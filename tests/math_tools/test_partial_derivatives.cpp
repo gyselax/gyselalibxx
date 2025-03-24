@@ -24,29 +24,21 @@ struct Y
 };
 
 auto static constexpr SplineBoundary = ddc::BoundCond::GREVILLE;
+
 std::size_t static constexpr spline_degree = 3;
 
 using CoordX = Coord<X>;
 using CoordY = Coord<Y>;
+using CoordXY = Coord<X, Y>;
+
 
 /**
- * @brief A class that represents a polynomial test function for computing partial derivatives.
- * The polynomial depends on two variables.
+ * @brief A class that represents a test function for computing partial derivatives.
+ * The test function is defined as the product of two cosine functions.
  */
-template <class DerivativeDimension, std::size_t spline_degree>
-class FunctionToDifferentiatePolynomial
+class FunctionToDifferentiateCosine
 {
-    static_assert(std::is_same_v<DerivativeDimension, X> || std::is_same_v<DerivativeDimension, Y>);
-
-    using DDim = DerivativeDimension;
-    using ODim = std::conditional_t<std::is_same_v<DDim, X>, Y, X>;
-
-    using CoordFull = Coord<DDim, ODim>;
-
-    int const m_degree;
-
 public:
-    FunctionToDifferentiatePolynomial() : m_degree(spline_degree + 1) {}
     /**
      * @brief Get the value of the function at given coordinate.
      *
@@ -55,11 +47,11 @@ public:
      *
      * @return The value of the function at the coordinate.
      */
-    KOKKOS_FUNCTION double operator()(CoordFull const coord) const
+    KOKKOS_FUNCTION double operator()(CoordXY const coord_xy) const
     {
-        double const x = ddc::get<X>(coord);
-        double const y = ddc::get<Y>(coord);
-        return (ipow(x, m_degree + 1) + ipow(y, m_degree)) * y;
+        double const x = ddc::get<X>(coord_xy);
+        double const y = ddc::get<Y>(coord_xy);
+        return Kokkos::cos(x) * Kokkos::cos(y);
     }
 
     /**
@@ -72,19 +64,22 @@ public:
      * @return The value of the partial derivative of the function
      * at the coordinate.
      */
-    KOKKOS_FUNCTION double differentiate(CoordFull const coord) const
+    template <class DerivativeDimension>
+    KOKKOS_FUNCTION double differentiate(CoordXY const coord_xy) const
     {
-        double const x = ddc::get<X>(coord);
-        double const y = ddc::get<Y>(coord);
+        static_assert(
+                std::is_same_v<DerivativeDimension, X> || std::is_same_v<DerivativeDimension, Y>);
+
+        double const x = ddc::get<X>(coord_xy);
+        double const y = ddc::get<Y>(coord_xy);
 
         if constexpr (std::is_same_v<DerivativeDimension, X>) {
-            return (1. + m_degree) * ipow(x, m_degree) * y;
+            return -Kokkos::sin(x) * Kokkos::cos(y);
         } else {
-            return ipow(x, m_degree + 1) + (m_degree + 1) * ipow(y, m_degree);
+            return -Kokkos::cos(x) * Kokkos::sin(y);
         }
     }
 };
-
 
 /**
  * @brief A class that represents a test for partial derivatives.
@@ -185,39 +180,34 @@ public:
                 KOKKOS_LAMBDA(IdxXY const idx) {
                     return Kokkos::abs(
                             field_differentiated(idx)
-                            - function_to_differentiate.differentiate(ddc::coordinate(idx)));
+                            - function_to_differentiate.template differentiate<DerivativeDimension>(
+                                    ddc::coordinate(idx)));
                 });
 
         return max_error;
     }
 };
 
-#if 0
 /**
  * @brief A class that represents a test for partial derivatives.
  * The test can be used with 1d splines for computing partial 
  * derivatives.
  */
-template <class DerivativeDimension, std::size_t N_ddim, std::size_t N_odim>
-class PartialDerivativeTestSpline1D
-    : public PartialDerivativeTest<DerivativeDimension, N_ddim, N_odim>
+template <class DerivativeDimension, std::size_t ncells_x, std::size_t ncells_y>
+class PartialDerivativeTestSpline1D : public PartialDerivativeTest<ncells_x, ncells_y>
 {
+    static_assert(std::is_same_v<DerivativeDimension, X> || std::is_same_v<DerivativeDimension, Y>);
+
 private:
-    using base_type = PartialDerivativeTest<DerivativeDimension, N_ddim, N_odim>;
-    using typename base_type::DDim;
+    using base_type = PartialDerivativeTest<ncells_x, ncells_y>;
+    using DDim = DerivativeDimension;
 
-    using typename base_type::IdxRangeDDim;
+    using typename base_type::GridX;
+    using typename base_type::GridY;
+
+    using typename base_type::IdxRangeX;
     using typename base_type::IdxRangeXY;
-    using typename base_type::IdxRangeODim;
-
-    using typename base_type::CoordDDim;
-    using typename base_type::CoordODim;
-
-    using typename base_type::GridDDim;
-    using typename base_type::GridODim;
-
-    using typename base_type::IdxStepDDim;
-    using typename base_type::IdxStepODim;
+    using typename base_type::IdxRangeY;
 
     struct BSplinesX : ddc::NonUniformBSplines<X, spline_degree>
     {
@@ -235,6 +225,9 @@ private:
     using BSplinesDDim = std::conditional_t<std::is_same_v<DDim, X>, BSplinesX, BSplinesY>;
     using BSplinesODim = std::conditional_t<std::is_same_v<DDim, X>, BSplinesY, BSplinesX>;
 
+    using GridDDim = std::conditional_t<std::is_same_v<DDim, X>, GridX, GridY>;
+    using GridODim = std::conditional_t<std::is_same_v<DDim, X>, GridY, GridX>;
+
     using SplineInterpPointsDDim
             = std::conditional_t<std::is_same_v<DDim, X>, SplineInterpPointsX, SplineInterpPointsY>;
     using SplineInterpPointsODim
@@ -248,8 +241,8 @@ private:
             SplineBoundary,
             SplineBoundary,
             ddc::SplineSolver::LAPACK,
-            GridDDim,
-            GridODim>;
+            GridX,
+            GridY>;
 
     using SplineDDimEvaluator = ddc::SplineEvaluator<
             Kokkos::DefaultExecutionSpace,
@@ -258,63 +251,70 @@ private:
             GridDDim,
             ddc::ConstantExtrapolationRule<DDim>,
             ddc::ConstantExtrapolationRule<DDim>,
-            GridDDim,
-            GridODim>;
-
-    ddc::ConstantExtrapolationRule<DDim> const m_bv_min;
-    ddc::ConstantExtrapolationRule<DDim> const m_bv_max;
+            GridX,
+            GridY>;
 
 public:
     PartialDerivativeTestSpline1D(
-            double const ddim_min,
-            double const ddim_max,
-            double const odim_min,
-            double const odim_max)
-        : base_type(ddim_min, ddim_max, odim_min, odim_max)
-        , m_bv_min(CoordDDim(ddim_min))
-        , m_bv_max(CoordDDim(ddim_max))
+            double const xmin,
+            double const xmax,
+            double const ymin,
+            double const ymax)
+        : base_type(xmin, xmax, ymin, ymax)
     {
-        std::vector<CoordDDim> point_sampling_ddim = build_random_non_uniform_break_points(
-                base_type::m_ddim_min,
-                base_type::m_ddim_max,
-                base_type::m_ncells_ddim);
+        std::vector<CoordX> point_sampling_x = build_random_non_uniform_break_points(
+                base_type::m_xmin,
+                base_type::m_xmax,
+                base_type::m_ncells_x,
+                0.2);
 
-        ddc::init_discrete_space<BSplinesDDim>(point_sampling_ddim);
-        ddc::init_discrete_space<GridDDim>(
-                SplineInterpPointsDDim::template get_sampling<GridDDim>());
+        ddc::init_discrete_space<BSplinesX>(point_sampling_x);
+        ddc::init_discrete_space<GridX>(SplineInterpPointsX::template get_sampling<GridX>());
 
+        std::vector<CoordY> point_sampling_y = build_random_non_uniform_break_points(
+                base_type::m_ymin,
+                base_type::m_ymax,
+                base_type::m_ncells_y,
+                0.2);
 
-        std::vector<CoordODim> point_sampling_odim = build_random_non_uniform_break_points(
-                base_type::m_odim_min,
-                base_type::m_odim_max,
-                base_type::m_ncells_odim);
-
-        ddc::init_discrete_space<BSplinesODim>(point_sampling_odim);
-        ddc::init_discrete_space<GridODim>(
-                SplineInterpPointsODim::template get_sampling<GridODim>());
+        ddc::init_discrete_space<BSplinesY>(point_sampling_y);
+        ddc::init_discrete_space<GridY>(SplineInterpPointsY::template get_sampling<GridY>());
     }
 
-    double const operator()(double& delta_ddim) const
+    double const compute_error(double& max_distance) const
     {
-        IdxRangeDDim const idxrange_ddim = SplineInterpPointsDDim::template get_domain<GridDDim>();
-        IdxRangeODim const idxrange_odim = SplineInterpPointsODim::template get_domain<GridODim>();
-        IdxRangeXY const idxrange = IdxRangeXY(idxrange_ddim, idxrange_odim);
+        IdxRangeX const idxrange_x = SplineInterpPointsX::template get_domain<GridX>();
+        IdxRangeY const idxrange_y = SplineInterpPointsY::template get_domain<GridY>();
+        IdxRangeXY const idxrange = IdxRangeXY(idxrange_x, idxrange_y);
+
+        double dmin, dmax;
+        if (std::is_same_v<DDim, X>) {
+            dmin = base_type::m_xmin;
+            dmax = base_type::m_xmax;
+        } else {
+            dmin = base_type::m_ymin;
+            dmax = base_type::m_ymax;
+        }
+        ddc::ConstantExtrapolationRule<DDim> const bv_min {Coord<DDim>(dmin)};
+        ddc::ConstantExtrapolationRule<DDim> const bv_max {Coord<DDim>(dmax)};
 
         SplineDDimBuilder const spline_builder(idxrange);
-        SplineDDimEvaluator const spline_evaluator(m_bv_min, m_bv_max);
+        SplineDDimEvaluator const spline_evaluator(bv_min, bv_max);
 
         Spline1DPartialDerivativeCreator<SplineDDimBuilder, SplineDDimEvaluator> const
                 derivative_creator(spline_builder, spline_evaluator);
 
-        using FunDiff = FunctionToDifferentiatePolynomial<typename base_type::DDim, spline_degree>;
-        FunDiff function_to_differentiate;
-        double const max_error = base_type::template compute_max_error<
-                FunDiff>(idxrange, function_to_differentiate, derivative_creator, delta_ddim);
+        FunctionToDifferentiateCosine function_to_differentiate;
+        double const max_error = base_type::
+                template compute_max_error<DerivativeDimension, FunctionToDifferentiateCosine>(
+                        idxrange,
+                        function_to_differentiate,
+                        derivative_creator,
+                        max_distance);
 
         return max_error;
     }
 };
-#endif
 
 /**
  * @brief A class that represents a test for partial derivatives.
@@ -338,13 +338,15 @@ public:
         std::vector<CoordX> point_sampling_x = build_random_non_uniform_break_points(
                 base_type::m_xmin,
                 base_type::m_xmax,
-                base_type::m_ncells_x);
+                base_type::m_ncells_x,
+                0.2);
         ddc::init_discrete_space<typename base_type::GridX>(point_sampling_x);
 
         std::vector<CoordY> point_sampling_y = build_random_non_uniform_break_points(
                 base_type::m_ymin,
                 base_type::m_ymax,
-                base_type::m_ncells_y);
+                base_type::m_ncells_y,
+                0.2);
         ddc::init_discrete_space<typename base_type::GridY>(point_sampling_y);
     }
 
@@ -361,11 +363,13 @@ public:
                 typename base_type::IdxRangeXY,
                 DerivativeDimension> const derivative_creator;
 
-        using FunDiff = FunctionToDifferentiatePolynomial<DerivativeDimension, 4>;
-        FunDiff function_to_differentiate;
-        double const max_error = base_type::template compute_max_error<
-                DerivativeDimension,
-                FunDiff>(idxrange_xy, function_to_differentiate, derivative_creator, max_distance);
+        FunctionToDifferentiateCosine function_to_differentiate;
+        double const max_error = base_type::
+                template compute_max_error<DerivativeDimension, FunctionToDifferentiateCosine>(
+                        idxrange_xy,
+                        function_to_differentiate,
+                        derivative_creator,
+                        max_distance);
 
         return max_error;
     }
@@ -381,7 +385,6 @@ public:
  * Since we use non uniform interpolation points, dx depends on the 
  * position. We take dx as the maximum distance between two points.
  */
-#if 0
 TEST(PartialDerivative, Spline1DPartialDerivative)
 {
     double const xmin(0.1);
@@ -394,10 +397,10 @@ TEST(PartialDerivative, Spline1DPartialDerivative)
     // Partial Derivative in X direction
     double delta_low_x,
             delta_high_x; // the maximum distance between points in the derivative direction
-    PartialDerivativeTestSpline1D<X, 10, 10> const test_low_x(xmin, xmax, ymin, ymax);
-    PartialDerivativeTestSpline1D<X, 100, 10> const test_high_x(xmin, xmax, ymin, ymax);
-    double const error_low_x = test_low_x(delta_low_x);
-    double const error_high_x = test_high_x(delta_high_x);
+    PartialDerivativeTestSpline1D<X, 10, 5> const test_low_x(xmin, xmax, ymin, ymax);
+    PartialDerivativeTestSpline1D<X, 100, 5> const test_high_x(xmin, xmax, ymin, ymax);
+    double const error_low_x = test_low_x.compute_error(delta_low_x);
+    double const error_high_x = test_high_x.compute_error(delta_high_x);
 
 
     double const order_x
@@ -409,10 +412,10 @@ TEST(PartialDerivative, Spline1DPartialDerivative)
     // Partial Derivative in Y direction
     double delta_low_y,
             delta_high_y; // the maximum distance between points in the derivative direction
-    PartialDerivativeTestSpline1D<Y, 10, 10> const test_low_y(ymin, ymax, xmin, xmax);
-    PartialDerivativeTestSpline1D<Y, 100, 10> const test_high_y(ymin, ymax, xmin, xmax);
-    double const error_low_y = test_low_y(delta_low_y);
-    double const error_high_y = test_high_y(delta_high_y);
+    PartialDerivativeTestSpline1D<Y, 5, 10> const test_low_y(xmin, xmax, ymin, ymax);
+    PartialDerivativeTestSpline1D<Y, 5, 100> const test_high_y(xmin, xmax, ymin, ymax);
+    double const error_low_y = test_low_y.compute_error(delta_low_y);
+    double const error_high_y = test_high_y.compute_error(delta_high_y);
 
     double const order_y
             = std::log(error_high_y / error_low_y) / std::log(delta_high_y / delta_low_y);
@@ -420,7 +423,6 @@ TEST(PartialDerivative, Spline1DPartialDerivative)
 
     EXPECT_LE(relative_error_order_y, TOL);
 }
-#endif
 
 TEST(PartialDerivative, CentralFDMPartialDerivative)
 {
@@ -446,17 +448,15 @@ TEST(PartialDerivative, CentralFDMPartialDerivative)
 
     EXPECT_LE(relative_error_order_x, TOL);
 
-#if 0
     // Partial Derivative in Y direction
-    double delta_low_y, delta_high_y; 
+    double delta_low_y, delta_high_y;
     double const error_low_y = test_low_res.compute_error<Y>(delta_low_y);
-    double const error_high_y = test_low_res.compute_error<Y>(delta_high_y);
+    double const error_high_y = test_high_res.compute_error<Y>(delta_high_y);
 
     double const order_y
             = std::log(error_high_y / error_low_y) / std::log(delta_high_y / delta_low_y);
     double const relative_error_order_y = std::fabs((expected_order - order_y) / expected_order);
 
     EXPECT_LE(relative_error_order_y, TOL);
-#endif
 }
 } // namespace
