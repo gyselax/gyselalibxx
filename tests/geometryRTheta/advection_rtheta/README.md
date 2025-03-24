@@ -22,10 +22,10 @@ The tests are made for different parameters which are:
 ### - The test simulation: 
  - simulation 1: translation of Gaussian function (AdvectionFieldSimulation)
    - $`f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)`$, 
-   - $`V(t, x, y) = (v_x, v_y)`$ . 
+   - $`A(t, x, y) = (v_x, v_y)`$ . 
  - simulation 2: rotation of Gaussian function (AdvectionFieldSimulation)
   - $`f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)`$, 
-  - $`V(t, x, y) = J_{\mathcal{F}_{\text{circular}}}(v_r, v_\theta)`$. 
+  - $`A(t, x, y) = J_{\mathcal{F}_{\text{circular}}}(v_r, v_\theta)`$. 
  - simulation 3: decentred rotation (test given in Edoardo Zoni's article [1]) (AdvectionFieldSimulation)
   - $`f_0(x,y) = \frac{1}{2} \left( G(r_1(x,y)) + G(r_2(x,y))\right)`$,
   - with 

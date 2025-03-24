@@ -5,6 +5,7 @@
 
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "mesh_builder.hpp"
 
 namespace {
 
@@ -16,12 +17,10 @@ public:
 
 using Coord1D = Coord<Tag>;
 
-template <std::size_t ncells>
 struct GridUniform : UniformGridBase<Tag>
 {
 };
 
-template <std::size_t ncells>
 struct GridNonUniform : NonUniformGridBase<Tag>
 {
 };
@@ -30,15 +29,14 @@ struct GridNonUniform : NonUniformGridBase<Tag>
 
 TEST(DDCHelper, UniformPeriodicRestriction)
 {
-    std::size_t constexpr ncells(5);
-    using Grid1D = GridUniform<ncells>;
+    using Grid1D = GridUniform;
     using Idx = Idx<Grid1D>;
     using IdxStep = IdxStep<Grid1D>;
     using IdxRange = IdxRange<Grid1D>;
 
     Coord1D x_min(-1.0);
     Coord1D x_max(1.0);
-    IdxStep npoints(ncells + 1);
+    IdxStep npoints(6);
     double x_len = x_max - x_min;
 
     ddc::init_discrete_space<Grid1D>(Grid1D::init(x_min, x_max, npoints));
@@ -73,24 +71,18 @@ TEST(DDCHelper, UniformPeriodicRestriction)
 
 TEST(DDCHelper, NonUniformPeriodicRestriction)
 {
-    std::size_t constexpr ncells(5);
-    using Grid1D = GridNonUniform<ncells>;
+    using Grid1D = GridNonUniform;
     using Idx = Idx<Grid1D>;
     using IdxStep = IdxStep<Grid1D>;
     using IdxRange = IdxRange<Grid1D>;
 
     Coord1D x_min(-1.0);
     Coord1D x_max(1.0);
+    IdxStep ncells(5);
     IdxStep npoints(ncells + 1);
     double x_len = x_max - x_min;
 
-    std::vector<double> nu_points(6);
-    for (int i(0); i < 5; ++i) {
-        nu_points[i] = x_min + i * 0.4;
-    }
-    nu_points[5] = x_max;
-
-    ddc::init_discrete_space<Grid1D>(nu_points);
+    ddc::init_discrete_space<Grid1D>(build_random_non_uniform_break_points(x_min, x_max, ncells));
 
     IdxRange idx_range(Idx(0), npoints - 1);
 
@@ -126,14 +118,14 @@ TEST(DDCHelper, NonUniformPeriodicRestriction)
  */
 TEST(DDCHelper, ComputeMaxDistanceUniformGrid)
 {
-    std::size_t constexpr ncells(10);
-    using Grid1D = GridUniform<ncells>;
+    using Grid1D = GridUniform;
     using Idx = Idx<Grid1D>;
     using IdxStep = IdxStep<Grid1D>;
     using IdxRange = IdxRange<Grid1D>;
 
     Coord1D x_min(0.);
     Coord1D x_max(1.0);
+    IdxStep ncells(10);
     IdxStep npoints(ncells + 1);
     double x_len = x_max - x_min;
 
@@ -153,8 +145,7 @@ TEST(DDCHelper, ComputeMaxDistanceUniformGrid)
  */
 TEST(DDCHelper, ComputeMaxDistanceNonUniformGridFirst)
 {
-    std::size_t constexpr ncells(5);
-    using Grid1D = GridNonUniform<ncells>;
+    using Grid1D = GridNonUniform;
     using Idx = Idx<Grid1D>;
     using IdxStep = IdxStep<Grid1D>;
     using IdxRange = IdxRange<Grid1D>;
@@ -163,6 +154,7 @@ TEST(DDCHelper, ComputeMaxDistanceNonUniformGridFirst)
     std::vector<double> points_list = {0., 0.9, 1., 1.1, 1.5, 2.};
     ddc::init_discrete_space<Grid1D>(points_list);
 
+    IdxStep ncells(5);
     IdxStep npoints(ncells + 1);
     IdxRange idx_range(Idx(0), npoints);
 
@@ -179,8 +171,7 @@ TEST(DDCHelper, ComputeMaxDistanceNonUniformGridFirst)
  */
 TEST(DDCHelper, ComputeMaxDistanceNonUniformGridMiddle)
 {
-    std::size_t constexpr ncells(5);
-    using Grid1D = GridNonUniform<ncells>;
+    using Grid1D = GridNonUniform;
     using Idx = Idx<Grid1D>;
     using IdxStep = IdxStep<Grid1D>;
     using IdxRange = IdxRange<Grid1D>;
@@ -189,6 +180,7 @@ TEST(DDCHelper, ComputeMaxDistanceNonUniformGridMiddle)
     std::vector<double> points_list = {0., 0.1, 1., 1.1, 1.5, 2.};
     ddc::init_discrete_space<Grid1D>(points_list);
 
+    IdxStep ncells(5);
     IdxStep npoints(ncells + 1);
     IdxRange idx_range(Idx(0), npoints);
 
@@ -205,8 +197,7 @@ TEST(DDCHelper, ComputeMaxDistanceNonUniformGridMiddle)
  */
 TEST(DDCHelper, ComputeMaxDistanceNonUniformGridLast)
 {
-    std::size_t constexpr ncells(5);
-    using Grid1D = GridNonUniform<ncells>;
+    using Grid1D = GridNonUniform;
     using Idx = Idx<Grid1D>;
     using IdxStep = IdxStep<Grid1D>;
     using IdxRange = IdxRange<Grid1D>;
@@ -215,6 +206,7 @@ TEST(DDCHelper, ComputeMaxDistanceNonUniformGridLast)
     std::vector<double> points_list = {0., 0.3, 0.9, 1., 1.1, 2.};
     ddc::init_discrete_space<Grid1D>(points_list);
 
+    int ncells(5);
     IdxStep npoints(ncells + 1);
     IdxRange idx_range(Idx(0), npoints);
 
