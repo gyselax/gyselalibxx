@@ -8,6 +8,7 @@
 
 #include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
+#include "tensor.hpp"
 #include "view.hpp"
 
 // Pre-declaration of analytical inverse
@@ -55,6 +56,15 @@ public:
     using CoordArg = Coord<R, Theta>;
     /// The type of the result of the function described by this mapping
     using CoordResult = Coord<X, Y>;
+
+    /// @brief The covariant form of the first physical coordinate.
+    using X_cov = typename X::Dual;
+    /// @brief The covariant form of the second physical coordinate.
+    using Y_cov = typename Y::Dual;
+    /// @brief The covariant form of the first logical coordinate.
+    using R_cov = typename R::Dual;
+    /// @brief The covariant form of the second logical coordinate.
+    using Theta_cov = typename Theta::Dual;
 
 public:
     CircularToCartesian() = default;
@@ -137,17 +147,19 @@ public:
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
-     * @param[out] matrix
-     * 				The Jacobian matrix returned.
+     * @return The Jacobian matrix.
      */
-    KOKKOS_FUNCTION void jacobian_matrix(Coord<R, Theta> const& coord, Matrix_2x2& matrix) const
+    KOKKOS_FUNCTION DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> jacobian_matrix(
+            Coord<R, Theta> const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
-        matrix[0][0] = Kokkos::cos(theta);
-        matrix[0][1] = -r * Kokkos::sin(theta);
-        matrix[1][0] = Kokkos::sin(theta);
-        matrix[1][1] = r * Kokkos::cos(theta);
+        DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> jacobian_matrix;
+        ddcHelper::get<X, R_cov>(jacobian_matrix) = Kokkos::cos(theta);
+        ddcHelper::get<X, Theta_cov>(jacobian_matrix) = -r * Kokkos::sin(theta);
+        ddcHelper::get<Y, R_cov>(jacobian_matrix) = Kokkos::sin(theta);
+        ddcHelper::get<Y, Theta_cov>(jacobian_matrix) = r * Kokkos::cos(theta);
+        return jacobian_matrix;
     }
 
     /**
@@ -231,8 +243,7 @@ public:
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
-     * @param[out] matrix
-     * 				The inverse Jacobian matrix returned.
+     * @return The inverse Jacobian matrix.
      *
      *
      * @see Jacobian::inv_jacobian_11
@@ -240,15 +251,19 @@ public:
      * @see Jacobian::inv_jacobian_21
      * @see Jacobian::inv_jacobian_22
      */
-    KOKKOS_FUNCTION void inv_jacobian_matrix(Coord<R, Theta> const& coord, Matrix_2x2& matrix) const
+    KOKKOS_FUNCTION DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X_cov, Y_cov>>
+    inv_jacobian_matrix(Coord<R, Theta> const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
         assert(fabs(r) >= 1e-15);
-        matrix[0][0] = Kokkos::cos(theta);
-        matrix[0][1] = Kokkos::sin(theta);
-        matrix[1][0] = -1 / r * Kokkos::sin(theta);
-        matrix[1][1] = 1 / r * Kokkos::cos(theta);
+
+        DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X_cov, Y_cov>> matrix;
+        ddcHelper::get<R, X_cov>(matrix) = Kokkos::cos(theta);
+        ddcHelper::get<R, Y_cov>(matrix) = Kokkos::sin(theta);
+        ddcHelper::get<Theta, X_cov>(matrix) = -1 / r * Kokkos::sin(theta);
+        ddcHelper::get<Theta, Y_cov>(matrix) = 1 / r * Kokkos::cos(theta);
+        return matrix;
     }
 
     /**

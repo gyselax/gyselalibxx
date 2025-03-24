@@ -6,8 +6,8 @@
 
 /**
  * @brief A function to convert a 2D Kokkos view into a ginkgo multivector structure.
- * @param gko_exec[in] A Ginkgo executor that has access to the Kokkos::View memory space
- * @param view[in] A 2-D Kokkos::View with unit stride in the second dimension
+ * @param[in] gko_exec A Ginkgo executor that has access to the Kokkos::View memory space
+ * @param[in] view A 2-D Kokkos::View with unit stride in the second dimension
  * @return A Ginkgo Multivector view over the Kokkos::View data
  */
 
@@ -31,8 +31,7 @@ auto to_gko_multivector(
  * @brief A function for checking convergence. It loops over the batch and checks 
  *        the if residual is lower or equal to the prescribed tolerance.
  * @param[in] batch_size the size of the batch , ie number of linears problems.
- * @param[in] logger Ginkgo logger which contains residual and numbers of iterations
- *                   For the whole batch.
+ * @param[in] tol The tolerancy on residual norm above which a non-convergency is reported.
  * @param[in] gko_exec Ginkgo executor, refers to the execution space.
  * @param[in] logger Ginkgo convergence object which stores iterations number and residual for the whole batch.
  */
@@ -58,9 +57,9 @@ inline void check_conv(
 }
 
 /**
- * @brief An helper to write the log corresponding to a single batch.
- * @param[in] log_file The stream of the log file.
- * @param[in] index The index of the batch.
+ * @brief A helper to write the log corresponding to a single batch.
+ * @param[inout] log_file The stream of the log file.
+ * @param[in] batch_index The index of the batch.
  * @param[in] num_iterations The number of iterations the iterative solver performed for this batch.
  * @param[in] implicit_res_norm The implicit residual norm at the end of the solver call (evaluated by
  * the Ginkgo solver).
@@ -90,12 +89,13 @@ inline void write_log(
 
 /**
  * @brief A function to save convergence data using the logger.
- * @param[in] batch_matrix Batch of matrices.
+ * @param[inout] log_file The file in which the logs will be saved.
+ * @param[in] batch_index The index of the relevant matrix in the batch of matrices.
+ * @param[in] matrix Batch of matrices.
  * @param[in] x_view 2d Kokkos view containing the batch of computed solutions.
  * @param[in] b_view 2d Kokkos view containing the batch of rhs. 
  * @param[in] logger Ginkgo logger which stores residual and numbers of iterations for the whole batch.
  * @param[in] tol tolerance 
- * @param[in] filename prefix used to generate the logger file.
  */
 template <class sparse_type>
 void save_logger(
@@ -162,12 +162,12 @@ void save_logger(
 
 /**
  * @brief A function to save convergence data using the logger.
+ * @param[inout] log_file The file in which the logs will be saved.
  * @param[in] batch_matrix Batch of matrices.
  * @param[in] x_view 2d Kokkos view containing the batch of computed solutions.
  * @param[in] b_view 2d Kokkos view containing the batch of rhs. 
  * @param[in] logger Ginkgo logger which stores residual and numbers of iterations for the whole batch.
  * @param[in] tol tolerance 
- * @param[in] filename prefix used to generate the logger file.
  */
 template <class batch_sparse_type>
 void save_logger(

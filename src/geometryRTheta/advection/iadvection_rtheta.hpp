@@ -39,7 +39,7 @@ public:
      * @param[in, out] allfdistribu
      *      The function to be advected.
      * @param[in] advection_field
-     *      The advection field along the logical index range axes, RTheta.
+     *      The advection field on the contravariant basis of the logical domain.
      * @param[in] advection_field_xy_centre
      *      The advection field along the physical index range axes, XY
      *      at the centre point.
@@ -50,7 +50,7 @@ public:
      */
     virtual host_t<DFieldRTheta> operator()(
             host_t<DFieldRTheta> allfdistribu,
-            host_t<DConstVectorFieldRTheta<R_cov, Theta_cov>> advection_field,
+            host_t<DConstVectorFieldRTheta<R, Theta>> advection_field,
             CoordXY const& advection_field_xy_centre,
             double const dt) const = 0;
 };

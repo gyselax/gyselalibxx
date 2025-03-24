@@ -162,6 +162,11 @@ private:
 
 public:
     /**
+     * @brief Construct an instance of the CentralFDMPartialDerivativeCreator class.
+     */
+    CentralFDMPartialDerivativeCreator() = default;
+
+    /**
      * Create a pointer to an instance of the abstract class IPartialDerivative.
      * The type of the returned object will be determined when the pointer is 
      * dereferenced.
