@@ -87,6 +87,21 @@ in order to calculate this we must calculate 3 terms: $m^{ij}$, $r^k$, and $`\ma
 M\overrightarrow{r} = m^{ij}\mathbf{b}_i\otimes\mathbf{b}_j r_k\mathbf{b}^k = (m^{ij}r_k (\mathbf{b}_j\cdot\mathbf{b}^k)) \mathbf{b}_i = m^{ij}r_j \mathbf{b}_i
 ```
 
+### Transpose of a multi-dimensional tensor
+
+A transpose operation is equivalent to changing which dimension is represented by which basis. Thus for a tensor expressed on two 1D bases $\mathbf{b}^i$ and $`\mathbf{c}_j`$:
+```math
+M = m_{i}^{\;j} \mathbf{b}^i \otimes \mathbf{c}_j
+```
+the transpose expressed using the same components will be defined as:
+```math
+M = m_{i}^{\;j} \mathbf{c}_j \otimes \mathbf{b}^i
+```
+element-wise a transpose operation can therefore be written as:
+```math
+(M^T)^i_{\;j} = m_{i}^{\;j}
+```
+
 ## Metric tensor
 
 The *metric tensor* $`G`$ associated with the set of coordinates $`\{q^i\}`$ is defined from its components $`g_{ij}`$ as
