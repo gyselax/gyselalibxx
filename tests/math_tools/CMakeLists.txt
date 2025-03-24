@@ -4,6 +4,7 @@
 include(GoogleTest)
 
 add_executable(unit_tests_math_tools
+    test_differential_operators.cpp
     test_lnorm_tools.cpp
     test_partial_derivatives.cpp
     test_spline_2d_cache.cpp
@@ -16,6 +17,7 @@ target_link_libraries(unit_tests_math_tools
         GTest::gmock
         paraconf::paraconf
         gslx::math_tools
+        gslx::mapping
         gslx::utils
 )
 

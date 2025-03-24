@@ -4,60 +4,39 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "ipartial_derivative.hpp"
+#include "metric_tensor_evaluator.hpp"
 
 
 /**
  * @brief A class which implements a gradient operator 
- *
- * @tparam Spline1DBuilder A 1D spline builder.
- * @tparam Spline1DEvaluator A 1D spline evaluator.
+ * @tparam Mapping A mapping.
+ * @tparam PositionCoordinate The coordinate type where the gradient can be evaluated.
  */
+template <class Mapping, class PositionCoordinate>
 class Gradient
-    : public IPartialDerivative<
-              typename Spline1DBuilder::batched_interpolation_domain_type,
-              typename Spline1DBuilder::continuous_dimension_type>
 {
-    static_assert(std::is_same_v<
-                  typename Spline1DBuilder::batched_spline_domain_type,
-                  typename Spline1DEvaluator::batched_spline_domain_type>);
-    static_assert(std::is_same_v<
-                  typename Spline1DBuilder::batched_interpolation_domain_type,
-                  typename Spline1DEvaluator::batched_evaluation_domain_type>);
+  using MetricTensorType = MetricTensorEvaluator<Mapping, PositionCoordinate>;
 
-private:
-    using base_type = IPartialDerivative<
-            typename Spline1DBuilder::batched_interpolation_domain_type,
-            typename Spline1DBuilder::continuous_dimension_type>;
+  using ContravariantVectorType = typename MetricTensorType::ContravariantVectorType;
+  using CovariantVectorType = typename MetricTensorType::CovariantVectorType;
 
-    using typename base_type::DConstFieldType;
-    using typename base_type::DFieldType;
+  using Dims = ddc::to_type_seq_t<typename Mapping::CoordArg>;
+  using Dims_cov = vector_index_set_dual_t<Dims>;
+  using Dim0_cov = ddc::type_seq_element_t<0, Dims_cov>;
+  using Dim1_cov = ddc::type_seq_element_t<1, Dims_cov>;
 
-    using IdxRangeBS = typename Spline1DBuilder::batched_spline_domain_type;
-    using DFieldBSMem = DFieldMem<IdxRangeBS>;
-    using DFieldBS = DField<IdxRangeBS>;
-
-    Spline1DBuilder const& m_builder;
-    Spline1DEvaluator const& m_evaluator;
-    DFieldBSMem m_spline_coefs;
+  MetricTensorType const m_metric_tensor;
 
 public:
     /**
-     * @brief Construct an instance of the class Spline1DPartialDerivative.
+     * @brief Construct an instance of the class Gradient.
      *
-     * @param builder A 1D spline builder.
-     * @param evaluator A 1D spline evaluator.
-     * @param field The field to be differentiated.
+     * @param metric_tensor A MetricTensorEvaluator.
      */
-    explicit Spline1DPartialDerivative(
-            Spline1DBuilder const& builder,
-            Spline1DEvaluator const& evaluator,
-            DConstFieldType const field)
-        : m_builder(builder)
-        , m_evaluator(evaluator)
-        , m_spline_coefs(builder.batched_spline_domain())
+    explicit KOKKOS_FUNCTION Gradient(
+            MetricTensorType const metric_tensor)
+        : m_metric_tensor(metric_tensor)
     {
-        m_builder(get_field(m_spline_coefs), field);
     }
 
     /**
@@ -66,8 +45,27 @@ public:
      *
      * @param[out] differentiated_field Contains on output the value of the differentiated field.
      */
-    void operator()(DFieldType differentiated_field) const final
+    KOKKOS_FUNCTION CovariantVectorType operator()(CovariantVectorType const& partial_derivatives) const
     {
-        m_evaluator.deriv(differentiated_field, get_const_field(m_spline_coefs));
+        CovariantVectorType gradient;
+        ddcHelper::get<Dim0_cov>(gradient) = ddcHelper::get<Dim0_cov>(partial_derivatives);
+        ddcHelper::get<Dim1_cov>(gradient) = ddcHelper::get<Dim1_cov>(partial_derivatives);
+
+        return gradient;
+    }
+
+    /**
+     * @brief Compute the partial derivative of a field in the direction 
+     * where the field is represented using 1d splines.
+     *
+     * @param[out] differentiated_field Contains on output the value of the differentiated field.
+     */
+    KOKKOS_FUNCTION ContravariantVectorType operator()(ContravariantVectorType const& partial_derivatives, PositionCoordinate const& coord) const
+    {
+        ContravariantVectorType gradient;
+
+        return tensor_mul(
+                index<'i', 'j'>(m_metric_tensor.inverse(coord)),
+                index<'j'>(partial_derivatives));
     }
 };

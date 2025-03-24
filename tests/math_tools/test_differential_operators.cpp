@@ -1,0 +1,46 @@
+/// Test of the metric tensor and its inverse: (singular point avoided)
+#include <ddc/kernels/splines.hpp>
+
+#include <gtest/gtest.h>
+
+#include "circular_to_cartesian.hpp"
+#include "czarny_to_cartesian.hpp"
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
+#include "../mapping/geometry_mapping_tests.hpp"
+#include "../mapping/mapping_testing_tools.hpp"
+#include "metric_tensor_evaluator.hpp"
+#include "gradient.hpp"
+#include "view.hpp"
+
+
+
+class GradientTest: public testing::TestWithParam<std::tuple<std::size_t, std::size_t>>
+{
+};
+
+TEST_P(GradientTest, Instantiate)
+{
+    auto const [Nr, Nt] = GetParam();
+    const CircularToCartesian<R, Theta, X, Y> mapping;
+
+    FieldMemRTheta_host<CoordRTheta> coords = get_example_coords(IdxStepR(Nr), IdxStepTheta(Nt));
+    IdxRangeRTheta grid = get_idx_range(coords);
+
+    MetricTensorEvaluator<CircularToCartesian<R, Theta, X, Y>, CoordRTheta> metric_tensor(mapping);
+    Gradient<CircularToCartesian<R, Theta, X, Y>, CoordRTheta> gradient(metric_tensor);
+
+    // Test for each coordinates if the inverse_metric_tensor is the inverse of the metric_tensor
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        check_inverse_tensor(
+                metric_tensor(coords(irtheta)),
+                metric_tensor.inverse(coords(irtheta)),
+                1e-10);
+    });
+}
+
+INSTANTIATE_TEST_SUITE_P(
+        MyGroup,
+        GradientTest,
+        testing::Combine(testing::Values<std::size_t>(64), testing::Values<std::size_t>(64)));
