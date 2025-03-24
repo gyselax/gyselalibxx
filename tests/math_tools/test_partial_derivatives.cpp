@@ -42,7 +42,7 @@ public:
     /**
      * @brief Default constructor.
      */
-    FunctionToDifferentiateCosine() = default;
+    KOKKOS_DEFAULTED_FUNCTION FunctionToDifferentiateCosine() = default;
 
     /**
      * @brief Default copy constructor.
@@ -53,7 +53,7 @@ public:
     /**
      * @brief Default destructor.
      */
-    ~FunctionToDifferentiateCosine() = default;
+    KOKKOS_DEFAULTED_FUNCTION ~FunctionToDifferentiateCosine() = default;
 
     /**
      * @brief Get the value of the function at given coordinate.
