@@ -327,6 +327,10 @@ class PartialDerivativeTestFDM : public PartialDerivativeTest<ncells_x, ncells_y
 private:
     using base_type = PartialDerivativeTest<ncells_x, ncells_y>;
 
+    using typename base_type::IdxRangeX;
+    using typename base_type::IdxRangeXY;
+    using typename base_type::IdxRangeY;
+
 public:
     PartialDerivativeTestFDM(
             double const xmin,
@@ -353,15 +357,12 @@ public:
     template <class DerivativeDimension>
     double const compute_error(double& max_distance) const
     {
-        typename base_type::IdxRangeX
-                idxrange_x(typename base_type::IdxX(0), base_type::m_ncells_x + 1);
-        typename base_type::IdxRangeY
-                idxrange_y(typename base_type::IdxY(0), base_type::m_ncells_y + 1);
-        typename base_type::IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
+        IdxRangeX idxrange_x(typename base_type::IdxX(0), base_type::m_ncells_x + 1);
+        IdxRangeY idxrange_y(typename base_type::IdxY(0), base_type::m_ncells_y + 1);
+        IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
 
-        CentralFDMPartialDerivativeCreator<
-                typename base_type::IdxRangeXY,
-                DerivativeDimension> const derivative_creator;
+        CentralFDMPartialDerivativeCreator<IdxRangeXY, DerivativeDimension> const
+                derivative_creator;
 
         FunctionToDifferentiateCosine function_to_differentiate;
         double const max_error = base_type::
