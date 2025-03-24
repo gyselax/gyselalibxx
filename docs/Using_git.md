@@ -34,7 +34,7 @@ After this command conflicts may appear between your branch and the main branch.
 
 Gyselalibxx depends on other external libraries to compile. These libraries are included in the repository via [submodules](https://git-scm.com/docs/gitsubmodules). In general you will not need to touch the code inside the folders associated with these repositories. However their presence sometimes causes unexpected behaviour. The following is a small FAQ of common issues concerning submodules:
 
-#### Q: I cloned the repository but the submodules were not cloned
+### Q: I cloned the repository but the submodules were not cloned
 
 **A:** If you accidentally cloned the repository without the `--recurse-submodules` option you can collect the submodules by running the following command:
 
@@ -42,7 +42,7 @@ Gyselalibxx depends on other external libraries to compile. These libraries are 
 git submodule update --init
 ```
 
-#### Q: Git reports changes in the submodule but I didn't change this code
+### Q: Git reports changes in the submodule but I didn't change this code
 
 **A:** It is likely that you previously checked out a branch where the submodule was pinned to a different version. When you changed to your current branch the submodule was not updated, hence the reported changes. You can revert the changes to return to the version in your branch using:
 
