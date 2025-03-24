@@ -288,7 +288,7 @@ public:
         IdxRangeXY const idxrange = IdxRangeXY(idxrange_x, idxrange_y);
 
         double dmin, dmax;
-        if (std::is_same_v<DDim, X>) {
+        if constexpr (std::is_same_v<DDim, X>) {
             dmin = base_type::m_xmin;
             dmax = base_type::m_xmax;
         } else {
