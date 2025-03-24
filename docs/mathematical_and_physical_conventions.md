@@ -104,6 +104,17 @@ while the inverse Jacobian $`J^{-1}`$ is defined by its components $`J^{-1}\left
 J^{-1}\left.^{i}_{\;j}\right. = \frac{\partial q^i}{\partial x^j}.
 ```
 
+It is important to note that the Jacobian matrix and its inverse are not usually expressed in the same basis. The Jacobian of a function $f : \{q^j\} \rightarrow \{x^i\}$ is defined on the basis:
+
+```math
+e_i \otimes b^j
+```
+while the inverse, being equivalent to the Jacobian of a function $f : \{x^i\} \rightarrow \{q^j\}$ is defined on the basis:
+
+```math
+b_j \otimes e_i
+```
+
 Both Jacobian and metric tensor relate to each other as
 
 ```math
@@ -130,7 +141,7 @@ A^i_\text{c} = J\left.^{i}_{\;j}\right. g^{jk}A_k.
 
 however a simplification can be made using the fact that $G=J^TJ$, thus $G^{-1}=J^{-1}J^{-T}$ (where $J^{-T}$ represents the transpose of the inverse of the Jacobian) and $JG^{-1} = JJ^{-1}J^{-T} = J^{-T}$. Finally the components of the vector $`\mathbf{A}`$ expressed in the covariant basis can be related to the components of the vector $`\mathbf{A}_c`$ expressed in the covariant basis as:
 ```math
-A^i_\text{c} = {A_i}_\text{c} = (J^{-T})_i^{\;j} A_j
+A^i_\text{c} = {A_i}_\text{c} = (J^{-T})_i^{\;j} A_j = (J^{-1})^j_{\;i} A_j
 ```
 
 ### Curvilinear to curvilinear
