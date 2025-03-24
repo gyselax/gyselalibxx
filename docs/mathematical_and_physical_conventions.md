@@ -95,11 +95,11 @@ M = m_{i}^{\;j} \mathbf{b}^i \otimes \mathbf{c}_j
 ```
 the transpose expressed using the same components will be defined as:
 ```math
-M^T = m_{i}^{\;j} \mathbf{c}_i \otimes \mathbf{b}^j
+M^T = m_{i}^{\;j} \mathbf{c}_j \otimes \mathbf{b}^i
 ```
 element-wise a transpose operation can therefore be written as:
 ```math
-(M^T)^i_{\;j} = m_{i}^{\;j}
+(M^T)^i_{\;j} = m_{j}^{\;i}
 ```
 
 ## Metric tensor
