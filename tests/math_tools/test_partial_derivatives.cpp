@@ -311,8 +311,8 @@ public:
             dmin = base_type::m_ymin;
             dmax = base_type::m_ymax;
         }
-        ddc::ConstantExtrapolationRule<DDim> const bv_min {Coord<DDim>(dmin)};
-        ddc::ConstantExtrapolationRule<DDim> const bv_max {Coord<DDim>(dmax)};
+        ddc::ConstantExtrapolationRule<DDim> const bv_min(Coord<DDim> {dmin});
+        ddc::ConstantExtrapolationRule<DDim> const bv_max(Coord<DDim> {dmax});
 
         SplineDDimBuilder const spline_builder(idxrange);
         SplineDDimEvaluator const spline_evaluator(bv_min, bv_max);
