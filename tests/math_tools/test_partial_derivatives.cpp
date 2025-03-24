@@ -40,6 +40,22 @@ class FunctionToDifferentiateCosine
 {
 public:
     /**
+     * @brief Default constructor.
+     */
+    FunctionToDifferentiateCosine() = default;
+
+    /**
+     * @brief Default copy constructor.
+     */
+    KOKKOS_DEFAULTED_FUNCTION FunctionToDifferentiateCosine(FunctionToDifferentiateCosine const&)
+            = default;
+
+    /**
+     * @brief Default destructor.
+     */
+    ~FunctionToDifferentiateCosine() = default;
+
+    /**
      * @brief Get the value of the function at given coordinate.
      *
      * @param[in] coord_xy The coordinate where we want to evaluate
@@ -198,7 +214,7 @@ class PartialDerivativeTestSpline1D : public PartialDerivativeTest<ncells_x, nce
 {
     static_assert(std::is_same_v<DerivativeDimension, X> || std::is_same_v<DerivativeDimension, Y>);
 
-private:
+public:
     using base_type = PartialDerivativeTest<ncells_x, ncells_y>;
     using DDim = DerivativeDimension;
 
@@ -281,7 +297,7 @@ public:
         ddc::init_discrete_space<GridY>(SplineInterpPointsY::template get_sampling<GridY>());
     }
 
-    double const compute_error(double& max_distance) const
+    double compute_error(double& max_distance) const
     {
         IdxRangeX const idxrange_x = SplineInterpPointsX::template get_domain<GridX>();
         IdxRangeY const idxrange_y = SplineInterpPointsY::template get_domain<GridY>();
@@ -355,7 +371,7 @@ public:
     }
 
     template <class DerivativeDimension>
-    double const compute_error(double& max_distance) const
+    double compute_error(double& max_distance) const
     {
         IdxRangeX idxrange_x(typename base_type::IdxX(0), base_type::m_ncells_x + 1);
         IdxRangeY idxrange_y(typename base_type::IdxY(0), base_type::m_ncells_y + 1);
