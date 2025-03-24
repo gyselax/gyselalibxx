@@ -3,5 +3,6 @@
   "ul-style": { "style" : "dash" },
   "ol-prefix": false,
   "no-duplicate-heading": { "siblings_only": true },
-  "no-hard-tabs": true
+  "no-hard-tabs": true,
+  "link-fragments": false
 }
