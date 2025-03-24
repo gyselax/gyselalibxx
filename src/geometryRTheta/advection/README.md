@@ -133,7 +133,7 @@ Then the four previous steps become
 - interpolate the advection function at the feet of the characteristics in the logical domain.
 
 Here, $\mathcal{G}$ is analytically invertible (we can fix  $\mathcal{G}^{-1}(x = 0, y = 0) = (r = 0, \theta = 0)$)
-and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details are given in [Zoni et al. (2019)](#zoni).
+and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details are given in [Zoni et al. (2019)][1].
 
 **Remark 1:** if $\mathcal{F}$ is the circular mapping function, then the physical domain and the pseudo-Cartesian domain are the same.
 
@@ -196,7 +196,7 @@ It tests:
   - simulation 2: rotation of Gaussian function
     - $`f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)`$,
     - $`A(t, x, y) = J_{\mathcal{F}_{\text{circular}}}(v_r, v_\theta)`$.
-  - simulation 3: decentred rotation (test given in [Zoni et al. (2019)](#zoni)).
+  - simulation 3: decentred rotation (test given in [Zoni et al. (2019)][1]).
     - $`f_0(x,y) = \frac{1}{2} \left( G(r_1(x,y)) + G(r_2(x,y))\right)`$,
       - with
         - $`G(r) = \cos\left(\frac{\pi r}{2 a}\right)^4 * 1_{r<a}(r)`$,
@@ -211,7 +211,7 @@ for $n = 1, 2, 4, 8,  ...$.
 
 ## References
 
-<a name="zoni"></a> [1] Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped
+[1]: Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped
 disk-like domains with the method of characteristics and spline finite elements".
 ([https://doi.org/10.1016/j.jcp.2019.108889](https://doi.org/10.1016/j.jcp.2019.108889).)
 Journal of Computational Physics (2019).
