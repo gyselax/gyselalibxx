@@ -63,6 +63,30 @@ Where
 - $`\{A_i\}`$ are the components of $`\mathbf{A}`$ in *the covariant basis*. We call these *the covariant components* of $`\mathbf{A}`$;
 - $`\{A^i\}`$ are the components of $`\mathbf{A}`$ in *the contravariant basis*. We call these *the contravariant components* of $`\mathbf{A}`$;
 
+## Multi-dimensional tensors
+
+Just as vectors can be expressed on either the covariant or contravariant bases, multi-dimensional tensors can also be expressed on both bases.
+The basis of a multi-dimensional tensor is the tensor product of 1D bases.
+
+For example, a 2D tensor can be written in any of the following four forms:
+```math
+M = m^{ij} \mathbf{b}_i \otimes \mathbf{b}_j = m^{i}_j \mathbf{b}_i \otimes \mathbf{b}^j = m_{i}^j \mathbf{b}^i \otimes \mathbf{b}_j = m_{ij} \mathbf{b}^i \otimes \mathbf{b}^j
+```
+
+This notation is useful as it provides a visual reminder of what element-wise operations are valid. When writing a tensor multiplication we must always follow the following rules:
+- Each index should appear at most twice in the equation (to avoid confusion).
+- When an index is repeated, one instance should be associated with a covariant component while the other should be associated with a contravariant component.
+
+In order to see the reason for this let us consider a matrix-vector product between a matrix $M$ and a vector $\overrightarrow{r}$ ($M\overrightarrow{r}$).
+If we write everything on the contravariant basis then we obtain:
+```math
+M\overrightarrow{r} = m^{ij}\mathbf{b}_i\otimes\mathbf{b}_j r^k\mathbf{b}_k = (m^{ij}r^k (\mathbf{b}_j\cdot\mathbf{b}_k)) \mathbf{b}_i
+```
+in order to calculate this we must calculate 3 terms: $m^{ij}$, $r^k$, and $`\mathbf{b}_j \cdot \mathbf{b}_k`$. However if we write the vector on the covariant basis we can use the property mentioned above ($`\mathbf{b}^i \cdot \mathbf{b}_j = \delta_{ij}`$) to simplify this:
+```math
+M\overrightarrow{r} = m^{ij}\mathbf{b}_i\otimes\mathbf{b}_j r_k\mathbf{b}^k = (m^{ij}r_k (\mathbf{b}_j\cdot\mathbf{b}^k)) \mathbf{b}_i = m^{ij}r_j \mathbf{b}_i
+```
+
 ## Metric tensor
 
 The *metric tensor* $`G`$ associated with the set of coordinates $`\{q^i\}`$ is defined from its components $`g_{ij}`$ as
