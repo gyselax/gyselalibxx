@@ -54,12 +54,13 @@ public:
     {
         double const r = ddc::get<R>(coord_rth);
         double const theta = ddc::get<Theta>(coord_rth);
-        return ipow(r, 2) * Kokkos::cos(theta) + 2 * r * Kokkos::sin(theta);
+        return ipow(r, 2) * Kokkos::cos(theta) + 2 * ipow(r, 3) * Kokkos::sin(theta);
     }
 
     /**
      * @brief Get the value of the gradient of the field 
-     * at a given coordinate.
+     * at a given coordinate. The gradient is expressed in 
+     * the contravariant basis of the circular geometry. 
      *
      * @param[in] coord_rth The coordinate where we want to evaluate 
      * the gradient.
@@ -71,8 +72,8 @@ public:
         double const r = ddc::get<R>(coord_rth);
         double const theta = ddc::get<Theta>(coord_rth);
         DVectorType gradient(
-                2 * r * Kokkos::cos(theta) + 2 * Kokkos::sin(theta),
-                -r * Kokkos::sin(theta) + 2 * Kokkos::cos(theta));
+                2 * r * Kokkos::cos(theta) + 6 * ipow(r, 2) * Kokkos::sin(theta),
+                -Kokkos::sin(theta) + 2 * r * Kokkos::cos(theta));
 
         return gradient;
     }
@@ -91,22 +92,18 @@ public:
         double const r = ddc::get<R>(coord_rth);
         double const theta = ddc::get<Theta>(coord_rth);
         DVectorCovType derivatives(
-                2 * r * Kokkos::cos(theta) + 2 * Kokkos::sin(theta),
-                -ipow(r, 2) * Kokkos::sin(theta) + 2 * r * Kokkos::cos(theta));
+                2 * r * Kokkos::cos(theta) + 6 * ipow(r, 2) * Kokkos::sin(theta),
+                -ipow(r, 2) * Kokkos::sin(theta) + 2 * ipow(r, 3) * Kokkos::cos(theta));
         return derivatives;
     }
 };
 
 
-class GradientTest : public testing::TestWithParam<std::tuple<std::size_t, std::size_t>>
-{
-};
-
 TEST(GradientTest, Circular)
 {
     double const TOL = 1e-12;
     CircularToCartesian<R, Theta, X, Y> const mapping;
-    FieldMemRTheta_host<CoordRTheta> coords = get_example_coords(IdxStepR(64), IdxStepTheta(64));
+    FieldMemRTheta_host<CoordRTheta> coords = get_example_coords(IdxStepR(32), IdxStepTheta(32));
     IdxRangeRTheta grid = get_idx_range(coords);
 
     MetricTensorEvaluator<CircularToCartesian<R, Theta, X, Y>, CoordRTheta> metric_tensor(mapping);
