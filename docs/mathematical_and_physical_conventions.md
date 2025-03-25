@@ -176,7 +176,7 @@ g_{il}\{p\} = (J_{\{q\to p\}})^T\left._{i}^{\;j}\right. g_{\{q\}jk} (J_{\{q\to p
 The metric tensor associated with the basis $`b_i`$ can be obtained from the Jacobian of the transformation $`\{p^i\} \rightarrow \{q^j\}`$ and the metric tensor associated with the basis $`c_j`$ via the following equation:
 
 ```math
-g_{il}\{q\} = (J_{\{p\to q\}})^T\left._{i}^{\;j} g_{\{p\}jk} (J_{\{p\to q\}})\left.^{k}_{\;l}\right. = (J_{\{q\to p\}})^{-1}\left.^{j}_{\;i}\right. g_{\{p\}jk} (J_{\{q\to p\}})^{-T}\left.^{k}_{\;l}\right.
+g_{il}\{q\} = (J_{\{p\to q\}})^T\left._{i}^{\;j}\right. g_{\{p\}jk} (J_{\{p\to q\}})\left.^{k}_{\;l}\right. = (J_{\{q\to p\}})^{-1}\left.^{j}_{\;i}\right. g_{\{p\}jk} (J_{\{q\to p\}})^{-T}\left.^{k}_{\;l}\right.
 ```
 
 These expressions can be used to relates the components of $`\mathbf{A}`$ expressed in the covariant vector bases associated with both curvilinear coordinates system in another way. Using the above expressions we can see that $`J_{\{q\to p\}}G_{\{q\}}^{-1}=G_{\{p\}}^{-1}J_{\{q\to p\}}^{-T}`$. This gives us:
