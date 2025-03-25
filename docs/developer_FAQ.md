@@ -10,6 +10,7 @@ A Debug execution is there to make it possible to catch bugs, potentially at the
 `static_assert` ensures that an error is raised during the compilation. If it is possible to use `static_assert` then this option should always be preferred as it prevents bad code from being generated and incurs no costs in the resulting code. In reality it is not always possible to use `static_assert`. In this case either `assert` or `abort` must be used depending on the condition being tested.
 
 A `static_assert` statement is written as:
+
 ```cpp
    static_assert(condition, "This is an explanation of what went wrong. "+
                     "It will be displayed in the compilation output.");
@@ -17,12 +18,14 @@ A `static_assert` statement is written as:
 
 `assert` ensures that an error is raised in Debug mode while `abort` ensures that an error is raised in Release mode.
 In order to choose which of the two should be used it is therefore important to ask yourself the following questions:
+
 1. Can the condition be true in a bug-free code?
 2. Is the condition dependent on user input?
 
 If the answer to either of these questions is yes then it may be better to use `abort`, otherwise `assert` should be preferred to avoid incurring an unnecessary cost in Release mode.
 
 On CPU an assertion is written as:
+
 ```cpp
 #include <cassert>
 
@@ -33,12 +36,14 @@ On CPU an assertion is written as:
 ```
 
 On GPU an assertion is written as:
+
 ```cpp
    // An explanation can be added here
    KOKKOS_ASSERT(condition);
 ```
 
 On CPU an abort statement is written as:
+
 ```cpp
 if (condition) {
     throw std::runtime_error("This is an explanation of what went wrong. "+
@@ -47,6 +52,7 @@ if (condition) {
 ```
 
 On GPU an abort statement is written as:
+
 ```cpp
 if (condition) {
     Kokkos::abort("This is an explanation of what went wrong. "+
