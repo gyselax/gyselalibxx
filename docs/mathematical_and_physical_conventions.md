@@ -181,7 +181,7 @@ Note that relating the components of the vector $`\mathbf{A}`$ expressed in the 
 A^i_\text{c} = J\left.^{i}_{\;j}\right. g^{jk}A_k. 
 ```
 
-however a simplification can be made using the fact that $G=J^TJ$, thus $G^{-1}=J^{-1}J^{-T}$ (where $J^{-T}$ represents the transpose of the inverse of the Jacobian) and $JG^{-1} = JJ^{-1}J^{-T} = J^{-T}$. Thus the components of the vector $`\mathbf{A}`$ expressed in the covariant basis $`\{\mathbf{b}^i\}`$ can be related to the components of the vector $`\mathbf{A}_c`$ expressed in the Cartesian basis as:
+however a simplification can be made using the fact that $G=J^TJ$, thus $G^{-1}=J^{-1}J^{-T}$ (where $J^{-T}$ represents the transpose of the inverse of the Jacobian) and $JG^{-1} = JJ^{-1}J^{-T} = J^{-T}$. Thus the components of the vector $`\mathbf{A}`$ expressed in the covariant basis $`\{\mathbf{b}^i\}`$ can be related to the components of the vector $`\mathbf{A}`$ expressed in the Cartesian basis as:
 
 ```math
 A^i_\text{c} = {A_i}_\text{c} = (J^{-T})_i^{\;j} A_j = (J^{-1})^j_{\;i} A_j
