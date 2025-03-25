@@ -5,7 +5,7 @@ import glob
 from pathlib import Path
 import sys
 
-HOME_DIR = Path(__file__).parent.parent.absolute()
+HOME_DIR = Path(__file__).parent.parent.parent.absolute()
 
 if __name__ == '__main__':
     cmake_files = glob.glob(str(HOME_DIR / '**' / 'CMakeLists.txt'), recursive=True)
