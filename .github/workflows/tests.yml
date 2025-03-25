@@ -79,11 +79,9 @@ jobs:
       - name: Run tests
         uses: ./.github/actions/run_tests
       - name: Check Test Coverage
-        uses: threeal/gcovr-action@v1.1.0
-        with:
-          lcov-out: lcov.info
-          filter: ./src
-          working-directory: ./build
+        run: |
+          pip install gcovr
+          gcovr --filter src --lcov lcov.info --merge-mode-functions=merge-use-line-0 build
       - name: Annotate coverage
         uses: ZainAmjad68/test-coverage-annotate@v1.2
         with:
