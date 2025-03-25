@@ -74,6 +74,7 @@ plugins:
 
 # Markdown Extensions
 markdown_extensions:
+  - footnotes
   - attr_list             # Allows setting attributes in markdown elements
   - pymdownx.arithmatex:  # Enables MathJax for LaTeX-style math rendering
       generic: true
