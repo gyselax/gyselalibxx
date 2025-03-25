@@ -138,7 +138,7 @@ however a simplification can be made using the fact that $G=J^TJ$, thus $G^{-1}=
 A^i_\text{c} = {A_i}_\text{c} = (J^{-T})_i^{\;j} A_j = (J^{-1})^j_{\;i} A_j
 ```
 
-Note that in the above expression the $`J^{-T}`$ tensor has been expressed in the $`\mathbf{e}_i \otimes \mathbf{b}_j`$ basis. 
+Note that in the above expression the $`J^{-T}`$ tensor has been expressed in the $`\mathbf{e}_i \otimes \mathbf{b}_j`$ basis.
 
 ### Curvilinear to curvilinear
 
