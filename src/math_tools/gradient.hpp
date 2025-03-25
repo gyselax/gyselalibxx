@@ -49,7 +49,7 @@ public:
      *
      * @return The components of the gradient expressed on the covariant basis.
      */
-    KOKKOS_FUNCTION CovariantVectorType
+    KOKKOS_INLINE_FUNCTION CovariantVectorType
     operator()(CovariantVectorType const& partial_derivatives) const
     {
         CovariantVectorType gradient;
