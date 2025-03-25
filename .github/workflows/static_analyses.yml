@@ -63,7 +63,7 @@ jobs:
       - name: Run pylint
         run: |
           pylint $(find tests -iname *.py)
-          pylint $(find doc -iname *.py)
+          pylint $(find docs -iname *.py)
           pylint $(find bin -iname *.py)
         shell: bash
         env:
