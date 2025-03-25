@@ -5,7 +5,7 @@ stages:
   - test
 
 include:
-  - local: 'ci_tools/reusable_ci_jobs.yml'
+  - local: 'bin/ci_tools/reusable_ci_jobs.yml'
 
 cmake_tests:
   extends: .cmake_tests
