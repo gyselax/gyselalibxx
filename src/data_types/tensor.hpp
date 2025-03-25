@@ -296,7 +296,7 @@ public:
     }
 
     /**
-     * @brief An operator to subtract one tensor from another elementwise.
+     * @brief An operator to get the negation of a tensor elementwise.
      * @return A new tensor containing the result of the subtraction.
      */
     KOKKOS_FUNCTION Tensor operator-() const

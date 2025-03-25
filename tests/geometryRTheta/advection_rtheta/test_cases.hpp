@@ -6,6 +6,7 @@
 #include "circular_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
+#include "indexed_tensor.hpp"
 #include "math_tools.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
@@ -362,8 +363,7 @@ public:
 class AdvectionField_rotation
 {
 private:
-    double const m_vr;
-    double const m_vtheta;
+    DVector<R, Theta> m_v;
     CartesianToCircular<X, Y, R, Theta> const m_physical_to_logical_mapping;
     CircularToCartesian<R, Theta, X, Y> const m_logical_to_physical_mapping;
 
@@ -378,8 +378,7 @@ public:
      *      The constant second polar component of the advection field in the physical index range.
      */
     AdvectionField_rotation(CoordVr vr, CoordVtheta vtheta)
-        : m_vr(vr)
-        , m_vtheta(vtheta)
+        : m_v(vr, vtheta)
         , m_physical_to_logical_mapping()
         , m_logical_to_physical_mapping()
     {
@@ -401,11 +400,9 @@ public:
     KOKKOS_FUNCTION CoordXY operator()(CoordXY const coord, double const t) const
     {
         CoordRTheta const coord_rtheta(m_physical_to_logical_mapping(coord));
-        std::array<std::array<double, 2>, 2> jacobian;
-        m_logical_to_physical_mapping.jacobian_matrix(coord_rtheta, jacobian);
-        double const vx = m_vr * jacobian[0][0] + m_vtheta * jacobian[0][1];
-        double const vy = m_vr * jacobian[1][0] + m_vtheta * jacobian[1][1];
-        return CoordXY(vx, vy);
+        Tensor jacobian = m_logical_to_physical_mapping.jacobian_matrix(coord_rtheta);
+        DVector<X, Y> v = tensor_mul(index<'i', 'j'>(jacobian), index<'j'>(m_v));
+        return CoordXY(ddcHelper::get<X>(v), ddcHelper::get<Y>(v));
     }
 
     /**
@@ -421,8 +418,7 @@ public:
     KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord_xy, double const t) const
     {
         CoordRTheta const coord_rtheta(m_physical_to_logical_mapping(coord_xy));
-        CoordRTheta const velocity(m_vr, m_vtheta);
-        return m_logical_to_physical_mapping(coord_rtheta - t * velocity);
+        return m_logical_to_physical_mapping(coord_rtheta - t * m_v);
     }
 };
 

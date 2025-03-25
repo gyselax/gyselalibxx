@@ -12,15 +12,15 @@ The following sections describe some of the DDC types used in Gyselalibxx.
 
 ## Contents
 
--  [Coordinates](#docs_DDC_in_gyselalibxx__Coordinates)
--  [Indexing and associated concepts](#docs_DDC_in_gyselalibxx__Indexing_and_associated_concepts)
-    -  [Grid](#docs_DDC_in_gyselalibxx__Grid)
-    -  [Index](#docs_DDC_in_gyselalibxx__Index)
-    -  [Index Step](#docs_DDC_in_gyselalibxx__Index_Step)
-    -  [Index Range](#docs_DDC_in_gyselalibxx__Index_Range)
--  [Data Storage](#docs_DDC_in_gyselalibxx__Data_Storage)
--  [Example](#docs_DDC_in_gyselalibxx__Example)
--  [Pitfalls](#docs_DDC_in_gyselalibxx__Pitfalls)
+- [Coordinates](#docs_DDC_in_gyselalibxx__Coordinates)
+- [Indexing and associated concepts](#docs_DDC_in_gyselalibxx__Indexing_and_associated_concepts)
+  - [Grid](#docs_DDC_in_gyselalibxx__Grid)
+  - [Index](#docs_DDC_in_gyselalibxx__Index)
+  - [Index Step](#docs_DDC_in_gyselalibxx__Index_Step)
+  - [Index Range](#docs_DDC_in_gyselalibxx__Index_Range)
+- [Data Storage](#docs_DDC_in_gyselalibxx__Data_Storage)
+- [Example](#docs_DDC_in_gyselalibxx__Example)
+- [Pitfalls](#docs_DDC_in_gyselalibxx__Pitfalls)
 
 ## Coordinates
 
@@ -31,6 +31,7 @@ Coordinates can have 1 or more dimension. E.g. the coordinate of a position on a
 If the value of the coordinate needs to be used in a mathematical expression, the scalar (`double`) quantity stored in one of the dimensions of a coordinate can be extracted using `ddc::get<DimOfInterest>(my_coord)`.
 
 It is also possible to extract a coordinate on a subset of the original dimensions using `ddc::select<DimOfInterest>(my_coord)`. For example if we want to get the position of an object on a radial slice $(r,\theta)$, but we are given the coordinate in the full vector space $`(r, \theta, \varphi, v_\parallel, \mu)`$ then we can do:
+
 ```cpp
 Coord<R, Theta, Phi, Vpar, Mu> full_coord(...);
 Coord<R, Theta> slice_coord = ddc::select<R, Theta>(full_coord);
@@ -41,6 +42,7 @@ Coordinates can be combined using operators. For example, let us consider three 
 ![Vector Image](../images/Coordinate_operations.jpg)
 
 The vector $Q$ can be written as $Q=R-P$. Similarly in the code, we would have:
+
 ```cpp
 Coord<X, Y> P(5.0, 2.0);
 Coord<X, Y> R(7.0, 6.0);
@@ -63,6 +65,7 @@ DDC provides multiple types to represent the concepts required to index elements
 ## Grid
 
 The points $`\{x_0, ..., x_N\}`$ form the grid on which the simulation evolves. This sampling can either be uniform or non-uniform. Accordingly DDC provides 2 classes for which Gysela provides the following type aliases:
+
 - `UniformGridBase` (the type alias of `ddc::UniformPointSampling`)
 - `NonUniformGridBase` (the type alias of `NonUniformPointSampling`)
 
@@ -71,6 +74,7 @@ A uniform point sampling is a collection of points which are equidistant, it is 
 It is possible to have multiple grids defined on the same dimension (e.g. the grid points used for a Gauss-Legendre quadrature, the grid points on which the simulation evolves, the grid points which split a spline into polynomials, etc). In order for each grid that is defined to have a different type DDC requires that we define structures which inherit from `UniformGridBase` and `NonUniformGridBase` (these structures are then the base structures from which we inherit). In Gyselalibxx such structures have the keyword `Grid` in the name (e.g. `GridX`) and are usually defined in `geometry.hpp`.
 
 E.g.:
+
 ```cpp
 struct GridX : UniformGridBase<X>
 {
@@ -93,6 +97,7 @@ It is also possible to extract an index on a subset of the original dimensions u
 Once a grid has been initialised using the function `ddc::init_discrete_space`, an `Idx` defined on that grid can be used to obtain the coordinates of the points in the grid. This is done using the function `ddc::coordinate`.
 
 E.g:
+
 ```cpp
 Coord<R> r_min(0.0);
 Coord<R> r_max(1.0);
@@ -101,8 +106,10 @@ ddc::init_discrete_space<GridR>(r_min, r_max, r_ncells);
 Idx<GridR> i(0); // The first point in the grid
 std::cout << ddc::coordinate(i) << std::endl;
 ```
+
 will output:
-```
+
+```none
 (0.0)
 ```
 
@@ -113,6 +120,7 @@ An `IdxStep` (type alias for `ddc::DiscreteVector`) describes the number of step
 This type is useful when we have the index of a point and we need to get the next point. An `IdxStep` can be added or subtracted from an `Idx` as long as both objects are templated by the same dimension. Similarly an `IdxStep` is the result of subtracting 2 `Idx`s.
 
 E.g:
+
 ```cpp
 Idx<GridX> i(4);
 Idx<GridX> j(6);
@@ -131,10 +139,12 @@ For a more concrete example of how this type is useful see [Example](#docs_DDC_i
 The last concept necessary to define the grid on which a simulation evolves is the concept of index ranges. The class `IdxRange` is designed to describe the indices on which a field is defined. This may be all or only a subset of the indices comprising the grid.
 
 Each index range is described by:
--   An origin : This is the `Idx` which indicates the first point in the domain.
--   A size : This is a `IdxStep` indicating the number of elements in each dimension.
+
+- An origin : This is the `Idx` which indicates the first point in the domain.
+- A size : This is a `IdxStep` indicating the number of elements in each dimension.
 
 For example if we consider the 2D grid: $`[x_0, ..., x_N] \times [y_0, ... y_M]`$, the index range would be described as:
+
 ```cpp
 Idx<GridX, GridY> origin(0, 0);
 IdxStep<GridX, GridY> size(N, M);
@@ -142,6 +152,7 @@ IdxRange<GridX, GridY> idx_range(origin, size);
 ```
 
 Similarly the section of the grid: $`[x_i, ..., x_j] \times [y_k, ... y_l]`$ would be described as:
+
 ```cpp
 Idx<GridX> i_index(i);
 Idx<GridX> j_index(j);
@@ -155,18 +166,23 @@ IdxRange<GridX, GridY> idx_range(origin, size);
 When working with index ranges we do not usually know if we have access to all of the grid or just a subset. It is therefore important to use the `get_index_range` function to traverse fields rather than initialising elements manually as we don't know the index of the first element of a `IdxRange` at compile time.
 
 There are multiple functions available for traversing an index range. Most of the time we will traverse the entire index range. This can be done simply as `IdxRange` implements the functions `begin()` and `end()`. These functions are called automatically using the modern C++ syntax for a for element in list, or using the `ddc::for_each` function. The latter is to be preferred as it will allow us to add parallelism later. The syntax is:
+
 ```cpp
 for (Idx<GridX> index : idx_range) {
 }
 ```
+
 or:
+
 ```cpp
 ddc::for_each(idx_range, [&](Idx<GridX> index) {
 });
 ```
+
 In the case of a `ddc::for_each` the second argument is a lambda function. The `[&]` ensures that any variable defined outside the loop are captured by reference so they can be used inside the lambda function.
 
 It is also common to need to iterate over a subset of grid points. Such a subset can be created using the syntax described above, however `IdxRange` also contains several helper functions which are designed to facilitate the creation of these sets:
+
 - `take_first(IdxStep<..> n)` : Returns an index range containing only the first n indices of the original range.
 - `take_last(IdxStep<..> n)` : Returns an index range containing only the last n indices of the original range.
 - `remove_first(IdxStep<..> n)` : Returns an index range containing all but the first n indices of the original range.
@@ -176,6 +192,7 @@ It is also common to need to iterate over a subset of grid points. Such a subset
 It is also possible to extract a lower-dimensional index range from an ND index range using `ddc::select<GridOfInterest>(my_nd_idx_range)`.
 
 Finally it may not be possible to express the elements you want to iterate over as an index range. This is notably the case if you want to iterate over every j-th element. In this case it is necessary to fall back on `IdxRangeIterator`. The syntax in this case is:
+
 ```cpp
 for (IdxRangeIterator<GridX> it=idx_range.begin(); it < idx_range.end(); it += j) {
     Idx<GridX> index = *it;
@@ -183,6 +200,7 @@ for (IdxRangeIterator<GridX> it=idx_range.begin(); it < idx_range.end(); it += j
 ```
 
 In addition to the iteration functionalities, `IdxRange` also has other useful functions. The following is a non-exhaustive list of useful functions:
+
 - `front()` : Returns the first `Idx` in the domain.
 - `back()` : Returns the last `Idx` in the domain.
 - `size()` : Returns the total number of points in the domain (the product of the number of points in each dimension).
@@ -197,11 +215,13 @@ Data is allocated at the instantiation of a `FieldMem` (type alias for `ddc::Chu
 In order to initialise the data storage to the correct size, a `FieldMem` is initialised by providing the `IdxRange` on which the values are defined.
 
 In Gyselalibxx the alias `FieldMemX` is usually defined in `geometry.hpp` to describe the memory block for a field defined on the all or part of `GridX`.. E.g:
+
 ```cpp
 FieldMemXVx<double> distribution_function_2d_alloc(idx_range_x_vx);
 ```
 
 In Gyselalibxx the functions are almost all defined using real numbers. The additional alias `DFieldMemX` is therefore defined to represent a real function defined on all or part of `GridX`. E.g:
+
 ```cpp
 DFieldMemRThetaPhiVparMu distribution_function_2d_alloc(idx_range_radial_poloidal_toroidal_velocity_mu);
 ```
@@ -213,6 +233,7 @@ To avoid copying data unnecessarily, DDC provides the type `Field` (type alias f
 Unless you need to allocate data, you should always use `Field` rather than `FieldMem`. A `Field` can be obtained from a `FieldMem` using the constructor of `Field` or the global function `get_field`.
 
 In Gyselalibxx the alias `FieldX` is usually defined in `geometry.hpp` to describe a reference to a function defined on the domain or sub-domain containing points from the point sampling `GridX`. E.g:
+
 ```cpp
 FieldMemXVx<double> distribution_function_2d_alloc(idx_range_x_vx);
 FieldXVx<double> distribution_function_2d(distribution_function_2d_alloc);
@@ -225,6 +246,7 @@ Finally we also define the aliases `ConstFieldX` and `DConstFieldX` to represent
 :warning: Beware a `DConstFieldX` is not equivalent to a `DFieldX const`. The latter indicates only that the field will always be associated with the same `FieldMem` object. Its contents can still be modified.
 
 A `Field` is indexed using either multiple 1D `Idx`s, or one ND `Idx`. As the `Idx`s contain information about the dimension on which they act it is not necessary to pass these arguments in a specific order. Thus the following two functions are equivalent:
+
 ```cpp
 double get_element_1(DFieldXVx my_chunk, IdxX i, IdxY j) {
     return my_chunk(i, j);
@@ -234,9 +256,11 @@ double get_element_2(DFieldXVx my_chunk, IdxX i, IdxY j) {
     return my_chunk(j, i);
 }
 ```
+
 This is particularly useful if we don't know the layout order of the data and will allow us to reorder this data without changing the way we interact with the chunk.
 
 Finally a `Field` also implements a `[]` operator. A `Field` does not have to reference the entire memory block stored in the associated `FieldMem`. The `[]` operator can be passed an `IdxRange` to create a `Field` which only references part of the `FieldMem`. This is especially useful for accessing slices. In this case a simpler syntax exists, where we only need to pass the index of the slice. For example, if we wish to get a $(r, \theta)$ slice from a distribution function defined in $`(r, \theta, \varphi, v_\parallel, \mu)`$ we would do the following:
+
 ```cpp
 DFieldMem<IdxRange<GridR, GridTheta, GridPhi, GridVpar, GridMu>> distribution_function_alloc(idx_range);
 DField<IdxRange<GridR, GridTheta, GridPhi, GridVpar, GridMu>> distribution_function(distribution_function_alloc);
@@ -257,6 +281,7 @@ which evolves over a 2 dimensional domain defined by the dimensions $(x,v)$. The
 We can also consider the species s as a discrete dimension which is defined as [i, e].
 
 The first thing which is necessary to define our system are types describing the continuous dimensions:
+
 ```cpp
 // Tag to represent the x-dimension
 struct X {
@@ -270,6 +295,7 @@ struct Vx {
 ```
 
 We also need types to define the grid on which the simulation will evolve. The domain is discretised on the following grid: $`[i, e]\times[x_0,...,x_N]\times[v_0,...,v_{N_v}]`$. Grid types are required to define the positions of the grid points in each of the three dimensions:
+
 - The object $`[x_0,...,x_N]`$ is defined with a grid and will be denoted $GridX$.
 - The object $`[v_0,...,v_{N_v}]`$ is defined with a grid and will be denoted $GridVx$.
 - The object $['i', 'e']$ is defined as a `SpeciesInformation` collection and will be denoted $Species$.
@@ -281,6 +307,7 @@ Other index ranges may be useful to work on slices of data or on subdomains (e.g
 The data itself will be stored in `FieldMem`s and accessed with `Field`s. For example the distribution function will be stored in a `DFieldMem<IdxRange<Species, GridX, GridVx>>`. To improve readability this type is denoted `DFieldMemSpXVx`. Similarly the electric potential will be stored in a `DFieldMemX`.
 
 The other types will be useful when interacting with the data. For example, in order to initialise the distribution function we need to loop over the grid using the coordinates and an `Idx<Species, GridX, GridVx>` (denoted `IdxSpXVx` for simplicity) to fill the array:
+
 ```cpp
 IdxRangeSpXVx idx_range(..);
 DFieldMemSpXVx distribution_function_alloc(idx_range);
@@ -306,6 +333,7 @@ $$
 $$
 
 This code can be written simply using `Idx` and `IdxStep`:
+
 ```cpp
 double get_laplacian_at_position(DFieldXY function_values, IndexXY position)
 {
@@ -333,5 +361,6 @@ When using DDC there are some things that you should be careful about. These are
 ### Synchronicity
 
 In DDC and Kokkos the code runs asynchronously when an execution space is provided. When no execution space is provided the code runs synchronously surrounded by fences. In order to ensure that there is no danger coming from the asynchronicity we need to follow certain rules. In Gysela the chosen conventions are:
--   Always provide an execution space to `ddc::parallel_for_each` or `ddc::parallel_transform_reduce` (or similar Kokkos functions).
--   Only provide an execution space to `create_mirror_view_and_copy` when this is unavoidable (i.e. when copying to the `DefaultExecutionSpace`). The `DefaultHostExecutionSpace` should never be passed to `create_mirror_view_and_copy`.
+
+- Always provide an execution space to `ddc::parallel_for_each` or `ddc::parallel_transform_reduce` (or similar Kokkos functions).
+- Only provide an execution space to `create_mirror_view_and_copy` when this is unavoidable (i.e. when copying to the `DefaultExecutionSpace`). The `DefaultHostExecutionSpace` should never be passed to `create_mirror_view_and_copy`.

@@ -1,13 +1,14 @@
 # Adding Documentation
 
 There are two types of documentation which are described in detail below:
-1.  Documentation describing code structures
-2.  Documentation describing general methods
+
+1. Documentation describing code structures
+2. Documentation describing general methods
 
 ## Building documentation locally
 
 The documentation can be built locally by running the following commands from the root directory:
-```
+```bash
 python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc build/
 cd docs
 mkdocs build
@@ -24,11 +25,12 @@ In order to view the docs the file `docs/site/index.html` should be opened in a 
 This documentation should be added next to the code it is describing.
 
 Each section of code is annotated with a selection of the following:
-1.  A short summary
-2.  An extended summary
-3.  Argument annotations
-4.  Result annotations
-5.  References to other relevant parts of the code
+
+1. A short summary
+2. An extended summary
+3. Argument annotations
+4. Result annotations
+5. References to other relevant parts of the code
 
 Class comments should contain a short summary and an extended summary.
 
@@ -37,7 +39,8 @@ Function comments should contain a short summary, an extended summary where appr
 Where it is helpful references to other parts of the code may also be added.
 
 Code documentation blocks must be notated in a multi-line comment beginning with `/**`. For example:
-```
+
+```cpp
 /**
  * Here is a multi-line comment which will be noticed by Doxygen.
  */
@@ -67,7 +70,7 @@ If other parts of the code are relevant to your description or may be relevant i
 
 ### Example
 
-```
+```cpp
 /**
  * @brief A class which provides an interpolating function.
  *
@@ -107,10 +110,13 @@ public:
 Each folder containing code should also contain a `README.md` file providing an overview of the contents of the folder and any general information and references which may be helpful for understanding this code.
 
 The `README.md` file should begin with a title:
+
 ```markdown
 # <title>
 ```
+
 If the folder doesn't contain a `.private` file (indicating that the folder is not yet ready to be shared publicly), the new page can be referenced from any enclosing page that may exist. For example if you create a new folder in `src/`, you should add the following line to the list of folders in `src/README.md`:
+
 ```markdown
 - [my_new_folder](./my_new_folder/README.md) : Short description of contents.
 ```
@@ -119,7 +125,8 @@ If the folder doesn't contain a `.private` file (indicating that the folder is n
 
 By default Doxygen only documents classes and class methods. In order to also document the functions in a file an additional descriptor must be added to the top of that file.
 The following is an example:
-```
+
+```cpp
 /**
  * @file my_file.hpp
  * Description of file.
@@ -133,24 +140,31 @@ This can be seen in action in the files in the folder `src/quadrature/`.
 Mathematical notation can be used in Doxygen output.
 
 In Markdown files it should be blocked with `$` commands. E.g:
-```
+
+```markdown
 $a \ne b$
 ```
+
 However if the equation includes characters which are used for markdown highlighting it is safer to use the following syntax:
-```
+
+```markdown
 $`a \ne b`$
 ```
 
 An equation can also be printed on its own line using `$$` commands. The syntax must be one of the following:
-```
+
+```markdown
 $$a \ne b$$
 ```
+
 or
-```
+
+```markdown
 $$
 a \ne b
 $$
 ```
+
 The first syntax can be used when the expression fits in one line and doesn't use markdown special characters. The second syntax can be used in all contexts.
 
 In C++ header files it should be blocked with Doxygen syntax, i.e. `@f$` instead of `$`, and `@f[` and `@f]` instead of `$$`.

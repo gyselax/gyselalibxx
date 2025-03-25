@@ -30,6 +30,7 @@ The position of any point in space can be written as
 where we introduced the unit vectors of the orthonormal Cartesian basis $`\{\mathbf{e}_i\}`$. The position vector $`\overrightarrow{r}`$ is not to be confused with the radial coordinate $`r`$. We rely on the Einstein summation in the above equation and in the following, i.e. we consider that repeated indices indicate a summation. See the [wikipedia page on Einstein summation](https://en.wikipedia.org/wiki/Einstein_notation) for more details.
 
 ## Contravariant and covariant bases
+
 Let us define the *contravariant basis* $`\{\mathbf{b}_i\}`$ associated to the $`\{q^i\}`$ coordinates by
 
 ```math
@@ -47,8 +48,8 @@ we have $`\mathbf{b}_i(x^1, \ldots , x^N)`$ and $`\mathbf{b}^i(x^1, \ldots , x^N
 
 ![Geometrical interpretation of the contravariant and covariant bases vectors](../images/curvilinear_coordinates_contravariant_covariant_bases.png)
 
-
 Note that neither contravariant nor covariant bases form orthonormal vector sets in general. Additionally note that in the case of Cartesian coordinates covariant and contravariant bases are the same. In general, the following property holds
+
 ```math
 \mathbf{b}^i \cdot \mathbf{b}_j = \delta_{ij},
 ```
@@ -60,6 +61,7 @@ with $`\cdot`$ the dot product operator and the Kronecker delta $`\delta_{ij} = 
 ```
 
 Where
+
 - $`\{A_i\}`$ are the components of $`\mathbf{A}`$ in *the covariant basis*. We call these *the covariant components* of $`\mathbf{A}`$;
 - $`\{A^i\}`$ are the components of $`\mathbf{A}`$ in *the contravariant basis*. We call these *the contravariant components* of $`\mathbf{A}`$;
 
