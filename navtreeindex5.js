@@ -162,9 +162,10 @@ var NAVTREEINDEX5 =
 "docs_mathematical_and_physical_conventions.html":[12],
 "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Contents":[12,0],
 "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Contravariant_and_covariant_bases":[12,2],
-"docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Differential_operators":[12,5],
-"docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Jacobian":[12,4],
-"docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Metric_tensor":[12,3],
+"docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Differential_operators":[12,6],
+"docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Jacobian":[12,5],
+"docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Metric_tensor":[12,4],
+"docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Multi-dimensional_tensors":[12,3],
 "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__On_the_use_of_curvilinear_coordinates":[12,1],
 "edge_8hpp_source.html":[17,0,14,0,2],
 "edge__transformation_8hpp_source.html":[17,0,14,0,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX5 =
 "kinetic__source_8hpp_source.html":[17,0,5,4,4],
 "krook__source__adaptive_8hpp_source.html":[17,0,5,4,5],
 "krook__source__constant_8hpp_source.html":[17,0,5,4,6],
-"l__norm__tools_8hpp.html":[17,0,11,2],
-"l__norm__tools_8hpp.html#a14de4af65e74d5300abfafe870ef954b":[17,0,11,2,9]
+"l__norm__tools_8hpp.html":[17,0,11,2]
 };

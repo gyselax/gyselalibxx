@@ -159,6 +159,46 @@ Contravariant and covariant bases</h1>
 <li>\(\{A_i\}\) are the components of \(\mathbf{A}\) in <em>the covariant basis</em>. We call these <em>the covariant components</em> of \(\mathbf{A}\);</li>
 <li>\(\{A^i\}\) are the components of \(\mathbf{A}\) in <em>the contravariant basis</em>. We call these <em>the contravariant components</em> of \(\mathbf{A}\);</li>
 </ul>
+<h1><a class="anchor" id="docs_mathematical_and_physical_conventions__Multi-dimensional_tensors"></a>
+Multi-dimensional tensors</h1>
+<p>Just as vectors can be expressed on either the covariant or contravariant bases, multi-dimensional tensors can also be expressed on both bases. The basis of a multi-dimensional tensor is the tensor product of 1D bases.</p>
+<p>For example, a 2D tensor can be written in any of the following four forms:</p>
+<p class="formulaDsp">
+\[M = m^{ij} \mathbf{b}_i \otimes \mathbf{b}_j = m^{i}_{\;j} \mathbf{b}_i \otimes \mathbf{b}^j = m_{i}^{\;j} \mathbf{b}^i \otimes \mathbf{b}_j = m_{ij} \mathbf{b}^i \otimes \mathbf{b}^j
+\]
+</p>
+<p>This notation is useful as it provides a visual reminder of what element-wise operations are valid. When writing a tensor multiplication we must always follow the following rules:</p>
+<ul>
+<li>Each index should appear at most twice in the equation (to avoid confusion).</li>
+<li>When an index is repeated, one instance should be associated with a covariant component while the other should be associated with a contravariant component.</li>
+</ul>
+<p>In order to see the reason for this let us consider a matrix-vector product between a matrix \(M\) and a vector \(\overrightarrow{r}\) ( \(M\overrightarrow{r}\)). If we write everything on the contravariant basis then we obtain:</p>
+<p class="formulaDsp">
+\[M\overrightarrow{r} = m^{ij}\mathbf{b}_i\otimes\mathbf{b}_j r^k\mathbf{b}_k = (m^{ij}r^k (\mathbf{b}_j\cdot\mathbf{b}_k)) \mathbf{b}_i
+\]
+</p>
+<p>in order to calculate this we must calculate 3 terms: \(m^{ij}\), \(r^k\), and \(\mathbf{b}_j \cdot \mathbf{b}_k\). However if we write the vector on the covariant basis we can use the property mentioned above ( \(\mathbf{b}^i \cdot \mathbf{b}_j = \delta_{ij}\)) to simplify this:</p>
+<p class="formulaDsp">
+\[M\overrightarrow{r} = m^{ij}\mathbf{b}_i\otimes\mathbf{b}_j r_k\mathbf{b}^k = (m^{ij}r_k (\mathbf{b}_j\cdot\mathbf{b}^k)) \mathbf{b}_i = m^{ij}r_j \mathbf{b}_i
+\]
+</p>
+<h3><a class="anchor" id="autotoc_md27"></a>
+Transpose of a multi-dimensional tensor</h3>
+<p>A transpose operation is equivalent to changing which dimension is represented by which basis. Thus for a tensor expressed on two 1D bases \(\mathbf{b}^i\) and \(\mathbf{c}_j\):</p>
+<p class="formulaDsp">
+\[M = m_{i}^{\;j} \mathbf{b}^i \otimes \mathbf{c}_j
+\]
+</p>
+<p>the transpose expressed using the same components will be defined as:</p>
+<p class="formulaDsp">
+\[M^T = m_{i}^{\;j} \mathbf{c}_j \otimes \mathbf{b}^i
+\]
+</p>
+<p>element-wise a transpose operation can therefore be written as:</p>
+<p class="formulaDsp">
+\[(M^T)^i_{\;j} = m\left._{j}^{\;i}\right.
+\]
+</p>
 <h1><a class="anchor" id="docs_mathematical_and_physical_conventions__Metric_tensor"></a>
 Metric tensor</h1>
 <p>The <em>metric tensor</em> \(G\) associated with the set of coordinates \(\{q^i\}\) is defined from its components \(g_{ij}\) as</p>
@@ -182,7 +222,7 @@ A^i =&amp; g^{ij}A_j.
 <p>An easy way to get the above formulas right is to remember that the metric tensor can be used to "raise" or "lower" indices.</p>
 <h1><a class="anchor" id="docs_mathematical_and_physical_conventions__Jacobian"></a>
 Jacobian</h1>
-<h3><a class="anchor" id="autotoc_md27"></a>
+<h3><a class="anchor" id="autotoc_md28"></a>
 Curvilinear to Cartesian</h3>
 <p>The <em>Jacobian</em> matrix \(J\) associated with the transformation from the curvilinear coordinates \(\{q^i\}\) to the Cartesian coordinates \(\{x^i\}\) is defined from its components \(J\left.^{i}_{\;j}\right.\) as</p>
 <p class="formulaDsp">
@@ -215,7 +255,7 @@ Curvilinear to Cartesian</h3>
 \[A^i_\text{c} = J\left.^{i}_{\;j}\right. g^{jk}A_k. 
 \]
 </p>
-<h3><a class="anchor" id="autotoc_md28"></a>
+<h3><a class="anchor" id="autotoc_md29"></a>
 Curvilinear to curvilinear</h3>
 <p>Let us now consider the more general case where one seeks to relate two curvilinear coordinate systems \(\{q^i\}\) and \(\{p^i\}\). We denote by \(J\{q\to p\}\) the Jacobian of the transformation from the coordinate system \(\{q^i\}\) to \(\{p^i\}\). The components of the Jacobian and of its inverse are defined similarly as above as</p>
 <p class="formulaDsp">
@@ -240,7 +280,7 @@ Curvilinear to curvilinear</h3>
 <h1><a class="anchor" id="docs_mathematical_and_physical_conventions__Differential_operators"></a>
 Differential operators</h1>
 <p>Hereafter are expressed differential operators in a curvilinear coordinate system \(\{q^i\}\).</p>
-<h3><a class="anchor" id="autotoc_md29"></a>
+<h3><a class="anchor" id="autotoc_md30"></a>
 Gradient</h3>
 <p>Let us consider a scalar field \(f\). The gradient \(\nabla f\) of such field is defined in the Cartesian basis \(\{\mathbf{e}_i\}\) as</p>
 <p class="formulaDsp">

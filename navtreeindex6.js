@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"l__norm__tools_8hpp.html#a14de4af65e74d5300abfafe870ef954b":[17,0,11,2,9],
 "l__norm__tools_8hpp.html#a1e7039002a54c7de373d8c9b27de00ca":[17,0,11,2,4],
 "l__norm__tools_8hpp.html#a27082a4ff6b4ad2c890a613983f6f287":[17,0,11,2,8],
 "l__norm__tools_8hpp.html#a4c8219dfeea80b86bff16a853e188f8d":[17,0,11,2,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX6 =
 "structFEM1DPoissonSolver_1_1GridPDEDimQ.html":[16,63,0],
 "structFEM1DPoissonSolver_1_1HiddenFEMBSplines.html":[16,63,1],
 "structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace2aeecfe91d464f5738599cc105fb6087.html":[16,65,0],
-"structGEOM__NAMESPACE__NAME_1_1BSplinesR.html":[16,3,0],
-"structGEOM__NAMESPACE__NAME_1_1BSplinesTheta.html":[16,3,1]
+"structGEOM__NAMESPACE__NAME_1_1BSplinesR.html":[16,3,0]
 };

@@ -116,7 +116,7 @@ Equations</h1>
 \]
 </p>
 <p><b>Remark:</b> the advection field of the advection equation is given by \(\frac{E\wedge B}{|B|^2} = E(t, x, y)\wedge e_z\) with \(B\) the magnetic field supposed of norm 1, (and \(e_z\) a vector perpendicular to the \((x,y)\) plane in the direct direction).</p>
-<h3><a class="anchor" id="autotoc_md41"></a>
+<h3><a class="anchor" id="autotoc_md42"></a>
 Operators</h3>
 <p>The simulations uses the following operators:</p>
 <ul>
@@ -124,21 +124,21 @@ Operators</h3>
 <li>Poisson equation: <a class="el" href="classFFTPoissonSolver.html" title="See FFTPoissonSolverImplementation.">FFTPoissonSolver</a> solver using FFT to solve the Poisson equation on a periodic domain (and compute the electric field);</li>
 <li>equations coupling: <a class="el" href="classPredCorrRK2XY.html" title="Predictor-corrector based on RK2 for the guiding-centre model.">PredCorrRK2XY</a> using a <a class="el" href="classRK2.html" title="A class which provides an implementation of a second-order Runge-Kutta method.">RK2</a> time integration method.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md42"></a>
+<h3><a class="anchor" id="autotoc_md43"></a>
 Execution space</h3>
 <p>The simulation runs on GPU/CPU.</p>
-<h3><a class="anchor" id="autotoc_md43"></a>
+<h3><a class="anchor" id="autotoc_md44"></a>
 Output files</h3>
 <p>The <code>guiding_centre</code> executable creates in the working folder an <code>output/</code> folder containing the output files: density, electrostatic potential and electric field values on the grid for some regular time steps.</p>
-<h3><a class="anchor" id="autotoc_md44"></a>
+<h3><a class="anchor" id="autotoc_md45"></a>
 Command line</h3>
 <div class="fragment"><div class="line">./guiding_centre_XY &lt;path_to_params.yaml&gt;</div>
 </div><!-- fragment --><h1><a class="anchor" id="simulations_geometryXY_guiding_centre__Simulation"></a>
 Simulation</h1>
-<h3><a class="anchor" id="autotoc_md45"></a>
+<h3><a class="anchor" id="autotoc_md46"></a>
 Grid</h3>
 <p>The simulation runs on a grid on \([0, 4\pi]\times[0, 2\pi]\) with 64 uniformly distributed points in each direction.</p>
-<h3><a class="anchor" id="autotoc_md46"></a>
+<h3><a class="anchor" id="autotoc_md47"></a>
 Test case: Kelvin-Helmholtz instability test case</h3>
 <p>The chosen initial conditions are</p>
 <p class="formulaDsp">
@@ -148,7 +148,7 @@ Test case: Kelvin-Helmholtz instability test case</h3>
 </p>
 <p>with \(\varepsilon = 0.015\) the amplitude of perturbation and \(k = 2\pi/ L_x = 0.5\) the mode of the perturbation.</p>
 <p>See more in <a class="el" href="src_geometryXY_initialisation.html">Initialisation on (x,y) geometry</a>.</p>
-<h3><a class="anchor" id="autotoc_md47"></a>
+<h3><a class="anchor" id="autotoc_md48"></a>
 Results treatments - diagnosis</h3>
 <p>In <code>post-process/PythonScripts/geometryXY/</code> folder, python files are available to plot the results saved in the <code>output/</code> folder:</p>
 <ul>

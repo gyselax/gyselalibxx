@@ -89,6 +89,7 @@ var NAVTREE =
       [ "Contents", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Contents", null ],
       [ "On the use of curvilinear coordinates", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__On_the_use_of_curvilinear_coordinates", null ],
       [ "Contravariant and covariant bases", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Contravariant_and_covariant_bases", null ],
+      [ "Multi-dimensional tensors", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Multi-dimensional_tensors", null ],
       [ "Metric tensor", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Metric_tensor", null ],
       [ "Jacobian", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Jacobian", null ],
       [ "Differential operators", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Differential_operators", null ]
@@ -292,8 +293,8 @@ var NAVTREEINDEX =
 "classMatrix__Centre__Block.html",
 "classPolarBSplines_1_1Impl.html#ad59005ab67bc08a9bade86b4cbb86c6e",
 "classVectorFieldMem.html#a5c5366a96f56e4422e59e8dec1e9c850",
-"l__norm__tools_8hpp.html#a1e7039002a54c7de373d8c9b27de00ca",
-"structGEOM__NAMESPACE__NAME_1_1BSplinesX.html"
+"l__norm__tools_8hpp.html#a14de4af65e74d5300abfafe870ef954b",
+"structGEOM__NAMESPACE__NAME_1_1BSplinesTheta.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

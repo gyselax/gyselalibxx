@@ -1,10 +1,10 @@
 var searchData=
 [
   ['x_0',['x',['../structGEOM__NAMESPACE__NAME_1_1X.html',1,'GEOM_NAMESPACE_NAME::X&lt; PatchIdx &gt;'],['../structperiodic__strips__uniform__2d__9patches_1_1X.html',1,'periodic_strips_uniform_2d_9patches::X&lt; PatchIdx &gt;'],['../structphysical__geometry_1_1X.html',1,'physical_geometry::X'],['../structX.html',1,'X'],['../structfigure__of__eight__5patches_1_1X.html',1,'figure_of_eight_5patches::X&lt; PatchIdx &gt;'],['../classIPolarFootFinder.html#aad57064cce5dd59aabb33fc778f42010',1,'IPolarFootFinder::X']]],
-  ['x_20and_20y_20on_20t_20x_20y_20vx_20vy_1',['Advection along x and y on (t, x, y, vx, vy)',['../tests_advection.html#autotoc_md87',1,'']]],
+  ['x_20and_20y_20on_20t_20x_20y_20vx_20vy_1',['Advection along x and y on (t, x, y, vx, vy)',['../tests_advection.html#autotoc_md88',1,'']]],
   ['x_20is_20not_20defined_2',['X is not defined',['../docs_Common_compilation_problems.html#docs_Common_compilation_problems__X_is_not_defined',1,'']]],
-  ['x_20on_20t_20x_3',['Advection along x on (t, x)',['../tests_advection.html#autotoc_md85',1,'']]],
-  ['x_20on_20t_20x_20vx_4',['Advection along x on (t, x, vx)',['../tests_advection.html#autotoc_md86',1,'']]],
+  ['x_20on_20t_20x_3',['Advection along x on (t, x)',['../tests_advection.html#autotoc_md86',1,'']]],
+  ['x_20on_20t_20x_20vx_4',['Advection along x on (t, x, vx)',['../tests_advection.html#autotoc_md87',1,'']]],
   ['x_20v_5fx_5',['x v_x',['../src_geometryXVx.html',1,'Geometry (x, v_x)'],['../src_speciesinfo.html',1,'SpeciesInfo (x, v_x)']]],
   ['x_20vx_6',['Geometry X-Vx',['../src_geometryXVx_geometry.html',1,'src_geometryXVx']]],
   ['x_20vx_20geometry_7',['Simulations in (x, vx) geometry',['../simulations_geometryXVx.html',1,'simulations']]],
