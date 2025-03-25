@@ -22,8 +22,6 @@ class Gradient
 
     using Dims = ddc::to_type_seq_t<typename Mapping::CoordArg>;
     using Dims_cov = vector_index_set_dual_t<Dims>;
-    using Dim0_cov = ddc::type_seq_element_t<0, Dims_cov>;
-    using Dim1_cov = ddc::type_seq_element_t<1, Dims_cov>;
 
     MetricTensorType const m_metric_tensor;
 
