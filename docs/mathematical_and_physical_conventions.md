@@ -168,19 +168,19 @@ g^{ik}_{\{p\}}A_{\{p\}k} = (J_{\{q\to p\}})^{i}_{\;j}g^{jl}_{\{q\}} A_{\{q\}l}.
 The metric tensor associated with the basis $`c_i`$ can be obtained from the Jacobian of the transformation $`\{q^i\} \rightarrow \{p^j\}`$ and the metric tensor associated with the basis $`b_j`$ via the following equation:
 
 ```math
-g^{ij}\{p\} = (J_{\{q\to p\}})^{i}_{\;j} g^{jk}_{\{q\}} (J_{\{q\to p\}})^{T}\left.^{i}_{\;j}\right. = (J_{\{p\to q\}})^{-1}\left.^{i}_{\;j}\right. g^{jk}_{\{q\}} (J_{\{p\to q\}})^{-T}\left.^{i}_{\;j}\right.
+g^{il}\{p\} = (J_{\{q\to p\}})^{i}_{\;j} g^{jk}_{\{q\}} (J_{\{q\to p\}})^{T}\left.^{k}_{\;l}\right. = (J_{\{p\to q\}})^{-1}\left.^{i}_{\;j}\right. g^{jk}_{\{q\}} (J_{\{p\to q\}})^{-T}\left.^{k}_{\;l}\right.
 ```
 
 The metric tensor associated with the basis $`b_i`$ can be obtained from the Jacobian of the transformation $`\{p^i\} \rightarrow \{q^j\}`$ and the metric tensor associated with the basis $`c_j`$ via the following equation:
 
 ```math
-g^{ij}\{q\} = (J_{\{p\to q\}})^{i}_{\;j} g^{jk}_{\{p\}} (J_{\{p\to q\}})^{T}\left.^{i}_{\;j}\right. = (J_{\{q\to p\}})^{-1}\left.^{i}_{\;j}\right. g^{jk}_{\{p\}} (J_{\{q\to p\}})^{-T}\left.^{i}_{\;j}\right.
+g^{il}\{q\} = (J_{\{p\to q\}})^{i}_{\;j} g^{jk}_{\{p\}} (J_{\{p\to q\}})^{T}\left.^{k}_{\;l}\right. = (J_{\{q\to p\}})^{-1}\left.^{i}_{\;j}\right. g^{jk}_{\{p\}} (J_{\{q\to p\}})^{-T}\left.^{k}_{\;l}\right.
 ```
 
 These expressions can be used to relates the components of $`\mathbf{A}`$ expressed in the covariant vector bases associated with both curvilinear coordinates system in another way. Using the above expressions we can see that $`J_{\{q\to p\}}G_{\{q\}}^{-1}=G_{\{p\}}^{-1}J_{\{q\to p\}}^{-T}`$. This gives us:
 
 ```math
-A_{\{p\}k} = (J_{\{q\to p\}})^{-T}\left._{\;i}^j\right. A_{\{q\}j} = (J_{\{q\to p\}})^{-1}\left.^j_{\;i}\right.A_{\{q\}j} = (J_{\{p\to q\}})^j_{\;i} A_{\{q\}j}.
+A_{\{p\}i} = (J_{\{q\to p\}})^{-T}\left._{\;i}^j\right. A_{\{q\}j} = (J_{\{q\to p\}})^{-1}\left.^j_{\;i}\right.A_{\{q\}j} = (J_{\{p\to q\}})^j_{\;i} A_{\{q\}j}.
 ```
 
 ## Differential operators
