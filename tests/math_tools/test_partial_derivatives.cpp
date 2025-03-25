@@ -360,7 +360,6 @@ public:
     using SplineInterpPointsX
             = ddc::GrevilleInterpolationPoints<BSplinesX, SplineBoundary, SplineBoundary>;
 
-
     struct BSplinesY : ddc::NonUniformBSplines<Y, spline_degree>
     {
     };

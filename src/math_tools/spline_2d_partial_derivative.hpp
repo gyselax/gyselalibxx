@@ -23,7 +23,10 @@ class Spline2DPartialDerivative
     static_assert(
             (std::is_same_v<
                     typename SplineEvaluator2D::continuous_dimension_type1,
-                    DerivativeDimension>) || (std::is_same_v<typename SplineEvaluator2D::continuous_dimension_type2, DerivativeDimension>));
+                    DerivativeDimension>)
+            || (std::is_same_v<
+                    typename SplineEvaluator2D::continuous_dimension_type2,
+                    DerivativeDimension>));
 
 private:
     using base_type = IPartialDerivative<
