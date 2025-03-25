@@ -144,13 +144,13 @@ Let us now consider the more general case where one seeks to relate two curvilin
 We denote by $`J\{q\to p\}`$ the Jacobian of the transformation from the coordinate system $`\{q^i\}`$ to $`\{p^i\}`$. The components of the Jacobian on the basis $`c_i \otimes b^j`$ and the components of its inverse on the basis $`b_i \otimes c^j`$ are defined similarly to above, as:
 
 ```math
-J_{q\to p}\left.^{i}_{\;j}\right. = \frac{\partial p^i}{\partial q^j}, \quad (J_{q\to p})^{-1}\left.^{i}_{\;j}\right. = \frac{\partial q^i}{\partial p^j}. 
+(J_{\{q\to p\}})^{i}_{\;j} = \frac{\partial p^i}{\partial q^j}, \quad (J_{\{q\to p\}})^{-1}\left.^{i}_{\;j}\right. = \frac{\partial q^i}{\partial p^j}. 
 ```
 
-Here one may note that $`(J_{q\to p})^{-1}\left.^{i}_{\;j}\right. = J_{p\to q}\left.^{i}_{\;j}\right.`$.  Let us now express a vector $`\mathbf{A}`$ in these bases as
+Here one may note that $`(J_{\{q\to p\}})^{-1}\left.^{i}_{\;j}\right. = (J_{\{p\to q\}})^{i}_{\;j}`$.  Let us now express a vector $`\mathbf{A}`$ in these bases as
 
 ```math
-\mathbf{A} = A^i\{p\} \mathbf{b}_i = A_i\{p\} \mathbf{b}^i = A^i\{q\} \mathbf{c}_i = A_i\{q\} \mathbf{c}^i, 
+\mathbf{A} = A^i_{\{p\}} \mathbf{b}_i = A_{i\{p\}} \mathbf{b}^i = A^i_{\{q\}} \mathbf{c}_i = A_{i\{q\}} \mathbf{c}^i, 
 ```
 
 where $`A^i\{p\}`$ (resp. $`A_i\{p\}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`\mathbf{A}`$ expressed in the vector basis associated with coordinates $`\{p^i\}`$, and similarly $`A^i\{q\}`$ (resp. $`A_i\{q\}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`\mathbf{A}`$ expressed in the vector basis associated with coordinates $`\{q^i\}`$. We have
