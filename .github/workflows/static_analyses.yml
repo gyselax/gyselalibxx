@@ -171,7 +171,7 @@ jobs:
     - name: Spell Check Repo
       uses: crate-ci/typos@v1.29.10
       with:
-        files: ./AUTHORS ./CMakeLists.txt ./docs/ ./post-process ./README.md ./simulations ./src ./tests/
+        files: ./AUTHORS ./CMakeLists.txt ./docs/ ./post-process ./README.md ./simulations ./src ./tests/ ./bin
   
   set_draft_failing:
     runs-on: ubuntu-latest
