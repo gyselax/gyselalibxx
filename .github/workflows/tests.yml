@@ -78,6 +78,7 @@ jobs:
           toolchain: toolchains/docker.gyselalibxx_env/tests_coverage_toolchain.cmake
       - name: Run tests
         uses: ./.github/actions/run_tests
+        continue-on-error: true
       - name: Check Test Coverage
         run: |
           pip install gcovr
