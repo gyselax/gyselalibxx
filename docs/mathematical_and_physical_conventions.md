@@ -150,31 +150,37 @@ We denote by $`J\{q\to p\}`$ the Jacobian of the transformation from the coordin
 Here one may note that $`(J_{\{q\to p\}})^{-1}\left.^{i}_{\;j}\right. = (J_{\{p\to q\}})^{i}_{\;j}`$.  Let us now express a vector $`\mathbf{A}`$ in these bases as
 
 ```math
-\mathbf{A} = A^i_{\{p\}} \mathbf{b}_i = A_{i\{p\}} \mathbf{b}^i = A^i_{\{q\}} \mathbf{c}_i = A_{i\{q\}} \mathbf{c}^i, 
+\mathbf{A} = A^i_{\{p\}} \mathbf{b}_i = A_{\{p\}i} \mathbf{b}^i = A^i_{\{q\}} \mathbf{c}_i = A_{\{q\}i} \mathbf{c}^i, 
 ```
 
-where $`A^i\{p\}`$ (resp. $`A_i\{p\}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`\mathbf{A}`$ expressed in the vector basis associated with coordinates $`\{p^i\}`$, and similarly $`A^i\{q\}`$ (resp. $`A_i\{q\}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`\mathbf{A}`$ expressed in the vector basis associated with coordinates $`\{q^i\}`$. We have
+where $`A^i_{\{p\}}`$ (resp. $`A_{\{p\}i}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`\mathbf{A}`$ expressed in the vector basis associated with coordinates $`\{p^i\}`$, and similarly $`A^i_{\{q\}}`$ (resp. $`A_{\{q\}i}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`\mathbf{A}`$ expressed in the vector basis associated with coordinates $`\{q^i\}`$. We have
 
 ```math
-A^i\{p\} = J_{q\to p}\left.^{i}_{\;j}\right. A^j\{q\}. 
+A^i_{\{p\}} = (J_{\{q\to p\}})^{i}_{\;j} A^j_{\{q\}}.
 ```
 
-By introducing the metric tensors $`G\{p\}`$  and $`G\{q\}`$ associated with both curvilinear coordinates system, and by writing $`g_{ij}\{p\}`$ and $`g_{ij}\{q\}`$ their elements ($`g^{ij}\{p\}`$ and $`g^{ij}\{q\}`$ the elements of their inverse) one relates the components of $`\mathbf{A}`$ expressed in covariant vector basis associated with both curvilinear coordinates system as
+By introducing the metric tensors $`G_{\{p\}}`$  and $`G_{\{q\}}`$ associated with both curvilinear coordinates system, and by writing $`g_{\{p\}ij}`$ and $`g_{\{q\}ij}`$ their elements ($`g^{ij}_{\{p\}}`$ and $`g^{ij}_{\{q\}}`$ the elements of their inverse) one relates the components of $`\mathbf{A}`$ expressed in the covariant vector bases associated with both curvilinear coordinates system as:
 
 ```math
-g^{ik}\{p\}A_k\{p\} = J\left.^{i}_{\;j}\right.\{q\to p\}g^{jl}\{q\} A_l\{q\}.
-```
-
-as for the curvilinear to Cartesian case we can use the fact that $JG^{-1}=J^{-T}$ to write this equation in an alternate form:
-
-```math
-g^{ik}\{p\}A_k\{p\} = (J^{-T})_{\;i}^j\{q\to p\}A_j\{q\} = (J^{-1})^j_{\;i}\{q\to p\}A_j\{q\} = (J)^j_{\;i}\{p\to q\} A_j\{q\}.
+g^{ik}_{\{p\}}A_{\{p\}k} = (J_{\{q\to p\}})^{i}_{\;j}g^{jl}_{\{q\}} A_{\{q\}l}.
 ```
 
 The metric tensor associated with the basis $`c_i`$ can be obtained from the Jacobian of the transformation $`\{q^i\} \rightarrow \{p^j\}`$ and the metric tensor associated with the basis $`b_j`$ via the following equation:
 
 ```math
-g^{ij}\{q\} = J\left.^{i}_{\;j}\right.\{q\to p\} g^{jk}\{p\} J^{-1}\left.^{i}_{\;j}\right.\{p\to q\}
+g^{ij}\{p\} = (J_{\{q\to p\}})^{i}_{\;j} g^{jk}_{\{q\}} (J_{\{q\to p\}})^{T}\left.^{i}_{\;j}\right. = (J_{\{p\to q\}})^{-1}\left.^{i}_{\;j}\right. g^{jk}_{\{q\}} (J_{\{p\to q\}})^{-T}\left.^{i}_{\;j}\right.
+```
+
+The metric tensor associated with the basis $`b_i`$ can be obtained from the Jacobian of the transformation $`\{p^i\} \rightarrow \{q^j\}`$ and the metric tensor associated with the basis $`c_j`$ via the following equation:
+
+```math
+g^{ij}\{q\} = (J_{\{p\to q\}})^{i}_{\;j} g^{jk}_{\{p\}} (J_{\{p\to q\}})^{T}\left.^{i}_{\;j}\right. = (J_{\{q\to p\}})^{-1}\left.^{i}_{\;j}\right. g^{jk}_{\{p\}} (J_{\{q\to p\}})^{-T}\left.^{i}_{\;j}\right.
+```
+
+These expressions can be used to relates the components of $`\mathbf{A}`$ expressed in the covariant vector bases associated with both curvilinear coordinates system in another way. Using the above expressions we can see that $`J_{\{q\to p\}}G_{\{q\}}^{-1}=G_{\{p\}}^{-1}J_{\{q\to p\}}^{-T}`$. This gives us:
+
+```math
+A_{\{p\}k} = (J_{\{q\to p\}})^{-T}\left._{\;i}^j\right. A_{\{q\}j} = (J_{\{q\to p\}})^{-1}\left.^j_{\;i}\right.A_{\{q\}j} = (J_{\{p\to q\}})^j_{\;i} A_{\{q\}j}.
 ```
 
 ## Differential operators
