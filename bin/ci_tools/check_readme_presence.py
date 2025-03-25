@@ -10,7 +10,7 @@ import subprocess
 import sys
 from git_evaluation_tools import get_diff_as_json
 
-gyselalibxx_root = Path(__file__).parent.parent
+gyselalibxx_root = Path(__file__).parent.parent.parent
 
 parser = argparse.ArgumentParser(description='Check that a README.md is present in any folder where new files have been added')
 parser.add_argument('diff_file', metavar='diff_file', type=str,
