@@ -125,7 +125,7 @@ var NAVTREE =
         [ "Velocity advection", "src_advection.html#src_advection__Velocity_advection", null ],
         [ "1D advection with a given advection field", "src_advection.html#src_advection__1D_advection_with_a_given_advection_field", null ],
         [ "PolarFootFinder", "src_advection.html#src_advection__PolarFootFinder", null ],
-        [ "References", "src_advection.html#autotoc_md51", null ]
+        [ "References", "src_advection.html#src_advection__References", null ]
       ] ],
       [ "Collisions", "src_collisions.html", null ],
       [ "Data Storage Types", "src_data_types.html", [
@@ -139,14 +139,14 @@ var NAVTREE =
           [ "Time integration methods", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Time_integration_methods", null ],
           [ "Advection domain", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Advection_domain", null ],
           [ "Advection Field", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Advection_Field", null ],
-          [ "Unit tests", "src_geometryRTheta_advection.html#autotoc_md56", null ],
-          [ "References", "src_geometryRTheta_advection.html#autotoc_md57", null ],
-          [ "Contents", "src_geometryRTheta_advection.html#autotoc_md58", null ]
+          [ "Unit tests", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Unit_tests", null ],
+          [ "Contents", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Contents", null ],
+          [ "References", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__References", null ]
         ] ],
         [ "Advection Field finder", "src_geometryRTheta_advection_field.html", [
           [ "Guiding centre case", "src_geometryRTheta_advection_field.html#src_geometryRTheta_advection_field__Guiding_centre_case", null ],
-          [ "References", "src_geometryRTheta_advection_field.html#autotoc_md63", null ],
-          [ "Contents", "src_geometryRTheta_advection_field.html#autotoc_md64", null ]
+          [ "Contents", "src_geometryRTheta_advection_field.html#src_geometryRTheta_advection_field__Contents", null ],
+          [ "References", "src_geometryRTheta_advection_field.html#src_geometryRTheta_advection_field__References", null ]
         ] ],
         [ "Geometry RTheta", "src_geometryRTheta_geometry.html", [
           [ "Shortcuts", "src_geometryRTheta_geometry.html#src_geometryRTheta_geometry__Shortcuts", null ]
@@ -171,8 +171,8 @@ var NAVTREE =
         ] ]
       ] ],
       [ "Geometry (vpar, mu)", "src_geometryVparMu.html", [
-        [ "CollisionConfiguration :", "src_geometryVparMu_collisions.html", null ],
-        [ "GeometryVparMu :", "src_geometryVparMu_geometry.html", null ],
+        [ "CollisionConfiguration", "src_geometryVparMu_collisions.html", null ],
+        [ "GeometryVparMu", "src_geometryVparMu_geometry.html", null ],
         [ "Initialisation methods", "src_geometryVparMu_initialisation.html", null ]
       ] ],
       [ "Geometry (x, v_x)", "src_geometryXVx.html", [
@@ -211,11 +211,11 @@ var NAVTREE =
         [ "Memory concerns", "src_interpolation.html#src_interpolation__Memory_concerns", null ],
         [ "Polar Splines", "src_interpolation_polar_splines.html", null ]
       ] ],
-      [ "Functions used for input and output.", "src_io.html", null ],
+      [ "Functions used for input and output", "src_io.html", null ],
       [ "Mappings", "src_mapping.html", [
         [ "Analytically invertible coordinate transformations", "src_mapping.html#src_mapping__Analytically_invertible_coordinate_transformations", null ],
         [ "Discrete coordinate transformation defined on B-splines", "src_mapping.html#src_mapping__Discrete_coordinate_transformation_defined_on_B-splines", null ],
-        [ ". Combined coordinate transformation which combines two of the coordinate transformations above.", "src_mapping.html#src_mapping__Combined_coordinate_transformation_which_combines_two_of_the_coordinate_transformations_above", null ]
+        [ "Combined coordinate transformation which combines two of the coordinate transformations above", "src_mapping.html#src_mapping__Combined_coordinate_transformation_which_combines_two_of_the_coordinate_transformations_above", null ]
       ] ],
       [ "Utility Functions", "src_math_tools.html", [
         [ "Derivative tools", "src_math_tools.html#src_math_tools__Derivative_tools", null ],
@@ -265,7 +265,10 @@ var NAVTREE =
           [ "References", "tests_geometryRTheta_advection_rtheta.html#tests_geometryRTheta_advection_rtheta__References", null ],
           [ "Contents", "tests_geometryRTheta_advection_rtheta.html#tests_geometryRTheta_advection_rtheta__Contents", null ]
         ] ],
-        [ "Tests on spline interpolator in polar coordinates", "tests_geometryRTheta_spline_interpolator_rtheta.html", null ],
+        [ "Tests on spline interpolator in polar coordinates", "tests_geometryRTheta_spline_interpolator_rtheta.html", [
+          [ "Functions tests", "tests_geometryRTheta_spline_interpolator_rtheta.html#tests_geometryRTheta_spline_interpolator_rtheta__Functions_tests", null ],
+          [ "Python scripts", "tests_geometryRTheta_spline_interpolator_rtheta.html#tests_geometryRTheta_spline_interpolator_rtheta__Python_scripts", null ]
+        ] ],
         [ "Tests on the 2D polar poisson solver", "tests_geometryRTheta_polar_poisson.html", [
           [ "Polar Poisson solver", "tests_geometryRTheta_polar_poisson.html#tests_geometryRTheta_polar_poisson__Polar_Poisson_solver", null ],
           [ "References", "tests_geometryRTheta_polar_poisson.html#tests_geometryRTheta_polar_poisson__References", null ],

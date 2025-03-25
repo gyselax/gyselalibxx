@@ -125,7 +125,8 @@ General case</h3>
 \\ E = -\nabla \phi 
 \]
 </p>
-<p>where</p><ul>
+<p>where</p>
+<ul>
 <li>\(\rho = \rho(t,r,\theta)\) is the <b>density</b> of the particles (electrons with mass \(m_e\) and charge \(q = -1\));</li>
 <li>\(v\) is the velocity of the particles ( \(div(v) = 0\));</li>
 <li>\(\phi\) is the usual electric potential associated withe the total electric field;</li>
@@ -133,7 +134,8 @@ General case</h3>
 </ul>
 <h3><a class="anchor" id="autotoc_md32"></a>
 Simplified case</h3>
-<p>We study a simplified case where</p><ul>
+<p>We study a simplified case where</p>
+<ul>
 <li>\(B = e_z\),</li>
 <li>\(\varepsilon_0 = 1\).</li>
 </ul>
@@ -162,12 +164,14 @@ Test case - diocotron instability</h1>
 \]
 </p>
 <p>with \(p = 50 \text{, } \bar{r} = \frac{R_1 + R_2}{2} \text{, and } d = \frac{R_2 - R_1}{2}\).</p>
-<p>The explicit solution \((\phi,\rho)\) is given by  </p><p class="formulaDsp">
+<p>The explicit solution \((\phi,\rho)\) is given by</p>
+<p class="formulaDsp">
 \[ \rho(t,r, \theta) = \rho_{0}(r) + \varepsilon\rho_{1}(t,r,\theta),
  \phi(t,r, \theta) = \phi_{0}(r) + \varepsilon\phi_{1}(t,r,\theta),
 \]
 </p>
-<p>with  </p><p class="formulaDsp">
+<p>with</p>
+<p class="formulaDsp">
 \[\rho_0(r) = \mathbb{I}_{ R_1 \leq r \leq R_2 }
 \]
 </p>
@@ -176,29 +180,34 @@ Test case - diocotron instability</h1>
 \[\rho_0(r) = \exp\left(- \left(\frac{r - \bar{r}}{d}\right)^p\right) \ \mathbb{I}_{R_1 \leq r \leq R_2}
 \]
 </p>
-<p>in Edoardo Zoni's article [2], and  </p><p class="formulaDsp">
+<p>in Edoardo Zoni's article [2], and</p>
+<p class="formulaDsp">
 \[ \rho_{1}(t,r, \theta) = \widehat{\rho_{1,l}}(r) e^{il\theta} e^{-i\omega t},
  \phi_{1}(t,r, \theta) = \widehat{\phi_{1,l}}(r) e^{il\theta} e^{-i\omega t},
 \]
 </p>
-<p>with \(l\in\mathbb{N}\) the selected mode, \(\omega \in \mathbb{C}\) a pulsation to be determined, and</p><ul>
+<p>with \(l\in\mathbb{N}\) the selected mode, \(\omega \in \mathbb{C}\) a pulsation to be determined, and</p>
+<ul>
 <li>if \(W_1 \leq r\lt R_1\) then, \(\widehat{\phi_{1,l}} (r) = \phi_{1,I}(r) = \frac{R_1^l}{r^l} \left( B R_1^l + C R_1^{-l}\right) \frac{r^{2l} - W_1^{2l}}{R_1^{2l} - W_1^{2l}}\)</li>
 <li>if \(R_1 \leq r\lt R_2\) then, \(\widehat{\phi_{1,l}} (r) = \phi_{1,II}(r) =  B r^l + C r^{-l}\)</li>
 <li>if \(R_2 \leq r\lt W_2\) then, \(\widehat{\phi_{1,l}} (r) = \phi_{1,III}(r) = \frac{R_2^l}{r^l} \left( B R_2^l + C R_2^{-l}\right) \frac{r^{2l} - W_2^{2l}}{ R_2^{2l} - W_2^{2l}}\).</li>
 </ul>
 <p>for \(B\) and \(C\) constants stastifying continuity conditions such that \(A[B,C]^t = 0\)</p>
-<p>with  </p><p class="formulaDsp">
+<p>with</p>
+<p class="formulaDsp">
 \[ A_{1,1} = R_1^l -  \frac{R_1^{2l+1}}{R_1^{2l} - W_1^{2l}} \left[  R_1^{l-1} + \frac{1}{R_1^{l+1}}  W_1^{2l}  \right] + \frac{ R_1^l}{\omega - l\omega_m(R_1)},
 \\ A_{1,2} = - R_1^{-l} - \frac{R_1}{R_1^{2l} - W_1^{2l}} \left[  R_1^{l-1} + \frac{1}{R_1^{l+1}}  W_1^{2l}  \right] +  \frac{ R_1^{-l}}{\omega - l\omega_m(R_1)},
 \\ A_{2,1} = - R_2^{l} + \frac{R_2^{2l+1}}{R_2^{2l} - W_2^{2l}} \left[  R_2^{l-1} + \frac{1}{R_2^{l+1}}  W_2^{2l}  \right] - \frac{ R_2^l }{\omega - l\omega_m(R_2)},
 \\ A_{2,2} = R_2^{-l} + \frac{R_2}{R_2^{2l} - W_2^{2l}} \left[  R_2^{l-1} + \frac{1}{R_2^{l+1}}  W_2^{2l}  \right] - \frac{ R_2^{-l} }{\omega - l\omega_m(R_2)}.
 \]
 </p>
-<p>where \(\omega\) satisfies  </p><p class="formulaDsp">
+<p>where \(\omega\) satisfies</p>
+<p class="formulaDsp">
 \[\left(\frac{\omega}{\omega_D} \right)^2 - b_l \frac{\omega}{\omega_D} + c_l = 0
 \]
 </p>
-<p>with  </p><p class="formulaDsp">
+<p>with</p>
+<p class="formulaDsp">
 \[b_l \left( 1 - \frac{W_1^{2l}}{W_2^{2l}} \right) = l\left[ 1 - \frac{R_1^2}{R_2^2} + \frac{\omega_q }{\omega_D} \left( 1 + \frac{R_1^2}{R_2^2} \right)\right]\left[ 1 - \frac{W_1^{2l}}{W_2^{2l}} \right] + \left(1 - \frac{R_1^{2l}}{R_2^{2l}} \right) \left(\frac{R_2^{2l}}{W_2^{2l}} - \frac{W_1^{2l}}{R_1^{2l}} \right)
 \]
 </p>
@@ -214,7 +223,7 @@ Predictor-corrector</h3>
 <h1><a class="anchor" id="simulations_geometryRTheta_diocotron__References"></a>
 References</h1>
 <p>[1] Emily Bourne. “Non-Uniform Numerical Schemes for the Modelling of Turbulence in the 5D GY-SELA Code”. PhD thesis. Aix-Marseille Université, Dec. 2022.</p>
-<p>[2] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the 
+<p>[2] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the
 method of characteristics and spline finite elements", <a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>, Journal of Computational Physics, 2019.</p>
 <p>[3] <a class="el" href="structR.html" title="Define non periodic real contravariant R dimension.">R</a>. C. Davidson.Physics of non neutral plasmas. 1990. Chap. 6, The Dioctron instability.</p>
 <p>[4] Eric Madaule, Sever Adrian Hirstoaga, Michel Mehrenberger and Jerôme Petri. “Semi-Lagrangian simulations of the diocotron instability”. HAL (July 2013). doi: <a href="https://hal.inria.fr/hal-00841504">https://hal.inria.fr/hal-00841504</a>.</p>
@@ -225,15 +234,15 @@ method of characteristics and spline finite elements", <a href="https://doi.org/
 Contents</h1>
 <ul>
 <li>diocotron.cpp : runs a diocotron instability simulation.</li>
-<li>params.yaml : defines the parameters of the simulation.</li>
-</ul>
-<p>Python files: (in <code>post_process/PythonScripts/geometryRTheta</code> folder)</p><ul>
+<li><p class="startli">params.yaml : defines the parameters of the simulation.</p>
+<p class="startli">Python files: (in <code>post_process/PythonScripts/geometryRTheta</code> folder)</p>
+</li>
 <li>animation_rho_phi.py : plot and save the density and electrical potential function in time.</li>
 <li>display_L2_norms.py : plot the L2 norms of the perturbation of the density and electrical potential function in time.</li>
 <li>mass_conservation.py : plot the relative errors of the mass of the particles.</li>
 </ul>
 <h3><a class="anchor" id="autotoc_md34"></a>
-Recommended parameters:</h3>
+Recommended parameters</h3>
 <ul>
 <li><code>Mesh:</code><ul>
 <li><code>r_size: 128</code> : number of cells in \(r\)-dimension. (Tests in Edoardo Zoni's article.)</li>
@@ -261,7 +270,7 @@ Recommended parameters:</h3>
 </li>
 </ul>
 <h3><a class="anchor" id="autotoc_md35"></a>
-Executables:</h3>
+Executables</h3>
 <ul>
 <li><code>diocotron_EXPLICIT_PREDCORRR_EULER_METHOD</code> : uses the predictor-corrector defined in BslExplicitPredCorrRP (ill-defined for other time integration methods).</li>
 <li><code>diocotron_IMPLICIT_PREDCORRR_EULER_METHOD</code> : uses the predictor-corrector defined in BslImplicitPredCorrRP (ill-defined for other time integration methods).</li>

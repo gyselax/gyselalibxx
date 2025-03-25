@@ -110,36 +110,34 @@ $(document).ready(function(){initNavTree('tests_geometryRTheta_advection_rtheta.
 Tests on the 2D polar advection operator</h1>
 <p>The tests implemented in this folder test the 2D polar advection operator implemented in the <code>src/geometryRTheta/advection/</code> folder ( <a class="el" href="src_geometryRTheta_advection.html">Advection operator</a> ).</p>
 <p>The tests are made for different parameters which are:</p>
-<h3><a class="anchor" id="autotoc_md95"></a>
-- The mapping and the domain used for the advection:</h3>
+<h3><a class="anchor" id="autotoc_md89"></a>
+- The mapping and the domain used for the advection</h3>
 <ul>
 <li>Circular mapping in the physical domain (<a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a>);</li>
 <li>Czarny mapping in the physical domain (<a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a>);</li>
 <li>Czarny mapping in the pseudo-Cartesian domain (<a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a>);</li>
 <li>Discrete mapping of the Czarny mapping in the pseudo-Cartesian domain (<a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a>).</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md96"></a>
-- The time integration method used to solve the characteristic equation:</h3>
+<h3><a class="anchor" id="autotoc_md90"></a>
+- The time integration method used to solve the characteristic equation</h3>
 <ul>
 <li>Explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> (<a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a>);</li>
 <li>Crank-Nicolson (<a class="el" href="classCrankNicolson.html" title="A class which provides an implementation of a Crank-Nicolson method.">CrankNicolson</a>);</li>
 <li>Runge-Kutta 3 (<a class="el" href="classRK3.html" title="A class which provides an implementation of a third-order Runge-Kutta method.">RK3</a>);</li>
 <li>Runge-Kutta 4 (<a class="el" href="classRK4.html" title="A class which provides an implementation of a fourth-order Runge-Kutta method.">RK4</a>).</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md97"></a>
-- The test simulation:</h3>
+<h3><a class="anchor" id="autotoc_md91"></a>
+- The test simulation</h3>
 <ul>
 <li>simulation 1: translation of Gaussian function (<a class="el" href="structAdvectionFieldSimulation.html" title="Base class for the tests simulation of the 2D polar advection operator.">AdvectionFieldSimulation</a>)<ul>
 <li>\(f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)\),</li>
 <li>\(A(t, x, y) = (v_x, v_y)\) .</li>
 </ul>
 </li>
-<li>simulation 2: rotation of Gaussian function (<a class="el" href="structAdvectionFieldSimulation.html" title="Base class for the tests simulation of the 2D polar advection operator.">AdvectionFieldSimulation</a>)<ul>
+<li>simulation 2: rotation of Gaussian function (<a class="el" href="structAdvectionFieldSimulation.html" title="Base class for the tests simulation of the 2D polar advection operator.">AdvectionFieldSimulation</a>)</li>
 <li>\(f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)\),</li>
 <li>\(A(t, x, y) = J_{\mathcal{F}_{\text{circular}}}(v_r, v_\theta)\).</li>
-</ul>
-</li>
-<li>simulation 3: decentred rotation (test given in Edoardo Zoni's article [1]) (<a class="el" href="structAdvectionFieldSimulation.html" title="Base class for the tests simulation of the 2D polar advection operator.">AdvectionFieldSimulation</a>)<ul>
+<li>simulation 3: decentred rotation (test given in Edoardo Zoni's article [1]) (<a class="el" href="structAdvectionFieldSimulation.html" title="Base class for the tests simulation of the 2D polar advection operator.">AdvectionFieldSimulation</a>)</li>
 <li>\(f_0(x,y) = \frac{1}{2} \left( G(r_1(x,y)) + G(r_2(x,y))\right)\),</li>
 <li>with<ul>
 <li>\(G(r) = \cos\left(\frac{\pi r}{2 a}\right)^4 * 1_{r&lt;a}(r)\),</li>
@@ -148,8 +146,6 @@ Tests on the 2D polar advection operator</h1>
 </ul>
 </li>
 <li>\(A(t, x, y) = \omega(y_c - y, x - x_c)\).</li>
-</ul>
-</li>
 </ul>
 <h1><a class="anchor" id="tests_geometryRTheta_advection_rtheta__Python_tests"></a>
 Python tests</h1>
@@ -175,7 +171,7 @@ Python tests</h1>
 </ul>
 <h1><a class="anchor" id="tests_geometryRTheta_advection_rtheta__References"></a>
 References</h1>
-<p>[1] Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped 
+<p>[1] Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped
 disk-like domains with the method of characteristics and spline finite elements". (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>.) Journal of Computational Physics (2019).</p>
 <h1><a class="anchor" id="tests_geometryRTheta_advection_rtheta__Contents"></a>
 Contents</h1>

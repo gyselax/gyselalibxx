@@ -21,5 +21,5 @@ var searchData=
   ['line_18',['Command line',['../simulations_geometryXY_guiding_centre.html#autotoc_md44',1,'']]],
   ['locally_19',['Building documentation locally',['../docs_Adding_docs.html#docs_Adding_docs__Building_documentation_locally',1,'']]],
   ['locator_20',['Patch locator',['../src_multipatch_connectivity.html#src_multipatch_connectivity__Patch_locator',1,'']]],
-  ['logical_20domain_20axis_21',['Advection field along the logical domain axis',['../src_geometryRTheta_advection_field.html#autotoc_md60',1,'']]]
+  ['logical_20domain_20axis_21',['Advection field along the logical domain axis',['../src_geometryRTheta_advection_field.html#autotoc_md56',1,'']]]
 ];

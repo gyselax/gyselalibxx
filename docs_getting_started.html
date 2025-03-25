@@ -137,7 +137,8 @@ Operators and Data Structures</h3>
 <hr  />
 <h1><a class="anchor" id="docs_getting_started__Navigating_the_Gyselalibxx_Codebase"></a>
 Navigating the Gyselalib++ Codebase</h1>
-<p>The gyselalib++ codebase is organised into several folders. The main folders of interest are:</p><ul>
+<p>The gyselalib++ codebase is organised into several folders. The main folders of interest are:</p>
+<ul>
 <li><b>src/</b> : This folder contains the source code for the library. It contains folders grouping the code by subject. The <code>src/</code> folder and each sub-folder contains a <code>README.md</code> detailing its contents. It is simple to navigate within this documentation : <a class="el" href="src.html">Gyselalib++ contents</a><ul>
 <li><b>geometry...</b> : The <code>src/</code> folder contains sub-folders whose names begin with <code>geometry</code>. These sub-folders contain code which is specific to a given geometry. Each geometry is defined by the dimensions on which its equations are defined. In these folders you will also find sub-folders grouping the code by subject. Each <code>geometry...</code> folder will contain a folder called <code>geometry</code> containing a file <code>geometry.hpp</code>. This file contains type aliases which are useful for this geometry. This includes the definition of the classes representing the dimensions. If a <code>geometry.hpp</code> is included in a file then this file can only be used for that specific geometry. Therefore files in a <code>geometry...</code> folder cannot be used for other geometries even if the two appear to be compatible at first glance (e.g. files from the <code>geometryRTheta</code> folder cannot be used for the <code>geometryAxi</code> simulations, files from the <code>geometryXVx</code> folder cannot be used for the <code>geometryXYVxVy</code> simulations).</li>
 </ul>

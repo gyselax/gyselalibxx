@@ -35,8 +35,8 @@ var searchData=
   ['vs_20functional_20programming_32',['Object-Oriented vs. Functional Programming',['../docs_CODING_STANDARD.html#autotoc_md8',1,'']]],
   ['vs_20object_20oriented_20programming_20oop_33',['Key Difference: Functional vs. Object-Oriented Programming (OOP)',['../docs_getting_started.html#autotoc_md22',1,'']]],
   ['vtheta_34',['Vtheta',['../structVtheta.html',1,'']]],
-  ['vx_35',['vx',['../tests_advection.html#autotoc_md92',1,'Advection along x on (t, x, vx)'],['../src_geometryXVx_geometry.html',1,'Geometry X-Vx'],['../structVx.html',1,'Vx']]],
+  ['vx_35',['vx',['../tests_advection.html#autotoc_md86',1,'Advection along x on (t, x, vx)'],['../src_geometryXVx_geometry.html',1,'Geometry X-Vx'],['../structVx.html',1,'Vx']]],
   ['vx_20geometry_36',['Simulations in (x, vx) geometry',['../simulations_geometryXVx.html',1,'simulations']]],
-  ['vx_20vy_37',['vx vy',['../tests_advection.html#autotoc_md93',1,'Advection along x and y on (t, x, y, vx, vy)'],['../src_geometryXYVxVy_geometry.html',1,'Geometry X Y-Vx Vy']]],
-  ['vy_38',['vy',['../tests_advection.html#autotoc_md93',1,'Advection along x and y on (t, x, y, vx, vy)'],['../src_geometryXYVxVy_geometry.html',1,'Geometry X Y-Vx Vy'],['../structVy.html',1,'Vy']]]
+  ['vx_20vy_37',['vx vy',['../tests_advection.html#autotoc_md87',1,'Advection along x and y on (t, x, y, vx, vy)'],['../src_geometryXYVxVy_geometry.html',1,'Geometry X Y-Vx Vy']]],
+  ['vy_38',['vy',['../tests_advection.html#autotoc_md87',1,'Advection along x and y on (t, x, y, vx, vy)'],['../src_geometryXYVxVy_geometry.html',1,'Geometry X Y-Vx Vy'],['../structVy.html',1,'Vy']]]
 ];

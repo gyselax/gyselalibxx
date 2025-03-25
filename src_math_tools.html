@@ -114,20 +114,23 @@ Derivative tools</h1>
 <li><code><a class="el" href="spline__1d__partial__derivative_8hpp_source.html">spline_1d_partial_derivative.hpp</a></code> : calculate derivatives using a 1d spline representation.</li>
 <li><code><a class="el" href="central__fdm__partial__derivatives_8hpp_source.html">central_fdm_partial_derivatives.hpp</a></code> : calculate derivatives using Finite Difference Method.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md78"></a>
+<h3><a class="anchor" id="autotoc_md72"></a>
 Finite difference derivatives</h3>
-<p>The method is as follow: Take a function \(f\). We want to approximate the value of \(f&#39;(x_1)\) knowing the value of \(f(x_1)\), \(f(x_2)\) and \(f(x_3)\) for \(x_3&gt;x_2&gt;x_1\). Denote \(\alpha :=|x_2-x_1|\) and \(\beta :=|x_3-x_2|\). We call \(Df(x_1)\) the approximate value of \(f&#39;(x_1)\). We want \(|f&#39;(x_1)-Df(x_1)|=o\left(\max(\alpha,\beta\right)^2)\). To this end, write  </p><p class="formulaDsp">
+<p>The method is as follow: Take a function \(f\). We want to approximate the value of \(f&#39;(x_1)\) knowing the value of \(f(x_1)\), \(f(x_2)\) and \(f(x_3)\) for \(x_3&gt;x_2&gt;x_1\). Denote \(\alpha :=|x_2-x_1|\) and \(\beta :=|x_3-x_2|\). We call \(Df(x_1)\) the approximate value of \(f&#39;(x_1)\). We want \(|f&#39;(x_1)-Df(x_1)|=o\left(\max(\alpha,\beta\right)^2)\). To this end, write</p>
+<p class="formulaDsp">
 \[ Df(x_1)=c_1f(x_1)+c_2f(x_2)+c_3f(x_3),
 \]
 </p>
-<p> and expand \(f\) to the second order.  </p><p class="formulaDsp">
+<p>and expand \(f\) to the second order.</p>
+<p class="formulaDsp">
 \[    \begin{aligned}
         Df(x_1) &amp; = c_1f(x_1)+c_2\left(f(x_1)+\alpha f&#39;(x_1)+\frac{1}{2}\alpha^2f&#39;&#39;(x_1)+o(\alpha^2)\right)               \\
                 &amp; +c_3\left(f(x_1)+(\alpha+\beta) f&#39;(x_1)+\frac{1}{2}(\alpha+\beta)^2f&#39;&#39;(x_1)+o((\alpha+\beta)^2)\right).
     \end{aligned}
 \]
 </p>
-<p> A term-by-term comparison gives us the following system:  </p><p class="formulaDsp">
+<p>A term-by-term comparison gives us the following system:</p>
+<p class="formulaDsp">
 \[    \left\{
     \begin{aligned}
         c_1+c_2+c_3                      &amp; =0  \\
@@ -137,11 +140,13 @@ Finite difference derivatives</h3>
     \right.
 \]
 </p>
-<p> The solution is therefore given by  </p><p class="formulaDsp">
+<p>The solution is therefore given by</p>
+<p class="formulaDsp">
 \[ c_1=-\frac{2\alpha+\beta}{\alpha^2+\alpha\beta}\qquad c_2=\frac{1}{\alpha}+\frac{1}{\beta}\qquad c_3=-\frac{\alpha}{\beta(\alpha+\beta)}.
 \]
 </p>
-<p> The same computation can be made for the backward and the centred FDM scheme, and lead to these three formulas:  </p><p class="formulaDsp">
+<p>The same computation can be made for the backward and the centred FDM scheme, and lead to these three formulas:</p>
+<p class="formulaDsp">
 \[    \begin{aligned}
         Df(x_1) &amp; = -\frac{2\alpha+\beta}{\alpha(\alpha+\beta)}f(x_1)+\left(\frac{1}{\alpha}+\frac{1}{\beta}\right)f(x_2)-\frac{\alpha}{\beta(\alpha+\beta)}f(x_3) \\
         Df(x_2) &amp; = -\frac{\beta}{\alpha(\alpha+\beta)}f(x_1)+\left(\frac{1}{\alpha}-\frac{1}{\beta}\right)f(x_2)+\frac{\alpha}{\alpha(\alpha+\beta)}f(x_3)        \\
@@ -149,10 +154,11 @@ Finite difference derivatives</h3>
     \end{aligned}
 \]
 </p>
-<p> One can check than in the uniform case ( \(\alpha=\beta\)) we recover the well known coefficient \(-1/2\) and \(1/2\) for the centred case and \(-3/2\), \(2\) and \(-1/2\) for the decentred case.</p>
+<p>One can check than in the uniform case ( \(\alpha=\beta\)) we recover the well known coefficient \(-1/2\) and \(1/2\) for the centred case and \(-3/2\), \(2\) and \(-1/2\) for the decentred case.</p>
 <h1><a class="anchor" id="src_math_tools__Utility_tools"></a>
 Utility tools</h1>
-<p>The <a class="el" href="l__norm__tools_8hpp.html" title="File Describing useful mathematical functions to compute Lnorms.">l_norm_tools.hpp</a> file contains functions computing the infinity norm. For now, it computes the infinity norm of</p><ul>
+<p>The <a class="el" href="l__norm__tools_8hpp.html" title="File Describing useful mathematical functions to compute Lnorms.">l_norm_tools.hpp</a> file contains functions computing the infinity norm. For now, it computes the infinity norm of</p>
+<ul>
 <li>a double: \(\Vert x \Vert_{\infty} = x\);</li>
 <li>a coordinate: \(\Vert x \Vert_{\infty} = \max_{i} (|x_i|)\). </li>
 </ul>

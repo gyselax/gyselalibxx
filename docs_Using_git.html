@@ -110,22 +110,27 @@ $(document).ready(function(){initNavTree('docs_Using_git.html',''); initResizabl
 <h1><a class="anchor" id="docs_Using_git__Branches"></a>
 Branches</h1>
 <p>Branches are an important tool for handling concurrent development. The <code>main</code> branch is the starting point for all developments. It contains all major developments which are considered sufficiently mature for other developers to also use them.</p>
-<p>Whenever you wish to add something new to gyselalibxx or fix an issue you should create a new branch from the <code>main</code> branch. The branch name should have the following format: </p><div class="fragment"><div class="line">&lt;user_name&gt;_&lt;description_of_development&gt;</div>
-</div><!-- fragment --><p> this allows us to quickly and easily identify the branch owner and the contents of the branch.</p>
-<p>It is important to keep your branch up to date with the main branch so that your changes can one day be merged into the main and used by other people. If this is not done on a regular basis then changes can accumulate making it exponentially harder to determine which changes are still relevant. As an <b>absolute minimum</b> you should update your branch <b>once a month</b>. You can do this using either a <a href="https://git-scm.com/docs/git-merge">merge</a> command: </p><div class="fragment"><div class="line">git fetch</div>
+<p>Whenever you wish to add something new to gyselalibxx or fix an issue you should create a new branch from the <code>main</code> branch. The branch name should have the following format:</p>
+<div class="fragment"><div class="line">&lt;user_name&gt;_&lt;description_of_development&gt;</div>
+</div><!-- fragment --><p>this allows us to quickly and easily identify the branch owner and the contents of the branch.</p>
+<p>It is important to keep your branch up to date with the main branch so that your changes can one day be merged into the main and used by other people. If this is not done on a regular basis then changes can accumulate making it exponentially harder to determine which changes are still relevant. As an <b>absolute minimum</b> you should update your branch <b>once a month</b>. You can do this using either a <a href="https://git-scm.com/docs/git-merge">merge</a> command:</p>
+<div class="fragment"><div class="line">git fetch</div>
 <div class="line">git merge origin/main</div>
-</div><!-- fragment --><p> or a <a href="https://git-scm.com/docs/git-rebase">rebase</a> command: </p><div class="fragment"><div class="line">git fetch</div>
+</div><!-- fragment --><p>or a <a href="https://git-scm.com/docs/git-rebase">rebase</a> command:</p>
+<div class="fragment"><div class="line">git fetch</div>
 <div class="line">git rebase origin/main</div>
 </div><!-- fragment --><p>After this command conflicts may appear between your branch and the main branch. For a <code>git merge</code> command all conflicts will appear at the same time. For a <code>git rebase</code> command conflicts may appear for each commit in your branch since the last rebase command (or its creation from the main branch). Conflicts should each be examined individually to ensure no new developments are lost. There are many resources (e.g. <a href="https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts">bitbucket</a>) online which describe how to fix these conflicts.</p>
 <h1><a class="anchor" id="docs_Using_git__Submodules"></a>
 Submodules</h1>
 <p>Gyselalibxx depends on other external libraries to compile. These libraries are included in the repository via <a href="https://git-scm.com/docs/gitsubmodules">submodules</a>. In general you will not need to touch the code inside the folders associated with these repositories. However their presence sometimes causes unexpected behaviour. The following is a small FAQ of common issues concerning submodules:</p>
-<h4><a class="anchor" id="autotoc_md19"></a>
-Q: I cloned the repository but the submodules were not cloned</h4>
-<p><b>A:</b> If you accidentally cloned the repository without the <code>--recurse-submodules</code> option you can collect the submodules by running the following command: </p><div class="fragment"><div class="line">git submodule update --init</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md20"></a>
-Q: Git reports changes in the submodule but I didn't change this code</h4>
-<p><b>A:</b> It is likely that you previously checked out a branch where the submodule was pinned to a different version. When you changed to your current branch the submodule was not updated, hence the reported changes. You can revert the changes to return to the version in your branch using: </p><div class="fragment"><div class="line">git submodule update --init</div>
+<h3><a class="anchor" id="autotoc_md19"></a>
+Q: I cloned the repository but the submodules were not cloned</h3>
+<p><b>A:</b> If you accidentally cloned the repository without the <code>--recurse-submodules</code> option you can collect the submodules by running the following command:</p>
+<div class="fragment"><div class="line">git submodule update --init</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md20"></a>
+Q: Git reports changes in the submodule but I didn't change this code</h3>
+<p><b>A:</b> It is likely that you previously checked out a branch where the submodule was pinned to a different version. When you changed to your current branch the submodule was not updated, hence the reported changes. You can revert the changes to return to the version in your branch using:</p>
+<div class="fragment"><div class="line">git submodule update --init</div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

@@ -108,33 +108,34 @@ $(document).ready(function(){initNavTree('toolchains.html',''); initResizable();
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="toolchains__General_usage"></a>
 General usage</h1>
-<p>In order to build Gyselalib++ the necessary steps are:</p><ol type="1">
+<p>In order to build Gyselalib++ the necessary steps are:</p>
+<ol type="1">
 <li>Prepare the environment</li>
 <li>Source the environment</li>
 <li>Use the environment to build</li>
 </ol>
 <p>For example on Adastra the necessary commands are:</p>
-<div class="fragment"><div class="line">$ mkdir -p build &amp;&amp; cd build</div>
-<div class="line">$ ../toolchains/mi250.hipcc.adastra.spack/prepare.sh</div>
-<div class="line">$ source ../toolchains/mi250.hipcc.adastra.spack/environment.sh</div>
-<div class="line">$ cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchains/mi250.hipcc.adastra.spack/toolchain.cmake</div>
+<div class="fragment"><div class="line">mkdir -p build &amp;&amp; cd build</div>
+<div class="line">../toolchains/mi250.hipcc.adastra.spack/prepare.sh</div>
+<div class="line">source ../toolchains/mi250.hipcc.adastra.spack/environment.sh</div>
+<div class="line">cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchains/mi250.hipcc.adastra.spack/toolchain.cmake</div>
 </div><!-- fragment --><h1><a class="anchor" id="toolchains__Toolchains"></a>
 Toolchains</h1>
 <p>The <a href="https://en.wikipedia.org/wiki/Toolchain">toolchains</a> are represented using a toolchain file. It summarizes CMake build settings for the appropriate machine environment and hardware.</p>
 <p>You can use the toolchains like so:</p>
-<div class="fragment"><div class="line">$ mkdir -p build &amp;&amp; cd build</div>
-<div class="line">$ cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchains/&lt;CONFIG&gt;/toolchain.cmake</div>
+<div class="fragment"><div class="line">mkdir -p build &amp;&amp; cd build</div>
+<div class="line">cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchains/&lt;CONFIG&gt;/toolchain.cmake</div>
 </div><!-- fragment --><p>The toolchains files are found in the <code>toolchains</code> folder and have the extension <code>.cmake</code>. The <code>CONFIG</code> folders are named after the environment where they run. E.g. <code>mi250.hipcc.adastra.spack</code> contains the files necessary to run on MI250 GPUs using <code>hipcc</code> on Adastra. <code>v100.persee</code> contains the files necessary to run on V100 GPUs on Persee.</p>
 <p>Additionally the folder <code>docker.gyselalibxx_env</code> provides toolchains which will work on most platforms. These toolchains are designed to work with the docker environment.</p>
 <h1><a class="anchor" id="toolchains__Environments"></a>
 Environments</h1>
 <p>Toolchains may require a non default environment. For that purpose environment scripts are provided. Each <code>CONFIG</code> folder in <code>toolchains</code> should contain (a potentially empty) environment file named <code>environment.sh</code>. The environment file is used like so:</p>
-<div class="fragment"><div class="line">$ source toolchains/&lt;CONFIG&gt;/environment.sh</div>
+<div class="fragment"><div class="line">source toolchains/&lt;CONFIG&gt;/environment.sh</div>
 </div><!-- fragment --><p>The <em>sourcing</em> of an environment file will generally happen before the build or usage of the built product.</p>
 <h1><a class="anchor" id="toolchains__Preparing_environments"></a>
 Preparing environments</h1>
 <p>The environment may need preparation (for example if the dependencies are not available on the machine). For that purpose the <code>CONFIG</code> folders should contain (a potentially empty) preparation file named <code>prepare.sh</code>. The preparation file is used like so:</p>
-<div class="fragment"><div class="line">$ toolchains/&lt;CONFIG&gt;/prepare.sh</div>
+<div class="fragment"><div class="line">toolchains/&lt;CONFIG&gt;/prepare.sh</div>
 </div><!-- fragment --><h1><a class="anchor" id="toolchains__General_notes"></a>
 General notes</h1>
 <ul>

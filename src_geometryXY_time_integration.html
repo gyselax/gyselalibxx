@@ -109,7 +109,8 @@ $(document).ready(function(){initNavTree('src_geometryXY_time_integration.html',
 <div class="textblock"><h1><a class="anchor" id="src_geometryXY_time_integration__Predictor-corrector_based_on_RK2"></a>
 Predictor-corrector based on RK2</h1>
 <p>The <a class="el" href="classPredCorrRK2XY.html" title="Predictor-corrector based on RK2 for the guiding-centre model.">PredCorrRK2XY</a> defines a predictor-corrector based on the <a class="el" href="classRK2.html" title="A class which provides an implementation of a second-order Runge-Kutta method.">RK2</a> time integration method. The <a class="el" href="classRK2.html" title="A class which provides an implementation of a second-order Runge-Kutta method.">RK2</a> method is implemented in the <a class="el" href="classITimeStepper.html" title="The superclass from which all timestepping methods inherit.">ITimeStepper</a> method (see <a class="el" href="src_timestepper.html">Time Stepping Methods</a>).</p>
-<p>This time integration method is applied to a a guiding-centre equations system documented in <a class="el" href="simulations_geometryXY_guiding_centre.html">Guiding centre (X,Y) simulation</a>.  </p><p class="formulaDsp">
+<p>This time integration method is applied to a a guiding-centre equations system documented in <a class="el" href="simulations_geometryXY_guiding_centre.html">Guiding centre (X,Y) simulation</a>.</p>
+<p class="formulaDsp">
 \[    \partial_t f(t, x, y) + (E(t, x, y)\wedge e_z) \cdot \nabla f(t, x, y) = 0, \\
     - \Delta \phi(t, x, y)  = -\partial_x^2 \phi(t, x, y) -\partial_y^2 \phi(t, x, y) = f(t, x, y), \\
     E(t, x, y) =  - \nabla \phi(t, x, y).

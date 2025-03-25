@@ -112,26 +112,32 @@ What is the difference between Debug and Release mode?</h1>
 <h1><a class="anchor" id="docs_developer_FAQ__Should_I_use_abort_assert_or_static_assert_to_raise_an_error"></a>
 Should I use abort, assert, or static_assert to raise an error?</h1>
 <p><code>static_assert</code> ensures that an error is raised during the compilation. If it is possible to use <code>static_assert</code> then this option should always be preferred as it prevents bad code from being generated and incurs no costs in the resulting code. In reality it is not always possible to use <code>static_assert</code>. In this case either <code>assert</code> or <code>abort</code> must be used depending on the condition being tested.</p>
-<p>A <code>static_assert</code> statement is written as: </p><div class="fragment"><div class="line"><span class="keyword">static_assert</span>(condition, <span class="stringliteral">&quot;This is an explanation of what went wrong. &quot;</span>+</div>
+<p>A <code>static_assert</code> statement is written as:</p>
+<div class="fragment"><div class="line"><span class="keyword">static_assert</span>(condition, <span class="stringliteral">&quot;This is an explanation of what went wrong. &quot;</span>+</div>
 <div class="line">                 <span class="stringliteral">&quot;It will be displayed in the compilation output.&quot;</span>);</div>
-</div><!-- fragment --><p><code>assert</code> ensures that an error is raised in Debug mode while <code>abort</code> ensures that an error is raised in Release mode. In order to choose which of the two should be used it is therefore important to ask yourself the following questions:</p><ol type="1">
+</div><!-- fragment --><p><code>assert</code> ensures that an error is raised in Debug mode while <code>abort</code> ensures that an error is raised in Release mode. In order to choose which of the two should be used it is therefore important to ask yourself the following questions:</p>
+<ol type="1">
 <li>Can the condition be true in a bug-free code?</li>
 <li>Is the condition dependent on user input?</li>
 </ol>
 <p>If the answer to either of these questions is yes then it may be better to use <code>abort</code>, otherwise <code>assert</code> should be preferred to avoid incurring an unnecessary cost in Release mode.</p>
-<p>On CPU an assertion is written as: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;cassert&gt;</span></div>
+<p>On CPU an assertion is written as:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;cassert&gt;</span></div>
 <div class="line"> </div>
 <div class="line">...</div>
 <div class="line"> </div>
 <div class="line">   <span class="comment">// An explanation can be added here</span></div>
 <div class="line">   assert(condition);</div>
-</div><!-- fragment --><p>On GPU an assertion is written as: </p><div class="fragment"><div class="line"><span class="comment">// An explanation can be added here</span></div>
+</div><!-- fragment --><p>On GPU an assertion is written as:</p>
+<div class="fragment"><div class="line"><span class="comment">// An explanation can be added here</span></div>
 <div class="line">KOKKOS_ASSERT(condition);</div>
-</div><!-- fragment --><p>On CPU an abort statement is written as: </p><div class="fragment"><div class="line"><span class="keywordflow">if</span> (condition) {</div>
+</div><!-- fragment --><p>On CPU an abort statement is written as:</p>
+<div class="fragment"><div class="line"><span class="keywordflow">if</span> (condition) {</div>
 <div class="line">    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;This is an explanation of what went wrong. &quot;</span>+</div>
 <div class="line">                <span class="stringliteral">&quot;Ideally it also explains how the user input can be changed to avoid this problem.&quot;</span>);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>On GPU an abort statement is written as: </p><div class="fragment"><div class="line"><span class="keywordflow">if</span> (condition) {</div>
+</div><!-- fragment --><p>On GPU an abort statement is written as:</p>
+<div class="fragment"><div class="line"><span class="keywordflow">if</span> (condition) {</div>
 <div class="line">    Kokkos::abort(<span class="stringliteral">&quot;This is an explanation of what went wrong. &quot;</span>+</div>
 <div class="line">                <span class="stringliteral">&quot;Ideally it also explains how the user input can be changed to avoid this problem.&quot;</span>);</div>
 <div class="line">}</div>

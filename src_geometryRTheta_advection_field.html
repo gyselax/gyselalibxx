@@ -107,12 +107,14 @@ $(document).ready(function(){initNavTree('src_geometryRTheta_advection_field.htm
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>The operator implemented here is a previous step to the advection operator. It computes the advection field along the axes in the physical domain or the axes in the logical domain.</p>
-<p>Currently, the implemented case is:</p><ul>
+<p>Currently, the implemented case is:</p>
+<ul>
 <li>Guiding centre equations system.</li>
 </ul>
 <h1><a class="anchor" id="src_geometryRTheta_advection_field__Guiding_centre_case"></a>
 Guiding centre case</h1>
-<p>The studied equation system is of the following type :  </p><p class="formulaDsp">
+<p>The studied equation system is of the following type :</p>
+<p class="formulaDsp">
 \[\left\{
 \begin{aligned}
 \partial_t \rho + A\cdot\nabla \rho = 0, \\
@@ -124,21 +126,25 @@ E = - \nabla  \phi, \\
 \]
 </p>
 <p>with \(\rho\) the density, \(\phi\) the electrostatic potential and \(E\) the electrical field.</p>
-<p>The <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> computes the advection field \(A\) from the electrical field \(\phi\) returned by the <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html" title="Define a polar PDE solver for a Poisson-like equation.">PolarSplineFEMPoissonLikeSolver</a>. It has two types of <code>operator()</code>:</p><ul>
+<p>The <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> computes the advection field \(A\) from the electrical field \(\phi\) returned by the <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html" title="Define a polar PDE solver for a Poisson-like equation.">PolarSplineFEMPoissonLikeSolver</a>. It has two types of <code>operator()</code>:</p>
+<ul>
 <li>one returning the advection field expressed on the vectors \((e_x, e_y)\) of the physical domain: \(A = A_x e_x + A_y e_y\)</li>
 <li>and another returning the advection field expressed on the vectors \((e^r, e^\theta)\) of the <a class="el" href="docs_mathematical_and_physical_conventions.html">contravariant basis</a> on the logical domain: \(A = A^r e_r + A^\theta e_\theta\).</li>
 </ul>
-<p>The <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html" title="Define a polar PDE solver for a Poisson-like equation.">PolarSplineFEMPoissonLikeSolver</a> can return the solution \(\phi\) of the PDE under two forms:</p><ul>
+<p>The <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html" title="Define a polar PDE solver for a Poisson-like equation.">PolarSplineFEMPoissonLikeSolver</a> can return the solution \(\phi\) of the PDE under two forms:</p>
+<ul>
 <li>a Field of values of the solution on the mesh points of the grid;</li>
 <li>a <a class="el" href="structPolarSplineMem.html" title="A structure containing the two FieldMems necessary to define a spline on a set of polar basis splines...">PolarSplineMem</a> representation of the solution.</li>
 </ul>
 <p>The <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> can handle as input the two forms. If a Field is given as input, it computes the spline representation (on the cross-product of two 1D bases) using a SplineBuilder2D. The spline representation is needed to compute the derivatives of the function \(\phi\). If the <a class="el" href="structPolarSplineMem.html" title="A structure containing the two FieldMems necessary to define a spline on a set of polar basis splines...">PolarSplineMem</a> representation is given as input, it can directly compute the derivatives of the function \(\phi\).</p>
 <p>Once the advection field computed, it is given as input to the <a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> operator to advect the density \(\rho\) function. The <a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> operator can handle the advection with an advection field along \((x,y)\) and with an advection field along \((r,\theta)\). But as the <a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> operator advects in the physical domain, it is recommended to work with the advection field along \((x,y)\).</p>
-<h3><a class="anchor" id="autotoc_md59"></a>
+<h3><a class="anchor" id="autotoc_md55"></a>
 Advection field along the physical domain axis</h3>
 <p>Thanks to the spline representation, the derivatives \(\partial_r \phi\) and \(\partial_\theta \phi\) are computed. The computation of the electrical field can be ill-defined around the O-point, so we treat this area separately.</p>
 <ul>
-<li>If \(r &gt; \varepsilon\), we use  <p class="formulaDsp">
+<li>If \(r &gt; \varepsilon\), we use</li>
+</ul>
+<p class="formulaDsp">
 \[\nabla \phi
 = \partial_x \phi e_x + \partial_y \phi e_y 
 = J^{-T}(\partial_r \phi e^r + \partial_\theta \phi e^\theta), 
@@ -146,14 +152,14 @@ Advection field along the physical domain axis</h3>
 \text{in the covariant basis,}
 \]
 </p>
-</li>
-</ul>
-<p>with \(J\) the Jacobian matrix of the coordinate transformation (mapping) \(\mathcal{F}: (r,\theta)\mapsto(x,y)\) and <em>G</em> the tensor metric of the contravariant basis of the curvilinear coordinates \((r,\theta)\). Then the electric field is given by  </p><p class="formulaDsp">
+<p>with \(J\) the Jacobian matrix of the coordinate transformation (mapping) \(\mathcal{F}: (r,\theta)\mapsto(x,y)\) and <em>G</em> the tensor metric of the contravariant basis of the curvilinear coordinates \((r,\theta)\). Then the electric field is given by</p>
+<p class="formulaDsp">
 \[E = -\nabla \phi
 = - \partial_x \phi e_x - \partial_y \phi e_y 
 \]
 </p>
-<p>and the advection field in the basis \((e_x, e_y)\) by  </p><p class="formulaDsp">
+<p>and the advection field in the basis \((e_x, e_y)\) by</p>
+<p class="formulaDsp">
 \[A = E\wedge e_z 
 = 
 \begin{bmatrix}
@@ -168,13 +174,13 @@ Advection field along the physical domain axis</h3>
 \]
 </p>
 <ul>
-<li>If \(r \leq \varepsilon\), we linearise. The method is detailed in <a class="el" href="src_geometryRTheta_advection_field.html#zoni">Zoni et al. (2019)</a>. We use only the derivatives along \(r\) at two linearly independent directions of \(\theta\) : \(\theta_1\) and \(\theta_2\)  <p class="formulaDsp">
+<li>If \(r \leq \varepsilon\), we linearise. The method is detailed in Zoni et al. (2019) [^1]. We use only the derivatives along \(r\) at two linearly independent directions of \(\theta\) : \(\theta_1\) and \(\theta_2\)</li>
+</ul>
+<p class="formulaDsp">
 \[\partial_r \phi (0, \theta_1) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right] (0, \theta_1), \\
 \partial_r \phi (0, \theta_2) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right] (0, \theta_2).
 \]
 </p>
-</li>
-</ul>
 <p>From these equations, we deduce the (unique) values of \(\partial_x\phi\) and \(\partial_y\phi\) at \((x,y) = (0,0)\),</p>
 <p class="formulaDsp">
 \[\begin{bmatrix}
@@ -197,7 +203,8 @@ Advection field along the physical domain axis</h3>
 \[E(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right)  E(0, \theta) + \frac{r}{\varepsilon} E(\varepsilon, \theta), \\
 \]
 </p>
-<p>As previously, we compute the advection field by  </p><p class="formulaDsp">
+<p>As previously, we compute the advection field by</p>
+<p class="formulaDsp">
 \[A = E\wedge e_z 
 = 
 \begin{bmatrix}
@@ -207,10 +214,10 @@ Advection field along the physical domain axis</h3>
 \]
 </p>
 <p>(In the code, we chose \(\theta_1 = \frac{\pi}{4}\) and \(\theta_2  = - \frac{\pi}{4}\), and \(\varepsilon = 10^{-12}\).)</p>
-<h3><a class="anchor" id="autotoc_md60"></a>
+<h3><a class="anchor" id="autotoc_md56"></a>
 Advection field along the logical domain axis</h3>
 <p>Firstly, the derivatives \(\partial_r \phi\) and \(\partial_\theta \phi\) are also computed here.</p>
-<h4><a class="anchor" id="autotoc_md61"></a>
+<h4><a class="anchor" id="autotoc_md57"></a>
 General coordinates system</h4>
 <ul>
 <li>In a <b>general coordinate system</b>, the gradient of a scalar function in the logical domain is given in the <a class="el" href="docs_mathematical_and_physical_conventions.html">covariant basis</a> by</li>
@@ -219,17 +226,20 @@ General coordinates system</h4>
 \[\nabla f = \sum_i \partial_{q_i} f b^i
 \]
 </p>
-<p>with</p><ul>
+<p>with</p>
+<ul>
 <li>\(J\) the Jacobian matrix associated with the mapping function of the system \(\mathcal{F}:(q_1,..., q_N)\mapsto(x_1, ..., x_N)\),</li>
 <li>and \(b^j\) the unnormalised local covariant vectors.</li>
 </ul>
-<p>In 2D with \((q_1, q_2) = (r,\theta)\) and \((x_1, x_2) = (x,y)\), it can be rewritten as the following matrix system  </p><p class="formulaDsp">
+<p>In 2D with \((q_1, q_2) = (r,\theta)\) and \((x_1, x_2) = (x,y)\), it can be rewritten as the following matrix system</p>
+<p class="formulaDsp">
 \[\hat{\nabla} f 
 = \partial_x f e_x + \partial_y f e_y
 = \partial_r f e^r + \partial_\theta f e^\theta
 \]
 </p>
-<p>With the composants linked by the following relation,  </p><p class="formulaDsp">
+<p>With the composants linked by the following relation,</p>
+<p class="formulaDsp">
 \[\begin{bmatrix}
     \partial_{x} f \\
     \partial_{y} f
@@ -242,10 +252,13 @@ J^{-T}
 \end{bmatrix}.
 \]
 </p>
-<h4><a class="anchor" id="autotoc_md62"></a>
+<h4><a class="anchor" id="autotoc_md58"></a>
 Application to the advection field</h4>
-<p>The gradient is expressed in the <em>covariant</em> basis. We express the advection field in the <em>contravariant</em> basis to use the nice property \(e_r\cdot e^r = 1\) and \(e_\theta\cdot e^\theta = 1\).</p><ul>
-<li>In the contravariant basis \((e_r, e_\theta)\), we compute the electric field,  <p class="formulaDsp">
+<p>The gradient is expressed in the <em>covariant</em> basis. We express the advection field in the <em>contravariant</em> basis to use the nice property \(e_r\cdot e^r = 1\) and \(e_\theta\cdot e^\theta = 1\).</p>
+<ul>
+<li>In the contravariant basis \((e_r, e_\theta)\), we compute the electric field,</li>
+</ul>
+<p class="formulaDsp">
 \[E
 = 
 \begin{bmatrix}
@@ -260,10 +273,9 @@ G^{-1}
 \end{bmatrix}.
 \]
 </p>
-</li>
-</ul>
 <p>with \(G^{-1}\) the inverse metric tensor.</p>
-<p>Then the advection field is given by  </p><p class="formulaDsp">
+<p>Then the advection field is given by</p>
+<p class="formulaDsp">
 \[A = E \wedge e_z = 
 \begin{bmatrix}
      E \cdot e_y \\
@@ -271,7 +283,8 @@ G^{-1}
 \end{bmatrix},
 \]
 </p>
-<p>with in contravariant basis,  </p><p class="formulaDsp">
+<p>with in contravariant basis,</p>
+<p class="formulaDsp">
 \[\begin{bmatrix}
     E \cdot e_x \\
     E \cdot e_y
@@ -295,7 +308,8 @@ J
 \end{bmatrix}. 
 \]
 </p>
-<p>So,  </p><p class="formulaDsp">
+<p>So,</p>
+<p class="formulaDsp">
 \[\begin{bmatrix}
     A \cdot e_r \\
     A \cdot e_\theta
@@ -332,7 +346,8 @@ J
 </p>
 <p>with \(J_{ij}\) the elements of the matrix <em>J</em>.</p>
 <p>Warning, the matrix \(G^{-1}\) can be ill-defined for \(r = 0\).</p>
-<p><em>Example: circular mapping:</em>  </p><p class="formulaDsp">
+<p><em>Example: circular mapping:</em></p>
+<p class="formulaDsp">
 \[G^{-1}
 = 
 \begin{bmatrix}
@@ -342,15 +357,15 @@ J
 \]
 </p>
 <p>In the code, the O-point is differently treated. The domain is split between a domain without the O-point ( \((0,\theta), \forall \theta\)) and the domain containing only the O-point. For the first domain, we compute the advection field along the logical axis as explain previously. On the second domain, we compute the unique value of the advection field along the physical axis using the linearisation done in the <a class="el" href="src_geometryRTheta_advection_field.html#src_geometryRTheta_advection_field__Guiding_centre_case">Advection field along the physical domain axis</a> section.</p>
-<h1><a class="anchor" id="autotoc_md63"></a>
-References</h1>
-<p><a class="anchor" id="zoni"></a> [1] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the 
-method of characteristics and spline finite elements", <a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>, Journal of Computational Physics, 2019.</p>
-<h1><a class="anchor" id="autotoc_md64"></a>
+<h1><a class="anchor" id="src_geometryRTheta_advection_field__Contents"></a>
 Contents</h1>
 <ul>
-<li><a class="el" href="advection__field__rtheta_8hpp_source.html">advection_field_rtheta.hpp</a> : containing <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> with the advection field computation for the guiding centre simulation. </li>
+<li><a class="el" href="advection__field__rtheta_8hpp_source.html">advection_field_rtheta.hpp</a> : containing <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> with the advection field computation for the guiding centre simulation.</li>
 </ul>
+<h1><a class="anchor" id="src_geometryRTheta_advection_field__References"></a>
+References</h1>
+<p>[^1]: Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the
+method of characteristics and spline finite elements", <a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>, Journal of Computational Physics, 2019. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

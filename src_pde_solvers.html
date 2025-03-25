@@ -112,10 +112,12 @@ $(document).ready(function(){initNavTree('src_pde_solvers.html',''); initResizab
 </ul>
 <h1><a class="anchor" id="src_pde_solvers__Poisson_s_equation"></a>
 Poisson's equation</h1>
-<p>The following methods exist for solving Poisson's equations:</p><ul>
+<p>The following methods exist for solving Poisson's equations:</p>
+<ul>
 <li><a class="el" href="classFFTPoissonSolver.html" title="See FFTPoissonSolverImplementation.">FFTPoissonSolver</a></li>
 </ul>
-<p>These solvers implement 2 interfaces:</p><ul>
+<p>These solvers implement 2 interfaces:</p>
+<ul>
 <li><code>field_type operator()(field_type phi, field_type rho) const</code></li>
 <li><code>field_type operator()(field_type phi, vector_field_type E, chunk_field_type rho) const</code></li>
 </ul>

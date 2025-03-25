@@ -106,12 +106,14 @@ $(document).ready(function(){initNavTree('src_geometryXYVxVy_vlasov.html',''); i
   <div class="headertitle"><div class="title">Vlasov solver</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This folder contains methods for solving the Vlasov equation:  </p><p class="formulaDsp">
+<div class="textblock"><p>This folder contains methods for solving the Vlasov equation:</p>
+<p class="formulaDsp">
 \[\partial_t f(t, x, v) + v_x \partial_x f + v_y \partial_y f + \frac{E_x}{m} \partial_{v_x} f + \frac{E_y}{m} \partial_{v_x} f = 0
 \]
 </p>
 <p>Where \(f\) is the distribution function, \(x\) and \(y\) are the spatial variables, \(v_x\) and \(v_y\) are the velocity variables, \(E_x\) and \(E_y\) are the components of the electric field and \(m\) is the mass of the considered plasma species.</p>
-<p>The implemented solvers are:</p><ul>
+<p>The implemented solvers are:</p>
+<ul>
 <li><a class="el" href="classSplitVlasovSolver.html" title="A class that solves a Vlasov equation using Strang&#39;s splitting.">SplitVlasovSolver</a> : Solves the Vlasov equation using Strang splitting</li>
 <li><a class="el" href="classMpiSplitVlasovSolver.html" title="A class that solves a Vlasov equation using Strang&#39;s splitting on an MPI distributed mesh.">MpiSplitVlasovSolver</a> : Solves the Vlasov equation using Strang splitting and MPI transposes between a X2Dsplit and a V2Dsplit layout. </li>
 </ul>

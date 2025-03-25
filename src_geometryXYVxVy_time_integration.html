@@ -106,14 +106,16 @@ $(document).ready(function(){initNavTree('src_geometryXYVxVy_time_integration.ht
   <div class="headertitle"><div class="title">Time integration</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The time integration folder contains methods for solving a Vlasov-Poisson system of equations defined as:  </p><p class="formulaDsp">
+<div class="textblock"><p>The time integration folder contains methods for solving a Vlasov-Poisson system of equations defined as:</p>
+<p class="formulaDsp">
 \[\partial_t f(t, x, v) + v_x \partial_x f + v_y \partial_y f + \frac{E_x}{m} \partial_{v_x} f + \frac{E_y}{m} \partial_{v_x} f = 0
 -\Delta \phi(x) = \sum_s \rho_{q,s}(x,y)
 \rho_{q,s}(x, y) = \int q_s f_s(x,y,v_x,v_y) dv_x v_y
 E = - \nabla \phi
 \]
 </p>
-<p>The implemented time integrators are:</p><ul>
+<p>The implemented time integrators are:</p>
+<ul>
 <li><a class="el" href="classPredCorr.html" title="A class that solves a Boltzmann-Poisson system of equations using a predictor-corrector scheme.">PredCorr</a> : A predictor-corrector method </li>
 </ul>
 </div></div><!-- contents -->

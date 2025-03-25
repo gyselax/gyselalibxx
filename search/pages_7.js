@@ -12,7 +12,7 @@ var searchData=
   ['geometry_20x_20y_20v_5fx_20v_5fy_9',['Geometry (x, y, v_x, v_y)',['../src_geometryXYVxVy.html',1,'src']]],
   ['geometry_20x_20y_20vx_20vy_10',['Geometry X Y-Vx Vy',['../src_geometryXYVxVy_geometry.html',1,'src_geometryXYVxVy']]],
   ['geometry_20xy_11',['Geometry XY',['../src_geometryXY_geometry.html',1,'src_geometryXY']]],
-  ['geometryvparmu_20_3a_12',['GeometryVparMu :',['../src_geometryVparMu_geometry.html',1,'src_geometryVparMu']]],
+  ['geometryvparmu_12',['GeometryVparMu',['../src_geometryVparMu_geometry.html',1,'src_geometryVparMu']]],
   ['getting_20started_20with_20gyselalib_13',['Getting Started with Gyselalib++',['../docs_getting_started.html',1,'']]],
   ['git_14',['Using Git',['../docs_Using_git.html',1,'']]],
   ['guiding_20centre_20x_20y_20simulation_15',['Guiding centre (X,Y) simulation',['../simulations_geometryXY_guiding_centre.html',1,'simulations_geometryXY']]],

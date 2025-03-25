@@ -8,5 +8,5 @@ var searchData=
   ['on_20x_20y_20geometry_5',['Initialisation on (x,y) geometry',['../src_geometryXY_initialisation.html',1,'src_geometryXY']]],
   ['operator_6',['operator',['../src_geometryRTheta_advection.html',1,'Advection operator'],['../tests_geometryRTheta_advection_rtheta.html',1,'Tests on the 2D polar advection operator']]],
   ['operators_7',['Tests on the templated advection operators',['../tests_advection.html',1,'tests']]],
-  ['output_8',['Functions used for input and output.',['../src_io.html',1,'src']]]
+  ['output_8',['Functions used for input and output',['../src_io.html',1,'src']]]
 ];

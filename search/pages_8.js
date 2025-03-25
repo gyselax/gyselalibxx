@@ -8,7 +8,7 @@ var searchData=
   ['initialisation_5',['Initialisation',['../src_geometryRTheta_initialisation.html',1,'src_geometryRTheta']]],
   ['initialisation_20methods_6',['initialisation methods',['../src_geometryVparMu_initialisation.html',1,'Initialisation methods'],['../src_geometryXVx_initialisation.html',1,'Initialisation methods'],['../src_geometryXYVxVy_initialisation.html',1,'Initialisation methods']]],
   ['initialisation_20on_20x_20y_20geometry_7',['Initialisation on (x,y) geometry',['../src_geometryXY_initialisation.html',1,'src_geometryXY']]],
-  ['input_20and_20output_8',['Functions used for input and output.',['../src_io.html',1,'src']]],
+  ['input_20and_20output_8',['Functions used for input and output',['../src_io.html',1,'src']]],
   ['instability_9',['Diocotron instability',['../simulations_geometryRTheta_diocotron.html',1,'simulations_geometryRTheta']]],
   ['integration_10',['integration',['../src_geometryXVx_time_integration.html',1,'Time integration'],['../src_geometryXYVxVy_time_integration.html',1,'Time integration']]],
   ['interpolation_20methods_11',['Interpolation Methods',['../src_interpolation.html',1,'src']]],

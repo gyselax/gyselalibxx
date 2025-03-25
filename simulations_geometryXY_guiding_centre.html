@@ -108,7 +108,8 @@ $(document).ready(function(){initNavTree('simulations_geometryXY_guiding_centre.
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="simulations_geometryXY_guiding_centre__Equations"></a>
 Equations</h1>
-<p>The <code>guiding_centre</code> executable deals with the following model:  </p><p class="formulaDsp">
+<p>The <code>guiding_centre</code> executable deals with the following model:</p>
+<p class="formulaDsp">
 \[    \partial_t f(t, x, y) + (E(t, x, y)\wedge e_z) \cdot \nabla f(t, x, y) = 0, \\
     - \Delta \phi(t, x, y)  = -\partial_x^2 \phi(t, x, y) -\partial_y^2 \phi(t, x, y) = f(t, x, y), \\
     E(t, x, y) =  - \nabla \phi(t, x, y).
@@ -139,7 +140,8 @@ Grid</h3>
 <p>The simulation runs on a grid on \([0, 4\pi]\times[0, 2\pi]\) with 64 uniformly distributed points in each direction.</p>
 <h3><a class="anchor" id="autotoc_md46"></a>
 Test case: Kelvin-Helmholtz instability test case</h3>
-<p>The chosen initial conditions are  </p><p class="formulaDsp">
+<p>The chosen initial conditions are</p>
+<p class="formulaDsp">
 \[    f(0, x, y) = f_{\text{eq}}(x,y) + \varepsilon\cos(kx),  \\
     f_{\text{eq}}(x,y) = \sin(y)
 \]
@@ -152,31 +154,36 @@ Results treatments - diagnosis</h3>
 <ul>
 <li><code>animation.py</code> displays and can save the curves of the density \(f\) and the electrostatic potential \(\phi\) for each time steps saved in the <code>output/</code> folder.</li>
 </ul>
-<p>The command line is given by </p><div class="fragment"><div class="line">python3 animation.py --name=&lt;name_file_to_save&gt; --folder=&lt;path_to_output&gt;</div>
+<p>The command line is given by</p>
+<div class="fragment"><div class="line">python3 animation.py --name=&lt;name_file_to_save&gt; --folder=&lt;path_to_output&gt;</div>
 </div><!-- fragment --><ul>
-<li><code>energy_conservation.py</code> plots the evolution of the energy of the system along the simulation:  <p class="formulaDsp">
+<li><code>energy_conservation.py</code> plots the evolution of the energy of the system along the simulation:</li>
+</ul>
+<p class="formulaDsp">
 \[d\mathcal{M}: t\mapsto \int_{\Omega} |E(t)|^2 - \int_{\Omega} |E_0|^2
 \]
 </p>
-</li>
-</ul>
-<p>The command line is given by </p><div class="fragment"><div class="line">python3 energy_conservation.py --name=&lt;name_file_to_save&gt; --folder=&lt;path_to_output&gt;</div>
+<p>The command line is given by</p>
+<div class="fragment"><div class="line">python3 energy_conservation.py --name=&lt;name_file_to_save&gt; --folder=&lt;path_to_output&gt;</div>
 </div><!-- fragment --><ul>
-<li><code>mass_conservation.py</code> plots the evolution of the mass of the system along the simulation:  <p class="formulaDsp">
+<li><code>mass_conservation.py</code> plots the evolution of the mass of the system along the simulation:</li>
+</ul>
+<p class="formulaDsp">
 \[d\mathcal{W}: t\mapsto \int_{\Omega} f(t) - \int_{\Omega} f_0
 \]
 </p>
-</li>
-</ul>
-<p>The command line is given by </p><div class="fragment"><div class="line">python3 mass_conservation.py --name=&lt;name_file_to_save&gt; --folder=&lt;path_to_output&gt;</div>
+<p>The command line is given by</p>
+<div class="fragment"><div class="line">python3 mass_conservation.py --name=&lt;name_file_to_save&gt; --folder=&lt;path_to_output&gt;</div>
 </div><!-- fragment --><ul>
 <li><code>plot_individual_curve.py</code> plots the curves of the density \(f\) and the electrostatic potential \(\phi\) for a given time</li>
 </ul>
-<p>The command line is given by </p><div class="fragment"><div class="line">python3 plot_individual_curve.py --name=&lt;name_file_to_save&gt; --time=&lt;given_time&gt; --folder=&lt;path_to_output&gt;</div>
+<p>The command line is given by</p>
+<div class="fragment"><div class="line">python3 plot_individual_curve.py --name=&lt;name_file_to_save&gt; --time=&lt;given_time&gt; --folder=&lt;path_to_output&gt;</div>
 </div><!-- fragment --><ul>
 <li><code>plot_L2_norms.py</code> plots the \(\mathcal{L}^2\) norms of the density \(f - f_{eq}\) and the electrostatic potential \(\phi\) along the simulation</li>
 </ul>
-<p>The command line is given by </p><div class="fragment"><div class="line">python3 plot_L2_norms.py --name=&lt;name_file_to_save&gt; --folder=&lt;path_to_output&gt;</div>
+<p>The command line is given by</p>
+<div class="fragment"><div class="line">python3 plot_L2_norms.py --name=&lt;name_file_to_save&gt; --folder=&lt;path_to_output&gt;</div>
 </div><!-- fragment --><h1><a class="anchor" id="simulations_geometryXY_guiding_centre__Contents"></a>
 Contents</h1>
 <ul>

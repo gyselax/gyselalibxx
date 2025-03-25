@@ -118,19 +118,20 @@ General case</h3>
 \[\partial_t \rho + div(\rho v) = 0
 \]
 </p>
-  <p class="formulaDsp">
+<p class="formulaDsp">
 \[\Delta \phi + \frac{\rho}{\varepsilon_0} = 0
 \]
 </p>
-  <p class="formulaDsp">
+<p class="formulaDsp">
 \[v = \frac{E\wedge B}{|B|^2}
 \]
 </p>
-  <p class="formulaDsp">
+<p class="formulaDsp">
 \[E = -\nabla \phi
 \]
 </p>
-<p>where</p><ul>
+<p>where</p>
+<ul>
 <li>\(\rho = \rho(t,r,\theta)\) is the <b>electric charge density</b> of the particles (electrons with mass \(m_e\) and charge \(q\));</li>
 <li>\(v\) is the velocity of the particles ( \(div(v) = 0\));</li>
 <li>\(\phi\) is the usual electric potential associated with the total electric field;</li>
@@ -139,7 +140,8 @@ General case</h3>
 <h3><a class="anchor" id="autotoc_md38"></a>
 Simplified case</h3>
 <p>We study a simplified case where \(B = e_z\), \(\varepsilon_0 = 1\). On a circular mapping, it gives \(v = -\nabla\phi \wedge e_z\), \(div(v) = 0\) <br  />
- and with \((e_r, e_\theta)\) the unnormalized local contravariant base,  </p><p class="formulaDsp">
+ and with \((e_r, e_\theta)\) the unnormalized local contravariant base,</p>
+<p class="formulaDsp">
 \[\partial_t \rho - \frac{\partial_\theta\phi}{r}\partial_r\rho + \partial_r\phi \frac{\partial_\theta\rho}{r} =0,
 \]
 </p>
@@ -153,13 +155,14 @@ Test case - vortex merger</h1>
 <p>We suppose as perturbed initial condition</p>
 <p class="formulaDsp">
 \[\rho(0,r, \theta) = \rho_{eq}(x,y) + \varepsilon 
-    \left( 
-        \exp\left[ - \frac{(x - x_1^*)^2 + (y - y_1^*)^2}{2 \sigma^2} \right]
-        + \exp\left[ - \frac{(x - x_2^*)^2 + (y - y_2^*)^2}{2 \sigma^2} \right]
-    \right)
+ \left( 
+  \exp\left[ - \frac{(x - x_1^*)^2 + (y - y_1^*)^2}{2 \sigma^2} \right]
+  + \exp\left[ - \frac{(x - x_2^*)^2 + (y - y_2^*)^2}{2 \sigma^2} \right]
+ \right)
 \]
 </p>
-<p>with</p><ul>
+<p>with</p>
+<ul>
 <li>\((x_1^*, y_1^*) = (0.08, -0.14)\),</li>
 <li>\((x_2^*, y_2^*) = (-0.08, 0.14)\),</li>
 <li>\(\sigma = 0.08\) and</li>
@@ -168,7 +171,7 @@ Test case - vortex merger</h1>
 <p>The equilibrium solution is computed during the initialisation phase in the <a class="el" href="classVortexMergerEquilibria.html" title="Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates.">VortexMergerEquilibria</a> class. The details are documented in <a class="el" href="src_geometryRTheta_initialisation.html">Initialisation</a>.</p>
 <h1><a class="anchor" id="simulations_geometryRTheta_vortex_merger__References"></a>
 References</h1>
-<p>[1] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the 
+<p>[1] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the
 method of characteristics and spline finite elements", <a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>, Journal of Computational Physics, 2019.</p>
 <h1><a class="anchor" id="simulations_geometryRTheta_vortex_merger__Useful_references"></a>
 Useful references</h1>
@@ -178,14 +181,14 @@ Useful references</h1>
 Contents</h1>
 <ul>
 <li>vortex_merger.cpp : runs a vortex-merger simulation.</li>
-<li>params.yaml : defines the parameters of the simulation.</li>
-</ul>
-<p>Python files: (in <code>post_process/PythonScripts/geometryRTheta</code> folder)</p><ul>
+<li><p class="startli">params.yaml : defines the parameters of the simulation.</p>
+<p class="startli">Python files: (in <code>post_process/PythonScripts/geometryRTheta</code> folder)</p>
+</li>
 <li>animation_rho_phi.py : plot and save the density and electrical potential function in time.</li>
 <li>mass_conservation.py : plot the relative errors of the mass of the particles.</li>
 </ul>
 <h3><a class="anchor" id="autotoc_md39"></a>
-Recommended parameters:</h3>
+Recommended parameters</h3>
 <ul>
 <li><code>Mesh:</code><ul>
 <li><code>r_size: 128</code> : number of cells in \(r\)-dimension. (Tests in Edoardo Zoni's article.)</li>
@@ -214,7 +217,7 @@ Recommended parameters:</h3>
 </li>
 </ul>
 <h3><a class="anchor" id="autotoc_md40"></a>
-Executables:</h3>
+Executables</h3>
 <ul>
 <li><code>vortex_merger</code> : the vortex-merger simulation with the given parameters.</li>
 </ul>

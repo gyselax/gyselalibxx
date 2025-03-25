@@ -106,7 +106,8 @@ $(document).ready(function(){initNavTree('src_geometryRTheta_time_solver.html','
   <div class="headertitle"><div class="title">Predictor-corrector methods</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This folder contains different predictor-corrector methods:</p><ul>
+<div class="textblock"><p>This folder contains different predictor-corrector methods:</p>
+<ul>
 <li>Predictor-corrector: BslPredCorrRP;</li>
 <li>Second order explicit predictor-corrector: BslExplicitPredCorrRP;</li>
 <li>Second order implicit predictor-corrector: BslImplicitPredCorrRP;</li>
@@ -163,27 +164,27 @@ Implicit predictor-corrector</h1>
 <li>From \(\rho^n\), we compute \(\phi^n\) with the Poisson-like equation (<a class="el" href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver.">IQNSolver</a>);</li>
 <li>From \(\phi^n\), we compute \(E^n\) by deriving (<a class="el" href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver.">IQNSolver</a>);</li>
 <li>From \(\rho^n \text{ and } A^n\), we compute \(\rho^P\) by advecting (<a class="el" href="classIAdvectionRTheta.html" title="Define the base class of 2D advection operators in polar index range.">IAdvectionRTheta</a>) on \(\frac{dt}{2}\);<ul>
-<li>We write \(X^P\) the characteristic feet such that it is the result of the implicit method:  <p class="formulaDsp">
-\[\partial_t X^k = \frac{A^n(X^n) + A^n(X^{k-1})}{2},  \qquad  X^k = X^n - \frac{dt}{2} \partial_t X^k.
-\]
-</p>
-</li>
+<li>We write \(X^P\) the characteristic feet such that it is the result of the implicit method:</li>
 </ul>
 </li>
 </ol>
+<p class="formulaDsp">
+\[\partial_t X^k = \frac{A^n(X^n) + A^n(X^{k-1})}{2},  \qquad  X^k = X^n - \frac{dt}{2} \partial_t X^k.
+\]
+</p>
 <p>Correction:</p>
 <ol type="1">
 <li>From \(\rho^{P}\), we compute \(\phi^{P}\) with the Poisson-like equation (<a class="el" href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver.">IQNSolver</a>);</li>
 <li>From \(\phi^{P}\), we compute \(E^{P}\) by deriving (<a class="el" href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver.">IQNSolver</a>);</li>
 <li>From \(\rho^n \text{ and } A^{P}\), we compute \(\rho^{C} = \rho^{n+1}\) by advecting (<a class="el" href="classIAdvectionRTheta.html" title="Define the base class of 2D advection operators in polar index range.">IAdvectionRTheta</a>) on \(dt\).<ul>
-<li>We write \(X^C\) the characteristic feet such that it is the result of the implicit method:  <p class="formulaDsp">
-\[\partial_t X^k = \frac{A^P(X^n) + A^P(X^{k-1})}{2},  \qquad  X^k = X^n - dt \partial_t X^k.
-\]
-</p>
-</li>
+<li>We write \(X^C\) the characteristic feet such that it is the result of the implicit method:</li>
 </ul>
 </li>
 </ol>
+<p class="formulaDsp">
+\[\partial_t X^k = \frac{A^P(X^n) + A^P(X^{k-1})}{2},  \qquad  X^k = X^n - dt \partial_t X^k.
+\]
+</p>
 <h1><a class="anchor" id="src_geometryRTheta_time_solver__References"></a>
 References</h1>
 <p>[1] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the
