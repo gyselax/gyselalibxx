@@ -94,13 +94,13 @@ An easy way to get the above formulas right is to remember that the metric tenso
 
 ### Curvilinear to Cartesian
 
-The *Jacobian* matrix $`J`$ associated with the transformation from the curvilinear coordinates $`\{q^i\}`$ to the Cartesian coordinates $`\{x^i\}`$ is defined from its components $`J\left.^{i}_{\;j}\right.`$ on the basis $`e_i \otimes b^j`$ as:
+The *Jacobian* matrix $`J`$ associated with the transformation from the curvilinear coordinates $`\{q^i\}`$ to the Cartesian coordinates $`\{x^i\}`$ is defined from its components $`J\left.^{i}_{\;j}\right.`$ on the basis $`\mathbf{e}_i \otimes \mathbf{b}^j`$ as:
 
 ```math
 J\left.^{i}_{\;j}\right. = \frac{\partial x^i}{\partial q^j},
 ```
 
-while the inverse Jacobian $`J^{-1}`$ is defined by its components $`J^{-1}\left.^{i}_{\;j}\right.`$ on the basis $`b_j \otimes e_i`$ as
+while the inverse Jacobian $`J^{-1}`$ is defined by its components $`J^{-1}\left.^{i}_{\;j}\right.`$ on the basis $`\mathbf{b}_j \otimes \mathbf{e}_i`$ as
 
 ```math
 J^{-1}\left.^{i}_{\;j}\right. = \frac{\partial q^i}{\partial x^j}.
@@ -143,7 +143,7 @@ Note that in the above expression the $`J^{-T}`$ tensor has been expressed in th
 ### Curvilinear to curvilinear
 
 Let us now consider the more general case where one seeks to relate two curvilinear coordinate systems $`\{q^i\}`$ and $`\{p^i\}`$. Let us also write $`\{\mathbf{b}_i\}`$ (resp. $`\{\mathbf{b}^i\}`$) the contravariant (resp. covariant) vector basis associated with coordinates $`\{q^i\}`$, and $`\{\mathbf{c}_i\}`$ (resp. $`\{\mathbf{c}^i\}`$) the contravariant (resp. covariant) vector basis associated with coordinates $`\{p^i\}`$.
-We denote by $`J\{q\to p\}`$ the Jacobian of the transformation from the coordinate system $`\{q^i\}`$ to $`\{p^i\}`$. The components of the Jacobian on the basis $`c_i \otimes b^j`$ and the components of its inverse on the basis $`b_i \otimes c^j`$ are defined similarly to above, as:
+We denote by $`J_{\{q\to p\}}`$ the Jacobian of the transformation from the coordinate system $`\{q^i\}`$ to $`\{p^i\}`$. The components of the Jacobian on the basis $`\mathbf{c}_i \otimes \mathbf{b}^j`$ and the components of its inverse on the basis $`\mathbf{b}_i \otimes \mathbf{c}^j`$ are defined similarly to above, as:
 
 ```math
 (J_{\{q\to p\}})^{i}_{\;j} = \frac{\partial p^i}{\partial q^j}, \quad (J_{\{q\to p\}})^{-1}\left.^{i}_{\;j}\right. = \frac{\partial q^i}{\partial p^j}. 
