@@ -48,7 +48,7 @@ jobs:
         run: |
           MARKDOWN_FILES=$(find . -name "*.md" -not -path "./vendor/*")
           echo $MARKDOWN_FILES
-          python3 ci_tools/markdown_linter.py ${MARKDOWN_FILES}
+          python3 bin/ci_tools/markdown_linter.py ${MARKDOWN_FILES}
 
   Python:
     name: Python Best Practices
@@ -64,7 +64,7 @@ jobs:
         run: |
           pylint $(find tests -iname *.py)
           pylint $(find doc -iname *.py)
-          pylint $(find ci_tools -iname *.py)
+          pylint $(find bin -iname *.py)
         shell: bash
         env:
           PYTHONPATH: ./post-process/PythonScripts
@@ -110,7 +110,7 @@ jobs:
           cat build/docs/doxygen.log
           # Get files which have changed in this merge request
           git diff ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}..${{ github.event.pull_request.head.sha || github.event.merge_group.head_sha }} --no-indent-heuristic --unified=0 --output=pull_new_files.txt --no-color --diff-filter=A
-          python3 ci_tools/check_readme_presence.py pull_new_files.txt
+          python3 bin/ci_tools/check_readme_presence.py pull_new_files.txt
           if [ -s build/docs/doxygen.log ]; then exit 1; fi
         shell: bash
 
@@ -130,7 +130,7 @@ jobs:
           base_sha: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
           trigger_type: ${{ github.event_name }}
       - run: |
-          python3 ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES} --errors-only
+          python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES} --errors-only
 
   cppcheck_static_analysis_warnings:
     name: CppCheck static analysis warnings
@@ -148,7 +148,7 @@ jobs:
           base_sha: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
           trigger_type: ${{ github.event_name }}
       - run: |
-          python3 ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
+          python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
 
   cmake_static_analysis:
     name: CMake static analysis
@@ -160,7 +160,7 @@ jobs:
         with:
           python-version: 3.12
       - run: |
-          python3 ci_tools/cmake_checker.py
+          python3 bin/ci_tools/cmake_checker.py
 
   spelling:
     name: Spell Check with Typos

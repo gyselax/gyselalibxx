@@ -71,12 +71,12 @@ foreach(MD_FILE ${MarkdownSources} "${gyselalibxx_SOURCE_DIR}/README.md")
 
 	file(RELATIVE_PATH relpath ${gyselalibxx_SOURCE_DIR} ${MD_FILE})
 
-	message(STATUS "${Python3_EXECUTABLE} ${gyselalibxx_SOURCE_DIR}/ci_tools/readme_to_doxygen.py ${MD_FILE} ${CMAKE_CURRENT_BINARY_DIR}/${relpath}")
+	message(STATUS "${Python3_EXECUTABLE} ${gyselalibxx_SOURCE_DIR}/docs/ci_tools/readme_to_doxygen.py ${MD_FILE} ${CMAKE_CURRENT_BINARY_DIR}/${relpath}")
 
 add_custom_command(
         OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${relpath}
-	COMMAND ${Python3_EXECUTABLE} ${gyselalibxx_SOURCE_DIR}/ci_tools/readme_to_doxygen.py ${MD_FILE} ${CMAKE_CURRENT_BINARY_DIR}/${relpath}
-        DEPENDS ${MD_FILE} ${gyselalibxx_SOURCE_DIR}/ci_tools/readme_to_doxygen.py
+        COMMAND ${Python3_EXECUTABLE} ${gyselalibxx_SOURCE_DIR}/docs/ci_tools/readme_to_doxygen.py ${MD_FILE} ${CMAKE_CURRENT_BINARY_DIR}/${relpath}
+        DEPENDS ${MD_FILE} ${gyselalibxx_SOURCE_DIR}/docs/ci_tools/readme_to_doxygen.py
         VERBATIM
 )
 

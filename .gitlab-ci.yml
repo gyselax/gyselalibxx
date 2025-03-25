@@ -70,7 +70,7 @@ python_best_practices:
   script: |
     pylint $(find tests -iname *.py)
     pylint $(find doc -iname *.py)
-    pylint $(find ci_tools -iname *.py)
+    pylint $(find bin -iname *.py)
     # Find all files with no extension or a .py extension in post-process/PythonScripts/
     POST_PROCESS_PYTHON_FILES=$(find post-process/PythonScripts/ -type f ! -name "*.*"; find post-process/PythonScripts -iname *.py)
     # Get pylint errors without failing
@@ -109,7 +109,7 @@ documentation:
     cat build-docs/docs/doxygen.log
     # Get files which have changed in this merge request
     git diff origin/${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}..HEAD --no-indent-heuristic --unified=0 --output=pull_new_files.txt --no-color --diff-filter=A
-    python3 ci_tools/check_readme_presence.py pull_new_files.txt
+    python3 bin/ci_tools/check_readme_presence.py pull_new_files.txt
     if [ -s build-docs/docs/doxygen.log ]; then exit 1; fi
 
 markdown_best_practices:
@@ -125,7 +125,7 @@ markdown_best_practices:
     MARKDOWN_FILES=$(find . -name "*.md" -not -path "./vendor/*")
     echo $MARKDOWN_FILES
     set +e
-    python3 ci_tools/markdown_linter.py ${MARKDOWN_FILES}
+    python3 bin/ci_tools/markdown_linter.py ${MARKDOWN_FILES}
   allow_failure:
     exit_codes: 2
 
@@ -139,7 +139,7 @@ cppcheck_static_analysis:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
     set +e
-    python3 ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
+    python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
   allow_failure:
     exit_codes: [1, 2] # Allow failure due to style or error but not fatal
 
@@ -152,4 +152,4 @@ cmake_static_analysis:
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
-    python3 ci_tools/cmake_checker.py
+    python3 bin/ci_tools/cmake_checker.py
