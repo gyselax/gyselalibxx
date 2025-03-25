@@ -52,11 +52,7 @@ public:
     KOKKOS_INLINE_FUNCTION CovariantVectorType
     operator()(CovariantVectorType const& partial_derivatives) const
     {
-        CovariantVectorType gradient;
-        ddcHelper::get<Dim0_cov>(gradient) = ddcHelper::get<Dim0_cov>(partial_derivatives);
-        ddcHelper::get<Dim1_cov>(gradient) = ddcHelper::get<Dim1_cov>(partial_derivatives);
-
-        return gradient;
+        return partial_derivatives;
     }
 
     /**
