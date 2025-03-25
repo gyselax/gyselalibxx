@@ -38,7 +38,8 @@
 template <
         class R,
         class Z,
-        class Zeta class SplineEvaluator,
+        class Zeta,
+       	class SplineEvaluator,
         class Rho = typename SplineEvaluator::continuous_dimension_type1,
         class Theta = typename SplineEvaluator::continuous_dimension_type2,
         class MemorySpace = typename SplineEvaluator::memory_space>
