@@ -4,10 +4,10 @@ The conventions adopted in Gyselalib++ for describing physical quantities such a
 
 ## Contents
 
-* [On the use of curvilinear coordinates](#on-the-use-of-curvilinear-coordinates)
-* [Metric tensor](#metric-tensor)
-* [Jacobian](#jacobian)
-* [Differential operators](#differential-operators)
+[On the use of curvilinear coordinates](#on-the-use-of-curvilinear-coordinates)
+[Metric tensor](#metric-tensor)
+[Jacobian](#jacobian)
+[Differential operators](#differential-operators)
 
 ## On the use of curvilinear coordinates
 

@@ -66,7 +66,7 @@ and `tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png`:
 ## Dependencies
 
 To install dependencies through spack, first follow the the 3 first steps of
-https://github.com/pdidev/spack
+<https://github.com/pdidev/spack>
 
 Then execute the following:
 
