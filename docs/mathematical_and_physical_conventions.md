@@ -216,22 +216,22 @@ By introducing the metric tensors $`G_{\{p\}}`$  and $`G_{\{q\}}`$ associated wi
 g^{ik}_{\{p\}}A_{\{p\}k} = (J_{\{q\to p\}})^{i}_{\;j}g^{jl}_{\{q\}} A_{\{q\}l}.
 ```
 
-The metric tensor associated with the basis $`c_i`$ can be obtained from the Jacobian of the transformation $`\{q^i\} \rightarrow \{p^j\}`$ and the metric tensor associated with the basis $`b_j`$ via the following equation:
+The metric tensor associated with the basis $`\mathbf{c}_i`$ can be obtained from the Jacobian of the transformation $`\{q^i\} \rightarrow \{p^j\}`$ and the metric tensor associated with the basis $`b_j`$ via the following equation:
 
 ```math
-g_{il}\{p\} = (J_{\{q\to p\}})^T\left._{i}^{\;j}\right. g_{\{q\}jk} (J_{\{q\to p\}})\left.^{k}_{\;l}\right. = (J_{\{p\to q\}})\left.^{j}_{\;i}\right. g_{\{q\}jk} (J_{\{p\to q\}})\left.^{k}_{\;l}\right.
+g_{{il}\{p\}} = (J_{\{q\to p\}})^T\left._{i}^{\;j}\right. g_{\{q\}jk} (J_{\{q\to p\}})\left.^{k}_{\;\;l}\right. = (J_{\{p\to q\}})\left.^{j}_{\;\;i}\right. g_{\{q\}jk} (J_{\{p\to q\}})\left.^{k}_{\;\;l}\right.
 ```
 
-The metric tensor associated with the basis $`b_i`$ can be obtained from the Jacobian of the transformation $`\{p^i\} \rightarrow \{q^j\}`$ and the metric tensor associated with the basis $`c_j`$ via the following equation:
+The metric tensor associated with the basis $`\mathbf{b}_i`$ can be obtained from the Jacobian of the transformation $`\{p^i\} \rightarrow \{q^j\}`$ and the metric tensor associated with the basis $`\mathbf{c}_j`$ via the following equation:
 
 ```math
-g_{il}\{q\} = (J_{\{p\to q\}})^T\left._{i}^{\;j}\right. g_{\{p\}jk} (J_{\{p\to q\}})\left.^{k}_{\;l}\right. = (J_{\{q\to p\}})^{-1}\left.^{j}_{\;i}\right. g_{\{p\}jk} (J_{\{q\to p\}})^{-T}\left.^{k}_{\;l}\right.
+g_{il}\{q\} = (J_{\{p\to q\}})^T\left._{i}^{\;j}\right. g_{\{p\}jk} (J_{\{p\to q\}})\left.^{k}_{\;\;l}\right. = (J_{\{q\to p\}})^{-1}\left.^{j}_{\;\;i}\right. g_{\{p\}jk} (J_{\{q\to p\}})^{-T}\left.^{k}_{\;\;l}\right.
 ```
 
 These expressions can be used to relates the components of $`\mathbf{A}`$ expressed in the covariant vector bases associated with both curvilinear coordinates system in another way. Using the above expressions we can see that $`J_{\{q\to p\}}G_{\{q\}}^{-1}=G_{\{p\}}^{-1}J_{\{q\to p\}}^{-T}`$. This gives us:
 
 ```math
-A_{\{p\}i} = (J_{\{q\to p\}})^{-T}\left._{\;i}^j\right. A_{\{q\}j} = (J_{\{q\to p\}})^{-1}\left.^j_{\;i}\right.A_{\{q\}j} = (J_{\{p\to q\}})^j_{\;i} A_{\{q\}j}.
+A_{\{p\}i} = (J_{\{q\to p\}})^{-T}\left._{\;\;i}^j\right. A_{\{q\}j} = (J_{\{q\to p\}})^{-1}\left.^j_{\;\;i}\right.A_{\{q\}j} = (J_{\{p\to q\}})^j_{\;\;i} A_{\{q\}j}.
 ```
 
 ## Differential operators
