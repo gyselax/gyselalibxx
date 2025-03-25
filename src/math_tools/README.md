@@ -7,7 +7,12 @@ This folder contains mathematical classes and functions.
 Functions for calculating derivatives with different methods:
 
 - `spline_1d_partial_derivative.hpp` : calculate derivatives using a 1d spline representation.
-- `central_fdm_partial_derivatives.hpp` : calculate derivatives using Finite Difference Method.
+- `spline_2d_partial_derivative.hpp` : calculate derivatives using a 2d spline representation.
+- `central_fdm_partial_derivatives.hpp` : calculate derivatives using Finite Difference Method.  
+
+### Spline derivatives
+
+The `spline_builder_2d_cache.hpp` file contains a class to be used with a 2d spline representation to compute partial derivatives. The cache class allows for calling the 2d splines builder only once per iteration, even if partial derivatives are evaluated in two directions.
 
 ### Finite difference derivatives
 
