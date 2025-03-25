@@ -7,5 +7,3 @@ The `geometryXYVxVy` folder contains all the code describing methods which are s
 - [poisson](./poisson/README.md) - Code describing the Quasi-Neutrality solver.
 - [time\_integration](./time_integration/README.md) - Time integrators for a Boltzmann-Poisson system of equations.
 - [vlasov](./vlasov/README.md) - Code describing solvers for the Vlasov equation.
-
-
