@@ -28,7 +28,8 @@ template <class Dim, class Grid1D>
 std::vector<Coord<Dim>> build_random_non_uniform_break_points(
         Coord<Dim> min,
         Coord<Dim> max,
-        IdxStep<Grid1D> n_cells)
+        IdxStep<Grid1D> n_cells,
+        double const non_uniformity = 1.)
 {
     static_assert(std::is_same_v<typename Grid1D::continuous_dimension_type, Dim>);
 
@@ -40,7 +41,7 @@ std::vector<Coord<Dim>> build_random_non_uniform_break_points(
     break_points[0] = min;
     for (int i(1); i < n_cells; ++i) {
         double const random_perturbation = double(rand()) / RAND_MAX - 0.5;
-        break_points[i] = min + (i + random_perturbation) * delta;
+        break_points[i] = min + (i + random_perturbation * non_uniformity) * delta;
     }
     break_points[n_cells] = max;
     return break_points;
