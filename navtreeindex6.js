@@ -1,5 +1,12 @@
 var NAVTREEINDEX6 =
 {
+"irighthandside_8hpp_source.html":[17,0,5,4,3],
+"itimestepper_8hpp_source.html":[17,0,19,2],
+"ivlasovsolver_8hpp_source.html":[17,0,7,4,0],
+"kinetic__source_8hpp_source.html":[17,0,5,4,4],
+"krook__source__adaptive_8hpp_source.html":[17,0,5,4,5],
+"krook__source__constant_8hpp_source.html":[17,0,5,4,6],
+"l__norm__tools_8hpp.html":[17,0,11,2],
 "l__norm__tools_8hpp.html#a14de4af65e74d5300abfafe870ef954b":[17,0,11,2,9],
 "l__norm__tools_8hpp.html#a1e7039002a54c7de373d8c9b27de00ca":[17,0,11,2,4],
 "l__norm__tools_8hpp.html#a27082a4ff6b4ad2c890a613983f6f287":[17,0,11,2,8],
@@ -100,8 +107,8 @@ var NAVTREEINDEX6 =
 "species__info_8hpp_source.html":[17,0,18,1],
 "species__init_8hpp_source.html":[17,0,18,2],
 "spline__1d__partial__derivative_8hpp_source.html":[17,0,11,4],
-"spline__builder__2d__cache_8hpp.html":[17,0,11,5],
-"spline__builder__2d__cache_8hpp_source.html":[17,0,11,5],
+"spline__2d__partial__derivative_8hpp_source.html":[17,0,11,5],
+"spline__builder__2d__cache_8hpp_source.html":[17,0,11,6],
 "spline__interpolator_8hpp_source.html":[17,0,8,5],
 "spline__interpolator__2d_8hpp_source.html":[17,0,8,6],
 "spline__interpolator__rtheta_2params_8yaml_8hpp_source.html":[17,1,1,3,0],
@@ -242,12 +249,5 @@ var NAVTREEINDEX6 =
 "structConstantExtrapolationRuleOnion.html":[16,43],
 "structConstantExtrapolationRuleOnion.html#a2fc1ed58f951dd2d5ae6878853524664":[16,43,1],
 "structConstantExtrapolationRuleOnion.html#af9e46e05ba3bc87e5df2f8d1f7a6393d":[16,43,0],
-"structEdge.html":[16,57],
-"structEdge.html#a01bafe4f74a4d717a45f57c4f7e023a9":[16,57,0],
-"structEdge.html#a17c65ef78459378e78d6327af23bc017":[16,57,1],
-"structEdge.html#a45e9ce9846a4f8d061b19460c3cc4c6d":[16,57,2],
-"structFEM1DPoissonSolver_1_1GridPDEDimQ.html":[16,63,0],
-"structFEM1DPoissonSolver_1_1HiddenFEMBSplines.html":[16,63,1],
-"structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace2aeecfe91d464f5738599cc105fb6087.html":[16,65,0],
-"structGEOM__NAMESPACE__NAME_1_1BSplinesR.html":[16,3,0]
+"structEdge.html":[16,57]
 };

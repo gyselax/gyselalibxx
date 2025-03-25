@@ -292,9 +292,9 @@ var NAVTREEINDEX =
 "classGaussLegendre.html#abb70874897c85fa6df64c91511e2d24e",
 "classMatrix__Centre__Block.html",
 "classPolarBSplines_1_1Impl.html#ad59005ab67bc08a9bade86b4cbb86c6e",
-"classVectorFieldMem.html#a5c5366a96f56e4422e59e8dec1e9c850",
-"l__norm__tools_8hpp.html#a14de4af65e74d5300abfafe870ef954b",
-"structGEOM__NAMESPACE__NAME_1_1BSplinesTheta.html"
+"classVectorFieldMem.html#a1706adefbd7b99f3421d6ec1a39d845c",
+"irighthandside_8hpp_source.html",
+"structEdge.html#a01bafe4f74a4d717a45f57c4f7e023a9"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

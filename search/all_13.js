@@ -9,7 +9,7 @@ var searchData=
   ['parts_20of_20the_20code_6',['References to other relevant parts of the code',['../docs_Adding_docs.html#autotoc_md4',1,'']]],
   ['passing_7',['Parameter passing',['../docs_CODING_STANDARD.html#docs_CODING_STANDARD__Parameter_passing',1,'']]],
   ['patch_8',['patch',['../structPatch.html',1,'Patch&lt; T &gt;'],['../src_multipatch_connectivity.html#src_multipatch_connectivity__Patch',1,'Patch']]],
-  ['patch_20domain_9',['Multi-patch domain',['../src_multipatch_connectivity.html#autotoc_md76',1,'']]],
+  ['patch_20domain_9',['Multi-patch domain',['../src_multipatch_connectivity.html#autotoc_md77',1,'']]],
   ['patch_20locator_10',['Patch locator',['../src_multipatch_connectivity.html#src_multipatch_connectivity__Patch_locator',1,'']]],
   ['patch_3c_20grid1_2c_20grid2_2c_20bsplines_5fdim1_2c_20bsplines_5fdim2_20_3e_11',['Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;',['../structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html',1,'']]],
   ['patchconnection_12',['PatchConnection',['../structconnectivity__details_1_1PatchConnection.html',1,'connectivity_details']]],

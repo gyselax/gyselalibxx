@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: Utility Functions</title>
+<title>Gyselalib++: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('src_math_tools.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('classSpline2DPartialDerivativeCreator.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -102,73 +102,17 @@ $(document).ready(function(){initNavTree('src_math_tools.html',''); initResizabl
 </div>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title">Utility Functions</div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">Spline2DPartialDerivativeCreator&lt; SplineBuilder2DCache, SplineEvaluator2D, DerivativeDimension &gt; Member List</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This folder contains mathematical classes and functions.</p>
-<h1><a class="anchor" id="src_math_tools__Derivative_tools"></a>
-Derivative tools</h1>
-<p>Functions for calculating derivatives with different methods:</p>
-<ul>
-<li><code><a class="el" href="spline__1d__partial__derivative_8hpp_source.html">spline_1d_partial_derivative.hpp</a></code> : calculate derivatives using a 1d spline representation.</li>
-<li><code><a class="el" href="spline__2d__partial__derivative_8hpp_source.html">spline_2d_partial_derivative.hpp</a></code> : calculate derivatives using a 2d spline representation.</li>
-<li><code><a class="el" href="central__fdm__partial__derivatives_8hpp_source.html">central_fdm_partial_derivatives.hpp</a></code> : calculate derivatives using Finite Difference Method. <br  />
-</li>
-</ul>
-<h3><a class="anchor" id="autotoc_md73"></a>
-Spline derivatives</h3>
-<p>The <code><a class="el" href="spline__builder__2d__cache_8hpp_source.html">spline_builder_2d_cache.hpp</a></code> file contains a class to be used with a 2d spline representation to compute partial derivatives. The cache class allows for calling the 2d splines builder only once per iteration, even if partial derivatives are evaluated in two directions.</p>
-<h3><a class="anchor" id="autotoc_md74"></a>
-Finite difference derivatives</h3>
-<p>The method is as follow: Take a function \(f\). We want to approximate the value of \(f&#39;(x_1)\) knowing the value of \(f(x_1)\), \(f(x_2)\) and \(f(x_3)\) for \(x_3&gt;x_2&gt;x_1\). Denote \(\alpha :=|x_2-x_1|\) and \(\beta :=|x_3-x_2|\). We call \(Df(x_1)\) the approximate value of \(f&#39;(x_1)\). We want \(|f&#39;(x_1)-Df(x_1)|=o\left(\max(\alpha,\beta\right)^2)\). To this end, write</p>
-<p class="formulaDsp">
-\[ Df(x_1)=c_1f(x_1)+c_2f(x_2)+c_3f(x_3),
-\]
-</p>
-<p>and expand \(f\) to the second order.</p>
-<p class="formulaDsp">
-\[    \begin{aligned}
-        Df(x_1) &amp; = c_1f(x_1)+c_2\left(f(x_1)+\alpha f&#39;(x_1)+\frac{1}{2}\alpha^2f&#39;&#39;(x_1)+o(\alpha^2)\right)               \\
-                &amp; +c_3\left(f(x_1)+(\alpha+\beta) f&#39;(x_1)+\frac{1}{2}(\alpha+\beta)^2f&#39;&#39;(x_1)+o((\alpha+\beta)^2)\right).
-    \end{aligned}
-\]
-</p>
-<p>A term-by-term comparison gives us the following system:</p>
-<p class="formulaDsp">
-\[    \left\{
-    \begin{aligned}
-        c_1+c_2+c_3                      &amp; =0  \\
-        \alpha c_2+(\alpha+\beta)c_3     &amp; =1  \\
-        \alpha^2 c_2+(\alpha+\beta)^2c_3 &amp; =0.
-    \end{aligned}
-    \right.
-\]
-</p>
-<p>The solution is therefore given by</p>
-<p class="formulaDsp">
-\[ c_1=-\frac{2\alpha+\beta}{\alpha^2+\alpha\beta}\qquad c_2=\frac{1}{\alpha}+\frac{1}{\beta}\qquad c_3=-\frac{\alpha}{\beta(\alpha+\beta)}.
-\]
-</p>
-<p>The same computation can be made for the backward and the centred FDM scheme, and lead to these three formulas:</p>
-<p class="formulaDsp">
-\[    \begin{aligned}
-        Df(x_1) &amp; = -\frac{2\alpha+\beta}{\alpha(\alpha+\beta)}f(x_1)+\left(\frac{1}{\alpha}+\frac{1}{\beta}\right)f(x_2)-\frac{\alpha}{\beta(\alpha+\beta)}f(x_3) \\
-        Df(x_2) &amp; = -\frac{\beta}{\alpha(\alpha+\beta)}f(x_1)+\left(\frac{1}{\alpha}-\frac{1}{\beta}\right)f(x_2)+\frac{\alpha}{\alpha(\alpha+\beta)}f(x_3)        \\
-        Df(x_3) &amp; = \frac{2\alpha+\beta}{\alpha(\alpha+\beta)}f(x_1)-\left(\frac{1}{\alpha}+\frac{1}{\beta}\right)f(x_2)+\frac{\alpha}{\beta(\alpha+\beta)}f(x_3).
-    \end{aligned}
-\]
-</p>
-<p>One can check than in the uniform case ( \(\alpha=\beta\)) we recover the well known coefficient \(-1/2\) and \(1/2\) for the centred case and \(-3/2\), \(2\) and \(-1/2\) for the decentred case.</p>
-<h1><a class="anchor" id="src_math_tools__Utility_tools"></a>
-Utility tools</h1>
-<p>The <a class="el" href="l__norm__tools_8hpp.html" title="File Describing useful mathematical functions to compute Lnorms.">l_norm_tools.hpp</a> file contains functions computing the infinity norm. For now, it computes the infinity norm of</p>
-<ul>
-<li>a double: \(\Vert x \Vert_{\infty} = x\);</li>
-<li>a coordinate: \(\Vert x \Vert_{\infty} = \max_{i} (|x_i|)\). </li>
-</ul>
-</div></div><!-- contents -->
-</div><!-- PageDoc -->
+
+<p>This is the complete list of members for <a class="el" href="classSpline2DPartialDerivativeCreator.html">Spline2DPartialDerivativeCreator&lt; SplineBuilder2DCache, SplineEvaluator2D, DerivativeDimension &gt;</a>, including all inherited members.</p>
+<table class="directory">
+  <tr class="even"><td class="entry"><a class="el" href="classSpline2DPartialDerivativeCreator.html#ae6a4c3975b542c507662f0544da044f2">create_instance</a>(DConstFieldType field) const</td><td class="entry"><a class="el" href="classSpline2DPartialDerivativeCreator.html">Spline2DPartialDerivativeCreator&lt; SplineBuilder2DCache, SplineEvaluator2D, DerivativeDimension &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classIPartialDerivativeCreator.html#aa6909a30ce6565221d37736bf059f7a0">IPartialDerivativeCreator&lt; SplineEvaluator2D::batched_evaluation_domain_type, DerivativeDimension &gt;::create_instance</a>(DConstField&lt; SplineEvaluator2D::batched_evaluation_domain_type &gt; field) const=0</td><td class="entry"><a class="el" href="classIPartialDerivativeCreator.html">IPartialDerivativeCreator&lt; SplineEvaluator2D::batched_evaluation_domain_type, DerivativeDimension &gt;</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classSpline2DPartialDerivativeCreator.html#a0bc845a4cd9f170962c1ca93256c2c92">Spline2DPartialDerivativeCreator</a>(SplineBuilder2DCache &amp;builder_cache, SplineEvaluator2D const &amp;evaluator)</td><td class="entry"><a class="el" href="classSpline2DPartialDerivativeCreator.html">Spline2DPartialDerivativeCreator&lt; SplineBuilder2DCache, SplineEvaluator2D, DerivativeDimension &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+</table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

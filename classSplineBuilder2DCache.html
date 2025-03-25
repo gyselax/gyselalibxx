@@ -122,6 +122,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a25d9d6d88b77743ad07907a5960db96e"><td class="memTemplItemLeft" align="right" valign="top">DConstFieldSplineCoeffs&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSplineBuilder2DCache.html#a25d9d6d88b77743ad07907a5960db96e">compute_coeffs</a> (DConstField&lt; IdxRangeField &gt; field_values)</td></tr>
 <tr class="memdesc:a25d9d6d88b77743ad07907a5960db96e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the spline coefficients of the spline representation of field_values if required, i.e.  <br /></td></tr>
 <tr class="separator:a25d9d6d88b77743ad07907a5960db96e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6aedf4cd2de466e64654217dd559b16" id="r_aa6aedf4cd2de466e64654217dd559b16"><td class="memItemLeft" align="right" valign="top">DConstFieldSplineCoeffs&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder2DCache.html#aa6aedf4cd2de466e64654217dd559b16">operator()</a> () const</td></tr>
+<tr class="memdesc:aa6aedf4cd2de466e64654217dd559b16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a constant field reference to the spline coefficients.  <br /></td></tr>
+<tr class="separator:aa6aedf4cd2de466e64654217dd559b16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class SplineBuilder2D&gt;<br />
@@ -204,6 +207,36 @@ template&lt;class DimOfInterest &gt; </div>
 <p>The compute_coeff function can be called with either Dim1 or Dim2 as a template parameter. When a call is made with one of these two dimensions, the corresponding boolean is set to false so that when the function is called with the other dimension, the builder is not called again.</p>
 <p>To summarise with <a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a> and <a class="el" href="structY.html" title="Define non periodic real Y dimension.">Y</a> as the two dimensions: ITERATION N compute_coeff&lt;X&gt;(field) --&gt; calls spline_builder compute_coeff&lt;Y&gt;(field) --&gt; does not call spline_builder</p>
 <p>ITERATION N+1 compute_coeff&lt;X&gt;(field_updated) --&gt; calls spline_builder compute_coeff&lt;Y&gt;(field_updated) --&gt; does not call spline_builder</p>
+
+</div>
+</div>
+<a id="aa6aedf4cd2de466e64654217dd559b16" name="aa6aedf4cd2de466e64654217dd559b16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6aedf4cd2de466e64654217dd559b16">&#9670;&#160;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SplineBuilder2D &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DConstFieldSplineCoeffs <a class="el" href="classSplineBuilder2DCache.html">SplineBuilder2DCache</a>&lt; SplineBuilder2D &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a constant field reference to the spline coefficients. </p>
+<dl class="section return"><dt>Returns</dt><dd>A reference to a constant field that contains the spline coefficients. </dd></dl>
 
 </div>
 </div>

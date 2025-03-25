@@ -294,6 +294,8 @@ var annotated =
     [ "SpeciesInformation", "classSpeciesInformation.html", "classSpeciesInformation" ],
     [ "Spline1DPartialDerivative", "classSpline1DPartialDerivative.html", "classSpline1DPartialDerivative" ],
     [ "Spline1DPartialDerivativeCreator", "classSpline1DPartialDerivativeCreator.html", "classSpline1DPartialDerivativeCreator" ],
+    [ "Spline2DPartialDerivative", "classSpline2DPartialDerivative.html", "classSpline2DPartialDerivative" ],
+    [ "Spline2DPartialDerivativeCreator", "classSpline2DPartialDerivativeCreator.html", "classSpline2DPartialDerivativeCreator" ],
     [ "SplineBuilder2DCache", "classSplineBuilder2DCache.html", "classSplineBuilder2DCache" ],
     [ "SplineInterpolator", "classSplineInterpolator.html", "classSplineInterpolator" ],
     [ "SplineInterpolator2D", "classSplineInterpolator2D.html", "classSplineInterpolator2D" ],
