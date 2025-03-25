@@ -37,7 +37,7 @@ def get_diff_as_json(filename):
     i = 0
     n = len(lines)
 
-    current_folder = Path(__file__).parents[1]
+    current_folder = Path(__file__).parent.parents[1]
     current_file_name = None
     current_file_additions = []
     current_file_deletions = []

@@ -25,6 +25,7 @@ Ax = "Ax"
 ax = "ax"
 color = "color"
 colors = "colors"
+artifacts = "artifacts"
 
 [files]
 extend-exclude = ["*.tex",
