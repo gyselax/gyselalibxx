@@ -106,8 +106,10 @@ TEST(GradientTest, Circular)
     FieldMemRTheta_host<CoordRTheta> coords = get_example_coords(IdxStepR(32), IdxStepTheta(32));
     IdxRangeRTheta grid = get_idx_range(coords);
 
-    MetricTensorEvaluator<CircularToCartesian<R, Theta, X, Y>, CoordRTheta> metric_tensor(mapping);
-    Gradient<CircularToCartesian<R, Theta, X, Y>, CoordRTheta> gradient_evaluator(metric_tensor);
+    using MetricTensorType
+            = MetricTensorEvaluator<CircularToCartesian<R, Theta, X, Y>, CoordRTheta>;
+    MetricTensorType metric_tensor(mapping);
+    Gradient<MetricTensorType> gradient_evaluator(metric_tensor);
 
     GradientTestFunction test_function;
 

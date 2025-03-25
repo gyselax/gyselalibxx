@@ -34,6 +34,9 @@ public:
     /// The type of a covariant vector associated with this mapping.
     using CovariantVectorType = DTensor<vector_index_set_dual_t<Dims>>;
 
+    /// The type of a coordinate associated with this mapping.
+    using CoordArg = PositionCoordinate;
+
 private:
     Mapping m_mapping;
 
@@ -57,7 +60,7 @@ public:
      * @return metric_tensor
      * 				A DTensor object containing the value of the metric tensor.
      */
-    KOKKOS_FUNCTION DTensor<Dims_cov, Dims_cov> operator()(PositionCoordinate const& coord) const
+    KOKKOS_FUNCTION DTensor<Dims_cov, Dims_cov> operator()(CoordArg const& coord) const
     {
         const double J_11 = m_mapping.jacobian_11(coord);
         const double J_12 = m_mapping.jacobian_12(coord);
@@ -80,7 +83,7 @@ public:
      * @return inverse_metric_tensor
      * 				A DTensor object containing the value of the inverse of the metric tensor.
      */
-    KOKKOS_FUNCTION DTensor<Dims, Dims> inverse(PositionCoordinate const& coord) const
+    KOKKOS_FUNCTION DTensor<Dims, Dims> inverse(CoordArg const& coord) const
     {
         const double J_11 = m_mapping.jacobian_11(coord);
         const double J_12 = m_mapping.jacobian_12(coord);

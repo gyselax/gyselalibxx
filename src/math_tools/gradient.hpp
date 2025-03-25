@@ -9,18 +9,16 @@
 
 /**
  * @brief A class which implements a gradient operator 
- * @tparam Mapping A mapping.
- * @tparam PositionCoordinate The coordinate type where the gradient can be evaluated.
+ * @tparam MetricTensorType A type representing a metric tensor.
  */
-template <class Mapping, class PositionCoordinate>
+template <class MetricTensorType>
 class Gradient
 {
-    using MetricTensorType = MetricTensorEvaluator<Mapping, PositionCoordinate>;
-
+    using CoordArg = typename MetricTensorType::CoordArg;
     using ContravariantVectorType = typename MetricTensorType::ContravariantVectorType;
     using CovariantVectorType = typename MetricTensorType::CovariantVectorType;
 
-    using Dims = ddc::to_type_seq_t<typename Mapping::CoordArg>;
+    using Dims = ddc::to_type_seq_t<typename MetricTensorType::CoordArg>;
     using Dims_cov = vector_index_set_dual_t<Dims>;
 
     MetricTensorType const m_metric_tensor;
@@ -64,9 +62,8 @@ public:
      *
      * @return The components of the gradient expressed on the contravariant basis.
      */
-    KOKKOS_INLINE_FUNCTION ContravariantVectorType operator()(
-            CovariantVectorType const& partial_derivatives,
-            PositionCoordinate const& coord) const
+    KOKKOS_INLINE_FUNCTION ContravariantVectorType
+    operator()(CovariantVectorType const& partial_derivatives, CoordArg const& coord) const
     {
         return tensor_mul(
                 index<'i', 'j'>(m_metric_tensor.inverse(coord)),
