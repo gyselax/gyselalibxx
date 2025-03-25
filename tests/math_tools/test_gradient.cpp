@@ -106,7 +106,7 @@ TEST(GradientTest, Circular)
 {
     double const TOL = 1e-12;
     CircularToCartesian<R, Theta, X, Y> const mapping;
-    FieldMemRTheta_host<CoordRTheta> coords = get_example_coords(IdxStepR(1), IdxStepTheta(1));
+    FieldMemRTheta_host<CoordRTheta> coords = get_example_coords(IdxStepR(64), IdxStepTheta(64));
     IdxRangeRTheta grid = get_idx_range(coords);
 
     MetricTensorEvaluator<CircularToCartesian<R, Theta, X, Y>, CoordRTheta> metric_tensor(mapping);

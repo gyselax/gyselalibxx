@@ -15,17 +15,17 @@
 template <class Mapping, class PositionCoordinate>
 class Gradient
 {
-    using MetricTensorType = MetricTensorEvaluator<Mapping, PositionCoordinate>;
+  using MetricTensorType = MetricTensorEvaluator<Mapping, PositionCoordinate>;
 
-    using ContravariantVectorType = typename MetricTensorType::ContravariantVectorType;
-    using CovariantVectorType = typename MetricTensorType::CovariantVectorType;
+  using ContravariantVectorType = typename MetricTensorType::ContravariantVectorType;
+  using CovariantVectorType = typename MetricTensorType::CovariantVectorType;
 
-    using Dims = ddc::to_type_seq_t<typename Mapping::CoordArg>;
-    using Dims_cov = vector_index_set_dual_t<Dims>;
-    using Dim0_cov = ddc::type_seq_element_t<0, Dims_cov>;
-    using Dim1_cov = ddc::type_seq_element_t<1, Dims_cov>;
+  using Dims = ddc::to_type_seq_t<typename Mapping::CoordArg>;
+  using Dims_cov = vector_index_set_dual_t<Dims>;
+  using Dim0_cov = ddc::type_seq_element_t<0, Dims_cov>;
+  using Dim1_cov = ddc::type_seq_element_t<1, Dims_cov>;
 
-    MetricTensorType const m_metric_tensor;
+  MetricTensorType const m_metric_tensor;
 
 public:
     /**
@@ -33,19 +33,24 @@ public:
      *
      * @param metric_tensor A MetricTensorEvaluator.
      */
-    explicit KOKKOS_FUNCTION Gradient(MetricTensorType const metric_tensor)
+    explicit KOKKOS_FUNCTION Gradient(
+            MetricTensorType const metric_tensor)
         : m_metric_tensor(metric_tensor)
     {
     }
 
     /**
-     * @brief Compute the partial derivative of a field in the direction 
-     * where the field is represented using 1d splines.
+     * @brief Compute the gradient of a scalar field from the partial 
+     * derivatives of the field. The gradient is expressed on the covariant 
+     * basis. The components of the gradient in the covariant basis are simply 
+     * equal to the value of the partial derivatives of the scalar field.
+     * See [Differential operators](#docs_mathematical_and_physical_conventions__Differential_operators)
      *
-     * @param[out] differentiated_field Contains on output the value of the differentiated field.
+     * @param[in] partial_derivatives Contains the partial derivatives of the scalar field.
+     *
+     * @return The components of the gradient expressed on the covariant basis.
      */
-    KOKKOS_FUNCTION CovariantVectorType
-    operator()(CovariantVectorType const& partial_derivatives) const
+    KOKKOS_FUNCTION CovariantVectorType operator()(CovariantVectorType const& partial_derivatives) const
     {
         CovariantVectorType gradient;
         ddcHelper::get<Dim0_cov>(gradient) = ddcHelper::get<Dim0_cov>(partial_derivatives);
@@ -54,15 +59,17 @@ public:
         return gradient;
     }
 
-    /**
-     * @brief Compute the partial derivative of a field in the direction 
-     * where the field is represented using 1d splines.
+     /**
+     * @brief Compute the gradient of a scalar field from the partial 
+     * derivatives of the field. The gradient is expressed on the contravariant 
+     * basis.  
+     * See [Differential operators](#docs_mathematical_and_physical_conventions__Differential_operators)
      *
-     * @param[out] differentiated_field Contains on output the value of the differentiated field.
+     * @param[in] partial_derivatives Contains the partial derivatives of the scalar field.
+     *
+     * @return The components of the gradient expressed on the contravariant basis.
      */
-    KOKKOS_FUNCTION ContravariantVectorType operator()(
-            CovariantVectorType const& partial_derivatives,
-            PositionCoordinate const& coord) const
+    KOKKOS_FUNCTION ContravariantVectorType operator()(CovariantVectorType const& partial_derivatives, PositionCoordinate const& coord) const
     {
         return tensor_mul(
                 index<'i', 'j'>(m_metric_tensor.inverse(coord)),
