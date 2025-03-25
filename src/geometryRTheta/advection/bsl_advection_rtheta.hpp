@@ -6,6 +6,7 @@
 #include "geometry.hpp"
 #include "i_interpolator_2d.hpp"
 #include "iadvection_rtheta.hpp"
+#include "indexed_tensor.hpp"
 #include "metric_tensor_evaluator.hpp"
 #include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
@@ -30,23 +31,24 @@
  * @f$ f(t, x) = f(0, X(t; 0, x)), \quad \forall t. @f$
  *
  *
- * So the first step of the advection operator is to compute the feet of the characteristics 
- * @f$ X(t; t+dt, x_i) @f$ for each mesh point @f$ x_i @f$.
+ * So the first step of the advection operator is to compute the feet of the characteristics
+ * @f$ X(t; t+\Delta t, x_i) @f$ for each mesh point @f$ x_i @f$.
  *
- * For the second step, we interpolate the function at the feet of the characteristics computed, and obtain the
- * function at the next time step: @f$ f(t + dt, x) = f(t, X(t + dt; t, x))@f$.
+ * For the second step, we interpolate the function at the computed feet of the characteristics, 
+ * and obtain the function at the next time step: 
+ * @f$ f(t + \Delta t, x) = f(t, X(t; t+\Delta, x))@f$.
  *
  *
  * Different time integration methods are implemented to solve the equation of the characteristics.
  * They are defined in the IPolarFootFinder class.
  *
  * The feet can be advected on different domains (physical domain or pseudo-physical domain)
- * which are determined in the SplinePolarFootFinder operator.
+ * which are determined in the SplinePolarFootFinder operator. 
  *
  * The interpolation of the function is always done in the logical domain,
- * where the B-splines are defined.
+ * where the B-splines are defined. 
  *
- * 
+ *
  * @see IPolarFootFinder
  */
 template <class FootFinder, class Mapping>
@@ -155,6 +157,7 @@ public:
      * @param [in] advection_field_rtheta
      *      A DConstVectorFieldRTheta containing the values of the advection field
      *      on the logical index range axis.
+     *      It is expressed on the contravariant basis.
      * @param [in] advection_field_xy_centre
      *      A CoordXY containing the value of the advection field on the 
      *      physical index range axis at the O-point. 
@@ -165,7 +168,7 @@ public:
      */
     host_t<DFieldRTheta> operator()(
             host_t<DFieldRTheta> allfdistribu_host,
-            host_t<DConstVectorFieldRTheta<R_cov, Theta_cov>> advection_field_rtheta,
+            host_t<DConstVectorFieldRTheta<R, Theta>> advection_field_rtheta,
             CoordXY const& advection_field_xy_centre,
             double dt) const override
     {
@@ -180,24 +183,17 @@ public:
         // Convert advection field on RTheta to advection field on XY
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_host(grid);
 
-        InverseJacobianMatrix<Mapping, CoordRTheta> inv_jacobian_matrix(m_mapping);
-
+        // (Ax, Ay) = J (Ar, Atheta)
         ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
             CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
-            std::array<std::array<double, 2>, 2> inv_J = inv_jacobian_matrix(coord_rtheta);
-            double const jacobian = m_mapping.jacobian(coord_rtheta);
+            Tensor J = m_mapping.jacobian_matrix(coord_rtheta);
 
-            ddcHelper::get<X>(advection_field_xy_host)(irtheta)
-                    = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * inv_J[0][0]
-                              * jacobian
-                      + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * inv_J[1][0]
-                                * jacobian;
-            ddcHelper::get<Y>(advection_field_xy_host)(irtheta)
-                    = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * inv_J[0][1]
-                              * jacobian
-                      + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * inv_J[1][1]
-                                * jacobian;
+            DVector<R, Theta> advec_field_rtheta = advection_field_rtheta(irtheta);
+            DVector<X, Y> advec_field_xy
+                    = tensor_mul(index<'i', 'j'>(J), index<'j'>(advec_field_rtheta));
+            ddcHelper::get<X>(advection_field_xy_host)(irtheta) = ddcHelper::get<X>(advec_field_xy);
+            ddcHelper::get<Y>(advection_field_xy_host)(irtheta) = ddcHelper::get<Y>(advec_field_xy);
         });
 
         ddc::for_each(Opoint_grid, [&](IdxRTheta const irtheta) {

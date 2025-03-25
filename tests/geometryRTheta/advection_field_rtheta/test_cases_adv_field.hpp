@@ -26,7 +26,10 @@
  * The test advection field is given in Edoardo Zoni's article
  * (https://doi.org/10.1016/j.jcp.2019.108889):
  *
- * @f$ A(x,y) = \omega [y_c - y, x - x_c]@f$.
+ * @f$ A(x,y) = \omega [y_c - y, x - x_c]^T = [-\partial_y \phi, \partial_x \phi]^T @f$,
+ * 
+ * An adapted electrostatic potential is 
+ * @f$ \phi(x,y) = \omega (1\2 * x^2 - x x_c + 1/2 * y^2 - y y_c)@f$.
  *
  * The characteristic feet are then given by
  * - @f$ X(t + dt) = x_c + (X(t) - x_c) \cos(\omega dt) - (Y(t) - y_c) \sin(\omega dt) @f$,
@@ -72,7 +75,7 @@ public:
     {
         double const x = ddc::get<X>(coord);
         double const y = ddc::get<Y>(coord);
-        return m_omega * (-0.5 * x * x + m_xc * x - 0.5 * y * y + m_yc * y);
+        return m_omega * (0.5 * x * x - m_xc * x + 0.5 * y * y - m_yc * y);
     }
 
     /**
@@ -104,10 +107,13 @@ public:
  *
  * The test advection field for a translation in the physical domain is given by :
  *
- * @f$ A(x,y) = [v_x, v_y]@f$.
+ * @f$ A(x,y) = [v_x, v_y] = [-\partial_y \phi, \partial_x \phi]^T @f$,
  *
  * with @f$ v_x @f$ and @f$ v_y @f$ constants.
  *
+ * An adapted electrostatic potential is 
+ * @f$ \phi(x,y) = v_y x - v_x y@f$.
+ * 
  * The characteristic feet are then given by
  * - @f$ X(t + dt) = X(t) + dt v_x @f$,
  * - @f$ Y(t + dt) = Y(t) + dt v_y @f$.
@@ -151,7 +157,7 @@ public:
     {
         double const vx = ddc::get<X>(m_velocity);
         double const vy = ddc::get<Y>(m_velocity);
-        return -vy * ddc::get<X>(coord) + vx * ddc::get<Y>(coord);
+        return vy * ddc::get<X>(coord) - vx * ddc::get<Y>(coord);
     }
 
     /**
@@ -177,10 +183,13 @@ public:
  *
  * The test advection field for a rotation in the physical domain is given by :
  *
- * @f$ A(x,y) = J_{\mathcal{F}}[v_r, v_\theta]@f$.
+ * @f$ A(x,y) = J_{\mathcal{F}}[v^r, v^\theta] = [-\partial_y \phi, \partial_x \phi]^T @f$,
  *
- * with @f$ v_r @f$ and @f$ v_\theta @f$ constants and @f$ \mathcal{F}@f$ the
- * circular mapping.
+ * with @f$ v^r @f$ and @f$ v^\theta @f$ constants composants in the contravariant basis 
+ * and @f$\mathcal{F}@f$ the circular mapping.
+ * 
+ * An adapted electrostatic potential for  @f$ v^r = 0 @f$ is 
+ * @f$ \phi(x,y) = 1/2 v^\theta (x^2 + y^2 )@f$.
  *
  * The characteristic feet are then given by
  * - @f$ (X(t + dt), Y(t + dt))  = \mathcal{F} (R(t + dt), \Theta(t + dt))@f$,
@@ -228,9 +237,9 @@ public:
      */
     KOKKOS_FUNCTION double operator()(CoordXY const coord, double const t) const
     {
-        CoordRTheta const coord_rtheta(m_mapping(coord));
-        double const r = ddc::get<R>(coord_rtheta);
-        return -0.5 * r * r * m_vtheta;
+        double const x = ddc::get<X>(coord);
+        double const y = ddc::get<Y>(coord);
+        return 0.5 * m_vtheta * (x * x + y * y);
     }
 
     /**
@@ -274,10 +283,10 @@ struct AdvectionFieldSimulation
     /// @brief The chosen electrostatical potential for the simulation.
     ElectrostaticPotentialSimulation const electrostatical_potential;
 
-    /// @brief The chosen function to be advected for the simulation.
+    ///@brief The chosen function to be advected for the simulation.
     FunctionToBeAdvected const function;
 
-    /// @brief The chosen advection field for the simulation.
+    ///@brief The chosen advection field for the simulation.
     AdvectionField const advection_field;
 };
 
