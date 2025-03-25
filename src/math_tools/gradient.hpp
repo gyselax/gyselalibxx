@@ -66,7 +66,7 @@ public:
      *
      * @return The components of the gradient expressed on the contravariant basis.
      */
-    KOKKOS_FUNCTION ContravariantVectorType operator()(
+    KOKKOS_INLINE_FUNCTION ContravariantVectorType operator()(
             CovariantVectorType const& partial_derivatives,
             PositionCoordinate const& coord) const
     {
