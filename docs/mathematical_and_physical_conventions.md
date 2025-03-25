@@ -155,7 +155,7 @@ while the inverse Jacobian $`J^{-1}`$ is defined by its components $`J^{-1}\left
 J^{-1}\left.^{i}_{\;j}\right. = \frac{\partial q^i}{\partial x^j}.
 ```
 
-Note that the Jacobian matrix and its inverse are not expressed in the same basis. Indeed, the inverse Jacobian of the transformation $`\{q^i\} \rightarrow \{x^j\}`$ is equivalent to the Jacobian of the transformation $`\{x^i\} \rightarrow \{q^j\}`$. As such it uses the basis on which the Jacobain of the transformation $`\{x^i\} \rightarrow \{q^j\}`$ would usually be expressed (here we used the fact that since $`\{\mathbf{e}_i\}`$ is a Cartesian basis one can write $`\mathbf{e}^i = \mathbf{e}_i `$).
+As shown above, the Jacobian matrix and its inverse are not expressed in the same basis. Indeed, the inverse Jacobian of the transformation $`\{q^i\} \rightarrow \{x^j\}`$ is equivalent to the Jacobian of the transformation $`\{x^i\} \rightarrow \{q^j\}`$. As such it uses the basis on which the Jacobian of the transformation $`\{x^i\} \rightarrow \{q^j\}`$ would usually be expressed.
 
 The metric tensor associated with the basis $`b_i`$ can be obtained from the Jacobian of the transformation $`\{x^i\} \rightarrow \{q^j\}`$ via the following equation:
 
