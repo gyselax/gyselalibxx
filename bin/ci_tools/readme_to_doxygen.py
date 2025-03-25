@@ -125,7 +125,7 @@ def format_equations(line, start_tag, end_tag, start_replace, end_replace, conte
 
     return line, idx
 
-root_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), '..'))
+root_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 if __name__ == '__main__':
     parser = ArgumentParser(description='Tool for translating Markdown files to a format that can be understood by Doxygen.')

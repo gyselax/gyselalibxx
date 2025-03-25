@@ -45,7 +45,7 @@ mirror_functions = {'create_mirror', 'create_mirror_and_copy', 'create_mirror_vi
 
 parallel_functions = ['parallel_for', 'parallel_for_each', 'parallel_transform_reduce']
 
-HOME_DIR = Path(__file__).parent.parent.absolute()
+HOME_DIR = Path(__file__).parent.parent.parent.absolute()
 global_folders = [HOME_DIR / f for f in ('src', 'simulations', 'tests')]
 
 auto_functions = set(['build_kokkos_layout', 'get', 'create_geometry_mirror_view', 'make_temporary_clone', 'discrete_space'])
