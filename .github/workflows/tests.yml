@@ -78,24 +78,19 @@ jobs:
           toolchain: toolchains/docker.gyselalibxx_env/tests_coverage_toolchain.cmake
       - name: Run tests
         uses: ./.github/actions/run_tests
-      - name: Look at coverage
-        run: |
-          find src -name '*.gcda' | xargs gcov
-          lcov -c --directory . --output-file lcov.info --gcov-tool gcov
-          lcov --ignore-errors unused -e lcov.info -o cleaned_coverage.txt "$(dirname $(pwd))/src/*"
-          lcov -l cleaned_coverage.txt
-        working-directory: ./build
-      #- name: Generate cleanly
-      #  uses: threeal/gcovr-action@v1.1.0
-      #  with:
-      #    xml-out: cobertura.xml
-      #- name: Annotate coverage
-      #  uses: ZainAmjad68/test-coverage-annotate@v0.8
-      #  with:
-      #    token: ${{ secrets.GITHUB_TOKEN }}
-      #    coverage-info-path: './build/lcov.info'
-      #    annotation-coverage: 'detailed'
-      #    annotation-type: 'all'
+      - name: Check Test Coverage
+        uses: threeal/gcovr-action@v1.1.0
+        with:
+          lcov-out: lcov.info
+          filter: ./src
+          working-directory: ./build
+      - name: Annotate coverage
+        uses: ZainAmjad68/test-coverage-annotate@v1.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          coverage-info-path: './build/lcov.info'
+          annotation-coverage: 'detailed'
+          annotation-type: 'lines'
 
   #set_draft_failing:
   #  runs-on: ubuntu-latest
