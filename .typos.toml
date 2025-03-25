@@ -7,7 +7,14 @@ extend-ignore-re = ["capitalize()",
                     "gko_exec->\\S*",
                     "on_finalize:",
                     "colors.Normalize"
+                    "spack concretize",
+                    "'center left'",
+                    "'center right'",
+                    "Gif-sur-Yvette"
                     ]
+extend-ignore-identifiers-re = [
+    "Comput. Phys. Commun."
+]
 
 [default.extend-words]
 # Don't correct these word (parts)
@@ -18,3 +25,12 @@ Ax = "Ax"
 ax = "ax"
 color = "color"
 colors = "colors"
+
+[files]
+extend-exclude = ["*.tex",
+                  "*.bib",
+                  "*.sty",
+                  "*.js",
+                  "*.svg",
+                  "*.css"
+                  ]
