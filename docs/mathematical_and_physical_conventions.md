@@ -111,7 +111,7 @@ M^T = m_{i}^{\;j} \mathbf{c}_j \otimes \mathbf{b}^i
 element-wise a transpose operation can therefore be written as:
 
 ```math
-(M^T)^i_{\;j} = m_{j}^{\;i}
+(M^T)^i_{\;j} = m\left._{j}^{\;i}\right.
 ```
 
 ## Metric tensor
