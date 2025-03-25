@@ -83,7 +83,7 @@ A = E\wedge e_z
 \end{bmatrix}. 
 ```
 
-- If $`r \leq \varepsilon`$, we linearise. The method is detailed in Zoni et al. (2019)[^1]. We use only the derivatives along $`r`$ at two linearly independent directions of $`\theta`$ : $`\theta_1`$ and $`\theta_2`$
+- If $`r \leq \varepsilon`$, we linearise. The method is detailed in Zoni et al. (2019) [^1]. We use only the derivatives along $`r`$ at two linearly independent directions of $`\theta`$ : $`\theta_1`$ and $`\theta_2`$
 
 ```math
 \partial_r \phi (0, \theta_1) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right] (0, \theta_1), \\
@@ -287,5 +287,5 @@ In the code, the O-point is differently treated. The domain is split between a d
 
 ## References
 
-[^1] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the
+[^1]: Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the
 method of characteristics and spline finite elements", <https://doi.org/10.1016/j.jcp.2019.108889>, Journal of Computational Physics, 2019.
