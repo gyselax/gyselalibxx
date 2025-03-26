@@ -82,14 +82,20 @@ jobs:
       - name: Check Test Coverage
         run: |
           pip install gcovr
-          gcovr --filter src --lcov lcov.info --merge-mode-functions=merge-use-line-0 build
-      - name: Annotate coverage
-        uses: ZainAmjad68/test-coverage-annotate@v1.2
+          gcovr --filter src --json cov.json --merge-mode-functions=merge-use-line-0 build
+      - name: Coverage annotations
+        uses: jgillick/test-coverage-annotations@v1.0.3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          coverage-info-path: './build/lcov.info'
-          annotation-coverage: 'detailed'
-          annotation-type: 'lines'
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          coverage: ./build/cov.json
+          only-changed-files: true
+      #- name: Annotate coverage
+      #  uses: ZainAmjad68/test-coverage-annotate@v1.2
+      #  with:
+      #    token: ${{ secrets.GITHUB_TOKEN }}
+      #    coverage-info-path: './build/lcov.info'
+      #    annotation-coverage: 'detailed'
+      #    annotation-type: 'lines'
 
   #set_draft_failing:
   #  runs-on: ubuntu-latest
