@@ -72,17 +72,17 @@ jobs:
         with:
           base_sha: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
           trigger_type: ${{ github.event_name }}
-      #- name: Build code
-      #  uses: ./.github/actions/build_code
-      #  with:
-      #    toolchain: toolchains/docker.gyselalibxx_env/tests_coverage_toolchain.cmake
-      #- name: Run tests
-      #  uses: ./.github/actions/run_tests
-      #  continue-on-error: true
-      #- name: Check Test Coverage
-      #  run: |
-      #    pip install gcovr
-      #    gcovr --filter src --json cov.json --merge-mode-functions=merge-use-line-0 build
+      - name: Build code
+        uses: ./.github/actions/build_code
+        with:
+          toolchain: toolchains/docker.gyselalibxx_env/tests_coverage_toolchain.cmake
+      - name: Run tests
+        uses: ./.github/actions/run_tests
+        continue-on-error: true
+      - name: Check Test Coverage
+        run: |
+          pip install gcovr
+          gcovr --filter src --json cov.json --merge-mode-functions=merge-use-line-0 build
       - name: Coverage annotations
         uses: jgillick/test-coverage-annotations@v1.0.3
         with:
