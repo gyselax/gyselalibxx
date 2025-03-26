@@ -95,7 +95,9 @@ template <class T, class... Dims>
 KOKKOS_INLINE_FUNCTION T
 dot_product(Vector<T, Dims...> const& a, Vector<T, typename Dims::Dual...> const& b)
 {
-    return ((ddcHelper::get<Dims>(a) * ddcHelper::get<typename Dims::Dual>(b)) + ...);
+    double untested_var = 3.0;
+    return ((ddcHelper::get<Dims>(a) * ddcHelper::get<typename Dims::Dual>(b)) + ...)
+           + untested_var;
 }
 
 
