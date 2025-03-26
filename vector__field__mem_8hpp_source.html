@@ -310,26 +310,20 @@ $(document).ready(function(){initNavTree('vector__field__mem_8hpp_source.html','
 <div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>};</div>
 </div>
 <div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span> </div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span><span class="keyword">template</span> &lt;</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>        <span class="keyword">class </span>IdxRangeType,</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>        <span class="keyword">class </span>VectorIndexSetType,</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>        <span class="keyword">class </span>MemSpace = Kokkos::DefaultExecutionSpace::memory_space&gt;</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span><span class="keyword">using </span><a class="code hl_class" href="classVectorFieldMem.html">DVectorFieldMem</a> = <a class="code hl_class" href="classVectorFieldMem.html">VectorFieldMem&lt;double, IdxRangeType, VectorIndexSetType, MemSpace&gt;</a>;</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span> </div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><span class="keyword">namespace </span>detail {</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span><span class="keyword">template</span> &lt;</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        <span class="keyword">class </span>NewMemorySpace,</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        <span class="keyword">class </span>ElementType,</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        <span class="keyword">class </span>SupportType,</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>        <span class="keyword">class </span>VectorIndexSetType,</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>        <span class="keyword">class </span>MemSpace&gt;</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span><span class="keyword">struct </span>OnMemorySpace&lt;</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>        NewMemorySpace,</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        <a class="code hl_class" href="classVectorFieldMem.html">VectorFieldMem</a>&lt;ElementType, SupportType, VectorIndexSetType, MemSpace&gt;&gt;</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>{</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    <span class="keyword">using </span>type = <a class="code hl_class" href="classVectorFieldMem.html">VectorFieldMem&lt;ElementType, SupportType, VectorIndexSetType, NewMemorySpace&gt;</a>;</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>};</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>} <span class="comment">// namespace detail</span></div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span><span class="keyword">namespace </span>detail {</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span><span class="keyword">template</span> &lt;</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>        <span class="keyword">class </span>NewMemorySpace,</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        <span class="keyword">class </span>ElementType,</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>        <span class="keyword">class </span>SupportType,</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        <span class="keyword">class </span>VectorIndexSetType,</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        <span class="keyword">class </span>MemSpace&gt;</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span><span class="keyword">struct </span>OnMemorySpace&lt;</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        NewMemorySpace,</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        <a class="code hl_class" href="classVectorFieldMem.html">VectorFieldMem</a>&lt;ElementType, SupportType, VectorIndexSetType, MemSpace&gt;&gt;</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>{</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>    <span class="keyword">using </span>type = <a class="code hl_class" href="classVectorFieldMem.html">VectorFieldMem&lt;ElementType, SupportType, VectorIndexSetType, NewMemorySpace&gt;</a>;</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>};</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>} <span class="comment">// namespace detail</span></div>
 <div class="ttc" id="aclassVectorFieldCommon_html"><div class="ttname"><a href="classVectorFieldCommon.html">VectorFieldCommon</a></div><div class="ttdef"><b>Definition</b> vector_field_common.hpp:10</div></div>
 <div class="ttc" id="aclassVectorFieldMem_html"><div class="ttname"><a href="classVectorFieldMem.html">VectorFieldMem</a></div><div class="ttdoc">Pre-declaration of VectorFieldMem.</div><div class="ttdef"><b>Definition</b> vector_field_mem.hpp:56</div></div>
 <div class="ttc" id="aclassVectorFieldMem_html_a044e87b9de9db522db0e3d2aaac2545d"><div class="ttname"><a href="classVectorFieldMem.html#a044e87b9de9db522db0e3d2aaac2545d">VectorFieldMem::VectorFieldMem</a></div><div class="ttdeci">VectorFieldMem()=default</div><div class="ttdoc">Empty VectorFieldMem.</div></div>
