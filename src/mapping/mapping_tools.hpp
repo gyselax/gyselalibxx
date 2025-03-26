@@ -126,41 +126,25 @@ class Defines2DJacobian
                         "The jacobian_matrix method of a 2D Mapping must take a Coordinate as an "
                         "argument and return a 2D Tensor.");
             }
-            if (!std::is_invocable_r_v<
-                        double,
-                        jacobian_11<Type>,
-                        Type,
-                        CoordinateType>) {
+            if (!std::is_invocable_r_v<double, jacobian_11<Type>, Type, CoordinateType>) {
                 return std::make_tuple(
                         false,
                         "The jacobian_11 method of a 2D Mapping must take a Coordinate as an "
                         "argument and return a double.");
             }
-            if (!std::is_invocable_r_v<
-                        double,
-                        jacobian_12<Type>,
-                        Type,
-                        CoordinateType>) {
+            if (!std::is_invocable_r_v<double, jacobian_12<Type>, Type, CoordinateType>) {
                 return std::make_tuple(
                         false,
                         "The jacobian_12 method of a 2D Mapping must take a Coordinate as an "
                         "argument and return a double.");
             }
-            if (!std::is_invocable_r_v<
-                        double,
-                        jacobian_21<Type>,
-                        Type,
-                        CoordinateType>) {
+            if (!std::is_invocable_r_v<double, jacobian_21<Type>, Type, CoordinateType>) {
                 return std::make_tuple(
                         false,
                         "The jacobian_21 method of a 2D Mapping must take a Coordinate as an "
                         "argument and return a double.");
             }
-            if (!std::is_invocable_r_v<
-                        double,
-                        jacobian_22<Type>,
-                        Type,
-                        CoordinateType>) {
+            if (!std::is_invocable_r_v<double, jacobian_22<Type>, Type, CoordinateType>) {
                 return std::make_tuple(
                         false,
                         "The jacobian_22 method of a 2D Mapping must take a Coordinate as an "

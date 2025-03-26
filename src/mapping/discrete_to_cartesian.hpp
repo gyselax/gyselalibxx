@@ -205,7 +205,7 @@ public:
             // Component (2,1), i.e dy/dr
             return m_spline_evaluator
                     .deriv_dim_1(coord, get_const_field(m_y_spline_representation));
-        } else { 
+        } else {
             // Component (2,2), i.e dy/dtheta
             return m_spline_evaluator
                     .deriv_dim_2(coord, get_const_field(m_y_spline_representation));
