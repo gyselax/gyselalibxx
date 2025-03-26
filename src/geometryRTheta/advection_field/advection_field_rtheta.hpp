@@ -273,13 +273,11 @@ private:
                 CoordRTheta const coord_1_0(0, th1);
                 CoordRTheta const coord_2_0(0, th2);
 
-                double const dr_x_1
-                        = m_mapping.template jacobian<X, R_cov>(coord_1_0); // dr_x (0, th1)
-                double const dr_y_1
-                        = m_mapping.template jacobian<Y, R_cov>(coord_1_0); // dr_y (0, th1)
+                double const dr_x_1 = m_mapping.template jacobian_component<X,R_cov>(coord_1_0); // dr_x (0, th1)
+                double const dr_y_1 = m_mapping.template jacobian_component<Y,R_cov>(coord_1_0); // dr_y (0, th1)
 
-                double const dr_x_2 = m_mapping.jacobian<X, R_cov>(coord_2_0); // dr_x (0, th2)
-                double const dr_y_2 = m_mapping.jacobian<Y, R_cov>(coord_2_0); // dr_y (0, th2)
+                double const dr_x_2 = m_mapping.template jacobian_component<X,R_cov>(coord_2_0); // dr_x (0, th2)
+                double const dr_y_2 = m_mapping.template jacobian_component<Y,R_cov>(coord_2_0); // dr_y (0, th2)
 
                 double deriv_r_phi_1 = evaluator.deriv_dim_1(
                         coord_1_0,
@@ -512,15 +510,11 @@ private:
         CoordRTheta const coord_1_0(0, th1);
         CoordRTheta const coord_2_0(0, th2);
 
-        double const dr_x_1
-                = m_mapping.template jacobian_component<X, R_cov>(coord_1_0); // dr_x (0, th1)
-        double const dr_y_1
-                = m_mapping.template jacobian_component<Y, R_cov>(coord_1_0); // dr_y (0, th1)
+        double const dr_x_1 = m_mapping.template jacobian_component<X,R_cov>(coord_1_0); // dr_x (0, th1)
+        double const dr_y_1 = m_mapping.template jacobian_component<Y,R_cov>(coord_1_0); // dr_y (0, th1)
 
-        double const dr_x_2
-                = m_mapping.template jacobian_component<X, R_cov>(coord_2_0); // dr_x (0, th2)
-        double const dr_y_2
-                = m_mapping.template jacobian_component<Y, R_cov>(coord_2_0); // dr_y (0, th2)
+        double const dr_x_2 = m_mapping.template jacobian_component<X,R_cov>(coord_2_0); // dr_x (0, th2)
+        double const dr_y_2 = m_mapping.template jacobian_component<Y,R_cov>(coord_2_0); // dr_y (0, th2)
 
         double const deriv_r_phi_1
                 = evaluator.deriv_dim_1(coord_1_0, get_const_field(electrostatic_potential_coef));
