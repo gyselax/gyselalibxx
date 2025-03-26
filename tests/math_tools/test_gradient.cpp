@@ -68,6 +68,7 @@ public:
     {
         double const r = ddc::get<R>(coord_rth);
         double const theta = ddc::get<Theta>(coord_rth);
+
         return ipow(r, 2) * Kokkos::cos(theta) + 2 * ipow(r, 3) * Kokkos::sin(theta);
     }
 
@@ -81,7 +82,7 @@ public:
      *
      * @return A vector type representing the value of the gradient.
      */
-    KOKKOS_INLINE_FUNCTION DVectorType gradient(CoordRTheta const coord_rth) const
+    KOKKOS_FUNCTION DVectorType gradient(CoordRTheta const coord_rth) const
     {
         double const r = ddc::get<R>(coord_rth);
         double const theta = ddc::get<Theta>(coord_rth);
@@ -101,13 +102,14 @@ public:
      *
      * @return A vector type representing the value of the partial derivatives.
      */
-    KOKKOS_INLINE_FUNCTION DVectorCovType partial_derivatives(CoordRTheta const coord_rth) const
+    KOKKOS_FUNCTION DVectorCovType partial_derivatives(CoordRTheta const coord_rth) const
     {
         double const r = ddc::get<R>(coord_rth);
         double const theta = ddc::get<Theta>(coord_rth);
         DVectorCovType derivatives(
                 2 * r * Kokkos::cos(theta) + 6 * ipow(r, 2) * Kokkos::sin(theta),
                 -ipow(r, 2) * Kokkos::sin(theta) + 2 * ipow(r, 3) * Kokkos::cos(theta));
+
         return derivatives;
     }
 };
