@@ -9,7 +9,7 @@
 
 
 /**
- * @brief A class which implements a gradient operator 
+ * @brief A class which implements a gradient operator.
  * @tparam MetricTensorType A type representing a metric tensor.
  */
 template <class MetricTensorType>
