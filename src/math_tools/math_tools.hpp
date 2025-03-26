@@ -8,6 +8,7 @@
 
 #include <Kokkos_Core.hpp>
 
+#include "indexed_tensor.hpp"
 #include "tensor.hpp"
 #include "vector_field.hpp"
 
@@ -55,9 +56,9 @@ sum(Kokkos::mdspan<
 template <class ElementType, class VectorIndexSetType>
 KOKKOS_INLINE_FUNCTION ElementType
 norm(Tensor<ElementType, VectorIndexSetType, VectorIndexSetType> const& metric,
-     Vector<ElementType, vector_index_set_dual_t<VectorIndexSetType>> const& vec)
+     Tensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>> const& vec)
 {
-    return tensor_mul(index<'i'>(vec), index<'i', 'j'>(metric), index<'j'>(vec));
+    return Kokkos::sqrt(tensor_mul(index<'i'>(vec), index<'i', 'j'>(metric), index<'j'>(vec)));
 }
 
 template <
@@ -130,13 +131,6 @@ inline std::size_t factorial(std::size_t f)
         r *= i;
     }
     return r;
-}
-
-template <class T, class... Dims>
-KOKKOS_INLINE_FUNCTION T
-dot_product(Vector<T, Dims...> const& a, Vector<T, typename Dims::Dual...> const& b)
-{
-    return ((ddcHelper::get<Dims>(a) * ddcHelper::get<typename Dims::Dual>(b)) + ...);
 }
 
 
