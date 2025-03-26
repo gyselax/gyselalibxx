@@ -15,29 +15,8 @@
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 
-TEST(MathTools, VectorNorm)
-{
-    double constexpr TOL(1e-14);
-
-    // Build an arbitrary metric tensor
-    using IndexSetCov = VectorIndexSet<R_cov, Theta_cov>;
-    DTensor<IndexSetCov, IndexSetCov> metric_tensor;
-    ddcHelper::get<R_cov, R_cov>(metric_tensor) = 1;
-    ddcHelper::get<R_cov, Theta_cov>(metric_tensor) = 2;
-    ddcHelper::get<Theta_cov, R_cov>(metric_tensor) = 3;
-    ddcHelper::get<Theta_cov, Theta_cov>(metric_tensor) = 4;
-
-    DVector<R, Theta> test_vec1(1.0, 0.0);
-    ASSERT_NEAR(norm(metric_tensor, test_vec1), 1, TOL);
-
-    DVector<R, Theta> test_vec2(0.0, 1.0);
-    ASSERT_NEAR(norm(metric_tensor, test_vec2), 2, TOL);
-
-    DVector<R, Theta> test_vec3(1.0, 1.0);
-    ASSERT_NEAR(norm(metric_tensor, test_vec3), std::sqrt(10), TOL);
-}
-
-TEST(MathTools, VectorFieldNorm)
+namespace {
+void vector_field_norm_test()
 {
     using IndexSet = VectorIndexSet<R, Theta>;
     double constexpr TOL(1e-14);
@@ -85,4 +64,32 @@ TEST(MathTools, VectorFieldNorm)
         double expected_norm = std::sqrt(1.0 + 1.5 * 1.5 * (r * r));
         ASSERT_NEAR(expected_norm, norm_vals_host(idx), TOL);
     });
+}
+} // namespace
+
+TEST(MathTools, VectorNorm)
+{
+    double constexpr TOL(1e-14);
+
+    // Build an arbitrary metric tensor
+    using IndexSetCov = VectorIndexSet<R_cov, Theta_cov>;
+    DTensor<IndexSetCov, IndexSetCov> metric_tensor;
+    ddcHelper::get<R_cov, R_cov>(metric_tensor) = 1;
+    ddcHelper::get<R_cov, Theta_cov>(metric_tensor) = 2;
+    ddcHelper::get<Theta_cov, R_cov>(metric_tensor) = 3;
+    ddcHelper::get<Theta_cov, Theta_cov>(metric_tensor) = 4;
+
+    DVector<R, Theta> test_vec1(1.0, 0.0);
+    ASSERT_NEAR(norm(metric_tensor, test_vec1), 1, TOL);
+
+    DVector<R, Theta> test_vec2(0.0, 1.0);
+    ASSERT_NEAR(norm(metric_tensor, test_vec2), 2, TOL);
+
+    DVector<R, Theta> test_vec3(1.0, 1.0);
+    ASSERT_NEAR(norm(metric_tensor, test_vec3), std::sqrt(10), TOL);
+}
+
+TEST(MathTools, VectorFieldNorm)
+{
+    vector_field_norm_test();
 }
