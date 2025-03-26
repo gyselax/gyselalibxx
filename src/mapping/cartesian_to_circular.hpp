@@ -171,6 +171,9 @@ public:
     template <class IndexTag1, class IndexTag2>
     KOKKOS_INLINE_FUNCTION double jacobian_component(Coord<X, Y> const& coord) const
     {
+        static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<X, Y>>);
+        static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<R_cov, Theta_cov>>);
+
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
         if constexpr (std::is_same_v<IndexTag1, X> && std::is_same_v<IndexTag2, R_cov>) {

@@ -193,6 +193,9 @@ public:
     template <class IndexTag1, class IndexTag2>
     KOKKOS_INLINE_FUNCTION double jacobian_component(Coord<R, Theta> coord) const
     {
+        static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<X, Y>>);
+        static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<R_cov, Theta_cov>>);
+
         if constexpr (std::is_same_v<IndexTag1, X> && std::is_same_v<IndexTag2, R_cov>) {
             // Component (1,1), i.e dx/dr
             return m_spline_evaluator

@@ -2,6 +2,7 @@
 #pragma once
 
 #include <numeric>
+#include <sstream>
 
 #include <ddc/ddc.hpp>
 
@@ -60,6 +61,14 @@ public:
             int comm_size,
             int rank)
     {
+        distributed_sub_idx_range distrib_idx_range(global_idx_range);
+        if (distrib_idx_range.size() % comm_size != 0) {
+            std::ostringstream error_msg;
+            error_msg << "The provided index range cannot be split equally over the specified "
+                         "number of MPI ranks ("
+                      << distrib_idx_range.extents() << " is not divisible by " << comm_size << ")";
+            throw std::runtime_error(error_msg.str());
+        }
         return internal_distribute_idx_range(global_idx_range, comm_size, rank);
     }
 

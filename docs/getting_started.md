@@ -32,19 +32,18 @@ By separating operators (behaviour) from data structures (data), you ensure clar
 
 For example consider the case of a semi-Lagrangian advection. The operator is similar to a function which modifies a data structure containing the distribution function. By using a class the method used to interpolate the function (e.g. spline interpolation or Lagrange interpolation) can be specified without duplicating code.
 
-
 ---
 
 ## Navigating the Gyselalib++ Codebase
 
 The gyselalib++ codebase is organised into several folders. The main folders of interest are:
+
 - **src/** : This folder contains the source code for the library. It contains folders grouping the code by subject. The `src/` folder and each sub-folder contains a `README.md` detailing its contents. It is simple to navigate within this documentation : [src](../src/README.md)
-    - **geometry...** : The `src/` folder contains sub-folders whose names begin with `geometry`. These sub-folders contain code which is specific to a given geometry. Each geometry is defined by the dimensions on which its equations are defined. In these folders you will also find sub-folders grouping the code by subject. Each `geometry...` folder will contain a folder called `geometry` containing a file `geometry.hpp`. This file contains type aliases which are useful for this geometry. This includes the definition of the classes representing the dimensions. If a `geometry.hpp` is included in a file then this file can only be used for that specific geometry. Therefore files in a `geometry...` folder cannot be used for other geometries even if the two appear to be compatible at first glance (e.g. files from the `geometryRTheta` folder cannot be used for the `geometryAxi` simulations, files from the `geometryXVx` folder cannot be used for the `geometryXYVxVy` simulations).
+  - **geometry...** : The `src/` folder contains sub-folders whose names begin with `geometry`. These sub-folders contain code which is specific to a given geometry. Each geometry is defined by the dimensions on which its equations are defined. In these folders you will also find sub-folders grouping the code by subject. Each `geometry...` folder will contain a folder called `geometry` containing a file `geometry.hpp`. This file contains type aliases which are useful for this geometry. This includes the definition of the classes representing the dimensions. If a `geometry.hpp` is included in a file then this file can only be used for that specific geometry. Therefore files in a `geometry...` folder cannot be used for other geometries even if the two appear to be compatible at first glance (e.g. files from the `geometryRTheta` folder cannot be used for the `geometryAxi` simulations, files from the `geometryXVx` folder cannot be used for the `geometryXYVxVy` simulations).
 
 - **tests/** : This folder contains the unit tests for the library. The folder structure is similar to that found in the `src/` folder.
 
 - **simulations/** : This folder contains examples of simulations. In order to use the gyselalib++ library for research applications we usually create a new repository which contains this repository as a sub-module, however there are still some simulations hosted in this repository. This is notably the case for simulations which have known properties that can be used as end-to-end tests. For example the Landau damping case.
-
 
 ---
 
@@ -64,8 +63,6 @@ The gyselalib++ codebase is organised into several folders. The main folders of 
 
    - Start with a small, well-scoped issue to familiarise yourself with the contribution process and code review workflow.
 
-
 ---
 
 We hope this guide sets you on the right path to contributing to gyselalib++. Happy coding!
-

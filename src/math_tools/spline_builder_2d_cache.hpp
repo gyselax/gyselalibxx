@@ -1,10 +1,5 @@
 
 // SPDX-License-Identifier: MIT
-/**
- * @file spline_builder_2d_cache.hpp
- * File containing a class to store the spline builder coefficients and recompute them when required.
- */
-
 #pragma once
 
 #include <ddc/ddc.hpp>
@@ -86,6 +81,16 @@ public:
             m_spline_builder(get_field(m_spline_coeffs), field_values);
         }
 
+        return get_const_field(m_spline_coeffs);
+    }
+
+    /**
+    * @brief Returns a constant field reference to the spline coefficients.
+    *
+    * @return A reference to a constant field that contains the spline coefficients.
+    */
+    DConstFieldSplineCoeffs operator()() const
+    {
         return get_const_field(m_spline_coeffs);
     }
 };
