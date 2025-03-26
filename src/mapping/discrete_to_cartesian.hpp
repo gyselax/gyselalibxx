@@ -191,7 +191,7 @@ public:
      * @see SplineEvaluator2D
      */
     template <class IndexTag1, class IndexTag2>
-    KOKKOS_INLINE_FUNCTION double jacobian_component(Coord<R, Theta> coord)
+    KOKKOS_INLINE_FUNCTION double jacobian_component(Coord<R, Theta> coord) const
     {
         if constexpr (std::is_same_v<IndexTag1, X> && std::is_same_v<IndexTag2, R_cov>) {
             // Component (1,1), i.e dx/dr
@@ -205,7 +205,7 @@ public:
             // Component (2,1), i.e dy/dr
             return m_spline_evaluator
                     .deriv_dim_1(coord, get_const_field(m_y_spline_representation));
-        } else if constexpr (std::is_same_v<IndexTag1, Y> && std::is_same_v<IndexTag2, Theta_cov>) {
+        } else { 
             // Component (2,2), i.e dy/dtheta
             return m_spline_evaluator
                     .deriv_dim_2(coord, get_const_field(m_y_spline_representation));

@@ -169,7 +169,7 @@ public:
      * @return A double with the value of the (1,1) coefficient of the Jacobian matrix.
      */
     template <class IndexTag1, class IndexTag2>
-    KOKKOS_INLINE_FUNCTION double jacobian_component(Coord<X, Y> const& coord)
+    KOKKOS_INLINE_FUNCTION double jacobian_component(Coord<X, Y> const& coord) const
     {
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
@@ -182,7 +182,7 @@ public:
         } else if constexpr (std::is_same_v<IndexTag1, Y> && std::is_same_v<IndexTag2, R_cov>) {
             // Component (2,1), i.e dy/dr
             return -y / Kokkos::pow(x * x + y * y, 2.);
-        } else if constexpr (std::is_same_v<IndexTag1, Y> && std::is_same_v<IndexTag2, Theta_cov>) {
+        } else {
             // Component (2,2), i.e dy/dtheta
             return x / Kokkos::pow(x * x + y * y, 2.);
         }

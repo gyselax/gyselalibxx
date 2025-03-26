@@ -128,7 +128,7 @@ class Defines2DJacobian
             }
             if (!std::is_invocable_r_v<
                         double,
-                        decltype(&Type::jacobian_11),
+                        jacobian_11<Type>,
                         Type,
                         CoordinateType>) {
                 return std::make_tuple(
@@ -138,7 +138,7 @@ class Defines2DJacobian
             }
             if (!std::is_invocable_r_v<
                         double,
-                        decltype(&Type::jacobian_12),
+                        jacobian_12<Type>,
                         Type,
                         CoordinateType>) {
                 return std::make_tuple(
@@ -148,7 +148,7 @@ class Defines2DJacobian
             }
             if (!std::is_invocable_r_v<
                         double,
-                        decltype(&Type::jacobian_21),
+                        jacobian_21<Type>,
                         Type,
                         CoordinateType>) {
                 return std::make_tuple(
@@ -158,7 +158,7 @@ class Defines2DJacobian
             }
             if (!std::is_invocable_r_v<
                         double,
-                        decltype(&Type::jacobian_22),
+                        jacobian_22<Type>,
                         Type,
                         CoordinateType>) {
                 return std::make_tuple(

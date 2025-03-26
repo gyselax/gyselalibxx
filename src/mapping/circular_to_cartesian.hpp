@@ -184,7 +184,7 @@ public:
         } else if constexpr (std::is_same_v<IndexTag1, Y> && std::is_same_v<IndexTag2, R_cov>) {
             //Compute the (2,1) coefficient of the Jacobian matrix, i.e J^y_r.
             return Kokkos::sin(theta);
-        } else if constexpr (std::is_same_v<IndexTag1, Y> && std::is_same_v<IndexTag2, Theta_cov>) {
+        } else { 
             //Compute the (2,2) coefficient of the Jacobian matrix, i.e J^y_theta.
             const double r = ddc::get<R>(coord);
             return r * Kokkos::cos(theta);
