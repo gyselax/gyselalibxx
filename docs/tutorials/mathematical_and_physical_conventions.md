@@ -143,19 +143,21 @@ An easy way to get the above formulas right is to remember that the metric tenso
 
 ### Curvilinear to Cartesian
 
-The *Jacobian* matrix $`J`$ associated with the transformation from the curvilinear coordinates $`\{q^i\}`$ to the Cartesian coordinates $`\{x^i\}`$ is defined from its components $`J\left.^{i}_{\;j}\right.`$ as
+The *Jacobian* matrix $`J`$ associated with the transformation from the curvilinear coordinates $`\{q^i\}`$ to the Cartesian coordinates $`\{x^i\}`$ is defined from its components $`J\left.^{i}_{\;j}\right.`$ on the basis $`\mathbf{e}_i \otimes \mathbf{b}^j`$ as:
 
 ```math
 J\left.^{i}_{\;j}\right. = \frac{\partial x^i}{\partial q^j},
 ```
 
-while the inverse Jacobian $`J^{-1}`$ is defined by its components $`J^{-1}\left.^{i}_{\;j}\right.`$ as
+while the inverse Jacobian $`J^{-1}`$ is defined by its components $`J^{-1}\left.^{i}_{\;j}\right.`$ on the basis $`\mathbf{b}_j \otimes \mathbf{e}_i`$ as
 
 ```math
 J^{-1}\left.^{i}_{\;j}\right. = \frac{\partial q^i}{\partial x^j}.
 ```
 
-Both Jacobian and metric tensor relate to each other as
+As shown above, the Jacobian matrix and its inverse are not expressed in the same basis. Indeed, the inverse Jacobian of the transformation $`\{q^i\} \rightarrow \{x^j\}`$ is equivalent to the Jacobian of the transformation $`\{x^i\} \rightarrow \{q^j\}`$. As such it uses the basis on which the Jacobian of the transformation $`\{x^i\} \rightarrow \{q^j\}`$ would usually be expressed.
+
+The metric tensor associated with the basis $`b_i`$ can be obtained from the Jacobian of the transformation $`\{x^i\} \rightarrow \{q^j\}`$ via the following equation:
 
 ```math
 G = J^{T}J.
@@ -179,30 +181,57 @@ Note that relating the components of the vector $`\mathbf{A}`$ expressed in the 
 A^i_\text{c} = J\left.^{i}_{\;j}\right. g^{jk}A_k.
 ```
 
+however a simplification can be made using the fact that $G=J^TJ$, thus $G^{-1}=J^{-1}J^{-T}$ (where $J^{-T}$ represents the transpose of the inverse of the Jacobian) and $JG^{-1} = JJ^{-1}J^{-T} = J^{-T}$. Thus the components of the vector $`\mathbf{A}`$ expressed in the covariant basis $`\{\mathbf{b}^i\}`$ can be related to the components of the vector $`\mathbf{A}`$ expressed in the Cartesian basis as:
+
+```math
+A^i_\text{c} = {A_i}_\text{c} = (J^{-T})_i^{\;j} A_j = (J^{-1})^j_{\;i} A_j
+```
+
+Note that in the above expression the $`J^{-T}`$ tensor has been expressed in the $`\mathbf{e}_i \otimes \mathbf{b}_j`$ basis.
+
 ### Curvilinear to curvilinear
 
-Let us now consider the more general case where one seeks to relate two curvilinear coordinate systems $`\{q^i\}`$ and $`\{p^i\}`$. We denote by $`J\{q\to p\}`$ the Jacobian of the transformation from the coordinate system $`\{q^i\}`$ to $`\{p^i\}`$. The components of the Jacobian and of its inverse are defined similarly as above as
+Let us now consider the more general case where one seeks to relate two curvilinear coordinate systems $`\{q^i\}`$ and $`\{p^i\}`$. Let us also write $`\{\mathbf{b}_i\}`$ (resp. $`\{\mathbf{b}^i\}`$) the contravariant (resp. covariant) vector basis associated with coordinates $`\{q^i\}`$, and $`\{\mathbf{c}_i\}`$ (resp. $`\{\mathbf{c}^i\}`$) the contravariant (resp. covariant) vector basis associated with coordinates $`\{p^i\}`$.
+We denote by $`J_{\{q\to p\}}`$ the Jacobian of the transformation from the coordinate system $`\{q^i\}`$ to $`\{p^i\}`$. The components of the Jacobian on the basis $`\mathbf{c}_i \otimes \mathbf{b}^j`$ and the components of its inverse on the basis $`\mathbf{b}_i \otimes \mathbf{c}^j`$ are defined similarly to above, as:
 
 ```math
-J\left.^{i}_{\;j}\right.\{q\to p\} = \frac{\partial p^i}{\partial q^j}, \quad J^{-1}\left.^{i}_{\;j}\right.\{p\to q\} = \frac{\partial q^i}{\partial p^j}.
+(J_{\{q\to p\}})^{i}_{\;j} = \frac{\partial p^i}{\partial q^j}, \quad (J_{\{q\to p\}})^{-1}\left.^{i}_{\;j}\right. = \frac{\partial q^i}{\partial p^j}. 
 ```
 
-Here one may note that $`J^{-1}\left.^{i}_{\;j}\right.\{p\to q\} = J\left.^{i}_{\;j}\right.\{q\to p\}`$. Let us now write $`\{\mathbf{b}_i\}`$ (resp. $`\{\mathbf{b}^i\}`$) the contravariant (resp. covariant) vector basis associated with coordinates $`\{q^i\}`$, and $`\{\mathbf{c}_i\}`$ (resp. $`\{\mathbf{c}^i\}`$) the contravariant (resp. covariant) vector basis associated with coordinates $`\{p^i\}`$. Let us now express a vector $`\mathbf{A}`$ in these bases as
+Here one may note that $`(J_{\{q\to p\}})^{-1}\left.^{i}_{\;j}\right. = (J_{\{p\to q\}})^{i}_{\;j}`$.  Let us now express a vector $`\mathbf{A}`$ in these bases as
 
 ```math
-\mathbf{A} = A^i\{p\} \mathbf{b}_i = A_i\{p\} \mathbf{b}^i = A^i\{q\} \mathbf{c}_i = A_i\{q\} \mathbf{c}^i,
+\mathbf{A} = A^i_{\{p\}} \mathbf{b}_i = A_{\{p\}i} \mathbf{b}^i = A^i_{\{q\}} \mathbf{c}_i = A_{\{q\}i} \mathbf{c}^i, 
 ```
 
-where $`A^i\{p\}`$ (resp. $`A_i\{p\}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`\mathbf{A}`$ expressed in the vector basis associated with coordinates $`\{p^i\}`$, and similarly $`A^i\{q\}`$ (resp. $`A_i\{q\}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`\mathbf{A}`$ expressed in the vector basis associated with coordinates $`\{q^i\}`$. We have
+where $`A^i_{\{p\}}`$ (resp. $`A_{\{p\}i}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`\mathbf{A}`$ expressed in the vector basis associated with coordinates $`\{p^i\}`$, and similarly $`A^i_{\{q\}}`$ (resp. $`A_{\{q\}i}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`\mathbf{A}`$ expressed in the vector basis associated with coordinates $`\{q^i\}`$. We have
 
 ```math
-A^i\{p\} = J\left.^{i}_{\;j}\right.\{q\to p\} A^j\{q\}.
+A^i_{\{p\}} = (J_{\{q\to p\}})^{i}_{\;j} A^j_{\{q\}}.
 ```
 
-By introducing the metric tensors $`G\{p\}`$  and $`G\{q\}`$ associated with both curvilinear coordinates system, and by writing $`g_{ij}\{p\}`$ and $`g_{ij}\{q\}`$ their elements ($`g^{ij}\{p\}`$ and $`g^{ij}\{q\}`$ the elements of their inverse) one relates the components of $`\mathbf{A}`$ expressed in covariant vector basis associated with both curvilinear coordinates system as
+By introducing the metric tensors $`G_{\{p\}}`$  and $`G_{\{q\}}`$ associated with both curvilinear coordinates system, and by writing $`g_{\{p\}ij}`$ and $`g_{\{q\}ij}`$ their elements ($`g^{ij}_{\{p\}}`$ and $`g^{ij}_{\{q\}}`$ the elements of their inverse) one relates the components of $`\mathbf{A}`$ expressed in the covariant vector bases associated with both curvilinear coordinates system as:
 
 ```math
-g^{ik}\{p\}A_k\{p\} = J\left.^{i}_{\;j}\right.\{q\to p\}g^{jl}\{p\} A_l\{q\}.
+g^{ik}_{\{p\}}A_{\{p\}k} = (J_{\{q\to p\}})^{i}_{\;j}g^{jl}_{\{q\}} A_{\{q\}l}.
+```
+
+The metric tensor associated with the basis $`\mathbf{c}_i`$ can be obtained from the Jacobian of the transformation $`\{q^i\} \rightarrow \{p^j\}`$ and the metric tensor associated with the basis $`b_j`$ via the following equation:
+
+```math
+g_{{il}\{p\}} = (J_{\{q\to p\}})^T\left._{i}^{\;j}\right. g_{\{q\}jk} (J_{\{q\to p\}})\left.^{k}_{\;\;l}\right. = (J_{\{p\to q\}})\left.^{j}_{\;\;i}\right. g_{\{q\}jk} (J_{\{p\to q\}})\left.^{k}_{\;\;l}\right.
+```
+
+The metric tensor associated with the basis $`\mathbf{b}_i`$ can be obtained from the Jacobian of the transformation $`\{p^i\} \rightarrow \{q^j\}`$ and the metric tensor associated with the basis $`\mathbf{c}_j`$ via the following equation:
+
+```math
+g_{il}\{q\} = (J_{\{p\to q\}})^T\left._{i}^{\;j}\right. g_{\{p\}jk} (J_{\{p\to q\}})\left.^{k}_{\;\;l}\right. = (J_{\{q\to p\}})^{-1}\left.^{j}_{\;\;i}\right. g_{\{p\}jk} (J_{\{q\to p\}})^{-T}\left.^{k}_{\;\;l}\right.
+```
+
+These expressions can be used to relates the components of $`\mathbf{A}`$ expressed in the covariant vector bases associated with both curvilinear coordinates system in another way. Using the above expressions we can see that $`J_{\{q\to p\}}G_{\{q\}}^{-1}=G_{\{p\}}^{-1}J_{\{q\to p\}}^{-T}`$. This gives us:
+
+```math
+A_{\{p\}i} = (J_{\{q\to p\}})^{-T}\left._{\;\;i}^j\right. A_{\{q\}j} = (J_{\{q\to p\}})^{-1}\left.^j_{\;\;i}\right.A_{\{q\}j} = (J_{\{p\to q\}})^j_{\;\;i} A_{\{q\}j}.
 ```
 
 ## Differential operators
