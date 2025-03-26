@@ -503,4 +503,23 @@ auto create_mirror_view_and_copy(
         return field_alloc;
     }
 }
+
+template <
+        class ElementType,
+        class IdxRangeType,
+        class... Dims,
+        class MemorySpace,
+        class LayoutStridedPolicy>
+KOKKOS_INLINE_FUNCTION void assign_vector_field_element(
+        VectorField<
+                ElementType,
+                IdxRangeType,
+                VectorIndexSet<Dims...>,
+                MemorySpace,
+                LayoutStridedPolicy> field,
+        typename IdxRangeType::discrete_element_type idx,
+        Vector<ElementType, Dims...> vector)
+{
+    ((ddcHelper::get<Dims>(field)(idx) = ddcHelper::get<Dims>(vector)), ...);
+}
 } // namespace ddcHelper
