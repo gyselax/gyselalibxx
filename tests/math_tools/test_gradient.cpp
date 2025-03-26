@@ -64,7 +64,7 @@ public:
      *
      * @return The value of the function at the coordinate.
      */
-    KOKKOS_FUNCTION double operator()(CoordRTheta const coord_rth) const
+    KOKKOS_INLINE_FUNCTION double operator()(CoordRTheta const coord_rth) const
     {
         double const r = ddc::get<R>(coord_rth);
         double const theta = ddc::get<Theta>(coord_rth);
