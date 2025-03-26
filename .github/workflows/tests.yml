@@ -87,7 +87,7 @@ jobs:
         uses: jgillick/test-coverage-annotations@v1.0.3
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}
-          coverage: ./build/cov.json
+          coverage: ./cov.json
           only-changed-files: true
       #- name: Annotate coverage
       #  uses: ZainAmjad68/test-coverage-annotate@v1.2
