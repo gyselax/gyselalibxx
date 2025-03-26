@@ -4,6 +4,7 @@
 
 #include "ddc_aliases.hpp"
 #include "indexed_tensor.hpp"
+#include "inverse_jacobian_matrix.hpp"
 #include "mapping_tools.hpp"
 #include "tensor.hpp"
 #include "vector_index_tools.hpp"
@@ -22,10 +23,6 @@ class MetricTensorEvaluator
 
     using Dims = ddc::to_type_seq_t<typename Mapping::CoordArg>;
     using Dims_cov = vector_index_set_dual_t<Dims>;
-    using Dim0 = ddc::type_seq_element_t<0, Dims>;
-    using Dim1 = ddc::type_seq_element_t<1, Dims>;
-    using Dim0_cov = typename Dim0::Dual;
-    using Dim1_cov = typename Dim1::Dual;
 
 public:
     /// The type of a contravariant vector associated with this mapping.
@@ -59,17 +56,8 @@ public:
      */
     KOKKOS_FUNCTION DTensor<Dims_cov, Dims_cov> operator()(PositionCoordinate const& coord) const
     {
-        const double J_11 = m_mapping.jacobian_11(coord);
-        const double J_12 = m_mapping.jacobian_12(coord);
-        const double J_21 = m_mapping.jacobian_21(coord);
-        const double J_22 = m_mapping.jacobian_22(coord);
-        DTensor<Dims_cov, Dims_cov> metric_tensor;
-        ddcHelper::get<Dim0_cov, Dim0_cov>(metric_tensor) = (J_11 * J_11 + J_21 * J_21);
-        ddcHelper::get<Dim0_cov, Dim1_cov>(metric_tensor) = (J_11 * J_12 + J_21 * J_22);
-        ddcHelper::get<Dim1_cov, Dim0_cov>(metric_tensor) = (J_11 * J_12 + J_21 * J_22);
-        ddcHelper::get<Dim1_cov, Dim1_cov>(metric_tensor) = (J_12 * J_12 + J_22 * J_22);
-
-        return metric_tensor;
+        Tensor J = m_mapping.jacobian_matrix(coord);
+        return tensor_mul(index<'j', 'i'>(J), index<'j', 'k'>(J));
     }
 
     /**
@@ -82,18 +70,8 @@ public:
      */
     KOKKOS_FUNCTION DTensor<Dims, Dims> inverse(PositionCoordinate const& coord) const
     {
-        const double J_11 = m_mapping.jacobian_11(coord);
-        const double J_12 = m_mapping.jacobian_12(coord);
-        const double J_21 = m_mapping.jacobian_21(coord);
-        const double J_22 = m_mapping.jacobian_22(coord);
-        const double jacob_2 = m_mapping.jacobian(coord) * m_mapping.jacobian(coord);
-
-        DTensor<Dims, Dims> inverse_metric_tensor;
-        ddcHelper::get<Dim0, Dim0>(inverse_metric_tensor) = (J_12 * J_12 + J_22 * J_22) / jacob_2;
-        ddcHelper::get<Dim0, Dim1>(inverse_metric_tensor) = (-J_11 * J_12 - J_21 * J_22) / jacob_2;
-        ddcHelper::get<Dim1, Dim0>(inverse_metric_tensor) = (-J_11 * J_12 - J_21 * J_22) / jacob_2;
-        ddcHelper::get<Dim1, Dim1>(inverse_metric_tensor) = (J_11 * J_11 + J_21 * J_21) / jacob_2;
-
-        return inverse_metric_tensor;
+        InverseJacobianMatrix<Mapping, PositionCoordinate> get_inverse_jacobian(m_mapping);
+        Tensor inv_J = get_inverse_jacobian(coord);
+        return tensor_mul(index<'i', 'j'>(inv_J), index<'k', 'j'>(inv_J));
     }
 };
