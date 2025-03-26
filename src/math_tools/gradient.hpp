@@ -51,7 +51,6 @@ public:
      * on the covariant basis. The components of the gradient in the covariant 
      * basis are simply equal to the value of the partial derivatives of the 
      * scalar field.
-     * See [Differential operators](#docs_mathematical_and_physical_conventions__Differential_operators)
      *
      * @param[in] partial_derivatives A vector containing the partial derivatives 
      * of the scalar field expressed at a given coordinate.
