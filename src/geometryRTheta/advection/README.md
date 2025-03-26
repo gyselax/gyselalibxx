@@ -149,7 +149,7 @@ In the studied equation, the advection field is given along the physical domain 
 
 The BslAdvectionRTheta operator can take as input
 the advection field expressed on the $`(e_x, e_y)`$ basis of the physical domain or
-the advection field expressed on the $`(e_r, e_\theta)`$ [contravariant basis](#docs_mathematical_and_physical_conventions) of the logical domain,
+the advection field expressed on the $`(e_r, e_\theta)`$ [contravariant basis](../../../docs/tutorials/mathematical_and_physical_conventions.md) of the logical domain,
 
 ```math
 A = A_x e_x + A_y e_y \quad \text{or} \quad A = A^r e_r + A^\theta e_\theta.
