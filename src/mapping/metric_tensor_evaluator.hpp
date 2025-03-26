@@ -59,10 +59,10 @@ public:
      */
     KOKKOS_FUNCTION DTensor<Dims_cov, Dims_cov> operator()(PositionCoordinate const& coord) const
     {
-        const double J_11 = m_mapping.jacobian_11(coord);
-        const double J_12 = m_mapping.jacobian_12(coord);
-        const double J_21 = m_mapping.jacobian_21(coord);
-        const double J_22 = m_mapping.jacobian_22(coord);
+        const double J_11 = m_mapping.template jacobian_component<Dim0, Dim0_cov>(coord);
+        const double J_12 = m_mapping.template jacobian_component<Dim0, Dim1_cov>(coord);
+        const double J_21 = m_mapping.template jacobian_component<Dim1, Dim0_cov>(coord);
+        const double J_22 = m_mapping.template jacobian_component<Dim1, Dim1_cov>(coord);
         DTensor<Dims_cov, Dims_cov> metric_tensor;
         ddcHelper::get<Dim0_cov, Dim0_cov>(metric_tensor) = (J_11 * J_11 + J_21 * J_21);
         ddcHelper::get<Dim0_cov, Dim1_cov>(metric_tensor) = (J_11 * J_12 + J_21 * J_22);
@@ -82,10 +82,10 @@ public:
      */
     KOKKOS_FUNCTION DTensor<Dims, Dims> inverse(PositionCoordinate const& coord) const
     {
-        const double J_11 = m_mapping.jacobian_11(coord);
-        const double J_12 = m_mapping.jacobian_12(coord);
-        const double J_21 = m_mapping.jacobian_21(coord);
-        const double J_22 = m_mapping.jacobian_22(coord);
+        const double J_11 = m_mapping.template jacobian_component<Dim0, Dim0_cov>(coord);
+        const double J_12 = m_mapping.template jacobian_component<Dim0, Dim1_cov>(coord);
+        const double J_21 = m_mapping.template jacobian_component<Dim1, Dim0_cov>(coord);
+        const double J_22 = m_mapping.template jacobian_component<Dim1, Dim1_cov>(coord);
         const double jacob_2 = m_mapping.jacobian(coord) * m_mapping.jacobian(coord);
 
         DTensor<Dims, Dims> inverse_metric_tensor;

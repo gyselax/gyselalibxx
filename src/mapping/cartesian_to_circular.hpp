@@ -140,18 +140,11 @@ public:
      *
      * For some computations, we need the complete Jacobian matrix or just the
      * coefficients.
-     * The coefficients can be given independently with the functions
-     * jacobian_11, jacobian_12,  jacobian_21 and jacobian_22.
+     * The coefficients can be given independently with the function jacobian_component.
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
      * @return The Jacobian matrix.
-     *
-     *
-     * @see Jacobian::jacobian_11
-     * @see Jacobian::jacobian_12
-     * @see Jacobian::jacobian_21
-     * @see Jacobian::jacobian_22
      */
     KOKKOS_FUNCTION DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> jacobian_matrix(
             Coord<X, Y> const& coord) const
@@ -168,76 +161,31 @@ public:
     }
 
     /**
-     * @brief Compute the (1,1) coefficient of the Jacobian matrix.
-     *
-     * For a mapping given by @f$ \mathcal{F} : (x,y)\mapsto (r,\theta) @f$, the
-     * (1,1) coefficient of the Jacobian matrix is given by @f$ \frac{\partial r}{\partial x} @f$.
+     * @brief Compute the (i,j) coefficient of the Jacobian matrix.
      *
      * @param[in] coord
      *              The coordinate where we evaluate the Jacobian matrix.
      *
      * @return A double with the value of the (1,1) coefficient of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian_11(Coord<X, Y> const& coord)
+    template <class IndexTag1, class IndexTag2>
+    KOKKOS_INLINE_FUNCTION double jacobian_component(Coord<X, Y> const& coord)
     {
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
-        return 2 * x / Kokkos::pow(x * x + y * y, 0.5);
-        ;
-    }
-
-    /**
-     * @brief Compute the (1,2) coefficient of the Jacobian matrix.
-     *
-     * For a mapping given by @f$ \mathcal{F} : (x,y)\mapsto (r,\theta) @f$, the
-     * (1,2) coefficient of the Jacobian matrix is given by @f$ \frac{\partial \theta}{\partial x} @f$.
-     *
-     * @param[in] coord
-     *              The coordinate where we evaluate the Jacobian matrix.
-     *
-     * @return A double with the value of the (1,2) coefficient of the Jacobian matrix.
-     */
-    KOKKOS_FUNCTION double jacobian_12(Coord<X, Y> const& coord)
-    {
-        const double x = ddc::get<X>(coord);
-        const double y = ddc::get<Y>(coord);
-        return 2 * y / Kokkos::pow(x * x + y * y, 0.5);
-    }
-
-    /**
-     * @brief Compute the (2,1) coefficient of the Jacobian matrix.
-     *
-     * For a mapping given by @f$ \mathcal{F} : (x,y)\mapsto (r,\theta) @f$, the
-     * (2,1) coefficient of the Jacobian matrix is given by @f$ \frac{\partial r}{\partial y} @f$.
-     *
-     * @param[in] coord
-     *              The coordinate where we evaluate the Jacobian matrix. .
-     *
-     * @return A double with the value of the (2,1) coefficient of the Jacobian matrix.
-     */
-    KOKKOS_FUNCTION double jacobian_21(Coord<X, Y> const& coord)
-    {
-        const double x = ddc::get<X>(coord);
-        const double y = ddc::get<Y>(coord);
-        return -y / Kokkos::pow(x * x + y * y, 2.);
-    }
-
-    /**
-     * @brief Compute the (2,2) coefficient of the Jacobian matrix.
-     *
-     * For a mapping given by @f$ \mathcal{F} : (x,y)\mapsto (r,\theta) @f$, the
-     * (2,2) coefficient of the Jacobian matrix is given by @f$ \frac{\partial \theta}{\partial y} @f$.
-     *
-     * @param[in] coord
-     *              The coordinate where we evaluate the Jacobian matrix.
-     *
-     * @return A double with the value of the (2,2) coefficient of the Jacobian matrix.
-     */
-    KOKKOS_FUNCTION double jacobian_22(Coord<X, Y> const& coord)
-    {
-        const double x = ddc::get<X>(coord);
-        const double y = ddc::get<Y>(coord);
-        return x / Kokkos::pow(x * x + y * y, 2.);
+        if constexpr (std::is_same_v<IndexTag1, X> && std::is_same_v<IndexTag2, R_cov>) {
+            // Component (1,1), i.e dx/dr
+            return 2 * x / Kokkos::pow(x * x + y * y, 0.5);
+        } else if constexpr (std::is_same_v<IndexTag1, X> && std::is_same_v<IndexTag2, Theta_cov>) {
+            // Component (1,2), i.e dx/dtheta
+            return 2 * y / Kokkos::pow(x * x + y * y, 0.5);
+        } else if constexpr (std::is_same_v<IndexTag1, Y> && std::is_same_v<IndexTag2, R_cov>) {
+            // Component (2,1), i.e dy/dr
+            return -y / Kokkos::pow(x * x + y * y, 2.);
+        } else if constexpr (std::is_same_v<IndexTag1, Y> && std::is_same_v<IndexTag2, Theta_cov>) {
+            // Component (2,2), i.e dy/dtheta
+            return x / Kokkos::pow(x * x + y * y, 2.);
+        }
     }
 
     /**
