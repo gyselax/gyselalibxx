@@ -156,7 +156,7 @@ public:
     /**
      * @brief Compute the (i,j) component of the Jacobian matrix.
      *
-     * @param[in] coord The coordinate where we evaluate the Jacobian matrix.
+     * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @return The (i,j) component of the Jacobian matrix.
      */
     template <class IndexTag1, class IndexTag2>
