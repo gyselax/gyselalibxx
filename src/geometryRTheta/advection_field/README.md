@@ -28,7 +28,7 @@ The AdvectionFieldFinder computes the advection field $`A`$ from the electrical 
 It has two types of `operator()`:
 
 - one returning the advection field expressed on the vectors $`(e_x, e_y)`$ of the physical domain: $`A = A_x e_x + A_y e_y`$
-- and another returning the advection field expressed on the vectors $`(e^r, e^\theta)`$ of the [contravariant basis](#docs_mathematical_and_physical_conventions) on the logical domain: $`A = A^r e_r + A^\theta e_\theta`$.
+- and another returning the advection field expressed on the vectors $`(e^r, e^\theta)`$ of the [contravariant basis](../../../docs/tutorials/mathematical_and_physical_conventions.md) on the logical domain: $`A = A^r e_r + A^\theta e_\theta`$.
 
 The PolarSplineFEMPoissonLikeSolver can return the solution $`\phi`$ of the PDE under two forms:
 
@@ -133,7 +133,7 @@ Firstly, the derivatives $`\partial_r \phi`$ and $`\partial_\theta \phi`$ are al
 
 #### General coordinates system
 
-- In a **general coordinate system**, the gradient of a scalar function in the logical domain is given in the [covariant basis](#docs_mathematical_and_physical_conventions) by
+- In a **general coordinate system**, the gradient of a scalar function in the logical domain is given in the [covariant basis](../../../docs/tutorials/mathematical_and_physical_conventions.md) by
 
 ```math
 \nabla f = \sum_i \partial_{q_i} f b^i
@@ -171,7 +171,7 @@ J^{-T}
 
 The gradient is expressed in the *covariant* basis. We express the advection field in the *contravariant* basis to use the nice property $`e_r\cdot e^r = 1`$ and $`e_\theta\cdot e^\theta = 1`$.
 
-- In the [contravariant basis](#docs_mathematical_and_physical_coneventions) $`(e_r, e_\theta)`$,
+- In the [contravariant basis](../../../docs/tutorials/mathematical_and_physical_conventions.md) $`(e_r, e_\theta)`$,
 we compute the electric field,
 
 ```math
@@ -189,7 +189,7 @@ G^{-1}
 \end{bmatrix}.
 ```
 
-with $`G^{-1}`$ the inverse [metric tensor](#docs_mathematical_and_physical_coneventions__Metric_tensor).
+with $`G^{-1}`$ the inverse [metric tensor](../../../docs/tutorials/mathematical_and_physical_conventions.md).
 
 Then the advection field is given by
 

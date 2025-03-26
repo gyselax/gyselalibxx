@@ -12,15 +12,15 @@ The following sections describe some of the DDC types used in Gyselalibxx.
 
 ## Contents
 
-- [Coordinates](#docs_DDC_in_gyselalibxx__Coordinates)
-- [Indexing and associated concepts](#docs_DDC_in_gyselalibxx__Indexing_and_associated_concepts)
-  - [Grid](#docs_DDC_in_gyselalibxx__Grid)
-  - [Index](#docs_DDC_in_gyselalibxx__Index)
-  - [Index Step](#docs_DDC_in_gyselalibxx__Index_Step)
-  - [Index Range](#docs_DDC_in_gyselalibxx__Index_Range)
-- [Data Storage](#docs_DDC_in_gyselalibxx__Data_Storage)
-- [Example](#docs_DDC_in_gyselalibxx__Example)
-- [Pitfalls](#docs_DDC_in_gyselalibxx__Pitfalls)
+- [Coordinates](#coordinates)
+- [Indexing and associated concepts](#indexing-and-associated-concepts)
+  - [Grid](#grid)
+  - [Index](#index)
+  - [Index Step](#index-step)
+  - [Index Range](#index-range)
+- [Data Storage](#data-storage)
+- [Example](#example)
+- [Pitfalls](#pitfalls)
 
 ## Coordinates
 
@@ -132,7 +132,7 @@ In Gyselalibxx the alias `IdxStepX` is usually defined in `geometry.hpp` to desc
 
 As with `Idx`s, an `IdxStep` can be multi-dimensional and lower dimension `IdxStep` objects can be extracted using `ddc::select<GridOfInterest>(my_nd_vector)`.
 
-For a more concrete example of how this type is useful see [Example](#docs_DDC_in_gyselalibxx__Example).
+For a more concrete example of how this type is useful see [Example](#example).
 
 ## Index Range
 
