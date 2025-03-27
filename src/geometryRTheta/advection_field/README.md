@@ -28,7 +28,7 @@ The AdvectionFieldFinder computes the advection field $`A`$ from the electrical 
 It has two types of `operator()`:
 
 - one returning the advection field expressed on the vectors $`(e_x, e_y)`$ of the physical domain: $`A = A_x e_x + A_y e_y`$
-- and another returning the advection field expressed on the vectors $`(e^r, e^\theta)`$ of the [contravariant basis](../../../docs/tutorials/mathematical_and_physical_conventions.md) on the logical domain: $`A = A^r e_r + A^\theta e_\theta`$.
+- and another returning the advection field expressed on the vectors $`(e^r, e^\theta)`$ of the [contravariant basis](../../../docs/standards/mathematical_and_physical_conventions.md) on the logical domain: $`A = A^r e_r + A^\theta e_\theta`$.
 
 The PolarSplineFEMPoissonLikeSolver can return the solution $`\phi`$ of the PDE under two forms:
 
@@ -53,9 +53,9 @@ The computation of the electrical field can be ill-defined around the O-point, s
 
 ```math
 \nabla \phi
-= \partial_x \phi e_x + \partial_y \phi e_y 
-= J^{-T}(\partial_r \phi e^r + \partial_\theta \phi e^\theta), 
-\qquad 
+= \partial_x \phi e_x + \partial_y \phi e_y
+= J^{-T}(\partial_r \phi e^r + \partial_\theta \phi e^\theta),
+\qquad
 \text{in the covariant basis,}
 ```
 
@@ -64,23 +64,23 @@ Then the electric field is given by
 
 ```math
 E = -\nabla \phi
-= - \partial_x \phi e_x - \partial_y \phi e_y 
+= - \partial_x \phi e_x - \partial_y \phi e_y
 ```
 
 and the advection field in the basis $`(e_x, e_y)`$ by
 
 ```math
-A = E\wedge e_z 
-= 
+A = E\wedge e_z
+=
 \begin{bmatrix}
      E\cdot e_y  \\
-    -E\cdot e_x 
-\end{bmatrix} 
-= 
+    -E\cdot e_x
+\end{bmatrix}
+=
 \begin{bmatrix}
     -\partial_y \phi \\
      \partial_x \phi
-\end{bmatrix}. 
+\end{bmatrix}.
 ```
 
 - If $`r \leq \varepsilon`$, we linearise. The method is detailed in Zoni et al. (2019) [^1]. We use only the derivatives along $`r`$ at two linearly independent directions of $`\theta`$ : $`\theta_1`$ and $`\theta_2`$
@@ -97,7 +97,7 @@ From these equations, we deduce the (unique) values of $`\partial_x\phi`$ and $`
     \partial_x \phi (0, \theta) \\
     \partial_y \phi (0, \theta)
 \end{bmatrix}
- = 
+ =
  \begin{bmatrix}
     \partial_r x (0, \theta_1)  & \partial_r y (0, \theta_1) \\
     \partial_r x (0, \theta_2)  & \partial_r y (0, \theta_2)
@@ -117,11 +117,11 @@ E(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right)  E(0, \theta) + \frac{r}
 As previously, we compute the advection field by
 
 ```math
-A = E\wedge e_z 
-= 
+A = E\wedge e_z
+=
 \begin{bmatrix}
       E\cdot e_y  \\
-    - E\cdot e_x 
+    - E\cdot e_x
 \end{bmatrix}.
 ```
 
@@ -133,7 +133,7 @@ Firstly, the derivatives $`\partial_r \phi`$ and $`\partial_\theta \phi`$ are al
 
 #### General coordinates system
 
-- In a **general coordinate system**, the gradient of a scalar function in the logical domain is given in the [covariant basis](../../../docs/tutorials/mathematical_and_physical_conventions.md) by
+- In a **general coordinate system**, the gradient of a scalar function in the logical domain is given in the [covariant basis](../../../docs/standards/mathematical_and_physical_conventions.md) by
 
 ```math
 \nabla f = \sum_i \partial_{q_i} f b^i
@@ -147,7 +147,7 @@ with
 In 2D with $`(q_1, q_2) = (r,\theta)`$ and $`(x_1, x_2) = (x,y)`$, it can be rewritten as the following matrix system
 
 ```math
-\hat{\nabla} f 
+\hat{\nabla} f
 = \partial_x f e_x + \partial_y f e_y
 = \partial_r f e^r + \partial_\theta f e^\theta
 ```
@@ -159,7 +159,7 @@ With the composants linked by the following relation,
     \partial_{x} f \\
     \partial_{y} f
 \end{bmatrix}
-= 
+=
 J^{-T}
 \begin{bmatrix}
     \partial_{r} f \\
@@ -171,17 +171,17 @@ J^{-T}
 
 The gradient is expressed in the *covariant* basis. We express the advection field in the *contravariant* basis to use the nice property $`e_r\cdot e^r = 1`$ and $`e_\theta\cdot e^\theta = 1`$.
 
-- In the [contravariant basis](../../../docs/tutorials/mathematical_and_physical_conventions.md) $`(e_r, e_\theta)`$,
+- In the [contravariant basis](../../../docs/standards/mathematical_and_physical_conventions.md) $`(e_r, e_\theta)`$,
 we compute the electric field,
 
 ```math
 E
-= 
+=
 \begin{bmatrix}
     E \cdot e_r \\
     E \cdot e_{\theta}
 \end{bmatrix}
-= 
+=
 G^{-1}
 \begin{bmatrix}
     - \partial_{r} \phi \\
@@ -189,12 +189,12 @@ G^{-1}
 \end{bmatrix}.
 ```
 
-with $`G^{-1}`$ the inverse [metric tensor](../../../docs/tutorials/mathematical_and_physical_conventions.md).
+with $`G^{-1}`$ the inverse [metric tensor](../../../docs/standards/mathematical_and_physical_conventions.md).
 
 Then the advection field is given by
 
 ```math
-A = E \wedge e_z = 
+A = E \wedge e_z =
 \begin{bmatrix}
      E \cdot e_y \\
     -E \cdot e_x
@@ -208,7 +208,7 @@ with in contravariant basis,
     E \cdot e_x \\
     E \cdot e_y
 \end{bmatrix}
-= 
+=
 J
 \begin{bmatrix}
     E \cdot e_r \\
@@ -219,12 +219,12 @@ J
     A \cdot e_x \\
     A \cdot e_y
 \end{bmatrix}
-= 
+=
 J
 \begin{bmatrix}
     A \cdot e_r \\
     A \cdot e_\theta
-\end{bmatrix}. 
+\end{bmatrix}.
 ```
 
 So,
@@ -272,7 +272,7 @@ Warning, the matrix $`G^{-1}`$ can be ill-defined for $r = 0$.
 
 ```math
 G^{-1}
-= 
+=
 \begin{bmatrix}
     1 & 0 \\
     0 & \frac{1}{r^2}

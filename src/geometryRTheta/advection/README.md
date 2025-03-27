@@ -121,7 +121,7 @@ That is why, we introduce the **pseudo-Cartesian domain**.
 We use another mapping function $\mathcal{G}$ such that:
 
 ```math
- \mathcal{G} : (r,\theta)_{i,j} \mapsto  (x,y)_{i,j} = (r\cos(\theta), r\sin(\theta))_{i,j}. 
+ \mathcal{G} : (r,\theta)_{i,j} \mapsto  (x,y)_{i,j} = (r\cos(\theta), r\sin(\theta))_{i,j}.
 ```
 
 Then the four previous steps become
@@ -149,7 +149,7 @@ In the studied equation, the advection field is given along the physical domain 
 
 The BslAdvectionRTheta operator can take as input
 the advection field expressed on the $`(e_x, e_y)`$ basis of the physical domain or
-the advection field expressed on the $`(e_r, e_\theta)`$ [contravariant basis](../../../docs/tutorials/mathematical_and_physical_conventions.md) of the logical domain,
+the advection field expressed on the $`(e_r, e_\theta)`$ [contravariant basis](../../../docs/standards/mathematical_and_physical_conventions.md) of the logical domain,
 
 ```math
 A = A_x e_x + A_y e_y \quad \text{or} \quad A = A^r e_r + A^\theta e_\theta.
@@ -168,7 +168,7 @@ To pass from the composants on the $`(e_r, e_\theta)`$ contravariant basis to th
     A\cdot e_x \\
     A\cdot e_y
 \end{bmatrix}
-= 
+=
 J
 \begin{bmatrix}
     A \cdot e_{r} \\
@@ -205,7 +205,7 @@ It tests:
     - $`A(t, x, y) = \omega(y_c - y, x - x_c)`$.
 
 The tests of the convergence order are made for constant CFL which means it checks the slope of the errors
-(infinity norm of the difference at the final time)  
+(infinity norm of the difference at the final time)
 for $`(N_r\times N_\theta, dt) = (N_{r,0}\times N_{\theta,0}, dt_0)`$ and then $`(n*N_{r,0}\times n*N_{\theta,0}, dt_0/n)`$
 for $n = 1, 2, 4, 8,  ...$.
 
