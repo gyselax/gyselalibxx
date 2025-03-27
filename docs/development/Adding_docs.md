@@ -22,7 +22,7 @@ cd docs
 mkdocs build
 ```
 
-In order to view the docs the file `docs/site/index.html` should be opened in a browser (e.g. Firefox).
+In order to view the docs the file `docs/site/index.html` should be opened in a browser (e.g. Firefox). To change the documentation layout or add new navigation pannels see [Gyselas MkDocs documentation](../README.md).
 
 ## Documentation describing code structures
 

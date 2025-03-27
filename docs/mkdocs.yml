@@ -10,7 +10,7 @@ use_directory_urls: false   # Keeps file extensions in URLs (e.g., docs/index.ht
 nav:
   - General:                    # General project information
       - Home: README.md                         # Main landing page
-      - First Steps::
+      - First Steps:
         - Getting Started: docs/first_steps/getting_started.md
         - Installation: docs/first_steps/install.md # Installation guide
         - DDC in Gyselalibxx: docs/first_steps/DDC_in_gyselalibxx.md
