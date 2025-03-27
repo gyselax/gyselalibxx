@@ -21,7 +21,9 @@ nav:
       - Adding Docs: docs/development/Adding_docs.md
       - Using Git: docs/development/Using_git.md
       - Developer FAQ: docs/development/developer_FAQ.md
-      - Gyselalib Contents: src
+      - Gyselalib Source: src
+      - Gyselalib Simulations: simulations
+      - Gyselalib Tests: tests
   - Troubleshooting:
       - Compilation Issues: docs/troubleshooting/Common_compilation_problems.md
 
