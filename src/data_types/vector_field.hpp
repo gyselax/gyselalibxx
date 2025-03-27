@@ -509,7 +509,7 @@ auto create_mirror_view_and_copy(
  *
  * @param[out] field On output, a VectorField containing the values of vector 
  * at the index idx.
- * @param[in] idx An index so specify where the values of the Vector should be 
+ * @param[in] idx An index to specify where the values of the Vector should be 
  * copied in the VectorField. 
  * @param[in] vector A Vector to be copied in the VectorField at the index idx.
  */
