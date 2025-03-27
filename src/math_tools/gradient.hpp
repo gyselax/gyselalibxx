@@ -123,7 +123,7 @@ public:
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(gradient),
-                KOKKOS_LAMBDA(IdxType const idx) {
+                KOKKOS_CLASS_LAMBDA(IdxType const idx) {
                     DVectorType gradient_proxy
                             = (*this)(partial_derivatives(idx), ddc::coordinate(idx));
                     ddcHelper::assign_vector_field_element(gradient, idx, gradient_proxy);

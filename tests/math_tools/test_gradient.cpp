@@ -114,10 +114,7 @@ public:
 };
 
 
-/**
- * Test for each coordinate if the gradient is equal to its prediction
- */
-TEST(GradientTest, CircularAtCoordinate)
+void compute_gradient_at_coordinate()
 {
     double const TOL = 1e-12;
     CircularToCartesian<R, Theta, X, Y> const mapping;
@@ -173,11 +170,7 @@ TEST(GradientTest, CircularAtCoordinate)
 }
 
 
-/**
- * Test for each coordinate if the gradient is equal to its prediction
- * using gradient methods that take vector field as parameters
- */
-TEST(GradientTest, CircularAtAllCoordinates)
+void compute_gradient_at_all_coordinates()
 {
     double const TOL = 1e-12;
     CircularToCartesian<R, Theta, X, Y> const mapping;
@@ -262,4 +255,22 @@ TEST(GradientTest, CircularAtAllCoordinates)
                         TOL);
             });
 }
+
+/**
+ * Test for each coordinate if the gradient is equal to its prediction
+ */
+TEST(GradientTest, Circular)
+{
+    compute_gradient_at_coordinate();
+}
+
+/**
+ * Test for each coordinate if the gradient is equal to its prediction
+ * using gradient methods that take vector field as parameters
+ */
+TEST(GradientTest, CircularAtAllCoordinates)
+{
+    compute_gradient_at_all_coordinates();
+}
+
 } // namespace
