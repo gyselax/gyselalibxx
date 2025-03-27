@@ -4,10 +4,10 @@ The conventions adopted in Gyselalib++ for describing physical quantities such a
 
 ## Contents
 
-[On the use of curvilinear coordinates](#on-the-use-of-curvilinear-coordinates)
-[Metric tensor](#metric-tensor)
-[Jacobian](#jacobian)
-[Differential operators](#differential-operators)
+- [On the use of curvilinear coordinates](#on-the-use-of-curvilinear-coordinates)
+- [Metric tensor](#metric-tensor)
+- [Jacobian](#jacobian)
+- [Differential operators](#differential-operators)
 
 ## On the use of curvilinear coordinates
 
@@ -195,13 +195,13 @@ Let us now consider the more general case where one seeks to relate two curvilin
 We denote by $`J_{\{q\to p\}}`$ the Jacobian of the transformation from the coordinate system $`\{q^i\}`$ to $`\{p^i\}`$. The components of the Jacobian on the basis $`\mathbf{c}_i \otimes \mathbf{b}^j`$ and the components of its inverse on the basis $`\mathbf{b}_i \otimes \mathbf{c}^j`$ are defined similarly to above, as:
 
 ```math
-(J_{\{q\to p\}})^{i}_{\;j} = \frac{\partial p^i}{\partial q^j}, \quad (J_{\{q\to p\}})^{-1}\left.^{i}_{\;j}\right. = \frac{\partial q^i}{\partial p^j}. 
+(J_{\{q\to p\}})^{i}_{\;j} = \frac{\partial p^i}{\partial q^j}, \quad (J_{\{q\to p\}})^{-1}\left.^{i}_{\;j}\right. = \frac{\partial q^i}{\partial p^j}.
 ```
 
 Here one may note that $`(J_{\{q\to p\}})^{-1}\left.^{i}_{\;j}\right. = (J_{\{p\to q\}})^{i}_{\;j}`$.  Let us now express a vector $`\mathbf{A}`$ in these bases as
 
 ```math
-\mathbf{A} = A^i_{\{p\}} \mathbf{b}_i = A_{\{p\}i} \mathbf{b}^i = A^i_{\{q\}} \mathbf{c}_i = A_{\{q\}i} \mathbf{c}^i, 
+\mathbf{A} = A^i_{\{p\}} \mathbf{b}_i = A_{\{p\}i} \mathbf{b}^i = A^i_{\{q\}} \mathbf{c}_i = A_{\{q\}i} \mathbf{c}^i,
 ```
 
 where $`A^i_{\{p\}}`$ (resp. $`A_{\{p\}i}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`\mathbf{A}`$ expressed in the vector basis associated with coordinates $`\{p^i\}`$, and similarly $`A^i_{\{q\}}`$ (resp. $`A_{\{q\}i}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`\mathbf{A}`$ expressed in the vector basis associated with coordinates $`\{q^i\}`$. We have

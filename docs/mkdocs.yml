@@ -10,14 +10,19 @@ use_directory_urls: false   # Keeps file extensions in URLs (e.g., docs/index.ht
 nav:
   - General:                    # General project information
       - Home: README.md                         # Main landing page
-      - Installation: docs/tutorials/install.md # Installation guide
-  - Documentation:              # Main documentation section
-      - Source: src                             # Link to the source directory
-      - toolchains                              # Placeholder for toolchain-related documentation
-      - Simulations: simulations                # Documentation on simulations
-      - Tests: tests                            # Testing
-      - MkDocs: docs/README.md                  # Documentation on how to use MkDocs for this project
-  - Tutorials: docs/tutorials   # Section for tutorials
+      - Setup:
+        - Getting Started: docs/setup/getting_started.md
+        - Installation: docs/setup/install.md # Installation guide
+  - Standards:
+      - Coding Standard: docs/standards/CODING_STANDARD.md
+      - Math & Physics: docs/standards/mathematical_and_physical_conventions.md
+  - Development:
+      - Adding Docs: docs/development/Adding_docs.md
+      - Using Git: docs/development/Using_git.md
+      - Developer FAQ: docs/development/developer_FAQ.md
+      - DDC in Gyselalibxx: docs/development/DDC_in_gyselalibxx.md
+  - Troubleshooting:
+      - Compilation Issues: docs/troubleshooting/Common_compilation_problems.md
 
   - API:  # API reference documentation
       - Gyselalib++:

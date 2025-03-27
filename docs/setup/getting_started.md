@@ -52,7 +52,7 @@ The gyselalib++ codebase is organised into several folders. The main folders of 
 1. **Familiarise yourself with DDC:**
 
    - Gyselalib++ relies heavily on [DDC (Discrete Domain Decomposition Library)](https://ddc.mdls.fr/) for data management. Understanding its usage is key to contributing effectively.
-   - See our detailed guide on DDC integration: [Using DDC in Gyselalib++](DDC_in_gyselalibxx.md).
+   - See our detailed guide on DDC integration: [Using DDC in Gyselalib++](../development/DDC_in_gyselalibxx.md).
 
 2. **Build the project:**
 

@@ -7,18 +7,19 @@ There are two types of documentation which are described in detail below:
 
 ## Building documentation locally
 
+For building our documentation we use [MkDocs](https://www.mkdocs.org/).
+Make sure you have installed `mkdocs` with its requirements:
+
+```bash
+pip install -r docs/requirements.txt
+```
+
 The documentation can be built locally by running the following commands from the root directory:
 
 ```bash
 python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc build/
 cd docs
 mkdocs build
-```
-
-Make sure you have installed `mkdocs` and the requirements:
-
-```bash
-pip install -r docs/requirements.txt
 ```
 
 In order to view the docs the file `docs/site/index.html` should be opened in a browser (e.g. Firefox).

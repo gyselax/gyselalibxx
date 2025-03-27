@@ -47,22 +47,6 @@ The toolchains are found in the folder `toolchains/`. Each toolchain is designed
 
 For more details about toolchains, see the documentation about [toolchains](../../toolchains/README.md).
 
-## Execution
-
-to run the tests:
-
-```bash
-ctest --output-on-failure
-```
-
-Then, just have a look at `tests/geometryXVx/landau/fft/growthrate_t0.0to45.0.png`:
-
-![tests/geometryXVx/landau/fft/growthrate\_t0.0to45.0.png](https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx/-/jobs/artifacts/main/raw/build/tests/geometryXVx/landau/fft/growthrate_t0.0to45.0.png?job=cmake_tests_Release "Landau damping rate")
-
-and `tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png`:
-
-![tests/geometryXVx/landau/fft/frequency\_t0.0to45.0.png](https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx/-/jobs/artifacts/main/raw/build/tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png?job=cmake_tests_Release "Landau damping frequency")
-
 ## Dependencies
 
 To install dependencies through spack, first follow the the 3 first steps of
@@ -79,3 +63,19 @@ spack install
 
 For example, you can find a Dockerfile installing these dependencies on ubuntu in
 `docker/gyselalibxx_env/Dockerfile`.
+
+## Execution
+
+to run the tests:
+
+```bash
+ctest --output-on-failure
+```
+
+Then, just have a look at `tests/geometryXVx/landau/fft/growthrate_t0.0to45.0.png`:
+
+![tests/geometryXVx/landau/fft/growthrate\_t0.0to45.0.png](https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx/-/jobs/artifacts/main/raw/build/tests/geometryXVx/landau/fft/growthrate_t0.0to45.0.png?job=cmake_tests_Release "Landau damping rate")
+
+and `tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png`:
+
+![tests/geometryXVx/landau/fft/frequency\_t0.0to45.0.png](https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx/-/jobs/artifacts/main/raw/build/tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png?job=cmake_tests_Release "Landau damping frequency")
