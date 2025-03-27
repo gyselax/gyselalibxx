@@ -297,13 +297,18 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     auto advection_field_xy_device = ddcHelper::
             create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), advection_field_xy);
 
+    auto allfdistribu_rtheta_device = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), allfdistribu_rtheta);
+    auto advection_field_rtheta_device = ddcHelper::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), advection_field_rtheta);
+
     // ================================================================================================
     // SIMULATION                                                                                     |
     // ================================================================================================
     for (int iter(0); iter < iter_nb; ++iter) {
         advection_operator(
-                allfdistribu_rtheta,
-                advection_field_rtheta,
+                get_field(allfdistribu_rtheta_device),
+                get_const_field(advection_field_rtheta_device),
                 advection_field_xy_centre,
                 dt);
         advection_operator(

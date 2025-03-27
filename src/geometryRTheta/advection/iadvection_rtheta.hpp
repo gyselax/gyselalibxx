@@ -48,9 +48,9 @@ public:
      *
      * @return A Field of the advected function (allfdistribu).
      */
-    virtual host_t<DFieldRTheta> operator()(
-            host_t<DFieldRTheta> allfdistribu,
-            host_t<DConstVectorFieldRTheta<R, Theta>> advection_field,
+    virtual DFieldRTheta operator()(
+            DFieldRTheta allfdistribu,
+            DConstVectorFieldRTheta<R, Theta> advection_field,
             CoordXY const& advection_field_xy_centre,
             double const dt) const = 0;
 };
