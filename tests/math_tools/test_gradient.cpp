@@ -135,38 +135,35 @@ void compute_gradient_at_coordinate()
     GradientTestFunction test_function;
 
     // Test for each coordinates if the gradient is equal to its prediction
-    ddc::parallel_for_each(
-            Kokkos::DefaultExecutionSpace(),
-            grid,
-            KOKKOS_LAMBDA(IdxRTheta const irtheta) {
-                CoordRTheta const coord_rth(coords(irtheta));
-                DVectorCovType partial_derivatives = test_function.partial_derivatives(coord_rth);
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        CoordRTheta const coord_rth(coords(irtheta));
+        DVectorCovType partial_derivatives = test_function.partial_derivatives(coord_rth);
 
-                // contravariant expression of the gradient
-                DVectorType gradient_contra = gradient_evaluator(partial_derivatives, coord_rth);
-                DVectorType gradient_prediction_contra = test_function.gradient(coord_rth);
+        // contravariant expression of the gradient
+        DVectorType gradient_contra = gradient_evaluator(partial_derivatives, coord_rth);
+        DVectorType gradient_prediction_contra = test_function.gradient(coord_rth);
 
-                EXPECT_NEAR(
-                        ddcHelper::get<R>(gradient_contra),
-                        ddcHelper::get<R>(gradient_prediction_contra),
-                        TOL);
-                EXPECT_NEAR(
-                        ddcHelper::get<Theta>(gradient_contra),
-                        ddcHelper::get<Theta>(gradient_prediction_contra),
-                        TOL);
+        EXPECT_NEAR(
+                ddcHelper::get<R>(gradient_contra),
+                ddcHelper::get<R>(gradient_prediction_contra),
+                TOL);
+        EXPECT_NEAR(
+                ddcHelper::get<Theta>(gradient_contra),
+                ddcHelper::get<Theta>(gradient_prediction_contra),
+                TOL);
 
-                // covariant expression of the gradient
-                DVectorCovType gradient_cov = gradient_evaluator(partial_derivatives);
+        // covariant expression of the gradient
+        DVectorCovType gradient_cov = gradient_evaluator(partial_derivatives);
 
-                EXPECT_NEAR(
-                        ddcHelper::get<R_cov>(gradient_cov),
-                        ddcHelper::get<R_cov>(partial_derivatives),
-                        TOL);
-                EXPECT_NEAR(
-                        ddcHelper::get<Theta_cov>(gradient_cov),
-                        ddcHelper::get<Theta_cov>(partial_derivatives),
-                        TOL);
-            });
+        EXPECT_NEAR(
+                ddcHelper::get<R_cov>(gradient_cov),
+                ddcHelper::get<R_cov>(partial_derivatives),
+                TOL);
+        EXPECT_NEAR(
+                ddcHelper::get<Theta_cov>(gradient_cov),
+                ddcHelper::get<Theta_cov>(partial_derivatives),
+                TOL);
+    });
 }
 
 
@@ -232,28 +229,25 @@ void compute_gradient_at_all_coordinates()
     gradient_evaluator(gradient_cov, get_const_field(partial_derivatives));
 
     // Test for each coordinates if the gradient is equal to its prediction
-    ddc::parallel_for_each(
-            Kokkos::DefaultExecutionSpace(),
-            idxrange_rtheta,
-            KOKKOS_LAMBDA(IdxRTheta const irtheta) {
-                EXPECT_NEAR(
-                        ddcHelper::get<R>(gradient_contra)(irtheta),
-                        ddcHelper::get<R>(gradient_prediction_contra)(irtheta),
-                        TOL);
-                EXPECT_NEAR(
-                        ddcHelper::get<Theta>(gradient_contra)(irtheta),
-                        ddcHelper::get<Theta>(gradient_prediction_contra)(irtheta),
-                        TOL);
+    ddc::for_each(idxrange_rtheta, [&](IdxRTheta const irtheta) {
+        EXPECT_NEAR(
+                ddcHelper::get<R>(gradient_contra)(irtheta),
+                ddcHelper::get<R>(gradient_prediction_contra)(irtheta),
+                TOL);
+        EXPECT_NEAR(
+                ddcHelper::get<Theta>(gradient_contra)(irtheta),
+                ddcHelper::get<Theta>(gradient_prediction_contra)(irtheta),
+                TOL);
 
-                EXPECT_NEAR(
-                        ddcHelper::get<R_cov>(gradient_cov)(irtheta),
-                        ddcHelper::get<R_cov>(partial_derivatives)(irtheta),
-                        TOL);
-                EXPECT_NEAR(
-                        ddcHelper::get<Theta_cov>(gradient_cov)(irtheta),
-                        ddcHelper::get<Theta_cov>(partial_derivatives)(irtheta),
-                        TOL);
-            });
+        EXPECT_NEAR(
+                ddcHelper::get<R_cov>(gradient_cov)(irtheta),
+                ddcHelper::get<R_cov>(partial_derivatives)(irtheta),
+                TOL);
+        EXPECT_NEAR(
+                ddcHelper::get<Theta_cov>(gradient_cov)(irtheta),
+                ddcHelper::get<Theta_cov>(partial_derivatives)(irtheta),
+                TOL);
+    });
 }
 
 /**
