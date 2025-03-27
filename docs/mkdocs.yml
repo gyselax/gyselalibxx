@@ -21,6 +21,7 @@ nav:
       - Using Git: docs/development/Using_git.md
       - Developer FAQ: docs/development/developer_FAQ.md
       - DDC in Gyselalibxx: docs/development/DDC_in_gyselalibxx.md
+      - Gyselalib Contents: src
   - Troubleshooting:
       - Compilation Issues: docs/troubleshooting/Common_compilation_problems.md
 
@@ -51,7 +52,7 @@ plugins:
   - search                                # Provides search functionality
   - include_dir_to_nav:                   # Automatically includes directories in navigation
       flat: false                         # Preserves directory structure
-      file_name_as_title: true            # Uses file names as titles in navigation
+      file_name_as_title: True            # Uses file names as titles in navigation
   - mkdoxy:                               # Integrates Doxygen-generated documentation into MkDocs
       projects:
         gyselalibxx:
