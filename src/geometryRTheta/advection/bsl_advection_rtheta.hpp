@@ -194,6 +194,7 @@ public:
 
         // (Ax, Ay) = J (Ar, Atheta)
         ddc::parallel_for_each(
+                Kokkos::DefaultExecutionSpace(),
                 grid_without_Opoint,
                 KOKKOS_LAMBDA(IdxRTheta const irtheta) {
                     CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
@@ -209,10 +210,15 @@ public:
                             = ddcHelper::get<Y>(advec_field_xy);
                 });
 
-        ddc::parallel_for_each(Opoint_grid, [&](IdxRTheta const irtheta) {
-            ddcHelper::get<X>(advection_field_xy)(irtheta) = CoordX(advection_field_xy_centre);
-            ddcHelper::get<Y>(advection_field_xy)(irtheta) = CoordY(advection_field_xy_centre);
-        });
+        ddc::parallel_for_each(
+                Kokkos::DefaultExecutionSpace(),
+                Opoint_grid,
+                KOKKOS_LAMBDA(IdxRTheta const irtheta) {
+                    ddcHelper::get<X>(advection_field_xy)(irtheta)
+                            = CoordX(advection_field_xy_centre);
+                    ddcHelper::get<Y>(advection_field_xy)(irtheta)
+                            = CoordY(advection_field_xy_centre);
+                });
 
         auto allfdistribu = ddc::
                 create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), allfdistribu_host);
