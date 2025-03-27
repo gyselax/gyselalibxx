@@ -190,13 +190,15 @@ public:
         DConstVectorFieldRTheta<R, Theta> advection_field_rtheta
                 = get_const_field(advection_field_rtheta_alloc);
 
+        Mapping const& mapping_proxy = m_mapping;
+
         // (Ax, Ay) = J (Ar, Atheta)
         ddc::parallel_for_each(
                 grid_without_Opoint,
                 KOKKOS_LAMBDA(IdxRTheta const irtheta) {
                     CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
-                    Tensor J = m_mapping.jacobian_matrix(coord_rtheta);
+                    Tensor J = mapping_proxy.jacobian_matrix(coord_rtheta);
 
                     DVector<X, Y> advec_field_xy = tensor_mul(
                             index<'i', 'j'>(J),
