@@ -16,7 +16,7 @@ To run the documentation locally follow the instructions in [Add Documentation](
 
 ## MkDocs Navigation and Configuration
 
-The configuration of MkDocs, including various options and additional packages, is managed through the `mkdocs.yml` file. This file allows you to customize the structure and appearance of your documentation.
+The configuration of MkDocs, including various options and additional packages, is managed through the `mkdocs.yml` file. This file allows you to customise the structure and appearance of your documentation.
 
 ### Modifying the Navigation Panel
 
