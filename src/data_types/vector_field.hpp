@@ -507,12 +507,6 @@ auto create_mirror_view_and_copy(
 /**
  * @brief Copy the elements of a vector into a vector field at a given index.
  *
- * @tparam ElementType Type of the elements in the ddc::Chunk of the VectorField and Vector.
- * @tparam IdxRangeType Type of the IndexRange over which the VectorField is defined. 
- * @tparam Dims... Dimensions of the VectorField and Vector. 
- * @tparam MemorySpace The original memory space of the chunk of the VectorFieldMem.
- * @tparam LayoutStridedPolicy Layout tag (see Kokkos).
- *
  * @param[out] field On output, a VectorField containing the values of vector 
  * at the index idx.
  * @param[in] idx An index so specify where the values of the Vector should be 
