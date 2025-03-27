@@ -70,16 +70,16 @@ public:
      * basis are simply equal to the value of the partial derivatives of the 
      * scalar field.
      *
-     * @param[in] partial_derivatives A vector field containing the 
-     * partial derivatives of the scalar field.
      * @param[out] gradient A vector field that contains on output the 
      * value of the gradient components expressed on the contravariant
+     * @param[in] partial_derivatives A vector field containing the 
+     * partial derivatives of the scalar field.
      * basis. 
      */
     template <class IdxRange>
     KOKKOS_INLINE_FUNCTION void operator()(
-            DVectorConstFieldCovType<IdxRange> const partial_derivatives,
-            DVectorFieldCovType<IdxRange> gradient) const
+            DVectorFieldCovType<IdxRange> gradient,
+            DVectorConstFieldCovType<IdxRange> const partial_derivatives) const
     {
         ddcHelper::deepcopy(gradient, partial_derivatives);
     }
@@ -108,16 +108,16 @@ public:
      * @brief Compute the gradient of a scalar field using partial derivatives
      * of the field. The gradient is expressed on the contravariant basis.  
      *
-     * @param[in] partial_derivatives A vector field that contains the partial 
-     * derivatives of the scalar field.
      * @param[out] gradient A vector field that contains on output the 
      * value of the gradient components expressed on the contravariant
+     * @param[in] partial_derivatives A vector field that contains the partial 
+     * derivatives of the scalar field.
      * basis. 
      */
     template <class IdxRange>
     KOKKOS_FUNCTION void operator()(
-            DVectorConstFieldCovType<IdxRange> const partial_derivatives,
-            DVectorFieldType<IdxRange> const gradient) const
+            DVectorFieldType<IdxRange> const gradient,
+            DVectorConstFieldCovType<IdxRange> const partial_derivatives) const
     {
         using IdxType = typename IdxRange::discrete_element_type;
         ddc::parallel_for_each(
