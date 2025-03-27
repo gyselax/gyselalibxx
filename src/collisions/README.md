@@ -1,6 +1,6 @@
 # Collisions
 
-Collision operator in $(v_\parallel,\mu)$ applied to all against all species at the same time. As such, the operator is $O(N^2)$ in number of species.
+Collision operator in $`(v_\parallel,\mu)`$ applied to all against all species at the same time. As such, the operator is $O(N^2)$ in number of species.
 
 It was rewritten from Fortran into C++. The operator's name is KOkkos coLIsion OPerator (KOLIOP) and is provided as a submodule (see `/vendor`).
 
