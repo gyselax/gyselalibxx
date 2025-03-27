@@ -317,6 +317,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
                 dt);
 
         ddc::parallel_deepcopy(allfdistribu_xy, get_const_field(allfdistribu_xy_device));
+        ddc::parallel_deepcopy(allfdistribu_rtheta, get_const_field(allfdistribu_rtheta_device));
 
         // Check the advected functions ---
         ddc::for_each(grid, [&](IdxRTheta const irtheta) {
