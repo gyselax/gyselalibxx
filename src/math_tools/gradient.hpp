@@ -24,13 +24,13 @@ class Gradient
     using DVectorCov = typename MetricTensorType::CovariantVectorType;
 
     template <class IdxRange>
-    using DVectorFieldType = VectorField<double, IdxRange, Dims>;
+    using DVectorFieldType = DVectorField<IdxRange, Dims>;
 
     template <class IdxRange>
-    using DVectorFieldCovType = VectorField<double, IdxRange, Dims_cov>;
+    using DVectorFieldCovType = DVectorField<IdxRange, Dims_cov>;
 
     template <class IdxRange>
-    using DVectorConstFieldCovType = VectorConstField<double, IdxRange, Dims_cov>;
+    using DVectorConstFieldCovType = DVectorConstField<IdxRange, Dims_cov>;
 
     MetricTensorType const& m_metric_tensor;
 

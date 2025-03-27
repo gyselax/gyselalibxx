@@ -20,11 +20,10 @@ namespace {
 using DVectorType = DVector<R, Theta>;
 using DVectorCovType = DVector<R_cov, Theta_cov>;
 
-using DVectorFieldMemType = VectorFieldMem<double, IdxRangeRTheta, VectorIndexSet<R, Theta>>;
+using DVectorFieldMemType = DVectorFieldMem<IdxRangeRTheta, VectorIndexSet<R, Theta>>;
 using DVectorFieldType = typename DVectorFieldMemType::span_type;
 
-using DVectorFieldMemCovType
-        = VectorFieldMem<double, IdxRangeRTheta, VectorIndexSet<R_cov, Theta_cov>>;
+using DVectorFieldMemCovType = DVectorFieldMem<IdxRangeRTheta, VectorIndexSet<R_cov, Theta_cov>>;
 using DVectorFieldCovType = typename DVectorFieldMemCovType::span_type;
 
 template <class ElementType>
@@ -236,8 +235,8 @@ TEST(GradientTest, CircularAtAllCoordinates)
     DVectorFieldCovType gradient_cov = get_field(gradient_cov_alloc);
 
     // computation of gradient
-    gradient_evaluator(get_const_field(partial_derivatives), gradient_contra);
-    gradient_evaluator(get_const_field(partial_derivatives), gradient_cov);
+    gradient_evaluator(gradient_contra, get_const_field(partial_derivatives));
+    gradient_evaluator(gradient_cov, get_const_field(partial_derivatives));
 
     // Test for each coordinates if the gradient is equal to its prediction
     ddc::parallel_for_each(
