@@ -119,11 +119,7 @@ void compute_gradient_at_coordinate()
     double const TOL = 1e-12;
     CircularToCartesian<R, Theta, X, Y> const mapping;
 
-    FieldMemRTheta_host<CoordRTheta> coords_host
-            = get_example_coords(IdxStepR(32), IdxStepTheta(32));
-    FieldMemRTheta<CoordRTheta> coords_alloc(get_idx_range(coords_host));
-    FieldRTheta<CoordRTheta> coords = get_field(coords_alloc);
-    ddc::parallel_deepcopy(coords, coords_host);
+    FieldMemRTheta_host<CoordRTheta> coords = get_example_coords(IdxStepR(32), IdxStepTheta(32));
 
     IdxRangeRTheta grid = get_idx_range(coords);
 
