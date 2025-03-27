@@ -513,7 +513,7 @@ auto create_mirror_view_and_copy(
  * @tparam MemorySpace The original memory space of the chunk of the VectorFieldMem.
  * @tparam LayoutStridedPolicy Layout tag (see Kokkos).
  *
- * @param[out] field On oputput, a VectorField containing the values of vector 
+ * @param[out] field On output, a VectorField containing the values of vector 
  * at the index idx.
  * @param[in] idx An index so specify where the values of the Vector should be 
  * copied in the VectorField. 
