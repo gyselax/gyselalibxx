@@ -110,7 +110,7 @@ jobs:
           # Make docs
           python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc
           cd docs
-          mkdocs build
+          mkdocs build --strict
         shell: bash
         continue-on-error: true
       - name: Check for new errors
