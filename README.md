@@ -18,8 +18,8 @@ https://gyselax.github.io/publication/)
 
 ## First steps
 
-- If you want to install Gyselalib follow: [installation](docs/tutorials/install.md).
-- [Getting Started with Gyselalib](docs/tutorials/getting_started.md).
+- If you want to install Gyselalib follow: [installation](docs/setup/install.md).
+- [Getting Started with Gyselalib](docs/setup/getting_started.md).
 
 ## Questions?
 
