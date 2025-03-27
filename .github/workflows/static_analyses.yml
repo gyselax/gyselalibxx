@@ -110,7 +110,7 @@ jobs:
           # Make docs
           python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc
           cd docs
-          mkdocs build --strict
+          mkdocs build
         shell: bash
         continue-on-error: true
       - name: Check for new errors
@@ -121,6 +121,12 @@ jobs:
           python3 bin/ci_tools/check_readme_presence.py pull_new_files.txt
           if [ -s docs/doxygen.log ]; then exit 1; fi
         shell: bash
+      - name: Test documentation
+        run: |
+          # Make docs
+          mkdocs build --strict
+        shell: bash
+        working-directory: ./docs
 
   cppcheck_static_analysis_errors:
     name: CppCheck static analysis errors
