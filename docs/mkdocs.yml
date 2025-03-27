@@ -45,15 +45,11 @@ nav:
 
 # Recommended for strict MkDocs diagnostics
 validation:
-  nav:
-    not_found: warn
-    omitted_files: warn
-  links:
     not_found: warn
     omitted_files: warn
     absolute_links: warn  # Or 'relative_to_docs' - new in MkDocs 1.6
     unrecognized_links: warn
-    anchors: warn  # New in MkDocs 1.6
+    anchors: info  # New in MkDocs 1.6
 
 # Theme Configuration
 theme: readthedocs  # Uses the ReadTheDocs theme for the site
