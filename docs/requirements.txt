@@ -2,4 +2,4 @@ mkdocs
 pymdown-extensions
 mkdocs-pdf
 mkdocs-include-dir-to-nav
-mkdoxy @ git+https://github.com/EmilyBourne/MkDoxy@3e9da381fd79c7a24489da86ceb9b24a0a3a058b
+mkdoxy @ git+https://github.com/EmilyBourne/MkDoxy@6adef20
