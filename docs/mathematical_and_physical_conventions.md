@@ -236,7 +236,7 @@ A_{\{p\}i} = (J_{\{q\to p\}})^{-T}\left._{\;\;i}^j\right. A_{\{q\}j} = (J_{\{q\t
 
 ## Differential operators
 
-Hereafter are expressed differential operators in a curvilinear coordinate system $`\{q^i\}`$.
+Hereafter are expressed differential operators in a curvilinear coordinate system $`\{q^i\}`$. A comprehensive derivation of such formulas can be found in Taha Sochi's note [1].
 
 ### Gradient
 
@@ -253,3 +253,21 @@ This quantity can be expressed in the both covariant $`\{\mathbf{b}^i\}`$ and co
 ```
 
 Note that the definition that uses the contravariant basis $`\{\mathbf{b}_i\}`$ is much more common.
+
+### Divergence
+
+The divergence of a vector field $`\mathbf{A} = A^i \mathbf{b}_i`$ is written as
+
+```math
+\nabla \cdot \mathbf{A} = \frac{1}{\sqrt{g}}\frac{\partial}{\partial q^i} \left( \sqrt{g} A^i\right), 
+```
+
+Where $`g`$ stands for the determinant of the metric tensor. Also note that $`g = \text{det}(G) = \text{det}(J^T J) = \text{det}(J)^2`$ thus $`\sqrt{g}`$ reduces to the determinant of the Jacobian tensor. 
+
+
+## References
+
+[1] Taha Sochi. "Tensor Calculus".
+([https://arxiv.org/abs/1610.04347](https://arxiv.org/abs/1610.04347).) 
+arXiv (2016).
+
