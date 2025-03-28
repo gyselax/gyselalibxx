@@ -189,18 +189,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a633cf2b257d6da39fcb04d154a36f06c" id="r_a633cf2b257d6da39fcb04d154a36f06c"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classTensor.html">DTensor</a>&lt; VectorIndexSet&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;, VectorIndexSet&lt; <a class="el" href="classCzarnyToCartesian.html#a15bf99762215733076b5a4c20ff8338c">R_cov</a>, <a class="el" href="classCzarnyToCartesian.html#aced2a90b42b1647181bbfece8eac8708">Theta_cov</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#a633cf2b257d6da39fcb04d154a36f06c">jacobian_matrix</a> (Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
 <tr class="memdesc:a633cf2b257d6da39fcb04d154a36f06c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full Jacobian matrix.  <br /></td></tr>
 <tr class="separator:a633cf2b257d6da39fcb04d154a36f06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7329713760ad58627151e16b70552cba" id="r_a7329713760ad58627151e16b70552cba"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#a7329713760ad58627151e16b70552cba">jacobian_11</a> (Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:a7329713760ad58627151e16b70552cba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the Jacobian matrix.  <br /></td></tr>
-<tr class="separator:a7329713760ad58627151e16b70552cba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a757ed771aa1bdb89022dc60c7de8dfaf" id="r_a757ed771aa1bdb89022dc60c7de8dfaf"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#a757ed771aa1bdb89022dc60c7de8dfaf">jacobian_12</a> (Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:a757ed771aa1bdb89022dc60c7de8dfaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the Jacobian matrix.  <br /></td></tr>
-<tr class="separator:a757ed771aa1bdb89022dc60c7de8dfaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab295bb0b8a4eed893cd37e871b6f1a8e" id="r_ab295bb0b8a4eed893cd37e871b6f1a8e"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#ab295bb0b8a4eed893cd37e871b6f1a8e">jacobian_21</a> (Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:ab295bb0b8a4eed893cd37e871b6f1a8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the Jacobian matrix.  <br /></td></tr>
-<tr class="separator:ab295bb0b8a4eed893cd37e871b6f1a8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a667c49f4af026ad1ff98fa122482e34f" id="r_a667c49f4af026ad1ff98fa122482e34f"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#a667c49f4af026ad1ff98fa122482e34f">jacobian_22</a> (Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:a667c49f4af026ad1ff98fa122482e34f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the Jacobian matrix.  <br /></td></tr>
-<tr class="separator:a667c49f4af026ad1ff98fa122482e34f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c75f9ca9bf65206ac349adb07acc497" id="r_a0c75f9ca9bf65206ac349adb07acc497"><td class="memTemplParams" colspan="2">template&lt;class IndexTag1 , class IndexTag2 &gt; </td></tr>
+<tr class="memitem:a0c75f9ca9bf65206ac349adb07acc497"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#a0c75f9ca9bf65206ac349adb07acc497">jacobian_component</a> (Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:a0c75f9ca9bf65206ac349adb07acc497"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (i,j) coefficient of the Jacobian matrix.  <br /></td></tr>
+<tr class="separator:a0c75f9ca9bf65206ac349adb07acc497"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3efb06a52c04cacab4474cd2475823ff" id="r_a3efb06a52c04cacab4474cd2475823ff"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classTensor.html">DTensor</a>&lt; VectorIndexSet&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;, VectorIndexSet&lt; <a class="el" href="classCzarnyToCartesian.html#a01671e9f90dfeda7700cd6226b3f4007">X_cov</a>, <a class="el" href="classCzarnyToCartesian.html#afff1c38ec37833746294d5ef53ac3631">Y_cov</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#a3efb06a52c04cacab4474cd2475823ff">inv_jacobian_matrix</a> (Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
 <tr class="memdesc:a3efb06a52c04cacab4474cd2475823ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full inverse Jacobian matrix.  <br /></td></tr>
 <tr class="separator:a3efb06a52c04cacab4474cd2475823ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -597,37 +589,32 @@ template&lt;class <a class="el" href="structR.html">R</a> , class <a class="el" 
 </div><div class="memdoc">
 
 <p>Compute full Jacobian matrix. </p>
-<p>For some computations, we need the complete Jacobian matrix or just the coefficients. The coefficients can be given independently with the functions jacobian_11, jacobian_12, jacobian_21 and jacobian_22.</p>
+<p>For some computations, we need the complete Jacobian matrix or just the coefficients. The coefficients can be given independently with the function jacobian_component</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The Jacobian matrix.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd>Jacobian::jacobian_11 </dd>
-<dd>
-Jacobian::jacobian_12 </dd>
-<dd>
-Jacobian::jacobian_21 </dd>
-<dd>
-Jacobian::jacobian_22 </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The Jacobian matrix. </dd></dl>
 
 </div>
 </div>
-<a id="a7329713760ad58627151e16b70552cba" name="a7329713760ad58627151e16b70552cba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7329713760ad58627151e16b70552cba">&#9670;&#160;</a></span>jacobian_11()</h2>
+<a id="a0c75f9ca9bf65206ac349adb07acc497" name="a0c75f9ca9bf65206ac349adb07acc497"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c75f9ca9bf65206ac349adb07acc497">&#9670;&#160;</a></span>jacobian_component()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class <a class="el" href="structR.html">R</a> , class <a class="el" href="structTheta.html">Theta</a> , class <a class="el" href="structX.html">X</a> , class <a class="el" href="structY.html">Y</a> &gt; </div>
+<div class="memtemplate">
+template&lt;class IndexTag1 , class IndexTag2 &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classCzarnyToCartesian.html">CzarnyToCartesian</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;::jacobian_11 </td>
+          <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classCzarnyToCartesian.html">CzarnyToCartesian</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;::jacobian_component </td>
           <td>(</td>
           <td class="paramtype">Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
@@ -641,129 +628,14 @@ template&lt;class <a class="el" href="structR.html">R</a> , class <a class="el" 
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (1,1) coefficient of the Jacobian matrix. </p>
-<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (1,1) coefficient of the Jacobian matrix is given by \( \frac{\partial x}{\partial r} \).</p>
+<p>Compute the (i,j) coefficient of the Jacobian matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,1) coefficient of the Jacobian matrix. </dd></dl>
-
-</div>
-</div>
-<a id="a757ed771aa1bdb89022dc60c7de8dfaf" name="a757ed771aa1bdb89022dc60c7de8dfaf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a757ed771aa1bdb89022dc60c7de8dfaf">&#9670;&#160;</a></span>jacobian_12()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class <a class="el" href="structR.html">R</a> , class <a class="el" href="structTheta.html">Theta</a> , class <a class="el" href="structX.html">X</a> , class <a class="el" href="structY.html">Y</a> &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classCzarnyToCartesian.html">CzarnyToCartesian</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;::jacobian_12 </td>
-          <td>(</td>
-          <td class="paramtype">Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>coord</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Compute the (1,2) coefficient of the Jacobian matrix. </p>
-<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (1,2) coefficient of the Jacobian matrix is given by \( \frac{\partial x}{\partial \theta} \).</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,2) coefficient of the Jacobian matrix. </dd></dl>
-
-</div>
-</div>
-<a id="ab295bb0b8a4eed893cd37e871b6f1a8e" name="ab295bb0b8a4eed893cd37e871b6f1a8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab295bb0b8a4eed893cd37e871b6f1a8e">&#9670;&#160;</a></span>jacobian_21()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class <a class="el" href="structR.html">R</a> , class <a class="el" href="structTheta.html">Theta</a> , class <a class="el" href="structX.html">X</a> , class <a class="el" href="structY.html">Y</a> &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classCzarnyToCartesian.html">CzarnyToCartesian</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;::jacobian_21 </td>
-          <td>(</td>
-          <td class="paramtype">Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>coord</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Compute the (2,1) coefficient of the Jacobian matrix. </p>
-<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (2,1) coefficient of the Jacobian matrix is given by \( \frac{\partial y}{\partial r} \).</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix. .</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,1) coefficient of the Jacobian matrix. </dd></dl>
-
-</div>
-</div>
-<a id="a667c49f4af026ad1ff98fa122482e34f" name="a667c49f4af026ad1ff98fa122482e34f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a667c49f4af026ad1ff98fa122482e34f">&#9670;&#160;</a></span>jacobian_22()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class <a class="el" href="structR.html">R</a> , class <a class="el" href="structTheta.html">Theta</a> , class <a class="el" href="structX.html">X</a> , class <a class="el" href="structY.html">Y</a> &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classCzarnyToCartesian.html">CzarnyToCartesian</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;::jacobian_22 </td>
-          <td>(</td>
-          <td class="paramtype">Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>coord</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Compute the (2,2) coefficient of the Jacobian matrix. </p>
-<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (2,2) coefficient of the Jacobian matrix is given by \( \frac{\partial y}{\partial \theta} \).</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,2) coefficient of the Jacobian matrix. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (i,j) coefficient of the Jacobian matrix. </dd></dl>
 
 </div>
 </div>

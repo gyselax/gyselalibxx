@@ -17,9 +17,6 @@ var classCartesianToCircular =
     [ "operator()", "classCartesianToCircular.html#ac7328c386b3ece480b67c475eb9d281a", null ],
     [ "jacobian", "classCartesianToCircular.html#a275832f34d53e29ba6a1304819d040fe", null ],
     [ "jacobian_matrix", "classCartesianToCircular.html#a82b4bdf6426a7ca736ece9eda07fd968", null ],
-    [ "jacobian_11", "classCartesianToCircular.html#acf596f31101774cc5f69e482a3f2be32", null ],
-    [ "jacobian_12", "classCartesianToCircular.html#aaebd26c2337e7d307ce00f52617bc28c", null ],
-    [ "jacobian_21", "classCartesianToCircular.html#a7e395b8b3165f96325480bb17158cc57", null ],
-    [ "jacobian_22", "classCartesianToCircular.html#aace08921f0b3db2aae6abf2dadf6ffca", null ],
+    [ "jacobian_component", "classCartesianToCircular.html#af69ebbdc58f56c521d3c25589fe16769", null ],
     [ "get_inverse_mapping", "classCartesianToCircular.html#a12006646133b008b23ec0467dc76886a", null ]
 ];
