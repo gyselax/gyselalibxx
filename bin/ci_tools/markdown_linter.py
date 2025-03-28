@@ -24,12 +24,7 @@ def find_markdown_files(folder):
     """
     Find all.md files in a given folder and its subfolders.
     """
-    md_files = []
-    for root, _, files in os.walk(folder):
-        for file in files:
-            if file.endswith('.md'):
-                md_files.append(os.path.join(root, file))
-    return md_files
+    return glob.glob('**/*.md', root_dir=folder, recursive=True)
 # '$'
 inline_math_tag = re.compile(r'(?<!\`)(?<!\$)\$(?!\`)(?!\$)')
 start_inline_math_tag = re.compile(r'(?<!\$)\$\`(?!\$)')
