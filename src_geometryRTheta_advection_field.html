@@ -138,7 +138,7 @@ E = - \nabla  \phi, \\
 </ul>
 <p>The <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> can handle as input the two forms. If a Field is given as input, it computes the spline representation (on the cross-product of two 1D bases) using a SplineBuilder2D. The spline representation is needed to compute the derivatives of the function \(\phi\). If the <a class="el" href="structPolarSplineMem.html" title="A structure containing the two FieldMems necessary to define a spline on a set of polar basis splines...">PolarSplineMem</a> representation is given as input, it can directly compute the derivatives of the function \(\phi\).</p>
 <p>Once the advection field computed, it is given as input to the <a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> operator to advect the density \(\rho\) function. The <a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> operator can handle the advection with an advection field along \((x,y)\) and with an advection field along \((r,\theta)\). But as the <a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> operator advects in the physical domain, it is recommended to work with the advection field along \((x,y)\).</p>
-<h3><a class="anchor" id="autotoc_md56"></a>
+<h3><a class="anchor" id="autotoc_md57"></a>
 Advection field along the physical domain axis</h3>
 <p>Thanks to the spline representation, the derivatives \(\partial_r \phi\) and \(\partial_\theta \phi\) are computed. The computation of the electrical field can be ill-defined around the O-point, so we treat this area separately.</p>
 <ul>
@@ -214,10 +214,10 @@ Advection field along the physical domain axis</h3>
 \]
 </p>
 <p>(In the code, we chose \(\theta_1 = \frac{\pi}{4}\) and \(\theta_2  = - \frac{\pi}{4}\), and \(\varepsilon = 10^{-12}\).)</p>
-<h3><a class="anchor" id="autotoc_md57"></a>
+<h3><a class="anchor" id="autotoc_md58"></a>
 Advection field along the logical domain axis</h3>
 <p>Firstly, the derivatives \(\partial_r \phi\) and \(\partial_\theta \phi\) are also computed here.</p>
-<h4><a class="anchor" id="autotoc_md58"></a>
+<h4><a class="anchor" id="autotoc_md59"></a>
 General coordinates system</h4>
 <ul>
 <li>In a <b>general coordinate system</b>, the gradient of a scalar function in the logical domain is given in the <a class="el" href="docs_mathematical_and_physical_conventions.html">covariant basis</a> by</li>
@@ -252,7 +252,7 @@ J^{-T}
 \end{bmatrix}.
 \]
 </p>
-<h4><a class="anchor" id="autotoc_md59"></a>
+<h4><a class="anchor" id="autotoc_md60"></a>
 Application to the advection field</h4>
 <p>The gradient is expressed in the <em>covariant</em> basis. We express the advection field in the <em>contravariant</em> basis to use the nice property \(e_r\cdot e^r = 1\) and \(e_\theta\cdot e^\theta = 1\).</p>
 <ul>

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['k_0',['k',['../classMatrix__Corner__Block.html#ae4272c855b07fbdf88cc781702145ab0',1,'Matrix_Corner_Block']]],
-  ['kelvin_20helmholtz_20instability_20test_20case_1',['kelvin helmholtz instability test case',['../src_geometryXY_initialisation.html#src_geometryXY_initialisation__Kelvin-Helmholtz_instability_test_case',1,'Kelvin-Helmholtz instability test case'],['../simulations_geometryXY_guiding_centre.html#autotoc_md47',1,'Test case: Kelvin-Helmholtz instability test case']]],
+  ['kelvin_20helmholtz_20instability_20test_20case_1',['kelvin helmholtz instability test case',['../src_geometryXY_initialisation.html#src_geometryXY_initialisation__Kelvin-Helmholtz_instability_test_case',1,'Kelvin-Helmholtz instability test case'],['../simulations_geometryXY_guiding_centre.html#autotoc_md48',1,'Test case: Kelvin-Helmholtz instability test case']]],
   ['kelvinhelmholtzinstabilityinitialisation_2',['kelvinhelmholtzinstabilityinitialisation',['../classKelvinHelmholtzInstabilityInitialisation.html',1,'KelvinHelmholtzInstabilityInitialisation'],['../classKelvinHelmholtzInstabilityInitialisation.html#a02c15d97613432489efdafaf5b3f3657',1,'KelvinHelmholtzInstabilityInitialisation::KelvinHelmholtzInstabilityInitialisation()']]],
   ['key_20difference_3a_20functional_20vs_20object_20oriented_20programming_20oop_3',['Key Difference: Functional vs. Object-Oriented Programming (OOP)',['../docs_getting_started.html#autotoc_md22',1,'']]],
   ['kineticsource_4',['kineticsource',['../classKineticSource.html',1,'KineticSource'],['../classKineticSource.html#ac1eb6d9a4a099ed40aa4bd3b22165358',1,'KineticSource::KineticSource()']]],

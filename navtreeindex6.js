@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"l__norm__tools_8hpp.html#abd8c6a554b42bfe5b2e272cf286993a7":[17,0,11,2,6],
 "l__norm__tools_8hpp.html#adaecce94200353e1fc9bd3e73d9e85ca":[17,0,11,2,5],
 "l__norm__tools_8hpp.html#ae78caab94d9b010c79a18002ffc99331":[17,0,11,2,1],
 "l__norm__tools_8hpp.html#af586948949594fb53ccfd4010d0a0fd6":[17,0,11,2,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX6 =
 "structGEOM__NAMESPACE__NAME_1_1GridR.html":[16,3,4],
 "structGEOM__NAMESPACE__NAME_1_1GridTheta.html":[16,3,5],
 "structGEOM__NAMESPACE__NAME_1_1GridX.html":[16,3,6],
-"structGEOM__NAMESPACE__NAME_1_1GridY.html":[16,3,7],
-"structGEOM__NAMESPACE__NAME_1_1R.html":[16,3,8]
+"structGEOM__NAMESPACE__NAME_1_1GridY.html":[16,3,7]
 };

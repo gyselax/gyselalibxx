@@ -301,7 +301,7 @@ Curvilinear to curvilinear</h3>
 </p>
 <h1><a class="anchor" id="docs_mathematical_and_physical_conventions__Differential_operators"></a>
 Differential operators</h1>
-<p>Hereafter are expressed differential operators in a curvilinear coordinate system \(\{q^i\}\).</p>
+<p>Hereafter are expressed differential operators in a curvilinear coordinate system \(\{q^i\}\). A comprehensive derivation of such formulas can be found in Taha Sochi's note [1].</p>
 <h3><a class="anchor" id="autotoc_md30"></a>
 Gradient</h3>
 <p>Let us consider a scalar field \(f\). The gradient \(\nabla f\) of such field is defined in the Cartesian basis \(\{\mathbf{e}_i\}\) as</p>
@@ -314,7 +314,23 @@ Gradient</h3>
 \[\nabla f = \frac{\partial f}{\partial q^i} \mathbf{b}^i = g^{ij} \frac{\partial f}{\partial q^j} \mathbf{b}_i. 
 \]
 </p>
-<p>Note that the definition that uses the contravariant basis \(\{\mathbf{b}_i\}\) is much more common. </p>
+<p>Note that the definition that uses the contravariant basis \(\{\mathbf{b}_i\}\) is much more common.</p>
+<h3><a class="anchor" id="autotoc_md31"></a>
+Divergence</h3>
+<p>The divergence of a vector field \(\mathbf{A} = A^i \mathbf{b}_i\) is written as</p>
+<p class="formulaDsp">
+\[\nabla \cdot \mathbf{A} = \frac{1}{\sqrt{g}}\frac{\partial}{\partial q^i} \left( \sqrt{g} A^i\right), 
+\]
+</p>
+<p>Where \(g\) stands for the determinant of the metric tensor. Also note that \(g = \text{det}(G) = \text{det}(J^T J) = \text{det}(J)^2\) thus \(\sqrt{g}\) reduces to the absolute value of the determinant of the Jacobian tensor. In the code we evaluate the above formula by writing</p>
+<p class="formulaDsp">
+\[\nabla \cdot \mathbf{A} = \frac{\partial A^i}{\partial q^i} +  \frac{1}{\sqrt{g}}A^i \frac{\partial \sqrt{g}}{\partial q^i}, 
+\]
+</p>
+<p>So as to be able to reuse the values of the partial derivatives of \(A^i\) between various differential operators.</p>
+<h1><a class="anchor" id="docs_mathematical_and_physical_conventions__References"></a>
+References</h1>
+<p>[1] Taha Sochi. "Tensor Calculus". (<a href="https://arxiv.org/abs/1610.04347">https://arxiv.org/abs/1610.04347</a>.) arXiv (2016). </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

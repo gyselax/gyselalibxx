@@ -134,7 +134,7 @@ Velocity advection</h1>
 <li>\(A\) the advection field. It could be defined on a subdomain \(\Omega&#39;\subset \Omega\);</li>
 <li>and \(x_i\) a given direction. The advection field domain has to be defined on this dimension for the time integration method.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md49"></a>
+<h3><a class="anchor" id="autotoc_md50"></a>
 Example of use</h3>
 <p>Here are some examples of equation types the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest GridInterest.">BslAdvection1D</a> operator can solve:</p>
 <ul>
@@ -202,7 +202,7 @@ Example of use</h3>
 <div class="fragment"><div class="line">DFieldSpXVx f(idx_range_sp_xvx);</div>
 <div class="line">DFieldSpX A(idx_range_sp_x);</div>
 <div class="line"><span class="keyword">using </span>IDimInterest = IDimX;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md50"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md51"></a>
 Parameters</h3>
 <p>The operator takes as templated parameters:</p>
 <ul>
@@ -233,7 +233,7 @@ Y(s; s, x, y) = y.
 </p>
 <p>The characteristic \(X\) represents the trajectory on the \(x\)-dimension of the solution \(f\) (idem for \(Y\) on the \(y\)-dimension). The parametrisation of the trajectory are given after the ";". \((X (t; s, x, y), Y (t; s, x, y))\) indicates that at the time \(s\), the trajectory passes by the point \((x,y)\). In the backward semi-Lagrangian method, we solve the equation of the characteristics to identify the trajectory of the solution passing by each mesh point \((x,y)_{ij}\) at the time \(s = t+dt\). We are interested in its position at the previous time step \(t\). The conservation property along the characteristics informs us that the value of the function at this position \((X(t; s=t+dt, x, y), Y (t; s=t+dt, x, y))\) at \(t\) is the same as the value of the function at the mesh point \((x,y)_{ij}\) at the time \(s = t+dt\).</p>
 <p>The characteristic feet are calculated using a time integration method. For details of available methods see <a class="el" href="src_timestepper.html">Time Stepping Methods</a>.</p>
-<h3><a class="anchor" id="autotoc_md51"></a>
+<h3><a class="anchor" id="autotoc_md52"></a>
 Advection domain</h3>
 <p>There are two advection domains to consider:</p>
 <ul>

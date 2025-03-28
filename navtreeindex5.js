@@ -159,6 +159,7 @@ var NAVTREEINDEX5 =
 "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Metric_tensor":[12,4],
 "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Multi-dimensional_tensors":[12,3],
 "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__On_the_use_of_curvilinear_coordinates":[12,1],
+"docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__References":[12,7],
 "edge_8hpp_source.html":[17,0,14,0,2],
 "edge__transformation_8hpp_source.html":[17,0,14,0,3],
 "euler_8hpp_source.html":[17,0,19,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX5 =
 "l__norm__tools_8hpp.html#a4c8219dfeea80b86bff16a853e188f8d":[17,0,11,2,3],
 "l__norm__tools_8hpp.html#a67052dc8560915ab8cf2d26716926883":[17,0,11,2,10],
 "l__norm__tools_8hpp.html#a7f4a4eefdd0dcdf92e87faf0a722f611":[17,0,11,2,7],
-"l__norm__tools_8hpp.html#a939e3995d29bdb32c073e38494563009":[17,0,11,2,0],
-"l__norm__tools_8hpp.html#abd8c6a554b42bfe5b2e272cf286993a7":[17,0,11,2,6]
+"l__norm__tools_8hpp.html#a939e3995d29bdb32c073e38494563009":[17,0,11,2,0]
 };

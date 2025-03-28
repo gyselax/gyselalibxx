@@ -126,7 +126,7 @@ Spline Interpolation</h1>
 <p>Interpolation by a spline interpolating function is implemented in the class <a class="el" href="classSplineInterpolator.html" title="A class for interpolating a function using splines.">SplineInterpolator</a>. In this case the interpolating function \(\phi(x)\) is a spline. The basis splines are passed as a template parameter, it is these that determine the order of the spline interpolation.</p>
 <p>In order for the interpolation to function correctly the values \(f_j=f(x_j)\) provided must be located at the points \(x_j\) identified as the spline interpolation points.</p>
 <p>The spline interpolation method is based entirely on the SplineBuilder and SplineEvaluator classes which are found in DDC.</p>
-<h3><a class="anchor" id="autotoc_md69"></a>
+<h3><a class="anchor" id="autotoc_md70"></a>
 Polar Spline Interpolation</h3>
 <p>There is no method to construct a polar spline from the values of a function. It should be possible to construct such a <code>PolarSplineBuilder</code>, but it is not clear where the interpolation points should be placed near the O-point in order to obtain a well-conditioned problem. The B-splines, splines and the spline evaluator for the polar splines can be found in the sub-folder <a class="el" href="src_interpolation_polar_splines.html">Polar Splines</a>.</p>
 <h1><a class="anchor" id="src_interpolation__Memory_concerns"></a>

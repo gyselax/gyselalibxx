@@ -148,19 +148,19 @@ Time integration methods</h1>
 </ul>
 <p>We are listing the different schemes for this equation \(\partial_t X (t) = A(t, X(t))\).</p>
 <p>We write \(X (t) = X (t; s, x)\), \(X^n = X(t^n)\) and \(A^n(X) = A(t^n, X)\) for a time discretisation \(\{t^n; t^n &gt; t^{n-1},  \forall n\}_n\).</p>
-<h3><a class="anchor" id="autotoc_md52"></a>
+<h3><a class="anchor" id="autotoc_md53"></a>
 Explicit Euler method</h3>
 <ul>
 <li>Scheme: \(X^n = X^{n+1} - dt A^{n+1}(X^{n+1})\)</li>
 <li>Convergence order : 1.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md53"></a>
+<h3><a class="anchor" id="autotoc_md54"></a>
 Crank-Nicolson method</h3>
 <ul>
 <li>Scheme: \(X^{k+1} = X^{n+1} - \frac{dt}{2} \left( A^{n+1}(X^{n+1}) + A^k(X^k) \right)\) and \(X^{n+1} = X^{k+1}\) once converged.</li>
 <li>Convergence order : 2.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md54"></a>
+<h3><a class="anchor" id="autotoc_md55"></a>
 RK3 method</h3>
 <ul>
 <li>Scheme: \(X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 4 k_2 + k_3 \right)\)<ul>
@@ -174,7 +174,7 @@ RK3 method</h3>
 </li>
 <li>Convergence order : 3.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md55"></a>
+<h3><a class="anchor" id="autotoc_md56"></a>
 RK4 method</h3>
 <ul>
 <li>Scheme: \(X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 2 k_2 + 2 k_3  + k_4\right)\)<ul>

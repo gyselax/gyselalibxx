@@ -116,10 +116,10 @@ Derivative tools</h1>
 <li><code><a class="el" href="central__fdm__partial__derivatives_8hpp_source.html">central_fdm_partial_derivatives.hpp</a></code> : calculate derivatives using Finite Difference Method. <br  />
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md73"></a>
+<h3><a class="anchor" id="autotoc_md74"></a>
 Spline derivatives</h3>
 <p>The <code><a class="el" href="spline__builder__2d__cache_8hpp_source.html">spline_builder_2d_cache.hpp</a></code> file contains a class to be used with a 2d spline representation to compute partial derivatives. The cache class allows for calling the 2d splines builder only once per iteration, even if partial derivatives are evaluated in two directions.</p>
-<h3><a class="anchor" id="autotoc_md74"></a>
+<h3><a class="anchor" id="autotoc_md75"></a>
 Finite difference derivatives</h3>
 <p>The method is as follow: Take a function \(f\). We want to approximate the value of \(f&#39;(x_1)\) knowing the value of \(f(x_1)\), \(f(x_2)\) and \(f(x_3)\) for \(x_3&gt;x_2&gt;x_1\). Denote \(\alpha :=|x_2-x_1|\) and \(\beta :=|x_3-x_2|\). We call \(Df(x_1)\) the approximate value of \(f&#39;(x_1)\). We want \(|f&#39;(x_1)-Df(x_1)|=o\left(\max(\alpha,\beta\right)^2)\). To this end, write</p>
 <p class="formulaDsp">

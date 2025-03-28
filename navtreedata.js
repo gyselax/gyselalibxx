@@ -92,7 +92,8 @@ var NAVTREE =
       [ "Multi-dimensional tensors", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Multi-dimensional_tensors", null ],
       [ "Metric tensor", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Metric_tensor", null ],
       [ "Jacobian", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Jacobian", null ],
-      [ "Differential operators", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Differential_operators", null ]
+      [ "Differential operators", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Differential_operators", null ],
+      [ "References", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__References", null ]
     ] ],
     [ "Gyselalib++ simulations", "simulations.html", [
       [ "Simulations in (r, theta) geometry", "simulations_geometryRTheta.html", [
@@ -293,8 +294,8 @@ var NAVTREEINDEX =
 "classMatrix__Corner__Block.html#a02c714c7dbf1c5d96d3deccdc2e1c510",
 "classPolarSplineEvaluator.html#a66468d51237ba05121d617991da901f3",
 "classVectorFieldMem.html#a94522577e4477ec70867222321b1c6ae",
-"l__norm__tools_8hpp.html#adaecce94200353e1fc9bd3e73d9e85ca",
-"structGEOM__NAMESPACE__NAME_1_1R.html#a8340119f57eacc403c379b792f37d669"
+"l__norm__tools_8hpp.html#abd8c6a554b42bfe5b2e272cf286993a7",
+"structGEOM__NAMESPACE__NAME_1_1R.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

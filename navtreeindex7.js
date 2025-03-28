@@ -1,5 +1,6 @@
 var NAVTREEINDEX7 =
 {
+"structGEOM__NAMESPACE__NAME_1_1R.html":[16,3,8],
 "structGEOM__NAMESPACE__NAME_1_1R.html#a8340119f57eacc403c379b792f37d669":[16,3,8,0],
 "structGEOM__NAMESPACE__NAME_1_1R__cov.html":[16,3,9],
 "structGEOM__NAMESPACE__NAME_1_1R__cov.html#a9db969bd4e7d1ff53df6ef4bdb8badac":[16,3,9,0],
