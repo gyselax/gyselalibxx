@@ -19,14 +19,14 @@ nav:
   - Standards:
       - Coding Standard: docs/standards/CODING_STANDARD.md
       - Math & Physics: docs/standards/mathematical_and_physical_conventions.md
-  - Development:
-      - Adding Docs: docs/development/Adding_docs.md
-      - Using Git: docs/development/Using_git.md
-      - Developer FAQ: docs/development/developer_FAQ.md
   - User:
       - Gyselalib Source: src
       - Gyselalib Simulations: simulations
       - Gyselalib Tests: tests
+  - Development:
+      - Adding Docs: docs/development/Adding_docs.md
+      - Using Git: docs/development/Using_git.md
+      - Developer FAQ: docs/development/developer_FAQ.md
   - Troubleshooting:
       - Compilation Issues: docs/troubleshooting/Common_compilation_problems.md
 
