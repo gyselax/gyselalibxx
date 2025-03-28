@@ -1,0 +1,11 @@
+var searchData=
+[
+  ['space_5ftags_0',['space_tags',['../classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.html#a5b96ecb99d32270b694bed7dc17e9b0e',1,'IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;']]],
+  ['span_5ftype_1',['span_type',['../classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.html#ad4c88b591e1de7d100a400f9fd0203ad',1,'DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::span_type'],['../classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html#ad62673081818631af0ba0c81dacfff98',1,'DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::span_type'],['../classVectorField.html#a26a5aba14a99a5d32086df8e34c89131',1,'VectorField::span_type'],['../classVectorFieldMem.html#a1706adefbd7b99f3421d6ec1a39d845c',1,'VectorFieldMem::span_type'],['../classMultipatchField.html#abd59fa1d9f2605c57ea59eeca005b079',1,'MultipatchField::span_type'],['../classMultipatchFieldMem.html#a5dbf8c8141b899d8f283676228c1d0ee',1,'MultipatchFieldMem::span_type']]],
+  ['spatial_5fdim_5ffor_2',['spatial_dim_for',['../classGeometryXVx.html#a801a3e9956431568cae987d46f81b968',1,'GeometryXVx']]],
+  ['spline_5fidx_5frange_5ftype_3',['spline_idx_range_type',['../classMultipatchSplineEvaluator2D.html#a1b17cff3afde8b9caf66f2fcfacce553',1,'MultipatchSplineEvaluator2D']]],
+  ['spline_5fidx_5frange_5ftype1_4',['spline_idx_range_type1',['../classMultipatchSplineEvaluator2D.html#a89581b13c5342e2a4202bcfe36f01d23',1,'MultipatchSplineEvaluator2D']]],
+  ['spline_5fidx_5frange_5ftype2_5',['spline_idx_range_type2',['../classMultipatchSplineEvaluator2D.html#acf8c87496d43c9d876e4e41d78db178c',1,'MultipatchSplineEvaluator2D']]],
+  ['splinecoeffonpatch_6',['SplineCoeffOnPatch',['../classMultipatchSplineEvaluator2D.html#aad2106e82884ea55e8fa063b0d425e0b',1,'MultipatchSplineEvaluator2D']]],
+  ['stride_5ftype_7',['stride_type',['../structIdxRangeSliceIterator.html#a186ef24babacb71c2a78f6966d82cdb2',1,'IdxRangeSliceIterator']]]
+];

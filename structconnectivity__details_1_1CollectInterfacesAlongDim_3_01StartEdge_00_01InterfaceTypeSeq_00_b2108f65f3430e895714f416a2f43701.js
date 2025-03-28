@@ -1,0 +1,5 @@
+var structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701 =
+[
+    [ "NewInterfaceList", "structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701.html#aa92bb7a60063721d6f9cb3abb70caf06", null ],
+    [ "type", "structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701.html#a2636f16ad2713171f31c1e914e5e4ffa", null ]
+];

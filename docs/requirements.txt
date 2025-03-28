@@ -1,5 +1,0 @@
-mkdocs
-pymdown-extensions
-mkdocs-pdf
-mkdocs-include-dir-to-nav
-mkdoxy @ git+https://github.com/EmilyBourne/MkDoxy@6adef20

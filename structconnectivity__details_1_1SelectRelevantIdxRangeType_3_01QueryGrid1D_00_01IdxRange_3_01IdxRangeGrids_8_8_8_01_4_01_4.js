@@ -1,0 +1,4 @@
+var structconnectivity__details_1_1SelectRelevantIdxRangeType_3_01QueryGrid1D_00_01IdxRange_3_01IdxRangeGrids_8_8_8_01_4_01_4 =
+[
+    [ "type", "structconnectivity__details_1_1SelectRelevantIdxRangeType_3_01QueryGrid1D_00_01IdxRange_3_01IdxRangeGrids_8_8_8_01_4_01_4.html#aaaf7c6c9ace8dd44ff08cd50695cb3ab", null ]
+];

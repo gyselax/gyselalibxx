@@ -1,0 +1,4 @@
+var structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_4_01_4 =
+[
+    [ "type", "structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_4_01_4.html#aa9bdbcc7da369ed1f67c16b29380e10f", null ]
+];

@@ -1,0 +1,4 @@
+var structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_ebd86d7b2345baf351562d16964c47d9 =
+[
+    [ "type", "structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_ebd86d7b2345baf351562d16964c47d9.html#a2086dfaa9ddbdd4eb07271691f38fee5", null ]
+];

@@ -1,0 +1,4 @@
+var structconnectivity__details_1_1ExtractPatches_3_01ddc_1_1detail_1_1TypeSeq_3_01EdgeType1_00_01EdgeTypes_8_8_8_01_4_01_4 =
+[
+    [ "type", "structconnectivity__details_1_1ExtractPatches_3_01ddc_1_1detail_1_1TypeSeq_3_01EdgeType1_00_01EdgeTypes_8_8_8_01_4_01_4.html#a8965f4b521e6227c5d1b785cc8b5fb25", null ]
+];
