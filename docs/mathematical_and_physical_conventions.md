@@ -24,17 +24,17 @@ Note that even though an inverse of the functions $`q^i(x^1, \ldots , x^N)`$ mus
 The position of any point in space can be written as
 
 ```math
-\overrightarrow{r} = x^i \mathbf{e}_i,
+\overrightarrow{x} = x^i \mathbf{e}_i,
 ```
 
-where we introduced the unit vectors of the orthonormal Cartesian basis $`\{\mathbf{e}_i\}`$. The position vector $`\overrightarrow{r}`$ is not to be confused with the radial coordinate $`r`$. We rely on the Einstein summation in the above equation and in the following, i.e. we consider that repeated indices indicate a summation. See the [wikipedia page on Einstein summation](https://en.wikipedia.org/wiki/Einstein_notation) for more details.
+where we introduced the unit vectors of the orthonormal Cartesian basis $`\{\mathbf{e}_i\}`$. The position vector $`\overrightarrow{x}`$ is not to be confused with the radial coordinate $`r`$. We rely on the Einstein summation in the above equation and in the following, i.e. we consider that repeated indices indicate a summation. See the [wikipedia page on Einstein summation](https://en.wikipedia.org/wiki/Einstein_notation) for more details.
 
 ## Contravariant and covariant bases
 
 Let us define the *contravariant basis* $`\{\mathbf{b}_i\}`$ associated to the $`\{q^i\}`$ coordinates by
 
 ```math
-\mathbf{b}_i = \frac{\partial \overrightarrow{r}}{\partial q^i} = \frac{\partial x^j}{\partial q^i} \mathbf{e}_j,
+\mathbf{b}_i = \frac{\partial \overrightarrow{x}}{\partial q^i} = \frac{\partial x^j}{\partial q^i} \mathbf{e}_j,
 ```
 
 and its dual basis, the *covariant basis* $`\{\mathbf{b}^i\}`$ by
