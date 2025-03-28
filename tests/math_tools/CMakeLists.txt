@@ -5,6 +5,7 @@ include(GoogleTest)
 
 add_executable(unit_tests_math_tools
     test_lnorm_tools.cpp
+    test_math_tools.cpp
     test_partial_derivatives.cpp
     test_spline_2d_cache.cpp
     ../main.cpp
