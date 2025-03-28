@@ -173,16 +173,23 @@ public:
 template <typename Type, typename CoordinateType>
 class Defines2DInvJacobian
 {
+    using DimRes0 = ddc::type_seq_element_t<0, ddc::to_type_seq_t<CoordinateType>>;
+    using DimRes1 = ddc::type_seq_element_t<1, ddc::to_type_seq_t<CoordinateType>>;
+    using DimArg0_cov =
+            typename ddc::type_seq_element_t<0, ddc::to_type_seq_t<CoordinateType>>::Dual;
+    using DimArg1_cov =
+            typename ddc::type_seq_element_t<1, ddc::to_type_seq_t<CoordinateType>>::Dual;
+
     template <typename ClassType>
     using inv_jacobian_type = decltype(&ClassType::inv_jacobian_matrix);
     template <typename ClassType>
-    using inv_jacobian_11 = decltype(&ClassType::inv_jacobian_11);
+    using inv_jacobian_11 = decltype(&ClassType::template inv_jacobian_component<DimRes0, DimArg0_cov>);
     template <typename ClassType>
-    using inv_jacobian_12 = decltype(&ClassType::inv_jacobian_12);
+    using inv_jacobian_12 = decltype(&ClassType::template inv_jacobian_component<DimRes0, DimArg1_cov>);
     template <typename ClassType>
-    using inv_jacobian_21 = decltype(&ClassType::inv_jacobian_21);
+    using inv_jacobian_21 = decltype(&ClassType::template inv_jacobian_component<DimRes1, DimArg0_cov>);
     template <typename ClassType>
-    using inv_jacobian_22 = decltype(&ClassType::inv_jacobian_22);
+    using inv_jacobian_22 = decltype(&ClassType::template inv_jacobian_component<DimRes1, DimArg1_cov>);
 
     static std::tuple<bool, const char*> constexpr has_2d_inv_jacobian_methods()
     {
@@ -217,7 +224,7 @@ class Defines2DInvJacobian
             }
             if (!std::is_invocable_r_v<
                         double,
-                        decltype(&Type::inv_jacobian_11),
+                        inv_jacobian_11<Type>,
                         Type,
                         CoordinateType>) {
                 return std::make_tuple(
@@ -227,7 +234,7 @@ class Defines2DInvJacobian
             }
             if (!std::is_invocable_r_v<
                         double,
-                        decltype(&Type::inv_jacobian_12),
+                        inv_jacobian_12<Type>,
                         Type,
                         CoordinateType>) {
                 return std::make_tuple(
@@ -237,7 +244,7 @@ class Defines2DInvJacobian
             }
             if (!std::is_invocable_r_v<
                         double,
-                        decltype(&Type::inv_jacobian_21),
+                        inv_jacobian_21<Type>,
                         Type,
                         CoordinateType>) {
                 return std::make_tuple(
@@ -247,7 +254,7 @@ class Defines2DInvJacobian
             }
             if (!std::is_invocable_r_v<
                         double,
-                        decltype(&Type::inv_jacobian_22),
+                        inv_jacobian_22<Type>,
                         Type,
                         CoordinateType>) {
                 return std::make_tuple(

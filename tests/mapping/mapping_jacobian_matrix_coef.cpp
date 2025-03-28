@@ -63,12 +63,12 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCircMap)
         Tensor inv_Jacobian_matrix = mapping.inv_jacobian_matrix(coords(irtheta));
 
         DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X, Y>> inv_Jacobian_matrix_coeff;
-        ddcHelper::get<R, X>(inv_Jacobian_matrix_coeff) = mapping.inv_jacobian_11(coords(irtheta));
-        ddcHelper::get<R, Y>(inv_Jacobian_matrix_coeff) = mapping.inv_jacobian_12(coords(irtheta));
+        ddcHelper::get<R, X>(inv_Jacobian_matrix_coeff) = mapping.template inv_jacobian_component<R,X>(coords(irtheta));
+        ddcHelper::get<R, Y>(inv_Jacobian_matrix_coeff) = mapping.template inv_jacobian_component<R,Y>(coords(irtheta));
         ddcHelper::get<Theta, X>(inv_Jacobian_matrix_coeff)
-                = mapping.inv_jacobian_21(coords(irtheta));
+                = mapping.template inv_jacobian_component<Theta, X>(coords(irtheta));
         ddcHelper::get<Theta, Y>(inv_Jacobian_matrix_coeff)
-                = mapping.inv_jacobian_22(coords(irtheta));
+                = mapping.template inv_jacobian_component<Theta, Y>(coords(irtheta));
 
         EXPECT_TRUE(inv_Jacobian_matrix == inv_Jacobian_matrix_coeff);
     });
@@ -112,12 +112,12 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCzarMap)
         Tensor inv_Jacobian_matrix = inv_jacobian(coords(irtheta));
 
         DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X, Y>> inv_Jacobian_matrix_coeff;
-        ddcHelper::get<R, X>(inv_Jacobian_matrix_coeff) = mapping.inv_jacobian_11(coords(irtheta));
-        ddcHelper::get<R, Y>(inv_Jacobian_matrix_coeff) = mapping.inv_jacobian_12(coords(irtheta));
+        ddcHelper::get<R, X>(inv_Jacobian_matrix_coeff) = mapping.template inv_jacobian_component<R, X>(coords(irtheta));
+        ddcHelper::get<R, Y>(inv_Jacobian_matrix_coeff) = mapping.template inv_jacobian_component<R, Y>(coords(irtheta));
         ddcHelper::get<Theta, X>(inv_Jacobian_matrix_coeff)
-                = mapping.inv_jacobian_21(coords(irtheta));
+                = mapping.template inv_jacobian_component<Theta, X>(coords(irtheta));
         ddcHelper::get<Theta, Y>(inv_Jacobian_matrix_coeff)
-                = mapping.inv_jacobian_22(coords(irtheta));
+                = mapping.template inv_jacobian_component<Theta, Y>(coords(irtheta));
 
         EXPECT_TRUE(inv_Jacobian_matrix == inv_Jacobian_matrix_coeff);
     });
@@ -199,13 +199,13 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
 
             DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X, Y>> inv_Jacobian_matrix_coeff;
             ddcHelper::get<R, X>(inv_Jacobian_matrix_coeff)
-                    = inv_jacobian.inv_jacobian_11(coord_rtheta);
+                    = inv_jacobian.template inv_jacobian_component<R, X>(coord_rtheta);
             ddcHelper::get<R, Y>(inv_Jacobian_matrix_coeff)
-                    = inv_jacobian.inv_jacobian_12(coord_rtheta);
+                    = inv_jacobian.template inv_jacobian_component<R, Y>(coord_rtheta);
             ddcHelper::get<Theta, X>(inv_Jacobian_matrix_coeff)
-                    = inv_jacobian.inv_jacobian_21(coord_rtheta);
+                    = inv_jacobian.template inv_jacobian_component<Theta, X>(coord_rtheta);
             ddcHelper::get<Theta, Y>(inv_Jacobian_matrix_coeff)
-                    = inv_jacobian.inv_jacobian_22(coord_rtheta);
+                    = inv_jacobian.template inv_jacobian_component<Theta, Y>(coord_rtheta);
 
             EXPECT_TRUE(inv_Jacobian_matrix == inv_Jacobian_matrix_coeff);
         }
