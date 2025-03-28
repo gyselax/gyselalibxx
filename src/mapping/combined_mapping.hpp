@@ -165,9 +165,9 @@ public:
         static_assert(
                 std::is_same_v<IndexTag1, DimResult1> && std::is_same_v<IndexTag1, DimResult2>);
         static_assert(
-                std::is_same_v<
+                (std::is_same_v<
                         IndexTag2,
-                        DimArg1::Dual> && std::is_same_v<IndexTag2, DimArg2::Dual>);
+                        typename DimArg1::Dual>) && (std::is_same_v<IndexTag2, typename DimArg2::Dual>));
         //VG// TODO replace by static_assert(ddc::in_tags_v<IndexTag1, ResultTags>);
         JacobianMatrixType J = jacobian_matrix(coord_rtheta);
         return ddcHelper::get<IndexTag1, IndexTag2>(J);
