@@ -14,7 +14,8 @@ extend-ignore-re = ["capitalize()",
                     "Gif-sur-Yvette"
                     ]
 extend-ignore-identifiers-re = [
-    "Comput. Phys. Commun."
+    "Comput. Phys. Commun.",
+    "J. Sci. Comput."
 ]
 
 [default.extend-words]
