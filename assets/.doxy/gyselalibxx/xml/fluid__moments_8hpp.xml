@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="fluid__moments_8hpp" kind="file" language="C++">
+    <compoundname>fluid_moments.hpp</compoundname>
+    <includes local="yes">geometry.hpp</includes>
+    <includes refid="quadrature_8hpp" local="yes">quadrature.hpp</includes>
+    <includedby refid="collisions__inter_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_inter.cpp</includedby>
+    <includedby refid="collisions__intra_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.cpp</includedby>
+    <includedby refid="fluid__moments_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.cpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp</label>
+        <link refid="fluid__moments_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>quadrature.hpp</label>
+        <link refid="quadrature_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>ddc_alias_inline_functions.hpp</label>
+        <link refid="ddc__alias__inline__functions_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>ddc_helper.hpp</label>
+        <link refid="ddc__helper_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Kokkos_Core.hpp</label>
+      </node>
+      <node id="4">
+        <label>cassert</label>
+      </node>
+      <node id="13">
+        <label>cmath</label>
+      </node>
+      <node id="5">
+        <label>ddc/ddc.hpp</label>
+      </node>
+      <node id="11">
+        <label>ddc/kernels/splines.hpp</label>
+      </node>
+      <node id="2">
+        <label>geometry.hpp</label>
+      </node>
+      <node id="8">
+        <label>type_traits</label>
+      </node>
+      <node id="9">
+        <label>utility</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classFluidMoments" prot="public">FluidMoments</innerclass>
+    <innerclass refid="structFluidMoments_1_1MomentDensity" prot="public">FluidMoments::MomentDensity</innerclass>
+    <innerclass refid="structFluidMoments_1_1MomentVelocity" prot="public">FluidMoments::MomentVelocity</innerclass>
+    <innerclass refid="structFluidMoments_1_1MomentTemperature" prot="public">FluidMoments::MomentTemperature</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;geometry.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;quadrature.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="classFluidMoments" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classFluidMoments" kindref="compound">FluidMoments</ref></highlight></codeline>
+<codeline lineno="15"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classQuadrature" kindref="compound">Quadrature&lt;IdxRangeVx, IdxRangeSpXVx&gt;</ref><sp/>m_integrate_v;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="23" refid="structFluidMoments_1_1MomentDensity" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structFluidMoments_1_1MomentDensity" kindref="compound">MomentDensity</ref></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="structFluidMoments_1_1MomentVelocity" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structFluidMoments_1_1MomentVelocity" kindref="compound">MomentVelocity</ref></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="structFluidMoments_1_1MomentTemperature" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structFluidMoments_1_1MomentTemperature" kindref="compound">MomentTemperature</ref></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="classFluidMoments_1a51b8fc4fc4530a3cad0836bb997c4c3d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structFluidMoments_1_1MomentDensity" kindref="compound">MomentDensity</ref><sp/><ref refid="classFluidMoments_1a51b8fc4fc4530a3cad0836bb997c4c3d" kindref="member">s_density</ref><sp/>=<sp/><ref refid="structFluidMoments_1_1MomentDensity" kindref="compound">MomentDensity</ref>();</highlight></codeline>
+<codeline lineno="50" refid="classFluidMoments_1a0e36a0f2a4851525413ad0f033ffe37f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structFluidMoments_1_1MomentVelocity" kindref="compound">MomentVelocity</ref><sp/><ref refid="classFluidMoments_1a0e36a0f2a4851525413ad0f033ffe37f" kindref="member">s_velocity</ref><sp/>=<sp/><ref refid="structFluidMoments_1_1MomentVelocity" kindref="compound">MomentVelocity</ref>();</highlight></codeline>
+<codeline lineno="55" refid="classFluidMoments_1a4648e3f7abc452675a0ed4bdecd59a80" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structFluidMoments_1_1MomentTemperature" kindref="compound">MomentTemperature</ref><sp/><ref refid="classFluidMoments_1a4648e3f7abc452675a0ed4bdecd59a80" kindref="member">s_temperature</ref><sp/>=<sp/><ref refid="structFluidMoments_1_1MomentTemperature" kindref="compound">MomentTemperature</ref>();</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classFluidMoments" kindref="compound">FluidMoments</ref>(<ref refid="classQuadrature" kindref="compound">Quadrature&lt;IdxRangeVx, IdxRangeSpXVx&gt;</ref><sp/>integrate_v);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classFluidMoments" kindref="compound">~FluidMoments</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classFluidMoments_1aeb2a3f97d8a00b2c5eed9df9e1317fd7" kindref="member">operator()</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">&amp;<sp/>density,<sp/>DConstFieldVx<sp/>fdistribu,<sp/><ref refid="structFluidMoments_1_1MomentDensity" kindref="compound">MomentDensity</ref><sp/>moment_density);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classFluidMoments_1aeb2a3f97d8a00b2c5eed9df9e1317fd7" kindref="member">operator()</ref>(DFieldSpX<sp/>density,<sp/>DConstFieldSpXVx<sp/>allfdistribu,<sp/><ref refid="structFluidMoments_1_1MomentDensity" kindref="compound">MomentDensity</ref><sp/>moment_density);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classFluidMoments_1aeb2a3f97d8a00b2c5eed9df9e1317fd7" kindref="member">operator()</ref>(</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal">&amp;<sp/>mean_velocity,</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DConstFieldVx<sp/>fdistribu,</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>density,</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structFluidMoments_1_1MomentVelocity" kindref="compound">MomentVelocity</ref><sp/>moment_velocity);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classFluidMoments_1aeb2a3f97d8a00b2c5eed9df9e1317fd7" kindref="member">operator()</ref>(</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DFieldSpX<sp/>mean_velocity,</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DConstFieldSpXVx<sp/>allfdistribu,</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DConstFieldSpX<sp/>density,</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structFluidMoments_1_1MomentVelocity" kindref="compound">MomentVelocity</ref><sp/>moment_velocity);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classFluidMoments_1aeb2a3f97d8a00b2c5eed9df9e1317fd7" kindref="member">operator()</ref>(</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal">&amp;<sp/>temperature,</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DConstFieldVx<sp/>fdistribu,</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>density,</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>mean_velocity,</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structFluidMoments_1_1MomentTemperature" kindref="compound">MomentTemperature</ref><sp/>moment_temperature);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classFluidMoments_1aeb2a3f97d8a00b2c5eed9df9e1317fd7" kindref="member">operator()</ref>(</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DFieldSpX<sp/>temperature,</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DConstFieldSpXVx<sp/>allfdistribu,</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DConstFieldSpX<sp/>density,</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DConstFieldSpX<sp/>mean_velocity,</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structFluidMoments_1_1MomentTemperature" kindref="compound">MomentTemperature</ref><sp/>moment_temperature);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal">};</highlight></codeline>
+    </programlisting>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,454 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="czarny__to__cartesian_8hpp" kind="file" language="C++">
+    <compoundname>czarny_to_cartesian.hpp</compoundname>
+    <includes local="no">cmath</includes>
+    <includes local="no">ddc/ddc.hpp</includes>
+    <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
+    <includes refid="mapping__tools_8hpp" local="yes">mapping_tools.hpp</includes>
+    <includes refid="tensor_8hpp" local="yes">tensor.hpp</includes>
+    <includes refid="view_8hpp" local="yes">view.hpp</includes>
+    <includedby refid="inv__jacobian__o__point_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inv_jacobian_o_point.hpp</includedby>
+    <incdepgraph>
+      <node id="13">
+        <label>tensor.hpp</label>
+        <link refid="tensor_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>tensor_index_tools.hpp</label>
+        <link refid="tensor__index__tools_8hpp_source"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>vector_index_tools.hpp</label>
+        <link refid="vector__index__tools_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp</label>
+        <link refid="czarny__to__cartesian_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>mapping_tools.hpp</label>
+        <link refid="mapping__tools_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>type_seq_tools.hpp</label>
+        <link refid="type__seq__tools_8hpp_source"/>
+      </node>
+      <node id="10">
+        <label>view.hpp</label>
+        <link refid="view_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>Kokkos_Core.hpp</label>
+      </node>
+      <node id="7">
+        <label>array</label>
+      </node>
+      <node id="14">
+        <label>cassert</label>
+      </node>
+      <node id="2">
+        <label>cmath</label>
+      </node>
+      <node id="3">
+        <label>ddc/ddc.hpp</label>
+      </node>
+      <node id="5">
+        <label>ddc/kernels/splines.hpp</label>
+      </node>
+      <node id="11">
+        <label>ostream</label>
+      </node>
+      <node id="8">
+        <label>type_traits</label>
+      </node>
+      <node id="9">
+        <label>utility</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp</label>
+        <link refid="spline__polar__foot__finder_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection/bsl_advection_rtheta.hpp</label>
+        <link refid="bsl__advection__rtheta_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp</label>
+        <link refid="bsl__predcorr_8hpp_source"/>
+      </node>
+      <node id="7">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_explicit.hpp</label>
+        <link refid="bsl__predcorr__second__order__explicit_8hpp_source"/>
+      </node>
+      <node id="8">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp</label>
+        <link refid="bsl__predcorr__second__order__implicit_8hpp_source"/>
+      </node>
+      <node id="3">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp</label>
+        <link refid="combined__mapping_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp</label>
+        <link refid="czarny__to__cartesian_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inv_jacobian_o_point.hpp</label>
+        <link refid="inv__jacobian__o__point_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classCzarnyToCartesian" prot="public">CzarnyToCartesian</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cmath&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ddc/ddc.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;mapping_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;tensor.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;view.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Pre-declaration<sp/>of<sp/>analytical<sp/>inverse</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>X,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Y,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>R,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Theta&gt;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classCartesianToCzarny" kindref="compound">CartesianToCzarny</ref>;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>R,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Theta,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>X,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Y&gt;</highlight></codeline>
+<codeline lineno="50" refid="classCzarnyToCartesian" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref></highlight></codeline>
+<codeline lineno="51"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="54" refid="classCzarnyToCartesian_1ab25d063bcbef5fb0f1bff444fc8a98e2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structX" kindref="compound">cartesian_tag_x</ref><sp/>=<sp/><ref refid="structX" kindref="compound">X</ref>;</highlight></codeline>
+<codeline lineno="56" refid="classCzarnyToCartesian_1afdc40195f47edbbf18a26245ce9516f9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structY" kindref="compound">cartesian_tag_y</ref><sp/>=<sp/><ref refid="structY" kindref="compound">Y</ref>;</highlight></codeline>
+<codeline lineno="58" refid="classCzarnyToCartesian_1ade4b789de130ce79e60c7b35f0551b63" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structR" kindref="compound">curvilinear_tag_r</ref><sp/>=<sp/><ref refid="structR" kindref="compound">R</ref>;</highlight></codeline>
+<codeline lineno="60" refid="classCzarnyToCartesian_1a293ee4cfdbbb0349873c5a8494536dd8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structTheta" kindref="compound">curvilinear_tag_theta</ref><sp/>=<sp/><ref refid="structTheta" kindref="compound">Theta</ref>;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63" refid="classCzarnyToCartesian_1a5d3fdb82137b6da3b1ba594a4796c9b3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCzarnyToCartesian_1a5d3fdb82137b6da3b1ba594a4796c9b3" kindref="member">CoordArg</ref><sp/>=<sp/>Coord&lt;R,<sp/>Theta&gt;;</highlight></codeline>
+<codeline lineno="65" refid="classCzarnyToCartesian_1acdb23773d132aa5c581f35fa3d31953f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCzarnyToCartesian_1acdb23773d132aa5c581f35fa3d31953f" kindref="member">CoordResult</ref><sp/>=<sp/>Coord&lt;X,<sp/>Y&gt;;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68" refid="classCzarnyToCartesian_1a01671e9f90dfeda7700cd6226b3f4007" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCzarnyToCartesian_1a01671e9f90dfeda7700cd6226b3f4007" kindref="member">X_cov</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" kindref="member">X::Dual</ref>;</highlight></codeline>
+<codeline lineno="70" refid="classCzarnyToCartesian_1afff1c38ec37833746294d5ef53ac3631" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCzarnyToCartesian_1afff1c38ec37833746294d5ef53ac3631" kindref="member">Y_cov</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structY_1aad98c6afa465f3fb654029648420df1f" kindref="member">Y::Dual</ref>;</highlight></codeline>
+<codeline lineno="72" refid="classCzarnyToCartesian_1a15bf99762215733076b5a4c20ff8338c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structR__cov" kindref="compound">R_cov</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kindref="member">R::Dual</ref>;</highlight></codeline>
+<codeline lineno="74" refid="classCzarnyToCartesian_1aced2a90b42b1647181bbfece8eac8708" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structTheta__cov" kindref="compound">Theta_cov</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structTheta_1a1f99557f831a14c03c9d03e1a5e33d40" kindref="member">Theta::Dual</ref>;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>m_epsilon;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>m_e;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="92" refid="classCzarnyToCartesian_1ac86693dda1f089062598e4bb31fb67b5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCzarnyToCartesian_1ac86693dda1f089062598e4bb31fb67b5" kindref="member">CzarnyToCartesian</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classCzarnyToCartesian_1a52971f527d1e9cd03a16c4c4dd2df48f" kindref="member">epsilon</ref>,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classCzarnyToCartesian_1a04b554d096dec68781d36d57680e59a0" kindref="member">e</ref>)<sp/>:<sp/>m_epsilon(<ref refid="classCzarnyToCartesian_1a52971f527d1e9cd03a16c4c4dd2df48f" kindref="member">epsilon</ref>),<sp/>m_e(<ref refid="classCzarnyToCartesian_1a04b554d096dec68781d36d57680e59a0" kindref="member">e</ref>)<sp/>{}</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100" refid="classCzarnyToCartesian_1ae821b68a527f54c5da9aabfa2a5b6995" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classCzarnyToCartesian_1ae821b68a527f54c5da9aabfa2a5b6995" kindref="member">CzarnyToCartesian</ref>(<ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>other)</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_epsilon(other.<ref refid="classCzarnyToCartesian_1a52971f527d1e9cd03a16c4c4dd2df48f" kindref="member">epsilon</ref>())</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_e(other.<ref refid="classCzarnyToCartesian_1a04b554d096dec68781d36d57680e59a0" kindref="member">e</ref>())</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112" refid="classCzarnyToCartesian_1ad999ca35e162f88c5e84a11afeb18301" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCzarnyToCartesian_1ad999ca35e162f88c5e84a11afeb18301" kindref="member">CzarnyToCartesian</ref>(<ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref>&amp;&amp;<sp/>x)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCzarnyToCartesian" kindref="compound">~CzarnyToCartesian</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124" refid="classCzarnyToCartesian_1a9447c8ec44ae0e2bb26ece0e450a33c1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref>&amp;<sp/><ref refid="classCzarnyToCartesian_1a9447c8ec44ae0e2bb26ece0e450a33c1" kindref="member">operator=</ref>(<ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>x)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134" refid="classCzarnyToCartesian_1af66a2728aa39532d16926223b65d8b8d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref>&amp;<sp/><ref refid="classCzarnyToCartesian_1af66a2728aa39532d16926223b65d8b8d" kindref="member">operator=</ref>(<ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref>&amp;&amp;<sp/>x)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143" refid="classCzarnyToCartesian_1a52971f527d1e9cd03a16c4c4dd2df48f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classCzarnyToCartesian_1a52971f527d1e9cd03a16c4c4dd2df48f" kindref="member">epsilon</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="144"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_epsilon;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155" refid="classCzarnyToCartesian_1a04b554d096dec68781d36d57680e59a0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classCzarnyToCartesian_1a04b554d096dec68781d36d57680e59a0" kindref="member">e</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="156"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_e;</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="167" refid="classCzarnyToCartesian_1a68b19d0cc414ccc2153b8d35e3bc7077" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/>Coord&lt;X,<sp/>Y&gt;<sp/><ref refid="classCzarnyToCartesian_1a68b19d0cc414ccc2153b8d35e3bc7077" kindref="member">operator()</ref>(Coord&lt;R,<sp/>Theta&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="168"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>ddc::get&lt;R&gt;(coord);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>theta<sp/>=<sp/>ddc::get&lt;Theta&gt;(coord);</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>tmp1</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>Kokkos::sqrt(m_epsilon<sp/>*<sp/>(m_epsilon<sp/>+<sp/>2.0<sp/>*<sp/>r<sp/>*<sp/>Kokkos::cos(theta))<sp/>+<sp/>1.0);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>x<sp/>=<sp/>(1.0<sp/>-<sp/>tmp1)<sp/>/<sp/>m_epsilon;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>y<sp/>=<sp/>m_e<sp/>*<sp/>r<sp/>*<sp/>Kokkos::sin(theta)</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/>(Kokkos::sqrt(1.0<sp/>-<sp/>0.25<sp/>*<sp/>m_epsilon<sp/>*<sp/>m_epsilon)<sp/>*<sp/>(2.0<sp/>-<sp/>tmp1));</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Coord&lt;X,<sp/>Y&gt;(x,<sp/>y);</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight></codeline>
+<codeline lineno="189" refid="classCzarnyToCartesian_1af037b527bbc6cbf89a44580d288b8a5f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classCzarnyToCartesian_1af037b527bbc6cbf89a44580d288b8a5f" kindref="member">jacobian</ref>(Coord&lt;R,<sp/>Theta&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="190"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>ddc::get&lt;R&gt;(coord);</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>theta<sp/>=<sp/>ddc::get&lt;Theta&gt;(coord);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>xi<sp/>=<sp/>Kokkos::sqrt(1.<sp/>/<sp/>(1.<sp/>-<sp/>m_epsilon<sp/>*<sp/>m_epsilon<sp/>*<sp/>0.25));</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>-r<sp/>/<sp/>Kokkos::sqrt(1<sp/>+<sp/>m_epsilon<sp/>*<sp/>(m_epsilon<sp/>+<sp/>2.0<sp/>*<sp/>r<sp/>*<sp/>Kokkos::cos(theta)))<sp/>*<sp/>m_e</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>xi</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/>(2<sp/>-<sp/>Kokkos::sqrt(1<sp/>+<sp/>m_epsilon<sp/>*<sp/>(m_epsilon<sp/>+<sp/>2.0<sp/>*<sp/>r<sp/>*<sp/>Kokkos::cos(theta))));</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211" refid="classCzarnyToCartesian_1a633cf2b257d6da39fcb04d154a36f06c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;X, Y&gt;</ref>,<sp/>VectorIndexSet&lt;R_cov,<sp/>Theta_cov&gt;&gt;<sp/><ref refid="classCzarnyToCartesian_1a633cf2b257d6da39fcb04d154a36f06c" kindref="member">jacobian_matrix</ref>(</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;R,<sp/>Theta&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="213"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>ddc::get&lt;R&gt;(coord);</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>theta<sp/>=<sp/>ddc::get&lt;Theta&gt;(coord);</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sin_theta<sp/>=<sp/>Kokkos::sin(theta);</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>cos_theta<sp/>=<sp/>Kokkos::cos(theta);</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>xi2<sp/>=<sp/>1.<sp/>/<sp/>(1.<sp/>-<sp/>m_epsilon<sp/>*<sp/>m_epsilon<sp/>*<sp/>0.25);</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>xi<sp/>=<sp/>Kokkos::sqrt(xi2);</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sqrt_eps<sp/>=<sp/>Kokkos::sqrt(m_epsilon<sp/>*<sp/>(m_epsilon<sp/>+<sp/>2.0<sp/>*<sp/>r<sp/>*<sp/>cos_theta)<sp/>+<sp/>1.0);</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sqrt_eps_2<sp/>=<sp/>2.0<sp/>-<sp/>sqrt_eps;</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;X, Y&gt;</ref>,<sp/>VectorIndexSet&lt;R_cov,<sp/>Theta_cov&gt;&gt;<sp/><ref refid="classCzarnyToCartesian_1a633cf2b257d6da39fcb04d154a36f06c" kindref="member">jacobian_matrix</ref>;</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;X,<sp/>R_cov&gt;(<ref refid="classCzarnyToCartesian_1a633cf2b257d6da39fcb04d154a36f06c" kindref="member">jacobian_matrix</ref>)<sp/>=<sp/>-cos_theta<sp/>/<sp/>sqrt_eps;</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;X,<sp/>Theta_cov&gt;(<ref refid="classCzarnyToCartesian_1a633cf2b257d6da39fcb04d154a36f06c" kindref="member">jacobian_matrix</ref>)<sp/>=<sp/>r<sp/>*<sp/>sin_theta<sp/>/<sp/>sqrt_eps;</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Y,<sp/>R_cov&gt;(<ref refid="classCzarnyToCartesian_1a633cf2b257d6da39fcb04d154a36f06c" kindref="member">jacobian_matrix</ref>)<sp/>=<sp/>m_e<sp/>*<sp/>m_epsilon<sp/>*<sp/>r<sp/>*<sp/>sin_theta<sp/>*<sp/>cos_theta<sp/>*<sp/>xi</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/>(sqrt_eps_2<sp/>*<sp/>sqrt_eps_2<sp/>*<sp/>sqrt_eps)</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>+<sp/>m_e<sp/>*<sp/>sin_theta<sp/>*<sp/>xi<sp/>/<sp/>sqrt_eps_2;</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Y,<sp/>Theta_cov&gt;(<ref refid="classCzarnyToCartesian_1a633cf2b257d6da39fcb04d154a36f06c" kindref="member">jacobian_matrix</ref>)</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>r</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>(-m_e<sp/>*<sp/>m_epsilon<sp/>*<sp/>r<sp/>*<sp/>sin_theta<sp/>*<sp/>sin_theta<sp/>*<sp/>xi</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/>(sqrt_eps_2<sp/>*<sp/>sqrt_eps_2<sp/>*<sp/>sqrt_eps)</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>+<sp/>m_e<sp/>*<sp/>cos_theta<sp/>*<sp/>xi<sp/>/<sp/>sqrt_eps_2);</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classCzarnyToCartesian_1a633cf2b257d6da39fcb04d154a36f06c" kindref="member">jacobian_matrix</ref>;</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IndexTag1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IndexTag2&gt;</highlight></codeline>
+<codeline lineno="249" refid="classCzarnyToCartesian_1a0c75f9ca9bf65206ac349adb07acc497" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classCzarnyToCartesian_1a0c75f9ca9bf65206ac349adb07acc497" kindref="member">jacobian_component</ref>(Coord&lt;R,<sp/>Theta&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="250"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>ddc::get&lt;R&gt;(coord);</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>theta<sp/>=<sp/>ddc::get&lt;Theta&gt;(coord);</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;IndexTag1,<sp/>X&gt;<sp/>&amp;&amp;<sp/>std::is_same_v&lt;IndexTag2,<sp/>R_cov&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Component<sp/>(1,1),<sp/>i.e<sp/>dx/dr</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>-Kokkos::cos(theta)</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/>Kokkos::sqrt(m_epsilon<sp/>*<sp/>(m_epsilon<sp/>+<sp/>2.0<sp/>*<sp/>r<sp/>*<sp/>Kokkos::cos(theta))<sp/>+<sp/>1.0);</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;IndexTag1,<sp/>X&gt;<sp/>&amp;&amp;<sp/>std::is_same_v&lt;IndexTag2,<sp/>Theta_cov&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Component<sp/>(1,2),<sp/>i.e<sp/>dx/dtheta</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>r<sp/>*<sp/>Kokkos::sin(theta)</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/>Kokkos::sqrt(m_epsilon<sp/>*<sp/>(m_epsilon<sp/>+<sp/>2.0<sp/>*<sp/>r<sp/>*<sp/>Kokkos::cos(theta))<sp/>+<sp/>1.0);</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;IndexTag1,<sp/>Y&gt;<sp/>&amp;&amp;<sp/>std::is_same_v&lt;IndexTag2,<sp/>R_cov&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Component<sp/>(2,1),<sp/>i.e<sp/>dy/dr</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sin_theta<sp/>=<sp/>Kokkos::sin(theta);</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>cos_theta<sp/>=<sp/>Kokkos::cos(theta);</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>xi2<sp/>=<sp/>1.<sp/>/<sp/>(1.<sp/>-<sp/>m_epsilon<sp/>*<sp/>m_epsilon<sp/>*<sp/>0.25);</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>xi<sp/>=<sp/>Kokkos::sqrt(xi2);</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>tmp1<sp/>=<sp/>Kokkos::sqrt(m_epsilon<sp/>*<sp/>(m_epsilon<sp/>+<sp/>2.0<sp/>*<sp/>r<sp/>*<sp/>cos_theta)<sp/>+<sp/>1.0);</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>tmp2<sp/>=<sp/>2.0<sp/>-<sp/>tmp1;</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_e<sp/>*<sp/>m_epsilon<sp/>*<sp/>r<sp/>*<sp/>sin_theta<sp/>*<sp/>cos_theta<sp/>*<sp/>xi<sp/>/<sp/>(tmp2<sp/>*<sp/>tmp2<sp/>*<sp/>tmp1)</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>+<sp/>m_e<sp/>*<sp/>sin_theta<sp/>*<sp/>xi<sp/>/<sp/>tmp2;</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;IndexTag1,<sp/>Y&gt;<sp/>&amp;&amp;<sp/>std::is_same_v&lt;IndexTag2,<sp/>Theta_cov&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Component<sp/>(2,2),<sp/>i.e<sp/>dy/dtheta</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sin_theta<sp/>=<sp/>Kokkos::sin(theta);</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>cos_theta<sp/>=<sp/>Kokkos::cos(theta);</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>xi2<sp/>=<sp/>1.<sp/>/<sp/>(1.<sp/>-<sp/>m_epsilon<sp/>*<sp/>m_epsilon<sp/>*<sp/>0.25);</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>xi<sp/>=<sp/>Kokkos::sqrt(xi2);</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>tmp1<sp/>=<sp/>Kokkos::sqrt(m_epsilon<sp/>*<sp/>(m_epsilon<sp/>+<sp/>2.0<sp/>*<sp/>r<sp/>*<sp/>cos_theta)<sp/>+<sp/>1.0);</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>tmp2<sp/>=<sp/>2.0<sp/>-<sp/>tmp1;</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>r</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>(-m_e<sp/>*<sp/>m_epsilon<sp/>*<sp/>r<sp/>*<sp/>sin_theta<sp/>*<sp/>sin_theta<sp/>*<sp/>xi<sp/>/<sp/>(tmp2<sp/>*<sp/>tmp2<sp/>*<sp/>tmp1)</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>+<sp/>m_e<sp/>*<sp/>cos_theta<sp/>*<sp/>xi<sp/>/<sp/>tmp2);</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"></highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;R, Theta&gt;</ref>,<sp/>VectorIndexSet&lt;X_cov,<sp/>Y_cov&gt;&gt;</highlight></codeline>
+<codeline lineno="305" refid="classCzarnyToCartesian_1a3efb06a52c04cacab4474cd2475823ff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCzarnyToCartesian_1a3efb06a52c04cacab4474cd2475823ff" kindref="member">inv_jacobian_matrix</ref>(Coord&lt;R,<sp/>Theta&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="306"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>ddc::get&lt;R&gt;(coord);</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>theta<sp/>=<sp/>ddc::get&lt;Theta&gt;(coord);</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"></highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(r<sp/>&gt;=<sp/>1<ref refid="classCzarnyToCartesian_1a04b554d096dec68781d36d57680e59a0" kindref="member">e</ref>-15);</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"></highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sin_theta<sp/>=<sp/>Kokkos::sin(theta);</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>cos_theta<sp/>=<sp/>Kokkos::cos(theta);</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>xi<sp/>=<sp/>Kokkos::sqrt(1.<sp/>/<sp/>(1.<sp/>-<sp/>m_epsilon<sp/>*<sp/>m_epsilon<sp/>*<sp/>0.25));</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>divisor<sp/>=<sp/>2<sp/>-<sp/>Kokkos::sqrt(1<sp/>+<sp/>m_epsilon<sp/>*<sp/>(m_epsilon<sp/>+<sp/>2.0<sp/>*<sp/>r<sp/>*<sp/>cos_theta));</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>fact_1<sp/>=<sp/>1<sp/>/<sp/>Kokkos::sqrt(1<sp/>+<sp/>m_epsilon<sp/>*<sp/>(m_epsilon<sp/>+<sp/>2.0<sp/>*<sp/>r<sp/>*<sp/>cos_theta));</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>fact_2<sp/>=<sp/>m_e<sp/>*<sp/>m_epsilon<sp/>*<sp/>xi<sp/>*<sp/>r<sp/>*<sp/>sin_theta<sp/>*<sp/>fact_1<sp/>/<sp/>divisor<sp/>/<sp/>divisor;</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>fact_3<sp/>=<sp/>m_e<sp/>*<sp/>xi<sp/>/<sp/>divisor;</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"></highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;R, Theta&gt;</ref>,<sp/>VectorIndexSet&lt;X_cov,<sp/>Y_cov&gt;&gt;<sp/>matrix;</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;R,<sp/>X_cov&gt;(matrix)</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>-1<sp/>/<sp/>fact_1<sp/>*<sp/>(-sin_theta<sp/>*<sp/>fact_2<sp/>+<sp/>cos_theta<sp/>*<sp/>fact_3)<sp/>/<sp/>fact_3;</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;R,<sp/>Y_cov&gt;(matrix)<sp/>=<sp/>sin_theta<sp/>/<sp/>fact_3;</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Theta,<sp/>X_cov&gt;(matrix)</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>1<sp/>/<sp/>r<sp/>/<sp/>fact_1<sp/>*<sp/>(cos_theta<sp/>*<sp/>fact_2<sp/>+<sp/>sin_theta<sp/>*<sp/>fact_3)<sp/>/<sp/>fact_3;</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Theta,<sp/>Y_cov&gt;(matrix)<sp/>=<sp/>1<sp/>/<sp/>r<sp/>*<sp/>cos_theta<sp/>/<sp/>fact_3;</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>matrix;</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"></highlight></codeline>
+<codeline lineno="341" refid="classCzarnyToCartesian_1a05f67462e6bc655d0d6a39a47acd2b3f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classCzarnyToCartesian_1a05f67462e6bc655d0d6a39a47acd2b3f" kindref="member">inv_jacobian_11</ref>(Coord&lt;R,<sp/>Theta&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="342"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>ddc::get&lt;R&gt;(coord);</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>theta<sp/>=<sp/>ddc::get&lt;Theta&gt;(coord);</highlight></codeline>
+<codeline lineno="345"><highlight class="normal"></highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sin_theta<sp/>=<sp/>Kokkos::sin(theta);</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>cos_theta<sp/>=<sp/>Kokkos::cos(theta);</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>xi<sp/>=<sp/>Kokkos::sqrt(1.<sp/>/<sp/>(1.<sp/>-<sp/>m_epsilon<sp/>*<sp/>m_epsilon<sp/>*<sp/>0.25));</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>divisor<sp/>=<sp/>2<sp/>-<sp/>Kokkos::sqrt(1<sp/>+<sp/>m_epsilon<sp/>*<sp/>(m_epsilon<sp/>+<sp/>2.0<sp/>*<sp/>r<sp/>*<sp/>cos_theta));</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"></highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>fact_1<sp/>=<sp/>1<sp/>/<sp/>Kokkos::sqrt(1<sp/>+<sp/>m_epsilon<sp/>*<sp/>(m_epsilon<sp/>+<sp/>2.0<sp/>*<sp/>r<sp/>*<sp/>cos_theta));</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>fact_2<sp/>=<sp/>m_e<sp/>*<sp/>m_epsilon<sp/>*<sp/>xi<sp/>*<sp/>r<sp/>*<sp/>sin_theta<sp/>*<sp/>fact_1<sp/>/<sp/>divisor<sp/>/<sp/>divisor;</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>fact_3<sp/>=<sp/>m_e<sp/>*<sp/>xi<sp/>/<sp/>divisor;</highlight></codeline>
+<codeline lineno="354"><highlight class="normal"></highlight></codeline>
+<codeline lineno="355"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>-1<sp/>/<sp/>fact_1<sp/>*<sp/>(-sin_theta<sp/>*<sp/>fact_2<sp/>+<sp/>cos_theta<sp/>*<sp/>fact_3)<sp/>/<sp/>fact_3;</highlight></codeline>
+<codeline lineno="356"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="357"><highlight class="normal"></highlight></codeline>
+<codeline lineno="368" refid="classCzarnyToCartesian_1a602f2238aa5c2e5cd56a8d2877c1ad67" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classCzarnyToCartesian_1a602f2238aa5c2e5cd56a8d2877c1ad67" kindref="member">inv_jacobian_12</ref>(Coord&lt;R,<sp/>Theta&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="369"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>ddc::get&lt;R&gt;(coord);</highlight></codeline>
+<codeline lineno="371"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>theta<sp/>=<sp/>ddc::get&lt;Theta&gt;(coord);</highlight></codeline>
+<codeline lineno="372"><highlight class="normal"></highlight></codeline>
+<codeline lineno="373"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sin_theta<sp/>=<sp/>Kokkos::sin(theta);</highlight></codeline>
+<codeline lineno="374"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>cos_theta<sp/>=<sp/>Kokkos::cos(theta);</highlight></codeline>
+<codeline lineno="375"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>xi<sp/>=<sp/>Kokkos::sqrt(1.<sp/>/<sp/>(1.<sp/>-<sp/>m_epsilon<sp/>*<sp/>m_epsilon<sp/>*<sp/>0.25));</highlight></codeline>
+<codeline lineno="376"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>divisor<sp/>=<sp/>2<sp/>-<sp/>Kokkos::sqrt(1<sp/>+<sp/>m_epsilon<sp/>*<sp/>(m_epsilon<sp/>+<sp/>2.0<sp/>*<sp/>r<sp/>*<sp/>cos_theta));</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"></highlight></codeline>
+<codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>fact_3<sp/>=<sp/>m_e<sp/>*<sp/>xi<sp/>/<sp/>divisor;</highlight></codeline>
+<codeline lineno="379"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>sin_theta<sp/>/<sp/>fact_3;</highlight></codeline>
+<codeline lineno="380"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="381"><highlight class="normal"></highlight></codeline>
+<codeline lineno="392" refid="classCzarnyToCartesian_1a870947d3bfc13d42e28a73344e96b40f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classCzarnyToCartesian_1a870947d3bfc13d42e28a73344e96b40f" kindref="member">inv_jacobian_21</ref>(Coord&lt;R,<sp/>Theta&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="393"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="394"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>ddc::get&lt;R&gt;(coord);</highlight></codeline>
+<codeline lineno="395"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>theta<sp/>=<sp/>ddc::get&lt;Theta&gt;(coord);</highlight></codeline>
+<codeline lineno="396"><highlight class="normal"></highlight></codeline>
+<codeline lineno="397"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(r<sp/>&gt;=<sp/>1<ref refid="classCzarnyToCartesian_1a04b554d096dec68781d36d57680e59a0" kindref="member">e</ref>-15);</highlight></codeline>
+<codeline lineno="398"><highlight class="normal"></highlight></codeline>
+<codeline lineno="399"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sin_theta<sp/>=<sp/>Kokkos::sin(theta);</highlight></codeline>
+<codeline lineno="400"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>cos_theta<sp/>=<sp/>Kokkos::cos(theta);</highlight></codeline>
+<codeline lineno="401"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>xi<sp/>=<sp/>Kokkos::sqrt(1.<sp/>/<sp/>(1.<sp/>-<sp/>m_epsilon<sp/>*<sp/>m_epsilon<sp/>*<sp/>0.25));</highlight></codeline>
+<codeline lineno="402"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>divisor<sp/>=<sp/>2<sp/>-<sp/>Kokkos::sqrt(1<sp/>+<sp/>m_epsilon<sp/>*<sp/>(m_epsilon<sp/>+<sp/>2.0<sp/>*<sp/>r<sp/>*<sp/>cos_theta));</highlight></codeline>
+<codeline lineno="403"><highlight class="normal"></highlight></codeline>
+<codeline lineno="404"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>fact_1<sp/>=<sp/>1<sp/>/<sp/>Kokkos::sqrt(1<sp/>+<sp/>m_epsilon<sp/>*<sp/>(m_epsilon<sp/>+<sp/>2.0<sp/>*<sp/>r<sp/>*<sp/>cos_theta));</highlight></codeline>
+<codeline lineno="405"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>fact_2<sp/>=<sp/>m_e<sp/>*<sp/>m_epsilon<sp/>*<sp/>xi<sp/>*<sp/>r<sp/>*<sp/>sin_theta<sp/>*<sp/>fact_1<sp/>/<sp/>divisor<sp/>/<sp/>divisor;</highlight></codeline>
+<codeline lineno="406"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>fact_3<sp/>=<sp/>m_e<sp/>*<sp/>xi<sp/>/<sp/>divisor;</highlight></codeline>
+<codeline lineno="407"><highlight class="normal"></highlight></codeline>
+<codeline lineno="408"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1<sp/>/<sp/>r<sp/>/<sp/>fact_1<sp/>*<sp/>(cos_theta<sp/>*<sp/>fact_2<sp/>+<sp/>sin_theta<sp/>*<sp/>fact_3)<sp/>/<sp/>fact_3;</highlight></codeline>
+<codeline lineno="409"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="410"><highlight class="normal"></highlight></codeline>
+<codeline lineno="421" refid="classCzarnyToCartesian_1ac7058984431ebd6205ebc97fbaa27df8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classCzarnyToCartesian_1ac7058984431ebd6205ebc97fbaa27df8" kindref="member">inv_jacobian_22</ref>(Coord&lt;R,<sp/>Theta&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="422"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="423"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>ddc::get&lt;R&gt;(coord);</highlight></codeline>
+<codeline lineno="424"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>theta<sp/>=<sp/>ddc::get&lt;Theta&gt;(coord);</highlight></codeline>
+<codeline lineno="425"><highlight class="normal"></highlight></codeline>
+<codeline lineno="426"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(r<sp/>&gt;=<sp/>1<ref refid="classCzarnyToCartesian_1a04b554d096dec68781d36d57680e59a0" kindref="member">e</ref>-15);</highlight></codeline>
+<codeline lineno="427"><highlight class="normal"></highlight></codeline>
+<codeline lineno="428"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>cos_theta<sp/>=<sp/>Kokkos::cos(theta);</highlight></codeline>
+<codeline lineno="429"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>xi<sp/>=<sp/>Kokkos::sqrt(1.<sp/>/<sp/>(1.<sp/>-<sp/>m_epsilon<sp/>*<sp/>m_epsilon<sp/>*<sp/>0.25));</highlight></codeline>
+<codeline lineno="430"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>divisor<sp/>=<sp/>2<sp/>-<sp/>Kokkos::sqrt(1<sp/>+<sp/>m_epsilon<sp/>*<sp/>(m_epsilon<sp/>+<sp/>2.0<sp/>*<sp/>r<sp/>*<sp/>cos_theta));</highlight></codeline>
+<codeline lineno="431"><highlight class="normal"></highlight></codeline>
+<codeline lineno="432"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>fact_3<sp/>=<sp/>m_e<sp/>*<sp/>xi<sp/>/<sp/>divisor;</highlight></codeline>
+<codeline lineno="433"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1<sp/>/<sp/>r<sp/>*<sp/>cos_theta<sp/>/<sp/>fact_3;</highlight></codeline>
+<codeline lineno="434"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="435"><highlight class="normal"></highlight></codeline>
+<codeline lineno="441" refid="classCzarnyToCartesian_1a3db743b369fe2c5b63c993abb1429bb1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCartesianToCzarny" kindref="compound">CartesianToCzarny&lt;X, Y, R, Theta&gt;</ref><sp/><ref refid="classCzarnyToCartesian_1a3db743b369fe2c5b63c993abb1429bb1" kindref="member">get_inverse_mapping</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="442"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="443"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classCartesianToCzarny" kindref="compound">CartesianToCzarny&lt;X, Y, R, Theta&gt;</ref>(m_epsilon,<sp/>m_e);</highlight></codeline>
+<codeline lineno="444"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="445"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="446"><highlight class="normal"></highlight></codeline>
+<codeline lineno="447"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">mapping_detail<sp/>{</highlight></codeline>
+<codeline lineno="448"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>X,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Y,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>R,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Theta,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ExecSpace&gt;</highlight></codeline>
+<codeline lineno="449"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">MappingAccessibility&lt;ExecSpace,<sp/><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref>&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>,<sp/><ref refid="structX" kindref="compound">X</ref>,<sp/><ref refid="structY" kindref="compound">Y</ref>&gt;&gt;<sp/>:<sp/>std::true_type</highlight></codeline>
+<codeline lineno="450"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="451"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="452"><highlight class="normal"></highlight></codeline>
+<codeline lineno="453"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>X,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Y,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>R,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Theta&gt;</highlight></codeline>
+<codeline lineno="454"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">IsCurvilinear2DMapping&lt;<ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref>&lt;<ref refid="structX" kindref="compound">X</ref>,<sp/><ref refid="structY" kindref="compound">Y</ref>,<sp/><ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;&gt;<sp/>:<sp/>std::true_type</highlight></codeline>
+<codeline lineno="455"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="456"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="457"><highlight class="normal"></highlight></codeline>
+<codeline lineno="458"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>X,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Y,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>R,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Theta&gt;</highlight></codeline>
+<codeline lineno="459"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">SingularOPointInvJacobian&lt;<ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref>&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>,<sp/><ref refid="structX" kindref="compound">X</ref>,<sp/><ref refid="structY" kindref="compound">Y</ref>&gt;&gt;<sp/>:<sp/>std::true_type</highlight></codeline>
+<codeline lineno="460"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="461"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="462"><highlight class="normal"></highlight></codeline>
+<codeline lineno="463"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>mapping_detail</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp"/>
+  </compounddef>
+</doxygen>

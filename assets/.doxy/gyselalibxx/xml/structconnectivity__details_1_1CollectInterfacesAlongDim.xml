@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structconnectivity__details_1_1CollectInterfacesAlongDim" kind="struct" language="C++" prot="public">
+    <compoundname>connectivity_details::CollectInterfacesAlongDim</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class StartEdge</type>
+      </param>
+      <param>
+        <type>class InterfaceTypeSeq</type>
+      </param>
+      <param>
+        <type>InsertPosition</type>
+        <declname>insert_pos</declname>
+        <defname>insert_pos</defname>
+      </param>
+      <param>
+        <type>class FoundInterfaces</type>
+        <defval>ddc::detail::TypeSeq&lt;&gt;</defval>
+      </param>
+      <param>
+        <type>class MatchingEdge</type>
+        <defval>equivalent_edge_t&lt;StartEdge, InterfaceTypeSeq&gt;</defval>
+      </param>
+      <param>
+        <type>bool</type>
+        <declname>interface_already_found</declname>
+        <defname>interface_already_found</defname>
+        <defval>ddc::in_tags_v&lt;                enforce_first_interface_edge_t&lt;                        typename <ref refid="structconnectivity__details_1_1FindInterface" kindref="compound">FindInterface</ref>&lt;StartEdge, InterfaceTypeSeq&gt;::type,                        std::conditional_t&lt;StartEdge::extremity == FRONT, MatchingEdge, StartEdge&gt;&gt;,                FoundInterfaces&gt;</defval>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>A class which collects interfaces along a given dimension on a specified direction from a starting edge. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>StartEdge</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The edge from which the collection should begin. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>InterfaceTypeSeq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A DDC type sequence containing all the possible Interfaces. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>insert_pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The position where the element should be inserted (back/front). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>FoundInterfaces</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interfaces that have been discovered so far along the given dimension and direction. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="340" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="340" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

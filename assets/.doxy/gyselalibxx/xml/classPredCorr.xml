@@ -1,0 +1,341 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classPredCorr" kind="class" language="C++" prot="public">
+    <compoundname>PredCorr</compoundname>
+    <basecompoundref refid="classITimeSolver" prot="public" virt="non-virtual">ITimeSolver</basecompoundref>
+    <basecompoundref refid="classITimeSolver" prot="public" virt="non-virtual">ITimeSolver</basecompoundref>
+    <includes refid="geometryXVx_2time__integration_2predcorr_8hpp" local="no">predcorr.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classPredCorr_1ab93545485a93004bdf8e6a6e28e270e3" prot="private" static="no" mutable="no">
+        <type><ref refid="classIBoltzmannSolver" kindref="compound">IBoltzmannSolver</ref> const  &amp;</type>
+        <definition>IBoltzmannSolver const&amp; PredCorr::m_boltzmann_solver</definition>
+        <argsstring></argsstring>
+        <name>m_boltzmann_solver</name>
+        <qualifiedname>PredCorr::m_boltzmann_solver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/time_integration/predcorr.hpp" line="24" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/time_integration/predcorr.hpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classPredCorr_1abd921586867be022e135265c42f30b4d" prot="private" static="no" mutable="no">
+        <type><ref refid="classIQNSolver" kindref="compound">IQNSolver</ref> const  &amp;</type>
+        <definition>IQNSolver const  &amp; PredCorr::m_poisson_solver</definition>
+        <argsstring></argsstring>
+        <name>m_poisson_solver</name>
+        <qualifiedname>PredCorr::m_poisson_solver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/time_integration/predcorr.hpp" line="26" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/time_integration/predcorr.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classPredCorr_1acfc4ace8adf60a9e607fbc970a521f54" prot="private" static="no" mutable="no">
+        <type><ref refid="classIVlasovSolver" kindref="compound">IVlasovSolver</ref> const  &amp;</type>
+        <definition>IVlasovSolver const&amp; PredCorr::m_vlasov_solver</definition>
+        <argsstring></argsstring>
+        <name>m_vlasov_solver</name>
+        <qualifiedname>PredCorr::m_vlasov_solver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/time_integration/predcorr.hpp" line="24" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/time_integration/predcorr.hpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classPredCorr_1a1c82ebed9dc0ae86a59c279053287061" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>PredCorr::PredCorr</definition>
+        <argsstring>(IBoltzmannSolver const &amp;boltzmann_solver, IQNSolver const &amp;poisson_solver)</argsstring>
+        <name>PredCorr</name>
+        <qualifiedname>PredCorr::PredCorr</qualifiedname>
+        <param>
+          <type><ref refid="classIBoltzmannSolver" kindref="compound">IBoltzmannSolver</ref> const &amp;</type>
+          <declname>boltzmann_solver</declname>
+        </param>
+        <param>
+          <type><ref refid="classIQNSolver" kindref="compound">IQNSolver</ref> const &amp;</type>
+          <declname>poisson_solver</declname>
+        </param>
+        <briefdescription>
+<para>Creates an instance of the predictor-corrector class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">boltzmann_solver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A solver for a Boltzmann equation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">poisson_solver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A solver for a Quasi-Neutrality equation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/time_integration/predcorr.hpp" line="34" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/time_integration/predcorr.cpp" bodystart="13" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classPredCorr_1a7f99203dc020f4337fc4c11c04d2d0ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>PredCorr::~PredCorr</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~PredCorr</name>
+        <qualifiedname>PredCorr::~PredCorr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/time_integration/predcorr.hpp" line="36" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classPredCorr_1a2a3c70566fbfaef1d04bb540c980e7d1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>DFieldSpXVx</type>
+        <definition>DFieldSpXVx PredCorr::operator()</definition>
+        <argsstring>(DFieldSpXVx allfdistribu, double time_start, double dt, int steps=1) const override</argsstring>
+        <name>operator()</name>
+        <qualifiedname>PredCorr::operator()</qualifiedname>
+        <reimplements refid="classITimeSolver_1abfdecd652433d1ae388a6489da2ed865">operator()</reimplements>
+        <param>
+          <type>DFieldSpXVx</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>time_start</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>steps</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>Solves the Boltzmann-Poisson system. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On input : the initial value of the distribution function. On output : the value of the distribution function after solving the Boltzmann-Poisson system a given number of iterations. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">time_start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The physical time at the start of the simulation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The timestep. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">steps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of iterations to be performed by the predictor-corrector. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The distribution function after solving the system. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/time_integration/predcorr.hpp" line="48" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/time_integration/predcorr.cpp" bodystart="19" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classPredCorr_1afc97ef53ef6d27e3dae91eafbf3deb6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>PredCorr::PredCorr</definition>
+        <argsstring>(IVlasovSolver const &amp;vlasov_solver, IQNSolver const &amp;poisson_solver)</argsstring>
+        <name>PredCorr</name>
+        <qualifiedname>PredCorr::PredCorr</qualifiedname>
+        <param>
+          <type><ref refid="classIVlasovSolver" kindref="compound">IVlasovSolver</ref> const &amp;</type>
+          <declname>vlasov_solver</declname>
+        </param>
+        <param>
+          <type><ref refid="classIQNSolver" kindref="compound">IQNSolver</ref> const &amp;</type>
+          <declname>poisson_solver</declname>
+        </param>
+        <briefdescription>
+<para>Creates an instance of the predictor-corrector class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">vlasov_solver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A solver for a Boltzmann equation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">poisson_solver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A solver for a Poisson equation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/time_integration/predcorr.hpp" line="34" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/time_integration/predcorr.cpp" bodystart="15" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classPredCorr_1a7f99203dc020f4337fc4c11c04d2d0ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>PredCorr::~PredCorr</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~PredCorr</name>
+        <qualifiedname>PredCorr::~PredCorr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/time_integration/predcorr.hpp" line="36" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classPredCorr_1a3b8e02177cabfc230b09eb5d5b49c084" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>DFieldSpVxVyXY</type>
+        <definition>DFieldSpVxVyXY PredCorr::operator()</definition>
+        <argsstring>(DFieldSpVxVyXY allfdistribu, double dt, int steps=1) const override</argsstring>
+        <name>operator()</name>
+        <qualifiedname>PredCorr::operator()</qualifiedname>
+        <reimplements refid="classITimeSolver_1a1848f9cee5d5c8e3c69a133cb17d0196">operator()</reimplements>
+        <param>
+          <type>DFieldSpVxVyXY</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>steps</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>Solves the Vlasov-Poisson system. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On input : the initial value of the distribution function. On output : the value of the distribution function after solving the Vlasov-Poisson system a given number of iterations. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The timestep. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">steps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of iterations to be performed by the predictor-corrector. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The distribution function after solving the system. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/time_integration/predcorr.hpp" line="47" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/time_integration/predcorr.cpp" bodystart="21" bodyend="126"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class that solves a Boltzmann-Poisson system of equations using a predictor-corrector scheme. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A class that solves a Vlasov-Poisson system of equations using a predictor-corrector scheme.</para>
+<para>A class that solves a Boltzmann-Poisson system with a predictor corrector scheme. This scheme consists in estimating the electric potential after a time interval of a half-timestep. This potential is then used to compute the value of the distribution function at time t+dt, where dt is the timestep.</para>
+<para>A class that solves a Vlasov-Poisson system with a predictor corrector scheme. This scheme consists in estimating the electric potential after a time interval of a half-timestep. This potential is then used to compute the value of the distribution function at time t+dt, where dt is the timestep. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>ITimeSolver</label>
+        <link refid="classITimeSolver"/>
+      </node>
+      <node id="1">
+        <label>PredCorr</label>
+        <link refid="classPredCorr"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>ITimeSolver</label>
+        <link refid="classITimeSolver"/>
+      </node>
+      <node id="1">
+        <label>PredCorr</label>
+        <link refid="classPredCorr"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/time_integration/predcorr.hpp" line="21" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/time_integration/predcorr.hpp" bodystart="22" bodyend="50"/>
+    <listofallmembers>
+      <member refid="classPredCorr_1ab93545485a93004bdf8e6a6e28e270e3" prot="private" virt="non-virtual"><scope>PredCorr</scope><name>m_boltzmann_solver</name></member>
+      <member refid="classPredCorr_1abd921586867be022e135265c42f30b4d" prot="private" virt="non-virtual"><scope>PredCorr</scope><name>m_poisson_solver</name></member>
+      <member refid="classPredCorr_1acfc4ace8adf60a9e607fbc970a521f54" prot="private" virt="non-virtual"><scope>PredCorr</scope><name>m_vlasov_solver</name></member>
+      <member refid="classPredCorr_1a2a3c70566fbfaef1d04bb540c980e7d1" prot="public" virt="virtual"><scope>PredCorr</scope><name>operator()</name></member>
+      <member refid="classPredCorr_1a3b8e02177cabfc230b09eb5d5b49c084" prot="public" virt="virtual"><scope>PredCorr</scope><name>operator()</name></member>
+      <member refid="classPredCorr_1a1c82ebed9dc0ae86a59c279053287061" prot="public" virt="non-virtual"><scope>PredCorr</scope><name>PredCorr</name></member>
+      <member refid="classPredCorr_1afc97ef53ef6d27e3dae91eafbf3deb6a" prot="public" virt="non-virtual"><scope>PredCorr</scope><name>PredCorr</name></member>
+      <member refid="classITimeSolver_1a0b6b8b4a38bfe8eb0763c65268a10379" prot="public" virt="virtual"><scope>PredCorr</scope><name>~ITimeSolver</name></member>
+      <member refid="classITimeSolver_1a0b6b8b4a38bfe8eb0763c65268a10379" prot="public" virt="virtual"><scope>PredCorr</scope><name>~ITimeSolver</name></member>
+      <member refid="classPredCorr_1a7f99203dc020f4337fc4c11c04d2d0ed" prot="public" virt="non-virtual"><scope>PredCorr</scope><name>~PredCorr</name></member>
+      <member refid="classPredCorr_1a7f99203dc020f4337fc4c11c04d2d0ed" prot="public" virt="non-virtual"><scope>PredCorr</scope><name>~PredCorr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

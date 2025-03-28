@@ -1,0 +1,476 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="species__init_8cpp" kind="file" language="C++">
+    <compoundname>species_init.cpp</compoundname>
+    <includes refid="species__init_8hpp" local="yes">species_init.hpp</includes>
+    <incdepgraph>
+      <node id="15">
+        <label>pdi_helper.hpp</label>
+        <link refid="pdi__helper_8hpp_source"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>paraconfpp.hpp</label>
+        <link refid="paraconfpp_8hpp_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>species_info.hpp</label>
+        <link refid="species__info_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.cpp</label>
+        <link refid="species__init_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>species_init.hpp</label>
+        <link refid="species__init_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>ddc_alias_inline_functions.hpp</label>
+        <link refid="ddc__alias__inline__functions_8hpp_source"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>ddc_helper.hpp</label>
+        <link refid="ddc__helper_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>cassert</label>
+      </node>
+      <node id="7">
+        <label>cmath</label>
+      </node>
+      <node id="3">
+        <label>ddc/ddc.hpp</label>
+      </node>
+      <node id="9">
+        <label>ddc/kernels/splines.hpp</label>
+      </node>
+      <node id="11">
+        <label>filesystem</label>
+      </node>
+      <node id="4">
+        <label>paraconf.h</label>
+      </node>
+      <node id="16">
+        <label>pdi.h</label>
+      </node>
+      <node id="12">
+        <label>stdexcept</label>
+      </node>
+      <node id="13">
+        <label>string</label>
+      </node>
+      <node id="19">
+        <label>type_traits</label>
+      </node>
+      <node id="14">
+        <label>utility</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="species__init_8cpp_1a2e4bbb971c51cc1d3a6051ae6dee2411" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_all_species</definition>
+        <argsstring>(IdxRangeSp &amp;idxrange_kinsp, IdxRangeSp &amp;idxrange_fluidsp, PC_tree_t conf_gyselalibxx, int nb_kinspecies, int nb_fluidspecies)</argsstring>
+        <name>init_all_species</name>
+        <param>
+          <type>IdxRangeSp &amp;</type>
+          <declname>idx_range_kinsp</declname>
+          <defname>idxrange_kinsp</defname>
+        </param>
+        <param>
+          <type>IdxRangeSp &amp;</type>
+          <declname>idx_range_fluidsp</declname>
+          <defname>idxrange_fluidsp</defname>
+        </param>
+        <param>
+          <type>PC_tree_t</type>
+          <declname>conf_gyselalibxx</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nb_kinspecies</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nb_fluidspecies</declname>
+        </param>
+        <briefdescription>
+<para>Initialise the species domain. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">idx_range_kinsp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>kinetic species domain </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">idx_range_fluidsp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>fluid species domain </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">conf_gyselalibxx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the YAML input file </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nb_kinspecies</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of kinetic species </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nb_fluidspecies</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of fluid species </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.cpp" line="13" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.cpp" bodystart="13" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="species__init_8cpp_1a24fddc226589fe83ecdfd37d0cc1990b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>IdxRangeSp</type>
+        <definition>IdxRangeSp init_species</definition>
+        <argsstring>(PC_tree_t conf_gyselalibxx)</argsstring>
+        <name>init_species</name>
+        <param>
+          <type>PC_tree_t</type>
+          <declname>conf_gyselalibxx</declname>
+        </param>
+        <briefdescription>
+<para>Initialise the species domain in the case of adiabatic and kinetic species. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">conf_gyselalibxx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the YAML input file </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the kinetic species domain </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.cpp" line="99" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.cpp" bodystart="99" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="species__init_8cpp_1ae07b6db6e912d04532f1adff2941439c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_species_withfluid</definition>
+        <argsstring>(IdxRangeSp &amp;idxrange_kinsp, IdxRangeSp &amp;idxrange_fluidsp, PC_tree_t conf_gyselalibxx)</argsstring>
+        <name>init_species_withfluid</name>
+        <param>
+          <type>IdxRangeSp &amp;</type>
+          <declname>idx_range_kinsp</declname>
+          <defname>idxrange_kinsp</defname>
+        </param>
+        <param>
+          <type>IdxRangeSp &amp;</type>
+          <declname>idx_range_fluidsp</declname>
+          <defname>idxrange_fluidsp</defname>
+        </param>
+        <param>
+          <type>PC_tree_t</type>
+          <declname>conf_gyselalibxx</declname>
+        </param>
+        <briefdescription>
+<para>Initialise the species domain in the specific case of fluid species added to adiabatic and kinetic species. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">idx_range_kinsp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>kinetic species domain </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">idx_range_fluidsp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>fluid species domain </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">conf_gyselalibxx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the YAML input file </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.cpp" line="122" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.cpp" bodystart="122" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="species__init_8cpp_1aaa5c221382fc7002453677d249fddaf6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>IdxRangeSp</type>
+        <definition>IdxRangeSp init_kinetic_species</definition>
+        <argsstring>()</argsstring>
+        <name>init_kinetic_species</name>
+        <briefdescription>
+<para>Initialise the kinetic species domain. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the kinetic species domain </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.cpp" line="142" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.cpp" bodystart="142" bodyend="160"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;species_init.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Initialise<sp/>the<sp/>species<sp/>domain</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>@param[out]<sp/>kinetic<sp/>species<sp/>domain<sp/></highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/>@param[out]<sp/>fluid<sp/>species<sp/>domain<sp/></highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>@param[in]<sp/>conf_gyselalibxx<sp/>is<sp/>the<sp/>YAML<sp/>input<sp/>file</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>@param[in]<sp/>nb_kinspecies<sp/>number<sp/>of<sp/>kinetic<sp/>species</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/>@param[in]<sp/>nb_fluidspecies<sp/>number<sp/>of<sp/>fluid<sp/>species</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>init_all_species(</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeSp&amp;<sp/>idxrange_kinsp,</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeSp&amp;<sp/>idxrange_fluidsp,</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC_tree_t<sp/>conf_gyselalibxx,</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>nb_kinspecies,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>nb_fluidspecies)</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Define<sp/>the<sp/>domain<sp/>for<sp/>kinetic<sp/>species</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>idxrange_kinsp<sp/>=<sp/>IdxRangeSp(IdxSp(0),<sp/>IdxStepSp(nb_kinspecies));</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemSp&gt;<sp/>kinetic_charges(idxrange_kinsp);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemSp&gt;<sp/>kinetic_masses(idxrange_kinsp);</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Define<sp/>the<sp/>domain<sp/>of<sp/>kinetic<sp/>species</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(IdxSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>isp<sp/>:<sp/>idxrange_kinsp)<sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC_tree_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>conf_isp<sp/>=<sp/>PCpp_get(</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>conf_gyselalibxx,</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;.SpeciesInfo[%d]&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(isp<sp/>-<sp/>idxrange_kinsp.front()).value());</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>kinetic_charges(isp)<sp/>=<sp/>PCpp_double(conf_isp,<sp/></highlight><highlight class="stringliteral">&quot;.charge&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>kinetic_masses(isp)<sp/>=<sp/>PCpp_double(conf_isp,<sp/></highlight><highlight class="stringliteral">&quot;.mass&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Deduce<sp/>adiabatic<sp/>species</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>nb_elec_adiabspecies<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>nb_ion_adiabspecies<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(IdxSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>isp<sp/>:<sp/>idxrange_kinsp)<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(kinetic_charges(isp)<sp/>==<sp/>-1.)<sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nb_elec_adiabspecies<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nb_ion_adiabspecies<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(nb_elec_adiabspecies<sp/>+<sp/>nb_ion_adiabspecies<sp/>&gt;<sp/>1)<sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;Error:<sp/>Not<sp/>possible<sp/>to<sp/>have<sp/>both<sp/>adiabatic<sp/>electrons<sp/>and<sp/>ions&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Define<sp/>the<sp/>domain<sp/>of<sp/>fluid<sp/>species</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>idxrange_fluidsp<sp/>=<sp/>IdxRangeSp(IdxSp(nb_kinspecies),<sp/>IdxStepSp(nb_fluidspecies));</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemSp&gt;<sp/>fluid_charges(idxrange_fluidsp);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemSp&gt;<sp/>fluid_masses(idxrange_fluidsp);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(IdxSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>isp<sp/>:<sp/>idxrange_fluidsp)<sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC_tree_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>conf_nisp<sp/>=<sp/>PCpp_get(</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>conf_gyselalibxx,</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;.NeutralSpeciesInfo[%d]&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(isp<sp/>-<sp/>idxrange_fluidsp.front()).value());</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fluid_charges(isp)<sp/>=<sp/>0.;<sp/></highlight><highlight class="comment">//<sp/>neutral<sp/>charge<sp/>is<sp/>zero</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fluid_masses(isp)<sp/>=<sp/>PCpp_double(conf_nisp,<sp/></highlight><highlight class="stringliteral">&quot;.mass&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Create<sp/>the<sp/>domain<sp/>of<sp/>all<sp/>species<sp/>including<sp/>kinetic<sp/>species<sp/>+<sp/>fluid<sp/>species<sp/>+<sp/>adiabatic<sp/>species<sp/>(if<sp/>existing)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>adiabatic<sp/>species<sp/>are<sp/>placed<sp/>at<sp/>the<sp/>back<sp/>of<sp/>the<sp/>domain</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>idxrange_allsp(</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxSp(0),</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxStepSp(</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nb_kinspecies<sp/>+<sp/>nb_fluidspecies<sp/>+<sp/>nb_elec_adiabspecies<sp/>+<sp/>nb_ion_adiabspecies));</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemSp&gt;<sp/>charges(idxrange_allsp);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(IdxSp<sp/>isp<sp/>:<sp/>idxrange_kinsp)<sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>charges(isp)<sp/>=<sp/>kinetic_charges(isp);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(IdxSp<sp/>isp<sp/>:<sp/>idxrange_fluidsp)<sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>charges(isp)<sp/>=<sp/>fluid_charges(isp);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(nb_elec_adiabspecies<sp/>+<sp/>nb_ion_adiabspecies<sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>charges(idxrange_allsp.back())<sp/>=<sp/>nb_ion_adiabspecies<sp/>-<sp/>nb_elec_adiabspecies;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Create<sp/>the<sp/>domain<sp/>of<sp/>kinetic<sp/>and<sp/>fluid<sp/>species</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>idxrange_kinfluidsp(IdxSp(0),<sp/>IdxStepSp(nb_kinspecies<sp/>+<sp/>nb_fluidspecies));</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemSp&gt;<sp/>masses(idxrange_kinfluidsp);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(IdxSp<sp/>isp<sp/>:<sp/>idxrange_kinsp)<sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>masses(isp)<sp/>=<sp/>kinetic_masses(isp);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(IdxSp<sp/>isp<sp/>:<sp/>idxrange_fluidsp)<sp/>{</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>masses(isp)<sp/>=<sp/>fluid_masses(isp);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::init_discrete_space&lt;Species&gt;(std::move(charges),<sp/>std::move(masses));</highlight></codeline>
+<codeline lineno="91"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Initialise<sp/>the<sp/>species<sp/>domain<sp/>in<sp/>the<sp/>case<sp/>of<sp/>adiabatic<sp/>and<sp/>kinetic<sp/>species</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/>*<sp/>@param[in]<sp/>conf_gyselalibxx<sp/>is<sp/>the<sp/>YAML<sp/>input<sp/>file</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/>*<sp/>@return<sp/>the<sp/>kinetic<sp/>species<sp/>domain<sp/></highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal">IdxRangeSp<sp/>init_species(PC_tree_t<sp/>conf_gyselalibxx)</highlight></codeline>
+<codeline lineno="100"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxStepSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>nb_kinspecies(PCpp_len(conf_gyselalibxx,<sp/></highlight><highlight class="stringliteral">&quot;.SpeciesInfo&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxStepSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>nb_fluidspecies(0);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeSp<sp/>idxrange_kinsp;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeSp<sp/>idxrange_fluidsp;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>init_all_species(</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>idxrange_kinsp,</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>idxrange_fluidsp,</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>conf_gyselalibxx,</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nb_kinspecies,</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nb_fluidspecies);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>idxrange_kinsp;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="116"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Initialise<sp/>the<sp/>species<sp/>domain<sp/>in<sp/>the<sp/>specific<sp/>case<sp/>of<sp/>fluid<sp/>species<sp/></highlight></codeline>
+<codeline lineno="117"><highlight class="comment"><sp/>*<sp/><sp/><sp/>added<sp/>to<sp/>adiabatic<sp/>and<sp/>kinetic<sp/>species</highlight></codeline>
+<codeline lineno="118"><highlight class="comment"><sp/>*<sp/>@param[out]<sp/>kinetic<sp/>species<sp/>domain<sp/></highlight></codeline>
+<codeline lineno="119"><highlight class="comment"><sp/>*<sp/>@param[out]<sp/>fluid<sp/>species<sp/>domain<sp/></highlight></codeline>
+<codeline lineno="120"><highlight class="comment"><sp/>*<sp/>@param[in]<sp/>conf_gyselalibxx<sp/>is<sp/>the<sp/>YAML<sp/>input<sp/>file</highlight></codeline>
+<codeline lineno="121"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>init_species_withfluid(</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeSp&amp;<sp/>idxrange_kinsp,</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeSp&amp;<sp/>idxrange_fluidsp,</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC_tree_t<sp/>conf_gyselalibxx)</highlight></codeline>
+<codeline lineno="126"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxStepSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>nb_kinspecies(PCpp_len(conf_gyselalibxx,<sp/></highlight><highlight class="stringliteral">&quot;.SpeciesInfo&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxStepSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>nb_fluidspecies(PCpp_len(conf_gyselalibxx,<sp/></highlight><highlight class="stringliteral">&quot;.NeutralSpeciesInfo&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/>init_all_species(</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>idxrange_kinsp,</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>idxrange_fluidsp,</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>conf_gyselalibxx,</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nb_kinspecies,</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nb_fluidspecies);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="139"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Initialise<sp/>the<sp/>kinetic<sp/>species<sp/>domain<sp/></highlight></codeline>
+<codeline lineno="140"><highlight class="comment"><sp/>*<sp/>@return<sp/>the<sp/>kinetic<sp/>species<sp/>domain<sp/></highlight></codeline>
+<codeline lineno="141"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal">IdxRangeSp<sp/>init_kinetic_species()</highlight></codeline>
+<codeline lineno="143"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;int&gt;<sp/>species;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/>charges;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/>masses;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>PDI_get_arrays(</highlight><highlight class="stringliteral">&quot;read_species&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;species&quot;</highlight><highlight class="normal">,<sp/>species,<sp/></highlight><highlight class="stringliteral">&quot;charges&quot;</highlight><highlight class="normal">,<sp/>charges,<sp/></highlight><highlight class="stringliteral">&quot;masses&quot;</highlight><highlight class="normal">,<sp/>masses);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxStepSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>idxstep_kinsp(charges.size());</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>idxrange_kinsp(IdxSp(0),<sp/>idxstep_kinsp);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemSp&gt;<sp/>kinetic_charges(idxrange_kinsp);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>host_t&lt;DFieldMemSp&gt;<sp/>kinetic_masses(idxrange_kinsp);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Define<sp/>the<sp/>domain<sp/>of<sp/>kinetic<sp/>species</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(IdxSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>isp<sp/>:<sp/>idxrange_kinsp)<sp/>{</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>kinetic_charges(isp)<sp/>=<sp/>charges[isp<sp/>-<sp/>idxrange_kinsp.front()];</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>kinetic_masses(isp)<sp/>=<sp/>masses[isp<sp/>-<sp/>idxrange_kinsp.front()];</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::init_discrete_space&lt;Species&gt;(std::move(kinetic_charges),<sp/>std::move(kinetic_masses));</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>idxrange_kinsp;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.cpp"/>
+  </compounddef>
+</doxygen>

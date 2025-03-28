@@ -1,0 +1,512 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespacetensor__tools" kind="namespace" language="C++">
+    <compoundname>tensor_tools</compoundname>
+    <innerclass refid="structtensor__tools_1_1GetContravariantDims" prot="public">tensor_tools::GetContravariantDims</innerclass>
+    <innerclass refid="structtensor__tools_1_1GetContravariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4" prot="public">tensor_tools::GetContravariantDims&lt; VectorIndexSet&lt; Dims... &gt; &gt;</innerclass>
+    <innerclass refid="structtensor__tools_1_1GetCovariantDims" prot="public">tensor_tools::GetCovariantDims</innerclass>
+    <innerclass refid="structtensor__tools_1_1GetCovariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4" prot="public">tensor_tools::GetCovariantDims&lt; VectorIndexSet&lt; Dims... &gt; &gt;</innerclass>
+    <innerclass refid="classtensor__tools_1_1IndexedTensor" prot="public">tensor_tools::IndexedTensor</innerclass>
+    <innerclass refid="structtensor__tools_1_1is__contravariant__vector__index__set" prot="public">tensor_tools::is_contravariant_vector_index_set</innerclass>
+    <innerclass refid="structtensor__tools_1_1is__contravariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4" prot="public">tensor_tools::is_contravariant_vector_index_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;</innerclass>
+    <innerclass refid="structtensor__tools_1_1is__covariant__vector__index__set" prot="public">tensor_tools::is_covariant_vector_index_set</innerclass>
+    <innerclass refid="structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4" prot="public">tensor_tools::is_covariant_vector_index_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;</innerclass>
+    <innerclass refid="structtensor__tools_1_1is__vector__index__set" prot="public">tensor_tools::is_vector_index_set</innerclass>
+    <innerclass refid="structtensor__tools_1_1is__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4" prot="public">tensor_tools::is_vector_index_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;</innerclass>
+    <innerclass refid="classtensor__tools_1_1TensorIndexElement" prot="public">tensor_tools::TensorIndexElement</innerclass>
+    <innerclass refid="structtensor__tools_1_1vector__index__set__dual" prot="public">tensor_tools::vector_index_set_dual</innerclass>
+    <innerclass refid="structtensor__tools_1_1vector__index__set__dual_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4" prot="public">tensor_tools::vector_index_set_dual&lt; VectorIndexSet&lt; Dims... &gt; &gt;</innerclass>
+    <innerclass refid="structtensor__tools_1_1VectorIndexIdMap" prot="public">tensor_tools::VectorIndexIdMap</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacetensor__tools_1acd62e88dcaeb52aa4c2cd79ea14922eb" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ValidatingTensorIndexSet</type>
+          </param>
+          <param>
+            <type>class TypeSeqTensorIndexTag</type>
+          </param>
+        </templateparamlist>
+        <type>typename details::ToTensorIndexElement&lt; ValidatingTensorIndexSet, TypeSeqTensorIndexTag &gt;::type</type>
+        <definition>using tensor_tools::to_tensor_index_element_t = typedef typename details:: ToTensorIndexElement&lt;ValidatingTensorIndexSet, TypeSeqTensorIndexTag&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>to_tensor_index_element_t</name>
+        <qualifiedname>tensor_tools::to_tensor_index_element_t</qualifiedname>
+        <briefdescription>
+<para>Get a <ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">TensorIndexElement</ref> from a TypeSeq of valid VectorIndexSets and a TypeSeq of indices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ValidatingTensorIndexSet</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A TypeSeq containing the VectorIndexSets describing the tags that can be used as indices in each dimension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TypeSeqTensorIndexTag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A TypeSeq containing the tags used to index the tensor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="182" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="183" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacetensor__tools_1a61be22b52b1e7e9a492557f7de7191e8" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class TypeSeqVectorIndexIdMap</type>
+          </param>
+        </templateparamlist>
+        <type>typename details::ExtractTypeSeqIndexSet&lt; TypeSeqVectorIndexIdMap &gt;::type</type>
+        <definition>using tensor_tools::get_type_seq_vector_index_set_t = typedef typename details::ExtractTypeSeqIndexSet&lt;TypeSeqVectorIndexIdMap&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>get_type_seq_vector_index_set_t</name>
+        <qualifiedname>tensor_tools::get_type_seq_vector_index_set_t</qualifiedname>
+        <briefdescription>
+<para>Get a TypeSeq of valid VectorIndexSets from a TypeSeq of VectorIndexIdMaps. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TypeSeqVectorIndexIdMap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A TypeSeq containing a <ref refid="structtensor__tools_1_1VectorIndexIdMap" kindref="compound">VectorIndexIdMap</ref> for each dimension of the tensor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="191" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="192" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacetensor__tools_1aba3defbe20356c56a388b8f7c2b459f9" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class TypeSeqVectorIndexIdMap</type>
+          </param>
+        </templateparamlist>
+        <type>typename details::GetIndexIds&lt; TypeSeqVectorIndexIdMap &gt;::type</type>
+        <definition>using tensor_tools::index_identifiers_t = typedef typename details::GetIndexIds&lt;TypeSeqVectorIndexIdMap&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>index_identifiers_t</name>
+        <qualifiedname>tensor_tools::index_identifiers_t</qualifiedname>
+        <briefdescription>
+<para>Create a TypeSeq of integral_constants containing all the character ids found in the TypeSeqVectorIndexIdMap. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TypeSeqVectorIndexIdMap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A TypeSeq containing a <ref refid="structtensor__tools_1_1VectorIndexIdMap" kindref="compound">VectorIndexIdMap</ref> for each dimension of the tensor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="306" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="306" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacetensor__tools_1abb2871c7aca6c2ad222ec182e2b6d250" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class TypeSeqVectorIndexIdMap</type>
+          </param>
+        </templateparamlist>
+        <type>typename details::GetUniqueIndices&lt; TypeSeqVectorIndexIdMap &gt;::type</type>
+        <definition>using tensor_tools::unique_indices_t = typedef typename details::GetUniqueIndices&lt;TypeSeqVectorIndexIdMap&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>unique_indices_t</name>
+        <qualifiedname>tensor_tools::unique_indices_t</qualifiedname>
+        <briefdescription>
+<para>Create a TypeSeq of <ref refid="structtensor__tools_1_1VectorIndexIdMap" kindref="compound">VectorIndexIdMap</ref> in which each character id only appears once from a TypeSeq of VectorIndexIdMaps with repeat character ids. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TypeSeqVectorIndexIdMap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A TypeSeq containing a <ref refid="structtensor__tools_1_1VectorIndexIdMap" kindref="compound">VectorIndexIdMap</ref> for each dimension of the tensor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="315" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="315" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacetensor__tools_1a52592b19040f7e788b2621d034df6253" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class TypeSeqVectorIndexIdMap</type>
+          </param>
+        </templateparamlist>
+        <type>typename details::GetNonRepeatedIndices&lt; TypeSeqVectorIndexIdMap, ddc::type_seq_size_v&lt; TypeSeqVectorIndexIdMap &gt; - 1, <ref refid="namespacetensor__tools_1aba3defbe20356c56a388b8f7c2b459f9" kindref="member">index_identifiers_t</ref>&lt; TypeSeqVectorIndexIdMap &gt; &gt;::type</type>
+        <definition>using tensor_tools::non_repeated_indices_t = typedef typename details::GetNonRepeatedIndices&lt; TypeSeqVectorIndexIdMap, ddc::type_seq_size_v&lt;TypeSeqVectorIndexIdMap&gt; - 1, index_identifiers_t&lt;TypeSeqVectorIndexIdMap&gt; &gt;::type</definition>
+        <argsstring></argsstring>
+        <name>non_repeated_indices_t</name>
+        <qualifiedname>tensor_tools::non_repeated_indices_t</qualifiedname>
+        <briefdescription>
+<para>Extract the VectorIndexIdMaps whose character id only appears once in a TypeSeq of VectorIndexIdMaps. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TypeSeqVectorIndexIdMap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A TypeSeq containing a <ref refid="structtensor__tools_1_1VectorIndexIdMap" kindref="compound">VectorIndexIdMap</ref> for each dimension of the tensor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="324" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="327" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacetensor__tools_1a980d9ffa93ea63cb1ec252adc26d0f2f" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>char</type>
+            <declname>ID</declname>
+            <defname>ID</defname>
+          </param>
+          <param>
+            <type>class TypeSeqVectorIndexIdMap</type>
+          </param>
+        </templateparamlist>
+        <type>typename details::GetRelevantVectorIndexSets&lt; ID, TypeSeqVectorIndexIdMap &gt;::type</type>
+        <definition>using tensor_tools::relevant_vector_index_sets_t = typedef typename details::GetRelevantVectorIndexSets&lt;ID, TypeSeqVectorIndexIdMap&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>relevant_vector_index_sets_t</name>
+        <qualifiedname>tensor_tools::relevant_vector_index_sets_t</qualifiedname>
+        <briefdescription>
+<para>Extract all VectorIndexSets which are described by the same character identifier. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character identifying the VectorIndexSets we are searching for. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TypeSeqVectorIndexIdMap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A TypeSeq containing a <ref refid="structtensor__tools_1_1VectorIndexIdMap" kindref="compound">VectorIndexIdMap</ref> for each dimension of the tensor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="336" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="337" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacetensor__tools_1a8a7c5666e38030f40be9343d8503b585" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>IndexPosition</declname>
+            <defname>IndexPosition</defname>
+          </param>
+          <param>
+            <type>class TypeSeqVectorIndexSet</type>
+          </param>
+        </templateparamlist>
+        <type>typename details::GetNthTensorIndexElement&lt; IndexPosition, ddc::type_seq_size_v&lt; TypeSeqVectorIndexSet &gt;, TypeSeqVectorIndexSet &gt;::type</type>
+        <definition>using tensor_tools::get_nth_tensor_index_element_t = typedef typename details::GetNthTensorIndexElement&lt; IndexPosition, ddc::type_seq_size_v&lt;TypeSeqVectorIndexSet&gt;, TypeSeqVectorIndexSet&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>get_nth_tensor_index_element_t</name>
+        <qualifiedname>tensor_tools::get_nth_tensor_index_element_t</qualifiedname>
+        <briefdescription>
+<para>Get the <ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">TensorIndexElement</ref> which indexes a <ref refid="classTensor" kindref="compound">Tensor</ref> at the n-th position of its internal array. E.g. for a 2x2 <ref refid="classTensor" kindref="compound">Tensor</ref>, get_nth_tensor_index_element_t&lt;1, TypeSeqVectorIndexSet&gt; returns the <ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">TensorIndexElement</ref> which indexes element 1 of the array, so the element {0,1} of the tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>IndexPosition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the underlying array for which we want to collect the <ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">TensorIndexElement</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TypeSeqVectorIndexSet</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A TypeSeq containing the VectorIndexSets describing the valid indices along each dimension of the tensor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="439" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="442" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacetensor__tools_1a8b70750aa12d74e15a89a1a3acc3c322" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>Elem</declname>
+            <defname>Elem</defname>
+          </param>
+          <param>
+            <type>class TypeSeqVectorIndexIdMap</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="namespacetensor__tools_1acd62e88dcaeb52aa4c2cd79ea14922eb" kindref="member">to_tensor_index_element_t</ref>&lt; <ref refid="namespacetensor__tools_1a61be22b52b1e7e9a492557f7de7191e8" kindref="member">get_type_seq_vector_index_set_t</ref>&lt; TypeSeqVectorIndexIdMap &gt;, typename details::GetNthTensorIndexElementFromMap&lt; TypeSeqVectorIndexIdMap, <ref refid="namespacetensor__tools_1a8a7c5666e38030f40be9343d8503b585" kindref="member">get_nth_tensor_index_element_t</ref>&lt; Elem, <ref refid="namespacetensor__tools_1a61be22b52b1e7e9a492557f7de7191e8" kindref="member">get_type_seq_vector_index_set_t</ref>&lt; <ref refid="namespacetensor__tools_1abb2871c7aca6c2ad222ec182e2b6d250" kindref="member">unique_indices_t</ref>&lt; TypeSeqVectorIndexIdMap &gt; &gt; &gt;, ddc::type_seq_size_v&lt; TypeSeqVectorIndexIdMap &gt; &gt;::type &gt;</type>
+        <definition>using tensor_tools::get_nth_tensor_index_element_from_map_t = typedef to_tensor_index_element_t&lt; get_type_seq_vector_index_set_t&lt;TypeSeqVectorIndexIdMap&gt;, typename details::GetNthTensorIndexElementFromMap&lt; TypeSeqVectorIndexIdMap, get_nth_tensor_index_element_t&lt; Elem, get_type_seq_vector_index_set_t&lt;unique_indices_t&lt;TypeSeqVectorIndexIdMap&gt; &gt;&gt;, ddc::type_seq_size_v&lt;TypeSeqVectorIndexIdMap&gt; &gt;::type&gt;</definition>
+        <argsstring></argsstring>
+        <name>get_nth_tensor_index_element_from_map_t</name>
+        <qualifiedname>tensor_tools::get_nth_tensor_index_element_from_map_t</qualifiedname>
+        <briefdescription>
+<para>Get the n-th valid index for a tensor which is accessed according to the pattern described by a TypeSeq of VectorIndexIdMaps. E.g. for a 2D tensor with components A_{xx}, A_{xy}, A_{yx}, A_{yy}, indexed with. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting><codeline><highlight class="normal">TypeSeq&lt;<ref refid="structtensor__tools_1_1VectorIndexIdMap" kindref="compound">VectorIndexIdMap</ref>&lt;</highlight><highlight class="charliteral">&apos;i&apos;</highlight><highlight class="normal">,<sp/>VectorIndexSet&lt;X,<sp/>Y&gt;&gt;,<sp/><ref refid="structtensor__tools_1_1VectorIndexIdMap" kindref="compound">VectorIndexIdMap</ref>&lt;</highlight><highlight class="charliteral">&apos;i&apos;</highlight><highlight class="normal">,<sp/>VectorIndexSet&lt;X,<sp/>Y&gt;&gt;&gt;</highlight></codeline>
+</programlisting></para>
+<para><itemizedlist>
+<listitem><para>the 1st element is <ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">TensorIndexElement</ref>&lt;TypeSeq&lt;VectorIndexSet&lt;X, Y&gt;, VectorIndexSet&lt;X, Y&gt;&gt;, <ref refid="structX" kindref="compound">X</ref>, <ref refid="structX" kindref="compound">X</ref>&gt;</para>
+</listitem><listitem><para>the 2nd element is <ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">TensorIndexElement</ref>&lt;TypeSeq&lt;VectorIndexSet&lt;X, Y&gt;, VectorIndexSet&lt;X, Y&gt;&gt;, <ref refid="structY" kindref="compound">Y</ref>, <ref refid="structY" kindref="compound">Y</ref>&gt;</para>
+</listitem></itemizedlist>
+</para>
+<para>A_{xy} and A_{yx} are not valid components as they do not respect the index pattern.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Elem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The element of interest. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TypeSeqVectorIndexIdMap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A TypeSeq containing a <ref refid="structtensor__tools_1_1VectorIndexIdMap" kindref="compound">VectorIndexIdMap</ref> for each dimension of the tensor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="462" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="469" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacetensor__tools_1a2978b8ce6b0bb07f92e089a9cc95337d" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class TypeSeqVectorIndexIdMapGlobal</type>
+          </param>
+          <param>
+            <type>class TypeSeqVectorIndexIdMapLocal</type>
+          </param>
+          <param>
+            <type>class GlobalTensorIndexElement</type>
+          </param>
+        </templateparamlist>
+        <type>typename details::ExtractSubTensorElement&lt; TypeSeqVectorIndexIdMapGlobal, TypeSeqVectorIndexIdMapLocal, GlobalTensorIndexElement &gt;::type</type>
+        <definition>using tensor_tools::extract_sub_tensor_element_t = typedef typename details::ExtractSubTensorElement&lt; TypeSeqVectorIndexIdMapGlobal, TypeSeqVectorIndexIdMapLocal, GlobalTensorIndexElement&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>extract_sub_tensor_element_t</name>
+        <qualifiedname>tensor_tools::extract_sub_tensor_element_t</qualifiedname>
+        <briefdescription>
+<para>Extract the relevant elements of a <ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">TensorIndexElement</ref> to create a sub-TensorIndexElement using a global and a local TypeSeq of VectorIndexIdMaps to identify the relevant elements. For example: for GlobalTensorIndexElement = TensorIndexElement&lt;X,Y&gt; with TypeSeqVectorIndexIdMapGlobal = TypeSeq&lt;<ref refid="structtensor__tools_1_1VectorIndexIdMap" kindref="compound">VectorIndexIdMap</ref>&lt;&apos;i&apos;, VectorIndexSet&lt;X, Y&gt;&gt;, <ref refid="structtensor__tools_1_1VectorIndexIdMap" kindref="compound">VectorIndexIdMap</ref>&lt;&apos;j&apos;, VectorIndexSet&lt;X, Y&gt;&gt;&gt; and TypeSeqVectorIndexIdMapLocal = TypeSeq&lt;<ref refid="structtensor__tools_1_1VectorIndexIdMap" kindref="compound">VectorIndexIdMap</ref>&lt;&apos;j&apos;, VectorIndexSet&lt;X, Y&gt;&gt;&gt; we obtain TensorIndexElement&lt;Y&gt; </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TypeSeqVectorIndexIdMapGlobal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The global TypeSeq of VectorIndexIdMaps describing how the <ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">TensorIndexElement</ref> was indexed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TypeSeqVectorIndexIdMapLocal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The local TypeSeq of VectorIndexIdMaps describing how to identify the relevant indices for the output. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>GlobalTensorIndexElement</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The starting <ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">TensorIndexElement</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="490" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="493" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacetensor__tools_1a09cf24ef307ce7250239f76c47aa7ac9" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structT" kindref="compound">T</ref></type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool tensor_tools::enable_indexed_tensor</definition>
+        <argsstring></argsstring>
+        <name>enable_indexed_tensor</name>
+        <qualifiedname>tensor_tools::enable_indexed_tensor</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>A boolean, true if the type is an <ref refid="classtensor__tools_1_1IndexedTensor" kindref="compound">IndexedTensor</ref>, false otherwise. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="16" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacetensor__tools_1ab86f1ce03b1c2a89e229a73da3e4b561" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class TensorType</type>
+          </param>
+          <param>
+            <type>class TypeSeqVectorIndexIdMap</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool tensor_tools::enable_indexed_tensor&lt; IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>enable_indexed_tensor&lt; IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt; &gt;</name>
+        <qualifiedname>tensor_tools::enable_indexed_tensor&lt; IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt; &gt;</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>A boolean, true if the type is an <ref refid="classtensor__tools_1_1IndexedTensor" kindref="compound">IndexedTensor</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="83" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacetensor__tools_1a6ab8da07aa375da3ae97f2347ed8b40d" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class Type</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool tensor_tools::is_indexed_tensor_v</definition>
+        <argsstring></argsstring>
+        <name>is_indexed_tensor_v</name>
+        <qualifiedname>tensor_tools::is_indexed_tensor_v</qualifiedname>
+        <initializer>= <ref refid="namespacetensor__tools_1a09cf24ef307ce7250239f76c47aa7ac9" kindref="member">enable_indexed_tensor</ref>&lt;std::remove_const_t&lt;std::remove_reference_t&lt;Type&gt;&gt;&gt;</initializer>
+        <briefdescription>
+<para>A tool to check if a type is an <ref refid="classtensor__tools_1_1IndexedTensor" kindref="compound">IndexedTensor</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="88" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacetensor__tools_1a96b145e7281df8a07bc6db14494f3230" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool tensor_tools::is_tensor_index_element_v</definition>
+        <argsstring></argsstring>
+        <name>is_tensor_index_element_v</name>
+        <qualifiedname>tensor_tools::is_tensor_index_element_v</qualifiedname>
+        <initializer>= details::enable_tensor_index_element&lt;std::remove_const_t&lt;std::remove_reference_t&lt;Type&gt;&gt;&gt;</initializer>
+        <briefdescription>
+<para>A helper to check if a type is a <ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">TensorIndexElement</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="164" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="165" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacetensor__tools_1a86b09bb6765b9454c8da9ae3f88b459a" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>char</type>
+            <declname>search_char</declname>
+            <defname>search_char</defname>
+          </param>
+          <param>
+            <type>class CharTypeSeq</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t tensor_tools::char_occurrences_v</definition>
+        <argsstring></argsstring>
+        <name>char_occurrences_v</name>
+        <qualifiedname>tensor_tools::char_occurrences_v</qualifiedname>
+        <initializer>= details::CountChar&lt;search_char, CharTypeSeq&gt;::value</initializer>
+        <briefdescription>
+<para>Count the number of instances of a character in a TypeSeq of literals. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>search_char</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character that you are searching for. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TupleType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the TypeSeq of integral_constants of characters. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="173" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="173" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>A namespace to group all the tools that are useful to carry out non-trivial operations on tensors. </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="12" column="1"/>
+  </compounddef>
+</doxygen>

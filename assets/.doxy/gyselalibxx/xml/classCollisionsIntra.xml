@@ -1,0 +1,801 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classCollisionsIntra" kind="class" language="C++" prot="public">
+    <compoundname>CollisionsIntra</compoundname>
+    <basecompoundref refid="classIRightHandSide" prot="public" virt="non-virtual">IRightHandSide</basecompoundref>
+    <includes refid="collisions__intra_8hpp" local="no">collisions_intra.hpp</includes>
+    <innerclass refid="structCollisionsIntra_1_1GhostedVx" prot="public">CollisionsIntra::GhostedVx</innerclass>
+    <innerclass refid="structCollisionsIntra_1_1GhostedVxStaggered" prot="public">CollisionsIntra::GhostedVxStaggered</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classCollisionsIntra_1a78125fea3147218240c8bb1cfd8b3b4e" prot="public" static="no">
+        <type>IdxRange&lt; <ref refid="structSpecies" kindref="compound">Species</ref>, <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structCollisionsIntra_1_1GhostedVx" kindref="compound">GhostedVx</ref> &gt;</type>
+        <definition>using CollisionsIntra::IdxRangeSpXVx_ghosted =  IdxRange&lt;Species, GridX, GhostedVx&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeSpXVx_ghosted</name>
+        <qualifiedname>CollisionsIntra::IdxRangeSpXVx_ghosted</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A type representing a mesh for species, space and ghosted vx mesh. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCollisionsIntra_1aa8de0dc7f09923428fa8ef0e30aeef1e" prot="public" static="no">
+        <type>IdxRange&lt; <ref refid="structSpecies" kindref="compound">Species</ref>, <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structCollisionsIntra_1_1GhostedVxStaggered" kindref="compound">GhostedVxStaggered</ref> &gt;</type>
+        <definition>using CollisionsIntra::IdxRangeSpXVx_ghosted_staggered =  IdxRange&lt;Species, GridX, GhostedVxStaggered&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeSpXVx_ghosted_staggered</name>
+        <qualifiedname>CollisionsIntra::IdxRangeSpXVx_ghosted_staggered</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A type representing a mesh for species, space and ghosted staggered vx mesh. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="68" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCollisionsIntra_1af1604f3f73be57180f6ab5e01606b1fd" prot="public" static="no">
+        <type>Idx&lt; <ref refid="structCollisionsIntra_1_1GhostedVx" kindref="compound">GhostedVx</ref> &gt;</type>
+        <definition>using CollisionsIntra::IdxVx_ghosted =  Idx&lt;GhostedVx&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxVx_ghosted</name>
+        <qualifiedname>CollisionsIntra::IdxVx_ghosted</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A type representing a ghosted vx index. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="73" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCollisionsIntra_1a164c6c249095a533900a12e2f1f48e25" prot="public" static="no">
+        <type>Idx&lt; <ref refid="structCollisionsIntra_1_1GhostedVxStaggered" kindref="compound">GhostedVxStaggered</ref> &gt;</type>
+        <definition>using CollisionsIntra::IdxVx_ghosted_staggered =  Idx&lt;GhostedVxStaggered&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxVx_ghosted_staggered</name>
+        <qualifiedname>CollisionsIntra::IdxVx_ghosted_staggered</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A type representing a ghosted staggered vx index. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="78" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCollisionsIntra_1aa075cab1489331085e1473960b074dd3" prot="public" static="no">
+        <type>Idx&lt; <ref refid="structSpecies" kindref="compound">Species</ref>, <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structCollisionsIntra_1_1GhostedVx" kindref="compound">GhostedVx</ref> &gt;</type>
+        <definition>using CollisionsIntra::IdxSpXVx_ghosted =  Idx&lt;Species, GridX, GhostedVx&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxSpXVx_ghosted</name>
+        <qualifiedname>CollisionsIntra::IdxSpXVx_ghosted</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A type representing a species, space and ghosted vx index. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="83" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCollisionsIntra_1a8bd3150e39cbad46ac340e07ca315662" prot="public" static="no">
+        <type>Idx&lt; <ref refid="structSpecies" kindref="compound">Species</ref>, <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structCollisionsIntra_1_1GhostedVxStaggered" kindref="compound">GhostedVxStaggered</ref> &gt;</type>
+        <definition>using CollisionsIntra::IdxSpXVx_ghosted_staggered =  Idx&lt;Species, GridX, GhostedVxStaggered&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxSpXVx_ghosted_staggered</name>
+        <qualifiedname>CollisionsIntra::IdxSpXVx_ghosted_staggered</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A type representing a species, space and ghosted staggered vx index. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classCollisionsIntra_1ad0a8b91c85101449cb4d869855d3642d" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool CollisionsIntra::uniform_edge_v</definition>
+        <argsstring></argsstring>
+        <name>uniform_edge_v</name>
+        <qualifiedname>CollisionsIntra::uniform_edge_v</qualifiedname>
+        <initializer>= ddc::is_uniform_point_sampling_v&lt;<ref refid="structGridVx" kindref="compound">GridVx</ref>&gt;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="41" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classCollisionsIntra_1a15c4b6fe9c57f3db6cff56a8fb4e6158" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double CollisionsIntra::m_nustar0</definition>
+        <argsstring></argsstring>
+        <name>m_nustar0</name>
+        <qualifiedname>CollisionsIntra::m_nustar0</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="115" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCollisionsIntra_1a88df4aa9b908cb938873a6dd2f9bb24b" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double CollisionsIntra::m_fthresh</definition>
+        <argsstring></argsstring>
+        <name>m_fthresh</name>
+        <qualifiedname>CollisionsIntra::m_fthresh</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="116" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCollisionsIntra_1a48754945df0b265698867321ab7c38b7" prot="private" static="no" mutable="no">
+        <type>DFieldMemSpX</type>
+        <definition>DFieldMemSpX CollisionsIntra::m_nustar_profile_alloc</definition>
+        <argsstring></argsstring>
+        <name>m_nustar_profile_alloc</name>
+        <qualifiedname>CollisionsIntra::m_nustar_profile_alloc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="117" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCollisionsIntra_1a35d58cd5492618435859d7b7adb38119" prot="private" static="no" mutable="no">
+        <type>DFieldSpX</type>
+        <definition>DFieldSpX CollisionsIntra::m_nustar_profile</definition>
+        <argsstring></argsstring>
+        <name>m_nustar_profile</name>
+        <qualifiedname>CollisionsIntra::m_nustar_profile</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="118" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCollisionsIntra_1a471cc65cdde54202731490a85b8fcac6" prot="private" static="no" mutable="no">
+        <type>IdxRange&lt; <ref refid="structCollisionsIntra_1_1GhostedVx" kindref="compound">GhostedVx</ref> &gt;</type>
+        <definition>IdxRange&lt;GhostedVx&gt; CollisionsIntra::m_gridvx_ghosted</definition>
+        <argsstring></argsstring>
+        <name>m_gridvx_ghosted</name>
+        <qualifiedname>CollisionsIntra::m_gridvx_ghosted</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="120" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCollisionsIntra_1ae29db743ce9f52508607c2ea2c79c72f" prot="private" static="no" mutable="no">
+        <type>IdxRange&lt; <ref refid="structCollisionsIntra_1_1GhostedVxStaggered" kindref="compound">GhostedVxStaggered</ref> &gt;</type>
+        <definition>IdxRange&lt;GhostedVxStaggered&gt; CollisionsIntra::m_gridvx_ghosted_staggered</definition>
+        <argsstring></argsstring>
+        <name>m_gridvx_ghosted_staggered</name>
+        <qualifiedname>CollisionsIntra::m_gridvx_ghosted_staggered</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="121" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCollisionsIntra_1aa759bbe6107323d07fa53ca3bfe22a6b" prot="private" static="no" mutable="no">
+        <type><ref refid="classCollisionsIntra_1a78125fea3147218240c8bb1cfd8b3b4e" kindref="member">IdxRangeSpXVx_ghosted</ref></type>
+        <definition>IdxRangeSpXVx_ghosted CollisionsIntra::m_mesh_ghosted</definition>
+        <argsstring></argsstring>
+        <name>m_mesh_ghosted</name>
+        <qualifiedname>CollisionsIntra::m_mesh_ghosted</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="123" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCollisionsIntra_1ab5b1ddc50b7bf865a21b2ac67e9ed0b0" prot="private" static="no" mutable="no">
+        <type><ref refid="classCollisionsIntra_1aa8de0dc7f09923428fa8ef0e30aeef1e" kindref="member">IdxRangeSpXVx_ghosted_staggered</ref></type>
+        <definition>IdxRangeSpXVx_ghosted_staggered CollisionsIntra::m_mesh_ghosted_staggered</definition>
+        <argsstring></argsstring>
+        <name>m_mesh_ghosted_staggered</name>
+        <qualifiedname>CollisionsIntra::m_mesh_ghosted_staggered</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="124" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" bodystart="124" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classCollisionsIntra_1a7cc81cef7ef91281becea62231df8c32" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class TargetDim</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION Idx&lt; TargetDim &gt;</type>
+        <definition>KOKKOS_FUNCTION Idx&lt; TargetDim &gt; CollisionsIntra::to_index</definition>
+        <argsstring>(Idx&lt; GridVx &gt; const &amp;index)</argsstring>
+        <name>to_index</name>
+        <qualifiedname>CollisionsIntra::to_index</qualifiedname>
+        <param>
+          <type>Idx&lt; <ref refid="structGridVx" kindref="compound">GridVx</ref> &gt; const &amp;</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="93" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.cpp" bodystart="12" bodyend="21"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classCollisionsIntra_1aa111f3e2a25bf4926538ef37b7d5489f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class GridVxSpoof</type>
+          </param>
+          <param>
+            <type>class GhostedVxSpoof</type>
+            <defval><ref refid="structCollisionsIntra_1_1GhostedVx" kindref="compound">GhostedVx</ref></defval>
+          </param>
+          <param>
+            <type>class GhostedVxStaggeredSpoof</type>
+            <defval><ref refid="structCollisionsIntra_1_1GhostedVxStaggered" kindref="compound">GhostedVxStaggered</ref></defval>
+          </param>
+        </templateparamlist>
+        <type>std::enable_if_t&lt;!ddc::is_uniform_point_sampling_v&lt; GridVxSpoof &gt; &gt;</type>
+        <definition>std::enable_if_t&lt;!ddc::is_uniform_point_sampling_v&lt; GridVxSpoof &gt; &gt; CollisionsIntra::build_ghosted_staggered_vx_point_sampling</definition>
+        <argsstring>(IdxRange&lt; GridVxSpoof &gt; const &amp;idx_range)</argsstring>
+        <name>build_ghosted_staggered_vx_point_sampling</name>
+        <qualifiedname>CollisionsIntra::build_ghosted_staggered_vx_point_sampling</qualifiedname>
+        <param>
+          <type>IdxRange&lt; GridVxSpoof &gt; const &amp;</type>
+          <declname>idx_range</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="103" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.cpp" bodystart="28" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classCollisionsIntra_1ae74cc75e0f4934311cfd47dc445bec20" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class GridVxSpoof</type>
+          </param>
+          <param>
+            <type>class GhostedVxSpoof</type>
+            <defval><ref refid="structCollisionsIntra_1_1GhostedVx" kindref="compound">GhostedVx</ref></defval>
+          </param>
+          <param>
+            <type>class GhostedVxStaggeredSpoof</type>
+            <defval><ref refid="structCollisionsIntra_1_1GhostedVxStaggered" kindref="compound">GhostedVxStaggered</ref></defval>
+          </param>
+        </templateparamlist>
+        <type>std::enable_if_t&lt; ddc::is_uniform_point_sampling_v&lt; GridVxSpoof &gt; &gt;</type>
+        <definition>std::enable_if_t&lt; ddc::is_uniform_point_sampling_v&lt; GridVxSpoof &gt; &gt; CollisionsIntra::build_ghosted_staggered_vx_point_sampling</definition>
+        <argsstring>(IdxRange&lt; GridVxSpoof &gt; const &amp;idx_range)</argsstring>
+        <name>build_ghosted_staggered_vx_point_sampling</name>
+        <qualifiedname>CollisionsIntra::build_ghosted_staggered_vx_point_sampling</qualifiedname>
+        <param>
+          <type>IdxRange&lt; GridVxSpoof &gt; const &amp;</type>
+          <declname>idx_range</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="113" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.cpp" bodystart="69" bodyend="90"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classCollisionsIntra_1addf7a93d3bbdc450236e56d71609c10b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>CollisionsIntra::CollisionsIntra</definition>
+        <argsstring>(IdxRangeSpXVx const &amp;mesh, double nustar0)</argsstring>
+        <name>CollisionsIntra</name>
+        <qualifiedname>CollisionsIntra::CollisionsIntra</qualifiedname>
+        <param>
+          <type>IdxRangeSpXVx const &amp;</type>
+          <declname>mesh</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>nustar0</declname>
+        </param>
+        <briefdescription>
+<para>The constructor for the operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">mesh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range on which the operator will act. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nustar0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The normalised collisionality. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="133" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.cpp" bodystart="92" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="classCollisionsIntra_1ad066a79f6c0a9dcf3720dbfc5e9056e0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>DFieldSpXVx</type>
+        <definition>DFieldSpXVx CollisionsIntra::operator()</definition>
+        <argsstring>(DFieldSpXVx allfdistribu, double dt) const override</argsstring>
+        <name>operator()</name>
+        <qualifiedname>CollisionsIntra::operator()</qualifiedname>
+        <reimplements refid="classIRightHandSide_1a00f66ff88f6b0fd17a931a09b1ddb2d3">operator()</reimplements>
+        <param>
+          <type>DFieldSpXVx</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+<para>Update the distribution function for intra-species collision. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Update the distribution function for both electrons and ions to show how it is modified following collisions within various species. This operator only handles collisions between particles of the same species.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The distribution function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step over which the collisions occur.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A field referencing the distribution function passed as argument. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="148" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.cpp" bodystart="261" bodyend="390"/>
+      </memberdef>
+      <memberdef kind="function" id="classCollisionsIntra_1a6b18fb17a213025672de06d8d6b7cee8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double CollisionsIntra::get_nustar0</definition>
+        <argsstring>() const</argsstring>
+        <name>get_nustar0</name>
+        <qualifiedname>CollisionsIntra::get_nustar0</qualifiedname>
+        <briefdescription>
+<para>Get the collision coefficient. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The collisionality coefficient. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="155" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classCollisionsIntra_1a80eaee577d89a01deb8a97abfc61a9a7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>IdxRange&lt; <ref refid="structCollisionsIntra_1_1GhostedVx" kindref="compound">GhostedVx</ref> &gt; const &amp;</type>
+        <definition>IdxRange&lt; CollisionsIntra::GhostedVx &gt; const  &amp; CollisionsIntra::get_gridvx_ghosted</definition>
+        <argsstring>() const</argsstring>
+        <name>get_gridvx_ghosted</name>
+        <qualifiedname>CollisionsIntra::get_gridvx_ghosted</qualifiedname>
+        <briefdescription>
+<para>Get the ghosted vx mesh used for computing finite differences centred derivatives. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The ghosted vx mesh. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="162" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.cpp" bodystart="122" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classCollisionsIntra_1a031c4df28647ec691dc89a3917038ee9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>IdxRange&lt; <ref refid="structCollisionsIntra_1_1GhostedVxStaggered" kindref="compound">GhostedVxStaggered</ref> &gt; const &amp;</type>
+        <definition>IdxRange&lt; CollisionsIntra::GhostedVxStaggered &gt; const  &amp; CollisionsIntra::get_gridvx_ghosted_staggered</definition>
+        <argsstring>() const</argsstring>
+        <name>get_gridvx_ghosted_staggered</name>
+        <qualifiedname>CollisionsIntra::get_gridvx_ghosted_staggered</qualifiedname>
+        <briefdescription>
+<para>Get the ghosted and staggered vx mesh used for computing finite differences centred derivatives. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The ghosted and staggered vx mesh. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="169" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.cpp" bodystart="127" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="classCollisionsIntra_1a497ba86f5e3b525ae0636305984d0a9e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>IdxRange&lt; <ref refid="structSpecies" kindref="compound">Species</ref>, <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structCollisionsIntra_1_1GhostedVx" kindref="compound">GhostedVx</ref> &gt; const &amp;</type>
+        <definition>IdxRange&lt; Species, GridX, CollisionsIntra::GhostedVx &gt; const  &amp; CollisionsIntra::get_mesh_ghosted</definition>
+        <argsstring>() const</argsstring>
+        <name>get_mesh_ghosted</name>
+        <qualifiedname>CollisionsIntra::get_mesh_ghosted</qualifiedname>
+        <briefdescription>
+<para>Get a mesh containing the species, spatial and the ghosted vx mesh. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The species, spatial, and ghosted vx mesh. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="176" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.cpp" bodystart="133" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="classCollisionsIntra_1a21406b811ef83d4f90a80c0139ddb5de" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CollisionsIntra::compute_rhs_vector</definition>
+        <argsstring>(DFieldSpXVx RR, DConstFieldSpXVx AA, DConstFieldSpXVx BB, DConstFieldSpXVx CC, DConstFieldSpXVx allfdistribu, double fthresh) const</argsstring>
+        <name>compute_rhs_vector</name>
+        <qualifiedname>CollisionsIntra::compute_rhs_vector</qualifiedname>
+        <param>
+          <type>DFieldSpXVx</type>
+          <declname>RR</declname>
+        </param>
+        <param>
+          <type>DConstFieldSpXVx</type>
+          <declname>AA</declname>
+        </param>
+        <param>
+          <type>DConstFieldSpXVx</type>
+          <declname>BB</declname>
+        </param>
+        <param>
+          <type>DConstFieldSpXVx</type>
+          <declname>CC</declname>
+        </param>
+        <param>
+          <type>DConstFieldSpXVx</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>fthresh</declname>
+        </param>
+        <briefdescription>
+<para>Compute the right-hand-side of the collision operator linear system. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">RR</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector representing the right-hand-side of the system. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">AA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector representing the lower diagonal of the matrix of the linear system. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">BB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector representing the diagonal of the matrix of the linear system. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">CC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector representing the upper diagonal of the matrix of the linear system. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The distribution function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fthresh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A constant value used for imposing Dirichlet boundary condition to solve the linear system. <linebreak/>
+ </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="187" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.cpp" bodystart="220" bodyend="257"/>
+      </memberdef>
+      <memberdef kind="function" id="classCollisionsIntra_1aa3c59137d3bc0e30d7ca9b413039b050" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CollisionsIntra::compute_matrix_coeff</definition>
+        <argsstring>(DFieldSpXVx AA, DFieldSpXVx BB, DFieldSpXVx CC, Field&lt; double, IdxRangeSpXVx_ghosted &gt; Dcoll, Field&lt; double, IdxRangeSpXVx_ghosted_staggered &gt; Dcoll_staggered, Field&lt; double, IdxRangeSpXVx_ghosted &gt; Nucoll, double deltat) const</argsstring>
+        <name>compute_matrix_coeff</name>
+        <qualifiedname>CollisionsIntra::compute_matrix_coeff</qualifiedname>
+        <param>
+          <type>DFieldSpXVx</type>
+          <declname>AA</declname>
+        </param>
+        <param>
+          <type>DFieldSpXVx</type>
+          <declname>BB</declname>
+        </param>
+        <param>
+          <type>DFieldSpXVx</type>
+          <declname>CC</declname>
+        </param>
+        <param>
+          <type>Field&lt; double, <ref refid="classCollisionsIntra_1a78125fea3147218240c8bb1cfd8b3b4e" kindref="member">IdxRangeSpXVx_ghosted</ref> &gt;</type>
+          <declname>Dcoll</declname>
+        </param>
+        <param>
+          <type>Field&lt; double, <ref refid="classCollisionsIntra_1aa8de0dc7f09923428fa8ef0e30aeef1e" kindref="member">IdxRangeSpXVx_ghosted_staggered</ref> &gt;</type>
+          <declname>Dcoll_staggered</declname>
+        </param>
+        <param>
+          <type>Field&lt; double, <ref refid="classCollisionsIntra_1a78125fea3147218240c8bb1cfd8b3b4e" kindref="member">IdxRangeSpXVx_ghosted</ref> &gt;</type>
+          <declname>Nucoll</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>deltat</declname>
+        </param>
+        <briefdescription>
+<para>Compute the coefficients of the tridiagonal matrix of the collision operator linear system. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">AA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector representing the lower diagonal of the matrix of the linear system. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">BB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector representing the diagonal of the matrix of the linear system. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">CC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector representing the upper diagonal of the matrix of the linear system. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">Dcoll</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The velocity-dependent diffusion coefficient of the collision operator. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">Dcoll_staggered</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The velocity-dependent diffusion coefficient of the collision operator computed on the staggered vx mesh. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">Nucoll</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The velocity-dependent advection coefficient of the collision operator. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deltat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="204" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.cpp" bodystart="139" bodyend="196"/>
+      </memberdef>
+      <memberdef kind="function" id="classCollisionsIntra_1a8f9e7a4e2131b1641f821f4bb4a78b03" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CollisionsIntra::fill_matrix_with_coeff</definition>
+        <argsstring>(Matrix_Banded &amp;matrix, host_t&lt; DConstFieldVx &gt; AA, host_t&lt; DConstFieldVx &gt; BB, host_t&lt; DConstFieldVx &gt; CC) const</argsstring>
+        <name>fill_matrix_with_coeff</name>
+        <qualifiedname>CollisionsIntra::fill_matrix_with_coeff</qualifiedname>
+        <param>
+          <type><ref refid="classMatrix__Banded" kindref="compound">Matrix_Banded</ref> &amp;</type>
+          <declname>matrix</declname>
+        </param>
+        <param>
+          <type>host_t&lt; DConstFieldVx &gt;</type>
+          <declname>AA</declname>
+        </param>
+        <param>
+          <type>host_t&lt; DConstFieldVx &gt;</type>
+          <declname>BB</declname>
+        </param>
+        <param>
+          <type>host_t&lt; DConstFieldVx &gt;</type>
+          <declname>CC</declname>
+        </param>
+        <briefdescription>
+<para>Fill the tridiagonal matrix of the collision operator linear system with the required coefficients. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">matrix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A banded (tridiagonal) matrix. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">AA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector containing the lower diagonal coefficients of the matrix. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">BB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector containing the diagonal coefficients of the matrix. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">CC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector containing the upper diagonal coefficients of the matrix. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="220" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.cpp" bodystart="198" bodyend="218"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Class describing the intra-species collision operator. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The intra-species collision operator can be written as <formula id="144">$ C_{aa} = d/dv (Dcoll df_a/dv - Nucoll f_a) $</formula> Where Dcoll and Nucoll are the collision operator diffusion and advection coefficients that depend on the absolute value of the velocity and possibly on space. f_a is the distribution function. The Nucoll and Dcoll coefficients are adjusted at each time and spatial position so that the collision operator conserves the density, momentum and energy of the considered species it acts on.</para>
+<para>The evolution equation for the collisions <formula id="145">$ df_a/dt = C_{aa} $</formula> is solved using a Crank-Nicolson finite difference scheme adapted for non-uniform meshes. The derivatives are computed using centred second-order finite differences. To use the same derivatives formula at the edges of the vx mesh, we introduce a ghosted vx mesh with additional points at the edges. To further improve the accuracy of the computations of the derivatives, we also introduce another vx mesh that is staggered with respect to the initial mesh. The points of the staggered mesh lie at the middle of the cells of the initial vx mesh (where a cell is defined by two adjacent points). The Crank-Nicolson scheme leads to the formulation of a linear system that needs to be resolved at each spatial position of the simulation box. Note that this linear system depends on the considered spatial position.</para>
+<para>The complete description of the operator can be found in <ulink url="https://github.com/gyselax/gyselalibxx/blob/main/doc/geometryXVx/collisions_intra_inter.pdf">rhs docs</ulink>. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>CollisionsIntra</label>
+        <link refid="classCollisionsIntra"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>IRightHandSide</label>
+        <link refid="classIRightHandSide"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>CollisionsIntra</label>
+        <link refid="classCollisionsIntra"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>IRightHandSide</label>
+        <link refid="classIRightHandSide"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="38" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" bodystart="39" bodyend="225"/>
+    <listofallmembers>
+      <member refid="classCollisionsIntra_1aa111f3e2a25bf4926538ef37b7d5489f" prot="private" virt="non-virtual"><scope>CollisionsIntra</scope><name>build_ghosted_staggered_vx_point_sampling</name></member>
+      <member refid="classCollisionsIntra_1ae74cc75e0f4934311cfd47dc445bec20" prot="private" virt="non-virtual"><scope>CollisionsIntra</scope><name>build_ghosted_staggered_vx_point_sampling</name></member>
+      <member refid="classCollisionsIntra_1addf7a93d3bbdc450236e56d71609c10b" prot="public" virt="non-virtual"><scope>CollisionsIntra</scope><name>CollisionsIntra</name></member>
+      <member refid="classCollisionsIntra_1aa3c59137d3bc0e30d7ca9b413039b050" prot="public" virt="non-virtual"><scope>CollisionsIntra</scope><name>compute_matrix_coeff</name></member>
+      <member refid="classCollisionsIntra_1a21406b811ef83d4f90a80c0139ddb5de" prot="public" virt="non-virtual"><scope>CollisionsIntra</scope><name>compute_rhs_vector</name></member>
+      <member refid="classCollisionsIntra_1a8f9e7a4e2131b1641f821f4bb4a78b03" prot="public" virt="non-virtual"><scope>CollisionsIntra</scope><name>fill_matrix_with_coeff</name></member>
+      <member refid="classCollisionsIntra_1a80eaee577d89a01deb8a97abfc61a9a7" prot="public" virt="non-virtual"><scope>CollisionsIntra</scope><name>get_gridvx_ghosted</name></member>
+      <member refid="classCollisionsIntra_1a031c4df28647ec691dc89a3917038ee9" prot="public" virt="non-virtual"><scope>CollisionsIntra</scope><name>get_gridvx_ghosted_staggered</name></member>
+      <member refid="classCollisionsIntra_1a497ba86f5e3b525ae0636305984d0a9e" prot="public" virt="non-virtual"><scope>CollisionsIntra</scope><name>get_mesh_ghosted</name></member>
+      <member refid="classCollisionsIntra_1a6b18fb17a213025672de06d8d6b7cee8" prot="public" virt="non-virtual"><scope>CollisionsIntra</scope><name>get_nustar0</name></member>
+      <member refid="classCollisionsIntra_1a78125fea3147218240c8bb1cfd8b3b4e" prot="public" virt="non-virtual"><scope>CollisionsIntra</scope><name>IdxRangeSpXVx_ghosted</name></member>
+      <member refid="classCollisionsIntra_1aa8de0dc7f09923428fa8ef0e30aeef1e" prot="public" virt="non-virtual"><scope>CollisionsIntra</scope><name>IdxRangeSpXVx_ghosted_staggered</name></member>
+      <member refid="classCollisionsIntra_1aa075cab1489331085e1473960b074dd3" prot="public" virt="non-virtual"><scope>CollisionsIntra</scope><name>IdxSpXVx_ghosted</name></member>
+      <member refid="classCollisionsIntra_1a8bd3150e39cbad46ac340e07ca315662" prot="public" virt="non-virtual"><scope>CollisionsIntra</scope><name>IdxSpXVx_ghosted_staggered</name></member>
+      <member refid="classCollisionsIntra_1af1604f3f73be57180f6ab5e01606b1fd" prot="public" virt="non-virtual"><scope>CollisionsIntra</scope><name>IdxVx_ghosted</name></member>
+      <member refid="classCollisionsIntra_1a164c6c249095a533900a12e2f1f48e25" prot="public" virt="non-virtual"><scope>CollisionsIntra</scope><name>IdxVx_ghosted_staggered</name></member>
+      <member refid="classCollisionsIntra_1a88df4aa9b908cb938873a6dd2f9bb24b" prot="private" virt="non-virtual"><scope>CollisionsIntra</scope><name>m_fthresh</name></member>
+      <member refid="classCollisionsIntra_1a471cc65cdde54202731490a85b8fcac6" prot="private" virt="non-virtual"><scope>CollisionsIntra</scope><name>m_gridvx_ghosted</name></member>
+      <member refid="classCollisionsIntra_1ae29db743ce9f52508607c2ea2c79c72f" prot="private" virt="non-virtual"><scope>CollisionsIntra</scope><name>m_gridvx_ghosted_staggered</name></member>
+      <member refid="classCollisionsIntra_1aa759bbe6107323d07fa53ca3bfe22a6b" prot="private" virt="non-virtual"><scope>CollisionsIntra</scope><name>m_mesh_ghosted</name></member>
+      <member refid="classCollisionsIntra_1ab5b1ddc50b7bf865a21b2ac67e9ed0b0" prot="private" virt="non-virtual"><scope>CollisionsIntra</scope><name>m_mesh_ghosted_staggered</name></member>
+      <member refid="classCollisionsIntra_1a15c4b6fe9c57f3db6cff56a8fb4e6158" prot="private" virt="non-virtual"><scope>CollisionsIntra</scope><name>m_nustar0</name></member>
+      <member refid="classCollisionsIntra_1a35d58cd5492618435859d7b7adb38119" prot="private" virt="non-virtual"><scope>CollisionsIntra</scope><name>m_nustar_profile</name></member>
+      <member refid="classCollisionsIntra_1a48754945df0b265698867321ab7c38b7" prot="private" virt="non-virtual"><scope>CollisionsIntra</scope><name>m_nustar_profile_alloc</name></member>
+      <member refid="classCollisionsIntra_1ad066a79f6c0a9dcf3720dbfc5e9056e0" prot="public" virt="virtual"><scope>CollisionsIntra</scope><name>operator()</name></member>
+      <member refid="classCollisionsIntra_1a7cc81cef7ef91281becea62231df8c32" prot="private" virt="non-virtual"><scope>CollisionsIntra</scope><name>to_index</name></member>
+      <member refid="classCollisionsIntra_1ad0a8b91c85101449cb4d869855d3642d" prot="private" virt="non-virtual"><scope>CollisionsIntra</scope><name>uniform_edge_v</name></member>
+      <member refid="classIRightHandSide_1a46c157197ef52a7dd221e687584b3d1c" prot="public" virt="virtual"><scope>CollisionsIntra</scope><name>~IRightHandSide</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

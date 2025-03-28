@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structInterface" kind="struct" language="C++" prot="public">
+    <compoundname>Interface</compoundname>
+    <includes refid="interface_8hpp" local="no">interface.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Edge1Type</type>
+      </param>
+      <param>
+        <type>class Edge2Type</type>
+      </param>
+      <param>
+        <type>bool</type>
+        <declname>orientations_agree_bool</declname>
+        <defname>orientations_agree_bool</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structInterface_1a0eba2d684c513fce67db0f0f977d1315" prot="public" static="no">
+        <type>Edge1Type</type>
+        <definition>using Interface&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt;::Edge1 =  Edge1Type</definition>
+        <argsstring></argsstring>
+        <name>Edge1</name>
+        <qualifiedname>Interface::Edge1</qualifiedname>
+        <briefdescription>
+<para><ref refid="structEdge" kindref="compound">Edge</ref> type of the first patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterface_1a8f23b4f792c4cc36db73b8f7f49b4d7a" prot="public" static="no">
+        <type>Edge2Type</type>
+        <definition>using Interface&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt;::Edge2 =  Edge2Type</definition>
+        <argsstring></argsstring>
+        <name>Edge2</name>
+        <qualifiedname>Interface::Edge2</qualifiedname>
+        <briefdescription>
+<para><ref refid="structEdge" kindref="compound">Edge</ref> type of the second patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" line="29" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterface_1add430c600a6a1181e4793a5a3b8beafd" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structEdge" kindref="compound">Edge</ref></type>
+          </param>
+          <param>
+            <type>class</type>
+            <defval>std::enable_if_t&lt;std::is_same_v&lt;<ref refid="structEdge" kindref="compound">Edge</ref>, <ref refid="structInterface_1a0eba2d684c513fce67db0f0f977d1315" kindref="member">Edge1</ref>&gt; || std::is_same_v&lt;<ref refid="structEdge" kindref="compound">Edge</ref>, <ref refid="structInterface_1a8f23b4f792c4cc36db73b8f7f49b4d7a" kindref="member">Edge2</ref>&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>std::conditional_t&lt; std::is_same_v&lt; <ref refid="structEdge" kindref="compound">Edge</ref>, <ref refid="structInterface_1a0eba2d684c513fce67db0f0f977d1315" kindref="member">Edge1</ref> &gt;, <ref refid="structInterface_1a8f23b4f792c4cc36db73b8f7f49b4d7a" kindref="member">Edge2</ref>, <ref refid="structInterface_1a0eba2d684c513fce67db0f0f977d1315" kindref="member">Edge1</ref> &gt;</type>
+        <definition>using Interface&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt;::OtherEdge =  std::conditional_t&lt;std::is_same_v&lt;Edge, Edge1&gt;, Edge2, Edge1&gt;</definition>
+        <argsstring></argsstring>
+        <name>OtherEdge</name>
+        <qualifiedname>Interface::OtherEdge</qualifiedname>
+        <briefdescription>
+<para>A tool to get the other edge of an interface. I.e. to get Edge1 given Edge2 or Edge2 given Edge1. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" line="38" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structInterface_1af2dbae0b5ea4505116a20eeb5179e72d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool Interface&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt;::orientations_agree</definition>
+        <argsstring></argsstring>
+        <name>orientations_agree</name>
+        <qualifiedname>Interface::orientations_agree</qualifiedname>
+        <initializer>= orientations_agree_bool</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>If True, the parametrisations of the physical edge have the same orientation. If False, the parametrisations of the physical edge have the opposite orientation. (See <ref refid="classEdgeTransformation" kindref="compound">EdgeTransformation</ref>). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" line="45" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structInterface_1ae0bdd297037fb4c4415bc7f9a3ca9fff" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>static constexpr bool Interface&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt;::connected_to_patch</definition>
+        <argsstring>()</argsstring>
+        <name>connected_to_patch</name>
+        <qualifiedname>Interface::connected_to_patch</qualifiedname>
+        <briefdescription>
+<para>A compile-time function to check if an interface is on the edge of a given patch. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>The</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>patch which may be connected </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the patch is connected, False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" line="53" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" bodystart="53" bodyend="63"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Represent a simple sticking of two edges. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Edge1Type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structEdge" kindref="compound">Edge</ref> type defined on first patch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Edge2Type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structEdge" kindref="compound">Edge</ref> type defined on second patch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>orientations_agree_bool</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Boolean, if true, the parametrisations of the physical edge have the same orientation; else, the parametrisations of the physical edge have the opposite orientation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classEdgeTransformation" kindref="compound">EdgeTransformation</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" line="20" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp" bodystart="21" bodyend="64"/>
+    <listofallmembers>
+      <member refid="structInterface_1ae0bdd297037fb4c4415bc7f9a3ca9fff" prot="public" virt="non-virtual"><scope>Interface</scope><name>connected_to_patch</name></member>
+      <member refid="structInterface_1a0eba2d684c513fce67db0f0f977d1315" prot="public" virt="non-virtual"><scope>Interface</scope><name>Edge1</name></member>
+      <member refid="structInterface_1a8f23b4f792c4cc36db73b8f7f49b4d7a" prot="public" virt="non-virtual"><scope>Interface</scope><name>Edge2</name></member>
+      <member refid="structInterface_1af2dbae0b5ea4505116a20eeb5179e72d" prot="public" virt="non-virtual"><scope>Interface</scope><name>orientations_agree</name></member>
+      <member refid="structInterface_1add430c600a6a1181e4793a5a3b8beafd" prot="public" virt="non-virtual"><scope>Interface</scope><name>OtherEdge</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

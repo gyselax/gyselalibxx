@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classIChargeDensityCalculator" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>IChargeDensityCalculator</compoundname>
+    <derivedcompoundref refid="classChargeDensityCalculator" prot="public" virt="non-virtual">ChargeDensityCalculator</derivedcompoundref>
+    <derivedcompoundref refid="classChargeDensityCalculator" prot="public" virt="non-virtual">ChargeDensityCalculator</derivedcompoundref>
+    <derivedcompoundref refid="classMpiChargeDensityCalculator" prot="public" virt="non-virtual">MpiChargeDensityCalculator</derivedcompoundref>
+    <includes refid="geometryXVx_2poisson_2ichargedensitycalculator_8hpp" local="no">ichargedensitycalculator.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classIChargeDensityCalculator_1a33642031ef4d350e865b9b3d81f6bc76" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>DFieldX</type>
+        <definition>virtual DFieldX IChargeDensityCalculator::operator()</definition>
+        <argsstring>(DFieldX rho, DConstFieldSpXVx allfdistribu) const =0</argsstring>
+        <name>operator()</name>
+        <qualifiedname>IChargeDensityCalculator::operator()</qualifiedname>
+        <reimplementedby refid="classChargeDensityCalculator_1a164ef05aba41f41d7862c1aa216c154e">operator()</reimplementedby>
+        <param>
+          <type>DFieldX</type>
+          <declname>rho</declname>
+        </param>
+        <param>
+          <type>DConstFieldSpXVx</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Calculate the charge density rho from the distribution function.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">rho</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The charge density. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The distribution function.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>rho The charge density. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/ichargedensitycalculator.hpp" line="26" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classIChargeDensityCalculator_1a35eed3a25d6d2b7a80246d204f15b66a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void IChargeDensityCalculator::operator()</definition>
+        <argsstring>(DFieldXY rho, DConstFieldSpVxVyXY allfdistribu) const =0</argsstring>
+        <name>operator()</name>
+        <qualifiedname>IChargeDensityCalculator::operator()</qualifiedname>
+        <reimplementedby refid="classChargeDensityCalculator_1a65457db8be8ee9655ca786ae39c1dbbe">operator()</reimplementedby>
+        <reimplementedby refid="classMpiChargeDensityCalculator_1a686ac85ff511649317275df829e71ba2">operator()</reimplementedby>
+        <param>
+          <type>DFieldXY</type>
+          <declname>rho</declname>
+        </param>
+        <param>
+          <type>DConstFieldSpVxVyXY</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Calculate the charge density rho from the distribution function.</para>
+<para>Calculate the charge density by calculating the spline representation of slices of the distribution function at each spatial point along the velocity direction. This representation is then integrated and multiplied by the charge to find the charge density.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">rho</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The charge density. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The distribution function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/ichargedensitycalculator.hpp" line="31" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class which computes charges density. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A class which calculates the charge density.</para>
+<para>A class which calculates the charge density. This is then used as the right hand side of the Quasi-Neutrality equation.</para>
+<para>A class which computes charges density by solving the equation: <formula id="171">$ \int_{v} q_s f_s(x,v) dv $</formula> where <formula id="139">$ q_s $</formula> is the charge of the species <formula id="140">$ s $</formula> and <formula id="141">$ f_s(x,v) $</formula> is the distribution function. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>ChargeDensityCalculator</label>
+        <link refid="classChargeDensityCalculator"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>IChargeDensityCalculator</label>
+        <link refid="classIChargeDensityCalculator"/>
+      </node>
+      <node id="3">
+        <label>MpiChargeDensityCalculator</label>
+        <link refid="classMpiChargeDensityCalculator"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/ichargedensitycalculator.hpp" line="15" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/ichargedensitycalculator.hpp" bodystart="16" bodyend="27"/>
+    <listofallmembers>
+      <member refid="classIChargeDensityCalculator_1a33642031ef4d350e865b9b3d81f6bc76" prot="public" virt="pure-virtual"><scope>IChargeDensityCalculator</scope><name>operator()</name></member>
+      <member refid="classIChargeDensityCalculator_1a35eed3a25d6d2b7a80246d204f15b66a" prot="public" virt="pure-virtual"><scope>IChargeDensityCalculator</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

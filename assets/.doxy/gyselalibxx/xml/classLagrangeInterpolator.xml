@@ -1,0 +1,338 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classLagrangeInterpolator" kind="class" language="C++" prot="public">
+    <compoundname>LagrangeInterpolator</compoundname>
+    <basecompoundref refid="classIInterpolator" prot="public" virt="non-virtual">IInterpolator&lt; GridInterp, Grid1D... &gt;</basecompoundref>
+    <includes refid="Lagrange__interpolator_8hpp" local="no">Lagrange_interpolator.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class GridInterp</type>
+      </param>
+      <param>
+        <type>BCond</type>
+        <declname>BcMin</declname>
+        <defname>BcMin</defname>
+      </param>
+      <param>
+        <type>BCond</type>
+        <declname>BcMax</declname>
+        <defname>BcMax</defname>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>Grid1D</declname>
+        <defname>Grid1D</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classLagrangeInterpolator_1a66bada460bd32a4dbdb846ff5acabbb7" prot="private" static="no">
+        <type>typename GridInterp::continuous_dimension_type</type>
+        <definition>using LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt;::InterpDim =  typename GridInterp::continuous_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>InterpDim</name>
+        <qualifiedname>LagrangeInterpolator::InterpDim</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" line="18" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classLagrangeInterpolator_1aac2bce44549fc5328fa2228e6e233c01" prot="private" static="no">
+        <type>typename <ref refid="classIInterpolator" kindref="compound">IInterpolator</ref>&lt; GridInterp, Grid1D... &gt;::deriv_type</type>
+        <definition>using LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt;::deriv_type =  typename IInterpolator&lt;GridInterp, Grid1D...&gt;::deriv_type</definition>
+        <argsstring></argsstring>
+        <name>deriv_type</name>
+        <qualifiedname>LagrangeInterpolator::deriv_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" line="19" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classLagrangeInterpolator_1a0656ca8187faf0316a97c2c4aa750850" prot="private" static="no">
+        <type>typename <ref refid="classIInterpolator" kindref="compound">IInterpolator</ref>&lt; GridInterp, Grid1D... &gt;::batched_derivs_idx_range_type</type>
+        <definition>using LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt;::batched_derivs_idx_range_type =  typename IInterpolator&lt;GridInterp, Grid1D...&gt;::batched_derivs_idx_range_type</definition>
+        <argsstring></argsstring>
+        <name>batched_derivs_idx_range_type</name>
+        <qualifiedname>LagrangeInterpolator::batched_derivs_idx_range_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" line="20" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classLagrangeInterpolator_1a66f8f70e8008006ae07046049d99309f" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt;::m_degree</definition>
+        <argsstring></argsstring>
+        <name>m_degree</name>
+        <qualifiedname>LagrangeInterpolator::m_degree</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" line="24" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classLagrangeInterpolator_1a6df18acd8b7a60f378b475b501ff5a4a" prot="private" static="no" mutable="no">
+        <type>IdxStep&lt; GridInterp &gt;</type>
+        <definition>IdxStep&lt;GridInterp&gt; LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt;::m_ghost</definition>
+        <argsstring></argsstring>
+        <name>m_ghost</name>
+        <qualifiedname>LagrangeInterpolator::m_ghost</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" line="25" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classLagrangeInterpolator_1a60914d8391f7ea2e47c624a088ec5d92" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt;::LagrangeInterpolator</definition>
+        <argsstring>(int degree, IdxStep&lt; GridInterp &gt; ghost)</argsstring>
+        <name>LagrangeInterpolator</name>
+        <qualifiedname>LagrangeInterpolator::LagrangeInterpolator</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>degree</declname>
+        </param>
+        <param>
+          <type>IdxStep&lt; GridInterp &gt;</type>
+          <declname>ghost</declname>
+        </param>
+        <briefdescription>
+<para>Create a <ref refid="classLagrange" kindref="compound">Lagrange</ref> interpolator object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">degree</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Degree of polynomials </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ghost</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Discrete vector which gives the number of ghost points. By default choose 2. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" bodystart="33" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classLagrangeInterpolator_1a24322b63ee0649eb5c5b8d7db410621b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt;::~LagrangeInterpolator</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~LagrangeInterpolator</name>
+        <qualifiedname>LagrangeInterpolator::~LagrangeInterpolator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" line="37" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classLagrangeInterpolator_1a08d2746b1cf2f70e18478141b3bc5ca9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>batched_derivs_idx_range_type</type>
+        <definition>batched_derivs_idx_range_type LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt;::batched_derivs_idx_range_xmin</definition>
+        <argsstring>(IdxRange&lt; Grid1D... &gt; idx_range) const override</argsstring>
+        <name>batched_derivs_idx_range_xmin</name>
+        <qualifiedname>LagrangeInterpolator::batched_derivs_idx_range_xmin</qualifiedname>
+        <reimplements refid="classIInterpolator_1af664c9db9a794fb1f199ff31f8673bf8">batched_derivs_idx_range_xmin</reimplements>
+        <param>
+          <type>IdxRange&lt; Grid1D... &gt;</type>
+          <declname>idx_range</declname>
+        </param>
+        <briefdescription>
+<para>Get the batched derivs index range on lower boundaries. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Dimension of interest IDimI is replaced with ddc::Deriv&lt;IDimI::continuous_dimensions_type&gt;. This is the index range on which derivatives on lower boundaries are defined.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range of a single-species distribution function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>idx_range The lower boundaries of this index range. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" line="39" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" bodystart="39" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classLagrangeInterpolator_1a9a6515bea1958ced63980a0ecee4c707" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>batched_derivs_idx_range_type</type>
+        <definition>batched_derivs_idx_range_type LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt;::batched_derivs_idx_range_xmax</definition>
+        <argsstring>(IdxRange&lt; Grid1D... &gt; idx_range) const override</argsstring>
+        <name>batched_derivs_idx_range_xmax</name>
+        <qualifiedname>LagrangeInterpolator::batched_derivs_idx_range_xmax</qualifiedname>
+        <reimplements refid="classIInterpolator_1a14f07a9a9cd43939de6acd999d25c195">batched_derivs_idx_range_xmax</reimplements>
+        <param>
+          <type>IdxRange&lt; Grid1D... &gt;</type>
+          <declname>idx_range</declname>
+        </param>
+        <briefdescription>
+<para>Get the batched derivs index range on upper boundaries. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Dimension of interest IDimI is replaced with ddc::Deriv&lt;IDimI::continuous_dimensions_type&gt;. This is the index range on which derivatives on upper boundaries are defined.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range of a single-species distribution function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>idx_range The upper boundaries of this index range. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" line="47" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" bodystart="47" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classLagrangeInterpolator_1a27441b99d16e977bf606a01442e8a957" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt;</type>
+        <definition>Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt; LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt;::operator()</definition>
+        <argsstring>(Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt; inout_data, Field&lt; const Coord&lt; typename GridInterp::continuous_dimension_type &gt;, IdxRange&lt; Grid1D... &gt; &gt; coordinates, std::optional&lt; Field&lt; double const, typename IInterpolator&lt; GridInterp, Grid1D... &gt;::batched_derivs_idx_range_type &gt; &gt; derivs_xmin=std::nullopt, std::optional&lt; Field&lt; double const, typename IInterpolator&lt; GridInterp, Grid1D... &gt;::batched_derivs_idx_range_type &gt; &gt; derivs_xmax=std::nullopt) const override</argsstring>
+        <name>operator()</name>
+        <qualifiedname>LagrangeInterpolator::operator()</qualifiedname>
+        <param>
+          <type>Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt;</type>
+          <declname>inout_data</declname>
+        </param>
+        <param>
+          <type>Field&lt; const Coord&lt; typename GridInterp::continuous_dimension_type &gt;, IdxRange&lt; Grid1D... &gt; &gt;</type>
+          <declname>coordinates</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; Field&lt; double const, typename <ref refid="classIInterpolator" kindref="compound">IInterpolator</ref>&lt; GridInterp, Grid1D... &gt;::batched_derivs_idx_range_type &gt; &gt;</type>
+          <declname>derivs_xmin</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <param>
+          <type>std::optional&lt; Field&lt; double const, typename <ref refid="classIInterpolator" kindref="compound">IInterpolator</ref>&lt; GridInterp, Grid1D... &gt;::batched_derivs_idx_range_type &gt; &gt;</type>
+          <declname>derivs_xmax</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <briefdescription>
+<para>Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">inout_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On input: an array containing the value of the function at the interpolation points. On output: an array containing the value of the function at the coordinates. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coordinates</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinates where the function should be evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">derivs_xmin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The values of the derivatives at the lower boundary (unused in this class). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">derivs_xmax</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The values of the derivatives at the upper boundary (unused in this class).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to the inout_data array containing the value of the function at the coordinates. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" line="67" column="11" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" bodystart="67" bodyend="104"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class for interpolating a function using <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials. It is designed to work with both uniform and non-uniform mesh, and have the advantage to be local. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>IInterpolator&lt; GridInterp, Grid1D... &gt;</label>
+        <link refid="classIInterpolator"/>
+      </node>
+      <node id="1">
+        <label>LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt;</label>
+        <link refid="classLagrangeInterpolator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>IInterpolator&lt; GridInterp, Grid1D... &gt;</label>
+        <link refid="classIInterpolator"/>
+      </node>
+      <node id="1">
+        <label>LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt;</label>
+        <link refid="classLagrangeInterpolator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" line="16" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp" bodystart="17" bodyend="105"/>
+    <listofallmembers>
+      <member refid="classLagrangeInterpolator_1a0656ca8187faf0316a97c2c4aa750850" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>batched_derivs_idx_range_type</name></member>
+      <member refid="classLagrangeInterpolator_1a9a6515bea1958ced63980a0ecee4c707" prot="public" virt="virtual"><scope>LagrangeInterpolator</scope><name>batched_derivs_idx_range_xmax</name></member>
+      <member refid="classLagrangeInterpolator_1a08d2746b1cf2f70e18478141b3bc5ca9" prot="public" virt="virtual"><scope>LagrangeInterpolator</scope><name>batched_derivs_idx_range_xmin</name></member>
+      <member refid="classLagrangeInterpolator_1aac2bce44549fc5328fa2228e6e233c01" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>deriv_type</name></member>
+      <member refid="classLagrangeInterpolator_1a66bada460bd32a4dbdb846ff5acabbb7" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>InterpDim</name></member>
+      <member refid="classLagrangeInterpolator_1a60914d8391f7ea2e47c624a088ec5d92" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>LagrangeInterpolator</name></member>
+      <member refid="classLagrangeInterpolator_1a66f8f70e8008006ae07046049d99309f" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>m_degree</name></member>
+      <member refid="classLagrangeInterpolator_1a6df18acd8b7a60f378b475b501ff5a4a" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>m_ghost</name></member>
+      <member refid="classLagrangeInterpolator_1a27441b99d16e977bf606a01442e8a957" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>operator()</name></member>
+      <member refid="classIInterpolator_1a83d8113fe207f0d87a240f6ae3f99498" prot="public" virt="pure-virtual" ambiguityscope="IInterpolator&lt; GridInterp, Grid1D... &gt;::"><scope>LagrangeInterpolator</scope><name>operator()</name></member>
+      <member refid="classIInterpolator_1a8cd2160d82f63450c0278568408fc892" prot="public" virt="virtual"><scope>LagrangeInterpolator</scope><name>~IInterpolator</name></member>
+      <member refid="classLagrangeInterpolator_1a24322b63ee0649eb5c5b8d7db410621b" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>~LagrangeInterpolator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

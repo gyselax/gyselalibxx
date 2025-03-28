@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structPolarBSplines_1_1Impl_1_1Corner1Tag" kind="struct" language="C++" prot="public">
+    <compoundname>PolarBSplines::Impl::Corner1Tag</compoundname>
+    <includes refid="polar__bsplines_8hpp" local="no">polar_bsplines.hpp</includes>
+    <briefdescription>
+<para>The tag for the first corner of the Barycentric coordinates. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="203" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="204" bodyend="205"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

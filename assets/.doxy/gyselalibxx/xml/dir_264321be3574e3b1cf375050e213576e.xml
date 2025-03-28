@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_264321be3574e3b1cf375050e213576e" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature</compoundname>
+    <innerfile refid="gauss__legendre__integration_8cpp">gauss_legendre_integration.cpp</innerfile>
+    <innerfile refid="gauss__legendre__integration_8hpp">gauss_legendre_integration.hpp</innerfile>
+    <innerfile refid="neumann__spline__quadrature_8hpp">neumann_spline_quadrature.hpp</innerfile>
+    <innerfile refid="quadrature_8hpp">quadrature.hpp</innerfile>
+    <innerfile refid="quadrature__coeffs__nd_8hpp">quadrature_coeffs_nd.hpp</innerfile>
+    <innerfile refid="simpson__quadrature_8hpp">simpson_quadrature.hpp</innerfile>
+    <innerfile refid="spline__quadrature_8hpp">spline_quadrature.hpp</innerfile>
+    <innerfile refid="trapezoid__quadrature_8hpp">trapezoid_quadrature.hpp</innerfile>
+    <innerfile refid="volume__quadrature__nd_8hpp">volume_quadrature_nd.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/"/>
+  </compounddef>
+</doxygen>

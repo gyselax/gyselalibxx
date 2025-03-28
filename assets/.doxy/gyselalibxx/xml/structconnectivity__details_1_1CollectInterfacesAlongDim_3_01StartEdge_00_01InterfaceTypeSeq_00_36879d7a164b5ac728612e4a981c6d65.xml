@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_36879d7a164b5ac728612e4a981c6d65" kind="struct" language="C++" prot="public">
+    <compoundname>connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, true &gt;</compoundname>
+    <includes refid="connectivity__details_8hpp" local="no">connectivity_details.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class StartEdge</type>
+      </param>
+      <param>
+        <type>class InterfaceTypeSeq</type>
+      </param>
+      <param>
+        <type>InsertPosition</type>
+        <declname>insert_pos</declname>
+        <defname>insert_pos</defname>
+      </param>
+      <param>
+        <type>class FoundInterfaces</type>
+      </param>
+      <param>
+        <type>class MatchingEdge</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_36879d7a164b5ac728612e4a981c6d65_1ad52638706761847365f3eebd80c501d3" prot="public" static="no">
+        <type>FoundInterfaces</type>
+        <definition>using connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, true &gt;::type =  FoundInterfaces</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, true &gt;::type</qualifiedname>
+        <briefdescription>
+<para>The type found by the class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="388" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="388" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Specialisation of <ref refid="structconnectivity__details_1_1CollectInterfacesAlongDim" kindref="compound">CollectInterfacesAlongDim</ref> to stop when the interface has already been identified (due to periodicity). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="379" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="386" bodyend="389"/>
+    <listofallmembers>
+      <member refid="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_36879d7a164b5ac728612e4a981c6d65_1ad52638706761847365f3eebd80c501d3" prot="public" virt="non-virtual"><scope>connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, true &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

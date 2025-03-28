@@ -1,0 +1,406 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classCollisionConfiguration" kind="class" language="C++" prot="public">
+    <compoundname>CollisionConfiguration</compoundname>
+    <includes refid="collision__configuration_8hpp" local="no">collision_configuration.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class GridSp</type>
+      </param>
+      <param>
+        <type>class <ref refid="structGridVpar" kindref="compound">GridVpar</ref></type>
+      </param>
+      <param>
+        <type>class <ref refid="structGridMu" kindref="compound">GridMu</ref></type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classCollisionConfiguration_1a77e5d69224da2c41da3bb3ed08f316e2" prot="public" static="no">
+        <type><ref refid="structGridMu" kindref="compound">GridMu</ref></type>
+        <definition>using CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;::GridMuType =  GridMu</definition>
+        <argsstring></argsstring>
+        <name>GridMuType</name>
+        <qualifiedname>CollisionConfiguration::GridMuType</qualifiedname>
+        <briefdescription>
+<para><ref refid="structMu" kindref="compound">Mu</ref> grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="25" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCollisionConfiguration_1abad505b2c709e1f9a0b2eca642819576" prot="public" static="no">
+        <type><ref refid="structGridVpar" kindref="compound">GridVpar</ref></type>
+        <definition>using CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;::GridVparType =  GridVpar</definition>
+        <argsstring></argsstring>
+        <name>GridVparType</name>
+        <qualifiedname>CollisionConfiguration::GridVparType</qualifiedname>
+        <briefdescription>
+<para><ref refid="structVpar" kindref="compound">Vpar</ref> grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="29" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCollisionConfiguration_1aec3210b40ef49f0c8d361e6eeeaeac16" prot="public" static="no">
+        <type>detail::InternalSpoofGridTheta</type>
+        <definition>using CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;::GridThetaType =  detail::InternalSpoofGridTheta</definition>
+        <argsstring></argsstring>
+        <name>GridThetaType</name>
+        <qualifiedname>CollisionConfiguration::GridThetaType</qualifiedname>
+        <briefdescription>
+<para><ref refid="structTheta" kindref="compound">Theta</ref> grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCollisionConfiguration_1af70141c99127445cd13f1538bcd5b1b6" prot="public" static="no">
+        <type>detail::InternalSpoofGridR</type>
+        <definition>using CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;::GridRType =  detail::InternalSpoofGridR</definition>
+        <argsstring></argsstring>
+        <name>GridRType</name>
+        <qualifiedname>CollisionConfiguration::GridRType</qualifiedname>
+        <briefdescription>
+<para><ref refid="structR" kindref="compound">R</ref> grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="37" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCollisionConfiguration_1ad23e1c19b3c9ad3ec57abf9faeded4a2" prot="public" static="no">
+        <type>detail::InternalSpoofGridPhi</type>
+        <definition>using CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;::GridPhiType =  detail::InternalSpoofGridPhi</definition>
+        <argsstring></argsstring>
+        <name>GridPhiType</name>
+        <qualifiedname>CollisionConfiguration::GridPhiType</qualifiedname>
+        <briefdescription>
+<para>Phi grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCollisionConfiguration_1a8519967631bca4d1974d92445159e363" prot="public" static="no">
+        <type>GridSp</type>
+        <definition>using CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;::GridSpType =  GridSp</definition>
+        <argsstring></argsstring>
+        <name>GridSpType</name>
+        <qualifiedname>CollisionConfiguration::GridSpType</qualifiedname>
+        <briefdescription>
+<para>Sp grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="45" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCollisionConfiguration_1a4e186e5b73d038f9506f12ca595a0c13" prot="public" static="no">
+        <type>IdxRange&lt; <ref refid="classCollisionConfiguration_1a77e5d69224da2c41da3bb3ed08f316e2" kindref="member">GridMuType</ref> &gt;</type>
+        <definition>using CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;::IdxRangeMuType =  IdxRange&lt;GridMuType&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeMuType</name>
+        <qualifiedname>CollisionConfiguration::IdxRangeMuType</qualifiedname>
+        <briefdescription>
+<para><ref refid="structMu" kindref="compound">Mu</ref> index range. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="50" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCollisionConfiguration_1ae670abd3ec52030c53d712175336c244" prot="public" static="no">
+        <type>IdxRange&lt; <ref refid="classCollisionConfiguration_1abad505b2c709e1f9a0b2eca642819576" kindref="member">GridVparType</ref> &gt;</type>
+        <definition>using CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;::IdxRangeVparType =  IdxRange&lt;GridVparType&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeVparType</name>
+        <qualifiedname>CollisionConfiguration::IdxRangeVparType</qualifiedname>
+        <briefdescription>
+<para><ref refid="structVpar" kindref="compound">Vpar</ref> index range. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCollisionConfiguration_1acacaddd6c74b2c52ee14e6b5d4983467" prot="public" static="no">
+        <type>IdxRange&lt; <ref refid="classCollisionConfiguration_1a8519967631bca4d1974d92445159e363" kindref="member">GridSpType</ref>, <ref refid="classCollisionConfiguration_1abad505b2c709e1f9a0b2eca642819576" kindref="member">GridVparType</ref> &gt;</type>
+        <definition>using CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;::IdxRangeSpVparType =  IdxRange&lt;GridSpType, GridVparType&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeSpVparType</name>
+        <qualifiedname>CollisionConfiguration::IdxRangeSpVparType</qualifiedname>
+        <briefdescription>
+<para>Sp,<ref refid="structVpar" kindref="compound">Vpar</ref> index range. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="58" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCollisionConfiguration_1af04c3dc20040cbe7a074981e9d153b85" prot="public" static="no">
+        <type>IdxRange&lt; <ref refid="classCollisionConfiguration_1a8519967631bca4d1974d92445159e363" kindref="member">GridSpType</ref>, <ref refid="classCollisionConfiguration_1abad505b2c709e1f9a0b2eca642819576" kindref="member">GridVparType</ref>, <ref refid="classCollisionConfiguration_1a77e5d69224da2c41da3bb3ed08f316e2" kindref="member">GridMuType</ref> &gt;</type>
+        <definition>using CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;::IdxRangeDistributionFunctionType =  IdxRange&lt;GridSpType, GridVparType, GridMuType&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeDistributionFunctionType</name>
+        <qualifiedname>CollisionConfiguration::IdxRangeDistributionFunctionType</qualifiedname>
+        <briefdescription>
+<para>Distribution function index range. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="62" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCollisionConfiguration_1af6f098de78a916ed942a90890981acbe" prot="public" static="no">
+        <type>detail::CollisionConfigurationData&lt; <ref refid="classCollisionConfiguration_1af04c3dc20040cbe7a074981e9d153b85" kindref="member">IdxRangeDistributionFunctionType</ref>, <ref refid="classCollisionConfiguration_1a8519967631bca4d1974d92445159e363" kindref="member">GridSpType</ref>, <ref refid="classCollisionConfiguration_1ad23e1c19b3c9ad3ec57abf9faeded4a2" kindref="member">GridPhiType</ref>, <ref refid="classCollisionConfiguration_1af70141c99127445cd13f1538bcd5b1b6" kindref="member">GridRType</ref>, <ref refid="classCollisionConfiguration_1aec3210b40ef49f0c8d361e6eeeaeac16" kindref="member">GridThetaType</ref>, <ref refid="classCollisionConfiguration_1abad505b2c709e1f9a0b2eca642819576" kindref="member">GridVparType</ref>, <ref refid="classCollisionConfiguration_1a77e5d69224da2c41da3bb3ed08f316e2" kindref="member">GridMuType</ref> &gt;</type>
+        <definition>using CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;::CollisionConfigurationDataType =  detail::CollisionConfigurationData&lt; IdxRangeDistributionFunctionType, GridSpType, GridPhiType, GridRType, GridThetaType, GridVparType, GridMuType&gt;</definition>
+        <argsstring></argsstring>
+        <name>CollisionConfigurationDataType</name>
+        <qualifiedname>CollisionConfiguration::CollisionConfigurationDataType</qualifiedname>
+        <briefdescription>
+<para>Container for the operator input data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="67" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classCollisionConfiguration_1abbb71a5c50b25e240239cac2439bfe47" prot="protected" static="no" mutable="no">
+        <type><ref refid="classCollisionConfiguration_1af6f098de78a916ed942a90890981acbe" kindref="member">CollisionConfigurationDataType</ref></type>
+        <definition>CollisionConfigurationDataType CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;::m_operator_quantities</definition>
+        <argsstring></argsstring>
+        <name>m_operator_quantities</name>
+        <qualifiedname>CollisionConfiguration::m_operator_quantities</qualifiedname>
+        <briefdescription>
+<para>Container for the arrays the quantities the operator needs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="184" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="184" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCollisionConfiguration_1a0706676008a4369fad2a2817ae531c31" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;::m_nustar0</definition>
+        <argsstring></argsstring>
+        <name>m_nustar0</name>
+        <qualifiedname>CollisionConfiguration::m_nustar0</qualifiedname>
+        <briefdescription>
+<para>Value of nustar0 = to nustar0_rpeak read in the YAML input file. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="189" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="189" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classCollisionConfiguration_1a0215481eecb81a3068c3335cf0929104" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;::CollisionConfiguration</definition>
+        <argsstring>(PC_tree_t const &amp;yaml_input_file, IdxRangeDistributionFunctionType index_range_fdistribution, DConstField&lt; IdxRangeMuType &gt; coeff_intdmu, DConstField&lt; IdxRangeVparType &gt; coeff_intdvpar, double B_norm, DConstField&lt; IdxRangeSpVparType &gt; Bstar_s)</argsstring>
+        <name>CollisionConfiguration</name>
+        <qualifiedname>CollisionConfiguration::CollisionConfiguration</qualifiedname>
+        <param>
+          <type>PC_tree_t const &amp;</type>
+          <declname>yaml_input_file</declname>
+        </param>
+        <param>
+          <type><ref refid="classCollisionConfiguration_1af04c3dc20040cbe7a074981e9d153b85" kindref="member">IdxRangeDistributionFunctionType</ref></type>
+          <declname>index_range_fdistribution</declname>
+        </param>
+        <param>
+          <type>DConstField&lt; <ref refid="classCollisionConfiguration_1a4e186e5b73d038f9506f12ca595a0c13" kindref="member">IdxRangeMuType</ref> &gt;</type>
+          <declname>coeff_intdmu</declname>
+        </param>
+        <param>
+          <type>DConstField&lt; <ref refid="classCollisionConfiguration_1ae670abd3ec52030c53d712175336c244" kindref="member">IdxRangeVparType</ref> &gt;</type>
+          <declname>coeff_intdvpar</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>B_norm</declname>
+        </param>
+        <param>
+          <type>DConstField&lt; <ref refid="classCollisionConfiguration_1acacaddd6c74b2c52ee14e6b5d4983467" kindref="member">IdxRangeSpVparType</ref> &gt;</type>
+          <declname>Bstar_s</declname>
+        </param>
+        <briefdescription>
+<para>The constructor for the <ref refid="classCollisionConfiguration" kindref="compound">CollisionConfiguration</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>yaml_input_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>yaml namelist file object. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>index_range_fdistribution</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index range of the whole distribution function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>coeff_intdmu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>quadrature coefficients. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>coeff_intdvpar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>quadrature coefficients. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">B_norm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The norm of the magnetic field defined over the polar slice. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">Bstar_s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bstar defined on the coordinates (species,r,theta,vpar). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="90" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="90" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classCollisionConfiguration_1a806514341ca2509be90b2db2d6d4fbe3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classCollisionConfiguration_1af6f098de78a916ed942a90890981acbe" kindref="member">CollisionConfigurationDataType</ref> &amp;</type>
+        <definition>const CollisionConfigurationDataType &amp; CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;::configuration</definition>
+        <argsstring>() const</argsstring>
+        <name>configuration</name>
+        <qualifiedname>CollisionConfiguration::configuration</qualifiedname>
+        <briefdescription>
+<para>Can be used to obtain the quantities the operator needs for its initialisation, modification is not authorised. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>const CollisionConfigurationDataType&amp; </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="115" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="115" bodyend="118"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classCollisionConfiguration_1a43d76d19ef1e45a5fa778c7c59f76471" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;::do_configuration_data_initialisation</definition>
+        <argsstring>(double input_B_norm, DConstField&lt; IdxRangeSpVparType &gt; input_Bstar_s)</argsstring>
+        <name>do_configuration_data_initialisation</name>
+        <qualifiedname>CollisionConfiguration::do_configuration_data_initialisation</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>input_B_norm</declname>
+        </param>
+        <param>
+          <type>DConstField&lt; <ref refid="classCollisionConfiguration_1acacaddd6c74b2c52ee14e6b5d4983467" kindref="member">IdxRangeSpVparType</ref> &gt;</type>
+          <declname>input_Bstar_s</declname>
+        </param>
+        <briefdescription>
+<para>Does the initialisation specific to this geometry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">input_B_norm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">input_Bstar_s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="127" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="127" bodyend="179"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Class to collect information to initialise the collision operator for a SpVparMu geometry. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>NOTE: Thanks to C++17 template constructor argument type deduction, we do not need to give the 3 template arguments. Giving a correct index_range_fdistribution is sufficient. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;</label>
+        <link refid="classCollisionConfiguration"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_operator_quantities</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>detail::CollisionConfigurationData&lt; IdxRangeDistributionFunctionType, GridSpType, GridPhiType, GridRType, GridThetaType, GridVparType, GridMuType &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" line="19" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp" bodystart="20" bodyend="190"/>
+    <listofallmembers>
+      <member refid="classCollisionConfiguration_1a0215481eecb81a3068c3335cf0929104" prot="public" virt="non-virtual"><scope>CollisionConfiguration</scope><name>CollisionConfiguration</name></member>
+      <member refid="classCollisionConfiguration_1af6f098de78a916ed942a90890981acbe" prot="public" virt="non-virtual"><scope>CollisionConfiguration</scope><name>CollisionConfigurationDataType</name></member>
+      <member refid="classCollisionConfiguration_1a806514341ca2509be90b2db2d6d4fbe3" prot="public" virt="non-virtual"><scope>CollisionConfiguration</scope><name>configuration</name></member>
+      <member refid="classCollisionConfiguration_1a43d76d19ef1e45a5fa778c7c59f76471" prot="protected" virt="non-virtual"><scope>CollisionConfiguration</scope><name>do_configuration_data_initialisation</name></member>
+      <member refid="classCollisionConfiguration_1a77e5d69224da2c41da3bb3ed08f316e2" prot="public" virt="non-virtual"><scope>CollisionConfiguration</scope><name>GridMuType</name></member>
+      <member refid="classCollisionConfiguration_1ad23e1c19b3c9ad3ec57abf9faeded4a2" prot="public" virt="non-virtual"><scope>CollisionConfiguration</scope><name>GridPhiType</name></member>
+      <member refid="classCollisionConfiguration_1af70141c99127445cd13f1538bcd5b1b6" prot="public" virt="non-virtual"><scope>CollisionConfiguration</scope><name>GridRType</name></member>
+      <member refid="classCollisionConfiguration_1a8519967631bca4d1974d92445159e363" prot="public" virt="non-virtual"><scope>CollisionConfiguration</scope><name>GridSpType</name></member>
+      <member refid="classCollisionConfiguration_1aec3210b40ef49f0c8d361e6eeeaeac16" prot="public" virt="non-virtual"><scope>CollisionConfiguration</scope><name>GridThetaType</name></member>
+      <member refid="classCollisionConfiguration_1abad505b2c709e1f9a0b2eca642819576" prot="public" virt="non-virtual"><scope>CollisionConfiguration</scope><name>GridVparType</name></member>
+      <member refid="classCollisionConfiguration_1af04c3dc20040cbe7a074981e9d153b85" prot="public" virt="non-virtual"><scope>CollisionConfiguration</scope><name>IdxRangeDistributionFunctionType</name></member>
+      <member refid="classCollisionConfiguration_1a4e186e5b73d038f9506f12ca595a0c13" prot="public" virt="non-virtual"><scope>CollisionConfiguration</scope><name>IdxRangeMuType</name></member>
+      <member refid="classCollisionConfiguration_1acacaddd6c74b2c52ee14e6b5d4983467" prot="public" virt="non-virtual"><scope>CollisionConfiguration</scope><name>IdxRangeSpVparType</name></member>
+      <member refid="classCollisionConfiguration_1ae670abd3ec52030c53d712175336c244" prot="public" virt="non-virtual"><scope>CollisionConfiguration</scope><name>IdxRangeVparType</name></member>
+      <member refid="classCollisionConfiguration_1a0706676008a4369fad2a2817ae531c31" prot="protected" virt="non-virtual"><scope>CollisionConfiguration</scope><name>m_nustar0</name></member>
+      <member refid="classCollisionConfiguration_1abbb71a5c50b25e240239cac2439bfe47" prot="protected" virt="non-virtual"><scope>CollisionConfiguration</scope><name>m_operator_quantities</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

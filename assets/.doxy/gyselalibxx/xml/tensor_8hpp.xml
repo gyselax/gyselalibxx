@@ -1,0 +1,1235 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="tensor_8hpp" kind="file" language="C++">
+    <compoundname>tensor.hpp</compoundname>
+    <includes local="no">array</includes>
+    <includes local="no">cassert</includes>
+    <includes local="no">ddc/ddc.hpp</includes>
+    <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
+    <includes refid="tensor__index__tools_8hpp" local="yes">tensor_index_tools.hpp</includes>
+    <includes refid="vector__index__tools_8hpp" local="yes">vector_index_tools.hpp</includes>
+    <includedby refid="indexed__tensor_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp</includedby>
+    <includedby refid="vector__field__common_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp</includedby>
+    <includedby refid="cartesian__to__circular_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp</includedby>
+    <includedby refid="circular__to__cartesian_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp</includedby>
+    <includedby refid="czarny__to__cartesian_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp</includedby>
+    <includedby refid="discrete__to__cartesian_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp</includedby>
+    <includedby refid="metric__tensor__evaluator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp</includedby>
+    <includedby refid="math__tools_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp</label>
+        <link refid="tensor_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>tensor_index_tools.hpp</label>
+        <link refid="tensor__index__tools_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>vector_index_tools.hpp</label>
+        <link refid="vector__index__tools_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>type_seq_tools.hpp</label>
+        <link refid="type__seq__tools_8hpp_source"/>
+      </node>
+      <node id="2">
+        <label>array</label>
+      </node>
+      <node id="3">
+        <label>cassert</label>
+      </node>
+      <node id="4">
+        <label>ddc/ddc.hpp</label>
+      </node>
+      <node id="6">
+        <label>ddc/kernels/splines.hpp</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="43">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp</label>
+        <link refid="bsl__advection__1d_8hpp_source"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/ipolar_foot_finder.hpp</label>
+        <link refid="ipolar__foot__finder_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp</label>
+        <link refid="spline__polar__foot__finder_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp</label>
+        <link refid="indexed__tensor_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp</label>
+        <link refid="tensor_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp</label>
+        <link refid="vector__field_8hpp_source"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp</label>
+        <link refid="vector__field__common_8hpp_source"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp</label>
+        <link refid="vector__field__mem_8hpp_source"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection/bsl_advection_rtheta.hpp</label>
+        <link refid="bsl__advection__rtheta_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp</label>
+        <link refid="advection__field__rtheta_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp</label>
+        <link refid="geometryRTheta_2geometry_2geometry_8hpp_source"/>
+      </node>
+      <node id="13">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp</label>
+        <link refid="vortex__merger__equilibrium_8hpp_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp</label>
+        <link refid="vortex__merger__initialisation_8hpp_source"/>
+      </node>
+      <node id="4">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp</label>
+        <link refid="bsl__predcorr_8hpp_source"/>
+      </node>
+      <node id="5">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_explicit.hpp</label>
+        <link refid="bsl__predcorr__second__order__explicit_8hpp_source"/>
+      </node>
+      <node id="6">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp</label>
+        <link refid="bsl__predcorr__second__order__implicit_8hpp_source"/>
+      </node>
+      <node id="51">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp</label>
+        <link refid="geometryXVx_2poisson_2qnsolver_8hpp_source"/>
+      </node>
+      <node id="26">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp</label>
+        <link refid="geometryXY_2geometry_2geometry_8hpp_source"/>
+      </node>
+      <node id="27">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp</label>
+        <link refid="predcorr__RK2_8hpp_source"/>
+      </node>
+      <node id="52">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp</label>
+        <link refid="geometryXYVxVy_2poisson_2qnsolver_8hpp_source"/>
+      </node>
+      <node id="16">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</label>
+        <link refid="bernstein_8hpp_source"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp</label>
+        <link refid="polar__bsplines_8hpp_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp</label>
+        <link refid="cartesian__to__circular_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="56">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp</label>
+        <link refid="circular__to__cartesian_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp</label>
+        <link refid="combined__mapping_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="57">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp</label>
+        <link refid="czarny__to__cartesian_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp</label>
+        <link refid="discrete__mapping__builder_8hpp_source"/>
+      </node>
+      <node id="19">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp</label>
+        <link refid="discrete__to__cartesian_8hpp_source"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inv_jacobian_o_point.hpp</label>
+        <link refid="inv__jacobian__o__point_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp</label>
+        <link refid="inverse__jacobian__matrix_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp</label>
+        <link refid="metric__tensor__evaluator_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/vector_mapper.hpp</label>
+        <link refid="vector__mapper_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/l_norm_tools.hpp</label>
+        <link refid="l__norm__tools_8hpp"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp</label>
+        <link refid="math__tools_8hpp_source"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp</label>
+        <link refid="connectivity_8hpp_source"/>
+      </node>
+      <node id="33">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/onion_patch_locator.hpp</label>
+        <link refid="onion__patch__locator_8hpp_source"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/utils_patch_locators.hpp</label>
+        <link refid="utils__patch__locators_8hpp_source"/>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp</label>
+        <link refid="multipatch__field_8hpp_source"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp</label>
+        <link refid="multipatch__field__mem_8hpp_source"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_type.hpp</label>
+        <link refid="multipatch__type_8hpp_source"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp</label>
+        <link refid="types_8hpp_source"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</label>
+        <link refid="constant__extrapolation__rules__onion_8hpp_source"/>
+      </node>
+      <node id="47">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp</label>
+        <link refid="multipatch__spline__builder_8hpp_source"/>
+      </node>
+      <node id="48">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp</label>
+        <link refid="multipatch__spline__builder__2d_8hpp_source"/>
+      </node>
+      <node id="36">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp</label>
+        <link refid="multipatch__spline__evaluator__2d_8hpp_source"/>
+      </node>
+      <node id="49">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/null_extrapolation_rules.hpp</label>
+        <link refid="null__extrapolation__rules_8hpp_source"/>
+      </node>
+      <node id="30">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/utils/multipatch_math_tools.hpp</label>
+        <link refid="multipatch__math__tools_8hpp_source"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp</label>
+        <link refid="fem__1d__poisson__solver_8hpp_source"/>
+      </node>
+      <node id="54">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp</label>
+        <link refid="fft__poisson__solver_8hpp_source"/>
+      </node>
+      <node id="50">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp</label>
+        <link refid="ipoisson__solver_8hpp_source"/>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</label>
+        <link refid="polarpoissonlikesolver_8hpp_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp</label>
+        <link refid="crank__nicolson_8hpp_source"/>
+      </node>
+      <node id="42">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/euler.hpp</label>
+        <link refid="euler_8hpp_source"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp</label>
+        <link refid="itimestepper_8hpp_source"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk2.hpp</label>
+        <link refid="rk2_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk3.hpp</label>
+        <link refid="rk3_8hpp_source"/>
+      </node>
+      <node id="46">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp</label>
+        <link refid="rk4_8hpp_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classTensor" prot="public">Tensor</innerclass>
+    <innernamespace refid="namespaceddcHelper">ddcHelper</innernamespace>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="tensor_8hpp_1ad9626f79cdcf0201187830beaeb777c2" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>class TypeSeqValidIndexSet</type>
+          </param>
+        </templateparamlist>
+        <type>typename detail::ToTensor&lt; ElementType, TypeSeqValidIndexSet &gt;::type</type>
+        <definition>using to_tensor_t =  typename detail::ToTensor&lt;ElementType, TypeSeqValidIndexSet&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>to_tensor_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="358" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="358" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="tensor_8hpp_1a6aee6677463b93014f0a19113c1e4260" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>ValidIndexSet</declname>
+            <defname>ValidIndexSet</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classTensor" kindref="compound">Tensor</ref>&lt; double, ValidIndexSet... &gt;</type>
+        <definition>using DTensor =  Tensor&lt;double, ValidIndexSet...&gt;</definition>
+        <argsstring></argsstring>
+        <name>DTensor</name>
+        <briefdescription>
+<para>A helper type alias to get a tensor containing doubles. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ValidIndexSet</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The indices that can be used along each dimension of the tensor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="369" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="369" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="tensor_8hpp_1ae3239ebdbab479a3e67907f2d16e8eb1" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>Dims</declname>
+            <defname>Dims</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classTensor" kindref="compound">Tensor</ref>&lt; ElementType, VectorIndexSet&lt; Dims... &gt; &gt;</type>
+        <definition>using Vector =  Tensor&lt;ElementType, VectorIndexSet&lt;Dims...&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>Vector</name>
+        <briefdescription>
+<para>A helper type alias to get a 1D tensor (a vector). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ElementType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the elements of the tensor (usually double/complex). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Dims</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimensions that can be used to index the vector. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="377" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="377" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="tensor_8hpp_1ab4d2f0aa26d0a1f32bae61fe748501dc" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>Dims</declname>
+            <defname>Dims</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classTensor" kindref="compound">Vector</ref>&lt; double, Dims... &gt;</type>
+        <definition>using DVector =  Vector&lt;double, Dims...&gt;</definition>
+        <argsstring></argsstring>
+        <name>DVector</name>
+        <briefdescription>
+<para>A helper type alias to get a 1D tensor (a vector) of doubles. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Dims</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimensions that can be used to index the vector. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="384" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="384" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="tensor_8hpp_1a8c09432fdcf7e7e87cbf80a8c484b13a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>class OElementType</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>ValidIndexSet</declname>
+            <defname>ValidIndexSet</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref>&lt; ElementType, ValidIndexSet... &gt;</type>
+        <definition>KOKKOS_INLINE_FUNCTION Tensor&lt; ElementType, ValidIndexSet... &gt; operator*</definition>
+        <argsstring>(OElementType val, Tensor&lt; ElementType, ValidIndexSet... &gt; const &amp;tensor)</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>OElementType</type>
+          <declname>val</declname>
+        </param>
+        <param>
+          <type><ref refid="classTensor" kindref="compound">Tensor</ref>&lt; ElementType, ValidIndexSet... &gt; const &amp;</type>
+          <declname>tensor</declname>
+        </param>
+        <briefdescription>
+<para>An operator to multiply all a tensor by a value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>val</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value by which the elements should be multiplied. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The tensor being multiplied. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new tensor containing the result of the multiplication. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="441" column="31" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="441" bodyend="446"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor_8hpp_1ae5e406e02d6b387823086b71eefb676b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>Dims</declname>
+            <defname>Dims</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt;</type>
+        <definition>KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; operator+</definition>
+        <argsstring>(Coord&lt; Dims... &gt; const &amp;coord, DVector&lt; Dims... &gt; const &amp;tensor)</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>Coord&lt; Dims... &gt; const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <param>
+          <type><ref refid="classTensor" kindref="compound">DVector</ref>&lt; Dims... &gt; const &amp;</type>
+          <declname>tensor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>An operator to add the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate to which the tensor is added. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The tensor to be added to the coordinate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The new coordinate. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="457" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="457" bodyend="462"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor_8hpp_1ae261d91e0f1e71db5f42d54551546d83" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>Dims</declname>
+            <defname>Dims</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt;</type>
+        <definition>KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; operator-</definition>
+        <argsstring>(Coord&lt; Dims... &gt; const &amp;coord, DVector&lt; Dims... &gt; const &amp;tensor)</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>Coord&lt; Dims... &gt; const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <param>
+          <type><ref refid="classTensor" kindref="compound">DVector</ref>&lt; Dims... &gt; const &amp;</type>
+          <declname>tensor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>An operator to add the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate from which the tensor is subtracted. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The tensor to be subtracted from the coordinate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The new coordinate. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="473" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="473" bodyend="478"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor_8hpp_1aeb2336de3f3d9e1236ce85bb85af9f00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>Dims</declname>
+            <defname>Dims</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; &amp;</type>
+        <definition>KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; &amp; operator+=</definition>
+        <argsstring>(Coord&lt; Dims... &gt; &amp;coord, DVector&lt; Dims... &gt; const &amp;tensor)</argsstring>
+        <name>operator+=</name>
+        <param>
+          <type>Coord&lt; Dims... &gt; &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <param>
+          <type><ref refid="classTensor" kindref="compound">DVector</ref>&lt; Dims... &gt; const &amp;</type>
+          <declname>tensor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>An operator to add the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate to which the tensor is added. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The tensor to be added to the coordinate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The new coordinate. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="489" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="489" bodyend="495"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor_8hpp_1a91e7258aa1fd0e4b9c7a6f764b554be8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>Dims</declname>
+            <defname>Dims</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; &amp;</type>
+        <definition>KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; &amp; operator-=</definition>
+        <argsstring>(Coord&lt; Dims... &gt; &amp;coord, DVector&lt; Dims... &gt; const &amp;tensor)</argsstring>
+        <name>operator-=</name>
+        <param>
+          <type>Coord&lt; Dims... &gt; &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <param>
+          <type><ref refid="classTensor" kindref="compound">DVector</ref>&lt; Dims... &gt; const &amp;</type>
+          <declname>tensor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>An operator to add the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate from which the tensor is subtracted. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The tensor to be subtracted from the coordinate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The new coordinate. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="506" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="506" bodyend="512"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;array&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cassert&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ddc/ddc.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;tensor_index_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_index_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">detail<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Val</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">IndexSet&gt;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ToCoord;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ToCoord&lt;VectorIndexSet&lt;Dims...&gt;&gt;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>Coord&lt;Dims...&gt;;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Val</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">IndexSet&gt;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">to_coord_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ToCoord&lt;ValidIndexSet&gt;::type;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>detail</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ValidIndexSet&gt;</highlight></codeline>
+<codeline lineno="34" refid="classTensor" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classTensor" kindref="compound">Tensor</ref></highlight></codeline>
+<codeline lineno="35"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">((is_vector_index_set_v&lt;ValidIndexSet&gt;<sp/>&amp;&amp;<sp/>...));</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(((is_covariant_vector_index_set_v&lt;ValidIndexSet&gt;)</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>||<sp/>(is_contravariant_vector_index_set_v&lt;ValidIndexSet&gt;))</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>...));</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="44" refid="classTensor_1a9c45ebb12d858cff471aedf396889708" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classTensor_1a9c45ebb12d858cff471aedf396889708" kindref="member">index_set</ref><sp/>=<sp/>ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/>s_n_elements<sp/>=<sp/>(ddc::type_seq_size_v&lt;ValidIndexSet&gt;<sp/>*<sp/>...);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>std::array&lt;ElementType,<sp/>s_n_elements&gt;<sp/>m_data;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="52" refid="classTensor_1ae41b35ad6cc6110daeaff56fff57bc2b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classTensor_1ae41b35ad6cc6110daeaff56fff57bc2b" kindref="member">element_type</ref><sp/>=<sp/>ElementType;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="classTensor_1ac7619bb6c3891c90bb2c59f7515f474f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/><ref refid="classTensor_1ac7619bb6c3891c90bb2c59f7515f474f" kindref="member">rank</ref>()</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(ValidIndexSet);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72" refid="classTensor_1a44e2cf57c4cb50f22c3537d5bd8edde0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/><ref refid="classTensor_1a44e2cf57c4cb50f22c3537d5bd8edde0" kindref="member">size</ref>()</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>s_n_elements;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="classTensor_1ac7619bb6c3891c90bb2c59f7515f474f" kindref="member">rank</ref>()<sp/>&gt;<sp/>0);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="84" refid="classTensor_1a32957d1f871e67a58974059c1ff6b178" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_DEFAULTED_FUNCTION<sp/><ref refid="classTensor_1a32957d1f871e67a58974059c1ff6b178" kindref="member">Tensor</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90" refid="classTensor_1a4a3910af9ebdd5a36e6999e2d4b274ac" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor_1a4a3910af9ebdd5a36e6999e2d4b274ac" kindref="member">Tensor</ref>(ElementType<sp/>fill_value)</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>i(0);<sp/>i<sp/>&lt;<sp/>s_n_elements;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_data[i]<sp/>=<sp/>fill_value;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Params,</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">=<sp/>std::enable_if_t&lt;(std::is_convertible_v&lt;Params,<sp/>ElementType&gt;<sp/>&amp;&amp;<sp/>...)&gt;,</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">=<sp/>std::enable_if_t&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Params)<sp/>==<sp/><ref refid="classTensor_1a44e2cf57c4cb50f22c3537d5bd8edde0" kindref="member">size</ref>()<sp/>&amp;&amp;<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Params)<sp/>!=<sp/>1&gt;&gt;</highlight></codeline>
+<codeline lineno="107" refid="classTensor_1a7d405bd91e2e89a1ee4c973badd821a6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor_1a7d405bd91e2e89a1ee4c973badd821a6" kindref="member">Tensor</ref>(Params...<sp/>elements)<sp/>:<sp/>m_data({elements...})</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor_1ac7619bb6c3891c90bb2c59f7515f474f" kindref="member">rank</ref>()<sp/>==<sp/>1,</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Filling<sp/>the<sp/>tensor<sp/>on<sp/>initialisation<sp/>is<sp/>only<sp/>permitted<sp/>for<sp/>1D<sp/>vector<sp/>objects&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
+<codeline lineno="120" refid="classTensor_1a1c1d599698457fd792ee9012fdb3b5b4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor_1a1c1d599698457fd792ee9012fdb3b5b4" kindref="member">Tensor</ref>(Coord&lt;Dims...&gt;<sp/>coord)<sp/>:<sp/>m_data(coord.array())</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor_1ac7619bb6c3891c90bb2c59f7515f474f" kindref="member">rank</ref>()<sp/>==<sp/>1,</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Filling<sp/>the<sp/>tensor<sp/>on<sp/>initialisation<sp/>is<sp/>only<sp/>permitted<sp/>for<sp/>1D<sp/>vector<sp/>objects&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;VectorIndexSet&lt;Dims...&gt;,<sp/>ddc::type_seq_element_t&lt;0,<sp/>index_set&gt;&gt;,</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;The<sp/>coordinate<sp/>must<sp/>have<sp/>the<sp/>same<sp/>memory<sp/>layout<sp/>to<sp/>make<sp/>a<sp/>clean<sp/>conversion.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OElementType&gt;</highlight></codeline>
+<codeline lineno="136" refid="classTensor_1a783dddf339a00723800683e528ef9bc3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor_1a783dddf339a00723800683e528ef9bc3" kindref="member">Tensor</ref>(<ref refid="classTensor" kindref="compound">Tensor&lt;OElementType, ValidIndexSet...&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>o_tensor)</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_data(o_tensor.m_data)</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>QueryTensorIndexElement&gt;</highlight></codeline>
+<codeline lineno="147" refid="classTensor_1afffb2e308bfc979b45c83c2f2cdff57d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/>ElementType&amp;<sp/><ref refid="classTensor_1afffb2e308bfc979b45c83c2f2cdff57d" kindref="member">get</ref>()</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(tensor_tools::is_tensor_index_element_v&lt;QueryTensorIndexElement&gt;);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_data[QueryTensorIndexElement::index()];</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>QueryTensorIndexElement&gt;</highlight></codeline>
+<codeline lineno="159" refid="classTensor_1a539ea3ced7ffa549f2b6b7e282895f13" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/>ElementType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classTensor_1a539ea3ced7ffa549f2b6b7e282895f13" kindref="member">get</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="160"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(tensor_tools::is_tensor_index_element_v&lt;QueryTensorIndexElement&gt;);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_data[QueryTensorIndexElement::index()];</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170" refid="classTensor_1ab427e698416968e0341852bd84203b75" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_DEFAULTED_FUNCTION<sp/><ref refid="classTensor" kindref="compound">Tensor</ref>&amp;<sp/><ref refid="classTensor_1ab427e698416968e0341852bd84203b75" kindref="member">operator=</ref>(<ref refid="classTensor" kindref="compound">Tensor</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
+<codeline lineno="178" refid="classTensor_1a865e540a3ab70a849b4f181404cd9fba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">Tensor</ref>&amp;<sp/><ref refid="classTensor_1a865e540a3ab70a849b4f181404cd9fba" kindref="member">operator=</ref>(Coord&lt;Dims...&gt;<sp/>coord)</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor_1ac7619bb6c3891c90bb2c59f7515f474f" kindref="member">rank</ref>()<sp/>==<sp/>1,</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Copying<sp/>a<sp/>coordinate<sp/>into<sp/>a<sp/>tensor<sp/>is<sp/>only<sp/>possible<sp/>for<sp/>1D<sp/>tensor<sp/>objects&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;VectorIndexSet&lt;Dims...&gt;,<sp/>ddc::type_seq_element_t&lt;0,<sp/>index_set&gt;&gt;,</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;The<sp/>coordinate<sp/>must<sp/>have<sp/>the<sp/>same<sp/>memory<sp/>layout<sp/>to<sp/>make<sp/>a<sp/>clean<sp/>conversion.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_data<sp/>=<sp/>coord.array();</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OElementType&gt;</highlight></codeline>
+<codeline lineno="197" refid="classTensor_1af0da6591449a8769614164b605781983" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">Tensor</ref>&amp;<sp/><ref refid="classTensor_1af0da6591449a8769614164b605781983" kindref="member">operator*=</ref>(OElementType<sp/>val)</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>i(0);<sp/>i<sp/>&lt;<sp/>s_n_elements;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_data[i]<sp/>*=<sp/>val;</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OElementType&gt;</highlight></codeline>
+<codeline lineno="212" refid="classTensor_1aef89751059895c9befb75892ca348a68" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">Tensor</ref>&amp;<sp/><ref refid="classTensor_1aef89751059895c9befb75892ca348a68" kindref="member">operator/=</ref>(OElementType<sp/>val)</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>i(0);<sp/>i<sp/>&lt;<sp/>s_n_elements;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_data[i]<sp/>/=<sp/>val;</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight></codeline>
+<codeline lineno="225" refid="classTensor_1a4e1e34b7fc6c2fd076736053e5cf3ec6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">Tensor</ref>&amp;<sp/><ref refid="classTensor_1a4e1e34b7fc6c2fd076736053e5cf3ec6" kindref="member">operator+=</ref>(<ref refid="classTensor" kindref="compound">Tensor</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>val)</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>i(0);<sp/>i<sp/>&lt;<sp/>s_n_elements;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_data[i]<sp/>+=<sp/>val.m_data[i];</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="238" refid="classTensor_1ab023077f54456efd237358613f819993" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">Tensor</ref>&amp;<sp/><ref refid="classTensor_1ab023077f54456efd237358613f819993" kindref="member">operator-=</ref>(<ref refid="classTensor" kindref="compound">Tensor</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>val)</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>i(0);<sp/>i<sp/>&lt;<sp/>s_n_elements;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_data[i]<sp/>-=<sp/>val.m_data[i];</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OElementType&gt;</highlight></codeline>
+<codeline lineno="253" refid="classTensor_1a1b1faf34db4a030d44560352b18d0c0c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">Tensor</ref><sp/><ref refid="classTensor_1a1b1faf34db4a030d44560352b18d0c0c" kindref="member">operator*</ref>(OElementType<sp/>val)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="254"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">Tensor</ref><sp/>result(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result<sp/>*=<sp/>val;</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"></highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OElementType&gt;</highlight></codeline>
+<codeline lineno="267" refid="classTensor_1a0f64f0f2afb76cb6f701ffd8e8b55d8d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">Tensor</ref><sp/><ref refid="classTensor_1a0f64f0f2afb76cb6f701ffd8e8b55d8d" kindref="member">operator/</ref>(OElementType<sp/>val)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="268"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">Tensor</ref><sp/>result(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result<sp/>/=<sp/>val;</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"></highlight></codeline>
+<codeline lineno="279" refid="classTensor_1a02ea288d5a36d155e4c6ed3cd7e50c23" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">Tensor</ref><sp/><ref refid="classTensor_1a02ea288d5a36d155e4c6ed3cd7e50c23" kindref="member">operator+</ref>(<ref refid="classTensor" kindref="compound">Tensor</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>val)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="280"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">Tensor</ref><sp/>result(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result<sp/>+=<sp/>val;</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"></highlight></codeline>
+<codeline lineno="291" refid="classTensor_1a52e9979367ea03d4498124b32ec9a821" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">Tensor</ref><sp/><ref refid="classTensor_1a52e9979367ea03d4498124b32ec9a821" kindref="member">operator-</ref>(<ref refid="classTensor" kindref="compound">Tensor</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>val)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="292"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">Tensor</ref><sp/>result(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result<sp/>-=<sp/>val;</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"></highlight></codeline>
+<codeline lineno="302" refid="classTensor_1a0a4985762ba9e45713294996fdae7268" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">Tensor</ref><sp/><ref refid="classTensor_1a0a4985762ba9e45713294996fdae7268" kindref="member">operator-</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="303"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">Tensor</ref><sp/>result;</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>i(0);<sp/>i<sp/>&lt;<sp/>s_n_elements;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result.m_data[i]<sp/>=<sp/>-m_data[i];</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"></highlight></codeline>
+<codeline lineno="316" refid="classTensor_1ad6f543ad919df72d4566b89a86bc4975" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classTensor_1ad6f543ad919df72d4566b89a86bc4975" kindref="member">operator==</ref>(<ref refid="classTensor" kindref="compound">Tensor</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>o_tensor)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="317"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>equal(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>i(0);<sp/>i<sp/>&lt;<sp/>s_n_elements;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>equal<sp/>=<sp/>equal<sp/>&amp;&amp;<sp/>(m_data[i]<sp/>==<sp/>o_tensor.m_data[i]);</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>equal;</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"></highlight></codeline>
+<codeline lineno="330" refid="classTensor_1a7c3c2bce8859c632c8a36ed0bb978069" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classTensor_1a7c3c2bce8859c632c8a36ed0bb978069" kindref="member">operator!=</ref>(<ref refid="classTensor" kindref="compound">Tensor</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>o_tensor)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="331"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!(*</highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>==<sp/>o_tensor);</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"></highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>dim&gt;</highlight></codeline>
+<codeline lineno="341" refid="classTensor_1a19169c8af9ca4025b5779c69761f4b8e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classTensor_1a19169c8af9ca4025b5779c69761f4b8e" kindref="member">vector_index_set_t</ref><sp/>=<sp/>ddc::type_seq_element_t&lt;dim,<sp/>index_set&gt;;</highlight></codeline>
+<codeline lineno="342"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"></highlight></codeline>
+<codeline lineno="344"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">detail<sp/>{</highlight></codeline>
+<codeline lineno="345"><highlight class="normal"></highlight></codeline>
+<codeline lineno="346"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqVal</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">IndexSet&gt;</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ToTensor;</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"></highlight></codeline>
+<codeline lineno="349"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ValidIndexSet&gt;</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ToTensor&lt;ElementType,<sp/>ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;&gt;</highlight></codeline>
+<codeline lineno="351"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/><ref refid="classTensor" kindref="compound">Tensor</ref>&lt;ElementType,<sp/>ValidIndexSet...&gt;;</highlight></codeline>
+<codeline lineno="353"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="354"><highlight class="normal"></highlight></codeline>
+<codeline lineno="355"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>detail</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="356"><highlight class="normal"></highlight></codeline>
+<codeline lineno="357"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqVal</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">IndexSet&gt;</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">to_tensor_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::ToTensor&lt;ElementType,<sp/>TypeSeqValidIndexSet&gt;::type;</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"></highlight></codeline>
+<codeline lineno="361"><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Type<sp/>aliases</highlight></codeline>
+<codeline lineno="363"></codeline>
+<codeline lineno="368"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ValidIndexSet&gt;</highlight></codeline>
+<codeline lineno="369"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classTensor" kindref="compound">DTensor</ref><sp/>=<sp/><ref refid="classTensor" kindref="compound">Tensor</ref>&lt;double,<sp/>ValidIndexSet...&gt;;</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"></highlight></codeline>
+<codeline lineno="376"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classTensor" kindref="compound">Vector</ref><sp/>=<sp/><ref refid="classTensor" kindref="compound">Tensor</ref>&lt;ElementType,<sp/>VectorIndexSet&lt;Dims...&gt;&gt;;</highlight></codeline>
+<codeline lineno="378"><highlight class="normal"></highlight></codeline>
+<codeline lineno="383"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
+<codeline lineno="384"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classTensor" kindref="compound">DVector</ref><sp/>=<sp/><ref refid="classTensor" kindref="compound">Vector</ref>&lt;double,<sp/>Dims...&gt;;</highlight></codeline>
+<codeline lineno="385"><highlight class="normal"></highlight></codeline>
+<codeline lineno="387"><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Operators</highlight></codeline>
+<codeline lineno="389"><highlight class="normal"></highlight></codeline>
+<codeline lineno="390"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ddcHelper<sp/>{</highlight></codeline>
+<codeline lineno="391"><highlight class="normal"></highlight></codeline>
+<codeline lineno="398"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>QueryIndexTag,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ValidIndexSet&gt;</highlight></codeline>
+<codeline lineno="399"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>ElementType&amp;<sp/>get(<ref refid="classTensor" kindref="compound">Tensor&lt;ElementType, ValidIndexSet...&gt;</ref>&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="400"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="401"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tensor.template<sp/>get&lt;<ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">tensor_tools::TensorIndexElement</ref>&lt;</highlight></codeline>
+<codeline lineno="402"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;,</highlight></codeline>
+<codeline lineno="403"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>QueryIndexTag...&gt;&gt;();</highlight></codeline>
+<codeline lineno="404"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="405"><highlight class="normal"></highlight></codeline>
+<codeline lineno="412"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>QueryIndexTag,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ValidIndexSet&gt;</highlight></codeline>
+<codeline lineno="413"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>ElementType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>get(<ref refid="classTensor" kindref="compound">Tensor&lt;ElementType, ValidIndexSet...&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="414"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="415"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tensor.template<sp/>get&lt;<ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">tensor_tools::TensorIndexElement</ref>&lt;</highlight></codeline>
+<codeline lineno="416"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;,</highlight></codeline>
+<codeline lineno="417"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>QueryIndexTag...&gt;&gt;();</highlight></codeline>
+<codeline lineno="418"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="419"><highlight class="normal"></highlight></codeline>
+<codeline lineno="427"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
+<codeline lineno="428"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>Coord&lt;Dims...&gt;<sp/>to_coord(<ref refid="classTensor" kindref="compound">Vector&lt;ElementType, Dims...&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="429"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="430"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Coord&lt;Dims...&gt;(get&lt;Dims&gt;(tensor)...);</highlight></codeline>
+<codeline lineno="431"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="432"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>ddcHelper</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="433"><highlight class="normal"></highlight></codeline>
+<codeline lineno="440"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">OElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ValidIndexSet&gt;</highlight></codeline>
+<codeline lineno="441"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/><ref refid="classTensor" kindref="compound">Tensor</ref>&lt;ElementType,<sp/>ValidIndexSet...&gt;<sp/>operator*(</highlight></codeline>
+<codeline lineno="442"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>OElementType<sp/>val,</highlight></codeline>
+<codeline lineno="443"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">Tensor&lt;ElementType, ValidIndexSet...&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="444"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="445"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tensor<sp/>*<sp/>val;</highlight></codeline>
+<codeline lineno="446"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="447"><highlight class="normal"></highlight></codeline>
+<codeline lineno="456"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
+<codeline lineno="457"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>Coord&lt;Dims...&gt;<sp/>operator+(</highlight></codeline>
+<codeline lineno="458"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;Dims...&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord,</highlight></codeline>
+<codeline lineno="459"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DVector&lt;Dims...&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="460"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="461"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Coord&lt;Dims...&gt;((ddc::get&lt;Dims&gt;(coord)<sp/>+<sp/>ddcHelper::get&lt;Dims&gt;(tensor))...);</highlight></codeline>
+<codeline lineno="462"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="463"><highlight class="normal"></highlight></codeline>
+<codeline lineno="472"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
+<codeline lineno="473"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>Coord&lt;Dims...&gt;<sp/>operator-(</highlight></codeline>
+<codeline lineno="474"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;Dims...&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord,</highlight></codeline>
+<codeline lineno="475"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DVector&lt;Dims...&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="476"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="477"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Coord&lt;Dims...&gt;((ddc::get&lt;Dims&gt;(coord)<sp/>-<sp/>ddcHelper::get&lt;Dims&gt;(tensor))...);</highlight></codeline>
+<codeline lineno="478"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="479"><highlight class="normal"></highlight></codeline>
+<codeline lineno="488"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
+<codeline lineno="489"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>Coord&lt;Dims...&gt;&amp;<sp/>operator+=(</highlight></codeline>
+<codeline lineno="490"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;Dims...&gt;&amp;<sp/>coord,</highlight></codeline>
+<codeline lineno="491"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DVector&lt;Dims...&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="492"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="493"><highlight class="normal"><sp/><sp/><sp/><sp/>((ddc::get&lt;Dims&gt;(coord)<sp/>+=<sp/>ddcHelper::get&lt;Dims&gt;(tensor)),<sp/>...);</highlight></codeline>
+<codeline lineno="494"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>coord;</highlight></codeline>
+<codeline lineno="495"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="496"><highlight class="normal"></highlight></codeline>
+<codeline lineno="505"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
+<codeline lineno="506"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>Coord&lt;Dims...&gt;&amp;<sp/>operator-=(</highlight></codeline>
+<codeline lineno="507"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;Dims...&gt;&amp;<sp/>coord,</highlight></codeline>
+<codeline lineno="508"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DVector&lt;Dims...&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="509"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="510"><highlight class="normal"><sp/><sp/><sp/><sp/>((ddc::get&lt;Dims&gt;(coord)<sp/>-=<sp/>ddcHelper::get&lt;Dims&gt;(tensor)),<sp/>...);</highlight></codeline>
+<codeline lineno="511"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>coord;</highlight></codeline>
+<codeline lineno="512"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp"/>
+  </compounddef>
+</doxygen>

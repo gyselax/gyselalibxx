@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structis__onion__patch__locator_3_01OnionPatchLocator_3_01MultipatchIdxRanges_00_01LogicalToPhys15c96379834346672a2b2d644897e91f" kind="struct" language="C++" prot="public">
+    <compoundname>is_onion_patch_locator&lt; OnionPatchLocator&lt; MultipatchIdxRanges, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt; &gt;</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::true_type</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>class MultipatchIdxRanges</type>
+      </param>
+      <param>
+        <type>class LogicalToPhysicalMapping</type>
+      </param>
+      <param>
+        <type>class PhysicalToLogicalMapping</type>
+      </param>
+      <param>
+        <type>class ExecSpace</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>is_onion_patch_locator&lt; OnionPatchLocator&lt; MultipatchIdxRanges, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt; &gt;</label>
+        <link refid="structis__onion__patch__locator_3_01OnionPatchLocator_3_01MultipatchIdxRanges_00_01LogicalToPhys15c96379834346672a2b2d644897e91f"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::true_type</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>is_onion_patch_locator&lt; OnionPatchLocator&lt; MultipatchIdxRanges, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt; &gt;</label>
+        <link refid="structis__onion__patch__locator_3_01OnionPatchLocator_3_01MultipatchIdxRanges_00_01LogicalToPhys15c96379834346672a2b2d644897e91f"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::true_type</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/utils_patch_locators.hpp" line="24" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/utils_patch_locators.hpp" bodystart="29" bodyend="30"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

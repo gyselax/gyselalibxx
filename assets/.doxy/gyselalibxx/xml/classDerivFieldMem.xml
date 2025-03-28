@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classDerivFieldMem" kind="class" language="C++" prot="public">
+    <compoundname>DerivFieldMem</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class</type>
+      </param>
+      <param>
+        <type>class</type>
+      </param>
+      <param>
+        <type>int</type>
+      </param>
+      <param>
+        <type>class</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>See <ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1DerivFieldMemImplementation" kindref="member">DerivFieldMemImplementation</ref> </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="10" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="10" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

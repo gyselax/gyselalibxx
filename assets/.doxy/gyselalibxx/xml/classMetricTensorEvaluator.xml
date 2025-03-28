@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classMetricTensorEvaluator" kind="class" language="C++" prot="public">
+    <compoundname>MetricTensorEvaluator</compoundname>
+    <includes refid="metric__tensor__evaluator_8hpp" local="no">metric_tensor_evaluator.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Mapping</type>
+      </param>
+      <param>
+        <type>class PositionCoordinate</type>
+        <defval>typename Mapping::CoordArg</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classMetricTensorEvaluator_1ad692758b51be7349b111b62c9fe8f1c1" prot="private" static="no">
+        <type>ddc::to_type_seq_t&lt; typename Mapping::CoordArg &gt;</type>
+        <definition>using MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::Dims =  ddc::to_type_seq_t&lt;typename Mapping::CoordArg&gt;</definition>
+        <argsstring></argsstring>
+        <name>Dims</name>
+        <qualifiedname>MetricTensorEvaluator::Dims</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp" line="24" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMetricTensorEvaluator_1a40f45a1ab0cabb31398ed494efb20e14" prot="private" static="no">
+        <type>vector_index_set_dual_t&lt; Dims &gt;</type>
+        <definition>using MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::Dims_cov =  vector_index_set_dual_t&lt;Dims&gt;</definition>
+        <argsstring></argsstring>
+        <name>Dims_cov</name>
+        <qualifiedname>MetricTensorEvaluator::Dims_cov</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp" line="25" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classMetricTensorEvaluator_1a7ca6db7787f9a6522e0123f7b00381eb" prot="public" static="no">
+        <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; Dims &gt;</type>
+        <definition>using MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::ContravariantVectorType =  DTensor&lt;Dims&gt;</definition>
+        <argsstring></argsstring>
+        <name>ContravariantVectorType</name>
+        <qualifiedname>MetricTensorEvaluator::ContravariantVectorType</qualifiedname>
+        <briefdescription>
+<para>The type of a contravariant vector associated with this mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp" line="29" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMetricTensorEvaluator_1a963a1d9b3ed9d5fea6fff6f19a9c0ba2" prot="public" static="no">
+        <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; vector_index_set_dual_t&lt; Dims &gt; &gt;</type>
+        <definition>using MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::CovariantVectorType =  DTensor&lt;vector_index_set_dual_t&lt;Dims&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>CovariantVectorType</name>
+        <qualifiedname>MetricTensorEvaluator::CovariantVectorType</qualifiedname>
+        <briefdescription>
+<para>The type of a covariant vector associated with this mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp" line="32" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classMetricTensorEvaluator_1a5f4e962eae51fbf5c0a48915001456ab" prot="private" static="no" mutable="no">
+        <type>Mapping</type>
+        <definition>Mapping MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::m_mapping</definition>
+        <argsstring></argsstring>
+        <name>m_mapping</name>
+        <qualifiedname>MetricTensorEvaluator::m_mapping</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp" line="35" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classMetricTensorEvaluator_1aa9cc21d5dd3c74af9af9d1a270692612" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION</type>
+        <definition>KOKKOS_FUNCTION MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::MetricTensorEvaluator</definition>
+        <argsstring>(Mapping mapping)</argsstring>
+        <name>MetricTensorEvaluator</name>
+        <qualifiedname>MetricTensorEvaluator::MetricTensorEvaluator</qualifiedname>
+        <param>
+          <type>Mapping</type>
+          <declname>mapping</declname>
+        </param>
+        <briefdescription>
+<para>A constructor for the metric tensor operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mapping which can be used to calculate the Jacobian. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp" line="43" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classMetricTensorEvaluator_1a440ec0f675e0633e8b68cf23719ea125" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; Dims_cov, Dims_cov &gt;</type>
+        <definition>KOKKOS_FUNCTION DTensor&lt; Dims_cov, Dims_cov &gt; MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::operator()</definition>
+        <argsstring>(PositionCoordinate const &amp;coord) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>MetricTensorEvaluator::operator()</qualifiedname>
+        <param>
+          <type>PositionCoordinate const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the metric tensor associated with the mapping at a given position in space. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The metric tensor matrix is defined as: <formula id="268">$ G = (J_{\mathcal{F}})^T J_{\mathcal{F}} $</formula>. with <formula id="269">$ J_{\mathcal{F}} $</formula> the Jacobian matrix.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the metric tensor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>metric_tensor A DTensor object containing the value of the metric tensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp" line="57" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp" bodystart="57" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classMetricTensorEvaluator_1a1756e929309a1af8757ef30bb1d2dbf6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; Dims, Dims &gt;</type>
+        <definition>KOKKOS_FUNCTION DTensor&lt; Dims, Dims &gt; MetricTensorEvaluator&lt; Mapping, PositionCoordinate &gt;::inverse</definition>
+        <argsstring>(PositionCoordinate const &amp;coord) const</argsstring>
+        <name>inverse</name>
+        <qualifiedname>MetricTensorEvaluator::inverse</qualifiedname>
+        <param>
+          <type>PositionCoordinate const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the inverse metric tensor associated with the mapping at a given position in space. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the metric tensor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>inverse_metric_tensor A DTensor object containing the value of the inverse of the metric tensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp" line="71" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp" bodystart="71" bodyend="76"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>An operator for calculating the metric tensor. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mapping providing the Jacobian operator. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>PositionCoordinate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate type where the metric tensor can be evaluated. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp" line="19" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp" bodystart="20" bodyend="77"/>
+    <listofallmembers>
+      <member refid="classMetricTensorEvaluator_1a7ca6db7787f9a6522e0123f7b00381eb" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>ContravariantVectorType</name></member>
+      <member refid="classMetricTensorEvaluator_1a963a1d9b3ed9d5fea6fff6f19a9c0ba2" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>CovariantVectorType</name></member>
+      <member refid="classMetricTensorEvaluator_1ad692758b51be7349b111b62c9fe8f1c1" prot="private" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>Dims</name></member>
+      <member refid="classMetricTensorEvaluator_1a40f45a1ab0cabb31398ed494efb20e14" prot="private" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>Dims_cov</name></member>
+      <member refid="classMetricTensorEvaluator_1a1756e929309a1af8757ef30bb1d2dbf6" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>inverse</name></member>
+      <member refid="classMetricTensorEvaluator_1a5f4e962eae51fbf5c0a48915001456ab" prot="private" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>m_mapping</name></member>
+      <member refid="classMetricTensorEvaluator_1aa9cc21d5dd3c74af9af9d1a270692612" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>MetricTensorEvaluator</name></member>
+      <member refid="classMetricTensorEvaluator_1a440ec0f675e0633e8b68cf23719ea125" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

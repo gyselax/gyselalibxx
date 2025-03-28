@@ -1,0 +1,616 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structIdxRangeSliceIterator" kind="struct" language="C++" prot="public">
+    <compoundname>IdxRangeSliceIterator</compoundname>
+    <includes refid="idx__range__slice_8hpp" local="no">idx_range_slice.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Grid1D</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structIdxRangeSliceIterator_1ae433765c9e433256f44fae63b22c8dd3" prot="public" static="no">
+        <type>std::random_access_iterator_tag</type>
+        <definition>using IdxRangeSliceIterator&lt; Grid1D &gt;::iterator_category =  std::random_access_iterator_tag</definition>
+        <argsstring></argsstring>
+        <name>iterator_category</name>
+        <qualifiedname>IdxRangeSliceIterator::iterator_category</qualifiedname>
+        <briefdescription>
+<para>The type of iterator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="254" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="254" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structIdxRangeSliceIterator_1aa3784446d2f1f986e069a084cec61160" prot="public" static="no">
+        <type>Idx&lt; Grid1D &gt;</type>
+        <definition>using IdxRangeSliceIterator&lt; Grid1D &gt;::value_type =  Idx&lt;Grid1D&gt;</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>IdxRangeSliceIterator::value_type</qualifiedname>
+        <briefdescription>
+<para>The type of the values stored in the iterator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="257" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="257" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structIdxRangeSliceIterator_1a186ef24babacb71c2a78f6966d82cdb2" prot="public" static="no">
+        <type>IdxStep&lt; Grid1D &gt;</type>
+        <definition>using IdxRangeSliceIterator&lt; Grid1D &gt;::stride_type =  IdxStep&lt;Grid1D&gt;</definition>
+        <argsstring></argsstring>
+        <name>stride_type</name>
+        <qualifiedname>IdxRangeSliceIterator::stride_type</qualifiedname>
+        <briefdescription>
+<para>The type of the stride between values. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="260" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="260" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structIdxRangeSliceIterator_1a96c7777c808fa57c6fa4da36a6e9830e" prot="public" static="no">
+        <type>std::ptrdiff_t</type>
+        <definition>using IdxRangeSliceIterator&lt; Grid1D &gt;::difference_type =  std::ptrdiff_t</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>IdxRangeSliceIterator::difference_type</qualifiedname>
+        <briefdescription>
+<para>The type that can be used to increment the iterator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="263" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="263" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structIdxRangeSliceIterator_1a721cdf4ac0eb28afcab2ac78bd415da1" prot="private" static="no" mutable="no">
+        <type>Idx&lt; Grid1D &gt;</type>
+        <definition>Idx&lt;Grid1D&gt; IdxRangeSliceIterator&lt; Grid1D &gt;::m_value</definition>
+        <argsstring></argsstring>
+        <name>m_value</name>
+        <qualifiedname>IdxRangeSliceIterator::m_value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="249" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="249" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structIdxRangeSliceIterator_1ac42ff01de66fca3012b218b35a2130a8" prot="private" static="no" mutable="no">
+        <type>IdxStep&lt; Grid1D &gt;</type>
+        <definition>IdxStep&lt;Grid1D&gt; IdxRangeSliceIterator&lt; Grid1D &gt;::m_stride</definition>
+        <argsstring></argsstring>
+        <name>m_stride</name>
+        <qualifiedname>IdxRangeSliceIterator::m_stride</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="250" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="250" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structIdxRangeSliceIterator_1a2f22d954e2203515d1e2f7af4e55eebb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>KOKKOS_DEFAULTED_FUNCTION</type>
+        <definition>KOKKOS_DEFAULTED_FUNCTION IdxRangeSliceIterator&lt; Grid1D &gt;::IdxRangeSliceIterator</definition>
+        <argsstring>()=default</argsstring>
+        <name>IdxRangeSliceIterator</name>
+        <qualifiedname>IdxRangeSliceIterator::IdxRangeSliceIterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="265" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="structIdxRangeSliceIterator_1a51e30a5240e788d2617746e1e0e3106a" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr</type>
+        <definition>KOKKOS_FUNCTION constexpr IdxRangeSliceIterator&lt; Grid1D &gt;::IdxRangeSliceIterator</definition>
+        <argsstring>(Idx&lt; Grid1D &gt; value, IdxStep&lt; Grid1D &gt; stride)</argsstring>
+        <name>IdxRangeSliceIterator</name>
+        <qualifiedname>IdxRangeSliceIterator::IdxRangeSliceIterator</qualifiedname>
+        <param>
+          <type>Idx&lt; Grid1D &gt;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>IdxStep&lt; Grid1D &gt;</type>
+          <declname>stride</declname>
+        </param>
+        <briefdescription>
+<para>Build an iterator using the current value and the distance to the following element. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value of the discrete sub-index range element. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The stride between consecutive sub-index range elements. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="273" column="40" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="273" bodyend="279"/>
+      </memberdef>
+      <memberdef kind="function" id="structIdxRangeSliceIterator_1aa0e84d0ad195d6b35f0d567da81b8ab8" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr Idx&lt; Grid1D &gt;</type>
+        <definition>KOKKOS_FUNCTION constexpr Idx&lt; Grid1D &gt; IdxRangeSliceIterator&lt; Grid1D &gt;::operator*</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>IdxRangeSliceIterator::operator*</qualifiedname>
+        <briefdescription>
+<para>Get the value referred to by the iterator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The value referred to by the iterator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="285" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="285" bodyend="288"/>
+      </memberdef>
+      <memberdef kind="function" id="structIdxRangeSliceIterator_1a428daf3ced0f82c06eb2a2c9eef543c6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr <ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref> &amp;</type>
+        <definition>KOKKOS_FUNCTION constexpr IdxRangeSliceIterator &amp; IdxRangeSliceIterator&lt; Grid1D &gt;::operator++</definition>
+        <argsstring>()</argsstring>
+        <name>operator++</name>
+        <qualifiedname>IdxRangeSliceIterator::operator++</qualifiedname>
+        <briefdescription>
+<para>The prefix increment operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A reference to the current incremented iterator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="294" column="53" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="294" bodyend="298"/>
+      </memberdef>
+      <memberdef kind="function" id="structIdxRangeSliceIterator_1a58387aeb6b23bade952ee6c6f17af075" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr <ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref></type>
+        <definition>KOKKOS_FUNCTION constexpr IdxRangeSliceIterator IdxRangeSliceIterator&lt; Grid1D &gt;::operator++</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator++</name>
+        <qualifiedname>IdxRangeSliceIterator::operator++</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+<para>The postfix increment operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A reference to the non-incremented iterator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="304" column="53" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="304" bodyend="309"/>
+      </memberdef>
+      <memberdef kind="function" id="structIdxRangeSliceIterator_1a54ae7139ec113bb5154889dd69c34459" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr <ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref> &amp;</type>
+        <definition>KOKKOS_FUNCTION constexpr IdxRangeSliceIterator &amp; IdxRangeSliceIterator&lt; Grid1D &gt;::operator--</definition>
+        <argsstring>()</argsstring>
+        <name>operator--</name>
+        <qualifiedname>IdxRangeSliceIterator::operator--</qualifiedname>
+        <briefdescription>
+<para>The prefix decrement operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A reference to the current decremented iterator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="315" column="53" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="315" bodyend="319"/>
+      </memberdef>
+      <memberdef kind="function" id="structIdxRangeSliceIterator_1aa5734dbd3f9f99ba7f354330a1f8fede" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr <ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref></type>
+        <definition>KOKKOS_FUNCTION constexpr IdxRangeSliceIterator IdxRangeSliceIterator&lt; Grid1D &gt;::operator--</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator--</name>
+        <qualifiedname>IdxRangeSliceIterator::operator--</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+<para>The postfix decrement operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A reference to the non-decremented iterator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="325" column="53" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="325" bodyend="330"/>
+      </memberdef>
+      <memberdef kind="function" id="structIdxRangeSliceIterator_1a7f68c5678b29c6091de746305c7c7807" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr <ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref> &amp;</type>
+        <definition>KOKKOS_FUNCTION constexpr IdxRangeSliceIterator &amp; IdxRangeSliceIterator&lt; Grid1D &gt;::operator+=</definition>
+        <argsstring>(difference_type n)</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>IdxRangeSliceIterator::operator+=</qualifiedname>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator_1a96c7777c808fa57c6fa4da36a6e9830e" kindref="member">difference_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>Increment the current iterator by n elements. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of strides by which the iterator should be incremented. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to the current incremented iterator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="337" column="53" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="337" bodyend="341"/>
+      </memberdef>
+      <memberdef kind="function" id="structIdxRangeSliceIterator_1aaf0b7e03e22115a3531bc5158986c5b6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr <ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref> &amp;</type>
+        <definition>KOKKOS_FUNCTION constexpr IdxRangeSliceIterator &amp; IdxRangeSliceIterator&lt; Grid1D &gt;::operator-=</definition>
+        <argsstring>(difference_type n)</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>IdxRangeSliceIterator::operator-=</qualifiedname>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator_1a96c7777c808fa57c6fa4da36a6e9830e" kindref="member">difference_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>Decrement the current iterator by n elements. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of strides by which the iterator should be decremented. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to the current decremented iterator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="348" column="53" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="348" bodyend="352"/>
+      </memberdef>
+      <memberdef kind="function" id="structIdxRangeSliceIterator_1a2fbcfc79ed570291cd4fe9ec34bdec60" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr Idx&lt; Grid1D &gt;</type>
+        <definition>KOKKOS_FUNCTION constexpr Idx&lt; Grid1D &gt; IdxRangeSliceIterator&lt; Grid1D &gt;::operator[]</definition>
+        <argsstring>(difference_type n) const</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>IdxRangeSliceIterator::operator[]</qualifiedname>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator_1a96c7777c808fa57c6fa4da36a6e9830e" kindref="member">difference_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>Access the n-th following element. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the element. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The Idx n-th position in the sub-index range following the value indicated by this iterator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="360" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="360" bodyend="363"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="structIdxRangeSliceIterator_1a407dc73b77575c1e846ba9c3f3cef165" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr bool</type>
+        <definition>KOKKOS_FUNCTION constexpr bool operator==</definition>
+        <argsstring>(IdxRangeSliceIterator const &amp;xx, IdxRangeSliceIterator const &amp;yy)</argsstring>
+        <name>operator==</name>
+        <qualifiedname>IdxRangeSliceIterator::operator==</qualifiedname>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref> const &amp;</type>
+          <declname>xx</declname>
+        </param>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref> const &amp;</type>
+          <declname>yy</declname>
+        </param>
+        <briefdescription>
+<para>Compare iterator equality. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="366" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="366" bodyend="371"/>
+      </memberdef>
+      <memberdef kind="friend" id="structIdxRangeSliceIterator_1a9c97b510fa95c83eb250ad2888d1614f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr bool</type>
+        <definition>KOKKOS_FUNCTION constexpr bool operator!=</definition>
+        <argsstring>(IdxRangeSliceIterator const &amp;xx, IdxRangeSliceIterator const &amp;yy)</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>IdxRangeSliceIterator::operator!=</qualifiedname>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref> const &amp;</type>
+          <declname>xx</declname>
+        </param>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref> const &amp;</type>
+          <declname>yy</declname>
+        </param>
+        <briefdescription>
+<para>Compare iterator non-equality. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="374" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="374" bodyend="379"/>
+      </memberdef>
+      <memberdef kind="friend" id="structIdxRangeSliceIterator_1adce70917996571583d5e289de0873794" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr bool</type>
+        <definition>KOKKOS_FUNCTION constexpr bool operator&lt;</definition>
+        <argsstring>(IdxRangeSliceIterator const &amp;xx, IdxRangeSliceIterator const &amp;yy)</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>IdxRangeSliceIterator::operator&lt;</qualifiedname>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref> const &amp;</type>
+          <declname>xx</declname>
+        </param>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref> const &amp;</type>
+          <declname>yy</declname>
+        </param>
+        <briefdescription>
+<para>Compare the order of iterators. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="382" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="382" bodyend="387"/>
+      </memberdef>
+      <memberdef kind="friend" id="structIdxRangeSliceIterator_1a1e37f4a4026b90bd62412946e907e0ad" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr bool</type>
+        <definition>KOKKOS_FUNCTION constexpr bool operator&gt;</definition>
+        <argsstring>(IdxRangeSliceIterator const &amp;xx, IdxRangeSliceIterator const &amp;yy)</argsstring>
+        <name>operator&gt;</name>
+        <qualifiedname>IdxRangeSliceIterator::operator&gt;</qualifiedname>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref> const &amp;</type>
+          <declname>xx</declname>
+        </param>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref> const &amp;</type>
+          <declname>yy</declname>
+        </param>
+        <briefdescription>
+<para>Compare the order of iterators. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="390" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="390" bodyend="395"/>
+      </memberdef>
+      <memberdef kind="friend" id="structIdxRangeSliceIterator_1a066cb10f031579b3c9416502f746def9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr bool</type>
+        <definition>KOKKOS_FUNCTION constexpr bool operator&lt;=</definition>
+        <argsstring>(IdxRangeSliceIterator const &amp;xx, IdxRangeSliceIterator const &amp;yy)</argsstring>
+        <name>operator&lt;=</name>
+        <qualifiedname>IdxRangeSliceIterator::operator&lt;=</qualifiedname>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref> const &amp;</type>
+          <declname>xx</declname>
+        </param>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref> const &amp;</type>
+          <declname>yy</declname>
+        </param>
+        <briefdescription>
+<para>Compare the order of iterators. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="398" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="398" bodyend="403"/>
+      </memberdef>
+      <memberdef kind="friend" id="structIdxRangeSliceIterator_1a0d6d96f92a4a45d06b6da3bbacadba5b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr bool</type>
+        <definition>KOKKOS_FUNCTION constexpr bool operator&gt;=</definition>
+        <argsstring>(IdxRangeSliceIterator const &amp;xx, IdxRangeSliceIterator const &amp;yy)</argsstring>
+        <name>operator&gt;=</name>
+        <qualifiedname>IdxRangeSliceIterator::operator&gt;=</qualifiedname>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref> const &amp;</type>
+          <declname>xx</declname>
+        </param>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref> const &amp;</type>
+          <declname>yy</declname>
+        </param>
+        <briefdescription>
+<para>Compare the order of iterators. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="406" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="406" bodyend="411"/>
+      </memberdef>
+      <memberdef kind="friend" id="structIdxRangeSliceIterator_1a72cd1010b51d205c6dfeb7d86c2a52cc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr <ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref></type>
+        <definition>KOKKOS_FUNCTION constexpr IdxRangeSliceIterator operator+</definition>
+        <argsstring>(IdxRangeSliceIterator i, difference_type n)</argsstring>
+        <name>operator+</name>
+        <qualifiedname>IdxRangeSliceIterator::operator+</qualifiedname>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref></type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator_1a96c7777c808fa57c6fa4da36a6e9830e" kindref="member">difference_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>Increment an iterator by n elements. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="414" column="60" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="414" bodyend="419"/>
+      </memberdef>
+      <memberdef kind="friend" id="structIdxRangeSliceIterator_1a9e1f33547deedae501feaeea8c1d6376" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr <ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref></type>
+        <definition>KOKKOS_FUNCTION constexpr IdxRangeSliceIterator operator+</definition>
+        <argsstring>(difference_type n, IdxRangeSliceIterator i)</argsstring>
+        <name>operator+</name>
+        <qualifiedname>IdxRangeSliceIterator::operator+</qualifiedname>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator_1a96c7777c808fa57c6fa4da36a6e9830e" kindref="member">difference_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref></type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+<para>Increment an iterator by n elements. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="422" column="60" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="422" bodyend="427"/>
+      </memberdef>
+      <memberdef kind="friend" id="structIdxRangeSliceIterator_1a50c6ca0cecd29fc2195cc18c9183a133" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr <ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref></type>
+        <definition>KOKKOS_FUNCTION constexpr IdxRangeSliceIterator operator-</definition>
+        <argsstring>(IdxRangeSliceIterator i, difference_type n)</argsstring>
+        <name>operator-</name>
+        <qualifiedname>IdxRangeSliceIterator::operator-</qualifiedname>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref></type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator_1a96c7777c808fa57c6fa4da36a6e9830e" kindref="member">difference_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>Decrement an iterator by n elements. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="430" column="60" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="430" bodyend="435"/>
+      </memberdef>
+      <memberdef kind="friend" id="structIdxRangeSliceIterator_1a5eb3d57f669cb12e33c94ba7c933bb8d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr <ref refid="structIdxRangeSliceIterator_1a96c7777c808fa57c6fa4da36a6e9830e" kindref="member">difference_type</ref></type>
+        <definition>KOKKOS_FUNCTION constexpr difference_type operator-</definition>
+        <argsstring>(IdxRangeSliceIterator const &amp;xx, IdxRangeSliceIterator const &amp;yy)</argsstring>
+        <name>operator-</name>
+        <qualifiedname>IdxRangeSliceIterator::operator-</qualifiedname>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref> const &amp;</type>
+          <declname>xx</declname>
+        </param>
+        <param>
+          <type><ref refid="structIdxRangeSliceIterator" kindref="compound">IdxRangeSliceIterator</ref> const &amp;</type>
+          <declname>yy</declname>
+        </param>
+        <briefdescription>
+<para>Decrement an iterator by n elements. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="438" column="54" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="438" bodyend="447"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>An iterator type for the <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="246" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="247" bodyend="448"/>
+    <listofallmembers>
+      <member refid="structIdxRangeSliceIterator_1a96c7777c808fa57c6fa4da36a6e9830e" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>difference_type</name></member>
+      <member refid="structIdxRangeSliceIterator_1a2f22d954e2203515d1e2f7af4e55eebb" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>IdxRangeSliceIterator</name></member>
+      <member refid="structIdxRangeSliceIterator_1a51e30a5240e788d2617746e1e0e3106a" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>IdxRangeSliceIterator</name></member>
+      <member refid="structIdxRangeSliceIterator_1ae433765c9e433256f44fae63b22c8dd3" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>iterator_category</name></member>
+      <member refid="structIdxRangeSliceIterator_1ac42ff01de66fca3012b218b35a2130a8" prot="private" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>m_stride</name></member>
+      <member refid="structIdxRangeSliceIterator_1a721cdf4ac0eb28afcab2ac78bd415da1" prot="private" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>m_value</name></member>
+      <member refid="structIdxRangeSliceIterator_1a9c97b510fa95c83eb250ad2888d1614f" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>operator!=</name></member>
+      <member refid="structIdxRangeSliceIterator_1aa0e84d0ad195d6b35f0d567da81b8ab8" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>operator*</name></member>
+      <member refid="structIdxRangeSliceIterator_1a72cd1010b51d205c6dfeb7d86c2a52cc" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>operator+</name></member>
+      <member refid="structIdxRangeSliceIterator_1a9e1f33547deedae501feaeea8c1d6376" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>operator+</name></member>
+      <member refid="structIdxRangeSliceIterator_1a428daf3ced0f82c06eb2a2c9eef543c6" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>operator++</name></member>
+      <member refid="structIdxRangeSliceIterator_1a58387aeb6b23bade952ee6c6f17af075" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>operator++</name></member>
+      <member refid="structIdxRangeSliceIterator_1a7f68c5678b29c6091de746305c7c7807" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>operator+=</name></member>
+      <member refid="structIdxRangeSliceIterator_1a50c6ca0cecd29fc2195cc18c9183a133" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>operator-</name></member>
+      <member refid="structIdxRangeSliceIterator_1a5eb3d57f669cb12e33c94ba7c933bb8d" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>operator-</name></member>
+      <member refid="structIdxRangeSliceIterator_1a54ae7139ec113bb5154889dd69c34459" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>operator--</name></member>
+      <member refid="structIdxRangeSliceIterator_1aa5734dbd3f9f99ba7f354330a1f8fede" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>operator--</name></member>
+      <member refid="structIdxRangeSliceIterator_1aaf0b7e03e22115a3531bc5158986c5b6" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>operator-=</name></member>
+      <member refid="structIdxRangeSliceIterator_1adce70917996571583d5e289de0873794" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>operator&lt;</name></member>
+      <member refid="structIdxRangeSliceIterator_1a066cb10f031579b3c9416502f746def9" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>operator&lt;=</name></member>
+      <member refid="structIdxRangeSliceIterator_1a407dc73b77575c1e846ba9c3f3cef165" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>operator==</name></member>
+      <member refid="structIdxRangeSliceIterator_1a1e37f4a4026b90bd62412946e907e0ad" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>operator&gt;</name></member>
+      <member refid="structIdxRangeSliceIterator_1a0d6d96f92a4a45d06b6da3bbacadba5b" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>operator&gt;=</name></member>
+      <member refid="structIdxRangeSliceIterator_1a2fbcfc79ed570291cd4fe9ec34bdec60" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>operator[]</name></member>
+      <member refid="structIdxRangeSliceIterator_1a186ef24babacb71c2a78f6966d82cdb2" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>stride_type</name></member>
+      <member refid="structIdxRangeSliceIterator_1aa3784446d2f1f986e069a084cec61160" prot="public" virt="non-virtual"><scope>IdxRangeSliceIterator</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

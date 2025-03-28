@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>File matrix_batch_csr.hpp - GyselalibX</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File matrix_batch_csr.hpp";
+        var mkdocs_page_input_path = "gyselalibxx/matrix__batch__csr_8hpp_source.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> GyselalibX
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">General</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/getting_started.html">Getting Started</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Installation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../docs/first_steps/install.html">Gyselalib++ Installation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../toolchains/index.html">Pre-made build settings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standards</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/mathematical_and_physical_conventions.html">Math & Physics</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Gyselalib++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Source</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../src/index.html">Gyselalib++ contents</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/advection/index.html">Advection methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/collisions/index.html">Collisions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/data_types/index.html">Data Storage Types</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryRTheta/index.html">Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection/index.html">Advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_field</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/geometry/index.html">Geometry RTheta</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/initialisation/index.html">Initialisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/poisson/index.html">Polar Poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_solver</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/time_solver/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryVparMu</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryVparMu/index.html">Geometry (vpar, mu)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/collisions/index.html">CollisionConfiguration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/geometry/index.html">GeometryVparMu</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXVx/index.html">Geometry (x, v_x)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >boltzmann</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/boltzmann/index.html">Boltzmann solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/geometry/index.html">Geometry X-Vx</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >rhs</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/rhs/index.html">RHS</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/utils/index.html">Utils</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXY/index.html">Geometry (x, y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/geometry/index.html">Geometry XY</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/initialisation/index.html">Initialisation on (x,y) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/time_integration/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXYVxVy</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXYVxVy/index.html">Geometry (x, y, v_x, v_y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/geometry/index.html">Geometry X Y-Vx Vy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vlasov</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/vlasov/index.html">Vlasov solver</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/interpolation/index.html">Interpolation Methods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/polar_splines/index.html">Polar Splines</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >io</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/io/index.html">Functions used for input and output</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mapping</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mapping/index.html">Mappings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >math_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/math_tools/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >matrix_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/matrix_tools/index.html">Matrix tools</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mpi_parallelisation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mpi_parallelisation/index.html">Parallelisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/multipatch/index.html">Multipatch</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >connectivity</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/connectivity/index.html">Multipatch connectivity</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/data_types/index.html">Data Types for Multipatch Geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/utils/index.html">Multipatch utilitary functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >quadrature</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/quadrature/index.html">Quadrature Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >speciesinfo</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/speciesinfo/index.html">SpeciesInfo (x, v_x)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >timestepper</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/timestepper/index.html">Time Stepping Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/utils/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Simulations</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../simulations/index.html">Gyselalib++ simulations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryRTheta/index.html">Simulations in (r, theta) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >diocotron</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/diocotron/index.html">Diocotron instability</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vortex_merger</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/vortex_merger/index.html">Vortex merger</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXVx/index.html">Simulations in (x, vx) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXY/index.html">Simulations in (x, y) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >guiding_centre</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryXY/guiding_centre/index.html">Guiding centre (X,Y) simulation</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tests</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../tests/index.html">Gyselalib++ tests</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/advection/index.html">Tests on the templated advection operators</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/geometryRTheta/index.html">Tests : Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/advection_rtheta/index.html">Tests on the 2D polar advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/polar_poisson/index.html">Tests on the 2D polar poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline_interpolator_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/spline_interpolator_rtheta/index.html">Tests on spline interpolator in polar coordinates</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/multipatch/index.html">Multipatch geometry tests</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometries</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/multipatch/geometries/index.html">Multipatch geometries</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Adding_docs.html">Adding Docs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Using_git.html">Using Git</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Gyselalib++</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" >Classes</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="annotated.html">Class List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="classes.html">Class Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="hierarchy.html">Class Hierarchy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Namespaces</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="namespaces.html">Namespace List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_members.html">Namespace Members</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_functions.html">Namespace Member Functions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_variables.html">Namespace Member Variables</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_typedefs.html">Namespace Member Typedefs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_enums.html">Namespace Member Enumerations</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="macros.html">Macros</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="files.html">Files</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">GyselalibX</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File matrix_batch_csr.hpp</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/gyselax/gyselalibxx/edit/master/docs/gyselalibxx/matrix__batch__csr_8hpp_source.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div><h1 id="file-matrix_batch_csrhpp">File matrix_batch_csr.hpp</h1>
+<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_8cedd1260cc2f2819c8df2fc66ad98b5.html"><strong>matrix_tools</strong></a> <strong>&gt;</strong> <a href="matrix__batch__csr_8hpp.html"><strong>matrix_batch_csr.hpp</strong></a></p>
+<p><a href="matrix__batch__csr_8hpp.html">Go to the documentation of this file</a></p>
+<pre><code class="language-C++">// SPDX-License-Identifier: MIT
+#pragma once
+
+#include &lt;ginkgo/extensions/kokkos.hpp&gt;
+#include &lt;ginkgo/ginkgo.hpp&gt;
+
+#include &lt;Kokkos_Core.hpp&gt;
+
+#include "matrix_batch.hpp"
+#include "matrix_utils.hpp"
+
+enum class MatrixBatchCsrSolver { CG, BICGSTAB, BATCH_CG, BATCH_BICGSTAB };
+
+template &lt;class ExecSpace, MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver::BICGSTAB&gt;
+class MatrixBatchCsr : public MatrixBatch&lt;ExecSpace&gt;
+{
+public:
+    using typename MatrixBatch&lt;ExecSpace&gt;::BatchedRHS;
+    using MatrixBatch&lt;ExecSpace&gt;::size;
+    using MatrixBatch&lt;ExecSpace&gt;::batch_size;
+
+private:
+    using batch_sparse_type = gko::batch::matrix::Csr&lt;double, int&gt;;
+    using solver_type = std::conditional_t&lt;
+            Solver == MatrixBatchCsrSolver::CG,
+            gko::solver::Cg&lt;double&gt;,
+            std::conditional_t&lt;
+                    Solver == MatrixBatchCsrSolver::BICGSTAB,
+                    gko::solver::Bicgstab&lt;double&gt;,
+                    std::conditional_t&lt;
+                            Solver == MatrixBatchCsrSolver::BATCH_CG,
+                            gko::batch::solver::Cg&lt;double&gt;,
+                            gko::batch::solver::Bicgstab&lt;double&gt;&gt;&gt;&gt;;
+
+    std::shared_ptr&lt;batch_sparse_type&gt; m_batch_matrix_csr;
+    std::conditional_t&lt;
+            Solver == MatrixBatchCsrSolver::CG || Solver == MatrixBatchCsrSolver::BICGSTAB,
+            std::vector&lt;std::shared_ptr&lt;solver_type&gt;&gt;,
+            std::shared_ptr&lt;solver_type&gt;&gt;
+            m_solver;
+    int m_max_iter;
+    double m_tol;
+    bool m_with_logger;
+    unsigned int m_preconditionner_max_block_size; // Maximum size of Jacobi-block preconditionner
+
+public:
+    explicit MatrixBatchCsr(
+            const int batch_size,
+            const int mat_size,
+            const int nnz_per_system,
+            std::optional&lt;int&gt; max_iter = std::nullopt,
+            std::optional&lt;double&gt; res_tol = std::nullopt,
+            std::optional&lt;bool&gt; logger = std::nullopt,
+            std::optional&lt;int&gt; preconditionner_max_block_size = 1u)
+        : MatrixBatch&lt;ExecSpace&gt;(batch_size, mat_size)
+        , m_max_iter(max_iter.value_or(1000))
+        , m_tol(res_tol.value_or(1e-15))
+        , m_with_logger(logger.value_or(false))
+        , m_preconditionner_max_block_size(preconditionner_max_block_size.value_or(
+                  default_preconditionner_max_block_size&lt;ExecSpace&gt;()))
+    {
+        std::shared_ptr const gko_exec = gko::ext::kokkos::create_executor(ExecSpace());
+        m_batch_matrix_csr = gko::share(
+                batch_sparse_type::
+                        create(gko_exec,
+                               gko::batch_dim&lt;2&gt;(batch_size, gko::dim&lt;2&gt;(mat_size, mat_size)),
+                               nnz_per_system));
+    }
+
+    explicit MatrixBatchCsr(
+            Kokkos::View&lt;double**, Kokkos::LayoutRight, ExecSpace&gt; batch_values,
+            Kokkos::View&lt;int*, Kokkos::LayoutRight, ExecSpace&gt; cols_idx,
+            Kokkos::View&lt;int*, Kokkos::LayoutRight, ExecSpace&gt; nnz_per_row,
+            std::optional&lt;int&gt; max_iter = std::nullopt,
+            std::optional&lt;double&gt; res_tol = std::nullopt,
+            std::optional&lt;bool&gt; logger = std::nullopt,
+            std::optional&lt;int&gt; preconditionner_max_block_size = 1u)
+        : MatrixBatch&lt;ExecSpace&gt;(batch_values.extent(0), nnz_per_row.size() - 1)
+        , m_max_iter(max_iter.value_or(1000))
+        , m_tol(res_tol.value_or(1e-15))
+        , m_with_logger(logger.value_or(false))
+        , m_preconditionner_max_block_size(preconditionner_max_block_size.value_or(
+                  default_preconditionner_max_block_size&lt;ExecSpace&gt;()))
+    {
+        std::shared_ptr const gko_exec = gko::ext::kokkos::create_executor(ExecSpace());
+        m_batch_matrix_csr = gko::share(
+                batch_sparse_type::
+                        create(gko_exec,
+                               gko::batch_dim&lt;2&gt;(batch_size(), gko::dim&lt;2&gt;(size(), size())),
+                               std::move(gko::array&lt;double&gt;::
+                                                 view(gko_exec,
+                                                      batch_values.span(),
+                                                      batch_values.data())),
+                               std::move(gko::array&lt;
+                                         int&gt;::view(gko_exec, cols_idx.span(), cols_idx.data())),
+                               std::move(gko::array&lt;int&gt;::
+                                                 view(gko_exec,
+                                                      nnz_per_row.span(),
+                                                      nnz_per_row.data()))));
+    }
+
+    std::tuple&lt;
+            Kokkos::View&lt;double**, Kokkos::LayoutRight, ExecSpace&gt;,
+            Kokkos::View&lt;int*, Kokkos::LayoutRight, ExecSpace&gt;,
+            Kokkos::View&lt;int*, Kokkos::LayoutRight, ExecSpace&gt;&gt;
+    get_batch_csr()
+    {
+        int* idx_buffer = m_batch_matrix_csr-&gt;get_col_idxs();
+        int* nnz_per_row_buffer = m_batch_matrix_csr-&gt;get_row_ptrs();
+        double* vals_buffer = m_batch_matrix_csr-&gt;get_values();
+
+        Kokkos::View&lt;int*, Kokkos::LayoutRight, ExecSpace&gt;
+                col_idx_view_buffer(idx_buffer, m_batch_matrix_csr-&gt;get_num_elements_per_item());
+        Kokkos::View&lt;int*, Kokkos::LayoutRight, ExecSpace&gt;
+                nnz_per_row_view_buffer(nnz_per_row_buffer, size() + 1);
+        Kokkos::View&lt;double**, Kokkos::LayoutRight, ExecSpace&gt; vals_view_buffer(
+                vals_buffer,
+                batch_size(),
+                m_batch_matrix_csr-&gt;get_num_elements_per_item());
+
+        return {vals_view_buffer, col_idx_view_buffer, nnz_per_row_view_buffer};
+    }
+
+    void setup_solver() final
+    {
+        std::shared_ptr const gko_exec = m_batch_matrix_csr-&gt;get_executor();
+        //Check if the indices array is sorted, and sort it if necessary.
+        //The values array corresponding to the indices is also reordered.
+        for (size_t i = 0; i &lt; batch_size(); i++) {
+            std::unique_ptr&lt;gko::matrix::Csr&lt;double, int&gt;&gt; tmp_matrix
+                    = m_batch_matrix_csr-&gt;create_view_for_item(i);
+            if (!tmp_matrix-&gt;is_sorted_by_column_index()) {
+                tmp_matrix-&gt;sort_by_column_index();
+            }
+        }
+        if constexpr (
+                Solver == MatrixBatchCsrSolver::CG || Solver == MatrixBatchCsrSolver::BICGSTAB) {
+            // Create the solver factory
+            std::shared_ptr const residual_criterion
+                    = gko::stop::ResidualNorm&lt;double&gt;::build().with_reduction_factor(m_tol).on(
+                            gko_exec);
+
+            std::shared_ptr const iterations_criterion
+                    = gko::stop::Iteration::build().with_max_iters(m_max_iter).on(gko_exec);
+
+            std::shared_ptr const preconditioner
+                    = gko::preconditioner::Jacobi&lt;double&gt;::build()
+                              .with_max_block_size(m_preconditionner_max_block_size)
+                              .on(gko_exec);
+
+            std::unique_ptr const solver_factory
+                    = solver_type::build()
+                              .with_preconditioner(preconditioner)
+                              .with_criteria(residual_criterion, iterations_criterion)
+                              .on(gko_exec);
+
+            // Create the solvers
+            for (size_t i = 0; i &lt; batch_size(); i++) {
+                m_solver.emplace_back(solver_factory-&gt;generate(
+                        m_batch_matrix_csr-&gt;create_const_view_for_item(i)));
+            }
+        } else {
+            // Create the solver factory
+            std::shared_ptr const preconditioner
+                    = gko::batch::preconditioner::Jacobi&lt;double, int&gt;::build()
+                              .with_max_block_size(m_preconditionner_max_block_size)
+                              .on(gko_exec);
+
+            std::shared_ptr solver_factory = solver_type::build()
+                                                     .with_max_iterations(m_max_iter)
+                                                     .with_tolerance(m_tol)
+                                                     .with_preconditioner(preconditioner)
+                                                     .on(gko_exec);
+
+            // Create the solver
+            m_solver = solver_factory-&gt;generate(m_batch_matrix_csr);
+        }
+        gko_exec-&gt;synchronize();
+    }
+
+    void solve(BatchedRHS const b) const final
+    {
+        BatchedRHS x_view("x_view", batch_size(), size());
+        Kokkos::deep_copy(x_view, b);
+        solve(x_view, b);
+        Kokkos::deep_copy(b, x_view);
+    }
+
+    void solve(BatchedRHS const x, BatchedRHS const b) const
+    {
+        if constexpr (
+                Solver == MatrixBatchCsrSolver::CG || Solver == MatrixBatchCsrSolver::BICGSTAB) {
+            for (size_t i = 0; i &lt; batch_size(); i++) {
+                std::shared_ptr const gko_exec = m_solver[i]-&gt;get_executor();
+
+                // Create a logger to obtain the iteration counts and "implicit" residual norms for every system after the solve.
+                std::shared_ptr const logger = gko::log::Convergence&lt;double&gt;::create();
+
+                // Solve &amp; log
+                m_solver[i]-&gt;add_logger(logger);
+                m_solver[i]
+                        -&gt;apply(to_gko_multivector(gko_exec, b)-&gt;create_const_view_for_item(i),
+                                to_gko_multivector(gko_exec, x)-&gt;create_view_for_item(i));
+                m_solver[i]-&gt;remove_logger(logger);
+                // save logger data
+                if (m_with_logger) {
+                    std::fstream log_file("csr_log.txt", std::ios::out | std::ios::app);
+                    save_logger(
+                            log_file,
+                            i,
+                            m_batch_matrix_csr-&gt;create_const_view_for_item(i),
+                            Kokkos::subview(x, i, Kokkos::ALL),
+                            Kokkos::subview(b, i, Kokkos::ALL),
+                            logger,
+                            m_tol);
+                    log_file.close();
+                }
+                // Check convergency
+                if (!logger-&gt;has_converged()) {
+                    throw std::runtime_error("Ginkgo did not converge in MatrixBatchCsr");
+                }
+            }
+        } else {
+            std::shared_ptr const gko_exec = m_solver-&gt;get_executor();
+
+            // Create a logger to obtain the iteration counts and "implicit" residual norms for every system after the solve.
+            std::shared_ptr const logger = gko::batch::log::BatchConvergence&lt;double&gt;::create();
+
+            // Solve &amp; log
+            m_solver-&gt;add_logger(logger);
+            m_solver-&gt;apply(to_gko_multivector(gko_exec, b), to_gko_multivector(gko_exec, x));
+            m_solver-&gt;remove_logger(logger);
+
+            // Save logger data
+            if (m_with_logger) {
+                std::fstream log_file("csr_log.txt", std::ios::out | std::ios::app);
+                save_logger(log_file, m_batch_matrix_csr, x, b, logger, m_tol);
+                log_file.close();
+            }
+            // Check convergence
+            check_conv(batch_size(), m_tol, gko_exec, logger);
+        }
+    }
+
+    double norm(int batch_idx) const
+    {
+        int const tmp_mat_size = size();
+        int const tmp_batch_size = batch_size();
+        double result = 0.;
+        double* vals_proxy = m_batch_matrix_csr-&gt;get_values();
+        int* row_ptr_proxy = m_batch_matrix_csr-&gt;get_row_ptrs();
+        Kokkos::View&lt;double**, Kokkos::LayoutRight, typename ExecSpace::memory_space&gt; vals_view(
+                vals_proxy,
+                tmp_batch_size,
+                m_batch_matrix_csr-&gt;get_num_elements_per_item());
+        Kokkos::View&lt;int*, Kokkos::LayoutRight, typename ExecSpace::memory_space&gt;
+                row_ptr_view(row_ptr_proxy, tmp_mat_size + 1);
+
+        Kokkos::parallel_reduce(
+                "L-infinity norm",
+                Kokkos::RangePolicy&lt;ExecSpace&gt;(0, tmp_mat_size),
+                KOKKOS_LAMBDA(int const i, double&amp; res) {
+                    double row_sum = 0.;
+                    for (int k = row_ptr_view[i]; k &lt; row_ptr_view[i + 1]; k++) {
+                        row_sum += Kokkos::abs(vals_view(batch_idx, k));
+                    }
+                    if (row_sum &gt; res) {
+                        res = row_sum;
+                    }
+                },
+                Kokkos::Max&lt;double&gt;(result));
+
+        return result;
+    }
+};
+
+template &lt;MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver::BICGSTAB&gt;
+void convert_coo_to_csr(
+        std::unique_ptr&lt;MatrixBatchCsr&lt;Kokkos::DefaultExecutionSpace, Solver&gt;&gt;&amp; matrix,
+        Kokkos::View&lt;double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace&gt; vals_coo_host,
+        Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace&gt; row_coo_host,
+        Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace&gt; col_coo_host)
+{
+    int const mat_size = matrix-&gt;size();
+    int const batch_size = matrix-&gt;batch_size();
+    int const non_zero_per_system = vals_coo_host.extent(0) / batch_size;
+
+    Kokkos::View&lt;double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace&gt;
+            values_view_host("", batch_size, non_zero_per_system);
+    Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace&gt;
+            idx_view_host("", non_zero_per_system);
+    Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace&gt;
+            nnz_per_row_view_host("", mat_size + 1);
+    nnz_per_row_view_host(0) = 0;
+    nnz_per_row_view_host(mat_size) = non_zero_per_system;
+
+    for (int i = 0; i &lt; mat_size; i++) {
+        int n_non_zero_in_row = 0;
+        for (int k = 0; k &lt; non_zero_per_system; k++) {
+            if (row_coo_host(k) == i) {
+                int const idx = nnz_per_row_view_host(i) + n_non_zero_in_row;
+                idx_view_host(idx) = col_coo_host(k);
+                values_view_host(0, idx) = vals_coo_host(k);
+                n_non_zero_in_row++;
+            }
+        }
+        nnz_per_row_view_host(i + 1) = nnz_per_row_view_host(i) + n_non_zero_in_row;
+    }
+    for (int batch_idx = 1; batch_idx &lt; batch_size; batch_idx++) {
+        for (int idx = 0; idx &lt; non_zero_per_system; idx++) {
+            values_view_host(batch_idx, idx) = vals_coo_host(batch_idx * non_zero_per_system + idx);
+        }
+    }
+    auto [values, col_idx, nnz_per_row] = matrix-&gt;get_batch_csr();
+    Kokkos::deep_copy(values, values_view_host);
+    Kokkos::deep_copy(col_idx, idx_view_host);
+    Kokkos::deep_copy(nnz_per_row, nnz_per_row_view_host);
+}
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/gyselax/gyselalibxx/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../docs/jscript/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

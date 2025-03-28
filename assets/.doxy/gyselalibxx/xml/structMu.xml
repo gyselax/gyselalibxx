@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structMu" kind="struct" language="C++" prot="public">
+    <compoundname>Mu</compoundname>
+    <includes refid="geometryVparMu_2geometry_2geometry_8hpp" local="no">geometry.hpp</includes>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structMu_1a1bbcdcd9e3b01b083631930c83c726c3" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>bool constexpr</type>
+        <definition>bool constexpr Mu::PERIODIC</definition>
+        <argsstring></argsstring>
+        <name>PERIODIC</name>
+        <qualifiedname>Mu::PERIODIC</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The periodicity of the magnetic momentum. This is a compile time constant which allows the code to avoid unnecessary if conditions. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry.hpp" line="38" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Define non periodic magnetic momentum <formula id="137">$\mu$</formula>. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry.hpp" line="31" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry.hpp" bodystart="32" bodyend="39"/>
+    <listofallmembers>
+      <member refid="structMu_1a1bbcdcd9e3b01b083631930c83c726c3" prot="public" virt="non-virtual"><scope>Mu</scope><name>PERIODIC</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

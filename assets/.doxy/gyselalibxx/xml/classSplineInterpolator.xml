@@ -1,0 +1,440 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classSplineInterpolator" kind="class" language="C++" prot="public">
+    <compoundname>SplineInterpolator</compoundname>
+    <basecompoundref refid="classIInterpolator" prot="public" virt="non-virtual">IInterpolator&lt; GridInterp, Grid1D... &gt;</basecompoundref>
+    <includes refid="spline__interpolator_8hpp" local="no">spline_interpolator.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class GridInterp</type>
+      </param>
+      <param>
+        <type>class BSplines</type>
+      </param>
+      <param>
+        <type>ddc::BoundCond</type>
+        <declname>BcMin</declname>
+        <defname>BcMin</defname>
+      </param>
+      <param>
+        <type>ddc::BoundCond</type>
+        <declname>BcMax</declname>
+        <defname>BcMax</defname>
+      </param>
+      <param>
+        <type>class LeftExtrapolationRule</type>
+      </param>
+      <param>
+        <type>class RightExtrapolationRule</type>
+      </param>
+      <param>
+        <type>ddc::SplineSolver</type>
+        <declname>Solver</declname>
+        <defname>Solver</defname>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>Grid1D</declname>
+        <defname>Grid1D</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSplineInterpolator_1a4f7e35cdf39b3329a3bb5fe774ac9bef" prot="private" static="no">
+        <type>ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplines, GridInterp, BcMin, BcMax, Solver, Grid1D... &gt;</type>
+        <definition>using SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;::BuilderType =  ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplines, GridInterp, BcMin, BcMax, Solver, Grid1D...&gt;</definition>
+        <argsstring></argsstring>
+        <name>BuilderType</name>
+        <qualifiedname>SplineInterpolator::BuilderType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineInterpolator_1ad1451b74f5827de1b4f253f388232f71" prot="private" static="no">
+        <type>ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplines, GridInterp, LeftExtrapolationRule, RightExtrapolationRule, Grid1D... &gt;</type>
+        <definition>using SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;::EvaluatorType =  ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplines, GridInterp, LeftExtrapolationRule, RightExtrapolationRule, Grid1D...&gt;</definition>
+        <argsstring></argsstring>
+        <name>EvaluatorType</name>
+        <qualifiedname>SplineInterpolator::EvaluatorType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineInterpolator_1a1f4ea33c0cb2a9ecb4658c7f536843b7" prot="private" static="no">
+        <type>typename <ref refid="classIInterpolator" kindref="compound">IInterpolator</ref>&lt; GridInterp, Grid1D... &gt;::deriv_type</type>
+        <definition>using SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;::deriv_type =  typename IInterpolator&lt;GridInterp, Grid1D...&gt;::deriv_type</definition>
+        <argsstring></argsstring>
+        <name>deriv_type</name>
+        <qualifiedname>SplineInterpolator::deriv_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" line="50" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineInterpolator_1a604d2cc6f28885bf7120179bb5a4b2d9" prot="private" static="no">
+        <type>typename <ref refid="classIInterpolator" kindref="compound">IInterpolator</ref>&lt; GridInterp, Grid1D... &gt;::batched_derivs_idx_range_type</type>
+        <definition>using SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;::batched_derivs_idx_range_type =  typename IInterpolator&lt;GridInterp, Grid1D...&gt;::batched_derivs_idx_range_type</definition>
+        <argsstring></argsstring>
+        <name>batched_derivs_idx_range_type</name>
+        <qualifiedname>SplineInterpolator::batched_derivs_idx_range_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineInterpolator_1af5914284e726e43516db72af11a57c30" prot="private" static="no">
+        <type>ConstField&lt; double, batched_derivs_idx_range_type &gt;</type>
+        <definition>using SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;::batched_deriv_field_type =  ConstField&lt;double, batched_derivs_idx_range_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>batched_deriv_field_type</name>
+        <qualifiedname>SplineInterpolator::batched_deriv_field_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSplineInterpolator_1a0e1dfe63670f3c0718d65876731658c6" prot="private" static="no" mutable="no">
+        <type>BuilderType const  &amp;</type>
+        <definition>BuilderType const&amp; SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;::m_builder</definition>
+        <argsstring></argsstring>
+        <name>m_builder</name>
+        <qualifiedname>SplineInterpolator::m_builder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" line="56" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSplineInterpolator_1adb3b5587324525081ce954deb739dcf9" prot="private" static="no" mutable="no">
+        <type>EvaluatorType const  &amp;</type>
+        <definition>EvaluatorType const&amp; SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;::m_evaluator</definition>
+        <argsstring></argsstring>
+        <name>m_evaluator</name>
+        <qualifiedname>SplineInterpolator::m_evaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" line="58" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSplineInterpolator_1a1ab4b24a041f3ff68b96acfeb6e9db4a" prot="private" static="no" mutable="yes">
+        <type>DFieldMem&lt; typename BuilderType::batched_spline_domain_type &gt;</type>
+        <definition>DFieldMem&lt;typename BuilderType::batched_spline_domain_type&gt; SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;::m_coefs</definition>
+        <argsstring></argsstring>
+        <name>m_coefs</name>
+        <qualifiedname>SplineInterpolator::m_coefs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" line="60" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSplineInterpolator_1a59381462373a38935329febd6950bed0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;::SplineInterpolator</definition>
+        <argsstring>(BuilderType const &amp;builder, EvaluatorType const &amp;evaluator)</argsstring>
+        <name>SplineInterpolator</name>
+        <qualifiedname>SplineInterpolator::SplineInterpolator</qualifiedname>
+        <param>
+          <type>BuilderType const &amp;</type>
+          <declname>builder</declname>
+        </param>
+        <param>
+          <type>EvaluatorType const &amp;</type>
+          <declname>evaluator</declname>
+        </param>
+        <briefdescription>
+<para>Create a spline interpolator object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">builder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An operator which builds spline coefficients from the values of a function at known interpolation points. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An operator which evaluates the value of a spline at requested coordinates. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" bodystart="69" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classSplineInterpolator_1abe4759eae637affa7603da612bb9d5b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;::~SplineInterpolator</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~SplineInterpolator</name>
+        <qualifiedname>SplineInterpolator::~SplineInterpolator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" line="76" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classSplineInterpolator_1a9cfc0e637f271993f61b0270d12e5703" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>batched_derivs_idx_range_type</type>
+        <definition>batched_derivs_idx_range_type SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;::batched_derivs_idx_range_xmin</definition>
+        <argsstring>(IdxRange&lt; Grid1D... &gt; idx_range) const override</argsstring>
+        <name>batched_derivs_idx_range_xmin</name>
+        <qualifiedname>SplineInterpolator::batched_derivs_idx_range_xmin</qualifiedname>
+        <reimplements refid="classIInterpolator_1af664c9db9a794fb1f199ff31f8673bf8">batched_derivs_idx_range_xmin</reimplements>
+        <param>
+          <type>IdxRange&lt; Grid1D... &gt;</type>
+          <declname>idx_range</declname>
+        </param>
+        <briefdescription>
+<para>Get the batched derivs index range on lower boundaries. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Dimension of interest IDimI is replaced with ddc::Deriv&lt;IDimI::continuous_dimensions_type&gt;. This is the index range on which derivatives on lower boundaries are defined.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range of a single-species distribution function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>idx_range The lower boundaries of this index range. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" line="78" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" bodystart="78" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classSplineInterpolator_1ab7b38622e403a5a5dc9e09d737a9dfe8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>batched_derivs_idx_range_type</type>
+        <definition>batched_derivs_idx_range_type SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;::batched_derivs_idx_range_xmax</definition>
+        <argsstring>(IdxRange&lt; Grid1D... &gt; idx_range) const override</argsstring>
+        <name>batched_derivs_idx_range_xmax</name>
+        <qualifiedname>SplineInterpolator::batched_derivs_idx_range_xmax</qualifiedname>
+        <reimplements refid="classIInterpolator_1a14f07a9a9cd43939de6acd999d25c195">batched_derivs_idx_range_xmax</reimplements>
+        <param>
+          <type>IdxRange&lt; Grid1D... &gt;</type>
+          <declname>idx_range</declname>
+        </param>
+        <briefdescription>
+<para>Get the batched derivs index range on upper boundaries. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Dimension of interest IDimI is replaced with ddc::Deriv&lt;IDimI::continuous_dimensions_type&gt;. This is the index range on which derivatives on upper boundaries are defined.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range of a single-species distribution function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>idx_range The upper boundaries of this index range. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" line="88" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" bodystart="88" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classSplineInterpolator_1a39f32a67cd5be9f26c7dafdb8e33ecaf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt;</type>
+        <definition>Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt; SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;::operator()</definition>
+        <argsstring>(Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt; const inout_data, ConstField&lt; Coord&lt; typename GridInterp::continuous_dimension_type &gt;, IdxRange&lt; Grid1D... &gt; &gt; const coordinates, std::optional&lt; batched_deriv_field_type &gt; derivs_xmin=std::nullopt, std::optional&lt; batched_deriv_field_type &gt; derivs_xmax=std::nullopt) const override</argsstring>
+        <name>operator()</name>
+        <qualifiedname>SplineInterpolator::operator()</qualifiedname>
+        <param>
+          <type>Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt; const</type>
+          <declname>inout_data</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; Coord&lt; typename GridInterp::continuous_dimension_type &gt;, IdxRange&lt; Grid1D... &gt; &gt; const</type>
+          <declname>coordinates</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; batched_deriv_field_type &gt;</type>
+          <declname>derivs_xmin</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <param>
+          <type>std::optional&lt; batched_deriv_field_type &gt;</type>
+          <declname>derivs_xmax</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <briefdescription>
+<para>Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">inout_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On input: an array containing the value of the function at the interpolation points. On output: an array containing the value of the function at the coordinates. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coordinates</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinates where the function should be evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">derivs_xmin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The values of the derivatives at the lower boundary (used only with ddc::BoundCond::HERMITE lower boundary condition). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">derivs_xmax</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The values of the derivatives at the upper boundary (used only with ddc::BoundCond::HERMITE upper boundary condition).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to the inout_data array containing the value of the function at the coordinates. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" line="112" column="11" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" bodystart="112" bodyend="123"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class for interpolating a function using splines. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The class is parametrised by multiple template parameters. Please note that CTAD will deduce all these template parameters from the Builder and Evaluator passed as constructor arguments.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>GridInterp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimension over which we interpolate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BSplines</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The BSplines along the dimension of interest. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BcMin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The boundary condition at the lower boundary. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BcMax</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The boundary condition at the upper boundary. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Grid1D...</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>All the dimensions of the interpolation problem (batched + interpolated). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>IInterpolator&lt; GridInterp, Grid1D... &gt;</label>
+        <link refid="classIInterpolator"/>
+      </node>
+      <node id="1">
+        <label>SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;</label>
+        <link refid="classSplineInterpolator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>IInterpolator&lt; GridInterp, Grid1D... &gt;</label>
+        <link refid="classIInterpolator"/>
+      </node>
+      <node id="1">
+        <label>SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;</label>
+        <link refid="classSplineInterpolator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" line="31" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" bodystart="32" bodyend="124"/>
+    <listofallmembers>
+      <member refid="classSplineInterpolator_1af5914284e726e43516db72af11a57c30" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>batched_deriv_field_type</name></member>
+      <member refid="classSplineInterpolator_1a604d2cc6f28885bf7120179bb5a4b2d9" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>batched_derivs_idx_range_type</name></member>
+      <member refid="classSplineInterpolator_1ab7b38622e403a5a5dc9e09d737a9dfe8" prot="public" virt="virtual"><scope>SplineInterpolator</scope><name>batched_derivs_idx_range_xmax</name></member>
+      <member refid="classSplineInterpolator_1a9cfc0e637f271993f61b0270d12e5703" prot="public" virt="virtual"><scope>SplineInterpolator</scope><name>batched_derivs_idx_range_xmin</name></member>
+      <member refid="classSplineInterpolator_1a4f7e35cdf39b3329a3bb5fe774ac9bef" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>BuilderType</name></member>
+      <member refid="classSplineInterpolator_1a1f4ea33c0cb2a9ecb4658c7f536843b7" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>deriv_type</name></member>
+      <member refid="classSplineInterpolator_1ad1451b74f5827de1b4f253f388232f71" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>EvaluatorType</name></member>
+      <member refid="classSplineInterpolator_1a0e1dfe63670f3c0718d65876731658c6" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>m_builder</name></member>
+      <member refid="classSplineInterpolator_1a1ab4b24a041f3ff68b96acfeb6e9db4a" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>m_coefs</name></member>
+      <member refid="classSplineInterpolator_1adb3b5587324525081ce954deb739dcf9" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>m_evaluator</name></member>
+      <member refid="classSplineInterpolator_1a39f32a67cd5be9f26c7dafdb8e33ecaf" prot="public" virt="non-virtual"><scope>SplineInterpolator</scope><name>operator()</name></member>
+      <member refid="classIInterpolator_1a83d8113fe207f0d87a240f6ae3f99498" prot="public" virt="pure-virtual" ambiguityscope="IInterpolator&lt; GridInterp, Grid1D... &gt;::"><scope>SplineInterpolator</scope><name>operator()</name></member>
+      <member refid="classSplineInterpolator_1a59381462373a38935329febd6950bed0" prot="public" virt="non-virtual"><scope>SplineInterpolator</scope><name>SplineInterpolator</name></member>
+      <member refid="classIInterpolator_1a8cd2160d82f63450c0278568408fc892" prot="public" virt="virtual"><scope>SplineInterpolator</scope><name>~IInterpolator</name></member>
+      <member refid="classSplineInterpolator_1abe4759eae637affa7603da612bb9d5b7" prot="public" virt="non-virtual"><scope>SplineInterpolator</scope><name>~SplineInterpolator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

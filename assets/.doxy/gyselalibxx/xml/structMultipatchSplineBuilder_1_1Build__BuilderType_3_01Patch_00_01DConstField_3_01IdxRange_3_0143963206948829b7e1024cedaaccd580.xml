@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structMultipatchSplineBuilder_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_0143963206948829b7e1024cedaaccd580" kind="struct" language="C++" prot="private">
+    <compoundname>MultipatchSplineBuilder::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>Grid1D</declname>
+        <defname>Grid1D</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structMultipatchSplineBuilder_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_0143963206948829b7e1024cedaaccd580_1a155090792cc0705db6da46b99a094c7c" prot="public" static="no">
+        <type>equivalent_edge_t&lt; <ref refid="structEdge" kindref="compound">Edge</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref>, GridOnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, FRONT &gt;, typename Connectivity::interface_collection &gt;</type>
+        <definition>using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, BcLower, BcUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;::lower_matching_edge =  equivalent_edge_t&lt; Edge&lt;Patch, GridOnPatch&lt;Patch&gt;, FRONT&gt;, typename Connectivity::interface_collection&gt;</definition>
+        <argsstring></argsstring>
+        <name>lower_matching_edge</name>
+        <qualifiedname>MultipatchSplineBuilder::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;::lower_matching_edge</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" line="87" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structMultipatchSplineBuilder_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_0143963206948829b7e1024cedaaccd580_1a3ab5e374f73db102e3410d0413db30ca" prot="public" static="no">
+        <type>equivalent_edge_t&lt; <ref refid="structEdge" kindref="compound">Edge</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref>, GridOnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, BACK &gt;, typename Connectivity::interface_collection &gt;</type>
+        <definition>using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, BcLower, BcUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;::upper_matching_edge =  equivalent_edge_t&lt; Edge&lt;Patch, GridOnPatch&lt;Patch&gt;, BACK&gt;, typename Connectivity::interface_collection&gt;</definition>
+        <argsstring></argsstring>
+        <name>upper_matching_edge</name>
+        <qualifiedname>MultipatchSplineBuilder::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;::upper_matching_edge</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" line="90" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structMultipatchSplineBuilder_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_0143963206948829b7e1024cedaaccd580_1a3401887480cd0c2aea78f1879ca5c896" prot="public" static="no">
+        <type>ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, GridOnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, std::is_same_v&lt; lower_matching_edge, <ref refid="structOutsideEdge" kindref="compound">OutsideEdge</ref> &gt; ? BcLower :BcTransition, std::is_same_v&lt; upper_matching_edge, <ref refid="structOutsideEdge" kindref="compound">OutsideEdge</ref> &gt; ? BcUpper :BcTransition, Solver, Grid1D... &gt;</type>
+        <definition>using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, BcLower, BcUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;::type =  ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch&lt;Patch&gt;, GridOnPatch&lt;Patch&gt;, std::is_same_v&lt;lower_matching_edge, OutsideEdge&gt; ? BcLower : BcTransition, std::is_same_v&lt;upper_matching_edge, OutsideEdge&gt; ? BcUpper : BcTransition, Solver, Grid1D...&gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>MultipatchSplineBuilder::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" line="94" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structMultipatchSplineBuilder_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_0143963206948829b7e1024cedaaccd580_1af45df9e9214257a1c071af9e5244fd02" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, BcLower, BcUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;::patch_id</definition>
+        <argsstring></argsstring>
+        <name>patch_id</name>
+        <qualifiedname>MultipatchSplineBuilder::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;::patch_id</qualifiedname>
+        <initializer>= ddc::type_seq_rank_v&lt;<ref refid="structPatch" kindref="compound">Patch</ref>, PatchOrdering&gt;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" line="93" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" line="85" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" bodystart="86" bodyend="103"/>
+    <listofallmembers>
+      <member refid="structMultipatchSplineBuilder_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_0143963206948829b7e1024cedaaccd580_1a155090792cc0705db6da46b99a094c7c" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;</scope><name>lower_matching_edge</name></member>
+      <member refid="structMultipatchSplineBuilder_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_0143963206948829b7e1024cedaaccd580_1af45df9e9214257a1c071af9e5244fd02" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;</scope><name>patch_id</name></member>
+      <member refid="structMultipatchSplineBuilder_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_0143963206948829b7e1024cedaaccd580_1a3401887480cd0c2aea78f1879ca5c896" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;</scope><name>type</name></member>
+      <member refid="structMultipatchSplineBuilder_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_0143963206948829b7e1024cedaaccd580_1a3ab5e374f73db102e3410d0413db30ca" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;</scope><name>upper_matching_edge</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

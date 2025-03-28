@@ -1,0 +1,353 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classQNSolver" kind="class" language="C++" prot="public">
+    <compoundname>QNSolver</compoundname>
+    <basecompoundref refid="classIQNSolver" prot="public" virt="non-virtual">IQNSolver</basecompoundref>
+    <basecompoundref refid="classIQNSolver" prot="public" virt="non-virtual">IQNSolver</basecompoundref>
+    <includes refid="geometryXVx_2poisson_2qnsolver_8hpp" local="no">qnsolver.hpp</includes>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classQNSolver_1a6447567016ca2420c44ca68c93359e7f" prot="private" static="no">
+        <type><ref refid="classIPoissonSolver" kindref="compound">IPoissonSolver</ref>&lt; IdxRangeX, IdxRangeX, typename Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right &gt;</type>
+        <definition>using QNSolver::PoissonSolver =  IPoissonSolver&lt; IdxRangeX, IdxRangeX, typename Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right&gt;</definition>
+        <argsstring></argsstring>
+        <name>PoissonSolver</name>
+        <qualifiedname>QNSolver::PoissonSolver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="23" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classQNSolver_1afd497ed74760ba783f099dff65865448" prot="private" static="no">
+        <type><ref refid="classIPoissonSolver" kindref="compound">IPoissonSolver</ref>&lt; IdxRangeXY, IdxRangeXY, typename Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right &gt;</type>
+        <definition>using QNSolver::PoissonSolver =  IPoissonSolver&lt; IdxRangeXY, IdxRangeXY, typename Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right&gt;</definition>
+        <argsstring></argsstring>
+        <name>PoissonSolver</name>
+        <qualifiedname>QNSolver::PoissonSolver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp" line="23" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classQNSolver_1a477aa8a214b2de0f9c73797237a8e2aa" prot="private" static="no" mutable="no">
+        <type><ref refid="classIPoissonSolver" kindref="compound">PoissonSolver</ref> const  &amp;</type>
+        <definition>PoissonSolver const  &amp; QNSolver::m_solve_poisson</definition>
+        <argsstring></argsstring>
+        <name>m_solve_poisson</name>
+        <qualifiedname>QNSolver::m_solve_poisson</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="28" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classQNSolver_1acb8175fc24afa3b213cf20e11aa4135e" prot="private" static="no" mutable="no">
+        <type><ref refid="classIChargeDensityCalculator" kindref="compound">IChargeDensityCalculator</ref> const  &amp;</type>
+        <definition>IChargeDensityCalculator const  &amp; QNSolver::m_compute_rho</definition>
+        <argsstring></argsstring>
+        <name>m_compute_rho</name>
+        <qualifiedname>QNSolver::m_compute_rho</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="29" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classQNSolver_1a8e24e91f5ed1c4bb590e93eb4f1f81ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>QNSolver::QNSolver</definition>
+        <argsstring>(PoissonSolver const &amp;solve_poisson, IChargeDensityCalculator const &amp;compute_rho)</argsstring>
+        <name>QNSolver</name>
+        <qualifiedname>QNSolver::QNSolver</qualifiedname>
+        <param>
+          <type><ref refid="classIPoissonSolver" kindref="compound">PoissonSolver</ref> const &amp;</type>
+          <declname>solve_poisson</declname>
+        </param>
+        <param>
+          <type><ref refid="classIChargeDensityCalculator" kindref="compound">IChargeDensityCalculator</ref> const &amp;</type>
+          <declname>compute_rho</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Construct the FftQNSolver operator.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>solve_poisson</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operator which solves the Poisson solver. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>compute_rho</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operator which calculates the charge density, the right hand side of the equation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="38" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.cpp" bodystart="13" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classQNSolver_1afbc0b4cd0f70f63c93dc6d8c540a2d9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>QNSolver::~QNSolver</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~QNSolver</name>
+        <qualifiedname>QNSolver::~QNSolver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="40" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classQNSolver_1a866ea0a8cd34e7789d8847aaf963fdf2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void QNSolver::operator()</definition>
+        <argsstring>(DFieldX electrostatic_potential, DFieldX electric_field, DConstFieldSpXVx allfdistribu) const override</argsstring>
+        <name>operator()</name>
+        <qualifiedname>QNSolver::operator()</qualifiedname>
+        <reimplements refid="classIQNSolver_1a0a2d3c31695c821a43582f1c2cd4e928">operator()</reimplements>
+        <param>
+          <type>DFieldX</type>
+          <declname>electrostatic_potential</declname>
+        </param>
+        <param>
+          <type>DFieldX</type>
+          <declname>electric_field</declname>
+        </param>
+        <param>
+          <type>DConstFieldSpXVx</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The operator which solves the equation using the method described by the class.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">electrostatic_potential</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The electrostatic potential, the result of the poisson solver. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">electric_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The electric field, the derivative of the electrostatic potential. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The distribution function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="49" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.cpp" bodystart="19" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classQNSolver_1a8e24e91f5ed1c4bb590e93eb4f1f81ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>QNSolver::QNSolver</definition>
+        <argsstring>(PoissonSolver const &amp;solve_poisson, IChargeDensityCalculator const &amp;compute_rho)</argsstring>
+        <name>QNSolver</name>
+        <qualifiedname>QNSolver::QNSolver</qualifiedname>
+        <param>
+          <type><ref refid="classIPoissonSolver" kindref="compound">PoissonSolver</ref> const &amp;</type>
+          <declname>solve_poisson</declname>
+        </param>
+        <param>
+          <type><ref refid="classIChargeDensityCalculator" kindref="compound">IChargeDensityCalculator</ref> const &amp;</type>
+          <declname>compute_rho</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Construct the <ref refid="classQNSolver" kindref="compound">QNSolver</ref> operator.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>solve_poisson</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operator which solves the Poisson solver. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>compute_rho</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operator which calculates the charge density, the right hand side of the equation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp" line="38" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classQNSolver_1afbc0b4cd0f70f63c93dc6d8c540a2d9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>QNSolver::~QNSolver</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~QNSolver</name>
+        <qualifiedname>QNSolver::~QNSolver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp" line="40" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classQNSolver_1a2472bab9fe832f065531f90c605df7dc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void QNSolver::operator()</definition>
+        <argsstring>(DFieldXY electrostatic_potential, DFieldXY electric_field_x, DFieldXY electric_field_y, DConstFieldSpVxVyXY allfdistribu) const override</argsstring>
+        <name>operator()</name>
+        <qualifiedname>QNSolver::operator()</qualifiedname>
+        <reimplements refid="classIQNSolver_1a2d17c3f1156a26b08313ba199b7c2fc4">operator()</reimplements>
+        <param>
+          <type>DFieldXY</type>
+          <declname>electrostatic_potential</declname>
+        </param>
+        <param>
+          <type>DFieldXY</type>
+          <declname>electric_field_x</declname>
+        </param>
+        <param>
+          <type>DFieldXY</type>
+          <declname>electric_field_y</declname>
+        </param>
+        <param>
+          <type>DConstFieldSpVxVyXY</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The operator which solves the equation using the method described by the class.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">electrostatic_potential</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The electrostatic potential, the result of the poisson solver. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">electric_field_x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The x-component of the electric field, the gradient of the electrostatic potential. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">electric_field_y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The y-component of the electric field, the gradient of the electrostatic potential. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The distribution function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp" line="50" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.cpp" bodystart="21" bodyend="46"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>An operator which solves the Quasi-Neutrality equation using a fast Fourier transform. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>An operator which solves the Quasi-Neutrality equation: <formula id="142">$ - \frac{d^2 \phi}{dx^2} = \rho $</formula> using a fast Fourier transform on a periodic index range. This operator only works for equidistant points.</para>
+<para>The electric field, <formula id="143">$ \frac{d \phi}{dx} $</formula> is calculated using a spline interpolation implemented in ElectricField. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>IQNSolver</label>
+        <link refid="classIQNSolver"/>
+      </node>
+      <node id="1">
+        <label>QNSolver</label>
+        <link refid="classQNSolver"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>IQNSolver</label>
+        <link refid="classIQNSolver"/>
+      </node>
+      <node id="1">
+        <label>QNSolver</label>
+        <link refid="classQNSolver"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="21" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" bodystart="22" bodyend="53"/>
+    <listofallmembers>
+      <member refid="classQNSolver_1acb8175fc24afa3b213cf20e11aa4135e" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>m_compute_rho</name></member>
+      <member refid="classQNSolver_1a477aa8a214b2de0f9c73797237a8e2aa" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>m_solve_poisson</name></member>
+      <member refid="classQNSolver_1a866ea0a8cd34e7789d8847aaf963fdf2" prot="public" virt="virtual"><scope>QNSolver</scope><name>operator()</name></member>
+      <member refid="classQNSolver_1a2472bab9fe832f065531f90c605df7dc" prot="public" virt="virtual"><scope>QNSolver</scope><name>operator()</name></member>
+      <member refid="classIQNSolver_1a1398a276bd2f959a0a3474c9d10b94c3" prot="public" virt="pure-virtual" ambiguityscope="IQNSolver::"><scope>QNSolver</scope><name>operator()</name></member>
+      <member refid="classQNSolver_1a6447567016ca2420c44ca68c93359e7f" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>PoissonSolver</name></member>
+      <member refid="classQNSolver_1afd497ed74760ba783f099dff65865448" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>PoissonSolver</name></member>
+      <member refid="classQNSolver_1a8e24e91f5ed1c4bb590e93eb4f1f81ba" prot="public" virt="non-virtual"><scope>QNSolver</scope><name>QNSolver</name></member>
+      <member refid="classQNSolver_1a8e24e91f5ed1c4bb590e93eb4f1f81ba" prot="public" virt="non-virtual"><scope>QNSolver</scope><name>QNSolver</name></member>
+      <member refid="classIQNSolver_1a9ebf91996421a1ebfffe7d0225bc37ec" prot="public" virt="virtual"><scope>QNSolver</scope><name>~IQNSolver</name></member>
+      <member refid="classIQNSolver_1a9ebf91996421a1ebfffe7d0225bc37ec" prot="public" virt="virtual"><scope>QNSolver</scope><name>~IQNSolver</name></member>
+      <member refid="classIQNSolver_1a9ebf91996421a1ebfffe7d0225bc37ec" prot="public" virt="virtual"><scope>QNSolver</scope><name>~IQNSolver</name></member>
+      <member refid="classQNSolver_1afbc0b4cd0f70f63c93dc6d8c540a2d9d" prot="public" virt="non-virtual"><scope>QNSolver</scope><name>~QNSolver</name></member>
+      <member refid="classQNSolver_1afbc0b4cd0f70f63c93dc6d8c540a2d9d" prot="public" virt="non-virtual"><scope>QNSolver</scope><name>~QNSolver</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

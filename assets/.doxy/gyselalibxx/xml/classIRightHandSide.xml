@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classIRightHandSide" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>IRightHandSide</compoundname>
+    <derivedcompoundref refid="classCollisionsInter" prot="public" virt="non-virtual">CollisionsInter</derivedcompoundref>
+    <derivedcompoundref refid="classCollisionsIntra" prot="public" virt="non-virtual">CollisionsIntra</derivedcompoundref>
+    <derivedcompoundref refid="classKineticSource" prot="public" virt="non-virtual">KineticSource</derivedcompoundref>
+    <derivedcompoundref refid="classKrookSourceAdaptive" prot="public" virt="non-virtual">KrookSourceAdaptive</derivedcompoundref>
+    <derivedcompoundref refid="classKrookSourceConstant" prot="public" virt="non-virtual">KrookSourceConstant</derivedcompoundref>
+    <includes refid="irighthandside_8hpp" local="no">irighthandside.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classIRightHandSide_1a46c157197ef52a7dd221e687584b3d1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual IRightHandSide::~IRightHandSide</definition>
+        <argsstring>()=default</argsstring>
+        <name>~IRightHandSide</name>
+        <qualifiedname>IRightHandSide::~IRightHandSide</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/irighthandside.hpp" line="18" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classIRightHandSide_1a00f66ff88f6b0fd17a931a09b1ddb2d3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>DFieldSpXVx</type>
+        <definition>virtual DFieldSpXVx IRightHandSide::operator()</definition>
+        <argsstring>(DFieldSpXVx allfdistribu, double dt) const =0</argsstring>
+        <name>operator()</name>
+        <qualifiedname>IRightHandSide::operator()</qualifiedname>
+        <reimplementedby refid="classCollisionsInter_1a1f8104eb5930b71b25856a0640c534bf">operator()</reimplementedby>
+        <reimplementedby refid="classCollisionsIntra_1ad066a79f6c0a9dcf3720dbfc5e9056e0">operator()</reimplementedby>
+        <reimplementedby refid="classKineticSource_1a384f4c655ebe246d99964de77ee780d2">operator()</reimplementedby>
+        <reimplementedby refid="classKrookSourceAdaptive_1a1f7a6ce3a4f5f93214352a4787ba7888">operator()</reimplementedby>
+        <reimplementedby refid="classKrookSourceConstant_1a266237a1a58a6f8f000ee4e910353dcc">operator()</reimplementedby>
+        <param>
+          <type>DFieldSpXVx</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+<para>Operator for applying the source term on the distribution function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The source <formula id="152">$S$</formula> acts on the distribution function following the evolution equation df/dt = S <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On input: the initial value of the distribution function. On output: the value of the distribution function after solving the source evolution equation on one timestep. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The timestep. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The distribution function after solving the source evolution equation. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/irighthandside.hpp" line="31" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>An abstract class representing a source in Boltzmann equation. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>CollisionsInter</label>
+        <link refid="classCollisionsInter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>CollisionsIntra</label>
+        <link refid="classCollisionsIntra"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>IRightHandSide</label>
+        <link refid="classIRightHandSide"/>
+      </node>
+      <node id="4">
+        <label>KineticSource</label>
+        <link refid="classKineticSource"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>KrookSourceAdaptive</label>
+        <link refid="classKrookSourceAdaptive"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>KrookSourceConstant</label>
+        <link refid="classKrookSourceConstant"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/irighthandside.hpp" line="15" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/irighthandside.hpp" bodystart="16" bodyend="32"/>
+    <listofallmembers>
+      <member refid="classIRightHandSide_1a00f66ff88f6b0fd17a931a09b1ddb2d3" prot="public" virt="pure-virtual"><scope>IRightHandSide</scope><name>operator()</name></member>
+      <member refid="classIRightHandSide_1a46c157197ef52a7dd221e687584b3d1c" prot="public" virt="virtual"><scope>IRightHandSide</scope><name>~IRightHandSide</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

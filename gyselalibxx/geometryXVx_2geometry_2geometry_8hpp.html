@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>File geometry.hpp - GyselalibX</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File geometry.hpp";
+        var mkdocs_page_input_path = "gyselalibxx/geometryXVx_2geometry_2geometry_8hpp.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> GyselalibX
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">General</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/getting_started.html">Getting Started</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Installation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../docs/first_steps/install.html">Gyselalib++ Installation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../toolchains/index.html">Pre-made build settings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standards</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/mathematical_and_physical_conventions.html">Math & Physics</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Gyselalib++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Source</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../src/index.html">Gyselalib++ contents</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/advection/index.html">Advection methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/collisions/index.html">Collisions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/data_types/index.html">Data Storage Types</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryRTheta/index.html">Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection/index.html">Advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_field</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/geometry/index.html">Geometry RTheta</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/initialisation/index.html">Initialisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/poisson/index.html">Polar Poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_solver</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/time_solver/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryVparMu</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryVparMu/index.html">Geometry (vpar, mu)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/collisions/index.html">CollisionConfiguration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/geometry/index.html">GeometryVparMu</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXVx/index.html">Geometry (x, v_x)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >boltzmann</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/boltzmann/index.html">Boltzmann solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/geometry/index.html">Geometry X-Vx</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >rhs</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/rhs/index.html">RHS</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/utils/index.html">Utils</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXY/index.html">Geometry (x, y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/geometry/index.html">Geometry XY</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/initialisation/index.html">Initialisation on (x,y) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/time_integration/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXYVxVy</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXYVxVy/index.html">Geometry (x, y, v_x, v_y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/geometry/index.html">Geometry X Y-Vx Vy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vlasov</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/vlasov/index.html">Vlasov solver</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/interpolation/index.html">Interpolation Methods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/polar_splines/index.html">Polar Splines</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >io</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/io/index.html">Functions used for input and output</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mapping</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mapping/index.html">Mappings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >math_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/math_tools/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >matrix_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/matrix_tools/index.html">Matrix tools</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mpi_parallelisation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mpi_parallelisation/index.html">Parallelisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/multipatch/index.html">Multipatch</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >connectivity</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/connectivity/index.html">Multipatch connectivity</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/data_types/index.html">Data Types for Multipatch Geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/utils/index.html">Multipatch utilitary functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >quadrature</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/quadrature/index.html">Quadrature Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >speciesinfo</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/speciesinfo/index.html">SpeciesInfo (x, v_x)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >timestepper</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/timestepper/index.html">Time Stepping Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/utils/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Simulations</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../simulations/index.html">Gyselalib++ simulations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryRTheta/index.html">Simulations in (r, theta) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >diocotron</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/diocotron/index.html">Diocotron instability</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vortex_merger</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/vortex_merger/index.html">Vortex merger</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXVx/index.html">Simulations in (x, vx) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXY/index.html">Simulations in (x, y) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >guiding_centre</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryXY/guiding_centre/index.html">Guiding centre (X,Y) simulation</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tests</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../tests/index.html">Gyselalib++ tests</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/advection/index.html">Tests on the templated advection operators</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/geometryRTheta/index.html">Tests : Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/advection_rtheta/index.html">Tests on the 2D polar advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/polar_poisson/index.html">Tests on the 2D polar poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline_interpolator_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/spline_interpolator_rtheta/index.html">Tests on spline interpolator in polar coordinates</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/multipatch/index.html">Multipatch geometry tests</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometries</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/multipatch/geometries/index.html">Multipatch geometries</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Adding_docs.html">Adding Docs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Using_git.html">Using Git</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Gyselalib++</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" >Classes</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="annotated.html">Class List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="classes.html">Class Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="hierarchy.html">Class Hierarchy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Namespaces</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="namespaces.html">Namespace List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_members.html">Namespace Members</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_functions.html">Namespace Member Functions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_variables.html">Namespace Member Variables</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_typedefs.html">Namespace Member Typedefs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_enums.html">Namespace Member Enumerations</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="macros.html">Macros</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="files.html">Files</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">GyselalibX</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File geometry.hpp</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/gyselax/gyselalibxx/edit/master/docs/gyselalibxx/geometryXVx_2geometry_2geometry_8hpp.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div><h1 id="file-geometryhpp">File geometry.hpp</h1>
+<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_3d8ac113f1c21fd7bc019cd952574dfc.html"><strong>geometry</strong></a> <strong>&gt;</strong> <a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a></p>
+<p><a href="geometryXVx_2geometry_2geometry_8hpp_source.html">Go to the source code of this file</a></p>
+<ul>
+<li><code>#include &lt;ddc/ddc.hpp&gt;</code></li>
+<li><code>#include &lt;ddc/kernels/splines.hpp&gt;</code></li>
+<li><code>#include "ddc_alias_inline_functions.hpp"</code></li>
+<li><code>#include "ddc_aliases.hpp"</code></li>
+<li><code>#include "ddc_helper.hpp"</code></li>
+<li><code>#include "moments.hpp"</code></li>
+<li><code>#include "non_uniform_interpolation_points.hpp"</code></li>
+<li><code>#include "species_info.hpp"</code></li>
+</ul>
+<h2 id="classes">Classes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="structBSplinesVx.html"><strong>BSplinesVx</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="structBSplinesX.html"><strong>BSplinesX</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">class</td>
+<td style="text-align: left;"><a href="classGeometryXVx.html"><strong>GeometryXVx</strong></a> <br><em>A class providing aliases for useful subindex ranges of the geometry. It is used as template parameter for generic dimensionality-agnostic operators such as advections.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="structGridMom.html"><strong>GridMom</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="structGridVx.html"><strong>GridVx</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="structGridX.html"><strong>GridX</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="structT.html"><strong>T</strong></a> <br><em>A class which describes the real space in the temporal direction.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="structVx.html"><strong>Vx</strong></a> <br><em>Define non periodic real</em> <a href="structX.html"><em><strong>X</strong></em></a> <em>velocity dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="structX.html"><strong>X</strong></a> <br><em>Define non periodic real</em> <a href="structX.html"><em><strong>X</strong></em></a> <em>dimension.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-types">Public Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef ConstField&lt; ElementType, IdxRangeBSX &gt;</td>
+<td style="text-align: left;"><a href="#typedef-bsconstfieldx"><strong>BSConstFieldX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldMem&lt; ElementType, IdxRangeBSX &gt;</td>
+<td style="text-align: left;"><a href="#typedef-bsfieldmemx"><strong>BSFieldMemX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Field&lt; ElementType, IdxRangeBSX &gt;</td>
+<td style="text-align: left;"><a href="#typedef-bsfieldx"><strong>BSFieldX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ConstField&lt; ElementType, IdxRangeSpMom &gt;</td>
+<td style="text-align: left;"><a href="#typedef-constfieldspmom"><strong>ConstFieldSpMom</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ConstField&lt; ElementType, IdxRangeSpMomX &gt;</td>
+<td style="text-align: left;"><a href="#typedef-constfieldspmomx"><strong>ConstFieldSpMomX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ConstField&lt; ElementType, IdxRangeSpVx &gt;</td>
+<td style="text-align: left;"><a href="#typedef-constfieldspvx"><strong>ConstFieldSpVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ConstField&lt; ElementType, IdxRangeSpX &gt;</td>
+<td style="text-align: left;"><a href="#typedef-constfieldspx"><strong>ConstFieldSpX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ConstField&lt; ElementType, IdxRangeSpXVx &gt;</td>
+<td style="text-align: left;"><a href="#typedef-constfieldspxvx"><strong>ConstFieldSpXVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Field&lt; ElementType const, IdxRangeVx &gt;</td>
+<td style="text-align: left;"><a href="#typedef-constfieldvx"><strong>ConstFieldVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Field&lt; ElementType const, IdxRangeX &gt;</td>
+<td style="text-align: left;"><a href="#typedef-constfieldx"><strong>ConstFieldX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Coord&lt; <a href="structT.html"><strong>T</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coordt"><strong>CoordT</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Coord&lt; <a href="structVx.html"><strong>Vx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coordvx"><strong>CoordVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Coord&lt; <a href="structX.html"><strong>X</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coordx"><strong>CoordX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structVx.html"><strong>Vx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coordxvx"><strong>CoordXVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef BSConstFieldX&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dbsconstfieldx"><strong>DBSConstFieldX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef BSFieldMemX&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dbsfieldmemx"><strong>DBSFieldMemX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef BSFieldX&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dbsfieldx"><strong>DBSFieldX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ConstFieldSpMom&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dconstfieldspmom"><strong>DConstFieldSpMom</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ConstFieldSpMomX&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dconstfieldspmomx"><strong>DConstFieldSpMomX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ConstFieldSpVx&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dconstfieldspvx"><strong>DConstFieldSpVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ConstFieldSpX&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dconstfieldspx"><strong>DConstFieldSpX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ConstFieldSpXVx&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dconstfieldspxvx"><strong>DConstFieldSpXVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ConstFieldVx&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dconstfieldvx"><strong>DConstFieldVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ConstFieldX&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dconstfieldx"><strong>DConstFieldX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldMemSpMom&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldmemspmom"><strong>DFieldMemSpMom</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldMemSpMomX&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldmemspmomx"><strong>DFieldMemSpMomX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldMemSpVx&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldmemspvx"><strong>DFieldMemSpVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldMemSpX&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldmemspx"><strong>DFieldMemSpX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldMemSpXVx&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldmemspxvx"><strong>DFieldMemSpXVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldMemVx&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldmemvx"><strong>DFieldMemVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldMemX&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldmemx"><strong>DFieldMemX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldSpMom&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldspmom"><strong>DFieldSpMom</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldSpMomX&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldspmomx"><strong>DFieldSpMomX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldSpVx&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldspvx"><strong>DFieldSpVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldSpX&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldspx"><strong>DFieldSpX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldSpXVx&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldspxvx"><strong>DFieldSpXVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldVx&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldvx"><strong>DFieldVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldX&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldx"><strong>DFieldX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldMem&lt; ElementType, IdxRangeSpMom &gt;</td>
+<td style="text-align: left;"><a href="#typedef-fieldmemspmom"><strong>FieldMemSpMom</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldMem&lt; ElementType, IdxRangeSpMomX &gt;</td>
+<td style="text-align: left;"><a href="#typedef-fieldmemspmomx"><strong>FieldMemSpMomX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldMem&lt; ElementType, IdxRangeSpVx &gt;</td>
+<td style="text-align: left;"><a href="#typedef-fieldmemspvx"><strong>FieldMemSpVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldMem&lt; ElementType, IdxRangeSpX &gt;</td>
+<td style="text-align: left;"><a href="#typedef-fieldmemspx"><strong>FieldMemSpX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldMem&lt; ElementType, IdxRangeSpXVx &gt;</td>
+<td style="text-align: left;"><a href="#typedef-fieldmemspxvx"><strong>FieldMemSpXVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldMem&lt; ElementType, IdxRangeVx &gt;</td>
+<td style="text-align: left;"><a href="#typedef-fieldmemvx"><strong>FieldMemVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldMem&lt; ElementType, IdxRangeX &gt;</td>
+<td style="text-align: left;"><a href="#typedef-fieldmemx"><strong>FieldMemX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Field&lt; ElementType, IdxRangeSpMom &gt;</td>
+<td style="text-align: left;"><a href="#typedef-fieldspmom"><strong>FieldSpMom</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Field&lt; ElementType, IdxRangeSpMomX &gt;</td>
+<td style="text-align: left;"><a href="#typedef-fieldspmomx"><strong>FieldSpMomX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Field&lt; ElementType, IdxRangeSpVx &gt;</td>
+<td style="text-align: left;"><a href="#typedef-fieldspvx"><strong>FieldSpVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Field&lt; ElementType, IdxRangeSpX &gt;</td>
+<td style="text-align: left;"><a href="#typedef-fieldspx"><strong>FieldSpX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Field&lt; ElementType, IdxRangeSpXVx &gt;</td>
+<td style="text-align: left;"><a href="#typedef-fieldspxvx"><strong>FieldSpXVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Field&lt; ElementType, IdxRangeVx &gt;</td>
+<td style="text-align: left;"><a href="#typedef-fieldvx"><strong>FieldVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Field&lt; ElementType, IdxRangeX &gt;</td>
+<td style="text-align: left;"><a href="#typedef-fieldx"><strong>FieldX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="structGridMom.html"><strong>GridMom</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxmom"><strong>IdxMom</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="structBSplinesVx.html"><strong>BSplinesVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrangebsvx"><strong>IdxRangeBSVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="structBSplinesX.html"><strong>BSplinesX</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrangebsx"><strong>IdxRangeBSX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="structGridMom.html"><strong>GridMom</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrangemom"><strong>IdxRangeMom</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="structSpecies.html"><strong>Species</strong></a>, <a href="structGridMom.html"><strong>GridMom</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrangespmom"><strong>IdxRangeSpMom</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="structSpecies.html"><strong>Species</strong></a>, <a href="structGridMom.html"><strong>GridMom</strong></a>, <a href="structGridX.html"><strong>GridX</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrangespmomx"><strong>IdxRangeSpMomX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="structSpecies.html"><strong>Species</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrangespvx"><strong>IdxRangeSpVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="structSpecies.html"><strong>Species</strong></a>, <a href="structGridX.html"><strong>GridX</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrangespx"><strong>IdxRangeSpX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="structSpecies.html"><strong>Species</strong></a>, <a href="structGridX.html"><strong>GridX</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrangespxvx"><strong>IdxRangeSpXVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrangevx"><strong>IdxRangeVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="structGridX.html"><strong>GridX</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrangex"><strong>IdxRangeX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="structGridX.html"><strong>GridX</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrangexvx"><strong>IdxRangeXVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="structSpecies.html"><strong>Species</strong></a>, <a href="structGridMom.html"><strong>GridMom</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxspmom"><strong>IdxSpMom</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="structSpecies.html"><strong>Species</strong></a>, <a href="structGridMom.html"><strong>GridMom</strong></a>, <a href="structGridX.html"><strong>GridX</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxspmomx"><strong>IdxSpMomX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="structSpecies.html"><strong>Species</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxspvx"><strong>IdxSpVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="structSpecies.html"><strong>Species</strong></a>, <a href="structGridX.html"><strong>GridX</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxspx"><strong>IdxSpX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="structSpecies.html"><strong>Species</strong></a>, <a href="structGridX.html"><strong>GridX</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxspxvx"><strong>IdxSpXVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxStep&lt; <a href="structGridMom.html"><strong>GridMom</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxstepmom"><strong>IdxStepMom</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxStep&lt; <a href="structSpecies.html"><strong>Species</strong></a>, <a href="structGridMom.html"><strong>GridMom</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxstepspmom"><strong>IdxStepSpMom</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxStep&lt; <a href="structSpecies.html"><strong>Species</strong></a>, <a href="structGridMom.html"><strong>GridMom</strong></a>, <a href="structGridX.html"><strong>GridX</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxstepspmomx"><strong>IdxStepSpMomX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxStep&lt; <a href="structSpecies.html"><strong>Species</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxstepspvx"><strong>IdxStepSpVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxStep&lt; <a href="structSpecies.html"><strong>Species</strong></a>, <a href="structGridX.html"><strong>GridX</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxstepspx"><strong>IdxStepSpX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxStep&lt; <a href="structSpecies.html"><strong>Species</strong></a>, <a href="structGridX.html"><strong>GridX</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxstepspxvx"><strong>IdxStepSpXVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxStep&lt; <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxstepvx"><strong>IdxStepVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxStep&lt; <a href="structGridX.html"><strong>GridX</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxstepx"><strong>IdxStepX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxStep&lt; <a href="structGridX.html"><strong>GridX</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxstepxvx"><strong>IdxStepXVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxvx"><strong>IdxVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="structGridX.html"><strong>GridX</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxx"><strong>IdxX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="structGridX.html"><strong>GridX</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxxvx"><strong>IdxXVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::GrevilleInterpolationPoints&lt; <a href="structBSplinesVx.html"><strong>BSplinesVx</strong></a>, SplineVxBoundary, SplineVxBoundary &gt;</td>
+<td style="text-align: left;"><a href="#typedef-splineinterppointsvx"><strong>SplineInterpPointsVx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::GrevilleInterpolationPoints&lt; <a href="structBSplinesX.html"><strong>BSplinesX</strong></a>, SplineXBoundary, SplineXBoundary &gt;</td>
+<td style="text-align: left;"><a href="#typedef-splineinterppointsx"><strong>SplineInterpPointsX</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesVx.html"><strong>BSplinesVx</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a>, SplineVxBoundary, SplineVxBoundary, ddc::SplineSolver::LAPACK, <a href="structGridX.html"><strong>GridX</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-splinevxbuilder"><strong>SplineVxBuilder</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::SplineBuilder&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, <a href="structBSplinesVx.html"><strong>BSplinesVx</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a>, SplineVxBoundary, SplineVxBoundary, ddc::SplineSolver::LAPACK, <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-splinevxbuilder_1d"><strong>SplineVxBuilder_1d</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesVx.html"><strong>BSplinesVx</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a>, ddc::ConstantExtrapolationRule&lt; <a href="structVx.html"><strong>Vx</strong></a> &gt;, ddc::ConstantExtrapolationRule&lt; <a href="structVx.html"><strong>Vx</strong></a> &gt;, <a href="structGridX.html"><strong>GridX</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-splinevxevaluator"><strong>SplineVxEvaluator</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::SplineEvaluator&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, <a href="structBSplinesVx.html"><strong>BSplinesVx</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a>, ddc::ConstantExtrapolationRule&lt; <a href="structVx.html"><strong>Vx</strong></a> &gt;, ddc::ConstantExtrapolationRule&lt; <a href="structVx.html"><strong>Vx</strong></a> &gt;, <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-splinevxevaluator_1d"><strong>SplineVxEvaluator_1d</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesX.html"><strong>BSplinesX</strong></a>, <a href="structGridX.html"><strong>GridX</strong></a>, SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK, <a href="structGridX.html"><strong>GridX</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-splinexbuilder"><strong>SplineXBuilder</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesX.html"><strong>BSplinesX</strong></a>, <a href="structGridX.html"><strong>GridX</strong></a>, SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK, <a href="structGridX.html"><strong>GridX</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-splinexbuilder_1d"><strong>SplineXBuilder_1d</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesX.html"><strong>BSplinesX</strong></a>, <a href="structGridX.html"><strong>GridX</strong></a>, ddc::ConstantExtrapolationRule&lt; <a href="structX.html"><strong>X</strong></a> &gt;, ddc::ConstantExtrapolationRule&lt; <a href="structX.html"><strong>X</strong></a> &gt;, <a href="structGridX.html"><strong>GridX</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-splinexevaluator"><strong>SplineXEvaluator</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesX.html"><strong>BSplinesX</strong></a>, <a href="structGridX.html"><strong>GridX</strong></a>, ddc::ConstantExtrapolationRule&lt; <a href="structX.html"><strong>X</strong></a> &gt;, ddc::ConstantExtrapolationRule&lt; <a href="structX.html"><strong>X</strong></a> &gt;, <a href="structGridX.html"><strong>GridX</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-splinexevaluator_1d"><strong>SplineXEvaluator_1d</strong></a>  <br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-attributes">Public Attributes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">int constexpr</td>
+<td style="text-align: left;"><a href="#variable-bsdegreevx"><strong>BSDegreeVx</strong></a>   = <code>3</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">int constexpr</td>
+<td style="text-align: left;"><a href="#variable-bsdegreex"><strong>BSDegreeX</strong></a>   = <code>3</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">bool constexpr</td>
+<td style="text-align: left;"><a href="#variable-bsplineonuniformcellsvx"><strong>BsplineOnUniformCellsVx</strong></a>   = <code>true</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">bool constexpr</td>
+<td style="text-align: left;"><a href="#variable-bsplineonuniformcellsx"><strong>BsplineOnUniformCellsX</strong></a>   = <code>true</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">auto constexpr</td>
+<td style="text-align: left;"><a href="#variable-splinevxboundary"><strong>SplineVxBoundary</strong></a>   = <code>ddc::BoundCond::HERMITE</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">auto constexpr</td>
+<td style="text-align: left;"><a href="#variable-splinexboundary"><strong>SplineXBoundary</strong></a>   = <code>[**X::PERIODIC**](structX.md#variable-periodic) ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE</code><br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-bsconstfieldx">typedef BSConstFieldX</h3>
+<pre><code class="language-C++">using BSConstFieldX =  ConstField&lt;ElementType, IdxRangeBSX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-bsfieldmemx">typedef BSFieldMemX</h3>
+<pre><code class="language-C++">using BSFieldMemX =  FieldMem&lt;ElementType, IdxRangeBSX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-bsfieldx">typedef BSFieldX</h3>
+<pre><code class="language-C++">using BSFieldX =  Field&lt;ElementType, IdxRangeBSX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-constfieldspmom">typedef ConstFieldSpMom</h3>
+<pre><code class="language-C++">using ConstFieldSpMom =  ConstField&lt;ElementType, IdxRangeSpMom&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-constfieldspmomx">typedef ConstFieldSpMomX</h3>
+<pre><code class="language-C++">using ConstFieldSpMomX =  ConstField&lt;ElementType, IdxRangeSpMomX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-constfieldspvx">typedef ConstFieldSpVx</h3>
+<pre><code class="language-C++">using ConstFieldSpVx =  ConstField&lt;ElementType, IdxRangeSpVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-constfieldspx">typedef ConstFieldSpX</h3>
+<pre><code class="language-C++">using ConstFieldSpX =  ConstField&lt;ElementType, IdxRangeSpX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-constfieldspxvx">typedef ConstFieldSpXVx</h3>
+<pre><code class="language-C++">using ConstFieldSpXVx =  ConstField&lt;ElementType, IdxRangeSpXVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-constfieldvx">typedef ConstFieldVx</h3>
+<pre><code class="language-C++">using ConstFieldVx =  Field&lt;ElementType const, IdxRangeVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-constfieldx">typedef ConstFieldX</h3>
+<pre><code class="language-C++">using ConstFieldX =  Field&lt;ElementType const, IdxRangeX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coordt">typedef CoordT</h3>
+<pre><code class="language-C++">using CoordT =  Coord&lt;T&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coordvx">typedef CoordVx</h3>
+<pre><code class="language-C++">using CoordVx =  Coord&lt;Vx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coordx">typedef CoordX</h3>
+<pre><code class="language-C++">using CoordX =  Coord&lt;X&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coordxvx">typedef CoordXVx</h3>
+<pre><code class="language-C++">using CoordXVx =  Coord&lt;X, Vx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dbsconstfieldx">typedef DBSConstFieldX</h3>
+<pre><code class="language-C++">using DBSConstFieldX =  BSConstFieldX&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dbsfieldmemx">typedef DBSFieldMemX</h3>
+<pre><code class="language-C++">using DBSFieldMemX =  BSFieldMemX&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dbsfieldx">typedef DBSFieldX</h3>
+<pre><code class="language-C++">using DBSFieldX =  BSFieldX&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dconstfieldspmom">typedef DConstFieldSpMom</h3>
+<pre><code class="language-C++">typedef ConstFieldSpMom&lt; double &gt; DConstFieldSpMom;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dconstfieldspmomx">typedef DConstFieldSpMomX</h3>
+<pre><code class="language-C++">using DConstFieldSpMomX =  ConstFieldSpMomX&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dconstfieldspvx">typedef DConstFieldSpVx</h3>
+<pre><code class="language-C++">using DConstFieldSpVx =  ConstFieldSpVx&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dconstfieldspx">typedef DConstFieldSpX</h3>
+<pre><code class="language-C++">using DConstFieldSpX =  ConstFieldSpX&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dconstfieldspxvx">typedef DConstFieldSpXVx</h3>
+<pre><code class="language-C++">using DConstFieldSpXVx =  ConstFieldSpXVx&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dconstfieldvx">typedef DConstFieldVx</h3>
+<pre><code class="language-C++">using DConstFieldVx =  ConstFieldVx&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dconstfieldx">typedef DConstFieldX</h3>
+<pre><code class="language-C++">using DConstFieldX =  ConstFieldX&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldmemspmom">typedef DFieldMemSpMom</h3>
+<pre><code class="language-C++">using DFieldMemSpMom =  FieldMemSpMom&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldmemspmomx">typedef DFieldMemSpMomX</h3>
+<pre><code class="language-C++">using DFieldMemSpMomX =  FieldMemSpMomX&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldmemspvx">typedef DFieldMemSpVx</h3>
+<pre><code class="language-C++">using DFieldMemSpVx =  FieldMemSpVx&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldmemspx">typedef DFieldMemSpX</h3>
+<pre><code class="language-C++">using DFieldMemSpX =  FieldMemSpX&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldmemspxvx">typedef DFieldMemSpXVx</h3>
+<pre><code class="language-C++">using DFieldMemSpXVx =  FieldMemSpXVx&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldmemvx">typedef DFieldMemVx</h3>
+<pre><code class="language-C++">using DFieldMemVx =  FieldMemVx&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldmemx">typedef DFieldMemX</h3>
+<pre><code class="language-C++">using DFieldMemX =  FieldMemX&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldspmom">typedef DFieldSpMom</h3>
+<pre><code class="language-C++">using DFieldSpMom =  FieldSpMom&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldspmomx">typedef DFieldSpMomX</h3>
+<pre><code class="language-C++">using DFieldSpMomX =  FieldSpMomX&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldspvx">typedef DFieldSpVx</h3>
+<pre><code class="language-C++">using DFieldSpVx =  FieldSpVx&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldspx">typedef DFieldSpX</h3>
+<pre><code class="language-C++">using DFieldSpX =  FieldSpX&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldspxvx">typedef DFieldSpXVx</h3>
+<pre><code class="language-C++">using DFieldSpXVx =  FieldSpXVx&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldvx">typedef DFieldVx</h3>
+<pre><code class="language-C++">using DFieldVx =  FieldVx&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldx">typedef DFieldX</h3>
+<pre><code class="language-C++">using DFieldX =  FieldX&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-fieldmemspmom">typedef FieldMemSpMom</h3>
+<pre><code class="language-C++">using FieldMemSpMom =  FieldMem&lt;ElementType, IdxRangeSpMom&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-fieldmemspmomx">typedef FieldMemSpMomX</h3>
+<pre><code class="language-C++">using FieldMemSpMomX =  FieldMem&lt;ElementType, IdxRangeSpMomX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-fieldmemspvx">typedef FieldMemSpVx</h3>
+<pre><code class="language-C++">using FieldMemSpVx =  FieldMem&lt;ElementType, IdxRangeSpVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-fieldmemspx">typedef FieldMemSpX</h3>
+<pre><code class="language-C++">using FieldMemSpX =  FieldMem&lt;ElementType, IdxRangeSpX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-fieldmemspxvx">typedef FieldMemSpXVx</h3>
+<pre><code class="language-C++">using FieldMemSpXVx =  FieldMem&lt;ElementType, IdxRangeSpXVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-fieldmemvx">typedef FieldMemVx</h3>
+<pre><code class="language-C++">using FieldMemVx =  FieldMem&lt;ElementType, IdxRangeVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-fieldmemx">typedef FieldMemX</h3>
+<pre><code class="language-C++">using FieldMemX =  FieldMem&lt;ElementType, IdxRangeX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-fieldspmom">typedef FieldSpMom</h3>
+<pre><code class="language-C++">using FieldSpMom =  Field&lt;ElementType, IdxRangeSpMom&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-fieldspmomx">typedef FieldSpMomX</h3>
+<pre><code class="language-C++">using FieldSpMomX =  Field&lt;ElementType, IdxRangeSpMomX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-fieldspvx">typedef FieldSpVx</h3>
+<pre><code class="language-C++">using FieldSpVx =  Field&lt;ElementType, IdxRangeSpVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-fieldspx">typedef FieldSpX</h3>
+<pre><code class="language-C++">using FieldSpX =  Field&lt;ElementType, IdxRangeSpX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-fieldspxvx">typedef FieldSpXVx</h3>
+<pre><code class="language-C++">using FieldSpXVx =  Field&lt;ElementType, IdxRangeSpXVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-fieldvx">typedef FieldVx</h3>
+<pre><code class="language-C++">using FieldVx =  Field&lt;ElementType, IdxRangeVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-fieldx">typedef FieldX</h3>
+<pre><code class="language-C++">using FieldX =  Field&lt;ElementType, IdxRangeX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxmom">typedef IdxMom</h3>
+<pre><code class="language-C++">using IdxMom =  Idx&lt;GridMom&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrangebsvx">typedef IdxRangeBSVx</h3>
+<pre><code class="language-C++">using IdxRangeBSVx =  IdxRange&lt;BSplinesVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrangebsx">typedef IdxRangeBSX</h3>
+<pre><code class="language-C++">using IdxRangeBSX =  IdxRange&lt;BSplinesX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrangemom">typedef IdxRangeMom</h3>
+<pre><code class="language-C++">using IdxRangeMom =  IdxRange&lt;GridMom&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrangespmom">typedef IdxRangeSpMom</h3>
+<pre><code class="language-C++">using IdxRangeSpMom =  IdxRange&lt;Species, GridMom&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrangespmomx">typedef IdxRangeSpMomX</h3>
+<pre><code class="language-C++">using IdxRangeSpMomX =  IdxRange&lt;Species, GridMom, GridX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrangespvx">typedef IdxRangeSpVx</h3>
+<pre><code class="language-C++">using IdxRangeSpVx =  IdxRange&lt;Species, GridVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrangespx">typedef IdxRangeSpX</h3>
+<pre><code class="language-C++">using IdxRangeSpX =  IdxRange&lt;Species, GridX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrangespxvx">typedef IdxRangeSpXVx</h3>
+<pre><code class="language-C++">using IdxRangeSpXVx =  IdxRange&lt;Species, GridX, GridVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrangevx">typedef IdxRangeVx</h3>
+<pre><code class="language-C++">using IdxRangeVx =  IdxRange&lt;GridVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrangex">typedef IdxRangeX</h3>
+<pre><code class="language-C++">using IdxRangeX =  IdxRange&lt;GridX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrangexvx">typedef IdxRangeXVx</h3>
+<pre><code class="language-C++">using IdxRangeXVx =  IdxRange&lt;GridX, GridVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxspmom">typedef IdxSpMom</h3>
+<pre><code class="language-C++">using IdxSpMom =  Idx&lt;Species, GridMom&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxspmomx">typedef IdxSpMomX</h3>
+<pre><code class="language-C++">using IdxSpMomX =  Idx&lt;Species, GridMom, GridX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxspvx">typedef IdxSpVx</h3>
+<pre><code class="language-C++">using IdxSpVx =  Idx&lt;Species, GridVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxspx">typedef IdxSpX</h3>
+<pre><code class="language-C++">using IdxSpX =  Idx&lt;Species, GridX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxspxvx">typedef IdxSpXVx</h3>
+<pre><code class="language-C++">using IdxSpXVx =  Idx&lt;Species, GridX, GridVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxstepmom">typedef IdxStepMom</h3>
+<pre><code class="language-C++">using IdxStepMom =  IdxStep&lt;GridMom&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxstepspmom">typedef IdxStepSpMom</h3>
+<pre><code class="language-C++">using IdxStepSpMom =  IdxStep&lt;Species, GridMom&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxstepspmomx">typedef IdxStepSpMomX</h3>
+<pre><code class="language-C++">using IdxStepSpMomX =  IdxStep&lt;Species, GridMom, GridX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxstepspvx">typedef IdxStepSpVx</h3>
+<pre><code class="language-C++">using IdxStepSpVx =  IdxStep&lt;Species, GridVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxstepspx">typedef IdxStepSpX</h3>
+<pre><code class="language-C++">using IdxStepSpX =  IdxStep&lt;Species, GridX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxstepspxvx">typedef IdxStepSpXVx</h3>
+<pre><code class="language-C++">using IdxStepSpXVx =  IdxStep&lt;Species, GridX, GridVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxstepvx">typedef IdxStepVx</h3>
+<pre><code class="language-C++">using IdxStepVx =  IdxStep&lt;GridVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxstepx">typedef IdxStepX</h3>
+<pre><code class="language-C++">using IdxStepX =  IdxStep&lt;GridX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxstepxvx">typedef IdxStepXVx</h3>
+<pre><code class="language-C++">using IdxStepXVx =  IdxStep&lt;GridX, GridVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxvx">typedef IdxVx</h3>
+<pre><code class="language-C++">using IdxVx =  Idx&lt;GridVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxx">typedef IdxX</h3>
+<pre><code class="language-C++">using IdxX =  Idx&lt;GridX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxxvx">typedef IdxXVx</h3>
+<pre><code class="language-C++">using IdxXVx =  Idx&lt;GridX, GridVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-splineinterppointsvx">typedef SplineInterpPointsVx</h3>
+<pre><code class="language-C++">using SplineInterpPointsVx =  ddc::GrevilleInterpolationPoints&lt;BSplinesVx, SplineVxBoundary, SplineVxBoundary&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-splineinterppointsx">typedef SplineInterpPointsX</h3>
+<pre><code class="language-C++">using SplineInterpPointsX =  ddc::GrevilleInterpolationPoints&lt;BSplinesX, SplineXBoundary, SplineXBoundary&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-splinevxbuilder">typedef SplineVxBuilder</h3>
+<pre><code class="language-C++">using SplineVxBuilder =  ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesVx, GridVx, SplineVxBoundary, SplineVxBoundary, ddc::SplineSolver::LAPACK, GridX, GridVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-splinevxbuilder_1d">typedef SplineVxBuilder_1d</h3>
+<pre><code class="language-C++">using SplineVxBuilder_1d =  ddc::SplineBuilder&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesVx, GridVx, SplineVxBoundary, SplineVxBoundary, ddc::SplineSolver::LAPACK, GridVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-splinevxevaluator">typedef SplineVxEvaluator</h3>
+<pre><code class="language-C++">using SplineVxEvaluator =  ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesVx, GridVx, ddc::ConstantExtrapolationRule&lt;Vx&gt;, ddc::ConstantExtrapolationRule&lt;Vx&gt;, GridX, GridVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-splinevxevaluator_1d">typedef SplineVxEvaluator_1d</h3>
+<pre><code class="language-C++">using SplineVxEvaluator_1d =  ddc::SplineEvaluator&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesVx, GridVx, ddc::ConstantExtrapolationRule&lt;Vx&gt;, ddc::ConstantExtrapolationRule&lt;Vx&gt;, GridVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-splinexbuilder">typedef SplineXBuilder</h3>
+<pre><code class="language-C++">using SplineXBuilder =  ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK, GridX, GridVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-splinexbuilder_1d">typedef SplineXBuilder_1d</h3>
+<pre><code class="language-C++">using SplineXBuilder_1d =  ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK, GridX&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-splinexevaluator">typedef SplineXEvaluator</h3>
+<pre><code class="language-C++">using SplineXEvaluator =  ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, ddc::ConstantExtrapolationRule&lt;X&gt;, ddc::ConstantExtrapolationRule&lt;X&gt;, GridX, GridVx&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-splinexevaluator_1d">typedef SplineXEvaluator_1d</h3>
+<pre><code class="language-C++">using SplineXEvaluator_1d =  ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, ddc::ConstantExtrapolationRule&lt;X&gt;, ddc::ConstantExtrapolationRule&lt;X&gt;, GridX&gt;;
+</code></pre>
+<hr>
+<h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
+<h3 id="variable-bsdegreevx">variable BSDegreeVx</h3>
+<pre><code class="language-C++">int constexpr BSDegreeVx;
+</code></pre>
+<hr>
+
+<h3 id="variable-bsdegreex">variable BSDegreeX</h3>
+<pre><code class="language-C++">int constexpr BSDegreeX;
+</code></pre>
+<hr>
+
+<h3 id="variable-bsplineonuniformcellsvx">variable BsplineOnUniformCellsVx</h3>
+<pre><code class="language-C++">bool constexpr BsplineOnUniformCellsVx;
+</code></pre>
+<hr>
+
+<h3 id="variable-bsplineonuniformcellsx">variable BsplineOnUniformCellsX</h3>
+<pre><code class="language-C++">bool constexpr BsplineOnUniformCellsX;
+</code></pre>
+<hr>
+
+<h3 id="variable-splinevxboundary">variable SplineVxBoundary</h3>
+<pre><code class="language-C++">auto constexpr SplineVxBoundary;
+</code></pre>
+<hr>
+
+<h3 id="variable-splinexboundary">variable SplineXBoundary</h3>
+<pre><code class="language-C++">auto constexpr SplineXBoundary;
+</code></pre>
+<hr>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp</code></p></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/gyselax/gyselalibxx/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../docs/jscript/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

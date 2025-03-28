@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_661be8452a62f1b4720eb6eb57123ae7" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo</compoundname>
+    <innerfile refid="moments_8hpp">moments.hpp</innerfile>
+    <innerfile refid="species__info_8hpp">species_info.hpp</innerfile>
+    <innerfile refid="species__init_8cpp">species_init.cpp</innerfile>
+    <innerfile refid="species__init_8hpp">species_init.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/"/>
+  </compounddef>
+</doxygen>

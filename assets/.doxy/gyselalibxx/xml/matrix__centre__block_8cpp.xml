@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="matrix__centre__block_8cpp" kind="file" language="C++">
+    <compoundname>matrix_centre_block.cpp</compoundname>
+    <includes local="no">utility</includes>
+    <includes local="no">string.h</includes>
+    <includes refid="matrix_8hpp" local="yes">matrix.hpp</includes>
+    <includes refid="matrix__centre__block_8hpp" local="yes">matrix_centre_block.hpp</includes>
+    <incdepgraph>
+      <node id="4">
+        <label>matrix.hpp</label>
+        <link refid="matrix_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_centre_block.cpp</label>
+        <link refid="matrix__centre__block_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>matrix_centre_block.hpp</label>
+        <link refid="matrix__centre__block_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>matrix_corner_block.hpp</label>
+        <link refid="matrix__corner__block_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>matrix_dense.hpp</label>
+        <link refid="matrix__dense_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>view.hpp</label>
+        <link refid="view_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Kokkos_Core.hpp</label>
+      </node>
+      <node id="8">
+        <label>array</label>
+      </node>
+      <node id="5">
+        <label>iosfwd</label>
+      </node>
+      <node id="6">
+        <label>memory</label>
+      </node>
+      <node id="9">
+        <label>ostream</label>
+      </node>
+      <node id="3">
+        <label>string.h</label>
+      </node>
+      <node id="2">
+        <label>utility</label>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"><sp/></highlight><highlight class="comment">//for<sp/>memcpy</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;matrix.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;matrix_centre_block.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><ref refid="classMatrix__Centre__Block_1aec4c02c287577b54d57a0b6123d7f869" kindref="member">Matrix_Centre_Block::Matrix_Centre_Block</ref>(</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>n,</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>top_block_size,</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>bottom_block_size,</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;Matrix&gt;<sp/>q)</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="classMatrix__Corner__Block" kindref="compound">Matrix_Corner_Block</ref>(n,<sp/>top_block_size<sp/>+<sp/>bottom_block_size,<sp/>std::move(q))</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>,<sp/>top_block_size(top_block_size)</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>,<sp/>bottom_block_size(bottom_block_size)</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>,<sp/>bottom_block_index(n<sp/>-<sp/>bottom_block_size)</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>,<sp/>swap_array(std::make_unique&lt;double[]&gt;(q_block-&gt;get_size()))</highlight></codeline>
+<codeline lineno="18"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classMatrix__Centre__Block_1a7cce0e26c2a0a31b8412a418f988dfb2" kindref="member">Matrix_Centre_Block::adjust_indexes</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&amp;<sp/>i,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&amp;<sp/>j)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="22"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(i<sp/>&lt;<sp/><ref refid="classMatrix__Centre__Block_1a421974b6a9996c56bea138314b72291a" kindref="member">top_block_size</ref>)</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>i<sp/>+=<sp/><ref refid="classMatrix__Corner__Block_1a2ba0aa809c557ad1d2c710ddf8248cb2" kindref="member">q_block</ref>-&gt;<ref refid="classMatrix_1a15badbcf214a7842a0a654f9210f39a1" kindref="member">get_size</ref>();</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(i<sp/>&lt;<sp/><ref refid="classMatrix__Centre__Block_1a2f2b0a3f24815ba87139c0639ec93c6b" kindref="member">bottom_block_index</ref>)</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>i<sp/>-=<sp/><ref refid="classMatrix__Centre__Block_1a421974b6a9996c56bea138314b72291a" kindref="member">top_block_size</ref>;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(j<sp/>&lt;<sp/><ref refid="classMatrix__Centre__Block_1a421974b6a9996c56bea138314b72291a" kindref="member">top_block_size</ref>)</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>j<sp/>+=<sp/><ref refid="classMatrix__Corner__Block_1a2ba0aa809c557ad1d2c710ddf8248cb2" kindref="member">q_block</ref>-&gt;get_size();</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(j<sp/>&lt;<sp/><ref refid="classMatrix__Centre__Block_1a2f2b0a3f24815ba87139c0639ec93c6b" kindref="member">bottom_block_index</ref>)</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>j<sp/>-=<sp/><ref refid="classMatrix__Centre__Block_1a421974b6a9996c56bea138314b72291a" kindref="member">top_block_size</ref>;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classMatrix__Centre__Block_1a3f27604e6f69a875e4e36aefdac74d7d" kindref="member">Matrix_Centre_Block::get_element</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>j)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="35"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrix__Centre__Block_1a7cce0e26c2a0a31b8412a418f988dfb2" kindref="member">adjust_indexes</ref>(i,<sp/>j);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classMatrix__Corner__Block_1a2eb6fc172db95cc7b24158b565abaae8" kindref="member">Matrix_Corner_Block::get_element</ref>(i,<sp/>j);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classMatrix__Centre__Block_1a27db3d1e7264670ff43acd1e55e85011" kindref="member">Matrix_Centre_Block::set_element</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>j,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>a_ij)</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrix__Centre__Block_1a7cce0e26c2a0a31b8412a418f988dfb2" kindref="member">adjust_indexes</ref>(i,<sp/>j);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrix__Corner__Block_1ac388c62891d9e088ff9c97bc2f6fab1b" kindref="member">Matrix_Corner_Block::set_element</ref>(i,<sp/>j,<sp/>a_ij);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal">DSpan1D<sp/><ref refid="classMatrix__Centre__Block_1ae592b5a53100ebac366316dc6bb48741" kindref="member">Matrix_Centre_Block::swap_array_to_corner</ref>(DSpan1D<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>bx)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="47"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>memcpy(<ref refid="classMatrix__Centre__Block_1a8525f336ba8700359bfb15a6c90c3612" kindref="member">swap_array</ref>.get(),</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bx.data_handle()<sp/>+<sp/><ref refid="classMatrix__Centre__Block_1a421974b6a9996c56bea138314b72291a" kindref="member">top_block_size</ref>,</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classMatrix__Corner__Block_1a2ba0aa809c557ad1d2c710ddf8248cb2" kindref="member">q_block</ref>-&gt;get_size()<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>memcpy(bx.data_handle()<sp/>+<sp/><ref refid="classMatrix__Corner__Block_1a2ba0aa809c557ad1d2c710ddf8248cb2" kindref="member">q_block</ref>-&gt;get_size(),</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bx.data_handle(),</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classMatrix__Centre__Block_1a421974b6a9996c56bea138314b72291a" kindref="member">top_block_size</ref><sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>memcpy(bx.data_handle(),<sp/><ref refid="classMatrix__Centre__Block_1a8525f336ba8700359bfb15a6c90c3612" kindref="member">swap_array</ref>.get(),<sp/><ref refid="classMatrix__Corner__Block_1a2ba0aa809c557ad1d2c710ddf8248cb2" kindref="member">q_block</ref>-&gt;get_size()<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>bx;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal">DSpan2D<sp/><ref refid="classMatrix__Centre__Block_1ae592b5a53100ebac366316dc6bb48741" kindref="member">Matrix_Centre_Block::swap_array_to_corner</ref>(DSpan2D<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>bx)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="59"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ncols<sp/>=<sp/>bx.extent(1);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>memcpy(<ref refid="classMatrix__Centre__Block_1a8525f336ba8700359bfb15a6c90c3612" kindref="member">swap_array</ref>.get(),</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bx.data_handle()<sp/>+<sp/><ref refid="classMatrix__Centre__Block_1a421974b6a9996c56bea138314b72291a" kindref="member">top_block_size</ref><sp/>*<sp/>ncols,</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classMatrix__Corner__Block_1a2ba0aa809c557ad1d2c710ddf8248cb2" kindref="member">q_block</ref>-&gt;get_size()<sp/>*<sp/>ncols<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>memcpy(bx.data_handle()<sp/>+<sp/><ref refid="classMatrix__Corner__Block_1a2ba0aa809c557ad1d2c710ddf8248cb2" kindref="member">q_block</ref>-&gt;get_size()<sp/>*<sp/>ncols,</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bx.data_handle(),</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classMatrix__Centre__Block_1a421974b6a9996c56bea138314b72291a" kindref="member">top_block_size</ref><sp/>*<sp/>ncols<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>memcpy(bx.data_handle(),<sp/><ref refid="classMatrix__Centre__Block_1a8525f336ba8700359bfb15a6c90c3612" kindref="member">swap_array</ref>.get(),<sp/><ref refid="classMatrix__Corner__Block_1a2ba0aa809c557ad1d2c710ddf8248cb2" kindref="member">q_block</ref>-&gt;get_size()<sp/>*<sp/>ncols<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>bx;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal">DSpan1D<sp/><ref refid="classMatrix__Centre__Block_1ae2ead03d989a84a39a45588383ba0fc6" kindref="member">Matrix_Centre_Block::swap_array_to_centre</ref>(DSpan1D<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>bx)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="72"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>memcpy(<ref refid="classMatrix__Centre__Block_1a8525f336ba8700359bfb15a6c90c3612" kindref="member">swap_array</ref>.get(),<sp/>bx.data_handle(),<sp/><ref refid="classMatrix__Corner__Block_1a2ba0aa809c557ad1d2c710ddf8248cb2" kindref="member">q_block</ref>-&gt;get_size()<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>memcpy(bx.data_handle(),</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bx.data_handle()<sp/>+<sp/><ref refid="classMatrix__Corner__Block_1a2ba0aa809c557ad1d2c710ddf8248cb2" kindref="member">q_block</ref>-&gt;get_size(),</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classMatrix__Centre__Block_1a421974b6a9996c56bea138314b72291a" kindref="member">top_block_size</ref><sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>memcpy(bx.data_handle()<sp/>+<sp/><ref refid="classMatrix__Centre__Block_1a421974b6a9996c56bea138314b72291a" kindref="member">top_block_size</ref>,</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classMatrix__Centre__Block_1a8525f336ba8700359bfb15a6c90c3612" kindref="member">swap_array</ref>.get(),</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classMatrix__Corner__Block_1a2ba0aa809c557ad1d2c710ddf8248cb2" kindref="member">q_block</ref>-&gt;get_size()<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>bx;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal">DSpan2D<sp/><ref refid="classMatrix__Centre__Block_1ae2ead03d989a84a39a45588383ba0fc6" kindref="member">Matrix_Centre_Block::swap_array_to_centre</ref>(DSpan2D<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>bx)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="84"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ncols<sp/>=<sp/>bx.extent(1);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>memcpy(<ref refid="classMatrix__Centre__Block_1a8525f336ba8700359bfb15a6c90c3612" kindref="member">swap_array</ref>.get(),<sp/>bx.data_handle(),<sp/><ref refid="classMatrix__Corner__Block_1a2ba0aa809c557ad1d2c710ddf8248cb2" kindref="member">q_block</ref>-&gt;get_size()<sp/>*<sp/>ncols<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>memcpy(bx.data_handle(),</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bx.data_handle()<sp/>+<sp/><ref refid="classMatrix__Corner__Block_1a2ba0aa809c557ad1d2c710ddf8248cb2" kindref="member">q_block</ref>-&gt;get_size()<sp/>*<sp/>ncols,</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classMatrix__Centre__Block_1a421974b6a9996c56bea138314b72291a" kindref="member">top_block_size</ref><sp/>*<sp/>ncols<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>memcpy(bx.data_handle()<sp/>+<sp/><ref refid="classMatrix__Centre__Block_1a421974b6a9996c56bea138314b72291a" kindref="member">top_block_size</ref><sp/>*<sp/>ncols,</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classMatrix__Centre__Block_1a8525f336ba8700359bfb15a6c90c3612" kindref="member">swap_array</ref>.get(),</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classMatrix__Corner__Block_1a2ba0aa809c557ad1d2c710ddf8248cb2" kindref="member">q_block</ref>-&gt;get_size()<sp/>*<sp/>ncols<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>bx;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal">DSpan1D<sp/><ref refid="classMatrix__Centre__Block_1a49aa2d65de19927537c168e6ca1ffbc8" kindref="member">Matrix_Centre_Block::solve_inplace</ref>(DSpan1D<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>bx)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="97"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrix__Centre__Block_1ae592b5a53100ebac366316dc6bb48741" kindref="member">swap_array_to_corner</ref>(bx);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrix__Corner__Block_1a63cfdbae8e80494242f82e73ebef5223" kindref="member">Matrix_Corner_Block::solve_inplace</ref>(bx);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrix__Centre__Block_1ae2ead03d989a84a39a45588383ba0fc6" kindref="member">swap_array_to_centre</ref>(bx);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>bx;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal">DSpan1D<sp/><ref refid="classMatrix__Centre__Block_1a134f99cb2eb5d91749334db3fb6ef4c7" kindref="member">Matrix_Centre_Block::solve_transpose_inplace</ref>(DSpan1D<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>bx)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="105"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrix__Centre__Block_1ae592b5a53100ebac366316dc6bb48741" kindref="member">swap_array_to_corner</ref>(bx);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrix__Corner__Block_1a1a3aab1aed85575bd8d3aa834cf73ed6" kindref="member">Matrix_Corner_Block::solve_transpose_inplace</ref>(bx);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrix__Centre__Block_1ae2ead03d989a84a39a45588383ba0fc6" kindref="member">swap_array_to_centre</ref>(bx);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>bx;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal">DSpan2D<sp/><ref refid="classMatrix__Centre__Block_1a9c7c1a7747125d7f1f1771de3cd05cda" kindref="member">Matrix_Centre_Block::solve_multiple_inplace</ref>(DSpan2D<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>bx)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="113"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrix__Centre__Block_1ae592b5a53100ebac366316dc6bb48741" kindref="member">swap_array_to_corner</ref>(bx);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrix__Corner__Block_1ae311ddeb39776bcb881158c7d7f497a7" kindref="member">Matrix_Corner_Block::solve_multiple_inplace</ref>(bx);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrix__Centre__Block_1ae2ead03d989a84a39a45588383ba0fc6" kindref="member">swap_array_to_centre</ref>(bx);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>bx;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_centre_block.cpp"/>
+  </compounddef>
+</doxygen>

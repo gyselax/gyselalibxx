@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_3ced5d1c6eac490d7704c2e023d148d8" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools</compoundname>
+    <innerfile refid="central__fdm__partial__derivatives_8hpp">central_fdm_partial_derivatives.hpp</innerfile>
+    <innerfile refid="ipartial__derivative_8hpp">ipartial_derivative.hpp</innerfile>
+    <innerfile refid="l__norm__tools_8hpp">l_norm_tools.hpp</innerfile>
+    <innerfile refid="math__tools_8hpp">math_tools.hpp</innerfile>
+    <innerfile refid="spline__1d__partial__derivative_8hpp">spline_1d_partial_derivative.hpp</innerfile>
+    <innerfile refid="spline__2d__partial__derivative_8hpp">spline_2d_partial_derivative.hpp</innerfile>
+    <innerfile refid="spline__builder__2d__cache_8hpp">spline_builder_2d_cache.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/"/>
+  </compounddef>
+</doxygen>

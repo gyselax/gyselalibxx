@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType" kind="struct" language="C++" prot="public">
+    <compoundname>PolarSplineFEMPoissonLikeSolver::EvalDeriv2DType</compoundname>
+    <includes refid="polarpoissonlikesolver_8hpp" local="no">polarpoissonlikesolver.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType_1a8ec2e7ec83bedae738b096e1930b6093" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, IdxRangeFull &gt;::EvalDeriv2DType::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::EvalDeriv2DType::value</qualifiedname>
+        <briefdescription>
+<para>The value of the function <formula id="308">$f(r, \theta)$</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="192" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="192" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType_1a85e12c01584beb77b03e7ba61e740233" prot="public" static="no" mutable="no">
+        <type><ref refid="classTensor" kindref="compound">DVector</ref>&lt; <ref refid="structR__cov" kindref="compound">R_cov</ref>, <ref refid="structTheta__cov" kindref="compound">Theta_cov</ref> &gt;</type>
+        <definition>DVector&lt;R_cov, Theta_cov&gt; PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, IdxRangeFull &gt;::EvalDeriv2DType::derivative</definition>
+        <argsstring></argsstring>
+        <name>derivative</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::EvalDeriv2DType::derivative</qualifiedname>
+        <briefdescription>
+<para>The gradient of the function <formula id="309">$\nabla f(r, \theta)$</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="194" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="194" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Object storing a value and a value of the derivatives in each direction of a 2D function. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, IdxRangeFull &gt;::EvalDeriv2DType</label>
+        <link refid="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>derivative</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Tensor&lt; R_cov, Theta_cov &gt;</label>
+        <link refid="classTensor"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="189" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="190" bodyend="195"/>
+    <listofallmembers>
+      <member refid="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType_1a85e12c01584beb77b03e7ba61e740233" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver::EvalDeriv2DType</scope><name>derivative</name></member>
+      <member refid="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType_1a8ec2e7ec83bedae738b096e1930b6093" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver::EvalDeriv2DType</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

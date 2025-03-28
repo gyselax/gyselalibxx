@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classMpiChargeDensityCalculator" kind="class" language="C++" prot="public">
+    <compoundname>MpiChargeDensityCalculator</compoundname>
+    <basecompoundref refid="classIChargeDensityCalculator" prot="public" virt="non-virtual">IChargeDensityCalculator</basecompoundref>
+    <includes refid="mpichargedensitycalculator_8hpp" local="no">mpichargedensitycalculator.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classMpiChargeDensityCalculator_1a105de408b04ea536a41a93b98c7028f5" prot="private" static="no" mutable="no">
+        <type><ref refid="classIChargeDensityCalculator" kindref="compound">IChargeDensityCalculator</ref> const  &amp;</type>
+        <definition>IChargeDensityCalculator const&amp; MpiChargeDensityCalculator::m_local_charge_density_calculator</definition>
+        <argsstring></argsstring>
+        <name>m_local_charge_density_calculator</name>
+        <qualifiedname>MpiChargeDensityCalculator::m_local_charge_density_calculator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/mpichargedensitycalculator.hpp" line="25" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/mpichargedensitycalculator.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMpiChargeDensityCalculator_1a2c0a8f93e9d849ff81de4bfe16445a3e" prot="private" static="no" mutable="no">
+        <type>MPI_Comm</type>
+        <definition>MPI_Comm MpiChargeDensityCalculator::m_comm</definition>
+        <argsstring></argsstring>
+        <name>m_comm</name>
+        <qualifiedname>MpiChargeDensityCalculator::m_comm</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/mpichargedensitycalculator.hpp" line="26" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/mpichargedensitycalculator.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classMpiChargeDensityCalculator_1aab5e7f8beb22d2f4020b90c65f5e90b5" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MpiChargeDensityCalculator::MpiChargeDensityCalculator</definition>
+        <argsstring>(MPI_Comm comm, IChargeDensityCalculator const &amp;local_charge_density_calculator)</argsstring>
+        <name>MpiChargeDensityCalculator</name>
+        <qualifiedname>MpiChargeDensityCalculator::MpiChargeDensityCalculator</qualifiedname>
+        <param>
+          <type>MPI_Comm</type>
+          <declname>comm</declname>
+        </param>
+        <param>
+          <type><ref refid="classIChargeDensityCalculator" kindref="compound">IChargeDensityCalculator</ref> const &amp;</type>
+          <declname>local_charge_density_calculator</declname>
+        </param>
+        <briefdescription>
+<para>Create a <ref refid="classMpiChargeDensityCalculator" kindref="compound">MpiChargeDensityCalculator</ref> object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">comm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The MPI communicator across which the calculation is carried out. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">local_charge_density_calculator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An operator which calculates the density locally on a given MPI node. The results from this operator will then be combined using MPI. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/mpichargedensitycalculator.hpp" line="37" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/mpichargedensitycalculator.cpp" bodystart="11" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classMpiChargeDensityCalculator_1a686ac85ff511649317275df829e71ba2" prot="public" static="no" const="yes" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>void</type>
+        <definition>void MpiChargeDensityCalculator::operator()</definition>
+        <argsstring>(DFieldXY rho, DConstFieldSpVxVyXY allfdistribu) const final</argsstring>
+        <name>operator()</name>
+        <qualifiedname>MpiChargeDensityCalculator::operator()</qualifiedname>
+        <reimplements refid="classIChargeDensityCalculator_1a35eed3a25d6d2b7a80246d204f15b66a">operator()</reimplements>
+        <param>
+          <type>DFieldXY</type>
+          <declname>rho</declname>
+        </param>
+        <param>
+          <type>DConstFieldSpVxVyXY</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <briefdescription>
+<para>Computes the charge density rho from the distribution function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">rho</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/mpichargedensitycalculator.hpp" line="46" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/mpichargedensitycalculator.cpp" bodystart="19" bodyend="37"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class which computes charges density with Kokkos. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A class which computes charges density by solving the equation: <formula id="169">$ \int_{vx} \int_{vy} q_s f_s(x,y,vx,vy) dvx dvy $</formula> where <formula id="139">$ q_s $</formula> is the charge of the species <formula id="140">$ s $</formula> and <formula id="170">$ f_s(x,y,vx,vy) $</formula> is the distribution function. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>IChargeDensityCalculator</label>
+        <link refid="classIChargeDensityCalculator"/>
+      </node>
+      <node id="1">
+        <label>MpiChargeDensityCalculator</label>
+        <link refid="classMpiChargeDensityCalculator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>IChargeDensityCalculator</label>
+        <link refid="classIChargeDensityCalculator"/>
+      </node>
+      <node id="1">
+        <label>MpiChargeDensityCalculator</label>
+        <link refid="classMpiChargeDensityCalculator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/mpichargedensitycalculator.hpp" line="22" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/mpichargedensitycalculator.hpp" bodystart="23" bodyend="47"/>
+    <listofallmembers>
+      <member refid="classMpiChargeDensityCalculator_1a2c0a8f93e9d849ff81de4bfe16445a3e" prot="private" virt="non-virtual"><scope>MpiChargeDensityCalculator</scope><name>m_comm</name></member>
+      <member refid="classMpiChargeDensityCalculator_1a105de408b04ea536a41a93b98c7028f5" prot="private" virt="non-virtual"><scope>MpiChargeDensityCalculator</scope><name>m_local_charge_density_calculator</name></member>
+      <member refid="classMpiChargeDensityCalculator_1aab5e7f8beb22d2f4020b90c65f5e90b5" prot="public" virt="non-virtual"><scope>MpiChargeDensityCalculator</scope><name>MpiChargeDensityCalculator</name></member>
+      <member refid="classMpiChargeDensityCalculator_1a686ac85ff511649317275df829e71ba2" prot="public" virt="virtual"><scope>MpiChargeDensityCalculator</scope><name>operator()</name></member>
+      <member refid="classIChargeDensityCalculator_1a33642031ef4d350e865b9b3d81f6bc76" prot="public" virt="pure-virtual" ambiguityscope="IChargeDensityCalculator::"><scope>MpiChargeDensityCalculator</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

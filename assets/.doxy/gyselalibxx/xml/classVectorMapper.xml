@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classVectorMapper" kind="class" language="C++" prot="public">
+    <compoundname>VectorMapper</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class InVectorSpace</type>
+      </param>
+      <param>
+        <type>class OutVectorSpace</type>
+      </param>
+      <param>
+        <type>class Mapping</type>
+      </param>
+      <param>
+        <type>class ExecSpace</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>The general predeclaration of <ref refid="classVectorMapper" kindref="compound">VectorMapper</ref>. <simplesect kind="see"><para><ref refid="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c_1VectorMapperImplementation" kindref="member">VectorMapperImplementation</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/vector_mapper.hpp" line="13" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/vector_mapper.hpp" bodystart="13" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

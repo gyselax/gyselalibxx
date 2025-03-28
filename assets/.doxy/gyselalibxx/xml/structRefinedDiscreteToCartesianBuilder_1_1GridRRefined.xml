@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structRefinedDiscreteToCartesianBuilder_1_1GridRRefined" kind="struct" language="C++" prot="public">
+    <compoundname>RefinedDiscreteToCartesianBuilder::GridRRefined</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">GrevillePointsR::interpolation_discrete_dimension_type</basecompoundref>
+    <includes refid="discrete__mapping__builder_8hpp" local="no">discrete_mapping_builder.hpp</includes>
+    <briefdescription>
+<para>The type of the grid of radial points on which the new mapping will be defined. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>GrevillePointsR::interpolation_discrete_dimension_type</label>
+      </node>
+      <node id="1">
+        <label>RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::GridRRefined</label>
+        <link refid="structRefinedDiscreteToCartesianBuilder_1_1GridRRefined"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>GrevillePointsR::interpolation_discrete_dimension_type</label>
+      </node>
+      <node id="1">
+        <label>RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::GridRRefined</label>
+        <link refid="structRefinedDiscreteToCartesianBuilder_1_1GridRRefined"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="227" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="228" bodyend="229"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

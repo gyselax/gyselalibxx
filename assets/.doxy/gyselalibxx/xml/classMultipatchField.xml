@@ -1,0 +1,595 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classMultipatchField" kind="class" language="C++" prot="public">
+    <compoundname>MultipatchField</compoundname>
+    <basecompoundref refid="classMultipatchType" prot="public" virt="non-virtual">MultipatchType&lt; T, Patches... &gt;</basecompoundref>
+    <includes refid="multipatch__field_8hpp" local="no">multipatch_field.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>template&lt; typename P &gt; typename</type>
+        <declname>T</declname>
+        <defname>T</defname>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>Patches</declname>
+        <defname>Patches</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classMultipatchField_1aa166acf6255535cc17a77462f916bc24" prot="public" static="no">
+        <type><ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>&lt; <ref refid="structT" kindref="compound">T</ref>, Patches... &gt;</type>
+        <definition>using MultipatchField&lt; T, Patches &gt;::base_type =  MultipatchType&lt;T, Patches...&gt;</definition>
+        <argsstring></argsstring>
+        <name>base_type</name>
+        <qualifiedname>MultipatchField::base_type</qualifiedname>
+        <briefdescription>
+<para>The <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref> from which this class inherits. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="38" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMultipatchField_1a233d6c418d017cdfd11e79694eee50b0" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structT" kindref="compound">T</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;<ref refid="classMultipatchField_1a5b3babc9be1e8e6c0c87ab4a89d87fc2" kindref="member">::discrete_domain_type</ref></type>
+        <definition>using MultipatchField&lt; T, Patches &gt;::InternalIdxRangeOnPatch =  typename T&lt;Patch&gt;::discrete_domain_type</definition>
+        <argsstring></argsstring>
+        <name>InternalIdxRangeOnPatch</name>
+        <qualifiedname>MultipatchField::InternalIdxRangeOnPatch</qualifiedname>
+        <briefdescription>
+<para>An internal type alias that is only instantiated if the idx_range method is called. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="45" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMultipatchField_1af03d87daa72042dad5e2f47b11f3fc06" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structT" kindref="compound">T</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;<ref refid="classMultipatchField_1abd59fa1d9f2605c57ea59eeca005b079" kindref="member">::span_type</ref></type>
+        <definition>using MultipatchField&lt; T, Patches &gt;::InternalFieldOnPatch =  typename T&lt;Patch&gt;::span_type</definition>
+        <argsstring></argsstring>
+        <name>InternalFieldOnPatch</name>
+        <qualifiedname>MultipatchField::InternalFieldOnPatch</qualifiedname>
+        <briefdescription>
+<para>An internal type alias that is only instantiated if the get_const_field method is called. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="49" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMultipatchField_1a44a9591797e84d0f116b8d424725fdea" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structT" kindref="compound">T</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;<ref refid="classMultipatchField_1a5cbbad0f201452b8682476434d69eae3" kindref="member">::view_type</ref></type>
+        <definition>using MultipatchField&lt; T, Patches &gt;::InternalConstFieldOnPatch =  typename T&lt;Patch&gt;::view_type</definition>
+        <argsstring></argsstring>
+        <name>InternalConstFieldOnPatch</name>
+        <qualifiedname>MultipatchField::InternalConstFieldOnPatch</qualifiedname>
+        <briefdescription>
+<para>An internal type alias that is only instantiated if the get_const_field method is called. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMultipatchField_1abd59fa1d9f2605c57ea59eeca005b079" prot="public" static="no">
+        <type><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; <ref refid="classMultipatchField_1af03d87daa72042dad5e2f47b11f3fc06" kindref="member">InternalFieldOnPatch</ref>, Patches... &gt;</type>
+        <definition>using MultipatchField&lt; T, Patches &gt;::span_type =  MultipatchField&lt;InternalFieldOnPatch, Patches...&gt;</definition>
+        <argsstring></argsstring>
+        <name>span_type</name>
+        <qualifiedname>MultipatchField::span_type</qualifiedname>
+        <briefdescription>
+<para>The type of a modifiable reference to this multipatch field. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="65" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMultipatchField_1a5cbbad0f201452b8682476434d69eae3" prot="public" static="no">
+        <type><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; <ref refid="classMultipatchField_1a44a9591797e84d0f116b8d424725fdea" kindref="member">InternalConstFieldOnPatch</ref>, Patches... &gt;</type>
+        <definition>using MultipatchField&lt; T, Patches &gt;::view_type =  MultipatchField&lt;InternalConstFieldOnPatch, Patches...&gt;</definition>
+        <argsstring></argsstring>
+        <name>view_type</name>
+        <qualifiedname>MultipatchField::view_type</qualifiedname>
+        <briefdescription>
+<para>The type of a constant reference to this multipatch field. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="67" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMultipatchField_1a5b3babc9be1e8e6c0c87ab4a89d87fc2" prot="public" static="no">
+        <type><ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>&lt; <ref refid="classMultipatchField_1a233d6c418d017cdfd11e79694eee50b0" kindref="member">InternalIdxRangeOnPatch</ref>, Patches... &gt;</type>
+        <definition>using MultipatchField&lt; T, Patches &gt;::discrete_domain_type =  MultipatchType&lt;InternalIdxRangeOnPatch, Patches...&gt;</definition>
+        <argsstring></argsstring>
+        <name>discrete_domain_type</name>
+        <qualifiedname>MultipatchField::discrete_domain_type</qualifiedname>
+        <briefdescription>
+<para>The type of the index ranges that can be used to access this field. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMultipatchField_1a8b5f2a92ee8624fbade15581c7276036" prot="public" static="no">
+        <type>typename base_type::example_element::memory_space</type>
+        <definition>using MultipatchField&lt; T, Patches &gt;::memory_space =  typename base_type::example_element::memory_space</definition>
+        <argsstring></argsstring>
+        <name>memory_space</name>
+        <qualifiedname>MultipatchField::memory_space</qualifiedname>
+        <briefdescription>
+<para>The memory space (CPU/GPU) where the data is saved. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="71" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMultipatchField_1a22720108209413ba6d27300ed253adf6" prot="public" static="no">
+        <type>typename base_type::example_element::element_type</type>
+        <definition>using MultipatchField&lt; T, Patches &gt;::element_type =  typename base_type::example_element::element_type</definition>
+        <argsstring></argsstring>
+        <name>element_type</name>
+        <qualifiedname>MultipatchField::element_type</qualifiedname>
+        <briefdescription>
+<para>The type of the elements inside the field. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="73" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMultipatchField_1a5a2a447cf52dda49f36c1089372e4e42" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="classMultipatchField_1a233d6c418d017cdfd11e79694eee50b0" kindref="member">InternalIdxRangeOnPatch</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;::discrete_element_type</type>
+        <definition>using MultipatchField&lt; T, Patches &gt;::idx_type =  typename InternalIdxRangeOnPatch&lt;Patch&gt;::discrete_element_type</definition>
+        <argsstring></argsstring>
+        <name>idx_type</name>
+        <qualifiedname>MultipatchField::idx_type</qualifiedname>
+        <briefdescription>
+<para>The type used to index the field on the specified patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="77" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classMultipatchField_1affc748ee952450daee6dddc1a2020a9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>template&lt; typename P &gt; typename</type>
+            <declname>OtherType</declname>
+            <defname>OtherType</defname>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>OPatches</declname>
+            <defname>OPatches</defname>
+          </param>
+        </templateparamlist>
+        <type>class</type>
+        <definition>friend class MultipatchField</definition>
+        <argsstring></argsstring>
+        <name>MultipatchField</name>
+        <qualifiedname>MultipatchField::MultipatchField</qualifiedname>
+        <param>
+          <type><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="56" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classMultipatchField_1a888426c528c86a5049c9636d73232c2d" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION</type>
+        <definition>KOKKOS_FUNCTION MultipatchField&lt; T, Patches &gt;::MultipatchField</definition>
+        <argsstring>(T&lt; Patches &gt;... args)</argsstring>
+        <name>MultipatchField</name>
+        <qualifiedname>MultipatchField::MultipatchField</qualifiedname>
+        <param>
+          <type><ref refid="structT" kindref="compound">T</ref>&lt; Patches &gt;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Instantiate the <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> class from an arbitrary number of objects.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The objects to be stored in the class. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="85" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="85" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classMultipatchField_1a243a3e0121a1f9d6fd081a0bc117b1ec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class MultipatchObj</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt;!is_mem_type_v&lt; MultipatchObj &gt;, bool &gt;</type>
+            <defval>true</defval>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION</type>
+        <definition>KOKKOS_FUNCTION MultipatchField&lt; T, Patches &gt;::MultipatchField</definition>
+        <argsstring>(MultipatchObj &amp;other)</argsstring>
+        <name>MultipatchField</name>
+        <qualifiedname>MultipatchField::MultipatchField</qualifiedname>
+        <param>
+          <type>MultipatchObj &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Create a <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> class by copying an instance of another compatible <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>.</para>
+<para>A compatible <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> is one which uses all the patches used by this class. The object being copied may include more patches than this <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>. Further the original <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> must store objects of the correct type (the type template may be different but return the same type depending on how it is designed).</para>
+<para>This function is not explicit as it is helpful to be able to change between equivalent multipatch definitions if the internal type is the same but the definition comes from different locations in the code.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The equivalent <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> being copied. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="102" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="102" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classMultipatchField_1a733d459c789fa5df78b5a7f2863f537e" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class MultipatchObj</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; is_mem_type_v&lt; MultipatchObj &gt;, bool &gt;</type>
+            <defval>true</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>MultipatchField&lt; T, Patches &gt;::MultipatchField</definition>
+        <argsstring>(MultipatchObj &amp;other)</argsstring>
+        <name>MultipatchField</name>
+        <qualifiedname>MultipatchField::MultipatchField</qualifiedname>
+        <param>
+          <type>MultipatchObj &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Create a <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> class from a compatible <ref refid="classMultipatchFieldMem" kindref="compound">MultipatchFieldMem</ref>.</para>
+<para>A compatible <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> is one which uses all the patches used by this class. The object being copied may include more patches than this <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>. Further the original <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> must store objects of the correct type.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classMultipatchFieldMem" kindref="compound">MultipatchFieldMem</ref> being accessed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="118" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="118" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="classMultipatchField_1a5d0139029c4d048c9433fa7d81098578" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>template&lt; typename P &gt; typename</type>
+            <declname>OtherType</declname>
+            <defname>OtherType</defname>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>OPatches</declname>
+            <defname>OPatches</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>MultipatchField&lt; T, Patches &gt;::MultipatchField</definition>
+        <argsstring>(MultipatchField&lt; OtherType, OPatches... &gt; &amp;&amp;other)</argsstring>
+        <name>MultipatchField</name>
+        <qualifiedname>MultipatchField::MultipatchField</qualifiedname>
+        <param>
+          <type><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; OtherType, OPatches... &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Create a <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> class from an r-value (temporary) instance of another <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> which uses the same type for the internal tuple.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The equivalent <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> being copied. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="131" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="131" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="classMultipatchField_1a56cfbacfcac49a2a205e1aa5ff6ffeeb" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>KOKKOS_DEFAULTED_FUNCTION</type>
+        <definition>KOKKOS_DEFAULTED_FUNCTION MultipatchField&lt; T, Patches &gt;::~MultipatchField</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>~MultipatchField</name>
+        <qualifiedname>MultipatchField::~MultipatchField</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="143" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classMultipatchField_1a5ce7a43366b076c562a4eeaf9e7e14d2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION auto</type>
+        <definition>KOKKOS_FUNCTION auto MultipatchField&lt; T, Patches &gt;::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <qualifiedname>MultipatchField::get</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Retrieve an object from the patch that it is defined on.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structPatch" kindref="compound">Patch</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The patch of the object to be returned. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The object on the given patch. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="152" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="152" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="classMultipatchField_1a9a4cb73606c74a79ac3bc33438320647" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto MultipatchField&lt; T, Patches &gt;::idx_range</definition>
+        <argsstring>() const</argsstring>
+        <name>idx_range</name>
+        <qualifiedname>MultipatchField::idx_range</qualifiedname>
+        <briefdescription>
+<para>Get a <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref> containing the index ranges on which the fields are defined. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The set of index ranges on which the set of fields stored in this class are defined. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="162" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="162" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="classMultipatchField_1a91a470e7def55ebe6311b178dce36d23" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION auto</type>
+        <definition>KOKKOS_FUNCTION auto MultipatchField&lt; T, Patches &gt;::get_field</definition>
+        <argsstring>()</argsstring>
+        <name>get_field</name>
+        <qualifiedname>MultipatchField::get_field</qualifiedname>
+        <briefdescription>
+<para>Get a <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> containing modifiable fields. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A set of modifiable fields providing access to the fields stored in this class. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="173" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="173" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="classMultipatchField_1aad6d9590fbc8731d5e25885da11ed142" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION auto</type>
+        <definition>KOKKOS_FUNCTION auto MultipatchField&lt; T, Patches &gt;::span_view</definition>
+        <argsstring>()</argsstring>
+        <name>span_view</name>
+        <qualifiedname>MultipatchField::span_view</qualifiedname>
+        <briefdescription>
+<para>Get a <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> containing modifiable fields. This function matches the DDC name to allow the global get_const_field to be defined. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A set of modifiable fields providing access to the fields stored in this class. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="185" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="185" bodyend="188"/>
+      </memberdef>
+      <memberdef kind="function" id="classMultipatchField_1a70e93ac539f73e00e629dde3bdd39fae" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION auto</type>
+        <definition>KOKKOS_FUNCTION auto MultipatchField&lt; T, Patches &gt;::get_const_field</definition>
+        <argsstring>() const</argsstring>
+        <name>get_const_field</name>
+        <qualifiedname>MultipatchField::get_const_field</qualifiedname>
+        <briefdescription>
+<para>Get a <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> containing constant fields so the values cannot be modified. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A set of constant fields providing access to the fields stored in this class. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="195" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="195" bodyend="199"/>
+      </memberdef>
+      <memberdef kind="function" id="classMultipatchField_1a6f9e5cd86edb626f778aef311c3a92d6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION auto</type>
+        <definition>KOKKOS_FUNCTION auto MultipatchField&lt; T, Patches &gt;::span_cview</definition>
+        <argsstring>()</argsstring>
+        <name>span_cview</name>
+        <qualifiedname>MultipatchField::span_cview</qualifiedname>
+        <briefdescription>
+<para>Get a <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref> containing constant fields so the values cannot be modified. This function matches the DDC name to allow the global get_const_field to be defined. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A set of constant fields providing access to the fields stored in this class. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="207" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="207" bodyend="210"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class to store field objects on patches. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>On a multipatch domain when we have objects and types defined on different patches, e.g. fields. They can be stored in this class and then be accessed by the patch they are defined on.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structT" kindref="compound">T</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the fields/derivative fields/vector fields that are stored on the given patches. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Patches</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The patches of the objects in the same order of the patches that the given objects are defined on.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>The objects have to be defined on different patches. Otherwise retrieving them by their patch is ill-defined. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>MultipatchField&lt; T, Patches &gt;</label>
+        <link refid="classMultipatchField"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>MultipatchType&lt; T, Patches... &gt;</label>
+        <link refid="classMultipatchType"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>MultipatchField&lt; T, Patches &gt;</label>
+        <link refid="classMultipatchField"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>MultipatchType&lt; T, Patches... &gt;</label>
+        <link refid="classMultipatchType"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="29" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="30" bodyend="211"/>
+    <listofallmembers>
+      <member refid="classMultipatchField_1aa166acf6255535cc17a77462f916bc24" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>base_type</name></member>
+      <member refid="classMultipatchField_1a5b3babc9be1e8e6c0c87ab4a89d87fc2" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>discrete_domain_type</name></member>
+      <member refid="classMultipatchField_1a22720108209413ba6d27300ed253adf6" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>element_type</name></member>
+      <member refid="classMultipatchType_1afba13bfc8d2a69be4c8760228c4a8414" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>example_element</name></member>
+      <member refid="classMultipatchField_1a5ce7a43366b076c562a4eeaf9e7e14d2" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>get</name></member>
+      <member refid="classMultipatchField_1a70e93ac539f73e00e629dde3bdd39fae" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>get_const_field</name></member>
+      <member refid="classMultipatchField_1a91a470e7def55ebe6311b178dce36d23" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>get_field</name></member>
+      <member refid="classMultipatchType_1a6a44d19ff0704be6f0b4e1d476cefbcc" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>get_tuple</name></member>
+      <member refid="classMultipatchField_1a9a4cb73606c74a79ac3bc33438320647" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>idx_range</name></member>
+      <member refid="classMultipatchField_1a5a2a447cf52dda49f36c1089372e4e42" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>idx_type</name></member>
+      <member refid="classMultipatchField_1a44a9591797e84d0f116b8d424725fdea" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>InternalConstFieldOnPatch</name></member>
+      <member refid="classMultipatchField_1af03d87daa72042dad5e2f47b11f3fc06" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>InternalFieldOnPatch</name></member>
+      <member refid="classMultipatchField_1a233d6c418d017cdfd11e79694eee50b0" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>InternalIdxRangeOnPatch</name></member>
+      <member refid="classMultipatchType_1ae7480fdbb95f4018d1cd39f809001c14" prot="protected" virt="non-virtual"><scope>MultipatchField</scope><name>m_tuple</name></member>
+      <member refid="classMultipatchField_1a8b5f2a92ee8624fbade15581c7276036" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>memory_space</name></member>
+      <member refid="classMultipatchField_1affc748ee952450daee6dddc1a2020a9e" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>MultipatchField</name></member>
+      <member refid="classMultipatchField_1a888426c528c86a5049c9636d73232c2d" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>MultipatchField</name></member>
+      <member refid="classMultipatchField_1a243a3e0121a1f9d6fd081a0bc117b1ec" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>MultipatchField</name></member>
+      <member refid="classMultipatchField_1a733d459c789fa5df78b5a7f2863f537e" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>MultipatchField</name></member>
+      <member refid="classMultipatchField_1a5d0139029c4d048c9433fa7d81098578" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>MultipatchField</name></member>
+      <member refid="classMultipatchType_1ae1ab2f08d00d74b0fd692ed0269af5c6" prot="protected" virt="non-virtual"><scope>MultipatchField</scope><name>MultipatchType</name></member>
+      <member refid="classMultipatchType_1a7a63de3f7e30ad01b0a2634abacba57d" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>MultipatchType</name></member>
+      <member refid="classMultipatchType_1ac456d01f07ff6b9ae5fb08ca646f4ff7" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>MultipatchType</name></member>
+      <member refid="classMultipatchType_1a69f9f3da2bb51cac35b2c609c9fda284" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>MultipatchType</name></member>
+      <member refid="classMultipatchType_1ac09ed5edaf7d35c564ef78fe31620631" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>PatchOrdering</name></member>
+      <member refid="classMultipatchType_1a8bd7585483ea579822748d6100ae3edb" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>size</name></member>
+      <member refid="classMultipatchField_1a6f9e5cd86edb626f778aef311c3a92d6" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>span_cview</name></member>
+      <member refid="classMultipatchField_1abd59fa1d9f2605c57ea59eeca005b079" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>span_type</name></member>
+      <member refid="classMultipatchField_1aad6d9590fbc8731d5e25885da11ed142" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>span_view</name></member>
+      <member refid="classMultipatchField_1a5cbbad0f201452b8682476434d69eae3" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>view_type</name></member>
+      <member refid="classMultipatchField_1a56cfbacfcac49a2a205e1aa5ff6ffeeb" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>~MultipatchField</name></member>
+      <member refid="classMultipatchType_1a9b09b8b98e05fea159a80bbca8367a77" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>~MultipatchType</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

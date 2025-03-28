@@ -1,0 +1,269 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classMatrixBatch" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>MatrixBatch</compoundname>
+    <derivedcompoundref refid="classMatrixBatchCsr" prot="public" virt="non-virtual">MatrixBatchCsr&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classMatrixBatchCsr" prot="public" virt="non-virtual">MatrixBatchCsr&lt; ExecSpace, Solver &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classMatrixBatchEll" prot="public" virt="non-virtual">MatrixBatchEll&lt; ExecSpace &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classMatrixBatchTridiag" prot="public" virt="non-virtual">MatrixBatchTridiag&lt; ExecSpace &gt;</derivedcompoundref>
+    <includes refid="matrix__batch_8hpp" local="no">matrix_batch.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename ExecSpace</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classMatrixBatch_1aaefa005779305b357172ff993db97030" prot="public" static="no">
+        <type>Kokkos::View&lt; double **, Kokkos::LayoutRight, ExecSpace &gt;</type>
+        <definition>using MatrixBatch&lt; ExecSpace &gt;::BatchedRHS =  Kokkos::View&lt;double**, Kokkos::LayoutRight, ExecSpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>BatchedRHS</name>
+        <qualifiedname>MatrixBatch::BatchedRHS</qualifiedname>
+        <briefdescription>
+<para>The type of a Kokkos::View storing batched right-hand sides. Second dimension is batch dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classMatrixBatch_1aee70aa705a56143d94796effecdd9a2b" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t MatrixBatch&lt; ExecSpace &gt;::m_size</definition>
+        <argsstring></argsstring>
+        <name>m_size</name>
+        <qualifiedname>MatrixBatch::m_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch.hpp" line="31" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMatrixBatch_1ad4ca21b8912e18b57edee86fca06be2d" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t MatrixBatch&lt; ExecSpace &gt;::m_batch_size</definition>
+        <argsstring></argsstring>
+        <name>m_batch_size</name>
+        <qualifiedname>MatrixBatch::m_batch_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch.hpp" line="32" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classMatrixBatch_1aa36e5c69da8c424b977aae7ac390715c" prot="protected" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>MatrixBatch&lt; ExecSpace &gt;::MatrixBatch</definition>
+        <argsstring>(const std::size_t batch_size, const std::size_t mat_size)</argsstring>
+        <name>MatrixBatch</name>
+        <qualifiedname>MatrixBatch::MatrixBatch</qualifiedname>
+        <param>
+          <type>const std::size_t</type>
+          <declname>batch_size</declname>
+        </param>
+        <param>
+          <type>const std::size_t</type>
+          <declname>mat_size</declname>
+        </param>
+        <briefdescription>
+<para>The constructor for <ref refid="classMatrixBatch" kindref="compound">MatrixBatch</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">batch_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of linear systems to solve. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mat_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Common matrix size for all the systems. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch.hpp" line="40" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch.hpp" bodystart="40" bodyend="44"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classMatrixBatch_1ad51f64ea5ba9ccd34f7bb1aa2993f547" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual MatrixBatch&lt; ExecSpace &gt;::~MatrixBatch</definition>
+        <argsstring>()=default</argsstring>
+        <name>~MatrixBatch</name>
+        <qualifiedname>MatrixBatch::~MatrixBatch</qualifiedname>
+        <briefdescription>
+<para>Destruct. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch.hpp" line="48" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classMatrixBatch_1a9d2068033157c94e632788300a43c884" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void MatrixBatch&lt; ExecSpace &gt;::setup_solver</definition>
+        <argsstring>()=0</argsstring>
+        <name>setup_solver</name>
+        <qualifiedname>MatrixBatch::setup_solver</qualifiedname>
+        <reimplementedby refid="classMatrixBatchCsr_1ad037e66bbdfdfa674e678f49d36f78df">setup_solver</reimplementedby>
+        <reimplementedby refid="classMatrixBatchCsr_1ad037e66bbdfdfa674e678f49d36f78df">setup_solver</reimplementedby>
+        <reimplementedby refid="classMatrixBatchEll_1a85a10595895f36e45701697a6b3d2c59">setup_solver</reimplementedby>
+        <reimplementedby refid="classMatrixBatchTridiag_1a92c40d724831cfe30419dadbb6dfa4f1">setup_solver</reimplementedby>
+        <briefdescription>
+<para>Perform a pre-process operation on the solver. Must be called after filling the matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch.hpp" line="53" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classMatrixBatch_1aed90bf340060a7bc8c24cf61771e212e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void MatrixBatch&lt; ExecSpace &gt;::solve</definition>
+        <argsstring>(BatchedRHS b) const =0</argsstring>
+        <name>solve</name>
+        <qualifiedname>MatrixBatch::solve</qualifiedname>
+        <reimplementedby refid="classMatrixBatchCsr_1a5d7f76fc2c25fb4867b50181779b4c3c">solve</reimplementedby>
+        <reimplementedby refid="classMatrixBatchCsr_1a5d7f76fc2c25fb4867b50181779b4c3c">solve</reimplementedby>
+        <reimplementedby refid="classMatrixBatchEll_1a899ef38788cbc5cb077519b6f71d51dd">solve</reimplementedby>
+        <reimplementedby refid="classMatrixBatchTridiag_1a47bb05714a68d7b8710b9c4f692bf5ec">solve</reimplementedby>
+        <param>
+          <type><ref refid="classMatrixBatch_1aaefa005779305b357172ff993db97030" kindref="member">BatchedRHS</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Solve the multiple right-hand sides linear problem Ax=b inplace. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 2D Kokkos::View storing the batched right-hand sides of the problem and receiving the corresponding solution. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch.hpp" line="60" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classMatrixBatch_1a62a55966b021f64906841fb38764dbc0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t MatrixBatch&lt; ExecSpace &gt;::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <qualifiedname>MatrixBatch::size</qualifiedname>
+        <briefdescription>
+<para>Get the size of the square matrix corresponding to a single batch in one of its dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The size of the matrix in one of its dimensions. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch.hpp" line="67" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch.hpp" bodystart="67" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classMatrixBatch_1a4ca6fc98c1b218c3aa0a534d04b2a06a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t MatrixBatch&lt; ExecSpace &gt;::batch_size</definition>
+        <argsstring>() const</argsstring>
+        <name>batch_size</name>
+        <qualifiedname>MatrixBatch::batch_size</qualifiedname>
+        <briefdescription>
+<para>Get the batch size of the linear problem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The batch size of the linear problem. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch.hpp" line="77" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch.hpp" bodystart="77" bodyend="80"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="classMatrixBatch" kindref="compound">MatrixBatch</ref> superclass for managing a collection of linear systems. The main assumption is that all matrices have the same size. It is also assumed that each matrix is used to solve one equation. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Classes inheriting from this class must manage other aspects: Sparsity: kind of storage (Dense, Ell, Csr, etc.) Kind of solver (direct, iterative) Preconditioners and factorisations</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ExecSpace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Execution space,needed by Kokkos for allocations and parallelism. The simplest choice is to follow Kokkos, for that: specify Kokkos::DefaultExecutionSpace </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>MatrixBatch&lt; ExecSpace &gt;</label>
+        <link refid="classMatrixBatch"/>
+      </node>
+      <node id="3">
+        <label>MatrixBatchCsr&lt; ExecSpace, Solver &gt;</label>
+        <link refid="classMatrixBatchCsr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>MatrixBatchCsr&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt;</label>
+        <link refid="classMatrixBatchCsr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>MatrixBatchEll&lt; ExecSpace &gt;</label>
+        <link refid="classMatrixBatchEll"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>MatrixBatchTridiag&lt; ExecSpace &gt;</label>
+        <link refid="classMatrixBatchTridiag"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch.hpp" line="23" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch.hpp" bodystart="24" bodyend="81"/>
+    <listofallmembers>
+      <member refid="classMatrixBatch_1a4ca6fc98c1b218c3aa0a534d04b2a06a" prot="public" virt="non-virtual"><scope>MatrixBatch</scope><name>batch_size</name></member>
+      <member refid="classMatrixBatch_1aaefa005779305b357172ff993db97030" prot="public" virt="non-virtual"><scope>MatrixBatch</scope><name>BatchedRHS</name></member>
+      <member refid="classMatrixBatch_1ad4ca21b8912e18b57edee86fca06be2d" prot="private" virt="non-virtual"><scope>MatrixBatch</scope><name>m_batch_size</name></member>
+      <member refid="classMatrixBatch_1aee70aa705a56143d94796effecdd9a2b" prot="private" virt="non-virtual"><scope>MatrixBatch</scope><name>m_size</name></member>
+      <member refid="classMatrixBatch_1aa36e5c69da8c424b977aae7ac390715c" prot="protected" virt="non-virtual"><scope>MatrixBatch</scope><name>MatrixBatch</name></member>
+      <member refid="classMatrixBatch_1a9d2068033157c94e632788300a43c884" prot="public" virt="pure-virtual"><scope>MatrixBatch</scope><name>setup_solver</name></member>
+      <member refid="classMatrixBatch_1a62a55966b021f64906841fb38764dbc0" prot="public" virt="non-virtual"><scope>MatrixBatch</scope><name>size</name></member>
+      <member refid="classMatrixBatch_1aed90bf340060a7bc8c24cf61771e212e" prot="public" virt="pure-virtual"><scope>MatrixBatch</scope><name>solve</name></member>
+      <member refid="classMatrixBatch_1ad51f64ea5ba9ccd34f7bb1aa2993f547" prot="public" virt="virtual"><scope>MatrixBatch</scope><name>~MatrixBatch</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>tensor_tools::is_covariant_vector_index_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;</compoundname>
+    <includes refid="vector__index__tools_8hpp" local="no">vector_index_tools.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class...</type>
+        <declname>Dims</declname>
+        <defname>Dims</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4_1ad1ff9c8b7d85ffec86b55bc4b2ef6c65" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool tensor_tools::is_covariant_vector_index_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>tensor_tools::is_covariant_vector_index_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;::value</qualifiedname>
+        <initializer>= (Dims::IS_COVARIANT &amp;&amp; ...)</initializer>
+        <briefdescription>
+<para>Compile-time boolean indicating if the vector indices are covariant. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_index_tools.hpp" line="82" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_index_tools.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A helper structure to check if all the dimensions in a VectorIndexSet can represent covariant indices. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_index_tools.hpp" line="79" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_index_tools.hpp" bodystart="80" bodyend="83"/>
+    <listofallmembers>
+      <member refid="structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4_1ad1ff9c8b7d85ffec86b55bc4b2ef6c65" prot="public" virt="non-virtual"><scope>tensor_tools::is_covariant_vector_index_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

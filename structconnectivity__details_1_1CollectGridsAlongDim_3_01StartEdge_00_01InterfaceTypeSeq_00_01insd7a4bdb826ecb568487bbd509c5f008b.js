@@ -1,5 +1,0 @@
-var structconnectivity__details_1_1CollectGridsAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_01insd7a4bdb826ecb568487bbd509c5f008b =
-[
-    [ "NewGridList", "structconnectivity__details_1_1CollectGridsAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_01insd7a4bdb826ecb568487bbd509c5f008b.html#a4dcd428a0812b38c076b18997a7fbe03", null ],
-    [ "type", "structconnectivity__details_1_1CollectGridsAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_01insd7a4bdb826ecb568487bbd509c5f008b.html#a61f31127356ceede4092449d8daea05c", null ]
-];

@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Variables - GyselalibX</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Variables";
+        var mkdocs_page_input_path = "gyselalibxx/variables.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> GyselalibX
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">General</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/getting_started.html">Getting Started</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Installation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../docs/first_steps/install.html">Gyselalib++ Installation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../toolchains/index.html">Pre-made build settings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standards</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/mathematical_and_physical_conventions.html">Math & Physics</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Gyselalib++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Source</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../src/index.html">Gyselalib++ contents</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/advection/index.html">Advection methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/collisions/index.html">Collisions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/data_types/index.html">Data Storage Types</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryRTheta/index.html">Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection/index.html">Advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_field</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/geometry/index.html">Geometry RTheta</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/initialisation/index.html">Initialisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/poisson/index.html">Polar Poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_solver</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/time_solver/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryVparMu</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryVparMu/index.html">Geometry (vpar, mu)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/collisions/index.html">CollisionConfiguration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/geometry/index.html">GeometryVparMu</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXVx/index.html">Geometry (x, v_x)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >boltzmann</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/boltzmann/index.html">Boltzmann solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/geometry/index.html">Geometry X-Vx</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >rhs</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/rhs/index.html">RHS</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/utils/index.html">Utils</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXY/index.html">Geometry (x, y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/geometry/index.html">Geometry XY</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/initialisation/index.html">Initialisation on (x,y) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/time_integration/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXYVxVy</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXYVxVy/index.html">Geometry (x, y, v_x, v_y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/geometry/index.html">Geometry X Y-Vx Vy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vlasov</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/vlasov/index.html">Vlasov solver</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/interpolation/index.html">Interpolation Methods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/polar_splines/index.html">Polar Splines</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >io</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/io/index.html">Functions used for input and output</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mapping</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mapping/index.html">Mappings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >math_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/math_tools/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >matrix_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/matrix_tools/index.html">Matrix tools</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mpi_parallelisation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mpi_parallelisation/index.html">Parallelisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/multipatch/index.html">Multipatch</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >connectivity</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/connectivity/index.html">Multipatch connectivity</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/data_types/index.html">Data Types for Multipatch Geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/utils/index.html">Multipatch utilitary functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >quadrature</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/quadrature/index.html">Quadrature Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >speciesinfo</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/speciesinfo/index.html">SpeciesInfo (x, v_x)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >timestepper</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/timestepper/index.html">Time Stepping Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/utils/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Simulations</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../simulations/index.html">Gyselalib++ simulations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryRTheta/index.html">Simulations in (r, theta) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >diocotron</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/diocotron/index.html">Diocotron instability</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vortex_merger</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/vortex_merger/index.html">Vortex merger</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXVx/index.html">Simulations in (x, vx) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXY/index.html">Simulations in (x, y) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >guiding_centre</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryXY/guiding_centre/index.html">Guiding centre (X,Y) simulation</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tests</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../tests/index.html">Gyselalib++ tests</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/advection/index.html">Tests on the templated advection operators</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/geometryRTheta/index.html">Tests : Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/advection_rtheta/index.html">Tests on the 2D polar advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/polar_poisson/index.html">Tests on the 2D polar poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline_interpolator_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/spline_interpolator_rtheta/index.html">Tests on spline interpolator in polar coordinates</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/multipatch/index.html">Multipatch geometry tests</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometries</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/multipatch/geometries/index.html">Multipatch geometries</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Adding_docs.html">Adding Docs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Using_git.html">Using Git</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >Gyselalib++</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" >Classes</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="annotated.html">Class List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="classes.html">Class Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="hierarchy.html">Class Hierarchy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Namespaces</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="namespaces.html">Namespace List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_members.html">Namespace Members</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_functions.html">Namespace Member Functions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_variables.html">Namespace Member Variables</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_typedefs.html">Namespace Member Typedefs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_enums.html">Namespace Member Enumerations</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Variables</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#b">b</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#c">c</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#d">d</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#e">e</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#f">f</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#g">g</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#h">h</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#i">i</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#l">l</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#m">m</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#n">n</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#o">o</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#p">p</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#r">r</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#s">s</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#t">t</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#u">u</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#v">v</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#x">x</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="macros.html">Macros</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="files.html">Files</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">GyselalibX</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">API</li>
+          <li class="breadcrumb-item">Gyselalib++</li>
+      <li class="breadcrumb-item active">Variables</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/gyselax/gyselalibxx/edit/master/docs/gyselalibxx/variables.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div><h1 id="variables">Variables</h1>
+<h2 id="b">b</h2>
+<ul>
+<li><strong>BSDegreeR</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BSDegreeTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BsplineOnUniformCellsR</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BsplineOnUniformCellsTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BSDegreeMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BSDegreeVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BsplineOnUniformCellsMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BsplineOnUniformCellsVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BSConstFieldX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BSDegreeVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BSDegreeX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BSFieldMemX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BSFieldX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BsplineOnUniformCellsVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BsplineOnUniformCellsX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BSConstFieldXY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BSDegreeY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BsplineOnUniformCellsY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BSDegreeVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BsplineOnUniformCellsVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>BCond</strong> (<a href="Lagrange_8hpp.html"><strong>Lagrange.hpp</strong></a>)</li>
+<li><strong>BSplines1OnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>BSplines2OnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+</ul>
+<h2 id="c">c</h2>
+<ul>
+<li><strong>ConstFieldR</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldRTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstSpline2D</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstVectorSplineCoeffs2D</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>CoordR</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>CoordRTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>CoordTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>CoordVr</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>CoordVtheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>CoordVx</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>CoordVy</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>CoordX</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>CoordXY</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>CoordY</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldSpVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldSpVparMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldVparMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>CoordMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>CoordVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldSpMom</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldSpMomX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldSpVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldSpX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldSpXVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>CoordT</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>CoordXVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldXY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldSpVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldSpVxVyXY</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldSpXYVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>ConstFieldVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>CoordXY_pC</strong> (<a href="geometry__pseudo__cartesian_8hpp.html"><strong>geometry_pseudo_cartesian.hpp</strong></a>)</li>
+<li><strong>CoordX_pC</strong> (<a href="geometry__pseudo__cartesian_8hpp.html"><strong>geometry_pseudo_cartesian.hpp</strong></a>)</li>
+<li><strong>CoordY_pC</strong> (<a href="geometry__pseudo__cartesian_8hpp.html"><strong>geometry_pseudo_cartesian.hpp</strong></a>)</li>
+<li><strong>collect_grids_on_dim_t</strong> (<a href="connectivity__details_8hpp.html"><strong>connectivity_details.hpp</strong></a>)</li>
+<li><strong>collect_interfaces_on_dim_t</strong> (<a href="connectivity__details_8hpp.html"><strong>connectivity_details.hpp</strong></a>)</li>
+<li><strong>ConstDeriv12_OnPatch_2D</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>ConstDeriv1_OnPatch_2D</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>ConstDeriv2_OnPatch_2D</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>ConstSplineCoeff1OnPatch_1D</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>ConstSplineCoeff1OnPatch_2D</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>ConstSplineCoeffOnPatch_2D</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>ConstSplineCoeffOnPatch_2D_host</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>Coord1Field1OnPatch_1D</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>CoordConstFieldOnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>CoordFieldMemOnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>CoordFieldOnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>ConstFieldSp</strong> (<a href="species__info_8hpp.html"><strong>species_info.hpp</strong></a>)</li>
+<li><strong>ConstField</strong> (<a href="ddc__aliases_8hpp.html"><strong>ddc_aliases.hpp</strong></a>)</li>
+<li><strong>Coord</strong> (<a href="ddc__aliases_8hpp.html"><strong>ddc_aliases.hpp</strong></a>)</li>
+<li><strong>CDSpan1D</strong> (<a href="view_8hpp.html"><strong>view.hpp</strong></a>)</li>
+<li><strong>CDSpan2D</strong> (<a href="view_8hpp.html"><strong>view.hpp</strong></a>)</li>
+</ul>
+<h2 id="d">d</h2>
+<ul>
+<li><strong>DerivConstField</strong> (<a href="derivative__field_8hpp.html"><strong>derivative_field.hpp</strong></a>)</li>
+<li><strong>DTensor</strong> (<a href="tensor_8hpp.html"><strong>tensor.hpp</strong></a>)</li>
+<li><strong>DVector</strong> (<a href="tensor_8hpp.html"><strong>tensor.hpp</strong></a>)</li>
+<li><strong>DVectorConstField</strong> (<a href="vector__field_8hpp.html"><strong>vector_field.hpp</strong></a>)</li>
+<li><strong>DVectorField</strong> (<a href="vector__field_8hpp.html"><strong>vector_field.hpp</strong></a>)</li>
+<li><strong>DVectorFieldMem</strong> (<a href="vector__field__mem_8hpp.html"><strong>vector_field_mem.hpp</strong></a>)</li>
+<li><strong>DConstFieldR</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldRTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstVectorFieldRTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemR</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemRTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldR</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldRTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DVectorFieldMemRTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DVectorFieldRTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldSpVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldSpVparMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldVparMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemSpVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemSpVparMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemVparMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldSpVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldSpVparMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldVparMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DBSConstFieldX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DBSFieldMemX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DBSFieldX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldSpMom</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldSpMomX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldSpVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldSpX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldSpXVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemSpMom</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemSpMomX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemSpVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemSpX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemSpXVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldSpMom</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldSpMomX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldSpVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldSpX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldSpXVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DBSConstFieldXY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldXY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemXY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldXY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldSpVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldSpVxVyXY</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldSpXYVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DConstFieldVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemSpVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemSpVxVyXY</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemSpXYVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldMemXYVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldSpVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldSpVxVyXY</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldSpXYVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>DFieldVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>dimensions_are_adjacent_v</strong> (<a href="mpitools_8hpp.html"><strong>mpitools.hpp</strong></a>)</li>
+<li><strong>DConstField1OnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>DConstFieldOnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>DField1OnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>DFieldMem1OnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>DFieldMem2OnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>DFieldMemOnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>DFieldOnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>DFieldOnPatch_host</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>DVectorConstFieldOnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>DVectorFieldMemOnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>DVectorFieldOnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>DConstFieldSp</strong> (<a href="species__info_8hpp.html"><strong>species_info.hpp</strong></a>)</li>
+<li><strong>DFieldMemSp</strong> (<a href="species__info_8hpp.html"><strong>species_info.hpp</strong></a>)</li>
+<li><strong>DFieldSp</strong> (<a href="species__info_8hpp.html"><strong>species_info.hpp</strong></a>)</li>
+<li><strong>DConstField</strong> (<a href="ddc__aliases_8hpp.html"><strong>ddc_aliases.hpp</strong></a>)</li>
+<li><strong>DField</strong> (<a href="ddc__aliases_8hpp.html"><strong>ddc_aliases.hpp</strong></a>)</li>
+<li><strong>DFieldMem</strong> (<a href="ddc__aliases_8hpp.html"><strong>ddc_aliases.hpp</strong></a>)</li>
+<li><strong>device_t</strong> (<a href="ddc__helper_8hpp.html"><strong>ddc_helper.hpp</strong></a>)</li>
+<li><strong>DKokkosView</strong> (<a href="view_8hpp.html"><strong>view.hpp</strong></a>)</li>
+<li><strong>DKokkosView_h</strong> (<a href="view_8hpp.html"><strong>view.hpp</strong></a>)</li>
+<li><strong>DSpan1D</strong> (<a href="view_8hpp.html"><strong>view.hpp</strong></a>)</li>
+<li><strong>DSpan2D</strong> (<a href="view_8hpp.html"><strong>view.hpp</strong></a>)</li>
+<li><strong>DView1D</strong> (<a href="view_8hpp.html"><strong>view.hpp</strong></a>)</li>
+<li><strong>DView2D</strong> (<a href="view_8hpp.html"><strong>view.hpp</strong></a>)</li>
+</ul>
+<h2 id="e">e</h2>
+<ul>
+<li><strong>enable_borrowed_deriv_field&lt; DerivField&lt; ElementType, SupportType, MemorySpace, LayoutStridedPolicy &gt; &gt;</strong> (<a href="derivative__field_8hpp.html"><strong>derivative_field.hpp</strong></a>)</li>
+<li><strong>enable_data_access_methods&lt; DerivField&lt; ElementType, SupportType, MemorySpace, LayoutStridedPolicy &gt; &gt;</strong> (<a href="derivative__field_8hpp.html"><strong>derivative_field.hpp</strong></a>)</li>
+<li><strong>enable_deriv_field&lt; DerivField&lt; ElementType, SupportType, MemorySpace, LayoutStridedPolicy &gt; &gt;</strong> (<a href="derivative__field_8hpp.html"><strong>derivative_field.hpp</strong></a>)</li>
+<li><strong>enable_borrowed_deriv_field</strong> (<a href="derivative__field__common_8hpp.html"><strong>derivative_field_common.hpp</strong></a>)</li>
+<li><strong>enable_deriv_field</strong> (<a href="derivative__field__common_8hpp.html"><strong>derivative_field_common.hpp</strong></a>)</li>
+<li><strong>enable_data_access_methods&lt; DerivFieldMem&lt; ElementType, SupportType, NDerivs, Allocator &gt; &gt;</strong> (<a href="derivative__field__mem_8hpp.html"><strong>derivative_field_mem.hpp</strong></a>)</li>
+<li><strong>enable_deriv_field&lt; DerivFieldMem&lt; ElementType, SupportType, NDerivs, MemSpace &gt; &gt;</strong> (<a href="derivative__field__mem_8hpp.html"><strong>derivative_field_mem.hpp</strong></a>)</li>
+<li><strong>enable_mem_type&lt; DerivFieldMem&lt; ElementType, SupportType, NDerivs, Allocator &gt; &gt;</strong> (<a href="derivative__field__mem_8hpp.html"><strong>derivative_field_mem.hpp</strong></a>)</li>
+<li><strong>enable_borrowed_vector_field&lt; VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; &gt;</strong> (<a href="vector__field_8hpp.html"><strong>vector_field.hpp</strong></a>)</li>
+<li><strong>enable_data_access_methods&lt; VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; &gt;</strong> (<a href="vector__field_8hpp.html"><strong>vector_field.hpp</strong></a>)</li>
+<li><strong>enable_vector_field&lt; VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; &gt;</strong> (<a href="vector__field_8hpp.html"><strong>vector_field.hpp</strong></a>)</li>
+<li><strong>enable_borrowed_vector_field</strong> (<a href="vector__field__common_8hpp.html"><strong>vector_field_common.hpp</strong></a>)</li>
+<li><strong>enable_vector_field</strong> (<a href="vector__field__common_8hpp.html"><strong>vector_field_common.hpp</strong></a>)</li>
+<li><strong>enable_data_access_methods&lt; VectorFieldMem&lt; ElementType, IdxRangeType, DimSeq, Allocator &gt; &gt;</strong> (<a href="vector__field__mem_8hpp.html"><strong>vector_field_mem.hpp</strong></a>)</li>
+<li><strong>enable_mem_type&lt; VectorFieldMem&lt; ElementType, IdxRangeType, DimSeq, Allocator &gt; &gt;</strong> (<a href="vector__field__mem_8hpp.html"><strong>vector_field_mem.hpp</strong></a>)</li>
+<li><strong>enable_vector_field&lt; VectorFieldMem&lt; ElementType, IdxRangeType, DimSeq, MemSpace &gt; &gt;</strong> (<a href="vector__field__mem_8hpp.html"><strong>vector_field_mem.hpp</strong></a>)</li>
+<li><strong>enable_data_access_methods&lt; ConstPolarSpline&lt; PolarBSplines, MemorySpace &gt; &gt;</strong> (<a href="polar__spline_8hpp.html"><strong>polar_spline.hpp</strong></a>)</li>
+<li><strong>enable_data_access_methods&lt; PolarSpline&lt; PolarBSplines, MemorySpace &gt; &gt;</strong> (<a href="polar__spline_8hpp.html"><strong>polar_spline.hpp</strong></a>)</li>
+<li><strong>enable_data_access_methods&lt; PolarSplineMem&lt; PolarBSplines, MemorySpace &gt; &gt;</strong> (<a href="polar__spline_8hpp.html"><strong>polar_spline.hpp</strong></a>)</li>
+<li><strong>enable_mem_type&lt; PolarSplineMem&lt; PolarBSplines, MemorySpace &gt; &gt;</strong> (<a href="polar__spline_8hpp.html"><strong>polar_spline.hpp</strong></a>)</li>
+<li><strong>equivalent_edge_t</strong> (<a href="connectivity__details_8hpp.html"><strong>connectivity_details.hpp</strong></a>)</li>
+<li><strong>extract_patches_t</strong> (<a href="connectivity__details_8hpp.html"><strong>connectivity_details.hpp</strong></a>)</li>
+<li><strong>enable_data_access_methods&lt; MultipatchField&lt; T, Patches... &gt; &gt;</strong> (<a href="multipatch__field_8hpp.html"><strong>multipatch_field.hpp</strong></a>)</li>
+<li><strong>enable_multipatch_field</strong> (<a href="multipatch__field_8hpp.html"><strong>multipatch_field.hpp</strong></a>)</li>
+<li><strong>enable_multipatch_field&lt; MultipatchField&lt; T, Patches... &gt; &gt;</strong> (<a href="multipatch__field_8hpp.html"><strong>multipatch_field.hpp</strong></a>)</li>
+<li><strong>enable_multipatch_type&lt; MultipatchField&lt; T, Patches... &gt; &gt;</strong> (<a href="multipatch__field_8hpp.html"><strong>multipatch_field.hpp</strong></a>)</li>
+<li><strong>enable_data_access_methods&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;</strong> (<a href="multipatch__field__mem_8hpp.html"><strong>multipatch_field_mem.hpp</strong></a>)</li>
+<li><strong>enable_mem_type&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;</strong> (<a href="multipatch__field__mem_8hpp.html"><strong>multipatch_field_mem.hpp</strong></a>)</li>
+<li><strong>enable_multipatch_field_mem</strong> (<a href="multipatch__field__mem_8hpp.html"><strong>multipatch_field_mem.hpp</strong></a>)</li>
+<li><strong>enable_multipatch_field_mem&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;</strong> (<a href="multipatch__field__mem_8hpp.html"><strong>multipatch_field_mem.hpp</strong></a>)</li>
+<li><strong>enable_multipatch_type&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;</strong> (<a href="multipatch__field__mem_8hpp.html"><strong>multipatch_field_mem.hpp</strong></a>)</li>
+<li><strong>enable_multipatch_type</strong> (<a href="multipatch__type_8hpp.html"><strong>multipatch_type.hpp</strong></a>)</li>
+<li><strong>enable_multipatch_type&lt; MultipatchType&lt; T, Patches... &gt; &gt;</strong> (<a href="multipatch__type_8hpp.html"><strong>multipatch_type.hpp</strong></a>)</li>
+<li><strong>enable_data_access_methods</strong> (<a href="ddc__alias__inline__functions_8hpp.html"><strong>ddc_alias_inline_functions.hpp</strong></a>)</li>
+<li><strong>enable_data_access_methods&lt; Field&lt; ElementType, IdxRangeType, LayoutType, MemoryType &gt; &gt;</strong> (<a href="ddc__alias__inline__functions_8hpp.html"><strong>ddc_alias_inline_functions.hpp</strong></a>)</li>
+<li><strong>enable_data_access_methods&lt; FieldMem&lt; ElementType, IdxRangeType, MemoryType &gt; &gt;</strong> (<a href="ddc__alias__inline__functions_8hpp.html"><strong>ddc_alias_inline_functions.hpp</strong></a>)</li>
+<li><strong>enable_mem_type</strong> (<a href="ddc__alias__inline__functions_8hpp.html"><strong>ddc_alias_inline_functions.hpp</strong></a>)</li>
+<li><strong>enable_mem_type&lt; FieldMem&lt; ElementType, IdxRangeType, MemoryType &gt; &gt;</strong> (<a href="ddc__alias__inline__functions_8hpp.html"><strong>ddc_alias_inline_functions.hpp</strong></a>)</li>
+<li><strong>Extremity</strong> (<a href="geometry__descriptors_8hpp.html"><strong>geometry_descriptors.hpp</strong></a>)</li>
+</ul>
+<h2 id="f">f</h2>
+<ul>
+<li><strong>FieldMemR</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemRTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldR</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldRTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemSpVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemSpVparMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemVparMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldSpVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldSpVparMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldVparMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemSpMom</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemSpMomX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemSpVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemSpX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemSpXVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldSpMom</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldSpMomX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldSpVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldSpX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldSpXVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemXY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldXY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemSpVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemSpVxVyXY</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemSpXYVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldMemXYVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldSpVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldSpVxVyXY</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldSpXYVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>FieldVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>find_associated_interface_t</strong> (<a href="connectivity__details_8hpp.html"><strong>connectivity_details.hpp</strong></a>)</li>
+<li><strong>find_patch_t</strong> (<a href="connectivity__details_8hpp.html"><strong>connectivity_details.hpp</strong></a>)</li>
+<li><strong>find_relevant_idx_range_t</strong> (<a href="connectivity__details_8hpp.html"><strong>connectivity_details.hpp</strong></a>)</li>
+<li><strong>FieldMemSp</strong> (<a href="species__info_8hpp.html"><strong>species_info.hpp</strong></a>)</li>
+<li><strong>FieldSp</strong> (<a href="species__info_8hpp.html"><strong>species_info.hpp</strong></a>)</li>
+<li><strong>Field</strong> (<a href="ddc__aliases_8hpp.html"><strong>ddc_aliases.hpp</strong></a>)</li>
+<li><strong>FieldMem</strong> (<a href="ddc__aliases_8hpp.html"><strong>ddc_aliases.hpp</strong></a>)</li>
+<li><strong>find_grid_t</strong> (<a href="type__seq__tools_8hpp.html"><strong>type_seq_tools.hpp</strong></a>)</li>
+</ul>
+<h2 id="g">g</h2>
+<ul>
+<li><strong>get_contravariant_dims_t</strong> (<a href="vector__index__tools_8hpp.html"><strong>vector_index_tools.hpp</strong></a>)</li>
+<li><strong>get_covariant_dims_t</strong> (<a href="vector__index__tools_8hpp.html"><strong>vector_index_tools.hpp</strong></a>)</li>
+<li><strong>Grid1OnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>Grid2OnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>get_spline_batched_builder1d_t</strong> (<a href="ddc__aliases_8hpp.html"><strong>ddc_aliases.hpp</strong></a>)</li>
+<li><strong>get_spline_batched_builder2d_t</strong> (<a href="ddc__aliases_8hpp.html"><strong>ddc_aliases.hpp</strong></a>)</li>
+<li><strong>get_spline_batched_evaluator1d_t</strong> (<a href="ddc__aliases_8hpp.html"><strong>ddc_aliases.hpp</strong></a>)</li>
+<li><strong>get_spline_batched_evaluator2d_t</strong> (<a href="ddc__aliases_8hpp.html"><strong>ddc_aliases.hpp</strong></a>)</li>
+</ul>
+<h2 id="h">h</h2>
+<ul>
+<li><strong>has_2d_inv_jacobian_v</strong> (<a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a>)</li>
+<li><strong>has_2d_jacobian_v</strong> (<a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a>)</li>
+<li><strong>has_singular_o_point_inv_jacobian_v</strong> (<a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a>)</li>
+<li><strong>has_data_access_methods_v</strong> (<a href="ddc__alias__inline__functions_8hpp.html"><strong>ddc_alias_inline_functions.hpp</strong></a>)</li>
+<li><strong>has_idx_range_v</strong> (<a href="ddc__alias__inline__functions_8hpp.html"><strong>ddc_alias_inline_functions.hpp</strong></a>)</li>
+<li><strong>host_t</strong> (<a href="ddc__helper_8hpp.html"><strong>ddc_helper.hpp</strong></a>)</li>
+</ul>
+<h2 id="i">i</h2>
+<ul>
+<li><strong>is_limiter_mask_enabled</strong> (<a href="collision__operator_8cpp.html"><strong>collision_operator.cpp</strong></a>)</li>
+<li><strong>is_sol_enabled</strong> (<a href="collision__operator_8cpp.html"><strong>collision_operator.cpp</strong></a>)</li>
+<li><strong>is_borrowed_deriv_field_v</strong> (<a href="derivative__field__common_8hpp.html"><strong>derivative_field_common.hpp</strong></a>)</li>
+<li><strong>is_deriv_field_v</strong> (<a href="derivative__field__common_8hpp.html"><strong>derivative_field_common.hpp</strong></a>)</li>
+<li><strong>is_subidx_range_collection_v</strong> (<a href="idx__range__slice_8hpp.html"><strong>idx_range_slice.hpp</strong></a>)</li>
+<li><strong>is_borrowed_vector_field_v</strong> (<a href="vector__field__common_8hpp.html"><strong>vector_field_common.hpp</strong></a>)</li>
+<li><strong>is_vector_field_v</strong> (<a href="vector__field__common_8hpp.html"><strong>vector_field_common.hpp</strong></a>)</li>
+<li><strong>is_contravariant_vector_index_set_v</strong> (<a href="vector__index__tools_8hpp.html"><strong>vector_index_tools.hpp</strong></a>)</li>
+<li><strong>is_covariant_vector_index_set_v</strong> (<a href="vector__index__tools_8hpp.html"><strong>vector_index_tools.hpp</strong></a>)</li>
+<li><strong>is_vector_index_set_v</strong> (<a href="vector__index__tools_8hpp.html"><strong>vector_index_tools.hpp</strong></a>)</li>
+<li><strong>IdxPolarBspl</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxR</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeBSPolar</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeBSR</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeBSRTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeBSTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeR</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeRTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxStepR</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxStepRTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxStepTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeSpVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeSpVparMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeVparMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxSpVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxSpVparMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxStepMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxStepSpVparMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxStepVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxStepVparMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxVparMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxMom</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeBSVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeBSX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeMom</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeSpMom</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeSpMomX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeSpVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeSpX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeSpXVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeXVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxSpMom</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxSpMomX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxSpVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxSpX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxSpXVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxStepMom</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxStepSpMom</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxStepSpMomX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxStepSpVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxStepSpX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxStepSpXVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxStepVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxStepX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxStepXVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxXVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeBSXY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeBSY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeXY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxStepY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxXY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeBSVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeBSVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeSpVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeSpVxVyXY</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeSpXYVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeVxVyXY</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxRangeXYVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxSpXYVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxStepVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>IdxXYVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>is_polar_spline_v</strong> (<a href="polar__spline_8hpp.html"><strong>polar_spline.hpp</strong></a>)</li>
+<li><strong>is_polar_spline_v&lt; ConstPolarSpline&lt; PolarBSplinesType, MemSpace &gt; &gt;</strong> (<a href="polar__spline_8hpp.html"><strong>polar_spline.hpp</strong></a>)</li>
+<li><strong>is_polar_spline_v&lt; PolarSpline&lt; PolarBSplinesType, MemSpace &gt; &gt;</strong> (<a href="polar__spline_8hpp.html"><strong>polar_spline.hpp</strong></a>)</li>
+<li><strong>is_polar_spline_v&lt; PolarSplineMem&lt; PolarBSplinesType, MemSpace &gt; &gt;</strong> (<a href="polar__spline_8hpp.html"><strong>polar_spline.hpp</strong></a>)</li>
+<li><strong>interpolator_on_idx_range_t</strong> (<a href="iinterpolator_8hpp.html"><strong>iinterpolator.hpp</strong></a>)</li>
+<li><strong>inverse_mapping_t</strong> (<a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a>)</li>
+<li><strong>is_accessible_v</strong> (<a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a>)</li>
+<li><strong>is_analytical_mapping_v</strong> (<a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a>)</li>
+<li><strong>is_curvilinear_2d_mapping_v</strong> (<a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a>)</li>
+<li><strong>is_mapping_v</strong> (<a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a>)</li>
+<li><strong>insert_into_seq_before_t</strong> (<a href="mpitools_8hpp.html"><strong>mpitools.hpp</strong></a>)</li>
+<li><strong>insert_into_type_seq_t</strong> (<a href="mpitools_8hpp.html"><strong>mpitools.hpp</strong></a>)</li>
+<li><strong>insert_mpi_tags_into_seq_t</strong> (<a href="mpitools_8hpp.html"><strong>mpitools.hpp</strong></a>)</li>
+<li><strong>interfaces_of_patch_t</strong> (<a href="connectivity__details_8hpp.html"><strong>connectivity_details.hpp</strong></a>)</li>
+<li><strong>is_onion_patch_locator_v</strong> (<a href="utils__patch__locators_8hpp.html"><strong>utils_patch_locators.hpp</strong></a>)</li>
+<li><strong>is_multipatch_field_v</strong> (<a href="multipatch__field_8hpp.html"><strong>multipatch_field.hpp</strong></a>)</li>
+<li><strong>is_multipatch_field_mem_v</strong> (<a href="multipatch__field__mem_8hpp.html"><strong>multipatch_field_mem.hpp</strong></a>)</li>
+<li><strong>is_multipatch_type_v</strong> (<a href="multipatch__type_8hpp.html"><strong>multipatch_type.hpp</strong></a>)</li>
+<li><strong>Idx1OnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>IdxRange1OnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>IdxRangeOnPatch</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>IFieldMemSp</strong> (<a href="species__info_8hpp.html"><strong>species_info.hpp</strong></a>)</li>
+<li><strong>IdxRangeSp</strong> (<a href="species__info_8hpp.html"><strong>species_info.hpp</strong></a>)</li>
+<li><strong>IdxSp</strong> (<a href="species__info_8hpp.html"><strong>species_info.hpp</strong></a>)</li>
+<li><strong>IdxStepSp</strong> (<a href="species__info_8hpp.html"><strong>species_info.hpp</strong></a>)</li>
+<li><strong>is_species_information_v</strong> (<a href="species__info_8hpp.html"><strong>species_info.hpp</strong></a>)</li>
+<li><strong>is_gslx_field_v</strong> (<a href="ddc__alias__inline__functions_8hpp.html"><strong>ddc_alias_inline_functions.hpp</strong></a>)</li>
+<li><strong>is_mem_type_v</strong> (<a href="ddc__alias__inline__functions_8hpp.html"><strong>ddc_alias_inline_functions.hpp</strong></a>)</li>
+<li><strong>Idx</strong> (<a href="ddc__aliases_8hpp.html"><strong>ddc_aliases.hpp</strong></a>)</li>
+<li><strong>IdxRange</strong> (<a href="ddc__aliases_8hpp.html"><strong>ddc_aliases.hpp</strong></a>)</li>
+<li><strong>IdxStep</strong> (<a href="ddc__aliases_8hpp.html"><strong>ddc_aliases.hpp</strong></a>)</li>
+</ul>
+<h2 id="l">l</h2>
+<ul>
+<li><strong>local_idx_range_r_offset</strong> (<a href="collision__operator_8cpp.html"><strong>collision_operator.cpp</strong></a>)</li>
+<li><strong>local_idx_range_theta_offset</strong> (<a href="collision__operator_8cpp.html"><strong>collision_operator.cpp</strong></a>)</li>
+</ul>
+<h2 id="m">m</h2>
+<ul>
+<li><strong>MaskType</strong> (<a href="mask__tanh_8hpp.html"><strong>mask_tanh.hpp</strong></a>)</li>
+<li><strong>MatrixBatchCsrSolver</strong> (<a href="matrix__batch__csr_8hpp.html"><strong>matrix_batch_csr.hpp</strong></a>)</li>
+<li><strong>MPI_type_descriptor_t</strong> (<a href="mpitools_8hpp.html"><strong>mpitools.hpp</strong></a>)</li>
+<li><strong>Matrix_2x2</strong> (<a href="view_8hpp.html"><strong>view.hpp</strong></a>)</li>
+</ul>
+<h2 id="n">n</h2>
+<ul>
+<li><strong>NonUniformGridBase</strong> (<a href="ddc__aliases_8hpp.html"><strong>ddc_aliases.hpp</strong></a>)</li>
+</ul>
+<h2 id="o">o</h2>
+<ul>
+<li><strong>on_memory_space_t</strong> (<a href="ddc__helper_8hpp.html"><strong>ddc_helper.hpp</strong></a>)</li>
+</ul>
+<h2 id="p">p</h2>
+<ul>
+<li><strong>PolarSplineMemRTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+</ul>
+<h2 id="r">r</h2>
+<ul>
+<li><strong>RhsType</strong> (<a href="irighthandside_8hpp.html"><strong>irighthandside.hpp</strong></a>)</li>
+</ul>
+<h2 id="s">s</h2>
+<ul>
+<li><strong>Spline2D</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>Spline2DMem</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineInterpPointsR</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineInterpPointsTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineRBoundary</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineRThetaBuilder</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineRThetaBuilder_host</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineRThetaEvaluatorConstBound</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineRThetaEvaluatorConstBound_host</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineRThetaEvaluatorNullBound</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineRThetaEvaluatorNullBound_host</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineThetaBoundary</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineInterpPointsMu</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineInterpPointsVpar</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineMuBoundary</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineMuBuilder</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineMuEvaluator</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineVparBoundary</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineVparBuilder</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineVparEvaluator</strong> (<a href="geometryVparMu_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineInterpPointsVx</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineInterpPointsX</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineVxBoundary</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineVxBuilder</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineVxBuilder_1d</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineVxEvaluator</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineVxEvaluator_1d</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineXBoundary</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineXBuilder</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineXBuilder_1d</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineXEvaluator</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineXEvaluator_1d</strong> (<a href="geometryXVx_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineInterpPointsY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineXBuilder_XY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineXEvaluator_XY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineYBoundary</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>, <a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineYBuilder_XY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineYEvaluator_XY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineInterpPointsVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineVyBoundary</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineVyBuilder</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineVyEvaluator</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineYBuilder</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>SplineYEvaluator</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>strip_outside_edges_t</strong> (<a href="connectivity__details_8hpp.html"><strong>connectivity_details.hpp</strong></a>)</li>
+<li><strong>SplineCoeff1OnPatch_1D</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>SplineCoeff1OnPatch_2D</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>SplineCoeffOnPatch_2D</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
+<li><strong>Span1D</strong> (<a href="view_8hpp.html"><strong>view.hpp</strong></a>)</li>
+<li><strong>Span2D</strong> (<a href="view_8hpp.html"><strong>view.hpp</strong></a>)</li>
+<li><strong>SpanND</strong> (<a href="view_8hpp.html"><strong>view.hpp</strong></a>)</li>
+</ul>
+<h2 id="t">t</h2>
+<ul>
+<li><strong>to_subidx_range_collection</strong> (<a href="idx__range__slice_8hpp.html"><strong>idx_range_slice.hpp</strong></a>)</li>
+<li><strong>to_tensor_t</strong> (<a href="tensor_8hpp.html"><strong>tensor.hpp</strong></a>)</li>
+<li><strong>to_tuple_t</strong> (<a href="connectivity__details_8hpp.html"><strong>connectivity_details.hpp</strong></a>)</li>
+<li><strong>type_seq_cat_t</strong> (<a href="type__seq__tools_8hpp.html"><strong>type_seq_tools.hpp</strong></a>)</li>
+<li><strong>type_seq_has_unique_elements_v</strong> (<a href="type__seq__tools_8hpp.html"><strong>type_seq_tools.hpp</strong></a>)</li>
+<li><strong>type_seq_range_t</strong> (<a href="type__seq__tools_8hpp.html"><strong>type_seq_tools.hpp</strong></a>)</li>
+<li><strong>type_seq_unique_t</strong> (<a href="type__seq__tools_8hpp.html"><strong>type_seq_tools.hpp</strong></a>)</li>
+</ul>
+<h2 id="u">u</h2>
+<ul>
+<li><strong>UniformGridBase</strong> (<a href="ddc__aliases_8hpp.html"><strong>ddc_aliases.hpp</strong></a>)</li>
+</ul>
+<h2 id="v">v</h2>
+<ul>
+<li><strong>Vector</strong> (<a href="tensor_8hpp.html"><strong>tensor.hpp</strong></a>)</li>
+<li><strong>VectorConstField</strong> (<a href="vector__field_8hpp.html"><strong>vector_field.hpp</strong></a>)</li>
+<li><strong>VectorIndexSet</strong> (<a href="vector__index__tools_8hpp.html"><strong>vector_index_tools.hpp</strong></a>)</li>
+<li><strong>vector_index_set_dual_t</strong> (<a href="vector__index__tools_8hpp.html"><strong>vector_index_tools.hpp</strong></a>)</li>
+<li><strong>VectorSplineCoeffs2D</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>VectorSplineCoeffsMem2D</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>VectorConstFieldXY_XY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>VectorFieldMemXY_XY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>VectorFieldXY_XY</strong> (<a href="geometryXY_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>V2DSplit</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+<li><strong>View1D</strong> (<a href="view_8hpp.html"><strong>view.hpp</strong></a>)</li>
+<li><strong>View2D</strong> (<a href="view_8hpp.html"><strong>view.hpp</strong></a>)</li>
+<li><strong>ViewND</strong> (<a href="view_8hpp.html"><strong>view.hpp</strong></a>)</li>
+</ul>
+<h2 id="x">x</h2>
+<ul>
+<li><strong>X2DSplit</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
+</ul></div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="functions.html" class="btn btn-neutral float-left" title="Functions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="macros.html" class="btn btn-neutral float-right" title="Macros">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/gyselax/gyselalibxx/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="functions.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="macros.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../docs/jscript/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

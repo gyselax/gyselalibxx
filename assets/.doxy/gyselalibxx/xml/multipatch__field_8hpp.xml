@@ -1,0 +1,531 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="multipatch__field_8hpp" kind="file" language="C++">
+    <compoundname>multipatch_field.hpp</compoundname>
+    <includes refid="multipatch__type_8hpp" local="yes">multipatch_type.hpp</includes>
+    <includedby refid="multipatch__field__mem_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp</includedby>
+    <includedby refid="constant__extrapolation__rules__onion_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</includedby>
+    <includedby refid="multipatch__math__tools_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/utils/multipatch_math_tools.hpp</includedby>
+    <includedby refid="itimestepper_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp</includedby>
+    <incdepgraph>
+      <node id="16">
+        <label>tensor.hpp</label>
+        <link refid="tensor_8hpp_source"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>tensor_index_tools.hpp</label>
+        <link refid="tensor__index__tools_8hpp_source"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>vector_field.hpp</label>
+        <link refid="vector__field_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>vector_field_common.hpp</label>
+        <link refid="vector__field__common_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>vector_field_mem.hpp</label>
+        <link refid="vector__field__mem_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>vector_index_tools.hpp</label>
+        <link refid="vector__index__tools_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp</label>
+        <link refid="multipatch__field_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>multipatch_type.hpp</label>
+        <link refid="multipatch__type_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>types.hpp</label>
+        <link refid="types_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ddc_alias_inline_functions.hpp</label>
+        <link refid="ddc__alias__inline__functions_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>ddc_helper.hpp</label>
+        <link refid="ddc__helper_8hpp_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>type_seq_tools.hpp</label>
+        <link refid="type__seq__tools_8hpp_source"/>
+      </node>
+      <node id="17">
+        <label>array</label>
+      </node>
+      <node id="11">
+        <label>cassert</label>
+      </node>
+      <node id="12">
+        <label>cmath</label>
+      </node>
+      <node id="6">
+        <label>ddc/ddc.hpp</label>
+      </node>
+      <node id="8">
+        <label>ddc/kernels/splines.hpp</label>
+      </node>
+      <node id="4">
+        <label>type_traits</label>
+      </node>
+      <node id="5">
+        <label>utility</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="6">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp</label>
+        <link refid="bsl__advection__1d_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp</label>
+        <link refid="bsl__predcorr_8hpp_source"/>
+      </node>
+      <node id="8">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_explicit.hpp</label>
+        <link refid="bsl__predcorr__second__order__explicit_8hpp_source"/>
+      </node>
+      <node id="7">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp</label>
+        <link refid="predcorr__RK2_8hpp_source"/>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp</label>
+        <link refid="multipatch__field_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp</label>
+        <link refid="multipatch__field__mem_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</label>
+        <link refid="constant__extrapolation__rules__onion_8hpp_source"/>
+      </node>
+      <node id="14">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/utils/multipatch_math_tools.hpp</label>
+        <link refid="multipatch__math__tools_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp</label>
+        <link refid="crank__nicolson_8hpp_source"/>
+      </node>
+      <node id="5">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/euler.hpp</label>
+        <link refid="euler_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp</label>
+        <link refid="itimestepper_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk2.hpp</label>
+        <link refid="rk2_8hpp_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk3.hpp</label>
+        <link refid="rk3_8hpp_source"/>
+      </node>
+      <node id="12">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp</label>
+        <link refid="rk4_8hpp_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classMultipatchField" prot="public">MultipatchField</innerclass>
+    <innernamespace refid="namespaceddcHelper">ddcHelper</innernamespace>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="multipatch__field_8hpp_1a077b099d6f85e6518ca7c27eb4b7aeca" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structT" kindref="compound">T</ref></type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool enable_multipatch_field</definition>
+        <argsstring></argsstring>
+        <name>enable_multipatch_field</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="8" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="multipatch__field_8hpp_1a554c41d0cdd6196870eef050bf92992a" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structT" kindref="compound">T</ref></type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool is_multipatch_field_v</definition>
+        <argsstring></argsstring>
+        <name>is_multipatch_field_v</name>
+        <initializer>= enable_multipatch_field&lt;std::remove_const_t&lt;std::remove_reference_t&lt;<ref refid="structT" kindref="compound">T</ref>&gt;&gt;&gt;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="11" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="multipatch__field_8hpp_1a98938c377f6bc9563511e285034c6219" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>template&lt; typename P &gt; typename</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>Patches</declname>
+            <defname>Patches</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool enable_multipatch_type&lt; MultipatchField&lt; T, Patches... &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>enable_multipatch_type&lt; MultipatchField&lt; T, Patches... &gt; &gt;</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="214" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="214" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="multipatch__field_8hpp_1a7e6234ec2716312916c433ea23a4f3e4" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>template&lt; typename P &gt; typename</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>Patches</declname>
+            <defname>Patches</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool enable_data_access_methods&lt; MultipatchField&lt; T, Patches... &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>enable_data_access_methods&lt; MultipatchField&lt; T, Patches... &gt; &gt;</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="217" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="217" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="multipatch__field_8hpp_1a08d41755d9a8db55bd06acc58e34f376" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>template&lt; typename P &gt; typename</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>Patches</declname>
+            <defname>Patches</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool enable_multipatch_field&lt; MultipatchField&lt; T, Patches... &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>enable_multipatch_field&lt; MultipatchField&lt; T, Patches... &gt; &gt;</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="220" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="220" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;multipatch_type.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_multipatch_field<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_multipatch_field_v</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>enable_multipatch_field&lt;std::remove_const_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>P&gt;<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structT" kindref="compound">T</ref>,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Patches&gt;</highlight></codeline>
+<codeline lineno="29" refid="classMultipatchField" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>&lt;T,<sp/>Patches...&gt;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(has_data_access_methods_v&lt;T&lt;Patches&gt;&gt;<sp/>&amp;&amp;<sp/>...),</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;The<sp/>MultipatchField<sp/>type<sp/>should<sp/>only<sp/>contain<sp/>instances<sp/>of<sp/>objects<sp/>that<sp/>can<sp/>be<sp/>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;manipulated<sp/>like<sp/>fields.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="38" refid="classMultipatchField_1aa166acf6255535cc17a77462f916bc24" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMultipatchType" kindref="compound">base_type</ref><sp/>=<sp/><ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>&lt;<ref refid="structT" kindref="compound">T</ref>,<sp/>Patches...&gt;;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classMultipatchType_1ac09ed5edaf7d35c564ef78fe31620631" kindref="member">base_type::PatchOrdering</ref>;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Patch&gt;</highlight></codeline>
+<codeline lineno="45" refid="classMultipatchField_1a233d6c418d017cdfd11e79694eee50b0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMultipatchField_1a233d6c418d017cdfd11e79694eee50b0" kindref="member">InternalIdxRangeOnPatch</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structT" kindref="compound">T&lt;Patch&gt;::discrete_domain_type</ref>;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Patch&gt;</highlight></codeline>
+<codeline lineno="49" refid="classMultipatchField_1af03d87daa72042dad5e2f47b11f3fc06" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMultipatchField_1af03d87daa72042dad5e2f47b11f3fc06" kindref="member">InternalFieldOnPatch</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structT" kindref="compound">T&lt;Patch&gt;::span_type</ref>;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Patch&gt;</highlight></codeline>
+<codeline lineno="53" refid="classMultipatchField_1a44a9591797e84d0f116b8d424725fdea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMultipatchField_1a44a9591797e84d0f116b8d424725fdea" kindref="member">InternalConstFieldOnPatch</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structT" kindref="compound">T&lt;Patch&gt;::view_type</ref>;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>P&gt;<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>OtherType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>OPatches&gt;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>!is_mem_type_v&lt;typename<sp/>base_type::example_element&gt;,</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;For<sp/>correct<sp/>GPU<sp/>handling<sp/>a<sp/>FieldMem<sp/>object<sp/>must<sp/>be<sp/>saved<sp/>in<sp/>a<sp/>MultipatchFieldMem<sp/>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;type.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="65" refid="classMultipatchField_1abd59fa1d9f2605c57ea59eeca005b079" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMultipatchField" kindref="compound">span_type</ref><sp/>=<sp/><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt;<ref refid="classMultipatchField_1af03d87daa72042dad5e2f47b11f3fc06" kindref="member">InternalFieldOnPatch</ref>,<sp/>Patches...&gt;;</highlight></codeline>
+<codeline lineno="67" refid="classMultipatchField_1a5cbbad0f201452b8682476434d69eae3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMultipatchField" kindref="compound">view_type</ref><sp/>=<sp/><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt;<ref refid="classMultipatchField_1a44a9591797e84d0f116b8d424725fdea" kindref="member">InternalConstFieldOnPatch</ref>,<sp/>Patches...&gt;;</highlight></codeline>
+<codeline lineno="69" refid="classMultipatchField_1a5b3babc9be1e8e6c0c87ab4a89d87fc2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMultipatchType" kindref="compound">discrete_domain_type</ref><sp/>=<sp/><ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>&lt;<ref refid="classMultipatchField_1a233d6c418d017cdfd11e79694eee50b0" kindref="member">InternalIdxRangeOnPatch</ref>,<sp/>Patches...&gt;;</highlight></codeline>
+<codeline lineno="71" refid="classMultipatchField_1a8b5f2a92ee8624fbade15581c7276036" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMultipatchField_1a8b5f2a92ee8624fbade15581c7276036" kindref="member">memory_space</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>base_type::example_element::memory_space;</highlight></codeline>
+<codeline lineno="73" refid="classMultipatchField_1a22720108209413ba6d27300ed253adf6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMultipatchField_1a22720108209413ba6d27300ed253adf6" kindref="member">element_type</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>base_type::example_element::element_type;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Patch&gt;</highlight></codeline>
+<codeline lineno="77" refid="classMultipatchField_1a5a2a447cf52dda49f36c1089372e4e42" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMultipatchField_1a5a2a447cf52dda49f36c1089372e4e42" kindref="member">idx_type</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classMultipatchField_1a233d6c418d017cdfd11e79694eee50b0" kindref="member">InternalIdxRangeOnPatch&lt;Patch&gt;::discrete_element_type</ref>;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="85" refid="classMultipatchField_1a888426c528c86a5049c9636d73232c2d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>KOKKOS_FUNCTION<sp/><ref refid="classMultipatchField_1a888426c528c86a5049c9636d73232c2d" kindref="member">MultipatchField</ref>(<ref refid="structT" kindref="compound">T&lt;Patches&gt;</ref>...<sp/>args)<sp/>:<sp/><ref refid="classMultipatchType" kindref="compound">base_type</ref>(args...)<sp/>{}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MultipatchObj,<sp/>std::enable_if_t&lt;!is_mem_type_v&lt;MultipatchObj&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/>true&gt;</highlight></codeline>
+<codeline lineno="102" refid="classMultipatchField_1a243a3e0121a1f9d6fd081a0bc117b1ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classMultipatchField_1a243a3e0121a1f9d6fd081a0bc117b1ec" kindref="member">MultipatchField</ref>(MultipatchObj&amp;<sp/>other)</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classMultipatchType" kindref="compound">base_type</ref>(std::move(<ref refid="structT" kindref="compound">T</ref>&lt;Patches&gt;(other.template<sp/><ref refid="classMultipatchField_1a5ce7a43366b076c562a4eeaf9e7e14d2" kindref="member">get</ref>&lt;Patches&gt;()))...)</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(is_multipatch_type_v&lt;MultipatchObj&gt;);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MultipatchObj,<sp/>std::enable_if_t&lt;is_mem_type_v&lt;MultipatchObj&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/>true&gt;</highlight></codeline>
+<codeline lineno="118" refid="classMultipatchField_1a733d459c789fa5df78b5a7f2863f537e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classMultipatchField_1a733d459c789fa5df78b5a7f2863f537e" kindref="member">MultipatchField</ref>(MultipatchObj&amp;<sp/>other)</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classMultipatchType" kindref="compound">base_type</ref>(std::move(<ref refid="structT" kindref="compound">T</ref>&lt;Patches&gt;(other.template<sp/><ref refid="classMultipatchField_1a5ce7a43366b076c562a4eeaf9e7e14d2" kindref="member">get</ref>&lt;Patches&gt;()))...)</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(is_multipatch_type_v&lt;MultipatchObj&gt;);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>P&gt;<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>OtherType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>OPatches&gt;</highlight></codeline>
+<codeline lineno="131" refid="classMultipatchField_1a5d0139029c4d048c9433fa7d81098578" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMultipatchField_1a5d0139029c4d048c9433fa7d81098578" kindref="member">MultipatchField</ref>(<ref refid="classMultipatchField" kindref="compound">MultipatchField&lt;OtherType, OPatches...&gt;</ref>&amp;&amp;<sp/>other)</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classMultipatchType" kindref="compound">base_type</ref>(std::make_tuple(other.template<sp/><ref refid="classMultipatchField_1a5ce7a43366b076c562a4eeaf9e7e14d2" kindref="member">get</ref>&lt;Patches&gt;()...))</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;ddc::detail::TypeSeq&lt;Patches...&gt;,<sp/>ddc::detail::TypeSeq&lt;OPatches...&gt;&gt;,</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Cannot<sp/>create<sp/>a<sp/>MultipatchField<sp/>from<sp/>a<sp/>temporary<sp/>MultipatchField<sp/>with<sp/>a<sp/>different<sp/>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;ordering&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;std::tuple&lt;T&lt;Patches&gt;...&gt;,<sp/>std::tuple&lt;OtherType&lt;OPatches&gt;...&gt;&gt;,</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;MultipatchFields<sp/>are<sp/>not<sp/>equivalent&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_DEFAULTED_FUNCTION<sp/><ref refid="classMultipatchField" kindref="compound">~MultipatchField</ref>()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>template<sp/>&lt;class<sp/><ref refid="structPatch" kindref="compound">Patch</ref>&gt;</highlight></codeline>
+<codeline lineno="152" refid="classMultipatchField_1a5ce7a43366b076c562a4eeaf9e7e14d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/>auto<sp/><ref refid="classMultipatchField_1a5ce7a43366b076c562a4eeaf9e7e14d2" kindref="member">get</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="153"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>::get_field(std::get&lt;<ref refid="structT" kindref="compound">T&lt;Patch&gt;</ref>&gt;(<ref refid="classMultipatchType_1ae7480fdbb95f4018d1cd39f809001c14" kindref="member">base_type::m_tuple</ref>));</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162" refid="classMultipatchField_1a9a4cb73606c74a79ac3bc33438320647" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classMultipatchField_1a9a4cb73606c74a79ac3bc33438320647" kindref="member">idx_range</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="163"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>&lt;<ref refid="classMultipatchField_1a233d6c418d017cdfd11e79694eee50b0" kindref="member">InternalIdxRangeOnPatch</ref>,<sp/>Patches...&gt;(</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_idx_range(std::get&lt;<ref refid="structT" kindref="compound">T&lt;Patches&gt;</ref>&gt;(<ref refid="classMultipatchType_1ae7480fdbb95f4018d1cd39f809001c14" kindref="member">base_type::m_tuple</ref>))...);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173" refid="classMultipatchField_1a91a470e7def55ebe6311b178dce36d23" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classMultipatchField_1a91a470e7def55ebe6311b178dce36d23" kindref="member">get_field</ref>()</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt;<ref refid="classMultipatchField_1af03d87daa72042dad5e2f47b11f3fc06" kindref="member">InternalFieldOnPatch</ref>,<sp/>Patches...&gt;(</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classMultipatchField_1a91a470e7def55ebe6311b178dce36d23" kindref="member">::get_field</ref>(std::get&lt;<ref refid="structT" kindref="compound">T&lt;Patches&gt;</ref>&gt;(<ref refid="classMultipatchType_1ae7480fdbb95f4018d1cd39f809001c14" kindref="member">base_type::m_tuple</ref>))...);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185" refid="classMultipatchField_1aad6d9590fbc8731d5e25885da11ed142" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classMultipatchField_1aad6d9590fbc8731d5e25885da11ed142" kindref="member">span_view</ref>()</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classMultipatchField_1a91a470e7def55ebe6311b178dce36d23" kindref="member">get_field</ref>();</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195" refid="classMultipatchField_1a70e93ac539f73e00e629dde3bdd39fae" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classMultipatchField_1a70e93ac539f73e00e629dde3bdd39fae" kindref="member">get_const_field</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="196"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt;<ref refid="classMultipatchField_1a44a9591797e84d0f116b8d424725fdea" kindref="member">InternalConstFieldOnPatch</ref>,<sp/>Patches...&gt;(</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classMultipatchField_1a70e93ac539f73e00e629dde3bdd39fae" kindref="member">::get_const_field</ref>(std::get&lt;<ref refid="structT" kindref="compound">T&lt;Patches&gt;</ref>&gt;(<ref refid="classMultipatchType_1ae7480fdbb95f4018d1cd39f809001c14" kindref="member">base_type::m_tuple</ref>))...);</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207" refid="classMultipatchField_1a6f9e5cd86edb626f778aef311c3a92d6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classMultipatchField_1a6f9e5cd86edb626f778aef311c3a92d6" kindref="member">span_cview</ref>()</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classMultipatchField_1a70e93ac539f73e00e629dde3bdd39fae" kindref="member">get_const_field</ref>();</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="211"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>P&gt;<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structT" kindref="compound">T</ref>,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Patches&gt;</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_multipatch_type&lt;<ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt;<ref refid="structT" kindref="compound">T</ref>,<sp/>Patches...&gt;&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>P&gt;<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structT" kindref="compound">T</ref>,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Patches&gt;</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_data_access_methods&lt;<ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt;<ref refid="structT" kindref="compound">T</ref>,<sp/>Patches...&gt;&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>P&gt;<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structT" kindref="compound">T</ref>,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Patches&gt;</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_multipatch_field&lt;<ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt;<ref refid="structT" kindref="compound">T</ref>,<sp/>Patches...&gt;&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ddcHelper<sp/>{</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>P&gt;<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>P&gt;<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Patches&gt;</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>deepcopy(<ref refid="classMultipatchField" kindref="compound">MultipatchField&lt;T1, Patches...&gt;</ref><sp/>dst,<sp/><ref refid="classMultipatchField" kindref="compound">MultipatchField&lt;T2, Patches...&gt;</ref><sp/>src)</highlight></codeline>
+<codeline lineno="231"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(ddc::is_chunk_v&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt;T1,<sp/>Patches...&gt;::example_element&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(ddc::parallel_deepcopy(dst.template<sp/>get&lt;Patches&gt;(),<sp/>src.template<sp/>get&lt;Patches&gt;()),<sp/>...);</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(ddcHelper::deepcopy(dst.template<sp/>get&lt;Patches&gt;(),<sp/>src.template<sp/>get&lt;Patches&gt;()),<sp/>...);</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="237"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>ddcHelper</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp"/>
+  </compounddef>
+</doxygen>

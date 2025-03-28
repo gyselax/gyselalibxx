@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structPolarSpline" kind="struct" language="C++" prot="public">
+    <compoundname>PolarSpline</compoundname>
+    <includes refid="polar__spline_8hpp" local="no">polar_spline.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class PolarBSplinesType</type>
+      </param>
+      <param>
+        <type>class MemSpace</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structPolarSpline_1a5a692091b5e1dbccc094ec737afc5cef" prot="public" static="no">
+        <type>typename PolarBSplinesType::BSplinesR_tag</type>
+        <definition>using PolarSpline&lt; PolarBSplinesType, MemSpace &gt;::BSplinesR =  typename PolarBSplinesType::BSplinesR_tag</definition>
+        <argsstring></argsstring>
+        <name>BSplinesR</name>
+        <qualifiedname>PolarSpline::BSplinesR</qualifiedname>
+        <briefdescription>
+<para>The radial bspline from which the polar B-splines are constructed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="115" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structPolarSpline_1ab3a28213cc6fec9de5bed1b39626ff19" prot="public" static="no">
+        <type>typename PolarBSplinesType::BSplinesTheta_tag</type>
+        <definition>using PolarSpline&lt; PolarBSplinesType, MemSpace &gt;::BSplinesTheta =  typename PolarBSplinesType::BSplinesTheta_tag</definition>
+        <argsstring></argsstring>
+        <name>BSplinesTheta</name>
+        <qualifiedname>PolarSpline::BSplinesTheta</qualifiedname>
+        <briefdescription>
+<para>The poloidal bspline from which the polar B-splines are constructed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="117" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="117" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structPolarSpline_1af608abfc57c38e2f35f25a0b9916d077" prot="public" static="no" mutable="no">
+        <type>DField&lt; IdxRange&lt; <ref refid="structPolarSpline_1a5a692091b5e1dbccc094ec737afc5cef" kindref="member">BSplinesR</ref>, <ref refid="structPolarSpline_1ab3a28213cc6fec9de5bed1b39626ff19" kindref="member">BSplinesTheta</ref> &gt;, MemSpace &gt;</type>
+        <definition>DField&lt;IdxRange&lt;BSplinesR, BSplinesTheta&gt;, MemSpace&gt; PolarSpline&lt; PolarBSplinesType, MemSpace &gt;::spline_coef</definition>
+        <argsstring></argsstring>
+        <name>spline_coef</name>
+        <qualifiedname>PolarSpline::spline_coef</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A Field containing the coefficients in front of the b-spline elements which can be expressed as a tensor product of 1D B-splines. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="124" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structPolarSpline_1a0095d1c0d61dc304c8f80dc6d45ac60f" prot="public" static="no" mutable="no">
+        <type>DField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemSpace &gt;</type>
+        <definition>DField&lt;IdxRange&lt;PolarBSplinesType&gt;, MemSpace&gt; PolarSpline&lt; PolarBSplinesType, MemSpace &gt;::singular_spline_coef</definition>
+        <argsstring></argsstring>
+        <name>singular_spline_coef</name>
+        <qualifiedname>PolarSpline::singular_spline_coef</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A Field containing the coefficients in front of the b-spline elements near the singular point which cannot be expressed as a tensor product of 1D B-splines. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="130" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="130" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structPolarSpline_1a83116cfcdadc19cc922a79634a24a51c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>PolarSpline&lt; PolarBSplinesType, MemSpace &gt;::PolarSpline</definition>
+        <argsstring>(PolarSplineMem&lt; PolarBSplinesType, MemSpace &gt; &amp;spl)</argsstring>
+        <name>PolarSpline</name>
+        <qualifiedname>PolarSpline::PolarSpline</qualifiedname>
+        <param>
+          <type><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>&lt; PolarBSplinesType, MemSpace &gt; &amp;</type>
+          <declname>spl</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Construct a reference to a <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>spl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref> being referenced. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="130" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="138" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="structPolarSpline_1ab3424fe85fc426c4828fa7e092dcd5a2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structPolarSpline" kindref="compound">PolarSpline</ref>&lt; PolarBSplinesType, MemSpace &gt;</type>
+        <definition>PolarSpline&lt; PolarBSplinesType, MemSpace &gt; PolarSpline&lt; PolarBSplinesType, MemSpace &gt;::span_view</definition>
+        <argsstring>()</argsstring>
+        <name>span_view</name>
+        <qualifiedname>PolarSpline::span_view</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get a modifiable reference to the polar spline referenced by this polar spline view.</para>
+<para><simplesect kind="return"><para>A modifiable reference to a polar spline. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="150" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="150" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="structPolarSpline_1a6f7a54f4d3c99218af31b7192666d2a6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structConstPolarSpline" kindref="compound">ConstPolarSpline</ref>&lt; PolarBSplinesType, MemSpace &gt;</type>
+        <definition>ConstPolarSpline&lt; PolarBSplinesType, MemSpace &gt; PolarSpline&lt; PolarBSplinesType, MemSpace &gt;::span_cview</definition>
+        <argsstring>() const</argsstring>
+        <name>span_cview</name>
+        <qualifiedname>PolarSpline::span_cview</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get a constant reference to the polar spline referenced by this polar spline view.</para>
+<para><simplesect kind="return"><para>A constant reference to a polar spline. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="160" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="160" bodyend="163"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A structure containing the two Fields necessary to define a reference to a spline on a set of polar basis splines. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>PolarBSplinesType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the polar B-splines on which this spline is defined. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="111" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="112" bodyend="164"/>
+    <listofallmembers>
+      <member refid="structPolarSpline_1a5a692091b5e1dbccc094ec737afc5cef" prot="public" virt="non-virtual"><scope>PolarSpline</scope><name>BSplinesR</name></member>
+      <member refid="structPolarSpline_1ab3a28213cc6fec9de5bed1b39626ff19" prot="public" virt="non-virtual"><scope>PolarSpline</scope><name>BSplinesTheta</name></member>
+      <member refid="structPolarSpline_1a83116cfcdadc19cc922a79634a24a51c" prot="public" virt="non-virtual"><scope>PolarSpline</scope><name>PolarSpline</name></member>
+      <member refid="structPolarSpline_1a0095d1c0d61dc304c8f80dc6d45ac60f" prot="public" virt="non-virtual"><scope>PolarSpline</scope><name>singular_spline_coef</name></member>
+      <member refid="structPolarSpline_1a6f7a54f4d3c99218af31b7192666d2a6" prot="public" virt="non-virtual"><scope>PolarSpline</scope><name>span_cview</name></member>
+      <member refid="structPolarSpline_1ab3424fe85fc426c4828fa7e092dcd5a2" prot="public" virt="non-virtual"><scope>PolarSpline</scope><name>span_view</name></member>
+      <member refid="structPolarSpline_1af608abfc57c38e2f35f25a0b9916d077" prot="public" virt="non-virtual"><scope>PolarSpline</scope><name>spline_coef</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classVortexMergerDensitySolution" kind="class" language="C++" prot="public">
+    <compoundname>VortexMergerDensitySolution</compoundname>
+    <includes refid="vortex__merger__initialisation_8hpp" local="no">vortex_merger_initialisation.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Mapping</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classVortexMergerDensitySolution_1a8cf2a5a55272ef42f54c34b445f52ecd" prot="private" static="no" mutable="no">
+        <type>Mapping const  &amp;</type>
+        <definition>Mapping const&amp; VortexMergerDensitySolution&lt; Mapping &gt;::m_mapping</definition>
+        <argsstring></argsstring>
+        <name>m_mapping</name>
+        <qualifiedname>VortexMergerDensitySolution::m_mapping</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp" line="24" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classVortexMergerDensitySolution_1a75f051a4a9d1ccfee6c1976e4a914c75" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>VortexMergerDensitySolution&lt; Mapping &gt;::VortexMergerDensitySolution</definition>
+        <argsstring>(Mapping const &amp;mapping)</argsstring>
+        <name>VortexMergerDensitySolution</name>
+        <qualifiedname>VortexMergerDensitySolution::VortexMergerDensitySolution</qualifiedname>
+        <param>
+          <type>Mapping const &amp;</type>
+          <declname>mapping</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate a <ref refid="classVortexMergerDensitySolution" kindref="compound">VortexMergerDensitySolution</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A mapping function from the logical index range to the physical index range. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp" line="35" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classVortexMergerDensitySolution_1aebe20037b60ca33bd8020faba80fe4f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VortexMergerDensitySolution&lt; Mapping &gt;::set_initialisation</definition>
+        <argsstring>(host_t&lt; DFieldRTheta &gt; rho_init, host_t&lt; DConstFieldRTheta &gt; rho_eq, const double eps, const double sigma, const double x_star_1, const double y_star_1, const double x_star_2, const double y_star_2)</argsstring>
+        <name>set_initialisation</name>
+        <qualifiedname>VortexMergerDensitySolution::set_initialisation</qualifiedname>
+        <param>
+          <type>host_t&lt; DFieldRTheta &gt;</type>
+          <declname>rho_init</declname>
+        </param>
+        <param>
+          <type>host_t&lt; DConstFieldRTheta &gt;</type>
+          <declname>rho_eq</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>eps</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>sigma</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>x_star_1</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>y_star_1</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>x_star_2</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>y_star_2</declname>
+        </param>
+        <briefdescription>
+<para>Set an initial condition for the vortex merger simulation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The initial condition is given by  <formula id="95">$ \rho(0, x, y) = \rho_{eq}(x,y) + \varepsilon
+     \left(
+         \exp\left[-\frac{(x - x_1^*)^2 + (y - y_1^*)^2}{2\sigma^2}\right]
+      +  \exp\left[-\frac{(x - x_2^*)^2 + (y - y_2^*)^2}{2\sigma^2}\right]
+     \right)$</formula></para>
+<para>with <formula id="96">$ \rho_{eq}$</formula> given by <ref refid="classVortexMergerEquilibria_1afcf358db72fd433f4470facfecd25019" kindref="member">VortexMergerEquilibria::set_equilibrium</ref>.</para>
+<para>The initial condition is also given in Edoardo Zoni&apos;s article (<ulink url="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</ulink>).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">rho_init</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The initial condition of the density. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rho_eq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The equilibrium density solution computed thanks to <ref refid="classVortexMergerEquilibria_1afcf358db72fd433f4470facfecd25019" kindref="member">VortexMergerEquilibria::set_equilibrium</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">eps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <formula id="11">$ \varepsilon $</formula> amplitude of the perturbation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sigma</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <formula id="97">$ \sigma $</formula> of the Gaussian functions. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x_star_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <formula id="98">$ x_1^*$</formula> parameter. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">y_star_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <formula id="99">$ y_1^*$</formula> parameter. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x_star_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <formula id="100">$ x_2^*$</formula> parameter. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">y_star_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <formula id="101">$ y_2^*$</formula> parameter. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp" line="72" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp" bodystart="72" bodyend="102"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Initial condition for the vortex merger simulation. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A class describing a mapping from curvilinear coordinates to Cartesian coordinates. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp" line="21" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp" bodystart="22" bodyend="103"/>
+    <listofallmembers>
+      <member refid="classVortexMergerDensitySolution_1a8cf2a5a55272ef42f54c34b445f52ecd" prot="private" virt="non-virtual"><scope>VortexMergerDensitySolution</scope><name>m_mapping</name></member>
+      <member refid="classVortexMergerDensitySolution_1aebe20037b60ca33bd8020faba80fe4f8" prot="public" virt="non-virtual"><scope>VortexMergerDensitySolution</scope><name>set_initialisation</name></member>
+      <member refid="classVortexMergerDensitySolution_1a75f051a4a9d1ccfee6c1976e4a914c75" prot="public" virt="non-virtual"><scope>VortexMergerDensitySolution</scope><name>VortexMergerDensitySolution</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

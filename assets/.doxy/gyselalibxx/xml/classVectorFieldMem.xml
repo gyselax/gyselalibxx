@@ -1,0 +1,833 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classVectorFieldMem" kind="class" language="C++" prot="public">
+    <compoundname>VectorFieldMem</compoundname>
+    <basecompoundref refid="classVectorFieldCommon" prot="public" virt="non-virtual">VectorFieldCommon&lt; FieldMem&lt; ElementType, IdxRangeType, MemSpace &gt;, VectorIndexSetType &gt;</basecompoundref>
+    <includes refid="vector__field__mem_8hpp" local="no">vector_field_mem.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class ElementType</type>
+      </param>
+      <param>
+        <type>class IdxRangeType</type>
+      </param>
+      <param>
+        <type>class VectorIndexSetType</type>
+      </param>
+      <param>
+        <type>class MemSpace</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classVectorFieldMem_1acc47ae50c99cb70a1624c4e9f7f23fa3" prot="public" static="no">
+        <type>FieldMem&lt; ElementType, IdxRangeType, MemSpace &gt;</type>
+        <definition>using VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::chunk_type =  FieldMem&lt;ElementType, IdxRangeType, MemSpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>chunk_type</name>
+        <qualifiedname>VectorFieldMem::chunk_type</qualifiedname>
+        <briefdescription>
+<para>Type describing the object which can be extracted from this <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> using the get&lt;&gt; function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is a DDC keyword used to make this class interchangeable with Field. In DDC FieldMem types are referred to as Chunk types and Field types are referred to as ChunkSpan/ChunkView. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="65" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classVectorFieldMem_1a86493fc429a78ba32b03e9311c17d202" prot="public" static="no">
+        <type>ddc::KokkosAllocator&lt; ElementType, MemSpace &gt;</type>
+        <definition>using VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::Allocator =  ddc::KokkosAllocator&lt;ElementType, MemSpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>Allocator</name>
+        <qualifiedname>VectorFieldMem::Allocator</qualifiedname>
+        <briefdescription>
+<para>The type of allocator that will be used to allocate the data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="80" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classVectorFieldMem_1a1706adefbd7b99f3421d6ec1a39d845c" prot="public" static="no">
+        <type><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace, Kokkos::layout_right &gt;</type>
+        <definition>using VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::span_type =  VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace, Kokkos::layout_right&gt;</definition>
+        <argsstring></argsstring>
+        <name>span_type</name>
+        <qualifiedname>VectorFieldMem::span_type</qualifiedname>
+        <briefdescription>
+<para>A type which can hold a reference to this <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is a DDC keyword used to make this class interchangeable with Field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classVectorFieldMem_1a87fe35819bfe4e143f6e1081ce23e726" prot="public" static="no">
+        <type><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; const ElementType, IdxRangeType, VectorIndexSetType, MemSpace, Kokkos::layout_right &gt;</type>
+        <definition>using VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::view_type =  VectorField&lt; const ElementType, IdxRangeType, VectorIndexSetType, MemSpace, Kokkos::layout_right&gt;</definition>
+        <argsstring></argsstring>
+        <name>view_type</name>
+        <qualifiedname>VectorFieldMem::view_type</qualifiedname>
+        <briefdescription>
+<para>A type which can hold a constant reference to this <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is a DDC keyword used to make this class interchangeable with Field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="100" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classVectorFieldMem_1ae89a87415f8842ac65d868a3534005fa" prot="public" static="no">
+        <type>typename base_type::discrete_domain_type</type>
+        <definition>using VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::discrete_domain_type =  typename base_type::discrete_domain_type</definition>
+        <argsstring></argsstring>
+        <name>discrete_domain_type</name>
+        <qualifiedname>VectorFieldMem::discrete_domain_type</qualifiedname>
+        <briefdescription>
+<para>The type of the index range on which the field is defined. This is a DDC keyword used to make this class interchangeable with Field. In DDC IdxRange types are referred to as DiscreteDomain types. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="112" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classVectorFieldMem_1a9b16375d74b5200bcd8fed9c55e57c92" prot="public" static="no">
+        <type><ref refid="classVectorFieldMem_1ae89a87415f8842ac65d868a3534005fa" kindref="member">discrete_domain_type</ref></type>
+        <definition>using VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::index_range_type =  discrete_domain_type</definition>
+        <argsstring></argsstring>
+        <name>index_range_type</name>
+        <qualifiedname>VectorFieldMem::index_range_type</qualifiedname>
+        <briefdescription>
+<para>The IdxRange on which the fields in this object are defined. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="114" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classVectorFieldMem_1a4399b76b097cfac6b274dae5204a548c" prot="public" static="no">
+        <type>typename chunk_type::memory_space</type>
+        <definition>using VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::memory_space =  typename chunk_type::memory_space</definition>
+        <argsstring></argsstring>
+        <name>memory_space</name>
+        <qualifiedname>VectorFieldMem::memory_space</qualifiedname>
+        <briefdescription>
+<para>The type of the memory space where the field is saved (CPU vs GPU). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="119" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="119" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classVectorFieldMem_1a6f62b5396ee5c34d3aa9abbfdb3ae30b" prot="private" static="no">
+        <type><ref refid="classVectorFieldCommon" kindref="compound">VectorFieldCommon</ref>&lt; <ref refid="classVectorFieldMem_1acc47ae50c99cb70a1624c4e9f7f23fa3" kindref="member">chunk_type</ref>, VectorIndexSetType &gt;</type>
+        <definition>using VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::base_type =  VectorFieldCommon&lt;chunk_type, VectorIndexSetType&gt;</definition>
+        <argsstring></argsstring>
+        <name>base_type</name>
+        <qualifiedname>VectorFieldMem::base_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="68" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classVectorFieldMem_1a69b83be2aa9a2e350191b76b4dde1b0e" prot="private" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t...</type>
+            <declname>Is</declname>
+            <defname>Is</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::VectorFieldMem</definition>
+        <argsstring>(index_range_type const &amp;idx_range, Allocator allocator, std::index_sequence&lt; Is... &gt; const &amp;)</argsstring>
+        <name>VectorFieldMem</name>
+        <qualifiedname>VectorFieldMem::VectorFieldMem</qualifiedname>
+        <param>
+          <type><ref refid="classVectorFieldMem_1a9b16375d74b5200bcd8fed9c55e57c92" kindref="member">index_range_type</ref> const &amp;</type>
+          <declname>idx_range</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorFieldMem_1a86493fc429a78ba32b03e9311c17d202" kindref="member">Allocator</ref></type>
+          <declname>allocator</declname>
+        </param>
+        <param>
+          <type>std::index_sequence&lt; Is... &gt; const &amp;</type>
+        </param>
+        <briefdescription>
+<para>Construct a <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> on an index range with uninitialized values. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="124" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="124" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1a73403b839e5a86b3e4fbfb067def3173" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>ODDims</declname>
+            <defname>ODDims</defname>
+          </param>
+          <param>
+            <type>typename <ref refid="structT" kindref="compound">T</ref></type>
+          </param>
+          <param>
+            <type>T...</type>
+            <declname>ints</declname>
+            <defname>ints</defname>
+          </param>
+        </templateparamlist>
+        <type>element_type const</type>
+        <definition>element_type const VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::operator()</definition>
+        <argsstring>(Idx&lt; ODDims... &gt; const &amp;delems, std::integer_sequence&lt; T, ints... &gt;) const noexcept</argsstring>
+        <name>operator()</name>
+        <qualifiedname>VectorFieldMem::operator()</qualifiedname>
+        <param>
+          <type>Idx&lt; ODDims... &gt; const &amp;</type>
+          <declname>delems</declname>
+        </param>
+        <param>
+          <type>std::integer_sequence&lt; <ref refid="structT" kindref="compound">T</ref>, ints... &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Element access using a multi-dimensional Idx <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>delems</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>discrete coordinates </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>copy of this element </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="137" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="137" bodyend="141"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classVectorFieldMem_1a044e87b9de9db522db0e3d2aaac2545d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::VectorFieldMem</definition>
+        <argsstring>()=default</argsstring>
+        <name>VectorFieldMem</name>
+        <qualifiedname>VectorFieldMem::VectorFieldMem</qualifiedname>
+        <briefdescription>
+<para>Empty <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="145" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1a81b4258a4747f9c97202980c7218a438" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::VectorFieldMem</definition>
+        <argsstring>(index_range_type const &amp;idx_range, Allocator allocator=Allocator())</argsstring>
+        <name>VectorFieldMem</name>
+        <qualifiedname>VectorFieldMem::VectorFieldMem</qualifiedname>
+        <param>
+          <type><ref refid="classVectorFieldMem_1a9b16375d74b5200bcd8fed9c55e57c92" kindref="member">index_range_type</ref> const &amp;</type>
+          <declname>idx_range</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorFieldMem_1a86493fc429a78ba32b03e9311c17d202" kindref="member">Allocator</ref></type>
+          <declname>allocator</declname>
+          <defval><ref refid="classVectorFieldMem_1a86493fc429a78ba32b03e9311c17d202" kindref="member">Allocator</ref>()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Construct a <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> on an index range with uninitialized values</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range on which the chunk will be defined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">allocator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An optional allocator used to create the chunks. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="153" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="153" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1a388c820f99c6290ee89ec1cca4685e66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::VectorFieldMem</definition>
+        <argsstring>(VectorFieldMem const &amp;other)=delete</argsstring>
+        <name>VectorFieldMem</name>
+        <qualifiedname>VectorFieldMem::VectorFieldMem</qualifiedname>
+        <param>
+          <type><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> const &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Deleted: use deepcopy instead. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="159" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1a43fb3313fbd0e4c96ebd7b7252031532" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::VectorFieldMem</definition>
+        <argsstring>(VectorFieldMem &amp;&amp;other)=default</argsstring>
+        <name>VectorFieldMem</name>
+        <qualifiedname>VectorFieldMem::VectorFieldMem</qualifiedname>
+        <param>
+          <type><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Constructs a new <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> by move <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> to move </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="165" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1a13e8628ef73113e5c9d09c63eb6d159d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> &amp;</type>
+        <definition>VectorFieldMem &amp; VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::operator=</definition>
+        <argsstring>(VectorFieldMem const &amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>VectorFieldMem::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> const &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Deleted: use deepcopy instead. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="168" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1ac813597853877e75100199b476a73828" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> &amp;</type>
+        <definition>VectorFieldMem &amp; VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::operator=</definition>
+        <argsstring>(VectorFieldMem &amp;&amp;other)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>VectorFieldMem::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Move-assigns a new value to this <ref refid="classVectorField" kindref="compound">VectorField</ref> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the <ref refid="classVectorField" kindref="compound">VectorField</ref> to move </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>*this </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="175" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1ae0c51ded5f7792cba8913a70036e49f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::~VectorFieldMem</definition>
+        <argsstring>()=default</argsstring>
+        <name>~VectorFieldMem</name>
+        <qualifiedname>VectorFieldMem::~VectorFieldMem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="177" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1a13245a7aa41f076008d0e5f391a1af9c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classVectorFieldMem_1a87fe35819bfe4e143f6e1081ce23e726" kindref="member">view_type</ref></type>
+        <definition>view_type VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::span_cview</definition>
+        <argsstring>() const</argsstring>
+        <name>span_cview</name>
+        <qualifiedname>VectorFieldMem::span_cview</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get a constant reference to this vector field.</para>
+<para>This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get_const_field should be used.</para>
+<para><simplesect kind="return"><para>A constant reference to this vector field. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="187" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="187" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1a5c5366a96f56e4422e59e8dec1e9c850" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classVectorFieldMem_1a87fe35819bfe4e143f6e1081ce23e726" kindref="member">view_type</ref></type>
+        <definition>view_type VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::span_view</definition>
+        <argsstring>() const</argsstring>
+        <name>span_view</name>
+        <qualifiedname>VectorFieldMem::span_view</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get a constant reference to this vector field.</para>
+<para>This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get_field should be used.</para>
+<para><simplesect kind="return"><para>A constant reference to this vector field. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="200" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="200" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1a94522577e4477ec70867222321b1c6ae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classVectorFieldMem_1a1706adefbd7b99f3421d6ec1a39d845c" kindref="member">span_type</ref></type>
+        <definition>span_type VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::span_view</definition>
+        <argsstring>()</argsstring>
+        <name>span_view</name>
+        <qualifiedname>VectorFieldMem::span_view</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get a modifiable reference to this vector field.</para>
+<para>This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get_field should be used.</para>
+<para><simplesect kind="return"><para>A modifiable reference to this vector field. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="213" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="213" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1a5b66c7eca07a6ec79a9963fc13e2b6cc" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>ODDims</declname>
+            <defname>ODDims</defname>
+          </param>
+        </templateparamlist>
+        <type>element_type const</type>
+        <definition>element_type const VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::operator()</definition>
+        <argsstring>(ddc::DiscreteElement&lt; ODDims &gt; const &amp;... delems) const noexcept</argsstring>
+        <name>operator()</name>
+        <qualifiedname>VectorFieldMem::operator()</qualifiedname>
+        <param>
+          <type>ddc::DiscreteElement&lt; ODDims &gt; const &amp;...</type>
+          <declname>delems</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Element access using a list of Idxs <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>delems</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>1D discrete coordinates </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>copy of this element </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="223" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="223" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1a4a5b0921086127d5a1e57ee4d587c5d5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>ODDims</declname>
+            <defname>ODDims</defname>
+          </param>
+          <param>
+            <type>class</type>
+            <defval>std::enable_if_t&lt;sizeof...(ODDims) != 1&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>element_type const</type>
+        <definition>element_type const VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::operator()</definition>
+        <argsstring>(Idx&lt; ODDims... &gt; const &amp;delems) const noexcept</argsstring>
+        <name>operator()</name>
+        <qualifiedname>VectorFieldMem::operator()</qualifiedname>
+        <param>
+          <type>Idx&lt; ODDims... &gt; const &amp;</type>
+          <declname>delems</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Element access using a multi-dimensional Idx <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>delems</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>discrete coordinates </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>copy of this element </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="235" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="235" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1a7a81a04ae5a72fd9236b3a3886dded3b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>QueryDDims</declname>
+            <defname>QueryDDims</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::operator[]</definition>
+        <argsstring>(Idx&lt; QueryDDims... &gt; const &amp;slice_spec) const</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>VectorFieldMem::operator[]</qualifiedname>
+        <param>
+          <type>Idx&lt; QueryDDims... &gt; const &amp;</type>
+          <declname>slice_spec</declname>
+        </param>
+        <briefdescription>
+<para>Slice out some dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> on the reduced index range which is obtained by indexing the dimensions QueryDDims at the position slice_spec.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">slice_spec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The slice describing the index range of interest.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A constant reference to the vector field on the sliced index range. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="252" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="252" bodyend="255"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1a803238e91bdec84b861d8e7eb11cc8af" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>QueryDDims</declname>
+            <defname>QueryDDims</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::operator[]</definition>
+        <argsstring>(Idx&lt; QueryDDims... &gt; const &amp;slice_spec)</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>VectorFieldMem::operator[]</qualifiedname>
+        <param>
+          <type>Idx&lt; QueryDDims... &gt; const &amp;</type>
+          <declname>slice_spec</declname>
+        </param>
+        <briefdescription>
+<para>Slice out some dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> on the reduced index range which is obtained by indexing the dimensions QueryDDims at the position slice_spec.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">slice_spec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The slice describing the index range of interest.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A modifiable reference to the vector field on the sliced index range. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="268" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="268" bodyend="271"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1a8f37de8cfbcb2dd9bc3b5a82acf98dc4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>QueryDDims</declname>
+            <defname>QueryDDims</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::operator[]</definition>
+        <argsstring>(IdxRange&lt; QueryDDims... &gt; const &amp;oidx_range) const</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>VectorFieldMem::operator[]</qualifiedname>
+        <param>
+          <type>IdxRange&lt; QueryDDims... &gt; const &amp;</type>
+          <declname>oidx_range</declname>
+        </param>
+        <briefdescription>
+<para>Slice out some dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> on the reduced index range passed as an argument.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">oidx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range of interest.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A modifiable reference to the vector field on the sliced index range. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="283" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="283" bodyend="286"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1a5770ccc15ea62e4105e65aab707837e7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>QueryDDims</declname>
+            <defname>QueryDDims</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::operator[]</definition>
+        <argsstring>(IdxRange&lt; QueryDDims... &gt; const &amp;oidx_range)</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>VectorFieldMem::operator[]</qualifiedname>
+        <param>
+          <type>IdxRange&lt; QueryDDims... &gt; const &amp;</type>
+          <declname>oidx_range</declname>
+        </param>
+        <briefdescription>
+<para>Slice out some dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> on the reduced index range passed as an argument.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">oidx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range of interest.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A modifiable reference to the vector field on the sliced index range. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="298" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="298" bodyend="301"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1a7c254b8e4de647c26d5961ed7976f573" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class QueryTag</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr chunk_span_type</type>
+        <definition>constexpr chunk_span_type VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::get</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>get</name>
+        <qualifiedname>VectorFieldMem::get</qualifiedname>
+        <briefdescription>
+<para>Get the Field describing the component in the QueryTag direction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The field in the specified direction. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="309" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="309" bodyend="313"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1ac34d633f44e6b30ac0500b7262bf6b7c" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class QueryTag</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr chunk_view_type</type>
+        <definition>constexpr chunk_view_type VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::get</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get</name>
+        <qualifiedname>VectorFieldMem::get</qualifiedname>
+        <briefdescription>
+<para>Get the Field describing the component in the QueryTag direction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The constant field in the specified direction. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="321" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="321" bodyend="325"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Pre-declaration of <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A class which describes the storage for a vector field.</para>
+<para>A class which describes the storage for a vector field. In other words a class which maps a position on an index range to a vector (x,y,z,...). This is done by storing the values at the positions in individual FieldMems.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ElementType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The data type of a scalar element of the vector field. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IdxRangeType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>VectorIndexSetType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A VectorIndexSet describing the dimensions described by the scalar elements of a vector field element. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>MemSpace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type describing where the memory is allocated. See DDC. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>VectorFieldCommon&lt; FieldMem&lt; ElementType, IdxRangeType, MemSpace &gt;, VectorIndexSetType &gt;</label>
+        <link refid="classVectorFieldCommon"/>
+      </node>
+      <node id="1">
+        <label>VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;</label>
+        <link refid="classVectorFieldMem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>VectorFieldCommon&lt; FieldMem&lt; ElementType, IdxRangeType, MemSpace &gt;, VectorIndexSetType &gt;</label>
+        <link refid="classVectorFieldCommon"/>
+      </node>
+      <node id="1">
+        <label>VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;</label>
+        <link refid="classVectorFieldMem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="54" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="56" bodyend="326"/>
+    <listofallmembers>
+      <member refid="classVectorFieldMem_1a86493fc429a78ba32b03e9311c17d202" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>Allocator</name></member>
+      <member refid="classVectorFieldMem_1a6f62b5396ee5c34d3aa9abbfdb3ae30b" prot="private" virt="non-virtual"><scope>VectorFieldMem</scope><name>base_type</name></member>
+      <member refid="classVectorFieldMem_1acc47ae50c99cb70a1624c4e9f7f23fa3" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>chunk_type</name></member>
+      <member refid="classVectorFieldMem_1ae89a87415f8842ac65d868a3534005fa" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>discrete_domain_type</name></member>
+      <member refid="classVectorFieldMem_1a7c254b8e4de647c26d5961ed7976f573" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>get</name></member>
+      <member refid="classVectorFieldMem_1ac34d633f44e6b30ac0500b7262bf6b7c" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>get</name></member>
+      <member refid="classVectorFieldMem_1a9b16375d74b5200bcd8fed9c55e57c92" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>index_range_type</name></member>
+      <member refid="classVectorFieldMem_1a4399b76b097cfac6b274dae5204a548c" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>memory_space</name></member>
+      <member refid="classVectorFieldMem_1a73403b839e5a86b3e4fbfb067def3173" prot="private" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator()</name></member>
+      <member refid="classVectorFieldMem_1a5b66c7eca07a6ec79a9963fc13e2b6cc" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator()</name></member>
+      <member refid="classVectorFieldMem_1a4a5b0921086127d5a1e57ee4d587c5d5" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator()</name></member>
+      <member refid="classVectorFieldMem_1a13e8628ef73113e5c9d09c63eb6d159d" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator=</name></member>
+      <member refid="classVectorFieldMem_1ac813597853877e75100199b476a73828" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator=</name></member>
+      <member refid="classVectorFieldMem_1a7a81a04ae5a72fd9236b3a3886dded3b" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator[]</name></member>
+      <member refid="classVectorFieldMem_1a803238e91bdec84b861d8e7eb11cc8af" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator[]</name></member>
+      <member refid="classVectorFieldMem_1a8f37de8cfbcb2dd9bc3b5a82acf98dc4" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator[]</name></member>
+      <member refid="classVectorFieldMem_1a5770ccc15ea62e4105e65aab707837e7" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>operator[]</name></member>
+      <member refid="classVectorFieldMem_1a13245a7aa41f076008d0e5f391a1af9c" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>span_cview</name></member>
+      <member refid="classVectorFieldMem_1a1706adefbd7b99f3421d6ec1a39d845c" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>span_type</name></member>
+      <member refid="classVectorFieldMem_1a5c5366a96f56e4422e59e8dec1e9c850" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>span_view</name></member>
+      <member refid="classVectorFieldMem_1a94522577e4477ec70867222321b1c6ae" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>span_view</name></member>
+      <member refid="classVectorFieldMem_1a69b83be2aa9a2e350191b76b4dde1b0e" prot="private" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
+      <member refid="classVectorFieldMem_1a044e87b9de9db522db0e3d2aaac2545d" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
+      <member refid="classVectorFieldMem_1a81b4258a4747f9c97202980c7218a438" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
+      <member refid="classVectorFieldMem_1a388c820f99c6290ee89ec1cca4685e66" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
+      <member refid="classVectorFieldMem_1a43fb3313fbd0e4c96ebd7b7252031532" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
+      <member refid="classVectorFieldMem_1a87fe35819bfe4e143f6e1081ce23e726" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>view_type</name></member>
+      <member refid="classVectorFieldMem_1ae0c51ded5f7792cba8913a70036e49f3" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>~VectorFieldMem</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

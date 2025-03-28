@@ -1,4 +1,0 @@
-var structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1detail_1_1TypeSeq_3_01Interfacd1aa547d7cc4bf022e85928246ab2d07 =
-[
-    [ "type", "structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1detail_1_1TypeSeq_3_01Interfacd1aa547d7cc4bf022e85928246ab2d07.html#ab1aa5cb1d073bb2150df0b723addd5ab", null ]
-];

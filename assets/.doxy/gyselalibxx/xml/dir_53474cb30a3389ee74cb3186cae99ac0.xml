@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_53474cb30a3389ee74cb3186cae99ac0" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs</compoundname>
+    <innerfile refid="collisions__inter_8cpp">collisions_inter.cpp</innerfile>
+    <innerfile refid="collisions__inter_8hpp">collisions_inter.hpp</innerfile>
+    <innerfile refid="collisions__intra_8cpp">collisions_intra.cpp</innerfile>
+    <innerfile refid="collisions__intra_8hpp">collisions_intra.hpp</innerfile>
+    <innerfile refid="collisions__utils_8cpp">collisions_utils.cpp</innerfile>
+    <innerfile refid="collisions__utils_8hpp">collisions_utils.hpp</innerfile>
+    <innerfile refid="irighthandside_8hpp">irighthandside.hpp</innerfile>
+    <innerfile refid="kinetic__source_8cpp">kinetic_source.cpp</innerfile>
+    <innerfile refid="kinetic__source_8hpp">kinetic_source.hpp</innerfile>
+    <innerfile refid="krook__source__adaptive_8cpp">krook_source_adaptive.cpp</innerfile>
+    <innerfile refid="krook__source__adaptive_8hpp">krook_source_adaptive.hpp</innerfile>
+    <innerfile refid="krook__source__constant_8cpp">krook_source_constant.cpp</innerfile>
+    <innerfile refid="krook__source__constant_8hpp">krook_source_constant.hpp</innerfile>
+    <innerfile refid="mask__tanh_8cpp">mask_tanh.cpp</innerfile>
+    <innerfile refid="mask__tanh_8hpp">mask_tanh.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/"/>
+  </compounddef>
+</doxygen>

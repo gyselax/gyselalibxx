@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_eaa769653453aaefd8cc10e98e9bb3eb" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types</compoundname>
+    <innerfile refid="deriv__details_8hpp">deriv_details.hpp</innerfile>
+    <innerfile refid="derivative__field_8hpp">derivative_field.hpp</innerfile>
+    <innerfile refid="derivative__field__common_8hpp">derivative_field_common.hpp</innerfile>
+    <innerfile refid="derivative__field__mem_8hpp">derivative_field_mem.hpp</innerfile>
+    <innerfile refid="idx__range__slice_8hpp">idx_range_slice.hpp</innerfile>
+    <innerfile refid="indexed__tensor_8hpp">indexed_tensor.hpp</innerfile>
+    <innerfile refid="tensor_8hpp">tensor.hpp</innerfile>
+    <innerfile refid="tensor__index__tools_8hpp">tensor_index_tools.hpp</innerfile>
+    <innerfile refid="vector__field_8hpp">vector_field.hpp</innerfile>
+    <innerfile refid="vector__field__common_8hpp">vector_field_common.hpp</innerfile>
+    <innerfile refid="vector__field__mem_8hpp">vector_field_mem.hpp</innerfile>
+    <innerfile refid="vector__index__tools_8hpp">vector_index_tools.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/"/>
+  </compounddef>
+</doxygen>

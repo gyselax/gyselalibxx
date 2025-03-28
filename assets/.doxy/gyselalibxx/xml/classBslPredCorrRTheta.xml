@@ -1,0 +1,304 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classBslPredCorrRTheta" kind="class" language="C++" prot="public">
+    <compoundname>BslPredCorrRTheta</compoundname>
+    <basecompoundref refid="classITimeSolverRTheta" prot="public" virt="non-virtual">ITimeSolverRTheta</basecompoundref>
+    <includes refid="bsl__predcorr_8hpp" local="no">bsl_predcorr.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Mapping</type>
+      </param>
+      <param>
+        <type>class FootFinder</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classBslPredCorrRTheta_1a5aa7b962bb5276873ce770e8ebf22c44" prot="private" static="no" mutable="no">
+        <type>Mapping const  &amp;</type>
+        <definition>Mapping const&amp; BslPredCorrRTheta&lt; Mapping, FootFinder &gt;::m_mapping</definition>
+        <argsstring></argsstring>
+        <name>m_mapping</name>
+        <qualifiedname>BslPredCorrRTheta::m_mapping</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="58" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classBslPredCorrRTheta_1ad9f9415365c57a292ae8e8c369f3ffe3" prot="private" static="no" mutable="no">
+        <type><ref refid="classBslAdvectionRTheta" kindref="compound">BslAdvectionRTheta</ref>&lt; FootFinder, Mapping &gt; const  &amp;</type>
+        <definition>BslAdvectionRTheta&lt;FootFinder, Mapping&gt; const&amp; BslPredCorrRTheta&lt; Mapping, FootFinder &gt;::m_advection_solver</definition>
+        <argsstring></argsstring>
+        <name>m_advection_solver</name>
+        <qualifiedname>BslPredCorrRTheta::m_advection_solver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="60" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classBslPredCorrRTheta_1a143881b77cdfb39a66b38f4afafa4adc" prot="private" static="no" mutable="no">
+        <type><ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref>&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref>, SplineRThetaEvaluatorNullBound &gt; const  &amp;</type>
+        <definition>PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound&gt; const&amp; BslPredCorrRTheta&lt; Mapping, FootFinder &gt;::m_poisson_solver</definition>
+        <argsstring></argsstring>
+        <name>m_poisson_solver</name>
+        <qualifiedname>BslPredCorrRTheta::m_poisson_solver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="66" column="8" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classBslPredCorrRTheta_1a556c9f8698d5c8b5b8ec9e40799fa4bc" prot="private" static="no" mutable="no">
+        <type>SplineRThetaBuilder_host const  &amp;</type>
+        <definition>SplineRThetaBuilder_host const&amp; BslPredCorrRTheta&lt; Mapping, FootFinder &gt;::m_builder</definition>
+        <argsstring></argsstring>
+        <name>m_builder</name>
+        <qualifiedname>BslPredCorrRTheta::m_builder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="68" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classBslPredCorrRTheta_1a56194097c5f870bc664f3d65f2993c40" prot="private" static="no" mutable="no">
+        <type>SplineRThetaEvaluatorNullBound_host const  &amp;</type>
+        <definition>SplineRThetaEvaluatorNullBound_host const&amp; BslPredCorrRTheta&lt; Mapping, FootFinder &gt;::m_spline_evaluator</definition>
+        <argsstring></argsstring>
+        <name>m_spline_evaluator</name>
+        <qualifiedname>BslPredCorrRTheta::m_spline_evaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="69" column="47" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classBslPredCorrRTheta_1ac5a6457ec7d54f8fbb926aca93a55069" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>BslPredCorrRTheta&lt; Mapping, FootFinder &gt;::BslPredCorrRTheta</definition>
+        <argsstring>(Mapping const &amp;mapping, BslAdvectionRTheta&lt; FootFinder, Mapping &gt; const &amp;advection_solver, SplineRThetaBuilder_host const &amp;builder, SplineRThetaEvaluatorNullBound_host const &amp;rhs_evaluator, PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound &gt; const &amp;poisson_solver)</argsstring>
+        <name>BslPredCorrRTheta</name>
+        <qualifiedname>BslPredCorrRTheta::BslPredCorrRTheta</qualifiedname>
+        <param>
+          <type>Mapping const &amp;</type>
+          <declname>mapping</declname>
+        </param>
+        <param>
+          <type><ref refid="classBslAdvectionRTheta" kindref="compound">BslAdvectionRTheta</ref>&lt; FootFinder, Mapping &gt; const &amp;</type>
+          <declname>advection_solver</declname>
+        </param>
+        <param>
+          <type>SplineRThetaBuilder_host const &amp;</type>
+          <declname>builder</declname>
+        </param>
+        <param>
+          <type>SplineRThetaEvaluatorNullBound_host const &amp;</type>
+          <declname>rhs_evaluator</declname>
+        </param>
+        <param>
+          <type><ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref>&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref>, SplineRThetaEvaluatorNullBound &gt; const &amp;</type>
+          <declname>poisson_solver</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate a <ref refid="classBslPredCorrRTheta" kindref="compound">BslPredCorrRTheta</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mapping function from the logical index range to the physical index range. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">advection_solver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The advection operator. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">builder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline builder for the computation of the RHS and the advection field. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rhs_evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The evaluator of B-splines for the RHS. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">poisson_solver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PDE solver which computes the electrical potential. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="90" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="90" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classBslPredCorrRTheta_1ab4b18b2f58e93e38933d46e3c3da5c5f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>host_t&lt; DFieldRTheta &gt;</type>
+        <definition>host_t&lt; DFieldRTheta &gt; BslPredCorrRTheta&lt; Mapping, FootFinder &gt;::operator()</definition>
+        <argsstring>(host_t&lt; DFieldRTheta &gt; allfdistribu_host, double const dt, int const steps) const override</argsstring>
+        <name>operator()</name>
+        <qualifiedname>BslPredCorrRTheta::operator()</qualifiedname>
+        <reimplements refid="classITimeSolverRTheta_1a5e17feb3b5b1c2cf535b2bf58732e137">operator()</reimplements>
+        <param>
+          <type>host_t&lt; DFieldRTheta &gt;</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type>int const</type>
+          <declname>steps</declname>
+        </param>
+        <briefdescription>
+<para>Solves on <formula id="133">$ T = dt*N $</formula> the equations system. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On input: the initial condition. On output: the solution at <formula id="134">$ dt *N$</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">steps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number <formula id="135">$ N$</formula> of time interactions.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A Field toward allfdistribu. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="108" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="108" bodyend="210"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Predictor-corrector for the Vlasov-Poisson equations. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>It solves in time the following Vlasov-Poisson equations system:</para>
+<para><itemizedlist>
+<listitem><para><formula id="103">$  - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho $</formula>,</para>
+</listitem><listitem><para><formula id="104">$ E = - \nabla \phi $</formula>,</para>
+</listitem><listitem><para><formula id="105">$ \partial_t \rho - E_y \partial_x \rho + E_x \partial_y \rho = 0$</formula>,</para>
+</listitem></itemizedlist>
+</para>
+<para>we write <formula id="106">$ (A_x, A_y) =  (-E_y, E_x)$</formula>.</para>
+<para>This method is mainly a Runge-Kutta 2 method:</para>
+<para>for <formula id="107">$ n \geq 0 $</formula>,</para>
+<para>First, it advects on a half time step:<itemizedlist>
+<listitem><para>1. From <formula id="108">$\rho^n$</formula>, it computes <formula id="109">$\phi^n$</formula> with a <ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref>;</para>
+</listitem><listitem><para>2. From <formula id="109">$\phi^n$</formula>, it computes <formula id="110">$A^n$</formula> with a <ref refid="classAdvectionFieldFinder" kindref="compound">AdvectionFieldFinder</ref>;</para>
+</listitem><listitem><para>3. From <formula id="108">$\rho^n$</formula> and <formula id="110">$A^n$</formula>, it computes <formula id="111">$\rho^{n+1/2}$</formula> with a <ref refid="classBslAdvectionRTheta" kindref="compound">BslAdvectionRTheta</ref> on <formula id="112">$\frac{dt}{2}$</formula>;</para>
+</listitem></itemizedlist>
+</para>
+<para>Secondly, it advects on a full time step:<itemizedlist>
+<listitem><para>4. From <formula id="111">$\rho^{n+1/2}$</formula>, it computes <formula id="113">$\phi^{n+1/2}$</formula> with a <ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref>;</para>
+</listitem><listitem><para>5. From <formula id="113">$\phi^{n+1/2}$</formula>, it computes <formula id="114">$A^{n+1/2}$</formula> with a <ref refid="classAdvectionFieldFinder" kindref="compound">AdvectionFieldFinder</ref>;</para>
+</listitem><listitem><para>6. From <formula id="108">$\rho^n$</formula> and <formula id="114">$A^{n+1/2}$</formula>, it computes <formula id="115">$\rho^{n+1}$</formula> with a <ref refid="classBslAdvectionRTheta" kindref="compound">BslAdvectionRTheta</ref> on <formula id="116">$dt$</formula>.</para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A class describing a mapping from curvilinear coordinates to Cartesian coordinates. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>FootFinder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A IFootFinder class. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>BslPredCorrRTheta&lt; Mapping, FootFinder &gt;</label>
+        <link refid="classBslPredCorrRTheta"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ITimeSolverRTheta</label>
+        <link refid="classITimeSolverRTheta"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>BslPredCorrRTheta&lt; Mapping, FootFinder &gt;</label>
+        <link refid="classBslPredCorrRTheta"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ITimeSolverRTheta</label>
+        <link refid="classITimeSolverRTheta"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="55" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="56" bodyend="211"/>
+    <listofallmembers>
+      <member refid="classBslPredCorrRTheta_1ac5a6457ec7d54f8fbb926aca93a55069" prot="public" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>BslPredCorrRTheta</name></member>
+      <member refid="classITimeSolverRTheta_1a5503beee2f7240e8b09ef8ac3be2af24" prot="protected" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>display_time_difference</name></member>
+      <member refid="classBslPredCorrRTheta_1ad9f9415365c57a292ae8e8c369f3ffe3" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>m_advection_solver</name></member>
+      <member refid="classBslPredCorrRTheta_1a556c9f8698d5c8b5b8ec9e40799fa4bc" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>m_builder</name></member>
+      <member refid="classBslPredCorrRTheta_1a5aa7b962bb5276873ce770e8ebf22c44" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>m_mapping</name></member>
+      <member refid="classBslPredCorrRTheta_1a143881b77cdfb39a66b38f4afafa4adc" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>m_poisson_solver</name></member>
+      <member refid="classBslPredCorrRTheta_1a56194097c5f870bc664f3d65f2993c40" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>m_spline_evaluator</name></member>
+      <member refid="classBslPredCorrRTheta_1ab4b18b2f58e93e38933d46e3c3da5c5f" prot="public" virt="virtual"><scope>BslPredCorrRTheta</scope><name>operator()</name></member>
+      <member refid="classITimeSolverRTheta_1afc3a0e07f492d601b0793a9dfba47bfb" prot="public" virt="virtual"><scope>BslPredCorrRTheta</scope><name>~ITimeSolverRTheta</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,245 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classPredCorrRK2XY" kind="class" language="C++" prot="public">
+    <compoundname>PredCorrRK2XY</compoundname>
+    <includes refid="predcorr__RK2_8hpp" local="no">predcorr_RK2.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class PoissonSolver</type>
+      </param>
+      <param>
+        <type>class AdvectionX</type>
+      </param>
+      <param>
+        <type>class AdvectionY</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classPredCorrRK2XY_1ab68e54270bf97bd0752b08113a0e40d8" prot="private" static="no" mutable="no">
+        <type>PoissonSolver const  &amp;</type>
+        <definition>PoissonSolver const&amp; PredCorrRK2XY&lt; PoissonSolver, AdvectionX, AdvectionY &gt;::m_poisson_solver</definition>
+        <argsstring></argsstring>
+        <name>m_poisson_solver</name>
+        <qualifiedname>PredCorrRK2XY::m_poisson_solver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp" line="50" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classPredCorrRK2XY_1ab506381f9972f09f46e137e586efe937" prot="private" static="no" mutable="no">
+        <type>AdvectionX const  &amp;</type>
+        <definition>AdvectionX const&amp; PredCorrRK2XY&lt; PoissonSolver, AdvectionX, AdvectionY &gt;::m_advection_x</definition>
+        <argsstring></argsstring>
+        <name>m_advection_x</name>
+        <qualifiedname>PredCorrRK2XY::m_advection_x</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp" line="52" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classPredCorrRK2XY_1a43971c534305b64c4e3f84d72d61ae6f" prot="private" static="no" mutable="no">
+        <type>AdvectionY const  &amp;</type>
+        <definition>AdvectionY const&amp; PredCorrRK2XY&lt; PoissonSolver, AdvectionX, AdvectionY &gt;::m_advection_y</definition>
+        <argsstring></argsstring>
+        <name>m_advection_y</name>
+        <qualifiedname>PredCorrRK2XY::m_advection_y</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp" line="53" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classPredCorrRK2XY_1a2c3ee01251b6c339e06d5f2276e69c9d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>PredCorrRK2XY&lt; PoissonSolver, AdvectionX, AdvectionY &gt;::PredCorrRK2XY</definition>
+        <argsstring>(PoissonSolver const &amp;poisson_solver, AdvectionX const &amp;advection_x, AdvectionY const &amp;advection_y)</argsstring>
+        <name>PredCorrRK2XY</name>
+        <qualifiedname>PredCorrRK2XY::PredCorrRK2XY</qualifiedname>
+        <param>
+          <type>PoissonSolver const &amp;</type>
+          <declname>poisson_solver</declname>
+        </param>
+        <param>
+          <type>AdvectionX const &amp;</type>
+          <declname>advection_x</declname>
+        </param>
+        <param>
+          <type>AdvectionY const &amp;</type>
+          <declname>advection_y</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate the predictor-corrector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>poisson_solver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Poisson solver also computing the electric field. <linebreak/>
+ </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>advection_x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>1D advection operator along <formula id="157">$ x $</formula> direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>advection_y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>1D advection operator along <formula id="167">$ y $</formula> direction. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp" bodystart="63" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classPredCorrRK2XY_1ab656f1b731b4bfb0dc0898e5120f29b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>PredCorrRK2XY&lt; PoissonSolver, AdvectionX, AdvectionY &gt;::~PredCorrRK2XY</definition>
+        <argsstring>()=default</argsstring>
+        <name>~PredCorrRK2XY</name>
+        <qualifiedname>PredCorrRK2XY::~PredCorrRK2XY</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp" line="71" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classPredCorrRK2XY_1a03ce8460021646ecb76554cbb4f1b088" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void PredCorrRK2XY&lt; PoissonSolver, AdvectionX, AdvectionY &gt;::operator()</definition>
+        <argsstring>(DFieldXY allfdistribu, double const dt, int const nbiter)</argsstring>
+        <name>operator()</name>
+        <qualifiedname>PredCorrRK2XY::operator()</qualifiedname>
+        <param>
+          <type>DFieldXY</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type>int const</type>
+          <declname>nbiter</declname>
+        </param>
+        <briefdescription>
+<para>Apply the predictor-corrector method on several time steps. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Along the simulation, the data are saved in an output folder.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Initial function <formula id="168">$f (0, x, y)$</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time step. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nbiter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of time steps. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp" line="82" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp" bodystart="82" bodyend="178"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Predictor-corrector based on <ref refid="classRK2" kindref="compound">RK2</ref> for the guiding-centre model. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>It solves in time the following guiding-centre equations system:</para>
+<para><itemizedlist>
+<listitem><para><formula id="160">$  -\Delta \phi = f $</formula>,</para>
+</listitem><listitem><para><formula id="104">$ E = - \nabla \phi $</formula>,</para>
+</listitem><listitem><para><formula id="161">$ \partial_t f - E_y \partial_x f + E_x \partial_y f= 0$</formula>.</para>
+</listitem></itemizedlist>
+</para>
+<para>This method is mainly a Runge-Kutta 2 method:</para>
+<para>for <formula id="107">$ n \geq 0 $</formula>,</para>
+<para>First, it advects on a half time step:<itemizedlist>
+<listitem><para>1./2. From <formula id="162">$f^n$</formula>, it computes <formula id="163">$E^n$</formula> with a <ref refid="classFFTPoissonSolver" kindref="compound">FFTPoissonSolver</ref>;</para>
+</listitem><listitem><para>3. From <formula id="162">$f^n$</formula> and <formula id="163">$E^n$</formula>, it computes <formula id="164">$f^{n+1/2}$</formula> with a <ref refid="classBslAdvection1D" kindref="compound">BslAdvection1D</ref> on <formula id="112">$\frac{dt}{2}$</formula>;</para>
+</listitem></itemizedlist>
+</para>
+<para>Secondly, it advects on a full time step:<itemizedlist>
+<listitem><para>4./5. From <formula id="164">$f^{n+1/2}$</formula>, it computes <formula id="165">$E^{n+1/2}$</formula> with a <ref refid="classFFTPoissonSolver" kindref="compound">FFTPoissonSolver</ref>;</para>
+</listitem><listitem><para>6. From <formula id="162">$f^n$</formula> and <formula id="165">$E^{n+1/2}$</formula>, it computes <formula id="166">$f^{n+1}$</formula> with a BslAdvectionRP on <formula id="116">$dt$</formula>.</para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>PoissonSolver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the Poisson solver applied in the method. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>AdvectionX</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the 1D advection operator applied to advect along <ref refid="structX" kindref="compound">X</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>AdvectionY</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the 1D advection operator applied to advect along <ref refid="structY" kindref="compound">Y</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp" line="47" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp" bodystart="48" bodyend="179"/>
+    <listofallmembers>
+      <member refid="classPredCorrRK2XY_1ab506381f9972f09f46e137e586efe937" prot="private" virt="non-virtual"><scope>PredCorrRK2XY</scope><name>m_advection_x</name></member>
+      <member refid="classPredCorrRK2XY_1a43971c534305b64c4e3f84d72d61ae6f" prot="private" virt="non-virtual"><scope>PredCorrRK2XY</scope><name>m_advection_y</name></member>
+      <member refid="classPredCorrRK2XY_1ab68e54270bf97bd0752b08113a0e40d8" prot="private" virt="non-virtual"><scope>PredCorrRK2XY</scope><name>m_poisson_solver</name></member>
+      <member refid="classPredCorrRK2XY_1a03ce8460021646ecb76554cbb4f1b088" prot="public" virt="non-virtual"><scope>PredCorrRK2XY</scope><name>operator()</name></member>
+      <member refid="classPredCorrRK2XY_1a2c3ee01251b6c339e06d5f2276e69c9d" prot="public" virt="non-virtual"><scope>PredCorrRK2XY</scope><name>PredCorrRK2XY</name></member>
+      <member refid="classPredCorrRK2XY_1ab656f1b731b4bfb0dc0898e5120f29b2" prot="public" virt="non-virtual"><scope>PredCorrRK2XY</scope><name>~PredCorrRK2XY</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

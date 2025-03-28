@@ -1,0 +1,635 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classRefinedDiscreteToCartesianBuilder" kind="class" language="C++" prot="public">
+    <compoundname>RefinedDiscreteToCartesianBuilder</compoundname>
+    <includes refid="discrete__mapping__builder_8hpp" local="no">discrete_mapping_builder.hpp</includes>
+    <innerclass refid="structRefinedDiscreteToCartesianBuilder_1_1BSplinesRRefined" prot="public">RefinedDiscreteToCartesianBuilder::BSplinesRRefined</innerclass>
+    <innerclass refid="structRefinedDiscreteToCartesianBuilder_1_1BSplinesThetaRefined" prot="public">RefinedDiscreteToCartesianBuilder::BSplinesThetaRefined</innerclass>
+    <innerclass refid="structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType" prot="private">RefinedDiscreteToCartesianBuilder::Build_BuilderType</innerclass>
+    <innerclass refid="structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilder2D_3_01Exe5e607dcd09b0e5dcea3e1a165ab7545e" prot="private">RefinedDiscreteToCartesianBuilder::Build_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver, GridROriginal, GridThetaOriginal &gt; &gt;</innerclass>
+    <innerclass refid="structRefinedDiscreteToCartesianBuilder_1_1GridRRefined" prot="public">RefinedDiscreteToCartesianBuilder::GridRRefined</innerclass>
+    <innerclass refid="structRefinedDiscreteToCartesianBuilder_1_1GridThetaRefined" prot="public">RefinedDiscreteToCartesianBuilder::GridThetaRefined</innerclass>
+    <templateparamlist>
+      <param>
+        <type>class <ref refid="structX" kindref="compound">X</ref></type>
+      </param>
+      <param>
+        <type>class <ref refid="structY" kindref="compound">Y</ref></type>
+      </param>
+      <param>
+        <type>class SplineBuilder</type>
+      </param>
+      <param>
+        <type>class SplineEvaluator</type>
+      </param>
+      <param>
+        <type>int</type>
+        <declname>ncells_r</declname>
+        <defname>ncells_r</defname>
+      </param>
+      <param>
+        <type>int</type>
+        <declname>ncells_theta</declname>
+        <defname>ncells_theta</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1adcf354a8ab0445ffa948f4581666abf5" prot="private" static="no">
+        <type>typename SplineBuilder::exec_space</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::ExecSpace =  typename SplineBuilder::exec_space</definition>
+        <argsstring></argsstring>
+        <name>ExecSpace</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::ExecSpace</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="186" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1ab43ab8c41ca8b2ce4a05c7ea554beca1" prot="private" static="no">
+        <type>typename SplineBuilder::memory_space</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::MemorySpace =  typename SplineBuilder::memory_space</definition>
+        <argsstring></argsstring>
+        <name>MemorySpace</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::MemorySpace</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="187" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1af9dc7d5d84cad8410cb3475efb6c885b" prot="private" static="no">
+        <type>typename SplineBuilder::bsplines_type1</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::BSplinesROriginal =  typename SplineBuilder::bsplines_type1</definition>
+        <argsstring></argsstring>
+        <name>BSplinesROriginal</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::BSplinesROriginal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="189" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="189" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1a41e5394ebcfc3bf9801cf4688c30c2df" prot="private" static="no">
+        <type>typename SplineBuilder::bsplines_type2</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::BSplinesThetaOriginal =  typename SplineBuilder::bsplines_type2</definition>
+        <argsstring></argsstring>
+        <name>BSplinesThetaOriginal</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::BSplinesThetaOriginal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="190" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1ac8bb33c60660c9c3ef06be05691c2fa3" prot="private" static="no">
+        <type>typename BSplinesROriginal::continuous_dimension_type</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::R =  typename BSplinesROriginal::continuous_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>R</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::R</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="192" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="192" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1aed2f81c9fa41ddc84f0eeaea706ff557" prot="private" static="no">
+        <type>typename BSplinesThetaOriginal::continuous_dimension_type</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::Theta =  typename BSplinesThetaOriginal::continuous_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>Theta</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::Theta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="193" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1a08632547b7021db2fccedb34ccea0520" prot="private" static="no">
+        <type>ddc::GrevilleInterpolationPoints&lt; <ref refid="structRefinedDiscreteToCartesianBuilder_1_1BSplinesRRefined" kindref="compound">BSplinesRRefined</ref>, SplineBuilder::builder_type1::s_bc_xmin, SplineBuilder::builder_type1::s_bc_xmax &gt;</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::GrevillePointsR =  ddc::GrevilleInterpolationPoints&lt; BSplinesRRefined, SplineBuilder::builder_type1::s_bc_xmin, SplineBuilder::builder_type1::s_bc_xmax&gt;</definition>
+        <argsstring></argsstring>
+        <name>GrevillePointsR</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::GrevillePointsR</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="215" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="218" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1a947fd2c55bdec316273137051a140f68" prot="private" static="no">
+        <type>ddc::GrevilleInterpolationPoints&lt; <ref refid="structRefinedDiscreteToCartesianBuilder_1_1BSplinesThetaRefined" kindref="compound">BSplinesThetaRefined</ref>, SplineBuilder::builder_type2::s_bc_xmin, SplineBuilder::builder_type2::s_bc_xmax &gt;</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::GrevillePointsTheta =  ddc::GrevilleInterpolationPoints&lt; BSplinesThetaRefined, SplineBuilder::builder_type2::s_bc_xmin, SplineBuilder::builder_type2::s_bc_xmax&gt;</definition>
+        <argsstring></argsstring>
+        <name>GrevillePointsTheta</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::GrevillePointsTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="220" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="223" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1a1ac982a4a159d3cfbdb11e2a5d2a038e" prot="private" static="no">
+        <type>typename SplineBuilder::interpolation_domain_type1</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::GridROriginal =  typename SplineBuilder::interpolation_domain_type1</definition>
+        <argsstring></argsstring>
+        <name>GridROriginal</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::GridROriginal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="237" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="237" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1aa78365f371dc18bff722bb788c879658" prot="private" static="no">
+        <type>typename SplineBuilder::interpolation_domain_type2</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::GridThetaOriginal =  typename SplineBuilder::interpolation_domain_type2</definition>
+        <argsstring></argsstring>
+        <name>GridThetaOriginal</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::GridThetaOriginal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="238" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="238" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1a81f5fab2cc5e693c076912734ca5db81" prot="private" static="no">
+        <type>typename Build_BuilderType&lt; SplineBuilder &gt;::type</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::RefinedSplineBuilder =  typename Build_BuilderType&lt;SplineBuilder&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>RefinedSplineBuilder</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::RefinedSplineBuilder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="280" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="280" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1a9aa08955fe0a96e986f157e168c91369" prot="private" static="no">
+        <type>ddc::SplineEvaluator2D&lt; ExecSpace, MemorySpace, <ref refid="structRefinedDiscreteToCartesianBuilder_1_1BSplinesRRefined" kindref="compound">BSplinesRRefined</ref>, <ref refid="structRefinedDiscreteToCartesianBuilder_1_1BSplinesThetaRefined" kindref="compound">BSplinesThetaRefined</ref>, <ref refid="structRefinedDiscreteToCartesianBuilder_1_1GridRRefined" kindref="compound">GridRRefined</ref>, <ref refid="structRefinedDiscreteToCartesianBuilder_1_1GridThetaRefined" kindref="compound">GridThetaRefined</ref>, typename SplineEvaluator::lower_extrapolation_rule_1_type, typename SplineEvaluator::upper_extrapolation_rule_1_type, typename SplineEvaluator::lower_extrapolation_rule_2_type, typename SplineEvaluator::upper_extrapolation_rule_2_type, <ref refid="structRefinedDiscreteToCartesianBuilder_1_1GridRRefined" kindref="compound">GridRRefined</ref>, <ref refid="structRefinedDiscreteToCartesianBuilder_1_1GridThetaRefined" kindref="compound">GridThetaRefined</ref> &gt;</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::RefinedSplineEvaluator =  ddc::SplineEvaluator2D&lt; ExecSpace, MemorySpace, BSplinesRRefined, BSplinesThetaRefined, GridRRefined, GridThetaRefined, typename SplineEvaluator::lower_extrapolation_rule_1_type, typename SplineEvaluator::upper_extrapolation_rule_1_type, typename SplineEvaluator::lower_extrapolation_rule_2_type, typename SplineEvaluator::upper_extrapolation_rule_2_type, GridRRefined, GridThetaRefined&gt;</definition>
+        <argsstring></argsstring>
+        <name>RefinedSplineEvaluator</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::RefinedSplineEvaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="282" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="294" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1a93b430086f0244cc2d5d5f814a1b88b9" prot="private" static="no">
+        <type>IdxRange&lt; <ref refid="structRefinedDiscreteToCartesianBuilder_1_1BSplinesRRefined" kindref="compound">BSplinesRRefined</ref>, <ref refid="structRefinedDiscreteToCartesianBuilder_1_1BSplinesThetaRefined" kindref="compound">BSplinesThetaRefined</ref> &gt;</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::IdxRangeSplines =  IdxRange&lt;BSplinesRRefined, BSplinesThetaRefined&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeSplines</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::IdxRangeSplines</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="296" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="296" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1a1d0dc26f04d96f2ca87d9f3c2f2598ad" prot="private" static="no">
+        <type>IdxRange&lt; <ref refid="structRefinedDiscreteToCartesianBuilder_1_1GridRRefined" kindref="compound">GridRRefined</ref>, <ref refid="structRefinedDiscreteToCartesianBuilder_1_1GridThetaRefined" kindref="compound">GridThetaRefined</ref> &gt;</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::IdxRangeInterpolationPoints =  IdxRange&lt;GridRRefined, GridThetaRefined&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeInterpolationPoints</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::IdxRangeInterpolationPoints</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="297" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="297" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1a630675537540d5d56cc669d50064567a" prot="private" static="no">
+        <type>typename IdxRangeInterpolationPoints::discrete_element_type</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::IdxInterpolationPoints =  typename IdxRangeInterpolationPoints::discrete_element_type</definition>
+        <argsstring></argsstring>
+        <name>IdxInterpolationPoints</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::IdxInterpolationPoints</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="298" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="298" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1a607efe00f172e8652026c9d8e9ad97b4" prot="private" static="no">
+        <type>DFieldMem&lt; IdxRangeSplines, MemorySpace &gt;</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::SplineCoeffsMem =  DFieldMem&lt;IdxRangeSplines, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>SplineCoeffsMem</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::SplineCoeffsMem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="300" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="300" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1adec8be181792e3ea6241e0fb5ca2569b" prot="private" static="no">
+        <type>typename SplineCoeffsMem::span_type</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::SplineCoeffs =  typename SplineCoeffsMem::span_type</definition>
+        <argsstring></argsstring>
+        <name>SplineCoeffs</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::SplineCoeffs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="302" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="302" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1aee42b628260fb31b9aba6733050d9b3b" prot="private" static="no">
+        <type>DFieldMem&lt; IdxRangeInterpolationPoints, MemorySpace &gt;</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::InterpolationFieldMem =  DFieldMem&lt;IdxRangeInterpolationPoints, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>InterpolationFieldMem</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::InterpolationFieldMem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="304" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="304" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1a3520a72588e22d5881fb5259c9360086" prot="private" static="no">
+        <type>typename InterpolationFieldMem::span_type</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::InterpolationField =  typename InterpolationFieldMem::span_type</definition>
+        <argsstring></argsstring>
+        <name>InterpolationField</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::InterpolationField</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="306" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="306" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classRefinedDiscreteToCartesianBuilder_1aa275ab992ce75c4f25a36802144b614d" prot="public" static="no">
+        <type><ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, RefinedSplineEvaluator &gt;</type>
+        <definition>using RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::MappingType =  DiscreteToCartesian&lt;X, Y, RefinedSplineEvaluator&gt;</definition>
+        <argsstring></argsstring>
+        <name>MappingType</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::MappingType</qualifiedname>
+        <briefdescription>
+<para>The type of the mapping that will be created. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="310" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="310" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classRefinedDiscreteToCartesianBuilder_1a78a1653c0e5dc317c2c5ec6bb7aa1dbe" prot="private" static="no" mutable="no">
+        <type>SplineCoeffsMem</type>
+        <definition>SplineCoeffsMem RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::m_curvilinear_to_x_spline_alloc</definition>
+        <argsstring></argsstring>
+        <name>m_curvilinear_to_x_spline_alloc</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::m_curvilinear_to_x_spline_alloc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="313" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="313" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classRefinedDiscreteToCartesianBuilder_1a97e68a126ef4c9d03bcd9771967f3dd6" prot="private" static="no" mutable="no">
+        <type>SplineCoeffsMem</type>
+        <definition>SplineCoeffsMem RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::m_curvilinear_to_y_spline_alloc</definition>
+        <argsstring></argsstring>
+        <name>m_curvilinear_to_y_spline_alloc</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::m_curvilinear_to_y_spline_alloc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="314" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="314" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classRefinedDiscreteToCartesianBuilder_1abc91465254724f9c06227b8ee8d2096e" prot="private" static="no" mutable="no">
+        <type>RefinedSplineEvaluator</type>
+        <definition>RefinedSplineEvaluator RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::m_evaluator</definition>
+        <argsstring></argsstring>
+        <name>m_evaluator</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::m_evaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="315" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="315" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classRefinedDiscreteToCartesianBuilder_1a98c7aa5459e478c1c85c30a70bc8cb86" prot="private" static="no" mutable="no">
+        <type>IdxRange&lt; <ref refid="structRefinedDiscreteToCartesianBuilder_1_1GridRRefined" kindref="compound">GridRRefined</ref>, <ref refid="structRefinedDiscreteToCartesianBuilder_1_1GridThetaRefined" kindref="compound">GridThetaRefined</ref> &gt;</type>
+        <definition>IdxRange&lt;GridRRefined, GridThetaRefined&gt; RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::m_idx_range_singular_point</definition>
+        <argsstring></argsstring>
+        <name>m_idx_range_singular_point</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::m_idx_range_singular_point</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="316" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="316" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classRefinedDiscreteToCartesianBuilder_1aa499a9cf34b44f04e5fc0cc29892256a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Mapping</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::RefinedDiscreteToCartesianBuilder</definition>
+        <argsstring>(ExecSpace exec_space, Mapping const &amp;analytical_mapping, SplineBuilder const &amp;builder, SplineEvaluator const &amp;evaluator)</argsstring>
+        <name>RefinedDiscreteToCartesianBuilder</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::RefinedDiscreteToCartesianBuilder</qualifiedname>
+        <param>
+          <type>ExecSpace</type>
+          <declname>exec_space</declname>
+        </param>
+        <param>
+          <type>Mapping const &amp;</type>
+          <declname>analytical_mapping</declname>
+        </param>
+        <param>
+          <type>SplineBuilder const &amp;</type>
+          <declname>builder</declname>
+        </param>
+        <param>
+          <type>SplineEvaluator const &amp;</type>
+          <declname>evaluator</declname>
+        </param>
+        <briefdescription>
+<para>Create an instance of the class capable of providing a <ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian</ref> class instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">exec_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The execution space where this class runs any for loops. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">analytical_mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The analytical mapping to be described by this discrete mapping. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">builder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A spline builder to be used to create a spline approximating the analytical mapping. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A spline evaluator to be used to evaluate a spline approximating the analytical mapping. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="328" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="328" bodyend="414"/>
+      </memberdef>
+      <memberdef kind="function" id="classRefinedDiscreteToCartesianBuilder_1ad569e80c83f31dfec64813d24bfb2e25" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, RefinedSplineEvaluator &gt;</type>
+        <definition>DiscreteToCartesian&lt; X, Y, RefinedSplineEvaluator &gt; RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::operator()</definition>
+        <argsstring>() const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::operator()</qualifiedname>
+        <briefdescription>
+<para>Get a <ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian</ref> class instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>An instance of the mapping. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="421" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="421" bodyend="428"/>
+      </memberdef>
+      <memberdef kind="function" id="classRefinedDiscreteToCartesianBuilder_1af736d95b521a444e5e24ed3632ae9481" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Mapping</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::set_curvilinear_to_cartesian_values</definition>
+        <argsstring>(InterpolationField curvilinear_to_x_vals, InterpolationField curvilinear_to_y_vals, Mapping const &amp;analytical_mapping, IdxRangeInterpolationPoints const &amp;interpolation_idx_range)</argsstring>
+        <name>set_curvilinear_to_cartesian_values</name>
+        <qualifiedname>RefinedDiscreteToCartesianBuilder::set_curvilinear_to_cartesian_values</qualifiedname>
+        <param>
+          <type>InterpolationField</type>
+          <declname>curvilinear_to_x_vals</declname>
+        </param>
+        <param>
+          <type>InterpolationField</type>
+          <declname>curvilinear_to_y_vals</declname>
+        </param>
+        <param>
+          <type>Mapping const &amp;</type>
+          <declname>analytical_mapping</declname>
+        </param>
+        <param>
+          <type>IdxRangeInterpolationPoints const &amp;</type>
+          <declname>interpolation_idx_range</declname>
+        </param>
+        <briefdescription>
+<para>Fill in the curvilinear fields with interpolation points mapped with the given analytical mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function should be private. It is not due to the inclusion of a KOKKOS_LAMBDA</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the analytical mapping. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">curvilinear_to_x_vals</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Field of coordinate on <ref refid="structX" kindref="compound">X</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">curvilinear_to_y_vals</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Field of coordinate on <ref refid="structY" kindref="compound">Y</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">analytical_mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Analytical mapping. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">interpolation_idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index range of an interpolation grid. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="443" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="443" bodyend="463"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class to create a <ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian</ref> instance from an analytical mapping. This class creates an instance which uses more refined splines than the provided builder and evaluator. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structX" kindref="compound">X</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first Cartesian dimension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structY" kindref="compound">Y</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second Cartesian dimension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>SplineBuilder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An operator for building spline coefficients. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>SplineEvaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An operator for evaluating a spline. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ncells_r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of cells in the refined spline in the radial direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ncells_theta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of cells in the refined spline in the radial direction. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="176" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="177" bodyend="464"/>
+    <listofallmembers>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1af9dc7d5d84cad8410cb3475efb6c885b" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>BSplinesROriginal</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1a41e5394ebcfc3bf9801cf4688c30c2df" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>BSplinesThetaOriginal</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1adcf354a8ab0445ffa948f4581666abf5" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>ExecSpace</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1a08632547b7021db2fccedb34ccea0520" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>GrevillePointsR</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1a947fd2c55bdec316273137051a140f68" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>GrevillePointsTheta</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1a1ac982a4a159d3cfbdb11e2a5d2a038e" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>GridROriginal</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1aa78365f371dc18bff722bb788c879658" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>GridThetaOriginal</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1a630675537540d5d56cc669d50064567a" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>IdxInterpolationPoints</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1a1d0dc26f04d96f2ca87d9f3c2f2598ad" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>IdxRangeInterpolationPoints</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1a93b430086f0244cc2d5d5f814a1b88b9" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>IdxRangeSplines</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1a3520a72588e22d5881fb5259c9360086" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>InterpolationField</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1aee42b628260fb31b9aba6733050d9b3b" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>InterpolationFieldMem</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1a78a1653c0e5dc317c2c5ec6bb7aa1dbe" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>m_curvilinear_to_x_spline_alloc</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1a97e68a126ef4c9d03bcd9771967f3dd6" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>m_curvilinear_to_y_spline_alloc</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1abc91465254724f9c06227b8ee8d2096e" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>m_evaluator</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1a98c7aa5459e478c1c85c30a70bc8cb86" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>m_idx_range_singular_point</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1aa275ab992ce75c4f25a36802144b614d" prot="public" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>MappingType</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1ab43ab8c41ca8b2ce4a05c7ea554beca1" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>MemorySpace</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1ad569e80c83f31dfec64813d24bfb2e25" prot="public" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>operator()</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1ac8bb33c60660c9c3ef06be05691c2fa3" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>R</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1aa499a9cf34b44f04e5fc0cc29892256a" prot="public" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>RefinedDiscreteToCartesianBuilder</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1a81f5fab2cc5e693c076912734ca5db81" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>RefinedSplineBuilder</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1a9aa08955fe0a96e986f157e168c91369" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>RefinedSplineEvaluator</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1af736d95b521a444e5e24ed3632ae9481" prot="public" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>set_curvilinear_to_cartesian_values</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1adec8be181792e3ea6241e0fb5ca2569b" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>SplineCoeffs</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1a607efe00f172e8652026c9d8e9ad97b4" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>SplineCoeffsMem</name></member>
+      <member refid="classRefinedDiscreteToCartesianBuilder_1aed2f81c9fa41ddc84f0eeaea706ff557" prot="private" virt="non-virtual"><scope>RefinedDiscreteToCartesianBuilder</scope><name>Theta</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

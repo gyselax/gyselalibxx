@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="impitranspose_8hpp" kind="file" language="C++">
+    <compoundname>impitranspose.hpp</compoundname>
+    <includes local="no">mpi.h</includes>
+    <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
+    <includedby refid="mpitransposealltoall_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/impitranspose.hpp</label>
+        <link refid="impitranspose_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>ddc/ddc.hpp</label>
+      </node>
+      <node id="5">
+        <label>ddc/kernels/splines.hpp</label>
+      </node>
+      <node id="2">
+        <label>mpi.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/mpisplitvlasovsolver.hpp</label>
+        <link refid="mpisplitvlasovsolver_8hpp_source"/>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/impitranspose.hpp</label>
+        <link refid="impitranspose_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp</label>
+        <link refid="mpitransposealltoall_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classIMPITranspose" prot="public">IMPITranspose</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;mpi.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Layout1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Layout2&gt;</highlight></codeline>
+<codeline lineno="14" refid="classIMPITranspose" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classIMPITranspose" kindref="compound">IMPITranspose</ref></highlight></codeline>
+<codeline lineno="15"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(ddc::type_seq_same_v&lt;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::to_type_seq_t&lt;typename<sp/>Layout1::discrete_domain_type&gt;,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::to_type_seq_t&lt;typename<sp/>Layout2::discrete_domain_type&gt;&gt;);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="22" refid="classIMPITranspose_1a280d7345bbf2d4f849a36a49bc4643f9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIMPITranspose_1a280d7345bbf2d4f849a36a49bc4643f9" kindref="member">idx_range_type1</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Layout1::discrete_domain_type;</highlight></codeline>
+<codeline lineno="24" refid="classIMPITranspose_1af0c568eecf467ecb7e913c5b3fc04f99" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIMPITranspose_1af0c568eecf467ecb7e913c5b3fc04f99" kindref="member">idx_range_type2</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Layout2::discrete_domain_type;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="28" refid="classIMPITranspose_1a0eb3f43c23660b2433c0383cbcf9a626" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>MPI_Comm<sp/><ref refid="classIMPITranspose_1a0eb3f43c23660b2433c0383cbcf9a626" kindref="member">m_comm</ref>;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="36" refid="classIMPITranspose_1a896a457be3e1f9584122760868b9cbd4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classIMPITranspose_1a896a457be3e1f9584122760868b9cbd4" kindref="member">IMPITranspose</ref>(MPI_Comm<sp/>comm)<sp/>:<sp/><ref refid="classIMPITranspose_1a0eb3f43c23660b2433c0383cbcf9a626" kindref="member">m_comm</ref>(comm)<sp/>{}</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">};</highlight></codeline>
+    </programlisting>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/impitranspose.hpp"/>
+  </compounddef>
+</doxygen>

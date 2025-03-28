@@ -1,0 +1,616 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classMPITransposeAllToAll" kind="class" language="C++" prot="public">
+    <compoundname>MPITransposeAllToAll</compoundname>
+    <basecompoundref refid="classIMPITranspose" prot="public" virt="non-virtual">IMPITranspose&lt; Layout1, Layout2 &gt;</basecompoundref>
+    <includes refid="mpitransposealltoall_8hpp" local="no">mpitransposealltoall.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Layout1</type>
+      </param>
+      <param>
+        <type>class Layout2</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classMPITransposeAllToAll_1aaaab817292b16b7950c336c245618f35" prot="public" static="no">
+        <type>typename Layout1::discrete_domain_type</type>
+        <definition>using MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::idx_range_type1 =  typename Layout1::discrete_domain_type</definition>
+        <argsstring></argsstring>
+        <name>idx_range_type1</name>
+        <qualifiedname>MPITransposeAllToAll::idx_range_type1</qualifiedname>
+        <briefdescription>
+<para>The type of the index range of the first MPI layout. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="28" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMPITransposeAllToAll_1af9426bfbb72332bf45cfff384863ce21" prot="public" static="no">
+        <type>typename Layout2::discrete_domain_type</type>
+        <definition>using MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::idx_range_type2 =  typename Layout2::discrete_domain_type</definition>
+        <argsstring></argsstring>
+        <name>idx_range_type2</name>
+        <qualifiedname>MPITransposeAllToAll::idx_range_type2</qualifiedname>
+        <briefdescription>
+<para>The type of the index range of the second MPI layout. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMPITransposeAllToAll_1a313e5b285bf71c5fdb45855e4ecd4573" prot="public" static="no">
+        <type>typename Layout1::distributed_sub_idx_range</type>
+        <definition>using MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::distributed_idx_range_type1 =  typename Layout1::distributed_sub_idx_range</definition>
+        <argsstring></argsstring>
+        <name>distributed_idx_range_type1</name>
+        <qualifiedname>MPITransposeAllToAll::distributed_idx_range_type1</qualifiedname>
+        <briefdescription>
+<para>The type of the index range of the first MPI layout. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="32" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMPITransposeAllToAll_1a1119f153697f8f23c1c382f70f208d4a" prot="public" static="no">
+        <type>typename Layout2::distributed_sub_idx_range</type>
+        <definition>using MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::distributed_idx_range_type2 =  typename Layout2::distributed_sub_idx_range</definition>
+        <argsstring></argsstring>
+        <name>distributed_idx_range_type2</name>
+        <qualifiedname>MPITransposeAllToAll::distributed_idx_range_type2</qualifiedname>
+        <briefdescription>
+<para>The type of the index range of the second MPI layout. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="34" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classMPITransposeAllToAll_1a49feb5fb4721d248732c7ebe60c6ada0" prot="private" static="no">
+        <type>ddcHelper::apply_template_to_type_seq_t&lt; <ref refid="structMPIDim" kindref="compound">MPIDim</ref>, typename Layout1::distributed_type_seq &gt;</type>
+        <definition>using MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::layout_1_mpi_dims =  ddcHelper:: apply_template_to_type_seq_t&lt;MPIDim, typename Layout1::distributed_type_seq&gt;</definition>
+        <argsstring></argsstring>
+        <name>layout_1_mpi_dims</name>
+        <qualifiedname>MPITransposeAllToAll::layout_1_mpi_dims</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="37" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMPITransposeAllToAll_1a765f1cfc6bcfd5510121bd1d2d8636c2" prot="private" static="no">
+        <type>ddcHelper::apply_template_to_type_seq_t&lt; <ref refid="structMPIDim" kindref="compound">MPIDim</ref>, typename Layout2::distributed_type_seq &gt;</type>
+        <definition>using MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::layout_2_mpi_dims =  ddcHelper:: apply_template_to_type_seq_t&lt;MPIDim, typename Layout2::distributed_type_seq&gt;</definition>
+        <argsstring></argsstring>
+        <name>layout_2_mpi_dims</name>
+        <qualifiedname>MPITransposeAllToAll::layout_2_mpi_dims</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMPITransposeAllToAll_1a0a3b4290cd7ce5d35dd9fe4cc1cac039" prot="private" static="no">
+        <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; layout_1_mpi_dims &gt;</type>
+        <definition>using MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::layout_1_mpi_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t&lt;layout_1_mpi_dims&gt;</definition>
+        <argsstring></argsstring>
+        <name>layout_1_mpi_idx_range_type</name>
+        <qualifiedname>MPITransposeAllToAll::layout_1_mpi_idx_range_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMPITransposeAllToAll_1aadda65b9866e417fcaeb5c0f14da6d7b" prot="private" static="no">
+        <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; layout_2_mpi_dims &gt;</type>
+        <definition>using MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::layout_2_mpi_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t&lt;layout_2_mpi_dims&gt;</definition>
+        <argsstring></argsstring>
+        <name>layout_2_mpi_idx_range_type</name>
+        <qualifiedname>MPITransposeAllToAll::layout_2_mpi_idx_range_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classMPITransposeAllToAll_1a333c58d46994bf2aa46a518b202f56ff" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::m_comm_size</definition>
+        <argsstring></argsstring>
+        <name>m_comm_size</name>
+        <qualifiedname>MPITransposeAllToAll::m_comm_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="47" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMPITransposeAllToAll_1ac9709dad99e63b102cdee841a41b487b" prot="private" static="no" mutable="no">
+        <type>Layout1</type>
+        <definition>Layout1 MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::m_layout_1</definition>
+        <argsstring></argsstring>
+        <name>m_layout_1</name>
+        <qualifiedname>MPITransposeAllToAll::m_layout_1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="48" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMPITransposeAllToAll_1a7193945ce3c6779376cf53c26e766ed1" prot="private" static="no" mutable="no">
+        <type>Layout2</type>
+        <definition>Layout2 MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::m_layout_2</definition>
+        <argsstring></argsstring>
+        <name>m_layout_2</name>
+        <qualifiedname>MPITransposeAllToAll::m_layout_2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="49" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMPITransposeAllToAll_1a48cea34f5a1c741451e3af7e9526cd17" prot="private" static="no" mutable="no">
+        <type><ref refid="classMPITransposeAllToAll_1aaaab817292b16b7950c336c245618f35" kindref="member">idx_range_type1</ref></type>
+        <definition>idx_range_type1 MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::m_local_idx_range_1</definition>
+        <argsstring></argsstring>
+        <name>m_local_idx_range_1</name>
+        <qualifiedname>MPITransposeAllToAll::m_local_idx_range_1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="50" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMPITransposeAllToAll_1aa86f8de0d200fbf29e7f1346a3ffb7b3" prot="private" static="no" mutable="no">
+        <type><ref refid="classMPITransposeAllToAll_1af9426bfbb72332bf45cfff384863ce21" kindref="member">idx_range_type2</ref></type>
+        <definition>idx_range_type2 MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::m_local_idx_range_2</definition>
+        <argsstring></argsstring>
+        <name>m_local_idx_range_2</name>
+        <qualifiedname>MPITransposeAllToAll::m_local_idx_range_2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="51" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMPITransposeAllToAll_1abaa90f0a03357bf2b11ec6a40346a376" prot="private" static="no" mutable="no">
+        <type>layout_1_mpi_idx_range_type</type>
+        <definition>layout_1_mpi_idx_range_type MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::m_layout_1_mpi_idx_range</definition>
+        <argsstring></argsstring>
+        <name>m_layout_1_mpi_idx_range</name>
+        <qualifiedname>MPITransposeAllToAll::m_layout_1_mpi_idx_range</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="52" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMPITransposeAllToAll_1a297883c3e3f9aeef584ee968f00e2c49" prot="private" static="no" mutable="no">
+        <type>layout_2_mpi_idx_range_type</type>
+        <definition>layout_2_mpi_idx_range_type MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::m_layout_2_mpi_idx_range</definition>
+        <argsstring></argsstring>
+        <name>m_layout_2_mpi_idx_range</name>
+        <qualifiedname>MPITransposeAllToAll::m_layout_2_mpi_idx_range</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="53" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classMPITransposeAllToAll_1a1c663a83e6a7b770ef8d764d877d4deb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IdxRange</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::MPITransposeAllToAll</definition>
+        <argsstring>(IdxRange global_idx_range, MPI_Comm comm)</argsstring>
+        <name>MPITransposeAllToAll</name>
+        <qualifiedname>MPITransposeAllToAll::MPITransposeAllToAll</qualifiedname>
+        <param>
+          <type>IdxRange</type>
+          <declname>global_idx_range</declname>
+        </param>
+        <param>
+          <type>MPI_Comm</type>
+          <declname>comm</declname>
+        </param>
+        <briefdescription>
+<para>A constructor for the transpose operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>global_idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The global index range of the data across processes provided in either layout. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The MPI communicator. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="63" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classMPITransposeAllToAll_1ac9c808ac3e2561eb23c62e545479d896" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Layout</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::get_local_idx_range</definition>
+        <argsstring>() const</argsstring>
+        <name>get_local_idx_range</name>
+        <qualifiedname>MPITransposeAllToAll::get_local_idx_range</qualifiedname>
+        <briefdescription>
+<para>Getter for the local index range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Layout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The layout whose index range should be retrieved.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The local index range in the specified MPI layout. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="106" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="106" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classMPITransposeAllToAll_1aedee134078a94aab50d0b3c33fecfdc1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>class InIdxRange</type>
+          </param>
+          <param>
+            <type>class IdxRangeOut</type>
+          </param>
+          <param>
+            <type>class MemSpace</type>
+          </param>
+          <param>
+            <type>class ExecSpace</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::operator()</definition>
+        <argsstring>(ExecSpace const &amp;execution_space, Field&lt; ElementType, IdxRangeOut, MemSpace &gt; recv_field, ConstField&lt; ElementType, InIdxRange, MemSpace &gt; send_field) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>MPITransposeAllToAll::operator()</qualifiedname>
+        <param>
+          <type>ExecSpace const &amp;</type>
+          <declname>execution_space</declname>
+        </param>
+        <param>
+          <type>Field&lt; ElementType, IdxRangeOut, MemSpace &gt;</type>
+          <declname>recv_field</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; ElementType, InIdxRange, MemSpace &gt;</type>
+          <declname>send_field</declname>
+        </param>
+        <briefdescription>
+<para>An operator which transposes from one layout to another. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the dimensions are ordered differently in the index ranges of the two layouts then this function can be used. If the index ranges have the same type then the transpose_to function must be used to disambiguate.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">execution_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The execution space (Host/Device) where the code will run. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">recv_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The chunk which will describe the data in the new layout. This data is gathered from the MPI processes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">send_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The chunk describing the data in the current layout. This data will be scattered to other MPI processes. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="137" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="137" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="classMPITransposeAllToAll_1ae6292dc81cee04163749bfa358d2bb41" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class OutLayout</type>
+          </param>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>class MemSpace</type>
+          </param>
+          <param>
+            <type>class ExecSpace</type>
+          </param>
+          <param>
+            <type>class InIdxRange</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::transpose_to</definition>
+        <argsstring>(ExecSpace const &amp;execution_space, Field&lt; ElementType, typename OutLayout::discrete_domain_type, MemSpace &gt; recv_field, ConstField&lt; ElementType, InIdxRange, MemSpace &gt; send_field) const</argsstring>
+        <name>transpose_to</name>
+        <qualifiedname>MPITransposeAllToAll::transpose_to</qualifiedname>
+        <param>
+          <type>ExecSpace const &amp;</type>
+          <declname>execution_space</declname>
+        </param>
+        <param>
+          <type>Field&lt; ElementType, typename OutLayout::discrete_domain_type, MemSpace &gt;</type>
+          <declname>recv_field</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; ElementType, InIdxRange, MemSpace &gt;</type>
+          <declname>send_field</declname>
+        </param>
+        <briefdescription>
+<para>An operator which transposes from one layout to another. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the dimensions are ordered differently in the index ranges of the two layouts then this function can be used. If the index ranges have the same type then the transpose_to function must be used to disambiguate.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>OutLayout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The layout that the data should be transposed to.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">execution_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The execution space (Host/Device) where the code will run. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">recv_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The chunk which will describe the data in the new layout. This data is gathered from the MPI processes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">send_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The chunk describing the data in the current layout. This data will be scattered to other MPI processes. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="172" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="172" bodyend="315"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classMPITransposeAllToAll_1acbae6ca6c9df9442f68c9c14647d979a" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>class MPIRecvIdxRange</type>
+          </param>
+          <param>
+            <type>class MPISendIdxRange</type>
+          </param>
+          <param>
+            <type>class MemSpace</type>
+          </param>
+          <param>
+            <type>class ExecSpace</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::call_all_to_all</definition>
+        <argsstring>(ExecSpace const &amp;execution_space, Field&lt; ElementType, MPIRecvIdxRange, MemSpace &gt; recv_field, ConstField&lt; ElementType, MPISendIdxRange, MemSpace &gt; send_field) const</argsstring>
+        <name>call_all_to_all</name>
+        <qualifiedname>MPITransposeAllToAll::call_all_to_all</qualifiedname>
+        <param>
+          <type>ExecSpace const &amp;</type>
+          <declname>execution_space</declname>
+        </param>
+        <param>
+          <type>Field&lt; ElementType, MPIRecvIdxRange, MemSpace &gt;</type>
+          <declname>recv_field</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; ElementType, MPISendIdxRange, MemSpace &gt;</type>
+          <declname>send_field</declname>
+        </param>
+        <briefdescription>
+<para>Function handling the MPI call. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="325" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="325" bodyend="344"/>
+      </memberdef>
+      <memberdef kind="function" id="classMPITransposeAllToAll_1a6c66db7c583a27422cbd48ca477d16f3" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>DistributedDims</declname>
+            <defname>DistributedDims</defname>
+          </param>
+        </templateparamlist>
+        <type>IdxRange&lt; <ref refid="structMPIDim" kindref="compound">MPIDim</ref>&lt; DistributedDims &gt;... &gt;</type>
+        <definition>IdxRange&lt; MPIDim&lt; DistributedDims &gt;... &gt; MPITransposeAllToAll&lt; Layout1, Layout2 &gt;::get_distribution</definition>
+        <argsstring>(IdxRange&lt; DistributedDims... &gt; local_idx_range, IdxRange&lt; DistributedDims... &gt; global_idx_range) const</argsstring>
+        <name>get_distribution</name>
+        <qualifiedname>MPITransposeAllToAll::get_distribution</qualifiedname>
+        <param>
+          <type>IdxRange&lt; DistributedDims... &gt;</type>
+          <declname>local_idx_range</declname>
+        </param>
+        <param>
+          <type>IdxRange&lt; DistributedDims... &gt;</type>
+          <declname>global_idx_range</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="347" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="347" bodyend="356"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class describing an operator for converting from/to different MPI layouts using AlltoAll. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class implements a basic AlltoAll operator and currently only works with a basic MPIBlockLayout.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Layout1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>One of the MPI layouts. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Layout2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The other MPI layouts. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>IMPITranspose&lt; Layout1, Layout2 &gt;</label>
+        <link refid="classIMPITranspose"/>
+      </node>
+      <node id="1">
+        <label>MPITransposeAllToAll&lt; Layout1, Layout2 &gt;</label>
+        <link refid="classMPITransposeAllToAll"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>IMPITranspose&lt; Layout1, Layout2 &gt;</label>
+        <link refid="classIMPITranspose"/>
+      </node>
+      <node id="1">
+        <label>MPITransposeAllToAll&lt; Layout1, Layout2 &gt;</label>
+        <link refid="classMPITransposeAllToAll"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" line="24" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp" bodystart="25" bodyend="357"/>
+    <listofallmembers>
+      <member refid="classMPITransposeAllToAll_1acbae6ca6c9df9442f68c9c14647d979a" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>call_all_to_all</name></member>
+      <member refid="classMPITransposeAllToAll_1a313e5b285bf71c5fdb45855e4ecd4573" prot="public" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>distributed_idx_range_type1</name></member>
+      <member refid="classMPITransposeAllToAll_1a1119f153697f8f23c1c382f70f208d4a" prot="public" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>distributed_idx_range_type2</name></member>
+      <member refid="classMPITransposeAllToAll_1a6c66db7c583a27422cbd48ca477d16f3" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>get_distribution</name></member>
+      <member refid="classMPITransposeAllToAll_1ac9c808ac3e2561eb23c62e545479d896" prot="public" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>get_local_idx_range</name></member>
+      <member refid="classMPITransposeAllToAll_1aaaab817292b16b7950c336c245618f35" prot="public" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>idx_range_type1</name></member>
+      <member refid="classMPITransposeAllToAll_1af9426bfbb72332bf45cfff384863ce21" prot="public" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>idx_range_type2</name></member>
+      <member refid="classIMPITranspose_1a896a457be3e1f9584122760868b9cbd4" prot="public" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>IMPITranspose</name></member>
+      <member refid="classMPITransposeAllToAll_1a49feb5fb4721d248732c7ebe60c6ada0" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>layout_1_mpi_dims</name></member>
+      <member refid="classMPITransposeAllToAll_1a0a3b4290cd7ce5d35dd9fe4cc1cac039" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>layout_1_mpi_idx_range_type</name></member>
+      <member refid="classMPITransposeAllToAll_1a765f1cfc6bcfd5510121bd1d2d8636c2" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>layout_2_mpi_dims</name></member>
+      <member refid="classMPITransposeAllToAll_1aadda65b9866e417fcaeb5c0f14da6d7b" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>layout_2_mpi_idx_range_type</name></member>
+      <member refid="classIMPITranspose_1a0eb3f43c23660b2433c0383cbcf9a626" prot="protected" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>m_comm</name></member>
+      <member refid="classMPITransposeAllToAll_1a333c58d46994bf2aa46a518b202f56ff" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>m_comm_size</name></member>
+      <member refid="classMPITransposeAllToAll_1ac9709dad99e63b102cdee841a41b487b" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>m_layout_1</name></member>
+      <member refid="classMPITransposeAllToAll_1abaa90f0a03357bf2b11ec6a40346a376" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>m_layout_1_mpi_idx_range</name></member>
+      <member refid="classMPITransposeAllToAll_1a7193945ce3c6779376cf53c26e766ed1" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>m_layout_2</name></member>
+      <member refid="classMPITransposeAllToAll_1a297883c3e3f9aeef584ee968f00e2c49" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>m_layout_2_mpi_idx_range</name></member>
+      <member refid="classMPITransposeAllToAll_1a48cea34f5a1c741451e3af7e9526cd17" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>m_local_idx_range_1</name></member>
+      <member refid="classMPITransposeAllToAll_1aa86f8de0d200fbf29e7f1346a3ffb7b3" prot="private" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>m_local_idx_range_2</name></member>
+      <member refid="classMPITransposeAllToAll_1a1c663a83e6a7b770ef8d764d877d4deb" prot="public" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>MPITransposeAllToAll</name></member>
+      <member refid="classMPITransposeAllToAll_1aedee134078a94aab50d0b3c33fecfdc1" prot="public" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>operator()</name></member>
+      <member refid="classMPITransposeAllToAll_1ae6292dc81cee04163749bfa358d2bb41" prot="public" virt="non-virtual"><scope>MPITransposeAllToAll</scope><name>transpose_to</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

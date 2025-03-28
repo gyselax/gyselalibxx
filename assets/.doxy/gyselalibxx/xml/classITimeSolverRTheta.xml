@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classITimeSolverRTheta" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>ITimeSolverRTheta</compoundname>
+    <derivedcompoundref refid="classBslExplicitPredCorrRTheta" prot="public" virt="non-virtual">BslExplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classBslImplicitPredCorrRTheta" prot="public" virt="non-virtual">BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classBslPredCorrRTheta" prot="public" virt="non-virtual">BslPredCorrRTheta&lt; Mapping, FootFinder &gt;</derivedcompoundref>
+    <includes refid="geometryRTheta_2time__solver_2itimesolver_8hpp" local="no">itimesolver.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classITimeSolverRTheta_1afc3a0e07f492d601b0793a9dfba47bfb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ITimeSolverRTheta::~ITimeSolverRTheta</definition>
+        <argsstring>()=default</argsstring>
+        <name>~ITimeSolverRTheta</name>
+        <qualifiedname>ITimeSolverRTheta::~ITimeSolverRTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/itimesolver.hpp" line="13" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classITimeSolverRTheta_1a5e17feb3b5b1c2cf535b2bf58732e137" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>host_t&lt; DFieldRTheta &gt;</type>
+        <definition>virtual host_t&lt; DFieldRTheta &gt; ITimeSolverRTheta::operator()</definition>
+        <argsstring>(host_t&lt; DFieldRTheta &gt; allfdistribu, double const dt, int const steps=1) const =0</argsstring>
+        <name>operator()</name>
+        <qualifiedname>ITimeSolverRTheta::operator()</qualifiedname>
+        <reimplementedby refid="classBslExplicitPredCorrRTheta_1a73344fb86202d79193d2bb3da2a6fae3">operator()</reimplementedby>
+        <reimplementedby refid="classBslImplicitPredCorrRTheta_1aa9c8a28861bf06a7d477ef7e9cf1a4c4">operator()</reimplementedby>
+        <reimplementedby refid="classBslPredCorrRTheta_1ab4b18b2f58e93e38933d46e3c3da5c5f">operator()</reimplementedby>
+        <param>
+          <type>host_t&lt; DFieldRTheta &gt;</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type>int const</type>
+          <declname>steps</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>Solves on <formula id="133">$ T = dt*N $</formula> the equations system. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On input: the initial condition. On output: the solution at <formula id="134">$ dt *N$</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">steps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number <formula id="135">$ N$</formula> of time interactions.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A Field toward allfdistribu. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/itimesolver.hpp" line="28" column="20"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classITimeSolverRTheta_1a5503beee2f7240e8b09ef8ac3be2af24" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ITimeSolverRTheta::display_time_difference</definition>
+        <argsstring>(std::string const &amp;title, std::chrono::time_point&lt; std::chrono::system_clock &gt; const &amp;start_time, std::chrono::time_point&lt; std::chrono::system_clock &gt; const &amp;end_time) const</argsstring>
+        <name>display_time_difference</name>
+        <qualifiedname>ITimeSolverRTheta::display_time_difference</qualifiedname>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>title</declname>
+        </param>
+        <param>
+          <type>std::chrono::time_point&lt; std::chrono::system_clock &gt; const &amp;</type>
+          <declname>start_time</declname>
+        </param>
+        <param>
+          <type>std::chrono::time_point&lt; std::chrono::system_clock &gt; const &amp;</type>
+          <declname>end_time</declname>
+        </param>
+        <briefdescription>
+<para>Displays the time difference between two given times and a title. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Useful to display the duration of a simulation.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">title</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A string printed in front of the computed duration. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">start_time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The start time point. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">end_time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The end time point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/itimesolver.hpp" line="47" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/itimesolver.hpp" bodystart="47" bodyend="64"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Base class for the time solvers. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>BslExplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;</label>
+        <link refid="classBslExplicitPredCorrRTheta"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;</label>
+        <link refid="classBslImplicitPredCorrRTheta"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>BslPredCorrRTheta&lt; Mapping, FootFinder &gt;</label>
+        <link refid="classBslPredCorrRTheta"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>ITimeSolverRTheta</label>
+        <link refid="classITimeSolverRTheta"/>
+      </node>
+    </inheritancegraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/itimesolver.hpp" line="10" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/itimesolver.hpp" bodystart="11" bodyend="65"/>
+    <listofallmembers>
+      <member refid="classITimeSolverRTheta_1a5503beee2f7240e8b09ef8ac3be2af24" prot="protected" virt="non-virtual"><scope>ITimeSolverRTheta</scope><name>display_time_difference</name></member>
+      <member refid="classITimeSolverRTheta_1a5e17feb3b5b1c2cf535b2bf58732e137" prot="public" virt="pure-virtual"><scope>ITimeSolverRTheta</scope><name>operator()</name></member>
+      <member refid="classITimeSolverRTheta_1afc3a0e07f492d601b0793a9dfba47bfb" prot="public" virt="virtual"><scope>ITimeSolverRTheta</scope><name>~ITimeSolverRTheta</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

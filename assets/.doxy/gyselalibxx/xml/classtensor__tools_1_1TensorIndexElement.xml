@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classtensor__tools_1_1TensorIndexElement" kind="class" language="C++" prot="public">
+    <compoundname>tensor_tools::TensorIndexElement</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class ValidatingTensorIndexSet</type>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>Dims</declname>
+        <defname>Dims</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>A class describing an index of a tensor. For example for a 2x2 metric tensor on an (x,y) plane the element <formula id="25">$ g_{xx} $</formula> would have the index TensorIndexElement&lt;TensorIndexSetXY, X, X&gt;. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ValidatingTensorIndexSet</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The TypeSeq of VectorIndexSets in which each tag comprising this element (along each dimension) can be found. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Dims</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimensions at which the tensor is accessed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" line="17" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp" bodystart="17" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

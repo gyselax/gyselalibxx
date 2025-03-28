@@ -1,0 +1,603 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="species__info_8hpp" kind="file" language="C++">
+    <compoundname>species_info.hpp</compoundname>
+    <includes local="no">ddc/ddc.hpp</includes>
+    <includes refid="ddc__alias__inline__functions_8hpp" local="yes">ddc_alias_inline_functions.hpp</includes>
+    <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
+    <includes refid="ddc__helper_8hpp" local="yes">ddc_helper.hpp</includes>
+    <includedby refid="bsl__advection__vx_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp</includedby>
+    <includedby refid="bsl__advection__x_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp</includedby>
+    <includedby refid="collision__common__configuration_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_common_configuration.hpp</includedby>
+    <includedby refid="collision__operator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.hpp</includedby>
+    <includedby refid="geometryVparMu_2geometry_2geometry_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry.hpp</includedby>
+    <includedby refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp</includedby>
+    <includedby refid="noperturbinitialisation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/noperturbinitialisation.hpp</includedby>
+    <includedby refid="geometryXVx_2geometry_2geometry_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp</includedby>
+    <includedby refid="bumpontailequilibrium_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/bumpontailequilibrium.hpp</includedby>
+    <includedby refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp</includedby>
+    <includedby refid="restartinitialisation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp</includedby>
+    <includedby refid="geometryXVx_2initialisation_2singlemodeperturbinitialisation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.hpp</includedby>
+    <includedby refid="collisions__utils_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_utils.cpp</includedby>
+    <includedby refid="kinetic__source_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/kinetic_source.cpp</includedby>
+    <includedby refid="krook__source__adaptive_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.cpp</includedby>
+    <includedby refid="geometryXYVxVy_2geometry_2geometry_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp</includedby>
+    <includedby refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp</includedby>
+    <includedby refid="geometryXYVxVy_2initialisation_2singlemodeperturbinitialisation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.hpp</includedby>
+    <includedby refid="geometryXYVxVy_2poisson_2chargedensitycalculator_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/chargedensitycalculator.cpp</includedby>
+    <includedby refid="mpichargedensitycalculator_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/mpichargedensitycalculator.cpp</includedby>
+    <includedby refid="species__init_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.hpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp</label>
+        <link refid="species__info_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ddc_alias_inline_functions.hpp</label>
+        <link refid="ddc__alias__inline__functions_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>ddc_helper.hpp</label>
+        <link refid="ddc__helper_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>cassert</label>
+      </node>
+      <node id="10">
+        <label>cmath</label>
+      </node>
+      <node id="2">
+        <label>ddc/ddc.hpp</label>
+      </node>
+      <node id="7">
+        <label>ddc/kernels/splines.hpp</label>
+      </node>
+      <node id="4">
+        <label>type_traits</label>
+      </node>
+      <node id="5">
+        <label>utility</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp</label>
+        <link refid="bsl__advection__vx_8hpp_source"/>
+      </node>
+      <node id="3">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp</label>
+        <link refid="bsl__advection__x_8hpp_source"/>
+      </node>
+      <node id="4">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_common_configuration.hpp</label>
+        <link refid="collision__common__configuration_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_operator.hpp</label>
+        <link refid="collision__operator_8hpp_source"/>
+      </node>
+      <node id="5">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp</label>
+        <link refid="collision__configuration_8hpp_source"/>
+      </node>
+      <node id="7">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry.hpp</label>
+        <link refid="geometryVparMu_2geometry_2geometry_8hpp_source"/>
+      </node>
+      <node id="8">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp</label>
+        <link refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8hpp_source"/>
+      </node>
+      <node id="9">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/noperturbinitialisation.hpp</label>
+        <link refid="noperturbinitialisation_8hpp_source"/>
+      </node>
+      <node id="10">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp</label>
+        <link refid="geometryXVx_2geometry_2geometry_8hpp_source"/>
+      </node>
+      <node id="11">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/bumpontailequilibrium.hpp</label>
+        <link refid="bumpontailequilibrium_8hpp_source"/>
+      </node>
+      <node id="12">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp</label>
+        <link refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp_source"/>
+      </node>
+      <node id="13">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp</label>
+        <link refid="restartinitialisation_8hpp_source"/>
+      </node>
+      <node id="14">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.hpp</label>
+        <link refid="geometryXVx_2initialisation_2singlemodeperturbinitialisation_8hpp_source"/>
+      </node>
+      <node id="15">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp</label>
+        <link refid="geometryXYVxVy_2geometry_2geometry_8hpp_source"/>
+      </node>
+      <node id="16">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp</label>
+        <link refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8hpp_source"/>
+      </node>
+      <node id="17">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.hpp</label>
+        <link refid="geometryXYVxVy_2initialisation_2singlemodeperturbinitialisation_8hpp_source"/>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp</label>
+        <link refid="species__info_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.hpp</label>
+        <link refid="species__init_8hpp_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classSpeciesInformation" prot="public">SpeciesInformation</innerclass>
+    <innerclass refid="classSpeciesInformation_1_1Impl" prot="public">SpeciesInformation::Impl</innerclass>
+    <innerclass refid="structSpecies" prot="public">Species</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="species__info_8hpp_1a3c1061aff4882920529ef88f6bd645c6" prot="public" static="no">
+        <type>Idx&lt; <ref refid="structSpecies" kindref="compound">Species</ref> &gt;</type>
+        <definition>using IdxSp =  Idx&lt;Species&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxSp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" line="168" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="species__info_8hpp_1a60d72b5a9420fec17edb62f662884432" prot="public" static="no">
+        <type>IdxRange&lt; <ref refid="structSpecies" kindref="compound">Species</ref> &gt;</type>
+        <definition>using IdxRangeSp =  IdxRange&lt;Species&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeSp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" line="169" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="species__info_8hpp_1adbc77c13a49e5f7ee2f38b56fd8e885e" prot="public" static="no">
+        <type>IdxStep&lt; <ref refid="structSpecies" kindref="compound">Species</ref> &gt;</type>
+        <definition>using IdxStepSp =  IdxStep&lt;Species&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxStepSp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" line="170" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="species__info_8hpp_1a3e55105f3ca5bad66a1e38cfb662bc84" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>FieldMem&lt; ElementType, IdxRangeSp &gt;</type>
+        <definition>using FieldMemSp =  FieldMem&lt;ElementType, IdxRangeSp&gt;</definition>
+        <argsstring></argsstring>
+        <name>FieldMemSp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" line="173" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" bodystart="173" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="species__info_8hpp_1a2b498155990c05252f7b4b3842c3ac03" prot="public" static="no">
+        <type>FieldMemSp&lt; double &gt;</type>
+        <definition>using DFieldMemSp =  FieldMemSp&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DFieldMemSp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" line="174" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" bodystart="174" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="species__info_8hpp_1ab6c2e4c38543896eabda2b52929aa1e3" prot="public" static="no">
+        <type>FieldMemSp&lt; int &gt;</type>
+        <definition>using IFieldMemSp =  FieldMemSp&lt;int&gt;</definition>
+        <argsstring></argsstring>
+        <name>IFieldMemSp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" line="175" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" bodystart="175" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="species__info_8hpp_1a64d77b872434b7ae401b202398d8c243" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>ConstField&lt; ElementType, IdxRangeSp &gt;</type>
+        <definition>using ConstFieldSp =  ConstField&lt;ElementType, IdxRangeSp&gt;</definition>
+        <argsstring></argsstring>
+        <name>ConstFieldSp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" line="178" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" bodystart="178" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="species__info_8hpp_1ac8d33134dbc0dfa236d91cd7f99de56d" prot="public" static="no">
+        <type>ConstFieldSp&lt; double &gt;</type>
+        <definition>using DConstFieldSp =  ConstFieldSp&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DConstFieldSp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" line="179" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" bodystart="179" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="species__info_8hpp_1a3c45a4e5b44636a9d712f3da23f4e3c3" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>Field&lt; ElementType, IdxRangeSp &gt;</type>
+        <definition>using FieldSp =  Field&lt;ElementType, IdxRangeSp&gt;</definition>
+        <argsstring></argsstring>
+        <name>FieldSp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" line="182" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" bodystart="182" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="species__info_8hpp_1a17d5860e83693add50f720bef51a41fc" prot="public" static="no">
+        <type>FieldSp&lt; double &gt;</type>
+        <definition>using DFieldSp =  FieldSp&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DFieldSp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" line="183" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" bodystart="183" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="species__info_8hpp_1acb6d252f49a7b3a5b40a08d298503195" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class Grid1D</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool is_species_information_v</definition>
+        <argsstring></argsstring>
+        <name>is_species_information_v</name>
+        <initializer>= std::is_same_v&lt;typename Grid1D::discrete_dimension_type, <ref refid="classSpeciesInformation" kindref="compound">SpeciesInformation</ref>&gt;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" line="136" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" bodystart="137" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="species__info_8hpp_1a2d3c66a4b0e1248569f0883445e21ad7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION Idx&lt; <ref refid="structSpecies" kindref="compound">Species</ref> &gt;</type>
+        <definition>KOKKOS_INLINE_FUNCTION Idx&lt; Species &gt; ielec</definition>
+        <argsstring>()</argsstring>
+        <name>ielec</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the discrete element representing the electron species </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" line="145" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" bodystart="145" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="species__info_8hpp_1aa626ddc97e95a4a73a2aa73ffa9a5af8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double charge</definition>
+        <argsstring>(Idx&lt; Species &gt; const isp)</argsstring>
+        <name>charge</name>
+        <param>
+          <type>Idx&lt; <ref refid="structSpecies" kindref="compound">Species</ref> &gt; const</type>
+          <declname>isp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">isp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a discrete element of either a kinetic or adiabatic species </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the charge associated to the discrete element </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" line="154" column="31" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" bodystart="154" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="species__info_8hpp_1ac531a206af114c365f548acb1743a348" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double mass</definition>
+        <argsstring>(Idx&lt; Species &gt; const isp)</argsstring>
+        <name>mass</name>
+        <param>
+          <type>Idx&lt; <ref refid="structSpecies" kindref="compound">Species</ref> &gt; const</type>
+          <declname>isp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">isp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a discrete element of either a kinetic or adiabatic species </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the mass associated to the discrete element </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" line="163" column="31" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" bodystart="163" bodyend="166"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ddc/ddc.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_alias_inline_functions.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_helper.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="classSpeciesInformation" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSpeciesInformation" kindref="compound">SpeciesInformation</ref></highlight></codeline>
+<codeline lineno="13"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="16" refid="classSpeciesInformation_1af77dd55f79155df4dab9bf490d900a07" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classSpeciesInformation" kindref="compound">discrete_dimension_type</ref><sp/>=<sp/><ref refid="classSpeciesInformation" kindref="compound">SpeciesInformation</ref>;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Gr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">1D,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemorySpace&gt;</highlight></codeline>
+<codeline lineno="21" refid="classSpeciesInformation_1_1Impl" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSpeciesInformation_1_1Impl" kindref="compound">Impl</ref></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ODDim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OMemorySpace&gt;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSpeciesInformation_1_1Impl" kindref="compound">Impl</ref>;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">discrete_element_type<sp/>=<sp/>Idx&lt;Grid1D&gt;;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">discrete_domain_type<sp/>=<sp/>IdxRange&lt;Grid1D&gt;;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">index_range_type<sp/>=<sp/>discrete_domain_type;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">discrete_vector_type<sp/>=<sp/>IdxStep&lt;Grid1D&gt;;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>charge<sp/>of<sp/>the<sp/>particles<sp/>(kinetic<sp/>+<sp/>adiabatic)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DFieldMem&lt;index_range_type,<sp/>MemorySpace&gt;<sp/>m_charge;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>mass<sp/>of<sp/>the<sp/>particles<sp/>of<sp/>all<sp/>kinetic<sp/>species</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DFieldMem&lt;index_range_type,<sp/>MemorySpace&gt;<sp/>m_mass;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>workaround<sp/>to<sp/>access<sp/>charges<sp/>on<sp/>the<sp/>device</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DConstField&lt;index_range_type,<sp/>MemorySpace&gt;<sp/>m_charge_view;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>workaround<sp/>to<sp/>access<sp/>masses<sp/>on<sp/>the<sp/>device</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DConstField&lt;index_range_type,<sp/>MemorySpace&gt;<sp/>m_mass_view;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>discrete_element_type<sp/>m_ielec;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="54" refid="classSpeciesInformation_1_1Impl_1aa89c8b5db4b1bb25e001ead86f921e82" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classSpeciesInformation" kindref="compound">discrete_dimension_type</ref><sp/>=<sp/><ref refid="classSpeciesInformation" kindref="compound">SpeciesInformation</ref>;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OMemorySpace&gt;</highlight></codeline>
+<codeline lineno="61" refid="classSpeciesInformation_1_1Impl_1a9db19ad040ca32c4bcd51b6aedd776c3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classSpeciesInformation_1_1Impl_1a9db19ad040ca32c4bcd51b6aedd776c3" kindref="member">Impl</ref>(<ref refid="classSpeciesInformation_1_1Impl" kindref="compound">Impl&lt;Grid1D, OMemorySpace&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>impl)</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_charge(get_idx_range(impl.m_charge))</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_mass(get_idx_range(impl.m_mass))</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_ielec(impl.m_ielec)</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_charge_view<sp/>=<sp/>get_const_field(m_charge);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_mass_view<sp/>=<sp/>get_const_field(m_mass);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(m_charge,<sp/>impl.m_charge);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(m_mass,<sp/>impl.m_mass);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77" refid="classSpeciesInformation_1_1Impl_1a1f565677d75cf122a50af8043c11d012" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSpeciesInformation_1_1Impl_1a1f565677d75cf122a50af8043c11d012" kindref="member">Impl</ref>(DFieldMem&lt;index_range_type,<sp/>MemorySpace&gt;<sp/><ref refid="classSpeciesInformation_1_1Impl_1adc4091cbb9adc9c34bc0b874b0ac5ce5" kindref="member">charge</ref>,</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DFieldMem&lt;index_range_type,<sp/>MemorySpace&gt;<sp/><ref refid="classSpeciesInformation_1_1Impl_1aefacfb3787f7fa87c5b08ef13f315e70" kindref="member">mass</ref>)</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_charge(std::move(<ref refid="classSpeciesInformation_1_1Impl_1adc4091cbb9adc9c34bc0b874b0ac5ce5" kindref="member">charge</ref>))</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_mass(std::move(<ref refid="classSpeciesInformation_1_1Impl_1aefacfb3787f7fa87c5b08ef13f315e70" kindref="member">mass</ref>))</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_charge_view<sp/>=<sp/>get_const_field(m_charge);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_mass_view<sp/>=<sp/>get_const_field(m_mass);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(<ref refid="classSpeciesInformation_1_1Impl_1adc4091cbb9adc9c34bc0b874b0ac5ce5" kindref="member">charge</ref>.size()<sp/>&gt;=<sp/>2);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>electron_found<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(discrete_element_type<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>isp<sp/>:<sp/>get_idx_range(m_charge))<sp/>{</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_charge(isp)<sp/>==<sp/>-1.)<sp/>{</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>electron_found<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_ielec<sp/>=<sp/>isp;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!electron_found)<sp/>{</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;electron<sp/>not<sp/>found&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98" refid="classSpeciesInformation_1_1Impl_1af4f71674dfd6e0c19e53a92bfaec3711" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/>discrete_element_type<sp/><ref refid="classSpeciesInformation_1_1Impl_1af4f71674dfd6e0c19e53a92bfaec3711" kindref="member">ielec</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="99"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_ielec;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107" refid="classSpeciesInformation_1_1Impl_1adc4091cbb9adc9c34bc0b874b0ac5ce5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classSpeciesInformation_1_1Impl_1adc4091cbb9adc9c34bc0b874b0ac5ce5" kindref="member">charge</ref>(discrete_element_type<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>isp)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="108"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_charge_view(isp);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116" refid="classSpeciesInformation_1_1Impl_1aefacfb3787f7fa87c5b08ef13f315e70" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classSpeciesInformation_1_1Impl_1aefacfb3787f7fa87c5b08ef13f315e70" kindref="member">mass</ref>(discrete_element_type<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>isp)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="117"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_mass_view(isp);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122" refid="classSpeciesInformation_1_1Impl_1a1b646bde625f303eb58abfd02bfa9b4d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classSpeciesInformation_1_1Impl_1a1b646bde625f303eb58abfd02bfa9b4d" kindref="member">charges</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="123"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>get_const_field(m_charge);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128" refid="classSpeciesInformation_1_1Impl_1ac70d3fcf55a5c234a7b405fb1061f644" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classSpeciesInformation_1_1Impl_1ac70d3fcf55a5c234a7b405fb1061f644" kindref="member">masses</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="129"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>get_const_field(m_mass);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="133"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Gr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">1D&gt;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_species_information_v</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>std::is_same_v&lt;typename<sp/>Grid1D::discrete_dimension_type,<sp/>SpeciesInformation&gt;;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Species<sp/>dimension</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="140" refid="structSpecies" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSpecies" kindref="compound">Species</ref><sp/>:<sp/><ref refid="classSpeciesInformation" kindref="compound">SpeciesInformation</ref></highlight></codeline>
+<codeline lineno="141"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="142"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>Idx&lt;Species&gt;<sp/>ielec()</highlight></codeline>
+<codeline lineno="146"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ddc::discrete_space&lt;Species&gt;().ielec();</highlight></codeline>
+<codeline lineno="148"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>charge(Idx&lt;Species&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>isp)</highlight></codeline>
+<codeline lineno="155"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ddc::discrete_space&lt;Species&gt;().charge(isp);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>mass(Idx&lt;Species&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>isp)</highlight></codeline>
+<codeline lineno="164"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ddc::discrete_space&lt;Species&gt;().mass(isp);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxSp<sp/>=<sp/>Idx&lt;Species&gt;;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeSp<sp/>=<sp/>IdxRange&lt;Species&gt;;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxStepSp<sp/>=<sp/>IdxStep&lt;Species&gt;;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemSp<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeSp&gt;;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemSp<sp/>=<sp/>FieldMemSp&lt;double&gt;;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IFieldMemSp<sp/>=<sp/>FieldMemSp&lt;int&gt;;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldSp<sp/>=<sp/>ConstField&lt;ElementType,<sp/>IdxRangeSp&gt;;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstFieldSp<sp/>=<sp/>ConstFieldSp&lt;double&gt;;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldSp<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeSp&gt;;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldSp<sp/>=<sp/>FieldSp&lt;double&gt;;</highlight></codeline>
+    </programlisting>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp"/>
+  </compounddef>
+</doxygen>

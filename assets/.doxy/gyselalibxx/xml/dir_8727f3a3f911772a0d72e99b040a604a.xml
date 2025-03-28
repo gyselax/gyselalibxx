@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_8727f3a3f911772a0d72e99b040a604a" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY</compoundname>
+    <innerdir refid="dir_6ef3b5c953c12640e6eb10271de0236d">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry</innerdir>
+    <innerdir refid="dir_bbd6cbd2460631a86c53df5e1524a2e1">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation</innerdir>
+    <innerdir refid="dir_157c3877c3ecd2255cecc01062c54b89">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/"/>
+  </compounddef>
+</doxygen>

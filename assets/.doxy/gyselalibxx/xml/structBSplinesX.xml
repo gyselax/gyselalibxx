@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structBSplinesX" kind="struct" language="C++" prot="public">
+    <compoundname>BSplinesX</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::conditional_t&lt; BsplineOnUniformCellsX, ddc::UniformBSplines&lt; X, BSDegreeX &gt;, ddc::NonUniformBSplines&lt; X, BSDegreeX &gt; &gt;</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">std::conditional_t&lt; BsplineOnUniformCellsX, ddc::UniformBSplines&lt; X, BSDegreeX &gt;, ddc::NonUniformBSplines&lt; X, BSDegreeX &gt; &gt;</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">std::conditional_t&lt; BsplineOnUniformCellsX, ddc::UniformBSplines&lt; X, BSDegreeX &gt;, ddc::NonUniformBSplines&lt; X, BSDegreeX &gt; &gt;</basecompoundref>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>BSplinesX</label>
+        <link refid="structBSplinesX"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::conditional_t&lt; BsplineOnUniformCellsX, ddc::UniformBSplines&lt; X, BSDegreeX &gt;, ddc::NonUniformBSplines&lt; X, BSDegreeX &gt; &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>BSplinesX</label>
+        <link refid="structBSplinesX"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::conditional_t&lt; BsplineOnUniformCellsX, ddc::UniformBSplines&lt; X, BSDegreeX &gt;, ddc::NonUniformBSplines&lt; X, BSDegreeX &gt; &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" line="78" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" bodystart="83" bodyend="84"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

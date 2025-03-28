@@ -1,0 +1,368 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classVortexMergerEquilibria" kind="class" language="C++" prot="public">
+    <compoundname>VortexMergerEquilibria</compoundname>
+    <includes refid="vortex__merger__equilibrium_8hpp" local="no">vortex_merger_equilibrium.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Mapping</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classVortexMergerEquilibria_1a01656c82c673a722858c8062a60e8520" prot="private" static="no" mutable="no">
+        <type>Mapping const  &amp;</type>
+        <definition>Mapping const&amp; VortexMergerEquilibria&lt; Mapping &gt;::m_mapping</definition>
+        <argsstring></argsstring>
+        <name>m_mapping</name>
+        <qualifiedname>VortexMergerEquilibria::m_mapping</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp" line="26" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classVortexMergerEquilibria_1a416448889eb29cc0e587e55eb2cab933" prot="private" static="no" mutable="no">
+        <type>IdxRangeRTheta const  &amp;</type>
+        <definition>IdxRangeRTheta const&amp; VortexMergerEquilibria&lt; Mapping &gt;::m_grid</definition>
+        <argsstring></argsstring>
+        <name>m_grid</name>
+        <qualifiedname>VortexMergerEquilibria::m_grid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp" line="27" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classVortexMergerEquilibria_1aa8fa9b6a874a77441964ba05099c3eca" prot="private" static="no" mutable="no">
+        <type>SplineRThetaBuilder_host const  &amp;</type>
+        <definition>SplineRThetaBuilder_host const&amp; VortexMergerEquilibria&lt; Mapping &gt;::m_builder</definition>
+        <argsstring></argsstring>
+        <name>m_builder</name>
+        <qualifiedname>VortexMergerEquilibria::m_builder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp" line="28" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classVortexMergerEquilibria_1a055d7580cce9802c9104e43d1814590f" prot="private" static="no" mutable="no">
+        <type>SplineRThetaEvaluatorNullBound_host const  &amp;</type>
+        <definition>SplineRThetaEvaluatorNullBound_host const&amp; VortexMergerEquilibria&lt; Mapping &gt;::m_evaluator</definition>
+        <argsstring></argsstring>
+        <name>m_evaluator</name>
+        <qualifiedname>VortexMergerEquilibria::m_evaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp" line="29" column="47" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classVortexMergerEquilibria_1aec660f84b6a10eddc0bf925b29c01749" prot="private" static="no" mutable="no">
+        <type><ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref>&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref>, SplineRThetaEvaluatorNullBound &gt; const  &amp;</type>
+        <definition>PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound&gt; const&amp; VortexMergerEquilibria&lt; Mapping &gt;::m_poisson_solver</definition>
+        <argsstring></argsstring>
+        <name>m_poisson_solver</name>
+        <qualifiedname>VortexMergerEquilibria::m_poisson_solver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp" line="34" column="8" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classVortexMergerEquilibria_1a3a8975ef28538c07c2a08ce9b0db3c9f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>VortexMergerEquilibria&lt; Mapping &gt;::VortexMergerEquilibria</definition>
+        <argsstring>(Mapping const &amp;mapping, IdxRangeRTheta const &amp;grid, SplineRThetaBuilder_host const &amp;builder, SplineRThetaEvaluatorNullBound_host const &amp;evaluator, PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound &gt; const &amp;poisson_solver)</argsstring>
+        <name>VortexMergerEquilibria</name>
+        <qualifiedname>VortexMergerEquilibria::VortexMergerEquilibria</qualifiedname>
+        <param>
+          <type>Mapping const &amp;</type>
+          <declname>mapping</declname>
+        </param>
+        <param>
+          <type>IdxRangeRTheta const &amp;</type>
+          <declname>grid</declname>
+        </param>
+        <param>
+          <type>SplineRThetaBuilder_host const &amp;</type>
+          <declname>builder</declname>
+        </param>
+        <param>
+          <type>SplineRThetaEvaluatorNullBound_host const &amp;</type>
+          <declname>evaluator</declname>
+        </param>
+        <param>
+          <type><ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref>&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref>, SplineRThetaEvaluatorNullBound &gt; const &amp;</type>
+          <declname>poisson_solver</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate a <ref refid="classVortexMergerEquilibria" kindref="compound">VortexMergerEquilibria</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mapping function from the logical index range to the physical index range. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">grid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range where the equilibrium is defined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">builder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A spline builder to get the spline representation of the RHS of the PDE. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The evaluator of B-splines for the RHS of the PDE. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">poisson_solver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PDE solver which computes the electrical potential. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp" bodystart="54" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classVortexMergerEquilibria_1ad3b9139693f6f2aeabf9355d14c7c37b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VortexMergerEquilibria&lt; Mapping &gt;::find_equilibrium</definition>
+        <argsstring>(host_t&lt; DFieldRTheta &gt; sigma, host_t&lt; DFieldRTheta &gt; phi_eq, host_t&lt; DFieldRTheta &gt; rho_eq, std::function&lt; double(double const)&gt; const &amp;function, double const phi_max, double const tau, int count_max=25) const</argsstring>
+        <name>find_equilibrium</name>
+        <qualifiedname>VortexMergerEquilibria::find_equilibrium</qualifiedname>
+        <param>
+          <type>host_t&lt; DFieldRTheta &gt;</type>
+          <declname>sigma</declname>
+        </param>
+        <param>
+          <type>host_t&lt; DFieldRTheta &gt;</type>
+          <declname>phi_eq</declname>
+        </param>
+        <param>
+          <type>host_t&lt; DFieldRTheta &gt;</type>
+          <declname>rho_eq</declname>
+        </param>
+        <param>
+          <type>std::function&lt; double(double const)&gt; const &amp;</type>
+          <declname>function</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>phi_max</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>tau</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count_max</declname>
+          <defval>25</defval>
+        </param>
+        <briefdescription>
+<para>Get an equilibrium. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The equilibrium is determined by the eigenvalue problem. For the given initial data <formula id="83">$ (\sigma^0, \phi^0) $</formula>,</para>
+<para><orderedlist>
+<listitem><para>compute <formula id="84">$ \rho^i = \sigma^{i-1} f(\phi^{i-1})$</formula>;</para>
+</listitem><listitem><para>compute <formula id="85">$ \phi_*^i$</formula> with <formula id="86">$ -\nabla\cdot\nabla\phi_*^i = \rho^i$</formula>;</para>
+</listitem><listitem><para>for <formula id="87">$ \phi_{\text{max}}$</formula> given, compute <formula id="88">$ c^i$</formula> with <formula id="89">$ c^i = \phi_{\text{max}} / \Vert \phi_*^i \Vert_{\mathcal{L}^\infty} $</formula> ;</para>
+</listitem><listitem><para>compute <formula id="90">$ (\sigma^i, \phi^i) = c^i (\sigma^{i-1}, \phi_*^i) $</formula>.</para>
+</listitem></orderedlist>
+</para>
+<para>We iterate until <formula id="91">$ |\sigma^i - \sigma^{i-1}|\leq \tau $</formula>.</para>
+<para>For the vortex merger simulation, <formula id="92">$ f(\phi) = \phi^2$</formula>.</para>
+<para>The algorithm is also detailed in Edoardo Zoni&apos;s article (<ulink url="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</ulink>).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">sigma</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <formula id="93">$\sigma $</formula> parameter. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">phi_eq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The equilibrium electrical potential <formula id="36">$ \phi $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">rho_eq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The equilibrium density <formula id="58">$ \rho $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">function</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function <formula id="1">$ f $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">phi_max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximal value of the electrical potential <formula id="36">$ \phi $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">tau</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <formula id="94">$ \tau $</formula> parameter. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">count_max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximal number of iteration of the implicit loop. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp" line="104" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp" bodystart="104" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="classVortexMergerEquilibria_1afcf358db72fd433f4470facfecd25019" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VortexMergerEquilibria&lt; Mapping &gt;::set_equilibrium</definition>
+        <argsstring>(host_t&lt; DFieldRTheta &gt; rho_eq, std::function&lt; double(double const)&gt; function, double const phi_max, double const tau)</argsstring>
+        <name>set_equilibrium</name>
+        <qualifiedname>VortexMergerEquilibria::set_equilibrium</qualifiedname>
+        <param>
+          <type>host_t&lt; DFieldRTheta &gt;</type>
+          <declname>rho_eq</declname>
+        </param>
+        <param>
+          <type>std::function&lt; double(double const)&gt;</type>
+          <declname>function</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>phi_max</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>tau</declname>
+        </param>
+        <briefdescription>
+<para>Set an equilibrium. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">rho_eq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The equilibrium density <formula id="58">$ \rho $</formula>. <linebreak/>
+ </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">function</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function <formula id="1">$ f $</formula> used to compute the equilibrium. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">phi_max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximal value of the electrical potential <formula id="36">$ \phi $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">tau</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <formula id="94">$ \tau $</formula> parameter. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp" line="195" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp" bodystart="195" bodyend="222"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A class describing a mapping from curvilinear coordinates to Cartesian coordinates. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp" line="23" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp" bodystart="24" bodyend="223"/>
+    <listofallmembers>
+      <member refid="classVortexMergerEquilibria_1ad3b9139693f6f2aeabf9355d14c7c37b" prot="public" virt="non-virtual"><scope>VortexMergerEquilibria</scope><name>find_equilibrium</name></member>
+      <member refid="classVortexMergerEquilibria_1aa8fa9b6a874a77441964ba05099c3eca" prot="private" virt="non-virtual"><scope>VortexMergerEquilibria</scope><name>m_builder</name></member>
+      <member refid="classVortexMergerEquilibria_1a055d7580cce9802c9104e43d1814590f" prot="private" virt="non-virtual"><scope>VortexMergerEquilibria</scope><name>m_evaluator</name></member>
+      <member refid="classVortexMergerEquilibria_1a416448889eb29cc0e587e55eb2cab933" prot="private" virt="non-virtual"><scope>VortexMergerEquilibria</scope><name>m_grid</name></member>
+      <member refid="classVortexMergerEquilibria_1a01656c82c673a722858c8062a60e8520" prot="private" virt="non-virtual"><scope>VortexMergerEquilibria</scope><name>m_mapping</name></member>
+      <member refid="classVortexMergerEquilibria_1aec660f84b6a10eddc0bf925b29c01749" prot="private" virt="non-virtual"><scope>VortexMergerEquilibria</scope><name>m_poisson_solver</name></member>
+      <member refid="classVortexMergerEquilibria_1afcf358db72fd433f4470facfecd25019" prot="public" virt="non-virtual"><scope>VortexMergerEquilibria</scope><name>set_equilibrium</name></member>
+      <member refid="classVortexMergerEquilibria_1a3a8975ef28538c07c2a08ce9b0db3c9f" prot="public" virt="non-virtual"><scope>VortexMergerEquilibria</scope><name>VortexMergerEquilibria</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

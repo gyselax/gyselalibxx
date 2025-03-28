@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structinterpolator__on__idx__range_3_01Interp_00_01GridInterp_00_01IdxRange_3_01Grid1D_8_8_8_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>interpolator_on_idx_range&lt; Interp, GridInterp, IdxRange&lt; Grid1D... &gt; &gt;</compoundname>
+    <includes refid="iinterpolator_8hpp" local="no">iinterpolator.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>template&lt; class... &gt; class</type>
+        <declname>Interp</declname>
+        <defname>Interp</defname>
+      </param>
+      <param>
+        <type>class GridInterp</type>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>Grid1D</declname>
+        <defname>Grid1D</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structinterpolator__on__idx__range_3_01Interp_00_01GridInterp_00_01IdxRange_3_01Grid1D_8_8_8_01_4_01_4_1a3d7bd6ff70bbce6361c363dd77cc76bd" prot="public" static="no">
+        <type>Interp&lt; GridInterp, Grid1D... &gt;</type>
+        <definition>using interpolator_on_idx_range&lt; Interp, GridInterp, IdxRange&lt; Grid1D... &gt; &gt;::type =  Interp&lt;GridInterp, Grid1D...&gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>interpolator_on_idx_range&lt; Interp, GridInterp, IdxRange&lt; Grid1D... &gt; &gt;::type</qualifiedname>
+        <briefdescription>
+<para>The type of the interpolator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/iinterpolator.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/iinterpolator.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>A structure which builds an interpolation type.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Interp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interpolator class being built. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>GridInterp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimension along which the operator will interpolate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Grid1D...</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimensions on which the data being interpolated are defined. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/iinterpolator.hpp" line="27" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/iinterpolator.hpp" bodystart="28" bodyend="31"/>
+    <listofallmembers>
+      <member refid="structinterpolator__on__idx__range_3_01Interp_00_01GridInterp_00_01IdxRange_3_01Grid1D_8_8_8_01_4_01_4_1a3d7bd6ff70bbce6361c363dd77cc76bd" prot="public" virt="non-virtual"><scope>interpolator_on_idx_range&lt; Interp, GridInterp, IdxRange&lt; Grid1D... &gt; &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

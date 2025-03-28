@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Class Member Functions - GyselalibX</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Class Member Functions";
+        var mkdocs_page_input_path = "gyselalibxx/class_member_functions.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> GyselalibX
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">General</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/getting_started.html">Getting Started</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Installation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../docs/first_steps/install.html">Gyselalib++ Installation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../toolchains/index.html">Pre-made build settings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standards</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/mathematical_and_physical_conventions.html">Math & Physics</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Gyselalib++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Source</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../src/index.html">Gyselalib++ contents</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/advection/index.html">Advection methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/collisions/index.html">Collisions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/data_types/index.html">Data Storage Types</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryRTheta/index.html">Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection/index.html">Advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_field</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/geometry/index.html">Geometry RTheta</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/initialisation/index.html">Initialisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/poisson/index.html">Polar Poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_solver</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/time_solver/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryVparMu</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryVparMu/index.html">Geometry (vpar, mu)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/collisions/index.html">CollisionConfiguration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/geometry/index.html">GeometryVparMu</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXVx/index.html">Geometry (x, v_x)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >boltzmann</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/boltzmann/index.html">Boltzmann solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/geometry/index.html">Geometry X-Vx</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >rhs</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/rhs/index.html">RHS</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/utils/index.html">Utils</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXY/index.html">Geometry (x, y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/geometry/index.html">Geometry XY</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/initialisation/index.html">Initialisation on (x,y) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/time_integration/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXYVxVy</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXYVxVy/index.html">Geometry (x, y, v_x, v_y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/geometry/index.html">Geometry X Y-Vx Vy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vlasov</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/vlasov/index.html">Vlasov solver</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/interpolation/index.html">Interpolation Methods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/polar_splines/index.html">Polar Splines</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >io</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/io/index.html">Functions used for input and output</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mapping</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mapping/index.html">Mappings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >math_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/math_tools/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >matrix_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/matrix_tools/index.html">Matrix tools</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mpi_parallelisation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mpi_parallelisation/index.html">Parallelisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/multipatch/index.html">Multipatch</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >connectivity</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/connectivity/index.html">Multipatch connectivity</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/data_types/index.html">Data Types for Multipatch Geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/utils/index.html">Multipatch utilitary functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >quadrature</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/quadrature/index.html">Quadrature Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >speciesinfo</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/speciesinfo/index.html">SpeciesInfo (x, v_x)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >timestepper</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/timestepper/index.html">Time Stepping Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/utils/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Simulations</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../simulations/index.html">Gyselalib++ simulations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryRTheta/index.html">Simulations in (r, theta) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >diocotron</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/diocotron/index.html">Diocotron instability</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vortex_merger</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/vortex_merger/index.html">Vortex merger</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXVx/index.html">Simulations in (x, vx) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXY/index.html">Simulations in (x, y) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >guiding_centre</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryXY/guiding_centre/index.html">Guiding centre (X,Y) simulation</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tests</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../tests/index.html">Gyselalib++ tests</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/advection/index.html">Tests on the templated advection operators</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/geometryRTheta/index.html">Tests : Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/advection_rtheta/index.html">Tests on the 2D polar advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/polar_poisson/index.html">Tests on the 2D polar poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline_interpolator_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/spline_interpolator_rtheta/index.html">Tests on spline interpolator in polar coordinates</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/multipatch/index.html">Multipatch geometry tests</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometries</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/multipatch/geometries/index.html">Multipatch geometries</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Adding_docs.html">Adding Docs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Using_git.html">Using Git</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Gyselalib++</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" >Classes</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="annotated.html">Class List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="classes.html">Class Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="hierarchy.html">Class Hierarchy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Namespaces</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="namespaces.html">Namespace List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_members.html">Namespace Members</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_functions.html">Namespace Member Functions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_variables.html">Namespace Member Variables</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_typedefs.html">Namespace Member Typedefs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_enums.html">Namespace Member Enumerations</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="macros.html">Macros</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="files.html">Files</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">GyselalibX</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Class Member Functions</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/gyselax/gyselalibxx/edit/master/docs/gyselalibxx/class_member_functions.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div><h1 id="class-member-functions">Class Member Functions</h1>
+<h2 id="a">a</h2>
+<ul>
+<li><strong>AdvectionFieldFinder</strong> (<a href="classAdvectionFieldFinder.html"><strong>AdvectionFieldFinder</strong></a>)</li>
+<li><strong>assemble_field_k_total</strong> (<a href="classITimeStepper.html"><strong>ITimeStepper</strong></a>)</li>
+<li><strong>assemble_k_total</strong> (<a href="classITimeStepper.html"><strong>ITimeStepper</strong></a>)</li>
+<li><strong>assemble_multipatch_field_k_total</strong> (<a href="classITimeStepper.html"><strong>ITimeStepper</strong></a>)</li>
+<li><strong>assemble_multipatch_field_k_total_on_patch</strong> (<a href="classITimeStepper.html"><strong>ITimeStepper</strong></a>)</li>
+<li><strong>assemble_vector_field_k_total</strong> (<a href="classITimeStepper.html"><strong>ITimeStepper</strong></a>)</li>
+<li><strong>apply_bc</strong> (<a href="classLagrange.html"><strong>Lagrange</strong></a>)</li>
+<li><strong>adjust_indexes</strong> (<a href="classMatrix__Centre__Block.html"><strong>Matrix_Centre_Block</strong></a>)</li>
+<li><strong>apply_evaluator</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
+<li><strong>apply_integrate</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
+</ul>
+<h2 id="b">b</h2>
+<ul>
+<li><strong>BarycentricToCartesian</strong> (<a href="classBarycentricToCartesian.html"><strong>BarycentricToCartesian</strong></a>)</li>
+<li><strong>BslAdvection1D</strong> (<a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a>)</li>
+<li><strong>BslAdvectionRTheta</strong> (<a href="classBslAdvectionRTheta.html"><strong>BslAdvectionRTheta</strong></a>)</li>
+<li><strong>BslAdvectionSpatial</strong> (<a href="classBslAdvectionSpatial.html"><strong>BslAdvectionSpatial</strong></a>)</li>
+<li><strong>BslAdvectionVelocity</strong> (<a href="classBslAdvectionVelocity.html"><strong>BslAdvectionVelocity</strong></a>)</li>
+<li><strong>BslExplicitPredCorrRTheta</strong> (<a href="classBslExplicitPredCorrRTheta.html"><strong>BslExplicitPredCorrRTheta</strong></a>)</li>
+<li><strong>BslImplicitPredCorrRTheta</strong> (<a href="classBslImplicitPredCorrRTheta.html"><strong>BslImplicitPredCorrRTheta</strong></a>)</li>
+<li><strong>BslPredCorrRTheta</strong> (<a href="classBslPredCorrRTheta.html"><strong>BslPredCorrRTheta</strong></a>)</li>
+<li><strong>BumpontailEquilibrium</strong> (<a href="classBumpontailEquilibrium.html"><strong>BumpontailEquilibrium</strong></a>)</li>
+<li><strong>build_ghosted_staggered_vx_point_sampling</strong> (<a href="classCollisionsIntra.html"><strong>CollisionsIntra</strong></a>)</li>
+<li><strong>build_non_periodic_matrix</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>
+<li><strong>build_periodic_matrix</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>
+<li><strong>batched_derivs_idx_range_xmax</strong> (<a href="classIInterpolator.html"><strong>IInterpolator</strong></a>, <a href="classIPreallocatableInterpolator.html"><strong>IPreallocatableInterpolator</strong></a>, <a href="classLagrangeInterpolator.html"><strong>LagrangeInterpolator</strong></a>, <a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a>)</li>
+<li><strong>batched_derivs_idx_range_xmin</strong> (<a href="classIInterpolator.html"><strong>IInterpolator</strong></a>, <a href="classIPreallocatableInterpolator.html"><strong>IPreallocatableInterpolator</strong></a>, <a href="classLagrangeInterpolator.html"><strong>LagrangeInterpolator</strong></a>, <a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a>)</li>
+<li><strong>back</strong> (<a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>)</li>
+<li><strong>begin</strong> (<a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>)</li>
+<li><strong>batch_size</strong> (<a href="classMatrixBatch.html"><strong>MatrixBatch</strong></a>)</li>
+</ul>
+<h2 id="c">c</h2>
+<ul>
+<li><strong>compute_advection_field_RTheta</strong> (<a href="classAdvectionFieldFinder.html"><strong>AdvectionFieldFinder</strong></a>)</li>
+<li><strong>compute_advection_field_XY</strong> (<a href="classAdvectionFieldFinder.html"><strong>AdvectionFieldFinder</strong></a>)</li>
+<li><strong>compute_square_polar_distance</strong> (<a href="classBslImplicitPredCorrRTheta.html"><strong>BslImplicitPredCorrRTheta</strong></a>)</li>
+<li><strong>compute_twomaxwellian</strong> (<a href="classBumpontailEquilibrium.html"><strong>BumpontailEquilibrium</strong></a>)</li>
+<li><strong>CartesianToBarycentric</strong> (<a href="classCartesianToBarycentric.html"><strong>CartesianToBarycentric</strong></a>)</li>
+<li><strong>CartesianToCircular</strong> (<a href="classCartesianToCircular.html"><strong>CartesianToCircular</strong></a>)</li>
+<li><strong>CartesianToCzarny</strong> (<a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a>)</li>
+<li><strong>CentralFDMPartialDerivative</strong> (<a href="classCentralFDMPartialDerivative.html"><strong>CentralFDMPartialDerivative</strong></a>)</li>
+<li><strong>CentralFDMPartialDerivativeCreator</strong> (<a href="classCentralFDMPartialDerivativeCreator.html"><strong>CentralFDMPartialDerivativeCreator</strong></a>)</li>
+<li><strong>create_instance</strong> (<a href="classCentralFDMPartialDerivativeCreator.html"><strong>CentralFDMPartialDerivativeCreator</strong></a>, <a href="classIPartialDerivativeCreator.html"><strong>IPartialDerivativeCreator</strong></a>, <a href="classSpline1DPartialDerivativeCreator.html"><strong>Spline1DPartialDerivativeCreator</strong></a>, <a href="classSpline2DPartialDerivativeCreator.html"><strong>Spline2DPartialDerivativeCreator</strong></a>)</li>
+<li><strong>ChargeDensityCalculator</strong> (<a href="classChargeDensityCalculator.html"><strong>ChargeDensityCalculator</strong></a>)</li>
+<li><strong>CircularToCartesian</strong> (<a href="classCircularToCartesian.html"><strong>CircularToCartesian</strong></a>)</li>
+<li><strong>CollisionConfiguration</strong> (<a href="classCollisionConfiguration.html"><strong>CollisionConfiguration</strong></a>)</li>
+<li><strong>configuration</strong> (<a href="classCollisionConfiguration.html"><strong>CollisionConfiguration</strong></a>)</li>
+<li><strong>CollisionOperator</strong> (<a href="classCollisionOperator.html"><strong>CollisionOperator</strong></a>)</li>
+<li><strong>CollisionsInter</strong> (<a href="classCollisionsInter.html"><strong>CollisionsInter</strong></a>)</li>
+<li><strong>CollisionsIntra</strong> (<a href="classCollisionsIntra.html"><strong>CollisionsIntra</strong></a>)</li>
+<li><strong>compute_matrix_coeff</strong> (<a href="classCollisionsIntra.html"><strong>CollisionsIntra</strong></a>)</li>
+<li><strong>compute_rhs_vector</strong> (<a href="classCollisionsIntra.html"><strong>CollisionsIntra</strong></a>)</li>
+<li><strong>CombinedMapping</strong> (<a href="classCombinedMapping.html"><strong>CombinedMapping</strong></a>)</li>
+<li><strong>ConstPolarSpline</strong> (<a href="structConstPolarSpline.html"><strong>ConstPolarSpline</strong></a>)</li>
+<li><strong>ConstantExtrapolationRuleOnion</strong> (<a href="structConstantExtrapolationRuleOnion.html"><strong>ConstantExtrapolationRuleOnion</strong></a>)</li>
+<li><strong>CrankNicolson</strong> (<a href="classCrankNicolson.html"><strong>CrankNicolson</strong></a>)</li>
+<li><strong>CzarnyToCartesian</strong> (<a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>)</li>
+<li><strong>control_point</strong> (<a href="classDiscreteToCartesian.html"><strong>DiscreteToCartesian</strong></a>)</li>
+<li><strong>check_distributed_idx_ranges_are_first</strong> (<a href="classIMPILayout.html"><strong>IMPILayout</strong></a>)</li>
+<li><strong>copy</strong> (<a href="classITimeStepper.html"><strong>ITimeStepper</strong></a>)</li>
+<li><strong>contains</strong> (<a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>)</li>
+<li><strong>connected_to_patch</strong> (<a href="structInterface.html"><strong>Interface</strong></a>)</li>
+<li><strong>compute_basis</strong> (<a href="classLagrange.html"><strong>Lagrange</strong></a>)</li>
+<li><strong>call_all_to_all</strong> (<a href="classMPITransposeAllToAll.html"><strong>MPITransposeAllToAll</strong></a>)</li>
+<li><strong>check_stability</strong> (<a href="classMatrixBatchTridiag.html"><strong>MatrixBatchTridiag</strong></a>)</li>
+<li><strong>calculate_delta_to_factorise</strong> (<a href="classMatrix__Corner__Block.html"><strong>Matrix_Corner_Block</strong></a>, <a href="classMatrix__Periodic__Banded.html"><strong>Matrix_Periodic_Banded</strong></a>)</li>
+<li><strong>compute_maxwellian</strong> (<a href="classMaxwellianEquilibrium.html"><strong>MaxwellianEquilibrium</strong></a>)</li>
+<li><strong>compute_overlapping_singular_elements</strong> (<a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>)</li>
+<li><strong>compute_singular_elements</strong> (<a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>)</li>
+<li><strong>compute_stencil_elements</strong> (<a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>)</li>
+<li><strong>charge</strong> (<a href="classSpeciesInformation_1_1Impl.html"><strong>SpeciesInformation::Impl</strong></a>)</li>
+<li><strong>charges</strong> (<a href="classSpeciesInformation_1_1Impl.html"><strong>SpeciesInformation::Impl</strong></a>)</li>
+<li><strong>compute_coeffs</strong> (<a href="classSplineBuilder2DCache.html"><strong>SplineBuilder2DCache</strong></a>)</li>
+<li><strong>check_n_points_in_cell</strong> (<a href="classddcHelper_1_1NonUniformInterpolationPoints.html"><strong>ddcHelper::NonUniformInterpolationPoints</strong></a>)</li>
+</ul>
+<h2 id="d">d</h2>
+<ul>
+<li><strong>do_configuration_data_initialisation</strong> (<a href="classCollisionConfiguration.html"><strong>CollisionConfiguration</strong></a>)</li>
+<li><strong>DerivField</strong> (<a href="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.html"><strong>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</strong></a>)</li>
+<li><strong>deepcopy</strong> (<a href="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.html"><strong>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</strong></a>)</li>
+<li><strong>DerivFieldCommon</strong> (<a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html"><strong>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</strong></a>)</li>
+<li><strong>DerivFieldMem</strong> (<a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html"><strong>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</strong></a>)</li>
+<li><strong>DiocotronDensitySolution</strong> (<a href="classDiocotronDensitySolution.html"><strong>DiocotronDensitySolution</strong></a>)</li>
+<li><strong>dispersion_relation</strong> (<a href="classDiocotronDensitySolution.html"><strong>DiocotronDensitySolution</strong></a>)</li>
+<li><strong>DiscreteToCartesian</strong> (<a href="classDiscreteToCartesian.html"><strong>DiscreteToCartesian</strong></a>)</li>
+<li><strong>DiscreteToCartesianBuilder</strong> (<a href="classDiscreteToCartesianBuilder.html"><strong>DiscreteToCartesianBuilder</strong></a>)</li>
+<li><strong>differentiate_and_invert_fourier_values</strong> (<a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html"><strong>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;</strong></a>)</li>
+<li><strong>display_time_difference</strong> (<a href="classITimeSolverRTheta.html"><strong>ITimeSolverRTheta</strong></a>)</li>
+<li><strong>distribute_idx_range</strong> (<a href="classMPILayout.html"><strong>MPILayout</strong></a>)</li>
+<li><strong>density_eq</strong> (<a href="classMaxwellianEquilibrium.html"><strong>MaxwellianEquilibrium</strong></a>)</li>
+<li><strong>deriv</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
+<li><strong>deriv_1_and_2</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>, <a href="classPolarSplineEvaluator.html"><strong>PolarSplineEvaluator</strong></a>)</li>
+<li><strong>deriv_dim_1</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>, <a href="classPolarSplineEvaluator.html"><strong>PolarSplineEvaluator</strong></a>)</li>
+<li><strong>deriv_dim_2</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>, <a href="classPolarSplineEvaluator.html"><strong>PolarSplineEvaluator</strong></a>)</li>
+<li><strong>deriv_dim_1_and_2</strong> (<a href="classPolarSplineEvaluator.html"><strong>PolarSplineEvaluator</strong></a>)</li>
+<li><strong>degree</strong> (<a href="classTriangularBernsteinPolynomialBasis.html"><strong>TriangularBernsteinPolynomialBasis</strong></a>)</li>
+</ul>
+<h2 id="e">e</h2>
+<ul>
+<li><strong>epsilon_bot</strong> (<a href="classBumpontailEquilibrium.html"><strong>BumpontailEquilibrium</strong></a>)</li>
+<li><strong>e</strong> (<a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a>, <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>)</li>
+<li><strong>epsilon</strong> (<a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a>, <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>)</li>
+<li><strong>equilibrium</strong> (<a href="classDiocotronDensitySolution.html"><strong>DiocotronDensitySolution</strong></a>)</li>
+<li><strong>EdgeTransformation</strong> (<a href="classEdgeTransformation.html"><strong>EdgeTransformation</strong></a>)</li>
+<li><strong>Euler</strong> (<a href="classEuler.html"><strong>Euler</strong></a>)</li>
+<li><strong>end</strong> (<a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>)</li>
+<li><strong>extent</strong> (<a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>)</li>
+<li><strong>extents</strong> (<a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>)</li>
+<li><strong>evaluate</strong> (<a href="classLagrange.html"><strong>Lagrange</strong></a>)</li>
+<li><strong>evaluate_lagrange</strong> (<a href="classLagrange.html"><strong>Lagrange</strong></a>)</li>
+<li><strong>eval_no_bc</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>, <a href="classPolarSplineEvaluator.html"><strong>PolarSplineEvaluator</strong></a>)</li>
+<li><strong>eval</strong> (<a href="classPolarBSplines_1_1Impl.html"><strong>PolarBSplines::Impl</strong></a>, <a href="classPolarSplineEvaluator.html"><strong>PolarSplineEvaluator</strong></a>)</li>
+<li><strong>eval_basis</strong> (<a href="classPolarBSplines_1_1Impl.html"><strong>PolarBSplines::Impl</strong></a>, <a href="classTriangularBernsteinPolynomialBasis_1_1Impl.html"><strong>TriangularBernsteinPolynomialBasis::Impl</strong></a>)</li>
+<li><strong>eval_deriv_r</strong> (<a href="classPolarBSplines_1_1Impl.html"><strong>PolarBSplines::Impl</strong></a>)</li>
+<li><strong>eval_deriv_r_and_theta</strong> (<a href="classPolarBSplines_1_1Impl.html"><strong>PolarBSplines::Impl</strong></a>)</li>
+<li><strong>eval_deriv_theta</strong> (<a href="classPolarBSplines_1_1Impl.html"><strong>PolarBSplines::Impl</strong></a>)</li>
+</ul>
+<h2 id="f">f</h2>
+<ul>
+<li><strong>fill_matrix_with_coeff</strong> (<a href="classCollisionsIntra.html"><strong>CollisionsIntra</strong></a>)</li>
+<li><strong>first_order_jacobian_matrix_r_rtheta</strong> (<a href="classDiscreteToCartesian.html"><strong>DiscreteToCartesian</strong></a>)</li>
+<li><strong>FEM1DPoissonSolver</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>
+<li><strong>FFTPoissonSolver</strong> (<a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html"><strong>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;</strong></a>)</li>
+<li><strong>FluidMoments</strong> (<a href="classFluidMoments.html"><strong>FluidMoments</strong></a>)</li>
+<li><strong>fill_k_total</strong> (<a href="classITimeStepper.html"><strong>ITimeStepper</strong></a>)</li>
+<li><strong>front</strong> (<a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>)</li>
+<li><strong>factorise</strong> (<a href="classMatrix.html"><strong>Matrix</strong></a>, <a href="classMatrix__Corner__Block.html"><strong>Matrix_Corner_Block</strong></a>)</li>
+<li><strong>factorise_method</strong> (<a href="classMatrix.html"><strong>Matrix</strong></a>, <a href="classMatrix__Banded.html"><strong>Matrix_Banded</strong></a>, <a href="classMatrix__Corner__Block.html"><strong>Matrix_Corner_Block</strong></a>, <a href="classMatrix__Dense.html"><strong>Matrix_Dense</strong></a>, <a href="classMatrix__PDS__Tridiag.html"><strong>Matrix_PDS_Tridiag</strong></a>)</li>
+<li><strong>full_domain</strong> (<a href="classPolarBSplines_1_1Impl.html"><strong>PolarBSplines::Impl</strong></a>)</li>
+<li><strong>find_equilibrium</strong> (<a href="classVortexMergerEquilibria.html"><strong>VortexMergerEquilibria</strong></a>)</li>
+</ul>
+<h2 id="g">g</h2>
+<ul>
+<li><strong>get_inverse_mapping</strong> (<a href="classCartesianToCircular.html"><strong>CartesianToCircular</strong></a>, <a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a>, <a href="classCircularToCartesian.html"><strong>CircularToCartesian</strong></a>, <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>)</li>
+<li><strong>get_derivative</strong> (<a href="classCollisionsInter.html"><strong>CollisionsInter</strong></a>, <a href="classKrookSourceAdaptive.html"><strong>KrookSourceAdaptive</strong></a>)</li>
+<li><strong>get_nustar0</strong> (<a href="classCollisionsInter.html"><strong>CollisionsInter</strong></a>, <a href="classCollisionsIntra.html"><strong>CollisionsIntra</strong></a>)</li>
+<li><strong>get_gridvx_ghosted</strong> (<a href="classCollisionsIntra.html"><strong>CollisionsIntra</strong></a>)</li>
+<li><strong>get_gridvx_ghosted_staggered</strong> (<a href="classCollisionsIntra.html"><strong>CollisionsIntra</strong></a>)</li>
+<li><strong>get_mesh_ghosted</strong> (<a href="classCollisionsIntra.html"><strong>CollisionsIntra</strong></a>)</li>
+<li><strong>get</strong> (<a href="classCombinedMapping.html"><strong>CombinedMapping</strong></a>, <a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>, <a href="classMultipatchField.html"><strong>MultipatchField</strong></a>, <a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a>, <a href="classMultipatchType.html"><strong>MultipatchType</strong></a>, <a href="classTensor.html"><strong>Tensor</strong></a>, <a href="classVectorField.html"><strong>VectorField</strong></a>, <a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a>)</li>
+<li><strong>get_chunk_subidx_range_1d_idx</strong> (<a href="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.html"><strong>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</strong></a>)</li>
+<li><strong>get_chunk_subidx_range_idx</strong> (<a href="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.html"><strong>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</strong></a>)</li>
+<li><strong>get_kokkos_view_from_internal_chunk</strong> (<a href="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.html"><strong>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</strong></a>)</li>
+<li><strong>get_array_index</strong> (<a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html"><strong>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</strong></a>)</li>
+<li><strong>get_index</strong> (<a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html"><strong>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</strong></a>, <a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>)</li>
+<li><strong>get_internal_field</strong> (<a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html"><strong>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</strong></a>)</li>
+<li><strong>get_mdspan</strong> (<a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html"><strong>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</strong></a>)</li>
+<li><strong>get_slicer_for</strong> (<a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html"><strong>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</strong></a>)</li>
+<li><strong>get_values_field</strong> (<a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html"><strong>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</strong></a>)</li>
+<li><strong>get_chunk_idx_range</strong> (<a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html"><strong>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</strong></a>)</li>
+<li><strong>get_idx_range</strong> (<a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html"><strong>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</strong></a>, <a href="classGaussLegendre.html"><strong>GaussLegendre</strong></a>, <a href="classMultipatchConnectivity.html"><strong>MultipatchConnectivity</strong></a>)</li>
+<li><strong>get_mdspan_size</strong> (<a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html"><strong>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</strong></a>)</li>
+<li><strong>get_frequency</strong> (<a href="classDiocotronDensitySolution.html"><strong>DiocotronDensitySolution</strong></a>)</li>
+<li><strong>get_slope</strong> (<a href="classDiocotronDensitySolution.html"><strong>DiocotronDensitySolution</strong></a>)</li>
+<li><strong>get_mid</strong> (<a href="classEdgeTransformation.html"><strong>EdgeTransformation</strong></a>)</li>
+<li><strong>get_target_idx</strong> (<a href="classEdgeTransformation.html"><strong>EdgeTransformation</strong></a>)</li>
+<li><strong>get_gradient</strong> (<a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html"><strong>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;</strong></a>)</li>
+<li><strong>get_laplace_operator</strong> (<a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html"><strong>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;</strong></a>)</li>
+<li><strong>GaussLegendre</strong> (<a href="classGaussLegendre.html"><strong>GaussLegendre</strong></a>)</li>
+<li><strong>gauss_legendre_coefficients</strong> (<a href="classGaussLegendre.html"><strong>GaussLegendre</strong></a>)</li>
+<li><strong>get_sampling</strong> (<a href="classGaussLegendre.html"><strong>GaussLegendre</strong></a>, <a href="classddcHelper_1_1NonUniformInterpolationPoints.html"><strong>ddcHelper::NonUniformInterpolationPoints</strong></a>)</li>
+<li><strong>get_sampling_on_cell</strong> (<a href="classGaussLegendre.html"><strong>GaussLegendre</strong></a>)</li>
+<li><strong>get_amplitudes</strong> (<a href="classKrookSourceAdaptive.html"><strong>KrookSourceAdaptive</strong></a>)</li>
+<li><strong>getclosest</strong> (<a href="classLagrange.html"><strong>Lagrange</strong></a>)</li>
+<li><strong>getclosest_binsearch</strong> (<a href="classLagrange.html"><strong>Lagrange</strong></a>)</li>
+<li><strong>get_distribution</strong> (<a href="classMPITransposeAllToAll.html"><strong>MPITransposeAllToAll</strong></a>)</li>
+<li><strong>get_local_idx_range</strong> (<a href="classMPITransposeAllToAll.html"><strong>MPITransposeAllToAll</strong></a>)</li>
+<li><strong>get_conforming_idx_vector</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>
+<li><strong>get_from_perp</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>
+<li><strong>get_idx_range_slice</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>
+<li><strong>get_idx_step</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>
+<li><strong>get_element</strong> (<a href="classMatrix.html"><strong>Matrix</strong></a>, <a href="classMatrix__Banded.html"><strong>Matrix_Banded</strong></a>, <a href="classMatrix__Centre__Block.html"><strong>Matrix_Centre_Block</strong></a>, <a href="classMatrix__Corner__Block.html"><strong>Matrix_Corner_Block</strong></a>, <a href="classMatrix__Dense.html"><strong>Matrix_Dense</strong></a>, <a href="classMatrix__PDS__Tridiag.html"><strong>Matrix_PDS_Tridiag</strong></a>, <a href="classMatrix__Periodic__Banded.html"><strong>Matrix_Periodic_Banded</strong></a>)</li>
+<li><strong>get_size</strong> (<a href="classMatrix.html"><strong>Matrix</strong></a>)</li>
+<li><strong>get_batch_csr</strong> (<a href="classMatrixBatchCsr.html"><strong>MatrixBatchCsr</strong></a>)</li>
+<li><strong>get_batch_ell</strong> (<a href="classMatrixBatchEll.html"><strong>MatrixBatchEll</strong></a>)</li>
+<li><strong>get_ell_element</strong> (<a href="classMatrixBatchEll.html"><strong>MatrixBatchEll</strong></a>)</li>
+<li><strong>get_all_idx_ranges_along_direction</strong> (<a href="classMultipatchConnectivity.html"><strong>MultipatchConnectivity</strong></a>)</li>
+<li><strong>get_const_field</strong> (<a href="classMultipatchField.html"><strong>MultipatchField</strong></a>, <a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a>)</li>
+<li><strong>get_field</strong> (<a href="classMultipatchField.html"><strong>MultipatchField</strong></a>, <a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a>)</li>
+<li><strong>get_deriv_value</strong> (<a href="classMultipatchSplineBuilder.html"><strong>MultipatchSplineBuilder</strong></a>, <a href="classMultipatchSplineBuilder2D.html"><strong>MultipatchSplineBuilder2D</strong></a>)</li>
+<li><strong>get_equivalent_coord</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
+<li><strong>get_patch_idx</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
+<li><strong>get_tuple</strong> (<a href="classMultipatchType.html"><strong>MultipatchType</strong></a>)</li>
+<li><strong>get_mapping_on_logical_dim</strong> (<a href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.html"><strong>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;</strong></a>)</li>
+<li><strong>get_mapping_on_patch</strong> (<a href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.html"><strong>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;</strong></a>)</li>
+<li><strong>get_2d_index</strong> (<a href="classPolarBSplines.html"><strong>PolarBSplines</strong></a>)</li>
+<li><strong>get_polar_index</strong> (<a href="classPolarBSplines.html"><strong>PolarBSplines</strong></a>)</li>
+<li><strong>get_matrix_stencil_element</strong> (<a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>)</li>
+<li><strong>get_quadrature_points_in_cell</strong> (<a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>)</li>
+<li><strong>get_value_and_gradient</strong> (<a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>)</li>
+<li><strong>get_slice</strong> (<a href="classVectorField.html"><strong>VectorField</strong></a>)</li>
+<li><strong>get_domain</strong> (<a href="classddcHelper_1_1NonUniformInterpolationPoints.html"><strong>ddcHelper::NonUniformInterpolationPoints</strong></a>)</li>
+</ul>
+<h2 id="h">h</h2>
+<ul>
+<li><strong>have_converged</strong> (<a href="classCrankNicolson.html"><strong>CrankNicolson</strong></a>)</li>
+</ul>
+<h2 id="i">i</h2>
+<ul>
+<li><strong>implicit_loop</strong> (<a href="classBslImplicitPredCorrRTheta.html"><strong>BslImplicitPredCorrRTheta</strong></a>)</li>
+<li><strong>init_from_input</strong> (<a href="classBumpontailEquilibrium.html"><strong>BumpontailEquilibrium</strong></a>, <a href="classMaxwellianEquilibrium.html"><strong>MaxwellianEquilibrium</strong></a>, <a href="classSingleModePerturbInitialisation.html"><strong>SingleModePerturbInitialisation</strong></a>)</li>
+<li><strong>inv_jacobian_11</strong> (<a href="classCircularToCartesian.html"><strong>CircularToCartesian</strong></a>, <a href="classCombinedMapping.html"><strong>CombinedMapping</strong></a>, <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>, <a href="classInverseJacobianMatrix.html"><strong>InverseJacobianMatrix</strong></a>)</li>
+<li><strong>inv_jacobian_12</strong> (<a href="classCircularToCartesian.html"><strong>CircularToCartesian</strong></a>, <a href="classCombinedMapping.html"><strong>CombinedMapping</strong></a>, <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>, <a href="classInverseJacobianMatrix.html"><strong>InverseJacobianMatrix</strong></a>)</li>
+<li><strong>inv_jacobian_21</strong> (<a href="classCircularToCartesian.html"><strong>CircularToCartesian</strong></a>, <a href="classCombinedMapping.html"><strong>CombinedMapping</strong></a>, <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>, <a href="classInverseJacobianMatrix.html"><strong>InverseJacobianMatrix</strong></a>)</li>
+<li><strong>inv_jacobian_22</strong> (<a href="classCircularToCartesian.html"><strong>CircularToCartesian</strong></a>, <a href="classCombinedMapping.html"><strong>CombinedMapping</strong></a>, <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>, <a href="classInverseJacobianMatrix.html"><strong>InverseJacobianMatrix</strong></a>)</li>
+<li><strong>inv_jacobian_matrix</strong> (<a href="classCircularToCartesian.html"><strong>CircularToCartesian</strong></a>, <a href="classCombinedMapping.html"><strong>CombinedMapping</strong></a>, <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>)</li>
+<li><strong>inv_jacobian</strong> (<a href="classCombinedMapping.html"><strong>CombinedMapping</strong></a>)</li>
+<li><strong>initialise_fields</strong> (<a href="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.html"><strong>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</strong></a>)</li>
+<li><strong>initialise_chunks</strong> (<a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html"><strong>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</strong></a>)</li>
+<li><strong>initialisation</strong> (<a href="classDiocotronDensitySolution.html"><strong>DiocotronDensitySolution</strong></a>)</li>
+<li><strong>idx_range_singular_point</strong> (<a href="classDiscreteToCartesian.html"><strong>DiscreteToCartesian</strong></a>)</li>
+<li><strong>is_match_available</strong> (<a href="classEdgeTransformation.html"><strong>EdgeTransformation</strong></a>)</li>
+<li><strong>init_fourier_space</strong> (<a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html"><strong>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;</strong></a>)</li>
+<li><strong>IMPITranspose</strong> (<a href="classIMPITranspose.html"><strong>IMPITranspose</strong></a>)</li>
+<li><strong>IdxRangeSlice</strong> (<a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>)</li>
+<li><strong>IdxRangeSliceIterator</strong> (<a href="structIdxRangeSliceIterator.html"><strong>IdxRangeSliceIterator</strong></a>)</li>
+<li><strong>InvJacobianOPoint</strong> (<a href="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_01be6b75c3c69e2165a260584a5fd55276.html"><strong>InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</strong></a>, <a href="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_399a54ae9b96ca8e75637deab2a35d95.html"><strong>InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</strong></a>, <a href="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864.html"><strong>InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</strong></a>)</li>
+<li><strong>InverseJacobianMatrix</strong> (<a href="classInverseJacobianMatrix.html"><strong>InverseJacobianMatrix</strong></a>)</li>
+<li><strong>internal_distribute_idx_range</strong> (<a href="classMPILayout.html"><strong>MPILayout</strong></a>)</li>
+<li><strong>inverse</strong> (<a href="classMetricTensorEvaluator.html"><strong>MetricTensorEvaluator</strong></a>)</li>
+<li><strong>Impl</strong> (<a href="classMoments_1_1Impl.html"><strong>Moments::Impl</strong></a>, <a href="classPolarBSplines_1_1Impl.html"><strong>PolarBSplines::Impl</strong></a>, <a href="classSpeciesInformation_1_1Impl.html"><strong>SpeciesInformation::Impl</strong></a>, <a href="classTriangularBernsteinPolynomialBasis_1_1Impl.html"><strong>TriangularBernsteinPolynomialBasis::Impl</strong></a>)</li>
+<li><strong>idx_range</strong> (<a href="classMultipatchField.html"><strong>MultipatchField</strong></a>, <a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a>)</li>
+<li><strong>integrate</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>, <a href="classPolarSplineEvaluator.html"><strong>PolarSplineEvaluator</strong></a>)</li>
+<li><strong>integrals</strong> (<a href="classPolarBSplines_1_1Impl.html"><strong>PolarBSplines::Impl</strong></a>)</li>
+<li><strong>init_nnz_per_line</strong> (<a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>)</li>
+<li><strong>ielec</strong> (<a href="classSpeciesInformation_1_1Impl.html"><strong>SpeciesInformation::Impl</strong></a>)</li>
+<li><strong>is_unified</strong> (<a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a>)</li>
+<li><strong>IndexedTensor</strong> (<a href="classtensor__tools_1_1IndexedTensor.html"><strong>tensor_tools::IndexedTensor</strong></a>)</li>
+</ul>
+<h2 id="j">j</h2>
+<ul>
+<li><strong>jacobian</strong> (<a href="classCartesianToCircular.html"><strong>CartesianToCircular</strong></a>, <a href="classCircularToCartesian.html"><strong>CircularToCartesian</strong></a>, <a href="classCombinedMapping.html"><strong>CombinedMapping</strong></a>, <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>, <a href="classDiscreteToCartesian.html"><strong>DiscreteToCartesian</strong></a>)</li>
+<li><strong>jacobian_component</strong> (<a href="classCartesianToCircular.html"><strong>CartesianToCircular</strong></a>, <a href="classCircularToCartesian.html"><strong>CircularToCartesian</strong></a>, <a href="classCombinedMapping.html"><strong>CombinedMapping</strong></a>, <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>, <a href="classDiscreteToCartesian.html"><strong>DiscreteToCartesian</strong></a>)</li>
+<li><strong>jacobian_matrix</strong> (<a href="classCartesianToCircular.html"><strong>CartesianToCircular</strong></a>, <a href="classCircularToCartesian.html"><strong>CircularToCartesian</strong></a>, <a href="classCombinedMapping.html"><strong>CombinedMapping</strong></a>, <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>, <a href="classDiscreteToCartesian.html"><strong>DiscreteToCartesian</strong></a>)</li>
+<li><strong>jit_build_nubsplinesx</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>
+</ul>
+<h2 id="k">k</h2>
+<ul>
+<li><strong>KelvinHelmholtzInstabilityInitialisation</strong> (<a href="classKelvinHelmholtzInstabilityInitialisation.html"><strong>KelvinHelmholtzInstabilityInitialisation</strong></a>)</li>
+<li><strong>KineticSource</strong> (<a href="classKineticSource.html"><strong>KineticSource</strong></a>)</li>
+<li><strong>KrookSourceAdaptive</strong> (<a href="classKrookSourceAdaptive.html"><strong>KrookSourceAdaptive</strong></a>)</li>
+<li><strong>KrookSourceConstant</strong> (<a href="classKrookSourceConstant.html"><strong>KrookSourceConstant</strong></a>)</li>
+</ul>
+<h2 id="l">l</h2>
+<ul>
+<li><strong>Lagrange</strong> (<a href="classLagrange.html"><strong>Lagrange</strong></a>)</li>
+<li><strong>LagrangeInterpolator</strong> (<a href="classLagrangeInterpolator.html"><strong>LagrangeInterpolator</strong></a>)</li>
+</ul>
+<h2 id="m">m</h2>
+<ul>
+<li><strong>mean_velocity_bot</strong> (<a href="classBumpontailEquilibrium.html"><strong>BumpontailEquilibrium</strong></a>)</li>
+<li><strong>make_internal_mdspan</strong> (<a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html"><strong>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</strong></a>)</li>
+<li><strong>MPITransposeAllToAll</strong> (<a href="classMPITransposeAllToAll.html"><strong>MPITransposeAllToAll</strong></a>)</li>
+<li><strong>MatchingIdxSlice</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>
+<li><strong>Matrix</strong> (<a href="classMatrix.html"><strong>Matrix</strong></a>)</li>
+<li><strong>make_new_banded</strong> (<a href="classMatrix.html"><strong>Matrix</strong></a>)</li>
+<li><strong>make_new_block_with_banded_region</strong> (<a href="classMatrix.html"><strong>Matrix</strong></a>)</li>
+<li><strong>make_new_periodic_banded</strong> (<a href="classMatrix.html"><strong>Matrix</strong></a>)</li>
+<li><strong>MatrixBatch</strong> (<a href="classMatrixBatch.html"><strong>MatrixBatch</strong></a>)</li>
+<li><strong>MatrixBatchCsr</strong> (<a href="classMatrixBatchCsr.html"><strong>MatrixBatchCsr</strong></a>)</li>
+<li><strong>MatrixBatchEll</strong> (<a href="classMatrixBatchEll.html"><strong>MatrixBatchEll</strong></a>)</li>
+<li><strong>MatrixBatchTridiag</strong> (<a href="classMatrixBatchTridiag.html"><strong>MatrixBatchTridiag</strong></a>)</li>
+<li><strong>Matrix_Banded</strong> (<a href="classMatrix__Banded.html"><strong>Matrix_Banded</strong></a>)</li>
+<li><strong>Matrix_Centre_Block</strong> (<a href="classMatrix__Centre__Block.html"><strong>Matrix_Centre_Block</strong></a>)</li>
+<li><strong>Matrix_Corner_Block</strong> (<a href="classMatrix__Corner__Block.html"><strong>Matrix_Corner_Block</strong></a>)</li>
+<li><strong>Matrix_Dense</strong> (<a href="classMatrix__Dense.html"><strong>Matrix_Dense</strong></a>)</li>
+<li><strong>Matrix_PDS_Tridiag</strong> (<a href="classMatrix__PDS__Tridiag.html"><strong>Matrix_PDS_Tridiag</strong></a>)</li>
+<li><strong>Matrix_Periodic_Banded</strong> (<a href="classMatrix__Periodic__Banded.html"><strong>Matrix_Periodic_Banded</strong></a>)</li>
+<li><strong>MaxwellianEquilibrium</strong> (<a href="classMaxwellianEquilibrium.html"><strong>MaxwellianEquilibrium</strong></a>)</li>
+<li><strong>mass</strong> (<a href="classMaxwellianEquilibrium.html"><strong>MaxwellianEquilibrium</strong></a>, <a href="classSpeciesInformation_1_1Impl.html"><strong>SpeciesInformation::Impl</strong></a>)</li>
+<li><strong>mean_velocity_eq</strong> (<a href="classMaxwellianEquilibrium.html"><strong>MaxwellianEquilibrium</strong></a>)</li>
+<li><strong>MetricTensorEvaluator</strong> (<a href="classMetricTensorEvaluator.html"><strong>MetricTensorEvaluator</strong></a>)</li>
+<li><strong>MpiChargeDensityCalculator</strong> (<a href="classMpiChargeDensityCalculator.html"><strong>MpiChargeDensityCalculator</strong></a>)</li>
+<li><strong>MpiSplitVlasovSolver</strong> (<a href="classMpiSplitVlasovSolver.html"><strong>MpiSplitVlasovSolver</strong></a>)</li>
+<li><strong>MultipatchField</strong> (<a href="classMultipatchField.html"><strong>MultipatchField</strong></a>)</li>
+<li><strong>MultipatchFieldMem</strong> (<a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a>)</li>
+<li><strong>MultipatchSplineBuilder</strong> (<a href="classMultipatchSplineBuilder.html"><strong>MultipatchSplineBuilder</strong></a>)</li>
+<li><strong>MultipatchSplineBuilder2D</strong> (<a href="classMultipatchSplineBuilder2D.html"><strong>MultipatchSplineBuilder2D</strong></a>)</li>
+<li><strong>MultipatchSplineEvaluator2D</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
+<li><strong>MultipatchType</strong> (<a href="classMultipatchType.html"><strong>MultipatchType</strong></a>)</li>
+<li><strong>masses</strong> (<a href="classSpeciesInformation_1_1Impl.html"><strong>SpeciesInformation::Impl</strong></a>)</li>
+</ul>
+<h2 id="n">n</h2>
+<ul>
+<li><strong>non_singular_inverse_jacobian_matrix</strong> (<a href="classCombinedMapping.html"><strong>CombinedMapping</strong></a>)</li>
+<li><strong>negative_differentiate_equation</strong> (<a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html"><strong>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;</strong></a>)</li>
+<li><strong>norm</strong> (<a href="classMatrixBatchCsr.html"><strong>MatrixBatchCsr</strong></a>, <a href="classMatrixBatchEll.html"><strong>MatrixBatchEll</strong></a>)</li>
+<li><strong>NoPerturbInitialisation</strong> (<a href="classNoPerturbInitialisation.html"><strong>NoPerturbInitialisation</strong></a>)</li>
+<li><strong>NullAdvectionVelocity</strong> (<a href="classNullAdvectionVelocity.html"><strong>NullAdvectionVelocity</strong></a>)</li>
+<li><strong>NullQNSolver</strong> (<a href="classNullQNSolver.html"><strong>NullQNSolver</strong></a>)</li>
+<li><strong>nbasis</strong> (<a href="classPolarBSplines_1_1Impl.html"><strong>PolarBSplines::Impl</strong></a>, <a href="classTriangularBernsteinPolynomialBasis.html"><strong>TriangularBernsteinPolynomialBasis</strong></a>)</li>
+<li><strong>n_singular_basis</strong> (<a href="classPolarBSplines.html"><strong>PolarBSplines</strong></a>)</li>
+</ul>
+<h2 id="o">o</h2>
+<ul>
+<li><strong>operator()</strong> (<a href="classAdvectionFieldFinder.html"><strong>AdvectionFieldFinder</strong></a>, <a href="classBarycentricToCartesian.html"><strong>BarycentricToCartesian</strong></a>, <a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a>, <a href="classBslAdvectionRTheta.html"><strong>BslAdvectionRTheta</strong></a>, <a href="classBslAdvectionSpatial.html"><strong>BslAdvectionSpatial</strong></a>, <a href="classBslAdvectionVelocity.html"><strong>BslAdvectionVelocity</strong></a>, <a href="classBslExplicitPredCorrRTheta.html"><strong>BslExplicitPredCorrRTheta</strong></a>, <a href="classBslImplicitPredCorrRTheta.html"><strong>BslImplicitPredCorrRTheta</strong></a>, <a href="classBslPredCorrRTheta.html"><strong>BslPredCorrRTheta</strong></a>, <a href="classBumpontailEquilibrium.html"><strong>BumpontailEquilibrium</strong></a>, <a href="classCartesianToBarycentric.html"><strong>CartesianToBarycentric</strong></a>, <a href="classCartesianToCircular.html"><strong>CartesianToCircular</strong></a>, <a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a>, <a href="classCentralFDMPartialDerivative.html"><strong>CentralFDMPartialDerivative</strong></a>, <a href="classChargeDensityCalculator.html"><strong>ChargeDensityCalculator</strong></a>, <a href="classCircularToCartesian.html"><strong>CircularToCartesian</strong></a>, <a href="classCollisionOperator.html"><strong>CollisionOperator</strong></a>, <a href="classCollisionsInter.html"><strong>CollisionsInter</strong></a>, <a href="classCollisionsIntra.html"><strong>CollisionsIntra</strong></a>, <a href="classCombinedMapping.html"><strong>CombinedMapping</strong></a>, <a href="structConstantExtrapolationRuleOnion.html"><strong>ConstantExtrapolationRuleOnion</strong></a>, <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>, <a href="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.html"><strong>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</strong></a>, <a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html"><strong>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</strong></a>, <a href="classDiscreteToCartesian.html"><strong>DiscreteToCartesian</strong></a>, <a href="classDiscreteToCartesianBuilder.html"><strong>DiscreteToCartesianBuilder</strong></a>, <a href="classEdgeTransformation.html"><strong>EdgeTransformation</strong></a>, <a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>, <a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html"><strong>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;</strong></a>, <a href="classFluidMoments.html"><strong>FluidMoments</strong></a>, <a href="classIAdvectionRTheta.html"><strong>IAdvectionRTheta</strong></a>, <a href="classIAdvectionSpatial.html"><strong>IAdvectionSpatial</strong></a>, <a href="classIAdvectionVelocity.html"><strong>IAdvectionVelocity</strong></a>, <a href="classIBoltzmannSolver.html"><strong>IBoltzmannSolver</strong></a>, <a href="classIChargeDensityCalculator.html"><strong>IChargeDensityCalculator</strong></a>, <a href="classIEquilibrium.html"><strong>IEquilibrium</strong></a>, <a href="classIInitialisation.html"><strong>IInitialisation</strong></a>, <a href="classIInterpolator.html"><strong>IInterpolator</strong></a>, <a href="classIInterpolator2D.html"><strong>IInterpolator2D</strong></a>, <a href="classIPartialDerivative.html"><strong>IPartialDerivative</strong></a>, <a href="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.html"><strong>IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;</strong></a>, <a href="classIPolarFootFinder.html"><strong>IPolarFootFinder</strong></a>, <a href="classIPreallocatableInterpolator.html"><strong>IPreallocatableInterpolator</strong></a>, <a href="classIPreallocatableInterpolator2D.html"><strong>IPreallocatableInterpolator2D</strong></a>, <a href="classIQNSolver.html"><strong>IQNSolver</strong></a>, <a href="classIRightHandSide.html"><strong>IRightHandSide</strong></a>, <a href="classITimeSolver.html"><strong>ITimeSolver</strong></a>, <a href="classITimeSolverRTheta.html"><strong>ITimeSolverRTheta</strong></a>, <a href="classIVlasovSolver.html"><strong>IVlasovSolver</strong></a>, <a href="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_01be6b75c3c69e2165a260584a5fd55276.html"><strong>InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</strong></a>, <a href="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_399a54ae9b96ca8e75637deab2a35d95.html"><strong>InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</strong></a>, <a href="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864.html"><strong>InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</strong></a>, <a href="classInverseJacobianMatrix.html"><strong>InverseJacobianMatrix</strong></a>, <a href="classKelvinHelmholtzInstabilityInitialisation.html"><strong>KelvinHelmholtzInstabilityInitialisation</strong></a>, <a href="classKineticSource.html"><strong>KineticSource</strong></a>, <a href="classKrookSourceAdaptive.html"><strong>KrookSourceAdaptive</strong></a>, <a href="classKrookSourceConstant.html"><strong>KrookSourceConstant</strong></a>, <a href="classLagrangeInterpolator.html"><strong>LagrangeInterpolator</strong></a>, <a href="classMPITransposeAllToAll.html"><strong>MPITransposeAllToAll</strong></a>, <a href="classMaxwellianEquilibrium.html"><strong>MaxwellianEquilibrium</strong></a>, <a href="classMetricTensorEvaluator.html"><strong>MetricTensorEvaluator</strong></a>, <a href="classMpiChargeDensityCalculator.html"><strong>MpiChargeDensityCalculator</strong></a>, <a href="classMpiSplitVlasovSolver.html"><strong>MpiSplitVlasovSolver</strong></a>, <a href="classMultipatchSplineBuilder.html"><strong>MultipatchSplineBuilder</strong></a>, <a href="classMultipatchSplineBuilder2D.html"><strong>MultipatchSplineBuilder2D</strong></a>, <a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>, <a href="classNoPerturbInitialisation.html"><strong>NoPerturbInitialisation</strong></a>, <a href="classNullAdvectionVelocity.html"><strong>NullAdvectionVelocity</strong></a>, <a href="structNullExtrapolationRule.html"><strong>NullExtrapolationRule</strong></a>, <a href="classNullQNSolver.html"><strong>NullQNSolver</strong></a>, <a href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.html"><strong>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;</strong></a>, <a href="classPoissonLikeRHSFunction.html"><strong>PoissonLikeRHSFunction</strong></a>, <a href="classPolarSplineEvaluator.html"><strong>PolarSplineEvaluator</strong></a>, <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>, <a href="classPredCorr.html"><strong>PredCorr</strong></a>, <a href="classPredCorrRK2XY.html"><strong>PredCorrRK2XY</strong></a>, <a href="classQNSolver.html"><strong>QNSolver</strong></a>, <a href="classQuadrature.html"><strong>Quadrature</strong></a>, <a href="classRefinedDiscreteToCartesianBuilder.html"><strong>RefinedDiscreteToCartesianBuilder</strong></a>, <a href="classRestartInitialisation.html"><strong>RestartInitialisation</strong></a>, <a href="classSingleModePerturbInitialisation.html"><strong>SingleModePerturbInitialisation</strong></a>, <a href="classSpline1DPartialDerivative.html"><strong>Spline1DPartialDerivative</strong></a>, <a href="classSpline2DPartialDerivative.html"><strong>Spline2DPartialDerivative</strong></a>, <a href="classSplineBuilder2DCache.html"><strong>SplineBuilder2DCache</strong></a>, <a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a>, <a href="classSplineInterpolator2D.html"><strong>SplineInterpolator2D</strong></a>, <a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a>, <a href="classSplitRightHandSideSolver.html"><strong>SplitRightHandSideSolver</strong></a>, <a href="classSplitVlasovSolver.html"><strong>SplitVlasovSolver</strong></a>, <a href="classVectorField.html"><strong>VectorField</strong></a>, <a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a>, <a href="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.html"><strong>VectorMapper&lt; VectorIndexSet&lt; XIn, YIn &gt;, VectorIndexSet&lt; XOut, YOut &gt;, Mapping, ExecSpace &gt;</strong></a>, <a href="classtensor__tools_1_1IndexedTensor.html"><strong>tensor_tools::IndexedTensor</strong></a>)</li>
+<li><strong>operator=</strong> (<a href="classBarycentricToCartesian.html"><strong>BarycentricToCartesian</strong></a>, <a href="classCartesianToBarycentric.html"><strong>CartesianToBarycentric</strong></a>, <a href="classCartesianToCircular.html"><strong>CartesianToCircular</strong></a>, <a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a>, <a href="classCircularToCartesian.html"><strong>CircularToCartesian</strong></a>, <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>, <a href="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.html"><strong>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</strong></a>, <a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html"><strong>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</strong></a>, <a href="classPolarBSplines_1_1Impl.html"><strong>PolarBSplines::Impl</strong></a>, <a href="classPolarSplineEvaluator.html"><strong>PolarSplineEvaluator</strong></a>, <a href="classTensor.html"><strong>Tensor</strong></a>, <a href="classTriangularBernsteinPolynomialBasis_1_1Impl.html"><strong>TriangularBernsteinPolynomialBasis::Impl</strong></a>, <a href="classVectorField.html"><strong>VectorField</strong></a>, <a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a>, <a href="classtensor__tools_1_1IndexedTensor.html"><strong>tensor_tools::IndexedTensor</strong></a>)</li>
+<li><strong>operator[]</strong> (<a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html"><strong>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</strong></a>, <a href="structIdxRangeSliceIterator.html"><strong>IdxRangeSliceIterator</strong></a>, <a href="classVectorField.html"><strong>VectorField</strong></a>, <a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a>)</li>
+<li><strong>order</strong> (<a href="classGaussLegendre.html"><strong>GaussLegendre</strong></a>)</li>
+<li><strong>operator*</strong> (<a href="structIdxRangeSliceIterator.html"><strong>IdxRangeSliceIterator</strong></a>, <a href="classTensor.html"><strong>Tensor</strong></a>)</li>
+<li><strong>operator++</strong> (<a href="structIdxRangeSliceIterator.html"><strong>IdxRangeSliceIterator</strong></a>)</li>
+<li><strong>operator+=</strong> (<a href="structIdxRangeSliceIterator.html"><strong>IdxRangeSliceIterator</strong></a>, <a href="classTensor.html"><strong>Tensor</strong></a>)</li>
+<li><strong>operator--</strong> (<a href="structIdxRangeSliceIterator.html"><strong>IdxRangeSliceIterator</strong></a>)</li>
+<li><strong>operator-=</strong> (<a href="structIdxRangeSliceIterator.html"><strong>IdxRangeSliceIterator</strong></a>, <a href="classTensor.html"><strong>Tensor</strong></a>)</li>
+<li><strong>OnionPatchLocator</strong> (<a href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.html"><strong>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;</strong></a>)</li>
+<li><strong>operator!=</strong> (<a href="classTensor.html"><strong>Tensor</strong></a>)</li>
+<li><strong>operator*=</strong> (<a href="classTensor.html"><strong>Tensor</strong></a>)</li>
+<li><strong>operator+</strong> (<a href="classTensor.html"><strong>Tensor</strong></a>)</li>
+<li><strong>operator-</strong> (<a href="classTensor.html"><strong>Tensor</strong></a>)</li>
+<li><strong>operator/</strong> (<a href="classTensor.html"><strong>Tensor</strong></a>)</li>
+<li><strong>operator/=</strong> (<a href="classTensor.html"><strong>Tensor</strong></a>)</li>
+<li><strong>operator==</strong> (<a href="classTensor.html"><strong>Tensor</strong></a>)</li>
+</ul>
+<h2 id="p">p</h2>
+<ul>
+<li><strong>preallocate</strong> (<a href="classIPreallocatableInterpolator.html"><strong>IPreallocatableInterpolator</strong></a>, <a href="classIPreallocatableInterpolator2D.html"><strong>IPreallocatableInterpolator2D</strong></a>, <a href="classPreallocatableLagrangeInterpolator.html"><strong>PreallocatableLagrangeInterpolator</strong></a>, <a href="classPreallocatableSplineInterpolator.html"><strong>PreallocatableSplineInterpolator</strong></a>, <a href="classPreallocatableSplineInterpolator2D.html"><strong>PreallocatableSplineInterpolator2D</strong></a>)</li>
+<li><strong>PoissonLikeRHSFunction</strong> (<a href="classPoissonLikeRHSFunction.html"><strong>PoissonLikeRHSFunction</strong></a>)</li>
+<li><strong>PolarSpline</strong> (<a href="structPolarSpline.html"><strong>PolarSpline</strong></a>)</li>
+<li><strong>PolarSplineEvaluator</strong> (<a href="classPolarSplineEvaluator.html"><strong>PolarSplineEvaluator</strong></a>)</li>
+<li><strong>PolarSplineFEMPoissonLikeSolver</strong> (<a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>)</li>
+<li><strong>PolarSplineMem</strong> (<a href="structPolarSplineMem.html"><strong>PolarSplineMem</strong></a>)</li>
+<li><strong>PreallocatableLagrangeInterpolator</strong> (<a href="classPreallocatableLagrangeInterpolator.html"><strong>PreallocatableLagrangeInterpolator</strong></a>)</li>
+<li><strong>PreallocatableSplineInterpolator</strong> (<a href="classPreallocatableSplineInterpolator.html"><strong>PreallocatableSplineInterpolator</strong></a>)</li>
+<li><strong>PreallocatableSplineInterpolator2D</strong> (<a href="classPreallocatableSplineInterpolator2D.html"><strong>PreallocatableSplineInterpolator2D</strong></a>)</li>
+<li><strong>PredCorr</strong> (<a href="classPredCorr.html"><strong>PredCorr</strong></a>)</li>
+<li><strong>PredCorrRK2XY</strong> (<a href="classPredCorrRK2XY.html"><strong>PredCorrRK2XY</strong></a>)</li>
+<li><strong>perturbation_initialisation</strong> (<a href="classSingleModePerturbInitialisation.html"><strong>SingleModePerturbInitialisation</strong></a>)</li>
+</ul>
+<h2 id="q">q</h2>
+<ul>
+<li><strong>QNSolver</strong> (<a href="classQNSolver.html"><strong>QNSolver</strong></a>)</li>
+<li><strong>Quadrature</strong> (<a href="classQuadrature.html"><strong>Quadrature</strong></a>)</li>
+</ul>
+<h2 id="r">r</h2>
+<ul>
+<li><strong>recursive_dispatch_patch_function</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
+<li><strong>replace_periodic_coord_inside</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
+<li><strong>RK2</strong> (<a href="classRK2.html"><strong>RK2</strong></a>)</li>
+<li><strong>RK3</strong> (<a href="classRK3.html"><strong>RK3</strong></a>)</li>
+<li><strong>RK4</strong> (<a href="classRK4.html"><strong>RK4</strong></a>)</li>
+<li><strong>RefinedDiscreteToCartesianBuilder</strong> (<a href="classRefinedDiscreteToCartesianBuilder.html"><strong>RefinedDiscreteToCartesianBuilder</strong></a>)</li>
+<li><strong>RestartInitialisation</strong> (<a href="classRestartInitialisation.html"><strong>RestartInitialisation</strong></a>)</li>
+<li><strong>rank</strong> (<a href="classTensor.html"><strong>Tensor</strong></a>, <a href="classTriangularBernsteinPolynomialBasis.html"><strong>TriangularBernsteinPolynomialBasis</strong></a>)</li>
+</ul>
+<h2 id="s">s</h2>
+<ul>
+<li><strong>span_cview</strong> (<a href="structConstPolarSpline.html"><strong>ConstPolarSpline</strong></a>, <a href="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.html"><strong>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</strong></a>, <a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html"><strong>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</strong></a>, <a href="classMultipatchField.html"><strong>MultipatchField</strong></a>, <a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a>, <a href="structPolarSpline.html"><strong>PolarSpline</strong></a>, <a href="structPolarSplineMem.html"><strong>PolarSplineMem</strong></a>, <a href="classVectorField.html"><strong>VectorField</strong></a>, <a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a>)</li>
+<li><strong>span_view</strong> (<a href="structConstPolarSpline.html"><strong>ConstPolarSpline</strong></a>, <a href="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.html"><strong>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</strong></a>, <a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html"><strong>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</strong></a>, <a href="classMultipatchField.html"><strong>MultipatchField</strong></a>, <a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a>, <a href="structPolarSpline.html"><strong>PolarSpline</strong></a>, <a href="structPolarSplineMem.html"><strong>PolarSplineMem</strong></a>, <a href="classVectorField.html"><strong>VectorField</strong></a>, <a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a>)</li>
+<li><strong>set_curvilinear_to_cartesian_values</strong> (<a href="classDiscreteToCartesianBuilder.html"><strong>DiscreteToCartesianBuilder</strong></a>, <a href="classRefinedDiscreteToCartesianBuilder.html"><strong>RefinedDiscreteToCartesianBuilder</strong></a>)</li>
+<li><strong>search_for_match</strong> (<a href="classEdgeTransformation.html"><strong>EdgeTransformation</strong></a>)</li>
+<li><strong>solve_matrix_system</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>
+<li><strong>solve_poisson_equation</strong> (<a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html"><strong>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;</strong></a>)</li>
+<li><strong>size</strong> (<a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>, <a href="classMatrixBatch.html"><strong>MatrixBatch</strong></a>, <a href="classMultipatchType.html"><strong>MultipatchType</strong></a>, <a href="classTensor.html"><strong>Tensor</strong></a>)</li>
+<li><strong>stride</strong> (<a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>)</li>
+<li><strong>strides</strong> (<a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>)</li>
+<li><strong>set_element</strong> (<a href="classMatrix.html"><strong>Matrix</strong></a>, <a href="classMatrix__Banded.html"><strong>Matrix_Banded</strong></a>, <a href="classMatrix__Centre__Block.html"><strong>Matrix_Centre_Block</strong></a>, <a href="classMatrix__Corner__Block.html"><strong>Matrix_Corner_Block</strong></a>, <a href="classMatrix__Dense.html"><strong>Matrix_Dense</strong></a>, <a href="classMatrix__PDS__Tridiag.html"><strong>Matrix_PDS_Tridiag</strong></a>, <a href="classMatrix__Periodic__Banded.html"><strong>Matrix_Periodic_Banded</strong></a>)</li>
+<li><strong>solve_inplace</strong> (<a href="classMatrix.html"><strong>Matrix</strong></a>, <a href="classMatrix__Centre__Block.html"><strong>Matrix_Centre_Block</strong></a>, <a href="classMatrix__Corner__Block.html"><strong>Matrix_Corner_Block</strong></a>)</li>
+<li><strong>solve_inplace_method</strong> (<a href="classMatrix.html"><strong>Matrix</strong></a>, <a href="classMatrix__Banded.html"><strong>Matrix_Banded</strong></a>, <a href="classMatrix__Corner__Block.html"><strong>Matrix_Corner_Block</strong></a>, <a href="classMatrix__Dense.html"><strong>Matrix_Dense</strong></a>, <a href="classMatrix__PDS__Tridiag.html"><strong>Matrix_PDS_Tridiag</strong></a>)</li>
+<li><strong>solve_multiple_inplace</strong> (<a href="classMatrix.html"><strong>Matrix</strong></a>, <a href="classMatrix__Centre__Block.html"><strong>Matrix_Centre_Block</strong></a>, <a href="classMatrix__Corner__Block.html"><strong>Matrix_Corner_Block</strong></a>)</li>
+<li><strong>solve_transpose_inplace</strong> (<a href="classMatrix.html"><strong>Matrix</strong></a>, <a href="classMatrix__Centre__Block.html"><strong>Matrix_Centre_Block</strong></a>, <a href="classMatrix__Corner__Block.html"><strong>Matrix_Corner_Block</strong></a>)</li>
+<li><strong>setup_solver</strong> (<a href="classMatrixBatch.html"><strong>MatrixBatch</strong></a>, <a href="classMatrixBatchCsr.html"><strong>MatrixBatchCsr</strong></a>, <a href="classMatrixBatchEll.html"><strong>MatrixBatchEll</strong></a>, <a href="classMatrixBatchTridiag.html"><strong>MatrixBatchTridiag</strong></a>)</li>
+<li><strong>solve</strong> (<a href="classMatrixBatch.html"><strong>MatrixBatch</strong></a>, <a href="classMatrixBatchCsr.html"><strong>MatrixBatchCsr</strong></a>, <a href="classMatrixBatchEll.html"><strong>MatrixBatchEll</strong></a>, <a href="classMatrixBatchTridiag.html"><strong>MatrixBatchTridiag</strong></a>)</li>
+<li><strong>set_ell_element</strong> (<a href="classMatrixBatchEll.html"><strong>MatrixBatchEll</strong></a>)</li>
+<li><strong>swap_array_to_centre</strong> (<a href="classMatrix__Centre__Block.html"><strong>Matrix_Centre_Block</strong></a>)</li>
+<li><strong>swap_array_to_corner</strong> (<a href="classMatrix__Centre__Block.html"><strong>Matrix_Centre_Block</strong></a>)</li>
+<li><strong>solve_gamma_section</strong> (<a href="classMatrix__Corner__Block.html"><strong>Matrix_Corner_Block</strong></a>)</li>
+<li><strong>solve_gamma_section_transpose</strong> (<a href="classMatrix__Corner__Block.html"><strong>Matrix_Corner_Block</strong></a>)</li>
+<li><strong>solve_lambda_section</strong> (<a href="classMatrix__Corner__Block.html"><strong>Matrix_Corner_Block</strong></a>, <a href="classMatrix__Periodic__Banded.html"><strong>Matrix_Periodic_Banded</strong></a>)</li>
+<li><strong>solve_lambda_section_transpose</strong> (<a href="classMatrix__Corner__Block.html"><strong>Matrix_Corner_Block</strong></a>, <a href="classMatrix__Periodic__Banded.html"><strong>Matrix_Periodic_Banded</strong></a>)</li>
+<li><strong>set_and_check_radii</strong> (<a href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.html"><strong>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;</strong></a>)</li>
+<li><strong>singular_idx_range</strong> (<a href="classPolarBSplines.html"><strong>PolarBSplines</strong></a>)</li>
+<li><strong>SingleModePerturbInitialisation</strong> (<a href="classSingleModePerturbInitialisation.html"><strong>SingleModePerturbInitialisation</strong></a>)</li>
+<li><strong>Spline1DPartialDerivative</strong> (<a href="classSpline1DPartialDerivative.html"><strong>Spline1DPartialDerivative</strong></a>)</li>
+<li><strong>Spline1DPartialDerivativeCreator</strong> (<a href="classSpline1DPartialDerivativeCreator.html"><strong>Spline1DPartialDerivativeCreator</strong></a>)</li>
+<li><strong>Spline2DPartialDerivative</strong> (<a href="classSpline2DPartialDerivative.html"><strong>Spline2DPartialDerivative</strong></a>)</li>
+<li><strong>Spline2DPartialDerivativeCreator</strong> (<a href="classSpline2DPartialDerivativeCreator.html"><strong>Spline2DPartialDerivativeCreator</strong></a>)</li>
+<li><strong>SplineBuilder2DCache</strong> (<a href="classSplineBuilder2DCache.html"><strong>SplineBuilder2DCache</strong></a>)</li>
+<li><strong>SplineInterpolator</strong> (<a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a>)</li>
+<li><strong>SplineInterpolator2D</strong> (<a href="classSplineInterpolator2D.html"><strong>SplineInterpolator2D</strong></a>)</li>
+<li><strong>SplinePolarFootFinder</strong> (<a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a>)</li>
+<li><strong>SplitRightHandSideSolver</strong> (<a href="classSplitRightHandSideSolver.html"><strong>SplitRightHandSideSolver</strong></a>)</li>
+<li><strong>SplitVlasovSolver</strong> (<a href="classSplitVlasovSolver.html"><strong>SplitVlasovSolver</strong></a>)</li>
+<li><strong>set_initialisation</strong> (<a href="classVortexMergerDensitySolution.html"><strong>VortexMergerDensitySolution</strong></a>)</li>
+<li><strong>set_equilibrium</strong> (<a href="classVortexMergerEquilibria.html"><strong>VortexMergerEquilibria</strong></a>)</li>
+</ul>
+<h2 id="t">t</h2>
+<ul>
+<li><strong>temperature_bot</strong> (<a href="classBumpontailEquilibrium.html"><strong>BumpontailEquilibrium</strong></a>)</li>
+<li><strong>to_index</strong> (<a href="classCollisionsIntra.html"><strong>CollisionsIntra</strong></a>)</li>
+<li><strong>transpose_to</strong> (<a href="classMPITransposeAllToAll.html"><strong>MPITransposeAllToAll</strong></a>)</li>
+<li><strong>temperature_eq</strong> (<a href="classMaxwellianEquilibrium.html"><strong>MaxwellianEquilibrium</strong></a>)</li>
+<li><strong>tensor_bspline_idx_range</strong> (<a href="classPolarBSplines_1_1Impl.html"><strong>PolarBSplines::Impl</strong></a>)</li>
+<li><strong>templated_weak_integral_element</strong> (<a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>)</li>
+<li><strong>theta_mod</strong> (<a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>)</li>
+<li><strong>to_discrete_element</strong> (<a href="classQuadrature.html"><strong>Quadrature</strong></a>)</li>
+<li><strong>Tensor</strong> (<a href="classTensor.html"><strong>Tensor</strong></a>)</li>
+</ul>
+<h2 id="u">u</h2>
+<ul>
+<li><strong>update</strong> (<a href="classCrankNicolson.html"><strong>CrankNicolson</strong></a>, <a href="classEuler.html"><strong>Euler</strong></a>, <a href="classITimeStepper.html"><strong>ITimeStepper</strong></a>, <a href="classRK2.html"><strong>RK2</strong></a>, <a href="classRK3.html"><strong>RK3</strong></a>, <a href="classRK4.html"><strong>RK4</strong></a>)</li>
+<li><strong>unify_value_at_centre_pt</strong> (<a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a>)</li>
+</ul>
+<h2 id="v">v</h2>
+<ul>
+<li><strong>VectorField</strong> (<a href="classVectorField.html"><strong>VectorField</strong></a>)</li>
+<li><strong>VectorFieldMem</strong> (<a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a>)</li>
+<li><strong>VectorMapper</strong> (<a href="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.html"><strong>VectorMapper&lt; VectorIndexSet&lt; XIn, YIn &gt;, VectorIndexSet&lt; XOut, YOut &gt;, Mapping, ExecSpace &gt;</strong></a>)</li>
+<li><strong>VortexMergerDensitySolution</strong> (<a href="classVortexMergerDensitySolution.html"><strong>VortexMergerDensitySolution</strong></a>)</li>
+<li><strong>VortexMergerEquilibria</strong> (<a href="classVortexMergerEquilibria.html"><strong>VortexMergerEquilibria</strong></a>)</li>
+</ul>
+<h2 id="w">w</h2>
+<ul>
+<li><strong>weak_integral_element</strong> (<a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>)</li>
+</ul>
+<h2 id="_1">~</h2>
+<ul>
+<li><strong>~BarycentricToCartesian</strong> (<a href="classBarycentricToCartesian.html"><strong>BarycentricToCartesian</strong></a>)</li>
+<li><strong>~BslAdvection1D</strong> (<a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a>)</li>
+<li><strong>~BslAdvectionRTheta</strong> (<a href="classBslAdvectionRTheta.html"><strong>BslAdvectionRTheta</strong></a>)</li>
+<li><strong>~BslAdvectionSpatial</strong> (<a href="classBslAdvectionSpatial.html"><strong>BslAdvectionSpatial</strong></a>)</li>
+<li><strong>~BslAdvectionVelocity</strong> (<a href="classBslAdvectionVelocity.html"><strong>BslAdvectionVelocity</strong></a>)</li>
+<li><strong>~BumpontailEquilibrium</strong> (<a href="classBumpontailEquilibrium.html"><strong>BumpontailEquilibrium</strong></a>)</li>
+<li><strong>~CartesianToBarycentric</strong> (<a href="classCartesianToBarycentric.html"><strong>CartesianToBarycentric</strong></a>)</li>
+<li><strong>~CartesianToCircular</strong> (<a href="classCartesianToCircular.html"><strong>CartesianToCircular</strong></a>)</li>
+<li><strong>~CartesianToCzarny</strong> (<a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a>)</li>
+<li><strong>~CircularToCartesian</strong> (<a href="classCircularToCartesian.html"><strong>CircularToCartesian</strong></a>)</li>
+<li><strong>~CollisionOperator</strong> (<a href="classCollisionOperator.html"><strong>CollisionOperator</strong></a>)</li>
+<li><strong>~CzarnyToCartesian</strong> (<a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>)</li>
+<li><strong>~DerivField</strong> (<a href="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.html"><strong>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</strong></a>)</li>
+<li><strong>~DerivFieldCommon</strong> (<a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html"><strong>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</strong></a>)</li>
+<li><strong>~DerivFieldMem</strong> (<a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html"><strong>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</strong></a>)</li>
+<li><strong>~EdgeTransformation</strong> (<a href="classEdgeTransformation.html"><strong>EdgeTransformation</strong></a>)</li>
+<li><strong>~FluidMoments</strong> (<a href="classFluidMoments.html"><strong>FluidMoments</strong></a>)</li>
+<li><strong>~IAdvectionRTheta</strong> (<a href="classIAdvectionRTheta.html"><strong>IAdvectionRTheta</strong></a>)</li>
+<li><strong>~IAdvectionSpatial</strong> (<a href="classIAdvectionSpatial.html"><strong>IAdvectionSpatial</strong></a>)</li>
+<li><strong>~IAdvectionVelocity</strong> (<a href="classIAdvectionVelocity.html"><strong>IAdvectionVelocity</strong></a>)</li>
+<li><strong>~IBoltzmannSolver</strong> (<a href="classIBoltzmannSolver.html"><strong>IBoltzmannSolver</strong></a>)</li>
+<li><strong>~IEquilibrium</strong> (<a href="classIEquilibrium.html"><strong>IEquilibrium</strong></a>)</li>
+<li><strong>~IInitialisation</strong> (<a href="classIInitialisation.html"><strong>IInitialisation</strong></a>)</li>
+<li><strong>~IInterpolator</strong> (<a href="classIInterpolator.html"><strong>IInterpolator</strong></a>)</li>
+<li><strong>~IInterpolator2D</strong> (<a href="classIInterpolator2D.html"><strong>IInterpolator2D</strong></a>)</li>
+<li><strong>~IPolarFootFinder</strong> (<a href="classIPolarFootFinder.html"><strong>IPolarFootFinder</strong></a>)</li>
+<li><strong>~IPreallocatableInterpolator</strong> (<a href="classIPreallocatableInterpolator.html"><strong>IPreallocatableInterpolator</strong></a>)</li>
+<li><strong>~IQNSolver</strong> (<a href="classIQNSolver.html"><strong>IQNSolver</strong></a>)</li>
+<li><strong>~IRightHandSide</strong> (<a href="classIRightHandSide.html"><strong>IRightHandSide</strong></a>)</li>
+<li><strong>~ITimeSolver</strong> (<a href="classITimeSolver.html"><strong>ITimeSolver</strong></a>)</li>
+<li><strong>~ITimeSolverRTheta</strong> (<a href="classITimeSolverRTheta.html"><strong>ITimeSolverRTheta</strong></a>)</li>
+<li><strong>~IVlasovSolver</strong> (<a href="classIVlasovSolver.html"><strong>IVlasovSolver</strong></a>)</li>
+<li><strong>~KelvinHelmholtzInstabilityInitialisation</strong> (<a href="classKelvinHelmholtzInstabilityInitialisation.html"><strong>KelvinHelmholtzInstabilityInitialisation</strong></a>)</li>
+<li><strong>~KineticSource</strong> (<a href="classKineticSource.html"><strong>KineticSource</strong></a>)</li>
+<li><strong>~KrookSourceAdaptive</strong> (<a href="classKrookSourceAdaptive.html"><strong>KrookSourceAdaptive</strong></a>)</li>
+<li><strong>~KrookSourceConstant</strong> (<a href="classKrookSourceConstant.html"><strong>KrookSourceConstant</strong></a>)</li>
+<li><strong>~LagrangeInterpolator</strong> (<a href="classLagrangeInterpolator.html"><strong>LagrangeInterpolator</strong></a>)</li>
+<li><strong>~MatchingIdxSlice</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>
+<li><strong>~Matrix</strong> (<a href="classMatrix.html"><strong>Matrix</strong></a>)</li>
+<li><strong>~MatrixBatch</strong> (<a href="classMatrixBatch.html"><strong>MatrixBatch</strong></a>)</li>
+<li><strong>~MaxwellianEquilibrium</strong> (<a href="classMaxwellianEquilibrium.html"><strong>MaxwellianEquilibrium</strong></a>)</li>
+<li><strong>~MpiSplitVlasovSolver</strong> (<a href="classMpiSplitVlasovSolver.html"><strong>MpiSplitVlasovSolver</strong></a>)</li>
+<li><strong>~MultipatchField</strong> (<a href="classMultipatchField.html"><strong>MultipatchField</strong></a>)</li>
+<li><strong>~MultipatchFieldMem</strong> (<a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a>)</li>
+<li><strong>~MultipatchSplineBuilder</strong> (<a href="classMultipatchSplineBuilder.html"><strong>MultipatchSplineBuilder</strong></a>)</li>
+<li><strong>~MultipatchSplineBuilder2D</strong> (<a href="classMultipatchSplineBuilder2D.html"><strong>MultipatchSplineBuilder2D</strong></a>)</li>
+<li><strong>~MultipatchSplineEvaluator2D</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
+<li><strong>~MultipatchType</strong> (<a href="classMultipatchType.html"><strong>MultipatchType</strong></a>)</li>
+<li><strong>~NoPerturbInitialisation</strong> (<a href="classNoPerturbInitialisation.html"><strong>NoPerturbInitialisation</strong></a>)</li>
+<li><strong>~NullAdvectionVelocity</strong> (<a href="classNullAdvectionVelocity.html"><strong>NullAdvectionVelocity</strong></a>)</li>
+<li><strong>~NullQNSolver</strong> (<a href="classNullQNSolver.html"><strong>NullQNSolver</strong></a>)</li>
+<li><strong>~OnionPatchLocator</strong> (<a href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.html"><strong>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;</strong></a>)</li>
+<li><strong>~Impl</strong> (<a href="classPolarBSplines_1_1Impl.html"><strong>PolarBSplines::Impl</strong></a>, <a href="classTriangularBernsteinPolynomialBasis_1_1Impl.html"><strong>TriangularBernsteinPolynomialBasis::Impl</strong></a>)</li>
+<li><strong>~PolarSplineEvaluator</strong> (<a href="classPolarSplineEvaluator.html"><strong>PolarSplineEvaluator</strong></a>)</li>
+<li><strong>~PreallocatableLagrangeInterpolator</strong> (<a href="classPreallocatableLagrangeInterpolator.html"><strong>PreallocatableLagrangeInterpolator</strong></a>)</li>
+<li><strong>~PreallocatableSplineInterpolator</strong> (<a href="classPreallocatableSplineInterpolator.html"><strong>PreallocatableSplineInterpolator</strong></a>)</li>
+<li><strong>~PredCorr</strong> (<a href="classPredCorr.html"><strong>PredCorr</strong></a>)</li>
+<li><strong>~PredCorrRK2XY</strong> (<a href="classPredCorrRK2XY.html"><strong>PredCorrRK2XY</strong></a>)</li>
+<li><strong>~QNSolver</strong> (<a href="classQNSolver.html"><strong>QNSolver</strong></a>)</li>
+<li><strong>~RestartInitialisation</strong> (<a href="classRestartInitialisation.html"><strong>RestartInitialisation</strong></a>)</li>
+<li><strong>~SingleModePerturbInitialisation</strong> (<a href="classSingleModePerturbInitialisation.html"><strong>SingleModePerturbInitialisation</strong></a>)</li>
+<li><strong>~SplineInterpolator</strong> (<a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a>)</li>
+<li><strong>~SplitRightHandSideSolver</strong> (<a href="classSplitRightHandSideSolver.html"><strong>SplitRightHandSideSolver</strong></a>)</li>
+<li><strong>~SplitVlasovSolver</strong> (<a href="classSplitVlasovSolver.html"><strong>SplitVlasovSolver</strong></a>)</li>
+<li><strong>~VectorField</strong> (<a href="classVectorField.html"><strong>VectorField</strong></a>)</li>
+<li><strong>~VectorFieldMem</strong> (<a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a>)</li>
+<li><strong>~IndexedTensor</strong> (<a href="classtensor__tools_1_1IndexedTensor.html"><strong>tensor_tools::IndexedTensor</strong></a>)</li>
+</ul></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/gyselax/gyselalibxx/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../docs/jscript/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

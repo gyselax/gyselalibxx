@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_51031f497920158ed20948cdaeaff0bc" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation</compoundname>
+    <innerfile refid="geometryXYVxVy_2initialisation_2iequilibrium_8hpp">iequilibrium.hpp</innerfile>
+    <innerfile refid="geometryXYVxVy_2initialisation_2iinitialisation_8hpp">iinitialisation.hpp</innerfile>
+    <innerfile refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8cpp">maxwellianequilibrium.cpp</innerfile>
+    <innerfile refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8hpp">maxwellianequilibrium.hpp</innerfile>
+    <innerfile refid="geometryXYVxVy_2initialisation_2singlemodeperturbinitialisation_8cpp">singlemodeperturbinitialisation.cpp</innerfile>
+    <innerfile refid="geometryXYVxVy_2initialisation_2singlemodeperturbinitialisation_8hpp">singlemodeperturbinitialisation.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/"/>
+  </compounddef>
+</doxygen>

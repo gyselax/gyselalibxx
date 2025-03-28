@@ -1,0 +1,468 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classKrookSourceAdaptive" kind="class" language="C++" prot="public">
+    <compoundname>KrookSourceAdaptive</compoundname>
+    <basecompoundref refid="classIRightHandSide" prot="public" virt="non-virtual">IRightHandSide</basecompoundref>
+    <includes refid="krook__source__adaptive_8hpp" local="no">krook_source_adaptive.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classKrookSourceAdaptive_1a64333f1b93ac51869c19567500beb3c9" prot="private" static="no" mutable="no">
+        <type>RhsType</type>
+        <definition>RhsType KrookSourceAdaptive::m_type</definition>
+        <argsstring></argsstring>
+        <name>m_type</name>
+        <qualifiedname>KrookSourceAdaptive::m_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" line="27" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classKrookSourceAdaptive_1a91b47bd34aca67b51814f9cab29b9ed7" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double KrookSourceAdaptive::m_extent</definition>
+        <argsstring></argsstring>
+        <name>m_extent</name>
+        <qualifiedname>KrookSourceAdaptive::m_extent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" line="28" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classKrookSourceAdaptive_1a39b9e91f59812ee8f3c348cee32d1eb7" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double KrookSourceAdaptive::m_stiffness</definition>
+        <argsstring></argsstring>
+        <name>m_stiffness</name>
+        <qualifiedname>KrookSourceAdaptive::m_stiffness</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" line="29" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classKrookSourceAdaptive_1a558ffc9791513bdc09c11a7c40c7f6cf" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double KrookSourceAdaptive::m_amplitude</definition>
+        <argsstring></argsstring>
+        <name>m_amplitude</name>
+        <qualifiedname>KrookSourceAdaptive::m_amplitude</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" line="30" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classKrookSourceAdaptive_1a9e6ed95dd7642e97a9ab640b17cd0078" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double KrookSourceAdaptive::m_density</definition>
+        <argsstring></argsstring>
+        <name>m_density</name>
+        <qualifiedname>KrookSourceAdaptive::m_density</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" line="31" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classKrookSourceAdaptive_1a7d636ce9dfb7fa5a07821666b7ce78dc" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double KrookSourceAdaptive::m_temperature</definition>
+        <argsstring></argsstring>
+        <name>m_temperature</name>
+        <qualifiedname>KrookSourceAdaptive::m_temperature</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" line="32" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classKrookSourceAdaptive_1a0257ad19cb3874f0528c4b30fe08503a" prot="private" static="no" mutable="no">
+        <type>DFieldMemX</type>
+        <definition>DFieldMemX KrookSourceAdaptive::m_mask</definition>
+        <argsstring></argsstring>
+        <name>m_mask</name>
+        <qualifiedname>KrookSourceAdaptive::m_mask</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" line="33" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classKrookSourceAdaptive_1ad7086c32113967edaabce132939c10d3" prot="private" static="no" mutable="no">
+        <type>DFieldMemVx</type>
+        <definition>DFieldMemVx KrookSourceAdaptive::m_ftarget</definition>
+        <argsstring></argsstring>
+        <name>m_ftarget</name>
+        <qualifiedname>KrookSourceAdaptive::m_ftarget</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" line="34" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classKrookSourceAdaptive_1a2e0a23353e923920745e63ec47543fbc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>KrookSourceAdaptive::KrookSourceAdaptive</definition>
+        <argsstring>(IdxRangeX const &amp;gridx, IdxRangeVx const &amp;gridvx, RhsType const type, double extent, double stiffness, double amplitude, double density, double temperature)</argsstring>
+        <name>KrookSourceAdaptive</name>
+        <qualifiedname>KrookSourceAdaptive::KrookSourceAdaptive</qualifiedname>
+        <param>
+          <type>IdxRangeX const &amp;</type>
+          <declname>gridx</declname>
+        </param>
+        <param>
+          <type>IdxRangeVx const &amp;</type>
+          <declname>gridvx</declname>
+        </param>
+        <param>
+          <type>RhsType const</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>extent</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>stiffness</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>amplitude</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>density</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>temperature</declname>
+        </param>
+        <briefdescription>
+<para>Creates an instance of the <ref refid="classKrookSourceAdaptive" kindref="compound">KrookSourceAdaptive</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">gridx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mesh in the x direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gridvx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mesh in the vx direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A RhsType parameter that defines the region where the operator is active. If type = Source, the mask equals one in the central zone of the plasma of width extent; If type = Sink, the mask equals zero in the central zone of the plasma of width extent; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">extent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that sets the extent of the source. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stiffness</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that sets the stiffness of the source extent. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">amplitude</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that sets the amplitude of the source. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">density</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that sets the density of the Maxwellian ftarget. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">temperature</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that sets the temperature of the Maxwellian ftarget. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" line="50" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.cpp" bodystart="17" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classKrookSourceAdaptive_1a7bddcb9927245e841113f9483271e6a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>KrookSourceAdaptive::KrookSourceAdaptive</definition>
+        <argsstring>(KrookSourceAdaptive &amp;&amp;)=default</argsstring>
+        <name>KrookSourceAdaptive</name>
+        <qualifiedname>KrookSourceAdaptive::KrookSourceAdaptive</qualifiedname>
+        <param>
+          <type><ref refid="classKrookSourceAdaptive" kindref="compound">KrookSourceAdaptive</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>Creates an instance of the <ref refid="classKrookSourceAdaptive" kindref="compound">KrookSourceAdaptive</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" line="63" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classKrookSourceAdaptive_1ad5ad503ec574995461c1f8332543c975" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>KrookSourceAdaptive::~KrookSourceAdaptive</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~KrookSourceAdaptive</name>
+        <qualifiedname>KrookSourceAdaptive::~KrookSourceAdaptive</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" line="65" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classKrookSourceAdaptive_1a1f7a6ce3a4f5f93214352a4787ba7888" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>DFieldSpXVx</type>
+        <definition>DFieldSpXVx KrookSourceAdaptive::operator()</definition>
+        <argsstring>(DFieldSpXVx allfdistribu, double dt) const override</argsstring>
+        <name>operator()</name>
+        <qualifiedname>KrookSourceAdaptive::operator()</qualifiedname>
+        <reimplements refid="classIRightHandSide_1a00f66ff88f6b0fd17a931a09b1ddb2d3">operator()</reimplements>
+        <param>
+          <type>DFieldSpXVx</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+<para>Update the distribution function following the <ref refid="classKrookSourceAdaptive" kindref="compound">KrookSourceAdaptive</ref> operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Update the distribution function for both electrons and ions to show how it is modified following the effect of the <ref refid="classKrookSourceAdaptive" kindref="compound">KrookSourceAdaptive</ref> operator.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The distribution function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A field referencing the distribution function passed as argument. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" line="78" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.cpp" bodystart="138" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="classKrookSourceAdaptive_1aa21bf44587670275cda2d33049a5227c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void KrookSourceAdaptive::get_amplitudes</definition>
+        <argsstring>(DFieldSpX amplitudes, DConstFieldSpXVx allfdistribu) const</argsstring>
+        <name>get_amplitudes</name>
+        <qualifiedname>KrookSourceAdaptive::get_amplitudes</qualifiedname>
+        <param>
+          <type>DFieldSpX</type>
+          <declname>amplitudes</declname>
+        </param>
+        <param>
+          <type>DConstFieldSpXVx</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <briefdescription>
+<para>Computes the amplitude coefficient of the <ref refid="classKrookSourceAdaptive" kindref="compound">KrookSourceAdaptive</ref> operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This coefficient depends on the considered species and ensures that the operator conserves the charge locally.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">amplitudes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A field that contains on output the amplitude coefficients for each species. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The distribution function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" line="91" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.cpp" bodystart="75" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classKrookSourceAdaptive_1a4a7cd940383e05f3425a9023324ee037" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void KrookSourceAdaptive::get_derivative</definition>
+        <argsstring>(DFieldSpXVx df, DConstFieldSpXVx f, DConstFieldSpXVx f0) const</argsstring>
+        <name>get_derivative</name>
+        <qualifiedname>KrookSourceAdaptive::get_derivative</qualifiedname>
+        <param>
+          <type>DFieldSpXVx</type>
+          <declname>df</declname>
+        </param>
+        <param>
+          <type>DConstFieldSpXVx</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>DConstFieldSpXVx</type>
+          <declname>f0</declname>
+        </param>
+        <briefdescription>
+<para>Computes the expression of the time derivative of the distribution function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The expression is df = -amplitude * mask * (f - ftarget). This function is used for the time integrator (<ref refid="classRK2" kindref="compound">RK2</ref> for instance).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">df</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time derivative. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The distribution function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">f0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An optional parameter. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" line="103" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.cpp" bodystart="112" bodyend="136"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class that describes a source of particles. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The <ref refid="classKrookSourceAdaptive" kindref="compound">KrookSourceAdaptive</ref> class solves the following evolution equation: df/dt = -amplitude * mask * (f - ftarget)</para>
+<para>mask defines the spatial region where the operator is active.</para>
+<para>ftarget is a maxwellian characterised by density and temperature, and a zero fluid velocity.</para>
+<para>amplitude depends on space, time and the considered species so that:<itemizedlist>
+<listitem><para>amplitude(ions) = m_amplitude = constant <linebreak/>
+</para>
+</listitem><listitem><para>amplitude(electrons, x, t) = m_amplitude (density_ions(x,t) - m_density) / (density_electrons(x,t) - m_density) <linebreak/>
+ so that the operator conserves locally the charge.</para>
+</listitem></itemizedlist>
+</para>
+<para>The complete description of the operator can be found in <ulink url="https://github.com/gyselax/gyselalibxx/blob/main/doc/geometryXVx/krook_source.pdf">rhs docs</ulink>. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>IRightHandSide</label>
+        <link refid="classIRightHandSide"/>
+      </node>
+      <node id="1">
+        <label>KrookSourceAdaptive</label>
+        <link refid="classKrookSourceAdaptive"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>IRightHandSide</label>
+        <link refid="classIRightHandSide"/>
+      </node>
+      <node id="1">
+        <label>KrookSourceAdaptive</label>
+        <link refid="classKrookSourceAdaptive"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" line="24" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.hpp" bodystart="25" bodyend="104"/>
+    <listofallmembers>
+      <member refid="classKrookSourceAdaptive_1aa21bf44587670275cda2d33049a5227c" prot="public" virt="non-virtual"><scope>KrookSourceAdaptive</scope><name>get_amplitudes</name></member>
+      <member refid="classKrookSourceAdaptive_1a4a7cd940383e05f3425a9023324ee037" prot="public" virt="non-virtual"><scope>KrookSourceAdaptive</scope><name>get_derivative</name></member>
+      <member refid="classKrookSourceAdaptive_1a2e0a23353e923920745e63ec47543fbc" prot="public" virt="non-virtual"><scope>KrookSourceAdaptive</scope><name>KrookSourceAdaptive</name></member>
+      <member refid="classKrookSourceAdaptive_1a7bddcb9927245e841113f9483271e6a0" prot="public" virt="non-virtual"><scope>KrookSourceAdaptive</scope><name>KrookSourceAdaptive</name></member>
+      <member refid="classKrookSourceAdaptive_1a558ffc9791513bdc09c11a7c40c7f6cf" prot="private" virt="non-virtual"><scope>KrookSourceAdaptive</scope><name>m_amplitude</name></member>
+      <member refid="classKrookSourceAdaptive_1a9e6ed95dd7642e97a9ab640b17cd0078" prot="private" virt="non-virtual"><scope>KrookSourceAdaptive</scope><name>m_density</name></member>
+      <member refid="classKrookSourceAdaptive_1a91b47bd34aca67b51814f9cab29b9ed7" prot="private" virt="non-virtual"><scope>KrookSourceAdaptive</scope><name>m_extent</name></member>
+      <member refid="classKrookSourceAdaptive_1ad7086c32113967edaabce132939c10d3" prot="private" virt="non-virtual"><scope>KrookSourceAdaptive</scope><name>m_ftarget</name></member>
+      <member refid="classKrookSourceAdaptive_1a0257ad19cb3874f0528c4b30fe08503a" prot="private" virt="non-virtual"><scope>KrookSourceAdaptive</scope><name>m_mask</name></member>
+      <member refid="classKrookSourceAdaptive_1a39b9e91f59812ee8f3c348cee32d1eb7" prot="private" virt="non-virtual"><scope>KrookSourceAdaptive</scope><name>m_stiffness</name></member>
+      <member refid="classKrookSourceAdaptive_1a7d636ce9dfb7fa5a07821666b7ce78dc" prot="private" virt="non-virtual"><scope>KrookSourceAdaptive</scope><name>m_temperature</name></member>
+      <member refid="classKrookSourceAdaptive_1a64333f1b93ac51869c19567500beb3c9" prot="private" virt="non-virtual"><scope>KrookSourceAdaptive</scope><name>m_type</name></member>
+      <member refid="classKrookSourceAdaptive_1a1f7a6ce3a4f5f93214352a4787ba7888" prot="public" virt="virtual"><scope>KrookSourceAdaptive</scope><name>operator()</name></member>
+      <member refid="classIRightHandSide_1a46c157197ef52a7dd221e687584b3d1c" prot="public" virt="virtual"><scope>KrookSourceAdaptive</scope><name>~IRightHandSide</name></member>
+      <member refid="classKrookSourceAdaptive_1ad5ad503ec574995461c1f8332543c975" prot="public" virt="non-virtual"><scope>KrookSourceAdaptive</scope><name>~KrookSourceAdaptive</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

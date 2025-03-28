@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structRefinedDiscreteToCartesianBuilder_1_1BSplinesRRefined" kind="struct" language="C++" prot="public">
+    <compoundname>RefinedDiscreteToCartesianBuilder::BSplinesRRefined</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::conditional_t&lt; BSplinesROriginal::is_uniform(), ddc::UniformBSplines&lt; R, BSplinesROriginal::degree()&gt;, ddc::NonUniformBSplines&lt; R, BSplinesROriginal::degree()&gt; &gt;</basecompoundref>
+    <includes refid="discrete__mapping__builder_8hpp" local="no">discrete_mapping_builder.hpp</includes>
+    <briefdescription>
+<para>The type of the radial B-splines on which the new mapping will be defined. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::BSplinesRRefined</label>
+        <link refid="structRefinedDiscreteToCartesianBuilder_1_1BSplinesRRefined"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::conditional_t&lt; BSplinesROriginal::is_uniform(), ddc::UniformBSplines&lt; R, BSplinesROriginal::degree()&gt;, ddc::NonUniformBSplines&lt; R, BSplinesROriginal::degree()&gt; &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::BSplinesRRefined</label>
+        <link refid="structRefinedDiscreteToCartesianBuilder_1_1BSplinesRRefined"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::conditional_t&lt; BSplinesROriginal::is_uniform(), ddc::UniformBSplines&lt; R, BSplinesROriginal::degree()&gt;, ddc::NonUniformBSplines&lt; R, BSplinesROriginal::degree()&gt; &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="197" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="202" bodyend="203"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
