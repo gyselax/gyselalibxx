@@ -1,11 +1,20 @@
-# Gyselalib++
+# Gyselalib++ Installation
 
-Gyselalib++ is a collection of C++ components for writing gyrokinetic semi-lagrangian codes.
-If this is your first interaction with gyselalib++ please check out the documentation on [Getting Started with Gyselalib++](getting_started.md).
+This document provides comprehensive instructions for installing, compiling, and running Gyselalib++ on various systems.
 
-## Set-up
+## Table of Contents
 
-In order to set up Gyselalib++ on a new machine, simply run:
+1. [Cloning the Repository](#cloning-the-repository)
+2. [Environment Setup](#environment-setup)
+3. [Compilation](#compilation)
+4. [Dependencies Management](#dependencies-management)
+5. [Running Tests](#running-tests)
+
+## Cloning the Repository
+
+To get started with Gyselalib++, you'll need to clone the repository along with its submodules. You can do this using either SSH or HTTPS:
+
+### SSH Method (recommended for developers with SSH keys configured)
 
 ```bash
 git clone --recurse-submodules git@gitlab.maisondelasimulation.fr:gysela-developpers/gyselalibxx.git gyselalibxx
@@ -13,7 +22,7 @@ cd gyselalibxx
 ./bin/install-hooks
 ```
 
-or
+### HTTPS Method
 
 ```bash
 git clone --recurse-submodules https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx.git gyselalibxx
@@ -21,9 +30,19 @@ cd gyselalibxx
 ./bin/install-hooks
 ```
 
-on a machine for which Gyselalib++ is already used an environment script may be available to set up the necessary modules etc.
+The `install-hooks` script sets up necessary git hooks for the repository.
 
-Please check the `toolchains/` folder to find the existing configurations. See the documentation about [toolchains](../../toolchains/README.md) for more information on the provided files.
+## Environment Setup
+
+Gyselalib++ requires specific environment configurations depending on your system. Pre-configured environment scripts are available in the `toolchains/` directory.
+
+### Available Toolchains
+
+The toolchains are organised by hardware architecture. For detailed information about available toolchains, see the [toolchains documentation](../../toolchains/README.md).
+
+On a machine for which Gyselalib++ is already used an environment script may be available to set up the necessary modules etc.
+
+### Example: Adastra Supercomputer Setup
 
 For example in order to set up the environment on the Adastra supercomputer simply run:
 
@@ -43,16 +62,17 @@ cmake -DCMAKE_TOOLCHAIN_FILE=<TOOLCHAIN_FILE> ..
 make
 ```
 
+### Docker Toolchains
+
 The toolchains are found in the folder `toolchains/`. Each toolchain is designed for specific hardware with the exception of those in the folder `docker.gyselalibxx_env/`. These toolchains can be used with the docker environment on most hardware.
 
 For more details about toolchains, see the documentation about [toolchains](../../toolchains/README.md).
 
-## Dependencies
+## Dependencies Management
 
-To install dependencies through spack, first follow the the 3 first steps of
+1. To install dependencies through spack, first follow the the 3 first steps of
 <https://github.com/pdidev/spack>
-
-Then execute the following:
+2. Then execute the following:
 
 ```sh
 spack env create gyselalibxx spack.yaml
@@ -61,21 +81,24 @@ spack concretize --reuse
 spack install
 ```
 
-For example, you can find a Dockerfile installing these dependencies on ubuntu in
+### Docker Example
+
+For example, you can find a Dockerfile installing these dependencies on Ubuntu at
 `docker/gyselalibxx_env/Dockerfile`.
 
-## Execution
+## Running Tests
 
-to run the tests:
+After successful compilation, you can run the test suite with:
 
 ```bash
 ctest --output-on-failure
 ```
 
-Then, just have a look at `tests/geometryXVx/landau/fft/growthrate_t0.0to45.0.png`:
+### Expected Test Results
 
-![tests/geometryXVx/landau/fft/growthrate\_t0.0to45.0.png](https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx/-/jobs/artifacts/main/raw/build/tests/geometryXVx/landau/fft/growthrate_t0.0to45.0.png?job=cmake_tests_Release "Landau damping rate")
+Upon successful execution, you should see output plots demonstrating the Landau damping characteristics:
 
-and `tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png`:
-
-![tests/geometryXVx/landau/fft/frequency\_t0.0to45.0.png](https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx/-/jobs/artifacts/main/raw/build/tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png?job=cmake_tests_Release "Landau damping frequency")
+1. **Landau Damping Rate**
+    Growth Rate Plot: `tests/geometryXVx/landau/fft/growthrate\_t0.0to45.0.png`
+2. **Landau Damping Frequency**
+    Frequency Plot: `tests/geometryXVx/landau/fft/frequency\_t0.0to45.0.png`

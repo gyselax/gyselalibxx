@@ -12,7 +12,9 @@ nav:
       - Home: README.md                         # Main landing page
       - First Steps:
         - Getting Started: docs/first_steps/getting_started.md
-        - Installation: docs/first_steps/install.md # Installation guide
+        - Installation:
+            - docs/first_steps/install.md # Installation guide
+            - toolchains/README.md
         - DDC in Gyselalibxx: docs/first_steps/DDC_in_gyselalibxx.md
   - Standards:
       - Coding Standard: docs/standards/CODING_STANDARD.md
@@ -48,7 +50,7 @@ nav:
 # Recommended for strict MkDocs diagnostics
 validation:
     not_found: warn
-    omitted_files: warn
+    omitted_files: info
     absolute_links: warn  # Or 'relative_to_docs' - new in MkDocs 1.6
     unrecognized_links: warn
     anchors: warn  # New in MkDocs 1.6
