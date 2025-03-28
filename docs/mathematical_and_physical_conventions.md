@@ -17,7 +17,7 @@ Let us consider a system of coordinates denoted by $`\{q^i\}_{ i \in [1, N]}`$, 
 q^i = q^i(x^1, \ldots , x^N) \quad \forall i \in [1, N].
 ```
 
-Note that even though an inverse of the functions $`q^i(x^1, \ldots , x^N)`$ must exist so that the coordinate transform is valid, it is not always possible to write an explicit formula for such inverse. The surface defined by $`q^i = \text{constant}`$ is called a *coordinate surface*, the intersection of these surfaces define *coordinate curves*. A *coordinate axis* is locally defined as the axis tangent to a given coordinate curve. As their name suggests, coordinate curves do not form straight lines in general. An illustration for these geometrical concepts is given in the following figure.
+Note that even though an inverse of the functions $`q^i(x^1, \ldots , x^N)`$ must exist so that the coordinate transform is valid, it is not always possible to write an explicit formula for such inverse. One *i coordinate surface* is defined as as $`q^i = \text{constant}`$ . One *i coordinate curve* is defined as the intersection of a serie of j coordinate surfaces $`\forall j \in [1, N]`$ with $` j\neq i`$. A *i coordinate axis* is defined as the tangent of the "i coordinate curve". As their name suggests, coordinate curves do not form straight lines in general. An illustration for these geometrical concepts is given in the following figure.
 
 ![Coordinate curves, surfaces and axes in a three-dimensional space](./curvilinear_coordinates_def.png "")
 
