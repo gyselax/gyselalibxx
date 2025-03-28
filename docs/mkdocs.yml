@@ -23,6 +23,7 @@ nav:
       - Adding Docs: docs/development/Adding_docs.md
       - Using Git: docs/development/Using_git.md
       - Developer FAQ: docs/development/developer_FAQ.md
+  - User:
       - Gyselalib Source: src
       - Gyselalib Simulations: simulations
       - Gyselalib Tests: tests
