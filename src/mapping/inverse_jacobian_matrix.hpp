@@ -22,6 +22,10 @@ private:
     using ValidResultIndices = ddc::to_type_seq_t<typename Mapping::CoordResult>;
     using DimArg0 = ddc::type_seq_element_t<0, ValidArgIndices>;
     using DimArg1 = ddc::type_seq_element_t<1, ValidArgIndices>;
+    using DimArg0_cov = typename DimArg0::Dual;
+    using DimArg1_cov = typename ddc::type_seq_element_t<1, ValidArgIndices>::Dual;
+    using DimRes0 = typename ddc::type_seq_element_t<0, ValidResultIndices>;
+    using DimRes1 = typename ddc::type_seq_element_t<1, ValidResultIndices>;
     using DimRes0_cov = typename ddc::type_seq_element_t<0, ValidResultIndices>::Dual;
     using DimRes1_cov = typename ddc::type_seq_element_t<1, ValidResultIndices>::Dual;
 
@@ -87,7 +91,8 @@ public:
             static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
             double jacob = m_mapping.jacobian(coord);
             assert(fabs(jacob) > 1e-15);
-            return m_mapping.jacobian_22(coord) / jacob;
+            // J^{-1}(1,1) = J(2,2) / det(J)
+            return m_mapping.template jacobian_component<DimRes1, DimArg1_cov>(coord) / jacob;
         }
     }
 
@@ -109,7 +114,8 @@ public:
             static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
             double jacob = m_mapping.jacobian(coord);
             assert(fabs(jacob) > 1e-15);
-            return -m_mapping.jacobian_12(coord) / jacob;
+            // J^{-1}(1,2) = -J(1,2) / det(J)
+            return -m_mapping.template jacobian_component<DimRes0, DimArg1_cov>(coord) / jacob;
         }
     }
     /**
@@ -130,7 +136,8 @@ public:
             static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
             double jacob = m_mapping.jacobian(coord);
             assert(fabs(jacob) > 1e-15);
-            return -m_mapping.jacobian_21(coord) / jacob;
+            // J^{-1}(2,1) = -J(2,1) / det(J)
+            return -m_mapping.template jacobian_component<DimRes1, DimArg0_cov>(coord) / jacob;
         }
     }
 
@@ -152,7 +159,8 @@ public:
             static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
             double jacob = m_mapping.jacobian(coord);
             assert(fabs(jacob) > 1e-15);
-            return m_mapping.jacobian_11(coord) / jacob;
+            // J^{-1}(2,2) = J(1,1) / det(J)
+            return m_mapping.template jacobian_component<DimRes0, DimArg0_cov>(coord) / jacob;
         }
     }
 };
