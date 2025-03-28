@@ -1,9 +1,10 @@
 [default]
 locale = 'en-gb'
 extend-ignore-re = ["capitalize()",
-                    "MPI_\\S*",
-                    "PDI_\\S*",
-                    "ddc::\\S*",
+                    "MPI_[^(\\s]*",
+                    "PDI_[^(\\s]*",
+                    "CMAKE_\\S*",
+                    "ddc::[^(\\s]*",
                     "gko_exec->\\S*",
                     "on_finalize:",
                     "colors.Normalize",
@@ -14,7 +15,8 @@ extend-ignore-re = ["capitalize()",
                     "Gif-sur-Yvette"
                     ]
 extend-ignore-identifiers-re = [
-    "Comput. Phys. Commun."
+    "Comput. Phys. Commun.",
+    "J. Sci. Comput."
 ]
 
 [default.extend-words]
