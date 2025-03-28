@@ -20,7 +20,6 @@ An example of such a mask function can be found in
 
 When setting \( S(f) = 0 \), the equation is commonly referred to as the Vlasov equation.
 
-
 The implemented Boltzmann solvers are:
 
 - SplitRightHandSideSolver
