@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_8cedd1260cc2f2819c8df2fc66ad98b5" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools</compoundname>
+    <innerfile refid="matrix_8cpp">matrix.cpp</innerfile>
+    <innerfile refid="matrix_8hpp">matrix.hpp</innerfile>
+    <innerfile refid="matrix__banded_8cpp">matrix_banded.cpp</innerfile>
+    <innerfile refid="matrix__banded_8hpp">matrix_banded.hpp</innerfile>
+    <innerfile refid="matrix__batch_8hpp">matrix_batch.hpp</innerfile>
+    <innerfile refid="matrix__batch__csr_8hpp">matrix_batch_csr.hpp</innerfile>
+    <innerfile refid="matrix__batch__ell_8hpp">matrix_batch_ell.hpp</innerfile>
+    <innerfile refid="matrix__batch__tridiag_8hpp">matrix_batch_tridiag.hpp</innerfile>
+    <innerfile refid="matrix__centre__block_8cpp">matrix_centre_block.cpp</innerfile>
+    <innerfile refid="matrix__centre__block_8hpp">matrix_centre_block.hpp</innerfile>
+    <innerfile refid="matrix__corner__block_8cpp">matrix_corner_block.cpp</innerfile>
+    <innerfile refid="matrix__corner__block_8hpp">matrix_corner_block.hpp</innerfile>
+    <innerfile refid="matrix__dense_8cpp">matrix_dense.cpp</innerfile>
+    <innerfile refid="matrix__dense_8hpp">matrix_dense.hpp</innerfile>
+    <innerfile refid="matrix__pds__tridiag_8cpp">matrix_pds_tridiag.cpp</innerfile>
+    <innerfile refid="matrix__pds__tridiag_8hpp">matrix_pds_tridiag.hpp</innerfile>
+    <innerfile refid="matrix__periodic__banded_8cpp">matrix_periodic_banded.cpp</innerfile>
+    <innerfile refid="matrix__periodic__banded_8hpp">matrix_periodic_banded.hpp</innerfile>
+    <innerfile refid="matrix__utils_8hpp">matrix_utils.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/"/>
+  </compounddef>
+</doxygen>

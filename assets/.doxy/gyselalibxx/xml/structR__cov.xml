@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structR__cov" kind="struct" language="C++" prot="public">
+    <compoundname>R_cov</compoundname>
+    <includes refid="geometryRTheta_2geometry_2geometry_8hpp" local="no">geometry.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structR__cov_1a8730d9a5eb3d718d402cad8cbbc93f0d" prot="public" static="no">
+        <type><ref refid="structR" kindref="compound">R</ref></type>
+        <definition>using R_cov::Dual =  R</definition>
+        <argsstring></argsstring>
+        <name>Dual</name>
+        <qualifiedname>R_cov::Dual</qualifiedname>
+        <briefdescription>
+<para>A type-alias mapping to the covariant counterpart. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="87" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structR__cov_1a58a60dc474ebbb898aad2089c56da66c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>bool constexpr</type>
+        <definition>bool constexpr R_cov::PERIODIC</definition>
+        <argsstring></argsstring>
+        <name>PERIODIC</name>
+        <qualifiedname>R_cov::PERIODIC</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Define periodicity of the dimension. Here, not periodic. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="78" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structR__cov_1addc6f8ecfa472ef35669ef4d4b695089" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>bool constexpr</type>
+        <definition>bool constexpr R_cov::IS_COVARIANT</definition>
+        <argsstring></argsstring>
+        <name>IS_COVARIANT</name>
+        <qualifiedname>R_cov::IS_COVARIANT</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>A boolean indicating if dimension describes a covariant coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="81" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structR__cov_1ad33bfa8d84633a654f6d895b62e55bd3" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>bool constexpr</type>
+        <definition>bool constexpr R_cov::IS_CONTRAVARIANT</definition>
+        <argsstring></argsstring>
+        <name>IS_CONTRAVARIANT</name>
+        <qualifiedname>R_cov::IS_CONTRAVARIANT</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>A boolean indicating if dimension describes a contravariant coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="84" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Define non periodic real covariant <ref refid="structR" kindref="compound">R</ref> dimension. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="72" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="73" bodyend="88"/>
+    <listofallmembers>
+      <member refid="structR__cov_1a8730d9a5eb3d718d402cad8cbbc93f0d" prot="public" virt="non-virtual"><scope>R_cov</scope><name>Dual</name></member>
+      <member refid="structR__cov_1ad33bfa8d84633a654f6d895b62e55bd3" prot="public" virt="non-virtual"><scope>R_cov</scope><name>IS_CONTRAVARIANT</name></member>
+      <member refid="structR__cov_1addc6f8ecfa472ef35669ef4d4b695089" prot="public" virt="non-virtual"><scope>R_cov</scope><name>IS_COVARIANT</name></member>
+      <member refid="structR__cov_1a58a60dc474ebbb898aad2089c56da66c" prot="public" virt="non-virtual"><scope>R_cov</scope><name>PERIODIC</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

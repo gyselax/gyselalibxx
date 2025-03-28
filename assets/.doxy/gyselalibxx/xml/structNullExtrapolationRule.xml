@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structNullExtrapolationRule" kind="struct" language="C++" prot="public">
+    <compoundname>NullExtrapolationRule</compoundname>
+    <includes refid="null__extrapolation__rules_8hpp" local="no">null_extrapolation_rules.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structNullExtrapolationRule_1afff2dfac58dbcfcc760da499bb23b953" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>Dim</declname>
+            <defname>Dim</defname>
+          </param>
+          <param>
+            <type>template&lt; typename P &gt; typename</type>
+            <declname>SplinesOnPatch</declname>
+            <defname>SplinesOnPatch</defname>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>Patches</declname>
+            <defname>Patches</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION double</type>
+        <definition>KOKKOS_FUNCTION double NullExtrapolationRule::operator()</definition>
+        <argsstring>(Coord&lt; Dim... &gt; const &amp;coord_extrap, MultipatchType&lt; SplinesOnPatch, Patches... &gt; const &amp;patches_splines, int const out_of_bounds_idx) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>NullExtrapolationRule::operator()</qualifiedname>
+        <param>
+          <type>Coord&lt; Dim... &gt; const &amp;</type>
+          <declname>coord_extrap</declname>
+        </param>
+        <param>
+          <type><ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>&lt; SplinesOnPatch, Patches... &gt; const &amp;</type>
+          <declname>patches_splines</declname>
+        </param>
+        <param>
+          <type>int const</type>
+          <declname>out_of_bounds_idx</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate to zero the splines at a given coordinate outside of the splines domain. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord_extrap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Coordinate where we want to evaluate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">patches_splines</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Splines stored in a <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">out_of_bounds_idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of the localisation of the coordinate. It is supposed to be negative to be considered as outside of the domain. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A null double. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/null_extrapolation_rules.hpp" line="27" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/null_extrapolation_rules.hpp" bodystart="27" bodyend="34"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Define null extrapolation rule common to all geometries. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classMultipatchSplineEvaluator2D" kindref="compound">MultipatchSplineEvaluator2D</ref>. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/null_extrapolation_rules.hpp" line="16" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/null_extrapolation_rules.hpp" bodystart="17" bodyend="35"/>
+    <listofallmembers>
+      <member refid="structNullExtrapolationRule_1afff2dfac58dbcfcc760da499bb23b953" prot="public" virt="non-virtual"><scope>NullExtrapolationRule</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

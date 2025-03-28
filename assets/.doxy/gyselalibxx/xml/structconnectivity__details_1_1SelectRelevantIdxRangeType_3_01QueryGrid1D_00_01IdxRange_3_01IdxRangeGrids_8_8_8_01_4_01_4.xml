@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structconnectivity__details_1_1SelectRelevantIdxRangeType_3_01QueryGrid1D_00_01IdxRange_3_01IdxRangeGrids_8_8_8_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>connectivity_details::SelectRelevantIdxRangeType&lt; QueryGrid1D, IdxRange&lt; IdxRangeGrids... &gt; &gt;</compoundname>
+    <includes refid="connectivity__details_8hpp" local="no">connectivity_details.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class QueryGrid1D</type>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>IdxRangeGrids</declname>
+        <defname>IdxRangeGrids</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structconnectivity__details_1_1SelectRelevantIdxRangeType_3_01QueryGrid1D_00_01IdxRange_3_01IdxRangeGrids_8_8_8_01_4_01_4_1aaaf7c6c9ace8dd44ff08cd50695cb3ab" prot="public" static="no">
+        <type>std::conditional_t&lt; ddc::in_tags_v&lt; QueryGrid1D, ddc::detail::TypeSeq&lt; IdxRangeGrids... &gt; &gt;, ddc::detail::TypeSeq&lt; IdxRange&lt; IdxRangeGrids... &gt; &gt;, ddc::detail::TypeSeq&lt;&gt; &gt;</type>
+        <definition>using connectivity_details::SelectRelevantIdxRangeType&lt; QueryGrid1D, IdxRange&lt; IdxRangeGrids... &gt; &gt;::type =  std::conditional_t&lt; ddc::in_tags_v&lt;QueryGrid1D, ddc::detail::TypeSeq&lt;IdxRangeGrids...&gt; &gt;, ddc::detail::TypeSeq&lt;IdxRange&lt;IdxRangeGrids...&gt; &gt;, ddc::detail::TypeSeq&lt;&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>connectivity_details::SelectRelevantIdxRangeType&lt; QueryGrid1D, IdxRange&lt; IdxRangeGrids... &gt; &gt;::type</qualifiedname>
+        <briefdescription>
+<para>The type found by the class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="559" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="562" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Specialisation of <ref refid="structconnectivity__details_1_1SelectRelevantIdxRangeType" kindref="compound">SelectRelevantIdxRangeType</ref> to get access to the grids in the index range. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="556" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="557" bodyend="563"/>
+    <listofallmembers>
+      <member refid="structconnectivity__details_1_1SelectRelevantIdxRangeType_3_01QueryGrid1D_00_01IdxRange_3_01IdxRangeGrids_8_8_8_01_4_01_4_1aaaf7c6c9ace8dd44ff08cd50695cb3ab" prot="public" virt="non-virtual"><scope>connectivity_details::SelectRelevantIdxRangeType&lt; QueryGrid1D, IdxRange&lt; IdxRangeGrids... &gt; &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structCollisionsIntra_1_1GhostedVxStaggered" kind="struct" language="C++" prot="public">
+    <compoundname>CollisionsIntra::GhostedVxStaggered</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::conditional_t&lt; uniform_edge_v, UniformGridBase&lt; Vx &gt;, NonUniformGridBase&lt; Vx &gt; &gt;</basecompoundref>
+    <includes refid="collisions__intra_8hpp" local="no">collisions_intra.hpp</includes>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>A conditional type representing either a uniform or a non-uniform ghosted staggered vx mesh. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>CollisionsIntra::GhostedVxStaggered</label>
+        <link refid="structCollisionsIntra_1_1GhostedVxStaggered"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::conditional_t&lt; uniform_edge_v, UniformGridBase&lt; Vx &gt;, NonUniformGridBase&lt; Vx &gt; &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>CollisionsIntra::GhostedVxStaggered</label>
+        <link refid="structCollisionsIntra_1_1GhostedVxStaggered"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::conditional_t&lt; uniform_edge_v, UniformGridBase&lt; Vx &gt;, NonUniformGridBase&lt; Vx &gt; &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" line="55" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp" bodystart="57" bodyend="58"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

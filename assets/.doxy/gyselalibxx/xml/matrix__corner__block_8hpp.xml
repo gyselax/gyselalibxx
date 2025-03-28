@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="matrix__corner__block_8hpp" kind="file" language="C++">
+    <compoundname>matrix_corner_block.hpp</compoundname>
+    <includes local="no">memory</includes>
+    <includes refid="matrix_8hpp" local="yes">matrix.hpp</includes>
+    <includes refid="matrix__dense_8hpp" local="yes">matrix_dense.hpp</includes>
+    <includes refid="view_8hpp" local="yes">view.hpp</includes>
+    <includedby refid="matrix_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix.cpp</includedby>
+    <includedby refid="matrix__centre__block_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_centre_block.hpp</includedby>
+    <includedby refid="matrix__corner__block_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_corner_block.cpp</includedby>
+    <includedby refid="matrix__periodic__banded_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_periodic_banded.hpp</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>matrix.hpp</label>
+        <link refid="matrix_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_corner_block.hpp</label>
+        <link refid="matrix__corner__block_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>matrix_dense.hpp</label>
+        <link refid="matrix__dense_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>view.hpp</label>
+        <link refid="view_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Kokkos_Core.hpp</label>
+      </node>
+      <node id="6">
+        <label>array</label>
+      </node>
+      <node id="4">
+        <label>iosfwd</label>
+      </node>
+      <node id="2">
+        <label>memory</label>
+      </node>
+      <node id="7">
+        <label>ostream</label>
+      </node>
+      <node id="8">
+        <label>utility</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_centre_block.hpp</label>
+        <link refid="matrix__centre__block_8hpp_source"/>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_corner_block.hpp</label>
+        <link refid="matrix__corner__block_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_periodic_banded.hpp</label>
+        <link refid="matrix__periodic__banded_8hpp_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classMatrix__Corner__Block" prot="public">Matrix_Corner_Block</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;matrix.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;matrix_dense.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;view.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="classMatrix__Corner__Block" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMatrix__Corner__Block" kindref="compound">Matrix_Corner_Block</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classMatrix" kindref="compound">Matrix</ref></highlight></codeline>
+<codeline lineno="24"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrix__Corner__Block" kindref="compound">Matrix_Corner_Block</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classMatrix_1a687d05d0c6cb4e1a8dc1a40e4926e9a3" kindref="member">n</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classMatrix__Corner__Block_1ae4272c855b07fbdf88cc781702145ab0" kindref="member">k</ref>,<sp/>std::unique_ptr&lt;Matrix&gt;<sp/>q);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classMatrix__Corner__Block_1a2eb6fc172db95cc7b24158b565abaae8" kindref="member">get_element</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>j)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classMatrix__Corner__Block_1ac388c62891d9e088ff9c97bc2f6fab1b" kindref="member">set_element</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>j,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>a_ij)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classMatrix__Corner__Block_1ae2a30d18e94a8b387569344375a14d7c" kindref="member">factorise</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>DSpan1D<sp/><ref refid="classMatrix__Corner__Block_1a63cfdbae8e80494242f82e73ebef5223" kindref="member">solve_inplace</ref>(DSpan1D<sp/>bx)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>DSpan1D<sp/><ref refid="classMatrix__Corner__Block_1a1a3aab1aed85575bd8d3aa834cf73ed6" kindref="member">solve_transpose_inplace</ref>(DSpan1D<sp/>bx)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>DSpan2D<sp/><ref refid="classMatrix__Corner__Block_1ae311ddeb39776bcb881158c7d7f497a7" kindref="member">solve_multiple_inplace</ref>(DSpan2D<sp/>bx)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrix__Corner__Block" kindref="compound">Matrix_Corner_Block</ref>(</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classMatrix_1a687d05d0c6cb4e1a8dc1a40e4926e9a3" kindref="member">n</ref>,</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classMatrix__Corner__Block_1ae4272c855b07fbdf88cc781702145ab0" kindref="member">k</ref>,</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;Matrix&gt;<sp/>q,</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>lambda_size1,</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>lambda_size2);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classMatrix__Corner__Block_1aed05bf304325853308dffcc6ec17f84e" kindref="member">calculate_delta_to_factorise</ref>();</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>DSpan1D<sp/><ref refid="classMatrix__Corner__Block_1aadfd35f93bcc111370d99886f72b5d95" kindref="member">solve_lambda_section</ref>(DSpan1D<sp/>v,<sp/>DView1D<sp/>u)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>DSpan1D<sp/><ref refid="classMatrix__Corner__Block_1a6b4201322eb578d60c5716b8f4003d45" kindref="member">solve_lambda_section_transpose</ref>(DSpan1D<sp/>u,<sp/>DView1D<sp/>v)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>DSpan1D<sp/><ref refid="classMatrix__Corner__Block_1a3cb6456221eee7f6210cbc24d69d8afa" kindref="member">solve_gamma_section</ref>(DSpan1D<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>u,<sp/>DView1D<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>v)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>DSpan1D<sp/><ref refid="classMatrix__Corner__Block_1a761a54e6146b0e570b2427a3bbb572c7" kindref="member">solve_gamma_section_transpose</ref>(DSpan1D<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>v,<sp/>DView1D<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>u)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144" refid="classMatrix__Corner__Block_1ae4272c855b07fbdf88cc781702145ab0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classMatrix__Corner__Block_1ae4272c855b07fbdf88cc781702145ab0" kindref="member">k</ref>;</highlight></codeline>
+<codeline lineno="146" refid="classMatrix__Corner__Block_1ae41b9a3f53786f953cd30242aad91641" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classMatrix__Corner__Block_1ae41b9a3f53786f953cd30242aad91641" kindref="member">nb</ref>;</highlight></codeline>
+<codeline lineno="152" refid="classMatrix__Corner__Block_1a7414c90ca623f4adc9ca5951ef96fe7f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::unique_ptr&lt;double[]&gt;<sp/><ref refid="classMatrix__Corner__Block_1a7414c90ca623f4adc9ca5951ef96fe7f" kindref="member">Abm_1_gamma_ptr</ref>;</highlight></codeline>
+<codeline lineno="154" refid="classMatrix__Corner__Block_1af19beee83d0007747a3d47bbea2371b2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::unique_ptr&lt;double[]&gt;<sp/><ref refid="classMatrix__Corner__Block_1af19beee83d0007747a3d47bbea2371b2" kindref="member">lambda_ptr</ref>;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157" refid="classMatrix__Corner__Block_1a2ba0aa809c557ad1d2c710ddf8248cb2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::unique_ptr&lt;Matrix&gt;<sp/><ref refid="classMatrix__Corner__Block_1a2ba0aa809c557ad1d2c710ddf8248cb2" kindref="member">q_block</ref>;</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160" refid="classMatrix__Corner__Block_1aaf8dcc6cde4f47c3aea20101d3f9d451" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrix__Dense" kindref="compound">Matrix_Dense</ref><sp/><ref refid="classMatrix__Corner__Block_1aaf8dcc6cde4f47c3aea20101d3f9d451" kindref="member">delta</ref>;</highlight></codeline>
+<codeline lineno="166" refid="classMatrix__Corner__Block_1afd674000287386818ce4e1a149a36ef3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>DSpan2D<sp/><ref refid="classMatrix__Corner__Block_1afd674000287386818ce4e1a149a36ef3" kindref="member">Abm_1_gamma</ref>;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169" refid="classMatrix__Corner__Block_1a4a86d05bdf1716db3c228a921b6a80b0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>DSpan2D<sp/><ref refid="classMatrix__Corner__Block_1a4a86d05bdf1716db3c228a921b6a80b0" kindref="member">lambda</ref>;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>factorise_method()</highlight><highlight class="keyword"><sp/>override</highlight></codeline>
+<codeline lineno="173"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>solve_inplace_method(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">*,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/>override</highlight></codeline>
+<codeline lineno="177"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="180"><highlight class="normal">};</highlight></codeline>
+    </programlisting>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_corner_block.hpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>File types.hpp - GyselalibX</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File types.hpp";
+        var mkdocs_page_input_path = "gyselalibxx/types_8hpp.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> GyselalibX
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">General</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/getting_started.html">Getting Started</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Installation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../docs/first_steps/install.html">Gyselalib++ Installation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../toolchains/index.html">Pre-made build settings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standards</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/mathematical_and_physical_conventions.html">Math & Physics</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Gyselalib++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Source</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../src/index.html">Gyselalib++ contents</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/advection/index.html">Advection methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/collisions/index.html">Collisions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/data_types/index.html">Data Storage Types</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryRTheta/index.html">Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection/index.html">Advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_field</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/geometry/index.html">Geometry RTheta</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/initialisation/index.html">Initialisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/poisson/index.html">Polar Poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_solver</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/time_solver/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryVparMu</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryVparMu/index.html">Geometry (vpar, mu)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/collisions/index.html">CollisionConfiguration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/geometry/index.html">GeometryVparMu</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXVx/index.html">Geometry (x, v_x)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >boltzmann</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/boltzmann/index.html">Boltzmann solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/geometry/index.html">Geometry X-Vx</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >rhs</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/rhs/index.html">RHS</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/utils/index.html">Utils</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXY/index.html">Geometry (x, y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/geometry/index.html">Geometry XY</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/initialisation/index.html">Initialisation on (x,y) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/time_integration/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXYVxVy</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXYVxVy/index.html">Geometry (x, y, v_x, v_y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/geometry/index.html">Geometry X Y-Vx Vy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vlasov</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/vlasov/index.html">Vlasov solver</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/interpolation/index.html">Interpolation Methods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/polar_splines/index.html">Polar Splines</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >io</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/io/index.html">Functions used for input and output</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mapping</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mapping/index.html">Mappings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >math_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/math_tools/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >matrix_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/matrix_tools/index.html">Matrix tools</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mpi_parallelisation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mpi_parallelisation/index.html">Parallelisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/multipatch/index.html">Multipatch</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >connectivity</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/connectivity/index.html">Multipatch connectivity</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/data_types/index.html">Data Types for Multipatch Geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/utils/index.html">Multipatch utilitary functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >quadrature</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/quadrature/index.html">Quadrature Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >speciesinfo</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/speciesinfo/index.html">SpeciesInfo (x, v_x)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >timestepper</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/timestepper/index.html">Time Stepping Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/utils/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Simulations</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../simulations/index.html">Gyselalib++ simulations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryRTheta/index.html">Simulations in (r, theta) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >diocotron</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/diocotron/index.html">Diocotron instability</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vortex_merger</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/vortex_merger/index.html">Vortex merger</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXVx/index.html">Simulations in (x, vx) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXY/index.html">Simulations in (x, y) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >guiding_centre</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryXY/guiding_centre/index.html">Guiding centre (X,Y) simulation</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tests</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../tests/index.html">Gyselalib++ tests</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/advection/index.html">Tests on the templated advection operators</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/geometryRTheta/index.html">Tests : Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/advection_rtheta/index.html">Tests on the 2D polar advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/polar_poisson/index.html">Tests on the 2D polar poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline_interpolator_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/spline_interpolator_rtheta/index.html">Tests on spline interpolator in polar coordinates</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/multipatch/index.html">Multipatch geometry tests</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometries</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/multipatch/geometries/index.html">Multipatch geometries</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Adding_docs.html">Adding Docs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Using_git.html">Using Git</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Gyselalib++</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" >Classes</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="annotated.html">Class List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="classes.html">Class Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="hierarchy.html">Class Hierarchy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Namespaces</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="namespaces.html">Namespace List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_members.html">Namespace Members</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_functions.html">Namespace Member Functions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_variables.html">Namespace Member Variables</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_typedefs.html">Namespace Member Typedefs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_enums.html">Namespace Member Enumerations</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="macros.html">Macros</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="files.html">Files</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">GyselalibX</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File types.hpp</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/gyselax/gyselalibxx/edit/master/docs/gyselalibxx/types_8hpp.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div><h1 id="file-typeshpp">File types.hpp</h1>
+<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_2cbcac1ff0802c0a6551cceb4db325f2.html"><strong>data_types</strong></a> <strong>&gt;</strong> <a href="types_8hpp.html"><strong>types.hpp</strong></a></p>
+<p><a href="types_8hpp_source.html">Go to the source code of this file</a></p>
+<ul>
+<li><code>#include &lt;ddc/kernels/splines.hpp&gt;</code></li>
+<li><code>#include "ddc_aliases.hpp"</code></li>
+<li><code>#include "ddc_helper.hpp"</code></li>
+<li><code>#include "vector_field.hpp"</code></li>
+<li><code>#include "vector_field_mem.hpp"</code></li>
+<li><code>#include "vector_index_tools.hpp"</code></li>
+</ul>
+<h2 id="public-types">Public Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef typename Patch::BSplines1</td>
+<td style="text-align: left;"><a href="#typedef-bsplines1onpatch"><strong>BSplines1OnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: The BSplines on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename Patch::BSplines2</td>
+<td style="text-align: left;"><a href="#typedef-bsplines2onpatch"><strong>BSplines2OnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: The BSplines on the second of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DConstField&lt; IdxRange&lt; ddc::Deriv&lt; typename Patch::Dim1 &gt;, ddc::Deriv&lt; typename Patch::Dim2 &gt; &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-constderiv12_onpatch_2d"><strong>ConstDeriv12_OnPatch_2D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant field of the derivatives</em> <em>defined on the index ranges of valid n and m.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DConstField&lt; IdxRange&lt; ddc::Deriv&lt; typename Patch::Dim1 &gt;, typename Patch::Grid2 &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-constderiv1_onpatch_2d"><strong>ConstDeriv1_OnPatch_2D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant field of the n-th derivatives in the direction of</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical grid defined on the index range of n and the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s second logical grid.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DConstField&lt; IdxRange&lt; typename Patch::Grid1, ddc::Deriv&lt; typename Patch::Dim2 &gt; &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-constderiv2_onpatch_2d"><strong>ConstDeriv2_OnPatch_2D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant field of the n-th derivatives in the direction of</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s second logical grid defined on the index range of n and the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical grid.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DConstField&lt; typename Patch::IdxRangeBS1 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-constsplinecoeff1onpatch_1d"><strong>ConstSplineCoeff1OnPatch_1D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of spline coefficients for a non-batched spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DConstField&lt; IdxRange&lt; typename Patch::BSplines1, typename Patch::Grid2 &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-constsplinecoeff1onpatch_2d"><strong>ConstSplineCoeff1OnPatch_2D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of spline coefficients batched over the second of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions for a spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DConstField&lt; typename Patch::IdxRangeBS12 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-constsplinecoeffonpatch_2d"><strong>ConstSplineCoeffOnPatch_2D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of 2D spline coefficients for a non-batched spline defined on both of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef host_t&lt; ConstSplineCoeffOnPatch_2D&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-constsplinecoeffonpatch_2d_host"><strong>ConstSplineCoeffOnPatch_2D_host</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of 2D spline coefficients for a non-batched spline defined on both of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions. Defined on host.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Field&lt; typename Patch::Coord1, typename Patch::IdxRange1 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coord1field1onpatch_1d"><strong>Coord1Field1OnPatch_1D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: Field of 1D coordinates defined on the defined on domain of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ConstField&lt; typename Patch::Coord12, typename Patch::IdxRange12 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coordconstfieldonpatch"><strong>CoordConstFieldOnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: ConstField of 2D coordinates defined on the 2D</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldMem&lt; typename Patch::Coord12, typename Patch::IdxRange12 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coordfieldmemonpatch"><strong>CoordFieldMemOnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: Field of 2D coordinates defined on the 2D</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Field&lt; typename Patch::Coord12, typename Patch::IdxRange12 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coordfieldonpatch"><strong>CoordFieldOnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: Field of 2D coordinates defined on the 2D</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DConstField&lt; typename Patch::IdxRange1 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dconstfield1onpatch"><strong>DConstField1OnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant Field of doubles on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DConstField&lt; typename Patch::IdxRange12 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dconstfieldonpatch"><strong>DConstFieldOnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant Field defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DField&lt; typename Patch::IdxRange1 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfield1onpatch"><strong>DField1OnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A Field of doubles on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DFieldMem&lt; typename Patch::IdxRange1 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldmem1onpatch"><strong>DFieldMem1OnPatch</strong></a>  <br><em>A FieldMem defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DFieldMem&lt; typename Patch::IdxRange2 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldmem2onpatch"><strong>DFieldMem2OnPatch</strong></a>  <br><em>A FieldMem defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DFieldMem&lt; typename Patch::IdxRange12 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldmemonpatch"><strong>DFieldMemOnPatch</strong></a>  <br><em>A FieldMem defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DField&lt; typename Patch::IdxRange12 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldonpatch"><strong>DFieldOnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A Field defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef host_t&lt; DFieldOnPatch&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dfieldonpatch_host"><strong>DFieldOnPatch_host</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A Field defined on host on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="classVectorField.html"><strong>VectorConstField</strong></a>&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt; typename Patch::Dim1, typename Patch::Dim2 &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dvectorconstfieldonpatch"><strong>DVectorConstFieldOnPatch</strong></a>  <br><em>A ConstVectorField defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a>&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt; typename Patch::Dim1, typename Patch::Dim2 &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dvectorfieldmemonpatch"><strong>DVectorFieldMemOnPatch</strong></a>  <br><em>A</em> <a href="classVectorFieldMem.html"><em><strong>VectorFieldMem</strong></em></a> <em>defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="classVectorField.html"><strong>VectorField</strong></a>&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt; typename Patch::Dim1, typename Patch::Dim2 &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dvectorfieldonpatch"><strong>DVectorFieldOnPatch</strong></a>  <br><em>A</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename Patch::Grid1</td>
+<td style="text-align: left;"><a href="#typedef-grid1onpatch"><strong>Grid1OnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: The grid on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename Patch::Grid2</td>
+<td style="text-align: left;"><a href="#typedef-grid2onpatch"><strong>Grid2OnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: The grid on the second of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename Patch::Idx1</td>
+<td style="text-align: left;"><a href="#typedef-idx1onpatch"><strong>Idx1OnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: An index for the grid on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename Patch::IdxRange1</td>
+<td style="text-align: left;"><a href="#typedef-idxrange1onpatch"><strong>IdxRange1OnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: An index range over the grids on the first</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 1D logical domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename Patch::IdxRange12</td>
+<td style="text-align: left;"><a href="#typedef-idxrangeonpatch"><strong>IdxRangeOnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: An index range over the grids on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DField&lt; typename Patch::IdxRangeBS1 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-splinecoeff1onpatch_1d"><strong>SplineCoeff1OnPatch_1D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of spline coefficients for a non-batched spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DField&lt; IdxRange&lt; typename Patch::BSplines1, typename Patch::Grid2 &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-splinecoeff1onpatch_2d"><strong>SplineCoeff1OnPatch_2D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of spline coefficients batched over the second of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions for a spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DField&lt; typename Patch::IdxRangeBS12 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-splinecoeffonpatch_2d"><strong>SplineCoeffOnPatch_2D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of 2D spline coefficients for a non-batched spline defined on both of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-bsplines1onpatch">typedef BSplines1OnPatch</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: The BSplines on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<pre><code class="language-C++">using BSplines1OnPatch =  typename Patch::BSplines1;
+</code></pre>
+<hr>
+
+<h3 id="typedef-bsplines2onpatch">typedef BSplines2OnPatch</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: The BSplines on the second of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<pre><code class="language-C++">using BSplines2OnPatch =  typename Patch::BSplines2;
+</code></pre>
+<hr>
+
+<h3 id="typedef-constderiv12_onpatch_2d">typedef ConstDeriv12_OnPatch_2D</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant field of the derivatives</em> <em>defined on the index ranges of valid n and m.</em></p>
+<pre><code class="language-C++">using ConstDeriv12_OnPatch_2D =  DConstField&lt;IdxRange&lt;ddc::Deriv&lt;typename Patch::Dim1&gt;, ddc::Deriv&lt;typename Patch::Dim2&gt; &gt;&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-constderiv1_onpatch_2d">typedef ConstDeriv1_OnPatch_2D</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant field of the n-th derivatives in the direction of</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical grid defined on the index range of n and the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s second logical grid.</em></p>
+<pre><code class="language-C++">using ConstDeriv1_OnPatch_2D =  DConstField&lt;IdxRange&lt;ddc::Deriv&lt;typename Patch::Dim1&gt;, typename Patch::Grid2&gt; &gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-constderiv2_onpatch_2d">typedef ConstDeriv2_OnPatch_2D</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant field of the n-th derivatives in the direction of</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s second logical grid defined on the index range of n and the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical grid.</em></p>
+<pre><code class="language-C++">using ConstDeriv2_OnPatch_2D =  DConstField&lt;IdxRange&lt;typename Patch::Grid1, ddc::Deriv&lt;typename Patch::Dim2&gt; &gt;&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-constsplinecoeff1onpatch_1d">typedef ConstSplineCoeff1OnPatch_1D</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of spline coefficients for a non-batched spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<pre><code class="language-C++">using ConstSplineCoeff1OnPatch_1D =  DConstField&lt;typename Patch::IdxRangeBS1&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-constsplinecoeff1onpatch_2d">typedef ConstSplineCoeff1OnPatch_2D</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of spline coefficients batched over the second of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions for a spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<pre><code class="language-C++">using ConstSplineCoeff1OnPatch_2D =  DConstField&lt;IdxRange&lt;typename Patch::BSplines1, typename Patch::Grid2&gt; &gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-constsplinecoeffonpatch_2d">typedef ConstSplineCoeffOnPatch_2D</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of 2D spline coefficients for a non-batched spline defined on both of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<pre><code class="language-C++">using ConstSplineCoeffOnPatch_2D =  DConstField&lt;typename Patch::IdxRangeBS12&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-constsplinecoeffonpatch_2d_host">typedef ConstSplineCoeffOnPatch_2D_host</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of 2D spline coefficients for a non-batched spline defined on both of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions. Defined on host.</em></p>
+<pre><code class="language-C++">using ConstSplineCoeffOnPatch_2D_host =  host_t&lt;ConstSplineCoeffOnPatch_2D&lt;Patch&gt; &gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coord1field1onpatch_1d">typedef Coord1Field1OnPatch_1D</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: Field of 1D coordinates defined on the defined on domain of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical dimension.</em></p>
+<pre><code class="language-C++">using Coord1Field1OnPatch_1D =  Field&lt;typename Patch::Coord1, typename Patch::IdxRange1&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coordconstfieldonpatch">typedef CoordConstFieldOnPatch</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: ConstField of 2D coordinates defined on the 2D</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical domain.</em></p>
+<pre><code class="language-C++">using CoordConstFieldOnPatch =  ConstField&lt;typename Patch::Coord12, typename Patch::IdxRange12&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coordfieldmemonpatch">typedef CoordFieldMemOnPatch</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: Field of 2D coordinates defined on the 2D</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical domain.</em></p>
+<pre><code class="language-C++">using CoordFieldMemOnPatch =  FieldMem&lt;typename Patch::Coord12, typename Patch::IdxRange12&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coordfieldonpatch">typedef CoordFieldOnPatch</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: Field of 2D coordinates defined on the 2D</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical domain.</em></p>
+<pre><code class="language-C++">using CoordFieldOnPatch =  Field&lt;typename Patch::Coord12, typename Patch::IdxRange12&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dconstfield1onpatch">typedef DConstField1OnPatch</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant Field of doubles on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<pre><code class="language-C++">using DConstField1OnPatch =  DConstField&lt;typename Patch::IdxRange1&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dconstfieldonpatch">typedef DConstFieldOnPatch</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant Field defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
+<pre><code class="language-C++">using DConstFieldOnPatch =  DConstField&lt;typename Patch::IdxRange12&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfield1onpatch">typedef DField1OnPatch</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A Field of doubles on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<pre><code class="language-C++">using DField1OnPatch =  DField&lt;typename Patch::IdxRange1&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldmem1onpatch">typedef DFieldMem1OnPatch</h3>
+<p><em>A FieldMem defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical domain.</em></p>
+<pre><code class="language-C++">using DFieldMem1OnPatch =  DFieldMem&lt;typename Patch::IdxRange1&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldmem2onpatch">typedef DFieldMem2OnPatch</h3>
+<p><em>A FieldMem defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical domain.</em></p>
+<pre><code class="language-C++">using DFieldMem2OnPatch =  DFieldMem&lt;typename Patch::IdxRange2&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldmemonpatch">typedef DFieldMemOnPatch</h3>
+<p><em>A FieldMem defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
+<pre><code class="language-C++">using DFieldMemOnPatch =  DFieldMem&lt;typename Patch::IdxRange12&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldonpatch">typedef DFieldOnPatch</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A Field defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
+<pre><code class="language-C++">using DFieldOnPatch =  DField&lt;typename Patch::IdxRange12&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dfieldonpatch_host">typedef DFieldOnPatch_host</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A Field defined on host on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
+<pre><code class="language-C++">using DFieldOnPatch_host =  host_t&lt;DFieldOnPatch&lt;Patch&gt; &gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dvectorconstfieldonpatch">typedef DVectorConstFieldOnPatch</h3>
+<p><em>A ConstVectorField defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
+<pre><code class="language-C++">using DVectorConstFieldOnPatch =  VectorConstField&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt;typename Patch::Dim1, typename Patch::Dim2&gt; &gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dvectorfieldmemonpatch">typedef DVectorFieldMemOnPatch</h3>
+<p><em>A</em> <a href="classVectorFieldMem.html"><em><strong>VectorFieldMem</strong></em></a> <em>defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
+<pre><code class="language-C++">using DVectorFieldMemOnPatch =  VectorFieldMem&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt;typename Patch::Dim1, typename Patch::Dim2&gt; &gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dvectorfieldonpatch">typedef DVectorFieldOnPatch</h3>
+<p><em>A</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
+<pre><code class="language-C++">using DVectorFieldOnPatch =  VectorField&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt;typename Patch::Dim1, typename Patch::Dim2&gt; &gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-grid1onpatch">typedef Grid1OnPatch</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: The grid on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<pre><code class="language-C++">using Grid1OnPatch =  typename Patch::Grid1;
+</code></pre>
+<hr>
+
+<h3 id="typedef-grid2onpatch">typedef Grid2OnPatch</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: The grid on the second of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<pre><code class="language-C++">using Grid2OnPatch =  typename Patch::Grid2;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idx1onpatch">typedef Idx1OnPatch</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: An index for the grid on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<pre><code class="language-C++">using Idx1OnPatch =  typename Patch::Idx1;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrange1onpatch">typedef IdxRange1OnPatch</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: An index range over the grids on the first</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 1D logical domain.</em></p>
+<pre><code class="language-C++">using IdxRange1OnPatch =  typename Patch::IdxRange1;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrangeonpatch">typedef IdxRangeOnPatch</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: An index range over the grids on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
+<pre><code class="language-C++">using IdxRangeOnPatch =  typename Patch::IdxRange12;
+</code></pre>
+<hr>
+
+<h3 id="typedef-splinecoeff1onpatch_1d">typedef SplineCoeff1OnPatch_1D</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of spline coefficients for a non-batched spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<pre><code class="language-C++">using SplineCoeff1OnPatch_1D =  DField&lt;typename Patch::IdxRangeBS1&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-splinecoeff1onpatch_2d">typedef SplineCoeff1OnPatch_2D</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of spline coefficients batched over the second of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions for a spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<pre><code class="language-C++">using SplineCoeff1OnPatch_2D =  DField&lt;IdxRange&lt;typename Patch::BSplines1, typename Patch::Grid2&gt; &gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-splinecoeffonpatch_2d">typedef SplineCoeffOnPatch_2D</h3>
+<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of 2D spline coefficients for a non-batched spline defined on both of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<pre><code class="language-C++">using SplineCoeffOnPatch_2D =  DField&lt;typename Patch::IdxRangeBS12&gt;;
+</code></pre>
+<hr>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp</code></p></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/gyselax/gyselalibxx/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../docs/jscript/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

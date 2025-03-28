@@ -1,0 +1,544 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classIdxRangeSlice" kind="class" language="C++" prot="public">
+    <compoundname>IdxRangeSlice</compoundname>
+    <includes refid="idx__range__slice_8hpp" local="no">idx_range_slice.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class...</type>
+        <declname>Dims</declname>
+        <defname>Dims</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classIdxRangeSlice_1ae49932089fe31921b0cdb4aea133d650" prot="private" static="no">
+        <type>ddc::detail::TypeSeq&lt; Dims... &gt;</type>
+        <definition>using IdxRangeSlice&lt; Dims &gt;::tags_seq =  ddc::detail::TypeSeq&lt;Dims...&gt;</definition>
+        <argsstring></argsstring>
+        <name>tags_seq</name>
+        <qualifiedname>IdxRangeSlice::tags_seq</qualifiedname>
+        <briefdescription>
+<para>A Type Sequence indicating the order of the dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classIdxRangeSlice_1ae029737c01f6337cc2775510bf436f64" prot="private" static="no" mutable="no">
+        <type>Idx&lt; Dims... &gt;</type>
+        <definition>Idx&lt;Dims...&gt; IdxRangeSlice&lt; Dims &gt;::m_front</definition>
+        <argsstring></argsstring>
+        <name>m_front</name>
+        <qualifiedname>IdxRangeSlice::m_front</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="45" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classIdxRangeSlice_1a95bbe456cf1e3c5fb3722b2a36160f33" prot="private" static="no" mutable="no">
+        <type>IdxStep&lt; Dims... &gt;</type>
+        <definition>IdxStep&lt;Dims...&gt; IdxRangeSlice&lt; Dims &gt;::m_size</definition>
+        <argsstring></argsstring>
+        <name>m_size</name>
+        <qualifiedname>IdxRangeSlice::m_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="46" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classIdxRangeSlice_1a9fb8cff425e72dc16b2bc818dcc84466" prot="private" static="no" mutable="no">
+        <type>IdxStep&lt; Dims... &gt;</type>
+        <definition>IdxStep&lt;Dims...&gt; IdxRangeSlice&lt; Dims &gt;::m_stride</definition>
+        <argsstring></argsstring>
+        <name>m_stride</name>
+        <qualifiedname>IdxRangeSlice::m_stride</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="47" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classIdxRangeSlice_1a45709058680b07f2af213c19e73c33d4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+          </param>
+        </templateparamlist>
+        <type>class</type>
+        <definition>friend class IdxRangeSlice</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeSlice</name>
+        <qualifiedname>IdxRangeSlice::IdxRangeSlice</qualifiedname>
+        <param>
+          <type><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="50" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classIdxRangeSlice_1af5cb71c4e5ef820d8774388eb6f44414" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>IdxRangeSlice&lt; Dims &gt;::IdxRangeSlice</definition>
+        <argsstring>()=default</argsstring>
+        <name>IdxRangeSlice</name>
+        <qualifiedname>IdxRangeSlice::IdxRangeSlice</qualifiedname>
+        <briefdescription>
+<para>Default constructor for <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref> creating an empty index range. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="54" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdxRangeSlice_1a14b43890dfd560f54e3de3c3859bd31d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION</type>
+        <definition>KOKKOS_FUNCTION IdxRangeSlice&lt; Dims &gt;::IdxRangeSlice</definition>
+        <argsstring>(Idx&lt; Dims... &gt; front, IdxStep&lt; Dims... &gt; size, IdxStep&lt; Dims... &gt; stride)</argsstring>
+        <name>IdxRangeSlice</name>
+        <qualifiedname>IdxRangeSlice::IdxRangeSlice</qualifiedname>
+        <param>
+          <type>Idx&lt; Dims... &gt;</type>
+          <declname>front</declname>
+        </param>
+        <param>
+          <type>IdxStep&lt; Dims... &gt;</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>IdxStep&lt; Dims... &gt;</type>
+          <declname>stride</declname>
+        </param>
+        <briefdescription>
+<para>Build a <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref> from vectors of valid Idxs in each dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>front</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Idx describing the first point in the index range. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of elements along each direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IdxStep distance between subsequent elements of the index range. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="63" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="63" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdxRangeSlice_1a2b89aee054545931b156449008fd8fff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>DDoms</declname>
+            <defname>DDoms</defname>
+          </param>
+          <param>
+            <type>class</type>
+            <defval>std::enable_if_t&lt;(is_subidx_range_collection_v&lt;DDoms&gt; &amp;&amp; ...)&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION</type>
+        <definition>KOKKOS_FUNCTION IdxRangeSlice&lt; Dims &gt;::IdxRangeSlice</definition>
+        <argsstring>(DDoms const &amp;... valid_indices)</argsstring>
+        <name>IdxRangeSlice</name>
+        <qualifiedname>IdxRangeSlice::IdxRangeSlice</qualifiedname>
+        <param>
+          <type>DDoms const &amp;...</type>
+          <declname>valid_indices</declname>
+        </param>
+        <briefdescription>
+<para>Build a <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref> from a set of 1D IdxRangeSlices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>valid_indices</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IdxRangeSlices which comprise this <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="81" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="81" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdxRangeSlice_1aa1cc7ec0912e5195f762b6176b2aa085" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>DDims</declname>
+            <defname>DDims</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION bool</type>
+        <definition>KOKKOS_FUNCTION bool IdxRangeSlice&lt; Dims &gt;::contains</definition>
+        <argsstring>(Idx&lt; DDims... &gt; elem) const</argsstring>
+        <name>contains</name>
+        <qualifiedname>IdxRangeSlice::contains</qualifiedname>
+        <param>
+          <type>Idx&lt; DDims... &gt;</type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+<para>Check if the specified Idx is found in this index range slice. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>elem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The element which may or may not be in this index range slice.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool True if the element is found in this index range slice, False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="96" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="96" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdxRangeSlice_1af94edc7f3cecfc5b987d37f7929b719f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>DDims</declname>
+            <defname>DDims</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION bool</type>
+        <definition>KOKKOS_FUNCTION bool IdxRangeSlice&lt; Dims &gt;::contains</definition>
+        <argsstring>(IdxRange&lt; DDims... &gt; idx_range) const</argsstring>
+        <name>contains</name>
+        <qualifiedname>IdxRangeSlice::contains</qualifiedname>
+        <param>
+          <type>IdxRange&lt; DDims... &gt;</type>
+          <declname>idx_range</declname>
+        </param>
+        <briefdescription>
+<para>Check if all elements of the specified IdxRange are found in this index range slice. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range which may or may not be in this index range slice.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool True if the all elements of the specified IdxRange are found in this index range slice. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="115" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="115" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdxRangeSlice_1a2ee4615ebb6864cdea1f6d93dc3e6add" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Dim</type>
+          </param>
+          <param>
+            <type>class</type>
+            <defval>std::enable_if_t&lt;ddc::in_tags_v&lt;Dim, tags_seq&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION std::size_t</type>
+        <definition>KOKKOS_FUNCTION std::size_t IdxRangeSlice&lt; Dims &gt;::get_index</definition>
+        <argsstring>(Idx&lt; Dim &gt; elem) const</argsstring>
+        <name>get_index</name>
+        <qualifiedname>IdxRangeSlice::get_index</qualifiedname>
+        <param>
+          <type>Idx&lt; Dim &gt;</type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+<para>Get the index of the Idx within the index range slice. This function is particularly useful to index an mdspan over the index range slice. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>elem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 1D Idx which is inside the index range slice.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The index of the element. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="135" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="135" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdxRangeSlice_1af6daea2b71b8e34e4b1c0a8b2a3fc95e" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr IdxStep&lt; Dims... &gt;</type>
+        <definition>KOKKOS_FUNCTION constexpr IdxStep&lt; Dims... &gt; IdxRangeSlice&lt; Dims &gt;::extents</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>extents</name>
+        <qualifiedname>IdxRangeSlice::extents</qualifiedname>
+        <briefdescription>
+<para>Get the size of the index range slice in each dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A IdxStep describing the size of the index range slice in each dimension. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="146" column="39" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="146" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdxRangeSlice_1a64ad71f7659189ff1ce4bfff4420a894" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class QueryDDim</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION constexpr IdxStep&lt; QueryDDim &gt;</type>
+        <definition>KOKKOS_FUNCTION constexpr IdxStep&lt; QueryDDim &gt; IdxRangeSlice&lt; Dims &gt;::extent</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>extent</name>
+        <qualifiedname>IdxRangeSlice::extent</qualifiedname>
+        <briefdescription>
+<para>Get the size of the index range slice in the specified dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>QueryDDim</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimension in which the size is requested.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A IdxStep describing the size of the index range slice in the specified dimension. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="159" column="39" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="159" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdxRangeSlice_1a3669efc69bfe9261cfc3ed85380e354c" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr std::size_t</type>
+        <definition>KOKKOS_FUNCTION constexpr std::size_t IdxRangeSlice&lt; Dims &gt;::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <qualifiedname>IdxRangeSlice::size</qualifiedname>
+        <briefdescription>
+<para>Get the total number of elements in the index range slice. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The total number of elements in the index range slice. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="169" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="169" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdxRangeSlice_1a7f97c317c82426f237b421e036200973" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr Idx&lt; Dims... &gt;</type>
+        <definition>KOKKOS_FUNCTION constexpr Idx&lt; Dims... &gt; IdxRangeSlice&lt; Dims &gt;::front</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>front</name>
+        <qualifiedname>IdxRangeSlice::front</qualifiedname>
+        <briefdescription>
+<para>Get the first element in the index range slice. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The first element in the index range slice. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="179" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="179" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdxRangeSlice_1ae9abf3cd2e4f039672b79ceb7967c682" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr Idx&lt; Dims... &gt;</type>
+        <definition>KOKKOS_FUNCTION constexpr Idx&lt; Dims... &gt; IdxRangeSlice&lt; Dims &gt;::back</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>back</name>
+        <qualifiedname>IdxRangeSlice::back</qualifiedname>
+        <briefdescription>
+<para>Get the last element in the index range slice. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The last element in the index range slice. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="189" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="189" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdxRangeSlice_1a855885bf7216d0efb3641ea5e54d6e34" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class QueryDim</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION constexpr IdxStep&lt; QueryDim &gt;</type>
+        <definition>KOKKOS_FUNCTION constexpr IdxStep&lt; QueryDim &gt; IdxRangeSlice&lt; Dims &gt;::stride</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>stride</name>
+        <qualifiedname>IdxRangeSlice::stride</qualifiedname>
+        <briefdescription>
+<para>Get the stride from one element of the index range slice to another. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>QueryDim</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimension being queried</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A 1D IdxStep describing a stride from one element to another. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="202" column="39" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="202" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdxRangeSlice_1ada67052c26c46493280f7afcbe1d9551" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr IdxStep&lt; Dims... &gt;</type>
+        <definition>KOKKOS_FUNCTION constexpr IdxStep&lt; Dims... &gt; IdxRangeSlice&lt; Dims &gt;::strides</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>strides</name>
+        <qualifiedname>IdxRangeSlice::strides</qualifiedname>
+        <briefdescription>
+<para>Get the strides from one element of the index range slice to another. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A IdxStep describing the strides from one element to another. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="212" column="39" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="212" bodyend="215"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdxRangeSlice_1a904892c0a225dd5fe2c16448f7070266" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION auto</type>
+        <definition>KOKKOS_FUNCTION auto IdxRangeSlice&lt; Dims &gt;::begin</definition>
+        <argsstring>() const</argsstring>
+        <name>begin</name>
+        <qualifiedname>IdxRangeSlice::begin</qualifiedname>
+        <briefdescription>
+<para>Get the iterator to the first element of the <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref>. The elements are pairs of Idxs and indices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The iterator to the first element of the <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="223" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="223" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdxRangeSlice_1a77ce2afa2b2a692ba19d2caa02dd57bb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION auto</type>
+        <definition>KOKKOS_FUNCTION auto IdxRangeSlice&lt; Dims &gt;::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <qualifiedname>IdxRangeSlice::end</qualifiedname>
+        <briefdescription>
+<para>Get the iterator to the end of the <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref>. The elements are pairs of Idxs and indices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The iterator to the end of the <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="235" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="235" bodyend="239"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class which describes a collection of equally spaced Idxs which form a index range. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class should eventually be replaced by a DDC functionality when this becomes available. </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="37" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="38" bodyend="240"/>
+    <listofallmembers>
+      <member refid="classIdxRangeSlice_1ae9abf3cd2e4f039672b79ceb7967c682" prot="public" virt="non-virtual"><scope>IdxRangeSlice</scope><name>back</name></member>
+      <member refid="classIdxRangeSlice_1a904892c0a225dd5fe2c16448f7070266" prot="public" virt="non-virtual"><scope>IdxRangeSlice</scope><name>begin</name></member>
+      <member refid="classIdxRangeSlice_1aa1cc7ec0912e5195f762b6176b2aa085" prot="public" virt="non-virtual"><scope>IdxRangeSlice</scope><name>contains</name></member>
+      <member refid="classIdxRangeSlice_1af94edc7f3cecfc5b987d37f7929b719f" prot="public" virt="non-virtual"><scope>IdxRangeSlice</scope><name>contains</name></member>
+      <member refid="classIdxRangeSlice_1a77ce2afa2b2a692ba19d2caa02dd57bb" prot="public" virt="non-virtual"><scope>IdxRangeSlice</scope><name>end</name></member>
+      <member refid="classIdxRangeSlice_1a64ad71f7659189ff1ce4bfff4420a894" prot="public" virt="non-virtual"><scope>IdxRangeSlice</scope><name>extent</name></member>
+      <member refid="classIdxRangeSlice_1af6daea2b71b8e34e4b1c0a8b2a3fc95e" prot="public" virt="non-virtual"><scope>IdxRangeSlice</scope><name>extents</name></member>
+      <member refid="classIdxRangeSlice_1a7f97c317c82426f237b421e036200973" prot="public" virt="non-virtual"><scope>IdxRangeSlice</scope><name>front</name></member>
+      <member refid="classIdxRangeSlice_1a2ee4615ebb6864cdea1f6d93dc3e6add" prot="public" virt="non-virtual"><scope>IdxRangeSlice</scope><name>get_index</name></member>
+      <member refid="classIdxRangeSlice_1a45709058680b07f2af213c19e73c33d4" prot="private" virt="non-virtual"><scope>IdxRangeSlice</scope><name>IdxRangeSlice</name></member>
+      <member refid="classIdxRangeSlice_1af5cb71c4e5ef820d8774388eb6f44414" prot="public" virt="non-virtual"><scope>IdxRangeSlice</scope><name>IdxRangeSlice</name></member>
+      <member refid="classIdxRangeSlice_1a14b43890dfd560f54e3de3c3859bd31d" prot="public" virt="non-virtual"><scope>IdxRangeSlice</scope><name>IdxRangeSlice</name></member>
+      <member refid="classIdxRangeSlice_1a2b89aee054545931b156449008fd8fff" prot="public" virt="non-virtual"><scope>IdxRangeSlice</scope><name>IdxRangeSlice</name></member>
+      <member refid="classIdxRangeSlice_1ae029737c01f6337cc2775510bf436f64" prot="private" virt="non-virtual"><scope>IdxRangeSlice</scope><name>m_front</name></member>
+      <member refid="classIdxRangeSlice_1a95bbe456cf1e3c5fb3722b2a36160f33" prot="private" virt="non-virtual"><scope>IdxRangeSlice</scope><name>m_size</name></member>
+      <member refid="classIdxRangeSlice_1a9fb8cff425e72dc16b2bc818dcc84466" prot="private" virt="non-virtual"><scope>IdxRangeSlice</scope><name>m_stride</name></member>
+      <member refid="classIdxRangeSlice_1a3669efc69bfe9261cfc3ed85380e354c" prot="public" virt="non-virtual"><scope>IdxRangeSlice</scope><name>size</name></member>
+      <member refid="classIdxRangeSlice_1a855885bf7216d0efb3641ea5e54d6e34" prot="public" virt="non-virtual"><scope>IdxRangeSlice</scope><name>stride</name></member>
+      <member refid="classIdxRangeSlice_1ada67052c26c46493280f7afcbe1d9551" prot="public" virt="non-virtual"><scope>IdxRangeSlice</scope><name>strides</name></member>
+      <member refid="classIdxRangeSlice_1ae49932089fe31921b0cdb4aea133d650" prot="private" virt="non-virtual"><scope>IdxRangeSlice</scope><name>tags_seq</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

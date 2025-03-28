@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structconnectivity__details_1_1FindPatch_3_01Grid1D_00_01ddc_1_1detail_1_1TypeSeq_3_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>connectivity_details::FindPatch&lt; Grid1D, ddc::detail::TypeSeq&lt;&gt; &gt;</compoundname>
+    <includes refid="connectivity__details_8hpp" local="no">connectivity_details.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Grid1D</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>Specialisation of <ref refid="structconnectivity__details_1_1FindPatch" kindref="compound">FindPatch</ref> for an empty patch list. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="130" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="131" bodyend="135"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

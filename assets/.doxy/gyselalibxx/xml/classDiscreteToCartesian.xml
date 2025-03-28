@@ -1,0 +1,687 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classDiscreteToCartesian" kind="class" language="C++" prot="public">
+    <compoundname>DiscreteToCartesian</compoundname>
+    <includes refid="discrete__to__cartesian_8hpp" local="no">discrete_to_cartesian.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class <ref refid="structX" kindref="compound">X</ref></type>
+      </param>
+      <param>
+        <type>class <ref refid="structY" kindref="compound">Y</ref></type>
+      </param>
+      <param>
+        <type>class SplineEvaluator</type>
+      </param>
+      <param>
+        <type>class <ref refid="structR" kindref="compound">R</ref></type>
+        <defval>typename SplineEvaluator::continuous_dimension_type1</defval>
+      </param>
+      <param>
+        <type>class <ref refid="structTheta" kindref="compound">Theta</ref></type>
+        <defval>typename SplineEvaluator::continuous_dimension_type2</defval>
+      </param>
+      <param>
+        <type>class MemorySpace</type>
+        <defval>typename SplineEvaluator::memory_space</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classDiscreteToCartesian_1a77815368f1e5e77222cf4a66b3589c2e" prot="public" static="no">
+        <type>typename SplineEvaluator::bsplines_type1</type>
+        <definition>using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::BSplineR =  typename SplineEvaluator::bsplines_type1</definition>
+        <argsstring></argsstring>
+        <name>BSplineR</name>
+        <qualifiedname>DiscreteToCartesian::BSplineR</qualifiedname>
+        <briefdescription>
+<para>Indicate the bspline type of the first logical dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteToCartesian_1aee74ab0f1f920e05ef94fbb15b36f6fc" prot="public" static="no">
+        <type>typename SplineEvaluator::bsplines_type2</type>
+        <definition>using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::BSplineTheta =  typename SplineEvaluator::bsplines_type2</definition>
+        <argsstring></argsstring>
+        <name>BSplineTheta</name>
+        <qualifiedname>DiscreteToCartesian::BSplineTheta</qualifiedname>
+        <briefdescription>
+<para>Indicate the bspline type of the second logical dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="45" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteToCartesian_1a7e46471be9fce4ff796a971c9a660c97" prot="public" static="no">
+        <type><ref refid="structX" kindref="compound">X</ref></type>
+        <definition>using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::cartesian_tag_x =  X</definition>
+        <argsstring></argsstring>
+        <name>cartesian_tag_x</name>
+        <qualifiedname>DiscreteToCartesian::cartesian_tag_x</qualifiedname>
+        <briefdescription>
+<para>Indicate the first physical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="48" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteToCartesian_1a6c115a3ce558a2d1d1256a09f8e7408a" prot="public" static="no">
+        <type><ref refid="structY" kindref="compound">Y</ref></type>
+        <definition>using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::cartesian_tag_y =  Y</definition>
+        <argsstring></argsstring>
+        <name>cartesian_tag_y</name>
+        <qualifiedname>DiscreteToCartesian::cartesian_tag_y</qualifiedname>
+        <briefdescription>
+<para>Indicate the second physical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="50" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteToCartesian_1aec413130c64ea6b59a0c177566eb9d7e" prot="public" static="no">
+        <type><ref refid="structR" kindref="compound">R</ref></type>
+        <definition>using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::curvilinear_tag_r =  R</definition>
+        <argsstring></argsstring>
+        <name>curvilinear_tag_r</name>
+        <qualifiedname>DiscreteToCartesian::curvilinear_tag_r</qualifiedname>
+        <briefdescription>
+<para>Indicate the first logical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="52" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteToCartesian_1a44d272af350574b3d72f696e38f2159d" prot="public" static="no">
+        <type><ref refid="structTheta" kindref="compound">Theta</ref></type>
+        <definition>using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::curvilinear_tag_theta =  Theta</definition>
+        <argsstring></argsstring>
+        <name>curvilinear_tag_theta</name>
+        <qualifiedname>DiscreteToCartesian::curvilinear_tag_theta</qualifiedname>
+        <briefdescription>
+<para>Indicate the second logical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteToCartesian_1a2b2e0b6ec7ee087fdb814f9fa22aec01" prot="public" static="no">
+        <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
+        <definition>using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::CoordArg =  Coord&lt;R, Theta&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoordArg</name>
+        <qualifiedname>DiscreteToCartesian::CoordArg</qualifiedname>
+        <briefdescription>
+<para>The type of the argument of the function described by this mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="57" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteToCartesian_1ad3524c5f93fade40f00a204901975a33" prot="public" static="no">
+        <type>Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
+        <definition>using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::CoordResult =  Coord&lt;X, Y&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoordResult</name>
+        <qualifiedname>DiscreteToCartesian::CoordResult</qualifiedname>
+        <briefdescription>
+<para>The type of the result of the function described by this mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="59" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteToCartesian_1a9c137067e23580e1970c360a02f295ce" prot="public" static="no">
+        <type>typename <ref refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" kindref="member">X::Dual</ref></type>
+        <definition>using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::X_cov =  typename X::Dual</definition>
+        <argsstring></argsstring>
+        <name>X_cov</name>
+        <qualifiedname>DiscreteToCartesian::X_cov</qualifiedname>
+        <briefdescription>
+<para>The covariant form of the first physical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="62" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteToCartesian_1a646b426effc493a17d533449660e648e" prot="public" static="no">
+        <type>typename <ref refid="structY_1aad98c6afa465f3fb654029648420df1f" kindref="member">Y::Dual</ref></type>
+        <definition>using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::Y_cov =  typename Y::Dual</definition>
+        <argsstring></argsstring>
+        <name>Y_cov</name>
+        <qualifiedname>DiscreteToCartesian::Y_cov</qualifiedname>
+        <briefdescription>
+<para>The covariant form of the second physical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="64" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteToCartesian_1a45e63566bd132456f6d966218c2d3253" prot="public" static="no">
+        <type>typename <ref refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kindref="member">R::Dual</ref></type>
+        <definition>using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::R_cov =  typename R::Dual</definition>
+        <argsstring></argsstring>
+        <name>R_cov</name>
+        <qualifiedname>DiscreteToCartesian::R_cov</qualifiedname>
+        <briefdescription>
+<para>The covariant form of the first logical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="66" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteToCartesian_1a2103653283a7597142ab62f30b999e22" prot="public" static="no">
+        <type>typename <ref refid="structTheta_1a1f99557f831a14c03c9d03e1a5e33d40" kindref="member">Theta::Dual</ref></type>
+        <definition>using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::Theta_cov =  typename Theta::Dual</definition>
+        <argsstring></argsstring>
+        <name>Theta_cov</name>
+        <qualifiedname>DiscreteToCartesian::Theta_cov</qualifiedname>
+        <briefdescription>
+<para>The covariant form of the second logical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="68" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classDiscreteToCartesian_1a45c6accac73934322acb395686992e45" prot="private" static="no">
+        <type>IdxRange&lt; <ref refid="classDiscreteToCartesian_1a77815368f1e5e77222cf4a66b3589c2e" kindref="member">BSplineR</ref>, <ref refid="classDiscreteToCartesian_1aee74ab0f1f920e05ef94fbb15b36f6fc" kindref="member">BSplineTheta</ref> &gt;</type>
+        <definition>using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::spline_idx_range =  IdxRange&lt;BSplineR, BSplineTheta&gt;</definition>
+        <argsstring></argsstring>
+        <name>spline_idx_range</name>
+        <qualifiedname>DiscreteToCartesian::spline_idx_range</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="71" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteToCartesian_1a45d1e5d607665f22d6d15985b0492a5e" prot="private" static="no">
+        <type>DConstField&lt; spline_idx_range, MemorySpace &gt;</type>
+        <definition>using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::SplineType =  DConstField&lt;spline_idx_range, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>SplineType</name>
+        <qualifiedname>DiscreteToCartesian::SplineType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="73" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteToCartesian_1a962d2592fdf435268fbdcc16462c6ea9" prot="private" static="no">
+        <type>typename SplineEvaluator::evaluation_domain_type</type>
+        <definition>using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::IdxRangeRTheta =  typename SplineEvaluator::evaluation_domain_type</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeRTheta</name>
+        <qualifiedname>DiscreteToCartesian::IdxRangeRTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="75" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteToCartesian_1af73b4a990bd92c6d60aac4a3a5b85c15" prot="private" static="no">
+        <type>typename SplineEvaluator::evaluation_domain_type2</type>
+        <definition>using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::IdxRangeTheta =  typename SplineEvaluator::evaluation_domain_type2</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeTheta</name>
+        <qualifiedname>DiscreteToCartesian::IdxRangeTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDiscreteToCartesian_1aba715a48c61ec9dab43c6710d5441ef8" prot="private" static="no">
+        <type>typename IdxRangeTheta::discrete_element_type</type>
+        <definition>using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::IdxTheta =  typename IdxRangeTheta::discrete_element_type</definition>
+        <argsstring></argsstring>
+        <name>IdxTheta</name>
+        <qualifiedname>DiscreteToCartesian::IdxTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="77" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classDiscreteToCartesian_1aca828b903d607e653835e2629ec1429c" prot="private" static="no" mutable="no">
+        <type>SplineType</type>
+        <definition>SplineType DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::m_x_spline_representation</definition>
+        <argsstring></argsstring>
+        <name>m_x_spline_representation</name>
+        <qualifiedname>DiscreteToCartesian::m_x_spline_representation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="80" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDiscreteToCartesian_1a3069591a9fa5104762c952ce8cb4d1ea" prot="private" static="no" mutable="no">
+        <type>SplineType</type>
+        <definition>SplineType DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::m_y_spline_representation</definition>
+        <argsstring></argsstring>
+        <name>m_y_spline_representation</name>
+        <qualifiedname>DiscreteToCartesian::m_y_spline_representation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="81" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDiscreteToCartesian_1aaf655d15b62e9989a5518971c0ca63bb" prot="private" static="no" mutable="no">
+        <type>SplineEvaluator</type>
+        <definition>SplineEvaluator DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::m_spline_evaluator</definition>
+        <argsstring></argsstring>
+        <name>m_spline_evaluator</name>
+        <qualifiedname>DiscreteToCartesian::m_spline_evaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="82" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDiscreteToCartesian_1a610157e2cd2ee7205c9e627ed8d03e6b" prot="private" static="no" mutable="no">
+        <type>IdxRangeRTheta</type>
+        <definition>IdxRangeRTheta DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::m_idx_range_singular_point</definition>
+        <argsstring></argsstring>
+        <name>m_idx_range_singular_point</name>
+        <qualifiedname>DiscreteToCartesian::m_idx_range_singular_point</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="83" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classDiscreteToCartesian_1a5e720020cc2407eec06bc0af1f13ef52" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION</type>
+        <definition>KOKKOS_FUNCTION DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::DiscreteToCartesian</definition>
+        <argsstring>(SplineType curvilinear_to_x, SplineType curvilinear_to_y, SplineEvaluator const &amp;evaluator, IdxRangeRTheta idx_range_singular_point)</argsstring>
+        <name>DiscreteToCartesian</name>
+        <qualifiedname>DiscreteToCartesian::DiscreteToCartesian</qualifiedname>
+        <param>
+          <type>SplineType</type>
+          <declname>curvilinear_to_x</declname>
+        </param>
+        <param>
+          <type>SplineType</type>
+          <declname>curvilinear_to_y</declname>
+        </param>
+        <param>
+          <type>SplineEvaluator const &amp;</type>
+          <declname>evaluator</declname>
+        </param>
+        <param>
+          <type>IdxRangeRTheta</type>
+          <declname>idx_range_singular_point</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate a <ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian</ref> from the coefficients of 2D splines approximating the mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A discrete mapping is a mapping whose values are known only at the mesh points of the grid. To interpolate the mapping, we use B-splines. The <ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian</ref> mapping is initialised from the coefficients in front of the basis splines which arise when we approximate the functions <formula id="226">$ x(r,\theta) $</formula>, and <formula id="227">$ y(r,\theta) $</formula> (with <formula id="157">$ x $</formula> and <formula id="167">$ y $</formula> the physical dimensions in the logical domain) with Splines (using SplineBuilder2D). Then to interpolate the mapping, we will evaluate the decomposed functions on B-splines (see DiscreteToCartesian::operator()).</para>
+<para>Here, the evaluator is given as input.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">curvilinear_to_x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bsplines coefficients of the first physical dimension in the logical domain.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">curvilinear_to_y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bsplines coefficients of the second physical dimension in the logical domain.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The evaluator used to evaluate the mapping.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range_singular_point</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range describing the points which should be used to evaluate functions at the central point.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para>SplineBuilder2D </para>
+</simplesect>
+<simplesect kind="see"><para>DiscreteToCartesian::operator() </para>
+</simplesect>
+<simplesect kind="see"><para>SplineBoundaryValue </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="116" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="116" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="classDiscreteToCartesian_1ae9e0ebea2c8a75a561ed90494e0fc201" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
+        <definition>KOKKOS_FUNCTION Coord&lt; X, Y &gt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::operator()</definition>
+        <argsstring>(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>DiscreteToCartesian::operator()</qualifiedname>
+        <param>
+          <type>Coord&lt; <ref refid="classDiscreteToCartesian_1aec413130c64ea6b59a0c177566eb9d7e" kindref="member">curvilinear_tag_r</ref>, <ref refid="classDiscreteToCartesian_1a44d272af350574b3d72f696e38f2159d" kindref="member">curvilinear_tag_theta</ref> &gt; const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the physical coordinates from the logical coordinates. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It evaluates the decomposed mapping on B-splines at the coordinate point with a SplineEvaluator2D.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinates in the logical domain.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The coordinates of the mapping in the physical domain.</para>
+</simplesect>
+<simplesect kind="see"><para>SplineEvaluator2D </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="141" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="141" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="classDiscreteToCartesian_1a9c809652342ab04ae993c142a21262f7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, VectorIndexSet&lt; <ref refid="classDiscreteToCartesian_1a45e63566bd132456f6d966218c2d3253" kindref="member">R_cov</ref>, <ref refid="classDiscreteToCartesian_1a2103653283a7597142ab62f30b999e22" kindref="member">Theta_cov</ref> &gt; &gt;</type>
+        <definition>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; X, Y &gt;, VectorIndexSet&lt; R_cov, Theta_cov &gt; &gt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::jacobian_matrix</definition>
+        <argsstring>(Coord&lt; R, Theta &gt; const &amp;coord) const</argsstring>
+        <name>jacobian_matrix</name>
+        <qualifiedname>DiscreteToCartesian::jacobian_matrix</qualifiedname>
+        <param>
+          <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt; const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute full Jacobian matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For some computations, we need the complete Jacobian matrix or just the coefficients. The coefficients can be given independently with the function jacobian_component.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian matrix. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The Jacobian matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="160" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="160" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="classDiscreteToCartesian_1aae3c6b00328f75ccee203c5ca76c863b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IndexTag1</type>
+          </param>
+          <param>
+            <type>class IndexTag2</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::jacobian_component</definition>
+        <argsstring>(Coord&lt; R, Theta &gt; coord) const</argsstring>
+        <name>jacobian_component</name>
+        <qualifiedname>DiscreteToCartesian::jacobian_component</qualifiedname>
+        <param>
+          <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the (i,j) coefficient of the Jacobian matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For a mapping given by <formula id="228">$ \mathcal{F} : {q_i}\mapsto {x_i} $</formula>, with <formula id="229">${q_i}$</formula> the curvilinear coordinates and <formula id="230">${x_i}$</formula> the Cartesian coordinates, the (i,j) coefficient of the Jacobian matrix is given by <formula id="231">$ J^i_j\frac{\partial x_i}{\partial q_j} $</formula>.</para>
+<para>As the mapping is decomposed on B-splines, it means it computes the derivatives of B-splines <formula id="232">$ \frac{\partial x_i}{\partial q_j} (r,\theta)= \sum_k c_{x_i,k} \frac{\partial B_k}{\partial q_j}(r,\theta)$</formula> (the derivatives are implemented in SplineEvaluator2D).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian matrix.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A double with the value of the (i,j) coefficient of the Jacobian matrix.</para>
+</simplesect>
+<simplesect kind="see"><para>SplineEvaluator2D </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="194" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="194" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="classDiscreteToCartesian_1af13e543668b38ffc52ac252997e9f1e8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION double</type>
+        <definition>KOKKOS_FUNCTION double DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::jacobian</definition>
+        <argsstring>(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord) const</argsstring>
+        <name>jacobian</name>
+        <qualifiedname>DiscreteToCartesian::jacobian</qualifiedname>
+        <param>
+          <type>Coord&lt; <ref refid="classDiscreteToCartesian_1aec413130c64ea6b59a0c177566eb9d7e" kindref="member">curvilinear_tag_r</ref>, <ref refid="classDiscreteToCartesian_1a44d272af350574b3d72f696e38f2159d" kindref="member">curvilinear_tag_theta</ref> &gt; const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A double with the value of the determinant of the Jacobian matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="226" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="226" bodyend="232"/>
+      </memberdef>
+      <memberdef kind="function" id="classDiscreteToCartesian_1afea2c72f045e6d7a609b76d1fb2b494e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, VectorIndexSet&lt; <ref refid="classDiscreteToCartesian_1a45e63566bd132456f6d966218c2d3253" kindref="member">R_cov</ref>, <ref refid="classDiscreteToCartesian_1a2103653283a7597142ab62f30b999e22" kindref="member">Theta_cov</ref> &gt; &gt;</type>
+        <definition>KOKKOS_INLINE_FUNCTION DTensor&lt; VectorIndexSet&lt; X, Y &gt;, VectorIndexSet&lt; R_cov, Theta_cov &gt; &gt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::first_order_jacobian_matrix_r_rtheta</definition>
+        <argsstring>(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord) const</argsstring>
+        <name>first_order_jacobian_matrix_r_rtheta</name>
+        <qualifiedname>DiscreteToCartesian::first_order_jacobian_matrix_r_rtheta</qualifiedname>
+        <param>
+          <type>Coord&lt; <ref refid="classDiscreteToCartesian_1aec413130c64ea6b59a0c177566eb9d7e" kindref="member">curvilinear_tag_r</ref>, <ref refid="classDiscreteToCartesian_1a44d272af350574b3d72f696e38f2159d" kindref="member">curvilinear_tag_theta</ref> &gt; const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Get the first order expansion of the Jacobian matrix with the theta component divided by r. The expansion is carried out around <formula id="233">$ r=0 $</formula>. The returned matrix <formula id="234">$ J$</formula> is defined as: <formula id="235">$ J_{00} = \frac{\partial x}{\partial r}(r, \theta) $</formula> <formula id="236">$ J_{01} = \frac{1}{r} \frac{\partial x}{\partial \theta}(r, \theta) + O(r^2) = \frac{\partial^2 x}{\partial r \partial \theta}(0, \theta) $</formula> <formula id="237">$ J_{10} = \frac{\partial y}{\partial r}(r, \theta) $</formula> <formula id="238">$ J_{11} = \frac{1}{r} \frac{\partial y}{\partial \theta}(r, \theta) + O(r^2) = \frac{\partial^2 y}{\partial r \partial \theta}(0, \theta) $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The first order expansion of the Jacobian matrix with the theta component divided by r. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="249" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="249" bodyend="264"/>
+      </memberdef>
+      <memberdef kind="function" id="classDiscreteToCartesian_1aeade6cd026d0d03df92d00b0f2651195" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION IdxRangeRTheta</type>
+        <definition>KOKKOS_INLINE_FUNCTION IdxRangeRTheta DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::idx_range_singular_point</definition>
+        <argsstring>() const</argsstring>
+        <name>idx_range_singular_point</name>
+        <qualifiedname>DiscreteToCartesian::idx_range_singular_point</qualifiedname>
+        <briefdescription>
+<para>Get the index range describing the points which should be used to evaluate functions at the central point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>An index range covering the O-point. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="271" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="271" bodyend="274"/>
+      </memberdef>
+      <memberdef kind="function" id="classDiscreteToCartesian_1a6c57fdeacc0c42720881993b7905ef38" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION const Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
+        <definition>KOKKOS_INLINE_FUNCTION const Coord&lt; X, Y &gt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::control_point</definition>
+        <argsstring>(Idx&lt; BSplineR, BSplineTheta &gt; const &amp;el) const</argsstring>
+        <name>control_point</name>
+        <qualifiedname>DiscreteToCartesian::control_point</qualifiedname>
+        <param>
+          <type>Idx&lt; <ref refid="classDiscreteToCartesian_1a77815368f1e5e77222cf4a66b3589c2e" kindref="member">BSplineR</ref>, <ref refid="classDiscreteToCartesian_1aee74ab0f1f920e05ef94fbb15b36f6fc" kindref="member">BSplineTheta</ref> &gt; const &amp;</type>
+          <declname>el</declname>
+        </param>
+        <briefdescription>
+<para>Get a control point of the mapping on B-splines. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The mapping <formula id="55">$ (r,\theta) \mapsto (x,y) $</formula> decomposed on B-splines can be identified by its control points <formula id="239">$ \{(c_{x,k}, c_{y,k})\}_{k}  $</formula> where <formula id="240">$ c_{x,k} $</formula> and <formula id="241">$ c_{y,k} $</formula> are the B-splines coefficients:</para>
+<para><formula id="242">$ x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k{r,\theta} $</formula>,</para>
+<para><formula id="243">$ y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k{r,\theta} $</formula>,</para>
+<para>where <formula id="244">$ N_r\times N_{\theta} $</formula> is the number of B-splines.</para>
+<para>The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points <formula id="245">$ \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}} $</formula> are equal to the pole <formula id="246">$ (c_{x,k}, c_{y,k}) = (x_0,y_0) $</formula>, <formula id="247">$ \forall k = 0, ..., N_{\theta}-1 $</formula> where <formula id="248">$ x(0,\theta), y(0,\theta) = (x_0,y_0) $</formula> <formula id="14">$ \forall \theta $</formula>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">el</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of the control point.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The el-th control point.</para>
+</simplesect>
+<simplesect kind="see"><para>GrevilleInterpolationPoints </para>
+</simplesect>
+<simplesect kind="see"><para>KnotsAsInterpolationPoints </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="304" column="40" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="304" bodyend="308"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class for describing discrete 2D mappings from the logical domain to the physical domain. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The mapping describe here is only defined on a grid. The <ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian</ref> class decomposes the mapping on B-splines to evaluate it on the physical domain.</para>
+<para><formula id="224">$ x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta),$</formula></para>
+<para><formula id="225">$ y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta).$</formula></para>
+<para>This mapping could be costly to inverse. </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="34" bodyend="309"/>
+    <listofallmembers>
+      <member refid="classDiscreteToCartesian_1a77815368f1e5e77222cf4a66b3589c2e" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>BSplineR</name></member>
+      <member refid="classDiscreteToCartesian_1aee74ab0f1f920e05ef94fbb15b36f6fc" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>BSplineTheta</name></member>
+      <member refid="classDiscreteToCartesian_1a7e46471be9fce4ff796a971c9a660c97" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>cartesian_tag_x</name></member>
+      <member refid="classDiscreteToCartesian_1a6c115a3ce558a2d1d1256a09f8e7408a" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>cartesian_tag_y</name></member>
+      <member refid="classDiscreteToCartesian_1a6c57fdeacc0c42720881993b7905ef38" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>control_point</name></member>
+      <member refid="classDiscreteToCartesian_1a2b2e0b6ec7ee087fdb814f9fa22aec01" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>CoordArg</name></member>
+      <member refid="classDiscreteToCartesian_1ad3524c5f93fade40f00a204901975a33" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>CoordResult</name></member>
+      <member refid="classDiscreteToCartesian_1aec413130c64ea6b59a0c177566eb9d7e" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>curvilinear_tag_r</name></member>
+      <member refid="classDiscreteToCartesian_1a44d272af350574b3d72f696e38f2159d" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>curvilinear_tag_theta</name></member>
+      <member refid="classDiscreteToCartesian_1a5e720020cc2407eec06bc0af1f13ef52" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>DiscreteToCartesian</name></member>
+      <member refid="classDiscreteToCartesian_1afea2c72f045e6d7a609b76d1fb2b494e" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>first_order_jacobian_matrix_r_rtheta</name></member>
+      <member refid="classDiscreteToCartesian_1aeade6cd026d0d03df92d00b0f2651195" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>idx_range_singular_point</name></member>
+      <member refid="classDiscreteToCartesian_1a962d2592fdf435268fbdcc16462c6ea9" prot="private" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>IdxRangeRTheta</name></member>
+      <member refid="classDiscreteToCartesian_1af73b4a990bd92c6d60aac4a3a5b85c15" prot="private" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>IdxRangeTheta</name></member>
+      <member refid="classDiscreteToCartesian_1aba715a48c61ec9dab43c6710d5441ef8" prot="private" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>IdxTheta</name></member>
+      <member refid="classDiscreteToCartesian_1af13e543668b38ffc52ac252997e9f1e8" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>jacobian</name></member>
+      <member refid="classDiscreteToCartesian_1aae3c6b00328f75ccee203c5ca76c863b" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>jacobian_component</name></member>
+      <member refid="classDiscreteToCartesian_1a9c809652342ab04ae993c142a21262f7" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>jacobian_matrix</name></member>
+      <member refid="classDiscreteToCartesian_1a610157e2cd2ee7205c9e627ed8d03e6b" prot="private" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>m_idx_range_singular_point</name></member>
+      <member refid="classDiscreteToCartesian_1aaf655d15b62e9989a5518971c0ca63bb" prot="private" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>m_spline_evaluator</name></member>
+      <member refid="classDiscreteToCartesian_1aca828b903d607e653835e2629ec1429c" prot="private" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>m_x_spline_representation</name></member>
+      <member refid="classDiscreteToCartesian_1a3069591a9fa5104762c952ce8cb4d1ea" prot="private" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>m_y_spline_representation</name></member>
+      <member refid="classDiscreteToCartesian_1ae9e0ebea2c8a75a561ed90494e0fc201" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>operator()</name></member>
+      <member refid="classDiscreteToCartesian_1a45e63566bd132456f6d966218c2d3253" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>R_cov</name></member>
+      <member refid="classDiscreteToCartesian_1a45c6accac73934322acb395686992e45" prot="private" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>spline_idx_range</name></member>
+      <member refid="classDiscreteToCartesian_1a45d1e5d607665f22d6d15985b0492a5e" prot="private" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>SplineType</name></member>
+      <member refid="classDiscreteToCartesian_1a2103653283a7597142ab62f30b999e22" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>Theta_cov</name></member>
+      <member refid="classDiscreteToCartesian_1a9c137067e23580e1970c360a02f295ce" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>X_cov</name></member>
+      <member refid="classDiscreteToCartesian_1a646b426effc493a17d533449660e648e" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>Y_cov</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_9a2f28dc8f538ee0f4428810facf29b8" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu</compoundname>
+    <innerdir refid="dir_d2f3522bfaadb2833cfc3c18da51fc33">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions</innerdir>
+    <innerdir refid="dir_807bff9d645a62665fbe11aeed095652">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry</innerdir>
+    <innerdir refid="dir_99d29839093a8e7b0be0d596be7efa54">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/"/>
+  </compounddef>
+</doxygen>

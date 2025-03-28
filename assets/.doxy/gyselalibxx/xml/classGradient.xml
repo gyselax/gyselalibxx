@@ -1,0 +1,388 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classGradient" kind="class" language="C++" prot="public">
+    <compoundname>Gradient</compoundname>
+    <includes refid="gradient_8hpp" local="no">gradient.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class MetricTensorType</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classGradient_1a64e4e9fca6da517e2146ac091ed82fdc" prot="private" static="no">
+        <type>typename MetricTensorType::CoordArg</type>
+        <definition>using Gradient&lt; MetricTensorType &gt;::CoordArg =  typename MetricTensorType::CoordArg</definition>
+        <argsstring></argsstring>
+        <name>CoordArg</name>
+        <qualifiedname>Gradient::CoordArg</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="18" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGradient_1a797578524c97ebe981f62dab1975fa62" prot="private" static="no">
+        <type>ddc::to_type_seq_t&lt; typename MetricTensorType::CoordArg &gt;</type>
+        <definition>using Gradient&lt; MetricTensorType &gt;::Dims =  ddc::to_type_seq_t&lt;typename MetricTensorType::CoordArg&gt;</definition>
+        <argsstring></argsstring>
+        <name>Dims</name>
+        <qualifiedname>Gradient::Dims</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="20" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGradient_1a9e7105999ad3a56c2fa6e5bddfa4ebc3" prot="private" static="no">
+        <type>vector_index_set_dual_t&lt; Dims &gt;</type>
+        <definition>using Gradient&lt; MetricTensorType &gt;::Dims_cov =  vector_index_set_dual_t&lt;Dims&gt;</definition>
+        <argsstring></argsstring>
+        <name>Dims_cov</name>
+        <qualifiedname>Gradient::Dims_cov</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="21" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGradient_1a46b3388d269d4812b86c0742d8ce2228" prot="private" static="no">
+        <type>typename MetricTensorType::ContravariantVectorType</type>
+        <definition>using Gradient&lt; MetricTensorType &gt;::DVectorType =  typename MetricTensorType::ContravariantVectorType</definition>
+        <argsstring></argsstring>
+        <name>DVectorType</name>
+        <qualifiedname>Gradient::DVectorType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="23" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGradient_1ad0785e06c3cdbc18808d46e5ab3f944e" prot="private" static="no">
+        <type>typename MetricTensorType::CovariantVectorType</type>
+        <definition>using Gradient&lt; MetricTensorType &gt;::DVectorCov =  typename MetricTensorType::CovariantVectorType</definition>
+        <argsstring></argsstring>
+        <name>DVectorCov</name>
+        <qualifiedname>Gradient::DVectorCov</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="24" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGradient_1a22184971638dfd5c6b5a69909118f21f" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>class IdxRange</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classVectorField" kindref="compound">DVectorField</ref>&lt; IdxRange, Dims &gt;</type>
+        <definition>using Gradient&lt; MetricTensorType &gt;::DVectorFieldType =  DVectorField&lt;IdxRange, Dims&gt;</definition>
+        <argsstring></argsstring>
+        <name>DVectorFieldType</name>
+        <qualifiedname>Gradient::DVectorFieldType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGradient_1a9648b8683142a384c35bbe571034afdb" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>class IdxRange</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classVectorField" kindref="compound">DVectorField</ref>&lt; IdxRange, Dims_cov &gt;</type>
+        <definition>using Gradient&lt; MetricTensorType &gt;::DVectorFieldCovType =  DVectorField&lt;IdxRange, Dims_cov&gt;</definition>
+        <argsstring></argsstring>
+        <name>DVectorFieldCovType</name>
+        <qualifiedname>Gradient::DVectorFieldCovType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGradient_1a8c4dee3271b238efbdb603210affdc8b" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>class IdxRange</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classVectorField" kindref="compound">DVectorConstField</ref>&lt; IdxRange, Dims_cov &gt;</type>
+        <definition>using Gradient&lt; MetricTensorType &gt;::DVectorConstFieldCovType =  DVectorConstField&lt;IdxRange, Dims_cov&gt;</definition>
+        <argsstring></argsstring>
+        <name>DVectorConstFieldCovType</name>
+        <qualifiedname>Gradient::DVectorConstFieldCovType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classGradient_1ad8996205b8fb9e102f7665a728a44159" prot="private" static="no" mutable="no">
+        <type>MetricTensorType const  &amp;</type>
+        <definition>MetricTensorType const&amp; Gradient&lt; MetricTensorType &gt;::m_metric_tensor</definition>
+        <argsstring></argsstring>
+        <name>m_metric_tensor</name>
+        <qualifiedname>Gradient::m_metric_tensor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="35" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classGradient_1a089c6838004a0e19b761a4933ef0d034" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION</type>
+        <definition>KOKKOS_FUNCTION Gradient&lt; MetricTensorType &gt;::Gradient</definition>
+        <argsstring>(MetricTensorType const &amp;metric_tensor)</argsstring>
+        <name>Gradient</name>
+        <qualifiedname>Gradient::Gradient</qualifiedname>
+        <param>
+          <type>MetricTensorType const &amp;</type>
+          <declname>metric_tensor</declname>
+        </param>
+        <briefdescription>
+<para>Construct an instance of the class <ref refid="classGradient" kindref="compound">Gradient</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>metric_tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A <ref refid="classMetricTensorEvaluator" kindref="compound">MetricTensorEvaluator</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="43" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="43" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classGradient_1a18b2e093f6d021c5297507d1f0a69394" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION DVectorCov</type>
+        <definition>KOKKOS_INLINE_FUNCTION DVectorCov Gradient&lt; MetricTensorType &gt;::operator()</definition>
+        <argsstring>(DVectorCov const &amp;partial_derivatives) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>Gradient::operator()</qualifiedname>
+        <param>
+          <type>DVectorCov const &amp;</type>
+          <declname>partial_derivatives</declname>
+        </param>
+        <briefdescription>
+<para>Compute the gradient of a scalar field at a given coordinate, from the partial derivatives of the field. The gradient is expressed on the covariant basis. The components of the gradient in the covariant basis are simply equal to the value of the partial derivatives of the scalar field. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">partial_derivatives</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector containing the partial derivatives of the scalar field expressed at a given coordinate.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The components of the gradient at a given coordinate, expressed on the covariant basis. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="61" column="39" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="61" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="classGradient_1a1388160bf8e4ba98bc79760d4729d6ea" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IdxRange</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION void</type>
+        <definition>KOKKOS_INLINE_FUNCTION void Gradient&lt; MetricTensorType &gt;::operator()</definition>
+        <argsstring>(DVectorFieldCovType&lt; IdxRange &gt; gradient, DVectorConstFieldCovType&lt; IdxRange &gt; const partial_derivatives) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>Gradient::operator()</qualifiedname>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">DVectorFieldCovType</ref>&lt; IdxRange &gt;</type>
+          <declname>gradient</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">DVectorConstFieldCovType</ref>&lt; IdxRange &gt; const</type>
+          <declname>partial_derivatives</declname>
+        </param>
+        <briefdescription>
+<para>Compute the gradient of a scalar field at a given coordinate, using partial derivatives of the field. The gradient is expressed on the covariant basis. The components of the gradient in the covariant basis are simply equal to the value of the partial derivatives of the scalar field. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">gradient</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector field that contains on output the value of the gradient components expressed on the contravariant </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">partial_derivatives</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector field containing the partial derivatives of the scalar field. basis. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="80" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="80" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classGradient_1a91c56b0cb7dc0ec63a708029db468ab4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION DVectorType</type>
+        <definition>KOKKOS_INLINE_FUNCTION DVectorType Gradient&lt; MetricTensorType &gt;::operator()</definition>
+        <argsstring>(DVectorCov const &amp;partial_derivatives, CoordArg const &amp;coord) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>Gradient::operator()</qualifiedname>
+        <param>
+          <type>DVectorCov const &amp;</type>
+          <declname>partial_derivatives</declname>
+        </param>
+        <param>
+          <type>CoordArg const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the gradient of a scalar field at a given coordinate, using partial derivatives of the field. The gradient is expressed on the contravariant basis. <linebreak/>
+ </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">partial_derivatives</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector that contains the partial derivatives of the scalar field expressed at a given coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate at which the gradient should be evaluated.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The components of the gradient at a given coordinate, expressed on the contravariant basis. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="100" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="100" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classGradient_1add6ab7bc7357e5b74821190bc43fc6b5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IdxRange</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION void</type>
+        <definition>KOKKOS_FUNCTION void Gradient&lt; MetricTensorType &gt;::operator()</definition>
+        <argsstring>(DVectorFieldType&lt; IdxRange &gt; const gradient, DVectorConstFieldCovType&lt; IdxRange &gt; const partial_derivatives) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>Gradient::operator()</qualifiedname>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">DVectorFieldType</ref>&lt; IdxRange &gt; const</type>
+          <declname>gradient</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">DVectorConstFieldCovType</ref>&lt; IdxRange &gt; const</type>
+          <declname>partial_derivatives</declname>
+        </param>
+        <briefdescription>
+<para>Compute the gradient of a scalar field using partial derivatives of the field. The gradient is expressed on the contravariant basis. <linebreak/>
+ </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">gradient</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector field that contains on output the value of the gradient components expressed on the contravariant </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">partial_derivatives</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector field that contains the partial derivatives of the scalar field. basis. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="118" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="118" bodyend="131"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class which implements a gradient operator. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>MetricTensorType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A type representing a metric tensor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="16" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="17" bodyend="132"/>
+    <listofallmembers>
+      <member refid="classGradient_1a64e4e9fca6da517e2146ac091ed82fdc" prot="private" virt="non-virtual"><scope>Gradient</scope><name>CoordArg</name></member>
+      <member refid="classGradient_1a797578524c97ebe981f62dab1975fa62" prot="private" virt="non-virtual"><scope>Gradient</scope><name>Dims</name></member>
+      <member refid="classGradient_1a9e7105999ad3a56c2fa6e5bddfa4ebc3" prot="private" virt="non-virtual"><scope>Gradient</scope><name>Dims_cov</name></member>
+      <member refid="classGradient_1a8c4dee3271b238efbdb603210affdc8b" prot="private" virt="non-virtual"><scope>Gradient</scope><name>DVectorConstFieldCovType</name></member>
+      <member refid="classGradient_1ad0785e06c3cdbc18808d46e5ab3f944e" prot="private" virt="non-virtual"><scope>Gradient</scope><name>DVectorCov</name></member>
+      <member refid="classGradient_1a9648b8683142a384c35bbe571034afdb" prot="private" virt="non-virtual"><scope>Gradient</scope><name>DVectorFieldCovType</name></member>
+      <member refid="classGradient_1a22184971638dfd5c6b5a69909118f21f" prot="private" virt="non-virtual"><scope>Gradient</scope><name>DVectorFieldType</name></member>
+      <member refid="classGradient_1a46b3388d269d4812b86c0742d8ce2228" prot="private" virt="non-virtual"><scope>Gradient</scope><name>DVectorType</name></member>
+      <member refid="classGradient_1a089c6838004a0e19b761a4933ef0d034" prot="public" virt="non-virtual"><scope>Gradient</scope><name>Gradient</name></member>
+      <member refid="classGradient_1ad8996205b8fb9e102f7665a728a44159" prot="private" virt="non-virtual"><scope>Gradient</scope><name>m_metric_tensor</name></member>
+      <member refid="classGradient_1a18b2e093f6d021c5297507d1f0a69394" prot="public" virt="non-virtual"><scope>Gradient</scope><name>operator()</name></member>
+      <member refid="classGradient_1a1388160bf8e4ba98bc79760d4729d6ea" prot="public" virt="non-virtual"><scope>Gradient</scope><name>operator()</name></member>
+      <member refid="classGradient_1a91c56b0cb7dc0ec63a708029db468ab4" prot="public" virt="non-virtual"><scope>Gradient</scope><name>operator()</name></member>
+      <member refid="classGradient_1add6ab7bc7357e5b74821190bc43fc6b5" prot="public" virt="non-virtual"><scope>Gradient</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

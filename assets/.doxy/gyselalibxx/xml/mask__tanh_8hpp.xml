@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="mask__tanh_8hpp" kind="file" language="C++">
+    <compoundname>mask_tanh.hpp</compoundname>
+    <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
+    <includes local="yes">geometry.hpp</includes>
+    <includedby refid="kinetic__source_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/kinetic_source.cpp</includedby>
+    <includedby refid="krook__source__adaptive_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_adaptive.cpp</includedby>
+    <includedby refid="krook__source__constant_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.cpp</includedby>
+    <includedby refid="mask__tanh_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/mask_tanh.cpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/mask_tanh.hpp</label>
+        <link refid="mask__tanh_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ddc/ddc.hpp</label>
+      </node>
+      <node id="4">
+        <label>ddc/kernels/splines.hpp</label>
+      </node>
+      <node id="5">
+        <label>geometry.hpp</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="mask__tanh_8hpp_1a6f9734fca864f135565da5376b5c3e72" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>MaskType</name>
+        <enumvalue id="mask__tanh_8hpp_1a6f9734fca864f135565da5376b5c3e72a960b44c579bc2f6818d2daaf9e4c16f0" prot="public">
+          <name>Normal</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="mask__tanh_8hpp_1a6f9734fca864f135565da5376b5c3e72acf4c2a4bf7c328c4e51f902350475343" prot="public">
+          <name>Inverted</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>An enum class that allows choosing between two types of masks. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/mask_tanh.hpp" line="10" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/mask_tanh.hpp" bodystart="10" bodyend="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="mask__tanh_8hpp_1a1d4432f5d3a7e655b4faae141b2d4eea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>host_t&lt; DFieldMemX &gt;</type>
+        <definition>host_t&lt; DFieldMemX &gt; mask_tanh</definition>
+        <argsstring>(IdxRangeX const &amp;gridx, double extent, double stiffness, MaskType const type, bool normalised)</argsstring>
+        <name>mask_tanh</name>
+        <param>
+          <type>IdxRangeX const &amp;</type>
+          <declname>gridx</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>extent</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>stiffness</declname>
+        </param>
+        <param>
+          <type>MaskType const</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>normalised</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a mask function defined with hyperbolic tangents. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Consider the index range [xmin, xmax], and {xleft, xright} the transition coordinates defined using the extent parameter.</para>
+<para>If type = &apos;normal&apos; the mask equals one inside the [xleft, xright] interval and zero outside.</para>
+<para>If type = &apos;inverted&apos; the mask equals zero inside the [xleft, xright] interval and one outside.</para>
+<para>If normalised = true, the mask is normalised so that its integral equals one</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">gridx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mesh in the x direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">extent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that sets the extent of the mask. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stiffness</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that sets the stiffness of the mask. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A MaskType parameter that defines the type of the mask. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">normalised</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A boolean that equals true if the integral of the mask must be equal to one. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A Dfield containing the mask. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/mask_tanh.hpp" line="34" column="8" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/mask_tanh.cpp" bodystart="11" bodyend="65" declfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/mask_tanh.hpp" declline="34" declcolumn="8"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;geometry.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/>MaskType<sp/>{<sp/>Normal,<sp/>Inverted<sp/>};</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal">host_t&lt;DFieldMemX&gt;<sp/>mask_tanh(</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeX<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>gridx,</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>extent,</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>stiffness,</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MaskType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>type,</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>normalised);</highlight></codeline>
+    </programlisting>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/mask_tanh.hpp"/>
+  </compounddef>
+</doxygen>

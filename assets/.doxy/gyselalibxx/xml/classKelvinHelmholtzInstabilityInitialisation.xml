@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classKelvinHelmholtzInstabilityInitialisation" kind="class" language="C++" prot="public">
+    <compoundname>KelvinHelmholtzInstabilityInitialisation</compoundname>
+    <includes refid="initialisation__Kelvin__Helmholtz_8hpp" local="no">initialisation_Kelvin_Helmholtz.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classKelvinHelmholtzInstabilityInitialisation_1aea24b966a750ad0e02d276c3df240d96" prot="private" static="no" mutable="no">
+        <type>double const</type>
+        <definition>double const KelvinHelmholtzInstabilityInitialisation::m_epsilon</definition>
+        <argsstring></argsstring>
+        <name>m_epsilon</name>
+        <qualifiedname>KelvinHelmholtzInstabilityInitialisation::m_epsilon</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" line="25" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classKelvinHelmholtzInstabilityInitialisation_1a09e5f372e1b0c4c85dd3f7e56bdb5b31" prot="private" static="no" mutable="no">
+        <type>double const</type>
+        <definition>double const KelvinHelmholtzInstabilityInitialisation::m_mode_k</definition>
+        <argsstring></argsstring>
+        <name>m_mode_k</name>
+        <qualifiedname>KelvinHelmholtzInstabilityInitialisation::m_mode_k</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" line="26" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classKelvinHelmholtzInstabilityInitialisation_1a02c15d97613432489efdafaf5b3f3657" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>KelvinHelmholtzInstabilityInitialisation::KelvinHelmholtzInstabilityInitialisation</definition>
+        <argsstring>(double const epsilon, double const mode_k)</argsstring>
+        <name>KelvinHelmholtzInstabilityInitialisation</name>
+        <qualifiedname>KelvinHelmholtzInstabilityInitialisation::KelvinHelmholtzInstabilityInitialisation</qualifiedname>
+        <param>
+          <type>double const</type>
+          <declname>epsilon</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>mode_k</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate the initializer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>epsilon</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><formula id="11">$ \varepsilon $</formula>, the amplitude of perturbation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mode_k</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><formula id="155">$ k $</formula>, the perturbation mode. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" line="35" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" bodystart="35" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classKelvinHelmholtzInstabilityInitialisation_1a92fb6a3daffddc6162cc36aca6f69378" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>KelvinHelmholtzInstabilityInitialisation::~KelvinHelmholtzInstabilityInitialisation</definition>
+        <argsstring>()=default</argsstring>
+        <name>~KelvinHelmholtzInstabilityInitialisation</name>
+        <qualifiedname>KelvinHelmholtzInstabilityInitialisation::~KelvinHelmholtzInstabilityInitialisation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" line="39" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classKelvinHelmholtzInstabilityInitialisation_1aff62a0f6acc61a78242b64936c0b3407" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void KelvinHelmholtzInstabilityInitialisation::operator()</definition>
+        <argsstring>(DFieldXY allfdistribu, DFieldXY allfdistribu_equilibrium)</argsstring>
+        <name>operator()</name>
+        <qualifiedname>KelvinHelmholtzInstabilityInitialisation::operator()</qualifiedname>
+        <param>
+          <type>DFieldXY</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>DFieldXY</type>
+          <declname>allfdistribu_equilibrium</declname>
+        </param>
+        <briefdescription>
+<para>Initialise <formula id="158">$ f_{eq}$</formula> and <formula id="1">$ f $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Field referring to the <formula id="1">$ f $</formula> function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>allfdistribu_equilibrium</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Field referring to the <formula id="159">$ f_{eq} $</formula> function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" line="47" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" bodystart="47" bodyend="64"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Initialise the allfdistribu function. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Set the allfdistribu at <formula id="153">$ f_{eq}(x, y) = \sin(y) $</formula></para>
+<para>and <formula id="154">$ f_0(x, y) = f_{eq}(x, y) + \varepsilon \cos(kx) $</formula>,</para>
+<para>with <formula id="11">$ \varepsilon $</formula> an amplitude of perturbation and <formula id="155">$ k $</formula> mode equal to <formula id="156">$ 2\pi $</formula> divided by the length of the index range on <formula id="157">$ x $</formula>. </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" line="23" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" bodystart="24" bodyend="65"/>
+    <listofallmembers>
+      <member refid="classKelvinHelmholtzInstabilityInitialisation_1a02c15d97613432489efdafaf5b3f3657" prot="public" virt="non-virtual"><scope>KelvinHelmholtzInstabilityInitialisation</scope><name>KelvinHelmholtzInstabilityInitialisation</name></member>
+      <member refid="classKelvinHelmholtzInstabilityInitialisation_1aea24b966a750ad0e02d276c3df240d96" prot="private" virt="non-virtual"><scope>KelvinHelmholtzInstabilityInitialisation</scope><name>m_epsilon</name></member>
+      <member refid="classKelvinHelmholtzInstabilityInitialisation_1a09e5f372e1b0c4c85dd3f7e56bdb5b31" prot="private" virt="non-virtual"><scope>KelvinHelmholtzInstabilityInitialisation</scope><name>m_mode_k</name></member>
+      <member refid="classKelvinHelmholtzInstabilityInitialisation_1aff62a0f6acc61a78242b64936c0b3407" prot="public" virt="non-virtual"><scope>KelvinHelmholtzInstabilityInitialisation</scope><name>operator()</name></member>
+      <member refid="classKelvinHelmholtzInstabilityInitialisation_1a92fb6a3daffddc6162cc36aca6f69378" prot="public" virt="non-virtual"><scope>KelvinHelmholtzInstabilityInitialisation</scope><name>~KelvinHelmholtzInstabilityInitialisation</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

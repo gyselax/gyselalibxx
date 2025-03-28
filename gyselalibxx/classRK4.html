@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Class RK4 - GyselalibX</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Class RK4";
+        var mkdocs_page_input_path = "gyselalibxx/classRK4.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> GyselalibX
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">General</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/getting_started.html">Getting Started</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Installation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../docs/first_steps/install.html">Gyselalib++ Installation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../toolchains/index.html">Pre-made build settings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standards</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/mathematical_and_physical_conventions.html">Math & Physics</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Gyselalib++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Source</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../src/index.html">Gyselalib++ contents</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/advection/index.html">Advection methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/collisions/index.html">Collisions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/data_types/index.html">Data Storage Types</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryRTheta/index.html">Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection/index.html">Advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_field</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/geometry/index.html">Geometry RTheta</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/initialisation/index.html">Initialisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/poisson/index.html">Polar Poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_solver</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/time_solver/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryVparMu</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryVparMu/index.html">Geometry (vpar, mu)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/collisions/index.html">CollisionConfiguration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/geometry/index.html">GeometryVparMu</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXVx/index.html">Geometry (x, v_x)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >boltzmann</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/boltzmann/index.html">Boltzmann solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/geometry/index.html">Geometry X-Vx</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >rhs</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/rhs/index.html">RHS</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/utils/index.html">Utils</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXY/index.html">Geometry (x, y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/geometry/index.html">Geometry XY</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/initialisation/index.html">Initialisation on (x,y) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/time_integration/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXYVxVy</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXYVxVy/index.html">Geometry (x, y, v_x, v_y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/geometry/index.html">Geometry X Y-Vx Vy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vlasov</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/vlasov/index.html">Vlasov solver</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/interpolation/index.html">Interpolation Methods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/polar_splines/index.html">Polar Splines</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >io</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/io/index.html">Functions used for input and output</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mapping</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mapping/index.html">Mappings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >math_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/math_tools/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >matrix_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/matrix_tools/index.html">Matrix tools</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mpi_parallelisation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mpi_parallelisation/index.html">Parallelisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/multipatch/index.html">Multipatch</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >connectivity</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/connectivity/index.html">Multipatch connectivity</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/data_types/index.html">Data Types for Multipatch Geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/utils/index.html">Multipatch utilitary functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >quadrature</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/quadrature/index.html">Quadrature Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >speciesinfo</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/speciesinfo/index.html">SpeciesInfo (x, v_x)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >timestepper</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/timestepper/index.html">Time Stepping Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/utils/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Simulations</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../simulations/index.html">Gyselalib++ simulations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryRTheta/index.html">Simulations in (r, theta) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >diocotron</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/diocotron/index.html">Diocotron instability</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vortex_merger</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/vortex_merger/index.html">Vortex merger</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXVx/index.html">Simulations in (x, vx) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXY/index.html">Simulations in (x, y) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >guiding_centre</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryXY/guiding_centre/index.html">Guiding centre (X,Y) simulation</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tests</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../tests/index.html">Gyselalib++ tests</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/advection/index.html">Tests on the templated advection operators</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/geometryRTheta/index.html">Tests : Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/advection_rtheta/index.html">Tests on the 2D polar advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/polar_poisson/index.html">Tests on the 2D polar poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline_interpolator_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/spline_interpolator_rtheta/index.html">Tests on spline interpolator in polar coordinates</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/multipatch/index.html">Multipatch geometry tests</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometries</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/multipatch/geometries/index.html">Multipatch geometries</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Adding_docs.html">Adding Docs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Using_git.html">Using Git</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Gyselalib++</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" >Classes</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="annotated.html">Class List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="classes.html">Class Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="hierarchy.html">Class Hierarchy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Namespaces</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="namespaces.html">Namespace List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_members.html">Namespace Members</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_functions.html">Namespace Member Functions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_variables.html">Namespace Member Variables</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_typedefs.html">Namespace Member Typedefs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_enums.html">Namespace Member Enumerations</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="macros.html">Macros</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="files.html">Files</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">GyselalibX</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Class RK4</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/gyselax/gyselalibxx/edit/master/docs/gyselalibxx/classRK4.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div><h1 id="class-rk4">Class RK4</h1>
+<p><strong>template &lt;class FieldMem, class <a href="classDerivFieldMem.html"><strong>DerivFieldMem</strong></a>, class ExecSpace&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classRK4.html"><strong>RK4</strong></a></p>
+<p><em>A class which provides an implementation of a fourth-order Runge-Kutta method.</em> <a href="#detailed-description">More...</a></p>
+<ul>
+<li><code>#include &lt;rk4.hpp&gt;</code></li>
+</ul>
+<p>Inherits the following classes: <a href="classITimeStepper.html">ITimeStepper</a></p>
+<h2 id="public-types">Public Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef typename DerivFieldMem::view_type</td>
+<td style="text-align: left;"><a href="#typedef-derivconstfield"><strong>DerivConstField</strong></a>  <br><em>The constant type of the derivatives values of the function being evolved.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename DerivFieldMem::span_type</td>
+<td style="text-align: left;"><a href="#typedef-derivfield"><strong>DerivField</strong></a>  <br><em>The type of the derivatives of the function being evolved.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename FieldMem::discrete_domain_type</td>
+<td style="text-align: left;"><a href="#typedef-idxrange"><strong>IdxRange</strong></a>  <br><em>The type of the index range on which the values of the function are defined.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename FieldMem::view_type</td>
+<td style="text-align: left;"><a href="#typedef-valconstfield"><strong>ValConstField</strong></a>  <br><em>The constant type of the values of the function being evolved.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename FieldMem::span_type</td>
+<td style="text-align: left;"><a href="#typedef-valfield"><strong>ValField</strong></a>  <br><em>The type of the values of the function being evolved.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-types-inherited-from-itimestepper">Public Types inherited from ITimeStepper</h2>
+<p>See <a href="classITimeStepper.html">ITimeStepper</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef typename DerivFieldMem::view_type</td>
+<td style="text-align: left;"><a href="classITimeStepper.html#typedef-derivconstfield"><strong>DerivConstField</strong></a>  <br><em>The constant type of the derivatives values of the function being evolved.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename DerivFieldMem::span_type</td>
+<td style="text-align: left;"><a href="classITimeStepper.html#typedef-derivfield"><strong>DerivField</strong></a>  <br><em>The type of the derivatives of the function being evolved.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename FieldMem::discrete_domain_type</td>
+<td style="text-align: left;"><a href="classITimeStepper.html#typedef-idxrange"><strong>IdxRange</strong></a>  <br><em>The type of the index range on which the values of the function are defined.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename FieldMem::view_type</td>
+<td style="text-align: left;"><a href="classITimeStepper.html#typedef-valconstfield"><strong>ValConstField</strong></a>  <br><em>The constant type of the values of the function being evolved.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename FieldMem::span_type</td>
+<td style="text-align: left;"><a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a>  <br><em>The type of the values of the function being evolved.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions">Public Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-rk4"><strong>RK4</strong></a> (<a href="classRK4.html#typedef-idxrange"><strong>IdxRange</strong></a> idx_range) <br><em>Create a</em> <a href="classRK4.html"><em><strong>RK4</strong></em></a> <em>object.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">virtual void</td>
+<td style="text-align: left;"><a href="#function-update-14"><strong>update</strong></a> (ExecSpace const &amp; exec_space, <a href="classRK4.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classRK4.html#typedef-derivfield"><strong>DerivField</strong></a>, <a href="classRK4.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator, std::function&lt; void(<a href="classRK4.html#typedef-valfield"><strong>ValField</strong></a>, <a href="classRK4.html#typedef-derivconstfield"><strong>DerivConstField</strong></a>, double)&gt; y_update) const<br><em>Carry out one step of the Runge-Kutta scheme.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-update-24"><strong>update</strong></a> (<a href="classRK4.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classRK4.html#typedef-derivfield"><strong>DerivField</strong></a>, <a href="classRK4.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator) const<br><em>Carry out one step of the timestepping scheme.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-update-34"><strong>update</strong></a> (ExecSpace const &amp; exec_space, <a href="classRK4.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classRK4.html#typedef-derivfield"><strong>DerivField</strong></a>, <a href="classRK4.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator) const<br><em>Carry out one step of the timestepping scheme.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">virtual void</td>
+<td style="text-align: left;"><a href="#function-update-44"><strong>update</strong></a> (ExecSpace const &amp; exec_space, <a href="classRK4.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classRK4.html#typedef-derivfield"><strong>DerivField</strong></a>, <a href="classRK4.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator, std::function&lt; void(<a href="classRK4.html#typedef-valfield"><strong>ValField</strong></a>, <a href="classRK4.html#typedef-derivconstfield"><strong>DerivConstField</strong></a>, double)&gt; y_update) const<br><em>Carry out one step of the timestepping scheme.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions-inherited-from-itimestepper">Public Functions inherited from ITimeStepper</h2>
+<p>See <a href="classITimeStepper.html">ITimeStepper</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="classITimeStepper.html#function-assemble_field_k_total"><strong>assemble_field_k_total</strong></a> (ExecSpace const &amp; exec_space, FieldType k_total, FuncType func, std::array&lt; FieldType, n_args &gt; k_arr) const<br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="classITimeStepper.html#function-assemble_vector_field_k_total"><strong>assemble_vector_field_k_total</strong></a> (ExecSpace const &amp; exec_space, FieldType k_total, FuncType func, std::array&lt; FieldType, n_args &gt; k_arr) const<br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="classITimeStepper.html#function-update-13"><strong>update</strong></a> (<a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classITimeStepper.html#typedef-derivfield"><strong>DerivField</strong></a>, <a href="classITimeStepper.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator) const<br><em>Carry out one step of the timestepping scheme.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="classITimeStepper.html#function-update-23"><strong>update</strong></a> (ExecSpace const &amp; exec_space, <a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classITimeStepper.html#typedef-derivfield"><strong>DerivField</strong></a>, <a href="classITimeStepper.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator) const<br><em>Carry out one step of the timestepping scheme.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">virtual void</td>
+<td style="text-align: left;"><a href="classITimeStepper.html#function-update-33"><strong>update</strong></a> (ExecSpace const &amp; exec_space, <a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classITimeStepper.html#typedef-derivfield"><strong>DerivField</strong></a>, <a href="classITimeStepper.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator, std::function&lt; void(<a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a>, <a href="classITimeStepper.html#typedef-derivconstfield"><strong>DerivConstField</strong></a>, double)&gt; y_update) const = 0<br><em>Carry out one step of the timestepping scheme.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-functions-inherited-from-itimestepper">Protected Functions inherited from ITimeStepper</h2>
+<p>See <a href="classITimeStepper.html">ITimeStepper</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="classITimeStepper.html#function-assemble_k_total"><strong>assemble_k_total</strong></a> (ExecSpace const &amp; exec_space, <a href="classITimeStepper.html#typedef-derivfield"><strong>DerivField</strong></a> k_total, FuncType func, T... k) const<br><em>A method to assemble multiple derivative fields into one. This method is responsible for choosing how this is done depending on the type of the derivative field.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="classITimeStepper.html#function-copy"><strong>copy</strong></a> (<a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a> copy_to, <a href="classITimeStepper.html#typedef-valconstfield"><strong>ValConstField</strong></a> copy_from) const<br><em>Make a copy of the values of the function being evolved.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-static-functions-inherited-from-itimestepper">Protected Static Functions inherited from ITimeStepper</h2>
+<p>See <a href="classITimeStepper.html">ITimeStepper</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION void</td>
+<td style="text-align: left;"><a href="classITimeStepper.html#function-fill_k_total"><strong>fill_k_total</strong></a> (DerivFieldType k_total, Idx i, <a href="classTensor.html"><strong>DVector</strong></a>&lt; DDims... &gt; new_val) <br><em>A method to fill an element of a vector field.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-description">Detailed Description</h2>
+<p>A class which provides an implementation of a fourth-order Runge-Kutta method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. The values which evolve are defined on an index range.</p>
+<p>For the following ODE : ,</p>
+<p>the Runge-Kutta 3 method is given by : ,</p>
+<p>with</p>
+<ul>
+<li>,</li>
+<li>,</li>
+<li>,</li>
+<li>. </li>
+</ul>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-derivconstfield">typedef DerivConstField</h3>
+<p><em>The constant type of the derivatives values of the function being evolved.</em> </p>
+<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::DerivConstField =  typename DerivFieldMem::view_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-derivfield">typedef DerivField</h3>
+<p><em>The type of the derivatives of the function being evolved.</em> </p>
+<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::DerivField =  typename DerivFieldMem::span_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrange">typedef IdxRange</h3>
+<p><em>The type of the index range on which the values of the function are defined.</em> </p>
+<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::IdxRange =  typename FieldMem::discrete_domain_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-valconstfield">typedef ValConstField</h3>
+<p><em>The constant type of the values of the function being evolved.</em> </p>
+<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::ValConstField =  typename FieldMem::view_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-valfield">typedef ValField</h3>
+<p><em>The type of the values of the function being evolved.</em> </p>
+<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::ValField =  typename FieldMem::span_type;
+</code></pre>
+<hr>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-rk4">function RK4</h3>
+<p><em>Create a</em> <a href="classRK4.html"><em><strong>RK4</strong></em></a> <em>object.</em></p>
+<pre><code class="language-C++">inline explicit RK4::RK4 (
+    IdxRange idx_range
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>idx_range</code> The index range on which the points which evolve over time are defined. </li>
+</ul>
+<hr>
+
+<h3 id="function-update-14">function update [1/4]</h3>
+<p><em>Carry out one step of the Runge-Kutta scheme.</em> </p>
+<pre><code class="language-C++">inline virtual void RK4::update (
+    ExecSpace const &amp; exec_space,
+    ValField y,
+    double dt,
+    std::function&lt; void( DerivField , ValConstField )&gt; dy_calculator,
+    std::function&lt; void( ValField , DerivConstField , double)&gt; y_update
+) const
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>exec_space</code> The space on which the function is executed (CPU/GPU). </li>
+<li><code>y</code> The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. </li>
+<li><code>dt</code> The time step over which the values should be evolved. </li>
+<li><code>dy_calculator</code> The function describing how the derivative of the evolve function is calculated. </li>
+<li><code>y_update</code> The function describing how the value(s) are updated using the derivative. </li>
+</ul>
+<p>Implements <a href="classITimeStepper.html#function-update-33"><em>ITimeStepper::update</em></a></p>
+<hr>
+
+<h3 id="function-update-24">function update [2/4]</h3>
+<p><em>Carry out one step of the timestepping scheme.</em> </p>
+<pre><code class="language-C++">inline void RK4::update (
+    ValField y,
+    double dt,
+    std::function&lt; void( DerivField , ValConstField )&gt; dy_calculator
+) const
+</code></pre>
+<p>This function is a wrapper around the update function below. The values of the function are updated using the trivial method <span class="arithmatex">\(f += df \* dt\)</span>. This is the standard method however some cases may need a more complex update function which is why the more explicit method is also provided.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>y</code> The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. </li>
+<li><code>dt</code> The time step over which the values should be evolved. </li>
+<li><code>dy_calculator</code> The function describing how the derivative of the evolve function is calculated. </li>
+</ul>
+<hr>
+
+<h3 id="function-update-34">function update [3/4]</h3>
+<p><em>Carry out one step of the timestepping scheme.</em> </p>
+<pre><code class="language-C++">inline void RK4::update (
+    ExecSpace const &amp; exec_space,
+    ValField y,
+    double dt,
+    std::function&lt; void( DerivField , ValConstField )&gt; dy_calculator
+) const
+</code></pre>
+<p>This function is a wrapper around the update function below. The values of the function are updated using the trivial method <span class="arithmatex">\(f += df \* dt\)</span>. This is the standard method however some cases may need a more complex update function which is why the more explicit method is also provided.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>exec_space</code> The space on which the function is executed (CPU/GPU). </li>
+<li><code>y</code> The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. </li>
+<li><code>dt</code> The time step over which the values should be evolved. </li>
+<li><code>dy_calculator</code> The function describing how the derivative of the evolve function is calculated. </li>
+</ul>
+<hr>
+
+<h3 id="function-update-44">function update [4/4]</h3>
+<p><em>Carry out one step of the timestepping scheme.</em> </p>
+<pre><code class="language-C++">virtual void RK4::update (
+    ExecSpace const &amp; exec_space,
+    ValField y,
+    double dt,
+    std::function&lt; void( DerivField , ValConstField )&gt; dy_calculator,
+    std::function&lt; void( ValField , DerivConstField , double)&gt; y_update
+) const
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>exec_space</code> The space on which the function is executed (CPU/GPU). </li>
+<li><code>y</code> The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. </li>
+<li><code>dt</code> The time step over which the values should be evolved. </li>
+<li><code>dy_calculator</code> The function describing how the derivative of the evolve function is calculated. </li>
+<li><code>y_update</code> The function describing how the value(s) are updated using the derivative. </li>
+</ul>
+<p>Implements <a href="classITimeStepper.html#function-update-33"><em>ITimeStepper::update</em></a></p>
+<hr>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp</code></p></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/gyselax/gyselalibxx/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../docs/jscript/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structFEM1DPoissonSolver_1_1HiddenFEMBSplines" kind="struct" language="C++" prot="public">
+    <compoundname>FEM1DPoissonSolver::HiddenFEMBSplines</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">ddc::NonUniformBSplines&lt; PDEDim, InputBSplines::degree()&gt;</basecompoundref>
+    <includes refid="fem__1d__poisson__solver_8hpp" local="no">fem_1d_poisson_solver.hpp</includes>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>The internal type of the FEM basis. This is used if the provided BSplines are uniform as non-uniform BSplines are required to correctly enforce Dirichlet boundary conditions.</para>
+<para>This type should be private but is public due to Kokkos restrictions. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator &gt;::HiddenFEMBSplines</label>
+        <link refid="structFEM1DPoissonSolver_1_1HiddenFEMBSplines"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ddc::NonUniformBSplines&lt; PDEDim, InputBSplines::degree()&gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator &gt;::HiddenFEMBSplines</label>
+        <link refid="structFEM1DPoissonSolver_1_1HiddenFEMBSplines"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ddc::NonUniformBSplines&lt; PDEDim, InputBSplines::degree()&gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="109" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="110" bodyend="111"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

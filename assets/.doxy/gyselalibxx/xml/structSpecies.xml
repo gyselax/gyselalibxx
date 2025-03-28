@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSpecies" kind="struct" language="C++" prot="public">
+    <compoundname>Species</compoundname>
+    <basecompoundref refid="classSpeciesInformation" prot="public" virt="non-virtual">SpeciesInformation</basecompoundref>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>Species</label>
+        <link refid="structSpecies"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SpeciesInformation</label>
+        <link refid="classSpeciesInformation"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>Species</label>
+        <link refid="structSpecies"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SpeciesInformation</label>
+        <link refid="classSpeciesInformation"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" line="140" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" bodystart="141" bodyend="142"/>
+    <listofallmembers>
+      <member refid="classSpeciesInformation_1af77dd55f79155df4dab9bf490d900a07" prot="public" virt="non-virtual"><scope>Species</scope><name>discrete_dimension_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

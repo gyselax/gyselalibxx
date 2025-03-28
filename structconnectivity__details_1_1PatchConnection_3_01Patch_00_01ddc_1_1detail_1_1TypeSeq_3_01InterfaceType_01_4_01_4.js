@@ -1,4 +1,0 @@
-var structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1detail_1_1TypeSeq_3_01InterfaceType_01_4_01_4 =
-[
-    [ "type", "structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1detail_1_1TypeSeq_3_01InterfaceType_01_4_01_4.html#a8f3e514120676d44e357f6ed57700784", null ]
-];

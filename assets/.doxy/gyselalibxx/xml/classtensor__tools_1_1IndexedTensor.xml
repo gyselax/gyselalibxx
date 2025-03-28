@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classtensor__tools_1_1IndexedTensor" kind="class" language="C++" prot="public">
+    <compoundname>tensor_tools::IndexedTensor</compoundname>
+    <includes refid="indexed__tensor_8hpp" local="no">indexed_tensor.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class TensorType</type>
+      </param>
+      <param>
+        <type>class TypeSeqVectorIndexIdMap</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classtensor__tools_1_1IndexedTensor_1a9b1aa0cb99b47fe5ea64752e79c6d30a" prot="public" static="no">
+        <type>TypeSeqVectorIndexIdMap</type>
+        <definition>using tensor_tools::IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt;::index_pattern =  TypeSeqVectorIndexIdMap</definition>
+        <argsstring></argsstring>
+        <name>index_pattern</name>
+        <qualifiedname>tensor_tools::IndexedTensor::index_pattern</qualifiedname>
+        <briefdescription>
+<para>The TensorIndexIdMap describing how the tensor is indexed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="32" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classtensor__tools_1_1IndexedTensor_1a3a4979a7a7ef6e30e2818d6d48e61c00" prot="public" static="no">
+        <type>TensorType</type>
+        <definition>using tensor_tools::IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt;::tensor_type =  TensorType</definition>
+        <argsstring></argsstring>
+        <name>tensor_type</name>
+        <qualifiedname>tensor_tools::IndexedTensor::tensor_type</qualifiedname>
+        <briefdescription>
+<para>The type of the tensor being indexed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="34" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classtensor__tools_1_1IndexedTensor_1a0749886d0415e031ff50a53fe772ceee" prot="private" static="no" mutable="no">
+        <type>TensorType &amp;</type>
+        <definition>TensorType&amp; tensor_tools::IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt;::m_tensor</definition>
+        <argsstring></argsstring>
+        <name>m_tensor</name>
+        <qualifiedname>tensor_tools::IndexedTensor::m_tensor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="43" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classtensor__tools_1_1IndexedTensor_1adc2f44bbee1b54e63cfc68a08ff8f632" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION</type>
+        <definition>KOKKOS_FUNCTION tensor_tools::IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt;::IndexedTensor</definition>
+        <argsstring>(TensorType &amp;tensor)</argsstring>
+        <name>IndexedTensor</name>
+        <qualifiedname>tensor_tools::IndexedTensor::IndexedTensor</qualifiedname>
+        <param>
+          <type>TensorType &amp;</type>
+          <declname>tensor</declname>
+        </param>
+        <briefdescription>
+<para>A constructor of an indexed tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The tensor to be indexed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="50" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor__tools_1_1IndexedTensor_1aee7a2f1a4fe398babbf65ede79953248" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>tensor_tools::IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt;::IndexedTensor</definition>
+        <argsstring>(IndexedTensor const &amp;)=delete</argsstring>
+        <name>IndexedTensor</name>
+        <qualifiedname>tensor_tools::IndexedTensor::IndexedTensor</qualifiedname>
+        <param>
+          <type><ref refid="classtensor__tools_1_1IndexedTensor" kindref="compound">IndexedTensor</ref> const &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="52" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor__tools_1_1IndexedTensor_1a15e191fb2ea10d109585cf28dc053bbe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>tensor_tools::IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt;::IndexedTensor</definition>
+        <argsstring>(IndexedTensor &amp;&amp;)=delete</argsstring>
+        <name>IndexedTensor</name>
+        <qualifiedname>tensor_tools::IndexedTensor::IndexedTensor</qualifiedname>
+        <param>
+          <type><ref refid="classtensor__tools_1_1IndexedTensor" kindref="compound">IndexedTensor</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="54" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor__tools_1_1IndexedTensor_1ab62a3b9c2ee3292926c0cb7595ffe4a6" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>KOKKOS_DEFAULTED_FUNCTION</type>
+        <definition>KOKKOS_DEFAULTED_FUNCTION tensor_tools::IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt;::~IndexedTensor</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>~IndexedTensor</name>
+        <qualifiedname>tensor_tools::IndexedTensor::~IndexedTensor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="56" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor__tools_1_1IndexedTensor_1af4b4eb7621bfd6bbff308f0843ff70eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classtensor__tools_1_1IndexedTensor" kindref="compound">IndexedTensor</ref> &amp;</type>
+        <definition>IndexedTensor &amp; tensor_tools::IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt;::operator=</definition>
+        <argsstring>(IndexedTensor const &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>tensor_tools::IndexedTensor::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classtensor__tools_1_1IndexedTensor" kindref="compound">IndexedTensor</ref> const &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="58" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor__tools_1_1IndexedTensor_1a7be8571c3a3f172553a9af1a7a35b3f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classtensor__tools_1_1IndexedTensor" kindref="compound">IndexedTensor</ref> &amp;</type>
+        <definition>IndexedTensor &amp; tensor_tools::IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt;::operator=</definition>
+        <argsstring>(IndexedTensor &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>tensor_tools::IndexedTensor::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classtensor__tools_1_1IndexedTensor" kindref="compound">IndexedTensor</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="60" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor__tools_1_1IndexedTensor_1a3de570a42eca6f3872f3817a1a6f3ac4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION TensorType &amp;</type>
+        <definition>KOKKOS_FUNCTION TensorType &amp; tensor_tools::IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt;::operator()</definition>
+        <argsstring>()</argsstring>
+        <name>operator()</name>
+        <qualifiedname>tensor_tools::IndexedTensor::operator()</qualifiedname>
+        <briefdescription>
+<para>An operator to access the underlying tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The underlying tensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="66" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" bodystart="66" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor__tools_1_1IndexedTensor_1aa64e4beab28845e03a3f7fe9fcd50f88" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION TensorType const &amp;</type>
+        <definition>KOKKOS_FUNCTION TensorType const  &amp; tensor_tools::IndexedTensor&lt; TensorType, TypeSeqVectorIndexIdMap &gt;::operator()</definition>
+        <argsstring>() const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>tensor_tools::IndexedTensor::operator()</qualifiedname>
+        <briefdescription>
+<para>An operator to access the underlying tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The underlying tensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="75" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" bodystart="75" bodyend="78"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class to capture the description of a tensor indexed at a specific component. This class should not be explicitly declared in user code. It is the output of a call to the index&lt;...&gt; function and is an input to the tensor_mul function. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TensorType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The tensor being indexed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TypeSeqVectorIndexIdMap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A TypeSeq containing VectorIndexIdMaps describing the indices used to access the tensor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" line="28" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp" bodystart="29" bodyend="79"/>
+    <listofallmembers>
+      <member refid="classtensor__tools_1_1IndexedTensor_1a9b1aa0cb99b47fe5ea64752e79c6d30a" prot="public" virt="non-virtual"><scope>tensor_tools::IndexedTensor</scope><name>index_pattern</name></member>
+      <member refid="classtensor__tools_1_1IndexedTensor_1adc2f44bbee1b54e63cfc68a08ff8f632" prot="public" virt="non-virtual"><scope>tensor_tools::IndexedTensor</scope><name>IndexedTensor</name></member>
+      <member refid="classtensor__tools_1_1IndexedTensor_1aee7a2f1a4fe398babbf65ede79953248" prot="public" virt="non-virtual"><scope>tensor_tools::IndexedTensor</scope><name>IndexedTensor</name></member>
+      <member refid="classtensor__tools_1_1IndexedTensor_1a15e191fb2ea10d109585cf28dc053bbe" prot="public" virt="non-virtual"><scope>tensor_tools::IndexedTensor</scope><name>IndexedTensor</name></member>
+      <member refid="classtensor__tools_1_1IndexedTensor_1a0749886d0415e031ff50a53fe772ceee" prot="private" virt="non-virtual"><scope>tensor_tools::IndexedTensor</scope><name>m_tensor</name></member>
+      <member refid="classtensor__tools_1_1IndexedTensor_1a3de570a42eca6f3872f3817a1a6f3ac4" prot="public" virt="non-virtual"><scope>tensor_tools::IndexedTensor</scope><name>operator()</name></member>
+      <member refid="classtensor__tools_1_1IndexedTensor_1aa64e4beab28845e03a3f7fe9fcd50f88" prot="public" virt="non-virtual"><scope>tensor_tools::IndexedTensor</scope><name>operator()</name></member>
+      <member refid="classtensor__tools_1_1IndexedTensor_1af4b4eb7621bfd6bbff308f0843ff70eb" prot="public" virt="non-virtual"><scope>tensor_tools::IndexedTensor</scope><name>operator=</name></member>
+      <member refid="classtensor__tools_1_1IndexedTensor_1a7be8571c3a3f172553a9af1a7a35b3f3" prot="public" virt="non-virtual"><scope>tensor_tools::IndexedTensor</scope><name>operator=</name></member>
+      <member refid="classtensor__tools_1_1IndexedTensor_1a3a4979a7a7ef6e30e2818d6d48e61c00" prot="public" virt="non-virtual"><scope>tensor_tools::IndexedTensor</scope><name>tensor_type</name></member>
+      <member refid="classtensor__tools_1_1IndexedTensor_1ab62a3b9c2ee3292926c0cb7595ffe4a6" prot="public" virt="non-virtual"><scope>tensor_tools::IndexedTensor</scope><name>~IndexedTensor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

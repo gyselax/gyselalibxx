@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structPolarBSplinesRTheta" kind="struct" language="C++" prot="public">
+    <compoundname>PolarBSplinesRTheta</compoundname>
+    <basecompoundref refid="classPolarBSplines" prot="public" virt="non-virtual">PolarBSplines&lt; BSplinesR, BSplinesTheta, 1 &gt;</basecompoundref>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>PolarBSplines&lt; BSplinesR, BSplinesTheta, 1 &gt;</label>
+        <link refid="classPolarBSplines"/>
+      </node>
+      <node id="1">
+        <label>PolarBSplinesRTheta</label>
+        <link refid="structPolarBSplinesRTheta"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>PolarBSplines&lt; BSplinesR, BSplinesTheta, 1 &gt;</label>
+        <link refid="classPolarBSplines"/>
+      </node>
+      <node id="1">
+        <label>PolarBSplinesRTheta</label>
+        <link refid="structPolarBSplinesRTheta"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="162" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="163" bodyend="164"/>
+    <listofallmembers>
+      <member refid="classPolarBSplines_1af53c68e9827efcffeee27e353ac3ef7e" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>BSplinesR_tag</name></member>
+      <member refid="classPolarBSplines_1a7c93c1bedcf655bff666950a59eff9ea" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>BSplinesTheta_tag</name></member>
+      <member refid="classPolarBSplines_1ae4895a87f3e1ed953614a3546c319762" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>continuity</name></member>
+      <member refid="classPolarBSplines_1acdb7056a76b2985ddced01f3ca5610f2" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>DimR</name></member>
+      <member refid="classPolarBSplines_1a963f3ab10c79d029e0908ee597bc41dd" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>DimTheta</name></member>
+      <member refid="classPolarBSplines_1a3781a1ef42e396315cd2912e0f128c8b" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>discrete_dimension_type</name></member>
+      <member refid="classPolarBSplines_1a8ad5514f78dabdfe57bbfa3c487fa808" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>get_2d_index</name></member>
+      <member refid="classPolarBSplines_1ab295d737e634cd296d1fdbb3a76c2e4e" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>get_polar_index</name></member>
+      <member refid="classPolarBSplines_1a9254ee09fe5fce248ae80efac56c82c3" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>n_singular_basis</name></member>
+      <member refid="classPolarBSplines_1ae4bb250b0904ab8a72c3f1fc029cb2fc" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>singular_idx_range</name></member>
+      <member refid="classPolarBSplines_1a84ea418aed020ad1396d3283aba7904e" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>tensor_product_idx_range_type</name></member>
+      <member refid="classPolarBSplines_1a6b1ab0ce3118e3bb0172d9a70ce7ccca" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>tensor_product_idx_step_type</name></member>
+      <member refid="classPolarBSplines_1a9d78494d89fbe4d9abea58a61619fae8" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>tensor_product_index_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_264890e5c091f8c8d7fe1f842870c25e" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation</compoundname>
+    <innerdir refid="dir_a6779ae02b71d57f488d261458bab1ce">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines</innerdir>
+    <innerfile refid="i__interpolator__2d_8hpp">i_interpolator_2d.hpp</innerfile>
+    <innerfile refid="iinterpolator_8hpp">iinterpolator.hpp</innerfile>
+    <innerfile refid="Lagrange_8hpp">Lagrange.hpp</innerfile>
+    <innerfile refid="Lagrange__interpolator_8hpp">Lagrange_interpolator.hpp</innerfile>
+    <innerfile refid="spline__interpolator_8hpp">spline_interpolator.hpp</innerfile>
+    <innerfile refid="spline__interpolator__2d_8hpp">spline_interpolator_2d.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/"/>
+  </compounddef>
+</doxygen>

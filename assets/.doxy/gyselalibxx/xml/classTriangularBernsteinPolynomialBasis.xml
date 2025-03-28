@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classTriangularBernsteinPolynomialBasis" kind="class" language="C++" prot="public">
+    <compoundname>TriangularBernsteinPolynomialBasis</compoundname>
+    <includes refid="bernstein_8hpp" local="no">bernstein.hpp</includes>
+    <innerclass refid="classTriangularBernsteinPolynomialBasis_1_1Impl" prot="public">TriangularBernsteinPolynomialBasis::Impl</innerclass>
+    <templateparamlist>
+      <param>
+        <type>class <ref refid="structX" kindref="compound">X</ref></type>
+      </param>
+      <param>
+        <type>class <ref refid="structY" kindref="compound">Y</ref></type>
+      </param>
+      <param>
+        <type>class Corner1Tag</type>
+      </param>
+      <param>
+        <type>class Corner2Tag</type>
+      </param>
+      <param>
+        <type>class Corner3Tag</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>D</declname>
+        <defname>D</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classTriangularBernsteinPolynomialBasis_1a15d207d662780362b254d20f8532f4fb" prot="public" static="no">
+        <type><ref refid="classTriangularBernsteinPolynomialBasis" kindref="compound">TriangularBernsteinPolynomialBasis</ref></type>
+        <definition>using TriangularBernsteinPolynomialBasis&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag, D &gt;::discrete_dimension_type =  TriangularBernsteinPolynomialBasis</definition>
+        <argsstring></argsstring>
+        <name>discrete_dimension_type</name>
+        <qualifiedname>TriangularBernsteinPolynomialBasis::discrete_dimension_type</qualifiedname>
+        <briefdescription>
+<para>A tag for DDC to recognise the discrete dimension type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp" line="35" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classTriangularBernsteinPolynomialBasis_1acbf2b77f37d38639c20cef4e8a2cef13" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>static constexpr std::size_t TriangularBernsteinPolynomialBasis&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag, D &gt;::rank</definition>
+        <argsstring>()</argsstring>
+        <name>rank</name>
+        <qualifiedname>TriangularBernsteinPolynomialBasis::rank</qualifiedname>
+        <briefdescription>
+<para>The rank of the system of equations. This is equal to the number of dimensions in the coordinates on which the polynomials are evaluated. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The rank of the system. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp" line="43" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp" bodystart="43" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classTriangularBernsteinPolynomialBasis_1afc2ce5f428444dc1fd4f0001d1c82f6a" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>static constexpr std::size_t TriangularBernsteinPolynomialBasis&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag, D &gt;::degree</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>degree</name>
+        <qualifiedname>TriangularBernsteinPolynomialBasis::degree</qualifiedname>
+        <briefdescription>
+<para>The degree of the triangular Bernstein polynomials. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The degree of the triangular Bernstein polynomials. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp" line="52" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp" bodystart="52" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classTriangularBernsteinPolynomialBasis_1ad4df99445b4db980d8dfb888bf5f40d7" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>static constexpr std::size_t TriangularBernsteinPolynomialBasis&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag, D &gt;::nbasis</definition>
+        <argsstring>()</argsstring>
+        <name>nbasis</name>
+        <qualifiedname>TriangularBernsteinPolynomialBasis::nbasis</qualifiedname>
+        <briefdescription>
+<para>The number of basis elements. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The number of basis elements. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp" line="61" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp" bodystart="61" bodyend="64"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class which evaluates the triangular Bernstein polynomials. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Triangular Bernstein polynomials of degree <formula id="172">$ D $</formula> are defined as: <formula id="173">$ T_{i_1,i_2,i_3}(x,y) = \binom{D}{i_1\,i_2\,i_3} \lambda_1^{i_1} \lambda_2^{i_2} \lambda_3^{i_3}, \quad i_1 +i_2+i_3 =D $</formula></para>
+<para>Where <formula id="174">$ \lambda_1 $</formula>, <formula id="175">$ \lambda_2 $</formula>, and <formula id="176">$ \lambda_3 $</formula> are the barycentric coordinates of <formula id="177">$ (x,y) $</formula></para>
+<para>c.f. Toshniwal et al. 2017 Multi-degree smooth polar splines: A framework for geometric modelling and isogeometric analysis <ulink url="https://doi.org/10.1016/j.cma.2016.11.009">https://doi.org/10.1016/j.cma.2016.11.009</ulink></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structX" kindref="compound">X</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first dimension of the Cartesian coordinate system. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structY" kindref="compound">Y</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second dimension of the Cartesian coordinate system. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Corner1Tag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A class to identify the first corner. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Corner2Tag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A class to identify the second corner. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Corner3Tag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A class to identify the third corner. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The degree of the polynomial. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp" line="31" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp" bodystart="32" bodyend="152"/>
+    <listofallmembers>
+      <member refid="classTriangularBernsteinPolynomialBasis_1afc2ce5f428444dc1fd4f0001d1c82f6a" prot="public" virt="non-virtual"><scope>TriangularBernsteinPolynomialBasis</scope><name>degree</name></member>
+      <member refid="classTriangularBernsteinPolynomialBasis_1a15d207d662780362b254d20f8532f4fb" prot="public" virt="non-virtual"><scope>TriangularBernsteinPolynomialBasis</scope><name>discrete_dimension_type</name></member>
+      <member refid="classTriangularBernsteinPolynomialBasis_1ad4df99445b4db980d8dfb888bf5f40d7" prot="public" virt="non-virtual"><scope>TriangularBernsteinPolynomialBasis</scope><name>nbasis</name></member>
+      <member refid="classTriangularBernsteinPolynomialBasis_1acbf2b77f37d38639c20cef4e8a2cef13" prot="public" virt="non-virtual"><scope>TriangularBernsteinPolynomialBasis</scope><name>rank</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

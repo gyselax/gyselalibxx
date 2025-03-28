@@ -1,0 +1,513 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classCartesianToCircular" kind="class" language="C++" prot="public">
+    <compoundname>CartesianToCircular</compoundname>
+    <includes refid="cartesian__to__circular_8hpp" local="no">cartesian_to_circular.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class <ref refid="structX" kindref="compound">X</ref></type>
+      </param>
+      <param>
+        <type>class <ref refid="structY" kindref="compound">Y</ref></type>
+      </param>
+      <param>
+        <type>class <ref refid="structR" kindref="compound">R</ref></type>
+      </param>
+      <param>
+        <type>class <ref refid="structTheta" kindref="compound">Theta</ref></type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classCartesianToCircular_1a3a8d1753956c80af0e2069197560b3a5" prot="public" static="no">
+        <type><ref refid="structX" kindref="compound">X</ref></type>
+        <definition>using CartesianToCircular&lt; X, Y, R, Theta &gt;::cartesian_tag_x =  X</definition>
+        <argsstring></argsstring>
+        <name>cartesian_tag_x</name>
+        <qualifiedname>CartesianToCircular::cartesian_tag_x</qualifiedname>
+        <briefdescription>
+<para>Indicate the first physical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="44" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCartesianToCircular_1a177d7877c5bf73f643f771a91613ce15" prot="public" static="no">
+        <type><ref refid="structY" kindref="compound">Y</ref></type>
+        <definition>using CartesianToCircular&lt; X, Y, R, Theta &gt;::cartesian_tag_y =  Y</definition>
+        <argsstring></argsstring>
+        <name>cartesian_tag_y</name>
+        <qualifiedname>CartesianToCircular::cartesian_tag_y</qualifiedname>
+        <briefdescription>
+<para>Indicate the second physical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCartesianToCircular_1a97b27a4e4e766216d76ce150a2903345" prot="public" static="no">
+        <type><ref refid="structR" kindref="compound">R</ref></type>
+        <definition>using CartesianToCircular&lt; X, Y, R, Theta &gt;::curvilinear_tag_r =  R</definition>
+        <argsstring></argsstring>
+        <name>curvilinear_tag_r</name>
+        <qualifiedname>CartesianToCircular::curvilinear_tag_r</qualifiedname>
+        <briefdescription>
+<para>Indicate the first logical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="48" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCartesianToCircular_1a22c0b5fa2d5952f5bd9e9db9045226e9" prot="public" static="no">
+        <type><ref refid="structTheta" kindref="compound">Theta</ref></type>
+        <definition>using CartesianToCircular&lt; X, Y, R, Theta &gt;::curvilinear_tag_theta =  Theta</definition>
+        <argsstring></argsstring>
+        <name>curvilinear_tag_theta</name>
+        <qualifiedname>CartesianToCircular::curvilinear_tag_theta</qualifiedname>
+        <briefdescription>
+<para>Indicate the second logical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="50" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCartesianToCircular_1addc99b0a3bea0e7444bc512a1e9e3d58" prot="public" static="no">
+        <type>Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
+        <definition>using CartesianToCircular&lt; X, Y, R, Theta &gt;::CoordArg =  Coord&lt;X, Y&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoordArg</name>
+        <qualifiedname>CartesianToCircular::CoordArg</qualifiedname>
+        <briefdescription>
+<para>The type of the argument of the function described by this mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCartesianToCircular_1a96445d5169722628a035e142fbf516d5" prot="public" static="no">
+        <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
+        <definition>using CartesianToCircular&lt; X, Y, R, Theta &gt;::CoordResult =  Coord&lt;R, Theta&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoordResult</name>
+        <qualifiedname>CartesianToCircular::CoordResult</qualifiedname>
+        <briefdescription>
+<para>The type of the result of the function described by this mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="55" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCartesianToCircular_1ad8e1bbab5fe5d419953f4250237260e7" prot="public" static="no">
+        <type>typename <ref refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" kindref="member">X::Dual</ref></type>
+        <definition>using CartesianToCircular&lt; X, Y, R, Theta &gt;::X_cov =  typename X::Dual</definition>
+        <argsstring></argsstring>
+        <name>X_cov</name>
+        <qualifiedname>CartesianToCircular::X_cov</qualifiedname>
+        <briefdescription>
+<para>The covariant form of the first physical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="58" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCartesianToCircular_1a2fac6fc2bff81a582bd4089fc6b0344f" prot="public" static="no">
+        <type>typename <ref refid="structY_1aad98c6afa465f3fb654029648420df1f" kindref="member">Y::Dual</ref></type>
+        <definition>using CartesianToCircular&lt; X, Y, R, Theta &gt;::Y_cov =  typename Y::Dual</definition>
+        <argsstring></argsstring>
+        <name>Y_cov</name>
+        <qualifiedname>CartesianToCircular::Y_cov</qualifiedname>
+        <briefdescription>
+<para>The covariant form of the second physical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="60" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCartesianToCircular_1a3af040539c015e89917c4a4194c8b9e2" prot="public" static="no">
+        <type>typename <ref refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kindref="member">R::Dual</ref></type>
+        <definition>using CartesianToCircular&lt; X, Y, R, Theta &gt;::R_cov =  typename R::Dual</definition>
+        <argsstring></argsstring>
+        <name>R_cov</name>
+        <qualifiedname>CartesianToCircular::R_cov</qualifiedname>
+        <briefdescription>
+<para>The covariant form of the first logical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="62" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCartesianToCircular_1a1d38114e75c30437baa95e8fb3e27fd0" prot="public" static="no">
+        <type>typename <ref refid="structTheta_1a1f99557f831a14c03c9d03e1a5e33d40" kindref="member">Theta::Dual</ref></type>
+        <definition>using CartesianToCircular&lt; X, Y, R, Theta &gt;::Theta_cov =  typename Theta::Dual</definition>
+        <argsstring></argsstring>
+        <name>Theta_cov</name>
+        <qualifiedname>CartesianToCircular::Theta_cov</qualifiedname>
+        <briefdescription>
+<para>The covariant form of the second logical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="64" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classCartesianToCircular_1aadb0566f1e02b139c56c8eac4fe94a7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>CartesianToCircular&lt; X, Y, R, Theta &gt;::CartesianToCircular</definition>
+        <argsstring>()=default</argsstring>
+        <name>CartesianToCircular</name>
+        <qualifiedname>CartesianToCircular::CartesianToCircular</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="67" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classCartesianToCircular_1a2162a169d565b588cf40345d197137e0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION</type>
+        <definition>KOKKOS_FUNCTION CartesianToCircular&lt; X, Y, R, Theta &gt;::CartesianToCircular</definition>
+        <argsstring>(CartesianToCircular const &amp;other)</argsstring>
+        <name>CartesianToCircular</name>
+        <qualifiedname>CartesianToCircular::CartesianToCircular</qualifiedname>
+        <param>
+          <type><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref> const &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate a <ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref> from another <ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref> (lvalue). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref> mapping used to instantiate the new one. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="75" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classCartesianToCircular_1abe8adddabf03ac964a31590c69e89f29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>CartesianToCircular&lt; X, Y, R, Theta &gt;::CartesianToCircular</definition>
+        <argsstring>(CartesianToCircular &amp;&amp;x)=default</argsstring>
+        <name>CartesianToCircular</name>
+        <qualifiedname>CartesianToCircular::CartesianToCircular</qualifiedname>
+        <param>
+          <type><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref> &amp;&amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate a Curvilinear2DToCartesian from another temporary <ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref> (rvalue). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Curvilinear2DToCartesian mapping used to instantiate the new one. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="83" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classCartesianToCircular_1aac63c7859465e7609bd85e95446810e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>CartesianToCircular&lt; X, Y, R, Theta &gt;::~CartesianToCircular</definition>
+        <argsstring>()=default</argsstring>
+        <name>~CartesianToCircular</name>
+        <qualifiedname>CartesianToCircular::~CartesianToCircular</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="85" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classCartesianToCircular_1ad149af07eb1a3c309c02797b1eeb1099" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref> &amp;</type>
+        <definition>CartesianToCircular &amp; CartesianToCircular&lt; X, Y, R, Theta &gt;::operator=</definition>
+        <argsstring>(CartesianToCircular const &amp;x)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>CartesianToCircular::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref> const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Assign a <ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref> from another <ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref> (lvalue). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref> mapping used to assign.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The <ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref> assigned. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="95" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classCartesianToCircular_1a37380fa46ba2613b3082a6c3b302af61" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref> &amp;</type>
+        <definition>CartesianToCircular &amp; CartesianToCircular&lt; X, Y, R, Theta &gt;::operator=</definition>
+        <argsstring>(CartesianToCircular &amp;&amp;x)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>CartesianToCircular::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref> &amp;&amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Assign a <ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref> from another temporary <ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref> (rvalue). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref> mapping used to assign.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The <ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref> assigned. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="105" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classCartesianToCircular_1ac7328c386b3ece480b67c475eb9d281a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
+        <definition>KOKKOS_FUNCTION Coord&lt; R, Theta &gt; CartesianToCircular&lt; X, Y, R, Theta &gt;::operator()</definition>
+        <argsstring>(Coord&lt; X, Y &gt; const &amp;coord) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>CartesianToCircular::operator()</qualifiedname>
+        <param>
+          <type>Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt; const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Convert the coordinate (x,y) to the equivalent <formula id="186">$ (r, \theta) $</formula> coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate to be converted.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The equivalent coordinate. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="114" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="114" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classCartesianToCircular_1a275832f34d53e29ba6a1304819d040fe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION double</type>
+        <definition>KOKKOS_FUNCTION double CartesianToCircular&lt; X, Y, R, Theta &gt;::jacobian</definition>
+        <argsstring>(Coord&lt; X, Y &gt; const &amp;coord)</argsstring>
+        <name>jacobian</name>
+        <qualifiedname>CartesianToCircular::jacobian</qualifiedname>
+        <param>
+          <type>Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt; const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A double with the value of the determinant of the Jacobian matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="131" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="131" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="classCartesianToCircular_1a82b4bdf6426a7ca736ece9eda07fd968" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, VectorIndexSet&lt; <ref refid="classCartesianToCircular_1a3af040539c015e89917c4a4194c8b9e2" kindref="member">R_cov</ref>, <ref refid="classCartesianToCircular_1a1d38114e75c30437baa95e8fb3e27fd0" kindref="member">Theta_cov</ref> &gt; &gt;</type>
+        <definition>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; X, Y &gt;, VectorIndexSet&lt; R_cov, Theta_cov &gt; &gt; CartesianToCircular&lt; X, Y, R, Theta &gt;::jacobian_matrix</definition>
+        <argsstring>(Coord&lt; X, Y &gt; const &amp;coord) const</argsstring>
+        <name>jacobian_matrix</name>
+        <qualifiedname>CartesianToCircular::jacobian_matrix</qualifiedname>
+        <param>
+          <type>Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt; const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute full Jacobian matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For some computations, we need the complete Jacobian matrix or just the coefficients. The coefficients can be given independently with the function jacobian_component.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian matrix. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The Jacobian matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="149" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="149" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="classCartesianToCircular_1af69ebbdc58f56c521d3c25589fe16769" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IndexTag1</type>
+          </param>
+          <param>
+            <type>class IndexTag2</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double CartesianToCircular&lt; X, Y, R, Theta &gt;::jacobian_component</definition>
+        <argsstring>(Coord&lt; X, Y &gt; const &amp;coord) const</argsstring>
+        <name>jacobian_component</name>
+        <qualifiedname>CartesianToCircular::jacobian_component</qualifiedname>
+        <param>
+          <type>Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt; const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the (i,j) coefficient of the Jacobian matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian matrix.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A double with the value of the (1,1) coefficient of the Jacobian matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="172" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="172" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="classCartesianToCircular_1a12006646133b008b23ec0467dc76886a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classCircularToCartesian" kindref="compound">CircularToCartesian</ref>&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref>, <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
+        <definition>CircularToCartesian&lt; R, Theta, X, Y &gt; CartesianToCircular&lt; X, Y, R, Theta &gt;::get_inverse_mapping</definition>
+        <argsstring>() const</argsstring>
+        <name>get_inverse_mapping</name>
+        <qualifiedname>CartesianToCircular::get_inverse_mapping</qualifiedname>
+        <briefdescription>
+<para>Get the inverse mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The inverse mapping. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="199" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="199" bodyend="202"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class for describing the circular 2D mapping. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The mapping <formula id="178">$ (x,y)\mapsto (r,\theta) $</formula> is defined as follow :</para>
+<para><formula id="179">$ r(x,y) = \sqrt x^2+y^2 ,$</formula></para>
+<para><formula id="180">$ \theta(x,y) = atan2(\frac{y}{x}) .$</formula></para>
+<para>It and its Jacobian matrix are invertible everywhere except for <formula id="12">$ r = 0 $</formula>.</para>
+<para>The Jacobian matrix coefficients are defined as follow</para>
+<para><formula id="181">$ J_{11}(r,\theta)  =\frac{2x}{\sqrt{x^2+y^2}}  $</formula></para>
+<para><formula id="182">$ J_{12}(r,\theta)  =\frac{2y}{\sqrt{x^2+y^2}}  $</formula></para>
+<para><formula id="183">$ J_{21}(r,\theta)  =\frac{-y}{(x^2+y^2)^2}  $</formula></para>
+<para><formula id="184">$ J_{22}(r,\theta)  =\frac{x}{(x^2+y^2)^2}  $</formula></para>
+<para>and the matrix determinant: <formula id="185">$ det(J) = r $</formula>. </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="40" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="41" bodyend="203"/>
+    <listofallmembers>
+      <member refid="classCartesianToCircular_1a3a8d1753956c80af0e2069197560b3a5" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>cartesian_tag_x</name></member>
+      <member refid="classCartesianToCircular_1a177d7877c5bf73f643f771a91613ce15" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>cartesian_tag_y</name></member>
+      <member refid="classCartesianToCircular_1aadb0566f1e02b139c56c8eac4fe94a7a" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>CartesianToCircular</name></member>
+      <member refid="classCartesianToCircular_1a2162a169d565b588cf40345d197137e0" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>CartesianToCircular</name></member>
+      <member refid="classCartesianToCircular_1abe8adddabf03ac964a31590c69e89f29" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>CartesianToCircular</name></member>
+      <member refid="classCartesianToCircular_1addc99b0a3bea0e7444bc512a1e9e3d58" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>CoordArg</name></member>
+      <member refid="classCartesianToCircular_1a96445d5169722628a035e142fbf516d5" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>CoordResult</name></member>
+      <member refid="classCartesianToCircular_1a97b27a4e4e766216d76ce150a2903345" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>curvilinear_tag_r</name></member>
+      <member refid="classCartesianToCircular_1a22c0b5fa2d5952f5bd9e9db9045226e9" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>curvilinear_tag_theta</name></member>
+      <member refid="classCartesianToCircular_1a12006646133b008b23ec0467dc76886a" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>get_inverse_mapping</name></member>
+      <member refid="classCartesianToCircular_1a275832f34d53e29ba6a1304819d040fe" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>jacobian</name></member>
+      <member refid="classCartesianToCircular_1af69ebbdc58f56c521d3c25589fe16769" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>jacobian_component</name></member>
+      <member refid="classCartesianToCircular_1a82b4bdf6426a7ca736ece9eda07fd968" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>jacobian_matrix</name></member>
+      <member refid="classCartesianToCircular_1ac7328c386b3ece480b67c475eb9d281a" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>operator()</name></member>
+      <member refid="classCartesianToCircular_1ad149af07eb1a3c309c02797b1eeb1099" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>operator=</name></member>
+      <member refid="classCartesianToCircular_1a37380fa46ba2613b3082a6c3b302af61" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>operator=</name></member>
+      <member refid="classCartesianToCircular_1a3af040539c015e89917c4a4194c8b9e2" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>R_cov</name></member>
+      <member refid="classCartesianToCircular_1a1d38114e75c30437baa95e8fb3e27fd0" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>Theta_cov</name></member>
+      <member refid="classCartesianToCircular_1ad8e1bbab5fe5d419953f4250237260e7" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>X_cov</name></member>
+      <member refid="classCartesianToCircular_1a2fac6fc2bff81a582bd4089fc6b0344f" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>Y_cov</name></member>
+      <member refid="classCartesianToCircular_1aac63c7859465e7609bd85e95446810e3" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>~CartesianToCircular</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

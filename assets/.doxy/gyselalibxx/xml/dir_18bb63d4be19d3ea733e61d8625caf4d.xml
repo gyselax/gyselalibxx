@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_18bb63d4be19d3ea733e61d8625caf4d" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection</compoundname>
+    <innerfile refid="bsl__advection__rtheta_8hpp">bsl_advection_rtheta.hpp</innerfile>
+    <innerfile refid="iadvection__rtheta_8hpp">iadvection_rtheta.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection/"/>
+  </compounddef>
+</doxygen>

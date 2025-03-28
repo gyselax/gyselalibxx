@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_8b9ab5da15e50812e4d198d35fde42ae" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils</compoundname>
+    <innerfile refid="fluid__moments_8cpp">fluid_moments.cpp</innerfile>
+    <innerfile refid="fluid__moments_8hpp">fluid_moments.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>File fem_1d_poisson_solver.hpp - GyselalibX</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File fem_1d_poisson_solver.hpp";
+        var mkdocs_page_input_path = "gyselalibxx/fem__1d__poisson__solver_8hpp_source.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> GyselalibX
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">General</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/getting_started.html">Getting Started</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Installation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../docs/first_steps/install.html">Gyselalib++ Installation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../toolchains/index.html">Pre-made build settings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standards</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/mathematical_and_physical_conventions.html">Math & Physics</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Gyselalib++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Source</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../src/index.html">Gyselalib++ contents</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/advection/index.html">Advection methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/collisions/index.html">Collisions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/data_types/index.html">Data Storage Types</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryRTheta/index.html">Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection/index.html">Advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_field</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/geometry/index.html">Geometry RTheta</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/initialisation/index.html">Initialisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/poisson/index.html">Polar Poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_solver</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/time_solver/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryVparMu</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryVparMu/index.html">Geometry (vpar, mu)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/collisions/index.html">CollisionConfiguration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/geometry/index.html">GeometryVparMu</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXVx/index.html">Geometry (x, v_x)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >boltzmann</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/boltzmann/index.html">Boltzmann solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/geometry/index.html">Geometry X-Vx</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >rhs</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/rhs/index.html">RHS</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/utils/index.html">Utils</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXY/index.html">Geometry (x, y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/geometry/index.html">Geometry XY</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/initialisation/index.html">Initialisation on (x,y) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/time_integration/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXYVxVy</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXYVxVy/index.html">Geometry (x, y, v_x, v_y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/geometry/index.html">Geometry X Y-Vx Vy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vlasov</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/vlasov/index.html">Vlasov solver</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/interpolation/index.html">Interpolation Methods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/polar_splines/index.html">Polar Splines</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >io</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/io/index.html">Functions used for input and output</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mapping</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mapping/index.html">Mappings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >math_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/math_tools/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >matrix_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/matrix_tools/index.html">Matrix tools</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mpi_parallelisation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mpi_parallelisation/index.html">Parallelisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/multipatch/index.html">Multipatch</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >connectivity</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/connectivity/index.html">Multipatch connectivity</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/data_types/index.html">Data Types for Multipatch Geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/utils/index.html">Multipatch utilitary functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >quadrature</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/quadrature/index.html">Quadrature Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >speciesinfo</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/speciesinfo/index.html">SpeciesInfo (x, v_x)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >timestepper</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/timestepper/index.html">Time Stepping Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/utils/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Simulations</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../simulations/index.html">Gyselalib++ simulations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryRTheta/index.html">Simulations in (r, theta) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >diocotron</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/diocotron/index.html">Diocotron instability</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vortex_merger</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/vortex_merger/index.html">Vortex merger</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXVx/index.html">Simulations in (x, vx) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXY/index.html">Simulations in (x, y) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >guiding_centre</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryXY/guiding_centre/index.html">Guiding centre (X,Y) simulation</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tests</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../tests/index.html">Gyselalib++ tests</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/advection/index.html">Tests on the templated advection operators</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/geometryRTheta/index.html">Tests : Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/advection_rtheta/index.html">Tests on the 2D polar advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/polar_poisson/index.html">Tests on the 2D polar poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline_interpolator_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/spline_interpolator_rtheta/index.html">Tests on spline interpolator in polar coordinates</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/multipatch/index.html">Multipatch geometry tests</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometries</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/multipatch/geometries/index.html">Multipatch geometries</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Adding_docs.html">Adding Docs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Using_git.html">Using Git</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Gyselalib++</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" >Classes</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="annotated.html">Class List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="classes.html">Class Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="hierarchy.html">Class Hierarchy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Namespaces</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="namespaces.html">Namespace List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_members.html">Namespace Members</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_functions.html">Namespace Member Functions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_variables.html">Namespace Member Variables</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_typedefs.html">Namespace Member Typedefs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_enums.html">Namespace Member Enumerations</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="macros.html">Macros</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="files.html">Files</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">GyselalibX</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File fem_1d_poisson_solver.hpp</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/gyselax/gyselalibxx/edit/master/docs/gyselalibxx/fem__1d__poisson__solver_8hpp_source.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div><h1 id="file-fem_1d_poisson_solverhpp">File fem_1d_poisson_solver.hpp</h1>
+<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_be2a347b8fed8e825bae8c199ecc63c1.html"><strong>pde_solvers</strong></a> <strong>&gt;</strong> <a href="fem__1d__poisson__solver_8hpp.html"><strong>fem_1d_poisson_solver.hpp</strong></a></p>
+<p><a href="fem__1d__poisson__solver_8hpp.html">Go to the documentation of this file</a></p>
+<pre><code class="language-C++">// SPDX-License-Identifier: MIT
+#pragma once
+#include &lt;ddc/ddc.hpp&gt;
+#include &lt;ddc/kernels/splines.hpp&gt;
+
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
+#include "gauss_legendre_integration.hpp"
+#include "ipoisson_solver.hpp"
+#include "matrix.hpp"
+
+
+template &lt;class SplineBuilder, class SplineEvaluator&gt;
+class FEM1DPoissonSolver
+    : public IPoissonSolver&lt;
+              typename SplineEvaluator::evaluation_domain_type,
+              typename SplineEvaluator::batched_evaluation_domain_type,
+              typename SplineEvaluator::memory_space,
+              Kokkos::layout_right&gt;
+{
+    static_assert(std::is_same_v&lt;
+                  typename SplineBuilder::batched_interpolation_domain_type,
+                  typename SplineEvaluator::batched_evaluation_domain_type&gt;);
+    static_assert(std::is_same_v&lt;
+                  typename SplineBuilder::interpolation_discrete_dimension_type,
+                  typename SplineEvaluator::evaluation_discrete_dimension_type&gt;);
+
+private:
+    using base_type = IPoissonSolver&lt;
+            typename SplineEvaluator::evaluation_domain_type,
+            typename SplineEvaluator::batched_evaluation_domain_type,
+            typename SplineEvaluator::memory_space,
+            Kokkos::layout_right&gt;;
+
+private:
+    using GridPDEDim = typename SplineBuilder::interpolation_discrete_dimension_type;
+
+    using InputBSplines = typename SplineBuilder::bsplines_type;
+
+    using PDEDim = typename GridPDEDim::continuous_dimension_type;
+
+    using CoordPDEDim = Coord&lt;PDEDim&gt;;
+
+    using IdxPDEDim = Idx&lt;GridPDEDim&gt;;
+
+private:
+    using field_type = typename base_type::field_type;
+
+    using vector_field_type = typename base_type::vector_field_type;
+
+    using fem_idx_range_type = typename base_type::laplacian_idx_range_type;
+
+    using batch_idx_range_type = typename base_type::batch_idx_range_type;
+
+    using batch_index_type = typename base_type::batch_index_type;
+
+    using memory_space = typename base_type::memory_space;
+
+    using exec_space = typename SplineEvaluator::exec_space;
+
+public:
+    struct GridPDEDimQ : NonUniformGridBase&lt;PDEDim&gt;
+    {
+    };
+
+private:
+    using IdxQ = Idx&lt;GridPDEDimQ&gt;;
+
+    using IdxStepQ = IdxStep&lt;GridPDEDimQ&gt;;
+
+    using IdxRangeQ = IdxRange&lt;GridPDEDimQ&gt;;
+
+    using DQFieldMem = DFieldMem&lt;IdxRangeQ, memory_space&gt;;
+    using DQConstField = DConstField&lt;IdxRangeQ, memory_space&gt;;
+
+    using CoordQField = Field&lt;CoordPDEDim, IdxRangeQ, memory_space&gt;;
+
+public:
+    struct HiddenFEMBSplines : ddc::NonUniformBSplines&lt;PDEDim, InputBSplines::degree()&gt;
+    {
+    };
+
+private:
+    using FEMBSplines = std::conditional_t&lt;
+            ddc::is_uniform_bsplines_v&lt;InputBSplines&gt; &amp;&amp; !InputBSplines::is_periodic(),
+            HiddenFEMBSplines,
+            InputBSplines&gt;;
+
+    using FEMEvalExtrapolationRule = std::conditional_t&lt;
+            FEMBSplines::is_periodic(),
+            ddc::PeriodicExtrapolationRule&lt;PDEDim&gt;,
+            ddc::NullExtrapolationRule&gt;;
+
+    template &lt;class IdxRange&gt;
+    struct FEMSplineEvaluatorBuilder;
+
+    template &lt;class... DimX&gt;
+    struct FEMSplineEvaluatorBuilder&lt;IdxRange&lt;DimX...&gt;&gt;
+    {
+        using type = ddc::SplineEvaluator&lt;
+                Kokkos::DefaultExecutionSpace,
+                Kokkos::DefaultExecutionSpace::memory_space,
+                FEMBSplines,
+                GridPDEDim,
+                FEMEvalExtrapolationRule,
+                FEMEvalExtrapolationRule,
+                DimX...&gt;;
+    };
+
+    using FEMSplineEvaluator = typename FEMSplineEvaluatorBuilder&lt;
+            typename SplineEvaluator::batched_evaluation_domain_type&gt;::type;
+
+    using IdxFEMBSplines = Idx&lt;FEMBSplines&gt;;
+
+    using IdxRangeFEMBSplines = IdxRange&lt;FEMBSplines&gt;;
+
+    using IdxRangeBatchedFEMBSplines = typename FEMSplineEvaluator::batched_spline_domain_type;
+
+    using FEMBSplinesCoeffMem = DFieldMem&lt;IdxRangeFEMBSplines, memory_space&gt;;
+
+    using BatchedFEMBSplinesCoeffMem = DFieldMem&lt;IdxRangeBatchedFEMBSplines, memory_space&gt;;
+
+    using BatchedFEMBSplinesCoeff = typename BatchedFEMBSplinesCoeffMem::span_type;
+
+private:
+    using IdxRangeBSplines = IdxRange&lt;InputBSplines&gt;;
+    using IdxBSplines = Idx&lt;InputBSplines&gt;;
+
+    using IdxRangeBatchedBSplines = typename SplineEvaluator::batched_spline_domain_type;
+
+    using full_index =
+            typename SplineEvaluator::batched_evaluation_domain_type::discrete_element_type;
+
+    using CoordFieldMem = FieldMem&lt;
+            CoordPDEDim,
+            typename FEMSplineEvaluator::batched_evaluation_domain_type,
+            memory_space&gt;;
+
+    using CoordField
+            = Field&lt;CoordPDEDim,
+                    typename FEMSplineEvaluator::batched_evaluation_domain_type,
+                    memory_space&gt;;
+
+private:
+    using RHSBSplines = InputBSplines;
+
+    using RHSSplineCoeffMem = DFieldMem&lt;IdxRangeBatchedBSplines, memory_space&gt;;
+    using RHSSplineCoeff = typename RHSSplineCoeffMem::span_type;
+
+    using RHSQuadTags = ddc::
+            type_seq_merge_t&lt;typename base_type::batch_tags, ddc::detail::TypeSeq&lt;GridPDEDimQ&gt;&gt;;
+
+    using IdxRangeRHSQuadrature = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;RHSQuadTags&gt;;
+
+    using IdxRHSQuadrature = typename IdxRangeRHSQuadrature::discrete_element_type;
+
+private:
+    // Spline degree in x direction
+    static int constexpr s_degree = InputBSplines::degree();
+
+    // Gauss points used for integration computation
+    static int constexpr s_npts_gauss = InputBSplines::degree() + 1;
+
+private:
+    SplineBuilder const&amp; m_spline_builder;
+
+    SplineEvaluator m_spline_evaluator;
+
+    FEMSplineEvaluator m_spline_fem_evaluator;
+
+    int m_matrix_size;
+
+    DQFieldMem m_quad_coef;
+
+    std::unique_ptr&lt;Matrix&gt; m_fem_matrix;
+
+public:
+    FEM1DPoissonSolver(SplineBuilder const&amp; spline_builder, SplineEvaluator const&amp; spline_evaluator)
+        : m_spline_builder(spline_builder)
+        , m_spline_evaluator(spline_evaluator)
+        , m_spline_fem_evaluator(jit_build_nubsplinesx(spline_evaluator))
+    {
+        using break_point_grid = ddc::knot_discrete_dimension_t&lt;InputBSplines&gt;;
+        IdxRange&lt;break_point_grid&gt; break_point_idx_range
+                = ddc::discrete_space&lt;InputBSplines&gt;().break_point_domain();
+        host_t&lt;FieldMem&lt;CoordPDEDim, IdxRange&lt;break_point_grid&gt;&gt;&gt; break_points_alloc(
+                break_point_idx_range);
+        ddcHelper::dump_coordinates(
+                Kokkos::DefaultHostExecutionSpace(),
+                get_field(break_points_alloc));
+
+        // Calculate the integration coefficients
+        GaussLegendre&lt;GridPDEDimQ, s_npts_gauss&gt; const gl(get_const_field(break_points_alloc));
+        m_quad_coef = gl.template gauss_legendre_coefficients&lt;memory_space&gt;();
+
+        // Build the finite elements matrix
+        if constexpr (InputBSplines::is_periodic()) {
+            build_periodic_matrix();
+        } else {
+            build_non_periodic_matrix();
+        }
+    }
+
+    field_type operator()(field_type phi, field_type rho) const override
+    {
+        batch_idx_range_type idx_range_batch(get_idx_range(phi));
+        IdxRangeBatchedFEMBSplines phi_coefs_idx_range(
+                idx_range_batch,
+                ddc::discrete_space&lt;FEMBSplines&gt;().full_domain());
+        BatchedFEMBSplinesCoeffMem phi_coefs_alloc(phi_coefs_idx_range);
+        BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);
+        solve_matrix_system(phi_coefs, rho);
+
+        CoordFieldMem eval_pts_alloc(get_idx_range(phi));
+        CoordField eval_pts = get_field(eval_pts_alloc);
+
+        ddc::parallel_for_each(
+                exec_space(),
+                get_idx_range(eval_pts),
+                KOKKOS_LAMBDA(full_index const idx) {
+                    eval_pts(idx) = ddc::coordinate(ddc::select&lt;GridPDEDim&gt;(idx));
+                });
+
+        m_spline_fem_evaluator(phi, get_const_field(eval_pts), get_const_field(phi_coefs));
+
+        return phi;
+    }
+
+    field_type operator()(field_type phi, vector_field_type E, field_type rho) const override
+    {
+        batch_idx_range_type idx_range_batch(get_idx_range(phi));
+        IdxRangeBatchedFEMBSplines phi_coefs_idx_range(
+                idx_range_batch,
+                ddc::discrete_space&lt;FEMBSplines&gt;().full_domain());
+        BatchedFEMBSplinesCoeffMem phi_coefs_alloc(phi_coefs_idx_range);
+        BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);
+        solve_matrix_system(phi_coefs, rho);
+
+        CoordFieldMem eval_pts_alloc(get_idx_range(phi));
+        CoordField eval_pts = get_field(eval_pts_alloc);
+
+        ddc::parallel_for_each(
+                exec_space(),
+                get_idx_range(eval_pts),
+                KOKKOS_LAMBDA(full_index const idx) {
+                    eval_pts(idx) = ddc::coordinate(ddc::select&lt;GridPDEDim&gt;(idx));
+                });
+
+        m_spline_fem_evaluator(phi, get_const_field(eval_pts), get_const_field(phi_coefs));
+        m_spline_fem_evaluator.deriv(E, get_const_field(eval_pts), get_const_field(phi_coefs));
+
+        ddc::parallel_for_each(
+                exec_space(),
+                get_idx_range(phi),
+                KOKKOS_LAMBDA(full_index const idx) { E(idx) = -E(idx); });
+        return phi;
+    }
+
+private:
+    void build_periodic_matrix()
+    {
+        int constexpr n_lower_diags = s_degree + 1;
+        int const nbasis = ddc::discrete_space&lt;FEMBSplines&gt;().nbasis();
+        m_matrix_size = nbasis + 1;
+        bool const positive_definite_symmetric = false;
+
+        // Matrix with block is used instead of periodic to contain the
+        // Dirichlet boundary conditions
+        m_fem_matrix = Matrix::make_new_block_with_banded_region(
+                m_matrix_size,
+                n_lower_diags,
+                n_lower_diags,
+                positive_definite_symmetric,
+                n_lower_diags);
+
+        auto quad_coef_host = ddc::create_mirror_and_copy(get_const_field(m_quad_coef));
+
+        IdxRangeFEMBSplines spline_idx_range = ddc::discrete_space&lt;FEMBSplines&gt;().full_domain();
+        IdxFEMBSplines first_bspline_idx = spline_idx_range.front();
+
+        // Fill the banded part of the matrix
+        std::array&lt;double, s_degree + 1&gt; derivs_alloc;
+        DSpan1D derivs = as_span(derivs_alloc);
+        ddc::for_each(get_idx_range(m_quad_coef), [&amp;](IdxQ const ix) {
+            CoordPDEDim const coord = ddc::coordinate(ix);
+            IdxFEMBSplines const jmin_idx
+                    = ddc::discrete_space&lt;FEMBSplines&gt;().eval_deriv(derivs, coord);
+            std::size_t j_min = (jmin_idx - first_bspline_idx).value();
+            for (int j = 0; j &lt; s_degree + 1; ++j) {
+                for (int k = 0; k &lt; s_degree + 1; ++k) {
+                    int const j_idx = (j + j_min) % nbasis;
+                    int const k_idx = (k + j_min) % nbasis;
+                    double a_jk = m_fem_matrix-&gt;get_element(j_idx, k_idx);
+                    // Update element
+                    a_jk += derivs[j] * derivs[k] * quad_coef_host(ix);
+
+                    m_fem_matrix-&gt;set_element(j_idx, k_idx, a_jk);
+                }
+            }
+        });
+
+        // Impose the boundary conditions
+        IdxRangeFEMBSplines const bspline_full_idx_range
+                = ddc::discrete_space&lt;FEMBSplines&gt;().full_domain();
+        IdxRangeFEMBSplines const idx_range_bspline
+                = bspline_full_idx_range.take_first(IdxStep&lt;FEMBSplines&gt;(nbasis));
+
+        host_t&lt;FEMBSplinesCoeffMem&gt; int_vals(idx_range_bspline);
+        ddc::integrals(Kokkos::DefaultHostExecutionSpace(), get_field(int_vals));
+
+        for (IdxFEMBSplines const ix : idx_range_bspline) {
+            int const i = (ix - first_bspline_idx).value();
+            m_fem_matrix-&gt;set_element(nbasis, i, int_vals(ix));
+            m_fem_matrix-&gt;set_element(i, nbasis, int_vals(ix));
+        }
+
+        // Factorise the matrix ready to call solve
+        m_fem_matrix-&gt;factorise();
+    }
+
+    void build_non_periodic_matrix()
+    {
+        // Matrix contains all elements of the basis except the first
+        // and last in order to impose Dirichlet conditions
+        int const nbasis = ddc::discrete_space&lt;FEMBSplines&gt;().nbasis();
+        m_matrix_size = nbasis - 2;
+        int constexpr n_lower_diags = s_degree;
+        bool const positive_definite_symmetric = false;
+
+        // Matrix with block is used instead of periodic to contain the
+        // Dirichlet boundary conditions
+        m_fem_matrix = Matrix::make_new_banded(
+                m_matrix_size,
+                n_lower_diags,
+                n_lower_diags,
+                positive_definite_symmetric);
+
+        auto quad_coef_host = ddc::create_mirror_and_copy(get_const_field(m_quad_coef));
+
+        IdxRangeFEMBSplines spline_idx_range = ddc::discrete_space&lt;FEMBSplines&gt;().full_domain();
+        IdxFEMBSplines first_bspline_idx = spline_idx_range.front();
+
+        // Fill the banded part of the matrix
+        std::array&lt;double, s_degree + 1&gt; derivs_alloc;
+        DSpan1D derivs = as_span(derivs_alloc);
+        ddc::for_each(get_idx_range(m_quad_coef), [&amp;](IdxQ const ix) {
+            CoordPDEDim const coord = ddc::coordinate(ix);
+            IdxFEMBSplines const jmin_idx
+                    = ddc::discrete_space&lt;FEMBSplines&gt;().eval_deriv(derivs, coord);
+            std::size_t j_min = (jmin_idx - first_bspline_idx).value();
+            for (int j = 0; j &lt; s_degree + 1; ++j) {
+                for (int k = 0; k &lt; s_degree + 1; ++k) {
+                    int const j_idx = (j + j_min) % nbasis - 1;
+                    int const k_idx = (k + j_min) % nbasis - 1;
+
+                    if (j_idx != -1 &amp;&amp; j_idx != m_matrix_size &amp;&amp; k_idx != -1
+                        &amp;&amp; k_idx != m_matrix_size) {
+                        double a_jk = m_fem_matrix-&gt;get_element(j_idx, k_idx);
+                        // Update element
+                        a_jk += derivs[j] * derivs[k] * quad_coef_host(ix);
+
+                        m_fem_matrix-&gt;set_element(j_idx, k_idx, a_jk);
+                    }
+                }
+            }
+        });
+
+        // Factorise the matrix ready to call solve
+        m_fem_matrix-&gt;factorise();
+    }
+
+
+public:
+    void solve_matrix_system(BatchedFEMBSplinesCoeff phi_spline_coef, field_type rho) const
+    {
+        // Calculate the spline representation of the RHS.
+        IdxRangeBatchedBSplines rho_spline_coef_idx_range(
+                batch_idx_range_type(get_idx_range(rho)),
+                get_spline_idx_range(m_spline_builder));
+        RHSSplineCoeffMem rho_spline_coef_alloc(rho_spline_coef_idx_range);
+        RHSSplineCoeff rho_spline_coef(rho_spline_coef_alloc);
+        m_spline_builder(rho_spline_coef, get_const_field(rho));
+
+        IdxRange&lt;FEMBSplines&gt; fem_idx_range = ddc::discrete_space&lt;FEMBSplines&gt;().full_domain();
+        int const nbasis_proxy = ddc::discrete_space&lt;FEMBSplines&gt;().nbasis();
+        SplineEvaluator spline_evaluator_proxy = m_spline_evaluator;
+        DQConstField quad_coef_proxy = get_const_field(m_quad_coef);
+
+        IdxFEMBSplines last_basis_element(nbasis_proxy - 1);
+
+        ddc::parallel_fill(phi_spline_coef, 0.0);
+
+        // Create the rhs as an alias for phi_spline_coef as the matrix equation is solved in place.
+        BatchedFEMBSplinesCoeff rhs(phi_spline_coef);
+
+        batch_idx_range_type batch_idx_range(get_idx_range(rho));
+        IdxRangeRHSQuadrature rhs_build_idx_range(batch_idx_range, get_idx_range(m_quad_coef));
+
+        // Fill phi_rhs(i) with \int rho(x) b_i(x) dx
+        // Rk: phi_rhs no longer contains spline coefficients, but is the
+        //     RHS of the matrix equation
+        ddc::parallel_for_each(
+                exec_space(),
+                rhs_build_idx_range,
+                KOKKOS_LAMBDA(IdxRHSQuadrature const idx) {
+                    batch_index_type ib(idx);
+                    IdxQ iq(idx);
+                    CoordPDEDim const coord = ddc::coordinate(iq);
+                    std::array&lt;double, s_degree + 1&gt; values_alloc;
+                    DSpan1D values = as_span(values_alloc);
+                    IdxFEMBSplines const jmin
+                            = ddc::discrete_space&lt;FEMBSplines&gt;().eval_basis(values, coord);
+                    double const rho_val = spline_evaluator_proxy(
+                            coord,
+                            DConstField&lt;IdxRangeBSplines&gt;(rho_spline_coef[ib]));
+                    for (int j = 0; j &lt; s_degree + 1; ++j) {
+                        IdxFEMBSplines j_idx = jmin + j;
+                        while (j_idx &gt; last_basis_element) {
+                            j_idx -= nbasis_proxy;
+                        }
+                        Kokkos::atomic_fetch_add(
+                                &amp;rhs(ib, j_idx),
+                                rho_val * values[j] * quad_coef_proxy(iq));
+                    }
+                });
+
+        auto phi_spline_coef_host_alloc = ddc::create_mirror_and_copy(phi_spline_coef);
+        host_t&lt;BatchedFEMBSplinesCoeff&gt; phi_spline_coef_host
+                = get_field(phi_spline_coef_host_alloc);
+
+        int constexpr n_implicit_min_bcs(!InputBSplines::is_periodic());
+
+        ddc::for_each(batch_idx_range, [&amp;](batch_index_type ib) {
+            IdxRangeFEMBSplines solve_idx_range(
+                    fem_idx_range.front() + n_implicit_min_bcs,
+                    IdxStep&lt;FEMBSplines&gt;(m_matrix_size));
+            DSpan1D const phi_rhs_host
+                    = phi_spline_coef_host[ib][solve_idx_range].allocation_mdspan();
+
+            // Solve the matrix equation to find the spline coefficients of phi
+            m_fem_matrix-&gt;solve_inplace(phi_rhs_host);
+        });
+
+        ddc::parallel_deepcopy(phi_spline_coef, phi_spline_coef_host);
+
+        if constexpr (!InputBSplines::is_periodic()) {
+            // Apply Dirichlet BCs
+            ddc::parallel_fill(phi_spline_coef[fem_idx_range.front()], 0.0);
+            ddc::parallel_fill(phi_spline_coef[fem_idx_range.back()], 0.0);
+        } else {
+            IdxFEMBSplines first_repeat_bspline(ddc::discrete_space&lt;FEMBSplines&gt;().nbasis());
+            // Copy the first d coefficients into the last d coefficients
+            // These coefficients refer to the same InputBSplines which cross the boundaries
+            ddc::parallel_for_each(
+                    exec_space(),
+                    batch_idx_range,
+                    KOKKOS_LAMBDA(batch_index_type ib) {
+                        for (int i = 0; i &lt; s_degree; i++) {
+                            phi_spline_coef(ib, first_repeat_bspline + i)
+                                    = phi_spline_coef(ib, IdxFEMBSplines(i));
+                        }
+                    });
+        }
+    }
+
+private:
+    //===========================================================================
+    // Create a non-uniform spline evaluator from the provided evaluator
+    //===========================================================================
+    static FEMSplineEvaluator jit_build_nubsplinesx(SplineEvaluator const&amp; spline_evaluator)
+    {
+        if constexpr (InputBSplines::is_periodic()) {
+            return spline_evaluator;
+        } else {
+            static_assert(
+                    (ddc::is_uniform_bsplines_v&lt;typename SplineEvaluator::bsplines_type&gt;)
+                    || ddc::is_non_uniform_bsplines_v&lt;typename SplineEvaluator::bsplines_type&gt;);
+            if constexpr (ddc::is_uniform_bsplines_v&lt;typename SplineEvaluator::bsplines_type&gt;) {
+                using break_point_grid = ddc::knot_discrete_dimension_t&lt;InputBSplines&gt;;
+                IdxRange&lt;break_point_grid&gt; break_point_idx_range
+                        = ddc::discrete_space&lt;InputBSplines&gt;().break_point_domain();
+                std::vector&lt;CoordPDEDim&gt; break_points(break_point_idx_range.size());
+
+                for (Idx&lt;break_point_grid&gt; const idx : break_point_idx_range) {
+                    break_points[(idx - break_point_idx_range.front()).value()]
+                            = ddc::coordinate(idx);
+                }
+                ddc::init_discrete_space&lt;FEMBSplines&gt;(break_points);
+            }
+            // Boundary values are never evaluated
+            return FEMSplineEvaluator(ddc::NullExtrapolationRule(), ddc::NullExtrapolationRule());
+        }
+    }
+};
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/gyselax/gyselalibxx/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../docs/jscript/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

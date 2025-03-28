@@ -1,0 +1,492 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classBslImplicitPredCorrRTheta" kind="class" language="C++" prot="public">
+    <compoundname>BslImplicitPredCorrRTheta</compoundname>
+    <basecompoundref refid="classITimeSolverRTheta" prot="public" virt="non-virtual">ITimeSolverRTheta</basecompoundref>
+    <includes refid="bsl__predcorr__second__order__implicit_8hpp" local="no">bsl_predcorr_second_order_implicit.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class LogicalToPhysicalMapping</type>
+      </param>
+      <param>
+        <type>class LogicalToPseudoPhysicalMapping</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classBslImplicitPredCorrRTheta_1a4a0005626551c918d876f493374cd555" prot="private" static="no">
+        <type><ref refid="classEuler" kindref="compound">Euler</ref>&lt; FieldMemRTheta&lt; CoordRTheta &gt;, <ref refid="classVectorFieldMem" kindref="compound">DVectorFieldMemRTheta</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, Kokkos::DefaultExecutionSpace &gt;</type>
+        <definition>using BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;::EulerMethod =  Euler&lt;FieldMemRTheta&lt;CoordRTheta&gt;, DVectorFieldMemRTheta&lt;X, Y&gt;, Kokkos::DefaultExecutionSpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>EulerMethod</name>
+        <qualifiedname>BslImplicitPredCorrRTheta::EulerMethod</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" line="64" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslImplicitPredCorrRTheta_1a284d9991b6b3a79fcbeaf2374c7a3a2e" prot="private" static="no">
+        <type><ref refid="classEuler" kindref="compound">Euler</ref>&lt; host_t&lt; FieldMemRTheta&lt; CoordRTheta &gt; &gt;, host_t&lt; <ref refid="classVectorFieldMem" kindref="compound">DVectorFieldMemRTheta</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt; &gt;, Kokkos::DefaultHostExecutionSpace &gt;</type>
+        <definition>using BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;::EulerMethod_host =  Euler&lt;host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt; &gt;, host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt; &gt;, Kokkos::DefaultHostExecutionSpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>EulerMethod_host</name>
+        <qualifiedname>BslImplicitPredCorrRTheta::EulerMethod_host</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslImplicitPredCorrRTheta_1a8fb89254b562099a229de9e9801dbde2" prot="private" static="no">
+        <type><ref refid="classSplinePolarFootFinder" kindref="compound">SplinePolarFootFinder</ref>&lt; <ref refid="classEuler" kindref="compound">EulerMethod</ref>, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound &gt;</type>
+        <definition>using BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;::SplinePolarFootFinderType =  SplinePolarFootFinder&lt; EulerMethod, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound&gt;</definition>
+        <argsstring></argsstring>
+        <name>SplinePolarFootFinderType</name>
+        <qualifiedname>BslImplicitPredCorrRTheta::SplinePolarFootFinderType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" line="74" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslImplicitPredCorrRTheta_1ac3e05e729fa98cadf42d8119423e1a6d" prot="private" static="no">
+        <type><ref refid="classSplinePolarFootFinder" kindref="compound">SplinePolarFootFinder</ref>&lt; <ref refid="classEuler" kindref="compound">EulerMethod_host</ref>, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host &gt;</type>
+        <definition>using BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;::SplinePolarFootFinderType_host =  SplinePolarFootFinder&lt; EulerMethod_host, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host&gt;</definition>
+        <argsstring></argsstring>
+        <name>SplinePolarFootFinderType_host</name>
+        <qualifiedname>BslImplicitPredCorrRTheta::SplinePolarFootFinderType_host</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" line="81" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classBslImplicitPredCorrRTheta_1ab35d97776c7595b150b7042456a689a1" prot="private" static="no" mutable="no">
+        <type>LogicalToPhysicalMapping const  &amp;</type>
+        <definition>LogicalToPhysicalMapping const&amp; BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;::m_logical_to_physical</definition>
+        <argsstring></argsstring>
+        <name>m_logical_to_physical</name>
+        <qualifiedname>BslImplicitPredCorrRTheta::m_logical_to_physical</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" line="88" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classBslImplicitPredCorrRTheta_1a46000b11ebad8f693e9fbc616f1ad1bd" prot="private" static="no" mutable="no">
+        <type><ref refid="classBslAdvectionRTheta" kindref="compound">BslAdvectionRTheta</ref>&lt; <ref refid="classSplinePolarFootFinder" kindref="compound">SplinePolarFootFinderType</ref>, LogicalToPhysicalMapping &gt; const  &amp;</type>
+        <definition>BslAdvectionRTheta&lt;SplinePolarFootFinderType, LogicalToPhysicalMapping&gt; const&amp; BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;::m_advection_solver</definition>
+        <argsstring></argsstring>
+        <name>m_advection_solver</name>
+        <qualifiedname>BslImplicitPredCorrRTheta::m_advection_solver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" line="91" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classBslImplicitPredCorrRTheta_1a241cdc5679b7f9b30fd1e5c83da61b9a" prot="private" static="no" mutable="no">
+        <type><ref refid="classEuler" kindref="compound">EulerMethod_host</ref> const</type>
+        <definition>EulerMethod_host const BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;::m_euler</definition>
+        <argsstring></argsstring>
+        <name>m_euler</name>
+        <qualifiedname>BslImplicitPredCorrRTheta::m_euler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" line="93" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classBslImplicitPredCorrRTheta_1aaca5b6d7122b87323ad6627e31c02aac" prot="private" static="no" mutable="no">
+        <type><ref refid="classSplinePolarFootFinder" kindref="compound">SplinePolarFootFinderType_host</ref> const</type>
+        <definition>SplinePolarFootFinderType_host const BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;::m_foot_finder</definition>
+        <argsstring></argsstring>
+        <name>m_foot_finder</name>
+        <qualifiedname>BslImplicitPredCorrRTheta::m_foot_finder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" line="94" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classBslImplicitPredCorrRTheta_1a0c81ab9a45d8515e7648d31731fee7ac" prot="private" static="no" mutable="no">
+        <type><ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref>&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref>, SplineRThetaEvaluatorNullBound &gt; const  &amp;</type>
+        <definition>PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound&gt; const&amp; BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;::m_poisson_solver</definition>
+        <argsstring></argsstring>
+        <name>m_poisson_solver</name>
+        <qualifiedname>BslImplicitPredCorrRTheta::m_poisson_solver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" line="100" column="8" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classBslImplicitPredCorrRTheta_1a30dec681fdf8580f57b31ae75663f229" prot="private" static="no" mutable="no">
+        <type>SplineRThetaBuilder_host const  &amp;</type>
+        <definition>SplineRThetaBuilder_host const&amp; BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;::m_builder</definition>
+        <argsstring></argsstring>
+        <name>m_builder</name>
+        <qualifiedname>BslImplicitPredCorrRTheta::m_builder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" line="102" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classBslImplicitPredCorrRTheta_1ac2e3fd41adc80b455d6d971f0cd8087a" prot="private" static="no" mutable="no">
+        <type>SplineRThetaEvaluatorConstBound_host const  &amp;</type>
+        <definition>SplineRThetaEvaluatorConstBound_host const&amp; BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;::m_evaluator</definition>
+        <argsstring></argsstring>
+        <name>m_evaluator</name>
+        <qualifiedname>BslImplicitPredCorrRTheta::m_evaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" line="103" column="48" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" bodystart="103" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classBslImplicitPredCorrRTheta_1abb9205434b8e367cea7b72c87e1c519f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;::BslImplicitPredCorrRTheta</definition>
+        <argsstring>(LogicalToPhysicalMapping const &amp;logical_to_physical, LogicalToPseudoPhysicalMapping const &amp;logical_to_pseudo_physical, BslAdvectionRTheta&lt; SplinePolarFootFinderType, LogicalToPhysicalMapping &gt; const &amp;advection_solver, IdxRangeRTheta const &amp;grid, SplineRThetaBuilder_host const &amp;builder, PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound &gt; const &amp;poisson_solver, SplineRThetaEvaluatorConstBound_host const &amp;advection_evaluator)</argsstring>
+        <name>BslImplicitPredCorrRTheta</name>
+        <qualifiedname>BslImplicitPredCorrRTheta::BslImplicitPredCorrRTheta</qualifiedname>
+        <param>
+          <type>LogicalToPhysicalMapping const &amp;</type>
+          <declname>logical_to_physical</declname>
+        </param>
+        <param>
+          <type>LogicalToPseudoPhysicalMapping const &amp;</type>
+          <declname>logical_to_pseudo_physical</declname>
+        </param>
+        <param>
+          <type><ref refid="classBslAdvectionRTheta" kindref="compound">BslAdvectionRTheta</ref>&lt; <ref refid="classSplinePolarFootFinder" kindref="compound">SplinePolarFootFinderType</ref>, LogicalToPhysicalMapping &gt; const &amp;</type>
+          <declname>advection_solver</declname>
+        </param>
+        <param>
+          <type>IdxRangeRTheta const &amp;</type>
+          <declname>grid</declname>
+        </param>
+        <param>
+          <type>SplineRThetaBuilder_host const &amp;</type>
+          <declname>builder</declname>
+        </param>
+        <param>
+          <type><ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref>&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref>, SplineRThetaEvaluatorNullBound &gt; const &amp;</type>
+          <declname>poisson_solver</declname>
+        </param>
+        <param>
+          <type>SplineRThetaEvaluatorConstBound_host const &amp;</type>
+          <declname>advection_evaluator</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate a <ref refid="classBslImplicitPredCorrRTheta" kindref="compound">BslImplicitPredCorrRTheta</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">logical_to_physical</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mapping from the logical domain to the physical domain. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">logical_to_pseudo_physical</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mapping from the logical domain to the pseudo-physical domain. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">advection_solver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The advection operator with an <ref refid="classEuler" kindref="compound">Euler</ref> method. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">grid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range on which the functions are defined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">builder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A spline builder to get the spline representation of the advection field and the rhs. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">poisson_solver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PDE solver which computes the electrical potential. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">advection_evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An evaluator of B-splines for the spline advection field. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" line="128" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" bodystart="128" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="classBslImplicitPredCorrRTheta_1aa9c8a28861bf06a7d477ef7e9cf1a4c4" prot="public" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="virtual">
+        <type>host_t&lt; DFieldRTheta &gt;</type>
+        <definition>host_t&lt; DFieldRTheta &gt; BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;::operator()</definition>
+        <argsstring>(host_t&lt; DFieldRTheta &gt; allfdistribu_host, double const dt, int const steps) const final</argsstring>
+        <name>operator()</name>
+        <qualifiedname>BslImplicitPredCorrRTheta::operator()</qualifiedname>
+        <reimplements refid="classITimeSolverRTheta_1a5e17feb3b5b1c2cf535b2bf58732e137">operator()</reimplements>
+        <param>
+          <type>host_t&lt; DFieldRTheta &gt;</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type>int const</type>
+          <declname>steps</declname>
+        </param>
+        <briefdescription>
+<para>Solves on <formula id="133">$ T = dt*N $</formula> the equations system. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On input: the initial condition. On output: the solution at <formula id="134">$ dt *N$</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">steps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number <formula id="135">$ N$</formula> of time interactions.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A Field toward allfdistribu. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" line="159" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" bodystart="159" bodyend="386"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classBslImplicitPredCorrRTheta_1a21996db8281effe305258715e9fb3bda" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;::compute_square_polar_distance</definition>
+        <argsstring>(CoordRTheta const &amp;coord1, CoordRTheta const &amp;coord2) const</argsstring>
+        <name>compute_square_polar_distance</name>
+        <qualifiedname>BslImplicitPredCorrRTheta::compute_square_polar_distance</qualifiedname>
+        <param>
+          <type>CoordRTheta const &amp;</type>
+          <declname>coord1</declname>
+        </param>
+        <param>
+          <type>CoordRTheta const &amp;</type>
+          <declname>coord2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" line="391" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" bodystart="391" bodyend="402"/>
+      </memberdef>
+      <memberdef kind="function" id="classBslImplicitPredCorrRTheta_1a546d332dc643c3ceb532b9e2ea778e05" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;::implicit_loop</definition>
+        <argsstring>(host_t&lt; DVectorFieldRTheta&lt; X, Y &gt; &gt; advection_field, host_t&lt; ConstVectorSplineCoeffs2D&lt; X, Y &gt; &gt; advection_field_coefs_k, host_t&lt; FieldRTheta&lt; CoordRTheta &gt; &gt; feet_coords, double const dt, double const tau) const</argsstring>
+        <name>implicit_loop</name>
+        <qualifiedname>BslImplicitPredCorrRTheta::implicit_loop</qualifiedname>
+        <param>
+          <type>host_t&lt; <ref refid="classVectorField" kindref="compound">DVectorFieldRTheta</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt; &gt;</type>
+          <declname>advection_field</declname>
+        </param>
+        <param>
+          <type>host_t&lt; <ref refid="classVectorField" kindref="compound">ConstVectorSplineCoeffs2D</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt; &gt;</type>
+          <declname>advection_field_coefs_k</declname>
+        </param>
+        <param>
+          <type>host_t&lt; FieldRTheta&lt; CoordRTheta &gt; &gt;</type>
+          <declname>feet_coords</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>tau</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" line="405" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" bodystart="405" bodyend="465"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A second order implicit predictor-corrector for the Vlasov-Poisson equations. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>It solves in time the following Vlasov-Poisson equations system:</para>
+<para><itemizedlist>
+<listitem><para><formula id="103">$  - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho $</formula>,</para>
+</listitem><listitem><para><formula id="104">$ E = - \nabla \phi $</formula>,</para>
+</listitem><listitem><para><formula id="105">$ \partial_t \rho - E_y \partial_x \rho + E_x \partial_y \rho = 0$</formula>,</para>
+</listitem></itemizedlist>
+</para>
+<para>we write <formula id="106">$ (A_x, A_y) =  (-E_y, E_x)$</formula>.</para>
+<para>The second order implicit predictor-corrector is also detailed in Edoardo Zoni&apos;s article (<ulink url="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</ulink>).</para>
+<para>for <formula id="107">$ n \geq 0 $</formula>,</para>
+<para>First, it predicts:<itemizedlist>
+<listitem><para>1. From <formula id="108">$\rho^n$</formula>, it computes <formula id="109">$\phi^n$</formula> with a <ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref>;</para>
+</listitem><listitem><para>2. From <formula id="109">$\phi^n$</formula>, it computes <formula id="110">$A^n$</formula> with a <ref refid="classAdvectionFieldFinder" kindref="compound">AdvectionFieldFinder</ref>;</para>
+</listitem><listitem><para>3. From <formula id="108">$\rho^n$</formula> and <formula id="110">$A^n$</formula>, it computes implicitly <formula id="117">$\rho^P$</formula> with a <ref refid="classBslAdvectionRTheta" kindref="compound">BslAdvectionRTheta</ref> on <formula id="125">$ \frac{dt}{4} $</formula>:<itemizedlist>
+<listitem><para>the characteristic feet <formula id="118">$X^P$</formula> is such that <formula id="126">$X^P = X^k$</formula> with <formula id="127">$X^k$</formula> the result of the implicit method:<itemizedlist>
+<listitem><para><formula id="128">$ X^k = X^n - \frac{dt}{4} \partial_t X^k$</formula>.</para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+<para>Secondly, it corrects:<itemizedlist>
+<listitem><para>4. From <formula id="117">$\rho^P$</formula>, it computes <formula id="120">$\phi^P$</formula> with a <ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref>;</para>
+</listitem><listitem><para>5. From <formula id="120">$\phi^P$</formula>, it computes <formula id="121">$A^P$</formula> with a <ref refid="classAdvectionFieldFinder" kindref="compound">AdvectionFieldFinder</ref>;</para>
+</listitem><listitem><para>6. From <formula id="108">$\rho^n$</formula> and <formula id="129">$ A^{P} $</formula>, it computes <formula id="115">$\rho^{n+1}$</formula> with a <ref refid="classBslAdvectionRTheta" kindref="compound">BslAdvectionRTheta</ref> on <formula id="130">$ \frac{dt}{2} $</formula>.<itemizedlist>
+<listitem><para>the characteristic feet <formula id="123">$X^C$</formula> is such that <formula id="131">$X^C = X^k$</formula> with <formula id="127">$X^k$</formula> the result of the implicit method:<itemizedlist>
+<listitem><para><formula id="132">$\partial_t X^k = A^P(X^n) + A^P(X^{k-1}) $</formula>,</para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>LogicalToPhysicalMapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A class describing a mapping from curvilinear coordinates to Cartesian coordinates. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>LogicalToPseudoPhysicalMapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A class describing a mapping from curvilinear coordinates to pseudo-Cartesian coordinates. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;</label>
+        <link refid="classBslImplicitPredCorrRTheta"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ITimeSolverRTheta</label>
+        <link refid="classITimeSolverRTheta"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;</label>
+        <link refid="classBslImplicitPredCorrRTheta"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ITimeSolverRTheta</label>
+        <link refid="classITimeSolverRTheta"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" line="61" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp" bodystart="62" bodyend="466"/>
+    <listofallmembers>
+      <member refid="classBslImplicitPredCorrRTheta_1abb9205434b8e367cea7b72c87e1c519f" prot="public" virt="non-virtual"><scope>BslImplicitPredCorrRTheta</scope><name>BslImplicitPredCorrRTheta</name></member>
+      <member refid="classBslImplicitPredCorrRTheta_1a21996db8281effe305258715e9fb3bda" prot="private" virt="non-virtual"><scope>BslImplicitPredCorrRTheta</scope><name>compute_square_polar_distance</name></member>
+      <member refid="classITimeSolverRTheta_1a5503beee2f7240e8b09ef8ac3be2af24" prot="protected" virt="non-virtual"><scope>BslImplicitPredCorrRTheta</scope><name>display_time_difference</name></member>
+      <member refid="classBslImplicitPredCorrRTheta_1a4a0005626551c918d876f493374cd555" prot="private" virt="non-virtual"><scope>BslImplicitPredCorrRTheta</scope><name>EulerMethod</name></member>
+      <member refid="classBslImplicitPredCorrRTheta_1a284d9991b6b3a79fcbeaf2374c7a3a2e" prot="private" virt="non-virtual"><scope>BslImplicitPredCorrRTheta</scope><name>EulerMethod_host</name></member>
+      <member refid="classBslImplicitPredCorrRTheta_1a546d332dc643c3ceb532b9e2ea778e05" prot="private" virt="non-virtual"><scope>BslImplicitPredCorrRTheta</scope><name>implicit_loop</name></member>
+      <member refid="classBslImplicitPredCorrRTheta_1a46000b11ebad8f693e9fbc616f1ad1bd" prot="private" virt="non-virtual"><scope>BslImplicitPredCorrRTheta</scope><name>m_advection_solver</name></member>
+      <member refid="classBslImplicitPredCorrRTheta_1a30dec681fdf8580f57b31ae75663f229" prot="private" virt="non-virtual"><scope>BslImplicitPredCorrRTheta</scope><name>m_builder</name></member>
+      <member refid="classBslImplicitPredCorrRTheta_1a241cdc5679b7f9b30fd1e5c83da61b9a" prot="private" virt="non-virtual"><scope>BslImplicitPredCorrRTheta</scope><name>m_euler</name></member>
+      <member refid="classBslImplicitPredCorrRTheta_1ac2e3fd41adc80b455d6d971f0cd8087a" prot="private" virt="non-virtual"><scope>BslImplicitPredCorrRTheta</scope><name>m_evaluator</name></member>
+      <member refid="classBslImplicitPredCorrRTheta_1aaca5b6d7122b87323ad6627e31c02aac" prot="private" virt="non-virtual"><scope>BslImplicitPredCorrRTheta</scope><name>m_foot_finder</name></member>
+      <member refid="classBslImplicitPredCorrRTheta_1ab35d97776c7595b150b7042456a689a1" prot="private" virt="non-virtual"><scope>BslImplicitPredCorrRTheta</scope><name>m_logical_to_physical</name></member>
+      <member refid="classBslImplicitPredCorrRTheta_1a0c81ab9a45d8515e7648d31731fee7ac" prot="private" virt="non-virtual"><scope>BslImplicitPredCorrRTheta</scope><name>m_poisson_solver</name></member>
+      <member refid="classBslImplicitPredCorrRTheta_1aa9c8a28861bf06a7d477ef7e9cf1a4c4" prot="public" virt="virtual"><scope>BslImplicitPredCorrRTheta</scope><name>operator()</name></member>
+      <member refid="classBslImplicitPredCorrRTheta_1a8fb89254b562099a229de9e9801dbde2" prot="private" virt="non-virtual"><scope>BslImplicitPredCorrRTheta</scope><name>SplinePolarFootFinderType</name></member>
+      <member refid="classBslImplicitPredCorrRTheta_1ac3e05e729fa98cadf42d8119423e1a6d" prot="private" virt="non-virtual"><scope>BslImplicitPredCorrRTheta</scope><name>SplinePolarFootFinderType_host</name></member>
+      <member refid="classITimeSolverRTheta_1afc3a0e07f492d601b0793a9dfba47bfb" prot="public" virt="virtual"><scope>BslImplicitPredCorrRTheta</scope><name>~ITimeSolverRTheta</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

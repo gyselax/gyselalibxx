@@ -1,0 +1,604 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classCrankNicolson" kind="class" language="C++" prot="public">
+    <compoundname>CrankNicolson</compoundname>
+    <basecompoundref refid="classITimeStepper" prot="public" virt="non-virtual">ITimeStepper&lt; FieldMem, FieldMem, Kokkos::DefaultExecutionSpace &gt;</basecompoundref>
+    <includes refid="crank__nicolson_8hpp" local="no">crank_nicolson.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class FieldMem</type>
+      </param>
+      <param>
+        <type>class <ref refid="classDerivFieldMem" kindref="compound">DerivFieldMem</ref></type>
+        <defval>FieldMem</defval>
+      </param>
+      <param>
+        <type>class ExecSpace</type>
+        <defval>Kokkos::DefaultExecutionSpace</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classCrankNicolson_1a1a86676d28229e9279602739dd2b3e53" prot="private" static="no">
+        <type><ref refid="classITimeStepper" kindref="compound">ITimeStepper</ref>&lt; FieldMem, <ref refid="classDerivFieldMem" kindref="compound">DerivFieldMem</ref>, ExecSpace &gt;</type>
+        <definition>using CrankNicolson&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::base_type =  ITimeStepper&lt;FieldMem, DerivFieldMem, ExecSpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>base_type</name>
+        <qualifiedname>CrankNicolson::base_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classCrankNicolson_1ae25dd92b3ce241ef3153e4e12e719d97" prot="private" static="no" mutable="no">
+        <type><ref refid="classCrankNicolson_1a468e0909ac8b50f109dc810879253134" kindref="member">IdxRange</ref> const</type>
+        <definition>IdxRange const CrankNicolson&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::m_idx_range</definition>
+        <argsstring></argsstring>
+        <name>m_idx_range</name>
+        <qualifiedname>CrankNicolson::m_idx_range</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="51" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCrankNicolson_1a21005b26b9fa75dd3d3251355e4713e0" prot="private" static="no" mutable="no">
+        <type>int const</type>
+        <definition>int const CrankNicolson&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::m_max_counter</definition>
+        <argsstring></argsstring>
+        <name>m_max_counter</name>
+        <qualifiedname>CrankNicolson::m_max_counter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="52" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCrankNicolson_1a3d882bbc034753c5b1b890b612878657" prot="private" static="no" mutable="no">
+        <type>double const</type>
+        <definition>double const CrankNicolson&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::m_epsilon</definition>
+        <argsstring></argsstring>
+        <name>m_epsilon</name>
+        <qualifiedname>CrankNicolson::m_epsilon</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="53" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classCrankNicolson_1acee28614e8739edfb476a51aa7c2fe91" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>CrankNicolson&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::CrankNicolson</definition>
+        <argsstring>(IdxRange idx_range, int const counter=int(20), double const epsilon=1e-12)</argsstring>
+        <name>CrankNicolson</name>
+        <qualifiedname>CrankNicolson::CrankNicolson</qualifiedname>
+        <param>
+          <type><ref refid="classCrankNicolson_1a468e0909ac8b50f109dc810879253134" kindref="member">IdxRange</ref></type>
+          <declname>idx_range</declname>
+        </param>
+        <param>
+          <type>int const</type>
+          <declname>counter</declname>
+          <defval>int(20)</defval>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>epsilon</declname>
+          <defval>1e-12</defval>
+        </param>
+        <briefdescription>
+<para>Create a <ref refid="classCrankNicolson" kindref="compound">CrankNicolson</ref> object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range on which the points which evolve over time are defined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">counter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximal number of loops for the implicit method. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">epsilon</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <formula id="11">$ \varepsilon $</formula> upperbound of the difference of two steps in the implicit method: <formula id="324">$ |y^{k+1} -  y^{k}| &lt; \varepsilon $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="69" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="69" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrankNicolson_1aae3a7f2977fb6afa91841769d3fad20b" prot="public" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="virtual">
+        <type>void</type>
+        <definition>void CrankNicolson&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::update</definition>
+        <argsstring>(ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(DerivField, ValConstField)&gt; dy_calculator, std::function&lt; void(ValField, DerivConstField, double)&gt; y_update) const final</argsstring>
+        <name>update</name>
+        <qualifiedname>CrankNicolson::update</qualifiedname>
+        <reimplements refid="classITimeStepper_1aa431ffdb2dd991945d59d5d94adf4bef">update</reimplements>
+        <param>
+          <type>ExecSpace const &amp;</type>
+          <declname>exec_space</declname>
+        </param>
+        <param>
+          <type><ref refid="classCrankNicolson_1aaba53f61442e763c05fbd7614c3e1c05" kindref="member">ValField</ref></type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(<ref refid="classCrankNicolson_1a58d11b9c1e57348b94e50b1ea284886f" kindref="member">DerivField</ref>, <ref refid="classCrankNicolson_1ad0949984fa0c2d0004f6b7a10e19cd69" kindref="member">ValConstField</ref>)&gt;</type>
+          <declname>dy_calculator</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(<ref refid="classCrankNicolson_1aaba53f61442e763c05fbd7614c3e1c05" kindref="member">ValField</ref>, <ref refid="classCrankNicolson_1a7ee2d8a1e9031e625d0861031891bd52" kindref="member">DerivConstField</ref>, double)&gt;</type>
+          <declname>y_update</declname>
+        </param>
+        <briefdescription>
+<para>Carry out one step of the Crank-Nicolson scheme. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">exec_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The space on which the function is executed (CPU/GPU). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step over which the values should be evolved. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dy_calculator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function describing how the derivative of the evolve function is calculated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">y_update</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function describing how the value(s) are updated using the derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="94" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="94" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrankNicolson_1a7b3fb7a2fee1adc8bda9d98920d071e0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool CrankNicolson&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::have_converged</definition>
+        <argsstring>(ExecSpace const &amp;exec_space, ValConstField y_old, ValConstField y_new) const</argsstring>
+        <name>have_converged</name>
+        <qualifiedname>CrankNicolson::have_converged</qualifiedname>
+        <param>
+          <type>ExecSpace const &amp;</type>
+          <declname>exec_space</declname>
+        </param>
+        <param>
+          <type><ref refid="classCrankNicolson_1ad0949984fa0c2d0004f6b7a10e19cd69" kindref="member">ValConstField</ref></type>
+          <declname>y_old</declname>
+        </param>
+        <param>
+          <type><ref refid="classCrankNicolson_1ad0949984fa0c2d0004f6b7a10e19cd69" kindref="member">ValConstField</ref></type>
+          <declname>y_new</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Check if the relative difference of the function between two time steps is below epsilon.</para>
+<para>This function should be private. It is not due to the inclusion of a KOKKOS_LAMBDA function.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">exec_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The space on which the function is executed (CPU/GPU). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">y_old</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value of the function at the previous time step. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">y_new</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The updated value of the function at the new time step. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if converged, False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="181" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="181" bodyend="188"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrankNicolson_1abf7ce877cffa5f112975e0c8ebaf5b28" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::update</definition>
+        <argsstring>(ValField y, double dt, std::function&lt; void(DerivField, ValConstField)&gt; dy_calculator) const</argsstring>
+        <name>update</name>
+        <qualifiedname>CrankNicolson::update</qualifiedname>
+        <param>
+          <type><ref refid="classCrankNicolson_1aaba53f61442e763c05fbd7614c3e1c05" kindref="member">ValField</ref></type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(<ref refid="classCrankNicolson_1a58d11b9c1e57348b94e50b1ea284886f" kindref="member">DerivField</ref>, <ref refid="classCrankNicolson_1ad0949984fa0c2d0004f6b7a10e19cd69" kindref="member">ValConstField</ref>)&gt;</type>
+          <declname>dy_calculator</declname>
+        </param>
+        <briefdescription>
+<para>Carry out one step of the timestepping scheme. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function is a wrapper around the update function below. The values of the function are updated using the trivial method $f += df * dt$. This is the standard method however some cases may need a more complex update function which is why the more explicit method is also provided.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step over which the values should be evolved. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dy_calculator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function describing how the derivative of the evolve function is calculated. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="56" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="78" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrankNicolson_1a9a7f95c2396c54b9f6323cbd444dd8c1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::update</definition>
+        <argsstring>(ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(DerivField, ValConstField)&gt; dy_calculator) const</argsstring>
+        <name>update</name>
+        <qualifiedname>CrankNicolson::update</qualifiedname>
+        <param>
+          <type>ExecSpace const &amp;</type>
+          <declname>exec_space</declname>
+        </param>
+        <param>
+          <type><ref refid="classCrankNicolson_1aaba53f61442e763c05fbd7614c3e1c05" kindref="member">ValField</ref></type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(<ref refid="classCrankNicolson_1a58d11b9c1e57348b94e50b1ea284886f" kindref="member">DerivField</ref>, <ref refid="classCrankNicolson_1ad0949984fa0c2d0004f6b7a10e19cd69" kindref="member">ValConstField</ref>)&gt;</type>
+          <declname>dy_calculator</declname>
+        </param>
+        <briefdescription>
+<para>Carry out one step of the timestepping scheme. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function is a wrapper around the update function below. The values of the function are updated using the trivial method $f += df * dt$. This is the standard method however some cases may need a more complex update function which is why the more explicit method is also provided.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">exec_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The space on which the function is executed (CPU/GPU). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step over which the values should be evolved. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dy_calculator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function describing how the derivative of the evolve function is calculated. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="56" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="102" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrankNicolson_1afdf22291a9a2f9180e1904d3a0728737" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::update</definition>
+        <argsstring>(ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(DerivField, ValConstField)&gt; dy_calculator, std::function&lt; void(ValField, DerivConstField, double)&gt; y_update) const=0</argsstring>
+        <name>update</name>
+        <qualifiedname>CrankNicolson::update</qualifiedname>
+        <reimplements refid="classITimeStepper_1aa431ffdb2dd991945d59d5d94adf4bef">update</reimplements>
+        <param>
+          <type>ExecSpace const &amp;</type>
+          <declname>exec_space</declname>
+        </param>
+        <param>
+          <type><ref refid="classCrankNicolson_1aaba53f61442e763c05fbd7614c3e1c05" kindref="member">ValField</ref></type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(<ref refid="classCrankNicolson_1a58d11b9c1e57348b94e50b1ea284886f" kindref="member">DerivField</ref>, <ref refid="classCrankNicolson_1ad0949984fa0c2d0004f6b7a10e19cd69" kindref="member">ValConstField</ref>)&gt;</type>
+          <declname>dy_calculator</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(<ref refid="classCrankNicolson_1aaba53f61442e763c05fbd7614c3e1c05" kindref="member">ValField</ref>, <ref refid="classCrankNicolson_1a7ee2d8a1e9031e625d0861031891bd52" kindref="member">DerivConstField</ref>, double)&gt;</type>
+          <declname>y_update</declname>
+        </param>
+        <briefdescription>
+<para>Carry out one step of the timestepping scheme. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">exec_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The space on which the function is executed (CPU/GPU). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step over which the values should be evolved. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dy_calculator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function describing how the derivative of the evolve function is calculated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">y_update</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function describing how the value(s) are updated using the derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="56" column="5"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classCrankNicolson_1a468e0909ac8b50f109dc810879253134" prot="public" static="no">
+        <type>typename FieldMem::discrete_domain_type</type>
+        <definition>using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::IdxRange =  typename FieldMem::discrete_domain_type</definition>
+        <argsstring></argsstring>
+        <name>IdxRange</name>
+        <qualifiedname>CrankNicolson::IdxRange</qualifiedname>
+        <briefdescription>
+<para>The type of the index range on which the values of the function are defined. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="42" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCrankNicolson_1ad0949984fa0c2d0004f6b7a10e19cd69" prot="public" static="no">
+        <type>typename FieldMem::view_type</type>
+        <definition>using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::ValConstField =  typename FieldMem::view_type</definition>
+        <argsstring></argsstring>
+        <name>ValConstField</name>
+        <qualifiedname>CrankNicolson::ValConstField</qualifiedname>
+        <briefdescription>
+<para>The constant type of the values of the function being evolved. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="44" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCrankNicolson_1aaba53f61442e763c05fbd7614c3e1c05" prot="public" static="no">
+        <type>typename FieldMem::span_type</type>
+        <definition>using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::ValField =  typename FieldMem::span_type</definition>
+        <argsstring></argsstring>
+        <name>ValField</name>
+        <qualifiedname>CrankNicolson::ValField</qualifiedname>
+        <briefdescription>
+<para>The type of the values of the function being evolved. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="45" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCrankNicolson_1a7ee2d8a1e9031e625d0861031891bd52" prot="public" static="no">
+        <type>typename DerivFieldMem::view_type</type>
+        <definition>using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::DerivConstField =  typename DerivFieldMem::view_type</definition>
+        <argsstring></argsstring>
+        <name>DerivConstField</name>
+        <qualifiedname>CrankNicolson::DerivConstField</qualifiedname>
+        <briefdescription>
+<para>The constant type of the derivatives values of the function being evolved. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="47" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCrankNicolson_1a58d11b9c1e57348b94e50b1ea284886f" prot="public" static="no">
+        <type>typename DerivFieldMem::span_type</type>
+        <definition>using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::DerivField =  typename DerivFieldMem::span_type</definition>
+        <argsstring></argsstring>
+        <name>DerivField</name>
+        <qualifiedname>CrankNicolson::DerivField</qualifiedname>
+        <briefdescription>
+<para>The type of the derivatives of the function being evolved. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="48" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class which provides an implementation of a Crank-Nicolson method. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A class which provides an implementation of a Crank-Nicolson method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. The values which evolve are defined on an index range.</para>
+<para>For the following ODE : <formula id="322">$\partial_t y(t) = f(t, y(t)) $</formula>,</para>
+<para>the Crank-Nicolson method is given by : <formula id="323">$ y^{k} =  y^{n} + \frac{dt}{2} \left(f(t^{n}, y^{n}) + f(t^{k}, y^{k}) \right)$</formula>.</para>
+<para>The method is an implicit method. If <formula id="324">$ |y^{k+1} -  y^{k}| &lt; \varepsilon $</formula>, then we set <formula id="325">$ y^{n+1} = y^{k+1} $</formula>.</para>
+<para>The method is order 2. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>CrankNicolson&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</label>
+        <link refid="classCrankNicolson"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</label>
+        <link refid="classITimeStepper"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>CrankNicolson&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</label>
+        <link refid="classCrankNicolson"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</label>
+        <link refid="classITimeStepper"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="37" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="38" bodyend="189"/>
+    <listofallmembers>
+      <member refid="classITimeStepper_1ace32467b0d2e375becbfe913755d5851" prot="public" virt="non-virtual"><scope>CrankNicolson</scope><name>assemble_field_k_total</name></member>
+      <member refid="classITimeStepper_1a7d94fc389aad94e1af939a5f32c81edd" prot="protected" virt="non-virtual"><scope>CrankNicolson</scope><name>assemble_k_total</name></member>
+      <member refid="classITimeStepper_1a7047fa6fd6122b8dcea1f283461aa2ee" prot="public" virt="non-virtual"><scope>CrankNicolson</scope><name>assemble_vector_field_k_total</name></member>
+      <member refid="classCrankNicolson_1a1a86676d28229e9279602739dd2b3e53" prot="private" virt="non-virtual"><scope>CrankNicolson</scope><name>base_type</name></member>
+      <member refid="classITimeStepper_1ac976ff8bc85dbfed9f7b378f69bd52b4" prot="protected" virt="non-virtual"><scope>CrankNicolson</scope><name>copy</name></member>
+      <member refid="classCrankNicolson_1acee28614e8739edfb476a51aa7c2fe91" prot="public" virt="non-virtual"><scope>CrankNicolson</scope><name>CrankNicolson</name></member>
+      <member refid="classCrankNicolson_1a7ee2d8a1e9031e625d0861031891bd52" prot="public" virt="non-virtual"><scope>CrankNicolson</scope><name>DerivConstField</name></member>
+      <member refid="classCrankNicolson_1a58d11b9c1e57348b94e50b1ea284886f" prot="public" virt="non-virtual"><scope>CrankNicolson</scope><name>DerivField</name></member>
+      <member refid="classITimeStepper_1a5600be32cf869c3f33d83f5aff7e7c62" prot="protected" virt="non-virtual"><scope>CrankNicolson</scope><name>fill_k_total</name></member>
+      <member refid="classCrankNicolson_1a7b3fb7a2fee1adc8bda9d98920d071e0" prot="public" virt="non-virtual"><scope>CrankNicolson</scope><name>have_converged</name></member>
+      <member refid="classCrankNicolson_1a468e0909ac8b50f109dc810879253134" prot="public" virt="non-virtual"><scope>CrankNicolson</scope><name>IdxRange</name></member>
+      <member refid="classCrankNicolson_1a3d882bbc034753c5b1b890b612878657" prot="private" virt="non-virtual"><scope>CrankNicolson</scope><name>m_epsilon</name></member>
+      <member refid="classCrankNicolson_1ae25dd92b3ce241ef3153e4e12e719d97" prot="private" virt="non-virtual"><scope>CrankNicolson</scope><name>m_idx_range</name></member>
+      <member refid="classCrankNicolson_1a21005b26b9fa75dd3d3251355e4713e0" prot="private" virt="non-virtual"><scope>CrankNicolson</scope><name>m_max_counter</name></member>
+      <member refid="classCrankNicolson_1aae3a7f2977fb6afa91841769d3fad20b" prot="public" virt="virtual"><scope>CrankNicolson</scope><name>update</name></member>
+      <member refid="classCrankNicolson_1abf7ce877cffa5f112975e0c8ebaf5b28" prot="public" virt="non-virtual"><scope>CrankNicolson</scope><name>update</name></member>
+      <member refid="classCrankNicolson_1a9a7f95c2396c54b9f6323cbd444dd8c1" prot="public" virt="non-virtual"><scope>CrankNicolson</scope><name>update</name></member>
+      <member refid="classCrankNicolson_1afdf22291a9a2f9180e1904d3a0728737" prot="public" virt="virtual"><scope>CrankNicolson</scope><name>update</name></member>
+      <member refid="classCrankNicolson_1ad0949984fa0c2d0004f6b7a10e19cd69" prot="public" virt="non-virtual"><scope>CrankNicolson</scope><name>ValConstField</name></member>
+      <member refid="classCrankNicolson_1aaba53f61442e763c05fbd7614c3e1c05" prot="public" virt="non-virtual"><scope>CrankNicolson</scope><name>ValField</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

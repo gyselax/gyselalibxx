@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structTheta__cov" kind="struct" language="C++" prot="public">
+    <compoundname>Theta_cov</compoundname>
+    <includes refid="geometryRTheta_2geometry_2geometry_8hpp" local="no">geometry.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structTheta__cov_1a5249a3e36315f79336d879b37293d0fb" prot="public" static="no">
+        <type><ref refid="structTheta" kindref="compound">Theta</ref></type>
+        <definition>using Theta_cov::Dual =  Theta</definition>
+        <argsstring></argsstring>
+        <name>Dual</name>
+        <qualifiedname>Theta_cov::Dual</qualifiedname>
+        <briefdescription>
+<para>A type-alias mapping to the covariant counterpart. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="107" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="107" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structTheta__cov_1ae29e197bb55ecd147bd7bf8ab0d03246" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>bool constexpr</type>
+        <definition>bool constexpr Theta_cov::PERIODIC</definition>
+        <argsstring></argsstring>
+        <name>PERIODIC</name>
+        <qualifiedname>Theta_cov::PERIODIC</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>Define periodicity of the dimension. Here, periodic. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="98" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structTheta__cov_1a0ec6a971ce9ef055bb3ed6b60f2b1ddf" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>bool constexpr</type>
+        <definition>bool constexpr Theta_cov::IS_COVARIANT</definition>
+        <argsstring></argsstring>
+        <name>IS_COVARIANT</name>
+        <qualifiedname>Theta_cov::IS_COVARIANT</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>A boolean indicating if dimension describes a covariant coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="101" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structTheta__cov_1aa8fa7e714a2fd9fc2de39f95d97e6e4a" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>bool constexpr</type>
+        <definition>bool constexpr Theta_cov::IS_CONTRAVARIANT</definition>
+        <argsstring></argsstring>
+        <name>IS_CONTRAVARIANT</name>
+        <qualifiedname>Theta_cov::IS_CONTRAVARIANT</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>A boolean indicating if dimension describes a contravariant coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="104" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="104" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Define periodic real covariant <ref refid="structTheta" kindref="compound">Theta</ref> dimension. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="92" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="93" bodyend="108"/>
+    <listofallmembers>
+      <member refid="structTheta__cov_1a5249a3e36315f79336d879b37293d0fb" prot="public" virt="non-virtual"><scope>Theta_cov</scope><name>Dual</name></member>
+      <member refid="structTheta__cov_1aa8fa7e714a2fd9fc2de39f95d97e6e4a" prot="public" virt="non-virtual"><scope>Theta_cov</scope><name>IS_CONTRAVARIANT</name></member>
+      <member refid="structTheta__cov_1a0ec6a971ce9ef055bb3ed6b60f2b1ddf" prot="public" virt="non-virtual"><scope>Theta_cov</scope><name>IS_COVARIANT</name></member>
+      <member refid="structTheta__cov_1ae29e197bb55ecd147bd7bf8ab0d03246" prot="public" virt="non-virtual"><scope>Theta_cov</scope><name>PERIODIC</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

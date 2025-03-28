@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structconnectivity__details_1_1StripOutsideEdges_3_01ddc_1_1detail_1_1TypeSeq_3_01EdgeType_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>connectivity_details::StripOutsideEdges&lt; ddc::detail::TypeSeq&lt; EdgeType &gt; &gt;</compoundname>
+    <includes refid="connectivity__details_8hpp" local="no">connectivity_details.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class EdgeType</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structconnectivity__details_1_1StripOutsideEdges_3_01ddc_1_1detail_1_1TypeSeq_3_01EdgeType_01_4_01_4_1a7a3343dbe34154d96b037ecc7f16ea72" prot="public" static="no">
+        <type>std::conditional_t&lt; std::is_same_v&lt; EdgeType, <ref refid="structOutsideEdge" kindref="compound">OutsideEdge</ref> &gt;, ddc::detail::TypeSeq&lt;&gt;, ddc::detail::TypeSeq&lt; EdgeType &gt; &gt;</type>
+        <definition>using connectivity_details::StripOutsideEdges&lt; ddc::detail::TypeSeq&lt; EdgeType &gt; &gt;::type =  std::conditional_t&lt; std::is_same_v&lt;EdgeType, OutsideEdge&gt;, ddc::detail::TypeSeq&lt;&gt;, ddc::detail::TypeSeq&lt;EdgeType&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>connectivity_details::StripOutsideEdges&lt; ddc::detail::TypeSeq&lt; EdgeType &gt; &gt;::type</qualifiedname>
+        <briefdescription>
+<para>The type found by the class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="64" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Specialisation of <ref refid="structconnectivity__details_1_1StripOutsideEdges" kindref="compound">StripOutsideEdges</ref> for the case with one edge in the list. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="61" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="62" bodyend="68"/>
+    <listofallmembers>
+      <member refid="structconnectivity__details_1_1StripOutsideEdges_3_01ddc_1_1detail_1_1TypeSeq_3_01EdgeType_01_4_01_4_1a7a3343dbe34154d96b037ecc7f16ea72" prot="public" virt="non-virtual"><scope>connectivity_details::StripOutsideEdges&lt; ddc::detail::TypeSeq&lt; EdgeType &gt; &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,559 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classMatchingIdxSlice" kind="class" language="C++" prot="public">
+    <compoundname>MatchingIdxSlice</compoundname>
+    <includes refid="matching__idx__slice_8hpp" local="no">matching_idx_slice.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class <ref refid="structInterface" kindref="compound">Interface</ref></type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classMatchingIdxSlice_1a6ae1a3ffc067ecc5a7a59a30ff2e2395" prot="private" static="no">
+        <type>typename Interface::Edge1::associated_patch</type>
+        <definition>using MatchingIdxSlice&lt; Interface &gt;::Patch1 =  typename Interface::Edge1::associated_patch</definition>
+        <argsstring></argsstring>
+        <name>Patch1</name>
+        <qualifiedname>MatchingIdxSlice::Patch1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="45" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMatchingIdxSlice_1ae2bb7212ead00ac2c6daa9d617bc2784" prot="private" static="no">
+        <type>typename Interface::Edge2::associated_patch</type>
+        <definition>using MatchingIdxSlice&lt; Interface &gt;::Patch2 =  typename Interface::Edge2::associated_patch</definition>
+        <argsstring></argsstring>
+        <name>Patch2</name>
+        <qualifiedname>MatchingIdxSlice::Patch2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMatchingIdxSlice_1a63445e86de83b232a177c4ecfa6ad847" prot="private" static="no">
+        <type>typename Interface::Edge1::parallel_grid</type>
+        <definition>using MatchingIdxSlice&lt; Interface &gt;::EdgeGrid1 =  typename Interface::Edge1::parallel_grid</definition>
+        <argsstring></argsstring>
+        <name>EdgeGrid1</name>
+        <qualifiedname>MatchingIdxSlice::EdgeGrid1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="48" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMatchingIdxSlice_1aee756407ca3cca5381a097308471eea0" prot="private" static="no">
+        <type>typename Interface::Edge2::parallel_grid</type>
+        <definition>using MatchingIdxSlice&lt; Interface &gt;::EdgeGrid2 =  typename Interface::Edge2::parallel_grid</definition>
+        <argsstring></argsstring>
+        <name>EdgeGrid2</name>
+        <qualifiedname>MatchingIdxSlice::EdgeGrid2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="49" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMatchingIdxSlice_1a1238397246e117384128e53a1f4671ca" prot="private" static="no">
+        <type>typename Interface::Edge1::perpendicular_grid</type>
+        <definition>using MatchingIdxSlice&lt; Interface &gt;::PerpEdgeGrid1 =  typename Interface::Edge1::perpendicular_grid</definition>
+        <argsstring></argsstring>
+        <name>PerpEdgeGrid1</name>
+        <qualifiedname>MatchingIdxSlice::PerpEdgeGrid1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMatchingIdxSlice_1a2db9fc9333eb2b8627ef90a0a769bdae" prot="private" static="no">
+        <type>typename Interface::Edge2::perpendicular_grid</type>
+        <definition>using MatchingIdxSlice&lt; Interface &gt;::PerpEdgeGrid2 =  typename Interface::Edge2::perpendicular_grid</definition>
+        <argsstring></argsstring>
+        <name>PerpEdgeGrid2</name>
+        <qualifiedname>MatchingIdxSlice::PerpEdgeGrid2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="52" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMatchingIdxSlice_1a3a8a92f3996562df7ef1da37152b8af5" prot="private" static="no">
+        <type>IdxRange&lt; EdgeGrid1 &gt;</type>
+        <definition>using MatchingIdxSlice&lt; Interface &gt;::IdxRange1D_1 =  IdxRange&lt;EdgeGrid1&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRange1D_1</name>
+        <qualifiedname>MatchingIdxSlice::IdxRange1D_1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMatchingIdxSlice_1a7838a3e41bdbe3130378c1cf095fdd17" prot="private" static="no">
+        <type>IdxRange&lt; EdgeGrid2 &gt;</type>
+        <definition>using MatchingIdxSlice&lt; Interface &gt;::IdxRange1D_2 =  IdxRange&lt;EdgeGrid2&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRange1D_2</name>
+        <qualifiedname>MatchingIdxSlice::IdxRange1D_2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="55" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMatchingIdxSlice_1ae4e8703ca3ecfe1669cd071ae2023d1b" prot="private" static="no">
+        <type>typename Patch1::IdxRange12</type>
+        <definition>using MatchingIdxSlice&lt; Interface &gt;::IdxRange2D_1 =  typename Patch1::IdxRange12</definition>
+        <argsstring></argsstring>
+        <name>IdxRange2D_1</name>
+        <qualifiedname>MatchingIdxSlice::IdxRange2D_1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="57" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMatchingIdxSlice_1a6277c0177c823c4fdbac46c2cec513a3" prot="private" static="no">
+        <type>typename Patch2::IdxRange12</type>
+        <definition>using MatchingIdxSlice&lt; Interface &gt;::IdxRange2D_2 =  typename Patch2::IdxRange12</definition>
+        <argsstring></argsstring>
+        <name>IdxRange2D_2</name>
+        <qualifiedname>MatchingIdxSlice::IdxRange2D_2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="58" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMatchingIdxSlice_1a0c2d43f55e2ca1b74c0948eb3737bd9a" prot="private" static="no">
+        <type><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref>&lt; EdgeGrid1 &gt;</type>
+        <definition>using MatchingIdxSlice&lt; Interface &gt;::IdxRangeSlice1 =  IdxRangeSlice&lt;EdgeGrid1&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeSlice1</name>
+        <qualifiedname>MatchingIdxSlice::IdxRangeSlice1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="60" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMatchingIdxSlice_1acffb0833e4708a1859ab75fadaa81e74" prot="private" static="no">
+        <type><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref>&lt; EdgeGrid2 &gt;</type>
+        <definition>using MatchingIdxSlice&lt; Interface &gt;::IdxRangeSlice2 =  IdxRangeSlice&lt;EdgeGrid2&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeSlice2</name>
+        <qualifiedname>MatchingIdxSlice::IdxRangeSlice2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="61" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classMatchingIdxSlice_1a99614222999a126f4c74485657347490" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool MatchingIdxSlice&lt; Interface &gt;::are_grids_uniform</definition>
+        <argsstring></argsstring>
+        <name>are_grids_uniform</name>
+        <qualifiedname>MatchingIdxSlice::are_grids_uniform</qualifiedname>
+        <initializer>= (ddc::is_uniform_point_sampling_v&lt;EdgeGrid1&gt;)&amp;&amp;(
+            ddc::is_uniform_point_sampling_v&lt;EdgeGrid2&gt;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="63" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classMatchingIdxSlice_1afc1848aa1d6495c7952672643330b607" prot="private" static="no" mutable="no">
+        <type>IdxRange1D_1 const</type>
+        <definition>IdxRange1D_1 const MatchingIdxSlice&lt; Interface &gt;::m_idx_range_edge_1</definition>
+        <argsstring></argsstring>
+        <name>m_idx_range_edge_1</name>
+        <qualifiedname>MatchingIdxSlice::m_idx_range_edge_1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="66" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMatchingIdxSlice_1a7f1534d38b7e0bc46b0b389bfe631dc2" prot="private" static="no" mutable="no">
+        <type>IdxRange1D_2 const</type>
+        <definition>IdxRange1D_2 const MatchingIdxSlice&lt; Interface &gt;::m_idx_range_edge_2</definition>
+        <argsstring></argsstring>
+        <name>m_idx_range_edge_2</name>
+        <qualifiedname>MatchingIdxSlice::m_idx_range_edge_2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="67" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMatchingIdxSlice_1abc4d8cec5d5210ed2822e25d2c13d980" prot="private" static="no" mutable="no">
+        <type><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice1</ref></type>
+        <definition>IdxRangeSlice1 MatchingIdxSlice&lt; Interface &gt;::m_conforming_idx_1</definition>
+        <argsstring></argsstring>
+        <name>m_conforming_idx_1</name>
+        <qualifiedname>MatchingIdxSlice::m_conforming_idx_1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="69" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMatchingIdxSlice_1a46a5a748e6f99aa7572f7ff7e1cb0bac" prot="private" static="no" mutable="no">
+        <type><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice2</ref></type>
+        <definition>IdxRangeSlice2 MatchingIdxSlice&lt; Interface &gt;::m_conforming_idx_2</definition>
+        <argsstring></argsstring>
+        <name>m_conforming_idx_2</name>
+        <qualifiedname>MatchingIdxSlice::m_conforming_idx_2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="70" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classMatchingIdxSlice_1ae5374ce68d12fb78c03b90a8aedbf8f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MatchingIdxSlice&lt; Interface &gt;::~MatchingIdxSlice</definition>
+        <argsstring>()=default</argsstring>
+        <name>~MatchingIdxSlice</name>
+        <qualifiedname>MatchingIdxSlice::~MatchingIdxSlice</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="73" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classMatchingIdxSlice_1ab6481837fb8af1581fac27689fcdc488" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>MatchingIdxSlice&lt; Interface &gt;::MatchingIdxSlice</definition>
+        <argsstring>(IdxRange1D_1 const &amp;idx_range_1, IdxRange1D_2 const &amp;idx_range_2)</argsstring>
+        <name>MatchingIdxSlice</name>
+        <qualifiedname>MatchingIdxSlice::MatchingIdxSlice</qualifiedname>
+        <param>
+          <type>IdxRange1D_1 const &amp;</type>
+          <declname>idx_range_1</declname>
+        </param>
+        <param>
+          <type>IdxRange1D_2 const &amp;</type>
+          <declname>idx_range_2</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate the class from 1D index ranges. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>To define the IdxRangeSlices containing the conforming indexes, we first check that the index steps between two conforming indexes are uniform, for the 1D grid of each edge of the interface.</para>
+<para>If true, the index step of the patch is applied to instantiate the associated <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref>.</para>
+<para>If the grids are uniform, it is true and we can use the greatest common divisor between the two number of cells to compute the index steps of each <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx_range_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>1D IdxRange of the first <ref refid="structEdge" kindref="compound">Edge</ref> of the <ref refid="structInterface" kindref="compound">Interface</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx_range_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>1D IdxRange of the second <ref refid="structEdge" kindref="compound">Edge</ref> of the <ref refid="structInterface" kindref="compound">Interface</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="90" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="90" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classMatchingIdxSlice_1a4d9de778afd3499b8d59c00d506b5d66" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>MatchingIdxSlice&lt; Interface &gt;::MatchingIdxSlice</definition>
+        <argsstring>(IdxRange2D_1 const &amp;idx_range_1, IdxRange2D_2 const &amp;idx_range_2)</argsstring>
+        <name>MatchingIdxSlice</name>
+        <qualifiedname>MatchingIdxSlice::MatchingIdxSlice</qualifiedname>
+        <param>
+          <type>IdxRange2D_1 const &amp;</type>
+          <declname>idx_range_1</declname>
+        </param>
+        <param>
+          <type>IdxRange2D_2 const &amp;</type>
+          <declname>idx_range_2</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate the class from 2D index ranges. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>To define the IdxRangeSlices containing the conforming indexes, we first check that the index steps between two conforming indexes are uniform, for the 1D grid of each edge of the interface.</para>
+<para>If true, the index step of the patch is applied to instantiate the associated <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref>.</para>
+<para>If the grids are uniform, it is true and we can use the greatest common divisor between the two number of cells to compute the index steps of each <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx_range_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>2D IdxRange of the first <ref refid="structEdge" kindref="compound">Edge</ref> of the <ref refid="structInterface" kindref="compound">Interface</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx_range_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>2D IdxRange of the second <ref refid="structEdge" kindref="compound">Edge</ref> of the <ref refid="structInterface" kindref="compound">Interface</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="119" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="119" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="classMatchingIdxSlice_1a230c16e68ddde60704030d6763dc3eb9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ParallelGrid</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt;(std::is_same_v&lt; ParallelGrid, EdgeGrid1 &gt;)||(std::is_same_v&lt; ParallelGrid, EdgeGrid2 &gt;), bool &gt;</type>
+            <defval>true</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref>&lt; ParallelGrid &gt;</type>
+        <definition>IdxRangeSlice&lt; ParallelGrid &gt; MatchingIdxSlice&lt; Interface &gt;::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <qualifiedname>MatchingIdxSlice::get</qualifiedname>
+        <briefdescription>
+<para>Get the <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref> containing the conforming indexes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ParallelGrid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parallel grid to the edge. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref> of conforming indexes on the given ParallelGrid. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="136" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="136" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="classMatchingIdxSlice_1abf1367b60ae40635ea39cfd343e92673" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class PerpendicularGrid</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt;(std::is_same_v&lt; PerpendicularGrid, PerpEdgeGrid1 &gt;)||(std::is_same_v&lt; PerpendicularGrid, PerpEdgeGrid2 &gt;), bool &gt;</type>
+            <defval>true</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto MatchingIdxSlice&lt; Interface &gt;::get_from_perp</definition>
+        <argsstring>() const</argsstring>
+        <name>get_from_perp</name>
+        <qualifiedname>MatchingIdxSlice::get_from_perp</qualifiedname>
+        <briefdescription>
+<para>Get the <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref> containing the conforming indexes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>PerpendicularGrid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The perpendicular grid to the edge. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref> of conforming indexes on the perpendicular grid to the given PerpendicularGrid. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="158" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="158" bodyend="165"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classMatchingIdxSlice_1af0c45d19d2abb0fa8bde08ffeb1c74c1" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void MatchingIdxSlice&lt; Interface &gt;::get_conforming_idx_vector</definition>
+        <argsstring>(std::vector&lt; Idx&lt; EdgeGrid1 &gt; &gt; &amp;conforming_idx_vec_1, std::vector&lt; Idx&lt; EdgeGrid2 &gt; &gt; &amp;conforming_idx_vec_2)</argsstring>
+        <name>get_conforming_idx_vector</name>
+        <qualifiedname>MatchingIdxSlice::get_conforming_idx_vector</qualifiedname>
+        <param>
+          <type>std::vector&lt; Idx&lt; EdgeGrid1 &gt; &gt; &amp;</type>
+          <declname>conforming_idx_vec_1</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; Idx&lt; EdgeGrid2 &gt; &gt; &amp;</type>
+          <declname>conforming_idx_vec_2</declname>
+        </param>
+        <briefdescription>
+<para>Fill in the vectors of conforming indices. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="170" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="170" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="classMatchingIdxSlice_1a184f8681ac930a65492fc67794883c07" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Grid1D</type>
+          </param>
+        </templateparamlist>
+        <type>IdxStep&lt; Grid1D &gt;</type>
+        <definition>IdxStep&lt; Grid1D &gt; MatchingIdxSlice&lt; Interface &gt;::get_idx_step</definition>
+        <argsstring>(std::vector&lt; Idx&lt; Grid1D &gt; &gt; const &amp;conforming_idx_vec) const</argsstring>
+        <name>get_idx_step</name>
+        <qualifiedname>MatchingIdxSlice::get_idx_step</qualifiedname>
+        <param>
+          <type>std::vector&lt; Idx&lt; Grid1D &gt; &gt; const &amp;</type>
+          <declname>conforming_idx_vec</declname>
+        </param>
+        <briefdescription>
+<para>Get the index step between the conforming indexes and check its uniformity. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="187" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="187" bodyend="213"/>
+      </memberdef>
+      <memberdef kind="function" id="classMatchingIdxSlice_1a76fc11693a512a23b286a541a7b8c744" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Grid1D</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref>&lt; Grid1D &gt;</type>
+        <definition>IdxRangeSlice&lt; Grid1D &gt; MatchingIdxSlice&lt; Interface &gt;::get_idx_range_slice</definition>
+        <argsstring>(IdxRange&lt; Grid1D &gt; const &amp;idx_range, std::vector&lt; Idx&lt; Grid1D &gt; &gt; const &amp;conforming_idx_vec) const</argsstring>
+        <name>get_idx_range_slice</name>
+        <qualifiedname>MatchingIdxSlice::get_idx_range_slice</qualifiedname>
+        <param>
+          <type>IdxRange&lt; Grid1D &gt; const &amp;</type>
+          <declname>idx_range</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; Idx&lt; Grid1D &gt; &gt; const &amp;</type>
+          <declname>conforming_idx_vec</declname>
+        </param>
+        <briefdescription>
+<para>Get the uniform index step of the second index range. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="218" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="218" bodyend="226"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Store the conforming indexes of each patch of a given interface. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The conforming indexes are the indexes with an equivalent index on the parallel grid of the other edge of a given interface. The conforming indexes are stored in an <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref>. The index step between two indexes in the <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref> are supposed to be uniform. If they are not, the instantiation of the class fails.</para>
+<para>If the grids are uniform, the index steps between the conforming indexes are uniform. The uniform index steps can be deduced from the greatest common divisor.</para>
+<para>E.g. for a first grid of N cells and a second grid of M cells, gcd = gcd(M, N) idx_step on the first grid: N / gcd idx_step on the second grid: M / gcd<itemizedlist>
+<listitem></listitem></itemizedlist>
+</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structInterface" kindref="compound">Interface</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structInterface" kindref="compound">Interface</ref> type between two edges of patches (<ref refid="structInterface" kindref="compound">Interface</ref> with <ref refid="structOutsideEdge" kindref="compound">OutsideEdge</ref> not allowed). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" line="38" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp" bodystart="39" bodyend="227"/>
+    <listofallmembers>
+      <member refid="classMatchingIdxSlice_1a99614222999a126f4c74485657347490" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>are_grids_uniform</name></member>
+      <member refid="classMatchingIdxSlice_1a63445e86de83b232a177c4ecfa6ad847" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>EdgeGrid1</name></member>
+      <member refid="classMatchingIdxSlice_1aee756407ca3cca5381a097308471eea0" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>EdgeGrid2</name></member>
+      <member refid="classMatchingIdxSlice_1a230c16e68ddde60704030d6763dc3eb9" prot="public" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>get</name></member>
+      <member refid="classMatchingIdxSlice_1af0c45d19d2abb0fa8bde08ffeb1c74c1" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>get_conforming_idx_vector</name></member>
+      <member refid="classMatchingIdxSlice_1abf1367b60ae40635ea39cfd343e92673" prot="public" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>get_from_perp</name></member>
+      <member refid="classMatchingIdxSlice_1a76fc11693a512a23b286a541a7b8c744" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>get_idx_range_slice</name></member>
+      <member refid="classMatchingIdxSlice_1a184f8681ac930a65492fc67794883c07" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>get_idx_step</name></member>
+      <member refid="classMatchingIdxSlice_1a3a8a92f3996562df7ef1da37152b8af5" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>IdxRange1D_1</name></member>
+      <member refid="classMatchingIdxSlice_1a7838a3e41bdbe3130378c1cf095fdd17" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>IdxRange1D_2</name></member>
+      <member refid="classMatchingIdxSlice_1ae4e8703ca3ecfe1669cd071ae2023d1b" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>IdxRange2D_1</name></member>
+      <member refid="classMatchingIdxSlice_1a6277c0177c823c4fdbac46c2cec513a3" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>IdxRange2D_2</name></member>
+      <member refid="classMatchingIdxSlice_1a0c2d43f55e2ca1b74c0948eb3737bd9a" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>IdxRangeSlice1</name></member>
+      <member refid="classMatchingIdxSlice_1acffb0833e4708a1859ab75fadaa81e74" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>IdxRangeSlice2</name></member>
+      <member refid="classMatchingIdxSlice_1abc4d8cec5d5210ed2822e25d2c13d980" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>m_conforming_idx_1</name></member>
+      <member refid="classMatchingIdxSlice_1a46a5a748e6f99aa7572f7ff7e1cb0bac" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>m_conforming_idx_2</name></member>
+      <member refid="classMatchingIdxSlice_1afc1848aa1d6495c7952672643330b607" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>m_idx_range_edge_1</name></member>
+      <member refid="classMatchingIdxSlice_1a7f1534d38b7e0bc46b0b389bfe631dc2" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>m_idx_range_edge_2</name></member>
+      <member refid="classMatchingIdxSlice_1ab6481837fb8af1581fac27689fcdc488" prot="public" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>MatchingIdxSlice</name></member>
+      <member refid="classMatchingIdxSlice_1a4d9de778afd3499b8d59c00d506b5d66" prot="public" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>MatchingIdxSlice</name></member>
+      <member refid="classMatchingIdxSlice_1a6ae1a3ffc067ecc5a7a59a30ff2e2395" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>Patch1</name></member>
+      <member refid="classMatchingIdxSlice_1ae2bb7212ead00ac2c6daa9d617bc2784" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>Patch2</name></member>
+      <member refid="classMatchingIdxSlice_1a1238397246e117384128e53a1f4671ca" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>PerpEdgeGrid1</name></member>
+      <member refid="classMatchingIdxSlice_1a2db9fc9333eb2b8627ef90a0a769bdae" prot="private" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>PerpEdgeGrid2</name></member>
+      <member refid="classMatchingIdxSlice_1ae5374ce68d12fb78c03b90a8aedbf8f6" prot="public" virt="non-virtual"><scope>MatchingIdxSlice</scope><name>~MatchingIdxSlice</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

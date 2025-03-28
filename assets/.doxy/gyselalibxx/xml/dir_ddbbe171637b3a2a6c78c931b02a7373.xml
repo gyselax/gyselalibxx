@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_ddbbe171637b3a2a6c78c931b02a7373" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper</compoundname>
+    <innerfile refid="crank__nicolson_8hpp">crank_nicolson.hpp</innerfile>
+    <innerfile refid="euler_8hpp">euler.hpp</innerfile>
+    <innerfile refid="itimestepper_8hpp">itimestepper.hpp</innerfile>
+    <innerfile refid="rk2_8hpp">rk2.hpp</innerfile>
+    <innerfile refid="rk3_8hpp">rk3.hpp</innerfile>
+    <innerfile refid="rk4_8hpp">rk4.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/"/>
+  </compounddef>
+</doxygen>

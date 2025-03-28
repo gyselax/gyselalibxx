@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>File edge_transformation.hpp - GyselalibX</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File edge_transformation.hpp";
+        var mkdocs_page_input_path = "gyselalibxx/edge__transformation_8hpp_source.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> GyselalibX
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">General</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/getting_started.html">Getting Started</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Installation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../docs/first_steps/install.html">Gyselalib++ Installation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../toolchains/index.html">Pre-made build settings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standards</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/mathematical_and_physical_conventions.html">Math & Physics</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Gyselalib++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Source</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../src/index.html">Gyselalib++ contents</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/advection/index.html">Advection methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/collisions/index.html">Collisions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/data_types/index.html">Data Storage Types</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryRTheta/index.html">Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection/index.html">Advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_field</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/geometry/index.html">Geometry RTheta</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/initialisation/index.html">Initialisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/poisson/index.html">Polar Poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_solver</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/time_solver/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryVparMu</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryVparMu/index.html">Geometry (vpar, mu)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/collisions/index.html">CollisionConfiguration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/geometry/index.html">GeometryVparMu</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXVx/index.html">Geometry (x, v_x)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >boltzmann</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/boltzmann/index.html">Boltzmann solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/geometry/index.html">Geometry X-Vx</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >rhs</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/rhs/index.html">RHS</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/utils/index.html">Utils</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXY/index.html">Geometry (x, y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/geometry/index.html">Geometry XY</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/initialisation/index.html">Initialisation on (x,y) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/time_integration/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXYVxVy</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXYVxVy/index.html">Geometry (x, y, v_x, v_y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/geometry/index.html">Geometry X Y-Vx Vy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vlasov</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/vlasov/index.html">Vlasov solver</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/interpolation/index.html">Interpolation Methods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/polar_splines/index.html">Polar Splines</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >io</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/io/index.html">Functions used for input and output</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mapping</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mapping/index.html">Mappings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >math_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/math_tools/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >matrix_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/matrix_tools/index.html">Matrix tools</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mpi_parallelisation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mpi_parallelisation/index.html">Parallelisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/multipatch/index.html">Multipatch</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >connectivity</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/connectivity/index.html">Multipatch connectivity</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/data_types/index.html">Data Types for Multipatch Geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/utils/index.html">Multipatch utilitary functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >quadrature</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/quadrature/index.html">Quadrature Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >speciesinfo</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/speciesinfo/index.html">SpeciesInfo (x, v_x)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >timestepper</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/timestepper/index.html">Time Stepping Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/utils/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Simulations</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../simulations/index.html">Gyselalib++ simulations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryRTheta/index.html">Simulations in (r, theta) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >diocotron</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/diocotron/index.html">Diocotron instability</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vortex_merger</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/vortex_merger/index.html">Vortex merger</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXVx/index.html">Simulations in (x, vx) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXY/index.html">Simulations in (x, y) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >guiding_centre</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryXY/guiding_centre/index.html">Guiding centre (X,Y) simulation</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tests</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../tests/index.html">Gyselalib++ tests</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/advection/index.html">Tests on the templated advection operators</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/geometryRTheta/index.html">Tests : Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/advection_rtheta/index.html">Tests on the 2D polar advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/polar_poisson/index.html">Tests on the 2D polar poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline_interpolator_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/spline_interpolator_rtheta/index.html">Tests on spline interpolator in polar coordinates</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/multipatch/index.html">Multipatch geometry tests</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometries</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/multipatch/geometries/index.html">Multipatch geometries</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Adding_docs.html">Adding Docs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Using_git.html">Using Git</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Gyselalib++</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" >Classes</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="annotated.html">Class List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="classes.html">Class Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="hierarchy.html">Class Hierarchy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Namespaces</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="namespaces.html">Namespace List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_members.html">Namespace Members</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_functions.html">Namespace Member Functions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_variables.html">Namespace Member Variables</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_typedefs.html">Namespace Member Typedefs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_enums.html">Namespace Member Enumerations</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="macros.html">Macros</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="files.html">Files</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">GyselalibX</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File edge_transformation.hpp</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/gyselax/gyselalibxx/edit/master/docs/gyselalibxx/edge__transformation_8hpp_source.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div><h1 id="file-edge_transformationhpp">File edge_transformation.hpp</h1>
+<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_28b51abc9241105ab41b66c468e7d019.html"><strong>connectivity</strong></a> <strong>&gt;</strong> <a href="edge__transformation_8hpp.html"><strong>edge_transformation.hpp</strong></a></p>
+<p><a href="edge__transformation_8hpp.html">Go to the documentation of this file</a></p>
+<pre><code class="language-C++">// SPDX-License-Identifier: MIT
+
+#pragma once
+
+#include &lt;numeric&gt;
+
+#include &lt;ddc/ddc.hpp&gt;
+
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
+#include "edge.hpp"
+#include "interface.hpp"
+
+
+template &lt;class Interface&gt;
+class EdgeTransformation
+{
+    static_assert(
+            !std::is_same_v&lt;
+                    typename Interface::Edge1,
+                    OutsideEdge&gt; &amp;&amp; !std::is_same_v&lt;typename Interface::Edge2, OutsideEdge&gt;,
+            "The interface cannot be an interface with the outside domain.");
+
+
+    using EdgeGrid1 = typename Interface::Edge1::parallel_grid;
+    using EdgeGrid2 = typename Interface::Edge2::parallel_grid;
+
+    using EdgeDim1 = typename EdgeGrid1::continuous_dimension_type;
+    using EdgeDim2 = typename EdgeGrid2::continuous_dimension_type;
+
+    using IdxRangeEdge1 = IdxRange&lt;EdgeGrid1&gt;;
+    using IdxRangeEdge2 = IdxRange&lt;EdgeGrid2&gt;;
+
+    using IdxEdge1 = Idx&lt;EdgeGrid1&gt;;
+    using IdxEdge2 = Idx&lt;EdgeGrid2&gt;;
+
+    IdxRangeEdge1 const&amp; m_idx_range_patch_1;
+    IdxRangeEdge2 const&amp; m_idx_range_patch_2;
+
+
+public:
+    EdgeTransformation(
+            IdxRangeEdge1 const&amp; idx_range_patch_1,
+            IdxRangeEdge2 const&amp; idx_range_patch_2)
+        : m_idx_range_patch_1(idx_range_patch_1)
+        , m_idx_range_patch_2(idx_range_patch_2)
+    {
+    }
+
+    ~EdgeTransformation() = default;
+
+
+    template &lt;class CurrentDim&gt;
+    Coord&lt;std::conditional_t&lt;std::is_same_v&lt;CurrentDim, EdgeDim1&gt;, EdgeDim2, EdgeDim1&gt;&gt; operator()(
+            Coord&lt;CurrentDim&gt; const&amp; current_coord) const
+    {
+        // The other continuous dimension
+        using TargetDim
+                = std::conditional_t&lt;std::is_same_v&lt;CurrentDim, EdgeDim1&gt;, EdgeDim2, EdgeDim1&gt;;
+
+        // The index range of CurrentDim
+        using IdxRangeCurrent = std::
+                conditional_t&lt;std::is_same_v&lt;CurrentDim, EdgeDim1&gt;, IdxRangeEdge1, IdxRangeEdge2&gt;;
+        // The index range of other dimension
+        using IdxRangeTarget = std::
+                conditional_t&lt;std::is_same_v&lt;CurrentDim, EdgeDim1&gt;, IdxRangeEdge2, IdxRangeEdge1&gt;;
+
+        // Get min and length on each 1D index ranges:
+        IdxRange&lt;EdgeGrid1, EdgeGrid2&gt; const
+                combined_idx_range(m_idx_range_patch_1, m_idx_range_patch_2);
+        IdxRangeCurrent const current_idx_range(combined_idx_range);
+        IdxRangeTarget const target_idx_range(combined_idx_range);
+
+        Coord&lt;CurrentDim&gt; const current_min = ddc::coordinate(current_idx_range.front());
+        double const current_length = ddcHelper::total_interval_length(current_idx_range);
+
+        Coord&lt;TargetDim&gt; const target_min = ddc::coordinate(target_idx_range.front());
+        double const target_length = ddcHelper::total_interval_length(target_idx_range);
+
+        double rescale_x = (current_coord - current_min) / current_length * target_length;
+
+        bool constexpr orientations_agree = Interface::orientations_agree;
+        if constexpr (!orientations_agree) {
+            rescale_x = target_length - rescale_x;
+        }
+        return target_min + rescale_x;
+    }
+
+
+
+    template &lt;class CurrentIdx&gt;
+    auto operator()(CurrentIdx const&amp; current_idx) const
+    {
+        using IdxTarget
+                = std::conditional_t&lt;std::is_same_v&lt;CurrentIdx, IdxEdge1&gt;, IdxEdge2, IdxEdge1&gt;;
+        IdxTarget target_idx;
+        [[maybe_unused]] bool is_equivalent_idx_found = search_for_match(target_idx, current_idx);
+        assert(is_equivalent_idx_found);
+        return target_idx;
+    }
+
+
+
+    template &lt;class CurrentIdx&gt;
+    bool is_match_available(CurrentIdx const&amp; current_idx) const
+    {
+        using IdxTarget
+                = std::conditional_t&lt;std::is_same_v&lt;CurrentIdx, IdxEdge1&gt;, IdxEdge2, IdxEdge1&gt;;
+        IdxTarget potential_target_idx;
+        return search_for_match(potential_target_idx, current_idx);
+    }
+
+
+
+    template &lt;class CurrentGrid, class TargetGrid&gt;
+    bool search_for_match(Idx&lt;TargetGrid&gt;&amp; target_idx, Idx&lt;CurrentGrid&gt; const&amp; current_idx) const
+    {
+        static_assert(
+                std::is_same_v&lt;CurrentGrid, EdgeGrid1&gt; || std::is_same_v&lt;CurrentGrid, EdgeGrid2&gt;,
+                "Current index must be associated with one of the edges.");
+        static_assert(
+                std::is_same_v&lt;TargetGrid, EdgeGrid1&gt; || std::is_same_v&lt;TargetGrid, EdgeGrid2&gt;,
+                "Target index must be associated with one of the edges.");
+        static_assert(
+                !std::is_same_v&lt;TargetGrid, CurrentGrid&gt;,
+                "The types of the indices should be different");
+
+        // Index range of CurrentIdx.
+        using IdxRangeCurrent = IdxRange&lt;CurrentGrid&gt;;
+        // Index range of other dimension.
+        using IdxRangeTarget = IdxRange&lt;TargetGrid&gt;;
+        // Coordinate on the discontinuous dimension of the current grid.
+        using CurrentCoord = Coord&lt;typename CurrentGrid::continuous_dimension_type&gt;;
+        // Index on the target grid
+        using IdxTarget = typename IdxRangeTarget::discrete_element_type;
+        // Index step on the target grid
+        using IdxStepTarget = typename IdxRangeTarget::discrete_vector_type;
+
+
+        bool is_equivalent_idx = false;
+
+        // Get the 1D index range corresponding to the current and target domains.
+        IdxRange&lt;EdgeGrid1, EdgeGrid2&gt; const
+                combined_idx_range(m_idx_range_patch_1, m_idx_range_patch_2);
+        IdxRangeCurrent const current_idx_range(combined_idx_range);
+        IdxRangeTarget const target_idx_range(combined_idx_range);
+
+        int const n_cells_current = current_idx_range.size() - 1;
+        int const n_cells_target = target_idx_range.size() - 1;
+
+        if constexpr ( // Uniform case
+                ddc::is_uniform_point_sampling_v&lt;
+                        EdgeGrid1&gt; &amp;&amp; ddc::is_uniform_point_sampling_v&lt;EdgeGrid2&gt;) {
+            // Get greatest common divisor
+            int const gcd_cells = std::gcd(n_cells_current, n_cells_target);
+
+            int const current_idx_value = (current_idx - current_idx_range.front()).value();
+            /*
+                There is an equivalent index if the current index is a multiple of
+                (number of current cells / gcd). If gcd == 1 then this condition is
+                only true if the current index represents an extremity
+                (current_idx_value == 0 or current_idx_value == n_cells_current).
+            */
+            is_equivalent_idx = (current_idx_value % (n_cells_current / gcd_cells) == 0);
+
+            // If there is an equivalent index, update target_idx.
+            if (is_equivalent_idx) {
+                double const rescaling_factor = double(n_cells_current) / double(n_cells_target);
+                IdxStepTarget target_idx_step_rescaled(int(current_idx_value / rescaling_factor));
+                target_idx = IdxTarget(target_idx_range.front());
+                target_idx += target_idx_step_rescaled;
+
+                if constexpr (!Interface::orientations_agree) {
+                    IdxStepTarget target_idx_step = IdxTarget(target_idx_range.back()) - target_idx;
+                    target_idx = IdxTarget(target_idx_range.front());
+                    target_idx += target_idx_step;
+                }
+            }
+        } else { // Non uniform case
+            // Dichotomy method comparing the coordinates of indexes of the target edge.
+            target_idx = get_target_idx(target_idx_range, current_idx);
+            CurrentCoord const current_coord(ddc::coordinate(current_idx));
+            CurrentCoord const target_equivalent_coord((*this)(ddc::coordinate(target_idx)));
+            is_equivalent_idx = (abs(current_coord - target_equivalent_coord) &lt; 1e-14);
+        }
+
+        return is_equivalent_idx;
+    }
+
+
+
+private:
+    template &lt;class IdxType&gt;
+    IdxType const get_mid(IdxType const&amp; idx_1, IdxType const&amp; idx_2) const
+    {
+        return idx_1 + (idx_2 - idx_1) / 2;
+    }
+
+    template &lt;class TargetGrid, class CurrentGrid&gt;
+    Idx&lt;TargetGrid&gt; const get_target_idx(
+            IdxRange&lt;TargetGrid&gt; const&amp; target_idx_range,
+            Idx&lt;CurrentGrid&gt; const&amp; current_idx) const
+    {
+        // Coordinate on the discontinuous dimension of the current grid.
+        using CurrentCoord = Coord&lt;typename CurrentGrid::continuous_dimension_type&gt;;
+        // Index on the target grid
+        using IdxTarget = Idx&lt;TargetGrid&gt;;
+        // Index step on the target grid
+        using IdxStepTarget = IdxStep&lt;TargetGrid&gt;;
+
+        // Dichotomy method
+        CurrentCoord const current_coord(ddc::coordinate(current_idx));
+
+        IdxTarget target_idx_min(target_idx_range.front());
+        IdxTarget target_idx_max(target_idx_range.back());
+        IdxTarget target_idx_mid = get_mid(target_idx_min, target_idx_max);
+
+        IdxStepTarget target_idx_step_diff = target_idx_max - target_idx_min;
+        while (target_idx_step_diff != IdxStepTarget(1)) {
+            CurrentCoord target_equivalent_coord_mid((*this)(ddc::coordinate(target_idx_mid)));
+
+            if ((current_coord &gt; target_equivalent_coord_mid &amp;&amp; Interface::orientations_agree)
+                || (current_coord &lt;= target_equivalent_coord_mid
+                    &amp;&amp; !Interface::orientations_agree)) {
+                target_idx_min = target_idx_mid;
+            } else {
+                target_idx_max = target_idx_mid;
+            }
+
+            target_idx_mid = get_mid(target_idx_min, target_idx_max);
+            target_idx_step_diff = target_idx_max - target_idx_min;
+        }
+
+        CurrentCoord target_coord_min((*this)(ddc::coordinate(target_idx_min)));
+        CurrentCoord target_coord_max((*this)(ddc::coordinate(target_idx_max)));
+        if (abs(current_coord - target_coord_min) &lt; abs(current_coord - target_coord_max)) {
+            return target_idx_min;
+        } else {
+            return target_idx_max;
+        }
+    }
+};
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/gyselax/gyselalibxx/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../docs/jscript/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

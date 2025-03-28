@@ -1,0 +1,886 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4" kind="class" language="C++" prot="public">
+    <compoundname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</compoundname>
+    <basecompoundref refid="classDerivFieldCommon" prot="public" virt="non-virtual">DerivFieldCommon&lt; FieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, MemSpace &gt;, IdxRange&lt; DDims... &gt; &gt;</basecompoundref>
+    <includes refid="derivative__field__mem_8hpp" local="no">derivative_field_mem.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class ElementType</type>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>DDims</declname>
+        <defname>DDims</defname>
+      </param>
+      <param>
+        <type>int</type>
+        <declname>NDerivs</declname>
+        <defname>NDerivs</defname>
+      </param>
+      <param>
+        <type>class MemSpace</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ad5d9bbda8108ebf61c13ee74f7d56f4a" prot="private" static="no">
+        <type><ref refid="classDerivFieldCommon" kindref="compound">DerivFieldCommon</ref>&lt; FieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, MemSpace &gt;, IdxRange&lt; DDims... &gt; &gt;</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::base_type =  DerivFieldCommon&lt; FieldMem&lt;ElementType, IdxRange&lt;DDims...&gt;, MemSpace&gt;, IdxRange&lt;DDims...&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>base_type</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::base_type</qualifiedname>
+        <briefdescription>
+<para>The class from which this object inherits. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a89b5982b10e92fc92bc35a36076e3505" prot="private" static="no">
+        <type>typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt; <ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1afb2089b734b8d88d06788a1844fc5676" kindref="member">physical_deriv_grids</ref> &gt;</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::physical_deriv_idx_range_type =  typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt;physical_deriv_grids&gt;</definition>
+        <argsstring></argsstring>
+        <name>physical_deriv_idx_range_type</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::physical_deriv_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>A index range describing all the index ranges where derivatives are defined. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A index range describing all the index ranges where derivatives are defined. If this index range is sliced into a 1D object then it describes the index range on which the derivative in that direction is defined. This object is used internally to initialise the chunks. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="124" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a59911201d1f87171c64404f64f89eec7" prot="private" static="no">
+        <type>typename base_type::discrete_deriv_idx_range_type</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::discrete_deriv_idx_range_type =  typename base_type::discrete_deriv_idx_range_type</definition>
+        <argsstring></argsstring>
+        <name>discrete_deriv_idx_range_type</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::discrete_deriv_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The IdxRange which describes the derivatives present on each chunk. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="128" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ac3dd1c182e4c37f65adccb17e4bf596e" prot="private" static="no">
+        <type>typename base_type::discrete_deriv_index_type</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::discrete_deriv_index_type =  typename base_type::discrete_deriv_index_type</definition>
+        <argsstring></argsstring>
+        <name>discrete_deriv_index_type</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::discrete_deriv_index_type</qualifiedname>
+        <briefdescription>
+<para>The Idx which describes the order of the derivatives in each dimension. (e.g. second-order derivative). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="133" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ab9401bf08cc2d76bf1a632f9ff740da8" prot="private" static="no">
+        <type>typename chunk_type::mapping_type</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::mapping_type =  typename chunk_type::mapping_type</definition>
+        <argsstring></argsstring>
+        <name>mapping_type</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::mapping_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="135" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a877480e7eafe32ad526b983f40200cdc" prot="private" static="no">
+        <type>typename chunk_type::extents_type</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::extents_type =  typename chunk_type::extents_type</definition>
+        <argsstring></argsstring>
+        <name>extents_type</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::extents_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="137" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a7b0ff7b9e831764d9ae1a9988478f7a6" prot="private" static="no">
+        <type>ddc::KokkosAllocator&lt; <ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a3857065aca7a7e4d911f2b5eee499c69" kindref="member">element_type</ref>, typename chunk_type::memory_space &gt;</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::allocator_type =  ddc::KokkosAllocator&lt;element_type, typename chunk_type::memory_space&gt;</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::allocator_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="139" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1aee850b47a22edcce1e8398418392e0f5" prot="private" static="no">
+        <type>typename base_type::internal_mdspan_type</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::internal_mdspan_type =  typename base_type::internal_mdspan_type</definition>
+        <argsstring></argsstring>
+        <name>internal_mdspan_type</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::internal_mdspan_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="141" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="141" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a3857065aca7a7e4d911f2b5eee499c69" prot="public" static="no">
+        <type>typename base_type::element_type</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::element_type =  typename base_type::element_type</definition>
+        <argsstring></argsstring>
+        <name>element_type</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::element_type</qualifiedname>
+        <briefdescription>
+<para>The type of the elements in the chunks. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="60" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a6c975a1c12c0a219d408da8b586835af" prot="public" static="no">
+        <type>typename base_type::discrete_domain_type</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::discrete_domain_type =  typename base_type::discrete_domain_type</definition>
+        <argsstring></argsstring>
+        <name>discrete_domain_type</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::discrete_domain_type</qualifiedname>
+        <briefdescription>
+<para>The IdxRange on which the chunks in this object are defined. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is a DDC keyword used to make this class interchangeable with Field. In DDC IdxRange types are referred to as DiscreteDomain types. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="68" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a07cfaf6fec0b894477ab7a83c15e6a80" prot="public" static="no">
+        <type>typename base_type::discrete_element_type</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::discrete_element_type =  typename base_type::discrete_element_type</definition>
+        <argsstring></argsstring>
+        <name>discrete_element_type</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::discrete_element_type</qualifiedname>
+        <briefdescription>
+<para>The Idx which can be used to index this object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is a DDC keyword used to make this class interchangeable with Field. In DDC Idx types are referred to as DiscreteElement types. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ab052cd269915bce72c9e1571cb181411" prot="public" static="no">
+        <type>typename base_type::deriv_tags</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::deriv_tags =  typename base_type::deriv_tags</definition>
+        <argsstring></argsstring>
+        <name>deriv_tags</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::deriv_tags</qualifiedname>
+        <briefdescription>
+<para>A type sequence containing all derivatives present in this object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="79" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1afb2089b734b8d88d06788a1844fc5676" prot="public" static="no">
+        <type>typename base_type::physical_deriv_grids</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::physical_deriv_grids =  typename base_type::physical_deriv_grids</definition>
+        <argsstring></argsstring>
+        <name>physical_deriv_grids</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::physical_deriv_grids</qualifiedname>
+        <briefdescription>
+<para>A type sequence containing all dimensions for which derivatives are present in this object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="82" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a9507a60bf4428e52d891bc48c778f7d7" prot="public" static="no">
+        <type>typename base_type::physical_grids</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::physical_grids =  typename base_type::physical_grids</definition>
+        <argsstring></argsstring>
+        <name>physical_grids</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::physical_grids</qualifiedname>
+        <briefdescription>
+<para>A type sequence containing all the physical dimensions on which the chunks are defined. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="85" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a9d746620e71965623275a8fc318eb497" prot="public" static="no">
+        <type>typename base_type::physical_idx_range_type</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::physical_idx_range_type =  typename base_type::physical_idx_range_type</definition>
+        <argsstring></argsstring>
+        <name>physical_idx_range_type</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::physical_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The physical index range on which the field is defined. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a79b8a0465670dbf6beb028eef811d596" prot="public" static="no">
+        <type>typename base_type::chunk_type</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::chunk_type =  typename base_type::chunk_type</definition>
+        <argsstring></argsstring>
+        <name>chunk_type</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::chunk_type</qualifiedname>
+        <briefdescription>
+<para>The type of the field stored in the array. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is a DDC keyword used to make this class interchangeable with Field. In DDC FieldMem types are referred to as Chunk types and Field types are referred to as ChunkSpan/ChunkView. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="97" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ad62673081818631af0ba0c81dacfff98" prot="public" static="no">
+        <type><ref refid="classDerivField" kindref="compound">DerivField</ref>&lt; ElementType, IdxRange&lt; DDims... &gt;, typename chunk_type::memory_space, typename chunk_type::layout_type &gt;</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::span_type =  DerivField&lt; ElementType, IdxRange&lt;DDims...&gt;, typename chunk_type::memory_space, typename chunk_type::layout_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>span_type</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::span_type</qualifiedname>
+        <briefdescription>
+<para>The type of a modifiable span of this field. This is a DDC keyword used to make this class interchangeable with Field. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="103" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ac376f71dff518c893e66c88ddb265fe4" prot="public" static="no">
+        <type><ref refid="classDerivField" kindref="compound">DerivField</ref>&lt; ElementType const, IdxRange&lt; DDims... &gt;, typename chunk_type::memory_space, typename chunk_type::layout_type &gt;</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::view_type =  DerivField&lt; ElementType const, IdxRange&lt;DDims...&gt;, typename chunk_type::memory_space, typename chunk_type::layout_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>view_type</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::view_type</qualifiedname>
+        <briefdescription>
+<para>The type of a constant view of this field. This is a DDC keyword used to make this class interchangeable with Field. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="110" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="114" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ab44eabd629c8780fcc2a0e67e9650691" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class</type>
+          </param>
+          <param>
+            <type>class</type>
+          </param>
+          <param>
+            <type>class</type>
+          </param>
+          <param>
+            <type>class</type>
+          </param>
+        </templateparamlist>
+        <type>class</type>
+        <definition>friend class DerivField</definition>
+        <argsstring></argsstring>
+        <name>DerivField</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::DerivField</qualifiedname>
+        <param>
+          <type><ref refid="classDerivField" kindref="compound">DerivField</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="100" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1abee55dea53c89b338f5ff43b57d0c7a9" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>ArrayIndex</declname>
+            <defname>ArrayIndex</defname>
+          </param>
+          <param>
+            <type>class Tag</type>
+          </param>
+        </templateparamlist>
+        <type>IdxRange&lt; Tag &gt;</type>
+        <definition>IdxRange&lt; Tag &gt; DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::get_idx_range</definition>
+        <argsstring>(physical_idx_range_type val_idx_range, physical_deriv_idx_range_type deriv_idx_ranges)</argsstring>
+        <name>get_idx_range</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::get_idx_range</qualifiedname>
+        <param>
+          <type><ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a9d746620e71965623275a8fc318eb497" kindref="member">physical_idx_range_type</ref></type>
+          <declname>val_idx_range</declname>
+        </param>
+        <param>
+          <type>physical_deriv_idx_range_type</type>
+          <declname>deriv_idx_ranges</declname>
+        </param>
+        <briefdescription>
+<para>A function to get the index range along direction Tag for the ArrayIndex-th element of internal_fields. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="149" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="149" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a9d46a31e9b4dc59e126cf15a2a2537ea" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>ArrayIndex</declname>
+            <defname>ArrayIndex</defname>
+          </param>
+        </templateparamlist>
+        <type>IdxRange&lt; DDims... &gt;</type>
+        <definition>IdxRange&lt; DDims... &gt; DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::get_chunk_idx_range</definition>
+        <argsstring>(physical_idx_range_type val_idx_range, physical_deriv_idx_range_type deriv_idx_ranges)</argsstring>
+        <name>get_chunk_idx_range</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::get_chunk_idx_range</qualifiedname>
+        <param>
+          <type><ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a9d746620e71965623275a8fc318eb497" kindref="member">physical_idx_range_type</ref></type>
+          <declname>val_idx_range</declname>
+        </param>
+        <param>
+          <type>physical_deriv_idx_range_type</type>
+          <declname>deriv_idx_ranges</declname>
+        </param>
+        <briefdescription>
+<para>Get the index range of the FieldMem at the index ArrayIndex in internal_fields. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="183" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="183" bodyend="189"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a6d6b4af2eae39ae4777b8014987f3198" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class QueryDDim</type>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>ArrayIndex</declname>
+            <defname>ArrayIndex</defname>
+          </param>
+        </templateparamlist>
+        <type>std::size_t</type>
+        <definition>std::size_t DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::get_mdspan_size</definition>
+        <argsstring>()</argsstring>
+        <name>get_mdspan_size</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::get_mdspan_size</qualifiedname>
+        <briefdescription>
+<para>Get the size of the mdspan in dimension QueryDDim, at the index ArrayIndex. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="193" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="193" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a71930d8ab2a366995e95669f4d35dd2c" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>ArrayIndex</declname>
+            <defname>ArrayIndex</defname>
+          </param>
+        </templateparamlist>
+        <type>std::enable_if_t&lt; std::is_constructible_v&lt; mapping_type, extents_type &gt;, internal_mdspan_type &gt;</type>
+        <definition>std::enable_if_t&lt; std::is_constructible_v&lt; mapping_type, extents_type &gt;, internal_mdspan_type &gt; DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::make_internal_mdspan</definition>
+        <argsstring>(allocator_type allocator)</argsstring>
+        <name>make_internal_mdspan</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::make_internal_mdspan</qualifiedname>
+        <param>
+          <type>allocator_type</type>
+          <declname>allocator</declname>
+        </param>
+        <briefdescription>
+<para>Make the internal mdspan that will be saved in internal_fields at the index ArrayIndex. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="219" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="219" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1aa15a282ff001c56164f83e2437ddee69" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t...</type>
+            <declname>ArrayIndex</declname>
+            <defname>ArrayIndex</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::initialise_chunks</definition>
+        <argsstring>(allocator_type allocator, std::index_sequence&lt; ArrayIndex... &gt;)</argsstring>
+        <name>initialise_chunks</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::initialise_chunks</qualifiedname>
+        <param>
+          <type>allocator_type</type>
+          <declname>allocator</declname>
+        </param>
+        <param>
+          <type>std::index_sequence&lt; ArrayIndex... &gt;</type>
+        </param>
+        <briefdescription>
+<para>Initialise the chunks inside internal_fields. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="235" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="235" bodyend="239"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a1675bc7159ba70d8c70c4017ea610fe2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>DerivDoms</declname>
+            <defname>DerivDoms</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::DerivFieldMem</definition>
+        <argsstring>(physical_idx_range_type val_idx_range, IdxRangeSlice&lt; DerivDoms &gt;... m_deriv_idx_range)</argsstring>
+        <name>DerivFieldMem</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::DerivFieldMem</qualifiedname>
+        <param>
+          <type><ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a9d746620e71965623275a8fc318eb497" kindref="member">physical_idx_range_type</ref></type>
+          <declname>val_idx_range</declname>
+        </param>
+        <param>
+          <type><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref>&lt; DerivDoms &gt;...</type>
+          <declname>m_deriv_idx_range</declname>
+        </param>
+        <briefdescription>
+<para>The constructor for <ref refid="classDerivFieldMem" kindref="compound">DerivFieldMem</ref>. The constructor initialises the chunks using the provided index ranges. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>val_idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range on which the values of the field are defined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>m_deriv_idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 1D sub-index ranges on which the derivatives of the field are defined. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="250" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="250" bodyend="255"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1abd291fdb248e85ba48ec74c19087e864" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>DerivDoms</declname>
+            <defname>DerivDoms</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::DerivFieldMem</definition>
+        <argsstring>(allocator_type allocator, physical_idx_range_type val_idx_range, IdxRangeSlice&lt; DerivDoms &gt;... m_deriv_idx_range)</argsstring>
+        <name>DerivFieldMem</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::DerivFieldMem</qualifiedname>
+        <param>
+          <type>allocator_type</type>
+          <declname>allocator</declname>
+        </param>
+        <param>
+          <type><ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a9d746620e71965623275a8fc318eb497" kindref="member">physical_idx_range_type</ref></type>
+          <declname>val_idx_range</declname>
+        </param>
+        <param>
+          <type><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref>&lt; DerivDoms &gt;...</type>
+          <declname>m_deriv_idx_range</declname>
+        </param>
+        <briefdescription>
+<para>The constructor for <ref refid="classDerivFieldMem" kindref="compound">DerivFieldMem</ref>. The constructor initialises the chunks using the provided index ranges. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>allocator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The object which allocates the memory on the CPU or GPU. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>val_idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range on which the values of the field are defined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>m_deriv_idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 1D sub-index ranges on which the derivatives of the field are defined. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="266" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="266" bodyend="280"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a7af910528c9b40eb599439539340925d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::~DerivFieldMem</definition>
+        <argsstring>()=default</argsstring>
+        <name>~DerivFieldMem</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::~DerivFieldMem</qualifiedname>
+        <briefdescription>
+<para>Defaulted destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="283" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ac897e84a086c7cf6b4577833a8093e69" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classDerivFieldMem" kindref="compound">DerivFieldMem</ref> &amp;</type>
+        <definition>DerivFieldMem &amp; DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::operator=</definition>
+        <argsstring>(DerivFieldMem const &amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classDerivFieldMem" kindref="compound">DerivFieldMem</ref> const &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Deleted copy operator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="286" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a031703d7536e1b06d4f9dedfad0448fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classDerivFieldMem" kindref="compound">DerivFieldMem</ref> &amp;</type>
+        <definition>DerivFieldMem &amp; DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::operator=</definition>
+        <argsstring>(DerivFieldMem &amp;&amp;other)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classDerivFieldMem" kindref="compound">DerivFieldMem</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Move-assigns a new value to this field <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the FieldMem to move </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>*this </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="292" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1af060ce1efbb1b8977510596bfda7c7d9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>DElem</declname>
+            <defname>DElem</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a3857065aca7a7e4d911f2b5eee499c69" kindref="member">element_type</ref> &amp;</type>
+        <definition>element_type &amp; DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::operator()</definition>
+        <argsstring>(DElem... elems) noexcept</argsstring>
+        <name>operator()</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::operator()</qualifiedname>
+        <param>
+          <type>DElem...</type>
+          <declname>elems</declname>
+        </param>
+        <briefdescription>
+<para>Get a modifiable reference to an element from a constant field. A Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>elems</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The element of interest.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The requested element. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="304" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="304" bodyend="310"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a452e3d080c0cf135f1610348fc469b42" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>DElem</declname>
+            <defname>DElem</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a3857065aca7a7e4d911f2b5eee499c69" kindref="member">element_type</ref> const &amp;</type>
+        <definition>element_type const  &amp; DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::operator()</definition>
+        <argsstring>(DElem... elems) const noexcept</argsstring>
+        <name>operator()</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::operator()</qualifiedname>
+        <param>
+          <type>DElem...</type>
+          <declname>elems</declname>
+        </param>
+        <briefdescription>
+<para>Get an element from a constant field. A Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>elems</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The element of interest.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The requested element. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="322" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="322" bodyend="328"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a6e0d2b4d800e11d4787cf8a1291558d7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ac376f71dff518c893e66c88ddb265fe4" kindref="member">view_type</ref></type>
+        <definition>view_type DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::span_cview</definition>
+        <argsstring>() const</argsstring>
+        <name>span_cview</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::span_cview</qualifiedname>
+        <briefdescription>
+<para>Get a constant <ref refid="classDerivField" kindref="compound">DerivField</ref> of this field. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get_const_field should be used.</para>
+<para><simplesect kind="return"><para>A constant span of this field. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="338" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="338" bodyend="341"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a99a11d6c6c4a56b0d05415ec51146eef" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ac376f71dff518c893e66c88ddb265fe4" kindref="member">view_type</ref></type>
+        <definition>view_type DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::span_view</definition>
+        <argsstring>() const</argsstring>
+        <name>span_view</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::span_view</qualifiedname>
+        <briefdescription>
+<para>Get a constant <ref refid="classDerivField" kindref="compound">DerivField</ref> of this field. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get_field should be used.</para>
+<para><simplesect kind="return"><para>A constant span of this field. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="351" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="351" bodyend="354"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a5bd780143c64dad90a6ed01c9380fc90" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ad62673081818631af0ba0c81dacfff98" kindref="member">span_type</ref></type>
+        <definition>span_type DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::span_view</definition>
+        <argsstring>()</argsstring>
+        <name>span_view</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::span_view</qualifiedname>
+        <briefdescription>
+<para>Get a modifiable <ref refid="classDerivField" kindref="compound">DerivField</ref> of this field. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function is designed to match the equivalent function in DDC. In Gysela it should not be called directly. Instead the global function get_field should be used.</para>
+<para><simplesect kind="return"><para>A span of this field. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="364" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="364" bodyend="367"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class which holds a chunk of memory describing a field and its derivatives. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The values of the field and the derivatives may be defined on different index ranges, but the underlying mesh must be the same for both.</para>
+<para><anchor id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1DerivFieldMemImplementation"/> <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ElementType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the elements inside the chunks. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IdxRange&lt;DDims...&gt;</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range on which the internal fields are defined. This index range is the physical index range on which the values are defined combined with the index range of the derivatives of interest (e.g. IdxRange&lt;Deriv&lt;IDimX&gt;, IDimX, IDimY&gt;). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>NDerivs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of derivatives which are defined in the dimensions where derivatives appear. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>MemSpace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The memory space where the data will be saved. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>DerivFieldCommon&lt; FieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, MemSpace &gt;, IdxRange&lt; DDims... &gt; &gt;</label>
+        <link refid="classDerivFieldCommon"/>
+      </node>
+      <node id="1">
+        <label>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</label>
+        <link refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>DerivFieldCommon&lt; FieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, MemSpace &gt;, IdxRange&lt; DDims... &gt; &gt;</label>
+        <link refid="classDerivFieldCommon"/>
+      </node>
+      <node id="1">
+        <label>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</label>
+        <link refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="47" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="51" bodyend="368"/>
+    <listofallmembers>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a7b0ff7b9e831764d9ae1a9988478f7a6" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>allocator_type</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ad5d9bbda8108ebf61c13ee74f7d56f4a" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>base_type</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a79b8a0465670dbf6beb028eef811d596" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>chunk_type</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ab052cd269915bce72c9e1571cb181411" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>deriv_tags</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ab44eabd629c8780fcc2a0e67e9650691" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>DerivField</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a1675bc7159ba70d8c70c4017ea610fe2" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>DerivFieldMem</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1abd291fdb248e85ba48ec74c19087e864" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>DerivFieldMem</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a59911201d1f87171c64404f64f89eec7" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>discrete_deriv_idx_range_type</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ac3dd1c182e4c37f65adccb17e4bf596e" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>discrete_deriv_index_type</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a6c975a1c12c0a219d408da8b586835af" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>discrete_domain_type</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a07cfaf6fec0b894477ab7a83c15e6a80" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>discrete_element_type</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a3857065aca7a7e4d911f2b5eee499c69" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>element_type</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a877480e7eafe32ad526b983f40200cdc" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>extents_type</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a9d46a31e9b4dc59e126cf15a2a2537ea" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>get_chunk_idx_range</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1abee55dea53c89b338f5ff43b57d0c7a9" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>get_idx_range</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a6d6b4af2eae39ae4777b8014987f3198" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>get_mdspan_size</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1aa15a282ff001c56164f83e2437ddee69" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>initialise_chunks</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1aee850b47a22edcce1e8398418392e0f5" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>internal_mdspan_type</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a71930d8ab2a366995e95669f4d35dd2c" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>make_internal_mdspan</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ab9401bf08cc2d76bf1a632f9ff740da8" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>mapping_type</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1af060ce1efbb1b8977510596bfda7c7d9" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>operator()</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a452e3d080c0cf135f1610348fc469b42" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>operator()</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ac897e84a086c7cf6b4577833a8093e69" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>operator=</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a031703d7536e1b06d4f9dedfad0448fd" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>operator=</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1afb2089b734b8d88d06788a1844fc5676" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>physical_deriv_grids</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a89b5982b10e92fc92bc35a36076e3505" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>physical_deriv_idx_range_type</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a9507a60bf4428e52d891bc48c778f7d7" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>physical_grids</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a9d746620e71965623275a8fc318eb497" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>physical_idx_range_type</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a6e0d2b4d800e11d4787cf8a1291558d7" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>span_cview</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ad62673081818631af0ba0c81dacfff98" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>span_type</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a99a11d6c6c4a56b0d05415ec51146eef" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>span_view</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a5bd780143c64dad90a6ed01c9380fc90" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>span_view</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ac376f71dff518c893e66c88ddb265fe4" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>view_type</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a7af910528c9b40eb599439539340925d" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>~DerivFieldMem</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,638 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAdvectionFieldFinder" kind="class" language="C++" prot="public">
+    <compoundname>AdvectionFieldFinder</compoundname>
+    <includes refid="advection__field__rtheta_8hpp" local="no">advection_field_rtheta.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Mapping</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classAdvectionFieldFinder_1adc93eaa4ffdf24734faae6857ee43730" prot="public" static="no">
+        <type>std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt;</type>
+        <definition>using AdvectionFieldFinder&lt; Mapping &gt;::Matrix_2x2 =  std::array&lt;std::array&lt;double, 2&gt;, 2&gt;</definition>
+        <argsstring></argsstring>
+        <name>Matrix_2x2</name>
+        <qualifiedname>AdvectionFieldFinder::Matrix_2x2</qualifiedname>
+        <briefdescription>
+<para>Define a 2x2 matrix with an 2D array of an 2D array. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="97" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="97" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAdvectionFieldFinder_1a457cb9a50e24ab460559fdd96d164bc3" prot="private" static="no" mutable="no">
+        <type>Mapping const  &amp;</type>
+        <definition>Mapping const&amp; AdvectionFieldFinder&lt; Mapping &gt;::m_mapping</definition>
+        <argsstring></argsstring>
+        <name>m_mapping</name>
+        <qualifiedname>AdvectionFieldFinder::m_mapping</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="100" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAdvectionFieldFinder_1a46c62cd714b9a75479695928a5057846" prot="private" static="no" mutable="no">
+        <type><ref refid="classPolarSplineEvaluator" kindref="compound">PolarSplineEvaluator</ref>&lt; <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref>, ddc::NullExtrapolationRule &gt; const</type>
+        <definition>PolarSplineEvaluator&lt;PolarBSplinesRTheta, ddc::NullExtrapolationRule&gt; const AdvectionFieldFinder&lt; Mapping &gt;::m_polar_spline_evaluator</definition>
+        <argsstring></argsstring>
+        <name>m_polar_spline_evaluator</name>
+        <qualifiedname>AdvectionFieldFinder::m_polar_spline_evaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="103" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAdvectionFieldFinder_1a0c98e53bab952f38d543d863f8d6e709" prot="private" static="no" mutable="no">
+        <type>SplineRThetaEvaluatorNullBound_host const</type>
+        <definition>SplineRThetaEvaluatorNullBound_host const AdvectionFieldFinder&lt; Mapping &gt;::m_spline_evaluator</definition>
+        <argsstring></argsstring>
+        <name>m_spline_evaluator</name>
+        <qualifiedname>AdvectionFieldFinder::m_spline_evaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="105" column="47" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAdvectionFieldFinder_1afaf17208dfa7b5b4fbe953426a171910" prot="private" static="no" mutable="no">
+        <type>double const</type>
+        <definition>double const AdvectionFieldFinder&lt; Mapping &gt;::m_epsilon</definition>
+        <argsstring></argsstring>
+        <name>m_epsilon</name>
+        <qualifiedname>AdvectionFieldFinder::m_epsilon</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="107" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="107" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classAdvectionFieldFinder_1af47b6bde71aa5690521b491488645cd3" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int AdvectionFieldFinder&lt; Mapping &gt;::n_overlap_cells</definition>
+        <argsstring></argsstring>
+        <name>n_overlap_cells</name>
+        <qualifiedname>AdvectionFieldFinder::n_overlap_cells</qualifiedname>
+        <initializer>= <ref refid="classPolarBSplines_1ae4895a87f3e1ed953614a3546c319762" kindref="member">PolarBSplinesRTheta::continuity</ref> + 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="109" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="109" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAdvectionFieldFinder_1a3086cce87c971e57d63e4ee31c0dadb6" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AdvectionFieldFinder&lt; Mapping &gt;::AdvectionFieldFinder</definition>
+        <argsstring>(Mapping const &amp;mapping, double const epsilon=1e-12)</argsstring>
+        <name>AdvectionFieldFinder</name>
+        <qualifiedname>AdvectionFieldFinder::AdvectionFieldFinder</qualifiedname>
+        <param>
+          <type>Mapping const &amp;</type>
+          <declname>mapping</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>epsilon</declname>
+          <defval>1e-12</defval>
+        </param>
+        <briefdescription>
+<para>Instantiate a AdvectionFieldRTheta . </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mapping <formula id="56">$ \mathcal{F} $</formula> from the logical domain to the physical domain. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">epsilon</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parameter <formula id="11">$ \varepsilon $</formula> for the linearisation of the electric field. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="121" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="121" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classAdvectionFieldFinder_1a6c48a3bdb689fb9a270698a6617f2cfb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AdvectionFieldFinder&lt; Mapping &gt;::operator()</definition>
+        <argsstring>(host_t&lt; DFieldRTheta &gt; electrostatic_potential, host_t&lt; DVectorFieldRTheta&lt; X, Y &gt; &gt; advection_field_xy) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>AdvectionFieldFinder::operator()</qualifiedname>
+        <param>
+          <type>host_t&lt; DFieldRTheta &gt;</type>
+          <declname>electrostatic_potential</declname>
+        </param>
+        <param>
+          <type>host_t&lt; <ref refid="classVectorField" kindref="compound">DVectorFieldRTheta</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt; &gt;</type>
+          <declname>advection_field_xy</declname>
+        </param>
+        <briefdescription>
+<para>Compute the advection field from a Field of <formula id="57">$\phi$</formula> values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">electrostatic_potential</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The values of the solution <formula id="57">$\phi$</formula> of the Poisson-like equation (2). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">advection_field_xy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The advection field on the physical axis. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="141" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="141" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="classAdvectionFieldFinder_1a1c94218e7996b38d562fa98ccd29dde5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AdvectionFieldFinder&lt; Mapping &gt;::operator()</definition>
+        <argsstring>(host_t&lt; Spline2D &gt; electrostatic_potential_coef, host_t&lt; DVectorFieldRTheta&lt; X, Y &gt; &gt; advection_field_xy) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>AdvectionFieldFinder::operator()</qualifiedname>
+        <param>
+          <type>host_t&lt; Spline2D &gt;</type>
+          <declname>electrostatic_potential_coef</declname>
+        </param>
+        <param>
+          <type>host_t&lt; <ref refid="classVectorField" kindref="compound">DVectorFieldRTheta</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt; &gt;</type>
+          <declname>advection_field_xy</declname>
+        </param>
+        <briefdescription>
+<para>Compute the advection field from a spline representation of <formula id="57">$\phi$</formula> solution. The B-splines basis used is the cross-product of two 1D B-splines basis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">electrostatic_potential_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline representation of the solution <formula id="57">$\phi$</formula> of the Poisson-like equation (2). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">advection_field_xy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The advection field on the physical axis. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="167" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="167" bodyend="175"/>
+      </memberdef>
+      <memberdef kind="function" id="classAdvectionFieldFinder_1ab5d88aecc399886af415472b221a96d9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AdvectionFieldFinder&lt; Mapping &gt;::operator()</definition>
+        <argsstring>(host_t&lt; PolarSplineMemRTheta &gt; &amp;electrostatic_potential_coef, host_t&lt; DVectorFieldRTheta&lt; X, Y &gt; &gt; advection_field_xy) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>AdvectionFieldFinder::operator()</qualifiedname>
+        <param>
+          <type>host_t&lt; <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMemRTheta</ref> &gt; &amp;</type>
+          <declname>electrostatic_potential_coef</declname>
+        </param>
+        <param>
+          <type>host_t&lt; <ref refid="classVectorField" kindref="compound">DVectorFieldRTheta</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt; &gt;</type>
+          <declname>advection_field_xy</declname>
+        </param>
+        <briefdescription>
+<para>Compute the advection field from the Poisson-like equation solution. The B-splines basis used is the polar B-splines (<ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">electrostatic_potential_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The polar spline representation of the solution <formula id="57">$\phi$</formula> of the Poisson-like equation (2). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">advection_field_xy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The advection field on the physical axis. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="187" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="187" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="classAdvectionFieldFinder_1af15aac72117e27547284dd75ac61caab" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AdvectionFieldFinder&lt; Mapping &gt;::operator()</definition>
+        <argsstring>(host_t&lt; DFieldRTheta &gt; electrostatic_potential, host_t&lt; DVectorFieldRTheta&lt; R, Theta &gt; &gt; advection_field_rtheta, CoordXY &amp;advection_field_xy_centre) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>AdvectionFieldFinder::operator()</qualifiedname>
+        <param>
+          <type>host_t&lt; DFieldRTheta &gt;</type>
+          <declname>electrostatic_potential</declname>
+        </param>
+        <param>
+          <type>host_t&lt; <ref refid="classVectorField" kindref="compound">DVectorFieldRTheta</ref>&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
+          <declname>advection_field_rtheta</declname>
+        </param>
+        <param>
+          <type>CoordXY &amp;</type>
+          <declname>advection_field_xy_centre</declname>
+        </param>
+        <briefdescription>
+<para>Compute the advection field from a Field of <formula id="57">$\phi$</formula> values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">electrostatic_potential</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The values of the solution <formula id="57">$\phi$</formula> of the Poisson-like equation (2). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">advection_field_rtheta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The advection field on the logical axis. It is expressed on the contravariant basis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">advection_field_xy_centre</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The advection field on the physical axis at the O-point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="356" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="356" bodyend="372"/>
+      </memberdef>
+      <memberdef kind="function" id="classAdvectionFieldFinder_1acc3d3127eab43e311d98df8f05d4effb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AdvectionFieldFinder&lt; Mapping &gt;::operator()</definition>
+        <argsstring>(host_t&lt; Spline2D &gt; electrostatic_potential_coef, host_t&lt; DVectorFieldRTheta&lt; R, Theta &gt; &gt; advection_field_rtheta, CoordXY &amp;advection_field_xy_centre) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>AdvectionFieldFinder::operator()</qualifiedname>
+        <param>
+          <type>host_t&lt; Spline2D &gt;</type>
+          <declname>electrostatic_potential_coef</declname>
+        </param>
+        <param>
+          <type>host_t&lt; <ref refid="classVectorField" kindref="compound">DVectorFieldRTheta</ref>&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
+          <declname>advection_field_rtheta</declname>
+        </param>
+        <param>
+          <type>CoordXY &amp;</type>
+          <declname>advection_field_xy_centre</declname>
+        </param>
+        <briefdescription>
+<para>Compute the advection field from a spline representation of <formula id="57">$\phi$</formula>. The B-splines basis used is the cross-product of two 1D B-splines basis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">electrostatic_potential_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline representation of the solution <formula id="57">$\phi$</formula> of the Poisson-like equation (2). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">advection_field_rtheta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The advection field on the logical axis. It is expressed on the contravariant basis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">advection_field_xy_centre</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The advection field on the physical axis at the O-point. <linebreak/>
+ </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="387" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="387" bodyend="397"/>
+      </memberdef>
+      <memberdef kind="function" id="classAdvectionFieldFinder_1a8e53045ac695348dde5079bb7f7f1f73" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AdvectionFieldFinder&lt; Mapping &gt;::operator()</definition>
+        <argsstring>(host_t&lt; PolarSplineMemRTheta &gt; &amp;electrostatic_potential_coef, host_t&lt; DVectorFieldRTheta&lt; R, Theta &gt; &gt; advection_field_rtheta, CoordXY &amp;advection_field_xy_centre) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>AdvectionFieldFinder::operator()</qualifiedname>
+        <param>
+          <type>host_t&lt; <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMemRTheta</ref> &gt; &amp;</type>
+          <declname>electrostatic_potential_coef</declname>
+        </param>
+        <param>
+          <type>host_t&lt; <ref refid="classVectorField" kindref="compound">DVectorFieldRTheta</ref>&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
+          <declname>advection_field_rtheta</declname>
+        </param>
+        <param>
+          <type>CoordXY &amp;</type>
+          <declname>advection_field_xy_centre</declname>
+        </param>
+        <briefdescription>
+<para>Compute the advection field from the Poisson-like equation. The B-splines basis used is the polar B-splines (<ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">electrostatic_potential_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The polar spline representation of the solution <formula id="57">$\phi$</formula> of the Poisson-like equation (2). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">advection_field_rtheta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The advection field on the logical axis. It is expressed on the contravariant basis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">advection_field_xy_centre</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The advection field on the physical axis at the O-point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="411" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="411" bodyend="421"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classAdvectionFieldFinder_1a8983689571c9eabb6cba669bab706083" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class SplineType</type>
+          </param>
+          <param>
+            <type>class Evaluator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void AdvectionFieldFinder&lt; Mapping &gt;::compute_advection_field_XY</definition>
+        <argsstring>(Evaluator evaluator, SplineType &amp;electrostatic_potential_coef, host_t&lt; DVectorFieldRTheta&lt; X, Y &gt; &gt; advection_field_xy) const</argsstring>
+        <name>compute_advection_field_XY</name>
+        <qualifiedname>AdvectionFieldFinder::compute_advection_field_XY</qualifiedname>
+        <param>
+          <type>Evaluator</type>
+          <declname>evaluator</declname>
+        </param>
+        <param>
+          <type>SplineType &amp;</type>
+          <declname>electrostatic_potential_coef</declname>
+        </param>
+        <param>
+          <type>host_t&lt; <ref refid="classVectorField" kindref="compound">DVectorFieldRTheta</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt; &gt;</type>
+          <declname>advection_field_xy</declname>
+        </param>
+        <briefdescription>
+<para>Compute the advection field along the physical axis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline evaluator used to evaluated electrostatic_potential_coef. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">electrostatic_potential_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline representation of the solution <formula id="57">$\phi$</formula> of the Poisson-like equation (2). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">advection_field_xy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The advection field on the physical axis. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="210" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="210" bodyend="335"/>
+      </memberdef>
+      <memberdef kind="function" id="classAdvectionFieldFinder_1ac33126b4e9484f801c0f87905669e5cc" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class SplineType</type>
+          </param>
+          <param>
+            <type>class Evaluator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void AdvectionFieldFinder&lt; Mapping &gt;::compute_advection_field_RTheta</definition>
+        <argsstring>(Evaluator evaluator, SplineType &amp;electrostatic_potential_coef, host_t&lt; DVectorFieldRTheta&lt; R, Theta &gt; &gt; advection_field_rtheta, CoordXY &amp;advection_field_xy_centre) const</argsstring>
+        <name>compute_advection_field_RTheta</name>
+        <qualifiedname>AdvectionFieldFinder::compute_advection_field_RTheta</qualifiedname>
+        <param>
+          <type>Evaluator</type>
+          <declname>evaluator</declname>
+        </param>
+        <param>
+          <type>SplineType &amp;</type>
+          <declname>electrostatic_potential_coef</declname>
+        </param>
+        <param>
+          <type>host_t&lt; <ref refid="classVectorField" kindref="compound">DVectorFieldRTheta</ref>&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
+          <declname>advection_field_rtheta</declname>
+        </param>
+        <param>
+          <type>CoordXY &amp;</type>
+          <declname>advection_field_xy_centre</declname>
+        </param>
+        <briefdescription>
+<para>Compute the advection field along the logical axis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline evaluator used to evaluated electrostatic_potential_coef. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">electrostatic_potential_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline representation of the solution <formula id="57">$\phi$</formula> of the Poisson-like equation (2). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">advection_field_rtheta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The advection field on the logical axis on an domain without O-point. It is expressed on the contravariant basis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">advection_field_xy_centre</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The advection field on the physical axis at the O-point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="440" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="440" bodyend="540"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The Vlasov-Poisson equations are given by</para>
+<para><itemizedlist>
+<listitem><para>(1) <formula id="32">$ \partial_t \rho + (E \wedge e_z) \cdot \nabla \rho = 0 $</formula>,</para>
+</listitem><listitem><para>(2) <formula id="33">$ - \nabla\cdot\nabla \phi = \rho  $</formula>,</para>
+</listitem><listitem><para>(3) <formula id="34">$ E = -\nabla \phi  $</formula>.</para>
+</listitem></itemizedlist>
+</para>
+<para>The functions are defined on a logical domain, and the mapping from the logical domain to the physical domain is written <formula id="35">$\mathcal{F}$</formula>.</para>
+<para>We here focus on equation (3). The <formula id="36">$ \phi $</formula> is already computed on B-splines with the given Poisson solver. Then in the AdvectionFieldFinder::operator() we compute the advection field ( <formula id="37">$A = E \wedge e_z$</formula>) thanks to (3) using the B-splines coefficients. Depending on the given mapping, the computation at the centre point is not always well-defined so we linearise around the centre point as explained in Edoardo Zoni&apos;s article (<ulink url="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</ulink>).</para>
+<para>The advection field can be computed along the logical domain axis or the physical domain axis.</para>
+<para>1- In the first case, we compute the electric field thanks to (3) and<itemizedlist>
+<listitem><para><formula id="38">$ \nabla_{x,y} \phi(r, \theta) = (J^{-1})^{T} \hat{\nabla}_{r,\theta} \phi(r, \theta) $</formula>,</para>
+</listitem><listitem><para><formula id="39">$ E(r, \theta) = -\nabla_{x,y} \phi(r, \theta) $</formula>,</para>
+</listitem></itemizedlist>
+</para>
+<para>For <formula id="40">$ r &lt; \varepsilon $</formula>, <formula id="41">$(J^{-1})^{T}$</formula> is ill-defined so we linearise  <formula id="42">$ E(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right)  E(0, \theta)
++ \frac{r}{\varepsilon} E(\varepsilon, \theta) $</formula>,</para>
+<para>with <formula id="43">$ E(0, \theta) $</formula> computed thanks to</para>
+<para><itemizedlist>
+<listitem><para><formula id="44">$ \partial_r \phi (0, \theta_1) = \left[\partial_r x  \partial_x \phi
++ \partial_r y  \partial_y \phi \right](0, \theta_1) $</formula>,</para>
+</listitem><listitem><para><formula id="45">$ \partial_r \phi (0, \theta_2) = \left[\partial_r x  \partial_x \phi
++ \partial_r y  \partial_y \phi \right] (0, \theta_2) $</formula>,</para>
+</listitem></itemizedlist>
+</para>
+<para>where <formula id="46">$ \theta_1 $</formula> and <formula id="47">$ \theta_2 $</formula> correspond to linearly independent directions.</para>
+<para>Then the advection field along the physical domain axis is given by <formula id="37">$A = E \wedge e_z$</formula>.</para>
+<para>2- In the second case, the advection field along the logical domain axis is computed with<itemizedlist>
+<listitem><para><formula id="48">$ \hat{\nabla} \phi = \sum_{i,j} \partial_{x_i} \phi g^{ij} e_j$</formula>,</para>
+</listitem><listitem><para>with <formula id="49">$g^{ij}$</formula>, the coefficients of the inverse metric tensor,</para>
+</listitem><listitem><para><formula id="50">$g_{jj}$</formula>, the coefficients of the metric tensor,</para>
+</listitem><listitem><para><formula id="51">$e_j$</formula>, the unnormalized local covariants vectors.</para>
+</listitem></itemizedlist>
+</para>
+<para>Then, we compute <formula id="52">$ \hat{E}_{r\theta} = -\hat{\nabla}_{r\theta} \phi $</formula> and <formula id="53">$ \hat{A}_{r\theta} = J^{-1}(J \hat{E}_{r\theta} \wedge e_z) $</formula>, with <formula id="54">$ J $</formula> the Jacobian matrix of the transformation <formula id="55">$ (r,\theta) \mapsto (x,y) $</formula>.</para>
+<para>The equation (1) is solved thanks to advection operator (<ref refid="classIAdvectionRTheta" kindref="compound">IAdvectionRTheta</ref>).</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A class describing a mapping from curvilinear coordinates to Cartesian coordinates.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="91" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="92" bodyend="541"/>
+    <listofallmembers>
+      <member refid="classAdvectionFieldFinder_1a3086cce87c971e57d63e4ee31c0dadb6" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>AdvectionFieldFinder</name></member>
+      <member refid="classAdvectionFieldFinder_1ac33126b4e9484f801c0f87905669e5cc" prot="private" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>compute_advection_field_RTheta</name></member>
+      <member refid="classAdvectionFieldFinder_1a8983689571c9eabb6cba669bab706083" prot="private" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>compute_advection_field_XY</name></member>
+      <member refid="classAdvectionFieldFinder_1afaf17208dfa7b5b4fbe953426a171910" prot="private" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>m_epsilon</name></member>
+      <member refid="classAdvectionFieldFinder_1a457cb9a50e24ab460559fdd96d164bc3" prot="private" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>m_mapping</name></member>
+      <member refid="classAdvectionFieldFinder_1a46c62cd714b9a75479695928a5057846" prot="private" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>m_polar_spline_evaluator</name></member>
+      <member refid="classAdvectionFieldFinder_1a0c98e53bab952f38d543d863f8d6e709" prot="private" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>m_spline_evaluator</name></member>
+      <member refid="classAdvectionFieldFinder_1adc93eaa4ffdf24734faae6857ee43730" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>Matrix_2x2</name></member>
+      <member refid="classAdvectionFieldFinder_1af47b6bde71aa5690521b491488645cd3" prot="private" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>n_overlap_cells</name></member>
+      <member refid="classAdvectionFieldFinder_1a6c48a3bdb689fb9a270698a6617f2cfb" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
+      <member refid="classAdvectionFieldFinder_1a1c94218e7996b38d562fa98ccd29dde5" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
+      <member refid="classAdvectionFieldFinder_1ab5d88aecc399886af415472b221a96d9" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
+      <member refid="classAdvectionFieldFinder_1af15aac72117e27547284dd75ac61caab" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
+      <member refid="classAdvectionFieldFinder_1acc3d3127eab43e311d98df8f05d4effb" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
+      <member refid="classAdvectionFieldFinder_1a8e53045ac695348dde5079bb7f7f1f73" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

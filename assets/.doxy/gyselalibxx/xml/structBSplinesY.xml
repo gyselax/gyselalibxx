@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structBSplinesY" kind="struct" language="C++" prot="public">
+    <compoundname>BSplinesY</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::conditional_t&lt; BsplineOnUniformCellsY, ddc::UniformBSplines&lt; Y, BSDegreeY &gt;, ddc::NonUniformBSplines&lt; Y, BSDegreeY &gt; &gt;</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">std::conditional_t&lt; BsplineOnUniformCellsY, ddc::UniformBSplines&lt; Y, BSDegreeY &gt;, ddc::NonUniformBSplines&lt; Y, BSDegreeY &gt; &gt;</basecompoundref>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>BSplinesY</label>
+        <link refid="structBSplinesY"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::conditional_t&lt; BsplineOnUniformCellsY, ddc::UniformBSplines&lt; Y, BSDegreeY &gt;, ddc::NonUniformBSplines&lt; Y, BSDegreeY &gt; &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>BSplinesY</label>
+        <link refid="structBSplinesY"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::conditional_t&lt; BsplineOnUniformCellsY, ddc::UniformBSplines&lt; Y, BSDegreeY &gt;, ddc::NonUniformBSplines&lt; Y, BSDegreeY &gt; &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="74" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="79" bodyend="80"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

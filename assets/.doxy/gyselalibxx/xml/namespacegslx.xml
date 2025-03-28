@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespacegslx" kind="namespace" language="C++">
+    <compoundname>gslx</compoundname>
+    <innernamespace refid="namespacegslx_1_1error">gslx::error</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>GSLX_ASSERT</para>
+<para>Use this macro to assert a condition. The assertions trigger only if GSLX_ASSERT_ENABLED is defined. Use that only for cheap assertion. The cost should be negligible compared to the computation.</para>
+<para>Example usage: <verbatim>GSLX_ASSERT(x &gt; 10);
+</verbatim> </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/assert.cpp" line="5" column="1"/>
+  </compounddef>
+</doxygen>

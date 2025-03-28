@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_5300298560c4bf255ab9f36681603d89" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping</compoundname>
+    <innerfile refid="barycentric__to__cartesian_8hpp">barycentric_to_cartesian.hpp</innerfile>
+    <innerfile refid="cartesian__to__barycentric_8hpp">cartesian_to_barycentric.hpp</innerfile>
+    <innerfile refid="cartesian__to__circular_8hpp">cartesian_to_circular.hpp</innerfile>
+    <innerfile refid="cartesian__to__czarny_8hpp">cartesian_to_czarny.hpp</innerfile>
+    <innerfile refid="circular__to__cartesian_8hpp">circular_to_cartesian.hpp</innerfile>
+    <innerfile refid="combined__mapping_8hpp">combined_mapping.hpp</innerfile>
+    <innerfile refid="czarny__to__cartesian_8hpp">czarny_to_cartesian.hpp</innerfile>
+    <innerfile refid="discrete__mapping__builder_8hpp">discrete_mapping_builder.hpp</innerfile>
+    <innerfile refid="discrete__to__cartesian_8hpp">discrete_to_cartesian.hpp</innerfile>
+    <innerfile refid="geometry__pseudo__cartesian_8hpp">geometry_pseudo_cartesian.hpp</innerfile>
+    <innerfile refid="inv__jacobian__o__point_8hpp">inv_jacobian_o_point.hpp</innerfile>
+    <innerfile refid="inverse__jacobian__matrix_8hpp">inverse_jacobian_matrix.hpp</innerfile>
+    <innerfile refid="mapping__tools_8hpp">mapping_tools.hpp</innerfile>
+    <innerfile refid="metric__tensor__evaluator_8hpp">metric_tensor_evaluator.hpp</innerfile>
+    <innerfile refid="vector__mapper_8hpp">vector_mapper.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/"/>
+  </compounddef>
+</doxygen>

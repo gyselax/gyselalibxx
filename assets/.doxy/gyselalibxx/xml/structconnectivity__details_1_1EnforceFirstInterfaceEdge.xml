@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structconnectivity__details_1_1EnforceFirstInterfaceEdge" kind="struct" language="C++" prot="public">
+    <compoundname>connectivity_details::EnforceFirstInterfaceEdge</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class InterfaceType</type>
+      </param>
+      <param>
+        <type>class FirstEdge</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>A class to flip the edges in an interface to ensure that the correct edge comes first. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>InterfaceType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interface being modified. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>FirstEdge</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The edge which should be first in the interface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="229" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="229" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,416 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classCartesianToBarycentric" kind="class" language="C++" prot="public">
+    <compoundname>CartesianToBarycentric</compoundname>
+    <includes refid="cartesian__to__barycentric_8hpp" local="no">cartesian_to_barycentric.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class <ref refid="structX" kindref="compound">X</ref></type>
+      </param>
+      <param>
+        <type>class <ref refid="structY" kindref="compound">Y</ref></type>
+      </param>
+      <param>
+        <type>class Corner1Tag</type>
+      </param>
+      <param>
+        <type>class Corner2Tag</type>
+      </param>
+      <param>
+        <type>class Corner3Tag</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classCartesianToBarycentric_1a70561133dc99e67073a2b6079b9fa71d" prot="public" static="no">
+        <type>Coord&lt; Corner1Tag, Corner2Tag, Corner3Tag &gt;</type>
+        <definition>using CartesianToBarycentric&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt;::CoordResult =  Coord&lt;Corner1Tag, Corner2Tag, Corner3Tag&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoordResult</name>
+        <qualifiedname>CartesianToBarycentric::CoordResult</qualifiedname>
+        <briefdescription>
+<para>The type of a coordinate in the barycentric coordinate system. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCartesianToBarycentric_1add315dc9c3efd0d306bf29b8f17bf03e" prot="public" static="no">
+        <type>Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
+        <definition>using CartesianToBarycentric&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt;::CoordArg =  Coord&lt;X, Y&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoordArg</name>
+        <qualifiedname>CartesianToBarycentric::CoordArg</qualifiedname>
+        <briefdescription>
+<para>The type of a coordinate in the Cartesian coordinate system. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classCartesianToBarycentric_1aefdd482dc0b9ca0c5807de92bb3ccc85" prot="private" static="no">
+        <type><ref refid="classCartesianToBarycentric_1add315dc9c3efd0d306bf29b8f17bf03e" kindref="member">CoordArg</ref></type>
+        <definition>using CartesianToBarycentric&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt;::CartesianCoord =  CoordArg</definition>
+        <argsstring></argsstring>
+        <name>CartesianCoord</name>
+        <qualifiedname>CartesianToBarycentric::CartesianCoord</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCartesianToBarycentric_1a7d2a8f92bb70902ab97c49afb344df86" prot="private" static="no">
+        <type><ref refid="classCartesianToBarycentric_1a70561133dc99e67073a2b6079b9fa71d" kindref="member">CoordResult</ref></type>
+        <definition>using CartesianToBarycentric&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt;::BarycentricCoord =  CoordResult</definition>
+        <argsstring></argsstring>
+        <name>BarycentricCoord</name>
+        <qualifiedname>CartesianToBarycentric::BarycentricCoord</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" line="34" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classCartesianToBarycentric_1ad792140f1db5c437f41e71c909773872" prot="private" static="no" mutable="no">
+        <type>CartesianCoord</type>
+        <definition>CartesianCoord CartesianToBarycentric&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt;::m_corner1</definition>
+        <argsstring></argsstring>
+        <name>m_corner1</name>
+        <qualifiedname>CartesianToBarycentric::m_corner1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" line="37" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCartesianToBarycentric_1a1ffe55d5a4ee7a22dce11c208b49813b" prot="private" static="no" mutable="no">
+        <type>CartesianCoord</type>
+        <definition>CartesianCoord CartesianToBarycentric&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt;::m_corner2</definition>
+        <argsstring></argsstring>
+        <name>m_corner2</name>
+        <qualifiedname>CartesianToBarycentric::m_corner2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" line="38" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCartesianToBarycentric_1a9411aea5564ee903275f400d3acf4384" prot="private" static="no" mutable="no">
+        <type>CartesianCoord</type>
+        <definition>CartesianCoord CartesianToBarycentric&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt;::m_corner3</definition>
+        <argsstring></argsstring>
+        <name>m_corner3</name>
+        <qualifiedname>CartesianToBarycentric::m_corner3</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" line="39" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classCartesianToBarycentric_1a514ac235da951a1244287d856038ab93" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>CartesianToBarycentric&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt;::CartesianToBarycentric</definition>
+        <argsstring>(CartesianCoord const &amp;corner1, CartesianCoord const &amp;corner2, CartesianCoord const &amp;corner3)</argsstring>
+        <name>CartesianToBarycentric</name>
+        <qualifiedname>CartesianToBarycentric::CartesianToBarycentric</qualifiedname>
+        <param>
+          <type>CartesianCoord const &amp;</type>
+          <declname>corner1</declname>
+        </param>
+        <param>
+          <type>CartesianCoord const &amp;</type>
+          <declname>corner2</declname>
+        </param>
+        <param>
+          <type>CartesianCoord const &amp;</type>
+          <declname>corner3</declname>
+        </param>
+        <briefdescription>
+<para>Construct the operator which converts between the coordinate systems. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">corner1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinates of the first corner of the triangle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">corner2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinates of the second corner of the triangle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">corner3</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinates of the third corner of the triangle. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" line="49" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" bodystart="49" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classCartesianToBarycentric_1adb730bda6cb339a0f2f0ac6283421de1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>CartesianToBarycentric&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt;::CartesianToBarycentric</definition>
+        <argsstring>(CartesianToBarycentric const &amp;other)=default</argsstring>
+        <name>CartesianToBarycentric</name>
+        <qualifiedname>CartesianToBarycentric::CartesianToBarycentric</qualifiedname>
+        <param>
+          <type><ref refid="classCartesianToBarycentric" kindref="compound">CartesianToBarycentric</ref> const &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>A copy operator for the mapping operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The object to be copied. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" line="63" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classCartesianToBarycentric_1a146760dbe7d05e8e849472b07b05f350" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>CartesianToBarycentric&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt;::CartesianToBarycentric</definition>
+        <argsstring>(CartesianToBarycentric &amp;&amp;x)=default</argsstring>
+        <name>CartesianToBarycentric</name>
+        <qualifiedname>CartesianToBarycentric::CartesianToBarycentric</qualifiedname>
+        <param>
+          <type><ref refid="classCartesianToBarycentric" kindref="compound">CartesianToBarycentric</ref> &amp;&amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>A r-value copy operator for the mapping operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The object to be consumed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" line="69" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classCartesianToBarycentric_1a061b577c34c83c47795c4ee00857a35a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>CartesianToBarycentric&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt;::~CartesianToBarycentric</definition>
+        <argsstring>()=default</argsstring>
+        <name>~CartesianToBarycentric</name>
+        <qualifiedname>CartesianToBarycentric::~CartesianToBarycentric</qualifiedname>
+        <briefdescription>
+<para>The destructor of the mapping operator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" line="72" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classCartesianToBarycentric_1ab1f8285c12aa2bc54048b7ff1000c5cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classCartesianToBarycentric" kindref="compound">CartesianToBarycentric</ref> &amp;</type>
+        <definition>CartesianToBarycentric &amp; CartesianToBarycentric&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt;::operator=</definition>
+        <argsstring>(CartesianToBarycentric const &amp;x)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>CartesianToBarycentric::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classCartesianToBarycentric" kindref="compound">CartesianToBarycentric</ref> const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>A copy operator for the mapping operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The object to be copied. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to this class instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" line="79" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classCartesianToBarycentric_1aa08861cb08d34846d4ccb4d4c8d2ca73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classCartesianToBarycentric" kindref="compound">CartesianToBarycentric</ref> &amp;</type>
+        <definition>CartesianToBarycentric &amp; CartesianToBarycentric&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt;::operator=</definition>
+        <argsstring>(CartesianToBarycentric &amp;&amp;x)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>CartesianToBarycentric::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classCartesianToBarycentric" kindref="compound">CartesianToBarycentric</ref> &amp;&amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>A r-value copy operator for the mapping operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The object to be consumed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to this class instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" line="86" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classCartesianToBarycentric_1a2a067e2af8444be27e98f571604aa939" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION <ref refid="classCartesianToBarycentric_1a70561133dc99e67073a2b6079b9fa71d" kindref="member">CoordResult</ref></type>
+        <definition>KOKKOS_FUNCTION CoordResult CartesianToBarycentric&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt;::operator()</definition>
+        <argsstring>(CoordArg const &amp;pos) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>CartesianToBarycentric::operator()</qualifiedname>
+        <param>
+          <type><ref refid="classCartesianToBarycentric_1add315dc9c3efd0d306bf29b8f17bf03e" kindref="member">CoordArg</ref> const &amp;</type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>The operator to get the equivalent barycentric coordinate of the Cartesian coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The known Cartesian coordinate.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The equivalent barycentric coordinate. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" line="95" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" bodystart="95" bodyend="111"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class to convert Cartesian coordinates to barycentric coordinates on a triangle. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Tags are used to identify the corners of the triangle. This ensures that there are different types for coordinate systems related to different triangles.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structX" kindref="compound">X</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The tag of the x dimension of the Cartesian coordinates. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structY" kindref="compound">Y</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The tag of the y dimension of the Cartesian coordinates. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Corner1Tag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A tag identifying the first corner of the triangle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Corner2Tag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A tag identifying the second corner of the triangle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Corner3Tag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A tag identifying the third corner of the triangle. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" line="23" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp" bodystart="24" bodyend="112"/>
+    <listofallmembers>
+      <member refid="classCartesianToBarycentric_1a7d2a8f92bb70902ab97c49afb344df86" prot="private" virt="non-virtual"><scope>CartesianToBarycentric</scope><name>BarycentricCoord</name></member>
+      <member refid="classCartesianToBarycentric_1aefdd482dc0b9ca0c5807de92bb3ccc85" prot="private" virt="non-virtual"><scope>CartesianToBarycentric</scope><name>CartesianCoord</name></member>
+      <member refid="classCartesianToBarycentric_1a514ac235da951a1244287d856038ab93" prot="public" virt="non-virtual"><scope>CartesianToBarycentric</scope><name>CartesianToBarycentric</name></member>
+      <member refid="classCartesianToBarycentric_1adb730bda6cb339a0f2f0ac6283421de1" prot="public" virt="non-virtual"><scope>CartesianToBarycentric</scope><name>CartesianToBarycentric</name></member>
+      <member refid="classCartesianToBarycentric_1a146760dbe7d05e8e849472b07b05f350" prot="public" virt="non-virtual"><scope>CartesianToBarycentric</scope><name>CartesianToBarycentric</name></member>
+      <member refid="classCartesianToBarycentric_1add315dc9c3efd0d306bf29b8f17bf03e" prot="public" virt="non-virtual"><scope>CartesianToBarycentric</scope><name>CoordArg</name></member>
+      <member refid="classCartesianToBarycentric_1a70561133dc99e67073a2b6079b9fa71d" prot="public" virt="non-virtual"><scope>CartesianToBarycentric</scope><name>CoordResult</name></member>
+      <member refid="classCartesianToBarycentric_1ad792140f1db5c437f41e71c909773872" prot="private" virt="non-virtual"><scope>CartesianToBarycentric</scope><name>m_corner1</name></member>
+      <member refid="classCartesianToBarycentric_1a1ffe55d5a4ee7a22dce11c208b49813b" prot="private" virt="non-virtual"><scope>CartesianToBarycentric</scope><name>m_corner2</name></member>
+      <member refid="classCartesianToBarycentric_1a9411aea5564ee903275f400d3acf4384" prot="private" virt="non-virtual"><scope>CartesianToBarycentric</scope><name>m_corner3</name></member>
+      <member refid="classCartesianToBarycentric_1a2a067e2af8444be27e98f571604aa939" prot="public" virt="non-virtual"><scope>CartesianToBarycentric</scope><name>operator()</name></member>
+      <member refid="classCartesianToBarycentric_1ab1f8285c12aa2bc54048b7ff1000c5cc" prot="public" virt="non-virtual"><scope>CartesianToBarycentric</scope><name>operator=</name></member>
+      <member refid="classCartesianToBarycentric_1aa08861cb08d34846d4ccb4d4c8d2ca73" prot="public" virt="non-virtual"><scope>CartesianToBarycentric</scope><name>operator=</name></member>
+      <member refid="classCartesianToBarycentric_1a061b577c34c83c47795c4ee00857a35a" prot="public" virt="non-virtual"><scope>CartesianToBarycentric</scope><name>~CartesianToBarycentric</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

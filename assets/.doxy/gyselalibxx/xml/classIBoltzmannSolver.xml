@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classIBoltzmannSolver" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>IBoltzmannSolver</compoundname>
+    <derivedcompoundref refid="classSplitRightHandSideSolver" prot="public" virt="non-virtual">SplitRightHandSideSolver</derivedcompoundref>
+    <derivedcompoundref refid="classSplitVlasovSolver" prot="public" virt="non-virtual">SplitVlasovSolver</derivedcompoundref>
+    <includes refid="iboltzmannsolver_8hpp" local="no">iboltzmannsolver.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classIBoltzmannSolver_1adedfcbd6d713c24cd39272d512ae8f1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual IBoltzmannSolver::~IBoltzmannSolver</definition>
+        <argsstring>()=default</argsstring>
+        <name>~IBoltzmannSolver</name>
+        <qualifiedname>IBoltzmannSolver::~IBoltzmannSolver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/boltzmann/iboltzmannsolver.hpp" line="13" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classIBoltzmannSolver_1aedf19fb0ae7e0bf80729c9f761ee20ed" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>DFieldSpXVx</type>
+        <definition>virtual DFieldSpXVx IBoltzmannSolver::operator()</definition>
+        <argsstring>(DFieldSpXVx allfdistribu, DConstFieldX efield, double dt) const =0</argsstring>
+        <name>operator()</name>
+        <qualifiedname>IBoltzmannSolver::operator()</qualifiedname>
+        <reimplementedby refid="classSplitRightHandSideSolver_1a350971eed31753861f6e2917b9b6b968">operator()</reimplementedby>
+        <reimplementedby refid="classSplitVlasovSolver_1a958b142757ef330191c9c25188294f15">operator()</reimplementedby>
+        <param>
+          <type>DFieldSpXVx</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>DConstFieldX</type>
+          <declname>efield</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+<para>Operator for solving the Boltzmann equation on one timestep. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On input : the initial value of the distribution function. On output : the value of the distribution function after solving the Boltzmann equation on one timestep. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">efield</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The electric field computed at every spatial position. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The timestep. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The distribution function after solving the Boltzmann equation. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/boltzmann/iboltzmannsolver.hpp" line="24" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>An abstract class for solving a Boltzmann equation. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>IBoltzmannSolver</label>
+        <link refid="classIBoltzmannSolver"/>
+      </node>
+      <node id="2">
+        <label>SplitRightHandSideSolver</label>
+        <link refid="classSplitRightHandSideSolver"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SplitVlasovSolver</label>
+        <link refid="classSplitVlasovSolver"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/boltzmann/iboltzmannsolver.hpp" line="10" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/boltzmann/iboltzmannsolver.hpp" bodystart="11" bodyend="26"/>
+    <listofallmembers>
+      <member refid="classIBoltzmannSolver_1aedf19fb0ae7e0bf80729c9f761ee20ed" prot="public" virt="pure-virtual"><scope>IBoltzmannSolver</scope><name>operator()</name></member>
+      <member refid="classIBoltzmannSolver_1adedfcbd6d713c24cd39272d512ae8f1b" prot="public" virt="virtual"><scope>IBoltzmannSolver</scope><name>~IBoltzmannSolver</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

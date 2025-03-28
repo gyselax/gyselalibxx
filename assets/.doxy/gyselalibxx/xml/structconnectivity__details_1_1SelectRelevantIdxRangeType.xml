@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structconnectivity__details_1_1SelectRelevantIdxRangeType" kind="struct" language="C++" prot="public">
+    <compoundname>connectivity_details::SelectRelevantIdxRangeType</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class QueryGrid1D</type>
+      </param>
+      <param>
+        <type>class IdxRangeType</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>A class to create a type sequence which contains the index range if it can be used to index the grid. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>QueryGrid1D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The grid which may or may not be present in the index range. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IdxRangeType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range type being checked. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="552" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="552" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

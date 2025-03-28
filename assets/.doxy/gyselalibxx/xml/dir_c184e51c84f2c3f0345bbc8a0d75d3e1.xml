@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_c184e51c84f2c3f0345bbc8a0d75d3e1" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io</compoundname>
+    <innerfile refid="input_8cpp">input.cpp</innerfile>
+    <innerfile refid="input_8hpp">input.hpp</innerfile>
+    <innerfile refid="output_8hpp">output.hpp</innerfile>
+    <innerfile refid="pdi__helper_8hpp">pdi_helper.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/"/>
+  </compounddef>
+</doxygen>

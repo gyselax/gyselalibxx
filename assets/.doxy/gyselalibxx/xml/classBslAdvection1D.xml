@@ -1,0 +1,659 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classBslAdvection1D" kind="class" language="C++" prot="public">
+    <compoundname>BslAdvection1D</compoundname>
+    <includes refid="bsl__advection__1d_8hpp" local="no">bsl_advection_1d.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class GridInterest</type>
+      </param>
+      <param>
+        <type>class IdxRangeAdvection</type>
+      </param>
+      <param>
+        <type>class IdxRangeFunction</type>
+      </param>
+      <param>
+        <type>class AdvectionFieldBuilder</type>
+      </param>
+      <param>
+        <type>class AdvectionFieldEvaluator</type>
+      </param>
+      <param>
+        <type>class TimeStepper</type>
+        <defval><ref refid="classEuler" kindref="compound">Euler</ref>&lt;FieldMem&lt;                        Coord&lt;typename GridInterest::continuous_dimension_type&gt;,                        IdxRangeAdvection&gt;,                DFieldMem&lt;IdxRangeAdvection&gt;&gt;</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classBslAdvection1D_1a0996b693977e61dbbace09073d40a92f" prot="private" static="no">
+        <type>typename IdxRangeAdvection::discrete_element_type</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::IdxAdvection =  typename IdxRangeAdvection::discrete_element_type</definition>
+        <argsstring></argsstring>
+        <name>IdxAdvection</name>
+        <qualifiedname>BslAdvection1D::IdxAdvection</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="66" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1ab36f0187be8b1f56073da6afca870606" prot="private" static="no">
+        <type>typename IdxRangeFunction::discrete_element_type</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::IdxFunction =  typename IdxRangeFunction::discrete_element_type</definition>
+        <argsstring></argsstring>
+        <name>IdxFunction</name>
+        <qualifiedname>BslAdvection1D::IdxFunction</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1ab0bb90f023da9f5b3e84e431fd6b1e0f" prot="private" static="no">
+        <type>typename GridInterest::continuous_dimension_type</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::DimInterest =  typename GridInterest::continuous_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>DimInterest</name>
+        <qualifiedname>BslAdvection1D::DimInterest</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="72" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1aa1f7a18b84f42d918786e3b3a2319e92" prot="private" static="no">
+        <type>Coord&lt; DimInterest &gt;</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::CoordInterest =  Coord&lt;DimInterest&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoordInterest</name>
+        <qualifiedname>BslAdvection1D::CoordInterest</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="73" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1a43a0cde49c5d68402de2ef703272a484" prot="private" static="no">
+        <type>IdxRange&lt; GridInterest &gt;</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::IdxRangeInterest =  IdxRange&lt;GridInterest&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeInterest</name>
+        <qualifiedname>BslAdvection1D::IdxRangeInterest</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="74" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1a9a71f16dd1c80959d4d5ac586e6fd05e" prot="private" static="no">
+        <type>typename IdxRangeInterest::discrete_element_type</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::IdxInterest =  typename IdxRangeInterest::discrete_element_type</definition>
+        <argsstring></argsstring>
+        <name>IdxInterest</name>
+        <qualifiedname>BslAdvection1D::IdxInterest</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="75" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1a838fdb38632c5c89b023b060a78cc1e7" prot="private" static="no">
+        <type>FieldMem&lt; CoordInterest, IdxRangeAdvection &gt;</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::FeetFieldMem =  FieldMem&lt;CoordInterest, IdxRangeAdvection&gt;</definition>
+        <argsstring></argsstring>
+        <name>FeetFieldMem</name>
+        <qualifiedname>BslAdvection1D::FeetFieldMem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="78" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1a2a7966fc2f138afe441555f2f5dee540" prot="private" static="no">
+        <type>typename FeetFieldMem::span_type</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::FeetField =  typename FeetFieldMem::span_type</definition>
+        <argsstring></argsstring>
+        <name>FeetField</name>
+        <qualifiedname>BslAdvection1D::FeetField</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="79" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1a5b1490a6ecf1025c649336cf6947ac37" prot="private" static="no">
+        <type>typename FeetFieldMem::view_type</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::FeetConstField =  typename FeetFieldMem::view_type</definition>
+        <argsstring></argsstring>
+        <name>FeetConstField</name>
+        <qualifiedname>BslAdvection1D::FeetConstField</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="80" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1a04c3d32914cdeb0c31bc3932eac80c4e" prot="private" static="no">
+        <type>DFieldMem&lt; IdxRangeAdvection &gt;</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::AdvecFieldMem =  DFieldMem&lt;IdxRangeAdvection&gt;</definition>
+        <argsstring></argsstring>
+        <name>AdvecFieldMem</name>
+        <qualifiedname>BslAdvection1D::AdvecFieldMem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="82" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1a258e3c3483313645cb8db29ede6881d6" prot="private" static="no">
+        <type>typename AdvecFieldMem::span_type</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::AdvecField =  typename AdvecFieldMem::span_type</definition>
+        <argsstring></argsstring>
+        <name>AdvecField</name>
+        <qualifiedname>BslAdvection1D::AdvecField</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="83" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1ac9c29f5e35b448444fdbe9f038059160" prot="private" static="no">
+        <type>DField&lt; IdxRangeFunction &gt;</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::FunctionField =  DField&lt;IdxRangeFunction&gt;</definition>
+        <argsstring></argsstring>
+        <name>FunctionField</name>
+        <qualifiedname>BslAdvection1D::FunctionField</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="85" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1ad4e1e527fb240ac6d797439fec7ed19d" prot="private" static="no">
+        <type>typename AdvectionFieldBuilder::batched_spline_domain_type</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::IdxRangeBSAdvection =  typename AdvectionFieldBuilder::batched_spline_domain_type</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeBSAdvection</name>
+        <qualifiedname>BslAdvection1D::IdxRangeBSAdvection</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1ac532261ba9c54f779bc90782e9b842aa" prot="private" static="no">
+        <type>DFieldMem&lt; IdxRangeBSAdvection &gt;</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::AdvecFieldSplineMem =  DFieldMem&lt;IdxRangeBSAdvection&gt;</definition>
+        <argsstring></argsstring>
+        <name>AdvecFieldSplineMem</name>
+        <qualifiedname>BslAdvection1D::AdvecFieldSplineMem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="89" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1ad3a9cef0bf1239bb6a28e5cd4537d1a8" prot="private" static="no">
+        <type>DField&lt; IdxRangeBSAdvection &gt;</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::AdvecFieldSplineCoeffs =  DField&lt;IdxRangeBSAdvection&gt;</definition>
+        <argsstring></argsstring>
+        <name>AdvecFieldSplineCoeffs</name>
+        <qualifiedname>BslAdvection1D::AdvecFieldSplineCoeffs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="90" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1a60ed7c8bb7052e29abd13c8b1fcba5f6" prot="private" static="no">
+        <type>ddc::Deriv&lt; DimInterest &gt;</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::DerivDim =  ddc::Deriv&lt;DimInterest&gt;</definition>
+        <argsstring></argsstring>
+        <name>DerivDim</name>
+        <qualifiedname>BslAdvection1D::DerivDim</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="93" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1a19d27590fb6b218cae8505ef2baf274e" prot="private" static="no">
+        <type>ddc::replace_dim_of_t&lt; IdxRangeAdvection, GridInterest, DerivDim &gt;</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::IdxRangeAdvecFieldDeriv =  ddc::replace_dim_of_t&lt;IdxRangeAdvection, GridInterest, DerivDim&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeAdvecFieldDeriv</name>
+        <qualifiedname>BslAdvection1D::IdxRangeAdvecFieldDeriv</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="94" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1a62a6a0897fd7c4e4d9c0c9ddbfda6c62" prot="private" static="no">
+        <type>Field&lt; const double, IdxRangeAdvecFieldDeriv &gt;</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::AdvecFieldDerivConstField =  Field&lt;const double, IdxRangeAdvecFieldDeriv&gt;</definition>
+        <argsstring></argsstring>
+        <name>AdvecFieldDerivConstField</name>
+        <qualifiedname>BslAdvection1D::AdvecFieldDerivConstField</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="96" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1af754ecb866db219fb7556796047a7a5a" prot="private" static="no">
+        <type>interpolator_on_idx_range_t&lt; <ref refid="classIPreallocatableInterpolator" kindref="compound">IPreallocatableInterpolator</ref>, GridInterest, IdxRangeFunction &gt;</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::FunctionPreallocatableInterpolatorType =  interpolator_on_idx_range_t&lt; IPreallocatableInterpolator, GridInterest, IdxRangeFunction&gt;</definition>
+        <argsstring></argsstring>
+        <name>FunctionPreallocatableInterpolatorType</name>
+        <qualifiedname>BslAdvection1D::FunctionPreallocatableInterpolatorType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="100" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1a5da12d33f6861ee5d8d48be4644209a1" prot="private" static="no">
+        <type>interpolator_on_idx_range_t&lt; <ref refid="classIInterpolator" kindref="compound">IInterpolator</ref>, GridInterest, IdxRangeFunction &gt;</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::FunctionInterpolatorType =  interpolator_on_idx_range_t&lt;IInterpolator, GridInterest, IdxRangeFunction&gt;</definition>
+        <argsstring></argsstring>
+        <name>FunctionInterpolatorType</name>
+        <qualifiedname>BslAdvection1D::FunctionInterpolatorType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="104" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1affe864a0f821b367d52e65c6d997dcbd" prot="private" static="no">
+        <type>typename FunctionInterpolatorType::batched_derivs_idx_range_type</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::IdxRangeFunctionDeriv =  typename FunctionInterpolatorType::batched_derivs_idx_range_type</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeFunctionDeriv</name>
+        <qualifiedname>BslAdvection1D::IdxRangeFunctionDeriv</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="108" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvection1D_1a59b910fb4007cc0eff44574178a90be9" prot="private" static="no">
+        <type>DFieldMem&lt; IdxRangeFunctionDeriv &gt;</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::FunctionDerivFieldMem =  DFieldMem&lt;IdxRangeFunctionDeriv&gt;</definition>
+        <argsstring></argsstring>
+        <name>FunctionDerivFieldMem</name>
+        <qualifiedname>BslAdvection1D::FunctionDerivFieldMem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="109" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="109" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classBslAdvection1D_1a91809c90211ee339d12375528ffeaa99" prot="private" static="no" mutable="no">
+        <type>FunctionPreallocatableInterpolatorType const  &amp;</type>
+        <definition>FunctionPreallocatableInterpolatorType const&amp; BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::m_function_interpolator</definition>
+        <argsstring></argsstring>
+        <name>m_function_interpolator</name>
+        <qualifiedname>BslAdvection1D::m_function_interpolator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="111" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classBslAdvection1D_1a1d37a2d009c65d63de04f1bca3b3a451" prot="private" static="no" mutable="no">
+        <type>AdvectionFieldBuilder const  &amp;</type>
+        <definition>AdvectionFieldBuilder const&amp; BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::m_adv_field_builder</definition>
+        <argsstring></argsstring>
+        <name>m_adv_field_builder</name>
+        <qualifiedname>BslAdvection1D::m_adv_field_builder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="113" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classBslAdvection1D_1a7d983ad5e4ee050ca8e1bd0141f7c184" prot="private" static="no" mutable="no">
+        <type>AdvectionFieldEvaluator const  &amp;</type>
+        <definition>AdvectionFieldEvaluator const&amp; BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::m_adv_field_evaluator</definition>
+        <argsstring></argsstring>
+        <name>m_adv_field_evaluator</name>
+        <qualifiedname>BslAdvection1D::m_adv_field_evaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="114" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classBslAdvection1D_1a806153ec462ed69d874a460bbb52a12f" prot="private" static="no" mutable="no">
+        <type>TimeStepper const  &amp;</type>
+        <definition>TimeStepper const&amp; BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::m_time_stepper</definition>
+        <argsstring></argsstring>
+        <name>m_time_stepper</name>
+        <qualifiedname>BslAdvection1D::m_time_stepper</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="116" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="116" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classBslAdvection1D_1a7ae25b90d5ed98e07638f207bb18a0a6" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::BslAdvection1D</definition>
+        <argsstring>(FunctionPreallocatableInterpolatorType const &amp;function_interpolator, AdvectionFieldBuilder const &amp;adv_field_builder, AdvectionFieldEvaluator const &amp;adv_field_evaluator, TimeStepper const &amp;time_stepper)</argsstring>
+        <name>BslAdvection1D</name>
+        <qualifiedname>BslAdvection1D::BslAdvection1D</qualifiedname>
+        <param>
+          <type>FunctionPreallocatableInterpolatorType const &amp;</type>
+          <declname>function_interpolator</declname>
+        </param>
+        <param>
+          <type>AdvectionFieldBuilder const &amp;</type>
+          <declname>adv_field_builder</declname>
+        </param>
+        <param>
+          <type>AdvectionFieldEvaluator const &amp;</type>
+          <declname>adv_field_evaluator</declname>
+        </param>
+        <param>
+          <type>TimeStepper const &amp;</type>
+          <declname>time_stepper</declname>
+        </param>
+        <briefdescription>
+<para>Constructor when the advection index range and the function index range are different. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>When IdxRangeAdvection and IdxRangeFunction are different, we need one interpolator for each index range.</para>
+<para>We can also use it when we want two different interpolators but defined on the same index range (e.g. different boundary conditions for the evaluators).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">function_interpolator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>interpolator along the GridInterest direction to interpolate the advected function (allfdistribu) on the index range of the function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">adv_field_builder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>builder along the GridInterest direction to build a spline representation of the advection field on the function index range. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">adv_field_evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>evaluator along the GridInterest direction to evaluate the advection field spline representation on the function index range. <linebreak/>
+ </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">time_stepper</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>time integration method for the characteristic equation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="136" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="136" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classBslAdvection1D_1a39d23b247f9017824d2a49e292235d24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::~BslAdvection1D</definition>
+        <argsstring>()=default</argsstring>
+        <name>~BslAdvection1D</name>
+        <qualifiedname>BslAdvection1D::~BslAdvection1D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="148" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classBslAdvection1D_1ab6c09fdec0ac2ec060d846a03a775766" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>FunctionField</type>
+        <definition>FunctionField BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::operator()</definition>
+        <argsstring>(FunctionField const allfdistribu, AdvecField const advection_field, double const dt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_min=std::nullopt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_max=std::nullopt) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>BslAdvection1D::operator()</qualifiedname>
+        <param>
+          <type>FunctionField const</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>AdvecField const</type>
+          <declname>advection_field</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; AdvecFieldDerivConstField &gt; const</type>
+          <declname>advection_field_derivatives_min</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <param>
+          <type>std::optional&lt; AdvecFieldDerivConstField &gt; const</type>
+          <declname>advection_field_derivatives_max</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <briefdescription>
+<para>Advects allfdistribu along the advection dimension GridInterest for a duration dt. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the advected function, allocated on the device </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">advection_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the advection field, allocated on the device. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">advection_field_derivatives_min</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the advection field derivatives at the left side of the interest dimension, allocated on the device. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">advection_field_derivatives_max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the advection field derivatives at the right side of the interest dimension, allocated on the device. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time step.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to the allfdistribu array after advection on dt. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="163" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="163" bodyend="269"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class which computes the advection along the dimension of interest GridInterest. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This operator solves the following equation type</para>
+<para><formula id="0">$ \partial_t f_s(t,x) + A_{s, x_i} (x&apos;) \cdot \partial_{x_i} f_s (t, x) = 0, \qquad x\in \Omega, x&apos;\in\Omega&apos;$</formula></para>
+<para>with<itemizedlist>
+<listitem><para><formula id="1">$ f $</formula>, a function defined on an index range <formula id="2">$ \Omega $</formula>;</para>
+</listitem><listitem><para><formula id="3">$ A $</formula>, an advection field defined on subindex range <formula id="4">$ \Omega&apos;\subset \Omega $</formula>;</para>
+</listitem><listitem><para><formula id="5">$ x_i $</formula>, an advection dimension.</para>
+</listitem></itemizedlist>
+</para>
+<para>The characteristic equation is solved on the advection index range <formula id="6">$ \Omega&apos;$</formula>. Then the feet on <formula id="7">$ \Omega$</formula> are computed from the characteristic feet on <formula id="6">$ \Omega&apos;$</formula> and the function <formula id="1">$ f $</formula> is interpolated at the feet in <formula id="2">$ \Omega $</formula>.</para>
+<para>The characteristic equation is solved using a time integration method (<ref refid="classITimeStepper" kindref="compound">ITimeStepper</ref>).</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>GridInterest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimension along which the advection is computed. It refers to the dimension of <formula id="5">$ x_i $</formula> in the equation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IdxRangeAdvection</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range <formula id="8">$ \Omega&apos; $</formula> where the characteristic equation is solved. It also refers to the index range of the advection field. It had to also be defined on the GridInterest for the time integration method. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IdxRangeFunction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range <formula id="2">$ \Omega $</formula> where allfdistribu is defined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>AdvectionFieldBuilder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the spline builder for the advection field (see SplineBuilder). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>AdvectionFieldEvaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the spline evaluator for the advection field (see SplineEvaluator). <linebreak/>
+ </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TimeStepper</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time integration method applied to solve the characteristic equation. The method is picked among the child classes of <ref refid="classITimeStepper" kindref="compound">ITimeStepper</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="62" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="63" bodyend="270"/>
+    <listofallmembers>
+      <member refid="classBslAdvection1D_1a258e3c3483313645cb8db29ede6881d6" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>AdvecField</name></member>
+      <member refid="classBslAdvection1D_1a62a6a0897fd7c4e4d9c0c9ddbfda6c62" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>AdvecFieldDerivConstField</name></member>
+      <member refid="classBslAdvection1D_1a04c3d32914cdeb0c31bc3932eac80c4e" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>AdvecFieldMem</name></member>
+      <member refid="classBslAdvection1D_1ad3a9cef0bf1239bb6a28e5cd4537d1a8" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>AdvecFieldSplineCoeffs</name></member>
+      <member refid="classBslAdvection1D_1ac532261ba9c54f779bc90782e9b842aa" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>AdvecFieldSplineMem</name></member>
+      <member refid="classBslAdvection1D_1a7ae25b90d5ed98e07638f207bb18a0a6" prot="public" virt="non-virtual"><scope>BslAdvection1D</scope><name>BslAdvection1D</name></member>
+      <member refid="classBslAdvection1D_1aa1f7a18b84f42d918786e3b3a2319e92" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>CoordInterest</name></member>
+      <member refid="classBslAdvection1D_1a60ed7c8bb7052e29abd13c8b1fcba5f6" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>DerivDim</name></member>
+      <member refid="classBslAdvection1D_1ab0bb90f023da9f5b3e84e431fd6b1e0f" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>DimInterest</name></member>
+      <member refid="classBslAdvection1D_1a5b1490a6ecf1025c649336cf6947ac37" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>FeetConstField</name></member>
+      <member refid="classBslAdvection1D_1a2a7966fc2f138afe441555f2f5dee540" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>FeetField</name></member>
+      <member refid="classBslAdvection1D_1a838fdb38632c5c89b023b060a78cc1e7" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>FeetFieldMem</name></member>
+      <member refid="classBslAdvection1D_1a59b910fb4007cc0eff44574178a90be9" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>FunctionDerivFieldMem</name></member>
+      <member refid="classBslAdvection1D_1ac9c29f5e35b448444fdbe9f038059160" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>FunctionField</name></member>
+      <member refid="classBslAdvection1D_1a5da12d33f6861ee5d8d48be4644209a1" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>FunctionInterpolatorType</name></member>
+      <member refid="classBslAdvection1D_1af754ecb866db219fb7556796047a7a5a" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>FunctionPreallocatableInterpolatorType</name></member>
+      <member refid="classBslAdvection1D_1a0996b693977e61dbbace09073d40a92f" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>IdxAdvection</name></member>
+      <member refid="classBslAdvection1D_1ab36f0187be8b1f56073da6afca870606" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>IdxFunction</name></member>
+      <member refid="classBslAdvection1D_1a9a71f16dd1c80959d4d5ac586e6fd05e" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>IdxInterest</name></member>
+      <member refid="classBslAdvection1D_1a19d27590fb6b218cae8505ef2baf274e" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>IdxRangeAdvecFieldDeriv</name></member>
+      <member refid="classBslAdvection1D_1ad4e1e527fb240ac6d797439fec7ed19d" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>IdxRangeBSAdvection</name></member>
+      <member refid="classBslAdvection1D_1affe864a0f821b367d52e65c6d997dcbd" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>IdxRangeFunctionDeriv</name></member>
+      <member refid="classBslAdvection1D_1a43a0cde49c5d68402de2ef703272a484" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>IdxRangeInterest</name></member>
+      <member refid="classBslAdvection1D_1a1d37a2d009c65d63de04f1bca3b3a451" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>m_adv_field_builder</name></member>
+      <member refid="classBslAdvection1D_1a7d983ad5e4ee050ca8e1bd0141f7c184" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>m_adv_field_evaluator</name></member>
+      <member refid="classBslAdvection1D_1a91809c90211ee339d12375528ffeaa99" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>m_function_interpolator</name></member>
+      <member refid="classBslAdvection1D_1a806153ec462ed69d874a460bbb52a12f" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>m_time_stepper</name></member>
+      <member refid="classBslAdvection1D_1ab6c09fdec0ac2ec060d846a03a775766" prot="public" virt="non-virtual"><scope>BslAdvection1D</scope><name>operator()</name></member>
+      <member refid="classBslAdvection1D_1a39d23b247f9017824d2a49e292235d24" prot="public" virt="non-virtual"><scope>BslAdvection1D</scope><name>~BslAdvection1D</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

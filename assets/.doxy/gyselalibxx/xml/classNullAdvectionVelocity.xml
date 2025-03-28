@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classNullAdvectionVelocity" kind="class" language="C++" prot="public">
+    <compoundname>NullAdvectionVelocity</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">IAdvectionV&lt; IdxRangeFdistribu, IdxRangeSpatial &gt;</basecompoundref>
+    <includes refid="nulladvectionvx_8hpp" local="no">nulladvectionvx.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class IdxRangeFdistribu</type>
+      </param>
+      <param>
+        <type>class IdxRangeSpatial</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classNullAdvectionVelocity_1a19f44b08bccfdad9a2a6e79781f8cb53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>NullAdvectionVelocity&lt; IdxRangeFdistribu, IdxRangeSpatial &gt;::NullAdvectionVelocity</definition>
+        <argsstring>()=default</argsstring>
+        <name>NullAdvectionVelocity</name>
+        <qualifiedname>NullAdvectionVelocity::NullAdvectionVelocity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/nulladvectionvx.hpp" line="16" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classNullAdvectionVelocity_1aa05b78702ecb9fd563edea7ecbcebc6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>NullAdvectionVelocity&lt; IdxRangeFdistribu, IdxRangeSpatial &gt;::~NullAdvectionVelocity</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~NullAdvectionVelocity</name>
+        <qualifiedname>NullAdvectionVelocity::~NullAdvectionVelocity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/nulladvectionvx.hpp" line="18" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classNullAdvectionVelocity_1a006ed56c49d2f95f5b95f78ed574f72e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>DField&lt; IdxRangeFdistribu &gt;</type>
+        <definition>DField&lt; IdxRangeFdistribu &gt; NullAdvectionVelocity&lt; IdxRangeFdistribu, IdxRangeSpatial &gt;::operator()</definition>
+        <argsstring>(DField&lt; IdxRangeFdistribu &gt; allfdistribu, DConstField&lt; IdxRangeSpatial &gt; electric_field, double dt) const override</argsstring>
+        <name>operator()</name>
+        <qualifiedname>NullAdvectionVelocity::operator()</qualifiedname>
+        <param>
+          <type>DField&lt; IdxRangeFdistribu &gt;</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>DConstField&lt; IdxRangeSpatial &gt;</type>
+          <declname>electric_field</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+<para>Do nothing instead of advecting fdistribu along GridV for a duration dt. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to an array containing the value of the distribution function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">electric_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The electric field which derives from electrostatic potential and is the advection speed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time step</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to the allfdistribu array containing the value of the function at the coordinates. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/nulladvectionvx.hpp" line="29" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/nulladvectionvx.hpp" bodystart="29" bodyend="35"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>This is a class which imitates a velocity advection. It inherits from IAdvectionV and can be used as an advection operator but does not actually modify the distribution function. This can be useful for debugging purposes. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>IAdvectionV&lt; IdxRangeFdistribu, IdxRangeSpatial &gt;</label>
+      </node>
+      <node id="1">
+        <label>NullAdvectionVelocity&lt; IdxRangeFdistribu, IdxRangeSpatial &gt;</label>
+        <link refid="classNullAdvectionVelocity"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>IAdvectionV&lt; IdxRangeFdistribu, IdxRangeSpatial &gt;</label>
+      </node>
+      <node id="1">
+        <label>NullAdvectionVelocity&lt; IdxRangeFdistribu, IdxRangeSpatial &gt;</label>
+        <link refid="classNullAdvectionVelocity"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/nulladvectionvx.hpp" line="13" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/nulladvectionvx.hpp" bodystart="14" bodyend="36"/>
+    <listofallmembers>
+      <member refid="classNullAdvectionVelocity_1a19f44b08bccfdad9a2a6e79781f8cb53" prot="public" virt="non-virtual"><scope>NullAdvectionVelocity</scope><name>NullAdvectionVelocity</name></member>
+      <member refid="classNullAdvectionVelocity_1a006ed56c49d2f95f5b95f78ed574f72e" prot="public" virt="non-virtual"><scope>NullAdvectionVelocity</scope><name>operator()</name></member>
+      <member refid="classNullAdvectionVelocity_1aa05b78702ecb9fd563edea7ecbcebc6f" prot="public" virt="non-virtual"><scope>NullAdvectionVelocity</scope><name>~NullAdvectionVelocity</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

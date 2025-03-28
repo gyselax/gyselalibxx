@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classIAdvectionVelocity" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>IAdvectionVelocity</compoundname>
+    <derivedcompoundref refid="classBslAdvectionVelocity" prot="public" virt="non-virtual">BslAdvectionVelocity&lt; Geometry, GridV &gt;</derivedcompoundref>
+    <includes refid="iadvectionvx_8hpp" local="no">iadvectionvx.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Geometry</type>
+      </param>
+      <param>
+        <type>class GridV</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classIAdvectionVelocity_1a970d504c9e17550be8be377490c6a0ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual IAdvectionVelocity&lt; Geometry, GridV &gt;::~IAdvectionVelocity</definition>
+        <argsstring>()=default</argsstring>
+        <name>~IAdvectionVelocity</name>
+        <qualifiedname>IAdvectionVelocity::~IAdvectionVelocity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/iadvectionvx.hpp" line="19" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classIAdvectionVelocity_1a3421d3fb6a659e30d75af3ce8bac861a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>DField&lt; typename Geometry::IdxRangeFdistribu &gt;</type>
+        <definition>virtual DField&lt; typename Geometry::IdxRangeFdistribu &gt; IAdvectionVelocity&lt; Geometry, GridV &gt;::operator()</definition>
+        <argsstring>(DField&lt; typename Geometry::IdxRangeFdistribu &gt; allfdistribu, DConstField&lt; typename Geometry::IdxRangeSpatial &gt; electric_field, double dt) const =0</argsstring>
+        <name>operator()</name>
+        <qualifiedname>IAdvectionVelocity::operator()</qualifiedname>
+        <param>
+          <type>DField&lt; typename Geometry::IdxRangeFdistribu &gt;</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>DConstField&lt; typename Geometry::IdxRangeSpatial &gt;</type>
+          <declname>electric_field</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+<para>operates a transport of the distribution function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to an array containing the value of the distribution function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">electric_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The electric field which derives from electrostatic potential and is the advection speed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time step.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to an array containing the value of distribution the function at the updated time t+dt. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/iadvectionvx.hpp" line="30" column="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class which provides an advection operator. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>An abstract class which implements a function that applies the transport along a velocity direction of the phase space.</para>
+<para>A generic class for a velocity advection </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>BslAdvectionVelocity&lt; Geometry, GridV &gt;</label>
+        <link refid="classBslAdvectionVelocity"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>IAdvectionVelocity&lt; Geometry, GridV &gt;</label>
+        <link refid="classIAdvectionVelocity"/>
+      </node>
+    </inheritancegraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/iadvectionvx.hpp" line="16" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/iadvectionvx.hpp" bodystart="17" bodyend="34"/>
+    <listofallmembers>
+      <member refid="classIAdvectionVelocity_1a3421d3fb6a659e30d75af3ce8bac861a" prot="public" virt="pure-virtual"><scope>IAdvectionVelocity</scope><name>operator()</name></member>
+      <member refid="classIAdvectionVelocity_1a970d504c9e17550be8be377490c6a0ff" prot="public" virt="virtual"><scope>IAdvectionVelocity</scope><name>~IAdvectionVelocity</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

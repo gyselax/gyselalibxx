@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_64163437c27c8707f17f92558da22106" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions</compoundname>
+    <innerfile refid="collision__common__configuration_8hpp">collision_common_configuration.hpp</innerfile>
+    <innerfile refid="collision__operator_8cpp">collision_operator.cpp</innerfile>
+    <innerfile refid="collision__operator_8hpp">collision_operator.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/"/>
+  </compounddef>
+</doxygen>

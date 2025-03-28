@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structIdxRangeToSlice" kind="struct" language="C++" prot="public">
+    <compoundname>IdxRangeToSlice</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class <ref refid="structT" kindref="compound">T</ref></type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>A class to create a <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref> type from a TypeSeq. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="452" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="452" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

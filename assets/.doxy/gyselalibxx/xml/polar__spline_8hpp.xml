@@ -1,0 +1,950 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="polar__spline_8hpp" kind="file" language="C++">
+    <compoundname>polar_spline.hpp</compoundname>
+    <includes local="no">ddc/ddc.hpp</includes>
+    <includes refid="ddc__alias__inline__functions_8hpp" local="yes">ddc_alias_inline_functions.hpp</includes>
+    <includes refid="ddc__helper_8hpp" local="yes">ddc_helper.hpp</includes>
+    <includedby refid="advection__field__rtheta_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp</includedby>
+    <includedby refid="polar__bsplines_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp</includedby>
+    <includedby refid="polar__spline__evaluator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp</includedby>
+    <includedby refid="polarpoissonlikesolver_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp</label>
+        <link refid="polar__spline_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ddc_alias_inline_functions.hpp</label>
+        <link refid="ddc__alias__inline__functions_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>ddc_helper.hpp</label>
+        <link refid="ddc__helper_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>cassert</label>
+      </node>
+      <node id="10">
+        <label>cmath</label>
+      </node>
+      <node id="2">
+        <label>ddc/ddc.hpp</label>
+      </node>
+      <node id="7">
+        <label>ddc/kernels/splines.hpp</label>
+      </node>
+      <node id="4">
+        <label>type_traits</label>
+      </node>
+      <node id="5">
+        <label>utility</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp</label>
+        <link refid="advection__field__rtheta_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp</label>
+        <link refid="geometryRTheta_2geometry_2geometry_8hpp_source"/>
+      </node>
+      <node id="10">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp</label>
+        <link refid="vortex__merger__equilibrium_8hpp_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp</label>
+        <link refid="vortex__merger__initialisation_8hpp_source"/>
+      </node>
+      <node id="3">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp</label>
+        <link refid="bsl__predcorr_8hpp_source"/>
+      </node>
+      <node id="4">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_explicit.hpp</label>
+        <link refid="bsl__predcorr__second__order__explicit_8hpp_source"/>
+      </node>
+      <node id="5">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp</label>
+        <link refid="bsl__predcorr__second__order__implicit_8hpp_source"/>
+      </node>
+      <node id="6">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp</label>
+        <link refid="polar__bsplines_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp</label>
+        <link refid="polar__spline_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp</label>
+        <link refid="polar__spline__evaluator_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</label>
+        <link refid="polarpoissonlikesolver_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structPolarSplineMem" prot="public">PolarSplineMem</innerclass>
+    <innerclass refid="structPolarSpline" prot="public">PolarSpline</innerclass>
+    <innerclass refid="structConstPolarSpline" prot="public">ConstPolarSpline</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="polar__spline_8hpp_1adbedd715b79dc3175e822ad17e7dd974" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structT" kindref="compound">T</ref></type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool is_polar_spline_v</definition>
+        <argsstring></argsstring>
+        <name>is_polar_spline_v</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="241" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="241" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="polar__spline_8hpp_1a8294abd262daf869a927a725242a6d33" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class PolarBSplinesType</type>
+          </param>
+          <param>
+            <type>class MemSpace</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool is_polar_spline_v&lt; PolarSplineMem&lt; PolarBSplinesType, MemSpace &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>is_polar_spline_v&lt; PolarSplineMem&lt; PolarBSplinesType, MemSpace &gt; &gt;</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="244" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="244" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="polar__spline_8hpp_1a94a74cfa73685d229f07a745de1ce922" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class PolarBSplinesType</type>
+          </param>
+          <param>
+            <type>class MemSpace</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool is_polar_spline_v&lt; PolarSpline&lt; PolarBSplinesType, MemSpace &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>is_polar_spline_v&lt; PolarSpline&lt; PolarBSplinesType, MemSpace &gt; &gt;</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="247" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="247" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="polar__spline_8hpp_1a4a2627eac18a2e96909048d9f536f348" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class PolarBSplinesType</type>
+          </param>
+          <param>
+            <type>class MemSpace</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool is_polar_spline_v&lt; ConstPolarSpline&lt; PolarBSplinesType, MemSpace &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>is_polar_spline_v&lt; ConstPolarSpline&lt; PolarBSplinesType, MemSpace &gt; &gt;</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="250" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="250" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="polar__spline_8hpp_1ab2c23e3ae0a0d250540eed5666a5382c" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="classPolarBSplines" kindref="compound">PolarBSplines</ref></type>
+          </param>
+          <param>
+            <type>class MemorySpace</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool enable_data_access_methods&lt; PolarSplineMem&lt; PolarBSplines, MemorySpace &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>enable_data_access_methods&lt; PolarSplineMem&lt; PolarBSplines, MemorySpace &gt; &gt;</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="390" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="390" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="polar__spline_8hpp_1af43d9edbc6f2206393e1a53573e1e8b6" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="classPolarBSplines" kindref="compound">PolarBSplines</ref></type>
+          </param>
+          <param>
+            <type>class MemorySpace</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool enable_data_access_methods&lt; ConstPolarSpline&lt; PolarBSplines, MemorySpace &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>enable_data_access_methods&lt; ConstPolarSpline&lt; PolarBSplines, MemorySpace &gt; &gt;</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="393" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="394" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="polar__spline_8hpp_1a5eaaccc5c80c7f8f897bfefd7d9c3371" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="classPolarBSplines" kindref="compound">PolarBSplines</ref></type>
+          </param>
+          <param>
+            <type>class MemorySpace</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool enable_data_access_methods&lt; PolarSpline&lt; PolarBSplines, MemorySpace &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>enable_data_access_methods&lt; PolarSpline&lt; PolarBSplines, MemorySpace &gt; &gt;</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="397" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="397" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="polar__spline_8hpp_1a04eedb0c1053d5d2ddadae2ba4a3c67f" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="classPolarBSplines" kindref="compound">PolarBSplines</ref></type>
+          </param>
+          <param>
+            <type>class MemorySpace</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool enable_mem_type&lt; PolarSplineMem&lt; PolarBSplines, MemorySpace &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>enable_mem_type&lt; PolarSplineMem&lt; PolarBSplines, MemorySpace &gt; &gt;</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="400" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="400" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="polar__spline_8hpp_1a002028cb191d3c57d246f80690f2eb04" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ExecSpace</type>
+          </param>
+          <param>
+            <type>class PolarBSplinesType</type>
+          </param>
+          <param>
+            <type>class MemSpace</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>&lt; PolarBSplinesType, typename ExecSpace::memory_space &gt;</type>
+        <definition>PolarSplineMem&lt; PolarBSplinesType, typename ExecSpace::memory_space &gt; create_mirror</definition>
+        <argsstring>(ExecSpace const &amp;exec_space, PolarSpline&lt; PolarBSplinesType, MemSpace &gt; const &amp;src)</argsstring>
+        <name>create_mirror</name>
+        <param>
+          <type>ExecSpace const &amp;</type>
+          <declname>exec_space</declname>
+        </param>
+        <param>
+          <type><ref refid="structPolarSpline" kindref="compound">PolarSpline</ref>&lt; PolarBSplinesType, MemSpace &gt; const &amp;</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+<para>A function to create a <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref> instance, which has the same attributes as src, except the memory space which is related to ExecSpace. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">exec_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Execution space from which the result must be accessible. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A reference to <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="260" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="260" bodyend="267"/>
+      </memberdef>
+      <memberdef kind="function" id="polar__spline_8hpp_1a1be0baf8dc9f244a0e65b57e34e01f45" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class PolarBSplinesType</type>
+          </param>
+          <param>
+            <type>class MemSpace</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>&lt; PolarBSplinesType, Kokkos::HostSpace &gt;</type>
+        <definition>PolarSplineMem&lt; PolarBSplinesType, Kokkos::HostSpace &gt; create_mirror</definition>
+        <argsstring>(PolarSpline&lt; PolarBSplinesType, MemSpace &gt; const &amp;src)</argsstring>
+        <name>create_mirror</name>
+        <param>
+          <type><ref refid="structPolarSpline" kindref="compound">PolarSpline</ref>&lt; PolarBSplinesType, MemSpace &gt; const &amp;</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+<para>A function to create a <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref> instance, which has the same attributes as src, This function allocates memory on the host. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A reference to <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="275" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="275" bodyend="281"/>
+      </memberdef>
+      <memberdef kind="function" id="polar__spline_8hpp_1adfb5cbba2d1cddc8343007faf7ffa59a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ExecSpace</type>
+          </param>
+          <param>
+            <type>class PolarBSplinesType</type>
+          </param>
+          <param>
+            <type>class MemSpace</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>&lt; PolarBSplinesType, typename ExecSpace::memory_space &gt;</type>
+        <definition>PolarSplineMem&lt; PolarBSplinesType, typename ExecSpace::memory_space &gt; create_mirror_and_copy</definition>
+        <argsstring>(ExecSpace const &amp;exec_space, PolarSpline&lt; PolarBSplinesType, MemSpace &gt; const &amp;src)</argsstring>
+        <name>create_mirror_and_copy</name>
+        <param>
+          <type>ExecSpace const &amp;</type>
+          <declname>exec_space</declname>
+        </param>
+        <param>
+          <type><ref refid="structPolarSpline" kindref="compound">PolarSpline</ref>&lt; PolarBSplinesType, MemSpace &gt; const &amp;</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+<para>A function to create copies of <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref> class instances. It first creates an instance on a memory space accessible from the specified execution space, then it copies the data to the new instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">exec_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Execution space for allocation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A reference to <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="291" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="291" bodyend="300"/>
+      </memberdef>
+      <memberdef kind="function" id="polar__spline_8hpp_1ad96f54cbd67b5ccf5dda4ded75f70f99" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class PolarBSplinesType</type>
+          </param>
+          <param>
+            <type>class MemSpace</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>&lt; PolarBSplinesType, Kokkos::HostSpace &gt;</type>
+        <definition>PolarSplineMem&lt; PolarBSplinesType, Kokkos::HostSpace &gt; create_mirror_and_copy</definition>
+        <argsstring>(PolarSpline&lt; PolarBSplinesType, MemSpace &gt; const &amp;src)</argsstring>
+        <name>create_mirror_and_copy</name>
+        <param>
+          <type><ref refid="structPolarSpline" kindref="compound">PolarSpline</ref>&lt; PolarBSplinesType, MemSpace &gt; const &amp;</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+<para>A function to create copies for <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref> class.It first creates an instance of the class on host, then it operates a copy of the data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A reference to <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="309" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="309" bodyend="316"/>
+      </memberdef>
+      <memberdef kind="function" id="polar__spline_8hpp_1a8ee7bcdc65c8497835a888de94159af0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ExecSpace</type>
+          </param>
+          <param>
+            <type>class PolarBSplinesType</type>
+          </param>
+          <param>
+            <type>class MemSpace</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto create_mirror_view</definition>
+        <argsstring>(ExecSpace const &amp;exec_space, PolarSpline&lt; PolarBSplinesType, MemSpace &gt; const &amp;src)</argsstring>
+        <name>create_mirror_view</name>
+        <param>
+          <type>ExecSpace const &amp;</type>
+          <declname>exec_space</declname>
+        </param>
+        <param>
+          <type><ref refid="structPolarSpline" kindref="compound">PolarSpline</ref>&lt; PolarBSplinesType, MemSpace &gt; const &amp;</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+<para>A function to create a mirror view instance for <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref> class on the specified execution space. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">exec_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Execution space from which the result must be accessible. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A reference to <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="325" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="325" bodyend="336"/>
+      </memberdef>
+      <memberdef kind="function" id="polar__spline_8hpp_1a8922cdf30055357be325f9658c818bc7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class PolarBSplinesType</type>
+          </param>
+          <param>
+            <type>class MemSpace</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto create_mirror_view</definition>
+        <argsstring>(PolarSpline&lt; PolarBSplinesType, MemSpace &gt; const &amp;src)</argsstring>
+        <name>create_mirror_view</name>
+        <param>
+          <type><ref refid="structPolarSpline" kindref="compound">PolarSpline</ref>&lt; PolarBSplinesType, MemSpace &gt; const &amp;</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+<para>A function to create a host allocated mirror view for <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A reference to <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="344" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="344" bodyend="353"/>
+      </memberdef>
+      <memberdef kind="function" id="polar__spline_8hpp_1a5bc3dfe7efead4e3fa3e5d980aeccca7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ExecSpace</type>
+          </param>
+          <param>
+            <type>class PolarBSplinesType</type>
+          </param>
+          <param>
+            <type>class MemSpace</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto create_mirror_view_and_copy</definition>
+        <argsstring>(ExecSpace const &amp;exec_space, PolarSpline&lt; PolarBSplinesType, MemSpace &gt; const &amp;src)</argsstring>
+        <name>create_mirror_view_and_copy</name>
+        <param>
+          <type>ExecSpace const &amp;</type>
+          <declname>exec_space</declname>
+        </param>
+        <param>
+          <type><ref refid="structPolarSpline" kindref="compound">PolarSpline</ref>&lt; PolarBSplinesType, MemSpace &gt; const &amp;</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+<para>A function to create copies for <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref> class. If src is accessible from exec_space, src is returned, else, it first creates a mirror view of the class, then it copies the data to the new instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">exec_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Execution space for allocation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A reference to <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="364" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="364" bodyend="372"/>
+      </memberdef>
+      <memberdef kind="function" id="polar__spline_8hpp_1aae2e96ea625d2ae14f5e2f9d38848776" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class PolarBSplinesType</type>
+          </param>
+          <param>
+            <type>class MemSpace</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto create_mirror_view_and_copy</definition>
+        <argsstring>(PolarSpline&lt; PolarBSplinesType, MemSpace &gt; const &amp;src)</argsstring>
+        <name>create_mirror_view_and_copy</name>
+        <param>
+          <type><ref refid="structPolarSpline" kindref="compound">PolarSpline</ref>&lt; PolarBSplinesType, MemSpace &gt; const &amp;</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+<para>A function to create host allocated view for <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para>create_mirror_view_and_copy.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A reference to <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" line="381" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp" bodystart="381" bodyend="387"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ddc/ddc.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_alias_inline_functions.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_helper.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplinesType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemSpace<sp/>=<sp/>Kokkos::DefaultExecutionSpace::memory_space&gt;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structPolarSpline" kindref="compound">PolarSpline</ref>;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplinesType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemSpace<sp/>=<sp/>Kokkos::DefaultExecutionSpace::memory_space&gt;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structConstPolarSpline" kindref="compound">ConstPolarSpline</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplinesType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemSpace<sp/>=<sp/>Kokkos::DefaultExecutionSpace::memory_space&gt;</highlight></codeline>
+<codeline lineno="23" refid="structPolarSplineMem" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref></highlight></codeline>
+<codeline lineno="24"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="27" refid="structPolarSplineMem_1a645cf4762b94732224d68ee16258ca66" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>PolarBSplinesType::BSplinesR_tag;</highlight></codeline>
+<codeline lineno="29" refid="structPolarSplineMem_1adc977e4404b46ee447c69e7b735f078f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>PolarBSplinesType::BSplinesTheta_tag;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="36" refid="structPolarSplineMem_1a1d181d3665490dc1c902bdda5f375c93" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMem&lt;IdxRange&lt;BSplinesR,<sp/>BSplinesTheta&gt;,<sp/>MemSpace&gt;<sp/><ref refid="structPolarSplineMem_1a1d181d3665490dc1c902bdda5f375c93" kindref="member">spline_coef</ref>;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="structPolarSplineMem_1a6ebb9d820a34d4b6a1bbd638f9ba6a3a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMem&lt;IdxRange&lt;PolarBSplinesType&gt;,<sp/>MemSpace&gt;<sp/><ref refid="structPolarSplineMem_1a6de765c22305f6ae148d1a7f5661d8a2" kindref="member">singular_spline_coef</ref>;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem&lt;PolarBSplinesType, MemSpace&gt;</ref>(IdxRange&lt;BSplinesR,<sp/>BSplinesTheta&gt;<sp/>domain)</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="structPolarSplineMem_1a1d181d3665490dc1c902bdda5f375c93" kindref="member">spline_coef</ref>(IdxRange&lt;<ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>,<sp/><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>&gt;(</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::select&lt;<ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>&gt;(domain).remove_first(</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxStep&lt;<ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>&gt;(PolarBSplinesType::continuity<sp/>+<sp/>1)),</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::select&lt;<ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>&gt;(domain)))</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/><ref refid="structPolarSplineMem_1a6de765c22305f6ae148d1a7f5661d8a2" kindref="member">singular_spline_coef</ref>(IdxRange&lt;PolarBSplinesType&gt;(</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;PolarBSplinesType&gt;(0),</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxStep&lt;PolarBSplinesType&gt;(PolarBSplinesType::n_singular_basis())))</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem&lt;PolarBSplinesType, MemSpace&gt;</ref>(</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;PolarBSplinesType&gt;<sp/>singular_domain,</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;BSplinesR,<sp/>BSplinesTheta&gt;<sp/>domain)</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="structPolarSplineMem_1a1d181d3665490dc1c902bdda5f375c93" kindref="member">spline_coef</ref>(domain)</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/><ref refid="structPolarSplineMem_1a6de765c22305f6ae148d1a7f5661d8a2" kindref="member">singular_spline_coef</ref>(singular_domain.take_first(</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxStep&lt;PolarBSplinesType&gt;(PolarBSplinesType::n_singular_basis())))</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88" refid="structPolarSplineMem_1adc81b7076342562cd55fc113c0a6bbcb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structPolarSpline" kindref="compound">PolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref><sp/><ref refid="structPolarSplineMem_1adc81b7076342562cd55fc113c0a6bbcb" kindref="member">span_view</ref>()</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structPolarSpline" kindref="compound">PolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref>(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98" refid="structPolarSplineMem_1a9e16f2188ac35e93d89a34670379f973" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structConstPolarSpline" kindref="compound">ConstPolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref><sp/><ref refid="structPolarSplineMem_1a9e16f2188ac35e93d89a34670379f973" kindref="member">span_cview</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="99"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structConstPolarSpline" kindref="compound">ConstPolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref>(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="102"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplinesType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemSpace&gt;</highlight></codeline>
+<codeline lineno="111" refid="structPolarSpline" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structPolarSpline" kindref="compound">PolarSpline</ref></highlight></codeline>
+<codeline lineno="112"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="115" refid="structPolarSpline_1a5a692091b5e1dbccc094ec737afc5cef" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>PolarBSplinesType::BSplinesR_tag;</highlight></codeline>
+<codeline lineno="117" refid="structPolarSpline_1ab3a28213cc6fec9de5bed1b39626ff19" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>PolarBSplinesType::BSplinesTheta_tag;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="124" refid="structPolarSpline_1af608abfc57c38e2f35f25a0b9916d077" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>DField&lt;IdxRange&lt;BSplinesR,<sp/>BSplinesTheta&gt;,<sp/>MemSpace&gt;<sp/><ref refid="structPolarSpline_1af608abfc57c38e2f35f25a0b9916d077" kindref="member">spline_coef</ref>;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130" refid="structPolarSpline_1a83116cfcdadc19cc922a79634a24a51c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>DField&lt;IdxRange&lt;PolarBSplinesType&gt;,<sp/>MemSpace&gt;<sp/><ref refid="structPolarSpline_1a0095d1c0d61dc304c8f80dc6d45ac60f" kindref="member">singular_spline_coef</ref>;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structPolarSpline" kindref="compound">PolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref>(</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem&lt;PolarBSplinesType, MemSpace&gt;</ref>&amp;<sp/>spl)</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="structPolarSpline_1af608abfc57c38e2f35f25a0b9916d077" kindref="member">spline_coef</ref>(get_field(spl.<ref refid="structPolarSpline_1af608abfc57c38e2f35f25a0b9916d077" kindref="member">spline_coef</ref>))</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/><ref refid="structPolarSpline_1a0095d1c0d61dc304c8f80dc6d45ac60f" kindref="member">singular_spline_coef</ref>(get_field(spl.<ref refid="structPolarSpline_1a0095d1c0d61dc304c8f80dc6d45ac60f" kindref="member">singular_spline_coef</ref>))</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150" refid="structPolarSpline_1ab3424fe85fc426c4828fa7e092dcd5a2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structPolarSpline" kindref="compound">PolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref><sp/><ref refid="structPolarSpline_1ab3424fe85fc426c4828fa7e092dcd5a2" kindref="member">span_view</ref>()</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160" refid="structPolarSpline_1a6f7a54f4d3c99218af31b7192666d2a6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structConstPolarSpline" kindref="compound">ConstPolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref><sp/><ref refid="structPolarSpline_1a6f7a54f4d3c99218af31b7192666d2a6" kindref="member">span_cview</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="161"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structConstPolarSpline" kindref="compound">ConstPolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref>(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="164"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplinesType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemSpace&gt;</highlight></codeline>
+<codeline lineno="173" refid="structConstPolarSpline" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structConstPolarSpline" kindref="compound">ConstPolarSpline</ref></highlight></codeline>
+<codeline lineno="174"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="177" refid="structConstPolarSpline_1abb8ad3be7f39e385d8fa90e991437648" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>PolarBSplinesType::BSplinesR_tag;</highlight></codeline>
+<codeline lineno="179" refid="structConstPolarSpline_1a45b2e9a326fa2fcfac0a2ef640be63f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>PolarBSplinesType::BSplinesTheta_tag;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="186" refid="structConstPolarSpline_1aedd7d1c4f010858e8f1e6a3bd59e4619" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>DConstField&lt;IdxRange&lt;BSplinesR,<sp/>BSplinesTheta&gt;,<sp/>MemSpace&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structConstPolarSpline_1aedd7d1c4f010858e8f1e6a3bd59e4619" kindref="member">spline_coef</ref>;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192" refid="structConstPolarSpline_1a74afaef9d251406fbd5641314d68ae4c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>DConstField&lt;IdxRange&lt;PolarBSplinesType&gt;,<sp/>MemSpace&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structConstPolarSpline_1ad65bed77b967e94437734b18bfcb8e49" kindref="member">singular_spline_coef</ref>;</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structConstPolarSpline" kindref="compound">ConstPolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref>(</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem&lt;PolarBSplinesType, MemSpace&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>spl)</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="structConstPolarSpline_1aedd7d1c4f010858e8f1e6a3bd59e4619" kindref="member">spline_coef</ref>(get_const_field(spl.<ref refid="structConstPolarSpline_1aedd7d1c4f010858e8f1e6a3bd59e4619" kindref="member">spline_coef</ref>))</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/><ref refid="structConstPolarSpline_1ad65bed77b967e94437734b18bfcb8e49" kindref="member">singular_spline_coef</ref>(get_const_field(spl.<ref refid="structConstPolarSpline_1ad65bed77b967e94437734b18bfcb8e49" kindref="member">singular_spline_coef</ref>))</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structConstPolarSpline" kindref="compound">ConstPolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref>(</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structPolarSpline" kindref="compound">PolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>spl)</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="structConstPolarSpline_1aedd7d1c4f010858e8f1e6a3bd59e4619" kindref="member">spline_coef</ref>(get_const_field(spl.<ref refid="structConstPolarSpline_1aedd7d1c4f010858e8f1e6a3bd59e4619" kindref="member">spline_coef</ref>))</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/><ref refid="structConstPolarSpline_1ad65bed77b967e94437734b18bfcb8e49" kindref="member">singular_spline_coef</ref>(get_const_field(spl.<ref refid="structConstPolarSpline_1ad65bed77b967e94437734b18bfcb8e49" kindref="member">singular_spline_coef</ref>))</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight></codeline>
+<codeline lineno="224" refid="structConstPolarSpline_1a8c2f3cdd5149357884a6593f3b5fcfae" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structPolarSpline" kindref="compound">PolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref><sp/><ref refid="structConstPolarSpline_1a8c2f3cdd5149357884a6593f3b5fcfae" kindref="member">span_view</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="225"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="234" refid="structConstPolarSpline_1a0f27d945fdb363714fd90bbb9a2d4f31" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structConstPolarSpline" kindref="compound">ConstPolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref><sp/><ref refid="structConstPolarSpline_1a0f27d945fdb363714fd90bbb9a2d4f31" kindref="member">span_cview</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="235"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="238"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_polar_spline_v<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplinesType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemSpace&gt;</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_polar_spline_v&lt;PolarSplineMem&lt;PolarBSplinesType,<sp/>MemSpace&gt;&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"></highlight></codeline>
+<codeline lineno="246"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplinesType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemSpace&gt;</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_polar_spline_v&lt;PolarSpline&lt;PolarBSplinesType,<sp/>MemSpace&gt;&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplinesType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemSpace&gt;</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_polar_spline_v&lt;ConstPolarSpline&lt;PolarBSplinesType,<sp/>MemSpace&gt;&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ExecSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplinesType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemSpace&gt;</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem&lt;PolarBSplinesType, typename ExecSpace::memory_space&gt;</ref><sp/>create_mirror(</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>exec_space,</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structPolarSpline" kindref="compound">PolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>src)</highlight></codeline>
+<codeline lineno="263"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem&lt;PolarBSplinesType, typename ExecSpace::memory_space&gt;</ref></highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dst(get_idx_range(src.<ref refid="structPolarSpline_1a0095d1c0d61dc304c8f80dc6d45ac60f" kindref="member">singular_spline_coef</ref>),<sp/>get_idx_range(src.<ref refid="structPolarSpline_1af608abfc57c38e2f35f25a0b9916d077" kindref="member">spline_coef</ref>));</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>dst;</highlight></codeline>
+<codeline lineno="267"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight></codeline>
+<codeline lineno="274"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplinesType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemSpace&gt;</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem&lt;PolarBSplinesType, Kokkos::HostSpace&gt;</ref><sp/>create_mirror(</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structPolarSpline" kindref="compound">PolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>src)</highlight></codeline>
+<codeline lineno="277"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem&lt;PolarBSplinesType, Kokkos::HostSpace&gt;</ref></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dst(get_idx_range(src.<ref refid="structPolarSpline_1a0095d1c0d61dc304c8f80dc6d45ac60f" kindref="member">singular_spline_coef</ref>),<sp/>get_idx_range(src.<ref refid="structPolarSpline_1af608abfc57c38e2f35f25a0b9916d077" kindref="member">spline_coef</ref>));</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>dst;</highlight></codeline>
+<codeline lineno="281"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"></highlight></codeline>
+<codeline lineno="290"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ExecSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplinesType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemSpace&gt;</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem&lt;PolarBSplinesType, typename ExecSpace::memory_space&gt;</ref><sp/>create_mirror_and_copy(</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>exec_space,</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structPolarSpline" kindref="compound">PolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>src)</highlight></codeline>
+<codeline lineno="294"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem&lt;PolarBSplinesType, typename ExecSpace::memory_space&gt;</ref><sp/>dst</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>create_mirror(exec_space,<sp/>src);</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(dst.<ref refid="structPolarSplineMem_1a1d181d3665490dc1c902bdda5f375c93" kindref="member">spline_coef</ref>,<sp/>src.<ref refid="structPolarSpline_1af608abfc57c38e2f35f25a0b9916d077" kindref="member">spline_coef</ref>);</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(dst.<ref refid="structPolarSplineMem_1a6de765c22305f6ae148d1a7f5661d8a2" kindref="member">singular_spline_coef</ref>,<sp/>src.<ref refid="structPolarSpline_1a0095d1c0d61dc304c8f80dc6d45ac60f" kindref="member">singular_spline_coef</ref>);</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>dst;</highlight></codeline>
+<codeline lineno="300"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"></highlight></codeline>
+<codeline lineno="308"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplinesType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemSpace&gt;</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem&lt;PolarBSplinesType, Kokkos::HostSpace&gt;</ref><sp/>create_mirror_and_copy(</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structPolarSpline" kindref="compound">PolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>src)</highlight></codeline>
+<codeline lineno="311"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem&lt;PolarBSplinesType, Kokkos::HostSpace&gt;</ref><sp/>dst<sp/>=<sp/>create_mirror(src);</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(dst.<ref refid="structPolarSplineMem_1a1d181d3665490dc1c902bdda5f375c93" kindref="member">spline_coef</ref>,<sp/>src.<ref refid="structPolarSpline_1af608abfc57c38e2f35f25a0b9916d077" kindref="member">spline_coef</ref>);</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(dst.<ref refid="structPolarSplineMem_1a6de765c22305f6ae148d1a7f5661d8a2" kindref="member">singular_spline_coef</ref>,<sp/>src.<ref refid="structPolarSpline_1a0095d1c0d61dc304c8f80dc6d45ac60f" kindref="member">singular_spline_coef</ref>);</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>dst;</highlight></codeline>
+<codeline lineno="316"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"></highlight></codeline>
+<codeline lineno="324"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ExecSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplinesType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemSpace&gt;</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>create_mirror_view(</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>exec_space,</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structPolarSpline" kindref="compound">PolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>src)</highlight></codeline>
+<codeline lineno="328"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;MemSpace,<sp/>typename<sp/>ExecSpace::memory_space&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>src;</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem&lt;PolarBSplinesType, typename ExecSpace::memory_space&gt;</ref></highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dst(get_idx_range(src.<ref refid="structPolarSpline_1a0095d1c0d61dc304c8f80dc6d45ac60f" kindref="member">singular_spline_coef</ref>),<sp/>get_idx_range(src.<ref refid="structPolarSpline_1af608abfc57c38e2f35f25a0b9916d077" kindref="member">spline_coef</ref>));</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>dst;</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="336"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"></highlight></codeline>
+<codeline lineno="343"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplinesType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemSpace&gt;</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>create_mirror_view(<ref refid="structPolarSpline" kindref="compound">PolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>src)</highlight></codeline>
+<codeline lineno="345"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;MemSpace,<sp/>Kokkos::HostSpace&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>src;</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem&lt;PolarBSplinesType, Kokkos::HostSpace&gt;</ref></highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dst(get_idx_range(src.<ref refid="structPolarSpline_1a0095d1c0d61dc304c8f80dc6d45ac60f" kindref="member">singular_spline_coef</ref>),<sp/>get_idx_range(src.<ref refid="structPolarSpline_1af608abfc57c38e2f35f25a0b9916d077" kindref="member">spline_coef</ref>));</highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>dst;</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="353"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="354"><highlight class="normal"></highlight></codeline>
+<codeline lineno="363"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ExecSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplinesType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemSpace&gt;</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>create_mirror_view_and_copy(</highlight></codeline>
+<codeline lineno="365"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>exec_space,</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structPolarSpline" kindref="compound">PolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>src)</highlight></codeline>
+<codeline lineno="367"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dst<sp/>=<sp/>create_mirror_view(exec_space,<sp/>src);</highlight></codeline>
+<codeline lineno="369"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(dst.spline_coef,<sp/>src.<ref refid="structPolarSpline_1af608abfc57c38e2f35f25a0b9916d077" kindref="member">spline_coef</ref>);</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(dst.singular_spline_coef,<sp/>src.<ref refid="structPolarSpline_1a0095d1c0d61dc304c8f80dc6d45ac60f" kindref="member">singular_spline_coef</ref>);</highlight></codeline>
+<codeline lineno="371"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>dst;</highlight></codeline>
+<codeline lineno="372"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="373"><highlight class="normal"></highlight></codeline>
+<codeline lineno="380"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplinesType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemSpace&gt;</highlight></codeline>
+<codeline lineno="381"><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>create_mirror_view_and_copy(<ref refid="structPolarSpline" kindref="compound">PolarSpline&lt;PolarBSplinesType, MemSpace&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>src)</highlight></codeline>
+<codeline lineno="382"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="383"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dst<sp/>=<sp/>create_mirror_view(src);</highlight></codeline>
+<codeline lineno="384"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(dst.spline_coef,<sp/>src.<ref refid="structPolarSpline_1af608abfc57c38e2f35f25a0b9916d077" kindref="member">spline_coef</ref>);</highlight></codeline>
+<codeline lineno="385"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(dst.singular_spline_coef,<sp/>src.<ref refid="structPolarSpline_1a0095d1c0d61dc304c8f80dc6d45ac60f" kindref="member">singular_spline_coef</ref>);</highlight></codeline>
+<codeline lineno="386"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>dst;</highlight></codeline>
+<codeline lineno="387"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="388"><highlight class="normal"></highlight></codeline>
+<codeline lineno="389"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplines,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemorySpace&gt;</highlight></codeline>
+<codeline lineno="390"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_data_access_methods&lt;PolarSplineMem&lt;PolarBSplines,<sp/>MemorySpace&gt;&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="391"><highlight class="normal"></highlight></codeline>
+<codeline lineno="392"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplines,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemorySpace&gt;</highlight></codeline>
+<codeline lineno="393"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="394"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>enable_data_access_methods&lt;ConstPolarSpline&lt;PolarBSplines,<sp/>MemorySpace&gt;&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="395"><highlight class="normal"></highlight></codeline>
+<codeline lineno="396"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplines,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemorySpace&gt;</highlight></codeline>
+<codeline lineno="397"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_data_access_methods&lt;PolarSpline&lt;PolarBSplines,<sp/>MemorySpace&gt;&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="398"><highlight class="normal"></highlight></codeline>
+<codeline lineno="399"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarBSplines,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemorySpace&gt;</highlight></codeline>
+<codeline lineno="400"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_mem_type&lt;PolarSplineMem&lt;PolarBSplines,<sp/>MemorySpace&gt;&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="401"><highlight class="normal"></highlight></codeline>
+<codeline lineno="402"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">detail<sp/>{</highlight></codeline>
+<codeline lineno="403"><highlight class="normal"></highlight></codeline>
+<codeline lineno="412"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>NewMemorySpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarSplineType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemorySpace&gt;</highlight></codeline>
+<codeline lineno="413"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">OnMemorySpace&lt;NewMemorySpace,<sp/><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>&lt;PolarSplineType,<sp/>MemorySpace&gt;&gt;</highlight></codeline>
+<codeline lineno="414"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="415"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/><ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem&lt;PolarSplineType, NewMemorySpace&gt;</ref>;</highlight></codeline>
+<codeline lineno="416"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="417"><highlight class="normal"></highlight></codeline>
+<codeline lineno="418"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>NewMemorySpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarSplineType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemorySpace&gt;</highlight></codeline>
+<codeline lineno="419"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">OnMemorySpace&lt;NewMemorySpace,<sp/><ref refid="structPolarSpline" kindref="compound">PolarSpline</ref>&lt;PolarSplineType,<sp/>MemorySpace&gt;&gt;</highlight></codeline>
+<codeline lineno="420"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="421"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/><ref refid="structPolarSpline" kindref="compound">PolarSpline&lt;PolarSplineType, NewMemorySpace&gt;</ref>;</highlight></codeline>
+<codeline lineno="422"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="423"><highlight class="normal"></highlight></codeline>
+<codeline lineno="424"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>NewMemorySpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>PolarSplineType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemorySpace&gt;</highlight></codeline>
+<codeline lineno="425"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">OnMemorySpace&lt;NewMemorySpace,<sp/><ref refid="structConstPolarSpline" kindref="compound">ConstPolarSpline</ref>&lt;PolarSplineType,<sp/>MemorySpace&gt;&gt;</highlight></codeline>
+<codeline lineno="426"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="427"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/><ref refid="structConstPolarSpline" kindref="compound">ConstPolarSpline&lt;PolarSplineType, NewMemorySpace&gt;</ref>;</highlight></codeline>
+<codeline lineno="428"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="429"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>detail</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp"/>
+  </compounddef>
+</doxygen>

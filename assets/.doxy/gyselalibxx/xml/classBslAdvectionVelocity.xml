@@ -1,0 +1,293 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classBslAdvectionVelocity" kind="class" language="C++" prot="public">
+    <compoundname>BslAdvectionVelocity</compoundname>
+    <basecompoundref refid="classIAdvectionVelocity" prot="public" virt="non-virtual">IAdvectionVelocity&lt; Geometry, GridV &gt;</basecompoundref>
+    <includes refid="bsl__advection__vx_8hpp" local="no">bsl_advection_vx.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Geometry</type>
+      </param>
+      <param>
+        <type>class GridV</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classBslAdvectionVelocity_1a0e7f5534310e9d108fb23915cc03a5b5" prot="private" static="no">
+        <type>typename Geometry::IdxRangeFdistribu</type>
+        <definition>using BslAdvectionVelocity&lt; Geometry, GridV &gt;::IdxRangeFdistribu =  typename Geometry::IdxRangeFdistribu</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeFdistribu</name>
+        <qualifiedname>BslAdvectionVelocity::IdxRangeFdistribu</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="18" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionVelocity_1ac795c6485aad318845f06f208021c89f" prot="private" static="no">
+        <type>typename Geometry::IdxRangeSpatial</type>
+        <definition>using BslAdvectionVelocity&lt; Geometry, GridV &gt;::IdxRangeSpatial =  typename Geometry::IdxRangeSpatial</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeSpatial</name>
+        <qualifiedname>BslAdvectionVelocity::IdxRangeSpatial</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="19" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionVelocity_1a2a19e8ceb8d68352557837ce4e627971" prot="private" static="no">
+        <type>typename IdxRangeSpatial::discrete_element_type</type>
+        <definition>using BslAdvectionVelocity&lt; Geometry, GridV &gt;::IdxSpatial =  typename IdxRangeSpatial::discrete_element_type</definition>
+        <argsstring></argsstring>
+        <name>IdxSpatial</name>
+        <qualifiedname>BslAdvectionVelocity::IdxSpatial</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="20" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionVelocity_1ad9556005d87ccc7a0df03a7f015eaf67" prot="private" static="no">
+        <type>Idx&lt; GridV &gt;</type>
+        <definition>using BslAdvectionVelocity&lt; Geometry, GridV &gt;::IdxV =  Idx&lt;GridV&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxV</name>
+        <qualifiedname>BslAdvectionVelocity::IdxV</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="21" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionVelocity_1a539aadca9d4b16f8e63c7f603b58a95b" prot="private" static="no">
+        <type>typename GridV::continuous_dimension_type</type>
+        <definition>using BslAdvectionVelocity&lt; Geometry, GridV &gt;::DimV =  typename GridV::continuous_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>DimV</name>
+        <qualifiedname>BslAdvectionVelocity::DimV</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="22" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionVelocity_1ad120e10800125f081ba188f12d3016f6" prot="private" static="no">
+        <type>ddc::remove_dims_of_t&lt; typename Geometry::IdxRangeFdistribu, <ref refid="structSpecies" kindref="compound">Species</ref> &gt;</type>
+        <definition>using BslAdvectionVelocity&lt; Geometry, GridV &gt;::IdxRangeSpaceVelocity =  ddc::remove_dims_of_t&lt;typename Geometry::IdxRangeFdistribu, Species&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeSpaceVelocity</name>
+        <qualifiedname>BslAdvectionVelocity::IdxRangeSpaceVelocity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="23" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionVelocity_1a1d5276e3630157bb71a0abce77109ea5" prot="private" static="no">
+        <type>interpolator_on_idx_range_t&lt; <ref refid="classIPreallocatableInterpolator" kindref="compound">IPreallocatableInterpolator</ref>, GridV, IdxRangeSpaceVelocity &gt;</type>
+        <definition>using BslAdvectionVelocity&lt; Geometry, GridV &gt;::PreallocatableInterpolatorType =  interpolator_on_idx_range_t&lt; IPreallocatableInterpolator, GridV, IdxRangeSpaceVelocity&gt;</definition>
+        <argsstring></argsstring>
+        <name>PreallocatableInterpolatorType</name>
+        <qualifiedname>BslAdvectionVelocity::PreallocatableInterpolatorType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionVelocity_1acdcc26d0e5908e82b42574e1fafa39bd" prot="private" static="no">
+        <type>interpolator_on_idx_range_t&lt; <ref refid="classIInterpolator" kindref="compound">IInterpolator</ref>, GridV, IdxRangeSpaceVelocity &gt;</type>
+        <definition>using BslAdvectionVelocity&lt; Geometry, GridV &gt;::InterpolatorType =  interpolator_on_idx_range_t&lt;IInterpolator, GridV, IdxRangeSpaceVelocity&gt;</definition>
+        <argsstring></argsstring>
+        <name>InterpolatorType</name>
+        <qualifiedname>BslAdvectionVelocity::InterpolatorType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="31" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classBslAdvectionVelocity_1afeaea98cd674abf7f58e0401a1df1204" prot="private" static="no" mutable="no">
+        <type>PreallocatableInterpolatorType const  &amp;</type>
+        <definition>PreallocatableInterpolatorType const&amp; BslAdvectionVelocity&lt; Geometry, GridV &gt;::m_interpolator_v</definition>
+        <argsstring></argsstring>
+        <name>m_interpolator_v</name>
+        <qualifiedname>BslAdvectionVelocity::m_interpolator_v</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="33" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classBslAdvectionVelocity_1a85c69c265dbb2410fdd60f7b78117593" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>BslAdvectionVelocity&lt; Geometry, GridV &gt;::BslAdvectionVelocity</definition>
+        <argsstring>(PreallocatableInterpolatorType const &amp;interpolator_v)</argsstring>
+        <name>BslAdvectionVelocity</name>
+        <qualifiedname>BslAdvectionVelocity::BslAdvectionVelocity</qualifiedname>
+        <param>
+          <type>PreallocatableInterpolatorType const &amp;</type>
+          <declname>interpolator_v</declname>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">interpolator_v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>interpolator along the GridV direction which refers to the velocity space. <linebreak/>
+ </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="40" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="40" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classBslAdvectionVelocity_1a5d4ef8f16bdc3c34ec6452cf761c945a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BslAdvectionVelocity&lt; Geometry, GridV &gt;::~BslAdvectionVelocity</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~BslAdvectionVelocity</name>
+        <qualifiedname>BslAdvectionVelocity::~BslAdvectionVelocity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="45" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classBslAdvectionVelocity_1a9774e52704d997107ddeeb0d4041a0a9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Field&lt; double, IdxRangeFdistribu &gt;</type>
+        <definition>Field&lt; double, IdxRangeFdistribu &gt; BslAdvectionVelocity&lt; Geometry, GridV &gt;::operator()</definition>
+        <argsstring>(Field&lt; double, IdxRangeFdistribu &gt; const allfdistribu, Field&lt; const double, IdxRangeSpatial &gt; const electric_field, double const dt) const override</argsstring>
+        <name>operator()</name>
+        <qualifiedname>BslAdvectionVelocity::operator()</qualifiedname>
+        <param>
+          <type>Field&lt; double, IdxRangeFdistribu &gt; const</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>Field&lt; const double, IdxRangeSpatial &gt; const</type>
+          <declname>electric_field</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+<para>Advects fdistribu along GridV for a duration dt. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the whole distribution function for one species, allocated on the device (ie it lets the choice of the location depend on the build configuration). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">electric_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the electric field which derives from electrostatic potential, allocated on the device. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time step </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to the allfdistribu array containing the value of the function at the coordinates. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="54" column="11" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="54" bodyend="115"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class which computes the velocity advection along the dimension of interest GridV. Working for every Cartesian geometry. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>BslAdvectionVelocity&lt; Geometry, GridV &gt;</label>
+        <link refid="classBslAdvectionVelocity"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>IAdvectionVelocity&lt; Geometry, GridV &gt;</label>
+        <link refid="classIAdvectionVelocity"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>BslAdvectionVelocity&lt; Geometry, GridV &gt;</label>
+        <link refid="classBslAdvectionVelocity"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>IAdvectionVelocity&lt; Geometry, GridV &gt;</label>
+        <link refid="classIAdvectionVelocity"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="16" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="17" bodyend="116"/>
+    <listofallmembers>
+      <member refid="classBslAdvectionVelocity_1a85c69c265dbb2410fdd60f7b78117593" prot="public" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>BslAdvectionVelocity</name></member>
+      <member refid="classBslAdvectionVelocity_1a539aadca9d4b16f8e63c7f603b58a95b" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>DimV</name></member>
+      <member refid="classBslAdvectionVelocity_1a0e7f5534310e9d108fb23915cc03a5b5" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxRangeFdistribu</name></member>
+      <member refid="classBslAdvectionVelocity_1ad120e10800125f081ba188f12d3016f6" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxRangeSpaceVelocity</name></member>
+      <member refid="classBslAdvectionVelocity_1ac795c6485aad318845f06f208021c89f" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxRangeSpatial</name></member>
+      <member refid="classBslAdvectionVelocity_1a2a19e8ceb8d68352557837ce4e627971" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxSpatial</name></member>
+      <member refid="classBslAdvectionVelocity_1ad9556005d87ccc7a0df03a7f015eaf67" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxV</name></member>
+      <member refid="classBslAdvectionVelocity_1acdcc26d0e5908e82b42574e1fafa39bd" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>InterpolatorType</name></member>
+      <member refid="classBslAdvectionVelocity_1afeaea98cd674abf7f58e0401a1df1204" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>m_interpolator_v</name></member>
+      <member refid="classBslAdvectionVelocity_1a9774e52704d997107ddeeb0d4041a0a9" prot="public" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>operator()</name></member>
+      <member refid="classIAdvectionVelocity_1a3421d3fb6a659e30d75af3ce8bac861a" prot="public" virt="pure-virtual" ambiguityscope="IAdvectionVelocity::"><scope>BslAdvectionVelocity</scope><name>operator()</name></member>
+      <member refid="classBslAdvectionVelocity_1a1d5276e3630157bb71a0abce77109ea5" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>PreallocatableInterpolatorType</name></member>
+      <member refid="classBslAdvectionVelocity_1a5d4ef8f16bdc3c34ec6452cf761c945a" prot="public" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>~BslAdvectionVelocity</name></member>
+      <member refid="classIAdvectionVelocity_1a970d504c9e17550be8be377490c6a0ff" prot="public" virt="virtual"><scope>BslAdvectionVelocity</scope><name>~IAdvectionVelocity</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classSpeciesInformation" kind="class" language="C++" prot="public">
+    <compoundname>SpeciesInformation</compoundname>
+    <derivedcompoundref refid="structSpecies" prot="public" virt="non-virtual">Species</derivedcompoundref>
+    <includes refid="species__info_8hpp" local="no">species_info.hpp</includes>
+    <innerclass refid="classSpeciesInformation_1_1Impl" prot="public">SpeciesInformation::Impl</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSpeciesInformation_1af77dd55f79155df4dab9bf490d900a07" prot="public" static="no">
+        <type><ref refid="classSpeciesInformation" kindref="compound">SpeciesInformation</ref></type>
+        <definition>using SpeciesInformation::discrete_dimension_type =  SpeciesInformation</definition>
+        <argsstring></argsstring>
+        <name>discrete_dimension_type</name>
+        <qualifiedname>SpeciesInformation::discrete_dimension_type</qualifiedname>
+        <briefdescription>
+<para>alias of the discrete dimension </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" line="16" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="structSpecies" kindref="compound">Species</ref> discrete dimension to access constant attributes related to species. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Species</label>
+        <link refid="structSpecies"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SpeciesInformation</label>
+        <link refid="classSpeciesInformation"/>
+      </node>
+    </inheritancegraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" line="12" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp" bodystart="13" bodyend="133"/>
+    <listofallmembers>
+      <member refid="classSpeciesInformation_1af77dd55f79155df4dab9bf490d900a07" prot="public" virt="non-virtual"><scope>SpeciesInformation</scope><name>discrete_dimension_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

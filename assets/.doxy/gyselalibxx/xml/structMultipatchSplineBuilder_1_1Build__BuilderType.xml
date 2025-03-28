@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structMultipatchSplineBuilder_1_1Build__BuilderType" kind="struct" language="C++" prot="private">
+    <compoundname>MultipatchSplineBuilder::Build_BuilderType</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+      </param>
+      <param>
+        <type>class FieldType</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>A small structure allowing the multiple grids to be unpacked from a field and repacked into a SplineBuilder type. </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" bodystart="77" bodyend="82"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

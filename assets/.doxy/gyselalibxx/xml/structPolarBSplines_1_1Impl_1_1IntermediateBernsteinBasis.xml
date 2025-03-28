@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structPolarBSplines_1_1Impl_1_1IntermediateBernsteinBasis" kind="struct" language="C++" prot="public">
+    <compoundname>PolarBSplines::Impl::IntermediateBernsteinBasis</compoundname>
+    <basecompoundref refid="classTriangularBernsteinPolynomialBasis" prot="public" virt="non-virtual">TriangularBernsteinPolynomialBasis&lt; DiscreteMapping::cartesian_tag_x, DiscreteMapping::cartesian_tag_y, Corner1Tag, Corner2Tag, Corner3Tag, C &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>class DiscreteMapping</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>PolarBSplines&lt; BSplinesR, BSplinesTheta, C &gt;::Impl&lt; DDim, MemorySpace &gt;::IntermediateBernsteinBasis&lt; DiscreteMapping &gt;</label>
+        <link refid="structPolarBSplines_1_1Impl_1_1IntermediateBernsteinBasis"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TriangularBernsteinPolynomialBasis&lt; DiscreteMapping::cartesian_tag_x, DiscreteMapping::cartesian_tag_y, Corner1Tag, Corner2Tag, Corner3Tag, C &gt;</label>
+        <link refid="classTriangularBernsteinPolynomialBasis"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>PolarBSplines&lt; BSplinesR, BSplinesTheta, C &gt;::Impl&lt; DDim, MemorySpace &gt;::IntermediateBernsteinBasis&lt; DiscreteMapping &gt;</label>
+        <link refid="structPolarBSplines_1_1Impl_1_1IntermediateBernsteinBasis"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TriangularBernsteinPolynomialBasis&lt; DiscreteMapping::cartesian_tag_x, DiscreteMapping::cartesian_tag_y, Corner1Tag, Corner2Tag, Corner3Tag, C &gt;</label>
+        <link refid="classTriangularBernsteinPolynomialBasis"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="216" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="224" bodyend="225"/>
+    <listofallmembers>
+      <member refid="classTriangularBernsteinPolynomialBasis_1afc2ce5f428444dc1fd4f0001d1c82f6a" prot="public" virt="non-virtual"><scope>PolarBSplines::Impl::IntermediateBernsteinBasis</scope><name>degree</name></member>
+      <member refid="classTriangularBernsteinPolynomialBasis_1a15d207d662780362b254d20f8532f4fb" prot="public" virt="non-virtual"><scope>PolarBSplines::Impl::IntermediateBernsteinBasis</scope><name>discrete_dimension_type</name></member>
+      <member refid="classTriangularBernsteinPolynomialBasis_1ad4df99445b4db980d8dfb888bf5f40d7" prot="public" virt="non-virtual"><scope>PolarBSplines::Impl::IntermediateBernsteinBasis</scope><name>nbasis</name></member>
+      <member refid="classTriangularBernsteinPolynomialBasis_1acbf2b77f37d38639c20cef4e8a2cef13" prot="public" virt="non-virtual"><scope>PolarBSplines::Impl::IntermediateBernsteinBasis</scope><name>rank</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

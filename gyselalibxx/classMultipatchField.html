@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Class MultipatchField - GyselalibX</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Class MultipatchField";
+        var mkdocs_page_input_path = "gyselalibxx/classMultipatchField.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> GyselalibX
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">General</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/getting_started.html">Getting Started</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Installation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../docs/first_steps/install.html">Gyselalib++ Installation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../toolchains/index.html">Pre-made build settings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standards</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/mathematical_and_physical_conventions.html">Math & Physics</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Gyselalib++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Source</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../src/index.html">Gyselalib++ contents</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/advection/index.html">Advection methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/collisions/index.html">Collisions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/data_types/index.html">Data Storage Types</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryRTheta/index.html">Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection/index.html">Advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_field</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/geometry/index.html">Geometry RTheta</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/initialisation/index.html">Initialisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/poisson/index.html">Polar Poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_solver</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/time_solver/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryVparMu</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryVparMu/index.html">Geometry (vpar, mu)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/collisions/index.html">CollisionConfiguration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/geometry/index.html">GeometryVparMu</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXVx/index.html">Geometry (x, v_x)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >boltzmann</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/boltzmann/index.html">Boltzmann solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/geometry/index.html">Geometry X-Vx</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >rhs</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/rhs/index.html">RHS</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/utils/index.html">Utils</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXY/index.html">Geometry (x, y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/geometry/index.html">Geometry XY</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/initialisation/index.html">Initialisation on (x,y) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/time_integration/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXYVxVy</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXYVxVy/index.html">Geometry (x, y, v_x, v_y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/geometry/index.html">Geometry X Y-Vx Vy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vlasov</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/vlasov/index.html">Vlasov solver</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/interpolation/index.html">Interpolation Methods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/polar_splines/index.html">Polar Splines</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >io</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/io/index.html">Functions used for input and output</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mapping</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mapping/index.html">Mappings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >math_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/math_tools/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >matrix_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/matrix_tools/index.html">Matrix tools</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mpi_parallelisation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mpi_parallelisation/index.html">Parallelisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/multipatch/index.html">Multipatch</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >connectivity</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/connectivity/index.html">Multipatch connectivity</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/data_types/index.html">Data Types for Multipatch Geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/utils/index.html">Multipatch utilitary functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >quadrature</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/quadrature/index.html">Quadrature Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >speciesinfo</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/speciesinfo/index.html">SpeciesInfo (x, v_x)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >timestepper</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/timestepper/index.html">Time Stepping Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/utils/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Simulations</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../simulations/index.html">Gyselalib++ simulations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryRTheta/index.html">Simulations in (r, theta) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >diocotron</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/diocotron/index.html">Diocotron instability</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vortex_merger</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/vortex_merger/index.html">Vortex merger</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXVx/index.html">Simulations in (x, vx) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXY/index.html">Simulations in (x, y) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >guiding_centre</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryXY/guiding_centre/index.html">Guiding centre (X,Y) simulation</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tests</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../tests/index.html">Gyselalib++ tests</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/advection/index.html">Tests on the templated advection operators</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/geometryRTheta/index.html">Tests : Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/advection_rtheta/index.html">Tests on the 2D polar advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/polar_poisson/index.html">Tests on the 2D polar poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline_interpolator_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/spline_interpolator_rtheta/index.html">Tests on spline interpolator in polar coordinates</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/multipatch/index.html">Multipatch geometry tests</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometries</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/multipatch/geometries/index.html">Multipatch geometries</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Adding_docs.html">Adding Docs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Using_git.html">Using Git</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Gyselalib++</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" >Classes</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="annotated.html">Class List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="classes.html">Class Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="hierarchy.html">Class Hierarchy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Namespaces</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="namespaces.html">Namespace List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_members.html">Namespace Members</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_functions.html">Namespace Member Functions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_variables.html">Namespace Member Variables</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_typedefs.html">Namespace Member Typedefs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_enums.html">Namespace Member Enumerations</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="macros.html">Macros</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="files.html">Files</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">GyselalibX</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Class MultipatchField</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/gyselax/gyselalibxx/edit/master/docs/gyselalibxx/classMultipatchField.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div><h1 id="class-multipatchfield">Class MultipatchField</h1>
+<p><strong>template &lt;template&lt; typename P &gt; typename T, class... Patches&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classMultipatchField.html"><strong>MultipatchField</strong></a></p>
+<p><em>A class to store field objects on patches.</em> <a href="#detailed-description">More...</a></p>
+<ul>
+<li><code>#include &lt;multipatch_field.hpp&gt;</code></li>
+</ul>
+<p>Inherits the following classes: <a href="classMultipatchType.html">MultipatchType</a></p>
+<h2 id="public-types">Public Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef typename <a href="structT.html"><strong>T</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;<a href="classMultipatchField.html#typedef-view_type"><strong>::view_type</strong></a></td>
+<td style="text-align: left;"><a href="#typedef-internalconstfieldonpatch"><strong>InternalConstFieldOnPatch</strong></a>  <br><em>An internal type alias that is only instantiated if the get_const_field method is called.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="structT.html"><strong>T</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;<a href="classMultipatchField.html#typedef-span_type"><strong>::span_type</strong></a></td>
+<td style="text-align: left;"><a href="#typedef-internalfieldonpatch"><strong>InternalFieldOnPatch</strong></a>  <br><em>An internal type alias that is only instantiated if the get_const_field method is called.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="structT.html"><strong>T</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;<a href="classMultipatchField.html#typedef-discrete_domain_type"><strong>::discrete_domain_type</strong></a></td>
+<td style="text-align: left;"><a href="#typedef-internalidxrangeonpatch"><strong>InternalIdxRangeOnPatch</strong></a>  <br><em>An internal type alias that is only instantiated if the idx_range method is called.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="classMultipatchType.html"><strong>MultipatchType</strong></a>&lt; <a href="structT.html"><strong>T</strong></a>, Patches... &gt;</td>
+<td style="text-align: left;"><a href="#typedef-base_type"><strong>base_type</strong></a>  <br><em>The</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>from which this class inherits.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="classMultipatchType.html"><strong>MultipatchType</strong></a>&lt; <a href="classMultipatchField.html#typedef-internalidxrangeonpatch"><strong>InternalIdxRangeOnPatch</strong></a>, Patches... &gt;</td>
+<td style="text-align: left;"><a href="#typedef-discrete_domain_type"><strong>discrete_domain_type</strong></a>  <br><em>The type of the index ranges that can be used to access this field.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename base_type::example_element::element_type</td>
+<td style="text-align: left;"><a href="#typedef-element_type"><strong>element_type</strong></a>  <br><em>The type of the elements inside the field.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="classMultipatchField.html#typedef-internalidxrangeonpatch"><strong>InternalIdxRangeOnPatch</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;::discrete_element_type</td>
+<td style="text-align: left;"><a href="#typedef-idx_type"><strong>idx_type</strong></a>  <br><em>The type used to index the field on the specified patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename base_type::example_element::memory_space</td>
+<td style="text-align: left;"><a href="#typedef-memory_space"><strong>memory_space</strong></a>  <br><em>The memory space (CPU/GPU) where the data is saved.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="classMultipatchField.html"><strong>MultipatchField</strong></a>&lt; <a href="classMultipatchField.html#typedef-internalfieldonpatch"><strong>InternalFieldOnPatch</strong></a>, Patches... &gt;</td>
+<td style="text-align: left;"><a href="#typedef-span_type"><strong>span_type</strong></a>  <br><em>The type of a modifiable reference to this multipatch field.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="classMultipatchField.html"><strong>MultipatchField</strong></a>&lt; <a href="classMultipatchField.html#typedef-internalconstfieldonpatch"><strong>InternalConstFieldOnPatch</strong></a>, Patches... &gt;</td>
+<td style="text-align: left;"><a href="#typedef-view_type"><strong>view_type</strong></a>  <br><em>The type of a constant reference to this multipatch field.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-types-inherited-from-multipatchtype">Public Types inherited from MultipatchType</h2>
+<p>See <a href="classMultipatchType.html">MultipatchType</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef ddc::detail::TypeSeq&lt; Patches... &gt;</td>
+<td style="text-align: left;"><a href="classMultipatchType.html#typedef-patchordering"><strong>PatchOrdering</strong></a>  <br><em>A tag storing the order of Patches in this</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="structT.html"><strong>T</strong></a>&lt; ddc::type_seq_element_t&lt; 0, <a href="classMultipatchType.html#typedef-patchordering"><strong>PatchOrdering</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="classMultipatchType.html#typedef-example_element"><strong>example_element</strong></a>  <br><em>The type of one of the elements of the</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>. This can be used to check that types are as expected using functions such as ddc::is_chunk_v.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions">Public Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION</td>
+<td style="text-align: left;"><a href="#function-multipatchfield-25"><strong>MultipatchField</strong></a> (<a href="structT.html"><strong>T</strong></a>&lt; Patches &gt;... args) <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION</td>
+<td style="text-align: left;"><a href="#function-multipatchfield-35"><strong>MultipatchField</strong></a> (MultipatchObj &amp; other) <br></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-multipatchfield-45"><strong>MultipatchField</strong></a> (MultipatchObj &amp; other) <br></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-multipatchfield-55"><strong>MultipatchField</strong></a> (<a href="classMultipatchField.html"><strong>MultipatchField</strong></a>&lt; OtherType, OPatches... &gt; &amp;&amp; other) <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION auto</td>
+<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> () const<br></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION auto</td>
+<td style="text-align: left;"><a href="#function-get_const_field"><strong>get_const_field</strong></a> () const<br><em>Get a</em> <a href="classMultipatchField.html"><em><strong>MultipatchField</strong></em></a> <em>containing constant fields so the values cannot be modified.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION auto</td>
+<td style="text-align: left;"><a href="#function-get_field"><strong>get_field</strong></a> () <br><em>Get a</em> <a href="classMultipatchField.html"><em><strong>MultipatchField</strong></em></a> <em>containing modifiable fields.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">auto</td>
+<td style="text-align: left;"><a href="#function-idx_range"><strong>idx_range</strong></a> () const<br><em>Get a</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>containing the index ranges on which the fields are defined.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION auto</td>
+<td style="text-align: left;"><a href="#function-span_cview"><strong>span_cview</strong></a> () <br><em>Get a</em> <a href="classMultipatchField.html"><em><strong>MultipatchField</strong></em></a> <em>containing constant fields so the values cannot be modified. This function matches the DDC name to allow the global get_const_field to be defined.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION auto</td>
+<td style="text-align: left;"><a href="#function-span_view"><strong>span_view</strong></a> () <br><em>Get a</em> <a href="classMultipatchField.html"><em><strong>MultipatchField</strong></em></a> <em>containing modifiable fields. This function matches the DDC name to allow the global get_const_field to be defined.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION</td>
+<td style="text-align: left;"><a href="#function-multipatchfield"><strong>~MultipatchField</strong></a> () noexcept<br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions-inherited-from-multipatchtype">Public Functions inherited from MultipatchType</h2>
+<p>See <a href="classMultipatchType.html">MultipatchType</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION</td>
+<td style="text-align: left;"><a href="classMultipatchType.html#function-multipatchtype-35"><strong>MultipatchType</strong></a> (<a href="structT.html"><strong>T</strong></a>&lt; Patches &gt;... args) <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION</td>
+<td style="text-align: left;"><a href="classMultipatchType.html#function-multipatchtype-45"><strong>MultipatchType</strong></a> (<a href="classMultipatchType.html"><strong>MultipatchType</strong></a>&lt; OtherType, OPatches... &gt; const &amp; other) <br></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="classMultipatchType.html#function-multipatchtype-55"><strong>MultipatchType</strong></a> (<a href="classMultipatchType.html"><strong>MultipatchType</strong></a>&lt; OtherType, OPatches... &gt; &amp;&amp; other) <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION <a href="structT.html"><strong>T</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="classMultipatchType.html#function-get"><strong>get</strong></a> () const<br></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION std::tuple&lt; <a href="structT.html"><strong>T</strong></a>&lt; Patches &gt;... &gt; const &amp;</td>
+<td style="text-align: left;"><a href="classMultipatchType.html#function-get_tuple"><strong>get_tuple</strong></a> () const<br><em>Get a constant reference to the tuple of objects stored inside this</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION</td>
+<td style="text-align: left;"><a href="classMultipatchType.html#function-multipatchtype"><strong>~MultipatchType</strong></a> () noexcept<br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-static-functions-inherited-from-multipatchtype">Public Static Functions inherited from MultipatchType</h2>
+<p>See <a href="classMultipatchType.html">MultipatchType</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">constexpr std::size_t</td>
+<td style="text-align: left;"><a href="classMultipatchType.html#function-size"><strong>size</strong></a> () <br><em>Get the number of objects stored inside the class. This is equal to the number of patches.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-attributes-inherited-from-multipatchtype">Protected Attributes inherited from MultipatchType</h2>
+<p>See <a href="classMultipatchType.html">MultipatchType</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">std::tuple&lt; <a href="structT.html"><strong>T</strong></a>&lt; Patches &gt;... &gt;</td>
+<td style="text-align: left;"><a href="classMultipatchType.html#variable-m_tuple"><strong>m_tuple</strong></a>  <br><em>The internal tuple containing the data.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-functions-inherited-from-multipatchtype">Protected Functions inherited from MultipatchType</h2>
+<p>See <a href="classMultipatchType.html">MultipatchType</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION</td>
+<td style="text-align: left;"><a href="classMultipatchType.html#function-multipatchtype-25"><strong>MultipatchType</strong></a> (std::tuple&lt; <a href="structT.html"><strong>T</strong></a>&lt; Patches &gt;... &gt; &amp;&amp; tuple) <br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-description">Detailed Description</h2>
+<p>On a multipatch domain when we have objects and types defined on different patches, e.g. fields. They can be stored in this class and then be accessed by the patch they are defined on.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><a href="structT.html"><strong>T</strong></a> The type of the fields/derivative fields/vector fields that are stored on the given patches. </li>
+<li><code>Patches</code> The patches of the objects in the same order of the patches that the given objects are defined on.</li>
+</ul>
+<p><strong>Warning:</strong></p>
+<p>The objects have to be defined on different patches. Otherwise retrieving them by their patch is ill-defined. </p>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-internalconstfieldonpatch">typedef InternalConstFieldOnPatch</h3>
+<p><em>An internal type alias that is only instantiated if the get_const_field method is called.</em> </p>
+<pre><code class="language-C++">using MultipatchField&lt; T, Patches &gt;::InternalConstFieldOnPatch =  typename T&lt;Patch&gt;::view_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-internalfieldonpatch">typedef InternalFieldOnPatch</h3>
+<p><em>An internal type alias that is only instantiated if the get_const_field method is called.</em> </p>
+<pre><code class="language-C++">using MultipatchField&lt; T, Patches &gt;::InternalFieldOnPatch =  typename T&lt;Patch&gt;::span_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-internalidxrangeonpatch">typedef InternalIdxRangeOnPatch</h3>
+<p><em>An internal type alias that is only instantiated if the idx_range method is called.</em> </p>
+<pre><code class="language-C++">using MultipatchField&lt; T, Patches &gt;::InternalIdxRangeOnPatch =  typename T&lt;Patch&gt;::discrete_domain_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-base_type">typedef base_type</h3>
+<p><em>The</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>from which this class inherits.</em></p>
+<pre><code class="language-C++">using MultipatchField&lt; T, Patches &gt;::base_type =  MultipatchType&lt;T, Patches...&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-discrete_domain_type">typedef discrete_domain_type</h3>
+<p><em>The type of the index ranges that can be used to access this field.</em> </p>
+<pre><code class="language-C++">using MultipatchField&lt; T, Patches &gt;::discrete_domain_type =  MultipatchType&lt;InternalIdxRangeOnPatch, Patches...&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-element_type">typedef element_type</h3>
+<p><em>The type of the elements inside the field.</em> </p>
+<pre><code class="language-C++">using MultipatchField&lt; T, Patches &gt;::element_type =  typename base_type::example_element::element_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idx_type">typedef idx_type</h3>
+<p><em>The type used to index the field on the specified patch.</em> </p>
+<pre><code class="language-C++">using MultipatchField&lt; T, Patches &gt;::idx_type =  typename InternalIdxRangeOnPatch&lt;Patch&gt;::discrete_element_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-memory_space">typedef memory_space</h3>
+<p><em>The memory space (CPU/GPU) where the data is saved.</em> </p>
+<pre><code class="language-C++">using MultipatchField&lt; T, Patches &gt;::memory_space =  typename base_type::example_element::memory_space;
+</code></pre>
+<hr>
+
+<h3 id="typedef-span_type">typedef span_type</h3>
+<p><em>The type of a modifiable reference to this multipatch field.</em> </p>
+<pre><code class="language-C++">using MultipatchField&lt; T, Patches &gt;::span_type =  MultipatchField&lt;InternalFieldOnPatch, Patches...&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-view_type">typedef view_type</h3>
+<p><em>The type of a constant reference to this multipatch field.</em> </p>
+<pre><code class="language-C++">using MultipatchField&lt; T, Patches &gt;::view_type =  MultipatchField&lt;InternalConstFieldOnPatch, Patches...&gt;;
+</code></pre>
+<hr>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-multipatchfield-25">function MultipatchField [2/5]</h3>
+<pre><code class="language-C++">inline explicit KOKKOS_FUNCTION MultipatchField::MultipatchField (
+    T &lt; Patches &gt;... args
+) 
+</code></pre>
+<p>Instantiate the <a href="classMultipatchField.html"><strong>MultipatchField</strong></a> class from an arbitrary number of objects.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>args</code> The objects to be stored in the class. </li>
+</ul>
+<hr>
+
+<h3 id="function-multipatchfield-35">function MultipatchField [3/5]</h3>
+<pre><code class="language-C++">template&lt;class MultipatchObj, std::enable_if_t&lt;!is_mem_type_v&lt; MultipatchObj &gt;, bool &gt;&gt;
+inline KOKKOS_FUNCTION MultipatchField::MultipatchField (
+    MultipatchObj &amp; other
+) 
+</code></pre>
+<p>Create a <a href="classMultipatchField.html"><strong>MultipatchField</strong></a> class by copying an instance of another compatible <a href="classMultipatchField.html"><strong>MultipatchField</strong></a>.</p>
+<p>A compatible <a href="classMultipatchField.html"><strong>MultipatchField</strong></a> is one which uses all the patches used by this class. The object being copied may include more patches than this <a href="classMultipatchField.html"><strong>MultipatchField</strong></a>. Further the original <a href="classMultipatchField.html"><strong>MultipatchField</strong></a> must store objects of the correct type (the type template may be different but return the same type depending on how it is designed).</p>
+<p>This function is not explicit as it is helpful to be able to change between equivalent multipatch definitions if the internal type is the same but the definition comes from different locations in the code.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>other</code> The equivalent <a href="classMultipatchField.html"><strong>MultipatchField</strong></a> being copied. </li>
+</ul>
+<hr>
+
+<h3 id="function-multipatchfield-45">function MultipatchField [4/5]</h3>
+<pre><code class="language-C++">template&lt;class MultipatchObj, std::enable_if_t&lt; is_mem_type_v&lt; MultipatchObj &gt;, bool &gt;&gt;
+inline explicit MultipatchField::MultipatchField (
+    MultipatchObj &amp; other
+) 
+</code></pre>
+<p>Create a <a href="classMultipatchField.html"><strong>MultipatchField</strong></a> class from a compatible <a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a>.</p>
+<p>A compatible <a href="classMultipatchField.html"><strong>MultipatchField</strong></a> is one which uses all the patches used by this class. The object being copied may include more patches than this <a href="classMultipatchField.html"><strong>MultipatchField</strong></a>. Further the original <a href="classMultipatchField.html"><strong>MultipatchField</strong></a> must store objects of the correct type.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>other</code> The <a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a> being accessed. </li>
+</ul>
+<hr>
+
+<h3 id="function-multipatchfield-55">function MultipatchField [5/5]</h3>
+<pre><code class="language-C++">template&lt;template&lt; typename P &gt; typename OtherType, class... OPatches&gt;
+inline MultipatchField::MultipatchField (
+    MultipatchField &lt; OtherType, OPatches... &gt; &amp;&amp; other
+) 
+</code></pre>
+<p>Create a <a href="classMultipatchField.html"><strong>MultipatchField</strong></a> class from an r-value (temporary) instance of another <a href="classMultipatchField.html"><strong>MultipatchField</strong></a> which uses the same type for the internal tuple.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>other</code> The equivalent <a href="classMultipatchField.html"><strong>MultipatchField</strong></a> being copied. </li>
+</ul>
+<hr>
+
+<h3 id="function-get">function get</h3>
+<pre><code class="language-C++">template&lt;class Patch&gt;
+inline KOKKOS_FUNCTION auto MultipatchField::get () const
+</code></pre>
+<p>Retrieve an object from the patch that it is defined on.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><a href="structPatch.html"><strong>Patch</strong></a> The patch of the object to be returned. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The object on the given patch. </p>
+<hr>
+
+<h3 id="function-get_const_field">function get_const_field</h3>
+<p><em>Get a</em> <a href="classMultipatchField.html"><em><strong>MultipatchField</strong></em></a> <em>containing constant fields so the values cannot be modified.</em></p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION auto MultipatchField::get_const_field () const
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>A set of constant fields providing access to the fields stored in this class. </p>
+<hr>
+
+<h3 id="function-get_field">function get_field</h3>
+<p><em>Get a</em> <a href="classMultipatchField.html"><em><strong>MultipatchField</strong></em></a> <em>containing modifiable fields.</em></p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION auto MultipatchField::get_field () 
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>A set of modifiable fields providing access to the fields stored in this class. </p>
+<hr>
+
+<h3 id="function-idx_range">function idx_range</h3>
+<p><em>Get a</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>containing the index ranges on which the fields are defined.</em></p>
+<pre><code class="language-C++">inline auto MultipatchField::idx_range () const
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>The set of index ranges on which the set of fields stored in this class are defined. </p>
+<hr>
+
+<h3 id="function-span_cview">function span_cview</h3>
+<p><em>Get a</em> <a href="classMultipatchField.html"><em><strong>MultipatchField</strong></em></a> <em>containing constant fields so the values cannot be modified. This function matches the DDC name to allow the global get_const_field to be defined.</em></p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION auto MultipatchField::span_cview () 
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>A set of constant fields providing access to the fields stored in this class. </p>
+<hr>
+
+<h3 id="function-span_view">function span_view</h3>
+<p><em>Get a</em> <a href="classMultipatchField.html"><em><strong>MultipatchField</strong></em></a> <em>containing modifiable fields. This function matches the DDC name to allow the global get_const_field to be defined.</em></p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION auto MultipatchField::span_view () 
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>A set of modifiable fields providing access to the fields stored in this class. </p>
+<hr>
+
+<h3 id="function-multipatchfield">function ~MultipatchField</h3>
+<pre><code class="language-C++">KOKKOS_DEFAULTED_FUNCTION MultipatchField::~MultipatchField () noexcept
+</code></pre>
+<hr>
+<h2 id="friends-documentation">Friends Documentation</h2>
+<h3 id="friend-multipatchfield-15">friend MultipatchField [1/5]</h3>
+<pre><code class="language-C++">template&lt;template&lt; typename P &gt; typename OtherType, class... OPatches&gt;
+class MultipatchField::MultipatchField (
+    MultipatchField
+) 
+</code></pre>
+<hr>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp</code></p></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/gyselax/gyselalibxx/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../docs/jscript/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

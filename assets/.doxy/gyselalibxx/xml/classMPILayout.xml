@@ -1,0 +1,332 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classMPILayout" kind="class" language="C++" prot="public">
+    <compoundname>MPILayout</compoundname>
+    <basecompoundref refid="classIMPILayout" prot="public" virt="non-virtual">IMPILayout&lt; IdxRangeData, DistributedDim... &gt;</basecompoundref>
+    <includes refid="mpilayout_8hpp" local="no">mpilayout.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class IdxRangeData</type>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>DistributedDim</declname>
+        <defname>DistributedDim</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classMPILayout_1a28898a7fe0df3d07bb1ba41aa18e2b24" prot="private" static="no">
+        <type><ref refid="classIMPILayout" kindref="compound">IMPILayout</ref>&lt; IdxRangeData, DistributedDim... &gt;</type>
+        <definition>using MPILayout&lt; IdxRangeData, DistributedDim &gt;::base_type =  IMPILayout&lt;IdxRangeData, DistributedDim...&gt;</definition>
+        <argsstring></argsstring>
+        <name>base_type</name>
+        <qualifiedname>MPILayout::base_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpilayout.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpilayout.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classMPILayout_1ad8142e0f533a266313e76614698b2ccc" prot="public" static="no">
+        <type>IdxRangeData</type>
+        <definition>using MPILayout&lt; IdxRangeData, DistributedDim &gt;::idx_range_type =  IdxRangeData</definition>
+        <argsstring></argsstring>
+        <name>idx_range_type</name>
+        <qualifiedname>MPILayout::idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The index range of the data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpilayout.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpilayout.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMPILayout_1ad5c0300b226356271de45722fcc7f447" prot="public" static="no">
+        <type>typename <ref refid="classIMPILayout_1affaed5e5e8eba26de6e64662c6ebc7d7" kindref="member">base_type::distributed_sub_idx_range</ref></type>
+        <definition>using MPILayout&lt; IdxRangeData, DistributedDim &gt;::distributed_sub_idx_range =  typename base_type::distributed_sub_idx_range</definition>
+        <argsstring></argsstring>
+        <name>distributed_sub_idx_range</name>
+        <qualifiedname>MPILayout::distributed_sub_idx_range</qualifiedname>
+        <briefdescription>
+<para>The index range of the distributed section of the data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpilayout.hpp" line="45" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpilayout.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classMPILayout_1a802925fc2fae468337b971b46f769500" prot="public" static="no">
+        <type>typename <ref refid="classIMPILayout_1a5734be7b4782cfd49498bd2ad6610353" kindref="member">base_type::distributed_type_seq</ref></type>
+        <definition>using MPILayout&lt; IdxRangeData, DistributedDim &gt;::distributed_type_seq =  typename base_type::distributed_type_seq</definition>
+        <argsstring></argsstring>
+        <name>distributed_type_seq</name>
+        <qualifiedname>MPILayout::distributed_type_seq</qualifiedname>
+        <briefdescription>
+<para>A type sequence describing the dimensions which are distributed across MPI processes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpilayout.hpp" line="47" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpilayout.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classMPILayout_1a455677e1ae24aca58a4be965bd1f397e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classMPILayout_1ad8142e0f533a266313e76614698b2ccc" kindref="member">idx_range_type</ref></type>
+        <definition>static idx_range_type MPILayout&lt; IdxRangeData, DistributedDim &gt;::distribute_idx_range</definition>
+        <argsstring>(idx_range_type global_idx_range, int comm_size, int rank)</argsstring>
+        <name>distribute_idx_range</name>
+        <qualifiedname>MPILayout::distribute_idx_range</qualifiedname>
+        <param>
+          <type><ref refid="classMPILayout_1ad8142e0f533a266313e76614698b2ccc" kindref="member">idx_range_type</ref></type>
+          <declname>global_idx_range</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>comm_size</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>rank</declname>
+        </param>
+        <briefdescription>
+<para>Get the distributed index range which follows the chosen layout. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">global_idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The global (non-distributed) index range. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">comm_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of MPI processes over which the data is distributed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rank</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rank of the current MPI process.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The distributed index range. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpilayout.hpp" line="59" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpilayout.hpp" bodystart="59" bodyend="73"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-static-func">
+      <memberdef kind="function" id="classMPILayout_1ab32c4d3ad1b3e2475033c0d08bb014e6" prot="protected" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class HeadTag</type>
+          </param>
+        </templateparamlist>
+        <type>IdxRange&lt; HeadTag &gt;</type>
+        <definition>static IdxRange&lt; HeadTag &gt; MPILayout&lt; IdxRangeData, DistributedDim &gt;::internal_distribute_idx_range</definition>
+        <argsstring>(IdxRange&lt; HeadTag &gt; global_idx_range, int comm_size, int rank)</argsstring>
+        <name>internal_distribute_idx_range</name>
+        <qualifiedname>MPILayout::internal_distribute_idx_range</qualifiedname>
+        <param>
+          <type>IdxRange&lt; HeadTag &gt;</type>
+          <declname>global_idx_range</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>comm_size</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>rank</declname>
+        </param>
+        <briefdescription>
+<para>Distribute a 1D index range over the MPI processes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">global_idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range to be distributed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">comm_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of processes over which the data should be disctributed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rank</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rank of the process within the current group of processes</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The distributed index range. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpilayout.hpp" line="88" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpilayout.hpp" bodystart="88" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classMPILayout_1afc8ae4453ec8db31580d3a6bf4974fa1" prot="protected" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class HeadTag</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>Tags</declname>
+            <defname>Tags</defname>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt;(sizeof...(Tags) &gt; 0), bool &gt;</type>
+            <defval>true</defval>
+          </param>
+        </templateparamlist>
+        <type>IdxRange&lt; HeadTag, Tags... &gt;</type>
+        <definition>static IdxRange&lt; HeadTag, Tags... &gt; MPILayout&lt; IdxRangeData, DistributedDim &gt;::internal_distribute_idx_range</definition>
+        <argsstring>(IdxRange&lt; HeadTag, Tags... &gt; idx_range, int comm_size, int rank)</argsstring>
+        <name>internal_distribute_idx_range</name>
+        <qualifiedname>MPILayout::internal_distribute_idx_range</qualifiedname>
+        <param>
+          <type>IdxRange&lt; HeadTag, Tags... &gt;</type>
+          <declname>idx_range</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>comm_size</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>rank</declname>
+        </param>
+        <briefdescription>
+<para>Distribute the index range over the MPI processes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function is called recursively. At each pass it distributes the index range over the first dimension in the discrete index range. The remaining dimensions and processes are then handled in the recursive call.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range to be distributed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">comm_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of processes over which the data should be disctributed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rank</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rank of the process within the current group of processes</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The distributed index range. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpilayout.hpp" line="123" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpilayout.hpp" bodystart="123" bodyend="162"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class describing a way in which data may be laid out across MPI processes. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class describes the simplest way of laying out data. In this layout the data is distributed along dimensions in order until the data is distributed. It is possible that the data may not be distributed along some of the requested dimensions if such distribution is not necessary. For example if we distribute dimensions <ref refid="structR" kindref="compound">R</ref> and <ref refid="structTheta" kindref="compound">Theta</ref> of a (<ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref>, Phi, <ref refid="structVpar" kindref="compound">Vpar</ref>, <ref refid="structMu" kindref="compound">Mu</ref>) grid of size 256 x 1024 x 256 x 64 x 8 over 64 processes, the theta dimension will not be distributed.</para>
+<para>The data is distributed such that it is maximally distributed over each dimension (in order) such that the size of each local index range along that dimension is the same for all processes. For example if we distribute dimensions <ref refid="structX" kindref="compound">X</ref> and <ref refid="structY" kindref="compound">Y</ref> of a (<ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, Z) grid of size (10, 15, 4) over 6 processes, the <ref refid="structX" kindref="compound">X</ref> dimension will be distributed over 2 processes and the <ref refid="structY" kindref="compound">Y</ref> dimension will be distributed over 3 processes.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>IdxRangeData</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IdxRange on which the data is defined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DistributedDim</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The tags of the discrete dimensions which are distributed across MPI processes. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>IMPILayout&lt; IdxRangeData, DistributedDim... &gt;</label>
+        <link refid="classIMPILayout"/>
+      </node>
+      <node id="1">
+        <label>MPILayout&lt; IdxRangeData, DistributedDim &gt;</label>
+        <link refid="classMPILayout"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>IMPILayout&lt; IdxRangeData, DistributedDim... &gt;</label>
+        <link refid="classIMPILayout"/>
+      </node>
+      <node id="1">
+        <label>MPILayout&lt; IdxRangeData, DistributedDim &gt;</label>
+        <link refid="classMPILayout"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpilayout.hpp" line="35" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpilayout.hpp" bodystart="36" bodyend="163"/>
+    <listofallmembers>
+      <member refid="classMPILayout_1a28898a7fe0df3d07bb1ba41aa18e2b24" prot="private" virt="non-virtual"><scope>MPILayout</scope><name>base_type</name></member>
+      <member refid="classIMPILayout_1aa958ea8d8ed3431a7d14e0333e379566" prot="public" virt="non-virtual"><scope>MPILayout</scope><name>discrete_domain_type</name></member>
+      <member refid="classMPILayout_1a455677e1ae24aca58a4be965bd1f397e" prot="public" virt="non-virtual"><scope>MPILayout</scope><name>distribute_idx_range</name></member>
+      <member refid="classIMPILayout_1aab14961802d15d51c8a1a45c7896e64d" prot="public" virt="non-virtual"><scope>MPILayout</scope><name>distributed_idx_ranges_are_first</name></member>
+      <member refid="classMPILayout_1ad5c0300b226356271de45722fcc7f447" prot="public" virt="non-virtual"><scope>MPILayout</scope><name>distributed_sub_idx_range</name></member>
+      <member refid="classMPILayout_1a802925fc2fae468337b971b46f769500" prot="public" virt="non-virtual"><scope>MPILayout</scope><name>distributed_type_seq</name></member>
+      <member refid="classMPILayout_1ad8142e0f533a266313e76614698b2ccc" prot="public" virt="non-virtual"><scope>MPILayout</scope><name>idx_range_type</name></member>
+      <member refid="classMPILayout_1ab32c4d3ad1b3e2475033c0d08bb014e6" prot="protected" virt="non-virtual"><scope>MPILayout</scope><name>internal_distribute_idx_range</name></member>
+      <member refid="classMPILayout_1afc8ae4453ec8db31580d3a6bf4974fa1" prot="protected" virt="non-virtual"><scope>MPILayout</scope><name>internal_distribute_idx_range</name></member>
+      <member refid="classIMPILayout_1ab55757fa0972d849a94feeca30a9f465" prot="public" virt="non-virtual"><scope>MPILayout</scope><name>n_distributed_dimensions</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classITimeSolver" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>ITimeSolver</compoundname>
+    <derivedcompoundref refid="classPredCorr" prot="public" virt="non-virtual">PredCorr</derivedcompoundref>
+    <derivedcompoundref refid="classPredCorr" prot="public" virt="non-virtual">PredCorr</derivedcompoundref>
+    <includes refid="geometryXVx_2time__integration_2itimesolver_8hpp" local="no">itimesolver.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classITimeSolver_1a0b6b8b4a38bfe8eb0763c65268a10379" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ITimeSolver::~ITimeSolver</definition>
+        <argsstring>()=default</argsstring>
+        <name>~ITimeSolver</name>
+        <qualifiedname>ITimeSolver::~ITimeSolver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/time_integration/itimesolver.hpp" line="13" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classITimeSolver_1abfdecd652433d1ae388a6489da2ed865" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>DFieldSpXVx</type>
+        <definition>virtual DFieldSpXVx ITimeSolver::operator()</definition>
+        <argsstring>(DFieldSpXVx allfdistribu, double time_start, double dt, int steps=1) const =0</argsstring>
+        <name>operator()</name>
+        <qualifiedname>ITimeSolver::operator()</qualifiedname>
+        <reimplementedby refid="classPredCorr_1a2a3c70566fbfaef1d04bb540c980e7d1">operator()</reimplementedby>
+        <param>
+          <type>DFieldSpXVx</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>time_start</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>steps</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>Operator for solving the Boltzmann-Poisson system. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On input : the initial value of the distribution function. On output : the value of the distribution function after solving the Boltzmann-Poisson system a given number of iterations. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">time_start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The physical time at the start of the simulation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The timestep. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">steps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of iterations to be performed by the solver. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The distribution function after solving the system. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/time_integration/itimesolver.hpp" line="25" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classITimeSolver_1a0b6b8b4a38bfe8eb0763c65268a10379" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ITimeSolver::~ITimeSolver</definition>
+        <argsstring>()=default</argsstring>
+        <name>~ITimeSolver</name>
+        <qualifiedname>ITimeSolver::~ITimeSolver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/time_integration/itimesolver.hpp" line="13" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classITimeSolver_1a1848f9cee5d5c8e3c69a133cb17d0196" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>DFieldSpVxVyXY</type>
+        <definition>virtual DFieldSpVxVyXY ITimeSolver::operator()</definition>
+        <argsstring>(DFieldSpVxVyXY allfdistribu, double dt, int steps=1) const =0</argsstring>
+        <name>operator()</name>
+        <qualifiedname>ITimeSolver::operator()</qualifiedname>
+        <reimplementedby refid="classPredCorr_1a3b8e02177cabfc230b09eb5d5b49c084">operator()</reimplementedby>
+        <param>
+          <type>DFieldSpVxVyXY</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>steps</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>Solves the Vlasov-Poisson system. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On input : the initial value of the distribution function. On output : the value of the distribution function after solving the Vlasov-Poisson system a given number of iterations. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The timestep. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">steps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of iterations to be performed by the predictor-corrector. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The distribution function after solving the system. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/time_integration/itimesolver.hpp" line="24" column="28"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>An abstract class for solving a Boltzmann-Poisson system of equations. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>An abstract class for solving a Vlasov-Poisson system of equations. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>ITimeSolver</label>
+        <link refid="classITimeSolver"/>
+      </node>
+      <node id="2">
+        <label>PredCorr</label>
+        <link refid="classPredCorr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/time_integration/itimesolver.hpp" line="10" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/time_integration/itimesolver.hpp" bodystart="11" bodyend="30"/>
+    <listofallmembers>
+      <member refid="classITimeSolver_1abfdecd652433d1ae388a6489da2ed865" prot="public" virt="pure-virtual"><scope>ITimeSolver</scope><name>operator()</name></member>
+      <member refid="classITimeSolver_1a1848f9cee5d5c8e3c69a133cb17d0196" prot="public" virt="pure-virtual"><scope>ITimeSolver</scope><name>operator()</name></member>
+      <member refid="classITimeSolver_1a0b6b8b4a38bfe8eb0763c65268a10379" prot="public" virt="virtual"><scope>ITimeSolver</scope><name>~ITimeSolver</name></member>
+      <member refid="classITimeSolver_1a0b6b8b4a38bfe8eb0763c65268a10379" prot="public" virt="virtual"><scope>ITimeSolver</scope><name>~ITimeSolver</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

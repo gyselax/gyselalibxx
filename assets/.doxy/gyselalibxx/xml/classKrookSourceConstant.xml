@@ -1,0 +1,364 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classKrookSourceConstant" kind="class" language="C++" prot="public">
+    <compoundname>KrookSourceConstant</compoundname>
+    <basecompoundref refid="classIRightHandSide" prot="public" virt="non-virtual">IRightHandSide</basecompoundref>
+    <includes refid="krook__source__constant_8hpp" local="no">krook_source_constant.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classKrookSourceConstant_1abea8bcb109815c3989c675988a4b1806" prot="private" static="no" mutable="no">
+        <type>RhsType</type>
+        <definition>RhsType KrookSourceConstant::m_type</definition>
+        <argsstring></argsstring>
+        <name>m_type</name>
+        <qualifiedname>KrookSourceConstant::m_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" line="25" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classKrookSourceConstant_1a15162b89d3a661c0d2aff41e0e0da708" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double KrookSourceConstant::m_extent</definition>
+        <argsstring></argsstring>
+        <name>m_extent</name>
+        <qualifiedname>KrookSourceConstant::m_extent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" line="26" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classKrookSourceConstant_1a5dc9c37ae84ea75ec9f889b7b2f5a7c0" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double KrookSourceConstant::m_stiffness</definition>
+        <argsstring></argsstring>
+        <name>m_stiffness</name>
+        <qualifiedname>KrookSourceConstant::m_stiffness</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" line="27" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classKrookSourceConstant_1ad9d79df9c4e54d439a262950a28aa5c6" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double KrookSourceConstant::m_amplitude</definition>
+        <argsstring></argsstring>
+        <name>m_amplitude</name>
+        <qualifiedname>KrookSourceConstant::m_amplitude</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" line="28" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classKrookSourceConstant_1a64c69a6cfd6d0d92f491dbac6bc0b9d6" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double KrookSourceConstant::m_density</definition>
+        <argsstring></argsstring>
+        <name>m_density</name>
+        <qualifiedname>KrookSourceConstant::m_density</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" line="29" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classKrookSourceConstant_1a85350898820ad47bf9efa903561eb8ae" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double KrookSourceConstant::m_temperature</definition>
+        <argsstring></argsstring>
+        <name>m_temperature</name>
+        <qualifiedname>KrookSourceConstant::m_temperature</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" line="30" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classKrookSourceConstant_1a1479ad0fff29c59732956ee59b36bd21" prot="private" static="no" mutable="no">
+        <type>DFieldMemX</type>
+        <definition>DFieldMemX KrookSourceConstant::m_mask</definition>
+        <argsstring></argsstring>
+        <name>m_mask</name>
+        <qualifiedname>KrookSourceConstant::m_mask</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" line="31" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classKrookSourceConstant_1ad11720feea9b1d6f0c3432201992ff87" prot="private" static="no" mutable="no">
+        <type>DFieldMemVx</type>
+        <definition>DFieldMemVx KrookSourceConstant::m_ftarget</definition>
+        <argsstring></argsstring>
+        <name>m_ftarget</name>
+        <qualifiedname>KrookSourceConstant::m_ftarget</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" line="32" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classKrookSourceConstant_1a23f3846feea732e1d57eae70823c546e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>KrookSourceConstant::KrookSourceConstant</definition>
+        <argsstring>(IdxRangeX const &amp;gridx, IdxRangeVx const &amp;gridv, RhsType const type, double extent, double stiffness, double amplitude, double density, double temperature)</argsstring>
+        <name>KrookSourceConstant</name>
+        <qualifiedname>KrookSourceConstant::KrookSourceConstant</qualifiedname>
+        <param>
+          <type>IdxRangeX const &amp;</type>
+          <declname>gridx</declname>
+        </param>
+        <param>
+          <type>IdxRangeVx const &amp;</type>
+          <declname>gridv</declname>
+        </param>
+        <param>
+          <type>RhsType const</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>extent</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>stiffness</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>amplitude</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>density</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>temperature</declname>
+        </param>
+        <briefdescription>
+<para>Creates an instance of the <ref refid="classKrookSourceConstant" kindref="compound">KrookSourceConstant</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">gridx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mesh in the x direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gridv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mesh in the vx direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A RhsType parameter that defines the region where the operator is active. If type = Source, the mask equals one in the central zone of the plasma of width extent; If type = Sink, the mask equals zero in the central zone of the plasma of width extent; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">extent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that sets the extent of the source. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stiffness</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that sets the stiffness of the source extent. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">amplitude</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that sets the the amplitude of the source. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">density</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that sets the density of the Maxwellian ftarget. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">temperature</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that sets the temperature of the Maxwellian ftarget. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" line="48" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.cpp" bodystart="11" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classKrookSourceConstant_1a94d8fa0b721fbe980a11a9edc298b9c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>KrookSourceConstant::KrookSourceConstant</definition>
+        <argsstring>(KrookSourceConstant &amp;&amp;)=default</argsstring>
+        <name>KrookSourceConstant</name>
+        <qualifiedname>KrookSourceConstant::KrookSourceConstant</qualifiedname>
+        <param>
+          <type><ref refid="classKrookSourceConstant" kindref="compound">KrookSourceConstant</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>Creates an instance of the <ref refid="classKrookSourceConstant" kindref="compound">KrookSourceConstant</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" line="61" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classKrookSourceConstant_1ae881ed7d8768c9f8bb103d10a1b625cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>KrookSourceConstant::~KrookSourceConstant</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~KrookSourceConstant</name>
+        <qualifiedname>KrookSourceConstant::~KrookSourceConstant</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" line="63" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classKrookSourceConstant_1a266237a1a58a6f8f000ee4e910353dcc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>DFieldSpXVx</type>
+        <definition>DFieldSpXVx KrookSourceConstant::operator()</definition>
+        <argsstring>(DFieldSpXVx allfdistribu, double dt) const override</argsstring>
+        <name>operator()</name>
+        <qualifiedname>KrookSourceConstant::operator()</qualifiedname>
+        <reimplements refid="classIRightHandSide_1a00f66ff88f6b0fd17a931a09b1ddb2d3">operator()</reimplements>
+        <param>
+          <type>DFieldSpXVx</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+<para>Update the distribution function following the <ref refid="classKrookSourceConstant" kindref="compound">KrookSourceConstant</ref> operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Update the distribution function for both electrons and ions to show how it is modified following the effect of the <ref refid="classKrookSourceConstant" kindref="compound">KrookSourceConstant</ref> operator.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The distribution function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A field referencing the distribution function passed as argument. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" line="76" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.cpp" bodystart="69" bodyend="90"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class that describes a source of particles. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The <ref refid="classKrookSourceConstant" kindref="compound">KrookSourceConstant</ref> class solves the following evolution equation: df/dt = -amplitude * mask * (f - ftarget)</para>
+<para>mask defines the spatial region where the operator is active.</para>
+<para>ftarget is a maxwellian characterised by density and temperature, and a zero fluid velocity.</para>
+<para>amplitude is a constant for both species.</para>
+<para>The solution of the evolution equation is therefore : f(t+dt) = ftarget + (f(t)-ftarget)*exp(-amplitude*mask*dt) </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>IRightHandSide</label>
+        <link refid="classIRightHandSide"/>
+      </node>
+      <node id="1">
+        <label>KrookSourceConstant</label>
+        <link refid="classKrookSourceConstant"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>IRightHandSide</label>
+        <link refid="classIRightHandSide"/>
+      </node>
+      <node id="1">
+        <label>KrookSourceConstant</label>
+        <link refid="classKrookSourceConstant"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" line="22" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/krook_source_constant.hpp" bodystart="23" bodyend="77"/>
+    <listofallmembers>
+      <member refid="classKrookSourceConstant_1a23f3846feea732e1d57eae70823c546e" prot="public" virt="non-virtual"><scope>KrookSourceConstant</scope><name>KrookSourceConstant</name></member>
+      <member refid="classKrookSourceConstant_1a94d8fa0b721fbe980a11a9edc298b9c8" prot="public" virt="non-virtual"><scope>KrookSourceConstant</scope><name>KrookSourceConstant</name></member>
+      <member refid="classKrookSourceConstant_1ad9d79df9c4e54d439a262950a28aa5c6" prot="private" virt="non-virtual"><scope>KrookSourceConstant</scope><name>m_amplitude</name></member>
+      <member refid="classKrookSourceConstant_1a64c69a6cfd6d0d92f491dbac6bc0b9d6" prot="private" virt="non-virtual"><scope>KrookSourceConstant</scope><name>m_density</name></member>
+      <member refid="classKrookSourceConstant_1a15162b89d3a661c0d2aff41e0e0da708" prot="private" virt="non-virtual"><scope>KrookSourceConstant</scope><name>m_extent</name></member>
+      <member refid="classKrookSourceConstant_1ad11720feea9b1d6f0c3432201992ff87" prot="private" virt="non-virtual"><scope>KrookSourceConstant</scope><name>m_ftarget</name></member>
+      <member refid="classKrookSourceConstant_1a1479ad0fff29c59732956ee59b36bd21" prot="private" virt="non-virtual"><scope>KrookSourceConstant</scope><name>m_mask</name></member>
+      <member refid="classKrookSourceConstant_1a5dc9c37ae84ea75ec9f889b7b2f5a7c0" prot="private" virt="non-virtual"><scope>KrookSourceConstant</scope><name>m_stiffness</name></member>
+      <member refid="classKrookSourceConstant_1a85350898820ad47bf9efa903561eb8ae" prot="private" virt="non-virtual"><scope>KrookSourceConstant</scope><name>m_temperature</name></member>
+      <member refid="classKrookSourceConstant_1abea8bcb109815c3989c675988a4b1806" prot="private" virt="non-virtual"><scope>KrookSourceConstant</scope><name>m_type</name></member>
+      <member refid="classKrookSourceConstant_1a266237a1a58a6f8f000ee4e910353dcc" prot="public" virt="virtual"><scope>KrookSourceConstant</scope><name>operator()</name></member>
+      <member refid="classIRightHandSide_1a46c157197ef52a7dd221e687584b3d1c" prot="public" virt="virtual"><scope>KrookSourceConstant</scope><name>~IRightHandSide</name></member>
+      <member refid="classKrookSourceConstant_1ae881ed7d8768c9f8bb103d10a1b625cb" prot="public" virt="non-virtual"><scope>KrookSourceConstant</scope><name>~KrookSourceConstant</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

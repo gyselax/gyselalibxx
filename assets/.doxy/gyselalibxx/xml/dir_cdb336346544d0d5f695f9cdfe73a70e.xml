@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_cdb336346544d0d5f695f9cdfe73a70e" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation</compoundname>
+    <innerfile refid="bumpontailequilibrium_8cpp">bumpontailequilibrium.cpp</innerfile>
+    <innerfile refid="bumpontailequilibrium_8hpp">bumpontailequilibrium.hpp</innerfile>
+    <innerfile refid="geometryXVx_2initialisation_2iequilibrium_8hpp">iequilibrium.hpp</innerfile>
+    <innerfile refid="geometryXVx_2initialisation_2iinitialisation_8hpp">iinitialisation.hpp</innerfile>
+    <innerfile refid="geometryXVx_2initialisation_2maxwellianequilibrium_8cpp">maxwellianequilibrium.cpp</innerfile>
+    <innerfile refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp">maxwellianequilibrium.hpp</innerfile>
+    <innerfile refid="restartinitialisation_8cpp">restartinitialisation.cpp</innerfile>
+    <innerfile refid="restartinitialisation_8hpp">restartinitialisation.hpp</innerfile>
+    <innerfile refid="geometryXVx_2initialisation_2singlemodeperturbinitialisation_8cpp">singlemodeperturbinitialisation.cpp</innerfile>
+    <innerfile refid="geometryXVx_2initialisation_2singlemodeperturbinitialisation_8hpp">singlemodeperturbinitialisation.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classSpline1DPartialDerivativeCreator" kind="class" language="C++" prot="public">
+    <compoundname>Spline1DPartialDerivativeCreator</compoundname>
+    <basecompoundref refid="classIPartialDerivativeCreator" prot="public" virt="non-virtual">IPartialDerivativeCreator&lt; Spline1DBuilder::batched_interpolation_domain_type, Spline1DBuilder::continuous_dimension_type &gt;</basecompoundref>
+    <includes refid="spline__1d__partial__derivative_8hpp" local="no">spline_1d_partial_derivative.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Spline1DBuilder</type>
+      </param>
+      <param>
+        <type>class Spline1DEvaluator</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSpline1DPartialDerivativeCreator_1af150c5587166c7dfcf659e1516f8ed98" prot="private" static="no">
+        <type>DConstField&lt; typename Spline1DBuilder::batched_interpolation_domain_type &gt;</type>
+        <definition>using Spline1DPartialDerivativeCreator&lt; Spline1DBuilder, Spline1DEvaluator &gt;::DConstFieldType =  DConstField&lt;typename Spline1DBuilder::batched_interpolation_domain_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>DConstFieldType</name>
+        <qualifiedname>Spline1DPartialDerivativeCreator::DConstFieldType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" line="95" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSpline1DPartialDerivativeCreator_1a0aace1454bad5b7f1d550697b2f8056f" prot="private" static="no" mutable="no">
+        <type>Spline1DBuilder const  &amp;</type>
+        <definition>Spline1DBuilder const&amp; Spline1DPartialDerivativeCreator&lt; Spline1DBuilder, Spline1DEvaluator &gt;::m_builder</definition>
+        <argsstring></argsstring>
+        <name>m_builder</name>
+        <qualifiedname>Spline1DPartialDerivativeCreator::m_builder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" line="98" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSpline1DPartialDerivativeCreator_1a52dfd5c5fb3acf0f58c142a714a57098" prot="private" static="no" mutable="no">
+        <type>Spline1DEvaluator const  &amp;</type>
+        <definition>Spline1DEvaluator const&amp; Spline1DPartialDerivativeCreator&lt; Spline1DBuilder, Spline1DEvaluator &gt;::m_evaluator</definition>
+        <argsstring></argsstring>
+        <name>m_evaluator</name>
+        <qualifiedname>Spline1DPartialDerivativeCreator::m_evaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" line="99" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSpline1DPartialDerivativeCreator_1a2284ecb994032c589f063fbbd6b549c3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Spline1DPartialDerivativeCreator&lt; Spline1DBuilder, Spline1DEvaluator &gt;::Spline1DPartialDerivativeCreator</definition>
+        <argsstring>(Spline1DBuilder const &amp;builder, Spline1DEvaluator const &amp;evaluator)</argsstring>
+        <name>Spline1DPartialDerivativeCreator</name>
+        <qualifiedname>Spline1DPartialDerivativeCreator::Spline1DPartialDerivativeCreator</qualifiedname>
+        <param>
+          <type>Spline1DBuilder const &amp;</type>
+          <declname>builder</declname>
+        </param>
+        <param>
+          <type>Spline1DEvaluator const &amp;</type>
+          <declname>evaluator</declname>
+        </param>
+        <briefdescription>
+<para>Construct an instance of the <ref refid="classSpline1DPartialDerivativeCreator" kindref="compound">Spline1DPartialDerivativeCreator</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">builder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 1d spline builder. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 1d spline evaluator. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" line="107" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" bodystart="107" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classSpline1DPartialDerivativeCreator_1aaba8db6f777ebce70d1c1522565bff09" prot="public" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="non-virtual">
+        <type>std::unique_ptr&lt; <ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative</ref>&lt; typename Spline1DBuilder::batched_interpolation_domain_type, typename Spline1DBuilder::continuous_dimension_type &gt; &gt;</type>
+        <definition>std::unique_ptr&lt; IPartialDerivative&lt; typename Spline1DBuilder::batched_interpolation_domain_type, typename Spline1DBuilder::continuous_dimension_type &gt; &gt; Spline1DPartialDerivativeCreator&lt; Spline1DBuilder, Spline1DEvaluator &gt;::create_instance</definition>
+        <argsstring>(DConstFieldType field) const final</argsstring>
+        <name>create_instance</name>
+        <qualifiedname>Spline1DPartialDerivativeCreator::create_instance</qualifiedname>
+        <param>
+          <type>DConstFieldType</type>
+          <declname>field</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Create a pointer to an instance of the abstract class <ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative</ref>. The type of the returned object will be determined when the pointer is dereferenced.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A field to be differentiated.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pointer to an instance of the <ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative</ref> class. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" line="127" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" bodystart="127" bodyend="132"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class which stores information necessary to create a pointer to an instance of the <ref refid="classSpline1DPartialDerivative" kindref="compound">Spline1DPartialDerivative</ref> class. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class allows an instance of the <ref refid="classSpline1DPartialDerivative" kindref="compound">Spline1DPartialDerivative</ref> class to be instantiated where necessary. Typically, the <ref refid="classSpline1DPartialDerivativeCreator" kindref="compound">Spline1DPartialDerivativeCreator</ref> is instantiated in the initialisation of the simulation, and the corresponding <ref refid="classSpline1DPartialDerivative" kindref="compound">Spline1DPartialDerivative</ref> object is instantiated where computing partial derivatives is required. <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Spline1DBuilder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 1D spline builder. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Spline1DEvaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 1D spline evaluator. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>IPartialDerivativeCreator&lt; Spline1DBuilder::batched_interpolation_domain_type, Spline1DBuilder::continuous_dimension_type &gt;</label>
+        <link refid="classIPartialDerivativeCreator"/>
+      </node>
+      <node id="1">
+        <label>Spline1DPartialDerivativeCreator&lt; Spline1DBuilder, Spline1DEvaluator &gt;</label>
+        <link refid="classSpline1DPartialDerivativeCreator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>IPartialDerivativeCreator&lt; Spline1DBuilder::batched_interpolation_domain_type, Spline1DBuilder::continuous_dimension_type &gt;</label>
+        <link refid="classIPartialDerivativeCreator"/>
+      </node>
+      <node id="1">
+        <label>Spline1DPartialDerivativeCreator&lt; Spline1DBuilder, Spline1DEvaluator &gt;</label>
+        <link refid="classSpline1DPartialDerivativeCreator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" line="89" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" bodystart="93" bodyend="133"/>
+    <listofallmembers>
+      <member refid="classSpline1DPartialDerivativeCreator_1aaba8db6f777ebce70d1c1522565bff09" prot="public" virt="non-virtual"><scope>Spline1DPartialDerivativeCreator</scope><name>create_instance</name></member>
+      <member refid="classIPartialDerivativeCreator_1aa6909a30ce6565221d37736bf059f7a0" prot="public" virt="pure-virtual" ambiguityscope="IPartialDerivativeCreator&lt; Spline1DBuilder::batched_interpolation_domain_type, Spline1DBuilder::continuous_dimension_type &gt;::"><scope>Spline1DPartialDerivativeCreator</scope><name>create_instance</name></member>
+      <member refid="classSpline1DPartialDerivativeCreator_1af150c5587166c7dfcf659e1516f8ed98" prot="private" virt="non-virtual"><scope>Spline1DPartialDerivativeCreator</scope><name>DConstFieldType</name></member>
+      <member refid="classSpline1DPartialDerivativeCreator_1a0aace1454bad5b7f1d550697b2f8056f" prot="private" virt="non-virtual"><scope>Spline1DPartialDerivativeCreator</scope><name>m_builder</name></member>
+      <member refid="classSpline1DPartialDerivativeCreator_1a52dfd5c5fb3acf0f58c142a714a57098" prot="private" virt="non-virtual"><scope>Spline1DPartialDerivativeCreator</scope><name>m_evaluator</name></member>
+      <member refid="classSpline1DPartialDerivativeCreator_1a2284ecb994032c589f063fbbd6b549c3" prot="public" virt="non-virtual"><scope>Spline1DPartialDerivativeCreator</scope><name>Spline1DPartialDerivativeCreator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

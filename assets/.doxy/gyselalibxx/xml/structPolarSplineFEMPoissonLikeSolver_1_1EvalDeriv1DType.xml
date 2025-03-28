@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType" kind="struct" language="C++" prot="public">
+    <compoundname>PolarSplineFEMPoissonLikeSolver::EvalDeriv1DType</compoundname>
+    <includes refid="polarpoissonlikesolver_8hpp" local="no">polarpoissonlikesolver.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType_1a59fd1b049baa158b324f7726653c7e62" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, IdxRangeFull &gt;::EvalDeriv1DType::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::EvalDeriv1DType::value</qualifiedname>
+        <briefdescription>
+<para>The value of the function <formula id="306">$f(x)$</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="180" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="180" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType_1a4b954ccf1b13c5806b5476c5ef323b75" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, IdxRangeFull &gt;::EvalDeriv1DType::derivative</definition>
+        <argsstring></argsstring>
+        <name>derivative</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::EvalDeriv1DType::derivative</qualifiedname>
+        <briefdescription>
+<para>The derivative of the function <formula id="307">$\partial_x f(x)$</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="182" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="182" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Object storing a value and a value of the derivative of a 1D function. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="177" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="178" bodyend="183"/>
+    <listofallmembers>
+      <member refid="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType_1a4b954ccf1b13c5806b5476c5ef323b75" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver::EvalDeriv1DType</scope><name>derivative</name></member>
+      <member refid="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType_1a59fd1b049baa158b324f7726653c7e62" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver::EvalDeriv1DType</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

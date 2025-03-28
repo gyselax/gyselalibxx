@@ -1,0 +1,340 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="species__init_8hpp" kind="file" language="C++">
+    <compoundname>species_init.hpp</compoundname>
+    <includes local="no">ddc/ddc.hpp</includes>
+    <includes local="no">paraconf.h</includes>
+    <includes refid="ddc__helper_8hpp" local="yes">ddc_helper.hpp</includes>
+    <includes refid="paraconfpp_8hpp" local="yes">paraconfpp.hpp</includes>
+    <includes refid="pdi__helper_8hpp" local="yes">pdi_helper.hpp</includes>
+    <includes refid="species__info_8hpp" local="yes">species_info.hpp</includes>
+    <includedby refid="species__init_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.cpp</includedby>
+    <incdepgraph>
+      <node id="14">
+        <label>pdi_helper.hpp</label>
+        <link refid="pdi__helper_8hpp_source"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>paraconfpp.hpp</label>
+        <link refid="paraconfpp_8hpp_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>species_info.hpp</label>
+        <link refid="species__info_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.hpp</label>
+        <link refid="species__init_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>ddc_alias_inline_functions.hpp</label>
+        <link refid="ddc__alias__inline__functions_8hpp_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>ddc_helper.hpp</label>
+        <link refid="ddc__helper_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>cassert</label>
+      </node>
+      <node id="6">
+        <label>cmath</label>
+      </node>
+      <node id="2">
+        <label>ddc/ddc.hpp</label>
+      </node>
+      <node id="8">
+        <label>ddc/kernels/splines.hpp</label>
+      </node>
+      <node id="10">
+        <label>filesystem</label>
+      </node>
+      <node id="3">
+        <label>paraconf.h</label>
+      </node>
+      <node id="15">
+        <label>pdi.h</label>
+      </node>
+      <node id="11">
+        <label>stdexcept</label>
+      </node>
+      <node id="12">
+        <label>string</label>
+      </node>
+      <node id="18">
+        <label>type_traits</label>
+      </node>
+      <node id="13">
+        <label>utility</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="species__init_8hpp_1a5547d02a2155e46720d2644e7584a275" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_all_species</definition>
+        <argsstring>(IdxRangeSp &amp;idx_range_kinsp, IdxRangeSp &amp;idx_range_fluidsp, PC_tree_t conf_gyselalibxx, int nb_kinspecies, int nb_fluidspecies)</argsstring>
+        <name>init_all_species</name>
+        <param>
+          <type>IdxRangeSp &amp;</type>
+          <declname>idx_range_kinsp</declname>
+        </param>
+        <param>
+          <type>IdxRangeSp &amp;</type>
+          <declname>idx_range_fluidsp</declname>
+        </param>
+        <param>
+          <type>PC_tree_t</type>
+          <declname>conf_gyselalibxx</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nb_kinspecies</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nb_fluidspecies</declname>
+        </param>
+        <briefdescription>
+<para>Initialise the species domain. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">idx_range_kinsp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>kinetic species domain </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">idx_range_fluidsp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>fluid species domain </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">conf_gyselalibxx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the YAML input file </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nb_kinspecies</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of kinetic species </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nb_fluidspecies</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of fluid species </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.hpp" line="22" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.cpp" bodystart="13" bodyend="91" declfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.hpp" declline="22" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="species__init_8hpp_1a24fddc226589fe83ecdfd37d0cc1990b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>IdxRangeSp</type>
+        <definition>IdxRangeSp init_species</definition>
+        <argsstring>(PC_tree_t conf_gyselalibxx)</argsstring>
+        <name>init_species</name>
+        <param>
+          <type>PC_tree_t</type>
+          <declname>conf_gyselalibxx</declname>
+        </param>
+        <briefdescription>
+<para>Initialise the species domain in the case of adiabatic and kinetic species. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">conf_gyselalibxx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the YAML input file </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the kinetic species domain </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.hpp" line="34" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.cpp" bodystart="99" bodyend="112" declfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.hpp" declline="34" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="species__init_8hpp_1a3f9e49dfa70140080b9f6f17f43a501a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_species_withfluid</definition>
+        <argsstring>(IdxRangeSp &amp;idx_range_kinsp, IdxRangeSp &amp;idx_range_fluidsp, PC_tree_t conf_gyselalibxx)</argsstring>
+        <name>init_species_withfluid</name>
+        <param>
+          <type>IdxRangeSp &amp;</type>
+          <declname>idx_range_kinsp</declname>
+        </param>
+        <param>
+          <type>IdxRangeSp &amp;</type>
+          <declname>idx_range_fluidsp</declname>
+        </param>
+        <param>
+          <type>PC_tree_t</type>
+          <declname>conf_gyselalibxx</declname>
+        </param>
+        <briefdescription>
+<para>Initialise the species domain in the specific case of fluid species added to adiabatic and kinetic species. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">idx_range_kinsp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>kinetic species domain </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">idx_range_fluidsp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>fluid species domain </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">conf_gyselalibxx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the YAML input file </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.hpp" line="43" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.cpp" bodystart="122" bodyend="135" declfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.hpp" declline="43" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="species__init_8hpp_1aaa5c221382fc7002453677d249fddaf6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>IdxRangeSp</type>
+        <definition>IdxRangeSp init_kinetic_species</definition>
+        <argsstring>()</argsstring>
+        <name>init_kinetic_species</name>
+        <briefdescription>
+<para>Initialise the kinetic species domain. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the kinetic species domain </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.hpp" line="52" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.cpp" bodystart="142" bodyend="160" declfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.hpp" declline="52" declcolumn="12"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ddc/ddc.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;paraconf.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_helper.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;paraconfpp.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;pdi_helper.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;species_info.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>init_all_species(</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeSp&amp;<sp/>idx_range_kinsp,</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeSp&amp;<sp/>idx_range_fluidsp,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC_tree_t<sp/>conf_gyselalibxx,</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>nb_kinspecies,</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>nb_fluidspecies);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal">IdxRangeSp<sp/>init_species(PC_tree_t<sp/>conf_gyselalibxx);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>init_species_withfluid(</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeSp&amp;<sp/>idx_range_kinsp,</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeSp&amp;<sp/>idx_range_fluidsp,</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC_tree_t<sp/>conf_gyselalibxx);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal">IdxRangeSp<sp/>init_kinetic_species();</highlight></codeline>
+    </programlisting>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.hpp"/>
+  </compounddef>
+</doxygen>

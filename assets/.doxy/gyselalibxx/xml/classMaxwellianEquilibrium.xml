@@ -1,0 +1,1017 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classMaxwellianEquilibrium" kind="class" language="C++" prot="public">
+    <compoundname>MaxwellianEquilibrium</compoundname>
+    <basecompoundref refid="classIEquilibrium" prot="public" virt="non-virtual">IEquilibrium</basecompoundref>
+    <basecompoundref refid="classIEquilibrium" prot="public" virt="non-virtual">IEquilibrium</basecompoundref>
+    <basecompoundref refid="classIEquilibrium" prot="public" virt="non-virtual">IEquilibrium</basecompoundref>
+    <includes refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8hpp" local="no">maxwellianequilibrium.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classMaxwellianEquilibrium_1a1abcb1421bf65ddc61429f0a076b6b07" prot="private" static="no" mutable="no">
+        <type>host_t&lt; DFieldMemSp &gt;</type>
+        <definition>host_t&lt;DFieldMemSp&gt; MaxwellianEquilibrium::m_mass</definition>
+        <argsstring></argsstring>
+        <name>m_mass</name>
+        <qualifiedname>MaxwellianEquilibrium::m_mass</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="16" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMaxwellianEquilibrium_1ae2eca1ff4552822b6a487e1334e4720d" prot="private" static="no" mutable="no">
+        <type>host_t&lt; DFieldMemSp &gt;</type>
+        <definition>host_t&lt; DFieldMemSp &gt; MaxwellianEquilibrium::m_density_eq</definition>
+        <argsstring></argsstring>
+        <name>m_density_eq</name>
+        <qualifiedname>MaxwellianEquilibrium::m_density_eq</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Equilibrium density of all kinetic species </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="19" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMaxwellianEquilibrium_1a732d1afffa2fbc4820336c2fed51abae" prot="private" static="no" mutable="no">
+        <type>host_t&lt; DFieldMemSp &gt;</type>
+        <definition>host_t&lt; DFieldMemSp &gt; MaxwellianEquilibrium::m_temperature_eq</definition>
+        <argsstring></argsstring>
+        <name>m_temperature_eq</name>
+        <qualifiedname>MaxwellianEquilibrium::m_temperature_eq</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Equilibrium temperature of all kinetic species </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="22" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMaxwellianEquilibrium_1aba59ca1bbf63e333dd3dd1eb04fe943c" prot="private" static="no" mutable="no">
+        <type>host_t&lt; DFieldMemSp &gt;</type>
+        <definition>host_t&lt; DFieldMemSp &gt; MaxwellianEquilibrium::m_mean_velocity_eq</definition>
+        <argsstring></argsstring>
+        <name>m_mean_velocity_eq</name>
+        <qualifiedname>MaxwellianEquilibrium::m_mean_velocity_eq</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Equilibrium mean velocity of all kinetic species </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="25" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMaxwellianEquilibrium_1a412ad9eaf8136221eb408893ab486fc8" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double MaxwellianEquilibrium::m_magnetic_field</definition>
+        <argsstring></argsstring>
+        <name>m_magnetic_field</name>
+        <qualifiedname>MaxwellianEquilibrium::m_magnetic_field</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="29" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1a52616624ef6c0da7107c05d680a11a74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MaxwellianEquilibrium::MaxwellianEquilibrium</definition>
+        <argsstring>(host_t&lt; DFieldMemSp &gt; mass, host_t&lt; DFieldMemSp &gt; density_eq, host_t&lt; DFieldMemSp &gt; temperature_eq, host_t&lt; DFieldMemSp &gt; mean_velocity_eq, double magnetic_field)</argsstring>
+        <name>MaxwellianEquilibrium</name>
+        <qualifiedname>MaxwellianEquilibrium::MaxwellianEquilibrium</qualifiedname>
+        <param>
+          <type>host_t&lt; DFieldMemSp &gt;</type>
+          <declname>mass</declname>
+        </param>
+        <param>
+          <type>host_t&lt; DFieldMemSp &gt;</type>
+          <declname>density_eq</declname>
+        </param>
+        <param>
+          <type>host_t&lt; DFieldMemSp &gt;</type>
+          <declname>temperature_eq</declname>
+        </param>
+        <param>
+          <type>host_t&lt; DFieldMemSp &gt;</type>
+          <declname>mean_velocity_eq</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>magnetic_field</declname>
+        </param>
+        <briefdescription>
+<para>The constructor for the <ref refid="classMaxwellianEquilibrium" kindref="compound">MaxwellianEquilibrium</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">mass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mass of the species </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">density_eq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The density of the Maxwellian </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">temperature_eq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The temperature of the Maxwellian </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mean_velocity_eq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mean velocity of the Maxwellian </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">magnetic_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The magnetic field </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.cpp" bodystart="9" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1a93e6fba9f6003062ba29256213f22dc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MaxwellianEquilibrium::~MaxwellianEquilibrium</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~MaxwellianEquilibrium</name>
+        <qualifiedname>MaxwellianEquilibrium::~MaxwellianEquilibrium</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="47" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1a0cc2b9bdb6300dd5661cedbfc27957b3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>DFieldSpVparMu</type>
+        <definition>DFieldSpVparMu MaxwellianEquilibrium::operator()</definition>
+        <argsstring>(DFieldSpVparMu allfequilibrium) const override</argsstring>
+        <name>operator()</name>
+        <qualifiedname>MaxwellianEquilibrium::operator()</qualifiedname>
+        <reimplements refid="classIEquilibrium_1a425f7b104d75900fcc769bdee9c0cdbd">operator()</reimplements>
+        <param>
+          <type>DFieldSpVparMu</type>
+          <declname>allfequilibrium</declname>
+        </param>
+        <briefdescription>
+<para>Initialises allfequilibrium as a Maxwellian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">allfequilibrium</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A Field containing a Maxwellian distribution function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A Field containing a Maxwellian distribution function. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="64" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.cpp" bodystart="23" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1aebb6814626426a44934a85ced7e2fe62" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>host_t&lt; DConstFieldSp &gt;</type>
+        <definition>host_t&lt; DConstFieldSp &gt; MaxwellianEquilibrium::mass</definition>
+        <argsstring>() const</argsstring>
+        <name>mass</name>
+        <qualifiedname>MaxwellianEquilibrium::mass</qualifiedname>
+        <briefdescription>
+<para>A method for accessing the m_mass member variable of the class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A field containing the m_mass value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="93" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" bodystart="93" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1a86de6dac16d6f3a968b16b028c4bee8d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>host_t&lt; DConstFieldSp &gt;</type>
+        <definition>host_t&lt; DConstFieldSp &gt; MaxwellianEquilibrium::density_eq</definition>
+        <argsstring>() const</argsstring>
+        <name>density_eq</name>
+        <qualifiedname>MaxwellianEquilibrium::density_eq</qualifiedname>
+        <briefdescription>
+<para>A method for accessing the m_density_eq member variable of the class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A field containing the m_density_eq value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="102" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" bodystart="102" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1ad82c2908d1306574b250ddc190bc2d28" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>host_t&lt; DConstFieldSp &gt;</type>
+        <definition>host_t&lt; DConstFieldSp &gt; MaxwellianEquilibrium::temperature_eq</definition>
+        <argsstring>() const</argsstring>
+        <name>temperature_eq</name>
+        <qualifiedname>MaxwellianEquilibrium::temperature_eq</qualifiedname>
+        <briefdescription>
+<para>A method for accessing the m_temperature_eq member variable of the class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A field containing the m_temperature_eq value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="111" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" bodystart="111" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1a37c0f236ccb7c4a8ce018c6d560c75c4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>host_t&lt; DConstFieldSp &gt;</type>
+        <definition>host_t&lt; DConstFieldSp &gt; MaxwellianEquilibrium::mean_velocity_eq</definition>
+        <argsstring>() const</argsstring>
+        <name>mean_velocity_eq</name>
+        <qualifiedname>MaxwellianEquilibrium::mean_velocity_eq</qualifiedname>
+        <briefdescription>
+<para>A method for accessing the m_mean_velocity_eq member variable of the class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A field containing the m_velocity_eq value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="120" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" bodystart="120" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1a034e0f873e3403b14b56ec4200b44bb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MaxwellianEquilibrium::MaxwellianEquilibrium</definition>
+        <argsstring>(host_t&lt; DFieldMemSp &gt; density_eq, host_t&lt; DFieldMemSp &gt; temperature_eq, host_t&lt; DFieldMemSp &gt; mean_velocity_eq)</argsstring>
+        <name>MaxwellianEquilibrium</name>
+        <qualifiedname>MaxwellianEquilibrium::MaxwellianEquilibrium</qualifiedname>
+        <param>
+          <type>host_t&lt; DFieldMemSp &gt;</type>
+          <declname>density_eq</declname>
+        </param>
+        <param>
+          <type>host_t&lt; DFieldMemSp &gt;</type>
+          <declname>temperature_eq</declname>
+        </param>
+        <param>
+          <type>host_t&lt; DFieldMemSp &gt;</type>
+          <declname>mean_velocity_eq</declname>
+        </param>
+        <briefdescription>
+<para>The constructor for the <ref refid="classMaxwellianEquilibrium" kindref="compound">MaxwellianEquilibrium</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">density_eq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The density of the Maxwellian </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">temperature_eq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The temperature of the Maxwellian </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mean_velocity_eq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mean velocity of the Maxwellian </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.cpp" bodystart="7" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1a93e6fba9f6003062ba29256213f22dc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MaxwellianEquilibrium::~MaxwellianEquilibrium</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~MaxwellianEquilibrium</name>
+        <qualifiedname>MaxwellianEquilibrium::~MaxwellianEquilibrium</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="38" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1af3b41f93de3bb96ae0b44d8f89ee2a0a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>DFieldSpVx</type>
+        <definition>DFieldSpVx MaxwellianEquilibrium::operator()</definition>
+        <argsstring>(DFieldSpVx allfequilibrium) const override</argsstring>
+        <name>operator()</name>
+        <qualifiedname>MaxwellianEquilibrium::operator()</qualifiedname>
+        <reimplements refid="classIEquilibrium_1a3ea3adf00a9a416a8e3fe54caba902a4">operator()</reimplements>
+        <param>
+          <type>DFieldSpVx</type>
+          <declname>allfequilibrium</declname>
+        </param>
+        <briefdescription>
+<para>Initialises allfequilibrium as a Maxwellian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">allfequilibrium</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A Field containing a Maxwellian distribution function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A Field containing a Maxwellian distribution function. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="55" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.cpp" bodystart="17" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1a86de6dac16d6f3a968b16b028c4bee8d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>host_t&lt; DConstFieldSp &gt;</type>
+        <definition>host_t&lt; DConstFieldSp &gt; MaxwellianEquilibrium::density_eq</definition>
+        <argsstring>() const</argsstring>
+        <name>density_eq</name>
+        <qualifiedname>MaxwellianEquilibrium::density_eq</qualifiedname>
+        <briefdescription>
+<para>A method for accessing the m_density_eq member variable of the class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A view containing the m_density_eq value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="78" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" bodystart="78" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1ad82c2908d1306574b250ddc190bc2d28" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>host_t&lt; DConstFieldSp &gt;</type>
+        <definition>host_t&lt; DConstFieldSp &gt; MaxwellianEquilibrium::temperature_eq</definition>
+        <argsstring>() const</argsstring>
+        <name>temperature_eq</name>
+        <qualifiedname>MaxwellianEquilibrium::temperature_eq</qualifiedname>
+        <briefdescription>
+<para>A method for accessing the m_temperature_eq member variable of the class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A view containing the m_temperature_eq value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="87" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" bodystart="87" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1a37c0f236ccb7c4a8ce018c6d560c75c4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>host_t&lt; DConstFieldSp &gt;</type>
+        <definition>host_t&lt; DConstFieldSp &gt; MaxwellianEquilibrium::mean_velocity_eq</definition>
+        <argsstring>() const</argsstring>
+        <name>mean_velocity_eq</name>
+        <qualifiedname>MaxwellianEquilibrium::mean_velocity_eq</qualifiedname>
+        <briefdescription>
+<para>A method for accessing the m_mean_velocity_eq member variable of the class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A view containing the m_velocity_eq value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="96" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" bodystart="96" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1a034e0f873e3403b14b56ec4200b44bb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MaxwellianEquilibrium::MaxwellianEquilibrium</definition>
+        <argsstring>(host_t&lt; DFieldMemSp &gt; density_eq, host_t&lt; DFieldMemSp &gt; temperature_eq, host_t&lt; DFieldMemSp &gt; mean_velocity_eq)</argsstring>
+        <name>MaxwellianEquilibrium</name>
+        <qualifiedname>MaxwellianEquilibrium::MaxwellianEquilibrium</qualifiedname>
+        <param>
+          <type>host_t&lt; DFieldMemSp &gt;</type>
+          <declname>density_eq</declname>
+        </param>
+        <param>
+          <type>host_t&lt; DFieldMemSp &gt;</type>
+          <declname>temperature_eq</declname>
+        </param>
+        <param>
+          <type>host_t&lt; DFieldMemSp &gt;</type>
+          <declname>mean_velocity_eq</declname>
+        </param>
+        <briefdescription>
+<para>The constructor for the <ref refid="classMaxwellianEquilibrium" kindref="compound">MaxwellianEquilibrium</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">density_eq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The density of the Maxwellian </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">temperature_eq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The temperature of the Maxwellian </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mean_velocity_eq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mean velocity of the Maxwellian </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp" line="31" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1a93e6fba9f6003062ba29256213f22dc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MaxwellianEquilibrium::~MaxwellianEquilibrium</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~MaxwellianEquilibrium</name>
+        <qualifiedname>MaxwellianEquilibrium::~MaxwellianEquilibrium</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp" line="36" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1a883dfc9d838b53deeb47e93f178c7655" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>DFieldSpVxVy</type>
+        <definition>DFieldSpVxVy MaxwellianEquilibrium::operator()</definition>
+        <argsstring>(DFieldSpVxVy allfequilibrium) const override</argsstring>
+        <name>operator()</name>
+        <qualifiedname>MaxwellianEquilibrium::operator()</qualifiedname>
+        <reimplements refid="classIEquilibrium_1ac3766d5ef01c1e949ec3dd6d55892a75">operator()</reimplements>
+        <param>
+          <type>DFieldSpVxVy</type>
+          <declname>allfequilibrium</declname>
+        </param>
+        <briefdescription>
+<para>Initialises allfequilibrium as a Maxwellian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">allfequilibrium</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A Field containing a Maxwellian distribution function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A Field containing a Maxwellian distribution function. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp" line="53" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.cpp" bodystart="17" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1a0de7a4e921a394a01123af2eae342c21" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>host_t&lt; ConstFieldSp&lt; double &gt; &gt;</type>
+        <definition>host_t&lt; ConstFieldSp&lt; double &gt; &gt; MaxwellianEquilibrium::density_eq</definition>
+        <argsstring>() const</argsstring>
+        <name>density_eq</name>
+        <qualifiedname>MaxwellianEquilibrium::density_eq</qualifiedname>
+        <briefdescription>
+<para>A method for accessing the m_density_eq member variable of the class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A field containing the m_density_eq value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp" line="77" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp" bodystart="77" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1aeba2d5c30212bd67b789c87610205263" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>host_t&lt; ConstFieldSp&lt; double &gt; &gt;</type>
+        <definition>host_t&lt; ConstFieldSp&lt; double &gt; &gt; MaxwellianEquilibrium::temperature_eq</definition>
+        <argsstring>() const</argsstring>
+        <name>temperature_eq</name>
+        <qualifiedname>MaxwellianEquilibrium::temperature_eq</qualifiedname>
+        <briefdescription>
+<para>A method for accessing the m_temperature_eq member variable of the class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A field containing the m_temperature_eq value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp" line="86" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp" bodystart="86" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1a19a92489bebf290fb48a26a641c9e292" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>host_t&lt; ConstFieldSp&lt; double &gt; &gt;</type>
+        <definition>host_t&lt; ConstFieldSp&lt; double &gt; &gt; MaxwellianEquilibrium::mean_velocity_eq</definition>
+        <argsstring>() const</argsstring>
+        <name>mean_velocity_eq</name>
+        <qualifiedname>MaxwellianEquilibrium::mean_velocity_eq</qualifiedname>
+        <briefdescription>
+<para>A method for accessing the m_mean_velocity_eq member variable of the class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A field containing the m_velocity_eq value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp" line="95" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp" bodystart="95" bodyend="98"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1aff3c441bf785e05f0f3b9e6594209876" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classMaxwellianEquilibrium" kindref="compound">MaxwellianEquilibrium</ref></type>
+        <definition>MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input</definition>
+        <argsstring>(IdxRangeSp idx_range_kinsp, PC_tree_t const &amp;yaml_input_file)</argsstring>
+        <name>init_from_input</name>
+        <qualifiedname>MaxwellianEquilibrium::init_from_input</qualifiedname>
+        <param>
+          <type>IdxRangeSp</type>
+          <declname>idx_range_kinsp</declname>
+        </param>
+        <param>
+          <type>PC_tree_t const &amp;</type>
+          <declname>yaml_input_file</declname>
+        </param>
+        <briefdescription>
+<para>Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range_kinsp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index range for the kinetic species </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">yaml_input_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>YAML input file </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>an instance of Maxwellian distribution function. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="55" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.cpp" bodystart="46" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1ad10e98762e5b6716ed6e62f6768bebd9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MaxwellianEquilibrium::compute_maxwellian</definition>
+        <argsstring>(DFieldVparMu const fMaxwellian, double const mass, double const density, double const temperature, double const mean_velocity, double const magnetic_field)</argsstring>
+        <name>compute_maxwellian</name>
+        <qualifiedname>MaxwellianEquilibrium::compute_maxwellian</qualifiedname>
+        <param>
+          <type>DFieldVparMu const</type>
+          <declname>fMaxwellian</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>mass</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>density</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>temperature</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>mean_velocity</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>magnetic_field</declname>
+        </param>
+        <briefdescription>
+<para>Compute a Maxwellian distribution function. The Maxwellian distribution function is defined as Compute $fM(v,mu) = (2*PI*T)**1.5*n*exp(-E)$ with. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><itemizedlist>
+<listitem><para>$n$ the density, $T$ the temperature and $u$ the mean velocity</para>
+</listitem><listitem><para>$B$ the magnetic field and</para>
+</listitem><listitem><para>$E$ the energy defined as $E = (0.5*(v-u)**2+mu*B)/T$. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">fMaxwellian</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A Maxwellian distribution function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Mass of the species. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">density</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that represents the density of Maxwellian. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">temperature</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that represents the temperature of Maxwellian. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mean_velocity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that represents the mean velocity of Maxwellian. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">magnetic_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Magnetic field. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="81" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.cpp" bodystart="73" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1af2e28581eaced8f7962064896b42e6b5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classMaxwellianEquilibrium" kindref="compound">MaxwellianEquilibrium</ref></type>
+        <definition>static MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input</definition>
+        <argsstring>(IdxRangeSp idx_range_kinsp, PC_tree_t const &amp;yaml_input_file)</argsstring>
+        <name>init_from_input</name>
+        <qualifiedname>MaxwellianEquilibrium::init_from_input</qualifiedname>
+        <param>
+          <type>IdxRangeSp</type>
+          <declname>idx_range_kinsp</declname>
+        </param>
+        <param>
+          <type>PC_tree_t const &amp;</type>
+          <declname>yaml_input_file</declname>
+        </param>
+        <briefdescription>
+<para>Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range_kinsp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index range for the kinetic species </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">yaml_input_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>YAML input file </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>an instance of Maxwellian distribution function. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="46" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1a45ec8865ba58e58d26fb9174e78faff7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MaxwellianEquilibrium::compute_maxwellian</definition>
+        <argsstring>(DFieldVx const fMaxwellian, double const density, double const temperature, double const mean_velocity)</argsstring>
+        <name>compute_maxwellian</name>
+        <qualifiedname>MaxwellianEquilibrium::compute_maxwellian</qualifiedname>
+        <param>
+          <type>DFieldVx const</type>
+          <declname>fMaxwellian</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>density</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>temperature</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>mean_velocity</declname>
+        </param>
+        <briefdescription>
+<para>Compute a Maxwellian distribution function. The Maxwellian distribution function is defined as $f_M(v) = n/(sqrt(2*PI*T))*exp(-(v-u)**2/(2*T))$ with $n$ the density, $T$ the temperature and $u$ is the mean velocity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">fMaxwellian</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A Maxwellian distribution function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">density</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that represents the density of Maxwellian. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">temperature</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that represents the temperature of Maxwellian. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mean_velocity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that represents the mean velocity of Maxwellian. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="68" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.cpp" bodystart="64" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1af2e28581eaced8f7962064896b42e6b5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classMaxwellianEquilibrium" kindref="compound">MaxwellianEquilibrium</ref></type>
+        <definition>static MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input</definition>
+        <argsstring>(IdxRangeSp idx_range_kinsp, PC_tree_t const &amp;yaml_input_file)</argsstring>
+        <name>init_from_input</name>
+        <qualifiedname>MaxwellianEquilibrium::init_from_input</qualifiedname>
+        <param>
+          <type>IdxRangeSp</type>
+          <declname>idx_range_kinsp</declname>
+        </param>
+        <param>
+          <type>PC_tree_t const &amp;</type>
+          <declname>yaml_input_file</declname>
+        </param>
+        <briefdescription>
+<para>Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range_kinsp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index range for the kinetic species </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">yaml_input_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>YAML input file </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>an instance of Maxwellian distribution function. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp" line="44" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1a07ab17abcde0a39b82eb76161a8e47c7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MaxwellianEquilibrium::compute_maxwellian</definition>
+        <argsstring>(DFieldVxVy const fMaxwellian, double const density, double const temperature, double const mean_velocity)</argsstring>
+        <name>compute_maxwellian</name>
+        <qualifiedname>MaxwellianEquilibrium::compute_maxwellian</qualifiedname>
+        <param>
+          <type>DFieldVxVy const</type>
+          <declname>fMaxwellian</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>density</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>temperature</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>mean_velocity</declname>
+        </param>
+        <briefdescription>
+<para>Compute a Maxwellian distribution function. The Maxwellian distribution function is defined as $f_M(v) = n/(sqrt(2*PI*T))*exp(-(v-u)**2/(2*T))$ with $n$ the density, $T$ the temperature and $u$ is the mean velocity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">fMaxwellian</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A Maxwellian distribution function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">density</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that represents the density of Maxwellian. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">temperature</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that represents the temperature of Maxwellian. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mean_velocity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter that represents the mean velocity of Maxwellian. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp" line="67" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.cpp" bodystart="71" bodyend="92"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Equilibrium operator as Maxwellian. This initialises all species. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A class that initialises the distribution function as a Maxwellian. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>IEquilibrium</label>
+        <link refid="classIEquilibrium"/>
+      </node>
+      <node id="1">
+        <label>MaxwellianEquilibrium</label>
+        <link refid="classMaxwellianEquilibrium"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>IEquilibrium</label>
+        <link refid="classIEquilibrium"/>
+      </node>
+      <node id="1">
+        <label>MaxwellianEquilibrium</label>
+        <link refid="classMaxwellianEquilibrium"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="13" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" bodystart="14" bodyend="124"/>
+    <listofallmembers>
+      <member refid="classMaxwellianEquilibrium_1ad10e98762e5b6716ed6e62f6768bebd9" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>compute_maxwellian</name></member>
+      <member refid="classMaxwellianEquilibrium_1a45ec8865ba58e58d26fb9174e78faff7" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>compute_maxwellian</name></member>
+      <member refid="classMaxwellianEquilibrium_1a07ab17abcde0a39b82eb76161a8e47c7" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>compute_maxwellian</name></member>
+      <member refid="classMaxwellianEquilibrium_1a86de6dac16d6f3a968b16b028c4bee8d" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>density_eq</name></member>
+      <member refid="classMaxwellianEquilibrium_1a86de6dac16d6f3a968b16b028c4bee8d" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>density_eq</name></member>
+      <member refid="classMaxwellianEquilibrium_1a0de7a4e921a394a01123af2eae342c21" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>density_eq</name></member>
+      <member refid="classMaxwellianEquilibrium_1aff3c441bf785e05f0f3b9e6594209876" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>init_from_input</name></member>
+      <member refid="classMaxwellianEquilibrium_1af2e28581eaced8f7962064896b42e6b5" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>init_from_input</name></member>
+      <member refid="classMaxwellianEquilibrium_1af2e28581eaced8f7962064896b42e6b5" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>init_from_input</name></member>
+      <member refid="classMaxwellianEquilibrium_1ae2eca1ff4552822b6a487e1334e4720d" prot="private" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>m_density_eq</name></member>
+      <member refid="classMaxwellianEquilibrium_1a412ad9eaf8136221eb408893ab486fc8" prot="private" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>m_magnetic_field</name></member>
+      <member refid="classMaxwellianEquilibrium_1a1abcb1421bf65ddc61429f0a076b6b07" prot="private" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>m_mass</name></member>
+      <member refid="classMaxwellianEquilibrium_1aba59ca1bbf63e333dd3dd1eb04fe943c" prot="private" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>m_mean_velocity_eq</name></member>
+      <member refid="classMaxwellianEquilibrium_1a732d1afffa2fbc4820336c2fed51abae" prot="private" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>m_temperature_eq</name></member>
+      <member refid="classMaxwellianEquilibrium_1aebb6814626426a44934a85ced7e2fe62" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>mass</name></member>
+      <member refid="classMaxwellianEquilibrium_1a52616624ef6c0da7107c05d680a11a74" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>MaxwellianEquilibrium</name></member>
+      <member refid="classMaxwellianEquilibrium_1a034e0f873e3403b14b56ec4200b44bb9" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>MaxwellianEquilibrium</name></member>
+      <member refid="classMaxwellianEquilibrium_1a034e0f873e3403b14b56ec4200b44bb9" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>MaxwellianEquilibrium</name></member>
+      <member refid="classMaxwellianEquilibrium_1a37c0f236ccb7c4a8ce018c6d560c75c4" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>mean_velocity_eq</name></member>
+      <member refid="classMaxwellianEquilibrium_1a37c0f236ccb7c4a8ce018c6d560c75c4" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>mean_velocity_eq</name></member>
+      <member refid="classMaxwellianEquilibrium_1a19a92489bebf290fb48a26a641c9e292" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>mean_velocity_eq</name></member>
+      <member refid="classMaxwellianEquilibrium_1a0cc2b9bdb6300dd5661cedbfc27957b3" prot="public" virt="virtual"><scope>MaxwellianEquilibrium</scope><name>operator()</name></member>
+      <member refid="classMaxwellianEquilibrium_1af3b41f93de3bb96ae0b44d8f89ee2a0a" prot="public" virt="virtual"><scope>MaxwellianEquilibrium</scope><name>operator()</name></member>
+      <member refid="classMaxwellianEquilibrium_1a883dfc9d838b53deeb47e93f178c7655" prot="public" virt="virtual"><scope>MaxwellianEquilibrium</scope><name>operator()</name></member>
+      <member refid="classMaxwellianEquilibrium_1ad82c2908d1306574b250ddc190bc2d28" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>temperature_eq</name></member>
+      <member refid="classMaxwellianEquilibrium_1ad82c2908d1306574b250ddc190bc2d28" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>temperature_eq</name></member>
+      <member refid="classMaxwellianEquilibrium_1aeba2d5c30212bd67b789c87610205263" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>temperature_eq</name></member>
+      <member refid="classIEquilibrium_1a7244af05e0e1176c0c02212cee0cfb43" prot="public" virt="virtual"><scope>MaxwellianEquilibrium</scope><name>~IEquilibrium</name></member>
+      <member refid="classIEquilibrium_1a7244af05e0e1176c0c02212cee0cfb43" prot="public" virt="virtual"><scope>MaxwellianEquilibrium</scope><name>~IEquilibrium</name></member>
+      <member refid="classIEquilibrium_1a7244af05e0e1176c0c02212cee0cfb43" prot="public" virt="virtual"><scope>MaxwellianEquilibrium</scope><name>~IEquilibrium</name></member>
+      <member refid="classMaxwellianEquilibrium_1a93e6fba9f6003062ba29256213f22dc0" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>~MaxwellianEquilibrium</name></member>
+      <member refid="classMaxwellianEquilibrium_1a93e6fba9f6003062ba29256213f22dc0" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>~MaxwellianEquilibrium</name></member>
+      <member refid="classMaxwellianEquilibrium_1a93e6fba9f6003062ba29256213f22dc0" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>~MaxwellianEquilibrium</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
