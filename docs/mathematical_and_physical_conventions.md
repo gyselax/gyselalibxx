@@ -262,12 +262,17 @@ The divergence of a vector field $`\mathbf{A} = A^i \mathbf{b}_i`$ is written as
 \nabla \cdot \mathbf{A} = \frac{1}{\sqrt{g}}\frac{\partial}{\partial q^i} \left( \sqrt{g} A^i\right), 
 ```
 
-Where $`g`$ stands for the determinant of the metric tensor. Also note that $`g = \text{det}(G) = \text{det}(J^T J) = \text{det}(J)^2`$ thus $`\sqrt{g}`$ reduces to the determinant of the Jacobian tensor. 
+Where $`g`$ stands for the determinant of the metric tensor. Also note that $`g = \text{det}(G) = \text{det}(J^T J) = \text{det}(J)^2`$ thus $`\sqrt{g}`$ reduces to the determinant of the Jacobian tensor. In the code we evaluate the above formula by writing 
 
+```math
+\nabla \cdot \mathbf{A} = \frac{\partial A^i}{\partial q^i} +  \frac{1}{\sqrt{g}}A^i \frac{\partial \sqrt{g}}{\partial q^i}, 
+```
+
+So as to be able to reuse the values of the partial derivatives of $`A^i`$ between various differential operators.
 
 ## References
 
 [1] Taha Sochi. "Tensor Calculus".
-([https://arxiv.org/abs/1610.04347](https://arxiv.org/abs/1610.04347).) 
+([https://arxiv.org/abs/1610.04347](https://arxiv.org/abs/1610.04347).)
 arXiv (2016).
 
