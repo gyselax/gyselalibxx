@@ -4,9 +4,9 @@ Script for linting .md files. This is especially important for files containing 
 from itertools import chain
 from argparse import ArgumentParser
 from collections import namedtuple
+import glob
 import re
 import sys
-import os
 import numpy as np
 
 LineInfo = namedtuple('LineInfo', ('line', 'char'))
