@@ -11,7 +11,6 @@ Different types of source terms include:
 
 - [Kinetic sources](../../../docs/latex/geometryXVx/rhs/kinetic_source.pdf)
 - [Krook sources](../../../docs/latex/geometryXVx/rhs/krook_source.pdf)
-- [Collisions](../../../docs/latex/geometryXVx/rhs/collisions_intra_inter.pdf)
 
 To incorporate spatial dependencies in source terms, mask functions are often used.
 These functions take the value 1 where the source is active and 0 otherwise.
