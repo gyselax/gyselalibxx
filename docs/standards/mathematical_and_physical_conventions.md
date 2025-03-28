@@ -4,10 +4,10 @@ The conventions adopted in Gyselalib++ for describing physical quantities such a
 
 ## Contents
 
-- [On the use of curvilinear coordinates](#docs_mathematical_and_physical_conventions__On_the_use_of_curvilinear_coordinates)
-- [Metric tensor](#docs_mathematical_and_physical_conventions__Metric_tensor)
-- [Jacobian](#docs_mathematical_and_physical_conventions__Jacobian)
-- [Differential operators](#docs_mathematical_and_physical_conventions__Differential_operators)
+- [On the use of curvilinear coordinates](#on-the-use-of-curvilinear-coordinates)
+- [Metric tensor](#metric-tensor)
+- [Jacobian](#jacobian)
+- [Differential operators](#differential-operators)
 
 ## On the use of curvilinear coordinates
 
@@ -19,7 +19,7 @@ q^i = q^i(x^1, \ldots , x^N) \quad \forall i \in [1, N].
 
 Note that even though an inverse of the functions $`q^i(x^1, \ldots , x^N)`$ must exist so that the coordinate transform is valid, it is not always possible to write an explicit formula for such inverse. The surface defined by $`q^i = \text{constant}`$ is called a *coordinate surface*, the intersection of these surfaces define *coordinate curves*. A *coordinate axis* is locally defined as the axis tangent to a given coordinate curve. As their name suggests, coordinate curves do not form straight lines in general. An illustration for these geometrical concepts is given in the following figure.
 
-![Coordinate curves, surfaces and axes in a three-dimensional space](./curvilinear_coordinates_def.png "")
+![Coordinate curves, surfaces and axes in a three-dimensional space](../images/curvilinear_coordinates_def.png "")
 
 The position of any point in space can be written as
 
@@ -46,18 +46,18 @@ and its dual basis, the *covariant basis* $`\{\mathbf{b}^i\}`$ by
 These two bases are *local bases*, in the sense that the $`\mathbf{b}_i`$ and $`\mathbf{b}^i`$ vectors depend on the considered position in space, i.e.
 we have $`\mathbf{b}_i(x^1, \ldots , x^N)`$ and $`\mathbf{b}^i(x^1, \ldots , x^N)`$. A geometrical interpretation of these two bases reads as follows. The *covariant* unit vector $`\mathbf{b}^i`$ is orthogonal to the coordinate surface $`q^i = \text{constant}`$, while the *contravariant* unit vector $`\mathbf{b}_i`$ is locally tangent to the coordinate curve associated with the $`q^i`$ coordinate. This is the situation depicted in the following picture.
 
-![Geometrical interpretation of the contravariant and covariant bases vectors](./curvilinear_coordinates_contravariant_covariant_bases.png)
+![Geometrical interpretation of the contravariant and covariant bases vectors](../images/curvilinear_coordinates_contravariant_covariant_bases.png)
 
 Note that neither contravariant nor covariant bases form orthonormal vector sets in general. Additionally note that in the case of Cartesian coordinates covariant and contravariant bases are the same. In general, the following property holds
 
 ```math
-\mathbf{b}^i \cdot \mathbf{b}_j = \delta_{ij}, 
+\mathbf{b}^i \cdot \mathbf{b}_j = \delta_{ij},
 ```
 
 with $`\cdot`$ the dot product operator and the Kronecker delta $`\delta_{ij} = 1`$ if $`i= j`$, and $`\delta_{ij} = 0`$ otherwise. Let us now consider a vector $`\mathbf{A} \in \mathbb{R}^N`$. This vector may be expressed in either covariant or contravariant bases as
 
 ```math
-\mathbf{A} = A_i \mathbf{b}^i = A^i \mathbf{b}_i, 
+\mathbf{A} = A_i \mathbf{b}^i = A^i \mathbf{b}_i,
 ```
 
 Where
@@ -166,19 +166,19 @@ G = J^{T}J.
 The Jacobian of a curvilinear coordinate transformation can be used to relate the components of a vector expressed in the Cartesian basis $`\{\mathbf{e}_i\}`$ to the components of the vector expressed in the contravariant basis $`\{\mathbf{b}_i\}`$ associated with the curvilinear coordinate system. More precisely, let us write a vector $`\mathbf{A}`$ as
 
 ```math
-\mathbf{A} = A^i_\text{c} \mathbf{e}_i = A^i \mathbf{b}_i, 
+\mathbf{A} = A^i_\text{c} \mathbf{e}_i = A^i \mathbf{b}_i,
 ```
 
 Where the "c" subscript indicates that the considered components is computed in the Cartesian basis. Note that we used the contravariant basis in the expression above. It can be shown using the chain rule that the following equality holds
 
 ```math
-A^i_\text{c} = J\left.^{i}_{\;j}\right. A^j. 
+A^i_\text{c} = J\left.^{i}_{\;j}\right. A^j.
 ```
 
-Note that relating the components of the vector $`\mathbf{A}`$ expressed in the covariant basis is less straightforward as this involves the metric tensor, i.e.  
+Note that relating the components of the vector $`\mathbf{A}`$ expressed in the covariant basis is less straightforward as this involves the metric tensor, i.e.
 
 ```math
-A^i_\text{c} = J\left.^{i}_{\;j}\right. g^{jk}A_k. 
+A^i_\text{c} = J\left.^{i}_{\;j}\right. g^{jk}A_k.
 ```
 
 however a simplification can be made using the fact that $G=J^TJ$, thus $G^{-1}=J^{-1}J^{-T}$ (where $J^{-T}$ represents the transpose of the inverse of the Jacobian) and $JG^{-1} = JJ^{-1}J^{-T} = J^{-T}$. Thus the components of the vector $`\mathbf{A}`$ expressed in the covariant basis $`\{\mathbf{b}^i\}`$ can be related to the components of the vector $`\mathbf{A}`$ expressed in the Cartesian basis as:
@@ -195,13 +195,13 @@ Let us now consider the more general case where one seeks to relate two curvilin
 We denote by $`J_{\{q\to p\}}`$ the Jacobian of the transformation from the coordinate system $`\{q^i\}`$ to $`\{p^i\}`$. The components of the Jacobian on the basis $`\mathbf{c}_i \otimes \mathbf{b}^j`$ and the components of its inverse on the basis $`\mathbf{b}_i \otimes \mathbf{c}^j`$ are defined similarly to above, as:
 
 ```math
-(J_{\{q\to p\}})^{i}_{\;j} = \frac{\partial p^i}{\partial q^j}, \quad (J_{\{q\to p\}})^{-1}\left.^{i}_{\;j}\right. = \frac{\partial q^i}{\partial p^j}. 
+(J_{\{q\to p\}})^{i}_{\;j} = \frac{\partial p^i}{\partial q^j}, \quad (J_{\{q\to p\}})^{-1}\left.^{i}_{\;j}\right. = \frac{\partial q^i}{\partial p^j}.
 ```
 
 Here one may note that $`(J_{\{q\to p\}})^{-1}\left.^{i}_{\;j}\right. = (J_{\{p\to q\}})^{i}_{\;j}`$.  Let us now express a vector $`\mathbf{A}`$ in these bases as
 
 ```math
-\mathbf{A} = A^i_{\{p\}} \mathbf{b}_i = A_{\{p\}i} \mathbf{b}^i = A^i_{\{q\}} \mathbf{c}_i = A_{\{q\}i} \mathbf{c}^i, 
+\mathbf{A} = A^i_{\{p\}} \mathbf{b}_i = A_{\{p\}i} \mathbf{b}^i = A^i_{\{q\}} \mathbf{c}_i = A_{\{q\}i} \mathbf{c}^i,
 ```
 
 where $`A^i_{\{p\}}`$ (resp. $`A_{\{p\}i}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`\mathbf{A}`$ expressed in the vector basis associated with coordinates $`\{p^i\}`$, and similarly $`A^i_{\{q\}}`$ (resp. $`A_{\{q\}i}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`\mathbf{A}`$ expressed in the vector basis associated with coordinates $`\{q^i\}`$. We have
@@ -243,13 +243,13 @@ Hereafter are expressed differential operators in a curvilinear coordinate syste
 Let us consider a scalar field $`f`$. The gradient $`\nabla f`$ of such field is defined in the Cartesian basis $`\{\mathbf{e}_i\}`$ as
 
 ```math
-\nabla f = \frac{\partial f}{\partial x^i} \mathbf{e}_i. 
+\nabla f = \frac{\partial f}{\partial x^i} \mathbf{e}_i.
 ```
 
 This quantity can be expressed in the both covariant $`\{\mathbf{b}^i\}`$ and contravariant $`\{\mathbf{b}_i\}`$  vector basis as
 
 ```math
-\nabla f = \frac{\partial f}{\partial q^i} \mathbf{b}^i = g^{ij} \frac{\partial f}{\partial q^j} \mathbf{b}_i. 
+\nabla f = \frac{\partial f}{\partial q^i} \mathbf{b}^i = g^{ij} \frac{\partial f}{\partial q^j} \mathbf{b}_i.
 ```
 
 Note that the definition that uses the contravariant basis $`\{\mathbf{b}_i\}`$ is much more common.

@@ -11,6 +11,7 @@ extend-ignore-re = ["capitalize()",
                     "spack concretize",
                     "'center left'",
                     "'center right'",
+                    "unrecognized_links",
                     "Gif-sur-Yvette"
                     ]
 extend-ignore-identifiers-re = [
