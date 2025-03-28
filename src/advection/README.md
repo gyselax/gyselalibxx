@@ -150,10 +150,12 @@ with $`f(0,x,y) = f_0(x,y)`$ and *A* the advection field.
 The characteristics are the solutions $X$ and $Y$ of the equations:
 
 ```math
+\begin{aligned}
 \partial_t X (t; s, x, y) = A_x(t,X(t; s, x, y),Y(t; s, x, y)),\\
 \partial_t Y (t; s, x, y) = A_y(t,X(t; s, x, y),Y(t; s, x, y)),\\
 X(s; s, x, y) = x,\\
 Y(s; s, x, y) = y.
+\end{aligned}
 ```
 
 The characteristic $X$ represents the trajectory on the $x$-dimension of the solution $f$
