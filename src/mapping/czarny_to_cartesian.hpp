@@ -375,8 +375,6 @@ public:
             //Compute the (2,2) coefficient of the inverse Jacobian matrix.
             assert(r >= 1e-15);
 
-            const double cos_theta = Kokkos::cos(theta);
-
             const double fact_3 = m_e * xi / divisor;
             return 1 / r * cos_theta / fact_3;
         }
