@@ -4,13 +4,13 @@ title: "[Bug]: "
 labels: ["bug"]
 body:
   - type: checkboxes
-  id: existing-issue
-  attributes:
-    label: Is there an existing issue for this?
-    description: Please search to see if an issue already exists for the bug you encountered.
-    options:
-    - label: I have searched the existing issues
-      required: true
+    id: existing-issue
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if an issue already exists for the bug you encountered.
+      options:
+      - label: I have searched the existing issues
+        required: true
   - type: markdown
     attributes:
       value: "## Bug Report\nPlease provide a clear description of the issue."
