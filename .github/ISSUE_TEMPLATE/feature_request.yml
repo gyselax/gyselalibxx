@@ -1,0 +1,46 @@
+name: Feature Request
+description: Suggest a new feature or enhancement
+title: "[FEATURE]: "
+labels: ["enhancement"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to suggest a new feature!
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Mathematical operator
+      description: Describe the mathematical equation that you would like to be implemented.
+      placeholder: |
+        "An operator which solves the following equation for $x$:"
+        "$$ Ax = b $$"
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation Ideas
+      description: If you have ideas about how to implement this feature, please share them here.
+      placeholder: |
+        - Relevant scientific papers or references
+        - Pseudo-code or algorithm suggestions
+        - Potential numerical methods
+    validations:
+      required: false
+
+  - type: textarea
+    id: benefits
+    attributes:
+      label: Benefits
+      description: What would this let you do that was not possible previously?
+      placeholder: |
+        - New physics models
+        - Usability enhancements
+        - Performance improvements
+        - etc.
+    validations:
+      required: false
