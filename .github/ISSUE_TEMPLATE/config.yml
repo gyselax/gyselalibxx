@@ -1,0 +1,10 @@
+blank_issues_enabled: false
+contact_links:
+  - name: General usage or troubleshooting questions
+    url: https://github.com/gyselax/gyselalibxx/discussions/categories/q-a
+    about: |
+      This repository does not handle general support via GitHub Issues.  
+      Please ask your question in the **Discussions** tab.
+  - name: Documentation
+    url: https://gyselax.github.io/gyselalibxx/
+    about: You can find more information about the library in the documentation
