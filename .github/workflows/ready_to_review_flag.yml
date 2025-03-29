@@ -1,4 +1,4 @@
-name: Clean up
+name: Add ready to review flag
 
 on:
   check_run:
