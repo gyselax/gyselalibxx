@@ -31,7 +31,7 @@ body:
     attributes:
       label: Location
       description: Where did you find this issue? (URL, file path, or section name)
-      placeholder: https://gyselax.github.io/gyselalibxx/bad_docs.html in section: To Fix
+      placeholder: "https://gyselax.github.io/gyselalibxx/bad_docs.html in section: To Fix"
     validations:
       required: true
 
