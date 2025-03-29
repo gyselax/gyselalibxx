@@ -1,0 +1,42 @@
+name: "Check if CPU/GPU tests can be skipped"
+outputs:
+  should_run:
+    description: "True if the tests should be run, False otherwise."
+    value: ${{ steps.outcome.outputs.should_run }}
+
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        MATCHING_PATHS='["src/**/*.hpp", "src/**/*.cpp", "tests/**/*.hpp", "tests/**/*.cpp", "simulations/**/*.hpp", "simulations/**/*.cpp", "**/CMakeLists.txt", "vendor/**", ".github/**", "toolchains/docker.gyselalibxx_env/**", "toolchains/v100.persee/**"]'
+        echo "MATCHING_PATHS=${MATCHING_PATHS}" >> ${GITHUB_OUTPUT}
+      shell: bash
+    - id: pr_check
+      if: github.event_name == 'pull_request'
+      run: |
+        gh pr diff ${{ github.event.pull_request.number }} --name-only > changed_files.txt
+      shell: bash
+    - id: merge_group_check
+      if: github.event_name == 'merge_group'
+      run: |
+        git diff --name-only origin/main > changed_files.txt
+      shell: bash
+    - id: changes_check
+      run: |
+        import fnmatch
+        import os
+        with open("changed_files.txt") as f:
+          lines = f.readlines()
+        matches = [m for pat in ${{ github.outputs.MATCHING_PATHS }} for m in fnmatch.filter(lines, pat)]
+        with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+          f.write(f'found_match={len(matches)!=0}')
+      shell: python
+    - id: duplicate_check
+      uses: fkirc/skip-duplicate-actions@v5
+        with:
+          # All of these options are optional, so you can remove them if you are happy with the defaults
+          skip_after_successful_duplicate: 'true'
+    - id: outcome
+      run: |
+        SHOULD_RUN=${{ steps.changes_check.outputs.found_match || ! steps.skip_check.outputs.should_skip }}
+        echo "should_run=${SHOULD_RUN}" >> $GITHUB_OUTPUT
