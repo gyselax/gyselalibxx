@@ -1,0 +1,67 @@
+name: Bug Report
+description: Report a problem with the project
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: checkboxes
+  id: existing-issue
+  attributes:
+    label: Is there an existing issue for this?
+    description: Please search to see if an issue already exists for the bug you encountered.
+    options:
+    - label: I have searched the existing issues
+      required: true
+  - type: markdown
+    attributes:
+      value: "## Bug Report\nPlease provide a clear description of the issue."
+  - type: textarea
+    attributes:
+      label: Description
+      description: A clear and concise description of the bug.
+      placeholder: Describe the bug...
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Version of the code used
+      description: The exact version of the code used. Either a commit SHA or a tag. This can be obtained with the command `git log -1 --pretty=format:%H`
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps to Reproduce
+      description: "Steps to reproduce the issue."
+      placeholder: |
+        1. Compile the project using [toolchain]
+        2. Run the following minimal example:
+
+           ```cpp
+           // Minimal example demonstrating the issue
+           ```
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected Behavior
+      description: "What should happen instead?"
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Logs or Screenshots
+      description: "If applicable, add logs or screenshots."
+  - type: input
+    attributes:
+      label: Environment
+      description: "Operating system, GPU type, etc."
+  - type: dropdown
+    attributes:
+      label: How does this bug impact your work?
+      options:
+        - "Minor - It’s an inconvenience, but I can work around it."
+        - "Moderate - It affects my workflow but doesn’t completely block me."
+        - "Severe - It prevents me from completing important work."
+        - "Critical - I cannot proceed at all."
+    validations:
+      required: true
