@@ -57,5 +57,6 @@ body:
         - "Moderate - It affects my workflow but doesn’t completely block me."
         - "Severe - It prevents me from completing important work."
         - "Critical - I cannot proceed at all."
+      default: 0
     validations:
       required: true
