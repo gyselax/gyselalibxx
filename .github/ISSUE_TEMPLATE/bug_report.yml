@@ -16,7 +16,7 @@ body:
       value: "## Bug Report\nPlease provide a clear description of the issue."
   - type: textarea
     attributes:
-      label: "# Description"
+      label: "Description"
       description: A clear and concise description of the bug.
       placeholder: Describe the bug...
     validations:
@@ -29,7 +29,7 @@ body:
       required: true
   - type: textarea
     attributes:
-      label: "# Steps to Reproduce"
+      label: "Steps to Reproduce"
       description: "Steps to reproduce the issue."
       placeholder: |
         1. Compile the project using [toolchain]
@@ -41,10 +41,10 @@ body:
         3. Observe ...
     validations:
       required: true
-  - type: input
+  - type: textarea
     attributes:
       label: Environment
-      description: "Operating system, GPU type, etc."
+      description: "Supercomputer/cluster/personal computer, operating system, CPU/GPU type, etc."
   - type: textarea
     attributes:
       label: Logs or Screenshots
