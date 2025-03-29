@@ -51,7 +51,7 @@ jobs:
 
   set_draft_failing:
     runs-on: ubuntu-latest
-    needs: [cpu_tests, gpu_tests]
+    needs: [cpu_tests]
     if: github.event_name == 'pull_request' && failure()
     steps:
       - uses: actions/checkout@v4
@@ -66,28 +66,6 @@ jobs:
               gh pr ready ${{ github.event.pull_request.number }} --undo
             fi
             gh pr comment ${{ github.event.pull_request.number }} -b "This PR is failing tests so it has been put back into draft. Please remove the draft status when the tests pass."
-            gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
-          fi
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-
-  set_draft_cancelled:
-    runs-on: ubuntu-latest
-    needs: [cpu_tests, gpu_tests]
-    if: github.event_name == 'pull_request' && cancelled()
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set PR to draft to avoid unnecessary runs
-        run: |
-          isDraft=${{ github.event.pull_request.draft }}
-          if [ "${isDraft}" != "true" ]
-          then
-            if [ "${{github.repository == 'gyselax/gyselalibxx'}}" == "true" ]
-            then
-               gh pr ready ${{ github.event.pull_request.number }} --undo
-            fi
-            gh pr comment ${{ github.event.pull_request.number }} -b "It seems like you haven't finished working on this PR so it has been put back into draft. Please remove the draft status when the PR can run tests without being interrupted."
             gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
           fi
         shell: bash
