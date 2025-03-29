@@ -1,0 +1,26 @@
+on:
+  pull_request_review:
+    types: [ submitted ]
+
+jobs:
+  Bot:
+    name: Update Review Stage
+    if: ((! github.event.pull_request.draft) && (github.event.review.user.type != 'Bot' ) && (! github.event.pull_request.head.repo.fork))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set draft
+        if: github.event.review.state == 'changes_requested'
+        run: |
+          gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
+          gh pr ready ${{ github.event.pull_request.number }} --undo
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Set ready to merge
+        if: github.event.review.state == 'approved'
+        run: |
+          gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
+          gh pr edit ${{ github.event.pull_request.number }} --add-label "Ready to merge"
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}

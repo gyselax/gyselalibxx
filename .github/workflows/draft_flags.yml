@@ -15,6 +15,12 @@ jobs:
           ref: main
       - run: |
           gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
+          RUNNING_WORKFLOW_LINKS=$(gh pr checks ${{ github.event.pull_request.number }} --json state,link --jq '.[] | select(.state == "QUEUED" or .state == "IN_PROGRESS" or .state == "WATING") | .link')
+          RUNNING_WORKFLOWS=$(echo "$RUNNING_WORKFLOW_LINKS" | awk -F'[/"]' '{print $(NF-2); }' | sort -u)
+          for workflow_id in ${RUNNING_WORKFLOWS}
+          do
+            gh run cancel ${workflow_id}
+          done
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
