@@ -13,13 +13,10 @@ body:
         required: true
   - type: markdown
     attributes:
-      value: "---"
-  - type: markdown
-    attributes:
       value: "## Bug Report\nPlease provide a clear description of the issue."
   - type: textarea
     attributes:
-      label: "---\n# Description"
+      label: "# Description"
       description: A clear and concise description of the bug.
       placeholder: Describe the bug...
     validations:
@@ -32,7 +29,7 @@ body:
       required: true
   - type: textarea
     attributes:
-      label: "---\n# Steps to Reproduce"
+      label: "# Steps to Reproduce"
       description: "Steps to reproduce the issue."
       placeholder: |
         1. Compile the project using [toolchain]
@@ -54,7 +51,7 @@ body:
       description: "If applicable, add logs or screenshots."
   - type: dropdown
     attributes:
-      label: "---\nHow does this bug impact your work?"
+      label: "How does this bug impact your work?"
       options:
         - "Minor - It’s an inconvenience, but I can work around it."
         - "Moderate - It affects my workflow but doesn’t completely block me."
