@@ -33,9 +33,24 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  wait_for_static_analysis:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.is_duplicate }}
+    steps:
+      - name: Checkout gyselalibxx
+        uses: actions/checkout@v4
+      - name: Wait
+        run: |
+          worflow_id=$(gh run list --commit ${{ github.sha }} -w "Static Analyses" --json databaseId --jq '.[]["databaseId"]')
+          gh run watch ${workflow_id}
+          # Wait 10 seconds in case job is cancelled
+          sleep 10
+        shell: bash
+
   trigger_gpu_tests:
     runs-on: ubuntu-latest
     environment: 'GitLab GPU trigger'
+    needs: [wait_for_static_analysis]
     if: ${{ inputs.is_duplicate }}
     steps:
       - name: Checkout gyselalibxx
