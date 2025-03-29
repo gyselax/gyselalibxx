@@ -44,3 +44,13 @@ body:
         - etc.
     validations:
       required: false
+
+  - type: checkboxes
+    id: willing-to-help
+    attributes:
+      label: Contribution
+      description: Would you be willing to help implement this?
+      options:
+        - label: I'm willing to work on this issue
+    validations:
+      required: false
