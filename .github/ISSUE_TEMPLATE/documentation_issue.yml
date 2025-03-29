@@ -1,0 +1,56 @@
+name: Documentation Issue
+description: Report missing, unclear, or incorrect documentation
+title: "[DOCS]: "
+labels: ["documentation"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Help us improve our documentation by reporting issues or suggesting improvements.
+
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Issue Type
+      description: What type of documentation issue is this?
+      options:
+        - Missing documentation
+        - Unclear explanation
+        - Incorrect information
+        - Outdated content
+        - Example needed
+        - Mathematical notation issue
+        - Typo/formatting problem
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: Where did you find this issue? (URL, file path, or section name)
+      placeholder: https://gyselax.github.io/gyselalibxx/bad_docs.html in section: To Fix
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe what's wrong or missing in the documentation
+      placeholder: "The explanation of the FooBar operator doesn't match the implementation in the code..."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: willing-to-help
+    attributes:
+      label: Contribution
+      description: Would you be willing to help implement this?
+      options:
+        - label: I'm willing to work on this issue
+    validations:
+      required: false
+
