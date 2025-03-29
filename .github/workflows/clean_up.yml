@@ -17,12 +17,15 @@ jobs:
           fetch-depth: 0
       - name: Set PR labels for reviews
         run: |
-          STATES=$(gh pr checks ${{ github.event.check_run.pull_requests.number }} --required --json state)
-          N_PASSES=$(echo $STATES | grep -o "\"state\":\"SUCCESS\"" | wc -l)
-          if [[ ${N_PASSES} == 10 ]]
-          then
-            # If all required tests are passing then mark as ready to review
-            gh pr edit ${{ github.event.check_run.pull_requests.number }} --add-label "Ready to review"
+          pr_number=$(gh pr list --search "${}" --state --json number --jq '.[]["number"]')
+          if [[ -n "${pr_number}" ]]
+            STATES=$(gh pr checks ${pr_number} --required --json state)
+            N_PASSES=$(echo $STATES | grep -o "\"state\":\"SUCCESS\"" | wc -l)
+            if [[ ${N_PASSES} == 10 ]]
+            then
+              # If all required tests are passing then mark as ready to review
+              gh pr edit ${pr_number} --add-label "Ready to review"
+            fi
           fi
         shell: bash
         env:
