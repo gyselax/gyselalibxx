@@ -90,22 +90,22 @@ public:
             static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
             double jacob = m_mapping.jacobian(coord);
             assert(fabs(jacob) > 1e-15);
-            if constexpr (std::is_same_v<IndexTag1, DimRes0> && std::is_same_v<IndexTag2, DimArg0_cov>) {
+            if constexpr (
+                    std::is_same_v<IndexTag1, DimRes0> && std::is_same_v<IndexTag2, DimArg0_cov>) {
                 //Compute the (1,1) coefficient of the inverse Jacobian matrix.
                 // J^{-1}(1,1) = J(2,2) / det(J)
                 return m_mapping.template jacobian_component<DimRes1, DimArg1_cov>(coord) / jacob;
-            }
-            else if constexpr (std::is_same_v<IndexTag1, DimRes0> && std::is_same_v<IndexTag2, DimArg1_cov>) {
+            } else if constexpr (
+                    std::is_same_v<IndexTag1, DimRes0> && std::is_same_v<IndexTag2, DimArg1_cov>) {
                 //Compute the (1,2) coefficient of the inverse Jacobian matrix.
                 // J^{-1}(1,2) = -J(1,2) / det(J)
                 return -m_mapping.template jacobian_component<DimRes0, DimArg1_cov>(coord) / jacob;
-            }
-            else if constexpr (std::is_same_v<IndexTag1, DimRes1> && std::is_same_v<IndexTag2, DimArg0_cov>) {
+            } else if constexpr (
+                    std::is_same_v<IndexTag1, DimRes1> && std::is_same_v<IndexTag2, DimArg0_cov>) {
                 //Compute the (2,1) coefficient of the inverse Jacobian matrix.
                 // J^{-1}(2,1) = -J(2,1) / det(J)
                 return -m_mapping.template jacobian_component<DimRes1, DimArg0_cov>(coord) / jacob;
-            }
-            else {
+            } else {
                 //Compute the (2,1) coefficient of the inverse Jacobian matrix.
                 // J^{-1}(2,2) = J(1,1) / det(J)
                 return m_mapping.template jacobian_component<DimRes0, DimArg0_cov>(coord) / jacob;

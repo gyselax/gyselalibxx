@@ -183,13 +183,17 @@ class Defines2DInvJacobian
     template <typename ClassType>
     using inv_jacobian_type = decltype(&ClassType::inv_jacobian_matrix);
     template <typename ClassType>
-    using inv_jacobian_11 = decltype(&ClassType::template inv_jacobian_component<DimRes0, DimArg0_cov>);
+    using inv_jacobian_11
+            = decltype(&ClassType::template inv_jacobian_component<DimRes0, DimArg0_cov>);
     template <typename ClassType>
-    using inv_jacobian_12 = decltype(&ClassType::template inv_jacobian_component<DimRes0, DimArg1_cov>);
+    using inv_jacobian_12
+            = decltype(&ClassType::template inv_jacobian_component<DimRes0, DimArg1_cov>);
     template <typename ClassType>
-    using inv_jacobian_21 = decltype(&ClassType::template inv_jacobian_component<DimRes1, DimArg0_cov>);
+    using inv_jacobian_21
+            = decltype(&ClassType::template inv_jacobian_component<DimRes1, DimArg0_cov>);
     template <typename ClassType>
-    using inv_jacobian_22 = decltype(&ClassType::template inv_jacobian_component<DimRes1, DimArg1_cov>);
+    using inv_jacobian_22
+            = decltype(&ClassType::template inv_jacobian_component<DimRes1, DimArg1_cov>);
 
     static std::tuple<bool, const char*> constexpr has_2d_inv_jacobian_methods()
     {
@@ -222,41 +226,25 @@ class Defines2DInvJacobian
                         "The inv_jacobian_matrix method of a 2D Mapping must take a Coordinate as "
                         "an argument and return a Tensor.");
             }
-            if (!std::is_invocable_r_v<
-                        double,
-                        inv_jacobian_11<Type>,
-                        Type,
-                        CoordinateType>) {
+            if (!std::is_invocable_r_v<double, inv_jacobian_11<Type>, Type, CoordinateType>) {
                 return std::make_tuple(
                         false,
                         "The inv_jacobian_11 method of a 2D Mapping must take a Coordinate as an "
                         "argument and return a double.");
             }
-            if (!std::is_invocable_r_v<
-                        double,
-                        inv_jacobian_12<Type>,
-                        Type,
-                        CoordinateType>) {
+            if (!std::is_invocable_r_v<double, inv_jacobian_12<Type>, Type, CoordinateType>) {
                 return std::make_tuple(
                         false,
                         "The inv_jacobian_12 method of a 2D Mapping must take a Coordinate as an "
                         "argument and return a double.");
             }
-            if (!std::is_invocable_r_v<
-                        double,
-                        inv_jacobian_21<Type>,
-                        Type,
-                        CoordinateType>) {
+            if (!std::is_invocable_r_v<double, inv_jacobian_21<Type>, Type, CoordinateType>) {
                 return std::make_tuple(
                         false,
                         "The inv_jacobian_21 method of a 2D Mapping must take a Coordinate as an "
                         "argument and return a double.");
             }
-            if (!std::is_invocable_r_v<
-                        double,
-                        inv_jacobian_22<Type>,
-                        Type,
-                        CoordinateType>) {
+            if (!std::is_invocable_r_v<double, inv_jacobian_22<Type>, Type, CoordinateType>) {
                 return std::make_tuple(
                         false,
                         "The inv_jacobian_22 method of a 2D Mapping must take a Coordinate as an "

@@ -347,7 +347,8 @@ public:
             //Compute the (1,1) coefficient of the inverse Jacobian matrix
             const double sin_theta = Kokkos::sin(theta);
 
-            const double fact_1 = 1 / Kokkos::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
+            const double fact_1
+                    = 1 / Kokkos::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
             const double fact_2 = m_e * m_epsilon * xi * r * sin_theta * fact_1 / divisor / divisor;
             const double fact_3 = m_e * xi / divisor;
 
@@ -358,20 +359,19 @@ public:
 
             const double fact_3 = m_e * xi / divisor;
             return sin_theta / fact_3;
-        }
-        else if constexpr (std::is_same_v<IndexTag1, Theta> && std::is_same_v<IndexTag2, X_cov>) {
+        } else if constexpr (std::is_same_v<IndexTag1, Theta> && std::is_same_v<IndexTag2, X_cov>) {
             //Compute the (2,1) coefficient of the inverse Jacobian matrix.
             assert(r >= 1e-15);
 
             const double sin_theta = Kokkos::sin(theta);
 
-            const double fact_1 = 1 / Kokkos::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
+            const double fact_1
+                    = 1 / Kokkos::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
             const double fact_2 = m_e * m_epsilon * xi * r * sin_theta * fact_1 / divisor / divisor;
             const double fact_3 = m_e * xi / divisor;
 
             return 1 / r / fact_1 * (cos_theta * fact_2 + sin_theta * fact_3) / fact_3;
-        }
-        else {
+        } else {
             //Compute the (2,2) coefficient of the inverse Jacobian matrix.
             assert(r >= 1e-15);
 

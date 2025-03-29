@@ -230,7 +230,9 @@ public:
     KOKKOS_INLINE_FUNCTION double inv_jacobian_component(CoordJacobian const& coord_rtheta) const
     {
         static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<DimArg1, DimArg2>>);
-        static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<typename DimResult1::Dual, typename DimResult2::Dual>>);
+        static_assert(ddc::in_tags_v<
+                      IndexTag2,
+                      VectorIndexSet<typename DimResult1::Dual, typename DimResult2::Dual>>);
 
         InvJacobianMatrixType J = inv_jacobian_matrix(coord_rtheta);
         return ddcHelper::get<IndexTag1, IndexTag2>(J);
