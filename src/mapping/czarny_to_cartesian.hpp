@@ -364,7 +364,6 @@ public:
             assert(r >= 1e-15);
 
             const double sin_theta = Kokkos::sin(theta);
-
             const double fact_1
                     = 1 / Kokkos::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
             const double fact_2 = m_e * m_epsilon * xi * r * sin_theta * fact_1 / divisor / divisor;
