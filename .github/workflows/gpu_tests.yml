@@ -53,7 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 'GitLab GPU trigger'
     needs: [wait_for_static_analysis]
-    if: ${{ inputs.is_duplicate }}
+    if: ${{ ! inputs.is_duplicate }}
     steps:
       - name: Checkout gyselalibxx
         uses: actions/checkout@v4
