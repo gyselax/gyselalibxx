@@ -35,7 +35,7 @@ concurrency:
 jobs:
   wait_for_static_analysis:
     runs-on: ubuntu-latest
-    if: ${{ inputs.is_duplicate }}
+    if: ${{ ! inputs.is_duplicate }}
     steps:
       - name: Checkout gyselalibxx
         uses: actions/checkout@v4

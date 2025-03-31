@@ -1,8 +1,8 @@
 name: "Check if CPU/GPU tests can be skipped"
 outputs:
-  should_run:
+  should_skip:
     description: "True if the tests should be run, False otherwise."
-    value: ${{ steps.outcome.outputs.should_run }}
+    value: ${{ steps.outcome.outputs.should_skip }}
 
 runs:
   using: "composite"
@@ -42,6 +42,6 @@ runs:
       run: |
         echo "Found match : ${{ steps.changes_check.outputs.found_match }}"
         echo "Should skip : ${{ steps.skip_check.outputs.should_skip }}"
-        SHOULD_RUN=${{ steps.changes_check.outputs.found_match || (! steps.skip_check.outputs.should_skip) }}
-        echo "should_run=${SHOULD_RUN}" >> $GITHUB_OUTPUT
+        SHOULD_SKIP=${{ (! steps.changes_check.outputs.found_match) || steps.skip_check.outputs.should_skip }}
+        echo "should_skip=${SHOULD_SKIP}" >> $GITHUB_OUTPUT
       shell: bash
