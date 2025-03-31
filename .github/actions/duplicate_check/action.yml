@@ -28,8 +28,10 @@ runs:
         import fnmatch
         import os
         with open("changed_files.txt") as f:
-          lines = f.readlines()
-        matches = [m for pat in os.environ['MATCHING_PATHS'] for m in fnmatch.filter(lines, pat)]
+          lines = [l.strip() for l in f.readlines()]
+        matching_paths = [si.strip('"') for si in os.environ['MATCHING_PATHS'].split('[')[1].split(']')[0].split(', ')]
+        matches = [m for pat in matching_paths for m in fnmatch.filter(lines, pat)]
+        print(matches)
         with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
           f.write(f'found_match={len(matches)!=0}')
       shell: python
