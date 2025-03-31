@@ -29,6 +29,8 @@ ax = "ax"
 color = "color"
 colors = "colors"
 artifacts = "artifacts"
+gyselalibxx = "Gyselalib++"
+Gyselalibxx = "Gyselalib++"
 
 [files]
 extend-exclude = ["*.tex",
