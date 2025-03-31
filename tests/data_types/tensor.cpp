@@ -5,6 +5,7 @@
 
 #include "geometry_tensor.hpp"
 #include "indexed_tensor.hpp"
+#include "static_tensors.hpp"
 #include "tensor.hpp"
 #include "tensor_index_tools.hpp"
 #include "vector_index_tools.hpp"
@@ -394,3 +395,47 @@ TEST(TensorTest, MulOrthonormal)
     int E = tensor_mul(index<'i', 'j'>(A), index<'j', 'i'>(B));
     EXPECT_EQ(E, 42);
 }
+
+TEST(TensorTest, LeviCivita2D)
+{
+    LeviCivitaTensor<int, VectorIndexSet<X, Y>> levi_civita;
+    static_assert(ddcHelper::get<X, X>(levi_civita) == 0);
+    static_assert(ddcHelper::get<X, Y>(levi_civita) == 1);
+    static_assert(ddcHelper::get<Y, X>(levi_civita) == -1);
+    static_assert(ddcHelper::get<Y, Y>(levi_civita) == 0);
+}
+
+TEST(TensorTest, LeviCivita3D)
+{
+    LeviCivitaTensor<int, VectorIndexSet<X, Y, Z>> levi_civita;
+    static_assert(ddcHelper::get<X, X, X>(levi_civita) == 0);
+    static_assert(ddcHelper::get<X, X, Y>(levi_civita) == 0);
+    static_assert(ddcHelper::get<X, X, Z>(levi_civita) == 0);
+    static_assert(ddcHelper::get<X, Y, X>(levi_civita) == 0);
+    static_assert(ddcHelper::get<X, Y, Y>(levi_civita) == 0);
+    static_assert(ddcHelper::get<X, Y, Z>(levi_civita) == 1);
+    static_assert(ddcHelper::get<X, Z, X>(levi_civita) == 0);
+    static_assert(ddcHelper::get<X, Z, Y>(levi_civita) == -1);
+    static_assert(ddcHelper::get<X, Z, Z>(levi_civita) == 0);
+
+    static_assert(ddcHelper::get<Y, X, X>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Y, X, Y>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Y, X, Z>(levi_civita) == -1);
+    static_assert(ddcHelper::get<Y, Y, X>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Y, Y, Y>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Y, Y, Z>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Y, Z, X>(levi_civita) == 1);
+    static_assert(ddcHelper::get<Y, Z, Y>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Y, Z, Z>(levi_civita) == 0);
+
+    static_assert(ddcHelper::get<Z, X, X>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Z, X, Y>(levi_civita) == 1);
+    static_assert(ddcHelper::get<Z, X, Z>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Z, Y, X>(levi_civita) == -1);
+    static_assert(ddcHelper::get<Z, Y, Y>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Z, Y, Z>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Z, Z, X>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Z, Z, Y>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Z, Z, Z>(levi_civita) == 0);
+}
+

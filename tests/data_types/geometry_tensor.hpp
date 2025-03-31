@@ -44,5 +44,11 @@ struct Y
     static bool constexpr IS_CONTRAVARIANT = true;
     using Dual = Y;
 };
+struct Z
+{
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    using Dual = Z;
+};
 
 } // namespace
