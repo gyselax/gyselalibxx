@@ -46,6 +46,8 @@ jobs:
           # Wait 10 seconds in case job is cancelled
           sleep 10
         shell: bash
+        env:
+        GH_TOKEN: ${{ github.token }}
 
   trigger_gpu_tests:
     runs-on: ubuntu-latest
