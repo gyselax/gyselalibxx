@@ -29,8 +29,6 @@ ax = "ax"
 color = "color"
 colors = "colors"
 artifacts = "artifacts"
-gyselalibxx = "Gyselalib++"
-Gyselalibxx = "Gyselalib++"
 
 [files]
 extend-exclude = ["*.tex",
@@ -40,3 +38,10 @@ extend-exclude = ["*.tex",
                   "*.svg",
                   "*.css"
                   ]
+
+[type.md]
+extend-glob = ["*.md"]
+
+[type.md.extend-words]
+gyselalibxx = "Gyselalib++"
+Gyselalibxx = "Gyselalib++"
