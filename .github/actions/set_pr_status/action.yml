@@ -19,7 +19,7 @@ runs:
       run: |
         STATES=$(gh pr checks ${{ inputs.pr_number }} --required --json state)
         N_PASSES=$(echo $STATES | grep -o "\"state\":\"SUCCESS\"" | wc -l)
-        if [[ ${N_PASSES} >= 10 ]]
+        if (( ${N_PASSES} >= 10 ))
         then
           # If all required tests (except GPU) are passing then mark as ready to review
           gh pr edit ${{ inputs.pr_number }} --add-label "Ready to review"
