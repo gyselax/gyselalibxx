@@ -111,6 +111,7 @@ public:
 
         Coord<TargetDim> const target_min = ddc::coordinate(target_idx_range.front());
         double const target_length = ddcHelper::total_interval_length(target_idx_range);
+        std::cout << current_length  << "   " << target_length << std::endl; 
 
         double rescale_x = (current_coord - current_min) / current_length * target_length;
 
@@ -243,8 +244,14 @@ public:
         IdxRangeCurrent const current_idx_range(combined_idx_range);
         IdxRangeTarget const target_idx_range(combined_idx_range);
 
-        int const n_cells_current = current_idx_range.size() - 1;
-        int const n_cells_target = target_idx_range.size() - 1;
+        int n_cells_current = current_idx_range.size() - 1;
+        int n_cells_target = target_idx_range.size() - 1;
+        if constexpr(CurrentGrid::continuous_dimension_type::PERIODIC){
+            n_cells_current++; 
+        }
+        if constexpr(TargetGrid::continuous_dimension_type::PERIODIC){
+            n_cells_target++; 
+        }
 
         if constexpr ( // Uniform case
                 ddc::is_uniform_point_sampling_v<
@@ -269,9 +276,19 @@ public:
                 target_idx += target_idx_step_rescaled;
 
                 if constexpr (!Interface::orientations_agree) {
-                    IdxStepTarget target_idx_step = IdxTarget(target_idx_range.back()) - target_idx;
-                    target_idx = IdxTarget(target_idx_range.front());
-                    target_idx += target_idx_step;
+                    if constexpr (TargetGrid::continuous_dimension_type::PERIODIC){
+                        IdxStepTarget target_idx_step = IdxTarget(target_idx_range.back() +1) - target_idx;
+                        target_idx = IdxTarget(target_idx_range.front());
+                        target_idx += target_idx_step;
+                        // Apply periodicity property of the domain. 
+                        if (target_idx == target_idx_range.back() +1){
+                            target_idx = target_idx_range.front(); 
+                        }
+                    }else{
+                        IdxStepTarget target_idx_step = IdxTarget(target_idx_range.back()) - target_idx;
+                        target_idx = IdxTarget(target_idx_range.front());
+                        target_idx += target_idx_step;
+                    }
                 }
             }
         } else { // Non uniform case

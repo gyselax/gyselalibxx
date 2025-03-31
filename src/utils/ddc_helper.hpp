@@ -42,7 +42,7 @@ constexpr std::enable_if_t<
         double>
 total_interval_length(IdxRange<IDim> const& idx_range)
 {
-    return std::fabs(ddc::rlength(idx_range) + ddc::step<IDim>());
+    return std::fabs(ddc::rlength(idx_range));// + ddc::step<IDim>());
 }
 
 //TODO: this should be directly handled by ddc::Discretisation really,
@@ -60,7 +60,7 @@ constexpr std::enable_if_t<
         double>
 total_interval_length(IdxRange<IDim> const& idx_range)
 {
-    IdxRange<IDim> dom_periodic(idx_range.front(), idx_range.extents() + 1);
+    IdxRange<IDim> dom_periodic(idx_range.front(), idx_range.extents()); //  +1);
     return std::fabs(ddc::rlength(dom_periodic));
 }
 
