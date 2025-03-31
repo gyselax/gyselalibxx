@@ -20,6 +20,7 @@ jobs:
     outputs:
       is_duplicate: ${{ steps.skip_check.outputs.should_run }}
     steps:
+      - uses: actions/checkout@v4
       - id: skip_check
         uses: ./.github/actions/duplicate_check
 
