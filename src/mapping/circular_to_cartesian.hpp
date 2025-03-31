@@ -200,7 +200,7 @@ public:
      *
      * For some computations, we need the complete inverse Jacobian matrix or just the
      * coefficients.
-     * The coefficients can be given independently with the function inv_jacobian_matrix.
+     * The coefficients can be given independently with the function inv_jacobian_component.
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
