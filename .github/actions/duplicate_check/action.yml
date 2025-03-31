@@ -44,6 +44,6 @@ runs:
       run: |
         echo "Found match : ${{ steps.changes_check.outputs.found_match }}"
         echo "Should skip : ${{ steps.skip_check.outputs.should_skip }}"
-        SHOULD_SKIP=${{ (! steps.changes_check.outputs.found_match) || steps.skip_check.outputs.should_skip }}
+        SHOULD_SKIP=${{ steps.skip_check.outputs.should_skip || (! steps.changes_check.outputs.found_match) }}
         echo "should_skip=${SHOULD_SKIP}" >> $GITHUB_OUTPUT
       shell: bash
