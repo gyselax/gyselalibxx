@@ -6,6 +6,12 @@
 #include "type_seq_tools.hpp"
 #include "vector_index_tools.hpp"
 
+/**
+ * A class containing only static constexpr methods which describes
+ * the Levi-Civita tensor.
+ * @tparam ElementType The type of the elements of the tensor (usually double/complex).
+ * @tparam ValidIndexSet The indices that can be used along any of the dimensions of the tensor.
+ */
 template <class ElementType, class ValidIndexSet>
 class LeviCivitaTensor
 {
