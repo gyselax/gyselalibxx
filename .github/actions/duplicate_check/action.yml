@@ -8,7 +8,8 @@ runs:
   using: "composite"
   steps:
     - run: |
-        MATCHING_PATHS='["src/**/*.hpp", "src/**/*.cpp", "tests/**/*.hpp", "tests/**/*.cpp", "simulations/**/*.hpp", "simulations/**/*.cpp", "**/CMakeLists.txt", "vendor/**", ".github/actions/**", ".github/workflows/**", "toolchains/docker.gyselalibxx_env/**", "toolchains/v100.persee/**"]'
+        #MATCHING_PATHS='["src/**/*.hpp", "src/**/*.cpp", "tests/**/*.hpp", "tests/**/*.cpp", "simulations/**/*.hpp", "simulations/**/*.cpp", "**/CMakeLists.txt", "vendor/**", ".github/actions/**", ".github/workflows/**", "toolchains/docker.gyselalibxx_env/**", "toolchains/v100.persee/**"]'
+        MATCHING_PATHS='["src/**/*.hpp", "src/**/*.cpp", "tests/**/*.hpp", "tests/**/*.cpp", "simulations/**/*.hpp", "simulations/**/*.cpp", "**/CMakeLists.txt", "vendor/**", "toolchains/docker.gyselalibxx_env/**", "toolchains/v100.persee/**"]'
         echo "MATCHING_PATHS=${MATCHING_PATHS}" >> ${GITHUB_ENV}
       shell: bash
     - id: pr_check
@@ -43,7 +44,8 @@ runs:
     - id: outcome
       run: |
         echo "Found match : ${{ steps.changes_check.outputs.found_match }}"
-        echo "Should skip : ${{ steps.skip_check.outputs.should_skip }}"
-        SHOULD_SKIP=${{ steps.skip_check.outputs.should_skip || (! steps.changes_check.outputs.found_match) }}
+        echo "Should skip : ${{ steps.duplicate_check.outputs.should_skip }}"
+        SHOULD_SKIP=${{ (! steps.changes_check.outputs.found_match) || steps.duplicate_check.outputs.should_skip }}
         echo "should_skip=${SHOULD_SKIP}" >> $GITHUB_OUTPUT
+        echo "should_skip=${SHOULD_SKIP}"
       shell: bash
