@@ -33,21 +33,40 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  wait_for_static_analysis:
+    runs-on: ubuntu-latest
+    if: ${{ ! inputs.is_duplicate }}
+    steps:
+      - name: Checkout gyselalibxx
+        uses: actions/checkout@v4
+      - name: Wait
+        run: |
+          workflow_id=$(gh run list --commit ${{ inputs.SHA || github.sha }} -w "Static Analyses" --json databaseId --jq '.[]["databaseId"]')
+          echo "Run id : ${workflow_id}"
+          if [ -n "${workflow_id}" ]
+          then
+            gh run watch ${workflow_id}
+          fi
+          # Wait 10 seconds in case job is cancelled
+          sleep 10
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+
   trigger_gpu_tests:
     runs-on: ubuntu-latest
     environment: 'GitLab GPU trigger'
+    needs: [wait_for_static_analysis]
+    if: ${{ ! inputs.is_duplicate }}
     steps:
       - name: Checkout gyselalibxx
-        if: ${{ ! inputs.is_duplicate }}
         uses: actions/checkout@v4
       - name: "Filter tests"
-        if: ${{ ! inputs.is_duplicate }}
         uses: ./.github/actions/test_filter
         with:
           base_sha: ${{ inputs.merge_target }}
           trigger_type: ${{ github.event_name }}
       - name: "Send to persee"
-        if: ${{ ! inputs.is_duplicate }}
         run: |
           git clone https://ci_bot:${GITLAB_PAT}@gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx.git --single-branch --branch trigger_persee
           cd gyselalibxx
@@ -60,15 +79,18 @@ jobs:
         shell: bash
         env:
           GITLAB_PAT: ${{secrets.GITLAB_PAT}}
+
+  pass_duplicate_gpu_tests:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.is_duplicate }}
+    steps:
       - name: "Get bot token"
-        if: ${{ inputs.is_duplicate }}
         uses: actions/create-github-app-token@v1
         id: app-token
         with:
           app-id: 1132905
           private-key: ${{ secrets.BOT_PEM }}
       - name: "Validate GPU using previous success"
-        if: ${{ inputs.is_duplicate }}
         run: |
           curl -L -X POST \
             --header "Accept: application/vnd.github+json" \
