@@ -33,9 +33,9 @@ runs:
       shell: python
     - id: duplicate_check
       uses: fkirc/skip-duplicate-actions@v5
-        with:
-          # All of these options are optional, so you can remove them if you are happy with the defaults
-          skip_after_successful_duplicate: 'true'
+      with:
+        # All of these options are optional, so you can remove them if you are happy with the defaults
+        skip_after_successful_duplicate: 'true'
     - id: outcome
       run: |
         SHOULD_RUN=${{ steps.changes_check.outputs.found_match || ! steps.skip_check.outputs.should_skip }}
