@@ -188,23 +188,31 @@ jobs:
   
   set_draft_failing:
     runs-on: ubuntu-latest
-    needs: [Indentation, Markdown, Python, Documentation, cppcheck_static_analysis_errors, cmake_static_analysis, spelling]
-    if: github.event_name == 'pull_request' && failure()
+    if: github.event_name == 'pull_request' && failure() && github.repository == 'gyselax/gyselalibxx'
 
     steps:
       - uses: actions/checkout@v4
       - name: Set PR to draft to avoid unnecessary runs
         run: |
-          isDraft=${{ github.event.pull_request.draft || (github.repository != 'gyselax/gyselalibxx' && ! contains(github.event.pull_request.labels.*.name, 'Ready to review')) }}
+          isDraft=${{ github.event.pull_request.draft }}
           if [ "${isDraft}" != "true" ]
           then
-            if [ "${{github.repository == 'gyselax/gyselalibxx'}}" == "true" ]
-            then
-               gh pr ready ${{ github.event.pull_request.number }} --undo
-            fi
+            gh pr ready ${{ github.event.pull_request.number }} --undo
             gh pr comment ${{ github.event.pull_request.number }} -b "This PR is failing tests so it has been put back into draft. Please remove the draft status when the tests pass."
             gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
           fi
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
+
+  set_pr_status:
+    runs-on: ubuntu-latest
+    name: CPU PR result
+    needs: [Indentation, Markdown, Python, Documentation, cppcheck_static_analysis_errors, cmake_static_analysis, spelling]
+    if: failure() && ${{ inputs.pr_number }} != ""
+    steps:
+      - uses: ./.github/actions/set_pr_status
+        with:
+          status: "failure"
+          pr_number: ${{ inputs.pr_number }}
+          sha: ${{ github.sha }}

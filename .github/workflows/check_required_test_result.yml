@@ -16,31 +16,13 @@ jobs:
     name: Set PR labels
     if: |
       github.repository == 'gyselax/gyselalibxx' && github.event.check_run.pull_requests &&
-      (github.event.check_run.conclusion == 'success' || github.event.check_run.conclusion == 'failure')
+      github.event.check_run.conclusion == 'failure' && github.event.check_run.name == "GPU Tests"
 
     steps:
       - uses: actions/checkout@v4
+      - uses: ./.github/actions/set_pr_status
         with:
-          fetch-depth: 0
-      - name: Set PR labels for reviews
-        run: |
-          pr_number=$(gh pr list --search "${}" --state --json number --jq '.[]["number"]')
-          if [[ -n "${pr_number}" ]]
-            STATES=$(gh pr checks ${pr_number} --required --json state)
-            N_PASSES=$(echo $STATES | grep -o "\"state\":\"SUCCESS\"" | wc -l)
-            N_FAILS=$(echo $STATES | grep -o "\"state\":\"FAILURE\"" | wc -l)
-            if [[ ${N_FAILS} != 0 ]]
-            then
-              # If any required tests are failing
-              gh pr comment ${{ github.event.pull_request.number }} -b "This PR is failing tests so it has been put back into draft. Please remove the draft status when the tests pass."
-              gh pr ready ${{ github.event.pull_request.number }} --undo
-            elif [[ ${N_PASSES} >= 10 ]]
-            then
-              # If all required tests are passing then mark as ready to review
-              gh pr edit ${pr_number} --add-label "Ready to review"
-            fi
-          fi
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
+          status: ${{ github.event.check_run.conclusion }}
+          pr_number: ${{ github.event.check_run.pull_requests.number }}
+          sha: ${{ github.event.check_run.head_sha }}
 

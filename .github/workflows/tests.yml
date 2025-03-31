@@ -48,26 +48,3 @@ jobs:
       pr_number: ${{ github.event.pull_request.number }}
       is_duplicate: ${{ needs.pre_job.outputs.is_duplicate == 'true' && github.event.pull_request.draft == false }}
     secrets: inherit
-
-  set_draft_failing:
-    runs-on: ubuntu-latest
-    needs: [cpu_tests]
-    if: github.event_name == 'pull_request' && failure()
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set PR to draft to avoid unnecessary runs
-        if: github.repository == 'gyselax/gyselalibxx'
-        run: |
-          isDraft=${{ github.event.pull_request.draft }}
-          if [ "${isDraft}" != "true" ]
-          then
-            if [ "${{github.repository == 'gyselax/gyselalibxx'}}" == "true" ]
-            then
-              gh pr ready ${{ github.event.pull_request.number }} --undo
-            fi
-            gh pr comment ${{ github.event.pull_request.number }} -b "This PR is failing tests so it has been put back into draft. Please remove the draft status when the tests pass."
-            gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
-          fi
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
