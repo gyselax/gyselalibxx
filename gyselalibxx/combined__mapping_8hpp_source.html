@@ -639,11 +639,6 @@ public:
     template &lt;class IndexTag1, class IndexTag2&gt;
     KOKKOS_INLINE_FUNCTION double jacobian_component(CoordJacobian const&amp; coord_rtheta) const
     {
-        static_assert(
-                std::is_same_v&lt;IndexTag1, DimResult1&gt; &amp;&amp; std::is_same_v&lt;IndexTag1, DimResult2&gt;);
-        static_assert((std::is_same_v&lt;IndexTag2, typename DimArg1::Dual&gt;)&amp;&amp;(
-                std::is_same_v&lt;IndexTag2, typename DimArg2::Dual&gt;));
-        //VG// TODO replace by static_assert(ddc::in_tags_v&lt;IndexTag1, ResultTags&gt;);
         JacobianMatrixType J = jacobian_matrix(coord_rtheta);
         return ddcHelper::get&lt;IndexTag1, IndexTag2&gt;(J);
     }
@@ -676,29 +671,13 @@ public:
         }
     }
 
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_11(CoordJacobian const&amp; coord_rtheta) const
+    template &lt;class IndexTag1, class IndexTag2&gt;
+    KOKKOS_INLINE_FUNCTION double inv_jacobian_component(CoordJacobian const&amp; coord_rtheta) const
     {
         InvJacobianMatrixType J = inv_jacobian_matrix(coord_rtheta);
-        return ddcHelper::get&lt;DimArg1, typename DimResult1::Dual&gt;(J);
+        return ddcHelper::get&lt;IndexTag1, IndexTag2&gt;(J);
     }
 
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_12(CoordJacobian const&amp; coord_rtheta) const
-    {
-        InvJacobianMatrixType J = inv_jacobian_matrix(coord_rtheta);
-        return ddcHelper::get&lt;DimArg1, typename DimResult2::Dual&gt;(J);
-    }
-
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_21(CoordJacobian const&amp; coord_rtheta) const
-    {
-        InvJacobianMatrixType J = inv_jacobian_matrix(coord_rtheta);
-        return ddcHelper::get&lt;DimArg2, typename DimResult1::Dual&gt;(J);
-    }
-
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_22(CoordJacobian const&amp; coord_rtheta) const
-    {
-        InvJacobianMatrixType J = inv_jacobian_matrix(coord_rtheta);
-        return ddcHelper::get&lt;DimArg2, typename DimResult2::Dual&gt;(J);
-    }
 
     KOKKOS_INLINE_FUNCTION double inv_jacobian(CoordJacobian const&amp; coord_rtheta) const
     {

@@ -564,7 +564,7 @@
 <para>Compute full inverse Jacobian matrix. </para>
         </briefdescription>
         <detaileddescription>
-<para>For some computations, we need the complete inverse Jacobian matrix or just the coefficients. The coefficients can be given independently with the functions inv_jacobian_11, inv_jacobian_12, inv_jacobian_21 and inv_jacobian_22.</para>
+<para>For some computations, we need the complete inverse Jacobian matrix or just the coefficients. The coefficients can be given independently with the function inv_jacobian_component.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">coord</parametername>
@@ -574,34 +574,34 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The inverse Jacobian matrix.</para>
-</simplesect>
-<simplesect kind="see"><para>Jacobian::inv_jacobian_11 </para>
-</simplesect>
-<simplesect kind="see"><para>Jacobian::inv_jacobian_12 </para>
-</simplesect>
-<simplesect kind="see"><para>Jacobian::inv_jacobian_21 </para>
-</simplesect>
-<simplesect kind="see"><para>Jacobian::inv_jacobian_22 </para>
+<simplesect kind="return"><para>The inverse Jacobian matrix. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" line="305" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" bodystart="305" bodyend="329"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" line="298" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" bodystart="298" bodyend="322"/>
       </memberdef>
-      <memberdef kind="function" id="classCzarnyToCartesian_1a05f67462e6bc655d0d6a39a47acd2b3f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classCzarnyToCartesian_1a948fc7c66c6eb94232bb6f89c3792d77" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IndexTag1</type>
+          </param>
+          <param>
+            <type>class IndexTag2</type>
+          </param>
+        </templateparamlist>
         <type>KOKKOS_FUNCTION double</type>
-        <definition>KOKKOS_FUNCTION double CzarnyToCartesian&lt; R, Theta, X, Y &gt;::inv_jacobian_11</definition>
+        <definition>KOKKOS_FUNCTION double CzarnyToCartesian&lt; R, Theta, X, Y &gt;::inv_jacobian_component</definition>
         <argsstring>(Coord&lt; R, Theta &gt; const &amp;coord) const</argsstring>
-        <name>inv_jacobian_11</name>
-        <qualifiedname>CzarnyToCartesian::inv_jacobian_11</qualifiedname>
+        <name>inv_jacobian_component</name>
+        <qualifiedname>CzarnyToCartesian::inv_jacobian_component</qualifiedname>
         <param>
           <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt; const &amp;</type>
           <declname>coord</declname>
         </param>
         <briefdescription>
-<para>Compute the (1,1) coefficient of the inverse Jacobian matrix. </para>
+<para>Compute the (i,j) coefficient of the inverse Jacobian matrix. </para>
         </briefdescription>
         <detaileddescription>
 <para>Be careful because not all mappings are invertible, especially at the centre point.</para>
@@ -614,109 +614,13 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>A double with the value of the (1,1) coefficient of the inverse Jacobian matrix. </para>
+<simplesect kind="return"><para>A double with the value of the (i,j) coefficient of the inverse Jacobian matrix. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" line="341" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" bodystart="341" bodyend="356"/>
-      </memberdef>
-      <memberdef kind="function" id="classCzarnyToCartesian_1a602f2238aa5c2e5cd56a8d2877c1ad67" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION double</type>
-        <definition>KOKKOS_FUNCTION double CzarnyToCartesian&lt; R, Theta, X, Y &gt;::inv_jacobian_12</definition>
-        <argsstring>(Coord&lt; R, Theta &gt; const &amp;coord) const</argsstring>
-        <name>inv_jacobian_12</name>
-        <qualifiedname>CzarnyToCartesian::inv_jacobian_12</qualifiedname>
-        <param>
-          <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt; const &amp;</type>
-          <declname>coord</declname>
-        </param>
-        <briefdescription>
-<para>Compute the (1,2) coefficient of the inverse Jacobian matrix. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Be careful because not all mappings are invertible, especially at the centre point.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">coord</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The coordinate where we evaluate the inverse Jacobian matrix.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>A double with the value of the (1,2) coefficient of the inverse Jacobian matrix. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" line="368" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" bodystart="368" bodyend="380"/>
-      </memberdef>
-      <memberdef kind="function" id="classCzarnyToCartesian_1a870947d3bfc13d42e28a73344e96b40f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION double</type>
-        <definition>KOKKOS_FUNCTION double CzarnyToCartesian&lt; R, Theta, X, Y &gt;::inv_jacobian_21</definition>
-        <argsstring>(Coord&lt; R, Theta &gt; const &amp;coord) const</argsstring>
-        <name>inv_jacobian_21</name>
-        <qualifiedname>CzarnyToCartesian::inv_jacobian_21</qualifiedname>
-        <param>
-          <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt; const &amp;</type>
-          <declname>coord</declname>
-        </param>
-        <briefdescription>
-<para>Compute the (2,1) coefficient of the inverse Jacobian matrix. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Be careful because not all mappings are invertible, especially at the centre point.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">coord</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The coordinate where we evaluate the inverse Jacobian matrix.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>A double with the value of the (2,1) coefficient of the inverse Jacobian matrix. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" line="392" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" bodystart="392" bodyend="409"/>
-      </memberdef>
-      <memberdef kind="function" id="classCzarnyToCartesian_1ac7058984431ebd6205ebc97fbaa27df8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION double</type>
-        <definition>KOKKOS_FUNCTION double CzarnyToCartesian&lt; R, Theta, X, Y &gt;::inv_jacobian_22</definition>
-        <argsstring>(Coord&lt; R, Theta &gt; const &amp;coord) const</argsstring>
-        <name>inv_jacobian_22</name>
-        <qualifiedname>CzarnyToCartesian::inv_jacobian_22</qualifiedname>
-        <param>
-          <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt; const &amp;</type>
-          <declname>coord</declname>
-        </param>
-        <briefdescription>
-<para>Compute the (2,2) coefficient of the inverse Jacobian matrix. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Be careful because not all mappings are invertible, especially at the centre point.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">coord</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The coordinate where we evaluate the inverse Jacobian matrix.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>A double with the value of the (2,2) coefficient of the inverse Jacobian matrix. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" line="421" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" bodystart="421" bodyend="434"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" line="335" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" bodystart="335" bodyend="380"/>
       </memberdef>
       <memberdef kind="function" id="classCzarnyToCartesian_1a3db743b369fe2c5b63c993abb1429bb1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classCartesianToCzarny" kindref="compound">CartesianToCzarny</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
@@ -734,7 +638,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" line="441" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" bodystart="441" bodyend="444"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" line="388" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" bodystart="388" bodyend="391"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -757,7 +661,7 @@
 <para>and  <formula id="223">$ \det(J(r, \theta)) = \frac{- r}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}}
  \frac{e\xi}{2 -  \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}}. $</formula> </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" line="50" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" bodystart="51" bodyend="445"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" line="50" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" bodystart="51" bodyend="392"/>
     <listofallmembers>
       <member refid="classCzarnyToCartesian_1ab25d063bcbef5fb0f1bff444fc8a98e2" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>cartesian_tag_x</name></member>
       <member refid="classCzarnyToCartesian_1afdc40195f47edbbf18a26245ce9516f9" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>cartesian_tag_y</name></member>
@@ -771,10 +675,7 @@
       <member refid="classCzarnyToCartesian_1a04b554d096dec68781d36d57680e59a0" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>e</name></member>
       <member refid="classCzarnyToCartesian_1a52971f527d1e9cd03a16c4c4dd2df48f" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>epsilon</name></member>
       <member refid="classCzarnyToCartesian_1a3db743b369fe2c5b63c993abb1429bb1" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>get_inverse_mapping</name></member>
-      <member refid="classCzarnyToCartesian_1a05f67462e6bc655d0d6a39a47acd2b3f" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>inv_jacobian_11</name></member>
-      <member refid="classCzarnyToCartesian_1a602f2238aa5c2e5cd56a8d2877c1ad67" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>inv_jacobian_12</name></member>
-      <member refid="classCzarnyToCartesian_1a870947d3bfc13d42e28a73344e96b40f" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>inv_jacobian_21</name></member>
-      <member refid="classCzarnyToCartesian_1ac7058984431ebd6205ebc97fbaa27df8" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>inv_jacobian_22</name></member>
+      <member refid="classCzarnyToCartesian_1a948fc7c66c6eb94232bb6f89c3792d77" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>inv_jacobian_component</name></member>
       <member refid="classCzarnyToCartesian_1a3efb06a52c04cacab4474cd2475823ff" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>inv_jacobian_matrix</name></member>
       <member refid="classCzarnyToCartesian_1af037b527bbc6cbf89a44580d288b8a5f" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>jacobian</name></member>
       <member refid="classCzarnyToCartesian_1a0c75f9ca9bf65206ac349adb07acc497" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>jacobian_component</name></member>

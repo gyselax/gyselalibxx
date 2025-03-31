@@ -190,70 +190,54 @@ public:
         return matrix;
     }
 
-    KOKKOS_FUNCTION double inv_jacobian_11(Coord<R, Theta> const& coord) const
+    template <class IndexTag1, class IndexTag2>
+    KOKKOS_FUNCTION double inv_jacobian_component(Coord<R, Theta> const& coord) const
     {
+        static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<R, Theta>>);
+        static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<X_cov, Y_cov>>);
+
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
-
-        const double sin_theta = Kokkos::sin(theta);
         const double cos_theta = Kokkos::cos(theta);
         const double xi = Kokkos::sqrt(1. / (1. - m_epsilon * m_epsilon * 0.25));
         const double divisor = 2 - Kokkos::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
 
-        const double fact_1 = 1 / Kokkos::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
-        const double fact_2 = m_e * m_epsilon * xi * r * sin_theta * fact_1 / divisor / divisor;
-        const double fact_3 = m_e * xi / divisor;
+        if constexpr (std::is_same_v<IndexTag1, R> && std::is_same_v<IndexTag2, X_cov>) {
+            //Compute the (1,1) coefficient of the inverse Jacobian matrix
+            const double sin_theta = Kokkos::sin(theta);
 
-        return -1 / fact_1 * (-sin_theta * fact_2 + cos_theta * fact_3) / fact_3;
+            const double fact_1
+                    = 1 / Kokkos::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
+            const double fact_2 = m_e * m_epsilon * xi * r * sin_theta * fact_1 / divisor / divisor;
+            const double fact_3 = m_e * xi / divisor;
+
+            return -1 / fact_1 * (-sin_theta * fact_2 + cos_theta * fact_3) / fact_3;
+        } else if constexpr (std::is_same_v<IndexTag1, R> && std::is_same_v<IndexTag2, Y_cov>) {
+            //Compute the (1,2) coefficient of the Jacobian matrix, i.e J^x_theta.
+            const double sin_theta = Kokkos::sin(theta);
+
+            const double fact_3 = m_e * xi / divisor;
+            return sin_theta / fact_3;
+        } else if constexpr (std::is_same_v<IndexTag1, Theta> && std::is_same_v<IndexTag2, X_cov>) {
+            //Compute the (2,1) coefficient of the inverse Jacobian matrix.
+            assert(r >= 1e-15);
+
+            const double sin_theta = Kokkos::sin(theta);
+            const double fact_1
+                    = 1 / Kokkos::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
+            const double fact_2 = m_e * m_epsilon * xi * r * sin_theta * fact_1 / divisor / divisor;
+            const double fact_3 = m_e * xi / divisor;
+
+            return 1 / r / fact_1 * (cos_theta * fact_2 + sin_theta * fact_3) / fact_3;
+        } else {
+            //Compute the (2,2) coefficient of the inverse Jacobian matrix.
+            assert(r >= 1e-15);
+
+            const double fact_3 = m_e * xi / divisor;
+            return 1 / r * cos_theta / fact_3;
+        }
     }
 
-    KOKKOS_FUNCTION double inv_jacobian_12(Coord<R, Theta> const& coord) const
-    {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
-
-        const double sin_theta = Kokkos::sin(theta);
-        const double cos_theta = Kokkos::cos(theta);
-        const double xi = Kokkos::sqrt(1. / (1. - m_epsilon * m_epsilon * 0.25));
-        const double divisor = 2 - Kokkos::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
-
-        const double fact_3 = m_e * xi / divisor;
-        return sin_theta / fact_3;
-    }
-
-    KOKKOS_FUNCTION double inv_jacobian_21(Coord<R, Theta> const& coord) const
-    {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
-
-        assert(r >= 1e-15);
-
-        const double sin_theta = Kokkos::sin(theta);
-        const double cos_theta = Kokkos::cos(theta);
-        const double xi = Kokkos::sqrt(1. / (1. - m_epsilon * m_epsilon * 0.25));
-        const double divisor = 2 - Kokkos::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
-
-        const double fact_1 = 1 / Kokkos::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
-        const double fact_2 = m_e * m_epsilon * xi * r * sin_theta * fact_1 / divisor / divisor;
-        const double fact_3 = m_e * xi / divisor;
-
-        return 1 / r / fact_1 * (cos_theta * fact_2 + sin_theta * fact_3) / fact_3;
-    }
-
-    KOKKOS_FUNCTION double inv_jacobian_22(Coord<R, Theta> const& coord) const
-    {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
-
-        assert(r >= 1e-15);
-
-        const double cos_theta = Kokkos::cos(theta);
-        const double xi = Kokkos::sqrt(1. / (1. - m_epsilon * m_epsilon * 0.25));
-        const double divisor = 2 - Kokkos::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
-
-        const double fact_3 = m_e * xi / divisor;
-        return 1 / r * cos_theta / fact_3;
-    }
 
     CartesianToCzarny<X, Y, R, Theta> get_inverse_mapping() const
     {

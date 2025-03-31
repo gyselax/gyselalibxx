@@ -576,19 +576,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-inv_jacobian_11"><strong>inv_jacobian_11</strong></a> (PositionCoordinate const &amp; coord) const<br><em>Compute the (1,1) coefficient of the inverse Jacobian matrix.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-inv_jacobian_12"><strong>inv_jacobian_12</strong></a> (PositionCoordinate const &amp; coord) const<br><em>Compute the (1,2) coefficient of the inverse Jacobian matrix.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-inv_jacobian_21"><strong>inv_jacobian_21</strong></a> (PositionCoordinate const &amp; coord) const<br><em>Compute the (2,1) coefficient of the inverse Jacobian matrix.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-inv_jacobian_22"><strong>inv_jacobian_22</strong></a> (PositionCoordinate const &amp; coord) const<br><em>Compute the (2,2) coefficient of the inverse Jacobian matrix.</em></td>
+<td style="text-align: left;"><a href="#function-inv_jacobian_component"><strong>inv_jacobian_component</strong></a> (PositionCoordinate const &amp; coord) const<br><em>Compute the (i,j) coefficient of the inverse Jacobian matrix.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION <a href="classInverseJacobianMatrix.html#typedef-inversejacobiantensor"><strong>InverseJacobianTensor</strong></a></td>
@@ -622,9 +610,10 @@
 </ul>
 <hr>
 
-<h3 id="function-inv_jacobian_11">function inv_jacobian_11</h3>
-<p><em>Compute the (1,1) coefficient of the inverse Jacobian matrix.</em> </p>
-<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double InverseJacobianMatrix::inv_jacobian_11 (
+<h3 id="function-inv_jacobian_component">function inv_jacobian_component</h3>
+<p><em>Compute the (i,j) coefficient of the inverse Jacobian matrix.</em> </p>
+<pre><code class="language-C++">template&lt;class IndexTag1, class IndexTag2&gt;
+inline KOKKOS_INLINE_FUNCTION double InverseJacobianMatrix::inv_jacobian_component (
     PositionCoordinate const &amp; coord
 ) const
 </code></pre>
@@ -634,52 +623,7 @@
 <li><code>coord</code> The coordinate where we evaluate the inverse Jacobian matrix.</li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>A double with the value of the (1,1) coefficient of the inverse Jacobian matrix. </p>
-<hr>
-
-<h3 id="function-inv_jacobian_12">function inv_jacobian_12</h3>
-<p><em>Compute the (1,2) coefficient of the inverse Jacobian matrix.</em> </p>
-<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double InverseJacobianMatrix::inv_jacobian_12 (
-    PositionCoordinate const &amp; coord
-) const
-</code></pre>
-<p>Be careful because not all mappings are invertible, especially at the centre point.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>coord</code> The coordinate where we evaluate the inverse Jacobian matrix.</li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>A double with the value of the (1,2) coefficient of the inverse Jacobian matrix. </p>
-<hr>
-
-<h3 id="function-inv_jacobian_21">function inv_jacobian_21</h3>
-<p><em>Compute the (2,1) coefficient of the inverse Jacobian matrix.</em> </p>
-<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double InverseJacobianMatrix::inv_jacobian_21 (
-    PositionCoordinate const &amp; coord
-) const
-</code></pre>
-<p>Be careful because not all mappings are invertible, especially at the centre point.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>coord</code> The coordinate where we evaluate the inverse Jacobian matrix.</li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>A double with the value of the (2,1) coefficient of the inverse Jacobian matrix. </p>
-<hr>
-
-<h3 id="function-inv_jacobian_22">function inv_jacobian_22</h3>
-<p><em>Compute the (2,2) coefficient of the inverse Jacobian matrix.</em> </p>
-<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double InverseJacobianMatrix::inv_jacobian_22 (
-    PositionCoordinate const &amp; coord
-) const
-</code></pre>
-<p>Be careful because not all mappings are invertible, especially at the centre point.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>coord</code> The coordinate where we evaluate the inverse Jacobian matrix.</li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>A double with the value of the (2,2) coefficient of the inverse Jacobian matrix. </p>
+<p>A double with the value of the (i,j) coefficient of the inverse Jacobian matrix. </p>
 <hr>
 
 <h3 id="function-operator">function operator()</h3>
@@ -688,17 +632,13 @@
     PositionCoordinate const &amp; coord
 ) const
 </code></pre>
-<p>For some computations, we need the complete inverse Jacobian matrix or just the coefficients. The coefficients can be given independently with the functions inv_jacobian_11, inv_jacobian_12, inv_jacobian_21 and inv_jacobian_22.</p>
+<p>For some computations, we need the complete inverse Jacobian matrix or just the coefficients. The coefficients can be given independently with the function inv_jacobian_component.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>coord</code> The coordinate where we evaluate the Jacobian matrix. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>The inverse Jacobian matrix returned.</p>
-<p><strong>See also:</strong> <a href="classInverseJacobianMatrix.html#function-inv_jacobian_11"><strong>inv_jacobian_11</strong></a> </p>
-<p><strong>See also:</strong> <a href="classInverseJacobianMatrix.html#function-inv_jacobian_12"><strong>inv_jacobian_12</strong></a> </p>
-<p><strong>See also:</strong> <a href="classInverseJacobianMatrix.html#function-inv_jacobian_21"><strong>inv_jacobian_21</strong></a> </p>
-<p><strong>See also:</strong> <a href="classInverseJacobianMatrix.html#function-inv_jacobian_22"><strong>inv_jacobian_22</strong></a> </p>
+<p>The inverse Jacobian matrix returned. </p>
 <hr>
 
 <hr>

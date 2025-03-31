@@ -60,10 +60,7 @@
 | Type | Name |
 | ---: | :--- |
 |  KOKKOS\_FUNCTION | [**InverseJacobianMatrix**](#function-inversejacobianmatrix) (Mapping const & mapping) <br>_A constructor for the_ [_**InverseJacobianMatrix**_](classInverseJacobianMatrix.md) _._ |
-|  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian\_11**](#function-inv_jacobian_11) (PositionCoordinate const & coord) const<br>_Compute the (1,1) coefficient of the inverse Jacobian matrix._  |
-|  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian\_12**](#function-inv_jacobian_12) (PositionCoordinate const & coord) const<br>_Compute the (1,2) coefficient of the inverse Jacobian matrix._  |
-|  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian\_21**](#function-inv_jacobian_21) (PositionCoordinate const & coord) const<br>_Compute the (2,1) coefficient of the inverse Jacobian matrix._  |
-|  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian\_22**](#function-inv_jacobian_22) (PositionCoordinate const & coord) const<br>_Compute the (2,2) coefficient of the inverse Jacobian matrix._  |
+|  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian\_component**](#function-inv_jacobian_component) (PositionCoordinate const & coord) const<br>_Compute the (i,j) coefficient of the inverse Jacobian matrix._  |
 |  KOKKOS\_INLINE\_FUNCTION [**InverseJacobianTensor**](classInverseJacobianMatrix.md#typedef-inversejacobiantensor) | [**operator()**](#function-operator) (PositionCoordinate const & coord) const<br>_Compute full inverse Jacobian matrix._  |
 
 
@@ -159,11 +156,12 @@ inline explicit KOKKOS_FUNCTION InverseJacobianMatrix::InverseJacobianMatrix (
 
 
 
-### function inv\_jacobian\_11 
+### function inv\_jacobian\_component 
 
-_Compute the (1,1) coefficient of the inverse Jacobian matrix._ 
+_Compute the (i,j) coefficient of the inverse Jacobian matrix._ 
 ```C++
-inline KOKKOS_INLINE_FUNCTION double InverseJacobianMatrix::inv_jacobian_11 (
+template<class IndexTag1, class IndexTag2>
+inline KOKKOS_INLINE_FUNCTION double InverseJacobianMatrix::inv_jacobian_component (
     PositionCoordinate const & coord
 ) const
 ```
@@ -184,118 +182,7 @@ Be careful because not all mappings are invertible, especially at the centre poi
 
 **Returns:**
 
-A double with the value of the (1,1) coefficient of the inverse Jacobian matrix. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function inv\_jacobian\_12 
-
-_Compute the (1,2) coefficient of the inverse Jacobian matrix._ 
-```C++
-inline KOKKOS_INLINE_FUNCTION double InverseJacobianMatrix::inv_jacobian_12 (
-    PositionCoordinate const & coord
-) const
-```
-
-
-
-Be careful because not all mappings are invertible, especially at the centre point.
-
-
-
-
-**Parameters:**
-
-
-* `coord` The coordinate where we evaluate the inverse Jacobian matrix.
-
-
-
-**Returns:**
-
-A double with the value of the (1,2) coefficient of the inverse Jacobian matrix. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function inv\_jacobian\_21 
-
-_Compute the (2,1) coefficient of the inverse Jacobian matrix._ 
-```C++
-inline KOKKOS_INLINE_FUNCTION double InverseJacobianMatrix::inv_jacobian_21 (
-    PositionCoordinate const & coord
-) const
-```
-
-
-
-Be careful because not all mappings are invertible, especially at the centre point.
-
-
-
-
-**Parameters:**
-
-
-* `coord` The coordinate where we evaluate the inverse Jacobian matrix.
-
-
-
-**Returns:**
-
-A double with the value of the (2,1) coefficient of the inverse Jacobian matrix. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function inv\_jacobian\_22 
-
-_Compute the (2,2) coefficient of the inverse Jacobian matrix._ 
-```C++
-inline KOKKOS_INLINE_FUNCTION double InverseJacobianMatrix::inv_jacobian_22 (
-    PositionCoordinate const & coord
-) const
-```
-
-
-
-Be careful because not all mappings are invertible, especially at the centre point.
-
-
-
-
-**Parameters:**
-
-
-* `coord` The coordinate where we evaluate the inverse Jacobian matrix.
-
-
-
-**Returns:**
-
-A double with the value of the (2,2) coefficient of the inverse Jacobian matrix. 
+A double with the value of the (i,j) coefficient of the inverse Jacobian matrix. 
 
 
 
@@ -318,7 +205,7 @@ inline KOKKOS_INLINE_FUNCTION InverseJacobianTensor InverseJacobianMatrix::opera
 
 
 
-For some computations, we need the complete inverse Jacobian matrix or just the coefficients. The coefficients can be given independently with the functions inv\_jacobian\_11, inv\_jacobian\_12, inv\_jacobian\_21 and inv\_jacobian\_22.
+For some computations, we need the complete inverse Jacobian matrix or just the coefficients. The coefficients can be given independently with the function inv\_jacobian\_component.
 
 
 
@@ -332,21 +219,9 @@ For some computations, we need the complete inverse Jacobian matrix or just the 
 
 **Returns:**
 
-The inverse Jacobian matrix returned.
+The inverse Jacobian matrix returned. 
 
 
-
-
-**See also:** [**inv\_jacobian\_11**](classInverseJacobianMatrix.md#function-inv_jacobian_11) 
-
-
-**See also:** [**inv\_jacobian\_12**](classInverseJacobianMatrix.md#function-inv_jacobian_12) 
-
-
-**See also:** [**inv\_jacobian\_21**](classInverseJacobianMatrix.md#function-inv_jacobian_21) 
-
-
-**See also:** [**inv\_jacobian\_22**](classInverseJacobianMatrix.md#function-inv_jacobian_22) 
 
 
 

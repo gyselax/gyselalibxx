@@ -54,54 +54,39 @@ public:
         }
     }
 
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_11(PositionCoordinate const& coord) const
-    {
-        if constexpr (has_2d_inv_jacobian_v<Mapping, PositionCoordinate>) {
-            return m_mapping.inv_jacobian_11(coord);
-        } else {
-            static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
-            double jacob = m_mapping.jacobian(coord);
-            assert(fabs(jacob) > 1e-15);
-            // J^{-1}(1,1) = J(2,2) / det(J)
-            return m_mapping.template jacobian_component<DimRes1, DimArg1_cov>(coord) / jacob;
-        }
-    }
 
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_12(PositionCoordinate const& coord) const
+    template <class IndexTag1, class IndexTag2>
+    KOKKOS_INLINE_FUNCTION double inv_jacobian_component(PositionCoordinate const& coord) const
     {
-        if constexpr (has_2d_inv_jacobian_v<Mapping, PositionCoordinate>) {
-            return m_mapping.inv_jacobian_12(coord);
-        } else {
-            static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
-            double jacob = m_mapping.jacobian(coord);
-            assert(fabs(jacob) > 1e-15);
-            // J^{-1}(1,2) = -J(1,2) / det(J)
-            return -m_mapping.template jacobian_component<DimRes0, DimArg1_cov>(coord) / jacob;
-        }
-    }
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_21(PositionCoordinate const& coord) const
-    {
-        if constexpr (has_2d_inv_jacobian_v<Mapping, PositionCoordinate>) {
-            return m_mapping.inv_jacobian_21(coord);
-        } else {
-            static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
-            double jacob = m_mapping.jacobian(coord);
-            assert(fabs(jacob) > 1e-15);
-            // J^{-1}(2,1) = -J(2,1) / det(J)
-            return -m_mapping.template jacobian_component<DimRes1, DimArg0_cov>(coord) / jacob;
-        }
-    }
+        static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<DimArg0, DimArg1>>);
+        static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<DimRes0_cov, DimRes1_cov>>);
 
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_22(PositionCoordinate const& coord) const
-    {
         if constexpr (has_2d_inv_jacobian_v<Mapping, PositionCoordinate>) {
-            return m_mapping.inv_jacobian_22(coord);
+            return m_mapping.template inv_jacobian_component<IndexTag1, IndexTag2>(coord);
         } else {
             static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
             double jacob = m_mapping.jacobian(coord);
             assert(fabs(jacob) > 1e-15);
-            // J^{-1}(2,2) = J(1,1) / det(J)
-            return m_mapping.template jacobian_component<DimRes0, DimArg0_cov>(coord) / jacob;
+            if constexpr (
+                    std::is_same_v<IndexTag1, DimArg0> && std::is_same_v<IndexTag2, DimRes0_cov>) {
+                //Compute the (1,1) coefficient of the inverse Jacobian matrix.
+                // J^{-1}(1,1) = J(2,2) / det(J)
+                return m_mapping.template jacobian_component<DimRes1, DimArg1_cov>(coord) / jacob;
+            } else if constexpr (
+                    std::is_same_v<IndexTag1, DimArg0> && std::is_same_v<IndexTag2, DimRes1_cov>) {
+                //Compute the (1,2) coefficient of the inverse Jacobian matrix.
+                // J^{-1}(1,2) = -J(1,2) / det(J)
+                return -m_mapping.template jacobian_component<DimRes0, DimArg1_cov>(coord) / jacob;
+            } else if constexpr (
+                    std::is_same_v<IndexTag1, DimArg1> && std::is_same_v<IndexTag2, DimRes0_cov>) {
+                //Compute the (2,1) coefficient of the inverse Jacobian matrix.
+                // J^{-1}(2,1) = -J(2,1) / det(J)
+                return -m_mapping.template jacobian_component<DimRes1, DimArg0_cov>(coord) / jacob;
+            } else {
+                //Compute the (2,1) coefficient of the inverse Jacobian matrix.
+                // J^{-1}(2,2) = J(1,1) / det(J)
+                return m_mapping.template jacobian_component<DimRes0, DimArg0_cov>(coord) / jacob;
+            }
         }
     }
 };

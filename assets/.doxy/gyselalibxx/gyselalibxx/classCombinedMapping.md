@@ -67,10 +67,7 @@ _A class which describes a mapping which is constructed by combining two mapping
 |   | [**CombinedMapping**](#function-combinedmapping-22) (Map1 mapping\_1, Mapping2 mapping\_2) <br>_Build a_ [_**CombinedMapping**_](classCombinedMapping.md) _from the component mappings. This constructor should be used if both mappings can be safely evaluated at all points in space._ |
 |  KOKKOS\_INLINE\_FUNCTION Mapping const & | [**get**](#function-get) () const<br>_Get access to one of the internal mappings._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian**](#function-inv_jacobian) ([**CoordJacobian**](classCombinedMapping.md#typedef-coordjacobian) const & coord\_rtheta) const<br>_Compute the determinant of the Jacobian matrix._  |
-|  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian\_11**](#function-inv_jacobian_11) ([**CoordJacobian**](classCombinedMapping.md#typedef-coordjacobian) const & coord\_rtheta) const<br>_Compute the (1,1) coefficient of the Jacobian matrix._  |
-|  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian\_12**](#function-inv_jacobian_12) ([**CoordJacobian**](classCombinedMapping.md#typedef-coordjacobian) const & coord\_rtheta) const<br>_Compute the (1,2) coefficient of the Jacobian matrix._  |
-|  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian\_21**](#function-inv_jacobian_21) ([**CoordJacobian**](classCombinedMapping.md#typedef-coordjacobian) const & coord\_rtheta) const<br>_Compute the (2,1) coefficient of the Jacobian matrix._  |
-|  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian\_22**](#function-inv_jacobian_22) ([**CoordJacobian**](classCombinedMapping.md#typedef-coordjacobian) const & coord\_rtheta) const<br>_Compute the (2,2) coefficient of the Jacobian matrix._  |
+|  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian\_component**](#function-inv_jacobian_component) ([**CoordJacobian**](classCombinedMapping.md#typedef-coordjacobian) const & coord\_rtheta) const<br>_Compute the (i,j) coefficient of the inverse Jacobian matrix._  |
 |  KOKKOS\_FUNCTION [**InvJacobianMatrixType**](classCombinedMapping.md#typedef-invjacobianmatrixtype) | [**inv\_jacobian\_matrix**](#function-inv_jacobian_matrix) ([**CoordJacobian**](classCombinedMapping.md#typedef-coordjacobian) const & coord) const<br>_Compute the full inverse Jacobian matrix._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**jacobian**](#function-jacobian) ([**CoordJacobian**](classCombinedMapping.md#typedef-coordjacobian) const & coord\_rtheta) const<br>_Compute the determinant of the Jacobian matrix._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) ([**CoordJacobian**](classCombinedMapping.md#typedef-coordjacobian) const & coord\_rtheta) const<br>_Compute the (i,j) component of the Jacobian matrix._  |
@@ -323,11 +320,12 @@ The determinant of the Jacobian matrix.
 
 
 
-### function inv\_jacobian\_11 
+### function inv\_jacobian\_component 
 
-_Compute the (1,1) coefficient of the Jacobian matrix._ 
+_Compute the (i,j) coefficient of the inverse Jacobian matrix._ 
 ```C++
-inline KOKKOS_INLINE_FUNCTION double CombinedMapping::inv_jacobian_11 (
+template<class IndexTag1, class IndexTag2>
+inline KOKKOS_INLINE_FUNCTION double CombinedMapping::inv_jacobian_component (
     CoordJacobian const & coord_rtheta
 ) const
 ```
@@ -348,118 +346,7 @@ inline KOKKOS_INLINE_FUNCTION double CombinedMapping::inv_jacobian_11 (
 
 **Returns:**
 
-The (1,1) coefficient of the Jacobian matrix. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function inv\_jacobian\_12 
-
-_Compute the (1,2) coefficient of the Jacobian matrix._ 
-```C++
-inline KOKKOS_INLINE_FUNCTION double CombinedMapping::inv_jacobian_12 (
-    CoordJacobian const & coord_rtheta
-) const
-```
-
-
-
-
-
-**See also:** [**inv\_jacobian\_matrix**](classCombinedMapping.md#function-inv_jacobian_matrix) 
-
-
-**Parameters:**
-
-
-* `coord_rtheta` The coordinate where we evaluate the Jacobian matrix. 
-
-
-
-**Returns:**
-
-The (1,2) coefficient of the Jacobian matrix. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function inv\_jacobian\_21 
-
-_Compute the (2,1) coefficient of the Jacobian matrix._ 
-```C++
-inline KOKKOS_INLINE_FUNCTION double CombinedMapping::inv_jacobian_21 (
-    CoordJacobian const & coord_rtheta
-) const
-```
-
-
-
-
-
-**See also:** [**inv\_jacobian\_matrix**](classCombinedMapping.md#function-inv_jacobian_matrix) 
-
-
-**Parameters:**
-
-
-* `coord_rtheta` The coordinate where we evaluate the Jacobian matrix. 
-
-
-
-**Returns:**
-
-The (2,1) coefficient of the Jacobian matrix. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function inv\_jacobian\_22 
-
-_Compute the (2,2) coefficient of the Jacobian matrix._ 
-```C++
-inline KOKKOS_INLINE_FUNCTION double CombinedMapping::inv_jacobian_22 (
-    CoordJacobian const & coord_rtheta
-) const
-```
-
-
-
-
-
-**See also:** [**inv\_jacobian\_matrix**](classCombinedMapping.md#function-inv_jacobian_matrix) 
-
-
-**Parameters:**
-
-
-* `coord_rtheta` The coordinate where we evaluate the Jacobian matrix. 
-
-
-
-**Returns:**
-
-The (2,2) coefficient of the Jacobian matrix. 
+The (i,j) coefficient of the Jacobian matrix. 
 
 
 

@@ -124,33 +124,34 @@ public:
         return matrix;
     }
 
-    KOKKOS_FUNCTION double inv_jacobian_11(Coord<R, Theta> const& coord) const
+
+    template <class IndexTag1, class IndexTag2>
+    KOKKOS_FUNCTION double inv_jacobian_component(Coord<R, Theta> const& coord) const
     {
+        static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<R, Theta>>);
+        static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<X_cov, Y_cov>>);
+
         const double theta = ddc::get<Theta>(coord);
-        return Kokkos::cos(theta);
+
+        if constexpr (std::is_same_v<IndexTag1, R> && std::is_same_v<IndexTag2, X_cov>) {
+            //Compute the (1,1) coefficient of the inverse Jacobian matrix.
+            return Kokkos::cos(theta);
+        } else if constexpr (std::is_same_v<IndexTag1, R> && std::is_same_v<IndexTag2, Y_cov>) {
+            //Compute the (1,2) coefficient of the inverse Jacobian matrix.
+            return Kokkos::sin(theta);
+        } else {
+            const double r = ddc::get<R>(coord);
+            assert(fabs(r) >= 1e-15);
+            if constexpr (std::is_same_v<IndexTag2, X_cov>) {
+                //Compute the (2,1) coefficient of the inverse Jacobian matrix.
+                return -1 / r * Kokkos::sin(theta);
+            } else {
+                //Compute the (2,2) coefficient of the inverse Jacobian matrix.
+                return 1 / r * Kokkos::cos(theta);
+            }
+        }
     }
 
-    KOKKOS_FUNCTION double inv_jacobian_12(Coord<R, Theta> const& coord) const
-    {
-        const double theta = ddc::get<Theta>(coord);
-        return Kokkos::sin(theta);
-    }
-
-    KOKKOS_FUNCTION double inv_jacobian_21(Coord<R, Theta> const& coord) const
-    {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
-        assert(fabs(r) >= 1e-15);
-        return -1 / r * Kokkos::sin(theta);
-    }
-
-    KOKKOS_FUNCTION double inv_jacobian_22(Coord<R, Theta> const& coord) const
-    {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
-        assert(fabs(r) >= 1e-15);
-        return 1 / r * Kokkos::cos(theta);
-    }
 
     CartesianToCircular<X, Y, R, Theta> get_inverse_mapping() const
     {

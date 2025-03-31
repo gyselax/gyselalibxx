@@ -231,7 +231,7 @@
 <para>Compute full inverse Jacobian matrix. </para>
         </briefdescription>
         <detaileddescription>
-<para>For some computations, we need the complete inverse Jacobian matrix or just the coefficients. The coefficients can be given independently with the functions inv_jacobian_11, inv_jacobian_12, inv_jacobian_21 and inv_jacobian_22.</para>
+<para>For some computations, we need the complete inverse Jacobian matrix or just the coefficients. The coefficients can be given independently with the function inv_jacobian_component.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">coord</parametername>
@@ -241,34 +241,34 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The inverse Jacobian matrix returned.</para>
-</simplesect>
-<simplesect kind="see"><para><ref refid="classInverseJacobianMatrix_1a39a32715b1ab87b946eef74360303c30" kindref="member">inv_jacobian_11</ref> </para>
-</simplesect>
-<simplesect kind="see"><para><ref refid="classInverseJacobianMatrix_1adfb394b2e3169b46fae6d5d483714fa2" kindref="member">inv_jacobian_12</ref> </para>
-</simplesect>
-<simplesect kind="see"><para><ref refid="classInverseJacobianMatrix_1ac017681ec46990381351f88dc784c143" kindref="member">inv_jacobian_21</ref> </para>
-</simplesect>
-<simplesect kind="see"><para><ref refid="classInverseJacobianMatrix_1ae17b8f5837fdfec9979bd9b558b89056" kindref="member">inv_jacobian_22</ref> </para>
+<simplesect kind="return"><para>The inverse Jacobian matrix returned. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" line="63" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" bodystart="63" bodyend="74"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" line="57" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" bodystart="57" bodyend="68"/>
       </memberdef>
-      <memberdef kind="function" id="classInverseJacobianMatrix_1a39a32715b1ab87b946eef74360303c30" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classInverseJacobianMatrix_1abe1ceae03b4c3e213456dd38eca1b63a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IndexTag1</type>
+          </param>
+          <param>
+            <type>class IndexTag2</type>
+          </param>
+        </templateparamlist>
         <type>KOKKOS_INLINE_FUNCTION double</type>
-        <definition>KOKKOS_INLINE_FUNCTION double InverseJacobianMatrix&lt; Mapping, PositionCoordinate &gt;::inv_jacobian_11</definition>
+        <definition>KOKKOS_INLINE_FUNCTION double InverseJacobianMatrix&lt; Mapping, PositionCoordinate &gt;::inv_jacobian_component</definition>
         <argsstring>(PositionCoordinate const &amp;coord) const</argsstring>
-        <name>inv_jacobian_11</name>
-        <qualifiedname>InverseJacobianMatrix::inv_jacobian_11</qualifiedname>
+        <name>inv_jacobian_component</name>
+        <qualifiedname>InverseJacobianMatrix::inv_jacobian_component</qualifiedname>
         <param>
           <type>PositionCoordinate const &amp;</type>
           <declname>coord</declname>
         </param>
         <briefdescription>
-<para>Compute the (1,1) coefficient of the inverse Jacobian matrix. </para>
+<para>Compute the (i,j) coefficient of the inverse Jacobian matrix. </para>
         </briefdescription>
         <detaileddescription>
 <para>Be careful because not all mappings are invertible, especially at the centre point.</para>
@@ -281,109 +281,13 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>A double with the value of the (1,1) coefficient of the inverse Jacobian matrix. </para>
+<simplesect kind="return"><para>A double with the value of the (i,j) coefficient of the inverse Jacobian matrix. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" line="86" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" bodystart="86" bodyend="97"/>
-      </memberdef>
-      <memberdef kind="function" id="classInverseJacobianMatrix_1adfb394b2e3169b46fae6d5d483714fa2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_INLINE_FUNCTION double</type>
-        <definition>KOKKOS_INLINE_FUNCTION double InverseJacobianMatrix&lt; Mapping, PositionCoordinate &gt;::inv_jacobian_12</definition>
-        <argsstring>(PositionCoordinate const &amp;coord) const</argsstring>
-        <name>inv_jacobian_12</name>
-        <qualifiedname>InverseJacobianMatrix::inv_jacobian_12</qualifiedname>
-        <param>
-          <type>PositionCoordinate const &amp;</type>
-          <declname>coord</declname>
-        </param>
-        <briefdescription>
-<para>Compute the (1,2) coefficient of the inverse Jacobian matrix. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Be careful because not all mappings are invertible, especially at the centre point.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">coord</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The coordinate where we evaluate the inverse Jacobian matrix.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>A double with the value of the (1,2) coefficient of the inverse Jacobian matrix. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" line="109" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" bodystart="109" bodyend="120"/>
-      </memberdef>
-      <memberdef kind="function" id="classInverseJacobianMatrix_1ac017681ec46990381351f88dc784c143" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_INLINE_FUNCTION double</type>
-        <definition>KOKKOS_INLINE_FUNCTION double InverseJacobianMatrix&lt; Mapping, PositionCoordinate &gt;::inv_jacobian_21</definition>
-        <argsstring>(PositionCoordinate const &amp;coord) const</argsstring>
-        <name>inv_jacobian_21</name>
-        <qualifiedname>InverseJacobianMatrix::inv_jacobian_21</qualifiedname>
-        <param>
-          <type>PositionCoordinate const &amp;</type>
-          <declname>coord</declname>
-        </param>
-        <briefdescription>
-<para>Compute the (2,1) coefficient of the inverse Jacobian matrix. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Be careful because not all mappings are invertible, especially at the centre point.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">coord</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The coordinate where we evaluate the inverse Jacobian matrix.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>A double with the value of the (2,1) coefficient of the inverse Jacobian matrix. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" line="131" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" bodystart="131" bodyend="142"/>
-      </memberdef>
-      <memberdef kind="function" id="classInverseJacobianMatrix_1ae17b8f5837fdfec9979bd9b558b89056" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_INLINE_FUNCTION double</type>
-        <definition>KOKKOS_INLINE_FUNCTION double InverseJacobianMatrix&lt; Mapping, PositionCoordinate &gt;::inv_jacobian_22</definition>
-        <argsstring>(PositionCoordinate const &amp;coord) const</argsstring>
-        <name>inv_jacobian_22</name>
-        <qualifiedname>InverseJacobianMatrix::inv_jacobian_22</qualifiedname>
-        <param>
-          <type>PositionCoordinate const &amp;</type>
-          <declname>coord</declname>
-        </param>
-        <briefdescription>
-<para>Compute the (2,2) coefficient of the inverse Jacobian matrix. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Be careful because not all mappings are invertible, especially at the centre point.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">coord</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The coordinate where we evaluate the inverse Jacobian matrix.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>A double with the value of the (2,2) coefficient of the inverse Jacobian matrix. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" line="154" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" bodystart="154" bodyend="165"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" line="82" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" bodystart="82" bodyend="114"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -409,7 +313,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" line="18" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" bodystart="19" bodyend="166"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" line="18" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" bodystart="19" bodyend="115"/>
     <listofallmembers>
       <member refid="classInverseJacobianMatrix_1ac7bbd34190edc4433143092eb8c9bb2e" prot="private" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>DimArg0</name></member>
       <member refid="classInverseJacobianMatrix_1abf90ed05669e61bbec35f9092b0bdb9d" prot="private" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>DimArg0_cov</name></member>
@@ -419,10 +323,7 @@
       <member refid="classInverseJacobianMatrix_1affaaf958581ae10a00cbf8c76cc105c0" prot="private" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>DimRes0_cov</name></member>
       <member refid="classInverseJacobianMatrix_1add1c12c5175f3fee40eba973c74dc256" prot="private" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>DimRes1</name></member>
       <member refid="classInverseJacobianMatrix_1ae44936e2c96002d851c624ef20540046" prot="private" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>DimRes1_cov</name></member>
-      <member refid="classInverseJacobianMatrix_1a39a32715b1ab87b946eef74360303c30" prot="public" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>inv_jacobian_11</name></member>
-      <member refid="classInverseJacobianMatrix_1adfb394b2e3169b46fae6d5d483714fa2" prot="public" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>inv_jacobian_12</name></member>
-      <member refid="classInverseJacobianMatrix_1ac017681ec46990381351f88dc784c143" prot="public" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>inv_jacobian_21</name></member>
-      <member refid="classInverseJacobianMatrix_1ae17b8f5837fdfec9979bd9b558b89056" prot="public" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>inv_jacobian_22</name></member>
+      <member refid="classInverseJacobianMatrix_1abe1ceae03b4c3e213456dd38eca1b63a" prot="public" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>inv_jacobian_component</name></member>
       <member refid="classInverseJacobianMatrix_1a8484531e5dbf59a3ab2a6ef08711a84d" prot="public" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>InverseJacobianMatrix</name></member>
       <member refid="classInverseJacobianMatrix_1a81c90715177eda38dbbabd977964d6d1" prot="public" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>InverseJacobianTensor</name></member>
       <member refid="classInverseJacobianMatrix_1a9ce3614e0a899f968697d97c2d33e3ed" prot="private" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>m_mapping</name></member>

@@ -447,7 +447,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="163" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="163" bodyend="172"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="163" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="163" bodyend="167"/>
       </memberdef>
       <memberdef kind="function" id="classCombinedMapping_1aef4b5216c34ee7a72285a45da9a86ef4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION double</type>
@@ -480,7 +480,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="180" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="180" bodyend="183"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="175" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="175" bodyend="178"/>
       </memberdef>
       <memberdef kind="function" id="classCombinedMapping_1ab3cb98e450447ccb284380d288490674" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classCombinedMapping_1ae7c680b6476d5fbf069f06df1211ae7e" kindref="member">InvJacobianMatrixType</ref></type>
@@ -514,20 +514,28 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="200" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="200" bodyend="221"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="195" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="195" bodyend="216"/>
       </memberdef>
-      <memberdef kind="function" id="classCombinedMapping_1a3ed2f33fa5953ac3e731b041c9bc149b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classCombinedMapping_1afc14b0f67ae144b58073713107f25ab1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IndexTag1</type>
+          </param>
+          <param>
+            <type>class IndexTag2</type>
+          </param>
+        </templateparamlist>
         <type>KOKKOS_INLINE_FUNCTION double</type>
-        <definition>KOKKOS_INLINE_FUNCTION double CombinedMapping&lt; Mapping1, Mapping2 &gt;::inv_jacobian_11</definition>
+        <definition>KOKKOS_INLINE_FUNCTION double CombinedMapping&lt; Mapping1, Mapping2 &gt;::inv_jacobian_component</definition>
         <argsstring>(CoordJacobian const &amp;coord_rtheta) const</argsstring>
-        <name>inv_jacobian_11</name>
-        <qualifiedname>CombinedMapping::inv_jacobian_11</qualifiedname>
+        <name>inv_jacobian_component</name>
+        <qualifiedname>CombinedMapping::inv_jacobian_component</qualifiedname>
         <param>
           <type><ref refid="classCombinedMapping_1adb0b420bad29ecc3a1fcec5252421d6d" kindref="member">CoordJacobian</ref> const &amp;</type>
           <declname>coord_rtheta</declname>
         </param>
         <briefdescription>
-<para>Compute the (1,1) coefficient of the Jacobian matrix. </para>
+<para>Compute the (i,j) coefficient of the inverse Jacobian matrix. </para>
         </briefdescription>
         <detaileddescription>
 <para><simplesect kind="see"><para><ref refid="classCombinedMapping_1ab3cb98e450447ccb284380d288490674" kindref="member">inv_jacobian_matrix</ref> </para>
@@ -541,112 +549,13 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The (1,1) coefficient of the Jacobian matrix. </para>
+<simplesect kind="return"><para>The (i,j) coefficient of the Jacobian matrix. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="229" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="229" bodyend="233"/>
-      </memberdef>
-      <memberdef kind="function" id="classCombinedMapping_1a334c16692b5c155c579a6fada37fa822" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_INLINE_FUNCTION double</type>
-        <definition>KOKKOS_INLINE_FUNCTION double CombinedMapping&lt; Mapping1, Mapping2 &gt;::inv_jacobian_12</definition>
-        <argsstring>(CoordJacobian const &amp;coord_rtheta) const</argsstring>
-        <name>inv_jacobian_12</name>
-        <qualifiedname>CombinedMapping::inv_jacobian_12</qualifiedname>
-        <param>
-          <type><ref refid="classCombinedMapping_1adb0b420bad29ecc3a1fcec5252421d6d" kindref="member">CoordJacobian</ref> const &amp;</type>
-          <declname>coord_rtheta</declname>
-        </param>
-        <briefdescription>
-<para>Compute the (1,2) coefficient of the Jacobian matrix. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="see"><para><ref refid="classCombinedMapping_1ab3cb98e450447ccb284380d288490674" kindref="member">inv_jacobian_matrix</ref> </para>
-</simplesect>
-<parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">coord_rtheta</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The coordinate where we evaluate the Jacobian matrix. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>The (1,2) coefficient of the Jacobian matrix. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="241" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="241" bodyend="245"/>
-      </memberdef>
-      <memberdef kind="function" id="classCombinedMapping_1ae27e58bd0f9df22c8b850199eef8a7a1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_INLINE_FUNCTION double</type>
-        <definition>KOKKOS_INLINE_FUNCTION double CombinedMapping&lt; Mapping1, Mapping2 &gt;::inv_jacobian_21</definition>
-        <argsstring>(CoordJacobian const &amp;coord_rtheta) const</argsstring>
-        <name>inv_jacobian_21</name>
-        <qualifiedname>CombinedMapping::inv_jacobian_21</qualifiedname>
-        <param>
-          <type><ref refid="classCombinedMapping_1adb0b420bad29ecc3a1fcec5252421d6d" kindref="member">CoordJacobian</ref> const &amp;</type>
-          <declname>coord_rtheta</declname>
-        </param>
-        <briefdescription>
-<para>Compute the (2,1) coefficient of the Jacobian matrix. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="see"><para><ref refid="classCombinedMapping_1ab3cb98e450447ccb284380d288490674" kindref="member">inv_jacobian_matrix</ref> </para>
-</simplesect>
-<parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">coord_rtheta</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The coordinate where we evaluate the Jacobian matrix. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>The (2,1) coefficient of the Jacobian matrix. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="253" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="253" bodyend="257"/>
-      </memberdef>
-      <memberdef kind="function" id="classCombinedMapping_1adcac00610eac90e415ea1fd55f09319e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_INLINE_FUNCTION double</type>
-        <definition>KOKKOS_INLINE_FUNCTION double CombinedMapping&lt; Mapping1, Mapping2 &gt;::inv_jacobian_22</definition>
-        <argsstring>(CoordJacobian const &amp;coord_rtheta) const</argsstring>
-        <name>inv_jacobian_22</name>
-        <qualifiedname>CombinedMapping::inv_jacobian_22</qualifiedname>
-        <param>
-          <type><ref refid="classCombinedMapping_1adb0b420bad29ecc3a1fcec5252421d6d" kindref="member">CoordJacobian</ref> const &amp;</type>
-          <declname>coord_rtheta</declname>
-        </param>
-        <briefdescription>
-<para>Compute the (2,2) coefficient of the Jacobian matrix. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="see"><para><ref refid="classCombinedMapping_1ab3cb98e450447ccb284380d288490674" kindref="member">inv_jacobian_matrix</ref> </para>
-</simplesect>
-<parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">coord_rtheta</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The coordinate where we evaluate the Jacobian matrix. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>The (2,2) coefficient of the Jacobian matrix. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="265" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="265" bodyend="269"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="225" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="225" bodyend="229"/>
       </memberdef>
       <memberdef kind="function" id="classCombinedMapping_1ac60309ab3ffb26c973f521c862ce5ed1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION double</type>
@@ -679,7 +588,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="277" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="277" bodyend="280"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="238" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="238" bodyend="241"/>
       </memberdef>
       <memberdef kind="function" id="classCombinedMapping_1ad7043f25e2074ab5befc28233e7a7a88" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -711,7 +620,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="288" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="288" bodyend="296"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="249" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="249" bodyend="257"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -745,7 +654,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="315" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="315" bodyend="321"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="276" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="276" bodyend="282"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -755,7 +664,7 @@
 <para>There are therefore 3 domains in this calculation <formula id="202">$ \Omega_{start} $</formula>, <formula id="203">$ \Omega_{mid} $</formula> and <formula id="204">$ \Omega_{end} $</formula> with <formula id="205">$ \mathcal{F}(\Omega_{mid})\rightarrow\Omega_{end} $</formula> and <formula id="206">$ \mathcal{G}(\Omega_{start})\rightarrow\Omega_{mid} $</formula></para>
 <para>The functions in this mapping are defined on the coordinate system associated with the domain <formula id="203">$ \Omega_{mid} $</formula>. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="24" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="25" bodyend="322"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="24" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="25" bodyend="283"/>
     <listofallmembers>
       <member refid="classCombinedMapping_1a5394e02f2afbc5bd43ea1a90ffe0dcb0" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>CombinedMapping</name></member>
       <member refid="classCombinedMapping_1a8fb44b1366eb67dced71e18066a3d064" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>CombinedMapping</name></member>
@@ -768,10 +677,7 @@
       <member refid="classCombinedMapping_1ac1e877868150f43cf82668e3cf76ebc7" prot="private" virt="non-virtual"><scope>CombinedMapping</scope><name>DimResult2</name></member>
       <member refid="classCombinedMapping_1ad7043f25e2074ab5befc28233e7a7a88" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>get</name></member>
       <member refid="classCombinedMapping_1ac60309ab3ffb26c973f521c862ce5ed1" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>inv_jacobian</name></member>
-      <member refid="classCombinedMapping_1a3ed2f33fa5953ac3e731b041c9bc149b" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>inv_jacobian_11</name></member>
-      <member refid="classCombinedMapping_1a334c16692b5c155c579a6fada37fa822" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>inv_jacobian_12</name></member>
-      <member refid="classCombinedMapping_1ae27e58bd0f9df22c8b850199eef8a7a1" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>inv_jacobian_21</name></member>
-      <member refid="classCombinedMapping_1adcac00610eac90e415ea1fd55f09319e" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>inv_jacobian_22</name></member>
+      <member refid="classCombinedMapping_1afc14b0f67ae144b58073713107f25ab1" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>inv_jacobian_component</name></member>
       <member refid="classCombinedMapping_1ab3cb98e450447ccb284380d288490674" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>inv_jacobian_matrix</name></member>
       <member refid="classCombinedMapping_1a42688dcc8f750418a02969d0430d6e37" prot="private" virt="non-virtual"><scope>CombinedMapping</scope><name>InverseMapping2</name></member>
       <member refid="classCombinedMapping_1ae7c680b6476d5fbf069f06df1211ae7e" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>InvJacobianMatrixType</name></member>

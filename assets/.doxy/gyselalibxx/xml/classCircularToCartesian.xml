@@ -465,7 +465,7 @@
 <para>Compute full inverse Jacobian matrix. </para>
         </briefdescription>
         <detaileddescription>
-<para>For some computations, we need the complete inverse Jacobian matrix or just the coefficients. The coefficients can be given independently with the functions inv_jacobian_11, inv_jacobian_12, inv_jacobian_21 and inv_jacobian_22.</para>
+<para>For some computations, we need the complete inverse Jacobian matrix or just the coefficients. The coefficients can be given independently with the function inv_jacobian_component.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">coord</parametername>
@@ -475,34 +475,34 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The inverse Jacobian matrix.</para>
-</simplesect>
-<simplesect kind="see"><para>Jacobian::inv_jacobian_11 </para>
-</simplesect>
-<simplesect kind="see"><para>Jacobian::inv_jacobian_12 </para>
-</simplesect>
-<simplesect kind="see"><para>Jacobian::inv_jacobian_21 </para>
-</simplesect>
-<simplesect kind="see"><para>Jacobian::inv_jacobian_22 </para>
+<simplesect kind="return"><para>The inverse Jacobian matrix. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="217" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="217" bodyend="229"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="210" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="210" bodyend="222"/>
       </memberdef>
-      <memberdef kind="function" id="classCircularToCartesian_1a48532e6a039c9f8d3fc658778e743d93" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classCircularToCartesian_1a25b6d57a41e9e8f9138b5ad2ddc54045" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IndexTag1</type>
+          </param>
+          <param>
+            <type>class IndexTag2</type>
+          </param>
+        </templateparamlist>
         <type>KOKKOS_FUNCTION double</type>
-        <definition>KOKKOS_FUNCTION double CircularToCartesian&lt; R, Theta, X, Y &gt;::inv_jacobian_11</definition>
+        <definition>KOKKOS_FUNCTION double CircularToCartesian&lt; R, Theta, X, Y &gt;::inv_jacobian_component</definition>
         <argsstring>(Coord&lt; R, Theta &gt; const &amp;coord) const</argsstring>
-        <name>inv_jacobian_11</name>
-        <qualifiedname>CircularToCartesian::inv_jacobian_11</qualifiedname>
+        <name>inv_jacobian_component</name>
+        <qualifiedname>CircularToCartesian::inv_jacobian_component</qualifiedname>
         <param>
           <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt; const &amp;</type>
           <declname>coord</declname>
         </param>
         <briefdescription>
-<para>Compute the (1,1) coefficient of the inverse Jacobian matrix. </para>
+<para>Compute the (i,j) coefficient of the inverse Jacobian matrix. </para>
         </briefdescription>
         <detaileddescription>
 <para>Be careful because not all mappings are invertible, especially at the centre point.</para>
@@ -515,109 +515,13 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>A double with the value of the (1,1) coefficient of the inverse Jacobian matrix. </para>
+<simplesect kind="return"><para>A double with the value of the (i,j) coefficient of the inverse Jacobian matrix. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="241" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="241" bodyend="245"/>
-      </memberdef>
-      <memberdef kind="function" id="classCircularToCartesian_1adf27c35d625421821a76e34422003e44" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION double</type>
-        <definition>KOKKOS_FUNCTION double CircularToCartesian&lt; R, Theta, X, Y &gt;::inv_jacobian_12</definition>
-        <argsstring>(Coord&lt; R, Theta &gt; const &amp;coord) const</argsstring>
-        <name>inv_jacobian_12</name>
-        <qualifiedname>CircularToCartesian::inv_jacobian_12</qualifiedname>
-        <param>
-          <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt; const &amp;</type>
-          <declname>coord</declname>
-        </param>
-        <briefdescription>
-<para>Compute the (1,2) coefficient of the inverse Jacobian matrix. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Be careful because not all mappings are invertible, especially at the centre point.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">coord</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The coordinate where we evaluate the inverse Jacobian matrix.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>A double with the value of the (1,2) coefficient of the inverse Jacobian matrix. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="257" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="257" bodyend="261"/>
-      </memberdef>
-      <memberdef kind="function" id="classCircularToCartesian_1a94c5d66d2276540fb23c00797931a0b4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION double</type>
-        <definition>KOKKOS_FUNCTION double CircularToCartesian&lt; R, Theta, X, Y &gt;::inv_jacobian_21</definition>
-        <argsstring>(Coord&lt; R, Theta &gt; const &amp;coord) const</argsstring>
-        <name>inv_jacobian_21</name>
-        <qualifiedname>CircularToCartesian::inv_jacobian_21</qualifiedname>
-        <param>
-          <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt; const &amp;</type>
-          <declname>coord</declname>
-        </param>
-        <briefdescription>
-<para>Compute the (2,1) coefficient of the inverse Jacobian matrix. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Be careful because not all mappings are invertible, especially at the centre point.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">coord</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The coordinate where we evaluate the inverse Jacobian matrix.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>A double with the value of the (2,1) coefficient of the inverse Jacobian matrix. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="273" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="273" bodyend="279"/>
-      </memberdef>
-      <memberdef kind="function" id="classCircularToCartesian_1a9c6b8535e67a90e3765f72464c8afc46" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION double</type>
-        <definition>KOKKOS_FUNCTION double CircularToCartesian&lt; R, Theta, X, Y &gt;::inv_jacobian_22</definition>
-        <argsstring>(Coord&lt; R, Theta &gt; const &amp;coord) const</argsstring>
-        <name>inv_jacobian_22</name>
-        <qualifiedname>CircularToCartesian::inv_jacobian_22</qualifiedname>
-        <param>
-          <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt; const &amp;</type>
-          <declname>coord</declname>
-        </param>
-        <briefdescription>
-<para>Compute the (2,2) coefficient of the inverse Jacobian matrix. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Be careful because not all mappings are invertible, especially at the centre point.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">coord</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The coordinate where we evaluate the inverse Jacobian matrix.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>A double with the value of the (2,2) coefficient of the inverse Jacobian matrix. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="291" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="291" bodyend="297"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="236" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="236" bodyend="260"/>
       </memberdef>
       <memberdef kind="function" id="classCircularToCartesian_1a933c7fa215c360fe24e6fa3b2e2cb646" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
@@ -635,7 +539,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="304" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="304" bodyend="307"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="268" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="268" bodyend="271"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -653,7 +557,7 @@
 <para><formula id="199">$ J_{22}(r,\theta)  = r \cos(\theta)$</formula></para>
 <para>and the matrix determinant: <formula id="185">$ det(J) = r $</formula>. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="43" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="44" bodyend="308"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="43" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="44" bodyend="272"/>
     <listofallmembers>
       <member refid="classCircularToCartesian_1a5da224f282c0518de1eb5f9533ef8382" prot="public" virt="non-virtual"><scope>CircularToCartesian</scope><name>cartesian_tag_x</name></member>
       <member refid="classCircularToCartesian_1ac5171ea2a53d148012365e778c790726" prot="public" virt="non-virtual"><scope>CircularToCartesian</scope><name>cartesian_tag_y</name></member>
@@ -665,10 +569,7 @@
       <member refid="classCircularToCartesian_1a85920bf056d72b2afd47bbf270fc3ab7" prot="public" virt="non-virtual"><scope>CircularToCartesian</scope><name>curvilinear_tag_r</name></member>
       <member refid="classCircularToCartesian_1ad391094efa9fde76191826ee2bf7fdd7" prot="public" virt="non-virtual"><scope>CircularToCartesian</scope><name>curvilinear_tag_theta</name></member>
       <member refid="classCircularToCartesian_1a933c7fa215c360fe24e6fa3b2e2cb646" prot="public" virt="non-virtual"><scope>CircularToCartesian</scope><name>get_inverse_mapping</name></member>
-      <member refid="classCircularToCartesian_1a48532e6a039c9f8d3fc658778e743d93" prot="public" virt="non-virtual"><scope>CircularToCartesian</scope><name>inv_jacobian_11</name></member>
-      <member refid="classCircularToCartesian_1adf27c35d625421821a76e34422003e44" prot="public" virt="non-virtual"><scope>CircularToCartesian</scope><name>inv_jacobian_12</name></member>
-      <member refid="classCircularToCartesian_1a94c5d66d2276540fb23c00797931a0b4" prot="public" virt="non-virtual"><scope>CircularToCartesian</scope><name>inv_jacobian_21</name></member>
-      <member refid="classCircularToCartesian_1a9c6b8535e67a90e3765f72464c8afc46" prot="public" virt="non-virtual"><scope>CircularToCartesian</scope><name>inv_jacobian_22</name></member>
+      <member refid="classCircularToCartesian_1a25b6d57a41e9e8f9138b5ad2ddc54045" prot="public" virt="non-virtual"><scope>CircularToCartesian</scope><name>inv_jacobian_component</name></member>
       <member refid="classCircularToCartesian_1ad6a44656287d8f142c833f109fdfedc6" prot="public" virt="non-virtual"><scope>CircularToCartesian</scope><name>inv_jacobian_matrix</name></member>
       <member refid="classCircularToCartesian_1a3a3dc427c587611aa1beac39556c8523" prot="public" virt="non-virtual"><scope>CircularToCartesian</scope><name>jacobian</name></member>
       <member refid="classCircularToCartesian_1a61f5a58fc058b1d9c2b2a034d12309d1" prot="public" virt="non-virtual"><scope>CircularToCartesian</scope><name>jacobian_component</name></member>

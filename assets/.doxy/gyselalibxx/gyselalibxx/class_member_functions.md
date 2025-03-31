@@ -215,10 +215,7 @@
 
 * **implicit\_loop** ([**BslImplicitPredCorrRTheta**](classBslImplicitPredCorrRTheta.md))
 * **init\_from\_input** ([**BumpontailEquilibrium**](classBumpontailEquilibrium.md), [**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md), [**SingleModePerturbInitialisation**](classSingleModePerturbInitialisation.md))
-* **inv\_jacobian\_11** ([**CircularToCartesian**](classCircularToCartesian.md), [**CombinedMapping**](classCombinedMapping.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**InverseJacobianMatrix**](classInverseJacobianMatrix.md))
-* **inv\_jacobian\_12** ([**CircularToCartesian**](classCircularToCartesian.md), [**CombinedMapping**](classCombinedMapping.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**InverseJacobianMatrix**](classInverseJacobianMatrix.md))
-* **inv\_jacobian\_21** ([**CircularToCartesian**](classCircularToCartesian.md), [**CombinedMapping**](classCombinedMapping.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**InverseJacobianMatrix**](classInverseJacobianMatrix.md))
-* **inv\_jacobian\_22** ([**CircularToCartesian**](classCircularToCartesian.md), [**CombinedMapping**](classCombinedMapping.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**InverseJacobianMatrix**](classInverseJacobianMatrix.md))
+* **inv\_jacobian\_component** ([**CircularToCartesian**](classCircularToCartesian.md), [**CombinedMapping**](classCombinedMapping.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**InverseJacobianMatrix**](classInverseJacobianMatrix.md))
 * **inv\_jacobian\_matrix** ([**CircularToCartesian**](classCircularToCartesian.md), [**CombinedMapping**](classCombinedMapping.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md))
 * **inv\_jacobian** ([**CombinedMapping**](classCombinedMapping.md))
 * **initialise\_fields** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md))

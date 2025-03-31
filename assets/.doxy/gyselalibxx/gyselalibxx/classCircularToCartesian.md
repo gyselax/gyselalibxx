@@ -72,10 +72,7 @@ _A class for describing the circular 2D mapping._ [More...](#detailed-descriptio
 |  KOKKOS\_FUNCTION | [**CircularToCartesian**](#function-circulartocartesian-23) ([**CircularToCartesian**](classCircularToCartesian.md) const & other) <br>_Instantiate a_ [_**CircularToCartesian**_](classCircularToCartesian.md) _from another_[_**CircularToCartesian**_](classCircularToCartesian.md) _(lvalue)._ |
 |   | [**CircularToCartesian**](#function-circulartocartesian-33) ([**CircularToCartesian**](classCircularToCartesian.md) && x) = default<br>_Instantiate a_ [_**CircularToCartesian**_](classCircularToCartesian.md) _from another temporary_[_**CircularToCartesian**_](classCircularToCartesian.md) _(rvalue)._ |
 |  [**CartesianToCircular**](classCartesianToCircular.md)&lt; [**X**](structX.md), [**Y**](structY.md), [**R**](structR.md), [**Theta**](structTheta.md) &gt; | [**get\_inverse\_mapping**](#function-get_inverse_mapping) () const<br>_Get the inverse mapping._  |
-|  KOKKOS\_FUNCTION double | [**inv\_jacobian\_11**](#function-inv_jacobian_11) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the (1,1) coefficient of the inverse Jacobian matrix._  |
-|  KOKKOS\_FUNCTION double | [**inv\_jacobian\_12**](#function-inv_jacobian_12) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the (1,2) coefficient of the inverse Jacobian matrix._  |
-|  KOKKOS\_FUNCTION double | [**inv\_jacobian\_21**](#function-inv_jacobian_21) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the (2,1) coefficient of the inverse Jacobian matrix._  |
-|  KOKKOS\_FUNCTION double | [**inv\_jacobian\_22**](#function-inv_jacobian_22) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the (2,2) coefficient of the inverse Jacobian matrix._  |
+|  KOKKOS\_FUNCTION double | [**inv\_jacobian\_component**](#function-inv_jacobian_component) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the (i,j) coefficient of the inverse Jacobian matrix._  |
 |  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt;, VectorIndexSet&lt; [**X\_cov**](classCircularToCartesian.md#typedef-x_cov), [**Y\_cov**](classCircularToCartesian.md#typedef-y_cov) &gt; &gt; | [**inv\_jacobian\_matrix**](#function-inv_jacobian_matrix) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute full inverse Jacobian matrix._  |
 |  KOKKOS\_FUNCTION double | [**jacobian**](#function-jacobian) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping._  |
 |  KOKKOS\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |
@@ -385,11 +382,12 @@ The inverse mapping.
 
 
 
-### function inv\_jacobian\_11 
+### function inv\_jacobian\_component 
 
-_Compute the (1,1) coefficient of the inverse Jacobian matrix._ 
+_Compute the (i,j) coefficient of the inverse Jacobian matrix._ 
 ```C++
-inline KOKKOS_FUNCTION double CircularToCartesian::inv_jacobian_11 (
+template<class IndexTag1, class IndexTag2>
+inline KOKKOS_FUNCTION double CircularToCartesian::inv_jacobian_component (
     Coord< R , Theta > const & coord
 ) const
 ```
@@ -410,118 +408,7 @@ Be careful because not all mappings are invertible, especially at the centre poi
 
 **Returns:**
 
-A double with the value of the (1,1) coefficient of the inverse Jacobian matrix. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function inv\_jacobian\_12 
-
-_Compute the (1,2) coefficient of the inverse Jacobian matrix._ 
-```C++
-inline KOKKOS_FUNCTION double CircularToCartesian::inv_jacobian_12 (
-    Coord< R , Theta > const & coord
-) const
-```
-
-
-
-Be careful because not all mappings are invertible, especially at the centre point.
-
-
-
-
-**Parameters:**
-
-
-* `coord` The coordinate where we evaluate the inverse Jacobian matrix.
-
-
-
-**Returns:**
-
-A double with the value of the (1,2) coefficient of the inverse Jacobian matrix. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function inv\_jacobian\_21 
-
-_Compute the (2,1) coefficient of the inverse Jacobian matrix._ 
-```C++
-inline KOKKOS_FUNCTION double CircularToCartesian::inv_jacobian_21 (
-    Coord< R , Theta > const & coord
-) const
-```
-
-
-
-Be careful because not all mappings are invertible, especially at the centre point.
-
-
-
-
-**Parameters:**
-
-
-* `coord` The coordinate where we evaluate the inverse Jacobian matrix.
-
-
-
-**Returns:**
-
-A double with the value of the (2,1) coefficient of the inverse Jacobian matrix. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function inv\_jacobian\_22 
-
-_Compute the (2,2) coefficient of the inverse Jacobian matrix._ 
-```C++
-inline KOKKOS_FUNCTION double CircularToCartesian::inv_jacobian_22 (
-    Coord< R , Theta > const & coord
-) const
-```
-
-
-
-Be careful because not all mappings are invertible, especially at the centre point.
-
-
-
-
-**Parameters:**
-
-
-* `coord` The coordinate where we evaluate the inverse Jacobian matrix.
-
-
-
-**Returns:**
-
-A double with the value of the (2,2) coefficient of the inverse Jacobian matrix. 
+A double with the value of the (i,j) coefficient of the inverse Jacobian matrix. 
 
 
 
@@ -544,7 +431,7 @@ inline KOKKOS_FUNCTION DTensor < VectorIndexSet< R , Theta >, VectorIndexSet< X_
 
 
 
-For some computations, we need the complete inverse Jacobian matrix or just the coefficients. The coefficients can be given independently with the functions inv\_jacobian\_11, inv\_jacobian\_12, inv\_jacobian\_21 and inv\_jacobian\_22.
+For some computations, we need the complete inverse Jacobian matrix or just the coefficients. The coefficients can be given independently with the function inv\_jacobian\_component.
 
 
 
@@ -558,21 +445,9 @@ For some computations, we need the complete inverse Jacobian matrix or just the 
 
 **Returns:**
 
-The inverse Jacobian matrix.
+The inverse Jacobian matrix. 
 
 
-
-
-**See also:** Jacobian::inv\_jacobian\_11 
-
-
-**See also:** Jacobian::inv\_jacobian\_12 
-
-
-**See also:** Jacobian::inv\_jacobian\_21 
-
-
-**See also:** Jacobian::inv\_jacobian\_22 
 
 
 

@@ -105,11 +105,6 @@ public:
     template <class IndexTag1, class IndexTag2>
     KOKKOS_INLINE_FUNCTION double jacobian_component(CoordJacobian const& coord_rtheta) const
     {
-        static_assert(
-                std::is_same_v<IndexTag1, DimResult1> && std::is_same_v<IndexTag1, DimResult2>);
-        static_assert((std::is_same_v<IndexTag2, typename DimArg1::Dual>)&&(
-                std::is_same_v<IndexTag2, typename DimArg2::Dual>));
-        //VG// TODO replace by static_assert(ddc::in_tags_v<IndexTag1, ResultTags>);
         JacobianMatrixType J = jacobian_matrix(coord_rtheta);
         return ddcHelper::get<IndexTag1, IndexTag2>(J);
     }
@@ -142,29 +137,13 @@ public:
         }
     }
 
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_11(CoordJacobian const& coord_rtheta) const
+    template <class IndexTag1, class IndexTag2>
+    KOKKOS_INLINE_FUNCTION double inv_jacobian_component(CoordJacobian const& coord_rtheta) const
     {
         InvJacobianMatrixType J = inv_jacobian_matrix(coord_rtheta);
-        return ddcHelper::get<DimArg1, typename DimResult1::Dual>(J);
+        return ddcHelper::get<IndexTag1, IndexTag2>(J);
     }
 
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_12(CoordJacobian const& coord_rtheta) const
-    {
-        InvJacobianMatrixType J = inv_jacobian_matrix(coord_rtheta);
-        return ddcHelper::get<DimArg1, typename DimResult2::Dual>(J);
-    }
-
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_21(CoordJacobian const& coord_rtheta) const
-    {
-        InvJacobianMatrixType J = inv_jacobian_matrix(coord_rtheta);
-        return ddcHelper::get<DimArg2, typename DimResult1::Dual>(J);
-    }
-
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_22(CoordJacobian const& coord_rtheta) const
-    {
-        InvJacobianMatrixType J = inv_jacobian_matrix(coord_rtheta);
-        return ddcHelper::get<DimArg2, typename DimResult2::Dual>(J);
-    }
 
     KOKKOS_INLINE_FUNCTION double inv_jacobian(CoordJacobian const& coord_rtheta) const
     {

@@ -312,10 +312,7 @@
     <member refid="classCircularToCartesian_1a9adea9d8d953ca89baa8ebc15ad71dee" kind="function"><name>jacobian_matrix</name></member>
     <member refid="classCircularToCartesian_1a61f5a58fc058b1d9c2b2a034d12309d1" kind="function"><name>jacobian_component</name></member>
     <member refid="classCircularToCartesian_1ad6a44656287d8f142c833f109fdfedc6" kind="function"><name>inv_jacobian_matrix</name></member>
-    <member refid="classCircularToCartesian_1a48532e6a039c9f8d3fc658778e743d93" kind="function"><name>inv_jacobian_11</name></member>
-    <member refid="classCircularToCartesian_1adf27c35d625421821a76e34422003e44" kind="function"><name>inv_jacobian_12</name></member>
-    <member refid="classCircularToCartesian_1a94c5d66d2276540fb23c00797931a0b4" kind="function"><name>inv_jacobian_21</name></member>
-    <member refid="classCircularToCartesian_1a9c6b8535e67a90e3765f72464c8afc46" kind="function"><name>inv_jacobian_22</name></member>
+    <member refid="classCircularToCartesian_1a25b6d57a41e9e8f9138b5ad2ddc54045" kind="function"><name>inv_jacobian_component</name></member>
     <member refid="classCircularToCartesian_1a933c7fa215c360fe24e6fa3b2e2cb646" kind="function"><name>get_inverse_mapping</name></member>
   </compound>
   <compound refid="structconnectivity__details_1_1CollectAllGridsOnDim" kind="struct"><name>connectivity_details::CollectAllGridsOnDim</name>
@@ -437,10 +434,7 @@
     <member refid="classCombinedMapping_1a351825cd8f426ab07ee619dacda35db7" kind="function"><name>jacobian_component</name></member>
     <member refid="classCombinedMapping_1aef4b5216c34ee7a72285a45da9a86ef4" kind="function"><name>jacobian</name></member>
     <member refid="classCombinedMapping_1ab3cb98e450447ccb284380d288490674" kind="function"><name>inv_jacobian_matrix</name></member>
-    <member refid="classCombinedMapping_1a3ed2f33fa5953ac3e731b041c9bc149b" kind="function"><name>inv_jacobian_11</name></member>
-    <member refid="classCombinedMapping_1a334c16692b5c155c579a6fada37fa822" kind="function"><name>inv_jacobian_12</name></member>
-    <member refid="classCombinedMapping_1ae27e58bd0f9df22c8b850199eef8a7a1" kind="function"><name>inv_jacobian_21</name></member>
-    <member refid="classCombinedMapping_1adcac00610eac90e415ea1fd55f09319e" kind="function"><name>inv_jacobian_22</name></member>
+    <member refid="classCombinedMapping_1afc14b0f67ae144b58073713107f25ab1" kind="function"><name>inv_jacobian_component</name></member>
     <member refid="classCombinedMapping_1ac60309ab3ffb26c973f521c862ce5ed1" kind="function"><name>inv_jacobian</name></member>
     <member refid="classCombinedMapping_1ad7043f25e2074ab5befc28233e7a7a88" kind="function"><name>get</name></member>
     <member refid="classCombinedMapping_1ac9fdfa73578e1671839ce4bfc96c75f5" kind="function"><name>non_singular_inverse_jacobian_matrix</name></member>
@@ -518,10 +512,7 @@
     <member refid="classCzarnyToCartesian_1a633cf2b257d6da39fcb04d154a36f06c" kind="function"><name>jacobian_matrix</name></member>
     <member refid="classCzarnyToCartesian_1a0c75f9ca9bf65206ac349adb07acc497" kind="function"><name>jacobian_component</name></member>
     <member refid="classCzarnyToCartesian_1a3efb06a52c04cacab4474cd2475823ff" kind="function"><name>inv_jacobian_matrix</name></member>
-    <member refid="classCzarnyToCartesian_1a05f67462e6bc655d0d6a39a47acd2b3f" kind="function"><name>inv_jacobian_11</name></member>
-    <member refid="classCzarnyToCartesian_1a602f2238aa5c2e5cd56a8d2877c1ad67" kind="function"><name>inv_jacobian_12</name></member>
-    <member refid="classCzarnyToCartesian_1a870947d3bfc13d42e28a73344e96b40f" kind="function"><name>inv_jacobian_21</name></member>
-    <member refid="classCzarnyToCartesian_1ac7058984431ebd6205ebc97fbaa27df8" kind="function"><name>inv_jacobian_22</name></member>
+    <member refid="classCzarnyToCartesian_1a948fc7c66c6eb94232bb6f89c3792d77" kind="function"><name>inv_jacobian_component</name></member>
     <member refid="classCzarnyToCartesian_1a3db743b369fe2c5b63c993abb1429bb1" kind="function"><name>get_inverse_mapping</name></member>
   </compound>
   <compound refid="classDerivField" kind="class"><name>DerivField</name>
@@ -1265,10 +1256,7 @@
     <member refid="classInverseJacobianMatrix_1a9ce3614e0a899f968697d97c2d33e3ed" kind="variable"><name>m_mapping</name></member>
     <member refid="classInverseJacobianMatrix_1a8484531e5dbf59a3ab2a6ef08711a84d" kind="function"><name>InverseJacobianMatrix</name></member>
     <member refid="classInverseJacobianMatrix_1a57305c9d836bb953313a1dc648952b29" kind="function"><name>operator()</name></member>
-    <member refid="classInverseJacobianMatrix_1a39a32715b1ab87b946eef74360303c30" kind="function"><name>inv_jacobian_11</name></member>
-    <member refid="classInverseJacobianMatrix_1adfb394b2e3169b46fae6d5d483714fa2" kind="function"><name>inv_jacobian_12</name></member>
-    <member refid="classInverseJacobianMatrix_1ac017681ec46990381351f88dc784c143" kind="function"><name>inv_jacobian_21</name></member>
-    <member refid="classInverseJacobianMatrix_1ae17b8f5837fdfec9979bd9b558b89056" kind="function"><name>inv_jacobian_22</name></member>
+    <member refid="classInverseJacobianMatrix_1abe1ceae03b4c3e213456dd38eca1b63a" kind="function"><name>inv_jacobian_component</name></member>
   </compound>
   <compound refid="classInvJacobianOPoint" kind="class"><name>InvJacobianOPoint</name>
   </compound>
