@@ -41,7 +41,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Wait
         run: |
-          worflow_id=$(gh run list --commit ${{ github.sha }} -w "Static Analyses" --json databaseId --jq '.[]["databaseId"]')
+          worflow_id=$(gh run list --commit ${{ inputs.SHA || github.sha }} -w "Static Analyses" --json databaseId --jq '.[]["databaseId"]')
+          echo "Run id : ${workflow_id}"
           gh run watch ${workflow_id}
           # Wait 10 seconds in case job is cancelled
           sleep 10
