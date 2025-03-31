@@ -152,7 +152,7 @@ public:
     /**
      * @brief Allocate a Field to the advected function.
      *
-     * @param [in, out] allfdistribu_host
+     * @param [in, out] allfdistribu
      *      A Field containing the values of the function we want to advect.
      * @param [in] advection_field_rtheta
      *      A DConstVectorFieldRTheta containing the values of the advection field
@@ -166,14 +166,14 @@ public:
      *
      * @return A Field to allfdistribu advected on the time step given.
      */
-    host_t<DFieldRTheta> operator()(
-            host_t<DFieldRTheta> allfdistribu_host,
-            host_t<DConstVectorFieldRTheta<R, Theta>> advection_field_rtheta,
+    DFieldRTheta operator()(
+            DFieldRTheta allfdistribu,
+            DConstVectorFieldRTheta<R, Theta> advection_field_rtheta,
             CoordXY const& advection_field_xy_centre,
             double dt) const override
     {
         Kokkos::Profiling::pushRegion("PolarAdvection");
-        IdxRangeRTheta grid(get_idx_range<GridR, GridTheta>(allfdistribu_host));
+        IdxRangeRTheta grid(get_idx_range<GridR, GridTheta>(allfdistribu));
 
         const int npoints_theta = IdxRangeTheta(grid).size();
         IdxRangeRTheta const grid_without_Opoint(grid.remove_first(IdxStepRTheta(1, 0)));
@@ -181,39 +181,43 @@ public:
 
 
         // Convert advection field on RTheta to advection field on XY
-        host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_host(grid);
+        DVectorFieldMemRTheta<X, Y> advection_field_xy_alloc(grid);
+        DVectorFieldRTheta<X, Y> advection_field_xy = get_field(advection_field_xy_alloc);
+
+        Mapping const& mapping_proxy = m_mapping;
 
         // (Ax, Ay) = J (Ar, Atheta)
-        ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
-            CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
-
-            Tensor J = m_mapping.jacobian_matrix(coord_rtheta);
-
-            DVector<R, Theta> advec_field_rtheta = advection_field_rtheta(irtheta);
-            DVector<X, Y> advec_field_xy
-                    = tensor_mul(index<'i', 'j'>(J), index<'j'>(advec_field_rtheta));
-            ddcHelper::get<X>(advection_field_xy_host)(irtheta) = ddcHelper::get<X>(advec_field_xy);
-            ddcHelper::get<Y>(advection_field_xy_host)(irtheta) = ddcHelper::get<Y>(advec_field_xy);
-        });
-
-        ddc::for_each(Opoint_grid, [&](IdxRTheta const irtheta) {
-            ddcHelper::get<X>(advection_field_xy_host)(irtheta) = CoordX(advection_field_xy_centre);
-            ddcHelper::get<Y>(advection_field_xy_host)(irtheta) = CoordY(advection_field_xy_centre);
-        });
-
-        auto allfdistribu = ddc::
-                create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), allfdistribu_host);
-
-        auto advection_field_xy = ddcHelper::create_mirror_view_and_copy(
+        ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
-                get_field(advection_field_xy_host));
+                grid_without_Opoint,
+                KOKKOS_LAMBDA(IdxRTheta const irtheta) {
+                    CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
+
+                    Tensor J = mapping_proxy.jacobian_matrix(coord_rtheta);
+
+                    DVector<X, Y> advec_field_xy = tensor_mul(
+                            index<'i', 'j'>(J),
+                            index<'j'>(advection_field_rtheta(irtheta)));
+                    ddcHelper::get<X>(advection_field_xy)(irtheta)
+                            = ddcHelper::get<X>(advec_field_xy);
+                    ddcHelper::get<Y>(advection_field_xy)(irtheta)
+                            = ddcHelper::get<Y>(advec_field_xy);
+                });
+
+        ddc::parallel_for_each(
+                Kokkos::DefaultExecutionSpace(),
+                Opoint_grid,
+                KOKKOS_LAMBDA(IdxRTheta const irtheta) {
+                    ddcHelper::get<X>(advection_field_xy)(irtheta)
+                            = CoordX(advection_field_xy_centre);
+                    ddcHelper::get<Y>(advection_field_xy)(irtheta)
+                            = CoordY(advection_field_xy_centre);
+                });
 
         (*this)(get_field(allfdistribu), get_const_field(advection_field_xy), dt);
 
-        ddc::parallel_deepcopy(allfdistribu_host, get_const_field(allfdistribu));
-
         Kokkos::Profiling::popRegion();
 
-        return allfdistribu_host;
+        return allfdistribu;
     }
 };

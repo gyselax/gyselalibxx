@@ -8,7 +8,9 @@
 
 #include <Kokkos_Core.hpp>
 
+#include "indexed_tensor.hpp"
 #include "tensor.hpp"
+#include "vector_field.hpp"
 
 template <typename T>
 KOKKOS_INLINE_FUNCTION T sum(const T* array, int size)
@@ -51,6 +53,46 @@ sum(Kokkos::mdspan<
     return val;
 }
 
+template <class ElementType, class VectorIndexSetType>
+KOKKOS_INLINE_FUNCTION ElementType
+norm(Tensor<ElementType, VectorIndexSetType, VectorIndexSetType> const& metric,
+     Tensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>> const& vec)
+{
+    return Kokkos::sqrt(tensor_mul(index<'i'>(vec), index<'i', 'j'>(metric), index<'j'>(vec)));
+}
+
+template <
+        class ExecSpace,
+        class IdxRangeType,
+        class MetricTensorEvaluator,
+        class VectorIndexSetType>
+void norm(
+        ExecSpace exec_space,
+        DField<IdxRangeType, typename ExecSpace::memory_space> norm_vals,
+        MetricTensorEvaluator const& get_metric,
+        DVectorConstField<IdxRangeType, VectorIndexSetType, typename ExecSpace::memory_space> vals)
+{
+    using IdxType = typename IdxRangeType::discrete_element_type;
+
+    if constexpr (is_contravariant_vector_index_set_v<VectorIndexSetType>) {
+        ddc::parallel_for_each(
+                exec_space,
+                get_idx_range(vals),
+                KOKKOS_LAMBDA(IdxType idx) {
+                    Tensor metric = get_metric(ddc::coordinate(idx));
+                    norm_vals(idx) = norm(metric, vals(idx));
+                });
+    } else {
+        ddc::parallel_for_each(
+                exec_space,
+                get_idx_range(vals),
+                KOKKOS_LAMBDA(IdxType idx) {
+                    Tensor metric = get_metric.inverse(ddc::coordinate(idx));
+                    norm_vals(idx) = norm(metric, vals(idx));
+                });
+    }
+}
+
 template <typename T>
 inline T modulo(T x, T y)
 {
@@ -89,13 +131,6 @@ inline std::size_t factorial(std::size_t f)
         r *= i;
     }
     return r;
-}
-
-template <class T, class... Dims>
-KOKKOS_INLINE_FUNCTION T
-dot_product(Vector<T, Dims...> const& a, Vector<T, typename Dims::Dual...> const& b)
-{
-    return ((ddcHelper::get<Dims>(a) * ddcHelper::get<typename Dims::Dual>(b)) + ...);
 }
 
 
