@@ -13,16 +13,20 @@ jobs:
   Check_flags:
     name: Check flags
     runs-on: ubuntu-latest
-    if: github.action.label.name == 'Ready to review' && github.action.pull_request.draft
+    #if: github.action.label.name == 'Ready to review' && github.action.pull_request.draft
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
       - run: |
+        echo "The added label is '${{ github.action.label.name }}'"
+        echo "The draft status is '${{ github.action.pull_request.draft }}'"
+      - run: |
           gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
           msg="Please remove the draft status if the PR is ready to review. The 'Ready to review' label will be added automatically when the tests are shown to be passing"
           gh pr comment ${{ github.event.pull_request.number }} -b ${msg}
         shell: bash
+        if: github.action.label.name == 'Ready to review' && github.action.pull_request.draft == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
 
