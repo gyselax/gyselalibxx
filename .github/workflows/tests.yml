@@ -18,15 +18,10 @@ jobs:
     if: github.repository == 'gyselax/gyselalibxx' && github.event.pull_request.draft == false
     # Map a step output to a job output
     outputs:
-      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+      is_duplicate: ${{ steps.skip_check.outputs.should_run }}
     steps:
       - id: skip_check
-        uses: fkirc/skip-duplicate-actions@v5
-        with:
-          # All of these options are optional, so you can remove them if you are happy with the defaults
-          skip_after_successful_duplicate: 'true'
-          paths: '["src/**/*.hpp", "src/**/*.cpp", "tests/**/*.hpp", "tests/**/*.cpp", "simulations/**/*.hpp", "simulations/**/*.cpp", "**/CMakeLists.txt", "vendor/**", ".github/**", "toolchains/docker.gyselalibxx_env/**", "toolchains/v100.persee/**"]'
-          cancel_others: 'false'
+        uses: ./.github/actions/duplicate_check
 
   cpu_tests:
     strategy:
@@ -40,7 +35,7 @@ jobs:
       toolchain: ${{ matrix.toolchain }}
       merge_target: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
       pr_number: ${{ github.event.pull_request.number }}
-      is_duplicate: ${{ needs.pre_job.outputs.should_skip == 'true' && github.event.pull_request.draft == false }}
+      is_duplicate: ${{ needs.pre_job.outputs.is_duplicate == 'false' && github.event.pull_request.draft == false }}
 
   gpu_tests:
     name: GPU Test
@@ -51,12 +46,12 @@ jobs:
       merge_target: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
       SHA: ${{ github.event.pull_request.head.sha }}
       pr_number: ${{ github.event.pull_request.number }}
-      is_duplicate: ${{ needs.pre_job.outputs.should_skip == 'true' && github.event.pull_request.draft == false }}
+      is_duplicate: ${{ needs.pre_job.outputs.is_duplicate == 'true' && github.event.pull_request.draft == false }}
     secrets: inherit
 
   set_draft_failing:
     runs-on: ubuntu-latest
-    needs: [cpu_tests, gpu_tests]
+    needs: [cpu_tests]
     if: github.event_name == 'pull_request' && failure()
     steps:
       - uses: actions/checkout@v4
@@ -71,28 +66,6 @@ jobs:
               gh pr ready ${{ github.event.pull_request.number }} --undo
             fi
             gh pr comment ${{ github.event.pull_request.number }} -b "This PR is failing tests so it has been put back into draft. Please remove the draft status when the tests pass."
-            gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
-          fi
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-
-  set_draft_cancelled:
-    runs-on: ubuntu-latest
-    needs: [cpu_tests, gpu_tests]
-    if: github.event_name == 'pull_request' && cancelled()
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set PR to draft to avoid unnecessary runs
-        run: |
-          isDraft=${{ github.event.pull_request.draft }}
-          if [ "${isDraft}" != "true" ]
-          then
-            if [ "${{github.repository == 'gyselax/gyselalibxx'}}" == "true" ]
-            then
-               gh pr ready ${{ github.event.pull_request.number }} --undo
-            fi
-            gh pr comment ${{ github.event.pull_request.number }} -b "It seems like you haven't finished working on this PR so it has been put back into draft. Please remove the draft status when the PR can run tests without being interrupted."
             gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
           fi
         shell: bash

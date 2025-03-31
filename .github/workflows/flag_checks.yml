@@ -1,5 +1,9 @@
 name: Flag checks
 
+# This PR is triggered when the "Ready to review" label is added on a draft PR.
+# It leaves a comment to remind that the "Ready to review" label is not supposed
+# to be used on draft PRs. It then removes the erroneous label.
+
 on:
   pull_request:
     types:
@@ -16,7 +20,8 @@ jobs:
           ref: main
       - run: |
           gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
-          gh pr comment ${{ github.event.pull_request.number }} -b "Please remove the draft status if the PR is ready to review"
+          msg="Please remove the draft status if the PR is ready to review. The 'Ready to review' label will be added automatically when the tests are shown to be passing"
+          gh pr comment ${{ github.event.pull_request.number }} -b ${msg}
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
