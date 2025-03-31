@@ -40,3 +40,4 @@ runs:
       run: |
         SHOULD_RUN=${{ steps.changes_check.outputs.found_match || ! steps.skip_check.outputs.should_skip }}
         echo "should_run=${SHOULD_RUN}" >> $GITHUB_OUTPUT
+      shell: bash
