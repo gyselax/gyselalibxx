@@ -74,6 +74,7 @@ jobs:
     needs: [cpu_tests]
     if: always() && ${{ inputs.pr_number }} != ""
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/set_pr_status
         with:
           status: ${{ needs.cpu_tests.result }}

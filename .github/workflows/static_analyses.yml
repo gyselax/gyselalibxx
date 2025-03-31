@@ -211,6 +211,7 @@ jobs:
     needs: [Indentation, Markdown, Python, Documentation, cppcheck_static_analysis_errors, cmake_static_analysis, spelling]
     if: failure() && ${{ inputs.pr_number }} != ""
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/set_pr_status
         with:
           status: "failure"
