@@ -90,7 +90,6 @@ public:
             static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
             double jacob = m_mapping.jacobian(coord);
             assert(fabs(jacob) > 1e-15);
-            static_assert(
             if constexpr (
                     std::is_same_v<IndexTag1, DimArg0> && std::is_same_v<IndexTag2, DimRes0_cov>) {
                 //Compute the (1,1) coefficient of the inverse Jacobian matrix.

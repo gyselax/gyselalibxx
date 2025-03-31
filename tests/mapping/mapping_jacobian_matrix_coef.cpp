@@ -204,19 +204,16 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
 
             using X_cov = X::Dual;
             using Y_cov = Y::Dual;
-            DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X_cov, Y_cov>> inv_Jacobian_matrix_coeff;
+            DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X_cov, Y_cov>>
+                    inv_Jacobian_matrix_coeff;
             ddcHelper::get<R, X_cov>(inv_Jacobian_matrix_coeff)
                     = inv_jacobian.template inv_jacobian_component<R, X_cov>(coord_rtheta);
-            std::cout << "1: " << ddcHelper::get<R, X_cov>(inv_Jacobian_matrix_coeff) << " : " << ddcHelper::get<R,X_cov>(inv_Jacobian_matrix) << std::endl;
             ddcHelper::get<R, Y_cov>(inv_Jacobian_matrix_coeff)
                     = inv_jacobian.template inv_jacobian_component<R, Y_cov>(coord_rtheta);
-            std::cout << "2: " << ddcHelper::get<R, Y_cov>(inv_Jacobian_matrix_coeff) << " : " << ddcHelper::get<R,Y_cov>(inv_Jacobian_matrix) << std::endl;
             ddcHelper::get<Theta, X_cov>(inv_Jacobian_matrix_coeff)
                     = inv_jacobian.template inv_jacobian_component<Theta, X_cov>(coord_rtheta);
-            std::cout << "3: " << ddcHelper::get<Theta, X>(inv_Jacobian_matrix_coeff) << " : " << ddcHelper::get<Theta,X_cov>(inv_Jacobian_matrix) << std::endl;
             ddcHelper::get<Theta, Y_cov>(inv_Jacobian_matrix_coeff)
                     = inv_jacobian.template inv_jacobian_component<Theta, Y_cov>(coord_rtheta);
-            std::cout << "4: " << ddcHelper::get<Theta, Y_cov>(inv_Jacobian_matrix_coeff) << " : " << ddcHelper::get<Theta,Y_cov>(inv_Jacobian_matrix) << std::endl;
 
             EXPECT_TRUE(inv_Jacobian_matrix == inv_Jacobian_matrix_coeff);
         }
