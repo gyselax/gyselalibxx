@@ -32,6 +32,7 @@ jobs:
             if [[ ${N_FAILS} != 0 ]]
             then
               # If any required tests are failing
+              gh pr comment ${{ github.event.pull_request.number }} -b "This PR is failing tests so it has been put back into draft. Please remove the draft status when the tests pass."
               gh pr ready ${{ github.event.pull_request.number }} --undo
             elif [[ ${N_PASSES} >= 10 ]]
             then
