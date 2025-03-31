@@ -69,7 +69,7 @@ python_best_practices:
     export PYTHONPATH="./post-process/PythonScripts"
   script: |
     pylint $(find tests -iname *.py)
-    pylint $(find doc -iname *.py)
+    pylint $(find docs -iname *.py)
     pylint $(find bin -iname *.py)
     # Find all files with no extension or a .py extension in post-process/PythonScripts/
     POST_PROCESS_PYTHON_FILES=$(find post-process/PythonScripts/ -type f ! -name "*.*"; find post-process/PythonScripts -iname *.py)
@@ -118,6 +118,22 @@ markdown_best_practices:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   stage: static_analysis
   needs: []
+  variables:
+    GIT_SUBMODULE_STRATEGY: none
+  before_script: |
+    apt-get update -qy
+    apt-get install -y nodejs
+    apt-get install -y npm
+    npm install markdownlint-cli2 --global
+  script: |
+    markdownlint-cli2 --config "./.markdownlint.json" "**/*.md" "!vendor"
+
+markdown_equations:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  stage: static_analysis
+  needs: []
   image: ghcr.io/gyselax/gyselalibxx_env
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
@@ -153,3 +169,18 @@ cmake_static_analysis:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
     python3 bin/ci_tools/cmake_checker.py
+
+spelling:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  stage: static_analysis
+  needs: []
+  before_script: |
+    apt-get update -qy
+    apt-get install -y wget
+    mkdir typos
+    cd typos
+    wget -qO- https://github.com/crate-ci/typos/releases/download/v1.30.3/typos-v1.30.3-x86_64-unknown-linux-musl.tar.gz | gunzip | tar xvf -
+    cd ..
+  script: |
+    ./typos/typos ./AUTHORS ./CMakeLists.txt ./docs/ ./post-process ./README.md ./simulations ./src ./tests/ ./bin

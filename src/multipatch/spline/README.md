@@ -3,9 +3,9 @@
 This directory defines structures and methods to deal with different splines on every patches.
 The multipatch patch operators implemented are
 
-- [Multipatch spline builder](#src_multipatch_spline__Multipatch_spline_builder) - Definition of `MultipatchSplineBuilder` and `MultipatchSplineBuilder2D`.
-- [Multipatch spline evaluator](#src_multipatch_spline__Multipatch_spline_evaluator) - Definition of `MultipatchSplineEvaluator2D`.
-- [Multipatch extrapolation rules](#src_multipatch_spline__Multipatch_extrapolation_rules) - Definition of extrapolation rules depending on the geometries for `MultipatchSplineEvaluator2D`.
+- [Multipatch spline builder](#multipatch-spline-builder) - Definition of `MultipatchSplineBuilder` and `MultipatchSplineBuilder2D`.
+- [Multipatch spline evaluator](#multipatch-spline-evaluator) - Definition of `MultipatchSplineEvaluator2D`.
+- [Multipatch extrapolation rules](#multipatch-extrapolation-rules) - Definition of extrapolation rules depending on the geometries for `MultipatchSplineEvaluator2D`.
 
 ## Multipatch spline builder
 
@@ -72,7 +72,7 @@ class in DDC.
 
 To instantiate a `MultipatchSplineEvaluator2D`, we need a patch locator operator to be able to determine on which patch the given (see [Connectivity](./../connectivity/README.md))
 coordinates will be physically located. We also need extrapolation rules to know what type of value returning if case of the
-coordinates are outside of the domain. Multipatch extrapolation rules are implemented and defined below [Multipatch extrapolation rules](#src_multipatch_spline__Multipatch_extrapolation_rules).
+coordinates are outside of the domain. Multipatch extrapolation rules are implemented and defined below [Multipatch extrapolation rules](#multipatch-extrapolation-rules).
 
 The coordinates are stored in fields stored in `MultipatchType` objects.
 They are stored on patches. Each field corresponds to the coordinates stored on a given patch.

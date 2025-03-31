@@ -22,15 +22,15 @@ ${GYSELALIBXX_HOME}/vendor/kokkos/core/src/Cuda/Kokkos_Cuda_KernelLaunch.hpp(345
 
 ## Implicit capture of 'this' in extended lambda expression
 
-Lambdas capture variables from their environment in order to use them in the expressions that are executed in the lambda function. They can capture local variables directly (by copy or reference), however in order to capture class variables the entire class must be captured. As captures for GPU require copies (see [above](#docs_Common_compilation_problems__The_closure_type_for_a_lambda_cannot_be_used_in_the_template_argument_type_of_a____global____function)) such a copy could be extremely costly. It is therefore advised to avoid class capture.
+Lambdas capture variables from their environment in order to use them in the expressions that are executed in the lambda function. They can capture local variables directly (by copy or reference), however in order to capture class variables the entire class must be captured. As captures for GPU require copies (see [above](#the-closure-type-for-a-lambda-cannot-be-used-in-the-template-argument-type-of-a-__global__-function)) such a copy could be extremely costly. It is therefore advised to avoid class capture.
 
 Luckily it is simple to avoid the class being captured. It is sufficient to define local copies or accessors (i.e. `ddc::ChunkSpan`) to the variables that will be used in the function.
 
 E.g. for the following code:
 
 ```cpp
-double my_function() const 
-{   
+double my_function() const
+{
     return ddc::parallel_transform_reduce(
             Kokkos::DefaultExecutionSpace(),
             m_class_field_x.domain(),
@@ -41,9 +41,9 @@ double my_function() const
 where `m_class_field_x` is a class member function the code should be:
 
 ```cpp
-double my_function() const 
+double my_function() const
 {
-    DSpanX class_field_x_proxy = m_class_field_x.span_view();   
+    DSpanX class_field_x_proxy = m_class_field_x.span_view();
     return ddc::parallel_transform_reduce(
             Kokkos::DefaultExecutionSpace(),
             class_field_x_proxy.domain(),
@@ -71,7 +71,7 @@ DDC provides 3 types of objects for storing/accessing array data:
 
 Whenever a new `ddc::Chunk` is created, memory is allocated. This includes when a `ddc::Chunk` is copied. In order to avoid accidental memory allocation the copy operator of `ddc::Chunk` is therefore deleted.
 
-This is a little awkward as it means that a `ddc::Chunk` then cannot be used as a function argument or used inside a GPU function (as captures for GPU require copies, see [above](#docs_Common_compilation_problems__The_closure_type_for_a_lambda_cannot_be_used_in_the_template_argument_type_of_a____global____function)). In order to get round this restriction the `ddc::ChunkSpan` type must be used. This type provides all the functionalities to access the data that is stored in a `ddc::Chunk` but creating/copying this object never allocates memory so there is no risk of accidental memory allocation. A `ddc::ChunkView` is almost identical to a `ddc::ChunkSpan` but the data it refers to cannot be modified.
+This is a little awkward as it means that a `ddc::Chunk` then cannot be used as a function argument or used inside a GPU function (as captures for GPU require copies, see [above](#the-closure-type-for-a-lambda-cannot-be-used-in-the-template-argument-type-of-a-__global__-function)). In order to get round this restriction the `ddc::ChunkSpan` type must be used. This type provides all the functionalities to access the data that is stored in a `ddc::Chunk` but creating/copying this object never allocates memory so there is no risk of accidental memory allocation. A `ddc::ChunkView` is almost identical to a `ddc::ChunkSpan` but the data it refers to cannot be modified.
 
 In practice this means that while `ddc::Chunk` is used to initialise the memory, only `ddc::ChunkSpan` or `ddc::ChunkView` should be used to interact with the memory.
 
@@ -124,7 +124,7 @@ When this rule is not followed you will see the following error message:
 
 ```bash
 <PATH_TO_FILE>(<LINE_NUMBER>): error: The enclosing parent function ("<FUNCTION>") for an extended __host__ __device__ lambda cannot have private or protected access within its class
-          detected during instantiation of "<CLASS>::<CLASS>(Argtypes)" 
+          detected during instantiation of "<CLASS>::<CLASS>(Argtypes)"
 ```
 
 ## A nonstatic member reference must be relative to a specific object

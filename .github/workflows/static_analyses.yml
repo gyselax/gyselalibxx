@@ -88,31 +88,45 @@ jobs:
   Documentation:
     name: Documentation check
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/gyselax/gyselalibxx_env
-      options: --user 1001
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Setup documenation compilation
-        run: |
-          cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DGYSELALIBXX_BUILD_DOCUMENTATION=ON -B build -S .
+      - name: Install doxygen
+        run:
+          sudo apt-get install doxygen
         shell: bash
-      - name: Make documenation
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+      - name: Install Python dependencies
+        run:
+          pip install -r requirements.txt
+        shell: bash
+        working-directory: ./docs
+      - name: Make documentation
         run: |
           # Make docs
-          cmake --build build --target doc
+          python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc
+          cd docs
+          mkdocs build
         shell: bash
         continue-on-error: true
       - name: Check for new errors
         run: |
-          cat build/docs/doxygen.log
+          cat docs/doxygen.log
           # Get files which have changed in this merge request
           git diff ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}..${{ github.event.pull_request.head.sha || github.event.merge_group.head_sha }} --no-indent-heuristic --unified=0 --output=pull_new_files.txt --no-color --diff-filter=A
           python3 bin/ci_tools/check_readme_presence.py pull_new_files.txt
-          if [ -s build/docs/doxygen.log ]; then exit 1; fi
+          if [ -s docs/doxygen.log ]; then exit 1; fi
         shell: bash
+      - name: Test documentation
+        run: |
+          # Make docs
+          mkdocs build --strict
+        shell: bash
+        working-directory: ./docs
 
   cppcheck_static_analysis_errors:
     name: CppCheck static analysis errors

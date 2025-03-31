@@ -7,17 +7,22 @@ There are two types of documentation which are described in detail below:
 
 ## Building documentation locally
 
+For building our documentation we use [MkDocs](https://www.mkdocs.org/).
+Make sure you have installed `mkdocs` with its requirements:
+
+```bash
+pip install -r docs/requirements.txt
+```
+
 The documentation can be built locally by running the following commands from the root directory:
 
 ```bash
-cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DGYSELALIBXX_BUILD_DOCUMENTATION=1 -B build-docs .
-cmake --build build-docs
+python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc build/
+cd docs
+mkdocs build
 ```
 
-The option `-DGYSELALIBXX_COMPILE_SOURCE=OFF` ensures that the C++ code is not built, thereby avoiding the need to have all the C++ dependencies installed on your system.
-If this option is not used then `make docs` should be used to build only the documentation.
-
-In order to view the docs the file `build-docs/docs/html/index.html` should be opened in a browser (e.g. Firefox).
+In order to view the docs the file `docs/site/index.html` should be opened in a browser (e.g. Firefox). To change the documentation layout or add new navigation panels see [Gyselas MkDocs documentation](../README.md).
 
 ## Documentation describing code structures
 

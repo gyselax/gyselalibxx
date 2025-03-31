@@ -4,18 +4,18 @@ This directory defines structures and methods to describe patches and how they a
 
 The following sections describe the structures and methods implemented:
 
-- [Patch](#src_multipatch_connectivity__Patch) - Definition of Patch tag.
-- [Interfaces](#src_multipatch_connectivity__Interfaces)
-  - [Sticking of Two Edges](#src_multipatch_connectivity__Interfaces__Sticking_of_Two_Edges)
-    - [Multi-patch domain](#src_multipatch_connectivity__Interfaces__Multi-patch_domain) - Mathematical definition of multi-patch domain.
-    - [Edges](#src_multipatch_connectivity__Interfaces__Edges) - Mathematical definition of edges.
-    - [Sticking and Coordinate Transformation](#src_multipatch_connectivity__Interfaces__Sticking_and_Coordinate_Transformation) - Mathematical definition of  coordinate transformation and links to the implemented class (Interface, Edge and EdgeTransformation).
-    - [Index transformation](#src_multipatch_connectivity__Interfaces__Index_transformation) - Algorithm of the index transformation in EdgeTransformation.
-    - [Conformity of the meshes](#src_multipatch_connectivity__Interfaces__Conformity_of_the_meshes) - Definition of `UniformGridIdxMatching`.
-- [Patch locator](#src_multipatch_connectivity__Patch_locator) - Definition of patch locator operators to identify the patch where a given physical coordinate is.
-  - [Onion shape geometry](#src_multipatch_connectivity__Patch_Locator__Global_analytical_invertible_mapping__Onion_shape_geometry) - Definition of `OnionPatchLocator`, a specialisation of `IPatchLocator` for "onion" shape geometries.  
-- [References](#src_multipatch_connectivity__References) - References.
-- [Contents](#src_multipatch_connectivity__Contents) - List of files in the folder.
+- [Patch](#patch) - Definition of Patch tag.
+- [Interfaces](#interfaces)
+  - [Sticking of Two Edges](#sticking-of-two-edges)
+    - [Multi-patch domain](#multi-patch-domain) - Mathematical definition of multi-patch domain.
+    - [Edges](#edges) - Mathematical definition of edges.
+    - [Sticking and Coordinate Transformation](#sticking-and-coordinate-transformation) - Mathematical definition of  coordinate transformation and links to the implemented class (Interface, Edge and EdgeTransformation).
+    - [Index transformation](#index-transformation) - Algorithm of the index transformation in EdgeTransformation.
+    - [Conformity of the meshes](#conformity-of-the-meshes) - Definition of `UniformGridIdxMatching`.
+- [Patch locator](#patch-locator) - Definition of patch locator operators to identify the patch where a given physical coordinate is.
+  - [Onion shaped geometry](#onion-shaped-geometry) - Definition of `OnionPatchLocator`, a specialisation of `IPatchLocator` for "onion" shape geometries.  
+- [References](#references) - References.
+- [Contents](#contents) - List of files in the folder.
 
 ## Patch
 
@@ -227,9 +227,9 @@ We can easily apply $`(\mathcal{F})^{-1}`$ to identify the equivalent logical co
 We check then for each patch if the logical coordinate is on a rectangular logical patch $\hat{\Omega}^{(i)}$,
 i.e. if $`(\mathcal{F})^{-1}(x)\in\hat{\Omega}^{(i)}`$.
 
-#### Onion shape geometry
+#### Onion shaped geometry
 
-We call "onion" shape geometry a disk-like patch surrounded by concentric ring-like patches.
+We call "onion" shaped geometry a disk-like patch surrounded by concentric ring-like patches.
 The patches are defined on the same dimensions `R` and `Theta`.
 The logical grid is then split into different logical grids, one for each patch.
 We can then define one global mapping from the (`R`, `Theta`) domain to the (`X`, `Y`) domain for all the patches.

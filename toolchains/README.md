@@ -19,7 +19,7 @@ cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchains/mi250.hipcc.adastra.spack/toolchai
 
 ## Toolchains
 
-The [toolchains](https://en.wikipedia.org/wiki/Toolchain) are represented using a toolchain file. It summarizes CMake build settings for the appropriate machine environment and hardware.
+The [toolchains](https://en.wikipedia.org/wiki/Toolchain) are represented using a toolchain file. It summarises CMake build settings for the appropriate machine environment and hardware.
 
 You can use the toolchains like so:
 

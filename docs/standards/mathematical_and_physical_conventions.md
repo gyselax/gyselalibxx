@@ -4,10 +4,10 @@ The conventions adopted in Gyselalib++ for describing physical quantities such a
 
 ## Contents
 
-- [On the use of curvilinear coordinates](#docs_mathematical_and_physical_conventions__On_the_use_of_curvilinear_coordinates)
-- [Metric tensor](#docs_mathematical_and_physical_conventions__Metric_tensor)
-- [Jacobian](#docs_mathematical_and_physical_conventions__Jacobian)
-- [Differential operators](#docs_mathematical_and_physical_conventions__Differential_operators)
+- [On the use of curvilinear coordinates](#on-the-use-of-curvilinear-coordinates)
+- [Metric tensor](#metric-tensor)
+- [Jacobian](#jacobian)
+- [Differential operators](#differential-operators)
 
 ## On the use of curvilinear coordinates
 
@@ -19,7 +19,7 @@ q^i = q^i(x^1, \ldots , x^N) \quad \forall i \in [1, N].
 
 Note that even though an inverse of the functions $`q^i(x^1, \ldots , x^N)`$ must exist so that the coordinate transform is valid, it is not always possible to write an explicit formula for such inverse. One *i coordinate surface* is defined as $`q^i = \text{constant}`$ . One *i coordinate curve* is defined as the intersection of a series of j coordinate surfaces $`\forall j \in [1, N]`$ with $` j\neq i`$. A *i coordinate axis* is defined as the tangent of the "i coordinate curve". As their name suggests, coordinate curves do not form straight lines in general. An illustration for these geometrical concepts is given in the following figure.
 
-![Coordinate curves, surfaces and axes in a three-dimensional space](./curvilinear_coordinates_def.png "")
+![Coordinate curves, surfaces and axes in a three-dimensional space](../images/curvilinear_coordinates_def.png "")
 
 The position of any point in space can be written as
 
@@ -46,7 +46,7 @@ and its dual basis, the *covariant basis* $`\{\mathbf{b}^i\}`$ by
 These two bases are *local bases*, in the sense that the $`\mathbf{b}_i`$ and $`\mathbf{b}^i`$ vectors depend on the considered position in space, i.e.
 we have $`\mathbf{b}_i(x^1, \ldots , x^N)`$ and $`\mathbf{b}^i(x^1, \ldots , x^N)`$. A geometrical interpretation of these two bases reads as follows. The *covariant* unit vector $`\mathbf{b}^i`$ is orthogonal to the coordinate surface $`q^i = \text{constant}`$, while the *contravariant* unit vector $`\mathbf{b}_i`$ is locally tangent to the coordinate curve associated with the $`q^i`$ coordinate. This is the situation depicted in the following picture.
 
-![Geometrical interpretation of the contravariant and covariant bases vectors](./curvilinear_coordinates_contravariant_covariant_bases.png)
+![Geometrical interpretation of the contravariant and covariant bases vectors](../images/curvilinear_coordinates_contravariant_covariant_bases.png)
 
 Note that neither contravariant nor covariant bases form orthonormal vector sets in general. Additionally note that in the case of Cartesian coordinates covariant and contravariant bases are the same. In general, the following property holds
 
@@ -236,7 +236,7 @@ A_{\{p\}i} = (J_{\{q\to p\}})^{-T}\left._{\;\;i}^j\right. A_{\{q\}j} = (J_{\{q\t
 
 ## Differential operators
 
-Hereafter are expressed differential operators in a curvilinear coordinate system $`\{q^i\}`$.
+Hereafter are expressed differential operators in a curvilinear coordinate system $`\{q^i\}`$. A comprehensive derivation of such formulas can be found in Taha Sochi's note [1].
 
 ### Gradient
 
@@ -253,3 +253,25 @@ This quantity can be expressed in the both covariant $`\{\mathbf{b}^i\}`$ and co
 ```
 
 Note that the definition that uses the contravariant basis $`\{\mathbf{b}_i\}`$ is much more common.
+
+### Divergence
+
+The divergence of a vector field $`\mathbf{A} = A^i \mathbf{b}_i`$ is written as
+
+```math
+\nabla \cdot \mathbf{A} = \frac{1}{\sqrt{g}}\frac{\partial}{\partial q^i} \left( \sqrt{g} A^i\right), 
+```
+
+Where $`g`$ stands for the determinant of the metric tensor. Also note that $`g = \text{det}(G) = \text{det}(J^T J) = \text{det}(J)^2`$ thus $`\sqrt{g}`$ reduces to the absolute value of the determinant of the Jacobian tensor. In the code we evaluate the above formula by writing
+
+```math
+\nabla \cdot \mathbf{A} = \frac{\partial A^i}{\partial q^i} +  \frac{1}{\sqrt{g}}A^i \frac{\partial \sqrt{g}}{\partial q^i}, 
+```
+
+So as to be able to reuse the values of the partial derivatives of $`A^i`$ between various differential operators.
+
+## References
+
+[1] Taha Sochi. "Tensor Calculus".
+([https://arxiv.org/abs/1610.04347](https://arxiv.org/abs/1610.04347).)
+arXiv (2016).
