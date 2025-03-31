@@ -48,4 +48,4 @@ Gyselalibxx = "Gyselalib++"
 
 [type.md.extend-identifiers]
 "Gyselalib[^+]" = "Gyselalib++"
-"gyselalib[^x]" = "Gyselalib++"
+"gyselalib([^x]|\\b)" = "Gyselalib++"
