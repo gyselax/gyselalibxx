@@ -556,12 +556,12 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="getting-started-with-gyselalib">Getting Started with Gyselalib++</h1>
-<p>Welcome to the gyselalib++ project! This guide is designed to help new developers understand how to get started with the project. Please bear in mind that developers unfamiliar with C++ will not find the answers to all their questions in the documentation. While we aim to provide documentation where relevant, this is not a replacement for foundational C++ knowledge; instead, it focuses on the specific challenges and paradigms relevant to gyselalib++. If you encounter unfamiliar keywords or concepts in the code, we recommend looking them up online as a first step. This will help you build a deeper understanding and use your time more effectively before seeking further assistance.</p>
+<p>Welcome to the Gyselalib++ project! This guide is designed to help new developers understand how to get started with the project. Please bear in mind that developers unfamiliar with C++ will not find the answers to all their questions in the documentation. While we aim to provide documentation where relevant, this is not a replacement for foundational C++ knowledge; instead, it focuses on the specific challenges and paradigms relevant to Gyselalib++. If you encounter unfamiliar keywords or concepts in the code, we recommend looking them up online as a first step. This will help you build a deeper understanding and use your time more effectively before seeking further assistance.</p>
 <hr>
 <h2 id="understanding-functional-programming-in-gyselalib">Understanding Functional Programming in Gyselalib++</h2>
-<p>There are multiple coding paradigms possible when writing code in C++. Two of the most common are object-oriented programming and functional programming. You may be familiar with object-oriented programming however gyselalib++ uses functional programming.</p>
+<p>There are multiple coding paradigms possible when writing code in C++. Two of the most common are object-oriented programming and functional programming. You may be familiar with object-oriented programming however Gyselalib++ uses functional programming.</p>
 <h3 id="key-difference-functional-vs-object-oriented-programming-oop">Key Difference: Functional vs. Object-Oriented Programming (OOP)</h3>
-<p><strong>Object-Oriented Programming (OOP)</strong> is built around the concept of objects that encapsulate data and behaviour. Developers used to OOP often think in terms of classes, inheritance, and polymorphism. While these are powerful concepts, they are not central to how gyselalib++ is structured. This is notably because inheritance, and polymorphism are often incompatible with GPU programming.</p>
+<p><strong>Object-Oriented Programming (OOP)</strong> is built around the concept of objects that encapsulate data and behaviour. Developers used to OOP often think in terms of classes, inheritance, and polymorphism. While these are powerful concepts, they are not central to how Gyselalib++ is structured. This is notably because inheritance, and polymorphism are often incompatible with GPU programming.</p>
 <p><strong>Functional Programming (FP)</strong> aims to make code more readable by making it more obvious where data is modified. This is done by separating data storage from operators. This way, data can never be modified inside its class without passing through an operator. In our code the functional programming paradigm was chosen as it allows us to write the code in a way which more closely resembles the equations.</p>
 <h3 id="operators-and-data-structures">Operators and Data Structures</h3>
 <p>When using functional programming classes fit into one of two groups:</p>
@@ -583,7 +583,7 @@
 <p>For example consider the case of a semi-Lagrangian advection. The operator is similar to a function which modifies a data structure containing the distribution function. By using a class the method used to interpolate the function (e.g. spline interpolation or Lagrange interpolation) can be specified without duplicating code.</p>
 <hr>
 <h2 id="navigating-the-gyselalib-codebase">Navigating the Gyselalib++ Codebase</h2>
-<p>The gyselalib++ codebase is organised into several folders. The main folders of interest are:</p>
+<p>The Gyselalib++ codebase is organised into several folders. The main folders of interest are:</p>
 <ul>
 <li><strong>src/</strong> : This folder contains the source code for the library. It contains folders grouping the code by subject. The <code>src/</code> folder and each sub-folder contains a <code>README.md</code> detailing its contents. It is simple to navigate within this documentation : <a href="../../src/index.html">src</a></li>
 <li>
@@ -593,7 +593,7 @@
 <p><strong>tests/</strong> : This folder contains the unit tests for the library. The folder structure is similar to that found in the <code>src/</code> folder.</p>
 </li>
 <li>
-<p><strong>simulations/</strong> : This folder contains examples of simulations. In order to use the gyselalib++ library for research applications we usually create a new repository which contains this repository as a sub-module, however there are still some simulations hosted in this repository. This is notably the case for simulations which have known properties that can be used as end-to-end tests. For example the Landau damping case.</p>
+<p><strong>simulations/</strong> : This folder contains examples of simulations. In order to use the Gyselalib++ library for research applications we usually create a new repository which contains this repository as a sub-module, however there are still some simulations hosted in this repository. This is notably the case for simulations which have known properties that can be used as end-to-end tests. For example the Landau damping case.</p>
 </li>
 </ul>
 <hr>
@@ -625,7 +625,7 @@
 </li>
 </ol>
 <hr>
-<p>We hope this guide sets you on the right path to contributing to gyselalib++. Happy coding!</p></div>
+<p>We hope this guide sets you on the right path to contributing to Gyselalib++. Happy coding!</p></div>
               
             </div>
           </div><footer>

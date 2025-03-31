@@ -573,13 +573,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="using-ddc-in-gyselalibxx">Using DDC in Gyselalibxx</h1>
+                <div><h1 id="using-ddc-in-gyselalib">Using DDC in Gyselalib++</h1>
 <p><a href="https://github.com/Maison-de-la-Simulation/ddc">DDC</a> is a library which aims to provide types which represent mathematical/physical concepts.
 Representing these concepts with types allows the compiler to enforce the mathematical validity of expressions.</p>
 <p>The DDC library is based on templates. The template parameters are based on physical dimensions.</p>
 <p>When using DDC the first step is therefore to create structures representing each of the physical dimensions, e.g. <code>X</code>. These objects should only contain one attribute, a static constexpr boolean called <code>PERIODIC</code> which indicates whether the dimension is periodic or not.
 The DDC types are then parametrised by this structure. The dimension is in real space and is continuous.</p>
-<p>The following sections describe some of the DDC types used in Gyselalibxx.</p>
+<p>The following sections describe some of the DDC types used in Gyselalib++.</p>
 <h2 id="contents">Contents</h2>
 <ul>
 <li><a href="#coordinates">Coordinates</a></li>
@@ -608,7 +608,7 @@ Coord&lt;X, Y&gt; R(7.0, 6.0);
 Coord&lt;X, Y&gt; Q = R - P;
 </code></pre>
 <p>The <code>Coord</code> class also provides an addition operator, comparison operators, and an output operator for easy printing using <code>cout</code>.</p>
-<p>In Gyselalibxx the alias <code>CoordX</code> is usually defined in <code>geometry.hpp</code> to describe the type <code>Coord&lt;X&gt;</code> more succinctly.</p>
+<p>In Gyselalib++ the alias <code>CoordX</code> is usually defined in <code>geometry.hpp</code> to describe the type <code>Coord&lt;X&gt;</code> more succinctly.</p>
 <h2 id="indexing-and-associated-concepts">Indexing and associated concepts</h2>
 <p>The physical problems that our simulations describe are defined on a domain. The domain on which the problem is defined is continuous (e.g. a radial domain <span class="arithmatex">\([0,1)\)</span>). However a simulation evolves on a grid. This means that the value of the function is only known at a discrete set of points. In the case of a function <span class="arithmatex">\(f(x)\rightarrow y \in \mathbb{R}\)</span> with <span class="arithmatex">\(x \in [0,1)\)</span>, we would usually discretise the domain <span class="arithmatex">\([0,1)\)</span> as follows:
 $$
@@ -622,7 +622,7 @@ $$</p>
 <li><code>NonUniformGridBase</code> (the type alias of <code>NonUniformPointSampling</code>)</li>
 </ul>
 <p>A uniform point sampling is a collection of points which are equidistant, it is therefore defined with an origin and a step or distance between consecutive points. In contrast the points found in a non-uniform point sampling are arbitrary. This kind of sampling must therefore be initialised from a list of points.</p>
-<p>It is possible to have multiple grids defined on the same dimension (e.g. the grid points used for a Gauss-Legendre quadrature, the grid points on which the simulation evolves, the grid points which split a spline into polynomials, etc). In order for each grid that is defined to have a different type DDC requires that we define structures which inherit from <code>UniformGridBase</code> and <code>NonUniformGridBase</code> (these structures are then the base structures from which we inherit). In Gyselalibxx such structures have the keyword <code>Grid</code> in the name (e.g. <code>GridX</code>) and are usually defined in <code>geometry.hpp</code>.</p>
+<p>It is possible to have multiple grids defined on the same dimension (e.g. the grid points used for a Gauss-Legendre quadrature, the grid points on which the simulation evolves, the grid points which split a spline into polynomials, etc). In order for each grid that is defined to have a different type DDC requires that we define structures which inherit from <code>UniformGridBase</code> and <code>NonUniformGridBase</code> (these structures are then the base structures from which we inherit). In Gyselalib++ such structures have the keyword <code>Grid</code> in the name (e.g. <code>GridX</code>) and are usually defined in <code>geometry.hpp</code>.</p>
 <p>E.g.:</p>
 <pre><code class="language-cpp">struct GridX : UniformGridBase&lt;X&gt;
 {
@@ -630,9 +630,9 @@ $$</p>
 </code></pre>
 <p>Although this seems like a useful type, you should not directly create instances of this class in the code. Instead you should call <code>init_discrete_space</code> and access the points using an <code>Index</code>. For more details see the section about <code>Index</code>.</p>
 <h2 id="index">Index</h2>
-<p>In order to interact with most types in Gyselalibxx we need to use an <code>Idx</code> (a type alias for <code>ddc::DiscreteElement</code>). This type describes an index of a point in the grid. E.g. the point <code>x_i</code> in the grid <code>GridX</code> can be indexed using the object <code>Idx&lt;GridX&gt;(i)</code>.
+<p>In order to interact with most types in Gyselalib++ we need to use an <code>Idx</code> (a type alias for <code>ddc::DiscreteElement</code>). This type describes an index of a point in the grid. E.g. the point <code>x_i</code> in the grid <code>GridX</code> can be indexed using the object <code>Idx&lt;GridX&gt;(i)</code>.
 An <code>Idx</code> is therefore roughly equivalent to an integer. Compared to an integer, it additionally contains information about the physical direction being examined. This allows the compiler to raise errors if typos/copy-paste errors lead to the wrong dimension being used.</p>
-<p>In Gyselalibxx the alias <code>IndexX</code> is usually defined in <code>geometry.hpp</code> to describe the index of the grid along the dimension X on which the distribution function is discretised.</p>
+<p>In Gyselalib++ the alias <code>IndexX</code> is usually defined in <code>geometry.hpp</code> to describe the index of the grid along the dimension X on which the distribution function is discretised.</p>
 <p>We can also create multi-dimensional indices. E.g. the point <code>(x_i, y_j)</code> can be indexed using the object <code>Idx&lt;GridX, GridY&gt;(i, j)</code></p>
 <p>It is also possible to extract an index on a subset of the original dimensions using <code>ddc::select&lt;GridOfInterest&gt;(my_nd_index)</code>.</p>
 <p>Once a grid has been initialised using the function <code>ddc::init_discrete_space</code>, an <code>Idx</code> defined on that grid can be used to obtain the coordinates of the points in the grid. This is done using the function <code>ddc::coordinate</code>.</p>
@@ -656,7 +656,7 @@ Idx&lt;GridX&gt; j(6);
 IdxStep&lt;GridX&gt; k = j-i;
 i += k;
 </code></pre>
-<p>In Gyselalibxx the alias <code>IdxStepX</code> is usually defined in <code>geometry.hpp</code> to describe the step from one element of a grid along the dimension X to another.</p>
+<p>In Gyselalib++ the alias <code>IdxStepX</code> is usually defined in <code>geometry.hpp</code> to describe the step from one element of a grid along the dimension X to another.</p>
 <p>As with <code>Idx</code>s, an <code>IdxStep</code> can be multi-dimensional and lower dimension <code>IdxStep</code> objects can be extracted using <code>ddc::select&lt;GridOfInterest&gt;(my_nd_vector)</code>.</p>
 <p>For a more concrete example of how this type is useful see <a href="#example">Example</a>.</p>
 <h2 id="index-range">Index Range</h2>
@@ -711,20 +711,20 @@ IdxRange&lt;GridX, GridY&gt; idx_range(origin, size);
 <li><code>size()</code> : Returns the total number of points in the domain (the product of the number of points in each dimension).</li>
 <li><code>extents()</code> : Returns the number of points in each dimension stored in an <code>IdxStep</code>.</li>
 </ul>
-<p>In Gyselalibxx the alias <code>IdxRangeX</code> is usually defined in <code>geometry.hpp</code> to describe the index range containing points from <code>GridX</code>.</p>
+<p>In Gyselalib++ the alias <code>IdxRangeX</code> is usually defined in <code>geometry.hpp</code> to describe the index range containing points from <code>GridX</code>.</p>
 <h2 id="data-storage">Data Storage</h2>
 <p>Data is allocated at the instantiation of a <code>FieldMem</code> (type alias for <code>ddc::Chunk</code>). This type is parametrised by the underlying data type (e.g. <code>double</code>), and the <code>IdxRange</code> on which the values are defined. By default in Gysela memory is allocated on the device (GPU).</p>
 <p>In order to initialise the data storage to the correct size, a <code>FieldMem</code> is initialised by providing the <code>IdxRange</code> on which the values are defined.</p>
-<p>In Gyselalibxx the alias <code>FieldMemX</code> is usually defined in <code>geometry.hpp</code> to describe the memory block for a field defined on the all or part of <code>GridX</code>.. E.g:</p>
+<p>In Gyselalib++ the alias <code>FieldMemX</code> is usually defined in <code>geometry.hpp</code> to describe the memory block for a field defined on the all or part of <code>GridX</code>.. E.g:</p>
 <pre><code class="language-cpp">FieldMemXVx&lt;double&gt; distribution_function_2d_alloc(idx_range_x_vx);
 </code></pre>
-<p>In Gyselalibxx the functions are almost all defined using real numbers. The additional alias <code>DFieldMemX</code> is therefore defined to represent a real function defined on all or part of <code>GridX</code>. E.g:</p>
+<p>In Gyselalib++ the functions are almost all defined using real numbers. The additional alias <code>DFieldMemX</code> is therefore defined to represent a real function defined on all or part of <code>GridX</code>. E.g:</p>
 <pre><code class="language-cpp">DFieldMemRThetaPhiVparMu distribution_function_2d_alloc(idx_range_radial_poloidal_toroidal_velocity_mu);
 </code></pre>
 <p>As instantiating a <code>FieldMem</code> leads to data allocation using this type always has an associated cost. In order to avoid accidental copying DDC is structured such that the only way to copy data from one <code>FieldMem</code> to another is using the function <code>ddc::deepcopy</code>. Using an assignment or initialising from another <code>FieldMem</code> will result in a compiler error.</p>
 <p>To avoid copying data unnecessarily, DDC provides the type <code>Field</code> (type alias for <code>ddc::ChunkSpan</code>). This can be thought of as a reference to a <code>FieldMem</code>. It may at first seem surprising that a new type is required for this as a more typical approach would be to use <code>const&amp;</code>. However when code runs on a GPU a new instance of each variable must be created on the GPU. This is necessary to avoid race conditions and to ensure locality. We do not want all the data in the <code>FieldMem</code> to be copied to/from the GPU every time a kernel is started, so instead we use <code>Field</code> which only copies a pointer to the GPU memory to the new variable instance.</p>
 <p>Unless you need to allocate data, you should always use <code>Field</code> rather than <code>FieldMem</code>. A <code>Field</code> can be obtained from a <code>FieldMem</code> using the constructor of <code>Field</code> or the global function <code>get_field</code>.</p>
-<p>In Gyselalibxx the alias <code>FieldX</code> is usually defined in <code>geometry.hpp</code> to describe a reference to a function defined on the domain or sub-domain containing points from the point sampling <code>GridX</code>. E.g:</p>
+<p>In Gyselalib++ the alias <code>FieldX</code> is usually defined in <code>geometry.hpp</code> to describe a reference to a function defined on the domain or sub-domain containing points from the point sampling <code>GridX</code>. E.g:</p>
 <pre><code class="language-cpp">FieldMemXVx&lt;double&gt; distribution_function_2d_alloc(idx_range_x_vx);
 FieldXVx&lt;double&gt; distribution_function_2d(distribution_function_2d_alloc);
 </code></pre>

@@ -553,10 +553,10 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="using-git">Using Git</h1>
-<p>Git is an extremely important tool for handling versioning and concurrent developments on the same code. There are many resources available online to help you get to grips with this tool. Here we summarise a few key concepts which will be helpful when working with git and Gyselalibxx. It is designed to be a jumping-off point and a reference for reoccurring git questions, not a complete git reference or tutorial.</p>
+<p>Git is an extremely important tool for handling versioning and concurrent developments on the same code. There are many resources available online to help you get to grips with this tool. Here we summarise a few key concepts which will be helpful when working with git and Gyselalib++. It is designed to be a jumping-off point and a reference for reoccurring git questions, not a complete git reference or tutorial.</p>
 <h2 id="branches">Branches</h2>
 <p>Branches are an important tool for handling concurrent development. The <code>main</code> branch is the starting point for all developments. It contains all major developments which are considered sufficiently mature for other developers to also use them.</p>
-<p>Whenever you wish to add something new to gyselalibxx or fix an issue you should create a new branch from the <code>main</code> branch. The branch name should have the following format:</p>
+<p>Whenever you wish to add something new to Gyselalib++ or fix an issue you should create a new branch from the <code>main</code> branch. The branch name should have the following format:</p>
 <pre><code class="language-none">&lt;user_name&gt;_&lt;description_of_development&gt;
 </code></pre>
 <p>this allows us to quickly and easily identify the branch owner and the contents of the branch.</p>
@@ -570,7 +570,7 @@ git rebase origin/main
 </code></pre>
 <p>After this command conflicts may appear between your branch and the main branch. For a <code>git merge</code> command all conflicts will appear at the same time. For a <code>git rebase</code> command conflicts may appear for each commit in your branch since the last rebase command (or its creation from the main branch). Conflicts should each be examined individually to ensure no new developments are lost. There are many resources (e.g. <a href="https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts">bitbucket</a>) online which describe how to fix these conflicts.</p>
 <h2 id="submodules">Submodules</h2>
-<p>Gyselalibxx depends on other external libraries to compile. These libraries are included in the repository via <a href="https://git-scm.com/docs/gitsubmodules">submodules</a>. In general you will not need to touch the code inside the folders associated with these repositories. However their presence sometimes causes unexpected behaviour. The following is a small FAQ of common issues concerning submodules:</p>
+<p>Gyselalib++ depends on other external libraries to compile. These libraries are included in the repository via <a href="https://git-scm.com/docs/gitsubmodules">submodules</a>. In general you will not need to touch the code inside the folders associated with these repositories. However their presence sometimes causes unexpected behaviour. The following is a small FAQ of common issues concerning submodules:</p>
 <h3 id="q-i-cloned-the-repository-but-the-submodules-were-not-cloned">Q: I cloned the repository but the submodules were not cloned</h3>
 <p><strong>A:</strong> If you accidentally cloned the repository without the <code>--recurse-submodules</code> option you can collect the submodules by running the following command:</p>
 <pre><code class="language-sh">git submodule update --init
