@@ -85,7 +85,7 @@ public:
         static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<DimRes0_cov, DimRes1_cov>>);
 
         if constexpr (has_2d_inv_jacobian_v<Mapping, PositionCoordinate>) {
-            return m_mapping.inv_jacobian_component(coord);
+            return m_mapping.template inv_jacobian_component<IndexTag1, IndexTag2>(coord);
         } else {
             static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
             double jacob = m_mapping.jacobian(coord);
