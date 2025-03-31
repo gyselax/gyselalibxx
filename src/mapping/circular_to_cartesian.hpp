@@ -246,16 +246,16 @@ public:
         } else if constexpr (std::is_same_v<IndexTag1, R> && std::is_same_v<IndexTag2, Y_cov>) {
             //Compute the (1,2) coefficient of the inverse Jacobian matrix.
             return Kokkos::sin(theta);
-        } else if constexpr (std::is_same_v<IndexTag1, Theta> && std::is_same_v<IndexTag2, X_cov>) {
-            //Compute the (2,1) coefficient of the inverse Jacobian matrix.
-            const double r = ddc::get<R>(coord);
-            assert(fabs(r) >= 1e-15);
-            return -1 / r * Kokkos::sin(theta);
         } else {
-            //Compute the (2,2) coefficient of the inverse Jacobian matrix.
             const double r = ddc::get<R>(coord);
             assert(fabs(r) >= 1e-15);
-            return 1 / r * Kokkos::cos(theta);
+            if constexpr (std::is_same_v<IndexTag2, X_cov>) {
+                //Compute the (2,1) coefficient of the inverse Jacobian matrix.
+                return -1 / r * Kokkos::sin(theta);
+            } else {
+                //Compute the (2,2) coefficient of the inverse Jacobian matrix.
+                return 1 / r * Kokkos::cos(theta);
+            }
         }
     }
 
