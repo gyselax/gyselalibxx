@@ -2,6 +2,10 @@ on:
   pull_request_review:
     types: [ submitted ]
 
+# Modify flags when a review is left on a PR. If changes are requested then the PR is put
+# back into draft and the "Ready to review" label is removed. If the PR is approved then
+# the "Ready to review" label is removed and the "Ready to merge" label is added.
+
 jobs:
   Bot:
     name: Update Review Stage
@@ -12,6 +16,7 @@ jobs:
         if: github.event.review.state == 'changes_requested'
         run: |
           gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
+          gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to merge"
           gh pr ready ${{ github.event.pull_request.number }} --undo
         shell: bash
         env:
