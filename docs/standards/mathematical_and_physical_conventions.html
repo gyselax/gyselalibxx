@@ -588,17 +588,17 @@
 <div class="arithmatex">\[
 q^i = q^i(x^1, \ldots , x^N) \quad \forall i \in [1, N].
 \]</div>
-<p>Note that even though an inverse of the functions <span class="arithmatex">\(q^i(x^1, \ldots , x^N)\)</span> must exist so that the coordinate transform is valid, it is not always possible to write an explicit formula for such inverse. The surface defined by <span class="arithmatex">\(q^i = \text{constant}\)</span> is called a <em>coordinate surface</em>, the intersection of these surfaces define <em>coordinate curves</em>. A <em>coordinate axis</em> is locally defined as the axis tangent to a given coordinate curve. As their name suggests, coordinate curves do not form straight lines in general. An illustration for these geometrical concepts is given in the following figure.</p>
+<p>Note that even though an inverse of the functions <span class="arithmatex">\(q^i(x^1, \ldots , x^N)\)</span> must exist so that the coordinate transform is valid, it is not always possible to write an explicit formula for such inverse. One <em>i coordinate surface</em> is defined as <span class="arithmatex">\(q^i = \text{constant}\)</span> . One <em>i coordinate curve</em> is defined as the intersection of a series of j coordinate surfaces <span class="arithmatex">\(\forall j \in [1, N]\)</span> with <span class="arithmatex">\( j\neq i\)</span>. A <em>i coordinate axis</em> is defined as the tangent of the "i coordinate curve". As their name suggests, coordinate curves do not form straight lines in general. An illustration for these geometrical concepts is given in the following figure.</p>
 <p><img alt="Coordinate curves, surfaces and axes in a three-dimensional space" src="../images/curvilinear_coordinates_def.png" title=""></p>
 <p>The position of any point in space can be written as</p>
 <div class="arithmatex">\[
-\overrightarrow{r} = x^i \mathbf{e}_i,
+\overrightarrow{x} = x^i \mathbf{e}_i,
 \]</div>
-<p>where we introduced the unit vectors of the orthonormal Cartesian basis <span class="arithmatex">\(\{\mathbf{e}_i\}\)</span>. The position vector <span class="arithmatex">\(\overrightarrow{r}\)</span> is not to be confused with the radial coordinate <span class="arithmatex">\(r\)</span>. We rely on the Einstein summation in the above equation and in the following, i.e. we consider that repeated indices indicate a summation. See the <a href="https://en.wikipedia.org/wiki/Einstein_notation">wikipedia page on Einstein summation</a> for more details.</p>
+<p>where we introduced the unit vectors of the orthonormal Cartesian basis <span class="arithmatex">\(\{\mathbf{e}_i\}\)</span>. The position vector <span class="arithmatex">\(\overrightarrow{x}\)</span> is not to be confused with the radial coordinate <span class="arithmatex">\(r\)</span>. We rely on the Einstein summation in the above equation and in the following, i.e. we consider that repeated indices indicate a summation. See the <a href="https://en.wikipedia.org/wiki/Einstein_notation">wikipedia page on Einstein summation</a> for more details.</p>
 <h2 id="contravariant-and-covariant-bases">Contravariant and covariant bases</h2>
 <p>Let us define the <em>contravariant basis</em> <span class="arithmatex">\(\{\mathbf{b}_i\}\)</span> associated to the <span class="arithmatex">\(\{q^i\}\)</span> coordinates by</p>
 <div class="arithmatex">\[
-\mathbf{b}_i = \frac{\partial \overrightarrow{r}}{\partial q^i} = \frac{\partial x^j}{\partial q^i} \mathbf{e}_j,
+\mathbf{b}_i = \frac{\partial \overrightarrow{x}}{\partial q^i} = \frac{\partial x^j}{\partial q^i} \mathbf{e}_j,
 \]</div>
 <p>and its dual basis, the <em>covariant basis</em> <span class="arithmatex">\(\{\mathbf{b}^i\}\)</span> by</p>
 <div class="arithmatex">\[
