@@ -1,5 +1,9 @@
 name: Draft flags
 
+# This workflow is triggered when a PR is put into draft.
+# It removes the "Ready to review" and "Ready to merge" labels
+# It additionally cancels any workflows that are in progress (e.g. CPU tests)
+
 on:
   pull_request:
     types:
@@ -15,6 +19,7 @@ jobs:
           ref: main
       - run: |
           gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
+          gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to merge"
           RUNNING_WORKFLOW_LINKS=$(gh pr checks ${{ github.event.pull_request.number }} --json state,link --jq '.[] | select(.state == "QUEUED" or .state == "IN_PROGRESS" or .state == "WATING") | .link')
           RUNNING_WORKFLOWS=$(echo "$RUNNING_WORKFLOW_LINKS" | awk -F'[/"]' '{print $(NF-2); }' | sort -u)
           for workflow_id in ${RUNNING_WORKFLOWS}
