@@ -49,16 +49,10 @@ public:
      *
      * For some computations, we need the complete inverse Jacobian matrix or just the
      * coefficients.
-     * The coefficients can be given independently with the functions
-     * inv_jacobian_11, inv_jacobian_12, inv_jacobian_21 and inv_jacobian_22.
+     * The coefficients can be given independently with the function inv_jacobian_component.
      *
      * @param[in] coord The coordinate where we evaluate the Jacobian matrix.
      * @returns The inverse Jacobian matrix returned.
-     *
-     * @see inv_jacobian_11
-     * @see inv_jacobian_12
-     * @see inv_jacobian_21
-     * @see inv_jacobian_22
      */
     KOKKOS_INLINE_FUNCTION InverseJacobianTensor operator()(PositionCoordinate const& coord) const
     {
@@ -73,94 +67,49 @@ public:
         }
     }
 
-    /**
-     * @brief Compute the (1,1) coefficient of the inverse Jacobian matrix.
-     *
-     * Be careful because not all mappings are invertible, especially at the centre point.
-     *
-     * @param[in] coord
-     * 				The coordinate where we evaluate the inverse Jacobian matrix.
-     *
-     * @return A double with the value of the (1,1) coefficient of the inverse Jacobian matrix.
-     */
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_11(PositionCoordinate const& coord) const
-    {
-        if constexpr (has_2d_inv_jacobian_v<Mapping, PositionCoordinate>) {
-            return m_mapping.inv_jacobian_11(coord);
-        } else {
-            static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
-            double jacob = m_mapping.jacobian(coord);
-            assert(fabs(jacob) > 1e-15);
-            // J^{-1}(1,1) = J(2,2) / det(J)
-            return m_mapping.template jacobian_component<DimRes1, DimArg1_cov>(coord) / jacob;
-        }
-    }
 
     /**
-     * @brief Compute the (1,2) coefficient of the inverse Jacobian matrix.
+     * @brief Compute the (i,j) coefficient of the inverse Jacobian matrix.
      *
      * Be careful because not all mappings are invertible, especially at the centre point.
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the inverse Jacobian matrix.
      *
-     * @return A double with the value of the (1,2) coefficient of the inverse Jacobian matrix.
+     * @return A double with the value of the (i,j) coefficient of the inverse Jacobian matrix.
      */
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_12(PositionCoordinate const& coord) const
+    template <class IndexTag1, class IndexTag2>
+    KOKKOS_INLINE_FUNCTION double inv_jacobian_component(PositionCoordinate const& coord) const
     {
-        if constexpr (has_2d_inv_jacobian_v<Mapping, PositionCoordinate>) {
-            return m_mapping.inv_jacobian_12(coord);
-        } else {
-            static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
-            double jacob = m_mapping.jacobian(coord);
-            assert(fabs(jacob) > 1e-15);
-            // J^{-1}(1,2) = -J(1,2) / det(J)
-            return -m_mapping.template jacobian_component<DimRes0, DimArg1_cov>(coord) / jacob;
-        }
-    }
-    /**
-     * @brief Compute the (2,1) coefficient of the inverse Jacobian matrix.
-     *
-     * Be careful because not all mappings are invertible, especially at the centre point.
-     *
-     * @param[in] coord
-     * 				The coordinate where we evaluate the inverse Jacobian matrix.
-     *
-     * @return A double with the value of the (2,1) coefficient of the inverse Jacobian matrix.
-     */
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_21(PositionCoordinate const& coord) const
-    {
-        if constexpr (has_2d_inv_jacobian_v<Mapping, PositionCoordinate>) {
-            return m_mapping.inv_jacobian_21(coord);
-        } else {
-            static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
-            double jacob = m_mapping.jacobian(coord);
-            assert(fabs(jacob) > 1e-15);
-            // J^{-1}(2,1) = -J(2,1) / det(J)
-            return -m_mapping.template jacobian_component<DimRes1, DimArg0_cov>(coord) / jacob;
-        }
-    }
+        static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<DimArg0, DimArg1>>);
+        static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<DimRes0_cov, DimRes1_cov>>);
 
-    /**
-     * @brief Compute the (2,2) coefficient of the inverse Jacobian matrix.
-     *
-     * Be careful because not all mappings are invertible, especially at the centre point.
-     *
-     * @param[in] coord
-     * 				The coordinate where we evaluate the inverse Jacobian matrix.
-     *
-     * @return A double with the value of the (2,2) coefficient of the inverse Jacobian matrix.
-     */
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_22(PositionCoordinate const& coord) const
-    {
         if constexpr (has_2d_inv_jacobian_v<Mapping, PositionCoordinate>) {
-            return m_mapping.inv_jacobian_22(coord);
+            return m_mapping.template inv_jacobian_component<IndexTag1, IndexTag2>(coord);
         } else {
             static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
             double jacob = m_mapping.jacobian(coord);
             assert(fabs(jacob) > 1e-15);
-            // J^{-1}(2,2) = J(1,1) / det(J)
-            return m_mapping.template jacobian_component<DimRes0, DimArg0_cov>(coord) / jacob;
+            if constexpr (
+                    std::is_same_v<IndexTag1, DimArg0> && std::is_same_v<IndexTag2, DimRes0_cov>) {
+                //Compute the (1,1) coefficient of the inverse Jacobian matrix.
+                // J^{-1}(1,1) = J(2,2) / det(J)
+                return m_mapping.template jacobian_component<DimRes1, DimArg1_cov>(coord) / jacob;
+            } else if constexpr (
+                    std::is_same_v<IndexTag1, DimArg0> && std::is_same_v<IndexTag2, DimRes1_cov>) {
+                //Compute the (1,2) coefficient of the inverse Jacobian matrix.
+                // J^{-1}(1,2) = -J(1,2) / det(J)
+                return -m_mapping.template jacobian_component<DimRes0, DimArg1_cov>(coord) / jacob;
+            } else if constexpr (
+                    std::is_same_v<IndexTag1, DimArg1> && std::is_same_v<IndexTag2, DimRes0_cov>) {
+                //Compute the (2,1) coefficient of the inverse Jacobian matrix.
+                // J^{-1}(2,1) = -J(2,1) / det(J)
+                return -m_mapping.template jacobian_component<DimRes1, DimArg0_cov>(coord) / jacob;
+            } else {
+                //Compute the (2,1) coefficient of the inverse Jacobian matrix.
+                // J^{-1}(2,2) = J(1,1) / det(J)
+                return m_mapping.template jacobian_component<DimRes0, DimArg0_cov>(coord) / jacob;
+            }
         }
     }
 };

@@ -162,11 +162,6 @@ public:
     template <class IndexTag1, class IndexTag2>
     KOKKOS_INLINE_FUNCTION double jacobian_component(CoordJacobian const& coord_rtheta) const
     {
-        static_assert(
-                std::is_same_v<IndexTag1, DimResult1> && std::is_same_v<IndexTag1, DimResult2>);
-        static_assert((std::is_same_v<IndexTag2, typename DimArg1::Dual>)&&(
-                std::is_same_v<IndexTag2, typename DimArg2::Dual>));
-        //VG// TODO replace by static_assert(ddc::in_tags_v<IndexTag1, ResultTags>);
         JacobianMatrixType J = jacobian_matrix(coord_rtheta);
         return ddcHelper::get<IndexTag1, IndexTag2>(J);
     }
@@ -221,52 +216,18 @@ public:
     }
 
     /**
-     * @brief Compute the (1,1) coefficient of the Jacobian matrix.
+     * @brief Compute the (i,j) coefficient of the inverse Jacobian matrix.
      * @see inv_jacobian_matrix
      * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
-     * @return The (1,1) coefficient of the Jacobian matrix.
+     * @return The (i,j) coefficient of the Jacobian matrix.
      */
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_11(CoordJacobian const& coord_rtheta) const
+    template <class IndexTag1, class IndexTag2>
+    KOKKOS_INLINE_FUNCTION double inv_jacobian_component(CoordJacobian const& coord_rtheta) const
     {
         InvJacobianMatrixType J = inv_jacobian_matrix(coord_rtheta);
-        return ddcHelper::get<DimArg1, typename DimResult1::Dual>(J);
+        return ddcHelper::get<IndexTag1, IndexTag2>(J);
     }
 
-    /**
-     * @brief Compute the (1,2) coefficient of the Jacobian matrix.
-     * @see inv_jacobian_matrix
-     * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
-     * @return The (1,2) coefficient of the Jacobian matrix.
-     */
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_12(CoordJacobian const& coord_rtheta) const
-    {
-        InvJacobianMatrixType J = inv_jacobian_matrix(coord_rtheta);
-        return ddcHelper::get<DimArg1, typename DimResult2::Dual>(J);
-    }
-
-    /**
-     * @brief Compute the (2,1) coefficient of the Jacobian matrix.
-     * @see inv_jacobian_matrix
-     * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
-     * @return The (2,1) coefficient of the Jacobian matrix.
-     */
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_21(CoordJacobian const& coord_rtheta) const
-    {
-        InvJacobianMatrixType J = inv_jacobian_matrix(coord_rtheta);
-        return ddcHelper::get<DimArg2, typename DimResult1::Dual>(J);
-    }
-
-    /**
-     * @brief Compute the (2,2) coefficient of the Jacobian matrix.
-     * @see inv_jacobian_matrix
-     * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
-     * @return The (2,2) coefficient of the Jacobian matrix.
-     */
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_22(CoordJacobian const& coord_rtheta) const
-    {
-        InvJacobianMatrixType J = inv_jacobian_matrix(coord_rtheta);
-        return ddcHelper::get<DimArg2, typename DimResult2::Dual>(J);
-    }
 
     /**
      * @brief Compute the determinant of the Jacobian matrix.
