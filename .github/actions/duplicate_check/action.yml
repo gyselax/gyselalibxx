@@ -16,6 +16,8 @@ runs:
       run: |
         gh pr diff ${{ github.event.pull_request.number }} --name-only > changed_files.txt
       shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
     - id: merge_group_check
       if: github.event_name == 'merge_group'
       run: |
