@@ -5,6 +5,7 @@ repo_url: https://github.com/gyselax/gyselalibxx/  # Repository URL for linking 
 # Documentation Source
 docs_dir: 'mkdoc/'          # Directory where MkDocs looks for documentation files
 use_directory_urls: false   # Keeps file extensions in URLs (e.g., docs/index.html instead of docs/)
+edit_uri: edit/main/
 
 # Navigation Structure
 nav:
@@ -102,4 +103,4 @@ markdown_extensions:
 extra_javascript:
   - docs/jscript/mathjax.js                               # Custom script for MathJax integration
   - https://polyfill.io/v3/polyfill.min.js?features=es6   # Ensures compatibility with older browsers
-  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js      # Loads MathJax for rendering mathematical equations
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js     # Loads MathJax for rendering mathematical equations
