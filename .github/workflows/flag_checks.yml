@@ -9,7 +9,7 @@ jobs:
   Check_flags:
     name: Check flags
     runs-on: ubuntu-latest
-    if: github.action.label.name == 'Ready to review' && github.action.pull_request.draft
+    if: github.event.label.name == 'Ready to review' && github.event.pull_request.draft
     steps:
       - uses: actions/checkout@v4
         with:
