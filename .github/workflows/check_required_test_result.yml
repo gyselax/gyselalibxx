@@ -16,7 +16,7 @@ jobs:
     name: Set PR labels
     if: |
       github.repository == 'gyselax/gyselalibxx' && github.event.check_run.pull_requests &&
-      github.event.check_run.conclusion == 'failure' && github.event.check_run.name == "GPU Tests"
+      github.event.check_run.conclusion == 'failure' && github.event.check_run.name == 'GPU Tests'
 
     steps:
       - uses: actions/checkout@v4
