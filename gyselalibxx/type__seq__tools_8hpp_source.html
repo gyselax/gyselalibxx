@@ -626,6 +626,76 @@ struct GetUnique&lt;ddc::detail::TypeSeq&lt;&gt;, ResultTypeSeq&gt;
     using type = ResultTypeSeq;
 };
 
+template &lt;class TypeSeqType, class OrderedTypeSeqType&gt;
+struct GetPermutationParity;
+
+template &lt;class HeadType, class... TailTypeSeq, class... TailOrderedTypeSeq&gt;
+struct GetPermutationParity&lt;
+        ddc::detail::TypeSeq&lt;HeadType, TailTypeSeq...&gt;,
+        ddc::detail::TypeSeq&lt;HeadType, TailOrderedTypeSeq...&gt;&gt;
+{
+    static_assert(
+            std::is_same_v&lt;
+                    ddc::detail::TypeSeq&lt;HeadType, TailOrderedTypeSeq...&gt;,
+                    typename detail::GetUnique&lt;
+                            ddc::detail::TypeSeq&lt;HeadType, TailOrderedTypeSeq...&gt;&gt;::type&gt;,
+            "Cannot calculate the permutation parity of a type seq with duplicate elements.");
+    static_assert(
+            std::is_same_v&lt;
+                    ddc::detail::TypeSeq&lt;HeadType, TailTypeSeq...&gt;,
+                    typename detail::GetUnique&lt;
+                            ddc::detail::TypeSeq&lt;HeadType, TailTypeSeq...&gt;&gt;::type&gt;,
+            "Cannot calculate the permutation parity of a type seq with duplicate elements.");
+    static constexpr int value = GetPermutationParity&lt;
+            ddc::detail::TypeSeq&lt;TailTypeSeq...&gt;,
+            ddc::detail::TypeSeq&lt;TailOrderedTypeSeq...&gt;&gt;::value;
+};
+
+template &lt;class HeadType, class... TailTypeSeq, class OrderedHeadType, class... TailOrderedTypeSeq&gt;
+struct GetPermutationParity&lt;
+        ddc::detail::TypeSeq&lt;HeadType, TailTypeSeq...&gt;,
+        ddc::detail::TypeSeq&lt;OrderedHeadType, TailOrderedTypeSeq...&gt;&gt;
+{
+    static_assert(
+            std::is_same_v&lt;
+                    ddc::detail::TypeSeq&lt;OrderedHeadType, TailOrderedTypeSeq...&gt;,
+                    typename detail::GetUnique&lt;
+                            ddc::detail::TypeSeq&lt;OrderedHeadType, TailOrderedTypeSeq...&gt;&gt;::type&gt;,
+            "Cannot calculate the permutation parity of a type seq with duplicate elements.");
+    static_assert(
+            std::is_same_v&lt;
+                    ddc::detail::TypeSeq&lt;HeadType, TailTypeSeq...&gt;,
+                    typename detail::GetUnique&lt;
+                            ddc::detail::TypeSeq&lt;HeadType, TailTypeSeq...&gt;&gt;::type&gt;,
+            "Cannot calculate the permutation parity of a type seq with duplicate elements.");
+    static constexpr int value = -GetPermutationParity&lt;
+            ddc::type_seq_replace_t&lt;
+                    ddc::detail::TypeSeq&lt;TailTypeSeq...&gt;,
+                    ddc::detail::TypeSeq&lt;OrderedHeadType&gt;,
+                    ddc::detail::TypeSeq&lt;HeadType&gt;&gt;,
+            ddc::detail::TypeSeq&lt;TailOrderedTypeSeq...&gt;&gt;::value;
+};
+
+template &lt;&gt;
+struct GetPermutationParity&lt;ddc::detail::TypeSeq&lt;&gt;, ddc::detail::TypeSeq&lt;&gt;&gt;
+{
+    static constexpr int value = 1;
+};
+
+template &lt;class Element, class IndexSequence&gt;
+struct TypeSeqDuplicate;
+
+template &lt;class Element, std::size_t... Is&gt;
+struct TypeSeqDuplicate&lt;Element, std::index_sequence&lt;Is...&gt;&gt;
+{
+private:
+    template &lt;size_t&gt;
+    using get_element = Element;
+
+public:
+    using type = ddc::detail::TypeSeq&lt;get_element&lt;Is&gt;...&gt;;
+};
+
 } // namespace detail
 
 template &lt;class TypeSeqIn, std::size_t Start, std::size_t End&gt;
@@ -643,6 +713,14 @@ using type_seq_unique_t = typename detail::GetUnique&lt;StartTypeSeq&gt;::type;
 template &lt;class TypeSeqType&gt;
 constexpr bool type_seq_has_unique_elements_v
         = std::is_same_v&lt;TypeSeqType, type_seq_unique_t&lt;TypeSeqType&gt;&gt;;
+
+template &lt;class TypeSeqType, class OrderedTypeSeq&gt;
+constexpr int type_seq_permutation_parity_v
+        = detail::GetPermutationParity&lt;TypeSeqType, OrderedTypeSeq&gt;::value;
+
+template &lt;class Element, std::size_t n_elements&gt;
+using type_seq_duplicate_t =
+        typename detail::TypeSeqDuplicate&lt;Element, std::make_index_sequence&lt;n_elements&gt;&gt;::type;
 </code></pre></div>
               
             </div>

@@ -566,6 +566,8 @@ class TensorIndexElement&lt;ddc::detail::TypeSeq&lt;ValidatingVectorIndexSets...
 {
     using ValidatingTensorIndexSet = ddc::detail::TypeSeq&lt;ValidatingVectorIndexSets...&gt;;
     static_assert((is_vector_index_set_v&lt;ValidatingVectorIndexSets&gt; &amp;&amp; ...));
+
+public:
     using IdxTypeSeq = ddc::detail::TypeSeq&lt;Dims...&gt;;
 
 public:

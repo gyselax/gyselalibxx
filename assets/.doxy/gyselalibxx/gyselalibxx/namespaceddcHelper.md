@@ -78,6 +78,7 @@
 |  void | [**deepcopy**](#function-deepcopy) ([**MultipatchField**](classMultipatchField.md)&lt; T1, Patches... &gt; dst, [**MultipatchField**](classMultipatchField.md)&lt; T2, Patches... &gt; src) <br>_Copy the data from one_ [_**MultipatchField**_](classMultipatchField.md) _into another._ |
 |  void | [**dump\_coordinates**](#function-dump_coordinates) (ExecSpace exec\_space, DField&lt; IdxRange&lt; Grid1D &gt;, Layout, MemorySpace &gt; dump\_coord) <br>_Dump the coordinates of a field into the field._  |
 |  void | [**dump\_coordinates**](#function-dump_coordinates) (ExecSpace exec\_space, Field&lt; Coord&lt; typename Grid1D::continuous\_dimension\_type &gt;, IdxRange&lt; Grid1D &gt;, Layout, MemorySpace &gt; dump\_coord) <br>_Dump the coordinates of a field into the field._  |
+|  KOKKOS\_INLINE\_FUNCTION constexpr double | [**get**](#function-get) ([**LeviCivitaTensor**](classLeviCivitaTensor.md)&lt; ElementType, ValidIndexSet &gt; const & tensor) <br>_A helper function to get a modifiable reference to an element of the tensor._  |
 |  KOKKOS\_INLINE\_FUNCTION ElementType & | [**get**](#function-get) ([**Tensor**](classTensor.md)&lt; ElementType, ValidIndexSet... &gt; & tensor) <br>_A helper function to get a modifiable reference to an element of the tensor._  |
 |  KOKKOS\_INLINE\_FUNCTION ElementType const & | [**get**](#function-get) ([**Tensor**](classTensor.md)&lt; ElementType, ValidIndexSet... &gt; const & tensor) <br>_A helper function to get an element of the tensor._  |
 |  constexpr auto | [**get**](#function-get) (VectorFieldType const & field) noexcept<br> |
@@ -432,6 +433,48 @@ inline void ddcHelper::dump_coordinates (
 
 * `exec_space` The execution space on which the code will run. 
 * `dump_coord` The field which will contain the coordinates. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function get 
+
+_A helper function to get a modifiable reference to an element of the tensor._ 
+```C++
+template<class... QueryIndexTag, class ElementType, class ValidIndexSet>
+KOKKOS_INLINE_FUNCTION constexpr double ddcHelper::get (
+    LeviCivitaTensor < ElementType, ValidIndexSet > const & tensor
+) 
+```
+
+
+
+
+
+**Template parameters:**
+
+
+* `QueryIndexTag` A type describing the relevant index. 
+
+
+
+**Parameters:**
+
+
+* `tensor` The tensor whose elements are examined. 
+
+
+
+**Returns:**
+
+The relevant element of the tensor. 
+
 
 
 

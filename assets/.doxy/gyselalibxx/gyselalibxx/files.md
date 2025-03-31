@@ -25,6 +25,7 @@ Here is a list of all files with brief descriptions:
         * **file** [**derivative\_field\_mem.hpp**](derivative__field__mem_8hpp.md)     
         * **file** [**idx\_range\_slice.hpp**](idx__range__slice_8hpp.md)     
         * **file** [**indexed\_tensor.hpp**](indexed__tensor_8hpp.md)     
+        * **file** [**static\_tensors.hpp**](static__tensors_8hpp.md)     
         * **file** [**tensor.hpp**](tensor_8hpp.md)     
         * **file** [**tensor\_index\_tools.hpp**](tensor__index__tools_8hpp.md)     
         * **file** [**vector\_field.hpp**](vector__field_8hpp.md)     

@@ -1501,6 +1501,15 @@
     <member refid="classLagrangeInterpolator_1a9a6515bea1958ced63980a0ecee4c707" kind="function"><name>batched_derivs_idx_range_xmax</name></member>
     <member refid="classLagrangeInterpolator_1a27441b99d16e977bf606a01442e8a957" kind="function"><name>operator()</name></member>
   </compound>
+  <compound refid="classLeviCivitaTensor" kind="class"><name>LeviCivitaTensor</name>
+    <member refid="classLeviCivitaTensor_1a75ae281b08da04242aa4b8fe07a61c67" kind="typedef"><name>element_type</name></member>
+    <member refid="classLeviCivitaTensor_1ae7830c67e0842b80b8b9566fe83fc7b0" kind="typedef"><name>index_set</name></member>
+    <member refid="classLeviCivitaTensor_1a0e1c1e6577d4c49cceaf6f338361084f" kind="typedef"><name>vector_index_set_t</name></member>
+    <member refid="classLeviCivitaTensor_1a861d4050938002b7643f5d106da33054" kind="function"><name>rank</name></member>
+    <member refid="classLeviCivitaTensor_1a9d2c687cdde551ff289df0020e0d5dc7" kind="function"><name>size</name></member>
+    <member refid="classLeviCivitaTensor_1a9f9c8c9bbbbe3356be9837195a510b43" kind="function"><name>get</name></member>
+    <member refid="classLeviCivitaTensor_1afdc799fa85d9418c2b5490feb24f948e" kind="function"><name>LeviCivitaTensor</name></member>
+  </compound>
   <compound refid="classMatchingIdxSlice" kind="class"><name>MatchingIdxSlice</name>
     <member refid="classMatchingIdxSlice_1a6ae1a3ffc067ecc5a7a59a30ff2e2395" kind="typedef"><name>Patch1</name></member>
     <member refid="classMatchingIdxSlice_1ae2bb7212ead00ac2c6daa9d617bc2784" kind="typedef"><name>Patch2</name></member>
@@ -2743,15 +2752,15 @@
     <member refid="structY__pC_1a6274201b751e93509509253746e598c1" kind="variable"><name>IS_COVARIANT</name></member>
     <member refid="structY__pC_1a840b5d333654df4c5be30422ce8eeb28" kind="variable"><name>IS_CONTRAVARIANT</name></member>
   </compound>
-  <compound refid="namespace_0d202" kind="namespace"><name>@202</name>
+  <compound refid="namespace_0d203" kind="namespace"><name>@203</name>
   </compound>
-  <compound refid="namespace_0d204" kind="namespace"><name>@204</name>
+  <compound refid="namespace_0d205" kind="namespace"><name>@205</name>
   </compound>
-  <compound refid="namespace_0d206" kind="namespace"><name>@206</name>
+  <compound refid="namespace_0d207" kind="namespace"><name>@207</name>
   </compound>
-  <compound refid="namespace_0d208" kind="namespace"><name>@208</name>
+  <compound refid="namespace_0d209" kind="namespace"><name>@209</name>
   </compound>
-  <compound refid="namespace_0d73" kind="namespace"><name>@73</name>
+  <compound refid="namespace_0d74" kind="namespace"><name>@74</name>
   </compound>
   <compound refid="namespaceconnectivity__details" kind="namespace"><name>connectivity_details</name>
     <member refid="connectivity__details_8hpp_1a466fdaea6f003eafe6cf608ff6593e35" kind="enum"><name>InsertPosition</name></member>
@@ -2767,6 +2776,7 @@
     <member refid="non__uniform__interpolation__points_8hpp_1a6ba00773b16df1063519790796f9c1dd" kind="variable"><name>is_non_uniform_interpolation_points_v</name></member>
     <member refid="derivative__field_8hpp_1a9a2d3927b6e69a7dee15d2d617bf6655" kind="function"><name>deepcopy</name></member>
     <member refid="derivative__field_8hpp_1ada5630e0ff2c91e9524e0c32aaa8ad77" kind="function"><name>deepcopy</name></member>
+    <member refid="static__tensors_8hpp_1a1991befd522c601fffc2248514baa52d" kind="function"><name>get</name></member>
     <member refid="tensor_8hpp_1ad3ef4581d179399169e4128657f9bf76" kind="function"><name>get</name></member>
     <member refid="tensor_8hpp_1adcacf7bf8173bf14f4591918285aa2f0" kind="function"><name>get</name></member>
     <member refid="tensor_8hpp_1af2697d1baeaea2e5fe1bcc8311767029" kind="function"><name>to_coord</name></member>
@@ -2882,6 +2892,8 @@
   <compound refid="indexed__tensor_8hpp" kind="file"><name>indexed_tensor.hpp</name>
     <member refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kind="function"><name>index</name></member>
     <member refid="indexed__tensor_8hpp_1ad8dde2095d734c21601a6cf275da4223" kind="function"><name>tensor_mul</name></member>
+  </compound>
+  <compound refid="static__tensors_8hpp" kind="file"><name>static_tensors.hpp</name>
   </compound>
   <compound refid="tensor_8hpp" kind="file"><name>tensor.hpp</name>
     <member refid="tensor_8hpp_1ad9626f79cdcf0201187830beaeb777c2" kind="typedef"><name>to_tensor_t</name></member>
@@ -3984,7 +3996,9 @@
     <member refid="type__seq__tools_8hpp_1aa14f1774e052704c69d90ca494bdb8f6" kind="typedef"><name>type_seq_cat_t</name></member>
     <member refid="type__seq__tools_8hpp_1ac95562d656c2ae2f82f9bc55881627f6" kind="typedef"><name>find_grid_t</name></member>
     <member refid="type__seq__tools_8hpp_1a77a5e0ba78f573fcf19e118cc8d08b61" kind="typedef"><name>type_seq_unique_t</name></member>
+    <member refid="type__seq__tools_8hpp_1a8d61e6a1acbf461eacb2729f96286f58" kind="typedef"><name>type_seq_duplicate_t</name></member>
     <member refid="type__seq__tools_8hpp_1a4d7dffaef6d65b35876eff7fe8ce3730" kind="variable"><name>type_seq_has_unique_elements_v</name></member>
+    <member refid="type__seq__tools_8hpp_1ae2b505ec732fa7a34361c329e7d1e66b" kind="variable"><name>type_seq_permutation_parity_v</name></member>
   </compound>
   <compound refid="view_8hpp" kind="file"><name>view.hpp</name>
     <member refid="view_8hpp_1a18a55b6c654d80286af78ef3cdea4197" kind="typedef"><name>SpanND</name></member>

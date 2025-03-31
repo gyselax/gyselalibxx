@@ -163,7 +163,7 @@
 * **evaluator\_type** ([**BslAdvectionRTheta**](classBslAdvectionRTheta.md), [**PoissonLikeRHSFunction**](classPoissonLikeRHSFunction.md))
 * **EulerMethod** ([**BslExplicitPredCorrRTheta**](classBslExplicitPredCorrRTheta.md), [**BslImplicitPredCorrRTheta**](classBslImplicitPredCorrRTheta.md))
 * **EulerMethod\_host** ([**BslExplicitPredCorrRTheta**](classBslExplicitPredCorrRTheta.md), [**BslImplicitPredCorrRTheta**](classBslImplicitPredCorrRTheta.md))
-* **element\_type** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md), [**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md), [**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md), [**MultipatchField**](classMultipatchField.md), [**MultipatchFieldMem**](classMultipatchFieldMem.md), [**Tensor**](classTensor.md), [**VectorField**](classVectorField.md))
+* **element\_type** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md), [**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md), [**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**MultipatchField**](classMultipatchField.md), [**MultipatchFieldMem**](classMultipatchFieldMem.md), [**Tensor**](classTensor.md), [**VectorField**](classVectorField.md))
 * **extents\_type** ([**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md))
 * **ExecSpace** ([**DiscreteToCartesianBuilder**](classDiscreteToCartesianBuilder.md), [**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **EdgeDim1** ([**EdgeTransformation**](classEdgeTransformation.md))
@@ -305,6 +305,7 @@
 * **IdxRangeInterp** ([**Lagrange**](classLagrange.md))
 * **IdxStepInterp** ([**Lagrange**](classLagrange.md))
 * **InterpDim** ([**LagrangeInterpolator**](classLagrangeInterpolator.md))
+* **index\_set** ([**LeviCivitaTensor**](classLeviCivitaTensor.md), [**Tensor**](classTensor.md))
 * **idx\_range\_type** ([**MPILayout**](classMPILayout.md))
 * **IdxRange1D\_1** ([**MatchingIdxSlice**](classMatchingIdxSlice.md))
 * **IdxRange1D\_2** ([**MatchingIdxSlice**](classMatchingIdxSlice.md))
@@ -353,7 +354,6 @@
 * **IdxRangeBS** ([**Spline1DPartialDerivative**](classSpline1DPartialDerivative.md), [**Spline2DPartialDerivative**](classSpline2DPartialDerivative.md))
 * **IdxRangeBSField** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
 * **IdxRangeField** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
-* **index\_set** ([**Tensor**](classTensor.md))
 * **IdxBreakPoints** ([**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md))
 * **interpolation\_discrete\_dimension\_type** ([**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md))
 * **index\_pattern** ([**tensor\_tools::IndexedTensor**](classtensor__tools_1_1IndexedTensor.md))
@@ -519,8 +519,8 @@
 * **value\_type** ([**IdxRangeSliceIterator**](structIdxRangeSliceIterator.md))
 * **ValidArgIndices** ([**InverseJacobianMatrix**](classInverseJacobianMatrix.md))
 * **ValidResultIndices** ([**InverseJacobianMatrix**](classInverseJacobianMatrix.md))
+* **vector\_index\_set\_t** ([**LeviCivitaTensor**](classLeviCivitaTensor.md), [**Tensor**](classTensor.md))
 * **VectorSplineCoeffsMem2D** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
-* **vector\_index\_set\_t** ([**Tensor**](classTensor.md))
 
 
 ## x

@@ -104,6 +104,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**InverseJacobianMatrix**](classInverseJacobianMatrix.md) 
 * **class** [**KelvinHelmholtzInstabilityInitialisation**](classKelvinHelmholtzInstabilityInitialisation.md) _Initialise the allfdistribu function._ 
 * **class** [**Lagrange**](classLagrange.md) _A class which implements_ [_**Lagrange**_](classLagrange.md) _polynomials._
+* **class** [**LeviCivitaTensor**](classLeviCivitaTensor.md) 
 * **class** [**MatchingIdxSlice**](classMatchingIdxSlice.md) _Store the conforming indexes of each patch of a given interface._ 
 * **class** [**Matrix**](classMatrix.md) _The super class from which matrix classes should inherit. This class is used to solve matrix equations._     
     * **class** [**Matrix\_Banded**](classMatrix__Banded.md) _A matrix class representing a banded matrix._ 

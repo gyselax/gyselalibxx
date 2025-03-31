@@ -539,7 +539,9 @@
 * **to\_tensor\_t** ([**tensor.hpp**](tensor_8hpp.md))
 * **to\_tuple\_t** ([**connectivity\_details.hpp**](connectivity__details_8hpp.md))
 * **type\_seq\_cat\_t** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))
+* **type\_seq\_duplicate\_t** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))
 * **type\_seq\_has\_unique\_elements\_v** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))
+* **type\_seq\_permutation\_parity\_v** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))
 * **type\_seq\_range\_t** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))
 * **type\_seq\_unique\_t** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))
 

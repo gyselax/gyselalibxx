@@ -150,7 +150,7 @@
 * **get\_gridvx\_ghosted** ([**CollisionsIntra**](classCollisionsIntra.md))
 * **get\_gridvx\_ghosted\_staggered** ([**CollisionsIntra**](classCollisionsIntra.md))
 * **get\_mesh\_ghosted** ([**CollisionsIntra**](classCollisionsIntra.md))
-* **get** ([**CombinedMapping**](classCombinedMapping.md), [**MatchingIdxSlice**](classMatchingIdxSlice.md), [**MultipatchField**](classMultipatchField.md), [**MultipatchFieldMem**](classMultipatchFieldMem.md), [**MultipatchType**](classMultipatchType.md), [**Tensor**](classTensor.md), [**VectorField**](classVectorField.md), [**VectorFieldMem**](classVectorFieldMem.md))
+* **get** ([**CombinedMapping**](classCombinedMapping.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**MatchingIdxSlice**](classMatchingIdxSlice.md), [**MultipatchField**](classMultipatchField.md), [**MultipatchFieldMem**](classMultipatchFieldMem.md), [**MultipatchType**](classMultipatchType.md), [**Tensor**](classTensor.md), [**VectorField**](classVectorField.md), [**VectorFieldMem**](classVectorFieldMem.md))
 * **get\_chunk\_subidx\_range\_1d\_idx** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md))
 * **get\_chunk\_subidx\_range\_idx** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md))
 * **get\_kokkos\_view\_from\_internal\_chunk** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md))
@@ -261,6 +261,7 @@
 
 * **Lagrange** ([**Lagrange**](classLagrange.md))
 * **LagrangeInterpolator** ([**LagrangeInterpolator**](classLagrangeInterpolator.md))
+* **LeviCivitaTensor** ([**LeviCivitaTensor**](classLeviCivitaTensor.md))
 
 
 ## m
@@ -355,6 +356,7 @@
 
 ## r
 
+* **rank** ([**LeviCivitaTensor**](classLeviCivitaTensor.md), [**Tensor**](classTensor.md), [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md))
 * **recursive\_dispatch\_patch\_function** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **replace\_periodic\_coord\_inside** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **RK2** ([**RK2**](classRK2.md))
@@ -362,7 +364,6 @@
 * **RK4** ([**RK4**](classRK4.md))
 * **RefinedDiscreteToCartesianBuilder** ([**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md))
 * **RestartInitialisation** ([**RestartInitialisation**](classRestartInitialisation.md))
-* **rank** ([**Tensor**](classTensor.md), [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md))
 
 
 ## s
@@ -373,7 +374,7 @@
 * **search\_for\_match** ([**EdgeTransformation**](classEdgeTransformation.md))
 * **solve\_matrix\_system** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **solve\_poisson\_equation** ([**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md))
-* **size** ([**IdxRangeSlice**](classIdxRangeSlice.md), [**MatrixBatch**](classMatrixBatch.md), [**MultipatchType**](classMultipatchType.md), [**Tensor**](classTensor.md))
+* **size** ([**IdxRangeSlice**](classIdxRangeSlice.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**MatrixBatch**](classMatrixBatch.md), [**MultipatchType**](classMultipatchType.md), [**Tensor**](classTensor.md))
 * **stride** ([**IdxRangeSlice**](classIdxRangeSlice.md))
 * **strides** ([**IdxRangeSlice**](classIdxRangeSlice.md))
 * **set\_element** ([**Matrix**](classMatrix.md), [**Matrix\_Banded**](classMatrix__Banded.md), [**Matrix\_Centre\_Block**](classMatrix__Centre__Block.md), [**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md), [**Matrix\_Dense**](classMatrix__Dense.md), [**Matrix\_PDS\_Tridiag**](classMatrix__PDS__Tridiag.md), [**Matrix\_Periodic\_Banded**](classMatrix__Periodic__Banded.md))

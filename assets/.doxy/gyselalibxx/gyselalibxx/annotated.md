@@ -120,6 +120,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**KrookSourceConstant**](classKrookSourceConstant.md) _A class that describes a source of particles._     
 * **class** [**Lagrange**](classLagrange.md) _A class which implements_ [_**Lagrange**_](classLagrange.md) _polynomials._    
 * **class** [**LagrangeInterpolator**](classLagrangeInterpolator.md) _A class for interpolating a function using_ [_**Lagrange**_](classLagrange.md) _polynomials. It is designed to work with both uniform and non-uniform mesh, and have the advantage to be local._    
+* **class** [**LeviCivitaTensor**](classLeviCivitaTensor.md)     
 * **struct** [**MPIDim**](structMPIDim.md) _An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered information will be sent to or where the gathered information will be collected from._     
 * **class** [**MPILayout**](classMPILayout.md) _A class describing a way in which data may be laid out across MPI processes._     
 * **class** [**MPITransposeAllToAll**](classMPITransposeAllToAll.md) _A class describing an operator for converting from/to different MPI layouts using AlltoAll._     
@@ -254,11 +255,11 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**X\_pC**](structX__pC.md) _Tag the first non periodic dimension in the pseudo\_Cartesian index range._     
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._    
 * **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo\_Cartesian index range._     
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d73.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d202.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d204.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d206.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d208.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d74.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d203.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d205.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d207.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d209.md) 
 * **namespace** [**connectivity\_details**](namespaceconnectivity__details.md)     
     * **struct** [**AddToTypeSeq**](structconnectivity__details_1_1AddToTypeSeq.md) _A class which helps insert an element into a type sequence._ 
     * **struct** [**AddToTypeSeq&lt; ToInsert, TypeSeq, BackInsert &gt;**](structconnectivity__details_1_1AddToTypeSeq_3_01ToInsert_00_01TypeSeq_00_01BackInsert_01_4.md) _Specialisation of_ [_**AddToTypeSeq**_](structconnectivity__details_1_1AddToTypeSeq.md) _to add an element at the back of the type sequence._    

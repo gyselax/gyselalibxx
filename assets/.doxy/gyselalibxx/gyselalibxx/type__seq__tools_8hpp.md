@@ -33,6 +33,7 @@
 | ---: | :--- |
 | typedef typename detail::FindGrid&lt; Dim, TypeSeqGrid &gt;::type | [**find\_grid\_t**](#typedef-find_grid_t)  <br>_A tool to find the grid that is defined along the specified dimension (e.g. get_ [_**GridX**_](structGridX.md) _from_[_**X**_](structX.md) _)_ |
 | typedef typename detail::TypeSeqCat&lt; TypeSeqs... &gt;::type | [**type\_seq\_cat\_t**](#typedef-type_seq_cat_t)  <br>_Concatenate type sequences into a new type sequence. This is similar to type\_seq\_merge\_t but it does not remove duplicate elements._  |
+| typedef typename detail::TypeSeqDuplicate&lt; Element, std::make\_index\_sequence&lt; n\_elements &gt; &gt;::type | [**type\_seq\_duplicate\_t**](#typedef-type_seq_duplicate_t)  <br>_Create a type sequence containing the element Element, repeated n times._  |
 | typedef typename detail::TypeSeqRange&lt; TypeSeqIn, Start, End, Start &gt;::type | [**type\_seq\_range\_t**](#typedef-type_seq_range_t)  <br>_A tool to get a subset of a TypeSeq by slicing [Start:End]._  |
 | typedef typename detail::GetUnique&lt; StartTypeSeq &gt;::type | [**type\_seq\_unique\_t**](#typedef-type_seq_unique_t)  <br>_Get a TypeSeq containing all unique types from the original TypeSeq._  |
 
@@ -44,6 +45,7 @@
 | Type | Name |
 | ---: | :--- |
 |  constexpr bool | [**type\_seq\_has\_unique\_elements\_v**](#variable-type_seq_has_unique_elements_v)   = `std::is\_same\_v&lt;TypeSeqType, type\_seq\_unique\_t&lt;TypeSeqType&gt;&gt;`<br>_Determine if a type sequence only contains unique elements._  |
+|  constexpr int | [**type\_seq\_permutation\_parity\_v**](#variable-type_seq_permutation_parity_v)   = `detail::GetPermutationParity&lt;TypeSeqType, OrderedTypeSeq&gt;::value`<br>_Determine if the permutation parity of a type sequence._  |
 
 
 
@@ -132,6 +134,32 @@ using type_seq_cat_t =  typename detail::TypeSeqCat<TypeSeqs...>::type;
 
 
 
+### typedef type\_seq\_duplicate\_t 
+
+_Create a type sequence containing the element Element, repeated n times._ 
+```C++
+using type_seq_duplicate_t =  typename detail::TypeSeqDuplicate<Element, std::make_index_sequence<n_elements> >::type;
+```
+
+
+
+
+
+**Template parameters:**
+
+
+* `Element` The element to be placed in the type sequence. 
+* `n_element` The number of times the element should appear in the type sequence. 
+
+
+
+
+        
+
+<hr>
+
+
+
 ### typedef type\_seq\_range\_t 
 
 _A tool to get a subset of a TypeSeq by slicing [Start:End]._ 
@@ -188,6 +216,33 @@ constexpr bool type_seq_has_unique_elements_v;
 
 
 * `TypeSeqType` The type sequence being examined. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### variable type\_seq\_permutation\_parity\_v 
+
+_Determine if the permutation parity of a type sequence._ 
+```C++
+constexpr int type_seq_permutation_parity_v;
+```
+
+
+
+
+
+**Template parameters:**
+
+
+* `TypeSeqType` The type sequence whose permutation parity is calculated. 
+* `OrderedTypeSeq` The final order of the indices.whose permutation parity is calculated. 
+* `OrderedTypeSeq` The final order of the indices. 
 
 
 

@@ -560,6 +560,10 @@
 <td style="text-align: left;"><a href="#typedef-type_seq_cat_t"><strong>type_seq_cat_t</strong></a>  <br><em>Concatenate type sequences into a new type sequence. This is similar to type_seq_merge_t but it does not remove duplicate elements.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef typename detail::TypeSeqDuplicate&lt; Element, std::make_index_sequence&lt; n_elements &gt; &gt;::type</td>
+<td style="text-align: left;"><a href="#typedef-type_seq_duplicate_t"><strong>type_seq_duplicate_t</strong></a>  <br><em>Create a type sequence containing the element Element, repeated n times.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef typename detail::TypeSeqRange&lt; TypeSeqIn, Start, End, Start &gt;::type</td>
 <td style="text-align: left;"><a href="#typedef-type_seq_range_t"><strong>type_seq_range_t</strong></a>  <br><em>A tool to get a subset of a TypeSeq by slicing [Start:End].</em></td>
 </tr>
@@ -582,6 +586,10 @@
 <td style="text-align: right;">constexpr bool</td>
 <td style="text-align: left;"><a href="#variable-type_seq_has_unique_elements_v"><strong>type_seq_has_unique_elements_v</strong></a>   = <code>std::is\_same\_v&amp;lt;TypeSeqType, type\_seq\_unique\_t&amp;lt;TypeSeqType&amp;gt;&amp;gt;</code><br><em>Determine if a type sequence only contains unique elements.</em></td>
 </tr>
+<tr>
+<td style="text-align: right;">constexpr int</td>
+<td style="text-align: left;"><a href="#variable-type_seq_permutation_parity_v"><strong>type_seq_permutation_parity_v</strong></a>   = <code>detail::GetPermutationParity&amp;lt;TypeSeqType, OrderedTypeSeq&amp;gt;::value</code><br><em>Determine if the permutation parity of a type sequence.</em></td>
+</tr>
 </tbody>
 </table>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
@@ -598,6 +606,17 @@
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>TypeSeqs</code> The type sequences to be concatenated. </li>
+</ul>
+<hr>
+
+<h3 id="typedef-type_seq_duplicate_t">typedef type_seq_duplicate_t</h3>
+<p><em>Create a type sequence containing the element Element, repeated n times.</em> </p>
+<pre><code class="language-C++">using type_seq_duplicate_t =  typename detail::TypeSeqDuplicate&lt;Element, std::make_index_sequence&lt;n_elements&gt; &gt;::type;
+</code></pre>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>Element</code> The element to be placed in the type sequence. </li>
+<li><code>n_element</code> The number of times the element should appear in the type sequence. </li>
 </ul>
 <hr>
 
@@ -624,6 +643,18 @@
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>TypeSeqType</code> The type sequence being examined. </li>
+</ul>
+<hr>
+
+<h3 id="variable-type_seq_permutation_parity_v">variable type_seq_permutation_parity_v</h3>
+<p><em>Determine if the permutation parity of a type sequence.</em> </p>
+<pre><code class="language-C++">constexpr int type_seq_permutation_parity_v;
+</code></pre>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>TypeSeqType</code> The type sequence whose permutation parity is calculated. </li>
+<li><code>OrderedTypeSeq</code> The final order of the indices.whose permutation parity is calculated. </li>
+<li><code>OrderedTypeSeq</code> The final order of the indices. </li>
 </ul>
 <hr>
 

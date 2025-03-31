@@ -2,522 +2,527 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="type__seq__tools_8hpp" kind="file" language="C++">
     <compoundname>type_seq_tools.hpp</compoundname>
+    <includedby refid="static__tensors_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp</includedby>
     <includedby refid="tensor__index__tools_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp</includedby>
     <includedby refid="ipartial__derivative_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp</includedby>
     <includedby refid="transpose_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/transpose.hpp</includedby>
     <invincdepgraph>
-      <node id="46">
+      <node id="47">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp</label>
         <link refid="bsl__advection__1d_8hpp_source"/>
-        <childnode refid="30" relation="include">
+        <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="28">
+      <node id="29">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/ipolar_foot_finder.hpp</label>
         <link refid="ipolar__foot__finder_8hpp_source"/>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="10">
+      <node id="11">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp</label>
         <link refid="spline__polar__foot__finder_8hpp_source"/>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-      </node>
-      <node id="3">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp</label>
-        <link refid="indexed__tensor_8hpp"/>
-        <childnode refid="4" relation="include">
-        </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+      </node>
+      <node id="4">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp</label>
+        <link refid="indexed__tensor_8hpp"/>
+        <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
         </childnode>
       </node>
-      <node id="24">
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp</label>
+        <link refid="static__tensors_8hpp_source"/>
+      </node>
+      <node id="25">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp</label>
         <link refid="tensor_8hpp_source"/>
-        <childnode refid="3" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
-        </childnode>
-        <childnode refid="58" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
         <childnode refid="59" relation="include">
         </childnode>
         <childnode refid="60" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="61" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-      </node>
-      <node id="2">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp</label>
-        <link refid="tensor__index__tools_8hpp_source"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="24" relation="include">
-        </childnode>
-      </node>
-      <node id="27">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp</label>
-        <link refid="vector__field_8hpp_source"/>
-        <childnode refid="28" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
+      </node>
+      <node id="3">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp</label>
+        <link refid="tensor__index__tools_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp</label>
+        <link refid="vector__field_8hpp_source"/>
         <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
         <childnode refid="32" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp</label>
+        <link refid="vector__field__common_8hpp_source"/>
+        <childnode refid="27" relation="include">
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="53" relation="include">
-        </childnode>
-      </node>
-      <node id="25">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp</label>
-        <link refid="vector__field__common_8hpp_source"/>
-        <childnode refid="26" relation="include">
-        </childnode>
-        <childnode refid="34" relation="include">
-        </childnode>
-        <childnode refid="45" relation="include">
-        </childnode>
-        <childnode refid="47" relation="include">
+        <childnode refid="46" relation="include">
         </childnode>
         <childnode refid="48" relation="include">
         </childnode>
         <childnode refid="49" relation="include">
         </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
       </node>
-      <node id="26">
+      <node id="27">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp</label>
         <link refid="vector__field__mem_8hpp_source"/>
-        <childnode refid="27" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="29" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
-        <childnode refid="35" relation="include">
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
         </childnode>
       </node>
-      <node id="4">
+      <node id="5">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection/bsl_advection_rtheta.hpp</label>
         <link refid="bsl__advection__rtheta_8hpp_source"/>
-        <childnode refid="5" relation="include">
-        </childnode>
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp</label>
         <link refid="advection__field__rtheta_8hpp_source"/>
-        <childnode refid="5" relation="include">
-        </childnode>
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
       </node>
-      <node id="20">
+      <node id="21">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp</label>
         <link refid="geometryRTheta_2geometry_2geometry_8hpp_source"/>
       </node>
-      <node id="15">
+      <node id="16">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp</label>
         <link refid="vortex__merger__equilibrium_8hpp_source"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="17">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp</label>
         <link refid="vortex__merger__initialisation_8hpp_source"/>
       </node>
-      <node id="5">
+      <node id="6">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp</label>
         <link refid="bsl__predcorr_8hpp_source"/>
       </node>
-      <node id="6">
+      <node id="7">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_explicit.hpp</label>
         <link refid="bsl__predcorr__second__order__explicit_8hpp_source"/>
       </node>
-      <node id="7">
+      <node id="8">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp</label>
         <link refid="bsl__predcorr__second__order__implicit_8hpp_source"/>
       </node>
-      <node id="54">
+      <node id="55">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp</label>
         <link refid="geometryXVx_2poisson_2qnsolver_8hpp_source"/>
       </node>
-      <node id="29">
+      <node id="30">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp</label>
         <link refid="geometryXY_2geometry_2geometry_8hpp_source"/>
       </node>
-      <node id="30">
+      <node id="31">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp</label>
         <link refid="predcorr__RK2_8hpp_source"/>
       </node>
-      <node id="55">
+      <node id="56">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp</label>
         <link refid="geometryXYVxVy_2poisson_2qnsolver_8hpp_source"/>
       </node>
-      <node id="67">
+      <node id="68">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/mpisplitvlasovsolver.hpp</label>
         <link refid="mpisplitvlasovsolver_8hpp_source"/>
       </node>
-      <node id="18">
+      <node id="19">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</label>
         <link refid="bernstein_8hpp_source"/>
-        <childnode refid="19" relation="include">
-        </childnode>
-      </node>
-      <node id="19">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp</label>
-        <link refid="polar__bsplines_8hpp_source"/>
         <childnode refid="20" relation="include">
         </childnode>
       </node>
-      <node id="58">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp</label>
-        <link refid="cartesian__to__circular_8hpp_source"/>
-        <childnode refid="8" relation="include">
+      <node id="20">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp</label>
+        <link refid="polar__bsplines_8hpp_source"/>
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
       <node id="59">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp</label>
-        <link refid="circular__to__cartesian_8hpp_source"/>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-      </node>
-      <node id="9">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp</label>
-        <link refid="combined__mapping_8hpp_source"/>
-        <childnode refid="10" relation="include">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp</label>
+        <link refid="cartesian__to__circular_8hpp_source"/>
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
       <node id="60">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp</label>
+        <link refid="circular__to__cartesian_8hpp_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp</label>
+        <link refid="combined__mapping_8hpp_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="61">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp</label>
         <link refid="czarny__to__cartesian_8hpp_source"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-      </node>
-      <node id="22">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp</label>
-        <link refid="discrete__mapping__builder_8hpp_source"/>
-      </node>
-      <node id="21">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp</label>
-        <link refid="discrete__to__cartesian_8hpp_source"/>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-      </node>
-      <node id="8">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inv_jacobian_o_point.hpp</label>
-        <link refid="inv__jacobian__o__point_8hpp_source"/>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
       <node id="23">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp</label>
-        <link refid="inverse__jacobian__matrix_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp</label>
+        <link refid="discrete__mapping__builder_8hpp_source"/>
+      </node>
+      <node id="22">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp</label>
+        <link refid="discrete__to__cartesian_8hpp_source"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+      </node>
+      <node id="9">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inv_jacobian_o_point.hpp</label>
+        <link refid="inv__jacobian__o__point_8hpp_source"/>
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="11">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp</label>
-        <link refid="metric__tensor__evaluator_8hpp_source"/>
-        <childnode refid="4" relation="include">
+      <node id="24">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp</label>
+        <link refid="inverse__jacobian__matrix_8hpp_source"/>
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp</label>
+        <link refid="metric__tensor__evaluator_8hpp_source"/>
+        <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
-      </node>
-      <node id="31">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/vector_mapper.hpp</label>
-        <link refid="vector__mapper_8hpp_source"/>
-        <childnode refid="10" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="62">
+      <node id="32">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/vector_mapper.hpp</label>
+        <link refid="vector__mapper_8hpp_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="63">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp</label>
         <link refid="central__fdm__partial__derivatives_8hpp_source"/>
       </node>
-      <node id="13">
+      <node id="14">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp</label>
         <link refid="gradient_8hpp_source"/>
       </node>
-      <node id="61">
+      <node id="62">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp</label>
         <link refid="ipartial__derivative_8hpp_source"/>
-        <childnode refid="62" relation="include">
-        </childnode>
         <childnode refid="63" relation="include">
         </childnode>
         <childnode refid="64" relation="include">
         </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
       </node>
-      <node id="32">
+      <node id="33">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/l_norm_tools.hpp</label>
         <link refid="l__norm__tools_8hpp"/>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="30" relation="include">
-        </childnode>
-        <childnode refid="33" relation="include">
+        <childnode refid="31" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
       </node>
-      <node id="17">
+      <node id="18">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp</label>
         <link refid="math__tools_8hpp_source"/>
-        <childnode refid="18" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="23" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="63">
+      <node id="64">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp</label>
         <link refid="spline__1d__partial__derivative_8hpp_source"/>
       </node>
-      <node id="64">
+      <node id="65">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp</label>
         <link refid="spline__2d__partial__derivative_8hpp_source"/>
       </node>
-      <node id="66">
+      <node id="67">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp</label>
         <link refid="mpitransposealltoall_8hpp_source"/>
-        <childnode refid="67" relation="include">
-        </childnode>
-      </node>
-      <node id="41">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp</label>
-        <link refid="connectivity_8hpp_source"/>
-      </node>
-      <node id="36">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/onion_patch_locator.hpp</label>
-        <link refid="onion__patch__locator_8hpp_source"/>
-        <childnode refid="37" relation="include">
-        </childnode>
-        <childnode refid="38" relation="include">
-        </childnode>
-      </node>
-      <node id="37">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/utils_patch_locators.hpp</label>
-        <link refid="utils__patch__locators_8hpp_source"/>
-        <childnode refid="38" relation="include">
-        </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="68" relation="include">
         </childnode>
       </node>
       <node id="42">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp</label>
-        <link refid="multipatch__field_8hpp_source"/>
-        <childnode refid="43" relation="include">
-        </childnode>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp</label>
+        <link refid="connectivity_8hpp_source"/>
+      </node>
+      <node id="37">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/onion_patch_locator.hpp</label>
+        <link refid="onion__patch__locator_8hpp_source"/>
         <childnode refid="38" relation="include">
-        </childnode>
-        <childnode refid="33" relation="include">
-        </childnode>
-        <childnode refid="44" relation="include">
-        </childnode>
-      </node>
-      <node id="43">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp</label>
-        <link refid="multipatch__field__mem_8hpp_source"/>
-        <childnode refid="44" relation="include">
-        </childnode>
-      </node>
-      <node id="40">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_type.hpp</label>
-        <link refid="multipatch__type_8hpp_source"/>
-        <childnode refid="41" relation="include">
-        </childnode>
-        <childnode refid="36" relation="include">
-        </childnode>
-        <childnode refid="42" relation="include">
-        </childnode>
-        <childnode refid="43" relation="include">
-        </childnode>
-        <childnode refid="38" relation="include">
-        </childnode>
-        <childnode refid="50" relation="include">
-        </childnode>
-        <childnode refid="51" relation="include">
-        </childnode>
-        <childnode refid="39" relation="include">
-        </childnode>
-        <childnode refid="52" relation="include">
-        </childnode>
-      </node>
-      <node id="35">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp</label>
-        <link refid="types_8hpp_source"/>
-        <childnode refid="36" relation="include">
-        </childnode>
-        <childnode refid="40" relation="include">
         </childnode>
         <childnode refid="39" relation="include">
         </childnode>
       </node>
       <node id="38">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/utils_patch_locators.hpp</label>
+        <link refid="utils__patch__locators_8hpp_source"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp</label>
+        <link refid="multipatch__field_8hpp_source"/>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp</label>
+        <link refid="multipatch__field__mem_8hpp_source"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_type.hpp</label>
+        <link refid="multipatch__type_8hpp_source"/>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp</label>
+        <link refid="types_8hpp_source"/>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</label>
         <link refid="constant__extrapolation__rules__onion_8hpp_source"/>
       </node>
-      <node id="50">
+      <node id="51">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp</label>
         <link refid="multipatch__spline__builder_8hpp_source"/>
       </node>
-      <node id="51">
+      <node id="52">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp</label>
         <link refid="multipatch__spline__builder__2d_8hpp_source"/>
       </node>
-      <node id="39">
+      <node id="40">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp</label>
         <link refid="multipatch__spline__evaluator__2d_8hpp_source"/>
       </node>
-      <node id="52">
+      <node id="53">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/null_extrapolation_rules.hpp</label>
         <link refid="null__extrapolation__rules_8hpp_source"/>
       </node>
-      <node id="33">
+      <node id="34">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/utils/multipatch_math_tools.hpp</label>
         <link refid="multipatch__math__tools_8hpp_source"/>
-        <childnode refid="34" relation="include">
+        <childnode refid="35" relation="include">
         </childnode>
       </node>
-      <node id="56">
+      <node id="57">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp</label>
         <link refid="fem__1d__poisson__solver_8hpp_source"/>
       </node>
-      <node id="57">
+      <node id="58">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp</label>
         <link refid="fft__poisson__solver_8hpp_source"/>
       </node>
-      <node id="53">
+      <node id="54">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp</label>
         <link refid="ipoisson__solver_8hpp_source"/>
-        <childnode refid="54" relation="include">
-        </childnode>
         <childnode refid="55" relation="include">
         </childnode>
         <childnode refid="56" relation="include">
         </childnode>
         <childnode refid="57" relation="include">
         </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</label>
         <link refid="polarpoissonlikesolver_8hpp_source"/>
-        <childnode refid="12" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
       </node>
-      <node id="34">
+      <node id="35">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp</label>
         <link refid="crank__nicolson_8hpp_source"/>
       </node>
-      <node id="45">
+      <node id="46">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/euler.hpp</label>
         <link refid="euler_8hpp_source"/>
-        <childnode refid="46" relation="include">
+        <childnode refid="47" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="44">
+      <node id="45">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp</label>
         <link refid="itimestepper_8hpp_source"/>
-        <childnode refid="34" relation="include">
+        <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="45" relation="include">
-        </childnode>
-        <childnode refid="47" relation="include">
+        <childnode refid="46" relation="include">
         </childnode>
         <childnode refid="48" relation="include">
         </childnode>
         <childnode refid="49" relation="include">
         </childnode>
-      </node>
-      <node id="47">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk2.hpp</label>
-        <link refid="rk2_8hpp_source"/>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="30" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
       </node>
       <node id="48">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk2.hpp</label>
+        <link refid="rk2_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk3.hpp</label>
         <link refid="rk3_8hpp_source"/>
       </node>
-      <node id="49">
+      <node id="50">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp</label>
         <link refid="rk4_8hpp_source"/>
       </node>
-      <node id="65">
+      <node id="66">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/transpose.hpp</label>
         <link refid="transpose_8hpp_source"/>
-        <childnode refid="66" relation="include">
+        <childnode refid="67" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -525,9 +530,11 @@
         <link refid="type__seq__tools_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="61" relation="include">
+        <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="65" relation="include">
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -559,7 +566,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="89" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="89" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="159" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="159" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1aa14f1774e052704c69d90ca494bdb8f6" prot="public" static="no">
         <templateparamlist>
@@ -590,7 +597,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="97" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="97" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="167" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="167" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1ac95562d656c2ae2f82f9bc55881627f6" prot="public" static="no">
         <templateparamlist>
@@ -612,7 +619,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="101" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="101" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="171" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="171" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1a77a5e0ba78f573fcf19e118cc8d08b61" prot="public" static="no">
         <templateparamlist>
@@ -641,7 +648,49 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="108" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="108" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="178" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="178" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="type__seq__tools_8hpp_1a8d61e6a1acbf461eacb2729f96286f58" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class Element</type>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>n_elements</declname>
+            <defname>n_elements</defname>
+          </param>
+        </templateparamlist>
+        <type>typename detail::TypeSeqDuplicate&lt; Element, std::make_index_sequence&lt; n_elements &gt; &gt;::type</type>
+        <definition>using type_seq_duplicate_t =  typename detail::TypeSeqDuplicate&lt;Element, std::make_index_sequence&lt;n_elements&gt; &gt;::type</definition>
+        <argsstring></argsstring>
+        <name>type_seq_duplicate_t</name>
+        <briefdescription>
+<para>Create a type sequence containing the element Element, repeated n times. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Element</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The element to be placed in the type sequence. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n_element</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of times the element should appear in the type sequence. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="204" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="205" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -673,7 +722,56 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="115" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="116" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="185" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="type__seq__tools_8hpp_1ae2b505ec732fa7a34361c329e7d1e66b" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class TypeSeqType</type>
+          </param>
+          <param>
+            <type>class OrderedTypeSeq</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr int</type>
+        <definition>constexpr int type_seq_permutation_parity_v</definition>
+        <argsstring></argsstring>
+        <name>type_seq_permutation_parity_v</name>
+        <initializer>= detail::GetPermutationParity&lt;TypeSeqType, OrderedTypeSeq&gt;::value</initializer>
+        <briefdescription>
+<para>Determine if the permutation parity of a type sequence. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TypeSeqType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type sequence whose permutation parity is calculated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>OrderedTypeSeq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The final order of the indices.whose permutation parity is calculated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>OrderedTypeSeq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The final order of the indices. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="195" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="196" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -765,23 +863,101 @@
 <codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>ResultTypeSeq;</highlight></codeline>
 <codeline lineno="83"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"></highlight></codeline>
-<codeline lineno="85"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>detail</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="86"><highlight class="normal"></highlight></codeline>
-<codeline lineno="88"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqIn,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Start,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>End&gt;</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_range_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqRange&lt;TypeSeqIn,<sp/>Start,<sp/>End,<sp/>Start&gt;::type;</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"></highlight></codeline>
-<codeline lineno="96"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TypeSeqs&gt;</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_cat_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqCat&lt;TypeSeqs...&gt;::type;</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"></highlight></codeline>
-<codeline lineno="100"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqGr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">&gt;</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_grid_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::FindGrid&lt;Dim,<sp/>TypeSeqGrid&gt;::type;</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"></highlight></codeline>
-<codeline lineno="107"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>StartTypeSeq&gt;</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_unique_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;StartTypeSeq&gt;::type;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OrderedTypeSeqType&gt;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HeadType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailTypeSeq,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailOrderedTypeSeq&gt;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity&lt;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailOrderedTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;::type&gt;,</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Cannot<sp/>calculate<sp/>the<sp/>permutation<sp/>parity<sp/>of<sp/>a<sp/>type<sp/>seq<sp/>with<sp/>duplicate<sp/>elements.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;&gt;::type&gt;,</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Cannot<sp/>calculate<sp/>the<sp/>permutation<sp/>parity<sp/>of<sp/>a<sp/>type<sp/>seq<sp/>with<sp/>duplicate<sp/>elements.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>value<sp/>=<sp/>GetPermutationParity&lt;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailOrderedTypeSeq...&gt;&gt;::value;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="109"><highlight class="normal"></highlight></codeline>
-<codeline lineno="114"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType&gt;</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>type_seq_has_unique_elements_v</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>std::is_same_v&lt;TypeSeqType,<sp/>type_seq_unique_t&lt;TypeSeqType&gt;&gt;;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HeadType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailTypeSeq,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">OrderedHeadType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailOrderedTypeSeq&gt;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity&lt;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType,<sp/>TailOrderedTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;::type&gt;,</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Cannot<sp/>calculate<sp/>the<sp/>permutation<sp/>parity<sp/>of<sp/>a<sp/>type<sp/>seq<sp/>with<sp/>duplicate<sp/>elements.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;&gt;::type&gt;,</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Cannot<sp/>calculate<sp/>the<sp/>permutation<sp/>parity<sp/>of<sp/>a<sp/>type<sp/>seq<sp/>with<sp/>duplicate<sp/>elements.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>value<sp/>=<sp/>-GetPermutationParity&lt;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::type_seq_replace_t&lt;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType&gt;,</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType&gt;&gt;,</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailOrderedTypeSeq...&gt;&gt;::value;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;&gt;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity&lt;ddc::detail::TypeSeq&lt;&gt;,<sp/>ddc::detail::TypeSeq&lt;&gt;&gt;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>value<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Element,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IndexSequence&gt;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqDuplicate;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Element,<sp/>std::size_t...<sp/>Is&gt;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqDuplicate&lt;Element,<sp/>std::index_sequence&lt;Is...&gt;&gt;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">get_element<sp/>=<sp/>Element;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>ddc::detail::TypeSeq&lt;get_element&lt;Is&gt;...&gt;;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>detail</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqIn,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Start,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>End&gt;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_range_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqRange&lt;TypeSeqIn,<sp/>Start,<sp/>End,<sp/>Start&gt;::type;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TypeSeqs&gt;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_cat_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqCat&lt;TypeSeqs...&gt;::type;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqGr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_grid_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::FindGrid&lt;Dim,<sp/>TypeSeqGrid&gt;::type;</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>StartTypeSeq&gt;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_unique_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;StartTypeSeq&gt;::type;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType&gt;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>type_seq_has_unique_elements_v</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>std::is_same_v&lt;TypeSeqType,<sp/>type_seq_unique_t&lt;TypeSeqType&gt;&gt;;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OrderedTypeSeq&gt;</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>type_seq_permutation_parity_v</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>detail::GetPermutationParity&lt;TypeSeqType,<sp/>OrderedTypeSeq&gt;::value;</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Element,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>n_elements&gt;</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_duplicate_t<sp/>=</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqDuplicate&lt;Element,<sp/>std::make_index_sequence&lt;n_elements&gt;&gt;::type;</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp"/>
   </compounddef>

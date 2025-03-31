@@ -195,6 +195,59 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="68" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="68" bodyend="82"/>
       </memberdef>
+      <memberdef kind="function" id="static__tensors_8hpp_1a1991befd522c601fffc2248514baa52d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>QueryIndexTag</declname>
+            <defname>QueryIndexTag</defname>
+          </param>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>class ValidIndexSet</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION constexpr double</type>
+        <definition>KOKKOS_INLINE_FUNCTION constexpr double ddcHelper::get</definition>
+        <argsstring>(LeviCivitaTensor&lt; ElementType, ValidIndexSet &gt; const &amp;tensor)</argsstring>
+        <name>get</name>
+        <qualifiedname>ddcHelper::get</qualifiedname>
+        <param>
+          <type><ref refid="classLeviCivitaTensor" kindref="compound">LeviCivitaTensor</ref>&lt; ElementType, ValidIndexSet &gt; const &amp;</type>
+          <declname>tensor</declname>
+        </param>
+        <briefdescription>
+<para>A helper function to get a modifiable reference to an element of the tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>QueryIndexTag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A type describing the relevant index. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The tensor whose elements are examined. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The relevant element of the tensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="92" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="92" bodyend="98"/>
+      </memberdef>
       <memberdef kind="function" id="tensor_8hpp_1ad3ef4581d179399169e4128657f9bf76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>

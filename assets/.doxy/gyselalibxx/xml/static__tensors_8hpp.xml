@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="static__tensors_8hpp" kind="file" language="C++">
+    <compoundname>static_tensors.hpp</compoundname>
+    <includes local="no">ddc/ddc.hpp</includes>
+    <includes refid="type__seq__tools_8hpp" local="yes">type_seq_tools.hpp</includes>
+    <includes refid="vector__index__tools_8hpp" local="yes">vector_index_tools.hpp</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp</label>
+        <link refid="static__tensors_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>vector_index_tools.hpp</label>
+        <link refid="vector__index__tools_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>type_seq_tools.hpp</label>
+        <link refid="type__seq__tools_8hpp_source"/>
+      </node>
+      <node id="2">
+        <label>ddc/ddc.hpp</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classLeviCivitaTensor" prot="public">LeviCivitaTensor</innerclass>
+    <innernamespace refid="namespaceddcHelper">ddcHelper</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ddc/ddc.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;type_seq_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_index_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Val</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">IndexSet&gt;</highlight></codeline>
+<codeline lineno="16" refid="classLeviCivitaTensor" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classLeviCivitaTensor" kindref="compound">LeviCivitaTensor</ref></highlight></codeline>
+<codeline lineno="17"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(is_vector_index_set_v&lt;ValidIndexSet&gt;);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="22" refid="classLeviCivitaTensor_1a75ae281b08da04242aa4b8fe07a61c67" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classLeviCivitaTensor_1a75ae281b08da04242aa4b8fe07a61c67" kindref="member">element_type</ref><sp/>=<sp/>ElementType;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="classLeviCivitaTensor_1a861d4050938002b7643f5d106da33054" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/><ref refid="classLeviCivitaTensor_1a861d4050938002b7643f5d106da33054" kindref="member">rank</ref>()</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ddc::type_seq_size_v&lt;ValidIndexSet&gt;;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="classLeviCivitaTensor_1a9d2c687cdde551ff289df0020e0d5dc7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/><ref refid="classLeviCivitaTensor_1a9d2c687cdde551ff289df0020e0d5dc7" kindref="member">size</ref>()</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classLeviCivitaTensor_1a861d4050938002b7643f5d106da33054" kindref="member">rank</ref>()<sp/>*<sp/><ref refid="classLeviCivitaTensor_1a861d4050938002b7643f5d106da33054" kindref="member">rank</ref>();</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="classLeviCivitaTensor_1ae7830c67e0842b80b8b9566fe83fc7b0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classLeviCivitaTensor_1ae7830c67e0842b80b8b9566fe83fc7b0" kindref="member">index_set</ref><sp/>=<sp/>type_seq_duplicate_t&lt;ValidIndexSet,<sp/><ref refid="classLeviCivitaTensor_1a861d4050938002b7643f5d106da33054" kindref="member">rank</ref>()&gt;;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="classLeviCivitaTensor_1afdc799fa85d9418c2b5490feb24f948e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_DEFAULTED_FUNCTION<sp/><ref refid="classLeviCivitaTensor_1afdc799fa85d9418c2b5490feb24f948e" kindref="member">LeviCivitaTensor</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>QueryTensorIndexElement&gt;</highlight></codeline>
+<codeline lineno="61" refid="classLeviCivitaTensor_1a9f9c8c9bbbbe3356be9837195a510b43" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>KOKKOS_FUNCTION<sp/>ElementType<sp/><ref refid="classLeviCivitaTensor_1a9f9c8c9bbbbe3356be9837195a510b43" kindref="member">get</ref>()</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(tensor_tools::is_tensor_index_element_v&lt;QueryTensorIndexElement&gt;);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(type_seq_has_unique_elements_v&lt;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>QueryTensorIndexElement::IdxTypeSeq&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>type_seq_permutation_parity_v&lt;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>QueryTensorIndexElement::IdxTypeSeq,</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ValidIndexSet&gt;;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>dim&gt;</highlight></codeline>
+<codeline lineno="80" refid="classLeviCivitaTensor_1a0e1c1e6577d4c49cceaf6f338361084f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classLeviCivitaTensor_1a0e1c1e6577d4c49cceaf6f338361084f" kindref="member">vector_index_set_t</ref><sp/>=<sp/>ValidIndexSet;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ddcHelper<sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>QueryIndexTag,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ValidIndexSet&gt;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>get(</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classLeviCivitaTensor" kindref="compound">LeviCivitaTensor&lt;ElementType, ValidIndexSet&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="94"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tensor.template<sp/>get&lt;<ref refid="classtensor__tools_1_1TensorIndexElement" kindref="compound">tensor_tools::TensorIndexElement</ref>&lt;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classLeviCivitaTensor_1ae7830c67e0842b80b8b9566fe83fc7b0" kindref="member">LeviCivitaTensor&lt;ElementType, ValidIndexSet&gt;::index_set</ref>,</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>QueryIndexTag...&gt;&gt;();</highlight></codeline>
+<codeline lineno="98"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>ddcHelper</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp"/>
+  </compounddef>
+</doxygen>
