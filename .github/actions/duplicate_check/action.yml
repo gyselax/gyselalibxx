@@ -8,7 +8,7 @@ runs:
   using: "composite"
   steps:
     - run: |
-        MATCHING_PATHS='["src/**/*.hpp", "src/**/*.cpp", "tests/**/*.hpp", "tests/**/*.cpp", "simulations/**/*.hpp", "simulations/**/*.cpp", "**/CMakeLists.txt", "vendor/**", ".github/**", "toolchains/docker.gyselalibxx_env/**", "toolchains/v100.persee/**"]'
+        MATCHING_PATHS='["src/**/*.hpp", "src/**/*.cpp", "tests/**/*.hpp", "tests/**/*.cpp", "simulations/**/*.hpp", "simulations/**/*.cpp", "**/CMakeLists.txt", "vendor/**", ".github/actions/**", ".github/workflows/**", "toolchains/docker.gyselalibxx_env/**", "toolchains/v100.persee/**"]'
         echo "MATCHING_PATHS=${MATCHING_PATHS}" >> ${GITHUB_OUTPUT}
       shell: bash
     - id: pr_check
