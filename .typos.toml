@@ -42,10 +42,11 @@ extend-exclude = ["*.tex",
 
 [type.md]
 extend-glob = ["*.md"]
+extend-ignore-re = ["gyselalibxx"]
 
 [type.md.extend-words]
 Gyselalibxx = "Gyselalib++"
 
 [type.md.extend-identifiers]
 "Gyselalib[^+]" = "Gyselalib++"
-"gyselalib([^x]|\\b)" = "Gyselalib++"
+"gyselalib" = "Gyselalib++"
