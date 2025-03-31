@@ -67,3 +67,16 @@ jobs:
       - name: Run tests
         if: ${{ ! inputs.is_duplicate }}
         uses: ./.github/actions/run_tests
+
+  set_pr_status:
+    runs-on: ubuntu-latest
+    name: CPU PR result
+    needs: [cpu_tests]
+    if: always() && ${{ inputs.pr_number }} != ""
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/set_pr_status
+        with:
+          status: ${{ needs.cpu_tests.result }}
+          pr_number: ${{ inputs.pr_number }}
+          sha: ${{ github.sha }}

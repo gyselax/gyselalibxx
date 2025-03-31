@@ -200,18 +200,11 @@ public:
      *
      * For some computations, we need the complete inverse Jacobian matrix or just the
      * coefficients.
-     * The coefficients can be given independently with the functions
-     * inv_jacobian_11, inv_jacobian_12, inv_jacobian_21 and inv_jacobian_22.
+     * The coefficients can be given independently with the function inv_jacobian_component.
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
      * @return The inverse Jacobian matrix.
-     *
-     *
-     * @see Jacobian::inv_jacobian_11
-     * @see Jacobian::inv_jacobian_12
-     * @see Jacobian::inv_jacobian_21
-     * @see Jacobian::inv_jacobian_22
      */
     KOKKOS_FUNCTION DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X_cov, Y_cov>>
     inv_jacobian_matrix(Coord<R, Theta> const& coord) const
@@ -228,73 +221,44 @@ public:
         return matrix;
     }
 
-    /**
-     * @brief Compute the (1,1) coefficient of the inverse Jacobian matrix.
-     *
-     * Be careful because not all mappings are invertible, especially at the centre point.
-     *
-     * @param[in] coord
-     *              The coordinate where we evaluate the inverse Jacobian matrix.
-     *
-     * @return A double with the value of the (1,1) coefficient of the inverse Jacobian matrix.
-     */
-    KOKKOS_FUNCTION double inv_jacobian_11(Coord<R, Theta> const& coord) const
-    {
-        const double theta = ddc::get<Theta>(coord);
-        return Kokkos::cos(theta);
-    }
 
     /**
-     * @brief Compute the (1,2) coefficient of the inverse Jacobian matrix.
+     * @brief Compute the (i,j) coefficient of the inverse Jacobian matrix.
      *
      * Be careful because not all mappings are invertible, especially at the centre point.
      *
      * @param[in] coord
      *              The coordinate where we evaluate the inverse Jacobian matrix.
      *
-     * @return A double with the value of the (1,2) coefficient of the inverse Jacobian matrix.
+     * @return A double with the value of the (i,j) coefficient of the inverse Jacobian matrix.
      */
-    KOKKOS_FUNCTION double inv_jacobian_12(Coord<R, Theta> const& coord) const
+    template <class IndexTag1, class IndexTag2>
+    KOKKOS_FUNCTION double inv_jacobian_component(Coord<R, Theta> const& coord) const
     {
+        static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<R, Theta>>);
+        static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<X_cov, Y_cov>>);
+
         const double theta = ddc::get<Theta>(coord);
-        return Kokkos::sin(theta);
+
+        if constexpr (std::is_same_v<IndexTag1, R> && std::is_same_v<IndexTag2, X_cov>) {
+            //Compute the (1,1) coefficient of the inverse Jacobian matrix.
+            return Kokkos::cos(theta);
+        } else if constexpr (std::is_same_v<IndexTag1, R> && std::is_same_v<IndexTag2, Y_cov>) {
+            //Compute the (1,2) coefficient of the inverse Jacobian matrix.
+            return Kokkos::sin(theta);
+        } else {
+            const double r = ddc::get<R>(coord);
+            assert(fabs(r) >= 1e-15);
+            if constexpr (std::is_same_v<IndexTag2, X_cov>) {
+                //Compute the (2,1) coefficient of the inverse Jacobian matrix.
+                return -1 / r * Kokkos::sin(theta);
+            } else {
+                //Compute the (2,2) coefficient of the inverse Jacobian matrix.
+                return 1 / r * Kokkos::cos(theta);
+            }
+        }
     }
 
-    /**
-     * @brief Compute the (2,1) coefficient of the inverse Jacobian matrix.
-     *
-     * Be careful because not all mappings are invertible, especially at the centre point.
-     *
-     * @param[in] coord
-     *              The coordinate where we evaluate the inverse Jacobian matrix.
-     *
-     * @return A double with the value of the (2,1) coefficient of the inverse Jacobian matrix.
-     */
-    KOKKOS_FUNCTION double inv_jacobian_21(Coord<R, Theta> const& coord) const
-    {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
-        assert(fabs(r) >= 1e-15);
-        return -1 / r * Kokkos::sin(theta);
-    }
-
-    /**
-     * @brief Compute the (2,2) coefficient of the inverse Jacobian matrix.
-     *
-     * Be careful because not all mappings are invertible, especially at the centre point.
-     *
-     * @param[in] coord
-     *              The coordinate where we evaluate the inverse Jacobian matrix.
-     *
-     * @return A double with the value of the (2,2) coefficient of the inverse Jacobian matrix.
-     */
-    KOKKOS_FUNCTION double inv_jacobian_22(Coord<R, Theta> const& coord) const
-    {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
-        assert(fabs(r) >= 1e-15);
-        return 1 / r * Kokkos::cos(theta);
-    }
 
     /**
      * @brief Get the inverse mapping.

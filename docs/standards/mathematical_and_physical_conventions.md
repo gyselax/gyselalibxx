@@ -17,24 +17,24 @@ Let us consider a system of coordinates denoted by $`\{q^i\}_{ i \in [1, N]}`$, 
 q^i = q^i(x^1, \ldots , x^N) \quad \forall i \in [1, N].
 ```
 
-Note that even though an inverse of the functions $`q^i(x^1, \ldots , x^N)`$ must exist so that the coordinate transform is valid, it is not always possible to write an explicit formula for such inverse. The surface defined by $`q^i = \text{constant}`$ is called a *coordinate surface*, the intersection of these surfaces define *coordinate curves*. A *coordinate axis* is locally defined as the axis tangent to a given coordinate curve. As their name suggests, coordinate curves do not form straight lines in general. An illustration for these geometrical concepts is given in the following figure.
+Note that even though an inverse of the functions $`q^i(x^1, \ldots , x^N)`$ must exist so that the coordinate transform is valid, it is not always possible to write an explicit formula for such inverse. One *i coordinate surface* is defined as $`q^i = \text{constant}`$ . One *i coordinate curve* is defined as the intersection of a series of j coordinate surfaces $`\forall j \in [1, N]`$ with $` j\neq i`$. A *i coordinate axis* is defined as the tangent of the "i coordinate curve". As their name suggests, coordinate curves do not form straight lines in general. An illustration for these geometrical concepts is given in the following figure.
 
 ![Coordinate curves, surfaces and axes in a three-dimensional space](../images/curvilinear_coordinates_def.png "")
 
 The position of any point in space can be written as
 
 ```math
-\overrightarrow{r} = x^i \mathbf{e}_i,
+\overrightarrow{x} = x^i \mathbf{e}_i,
 ```
 
-where we introduced the unit vectors of the orthonormal Cartesian basis $`\{\mathbf{e}_i\}`$. The position vector $`\overrightarrow{r}`$ is not to be confused with the radial coordinate $`r`$. We rely on the Einstein summation in the above equation and in the following, i.e. we consider that repeated indices indicate a summation. See the [wikipedia page on Einstein summation](https://en.wikipedia.org/wiki/Einstein_notation) for more details.
+where we introduced the unit vectors of the orthonormal Cartesian basis $`\{\mathbf{e}_i\}`$. The position vector $`\overrightarrow{x}`$ is not to be confused with the radial coordinate $`r`$. We rely on the Einstein summation in the above equation and in the following, i.e. we consider that repeated indices indicate a summation. See the [wikipedia page on Einstein summation](https://en.wikipedia.org/wiki/Einstein_notation) for more details.
 
 ## Contravariant and covariant bases
 
 Let us define the *contravariant basis* $`\{\mathbf{b}_i\}`$ associated to the $`\{q^i\}`$ coordinates by
 
 ```math
-\mathbf{b}_i = \frac{\partial \overrightarrow{r}}{\partial q^i} = \frac{\partial x^j}{\partial q^i} \mathbf{e}_j,
+\mathbf{b}_i = \frac{\partial \overrightarrow{x}}{\partial q^i} = \frac{\partial x^j}{\partial q^i} \mathbf{e}_j,
 ```
 
 and its dual basis, the *covariant basis* $`\{\mathbf{b}^i\}`$ by
