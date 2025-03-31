@@ -207,7 +207,7 @@ jobs:
 
   set_pr_status:
     runs-on: ubuntu-latest
-    name: CPU PR result
+    name: Set PR to draft
     needs: [Indentation, Markdown, Python, Documentation, cppcheck_static_analysis_errors, cmake_static_analysis, spelling]
     if: failure() && ${{ inputs.pr_number }} != ""
     steps:
