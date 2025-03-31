@@ -439,3 +439,44 @@ TEST(TensorTest, LeviCivita3D)
     static_assert(ddcHelper::get<Z, Z, Z>(levi_civita) == 0);
 }
 
+TEST(TensorTest, LeviCivitaMul)
+{
+    LeviCivitaTensor<int, VectorIndexSet<X, Y>> levi_civita;
+    using Tensor2D = Tensor<int, VectorIndexSet<X, Y>, VectorIndexSet<X, Y>>;
+    Tensor2D A;
+    ddcHelper::get<X, X>(A) = 1;
+    ddcHelper::get<X, Y>(A) = 0;
+    ddcHelper::get<Y, X>(A) = 2;
+    ddcHelper::get<Y, Y>(A) = 4;
+
+    Tensor2D L = tensor_mul(index<'i', 'j'>(levi_civita), index<'j', 'k'>(A));
+    Tensor2D R = tensor_mul(index<'i', 'j'>(A), index<'j', 'k'>(levi_civita));
+    Tensor2D I = tensor_mul(index<'i', 'j'>(levi_civita), index<'j', 'k'>(levi_civita));
+
+    int val = ddcHelper::get<X, X>(L);
+    EXPECT_EQ(val, 2);
+    val = ddcHelper::get<X, Y>(L);
+    EXPECT_EQ(val, 4);
+    val = ddcHelper::get<Y, X>(L);
+    EXPECT_EQ(val, -1);
+    val = ddcHelper::get<Y, Y>(L);
+    EXPECT_EQ(val, 0);
+
+    val = ddcHelper::get<X, X>(R);
+    EXPECT_EQ(val, 0);
+    val = ddcHelper::get<X, Y>(R);
+    EXPECT_EQ(val, 1);
+    val = ddcHelper::get<Y, X>(R);
+    EXPECT_EQ(val, -4);
+    val = ddcHelper::get<Y, Y>(R);
+    EXPECT_EQ(val, 2);
+
+    val = ddcHelper::get<X, X>(I);
+    EXPECT_EQ(val, -1);
+    val = ddcHelper::get<X, Y>(I);
+    EXPECT_EQ(val, 0);
+    val = ddcHelper::get<Y, X>(I);
+    EXPECT_EQ(val, 0);
+    val = ddcHelper::get<Y, Y>(I);
+    EXPECT_EQ(val, -1);
+}
