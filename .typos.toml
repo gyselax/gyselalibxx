@@ -45,7 +45,7 @@ extend-glob = ["*.md"]
 
 [type.md.extend-words]
 Gyselalibxx = "Gyselalib++"
-"gyselalib" = "Gyselalib++"
 
 [type.md.extend-identifiers]
 "Gyselalib[^+]" = "Gyselalib++"
+gyselalib = "Gyselalib++"
