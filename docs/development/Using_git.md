@@ -1,12 +1,12 @@
 # Using Git
 
-Git is an extremely important tool for handling versioning and concurrent developments on the same code. There are many resources available online to help you get to grips with this tool. Here we summarise a few key concepts which will be helpful when working with git and Gyselalibxx. It is designed to be a jumping-off point and a reference for reoccurring git questions, not a complete git reference or tutorial.
+Git is an extremely important tool for handling versioning and concurrent developments on the same code. There are many resources available online to help you get to grips with this tool. Here we summarise a few key concepts which will be helpful when working with git and Gyselalib++. It is designed to be a jumping-off point and a reference for reoccurring git questions, not a complete git reference or tutorial.
 
 ## Branches
 
 Branches are an important tool for handling concurrent development. The `main` branch is the starting point for all developments. It contains all major developments which are considered sufficiently mature for other developers to also use them.
 
-Whenever you wish to add something new to gyselalibxx or fix an issue you should create a new branch from the `main` branch. The branch name should have the following format:
+Whenever you wish to add something new to Gyselalib++ or fix an issue you should create a new branch from the `main` branch. The branch name should have the following format:
 
 ```none
 <user_name>_<description_of_development>
@@ -32,7 +32,7 @@ After this command conflicts may appear between your branch and the main branch.
 
 ## Submodules
 
-Gyselalibxx depends on other external libraries to compile. These libraries are included in the repository via [submodules](https://git-scm.com/docs/gitsubmodules). In general you will not need to touch the code inside the folders associated with these repositories. However their presence sometimes causes unexpected behaviour. The following is a small FAQ of common issues concerning submodules:
+Gyselalib++ depends on other external libraries to compile. These libraries are included in the repository via [submodules](https://git-scm.com/docs/gitsubmodules). In general you will not need to touch the code inside the folders associated with these repositories. However their presence sometimes causes unexpected behaviour. The following is a small FAQ of common issues concerning submodules:
 
 ### Q: I cloned the repository but the submodules were not cloned
 

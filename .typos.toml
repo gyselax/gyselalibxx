@@ -12,7 +12,8 @@ extend-ignore-re = ["capitalize()",
                     "'center left'",
                     "'center right'",
                     "unrecognized_links",
-                    "Gif-sur-Yvette"
+                    "Gif-sur-Yvette",
+                    "GYSELALIBXX_HOME"
                     ]
 extend-ignore-identifiers-re = [
     "Comput. Phys. Commun.",
@@ -38,3 +39,14 @@ extend-exclude = ["*.tex",
                   "*.svg",
                   "*.css"
                   ]
+
+[type.md]
+extend-glob = ["*.md"]
+extend-ignore-re = ["gyselalibxx"]
+
+[type.md.extend-words]
+Gyselalibxx = "Gyselalib++"
+
+[type.md.extend-identifiers]
+"Gyselalib[^+]" = "Gyselalib++"
+"gyselalib" = "Gyselalib++"
