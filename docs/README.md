@@ -1,6 +1,6 @@
 # Mkdocs documentation
 
-This file describes the Mkdocs package we use inside Gyselalib to document our code.
+This file describes the Mkdocs package we use inside Gyselalib++ to document our code.
 
 ## Packages for installation
 
