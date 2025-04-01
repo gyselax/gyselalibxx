@@ -79,7 +79,7 @@ target_link_libraries(advection_ALL
 		Eigen3::Eigen
 
 
-		gslx::advection_RTheta
+		gslx::advection
 		gslx::geometry_RTheta
 		gslx::interpolation
 		gslx::io
