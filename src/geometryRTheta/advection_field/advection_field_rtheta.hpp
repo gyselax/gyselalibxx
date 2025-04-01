@@ -382,8 +382,6 @@ public:
      * @param[out] advection_field_rtheta
      *      The advection field on the logical axis. It is expressed on the contravariant basis. 
      * @param[out] advection_field_xy_centre
-     *      The advection field on the physical axis at the O-point.  
-     * @param[out] advection_field_xy_centre
      *      The advection field at the centre point on the Cartesian basis.
      */
     void operator()(
