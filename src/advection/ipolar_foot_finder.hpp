@@ -14,15 +14,16 @@
  *
  * @tparam GridRadial The radial grid on which the distribution function is defined.
  * @tparam GridPoloidal The poloidial grid on which the distribution function is defined.
- * @tparam AdvectionDim1 The first dimension of the advection field vector.
- * @tparam AdvectionDim2 The second dimension of the advection field vector.
+ * @tparam VectorIndexSetAdvDims A VectorIndexSet describing the dimensions of the
+ *                  vectors comprising the advection field.
+ * @tparam IdxRangeBatched The index range on which the operator acts.
  * @tparam MemorySpace The memory space where the data is saved (CPU/GPU).
  */
 template <
         class GridRadial,
         class GridPoloidal,
         class VectorIndexSetAdvDims,
-        class BatchedIdxRange,
+        class IdxRangeBatched,
         class MemorySpace>
 class IPolarFootFinder
 {
@@ -34,15 +35,15 @@ class IPolarFootFinder
             (ddc::is_non_uniform_point_sampling_v<GridPoloidal>)
             || (ddc::is_uniform_point_sampling_v<GridPoloidal>));
     static_assert(is_vector_index_set_v<VectorIndexSetAdvDims>);
-    static_assert(ddc::is_discrete_domain_v<BatchedIdxRange>);
+    static_assert(ddc::is_discrete_domain_v<IdxRangeBatched>);
     static_assert(Kokkos::is_memory_space_v<MemorySpace>);
 
     // Check that grids make sense
     static_assert(
-            ddc::in_tags_v<GridRadial, ddc::to_type_seq_t<BatchedIdxRange>>,
+            ddc::in_tags_v<GridRadial, ddc::to_type_seq_t<IdxRangeBatched>>,
             "The radial grid must be found in the batched index range");
     static_assert(
-            ddc::in_tags_v<GridPoloidal, ddc::to_type_seq_t<BatchedIdxRange>>,
+            ddc::in_tags_v<GridPoloidal, ddc::to_type_seq_t<IdxRangeBatched>>,
             "The poloidal grid must be found in the batched index range");
 
     // Check that VectorIndexSetAdvDims makes sense
@@ -67,7 +68,7 @@ public:
     using memory_space = MemorySpace;
 
     /// The type of the index range over which the operator works.
-    using IdxRangeOperator = BatchedIdxRange;
+    using IdxRangeOperator = IdxRangeBatched;
 
 public:
     virtual ~IPolarFootFinder() = default;
