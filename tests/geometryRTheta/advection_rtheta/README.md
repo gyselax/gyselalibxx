@@ -2,8 +2,8 @@
 
 ## Tests on the 2D polar advection operator
 
-The tests implemented in this folder test the 2D polar advection operator implemented in the `src/geometryRTheta/advection/` folder
-( [advection](./../../../src/geometryRTheta/advection/README.md) ).
+The tests implemented in this folder test the 2D polar advection operator implemented in the `src/advection/` folder
+( [advection](./../../../src/advection/README.md) ).
 
 The tests of the convergence order are made for constant CFL which means it checks the slope of the errors
 (infinity norm of the difference at the final time)

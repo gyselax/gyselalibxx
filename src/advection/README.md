@@ -240,13 +240,13 @@ In the studied equation, the advection field is given along the physical domain 
 
 The BslAdvectionPolar operator can take as input
 the advection field expressed on the $`(e_x, e_y)`$ basis of the physical domain or
-the advection field expressed on the $`(e_r, e_\theta)`$ [contravariant basis](../../../docs/standards/mathematical_and_physical_conventions.md) of the logical domain,
+the advection field expressed on the $`(e_r, e_\theta)`$ [contravariant basis](../../docs/standards/mathematical_and_physical_conventions.md) of the logical domain,
 
 ```math
 A = A_x e_x + A_y e_y \quad \text{or} \quad A = A^r e_r + A^\theta e_\theta.
 ```
 
-The advection field can be computed thanks to the AdvectionFieldFinder operator. This operator returns both expressions of the advection field (see [advection\_field\_rtheta](./../advection_field/README.md)).
+The advection field should be computed before calling this class.
 
 - If the advection field is directly expressed on the $`(e_x, e_y)`$ basis of the physical domain, no treatment is needed in the BslAdvectionPolar operator.
 
