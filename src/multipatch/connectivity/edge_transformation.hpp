@@ -23,9 +23,9 @@ struct IdxRangeCurrentAndTarget;
 template <class Interface>
 struct IdxRangeCurrentAndTarget<Interface, typename Interface::Edge1::associated_patch>
 {
-    /// @brief Grid parallel to Edge1 of the Interface. 
+    /// @brief Grid parallel to Edge1 of the Interface.
     using EdgeGrid1 = typename Interface::Edge1::parallel_grid;
-    /// @brief Grid parallel to Edge2 of the Interface. 
+    /// @brief Grid parallel to Edge2 of the Interface.
     using EdgeGrid2 = typename Interface::Edge2::parallel_grid;
 
     /// @brief IdxRange parallel to the Edge on the current patch.
@@ -38,9 +38,9 @@ struct IdxRangeCurrentAndTarget<Interface, typename Interface::Edge1::associated
 template <class Interface>
 struct IdxRangeCurrentAndTarget<Interface, typename Interface::Edge2::associated_patch>
 {
-    /// @brief Grid parallel to Edge1 of the Interface. 
+    /// @brief Grid parallel to Edge1 of the Interface.
     using EdgeGrid1 = typename Interface::Edge1::parallel_grid;
-    /// @brief Grid parallel to Edge2 of the Interface. 
+    /// @brief Grid parallel to Edge2 of the Interface.
     using EdgeGrid2 = typename Interface::Edge2::parallel_grid;
 
     /// @brief IdxRange parallel to the Edge on the current patch.
@@ -58,9 +58,9 @@ struct IdxRangeCurrentAndTarget<
         Interface,
         typename Interface::Edge1::parallel_grid::continuous_dimension_type>
 {
-    /// @brief Grid parallel to Edge1 of the Interface. 
+    /// @brief Grid parallel to Edge1 of the Interface.
     using EdgeGrid1 = typename Interface::Edge1::parallel_grid;
-    /// @brief Grid parallel to Edge2 of the Interface. 
+    /// @brief Grid parallel to Edge2 of the Interface.
     using EdgeGrid2 = typename Interface::Edge2::parallel_grid;
 
     /// @brief IdxRange parallel to the Edge on the current patch.
@@ -78,9 +78,9 @@ struct IdxRangeCurrentAndTarget<
         Interface,
         typename Interface::Edge2::parallel_grid::continuous_dimension_type>
 {
-    /// @brief Grid parallel to Edge1 of the Interface. 
+    /// @brief Grid parallel to Edge1 of the Interface.
     using EdgeGrid1 = typename Interface::Edge1::parallel_grid;
-    /// @brief Grid parallel to Edge2 of the Interface. 
+    /// @brief Grid parallel to Edge2 of the Interface.
     using EdgeGrid2 = typename Interface::Edge2::parallel_grid;
 
     /// @brief IdxRange parallel to the Edge on the current patch.
