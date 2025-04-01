@@ -189,7 +189,7 @@ public:
     DFieldFDistribu operator()(
             DFieldFDistribu allfdistribu,
             DVectorConstFieldAdvectionRTheta advection_field_rtheta,
-            CoordXY const& advection_field_xy_centre,
+            DTensor<CartesianBasis> const& advection_field_xy_centre,
             double dt) const
     {
         Kokkos::Profiling::pushRegion("PolarAdvection");
@@ -216,13 +216,12 @@ public:
 
                     Tensor J = logical_to_physical_mapping_proxy.jacobian_matrix(coord_rtheta);
 
-                    DTensor<CartesianBasis> advec_field_xy = tensor_mul(
-                            index<'i', 'j'>(J),
-                            index<'j'>(advection_field_rtheta(irtheta)));
                     ddcHelper::assign_vector_field_element(
                             advection_field_xy,
                             irtheta,
-                            advec_field_xy);
+                            tensor_mul(
+                                    index<'i', 'j'>(J),
+                                    index<'j'>(advection_field_rtheta(irtheta))));
                 });
 
         ddc::parallel_for_each(

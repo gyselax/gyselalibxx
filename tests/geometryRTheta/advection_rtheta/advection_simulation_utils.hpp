@@ -386,11 +386,12 @@ void simulate(
     ddc::for_each(grid, [&](IdxRTheta const irtheta) {
         // Moving the coordinates in the physical domain:
         CoordXY const coord_xy = to_physical_mapping_host(ddc::coordinate(irtheta));
-        CoordXY const advection_field = simulation.advection_field(coord_xy, 0.);
 
         // Define the advection field on the physical domain:
-        ddcHelper::get<X>(advection_field_test_vec_host)(irtheta) = ddc::get<X>(advection_field);
-        ddcHelper::get<Y>(advection_field_test_vec_host)(irtheta) = ddc::get<Y>(advection_field);
+        ddcHelper::assign_vector_field_element(
+                get_field(advection_field_test_vec_host),
+                irtheta,
+                simulation.advection_field(coord_xy, 0.));
     });
 
     auto allfdistribu = ddc::create_mirror_view_and_copy(

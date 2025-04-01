@@ -239,11 +239,11 @@ public:
 ￼     *
 ￼     * @return The advection field in the physical index range.
 ￼     */
-    KOKKOS_FUNCTION CoordXY operator()(CoordXY const coord, double const t) const
+    KOKKOS_FUNCTION DVector<X, Y> operator()(CoordXY const coord, double const t) const
     {
         double const x = m_omega * (m_yc - ddc::get<Y>(coord));
         double const y = m_omega * (ddc::get<X>(coord) - m_xc);
-        return CoordXY(x, y);
+        return DVector<X, Y>(x, y);
     }
 
     /**
@@ -318,9 +318,9 @@ public:
 ￼     *
 ￼     * @return The advection field in the physical index range.
 ￼     */
-    KOKKOS_FUNCTION CoordXY operator()(CoordXY const coord, double const t) const
+    KOKKOS_FUNCTION DVector<X, Y> operator()(CoordXY const coord, double const t) const
     {
-        return m_velocity;
+        return DVector<X, Y>(m_velocity);
     }
 
     /**
@@ -397,12 +397,11 @@ public:
 ￼     *
 ￼     * @return The advection field in the physical index range.
 ￼     */
-    KOKKOS_FUNCTION CoordXY operator()(CoordXY const coord, double const t) const
+    KOKKOS_FUNCTION DVector<X, Y> operator()(CoordXY const coord, double const t) const
     {
         CoordRTheta const coord_rtheta(m_physical_to_logical_mapping(coord));
         Tensor jacobian = m_logical_to_physical_mapping.jacobian_matrix(coord_rtheta);
-        DVector<X, Y> v = tensor_mul(index<'i', 'j'>(jacobian), index<'j'>(m_v));
-        return CoordXY(ddcHelper::get<X>(v), ddcHelper::get<Y>(v));
+        return tensor_mul(index<'i', 'j'>(jacobian), index<'j'>(m_v));
     }
 
     /**
