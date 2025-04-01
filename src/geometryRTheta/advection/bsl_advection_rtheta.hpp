@@ -50,7 +50,7 @@
  * @see IPolarFootFinder
  */
 template <class FootFinder, class LogicalToPhysicalMapping, class InterpolatorPolar>
-class BslAdvectionRTheta
+class BslAdvectionPolar
 {
     using CoordRTheta = typename LogicalToPhysicalMapping::CoordArg;
     using CoordXY = typename LogicalToPhysicalMapping::CoordResult;
@@ -114,7 +114,7 @@ public:
      * @tparam IFootFinder
      *      A child class of IFootFinder.
      */
-    BslAdvectionRTheta(
+    BslAdvectionPolar(
             InterpolatorPolar const& function_interpolator,
             FootFinder const& foot_finder,
             LogicalToPhysicalMapping const& logical_to_physical_mapping)
@@ -124,7 +124,7 @@ public:
     {
     }
 
-    ~BslAdvectionRTheta() = default;
+    ~BslAdvectionPolar() = default;
 
 
     /**

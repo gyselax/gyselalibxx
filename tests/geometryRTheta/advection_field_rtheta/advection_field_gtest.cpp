@@ -154,7 +154,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
             builder,
             spline_evaluator_extrapol);
 
-    BslAdvectionRTheta advection_operator(interpolator, find_feet, to_physical_mapping);
+    BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
 
     // --- Advection field finder ---------------------------------------------------------------------
     AdvectionFieldFinder advection_field_computer(to_physical_mapping);
@@ -254,7 +254,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
         DVector<X, Y> adv_field
                 = tensor_mul(index<'i', 'j'>(J), index<'j'>(advection_field_rtheta(irtheta)));
 
-        // computation made in BslAdvectionRTheta operator:
+        // computation made in BslAdvectionPolar operator:
         ddcHelper::get<X>(advection_field_xy_from_rtheta)(irtheta) = ddcHelper::get<X>(adv_field);
         ddcHelper::get<Y>(advection_field_xy_from_rtheta)(irtheta) = ddcHelper::get<Y>(adv_field);
 
@@ -268,7 +268,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     });
 
     ddc::for_each(Opoint_grid, [&](IdxRTheta const irtheta) {
-        // computation made in BslAdvectionRTheta operator:
+        // computation made in BslAdvectionPolar operator:
         ddcHelper::get<X>(advection_field_xy_from_rtheta)(irtheta)
                 = CoordX(advection_field_xy_centre);
         ddcHelper::get<Y>(advection_field_xy_from_rtheta)(irtheta)

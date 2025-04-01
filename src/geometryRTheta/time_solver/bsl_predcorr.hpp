@@ -38,12 +38,12 @@
  * First, it advects on a half time step:
  * - 1. From @f$\rho^n@f$, it computes @f$\phi^n@f$ with a PolarSplineFEMPoissonLikeSolver;
  * - 2. From @f$\phi^n@f$, it computes @f$A^n@f$ with a AdvectionFieldFinder;
- * - 3. From @f$\rho^n@f$ and @f$A^n@f$, it computes @f$\rho^{n+1/2}@f$ with a BslAdvectionRTheta on @f$\frac{dt}{2}@f$;
+ * - 3. From @f$\rho^n@f$ and @f$A^n@f$, it computes @f$\rho^{n+1/2}@f$ with a BslAdvectionPolar on @f$\frac{dt}{2}@f$;
  *
  * Secondly, it advects on a full time step:
  * - 4. From @f$\rho^{n+1/2}@f$, it computes @f$\phi^{n+1/2}@f$ with a PolarSplineFEMPoissonLikeSolver;
  * - 5. From @f$\phi^{n+1/2}@f$, it computes @f$A^{n+1/2}@f$ with a AdvectionFieldFinder;
- * - 6. From @f$\rho^n@f$ and @f$A^{n+1/2}@f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionRTheta on @f$dt@f$.
+ * - 6. From @f$\rho^n@f$ and @f$A^{n+1/2}@f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionPolar on @f$dt@f$.
  *
  * @tparam Mapping
  *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
@@ -57,7 +57,7 @@ class BslPredCorrRTheta : public ITimeSolverRTheta
 private:
     Mapping const& m_mapping;
 
-    BslAdvectionRTheta<FootFinder, Mapping> const& m_advection_solver;
+    BslAdvectionPolar<FootFinder, Mapping> const& m_advection_solver;
 
     PolarSplineFEMPoissonLikeSolver<
             GridR,
@@ -89,7 +89,7 @@ public:
      */
     BslPredCorrRTheta(
             Mapping const& mapping,
-            BslAdvectionRTheta<FootFinder, Mapping> const& advection_solver,
+            BslAdvectionPolar<FootFinder, Mapping> const& advection_solver,
             SplineRThetaBuilder_host const& builder,
             SplineRThetaEvaluatorNullBound_host const& rhs_evaluator,
             PolarSplineFEMPoissonLikeSolver<

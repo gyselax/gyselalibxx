@@ -40,14 +40,14 @@
  * First, it predicts:
  * - 1. From @f$\rho^n@f$, it computes @f$\phi^n@f$ with a PolarSplineFEMPoissonLikeSolver;
  * - 2. From @f$\phi^n@f$, it computes @f$A^n@f$ with a AdvectionFieldFinder;
- * - 3. From @f$\rho^n@f$ and @f$A^n@f$, it computes implicitly @f$\rho^P@f$ with a BslAdvectionRTheta on @f$ \frac{dt}{4} @f$:
+ * - 3. From @f$\rho^n@f$ and @f$A^n@f$, it computes implicitly @f$\rho^P@f$ with a BslAdvectionPolar on @f$ \frac{dt}{4} @f$:
  *      - the characteristic feet @f$X^P@f$ is such that @f$X^P = X^k@f$ with @f$X^k@f$ the result of the implicit method:
  *          - @f$ X^k = X^n - \frac{dt}{4} \partial_t X^k@f$.
  * 
  * Secondly, it corrects: 
  * - 4. From @f$\rho^P@f$, it computes @f$\phi^P@f$ with a PolarSplineFEMPoissonLikeSolver;
  * - 5. From @f$\phi^P@f$, it computes @f$A^P@f$ with a AdvectionFieldFinder;
- * - 6. From @f$\rho^n@f$ and @f$ A^{P} @f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionRTheta on @f$ \frac{dt}{2} @f$.
+ * - 6. From @f$\rho^n@f$ and @f$ A^{P} @f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionPolar on @f$ \frac{dt}{2} @f$.
  *      - the characteristic feet @f$X^C@f$ is such that @f$X^C = X^k@f$ with @f$X^k@f$ the result of the implicit method:
  *          - @f$\partial_t X^k = A^P(X^n) + A^P(X^{k-1}) @f$,
  *
@@ -87,7 +87,7 @@ private:
 
     LogicalToPhysicalMapping const& m_logical_to_physical;
 
-    BslAdvectionRTheta<SplinePolarFootFinderType, LogicalToPhysicalMapping> const&
+    BslAdvectionPolar<SplinePolarFootFinderType, LogicalToPhysicalMapping> const&
             m_advection_solver;
 
     EulerMethod_host const m_euler;
@@ -128,7 +128,7 @@ public:
     BslImplicitPredCorrRTheta(
             LogicalToPhysicalMapping const& logical_to_physical,
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
-            BslAdvectionRTheta<SplinePolarFootFinderType, LogicalToPhysicalMapping> const&
+            BslAdvectionPolar<SplinePolarFootFinderType, LogicalToPhysicalMapping> const&
                     advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder_host const& builder,

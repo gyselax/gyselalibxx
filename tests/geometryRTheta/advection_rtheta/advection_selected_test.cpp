@@ -298,7 +298,7 @@ int main(int argc, char** argv)
             builder,
             spline_evaluator_extrapol);
 
-    BslAdvectionRTheta advection_operator(interpolator, foot_finder, to_physical_mapping);
+    BslAdvectionPolar advection_operator(interpolator, foot_finder, to_physical_mapping);
 
     std::cout << mapping_name << " MAPPING - " << adv_domain_name << " DOMAIN - " << method_name
               << " - " << simu_type << " : " << std::endl;

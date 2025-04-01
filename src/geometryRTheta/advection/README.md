@@ -147,7 +147,7 @@ In the studied equation, the advection field is given along the physical domain 
 \partial_t f + A \cdot \nabla f = 0.
 ```
 
-The BslAdvectionRTheta operator can take as input
+The BslAdvectionPolar operator can take as input
 the advection field expressed on the $`(e_x, e_y)`$ basis of the physical domain or
 the advection field expressed on the $`(e_r, e_\theta)`$ [contravariant basis](../../../docs/standards/mathematical_and_physical_conventions.md) of the logical domain,
 
@@ -157,7 +157,7 @@ A = A_x e_x + A_y e_y \quad \text{or} \quad A = A^r e_r + A^\theta e_\theta.
 
 The advection field can be computed thanks to the AdvectionFieldFinder operator. This operator returns both expressions of the advection field (see [advection\_field\_rtheta](./../advection_field/README.md)).
 
-- If the advection field is directly expressed on the $`(e_x, e_y)`$ basis of the physical domain, no treatment is needed in the BslAdvectionRTheta operator.
+- If the advection field is directly expressed on the $`(e_x, e_y)`$ basis of the physical domain, no treatment is needed in the BslAdvectionPolar operator.
 
 - If the advection field is expressed on the $`(e_r, e_\theta)`$ contravariant basis of the logical domain, then we need to compute the advection field on the $`(e_x, e_y)`$ basis to advect in the physical domain.
 
@@ -214,7 +214,7 @@ for $n = 1, 2, 4, 8,  ...$.
 This folder contains:
 
 - iadvection\_rtheta.hpp : define the base class for advection operator (IAdvectionRTheta).
-  - bsl\_advection\_rtheta.hpp : define the advection operator described just before (BslAdvectionRTheta).
+  - bsl\_advection\_rtheta.hpp : define the advection operator described just before (BslAdvectionPolar).
 
 ## References
 

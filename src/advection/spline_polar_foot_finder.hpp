@@ -40,7 +40,7 @@
  *      A boundary condition must be provided in case the foot of the characteristic
  *      is found outside the domain.
  *
- * @see BslAdvectionRTheta
+ * @see BslAdvectionPolar
  */
 template <
         class TimeStepper,

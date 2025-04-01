@@ -222,7 +222,7 @@ void run_simulations_with_methods(
             params.advection_builder,
             params.advection_evaluator);
 
-    BslAdvectionRTheta
+    BslAdvectionPolar
             advection_operator(params.interpolator, foot_finder, sim.to_physical_mapping);
 
     run_simulations(
