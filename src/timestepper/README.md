@@ -64,4 +64,3 @@ $`x^{n+1} = x^{n} + \frac{dt}{6}  \left( k_1 + 2 k_2 + 2 k_3  + k_4\right)`$
     - $`k_4 =  f(x^{n+1} + dt k_3)`$.
 
 - Convergence order : 4.
-

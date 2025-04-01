@@ -267,7 +267,6 @@ J
 \end{bmatrix}.
 ```
 
-
 ## PolarFootFinder
 
 These methods are designed to calculate the foot of the characteristic on the polar plane for a 2D transport equation of the type:
