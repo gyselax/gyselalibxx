@@ -54,10 +54,17 @@
 template <class Mapping, class FootFinder>
 class BslPredCorrRTheta : public ITimeSolverRTheta
 {
+    using BslAdvectionRTheta = BslAdvectionPolar<
+            FootFinder,
+            Mapping,
+            PreallocatableSplineInterpolator2D<
+                    SplineRThetaBuilder,
+                    SplineRThetaEvaluatorNullBound>>;
+
 private:
     Mapping const& m_mapping;
 
-    BslAdvectionPolar<FootFinder, Mapping> const& m_advection_solver;
+    BslAdvectionRTheta const& m_advection_solver;
 
     PolarSplineFEMPoissonLikeSolver<
             GridR,
@@ -89,7 +96,7 @@ public:
      */
     BslPredCorrRTheta(
             Mapping const& mapping,
-            BslAdvectionPolar<FootFinder, Mapping> const& advection_solver,
+            BslAdvectionRTheta const& advection_solver,
             SplineRThetaBuilder_host const& builder,
             SplineRThetaEvaluatorNullBound_host const& rhs_evaluator,
             PolarSplineFEMPoissonLikeSolver<

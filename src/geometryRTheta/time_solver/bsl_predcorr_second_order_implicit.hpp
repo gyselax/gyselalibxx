@@ -85,10 +85,16 @@ private:
             SplineRThetaBuilder_host,
             SplineRThetaEvaluatorConstBound_host>;
 
+    using BslAdvectionRTheta = BslAdvectionPolar<
+            SplinePolarFootFinderType,
+            LogicalToPhysicalMapping,
+            PreallocatableSplineInterpolator2D<
+                    SplineRThetaBuilder,
+                    SplineRThetaEvaluatorNullBound>>;
+
     LogicalToPhysicalMapping const& m_logical_to_physical;
 
-    BslAdvectionPolar<SplinePolarFootFinderType, LogicalToPhysicalMapping> const&
-            m_advection_solver;
+    BslAdvectionRTheta const& m_advection_solver;
 
     EulerMethod_host const m_euler;
     SplinePolarFootFinderType_host const m_foot_finder;
@@ -128,8 +134,7 @@ public:
     BslImplicitPredCorrRTheta(
             LogicalToPhysicalMapping const& logical_to_physical,
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
-            BslAdvectionPolar<SplinePolarFootFinderType, LogicalToPhysicalMapping> const&
-                    advection_solver,
+            BslAdvectionRTheta const& advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder_host const& builder,
             PolarSplineFEMPoissonLikeSolver<
