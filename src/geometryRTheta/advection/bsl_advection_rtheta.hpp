@@ -50,7 +50,7 @@
  *
  * @see IPolarFootFinder
  */
-template <class FootFinder, class Mapping, class InterpolatorPolar>
+template <class FootFinder, class LogicalToPhysicalMapping, class InterpolatorPolar>
 class BslAdvectionRTheta
 {
 private:
@@ -58,7 +58,7 @@ private:
 
     FootFinder const& m_find_feet;
 
-    Mapping const& m_mapping;
+    LogicalToPhysicalMapping const& m_logical_to_physical_mapping;
 
 
 public:
@@ -70,7 +70,7 @@ public:
      *      characteristics have been computed.
      * @param[in] foot_finder
      *      An IFootFinder which computes the feet of the characteristics.
-     * @param[in] mapping
+     * @param[in] logical_to_physical_mapping
      *      The mapping function from the logical domain to the physical
      *      domain. 
      *
@@ -80,10 +80,10 @@ public:
     BslAdvectionRTheta(
             InterpolatorPolar const& function_interpolator,
             FootFinder const& foot_finder,
-            Mapping const& mapping)
+            LogicalToPhysicalMapping const& logical_to_physical_mapping)
         : m_interpolator(function_interpolator)
         , m_find_feet(foot_finder)
-        , m_mapping(mapping)
+        , m_logical_to_physical_mapping(logical_to_physical_mapping)
     {
     }
 
@@ -167,7 +167,7 @@ public:
         DVectorFieldMemRTheta<X, Y> advection_field_xy_alloc(grid);
         DVectorFieldRTheta<X, Y> advection_field_xy = get_field(advection_field_xy_alloc);
 
-        Mapping const& mapping_proxy = m_mapping;
+        LogicalToPhysicalMapping const& logical_to_physical_mapping_proxy = m_logical_to_physical_mapping;
 
         // (Ax, Ay) = J (Ar, Atheta)
         ddc::parallel_for_each(
@@ -176,7 +176,7 @@ public:
                 KOKKOS_LAMBDA(IdxRTheta const irtheta) {
                     CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
-                    Tensor J = mapping_proxy.jacobian_matrix(coord_rtheta);
+                    Tensor J = logical_to_physical_mapping_proxy.jacobian_matrix(coord_rtheta);
 
                     DVector<X, Y> advec_field_xy = tensor_mul(
                             index<'i', 'j'>(J),
