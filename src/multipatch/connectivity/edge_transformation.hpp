@@ -19,7 +19,7 @@
 template <class Interface, typename T>
 struct IdxRangeCurrentAndTarget;
 
-/// @brief Specification for current patch being the Patch1 of the given Interface. 
+/// @brief Specification for current patch being the Patch1 of the given Interface.
 template <class Interface>
 struct IdxRangeCurrentAndTarget<Interface, typename Interface::Edge1::associated_patch>
 {

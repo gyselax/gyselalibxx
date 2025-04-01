@@ -148,7 +148,7 @@ TEST_F(IndexTransformationNonUniformPeriodicTest, Periodicity)
 
     // Coordinate transformation .................................................................
     EdgeTransformation<Interface12> index_transformation(idx_range_theta1, idx_range_theta2);
-    
+
     // Test periodicity property
     Patch1::Idx2 test_idx_theta1 = Patch1::Idx2(0);
     Patch2::Idx2 test_idx_theta2 = index_transformation(test_idx_theta1);

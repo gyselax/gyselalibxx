@@ -39,7 +39,7 @@ protected:
     Patch2::IdxRange2 const idx_range_theta2;
 
 public:
-IndexTransformationUniformPeriodicTest()
+    IndexTransformationUniformPeriodicTest()
         : idx_range_r1(Patch1::Idx1(0), r1_npoints)
         , idx_range_theta1(Patch1::Idx2(0), theta1_npoints)
         , idx_range_r2(Patch2::Idx1(0), r2_npoints)
@@ -58,7 +58,8 @@ IndexTransformationUniformPeriodicTest()
         ddc::init_discrete_space<BSplinesTheta<1>>(theta1_min, theta1_max, theta1_npoints);
 
         ddc::init_discrete_space<GridR<1>>(GridR<1>::init(r1_min, r1_max, r1_npoints));
-        ddc::init_discrete_space<GridTheta<1>>(SplineInterpPointsTheta1::get_sampling<GridTheta<1>>());
+        ddc::init_discrete_space<GridTheta<1>>(
+                SplineInterpPointsTheta1::get_sampling<GridTheta<1>>());
 
         // Patch 2
         Patch2::Coord1 const r2_min(1.0);
@@ -70,7 +71,8 @@ IndexTransformationUniformPeriodicTest()
         ddc::init_discrete_space<BSplinesTheta<2>>(theta2_min, theta2_max, theta2_npoints);
 
         ddc::init_discrete_space<GridR<2>>(GridR<2>::init(r2_min, r2_max, r2_npoints));
-        ddc::init_discrete_space<GridTheta<2>>(SplineInterpPointsTheta2::get_sampling<GridTheta<2>>());
+        ddc::init_discrete_space<GridTheta<2>>(
+                SplineInterpPointsTheta2::get_sampling<GridTheta<2>>());
     }
 };
 
@@ -122,7 +124,7 @@ TEST_F(IndexTransformationUniformPeriodicTest, ReverseTransformation)
     // Coordinate transformation .................................................................
     EdgeTransformation<Interface12> index_transformation(idx_range_theta1, idx_range_theta2);
 
-    Patch2::Idx2 test_idx_theta2(3+1);
+    Patch2::Idx2 test_idx_theta2(3 + 1);
     Patch1::Idx2 test_idx_theta1(index_transformation(test_idx_theta2));
 
     EXPECT_EQ((test_idx_theta1 - idx_range_theta1.front()).value(), 6);
@@ -137,7 +139,7 @@ TEST_F(IndexTransformationUniformPeriodicTest, Periodicity)
     // Coordinate transformation .................................................................
     EdgeTransformation<Interface12> index_transformation(idx_range_theta1, idx_range_theta2);
 
-    Patch1::Idx2 test_idx_theta1 (0);
+    Patch1::Idx2 test_idx_theta1(0);
     Patch2::Idx2 test_idx_theta2 = index_transformation(test_idx_theta1);
 
     EXPECT_EQ((test_idx_theta2 - idx_range_theta2.front()).value(), 0);

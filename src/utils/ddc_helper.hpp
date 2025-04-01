@@ -60,7 +60,7 @@ constexpr std::enable_if_t<
         double>
 total_interval_length(IdxRange<IDim> const& idx_range)
 {
-    IdxRange<IDim> dom_periodic(idx_range.front(), idx_range.extents() +1);
+    IdxRange<IDim> dom_periodic(idx_range.front(), idx_range.extents() + 1);
     return std::fabs(ddc::rlength(dom_periodic));
 }
 
