@@ -1,5 +1,5 @@
 
-# Gyselalib++
+# Gyselalib
 
 ![image](docs/images/logo_big.png)
 
