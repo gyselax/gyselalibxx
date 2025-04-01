@@ -195,7 +195,7 @@ public:
         Kokkos::Profiling::pushRegion("PolarAdvection");
         IdxRangeRTheta grid(get_idx_range(allfdistribu));
 
-        const int npoints_theta = IdxRangeTheta(grid).size();
+        const int npoints_theta = grid.size();
         IdxRangeRTheta const grid_without_Opoint(grid.remove_first(IdxStepRTheta(1, 0)));
         IdxRangeRTheta const Opoint_grid(grid.take_first(IdxStepRTheta(1, npoints_theta)));
 
