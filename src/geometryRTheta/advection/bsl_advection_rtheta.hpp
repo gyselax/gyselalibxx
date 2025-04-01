@@ -5,7 +5,6 @@
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
 #include "i_interpolator_2d.hpp"
-#include "iadvection_rtheta.hpp"
 #include "indexed_tensor.hpp"
 #include "metric_tensor_evaluator.hpp"
 #include "spline_interpolator_2d.hpp"
@@ -51,27 +50,11 @@
  *
  * @see IPolarFootFinder
  */
-template <class FootFinder, class Mapping>
-class BslAdvectionRTheta : public IAdvectionRTheta
+template <class FootFinder, class Mapping, class InterpolatorPolar>
+class BslAdvectionRTheta
 {
 private:
-    /// The type of the 2D Spline Evaluator used by this class
-    using evaluator_type = ddc::SplineEvaluator2D<
-            Kokkos::DefaultExecutionSpace,
-            Kokkos::DefaultExecutionSpace::memory_space,
-            BSplinesR,
-            BSplinesTheta,
-            GridR,
-            GridTheta,
-            ddc::NullExtrapolationRule,
-            ddc::NullExtrapolationRule,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            GridR,
-            GridTheta>;
-    using PreallocatableSplineInterpolatorType
-            = PreallocatableSplineInterpolator2D<SplineRThetaBuilder, evaluator_type>;
-    PreallocatableSplineInterpolatorType const& m_interpolator;
+    InterpolatorPolar const& m_interpolator;
 
     FootFinder const& m_find_feet;
 
@@ -95,7 +78,7 @@ public:
      *      A child class of IFootFinder.
      */
     BslAdvectionRTheta(
-            PreallocatableSplineInterpolatorType const& function_interpolator,
+            InterpolatorPolar const& function_interpolator,
             FootFinder const& foot_finder,
             Mapping const& mapping)
         : m_interpolator(function_interpolator)
@@ -104,7 +87,7 @@ public:
     {
     }
 
-    ~BslAdvectionRTheta() override = default;
+    ~BslAdvectionRTheta() = default;
 
 
     /**
@@ -123,7 +106,7 @@ public:
     DFieldRTheta operator()(
             DFieldRTheta allfdistribu,
             DConstVectorFieldRTheta<X, Y> advection_field_xy,
-            double dt) const override
+            double dt) const
     {
         // Pre-allocate some memory to prevent allocation later in loop
         std::unique_ptr<IInterpolator2D<IdxRangeRTheta, IdxRangeRTheta>> const interpolator_ptr
@@ -170,7 +153,7 @@ public:
             DFieldRTheta allfdistribu,
             DConstVectorFieldRTheta<R, Theta> advection_field_rtheta,
             CoordXY const& advection_field_xy_centre,
-            double dt) const override
+            double dt) const
     {
         Kokkos::Profiling::pushRegion("PolarAdvection");
         IdxRangeRTheta grid(get_idx_range<GridR, GridTheta>(allfdistribu));
