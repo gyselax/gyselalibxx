@@ -51,6 +51,6 @@ public:
     virtual DFieldRTheta operator()(
             DFieldRTheta allfdistribu,
             DConstVectorFieldRTheta<R, Theta> advection_field,
-            CoordXY const& advection_field_xy_centre,
+            DVector<X, Y> const& advection_field_xy_centre,
             double const dt) const = 0;
 };
