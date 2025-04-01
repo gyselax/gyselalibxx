@@ -3,7 +3,6 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "geometry.hpp"
 #include "i_interpolator_2d.hpp"
 #include "indexed_tensor.hpp"
 #include "metric_tensor_evaluator.hpp"
@@ -53,6 +52,44 @@
 template <class FootFinder, class LogicalToPhysicalMapping, class InterpolatorPolar>
 class BslAdvectionRTheta
 {
+    using CoordRTheta = typename LogicalToPhysicalMapping::CoordArg;
+    using CoordXY = typename LogicalToPhysicalMapping::CoordResult;
+
+    using CartesianBasis = ddc::to_type_seq_t<CoordXY>;
+    using CurvilinearBasis = ddc::to_type_seq_t<CoordRTheta>;
+
+    using IdxRangeBatched = typename FootFinder::IdxRangeOperator;
+
+    using IdxRangeRTheta = IdxRange<
+            find_grid_t<
+                    ddc::type_seq_element_t<0, CurvilinearBasis>,
+                    ddc::to_type_seq_t<IdxRangeBatched>>,
+            find_grid_t<
+                    ddc::type_seq_element_t<1, CurvilinearBasis>,
+                    ddc::to_type_seq_t<IdxRangeBatched>>>;
+
+    using IdxRTheta = typename IdxRangeRTheta::discrete_element_type;
+    using IdxStepRTheta = typename IdxRangeRTheta::discrete_vector_type;
+
+    using MemorySpace = typename FootFinder::memory_space;
+
+    using DFieldFDistribu = DField<IdxRangeBatched, MemorySpace>;
+
+    using CFieldMemFeetRTheta = FieldMem<CoordRTheta, IdxRangeBatched, MemorySpace>;
+
+    using CFieldFeetRTheta = Field<CoordRTheta, IdxRangeBatched, MemorySpace>;
+
+    using DVectorFieldMemAdvectionXY
+            = DVectorFieldMem<IdxRangeBatched, CartesianBasis, MemorySpace>;
+    using DVectorFieldAdvectionXY = DVectorField<IdxRangeBatched, CartesianBasis, MemorySpace>;
+    using DVectorConstFieldAdvectionXY
+            = DVectorConstField<IdxRangeBatched, CartesianBasis, MemorySpace>;
+
+    using DVectorFieldAdvectionRTheta
+            = DVectorField<IdxRangeBatched, CurvilinearBasis, MemorySpace>;
+    using DVectorConstFieldAdvectionRTheta
+            = DVectorConstField<IdxRangeBatched, CurvilinearBasis, MemorySpace>;
+
 private:
     InterpolatorPolar const& m_interpolator;
 
@@ -96,16 +133,16 @@ public:
      * @param [in, out] allfdistribu
      *      A Field containing the values of the function we want to advect.
      * @param [in] advection_field_xy
-     *      A DConstVectorFieldRTheta containing the values of the advection field
-     *      on the physical domain axes.
+     *      A field of vectors defined on the Cartesian basis containing the values
+     *      of the advection field at each point on the logical grid.
      * @param [in] dt
      *      A time step used.
      *
      * @return A Field to allfdistribu advected on the time step given.
      */
-    DFieldRTheta operator()(
-            DFieldRTheta allfdistribu,
-            DConstVectorFieldRTheta<X, Y> advection_field_xy,
+    DFieldFDistribu operator()(
+            DFieldFDistribu allfdistribu,
+            DVectorConstFieldAdvectionXY advection_field_xy,
             double dt) const
     {
         // Pre-allocate some memory to prevent allocation later in loop
@@ -113,8 +150,8 @@ public:
                 = m_interpolator.preallocate();
 
         // Initialise the feet
-        FieldMemRTheta<CoordRTheta> feet_rtheta_alloc(get_idx_range(advection_field_xy));
-        FieldRTheta<CoordRTheta> feet_rtheta = get_field(feet_rtheta_alloc);
+        CFieldMemFeetRTheta feet_rtheta_alloc(get_idx_range(advection_field_xy));
+        CFieldFeetRTheta feet_rtheta = get_field(feet_rtheta_alloc);
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(advection_field_xy),
@@ -138,8 +175,8 @@ public:
      * @param [in, out] allfdistribu
      *      A Field containing the values of the function we want to advect.
      * @param [in] advection_field_rtheta
-     *      A DConstVectorFieldRTheta containing the values of the advection field
-     *      on the logical index range axis.
+     *      A field of vectors defined on the Curvilinear basis containing the values
+     *      of the advection field at each point on the logical grid.
      *      It is expressed on the contravariant basis.
      * @param [in] advection_field_xy_centre
      *      A CoordXY containing the value of the advection field on the 
@@ -149,14 +186,14 @@ public:
      *
      * @return A Field to allfdistribu advected on the time step given.
      */
-    DFieldRTheta operator()(
-            DFieldRTheta allfdistribu,
-            DConstVectorFieldRTheta<R, Theta> advection_field_rtheta,
+    DFieldFDistribu operator()(
+            DFieldFDistribu allfdistribu,
+            DVectorConstFieldAdvectionRTheta advection_field_rtheta,
             CoordXY const& advection_field_xy_centre,
             double dt) const
     {
         Kokkos::Profiling::pushRegion("PolarAdvection");
-        IdxRangeRTheta grid(get_idx_range<GridR, GridTheta>(allfdistribu));
+        IdxRangeRTheta grid(get_idx_range(allfdistribu));
 
         const int npoints_theta = IdxRangeTheta(grid).size();
         IdxRangeRTheta const grid_without_Opoint(grid.remove_first(IdxStepRTheta(1, 0)));
@@ -164,10 +201,11 @@ public:
 
 
         // Convert advection field on RTheta to advection field on XY
-        DVectorFieldMemRTheta<X, Y> advection_field_xy_alloc(grid);
-        DVectorFieldRTheta<X, Y> advection_field_xy = get_field(advection_field_xy_alloc);
+        DVectorFieldMemAdvectionXY advection_field_xy_alloc(grid);
+        DVectorFieldAdvectionXY advection_field_xy = get_field(advection_field_xy_alloc);
 
-        LogicalToPhysicalMapping const& logical_to_physical_mapping_proxy = m_logical_to_physical_mapping;
+        LogicalToPhysicalMapping const& logical_to_physical_mapping_proxy
+                = m_logical_to_physical_mapping;
 
         // (Ax, Ay) = J (Ar, Atheta)
         ddc::parallel_for_each(
@@ -178,23 +216,23 @@ public:
 
                     Tensor J = logical_to_physical_mapping_proxy.jacobian_matrix(coord_rtheta);
 
-                    DVector<X, Y> advec_field_xy = tensor_mul(
+                    DTensor<CartesianBasis> advec_field_xy = tensor_mul(
                             index<'i', 'j'>(J),
                             index<'j'>(advection_field_rtheta(irtheta)));
-                    ddcHelper::get<X>(advection_field_xy)(irtheta)
-                            = ddcHelper::get<X>(advec_field_xy);
-                    ddcHelper::get<Y>(advection_field_xy)(irtheta)
-                            = ddcHelper::get<Y>(advec_field_xy);
+                    ddcHelper::assign_vector_field_element(
+                            advection_field_xy,
+                            irtheta,
+                            advec_field_xy);
                 });
 
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 Opoint_grid,
                 KOKKOS_LAMBDA(IdxRTheta const irtheta) {
-                    ddcHelper::get<X>(advection_field_xy)(irtheta)
-                            = CoordX(advection_field_xy_centre);
-                    ddcHelper::get<Y>(advection_field_xy)(irtheta)
-                            = CoordY(advection_field_xy_centre);
+                    ddcHelper::assign_vector_field_element(
+                            advection_field_xy,
+                            irtheta,
+                            advection_field_xy_centre);
                 });
 
         (*this)(get_field(allfdistribu), get_const_field(advection_field_xy), dt);
