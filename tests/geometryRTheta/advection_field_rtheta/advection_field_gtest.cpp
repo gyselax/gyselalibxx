@@ -274,7 +274,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
         ddcHelper::assign_vector_field_element(
                 get_field(difference_between_fields_xy_and_rtheta),
                 irtheta,
-                advection_field_xy_from_rtheta(irtheta));
+                advection_field_xy_from_rtheta(irtheta) - advection_field_xy(irtheta));
     });
 
     // --- Check the difference on advection fields  --------------------------------------------------
