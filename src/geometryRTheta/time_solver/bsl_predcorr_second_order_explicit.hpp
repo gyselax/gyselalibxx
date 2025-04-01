@@ -10,7 +10,7 @@
 #include <ddc/pdi.hpp>
 
 #include "advection_field_rtheta.hpp"
-#include "bsl_advection_rtheta.hpp"
+#include "bsl_advection_polar.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "euler.hpp"

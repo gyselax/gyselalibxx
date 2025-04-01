@@ -12,7 +12,7 @@
 #include <ddc/ddc.hpp>
 
 #include "advection_simulation_utils.hpp"
-#include "bsl_advection_rtheta.hpp"
+#include "bsl_advection_polar.hpp"
 #include "cartesian_to_circular.hpp"
 #include "cartesian_to_czarny.hpp"
 #include "circular_to_cartesian.hpp"
@@ -222,8 +222,7 @@ void run_simulations_with_methods(
             params.advection_builder,
             params.advection_evaluator);
 
-    BslAdvectionPolar
-            advection_operator(params.interpolator, foot_finder, sim.to_physical_mapping);
+    BslAdvectionPolar advection_operator(params.interpolator, foot_finder, sim.to_physical_mapping);
 
     run_simulations(
             sim.to_physical_mapping_host,

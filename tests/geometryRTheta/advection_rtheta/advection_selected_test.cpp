@@ -9,7 +9,7 @@
 #include <ddc/ddc.hpp>
 
 #include "advection_simulation_utils.hpp"
-#include "bsl_advection_rtheta.hpp"
+#include "bsl_advection_polar.hpp"
 #include "cartesian_to_circular.hpp"
 #include "cartesian_to_czarny.hpp"
 #include "circular_to_cartesian.hpp"
