@@ -37,7 +37,7 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING_PHYSICAL" "CZARNY_MAPPING_PHYSICAL" "CZAR
 
                 Eigen3::Eigen
 
-                gslx::advection_RTheta
+                gslx::advection
                 gslx::geometry_RTheta
                 gslx::interpolation
                 gslx::io
