@@ -216,4 +216,4 @@ jobs:
         with:
           status: "failure"
           pr_number: ${{ github.event.pull_request.number }}
-          sha: ${{ github.sha }}
+          sha: ${{ github.event.pull_request.head.sha || github.sha }}
