@@ -159,8 +159,8 @@ public:
      *      on the logical index range axis.
      *      It is expressed on the contravariant basis.
      * @param [in] advection_field_xy_centre
-     *      A CoordXY containing the value of the advection field on the 
-     *      physical index range axis at the O-point. 
+     *      A vector in the Cartesian basis, containing the value of the advection
+     *      field at the O-point.
      * @param [in] dt
      *      A time step used.
      *

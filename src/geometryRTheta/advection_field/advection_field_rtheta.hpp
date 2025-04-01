@@ -351,7 +351,7 @@ public:
      * @param[out] advection_field_rtheta
      *      The advection field on the logical axis. It is expressed on the contravariant basis. 
      * @param[out] advection_field_xy_centre
-     *      The advection field on the physical axis at the O-point. 
+     *      The advection field at the centre point on the Cartesian basis.
      */
     void operator()(
             host_t<DFieldRTheta> electrostatic_potential,
@@ -383,6 +383,8 @@ public:
      *      The advection field on the logical axis. It is expressed on the contravariant basis. 
      * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point.  
+     * @param[out] advection_field_xy_centre
+     *      The advection field at the centre point on the Cartesian basis.
      */
     void operator()(
             host_t<Spline2D> electrostatic_potential_coef,
@@ -406,7 +408,7 @@ public:
      * @param[out] advection_field_rtheta
      *      The advection field on the logical axis. It is expressed on the contravariant basis. 
      * @param[out] advection_field_xy_centre
-     *      The advection field on the physical axis at the O-point. 
+     *      The advection field at the centre point on the Cartesian basis.
      */
     void operator()(
             host_t<PolarSplineMemRTheta>& electrostatic_potential_coef,
@@ -433,8 +435,8 @@ private:
      * @param[out] advection_field_rtheta
      *      The advection field on the logical axis on an domain without O-point.
      *      It is expressed on the contravariant basis. 
-     * @param[out] advection_field_xy_centre
-     *      The advection field on the physical axis at the O-point. 
+     * @param [in] advection_field_xy_centre
+     *      The advection field at the centre point on the Cartesian basis.
      */
     template <class SplineType, class Evaluator>
     void compute_advection_field_RTheta(
