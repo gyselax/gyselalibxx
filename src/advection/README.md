@@ -137,6 +137,137 @@ The operator takes as templated parameters:
 
 **Remark/Warning:** The advection field need to use interpolation on B-splines. So we cannot use other type of interpolator for the advection field. However there is no constraint on the interpolator of the advected function.
 
+## 2D advection on a polar slice with a given advection field
+
+### Studied equation
+
+The studied equation is the following 2D transport equation type :
+
+```math
+\partial_t f(t,x,y) + A(t,x,y)\cdot\nabla f(t,x,y) = 0,
+```
+
+with $`f(0,x,y) = f_0(x,y)`$ and *A* the advection field.
+
+**We want to solve it on a polar grid so we have:**  $`(t,x,y) = (t,x(r,\theta),y(r,\theta))`$.
+
+### Backward Semi-Lagrangian method
+
+The method used to solve the equation is a backward Semi-Lagrangian method (BSL).
+It uses the conservation property along the characteristics:
+
+```math
+\forall t, \quad f(t, x, y) = f(s, X(t; s, x, y), Y(t; s, x, y))
+```
+
+with:
+
+```math
+\begin{aligned}
+\partial_t X (t; s, x, y) = A(t,X(t; s, x, y),Y(t; s, x, y)) \cdot e_x,\\
+\partial_t Y (t; s, x, y) = A(t,X(t; s, x, y),Y(t; s, x, y)) \cdot e_y,\\
+X(s; s, x, y) = x,\\
+Y(s; s, x, y) = y.
+\end{aligned}
+```
+
+So to compute the advected function at the next time step,
+
+- we compute the feet of the characteristics $`X(t^n; t^{n+1}, x_i, y_j)`$ and $`Y(t^n; t^{n+1}, x_i, y_j)`$
+ for each mesh point $`(x_i, y_j)`$ with a time integration method ;
+- we interpolate the function $f(t = t^n)$ on the feet of the characteristics.
+ The property ensures that the interpolation gives the function at the next time step $f(t = t^{n+1})$.
+
+There are multiple time integration methods available. For more details see [Time Stepping Methods](../timestepper/README.md).
+
+## Advection domain
+
+The advection domain is the domain on which we will solve the equation.
+There are three potential advection domains to consider:
+
+- the physical domain;
+- the logical domain;
+- the pseudo-Cartesian domain.
+
+It seems logical to use the **physical domain**, where the studied equation is given, as the advection domain.
+
+However, we want to solve this equation on a polar grid. So before advecting, we have to
+compute the mesh points in the physical domain using a mapping function $\mathcal{F}$:
+
+```math
+\mathcal{F} : (r,\theta)_{i,j} \mapsto  (x,y)_{i,j}.
+```
+
+This adds some steps to the advection operator, we now have to compute
+
+- the mesh points in the physical domain using $\mathcal{F}$;
+- the feet of the characteristics in the physical domain;
+- the feet of the characteristics in the logical domain (polar grid) using $\mathcal{F}^{-1}$;
+- then interpolate the advection function at the feet of the characteristics in the logical domain.
+
+The third step can be difficult especially if the mapping function $\mathcal{F}$ is not analytically invertible.
+It is not impossible, but the computations can be costly.
+
+That is why, we introduce the **pseudo-Cartesian domain**.
+We use another mapping function $\mathcal{G}$ such that:
+
+```math
+ \mathcal{G} : (r,\theta)_{i,j} \mapsto  (x,y)_{i,j} = (r\cos(\theta), r\sin(\theta))_{i,j}.
+```
+
+Then the four previous steps become
+
+- calculate the mesh points in the pseudo-Cartesian domain using $\mathcal{G}$;
+- calculate the advection field $A$ in the pseudo-Cartesian domain using the Jacobian matrix of $(\mathcal{F}\circ\mathcal{G}^{-1})^{-1}$;
+- calculate the feet of the characteristics in the pseudo\_Cartesian domain;
+- calculate the feet of the characteristics in the logical domain (polar grid) using $\mathcal{G}^{-1}$;
+- interpolate the advection function at the feet of the characteristics in the logical domain.
+
+Here, $\mathcal{G}$ is analytically invertible (we can fix  $\mathcal{G}^{-1}(x = 0, y = 0) = (r = 0, \theta = 0)$)
+and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details are given in Zoni et al. (2019) [^1].
+
+**Remark 1:** if $\mathcal{F}$ is the circular mapping function, then the physical domain and the pseudo-Cartesian domain are the same.
+
+**Remark 2:** if the mapping function is analytically invertible, it is less costly to advect in the physical domain.
+
+## Advection Field
+
+In the studied equation, the advection field is given along the physical domain axis:
+
+```math
+\partial_t f + A \cdot \nabla f = 0.
+```
+
+The BslAdvectionPolar operator can take as input
+the advection field expressed on the $`(e_x, e_y)`$ basis of the physical domain or
+the advection field expressed on the $`(e_r, e_\theta)`$ [contravariant basis](../../../docs/standards/mathematical_and_physical_conventions.md) of the logical domain,
+
+```math
+A = A_x e_x + A_y e_y \quad \text{or} \quad A = A^r e_r + A^\theta e_\theta.
+```
+
+The advection field can be computed thanks to the AdvectionFieldFinder operator. This operator returns both expressions of the advection field (see [advection\_field\_rtheta](./../advection_field/README.md)).
+
+- If the advection field is directly expressed on the $`(e_x, e_y)`$ basis of the physical domain, no treatment is needed in the BslAdvectionPolar operator.
+
+- If the advection field is expressed on the $`(e_r, e_\theta)`$ contravariant basis of the logical domain, then we need to compute the advection field on the $`(e_x, e_y)`$ basis to advect in the physical domain.
+
+To pass from the composants on the $`(e_r, e_\theta)`$ contravariant basis to the composants on the $`(e_x, e_y)`$ basis, we use the Jacobian matrix *J* of the coordinate transformation $`(r,\theta) \mapsto (x,y)`$,
+
+```math
+\begin{bmatrix}
+    A\cdot e_x \\
+    A\cdot e_y
+\end{bmatrix}
+=
+J
+\begin{bmatrix}
+    A \cdot e_{r} \\
+    A \cdot e_{\theta}
+\end{bmatrix}.
+```
+
+
 ## PolarFootFinder
 
 These methods are designed to calculate the foot of the characteristic on the polar plane for a 2D transport equation of the type:
