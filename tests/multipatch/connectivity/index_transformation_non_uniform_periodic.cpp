@@ -97,7 +97,6 @@ TEST_F(IndexTransformationNonUniformPeriodicTest, IndexAvailability)
     using Interface12 = Interface<EdgeR1B, EdgeR2F, false>;
 
     // Coordinate transformation .................................................................
-    // Current index starting at 0
     EdgeTransformation<Interface12> index_transformation(idx_range_theta1, idx_range_theta2);
 
     Patch1::Idx2 test_idx_theta1(7);
@@ -117,7 +116,6 @@ TEST_F(IndexTransformationNonUniformPeriodicTest, InvertedOrientation)
     using Interface12 = Interface<EdgeR1B, EdgeR2F, false>;
 
     // Coordinate transformation .................................................................
-    // Current index starting at 0
     EdgeTransformation<Interface12> index_transformation(idx_range_theta1, idx_range_theta2);
 
     Patch1::Idx2 test_idx_theta1(6);
@@ -134,7 +132,6 @@ TEST_F(IndexTransformationNonUniformPeriodicTest, ReverseTransformation)
     using Interface12 = Interface<EdgeR1B, EdgeR2F, false>;
 
     // Coordinate transformation .................................................................
-    // Current index starting at 0
     EdgeTransformation<Interface12> index_transformation(idx_range_theta1, idx_range_theta2);
 
     Patch2::Idx2 test_idx_theta2(3);

@@ -104,19 +104,12 @@ TEST_F(IndexTransformationUniformPeriodicTest, InvertedOrientation)
     using Interface12 = Interface<EdgeR1B, EdgeR2F, false>;
 
     // Coordinate transformation .................................................................
-    // Current index starting at 0
     EdgeTransformation<Interface12> index_transformation(idx_range_theta1, idx_range_theta2);
 
     Patch1::Idx2 test_idx_theta1(6);
     Patch2::Idx2 test_idx_theta2(index_transformation(test_idx_theta1));
 
     EXPECT_EQ((test_idx_theta2 - idx_range_theta2.front()).value(), 3);
-
-    // Apply periodicity property
-    test_idx_theta1 = Patch1::Idx2 (0);
-    test_idx_theta2 = index_transformation(test_idx_theta1);
-
-    EXPECT_EQ((test_idx_theta2 - idx_range_theta2.front()).value(), 0);
 }
 
 
@@ -127,11 +120,25 @@ TEST_F(IndexTransformationUniformPeriodicTest, ReverseTransformation)
     using Interface12 = Interface<EdgeR1B, EdgeR2F, false>;
 
     // Coordinate transformation .................................................................
-    // Current index not starting at 0
     EdgeTransformation<Interface12> index_transformation(idx_range_theta1, idx_range_theta2);
 
     Patch2::Idx2 test_idx_theta2(3+1);
     Patch1::Idx2 test_idx_theta1(index_transformation(test_idx_theta2));
 
     EXPECT_EQ((test_idx_theta1 - idx_range_theta1.front()).value(), 6);
+}
+
+TEST_F(IndexTransformationUniformPeriodicTest, Periodicity)
+{
+    using EdgeR1B = Edge<Patch1, GridR<1>, BACK>;
+    using EdgeR2F = Edge<Patch2, GridR<2>, FRONT>;
+    using Interface12 = Interface<EdgeR1B, EdgeR2F, false>;
+
+    // Coordinate transformation .................................................................
+    EdgeTransformation<Interface12> index_transformation(idx_range_theta1, idx_range_theta2);
+
+    Patch1::Idx2 test_idx_theta1 (0);
+    Patch2::Idx2 test_idx_theta2 = index_transformation(test_idx_theta1);
+
+    EXPECT_EQ((test_idx_theta2 - idx_range_theta2.front()).value(), 0);
 }
