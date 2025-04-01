@@ -62,6 +62,7 @@ protected:
     /// The continuous radial dimension.
     using VectorIndexSetAdvectionDims = VectorIndexSetAdvDims;
 
+public:
     /// The type of the memory space where the field is saved (CPU vs GPU).
     using memory_space = MemorySpace;
 

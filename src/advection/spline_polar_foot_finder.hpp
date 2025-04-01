@@ -68,9 +68,6 @@ class SplinePolarFootFinder
                   typename SplineRThetaBuilder::exec_space,
                   LogicalToPseudoPhysicalMapping>);
 
-private:
-    using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
-
     using base_type = IPolarFootFinder<
             typename SplineRThetaBuilder::interpolation_discrete_dimension_type1,
             typename SplineRThetaBuilder::interpolation_discrete_dimension_type2,
@@ -78,10 +75,15 @@ private:
             typename SplineRThetaBuilder::batched_interpolation_domain_type,
             typename SplineRThetaBuilder::memory_space>;
 
+public:
+    using typename base_type::memory_space;
+
+private:
+    using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
+
 private:
     using typename base_type::GridR;
     using typename base_type::GridTheta;
-    using typename base_type::memory_space;
     using typename base_type::R;
     using typename base_type::Theta;
     using typename base_type::VectorIndexSetAdvectionDims;
