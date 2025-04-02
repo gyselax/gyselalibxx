@@ -35,11 +35,6 @@ public:
     /// @brief Indicate the third logical coordinate.
     using toroidal_tag_phi = Phi;
 
-    /// The type of the argument of the function described by this mapping.
-    using CoordArg = Coord<Rho, Theta, Zeta>;
-    /// The type of the result of the function described by this mapping.
-    using CoordResult = Coord<R, Z, Phi>;
-
     /// The type of the coordinate change on the polar plane.
     using PolarToCartesian = Curvilinear2DToCartesian;
 
@@ -56,6 +51,12 @@ private:
     using Phi_cov = typename Phi::Dual;
 
     using CoordArg2D = Coord<Rho, Theta>;
+
+public:
+    /// The type of the argument of the function described by this mapping.
+    using CoordArg = Coord<Rho, Theta, Phi>;
+    /// The type of the result of the function described by this mapping.
+    using CoordResult = Coord<R, Z, Zeta>;
 
 private:
     Curvilinear2DToCartesian m_mapping_2d;
@@ -76,7 +77,7 @@ public:
      */
     KOKKOS_FUNCTION CoordResult operator()(CoordArg const& coord) const
     {
-        return CoordResult(m_mapping_2d(CoordArg2D(coord)), Coord<Phi>(-ddc::get<Zeta>(coord)));
+        return CoordResult(m_mapping_2d(CoordArg2D(coord)), Coord<Zeta>(-ddc::get<Phi>(coord)));
     }
 
 
@@ -88,7 +89,7 @@ public:
     KOKKOS_FUNCTION DTensor<VectorIndexSet<R, Z, Zeta>, VectorIndexSet<Rho_cov, Theta_cov, Phi_cov>>
     jacobian_matrix(CoordArg const& coord) const
     {
-        DTensor<VectorIndexSet<R, Z, Zeta>, VectorIndexSet<Rho_cov, Theta_cov, Zeta_cov>> J_3d(0);
+        DTensor<VectorIndexSet<R, Z, Zeta>, VectorIndexSet<Rho_cov, Theta_cov, Phi_cov>> J_3d(0);
         DTensor<VectorIndexSet<R, Z>, VectorIndexSet<Rho_cov, Theta_cov>> J_2d
                 = m_mapping_2d.jacobian_matrix(CoordArg2D(coord));
         ddcHelper::get<R, Rho_cov>(J_3d) = ddcHelper::get<R, Rho_cov>(J_2d);
@@ -115,10 +116,43 @@ public:
                     CoordArg2D(coord));
         }
     }
+
+    KOKKOS_FUNCTION DTensor<VectorIndexSet<Rho, Theta, Phi>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>>
+    inv_jacobian_matrix(CoordArg const& coord) const
+    {
+        static_assert(has_2d_inv_jacobian_v<Curvilinear2DToCartesian>);
+        DTensor<VectorIndexSet<Rho, Theta, Phi>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>> inv_J_3d;
+        DTensor<VectorIndexSet<Rho, Theta>, VectorIndexSet<R_cov, Z_cov>> inv_J_2d
+                = m_mapping_2d.inv_jacobian_matrix(CoordArg2D(coord));
+        ddcHelper::get<Rho, R_cov>(inv_J_3d) = ddcHelper::get<Rho, R_cov>(inv_J_2d);
+        ddcHelper::get<Rho, Z_cov>(inv_J_3d) = ddcHelper::get<Rho, Z_cov>(inv_J_2d);
+        ddcHelper::get<Theta, R_cov>(inv_J_3d) = ddcHelper::get<Theta, R_cov>(inv_J_2d);
+        ddcHelper::get<Theta, Z_cov>(inv_J_3d) = ddcHelper::get<Theta, Z_cov>(inv_J_2d);
+        ddcHelper::get<Phi, Zeta_cov>(inv_J_3d) = -1;
+        return inv_J_3d;
+    }
+
+    template <class IndexTag1, class IndexTag2>
+    KOKKOS_INLINE_FUNCTION double inv_jacobian_component(CoordArg const& coord) const
+    {
+        static_assert(has_2d_inv_jacobian_v<Curvilinear2DToCartesian>);
+        static_assert(ddc::in_tags_v<IndexTag1, ddc::detail::TypeSeq<Rho, Theta, Phi>>);
+        static_assert(ddc::in_tags_v<IndexTag2, ddc::detail::TypeSeq<R_cov, Z_cov, Zeta_cov>>);
+
+        if constexpr (std::is_same_v<IndexTag1, Phi> && std::is_same_v<IndexTag2, Zeta_cov>) {
+            return -1;
+        } else if constexpr (
+                (std::is_same_v<IndexTag1, Phi>) || (std::is_same_v<IndexTag2, Zeta_cov>)) {
+            return 0;
+        } else {
+            return m_mapping_2d.template jacobian_component<IndexTag1, IndexTag2>(
+                    CoordArg2D(coord));
+        }
+    }
 };
 
 namespace mapping_detail {
-template <class Curvilinear2DToCartesian, class Zeta, class Phi>
+template <class Curvilinear2DToCartesian, class Zeta, class Phi, class ExecSpace>
 struct MappingAccessibility<ExecSpace, ToroidalToCylindrical<Curvilinear2DToCartesian, Zeta, Phi>>
     : MappingAccessibility<ExecSpace, Curvilinear2DToCartesian>
 {
