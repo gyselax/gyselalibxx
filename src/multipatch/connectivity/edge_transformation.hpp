@@ -391,14 +391,10 @@ public:
         IdxRangeCurrent const current_idx_range(combined_idx_range);
         IdxRangeTarget const target_idx_range(combined_idx_range);
 
-        int n_cells_current = current_idx_range.size() - 1;
-        int n_cells_target = target_idx_range.size() - 1;
-        if constexpr (CurrentGrid::continuous_dimension_type::PERIODIC) {
-            n_cells_current++;
-        }
-        if constexpr (TargetGrid::continuous_dimension_type::PERIODIC) {
-            n_cells_target++;
-        }
+        int n_cells_current
+                = current_idx_range.size() - int(!CurrentGrid::continuous_dimension_type::PERIODIC);
+        int n_cells_target
+                = target_idx_range.size() - int(!TargetGrid::continuous_dimension_type::PERIODIC);
 
         if constexpr ( // Uniform case
                 ddc::is_uniform_point_sampling_v<
@@ -419,22 +415,19 @@ public:
             if (is_equivalent_idx) {
                 double const rescaling_factor = double(n_cells_current) / double(n_cells_target);
                 IdxStepTarget target_idx_step_rescaled(int(current_idx_value / rescaling_factor));
-                target_idx = IdxTarget(target_idx_range.front());
-                target_idx += target_idx_step_rescaled;
+                target_idx = target_idx_range.front() + target_idx_step_rescaled;
 
                 if constexpr (!Interface::orientations_agree) {
+                    IdxStepTarget target_idx_step = target_idx_range.back() - target_idx;
+                    target_idx = IdxTarget(target_idx_range.front())
+                                 + int(TargetGrid::continuous_dimension_type::PERIODIC)
+                                 + target_idx_step;
+
                     if constexpr (TargetGrid::continuous_dimension_type::PERIODIC) {
-                        IdxStepTarget target_idx_step
-                                = IdxTarget(target_idx_range.back() + 1) - target_idx;
-                        target_idx = IdxTarget(target_idx_range.front()) + target_idx_step;
                         // Apply periodicity property of the domain.
                         if (target_idx == target_idx_range.back() + 1) {
                             target_idx = target_idx_range.front();
                         }
-                    } else {
-                        IdxStepTarget target_idx_step
-                                = IdxTarget(target_idx_range.back()) - target_idx;
-                        target_idx = IdxTarget(target_idx_range.front()) + target_idx_step;
                     }
                 }
             }
@@ -480,10 +473,8 @@ private:
         CurrentCoord const current_coord(ddc::coordinate(current_idx));
 
         IdxTarget target_idx_min(target_idx_range.front());
-        IdxTarget target_idx_max(target_idx_range.back());
-        if constexpr (TargetGrid::continuous_dimension_type::PERIODIC) {
-            target_idx_max = IdxTarget(target_idx_range.back() + 1);
-        }
+        IdxTarget target_idx_max(
+                target_idx_range.back() + int(TargetGrid::continuous_dimension_type::PERIODIC));
         IdxTarget target_idx_mid = get_mid(target_idx_min, target_idx_max);
 
         IdxStepTarget target_idx_step_diff = target_idx_max - target_idx_min;
