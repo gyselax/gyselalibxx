@@ -119,6 +119,7 @@ public:
             DVectorFieldType<IdxRange> const gradient,
             DVectorConstFieldCovType<IdxRange> const partial_derivatives) const
     {
+        static_assert(is_accessible_v<Kokkos::DefaultExecutionSpace, MetricTensorType>);
         using IdxType = typename IdxRange::discrete_element_type;
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
