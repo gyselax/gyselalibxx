@@ -4,6 +4,7 @@
 #include <gtest/gtest.h>
 
 #include "circular_to_cartesian.hpp"
+#include "combined_mapping.hpp"
 #include "cylindrical_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
@@ -12,6 +13,7 @@
 #include "geometry_mapping_tests.hpp"
 #include "mapping_testing_tools.hpp"
 #include "metric_tensor_evaluator.hpp"
+#include "toroidal_to_cylindrical.hpp"
 #include "view.hpp"
 
 
@@ -80,6 +82,27 @@ TEST_P(InverseMetricTensor3D, InverseMatrixCylindricalMap)
     });
 }
 
+TEST_P(InverseMetricTensor3D, InverseMatrixToroidalMap)
+{
+    auto const [Nr, Nt, Np] = GetParam();
+    const CzarnyToCartesian<R, Theta, Rho, Z> mapping_2d(0.3, 1.4);
+    using TorToCylMapping = ToroidalToCylindrical<CzarnyToCartesian<R, Theta, Rho, Z>, Zeta, Phi>;
+    using CylToCartMapping = CylindricalToCartesian<Rho, Z, Zeta, X, Y>;
+    using Mapping = CombinedMapping<CylToCartMapping, TorToCylMapping>;
+    CylToCartMapping cyl_to_cart;
+    TorToCylMapping tor_to_cyl(mapping_2d);
+    Mapping mapping(cyl_to_cart, tor_to_cyl);
+
+    FieldMemRThetaPhi_host<CoordRThetaPhi> coords
+            = get_example_coords(IdxStepR(Nr), IdxStepTheta(Nt), IdxStepPhi(Np));
+    IdxRangeRThetaPhi grid = get_idx_range(coords);
+
+    MetricTensorEvaluator<Mapping, CoordRThetaPhi> metric_tensor(mapping);
+    // Test for each coordinates if the inverse_metric_tensor is the inverse of the metric_tensor
+    ddc::for_each(grid, [&](IdxRThetaPhi const idx) {
+        check_inverse_tensor(metric_tensor(coords(idx)), metric_tensor.inverse(coords(idx)), 1e-10);
+    });
+}
 
 INSTANTIATE_TEST_SUITE_P(
         MyGroup,
