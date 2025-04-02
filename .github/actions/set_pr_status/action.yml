@@ -46,7 +46,7 @@ runs:
           RUNNING_WORKFLOWS=$(gh run list --commit ${{ inputs.sha }} --json databaseId,status --jq '.[] | select(.status == "completed") | .["databaseId"]')
           for workflow_id in ${RUNNING_WORKFLOWS}
           do
-            gh run cancel ${workflow_id}
+            gh run cancel ${workflow_id} || true
           done
         fi
       shell: bash
