@@ -31,23 +31,23 @@ runs:
     - if: github.repository == 'gyselax/gyselalibxx' && inputs.status == 'failure'
       # If any required tests are failing
       run: |
-        LATEST_SHA=$(gh pr view ${{ inputs.pr_number }} --json headRefOid --jq '.["headRefOid"]')
-        if [[ "${LATEST_SHA}" == "${{ inputs.sha }}" ]]
+        is_draft=$(gh pr view ${{ inputs.pr_number }} --json isDraft --jq '.["isDraft"]')
+        if [[ "${is_draft}" == "false" ]]
         then
-          is_draft=$(gh pr view ${{ inputs.pr_number }} --json isDraft --jq '.["isDraft"]')
-          if [[ "${is_draft}" == "false" ]]
+          LATEST_SHA=$(gh pr view ${{ inputs.pr_number }} --json headRefOid --jq '.["headRefOid"]')
+          if [[ "${LATEST_SHA}" == "${{ inputs.sha }}" ]]
           then
-            # If the PR hasn't been modified since then put it into draft
-            gh pr comment ${{ github.event.pull_request.number }} -b "This PR is failing tests so it has been put back into draft. Please remove the draft status when the tests pass."
-            gh pr ready ${{ github.event.pull_request.number }} --undo
+              # If the PR hasn't been modified since then put it into draft
+              gh pr comment ${{ github.event.pull_request.number }} -b "This PR is failing tests so it has been put back into draft. Please remove the draft status when the tests pass."
+              gh pr ready ${{ github.event.pull_request.number }} --undo
+          else
+            # If the PR has been modified then cancel any runs associated with this SHA
+            RUNNING_WORKFLOWS=$(gh run list --commit ${{ inputs.sha }} --json databaseId,status --jq '.[] | select(.status == "completed") | .["databaseId"]')
+            for workflow_id in ${RUNNING_WORKFLOWS}
+            do
+              gh run cancel ${workflow_id} || true
+            done
           fi
-        else
-          # If the PR has been modified then cancel any runs associated with this SHA
-          RUNNING_WORKFLOWS=$(gh run list --commit ${{ inputs.sha }} --json databaseId,status --jq '.[] | select(.status == "completed") | .["databaseId"]')
-          for workflow_id in ${RUNNING_WORKFLOWS}
-          do
-            gh run cancel ${workflow_id} || true
-          done
         fi
       shell: bash
       env:
