@@ -151,7 +151,7 @@ TEST_F(IndexTransformationNonUniformPeriodicTest, PeriodicitySameOrientation)
     EdgeTransformation<Interface12> index_transformation(idx_range_theta1, idx_range_theta2);
 
     // Test periodicity property
-    Patch1::Idx2 test_idx_theta1 (8);
+    Patch1::Idx2 test_idx_theta1(8);
     Patch2::Idx2 test_idx_theta2 = index_transformation(test_idx_theta1);
 
     EXPECT_EQ((test_idx_theta2 - idx_range_theta2.front()).value(), 0);
@@ -168,7 +168,7 @@ TEST_F(IndexTransformationNonUniformPeriodicTest, PeriodicityInvertedOrientation
     EdgeTransformation<Interface12> index_transformation(idx_range_theta1, idx_range_theta2);
 
     // Test periodicity property
-    Patch1::Idx2 test_idx_theta1 (0);
+    Patch1::Idx2 test_idx_theta1(0);
     Patch2::Idx2 test_idx_theta2 = index_transformation(test_idx_theta1);
 
     EXPECT_EQ((test_idx_theta2 - idx_range_theta2.front()).value(), 0);

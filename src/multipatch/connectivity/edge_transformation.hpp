@@ -399,7 +399,7 @@ public:
                 = target_idx_range.size() - int(!TargetGrid::continuous_dimension_type::PERIODIC);
 
         if constexpr (CurrentGrid::continuous_dimension_type::PERIODIC) {
-            current_idx 
+            current_idx
                     = (current_idx - current_idx_range.front()).value() < n_cells_current
                               ? current_idx
                               : IdxCurrent((current_idx - current_idx_range.back()).value() - 1);
