@@ -78,3 +78,11 @@ public:
         return tensor_mul(index<'i', 'j'>(inv_J), index<'k', 'j'>(inv_J));
     }
 };
+
+namespace mapping_detail {
+template <class Mapping, class PositionCoordinate, class ExecSpace>
+struct MappingAccessibility<ExecSpace, MetricTensorEvaluator<Mapping, PositionCoordinate>>
+    : MappingAccessibility<ExecSpace, Mapping>
+{
+};
+} // namespace mapping_detail
