@@ -29,6 +29,23 @@ struct Z
     using Dual = Z;
 };
 
+struct Rho_cov;
+struct Rho
+{
+    static bool constexpr PERIODIC = false;
+    static bool constexpr IS_COVARIANT = false;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    /// The corresponding type in the dual space.
+    using Dual = Rho_cov;
+};
+struct Rho_cov
+{
+    static bool constexpr PERIODIC = false;
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = false;
+    /// The corresponding type in the dual space.
+    using Dual = Rho;
+};
 struct Zeta_cov;
 struct Zeta
 {
