@@ -22,7 +22,7 @@ template <
         class GridRadial,
         class GridPoloidal,
         class VectorIndexSetAdvDims,
-        class BatchedIdxRange,
+        class IdxRangeBatched,
         class MemorySpace>
 class IPolarFootFinder
 {
@@ -34,15 +34,15 @@ class IPolarFootFinder
             (ddc::is_non_uniform_point_sampling_v<GridPoloidal>)
             || (ddc::is_uniform_point_sampling_v<GridPoloidal>));
     static_assert(is_vector_index_set_v<VectorIndexSetAdvDims>);
-    static_assert(ddc::is_discrete_domain_v<BatchedIdxRange>);
+    static_assert(ddc::is_discrete_domain_v<IdxRangeBatched>);
     static_assert(Kokkos::is_memory_space_v<MemorySpace>);
 
     // Check that grids make sense
     static_assert(
-            ddc::in_tags_v<GridRadial, ddc::to_type_seq_t<BatchedIdxRange>>,
+            ddc::in_tags_v<GridRadial, ddc::to_type_seq_t<IdxRangeBatched>>,
             "The radial grid must be found in the batched index range");
     static_assert(
-            ddc::in_tags_v<GridPoloidal, ddc::to_type_seq_t<BatchedIdxRange>>,
+            ddc::in_tags_v<GridPoloidal, ddc::to_type_seq_t<IdxRangeBatched>>,
             "The poloidal grid must be found in the batched index range");
 
     // Check that VectorIndexSetAdvDims makes sense
@@ -67,7 +67,7 @@ public:
     using memory_space = MemorySpace;
 
     /// The type of the index range over which the operator works.
-    using IdxRangeOperator = BatchedIdxRange;
+    using IdxRangeOperator = IdxRangeBatched;
 
 public:
     virtual ~IPolarFootFinder() = default;

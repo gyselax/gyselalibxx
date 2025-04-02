@@ -128,7 +128,7 @@ private:
     using BSplinesR = typename SplineRThetaBuilderAdvection::bsplines_type1;
     using BSplinesTheta = typename SplineRThetaBuilderAdvection::bsplines_type2;
 
-    using BatchedSplineIdxRange
+    using IdxRangeSplineBatched
             = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
                     ddc::to_type_seq_t<IdxRangeOperator>,
                     ddc::detail::TypeSeq<GridR, GridTheta>,
@@ -175,7 +175,7 @@ public:
      * on the polar plane on a compatible memory space.
      */
     using VectorSplineCoeffsMem
-            = DVectorFieldMem<BatchedSplineIdxRange, PseudoCartesianBasis, memory_space>;
+            = DVectorFieldMem<IdxRangeSplineBatched, PseudoCartesianBasis, memory_space>;
 
 public:
     /**
