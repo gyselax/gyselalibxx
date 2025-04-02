@@ -24,7 +24,7 @@ class GyrokineticPoissonBracket
     using CovBasisSpatial = get_covariant_dims_t<BasisSpatial>;
 
 private:
-    Mapping3D const& m_mapping;
+    Mapping3D m_mapping;
     Gradient<MetricTensorEvaluator<Mapping3D>> m_grad;
 
 public:

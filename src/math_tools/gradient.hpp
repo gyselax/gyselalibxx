@@ -32,7 +32,7 @@ class Gradient
     template <class IdxRange>
     using DVectorConstFieldCovType = DVectorConstField<IdxRange, Dims_cov>;
 
-    MetricTensorType const& m_metric_tensor;
+    MetricTensorType m_metric_tensor;
 
 public:
     /**
