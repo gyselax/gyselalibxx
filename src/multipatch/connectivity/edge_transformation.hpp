@@ -93,7 +93,7 @@ struct IdxRangeCurrentAndTarget<
 /**
  * @brief Get equivalent coordinate on the target patch. 
  * 
- * @tparam T Type for a continuous dimension or a patch. 
+ * @tparam PatchOrDim Type for a continuous dimension or a patch. 
  * @tparam Interface Interface type given in EdgeTransformation class. 
  * @tparam CurrentDim The continuous dimension where the given coordinate is defined. 
  * 
@@ -103,7 +103,7 @@ struct IdxRangeCurrentAndTarget<
  * 
  * @return Equivalent coordinate on the target patch. 
  */
-template <typename T, class Interface, class CurrentDim>
+template <typename PatchOrDim, class Interface, class CurrentDim>
 Coord<std::conditional_t<
         std::is_same_v<
                 CurrentDim,
@@ -124,8 +124,9 @@ get_equivalent_target_coordinate(
     // The other continuous dimension
     using TargetDim = std::conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, EdgeDim2, EdgeDim1>;
 
-    using IdxRangeCurrent = typename IdxRangeCurrentAndTarget<Interface, T>::IdxRangeCurrent;
-    using IdxRangeTarget = typename IdxRangeCurrentAndTarget<Interface, T>::IdxRangeTarget;
+    using IdxRangeCurrent =
+            typename IdxRangeCurrentAndTarget<Interface, PatchOrDim>::IdxRangeCurrent;
+    using IdxRangeTarget = typename IdxRangeCurrentAndTarget<Interface, PatchOrDim>::IdxRangeTarget;
 
     // Gem_idx_range_patch_1min and length on each 1D index ranges:
     IdxRange<EdgeGrid1, EdgeGrid2> const combined_idx_range(idx_range_patch_1, idx_range_patch_2);
