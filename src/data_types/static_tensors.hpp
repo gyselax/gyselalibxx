@@ -16,7 +16,8 @@ template <class ElementType, class ValidIndexSet>
 class LeviCivitaTensor
 {
     static_assert(is_vector_index_set_v<ValidIndexSet>);
-    static_assert(is_covariant_vector_index_set_v<ValidIndexSet>,
+    static_assert(
+            is_covariant_vector_index_set_v<ValidIndexSet>,
             "The Levi-Civita tensor is defined from covariant components");
 
 public:
