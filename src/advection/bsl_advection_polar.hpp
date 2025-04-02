@@ -52,6 +52,9 @@
 template <class FootFinder, class LogicalToPhysicalMapping, class InterpolatorPolar>
 class BslAdvectionPolar
 {
+    using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
+    using Theta = typename LogicalToPhysicalMapping::curvilinear_tag_theta;
+
     using CoordRTheta = typename LogicalToPhysicalMapping::CoordArg;
     using CoordXY = typename LogicalToPhysicalMapping::CoordResult;
 
@@ -60,13 +63,11 @@ class BslAdvectionPolar
 
     using IdxRangeBatched = typename FootFinder::IdxRangeOperator;
 
-    using IdxRangeRTheta = IdxRange<
-            find_grid_t<
-                    ddc::type_seq_element_t<0, CurvilinearBasis>,
-                    ddc::to_type_seq_t<IdxRangeBatched>>,
-            find_grid_t<
-                    ddc::type_seq_element_t<1, CurvilinearBasis>,
-                    ddc::to_type_seq_t<IdxRangeBatched>>>;
+    using GridR = find_grid_t<R, ddc::to_type_seq_t<IdxRangeBatched>>;
+    using GridTheta = find_grid_t<Theta, ddc::to_type_seq_t<IdxRangeBatched>>;
+
+    using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
+    using IdxRangeTheta = IdxRange<GridTheta>;
 
     using IdxRTheta = typename IdxRangeRTheta::discrete_element_type;
     using IdxStepRTheta = typename IdxRangeRTheta::discrete_vector_type;
@@ -195,7 +196,7 @@ public:
         Kokkos::Profiling::pushRegion("PolarAdvection");
         IdxRangeRTheta grid(get_idx_range(allfdistribu));
 
-        const int npoints_theta = grid.size();
+        const int npoints_theta = IdxRangeTheta(grid).size();
         IdxRangeRTheta const grid_without_Opoint(grid.remove_first(IdxStepRTheta(1, 0)));
         IdxRangeRTheta const Opoint_grid(grid.take_first(IdxStepRTheta(1, npoints_theta)));
 
