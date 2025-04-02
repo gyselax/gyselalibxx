@@ -682,10 +682,10 @@
 <codeline lineno="343"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>-------------------------------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="344"><highlight class="normal"></highlight></codeline>
 <codeline lineno="345"><highlight class="normal"></highlight></codeline>
-<codeline lineno="356" refid="classAdvectionFieldFinder_1af15aac72117e27547284dd75ac61caab" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAdvectionFieldFinder_1af15aac72117e27547284dd75ac61caab" kindref="member">operator()</ref>(</highlight></codeline>
+<codeline lineno="356" refid="classAdvectionFieldFinder_1a9d0eeda30e67611e8dd43b76d1917c16" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAdvectionFieldFinder_1a9d0eeda30e67611e8dd43b76d1917c16" kindref="member">operator()</ref>(</highlight></codeline>
 <codeline lineno="357"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;DFieldRTheta&gt;<sp/>electrostatic_potential,</highlight></codeline>
 <codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;<ref refid="classVectorField" kindref="compound">DVectorFieldRTheta&lt;R, Theta&gt;</ref>&gt;<sp/>advection_field_rtheta,</highlight></codeline>
-<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CoordXY&amp;<sp/>advection_field_xy_centre)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DVector&lt;X, Y&gt;</ref>&amp;<sp/>advection_field_xy_centre)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="360"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeRTheta<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>grid<sp/>=<sp/>get_idx_range(electrostatic_potential);</highlight></codeline>
 <codeline lineno="362"><highlight class="normal"></highlight></codeline>
@@ -702,10 +702,10 @@
 <codeline lineno="373"><highlight class="normal"></highlight></codeline>
 <codeline lineno="374"><highlight class="normal"></highlight></codeline>
 <codeline lineno="375"><highlight class="normal"></highlight></codeline>
-<codeline lineno="387" refid="classAdvectionFieldFinder_1acc3d3127eab43e311d98df8f05d4effb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAdvectionFieldFinder_1acc3d3127eab43e311d98df8f05d4effb" kindref="member">operator()</ref>(</highlight></codeline>
+<codeline lineno="387" refid="classAdvectionFieldFinder_1a89990a08a45c7671f3fb9fbcdeecf66f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAdvectionFieldFinder_1a89990a08a45c7671f3fb9fbcdeecf66f" kindref="member">operator()</ref>(</highlight></codeline>
 <codeline lineno="388"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;Spline2D&gt;<sp/>electrostatic_potential_coef,</highlight></codeline>
 <codeline lineno="389"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;<ref refid="classVectorField" kindref="compound">DVectorFieldRTheta&lt;R, Theta&gt;</ref>&gt;<sp/>advection_field_rtheta,</highlight></codeline>
-<codeline lineno="390"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CoordXY&amp;<sp/>advection_field_xy_centre)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="390"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DVector&lt;X, Y&gt;</ref>&amp;<sp/>advection_field_xy_centre)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="391"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="392"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>compute_advection_field_RTheta(</highlight></codeline>
 <codeline lineno="393"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_spline_evaluator,</highlight></codeline>
@@ -715,10 +715,10 @@
 <codeline lineno="397"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="398"><highlight class="normal"></highlight></codeline>
 <codeline lineno="399"><highlight class="normal"></highlight></codeline>
-<codeline lineno="411" refid="classAdvectionFieldFinder_1a8e53045ac695348dde5079bb7f7f1f73" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAdvectionFieldFinder_1a8e53045ac695348dde5079bb7f7f1f73" kindref="member">operator()</ref>(</highlight></codeline>
+<codeline lineno="411" refid="classAdvectionFieldFinder_1a96e2dc6da4ab3200da740bdf5d3aeda6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAdvectionFieldFinder_1a96e2dc6da4ab3200da740bdf5d3aeda6" kindref="member">operator()</ref>(</highlight></codeline>
 <codeline lineno="412"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;PolarSplineMemRTheta&gt;&amp;<sp/>electrostatic_potential_coef,</highlight></codeline>
 <codeline lineno="413"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;<ref refid="classVectorField" kindref="compound">DVectorFieldRTheta&lt;R, Theta&gt;</ref>&gt;<sp/>advection_field_rtheta,</highlight></codeline>
-<codeline lineno="414"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CoordXY&amp;<sp/>advection_field_xy_centre)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="414"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DVector&lt;X, Y&gt;</ref>&amp;<sp/>advection_field_xy_centre)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="415"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="416"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>compute_advection_field_RTheta(</highlight></codeline>
 <codeline lineno="417"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_polar_spline_evaluator,</highlight></codeline>
@@ -735,7 +735,7 @@
 <codeline lineno="441"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Evaluator<sp/>evaluator,</highlight></codeline>
 <codeline lineno="442"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineType&amp;<sp/>electrostatic_potential_coef,</highlight></codeline>
 <codeline lineno="443"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;<ref refid="classVectorField" kindref="compound">DVectorFieldRTheta&lt;R, Theta&gt;</ref>&gt;<sp/>advection_field_rtheta,</highlight></codeline>
-<codeline lineno="444"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CoordXY&amp;<sp/>advection_field_xy_centre)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="444"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DVector&lt;X, Y&gt;</ref>&amp;<sp/>advection_field_xy_centre)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="445"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="446"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
 <codeline lineno="447"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(std::is_same_v&lt;</highlight></codeline>
@@ -830,7 +830,7 @@
 <codeline lineno="536"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>deriv_y_phi_0</highlight></codeline>
 <codeline lineno="537"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(-dr_x_2<sp/>*<sp/>deriv_r_phi_1<sp/>+<sp/>dr_x_1<sp/>*<sp/>deriv_r_phi_2)<sp/>/<sp/>determinant;</highlight></codeline>
 <codeline lineno="538"><highlight class="normal"></highlight></codeline>
-<codeline lineno="539"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>advection_field_xy_centre<sp/>=<sp/>CoordXY(-deriv_y_phi_0,<sp/>deriv_x_phi_0);</highlight></codeline>
+<codeline lineno="539"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>advection_field_xy_centre<sp/>=<sp/><ref refid="classTensor" kindref="compound">DVector&lt;X, Y&gt;</ref>(-deriv_y_phi_0,<sp/>deriv_x_phi_0);</highlight></codeline>
 <codeline lineno="540"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="541"><highlight class="normal">};</highlight></codeline>
     </programlisting>

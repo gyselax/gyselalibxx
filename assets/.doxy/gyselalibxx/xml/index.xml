@@ -19,11 +19,11 @@
     <member refid="classAdvectionFieldFinder_1a6c48a3bdb689fb9a270698a6617f2cfb" kind="function"><name>operator()</name></member>
     <member refid="classAdvectionFieldFinder_1a1c94218e7996b38d562fa98ccd29dde5" kind="function"><name>operator()</name></member>
     <member refid="classAdvectionFieldFinder_1ab5d88aecc399886af415472b221a96d9" kind="function"><name>operator()</name></member>
-    <member refid="classAdvectionFieldFinder_1af15aac72117e27547284dd75ac61caab" kind="function"><name>operator()</name></member>
-    <member refid="classAdvectionFieldFinder_1acc3d3127eab43e311d98df8f05d4effb" kind="function"><name>operator()</name></member>
-    <member refid="classAdvectionFieldFinder_1a8e53045ac695348dde5079bb7f7f1f73" kind="function"><name>operator()</name></member>
+    <member refid="classAdvectionFieldFinder_1a9d0eeda30e67611e8dd43b76d1917c16" kind="function"><name>operator()</name></member>
+    <member refid="classAdvectionFieldFinder_1a89990a08a45c7671f3fb9fbcdeecf66f" kind="function"><name>operator()</name></member>
+    <member refid="classAdvectionFieldFinder_1a96e2dc6da4ab3200da740bdf5d3aeda6" kind="function"><name>operator()</name></member>
     <member refid="classAdvectionFieldFinder_1a8983689571c9eabb6cba669bab706083" kind="function"><name>compute_advection_field_XY</name></member>
-    <member refid="classAdvectionFieldFinder_1ac33126b4e9484f801c0f87905669e5cc" kind="function"><name>compute_advection_field_RTheta</name></member>
+    <member refid="classAdvectionFieldFinder_1ae49c77c27d8f831a567d6771fe9470cd" kind="function"><name>compute_advection_field_RTheta</name></member>
   </compound>
   <compound refid="classBarycentricToCartesian" kind="class"><name>BarycentricToCartesian</name>
     <member refid="classBarycentricToCartesian_1a17c315a0ea34b60e62b3d8c970b4e15c" kind="typedef"><name>CoordArg</name></member>
@@ -80,7 +80,7 @@
     <member refid="classBslAdvectionRTheta_1a49bf03be8882926e0cab726a38a8f032" kind="function"><name>BslAdvectionRTheta</name></member>
     <member refid="classBslAdvectionRTheta_1a15db98ec3da8f67fb028e7eb81014de0" kind="function"><name>~BslAdvectionRTheta</name></member>
     <member refid="classBslAdvectionRTheta_1a85ddb58463ee4c5bd45f70ec0e77a43a" kind="function"><name>operator()</name></member>
-    <member refid="classBslAdvectionRTheta_1aca42435e548e022990c92037c248fd5e" kind="function"><name>operator()</name></member>
+    <member refid="classBslAdvectionRTheta_1a7a7e46265dcf9f401e5aff2f151c9a0a" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classBslAdvectionSpatial" kind="class"><name>BslAdvectionSpatial</name>
     <member refid="classBslAdvectionSpatial_1a5ab2e7471cfc6966ededa7d5b4f5510c" kind="typedef"><name>GridV</name></member>
@@ -1027,7 +1027,7 @@
   <compound refid="classIAdvectionRTheta" kind="class"><name>IAdvectionRTheta</name>
     <member refid="classIAdvectionRTheta_1a6f5a140075a424ee8cd8312b71a820a6" kind="function"><name>~IAdvectionRTheta</name></member>
     <member refid="classIAdvectionRTheta_1a96cd4aff911a5d2155fb29480f92a5db" kind="function"><name>operator()</name></member>
-    <member refid="classIAdvectionRTheta_1ae033a01f398275f6fdfe6dd2ae9ee92d" kind="function"><name>operator()</name></member>
+    <member refid="classIAdvectionRTheta_1ae16da023b0335e2a8f17b406df9aa372" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classIAdvectionSpatial" kind="class"><name>IAdvectionSpatial</name>
     <member refid="classIAdvectionSpatial_1a4d3a4ee18ee609f0261a323062a58d7a" kind="function"><name>~IAdvectionSpatial</name></member>

@@ -77,7 +77,7 @@ Inherits the following classes: [IAdvectionRTheta](classIAdvectionRTheta.md)
 | ---: | :--- |
 |   | [**BslAdvectionRTheta**](#function-bsladvectionrtheta) ([**PreallocatableSplineInterpolatorType**](classPreallocatableSplineInterpolator2D.md) const & function\_interpolator, FootFinder const & foot\_finder, Mapping const & mapping) <br>_Instantiate an advection operator._  |
 | virtual DFieldRTheta | [**operator()**](#function-operator) (DFieldRTheta allfdistribu, [**DConstVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; advection\_field\_xy, double dt) override const<br>_Allocate a Field of the advected function._  |
-| virtual DFieldRTheta | [**operator()**](#function-operator_1) (DFieldRTheta allfdistribu, [**DConstVectorFieldRTheta**](classVectorField.md)&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; advection\_field\_rtheta, CoordXY const & advection\_field\_xy\_centre, double dt) override const<br>_Allocate a Field to the advected function._  |
+| virtual DFieldRTheta | [**operator()**](#function-operator_1) (DFieldRTheta allfdistribu, [**DConstVectorFieldRTheta**](classVectorField.md)&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; advection\_field\_rtheta, [**DVector**](classTensor.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; const & advection\_field\_xy\_centre, double dt) override const<br>_Allocate a Field to the advected function._  |
 |   | [**~BslAdvectionRTheta**](#function-bsladvectionrtheta) () override<br> |
 
 
@@ -88,7 +88,7 @@ See [IAdvectionRTheta](classIAdvectionRTheta.md)
 | Type | Name |
 | ---: | :--- |
 | virtual DFieldRTheta | [**operator()**](classIAdvectionRTheta.md#function-operator) (DFieldRTheta allfdistribu, [**DConstVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; advection\_field, double const dt) const = 0<br>_Advect a function along the advection field given on dt with a given advection field along XY._  |
-| virtual DFieldRTheta | [**operator()**](classIAdvectionRTheta.md#function-operator_1) (DFieldRTheta allfdistribu, [**DConstVectorFieldRTheta**](classVectorField.md)&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; advection\_field, CoordXY const & advection\_field\_xy\_centre, double const dt) const = 0<br>_Advect a function along the advection field given on dt with a given advection field along RTheta._  |
+| virtual DFieldRTheta | [**operator()**](classIAdvectionRTheta.md#function-operator_1) (DFieldRTheta allfdistribu, [**DConstVectorFieldRTheta**](classVectorField.md)&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; advection\_field, [**DVector**](classTensor.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; const & advection\_field\_xy\_centre, double const dt) const = 0<br>_Advect a function along the advection field given on dt with a given advection field along RTheta._  |
 | virtual  | [**~IAdvectionRTheta**](classIAdvectionRTheta.md#function-iadvectionrtheta) () = default<br> |
 
 
@@ -271,7 +271,7 @@ _Allocate a Field to the advected function._
 inline virtual DFieldRTheta BslAdvectionRTheta::operator() (
     DFieldRTheta allfdistribu,
     DConstVectorFieldRTheta < R , Theta > advection_field_rtheta,
-    CoordXY const & advection_field_xy_centre,
+    DVector < X , Y > const & advection_field_xy_centre,
     double dt
 ) override const
 ```
@@ -285,7 +285,7 @@ inline virtual DFieldRTheta BslAdvectionRTheta::operator() (
 
 * `allfdistribu` A Field containing the values of the function we want to advect. 
 * `advection_field_rtheta` A DConstVectorFieldRTheta containing the values of the advection field on the logical index range axis. It is expressed on the contravariant basis. 
-* `advection_field_xy_centre` A CoordXY containing the value of the advection field on the physical index range axis at the O-point. 
+* `advection_field_xy_centre` A vector in the Cartesian basis, containing the value of the advection field at the O-point. 
 * `dt` A time step used.
 
 

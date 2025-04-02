@@ -772,7 +772,7 @@ public:
     void operator()(
             host_t&lt;DFieldRTheta&gt; electrostatic_potential,
             host_t&lt;DVectorFieldRTheta&lt;R, Theta&gt;&gt; advection_field_rtheta,
-            CoordXY&amp; advection_field_xy_centre) const
+            DVector&lt;X, Y&gt;&amp; advection_field_xy_centre) const
     {
         IdxRangeRTheta const grid = get_idx_range(electrostatic_potential);
 
@@ -792,7 +792,7 @@ public:
     void operator()(
             host_t&lt;Spline2D&gt; electrostatic_potential_coef,
             host_t&lt;DVectorFieldRTheta&lt;R, Theta&gt;&gt; advection_field_rtheta,
-            CoordXY&amp; advection_field_xy_centre) const
+            DVector&lt;X, Y&gt;&amp; advection_field_xy_centre) const
     {
         compute_advection_field_RTheta(
                 m_spline_evaluator,
@@ -805,7 +805,7 @@ public:
     void operator()(
             host_t&lt;PolarSplineMemRTheta&gt;&amp; electrostatic_potential_coef,
             host_t&lt;DVectorFieldRTheta&lt;R, Theta&gt;&gt; advection_field_rtheta,
-            CoordXY&amp; advection_field_xy_centre) const
+            DVector&lt;X, Y&gt;&amp; advection_field_xy_centre) const
     {
         compute_advection_field_RTheta(
                 m_polar_spline_evaluator,
@@ -822,7 +822,7 @@ private:
             Evaluator evaluator,
             SplineType&amp; electrostatic_potential_coef,
             host_t&lt;DVectorFieldRTheta&lt;R, Theta&gt;&gt; advection_field_rtheta,
-            CoordXY&amp; advection_field_xy_centre) const
+            DVector&lt;X, Y&gt;&amp; advection_field_xy_centre) const
     {
         static_assert(
                 (std::is_same_v&lt;
@@ -917,7 +917,7 @@ private:
         double const deriv_y_phi_0
                 = (-dr_x_2 * deriv_r_phi_1 + dr_x_1 * deriv_r_phi_2) / determinant;
 
-        advection_field_xy_centre = CoordXY(-deriv_y_phi_0, deriv_x_phi_0);
+        advection_field_xy_centre = DVector&lt;X, Y&gt;(-deriv_y_phi_0, deriv_x_phi_0);
     }
 };
 </code></pre></div>

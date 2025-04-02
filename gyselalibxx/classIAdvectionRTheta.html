@@ -561,7 +561,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">virtual DFieldRTheta</td>
-<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (DFieldRTheta allfdistribu, <a href="classVectorField.html"><strong>DConstVectorFieldRTheta</strong></a>&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; advection_field, CoordXY const &amp; advection_field_xy_centre, double const dt) const = 0<br><em>Advect a function along the advection field given on dt with a given advection field along RTheta.</em></td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (DFieldRTheta allfdistribu, <a href="classVectorField.html"><strong>DConstVectorFieldRTheta</strong></a>&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; advection_field, <a href="classTensor.html"><strong>DVector</strong></a>&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; const &amp; advection_field_xy_centre, double const dt) const = 0<br><em>Advect a function along the advection field given on dt with a given advection field along RTheta.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual</td>
@@ -593,7 +593,7 @@
 <pre><code class="language-C++">virtual DFieldRTheta IAdvectionRTheta::operator() (
     DFieldRTheta allfdistribu,
     DConstVectorFieldRTheta &lt; R , Theta &gt; advection_field,
-    CoordXY const &amp; advection_field_xy_centre,
+    DVector &lt; X , Y &gt; const &amp; advection_field_xy_centre,
     double const dt
 ) const = 0
 </code></pre>
@@ -601,7 +601,7 @@
 <ul>
 <li><code>allfdistribu</code> The function to be advected. </li>
 <li><code>advection_field</code> The advection field on the contravariant basis of the logical domain. </li>
-<li><code>advection_field_xy_centre</code> The advection field along the physical index range axes, XY at the centre point. </li>
+<li><code>advection_field_xy_centre</code> A vector in the Cartesian basis, containing the value of the advection field at the O-point. </li>
 <li><code>dt</code> The time step.</li>
 </ul>
 <p><strong>Returns:</strong></p>

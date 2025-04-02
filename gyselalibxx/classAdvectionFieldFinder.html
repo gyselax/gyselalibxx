@@ -588,15 +588,15 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator_3"><strong>operator()</strong></a> (host_t&lt; DFieldRTheta &gt; electrostatic_potential, host_t&lt; <a href="classVectorField.html"><strong>DVectorFieldRTheta</strong></a>&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt; advection_field_rtheta, CoordXY &amp; advection_field_xy_centre) const<br><em>Compute the advection field from a Field of</em>  <em>values.</em></td>
+<td style="text-align: left;"><a href="#function-operator_3"><strong>operator()</strong></a> (host_t&lt; DFieldRTheta &gt; electrostatic_potential, host_t&lt; <a href="classVectorField.html"><strong>DVectorFieldRTheta</strong></a>&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt; advection_field_rtheta, <a href="classTensor.html"><strong>DVector</strong></a>&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; &amp; advection_field_xy_centre) const<br><em>Compute the advection field from a Field of</em>  <em>values.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator_4"><strong>operator()</strong></a> (host_t&lt; Spline2D &gt; electrostatic_potential_coef, host_t&lt; <a href="classVectorField.html"><strong>DVectorFieldRTheta</strong></a>&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt; advection_field_rtheta, CoordXY &amp; advection_field_xy_centre) const<br><em>Compute the advection field from a spline representation of</em>  <em>. The B-splines basis used is the cross-product of two 1D B-splines basis.</em></td>
+<td style="text-align: left;"><a href="#function-operator_4"><strong>operator()</strong></a> (host_t&lt; Spline2D &gt; electrostatic_potential_coef, host_t&lt; <a href="classVectorField.html"><strong>DVectorFieldRTheta</strong></a>&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt; advection_field_rtheta, <a href="classTensor.html"><strong>DVector</strong></a>&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; &amp; advection_field_xy_centre) const<br><em>Compute the advection field from a spline representation of</em>  <em>. The B-splines basis used is the cross-product of two 1D B-splines basis.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator_5"><strong>operator()</strong></a> (host_t&lt; <a href="structPolarSplineMem.html"><strong>PolarSplineMemRTheta</strong></a> &gt; &amp; electrostatic_potential_coef, host_t&lt; <a href="classVectorField.html"><strong>DVectorFieldRTheta</strong></a>&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt; advection_field_rtheta, CoordXY &amp; advection_field_xy_centre) const<br><em>Compute the advection field from the Poisson-like equation. The B-splines basis used is the polar B-splines (</em> <a href="structPolarSplineMem.html"><em><strong>PolarSplineMem</strong></em></a> <em>).</em></td>
+<td style="text-align: left;"><a href="#function-operator_5"><strong>operator()</strong></a> (host_t&lt; <a href="structPolarSplineMem.html"><strong>PolarSplineMemRTheta</strong></a> &gt; &amp; electrostatic_potential_coef, host_t&lt; <a href="classVectorField.html"><strong>DVectorFieldRTheta</strong></a>&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt; advection_field_rtheta, <a href="classTensor.html"><strong>DVector</strong></a>&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; &amp; advection_field_xy_centre) const<br><em>Compute the advection field from the Poisson-like equation. The B-splines basis used is the polar B-splines (</em> <a href="structPolarSplineMem.html"><em><strong>PolarSplineMem</strong></em></a> <em>).</em></td>
 </tr>
 </tbody>
 </table>
@@ -701,14 +701,14 @@
 <pre><code class="language-C++">inline void AdvectionFieldFinder::operator() (
     host_t&lt; DFieldRTheta &gt; electrostatic_potential,
     host_t&lt; DVectorFieldRTheta &lt; R , Theta &gt; &gt; advection_field_rtheta,
-    CoordXY &amp; advection_field_xy_centre
+    DVector &lt; X , Y &gt; &amp; advection_field_xy_centre
 ) const
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>electrostatic_potential</code> The values of the solution  of the Poisson-like equation (2). </li>
 <li><code>advection_field_rtheta</code> The advection field on the logical axis. It is expressed on the contravariant basis. </li>
-<li><code>advection_field_xy_centre</code> The advection field on the physical axis at the O-point. </li>
+<li><code>advection_field_xy_centre</code> The advection field at the centre point on the Cartesian basis. </li>
 </ul>
 <hr>
 
@@ -717,14 +717,14 @@
 <pre><code class="language-C++">inline void AdvectionFieldFinder::operator() (
     host_t&lt; Spline2D &gt; electrostatic_potential_coef,
     host_t&lt; DVectorFieldRTheta &lt; R , Theta &gt; &gt; advection_field_rtheta,
-    CoordXY &amp; advection_field_xy_centre
+    DVector &lt; X , Y &gt; &amp; advection_field_xy_centre
 ) const
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>electrostatic_potential_coef</code> The spline representation of the solution  of the Poisson-like equation (2). </li>
 <li><code>advection_field_rtheta</code> The advection field on the logical axis. It is expressed on the contravariant basis. </li>
-<li><code>advection_field_xy_centre</code> The advection field on the physical axis at the O-point. </li>
+<li><code>advection_field_xy_centre</code> The advection field at the centre point on the Cartesian basis. </li>
 </ul>
 <hr>
 
@@ -733,14 +733,14 @@
 <pre><code class="language-C++">inline void AdvectionFieldFinder::operator() (
     host_t&lt; PolarSplineMemRTheta &gt; &amp; electrostatic_potential_coef,
     host_t&lt; DVectorFieldRTheta &lt; R , Theta &gt; &gt; advection_field_rtheta,
-    CoordXY &amp; advection_field_xy_centre
+    DVector &lt; X , Y &gt; &amp; advection_field_xy_centre
 ) const
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>electrostatic_potential_coef</code> The polar spline representation of the solution  of the Poisson-like equation (2). </li>
 <li><code>advection_field_rtheta</code> The advection field on the logical axis. It is expressed on the contravariant basis. </li>
-<li><code>advection_field_xy_centre</code> The advection field on the physical axis at the O-point. </li>
+<li><code>advection_field_xy_centre</code> The advection field at the centre point on the Cartesian basis. </li>
 </ul>
 <hr>
 

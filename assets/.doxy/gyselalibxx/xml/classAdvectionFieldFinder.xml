@@ -266,10 +266,10 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="187" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="187" bodyend="195"/>
       </memberdef>
-      <memberdef kind="function" id="classAdvectionFieldFinder_1af15aac72117e27547284dd75ac61caab" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classAdvectionFieldFinder_1a9d0eeda30e67611e8dd43b76d1917c16" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void AdvectionFieldFinder&lt; Mapping &gt;::operator()</definition>
-        <argsstring>(host_t&lt; DFieldRTheta &gt; electrostatic_potential, host_t&lt; DVectorFieldRTheta&lt; R, Theta &gt; &gt; advection_field_rtheta, CoordXY &amp;advection_field_xy_centre) const</argsstring>
+        <argsstring>(host_t&lt; DFieldRTheta &gt; electrostatic_potential, host_t&lt; DVectorFieldRTheta&lt; R, Theta &gt; &gt; advection_field_rtheta, DVector&lt; X, Y &gt; &amp;advection_field_xy_centre) const</argsstring>
         <name>operator()</name>
         <qualifiedname>AdvectionFieldFinder::operator()</qualifiedname>
         <param>
@@ -281,7 +281,7 @@
           <declname>advection_field_rtheta</declname>
         </param>
         <param>
-          <type>CoordXY &amp;</type>
+          <type><ref refid="classTensor" kindref="compound">DVector</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt; &amp;</type>
           <declname>advection_field_xy_centre</declname>
         </param>
         <briefdescription>
@@ -309,7 +309,7 @@
 <parametername direction="out">advection_field_xy_centre</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The advection field on the physical axis at the O-point. </para>
+<para>The advection field at the centre point on the Cartesian basis. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -319,10 +319,10 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="356" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="356" bodyend="372"/>
       </memberdef>
-      <memberdef kind="function" id="classAdvectionFieldFinder_1acc3d3127eab43e311d98df8f05d4effb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classAdvectionFieldFinder_1a89990a08a45c7671f3fb9fbcdeecf66f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void AdvectionFieldFinder&lt; Mapping &gt;::operator()</definition>
-        <argsstring>(host_t&lt; Spline2D &gt; electrostatic_potential_coef, host_t&lt; DVectorFieldRTheta&lt; R, Theta &gt; &gt; advection_field_rtheta, CoordXY &amp;advection_field_xy_centre) const</argsstring>
+        <argsstring>(host_t&lt; Spline2D &gt; electrostatic_potential_coef, host_t&lt; DVectorFieldRTheta&lt; R, Theta &gt; &gt; advection_field_rtheta, DVector&lt; X, Y &gt; &amp;advection_field_xy_centre) const</argsstring>
         <name>operator()</name>
         <qualifiedname>AdvectionFieldFinder::operator()</qualifiedname>
         <param>
@@ -334,7 +334,7 @@
           <declname>advection_field_rtheta</declname>
         </param>
         <param>
-          <type>CoordXY &amp;</type>
+          <type><ref refid="classTensor" kindref="compound">DVector</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt; &amp;</type>
           <declname>advection_field_xy_centre</declname>
         </param>
         <briefdescription>
@@ -362,8 +362,7 @@
 <parametername direction="out">advection_field_xy_centre</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The advection field on the physical axis at the O-point. <linebreak/>
- </para>
+<para>The advection field at the centre point on the Cartesian basis. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -373,10 +372,10 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="387" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="387" bodyend="397"/>
       </memberdef>
-      <memberdef kind="function" id="classAdvectionFieldFinder_1a8e53045ac695348dde5079bb7f7f1f73" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classAdvectionFieldFinder_1a96e2dc6da4ab3200da740bdf5d3aeda6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void AdvectionFieldFinder&lt; Mapping &gt;::operator()</definition>
-        <argsstring>(host_t&lt; PolarSplineMemRTheta &gt; &amp;electrostatic_potential_coef, host_t&lt; DVectorFieldRTheta&lt; R, Theta &gt; &gt; advection_field_rtheta, CoordXY &amp;advection_field_xy_centre) const</argsstring>
+        <argsstring>(host_t&lt; PolarSplineMemRTheta &gt; &amp;electrostatic_potential_coef, host_t&lt; DVectorFieldRTheta&lt; R, Theta &gt; &gt; advection_field_rtheta, DVector&lt; X, Y &gt; &amp;advection_field_xy_centre) const</argsstring>
         <name>operator()</name>
         <qualifiedname>AdvectionFieldFinder::operator()</qualifiedname>
         <param>
@@ -388,7 +387,7 @@
           <declname>advection_field_rtheta</declname>
         </param>
         <param>
-          <type>CoordXY &amp;</type>
+          <type><ref refid="classTensor" kindref="compound">DVector</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt; &amp;</type>
           <declname>advection_field_xy_centre</declname>
         </param>
         <briefdescription>
@@ -416,7 +415,7 @@
 <parametername direction="out">advection_field_xy_centre</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The advection field on the physical axis at the O-point. </para>
+<para>The advection field at the centre point on the Cartesian basis. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -489,7 +488,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="210" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="210" bodyend="335"/>
       </memberdef>
-      <memberdef kind="function" id="classAdvectionFieldFinder_1ac33126b4e9484f801c0f87905669e5cc" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classAdvectionFieldFinder_1ae49c77c27d8f831a567d6771fe9470cd" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class SplineType</type>
@@ -500,7 +499,7 @@
         </templateparamlist>
         <type>void</type>
         <definition>void AdvectionFieldFinder&lt; Mapping &gt;::compute_advection_field_RTheta</definition>
-        <argsstring>(Evaluator evaluator, SplineType &amp;electrostatic_potential_coef, host_t&lt; DVectorFieldRTheta&lt; R, Theta &gt; &gt; advection_field_rtheta, CoordXY &amp;advection_field_xy_centre) const</argsstring>
+        <argsstring>(Evaluator evaluator, SplineType &amp;electrostatic_potential_coef, host_t&lt; DVectorFieldRTheta&lt; R, Theta &gt; &gt; advection_field_rtheta, DVector&lt; X, Y &gt; &amp;advection_field_xy_centre) const</argsstring>
         <name>compute_advection_field_RTheta</name>
         <qualifiedname>AdvectionFieldFinder::compute_advection_field_RTheta</qualifiedname>
         <param>
@@ -516,7 +515,7 @@
           <declname>advection_field_rtheta</declname>
         </param>
         <param>
-          <type>CoordXY &amp;</type>
+          <type><ref refid="classTensor" kindref="compound">DVector</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt; &amp;</type>
           <declname>advection_field_xy_centre</declname>
         </param>
         <briefdescription>
@@ -549,10 +548,10 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="out">advection_field_xy_centre</parametername>
+<parametername direction="in">advection_field_xy_centre</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The advection field on the physical axis at the O-point. </para>
+<para>The advection field at the centre point on the Cartesian basis. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -619,7 +618,7 @@
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="91" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="92" bodyend="541"/>
     <listofallmembers>
       <member refid="classAdvectionFieldFinder_1a3086cce87c971e57d63e4ee31c0dadb6" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>AdvectionFieldFinder</name></member>
-      <member refid="classAdvectionFieldFinder_1ac33126b4e9484f801c0f87905669e5cc" prot="private" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>compute_advection_field_RTheta</name></member>
+      <member refid="classAdvectionFieldFinder_1ae49c77c27d8f831a567d6771fe9470cd" prot="private" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>compute_advection_field_RTheta</name></member>
       <member refid="classAdvectionFieldFinder_1a8983689571c9eabb6cba669bab706083" prot="private" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>compute_advection_field_XY</name></member>
       <member refid="classAdvectionFieldFinder_1afaf17208dfa7b5b4fbe953426a171910" prot="private" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>m_epsilon</name></member>
       <member refid="classAdvectionFieldFinder_1a457cb9a50e24ab460559fdd96d164bc3" prot="private" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>m_mapping</name></member>
@@ -630,9 +629,9 @@
       <member refid="classAdvectionFieldFinder_1a6c48a3bdb689fb9a270698a6617f2cfb" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
       <member refid="classAdvectionFieldFinder_1a1c94218e7996b38d562fa98ccd29dde5" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
       <member refid="classAdvectionFieldFinder_1ab5d88aecc399886af415472b221a96d9" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
-      <member refid="classAdvectionFieldFinder_1af15aac72117e27547284dd75ac61caab" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
-      <member refid="classAdvectionFieldFinder_1acc3d3127eab43e311d98df8f05d4effb" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
-      <member refid="classAdvectionFieldFinder_1a8e53045ac695348dde5079bb7f7f1f73" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
+      <member refid="classAdvectionFieldFinder_1a9d0eeda30e67611e8dd43b76d1917c16" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
+      <member refid="classAdvectionFieldFinder_1a89990a08a45c7671f3fb9fbcdeecf66f" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
+      <member refid="classAdvectionFieldFinder_1a96e2dc6da4ab3200da740bdf5d3aeda6" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>
