@@ -410,10 +410,9 @@ public:
 
         // Periodicity property.
         if constexpr (CurrentGrid::continuous_dimension_type::PERIODIC) {
-            current_idx
-                    = (current_idx - current_idx_range.front()).value() < n_cells_current
-                              ? current_idx
-                              : IdxCurrent((current_idx - current_idx_range.back()).value());
+            current_idx = (current_idx - current_idx_range.front()).value() < n_cells_current
+                                  ? current_idx
+                                  : IdxCurrent((current_idx - current_idx_range.back()).value());
         }
 
         if constexpr ( // Uniform case
@@ -439,8 +438,7 @@ public:
 
                 if constexpr (!Interface::orientations_agree) {
                     IdxStepTarget target_idx_step = target_idx_range.back() - target_idx;
-                    target_idx = IdxTarget(target_idx_range.front())
-                                 + target_idx_step;
+                    target_idx = IdxTarget(target_idx_range.front()) + target_idx_step;
                 }
 
                 // Apply periodicity property of the domain.
@@ -500,7 +498,7 @@ private:
         while (target_idx_step_diff != IdxStepTarget(1)) {
             CurrentCoord target_equivalent_coord_mid
                     = (*this).template operator()<TargetPatch>(ddc::coordinate(target_idx_mid));
-            // Periodicity property. 
+            // Periodicity property.
             if constexpr (TargetGrid::continuous_dimension_type::PERIODIC) {
                 if (target_idx_mid == target_idx_range.back()) {
                     target_equivalent_coord_mid = (*this).template operator()<TargetPatch>(
@@ -520,7 +518,7 @@ private:
             target_idx_step_diff = target_idx_max - target_idx_min;
         }
 
-        // Periodicity property. 
+        // Periodicity property.
         if constexpr (TargetGrid::continuous_dimension_type::PERIODIC) {
             if (target_idx_max == target_idx_range.back()) {
                 target_idx_max = target_idx_range.front();
