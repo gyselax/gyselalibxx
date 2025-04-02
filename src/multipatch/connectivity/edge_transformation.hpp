@@ -356,7 +356,7 @@ public:
      * 
      */
     template <class CurrentGrid, class TargetGrid>
-    bool search_for_match(Idx<TargetGrid>& target_idx, Idx<CurrentGrid> const& current_idx) const
+    bool search_for_match(Idx<TargetGrid>& target_idx, Idx<CurrentGrid> current_idx) const
     {
         static_assert(
                 std::is_same_v<CurrentGrid, EdgeGrid1> || std::is_same_v<CurrentGrid, EdgeGrid2>,
@@ -377,6 +377,8 @@ public:
         using IdxRangeTarget = IdxRange<TargetGrid>;
         // Coordinate on the discontinuous dimension of the current grid.
         using CurrentCoord = Coord<typename CurrentGrid::continuous_dimension_type>;
+        // Index on the current grid
+        using IdxCurrent = typename IdxRangeCurrent::discrete_element_type;
         // Index on the target grid
         using IdxTarget = typename IdxRangeTarget::discrete_element_type;
         // Index step on the target grid
@@ -395,6 +397,13 @@ public:
                 = current_idx_range.size() - int(!CurrentGrid::continuous_dimension_type::PERIODIC);
         int n_cells_target
                 = target_idx_range.size() - int(!TargetGrid::continuous_dimension_type::PERIODIC);
+
+        if constexpr (CurrentGrid::continuous_dimension_type::PERIODIC) {
+            current_idx 
+                    = (current_idx - current_idx_range.front()).value() < n_cells_current
+                              ? current_idx
+                              : IdxCurrent((current_idx - current_idx_range.back()).value() - 1);
+        }
 
         if constexpr ( // Uniform case
                 ddc::is_uniform_point_sampling_v<
@@ -422,12 +431,11 @@ public:
                     target_idx = IdxTarget(target_idx_range.front())
                                  + int(TargetGrid::continuous_dimension_type::PERIODIC)
                                  + target_idx_step;
-
-                    if constexpr (TargetGrid::continuous_dimension_type::PERIODIC) {
-                        // Apply periodicity property of the domain.
-                        if (target_idx == target_idx_range.back() + 1) {
-                            target_idx = target_idx_range.front();
-                        }
+                }
+                if constexpr (TargetGrid::continuous_dimension_type::PERIODIC) {
+                    // Apply periodicity property of the domain.
+                    if (target_idx == target_idx_range.back() + 1) {
+                        target_idx = target_idx_range.front();
                     }
                 }
             }
@@ -470,7 +478,7 @@ private:
         using IdxStepTarget = IdxStep<TargetGrid>;
 
         // Dichotomy method
-        CurrentCoord const current_coord(ddc::coordinate(current_idx));
+        CurrentCoord current_coord(ddc::coordinate(current_idx));
 
         IdxTarget target_idx_min(target_idx_range.front());
         IdxTarget target_idx_max(
@@ -512,6 +520,8 @@ private:
         CurrentCoord target_coord_max
                 = (*this).template operator()<TargetPatch>(ddc::coordinate(target_idx_max));
 
+        std::cout << target_coord_min << "   " << current_coord << "   " << target_coord_max
+                  << std::endl;
         if (abs(current_coord - target_coord_min) < abs(current_coord - target_coord_max)) {
             return target_idx_min;
         } else {

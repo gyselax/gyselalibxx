@@ -130,7 +130,24 @@ TEST_F(IndexTransformationUniformPeriodicTest, ReverseTransformation)
     EXPECT_EQ((test_idx_theta1 - idx_range_theta1.front()).value(), 6);
 }
 
-TEST_F(IndexTransformationUniformPeriodicTest, Periodicity)
+
+TEST_F(IndexTransformationUniformPeriodicTest, PeriodicitySameOrientation)
+{
+    using EdgeR1B = Edge<Patch1, GridR<1>, BACK>;
+    using EdgeR2F = Edge<Patch2, GridR<2>, FRONT>;
+    using Interface12 = Interface<EdgeR1B, EdgeR2F, true>;
+
+    // Coordinate transformation .................................................................
+    EdgeTransformation<Interface12> index_transformation(idx_range_theta1, idx_range_theta2);
+
+    Patch1::Idx2 test_idx_theta1(8);
+    Patch2::Idx2 test_idx_theta2 = index_transformation(test_idx_theta1);
+
+    EXPECT_EQ((test_idx_theta2 - idx_range_theta2.front()).value(), 0);
+}
+
+
+TEST_F(IndexTransformationUniformPeriodicTest, PeriodicityInvertedOrientation)
 {
     using EdgeR1B = Edge<Patch1, GridR<1>, BACK>;
     using EdgeR2F = Edge<Patch2, GridR<2>, FRONT>;
