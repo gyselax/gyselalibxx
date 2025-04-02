@@ -16,7 +16,7 @@
  * @brief Struct to identify the type of an index range on the current 
  * patch and the index range type on the target patch. 
  */
-template <class Interface, typename T>
+template <class Interface, class PatchOrDim>
 struct IdxRangeCurrentAndTarget;
 
 /// @brief Specification for current patch being the Patch1 of the given Interface.
