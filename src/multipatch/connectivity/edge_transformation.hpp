@@ -134,12 +134,11 @@ get_equivalent_target_coordinate(
     IdxRangeTarget const target_idx_range(combined_idx_range);
 
     Coord<CurrentDim> const current_min = ddc::coordinate(current_idx_range.front());
-    double current_length = ddcHelper::total_interval_length(current_idx_range);
+    double const current_length = ddcHelper::total_interval_length(current_idx_range);
 
     Coord<TargetDim> const target_min = ddc::coordinate(target_idx_range.front());
     double target_length = ddcHelper::total_interval_length(target_idx_range);
 
-    std::cout << current_length << "   " << target_length << std::endl;
 
     double rescale_x = (current_coord - current_min) / current_length * target_length;
 
@@ -209,12 +208,6 @@ public:
     EdgeTransformation(
             IdxRangeEdge1 const& idx_range_patch_1,
             IdxRangeEdge2 const& idx_range_patch_2)
-        //     : m_idx_range_patch_1(
-        //         idx_range_patch_1.front(),
-        //         idx_range_patch_1.extents() + int(EdgeDim1::PERIODIC))
-        // , m_idx_range_patch_2(
-        //           idx_range_patch_2.front(),
-        //           idx_range_patch_2.extents() + int(EdgeDim2::PERIODIC))
         : m_idx_range_patch_1(idx_range_patch_1)
         , m_idx_range_patch_2(idx_range_patch_2)
     {
@@ -412,11 +405,6 @@ public:
         IdxRangeCurrent const current_idx_range(combined_idx_range);
         IdxRangeTarget const target_idx_range(combined_idx_range);
 
-        // int n_cells_current
-        //         = current_idx_range.size() - int(!CurrentGrid::continuous_dimension_type::PERIODIC);
-        // int n_cells_target
-        //         = target_idx_range.size() - int(!TargetGrid::continuous_dimension_type::PERIODIC);
-
         int n_cells_current = current_idx_range.size() - 1;
         int n_cells_target = target_idx_range.size() - 1;
 
@@ -425,12 +413,8 @@ public:
             current_idx
                     = (current_idx - current_idx_range.front()).value() < n_cells_current
                               ? current_idx
-                              // : IdxCurrent((current_idx - current_idx_range.back()).value() - 1);
                               : IdxCurrent((current_idx - current_idx_range.back()).value());
         }
-
-        std::cout << n_cells_current << "   " << current_idx_range.back() << "     " << current_idx
-                  << std::endl;
 
         if constexpr ( // Uniform case
                 ddc::is_uniform_point_sampling_v<
@@ -456,12 +440,12 @@ public:
                 if constexpr (!Interface::orientations_agree) {
                     IdxStepTarget target_idx_step = target_idx_range.back() - target_idx;
                     target_idx = IdxTarget(target_idx_range.front())
-                                 // + int(TargetGrid::continuous_dimension_type::PERIODIC)
                                  + target_idx_step;
                 }
+
+                // Apply periodicity property of the domain.
                 if constexpr (TargetGrid::continuous_dimension_type::PERIODIC) {
-                    // Apply periodicity property of the domain.
-                    if (target_idx == target_idx_range.back()) { // + 1) {
+                    if (target_idx == target_idx_range.back()) {
                         target_idx = target_idx_range.front();
                     }
                 }
@@ -510,17 +494,14 @@ private:
 
         IdxTarget target_idx_min(target_idx_range.front());
         IdxTarget target_idx_max(target_idx_range.back());
-        // + int(TargetGrid::continuous_dimension_type::PERIODIC));
         IdxTarget target_idx_mid = get_mid(target_idx_min, target_idx_max);
-
-        std::cout << target_idx_min << "  " << target_idx_max << std::endl;
 
         IdxStepTarget target_idx_step_diff = target_idx_max - target_idx_min;
         while (target_idx_step_diff != IdxStepTarget(1)) {
             CurrentCoord target_equivalent_coord_mid
                     = (*this).template operator()<TargetPatch>(ddc::coordinate(target_idx_mid));
+            // Periodicity property. 
             if constexpr (TargetGrid::continuous_dimension_type::PERIODIC) {
-                // if (target_idx_mid == IdxTarget(target_idx_range.back()+ 1)) {
                 if (target_idx_mid == target_idx_range.back()) {
                     target_equivalent_coord_mid = (*this).template operator()<TargetPatch>(
                             ddc::coordinate(target_idx_range.front()));
@@ -539,8 +520,8 @@ private:
             target_idx_step_diff = target_idx_max - target_idx_min;
         }
 
+        // Periodicity property. 
         if constexpr (TargetGrid::continuous_dimension_type::PERIODIC) {
-            // if (target_idx_max == IdxTarget(target_idx_range.back() + 1)) {
             if (target_idx_max == target_idx_range.back()) {
                 target_idx_max = target_idx_range.front();
             }
@@ -550,9 +531,6 @@ private:
                 = (*this).template operator()<TargetPatch>(ddc::coordinate(target_idx_min));
         CurrentCoord target_coord_max
                 = (*this).template operator()<TargetPatch>(ddc::coordinate(target_idx_max));
-
-        std::cout << target_idx_min << "  " << target_idx_max << "  " << target_coord_min << "  "
-                  << current_coord << "  " << target_coord_max << std::endl;
 
         if (abs(current_coord - target_coord_min) < abs(current_coord - target_coord_max)) {
             return target_idx_min;
