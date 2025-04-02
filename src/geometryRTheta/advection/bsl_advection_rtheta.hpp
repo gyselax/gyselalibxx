@@ -159,8 +159,8 @@ public:
      *      on the logical index range axis.
      *      It is expressed on the contravariant basis.
      * @param [in] advection_field_xy_centre
-     *      A CoordXY containing the value of the advection field on the 
-     *      physical index range axis at the O-point. 
+     *      A vector in the Cartesian basis, containing the value of the advection
+     *      field at the O-point.
      * @param [in] dt
      *      A time step used.
      *
@@ -169,7 +169,7 @@ public:
     DFieldRTheta operator()(
             DFieldRTheta allfdistribu,
             DConstVectorFieldRTheta<R, Theta> advection_field_rtheta,
-            CoordXY const& advection_field_xy_centre,
+            DVector<X, Y> const& advection_field_xy_centre,
             double dt) const override
     {
         Kokkos::Profiling::pushRegion("PolarAdvection");
@@ -195,23 +195,22 @@ public:
 
                     Tensor J = mapping_proxy.jacobian_matrix(coord_rtheta);
 
-                    DVector<X, Y> advec_field_xy = tensor_mul(
-                            index<'i', 'j'>(J),
-                            index<'j'>(advection_field_rtheta(irtheta)));
-                    ddcHelper::get<X>(advection_field_xy)(irtheta)
-                            = ddcHelper::get<X>(advec_field_xy);
-                    ddcHelper::get<Y>(advection_field_xy)(irtheta)
-                            = ddcHelper::get<Y>(advec_field_xy);
+                    ddcHelper::assign_vector_field_element(
+                            advection_field_xy,
+                            irtheta,
+                            tensor_mul(
+                                    index<'i', 'j'>(J),
+                                    index<'j'>(advection_field_rtheta(irtheta))));
                 });
 
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 Opoint_grid,
                 KOKKOS_LAMBDA(IdxRTheta const irtheta) {
-                    ddcHelper::get<X>(advection_field_xy)(irtheta)
-                            = CoordX(advection_field_xy_centre);
-                    ddcHelper::get<Y>(advection_field_xy)(irtheta)
-                            = CoordY(advection_field_xy_centre);
+                    ddcHelper::assign_vector_field_element(
+                            advection_field_xy,
+                            irtheta,
+                            advection_field_xy_centre);
                 });
 
         (*this)(get_field(allfdistribu), get_const_field(advection_field_xy), dt);
