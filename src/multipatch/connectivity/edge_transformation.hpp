@@ -302,8 +302,6 @@ public:
         using CurrentCoord = Coord<typename CurrentGrid::continuous_dimension_type>;
         // Index on the current grid
         using IdxCurrent = typename IdxRangeCurrent::discrete_element_type;
-        // Index on the target grid
-        using IdxTarget = typename IdxRangeTarget::discrete_element_type;
         // Index step on the target grid
         using IdxStepTarget = typename IdxRangeTarget::discrete_vector_type;
 
@@ -327,8 +325,8 @@ public:
         IdxRangeCurrent const current_idx_range(combined_idx_range);
         IdxRangeTarget const target_idx_range(combined_idx_range);
 
-        int n_cells_current = current_idx_range.size() - 1;
-        int n_cells_target = target_idx_range.size() - 1;
+        int const n_cells_current = current_idx_range.size() - 1;
+        int const n_cells_target = target_idx_range.size() - 1;
 
         // Periodicity property.
         if constexpr (CurrentGrid::continuous_dimension_type::PERIODIC) {
@@ -360,7 +358,7 @@ public:
 
                 if constexpr (!Interface::orientations_agree) {
                     IdxStepTarget target_idx_step = target_idx_range.back() - target_idx;
-                    target_idx = IdxTarget(target_idx_range.front()) + target_idx_step;
+                    target_idx = target_idx_range.front() + target_idx_step;
                 }
 
                 // Apply periodicity property of the domain.
