@@ -126,7 +126,7 @@ with $\det(J) = \frac{-r}{\sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}}\
 \right.
 ```
 
-# 3D coordinate transformations
+## 3D coordinate transformations
 
 ### Cylindrical to Cartesian transformation
 
