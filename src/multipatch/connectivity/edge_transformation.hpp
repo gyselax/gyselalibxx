@@ -13,69 +13,6 @@
 
 
 /**
- * @brief Get equivalent coordinate on the target patch. 
- * 
- * @tparam CurrentPatch Type for the current patch. 
- * @tparam Interface Interface type given in EdgeTransformation class. 
- * 
- * @param current_coord Coordinate on the current patch. 
- * @param idx_range_patch_1 Index range on the Edge1 of the Interface. 
- * @param idx_range_patch_2 Index range on the Edge2 of the Interface. 
- * 
- * @return Equivalent coordinate on the target patch. 
- */
-template <
-        typename CurrentPatch,
-        class Interface,
-        class TargetDim = std::conditional_t<
-                std::is_same_v<CurrentPatch, typename Interface::Edge1::associated_patch>,
-                typename Interface::Edge2::parallel_grid::continuous_dimension_type,
-                typename Interface::Edge1::parallel_grid::continuous_dimension_type>,
-        class CurrentDim = std::conditional_t<
-                std::is_same_v<CurrentPatch, typename Interface::Edge1::associated_patch>,
-                typename Interface::Edge1::parallel_grid::continuous_dimension_type,
-                typename Interface::Edge2::parallel_grid::continuous_dimension_type>>
-Coord<TargetDim> get_equivalent_target_coordinate(
-        Coord<CurrentDim> const& current_coord,
-        IdxRange<typename Interface::Edge1::parallel_grid> const& idx_range_patch_1,
-        IdxRange<typename Interface::Edge2::parallel_grid> const& idx_range_patch_2)
-{
-    using Patch1 = typename Interface::Edge1::associated_patch;
-
-    using EdgeGrid1 = typename Interface::Edge1::parallel_grid;
-    using EdgeGrid2 = typename Interface::Edge2::parallel_grid;
-
-    using IdxRangeCurrent = IdxRange<
-            std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeGrid1, EdgeGrid2>>;
-    using IdxRangeTarget = IdxRange<
-            std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeGrid2, EdgeGrid1>>;
-
-    // Get min and length on each 1D index range:
-    IdxRange<EdgeGrid1, EdgeGrid2> const combined_idx_range(idx_range_patch_1, idx_range_patch_2);
-    IdxRangeCurrent const current_idx_range(combined_idx_range);
-    IdxRangeTarget const target_idx_range(combined_idx_range);
-
-    Coord<CurrentDim> const current_min = ddc::coordinate(current_idx_range.front());
-    double const current_length = ddcHelper::total_interval_length(current_idx_range);
-
-    Coord<TargetDim> const target_min = ddc::coordinate(target_idx_range.front());
-    double target_length = ddcHelper::total_interval_length(target_idx_range);
-
-
-    double rescale_x = (current_coord - current_min) / current_length * target_length;
-
-    bool constexpr orientations_agree = Interface::orientations_agree;
-    if constexpr (!orientations_agree) {
-        rescale_x = target_length - rescale_x;
-    }
-    if constexpr (TargetDim::PERIODIC) {
-        rescale_x = std::fmod(rescale_x, target_length);
-    }
-    return target_min + rescale_x;
-}
-
-
-/**
  * @brief Transform a coordinate or an index from one edge to the one on the other edge.
  * 
  * According to the orientation of the interface, we compute the equivalent coordinate
@@ -161,9 +98,8 @@ public:
                 "The two patches have the same conditinous dimension. "
                 "Please specify the input Patch as template parameter "
                 "using .template operator<CurrentPatch>()(current_coord).");
-        return get_equivalent_target_coordinate<
-                std::conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, Patch1, Patch2>,
-                Interface>(current_coord, m_idx_range_patch_1, m_idx_range_patch_2);
+        using CurrentPatch = std::conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, Patch1, Patch2>; 
+        return (*this).get_equivalent_target_coordinate<CurrentPatch>(current_coord);
     }
 
     /**
@@ -185,9 +121,7 @@ public:
                     EdgeDim1,
                     EdgeDim2>> const& current_coord) const
     {
-        return get_equivalent_target_coordinate<
-                CurrentPatch,
-                Interface>(current_coord, m_idx_range_patch_1, m_idx_range_patch_2);
+        return (*this).get_equivalent_target_coordinate<CurrentPatch>(current_coord);
     }
 
 
@@ -317,8 +251,6 @@ public:
         using IdxRangeTarget = IdxRange<TargetGrid>;
         // Coordinate on the discontinuous dimension of the current grid.
         using CurrentCoord = Coord<typename CurrentGrid::continuous_dimension_type>;
-        // Index on the current grid
-        using IdxCurrent = typename IdxRangeCurrent::discrete_element_type;
         // Index step on the target grid
         using IdxStepTarget = typename IdxRangeTarget::discrete_vector_type;
 
@@ -347,9 +279,9 @@ public:
 
         // Periodicity property.
         if constexpr (CurrentGrid::continuous_dimension_type::PERIODIC) {
-            current_idx = (current_idx - current_idx_range.front()).value() < n_cells_current
+            current_idx = (current_idx < current_idx_range.back())
                                   ? current_idx
-                                  : IdxCurrent((current_idx - current_idx_range.back()).value());
+                                  : current_idx - current_idx_range.extents() + 1;
         }
 
         if constexpr ( // Uniform case
@@ -399,6 +331,51 @@ public:
 
 
 private:
+    /**
+ * @brief Get equivalent coordinate on the target patch. 
+ * @tparam CurrentPatch Type for the current patch. 
+ * @param current_coord Coordinate on the current patch. 
+ * @return Equivalent coordinate on the target patch. 
+ */
+    template <
+            typename CurrentPatch,
+            class TargetDim
+            = std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeDim2, EdgeDim1>,
+            class CurrentDim
+            = std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeDim1, EdgeDim2>>
+    Coord<TargetDim> get_equivalent_target_coordinate(Coord<CurrentDim> const& current_coord) const
+    {
+        using IdxRangeCurrent = IdxRange<
+                std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeGrid1, EdgeGrid2>>;
+        using IdxRangeTarget = IdxRange<
+                std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeGrid2, EdgeGrid1>>;
+
+        // Get min and length on each 1D index range:
+        IdxRange<EdgeGrid1, EdgeGrid2> const
+                combined_idx_range(m_idx_range_patch_1, m_idx_range_patch_2);
+        IdxRangeCurrent const current_idx_range(combined_idx_range);
+        IdxRangeTarget const target_idx_range(combined_idx_range);
+
+        Coord<CurrentDim> const current_min = ddc::coordinate(current_idx_range.front());
+        double const current_length = ddcHelper::total_interval_length(current_idx_range);
+
+        Coord<TargetDim> const target_min = ddc::coordinate(target_idx_range.front());
+        double target_length = ddcHelper::total_interval_length(target_idx_range);
+
+
+        double rescale_x = (current_coord - current_min) / current_length * target_length;
+
+        bool constexpr orientations_agree = Interface::orientations_agree;
+        if constexpr (!orientations_agree) {
+            rescale_x = target_length - rescale_x;
+        }
+        if constexpr (TargetDim::PERIODIC) {
+            rescale_x = std::fmod(rescale_x, target_length);
+        }
+        return target_min + rescale_x;
+    }
+
+
     /// @brief Get index corresponding to the middle of two indexes.
     template <class IdxType>
     IdxType const get_mid(IdxType const& idx_1, IdxType const& idx_2) const
