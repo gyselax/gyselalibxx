@@ -122,6 +122,9 @@ public:
                                  EdgeDim1,
                                  EdgeDim2>> const& current_coord) const
     {
+        using CurrentDim = std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeDim1, EdgeDim2>>;
+        using TargetDim = std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeDim2, EdgeDim1>>;
+
         using IdxRangeCurrent = IdxRange<
                 std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeGrid1, EdgeGrid2>>;
         using IdxRangeTarget = IdxRange<
