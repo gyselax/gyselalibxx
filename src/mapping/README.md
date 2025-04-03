@@ -126,6 +126,45 @@ with $\det(J) = \frac{-r}{\sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}}\
 \right.
 ```
 
+# 3D coordinate transformations
+
+### Cylindrical to Cartesian transformation
+
+- Mapping (CylindricalToCartesian):
+
+```math
+\left\{
+\begin{aligned}
+ & x(R,Z,\zeta) = R \cos(\zeta), \\
+ & y(R,Z,\zeta) = R \sin(\zeta), \\
+ & z(R,Z,\zeta) = Z
+\end{aligned}
+\right.
+```
+
+```math
+J (R, Z, \zeta) = 
+\begin{bmatrix} 
+ \cos(\zeta) & 0 & -R\sin(\zeta) \\
+  0          & 1 &       0 \\
+ \sin(\zeta) & 0 &  R\cos(\zeta) \\
+\end{bmatrix}.
+```
+
+with $\det(J) = R$.
+
+- Inverse mapping (CartesianToCylindrical):
+
+```math
+\left\{
+\begin{aligned}
+ & R(x,y,z) = \sqrt{x^2 + y^2}, \\
+ & \zeta(x,y,z) = \text{atan2}(y, x), \\
+ & Z(x,y,z) = z.
+\end{aligned}
+\right.
+```
+
 ## Combined coordinate transformation which combines two of the coordinate transformations above
 
 The tools are:
