@@ -221,6 +221,26 @@ public:
     }
 
 
+    /**
+     * @brief Transform a coordinate of an index on the edge of the current patch 
+     * to the analogous coordinate on the target patch. 
+     * 
+     * @param current_idx
+     *      A index on the edge of the current patch.
+     * @tparam CurrentIdx 
+     *      The current index type of the given coordinate index. 
+     * 
+     * @return The analogous coordinate on the target patch. 
+    */
+    template <class CurrentIdx>
+    Coord<std::conditional_t<std::is_same_v<CurrentIdx, IdxEdge1>, EdgeDim2, EdgeDim1>>
+    get_equivalent_coord_from_idx(CurrentIdx const& current_idx) const
+    {
+        using CurrentPatch
+                = std::conditional_t<std::is_same_v<CurrentIdx, IdxEdge1>, Patch1, Patch2>;
+        return (*this).template operator()<CurrentPatch>(ddc::coordinate(current_idx));
+    }
+
 
     /**
      * @brief Check if a given index has an equivalent index on the other 
@@ -290,9 +310,6 @@ public:
         static_assert(
                 !std::is_same_v<TargetGrid, CurrentGrid>,
                 "The types of the indices should be different");
-
-        using TargetPatch
-                = std::conditional_t<std::is_same_v<TargetGrid, EdgeGrid1>, Patch1, Patch2>;
 
         // Index range of CurrentIdx.
         using IdxRangeCurrent = IdxRange<CurrentGrid>;
@@ -372,8 +389,7 @@ public:
             // Dichotomy method comparing the coordinates of indexes of the target edge.
             target_idx = get_target_idx(target_idx_range, current_idx);
             CurrentCoord const current_coord(ddc::coordinate(current_idx));
-            CurrentCoord target_equivalent_coord
-                    = (*this).template operator()<TargetPatch>(ddc::coordinate(target_idx));
+            CurrentCoord target_equivalent_coord = get_equivalent_coord_from_idx(target_idx);
             is_equivalent_idx = (abs(current_coord - target_equivalent_coord) < 1e-14);
         }
 
@@ -397,9 +413,6 @@ private:
             IdxRange<TargetGrid> const& target_idx_range,
             Idx<CurrentGrid> const& current_idx) const
     {
-        using TargetPatch
-                = std::conditional_t<std::is_same_v<TargetGrid, EdgeGrid1>, Patch1, Patch2>;
-
         // Coordinate on the discontinuous dimension of the current grid.
         using CurrentCoord = Coord<typename CurrentGrid::continuous_dimension_type>;
         // Index on the target grid
@@ -417,13 +430,13 @@ private:
         IdxStepTarget target_idx_step_diff = target_idx_max - target_idx_min;
         while (target_idx_step_diff != IdxStepTarget(1)) {
             CurrentCoord target_equivalent_coord_mid
-                    = (*this).template operator()<TargetPatch>(ddc::coordinate(target_idx_mid));
-            
+                    = get_equivalent_coord_from_idx(target_idx_mid);
+
             // Periodicity property.
             if constexpr (TargetGrid::continuous_dimension_type::PERIODIC) {
                 if (target_idx_mid == target_idx_range.back()) {
-                    target_equivalent_coord_mid = (*this).template operator()<TargetPatch>(
-                            ddc::coordinate(target_idx_range.front()));
+                    target_equivalent_coord_mid
+                            = get_equivalent_coord_from_idx(target_idx_range.front());
                 }
             }
 
@@ -446,10 +459,8 @@ private:
             }
         }
 
-        CurrentCoord target_coord_min
-                = (*this).template operator()<TargetPatch>(ddc::coordinate(target_idx_min));
-        CurrentCoord target_coord_max
-                = (*this).template operator()<TargetPatch>(ddc::coordinate(target_idx_max));
+        CurrentCoord target_coord_min = get_equivalent_coord_from_idx(target_idx_min);
+        CurrentCoord target_coord_max = get_equivalent_coord_from_idx(target_idx_max);
 
         if (abs(current_coord - target_coord_min) < abs(current_coord - target_coord_max)) {
             return target_idx_min;
