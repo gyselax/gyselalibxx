@@ -100,7 +100,7 @@ public:
                 "using .template operator<CurrentPatch>()(current_coord).");
         using CurrentPatch
                 = std::conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, Patch1, Patch2>;
-        return (*this).get_equivalent_target_coordinate<CurrentPatch>(current_coord);
+        return get_equivalent_target_coordinate<CurrentPatch>(current_coord);
     }
 
     /**
@@ -122,7 +122,7 @@ public:
                                  EdgeDim1,
                                  EdgeDim2>> const& current_coord) const
     {
-        return (*this).get_equivalent_target_coordinate<CurrentPatch>(current_coord);
+        return get_equivalent_target_coordinate<CurrentPatch>(current_coord);
     }
 
 
@@ -173,7 +173,7 @@ public:
     {
         using CurrentPatch
                 = std::conditional_t<std::is_same_v<CurrentIdx, IdxEdge1>, Patch1, Patch2>;
-        return (*this).transform_edge_coord<CurrentPatch>(ddc::coordinate(current_idx));
+        return transform_edge_coord<CurrentPatch>(ddc::coordinate(current_idx));
     }
 
 
