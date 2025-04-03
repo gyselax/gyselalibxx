@@ -52,7 +52,7 @@ DFieldMem<IdxRangeCoeffs, typename ExecSpace::memory_space> compute_coeffs_on_ma
     using R = typename Mapping::curvilinear_tag_r;
     using Theta = typename Mapping::curvilinear_tag_theta;
 
-    static_assert(has_2d_jacobian_v<Mapping, Coord<R, Theta>>);
+    static_assert(has_jacobian_v<Mapping, Coord<R, Theta>>);
 
     using IdxCoeffs = typename IdxRangeCoeffs::discrete_element_type;
     IdxRangeCoeffs grid = get_idx_range(coefficients_alloc);

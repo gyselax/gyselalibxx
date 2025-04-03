@@ -185,7 +185,7 @@ double check_Jacobian_on_grid(
         Mapping const& analytical_mapping,
         IdxRangeRTheta const& idx_range)
 {
-    static_assert(has_2d_jacobian_v<Mapping, CoordRTheta>);
+    static_assert(has_jacobian_v<Mapping, CoordRTheta>);
     double max_err = 0.;
     ddc::for_each(idx_range, [&](IdxRTheta const irtheta) {
         const CoordRTheta coord(ddc::coordinate(irtheta));

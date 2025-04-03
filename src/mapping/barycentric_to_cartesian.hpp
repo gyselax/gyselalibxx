@@ -6,6 +6,9 @@
 #include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
 
+template <class X, class Y, class Corner1Tag, class Corner2Tag, class Corner3Tag>
+class CartesianToBarycentric;
+
 /**
  * @brief A class to convert barycentric coordinates to Cartesian coordinates
  * on a triangle.
@@ -108,5 +111,20 @@ public:
         const double y = y1 * l1 + y2 * l2 + y3 * l3;
 
         return CartesianCoord(x, y);
+    }
+
+    /**
+     * @brief Get the inverse mapping.
+     *
+     * @return The inverse mapping.
+     */
+    CartesianToBarycentric<X, Y, Corner1Tag, Corner2Tag, Corner3Tag> get_inverse_mapping() const
+    {
+        return CartesianToBarycentric<
+                X,
+                Y,
+                Corner1Tag,
+                Corner2Tag,
+                Corner3Tag>(m_corner1, m_corner2, m_corner3);
     }
 };

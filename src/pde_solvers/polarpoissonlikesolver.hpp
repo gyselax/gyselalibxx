@@ -330,7 +330,7 @@ public:
                   ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
                           - ddc::discrete_space<BSplinesTheta>().nbasis())
     {
-        static_assert(has_2d_jacobian_v<Mapping, CoordRTheta>);
+        static_assert(has_jacobian_v<Mapping, CoordRTheta>);
         //initialise x_init
         Kokkos::deep_copy(m_x_init, 0);
         // Get break points
