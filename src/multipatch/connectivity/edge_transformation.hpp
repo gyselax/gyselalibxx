@@ -313,9 +313,8 @@ public:
 
         // Periodicity property.
         if constexpr (CurrentGrid::continuous_dimension_type::PERIODIC) {
-            current_idx = (current_idx == current_idx_range.back())
-                                  ? current_idx_range.front()
-                                  : current_idx ;
+            current_idx = (current_idx == current_idx_range.back()) ? current_idx_range.front()
+                                                                    : current_idx;
         }
 
         if constexpr ( // Uniform case

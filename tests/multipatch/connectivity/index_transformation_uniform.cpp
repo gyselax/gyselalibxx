@@ -42,7 +42,9 @@ public:
         , idx_range_x2(Patch2::Idx1(0), x2_size)
         , idx_range_y2(Patch2::Idx2(0), y2_size)
         , idx_range_x3(Patch3::Idx1(2), x3_size - 2)
-        , idx_range_y3(Patch3::Idx2(3), y3_size - 3) {}
+        , idx_range_y3(Patch3::Idx2(3), y3_size - 3)
+    {
+    }
 
     static void SetUpTestSuite()
     {
