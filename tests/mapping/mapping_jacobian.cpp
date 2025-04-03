@@ -194,7 +194,7 @@ TEST_P(InvJacobianMatrix3D, InverseMatrixToroidalDiscCzarMap)
 
     ToroidalToCylindrical<Mapping2D, Zeta, Phi> mapping(mapping_2d);
 
-    static_assert(has_2d_jacobian_v<decltype(mapping), CoordRThetaPhi>);
+    static_assert(has_jacobian_v<decltype(mapping), CoordRThetaPhi>);
     InverseJacobianMatrix inv_jacobian(mapping);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
