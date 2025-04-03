@@ -91,7 +91,7 @@ TEST_F(CoordinateTransformationPeriodicTest, InvertedOrientation)
 
     Patch1::Coord2 test_coord_theta1(3.625);
     Patch2::Coord2 test_coord_theta2(
-            coord_transformation.template operator()<Patch1>(test_coord_theta1));
+            coord_transformation.transform_edge_coord<Patch1>(test_coord_theta1));
 
     EXPECT_NEAR(double(test_coord_theta2), -3.625, 1e-14);
 }
@@ -108,7 +108,7 @@ TEST_F(CoordinateTransformationPeriodicTest, ReverseTransformation)
 
     Patch2::Coord2 test_coord_theta2(-3.75);
     Patch1::Coord2 test_coord_theta1
-            = coord_transformation.template operator()<Patch2>(test_coord_theta2);
+            = coord_transformation.transform_edge_coord<Patch2>(test_coord_theta2);
 
     EXPECT_NEAR(double(test_coord_theta1), 4.75, 1e-14);
 }
@@ -125,12 +125,12 @@ TEST_F(CoordinateTransformationPeriodicTest, Periodicity)
 
     Patch1::Coord2 test_coord_theta1(7.0);
     Patch2::Coord2 test_coord_theta2(
-            coord_transformation.template operator()<Patch1>(test_coord_theta1));
+            coord_transformation.transform_edge_coord<Patch1>(test_coord_theta1));
 
     EXPECT_NEAR(double(test_coord_theta2), -4.0, 1e-14);
 
     test_coord_theta1 = Patch1::Coord2(2.5);
-    test_coord_theta2 = coord_transformation.template operator()<Patch1>(test_coord_theta1);
+    test_coord_theta2 = coord_transformation.transform_edge_coord<Patch1>(test_coord_theta1);
 
     EXPECT_NEAR(double(test_coord_theta2), -4.0, 1e-14);
 

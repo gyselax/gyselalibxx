@@ -116,7 +116,7 @@ public:
      * @return The analogous coordinate on the target patch. 
     */
     template <class CurrentPatch>
-    Coord<std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeDim2, EdgeDim1>> operator()(
+    Coord<std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeDim2, EdgeDim1>> transform_edge_coord(
             Coord<std::conditional_t<
                     std::is_same_v<CurrentPatch, Patch1>,
                     EdgeDim1,
@@ -173,7 +173,7 @@ public:
     {
         using CurrentPatch
                 = std::conditional_t<std::is_same_v<CurrentIdx, IdxEdge1>, Patch1, Patch2>;
-        return (*this).template operator()<CurrentPatch>(ddc::coordinate(current_idx));
+        return (*this).transform_edge_coord<CurrentPatch>(ddc::coordinate(current_idx));
     }
 
 
