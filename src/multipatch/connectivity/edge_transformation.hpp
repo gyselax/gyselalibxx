@@ -408,7 +408,7 @@ private:
         using IdxStepTarget = IdxStep<TargetGrid>;
 
         // Dichotomy method
-        CurrentCoord current_coord(ddc::coordinate(current_idx));
+        CurrentCoord const current_coord(ddc::coordinate(current_idx));
 
         IdxTarget target_idx_min(target_idx_range.front());
         IdxTarget target_idx_max(target_idx_range.back());
@@ -418,6 +418,7 @@ private:
         while (target_idx_step_diff != IdxStepTarget(1)) {
             CurrentCoord target_equivalent_coord_mid
                     = (*this).template operator()<TargetPatch>(ddc::coordinate(target_idx_mid));
+            
             // Periodicity property.
             if constexpr (TargetGrid::continuous_dimension_type::PERIODIC) {
                 if (target_idx_mid == target_idx_range.back()) {
