@@ -34,7 +34,9 @@ public:
         : idx_range_x1(Patch1::Idx1(0), x1_size)
         , idx_range_y1(Patch1::Idx2(0), y1_size)
         , idx_range_x2(Patch2::Idx1(0), x2_size)
-        , idx_range_y2(Patch2::Idx2(0), y2_size) {};
+        , idx_range_y2(Patch2::Idx2(0), y2_size)
+    {
+    }
 
     static void SetUpTestSuite()
     {
