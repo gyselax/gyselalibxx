@@ -100,7 +100,7 @@ public:
                 "using .template operator<CurrentPatch>()(current_coord).");
         using CurrentPatch
                 = std::conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, Patch1, Patch2>;
-        return get_equivalent_target_coordinate<CurrentPatch>(current_coord);
+        return transform_edge_coord<CurrentPatch>(current_coord);
     }
 
     /**
@@ -122,8 +122,36 @@ public:
                                  EdgeDim1,
                                  EdgeDim2>> const& current_coord) const
     {
-        return get_equivalent_target_coordinate<CurrentPatch>(current_coord);
+        using IdxRangeCurrent = IdxRange<
+                std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeGrid1, EdgeGrid2>>;
+        using IdxRangeTarget = IdxRange<
+                std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeGrid2, EdgeGrid1>>;
+
+        // Get min and length on each 1D index range:
+        IdxRange<EdgeGrid1, EdgeGrid2> const
+                combined_idx_range(m_idx_range_patch_1, m_idx_range_patch_2);
+        IdxRangeCurrent const current_idx_range(combined_idx_range);
+        IdxRangeTarget const target_idx_range(combined_idx_range);
+
+        Coord<CurrentDim> const current_min = ddc::coordinate(current_idx_range.front());
+        double const current_length = ddcHelper::total_interval_length(current_idx_range);
+
+        Coord<TargetDim> const target_min = ddc::coordinate(target_idx_range.front());
+        double target_length = ddcHelper::total_interval_length(target_idx_range);
+
+
+        double rescale_x = (current_coord - current_min) / current_length * target_length;
+
+        bool constexpr orientations_agree = Interface::orientations_agree;
+        if constexpr (!orientations_agree) {
+            rescale_x = target_length - rescale_x;
+        }
+        if constexpr (TargetDim::PERIODIC) {
+            rescale_x = std::fmod(rescale_x, target_length);
+        }
+        return target_min + rescale_x;
     }
+
 
 
     /**
@@ -332,51 +360,6 @@ public:
 
 
 private:
-    /**
- * @brief Get equivalent coordinate on the target patch. 
- * @tparam CurrentPatch Type for the current patch. 
- * @param current_coord Coordinate on the current patch. 
- * @return Equivalent coordinate on the target patch. 
- */
-    template <
-            typename CurrentPatch,
-            class TargetDim
-            = std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeDim2, EdgeDim1>,
-            class CurrentDim
-            = std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeDim1, EdgeDim2>>
-    Coord<TargetDim> get_equivalent_target_coordinate(Coord<CurrentDim> const& current_coord) const
-    {
-        using IdxRangeCurrent = IdxRange<
-                std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeGrid1, EdgeGrid2>>;
-        using IdxRangeTarget = IdxRange<
-                std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeGrid2, EdgeGrid1>>;
-
-        // Get min and length on each 1D index range:
-        IdxRange<EdgeGrid1, EdgeGrid2> const
-                combined_idx_range(m_idx_range_patch_1, m_idx_range_patch_2);
-        IdxRangeCurrent const current_idx_range(combined_idx_range);
-        IdxRangeTarget const target_idx_range(combined_idx_range);
-
-        Coord<CurrentDim> const current_min = ddc::coordinate(current_idx_range.front());
-        double const current_length = ddcHelper::total_interval_length(current_idx_range);
-
-        Coord<TargetDim> const target_min = ddc::coordinate(target_idx_range.front());
-        double target_length = ddcHelper::total_interval_length(target_idx_range);
-
-
-        double rescale_x = (current_coord - current_min) / current_length * target_length;
-
-        bool constexpr orientations_agree = Interface::orientations_agree;
-        if constexpr (!orientations_agree) {
-            rescale_x = target_length - rescale_x;
-        }
-        if constexpr (TargetDim::PERIODIC) {
-            rescale_x = std::fmod(rescale_x, target_length);
-        }
-        return target_min + rescale_x;
-    }
-
-
     /// @brief Get index corresponding to the middle of two indexes.
     template <class IdxType>
     IdxType const get_mid(IdxType const& idx_1, IdxType const& idx_2) const
