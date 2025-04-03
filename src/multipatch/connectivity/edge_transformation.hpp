@@ -50,7 +50,7 @@ Coord<TargetDim> get_equivalent_target_coordinate(
     using IdxRangeTarget = IdxRange<
             std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeGrid2, EdgeGrid1>>;
 
-    // Gem_idx_range_patch_1min and length on each 1D index ranges:
+    // Get min and length on each 1D index range:
     IdxRange<EdgeGrid1, EdgeGrid2> const combined_idx_range(idx_range_patch_1, idx_range_patch_2);
     IdxRangeCurrent const current_idx_range(combined_idx_range);
     IdxRangeTarget const target_idx_range(combined_idx_range);
