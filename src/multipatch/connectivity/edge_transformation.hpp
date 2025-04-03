@@ -13,89 +13,10 @@
 
 
 /**
- * @brief Struct to identify the type of an index range on the current 
- * patch and the index range type on the target patch. 
- */
-template <class Interface, class PatchOrDim>
-struct IdxRangeCurrentAndTarget;
-
-/// @brief Specification for current patch being the Patch1 of the given Interface.
-template <class Interface>
-struct IdxRangeCurrentAndTarget<Interface, typename Interface::Edge1::associated_patch>
-{
-    /// @brief Grid parallel to Edge1 of the Interface.
-    using EdgeGrid1 = typename Interface::Edge1::parallel_grid;
-    /// @brief Grid parallel to Edge2 of the Interface.
-    using EdgeGrid2 = typename Interface::Edge2::parallel_grid;
-
-    /// @brief IdxRange parallel to the Edge on the current patch.
-    using IdxRangeCurrent = IdxRange<EdgeGrid1>;
-    /// @brief IdxRange parallel to the Edge on the target patch.
-    using IdxRangeTarget = IdxRange<EdgeGrid2>;
-};
-
-/// @brief Specification for current patch being the Patch2 of the given Interface.
-template <class Interface>
-struct IdxRangeCurrentAndTarget<Interface, typename Interface::Edge2::associated_patch>
-{
-    /// @brief Grid parallel to Edge1 of the Interface.
-    using EdgeGrid1 = typename Interface::Edge1::parallel_grid;
-    /// @brief Grid parallel to Edge2 of the Interface.
-    using EdgeGrid2 = typename Interface::Edge2::parallel_grid;
-
-    /// @brief IdxRange parallel to the Edge on the current patch.
-    using IdxRangeCurrent = IdxRange<EdgeGrid2>;
-    /// @brief IdxRange parallel to the Edge on the target patch.
-    using IdxRangeTarget = IdxRange<EdgeGrid1>;
-};
-
-/**
- * @brief Specification for current continuous dimension being the 
- * continuous dimension of the grid on Edge1 of the given Interface. 
- */
-template <class Interface>
-struct IdxRangeCurrentAndTarget<
-        Interface,
-        typename Interface::Edge1::parallel_grid::continuous_dimension_type>
-{
-    /// @brief Grid parallel to Edge1 of the Interface.
-    using EdgeGrid1 = typename Interface::Edge1::parallel_grid;
-    /// @brief Grid parallel to Edge2 of the Interface.
-    using EdgeGrid2 = typename Interface::Edge2::parallel_grid;
-
-    /// @brief IdxRange parallel to the Edge on the current patch.
-    using IdxRangeCurrent = IdxRange<EdgeGrid1>;
-    /// @brief IdxRange parallel to the Edge on the target patch.
-    using IdxRangeTarget = IdxRange<EdgeGrid2>;
-};
-
-/**
- * @brief Specification for current continuous dimension being the 
- * continuous dimension of the grid on Edge2 of the given Interface. 
- */
-template <class Interface>
-struct IdxRangeCurrentAndTarget<
-        Interface,
-        typename Interface::Edge2::parallel_grid::continuous_dimension_type>
-{
-    /// @brief Grid parallel to Edge1 of the Interface.
-    using EdgeGrid1 = typename Interface::Edge1::parallel_grid;
-    /// @brief Grid parallel to Edge2 of the Interface.
-    using EdgeGrid2 = typename Interface::Edge2::parallel_grid;
-
-    /// @brief IdxRange parallel to the Edge on the current patch.
-    using IdxRangeCurrent = IdxRange<EdgeGrid2>;
-    /// @brief IdxRange parallel to the Edge on the target patch.
-    using IdxRangeTarget = IdxRange<EdgeGrid1>;
-};
-
-
-/**
  * @brief Get equivalent coordinate on the target patch. 
  * 
- * @tparam PatchOrDim Type for a continuous dimension or a patch. 
+ * @tparam CurrentPatch Type for the current patch. 
  * @tparam Interface Interface type given in EdgeTransformation class. 
- * @tparam CurrentDim The continuous dimension where the given coordinate is defined. 
  * 
  * @param current_coord Coordinate on the current patch. 
  * @param idx_range_patch_1 Index range on the Edge1 of the Interface. 
@@ -103,30 +24,31 @@ struct IdxRangeCurrentAndTarget<
  * 
  * @return Equivalent coordinate on the target patch. 
  */
-template <typename PatchOrDim, class Interface, class CurrentDim>
-Coord<std::conditional_t<
-        std::is_same_v<
-                CurrentDim,
+template <
+        typename CurrentPatch,
+        class Interface,
+        class TargetDim = std::conditional_t<
+                std::is_same_v<CurrentPatch, typename Interface::Edge1::associated_patch>,
+                typename Interface::Edge2::parallel_grid::continuous_dimension_type,
                 typename Interface::Edge1::parallel_grid::continuous_dimension_type>,
-        typename Interface::Edge2::parallel_grid::continuous_dimension_type,
-        typename Interface::Edge1::parallel_grid::continuous_dimension_type>>
-get_equivalent_target_coordinate(
+        class CurrentDim = std::conditional_t<
+                std::is_same_v<CurrentPatch, typename Interface::Edge1::associated_patch>,
+                typename Interface::Edge1::parallel_grid::continuous_dimension_type,
+                typename Interface::Edge2::parallel_grid::continuous_dimension_type>>
+Coord<TargetDim> get_equivalent_target_coordinate(
         Coord<CurrentDim> const& current_coord,
         IdxRange<typename Interface::Edge1::parallel_grid> const& idx_range_patch_1,
         IdxRange<typename Interface::Edge2::parallel_grid> const& idx_range_patch_2)
 {
+    using Patch1 = typename Interface::Edge1::associated_patch;
+
     using EdgeGrid1 = typename Interface::Edge1::parallel_grid;
     using EdgeGrid2 = typename Interface::Edge2::parallel_grid;
 
-    using EdgeDim1 = typename EdgeGrid1::continuous_dimension_type;
-    using EdgeDim2 = typename EdgeGrid2::continuous_dimension_type;
-
-    // The other continuous dimension
-    using TargetDim = std::conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, EdgeDim2, EdgeDim1>;
-
-    using IdxRangeCurrent =
-            typename IdxRangeCurrentAndTarget<Interface, PatchOrDim>::IdxRangeCurrent;
-    using IdxRangeTarget = typename IdxRangeCurrentAndTarget<Interface, PatchOrDim>::IdxRangeTarget;
+    using IdxRangeCurrent = IdxRange<
+            std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeGrid1, EdgeGrid2>>;
+    using IdxRangeTarget = IdxRange<
+            std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeGrid2, EdgeGrid1>>;
 
     // Gem_idx_range_patch_1min and length on each 1D index ranges:
     IdxRange<EdgeGrid1, EdgeGrid2> const combined_idx_range(idx_range_patch_1, idx_range_patch_2);
@@ -240,7 +162,7 @@ public:
                 "Please specify the input Patch as template parameter "
                 "using .template operator<CurrentPatch>()(current_coord).");
         return get_equivalent_target_coordinate<
-                CurrentDim,
+                std::conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, Patch1, Patch2>,
                 Interface>(current_coord, m_idx_range_patch_1, m_idx_range_patch_2);
     }
 
