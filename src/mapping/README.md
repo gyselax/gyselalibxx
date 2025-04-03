@@ -165,6 +165,19 @@ with $\det(J) = -R$.
 \right.
 ```
 
+### Toroidal to Cylindrical transformation
+
+The toroidal to cylindrical transformation combines a 2D transformation in the polar plane of the torus with an orthogonal transformation in the remaining dimension.
+
+```math
+\begin{aligned}
+(\rho, \theta) = f(R, Z) \\
+\phi = - \zeta
+\end{aligned}
+```
+
+where $f$ is a 2D curvilinear to cartesian transformation.
+
 ## Combined coordinate transformation which combines two of the coordinate transformations above
 
 The tools are:
