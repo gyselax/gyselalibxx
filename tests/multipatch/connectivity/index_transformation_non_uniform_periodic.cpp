@@ -44,7 +44,7 @@ public:
         : idx_range_r1(Patch1::Idx1(0), r1_npoints)
         , idx_range_theta1(Patch1::Idx2(0), theta1_npoints)
         , idx_range_r2(Patch2::Idx1(0), r2_npoints)
-        , idx_range_theta2(Patch2::Idx2(0), theta2_npoints) {};
+        , idx_range_theta2(Patch2::Idx2(0), theta2_npoints) {}
 
     static void SetUpTestSuite()
     {

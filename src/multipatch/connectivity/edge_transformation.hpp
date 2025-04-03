@@ -313,9 +313,9 @@ public:
 
         // Periodicity property.
         if constexpr (CurrentGrid::continuous_dimension_type::PERIODIC) {
-            current_idx = (current_idx < current_idx_range.back())
-                                  ? current_idx
-                                  : current_idx - current_idx_range.extents() + 1;
+            current_idx = (current_idx == current_idx_range.back())
+                                  ? current_idx_range.front()
+                                  : current_idx ;
         }
 
         if constexpr ( // Uniform case
@@ -397,14 +397,6 @@ private:
         while (target_idx_step_diff != IdxStepTarget(1)) {
             CurrentCoord target_equivalent_coord_mid
                     = get_equivalent_coord_from_idx(target_idx_mid);
-
-            // Periodicity property.
-            if constexpr (TargetGrid::continuous_dimension_type::PERIODIC) {
-                if (target_idx_mid == target_idx_range.back()) {
-                    target_equivalent_coord_mid
-                            = get_equivalent_coord_from_idx(target_idx_range.front());
-                }
-            }
 
             if ((current_coord > target_equivalent_coord_mid && Interface::orientations_agree)
                 || (current_coord <= target_equivalent_coord_mid
