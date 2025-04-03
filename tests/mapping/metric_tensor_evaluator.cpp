@@ -69,7 +69,7 @@ TEST_P(InverseMetricTensor3D, InverseMatrixCylindricalMap)
     using Mapping = CylindricalToCartesian<R, Z, Zeta, X, Y>;
     Mapping mapping;
 
-    FieldMemRThetaPhi_host<Coord<R, Z, Zeta>> coords
+    FieldMemRZZeta_host<Coord<R, Z, Zeta>> coords
             = get_example_coords(IdxStepR(Nr), IdxStepZ(Nz), IdxStepZeta(Nzeta));
     IdxRangeRZZeta grid = get_idx_range(coords);
 

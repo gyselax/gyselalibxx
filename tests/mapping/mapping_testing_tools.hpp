@@ -44,7 +44,7 @@ auto get_example_coords(IdxStep<GridR> r_ncells, IdxStep<GridTheta> theta_ncells
     return coords;
 }
 
-template <class GridR, class GridTheta>
+template <class GridR, class GridTheta, class GridPhi>
 auto get_example_coords(
         IdxStep<GridR> r_ncells,
         IdxStep<GridTheta> theta_ncells,
