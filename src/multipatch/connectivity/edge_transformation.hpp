@@ -116,11 +116,11 @@ public:
      * @return The analogous coordinate on the target patch. 
     */
     template <class CurrentPatch>
-    Coord<std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeDim2, EdgeDim1>> transform_edge_coord(
-            Coord<std::conditional_t<
-                    std::is_same_v<CurrentPatch, Patch1>,
-                    EdgeDim1,
-                    EdgeDim2>> const& current_coord) const
+    Coord<std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeDim2, EdgeDim1>>
+    transform_edge_coord(Coord<std::conditional_t<
+                                 std::is_same_v<CurrentPatch, Patch1>,
+                                 EdgeDim1,
+                                 EdgeDim2>> const& current_coord) const
     {
         return (*this).get_equivalent_target_coordinate<CurrentPatch>(current_coord);
     }
