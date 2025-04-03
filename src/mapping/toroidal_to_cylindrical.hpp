@@ -80,12 +80,30 @@ public:
         return CoordResult(m_mapping_2d(CoordArg2D(coord)), Coord<Zeta>(-ddc::get<Phi>(coord)));
     }
 
-
+    /**
+     * @brief Compute the Jacobian: the determinant of the Jacobian matrix of the mapping.
+     *
+     * @param[in] coord
+     *          The coordinate where we evaluate the Jacobian.
+     *
+     * @return The value of the determinant of the Jacobian matrix.
+     */
     KOKKOS_FUNCTION double jacobian(CoordArg const& coord) const
     {
         return -m_mapping_2d.jacobian(CoordArg2D(coord));
     }
 
+    /**
+     * @brief Compute the Jacobian matrix.
+     *
+     * For different computations, we need either the complete Jacobian matrix or
+     * some of the coefficients of the matrix.
+     * The coefficients can be obtained independently with the function jacobian_component.
+     *
+     * @param[in] coord
+     * 				The coordinate where we evaluate the Jacobian matrix.
+     * @return The Jacobian matrix.
+     */
     KOKKOS_FUNCTION DTensor<VectorIndexSet<R, Z, Zeta>, VectorIndexSet<Rho_cov, Theta_cov, Phi_cov>>
     jacobian_matrix(CoordArg const& coord) const
     {
@@ -100,6 +118,17 @@ public:
         return J_3d;
     }
 
+    /**
+     * @brief Compute the (i,j) coefficient of the Jacobian matrix.
+     * 
+     * @param[in] coord
+     *              The coordinate where we evaluate the Jacobian matrix.
+     *
+     * @tparam The tag representing the index i.
+     * @tparam The tag representing the index j.
+     *
+     * @return The value of the (i,j) coefficient of the Jacobian matrix.
+     */
     template <class IndexTag1, class IndexTag2>
     KOKKOS_INLINE_FUNCTION double jacobian_component(CoordArg const& coord) const
     {
@@ -117,6 +146,17 @@ public:
         }
     }
 
+    /**
+     * @brief Compute the inverse of the Jacobian matrix.
+     *
+     * For different computations, we need either the complete Jacobian matrix or
+     * some of the coefficients of the matrix.
+     * The coefficients can be obtained independently with the function inv_jacobian_component.
+     *
+     * @param[in] coord
+     * 				The coordinate where we evaluate the Jacobian matrix.
+     * @return The Jacobian matrix.
+     */
     KOKKOS_FUNCTION DTensor<VectorIndexSet<Rho, Theta, Phi>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>>
     inv_jacobian_matrix(CoordArg const& coord) const
     {
@@ -132,6 +172,17 @@ public:
         return inv_J_3d;
     }
 
+    /**
+     * @brief Compute the (i,j) coefficient of the inverse of the Jacobian matrix.
+     * 
+     * @param[in] coord
+     *              The coordinate where we evaluate the Jacobian matrix.
+     *
+     * @tparam The tag representing the index i.
+     * @tparam The tag representing the index j.
+     *
+     * @return The value of the (i,j) coefficient of the Jacobian matrix.
+     */
     template <class IndexTag1, class IndexTag2>
     KOKKOS_INLINE_FUNCTION double inv_jacobian_component(CoordArg const& coord) const
     {
