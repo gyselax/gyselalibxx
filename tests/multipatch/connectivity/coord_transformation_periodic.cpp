@@ -135,7 +135,8 @@ TEST_F(CoordinateTransformationPeriodicTest, Periodicity)
     EXPECT_NEAR(double(test_coord_theta2), -4.0, 1e-14);
 
     // Test get_equivalent_coord_from_idx()
-    test_coord_theta2 = coord_transformation.get_equivalent_coord_from_idx(idx_range_theta1.front());
+    test_coord_theta2
+            = coord_transformation.get_equivalent_coord_from_idx(idx_range_theta1.front());
 
     EXPECT_NEAR(double(test_coord_theta2), -4.0, 1e-14);
 }
