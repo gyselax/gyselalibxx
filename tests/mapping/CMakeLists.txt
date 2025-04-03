@@ -5,6 +5,7 @@ add_executable(unit_tests_mapping
     mapping_execution_space_access.cpp
     mapping_jacobian.cpp
     mapping_jacobian_matrix_coef.cpp
+    mapping_static_properties.cpp
     metric_tensor_evaluator.cpp
     pseudo_cartesian_jacobian_matrix.cpp
     refined_discrete_mapping.cpp
