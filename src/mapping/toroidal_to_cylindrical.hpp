@@ -120,7 +120,7 @@ public:
     KOKKOS_FUNCTION DTensor<VectorIndexSet<Rho, Theta, Phi>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>>
     inv_jacobian_matrix(CoordArg const& coord) const
     {
-        static_assert(has_2d_inv_jacobian_v<Curvilinear2DToCartesian>);
+        static_assert(has_inv_jacobian_v<Curvilinear2DToCartesian>);
         DTensor<VectorIndexSet<Rho, Theta, Phi>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>> inv_J_3d;
         DTensor<VectorIndexSet<Rho, Theta>, VectorIndexSet<R_cov, Z_cov>> inv_J_2d
                 = m_mapping_2d.inv_jacobian_matrix(CoordArg2D(coord));
@@ -135,7 +135,7 @@ public:
     template <class IndexTag1, class IndexTag2>
     KOKKOS_INLINE_FUNCTION double inv_jacobian_component(CoordArg const& coord) const
     {
-        static_assert(has_2d_inv_jacobian_v<Curvilinear2DToCartesian>);
+        static_assert(has_inv_jacobian_v<Curvilinear2DToCartesian>);
         static_assert(ddc::in_tags_v<IndexTag1, ddc::detail::TypeSeq<Rho, Theta, Phi>>);
         static_assert(ddc::in_tags_v<IndexTag2, ddc::detail::TypeSeq<R_cov, Z_cov, Zeta_cov>>);
 
