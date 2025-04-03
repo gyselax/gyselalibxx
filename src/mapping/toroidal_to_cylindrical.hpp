@@ -160,10 +160,11 @@ public:
     KOKKOS_FUNCTION DTensor<VectorIndexSet<Rho, Theta, Phi>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>>
     inv_jacobian_matrix(CoordArg const& coord) const
     {
-        static_assert(has_inv_jacobian_v<Curvilinear2DToCartesian>);
+        InverseJacobianMatrix<Curvilinear2DToCartesian, CoordArg2D> inv_jacobian_matrix_2d(
+                m_mapping_2d);
         DTensor<VectorIndexSet<Rho, Theta, Phi>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>> inv_J_3d;
         DTensor<VectorIndexSet<Rho, Theta>, VectorIndexSet<R_cov, Z_cov>> inv_J_2d
-                = m_mapping_2d.inv_jacobian_matrix(CoordArg2D(coord));
+                = inv_jacobian_matrix_2d(CoordArg2D(coord));
         ddcHelper::get<Rho, R_cov>(inv_J_3d) = ddcHelper::get<Rho, R_cov>(inv_J_2d);
         ddcHelper::get<Rho, Z_cov>(inv_J_3d) = ddcHelper::get<Rho, Z_cov>(inv_J_2d);
         ddcHelper::get<Theta, R_cov>(inv_J_3d) = ddcHelper::get<Theta, R_cov>(inv_J_2d);
