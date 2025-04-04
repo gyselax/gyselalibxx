@@ -580,8 +580,8 @@ private:
 private:
     using InverseMapping2 = inverse_mapping_t&lt;Mapping2&gt;;
 
-    static_assert(has_2d_jacobian_v&lt;Mapping1, CoordJacobian&gt;);
-    static_assert(has_2d_jacobian_v&lt;InverseMapping2, CoordJacobian&gt;);
+    static_assert(has_jacobian_v&lt;Mapping1, CoordJacobian&gt;);
+    static_assert(has_jacobian_v&lt;InverseMapping2, CoordJacobian&gt;);
 
 private:
     Mapping1 m_mapping_1;

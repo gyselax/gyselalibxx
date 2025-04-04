@@ -116,6 +116,10 @@
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
         <childnode refid="16" relation="include">
         </childnode>
       </node>
@@ -332,7 +336,7 @@
 <codeline lineno="19" refid="classMetricTensorEvaluator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMetricTensorEvaluator" kindref="compound">MetricTensorEvaluator</ref></highlight></codeline>
 <codeline lineno="20"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(is_mapping_v&lt;Mapping&gt;);</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(has_2d_jacobian_v&lt;Mapping,<sp/>PositionCoordinate&gt;);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(has_jacobian_v&lt;Mapping,<sp/>PositionCoordinate&gt;);</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Dims<sp/>=<sp/>ddc::to_type_seq_t&lt;typename<sp/>Mapping::CoordArg&gt;;</highlight></codeline>
 <codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Dims_cov<sp/>=<sp/>vector_index_set_dual_t&lt;Dims&gt;;</highlight></codeline>

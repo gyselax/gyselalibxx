@@ -21,17 +21,17 @@
     <includedby refid="bsl__predcorr__second__order__explicit_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_explicit.hpp</includedby>
     <includedby refid="bsl__predcorr__second__order__implicit_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp</includedby>
     <incdepgraph>
-      <node id="20">
+      <node id="24">
         <label>indexed_tensor.hpp</label>
         <link refid="indexed__tensor_8hpp"/>
-        <childnode refid="21" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
       </node>
-      <node id="21">
+      <node id="15">
         <label>tensor.hpp</label>
         <link refid="tensor_8hpp_source"/>
         <childnode refid="9" relation="include">
@@ -42,17 +42,17 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
       </node>
-      <node id="22">
+      <node id="16">
         <label>tensor_index_tools.hpp</label>
         <link refid="tensor__index__tools_8hpp_source"/>
-        <childnode refid="23" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
       </node>
       <node id="25">
@@ -66,7 +66,7 @@
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
       </node>
       <node id="27">
@@ -76,7 +76,7 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="26">
@@ -92,10 +92,10 @@
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
       </node>
-      <node id="24">
+      <node id="18">
         <label>vector_index_tools.hpp</label>
         <link refid="vector__index__tools_8hpp_source"/>
         <childnode refid="2" relation="include">
@@ -116,7 +116,7 @@
         <link refid="polar__spline__evaluator_8hpp_source"/>
         <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
       <node id="34">
@@ -126,9 +126,9 @@
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
       <node id="14">
@@ -142,6 +142,10 @@
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
       </node>
       <node id="33">
         <label>metric_tensor_evaluator.hpp</label>
@@ -150,11 +154,27 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>math_tools.hpp</label>
+        <link refid="math__tools_8hpp_source"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
@@ -162,31 +182,15 @@
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
-      </node>
-      <node id="18">
-        <label>math_tools.hpp</label>
-        <link refid="math__tools_8hpp_source"/>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
         <childnode refid="25" relation="include">
         </childnode>
       </node>
       <node id="31">
         <label>matrix_batch.hpp</label>
         <link refid="matrix__batch_8hpp_source"/>
-        <childnode refid="17" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
       <node id="28">
@@ -196,7 +200,7 @@
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
@@ -208,7 +212,7 @@
         <link refid="matrix__utils_8hpp_source"/>
         <childnode refid="30" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -224,7 +228,7 @@
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="28" relation="include">
         </childnode>
@@ -236,7 +240,7 @@
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
@@ -264,7 +268,7 @@
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
@@ -327,26 +331,26 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="23">
+      <node id="17">
         <label>type_seq_tools.hpp</label>
         <link refid="type__seq__tools_8hpp_source"/>
       </node>
-      <node id="15">
+      <node id="19">
         <label>view.hpp</label>
         <link refid="view_8hpp_source"/>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="21">
         <label>Kokkos_Core.hpp</label>
       </node>
-      <node id="19">
+      <node id="23">
         <label>algorithm</label>
       </node>
       <node id="9">
@@ -370,7 +374,7 @@
       <node id="30">
         <label>ginkgo/ginkgo.hpp</label>
       </node>
-      <node id="16">
+      <node id="20">
         <label>ostream</label>
       </node>
       <node id="4">
@@ -677,7 +681,7 @@
 <codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::discrete_space&lt;PolarBSplinesRTheta&gt;().nbasis()</highlight></codeline>
 <codeline lineno="331"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>ddc::discrete_space&lt;BSplinesTheta&gt;().nbasis())</highlight></codeline>
 <codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(has_2d_jacobian_v&lt;Mapping,<sp/>CoordRTheta&gt;);</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(has_jacobian_v&lt;Mapping,<sp/>CoordRTheta&gt;);</highlight></codeline>
 <codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//initialise<sp/>x_init</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::deep_copy(m_x_init,<sp/>0);</highlight></codeline>
 <codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Get<sp/>break<sp/>points</highlight><highlight class="normal"></highlight></codeline>

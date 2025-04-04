@@ -6,6 +6,36 @@
     <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
     <includes refid="mapping__tools_8hpp" local="yes">mapping_tools.hpp</includes>
     <incdepgraph>
+      <node id="9">
+        <label>tensor.hpp</label>
+        <link refid="tensor_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>tensor_index_tools.hpp</label>
+        <link refid="tensor__index__tools_8hpp_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>vector_index_tools.hpp</label>
+        <link refid="vector__index__tools_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
       <node id="1">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp</label>
         <link refid="barycentric__to__cartesian_8hpp"/>
@@ -27,6 +57,10 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
       </node>
       <node id="3">
         <label>ddc_aliases.hpp</label>
@@ -36,23 +70,30 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="9">
+      <node id="12">
+        <label>type_seq_tools.hpp</label>
+        <link refid="type__seq__tools_8hpp_source"/>
+      </node>
+      <node id="14">
         <label>view.hpp</label>
         <link refid="view_8hpp_source"/>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="11">
+      <node id="16">
         <label>Kokkos_Core.hpp</label>
       </node>
       <node id="6">
         <label>array</label>
+      </node>
+      <node id="10">
+        <label>cassert</label>
       </node>
       <node id="2">
         <label>ddc/ddc.hpp</label>
@@ -60,7 +101,7 @@
       <node id="4">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="10">
+      <node id="15">
         <label>ostream</label>
       </node>
       <node id="7">

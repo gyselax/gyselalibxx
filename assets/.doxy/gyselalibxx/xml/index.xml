@@ -3614,8 +3614,8 @@
     <member refid="mapping__tools_8hpp_1a73b10b1b7a6d6f065a61b7cd3e07715d" kind="typedef"><name>inverse_mapping_t</name></member>
     <member refid="mapping__tools_8hpp_1af4d26b36a5a227ac1dc9de0e85602530" kind="variable"><name>is_accessible_v</name></member>
     <member refid="mapping__tools_8hpp_1a91e6734a3ddaeb51dcccfdd2a518e219" kind="variable"><name>is_mapping_v</name></member>
-    <member refid="mapping__tools_8hpp_1af5fab9506dfee551ee86b94fd9469987" kind="variable"><name>has_2d_jacobian_v</name></member>
-    <member refid="mapping__tools_8hpp_1a9b55fd60110340bf8081fd1e9b3bd7e6" kind="variable"><name>has_2d_inv_jacobian_v</name></member>
+    <member refid="mapping__tools_8hpp_1a812e55e0df4483186b74be893a55edf5" kind="variable"><name>has_jacobian_v</name></member>
+    <member refid="mapping__tools_8hpp_1a0b47bd9a783fa783a2901b6a0f79f7ad" kind="variable"><name>has_inv_jacobian_v</name></member>
     <member refid="mapping__tools_8hpp_1a230c6bfb2a4c17a294b86fd030d2ab2f" kind="variable"><name>is_curvilinear_2d_mapping_v</name></member>
     <member refid="mapping__tools_8hpp_1a489e6f5039f572e0f76796a376857cd5" kind="variable"><name>is_analytical_mapping_v</name></member>
     <member refid="mapping__tools_8hpp_1a40c83f9e43b408ef10e0c553b6c97ddf" kind="variable"><name>has_singular_o_point_inv_jacobian_v</name></member>

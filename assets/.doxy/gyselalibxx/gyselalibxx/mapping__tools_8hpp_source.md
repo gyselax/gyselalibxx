@@ -15,6 +15,8 @@
 #include <type_traits>
 #include <utility>
 
+#include "tensor.hpp"
+#include "vector_index_tools.hpp"
 #include "view.hpp"
 
 namespace mapping_detail {
@@ -70,195 +72,144 @@ public:
     static constexpr bool value = is_mapping();
 };
 
-template <typename Type, typename CoordinateType>
-class Defines2DJacobian
+template <typename Type, typename CoordinateType, bool HideError>
+class DefinesJacobian
 {
-    using DimArg0 = ddc::type_seq_element_t<0, ddc::to_type_seq_t<CoordinateType>>;
-    using DimArg1 = ddc::type_seq_element_t<1, ddc::to_type_seq_t<CoordinateType>>;
-    using DimRes0_cov =
-            typename ddc::type_seq_element_t<0, ddc::to_type_seq_t<CoordinateType>>::Dual;
-    using DimRes1_cov =
-            typename ddc::type_seq_element_t<1, ddc::to_type_seq_t<CoordinateType>>::Dual;
-
+    struct IdxTag;
     template <typename ClassType>
-    using jacobian_type = decltype(&ClassType::jacobian_matrix);
+    using jacobian_matrix = decltype(&ClassType::jacobian_matrix);
     template <typename ClassType>
-    using jacobian_11 = decltype(&ClassType::template jacobian_component<DimArg0, DimRes0_cov>);
-    template <typename ClassType>
-    using jacobian_12 = decltype(&ClassType::template jacobian_component<DimArg0, DimRes1_cov>);
-    template <typename ClassType>
-    using jacobian_21 = decltype(&ClassType::template jacobian_component<DimArg1, DimRes0_cov>);
-    template <typename ClassType>
-    using jacobian_22 = decltype(&ClassType::template jacobian_component<DimArg1, DimRes1_cov>);
+    using jacobian_component = decltype(&ClassType::template jacobian_component<IdxTag, IdxTag>);
     template <typename ClassType>
     using jacobian = decltype(&ClassType::jacobian);
 
-    static std::tuple<bool, const char*> constexpr has_2d_jacobian_methods()
+    static bool constexpr has_jacobian_methods()
     {
-        if (!CheckClassAttributeExistence<Type, jacobian_type>::has_attribute) {
-            return std::make_tuple(false, "A 2D Mapping must define the jacobian_matrix function");
+        if constexpr (!CheckClassAttributeExistence<Type, jacobian_matrix>::has_attribute) {
+            static_assert(HideError, "A Mapping must define the jacobian_matrix function");
+            return false;
         }
-        if (!CheckClassAttributeExistence<Type, jacobian_11>::has_attribute) {
-            return std::make_tuple(false, "A 2D Mapping must define the jacobian_11 function");
+        if constexpr (!CheckClassAttributeExistence<Type, jacobian_component>::has_attribute) {
+            static_assert(HideError, "A Mapping must define the jacobian_component function");
+            return false;
         }
-        if (!CheckClassAttributeExistence<Type, jacobian_12>::has_attribute) {
-            return std::make_tuple(false, "A 2D Mapping must define the jacobian_12 function");
+        if constexpr (!CheckClassAttributeExistence<Type, jacobian>::has_attribute) {
+            static_assert(HideError, "A Mapping must define the jacobian function");
+            return false;
         }
-        if (!CheckClassAttributeExistence<Type, jacobian_21>::has_attribute) {
-            return std::make_tuple(false, "A 2D Mapping must define the jacobian_21 function");
-        }
-        if (!CheckClassAttributeExistence<Type, jacobian_22>::has_attribute) {
-            return std::make_tuple(false, "A 2D Mapping must define the jacobian_22 function");
-        }
-        if (!CheckClassAttributeExistence<Type, jacobian>::has_attribute) {
-            return std::make_tuple(false, "A 2D Mapping must define the jacobian function");
-        }
-        return std::make_tuple(true, "");
+        return true;
     }
 
-    static std::tuple<bool, const char*> constexpr has_2d_jacobian()
+    static bool constexpr has_jacobian()
     {
-        constexpr std::tuple<bool, const char*> success = has_2d_jacobian_methods();
-        if constexpr (std::get<bool>(success)) {
-            if (!std::is_invocable_v<decltype(&Type::jacobian_matrix), Type, CoordinateType>) {
-                return std::make_tuple(
-                        false,
-                        "The jacobian_matrix method of a 2D Mapping must take a Coordinate as an "
-                        "argument and return a 2D Tensor.");
+        static_assert(mapping_detail::IsMapping<Type>::value);
+        constexpr bool success = has_jacobian_methods();
+        if constexpr (success) {
+            using ArgBasisCov = get_covariant_dims_t<ddc::to_type_seq_t<typename Type::CoordArg>>;
+            using ResultBasis
+                    = get_contravariant_dims_t<ddc::to_type_seq_t<typename Type::CoordResult>>;
+            if constexpr (!std::is_invocable_r_v<
+                                  DTensor<ResultBasis, ArgBasisCov>,
+                                  decltype(&Type::jacobian_matrix),
+                                  Type,
+                                  CoordinateType>) {
+                static_assert(
+                        HideError,
+                        "The jacobian_matrix method of a Mapping must take a Coordinate as an "
+                        "argument and return a Tensor.");
+                return false;
             }
-            if (!std::is_invocable_r_v<double, jacobian_11<Type>, Type, CoordinateType>) {
-                return std::make_tuple(
-                        false,
-                        "The jacobian_11 method of a 2D Mapping must take a Coordinate as an "
+            if constexpr (!std::is_invocable_r_v<
+                                  double,
+                                  jacobian_component<Type>,
+                                  Type,
+                                  CoordinateType>) {
+                static_assert(
+                        HideError,
+                        "The jacobian_component method of a Mapping must take a Coordinate as an "
                         "argument and return a double.");
+                return false;
             }
-            if (!std::is_invocable_r_v<double, jacobian_12<Type>, Type, CoordinateType>) {
-                return std::make_tuple(
-                        false,
-                        "The jacobian_12 method of a 2D Mapping must take a Coordinate as an "
-                        "argument and return a double.");
-            }
-            if (!std::is_invocable_r_v<double, jacobian_21<Type>, Type, CoordinateType>) {
-                return std::make_tuple(
-                        false,
-                        "The jacobian_21 method of a 2D Mapping must take a Coordinate as an "
-                        "argument and return a double.");
-            }
-            if (!std::is_invocable_r_v<double, jacobian_22<Type>, Type, CoordinateType>) {
-                return std::make_tuple(
-                        false,
-                        "The jacobian_22 method of a 2D Mapping must take a Coordinate as an "
-                        "argument and return a double.");
-            }
-            if (!std::is_invocable_r_v<double, decltype(&Type::jacobian), Type, CoordinateType>) {
-                return std::make_tuple(
-                        false,
-                        "The jacobian method of a 2D Mapping must take a Coordinate as an argument "
+            if constexpr (!std::is_invocable_r_v<
+                                  double,
+                                  decltype(&Type::jacobian),
+                                  Type,
+                                  CoordinateType>) {
+                static_assert(
+                        HideError,
+                        "The jacobian method of a Mapping must take a Coordinate as an argument "
                         "and return a double.");
+                return false;
             }
-            return std::make_tuple(true, "");
+            return true;
         }
         return success;
     }
 
-    static constexpr std::tuple<bool, const char*> has_2d_jacobian_output = has_2d_jacobian();
-
 public:
-    static constexpr bool value = std::get<bool>(has_2d_jacobian_output);
-    static constexpr const char* error_msg = std::get<const char*>(has_2d_jacobian_output);
+    static constexpr bool value = has_jacobian();
 };
 
-template <typename Type, typename CoordinateType>
-class Defines2DInvJacobian
+template <typename Type, typename CoordinateType, bool HideError>
+class DefinesInvJacobian
 {
-    using DimRes0 = ddc::type_seq_element_t<0, ddc::to_type_seq_t<CoordinateType>>;
-    using DimRes1 = ddc::type_seq_element_t<1, ddc::to_type_seq_t<CoordinateType>>;
-    using DimArg0_cov =
-            typename ddc::type_seq_element_t<0, ddc::to_type_seq_t<CoordinateType>>::Dual;
-    using DimArg1_cov =
-            typename ddc::type_seq_element_t<1, ddc::to_type_seq_t<CoordinateType>>::Dual;
-
+    struct IdxTag;
     template <typename ClassType>
     using inv_jacobian_type = decltype(&ClassType::inv_jacobian_matrix);
     template <typename ClassType>
-    using inv_jacobian_11
-            = decltype(&ClassType::template inv_jacobian_component<DimRes0, DimArg0_cov>);
-    template <typename ClassType>
-    using inv_jacobian_12
-            = decltype(&ClassType::template inv_jacobian_component<DimRes0, DimArg1_cov>);
-    template <typename ClassType>
-    using inv_jacobian_21
-            = decltype(&ClassType::template inv_jacobian_component<DimRes1, DimArg0_cov>);
-    template <typename ClassType>
-    using inv_jacobian_22
-            = decltype(&ClassType::template inv_jacobian_component<DimRes1, DimArg1_cov>);
+    using inv_jacobian_component
+            = decltype(&ClassType::template inv_jacobian_component<IdxTag, IdxTag>);
 
-    static std::tuple<bool, const char*> constexpr has_2d_inv_jacobian_methods()
+    static bool constexpr has_inv_jacobian_methods()
     {
-        if (!CheckClassAttributeExistence<Type, inv_jacobian_type>::has_attribute) {
-            return std::
-                    make_tuple(false, "A 2D Mapping must define the inv_jacobian_matrix function");
+        if constexpr (!CheckClassAttributeExistence<Type, inv_jacobian_type>::has_attribute) {
+            static_assert(HideError, "A Mapping must define the inv_jacobian_matrix function");
+            return false;
         }
-        if (!CheckClassAttributeExistence<Type, inv_jacobian_11>::has_attribute) {
-            return std::make_tuple(false, "A 2D Mapping must define the inv_jacobian_11 function");
+        if constexpr (!CheckClassAttributeExistence<Type, inv_jacobian_component>::has_attribute) {
+            static_assert(HideError, "A Mapping must define the inv_jacobian_component function");
+            return false;
         }
-        if (!CheckClassAttributeExistence<Type, inv_jacobian_12>::has_attribute) {
-            return std::make_tuple(false, "A 2D Mapping must define the inv_jacobian_12 function");
-        }
-        if (!CheckClassAttributeExistence<Type, inv_jacobian_21>::has_attribute) {
-            return std::make_tuple(false, "A 2D Mapping must define the inv_jacobian_21 function");
-        }
-        if (!CheckClassAttributeExistence<Type, inv_jacobian_22>::has_attribute) {
-            return std::make_tuple(false, "A 2D Mapping must define the inv_jacobian_22 function");
-        }
-        return std::make_tuple(true, "");
+        return true;
     }
 
-    static std::tuple<bool, const char*> constexpr has_2d_inv_jacobian()
+    static bool constexpr has_inv_jacobian()
     {
-        constexpr std::tuple<bool, const char*> success = has_2d_inv_jacobian_methods();
-        if constexpr (std::get<bool>(success)) {
-            if (!std::is_invocable_v<decltype(&Type::inv_jacobian_matrix), Type, CoordinateType>) {
-                return std::make_tuple(
-                        false,
-                        "The inv_jacobian_matrix method of a 2D Mapping must take a Coordinate as "
-                        "an argument and return a Tensor.");
+        static_assert(mapping_detail::IsMapping<Type>::value);
+        constexpr bool success = has_inv_jacobian_methods();
+        if constexpr (success) {
+            using ResultBasisCov
+                    = get_covariant_dims_t<ddc::to_type_seq_t<typename Type::CoordResult>>;
+            using ArgBasis = get_contravariant_dims_t<ddc::to_type_seq_t<typename Type::CoordArg>>;
+            if constexpr (!std::is_invocable_r_v<
+                                  DTensor<ArgBasis, ResultBasisCov>,
+                                  decltype(&Type::inv_jacobian_matrix),
+                                  Type,
+                                  CoordinateType>) {
+                static_assert(
+                        HideError,
+                        "The inv_jacobian_matrix method of a Mapping must take a Coordinate as an "
+                        "argument and return a Tensor.");
+                return false;
             }
-            if (!std::is_invocable_r_v<double, inv_jacobian_11<Type>, Type, CoordinateType>) {
-                return std::make_tuple(
-                        false,
-                        "The inv_jacobian_11 method of a 2D Mapping must take a Coordinate as an "
-                        "argument and return a double.");
+            if constexpr (!std::is_invocable_r_v<
+                                  double,
+                                  inv_jacobian_component<Type>,
+                                  Type,
+                                  CoordinateType>) {
+                static_assert(
+                        HideError,
+                        "The inv_jacobian_component method of a Mapping must take a Coordinate as "
+                        "an argument and return a double.");
+                return false;
             }
-            if (!std::is_invocable_r_v<double, inv_jacobian_12<Type>, Type, CoordinateType>) {
-                return std::make_tuple(
-                        false,
-                        "The inv_jacobian_12 method of a 2D Mapping must take a Coordinate as an "
-                        "argument and return a double.");
-            }
-            if (!std::is_invocable_r_v<double, inv_jacobian_21<Type>, Type, CoordinateType>) {
-                return std::make_tuple(
-                        false,
-                        "The inv_jacobian_21 method of a 2D Mapping must take a Coordinate as an "
-                        "argument and return a double.");
-            }
-            if (!std::is_invocable_r_v<double, inv_jacobian_22<Type>, Type, CoordinateType>) {
-                return std::make_tuple(
-                        false,
-                        "The inv_jacobian_22 method of a 2D Mapping must take a Coordinate as an "
-                        "argument and return a double.");
-            }
-            return std::make_tuple(true, "");
+            return true;
         }
         return success;
     }
 
-    static constexpr std::tuple<bool, const char*> has_2d_inv_jacobian_output
-            = has_2d_inv_jacobian();
-
 public:
-    static constexpr bool value = std::get<bool>(has_2d_inv_jacobian_output);
-    static constexpr const char* error_msg = std::get<const char*>(has_2d_inv_jacobian_output);
+    static constexpr bool value = has_inv_jacobian();
 };
 
 template <class Mapping>
@@ -300,13 +251,13 @@ static constexpr bool is_accessible_v = mapping_detail::
 template <class Mapping>
 static constexpr bool is_mapping_v = mapping_detail::IsMapping<Mapping>::value;
 
-template <class Mapping, class CoordinateType>
-static constexpr bool has_2d_jacobian_v
-        = mapping_detail::Defines2DJacobian<Mapping, CoordinateType>::value;
+template <class Mapping, class CoordinateType, bool RaiseError = true>
+static constexpr bool has_jacobian_v
+        = mapping_detail::DefinesJacobian<Mapping, CoordinateType, !RaiseError>::value;
 
-template <class Mapping, class CoordinateType>
-static constexpr bool has_2d_inv_jacobian_v
-        = mapping_detail::Defines2DInvJacobian<Mapping, CoordinateType>::value;
+template <class Mapping, class CoordinateType, bool RaiseError = true>
+static constexpr bool has_inv_jacobian_v
+        = mapping_detail::DefinesInvJacobian<Mapping, CoordinateType, !RaiseError>::value;
 
 template <class Mapping>
 static constexpr bool is_curvilinear_2d_mapping_v = mapping_detail::IsCurvilinear2DMapping<

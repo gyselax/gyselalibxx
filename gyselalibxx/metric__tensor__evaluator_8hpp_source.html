@@ -558,7 +558,7 @@ template &lt;class Mapping, class PositionCoordinate = typename Mapping::CoordAr
 class MetricTensorEvaluator
 {
     static_assert(is_mapping_v&lt;Mapping&gt;);
-    static_assert(has_2d_jacobian_v&lt;Mapping, PositionCoordinate&gt;);
+    static_assert(has_jacobian_v&lt;Mapping, PositionCoordinate&gt;);
 
     using Dims = ddc::to_type_seq_t&lt;typename Mapping::CoordArg&gt;;
     using Dims_cov = vector_index_set_dual_t&lt;Dims&gt;;

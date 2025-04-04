@@ -313,8 +313,8 @@
 
 ## h
 
-* **has\_2d\_inv\_jacobian\_v** ([**mapping\_tools.hpp**](mapping__tools_8hpp.md))
-* **has\_2d\_jacobian\_v** ([**mapping\_tools.hpp**](mapping__tools_8hpp.md))
+* **has\_inv\_jacobian\_v** ([**mapping\_tools.hpp**](mapping__tools_8hpp.md))
+* **has\_jacobian\_v** ([**mapping\_tools.hpp**](mapping__tools_8hpp.md))
 * **has\_singular\_o\_point\_inv\_jacobian\_v** ([**mapping\_tools.hpp**](mapping__tools_8hpp.md))
 * **has\_data\_access\_methods\_v** ([**ddc\_alias\_inline\_functions.hpp**](ddc__alias__inline__functions_8hpp.md))
 * **has\_idx\_range\_v** ([**ddc\_alias\_inline\_functions.hpp**](ddc__alias__inline__functions_8hpp.md))

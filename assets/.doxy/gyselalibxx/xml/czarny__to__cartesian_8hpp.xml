@@ -10,31 +10,31 @@
     <includes refid="view_8hpp" local="yes">view.hpp</includes>
     <includedby refid="inv__jacobian__o__point_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inv_jacobian_o_point.hpp</includedby>
     <incdepgraph>
-      <node id="13">
+      <node id="10">
         <label>tensor.hpp</label>
         <link refid="tensor_8hpp_source"/>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="12">
         <label>tensor_index_tools.hpp</label>
         <link refid="tensor__index__tools_8hpp_source"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="14">
         <label>vector_index_tools.hpp</label>
         <link refid="vector__index__tools_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -51,9 +51,9 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
         <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="6">
@@ -67,6 +67,10 @@
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
       </node>
       <node id="4">
         <label>ddc_aliases.hpp</label>
@@ -76,29 +80,29 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="13">
         <label>type_seq_tools.hpp</label>
         <link refid="type__seq__tools_8hpp_source"/>
       </node>
-      <node id="10">
+      <node id="15">
         <label>view.hpp</label>
         <link refid="view_8hpp_source"/>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="12">
+      <node id="17">
         <label>Kokkos_Core.hpp</label>
       </node>
       <node id="7">
         <label>array</label>
       </node>
-      <node id="14">
+      <node id="11">
         <label>cassert</label>
       </node>
       <node id="2">
@@ -110,7 +114,7 @@
       <node id="5">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="11">
+      <node id="16">
         <label>ostream</label>
       </node>
       <node id="8">

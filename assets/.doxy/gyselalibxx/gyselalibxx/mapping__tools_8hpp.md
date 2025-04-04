@@ -13,6 +13,8 @@
 * `#include <array>`
 * `#include <type_traits>`
 * `#include <utility>`
+* `#include "tensor.hpp"`
+* `#include "vector_index_tools.hpp"`
 * `#include "view.hpp"`
 
 
@@ -46,8 +48,8 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**has\_2d\_inv\_jacobian\_v**](#variable-has_2d_inv_jacobian_v)   = `mapping\_detail::Defines2DInvJacobian&lt;Mapping, CoordinateType&gt;::value`<br> |
-|  constexpr bool | [**has\_2d\_jacobian\_v**](#variable-has_2d_jacobian_v)   = `mapping\_detail::Defines2DJacobian&lt;Mapping, CoordinateType&gt;::value`<br> |
+|  constexpr bool | [**has\_inv\_jacobian\_v**](#variable-has_inv_jacobian_v)   = `mapping\_detail::DefinesInvJacobian&lt;Mapping, CoordinateType, !RaiseError&gt;::value`<br> |
+|  constexpr bool | [**has\_jacobian\_v**](#variable-has_jacobian_v)   = `mapping\_detail::DefinesJacobian&lt;Mapping, CoordinateType, !RaiseError&gt;::value`<br> |
 |  constexpr bool | [**has\_singular\_o\_point\_inv\_jacobian\_v**](#variable-has_singular_o_point_inv_jacobian_v)   = `/* multi line expression */`<br> |
 |  constexpr bool | [**is\_accessible\_v**](#variable-is_accessible_v)   = `/* multi line expression */`<br> |
 |  constexpr bool | [**is\_analytical\_mapping\_v**](#variable-is_analytical_mapping_v)   = `mapping\_detail::IsAnalyticalMapping&lt;Mapping&gt;::value`<br> |
@@ -115,10 +117,10 @@ using inverse_mapping_t =  decltype(std::declval<Mapping>().get_inverse_mapping(
 
 
 
-### variable has\_2d\_inv\_jacobian\_v 
+### variable has\_inv\_jacobian\_v 
 
 ```C++
-constexpr bool has_2d_inv_jacobian_v;
+constexpr bool has_inv_jacobian_v;
 ```
 
 
@@ -128,10 +130,10 @@ constexpr bool has_2d_inv_jacobian_v;
 
 
 
-### variable has\_2d\_jacobian\_v 
+### variable has\_jacobian\_v 
 
 ```C++
-constexpr bool has_2d_jacobian_v;
+constexpr bool has_jacobian_v;
 ```
 
 
