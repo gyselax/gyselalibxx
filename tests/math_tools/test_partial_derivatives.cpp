@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 
 #include "central_fdm_partial_derivatives.hpp"
+#include "central_fdm_partial_derivatives_with_boundary_values.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "math_tools.hpp"
@@ -98,6 +99,72 @@ public:
     }
 };
 
+/**
+ * @brief A class that represents a test function for computing partial derivatives with boundary values.
+ * The test function is defined as the product of two polynomials of cosine functions.
+ * This function has been chosen to ease the use of boundary conditions.
+ */
+class FunctionToDifferentiateLinearCosine
+{
+public:
+    /**
+     * @brief Default constructor.
+     */
+    KOKKOS_DEFAULTED_FUNCTION FunctionToDifferentiateLinearCosine() = default;
+
+    /**
+     * @brief Default copy constructor.
+     */
+    KOKKOS_DEFAULTED_FUNCTION FunctionToDifferentiateLinearCosine(
+            FunctionToDifferentiateLinearCosine const&)
+            = default;
+
+    /**
+     * @brief Default destructor.
+     */
+    KOKKOS_DEFAULTED_FUNCTION ~FunctionToDifferentiateLinearCosine() = default;
+
+    /**
+     * @brief Get the value of the function at given coordinate.
+     *
+     * @param[in] coord_xy The coordinate where we want to evaluate
+     * the function.
+     *
+     * @return The value of the function at the coordinate.
+     */
+    KOKKOS_FUNCTION double operator()(CoordXY const coord_xy) const
+    {
+        double const x = ddc::get<X>(coord_xy);
+        double const y = ddc::get<Y>(coord_xy);
+        return (Kokkos::cos(x) + 1) * (Kokkos::cos(y) + 1);
+    }
+
+    /**
+     * @brief Get the value of the partial derivative of the function
+     * in the DerivativeDimension direction at a given coordinate.
+     *
+     * @param[in] coord_xy The coordinate where we want to evaluate 
+     * the partial derivative.
+     *
+     * @return The value of the partial derivative of the function
+     * at the coordinate.
+     */
+    template <class DerivativeDimension>
+    KOKKOS_FUNCTION double differentiate(CoordXY const coord_xy) const
+    {
+        static_assert(
+                std::is_same_v<DerivativeDimension, X> || std::is_same_v<DerivativeDimension, Y>);
+
+        double const x = ddc::get<X>(coord_xy);
+        double const y = ddc::get<Y>(coord_xy);
+
+        if constexpr (std::is_same_v<DerivativeDimension, X>) {
+            return -Kokkos::sin(x) * (Kokkos::cos(y) + 1);
+        } else {
+            return -(1 + Kokkos::cos(x)) * Kokkos::sin(y);
+        }
+    }
+};
 /**
  * @brief A class that represents a test for partial derivatives.
  * The test can be used with several implementations for computing
@@ -195,6 +262,14 @@ public:
                 0.,
                 ddc::reducer::max<double>(),
                 KOKKOS_LAMBDA(IdxXY const idx) {
+                    /*printf("At point (%lf,%lf), we have %lf\n",*/
+                    /*       ddc::get<X>(ddc::coordinate(idx)),*/
+                    /*       ddc::get<Y>(ddc::coordinate(idx)),*/
+                    /*       Kokkos::abs(*/
+                    /*               field_differentiated(idx)*/
+                    /*               - function_to_differentiate*/
+                    /*                         .template differentiate<DerivativeDimension>(*/
+                    /*                                 ddc::coordinate(idx))));*/
                     return Kokkos::abs(
                             field_differentiated(idx)
                             - function_to_differentiate.template differentiate<DerivativeDimension>(
@@ -519,6 +594,67 @@ public:
     }
 };
 
+/**
+ * @brief A class that represents a test for partial derivatives.
+ * The test can be used with finite difference method for
+ * computing partial derivatives with boundary values.
+ */
+template <std::size_t ncells_x, std::size_t ncells_y>
+class PartialDerivativeTestFDMWithBV : public PartialDerivativeTest<ncells_x, ncells_y>
+{
+private:
+    using base_type = PartialDerivativeTest<ncells_x, ncells_y>;
+
+    using typename base_type::IdxRangeX;
+    using typename base_type::IdxRangeXY;
+    using typename base_type::IdxRangeY;
+
+public:
+    PartialDerivativeTestFDMWithBV(
+            double const xmin,
+            double const xmax,
+            double const ymin,
+            double const ymax)
+        : base_type(xmin, xmax, ymin, ymax)
+    {
+        std::vector<CoordX> point_sampling_x = build_random_non_uniform_break_points(
+                base_type::m_xmin,
+                base_type::m_xmax,
+                base_type::m_ncells_x,
+                0.2);
+        ddc::init_discrete_space<typename base_type::GridX>(point_sampling_x);
+
+        std::vector<CoordY> point_sampling_y = build_random_non_uniform_break_points(
+                base_type::m_ymin,
+                base_type::m_ymax,
+                base_type::m_ncells_y,
+                0.2);
+        ddc::init_discrete_space<typename base_type::GridY>(point_sampling_y);
+    }
+
+    template <class DerivativeDimension>
+    double compute_error(double& max_distance) const
+    {
+        IdxRangeX idxrange_x(typename base_type::IdxX(0), base_type::m_ncells_x + 1);
+        IdxRangeY idxrange_y(typename base_type::IdxY(0), base_type::m_ncells_y + 1);
+        IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
+
+        // the boundary values are the value of the test function at -pi and pi, namely 0.
+        CentralFDMPartialDerivativeWithBValueCreator<IdxRangeXY, DerivativeDimension> const
+                derivative_creator(0., 0.);
+
+        FunctionToDifferentiateLinearCosine function_to_differentiate;
+        double const max_error = base_type::template compute_max_error<
+                DerivativeDimension,
+                FunctionToDifferentiateLinearCosine>(
+                idxrange_xy,
+                function_to_differentiate,
+                derivative_creator,
+                max_distance);
+
+        return max_error;
+    }
+};
 
 /** 
  * We expect a convergence of the error following error ~ (dx)^d
@@ -621,6 +757,43 @@ TEST(PartialDerivative, CentralFDMPartialDerivative)
 
     PartialDerivativeTestFDM<10, 10> const test_low_res(xmin, xmax, ymin, ymax);
     PartialDerivativeTestFDM<100, 100> const test_high_res(xmin, xmax, ymin, ymax);
+
+    // Partial Derivative in X direction
+    double delta_low_x, delta_high_x; // max distance between points in the derivative direction
+    double const error_low_x = test_low_res.compute_error<X>(delta_low_x);
+    double const error_high_x = test_high_res.compute_error<X>(delta_high_x);
+
+    double const order_x
+            = std::log(error_high_x / error_low_x) / std::log(delta_high_x / delta_low_x);
+    double const relative_error_order_x = std::fabs((expected_order - order_x) / expected_order);
+
+    EXPECT_LE(relative_error_order_x, TOL);
+
+    // Partial Derivative in Y direction
+    double delta_low_y, delta_high_y;
+    double const error_low_y = test_low_res.compute_error<Y>(delta_low_y);
+    double const error_high_y = test_high_res.compute_error<Y>(delta_high_y);
+
+    double const order_y
+            = std::log(error_high_y / error_low_y) / std::log(delta_high_y / delta_low_y);
+    double const relative_error_order_y = std::fabs((expected_order - order_y) / expected_order);
+
+    EXPECT_LE(relative_error_order_y, TOL);
+}
+
+TEST(PartialDerivative, CentralFDMPartialDerivativeWithBV)
+{
+    double const xmin(-M_PI);
+    double const xmax(M_PI);
+    double const ymin(-M_PI);
+    double const ymax(M_PI);
+    // relative error of convergence should be less than 15%
+    double const TOL = 0.15;
+    // due to the boundary values we lose the order two
+    int const expected_order(1.5);
+
+    PartialDerivativeTestFDMWithBV<10, 10> const test_low_res(xmin, xmax, ymin, ymax);
+    PartialDerivativeTestFDMWithBV<100, 100> const test_high_res(xmin, xmax, ymin, ymax);
 
     // Partial Derivative in X direction
     double delta_low_x, delta_high_x; // max distance between points in the derivative direction
