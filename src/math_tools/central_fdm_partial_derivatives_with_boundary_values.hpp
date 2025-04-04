@@ -188,8 +188,8 @@ public:
     std::unique_ptr<IPartialDerivative<IdxRangeFull, DerivativeDimension>> create_instance(
             DConstFieldType field_ref) const final
     {
-        return std::make_unique<
-                CentralFDMPartialDerivativeWithBValue<IdxRangeFull, DerivativeDimension>>(
-                field_ref, m_BValue_left, m_BValue_right);
+        return std::make_unique<CentralFDMPartialDerivativeWithBValue<
+                IdxRangeFull,
+                DerivativeDimension>>(field_ref, m_BValue_left, m_BValue_right);
     }
 };
