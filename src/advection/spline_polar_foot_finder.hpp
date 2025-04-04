@@ -40,7 +40,7 @@
  *      A boundary condition must be provided in case the foot of the characteristic
  *      is found outside the domain.
  *
- * @see BslAdvectionRTheta
+ * @see BslAdvectionPolar
  */
 template <
         class TimeStepper,
@@ -52,8 +52,8 @@ class SplinePolarFootFinder
     : public IPolarFootFinder<
               typename SplineRThetaBuilder::interpolation_discrete_dimension_type1,
               typename SplineRThetaBuilder::interpolation_discrete_dimension_type2,
-              typename LogicalToPhysicalMapping::cartesian_tag_x,
-              typename LogicalToPhysicalMapping::cartesian_tag_y,
+              ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>,
+              typename SplineRThetaBuilder::batched_interpolation_domain_type,
               typename SplineRThetaBuilder::memory_space>
 {
     static_assert(is_mapping_v<LogicalToPhysicalMapping>);
@@ -68,24 +68,25 @@ class SplinePolarFootFinder
                   typename SplineRThetaBuilder::exec_space,
                   LogicalToPseudoPhysicalMapping>);
 
-private:
-    using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
-
     using base_type = IPolarFootFinder<
             typename SplineRThetaBuilder::interpolation_discrete_dimension_type1,
             typename SplineRThetaBuilder::interpolation_discrete_dimension_type2,
-            typename LogicalToPhysicalMapping::cartesian_tag_x,
-            typename LogicalToPhysicalMapping::cartesian_tag_y,
+            ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>,
+            typename SplineRThetaBuilder::batched_interpolation_domain_type,
             typename SplineRThetaBuilder::memory_space>;
+
+public:
+    using typename base_type::memory_space;
+
+private:
+    using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
 
 private:
     using typename base_type::GridR;
     using typename base_type::GridTheta;
-    using typename base_type::memory_space;
     using typename base_type::R;
     using typename base_type::Theta;
-    using typename base_type::X;
-    using typename base_type::Y;
+    using typename base_type::VectorIndexSetAdvectionDims;
     using ExecSpace = typename SplineRThetaBuilder::exec_space;
     /**
      * @brief Tag the first dimension in the advection index range.
@@ -98,11 +99,11 @@ private:
     /**
      * @brief The coordinate type associated to the dimensions in the advection domain.
      */
-    using CoordXY_adv = Coord<X_adv, Y_adv>;
+    using CoordXY_adv = typename LogicalToPseudoPhysicalMapping::CoordResult;
 
     using CoordRTheta = Coord<R, Theta>;
 
-    using typename base_type::IdxRangeRTheta;
+    using IdxRangeRTheta = typename base_type::IdxRangeOperator;
     using IdxRangeR = IdxRange<GridR>;
     using IdxRangeTheta = IdxRange<GridTheta>;
     using IdxRTheta = Idx<GridR, GridTheta>;
@@ -137,12 +138,12 @@ public:
     /// The type of a vector (x,y) field on the polar plane on a compatible memory space.
     template <class Dim1, class Dim2>
     using DVectorFieldRTheta
-            = VectorField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>, memory_space>;
+            = DVectorField<IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>, memory_space>;
 
     /// The type of a constant vector (x,y) field on the polar plane on a compatible memory space.
     template <class Dim1, class Dim2>
     using DVectorConstFieldRTheta
-            = VectorConstField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>, memory_space>;
+            = DVectorConstField<IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>, memory_space>;
 
     /// The type of 2 splines representing the x and y components of a vector on the polar plane on a compatible memory space.
     template <class Dim1, class Dim2>
@@ -212,7 +213,8 @@ public:
      */
     void operator()(
             FieldRTheta<CoordRTheta> feet,
-            DVectorConstFieldRTheta<X, Y> advection_field,
+            DVectorConstField<IdxRangeRTheta, VectorIndexSetAdvectionDims, memory_space>
+                    advection_field,
             double dt) const final
     {
         VectorSplineCoeffsMem2D<X_adv, Y_adv> advection_field_in_adv_domain_coefs(

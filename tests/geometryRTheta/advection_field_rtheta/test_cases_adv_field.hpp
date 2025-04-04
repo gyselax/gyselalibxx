@@ -272,7 +272,7 @@ public:
  * - RotationAdvectionFieldSimulation,
  * - DecentredRotationAdvectionFieldSimulation.
  *
- * @see BslAdvectionRTheta
+ * @see BslAdvectionPolar
  * @see FunctionToBeAdvected
  * @see ElectrostaticPotentialSimulation
  * @see AdvectionField

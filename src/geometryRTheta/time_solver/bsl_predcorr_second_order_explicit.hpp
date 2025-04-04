@@ -10,7 +10,7 @@
 #include <ddc/pdi.hpp>
 
 #include "advection_field_rtheta.hpp"
-#include "bsl_advection_rtheta.hpp"
+#include "bsl_advection_polar.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "euler.hpp"
@@ -41,14 +41,14 @@
  * First, it predicts:
  * - 1. From @f$\rho^n@f$, it computes @f$\phi^n@f$ with a PolarSplineFEMPoissonLikeSolver;
  * - 2. From @f$\phi^n@f$, it computes @f$A^n@f$ with a AdvectionFieldFinder;
- * - 3. From @f$\rho^n@f$ and @f$A^n@f$, it computes @f$\rho^P@f$ with a BslAdvectionRTheta on @f$ dt @f$;
+ * - 3. From @f$\rho^n@f$ and @f$A^n@f$, it computes @f$\rho^P@f$ with a BslAdvectionPolar on @f$ dt @f$;
  *
  * We write @f$X^P@f$ the characteristic feet such that @f$\partial_t X^P = A^n(X^n)@f$.
  *
  * Secondly, it corrects:
  * - 4. From @f$\rho^P@f$, it computes @f$\phi^P@f$ with a PolarSplineFEMPoissonLikeSolver;
  * - 5. From @f$\phi^P@f$, it computes @f$A^P@f$ with a AdvectionFieldFinder;
- * - 6. From @f$\rho^n@f$ and @f$\frac{A^{P}(X^n) + A^n(X^P)}{2} @f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionRTheta on @f$ dt @f$.
+ * - 6. From @f$\rho^n@f$ and @f$\frac{A^{P}(X^n) + A^n(X^P)}{2} @f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionPolar on @f$ dt @f$.
  *
  * (With @f$X^C@f$ the characteristic feet such that @f$\partial_t X^C = \frac{A^{P}(X^n) + A^n(X^P)}{2} @f$.)
  *
@@ -85,11 +85,17 @@ private:
             SplineRThetaBuilder_host,
             SplineRThetaEvaluatorConstBound_host>;
 
+    using BslAdvectionRTheta = BslAdvectionPolar<
+            SplinePolarFootFinderType,
+            LogicalToPhysicalMapping,
+            PreallocatableSplineInterpolator2D<
+                    SplineRThetaBuilder,
+                    SplineRThetaEvaluatorNullBound>>;
+
 
     LogicalToPhysicalMapping const& m_logical_to_physical;
 
-    BslAdvectionRTheta<SplinePolarFootFinderType, LogicalToPhysicalMapping> const&
-            m_advection_solver;
+    BslAdvectionRTheta const& m_advection_solver;
 
     EulerMethod_host const m_euler;
     SplinePolarFootFinderType_host const m_find_feet;
@@ -129,8 +135,7 @@ public:
     BslExplicitPredCorrRTheta(
             LogicalToPhysicalMapping const& logical_to_physical,
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
-            BslAdvectionRTheta<SplinePolarFootFinderType, LogicalToPhysicalMapping>&
-                    advection_solver,
+            BslAdvectionRTheta const& advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder_host const& builder,
             PolarSplineFEMPoissonLikeSolver<

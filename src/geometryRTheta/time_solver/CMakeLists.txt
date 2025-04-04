@@ -10,12 +10,12 @@ target_link_libraries(time_integration_RTheta
     INTERFACE
         DDC::core
         Eigen3::Eigen
+        gslx::advection
+        gslx::advection_field_RTheta
         gslx::geometry_RTheta
         gslx::poisson_RTheta
-        gslx::advection_RTheta
         gslx::utils
         gslx::timestepper
-        gslx::advection_field_RTheta
 )
 add_library(gslx::time_integration_RTheta ALIAS time_integration_RTheta)
 
