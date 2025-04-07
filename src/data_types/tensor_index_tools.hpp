@@ -30,6 +30,9 @@ class TensorIndexElement<ddc::detail::TypeSeq<ValidatingVectorIndexSets...>, Dim
 {
     using ValidatingTensorIndexSet = ddc::detail::TypeSeq<ValidatingVectorIndexSets...>;
     static_assert((is_vector_index_set_v<ValidatingVectorIndexSets> && ...));
+
+public:
+    /// The type sequence containing all the indices applied to the tensor.
     using IdxTypeSeq = ddc::detail::TypeSeq<Dims...>;
 
 public:

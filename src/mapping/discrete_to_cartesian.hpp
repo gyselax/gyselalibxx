@@ -8,6 +8,7 @@
 #include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
 #include "math_tools.hpp"
+#include "tensor.hpp"
 #include "view.hpp"
 
 /**
@@ -56,6 +57,15 @@ public:
     using CoordArg = Coord<R, Theta>;
     /// The type of the result of the function described by this mapping
     using CoordResult = Coord<X, Y>;
+
+    /// @brief The covariant form of the first physical coordinate.
+    using X_cov = typename X::Dual;
+    /// @brief The covariant form of the second physical coordinate.
+    using Y_cov = typename Y::Dual;
+    /// @brief The covariant form of the first logical coordinate.
+    using R_cov = typename R::Dual;
+    /// @brief The covariant form of the second logical coordinate.
+    using Theta_cov = typename Theta::Dual;
 
 private:
     using spline_idx_range = IdxRange<BSplineR, BSplineTheta>;
@@ -141,114 +151,68 @@ public:
      *
      * For some computations, we need the complete Jacobian matrix or just the
      * coefficients.
-     * The coefficients can be given independently with the functions
-     * jacobian_11, jacobian_12, jacobian_21 and jacobian_22.
+     * The coefficients can be given independently with the function jacobian_component.
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
-     * @param[out] matrix
-     * 				The Jacobian matrix returned.
+     * @return The Jacobian matrix.
      */
-    KOKKOS_FUNCTION void jacobian_matrix(
-            Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord,
-            Matrix_2x2& matrix) const
+    KOKKOS_FUNCTION DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> jacobian_matrix(
+            Coord<R, Theta> const& coord) const
     {
-        matrix[0][0]
+        DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> jacobian_matrix;
+        ddcHelper::get<X, R_cov>(jacobian_matrix)
                 = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_x_spline_representation));
-        matrix[0][1]
+        ddcHelper::get<X, Theta_cov>(jacobian_matrix)
                 = m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_x_spline_representation));
-        matrix[1][0]
+        ddcHelper::get<Y, R_cov>(jacobian_matrix)
                 = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));
-        matrix[1][1]
+        ddcHelper::get<Y, Theta_cov>(jacobian_matrix)
                 = m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_y_spline_representation));
+        return jacobian_matrix;
     }
 
     /**
-     * @brief Compute the (1,1) coefficient of the Jacobian matrix.
-     *
-     * For a mapping given by @f$ \mathcal{F} : (r,\theta)\mapsto (x,y) @f$, the
-     * (1,1) coefficient of the Jacobian matrix is given by @f$ \frac{\partial x}{\partial r} @f$.
+     * @brief Compute the (i,j) coefficient of the Jacobian matrix.
+     * 
+     * For a mapping given by @f$ \mathcal{F} : {q_i}\mapsto {x_i} @f$,
+     *  with @f${q_i}@f$ the curvilinear coordinates and @f${x_i}@f$ the Cartesian coordinates, the
+     * (i,j) coefficient of the Jacobian matrix is given by @f$ J^i_j\frac{\partial x_i}{\partial q_j} @f$.
+     * 
      * As the mapping is decomposed on B-splines, it means it computes the derivatives of B-splines
-     * @f$ \frac{\partial x}{\partial r} (r,\theta)= \sum_k c_{x,k} \frac{\partial B_k}{\partial r}(r,\theta)@f$
+     * @f$ \frac{\partial x_i}{\partial q_j} (r,\theta)= \sum_k c_{x_i,k} \frac{\partial B_k}{\partial q_j}(r,\theta)@f$
      * (the derivatives are implemented in SplineEvaluator2D).
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
      *
-     * @return A double with the value of the (1,1) coefficient of the Jacobian matrix.
+     * @return A double with the value of the (i,j) coefficient of the Jacobian matrix.
      *
      * @see SplineEvaluator2D
      */
-    KOKKOS_FUNCTION double jacobian_11(
-            Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
+    template <class IndexTag1, class IndexTag2>
+    KOKKOS_INLINE_FUNCTION double jacobian_component(Coord<R, Theta> coord) const
     {
-        return m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_x_spline_representation));
-    }
+        static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<X, Y>>);
+        static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<R_cov, Theta_cov>>);
 
-    /**
-     * @brief Compute the (1,2) coefficient of the Jacobian matrix.
-     *
-     * For a mapping given by @f$ \mathcal{F} : (r,\theta)\mapsto (x,y) @f$, the
-     * (1,2) coefficient of the Jacobian matrix is given by @f$ \frac{\partial x}{\partial \theta} @f$.
-     * As the mapping is decomposed on B-splines, it means it computes
-     * @f$ \frac{\partial x}{\partial \theta}(r,\theta) = \sum_k c_{x,k} \frac{\partial B_k}{\partial \theta}(r,\theta) @f$
-     * (the derivatives of B-splines are implemented in SplineEvaluator2D).
-     *
-     * @param[in] coord
-     * 				The coordinate where we evaluate the Jacobian matrix.
-     *
-     * @return A double with the value of the (1,2) coefficient of the Jacobian matrix.
-     *
-     * @see SplineEvaluator2D
-     */
-    KOKKOS_FUNCTION double jacobian_12(
-            Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
-    {
-        return m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_x_spline_representation));
-    }
-
-    /**
-     * @brief Compute the (2,1) coefficient of the Jacobian matrix.
-     *
-     *For a mapping given by @f$ \mathcal{F} : (r,\theta)\mapsto (x,y) @f$, the
-     * (2,1) coefficient of the Jacobian matrix is given by @f$ \frac{\partial y}{\partial r} @f$.
-     * As the mapping is decomposed on B-splines, it means it computes
-     * @f$ \frac{\partial y}{\partial r}(r,\theta) = \sum_k c_{y,k} \frac{\partial B_k}{\partial r}(r,\theta)@f$
-     * (the derivatives of B-splines are implemented in SplineEvaluator2D).
-     *
-     * @param[in] coord
-     * 				The coordinate where we evaluate the Jacobian matrix. .
-     *
-     * @return A double with the value of the (2,1) coefficient of the Jacobian matrix.
-     *
-     * @see SplineEvaluator2D
-     */
-    KOKKOS_FUNCTION double jacobian_21(
-            Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
-    {
-        return m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));
-    }
-
-    /**
-     * @brief Compute the (2,2) coefficient of the Jacobian matrix.
-     *
-     *For a mapping given by @f$ \mathcal{F} : (r,\theta)\mapsto (x,y) @f$, the
-     * (2,2) coefficient of the Jacobian matrix is given by @f$ \frac{\partial y}{\partial \theta} @f$.
-     * As the mapping is decomposed on B-splines, it means it computes
-     * @f$ \frac{\partial y}{\partial \theta} (r,\theta) = \sum_k c_{y,k} \frac{\partial B_k}{\partial \theta}(r,\theta) @f$
-     * (the derivatives of B-splines are implemented in SplineEvaluator2D).
-     *
-     * @param[in] coord
-     * 				The coordinate where we evaluate the Jacobian matrix.
-     *
-     * @return A double with the value of the (2,2) coefficient of the Jacobian matrix.
-     *
-     * @see SplineEvaluator2D
-     */
-    KOKKOS_FUNCTION double jacobian_22(
-            Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
-    {
-        return m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_y_spline_representation));
+        if constexpr (std::is_same_v<IndexTag1, X> && std::is_same_v<IndexTag2, R_cov>) {
+            // Component (1,1), i.e dx/dr
+            return m_spline_evaluator
+                    .deriv_dim_1(coord, get_const_field(m_x_spline_representation));
+        } else if constexpr (std::is_same_v<IndexTag1, X> && std::is_same_v<IndexTag2, Theta_cov>) {
+            // Component (1,2), i.e dx/dtheta
+            return m_spline_evaluator
+                    .deriv_dim_2(coord, get_const_field(m_x_spline_representation));
+        } else if constexpr (std::is_same_v<IndexTag1, Y> && std::is_same_v<IndexTag2, R_cov>) {
+            // Component (2,1), i.e dy/dr
+            return m_spline_evaluator
+                    .deriv_dim_1(coord, get_const_field(m_y_spline_representation));
+        } else {
+            // Component (2,2), i.e dy/dtheta
+            return m_spline_evaluator
+                    .deriv_dim_2(coord, get_const_field(m_y_spline_representation));
+        }
     }
 
     /**
@@ -262,9 +226,9 @@ public:
     KOKKOS_FUNCTION double jacobian(
             Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
     {
-        Matrix_2x2 J;
-        jacobian_matrix(coord, J);
-        return determinant(J);
+        Tensor J = jacobian_matrix(coord);
+        return ddcHelper::get<X, R_cov>(J) * ddcHelper::get<Y, Theta_cov>(J)
+               - ddcHelper::get<Y, R_cov>(J) * ddcHelper::get<X, Theta_cov>(J);
     }
 
     /**
@@ -281,19 +245,22 @@ public:
      *
      * @return The first order expansion of the Jacobian matrix with the theta component divided by r.
      */
-    KOKKOS_INLINE_FUNCTION Matrix_2x2 first_order_jacobian_matrix_r_rtheta(
+    KOKKOS_INLINE_FUNCTION DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>>
+    first_order_jacobian_matrix_r_rtheta(
             Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
     {
-        Matrix_2x2 matrix;
-        matrix[0][0]
+        DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> J;
+        ddcHelper::get<X, R_cov>(J)
                 = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_x_spline_representation));
-        matrix[0][1] = m_spline_evaluator
-                               .deriv_1_and_2(coord, get_const_field(m_x_spline_representation));
-        matrix[1][0]
+        ddcHelper::get<X, Theta_cov>(J)
+                = m_spline_evaluator
+                          .deriv_1_and_2(coord, get_const_field(m_x_spline_representation));
+        ddcHelper::get<Y, R_cov>(J)
                 = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));
-        matrix[1][1] = m_spline_evaluator
-                               .deriv_1_and_2(coord, get_const_field(m_y_spline_representation));
-        return matrix;
+        ddcHelper::get<Y, Theta_cov>(J)
+                = m_spline_evaluator
+                          .deriv_1_and_2(coord, get_const_field(m_y_spline_representation));
+        return J;
     }
 
     /**

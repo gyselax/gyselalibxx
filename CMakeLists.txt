@@ -15,7 +15,6 @@ list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
 set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
 
 ## List of options
-option(GYSELALIBXX_BUILD_DOCUMENTATION "Build the documentation." OFF)
 option(GYSELALIBXX_BUILD_SIMULATIONS "Build the simulations." ON)
 option(GYSELALIBXX_BUILD_TESTING "Build the tests." ON)
 option(GYSELALIBXX_ENABLE_DEPRECATED "Enable deprecated code" OFF)
@@ -24,30 +23,13 @@ set(GYSELALIBXX_DEFAULT_CXX_FLAGS "-O1" CACHE STRING "Default flags for C++ spec
 option(ACTIVATE_RESTART_TESTS "Activate tests which check that a simulation gives the same results after restart." ON)
 
 set(GYSELALIBXX_DEPENDENCY_POLICIES "AUTO" "EMBEDDED" "INSTALLED")
-option(GYSELALIBXX_BUILD_DOCUMENTATION "Build the documentation." OFF)
 
 set(GYSELALIBXX_INCLUDE_TESTING_DEPENDENCIES ${GYSELALIBXX_BUILD_TESTING} CACHE BOOL "Indicates if the testing dependencies should be included. By default they are only included if the tests are built.")
 
 # Set default DDC options when included in GYSELA
 option(DDC_BUILD_BENCHMARKS       "Build DDC benchmarks." OFF)
-option(DDC_BUILD_DOCUMENTATION    "Build DDC documentation/website" OFF)
 option(DDC_BUILD_EXAMPLES         "Build DDC examples" OFF)
 option(DDC_BUILD_TESTS            "Build DDC tests if BUILD_TESTING is enabled" OFF)
-
-###############################################################################################
-#                                  Build documentation
-###############################################################################################
-
-## if documentation is enabled, build it
-if("${GYSELALIBXX_BUILD_DOCUMENTATION}")
-  ## Look for a pre-installed Doxygen
-  find_package(Doxygen REQUIRED OPTIONAL_COMPONENTS dot)
-
-  add_subdirectory(docs/)
-endif()
-
-## Turn off documentation for subpackages
-set(BUILD_DOCUMENTATION OFF)
 
 ###############################################################################################
 #                                     Get dependencies

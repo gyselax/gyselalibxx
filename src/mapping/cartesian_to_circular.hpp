@@ -5,6 +5,7 @@
 
 #include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
+#include "tensor.hpp"
 #include "view.hpp"
 
 // Pre-declaration of analytical inverse
@@ -24,13 +25,13 @@ class CircularToCartesian;
  *
  * The Jacobian matrix coefficients are defined as follow
  *
- * @f$ J_{11}(r,\theta)  =\frac{2x}{\sqrt{x^2+y^2}}  @f$
+ * @f$ J_{11}(x,y)  =\frac{2x}{\sqrt{x^2+y^2}}  @f$
  *
- * @f$ J_{12}(r,\theta)  =\frac{2y}{\sqrt{x^2+y^2}}  @f$
+ * @f$ J_{12}(x,y)  =\frac{2y}{\sqrt{x^2+y^2}}  @f$
  *
- * @f$ J_{21}(r,\theta)  =\frac{-y}{(x^2+y^2)^2}  @f$
+ * @f$ J_{21}(x,y)  =\frac{-y}{(x^2+y^2)^2}  @f$
  *
- * @f$ J_{22}(r,\theta)  =\frac{x}{(x^2+y^2)^2}  @f$
+ * @f$ J_{22}(x,y)  =\frac{x}{(x^2+y^2)^2}  @f$
  *
  * and the matrix determinant: @f$ det(J) = r @f$.
  *
@@ -52,6 +53,15 @@ public:
     using CoordArg = Coord<X, Y>;
     /// The type of the result of the function described by this mapping
     using CoordResult = Coord<R, Theta>;
+
+    /// @brief The covariant form of the first physical coordinate.
+    using X_cov = typename X::Dual;
+    /// @brief The covariant form of the second physical coordinate.
+    using Y_cov = typename Y::Dual;
+    /// @brief The covariant form of the first logical coordinate.
+    using R_cov = typename R::Dual;
+    /// @brief The covariant form of the second logical coordinate.
+    using Theta_cov = typename Theta::Dual;
 
 public:
     CartesianToCircular() = default;
@@ -130,102 +140,55 @@ public:
      *
      * For some computations, we need the complete Jacobian matrix or just the
      * coefficients.
-     * The coefficients can be given independently with the functions
-     * jacobian_11, jacobian_12,  jacobian_21 and jacobian_22.
+     * The coefficients can be given independently with the function jacobian_component.
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
-     * @param[out] matrix
-     * 				The Jacobian matrix returned.
-     *
-     *
-     * @see Jacobian::jacobian_11
-     * @see Jacobian::jacobian_12
-     * @see Jacobian::jacobian_21
-     * @see Jacobian::jacobian_22
+     * @return The Jacobian matrix.
      */
-    KOKKOS_FUNCTION void jacobian_matrix(Coord<X, Y> const& coord, Matrix_2x2& matrix)
+    KOKKOS_FUNCTION DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X_cov, Y_cov>> jacobian_matrix(
+            Coord<X, Y> const& coord) const
 
     {
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
-        matrix[0][0] = 2 * x / Kokkos::pow(x * x + y * y, 0.5);
-        matrix[0][1] = 2 * y / Kokkos::pow(x * x + y * y, 0.5);
-        matrix[1][0] = -y / Kokkos::pow(x * x + y * y, 2.);
-        matrix[1][1] = x / Kokkos::pow(x * x + y * y, 2.);
+        DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X_cov, Y_cov>> jacobian_matrix;
+        ddcHelper::get<R, X_cov>(jacobian_matrix) = 2 * x / Kokkos::pow(x * x + y * y, 0.5);
+        ddcHelper::get<R, Y_cov>(jacobian_matrix) = 2 * y / Kokkos::pow(x * x + y * y, 0.5);
+        ddcHelper::get<Theta, X_cov>(jacobian_matrix) = -y / Kokkos::pow(x * x + y * y, 2.);
+        ddcHelper::get<Theta, Y_cov>(jacobian_matrix) = x / Kokkos::pow(x * x + y * y, 2.);
+        return jacobian_matrix;
     }
 
     /**
-     * @brief Compute the (1,1) coefficient of the Jacobian matrix.
-     *
-     * For a mapping given by @f$ \mathcal{F} : (x,y)\mapsto (r,\theta) @f$, the
-     * (1,1) coefficient of the Jacobian matrix is given by @f$ \frac{\partial r}{\partial x} @f$.
+     * @brief Compute the (i,j) coefficient of the Jacobian matrix.
      *
      * @param[in] coord
      *              The coordinate where we evaluate the Jacobian matrix.
      *
      * @return A double with the value of the (1,1) coefficient of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian_11(Coord<X, Y> const& coord)
+    template <class IndexTag1, class IndexTag2>
+    KOKKOS_INLINE_FUNCTION double jacobian_component(Coord<X, Y> const& coord) const
     {
-        const double x = ddc::get<X>(coord);
-        const double y = ddc::get<Y>(coord);
-        return 2 * x / Kokkos::pow(x * x + y * y, 0.5);
-        ;
-    }
+        static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<R, Theta>>);
+        static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<X_cov, Y_cov>>);
 
-    /**
-     * @brief Compute the (1,2) coefficient of the Jacobian matrix.
-     *
-     * For a mapping given by @f$ \mathcal{F} : (x,y)\mapsto (r,\theta) @f$, the
-     * (1,2) coefficient of the Jacobian matrix is given by @f$ \frac{\partial \theta}{\partial x} @f$.
-     *
-     * @param[in] coord
-     *              The coordinate where we evaluate the Jacobian matrix.
-     *
-     * @return A double with the value of the (1,2) coefficient of the Jacobian matrix.
-     */
-    KOKKOS_FUNCTION double jacobian_12(Coord<X, Y> const& coord)
-    {
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
-        return 2 * y / Kokkos::pow(x * x + y * y, 0.5);
-    }
-
-    /**
-     * @brief Compute the (2,1) coefficient of the Jacobian matrix.
-     *
-     * For a mapping given by @f$ \mathcal{F} : (x,y)\mapsto (r,\theta) @f$, the
-     * (2,1) coefficient of the Jacobian matrix is given by @f$ \frac{\partial r}{\partial y} @f$.
-     *
-     * @param[in] coord
-     *              The coordinate where we evaluate the Jacobian matrix. .
-     *
-     * @return A double with the value of the (2,1) coefficient of the Jacobian matrix.
-     */
-    KOKKOS_FUNCTION double jacobian_21(Coord<X, Y> const& coord)
-    {
-        const double x = ddc::get<X>(coord);
-        const double y = ddc::get<Y>(coord);
-        return -y / Kokkos::pow(x * x + y * y, 2.);
-    }
-
-    /**
-     * @brief Compute the (2,2) coefficient of the Jacobian matrix.
-     *
-     * For a mapping given by @f$ \mathcal{F} : (x,y)\mapsto (r,\theta) @f$, the
-     * (2,2) coefficient of the Jacobian matrix is given by @f$ \frac{\partial \theta}{\partial y} @f$.
-     *
-     * @param[in] coord
-     *              The coordinate where we evaluate the Jacobian matrix.
-     *
-     * @return A double with the value of the (2,2) coefficient of the Jacobian matrix.
-     */
-    KOKKOS_FUNCTION double jacobian_22(Coord<X, Y> const& coord)
-    {
-        const double x = ddc::get<X>(coord);
-        const double y = ddc::get<Y>(coord);
-        return x / Kokkos::pow(x * x + y * y, 2.);
+        if constexpr (std::is_same_v<IndexTag1, R> && std::is_same_v<IndexTag2, X_cov>) {
+            // Component (1,1), i.e dr/dx
+            return 2 * x / Kokkos::pow(x * x + y * y, 0.5);
+        } else if constexpr (std::is_same_v<IndexTag1, R> && std::is_same_v<IndexTag2, Y_cov>) {
+            // Component (1,2), i.e dr/dy
+            return 2 * y / Kokkos::pow(x * x + y * y, 0.5);
+        } else if constexpr (std::is_same_v<IndexTag1, Theta> && std::is_same_v<IndexTag2, X_cov>) {
+            // Component (2,1), i.e dtheta/dy
+            return -y / Kokkos::pow(x * x + y * y, 2.);
+        } else {
+            // Component (2,2), i.e dtheta/dy
+            return x / Kokkos::pow(x * x + y * y, 2.);
+        }
     }
 
     /**

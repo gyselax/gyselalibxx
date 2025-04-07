@@ -185,25 +185,20 @@ double check_Jacobian_on_grid(
         Mapping const& analytical_mapping,
         IdxRangeRTheta const& idx_range)
 {
-    static_assert(has_2d_jacobian_v<Mapping, CoordRTheta>);
+    static_assert(has_jacobian_v<Mapping, CoordRTheta>);
     double max_err = 0.;
     ddc::for_each(idx_range, [&](IdxRTheta const irtheta) {
         const CoordRTheta coord(ddc::coordinate(irtheta));
 
-        Matrix_2x2 discrete_Jacobian;
-        Matrix_2x2 analytical_Jacobian;
-        mapping.jacobian_matrix(coord, discrete_Jacobian);
-        analytical_mapping.jacobian_matrix(coord, analytical_Jacobian);
+        Tensor discrete_Jacobian = mapping.jacobian_matrix(coord);
+        Tensor analytical_Jacobian = analytical_mapping.jacobian_matrix(coord);
 
-        const double diff_11 = double(discrete_Jacobian[0][0] - analytical_Jacobian[0][0]);
-        const double diff_12 = double(discrete_Jacobian[0][1] - analytical_Jacobian[0][1]);
-        const double diff_21 = double(discrete_Jacobian[1][0] - analytical_Jacobian[1][0]);
-        const double diff_22 = double(discrete_Jacobian[1][1] - analytical_Jacobian[1][1]);
+        Tensor diff = discrete_Jacobian - analytical_Jacobian;
 
-        max_err = max_err > diff_11 ? max_err : diff_11;
-        max_err = max_err > diff_12 ? max_err : diff_12;
-        max_err = max_err > diff_21 ? max_err : diff_21;
-        max_err = max_err > diff_22 ? max_err : diff_22;
+        max_err = std::max(max_err, ddcHelper::get<X, R_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<X, Theta_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<Y, R_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<Y, Theta_cov>(diff));
     });
 
     return max_err;
@@ -267,20 +262,15 @@ double check_Jacobian_not_on_grid(
     ddc::for_each(idx_range, [&](IdxRTheta const irtheta) {
         const CoordRTheta coord(coords(irtheta));
 
-        Matrix_2x2 discrete_Jacobian;
-        Matrix_2x2 analytical_Jacobian;
-        mapping.jacobian_matrix(coord, discrete_Jacobian);
-        analytical_mapping.jacobian_matrix(coord, analytical_Jacobian);
+        Tensor discrete_Jacobian = mapping.jacobian_matrix(coord);
+        Tensor analytical_Jacobian = analytical_mapping.jacobian_matrix(coord);
 
-        const double diff_11 = double(discrete_Jacobian[0][0] - analytical_Jacobian[0][0]);
-        const double diff_12 = double(discrete_Jacobian[0][1] - analytical_Jacobian[0][1]);
-        const double diff_21 = double(discrete_Jacobian[1][0] - analytical_Jacobian[1][0]);
-        const double diff_22 = double(discrete_Jacobian[1][1] - analytical_Jacobian[1][1]);
+        Tensor diff = discrete_Jacobian - analytical_Jacobian;
 
-        max_err = max_err > diff_11 ? max_err : diff_11;
-        max_err = max_err > diff_12 ? max_err : diff_12;
-        max_err = max_err > diff_21 ? max_err : diff_21;
-        max_err = max_err > diff_22 ? max_err : diff_22;
+        max_err = std::max(max_err, ddcHelper::get<X, R_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<X, Theta_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<Y, R_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<Y, Theta_cov>(diff));
     });
 
     return max_err;
@@ -352,19 +342,17 @@ double check_pseudo_Cart(
     InvJacobianOPoint<CombinedMapping<Mapping, PseudoCartToCirc>, CoordRTheta>
             inv_jacob_analytical_mapping(analytical_pseudo_cart_to_cart);
 
-    Matrix_2x2 discrete_pseudo_Cart = inv_jacob_mapping();
-    Matrix_2x2 analytical_pseudo_Cart = inv_jacob_analytical_mapping();
+    Tensor discrete_pseudo_Cart = inv_jacob_mapping();
+    Tensor analytical_pseudo_Cart = inv_jacob_analytical_mapping();
 
-    const double diff_11 = double(discrete_pseudo_Cart[0][0] - analytical_pseudo_Cart[0][0]);
-    const double diff_12 = double(discrete_pseudo_Cart[0][1] - analytical_pseudo_Cart[0][1]);
-    const double diff_21 = double(discrete_pseudo_Cart[1][0] - analytical_pseudo_Cart[1][0]);
-    const double diff_22 = double(discrete_pseudo_Cart[1][1] - analytical_pseudo_Cart[1][1]);
+    Tensor diff = discrete_pseudo_Cart - analytical_pseudo_Cart;
+
 
     double max_err = 0.;
-    max_err = max_err > diff_11 ? max_err : diff_11;
-    max_err = max_err > diff_12 ? max_err : diff_12;
-    max_err = max_err > diff_21 ? max_err : diff_21;
-    max_err = max_err > diff_22 ? max_err : diff_22;
+    max_err = std::max(max_err, ddcHelper::get<X_pC, X>(diff));
+    max_err = std::max(max_err, ddcHelper::get<X_pC, Y>(diff));
+    max_err = std::max(max_err, ddcHelper::get<Y_pC, X>(diff));
+    max_err = std::max(max_err, ddcHelper::get<Y_pC, Y>(diff));
 
     return max_err;
 }

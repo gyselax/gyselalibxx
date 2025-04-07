@@ -17,38 +17,6 @@
 #include "mesh_builder.hpp"
 
 
-namespace {
-
-using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
-
-/**
- * @brief Check if the product of the matrix and inv_matrix gives the identity matrix.
- *
- * The error tolerance is given at 1e-15.
- *
- * @param[in] matrix
- * 			The Jacobian matrix of the mapping.
- * @param[in] inv_matrix
- * 			The inverse Jacobian matrix of the mapping.
- */
-void check_inverse(Matrix_2x2 matrix, Matrix_2x2 inv_matrix)
-{
-    const double TOL = 1e-15;
-    constexpr std::size_t N = 2;
-
-    for (std::size_t i(0); i < N; ++i) {
-        for (std::size_t j(0); j < N; ++j) {
-            double id_val = 0.0;
-            for (std::size_t k(0); k < N; ++k) {
-                id_val += matrix[i][k] * inv_matrix[k][j];
-            }
-            EXPECT_NEAR(id_val, static_cast<double>(i == j), TOL);
-        }
-    }
-}
-
-} // namespace
-
 
 /**
  * @brief A class for the Google tests.
@@ -67,17 +35,15 @@ TEST_P(InvJacobianMatrix, InverseMatrixCircMap)
     FieldMemRTheta_host<CoordRTheta> coords = get_example_coords(IdxStepR(Nr), IdxStepTheta(Nt));
     IdxRangeRTheta grid = get_idx_range(coords);
 
-    static_assert(has_2d_jacobian_v<CircularToCartesian<R, Theta, X, Y>, CoordRTheta>);
+    static_assert(has_jacobian_v<CircularToCartesian<R, Theta, X, Y>, CoordRTheta>);
     InverseJacobianMatrix inv_jacobian(mapping);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
     ddc::for_each(grid, [&](IdxRTheta const irtheta) {
-        Matrix_2x2 Jacobian_matrix;
-        Matrix_2x2 inv_Jacobian_matrix = inv_jacobian(coords(irtheta));
-
-        mapping.jacobian_matrix(coords(irtheta), Jacobian_matrix);
-
-        check_inverse(Jacobian_matrix, inv_Jacobian_matrix);
+        check_inverse_tensor(
+                mapping.jacobian_matrix(coords(irtheta)),
+                inv_jacobian(coords(irtheta)),
+                1e-15);
     });
 }
 
@@ -90,18 +56,15 @@ TEST_P(InvJacobianMatrix, InverseMatrixCzarMap)
     FieldMemRTheta_host<CoordRTheta> coords = get_example_coords(IdxStepR(Nr), IdxStepTheta(Nt));
     IdxRangeRTheta grid = get_idx_range(coords);
 
-    static_assert(has_2d_jacobian_v<CzarnyToCartesian<R, Theta, X, Y>, CoordRTheta>);
-    static_assert(has_2d_inv_jacobian_v<CzarnyToCartesian<R, Theta, X, Y>, CoordRTheta>);
+    static_assert(has_jacobian_v<CzarnyToCartesian<R, Theta, X, Y>, CoordRTheta>);
+    static_assert(has_inv_jacobian_v<CzarnyToCartesian<R, Theta, X, Y>, CoordRTheta>);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
     ddc::for_each(grid, [&](IdxRTheta const irtheta) {
-        Matrix_2x2 Jacobian_matrix;
-        Matrix_2x2 inv_Jacobian_matrix;
-
-        mapping.jacobian_matrix(coords(irtheta), Jacobian_matrix);
-        mapping.inv_jacobian_matrix(coords(irtheta), inv_Jacobian_matrix);
-
-        check_inverse(Jacobian_matrix, inv_Jacobian_matrix);
+        check_inverse_tensor(
+                mapping.jacobian_matrix(coords(irtheta)),
+                mapping.inv_jacobian_matrix(coords(irtheta)),
+                1e-15);
     });
 }
 
@@ -149,7 +112,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
                     evaluator);
     DiscreteToCartesian mapping = mapping_builder();
 
-    static_assert(has_2d_jacobian_v<decltype(mapping), CoordRTheta>);
+    static_assert(has_jacobian_v<decltype(mapping), CoordRTheta>);
     InverseJacobianMatrix inv_jacobian(mapping);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
@@ -157,12 +120,10 @@ TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
         const CoordRTheta coord_rtheta(ddc::coordinate(irtheta));
         const double r = ddc::get<R>(coord_rtheta);
         if (fabs(r) > 1e-15) {
-            Matrix_2x2 Jacobian_matrix;
-            Matrix_2x2 inv_Jacobian_matrix = inv_jacobian(coord_rtheta);
-
-            mapping.jacobian_matrix(coord_rtheta, Jacobian_matrix);
-
-            check_inverse(Jacobian_matrix, inv_Jacobian_matrix);
+            check_inverse_tensor(
+                    mapping.jacobian_matrix(coord_rtheta),
+                    inv_jacobian(coord_rtheta),
+                    1e-15);
         }
     });
 }
