@@ -87,32 +87,44 @@ public:
         IdxStepDeriv const step(1);
 
         // front batched derivative
+        // we compute second order left and right decentred FDM (using boundary values)
+        // and we take the average
         {
             IdxDeriv const ix(idxrange_deriv.front());
-            double const h = ddc::coordinate(ix + step) - ddc::coordinate(ix);
+            double const h1 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
+            double const h2 = ddc::coordinate(ix + 2 * step) - ddc::coordinate(ix + step);
+            double const c3 = -h1 / (h2 * (h1 + h2));
+            double const c2 = 1. / h1 + 1. / h2;
             double bvalue_left(m_BValue_left);
             ddc::parallel_for_each(
                     Kokkos::DefaultExecutionSpace(),
                     idxrange_batch,
                     KOKKOS_LAMBDA(IdxBatch ib) {
                         IdxFull ibx(ib, ix);
-                        differentiated_field(ibx)
-                                = (field_proxy(ib, ix + step) - bvalue_left) / (2 * h);
+                        double value_left = c2 * field_proxy(ib, ix + step)
+                                            + c3 * field_proxy(ib, ix + 2 * step);
+                        double value_right = -c2 * bvalue_left - c3 * bvalue_left;
+                        differentiated_field(ibx) = (value_right + value_left) / 2;
                     });
         }
 
         // back batched derivative
         {
             IdxDeriv const ix = idxrange_deriv.back();
-            double const h = ddc::coordinate(ix) - ddc::coordinate(ix - step);
+            double const h1 = ddc::coordinate(ix) - ddc::coordinate(ix - step);
+            double const h2 = ddc::coordinate(ix - step) - ddc::coordinate(ix - 2 * step);
+            double const c3 = h1 / (h2 * (h1 + h2));
+            double const c2 = -(h1 + h2) / (h1 * h2);
             double bvalue_right(m_BValue_right);
             ddc::parallel_for_each(
                     Kokkos::DefaultExecutionSpace(),
                     idxrange_batch,
                     KOKKOS_LAMBDA(IdxBatch ib) {
                         IdxFull ibx(ib, ix);
-                        differentiated_field(ibx)
-                                = (bvalue_right - field_proxy(ib, ix - step)) / (2 * h);
+                        double value_left = c2 * field_proxy(ib, ix - step)
+                                            + c3 * field_proxy(ib, ix - 2 * step);
+                        double value_right = -c2 * bvalue_right - c3 * bvalue_right;
+                        differentiated_field(ibx) = (value_left + value_right) / 2;
                     });
         }
 

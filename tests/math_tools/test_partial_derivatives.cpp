@@ -102,7 +102,8 @@ public:
 /**
  * @brief A class that represents a test function for computing partial derivatives with boundary values.
  * The test function is defined as the product of two polynomials of cosine functions.
- * This function has been chosen to ease the use of boundary conditions.
+ * This function has been chosen to ease the use of boundary conditions
+ * due to the fact that its value and its derivative are both null at the boundary.
  */
 class FunctionToDifferentiateLinearCosine
 {
@@ -790,7 +791,7 @@ TEST(PartialDerivative, CentralFDMPartialDerivativeWithBV)
     // relative error of convergence should be less than 15%
     double const TOL = 0.15;
     // due to the boundary values we lose the order two
-    int const expected_order(1.5);
+    int const expected_order(2);
 
     PartialDerivativeTestFDMWithBV<10, 10> const test_low_res(xmin, xmax, ymin, ymax);
     PartialDerivativeTestFDMWithBV<100, 100> const test_high_res(xmin, xmax, ymin, ymax);
