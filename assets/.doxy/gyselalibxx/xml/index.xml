@@ -39,6 +39,7 @@
     <member refid="classBarycentricToCartesian_1ac388fd3a74670ce860ba77f7d0955f57" kind="function"><name>operator=</name></member>
     <member refid="classBarycentricToCartesian_1a90099183ad11818655b660d81b97522a" kind="function"><name>operator=</name></member>
     <member refid="classBarycentricToCartesian_1a9bd05c5378d5246a7ad4f18dbb86ab76" kind="function"><name>operator()</name></member>
+    <member refid="classBarycentricToCartesian_1a0d989e44273714f226c63ae78657214c" kind="function"><name>get_inverse_mapping</name></member>
   </compound>
   <compound refid="classBslAdvection1D" kind="class"><name>BslAdvection1D</name>
     <member refid="classBslAdvection1D_1a0996b693977e61dbbace09073d40a92f" kind="typedef"><name>IdxAdvection</name></member>
@@ -222,6 +223,7 @@
     <member refid="classCartesianToBarycentric_1ab1f8285c12aa2bc54048b7ff1000c5cc" kind="function"><name>operator=</name></member>
     <member refid="classCartesianToBarycentric_1aa08861cb08d34846d4ccb4d4c8d2ca73" kind="function"><name>operator=</name></member>
     <member refid="classCartesianToBarycentric_1a2a067e2af8444be27e98f571604aa939" kind="function"><name>operator()</name></member>
+    <member refid="classCartesianToBarycentric_1a976a360bbda424096e185dbdf856b956" kind="function"><name>get_inverse_mapping</name></member>
   </compound>
   <compound refid="classCartesianToCircular" kind="class"><name>CartesianToCircular</name>
     <member refid="classCartesianToCircular_1a3a8d1753956c80af0e2069197560b3a5" kind="typedef"><name>cartesian_tag_x</name></member>
@@ -242,7 +244,7 @@
     <member refid="classCartesianToCircular_1a37380fa46ba2613b3082a6c3b302af61" kind="function"><name>operator=</name></member>
     <member refid="classCartesianToCircular_1ac7328c386b3ece480b67c475eb9d281a" kind="function"><name>operator()</name></member>
     <member refid="classCartesianToCircular_1a275832f34d53e29ba6a1304819d040fe" kind="function"><name>jacobian</name></member>
-    <member refid="classCartesianToCircular_1a82b4bdf6426a7ca736ece9eda07fd968" kind="function"><name>jacobian_matrix</name></member>
+    <member refid="classCartesianToCircular_1a15d8b8ccc837c4e57c000ac4307713f5" kind="function"><name>jacobian_matrix</name></member>
     <member refid="classCartesianToCircular_1af69ebbdc58f56c521d3c25589fe16769" kind="function"><name>jacobian_component</name></member>
     <member refid="classCartesianToCircular_1a12006646133b008b23ec0467dc76886a" kind="function"><name>get_inverse_mapping</name></member>
   </compound>

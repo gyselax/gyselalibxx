@@ -587,6 +587,10 @@
 <td style="text-align: left;"><a href="#function-barycentrictocartesian-33"><strong>BarycentricToCartesian</strong></a> (<a href="classBarycentricToCartesian.html"><strong>BarycentricToCartesian</strong></a> &amp;&amp; x) = default<br><em>A r-value copy operator for the mapping operator.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;"><a href="classCartesianToBarycentric.html"><strong>CartesianToBarycentric</strong></a>&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a>, Corner1Tag, Corner2Tag, Corner3Tag &gt;</td>
+<td style="text-align: left;"><a href="#function-get_inverse_mapping"><strong>get_inverse_mapping</strong></a> () const<br><em>Get the inverse mapping.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">KOKKOS_FUNCTION <a href="classBarycentricToCartesian.html#typedef-coordresult"><strong>CoordResult</strong></a></td>
 <td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classBarycentricToCartesian.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; pos) const<br><em>The operator to get the equivalent Cartesian coordinate of the barycentric coordinate.</em></td>
 </tr>
@@ -665,6 +669,14 @@
 <ul>
 <li><code>x</code> The object to be consumed. </li>
 </ul>
+<hr>
+
+<h3 id="function-get_inverse_mapping">function get_inverse_mapping</h3>
+<p><em>Get the inverse mapping.</em> </p>
+<pre><code class="language-C++">inline CartesianToBarycentric &lt; X , Y , Corner1Tag, Corner2Tag, Corner3Tag &gt; BarycentricToCartesian::get_inverse_mapping () const
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>The inverse mapping. </p>
 <hr>
 
 <h3 id="function-operator">function operator()</h3>

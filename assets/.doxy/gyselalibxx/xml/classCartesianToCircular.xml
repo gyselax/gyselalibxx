@@ -380,9 +380,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="131" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="131" bodyend="136"/>
       </memberdef>
-      <memberdef kind="function" id="classCartesianToCircular_1a82b4bdf6426a7ca736ece9eda07fd968" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, VectorIndexSet&lt; <ref refid="classCartesianToCircular_1a3af040539c015e89917c4a4194c8b9e2" kindref="member">R_cov</ref>, <ref refid="classCartesianToCircular_1a1d38114e75c30437baa95e8fb3e27fd0" kindref="member">Theta_cov</ref> &gt; &gt;</type>
-        <definition>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; X, Y &gt;, VectorIndexSet&lt; R_cov, Theta_cov &gt; &gt; CartesianToCircular&lt; X, Y, R, Theta &gt;::jacobian_matrix</definition>
+      <memberdef kind="function" id="classCartesianToCircular_1a15d8b8ccc837c4e57c000ac4307713f5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, VectorIndexSet&lt; <ref refid="classCartesianToCircular_1ad8e1bbab5fe5d419953f4250237260e7" kindref="member">X_cov</ref>, <ref refid="classCartesianToCircular_1a2fac6fc2bff81a582bd4089fc6b0344f" kindref="member">Y_cov</ref> &gt; &gt;</type>
+        <definition>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; R, Theta &gt;, VectorIndexSet&lt; X_cov, Y_cov &gt; &gt; CartesianToCircular&lt; X, Y, R, Theta &gt;::jacobian_matrix</definition>
         <argsstring>(Coord&lt; X, Y &gt; const &amp;coord) const</argsstring>
         <name>jacobian_matrix</name>
         <qualifiedname>CartesianToCircular::jacobian_matrix</qualifiedname>
@@ -479,10 +479,10 @@
 <para><formula id="180">$ \theta(x,y) = atan2(\frac{y}{x}) .$</formula></para>
 <para>It and its Jacobian matrix are invertible everywhere except for <formula id="12">$ r = 0 $</formula>.</para>
 <para>The Jacobian matrix coefficients are defined as follow</para>
-<para><formula id="181">$ J_{11}(r,\theta)  =\frac{2x}{\sqrt{x^2+y^2}}  $</formula></para>
-<para><formula id="182">$ J_{12}(r,\theta)  =\frac{2y}{\sqrt{x^2+y^2}}  $</formula></para>
-<para><formula id="183">$ J_{21}(r,\theta)  =\frac{-y}{(x^2+y^2)^2}  $</formula></para>
-<para><formula id="184">$ J_{22}(r,\theta)  =\frac{x}{(x^2+y^2)^2}  $</formula></para>
+<para><formula id="181">$ J_{11}(x,y)  =\frac{2x}{\sqrt{x^2+y^2}}  $</formula></para>
+<para><formula id="182">$ J_{12}(x,y)  =\frac{2y}{\sqrt{x^2+y^2}}  $</formula></para>
+<para><formula id="183">$ J_{21}(x,y)  =\frac{-y}{(x^2+y^2)^2}  $</formula></para>
+<para><formula id="184">$ J_{22}(x,y)  =\frac{x}{(x^2+y^2)^2}  $</formula></para>
 <para>and the matrix determinant: <formula id="185">$ det(J) = r $</formula>. </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="40" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="41" bodyend="203"/>
@@ -499,7 +499,7 @@
       <member refid="classCartesianToCircular_1a12006646133b008b23ec0467dc76886a" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>get_inverse_mapping</name></member>
       <member refid="classCartesianToCircular_1a275832f34d53e29ba6a1304819d040fe" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>jacobian</name></member>
       <member refid="classCartesianToCircular_1af69ebbdc58f56c521d3c25589fe16769" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>jacobian_component</name></member>
-      <member refid="classCartesianToCircular_1a82b4bdf6426a7ca736ece9eda07fd968" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>jacobian_matrix</name></member>
+      <member refid="classCartesianToCircular_1a15d8b8ccc837c4e57c000ac4307713f5" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>jacobian_matrix</name></member>
       <member refid="classCartesianToCircular_1ac7328c386b3ece480b67c475eb9d281a" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>operator()</name></member>
       <member refid="classCartesianToCircular_1ad149af07eb1a3c309c02797b1eeb1099" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>operator=</name></member>
       <member refid="classCartesianToCircular_1a37380fa46ba2613b3082a6c3b302af61" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>operator=</name></member>

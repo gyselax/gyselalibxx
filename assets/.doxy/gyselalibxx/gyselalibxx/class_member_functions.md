@@ -144,7 +144,7 @@
 
 ## g
 
-* **get\_inverse\_mapping** ([**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md))
+* **get\_inverse\_mapping** ([**BarycentricToCartesian**](classBarycentricToCartesian.md), [**CartesianToBarycentric**](classCartesianToBarycentric.md), [**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md))
 * **get\_derivative** ([**CollisionsInter**](classCollisionsInter.md), [**KrookSourceAdaptive**](classKrookSourceAdaptive.md))
 * **get\_nustar0** ([**CollisionsInter**](classCollisionsInter.md), [**CollisionsIntra**](classCollisionsIntra.md))
 * **get\_gridvx\_ghosted** ([**CollisionsIntra**](classCollisionsIntra.md))

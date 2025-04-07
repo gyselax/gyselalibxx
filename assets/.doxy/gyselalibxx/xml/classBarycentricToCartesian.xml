@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="27" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBarycentricToCartesian_1a04d30e49d0585fdd51f142298514f3ad" prot="public" static="no">
         <type>Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="30" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="33" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-type">
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="33" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="36" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="36" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="36" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="36" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="39" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classBarycentricToCartesian_1a0fb66f9b954d3a25f6ce262eaa89a6c3" prot="private" static="no" mutable="no">
         <type>CartesianCoord</type>
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="37" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="37" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="40" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classBarycentricToCartesian_1ae9ebb4ee942dab8e7b108c45d4f36931" prot="private" static="no" mutable="no">
         <type>CartesianCoord</type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="38" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="38" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="41" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="41" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -164,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="48" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="48" bodyend="56"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="51" bodyend="59"/>
       </memberdef>
       <memberdef kind="function" id="classBarycentricToCartesian_1a3f01bbebc3fca1262172d79d2b6528ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -193,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="62" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="65" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classBarycentricToCartesian_1acf3704b28817d1b862925e6aee56f835" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -222,7 +222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="68" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="71" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classBarycentricToCartesian_1acd4b23c1212d5e8dd7b71f146e55f0fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -237,7 +237,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="71" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="74" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classBarycentricToCartesian_1ac388fd3a74670ce860ba77f7d0955f57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classBarycentricToCartesian" kindref="compound">BarycentricToCartesian</ref> &amp;</type>
@@ -268,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="78" column="28"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="81" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classBarycentricToCartesian_1a90099183ad11818655b660d81b97522a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classBarycentricToCartesian" kindref="compound">BarycentricToCartesian</ref> &amp;</type>
@@ -299,7 +299,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="85" column="28"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="88" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classBarycentricToCartesian_1a9bd05c5378d5246a7ad4f18dbb86ab76" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classBarycentricToCartesian_1a04d30e49d0585fdd51f142298514f3ad" kindref="member">CoordResult</ref></type>
@@ -330,7 +330,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="94" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="94" bodyend="111"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="97" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="97" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="classBarycentricToCartesian_1a0d989e44273714f226c63ae78657214c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classCartesianToBarycentric" kindref="compound">CartesianToBarycentric</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, Corner1Tag, Corner2Tag, Corner3Tag &gt;</type>
+        <definition>CartesianToBarycentric&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt; BarycentricToCartesian&lt; Corner1Tag, Corner2Tag, Corner3Tag, X, Y &gt;::get_inverse_mapping</definition>
+        <argsstring>() const</argsstring>
+        <name>get_inverse_mapping</name>
+        <qualifiedname>BarycentricToCartesian::get_inverse_mapping</qualifiedname>
+        <briefdescription>
+<para>Get the inverse mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The inverse mapping. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="121" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="121" bodyend="129"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -381,7 +399,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="23" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="24" bodyend="112"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" line="26" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp" bodystart="27" bodyend="130"/>
     <listofallmembers>
       <member refid="classBarycentricToCartesian_1aac393fbec04a1c1ba1ca468c667ec055" prot="public" virt="non-virtual"><scope>BarycentricToCartesian</scope><name>BarycentricToCartesian</name></member>
       <member refid="classBarycentricToCartesian_1a3f01bbebc3fca1262172d79d2b6528ab" prot="public" virt="non-virtual"><scope>BarycentricToCartesian</scope><name>BarycentricToCartesian</name></member>
@@ -389,6 +407,7 @@
       <member refid="classBarycentricToCartesian_1addfa9c9ddb1ceb9d2cbb9444d8c5dd59" prot="private" virt="non-virtual"><scope>BarycentricToCartesian</scope><name>CartesianCoord</name></member>
       <member refid="classBarycentricToCartesian_1a17c315a0ea34b60e62b3d8c970b4e15c" prot="public" virt="non-virtual"><scope>BarycentricToCartesian</scope><name>CoordArg</name></member>
       <member refid="classBarycentricToCartesian_1a04d30e49d0585fdd51f142298514f3ad" prot="public" virt="non-virtual"><scope>BarycentricToCartesian</scope><name>CoordResult</name></member>
+      <member refid="classBarycentricToCartesian_1a0d989e44273714f226c63ae78657214c" prot="public" virt="non-virtual"><scope>BarycentricToCartesian</scope><name>get_inverse_mapping</name></member>
       <member refid="classBarycentricToCartesian_1a41bbbd90477224472ab9c60a22896ba6" prot="private" virt="non-virtual"><scope>BarycentricToCartesian</scope><name>m_corner1</name></member>
       <member refid="classBarycentricToCartesian_1a0fb66f9b954d3a25f6ce262eaa89a6c3" prot="private" virt="non-virtual"><scope>BarycentricToCartesian</scope><name>m_corner2</name></member>
       <member refid="classBarycentricToCartesian_1ae9ebb4ee942dab8e7b108c45d4f36931" prot="private" virt="non-virtual"><scope>BarycentricToCartesian</scope><name>m_corner3</name></member>

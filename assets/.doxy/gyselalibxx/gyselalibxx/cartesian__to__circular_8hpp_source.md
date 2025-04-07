@@ -68,7 +68,7 @@ public:
         return 2. * (x * x - y * y) / Kokkos::pow(x * x + y * y, 1.5);
     }
 
-    KOKKOS_FUNCTION DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> jacobian_matrix(
+    KOKKOS_FUNCTION DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X_cov, Y_cov>> jacobian_matrix(
             Coord<X, Y> const& coord) const
 
     {
@@ -85,22 +85,22 @@ public:
     template <class IndexTag1, class IndexTag2>
     KOKKOS_INLINE_FUNCTION double jacobian_component(Coord<X, Y> const& coord) const
     {
-        static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<X, Y>>);
-        static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<R_cov, Theta_cov>>);
+        static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<R, Theta>>);
+        static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<X_cov, Y_cov>>);
 
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
-        if constexpr (std::is_same_v<IndexTag1, X> && std::is_same_v<IndexTag2, R_cov>) {
-            // Component (1,1), i.e dx/dr
+        if constexpr (std::is_same_v<IndexTag1, R> && std::is_same_v<IndexTag2, X_cov>) {
+            // Component (1,1), i.e dr/dx
             return 2 * x / Kokkos::pow(x * x + y * y, 0.5);
-        } else if constexpr (std::is_same_v<IndexTag1, X> && std::is_same_v<IndexTag2, Theta_cov>) {
-            // Component (1,2), i.e dx/dtheta
+        } else if constexpr (std::is_same_v<IndexTag1, R> && std::is_same_v<IndexTag2, Y_cov>) {
+            // Component (1,2), i.e dr/dy
             return 2 * y / Kokkos::pow(x * x + y * y, 0.5);
-        } else if constexpr (std::is_same_v<IndexTag1, Y> && std::is_same_v<IndexTag2, R_cov>) {
-            // Component (2,1), i.e dy/dr
+        } else if constexpr (std::is_same_v<IndexTag1, Theta> && std::is_same_v<IndexTag2, X_cov>) {
+            // Component (2,1), i.e dtheta/dy
             return -y / Kokkos::pow(x * x + y * y, 2.);
         } else {
-            // Component (2,2), i.e dy/dtheta
+            // Component (2,2), i.e dtheta/dy
             return x / Kokkos::pow(x * x + y * y, 2.);
         }
     }

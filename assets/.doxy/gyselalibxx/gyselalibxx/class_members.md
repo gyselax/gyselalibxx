@@ -337,8 +337,8 @@
 
 ## g
 
+* **get\_inverse\_mapping** ([**BarycentricToCartesian**](classBarycentricToCartesian.md), [**CartesianToBarycentric**](classCartesianToBarycentric.md), [**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md))
 * **GridV** ([**BslAdvectionSpatial**](classBslAdvectionSpatial.md))
-* **get\_inverse\_mapping** ([**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md))
 * **GridMuType** ([**CollisionConfiguration**](classCollisionConfiguration.md))
 * **GridPhiType** ([**CollisionConfiguration**](classCollisionConfiguration.md))
 * **GridRType** ([**CollisionConfiguration**](classCollisionConfiguration.md))

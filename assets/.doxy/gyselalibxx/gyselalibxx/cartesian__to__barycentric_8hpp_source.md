@@ -16,6 +16,9 @@
 #include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
 
+template <class Corner1Tag, class Corner2Tag, class Corner3Tag, class X, class Y>
+class BarycentricToCartesian;
+
 template <class X, class Y, class Corner1Tag, class Corner2Tag, class Corner3Tag>
 class CartesianToBarycentric
 {
@@ -70,6 +73,16 @@ public:
         const double lam2 = ((y - y3) * (x1 - x3) + (x3 - x) * (y1 - y3)) / div;
         const double lam3 = 1 - lam1 - lam2;
         return BarycentricCoord(lam1, lam2, lam3);
+    }
+
+    BarycentricToCartesian<Corner1Tag, Corner2Tag, Corner3Tag, X, Y> get_inverse_mapping() const
+    {
+        return BarycentricToCartesian<
+                Corner1Tag,
+                Corner2Tag,
+                Corner3Tag,
+                X,
+                Y>(m_corner1, m_corner2, m_corner3);
     }
 };
 ```

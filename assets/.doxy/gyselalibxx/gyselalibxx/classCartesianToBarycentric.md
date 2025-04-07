@@ -63,6 +63,7 @@ _A class to convert Cartesian coordinates to barycentric coordinates on a triang
 |   | [**CartesianToBarycentric**](#function-cartesiantobarycentric-13) (CartesianCoord const & corner1, CartesianCoord const & corner2, CartesianCoord const & corner3) <br>_Construct the operator which converts between the coordinate systems._  |
 |   | [**CartesianToBarycentric**](#function-cartesiantobarycentric-23) ([**CartesianToBarycentric**](classCartesianToBarycentric.md) const & other) = default<br>_A copy operator for the mapping operator._  |
 |   | [**CartesianToBarycentric**](#function-cartesiantobarycentric-33) ([**CartesianToBarycentric**](classCartesianToBarycentric.md) && x) = default<br>_A r-value copy operator for the mapping operator._  |
+|  [**BarycentricToCartesian**](classBarycentricToCartesian.md)&lt; Corner1Tag, Corner2Tag, Corner3Tag, [**X**](structX.md), [**Y**](structY.md) &gt; | [**get\_inverse\_mapping**](#function-get_inverse_mapping) () const<br>_Get the inverse mapping._  |
 |  KOKKOS\_FUNCTION [**CoordResult**](classCartesianToBarycentric.md#typedef-coordresult) | [**operator()**](#function-operator) ([**CoordArg**](classCartesianToBarycentric.md#typedef-coordarg) const & pos) const<br>_The operator to get the equivalent barycentric coordinate of the Cartesian coordinate._  |
 |  [**CartesianToBarycentric**](classCartesianToBarycentric.md) & | [**operator=**](#function-operator_1) ([**CartesianToBarycentric**](classCartesianToBarycentric.md) const & x) = default<br>_A copy operator for the mapping operator._  |
 |  [**CartesianToBarycentric**](classCartesianToBarycentric.md) & | [**operator=**](#function-operator_2) ([**CartesianToBarycentric**](classCartesianToBarycentric.md) && x) = default<br>_A r-value copy operator for the mapping operator._  |
@@ -226,6 +227,31 @@ CartesianToBarycentric::CartesianToBarycentric (
 
 
 * `x` The object to be consumed. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function get\_inverse\_mapping 
+
+_Get the inverse mapping._ 
+```C++
+inline BarycentricToCartesian < Corner1Tag, Corner2Tag, Corner3Tag, X , Y > CartesianToBarycentric::get_inverse_mapping () const
+```
+
+
+
+
+
+**Returns:**
+
+The inverse mapping. 
+
 
 
 

@@ -631,7 +631,7 @@
 <td style="text-align: left;"><a href="#function-jacobian_component"><strong>jacobian_component</strong></a> (Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; const &amp; coord) const<br><em>Compute the (i,j) coefficient of the Jacobian matrix.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;, VectorIndexSet&lt; <a href="classCartesianToCircular.html#typedef-r_cov"><strong>R_cov</strong></a>, <a href="classCartesianToCircular.html#typedef-theta_cov"><strong>Theta_cov</strong></a> &gt; &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt;, VectorIndexSet&lt; <a href="classCartesianToCircular.html#typedef-x_cov"><strong>X_cov</strong></a>, <a href="classCartesianToCircular.html#typedef-y_cov"><strong>Y_cov</strong></a> &gt; &gt;</td>
 <td style="text-align: left;"><a href="#function-jacobian_matrix"><strong>jacobian_matrix</strong></a> (Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; const &amp; coord) const<br><em>Compute full Jacobian matrix.</em></td>
 </tr>
 <tr>
@@ -786,7 +786,7 @@ inline KOKKOS_INLINE_FUNCTION double CartesianToCircular::jacobian_component (
 
 <h3 id="function-jacobian_matrix">function jacobian_matrix</h3>
 <p><em>Compute full Jacobian matrix.</em> </p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor &lt; VectorIndexSet&lt; X , Y &gt;, VectorIndexSet&lt; R_cov , Theta_cov &gt; &gt; CartesianToCircular::jacobian_matrix (
+<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor &lt; VectorIndexSet&lt; R , Theta &gt;, VectorIndexSet&lt; X_cov , Y_cov &gt; &gt; CartesianToCircular::jacobian_matrix (
     Coord&lt; X , Y &gt; const &amp; coord
 ) const
 </code></pre>
