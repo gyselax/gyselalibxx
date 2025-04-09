@@ -116,7 +116,7 @@ public:
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
         const double r = Kokkos::sqrt(x * x + y * y);
-        const double theta = Kokkos::atan2(y, x);
+        const double theta = Kokkos::fmod(Kokkos::atan2(y, x), 2 * M_PI);
         return Coord<R, Theta>(r, theta);
     }
 
