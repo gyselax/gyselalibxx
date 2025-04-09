@@ -30,15 +30,15 @@ class CylindricalToCartesian;
  *
  * The Jacobian matrix coefficients are defined as follow
  *
- * @f$ J^R_{\.X}(x,y,z)  =\frac{2x}{\sqrt{x^2+y^2}}  @f$
+ * @f$ J^R_{\.X}(x,y,z)  =\frac{x}{\sqrt{x^2+y^2}}  @f$
  *
- * @f$ J^R_{\.Y}(x,y,z)  =\frac{2y}{\sqrt{x^2+y^2}}  @f$
+ * @f$ J^R_{\.Y}(x,y,z)  =\frac{y}{\sqrt{x^2+y^2}}  @f$
  *
- * @f$ J^{\zeta}_{\.X}(x,y,z)  =\frac{-y}{(x^2+y^2)^2}  @f$
+ * @f$ J^{\zeta}_{\.X}(x,y,z)  =\frac{-y}{x^2+y^2}  @f$
  *
- * @f$ J^{\zeta}_{\.Y}(x,y,z)  =\frac{x}{(x^2+y^2)^2}  @f$
+ * @f$ J^{\zeta}_{\.Y}(x,y,z)  =\frac{x}{x^2+y^2}  @f$
  *
- * and the matrix determinant: @f$ det(J) = R @f$.
+ * and the matrix determinant: @f$ det(J) = \frac{1}{\sqrt{x^2+y^2}} @f$.
  *
  */
 template <class X, class Y, class Z, class R, class Zeta>
@@ -143,7 +143,7 @@ public:
     {
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
-        return 2. * (x * x - y * y) / Kokkos::pow(x * x + y * y, 1.5);
+        return 1. / Kokkos::sqrt(x * x + y * y);
     }
 
     /**
@@ -164,10 +164,10 @@ public:
         const double y = ddc::get<Y>(coord);
 
         DTensor<VectorIndexSet<R, Z, Zeta>, VectorIndexSet<X_cov, Y_cov, Z_cov>> matrix(0);
-        ddcHelper::get<R, X_cov>(matrix) = 2 * x / Kokkos::pow(x * x + y * y, 0.5);
-        ddcHelper::get<R, Y_cov>(matrix) = 2 * y / Kokkos::pow(x * x + y * y, 0.5);
-        ddcHelper::get<Zeta, X_cov>(matrix) = -y / Kokkos::pow(x * x + y * y, 2.);
-        ddcHelper::get<Zeta, Y_cov>(matrix) = x / Kokkos::pow(x * x + y * y, 2.);
+        ddcHelper::get<R, X_cov>(matrix) = x / Kokkos::sqrt(x * x + y * y, 0.5);
+        ddcHelper::get<R, Y_cov>(matrix) = y / Kokkos::sqrt(x * x + y * y, 0.5);
+        ddcHelper::get<Zeta, X_cov>(matrix) = -y / (x * x + y * y);
+        ddcHelper::get<Zeta, Y_cov>(matrix) = x / (x * x + y * y);
         ddcHelper::get<Z, Z_cov>(matrix) = 1;
         return matrix;
     }
@@ -195,16 +195,16 @@ public:
         const double y = ddc::get<Y>(coord);
         if constexpr (std::is_same_v<IndexTag1, X> && std::is_same_v<IndexTag2, R_cov>) {
             // Component (1,1), i.e dx/dr
-            return 2 * x / Kokkos::pow(x * x + y * y, 0.5);
+            return x / Kokkos::sqrt(x * x + y * y);
         } else if constexpr (std::is_same_v<IndexTag1, X> && std::is_same_v<IndexTag2, Zeta_cov>) {
             // Component (1,2), i.e dx/dtheta
-            return 2 * y / Kokkos::pow(x * x + y * y, 0.5);
+            return y / Kokkos::sqrt(x * x + y * y);
         } else if constexpr (std::is_same_v<IndexTag1, Y> && std::is_same_v<IndexTag2, R_cov>) {
             // Component (2,1), i.e dy/dr
-            return -y / Kokkos::pow(x * x + y * y, 2.);
+            return -y / (x * x + y * y);
         } else if constexpr (std::is_same_v<IndexTag1, Y> && std::is_same_v<IndexTag2, Zeta_cov>) {
             // Component (2,2), i.e dy/dtheta
-            return x / Kokkos::pow(x * x + y * y, 2.);
+            return x / (x * x + y * y);
         } else if constexpr (std::is_same_v<IndexTag1, Z> && std::is_same_v<IndexTag2, Z_cov>) {
             return 1;
         } else {
