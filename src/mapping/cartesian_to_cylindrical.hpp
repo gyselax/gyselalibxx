@@ -164,8 +164,8 @@ public:
         const double y = ddc::get<Y>(coord);
 
         DTensor<VectorIndexSet<R, Z, Zeta>, VectorIndexSet<X_cov, Y_cov, Z_cov>> matrix(0);
-        ddcHelper::get<R, X_cov>(matrix) = x / Kokkos::sqrt(x * x + y * y, 0.5);
-        ddcHelper::get<R, Y_cov>(matrix) = y / Kokkos::sqrt(x * x + y * y, 0.5);
+        ddcHelper::get<R, X_cov>(matrix) = x / Kokkos::sqrt(x * x + y * y);
+        ddcHelper::get<R, Y_cov>(matrix) = y / Kokkos::sqrt(x * x + y * y);
         ddcHelper::get<Zeta, X_cov>(matrix) = -y / (x * x + y * y);
         ddcHelper::get<Zeta, Y_cov>(matrix) = x / (x * x + y * y);
         ddcHelper::get<Z, Z_cov>(matrix) = 1;
