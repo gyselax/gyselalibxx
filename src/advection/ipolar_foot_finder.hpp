@@ -14,8 +14,10 @@
  *
  * @tparam GridRadial The radial grid on which the distribution function is defined.
  * @tparam GridPoloidal The poloidial grid on which the distribution function is defined.
- * @tparam AdvectionDim1 The first dimension of the advection field vector.
- * @tparam AdvectionDim2 The second dimension of the advection field vector.
+ * @tparam VectorIndexSetAdvDims A vector index set containing the set of dimensions
+ *                              that can be used to index the advection dimensions.
+ * @tparam IdxRangeBatched The index range on which this batched operator operates.
+ *                              I.e. the index range of the distribution function.
  * @tparam MemorySpace The memory space where the data is saved (CPU/GPU).
  */
 template <
