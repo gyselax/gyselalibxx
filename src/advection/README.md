@@ -180,7 +180,7 @@ So to compute the advected function at the next time step,
 
 There are multiple time integration methods available. For more details see [Time Stepping Methods](../timestepper/README.md).
 
-## Advection domain
+### Advection domain
 
 The advection domain is the domain on which we will solve the equation.
 There are three potential advection domains to consider:
