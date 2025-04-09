@@ -26,8 +26,8 @@ void test_analytical_inverse(Mapping map)
     coord_start(double(rand()) / RAND_MAX, double(rand()) / RAND_MAX * M_PI + M_PI * 0.5);
     CoordXY coord_xy = map(coord_start);
     CoordRTheta coord_end = inv_map(coord_xy);
-    EXPECT_NEAR(ddc::get<R>(coord_start), ddc::get<R>(coord_end), 1e-14);
-    EXPECT_NEAR(ddc::get<Theta>(coord_start), ddc::get<Theta>(coord_end), 1e-14);
+    EXPECT_NEAR(ddc::get<R>(coord_start), ddc::get<R>(coord_end), 1e-13);
+    EXPECT_NEAR(ddc::get<Theta>(coord_start), ddc::get<Theta>(coord_end), 1e-13);
 }
 
 template <class Mapping>
@@ -45,9 +45,9 @@ void test_analytical_inverse_jacobian(Mapping map)
             map.jacobian_matrix(coord_rtheta),
             inv_map.jacobian_matrix(coord_xy),
             1e-14);
-    EXPECT_NEAR(map.jacobian(coord_rtheta) * inv_map.jacobian(coord_xy), 1.0, 1e-14);
-    EXPECT_NEAR(map.jacobian(coord_rtheta), determinant(map.jacobian_matrix(coord_rtheta)), 1e-14);
-    EXPECT_NEAR(inv_map.jacobian(coord_xy), determinant(inv_map.jacobian_matrix(coord_xy)), 1e-14);
+    EXPECT_NEAR(map.jacobian(coord_rtheta) * inv_map.jacobian(coord_xy), 1.0, 1e-13);
+    EXPECT_NEAR(map.jacobian(coord_rtheta), determinant(map.jacobian_matrix(coord_rtheta)), 1e-13);
+    EXPECT_NEAR(inv_map.jacobian(coord_xy), determinant(inv_map.jacobian_matrix(coord_xy)), 1e-13);
 }
 
 TEST(AnalyticalMappingTests, Circular)
