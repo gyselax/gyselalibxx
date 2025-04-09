@@ -6,11 +6,12 @@
 
 #include <gtest/gtest.h>
 
-#include "circular_to_cartesian.hpp"
-#include "czarny_to_cartesian.hpp"
 #include "cartesian_to_circular.hpp"
 #include "cartesian_to_czarny.hpp"
+#include "circular_to_cartesian.hpp"
+#include "czarny_to_cartesian.hpp"
 #include "geometry_mapping_tests.hpp"
+#include "math_tools.hpp"
 
 template <class Mapping>
 void test_analytical_inverse(Mapping map)
@@ -40,8 +41,13 @@ void test_analytical_inverse_jacobian(Mapping map)
     CoordRTheta coord_rtheta(double(rand()) / RAND_MAX, double(rand()) / RAND_MAX * 2.0 * M_PI);
     CoordXY coord_xy = map(coord_rtheta);
 
-    check_inverse_tensor(map.jacobian_matrix(coord_rtheta), inv_map.jacobian_matrix(coord_xy), 1e-14);
+    check_inverse_tensor(
+            map.jacobian_matrix(coord_rtheta),
+            inv_map.jacobian_matrix(coord_xy),
+            1e-14);
     EXPECT_NEAR(map.jacobian(coord_rtheta) * inv_map.jacobian(coord_xy), 1.0, 1e-14);
+    EXPECT_NEAR(map.jacobian(coord_rtheta), determinant(map.jacobian_matrix(coord_rtheta)), 1e-14);
+    EXPECT_NEAR(inv_map.jacobian(coord_xy), determinant(inv_map.jacobian_matrix(coord_xy)), 1e-14);
 }
 
 TEST(AnalyticalMappingTests, Circular)
