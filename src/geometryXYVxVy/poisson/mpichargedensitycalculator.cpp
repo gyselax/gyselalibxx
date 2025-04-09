@@ -25,6 +25,8 @@ void MpiChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpVxVyXY al
 
     m_local_charge_density_calculator(rho_local, allfdistribu);
 
+    Kokkos::DefaultExecutionSpace().fence("Fence local ChargeDensityCalculator");
+
     MPI_Allreduce(
             rho_local.data_handle(),
             rho.data_handle(),
