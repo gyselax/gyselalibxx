@@ -106,6 +106,7 @@ using CoordTheta = Coord<Theta>;
 using CoordPhi = Coord<Phi>;
 using CoordRTheta = Coord<R, Theta>;
 using CoordRThetaPhi = Coord<R, Theta, Phi>;
+using CoordRZZeta = Coord<R, Z, Zeta>;
 using CoordXY = Coord<X, Y>;
 
 int constexpr BSDegree = 3;
