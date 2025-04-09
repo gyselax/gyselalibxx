@@ -144,7 +144,7 @@ public:
     KOKKOS_FUNCTION double jacobian(CoordArg const& coord) const
     {
         double r = ddc::get<R>(coord);
-        return r;
+        return -r;
     }
 
     /**
