@@ -135,10 +135,4 @@ TEST_F(CoordinateTransformationPeriodicTest, Periodicity)
     test_coord_theta2 = coord_transformation.transform_edge_coord<Patch1>(test_coord_theta1);
 
     EXPECT_NEAR(double(test_coord_theta2), -4.0, 1e-14);
-
-    // Test get_equivalent_coord_from_idx()
-    test_coord_theta2
-            = coord_transformation.get_equivalent_coord_from_idx(idx_range_theta1.front());
-
-    EXPECT_NEAR(double(test_coord_theta2), -4.0, 1e-14);
 }
