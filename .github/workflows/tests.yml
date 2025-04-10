@@ -79,7 +79,7 @@ jobs:
       #    name: code-coverage-report
       - name: Copy test
         run: |
-          cp cov_test/coverage.xml .
+          cp cov_test/coverage.xml cobertura.xml
       - name: Upload coverage reports to Codecov with GitHub Action
         uses: codecov/codecov-action@v5
         env:
