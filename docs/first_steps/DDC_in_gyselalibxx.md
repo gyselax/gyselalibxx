@@ -55,7 +55,7 @@ In Gyselalib++ the alias `CoordX` is usually defined in `geometry.hpp` to descri
 
 ## Indexing and associated concepts
 
-The physical problems that our simulations describe are defined on a domain. The domain on which the problem is defined is continuous (e.g. a radial domain $[0,1)$). However a simulation evolves on a grid. This means that the value of the function is only known at a discrete set of points. In the case of a function $f(x)\rightarrow y \in \mathbb{R}$ with $x \in [0,1)$, we would usually discretise the domain $[0,1)$ as follows:
+The physical problems that our simulations describe are defined on a domain. The domain on which the problem is defined is continuous (e.g. a radial domain $[0,1)$ ). However a simulation evolves on a grid. This means that the value of the function is only known at a discrete set of points. In the case of a function $f(x)\rightarrow y \in \mathbb{R}$ with $x \in [0,1)$, we would usually discretise the domain $[0,1)$ as follows:
 $$
 x_0, x_1, ..., x_i, ..., x_N
 $$
