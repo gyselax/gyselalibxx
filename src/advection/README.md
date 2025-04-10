@@ -223,7 +223,7 @@ Then the four previous steps become
 - calculate the feet of the characteristics in the logical domain (polar grid) using $\mathcal{G}^{-1}$;
 - interpolate the advection function at the feet of the characteristics in the logical domain.
 
-Here, $\mathcal{G}$ is analytically invertible (we can fix  $\mathcal{G}^{-1}(x = 0, y = 0) = (r = 0, \theta = 0)$)
+Here, $\mathcal{G}$ is analytically invertible (we can fix  $\mathcal{G}^{-1}(x = 0, y = 0) = (r = 0, \theta = 0)$ )
 and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details are given in Zoni et al. (2019) [^1].
 
 **Remark 1:** if $\mathcal{F}$ is the circular mapping function, then the physical domain and the pseudo-Cartesian domain are the same.
