@@ -230,7 +230,7 @@ and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details
 
 **Remark 2:** if the mapping function is analytically invertible, it is less costly to advect in the physical domain.
 
-## Advection Field
+### Advection Field
 
 In the studied equation, the advection field is given along the physical domain axis:
 
