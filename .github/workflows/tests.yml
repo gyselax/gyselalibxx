@@ -33,53 +33,53 @@ jobs:
   #    - id: skip_check
   #      uses: ./.github/actions/duplicate_check
 
-  #coverage_test:
-  #  name: Coverage Test
-  #  #needs: pre_job
-  #  runs-on: ubuntu-latest
-  #  container:
-  #    image: ghcr.io/gyselax/gyselalibxx_env:latest
-  #    options: --user root
-  #  #if: ${{ needs.pre_job.outputs.should_skip != 'true' && github.event.pull_request.draft == false }}
-  #  steps:
-  #    - name: Checkout gyselalibxx
-  #      uses: actions/checkout@v4
-  #      with:
-  #        submodules: recursive
-  #    - name: "Filter tests"
-  #      uses: ./.github/actions/test_filter
-  #      with:
-  #        base_sha: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
-  #        trigger_type: ${{ github.event_name }}
-  #    - name: Build code
-  #      uses: ./.github/actions/build_code
-  #      with:
-  #        toolchain: toolchains/docker.gyselalibxx_env/tests_coverage_toolchain.cmake
-  #    - name: Run tests
-  #      uses: ./.github/actions/run_tests
-  #      continue-on-error: true
-  #    - name: Check Test Coverage
-  #      run: |
-  #        pip install gcovr
-  #        gcovr --filter src -o coverage.xml --merge-mode-functions=merge-use-line-0 build
-  #    - name: Archive code coverage results
-  #      uses: actions/upload-artifact@v4
-  #      with:
-  #        name: code-coverage-report
-  #        path: coverage.xml
+  coverage_test:
+    name: Coverage Test
+    #needs: pre_job
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/gyselax/gyselalibxx_env:latest
+      options: --user root
+    #if: ${{ needs.pre_job.outputs.should_skip != 'true' && github.event.pull_request.draft == false }}
+    steps:
+      - name: Checkout gyselalibxx
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: "Filter tests"
+        uses: ./.github/actions/test_filter
+        with:
+          base_sha: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
+          trigger_type: ${{ github.event_name }}
+      - name: Build code
+        uses: ./.github/actions/build_code
+        with:
+          toolchain: toolchains/docker.gyselalibxx_env/tests_coverage_toolchain.cmake
+      - name: Run tests
+        uses: ./.github/actions/run_tests
+        continue-on-error: true
+      - name: Check Test Coverage
+        run: |
+          pip install gcovr
+          gcovr --filter src --json coverage.json --merge-mode-functions=merge-use-line-0 build
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage-report
+          path: coverage.json
 
   upload_coverage:
     name: Coverage upload
     needs: coverage_test
     runs-on: ubuntu-latest
     steps:
-      #- name: Download a single artifact
-      #  uses: actions/download-artifact@v4
-      #  with:
-      #    name: code-coverage-report
-      - name: Copy test
-        run: |
-          cp cov_test/coverage.xml cobertura.xml
+      - name: Download a single artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: code-coverage-report
+      #- name: Copy test
+      #  run: |
+      #    cp cov_test/coverage.xml cobertura.xml
       - name: Upload coverage reports to Codecov with GitHub Action
         uses: codecov/codecov-action@v5
         env:
