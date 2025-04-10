@@ -151,6 +151,8 @@ with $`f(0,x,y) = f_0(x,y)`$ and *A* the advection field.
 
 **We want to solve it on a polar grid so we have:**  $`(t,x,y) = (t,x(r,\theta),y(r,\theta))`$.
 
+Note that the implemented operator BslAdvectionPolar is batched so it can solve similar equations at multiple places on the phase space coordinates.
+
 ### Backward Semi-Lagrangian method
 
 The method used to solve the equation is a backward Semi-Lagrangian method (BSL).
