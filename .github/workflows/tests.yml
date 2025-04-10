@@ -61,7 +61,7 @@ jobs:
       - name: Check Test Coverage
         run: |
           pip install gcovr
-          gcovr --filter src --cobertura coverage.xml --merge-mode-functions=merge-use-line-0 build
+          gcovr --filter src -o coverage.xml --merge-mode-functions=merge-use-line-0 build
       - name: Archive code coverage results
         uses: actions/upload-artifact@v4
         with:
