@@ -143,7 +143,7 @@ if __name__ == '__main__':
                 if content_lines[end_pos.line-1][end_pos.char-1] == ')' and suggestion[-1] == ')':
                     success = False
                     print(f"::error file={file},line={end_pos.line}:: Inline maths expressions ending in a parentheses, should not be followed by a parentheses without a space. ({file}: Line {end_pos.line}, position {end_pos.char})", file=sys.stderr)
-                    suggestion = suggestion.replace('$','$ ')
+                    end_code = '$ '
             except IndexError:
                 pass
 
