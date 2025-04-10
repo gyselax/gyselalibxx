@@ -39,7 +39,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**SplinePolarFootFinder**](classSplinePolarFootFinder.md) &lt;class TimeStepper, class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping, class SplineRThetaBuilder, class SplineRThetaEvaluatorConstBound&gt;<br>_A class to find the foot of the characteristics on the_  _plane._ |
+| class | [**SplinePolarFootFinder**](classSplinePolarFootFinder.md) &lt;class TimeStepper, class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping, class SplineRThetaBuilderAdvection, class SplineRThetaEvaluatorAdvection&gt;<br>_A class to find the foot of the characteristics on the_  _plane._ |
 
 
 

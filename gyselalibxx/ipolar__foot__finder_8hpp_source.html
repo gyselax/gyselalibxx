@@ -552,11 +552,33 @@
 template &lt;
         class GridRadial,
         class GridPoloidal,
-        class AdvectionDim1,
-        class AdvectionDim2,
+        class VectorIndexSetAdvDims,
+        class IdxRangeBatched,
         class MemorySpace&gt;
 class IPolarFootFinder
 {
+    // Check types
+    static_assert(
+            (ddc::is_non_uniform_point_sampling_v&lt;GridRadial&gt;)
+            || (ddc::is_uniform_point_sampling_v&lt;GridRadial&gt;));
+    static_assert(
+            (ddc::is_non_uniform_point_sampling_v&lt;GridPoloidal&gt;)
+            || (ddc::is_uniform_point_sampling_v&lt;GridPoloidal&gt;));
+    static_assert(is_vector_index_set_v&lt;VectorIndexSetAdvDims&gt;);
+    static_assert(ddc::is_discrete_domain_v&lt;IdxRangeBatched&gt;);
+    static_assert(Kokkos::is_memory_space_v&lt;MemorySpace&gt;);
+
+    // Check that grids make sense
+    static_assert(
+            ddc::in_tags_v&lt;GridRadial, ddc::to_type_seq_t&lt;IdxRangeBatched&gt;&gt;,
+            "The radial grid must be found in the batched index range");
+    static_assert(
+            ddc::in_tags_v&lt;GridPoloidal, ddc::to_type_seq_t&lt;IdxRangeBatched&gt;&gt;,
+            "The poloidal grid must be found in the batched index range");
+
+    // Check that VectorIndexSetAdvDims makes sense
+    static_assert(ddc::type_seq_size_v&lt;VectorIndexSetAdvDims&gt; == 2);
+
 protected:
     using GridR = GridRadial;
     using GridTheta = GridPoloidal;
@@ -564,19 +586,20 @@ protected:
     using R = typename GridR::continuous_dimension_type;
     using Theta = typename GridTheta::continuous_dimension_type;
 
-    using X = AdvectionDim1;
-    using Y = AdvectionDim2;
+    using VectorIndexSetAdvectionDims = VectorIndexSetAdvDims;
 
+public:
     using memory_space = MemorySpace;
 
-    using IdxRangeRTheta = IdxRange&lt;GridR, GridTheta&gt;;
+    using IdxRangeOperator = IdxRangeBatched;
 
 public:
     virtual ~IPolarFootFinder() = default;
 
     virtual void operator()(
-            Field&lt;Coord&lt;R, Theta&gt;, IdxRangeRTheta, memory_space&gt; feet,
-            DVectorConstField&lt;IdxRangeRTheta, VectorIndexSet&lt;X, Y&gt;, memory_space&gt; advection_field,
+            Field&lt;Coord&lt;R, Theta&gt;, IdxRangeOperator, memory_space&gt; feet,
+            DVectorConstField&lt;IdxRangeOperator, VectorIndexSetAdvectionDims, memory_space&gt;
+                    advection_field,
             double dt) const = 0;
 };
 </code></pre></div>

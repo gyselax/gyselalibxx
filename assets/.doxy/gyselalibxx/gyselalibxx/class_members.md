@@ -165,7 +165,8 @@
 * **charge** ([**SpeciesInformation::Impl**](classSpeciesInformation_1_1Impl.md))
 * **charges** ([**SpeciesInformation::Impl**](classSpeciesInformation_1_1Impl.md))
 * **compute\_coeffs** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
-* **ConstFieldRTheta** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
+* **CConstFieldFeet** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
+* **CFieldFeet** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **CoordXY\_adv** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **check\_n\_points\_in\_cell** ([**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md))
 
@@ -253,8 +254,8 @@
 * **DFieldBSMem** ([**Spline1DPartialDerivative**](classSpline1DPartialDerivative.md), [**Spline2DPartialDerivative**](classSpline2DPartialDerivative.md))
 * **DConstFieldSplineCoeffs** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
 * **DFieldSplineCoeffMem** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
-* **DVectorConstFieldRTheta** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
-* **DVectorFieldRTheta** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
+* **DVectorConstFieldAdvection** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
+* **DVectorFieldAdvection** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **degree** ([**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md))
 
 
@@ -331,7 +332,6 @@
 * **factorise\_method** ([**Matrix**](classMatrix.md), [**Matrix\_Banded**](classMatrix__Banded.md), [**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md), [**Matrix\_Dense**](classMatrix__Dense.md), [**Matrix\_PDS\_Tridiag**](classMatrix__PDS__Tridiag.md))
 * **find\_connections\_t** ([**MultipatchConnectivity**](classMultipatchConnectivity.md))
 * **full\_domain** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
-* **FieldRTheta** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **find\_equilibrium** ([**VortexMergerEquilibria**](classVortexMergerEquilibria.md))
 
 
@@ -472,7 +472,7 @@
 * **internal\_mdview\_type** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
 * **initialise\_chunks** ([**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md))
 * **initialisation** ([**DiocotronDensitySolution**](classDiocotronDensitySolution.md))
-* **IdxRangeRTheta** ([**DiscreteToCartesian**](classDiscreteToCartesian.md), [**IPolarFootFinder**](classIPolarFootFinder.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
+* **IdxRangeRTheta** ([**DiscreteToCartesian**](classDiscreteToCartesian.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **IdxRangeTheta** ([**DiscreteToCartesian**](classDiscreteToCartesian.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **IdxTheta** ([**DiscreteToCartesian**](classDiscreteToCartesian.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864.md), [**PolarBSplines**](classPolarBSplines.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **idx\_range\_singular\_point** ([**DiscreteToCartesian**](classDiscreteToCartesian.md))
@@ -504,6 +504,7 @@
 * **IMPITranspose** ([**IMPITranspose**](classIMPITranspose.md))
 * **idx\_range\_type1** ([**IMPITranspose**](classIMPITranspose.md), [**MPITransposeAllToAll**](classMPITransposeAllToAll.md))
 * **idx\_range\_type2** ([**IMPITranspose**](classIMPITranspose.md), [**MPITransposeAllToAll**](classMPITransposeAllToAll.md))
+* **IdxRangeOperator** ([**IPolarFootFinder**](classIPolarFootFinder.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **IdxRangeSlice** ([**IdxRangeSlice**](classIdxRangeSlice.md))
 * **IdxRangeSliceIterator** ([**IdxRangeSliceIterator**](structIdxRangeSliceIterator.md))
 * **iterator\_category** ([**IdxRangeSliceIterator**](structIdxRangeSliceIterator.md))
@@ -576,6 +577,8 @@
 * **IdxRangeBS** ([**Spline1DPartialDerivative**](classSpline1DPartialDerivative.md), [**Spline2DPartialDerivative**](classSpline2DPartialDerivative.md))
 * **IdxRangeBSField** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
 * **IdxRangeField** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
+* **IdxOperator** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
+* **IdxRangeSplineBatched** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **is\_unified** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **IdxBreakPoints** ([**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md))
 * **interpolation\_discrete\_dimension\_type** ([**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md))
@@ -963,6 +966,7 @@
 * **PredCorrRK2XY** ([**PredCorrRK2XY**](classPredCorrRK2XY.md))
 * **PoissonSolver** ([**QNSolver**](classQNSolver.md))
 * **perturbation\_initialisation** ([**SingleModePerturbInitialisation**](classSingleModePerturbInitialisation.md))
+* **PseudoCartesianBasis** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **PseudoCartesianToCircular** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **PseudoPhysicalToLogicalMapping** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **PseudoPhysicalToPhysicalMapping** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
@@ -1118,12 +1122,13 @@
 * **view\_type** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md), [**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md), [**MultipatchField**](classMultipatchField.md), [**MultipatchFieldMem**](classMultipatchFieldMem.md), [**VectorField**](classVectorField.md), [**VectorFieldMem**](classVectorFieldMem.md))
 * **vector\_field\_type** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md), [**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md), [**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md))
 * **velocity\_dim\_for** ([**GeometryVxVyXY**](classGeometryVxVyXY.md), [**GeometryXVx**](classGeometryXVx.md), [**GeometryXYVxVy**](classGeometryXYVxVy.md))
+* **VectorIndexSetAdvectionDims** ([**IPolarFootFinder**](classIPolarFootFinder.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **value\_type** ([**IdxRangeSliceIterator**](structIdxRangeSliceIterator.md))
 * **ValidArgIndices** ([**InverseJacobianMatrix**](classInverseJacobianMatrix.md))
 * **ValidResultIndices** ([**InverseJacobianMatrix**](classInverseJacobianMatrix.md))
 * **vector\_index\_set\_t** ([**LeviCivitaTensor**](classLeviCivitaTensor.md), [**Tensor**](classTensor.md))
 * **value** ([**PolarSplineFEMPoissonLikeSolver::EvalDeriv1DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType.md), [**PolarSplineFEMPoissonLikeSolver::EvalDeriv2DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.md), [**tensor\_tools::is\_contravariant\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__contravariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md), [**tensor\_tools::is\_covariant\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md))
-* **VectorSplineCoeffsMem2D** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
+* **VectorSplineCoeffsMem** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **VectorField** ([**VectorField**](classVectorField.md))
 * **VectorFieldMem** ([**VectorFieldMem**](classVectorFieldMem.md))
 * **VectorMapper** ([**VectorMapper&lt; VectorIndexSet&lt; XIn, YIn &gt;, VectorIndexSet&lt; XOut, YOut &gt;, Mapping, ExecSpace &gt;**](classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.md))
@@ -1140,16 +1145,16 @@
 ## x
 
 * **X\_cov** ([**CartesianToCircular**](classCartesianToCircular.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**DiscreteToCartesian**](classDiscreteToCartesian.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_01be6b75c3c69e2165a260584a5fd55276.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_399a54ae9b96ca8e75637deab2a35d95.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864.md))
-* **X** ([**IPolarFootFinder**](classIPolarFootFinder.md), [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **Xpc\_cov** ([**InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864.md))
+* **X** ([**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md))
 * **X\_adv** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 
 
 ## y
 
 * **Y\_cov** ([**CartesianToCircular**](classCartesianToCircular.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**DiscreteToCartesian**](classDiscreteToCartesian.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_01be6b75c3c69e2165a260584a5fd55276.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_399a54ae9b96ca8e75637deab2a35d95.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864.md))
-* **Y** ([**IPolarFootFinder**](classIPolarFootFinder.md), [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **Ypc\_cov** ([**InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864.md))
+* **Y** ([**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md))
 * **Y\_adv** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 
 

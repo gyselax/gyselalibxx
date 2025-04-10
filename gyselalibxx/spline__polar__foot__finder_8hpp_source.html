@@ -560,66 +560,84 @@ template &lt;
         class TimeStepper,
         class LogicalToPhysicalMapping,
         class LogicalToPseudoPhysicalMapping,
-        class SplineRThetaBuilder,
-        class SplineRThetaEvaluatorConstBound&gt;
+        class SplineRThetaBuilderAdvection,
+        class SplineRThetaEvaluatorAdvection&gt;
 class SplinePolarFootFinder
     : public IPolarFootFinder&lt;
-              typename SplineRThetaBuilder::interpolation_discrete_dimension_type1,
-              typename SplineRThetaBuilder::interpolation_discrete_dimension_type2,
-              typename LogicalToPhysicalMapping::cartesian_tag_x,
-              typename LogicalToPhysicalMapping::cartesian_tag_y,
-              typename SplineRThetaBuilder::memory_space&gt;
+              typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
+              typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
+              ddc::to_type_seq_t&lt;typename LogicalToPhysicalMapping::CoordResult&gt;,
+              typename SplineRThetaBuilderAdvection::batched_interpolation_domain_type,
+              typename SplineRThetaBuilderAdvection::memory_space&gt;
 {
     static_assert(is_mapping_v&lt;LogicalToPhysicalMapping&gt;);
     static_assert(is_mapping_v&lt;LogicalToPseudoPhysicalMapping&gt;);
     static_assert(is_analytical_mapping_v&lt;LogicalToPseudoPhysicalMapping&gt;);
     static_assert(std::is_same_v&lt;
-                  typename SplineRThetaBuilder::memory_space,
-                  typename SplineRThetaEvaluatorConstBound::memory_space&gt;);
-    static_assert(
-            is_accessible_v&lt;typename SplineRThetaBuilder::exec_space, LogicalToPhysicalMapping&gt;);
+                  typename SplineRThetaBuilderAdvection::memory_space,
+                  typename SplineRThetaEvaluatorAdvection::memory_space&gt;);
     static_assert(is_accessible_v&lt;
-                  typename SplineRThetaBuilder::exec_space,
+                  typename SplineRThetaBuilderAdvection::exec_space,
+                  LogicalToPhysicalMapping&gt;);
+    static_assert(is_accessible_v&lt;
+                  typename SplineRThetaBuilderAdvection::exec_space,
                   LogicalToPseudoPhysicalMapping&gt;);
+    static_assert(
+            std::is_same_v&lt;
+                    typename SplineRThetaBuilderAdvection::batched_interpolation_domain_type,
+                    typename TimeStepper::IdxRange&gt;,
+            "The SplinePolarFootFinder is designed to work with an advection field defined on the "
+            "same grid as the distribution function.");
+
+    using base_type = IPolarFootFinder&lt;
+            typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
+            typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
+            ddc::to_type_seq_t&lt;typename LogicalToPhysicalMapping::CoordResult&gt;,
+            typename SplineRThetaBuilderAdvection::batched_interpolation_domain_type,
+            typename SplineRThetaBuilderAdvection::memory_space&gt;;
+
+public:
+    using typename base_type::memory_space;
 
 private:
     using PseudoPhysicalToLogicalMapping = inverse_mapping_t&lt;LogicalToPseudoPhysicalMapping&gt;;
 
-    using base_type = IPolarFootFinder&lt;
-            typename SplineRThetaBuilder::interpolation_discrete_dimension_type1,
-            typename SplineRThetaBuilder::interpolation_discrete_dimension_type2,
-            typename LogicalToPhysicalMapping::cartesian_tag_x,
-            typename LogicalToPhysicalMapping::cartesian_tag_y,
-            typename SplineRThetaBuilder::memory_space&gt;;
-
 private:
     using typename base_type::GridR;
     using typename base_type::GridTheta;
-    using typename base_type::memory_space;
+    using typename base_type::IdxRangeOperator;
     using typename base_type::R;
     using typename base_type::Theta;
-    using typename base_type::X;
-    using typename base_type::Y;
-    using ExecSpace = typename SplineRThetaBuilder::exec_space;
+    using typename base_type::VectorIndexSetAdvectionDims;
+    using ExecSpace = typename SplineRThetaBuilderAdvection::exec_space;
     using X_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
     using Y_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
-    using CoordXY_adv = Coord&lt;X_adv, Y_adv&gt;;
+    using CoordXY_adv = typename LogicalToPseudoPhysicalMapping::CoordResult;
+
+    using PseudoCartesianBasis = ddc::to_type_seq_t&lt;CoordXY_adv&gt;;
 
     using CoordRTheta = Coord&lt;R, Theta&gt;;
 
-    using typename base_type::IdxRangeRTheta;
+    using IdxRangeRTheta = IdxRange&lt;GridR, GridTheta&gt;;
     using IdxRangeR = IdxRange&lt;GridR&gt;;
     using IdxRangeTheta = IdxRange&lt;GridTheta&gt;;
     using IdxRTheta = Idx&lt;GridR, GridTheta&gt;;
     using IdxR = Idx&lt;GridR&gt;;
     using IdxTheta = Idx&lt;GridTheta&gt;;
+    using IdxOperator = typename IdxRangeOperator::discrete_element_type;
 
     using PseudoCartesianToCircular = CartesianToCircular&lt;X_adv, Y_adv, R, Theta&gt;;
     using PseudoPhysicalToPhysicalMapping
             = CombinedMapping&lt;LogicalToPhysicalMapping, PseudoCartesianToCircular&gt;;
 
-    using BSplinesR = typename SplineRThetaBuilder::bsplines_type1;
-    using BSplinesTheta = typename SplineRThetaBuilder::bsplines_type2;
+    using BSplinesR = typename SplineRThetaBuilderAdvection::bsplines_type1;
+    using BSplinesTheta = typename SplineRThetaBuilderAdvection::bsplines_type2;
+
+    using IdxRangeSplineBatched
+            = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_replace_t&lt;
+                    ddc::to_type_seq_t&lt;IdxRangeOperator&gt;,
+                    ddc::detail::TypeSeq&lt;GridR, GridTheta&gt;,
+                    ddc::detail::TypeSeq&lt;BSplinesR, BSplinesTheta&gt;&gt;&gt;;
 
     TimeStepper const&amp; m_time_stepper;
 
@@ -627,38 +645,30 @@ private:
     PseudoPhysicalToLogicalMapping m_pseudo_physical_to_logical;
     PseudoPhysicalToPhysicalMapping m_pseudo_physical_to_physical;
 
-    SplineRThetaBuilder const&amp; m_builder_advection_field;
-    SplineRThetaEvaluatorConstBound const&amp; m_evaluator_advection_field;
+    SplineRThetaBuilderAdvection const&amp; m_builder_advection_field;
+    SplineRThetaEvaluatorAdvection const&amp; m_evaluator_advection_field;
 
 public:
-    template &lt;class ElementType&gt;
-    using FieldRTheta = Field&lt;ElementType, IdxRangeRTheta, memory_space&gt;;
+    using CFieldFeet = Field&lt;CoordRTheta, IdxRangeOperator, memory_space&gt;;
 
-    template &lt;class ElementType&gt;
-    using ConstFieldRTheta = ConstField&lt;ElementType, IdxRangeRTheta, memory_space&gt;;
+    using CConstFieldFeet = ConstField&lt;CoordRTheta, IdxRangeOperator, memory_space&gt;;
 
-    template &lt;class Dim1, class Dim2&gt;
-    using DVectorFieldRTheta
-            = VectorField&lt;double, IdxRangeRTheta, VectorIndexSet&lt;Dim1, Dim2&gt;, memory_space&gt;;
+    using DVectorFieldAdvection
+            = DVectorField&lt;IdxRangeOperator, PseudoCartesianBasis, memory_space&gt;;
 
-    template &lt;class Dim1, class Dim2&gt;
-    using DVectorConstFieldRTheta
-            = VectorConstField&lt;double, IdxRangeRTheta, VectorIndexSet&lt;Dim1, Dim2&gt;, memory_space&gt;;
+    using DVectorConstFieldAdvection
+            = DVectorConstField&lt;IdxRangeOperator, PseudoCartesianBasis, memory_space&gt;;
 
-    template &lt;class Dim1, class Dim2&gt;
-    using VectorSplineCoeffsMem2D = VectorFieldMem&lt;
-            double,
-            IdxRange&lt;BSplinesR, BSplinesTheta&gt;,
-            VectorIndexSet&lt;Dim1, Dim2&gt;,
-            memory_space&gt;;
+    using VectorSplineCoeffsMem
+            = DVectorFieldMem&lt;IdxRangeSplineBatched, PseudoCartesianBasis, memory_space&gt;;
 
 public:
     SplinePolarFootFinder(
             TimeStepper const&amp; time_stepper,
             LogicalToPhysicalMapping const&amp; logical_to_physical_mapping,
             LogicalToPseudoPhysicalMapping const&amp; logical_to_pseudo_physical_mapping,
-            SplineRThetaBuilder const&amp; builder_advection_field,
-            SplineRThetaEvaluatorConstBound const&amp; evaluator_advection_field,
+            SplineRThetaBuilderAdvection const&amp; builder_advection_field,
+            SplineRThetaEvaluatorAdvection const&amp; evaluator_advection_field,
             double epsilon = 1e-12)
         : m_time_stepper(time_stepper)
         , m_logical_to_pseudo_physical(logical_to_pseudo_physical_mapping)
@@ -673,11 +683,12 @@ public:
     }
 
     void operator()(
-            FieldRTheta&lt;CoordRTheta&gt; feet,
-            DVectorConstFieldRTheta&lt;X, Y&gt; advection_field,
+            CFieldFeet feet,
+            DVectorConstField&lt;IdxRangeOperator, VectorIndexSetAdvectionDims, memory_space&gt;
+                    advection_field,
             double dt) const final
     {
-        VectorSplineCoeffsMem2D&lt;X_adv, Y_adv&gt; advection_field_in_adv_domain_coefs(
+        VectorSplineCoeffsMem advection_field_in_adv_domain_coefs(
                 get_spline_idx_range(m_builder_advection_field));
 
         // Compute the advection field in the advection domain.
@@ -696,9 +707,8 @@ public:
 
 
         // The function describing how the derivative of the evolve function is calculated.
-        std::function&lt;void(DVectorFieldRTheta&lt;X_adv, Y_adv&gt;, ConstFieldRTheta&lt;CoordRTheta&gt;)&gt; dy
-                = [&amp;](DVectorFieldRTheta&lt;X_adv, Y_adv&gt; updated_advection_field,
-                      ConstFieldRTheta&lt;CoordRTheta&gt; feet) {
+        std::function&lt;void(DVectorFieldAdvection, CConstFieldFeet)&gt; dy
+                = [&amp;](DVectorFieldAdvection updated_advection_field, CConstFieldFeet feet) {
                       m_evaluator_advection_field(
                               get_field(ddcHelper::get&lt;X_adv&gt;(updated_advection_field)),
                               get_const_field(feet),
@@ -711,47 +721,45 @@ public:
                                       ddcHelper::get&lt;Y_adv&gt;(advection_field_in_adv_domain_coefs)));
                   };
 
-        IdxRangeRTheta const idx_range_rp = get_idx_range&lt;GridR, GridTheta&gt;(feet);
-
         CoordXY_adv coord_centre(m_logical_to_pseudo_physical(CoordRTheta(0, 0)));
         LogicalToPseudoPhysicalMapping logical_to_pseudo_physical_proxy
                 = m_logical_to_pseudo_physical;
         PseudoPhysicalToLogicalMapping pseudo_physical_to_logical_proxy
                 = m_pseudo_physical_to_logical;
 
+        IdxRangeOperator idx_range = get_idx_range(feet);
+        IdxRangeTheta idx_range_theta(idx_range);
+
         // The function describing how the value(s) are updated using the derivative.
-        std::function&lt;void(FieldRTheta&lt;CoordRTheta&gt;, DVectorConstFieldRTheta&lt;X_adv, Y_adv&gt;, double)&gt;
-                update_function = [&amp;](FieldRTheta&lt;CoordRTheta&gt; feet,
-                                      DVectorConstFieldRTheta&lt;X_adv, Y_adv&gt; advection_field,
-                                      double dt) {
-                    // Compute the characteristic feet at t^n:
-                    ddc::parallel_for_each(
-                            ExecSpace(),
-                            idx_range_rp,
-                            KOKKOS_LAMBDA(IdxRTheta const irtheta) {
-                                CoordRTheta const coord_rtheta(feet(irtheta));
-                                CoordXY_adv const coord_xy
-                                        = logical_to_pseudo_physical_proxy(coord_rtheta);
+        std::function&lt;void(CFieldFeet, DVectorConstFieldAdvection, double)&gt; update_function
+                = [&amp;](CFieldFeet feet, DVectorConstFieldAdvection advection_field, double dt) {
+                      // Compute the characteristic feet at t^n:
+                      ddc::parallel_for_each(
+                              ExecSpace(),
+                              get_idx_range(feet),
+                              KOKKOS_LAMBDA(IdxOperator const idx) {
+                                  CoordRTheta const coord_rtheta(feet(idx));
+                                  CoordXY_adv const coord_xy
+                                          = logical_to_pseudo_physical_proxy(coord_rtheta);
 
-                                CoordXY_adv const feet_xy
-                                        = coord_xy - dt * advection_field(irtheta);
+                                  CoordXY_adv const feet_xy = coord_xy - dt * advection_field(idx);
 
-                                if (norm_inf(feet_xy - coord_centre) &lt; 1e-15) {
-                                    feet(irtheta) = CoordRTheta(0, 0);
-                                } else {
-                                    feet(irtheta) = pseudo_physical_to_logical_proxy(feet_xy);
-                                    ddc::select&lt;Theta&gt;(feet(irtheta))
-                                            = ddcHelper::restrict_to_idx_range(
-                                                    ddc::select&lt;Theta&gt;(feet(irtheta)),
-                                                    IdxRangeTheta(idx_range_rp));
-                                }
-                            });
+                                  if (norm_inf(feet_xy - coord_centre) &lt; 1e-15) {
+                                      feet(idx) = CoordRTheta(0, 0);
+                                  } else {
+                                      feet(idx) = pseudo_physical_to_logical_proxy(feet_xy);
+                                      ddc::select&lt;Theta&gt;(feet(idx))
+                                              = ddcHelper::restrict_to_idx_range(
+                                                      ddc::select&lt;Theta&gt;(feet(idx)),
+                                                      idx_range_theta);
+                                  }
+                              });
 
-                    // Treatment to conserve the C0 property of the advected function:
-                    unify_value_at_centre_pt(feet);
-                    // Test if the values are the same at the centre point
-                    is_unified(feet);
-                };
+                      // Treatment to conserve the C0 property of the advected function:
+                      unify_value_at_centre_pt(feet);
+                      // Test if the values are the same at the centre point
+                      is_unified(feet);
+                  };
 
 
         // Solve the characteristic equation

@@ -540,12 +540,31 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-ipolarfootfinder">Class IPolarFootFinder</h1>
-<p><strong>template &lt;class GridRadial, class GridPoloidal, class AdvectionDim1, class AdvectionDim2, class MemorySpace&gt;</strong></p>
+<p><strong>template &lt;class GridRadial, class GridPoloidal, class VectorIndexSetAdvDims, class IdxRangeBatched, class MemorySpace&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classIPolarFootFinder.html"><strong>IPolarFootFinder</strong></a></p>
 <p><em>Define a base class for all the time integration methods used to find the foot of a characteristic on a polar domain (a polar domain is a domain defined on the</em>  <em>plane).</em><a href="#detailed-description">More...</a></p>
 <ul>
 <li><code>#include &lt;ipolar_foot_finder.hpp&gt;</code></li>
 </ul>
+<h2 id="public-types">Public Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef IdxRangeBatched</td>
+<td style="text-align: left;"><a href="#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>  <br><em>The type of the index range over which the operator works.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef MemorySpace</td>
+<td style="text-align: left;"><a href="#typedef-memory_space"><strong>memory_space</strong></a>  <br><em>The type of the memory space where the field is saved (CPU vs GPU).</em></td>
+</tr>
+</tbody>
+</table>
 <h2 id="public-functions">Public Functions</h2>
 <table>
 <thead>
@@ -557,7 +576,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">virtual void</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (Field&lt; Coord&lt; <a href="classIPolarFootFinder.html#typedef-r"><strong>R</strong></a>, <a href="classIPolarFootFinder.html#typedef-theta"><strong>Theta</strong></a> &gt;, <a href="classIPolarFootFinder.html#typedef-idxrangertheta"><strong>IdxRangeRTheta</strong></a>, <a href="classIPolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; feet, <a href="classVectorField.html"><strong>DVectorConstField</strong></a>&lt; <a href="classIPolarFootFinder.html#typedef-idxrangertheta"><strong>IdxRangeRTheta</strong></a>, VectorIndexSet&lt; <a href="classIPolarFootFinder.html#typedef-x"><strong>X</strong></a>, <a href="classIPolarFootFinder.html#typedef-y"><strong>Y</strong></a> &gt;, <a href="classIPolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; advection_field, double dt) const = 0<br><em>Advect the feet over</em>  <em>.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (Field&lt; Coord&lt; <a href="classIPolarFootFinder.html#typedef-r"><strong>R</strong></a>, <a href="classIPolarFootFinder.html#typedef-theta"><strong>Theta</strong></a> &gt;, <a href="classIPolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>, <a href="classIPolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; feet, <a href="classVectorField.html"><strong>DVectorConstField</strong></a>&lt; <a href="classIPolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>, <a href="classIPolarFootFinder.html#typedef-vectorindexsetadvectiondims"><strong>VectorIndexSetAdvectionDims</strong></a>, <a href="classIPolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; advection_field, double dt) const = 0<br><em>Advect the feet over</em>  <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual</td>
@@ -583,10 +602,6 @@
 <td style="text-align: left;"><a href="#typedef-gridtheta"><strong>GridTheta</strong></a>  <br><em>The continuous poloidal dimension.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef IdxRange&lt; <a href="classIPolarFootFinder.html#typedef-gridr"><strong>GridR</strong></a>, <a href="classIPolarFootFinder.html#typedef-gridtheta"><strong>GridTheta</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#typedef-idxrangertheta"><strong>IdxRangeRTheta</strong></a>  <br><em>The type of the index range over which the operator works.</em></td>
-</tr>
-<tr>
 <td style="text-align: right;">typedef typename GridR::continuous_dimension_type</td>
 <td style="text-align: left;"><a href="#typedef-r"><strong>R</strong></a>  <br><em>The continuous radial dimension.</em></td>
 </tr>
@@ -595,16 +610,8 @@
 <td style="text-align: left;"><a href="#typedef-theta"><strong>Theta</strong></a>  <br><em>The continuous poloidal dimension.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef AdvectionDim1</td>
-<td style="text-align: left;"><a href="#typedef-x"><strong>X</strong></a>  <br><em>The continuous radial dimension.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef AdvectionDim2</td>
-<td style="text-align: left;"><a href="#typedef-y"><strong>Y</strong></a>  <br><em>The continuous poloidal dimension.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef MemorySpace</td>
-<td style="text-align: left;"><a href="#typedef-memory_space"><strong>memory_space</strong></a>  <br><em>The type of the memory space where the field is saved (CPU vs GPU).</em></td>
+<td style="text-align: right;">typedef VectorIndexSetAdvDims</td>
+<td style="text-align: left;"><a href="#typedef-vectorindexsetadvectiondims"><strong>VectorIndexSetAdvectionDims</strong></a>  <br><em>The continuous radial dimension.</em></td>
 </tr>
 </tbody>
 </table>
@@ -614,16 +621,28 @@
 <ul>
 <li><code>GridRadial</code> The radial grid on which the distribution function is defined. </li>
 <li><code>GridPoloidal</code> The poloidial grid on which the distribution function is defined. </li>
-<li><code>AdvectionDim1</code> The first dimension of the advection field vector. </li>
-<li><code>AdvectionDim2</code> The second dimension of the advection field vector. </li>
+<li><code>VectorIndexSetAdvDims</code> A vector index set containing the set of dimensions that can be used to index the advection dimensions. </li>
+<li><code>IdxRangeBatched</code> The index range on which this batched operator operates. I.e. the index range of the distribution function. </li>
 <li><code>MemorySpace</code> The memory space where the data is saved (CPU/GPU). </li>
 </ul>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-idxrangeoperator">typedef IdxRangeOperator</h3>
+<p><em>The type of the index range over which the operator works.</em> </p>
+<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace &gt;::IdxRangeOperator =  IdxRangeBatched;
+</code></pre>
+<hr>
+
+<h3 id="typedef-memory_space">typedef memory_space</h3>
+<p><em>The type of the memory space where the field is saved (CPU vs GPU).</em> </p>
+<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace &gt;::memory_space =  MemorySpace;
+</code></pre>
+<hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-operator">function operator()</h3>
 <p><em>Advect the feet over</em>  <em>.</em></p>
 <pre><code class="language-C++">virtual void IPolarFootFinder::operator() (
-    Field&lt; Coord&lt; R , Theta &gt;, IdxRangeRTheta , memory_space &gt; feet,
-    DVectorConstField &lt; IdxRangeRTheta , VectorIndexSet&lt; X , Y &gt;, memory_space &gt; advection_field,
+    Field&lt; Coord&lt; R , Theta &gt;, IdxRangeOperator , memory_space &gt; feet,
+    DVectorConstField &lt; IdxRangeOperator , VectorIndexSetAdvectionDims , memory_space &gt; advection_field,
     double dt
 ) const = 0
 </code></pre>
@@ -642,49 +661,31 @@
 <h2 id="protected-types-documentation">Protected Types Documentation</h2>
 <h3 id="typedef-gridr">typedef GridR</h3>
 <p><em>The continuous radial dimension.</em> </p>
-<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, AdvectionDim1, AdvectionDim2, MemorySpace &gt;::GridR =  GridRadial;
+<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace &gt;::GridR =  GridRadial;
 </code></pre>
 <hr>
 
 <h3 id="typedef-gridtheta">typedef GridTheta</h3>
 <p><em>The continuous poloidal dimension.</em> </p>
-<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, AdvectionDim1, AdvectionDim2, MemorySpace &gt;::GridTheta =  GridPoloidal;
-</code></pre>
-<hr>
-
-<h3 id="typedef-idxrangertheta">typedef IdxRangeRTheta</h3>
-<p><em>The type of the index range over which the operator works.</em> </p>
-<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, AdvectionDim1, AdvectionDim2, MemorySpace &gt;::IdxRangeRTheta =  IdxRange&lt;GridR, GridTheta&gt;;
+<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace &gt;::GridTheta =  GridPoloidal;
 </code></pre>
 <hr>
 
 <h3 id="typedef-r">typedef R</h3>
 <p><em>The continuous radial dimension.</em> </p>
-<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, AdvectionDim1, AdvectionDim2, MemorySpace &gt;::R =  typename GridR::continuous_dimension_type;
+<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace &gt;::R =  typename GridR::continuous_dimension_type;
 </code></pre>
 <hr>
 
 <h3 id="typedef-theta">typedef Theta</h3>
 <p><em>The continuous poloidal dimension.</em> </p>
-<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, AdvectionDim1, AdvectionDim2, MemorySpace &gt;::Theta =  typename GridTheta::continuous_dimension_type;
+<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace &gt;::Theta =  typename GridTheta::continuous_dimension_type;
 </code></pre>
 <hr>
 
-<h3 id="typedef-x">typedef X</h3>
+<h3 id="typedef-vectorindexsetadvectiondims">typedef VectorIndexSetAdvectionDims</h3>
 <p><em>The continuous radial dimension.</em> </p>
-<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, AdvectionDim1, AdvectionDim2, MemorySpace &gt;::X =  AdvectionDim1;
-</code></pre>
-<hr>
-
-<h3 id="typedef-y">typedef Y</h3>
-<p><em>The continuous poloidal dimension.</em> </p>
-<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, AdvectionDim1, AdvectionDim2, MemorySpace &gt;::Y =  AdvectionDim2;
-</code></pre>
-<hr>
-
-<h3 id="typedef-memory_space">typedef memory_space</h3>
-<p><em>The type of the memory space where the field is saved (CPU vs GPU).</em> </p>
-<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, AdvectionDim1, AdvectionDim2, MemorySpace &gt;::memory_space =  MemorySpace;
+<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace &gt;::VectorIndexSetAdvectionDims =  VectorIndexSetAdvDims;
 </code></pre>
 <hr>
 

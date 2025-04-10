@@ -2,7 +2,7 @@
 
 # Class SplinePolarFootFinder
 
-**template &lt;class TimeStepper, class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping, class SplineRThetaBuilder, class SplineRThetaEvaluatorConstBound&gt;**
+**template &lt;class TimeStepper, class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping, class SplineRThetaBuilderAdvection, class SplineRThetaEvaluatorAdvection&gt;**
 
 
 
@@ -35,13 +35,22 @@ Inherits the following classes: [IPolarFootFinder](classIPolarFootFinder.md)
 
 | Type | Name |
 | ---: | :--- |
-| typedef ConstField&lt; ElementType, IdxRangeRTheta, memory\_space &gt; | [**ConstFieldRTheta**](#typedef-constfieldrtheta)  <br>_The type of a constant field on the polar plane on a compatible memory space._  |
-| typedef [**VectorConstField**](classVectorField.md)&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt;, memory\_space &gt; | [**DVectorConstFieldRTheta**](#typedef-dvectorconstfieldrtheta)  <br>_The type of a constant vector (x,y) field on the polar plane on a compatible memory space._  |
-| typedef [**VectorField**](classVectorField.md)&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt;, memory\_space &gt; | [**DVectorFieldRTheta**](#typedef-dvectorfieldrtheta)  <br>_The type of a vector (x,y) field on the polar plane on a compatible memory space._  |
-| typedef Field&lt; ElementType, IdxRangeRTheta, memory\_space &gt; | [**FieldRTheta**](#typedef-fieldrtheta)  <br>_The type of a field on the polar plane on a compatible memory space._  |
-| typedef [**VectorFieldMem**](classVectorFieldMem.md)&lt; double, IdxRange&lt; [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md) &gt;, VectorIndexSet&lt; Dim1, Dim2 &gt;, memory\_space &gt; | [**VectorSplineCoeffsMem2D**](#typedef-vectorsplinecoeffsmem2d)  <br>_The type of 2 splines representing the x and y components of a vector on the polar plane on a compatible memory space._  |
+| typedef ConstField&lt; CoordRTheta, IdxRangeOperator, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; | [**CConstFieldFeet**](#typedef-cconstfieldfeet)  <br>_The type of a constant field of (r, theta) coordinates at every grid point, saved on a compatible memory space._  |
+| typedef Field&lt; CoordRTheta, IdxRangeOperator, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; | [**CFieldFeet**](#typedef-cfieldfeet)  <br>_The type of a field of (r, theta) coordinates at every grid point, saved on a compatible memory space._  |
+| typedef [**DVectorConstField**](classVectorField.md)&lt; IdxRangeOperator, PseudoCartesianBasis, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; | [**DVectorConstFieldAdvection**](#typedef-dvectorconstfieldadvection)  <br>_The type of a constant vector field defined on the pseudo-Cartesian basis at every grid point, saved on a compatible memory space._  |
+| typedef [**DVectorField**](classVectorField.md)&lt; IdxRangeOperator, PseudoCartesianBasis, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; | [**DVectorFieldAdvection**](#typedef-dvectorfieldadvection)  <br>_The type of a vector field defined on the pseudo-Cartesian basis at every grid point, saved on a compatible memory space._  |
+| typedef [**DVectorFieldMem**](classVectorFieldMem.md)&lt; IdxRangeSplineBatched, PseudoCartesianBasis, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; | [**VectorSplineCoeffsMem**](#typedef-vectorsplinecoeffsmem)  <br>_The type of 2 batched splines representing the x and y components of a vector on the polar plane on a compatible memory space._  |
+| typedef MemorySpace | [**memory\_space**](#typedef-memory_space)  <br>_The type of the memory space where the field is saved (CPU vs GPU)._  |
 
 
+## Public Types inherited from IPolarFootFinder
+
+See [IPolarFootFinder](classIPolarFootFinder.md)
+
+| Type | Name |
+| ---: | :--- |
+| typedef IdxRangeBatched | [**IdxRangeOperator**](classIPolarFootFinder.md#typedef-idxrangeoperator)  <br>_The type of the index range over which the operator works._  |
+| typedef MemorySpace | [**memory\_space**](classIPolarFootFinder.md#typedef-memory_space)  <br>_The type of the memory space where the field is saved (CPU vs GPU)._  |
 
 
 
@@ -84,10 +93,10 @@ Inherits the following classes: [IPolarFootFinder](classIPolarFootFinder.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**SplinePolarFootFinder**](#function-splinepolarfootfinder) (TimeStepper const & time\_stepper, LogicalToPhysicalMapping const & logical\_to\_physical\_mapping, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical\_mapping, SplineRThetaBuilder const & builder\_advection\_field, SplineRThetaEvaluatorConstBound const & evaluator\_advection\_field, double epsilon=1e-12) <br>_Instantiate a time integration method for the advection operator._  |
-|  void | [**is\_unified**](#function-is_unified) (Field&lt; [**T**](structT.md), IdxRangeRTheta, memory\_space &gt; const & values) const<br>_Check if the values at the centre point are the same._  |
-|  void | [**operator()**](#function-operator) ([**FieldRTheta**](classSplinePolarFootFinder.md#typedef-fieldrtheta)&lt; CoordRTheta &gt; feet, [**DVectorConstFieldRTheta**](classSplinePolarFootFinder.md#typedef-dvectorconstfieldrtheta)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; advection\_field, double dt) const<br>_Advect the feet over_  _._ |
-|  void | [**unify\_value\_at\_centre\_pt**](#function-unify_value_at_centre_pt) (Field&lt; [**T**](structT.md), IdxRangeRTheta, memory\_space &gt; values) const<br>_Replace the value at_  _point by the value at_ _for all_ _._ |
+|   | [**SplinePolarFootFinder**](#function-splinepolarfootfinder) (TimeStepper const & time\_stepper, LogicalToPhysicalMapping const & logical\_to\_physical\_mapping, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical\_mapping, SplineRThetaBuilderAdvection const & builder\_advection\_field, SplineRThetaEvaluatorAdvection const & evaluator\_advection\_field, double epsilon=1e-12) <br>_Instantiate a time integration method for the advection operator._  |
+|  void | [**is\_unified**](#function-is_unified) (Field&lt; [**T**](structT.md), IdxRangeRTheta, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; const & values) const<br>_Check if the values at the centre point are the same._  |
+|  void | [**operator()**](#function-operator) ([**CFieldFeet**](classSplinePolarFootFinder.md#typedef-cfieldfeet) feet, [**DVectorConstField**](classVectorField.md)&lt; IdxRangeOperator, VectorIndexSetAdvectionDims, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; advection\_field, double dt) const<br>_Advect the feet over_  _._ |
+|  void | [**unify\_value\_at\_centre\_pt**](#function-unify_value_at_centre_pt) (Field&lt; [**T**](structT.md), IdxRangeRTheta, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; values) const<br>_Replace the value at_  _point by the value at_ _for all_ _._ |
 
 
 ## Public Functions inherited from IPolarFootFinder
@@ -96,7 +105,7 @@ See [IPolarFootFinder](classIPolarFootFinder.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual void | [**operator()**](classIPolarFootFinder.md#function-operator) (Field&lt; Coord&lt; [**R**](classIPolarFootFinder.md#typedef-r), [**Theta**](classIPolarFootFinder.md#typedef-theta) &gt;, [**IdxRangeRTheta**](classIPolarFootFinder.md#typedef-idxrangertheta), [**memory\_space**](classIPolarFootFinder.md#typedef-memory_space) &gt; feet, [**DVectorConstField**](classVectorField.md)&lt; [**IdxRangeRTheta**](classIPolarFootFinder.md#typedef-idxrangertheta), VectorIndexSet&lt; [**X**](classIPolarFootFinder.md#typedef-x), [**Y**](classIPolarFootFinder.md#typedef-y) &gt;, [**memory\_space**](classIPolarFootFinder.md#typedef-memory_space) &gt; advection\_field, double dt) const = 0<br>_Advect the feet over_  _._ |
+| virtual void | [**operator()**](classIPolarFootFinder.md#function-operator) (Field&lt; Coord&lt; [**R**](classIPolarFootFinder.md#typedef-r), [**Theta**](classIPolarFootFinder.md#typedef-theta) &gt;, [**IdxRangeOperator**](classIPolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classIPolarFootFinder.md#typedef-memory_space) &gt; feet, [**DVectorConstField**](classVectorField.md)&lt; [**IdxRangeOperator**](classIPolarFootFinder.md#typedef-idxrangeoperator), [**VectorIndexSetAdvectionDims**](classIPolarFootFinder.md#typedef-vectorindexsetadvectiondims), [**memory\_space**](classIPolarFootFinder.md#typedef-memory_space) &gt; advection\_field, double dt) const = 0<br>_Advect the feet over_  _._ |
 | virtual  | [**~IPolarFootFinder**](classIPolarFootFinder.md#function-ipolarfootfinder) () = default<br> |
 
 
@@ -114,12 +123,9 @@ See [IPolarFootFinder](classIPolarFootFinder.md)
 | ---: | :--- |
 | typedef GridRadial | [**GridR**](classIPolarFootFinder.md#typedef-gridr)  <br>_The continuous radial dimension._  |
 | typedef GridPoloidal | [**GridTheta**](classIPolarFootFinder.md#typedef-gridtheta)  <br>_The continuous poloidal dimension._  |
-| typedef IdxRange&lt; [**GridR**](classIPolarFootFinder.md#typedef-gridr), [**GridTheta**](classIPolarFootFinder.md#typedef-gridtheta) &gt; | [**IdxRangeRTheta**](classIPolarFootFinder.md#typedef-idxrangertheta)  <br>_The type of the index range over which the operator works._  |
 | typedef typename GridR::continuous\_dimension\_type | [**R**](classIPolarFootFinder.md#typedef-r)  <br>_The continuous radial dimension._  |
 | typedef typename GridTheta::continuous\_dimension\_type | [**Theta**](classIPolarFootFinder.md#typedef-theta)  <br>_The continuous poloidal dimension._  |
-| typedef AdvectionDim1 | [**X**](classIPolarFootFinder.md#typedef-x)  <br>_The continuous radial dimension._  |
-| typedef AdvectionDim2 | [**Y**](classIPolarFootFinder.md#typedef-y)  <br>_The continuous poloidal dimension._  |
-| typedef MemorySpace | [**memory\_space**](classIPolarFootFinder.md#typedef-memory_space)  <br>_The type of the memory space where the field is saved (CPU vs GPU)._  |
+| typedef VectorIndexSetAdvDims | [**VectorIndexSetAdvectionDims**](classIPolarFootFinder.md#typedef-vectorindexsetadvectiondims)  <br>_The continuous radial dimension._  |
 
 
 
@@ -183,12 +189,12 @@ More details can be found in Edoardo Zoni's article ([https://doi.org/10.1016/j.
 * `TimeStepper` A child class of [**ITimeStepper**](classITimeStepper.md) providing a time integration method. 
 * `LogicalToPhysicalMapping` A mapping from the logical domain to the physical domain. 
 * `LogicalToPseudoPhysicalMapping` A mapping from the logical domain to the domain where the advection is carried out. This may be a pseudo-physical domain or the physical domain itself. 
-* `SplineRThetaBuilder` A 2D SplineBuilder to construct a spline on a polar domain. 
-* `SplineRThetaEvaluatorConstBound` A 2D SplineEvaluator to evaluate a spline on a polar domain. A boundary condition must be provided in case the foot of the characteristic is found outside the domain.
+* `SplineRThetaBuilderAdvection` A 2D SplineBuilder to construct a spline on a polar domain. 
+* `SplineRThetaEvaluatorAdvection` A 2D SplineEvaluator to evaluate a spline on a polar domain. A boundary condition must be provided in case the foot of the characteristic is found outside the domain.
 
 
 
-**See also:** [**BslAdvectionRTheta**](classBslAdvectionRTheta.md) 
+**See also:** BslAdvectionPolar 
 
 
 
@@ -198,11 +204,11 @@ More details can be found in Edoardo Zoni's article ([https://doi.org/10.1016/j.
 
 
 
-### typedef ConstFieldRTheta 
+### typedef CConstFieldFeet 
 
-_The type of a constant field on the polar plane on a compatible memory space._ 
+_The type of a constant field of (r, theta) coordinates at every grid point, saved on a compatible memory space._ 
 ```C++
-using SplinePolarFootFinder< TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound >::ConstFieldRTheta =  ConstField<ElementType, IdxRangeRTheta, memory_space>;
+using SplinePolarFootFinder< TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection >::CConstFieldFeet =  ConstField<CoordRTheta, IdxRangeOperator, memory_space>;
 ```
 
 
@@ -212,11 +218,11 @@ using SplinePolarFootFinder< TimeStepper, LogicalToPhysicalMapping, LogicalToPse
 
 
 
-### typedef DVectorConstFieldRTheta 
+### typedef CFieldFeet 
 
-_The type of a constant vector (x,y) field on the polar plane on a compatible memory space._ 
+_The type of a field of (r, theta) coordinates at every grid point, saved on a compatible memory space._ 
 ```C++
-using SplinePolarFootFinder< TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound >::DVectorConstFieldRTheta =  VectorConstField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>, memory_space>;
+using SplinePolarFootFinder< TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection >::CFieldFeet =  Field<CoordRTheta, IdxRangeOperator, memory_space>;
 ```
 
 
@@ -226,11 +232,11 @@ using SplinePolarFootFinder< TimeStepper, LogicalToPhysicalMapping, LogicalToPse
 
 
 
-### typedef DVectorFieldRTheta 
+### typedef DVectorConstFieldAdvection 
 
-_The type of a vector (x,y) field on the polar plane on a compatible memory space._ 
+_The type of a constant vector field defined on the pseudo-Cartesian basis at every grid point, saved on a compatible memory space._ 
 ```C++
-using SplinePolarFootFinder< TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound >::DVectorFieldRTheta =  VectorField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>, memory_space>;
+using SplinePolarFootFinder< TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection >::DVectorConstFieldAdvection =  DVectorConstField<IdxRangeOperator, PseudoCartesianBasis, memory_space>;
 ```
 
 
@@ -240,11 +246,11 @@ using SplinePolarFootFinder< TimeStepper, LogicalToPhysicalMapping, LogicalToPse
 
 
 
-### typedef FieldRTheta 
+### typedef DVectorFieldAdvection 
 
-_The type of a field on the polar plane on a compatible memory space._ 
+_The type of a vector field defined on the pseudo-Cartesian basis at every grid point, saved on a compatible memory space._ 
 ```C++
-using SplinePolarFootFinder< TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound >::FieldRTheta =  Field<ElementType, IdxRangeRTheta, memory_space>;
+using SplinePolarFootFinder< TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection >::DVectorFieldAdvection =  DVectorField<IdxRangeOperator, PseudoCartesianBasis, memory_space>;
 ```
 
 
@@ -254,11 +260,25 @@ using SplinePolarFootFinder< TimeStepper, LogicalToPhysicalMapping, LogicalToPse
 
 
 
-### typedef VectorSplineCoeffsMem2D 
+### typedef VectorSplineCoeffsMem 
 
-_The type of 2 splines representing the x and y components of a vector on the polar plane on a compatible memory space._ 
+_The type of 2 batched splines representing the x and y components of a vector on the polar plane on a compatible memory space._ 
 ```C++
-using SplinePolarFootFinder< TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound >::VectorSplineCoeffsMem2D =  VectorFieldMem< double, IdxRange<BSplinesR, BSplinesTheta>, VectorIndexSet<Dim1, Dim2>, memory_space>;
+using SplinePolarFootFinder< TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection >::VectorSplineCoeffsMem =  DVectorFieldMem<IdxRangeSplineBatched, PseudoCartesianBasis, memory_space>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef memory\_space 
+
+_The type of the memory space where the field is saved (CPU vs GPU)._ 
+```C++
+using IPolarFootFinder< GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace >::memory_space =  MemorySpace;
 ```
 
 
@@ -278,8 +298,8 @@ inline SplinePolarFootFinder::SplinePolarFootFinder (
     TimeStepper const & time_stepper,
     LogicalToPhysicalMapping const & logical_to_physical_mapping,
     LogicalToPseudoPhysicalMapping const & logical_to_pseudo_physical_mapping,
-    SplineRThetaBuilder const & builder_advection_field,
-    SplineRThetaEvaluatorConstBound const & evaluator_advection_field,
+    SplineRThetaBuilderAdvection const & builder_advection_field,
+    SplineRThetaEvaluatorAdvection const & evaluator_advection_field,
     double epsilon=1e-12
 ) 
 ```
@@ -346,8 +366,8 @@ For polar geometry, to ensure continuity at the centre point, we have to be sure
 _Advect the feet over_  _._
 ```C++
 inline void SplinePolarFootFinder::operator() (
-    FieldRTheta < CoordRTheta > feet,
-    DVectorConstFieldRTheta < X , Y > advection_field,
+    CFieldFeet feet,
+    DVectorConstField < IdxRangeOperator, VectorIndexSetAdvectionDims, memory_space > advection_field,
     double dt
 ) const
 ```

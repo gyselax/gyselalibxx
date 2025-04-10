@@ -32,7 +32,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**IPolarFootFinder**](classIPolarFootFinder.md) &lt;class GridRadial, class GridPoloidal, class AdvectionDim1, class AdvectionDim2, class MemorySpace&gt;<br>_Define a base class for all the time integration methods used to find the foot of a characteristic on a polar domain (a polar domain is a domain defined on the_  _plane)._ |
+| class | [**IPolarFootFinder**](classIPolarFootFinder.md) &lt;class GridRadial, class GridPoloidal, class VectorIndexSetAdvDims, class IdxRangeBatched, class MemorySpace&gt;<br>_Define a base class for all the time integration methods used to find the foot of a characteristic on a polar domain (a polar domain is a domain defined on the_  _plane)._ |
 
 
 
