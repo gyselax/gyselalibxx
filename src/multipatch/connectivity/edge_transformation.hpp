@@ -259,7 +259,8 @@ public:
                 !std::is_same_v<TargetGrid, CurrentGrid>,
                 "The types of the indices should be different");
 
-        using TargetPatch = std::conditional_t<std::is_same_v<TargetGrid, EdgeGrid1>, Patch1, Patch2>;
+        using TargetPatch
+                = std::conditional_t<std::is_same_v<TargetGrid, EdgeGrid1>, Patch1, Patch2>;
 
         // Index range of CurrentIdx.
         using IdxRangeCurrent = IdxRange<CurrentGrid>;
@@ -295,19 +296,19 @@ public:
 
         // Periodicity property.
         if constexpr (CurrentGrid::continuous_dimension_type::PERIODIC) {
-            std::size_t counter = 0; 
+            std::size_t counter = 0;
             while ((current_idx < current_idx_range.front()) && (counter < 10)) {
-                counter ++; 
-                current_idx += n_cells_current; 
+                counter++;
+                current_idx += n_cells_current;
             }
-            counter = 0; 
+            counter = 0;
             while ((current_idx >= current_idx_range.back()) && (counter < 10)) {
-                counter ++; 
-                current_idx -= n_cells_current; 
+                counter++;
+                current_idx -= n_cells_current;
             }
         } else {
-            assert(current_idx <= current_idx_range.back()); 
-            assert(current_idx >= current_idx_range.front()); 
+            assert(current_idx <= current_idx_range.back());
+            assert(current_idx >= current_idx_range.front());
         }
 
         if constexpr ( // Uniform case
@@ -372,7 +373,8 @@ private:
             IdxRange<TargetGrid> const& target_idx_range,
             Idx<CurrentGrid> const& current_idx) const
     {
-        using TargetPatch = std::conditional_t<std::is_same_v<TargetGrid, EdgeGrid1>, Patch1, Patch2>;
+        using TargetPatch
+                = std::conditional_t<std::is_same_v<TargetGrid, EdgeGrid1>, Patch1, Patch2>;
 
         // Coordinate on the discontinuous dimension of the current grid.
         using CurrentCoord = Coord<typename CurrentGrid::continuous_dimension_type>;
