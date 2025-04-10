@@ -4,9 +4,9 @@ Script for linting .md files. This is especially important for files containing 
 from itertools import chain
 from argparse import ArgumentParser
 from collections import namedtuple
+import glob
 import re
 import sys
-
 import numpy as np
 
 LineInfo = namedtuple('LineInfo', ('line', 'char'))
@@ -20,6 +20,11 @@ def index_to_line_info(idx, text_block):
     char = idx - max(text_block[:idx].rfind('\n'), 0)+1
     return LineInfo(line, char)
 
+def find_markdown_files(folder):
+    """
+    Find all.md files in a given folder and its subfolders.
+    """
+    return glob.glob('**/*.md', root_dir=folder, recursive=True)
 # '$'
 inline_math_tag = re.compile(r'(?<!\`)(?<!\$)\$(?!\`)(?!\$)')
 start_inline_math_tag = re.compile(r'(?<!\$)\$\`(?!\$)')
@@ -42,14 +47,25 @@ problematic_markdown_special_chars = re.compile(r'[\<\>]')
 if __name__ == '__main__':
     parser = ArgumentParser(description='Check that markdown file is compatible with GitLab restrictions.')
 
-    parser.add_argument('input_files', type=str, nargs='+', help='The file to check.')
+    parser.add_argument('input_files', type=str, nargs='*', default=[], help='The file(s) to check.')
     parser.add_argument('--fix', action='store_true', help='If this flag is used then the script will attempt to fix the file in place. Please check the output before committing')
+    parser.add_argument('--folder', type=str, help='Folder to search for markdown files.')
+
     args = parser.parse_args()
+
+    input_files = args.input_files[:]
+
+    if args.folder:
+        input_files.extend(find_markdown_files(args.folder))
+
+    if not input_files:
+        print("No markdown files found.")
+        sys.exit(1)
 
     success = True
     warnings = False
 
-    for file in args.input_files:
+    for file in input_files:
         print(f"Checking {file}")
         with open(file, 'r', encoding='utf-8') as f:
             file_contents = f.read()

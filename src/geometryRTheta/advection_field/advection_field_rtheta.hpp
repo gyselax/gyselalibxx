@@ -273,11 +273,15 @@ private:
                 CoordRTheta const coord_1_0(0, th1);
                 CoordRTheta const coord_2_0(0, th2);
 
-                double const dr_x_1 = m_mapping.jacobian_11(coord_1_0); // dr_x (0, th1)
-                double const dr_y_1 = m_mapping.jacobian_21(coord_1_0); // dr_y (0, th1)
+                double const dr_x_1 = m_mapping.template jacobian_component<X, R_cov>(
+                        coord_1_0); // dr_x (0, th1)
+                double const dr_y_1 = m_mapping.template jacobian_component<Y, R_cov>(
+                        coord_1_0); // dr_y (0, th1)
 
-                double const dr_x_2 = m_mapping.jacobian_11(coord_2_0); // dr_x (0, th2)
-                double const dr_y_2 = m_mapping.jacobian_21(coord_2_0); // dr_y (0, th2)
+                double const dr_x_2 = m_mapping.template jacobian_component<X, R_cov>(
+                        coord_2_0); // dr_x (0, th2)
+                double const dr_y_2 = m_mapping.template jacobian_component<Y, R_cov>(
+                        coord_2_0); // dr_y (0, th2)
 
                 double deriv_r_phi_1 = evaluator.deriv_dim_1(
                         coord_1_0,
@@ -347,12 +351,12 @@ public:
      * @param[out] advection_field_rtheta
      *      The advection field on the logical axis. It is expressed on the contravariant basis. 
      * @param[out] advection_field_xy_centre
-     *      The advection field on the physical axis at the O-point. 
+     *      The advection field at the centre point on the Cartesian basis.
      */
     void operator()(
             host_t<DFieldRTheta> electrostatic_potential,
             host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
-            CoordXY& advection_field_xy_centre) const
+            DVector<X, Y>& advection_field_xy_centre) const
     {
         IdxRangeRTheta const grid = get_idx_range(electrostatic_potential);
 
@@ -378,12 +382,12 @@ public:
      * @param[out] advection_field_rtheta
      *      The advection field on the logical axis. It is expressed on the contravariant basis. 
      * @param[out] advection_field_xy_centre
-     *      The advection field on the physical axis at the O-point.  
+     *      The advection field at the centre point on the Cartesian basis.
      */
     void operator()(
             host_t<Spline2D> electrostatic_potential_coef,
             host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
-            CoordXY& advection_field_xy_centre) const
+            DVector<X, Y>& advection_field_xy_centre) const
     {
         compute_advection_field_RTheta(
                 m_spline_evaluator,
@@ -402,12 +406,12 @@ public:
      * @param[out] advection_field_rtheta
      *      The advection field on the logical axis. It is expressed on the contravariant basis. 
      * @param[out] advection_field_xy_centre
-     *      The advection field on the physical axis at the O-point. 
+     *      The advection field at the centre point on the Cartesian basis.
      */
     void operator()(
             host_t<PolarSplineMemRTheta>& electrostatic_potential_coef,
             host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
-            CoordXY& advection_field_xy_centre) const
+            DVector<X, Y>& advection_field_xy_centre) const
     {
         compute_advection_field_RTheta(
                 m_polar_spline_evaluator,
@@ -429,15 +433,15 @@ private:
      * @param[out] advection_field_rtheta
      *      The advection field on the logical axis on an domain without O-point.
      *      It is expressed on the contravariant basis. 
-     * @param[out] advection_field_xy_centre
-     *      The advection field on the physical axis at the O-point. 
+     * @param [in] advection_field_xy_centre
+     *      The advection field at the centre point on the Cartesian basis.
      */
     template <class SplineType, class Evaluator>
     void compute_advection_field_RTheta(
             Evaluator evaluator,
             SplineType& electrostatic_potential_coef,
             host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
-            CoordXY& advection_field_xy_centre) const
+            DVector<X, Y>& advection_field_xy_centre) const
     {
         static_assert(
                 (std::is_same_v<
@@ -510,11 +514,15 @@ private:
         CoordRTheta const coord_1_0(0, th1);
         CoordRTheta const coord_2_0(0, th2);
 
-        double const dr_x_1 = m_mapping.jacobian_11(coord_1_0); // dr_x (0, th1)
-        double const dr_y_1 = m_mapping.jacobian_21(coord_1_0); // dr_y (0, th1)
+        double const dr_x_1
+                = m_mapping.template jacobian_component<X, R_cov>(coord_1_0); // dr_x (0, th1)
+        double const dr_y_1
+                = m_mapping.template jacobian_component<Y, R_cov>(coord_1_0); // dr_y (0, th1)
 
-        double const dr_x_2 = m_mapping.jacobian_11(coord_2_0); // dr_x (0, th2)
-        double const dr_y_2 = m_mapping.jacobian_21(coord_2_0); // dr_y (0, th2)
+        double const dr_x_2
+                = m_mapping.template jacobian_component<X, R_cov>(coord_2_0); // dr_x (0, th2)
+        double const dr_y_2
+                = m_mapping.template jacobian_component<Y, R_cov>(coord_2_0); // dr_y (0, th2)
 
         double const deriv_r_phi_1
                 = evaluator.deriv_dim_1(coord_1_0, get_const_field(electrostatic_potential_coef));
@@ -528,6 +536,6 @@ private:
         double const deriv_y_phi_0
                 = (-dr_x_2 * deriv_r_phi_1 + dr_x_1 * deriv_r_phi_2) / determinant;
 
-        advection_field_xy_centre = CoordXY(-deriv_y_phi_0, deriv_x_phi_0);
+        advection_field_xy_centre = DVector<X, Y>(-deriv_y_phi_0, deriv_x_phi_0);
     }
 };

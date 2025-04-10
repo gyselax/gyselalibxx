@@ -1,81 +1,26 @@
+
 # Gyselalib++
 
-Gyselalib++ is a collection of C++ components for writing gyrokinetic semi-lagrangian codes.
-If this is your first interaction with gyselalib++ please check out the documentation on [Getting Started with Gyselalib++](./docs/getting_started.md).
+![image](docs/images/logo_big.png)
 
-## Set-up
+[![License](https://img.shields.io/github/license/gyselax/gyselalibxx?color=blue&logo=open-source-initiative&logoColor=white)](https://github.com/gyselax/gyselalibxx/blob/master/LICENSE)
+[![Issues](https://img.shields.io/github/issues/gyselax/gyselalibxx)](https://github.com/gyselax/gyselalibxx/issues)
 
-In order to set up Gyselalib++ on a new machine, simply run:
+Gyselalib++ is a library that provides functionality for solving kinetic and gyrokinetic problems on exascale computing architectures.
 
-```sh
-git clone --recurse-submodules git@github.com:gyselax/gyselalibxx.git gyselalibxx
-cd gyselalibxx
-./bin/install-hooks
-```
+The theoretical approach and implementation details builds on the following paper:
 
-or
+- V. Grandgirard et al. (2016). A 5D gyrokinetic full-f global semi-lagrangian code for flux-driven ion turbulence simulations. [*Computer Physics Communications*](https://doi.org/10.1016/j.cpc.2016.05.007)
+[[PDF]](https://www.sciencedirect.com/science/article/pii/S0010465516301230/pdfft?casa\_token=0aLVJvOU6QQAAAAA:UneLQCHIYkJRk6F42an3hTNCuDZzMYZcppUKK\_nRRXWdMaQYgm6PlyqN08ZGFm8ZXhw2qDy1pQ&md5=fd256637e0ef6f45653879c233b579ff&pid=1-s2.0-S0010465516301230-main.pdf)
 
-```sh
-git clone --recurse-submodules https://github.com/gyselax/gyselalibxx.git gyselalibxx
-cd gyselalibxx
-./bin/install-hooks
-```
+A list of Gysela related publications can be found here: [Publications](
+https://gyselax.github.io/publication/)
 
-on a machine for which Gyselalib++ is already used an environment script may be available to set up the necessary modules etc.
+## First steps
 
-Please check the `toolchains/` folder to find the existing configurations. See the documentation about [toolchains](./toolchains/README.md) for more information on the provided files.
+- If you want to install Gyselalib++ follow: [installation](docs/first_steps/install.md).
+- [Getting Started with Gyselalib++](docs/first_steps/getting_started.md).
 
-For example in order to set up the environment on the Adastra supercomputer simply run:
+## Questions?
 
-```sh
-source toolchains/mi250.hipcc.adastra.spack/prepare.sh
-source toolchains/mi250.hipcc.adastra.spack/environment.sh
-```
-
-## Compilation
-
-To compile Gyselalib++, navigate to the folder where the library was cloned to and run:
-
-```sh
-mkdir build
-cd build
-cmake -DCMAKE_TOOLCHAIN_FILE=<TOOLCHAIN_FILE> ..
-make
-```
-
-The toolchains are found in the folder `toolchains/`. Each toolchain is designed for specific hardware with the exception of those in the folder `docker.gyselalibxx_env/`. These toolchains can be used with the docker environment on most hardware.
-
-For more details about toolchains, see the documentation about [toolchains](./toolchains/README.md).
-
-## Execution
-
-to run the tests:
-
-```sh
-ctest --output-on-failure
-```
-
-Then, just have a look at `tests/geometryXVx/landau/fft/growthrate_t0.0to45.0.png`:
-
-![tests/geometryXVx/landau/fft/growthrate\_t0.0to45.0.png](https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx/-/jobs/artifacts/main/raw/build/tests/geometryXVx/landau/fft/growthrate_t0.0to45.0.png?job=cmake_tests_Release "Landau damping rate")
-
-and `tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png`:
-
-![tests/geometryXVx/landau/fft/frequency\_t0.0to45.0.png](https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx/-/jobs/artifacts/main/raw/build/tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png?job=cmake_tests_Release "Landau damping frequency")
-
-## Dependencies
-
-To install dependencies through spack, first follow the the 3 first steps of
-<https://github.com/pdidev/spack>
-
-Then execute the following:
-
-```sh
-spack env create gyselalibxx spack.yaml
-spack env activate gyselalibxx
-spack concretise --reuse
-spack install
-```
-
-For example, you can find a Dockerfile installing these dependencies on ubuntu in
-`docker/gyselalibxx_env/Dockerfile`.
+Contact the [GYSELA-X Team](https://gyselax.github.io/)

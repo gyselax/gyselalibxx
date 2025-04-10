@@ -1,19 +1,23 @@
 [default]
 locale = 'en-gb'
 extend-ignore-re = ["capitalize()",
-                    "MPI_\\S*",
-                    "PDI_\\S*",
-                    "ddc::\\S*",
+                    "MPI_[^(\\s]*",
+                    "PDI_[^(\\s]*",
+                    "CMAKE_\\S*",
+                    "ddc::[^(\\s]*",
                     "gko_exec->\\S*",
                     "on_finalize:",
                     "colors.Normalize",
                     "spack concretize",
                     "'center left'",
                     "'center right'",
-                    "Gif-sur-Yvette"
+                    "unrecognized_links",
+                    "Gif-sur-Yvette",
+                    "GYSELALIBXX_HOME"
                     ]
 extend-ignore-identifiers-re = [
-    "Comput. Phys. Commun."
+    "Comput. Phys. Commun.",
+    "J. Sci. Comput."
 ]
 
 [default.extend-words]
@@ -35,3 +39,14 @@ extend-exclude = ["*.tex",
                   "*.svg",
                   "*.css"
                   ]
+
+[type.md]
+extend-glob = ["*.md"]
+extend-ignore-re = ["gyselalibxx", "Gyselalib\\+\\+"]
+
+[type.md.extend-words]
+Gyselalibxx = "Gyselalib++"
+
+[type.md.extend-identifiers]
+"Gyselalib" = "Gyselalib++"
+"gyselalib" = "Gyselalib++"

@@ -35,7 +35,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixCircMap)
     FieldMemRTheta_host<CoordRTheta> coords = get_example_coords(IdxStepR(Nr), IdxStepTheta(Nt));
     IdxRangeRTheta grid = get_idx_range(coords);
 
-    static_assert(has_2d_jacobian_v<CircularToCartesian<R, Theta, X, Y>, CoordRTheta>);
+    static_assert(has_jacobian_v<CircularToCartesian<R, Theta, X, Y>, CoordRTheta>);
     InverseJacobianMatrix inv_jacobian(mapping);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
@@ -56,8 +56,8 @@ TEST_P(InvJacobianMatrix, InverseMatrixCzarMap)
     FieldMemRTheta_host<CoordRTheta> coords = get_example_coords(IdxStepR(Nr), IdxStepTheta(Nt));
     IdxRangeRTheta grid = get_idx_range(coords);
 
-    static_assert(has_2d_jacobian_v<CzarnyToCartesian<R, Theta, X, Y>, CoordRTheta>);
-    static_assert(has_2d_inv_jacobian_v<CzarnyToCartesian<R, Theta, X, Y>, CoordRTheta>);
+    static_assert(has_jacobian_v<CzarnyToCartesian<R, Theta, X, Y>, CoordRTheta>);
+    static_assert(has_inv_jacobian_v<CzarnyToCartesian<R, Theta, X, Y>, CoordRTheta>);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
     ddc::for_each(grid, [&](IdxRTheta const irtheta) {
@@ -112,7 +112,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
                     evaluator);
     DiscreteToCartesian mapping = mapping_builder();
 
-    static_assert(has_2d_jacobian_v<decltype(mapping), CoordRTheta>);
+    static_assert(has_jacobian_v<decltype(mapping), CoordRTheta>);
     InverseJacobianMatrix inv_jacobian(mapping);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix

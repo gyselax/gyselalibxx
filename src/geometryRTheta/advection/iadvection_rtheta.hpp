@@ -40,17 +40,17 @@ public:
      *      The function to be advected.
      * @param[in] advection_field
      *      The advection field on the contravariant basis of the logical domain.
-     * @param[in] advection_field_xy_centre
-     *      The advection field along the physical index range axes, XY
-     *      at the centre point.
+     * @param [in] advection_field_xy_centre
+     *      A vector in the Cartesian basis, containing the value of the advection
+     *      field at the O-point.
      * @param[in] dt
      *      The time step.
      *
      * @return A Field of the advected function (allfdistribu).
      */
-    virtual host_t<DFieldRTheta> operator()(
-            host_t<DFieldRTheta> allfdistribu,
-            host_t<DConstVectorFieldRTheta<R, Theta>> advection_field,
-            CoordXY const& advection_field_xy_centre,
+    virtual DFieldRTheta operator()(
+            DFieldRTheta allfdistribu,
+            DConstVectorFieldRTheta<R, Theta> advection_field,
+            DVector<X, Y> const& advection_field_xy_centre,
             double const dt) const = 0;
 };
