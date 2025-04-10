@@ -189,26 +189,6 @@ public:
     }
 
 
-    /**
-     * @brief Transform a coordinate of an index on the edge of the current patch 
-     * to the analogous coordinate on the target patch. 
-     * 
-     * @param current_idx
-     *      A index on the edge of the current patch.
-     * @tparam CurrentIdx 
-     *      The current index type of the given coordinate index. 
-     * 
-     * @return The analogous coordinate on the target patch. 
-    */
-    template <class CurrentIdx>
-    Coord<std::conditional_t<std::is_same_v<CurrentIdx, IdxEdge1>, EdgeDim2, EdgeDim1>>
-    get_equivalent_coord_from_idx(CurrentIdx const& current_idx) const
-    {
-        using CurrentPatch
-                = std::conditional_t<std::is_same_v<CurrentIdx, IdxEdge1>, Patch1, Patch2>;
-        return transform_edge_coord<CurrentPatch>(ddc::coordinate(current_idx));
-    }
-
 
     /**
      * @brief Check if a given index has an equivalent index on the other 
