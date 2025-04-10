@@ -140,9 +140,9 @@ if __name__ == '__main__':
                 print(f"::error file={file},line={line_info.line}:: Inline maths expressions should be written in one line. ({file}: Line {expr.start_pos.line}-{end_pos.line}, position {expr.start_pos.char})", file=sys.stderr)
                 suggestion = suggestion.replace('\n','')
             try:
-                if content_lines[end_pos.line-1][end_pos.char-1] == ')':
+                if content_lines[end_pos.line-1][end_pos.char-1] == ')' and suggestion[-1] == ')':
                     success = False
-                    print(f"::error file={file},line={end_pos.line}:: Inline maths expressions should not be followed by a parentheses without a space. ({file}: Line {end_pos.line}, position {end_pos.char})", file=sys.stderr)
+                    print(f"::error file={file},line={end_pos.line}:: Inline maths expressions ending in a parentheses, should not be followed by a parentheses without a space. ({file}: Line {end_pos.line}, position {end_pos.char})", file=sys.stderr)
                     suggestion = suggestion.replace('$','$ ')
             except IndexError:
                 pass
