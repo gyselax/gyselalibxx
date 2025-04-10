@@ -1,15 +1,17 @@
 name: Acceptance tests
 
 on:
-  pull_request:
-    types:
-      - opened
-      - reopened
-      - synchronize
-      - ready_for_review
-  merge_group:
-    types:
-      - checks_requested
+  push:
+    branches: [ebourne_coverage]
+  #pull_request:
+  #  types:
+  #    - opened
+  #    - reopened
+  #    - synchronize
+  #    - ready_for_review
+  #merge_group:
+  #  types:
+  #    - checks_requested
 
 jobs:
   #pre_job:
