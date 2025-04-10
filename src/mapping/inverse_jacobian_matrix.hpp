@@ -17,6 +17,8 @@
 template <class Mapping, class PositionCoordinate = typename Mapping::CoordArg>
 class InverseJacobianMatrix
 {
+    static_assert(Mapping::CoordArg::size() == 2);
+
 private:
     using ValidArgIndices = ddc::to_type_seq_t<typename Mapping::CoordArg>;
     using ValidResultIndices = ddc::to_type_seq_t<typename Mapping::CoordResult>;
@@ -56,10 +58,10 @@ public:
      */
     KOKKOS_INLINE_FUNCTION InverseJacobianTensor operator()(PositionCoordinate const& coord) const
     {
-        if constexpr (has_2d_inv_jacobian_v<Mapping, PositionCoordinate>) {
+        if constexpr (has_inv_jacobian_v<Mapping, PositionCoordinate, false>) {
             return m_mapping.inv_jacobian_matrix(coord);
         } else {
-            static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
+            static_assert(has_jacobian_v<Mapping, PositionCoordinate>);
             DTensor<ValidResultIndices, vector_index_set_dual_t<ValidArgIndices>> jacobian
                     = m_mapping.jacobian_matrix(coord);
             assert(fabs(determinant(jacobian)) > 1e-15);
@@ -84,10 +86,10 @@ public:
         static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<DimArg0, DimArg1>>);
         static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<DimRes0_cov, DimRes1_cov>>);
 
-        if constexpr (has_2d_inv_jacobian_v<Mapping, PositionCoordinate>) {
+        if constexpr (has_inv_jacobian_v<Mapping, PositionCoordinate, false>) {
             return m_mapping.template inv_jacobian_component<IndexTag1, IndexTag2>(coord);
         } else {
-            static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
+            static_assert(has_jacobian_v<Mapping, PositionCoordinate>);
             double jacob = m_mapping.jacobian(coord);
             assert(fabs(jacob) > 1e-15);
             if constexpr (
