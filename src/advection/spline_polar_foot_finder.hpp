@@ -83,18 +83,18 @@ class SplinePolarFootFinder
             typename SplineRThetaBuilderAdvection::memory_space>;
 
 public:
+    using typename base_type::GridR;
+    using typename base_type::GridTheta;
     using typename base_type::IdxRangeOperator;
     using typename base_type::memory_space;
+    using typename base_type::R;
+    using typename base_type::Theta;
+    using typename base_type::VectorIndexSetAdvectionDims;
 
 private:
     using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
 
 private:
-    using typename base_type::GridR;
-    using typename base_type::GridTheta;
-    using typename base_type::R;
-    using typename base_type::Theta;
-    using typename base_type::VectorIndexSetAdvectionDims;
     using ExecSpace = typename SplineRThetaBuilderAdvection::exec_space;
     /**
      * @brief Tag the first dimension in the advection index range.
