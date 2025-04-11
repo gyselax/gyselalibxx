@@ -163,12 +163,16 @@ public:
     {
         const double r = ddc::get<R>(coord);
         const double zeta = ddc::get<Zeta>(coord);
-        DTensor<VectorIndexSet<X, Y, Z>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>> jacobian_matrix(0);
+        DTensor<VectorIndexSet<X, Y, Z>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>> jacobian_matrix;
         ddcHelper::get<X, R_cov>(jacobian_matrix) = Kokkos::cos(zeta);
+        ddcHelper::get<X, Z_cov>(jacobian_matrix) = 0;
         ddcHelper::get<X, Zeta_cov>(jacobian_matrix) = -r * Kokkos::sin(zeta);
         ddcHelper::get<Y, R_cov>(jacobian_matrix) = Kokkos::sin(zeta);
+        ddcHelper::get<Y, Z_cov>(jacobian_matrix) = 0;
         ddcHelper::get<Y, Zeta_cov>(jacobian_matrix) = r * Kokkos::cos(zeta);
+        ddcHelper::get<Z, R_cov>(jacobian_matrix) = 0;
         ddcHelper::get<Z, Z_cov>(jacobian_matrix) = 1;
+        ddcHelper::get<Z, Zeta_cov>(jacobian_matrix) = 0;
         return jacobian_matrix;
     }
 
