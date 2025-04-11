@@ -101,16 +101,19 @@ documentation:
   before_script: |
     git config --global --add safe.directory $CI_PROJECT_DIR
     git fetch origin ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME} --recurse-submodules=no
+    pip install -r docs/requirements.txt --prefix docs/pip_install
+    export PYTHONPATH=$(pwd)/docs/pip_install/local/lib/python3.10/dist-packages/
   script: |
-    rm -rf build || true
-    # Make docs
-    cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DGYSELALIBXX_BUILD_DOCUMENTATION=1 -B build-docs .
-    cmake --build build-docs || true
-    cat build-docs/docs/doxygen.log
+    rm -rf docs/mkdoc docs/site || true
+    python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc
+    cd docs
+    pip_install/local/bin/mkdocs build
+    cat doxygen.log
+    cd ..
     # Get files which have changed in this merge request
     git diff origin/${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}..HEAD --no-indent-heuristic --unified=0 --output=pull_new_files.txt --no-color --diff-filter=A
     python3 bin/ci_tools/check_readme_presence.py pull_new_files.txt
-    if [ -s build-docs/docs/doxygen.log ]; then exit 1; fi
+    if [ -s docs/doxygen.log ]; then exit 1; fi
 
 markdown_best_practices:
   rules:
