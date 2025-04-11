@@ -223,7 +223,7 @@ J
 
 The methods inheriting from IPolarFootFinder provide ways of calculating the feet of the characteristics on the polar plane.
 
-The characteristic feet are calculated using a time integration method. For details of available methods see [timestepper](../timestepper/README.md).
+The feet of the characteristics are calculated using a time integration method. For details of available methods see [timestepper](../timestepper/README.md).
 
 ### Advection domain
 
@@ -246,9 +246,9 @@ compute the mesh points in the physical domain using a mapping function $\mathca
 This adds some steps to the advection operator, we now have to compute
 
  1. the mesh points in the physical domain using $\mathcal{F}$;
- 2. the characteristic feet in the physical domain;
- 3. the characteristic feet in the logical domain (polar grid) using $\mathcal{F}^{-1}$;
- 4. then interpolate the advection function at the  characteristic feet in the logical domain.
+ 2. the feet of the characteristics in the physical domain;
+ 3. the feet of the characteristics in the logical domain (polar grid) using $\mathcal{F}^{-1}$;
+ 4. then interpolate the advection function at the feet of the characteristics in the logical domain.
 
 The third step can be difficult especially if the mapping function $\mathcal{F}$ is not analytically invertible.
 It is not impossible but the computations can be costly.
@@ -264,8 +264,8 @@ Then the four previous steps become
 
  1. calculate the mesh points in the pseudo-Cartesian domain using $\mathcal{G}$;
  2. calculate the advection field $A$ in the pseudo-Cartesian domain using the Jacobian matrix of $(\mathcal{F}\circ\mathcal{G}^{-1})^{-1}$;
- 3. calculate the characteristic feet in the pseudo-Cartesian domain;
- 4. calculate the characteristic feet in the logical domain (polar grid) using $\mathcal{G}^{-1}$;
+ 3. calculate the feet of the characteristics n the pseudo-Cartesian domain;
+ 4. calculate the feet of the characteristics in the logical domain (polar grid) using $\mathcal{G}^{-1}$;
 
 Here, $\mathcal{G}$ is analytically invertible (we can fix  $`\mathcal{G}^{-1}(x = x_0, y = y_0) = (r = 0, \theta = 0)`$)
 and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details are given in Edoardo Zoni's article [^1].
