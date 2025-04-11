@@ -306,7 +306,7 @@ public:
                 counter++;
                 current_idx -= n_cells_current;
             }
-        } 
+        }
         assert(current_idx <= current_idx_range.back());
         assert(current_idx >= current_idx_range.front());
 
