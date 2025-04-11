@@ -101,13 +101,13 @@ documentation:
   before_script: |
     git config --global --add safe.directory $CI_PROJECT_DIR
     git fetch origin ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME} --recurse-submodules=no
-    pip install -r docs/requirements.txt
-    PATH="$PATH:/ci/.local/bin"
+    pip install -r docs/requirements.txt --prefix docs/pip_install
+    export PYTHONPATH=$(pwd)/docs/pip_install/local/lib/python3.10/dist-packages/
   script: |
     rm -rf docs/mkdoc docs/site || true
     python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc
     cd docs
-    mkdocs build
+    pip_install/local/bin/mkdocs build
     cat doxygen.log
     cd ..
     # Get files which have changed in this merge request
