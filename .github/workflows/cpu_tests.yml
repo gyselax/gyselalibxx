@@ -55,7 +55,7 @@ jobs:
         run: |
           echo "${matrix}"
           echo "matrix={\"toolchain\": $matrix}" >> $GITHUB_OUTPUT
-      shell: bash
+        shell: bash
 
   cpu_tests:
     runs-on: ubuntu-latest
