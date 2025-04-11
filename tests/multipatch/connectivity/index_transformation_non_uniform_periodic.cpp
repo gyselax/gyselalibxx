@@ -123,7 +123,7 @@ TEST_F(IndexTransformationNonUniformPeriodicTest, InvertedOrientation)
     Patch1::Idx2 test_idx_theta1(6);
     Patch2::Idx2 test_idx_theta2(index_transformation(test_idx_theta1));
 
-    EXPECT_EQ((test_idx_theta2 - idx_range_theta2.front()).value(), 3);
+    EXPECT_EQ(test_idx_theta2, Patch2::Idx2(3));
 }
 
 
@@ -139,7 +139,7 @@ TEST_F(IndexTransformationNonUniformPeriodicTest, ReverseTransformation)
     Patch2::Idx2 test_idx_theta2(3);
     Patch1::Idx2 test_idx_theta1(index_transformation(test_idx_theta2));
 
-    EXPECT_EQ((test_idx_theta1 - idx_range_theta1.front()).value(), 6);
+    EXPECT_EQ(test_idx_theta1 , Patch1::Idx2(6));
 }
 
 
@@ -156,7 +156,7 @@ TEST_F(IndexTransformationNonUniformPeriodicTest, PeriodicitySameOrientation)
     Patch1::Idx2 test_idx_theta1(8);
     Patch2::Idx2 test_idx_theta2 = index_transformation(test_idx_theta1);
 
-    EXPECT_EQ((test_idx_theta2 - idx_range_theta2.front()).value(), 0);
+    EXPECT_EQ(test_idx_theta2, Patch2::Idx2(0));
 }
 
 
@@ -173,5 +173,5 @@ TEST_F(IndexTransformationNonUniformPeriodicTest, PeriodicityInvertedOrientation
     Patch1::Idx2 test_idx_theta1(0);
     Patch2::Idx2 test_idx_theta2 = index_transformation(test_idx_theta1);
 
-    EXPECT_EQ((test_idx_theta2 - idx_range_theta2.front()).value(), 0);
+    EXPECT_EQ(test_idx_theta2, Patch2::Idx2(0));
 }
