@@ -176,7 +176,7 @@ Y(s; s, x, y) = y.
 So to compute the advected function at the next time step,
 
 - we compute the feet of the characteristics $`X(t^n; t^{n+1}, x_i, y_j)`$ and $`Y(t^n; t^{n+1}, x_i, y_j)`$
- for each mesh point $`(x_i, y_j)`$ with a foot finder method (e.g. see [PolarFootFinder](#polarfootfinder);
+ for each mesh point $`(x_i, y_j)`$ with a foot finder method (e.g. see [PolarFootFinder](#polarfootfinder));
 - we interpolate the function $f(t = t^n)$ on the feet of the characteristics.
  The property ensures that the interpolation gives the function at the next time step $f(t = t^{n+1})$.
 
