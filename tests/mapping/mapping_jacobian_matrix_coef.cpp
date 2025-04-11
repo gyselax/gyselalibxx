@@ -106,6 +106,7 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCzarMap)
                 = mapping.template jacobian_component<Y, Theta_cov>(coords(irtheta));
 
         EXPECT_TRUE(Jacobian_matrix == Jacobian_matrix_coeff);
+        EXPECT_NEAR(determinant(Jacobian_matrix), mapping.jacobian(coords(irtheta)), 1e-14);
     });
 
     InverseJacobianMatrix inv_jacobian(mapping);

@@ -25,15 +25,15 @@ class CircularToCartesian;
  *
  * The Jacobian matrix coefficients are defined as follow
  *
- * @f$ J_{11}(x,y)  =\frac{2x}{\sqrt{x^2+y^2}}  @f$
+ * @f$ J_{11}(x,y)  =\frac{x}{\sqrt{x^2+y^2}}  @f$
  *
- * @f$ J_{12}(x,y)  =\frac{2y}{\sqrt{x^2+y^2}}  @f$
+ * @f$ J_{12}(x,y)  =\frac{y}{\sqrt{x^2+y^2}}  @f$
  *
- * @f$ J_{21}(x,y)  =\frac{-y}{(x^2+y^2)^2}  @f$
+ * @f$ J_{21}(x,y)  =\frac{-y}{x^2+y^2}  @f$
  *
- * @f$ J_{22}(x,y)  =\frac{x}{(x^2+y^2)^2}  @f$
+ * @f$ J_{22}(x,y)  =\frac{x}{x^2+y^2}  @f$
  *
- * and the matrix determinant: @f$ det(J) = r @f$.
+ * and the matrix determinant: @f$ det(J) = 1/(x^2+y^2) @f$.
  *
  */
 template <class X, class Y, class R, class Theta>
@@ -116,7 +116,9 @@ public:
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
         const double r = Kokkos::sqrt(x * x + y * y);
-        const double theta = Kokkos::atan2(y, x);
+        const double theta_pi_to_pi(Kokkos::atan2(y, x));
+        const double theta = theta_pi_to_pi * (theta_pi_to_pi >= 0)
+                             + (theta_pi_to_pi + 2 * M_PI) * (theta_pi_to_pi < 0);
         return Coord<R, Theta>(r, theta);
     }
 
@@ -132,7 +134,7 @@ public:
     {
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
-        return 2. * (x * x - y * y) / Kokkos::pow(x * x + y * y, 1.5);
+        return 1. / Kokkos::sqrt(x * x + y * y);
     }
 
     /**
@@ -153,10 +155,12 @@ public:
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
         DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X_cov, Y_cov>> jacobian_matrix;
-        ddcHelper::get<R, X_cov>(jacobian_matrix) = 2 * x / Kokkos::pow(x * x + y * y, 0.5);
-        ddcHelper::get<R, Y_cov>(jacobian_matrix) = 2 * y / Kokkos::pow(x * x + y * y, 0.5);
-        ddcHelper::get<Theta, X_cov>(jacobian_matrix) = -y / Kokkos::pow(x * x + y * y, 2.);
-        ddcHelper::get<Theta, Y_cov>(jacobian_matrix) = x / Kokkos::pow(x * x + y * y, 2.);
+        const double r2 = x * x + y * y;
+        const double r = Kokkos::sqrt(r2);
+        ddcHelper::get<R, X_cov>(jacobian_matrix) = x / r;
+        ddcHelper::get<R, Y_cov>(jacobian_matrix) = y / r;
+        ddcHelper::get<Theta, X_cov>(jacobian_matrix) = -y / r2;
+        ddcHelper::get<Theta, Y_cov>(jacobian_matrix) = x / r2;
         return jacobian_matrix;
     }
 
@@ -178,16 +182,16 @@ public:
         const double y = ddc::get<Y>(coord);
         if constexpr (std::is_same_v<IndexTag1, R> && std::is_same_v<IndexTag2, X_cov>) {
             // Component (1,1), i.e dr/dx
-            return 2 * x / Kokkos::pow(x * x + y * y, 0.5);
+            return x / Kokkos::pow(x * x + y * y, 0.5);
         } else if constexpr (std::is_same_v<IndexTag1, R> && std::is_same_v<IndexTag2, Y_cov>) {
             // Component (1,2), i.e dr/dy
-            return 2 * y / Kokkos::pow(x * x + y * y, 0.5);
+            return y / Kokkos::pow(x * x + y * y, 0.5);
         } else if constexpr (std::is_same_v<IndexTag1, Theta> && std::is_same_v<IndexTag2, X_cov>) {
             // Component (2,1), i.e dtheta/dy
-            return -y / Kokkos::pow(x * x + y * y, 2.);
+            return -y / (x * x + y * y);
         } else {
             // Component (2,2), i.e dtheta/dy
-            return x / Kokkos::pow(x * x + y * y, 2.);
+            return x / (x * x + y * y);
         }
     }
 

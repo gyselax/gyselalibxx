@@ -2,6 +2,7 @@ include(GoogleTest)
 
 add_executable(unit_tests_mapping
     ../main.cpp
+    mapping_analytical_inverse.cpp
     mapping_execution_space_access.cpp
     mapping_jacobian.cpp
     mapping_jacobian_matrix_coef.cpp
