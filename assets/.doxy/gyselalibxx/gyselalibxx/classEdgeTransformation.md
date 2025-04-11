@@ -58,7 +58,8 @@ _Transform a coordinate or an index from one edge to the one on the other edge._
 |  bool | [**is\_match\_available**](#function-is_match_available) (CurrentIdx const & current\_idx) const<br>_Check if a given index has an equivalent index on the other patch of an interface._  |
 |  Coord&lt; std::conditional\_t&lt; std::is\_same\_v&lt; CurrentDim, EdgeDim1 &gt;, EdgeDim2, EdgeDim1 &gt; &gt; | [**operator()**](#function-operator) (Coord&lt; CurrentDim &gt; const & current\_coord) const<br>_Transform a coordinate on the edge in the dimension of the current patch to the analogous coordinate on the target patch._  |
 |  auto | [**operator()**](#function-operator_1) (CurrentIdx const & current\_idx) const<br>_Transform an index on the edge in the dimension of the current patch to the analogous index on the target patch._  |
-|  bool | [**search\_for\_match**](#function-search_for_match) (Idx&lt; TargetGrid &gt; & target\_idx, Idx&lt; CurrentGrid &gt; const & current\_idx) const<br>_Check if a given index has an equivalent index and transform an index on the edge in the dimension of the current patch to the analogous index on the target patch._  |
+|  bool | [**search\_for\_match**](#function-search_for_match) (Idx&lt; TargetGrid &gt; & target\_idx, Idx&lt; CurrentGrid &gt; current\_idx) const<br>_Check if a given index has an equivalent index and transform an index on the edge in the dimension of the current patch to the analogous index on the target patch._  |
+|  Coord&lt; std::conditional\_t&lt; std::is\_same\_v&lt; CurrentPatch, Patch1 &gt;, EdgeDim2, EdgeDim1 &gt; &gt; | [**transform\_edge\_coord**](#function-transform_edge_coord) (Coord&lt; std::conditional\_t&lt; std::is\_same\_v&lt; CurrentPatch, Patch1 &gt;, EdgeDim1, EdgeDim2 &gt; &gt; const & current\_coord) const<br>_Transform a coordinate on the edge in the dimension of the current patch to the analogous coordinate on the target patch._  |
 |   | [**~EdgeTransformation**](#function-edgetransformation) () = default<br> |
 
 
@@ -233,6 +234,13 @@ The analogous coordinate on the target patch.
 
 
 
+**Warning:**
+
+This operator is ill-defined when the two patches have the same continuous dimension. 
+
+
+
+
 
         
 
@@ -295,7 +303,7 @@ _Check if a given index has an equivalent index and transform an index on the ed
 template<class CurrentGrid, class TargetGrid>
 inline bool EdgeTransformation::search_for_match (
     Idx< TargetGrid > & target_idx,
-    Idx< CurrentGrid > const & current_idx
+    Idx< CurrentGrid > current_idx
 ) const
 ```
 
@@ -339,6 +347,48 @@ target\_idx is always replaced by the suspected index. If there is not equivalen
 **Returns:**
 
 Boolean stating if there is an equivalent index. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function transform\_edge\_coord 
+
+_Transform a coordinate on the edge in the dimension of the current patch to the analogous coordinate on the target patch._ 
+```C++
+template<class CurrentPatch>
+inline Coord< std::conditional_t< std::is_same_v< CurrentPatch, Patch1 >, EdgeDim2, EdgeDim1 > > EdgeTransformation::transform_edge_coord (
+    Coord< std::conditional_t< std::is_same_v< CurrentPatch, Patch1 >, EdgeDim1, EdgeDim2 > > const & current_coord
+) const
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `current_coord` A coordinate on the edge of the current patch.
+
+
+
+**Template parameters:**
+
+
+* `CurrentPatch` The current patch of the given coordinate coord.
+
+
+
+**Returns:**
+
+The analogous coordinate on the target patch. 
 
 
 

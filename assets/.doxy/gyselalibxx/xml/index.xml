@@ -725,14 +725,17 @@
     <member refid="classEdgeTransformation_1a82235425b928260db776024489d79494" kind="typedef"><name>IdxRangeEdge2</name></member>
     <member refid="classEdgeTransformation_1aa764243d5caf10be79fffd22998e152c" kind="typedef"><name>IdxEdge1</name></member>
     <member refid="classEdgeTransformation_1a4fe395b69c8c73d1dfa6400f6f4b5904" kind="typedef"><name>IdxEdge2</name></member>
+    <member refid="classEdgeTransformation_1a294f417eaa686fc4859e317781f081d8" kind="typedef"><name>Patch1</name></member>
+    <member refid="classEdgeTransformation_1a1cd229bad029c4ce9e9817263ef5513f" kind="typedef"><name>Patch2</name></member>
     <member refid="classEdgeTransformation_1ae87ad0e754740beb05cd2aa1d39d672e" kind="variable"><name>m_idx_range_patch_1</name></member>
     <member refid="classEdgeTransformation_1a46083878784c4da1ba6e99df70409c32" kind="variable"><name>m_idx_range_patch_2</name></member>
     <member refid="classEdgeTransformation_1a11c84fec5577a58b0addfd13bd744117" kind="function"><name>EdgeTransformation</name></member>
     <member refid="classEdgeTransformation_1a91afccef9c7c3d5767a08ed75e05adef" kind="function"><name>~EdgeTransformation</name></member>
     <member refid="classEdgeTransformation_1a10c297fdec475ce3b1b6afbbcdedb5cb" kind="function"><name>operator()</name></member>
+    <member refid="classEdgeTransformation_1af74c1eaafc7480a57a0fcc52ae4507b6" kind="function"><name>transform_edge_coord</name></member>
     <member refid="classEdgeTransformation_1a953cea3a043308fbce6a55438daf7376" kind="function"><name>operator()</name></member>
     <member refid="classEdgeTransformation_1a608a25e1800da17a87d13fa7f8a5cfc7" kind="function"><name>is_match_available</name></member>
-    <member refid="classEdgeTransformation_1a0259680760413ed6fbbdfc9ffda44fc4" kind="function"><name>search_for_match</name></member>
+    <member refid="classEdgeTransformation_1adfe213ac8ac3f445446b084b44c3c6e5" kind="function"><name>search_for_match</name></member>
     <member refid="classEdgeTransformation_1a7e6652f22cea94a7db8afea03ee7fef7" kind="function"><name>get_mid</name></member>
     <member refid="classEdgeTransformation_1a74f683e93642ada4263db04cd877f36d" kind="function"><name>get_target_idx</name></member>
   </compound>

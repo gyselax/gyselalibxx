@@ -573,7 +573,11 @@
 </tr>
 <tr>
 <td style="text-align: right;">bool</td>
-<td style="text-align: left;"><a href="#function-search_for_match"><strong>search_for_match</strong></a> (Idx&lt; TargetGrid &gt; &amp; target_idx, Idx&lt; CurrentGrid &gt; const &amp; current_idx) const<br><em>Check if a given index has an equivalent index and transform an index on the edge in the dimension of the current patch to the analogous index on the target patch.</em></td>
+<td style="text-align: left;"><a href="#function-search_for_match"><strong>search_for_match</strong></a> (Idx&lt; TargetGrid &gt; &amp; target_idx, Idx&lt; CurrentGrid &gt; current_idx) const<br><em>Check if a given index has an equivalent index and transform an index on the edge in the dimension of the current patch to the analogous index on the target patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">Coord&lt; std::conditional_t&lt; std::is_same_v&lt; CurrentPatch, Patch1 &gt;, EdgeDim2, EdgeDim1 &gt; &gt;</td>
+<td style="text-align: left;"><a href="#function-transform_edge_coord"><strong>transform_edge_coord</strong></a> (Coord&lt; std::conditional_t&lt; std::is_same_v&lt; CurrentPatch, Patch1 &gt;, EdgeDim1, EdgeDim2 &gt; &gt; const &amp; current_coord) const<br><em>Transform a coordinate on the edge in the dimension of the current patch to the analogous coordinate on the target patch.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
@@ -644,6 +648,8 @@ inline Coord&lt; std::conditional_t&lt; std::is_same_v&lt; CurrentDim, EdgeDim1 
 </ul>
 <p><strong>Returns:</strong></p>
 <p>The analogous coordinate on the target patch. </p>
+<p><strong>Warning:</strong></p>
+<p>This operator is ill-defined when the two patches have the same continuous dimension. </p>
 <hr>
 
 <h3 id="function-operator_1">function operator()</h3>
@@ -672,7 +678,7 @@ inline auto EdgeTransformation::operator() (
 <pre><code class="language-C++">template&lt;class CurrentGrid, class TargetGrid&gt;
 inline bool EdgeTransformation::search_for_match (
     Idx&lt; TargetGrid &gt; &amp; target_idx,
-    Idx&lt; CurrentGrid &gt; const &amp; current_idx
+    Idx&lt; CurrentGrid &gt; current_idx
 ) const
 </code></pre>
 <p>If the grids are uniform, we can simplify the algorithm by using modulo. Otherwise, we need to check all the indices of the target grid. We suppose the coordinate transformation bijective, so we can use a dichotomy method.</p>
@@ -694,6 +700,25 @@ inline bool EdgeTransformation::search_for_match (
 </ul>
 <p><strong>Returns:</strong></p>
 <p>Boolean stating if there is an equivalent index. </p>
+<hr>
+
+<h3 id="function-transform_edge_coord">function transform_edge_coord</h3>
+<p><em>Transform a coordinate on the edge in the dimension of the current patch to the analogous coordinate on the target patch.</em> </p>
+<pre><code class="language-C++">template&lt;class CurrentPatch&gt;
+inline Coord&lt; std::conditional_t&lt; std::is_same_v&lt; CurrentPatch, Patch1 &gt;, EdgeDim2, EdgeDim1 &gt; &gt; EdgeTransformation::transform_edge_coord (
+    Coord&lt; std::conditional_t&lt; std::is_same_v&lt; CurrentPatch, Patch1 &gt;, EdgeDim1, EdgeDim2 &gt; &gt; const &amp; current_coord
+) const
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>current_coord</code> A coordinate on the edge of the current patch.</li>
+</ul>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>CurrentPatch</code> The current patch of the given coordinate coord.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The analogous coordinate on the target patch. </p>
 <hr>
 
 <h3 id="function-edgetransformation_1">function ~EdgeTransformation</h3>

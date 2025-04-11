@@ -21,7 +21,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="43" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classEdgeTransformation_1a6a7396b3e9d1192d06304f26c008e9e2" prot="private" static="no">
         <type>typename Interface::Edge2::parallel_grid</type>
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="44" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="44" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classEdgeTransformation_1a2e0b7b2e83fbdd34e8e99584216fce79" prot="private" static="no">
         <type>typename EdgeGrid1::continuous_dimension_type</type>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="46" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="45" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classEdgeTransformation_1a5b7d95b590baebb0f32f05d4b0771aa9" prot="private" static="no">
         <type>typename EdgeGrid2::continuous_dimension_type</type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="47" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="47" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classEdgeTransformation_1a8860a81bb83b653171a6eb7391435229" prot="private" static="no">
         <type>IdxRange&lt; EdgeGrid1 &gt;</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="49" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="49" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="48" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="48" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classEdgeTransformation_1a82235425b928260db776024489d79494" prot="private" static="no">
         <type>IdxRange&lt; EdgeGrid2 &gt;</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="50" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="50" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="49" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classEdgeTransformation_1aa764243d5caf10be79fffd22998e152c" prot="private" static="no">
         <type>Idx&lt; EdgeGrid1 &gt;</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="52" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="52" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classEdgeTransformation_1a4fe395b69c8c73d1dfa6400f6f4b5904" prot="private" static="no">
         <type>Idx&lt; EdgeGrid2 &gt;</type>
@@ -119,7 +119,35 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="53" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="52" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classEdgeTransformation_1a294f417eaa686fc4859e317781f081d8" prot="private" static="no">
+        <type>typename Interface::Edge1::associated_patch</type>
+        <definition>using EdgeTransformation&lt; Interface &gt;::Patch1 =  typename Interface::Edge1::associated_patch</definition>
+        <argsstring></argsstring>
+        <name>Patch1</name>
+        <qualifiedname>EdgeTransformation::Patch1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classEdgeTransformation_1a1cd229bad029c4ce9e9817263ef5513f" prot="private" static="no">
+        <type>typename Interface::Edge2::associated_patch</type>
+        <definition>using EdgeTransformation&lt; Interface &gt;::Patch2 =  typename Interface::Edge2::associated_patch</definition>
+        <argsstring></argsstring>
+        <name>Patch2</name>
+        <qualifiedname>EdgeTransformation::Patch2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="55" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="55" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -135,7 +163,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="55" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="55" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="57" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="57" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classEdgeTransformation_1a46083878784c4da1ba6e99df70409c32" prot="private" static="no" mutable="no">
         <type>IdxRangeEdge2 const  &amp;</type>
@@ -149,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="56" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="56" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="58" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="58" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -192,7 +220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="65" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="65" bodyend="71"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="67" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="67" bodyend="73"/>
       </memberdef>
       <memberdef kind="function" id="classEdgeTransformation_1a91afccef9c7c3d5767a08ed75e05adef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -206,7 +234,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="73" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="75" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classEdgeTransformation_1a10c297fdec475ce3b1b6afbbcdedb5cb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -247,11 +275,58 @@
 </parameterlist>
 <simplesect kind="return"><para>The analogous coordinate on the target patch. </para>
 </simplesect>
+<simplesect kind="warning"><para>This operator is ill-defined when the two patches have the same continuous dimension. </para>
+</simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="89" column="11" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="89" bodyend="122"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="93" column="11" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="93" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classEdgeTransformation_1af74c1eaafc7480a57a0fcc52ae4507b6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class CurrentPatch</type>
+          </param>
+        </templateparamlist>
+        <type>Coord&lt; std::conditional_t&lt; std::is_same_v&lt; CurrentPatch, Patch1 &gt;, EdgeDim2, EdgeDim1 &gt; &gt;</type>
+        <definition>Coord&lt; std::conditional_t&lt; std::is_same_v&lt; CurrentPatch, Patch1 &gt;, EdgeDim2, EdgeDim1 &gt; &gt; EdgeTransformation&lt; Interface &gt;::transform_edge_coord</definition>
+        <argsstring>(Coord&lt; std::conditional_t&lt; std::is_same_v&lt; CurrentPatch, Patch1 &gt;, EdgeDim1, EdgeDim2 &gt; &gt; const &amp;current_coord) const</argsstring>
+        <name>transform_edge_coord</name>
+        <qualifiedname>EdgeTransformation::transform_edge_coord</qualifiedname>
+        <param>
+          <type>Coord&lt; std::conditional_t&lt; std::is_same_v&lt; CurrentPatch, Patch1 &gt;, EdgeDim1, EdgeDim2 &gt; &gt; const &amp;</type>
+          <declname>current_coord</declname>
+        </param>
+        <briefdescription>
+<para>Transform a coordinate on the edge in the dimension of the current patch to the analogous coordinate on the target patch. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>current_coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A coordinate on the edge of the current patch.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CurrentPatch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current patch of the given coordinate coord.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The analogous coordinate on the target patch. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="120" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="120" bodyend="157"/>
       </memberdef>
       <memberdef kind="function" id="classEdgeTransformation_1a953cea3a043308fbce6a55438daf7376" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -298,7 +373,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="145" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="145" bodyend="153"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="180" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="180" bodyend="188"/>
       </memberdef>
       <memberdef kind="function" id="classEdgeTransformation_1a608a25e1800da17a87d13fa7f8a5cfc7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -346,9 +421,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="176" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="176" bodyend="182"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="211" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="211" bodyend="217"/>
       </memberdef>
-      <memberdef kind="function" id="classEdgeTransformation_1a0259680760413ed6fbbdfc9ffda44fc4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classEdgeTransformation_1adfe213ac8ac3f445446b084b44c3c6e5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class CurrentGrid</type>
@@ -359,7 +434,7 @@
         </templateparamlist>
         <type>bool</type>
         <definition>bool EdgeTransformation&lt; Interface &gt;::search_for_match</definition>
-        <argsstring>(Idx&lt; TargetGrid &gt; &amp;target_idx, Idx&lt; CurrentGrid &gt; const &amp;current_idx) const</argsstring>
+        <argsstring>(Idx&lt; TargetGrid &gt; &amp;target_idx, Idx&lt; CurrentGrid &gt; current_idx) const</argsstring>
         <name>search_for_match</name>
         <qualifiedname>EdgeTransformation::search_for_match</qualifiedname>
         <param>
@@ -367,7 +442,7 @@
           <declname>target_idx</declname>
         </param>
         <param>
-          <type>Idx&lt; CurrentGrid &gt; const &amp;</type>
+          <type>Idx&lt; CurrentGrid &gt;</type>
           <declname>current_idx</declname>
         </param>
         <briefdescription>
@@ -426,7 +501,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="214" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="214" bodyend="286"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="249" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="249" bodyend="359"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -456,7 +531,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="293" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="293" bodyend="296"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="366" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="366" bodyend="369"/>
       </memberdef>
       <memberdef kind="function" id="classEdgeTransformation_1a74f683e93642ada4263db04cd877f36d" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -487,7 +562,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="300" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="300" bodyend="341"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="374" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="374" bodyend="434"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -512,7 +587,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="34" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="35" bodyend="342"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="34" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="35" bodyend="435"/>
     <listofallmembers>
       <member refid="classEdgeTransformation_1a2e0b7b2e83fbdd34e8e99584216fce79" prot="private" virt="non-virtual"><scope>EdgeTransformation</scope><name>EdgeDim1</name></member>
       <member refid="classEdgeTransformation_1a5b7d95b590baebb0f32f05d4b0771aa9" prot="private" virt="non-virtual"><scope>EdgeTransformation</scope><name>EdgeDim2</name></member>
@@ -530,7 +605,10 @@
       <member refid="classEdgeTransformation_1a46083878784c4da1ba6e99df70409c32" prot="private" virt="non-virtual"><scope>EdgeTransformation</scope><name>m_idx_range_patch_2</name></member>
       <member refid="classEdgeTransformation_1a10c297fdec475ce3b1b6afbbcdedb5cb" prot="public" virt="non-virtual"><scope>EdgeTransformation</scope><name>operator()</name></member>
       <member refid="classEdgeTransformation_1a953cea3a043308fbce6a55438daf7376" prot="public" virt="non-virtual"><scope>EdgeTransformation</scope><name>operator()</name></member>
-      <member refid="classEdgeTransformation_1a0259680760413ed6fbbdfc9ffda44fc4" prot="public" virt="non-virtual"><scope>EdgeTransformation</scope><name>search_for_match</name></member>
+      <member refid="classEdgeTransformation_1a294f417eaa686fc4859e317781f081d8" prot="private" virt="non-virtual"><scope>EdgeTransformation</scope><name>Patch1</name></member>
+      <member refid="classEdgeTransformation_1a1cd229bad029c4ce9e9817263ef5513f" prot="private" virt="non-virtual"><scope>EdgeTransformation</scope><name>Patch2</name></member>
+      <member refid="classEdgeTransformation_1adfe213ac8ac3f445446b084b44c3c6e5" prot="public" virt="non-virtual"><scope>EdgeTransformation</scope><name>search_for_match</name></member>
+      <member refid="classEdgeTransformation_1af74c1eaafc7480a57a0fcc52ae4507b6" prot="public" virt="non-virtual"><scope>EdgeTransformation</scope><name>transform_edge_coord</name></member>
       <member refid="classEdgeTransformation_1a91afccef9c7c3d5767a08ed75e05adef" prot="public" virt="non-virtual"><scope>EdgeTransformation</scope><name>~EdgeTransformation</name></member>
     </listofallmembers>
   </compounddef>

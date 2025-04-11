@@ -412,6 +412,7 @@
 
 * **temperature\_bot** ([**BumpontailEquilibrium**](classBumpontailEquilibrium.md))
 * **to\_index** ([**CollisionsIntra**](classCollisionsIntra.md))
+* **transform\_edge\_coord** ([**EdgeTransformation**](classEdgeTransformation.md))
 * **transpose\_to** ([**MPITransposeAllToAll**](classMPITransposeAllToAll.md))
 * **temperature\_eq** ([**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md))
 * **tensor\_bspline\_idx\_range** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
