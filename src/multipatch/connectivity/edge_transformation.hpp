@@ -341,6 +341,8 @@ public:
                         target_idx = target_idx_range.front();
                     }
                 }
+                assert(target_idx <= target_idx_range.back());
+                assert(target_idx >= target_idx_range.front());
             }
         } else { // Non uniform case
             // Dichotomy method comparing the coordinates of indexes of the target edge.
@@ -411,6 +413,8 @@ private:
                 target_idx_max = target_idx_range.front();
             }
         }
+        assert(target_idx_max <= target_idx_range.back());
+        assert(target_idx_max >= target_idx_range.front());
 
         CurrentCoord target_coord_min
                 = transform_edge_coord<TargetPatch>(ddc::coordinate(target_idx_min));
