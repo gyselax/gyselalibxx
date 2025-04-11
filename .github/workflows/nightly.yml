@@ -27,6 +27,7 @@ jobs:
           cd vendor/ddc
           git fetch
           git checkout main
+          git log -1
         shell: bash
       - name: Build code
         uses: ./.github/actions/build_code
