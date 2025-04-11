@@ -21,7 +21,7 @@ runs:
     - id: merge_group_check
       if: github.event_name == 'merge_group'
       run: |
-        git diff --name-only origin/main > changed_files.txt
+        git diff --name-only origin/devel > changed_files.txt
       shell: bash
     - id: changes_check
       run: |
