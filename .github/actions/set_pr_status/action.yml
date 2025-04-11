@@ -17,7 +17,7 @@ runs:
     - uses: actions/checkout@v4
     - if: github.repository == 'gyselax/gyselalibxx' && inputs.status == 'success'
       run: |
-        STATES=$(gh pr checks ${{ inputs.pr_number }} --required --json state)
+        STATES=$(gh pr checks ${{ inputs.pr_number }} --required --json state || true)
         N_PASSES=$(echo $STATES | grep -o "\"state\":\"SUCCESS\"" | wc -l)
         if (( ${N_PASSES} >= 10 ))
         then
