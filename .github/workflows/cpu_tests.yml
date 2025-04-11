@@ -98,13 +98,13 @@ jobs:
         if: matrix.toolchain == 'tests_coverage_toolchain'
         run: |
           pip install gcovr
-          gcovr --filter src --json coverage.json --merge-mode-functions=merge-use-line-0 build
+          gcovr --filter src --lcov coverage.lcov --merge-mode-functions=merge-use-line-0 build
       - name: Archive code coverage results
         if: matrix.toolchain == 'tests_coverage_toolchain'
         uses: actions/upload-artifact@v4
         with:
           name: code-coverage-report
-          path: coverage.json
+          path: coverage.lcov
 
   upload_coverage:
     name: Coverage upload
@@ -121,7 +121,7 @@ jobs:
       - name: Upload coverage reports to Codecov with GitHub Action
         uses: codecov/codecov-action@v5
         with:
-          files: coverage.json
+          files: coverage.lcov
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
 
