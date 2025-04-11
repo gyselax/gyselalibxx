@@ -83,7 +83,7 @@ jobs:
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/build_code
         with:
-          toolchain: toolchains/docker.gyselalibxx_env/${{ inputs.toolchain }}.cmake
+          toolchain: toolchains/docker.gyselalibxx_env/${{ matrix.toolchain }}.cmake
       - name: Run tests
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/run_tests
