@@ -155,10 +155,10 @@
         </briefdescription>
         <detaileddescription>
 <para>The pseudo-Cartesian Jacobian matrix for a Czarny mapping is given by :<itemizedlist>
-<listitem><para><formula id="257">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = - \sqrt{1 + \varepsilon^2}, $</formula></para>
-</listitem><listitem><para><formula id="254">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0, $</formula></para>
-</listitem><listitem><para><formula id="255">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0, $</formula></para>
-</listitem><listitem><para><formula id="258">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = \frac{2 - \sqrt{1 + \varepsilon^2}}{e \xi}. $</formula></para>
+<listitem><para><formula id="258">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = - \sqrt{1 + \varepsilon^2}, $</formula></para>
+</listitem><listitem><para><formula id="255">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0, $</formula></para>
+</listitem><listitem><para><formula id="256">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0, $</formula></para>
+</listitem><listitem><para><formula id="259">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = \frac{2 - \sqrt{1 + \varepsilon^2}}{e \xi}. $</formula></para>
 </listitem></itemizedlist>
 </para>
 <para><simplesect kind="return"><para>The matrix evaluated at the central point. </para>
@@ -173,7 +173,7 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<para>A specialisation of <ref refid="classInvJacobianOPoint" kindref="compound">InvJacobianOPoint</ref> for a combined mapping <formula id="201">$ \mathcal{F} \circ \mathcal{G} $</formula> where <formula id="56">$ \mathcal{F} $</formula> is a Czarny mapping from logical to physical, and <formula id="200">$ \mathcal{G} $</formula> is an inverse circular mapping from physical to logical. The combined mapping <formula id="201">$ \mathcal{F} \circ \mathcal{G} $</formula> therefore maps from a physical domain <formula id="249">$ (X_{pc}, Y_{pc}) $</formula> to a physical domain <formula id="250">$ (X, Y) $</formula>. </para>
+<para>A specialisation of <ref refid="classInvJacobianOPoint" kindref="compound">InvJacobianOPoint</ref> for a combined mapping <formula id="202">$ \mathcal{F} \circ \mathcal{G} $</formula> where <formula id="56">$ \mathcal{F} $</formula> is a Czarny mapping from logical to physical, and <formula id="201">$ \mathcal{G} $</formula> is an inverse circular mapping from physical to logical. The combined mapping <formula id="202">$ \mathcal{F} \circ \mathcal{G} $</formula> therefore maps from a physical domain <formula id="250">$ (X_{pc}, Y_{pc}) $</formula> to a physical domain <formula id="251">$ (X, Y) $</formula>. </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inv_jacobian_o_point.hpp" line="106" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inv_jacobian_o_point.hpp" bodystart="109" bodyend="159"/>
     <listofallmembers>

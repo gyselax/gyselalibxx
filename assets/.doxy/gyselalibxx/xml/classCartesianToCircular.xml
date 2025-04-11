@@ -347,7 +347,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="114" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="114" bodyend="121"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="114" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="114" bodyend="123"/>
       </memberdef>
       <memberdef kind="function" id="classCartesianToCircular_1a275832f34d53e29ba6a1304819d040fe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION double</type>
@@ -378,7 +378,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="131" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="131" bodyend="136"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="133" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="133" bodyend="138"/>
       </memberdef>
       <memberdef kind="function" id="classCartesianToCircular_1a15d8b8ccc837c4e57c000ac4307713f5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, VectorIndexSet&lt; <ref refid="classCartesianToCircular_1ad8e1bbab5fe5d419953f4250237260e7" kindref="member">X_cov</ref>, <ref refid="classCartesianToCircular_1a2fac6fc2bff81a582bd4089fc6b0344f" kindref="member">Y_cov</ref> &gt; &gt;</type>
@@ -410,7 +410,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="149" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="149" bodyend="161"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="151" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="151" bodyend="165"/>
       </memberdef>
       <memberdef kind="function" id="classCartesianToCircular_1af69ebbdc58f56c521d3c25589fe16769" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -449,7 +449,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="172" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="172" bodyend="192"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="176" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="176" bodyend="196"/>
       </memberdef>
       <memberdef kind="function" id="classCartesianToCircular_1a12006646133b008b23ec0467dc76886a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classCircularToCartesian" kindref="compound">CircularToCartesian</ref>&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref>, <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
@@ -467,7 +467,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="199" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="199" bodyend="202"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="203" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="203" bodyend="206"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -479,13 +479,13 @@
 <para><formula id="180">$ \theta(x,y) = atan2(\frac{y}{x}) .$</formula></para>
 <para>It and its Jacobian matrix are invertible everywhere except for <formula id="12">$ r = 0 $</formula>.</para>
 <para>The Jacobian matrix coefficients are defined as follow</para>
-<para><formula id="181">$ J_{11}(x,y)  =\frac{2x}{\sqrt{x^2+y^2}}  $</formula></para>
-<para><formula id="182">$ J_{12}(x,y)  =\frac{2y}{\sqrt{x^2+y^2}}  $</formula></para>
-<para><formula id="183">$ J_{21}(x,y)  =\frac{-y}{(x^2+y^2)^2}  $</formula></para>
-<para><formula id="184">$ J_{22}(x,y)  =\frac{x}{(x^2+y^2)^2}  $</formula></para>
-<para>and the matrix determinant: <formula id="185">$ det(J) = r $</formula>. </para>
+<para><formula id="181">$ J_{11}(x,y)  =\frac{x}{\sqrt{x^2+y^2}}  $</formula></para>
+<para><formula id="182">$ J_{12}(x,y)  =\frac{y}{\sqrt{x^2+y^2}}  $</formula></para>
+<para><formula id="183">$ J_{21}(x,y)  =\frac{-y}{x^2+y^2}  $</formula></para>
+<para><formula id="184">$ J_{22}(x,y)  =\frac{x}{x^2+y^2}  $</formula></para>
+<para>and the matrix determinant: <formula id="185">$ det(J) = 1/(x^2+y^2) $</formula>. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="40" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="41" bodyend="203"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" line="40" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp" bodystart="41" bodyend="207"/>
     <listofallmembers>
       <member refid="classCartesianToCircular_1a3a8d1753956c80af0e2069197560b3a5" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>cartesian_tag_x</name></member>
       <member refid="classCartesianToCircular_1a177d7877c5bf73f643f771a91613ce15" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>cartesian_tag_y</name></member>

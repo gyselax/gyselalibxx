@@ -495,11 +495,11 @@
     </briefdescription>
     <detaileddescription>
 <para>According to the orientation of the interface, we compute the equivalent coordinate<itemizedlist>
-<listitem><para>if True, <formula id="291">$ \\ t \mapsto min_2 + \frac{t - min_1}{max_1 - min_1}(max_2 - min_2) $</formula></para>
-</listitem><listitem><para>if False, <formula id="292">$ \\ t \mapsto max_2 - \frac{t - min_1}{max_1 - min_1}(max_2 - min_2) $</formula></para>
+<listitem><para>if True, <formula id="292">$ \\ t \mapsto min_2 + \frac{t - min_1}{max_1 - min_1}(max_2 - min_2) $</formula></para>
+</listitem><listitem><para>if False, <formula id="293">$ \\ t \mapsto max_2 - \frac{t - min_1}{max_1 - min_1}(max_2 - min_2) $</formula></para>
 </listitem></itemizedlist>
 </para>
-<para>where <formula id="293">$ min_i $</formula> and <formula id="294">$ max_i $</formula> are the minimum and maximum coordinates of the edge <formula id="295">$ i $</formula>.</para>
+<para>where <formula id="294">$ min_i $</formula> and <formula id="295">$ max_i $</formula> are the minimum and maximum coordinates of the edge <formula id="296">$ i $</formula>.</para>
 <para>For the indices, we look for an equivalent index corresponding to a coordinate equivalent to the coordinate of the initial index.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>

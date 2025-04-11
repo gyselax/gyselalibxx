@@ -123,7 +123,7 @@
 <parametername direction="in">epsilon</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <formula id="11">$ \varepsilon $</formula> upperbound of the difference of two steps in the implicit method: <formula id="324">$ |y^{k+1} -  y^{k}| &lt; \varepsilon $</formula>. </para>
+<para>The <formula id="11">$ \varepsilon $</formula> upperbound of the difference of two steps in the implicit method: <formula id="325">$ |y^{k+1} -  y^{k}| &lt; \varepsilon $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -548,9 +548,9 @@
     </briefdescription>
     <detaileddescription>
 <para>A class which provides an implementation of a Crank-Nicolson method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. The values which evolve are defined on an index range.</para>
-<para>For the following ODE : <formula id="322">$\partial_t y(t) = f(t, y(t)) $</formula>,</para>
-<para>the Crank-Nicolson method is given by : <formula id="323">$ y^{k} =  y^{n} + \frac{dt}{2} \left(f(t^{n}, y^{n}) + f(t^{k}, y^{k}) \right)$</formula>.</para>
-<para>The method is an implicit method. If <formula id="324">$ |y^{k+1} -  y^{k}| &lt; \varepsilon $</formula>, then we set <formula id="325">$ y^{n+1} = y^{k+1} $</formula>.</para>
+<para>For the following ODE : <formula id="323">$\partial_t y(t) = f(t, y(t)) $</formula>,</para>
+<para>the Crank-Nicolson method is given by : <formula id="324">$ y^{k} =  y^{n} + \frac{dt}{2} \left(f(t^{n}, y^{n}) + f(t^{k}, y^{k}) \right)$</formula>.</para>
+<para>The method is an implicit method. If <formula id="325">$ |y^{k+1} -  y^{k}| &lt; \varepsilon $</formula>, then we set <formula id="326">$ y^{n+1} = y^{k+1} $</formula>.</para>
 <para>The method is order 2. </para>
     </detaileddescription>
     <inheritancegraph>

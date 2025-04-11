@@ -438,14 +438,14 @@
     </briefdescription>
     <detaileddescription>
 <para>A class which provides an implementation of a fourth-order Runge-Kutta method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. The values which evolve are defined on an index range.</para>
-<para>For the following ODE : <formula id="322">$\partial_t y(t) = f(t, y(t)) $</formula>,</para>
-<para>the Runge-Kutta 3 method is given by : <formula id="332">$ y^{n+1} =  y^{n} + \frac{dt}{6} \left(k_1 + 2k_2 + 2k_3 + k_4 \right) $</formula>,</para>
+<para>For the following ODE : <formula id="323">$\partial_t y(t) = f(t, y(t)) $</formula>,</para>
+<para>the Runge-Kutta 3 method is given by : <formula id="333">$ y^{n+1} =  y^{n} + \frac{dt}{6} \left(k_1 + 2k_2 + 2k_3 + k_4 \right) $</formula>,</para>
 <para>with</para>
 <para><itemizedlist>
-<listitem><para><formula id="328">$ k_1 = f(t^{n}, y^{n}) $</formula>,</para>
-</listitem><listitem><para><formula id="329">$ k_2 = f(t^{n+1/2}, y^{n} + \frac{dt}{2} k_1 ) $</formula>,</para>
-</listitem><listitem><para><formula id="333">$ k_3 = f(t^{n+1/2}, y^{n} + \frac{dt}{2} k_2 ) $</formula>,</para>
-</listitem><listitem><para><formula id="334">$ k_3 = f(t^{n}, y^{n} + dt k_3 ) $</formula>. </para>
+<listitem><para><formula id="329">$ k_1 = f(t^{n}, y^{n}) $</formula>,</para>
+</listitem><listitem><para><formula id="330">$ k_2 = f(t^{n+1/2}, y^{n} + \frac{dt}{2} k_1 ) $</formula>,</para>
+</listitem><listitem><para><formula id="334">$ k_3 = f(t^{n+1/2}, y^{n} + \frac{dt}{2} k_2 ) $</formula>,</para>
+</listitem><listitem><para><formula id="335">$ k_3 = f(t^{n}, y^{n} + dt k_3 ) $</formula>. </para>
 </listitem></itemizedlist>
 </para>
     </detaileddescription>

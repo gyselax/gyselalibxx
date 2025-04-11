@@ -285,7 +285,7 @@
 <parametername direction="in">epsilon</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The parameter <formula id="11">$ \varepsilon $</formula> which determines when a point is close enough to the central O-point for linearisation to be required when calculating the inverse of the Jacobian. The Jacobian is linearised on <formula id="207">$ r \in [0, \varepsilon] $</formula>. </para>
+<para>The parameter <formula id="11">$ \varepsilon $</formula> which determines when a point is close enough to the central O-point for linearisation to be required when calculating the inverse of the Jacobian. The Jacobian is linearised on <formula id="208">$ r \in [0, \varepsilon] $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -391,8 +391,8 @@
         </briefdescription>
         <detaileddescription>
 <para>For some computations, we need the complete Jacobian matrix or just the coefficients. This is calculated by combining the Jacobian matrices of the 2 curvilinear mappings.</para>
-<para><formula id="208">$ J_{(x_{in}, y_{in})-&gt;(x_{out},y_{out})} = J_{F\circ G} $</formula> <formula id="209">$ = J_{(x_{mid}, y_{mid})-&gt;(x_{out},y_{out})}J_{(x_{in}, y_{in})-&gt;(x_{mid}, y_{mid})} = J_F J_G $</formula> <formula id="210">$ = J_{(x_{mid}, y_{mid})-&gt;(x_{out},y_{out})} [J_{(x_{mid}, y_{mid})-&gt;(x_{in}, y_{in})}]^{-1} = J_F [J_{G^{-1}}]^{-1} $</formula></para>
-<para>The Jacobians that are used for the calculation must be mappings from <formula id="211">$ (x_{mid}, y_{mid}) $</formula> so they can be calculated on the correct coordinate system.</para>
+<para><formula id="209">$ J_{(x_{in}, y_{in})-&gt;(x_{out},y_{out})} = J_{F\circ G} $</formula> <formula id="210">$ = J_{(x_{mid}, y_{mid})-&gt;(x_{out},y_{out})}J_{(x_{in}, y_{in})-&gt;(x_{mid}, y_{mid})} = J_F J_G $</formula> <formula id="211">$ = J_{(x_{mid}, y_{mid})-&gt;(x_{out},y_{out})} [J_{(x_{mid}, y_{mid})-&gt;(x_{in}, y_{in})}]^{-1} = J_F [J_{G^{-1}}]^{-1} $</formula></para>
+<para>The Jacobians that are used for the calculation must be mappings from <formula id="212">$ (x_{mid}, y_{mid}) $</formula> so they can be calculated on the correct coordinate system.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">coord</parametername>
@@ -496,7 +496,7 @@
 <para>Compute the full inverse Jacobian matrix. </para>
         </briefdescription>
         <detaileddescription>
-<para>If one of the mappings is singular then this function linearises the inverse Jacobian between the O-point and <formula id="212">$ r = \varepsilon $</formula>. The inverse Jacobian at the O-point is calculated using the class <ref refid="classInvJacobianOPoint" kindref="compound">InvJacobianOPoint</ref> in this case. The inverse Jacobian at a point where the matrices are not singular is calculated using non_singular_inverse_jacobian_matrix</para>
+<para>If one of the mappings is singular then this function linearises the inverse Jacobian between the O-point and <formula id="213">$ r = \varepsilon $</formula>. The inverse Jacobian at the O-point is calculated using the class <ref refid="classInvJacobianOPoint" kindref="compound">InvJacobianOPoint</ref> in this case. The inverse Jacobian at a point where the matrices are not singular is calculated using non_singular_inverse_jacobian_matrix</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">coord</parametername>
@@ -639,8 +639,8 @@
         <detaileddescription>
 <para>Compute the inverse Jacobian matrix at a point where the matrices are not singular.</para>
 <para>This is calculated by combining the Jacobian matrices of the 2 curvilinear mappings.</para>
-<para><formula id="213">$ [J_{(x_{in}, y_{in})-&gt;(x_{out},y_{out})}]^{-1} = [J_{F\circ G}]^{-1} $</formula> <formula id="214">$ = [J_{(x_{mid}, y_{mid})-&gt;(x_{out},y_{out})}J_{(x_{in}, y_{in})-&gt;(x_{mid}, y_{mid})}]^{-1} = [J_F J_G]^{-1} $</formula> <formula id="215">$ = J_{(x_{in}, y_{in})-&gt;(x_{mid}, y_{mid})}^{-1}J_{(x_{mid}, y_{mid})-&gt;(x_{out},y_{out})}^{-1} = J_G^{-1} J_F^{-1} $</formula> <formula id="216">$ = J_{(x_{mid}, y_{mid})-&gt;(x_{in}, y_{in})} J_{(x_{mid}, y_{mid})-&gt;(x_{out},y_{out})}^{-1} = J_{G^{-1}} J_F^{-1} $</formula></para>
-<para>The Jacobians that are used for the calculation must be mappings from <formula id="211">$ (x_{mid}, y_{mid}) $</formula> so they can be calculated on the correct coordinate system.</para>
+<para><formula id="214">$ [J_{(x_{in}, y_{in})-&gt;(x_{out},y_{out})}]^{-1} = [J_{F\circ G}]^{-1} $</formula> <formula id="215">$ = [J_{(x_{mid}, y_{mid})-&gt;(x_{out},y_{out})}J_{(x_{in}, y_{in})-&gt;(x_{mid}, y_{mid})}]^{-1} = [J_F J_G]^{-1} $</formula> <formula id="216">$ = J_{(x_{in}, y_{in})-&gt;(x_{mid}, y_{mid})}^{-1}J_{(x_{mid}, y_{mid})-&gt;(x_{out},y_{out})}^{-1} = J_G^{-1} J_F^{-1} $</formula> <formula id="217">$ = J_{(x_{mid}, y_{mid})-&gt;(x_{in}, y_{in})} J_{(x_{mid}, y_{mid})-&gt;(x_{out},y_{out})}^{-1} = J_{G^{-1}} J_F^{-1} $</formula></para>
+<para>The Jacobians that are used for the calculation must be mappings from <formula id="212">$ (x_{mid}, y_{mid}) $</formula> so they can be calculated on the correct coordinate system.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">coord</parametername>
@@ -658,11 +658,11 @@
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>A class which describes a mapping which is constructed by combining two mappings. Let us denote Mapping1 as <formula id="56">$ \mathcal{F} $</formula> and Mapping2 as <formula id="200">$ \mathcal{G} $</formula> then this mapping represents: <formula id="201">$ \mathcal{F} \circ \mathcal{G} $</formula>. </para>
+<para>A class which describes a mapping which is constructed by combining two mappings. Let us denote Mapping1 as <formula id="56">$ \mathcal{F} $</formula> and Mapping2 as <formula id="201">$ \mathcal{G} $</formula> then this mapping represents: <formula id="202">$ \mathcal{F} \circ \mathcal{G} $</formula>. </para>
     </briefdescription>
     <detaileddescription>
-<para>There are therefore 3 domains in this calculation <formula id="202">$ \Omega_{start} $</formula>, <formula id="203">$ \Omega_{mid} $</formula> and <formula id="204">$ \Omega_{end} $</formula> with <formula id="205">$ \mathcal{F}(\Omega_{mid})\rightarrow\Omega_{end} $</formula> and <formula id="206">$ \mathcal{G}(\Omega_{start})\rightarrow\Omega_{mid} $</formula></para>
-<para>The functions in this mapping are defined on the coordinate system associated with the domain <formula id="203">$ \Omega_{mid} $</formula>. </para>
+<para>There are therefore 3 domains in this calculation <formula id="203">$ \Omega_{start} $</formula>, <formula id="204">$ \Omega_{mid} $</formula> and <formula id="205">$ \Omega_{end} $</formula> with <formula id="206">$ \mathcal{F}(\Omega_{mid})\rightarrow\Omega_{end} $</formula> and <formula id="207">$ \mathcal{G}(\Omega_{start})\rightarrow\Omega_{mid} $</formula></para>
+<para>The functions in this mapping are defined on the coordinate system associated with the domain <formula id="204">$ \Omega_{mid} $</formula>. </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" line="24" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp" bodystart="25" bodyend="283"/>
     <listofallmembers>

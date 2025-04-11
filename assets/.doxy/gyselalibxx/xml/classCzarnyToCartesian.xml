@@ -646,19 +646,19 @@
     </briefdescription>
     <detaileddescription>
 <para>The mapping <formula id="193">$ (r,\theta)\mapsto (x,y) $</formula> is defined by</para>
-<para><formula id="217">$ x(r,\theta) = \frac{1}{\epsilon} \left( 1 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right),$</formula></para>
-<para><formula id="218">$ y(r,\theta) = \frac{e\xi r \sin(\theta)}{2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} },$</formula></para>
+<para><formula id="218">$ x(r,\theta) = \frac{1}{\epsilon} \left( 1 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right),$</formula></para>
+<para><formula id="219">$ y(r,\theta) = \frac{e\xi r \sin(\theta)}{2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} },$</formula></para>
 <para>with <formula id="190">$ \xi = 1/\sqrt{1 - \epsilon^2 /4} $</formula> and <formula id="191">$ e $</formula> and <formula id="192">$ \epsilon $</formula> given as parameters. It and its Jacobian matrix are invertible everywhere except for <formula id="12">$ r = 0 $</formula>.</para>
 <para>Its Jacobian coefficients are defined as follow</para>
-<para><formula id="219">$ J_{11}(r,\theta) = - \cos(\theta)\frac{1}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } $</formula></para>
-<para><formula id="220">$ J_{12}(r,\theta)  =  r\sin(\theta)\frac{1}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } $</formula></para>
-<para><formula id="221">$ J_{21}(r,\theta)  =  \cos(\theta)\frac{e\epsilon \xi r\sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left(
+<para><formula id="220">$ J_{11}(r,\theta) = - \cos(\theta)\frac{1}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } $</formula></para>
+<para><formula id="221">$ J_{12}(r,\theta)  =  r\sin(\theta)\frac{1}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } $</formula></para>
+<para><formula id="222">$ J_{21}(r,\theta)  =  \cos(\theta)\frac{e\epsilon \xi r\sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left(
 2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}  \right)^2 }
 +  \sin(\theta)\frac{e\xi }{ 2- \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }$</formula></para>
-<para><formula id="222">$ J_{22}(r,\theta)  =   r \sin(\theta)\frac{- e\epsilon \xi r \sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left(
+<para><formula id="223">$ J_{22}(r,\theta)  =   r \sin(\theta)\frac{- e\epsilon \xi r \sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left(
 2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right)^2 }
 +  r\cos(\theta)\frac{e\xi }{ 2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }$</formula>.</para>
-<para>and  <formula id="223">$ \det(J(r, \theta)) = \frac{- r}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}}
+<para>and  <formula id="224">$ \det(J(r, \theta)) = \frac{- r}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}}
  \frac{e\xi}{2 -  \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}}. $</formula> </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" line="50" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp" bodystart="51" bodyend="392"/>

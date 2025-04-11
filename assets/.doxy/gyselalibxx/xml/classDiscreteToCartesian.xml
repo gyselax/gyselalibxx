@@ -365,7 +365,7 @@
 <para>Instantiate a <ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian</ref> from the coefficients of 2D splines approximating the mapping. </para>
         </briefdescription>
         <detaileddescription>
-<para>A discrete mapping is a mapping whose values are known only at the mesh points of the grid. To interpolate the mapping, we use B-splines. The <ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian</ref> mapping is initialised from the coefficients in front of the basis splines which arise when we approximate the functions <formula id="226">$ x(r,\theta) $</formula>, and <formula id="227">$ y(r,\theta) $</formula> (with <formula id="157">$ x $</formula> and <formula id="167">$ y $</formula> the physical dimensions in the logical domain) with Splines (using SplineBuilder2D). Then to interpolate the mapping, we will evaluate the decomposed functions on B-splines (see DiscreteToCartesian::operator()).</para>
+<para>A discrete mapping is a mapping whose values are known only at the mesh points of the grid. To interpolate the mapping, we use B-splines. The <ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian</ref> mapping is initialised from the coefficients in front of the basis splines which arise when we approximate the functions <formula id="227">$ x(r,\theta) $</formula>, and <formula id="228">$ y(r,\theta) $</formula> (with <formula id="157">$ x $</formula> and <formula id="167">$ y $</formula> the physical dimensions in the logical domain) with Splines (using SplineBuilder2D). Then to interpolate the mapping, we will evaluate the decomposed functions on B-splines (see DiscreteToCartesian::operator()).</para>
 <para>Here, the evaluator is given as input.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
@@ -500,8 +500,8 @@
 <para>Compute the (i,j) coefficient of the Jacobian matrix. </para>
         </briefdescription>
         <detaileddescription>
-<para>For a mapping given by <formula id="228">$ \mathcal{F} : {q_i}\mapsto {x_i} $</formula>, with <formula id="229">${q_i}$</formula> the curvilinear coordinates and <formula id="230">${x_i}$</formula> the Cartesian coordinates, the (i,j) coefficient of the Jacobian matrix is given by <formula id="231">$ J^i_j\frac{\partial x_i}{\partial q_j} $</formula>.</para>
-<para>As the mapping is decomposed on B-splines, it means it computes the derivatives of B-splines <formula id="232">$ \frac{\partial x_i}{\partial q_j} (r,\theta)= \sum_k c_{x_i,k} \frac{\partial B_k}{\partial q_j}(r,\theta)$</formula> (the derivatives are implemented in SplineEvaluator2D).</para>
+<para>For a mapping given by <formula id="229">$ \mathcal{F} : {q_i}\mapsto {x_i} $</formula>, with <formula id="230">${q_i}$</formula> the curvilinear coordinates and <formula id="231">${x_i}$</formula> the Cartesian coordinates, the (i,j) coefficient of the Jacobian matrix is given by <formula id="232">$ J^i_j\frac{\partial x_i}{\partial q_j} $</formula>.</para>
+<para>As the mapping is decomposed on B-splines, it means it computes the derivatives of B-splines <formula id="233">$ \frac{\partial x_i}{\partial q_j} (r,\theta)= \sum_k c_{x_i,k} \frac{\partial B_k}{\partial q_j}(r,\theta)$</formula> (the derivatives are implemented in SplineEvaluator2D).</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">coord</parametername>
@@ -563,7 +563,7 @@
           <declname>coord</declname>
         </param>
         <briefdescription>
-<para>Get the first order expansion of the Jacobian matrix with the theta component divided by r. The expansion is carried out around <formula id="233">$ r=0 $</formula>. The returned matrix <formula id="234">$ J$</formula> is defined as: <formula id="235">$ J_{00} = \frac{\partial x}{\partial r}(r, \theta) $</formula> <formula id="236">$ J_{01} = \frac{1}{r} \frac{\partial x}{\partial \theta}(r, \theta) + O(r^2) = \frac{\partial^2 x}{\partial r \partial \theta}(0, \theta) $</formula> <formula id="237">$ J_{10} = \frac{\partial y}{\partial r}(r, \theta) $</formula> <formula id="238">$ J_{11} = \frac{1}{r} \frac{\partial y}{\partial \theta}(r, \theta) + O(r^2) = \frac{\partial^2 y}{\partial r \partial \theta}(0, \theta) $</formula>. </para>
+<para>Get the first order expansion of the Jacobian matrix with the theta component divided by r. The expansion is carried out around <formula id="234">$ r=0 $</formula>. The returned matrix <formula id="235">$ J$</formula> is defined as: <formula id="236">$ J_{00} = \frac{\partial x}{\partial r}(r, \theta) $</formula> <formula id="237">$ J_{01} = \frac{1}{r} \frac{\partial x}{\partial \theta}(r, \theta) + O(r^2) = \frac{\partial^2 x}{\partial r \partial \theta}(0, \theta) $</formula> <formula id="238">$ J_{10} = \frac{\partial y}{\partial r}(r, \theta) $</formula> <formula id="239">$ J_{11} = \frac{1}{r} \frac{\partial y}{\partial \theta}(r, \theta) + O(r^2) = \frac{\partial^2 y}{\partial r \partial \theta}(0, \theta) $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -615,11 +615,11 @@
 <para>Get a control point of the mapping on B-splines. </para>
         </briefdescription>
         <detaileddescription>
-<para>The mapping <formula id="55">$ (r,\theta) \mapsto (x,y) $</formula> decomposed on B-splines can be identified by its control points <formula id="239">$ \{(c_{x,k}, c_{y,k})\}_{k}  $</formula> where <formula id="240">$ c_{x,k} $</formula> and <formula id="241">$ c_{y,k} $</formula> are the B-splines coefficients:</para>
-<para><formula id="242">$ x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k{r,\theta} $</formula>,</para>
-<para><formula id="243">$ y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k{r,\theta} $</formula>,</para>
-<para>where <formula id="244">$ N_r\times N_{\theta} $</formula> is the number of B-splines.</para>
-<para>The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points <formula id="245">$ \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}} $</formula> are equal to the pole <formula id="246">$ (c_{x,k}, c_{y,k}) = (x_0,y_0) $</formula>, <formula id="247">$ \forall k = 0, ..., N_{\theta}-1 $</formula> where <formula id="248">$ x(0,\theta), y(0,\theta) = (x_0,y_0) $</formula> <formula id="14">$ \forall \theta $</formula>.</para>
+<para>The mapping <formula id="55">$ (r,\theta) \mapsto (x,y) $</formula> decomposed on B-splines can be identified by its control points <formula id="240">$ \{(c_{x,k}, c_{y,k})\}_{k}  $</formula> where <formula id="241">$ c_{x,k} $</formula> and <formula id="242">$ c_{y,k} $</formula> are the B-splines coefficients:</para>
+<para><formula id="243">$ x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k{r,\theta} $</formula>,</para>
+<para><formula id="244">$ y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k{r,\theta} $</formula>,</para>
+<para>where <formula id="245">$ N_r\times N_{\theta} $</formula> is the number of B-splines.</para>
+<para>The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points <formula id="246">$ \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}} $</formula> are equal to the pole <formula id="247">$ (c_{x,k}, c_{y,k}) = (x_0,y_0) $</formula>, <formula id="248">$ \forall k = 0, ..., N_{\theta}-1 $</formula> where <formula id="249">$ x(0,\theta), y(0,\theta) = (x_0,y_0) $</formula> <formula id="14">$ \forall \theta $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">el</parametername>
@@ -647,8 +647,8 @@
     </briefdescription>
     <detaileddescription>
 <para>The mapping describe here is only defined on a grid. The <ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian</ref> class decomposes the mapping on B-splines to evaluate it on the physical domain.</para>
-<para><formula id="224">$ x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta),$</formula></para>
-<para><formula id="225">$ y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta).$</formula></para>
+<para><formula id="225">$ x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta),$</formula></para>
+<para><formula id="226">$ y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta).$</formula></para>
 <para>This mapping could be costly to inverse. </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp" bodystart="34" bodyend="309"/>

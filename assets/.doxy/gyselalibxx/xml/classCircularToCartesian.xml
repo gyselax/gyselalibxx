@@ -555,7 +555,7 @@
 <para><formula id="197">$ J_{12}(r,\theta)  = - r \sin(\theta)$</formula></para>
 <para><formula id="198">$ J_{21}(r,\theta)  = \sin(\theta)$</formula></para>
 <para><formula id="199">$ J_{22}(r,\theta)  = r \cos(\theta)$</formula></para>
-<para>and the matrix determinant: <formula id="185">$ det(J) = r $</formula>. </para>
+<para>and the matrix determinant: <formula id="200">$ det(J) = r $</formula>. </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="43" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="44" bodyend="272"/>
     <listofallmembers>

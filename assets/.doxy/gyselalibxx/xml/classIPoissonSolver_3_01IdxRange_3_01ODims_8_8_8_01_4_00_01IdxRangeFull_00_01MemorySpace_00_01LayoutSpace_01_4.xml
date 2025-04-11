@@ -237,7 +237,7 @@
           <declname>rho</declname>
         </param>
         <briefdescription>
-<para>An operator which calculates the solution <formula id="57">$\phi$</formula> to Poisson&apos;s equation: <formula id="297">$ -\Delta \phi = \rho $</formula>. </para>
+<para>An operator which calculates the solution <formula id="57">$\phi$</formula> to Poisson&apos;s equation: <formula id="298">$ -\Delta \phi = \rho $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -284,7 +284,7 @@
           <declname>rho</declname>
         </param>
         <briefdescription>
-<para>An operator which calculates the solution <formula id="57">$\phi$</formula> to Poisson&apos;s equation and its derivative: <formula id="298">$ - \Delta \phi = \rho $</formula> <formula id="104">$ E = - \nabla \phi $</formula>. </para>
+<para>An operator which calculates the solution <formula id="57">$\phi$</formula> to Poisson&apos;s equation and its derivative: <formula id="299">$ - \Delta \phi = \rho $</formula> <formula id="104">$ E = - \nabla \phi $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -324,7 +324,7 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<para>An abstract class from which a Poisson solver can inherit. Classes inheriting from this must implement a way to solve the following equation: <formula id="297">$ -\Delta \phi = \rho $</formula></para>
+<para>An abstract class from which a Poisson solver can inherit. Classes inheriting from this must implement a way to solve the following equation: <formula id="298">$ -\Delta \phi = \rho $</formula></para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername>IdxRangeLaplacian</parametername>

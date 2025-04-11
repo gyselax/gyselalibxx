@@ -11,7 +11,7 @@
         <name>value</name>
         <qualifiedname>PolarSplineFEMPoissonLikeSolver::EvalDeriv1DType::value</qualifiedname>
         <briefdescription>
-<para>The value of the function <formula id="306">$f(x)$</formula>. </para>
+<para>The value of the function <formula id="307">$f(x)$</formula>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -26,7 +26,7 @@
         <name>derivative</name>
         <qualifiedname>PolarSplineFEMPoissonLikeSolver::EvalDeriv1DType::derivative</qualifiedname>
         <briefdescription>
-<para>The derivative of the function <formula id="307">$\partial_x f(x)$</formula>. </para>
+<para>The derivative of the function <formula id="308">$\partial_x f(x)$</formula>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>

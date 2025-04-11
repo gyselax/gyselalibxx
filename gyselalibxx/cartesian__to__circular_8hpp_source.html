@@ -591,7 +591,9 @@ public:
         const double x = ddc::get&lt;X&gt;(coord);
         const double y = ddc::get&lt;Y&gt;(coord);
         const double r = Kokkos::sqrt(x * x + y * y);
-        const double theta = Kokkos::atan2(y, x);
+        const double theta_pi_to_pi(Kokkos::atan2(y, x));
+        const double theta = theta_pi_to_pi * (theta_pi_to_pi &gt;= 0)
+                             + (theta_pi_to_pi + 2 * M_PI) * (theta_pi_to_pi &lt; 0);
         return Coord&lt;R, Theta&gt;(r, theta);
     }
 
@@ -599,7 +601,7 @@ public:
     {
         const double x = ddc::get&lt;X&gt;(coord);
         const double y = ddc::get&lt;Y&gt;(coord);
-        return 2. * (x * x - y * y) / Kokkos::pow(x * x + y * y, 1.5);
+        return 1. / Kokkos::sqrt(x * x + y * y);
     }
 
     KOKKOS_FUNCTION DTensor&lt;VectorIndexSet&lt;R, Theta&gt;, VectorIndexSet&lt;X_cov, Y_cov&gt;&gt; jacobian_matrix(
@@ -609,10 +611,12 @@ public:
         const double x = ddc::get&lt;X&gt;(coord);
         const double y = ddc::get&lt;Y&gt;(coord);
         DTensor&lt;VectorIndexSet&lt;R, Theta&gt;, VectorIndexSet&lt;X_cov, Y_cov&gt;&gt; jacobian_matrix;
-        ddcHelper::get&lt;R, X_cov&gt;(jacobian_matrix) = 2 * x / Kokkos::pow(x * x + y * y, 0.5);
-        ddcHelper::get&lt;R, Y_cov&gt;(jacobian_matrix) = 2 * y / Kokkos::pow(x * x + y * y, 0.5);
-        ddcHelper::get&lt;Theta, X_cov&gt;(jacobian_matrix) = -y / Kokkos::pow(x * x + y * y, 2.);
-        ddcHelper::get&lt;Theta, Y_cov&gt;(jacobian_matrix) = x / Kokkos::pow(x * x + y * y, 2.);
+        const double r2 = x * x + y * y;
+        const double r = Kokkos::sqrt(r2);
+        ddcHelper::get&lt;R, X_cov&gt;(jacobian_matrix) = x / r;
+        ddcHelper::get&lt;R, Y_cov&gt;(jacobian_matrix) = y / r;
+        ddcHelper::get&lt;Theta, X_cov&gt;(jacobian_matrix) = -y / r2;
+        ddcHelper::get&lt;Theta, Y_cov&gt;(jacobian_matrix) = x / r2;
         return jacobian_matrix;
     }
 
@@ -626,16 +630,16 @@ public:
         const double y = ddc::get&lt;Y&gt;(coord);
         if constexpr (std::is_same_v&lt;IndexTag1, R&gt; &amp;&amp; std::is_same_v&lt;IndexTag2, X_cov&gt;) {
             // Component (1,1), i.e dr/dx
-            return 2 * x / Kokkos::pow(x * x + y * y, 0.5);
+            return x / Kokkos::pow(x * x + y * y, 0.5);
         } else if constexpr (std::is_same_v&lt;IndexTag1, R&gt; &amp;&amp; std::is_same_v&lt;IndexTag2, Y_cov&gt;) {
             // Component (1,2), i.e dr/dy
-            return 2 * y / Kokkos::pow(x * x + y * y, 0.5);
+            return y / Kokkos::pow(x * x + y * y, 0.5);
         } else if constexpr (std::is_same_v&lt;IndexTag1, Theta&gt; &amp;&amp; std::is_same_v&lt;IndexTag2, X_cov&gt;) {
             // Component (2,1), i.e dtheta/dy
-            return -y / Kokkos::pow(x * x + y * y, 2.);
+            return -y / (x * x + y * y);
         } else {
             // Component (2,2), i.e dtheta/dy
-            return x / Kokkos::pow(x * x + y * y, 2.);
+            return x / (x * x + y * y);
         }
     }
 
