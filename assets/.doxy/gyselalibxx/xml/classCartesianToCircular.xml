@@ -477,7 +477,7 @@
 <para>The mapping <formula id="178">$ (x,y)\mapsto (r,\theta) $</formula> is defined as follow :</para>
 <para><formula id="179">$ r(x,y) = \sqrt x^2+y^2 ,$</formula></para>
 <para><formula id="180">$ \theta(x,y) = atan2(\frac{y}{x}) .$</formula></para>
-<para>It and its Jacobian matrix are invertible everywhere except for <formula id="12">$ r = 0 $</formula>.</para>
+<para>It and its Jacobian matrix are invertible everywhere except for <formula id="18">$ r = 0 $</formula>.</para>
 <para>The Jacobian matrix coefficients are defined as follow</para>
 <para><formula id="181">$ J_{11}(x,y)  =\frac{x}{\sqrt{x^2+y^2}}  $</formula></para>
 <para><formula id="182">$ J_{12}(x,y)  =\frac{y}{\sqrt{x^2+y^2}}  $</formula></para>

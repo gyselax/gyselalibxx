@@ -35,10 +35,16 @@ Inherits the following classes: [IPolarFootFinder](classIPolarFootFinder.md)
 
 | Type | Name |
 | ---: | :--- |
-| typedef ConstField&lt; CoordRTheta, IdxRangeOperator, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; | [**CConstFieldFeet**](#typedef-cconstfieldfeet)  <br>_The type of a constant field of (r, theta) coordinates at every grid point, saved on a compatible memory space._  |
-| typedef Field&lt; CoordRTheta, IdxRangeOperator, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; | [**CFieldFeet**](#typedef-cfieldfeet)  <br>_The type of a field of (r, theta) coordinates at every grid point, saved on a compatible memory space._  |
-| typedef [**DVectorConstField**](classVectorField.md)&lt; IdxRangeOperator, PseudoCartesianBasis, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; | [**DVectorConstFieldAdvection**](#typedef-dvectorconstfieldadvection)  <br>_The type of a constant vector field defined on the pseudo-Cartesian basis at every grid point, saved on a compatible memory space._  |
-| typedef [**DVectorField**](classVectorField.md)&lt; IdxRangeOperator, PseudoCartesianBasis, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; | [**DVectorFieldAdvection**](#typedef-dvectorfieldadvection)  <br>_The type of a vector field defined on the pseudo-Cartesian basis at every grid point, saved on a compatible memory space._  |
+| typedef ConstField&lt; CoordRTheta, [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; | [**CConstFieldFeet**](#typedef-cconstfieldfeet)  <br>_The type of a constant field of (r, theta) coordinates at every grid point, saved on a compatible memory space._  |
+| typedef Field&lt; CoordRTheta, [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; | [**CFieldFeet**](#typedef-cfieldfeet)  <br>_The type of a field of (r, theta) coordinates at every grid point, saved on a compatible memory space._  |
+| typedef [**DVectorConstField**](classVectorField.md)&lt; [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), PseudoCartesianBasis, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; | [**DVectorConstFieldAdvection**](#typedef-dvectorconstfieldadvection)  <br>_The type of a constant vector field defined on the pseudo-Cartesian basis at every grid point, saved on a compatible memory space._  |
+| typedef [**DVectorField**](classVectorField.md)&lt; [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), PseudoCartesianBasis, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; | [**DVectorFieldAdvection**](#typedef-dvectorfieldadvection)  <br>_The type of a vector field defined on the pseudo-Cartesian basis at every grid point, saved on a compatible memory space._  |
+| typedef GridRadial | [**GridR**](#typedef-gridr)  <br>_The continuous radial dimension._  |
+| typedef GridPoloidal | [**GridTheta**](#typedef-gridtheta)  <br>_The continuous poloidal dimension._  |
+| typedef IdxRangeBatched | [**IdxRangeOperator**](#typedef-idxrangeoperator)  <br>_The type of the index range over which the operator works._  |
+| typedef typename GridR::continuous\_dimension\_type | [**R**](#typedef-r)  <br>_The continuous radial dimension._  |
+| typedef typename GridTheta::continuous\_dimension\_type | [**Theta**](#typedef-theta)  <br>_The continuous poloidal dimension._  |
+| typedef VectorIndexSetAdvDims | [**VectorIndexSetAdvectionDims**](#typedef-vectorindexsetadvectiondims)  <br>_The continuous radial dimension._  |
 | typedef [**DVectorFieldMem**](classVectorFieldMem.md)&lt; IdxRangeSplineBatched, PseudoCartesianBasis, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; | [**VectorSplineCoeffsMem**](#typedef-vectorsplinecoeffsmem)  <br>_The type of 2 batched splines representing the x and y components of a vector on the polar plane on a compatible memory space._  |
 | typedef MemorySpace | [**memory\_space**](#typedef-memory_space)  <br>_The type of the memory space where the field is saved (CPU vs GPU)._  |
 
@@ -95,7 +101,7 @@ See [IPolarFootFinder](classIPolarFootFinder.md)
 | ---: | :--- |
 |   | [**SplinePolarFootFinder**](#function-splinepolarfootfinder) (TimeStepper const & time\_stepper, LogicalToPhysicalMapping const & logical\_to\_physical\_mapping, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical\_mapping, SplineRThetaBuilderAdvection const & builder\_advection\_field, SplineRThetaEvaluatorAdvection const & evaluator\_advection\_field, double epsilon=1e-12) <br>_Instantiate a time integration method for the advection operator._  |
 |  void | [**is\_unified**](#function-is_unified) (Field&lt; [**T**](structT.md), IdxRangeRTheta, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; const & values) const<br>_Check if the values at the centre point are the same._  |
-|  void | [**operator()**](#function-operator) ([**CFieldFeet**](classSplinePolarFootFinder.md#typedef-cfieldfeet) feet, [**DVectorConstField**](classVectorField.md)&lt; IdxRangeOperator, VectorIndexSetAdvectionDims, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; advection\_field, double dt) const<br>_Advect the feet over_  _._ |
+|  void | [**operator()**](#function-operator) ([**CFieldFeet**](classSplinePolarFootFinder.md#typedef-cfieldfeet) feet, [**DVectorConstField**](classVectorField.md)&lt; [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**VectorIndexSetAdvectionDims**](classSplinePolarFootFinder.md#typedef-vectorindexsetadvectiondims), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; advection\_field, double dt) const<br>_Advect the feet over_  _._ |
 |  void | [**unify\_value\_at\_centre\_pt**](#function-unify_value_at_centre_pt) (Field&lt; [**T**](structT.md), IdxRangeRTheta, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; values) const<br>_Replace the value at_  _point by the value at_ _for all_ _._ |
 
 
@@ -194,7 +200,7 @@ More details can be found in Edoardo Zoni's article ([https://doi.org/10.1016/j.
 
 
 
-**See also:** BslAdvectionPolar 
+**See also:** [**BslAdvectionPolar**](classBslAdvectionPolar.md) 
 
 
 
@@ -251,6 +257,90 @@ using SplinePolarFootFinder< TimeStepper, LogicalToPhysicalMapping, LogicalToPse
 _The type of a vector field defined on the pseudo-Cartesian basis at every grid point, saved on a compatible memory space._ 
 ```C++
 using SplinePolarFootFinder< TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection >::DVectorFieldAdvection =  DVectorField<IdxRangeOperator, PseudoCartesianBasis, memory_space>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef GridR 
+
+_The continuous radial dimension._ 
+```C++
+using IPolarFootFinder< GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace >::GridR =  GridRadial;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef GridTheta 
+
+_The continuous poloidal dimension._ 
+```C++
+using IPolarFootFinder< GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace >::GridTheta =  GridPoloidal;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef IdxRangeOperator 
+
+_The type of the index range over which the operator works._ 
+```C++
+using IPolarFootFinder< GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace >::IdxRangeOperator =  IdxRangeBatched;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef R 
+
+_The continuous radial dimension._ 
+```C++
+using IPolarFootFinder< GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace >::R =  typename GridR::continuous_dimension_type;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef Theta 
+
+_The continuous poloidal dimension._ 
+```C++
+using IPolarFootFinder< GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace >::Theta =  typename GridTheta::continuous_dimension_type;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef VectorIndexSetAdvectionDims 
+
+_The continuous radial dimension._ 
+```C++
+using IPolarFootFinder< GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace >::VectorIndexSetAdvectionDims =  VectorIndexSetAdvDims;
 ```
 
 
@@ -367,7 +457,7 @@ _Advect the feet over_  _._
 ```C++
 inline void SplinePolarFootFinder::operator() (
     CFieldFeet feet,
-    DVectorConstField < IdxRangeOperator, VectorIndexSetAdvectionDims, memory_space > advection_field,
+    DVectorConstField < IdxRangeOperator , VectorIndexSetAdvectionDims , memory_space > advection_field,
     double dt
 ) const
 ```

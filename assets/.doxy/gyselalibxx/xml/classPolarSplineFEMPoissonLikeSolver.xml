@@ -1992,7 +1992,7 @@
           <declname>idx_theta</declname>
         </param>
         <briefdescription>
-<para>Calculates the modulo idx_theta in relation to cells number along <formula id="17">$ \theta $</formula> direction . </para>
+<para>Calculates the modulo idx_theta in relation to cells number along <formula id="23">$ \theta $</formula> direction . </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -2000,11 +2000,11 @@
 <parametername direction="in">idx_theta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><formula id="17">$ \theta $</formula> index.</para>
+<para><formula id="23">$ \theta $</formula> index.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The corresponding indice modulo <formula id="17">$ \theta $</formula> direction cells number </para>
+<simplesect kind="return"><para>The corresponding indice modulo <formula id="23">$ \theta $</formula> direction cells number </para>
 </simplesect>
 </para>
         </detaileddescription>

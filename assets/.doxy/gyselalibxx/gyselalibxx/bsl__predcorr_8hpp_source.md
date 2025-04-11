@@ -20,7 +20,7 @@
 #include <ddc/pdi.hpp>
 
 #include "advection_field_rtheta.hpp"
-#include "bsl_advection_rtheta.hpp"
+#include "bsl_advection_polar.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
@@ -33,10 +33,17 @@
 template <class Mapping, class FootFinder>
 class BslPredCorrRTheta : public ITimeSolverRTheta
 {
+    using BslAdvectionRTheta = BslAdvectionPolar<
+            FootFinder,
+            Mapping,
+            PreallocatableSplineInterpolator2D<
+                    SplineRThetaBuilder,
+                    SplineRThetaEvaluatorNullBound>>;
+
 private:
     Mapping const& m_mapping;
 
-    BslAdvectionRTheta<FootFinder, Mapping> const& m_advection_solver;
+    BslAdvectionRTheta const& m_advection_solver;
 
     PolarSplineFEMPoissonLikeSolver<
             GridR,
@@ -51,7 +58,7 @@ private:
 public:
     BslPredCorrRTheta(
             Mapping const& mapping,
-            BslAdvectionRTheta<FootFinder, Mapping> const& advection_solver,
+            BslAdvectionRTheta const& advection_solver,
             SplineRThetaBuilder_host const& builder,
             SplineRThetaEvaluatorNullBound_host const& rhs_evaluator,
             PolarSplineFEMPoissonLikeSolver<

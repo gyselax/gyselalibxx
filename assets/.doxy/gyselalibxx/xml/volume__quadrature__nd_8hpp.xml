@@ -270,7 +270,7 @@
 <parametername direction="in">mapping</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The mapping function from the logical index range <formula id="9">$ (r,\theta) $</formula> to the physical index range <formula id="320">$ (x, y) $</formula>. </para>
+<para>The mapping function from the logical index range <formula id="15">$ (r,\theta) $</formula> to the physical index range <formula id="320">$ (x, y) $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

@@ -13,7 +13,7 @@
       </param>
     </templateparamlist>
     <briefdescription>
-<para>A class describing an index of a tensor. For example for a 2x2 metric tensor on an (x,y) plane the element <formula id="25">$ g_{xx} $</formula> would have the index TensorIndexElement&lt;TensorIndexSetXY, X, X&gt;. </para>
+<para>A class describing an index of a tensor. For example for a 2x2 metric tensor on an (x,y) plane the element <formula id="31">$ g_{xx} $</formula> would have the index TensorIndexElement&lt;TensorIndexSetXY, X, X&gt;. </para>
     </briefdescription>
     <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>

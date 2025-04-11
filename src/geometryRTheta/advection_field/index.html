@@ -95,12 +95,6 @@
     <ul class="current">
                 <li class="toctree-l3"><a class="reference internal" href="../index.html">Geometry (r, theta)</a>
                 </li>
-                <li class="toctree-l3"><a class="reference internal" >advection</a>
-    <ul>
-                <li class="toctree-l4"><a class="reference internal" href="../advection/index.html">Advection operator</a>
-                </li>
-    </ul>
-                </li>
                 <li class="toctree-l3 current"><a class="reference internal current" >advection_field</a>
     <ul class="current">
                 <li class="toctree-l4 current"><a class="reference internal current" href="#">Advection Field finder</a>
@@ -578,9 +572,9 @@ It has two types of <code>operator()</code>:</p>
 If a Field is given as input, it computes the spline representation (on the cross-product of two 1D bases) using a SplineBuilder2D.
 The spline representation is needed to compute the derivatives of the function <span class="arithmatex">\(\phi\)</span>.
 If the PolarSplineMem representation is given as input, it can directly compute the derivatives of the function <span class="arithmatex">\(\phi\)</span>.</p>
-<p>Once the advection field computed, it is given as input to the BslAdvectionRTheta operator to advect the density <span class="arithmatex">\(\rho\)</span> function.
-The BslAdvectionRTheta operator can handle the advection with an advection field along <span class="arithmatex">\((x,y)\)</span> and with an advection field along <span class="arithmatex">\((r,\theta)\)</span>.
-But as the BslAdvectionRTheta operator advects in the physical domain, it is recommended to work with the advection field along <span class="arithmatex">\((x,y)\)</span>.</p>
+<p>Once the advection field computed, it is given as input to the BslAdvectionPolar operator to advect the density <span class="arithmatex">\(\rho\)</span> function.
+The BslAdvectionPolar operator can handle the advection with an advection field along <span class="arithmatex">\((x,y)\)</span> and with an advection field along <span class="arithmatex">\((r,\theta)\)</span>.
+But as the BslAdvectionPolar operator advects in the physical domain, it is recommended to work with the advection field along <span class="arithmatex">\((x,y)\)</span>.</p>
 <h3 id="advection-field-along-the-physical-domain-axis">Advection field along the physical domain axis</h3>
 <p>Thanks to the spline representation, the derivatives <span class="arithmatex">\(\partial_r \phi\)</span> and <span class="arithmatex">\(\partial_\theta \phi\)</span> are computed.
 The computation of the electrical field can be ill-defined around the O-point, so we treat this area separately.</p>
@@ -802,7 +796,7 @@ method of characteristics and spline finite elements", <a href="https://doi.org/
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../advection/index.html" class="btn btn-neutral float-left" title="Advection operator"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="Geometry (r, theta)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../geometry/index.html" class="btn btn-neutral float-right" title="Geometry RTheta">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -830,7 +824,7 @@ method of characteristics and spline finite elements", <a href="https://doi.org/
         </span>
     
     
-      <span><a href="../advection/index.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../index.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../geometry/index.html" style="color: #fcfcfc">Next &raquo;</a></span>

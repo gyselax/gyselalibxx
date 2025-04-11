@@ -133,7 +133,7 @@
 <parametername direction="in">epsilon</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The parameter <formula id="11">$ \varepsilon $</formula> for the linearisation of the electric field. </para>
+<para>The parameter <formula id="17">$ \varepsilon $</formula> for the linearisation of the electric field. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -601,7 +601,7 @@
 </listitem></itemizedlist>
 </para>
 <para>Then, we compute <formula id="52">$ \hat{E}_{r\theta} = -\hat{\nabla}_{r\theta} \phi $</formula> and <formula id="53">$ \hat{A}_{r\theta} = J^{-1}(J \hat{E}_{r\theta} \wedge e_z) $</formula>, with <formula id="54">$ J $</formula> the Jacobian matrix of the transformation <formula id="55">$ (r,\theta) \mapsto (x,y) $</formula>.</para>
-<para>The equation (1) is solved thanks to advection operator (<ref refid="classIAdvectionRTheta" kindref="compound">IAdvectionRTheta</ref>).</para>
+<para>The equation (1) is solved thanks to advection operator (IAdvectionRTheta).</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername>Mapping</parametername>

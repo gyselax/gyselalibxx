@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection - GyselalibX</title>
+    <title>Class BslAdvectionPolar - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection";
-        var mkdocs_page_input_path = "gyselalibxx/dir_18bb63d4be19d3ea733e61d8625caf4d.md";
+        var mkdocs_page_name = "Class BslAdvectionPolar";
+        var mkdocs_page_input_path = "gyselalibxx/classBslAdvectionPolar.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -94,12 +94,6 @@
                 <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/geometryRTheta/index.html">Geometry (r, theta)</a>
-                </li>
-                <li class="toctree-l3"><a class="reference internal" >advection</a>
-    <ul>
-                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection/index.html">Advection operator</a>
-                </li>
-    </ul>
                 </li>
                 <li class="toctree-l3"><a class="reference internal" >advection_field</a>
     <ul>
@@ -529,9 +523,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection</li>
+      <li class="breadcrumb-item active">Class BslAdvectionPolar</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/dir_18bb63d4be19d3ea733e61d8625caf4d.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classBslAdvectionPolar.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -539,9 +533,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="dir-homerunnerworkgyselalibxxgyselalibxxcode_branchsrcgeometryrthetaadvection">Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection</h1>
-<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_18bb63d4be19d3ea733e61d8625caf4d.html"><strong>advection</strong></a></p>
-<h2 id="files">Files</h2>
+                <div><h1 id="class-bsladvectionpolar">Class BslAdvectionPolar</h1>
+<p><strong>template &lt;class FootFinder, class LogicalToPhysicalMapping, class InterpolatorPolar&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a></p>
+<p><em>Define an advection operator on 2D</em>  <em>index range.</em><a href="#detailed-description">More...</a></p>
+<ul>
+<li><code>#include &lt;bsl_advection_polar.hpp&gt;</code></li>
+</ul>
+<h2 id="public-functions">Public Functions</h2>
 <table>
 <thead>
 <tr>
@@ -551,17 +550,100 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="bsl__advection__rtheta_8hpp.html"><strong>bsl_advection_rtheta.hpp</strong></a> <br></td>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-bsladvectionpolar"><strong>BslAdvectionPolar</strong></a> (InterpolatorPolar const &amp; function_interpolator, FootFinder const &amp; foot_finder, LogicalToPhysicalMapping const &amp; logical_to_physical_mapping) <br><em>Instantiate an advection operator.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="iadvection__rtheta_8hpp.html"><strong>iadvection_rtheta.hpp</strong></a> <br></td>
+<td style="text-align: right;">DFieldFDistribu</td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (DFieldFDistribu allfdistribu, <a href="classVectorField.html"><strong>DVectorConstFieldAdvectionXY</strong></a> advection_field_xy, double dt) const<br><em>Allocate a Field of the advected function.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">DFieldFDistribu</td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (DFieldFDistribu allfdistribu, <a href="classVectorField.html"><strong>DVectorConstFieldAdvectionRTheta</strong></a> advection_field_rtheta, <a href="classTensor.html"><strong>DTensor</strong></a>&lt; CartesianBasis &gt; const &amp; advection_field_xy_centre, double dt) const<br><em>Allocate a Field to the advected function.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-bsladvectionpolar"><strong>~BslAdvectionPolar</strong></a> () = default<br></td>
 </tr>
 </tbody>
 </table>
+<h2 id="detailed-description">Detailed Description</h2>
+<p>The advection operator uses a backward semi-Lagrangian method. The method is based on the property that the solution is constant along the characteristics.</p>
+<p>For the following equation: </p>
+<p>we write the characteristics: </p>
+<p>Then the property gives us: </p>
+<p>So the first step of the advection operator is to compute the feet of the characteristics  for each mesh point .</p>
+<p>For the second step, we interpolate the function at the computed feet of the characteristics, and obtain the function at the next time step: .</p>
+<p>Different time integration methods are implemented to solve the equation of the characteristics. They are defined in the <a href="classIPolarFootFinder.html"><strong>IPolarFootFinder</strong></a> class.</p>
+<p>The feet can be advected on different domains (physical domain or pseudo-physical domain) which are determined in the <a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a> operator.</p>
+<p>The interpolation of the function is always done in the logical domain, where the B-splines are defined.</p>
+<p><strong>See also:</strong> <a href="classIPolarFootFinder.html"><strong>IPolarFootFinder</strong></a> </p>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-bsladvectionpolar">function BslAdvectionPolar</h3>
+<p><em>Instantiate an advection operator.</em> </p>
+<pre><code class="language-C++">inline BslAdvectionPolar::BslAdvectionPolar (
+    InterpolatorPolar const &amp; function_interpolator,
+    FootFinder const &amp; foot_finder,
+    LogicalToPhysicalMapping const &amp; logical_to_physical_mapping
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>function_interpolator</code> The polar interpolator to interpolate the function once the characteristics have been computed. </li>
+<li><code>foot_finder</code> An IFootFinder which computes the feet of the characteristics. </li>
+<li><code>logical_to_physical_mapping</code> The mapping function from the logical domain to the physical domain.</li>
+</ul>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>IFootFinder</code> A child class of IFootFinder. </li>
+</ul>
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection/</code></p></div>
+
+<h3 id="function-operator">function operator()</h3>
+<p><em>Allocate a Field of the advected function.</em> </p>
+<pre><code class="language-C++">inline DFieldFDistribu BslAdvectionPolar::operator() (
+    DFieldFDistribu allfdistribu,
+    DVectorConstFieldAdvectionXY advection_field_xy,
+    double dt
+) const
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>allfdistribu</code> A Field containing the values of the function we want to advect. </li>
+<li><code>advection_field_xy</code> A field of vectors defined on the Cartesian basis containing the values of the advection field at each point on the logical grid. </li>
+<li><code>dt</code> A time step used.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A Field to allfdistribu advected on the time step given. </p>
+<hr>
+
+<h3 id="function-operator_1">function operator()</h3>
+<p><em>Allocate a Field to the advected function.</em> </p>
+<pre><code class="language-C++">inline DFieldFDistribu BslAdvectionPolar::operator() (
+    DFieldFDistribu allfdistribu,
+    DVectorConstFieldAdvectionRTheta advection_field_rtheta,
+    DTensor &lt; CartesianBasis &gt; const &amp; advection_field_xy_centre,
+    double dt
+) const
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>allfdistribu</code> A Field containing the values of the function we want to advect. </li>
+<li><code>advection_field_rtheta</code> A field of vectors defined on the Curvilinear basis containing the values of the advection field at each point on the logical grid. It is expressed on the contravariant basis. </li>
+<li><code>advection_field_xy_centre</code> A vector in the Cartesian basis, containing the value of the advection field at the O-point. </li>
+<li><code>dt</code> A time step used.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A Field to allfdistribu advected on the time step given. </p>
+<hr>
+
+<h3 id="function-bsladvectionpolar_1">function ~BslAdvectionPolar</h3>
+<pre><code class="language-C++">BslAdvectionPolar::~BslAdvectionPolar () = default
+</code></pre>
+<hr>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp</code></p></div>
               
             </div>
           </div><footer>

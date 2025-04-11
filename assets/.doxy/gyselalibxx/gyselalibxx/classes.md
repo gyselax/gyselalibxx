@@ -17,7 +17,7 @@
 
 * [**BarycentricToCartesian**](classBarycentricToCartesian.md)
 * [**BslAdvection1D**](classBslAdvection1D.md)
-* [**BslAdvectionRTheta**](classBslAdvectionRTheta.md)
+* [**BslAdvectionPolar**](classBslAdvectionPolar.md)
 * [**BslAdvectionSpatial**](classBslAdvectionSpatial.md)
 * [**BslAdvectionVelocity**](classBslAdvectionVelocity.md)
 * [**BslExplicitPredCorrRTheta**](classBslExplicitPredCorrRTheta.md)
@@ -219,7 +219,6 @@
 
 ## i
 
-* [**IAdvectionRTheta**](classIAdvectionRTheta.md)
 * [**IAdvectionSpatial**](classIAdvectionSpatial.md)
 * [**IAdvectionVelocity**](classIAdvectionVelocity.md)
 * [**IBoltzmannSolver**](classIBoltzmannSolver.md)

@@ -95,12 +95,6 @@
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../geometryRTheta/index.html">Geometry (r, theta)</a>
                 </li>
-                <li class="toctree-l3"><a class="reference internal" >advection</a>
-    <ul>
-                <li class="toctree-l4"><a class="reference internal" href="../geometryRTheta/advection/index.html">Advection operator</a>
-                </li>
-    </ul>
-                </li>
                 <li class="toctree-l3"><a class="reference internal" >advection_field</a>
     <ul>
                 <li class="toctree-l4"><a class="reference internal" href="../geometryRTheta/advection_field/index.html">Advection Field finder</a>
@@ -359,6 +353,16 @@
     <ul class="current">
                 <li class="toctree-l3 current"><a class="reference internal current" href="#">Time Stepping Methods</a>
     <ul class="current">
+    <li class="toctree-l4"><a class="reference internal" href="#explicit-euler-method">Explicit Euler method</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#crank-nicolson-method">Crank-Nicolson method</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#rk2-method">RK2 method</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#rk3-method">RK3 method</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#rk4-method">RK4 method</a>
+    </li>
     </ul>
                 </li>
     </ul>
@@ -547,8 +551,8 @@
                 <div><h1 id="time-stepping-methods">Time Stepping Methods</h1>
 <p>Time stepping methods are methods for calculating how a value (or dimensioned values) evolves over time. Such an evolution should be expressed as a system of equations of the form:</p>
 <div class="arithmatex">\[
-dy/dt = f(t, y)\\
-y(t_0) = y_0
+d\overrightarrow{x}/dt = f(\overrightarrow{x})\\
+\overrightarrow{x}(t_0) = \overrightarrow{x}_0
 \]</div>
 <p>The implemented methods are:</p>
 <ul>
@@ -558,7 +562,76 @@ y(t_0) = y_0
 <li>Third order Runge Kutta (RK3)</li>
 <li>Fourth order Runge Kutta (RK4)</li>
 </ul>
-<p>These classes all contain an <code>update</code> method which carries out one time step of the algorithm.</p></div>
+<p>These classes all contain an <code>update</code> method which carries out one time step of the algorithm.</p>
+<h2 id="explicit-euler-method">Explicit Euler method</h2>
+<ul>
+<li>
+<p>Scheme:
+<span class="arithmatex">\(x^{n+1} = x^{n} + dt f(x^{n+1})\)</span></p>
+</li>
+<li>
+<p>Convergence order : 1.</p>
+</li>
+</ul>
+<h2 id="crank-nicolson-method">Crank-Nicolson method</h2>
+<ul>
+<li>
+<p>Scheme:
+<span class="arithmatex">\(x^{k} = x^{n} + \frac{dt}{2} \left( f(x^{n}) + f(x^k) \right)\)</span> and
+<span class="arithmatex">\(x^{n+1} = x^{k+1}\)</span> once converged.</p>
+</li>
+<li>
+<p>Convergence order : 2.</p>
+</li>
+</ul>
+<h2 id="rk2-method">RK2 method</h2>
+<ul>
+<li>Scheme:
+<span class="arithmatex">\(x^{n+1} = x^{n} + dt k_2\)</span></li>
+<li>
+<p>with</p>
+<ul>
+<li><span class="arithmatex">\(k_1 =  f(x^{n})\)</span>,</li>
+<li><span class="arithmatex">\(k_2 =  f(x^{n} + \frac{dt}{2} k_1)\)</span>,</li>
+</ul>
+</li>
+<li>
+<p>Convergence order : 3.</p>
+</li>
+</ul>
+<h2 id="rk3-method">RK3 method</h2>
+<ul>
+<li>Scheme:
+<span class="arithmatex">\(x^n = x^{n+1} - \frac{dt}{6}  \left( k_1 + 4 k_2 + k_3 \right)\)</span></li>
+<li>
+<p>with</p>
+<ul>
+<li><span class="arithmatex">\(k_1 =  f(x^{n})\)</span>,</li>
+<li><span class="arithmatex">\(k_2 =  f(x^{n} + \frac{dt}{2} k_1)\)</span>,</li>
+<li><span class="arithmatex">\(k_3 =  f(x^{n} + dt( 2k_2 - k_1))\)</span>.</li>
+</ul>
+</li>
+<li>
+<p>Convergence order : 3.</p>
+</li>
+</ul>
+<h2 id="rk4-method">RK4 method</h2>
+<ul>
+<li>Scheme:
+<span class="arithmatex">\(x^{n+1} = x^{n} + \frac{dt}{6}  \left( k_1 + 2 k_2 + 2 k_3  + k_4\right)\)</span></li>
+<li>
+<p>with</p>
+<ul>
+<li><span class="arithmatex">\(k_1 =  f(x^{n+1})\)</span>,</li>
+<li><span class="arithmatex">\(k_2 =  f(x^{n+1} + \frac{dt}{2} k_1)\)</span>,</li>
+<li><span class="arithmatex">\(k_3 =  f(x^{n+1} + \frac{dt}{2} k_2)\)</span>,</li>
+<li><span class="arithmatex">\(k_4 =  f(x^{n+1} + dt k_3)\)</span>.</li>
+</ul>
+</li>
+<li>
+<p>Convergence order : 4.</p>
+</li>
+</ul></div>
               
             </div>
           </div><footer>

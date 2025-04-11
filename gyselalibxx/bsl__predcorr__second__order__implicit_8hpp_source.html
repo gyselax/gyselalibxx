@@ -95,12 +95,6 @@
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/geometryRTheta/index.html">Geometry (r, theta)</a>
                 </li>
-                <li class="toctree-l3"><a class="reference internal" >advection</a>
-    <ul>
-                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection/index.html">Advection operator</a>
-                </li>
-    </ul>
-                </li>
                 <li class="toctree-l3"><a class="reference internal" >advection_field</a>
     <ul>
                 <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
@@ -554,7 +548,7 @@
 #include &lt;ddc/pdi.hpp&gt;
 
 #include "advection_field_rtheta.hpp"
-#include "bsl_advection_rtheta.hpp"
+#include "bsl_advection_polar.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
@@ -593,10 +587,16 @@ private:
             SplineRThetaBuilder_host,
             SplineRThetaEvaluatorConstBound_host&gt;;
 
+    using BslAdvectionRTheta = BslAdvectionPolar&lt;
+            SplinePolarFootFinderType,
+            LogicalToPhysicalMapping,
+            PreallocatableSplineInterpolator2D&lt;
+                    SplineRThetaBuilder,
+                    SplineRThetaEvaluatorNullBound&gt;&gt;;
+
     LogicalToPhysicalMapping const&amp; m_logical_to_physical;
 
-    BslAdvectionRTheta&lt;SplinePolarFootFinderType, LogicalToPhysicalMapping&gt; const&amp;
-            m_advection_solver;
+    BslAdvectionRTheta const&amp; m_advection_solver;
 
     EulerMethod_host const m_euler;
     SplinePolarFootFinderType_host const m_foot_finder;
@@ -616,8 +616,7 @@ public:
     BslImplicitPredCorrRTheta(
             LogicalToPhysicalMapping const&amp; logical_to_physical,
             LogicalToPseudoPhysicalMapping const&amp; logical_to_pseudo_physical,
-            BslAdvectionRTheta&lt;SplinePolarFootFinderType, LogicalToPhysicalMapping&gt; const&amp;
-                    advection_solver,
+            BslAdvectionRTheta const&amp; advection_solver,
             IdxRangeRTheta const&amp; grid,
             SplineRThetaBuilder_host const&amp; builder,
             PolarSplineFEMPoissonLikeSolver&lt;

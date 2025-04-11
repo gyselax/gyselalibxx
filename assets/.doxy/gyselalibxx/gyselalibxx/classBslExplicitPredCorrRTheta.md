@@ -75,7 +75,7 @@ Inherits the following classes: [ITimeSolverRTheta](classITimeSolverRTheta.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslExplicitPredCorrRTheta**](#function-bslexplicitpredcorrrtheta) (LogicalToPhysicalMapping const & logical\_to\_physical, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical, [**BslAdvectionRTheta**](classBslAdvectionRTheta.md)&lt; [**SplinePolarFootFinderType**](classSplinePolarFootFinder.md), LogicalToPhysicalMapping &gt; & advection\_solver, IdxRangeRTheta const & grid, SplineRThetaBuilder\_host const & builder, [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md)&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), SplineRThetaEvaluatorNullBound &gt; const & poisson\_solver, SplineRThetaEvaluatorConstBound\_host const & advection\_evaluator) <br>_Instantiate a_ [_**BslExplicitPredCorrRTheta**_](classBslExplicitPredCorrRTheta.md) _._ |
+|   | [**BslExplicitPredCorrRTheta**](#function-bslexplicitpredcorrrtheta) (LogicalToPhysicalMapping const & logical\_to\_physical, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, IdxRangeRTheta const & grid, SplineRThetaBuilder\_host const & builder, [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md)&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), SplineRThetaEvaluatorNullBound &gt; const & poisson\_solver, SplineRThetaEvaluatorConstBound\_host const & advection\_evaluator) <br>_Instantiate a_ [_**BslExplicitPredCorrRTheta**_](classBslExplicitPredCorrRTheta.md) _._ |
 | virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; allfdistribu, double const dt, int const steps) const<br>_Solves on_  _the equations system._ |
 
 
@@ -174,7 +174,7 @@ for ,
 First, it predicts:
 * 1. From , it computes  with a [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md);
 * 2. From , it computes  with a [**AdvectionFieldFinder**](classAdvectionFieldFinder.md);
-* 3. From  and , it computes  with a [**BslAdvectionRTheta**](classBslAdvectionRTheta.md) on ;
+* 3. From  and , it computes  with a [**BslAdvectionPolar**](classBslAdvectionPolar.md) on ;
 
 
 
@@ -185,7 +185,7 @@ We write  the characteristic feet such that .
 Secondly, it corrects:
 * 4. From , it computes  with a [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md);
 * 5. From , it computes  with a [**AdvectionFieldFinder**](classAdvectionFieldFinder.md);
-* 6. From  and , it computes  with a [**BslAdvectionRTheta**](classBslAdvectionRTheta.md) on .
+* 6. From  and , it computes  with a [**BslAdvectionPolar**](classBslAdvectionPolar.md) on .
 
 
 
@@ -217,7 +217,7 @@ _Instantiate a_ [_**BslExplicitPredCorrRTheta**_](classBslExplicitPredCorrRTheta
 inline BslExplicitPredCorrRTheta::BslExplicitPredCorrRTheta (
     LogicalToPhysicalMapping const & logical_to_physical,
     LogicalToPseudoPhysicalMapping const & logical_to_pseudo_physical,
-    BslAdvectionRTheta < SplinePolarFootFinderType , LogicalToPhysicalMapping > & advection_solver,
+    BslAdvectionRTheta const & advection_solver,
     IdxRangeRTheta const & grid,
     SplineRThetaBuilder_host const & builder,
     PolarSplineFEMPoissonLikeSolver < GridR , GridTheta , PolarBSplinesRTheta , SplineRThetaEvaluatorNullBound > const & poisson_solver,

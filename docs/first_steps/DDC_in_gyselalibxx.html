@@ -127,12 +127,6 @@
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../../src/geometryRTheta/index.html">Geometry (r, theta)</a>
                 </li>
-                <li class="toctree-l3"><a class="reference internal" >advection</a>
-    <ul>
-                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryRTheta/advection/index.html">Advection operator</a>
-                </li>
-    </ul>
-                </li>
                 <li class="toctree-l3"><a class="reference internal" >advection_field</a>
     <ul>
                 <li class="toctree-l4"><a class="reference internal" href="../../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
@@ -610,7 +604,7 @@ Coord&lt;X, Y&gt; Q = R - P;
 <p>The <code>Coord</code> class also provides an addition operator, comparison operators, and an output operator for easy printing using <code>cout</code>.</p>
 <p>In Gyselalib++ the alias <code>CoordX</code> is usually defined in <code>geometry.hpp</code> to describe the type <code>Coord&lt;X&gt;</code> more succinctly.</p>
 <h2 id="indexing-and-associated-concepts">Indexing and associated concepts</h2>
-<p>The physical problems that our simulations describe are defined on a domain. The domain on which the problem is defined is continuous (e.g. a radial domain <span class="arithmatex">\([0,1)\)</span>). However a simulation evolves on a grid. This means that the value of the function is only known at a discrete set of points. In the case of a function <span class="arithmatex">\(f(x)\rightarrow y \in \mathbb{R}\)</span> with <span class="arithmatex">\(x \in [0,1)\)</span>, we would usually discretise the domain <span class="arithmatex">\([0,1)\)</span> as follows:
+<p>The physical problems that our simulations describe are defined on a domain. The domain on which the problem is defined is continuous (e.g. a radial domain <span class="arithmatex">\([0,1)\)</span> ). However a simulation evolves on a grid. This means that the value of the function is only known at a discrete set of points. In the case of a function <span class="arithmatex">\(f(x)\rightarrow y \in \mathbb{R}\)</span> with <span class="arithmatex">\(x \in [0,1)\)</span>, we would usually discretise the domain <span class="arithmatex">\([0,1)\)</span> as follows:
 $$
 x_0, x_1, ..., x_i, ..., x_N
 $$</p>

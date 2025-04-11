@@ -619,7 +619,7 @@
 <para><formula id="243">$ x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k{r,\theta} $</formula>,</para>
 <para><formula id="244">$ y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k{r,\theta} $</formula>,</para>
 <para>where <formula id="245">$ N_r\times N_{\theta} $</formula> is the number of B-splines.</para>
-<para>The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points <formula id="246">$ \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}} $</formula> are equal to the pole <formula id="247">$ (c_{x,k}, c_{y,k}) = (x_0,y_0) $</formula>, <formula id="248">$ \forall k = 0, ..., N_{\theta}-1 $</formula> where <formula id="249">$ x(0,\theta), y(0,\theta) = (x_0,y_0) $</formula> <formula id="14">$ \forall \theta $</formula>.</para>
+<para>The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points <formula id="246">$ \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}} $</formula> are equal to the pole <formula id="247">$ (c_{x,k}, c_{y,k}) = (x_0,y_0) $</formula>, <formula id="248">$ \forall k = 0, ..., N_{\theta}-1 $</formula> where <formula id="249">$ x(0,\theta), y(0,\theta) = (x_0,y_0) $</formula> <formula id="20">$ \forall \theta $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">el</parametername>

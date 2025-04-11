@@ -57,7 +57,7 @@
 <parametername>epsilon</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><formula id="11">$ \varepsilon $</formula>, the amplitude of perturbation. </para>
+<para><formula id="17">$ \varepsilon $</formula>, the amplitude of perturbation. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -137,7 +137,7 @@
     <detaileddescription>
 <para>Set the allfdistribu at <formula id="153">$ f_{eq}(x, y) = \sin(y) $</formula></para>
 <para>and <formula id="154">$ f_0(x, y) = f_{eq}(x, y) + \varepsilon \cos(kx) $</formula>,</para>
-<para>with <formula id="11">$ \varepsilon $</formula> an amplitude of perturbation and <formula id="155">$ k $</formula> mode equal to <formula id="156">$ 2\pi $</formula> divided by the length of the index range on <formula id="157">$ x $</formula>. </para>
+<para>with <formula id="17">$ \varepsilon $</formula> an amplitude of perturbation and <formula id="155">$ k $</formula> mode equal to <formula id="156">$ 2\pi $</formula> divided by the length of the index range on <formula id="157">$ x $</formula>. </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" line="23" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" bodystart="24" bodyend="65"/>
     <listofallmembers>

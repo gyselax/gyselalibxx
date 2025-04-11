@@ -95,12 +95,6 @@
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/geometryRTheta/index.html">Geometry (r, theta)</a>
                 </li>
-                <li class="toctree-l3"><a class="reference internal" >advection</a>
-    <ul>
-                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection/index.html">Advection operator</a>
-                </li>
-    </ul>
-                </li>
                 <li class="toctree-l3"><a class="reference internal" >advection_field</a>
     <ul>
                 <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
@@ -554,7 +548,7 @@
 #include &lt;ddc/pdi.hpp&gt;
 
 #include "advection_field_rtheta.hpp"
-#include "bsl_advection_rtheta.hpp"
+#include "bsl_advection_polar.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
@@ -567,10 +561,17 @@
 template &lt;class Mapping, class FootFinder&gt;
 class BslPredCorrRTheta : public ITimeSolverRTheta
 {
+    using BslAdvectionRTheta = BslAdvectionPolar&lt;
+            FootFinder,
+            Mapping,
+            PreallocatableSplineInterpolator2D&lt;
+                    SplineRThetaBuilder,
+                    SplineRThetaEvaluatorNullBound&gt;&gt;;
+
 private:
     Mapping const&amp; m_mapping;
 
-    BslAdvectionRTheta&lt;FootFinder, Mapping&gt; const&amp; m_advection_solver;
+    BslAdvectionRTheta const&amp; m_advection_solver;
 
     PolarSplineFEMPoissonLikeSolver&lt;
             GridR,
@@ -585,7 +586,7 @@ private:
 public:
     BslPredCorrRTheta(
             Mapping const&amp; mapping,
-            BslAdvectionRTheta&lt;FootFinder, Mapping&gt; const&amp; advection_solver,
+            BslAdvectionRTheta const&amp; advection_solver,
             SplineRThetaBuilder_host const&amp; builder,
             SplineRThetaEvaluatorNullBound_host const&amp; rhs_evaluator,
             PolarSplineFEMPoissonLikeSolver&lt;

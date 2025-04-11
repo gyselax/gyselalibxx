@@ -77,13 +77,19 @@
     <ul class="current">
                 <li class="toctree-l3 current"><a class="reference internal current" href="#">Advection methods</a>
     <ul class="current">
+    <li class="toctree-l4"><a class="reference internal" href="#contents">Contents</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#studied-equation">Studied equation</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#backward-semi-lagrangian-method">Backward Semi-Lagrangian method</a>
+    </li>
     <li class="toctree-l4"><a class="reference internal" href="#spatial-advection">Spatial advection</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#velocity-advection">Velocity advection</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1d-advection-with-a-given-advection-field">1D advection with a given advection field</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#polarfootfinder">PolarFootFinder</a>
+    <li class="toctree-l4"><a class="reference internal" href="#2d-advection-on-a-polar-slice-with-a-given-advection-field">2D advection on a polar slice with a given advection field</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#references">References</a>
     </li>
@@ -106,12 +112,6 @@
                 <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../geometryRTheta/index.html">Geometry (r, theta)</a>
-                </li>
-                <li class="toctree-l3"><a class="reference internal" >advection</a>
-    <ul>
-                <li class="toctree-l4"><a class="reference internal" href="../geometryRTheta/advection/index.html">Advection operator</a>
-                </li>
-    </ul>
                 </li>
                 <li class="toctree-l3"><a class="reference internal" >advection_field</a>
     <ul>
@@ -555,28 +555,72 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="advection-methods">Advection methods</h1>
-<p>The <code>advection/</code> folder gathers the backward semi lagrangian scheme classes. There are two main classes, AdvectionSpatial and AdvectionVelocity. Implementing these operators separately makes sense, since we are using time splitting.</p>
+<p>The <code>advection/</code> folder gathers the classes which implement backward semi-Lagrangian schemes. There are 1D and 2D operators. Implementing the operators separately makes sense, since we are using time splitting.
+For the 1D case 2 specialised operators are also provided for common calculations.</p>
 <p>The feet of the characteristic curves are used to interpolate the updated distribution function on mesh points. It uses batched interpolators so the interpolation step is done over the whole distribution function.</p>
-<h2 id="spatial-advection">Spatial advection</h2>
-<p>Here the purpose is the advection along a direction on the physical space dimension of the phase space.
-The dynamics of the motion on the spatial dimension are governed by the following equation.</p>
-<div class="arithmatex">\[ \frac{df_s}{dt}= \sqrt{\frac{m_e}{m_s}} v \frac{\partial f_s}{\partial x} \]</div>
-<h2 id="velocity-advection">Velocity advection</h2>
-<p>Here the purpose is the advection along a direction on the velocity space dimension of the phase space.
-The dynamics of the motion on the velocity dimension are governed by the following equation, where E is the electric field.</p>
-<div class="arithmatex">\[ \frac{df_s}{dt}= q_s \sqrt{\frac{m_e}{m_s}} E \frac{\partial f_s}{\partial v} \]</div>
-<h2 id="1d-advection-with-a-given-advection-field">1D advection with a given advection field</h2>
-<p>The purpose of the BslAdvection1D operator is an advection along a given direction of the phase space. The advection field is given as input.
-The dynamics of the motion are governed by the following equation.</p>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#studied-equation">Studied equation</a></li>
+<li><a href="#backward-semi-lagrangian-method">Backward Semi-Lagrangian method</a></li>
+<li><a href="#spatial-advection">Spatial advection</a></li>
+<li><a href="#velocity-advection">Velocity advection</a></li>
+<li><a href="#1d-advection-with-a-given-advection-field">1D advection with a given advection field</a></li>
+<li><a href="#2d-advection-on-a-polar-slice-with-a-given-advection-field">2D advection on a polar slice with a given advection field</a></li>
+<li><a href="#advection-field">Advection Field</a></li>
+<li><a href="#polar-foot-finder">Polar Foot Finder</a></li>
+<li><a href="#advection-domain">Advection Domain</a></li>
+</ul>
+<h2 id="studied-equation">Studied equation</h2>
+<p>The studied equation is the following transport equation:</p>
 <div class="arithmatex">\[
-    \partial_t f(t,x) + A\partial_{x_i}(x')f(t,x) = 0,
+\partial_t f(t, \overrightarrow{x}) + \overrightarrow{A}(t, \overrightarrow{x})\cdot\nabla f(t, \overrightarrow{x}) = 0,
+\]</div>
+<p>with <span class="arithmatex">\(f(0, \overrightarrow{x}) = f_0(\overrightarrow{x})\)</span> and <em>A</em> the advection field. The advection field is a vector with the same number of dimensions as the operator. E.g. for a 1D advection <em>A</em> is a scalar.</p>
+<h2 id="backward-semi-lagrangian-method">Backward Semi-Lagrangian method</h2>
+<p>The method used to solve the equation is a backward semi-Lagrangian method (BSL).
+It uses the conservation property along the characteristics:</p>
+<div class="arithmatex">\[
+\forall s, \quad f(t, \overrightarrow{x}) = f(s, \overrightarrow{X}(t; s, \overrightarrow{x}))
+\]</div>
+<p>with:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\partial_s \overrightarrow{X} (t; s, \overrightarrow{x}) = A(t, \overrightarrow{X}(t; s, x)),\\
+\overrightarrow{X}(s; s, \overrightarrow{x}) = \overrightarrow{x},\\
+\end{aligned}
+\]</div>
+<p>The characteristic <span class="arithmatex">\(\overrightarrow{X}\)</span> represents the trajectory of the solution <span class="arithmatex">\(f\)</span>.
+The parametrisation of the trajectory are given after the ";".
+<span class="arithmatex">\(\overrightarrow{X} (t; s, \overrightarrow{x})\)</span> indicates that at the time <span class="arithmatex">\(s\)</span>, the trajectory passes by the point <span class="arithmatex">\(\overrightarrow{x}\)</span>.
+In the backward semi-Lagrangian method, we solve the equation of the characteristics to identify the trajectory
+of the solution passing by each mesh point <span class="arithmatex">\(\overrightarrow{x}_{\star}\)</span> at the time <span class="arithmatex">\(s = t+dt\)</span>. We are interested in its position at the previous time step <span class="arithmatex">\(t\)</span>. The conservation property along the characteristics informs us that the value of the function at this position <span class="arithmatex">\(\overrightarrow{X}(t; s=t+dt, \overrightarrow{x_\star})\)</span>  at <span class="arithmatex">\(t\)</span> is the same as the value of the function at the mesh point <span class="arithmatex">\(\overrightarrow{x_\star}\)</span> at the time <span class="arithmatex">\(s = t+dt\)</span>.</p>
+<p>So to compute the advected function at the next time step,</p>
+<ul>
+<li>we compute the feet of the characteristics <span class="arithmatex">\(\overrightarrow{X}(t^n; t^{n+1}, \overrightarrow{x}_{\star})\)</span>
+ for each mesh point <span class="arithmatex">\(\overrightarrow{x}_{\star}\)</span>;</li>
+<li>we interpolate the function <span class="arithmatex">\(f(t = t^n)\)</span> on the feet of the characteristics.
+ The property ensures that the interpolation gives the function at the next time step <span class="arithmatex">\(f(t = t^{n+1})\)</span>.</li>
+</ul>
+<h2 id="spatial-advection">Spatial advection</h2>
+<p>The spatial advection solves the following (batched) 1D equation:</p>
+<div class="arithmatex">\[ \frac{df_s}{dt}= \sqrt{\frac{m_e}{m_s}} v \frac{\partial f_s}{\partial x} \]</div>
+<p>describing the advection along a direction on the physical space dimension of the phase space.</p>
+<h2 id="velocity-advection">Velocity advection</h2>
+<p>The velocity advection solves the following (batched) 1D equation:</p>
+<div class="arithmatex">\[ \frac{df_s}{dt}= q_s \sqrt{\frac{m_e}{m_s}} E \frac{\partial f_s}{\partial v} \]</div>
+<p>describing the advection along a direction on the velocity space dimension of the phase space,
+with <span class="arithmatex">\(E\)</span> the electric field.</p>
+<h2 id="1d-advection-with-a-given-advection-field">1D advection with a given advection field</h2>
+<p>The operator BslAdvection1D implements the 1D case:</p>
+<div class="arithmatex">\[
+    \partial_t f(t,x) + A(x')\partial_{x_i}(x')f(t,x) = 0,
     \qquad x \in \Omega, x' \in \Omega',
 \]</div>
 <p>with</p>
 <ul>
 <li><span class="arithmatex">\(f\)</span> the function to advect. It is defined on <span class="arithmatex">\(\Omega\)</span> domain and the time dimension;</li>
 <li><span class="arithmatex">\(A\)</span> the advection field. It could be defined on a subdomain <span class="arithmatex">\(\Omega'\subset \Omega\)</span>;</li>
-<li>and <span class="arithmatex">\(x_i\)</span> a given direction. The advection field domain has to be defined on this dimension for the time integration method.</li>
+<li>and <span class="arithmatex">\(x_i\)</span> the component of x in the direction on which the advection is defined. The advection field domain has to be defined on this dimension for the time integration method.</li>
 </ul>
 <h3 id="example-of-use">Example of use</h3>
 <p>Here are some examples of equation types the BslAdvection1D operator can solve:</p>
@@ -646,41 +690,43 @@ using IDimInterest = IDimX;
 DFieldSpX A(idx_range_sp_x);
 using IDimInterest = IDimX;
 </code></pre>
-<h3 id="parameters">Parameters</h3>
-<p>The operator takes as templated parameters:</p>
-<ul>
-<li>IDimInterest: a dimension of interest (or advection dimension) which refers to the dimension along which we advect the function;</li>
-<li>AdvectionDomain: an advection domain, which refers to the domain where the advection field is defined. It has to contain the dimension of interest for the interpolation of the advection field in the time integration method;</li>
-<li>FunctionDomain: the full domain where the function we want to advect is defined;</li>
-<li>AdvectionFieldBuilder: a spline builder type for the advection field.</li>
-<li>AdvectionFieldEvaluator: a spline evaluator type for the advection field.</li>
-<li>TimeStepper: a time integration method (see <a href="../timestepper/index.html">timestepper</a>) to solve the characteristic equation. It has to be defined on the advection field domain. The feet have to be a Field of coordinates of the dimension of interest defined on the advection field domain.</li>
-</ul>
 <p><strong>Remark/Warning:</strong> the BslAdvection1D operator is built with builder and evaluator for the advection field and interpolator for the function we want to advect. Theses operators have to be defined on the same domain as the advection field and function. For instance, if the advection field and/or the function are defined on the species dimension, then the interpolators have to contain the species dimension in its batched dimensions (see tests in the <code>tests/advection/</code> folder).</p>
 <p><strong>Remark/Warning:</strong> The advection field need to use interpolation on B-splines. So we cannot use other type of interpolator for the advection field. However there is no constraint on the interpolator of the advected function.</p>
-<h2 id="polarfootfinder">PolarFootFinder</h2>
-<p>These methods are designed to calculate the foot of the characteristic on the polar plane for a 2D transport equation of the type:</p>
+<h2 id="2d-advection-on-a-polar-slice-with-a-given-advection-field">2D advection on a polar slice with a given advection field</h2>
+<p>The operator BslAdvectionPolar implements the (batched) 2D case on a polar slice of the distribution function.</p>
+<p>On the polar grid we have:  <span class="arithmatex">\((t, \overrightarrow{x}) = (t,x(r,\theta),y(r,\theta))\)</span>.</p>
+<h3 id="advection-field">Advection Field</h3>
+<p>The BslAdvectionPolar operator can take as input
+the advection field expressed on the <span class="arithmatex">\((e_x, e_y)\)</span> basis of the physical domain or
+the advection field expressed on the <span class="arithmatex">\((e_r, e_\theta)\)</span> <a href="../../docs/standards/mathematical_and_physical_conventions.html">contravariant basis</a> of the logical domain,</p>
 <div class="arithmatex">\[
-\partial_t f(t,x(r,\theta),y(r,\theta)) + A(t,x(r,\theta),y(r,\theta))\cdot\nabla f(t,x(r,\theta),y(r,\theta)) = 0,
+A = A_x e_x + A_y e_y \quad \text{or} \quad A = A^r e_r + A^\theta e_\theta.
 \]</div>
-<p>with <span class="arithmatex">\(f(0,x,y) = f_0(x,y)\)</span> and <em>A</em> the advection field.</p>
-<p>The characteristics are the solutions <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> of the equations:</p>
+<p>The advection field should be computed before calling this class.</p>
+<ul>
+<li>
+<p>If the advection field is directly expressed on the <span class="arithmatex">\((e_x, e_y)\)</span> basis of the physical domain, no treatment is needed in the BslAdvectionPolar operator.</p>
+</li>
+<li>
+<p>If the advection field is expressed on the <span class="arithmatex">\((e_r, e_\theta)\)</span> contravariant basis of the logical domain, then we need to compute the advection field on the <span class="arithmatex">\((e_x, e_y)\)</span> basis to advect in the physical domain.</p>
+</li>
+</ul>
+<p>To pass from the composants on the <span class="arithmatex">\((e_r, e_\theta)\)</span> contravariant basis to the composants on the <span class="arithmatex">\((e_x, e_y)\)</span> basis, we use the Jacobian matrix <em>J</em> of the coordinate transformation <span class="arithmatex">\((r,\theta) \mapsto (x,y)\)</span>,</p>
 <div class="arithmatex">\[
-\begin{aligned}
-\partial_t X (t; s, x, y) = A_x(t,X(t; s, x, y),Y(t; s, x, y)),\\
-\partial_t Y (t; s, x, y) = A_y(t,X(t; s, x, y),Y(t; s, x, y)),\\
-X(s; s, x, y) = x,\\
-Y(s; s, x, y) = y.
-\end{aligned}
+\begin{bmatrix}
+    A\cdot e_x \\
+    A\cdot e_y
+\end{bmatrix}
+=
+J
+\begin{bmatrix}
+    A \cdot e_{r} \\
+    A \cdot e_{\theta}
+\end{bmatrix}.
 \]</div>
-<p>The characteristic <span class="arithmatex">\(X\)</span> represents the trajectory on the <span class="arithmatex">\(x\)</span>-dimension of the solution <span class="arithmatex">\(f\)</span>
-(idem for <span class="arithmatex">\(Y\)</span> on the <span class="arithmatex">\(y\)</span>-dimension).
-The parametrisation of the trajectory are given after the ";".
-<span class="arithmatex">\((X (t; s, x, y), Y (t; s, x, y))\)</span> indicates that at the time <span class="arithmatex">\(s\)</span>, the trajectory passes by the point <span class="arithmatex">\((x,y)\)</span>.
-In the backward semi-Lagrangian method, we solve the equation of the characteristics to identify the trajectory
-of the solution passing by each mesh point <span class="arithmatex">\((x,y)_{ij}\)</span> at the time <span class="arithmatex">\(s = t+dt\)</span>. We are interested in its position
-at the previous time step <span class="arithmatex">\(t\)</span>. The conservation property along the characteristics informs us that the value of the function at this position <span class="arithmatex">\((X(t; s=t+dt, x, y), Y (t; s=t+dt, x, y))\)</span>  at <span class="arithmatex">\(t\)</span> is the same as the value of the function at the mesh point <span class="arithmatex">\((x,y)_{ij}\)</span> at the time <span class="arithmatex">\(s = t+dt\)</span>.</p>
-<p>The characteristic feet are calculated using a time integration method. For details of available methods see <a href="../timestepper/index.html">timestepper</a>.</p>
+<h3 id="polar-foot-finder">Polar Foot Finder</h3>
+<p>The methods inheriting from IPolarFootFinder provide ways of calculating the feet of the characteristics on the polar plane.</p>
+<p>The feet of the characteristics are calculated using a time integration method. For details of available methods see <a href="../timestepper/index.html">Time Stepping Methods</a>.</p>
 <h3 id="advection-domain">Advection domain</h3>
 <p>There are two advection domains to consider:</p>
 <ul>
@@ -697,9 +743,9 @@ compute the mesh points in the physical domain using a mapping function <span cl
 <p>This adds some steps to the advection operator, we now have to compute</p>
 <ol>
 <li>the mesh points in the physical domain using <span class="arithmatex">\(\mathcal{F}\)</span>;</li>
-<li>the characteristic feet in the physical domain;</li>
-<li>the characteristic feet in the logical domain (polar grid) using <span class="arithmatex">\(\mathcal{F}^{-1}\)</span>;</li>
-<li>then interpolate the advection function at the  characteristic feet in the logical domain.</li>
+<li>the feet of the characteristics in the physical domain;</li>
+<li>the feet of the characteristics in the logical domain (polar grid) using <span class="arithmatex">\(\mathcal{F}^{-1}\)</span>;</li>
+<li>then interpolate the advection function at the feet of the characteristics in the logical domain.</li>
 </ol>
 <p>The third step can be difficult especially if the mapping function <span class="arithmatex">\(\mathcal{F}\)</span> is not analytically invertible.
 It is not impossible but the computations can be costly.</p>
@@ -712,18 +758,25 @@ We use another mapping function <span class="arithmatex">\(\mathcal{G}\)</span> 
 <ol>
 <li>calculate the mesh points in the pseudo-Cartesian domain using <span class="arithmatex">\(\mathcal{G}\)</span>;</li>
 <li>calculate the advection field <span class="arithmatex">\(A\)</span> in the pseudo-Cartesian domain using the Jacobian matrix of <span class="arithmatex">\((\mathcal{F}\circ\mathcal{G}^{-1})^{-1}\)</span>;</li>
-<li>calculate the characteristic feet in the pseudo-Cartesian domain;</li>
-<li>calculate the characteristic feet in the logical domain (polar grid) using <span class="arithmatex">\(\mathcal{G}^{-1}\)</span>;</li>
+<li>calculate the feet of the characteristics in the pseudo-Cartesian domain;</li>
+<li>calculate the feet of the characteristics in the logical domain (polar grid) using <span class="arithmatex">\(\mathcal{G}^{-1}\)</span>;</li>
 </ol>
 <p>Here, <span class="arithmatex">\(\mathcal{G}\)</span> is analytically invertible (we can fix  <span class="arithmatex">\(\mathcal{G}^{-1}(x = x_0, y = y_0) = (r = 0, \theta = 0)\)</span>)
-and  <span class="arithmatex">\((J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}\)</span> is well-defined. The details are given in Edoardo Zoni's article [1].</p>
+and  <span class="arithmatex">\((J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}\)</span> is well-defined. The details are given in Edoardo Zoni's article <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
 <p><strong>Remark 1:</strong> if <span class="arithmatex">\(\mathcal{F}\)</span> is the circular mapping function, then the physical domain and the pseudo-Cartesian domain are the same.</p>
 <p><strong>Remark 2:</strong> if the mapping function is analytically invertible, it is less costly to advect in the physical domain.</p>
 <h2 id="references">References</h2>
-<p>[1] Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped
 disk-like domains with the method of characteristics and spline finite elements".
 (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>.)
-Journal of Computational Physics (2019).</p></div>
+Journal of Computational Physics (2019). <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+</ol>
+</div></div>
               
             </div>
           </div><footer>

@@ -75,7 +75,7 @@ Inherits the following classes: [ITimeSolverRTheta](classITimeSolverRTheta.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslPredCorrRTheta**](#function-bslpredcorrrtheta) (Mapping const & mapping, [**BslAdvectionRTheta**](classBslAdvectionRTheta.md)&lt; FootFinder, Mapping &gt; const & advection\_solver, SplineRThetaBuilder\_host const & builder, SplineRThetaEvaluatorNullBound\_host const & rhs\_evaluator, [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md)&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), SplineRThetaEvaluatorNullBound &gt; const & poisson\_solver) <br>_Instantiate a_ [_**BslPredCorrRTheta**_](classBslPredCorrRTheta.md) _._ |
+|   | [**BslPredCorrRTheta**](#function-bslpredcorrrtheta) (Mapping const & mapping, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, SplineRThetaBuilder\_host const & builder, SplineRThetaEvaluatorNullBound\_host const & rhs\_evaluator, [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md)&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), SplineRThetaEvaluatorNullBound &gt; const & poisson\_solver) <br>_Instantiate a_ [_**BslPredCorrRTheta**_](classBslPredCorrRTheta.md) _._ |
 | virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; allfdistribu, double const dt, int const steps) override const<br>_Solves on_  _the equations system._ |
 
 
@@ -174,7 +174,7 @@ for ,
 First, it advects on a half time step:
 * 1. From , it computes  with a [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md);
 * 2. From , it computes  with a [**AdvectionFieldFinder**](classAdvectionFieldFinder.md);
-* 3. From  and , it computes  with a [**BslAdvectionRTheta**](classBslAdvectionRTheta.md) on ;
+* 3. From  and , it computes  with a [**BslAdvectionPolar**](classBslAdvectionPolar.md) on ;
 
 
 
@@ -182,7 +182,7 @@ First, it advects on a half time step:
 Secondly, it advects on a full time step:
 * 4. From , it computes  with a [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md);
 * 5. From , it computes  with a [**AdvectionFieldFinder**](classAdvectionFieldFinder.md);
-* 6. From  and , it computes  with a [**BslAdvectionRTheta**](classBslAdvectionRTheta.md) on .
+* 6. From  and , it computes  with a [**BslAdvectionPolar**](classBslAdvectionPolar.md) on .
 
 
 
@@ -210,7 +210,7 @@ _Instantiate a_ [_**BslPredCorrRTheta**_](classBslPredCorrRTheta.md) _._
 ```C++
 inline BslPredCorrRTheta::BslPredCorrRTheta (
     Mapping const & mapping,
-    BslAdvectionRTheta < FootFinder, Mapping > const & advection_solver,
+    BslAdvectionRTheta const & advection_solver,
     SplineRThetaBuilder_host const & builder,
     SplineRThetaEvaluatorNullBound_host const & rhs_evaluator,
     PolarSplineFEMPoissonLikeSolver < GridR , GridTheta , PolarBSplinesRTheta , SplineRThetaEvaluatorNullBound > const & poisson_solver

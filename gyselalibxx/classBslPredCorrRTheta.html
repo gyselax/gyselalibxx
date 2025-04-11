@@ -95,12 +95,6 @@
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/geometryRTheta/index.html">Geometry (r, theta)</a>
                 </li>
-                <li class="toctree-l3"><a class="reference internal" >advection</a>
-    <ul>
-                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection/index.html">Advection operator</a>
-                </li>
-    </ul>
-                </li>
                 <li class="toctree-l3"><a class="reference internal" >advection_field</a>
     <ul>
                 <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
@@ -558,7 +552,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-bslpredcorrrtheta"><strong>BslPredCorrRTheta</strong></a> (Mapping const &amp; mapping, <a href="classBslAdvectionRTheta.html"><strong>BslAdvectionRTheta</strong></a>&lt; FootFinder, Mapping &gt; const &amp; advection_solver, SplineRThetaBuilder_host const &amp; builder, SplineRThetaEvaluatorNullBound_host const &amp; rhs_evaluator, <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>&lt; <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a>, SplineRThetaEvaluatorNullBound &gt; const &amp; poisson_solver) <br><em>Instantiate a</em> <a href="classBslPredCorrRTheta.html"><em><strong>BslPredCorrRTheta</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-bslpredcorrrtheta"><strong>BslPredCorrRTheta</strong></a> (Mapping const &amp; mapping, <a href="classBslAdvectionPolar.html"><strong>BslAdvectionRTheta</strong></a> const &amp; advection_solver, SplineRThetaBuilder_host const &amp; builder, SplineRThetaEvaluatorNullBound_host const &amp; rhs_evaluator, <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>&lt; <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a>, SplineRThetaEvaluatorNullBound &gt; const &amp; poisson_solver) <br><em>Instantiate a</em> <a href="classBslPredCorrRTheta.html"><em><strong>BslPredCorrRTheta</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual host_t&lt; DFieldRTheta &gt;</td>
@@ -615,11 +609,11 @@
 <p>First, it advects on a half time step:
 * 1. From , it computes  with a <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>;
 * 2. From , it computes  with a <a href="classAdvectionFieldFinder.html"><strong>AdvectionFieldFinder</strong></a>;
-* 3. From  and , it computes  with a <a href="classBslAdvectionRTheta.html"><strong>BslAdvectionRTheta</strong></a> on ;</p>
+* 3. From  and , it computes  with a <a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a> on ;</p>
 <p>Secondly, it advects on a full time step:
 * 4. From , it computes  with a <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>;
 * 5. From , it computes  with a <a href="classAdvectionFieldFinder.html"><strong>AdvectionFieldFinder</strong></a>;
-* 6. From  and , it computes  with a <a href="classBslAdvectionRTheta.html"><strong>BslAdvectionRTheta</strong></a> on .</p>
+* 6. From  and , it computes  with a <a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a> on .</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>Mapping</code> A class describing a mapping from curvilinear coordinates to Cartesian coordinates. </li>
@@ -630,7 +624,7 @@
 <p><em>Instantiate a</em> <a href="classBslPredCorrRTheta.html"><em><strong>BslPredCorrRTheta</strong></em></a> <em>.</em></p>
 <pre><code class="language-C++">inline BslPredCorrRTheta::BslPredCorrRTheta (
     Mapping const &amp; mapping,
-    BslAdvectionRTheta &lt; FootFinder, Mapping &gt; const &amp; advection_solver,
+    BslAdvectionRTheta const &amp; advection_solver,
     SplineRThetaBuilder_host const &amp; builder,
     SplineRThetaEvaluatorNullBound_host const &amp; rhs_evaluator,
     PolarSplineFEMPoissonLikeSolver &lt; GridR , GridTheta , PolarBSplinesRTheta , SplineRThetaEvaluatorNullBound &gt; const &amp; poisson_solver

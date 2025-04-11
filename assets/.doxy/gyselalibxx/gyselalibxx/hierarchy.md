@@ -7,9 +7,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**AdvectionFieldFinder**](classAdvectionFieldFinder.md) _Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation._ 
 * **class** [**BarycentricToCartesian**](classBarycentricToCartesian.md) _A class to convert barycentric coordinates to Cartesian coordinates on a triangle._ 
 * **class** [**BslAdvection1D**](classBslAdvection1D.md) _A class which computes the advection along the dimension of interest GridInterest._ 
-* **class** [**IAdvectionRTheta**](classIAdvectionRTheta.md) _Define the base class of 2D advection operators in polar index range._     
-    * **class** [**BslAdvectionRTheta**](classBslAdvectionRTheta.md) _Define an advection operator on 2D_  _index range._
-    * **class** [**BslAdvectionRTheta**](classBslAdvectionRTheta.md) _Define an advection operator on 2D_  _index range._
+* **class** [**BslAdvectionPolar**](classBslAdvectionPolar.md) _Define an advection operator on 2D_  _index range._
 * **class** [**IAdvectionSpatial**](classIAdvectionSpatial.md) _A class which provides an advection operator._     
     * **class** [**BslAdvectionSpatial**](classBslAdvectionSpatial.md) _A class which computes the spatial advection along the dimension of interest_ [_**GridX**_](structGridX.md) _. Working for every Cartesian geometry._
 * **class** [**IAdvectionVelocity**](classIAdvectionVelocity.md) _A class which provides an advection operator._     

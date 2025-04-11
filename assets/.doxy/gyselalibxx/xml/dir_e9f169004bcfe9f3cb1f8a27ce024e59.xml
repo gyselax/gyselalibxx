@@ -2,7 +2,6 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="dir_e9f169004bcfe9f3cb1f8a27ce024e59" kind="dir">
     <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta</compoundname>
-    <innerdir refid="dir_18bb63d4be19d3ea733e61d8625caf4d">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection</innerdir>
     <innerdir refid="dir_93bd9c5dcb1561501879bb6d3649fe64">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field</innerdir>
     <innerdir refid="dir_718520565cc7a7cfd9ba0e7c9c4c6d52">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry</innerdir>
     <innerdir refid="dir_1b70d60e6147eeeade38d183e3e9d318">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation</innerdir>

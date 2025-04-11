@@ -95,12 +95,6 @@
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../../../src/geometryRTheta/index.html">Geometry (r, theta)</a>
                 </li>
-                <li class="toctree-l3"><a class="reference internal" >advection</a>
-    <ul>
-                <li class="toctree-l4"><a class="reference internal" href="../../../src/geometryRTheta/advection/index.html">Advection operator</a>
-                </li>
-    </ul>
-                </li>
                 <li class="toctree-l3"><a class="reference internal" >advection_field</a>
     <ul>
                 <li class="toctree-l4"><a class="reference internal" href="../../../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
@@ -545,8 +539,12 @@
               
                 <div><h1 id="tests-on-the-2d-polar-advection-operator">Tests on the 2D polar advection operator</h1>
 <h2 id="tests-on-the-2d-polar-advection-operator_1">Tests on the 2D polar advection operator</h2>
-<p>The tests implemented in this folder test the 2D polar advection operator implemented in the <code>src/geometryRTheta/advection/</code> folder
-( <a href="../../../src/geometryRTheta/advection/index.html">advection</a> ).</p>
+<p>The tests implemented in this folder test the 2D polar advection operator implemented in the <code>src/advection/</code> folder
+( <a href="../../../src/advection/index.html">advection</a> ).</p>
+<p>The tests of the convergence order are made for constant CFL which means it checks the slope of the errors
+(infinity norm of the difference at the final time)
+for <span class="arithmatex">\((N_r\times N_\theta, dt) = (N_{r,0}\times N_{\theta,0}, dt_0)\)</span> and then <span class="arithmatex">\((n*N_{r,0}\times n*N_{\theta,0}, dt_0/n)\)</span>
+for <span class="arithmatex">\(n = 1, 2, 4, 8,  ...\)</span>.</p>
 <p>The tests are made for different parameters which are:</p>
 <h3 id="-the-mapping-and-the-domain-used-for-the-advection">- The mapping and the domain used for the advection</h3>
 <ul>

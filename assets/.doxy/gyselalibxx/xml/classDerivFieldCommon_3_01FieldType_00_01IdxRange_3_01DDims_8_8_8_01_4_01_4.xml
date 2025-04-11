@@ -383,7 +383,7 @@
 <para>The internal fields describing the values and derivatives. </para>
         </briefdescription>
         <detaileddescription>
-<para>The fields which contain the values have different index ranges to the fields containing derivatives so a DDC object cannot be used directly. E.g. for a 2D field (<ref refid="structX" kindref="compound">X</ref>,<ref refid="structY" kindref="compound">Y</ref>) with derivatives provided in both directions the elements of internal_fields have the type : DFieldMem&lt;IdxRange&lt;Deriv&lt;IDimX&gt;, Deriv&lt;IDimY&gt;, IDimX, IDimY&gt; The derivative index ranges are then defined such that the elements of internal_fields represent: 0 : <formula id="18">$f(x,y)$</formula> 1 : <formula id="19">$\partial_x^k f(x,y)  \quad \forall 1 \leq k \leq NDerivs$</formula> 2 : <formula id="20">$\partial_y^k f(x,y)  \quad \forall 1 \leq k \leq NDerivs$</formula> 3 : <formula id="21">$\partial_x^j \partial_y^k f(x,y)  \quad \forall 1 \leq j \leq NDerivs,  \forall 1 \leq k \leq NDerivs$</formula> </para>
+<para>The fields which contain the values have different index ranges to the fields containing derivatives so a DDC object cannot be used directly. E.g. for a 2D field (<ref refid="structX" kindref="compound">X</ref>,<ref refid="structY" kindref="compound">Y</ref>) with derivatives provided in both directions the elements of internal_fields have the type : DFieldMem&lt;IdxRange&lt;Deriv&lt;IDimX&gt;, Deriv&lt;IDimY&gt;, IDimX, IDimY&gt; The derivative index ranges are then defined such that the elements of internal_fields represent: 0 : <formula id="24">$f(x,y)$</formula> 1 : <formula id="25">$\partial_x^k f(x,y)  \quad \forall 1 \leq k \leq NDerivs$</formula> 2 : <formula id="26">$\partial_y^k f(x,y)  \quad \forall 1 \leq k \leq NDerivs$</formula> 3 : <formula id="27">$\partial_x^j \partial_y^k f(x,y)  \quad \forall 1 \leq j \leq NDerivs,  \forall 1 \leq k \leq NDerivs$</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -495,7 +495,7 @@
 <para>An internal function which provides the index of a field inside the internal_fields array. An Idx describes the derivatives of interest. n-th order derivatives are stored in the same field for all n!=0 so it is sufficient to provide any valid element from the derivatives. </para>
         </briefdescription>
         <detaileddescription>
-<para>The index is calculated using a bit mask. Mathematically the equation which determines the index in <computeroutput>internal_fields</computeroutput> is: <formula id="22">$ \sum_{\xi} 2^{i_\xi} \delta_{\text{using derivs in }\xi} $</formula> where <formula id="23">$i_\xi$</formula> is the index of the dimension <formula id="24">$\xi$</formula> in the tags.</para>
+<para>The index is calculated using a bit mask. Mathematically the equation which determines the index in <computeroutput>internal_fields</computeroutput> is: <formula id="28">$ \sum_{\xi} 2^{i_\xi} \delta_{\text{using derivs in }\xi} $</formula> where <formula id="29">$i_\xi$</formula> is the index of the dimension <formula id="30">$\xi$</formula> in the tags.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>idx</parametername>

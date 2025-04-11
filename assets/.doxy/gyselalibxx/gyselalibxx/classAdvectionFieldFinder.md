@@ -155,7 +155,7 @@ Then the advection field along the physical domain axis is given by .
 Then, we compute  and , with  the Jacobian matrix of the transformation .
 
 
-The equation (1) is solved thanks to advection operator ([**IAdvectionRTheta**](classIAdvectionRTheta.md)).
+The equation (1) is solved thanks to advection operator (IAdvectionRTheta).
 
 
 

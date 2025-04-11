@@ -20,7 +20,7 @@
 #include <ddc/pdi.hpp>
 
 #include "advection_field_rtheta.hpp"
-#include "bsl_advection_rtheta.hpp"
+#include "bsl_advection_polar.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
@@ -59,10 +59,16 @@ private:
             SplineRThetaBuilder_host,
             SplineRThetaEvaluatorConstBound_host>;
 
+    using BslAdvectionRTheta = BslAdvectionPolar<
+            SplinePolarFootFinderType,
+            LogicalToPhysicalMapping,
+            PreallocatableSplineInterpolator2D<
+                    SplineRThetaBuilder,
+                    SplineRThetaEvaluatorNullBound>>;
+
     LogicalToPhysicalMapping const& m_logical_to_physical;
 
-    BslAdvectionRTheta<SplinePolarFootFinderType, LogicalToPhysicalMapping> const&
-            m_advection_solver;
+    BslAdvectionRTheta const& m_advection_solver;
 
     EulerMethod_host const m_euler;
     SplinePolarFootFinderType_host const m_foot_finder;
@@ -82,8 +88,7 @@ public:
     BslImplicitPredCorrRTheta(
             LogicalToPhysicalMapping const& logical_to_physical,
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
-            BslAdvectionRTheta<SplinePolarFootFinderType, LogicalToPhysicalMapping> const&
-                    advection_solver,
+            BslAdvectionRTheta const& advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder_host const& builder,
             PolarSplineFEMPoissonLikeSolver<

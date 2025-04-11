@@ -124,7 +124,7 @@
 <parametername direction="in">eps</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <formula id="11">$ \varepsilon $</formula> amplitude of the perturbation. </para>
+<para>The <formula id="17">$ \varepsilon $</formula> amplitude of the perturbation. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
