@@ -1,6 +1,4 @@
-#include <array>
-#include <cassert>
-
+// SPDX-License-Identifier: MIT
 #include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
