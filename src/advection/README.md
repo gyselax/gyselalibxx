@@ -80,7 +80,7 @@ with $E$ the electric field.
 The operator BslAdvection1D implements the 1d case:
 
 ```math
-    \partial_t f(t,x) + A\partial_{x_i}(x')f(t,x) = 0,
+    \partial_t f(t,x) + A(x')\partial_{x}(x')f(t,x) = 0,
     \qquad x \in \Omega, x' \in \Omega',
 ```
 
