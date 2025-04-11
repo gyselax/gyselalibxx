@@ -109,10 +109,11 @@ documentation:
     cd docs
     mkdocs build
     cat doxygen.log
+    cd ..
     # Get files which have changed in this merge request
     git diff origin/${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}..HEAD --no-indent-heuristic --unified=0 --output=pull_new_files.txt --no-color --diff-filter=A
     python3 bin/ci_tools/check_readme_presence.py pull_new_files.txt
-    if [ -s doxygen.log ]; then exit 1; fi
+    if [ -s docs/doxygen.log ]; then exit 1; fi
 
 markdown_best_practices:
   rules:
