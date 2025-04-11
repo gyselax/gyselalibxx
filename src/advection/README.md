@@ -29,7 +29,7 @@ with $`f(0, \overrightarrow{x}) = f_0(\overrightarrow{x})`$ and *A* the advectio
 
 ## Backward Semi-Lagrangian method
 
-The method used to solve the equation is a backward Semi-Lagrangian method (BSL).
+The method used to solve the equation is a backward semi-Lagrangian method (BSL).
 It uses the conservation property along the characteristics:
 
 ```math
