@@ -1,0 +1,35 @@
+name: Nightly DDC check
+
+on:
+  schedule:
+    # Trigger at 4:30 am UTC every day
+    - cron: '30 4 * * *'
+  push:
+    branches: [ebourne_nightly]
+
+jobs:
+  cpu_tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ['tests_toolchain', 'tests_release_toolchain', 'tests_release_omp_toolchain']
+    container:
+      image: ghcr.io/gyselax/gyselalibxx_env:latest
+      options: --user root
+    name: CPU Test
+    steps:
+      - name: Checkout gyselalibxx
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Checkout recent DDC version
+        run: |
+          cd vendor/ddc
+          git fetch
+          git checkout main
+        shell: bash
+      - name: Build code
+        uses: ./.github/actions/build_code
+        with:
+          toolchain: toolchains/docker.gyselalibxx_env/${{ matrix.toolchain }}.cmake
+      - name: Run tests
+        uses: ./.github/actions/run_tests
