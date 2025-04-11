@@ -264,7 +264,7 @@ Then the four previous steps become
 
  1. calculate the mesh points in the pseudo-Cartesian domain using $\mathcal{G}$;
  2. calculate the advection field $A$ in the pseudo-Cartesian domain using the Jacobian matrix of $(\mathcal{F}\circ\mathcal{G}^{-1})^{-1}$;
- 3. calculate the feet of the characteristics n the pseudo-Cartesian domain;
+ 3. calculate the feet of the characteristics in the pseudo-Cartesian domain;
  4. calculate the feet of the characteristics in the logical domain (polar grid) using $\mathcal{G}^{-1}$;
 
 Here, $\mathcal{G}$ is analytically invertible (we can fix  $`\mathcal{G}^{-1}(x = x_0, y = y_0) = (r = 0, \theta = 0)`$)
