@@ -263,14 +263,6 @@ public:
                 0.,
                 ddc::reducer::max<double>(),
                 KOKKOS_LAMBDA(IdxXY const idx) {
-                    /*printf("At point (%lf,%lf), we have %lf\n",*/
-                    /*       ddc::get<X>(ddc::coordinate(idx)),*/
-                    /*       ddc::get<Y>(ddc::coordinate(idx)),*/
-                    /*       Kokkos::abs(*/
-                    /*               field_differentiated(idx)*/
-                    /*               - function_to_differentiate*/
-                    /*                         .template differentiate<DerivativeDimension>(*/
-                    /*                                 ddc::coordinate(idx))));*/
                     return Kokkos::abs(
                             field_differentiated(idx)
                             - function_to_differentiate.template differentiate<DerivativeDimension>(

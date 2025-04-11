@@ -22,7 +22,7 @@ template <class IdxRangeFull, class DerivativeDimension>
 class CentralFDMPartialDerivativeWithBValue
     : public IPartialDerivative<IdxRangeFull, DerivativeDimension>
 {
-private:
+public:
     using base_type = IPartialDerivative<IdxRangeFull, DerivativeDimension>;
 
     /// The type of the field to be differentiated.
@@ -40,7 +40,8 @@ private:
     /// The index range of all dimensions except DerivativeDimension.
     using typename base_type::IdxRangeBatch;
 
-    /// The field to be differentiated
+private:
+    /// The field to be differentiated, with the two boundary values
     DFieldMemType m_field;
     double m_BValue_left;
     double m_BValue_right;
