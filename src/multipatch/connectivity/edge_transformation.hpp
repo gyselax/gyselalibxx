@@ -97,7 +97,7 @@ public:
                 !std::is_same_v<EdgeDim1, EdgeDim2>,
                 "The two patches have the same conditinous dimension. "
                 "Please specify the input Patch as template parameter "
-                "using .template operator<CurrentPatch>()(current_coord).");
+                "using .transform_edge_coord<CurrentPatch>()(current_coord).");
         using CurrentPatch
                 = std::conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, Patch1, Patch2>;
         return transform_edge_coord<CurrentPatch>(current_coord);
