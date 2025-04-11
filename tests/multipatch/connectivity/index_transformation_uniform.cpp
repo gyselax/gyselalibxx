@@ -185,7 +185,7 @@ TEST_F(IndexTransformationUniformTest, StickingDifferentDimensions)
     test_idx_x1 = Patch1::Idx1(4);
     Patch3::Idx2 test_idx_y3(index_transformation_13(test_idx_x1));
 
-    // The first index of the index range is 3. 
+    // The first index of the index range is 3.
     EXPECT_EQ(test_idx_y3, Patch3::Idx2(3) + Patch3::IdxStep2(3));
 }
 
@@ -212,7 +212,7 @@ TEST_F(IndexTransformationUniformTest, ReverseTransformation)
     EdgeTransformation<Interface13> index_transformation_13(idx_range_x1, idx_range_x3);
 
     Patch3::Idx1 test_idx_x3(2);
-    // The first index of the index range is 2. 
+    // The first index of the index range is 2.
     test_idx_x3 += Patch3::IdxStep1(2);
     test_idx_x1 = index_transformation_13(test_idx_x3);
 
