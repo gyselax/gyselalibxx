@@ -92,7 +92,7 @@ jobs:
     runs-on: ubuntu-latest
     name: CPU PR result
     needs: [cpu_tests]
-    if: always() && (github.event_name == 'pull_request' || github.event_name == 'merge_group')
+    if: always() && (github.event_name == 'pull_request' && github.event.pull_request.draft == true)
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/set_pr_status
