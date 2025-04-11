@@ -23,7 +23,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  SHA: ${{ github.event.pull_request.head.sha | github.sha }}
+  SHA: ${{ github.event.pull_request.head.sha || github.sha }}
 
 jobs:
   pre_job:
@@ -62,7 +62,7 @@ jobs:
       - name: "Filter tests"
         uses: ./.github/actions/test_filter
         with:
-          base_sha: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha | inputs.merge_target }}
+          base_sha: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || inputs.merge_target }}
           trigger_type: ${{ github.event_name }}
       - name: "Send to persee"
         run: |
@@ -111,7 +111,7 @@ jobs:
   #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
   #      uses: ./.github/actions/test_filter
   #      with:
-  #        base_sha: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha | inputs.merge_target }}
+  #        base_sha: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || inputs.merge_target }}
   #        trigger_type: ${{ github.event_name }}
   #    - name: Setup environment
   #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
