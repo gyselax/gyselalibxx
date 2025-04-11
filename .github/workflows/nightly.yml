@@ -11,7 +11,8 @@ jobs:
   cpu_tests:
     runs-on: ubuntu-latest
     strategy:
-      matrix: ['tests_toolchain', 'tests_release_toolchain', 'tests_release_omp_toolchain']
+      matrix:
+        toolchain: ['tests_toolchain', 'tests_release_toolchain', 'tests_release_omp_toolchain']
     container:
       image: ghcr.io/gyselax/gyselalibxx_env:latest
       options: --user root
