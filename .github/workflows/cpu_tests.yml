@@ -34,7 +34,7 @@ jobs:
   pre_job:
     name: 'Check for unnecessary runs'
     runs-on: ubuntu-latest
-    if: github.repository == 'gyselax/gyselalibxx' && github.event.pull_request.draft == false
+    if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
     # Map a step output to a job output
     outputs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
