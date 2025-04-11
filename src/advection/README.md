@@ -49,7 +49,7 @@ The characteristic $\overrightarrow{X}$ represents the trajectory of the solutio
 The parametrisation of the trajectory are given after the ";".
 $\overrightarrow{X} (t; s, \overrightarrow{x})$ indicates that at the time $s$, the trajectory passes by the point $\overrightarrow{x}$.
 In the backward semi-Lagrangian method, we solve the equation of the characteristics to identify the trajectory
-of the solution passing by each mesh point $`\overrightarrow{x}_{\star}`$ at the time $s = t+dt$. We are interested in its position at the previous time step $t$. The conservation property along the characteristics informs us that the value of the function at this position $\overrightarrow{X}(t; s=t+dt, \overrightarrow{x_\star})$  at $t$ is the same as the value of the function at the mesh point $\overrightarrow{x_\star}$ at the time $s = t+dt$.
+of the solution passing by each mesh point $`\overrightarrow{x}_{\star}`$ at the time $s = t+dt$. We are interested in its position at the previous time step $t$. The conservation property along the characteristics informs us that the value of the function at this position $`\overrightarrow{X}(t; s=t+dt, \overrightarrow{x_\star})`$  at $t$ is the same as the value of the function at the mesh point $`\overrightarrow{x_\star}`$ at the time $s = t+dt$.
 
 So to compute the advected function at the next time step,
 
