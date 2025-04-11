@@ -83,6 +83,7 @@ class SplinePolarFootFinder
             typename SplineRThetaBuilderAdvection::memory_space>;
 
 public:
+    using typename base_type::IdxRangeOperator;
     using typename base_type::memory_space;
 
 private:
@@ -91,7 +92,6 @@ private:
 private:
     using typename base_type::GridR;
     using typename base_type::GridTheta;
-    using typename base_type::IdxRangeOperator;
     using typename base_type::R;
     using typename base_type::Theta;
     using typename base_type::VectorIndexSetAdvectionDims;
