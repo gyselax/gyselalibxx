@@ -176,61 +176,9 @@ Y(s; s, x, y) = y.
 So to compute the advected function at the next time step,
 
 - we compute the feet of the characteristics $`X(t^n; t^{n+1}, x_i, y_j)`$ and $`Y(t^n; t^{n+1}, x_i, y_j)`$
- for each mesh point $`(x_i, y_j)`$ with a time integration method ;
+ for each mesh point $`(x_i, y_j)`$ with a foot finder method (e.g. see [PolarFootFinder](#polarfootfinder);
 - we interpolate the function $f(t = t^n)$ on the feet of the characteristics.
  The property ensures that the interpolation gives the function at the next time step $f(t = t^{n+1})$.
-
-There are multiple time integration methods available. For more details see [Time Stepping Methods](../timestepper/README.md).
-
-### Advection domain
-
-The advection domain is the domain on which we will solve the equation.
-There are three potential advection domains to consider:
-
-- the physical domain;
-- the logical domain;
-- the pseudo-Cartesian domain.
-
-It seems logical to use the **physical domain**, where the studied equation is given, as the advection domain.
-
-However, we want to solve this equation on a polar grid. So before advecting, we have to
-compute the mesh points in the physical domain using a mapping function $\mathcal{F}$:
-
-```math
-\mathcal{F} : (r,\theta)_{i,j} \mapsto  (x,y)_{i,j}.
-```
-
-This adds some steps to the advection operator, we now have to compute
-
-- the mesh points in the physical domain using $\mathcal{F}$;
-- the feet of the characteristics in the physical domain;
-- the feet of the characteristics in the logical domain (polar grid) using $\mathcal{F}^{-1}$;
-- then interpolate the advection function at the feet of the characteristics in the logical domain.
-
-The third step can be difficult especially if the mapping function $\mathcal{F}$ is not analytically invertible.
-It is not impossible, but the computations can be costly.
-
-That is why, we introduce the **pseudo-Cartesian domain**.
-We use another mapping function $\mathcal{G}$ such that:
-
-```math
- \mathcal{G} : (r,\theta)_{i,j} \mapsto  (x,y)_{i,j} = (r\cos(\theta), r\sin(\theta))_{i,j}.
-```
-
-Then the four previous steps become
-
-- calculate the mesh points in the pseudo-Cartesian domain using $\mathcal{G}$;
-- calculate the advection field $A$ in the pseudo-Cartesian domain using the Jacobian matrix of $(\mathcal{F}\circ\mathcal{G}^{-1})^{-1}$;
-- calculate the feet of the characteristics in the pseudo\_Cartesian domain;
-- calculate the feet of the characteristics in the logical domain (polar grid) using $\mathcal{G}^{-1}$;
-- interpolate the advection function at the feet of the characteristics in the logical domain.
-
-Here, $\mathcal{G}$ is analytically invertible (we can fix  $\mathcal{G}^{-1}(x = 0, y = 0) = (r = 0, \theta = 0)$ )
-and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details are given in Zoni et al. (2019) [^1].
-
-**Remark 1:** if $\mathcal{F}$ is the circular mapping function, then the physical domain and the pseudo-Cartesian domain are the same.
-
-**Remark 2:** if the mapping function is analytically invertible, it is less costly to advect in the physical domain.
 
 ### Advection Field
 
