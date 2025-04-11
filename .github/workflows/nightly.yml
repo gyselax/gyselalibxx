@@ -13,6 +13,7 @@ jobs:
     strategy:
       matrix:
         toolchain: ['tests_toolchain', 'tests_release_toolchain', 'tests_release_omp_toolchain']
+        fail-fast: false
     container:
       image: ghcr.io/gyselax/gyselalibxx_env:latest
       options: --user root
