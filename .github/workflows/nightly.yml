@@ -28,7 +28,6 @@ jobs:
         with:
           repository: CExA-project/ddc
           path: vendor/ddc
-          git log -1
         shell: bash
       - name: Build code
         uses: ./.github/actions/build_code
