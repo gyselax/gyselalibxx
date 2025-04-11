@@ -1,28 +1,83 @@
 # Advection methods
 
-The `advection/` folder gathers the backward semi lagrangian scheme classes. There are two main classes, AdvectionSpatial and AdvectionVelocity. Implementing these operators separately makes sense, since we are using time splitting.
+The `advection/` folder gathers the classes which implement backward semi-Lagrangian schemes. There are 1D and 2D operators. Implementing the operators separately makes sense, since we are using time splitting.
+For the 1D case 2 specialised operators are also provided for common calculations.
 
 The feet of the characteristic curves are used to interpolate the updated distribution function on mesh points. It uses batched interpolators so the interpolation step is done over the whole distribution function.
 
+## Contents
+
+- [Studied equation](#studied-equation)
+- [Backward Semi-Lagrangian method](#backward-semi-lagrangian-method)
+- [Spatial advection](#spatial-advection)
+- [Velocity advection](#velocity-advection)
+- [1D advection with a given advection field](#1d-advection-with-a-given-advection-field)
+- [2D advection on a polar slice with a given advection field](#2d-advection-on-a-polar-slice-with-a-given-advection-field)
+    - [Advection Field](#advection-field)
+    - [Polar Foot Finder](#polar-foot-finder)
+    - [Advection Domain](#advection-domain)
+
+## Studied equation
+
+The studied equation is the following transport equation:
+
+```math
+\partial_t f(t, \overrightarrow{x}) + \overrightarrow{A}(t, \overrightarrow{x})\cdot\nabla f(t, \overrightarrow{x}) = 0,
+```
+
+with $`f(0, \overrightarrow{x}) = f_0(\overrightarrow{x})`$ and *A* the advection field. The advection field is a vector with the same number of dimensions as the operator. E.g. for a 1D advection *A* is a scalar.
+
+## Backward Semi-Lagrangian method
+
+The method used to solve the equation is a backward Semi-Lagrangian method (BSL).
+It uses the conservation property along the characteristics:
+
+```math
+\forall t, \quad f(t, \overrightarrow{x}) = f(s, \overrightarrow{X}(t; s, \overrightarrow{x}))
+```
+
+with:
+
+```math
+\begin{aligned}
+\partial_t \overrightarrow{X} (t; s, \overrightarrow{x}) = A(t, \overrightarrow{X}(t; s, x)),\\
+\overrightarrow{X}(s; s, \overrightarrow{x}) = \overrightarrow{x},\\
+\end{aligned}
+```
+
+The characteristic $\overrightarrow{X}$ represents the trajectory of the solution $f$.
+The parametrisation of the trajectory are given after the ";".
+$\overrightarrow{X} (t; s, \overrightarrow{x})$ indicates that at the time $s$, the trajectory passes by the point $\overrightarrow{x}$.
+In the backward semi-Lagrangian method, we solve the equation of the characteristics to identify the trajectory
+of the solution passing by each mesh point $`\overrightarrow{x}_{\star}`$ at the time $s = t+dt$. We are interested in its position at the previous time step $t$. The conservation property along the characteristics informs us that the value of the function at this position $\overrightarrow{X}(t; s=t+dt, \overrightarrow{x_\star})$  at $t$ is the same as the value of the function at the mesh point $\overrightarrow{x_\star}$ at the time $s = t+dt$.
+
+So to compute the advected function at the next time step,
+
+- we compute the feet of the characteristics $`\overrightarrow{X}(t^n; t^{n+1}, \overrightarrow{x}_{\star})`$
+ for each mesh point $`\overrightarrow{x}_{\star}`$;
+- we interpolate the function $f(t = t^n)$ on the feet of the characteristics.
+ The property ensures that the interpolation gives the function at the next time step $f(t = t^{n+1})$.
+
 ## Spatial advection
 
-Here the purpose is the advection along a direction on the physical space dimension of the phase space.
-The dynamics of the motion on the spatial dimension are governed by the following equation.
+The spatial advection solves the following (batched) 1D equation:
 
 $$ \frac{df_s}{dt}= \sqrt{\frac{m_e}{m_s}} v \frac{\partial f_s}{\partial x} $$
 
+describing the advection along a direction on the physical space dimension of the phase space.
+
 ## Velocity advection
 
-Here the purpose is the advection along a direction on the velocity space dimension of the phase space.
-The dynamics of the motion on the velocity dimension are governed by the following equation, where E is the electric field.
+The velocity advection solves the following (batched) 1D equation:
 
 $$ \frac{df_s}{dt}= q_s \sqrt{\frac{m_e}{m_s}} E \frac{\partial f_s}{\partial v} $$
 
+describing the advection along a direction on the velocity space dimension of the phase space,
+with $E$ the electric field.
+
 ## 1D advection with a given advection field
 
-The purpose of the BslAdvection1D operator is an advection along a given direction of the phase space. The advection field is given as input.
-The dynamics of the motion are governed by the following equation.
-
+The operator BslAdvection1D implements the 1d case:
 ```math
     \partial_t f(t,x) + A\partial_{x_i}(x')f(t,x) = 0,
     \qquad x \in \Omega, x' \in \Omega',
@@ -122,71 +177,17 @@ DFieldSpX A(idx_range_sp_x);
 using IDimInterest = IDimX;
 ```
 
-### Parameters
-
-The operator takes as templated parameters:
-
-- IDimInterest: a dimension of interest (or advection dimension) which refers to the dimension along which we advect the function;
-- AdvectionDomain: an advection domain, which refers to the domain where the advection field is defined. It has to contain the dimension of interest for the interpolation of the advection field in the time integration method;
-- FunctionDomain: the full domain where the function we want to advect is defined;
-- AdvectionFieldBuilder: a spline builder type for the advection field.
-- AdvectionFieldEvaluator: a spline evaluator type for the advection field.
-- TimeStepper: a time integration method (see [timestepper](./../timestepper/README.md)) to solve the characteristic equation. It has to be defined on the advection field domain. The feet have to be a Field of coordinates of the dimension of interest defined on the advection field domain.
-
 **Remark/Warning:** the BslAdvection1D operator is built with builder and evaluator for the advection field and interpolator for the function we want to advect. Theses operators have to be defined on the same domain as the advection field and function. For instance, if the advection field and/or the function are defined on the species dimension, then the interpolators have to contain the species dimension in its batched dimensions (see tests in the `tests/advection/` folder).
 
 **Remark/Warning:** The advection field need to use interpolation on B-splines. So we cannot use other type of interpolator for the advection field. However there is no constraint on the interpolator of the advected function.
 
 ## 2D advection on a polar slice with a given advection field
 
-### Studied equation
+The operator BslAdvectionPolar implements the (batched) 2d case on a polar slice of the distribution function.
 
-The studied equation is the following 2D transport equation type :
-
-```math
-\partial_t f(t,x,y) + A(t,x,y)\cdot\nabla f(t,x,y) = 0,
-```
-
-with $`f(0,x,y) = f_0(x,y)`$ and *A* the advection field.
-
-**We want to solve it on a polar grid so we have:**  $`(t,x,y) = (t,x(r,\theta),y(r,\theta))`$.
-
-Note that the implemented operator BslAdvectionPolar is batched so it can solve similar equations at multiple places on the phase space coordinates.
-
-### Backward Semi-Lagrangian method
-
-The method used to solve the equation is a backward Semi-Lagrangian method (BSL).
-It uses the conservation property along the characteristics:
-
-```math
-\forall t, \quad f(t, x, y) = f(s, X(t; s, x, y), Y(t; s, x, y))
-```
-
-with:
-
-```math
-\begin{aligned}
-\partial_t X (t; s, x, y) = A(t,X(t; s, x, y),Y(t; s, x, y)) \cdot e_x,\\
-\partial_t Y (t; s, x, y) = A(t,X(t; s, x, y),Y(t; s, x, y)) \cdot e_y,\\
-X(s; s, x, y) = x,\\
-Y(s; s, x, y) = y.
-\end{aligned}
-```
-
-So to compute the advected function at the next time step,
-
-- we compute the feet of the characteristics $`X(t^n; t^{n+1}, x_i, y_j)`$ and $`Y(t^n; t^{n+1}, x_i, y_j)`$
- for each mesh point $`(x_i, y_j)`$ with a foot finder method (e.g. see [PolarFootFinder](#polarfootfinder));
-- we interpolate the function $f(t = t^n)$ on the feet of the characteristics.
- The property ensures that the interpolation gives the function at the next time step $f(t = t^{n+1})$.
+On the polar grid we have:  $`(t, \overrightarrow{x}) = (t,x(r,\theta),y(r,\theta))`$.
 
 ### Advection Field
-
-In the studied equation, the advection field is given along the physical domain axis:
-
-```math
-\partial_t f + A \cdot \nabla f = 0.
-```
 
 The BslAdvectionPolar operator can take as input
 the advection field expressed on the $`(e_x, e_y)`$ basis of the physical domain or
@@ -217,34 +218,9 @@ J
 \end{bmatrix}.
 ```
 
-## PolarFootFinder
+### Polar Foot Finder
 
-These methods are designed to calculate the foot of the characteristic on the polar plane for a 2D transport equation of the type:
-
-```math
-\partial_t f(t,x(r,\theta),y(r,\theta)) + A(t,x(r,\theta),y(r,\theta))\cdot\nabla f(t,x(r,\theta),y(r,\theta)) = 0,
-```
-
-with $`f(0,x,y) = f_0(x,y)`$ and *A* the advection field.
-
-The characteristics are the solutions $X$ and $Y$ of the equations:
-
-```math
-\begin{aligned}
-\partial_t X (t; s, x, y) = A_x(t,X(t; s, x, y),Y(t; s, x, y)),\\
-\partial_t Y (t; s, x, y) = A_y(t,X(t; s, x, y),Y(t; s, x, y)),\\
-X(s; s, x, y) = x,\\
-Y(s; s, x, y) = y.
-\end{aligned}
-```
-
-The characteristic $X$ represents the trajectory on the $x$-dimension of the solution $f$
-(idem for $Y$ on the $y$-dimension).
-The parametrisation of the trajectory are given after the ";".
-$(X (t; s, x, y), Y (t; s, x, y))$ indicates that at the time $s$, the trajectory passes by the point $(x,y)$.
-In the backward semi-Lagrangian method, we solve the equation of the characteristics to identify the trajectory
-of the solution passing by each mesh point $`(x,y)_{ij}`$ at the time $s = t+dt$. We are interested in its position
-at the previous time step $t$. The conservation property along the characteristics informs us that the value of the function at this position $(X(t; s=t+dt, x, y), Y (t; s=t+dt, x, y))$  at $t$ is the same as the value of the function at the mesh point $`(x,y)_{ij}`$ at the time $s = t+dt$.
+The methods inheriting from IPolarFootFinder provide ways of calculating the feet of the characteristics on the polar plane.
 
 The characteristic feet are calculated using a time integration method. For details of available methods see [timestepper](../timestepper/README.md).
 
