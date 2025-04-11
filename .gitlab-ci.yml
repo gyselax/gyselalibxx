@@ -101,7 +101,7 @@ documentation:
   before_script: |
     git config --global --add safe.directory $CI_PROJECT_DIR
     git fetch origin ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME} --recurse-submodules=no
-    pip install -r requirements.txt
+    pip install -r docs/requirements.txt
   script: |
     rm -rf docs/mkdoc docs/site || true
     python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc
