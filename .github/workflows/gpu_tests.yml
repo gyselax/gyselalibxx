@@ -13,9 +13,9 @@ on:
   workflow_dispatch:
     inputs:
       merge_target:
-        description: "The branch to which this branch should be compared to filter out costly tests (default: main)"
+        description: "The branch to which this branch should be compared to filter out costly tests (default: devel)"
         required: false
-        default: main
+        default: devel
         type: string
 
 concurrency:
