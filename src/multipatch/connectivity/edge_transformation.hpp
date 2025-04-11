@@ -295,6 +295,7 @@ public:
 
         // Periodicity property.
         if constexpr (CurrentGrid::continuous_dimension_type::PERIODIC) {
+            // current_idx is provided by the user so it may be outside the expected range.
             std::size_t counter = 0;
             while ((current_idx < current_idx_range.front()) && (counter < 10)) {
                 counter++;
