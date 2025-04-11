@@ -11,9 +11,9 @@ jobs:
   cpu_tests:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         toolchain: ['tests_toolchain', 'tests_release_toolchain', 'tests_release_omp_toolchain']
-        fail-fast: false
     container:
       image: ghcr.io/gyselax/gyselalibxx_env:latest
       options: --user root
@@ -28,7 +28,6 @@ jobs:
         with:
           repository: CExA-project/ddc
           path: vendor/ddc
-        shell: bash
       - name: Build code
         uses: ./.github/actions/build_code
         with:
