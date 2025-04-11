@@ -62,6 +62,7 @@ jobs:
     needs: pre_job
     strategy:
       matrix: ${{fromJson(needs.matrix_prep.outputs.matrix)}}
+      fail-fast: false
     container:
       image: ghcr.io/gyselax/gyselalibxx_env:latest
       options: --user root
