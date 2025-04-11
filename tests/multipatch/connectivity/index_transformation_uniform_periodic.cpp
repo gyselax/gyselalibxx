@@ -113,7 +113,7 @@ TEST_F(IndexTransformationUniformPeriodicTest, InvertedOrientation)
     Patch1::Idx2 test_idx_theta1(6);
     Patch2::Idx2 test_idx_theta2(index_transformation(test_idx_theta1));
 
-    EXPECT_EQ(test_idx_theta2 , Patch2::Idx2( 3+1));
+    EXPECT_EQ(test_idx_theta2, Patch2::Idx2(3 + 1));
 }
 
 
@@ -145,7 +145,7 @@ TEST_F(IndexTransformationUniformPeriodicTest, PeriodicitySameOrientation)
     Patch1::Idx2 test_idx_theta1(8);
     Patch2::Idx2 test_idx_theta2 = index_transformation(test_idx_theta1);
 
-    EXPECT_EQ(test_idx_theta2 , Patch2::Idx2(0+1));
+    EXPECT_EQ(test_idx_theta2, Patch2::Idx2(0 + 1));
 }
 
 
@@ -161,5 +161,5 @@ TEST_F(IndexTransformationUniformPeriodicTest, PeriodicityInvertedOrientation)
     Patch1::Idx2 test_idx_theta1(0);
     Patch2::Idx2 test_idx_theta2 = index_transformation(test_idx_theta1);
 
-    EXPECT_EQ(test_idx_theta2 , Patch2::Idx2(0+1));
+    EXPECT_EQ(test_idx_theta2, Patch2::Idx2(0 + 1));
 }

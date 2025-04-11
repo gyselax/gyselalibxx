@@ -173,7 +173,7 @@ TEST_F(IndexTransformationNonUniformTest, InvertedOrientation)
     test_idx_x1 = Patch1::Idx1(12);
     Patch3::Idx1 test_idx_x3(index_transformation_13(test_idx_x1));
 
-    EXPECT_EQ(test_idx_x3, Patch3::Idx1(2+2));
+    EXPECT_EQ(test_idx_x3, Patch3::Idx1(2 + 2));
 }
 
 
@@ -195,7 +195,7 @@ TEST_F(IndexTransformationNonUniformTest, StickingDifferentDimensions)
     Patch1::Idx1 test_idx_x1(4);
     Patch2::Idx2 test_idx_y2(index_transformation_12(test_idx_x1));
 
-    EXPECT_EQ(test_idx_y2,Patch2::Idx2(3));
+    EXPECT_EQ(test_idx_y2, Patch2::Idx2(3));
 
     // Target index not starting at 0
     EdgeTransformation<Interface13> index_transformation_13(idx_range_x1, idx_range_y3);
@@ -203,7 +203,7 @@ TEST_F(IndexTransformationNonUniformTest, StickingDifferentDimensions)
     test_idx_x1 = Patch1::Idx1(4);
     Patch3::Idx2 test_idx_y3(index_transformation_13(test_idx_x1));
 
-    EXPECT_EQ(test_idx_y3, Patch3::Idx2( 3+3));
+    EXPECT_EQ(test_idx_y3, Patch3::Idx2(3 + 3));
 }
 
 
@@ -224,12 +224,12 @@ TEST_F(IndexTransformationNonUniformTest, ReverseTransformation)
     Patch2::Idx1 test_idx_x2(2);
     Patch1::Idx1 test_idx_x1(index_transformation_12(test_idx_x2));
 
-    EXPECT_EQ(test_idx_x1 , Patch1::Idx1(12));
+    EXPECT_EQ(test_idx_x1, Patch1::Idx1(12));
 
     EdgeTransformation<Interface13> index_transformation_13(idx_range_x1, idx_range_x3);
 
     Patch3::Idx1 test_idx_x3(2 + 2);
     test_idx_x1 = index_transformation_13(test_idx_x3);
 
-    EXPECT_EQ(test_idx_x1 , Patch1::Idx1(12));
+    EXPECT_EQ(test_idx_x1, Patch1::Idx1(12));
 }

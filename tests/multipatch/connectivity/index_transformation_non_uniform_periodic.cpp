@@ -139,7 +139,7 @@ TEST_F(IndexTransformationNonUniformPeriodicTest, ReverseTransformation)
     Patch2::Idx2 test_idx_theta2(3);
     Patch1::Idx2 test_idx_theta1(index_transformation(test_idx_theta2));
 
-    EXPECT_EQ(test_idx_theta1 , Patch1::Idx2(6));
+    EXPECT_EQ(test_idx_theta1, Patch1::Idx2(6));
 }
 
 
