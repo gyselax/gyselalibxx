@@ -306,10 +306,9 @@ public:
                 counter++;
                 current_idx -= n_cells_current;
             }
-        } else {
-            assert(current_idx <= current_idx_range.back());
-            assert(current_idx >= current_idx_range.front());
-        }
+        } 
+        assert(current_idx <= current_idx_range.back());
+        assert(current_idx >= current_idx_range.front());
 
         if constexpr ( // Uniform case
                 ddc::is_uniform_point_sampling_v<
