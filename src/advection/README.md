@@ -13,9 +13,9 @@ The feet of the characteristic curves are used to interpolate the updated distri
 - [Velocity advection](#velocity-advection)
 - [1D advection with a given advection field](#1d-advection-with-a-given-advection-field)
 - [2D advection on a polar slice with a given advection field](#2d-advection-on-a-polar-slice-with-a-given-advection-field)
-    - [Advection Field](#advection-field)
-    - [Polar Foot Finder](#polar-foot-finder)
-    - [Advection Domain](#advection-domain)
+  - [Advection Field](#advection-field)
+  - [Polar Foot Finder](#polar-foot-finder)
+  - [Advection Domain](#advection-domain)
 
 ## Studied equation
 
@@ -78,6 +78,7 @@ with $E$ the electric field.
 ## 1D advection with a given advection field
 
 The operator BslAdvection1D implements the 1d case:
+
 ```math
     \partial_t f(t,x) + A\partial_{x_i}(x')f(t,x) = 0,
     \qquad x \in \Omega, x' \in \Omega',
