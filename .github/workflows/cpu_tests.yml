@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: pre_job
     strategy:
-      matrix: ${{fromJson(needs.matrix_prep.outputs.matrix)}}
+      matrix: ${{fromJson(needs.pre_job.outputs.matrix)}}
       fail-fast: false
     container:
       image: ghcr.io/gyselax/gyselalibxx_env:latest
