@@ -185,25 +185,6 @@ jobs:
       uses: crate-ci/typos@v1.29.10
       with:
         files: ./AUTHORS ./CMakeLists.txt ./docs/ ./post-process ./README.md ./simulations ./src ./tests/ ./bin
-  
-  set_draft_failing:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && failure() && github.repository == 'gyselax/gyselalibxx'
-
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set PR to draft to avoid unnecessary runs
-        run: |
-          isDraft=${{ github.event.pull_request.draft }}
-          if [ "${isDraft}" != "true" ]
-          then
-            gh pr ready ${{ github.event.pull_request.number }} --undo
-            gh pr comment ${{ github.event.pull_request.number }} -b "This PR is failing tests so it has been put back into draft. Please remove the draft status when the tests pass."
-            gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
-          fi
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
 
   set_pr_status:
     runs-on: ubuntu-latest
