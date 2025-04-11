@@ -223,7 +223,7 @@ J
 
 The methods inheriting from IPolarFootFinder provide ways of calculating the feet of the characteristics on the polar plane.
 
-The feet of the characteristics are calculated using a time integration method. For details of available methods see [timestepper](../timestepper/README.md).
+The feet of the characteristics are calculated using a time integration method. For details of available methods see [Time Stepping Methods](../timestepper/README.md).
 
 ### Advection domain
 
