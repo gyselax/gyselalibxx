@@ -77,7 +77,7 @@ with $E$ the electric field.
 
 ## 1D advection with a given advection field
 
-The operator BslAdvection1D implements the 1d case:
+The operator BslAdvection1D implements the 1D case:
 
 ```math
     \partial_t f(t,x) + A(x')\partial_{x}(x')f(t,x) = 0,
@@ -184,7 +184,7 @@ using IDimInterest = IDimX;
 
 ## 2D advection on a polar slice with a given advection field
 
-The operator BslAdvectionPolar implements the (batched) 2d case on a polar slice of the distribution function.
+The operator BslAdvectionPolar implements the (batched) 2D case on a polar slice of the distribution function.
 
 On the polar grid we have:  $`(t, \overrightarrow{x}) = (t,x(r,\theta),y(r,\theta))`$.
 
