@@ -80,7 +80,7 @@ with $E$ the electric field.
 The operator BslAdvection1D implements the 1D case:
 
 ```math
-    \partial_t f(t,x) + A(x')\partial_{x}(x')f(t,x) = 0,
+    \partial_t f(t,x) + A(x')\partial_{x_i}(x')f(t,x) = 0,
     \qquad x \in \Omega, x' \in \Omega',
 ```
 
@@ -88,7 +88,7 @@ with
 
 - $`f`$ the function to advect. It is defined on $`\Omega`$ domain and the time dimension;
 - $`A`$ the advection field. It could be defined on a subdomain $`\Omega'\subset \Omega`$;
-- and $`x_i`$ a given direction. The advection field domain has to be defined on this dimension for the time integration method.
+- and $`x_i`$ the component of x in the direction on which the advection is defined. The advection field domain has to be defined on this dimension for the time integration method.
 
 ### Example of use
 
