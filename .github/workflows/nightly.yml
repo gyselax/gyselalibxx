@@ -24,10 +24,10 @@ jobs:
         with:
           submodules: recursive
       - name: Checkout recent DDC version
-        run: |
-          cd vendor/ddc
-          git fetch
-          git checkout main
+        uses: actions/checkout@v4
+        with:
+          repository: CExA-project/ddc
+          path: vendor/ddc
           git log -1
         shell: bash
       - name: Build code
