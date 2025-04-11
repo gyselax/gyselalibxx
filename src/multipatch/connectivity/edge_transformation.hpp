@@ -142,8 +142,7 @@ public:
         double const current_length = ddcHelper::total_interval_length(current_idx_range);
 
         Coord<TargetDim> const target_min = ddc::coordinate(target_idx_range.front());
-        double target_length = ddcHelper::total_interval_length(target_idx_range);
-
+        double const target_length = ddcHelper::total_interval_length(target_idx_range);
 
         double rescale_x = (current_coord - current_min) / current_length * target_length;
 
