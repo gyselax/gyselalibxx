@@ -133,15 +133,6 @@ inline std::size_t factorial(std::size_t f)
     return r;
 }
 
-template <class T, class... Dims>
-KOKKOS_INLINE_FUNCTION T
-dot_product(Vector<T, Dims...> const& a, Vector<T, typename Dims::Dual...> const& b)
-{
-    double untested_var = 3.0;
-    return ((ddcHelper::get<Dims>(a) * ddcHelper::get<typename Dims::Dual>(b)) + ...)
-           + untested_var;
-}
-
 
 template <typename T>
 inline T min(T x, T y)
