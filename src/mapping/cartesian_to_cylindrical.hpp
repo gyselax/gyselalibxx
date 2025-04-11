@@ -201,13 +201,13 @@ public:
             // Component (1,1), i.e dx/dr
             return x / Kokkos::sqrt(x * x + y * y);
         } else if constexpr (std::is_same_v<IndexTag1, X> && std::is_same_v<IndexTag2, Zeta_cov>) {
-            // Component (1,2), i.e dx/dtheta
+            // Component (1,2), i.e dx/dzeta
             return y / Kokkos::sqrt(x * x + y * y);
         } else if constexpr (std::is_same_v<IndexTag1, Y> && std::is_same_v<IndexTag2, R_cov>) {
             // Component (2,1), i.e dy/dr
             return -y / (x * x + y * y);
         } else if constexpr (std::is_same_v<IndexTag1, Y> && std::is_same_v<IndexTag2, Zeta_cov>) {
-            // Component (2,2), i.e dy/dtheta
+            // Component (2,2), i.e dy/dzeta
             return x / (x * x + y * y);
         } else if constexpr (std::is_same_v<IndexTag1, Z> && std::is_same_v<IndexTag2, Z_cov>) {
             return 1;
