@@ -33,14 +33,14 @@ The method used to solve the equation is a backward semi-Lagrangian method (BSL)
 It uses the conservation property along the characteristics:
 
 ```math
-\forall t, \quad f(t, \overrightarrow{x}) = f(s, \overrightarrow{X}(t; s, \overrightarrow{x}))
+\forall s, \quad f(t, \overrightarrow{x}) = f(s, \overrightarrow{X}(t; s, \overrightarrow{x}))
 ```
 
 with:
 
 ```math
 \begin{aligned}
-\partial_t \overrightarrow{X} (t; s, \overrightarrow{x}) = A(t, \overrightarrow{X}(t; s, x)),\\
+\partial_s \overrightarrow{X} (t; s, \overrightarrow{x}) = A(t, \overrightarrow{X}(t; s, x)),\\
 \overrightarrow{X}(s; s, \overrightarrow{x}) = \overrightarrow{x},\\
 \end{aligned}
 ```
