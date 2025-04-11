@@ -1,6 +1,15 @@
 name: GPU acceptance tests
 
 on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+  merge_group:
+    types:
+      - checks_requested
   workflow_dispatch:
     inputs:
       merge_target:
@@ -8,40 +17,29 @@ on:
         required: false
         default: main
         type: string
-  workflow_call:
-    inputs:
-      merge_target:
-        description: "The branch to which this branch should be compared to filter out costly tests"
-        required: true
-        type: string
-      SHA:
-        description: "The SHA of the commit being tested"
-        required: true
-        type: string
-      pr_number:
-        description: "The number of the pull request that triggered the test"
-        required: false
-        type: number
-      is_duplicate:
-        description: "Indicate if the run would be a duplicate"
-        required: false
-        default: false
-        type: boolean
 
 concurrency:
-  group: ${{ github.event_name != 'workflow_dispatch' && format('{0}-{1}', github.workflow, inputs.pr_number) || github.run_id }}
+  group: ${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.run_id }}
   cancel-in-progress: true
 
+env:
+  SHA: ${{ github.event.pull_request.head.sha | github.sha }}
+
 jobs:
-  wait_for_static_analysis:
+  pre_job:
+    name: 'Check for unnecessary runs'
     runs-on: ubuntu-latest
-    if: ${{ ! inputs.is_duplicate }}
+    if: github.repository == 'gyselax/gyselalibxx' && github.event.pull_request.draft == false
+    # Map a step output to a job output
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
     steps:
-      - name: Checkout gyselalibxx
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - id: skip_check
+        uses: ./.github/actions/duplicate_check
       - name: Wait
         run: |
-          workflow_id=$(gh run list --commit ${{ inputs.SHA || github.sha }} -w "Static Analyses" --json databaseId --jq '.[]["databaseId"]')
+          workflow_id=$(gh run list --commit ${{ env.SHA }} -w "Static Analyses" --json databaseId --jq '.[]["databaseId"]')
           echo "Run id : ${workflow_id}"
           if [ -n "${workflow_id}" ]
           then
@@ -56,15 +54,15 @@ jobs:
   trigger_gpu_tests:
     runs-on: ubuntu-latest
     environment: 'GitLab GPU trigger'
-    needs: [wait_for_static_analysis]
-    if: ${{ ! inputs.is_duplicate }}
+    needs: [pre_job]
+    if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
     steps:
       - name: Checkout gyselalibxx
         uses: actions/checkout@v4
       - name: "Filter tests"
         uses: ./.github/actions/test_filter
         with:
-          base_sha: ${{ inputs.merge_target }}
+          base_sha: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha | inputs.merge_target }}
           trigger_type: ${{ github.event_name }}
       - name: "Send to persee"
         run: |
@@ -73,8 +71,8 @@ jobs:
           git config --global user.name "GitHub CI Documentation builder"
           git config --global user.email "username@users.noreply.github.com"
           echo "${GITHUB_REPOSITORY}" > repo
-          echo "${{ inputs.SHA || github.sha }}" > commit
-          git commit -m "Test commit ${{ inputs.SHA || github.sha }}" repo commit
+          echo "${{ env.SHA }}" > commit
+          git commit -m "Test commit ${{ env.SHA }}" repo commit
           git push
         shell: bash
         env:
@@ -82,7 +80,7 @@ jobs:
 
   pass_duplicate_gpu_tests:
     runs-on: ubuntu-latest
-    if: ${{ inputs.is_duplicate }}
+    if: ${{ needs.pre_job.outputs.should_skip == 'true' }}
     steps:
       - name: "Get bot token"
         uses: actions/create-github-app-token@v1
@@ -97,7 +95,7 @@ jobs:
             --header "X-GitHub-Api-Version: 2022-11-28" \
             --header "Authorization: token ${{ steps.app-token.outputs.token }}" \
             https://api.github.com/repos/${GITHUB_REPOSITORY}/check-runs \
-            -d "{\"name\":\"GPU Tests\",\"head_sha\":\"${{ inputs.SHA || github.sha }}\",\"status\":\"completed\", \"conclusion\":\"success\",\"output\":{\"title\":\"GPU Test\",\"summary\":\"Previous success is still valid. Tests were not rerun\"}"
+            -d "{\"name\":\"GPU Tests\",\"head_sha\":\"${{ env.SHA }}\",\"status\":\"completed\", \"conclusion\":\"success\",\"output\":{\"title\":\"GPU Test\",\"summary\":\"Previous success is still valid. Tests were not rerun\"}"
 
 
   #gpu_tests:
@@ -105,26 +103,26 @@ jobs:
   #  environment: development
   #  steps:
   #    - name: Checkout gyselalibxx
-  #      if: ${{ ! inputs.is_duplicate }}
+  #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
   #      uses: actions/checkout@v4
   #      with:
   #        submodules: recursive
   #    - name: "Filter tests"
-  #      if: ${{ ! inputs.is_duplicate }}
+  #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
   #      uses: ./.github/actions/test_filter
   #      with:
-  #        base_sha: ${{ inputs.merge_target }}
+  #        base_sha: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha | inputs.merge_target }}
   #        trigger_type: ${{ github.event_name }}
   #    - name: Setup environment
-  #      if: ${{ ! inputs.is_duplicate }}
+  #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
   #      run: |
   #        . toolchains/v100.persee/environment.sh
   #      shell: bash
   #    - name: Build code
-  #      if: ${{ ! inputs.is_duplicate }}
+  #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
   #      uses: ./.github/actions/build_code
   #      with:
   #        toolchain: toolchains/v100.persee/toolchain.cmake
   #    - name: Run tests
-  #      if: ${{ ! inputs.is_duplicate }}
+  #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
   #      uses: ./.github/actions/run_tests
