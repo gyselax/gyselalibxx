@@ -1467,12 +1467,10 @@ public:
                     Idx<RBasisSubset> ib_trial_r(idx_trial_r - cell_idx_r);
                     Idx<ThetaBasisSubset> ib_trial_theta(theta_mod(ib_trial_theta_idx));
 
-                    assert((ib_test_r - Idx<RBasisSubset>(0)).value() < BSplinesR::degree() + 1);
-                    assert((ib_test_theta - Idx<ThetaBasisSubset>(0)).value()
-                           < BSplinesTheta::degree() + 1);
-                    assert((ib_trial_r - Idx<RBasisSubset>(0)).value() < BSplinesR::degree() + 1);
-                    assert((ib_trial_theta - Idx<ThetaBasisSubset>(0)).value()
-                           < BSplinesTheta::degree() + 1);
+                    assert(ib_test_r < Idx<RBasisSubset>(BSplinesR::degree() + 1));
+                    assert(ib_test_theta < Idx<ThetaBasisSubset>(BSplinesTheta::degree() + 1));
+                    assert(ib_trial_r < Idx<RBasisSubset>(BSplinesR::degree() + 1));
+                    assert(ib_trial_theta < Idx<ThetaBasisSubset>(BSplinesTheta::degree() + 1));
 
                     // Calculate the weak integral
                     return ddc::parallel_transform_reduce(
