@@ -95,14 +95,12 @@ jobs:
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/run_tests
       - name: Check Test Coverage
-        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
-        if: matrix.toolchain == 'tests_coverage_toolchain'
+        if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'tests_coverage_toolchain'
         run: |
           pip install gcovr
           gcovr --filter src --lcov coverage.lcov --merge-mode-functions=merge-use-line-0 build
       - name: Archive code coverage results
-        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
-        if: matrix.toolchain == 'tests_coverage_toolchain'
+        if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'tests_coverage_toolchain'
         uses: actions/upload-artifact@v4
         with:
           name: code-coverage-report
