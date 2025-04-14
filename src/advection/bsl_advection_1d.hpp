@@ -35,7 +35,8 @@
  *          The dimension along which the advection is computed. 
  *          It refers to the dimension of @f$ x_i @f$ in the equation. 
  * @tparam IdxRangeAdvection
- *          The index range of @f$ \Omega' @f$ where the characteristic equation is solved. 
+ *          The index range for the interpolation points defined on @f$ \Omega' @f$ 
+ *          where the characteristic equation is solved. 
  *          @f$ \Omega' @f$ also refers to the domain of the advection field. 
  *          It had to also be defined on the GridInterest for the time integration method. 
  * @tparam IdxRangeFunction
