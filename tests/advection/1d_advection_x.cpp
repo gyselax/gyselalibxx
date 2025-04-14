@@ -128,7 +128,7 @@ public:
         ddc::for_each(interpolation_idx_range, [&](IdxX const idx) {
             double const x0 = ddc::coordinate(idx);
             double x = 2 * std::atan(std::tan(x0 / 2.) * std::exp(-final_t));
-            // Replace inside the index range the feet if the dimension if periodic
+            // Replace inside the domain the feet if the dimension if periodic
             if (X::PERIODIC) {
                 x = fmod(x - double(x_min), double(x_max - x_min)) + double(x_min);
                 x = x > double(x_min) ? x : x + double(x_max - x_min);

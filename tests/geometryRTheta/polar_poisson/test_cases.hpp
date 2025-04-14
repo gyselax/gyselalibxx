@@ -232,21 +232,21 @@ public:
      */
     double solution_at_pole(Coord<R, Theta> const& coord) const;
     /**
-     * @brief Get the value of the RHS on the index range except the O-point.
+     * @brief Get the value of the RHS on the domain except the O-point.
      *
      * @param[in] coord
      *      The given polar coordinate.
      *
-     * @return The value of the RHS on the index range except the O-point.
+     * @return The value of the RHS on the domain except the O-point.
      */
     double non_singular_solution(Coord<R, Theta> const& coord) const;
     /**
-     * @brief Get the value of the RHS at any point of the index range.
+     * @brief Get the value of the RHS at any point of the domain.
      *
      * @param[in] coord
      *      The given polar coordinate.
      *
-     * @return The value of the RHS at any point of the index range.
+     * @return The value of the RHS at any point of the domain.
      */
     double operator()(Coord<R, Theta> const& coord) const
     {

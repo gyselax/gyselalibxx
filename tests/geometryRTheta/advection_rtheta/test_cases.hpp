@@ -50,7 +50,7 @@ public:
      * @brief Instantiate a FunctionToBeAdvected_cos_4_ellipse function.
      *
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range.
+     *      The mapping from the logical domain to the physical domain.
      */
     explicit FunctionToBeAdvected_cos_4_ellipse(Mapping const& mapping) : m_mapping(mapping) {}
 
@@ -114,7 +114,7 @@ public:
      * @brief Instantiate a FunctionToBeAdvected_gaussian function.
      *
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range.
+     *      The mapping from the logical domain to the physical domain.
      * @param[in] constant
      *      The constant @f$ C@f$ in front of the exponential.
      * @param[in] x0
@@ -230,14 +230,14 @@ public:
             = default;
 
     /**
-￼     * @brief Get the advection field in the physical index range.
+￼     * @brief Get the advection field in the physical domain.
 ￼     *
 ￼     * @param[in] coord
-￼     *      The coordinate in the physical index range.
+￼     *      The coordinate in the physical domain.
 ￼     * @param[in] t
 ￼     *      Time component.
 ￼     *
-￼     * @return The advection field in the physical index range.
+￼     * @return The advection field in the physical domain.
 ￼     */
     KOKKOS_FUNCTION DVector<X, Y> operator()(CoordXY const coord, double const t) const
     {
@@ -247,14 +247,14 @@ public:
     }
 
     /**
-￼     * @brief Get the characteristic feet in the physical index range.
+￼     * @brief Get the characteristic feet in the physical domain.
 ￼     *
 ￼     * @param[in] coord
-￼     *      The original coordinate in the physical index range.
+￼     *      The original coordinate in the physical domain.
 ￼     * @param[in] t
 ￼     *      Time component.
 ￼     *
-￼     * @return The characteristic feet in the physical index range.
+￼     * @return The characteristic feet in the physical domain.
 ￼     */
     KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord, double const t) const
     {
@@ -274,7 +274,7 @@ public:
  * @brief Advection field for the tests of the 2D polar advection operator.
  *
  *
- * The test advection field for a translation in the physical index range is given by :
+ * The test advection field for a translation in the physical domain is given by :
  *
  * @f$ A(x,y) = [v_x, v_y]@f$.
  *
@@ -295,9 +295,9 @@ public:
      * @brief Instantiate an AdvectionField_translation advection field.
      *
      * @param[in] vx
-     *      The constant first component of the advection field in the physical index range.
+     *      The constant first component of the advection field in the physical domain.
      * @param[in] vy
-     *      The constant second component of the advection field in the physical index range.
+     *      The constant second component of the advection field in the physical domain.
      */
     AdvectionField_translation(CoordVx vx, CoordVy vy)
         : m_velocity(ddc::get<Vx>(vx), ddc::get<Vy>(vy))
@@ -309,14 +309,14 @@ public:
             = default;
 
     /**
-￼     * @brief Get the advection field in the physical index range.
+￼     * @brief Get the advection field in the physical domain.
 ￼     *
 ￼     * @param[in] coord
-￼     *      The coordinate in the physical index range.
+￼     *      The coordinate in the physical domain.
 ￼     * @param[in] t
 ￼     *      Time component.
 ￼     *
-￼     * @return The advection field in the physical index range.
+￼     * @return The advection field in the physical domain.
 ￼     */
     KOKKOS_FUNCTION DVector<X, Y> operator()(CoordXY const coord, double const t) const
     {
@@ -324,14 +324,14 @@ public:
     }
 
     /**
-￼     * @brief Get the characteristic feet in the physical index range.
+￼     * @brief Get the characteristic feet in the physical domain.
 ￼     *
 ￼     * @param[in] coord
-￼     *      The original coordinate in the physical index range.
+￼     *      The original coordinate in the physical domain.
 ￼     * @param[in] t
 ￼     *      Time component.
 ￼     *
-￼     * @return The characteristic feet in the physical index range.
+￼     * @return The characteristic feet in the physical domain.
 ￼     */
     KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord, double const t) const
     {
@@ -345,7 +345,7 @@ public:
  * @brief Advection field for the tests of the 2D polar advection operator.
  *
  *
- * The test advection field for a rotation in the physical index range is given by :
+ * The test advection field for a rotation in the physical domain is given by :
  *
  * @f$ A(x,y) = J_{\mathcal{F}}[v_r, v_\theta]@f$.
  *
@@ -373,9 +373,9 @@ public:
      * @brief Instantiate an AdvectionField_rotation advection field.
      *
      * @param[in] vr
-     *      The constant first polar component of the advection field in the physical index range.
+     *      The constant first polar component of the advection field in the physical domain.
      * @param[in] vtheta
-     *      The constant second polar component of the advection field in the physical index range.
+     *      The constant second polar component of the advection field in the physical domain.
      */
     AdvectionField_rotation(CoordVr vr, CoordVtheta vtheta)
         : m_v(vr, vtheta)
@@ -388,14 +388,14 @@ public:
     KOKKOS_DEFAULTED_FUNCTION AdvectionField_rotation(AdvectionField_rotation const&) = default;
 
     /**
-￼     * @brief Get the advection field in the physical index range.
+￼     * @brief Get the advection field in the physical domain.
 ￼     *
 ￼     * @param[in] coord
-￼     *      The coordinate in the physical index range.
+￼     *      The coordinate in the physical domain.
 ￼     * @param[in] t
 ￼     *      Time component.
 ￼     *
-￼     * @return The advection field in the physical index range.
+￼     * @return The advection field in the physical domain.
 ￼     */
     KOKKOS_FUNCTION DVector<X, Y> operator()(CoordXY const coord, double const t) const
     {
@@ -405,14 +405,14 @@ public:
     }
 
     /**
-￼     * @brief Get the characteristic feet in the physical index range.
+￼     * @brief Get the characteristic feet in the physical domain.
 ￼     *
 ￼     * @param[in] coord_xy
-￼     *      The original coordinate in the physical index range.
+￼     *      The original coordinate in the physical domain.
 ￼     * @param[in] t
 ￼     *      Time component.
 ￼     *
-￼     * @return The characteristic feet in the physical index range.
+￼     * @return The characteristic feet in the physical domain.
 ￼     */
     KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord_xy, double const t) const
     {

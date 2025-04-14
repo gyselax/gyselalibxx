@@ -161,7 +161,7 @@ public:
      * mapping of a circular mapping and a discrete mapping of a Czarny
      * mapping.
      *
-     * Create a Nr x Nt discrete index range with Nr = N, Nt = 2*N and N a
+     * Create a Nr x Nt index range with Nr = N, Nt = 2*N and N a
      * templated parameter.
      * Then compute the infinity norm of the difference between the
      * the pseudo Cartesian Jacobian matrix of the analytical mapping

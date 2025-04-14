@@ -19,12 +19,12 @@
  * @f$ \partial_t f_s(t,x) + A_{s, x_i} (x') \cdot \partial_{x_i} f_s (t, x) = 0, \qquad x\in \Omega, x'\in\Omega'@f$
  * 
  * with 
- *  * @f$ f @f$, a function defined on an index range @f$ \Omega @f$; 
- *  * @f$ A @f$, an advection field defined on subindex range @f$ \Omega'\subset \Omega @f$; 
+ *  * @f$ f @f$, a function defined on an domain @f$ \Omega @f$; 
+ *  * @f$ A @f$, an advection field defined on subdomain @f$ \Omega'\subset \Omega @f$; 
  *  * @f$ x_i @f$, an advection dimension.
  * 
  * 
- * The characteristic equation is solved on the advection index range @f$ \Omega'@f$. 
+ * The characteristic equation is solved on the advection domain @f$ \Omega'@f$. 
  * Then the feet on @f$ \Omega@f$ are computed from the characteristic feet on @f$ \Omega'@f$ and the function 
  * @f$ f @f$ is interpolated at the feet in @f$ \Omega @f$. 
  * 
@@ -35,11 +35,11 @@
  *          The dimension along which the advection is computed. 
  *          It refers to the dimension of @f$ x_i @f$ in the equation. 
  * @tparam IdxRangeAdvection
- *          The index range @f$ \Omega' @f$ where the characteristic equation is solved. 
- *          It also refers to the index range of the advection field. 
+ *          The index range of @f$ \Omega' @f$ where the characteristic equation is solved. 
+ *          @f$ \Omega' @f$ also refers to the domain of the advection field. 
  *          It had to also be defined on the GridInterest for the time integration method. 
  * @tparam IdxRangeFunction
- *          The index range @f$ \Omega @f$ where allfdistribu is defined. 
+ *          The index range of @f$ \Omega @f$ where allfdistribu is defined. 
  * @tparam AdvectionFieldBuilder
  *          The type of the spline builder for the advection field (see SplineBuilder). 
  * @tparam AdvectionFieldEvaluator
@@ -117,20 +117,20 @@ private:
 
 public:
     /**
-     * @brief Constructor when the advection index range and the function index range are different. 
+     * @brief Constructor when the advection domain and the function domain are different. 
      * 
      * When IdxRangeAdvection and IdxRangeFunction are different, we need one interpolator for 
      * each index range. 
      * 
      * We can also use it when we want two different interpolators but defined on the same 
-     * index range (e.g. different boundary conditions for the evaluators).
+     * domain (e.g. different boundary conditions for the evaluators).
      * 
      * @param[in] function_interpolator interpolator along the GridInterest direction to interpolate 
-     *          the advected function (allfdistribu) on the index range of the function.
+     *          the advected function (allfdistribu) on the domain of the function.
      * @param[in] adv_field_builder builder along the GridInterest direction to build a spline representation
-     *          of the advection field on the function index range. 
+     *          of the advection field on the function domain. 
      * @param[in] adv_field_evaluator evaluator along the GridInterest direction to evaluate 
-     *          the advection field spline representation on the function index range.  
+     *          the advection field spline representation on the function domain.  
      * @param[in] time_stepper time integration method for the characteristic equation. 
      */
     explicit BslAdvection1D(
@@ -171,7 +171,7 @@ public:
     {
         Kokkos::Profiling::pushRegion("BslAdvection1D");
 
-        // Get index ranges and operators .............................................................
+        // Get index ranges and operators ........................................................
         IdxRangeFunction const idx_range_function = get_idx_range(allfdistribu);
         IdxRangeAdvection const idx_range_advection = get_idx_range(advection_field);
 

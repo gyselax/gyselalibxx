@@ -187,7 +187,7 @@ public:
             double const x0 = ddc::coordinate(IdxX(xv_idx));
             double const v = ddc::coordinate(IdxVx(xv_idx));
             double x = x0 - final_t * v;
-            // Replace inside the index range the feet if the dimension if periodic
+            // Replace inside the domain the feet if the dimension if periodic
             if (X::PERIODIC) {
                 x = fmod(x - double(x_min), double(x_max - x_min)) + double(x_min);
                 x = x > double(x_min) ? x : x + double(x_max - x_min);

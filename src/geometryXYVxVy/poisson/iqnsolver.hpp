@@ -12,7 +12,7 @@
  *
  * An operator which solves the Quasi-Neutrality equation:
  * @f$ - \frac{d^2 \phi}{dx^2} = \rho @f$
- * using a fast Fourier transform on a periodic index range.
+ * using a fast Fourier transform on a periodic domain.
  * This operator only works for equidistant points.
  */
 class IQNSolver
