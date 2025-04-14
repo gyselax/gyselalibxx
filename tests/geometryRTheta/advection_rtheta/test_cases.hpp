@@ -432,7 +432,7 @@ public:
  * - RotationSimulation,
  * - DecentredRotationSimulation.
  *
- * @see BslAdvectionRTheta
+ * @see BslAdvectionPolar
  * @see FunctionToBeAdvected
  * @see AdvectionField
  */
