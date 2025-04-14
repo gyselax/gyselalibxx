@@ -9,7 +9,6 @@ Internally the information for the vector fields along each dimension is stored 
 
 In order to facilitate the usage of VectorField the utility functions `get_idx_range`, `ddcHelper::deepcopy`, and `ddcHelper::get` are provided. However for the best access it is advised to retrieve the Field and use this directly.
 
-
 ## DerivField
 
 The classes DerivFieldMem and DerivField provide a way to represent a field with its associated derivatives. The two classes are required as DerivFieldMem contains FieldMem objects while DerivField contains Field objects.

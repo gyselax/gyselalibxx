@@ -176,7 +176,9 @@ public:
     */
     struct EvalDeriv1DType
     {
+        /// The value of the function @f$f(x)@f$.
         double value;
+        /// The derivative of the function @f$\partial_x f(x)@f$.
         double derivative;
     };
 
@@ -186,7 +188,9 @@ public:
     */
     struct EvalDeriv2DType
     {
+        /// The value of the function @f$f(r, \theta)@f$.
         double value;
+        /// The gradient of the function @f$\nabla f(r, \theta)@f$.
         DVector<R_cov, Theta_cov> derivative;
     };
 
@@ -332,7 +336,7 @@ public:
                   ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
                           - ddc::discrete_space<BSplinesTheta>().nbasis())
     {
-        static_assert(has_2d_jacobian_v<Mapping, CoordRTheta>);
+        static_assert(has_jacobian_v<Mapping, CoordRTheta>);
         //initialise x_init
         Kokkos::deep_copy(m_x_init, 0);
         // Get break points

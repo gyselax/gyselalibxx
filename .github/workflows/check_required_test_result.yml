@@ -1,0 +1,28 @@
+name: Check required test result
+
+# Check the status of the PR following the conclusion of a required test
+# If any required tests are failing the PR is pub back into draft.
+# If all the required tests (except the GPU tests which are very slow)
+# are passing then the "Ready to review" label is added to the PR.
+
+on:
+  check_run:
+    types: completed
+
+jobs:
+
+  set_labels:
+    runs-on: ubuntu-latest
+    name: Set PR labels
+    if: |
+      github.repository == 'gyselax/gyselalibxx' && github.event.check_run.pull_requests &&
+      github.event.check_run.conclusion == 'failure' && github.event.check_run.name == 'GPU Tests'
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/set_pr_status
+        with:
+          status: ${{ github.event.check_run.conclusion }}
+          pr_number: ${{ github.event.check_run.pull_requests.number }}
+          sha: ${{ github.event.check_run.head_sha }}
+

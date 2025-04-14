@@ -46,12 +46,12 @@ PC_tree_t parse_executable_arguments(int argc, char** argv, char const* const pa
  *
  * The index range is initialised using information from an input yaml file.
  * If the B-splines are uniform then the information to be read is:
- * - .SplineMesh.<mesh_identifier>_min
- * - .SplineMesh.<mesh_identifier>_max
- * - .SplineMesh.<mesh_identifier>_ncells
+ * - .SplineMesh.\<mesh_identifier\>_min
+ * - .SplineMesh.\<mesh_identifier\>_max
+ * - .SplineMesh.\<mesh_identifier\>_ncells
  *
  * If the B-splines are non-uniform then the information to be read is:
- * - .SplineMesh.<mesh_identifier>_MeshFile
+ * - .SplineMesh.\<mesh_identifier\>_MeshFile
  *
  * This string indicates the name of a file which contains the knots of the bspline.
  *
@@ -86,9 +86,9 @@ inline IdxRange<Grid1D> init_spline_dependent_idx_range(
         // if you want to ensure that the interpolation points used match exactly the points
         // used to initialise values passed into the simulation.
         std::vector<Coord1D> mesh;
-        std::string grid_name = "grid_" + mesh_identifier;
 
         if constexpr (BSplines::is_uniform()) {
+            std::string grid_name = "grid_" + mesh_identifier;
             PDI_get_arrays("read_" + mesh_identifier, grid_name, mesh);
         } else {
             std::string breakpoints_name = "breakpoints_" + mesh_identifier;
@@ -96,7 +96,7 @@ inline IdxRange<Grid1D> init_spline_dependent_idx_range(
                     "read_" + mesh_identifier,
                     breakpoints_name,
                     breakpoints,
-                    grid_name,
+                    mesh_identifier,
                     mesh);
             ddc::init_discrete_space<BSplines>(breakpoints);
         }
@@ -120,9 +120,9 @@ inline IdxRange<Grid1D> init_spline_dependent_idx_range(
  * position at the boundary.
  *
  * The information to be read from the file is:
- * - .SplineMesh.<mesh_identifier>_min
- * - .SplineMesh.<mesh_identifier>_max
- * - .SplineMesh.<mesh_identifier>_ncells
+ * - .SplineMesh.\<mesh_identifier\>_min
+ * - .SplineMesh.\<mesh_identifier\>_max
+ * - .SplineMesh.\<mesh_identifier\>_ncells
  *
  * The interpolation index range is then created using the specified method.
  */

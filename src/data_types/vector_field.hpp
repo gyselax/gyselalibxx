@@ -503,4 +503,32 @@ auto create_mirror_view_and_copy(
         return field_alloc;
     }
 }
+
+/**
+ * @brief Copy the elements of a vector into a vector field at a given index.
+ *
+ * @param[out] field On output, a VectorField containing the values of vector 
+ * at the index idx.
+ * @param[in] idx An index to specify where the values of the Vector should be 
+ * copied in the VectorField. 
+ * @param[in] vector A Vector to be copied in the VectorField at the index idx.
+ */
+template <
+        class ElementType,
+        class IdxRangeType,
+        class... Dims,
+        class MemorySpace,
+        class LayoutStridedPolicy>
+KOKKOS_INLINE_FUNCTION void assign_vector_field_element(
+        VectorField<
+                ElementType,
+                IdxRangeType,
+                VectorIndexSet<Dims...>,
+                MemorySpace,
+                LayoutStridedPolicy> field,
+        typename IdxRangeType::discrete_element_type idx,
+        Vector<ElementType, Dims...> vector)
+{
+    ((ddcHelper::get<Dims>(field)(idx) = ddcHelper::get<Dims>(vector)), ...);
+}
 } // namespace ddcHelper

@@ -5,6 +5,7 @@
 #include "circular_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "discrete_to_cartesian.hpp"
+#include "indexed_tensor.hpp"
 #include "mapping_tools.hpp"
 #include "view.hpp"
 
@@ -47,6 +48,11 @@ class InvJacobianOPoint<
     /// The coordinate system in which the inverse of the Jacobian is calculated.
     using CoordRTheta = Coord<R, Theta>;
 
+    /// @brief The covariant form of the first physical coordinate.
+    using X_cov = typename X::Dual;
+    /// @brief The covariant form of the second physical coordinate.
+    using Y_cov = typename Y::Dual;
+
 private:
     using Mapping = CombinedMapping<
             CircularToCartesian<R, Theta, X, Y>,
@@ -76,13 +82,14 @@ public:
      *
      * @result The matrix evaluated at the central point.
      */
-    KOKKOS_INLINE_FUNCTION Matrix_2x2 operator()() const
+    KOKKOS_INLINE_FUNCTION DTensor<VectorIndexSet<Xpc, Ypc>, VectorIndexSet<X_cov, Y_cov>>
+    operator()() const
     {
-        Matrix_2x2 J;
-        J[0][0] = 1.;
-        J[0][1] = 0.;
-        J[1][0] = 0.;
-        J[1][1] = 1.;
+        DTensor<VectorIndexSet<Xpc, Ypc>, VectorIndexSet<X_cov, Y_cov>> J;
+        ddcHelper::get<Xpc, X_cov>(J) = 1.;
+        ddcHelper::get<Xpc, Y_cov>(J) = 0.;
+        ddcHelper::get<Ypc, X_cov>(J) = 0.;
+        ddcHelper::get<Ypc, Y_cov>(J) = 1.;
         return J;
     }
 };
@@ -103,10 +110,14 @@ class InvJacobianOPoint<
     /// The coordinate system in which the inverse of the Jacobian is calculated.
     using CoordRTheta = Coord<R, Theta>;
 
+    /// @brief The covariant form of the first physical coordinate.
+    using X_cov = typename X::Dual;
+    /// @brief The covariant form of the second physical coordinate.
+    using Y_cov = typename Y::Dual;
+
 private:
-    using Mapping = CombinedMapping<
-            CzarnyToCartesian<R, Theta, X, Y>,
-            CartesianToCircular<Xpc, Ypc, R, Theta>>;
+    using CzarnyToCart = CzarnyToCartesian<R, Theta, X, Y>;
+    using Mapping = CombinedMapping<CzarnyToCart, CartesianToCircular<Xpc, Ypc, R, Theta>>;
 
 private:
     Mapping m_mapping;
@@ -130,18 +141,19 @@ public:
      *
      * @result The matrix evaluated at the central point.
      */
-    KOKKOS_INLINE_FUNCTION Matrix_2x2 operator()() const
+    KOKKOS_INLINE_FUNCTION DTensor<VectorIndexSet<Xpc, Ypc>, VectorIndexSet<X_cov, Y_cov>>
+    operator()() const
     {
-        Matrix_2x2 J;
-        const double epsilon
-                = m_mapping.template get<CzarnyToCartesian<R, Theta, X, Y>>().epsilon();
-        const double e = m_mapping.template get<CzarnyToCartesian<R, Theta, X, Y>>().e();
+        const double epsilon = m_mapping.template get<CzarnyToCart>().epsilon();
+        const double e = m_mapping.template get<CzarnyToCart>().e();
         const double xi = Kokkos::sqrt(1. / (1. - epsilon * epsilon * 0.25));
         const double sqrt_eps_2 = Kokkos::sqrt(1. + epsilon * epsilon);
-        J[0][0] = -sqrt_eps_2;
-        J[0][1] = 0.;
-        J[1][0] = 0.;
-        J[1][1] = (2 - sqrt_eps_2) / e / xi;
+
+        DTensor<VectorIndexSet<Xpc, Ypc>, VectorIndexSet<X_cov, Y_cov>> J;
+        ddcHelper::get<Xpc, X_cov>(J) = -sqrt_eps_2;
+        ddcHelper::get<Xpc, Y_cov>(J) = 0.;
+        ddcHelper::get<Ypc, X_cov>(J) = 0.;
+        ddcHelper::get<Ypc, Y_cov>(J) = (2 - sqrt_eps_2) / e / xi;
         return J;
     }
 };
@@ -170,6 +182,15 @@ class InvJacobianOPoint<
 {
     /// The coordinate system in which the inverse of the Jacobian is calculated.
     using CoordRTheta = Coord<R, Theta>;
+
+    /// @brief The covariant form of the first physical coordinate.
+    using X_cov = typename X::Dual;
+    /// @brief The covariant form of the second physical coordinate.
+    using Y_cov = typename Y::Dual;
+    using Xpc_cov = typename Xpc::Dual;
+    using Ypc_cov = typename Ypc::Dual;
+    using R_cov = typename R::Dual;
+    using Theta_cov = typename Theta::Dual;
 
 private:
     using Mapping = CombinedMapping<
@@ -230,44 +251,36 @@ public:
      * @see BslAdvection
      * @see AdvectionDomain
      */
-    KOKKOS_FUNCTION Matrix_2x2 operator()() const
+    KOKKOS_FUNCTION DTensor<VectorIndexSet<Xpc, Ypc>, VectorIndexSet<X_cov, Y_cov>> operator()()
+            const
     {
         DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, MemorySpace> const& discrete_mapping
                 = m_mapping.template get<
                         DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, MemorySpace>>();
-        Matrix_2x2 J;
-        J[0][0] = 0;
-        J[0][1] = 0;
-        J[1][0] = 0;
-        J[1][1] = 0;
+        DTensor<VectorIndexSet<Xpc, Ypc>, VectorIndexSet<X_cov, Y_cov>> J(0.0);
         IdxRangeRTheta idx_range_singular_point = discrete_mapping.idx_range_singular_point();
         // Average the values at (r = 0, theta):
         IdxR ir(idx_range_singular_point.front());
         for (IdxTheta itheta : IdxRangeTheta(idx_range_singular_point)) {
             Coord<R, Theta> coord(ddc::coordinate(ir), ddc::coordinate(itheta));
-            Matrix_2x2 J_first_order = discrete_mapping.first_order_jacobian_matrix_r_rtheta(coord);
+            DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> J_first_order
+                    = discrete_mapping.first_order_jacobian_matrix_r_rtheta(coord);
 
             double th = ddc::get<Theta>(coord);
-            Matrix_2x2 J_circ_r_rtheta;
-            J_circ_r_rtheta[0][0] = Kokkos::cos(th);
-            J_circ_r_rtheta[0][1] = Kokkos::sin(th);
-            J_circ_r_rtheta[1][0] = -Kokkos::sin(th);
-            J_circ_r_rtheta[1][1] = Kokkos::cos(th);
+            DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<Xpc_cov, Ypc_cov>> J_circ_r_rtheta;
+            ddcHelper::get<R, Xpc_cov>(J_circ_r_rtheta) = Kokkos::cos(th);
+            ddcHelper::get<R, Ypc_cov>(J_circ_r_rtheta) = Kokkos::sin(th);
+            ddcHelper::get<Theta, Xpc_cov>(J_circ_r_rtheta) = -Kokkos::sin(th);
+            ddcHelper::get<Theta, Ypc_cov>(J_circ_r_rtheta) = Kokkos::cos(th);
 
-            Matrix_2x2 J_theta;
-            J_theta = inverse(mat_mul(J_first_order, J_circ_r_rtheta));
+            Tensor J_theta = inverse(
+                    tensor_mul(index<'i', 'j'>(J_first_order), index<'j', 'k'>(J_circ_r_rtheta)));
 
-            J[0][0] += J_theta[0][0];
-            J[0][1] += J_theta[0][1];
-            J[1][0] += J_theta[1][0];
-            J[1][1] += J_theta[1][1];
+            J += J_theta;
         }
 
         int const theta_size = idx_range_singular_point.size();
-        J[0][0] /= theta_size;
-        J[0][1] /= theta_size;
-        J[1][0] /= theta_size;
-        J[1][1] /= theta_size;
+        J /= theta_size;
         return J;
     }
 };
