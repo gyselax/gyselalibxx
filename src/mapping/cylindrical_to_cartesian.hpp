@@ -40,7 +40,7 @@ class CartesianToCylindrical;
  *
  * @f$ J_{33}(R,\zeta) = 1 @f$
  *
- * and the matrix determinant: @f$ det(J) = R @f$.
+ * and the matrix determinant: @f$ \det(J) = R @f$.
  *
  */
 template <class R, class Z, class Zeta, class X, class Y>
