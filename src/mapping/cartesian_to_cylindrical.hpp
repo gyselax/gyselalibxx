@@ -20,7 +20,7 @@ class CylindricalToCartesian;
  *
  * The mapping @f$ (x,y,z) \mapsto (r,z, \zeta) @f$ is defined as follow :
  *
- * @f$ R(x,y,z) = \sqrt x^2+y^2 ,@f$
+ * @f$ R(x,y,z) = \sqrt{x^2+y^2} ,@f$
  *
  * @f$ \zeta(x,y,z) = atan2(\frac{y}{x}) .@f$
  *

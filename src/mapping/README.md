@@ -23,7 +23,7 @@ The current coordinate transformations implemented are:
 J (r,\theta) = 
 \begin{bmatrix} 
  \cos(\theta) & -r\sin(\theta) \\
- \sin(\theta) &  r\cos(\theta) \\
+ \sin(\theta) &  r\cos(\theta)
 \end{bmatrix}.
 ```
 
@@ -147,7 +147,7 @@ J (R, Z, \zeta) =
 \begin{bmatrix} 
  \cos(\zeta) & 0 & -R\sin(\zeta) \\
   0          & 1 &       0 \\
- \sin(\zeta) & 0 &  R\cos(\zeta) \\
+ \sin(\zeta) & 0 &  R\cos(\zeta)
 \end{bmatrix}.
 ```
 
