@@ -12,7 +12,7 @@
 #include "ddc_helper.hpp"
 
 /**
- * @brief A class providing an operator for integrating functions defined on a know grid points.
+ * @brief A class providing an operator for integrating functions defined on known grid points.
  *
  * @tparam IdxRangeQuadrature The index range over which the function is integrated.
  * @tparam IdxRangeTotal The index range of the chunk which can be passed to the operator(). This is the
@@ -44,7 +44,7 @@ public:
     explicit Quadrature(QuadConstField coeffs) : m_coefficients(coeffs) {}
 
     /**
-     * @brief An operator for calculating the integral of a function defined on a know grid points.
+     * @brief An operator for calculating the integral of a function defined on known grid points.
      *
      * @param[in] exec_space
      *        The space on which the function is executed (CPU/GPU).
