@@ -49,7 +49,7 @@ std::string to_lower(std::string s)
  * @param[in] to_physical_mapping
  *      The mapping function from the logical domain to the physical domain.
  * @param[in] idx_range_theta
- *      The index range to which the poloidal coordinate should be restricted.
+ *      An index range spanning the domain to which the poloidal coordinate should be restricted.
  */
 template <class LogicalToPhysicalMapping>
 void print_coordinate(
@@ -212,7 +212,7 @@ host_t<FieldMemRTheta<CoordRTheta>> compute_exact_feet_rtheta(
  *      The mapping function from the logical domain to the physical
  *      domain.
  * @param[in] grid
- *      The logical index range where the function is defined.
+ *      An index range spanning the logical domain where the function is defined.
  * @param[in] allfdistribu_advected
  *      The computed function.
  * @param[in] function_to_be_advected
@@ -296,7 +296,7 @@ void display_time(
  *      The analytical version of the mapping.
  *      It can be different from the mapping if the mapping is discrete.
  * @param[in] grid
- *      The logical index range on which the advected function is defined.
+ *      An index range spanning the logical domain on which the advected function is defined.
  * @param[in] time_stepper
  *      The time integration method used to solve the characteristic
  *      equation.
@@ -537,7 +537,7 @@ void simulate(
  *      The analytical version of the mapping.
  *      It can be different from the mapping if the mapping is discrete.
  * @param[in] grid
- *      The logical index range on which the advected function is defined.
+ *      An index range spanning the logical domain on which the advected function is defined.
  * @param[in] time_stepper
  *      The time integration method used to solve the characteristic
  *      equation.

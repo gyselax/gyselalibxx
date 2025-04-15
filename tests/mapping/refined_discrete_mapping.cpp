@@ -395,7 +395,7 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     const CzarnyMapping analytical_mapping(0.3, 1.4);
     //const CircularMapping analytical_mapping;
 
-    // Discrete index range ---
+    // Index range ---
     int const Nr = 16;
     int const Nt = 32;
 

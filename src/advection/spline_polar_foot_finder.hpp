@@ -97,11 +97,11 @@ private:
 private:
     using ExecSpace = typename SplineRThetaBuilderAdvection::exec_space;
     /**
-     * @brief Tag the first dimension in the advection index range.
+     * @brief Tag the first dimension in the advection domain.
      */
     using X_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
     /**
-     * @brief Tag the second dimension in the advection index range.
+     * @brief Tag the second dimension in the advection domain.
      */
     using Y_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
     /**
@@ -222,8 +222,8 @@ public:
     /**
      * @brief Advect the feet over @f$ dt @f$.
      *
-     * From the advection field in the physical index range, compute the advection field
-     * in the right index range an compute its B-splines coefficients.
+     * From the advection field in the physical domain, compute the advection field
+     * in the right domain an compute its B-splines coefficients.
      * Then, use the given time integration method (time_stepper) to solve the
      * characteristic equation over @f$ dt @f$.
      *
@@ -231,7 +231,7 @@ public:
      *      On input: the mesh points.
      *      On output: the characteristic feet.
      * @param[in] advection_field
-     *      The advection field in the physical index range.
+     *      The advection field in the physical domain.
      * @param[in] dt
      *      The time step.
      */

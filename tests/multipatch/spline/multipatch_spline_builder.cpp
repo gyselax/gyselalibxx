@@ -250,7 +250,7 @@ public:
 
 
 /*
-    The global index range is split into two 1D patches on X1 and X2.
+    The global domain is split into two 1D patches on X1 and X2.
  */
 TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
 {
@@ -317,7 +317,7 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
 
 
 /*
-    The global index range is split into two 2D patches on (X1, Y1) and (X2, Y2).
+    The global domain is split into two 2D patches on (X1, Y1) and (X2, Y2).
  */
 TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
 {

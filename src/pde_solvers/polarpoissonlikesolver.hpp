@@ -271,7 +271,7 @@ public:
      *      The spline representation of the  @f$ \beta @f$ function in the
      *      definition of the Poisson-like equation.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
@@ -502,7 +502,7 @@ public:
      *      The spline representation of the  @f$ \beta @f$ function in the
      *      definition of the Poisson-like equation.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
@@ -583,7 +583,7 @@ public:
      *      The spline representation of the  @f$ \beta @f$ function in the
      *      definition of the Poisson-like equation.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
@@ -722,7 +722,7 @@ public:
      *      The spline representation of the  @f$ \beta @f$ function in the
      *      definition of the Poisson-like equation.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
@@ -1072,7 +1072,7 @@ public:
      *      The spline representation of the  @f$ \beta @f$ function in the
      *      definition of the Poisson-like equation.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @param[in] evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
@@ -1258,7 +1258,7 @@ public:
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @param[in] int_volume
      *      The integral volume associated with each point used in the quadrature scheme.
@@ -1342,7 +1342,7 @@ public:
      * @param[in] evaluator
      *      An evaluator for evaluating 2D splines on @f$ (r, \theta) @f$.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @return 
      *      The value of the matrix element.
