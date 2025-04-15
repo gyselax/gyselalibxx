@@ -330,7 +330,7 @@ public:
             double x = 2 * std::atan(std::tan(x0 * M_PI) * std::exp(-final_t)) / M_PI / 2.;
             double y = 2 * std::atan(std::tan(y0 * M_PI) * std::exp(-final_t)) / M_PI / 2.;
 
-            // Replace inside the domain the feet if the dimension if periodic
+            // Replace the feet inside the domain if the dimension if periodic
             if (X::PERIODIC) {
                 x = fmod(x - double(x_min), double(x_max - x_min)) + double(x_min);
                 x = x > double(x_min) ? x : x + double(x_max - x_min);

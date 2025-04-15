@@ -12,7 +12,7 @@
 #include "ddc_helper.hpp"
 
 /**
- * @brief A class providing an operator for integrating functions defined on a discrete domain.
+ * @brief A class providing an operator for integrating functions defined on a know grid points.
  *
  * @tparam IdxRangeQuadrature The index range over which the function is integrated.
  * @tparam IdxRangeTotal The index range of the chunk which can be passed to the operator(). This is the
