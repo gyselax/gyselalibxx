@@ -128,9 +128,7 @@ public:
         const double y = ddc::get<Y>(coord);
         Coord<R> r(Kokkos::sqrt(x * x + y * y));
         const double zeta_pi_to_pi(Kokkos::atan2(y, x));
-        Coord<Zeta> zeta(
-                zeta_pi_to_pi * (zeta_pi_to_pi >= 0)
-                + (zeta_pi_to_pi + 2 * M_PI) * (zeta_pi_to_pi < 0));
+        Coord<Zeta> zeta(zeta_pi_to_pi + 2 * M_PI * (zeta_pi_to_pi < 0));
 
         return CoordResult(r, ddc::select<Z>(coord), zeta);
     }
