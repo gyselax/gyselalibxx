@@ -69,7 +69,7 @@ public:
     using X_cov = typename X::Dual;
     /// @brief The covariant form of the second Cartesian coordinate.
     using Y_cov = typename Y::Dual;
-    /// @brief The covariant form of the second Cartesian coordinate.
+    /// @brief The covariant form of the third Cartesian coordinate and the longitudinal cylindrical coordinate.
     using Z_cov = typename Z::Dual;
     /// @brief The covariant form of the radial cylindrical coordinate.
     using R_cov = typename R::Dual;
