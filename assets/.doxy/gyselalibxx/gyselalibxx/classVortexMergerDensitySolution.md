@@ -119,7 +119,7 @@ inline explicit VortexMergerDensitySolution::VortexMergerDensitySolution (
 **Parameters:**
 
 
-* `mapping` A mapping function from the logical index range to the physical index range. 
+* `mapping` A mapping function from the logical domain to the physical domain. 
 
 
 

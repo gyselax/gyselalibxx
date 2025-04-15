@@ -54,7 +54,7 @@ _A class which computes the advection along the dimension of interest GridIntere
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslAdvection1D**](#function-bsladvection1d) (FunctionPreallocatableInterpolatorType const & function\_interpolator, AdvectionFieldBuilder const & adv\_field\_builder, AdvectionFieldEvaluator const & adv\_field\_evaluator, TimeStepper const & time\_stepper) <br>_Constructor when the advection index range and the function index range are different._  |
+|   | [**BslAdvection1D**](#function-bsladvection1d) (FunctionPreallocatableInterpolatorType const & function\_interpolator, AdvectionFieldBuilder const & adv\_field\_builder, AdvectionFieldEvaluator const & adv\_field\_evaluator, TimeStepper const & time\_stepper) <br>_Constructor when the advection domain and the function domain are different._  |
 |  FunctionField | [**operator()**](#function-operator) (FunctionField const allfdistribu, AdvecField const advection\_field, double const dt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection\_field\_derivatives\_min=std::nullopt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection\_field\_derivatives\_max=std::nullopt) const<br>_Advects allfdistribu along the advection dimension GridInterest for a duration dt._  |
 |   | [**~BslAdvection1D**](#function-bsladvection1d) () = default<br> |
 
@@ -95,14 +95,14 @@ This operator solves the following equation type
 
 
 with
-* , a function defined on an index range ;
-* , an advection field defined on subindex range ;
+* , a function defined on an domain ;
+* , an advection field defined on subdomain ;
 * , an advection dimension.
 
 
 
 
-The characteristic equation is solved on the advection index range . Then the feet on  are computed from the characteristic feet on  and the function  is interpolated at the feet in .
+The characteristic equation is solved on the advection domain . Then the feet on  are computed from the characteristic feet on  and the function  is interpolated at the feet in .
 
 
 The characteristic equation is solved using a time integration method ([**ITimeStepper**](classITimeStepper.md)).
@@ -114,8 +114,8 @@ The characteristic equation is solved using a time integration method ([**ITimeS
 
 
 * `GridInterest` The dimension along which the advection is computed. It refers to the dimension of  in the equation. 
-* `IdxRangeAdvection` The index range  where the characteristic equation is solved. It also refers to the index range of the advection field. It had to also be defined on the GridInterest for the time integration method. 
-* `IdxRangeFunction` The index range  where allfdistribu is defined. 
+* `IdxRangeAdvection` The index range for the interpolation points defined on  where the characteristic equation is solved.  also refers to the domain of the advection field. It had to also be defined on the GridInterest for the time integration method. 
+* `IdxRangeFunction` The index range of  where allfdistribu is defined. 
 * `AdvectionFieldBuilder` The type of the spline builder for the advection field (see SplineBuilder). 
 * `AdvectionFieldEvaluator` The type of the spline evaluator for the advection field (see SplineEvaluator). 
  
@@ -132,7 +132,7 @@ The characteristic equation is solved using a time integration method ([**ITimeS
 
 ### function BslAdvection1D 
 
-_Constructor when the advection index range and the function index range are different._ 
+_Constructor when the advection domain and the function domain are different._ 
 ```C++
 inline explicit BslAdvection1D::BslAdvection1D (
     FunctionPreallocatableInterpolatorType const & function_interpolator,
@@ -147,7 +147,7 @@ inline explicit BslAdvection1D::BslAdvection1D (
 When IdxRangeAdvection and IdxRangeFunction are different, we need one interpolator for each index range.
 
 
-We can also use it when we want two different interpolators but defined on the same index range (e.g. different boundary conditions for the evaluators).
+We can also use it when we want two different interpolators but defined on the same domain (e.g. different boundary conditions for the evaluators).
 
 
 
@@ -155,9 +155,9 @@ We can also use it when we want two different interpolators but defined on the s
 **Parameters:**
 
 
-* `function_interpolator` interpolator along the GridInterest direction to interpolate the advected function (allfdistribu) on the index range of the function. 
-* `adv_field_builder` builder along the GridInterest direction to build a spline representation of the advection field on the function index range. 
-* `adv_field_evaluator` evaluator along the GridInterest direction to evaluate the advection field spline representation on the function index range. 
+* `function_interpolator` interpolator along the GridInterest direction to interpolate the advected function (allfdistribu) on the domain of the function. 
+* `adv_field_builder` builder along the GridInterest direction to build a spline representation of the advection field on the function domain. 
+* `adv_field_evaluator` evaluator along the GridInterest direction to evaluate the advection field spline representation on the function domain. 
  
 * `time_stepper` time integration method for the characteristic equation. 
 

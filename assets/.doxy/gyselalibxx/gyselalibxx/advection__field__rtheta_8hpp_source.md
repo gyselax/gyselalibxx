@@ -147,7 +147,7 @@ private:
                 DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X, Y>> inv_J
                         = inv_jacobian_matrix(coord_rtheta);
 
-                // Gradient of phi in the physical index range (Cartesian index range)
+                // Gradient of phi in the physical domain (Cartesian coordinates)
                 // grad_{x,y} phi = J^{-T} grad_{r,theta} phi
                 DVector<X, Y> grad_phi
                         = tensor_mul(index<'j', 'i'>(inv_J), index<'j'>(deriv_phi(irtheta)));

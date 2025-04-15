@@ -224,7 +224,7 @@ inline BslPredCorrRTheta::BslPredCorrRTheta (
 **Parameters:**
 
 
-* `mapping` The mapping function from the logical index range to the physical index range. 
+* `mapping` The mapping function from the logical domain to the physical domain. 
 * `advection_solver` The advection operator. 
 * `builder` The spline builder for the computation of the RHS and the advection field. 
 * `rhs_evaluator` The evaluator of B-splines for the RHS. 

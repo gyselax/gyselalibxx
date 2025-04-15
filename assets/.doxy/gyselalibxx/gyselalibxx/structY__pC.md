@@ -8,7 +8,7 @@
 
 
 
-_Tag the second non periodic dimension in the pseudo\_Cartesian index range._ 
+_Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._ 
 
 * `#include <geometry_pseudo_cartesian.hpp>`
 

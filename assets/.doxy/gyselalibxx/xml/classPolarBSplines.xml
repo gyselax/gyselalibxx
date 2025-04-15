@@ -337,7 +337,7 @@
     </briefdescription>
     <detaileddescription>
 <para>A class containing all information describing polar B-splines.</para>
-<para>Polar B-splines are 2D B-splines with a special treatment for the central singular point of a polar index range. At this singular point new B-splines are created which traverse the singular point and ensure the desired continuity condition.</para>
+<para>Polar B-splines are 2D B-splines with a special treatment for the central singular point of a polar domain. At this singular point new B-splines are created which traverse the singular point and ensure the desired continuity condition.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref></parametername>

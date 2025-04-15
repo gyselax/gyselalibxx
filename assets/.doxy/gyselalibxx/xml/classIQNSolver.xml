@@ -233,7 +233,7 @@
 <para>An operator which solves the Quasi-Neutrality equation using a fast Fourier transform.</para>
 <para>An operator which solves the Quasi-Neutrality equation.</para>
 <para>An operator which solves the Quasi-Neutrality equation: <formula id="142">$ - \frac{d^2 \phi}{dx^2} = \rho $</formula></para>
-<para>An operator which solves the Quasi-Neutrality equation: <formula id="142">$ - \frac{d^2 \phi}{dx^2} = \rho $</formula> using a fast Fourier transform on a periodic index range. This operator only works for equidistant points. </para>
+<para>An operator which solves the Quasi-Neutrality equation: <formula id="142">$ - \frac{d^2 \phi}{dx^2} = \rho $</formula> using a fast Fourier transform on a periodic domain. This operator only works for equidistant points. </para>
     </detaileddescription>
     <inheritancegraph>
       <node id="1">

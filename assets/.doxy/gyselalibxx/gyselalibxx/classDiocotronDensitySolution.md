@@ -130,10 +130,10 @@ inline DiocotronDensitySolution::DiocotronDensitySolution (
 **Parameters:**
 
 
-* `W1` The value of the r-coordinate where the index range starts. 
-* `R1` The value of the r-coordinate where the index range of non null initial condition starts. 
-* `R2` The value of the r-coordinate where the index range of non null initial condition ends. 
-* `W2` The value of the r-coordinate where the index range ends. 
+* `W1` The value of the r-coordinate where the domain starts. 
+* `R1` The value of the r-coordinate where the domain of non null initial condition starts. 
+* `R2` The value of the r-coordinate where the domain of non null initial condition ends. 
+* `W2` The value of the r-coordinate where the domain ends. 
 * `Q` The charge carried by the inner conductor at . 
 * `l` The mode of the perturbation. 
 * `eps` The amplitude of the perturbation. 

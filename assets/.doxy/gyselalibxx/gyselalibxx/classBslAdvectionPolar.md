@@ -10,7 +10,7 @@
 
 
 
-_Define an advection operator on 2D_  _index range._[More...](#detailed-description)
+_Define an advection operator on 2D_  _domain._[More...](#detailed-description)
 
 * `#include <bsl_advection_polar.hpp>`
 

@@ -7,7 +7,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**AdvectionFieldFinder**](classAdvectionFieldFinder.md) _Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation._ 
 * **class** [**BarycentricToCartesian**](classBarycentricToCartesian.md) _A class to convert barycentric coordinates to Cartesian coordinates on a triangle._ 
 * **class** [**BslAdvection1D**](classBslAdvection1D.md) _A class which computes the advection along the dimension of interest GridInterest._ 
-* **class** [**BslAdvectionPolar**](classBslAdvectionPolar.md) _Define an advection operator on 2D_  _index range._
+* **class** [**BslAdvectionPolar**](classBslAdvectionPolar.md) _Define an advection operator on 2D_  _domain._
 * **class** [**IAdvectionSpatial**](classIAdvectionSpatial.md) _A class which provides an advection operator._     
     * **class** [**BslAdvectionSpatial**](classBslAdvectionSpatial.md) _A class which computes the spatial advection along the dimension of interest_ [_**GridX**_](structGridX.md) _. Working for every Cartesian geometry._
 * **class** [**IAdvectionVelocity**](classIAdvectionVelocity.md) _A class which provides an advection operator._     
@@ -133,7 +133,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**PolarSplineEvaluator**](classPolarSplineEvaluator.md) _Define an evaluator on polar B-splines._ 
 * **class** [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md) _Define a polar PDE solver for a Poisson-like equation._ 
 * **class** [**PredCorrRK2XY**](classPredCorrRK2XY.md) _Predictor-corrector based on_ [_**RK2**_](classRK2.md) _for the guiding-centre model._
-* **class** [**Quadrature**](classQuadrature.md) _A class providing an operator for integrating functions defined on a discrete index range._ 
+* **class** [**Quadrature**](classQuadrature.md) _A class providing an operator for integrating functions defined on known grid points._ 
 * **class** [**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md) _A class to create a_ [_**DiscreteToCartesian**_](classDiscreteToCartesian.md) _instance from an analytical mapping. This class creates an instance which uses more refined splines than the provided builder and evaluator. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data._
 * **class** [**SpeciesInformation**](classSpeciesInformation.md) [_**Species**_](structSpecies.md) _discrete dimension to access constant attributes related to species._    
     * **struct** [**Species**](structSpecies.md) 
@@ -204,9 +204,9 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**Vx**](structVx.md) _Define non periodic real_ [_**X**_](structX.md) _velocity dimension._
 * **struct** [**Vy**](structVy.md) _Define non periodic real_ [_**Y**_](structY.md) _velocity dimension._
 * **struct** [**X**](structX.md) _Define non periodic real_ [_**X**_](structX.md) _dimension._
-* **struct** [**X\_pC**](structX__pC.md) _Tag the first non periodic dimension in the pseudo\_Cartesian index range._ 
+* **struct** [**X\_pC**](structX__pC.md) _Tag the first non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._ 
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._
-* **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo\_Cartesian index range._ 
+* **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._ 
 * **struct** [**connectivity\_details::AddToTypeSeq**](structconnectivity__details_1_1AddToTypeSeq.md) _A class which helps insert an element into a type sequence._ 
 * **struct** [**connectivity\_details::AddToTypeSeq&lt; ToInsert, TypeSeq, BackInsert &gt;**](structconnectivity__details_1_1AddToTypeSeq_3_01ToInsert_00_01TypeSeq_00_01BackInsert_01_4.md) _Specialisation of_ [_**AddToTypeSeq**_](structconnectivity__details_1_1AddToTypeSeq.md) _to add an element at the back of the type sequence._
 * **struct** [**connectivity\_details::AddToTypeSeq&lt; ToInsert, TypeSeq, FrontInsert &gt;**](structconnectivity__details_1_1AddToTypeSeq_3_01ToInsert_00_01TypeSeq_00_01FrontInsert_01_4.md) _Specialisation of_ [_**AddToTypeSeq**_](structconnectivity__details_1_1AddToTypeSeq.md) _to add an element at the front of the type sequence._

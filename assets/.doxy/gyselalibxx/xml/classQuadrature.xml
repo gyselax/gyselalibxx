@@ -116,7 +116,7 @@
           <declname>integrated_function</declname>
         </param>
         <briefdescription>
-<para>An operator for calculating the integral of a function defined on a discrete index range. </para>
+<para>An operator for calculating the integral of a function defined on known grid points. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -136,7 +136,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The integral of the function over the index range. </para>
+<simplesect kind="return"><para>The integral of the function over the domain. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -174,7 +174,7 @@
           <declname>integrated_function</declname>
         </param>
         <briefdescription>
-<para>An operator for calculating the integral of a function defined on a discrete index range by cycling over batch dimensions. </para>
+<para>An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -265,7 +265,7 @@
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>A class providing an operator for integrating functions defined on a discrete index range. </para>
+<para>A class providing an operator for integrating functions defined on known grid points. </para>
     </briefdescription>
     <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>

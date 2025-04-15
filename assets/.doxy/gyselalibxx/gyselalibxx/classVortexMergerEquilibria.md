@@ -124,7 +124,7 @@ inline VortexMergerEquilibria::VortexMergerEquilibria (
 **Parameters:**
 
 
-* `mapping` The mapping function from the logical index range to the physical index range. 
+* `mapping` The mapping function from the logical domain to the physical domain. 
 * `grid` The index range where the equilibrium is defined. 
 * `builder` A spline builder to get the spline representation of the RHS of the PDE. 
 * `evaluator` The evaluator of B-splines for the RHS of the PDE. 

@@ -99,7 +99,7 @@ An operator which solves the Quasi-Neutrality equation.
 An operator which solves the Quasi-Neutrality equation: 
 
 
-An operator which solves the Quasi-Neutrality equation:  using a fast Fourier transform on a periodic index range. This operator only works for equidistant points. 
+An operator which solves the Quasi-Neutrality equation:  using a fast Fourier transform on a periodic domain. This operator only works for equidistant points. 
 
 
     

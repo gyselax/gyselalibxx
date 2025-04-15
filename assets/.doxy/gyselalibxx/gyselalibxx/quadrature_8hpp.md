@@ -35,7 +35,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**Quadrature**](classQuadrature.md) &lt;class IdxRangeQuadrature, class IdxRangeTotal, class MemorySpace&gt;<br>_A class providing an operator for integrating functions defined on a discrete index range._  |
+| class | [**Quadrature**](classQuadrature.md) &lt;class IdxRangeQuadrature, class IdxRangeTotal, class MemorySpace&gt;<br>_A class providing an operator for integrating functions defined on known grid points._  |
 
 
 

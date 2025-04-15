@@ -38,7 +38,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**BslAdvectionPolar**](classBslAdvectionPolar.md) &lt;class FootFinder, class LogicalToPhysicalMapping, class InterpolatorPolar&gt;<br>_Define an advection operator on 2D_  _index range._ |
+| class | [**BslAdvectionPolar**](classBslAdvectionPolar.md) &lt;class FootFinder, class LogicalToPhysicalMapping, class InterpolatorPolar&gt;<br>_Define an advection operator on 2D_  _domain._ |
 
 
 

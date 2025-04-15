@@ -132,7 +132,7 @@ This function uses rvalues. It means that coefficients is a temporary input para
 
 
 * `exec_space` The space on which the function is executed (CPU/GPU). 
-* `mapping` The mapping function from the logical index range  to the physical index range . 
+* `mapping` The mapping function from the logical domain  to the physical domain . 
 * `coefficients_alloc` The quadrature coefficients .
 
 

@@ -829,11 +829,11 @@ inline void SplinePolarFootFinder::is_unified (
     double dt
 ) const
 </code></pre>
-<p>From the advection field in the physical index range, compute the advection field in the right index range an compute its B-splines coefficients. Then, use the given time integration method (time_stepper) to solve the characteristic equation over .</p>
+<p>From the advection field in the physical domain, compute the advection field in the right domain an compute its B-splines coefficients. Then, use the given time integration method (time_stepper) to solve the characteristic equation over .</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>feet</code> On input: the mesh points. On output: the characteristic feet. </li>
-<li><code>advection_field</code> The advection field in the physical index range. </li>
+<li><code>advection_field</code> The advection field in the physical domain. </li>
 <li><code>dt</code> The time step. </li>
 </ul>
 <hr>

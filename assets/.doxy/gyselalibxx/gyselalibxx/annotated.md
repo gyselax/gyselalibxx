@@ -15,7 +15,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**BSplinesY**](structBSplinesY.md) 
 * **class** [**BarycentricToCartesian**](classBarycentricToCartesian.md) _A class to convert barycentric coordinates to Cartesian coordinates on a triangle._     
 * **class** [**BslAdvection1D**](classBslAdvection1D.md) _A class which computes the advection along the dimension of interest GridInterest._     
-* **class** [**BslAdvectionPolar**](classBslAdvectionPolar.md) _Define an advection operator on 2D_  _index range._    
+* **class** [**BslAdvectionPolar**](classBslAdvectionPolar.md) _Define an advection operator on 2D_  _domain._    
 * **class** [**BslAdvectionSpatial**](classBslAdvectionSpatial.md) _A class which computes the spatial advection along the dimension of interest_ [_**GridX**_](structGridX.md) _. Working for every Cartesian geometry._    
 * **class** [**BslAdvectionVelocity**](classBslAdvectionVelocity.md) _A class which computes the velocity advection along the dimension of interest GridV. Working for every Cartesian geometry._     
 * **class** [**BslExplicitPredCorrRTheta**](classBslExplicitPredCorrRTheta.md) _A second order explicit predictor-corrector for the Vlasov-Poisson equations._     
@@ -196,7 +196,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**PredCorr**](classPredCorr.md) _A class that solves a Boltzmann-Poisson system of equations using a predictor-corrector scheme._     
 * **class** [**PredCorrRK2XY**](classPredCorrRK2XY.md) _Predictor-corrector based on_ [_**RK2**_](classRK2.md) _for the guiding-centre model._    
 * **class** [**QNSolver**](classQNSolver.md) _An operator which solves the Quasi-Neutrality equation using a fast Fourier transform._     
-* **class** [**Quadrature**](classQuadrature.md) _A class providing an operator for integrating functions defined on a discrete index range._     
+* **class** [**Quadrature**](classQuadrature.md) _A class providing an operator for integrating functions defined on known grid points._     
 * **struct** [**R**](structR.md) _Define non periodic real contravariant_ [_**R**_](structR.md) _dimension._    
 * **class** [**RK2**](classRK2.md) _A class which provides an implementation of a second-order Runge-Kutta method._     
 * **class** [**RK3**](classRK3.md) _A class which provides an implementation of a third-order Runge-Kutta method._     
@@ -251,9 +251,9 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**Vx**](structVx.md) _Define non periodic real_ [_**X**_](structX.md) _velocity dimension._    
 * **struct** [**Vy**](structVy.md) _Define non periodic real_ [_**Y**_](structY.md) _velocity dimension._    
 * **struct** [**X**](structX.md) _Define non periodic real_ [_**X**_](structX.md) _dimension._    
-* **struct** [**X\_pC**](structX__pC.md) _Tag the first non periodic dimension in the pseudo\_Cartesian index range._     
+* **struct** [**X\_pC**](structX__pC.md) _Tag the first non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._    
-* **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo\_Cartesian index range._     
+* **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d73.md) 
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d202.md) 
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d204.md) 

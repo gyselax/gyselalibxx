@@ -464,7 +464,7 @@ inline void SplinePolarFootFinder::operator() (
 
 
 
-From the advection field in the physical index range, compute the advection field in the right index range an compute its B-splines coefficients. Then, use the given time integration method (time\_stepper) to solve the characteristic equation over .
+From the advection field in the physical domain, compute the advection field in the right domain an compute its B-splines coefficients. Then, use the given time integration method (time\_stepper) to solve the characteristic equation over .
 
 
 
@@ -473,7 +473,7 @@ From the advection field in the physical index range, compute the advection fiel
 
 
 * `feet` On input: the mesh points. On output: the characteristic feet. 
-* `advection_field` The advection field in the physical index range. 
+* `advection_field` The advection field in the physical domain. 
 * `dt` The time step. 
 
 

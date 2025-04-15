@@ -536,7 +536,7 @@
                 <div><h1 id="class-quadrature">Class Quadrature</h1>
 <p><strong>template &lt;class IdxRangeQuadrature, class IdxRangeTotal, class MemorySpace&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classQuadrature.html"><strong>Quadrature</strong></a></p>
-<p><em>A class providing an operator for integrating functions defined on a discrete index range.</em> <a href="#detailed-description">More...</a></p>
+<p><em>A class providing an operator for integrating functions defined on known grid points.</em> <a href="#detailed-description">More...</a></p>
 <ul>
 <li><code>#include &lt;quadrature.hpp&gt;</code></li>
 </ul>
@@ -555,11 +555,11 @@
 </tr>
 <tr>
 <td style="text-align: right;">double</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (ExecutionSpace exec_space, IntegratorFunction integrated_function) const<br><em>An operator for calculating the integral of a function defined on a discrete index range.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (ExecutionSpace exec_space, IntegratorFunction integrated_function) const<br><em>An operator for calculating the integral of a function defined on known grid points.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (ExecutionSpace exec_space, Field&lt; double, BatchIdxRange, MemorySpace &gt; const result, IntegratorFunction integrated_function) const<br><em>An operator for calculating the integral of a function defined on a discrete index range by cycling over batch dimensions.</em></td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (ExecutionSpace exec_space, Field&lt; double, BatchIdxRange, MemorySpace &gt; const result, IntegratorFunction integrated_function) const<br><em>An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions.</em></td>
 </tr>
 </tbody>
 </table>
@@ -584,7 +584,7 @@
 <hr>
 
 <h3 id="function-operator">function operator()</h3>
-<p><em>An operator for calculating the integral of a function defined on a discrete index range.</em> </p>
+<p><em>An operator for calculating the integral of a function defined on known grid points.</em> </p>
 <pre><code class="language-C++">template&lt;class ExecutionSpace, class IntegratorFunction&gt;
 inline double Quadrature::operator() (
     ExecutionSpace exec_space,
@@ -597,11 +597,11 @@ inline double Quadrature::operator() (
 <li><code>integrated_function</code> A function taking an index of a position in the index range over which the quadrature is calculated and returning the value of the function to be integrated at that point. It should be noted that a Field fulfils these criteria and can be passed as the function to be integrated. If the exec_space is a GPU the function that is passed must be accessible from GPU.</li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>The integral of the function over the index range. </p>
+<p>The integral of the function over the domain. </p>
 <hr>
 
 <h3 id="function-operator_1">function operator()</h3>
-<p><em>An operator for calculating the integral of a function defined on a discrete index range by cycling over batch dimensions.</em> </p>
+<p><em>An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions.</em> </p>
 <pre><code class="language-C++">template&lt;class ExecutionSpace, class BatchIdxRange, class IntegratorFunction&gt;
 inline void Quadrature::operator() (
     ExecutionSpace exec_space,

@@ -233,7 +233,7 @@ The equation we are studying:
 
 * `coeff_alpha` The spline representation of the  function in the definition of the Poisson-like equation. 
 * `coeff_beta` The spline representation of the  function in the definition of the Poisson-like equation. 
-* `mapping` The mapping from the logical index range to the physical index range where the equation is defined. 
+* `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
 * `spline_evaluator` An evaluator for evaluating 2D splines on .
 
 
@@ -277,7 +277,7 @@ inline void PolarSplineFEMPoissonLikeSolver::compute_overlapping_singular_elemen
 
 * `coeff_alpha` The spline representation of the  function in the definition of the Poisson-like equation. 
 * `coeff_beta` The spline representation of the  function in the definition of the Poisson-like equation. 
-* `mapping` The mapping from the logical index range to the physical index range where the equation is defined. 
+* `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
 * `spline_evaluator` An evaluator for evaluating 2D splines on . 
 * `values_csr_host` A 2D Kokkos view which stores the values of non-zero elements for the whole batch. 
 * `col_idx_csr_host` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) 
@@ -317,7 +317,7 @@ inline void PolarSplineFEMPoissonLikeSolver::compute_singular_elements (
 
 * `coeff_alpha` The spline representation of the  function in the definition of the Poisson-like equation. 
 * `coeff_beta` The spline representation of the  function in the definition of the Poisson-like equation. 
-* `mapping` The mapping from the logical index range to the physical index range where the equation is defined. 
+* `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
 * `spline_evaluator` An evaluator for evaluating 2D splines on . 
 * `values_csr_host` A 2D Kokkos view which stores the values of non-zero elements for the whole batch. 
 * `col_idx_csr_host` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix). 
@@ -357,7 +357,7 @@ inline void PolarSplineFEMPoissonLikeSolver::compute_stencil_elements (
 
 * `coeff_alpha` The spline representation of the  function in the definition of the Poisson-like equation. 
 * `coeff_beta` The spline representation of the  function in the definition of the Poisson-like equation. 
-* `mapping` The mapping from the logical index range to the physical index range where the equation is defined. 
+* `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
 * `spline_evaluator` An evaluator for evaluating 2D splines on . 
 * `values_csr_host` A 2D Kokkos view which stores the values of non-zero elements for the whole batch. 
 * `col_idx_csr_host` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) 
@@ -399,7 +399,7 @@ inline double PolarSplineFEMPoissonLikeSolver::get_matrix_stencil_element (
 * `coeff_alpha` The spline representation of the  function in the definition of the Poisson-like equation. 
 * `coeff_beta` The spline representation of the  function in the definition of the Poisson-like equation. 
 * `evaluator` An evaluator for evaluating 2D splines on . 
-* `mapping` The mapping from the logical index range to the physical index range where the equation is defined. 
+* `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
 
 
 
@@ -649,7 +649,7 @@ static inline KOKKOS_FUNCTION double PolarSplineFEMPoissonLikeSolver::templated_
 * `coeff_alpha` The spline representation of the  function in the definition of the Poisson-like equation. 
 * `coeff_beta` The spline representation of the  function in the definition of the Poisson-like equation. 
 * `spline_evaluator` An evaluator for evaluating 2D splines on . 
-* `mapping` The mapping from the logical index range to the physical index range where the equation is defined. 
+* `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
 * `int_volume` The integral volume associated with each point used in the quadrature scheme. 
 
 
@@ -733,7 +733,7 @@ static inline KOKKOS_FUNCTION double PolarSplineFEMPoissonLikeSolver::weak_integ
 * `trial_bspline_val_and_deriv` The data structure containing the derivatives over radial and poloidal directions for trial space. 
 * `coeff_alpha` The spline representation of the  function in the definition of the Poisson-like equation. 
 * `coeff_beta` The spline representation of the  function in the definition of the Poisson-like equation. 
-* `mapping` The mapping from the logical index range to the physical index range where the equation is defined. 
+* `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
 * `evaluator` An evaluator for evaluating 2D splines on . 
 * `int_volume` The integral volume associated with each point used in the quadrature scheme. 
 

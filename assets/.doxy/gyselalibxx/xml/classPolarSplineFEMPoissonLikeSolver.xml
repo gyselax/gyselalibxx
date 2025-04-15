@@ -957,7 +957,7 @@
 <parametername direction="in">mapping</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The mapping from the logical index range to the physical index range where the equation is defined. </para>
+<para>The mapping from the logical domain to the physical domain where the equation is defined. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1048,7 +1048,7 @@
 <parametername direction="in">mapping</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The mapping from the logical index range to the physical index range where the equation is defined. </para>
+<para>The mapping from the logical domain to the physical domain where the equation is defined. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1154,7 +1154,7 @@
 <parametername direction="in">mapping</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The mapping from the logical index range to the physical index range where the equation is defined. </para>
+<para>The mapping from the logical domain to the physical domain where the equation is defined. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1260,7 +1260,7 @@
 <parametername direction="in">mapping</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The mapping from the logical index range to the physical index range where the equation is defined. </para>
+<para>The mapping from the logical domain to the physical domain where the equation is defined. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1480,7 +1480,7 @@
 <parametername direction="in">mapping</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The mapping from the logical index range to the physical index range where the equation is defined. </para>
+<para>The mapping from the logical domain to the physical domain where the equation is defined. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -1670,7 +1670,7 @@
 <parametername direction="in">mapping</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The mapping from the logical index range to the physical index range where the equation is defined. </para>
+<para>The mapping from the logical domain to the physical domain where the equation is defined. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1961,7 +1961,7 @@
 <parametername direction="in">mapping</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The mapping from the logical index range to the physical index range where the equation is defined. </para>
+<para>The mapping from the logical domain to the physical domain where the equation is defined. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

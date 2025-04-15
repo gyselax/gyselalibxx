@@ -569,7 +569,7 @@
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>Define an advection operator on 2D <formula id="9">$(r, \theta)$</formula> index range. </para>
+<para>Define an advection operator on 2D <formula id="9">$(r, \theta)$</formula> domain. </para>
     </briefdescription>
     <detaileddescription>
 <para>The advection operator uses a backward semi-Lagrangian method. The method is based on the property that the solution is constant along the characteristics.</para>

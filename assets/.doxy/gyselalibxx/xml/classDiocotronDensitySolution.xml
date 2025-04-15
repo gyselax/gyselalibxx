@@ -229,7 +229,7 @@
 <parametername direction="in">W1</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The value of the r-coordinate where the index range starts. </para>
+<para>The value of the r-coordinate where the domain starts. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -237,7 +237,7 @@
 <parametername direction="in">R1</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The value of the r-coordinate where the index range of non null initial condition starts. </para>
+<para>The value of the r-coordinate where the domain of non null initial condition starts. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -245,7 +245,7 @@
 <parametername direction="in">R2</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The value of the r-coordinate where the index range of non null initial condition ends. </para>
+<para>The value of the r-coordinate where the domain of non null initial condition ends. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -253,7 +253,7 @@
 <parametername direction="in">W2</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The value of the r-coordinate where the index range ends. </para>
+<para>The value of the r-coordinate where the domain ends. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

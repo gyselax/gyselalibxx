@@ -71,7 +71,7 @@
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>Tag the second non periodic dimension in the pseudo_Cartesian index range. </para>
+<para>Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates). </para>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>

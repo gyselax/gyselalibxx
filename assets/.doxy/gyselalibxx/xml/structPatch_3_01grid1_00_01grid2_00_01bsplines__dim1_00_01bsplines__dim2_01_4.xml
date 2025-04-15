@@ -145,7 +145,7 @@
         <name>Coord12</name>
         <qualifiedname>Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::Coord12</qualifiedname>
         <briefdescription>
-<para>Coordinate type on the 2D continuous index range. </para>
+<para>Coordinate type on the 2D continuous dimensions. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>

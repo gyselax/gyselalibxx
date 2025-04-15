@@ -71,7 +71,7 @@
         <name>X_adv</name>
         <qualifiedname>SplinePolarFootFinder::X_adv</qualifiedname>
         <briefdescription>
-<para>Tag the first dimension in the advection index range. </para>
+<para>Tag the first dimension in the advection domain. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -86,7 +86,7 @@
         <name>Y_adv</name>
         <qualifiedname>SplinePolarFootFinder::Y_adv</qualifiedname>
         <briefdescription>
-<para>Tag the second dimension in the advection index range. </para>
+<para>Tag the second dimension in the advection domain. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -689,7 +689,7 @@
 <para>Advect the feet over <formula id="16">$ dt $</formula>. </para>
         </briefdescription>
         <detaileddescription>
-<para>From the advection field in the physical index range, compute the advection field in the right index range an compute its B-splines coefficients. Then, use the given time integration method (time_stepper) to solve the characteristic equation over <formula id="16">$ dt $</formula>.</para>
+<para>From the advection field in the physical domain, compute the advection field in the right domain an compute its B-splines coefficients. Then, use the given time integration method (time_stepper) to solve the characteristic equation over <formula id="16">$ dt $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">feet</parametername>
@@ -703,7 +703,7 @@
 <parametername direction="in">advection_field</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The advection field in the physical index range. </para>
+<para>The advection field in the physical domain. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

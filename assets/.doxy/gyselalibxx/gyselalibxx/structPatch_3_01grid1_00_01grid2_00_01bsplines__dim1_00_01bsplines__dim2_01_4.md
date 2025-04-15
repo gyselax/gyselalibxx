@@ -37,7 +37,7 @@ _Tag for a patch._ [More...](#detailed-description)
 | typedef bsplines\_dim1 | [**BSplines1**](#typedef-bsplines1)  <br>_B-splines defined along the first dimension._  |
 | typedef bsplines\_dim2 | [**BSplines2**](#typedef-bsplines2)  <br>_B-splines defined along the second dimension._  |
 | typedef Coord&lt; [**Dim1**](structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md#typedef-dim1) &gt; | [**Coord1**](#typedef-coord1)  <br>_Coordinate type on the first continuous dimension._  |
-| typedef Coord&lt; [**Dim1**](structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md#typedef-dim1), [**Dim2**](structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md#typedef-dim2) &gt; | [**Coord12**](#typedef-coord12)  <br>_Coordinate type on the 2D continuous index range._  |
+| typedef Coord&lt; [**Dim1**](structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md#typedef-dim1), [**Dim2**](structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md#typedef-dim2) &gt; | [**Coord12**](#typedef-coord12)  <br>_Coordinate type on the 2D continuous dimensions._  |
 | typedef Coord&lt; [**Dim2**](structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md#typedef-dim2) &gt; | [**Coord2**](#typedef-coord2)  <br>_Coordinate type on the second continuous dimension._  |
 | typedef typename grid1::continuous\_dimension\_type | [**Dim1**](#typedef-dim1)  <br>_First continuous dimension._  |
 | typedef typename grid2::continuous\_dimension\_type | [**Dim2**](#typedef-dim2)  <br>_Second continuous dimension._  |
@@ -174,7 +174,7 @@ using Patch< grid1, grid2, bsplines_dim1, bsplines_dim2 >::Coord1 =  Coord<Dim1>
 
 ### typedef Coord12 
 
-_Coordinate type on the 2D continuous index range._ 
+_Coordinate type on the 2D continuous dimensions._ 
 ```C++
 using Patch< grid1, grid2, bsplines_dim1, bsplines_dim2 >::Coord12 =  Coord<Dim1, Dim2>;
 ```

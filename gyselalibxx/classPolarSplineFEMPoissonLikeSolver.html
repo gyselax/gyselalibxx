@@ -735,7 +735,7 @@ inline PolarSplineFEMPoissonLikeSolver::PolarSplineFEMPoissonLikeSolver (
 <ul>
 <li><code>coeff_alpha</code> The spline representation of the  function in the definition of the Poisson-like equation. </li>
 <li><code>coeff_beta</code> The spline representation of the  function in the definition of the Poisson-like equation. </li>
-<li><code>mapping</code> The mapping from the logical index range to the physical index range where the equation is defined. </li>
+<li><code>mapping</code> The mapping from the logical domain to the physical domain where the equation is defined. </li>
 <li><code>spline_evaluator</code> An evaluator for evaluating 2D splines on .</li>
 </ul>
 <p><strong>Template parameters:</strong></p>
@@ -761,7 +761,7 @@ inline void PolarSplineFEMPoissonLikeSolver::compute_overlapping_singular_elemen
 <ul>
 <li><code>coeff_alpha</code> The spline representation of the  function in the definition of the Poisson-like equation. </li>
 <li><code>coeff_beta</code> The spline representation of the  function in the definition of the Poisson-like equation. </li>
-<li><code>mapping</code> The mapping from the logical index range to the physical index range where the equation is defined. </li>
+<li><code>mapping</code> The mapping from the logical domain to the physical domain where the equation is defined. </li>
 <li><code>spline_evaluator</code> An evaluator for evaluating 2D splines on . </li>
 <li><code>values_csr_host</code> A 2D Kokkos view which stores the values of non-zero elements for the whole batch. </li>
 <li><code>col_idx_csr_host</code> A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) </li>
@@ -786,7 +786,7 @@ inline void PolarSplineFEMPoissonLikeSolver::compute_singular_elements (
 <ul>
 <li><code>coeff_alpha</code> The spline representation of the  function in the definition of the Poisson-like equation. </li>
 <li><code>coeff_beta</code> The spline representation of the  function in the definition of the Poisson-like equation. </li>
-<li><code>mapping</code> The mapping from the logical index range to the physical index range where the equation is defined. </li>
+<li><code>mapping</code> The mapping from the logical domain to the physical domain where the equation is defined. </li>
 <li><code>spline_evaluator</code> An evaluator for evaluating 2D splines on . </li>
 <li><code>values_csr_host</code> A 2D Kokkos view which stores the values of non-zero elements for the whole batch. </li>
 <li><code>col_idx_csr_host</code> A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix). </li>
@@ -811,7 +811,7 @@ inline void PolarSplineFEMPoissonLikeSolver::compute_stencil_elements (
 <ul>
 <li><code>coeff_alpha</code> The spline representation of the  function in the definition of the Poisson-like equation. </li>
 <li><code>coeff_beta</code> The spline representation of the  function in the definition of the Poisson-like equation. </li>
-<li><code>mapping</code> The mapping from the logical index range to the physical index range where the equation is defined. </li>
+<li><code>mapping</code> The mapping from the logical domain to the physical domain where the equation is defined. </li>
 <li><code>spline_evaluator</code> An evaluator for evaluating 2D splines on . </li>
 <li><code>values_csr_host</code> A 2D Kokkos view which stores the values of non-zero elements for the whole batch. </li>
 <li><code>col_idx_csr_host</code> A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) </li>
@@ -838,7 +838,7 @@ inline double PolarSplineFEMPoissonLikeSolver::get_matrix_stencil_element (
 <li><code>coeff_alpha</code> The spline representation of the  function in the definition of the Poisson-like equation. </li>
 <li><code>coeff_beta</code> The spline representation of the  function in the definition of the Poisson-like equation. </li>
 <li><code>evaluator</code> An evaluator for evaluating 2D splines on . </li>
-<li><code>mapping</code> The mapping from the logical index range to the physical index range where the equation is defined. </li>
+<li><code>mapping</code> The mapping from the logical domain to the physical domain where the equation is defined. </li>
 </ul>
 <p><strong>Returns:</strong></p>
 <p>The value of the matrix element. </p>
@@ -967,7 +967,7 @@ static inline KOKKOS_FUNCTION double PolarSplineFEMPoissonLikeSolver::templated_
 <li><code>coeff_alpha</code> The spline representation of the  function in the definition of the Poisson-like equation. </li>
 <li><code>coeff_beta</code> The spline representation of the  function in the definition of the Poisson-like equation. </li>
 <li><code>spline_evaluator</code> An evaluator for evaluating 2D splines on . </li>
-<li><code>mapping</code> The mapping from the logical index range to the physical index range where the equation is defined. </li>
+<li><code>mapping</code> The mapping from the logical domain to the physical domain where the equation is defined. </li>
 <li><code>int_volume</code> The integral volume associated with each point used in the quadrature scheme. </li>
 </ul>
 <p><strong>Returns:</strong></p>
@@ -1011,7 +1011,7 @@ static inline KOKKOS_FUNCTION double PolarSplineFEMPoissonLikeSolver::weak_integ
 <li><code>trial_bspline_val_and_deriv</code> The data structure containing the derivatives over radial and poloidal directions for trial space. </li>
 <li><code>coeff_alpha</code> The spline representation of the  function in the definition of the Poisson-like equation. </li>
 <li><code>coeff_beta</code> The spline representation of the  function in the definition of the Poisson-like equation. </li>
-<li><code>mapping</code> The mapping from the logical index range to the physical index range where the equation is defined. </li>
+<li><code>mapping</code> The mapping from the logical domain to the physical domain where the equation is defined. </li>
 <li><code>evaluator</code> An evaluator for evaluating 2D splines on . </li>
 <li><code>int_volume</code> The integral volume associated with each point used in the quadrature scheme. </li>
 </ul>

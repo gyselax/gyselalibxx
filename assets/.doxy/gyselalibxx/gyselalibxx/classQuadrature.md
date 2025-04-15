@@ -10,7 +10,7 @@
 
 
 
-_A class providing an operator for integrating functions defined on a discrete index range._ [More...](#detailed-description)
+_A class providing an operator for integrating functions defined on known grid points._ [More...](#detailed-description)
 
 * `#include <quadrature.hpp>`
 
@@ -55,8 +55,8 @@ _A class providing an operator for integrating functions defined on a discrete i
 | Type | Name |
 | ---: | :--- |
 |   | [**Quadrature**](#function-quadrature) (QuadConstField coeffs) <br>_Create a_ [_**Quadrature**_](classQuadrature.md) _object._ |
-|  double | [**operator()**](#function-operator) (ExecutionSpace exec\_space, IntegratorFunction integrated\_function) const<br>_An operator for calculating the integral of a function defined on a discrete index range._  |
-|  void | [**operator()**](#function-operator_1) (ExecutionSpace exec\_space, Field&lt; double, BatchIdxRange, MemorySpace &gt; const result, IntegratorFunction integrated\_function) const<br>_An operator for calculating the integral of a function defined on a discrete index range by cycling over batch dimensions._  |
+|  double | [**operator()**](#function-operator) (ExecutionSpace exec\_space, IntegratorFunction integrated\_function) const<br>_An operator for calculating the integral of a function defined on known grid points._  |
+|  void | [**operator()**](#function-operator_1) (ExecutionSpace exec\_space, Field&lt; double, BatchIdxRange, MemorySpace &gt; const result, IntegratorFunction integrated\_function) const<br>_An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions._  |
 
 
 
@@ -135,7 +135,7 @@ inline explicit Quadrature::Quadrature (
 
 ### function operator() 
 
-_An operator for calculating the integral of a function defined on a discrete index range._ 
+_An operator for calculating the integral of a function defined on known grid points._ 
 ```C++
 template<class ExecutionSpace, class IntegratorFunction>
 inline double Quadrature::operator() (
@@ -158,7 +158,7 @@ inline double Quadrature::operator() (
 
 **Returns:**
 
-The integral of the function over the index range. 
+The integral of the function over the domain. 
 
 
 
@@ -172,7 +172,7 @@ The integral of the function over the index range.
 
 ### function operator() 
 
-_An operator for calculating the integral of a function defined on a discrete index range by cycling over batch dimensions._ 
+_An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions._ 
 ```C++
 template<class ExecutionSpace, class BatchIdxRange, class IntegratorFunction>
 inline void Quadrature::operator() (

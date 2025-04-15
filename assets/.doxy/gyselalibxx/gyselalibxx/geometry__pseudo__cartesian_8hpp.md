@@ -31,8 +31,8 @@
 
 | Type | Name |
 | ---: | :--- |
-| struct | [**X\_pC**](structX__pC.md) <br>_Tag the first non periodic dimension in the pseudo\_Cartesian index range._  |
-| struct | [**Y\_pC**](structY__pC.md) <br>_Tag the second non periodic dimension in the pseudo\_Cartesian index range._  |
+| struct | [**X\_pC**](structX__pC.md) <br>_Tag the first non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._  |
+| struct | [**Y\_pC**](structY__pC.md) <br>_Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._  |
 
 
 ## Public Types

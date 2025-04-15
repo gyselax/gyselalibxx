@@ -44,7 +44,7 @@
 <parametername direction="in">mapping</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A mapping function from the logical index range to the physical index range. </para>
+<para>A mapping function from the logical domain to the physical domain. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
