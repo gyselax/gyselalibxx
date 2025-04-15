@@ -69,74 +69,6 @@ public:
     {
         double const x = ddc::get<X>(coord_xy);
         double const y = ddc::get<Y>(coord_xy);
-        return Kokkos::cos(x) * Kokkos::cos(y);
-    }
-
-    /**
-     * @brief Get the value of the partial derivative of the function
-     * in the DerivativeDimension direction at a given coordinate.
-     *
-     * @param[in] coord_xy The coordinate where we want to evaluate 
-     * the partial derivative.
-     *
-     * @return The value of the partial derivative of the function
-     * at the coordinate.
-     */
-    template <class DerivativeDimension>
-    KOKKOS_FUNCTION double differentiate(CoordXY const coord_xy) const
-    {
-        static_assert(
-                std::is_same_v<DerivativeDimension, X> || std::is_same_v<DerivativeDimension, Y>);
-
-        double const x = ddc::get<X>(coord_xy);
-        double const y = ddc::get<Y>(coord_xy);
-
-        if constexpr (std::is_same_v<DerivativeDimension, X>) {
-            return -Kokkos::sin(x) * Kokkos::cos(y);
-        } else {
-            return -Kokkos::cos(x) * Kokkos::sin(y);
-        }
-    }
-};
-
-/**
- * @brief A class that represents a test function for computing partial derivatives with boundary values.
- * The test function is defined as the product of two polynomials of cosine functions.
- * This function has been chosen to ease the use of boundary conditions
- * due to the fact that its value and its derivative are both null at the boundary.
- */
-class FunctionToDifferentiateLinearCosine
-{
-public:
-    /**
-     * @brief Default constructor.
-     */
-    KOKKOS_DEFAULTED_FUNCTION FunctionToDifferentiateLinearCosine() = default;
-
-    /**
-     * @brief Default copy constructor.
-     */
-    KOKKOS_DEFAULTED_FUNCTION FunctionToDifferentiateLinearCosine(
-            FunctionToDifferentiateLinearCosine const&)
-            = default;
-
-    /**
-     * @brief Default destructor.
-     */
-    KOKKOS_DEFAULTED_FUNCTION ~FunctionToDifferentiateLinearCosine() = default;
-
-    /**
-     * @brief Get the value of the function at given coordinate.
-     *
-     * @param[in] coord_xy The coordinate where we want to evaluate
-     * the function.
-     *
-     * @return The value of the function at the coordinate.
-     */
-    KOKKOS_FUNCTION double operator()(CoordXY const coord_xy) const
-    {
-        double const x = ddc::get<X>(coord_xy);
-        double const y = ddc::get<Y>(coord_xy);
         return (Kokkos::cos(x) + 1) * (Kokkos::cos(y) + 1);
     }
 
@@ -166,6 +98,7 @@ public:
         }
     }
 };
+
 /**
  * @brief A class that represents a test for partial derivatives.
  * The test can be used with several implementations for computing
@@ -636,14 +569,13 @@ public:
         CentralFDMPartialDerivativeWithBValueCreator<IdxRangeXY, DerivativeDimension> const
                 derivative_creator(0., 0.);
 
-        FunctionToDifferentiateLinearCosine function_to_differentiate;
-        double const max_error = base_type::template compute_max_error<
-                DerivativeDimension,
-                FunctionToDifferentiateLinearCosine>(
-                idxrange_xy,
-                function_to_differentiate,
-                derivative_creator,
-                max_distance);
+        FunctionToDifferentiateCosine function_to_differentiate;
+        double const max_error = base_type::
+                template compute_max_error<DerivativeDimension, FunctionToDifferentiateCosine>(
+                        idxrange_xy,
+                        function_to_differentiate,
+                        derivative_creator,
+                        max_distance);
 
         return max_error;
     }

@@ -22,7 +22,7 @@ template <class IdxRangeFull, class DerivativeDimension>
 class CentralFDMPartialDerivativeWithBValue
     : public IPartialDerivative<IdxRangeFull, DerivativeDimension>
 {
-public:
+private:
     using base_type = IPartialDerivative<IdxRangeFull, DerivativeDimension>;
 
     /// The type of the field to be differentiated.
@@ -43,8 +43,8 @@ public:
 private:
     /// The field to be differentiated, with the two boundary values
     DFieldMemType m_field;
-    double m_BValue_left;
-    double m_BValue_right;
+    double m_b_value_left;
+    double m_b_value_right;
 
 public:
     /**
@@ -59,8 +59,8 @@ public:
             double bvalue_left,
             double bvalue_right)
         : m_field(get_idx_range(field_ref))
-        , m_BValue_left(bvalue_left)
-        , m_BValue_right(bvalue_right)
+        , m_b_value_left(bvalue_left)
+        , m_b_value_right(bvalue_right)
     {
         ddc::parallel_deepcopy(get_field(m_field), field_ref);
     }
@@ -96,7 +96,7 @@ public:
             double const h2 = ddc::coordinate(ix + 2 * step) - ddc::coordinate(ix + step);
             double const c3 = -h1 / (h2 * (h1 + h2));
             double const c2 = 1. / h1 + 1. / h2;
-            double bvalue_left(m_BValue_left);
+            double bvalue_left(m_b_value_left);
             ddc::parallel_for_each(
                     Kokkos::DefaultExecutionSpace(),
                     idxrange_batch,
@@ -116,7 +116,7 @@ public:
             double const h2 = ddc::coordinate(ix - step) - ddc::coordinate(ix - 2 * step);
             double const c3 = h1 / (h2 * (h1 + h2));
             double const c2 = -(h1 + h2) / (h1 * h2);
-            double bvalue_right(m_BValue_right);
+            double bvalue_right(m_b_value_right);
             ddc::parallel_for_each(
                     Kokkos::DefaultExecutionSpace(),
                     idxrange_batch,
@@ -172,9 +172,10 @@ private:
     /// The type of a constant reference to the field to be differentiated.
     using DConstFieldType = DConstField<IdxRangeFull>;
 
+private:
     // The boundary values for the derivative
-    double m_BValue_left;
-    double m_BValue_right;
+    double m_b_value_left;
+    double m_b_value_right;
 
 public:
     /**
@@ -184,8 +185,8 @@ public:
      * @param bvalue_right The right boundary value.
      */
     CentralFDMPartialDerivativeWithBValueCreator(double bvalue_left, double bvalue_right)
-        : m_BValue_left(bvalue_left)
-        , m_BValue_right(bvalue_right)
+        : m_b_value_left(bvalue_left)
+        , m_b_value_right(bvalue_right)
     {
     }
 
@@ -203,6 +204,6 @@ public:
     {
         return std::make_unique<CentralFDMPartialDerivativeWithBValue<
                 IdxRangeFull,
-                DerivativeDimension>>(field_ref, m_BValue_left, m_BValue_right);
+                DerivativeDimension>>(field_ref, m_b_value_left, m_b_value_right);
     }
 };
