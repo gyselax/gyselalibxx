@@ -44,7 +44,7 @@ public:
     explicit Quadrature(QuadConstField coeffs) : m_coefficients(coeffs) {}
 
     /**
-     * @brief An operator for calculating the integral of a function defined on a discrete domain.
+     * @brief An operator for calculating the integral of a function defined on a know grid points.
      *
      * @param[in] exec_space
      *        The space on which the function is executed (CPU/GPU).
