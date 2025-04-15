@@ -98,6 +98,8 @@ jobs:
         if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'tests_coverage_toolchain'
         run: |
           pip install gcovr
+          find -name '*gcno' | grep -v -e '^./src/.*'
+          find -name '*gcda' | grep -v -e '^./src/.*'
           gcovr --filter src --lcov coverage.lcov --merge-mode-functions=merge-use-line-0 --exclude-throw-branches --exclude 'vendor/*' build
       - name: Archive code coverage results
         if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'tests_coverage_toolchain'
