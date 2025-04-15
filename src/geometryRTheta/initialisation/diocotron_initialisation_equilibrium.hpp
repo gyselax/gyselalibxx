@@ -86,15 +86,15 @@ public:
      *
      *
      * @param[in] W1
-     *      The value of the r-coordinate where the index range starts.
+     *      The value of the r-coordinate where the domain starts.
      * @param[in] R1
-     *      The value of the r-coordinate where the index range of non null
+     *      The value of the r-coordinate where the domain of non null
      *      initial condition starts.
      * @param[in] R2
-     *      The value of the r-coordinate where the index range of non null
+     *      The value of the r-coordinate where the domain of non null
      *      initial condition ends.
      * @param[in] W2
-     *      The value of the r-coordinate where the index range ends.
+     *      The value of the r-coordinate where the domain ends.
      * @param[in] Q
      *      The charge carried by the inner conductor at @f$ r = W_1 @f$.
      * @param[in] l
