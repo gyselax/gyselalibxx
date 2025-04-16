@@ -178,6 +178,15 @@ The toroidal to cylindrical transformation combines a 2D transformation in the p
 
 where $f$ is a 2D curvilinear to cartesian transformation.
 
+```math
+J (R, Z, \zeta) =
+\begin{bmatrix}
+ J_f\.^{\rho}_{\;R} & J_f\.^{\rho}_{\;Z} & 0 \\
+ J_f\.^{\theta}_{\;R} & 0 & J_f\.^{\theta}_{\;Z} & 0
+  0          & 0 &       -1 \\
+\end{bmatrix}.
+```
+
 ## Combined coordinate transformation which combines two of the coordinate transformations above
 
 The tools are:
