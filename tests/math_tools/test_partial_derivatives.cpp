@@ -69,7 +69,10 @@ public:
     {
         double const x = ddc::get<X>(coord_xy);
         double const y = ddc::get<Y>(coord_xy);
-        return (Kokkos::cos(x) + 1) * (Kokkos::cos(y) + 1);
+        // This function has been chosen because its boundary values are constant
+        // on the domain @f$[-\pi,\pi]\times[-\pi,\pi]@f$.
+        // The 1.5 is an arbitrary offset, to avoid having zero value at the boundary.
+        return (Kokkos::cos(x) + 1) * (Kokkos::cos(y) + 1) + 1.5;
     }
 
     /**
@@ -567,7 +570,7 @@ public:
 
         // the boundary values are the value of the test function at -pi and pi, namely 0.
         CentralFDMPartialDerivativeWithBValueCreator<IdxRangeXY, DerivativeDimension> const
-                derivative_creator(0., 0.);
+                derivative_creator(1.5, 1.5);
 
         FunctionToDifferentiateCosine function_to_differentiate;
         double const max_error = base_type::
