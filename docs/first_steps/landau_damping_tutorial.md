@@ -1,6 +1,6 @@
 # 1D-1V Landau Damping Simulation with Gyselalib++
 
-> **Tutorial Goal:** Learn to use Gyselalib++ to implement a 1D-1V Vlasov–Poisson simulation demonstrating Landau damping, by walking through the scientific and algorithmic choices made in [this simulation](../../simulations/geometryXVx/landau/landau_fft.cpp).
+> **Tutorial Goal:** Learn to use Gyselalib++ to implement a 1D-1V Vlasov–Poisson simulation demonstrating Landau damping, by walking through the scientific and algorithmic choices made in [this simulation](https://github.com/gyselax/gyselalibxx/blob/main/simulations/geometryXVx/landau/landau_fft.cpp).
 
 ---
 
@@ -26,7 +26,7 @@ Here, $ E(x, t) $ is the self-consistent electric field, determined by Poisson�
 \frac{\partial E}{\partial x} = \int_{-\infty}^{\infty} q_s f(x, v, t)\, dv - n_{0}
 ```
 
-This system conserves phase-space density and exhibits **Landau damping** — the decay of the electric field due to phase mixing in velocity space, even in the absence of collisions.
+This system conserves phase-space density and exhibits **Landau damping**, the decay of the electric field due to phase mixing in velocity space, even in the absence of collisions.
 
 In Gyselalib++, each of these equations corresponds to a **numerical operator** that we must explicitly construct and compose.
 
@@ -37,14 +37,17 @@ In Gyselalib++, each of these equations corresponds to a **numerical operator** 
 Before discretizing the system, we must define the **computational domain** for both space and velocity.
 
 We consider a **periodic spatial domain**:
-- $ x \in [0, L_x] $, with $ L_x = 2\pi $
+
+- $` x \in [0, L_x] `$, with $` L_x = 2\pi `$
 - Periodic boundary conditions in $ x $
 
 And a **bounded velocity domain**:
+
 - $ v \in [-v_{\max}, v_{\max}] $, with $ v_{\max} = 6 $
 - Homogeneous Dirichlet (zero) boundary conditions in $ v $
 
 These boundary choices are typical for Landau damping simulations:
+
 - The periodicity in $ x $ allows us to use **Fourier-based Poisson solvers**
 - The truncation of the $ v $-domain must be large enough to contain the significant support of the distribution function
 
@@ -84,18 +87,20 @@ struct Vx
 Our numerical scheme is based on a **splitting approach** to solve the Vlasov–Poisson system. Each term in the equations is discretized and handled by an explicit operator, which mirrors the structure of a simulation methods section.
 
 The key choices are:
+
 - A **semi-Lagrangian method** for phase-space advection
 - A **Strang splitting** technique for time integration
 - An **FFT-based Poisson solver** for computing the electric field
 - A **spline-based quadrature rule** for evaluating the charge density
 
-Each of these is a deliberate, transparent modeling decision — in Gyselalib++, they correspond to clearly defined building blocks in the simulation.
+Each of these is a deliberate, transparent modelling decision. In Gyselalib++, they correspond to clearly defined building blocks in the simulation.
 
 ---
 
 ### Predictor–Corrector Scheme
 
 To improve the accuracy of the time integration, we use a **predictor–corrector scheme** to solve the system of equations. This involves:
+
 1. Calculating the electric field
 2. Computing an intermediate solution using the calculated electric field
 3. Calculating the electric field at the intermediate solution
@@ -138,6 +143,7 @@ We use **Strang splitting** to decompose the Vlasov equation:
 ```
 
 Where:
+
 - $` \mathcal{A}_x(f) = -v \frac{\partial f}{\partial x} `$
 - $` \mathcal{A}_v(f) = -E(x) \frac{\partial f}{\partial v} `$
 
@@ -157,13 +163,17 @@ Each sub-step of the splitting is handled via a **semi-Lagrangian method**. This
 In our simulation we will use a **spline representation** of $ f $ for the interpolation.
 
 Benefits of this approach:
+
 - Unconditionally stable for large time steps
 - Works naturally with non-uniform grids and smooth basis functions
 - Avoids CFL restrictions typical of Eulerian methods
 
 When tracing characteristics backward in time the foot of the characteristic may fall outside the simulation domain. We define **extrapolation conditions** to describe how the function is evaluated in these cases:
+
 - In the **spatial domain**, periodic extrapolation is used, consistent with the assumed periodicity of the domain.
 - In the **velocity domain**, constant extrapolation is used. As the distribution function decays rapidly at large velocities we can assume that the function is zero outside of the domain, but the use of a constant extrapolation instead avoids the accidental introduction of discontinuities.
+
+---
 
 ### Spline Representation
 
@@ -174,21 +184,26 @@ We represent these one-dimensional functions using **B-spline interpolation**. T
 - **Uniform knot spacing** is used in both the spatial and velocity domains.
 - **Cubic B-splines** (polynomial degree $ p = 3 $) are employed to provide smooth and accurate interpolation.
 
-This representation is used consistently throughout the simulation for both initialization and interpolation during advection steps.
+This representation is used consistently throughout the simulation for both initialisation and interpolation during advection steps.
 
 The spline $S(x)$ is evaluated from the B-splines using the following equation:
+
 ```math
 S(x) = \sum_i c_i b_i(x)
 ```
+
 where $`c_i`$ are the spline coefficients and $`b_i(x)`$ are the B-splines.
 
 Building a spline representation of a function is equivalent to calculating the spline coefficients $`c_i`$.
 Our simulation will evolve on grid points $`x_i`$ so we can define $`N_p`$ equations:
+
 ```math
 S(x_j) = \sum_i c_i b_i(x_j)
 ```
+
 where $`N_p`$ is the number of interpolation points.
 For our simulation we choose to use **Greville abscissae** as the interpolation points, as this ensures good approximation properties. However this may result in fewer equations than the degrees of freedom of the spline space. We therefore also define **closure conditions** which reflect the physical properties of each domain:
+
 - In the **spatial domain**, periodic boundary conditions are enforced, consistent with the assumed periodicity of the Vlasov–Poisson system.
 - In the **velocity domain**, the spline space enforces **homogeneous Hermite-type boundary conditions**, which ensure that derivatives vanish at the domain boundaries. This reflects the rapid decay of the distribution function at large velocities.
 
@@ -222,6 +237,7 @@ struct BSplinesVx : ddc::UniformBSplines<Vx, BSDegreeVx>
 ```
 
 In the body of the simulation these objects must be initialised as global objects. This is done as follows:
+
 ```cpp
 Coord<X> const x_min(0.0);
 Coord<X> const x_max(1.0);
@@ -236,6 +252,8 @@ ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_ncells);
 ```
 
 The function `ddc::init_discrete_space` calls the [constructor of `ddc::UniformBSplines<CDim, Degree>::Impl`](https://ddc.mdls.fr/classddc_1_1UniformBSplines_1_1Impl.html) with arguments describing the uniform cells on which the splines are defined.
+
+---
 
 ### Generating the Grid from the Spline Space
 
@@ -272,9 +290,12 @@ IdxRange<X> idx_range_x(SplineInterpPointsX::get_domain<GridX>());
 IdxRange<Vx> idx_range_vx(SplineInterpPointsVx::get_domain<GridVx>());
 ```
 
+---
+
 #### Spline Dependent Grids with Input
 
 Spline-dependent grids are very common in Gyselalib++ but the required input for initialising these grids depends on:
+
 - The uniformity of the cells on which the splines are defined
 - The method of defining the grid points from the splines
 
@@ -290,6 +311,8 @@ IdxRange<Vx> const idx_range_vx = init_spline_dependent_idx_range<
         BSplinesVx,
         SplineInterpPointsVx>(conf_gyselalibxx, "vx");
 ```
+
+---
 
 ### Defining the Spline Interpolation
 
@@ -364,11 +387,15 @@ SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
 SplineVxEvaluator const spline_vx_evaluator(bv_vx_min, bv_vx_max);
 ```
 
+---
+
 ### Leveraging Common Geometries
 
 In what we have presented so far we have described several structures which are specific to the geometry that we use in this simulation but are not specific to the simulation itself. In order to reduce code duplication and the time spent constructing such geometries, Gyselalib++ provides some files describing common geometries. These can be found in `src/geometry.../geometry/geometry.hpp`.
 
 These files also contain several type aliases which simplify the notation of these types in the body of the code.
+
+---
 
 ### Constructing the Semi-Lagrangian Advection Operators
 
@@ -382,6 +409,8 @@ BslAdvectionSpatial<GeometryXVx, GridX> const advection_x(spline_x_interpolator)
 BslAdvectionVelocity<GeometryXVx, GridVx> const advection_vx(spline_vx_interpolator);
 ```
 
+---
+
 ### Implementing the Operator Splitting Strategy
 
 The overall advection operator is constructed using an operator implementing Strang splitting. For the XVx geometry Gyselalib++ provides the `SplitVlasovSolver` operator for this:
@@ -389,6 +418,8 @@ The overall advection operator is constructed using an operator implementing Str
 ```cpp
 SplitVlasovSolver const vlasov(advection_x, advection_vx);
 ```
+
+---
 
 ### Solving the Poisson Equation
 
@@ -414,6 +445,8 @@ This operator is assembled from this field of quadrature coefficients as follows
 ChargeDensityCalculator rhs(get_field(quadrature_coeffs));
 ```
 
+---
+
 #### Solving the Equation with an FFT Solver
 
 The FFT solver is constructed using the index range on which it operates:
@@ -427,6 +460,8 @@ This operator and the charge density calculator are bound together using a class
 ```cpp
 QNSolver const poisson(fft_poisson_solver, rhs);
 ```
+
+---
 
 ### Assembling the Time-Stepping Scheme
 
