@@ -66,6 +66,7 @@ using MultipatchSplineBuilderX = MultipatchSplineBuilder<
         SplineXBoundary,
         Connectivity,
         ddc::SplineSolver::LAPACK,
+        DConstFieldOnPatch,
         Patch1,
         Patch2>;
 
