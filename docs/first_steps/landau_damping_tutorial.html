@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>1D-1V Landau Damping Simulation with Gyselalib++ - GyselalibX</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "1D-1V Landau Damping Simulation with Gyselalib++";
+        var mkdocs_page_input_path = "docs/first_steps/landau_damping_tutorial.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> GyselalibX
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">General</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Installation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="install.html">Gyselalib++ Installation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../toolchains/index.html">Pre-made build settings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Tutorials</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">1D-1V Landau Damping Simulation with Gyselalib++</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#problem-setup-vlasovpoisson-in-1d-1v">Problem Setup: Vlasov–Poisson in 1D-1V</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#continuous-geometry">Continuous Geometry</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#numerical-methods">Numerical Methods</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#predictorcorrector-scheme">Predictor–Corrector Scheme</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#poisson-solver">Poisson Solver</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#charge-density-via-quadrature">Charge Density via Quadrature</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#operator-splitting">Operator Splitting</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#semi-lagrangian-advection">Semi-Lagrangian Advection</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#spline-representation">Spline Representation</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#constructing-the-simulation">Constructing the Simulation</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#defining-the-spline-basis">Defining the Spline Basis</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#generating-the-grid-from-the-spline-space">Generating the Grid from the Spline Space</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#defining-the-grid-of-species">Defining the Grid of Species</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#defining-the-spline-interpolation">Defining the Spline Interpolation</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#leveraging-common-geometries">Leveraging Common Geometries</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#constructing-the-semi-lagrangian-advection-operators">Constructing the Semi-Lagrangian Advection Operators</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#implementing-the-operator-splitting-strategy">Implementing the Operator Splitting Strategy</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#solving-the-poisson-equation">Solving the Poisson Equation</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#assembling-the-time-stepping-scheme">Assembling the Time-Stepping Scheme</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#specifying-initial-conditions">Specifying Initial Conditions</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#analytical-form">Analytical Form</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#implementation-in-the-code">Implementation in the code</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#output-and-postprocessing">Output and Postprocessing</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#running-the-simulation">Running the Simulation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
+    </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standards</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../standards/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../standards/mathematical_and_physical_conventions.html">Math & Physics</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Gyselalib++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Source</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../src/index.html">Gyselalib++ contents</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/advection/index.html">Advection methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/collisions/index.html">Collisions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/data_types/index.html">Data Storage Types</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/geometryRTheta/index.html">Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_field</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryRTheta/geometry/index.html">Geometry RTheta</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryRTheta/initialisation/index.html">Initialisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryRTheta/poisson/index.html">Polar Poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_solver</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryRTheta/time_solver/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryVparMu</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/geometryVparMu/index.html">Geometry (vpar, mu)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryVparMu/collisions/index.html">CollisionConfiguration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryVparMu/geometry/index.html">GeometryVparMu</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryVparMu/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/geometryXVx/index.html">Geometry (x, v_x)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >boltzmann</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryXVx/boltzmann/index.html">Boltzmann solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryXVx/geometry/index.html">Geometry X-Vx</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryXVx/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryXVx/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >rhs</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryXVx/rhs/index.html">RHS</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryXVx/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryXVx/utils/index.html">Utils</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/geometryXY/index.html">Geometry (x, y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryXY/geometry/index.html">Geometry XY</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryXY/initialisation/index.html">Initialisation on (x,y) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryXY/time_integration/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXYVxVy</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/geometryXYVxVy/index.html">Geometry (x, y, v_x, v_y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryXYVxVy/geometry/index.html">Geometry X Y-Vx Vy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryXYVxVy/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryXYVxVy/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryXYVxVy/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vlasov</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/geometryXYVxVy/vlasov/index.html">Vlasov solver</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/interpolation/index.html">Interpolation Methods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/interpolation/polar_splines/index.html">Polar Splines</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >io</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/io/index.html">Functions used for input and output</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mapping</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/mapping/index.html">Mappings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >math_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/math_tools/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >matrix_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/matrix_tools/index.html">Matrix tools</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mpi_parallelisation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/mpi_parallelisation/index.html">Parallelisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/multipatch/index.html">Multipatch</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >connectivity</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/multipatch/connectivity/index.html">Multipatch connectivity</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/multipatch/data_types/index.html">Data Types for Multipatch Geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../src/multipatch/utils/index.html">Multipatch utilitary functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/pde_solvers/index.html">PDE Solvers</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >quadrature</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/quadrature/index.html">Quadrature Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >speciesinfo</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/speciesinfo/index.html">SpeciesInfo (x, v_x)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >timestepper</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/timestepper/index.html">Time Stepping Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../src/utils/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Simulations</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../simulations/index.html">Gyselalib++ simulations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../simulations/geometryRTheta/index.html">Simulations in (r, theta) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >diocotron</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../simulations/geometryRTheta/diocotron/index.html">Diocotron instability</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vortex_merger</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../simulations/geometryRTheta/vortex_merger/index.html">Vortex merger</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../simulations/geometryXVx/index.html">Simulations in (x, vx) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../simulations/geometryXY/index.html">Simulations in (x, y) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >guiding_centre</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../simulations/geometryXY/guiding_centre/index.html">Guiding centre (X,Y) simulation</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tests</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../tests/index.html">Gyselalib++ tests</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../tests/advection/index.html">Tests on the templated advection operators</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../tests/geometryRTheta/index.html">Tests : Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../tests/geometryRTheta/advection_rtheta/index.html">Tests on the 2D polar advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../tests/geometryRTheta/polar_poisson/index.html">Tests on the 2D polar poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline_interpolator_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../tests/geometryRTheta/spline_interpolator_rtheta/index.html">Tests on spline interpolator in polar coordinates</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../tests/multipatch/index.html">Multipatch geometry tests</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometries</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../tests/multipatch/geometries/index.html">Multipatch geometries</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../development/Adding_docs.html">Adding Docs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../development/Using_git.html">Using Git</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../development/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Gyselalib++</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" >Classes</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../gyselalibxx/annotated.html">Class List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../gyselalibxx/classes.html">Class Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../gyselalibxx/hierarchy.html">Class Hierarchy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Namespaces</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../gyselalibxx/namespaces.html">Namespace List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../gyselalibxx/namespace_members.html">Namespace Members</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../gyselalibxx/namespace_member_functions.html">Namespace Member Functions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../gyselalibxx/namespace_member_variables.html">Namespace Member Variables</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../gyselalibxx/namespace_member_typedefs.html">Namespace Member Typedefs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../gyselalibxx/namespace_member_enums.html">Namespace Member Enumerations</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../gyselalibxx/functions.html">Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../gyselalibxx/variables.html">Variables</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../gyselalibxx/macros.html">Macros</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../gyselalibxx/files.html">Files</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">GyselalibX</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">General</li>
+          <li class="breadcrumb-item">Tutorials</li>
+      <li class="breadcrumb-item active">1D-1V Landau Damping Simulation with Gyselalib++</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/docs/first_steps/landau_damping_tutorial.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div><h1 id="1d-1v-landau-damping-simulation-with-gyselalib">1D-1V Landau Damping Simulation with Gyselalib++</h1>
+<blockquote>
+<p><strong>Tutorial Goal:</strong> Learn to use Gyselalib++ to implement a 1D-1V Vlasov–Poisson simulation demonstrating Landau damping, by walking through the scientific and algorithmic choices made in <a href="https://github.com/gyselax/gyselalibxx/blob/main/simulations/geometryXVx/landau/landau_fft.cpp">this simulation</a>.</p>
+</blockquote>
+<hr>
+<h2 id="introduction">Introduction</h2>
+<p>In this tutorial we will walk you through the implementation of a <strong>1D-1V Landau damping simulation</strong>.</p>
+<p>Each decision we make in building the simulation from the domain geometry to the choice of numerical solver corresponds to a statement you might find in a scientific article describing such a simulation. We show how to express these decisions clearly using Gyselalib++.</p>
+<hr>
+<h2 id="problem-setup-vlasovpoisson-in-1d-1v">Problem Setup: Vlasov–Poisson in 1D-1V</h2>
+<p>We consider the <strong>electrostatic Vlasov–Poisson system</strong> in one spatial and one velocity dimension. This models the time evolution of the <strong>electron distribution function</strong> <span class="arithmatex">\(f(x, v, t)\)</span>, which obeys the Vlasov equation:</p>
+<div class="arithmatex">\[
+\frac{\partial f}{\partial t} + v \frac{\partial f}{\partial x} + E(x, t) \frac{\partial f}{\partial v} = 0
+\]</div>
+<p>Here, <span class="arithmatex">\(E(x, t)\)</span> is the self-consistent electric field, determined by Poisson’s equation:</p>
+<div class="arithmatex">\[
+\frac{\partial E}{\partial x} = \int_{-\infty}^{\infty} q_s f(x, v, t)\, dv - n_{0}
+\]</div>
+<p>This system conserves phase-space density and exhibits <strong>Landau damping</strong>, the decay of the electric field due to phase mixing in velocity space, even in the absence of collisions.</p>
+<p>In Gyselalib++, each of these equations corresponds to a <strong>numerical operator</strong> that we must explicitly construct and compose.</p>
+<hr>
+<h2 id="continuous-geometry">Continuous Geometry</h2>
+<p>Before discretizing the system, we must define the <strong>computational domain</strong> for both space and velocity.</p>
+<p>We consider a <strong>periodic spatial domain</strong>:</p>
+<ul>
+<li><span class="arithmatex">\( x \in [0, L_x] \)</span>, with <span class="arithmatex">\( L_x = 2\pi \)</span></li>
+<li>Periodic boundary conditions in <span class="arithmatex">\(x\)</span></li>
+</ul>
+<p>And a <strong>bounded velocity domain</strong>:</p>
+<ul>
+<li><span class="arithmatex">\(v \in [-v_{\max}, v_{\max}]\)</span>, with <span class="arithmatex">\(v_{\max} = 6\)</span></li>
+<li>Homogeneous Dirichlet (zero) boundary conditions in <span class="arithmatex">\(v\)</span></li>
+</ul>
+<p>These boundary choices are typical for Landau damping simulations:</p>
+<ul>
+<li>The periodicity in <span class="arithmatex">\(x\)</span> allows us to use <strong>Fourier-based Poisson solvers</strong></li>
+<li>The truncation of the <span class="arithmatex">\(v\)</span>-domain must be large enough to contain the significant support of the distribution function</li>
+</ul>
+<p>We can now take the first steps to construct our simulation. We create structures to describe the continuous dimensions of the <strong>computational domain</strong>:</p>
+<pre><code class="language-cpp">/**
+ * @brief A class which describes the real space in the spatial X direction
+ */
+struct X
+{
+    /// @brief A boolean indicating if the dimension is periodic.
+    static bool constexpr PERIODIC = true;
+
+    /// A boolean indicating if dimension describes a covariant coordinate.
+    static bool constexpr IS_COVARIANT = true;
+    /// A boolean indicating if dimension describes a contravariant coordinate.
+    static bool constexpr IS_CONTRAVARIANT = true;
+    /// A type-alias mapping to the co/contra-variant counterpart.
+    using Dual = X;
+};
+
+/**
+ * @brief A class which describes the real space in the X-velocity direction
+ */
+struct Vx
+{
+    /// @brief A boolean indicating if the dimension is periodic.
+    static bool constexpr PERIODIC = false;
+};
+</code></pre>
+<hr>
+<h2 id="numerical-methods">Numerical Methods</h2>
+<p>Our numerical scheme is based on a <strong>splitting approach</strong> to solve the Vlasov–Poisson system. Each term in the equations is discretized and handled by an explicit operator, which mirrors the structure of a simulation methods section.</p>
+<p>The key choices are:</p>
+<ul>
+<li>A <strong>semi-Lagrangian method</strong> for phase-space advection</li>
+<li>A <strong>Strang splitting</strong> technique for time integration</li>
+<li>An <strong>FFT-based Poisson solver</strong> for computing the electric field</li>
+<li>A <strong>spline-based quadrature rule</strong> for evaluating the charge density</li>
+</ul>
+<p>Each of these is a deliberate, transparent modelling decision. In Gyselalib++, they correspond to clearly defined building blocks in the simulation.</p>
+<hr>
+<h3 id="predictorcorrector-scheme">Predictor–Corrector Scheme</h3>
+<p>To improve the accuracy of the time integration, we use a <strong>predictor–corrector scheme</strong> to solve the system of equations. This involves:</p>
+<ol>
+<li>Calculating the electric field</li>
+<li>Computing an intermediate solution using the calculated electric field</li>
+<li>Calculating the electric field at the intermediate solution</li>
+<li>Computing the final solution using the electric field calculated at the intermediate solution</li>
+</ol>
+<p>This enhances stability and temporal accuracy without the need for small time steps.</p>
+<hr>
+<h3 id="poisson-solver">Poisson Solver</h3>
+<p>To compute the electric field, we solve Poisson’s equation:</p>
+<div class="arithmatex">\[
+\frac{d^2 \phi}{dx^2} = \rho(x) - n_0, \quad E(x) = -\frac{d\phi}{dx}
+\]</div>
+<p>We use a <strong>spectral solver based on FFT</strong>, leveraging the periodic boundary condition in space. This provides high efficiency and spectral accuracy for the potential and field.</p>
+<hr>
+<h3 id="charge-density-via-quadrature">Charge Density via Quadrature</h3>
+<p>To compute the charge density <span class="arithmatex">\(\rho(x)\)</span>, we integrate the distribution function over velocity space:</p>
+<div class="arithmatex">\[
+\rho(x) = \int_{-\infty}^{\infty} f(x, v)\, dv
+\]</div>
+<p>This integral is evaluated using a <strong>high-order quadrature rule</strong> based on a spline approximation.</p>
+<hr>
+<h3 id="operator-splitting">Operator Splitting</h3>
+<p>We use <strong>Strang splitting</strong> to decompose the Vlasov equation:</p>
+<div class="arithmatex">\[
+\frac{\partial f}{\partial t} = \mathcal{A}_x(f) + \mathcal{A}_v(f)
+\]</div>
+<p>Where:</p>
+<ul>
+<li><span class="arithmatex">\( \mathcal{A}_x(f) = -v \frac{\partial f}{\partial x} \)</span></li>
+<li><span class="arithmatex">\( \mathcal{A}_v(f) = -E(x) \frac{\partial f}{\partial v} \)</span></li>
+</ul>
+<p>Strang splitting alternates between these operators in a <strong>symmetric sequence</strong> to achieve second-order accuracy in time:</p>
+<div class="arithmatex">\[
+f^{n+1} = e^{\frac{\Delta t}{2} \mathcal{A}_v} \, e^{\Delta t \mathcal{A}_x} \, e^{\frac{\Delta t}{2} \mathcal{A}_v} f^n
+\]</div>
+<p>This approach is standard in semi-Lagrangian Vlasov solvers, and allows us to treat each advection step independently.</p>
+<hr>
+<h3 id="semi-lagrangian-advection">Semi-Lagrangian Advection</h3>
+<p>Each sub-step of the splitting is handled via a <strong>semi-Lagrangian method</strong>. This involves tracing characteristics <strong>backward in time</strong> to find where information originates, and interpolating from that location.
+In our simulation we will use a <strong>spline representation</strong> of <span class="arithmatex">\(f\)</span> for the interpolation.</p>
+<p>Benefits of this approach:</p>
+<ul>
+<li>Unconditionally stable for large time steps</li>
+<li>Works naturally with non-uniform grids and smooth basis functions</li>
+<li>Avoids CFL restrictions typical of Eulerian methods</li>
+</ul>
+<p>When tracing characteristics backward in time the foot of the characteristic may fall outside the simulation domain. We define <strong>extrapolation conditions</strong> to describe how the function is evaluated in these cases:</p>
+<ul>
+<li>In the <strong>spatial domain</strong>, periodic extrapolation is used, consistent with the assumed periodicity of the domain.</li>
+<li>In the <strong>velocity domain</strong>, constant extrapolation is used. As the distribution function decays rapidly at large velocities we can assume that the function is zero outside of the domain, but the use of a constant extrapolation instead avoids the accidental introduction of discontinuities.</li>
+</ul>
+<hr>
+<h3 id="spline-representation">Spline Representation</h3>
+<p>The semi-Lagrangian method employed in this simulation requires the representation of the distribution function <span class="arithmatex">\(f(x, v, t)\)</span> as a one-dimensional function during each substep of the Strang splitting scheme. Specifically, during advection in configuration space, <span class="arithmatex">\(f(\cdot, v)\)</span> is treated as a function of <span class="arithmatex">\(x\)</span> for fixed <span class="arithmatex">\(v\)</span>, and vice versa for velocity space.</p>
+<p>We represent these one-dimensional functions using <strong>B-spline interpolation</strong>. The spline spaces used in each dimension are defined as follows:</p>
+<ul>
+<li><strong>Uniform knot spacing</strong> is used in both the spatial and velocity domains.</li>
+<li><strong>Cubic B-splines</strong> (polynomial degree <span class="arithmatex">\(p = 3\)</span>) are employed to provide smooth and accurate interpolation.</li>
+</ul>
+<p>This representation is used consistently throughout the simulation for both initialisation and interpolation during advection steps.</p>
+<p>The spline <span class="arithmatex">\(S(x)\)</span> is evaluated from the B-splines using the following equation:</p>
+<div class="arithmatex">\[
+S(x) = \sum_i c_i b_i(x)
+\]</div>
+<p>where <span class="arithmatex">\(c_i\)</span> are the spline coefficients and <span class="arithmatex">\(b_i(x)\)</span> are the B-splines.</p>
+<p>Building a spline representation of a function is equivalent to calculating the spline coefficients <span class="arithmatex">\(c_i\)</span>.
+Our simulation will evolve on grid points <span class="arithmatex">\(x_i\)</span> so we can define <span class="arithmatex">\(N_p\)</span> equations:</p>
+<div class="arithmatex">\[
+S(x_j) = \sum_i c_i b_i(x_j)
+\]</div>
+<p>where <span class="arithmatex">\(N_p\)</span> is the number of interpolation points.
+For our simulation we choose to use <strong>Greville abscissae</strong> as the interpolation points, as this ensures good approximation properties. However this may result in fewer equations than the degrees of freedom of the spline space. We therefore also define <strong>closure conditions</strong> which reflect the physical properties of each domain:</p>
+<ul>
+<li>In the <strong>spatial domain</strong>, periodic boundary conditions are enforced, consistent with the assumed periodicity of the Vlasov–Poisson system.</li>
+<li>In the <strong>velocity domain</strong>, the spline space enforces <strong>homogeneous Hermite-type boundary conditions</strong>, which ensure that derivatives vanish at the domain boundaries. This reflects the rapid decay of the distribution function at large velocities.</li>
+</ul>
+<hr>
+<h2 id="constructing-the-simulation">Constructing the Simulation</h2>
+<p>In this section, we build the Landau damping simulation step by step, beginning with the <strong>spline basis</strong> and <strong>grid</strong>, and working our way up to the full operator composition.</p>
+<p>This construction reflects the mathematical structure of the Vlasov–Poisson system and the numerical methods we introduced earlier, from foundational representation to time integration.</p>
+<p>Fundamental operators which are useful for many simulations and geometries are provided by Gyselalib++, however as we move towards more specific operators the dependencies on the geometry or the simulation become stronger.
+In these cases you may need to write your own operator built upon the tools that Gyselalib++ provides. Nevertheless, as we will see, Gyselalib++ probides several geometry specific operators for common use cases.</p>
+<hr>
+<h3 id="defining-the-spline-basis">Defining the Spline Basis</h3>
+<p>The spline basis as defined <a href="#spline-representation">above</a> is described using DDC:</p>
+<pre><code class="language-cpp">int constexpr BSDegreeX = 3;
+int constexpr BSDegreeVx = 3;
+
+struct BSplinesX : ddc::UniformBSplines&lt;X, BSDegreeX&gt;
+{
+};
+struct BSplinesVx : ddc::UniformBSplines&lt;Vx, BSDegreeVx&gt;
+{
+};
+</code></pre>
+<p>In the body of the simulation these objects must be initialised as global objects. This is done as follows:</p>
+<pre><code class="language-cpp">Coord&lt;X&gt; const x_min(0.0);
+Coord&lt;X&gt; const x_max(1.0);
+IdxStep&lt;GridX&gt; const x_ncells(100);
+
+Coord&lt;Vx&gt; const vx_min(-6);
+Coord&lt;Vx&gt; const vx_max(6);
+IdxStep&lt;GridVx&gt; const vx_ncells(30);
+
+ddc::init_discrete_space&lt;BSplinesX&gt;(x_min, x_max, x_ncells);
+ddc::init_discrete_space&lt;BSplinesVx&gt;(vx_min, vx_max, vx_ncells);
+</code></pre>
+<p>The function <code>ddc::init_discrete_space</code> calls the <a href="https://ddc.mdls.fr/classddc_1_1UniformBSplines_1_1Impl.html">constructor of <code>ddc::UniformBSplines&lt;CDim, Degree&gt;::Impl</code></a> with arguments describing the uniform cells on which the splines are defined.</p>
+<hr>
+<h3 id="generating-the-grid-from-the-spline-space">Generating the Grid from the Spline Space</h3>
+<p>The grid is constructed from the Greville abscissae of the b-splines using DDC as follows:</p>
+<pre><code class="language-cpp">auto constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
+auto constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
+
+using SplineInterpPointsX
+        = ddc::GrevilleInterpolationPoints&lt;BSplinesX, SplineXBoundary, SplineXBoundary&gt;;
+using SplineInterpPointsVx
+        = ddc::GrevilleInterpolationPoints&lt;BSplinesVx, SplineVxBoundary, SplineVxBoundary&gt;;
+
+struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
+{
+};
+struct GridVx : SplineInterpPointsVx::interpolation_discrete_dimension_type
+{
+};
+</code></pre>
+<p>In the body of the simulation these objects must be initialised as global objects. This is done as follows:</p>
+<pre><code class="language-cpp">ddc::init_discrete_space&lt;GridX&gt;(SplineInterpPointsX::get_sampling&lt;GridX&gt;());
+ddc::init_discrete_space&lt;GridVx&gt;(SplineInterpPointsVx::get_sampling&lt;GridVx&gt;());
+</code></pre>
+<p>The index range on which the simulation will be defined can then be constructed:</p>
+<pre><code class="language-cpp">IdxRange&lt;X&gt; idx_range_x(SplineInterpPointsX::get_domain&lt;GridX&gt;());
+IdxRange&lt;Vx&gt; idx_range_vx(SplineInterpPointsVx::get_domain&lt;GridVx&gt;());
+</code></pre>
+<h4 id="spline-dependent-grids-with-input">Spline Dependent Grids with Input</h4>
+<p>Spline-dependent grids are very common in Gyselalib++ but the required input for initialising these grids depends on:</p>
+<ul>
+<li>The uniformity of the cells on which the splines are defined</li>
+<li>The method of defining the grid points from the splines</li>
+</ul>
+<p>This information is often provided as a yaml input using paraconf, so Gyselalib++ also provides a helper function to initialise both the splines and the grids from a paraconf configuration. This can be called as follows:</p>
+<pre><code class="language-cpp">IdxRange&lt;X&gt; const idx_range_x = init_spline_dependent_idx_range&lt;
+        GridX,
+        BSplinesX,
+        SplineInterpPointsX&gt;(conf_gyselalibxx, "x");
+IdxRange&lt;Vx&gt; const idx_range_vx = init_spline_dependent_idx_range&lt;
+        GridVx,
+        BSplinesVx,
+        SplineInterpPointsVx&gt;(conf_gyselalibxx, "vx");
+</code></pre>
+<hr>
+<h3 id="defining-the-grid-of-species">Defining the Grid of Species</h3>
+<p>The distribution function depends not only on the spatial and velocity dimensions, but also on the species.
+We therefore also need to initialise the global grid of species. Gyselalib++ provides three functions for initialising the species from a paraconf configuration depending on the kind of species used (fluid, kinetic, adiabatic). For this simulation we will use kinetic and adiabatic species:</p>
+<pre><code class="language-cpp">IdxRangeSp const idx_range_kinsp = init_species(conf_gyselalibxx);
+</code></pre>
+<hr>
+<h3 id="defining-the-spline-interpolation">Defining the Spline Interpolation</h3>
+<p>The spline interpolation requires a spline builder implementing the requested closure conditions, and a spline evaluator.</p>
+<p>The spline builders are defined as:</p>
+<pre><code class="language-cpp">using SplineXBuilder = ddc::SplineBuilder&lt;
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesX,
+        GridX,
+        SplineXBoundary,
+        SplineXBoundary,
+        ddc::SplineSolver::LAPACK&gt;;
+
+using SplineVxBuilder = ddc::SplineBuilder&lt;
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesVx,
+        GridVx,
+        SplineVxBoundary,
+        SplineVxBoundary,
+        ddc::SplineSolver::LAPACK&gt;;
+</code></pre>
+<p>where <code>ddc::SplineSolver::LAPACK</code> indicates the solver that will be used to solve the matrix equation, and <code>Kokkos::DefaultExecutionSpace</code> indicates that the builder will act on the default execution space (GPU if enabled, for more information about execution spaces see the <a href="https://kokkos.org/kokkos-core-wiki/API/core/execution_spaces.html">Kokkos documentation</a>).</p>
+<p>In the body of the simulation an instance of the spline builder is created using the index range of the interpolation points:</p>
+<pre><code class="language-cpp">SplineXBuilder const builder_x(idx_range_x);
+SplineVxBuilder const builder_vx(idx_range_vx);
+</code></pre>
+<p>The spline evaluators are defined as:</p>
+<pre><code class="language-cpp">using SplineXEvaluator = ddc::SplineEvaluator&lt;
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesX,
+        GridX,
+        ddc::PeriodicExtrapolationRule&lt;X&gt;,
+        ddc::PeriodicExtrapolationRule&lt;X&gt;&gt;;
+
+using SplineVxEvaluator = ddc::SplineEvaluator&lt;
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesVx,
+        GridVx,
+        ddc::ConstantExtrapolationRule&lt;Vx&gt;,
+        ddc::ConstantExtrapolationRule&lt;Vx&gt;&gt;
+</code></pre>
+<p>In the body of the simulation an instance of the spline evaluator operator is created from the extrapolation conditions:</p>
+<pre><code class="language-cpp">ddc::PeriodicExtrapolationRule&lt;X&gt; bv_x_min;
+ddc::PeriodicExtrapolationRule&lt;X&gt; bv_x_max;
+
+// The extrapolation is constant and has the same value as that of the spline
+// at the first coordinate of the index range
+ddc::ConstantExtrapolationRule&lt;Vx&gt; bv_vx_min(ddc::coordinate(idx_range_vx.front()));
+
+// The extrapolation is constant and has the same value as that of the spline
+// at the last coordinate of the index range
+ddc::ConstantExtrapolationRule&lt;Vx&gt; bv_vx_max(ddc::coordinate(idx_range_vx.back()));
+
+SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
+SplineVxEvaluator const spline_vx_evaluator(bv_vx_min, bv_vx_max);
+</code></pre>
+<hr>
+<h3 id="leveraging-common-geometries">Leveraging Common Geometries</h3>
+<p>In what we have presented so far we have described several structures which are specific to the geometry that we use in this simulation but are not specific to the simulation itself. In order to reduce code duplication and the time spent constructing such geometries, Gyselalib++ provides some files describing common geometries. These can be found in <code>src/geometry.../geometry/geometry.hpp</code>.</p>
+<p>These files also contain several type aliases which simplify the notation of these types in the body of the code.</p>
+<hr>
+<h3 id="constructing-the-semi-lagrangian-advection-operators">Constructing the Semi-Lagrangian Advection Operators</h3>
+<p>Now we have defined both the splines and the grid we can construct our advection operators using spline interpolation:</p>
+<pre><code class="language-cpp">PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
+PreallocatableSplineInterpolator const spline_vx_interpolator(builder_vx, spline_vx_evaluator);
+
+BslAdvectionSpatial&lt;GeometryXVx, GridX&gt; const advection_x(spline_x_interpolator);
+BslAdvectionVelocity&lt;GeometryXVx, GridVx&gt; const advection_vx(spline_vx_interpolator);
+</code></pre>
+<hr>
+<h3 id="implementing-the-operator-splitting-strategy">Implementing the Operator Splitting Strategy</h3>
+<p>The overall advection operator is constructed using an operator implementing Strang splitting. For the XVx geometry Gyselalib++ provides the <code>SplitVlasovSolver</code> operator for this:</p>
+<pre><code class="language-cpp">SplitVlasovSolver const vlasov(advection_x, advection_vx);
+</code></pre>
+<hr>
+<h3 id="solving-the-poisson-equation">Solving the Poisson Equation</h3>
+<p>The Poisson equation is solved in two stages:</p>
+<ol>
+<li>Evaluate the charge density</li>
+<li>Solve the equation using an FFT solver</li>
+</ol>
+<h4 id="evaluating-the-charge-density">Evaluating the Charge Density</h4>
+<p>The quadrature scheme for the charge density operator first requires the definition of the quadrature coefficients using the chosen scheme:</p>
+<pre><code class="language-cpp">DFieldMemVx const quadrature_coeffs(neumann_spline_quadrature_coefficients&lt;
+                                    Kokkos::DefaultExecutionSpace&gt;(mesh_vx, builder_vx));
+</code></pre>
+<p>Here <code>DFieldMemVx</code> is a field of doubles defined along the Vx dimension. The keyword <code>Mem</code> indicates that this object allocates memory on instantiation. It should not be used directly, the field must always be extracted. For more explanations see <a href="DDC_in_gyselalibxx.html">Using DDC in Gyselalib++</a>.</p>
+<p>The charge density calculator can be expressed simply using the <code>Quadrature</code> class. Gyselalib++ provides an operator for the XVx case which can be used as an example for other geometries.
+This operator is assembled from this field of quadrature coefficients as follows:</p>
+<pre><code class="language-cpp">ChargeDensityCalculator rhs(get_field(quadrature_coeffs));
+</code></pre>
+<hr>
+<h4 id="solving-the-equation-with-an-fft-solver">Solving the Equation with an FFT Solver</h4>
+<p>The FFT solver is constructed using the index range on which it operates:</p>
+<pre><code class="language-cpp">FFTPoissonSolver&lt;IdxRangeX&gt; fft_poisson_solver(idx_range_x);
+</code></pre>
+<p>This operator and the charge density calculator are bound together using a class (specific to the XVx geometry) called <code>QNSolver</code>:</p>
+<pre><code class="language-cpp">QNSolver const poisson(fft_poisson_solver, rhs);
+</code></pre>
+<hr>
+<h3 id="assembling-the-time-stepping-scheme">Assembling the Time-Stepping Scheme</h3>
+<p>Finally the predictor-corrector (specific to the XVx geometry) is constructed from the Vlasov operator and the Poisson operator:</p>
+<pre><code class="language-cpp">PredCorr const predcorr(vlasov, poisson);
+</code></pre>
+<hr>
+<h2 id="specifying-initial-conditions">Specifying Initial Conditions</h2>
+<p>To complete the simulation setup, we must define the initial state of the distribution function <span class="arithmatex">\(f(x, v, t=0)\)</span>. In this example, we consider the <strong>classical Landau damping problem</strong>, where an equilibrium Maxwellian is perturbed by a small-amplitude density wave.</p>
+<hr>
+<h3 id="analytical-form">Analytical Form</h3>
+<p>The initial condition is given by:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+f(x, v, 0) = f_M(v) \left(1 + \alpha \cos(k x)\right) \\
+f_M(s, v) = \frac{n}{\sqrt{2\pi T}} \exp(-\frac{(v-u)^2}{2 T})
+\end{aligned}
+\]</div>
+<p>where <span class="arithmatex">\(n\)</span> is the equilibrium density, <span class="arithmatex">\(u\)</span> is the mean velocity at equilibrium and <span class="arithmatex">\(T\)</span> is the equilibrium temperature. These parameters are provided as input to the simulation.</p>
+<p>This defines a <strong>spatially modulated Maxwellian</strong>, with small perturbations intended to excite Landau damping of the <span class="arithmatex">\(k\)</span>-mode in the electric field.</p>
+<hr>
+<h3 id="implementation-in-the-code">Implementation in the code</h3>
+<p>Gyselalib++ provides an operator <code>SingleModePerturbInitialisation</code> describing this equation for the XVx geometry. It takes</p>
+<pre><code class="language-cpp">// Initialisation of the Maxwellian equilibrium
+DFieldMemSpVx allfequilibrium(meshSpVx);
+MaxwellianEquilibrium const init_fequilibrium
+        = MaxwellianEquilibrium::init_from_input(idx_range_kinsp, conf_gyselalibxx);
+init_fequilibrium(get_field(allfequilibrium));
+
+// Initialisation of the distribution function
+SingleModePerturbInitialisation const init
+        = SingleModePerturbInitialisation::init_from_input(
+                get_const_field(allfequilibrium),
+                idx_range_kinsp,
+                conf_gyselalibxx);
+init(get_field(allfdistribu));
+</code></pre>
+<p>The equilibrium density, mean velocity, and temperature are read from the paraconf configuration.</p>
+<hr>
+<h2 id="output-and-postprocessing">Output and Postprocessing</h2>
+<p>While this tutorial does not define built-in diagnostics, the output contains all necessary data for postprocessing using HDF5-compatible tools.</p>
+<p>Gyselalib++ relies on PDI to output data from the simulations. You can find more information about this library in their <a href="https://pdi.dev/main/">documentation</a>.</p>
+<p>For this simulation we output one file containing initialisation parameters including the grid, some information about the species and the initial state:</p>
+<pre><code class="language-cpp">ddc::expose_to_pdi("Nx_spline_cells", ddc::discrete_space&lt;BSplinesX&gt;().ncells());
+ddc::expose_to_pdi("Nvx_spline_cells", ddc::discrete_space&lt;BSplinesVx&gt;().ncells());
+expose_mesh_to_pdi("MeshX", mesh_x);
+expose_mesh_to_pdi("MeshVx", mesh_vx);
+ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
+ddc::expose_to_pdi("Nkinspecies", idx_range_kinsp.size());
+ddc::expose_to_pdi(
+        "fdistribu_charges",
+        ddc::discrete_space&lt;Species&gt;().charges()[idx_range_kinsp]);
+ddc::expose_to_pdi(
+        "fdistribu_masses",
+        ddc::discrete_space&lt;Species&gt;().masses()[idx_range_kinsp]);
+ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);
+</code></pre>
+<p>we also output the distribution function at each step (this is done in the predictor corrector method).</p>
+<hr>
+<h2 id="running-the-simulation">Running the Simulation</h2>
+<p>Once the simulation has been fully defined, it can be built and executed using CMake as with any Gyselalib++ simulation. The simulation must be linked to each sub-library of Gysela that was used.</p>
+<p>In the repository, this simulation is located at:</p>
+<pre><code class="language-none">simulations/geometryXVx/landau/landau_fft.cpp
+</code></pre>
+<p>The paraconf configuration for the simulation input is located at:</p>
+<pre><code class="language-none">simulations/geometryXVx/landau/params.yaml.hpp
+</code></pre>
+<p>The PDI configuration for the simulation output is located at:</p>
+<pre><code class="language-none">simulations/geometryXVx/landau/pdi_out.yml.hpp
+</code></pre>
+<p>The simulation can be built using the usual commands to build the library. See <a href="install.html#compilation">Compilation</a> for more details:</p>
+<p>You can then generate an example yaml file:</p>
+<pre><code class="language-bash">./build/simulations/geometryXVx/landau/landau_fft --dump-config config.yml
+</code></pre>
+<p>and run the simulation:</p>
+<pre><code class="language-bash">./build/simulations/geometryXVx/landau/landau_fft config.yml
+</code></pre>
+<p>The simulation outputs are saved in <strong>HDF5 format</strong>.</p>
+<hr>
+<h2 id="conclusion">Conclusion</h2>
+<p>In this tutorial, we have constructed a full 1D-1V Landau damping simulation using Gyselalib++. Starting from the Vlasov–Poisson system, we made explicit numerical choices for spline representation, operator splitting, and semi-Lagrangian advection. Each step that must be described to reproduce the simulation was written explicitly in the body of the simulation as part of a code structure.</p>
+<p>The logic required to build this simulation should be analogous to the logic needed to build more complex 1D-1V simulations or simulations in higher dimensions.</p>
+<p>We hope this tutorial helps you get started with Gyselalib++ — good luck with your simulations!</p></div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="DDC_in_gyselalibxx.html" class="btn btn-neutral float-left" title="DDC in Gyselalib++"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../standards/CODING_STANDARD.html" class="btn btn-neutral float-right" title="Coding Standard">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/gyselax/gyselalibxx/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="DDC_in_gyselalibxx.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../standards/CODING_STANDARD.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../jscript/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
