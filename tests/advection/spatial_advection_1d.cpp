@@ -115,10 +115,7 @@ using SplineXEvaluator = ddc::SplineEvaluator<
         BSplinesX,
         GridX,
         ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>,
-        Species,
-        GridX,
-        GridVx>;
+        ddc::PeriodicExtrapolationRule<X>>;
 
 
 class Spatial1DAdvectionTest : public ::testing::Test

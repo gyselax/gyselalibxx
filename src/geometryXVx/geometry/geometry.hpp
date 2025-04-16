@@ -141,30 +141,7 @@ using SplineVxEvaluator = ddc::SplineEvaluator<
         BSplinesVx,
         GridVx,
         ddc::ConstantExtrapolationRule<Vx>,
-        ddc::ConstantExtrapolationRule<Vx>,
-        GridX,
-        GridVx>;
-using SplineXEvaluator_1d = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-#ifdef PERIODIC_RDIMX
-        ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>,
-#else
-        ddc::ConstantExtrapolationRule<X>,
-        ddc::ConstantExtrapolationRule<X>,
-#endif
-        GridX>;
-using SplineVxEvaluator_1d = ddc::SplineEvaluator<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::HostSpace,
-        BSplinesVx,
-        GridVx,
-        ddc::ConstantExtrapolationRule<Vx>,
-        ddc::ConstantExtrapolationRule<Vx>,
-        GridVx>;
+        ddc::ConstantExtrapolationRule<Vx>>;
 
 struct GridMom : Moments
 {

@@ -72,8 +72,7 @@ using SplineXEvaluator = ddc::SplineEvaluator<
         BSplinesX,
         GridX,
         ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>,
-        GridX>;
+        ddc::PeriodicExtrapolationRule<X>>;
 
 
 class XAdvection1DTest : public ::testing::Test

@@ -128,9 +128,7 @@ TEST(PolarSplineTest, ConstantEval)
             ddc::NullExtrapolationRule,
             ddc::NullExtrapolationRule,
             ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            GridR,
-            GridTheta>;
+            ddc::PeriodicExtrapolationRule<Theta>>;
 
     CoordR constexpr r0(0.);
     CoordR constexpr rN(1.);
@@ -249,9 +247,7 @@ void test_polar_integrals()
             ddc::NullExtrapolationRule,
             ddc::NullExtrapolationRule,
             ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            GridR,
-            GridTheta>;
+            ddc::PeriodicExtrapolationRule<Theta>>;
 
     CoordR constexpr r0(0.);
     CoordR constexpr rN(1.);

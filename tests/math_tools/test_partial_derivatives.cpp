@@ -265,9 +265,7 @@ public:
             BSplinesDDim,
             GridDDim,
             ddc::ConstantExtrapolationRule<DDim>,
-            ddc::ConstantExtrapolationRule<DDim>,
-            GridX,
-            GridY>;
+            ddc::ConstantExtrapolationRule<DDim>>;
 
 public:
     PartialDerivativeTestSpline1D(
@@ -387,9 +385,7 @@ public:
             ddc::ConstantExtrapolationRule<X, Y>,
             ddc::ConstantExtrapolationRule<X, Y>,
             ddc::ConstantExtrapolationRule<Y, X>,
-            ddc::ConstantExtrapolationRule<Y, X>,
-            GridX,
-            GridY>;
+            ddc::ConstantExtrapolationRule<Y, X>>;
 
     ddc::ConstantExtrapolationRule<X, Y> const m_bv_xmin;
     ddc::ConstantExtrapolationRule<X, Y> const m_bv_xmax;

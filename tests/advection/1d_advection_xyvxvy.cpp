@@ -135,9 +135,7 @@ using SplineXEvaluator = ddc::SplineEvaluator<
         BSplinesX,
         GridX,
         ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>,
-        GridX,
-        GridY>;
+        ddc::PeriodicExtrapolationRule<X>>;
 
 using SplineYBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
@@ -153,9 +151,7 @@ using SplineYEvaluator = ddc::SplineEvaluator<
         BSplinesY,
         GridY,
         ddc::PeriodicExtrapolationRule<Y>,
-        ddc::PeriodicExtrapolationRule<Y>,
-        GridX,
-        GridY>;
+        ddc::PeriodicExtrapolationRule<Y>>;
 
 
 

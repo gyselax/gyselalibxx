@@ -63,9 +63,7 @@ using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
         ddc::ConstantExtrapolationRule<R, Theta>,
         ddc::ConstantExtrapolationRule<R, Theta>,
         ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        GridR<PatchIdx>,
-        GridTheta<PatchIdx>>;
+        ddc::PeriodicExtrapolationRule<Theta>>;
 
 
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;

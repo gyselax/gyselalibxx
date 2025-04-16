@@ -143,9 +143,7 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
             ddc::NullExtrapolationRule,
             ddc::NullExtrapolationRule,
             ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            GridR,
-            GridTheta>;
+            ddc::PeriodicExtrapolationRule<Theta>>;
     using BSplines = typename TestFixture::BSplines;
     using CoordR = Coord<R>;
     using CoordTheta = Coord<Theta>;

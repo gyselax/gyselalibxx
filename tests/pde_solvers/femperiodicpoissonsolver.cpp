@@ -66,8 +66,7 @@ using SplineXEvaluator_1d = ddc::SplineEvaluator<
         BSplinesX,
         GridX,
         ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>,
-        GridX>;
+        ddc::PeriodicExtrapolationRule<X>>;
 
 using DFieldMemX = DFieldMem<IdxRangeX>;
 using DFieldMemBatchX = DFieldMem<IdxRangeBatchX>;

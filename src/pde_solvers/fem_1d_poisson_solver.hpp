@@ -121,24 +121,13 @@ private:
             ddc::PeriodicExtrapolationRule<PDEDim>,
             ddc::NullExtrapolationRule>;
 
-    template <class IdxRange>
-    struct FEMSplineEvaluatorBuilder;
-
-    template <class... DimX>
-    struct FEMSplineEvaluatorBuilder<IdxRange<DimX...>>
-    {
-        using type = ddc::SplineEvaluator<
+    using FEMSplineEvaluator = ddc::SplineEvaluator<
                 Kokkos::DefaultExecutionSpace,
                 Kokkos::DefaultExecutionSpace::memory_space,
                 FEMBSplines,
                 GridPDEDim,
                 FEMEvalExtrapolationRule,
-                FEMEvalExtrapolationRule,
-                DimX...>;
-    };
-
-    using FEMSplineEvaluator = typename FEMSplineEvaluatorBuilder<
-            typename SplineEvaluator::batched_evaluation_domain_type>::type;
+                FEMEvalExtrapolationRule>;
 
     using IdxFEMBSplines = Idx<FEMBSplines>;
 

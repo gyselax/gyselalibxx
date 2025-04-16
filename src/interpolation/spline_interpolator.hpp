@@ -44,8 +44,7 @@ class SplineInterpolator : public IInterpolator<GridInterp, Grid1D...>
             BSplines,
             GridInterp,
             LeftExtrapolationRule,
-            RightExtrapolationRule,
-            Grid1D...>;
+            RightExtrapolationRule>;
     using deriv_type = typename IInterpolator<GridInterp, Grid1D...>::deriv_type;
     using batched_derivs_idx_range_type =
             typename IInterpolator<GridInterp, Grid1D...>::batched_derivs_idx_range_type;
@@ -154,8 +153,7 @@ class PreallocatableSplineInterpolator : public IPreallocatableInterpolator<Grid
             BSplines,
             GridInterp,
             LeftExtrapolationRule,
-            RightExtrapolationRule,
-            Grid1D...>;
+            RightExtrapolationRule>;
 
     BuilderType const& m_builder;
 

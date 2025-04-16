@@ -51,8 +51,7 @@ using SplineXEvaluator_1d = ddc::SplineEvaluator<
         BSplinesX,
         GridX,
         ddc::NullExtrapolationRule,
-        ddc::NullExtrapolationRule,
-        GridX>;
+        ddc::NullExtrapolationRule>;
 
 using DFieldMemX = DFieldMem<IdxRangeX>;
 

@@ -123,10 +123,7 @@ using SplineVxEvaluator = ddc::SplineEvaluator<
         BSplinesVx,
         GridVx,
         ddc::ConstantExtrapolationRule<Vx>,
-        ddc::ConstantExtrapolationRule<Vx>,
-        Species,
-        GridX,
-        GridVx>;
+        ddc::ConstantExtrapolationRule<Vx>>;
 
 
 class Velocity1DAdvectionTest : public ::testing::Test

@@ -112,9 +112,7 @@ using SplineXEvaluator_XY = ddc::SplineEvaluator<
         BSplinesX,
         GridX,
         ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>,
-        GridX,
-        GridY>;
+        ddc::PeriodicExtrapolationRule<X>>;
 
 
 using SplineYBuilder_XY = ddc::SplineBuilder<
@@ -131,9 +129,7 @@ using SplineYEvaluator_XY = ddc::SplineEvaluator<
         BSplinesY,
         GridY,
         ddc::PeriodicExtrapolationRule<Y>,
-        ddc::PeriodicExtrapolationRule<Y>,
-        GridX,
-        GridY>;
+        ddc::PeriodicExtrapolationRule<Y>>;
 
 // Spline index range
 using IdxRangeBSX = IdxRange<BSplinesX>;

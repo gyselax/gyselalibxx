@@ -135,9 +135,7 @@ public:
             ddc::NullExtrapolationRule,
             ddc::NullExtrapolationRule,
             ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            GridR,
-            GridTheta>;
+            ddc::PeriodicExtrapolationRule<Theta>>;
 
 
     using spline_idx_range = IdxRange<BSplinesR, BSplinesTheta>;

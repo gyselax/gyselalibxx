@@ -167,9 +167,7 @@ using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
         ddc::NullExtrapolationRule,
         ddc::NullExtrapolationRule,
         ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        GridR,
-        GridTheta>;
+        ddc::PeriodicExtrapolationRule<Theta>>;
 using SplineRThetaEvaluator_host = SplineRThetaEvaluator<Kokkos::DefaultHostExecutionSpace>;
 
 using IdxRangeBSR = IdxRange<BSplinesR>;

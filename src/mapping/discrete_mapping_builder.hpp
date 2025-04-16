@@ -285,9 +285,7 @@ private:
             typename SplineEvaluator::lower_extrapolation_rule_1_type,
             typename SplineEvaluator::upper_extrapolation_rule_1_type,
             typename SplineEvaluator::lower_extrapolation_rule_2_type,
-            typename SplineEvaluator::upper_extrapolation_rule_2_type,
-            GridRRefined,
-            GridThetaRefined>;
+            typename SplineEvaluator::upper_extrapolation_rule_2_type>;
 
     using IdxRangeSplines = IdxRange<BSplinesRRefined, BSplinesThetaRefined>;
     using IdxRangeInterpolationPoints = IdxRange<GridRRefined, GridThetaRefined>;

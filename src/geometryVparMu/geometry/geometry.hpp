@@ -92,8 +92,7 @@ using SplineVparEvaluator = ddc::SplineEvaluator<
         BSplinesVpar,
         GridVpar,
         ddc::ConstantExtrapolationRule<Vpar>,
-        ddc::ConstantExtrapolationRule<Vpar>,
-        GridVpar>;
+        ddc::ConstantExtrapolationRule<Vpar>>;
 
 using SplineMuBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
@@ -109,8 +108,7 @@ using SplineMuEvaluator = ddc::SplineEvaluator<
         BSplinesMu,
         GridMu,
         ddc::ConstantExtrapolationRule<Mu>,
-        ddc::ConstantExtrapolationRule<Mu>,
-        GridMu>;
+        ddc::ConstantExtrapolationRule<Mu>>;
 
 // Idx = index of the point in the point sampling
 using IdxVpar = Idx<GridVpar>;
