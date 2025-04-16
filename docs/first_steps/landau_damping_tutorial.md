@@ -500,7 +500,7 @@ f(x, v, 0) = f_M(v) \left(1 + \alpha \cos(k x)\right) \\
 \end{aligned}
 ```
 
-where $n$ is the equilibrium density, $u$ is the mean velocity at equilibrium and $T$ is the equilibrium temperature.
+where $n$ is the equilibrium density, $u$ is the mean velocity at equilibrium and $T$ is the equilibrium temperature. These parameters are provided as input to the simulation.
 
 This defines a **spatially modulated Maxwellian**, with small perturbations intended to excite Landau damping of the $k$-mode in the electric field.
 
@@ -530,7 +530,9 @@ The equilibrium density, mean velocity, and temperature are read from the paraco
 
 ---
 
-## Diagnostics and output
+## Output and Postprocessing
+
+While this tutorial does not define built-in diagnostics, the output contains all necessary data for postprocessing using HDF5-compatible tools.
 
 Gyselalib++ relies on PDI to output data from the simulations. You can find more information about this library in their [documentation](https://pdi.dev/main/).
 
@@ -562,23 +564,23 @@ Once the simulation has been fully defined, it can be built and executed using C
 
 In the repository, this simulation is located at:
 
-```
+```none
 simulations/geometryXVx/landau/landau_fft.cpp
 ```
 
 The paraconf configuration for the simulation input is located at:
 
-```
+```none
 simulations/geometryXVx/landau/params.yaml.hpp
 ```
 
 The PDI configuration for the simulation output is located at:
 
-```
+```none
 simulations/geometryXVx/landau/pdi_out.yml.hpp
 ```
 
-The simulation can be built using the usual commands to build the library. See [Compilation](./install.md#Compilation) for more details:
+The simulation can be built using the usual commands to build the library. See [Compilation](./install.md#compilation) for more details:
 
 You can then generate an example yaml file:
 
@@ -591,6 +593,7 @@ and run the simulation:
 ```bash
 ./build/simulations/geometryXVx/landau/landau_fft config.yml
 ```
+
 The simulation outputs are saved in **HDF5 format**.
 
 ---
@@ -602,5 +605,3 @@ In this tutorial, we have constructed a full 1D-1V Landau damping simulation usi
 The logic required to build this simulation should be analogous to the logic needed to build more complex 1D-1V simulations or simulations in higher dimensions.
 
 We hope this tutorial helps you get started with Gyselalib++ — good luck with your simulations!
-
-
