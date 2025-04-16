@@ -62,6 +62,13 @@ private:
     Curvilinear2DToCartesian m_mapping_2d;
 
 public:
+    /**
+     * @brief Instantiate a ToroidalToCylindrical mapping from a 2D Curvilinear2DToCartesian
+     * mapping.
+     * 
+     * @param[in] mapping_2d The mapping governing the transformation from
+     *                          @f$(\rho, \theta) \f$ to @f$ (R, Z) @f$.
+     */
     explicit ToroidalToCylindrical(Curvilinear2DToCartesian const& mapping_2d)
         : m_mapping_2d(mapping_2d)
     {
