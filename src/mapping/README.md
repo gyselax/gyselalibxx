@@ -146,12 +146,12 @@ with $\det(J) = \frac{-r}{\sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}}\
 J (R, Z, \zeta) = 
 \begin{bmatrix} 
  \cos(\zeta) & 0 & -R\sin(\zeta) \\
-  0          & 1 &       0 \\
  \sin(\zeta) & 0 &  R\cos(\zeta)
+  0          & 1 &       0 \\
 \end{bmatrix}.
 ```
 
-with $\det(J) = R$.
+with $\det(J) = -R$.
 
 - Inverse mapping (CartesianToCylindrical):
 
