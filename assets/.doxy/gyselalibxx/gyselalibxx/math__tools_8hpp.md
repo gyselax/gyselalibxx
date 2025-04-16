@@ -59,6 +59,7 @@
 | Type | Name |
 | ---: | :--- |
 |  KOKKOS\_INLINE\_FUNCTION double | [**determinant**](#function-determinant) ([**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr) <br> |
+|  KOKKOS\_INLINE\_FUNCTION double | [**determinant**](#function-determinant) ([**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr) <br> |
 |  std::size\_t | [**factorial**](#function-factorial) (std::size\_t f) <br> |
 |  KOKKOS\_INLINE\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual &gt; &gt; | [**inverse**](#function-inverse) ([**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr) <br> |
 |  KOKKOS\_INLINE\_FUNCTION constexpr double | [**ipow**](#function-ipow) (double a, std::size\_t i) <br> |
@@ -110,6 +111,22 @@
 template<class RowDim1, class RowDim2, class ColDim1, class ColDim2>
 KOKKOS_INLINE_FUNCTION double determinant (
     DTensor < VectorIndexSet< RowDim1, RowDim2 >, VectorIndexSet< ColDim1, ColDim2 > > arr
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function determinant 
+
+```C++
+template<class RowDim1, class RowDim2, class RowDim3, class ColDim1, class ColDim2, class ColDim3>
+KOKKOS_INLINE_FUNCTION double determinant (
+    DTensor < VectorIndexSet< RowDim1, RowDim2, RowDim3 >, VectorIndexSet< ColDim1, ColDim2, ColDim3 > > arr
 ) 
 ```
 

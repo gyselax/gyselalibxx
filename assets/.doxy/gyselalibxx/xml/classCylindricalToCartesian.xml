@@ -1,0 +1,644 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classCylindricalToCartesian" kind="class" language="C++" prot="public">
+    <compoundname>CylindricalToCartesian</compoundname>
+    <includes refid="cylindrical__to__cartesian_8hpp" local="no">cylindrical_to_cartesian.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class <ref refid="structR" kindref="compound">R</ref></type>
+      </param>
+      <param>
+        <type>class Z</type>
+      </param>
+      <param>
+        <type>class Zeta</type>
+      </param>
+      <param>
+        <type>class <ref refid="structX" kindref="compound">X</ref></type>
+      </param>
+      <param>
+        <type>class <ref refid="structY" kindref="compound">Y</ref></type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classCylindricalToCartesian_1a5b9d946ab8eaacbfe7ee1cd4c6218f7d" prot="public" static="no">
+        <type><ref refid="structX" kindref="compound">X</ref></type>
+        <definition>using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::cartesian_tag_x =  X</definition>
+        <argsstring></argsstring>
+        <name>cartesian_tag_x</name>
+        <qualifiedname>CylindricalToCartesian::cartesian_tag_x</qualifiedname>
+        <briefdescription>
+<para>Indicate the first Cartesian coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="59" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCylindricalToCartesian_1a030b1b72b6a02eecfca2a36b4649ae8d" prot="public" static="no">
+        <type><ref refid="structY" kindref="compound">Y</ref></type>
+        <definition>using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::cartesian_tag_y =  Y</definition>
+        <argsstring></argsstring>
+        <name>cartesian_tag_y</name>
+        <qualifiedname>CylindricalToCartesian::cartesian_tag_y</qualifiedname>
+        <briefdescription>
+<para>Indicate the second Cartesian coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="61" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCylindricalToCartesian_1adf8b0cba843bc9b807ca769008a6c96f" prot="public" static="no">
+        <type>Z</type>
+        <definition>using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::cartesian_tag_z =  Z</definition>
+        <argsstring></argsstring>
+        <name>cartesian_tag_z</name>
+        <qualifiedname>CylindricalToCartesian::cartesian_tag_z</qualifiedname>
+        <briefdescription>
+<para>Indicate the second Cartesian coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCylindricalToCartesian_1a8df4b9a42864d1961ffe3ab5c863df01" prot="public" static="no">
+        <type><ref refid="structR" kindref="compound">R</ref></type>
+        <definition>using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::cylindrical_tag_R =  R</definition>
+        <argsstring></argsstring>
+        <name>cylindrical_tag_R</name>
+        <qualifiedname>CylindricalToCartesian::cylindrical_tag_R</qualifiedname>
+        <briefdescription>
+<para>Indicate the radial cylindrical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="65" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCylindricalToCartesian_1a877916621e407b39bf5d1d8dd025547d" prot="public" static="no">
+        <type>Z</type>
+        <definition>using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::cylindrical_tag_Z =  Z</definition>
+        <argsstring></argsstring>
+        <name>cylindrical_tag_Z</name>
+        <qualifiedname>CylindricalToCartesian::cylindrical_tag_Z</qualifiedname>
+        <briefdescription>
+<para>Indicate the longitudinal cylindrical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="67" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCylindricalToCartesian_1aa607e0e8bb3ffe217090e65e20f455cf" prot="public" static="no">
+        <type>Zeta</type>
+        <definition>using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::cylindrical_tag_Zeta =  Zeta</definition>
+        <argsstring></argsstring>
+        <name>cylindrical_tag_Zeta</name>
+        <qualifiedname>CylindricalToCartesian::cylindrical_tag_Zeta</qualifiedname>
+        <briefdescription>
+<para>Indicate the angular cylindrical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCylindricalToCartesian_1a39a34f6023516b1acb1fa72dcf58f63a" prot="public" static="no">
+        <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, Z, Zeta &gt;</type>
+        <definition>using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::CoordArg =  Coord&lt;R, Z, Zeta&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoordArg</name>
+        <qualifiedname>CylindricalToCartesian::CoordArg</qualifiedname>
+        <briefdescription>
+<para>The type of the argument of the function described by this mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="72" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCylindricalToCartesian_1af977670db7df9fc5df74be9e3cd0b858" prot="public" static="no">
+        <type>Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, Z &gt;</type>
+        <definition>using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::CoordResult =  Coord&lt;X, Y, Z&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoordResult</name>
+        <qualifiedname>CylindricalToCartesian::CoordResult</qualifiedname>
+        <briefdescription>
+<para>The type of the result of the function described by this mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="74" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCylindricalToCartesian_1a6659f0416281d0a6898234cae492417a" prot="public" static="no">
+        <type>typename <ref refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" kindref="member">X::Dual</ref></type>
+        <definition>using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::X_cov =  typename X::Dual</definition>
+        <argsstring></argsstring>
+        <name>X_cov</name>
+        <qualifiedname>CylindricalToCartesian::X_cov</qualifiedname>
+        <briefdescription>
+<para>The covariant form of the first Cartesian coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="77" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCylindricalToCartesian_1ae6e3d1d40c0e22e8c2a2f881a5f62357" prot="public" static="no">
+        <type>typename <ref refid="structY_1aad98c6afa465f3fb654029648420df1f" kindref="member">Y::Dual</ref></type>
+        <definition>using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::Y_cov =  typename Y::Dual</definition>
+        <argsstring></argsstring>
+        <name>Y_cov</name>
+        <qualifiedname>CylindricalToCartesian::Y_cov</qualifiedname>
+        <briefdescription>
+<para>The covariant form of the second Cartesian coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="79" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCylindricalToCartesian_1aa313137793384e3e7f0f7cff3d5dc03b" prot="public" static="no">
+        <type>typename Z::Dual</type>
+        <definition>using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::Z_cov =  typename Z::Dual</definition>
+        <argsstring></argsstring>
+        <name>Z_cov</name>
+        <qualifiedname>CylindricalToCartesian::Z_cov</qualifiedname>
+        <briefdescription>
+<para>The covariant form of the third Cartesian coordinate and the longitudinal cylindrical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="81" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCylindricalToCartesian_1a0f20428fdcab7959b3d6b5cb27cf9a29" prot="public" static="no">
+        <type>typename <ref refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kindref="member">R::Dual</ref></type>
+        <definition>using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::R_cov =  typename R::Dual</definition>
+        <argsstring></argsstring>
+        <name>R_cov</name>
+        <qualifiedname>CylindricalToCartesian::R_cov</qualifiedname>
+        <briefdescription>
+<para>The covariant form of the radial cylindrical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="83" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCylindricalToCartesian_1a585a32f926487c142fd2479c7e0c912e" prot="public" static="no">
+        <type>typename Zeta::Dual</type>
+        <definition>using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::Zeta_cov =  typename Zeta::Dual</definition>
+        <argsstring></argsstring>
+        <name>Zeta_cov</name>
+        <qualifiedname>CylindricalToCartesian::Zeta_cov</qualifiedname>
+        <briefdescription>
+<para>The covariant form of the angular cylindrical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="85" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classCylindricalToCartesian_1afde4138188b405fd7185491ddf11fef6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::CylindricalToCartesian</definition>
+        <argsstring>()=default</argsstring>
+        <name>CylindricalToCartesian</name>
+        <qualifiedname>CylindricalToCartesian::CylindricalToCartesian</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="88" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classCylindricalToCartesian_1a3b1c62cff588c7f21a80b3ef5aeb053d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION</type>
+        <definition>KOKKOS_FUNCTION CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::CylindricalToCartesian</definition>
+        <argsstring>(CylindricalToCartesian const &amp;other)</argsstring>
+        <name>CylindricalToCartesian</name>
+        <qualifiedname>CylindricalToCartesian::CylindricalToCartesian</qualifiedname>
+        <param>
+          <type><ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> const &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate a <ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> from another <ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> (lvalue). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> mapping used to instantiate the new one. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="96" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="96" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classCylindricalToCartesian_1a54f71bf7a3ae7fe121bcfc43c4f57698" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::CylindricalToCartesian</definition>
+        <argsstring>(CylindricalToCartesian &amp;&amp;x)=default</argsstring>
+        <name>CylindricalToCartesian</name>
+        <qualifiedname>CylindricalToCartesian::CylindricalToCartesian</qualifiedname>
+        <param>
+          <type><ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> &amp;&amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate a <ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> from another temporary <ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> (rvalue). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> mapping used to instantiate the new one. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="104" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classCylindricalToCartesian_1ae4608cbeddf53ed01c622c3a6c7646e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::~CylindricalToCartesian</definition>
+        <argsstring>()=default</argsstring>
+        <name>~CylindricalToCartesian</name>
+        <qualifiedname>CylindricalToCartesian::~CylindricalToCartesian</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="106" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classCylindricalToCartesian_1a3843aedba2ad3e40509701f57fd9731b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> &amp;</type>
+        <definition>CylindricalToCartesian &amp; CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::operator=</definition>
+        <argsstring>(CylindricalToCartesian const &amp;x)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>CylindricalToCartesian::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Assign a <ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> from another <ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> (lvalue). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> mapping used to assign.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The <ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> assigned. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="116" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classCylindricalToCartesian_1aee74e1eb673e4b4e403bbf2f591b9f23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> &amp;</type>
+        <definition>CylindricalToCartesian &amp; CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::operator=</definition>
+        <argsstring>(CylindricalToCartesian &amp;&amp;x)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>CylindricalToCartesian::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> &amp;&amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Assign a <ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> from another temporary <ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> (rvalue). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> mapping used to assign.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The <ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref> assigned. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="126" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classCylindricalToCartesian_1ae4904ff87892e9c3b8c901df57734b11" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION <ref refid="classCylindricalToCartesian_1af977670db7df9fc5df74be9e3cd0b858" kindref="member">CoordResult</ref></type>
+        <definition>KOKKOS_FUNCTION CoordResult CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::operator()</definition>
+        <argsstring>(CoordArg const &amp;coord) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>CylindricalToCartesian::operator()</qualifiedname>
+        <param>
+          <type><ref refid="classCylindricalToCartesian_1a39a34f6023516b1acb1fa72dcf58f63a" kindref="member">CoordArg</ref> const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Convert the <formula id="248">$ (r, \zeta) $</formula> coordinate to the equivalent (x,y) coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate to be converted.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The equivalent coordinate. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="135" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="135" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="classCylindricalToCartesian_1a2e4f8ff726356940f7150cf5a74e9234" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION double</type>
+        <definition>KOKKOS_FUNCTION double CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::jacobian</definition>
+        <argsstring>(CoordArg const &amp;coord) const</argsstring>
+        <name>jacobian</name>
+        <qualifiedname>CylindricalToCartesian::jacobian</qualifiedname>
+        <param>
+          <type><ref refid="classCylindricalToCartesian_1a39a34f6023516b1acb1fa72dcf58f63a" kindref="member">CoordArg</ref> const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A double with the value of the determinant of the Jacobian matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="152" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="152" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="classCylindricalToCartesian_1a1a9d378d342e29cf152af56823117f14" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, Z &gt;, VectorIndexSet&lt; <ref refid="classCylindricalToCartesian_1a0f20428fdcab7959b3d6b5cb27cf9a29" kindref="member">R_cov</ref>, <ref refid="classCylindricalToCartesian_1aa313137793384e3e7f0f7cff3d5dc03b" kindref="member">Z_cov</ref>, <ref refid="classCylindricalToCartesian_1a585a32f926487c142fd2479c7e0c912e" kindref="member">Zeta_cov</ref> &gt; &gt;</type>
+        <definition>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; X, Y, Z &gt;, VectorIndexSet&lt; R_cov, Z_cov, Zeta_cov &gt; &gt; CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::jacobian_matrix</definition>
+        <argsstring>(CoordArg const &amp;coord) const</argsstring>
+        <name>jacobian_matrix</name>
+        <qualifiedname>CylindricalToCartesian::jacobian_matrix</qualifiedname>
+        <param>
+          <type><ref refid="classCylindricalToCartesian_1a39a34f6023516b1acb1fa72dcf58f63a" kindref="member">CoordArg</ref> const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute full Jacobian matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For some computations, we need the complete Jacobian matrix or just the coefficients. The coefficients can be given independently with the function jacobian_component.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian matrix. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The Jacobian matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="170" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="170" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="classCylindricalToCartesian_1a7c882c0b0ea2e38f652235adf705d982" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IndexTag1</type>
+          </param>
+          <param>
+            <type>class IndexTag2</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION double</type>
+        <definition>KOKKOS_FUNCTION double CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::jacobian_component</definition>
+        <argsstring>(CoordArg const &amp;coord) const</argsstring>
+        <name>jacobian_component</name>
+        <qualifiedname>CylindricalToCartesian::jacobian_component</qualifiedname>
+        <param>
+          <type><ref refid="classCylindricalToCartesian_1a39a34f6023516b1acb1fa72dcf58f63a" kindref="member">CoordArg</ref> const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the (i,j) coefficient of the Jacobian matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian matrix.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A double with the value of the (i,j) coefficient of the Jacobian matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="196" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="196" bodyend="222"/>
+      </memberdef>
+      <memberdef kind="function" id="classCylindricalToCartesian_1a07bc2e8d4fc932cb988298561e542750" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structR" kindref="compound">R</ref>, Z, Zeta &gt;, VectorIndexSet&lt; <ref refid="classCylindricalToCartesian_1a6659f0416281d0a6898234cae492417a" kindref="member">X_cov</ref>, <ref refid="classCylindricalToCartesian_1ae6e3d1d40c0e22e8c2a2f881a5f62357" kindref="member">Y_cov</ref>, <ref refid="classCylindricalToCartesian_1aa313137793384e3e7f0f7cff3d5dc03b" kindref="member">Z_cov</ref> &gt; &gt;</type>
+        <definition>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; R, Z, Zeta &gt;, VectorIndexSet&lt; X_cov, Y_cov, Z_cov &gt; &gt; CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::inv_jacobian_matrix</definition>
+        <argsstring>(CoordArg const &amp;coord) const</argsstring>
+        <name>inv_jacobian_matrix</name>
+        <qualifiedname>CylindricalToCartesian::inv_jacobian_matrix</qualifiedname>
+        <param>
+          <type><ref refid="classCylindricalToCartesian_1a39a34f6023516b1acb1fa72dcf58f63a" kindref="member">CoordArg</ref> const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute full inverse Jacobian matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For some computations, we need the complete inverse Jacobian matrix or just the coefficients. The coefficients can be given independently with the function inv_jacobian_component.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian matrix. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The inverse Jacobian matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="237" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="237" bodyend="250"/>
+      </memberdef>
+      <memberdef kind="function" id="classCylindricalToCartesian_1aba51dfb6eb798e561daf6a3842cd172b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IndexTag1</type>
+          </param>
+          <param>
+            <type>class IndexTag2</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION double</type>
+        <definition>KOKKOS_FUNCTION double CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::inv_jacobian_component</definition>
+        <argsstring>(CoordArg const &amp;coord) const</argsstring>
+        <name>inv_jacobian_component</name>
+        <qualifiedname>CylindricalToCartesian::inv_jacobian_component</qualifiedname>
+        <param>
+          <type><ref refid="classCylindricalToCartesian_1a39a34f6023516b1acb1fa72dcf58f63a" kindref="member">CoordArg</ref> const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the (i,j) coefficient of the inverse Jacobian matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Be careful because not all mappings are invertible, especially at the centre point.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the inverse Jacobian matrix.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A double with the value of the (i,j) coefficient of the inverse Jacobian matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="264" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="264" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="classCylindricalToCartesian_1a72d668c778d7d7ee8d3248ce5737e7c0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classCartesianToCylindrical" kindref="compound">CartesianToCylindrical</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, Z, <ref refid="structR" kindref="compound">R</ref>, Zeta &gt;</type>
+        <definition>CartesianToCylindrical&lt; X, Y, Z, R, Zeta &gt; CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::get_inverse_mapping</definition>
+        <argsstring>() const</argsstring>
+        <name>get_inverse_mapping</name>
+        <qualifiedname>CylindricalToCartesian::get_inverse_mapping</qualifiedname>
+        <briefdescription>
+<para>Get the inverse mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The inverse mapping. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="300" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="300" bodyend="303"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class for describing the cylindrical 3D mapping. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The mapping <formula id="234">$ (R, Z, \zeta)\mapsto (x,y,z) $</formula> is defined as follow :</para>
+<para><formula id="235">$ x(R, Z, \zeta) = R \cos(\zeta), $</formula></para>
+<para><formula id="236">$ y(R, Z, \zeta) = R \sin(\zeta). $</formula></para>
+<para><formula id="237">$ z(R, Z, \zeta) = z. $</formula></para>
+<para>It and its Jacobian matrix are invertible everywhere except for <formula id="191">$ R = 0 $</formula>.</para>
+<para>The Jacobian matrix coefficients are defined as follow</para>
+<para><formula id="238">$ J^x_{\;R}(R, Z, \zeta) = \cos(\zeta) $</formula></para>
+<para><formula id="239">$ J^x_{\;Z}(R, Z, \zeta) = 0 $</formula></para>
+<para><formula id="240">$ J^x_{\;\zeta}(R, Z, \zeta) = - R \sin(\zeta) $</formula></para>
+<para><formula id="241">$ J^y_{\;R}(R, Z, \zeta) = \sin(\zeta) $</formula></para>
+<para><formula id="242">$ J^y_{\;Z}(R, Z, \zeta) = 0 $</formula></para>
+<para><formula id="243">$ J^y_{\;\zeta}(R, Z, \zeta) = R \cos(\zeta) $</formula></para>
+<para><formula id="244">$ J^z_{\;R}(R, Z, \zeta) = 0 $</formula></para>
+<para><formula id="245">$ J^z_{\;Z}(R, Z, \zeta) = 1 $</formula></para>
+<para><formula id="246">$ J^z_{\;\zeta}(R, Z, \zeta) = 0 $</formula></para>
+<para>and the matrix determinant: <formula id="247">$ \det(J) = -R $</formula>. </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="55" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="56" bodyend="304"/>
+    <listofallmembers>
+      <member refid="classCylindricalToCartesian_1a5b9d946ab8eaacbfe7ee1cd4c6218f7d" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>cartesian_tag_x</name></member>
+      <member refid="classCylindricalToCartesian_1a030b1b72b6a02eecfca2a36b4649ae8d" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>cartesian_tag_y</name></member>
+      <member refid="classCylindricalToCartesian_1adf8b0cba843bc9b807ca769008a6c96f" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>cartesian_tag_z</name></member>
+      <member refid="classCylindricalToCartesian_1a39a34f6023516b1acb1fa72dcf58f63a" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>CoordArg</name></member>
+      <member refid="classCylindricalToCartesian_1af977670db7df9fc5df74be9e3cd0b858" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>CoordResult</name></member>
+      <member refid="classCylindricalToCartesian_1a8df4b9a42864d1961ffe3ab5c863df01" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>cylindrical_tag_R</name></member>
+      <member refid="classCylindricalToCartesian_1a877916621e407b39bf5d1d8dd025547d" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>cylindrical_tag_Z</name></member>
+      <member refid="classCylindricalToCartesian_1aa607e0e8bb3ffe217090e65e20f455cf" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>cylindrical_tag_Zeta</name></member>
+      <member refid="classCylindricalToCartesian_1afde4138188b405fd7185491ddf11fef6" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>CylindricalToCartesian</name></member>
+      <member refid="classCylindricalToCartesian_1a3b1c62cff588c7f21a80b3ef5aeb053d" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>CylindricalToCartesian</name></member>
+      <member refid="classCylindricalToCartesian_1a54f71bf7a3ae7fe121bcfc43c4f57698" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>CylindricalToCartesian</name></member>
+      <member refid="classCylindricalToCartesian_1a72d668c778d7d7ee8d3248ce5737e7c0" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>get_inverse_mapping</name></member>
+      <member refid="classCylindricalToCartesian_1aba51dfb6eb798e561daf6a3842cd172b" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>inv_jacobian_component</name></member>
+      <member refid="classCylindricalToCartesian_1a07bc2e8d4fc932cb988298561e542750" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>inv_jacobian_matrix</name></member>
+      <member refid="classCylindricalToCartesian_1a2e4f8ff726356940f7150cf5a74e9234" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>jacobian</name></member>
+      <member refid="classCylindricalToCartesian_1a7c882c0b0ea2e38f652235adf705d982" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>jacobian_component</name></member>
+      <member refid="classCylindricalToCartesian_1a1a9d378d342e29cf152af56823117f14" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>jacobian_matrix</name></member>
+      <member refid="classCylindricalToCartesian_1ae4904ff87892e9c3b8c901df57734b11" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>operator()</name></member>
+      <member refid="classCylindricalToCartesian_1a3843aedba2ad3e40509701f57fd9731b" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>operator=</name></member>
+      <member refid="classCylindricalToCartesian_1aee74e1eb673e4b4e403bbf2f591b9f23" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>operator=</name></member>
+      <member refid="classCylindricalToCartesian_1a0f20428fdcab7959b3d6b5cb27cf9a29" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>R_cov</name></member>
+      <member refid="classCylindricalToCartesian_1a6659f0416281d0a6898234cae492417a" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>X_cov</name></member>
+      <member refid="classCylindricalToCartesian_1ae6e3d1d40c0e22e8c2a2f881a5f62357" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>Y_cov</name></member>
+      <member refid="classCylindricalToCartesian_1aa313137793384e3e7f0f7cff3d5dc03b" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>Z_cov</name></member>
+      <member refid="classCylindricalToCartesian_1a585a32f926487c142fd2479c7e0c912e" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>Zeta_cov</name></member>
+      <member refid="classCylindricalToCartesian_1ae4608cbeddf53ed01c622c3a6c7646e4" prot="public" virt="non-virtual"><scope>CylindricalToCartesian</scope><name>~CylindricalToCartesian</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -285,6 +285,8 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#discrete-coordinate-transformation-defined-on-b-splines">Discrete coordinate transformation defined on B-splines</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3d-coordinate-transformations">3D coordinate transformations</a>
+    </li>
     <li class="toctree-l4"><a class="reference internal" href="#combined-coordinate-transformation-which-combines-two-of-the-coordinate-transformations-above">Combined coordinate transformation which combines two of the coordinate transformations above</a>
     </li>
     </ul>
@@ -564,7 +566,7 @@
 J (r,\theta) = 
 \begin{bmatrix} 
  \cos(\theta) &amp; -r\sin(\theta) \\
- \sin(\theta) &amp;  r\cos(\theta) \\
+ \sin(\theta) &amp;  r\cos(\theta)
 \end{bmatrix}.
 \]</div>
 <p>with <span class="arithmatex">\(\det(J) = r\)</span>.</p>
@@ -656,6 +658,41 @@ J (r,\theta)
 \begin{aligned}
  &amp; x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta) , \\
  &amp; y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta) .
+\end{aligned}
+\right.
+\]</div>
+<h2 id="3d-coordinate-transformations">3D coordinate transformations</h2>
+<h3 id="cylindrical-to-cartesian-transformation">Cylindrical to Cartesian transformation</h3>
+<ul>
+<li>Mapping (CylindricalToCartesian):</li>
+</ul>
+<div class="arithmatex">\[
+\left\{
+\begin{aligned}
+ &amp; x(R,Z,\zeta) = R \cos(\zeta), \\
+ &amp; y(R,Z,\zeta) = R \sin(\zeta), \\
+ &amp; z(R,Z,\zeta) = Z
+\end{aligned}
+\right.
+\]</div>
+<div class="arithmatex">\[
+J (R, Z, \zeta) = 
+\begin{bmatrix} 
+ \cos(\zeta) &amp; 0 &amp; -R\sin(\zeta) \\
+ \sin(\zeta) &amp; 0 &amp;  R\cos(\zeta)
+  0          &amp; 1 &amp;       0 \\
+\end{bmatrix}.
+\]</div>
+<p>with <span class="arithmatex">\(\det(J) = -R\)</span>.</p>
+<ul>
+<li>Inverse mapping (CartesianToCylindrical):</li>
+</ul>
+<div class="arithmatex">\[
+\left\{
+\begin{aligned}
+ &amp; R(x,y,z) = \sqrt{x^2 + y^2}, \\
+ &amp; \zeta(x,y,z) = \text{atan2}(y, x), \\
+ &amp; Z(x,y,z) = z.
 \end{aligned}
 \right.
 \]</div>

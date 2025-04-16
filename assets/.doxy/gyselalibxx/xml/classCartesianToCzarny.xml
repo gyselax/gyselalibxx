@@ -163,7 +163,7 @@
 <parametername direction="in">epsilon</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <formula id="192">$ \epsilon $</formula> parameter in the definition of the mapping <ref refid="classCartesianToCzarny" kindref="compound">CartesianToCzarny</ref>.</para>
+<para>The <formula id="208">$ \epsilon $</formula> parameter in the definition of the mapping <ref refid="classCartesianToCzarny" kindref="compound">CartesianToCzarny</ref>.</para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -171,7 +171,7 @@
 <parametername direction="in">e</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <formula id="191">$ e $</formula> parameter in the definition of the mapping <ref refid="classCartesianToCzarny" kindref="compound">CartesianToCzarny</ref>.</para>
+<para>The <formula id="207">$ e $</formula> parameter in the definition of the mapping <ref refid="classCartesianToCzarny" kindref="compound">CartesianToCzarny</ref>.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -324,10 +324,10 @@
         <name>epsilon</name>
         <qualifiedname>CartesianToCzarny::epsilon</qualifiedname>
         <briefdescription>
-<para>Return the <formula id="192">$ \epsilon $</formula> parameter. </para>
+<para>Return the <formula id="208">$ \epsilon $</formula> parameter. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>The value of <formula id="192">$ \epsilon $</formula>.</para>
+<para><simplesect kind="return"><para>The value of <formula id="208">$ \epsilon $</formula>.</para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classCartesianToCzarny" kindref="compound">CartesianToCzarny</ref> </para>
 </simplesect>
@@ -344,10 +344,10 @@
         <name>e</name>
         <qualifiedname>CartesianToCzarny::e</qualifiedname>
         <briefdescription>
-<para>Return the <formula id="191">$ e $</formula> parameter. </para>
+<para>Return the <formula id="207">$ e $</formula> parameter. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>The value of <formula id="191">$ e $</formula>.</para>
+<para><simplesect kind="return"><para>The value of <formula id="207">$ e $</formula>.</para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classCartesianToCzarny" kindref="compound">CartesianToCzarny</ref> </para>
 </simplesect>
@@ -411,10 +411,10 @@
 <para>A class for describing the Czarny 2D mapping. </para>
     </briefdescription>
     <detaileddescription>
-<para>The mapping <formula id="187">$ (x,y)  \mapsto (r,\theta)$</formula> is defined by</para>
-<para><formula id="188">$ r(x,y) = \sqrt{\frac{y^2 (1+\epsilon x)^2}{e^2\xi^2+0.25(\epsilon x^2-2x-\epsilon)^2}},$</formula></para>
-<para><formula id="189">$ \theta (x,y)) = atan2(2. y (1+\epsilon x), (e \xi (\epsilon x^2 - 2x-\epsilon))), $</formula></para>
-<para>with <formula id="190">$ \xi = 1/\sqrt{1 - \epsilon^2 /4} $</formula> and <formula id="191">$ e $</formula> and <formula id="192">$ \epsilon $</formula> given as parameters. </para>
+<para>The mapping <formula id="203">$ (x,y)  \mapsto (r,\theta)$</formula> is defined by</para>
+<para><formula id="204">$ r(x,y) = \sqrt{\frac{y^2 (1+\epsilon x)^2}{e^2\xi^2+0.25(\epsilon x^2-2x-\epsilon)^2}},$</formula></para>
+<para><formula id="205">$ \theta (x,y)) = atan2(2. y (1+\epsilon x), (e \xi (\epsilon x^2 - 2x-\epsilon))), $</formula></para>
+<para>with <formula id="206">$ \xi = 1/\sqrt{1 - \epsilon^2 /4} $</formula> and <formula id="207">$ e $</formula> and <formula id="208">$ \epsilon $</formula> given as parameters. </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_czarny.hpp" line="26" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_czarny.hpp" bodystart="27" bodyend="159"/>
     <listofallmembers>

@@ -1,0 +1,313 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="cylindrical__to__cartesian_8hpp" kind="file" language="C++">
+    <compoundname>cylindrical_to_cartesian.hpp</compoundname>
+    <includes local="no">cassert</includes>
+    <includes local="no">cmath</includes>
+    <includes local="no">ddc/ddc.hpp</includes>
+    <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
+    <includes refid="mapping__tools_8hpp" local="yes">mapping_tools.hpp</includes>
+    <includes refid="tensor_8hpp" local="yes">tensor.hpp</includes>
+    <includes refid="view_8hpp" local="yes">view.hpp</includes>
+    <incdepgraph>
+      <node id="11">
+        <label>tensor.hpp</label>
+        <link refid="tensor_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>tensor_index_tools.hpp</label>
+        <link refid="tensor__index__tools_8hpp_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>vector_index_tools.hpp</label>
+        <link refid="vector__index__tools_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp</label>
+        <link refid="cylindrical__to__cartesian_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>mapping_tools.hpp</label>
+        <link refid="mapping__tools_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>type_seq_tools.hpp</label>
+        <link refid="type__seq__tools_8hpp_source"/>
+      </node>
+      <node id="15">
+        <label>view.hpp</label>
+        <link refid="view_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>Kokkos_Core.hpp</label>
+      </node>
+      <node id="8">
+        <label>array</label>
+      </node>
+      <node id="2">
+        <label>cassert</label>
+      </node>
+      <node id="3">
+        <label>cmath</label>
+      </node>
+      <node id="4">
+        <label>ddc/ddc.hpp</label>
+      </node>
+      <node id="6">
+        <label>ddc/kernels/splines.hpp</label>
+      </node>
+      <node id="16">
+        <label>ostream</label>
+      </node>
+      <node id="9">
+        <label>type_traits</label>
+      </node>
+      <node id="10">
+        <label>utility</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classCylindricalToCartesian" prot="public">CylindricalToCartesian</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cassert&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cmath&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ddc/ddc.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;mapping_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;tensor.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;view.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Pre-declaration<sp/>of<sp/>analytical<sp/>inverse</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>X,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Y,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Z,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>R,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Zeta&gt;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classCartesianToCylindrical" kindref="compound">CartesianToCylindrical</ref>;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>R,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Z,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Zeta,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>X,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Y&gt;</highlight></codeline>
+<codeline lineno="55" refid="classCylindricalToCartesian" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref></highlight></codeline>
+<codeline lineno="56"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="59" refid="classCylindricalToCartesian_1a5b9d946ab8eaacbfe7ee1cd4c6218f7d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structX" kindref="compound">cartesian_tag_x</ref><sp/>=<sp/><ref refid="structX" kindref="compound">X</ref>;</highlight></codeline>
+<codeline lineno="61" refid="classCylindricalToCartesian_1a030b1b72b6a02eecfca2a36b4649ae8d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structY" kindref="compound">cartesian_tag_y</ref><sp/>=<sp/><ref refid="structY" kindref="compound">Y</ref>;</highlight></codeline>
+<codeline lineno="63" refid="classCylindricalToCartesian_1adf8b0cba843bc9b807ca769008a6c96f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCylindricalToCartesian_1adf8b0cba843bc9b807ca769008a6c96f" kindref="member">cartesian_tag_z</ref><sp/>=<sp/>Z;</highlight></codeline>
+<codeline lineno="65" refid="classCylindricalToCartesian_1a8df4b9a42864d1961ffe3ab5c863df01" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structR" kindref="compound">cylindrical_tag_R</ref><sp/>=<sp/><ref refid="structR" kindref="compound">R</ref>;</highlight></codeline>
+<codeline lineno="67" refid="classCylindricalToCartesian_1a877916621e407b39bf5d1d8dd025547d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCylindricalToCartesian_1a877916621e407b39bf5d1d8dd025547d" kindref="member">cylindrical_tag_Z</ref><sp/>=<sp/>Z;</highlight></codeline>
+<codeline lineno="69" refid="classCylindricalToCartesian_1aa607e0e8bb3ffe217090e65e20f455cf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCylindricalToCartesian_1aa607e0e8bb3ffe217090e65e20f455cf" kindref="member">cylindrical_tag_Zeta</ref><sp/>=<sp/>Zeta;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72" refid="classCylindricalToCartesian_1a39a34f6023516b1acb1fa72dcf58f63a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCylindricalToCartesian_1a39a34f6023516b1acb1fa72dcf58f63a" kindref="member">CoordArg</ref><sp/>=<sp/>Coord&lt;R,<sp/>Z,<sp/>Zeta&gt;;</highlight></codeline>
+<codeline lineno="74" refid="classCylindricalToCartesian_1af977670db7df9fc5df74be9e3cd0b858" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCylindricalToCartesian_1af977670db7df9fc5df74be9e3cd0b858" kindref="member">CoordResult</ref><sp/>=<sp/>Coord&lt;X,<sp/>Y,<sp/>Z&gt;;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77" refid="classCylindricalToCartesian_1a6659f0416281d0a6898234cae492417a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCylindricalToCartesian_1a6659f0416281d0a6898234cae492417a" kindref="member">X_cov</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" kindref="member">X::Dual</ref>;</highlight></codeline>
+<codeline lineno="79" refid="classCylindricalToCartesian_1ae6e3d1d40c0e22e8c2a2f881a5f62357" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCylindricalToCartesian_1ae6e3d1d40c0e22e8c2a2f881a5f62357" kindref="member">Y_cov</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structY_1aad98c6afa465f3fb654029648420df1f" kindref="member">Y::Dual</ref>;</highlight></codeline>
+<codeline lineno="81" refid="classCylindricalToCartesian_1aa313137793384e3e7f0f7cff3d5dc03b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCylindricalToCartesian_1aa313137793384e3e7f0f7cff3d5dc03b" kindref="member">Z_cov</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Z::Dual;</highlight></codeline>
+<codeline lineno="83" refid="classCylindricalToCartesian_1a0f20428fdcab7959b3d6b5cb27cf9a29" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structR__cov" kindref="compound">R_cov</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kindref="member">R::Dual</ref>;</highlight></codeline>
+<codeline lineno="85" refid="classCylindricalToCartesian_1a585a32f926487c142fd2479c7e0c912e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCylindricalToCartesian_1a585a32f926487c142fd2479c7e0c912e" kindref="member">Zeta_cov</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Zeta::Dual;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96" refid="classCylindricalToCartesian_1a3b1c62cff588c7f21a80b3ef5aeb053d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classCylindricalToCartesian_1a3b1c62cff588c7f21a80b3ef5aeb053d" kindref="member">CylindricalToCartesian</ref>(<ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>other)<sp/>{}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104" refid="classCylindricalToCartesian_1a54f71bf7a3ae7fe121bcfc43c4f57698" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCylindricalToCartesian_1a54f71bf7a3ae7fe121bcfc43c4f57698" kindref="member">CylindricalToCartesian</ref>(<ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref>&amp;&amp;<sp/>x)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCylindricalToCartesian" kindref="compound">~CylindricalToCartesian</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116" refid="classCylindricalToCartesian_1a3843aedba2ad3e40509701f57fd9731b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref>&amp;<sp/><ref refid="classCylindricalToCartesian_1a3843aedba2ad3e40509701f57fd9731b" kindref="member">operator=</ref>(<ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>x)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126" refid="classCylindricalToCartesian_1aee74e1eb673e4b4e403bbf2f591b9f23" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref>&amp;<sp/><ref refid="classCylindricalToCartesian_1aee74e1eb673e4b4e403bbf2f591b9f23" kindref="member">operator=</ref>(<ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref>&amp;&amp;<sp/>x)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135" refid="classCylindricalToCartesian_1ae4904ff87892e9c3b8c901df57734b11" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classCylindricalToCartesian_1af977670db7df9fc5df74be9e3cd0b858" kindref="member">CoordResult</ref><sp/><ref refid="classCylindricalToCartesian_1ae4904ff87892e9c3b8c901df57734b11" kindref="member">operator()</ref>(<ref refid="classCylindricalToCartesian_1a39a34f6023516b1acb1fa72dcf58f63a" kindref="member">CoordArg</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="136"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>ddc::get&lt;R&gt;(coord);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>zeta<sp/>=<sp/>ddc::get&lt;Zeta&gt;(coord);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;X&gt;<sp/>x(r<sp/>*<sp/>Kokkos::cos(zeta));</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;Y&gt;<sp/>y(r<sp/>*<sp/>Kokkos::sin(zeta));</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classCylindricalToCartesian_1af977670db7df9fc5df74be9e3cd0b858" kindref="member">CoordResult</ref>(x,<sp/>y,<sp/>ddc::select&lt;Z&gt;(coord));</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152" refid="classCylindricalToCartesian_1a2e4f8ff726356940f7150cf5a74e9234" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classCylindricalToCartesian_1a2e4f8ff726356940f7150cf5a74e9234" kindref="member">jacobian</ref>(<ref refid="classCylindricalToCartesian_1a39a34f6023516b1acb1fa72dcf58f63a" kindref="member">CoordArg</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="153"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>ddc::get&lt;R&gt;(coord);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>-r;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;X, Y, Z&gt;</ref>,<sp/>VectorIndexSet&lt;R_cov,<sp/>Z_cov,<sp/>Zeta_cov&gt;&gt;</highlight></codeline>
+<codeline lineno="170" refid="classCylindricalToCartesian_1a1a9d378d342e29cf152af56823117f14" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCylindricalToCartesian_1a1a9d378d342e29cf152af56823117f14" kindref="member">jacobian_matrix</ref>(<ref refid="classCylindricalToCartesian_1a39a34f6023516b1acb1fa72dcf58f63a" kindref="member">CoordArg</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="171"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>ddc::get&lt;R&gt;(coord);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>zeta<sp/>=<sp/>ddc::get&lt;Zeta&gt;(coord);</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;X, Y, Z&gt;</ref>,<sp/>VectorIndexSet&lt;R_cov,<sp/>Z_cov,<sp/>Zeta_cov&gt;&gt;<sp/><ref refid="classCylindricalToCartesian_1a1a9d378d342e29cf152af56823117f14" kindref="member">jacobian_matrix</ref>;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;X,<sp/>R_cov&gt;(<ref refid="classCylindricalToCartesian_1a1a9d378d342e29cf152af56823117f14" kindref="member">jacobian_matrix</ref>)<sp/>=<sp/>Kokkos::cos(zeta);</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;X,<sp/>Z_cov&gt;(<ref refid="classCylindricalToCartesian_1a1a9d378d342e29cf152af56823117f14" kindref="member">jacobian_matrix</ref>)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;X,<sp/>Zeta_cov&gt;(<ref refid="classCylindricalToCartesian_1a1a9d378d342e29cf152af56823117f14" kindref="member">jacobian_matrix</ref>)<sp/>=<sp/>-r<sp/>*<sp/>Kokkos::sin(zeta);</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Y,<sp/>R_cov&gt;(<ref refid="classCylindricalToCartesian_1a1a9d378d342e29cf152af56823117f14" kindref="member">jacobian_matrix</ref>)<sp/>=<sp/>Kokkos::sin(zeta);</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Y,<sp/>Z_cov&gt;(<ref refid="classCylindricalToCartesian_1a1a9d378d342e29cf152af56823117f14" kindref="member">jacobian_matrix</ref>)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Y,<sp/>Zeta_cov&gt;(<ref refid="classCylindricalToCartesian_1a1a9d378d342e29cf152af56823117f14" kindref="member">jacobian_matrix</ref>)<sp/>=<sp/>r<sp/>*<sp/>Kokkos::cos(zeta);</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Z,<sp/>R_cov&gt;(<ref refid="classCylindricalToCartesian_1a1a9d378d342e29cf152af56823117f14" kindref="member">jacobian_matrix</ref>)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Z,<sp/>Z_cov&gt;(<ref refid="classCylindricalToCartesian_1a1a9d378d342e29cf152af56823117f14" kindref="member">jacobian_matrix</ref>)<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Z,<sp/>Zeta_cov&gt;(<ref refid="classCylindricalToCartesian_1a1a9d378d342e29cf152af56823117f14" kindref="member">jacobian_matrix</ref>)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classCylindricalToCartesian_1a1a9d378d342e29cf152af56823117f14" kindref="member">jacobian_matrix</ref>;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IndexTag1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IndexTag2&gt;</highlight></codeline>
+<codeline lineno="196" refid="classCylindricalToCartesian_1a7c882c0b0ea2e38f652235adf705d982" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classCylindricalToCartesian_1a7c882c0b0ea2e38f652235adf705d982" kindref="member">jacobian_component</ref>(<ref refid="classCylindricalToCartesian_1a39a34f6023516b1acb1fa72dcf58f63a" kindref="member">CoordArg</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="197"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(ddc::in_tags_v&lt;IndexTag1,<sp/>VectorIndexSet&lt;X,<sp/>Y,<sp/>Z&gt;&gt;);</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(ddc::in_tags_v&lt;IndexTag2,<sp/>VectorIndexSet&lt;R_cov,<sp/>Z_cov,<sp/>Zeta_cov&gt;&gt;);</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>zeta<sp/>=<sp/>ddc::get&lt;Zeta&gt;(coord);</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;IndexTag1,<sp/>X&gt;<sp/>&amp;&amp;<sp/>std::is_same_v&lt;IndexTag2,<sp/>R_cov&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Compute<sp/>the<sp/>(1,1)<sp/>coefficient<sp/>of<sp/>the<sp/>Jacobian<sp/>matrix,<sp/>i.e<sp/>J^x_r.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Kokkos::cos(zeta);</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;IndexTag1,<sp/>X&gt;<sp/>&amp;&amp;<sp/>std::is_same_v&lt;IndexTag2,<sp/>Zeta_cov&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Compute<sp/>the<sp/>(1,2)<sp/>coefficient<sp/>of<sp/>the<sp/>Jacobian<sp/>matrix,<sp/>i.e<sp/>J^x_theta.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>ddc::get&lt;R&gt;(coord);</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>-r<sp/>*<sp/>Kokkos::sin(zeta);</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;IndexTag1,<sp/>Y&gt;<sp/>&amp;&amp;<sp/>std::is_same_v&lt;IndexTag2,<sp/>R_cov&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Compute<sp/>the<sp/>(2,1)<sp/>coefficient<sp/>of<sp/>the<sp/>Jacobian<sp/>matrix,<sp/>i.e<sp/>J^y_r.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Kokkos::sin(zeta);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;IndexTag1,<sp/>Y&gt;<sp/>&amp;&amp;<sp/>std::is_same_v&lt;IndexTag2,<sp/>Zeta_cov&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Compute<sp/>the<sp/>(2,2)<sp/>coefficient<sp/>of<sp/>the<sp/>Jacobian<sp/>matrix,<sp/>i.e<sp/>J^y_theta.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>ddc::get&lt;R&gt;(coord);</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>r<sp/>*<sp/>Kokkos::cos(zeta);</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;IndexTag1,<sp/>Z&gt;<sp/>&amp;&amp;<sp/>std::is_same_v&lt;IndexTag2,<sp/>Z_cov&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"></highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;R, Z, Zeta&gt;</ref>,<sp/>VectorIndexSet&lt;X_cov,<sp/>Y_cov,<sp/>Z_cov&gt;&gt;</highlight></codeline>
+<codeline lineno="237" refid="classCylindricalToCartesian_1a07bc2e8d4fc932cb988298561e542750" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCylindricalToCartesian_1a07bc2e8d4fc932cb988298561e542750" kindref="member">inv_jacobian_matrix</ref>(<ref refid="classCylindricalToCartesian_1a39a34f6023516b1acb1fa72dcf58f63a" kindref="member">CoordArg</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="238"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>ddc::get&lt;R&gt;(coord);</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>zeta<sp/>=<sp/>ddc::get&lt;Zeta&gt;(coord);</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(fabs(r)<sp/>&gt;=<sp/>1e-15);</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;R, Z, Zeta&gt;</ref>,<sp/>VectorIndexSet&lt;X_cov,<sp/>Y_cov,<sp/>Z_cov&gt;&gt;<sp/>matrix(0);</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;R,<sp/>X_cov&gt;(matrix)<sp/>=<sp/>Kokkos::cos(zeta);</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;R,<sp/>Y_cov&gt;(matrix)<sp/>=<sp/>Kokkos::sin(zeta);</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Zeta,<sp/>X_cov&gt;(matrix)<sp/>=<sp/>-1<sp/>/<sp/>r<sp/>*<sp/>Kokkos::sin(zeta);</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Zeta,<sp/>Y_cov&gt;(matrix)<sp/>=<sp/>1<sp/>/<sp/>r<sp/>*<sp/>Kokkos::cos(zeta);</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Z,<sp/>Z_cov&gt;(matrix)<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>matrix;</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IndexTag1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IndexTag2&gt;</highlight></codeline>
+<codeline lineno="264" refid="classCylindricalToCartesian_1aba51dfb6eb798e561daf6a3842cd172b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classCylindricalToCartesian_1aba51dfb6eb798e561daf6a3842cd172b" kindref="member">inv_jacobian_component</ref>(<ref refid="classCylindricalToCartesian_1a39a34f6023516b1acb1fa72dcf58f63a" kindref="member">CoordArg</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="265"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(ddc::in_tags_v&lt;IndexTag1,<sp/>VectorIndexSet&lt;R,<sp/>Z,<sp/>Zeta&gt;&gt;);</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(ddc::in_tags_v&lt;IndexTag2,<sp/>VectorIndexSet&lt;X_cov,<sp/>Y_cov,<sp/>Z_cov&gt;&gt;);</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>zeta<sp/>=<sp/>ddc::get&lt;Zeta&gt;(coord);</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"></highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;IndexTag1,<sp/>R&gt;<sp/>&amp;&amp;<sp/>std::is_same_v&lt;IndexTag2,<sp/>X_cov&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Compute<sp/>the<sp/>(1,1)<sp/>coefficient<sp/>of<sp/>the<sp/>inverse<sp/>Jacobian<sp/>matrix.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Kokkos::cos(zeta);</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;IndexTag1,<sp/>R&gt;<sp/>&amp;&amp;<sp/>std::is_same_v&lt;IndexTag2,<sp/>Y_cov&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Compute<sp/>the<sp/>(1,2)<sp/>coefficient<sp/>of<sp/>the<sp/>inverse<sp/>Jacobian<sp/>matrix.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Kokkos::sin(zeta);</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;IndexTag1,<sp/>Z&gt;<sp/>&amp;&amp;<sp/>std::is_same_v&lt;IndexTag2,<sp/>Z_cov&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1;</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;IndexTag1,<sp/>Z&gt;<sp/>||<sp/>std::is_same_v&lt;IndexTag2,<sp/>Z_cov&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>ddc::get&lt;R&gt;(coord);</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(fabs(r)<sp/>&gt;=<sp/>1e-15);</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;IndexTag2,<sp/>X_cov&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Compute<sp/>the<sp/>(2,1)<sp/>coefficient<sp/>of<sp/>the<sp/>inverse<sp/>Jacobian<sp/>matrix.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>-1<sp/>/<sp/>r<sp/>*<sp/>Kokkos::sin(zeta);</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Compute<sp/>the<sp/>(2,2)<sp/>coefficient<sp/>of<sp/>the<sp/>inverse<sp/>Jacobian<sp/>matrix.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1<sp/>/<sp/>r<sp/>*<sp/>Kokkos::cos(zeta);</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"></highlight></codeline>
+<codeline lineno="294"><highlight class="normal"></highlight></codeline>
+<codeline lineno="300" refid="classCylindricalToCartesian_1a72d668c778d7d7ee8d3248ce5737e7c0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCartesianToCylindrical" kindref="compound">CartesianToCylindrical&lt;X, Y, Z, R, Zeta&gt;</ref><sp/><ref refid="classCylindricalToCartesian_1a72d668c778d7d7ee8d3248ce5737e7c0" kindref="member">get_inverse_mapping</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="301"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classCartesianToCylindrical" kindref="compound">CartesianToCylindrical&lt;X, Y, Z, R, Zeta&gt;</ref>();</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="304"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"></highlight></codeline>
+<codeline lineno="306"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">mapping_detail<sp/>{</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>X,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Y,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Z,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>R,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Zeta,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ExecSpace&gt;</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">MappingAccessibility&lt;ExecSpace,<sp/><ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref>&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/>Z,<sp/>Zeta,<sp/><ref refid="structX" kindref="compound">X</ref>,<sp/><ref refid="structY" kindref="compound">Y</ref>&gt;&gt;<sp/>:<sp/>std::true_type</highlight></codeline>
+<codeline lineno="309"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="310"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"></highlight></codeline>
+<codeline lineno="312"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>mapping_detail</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp"/>
+  </compounddef>
+</doxygen>

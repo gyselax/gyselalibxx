@@ -256,7 +256,7 @@
           <declname>index</declname>
         </param>
         <briefdescription>
-<para>The multiplicative factor corresponding to the Laplace operator <formula id="300">$ \Delta $</formula> expressed in Fourier space at a given mode. </para>
+<para>The multiplicative factor corresponding to the Laplace operator <formula id="331">$ \Delta $</formula> expressed in Fourier space at a given mode. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -626,7 +626,7 @@
           <declname>rho</declname>
         </param>
         <briefdescription>
-<para>An operator which calculates the solution <formula id="57">$\phi$</formula> to Poisson&apos;s equation: <formula id="299">$ - \Delta \phi = \rho $</formula>. </para>
+<para>An operator which calculates the solution <formula id="57">$\phi$</formula> to Poisson&apos;s equation: <formula id="330">$ - \Delta \phi = \rho $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -673,7 +673,7 @@
           <declname>rho</declname>
         </param>
         <briefdescription>
-<para>An operator which calculates the solution <formula id="57">$\phi$</formula> to Poisson&apos;s equation and its derivative: <formula id="299">$ - \Delta \phi = \rho $</formula> <formula id="104">$ E = - \nabla \phi $</formula>. </para>
+<para>An operator which calculates the solution <formula id="57">$\phi$</formula> to Poisson&apos;s equation and its derivative: <formula id="330">$ - \Delta \phi = \rho $</formula> <formula id="104">$ E = - \nabla \phi $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -711,7 +711,7 @@
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>A class to solve the following equation: <formula id="298">$ -\Delta \phi = \rho $</formula> using a Fourier transform. </para>
+<para>A class to solve the following equation: <formula id="329">$ -\Delta \phi = \rho $</formula> using a Fourier transform. </para>
     </briefdescription>
     <detaileddescription>
 <para>The implementation of this class can be found at <ref refid="classFFTPoissonSolver" kindref="compound">FFTPoissonSolver</ref>&lt; IdxRange&lt;GridPDEDim1D...&gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;. <anchor id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1FFTPoissonSolverImplementation"/> <parameterlist kind="templateparam"><parameteritem>

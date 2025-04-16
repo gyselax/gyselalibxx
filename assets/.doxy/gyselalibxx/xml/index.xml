@@ -271,6 +271,32 @@
     <member refid="classCartesianToCircular_1af69ebbdc58f56c521d3c25589fe16769" kind="function"><name>jacobian_component</name></member>
     <member refid="classCartesianToCircular_1a12006646133b008b23ec0467dc76886a" kind="function"><name>get_inverse_mapping</name></member>
   </compound>
+  <compound refid="classCartesianToCylindrical" kind="class"><name>CartesianToCylindrical</name>
+    <member refid="classCartesianToCylindrical_1aa3b112e49eee9555a87c8590c4770c8a" kind="typedef"><name>cartesian_tag_x</name></member>
+    <member refid="classCartesianToCylindrical_1a3c79d722649020f1a871fd8011e01b98" kind="typedef"><name>cartesian_tag_y</name></member>
+    <member refid="classCartesianToCylindrical_1a1bf22d31c32a6dc0e6707e3b2c058f0b" kind="typedef"><name>cartesian_tag_z</name></member>
+    <member refid="classCartesianToCylindrical_1aa0610127921f962d7a9e4b9881a1a5ff" kind="typedef"><name>cylindrical_tag_R</name></member>
+    <member refid="classCartesianToCylindrical_1a78b198363986b0644fce386e52c6c500" kind="typedef"><name>cylindrical_tag_Z</name></member>
+    <member refid="classCartesianToCylindrical_1a3488fcd6d0e017d27be68cce5e822a8d" kind="typedef"><name>cylindrical_tag_Zeta</name></member>
+    <member refid="classCartesianToCylindrical_1a7e5a21ac904038306057075a17c14c37" kind="typedef"><name>CoordArg</name></member>
+    <member refid="classCartesianToCylindrical_1a6752b9f89115c9db812ff06851c9b946" kind="typedef"><name>CoordResult</name></member>
+    <member refid="classCartesianToCylindrical_1ad563f0ab35cd67ea9967bb5e74a36d4e" kind="typedef"><name>X_cov</name></member>
+    <member refid="classCartesianToCylindrical_1a46a76590600f745c0e18b4aa26eecdcd" kind="typedef"><name>Y_cov</name></member>
+    <member refid="classCartesianToCylindrical_1a451e79e9e22b7697cab071ffac776e82" kind="typedef"><name>Z_cov</name></member>
+    <member refid="classCartesianToCylindrical_1abcbc425ce9688bc66906c88014bb3b53" kind="typedef"><name>R_cov</name></member>
+    <member refid="classCartesianToCylindrical_1abcafcc6698663207e665f1a1d85bc371" kind="typedef"><name>Zeta_cov</name></member>
+    <member refid="classCartesianToCylindrical_1ae8f0f84e4c35f1e4e42afbde50dcce61" kind="function"><name>CartesianToCylindrical</name></member>
+    <member refid="classCartesianToCylindrical_1ad9520ba39e7646f0e7cacdc4e854b703" kind="function"><name>CartesianToCylindrical</name></member>
+    <member refid="classCartesianToCylindrical_1adfa8c0b868c30b7a15fa8bf5fbf97308" kind="function"><name>CartesianToCylindrical</name></member>
+    <member refid="classCartesianToCylindrical_1a7e3a8af1616ab01c558e057dfa0dbea0" kind="function"><name>~CartesianToCylindrical</name></member>
+    <member refid="classCartesianToCylindrical_1a3997bb373bcc5809b1bdfb7c1bf1c07c" kind="function"><name>operator=</name></member>
+    <member refid="classCartesianToCylindrical_1a5578c461691f0c81a513c4b626ec9135" kind="function"><name>operator=</name></member>
+    <member refid="classCartesianToCylindrical_1afea84c9965d1fa33b5573d3140db8df6" kind="function"><name>operator()</name></member>
+    <member refid="classCartesianToCylindrical_1a2c6b83170ea4878792ffd0d4be1ecffb" kind="function"><name>jacobian</name></member>
+    <member refid="classCartesianToCylindrical_1a5f5945e50e313ce3c5927d4591629d3e" kind="function"><name>jacobian_matrix</name></member>
+    <member refid="classCartesianToCylindrical_1a7d4dc83cf1c3950a783fc4e482f33815" kind="function"><name>jacobian_component</name></member>
+    <member refid="classCartesianToCylindrical_1ab9aa77a76d9efd4cd3194cdf1b0186ea" kind="function"><name>get_inverse_mapping</name></member>
+  </compound>
   <compound refid="classCartesianToCzarny" kind="class"><name>CartesianToCzarny</name>
     <member refid="classCartesianToCzarny_1a8d3cd4ae79e45649d5787c5ffaf2a44a" kind="typedef"><name>cartesian_tag_x</name></member>
     <member refid="classCartesianToCzarny_1aa611a9efa124ca19dd687b9391ecb1c9" kind="typedef"><name>cartesian_tag_y</name></member>
@@ -510,6 +536,34 @@
     <member refid="classCrankNicolson_1aaba53f61442e763c05fbd7614c3e1c05" kind="typedef"><name>ValField</name></member>
     <member refid="classCrankNicolson_1a7ee2d8a1e9031e625d0861031891bd52" kind="typedef"><name>DerivConstField</name></member>
     <member refid="classCrankNicolson_1a58d11b9c1e57348b94e50b1ea284886f" kind="typedef"><name>DerivField</name></member>
+  </compound>
+  <compound refid="classCylindricalToCartesian" kind="class"><name>CylindricalToCartesian</name>
+    <member refid="classCylindricalToCartesian_1a5b9d946ab8eaacbfe7ee1cd4c6218f7d" kind="typedef"><name>cartesian_tag_x</name></member>
+    <member refid="classCylindricalToCartesian_1a030b1b72b6a02eecfca2a36b4649ae8d" kind="typedef"><name>cartesian_tag_y</name></member>
+    <member refid="classCylindricalToCartesian_1adf8b0cba843bc9b807ca769008a6c96f" kind="typedef"><name>cartesian_tag_z</name></member>
+    <member refid="classCylindricalToCartesian_1a8df4b9a42864d1961ffe3ab5c863df01" kind="typedef"><name>cylindrical_tag_R</name></member>
+    <member refid="classCylindricalToCartesian_1a877916621e407b39bf5d1d8dd025547d" kind="typedef"><name>cylindrical_tag_Z</name></member>
+    <member refid="classCylindricalToCartesian_1aa607e0e8bb3ffe217090e65e20f455cf" kind="typedef"><name>cylindrical_tag_Zeta</name></member>
+    <member refid="classCylindricalToCartesian_1a39a34f6023516b1acb1fa72dcf58f63a" kind="typedef"><name>CoordArg</name></member>
+    <member refid="classCylindricalToCartesian_1af977670db7df9fc5df74be9e3cd0b858" kind="typedef"><name>CoordResult</name></member>
+    <member refid="classCylindricalToCartesian_1a6659f0416281d0a6898234cae492417a" kind="typedef"><name>X_cov</name></member>
+    <member refid="classCylindricalToCartesian_1ae6e3d1d40c0e22e8c2a2f881a5f62357" kind="typedef"><name>Y_cov</name></member>
+    <member refid="classCylindricalToCartesian_1aa313137793384e3e7f0f7cff3d5dc03b" kind="typedef"><name>Z_cov</name></member>
+    <member refid="classCylindricalToCartesian_1a0f20428fdcab7959b3d6b5cb27cf9a29" kind="typedef"><name>R_cov</name></member>
+    <member refid="classCylindricalToCartesian_1a585a32f926487c142fd2479c7e0c912e" kind="typedef"><name>Zeta_cov</name></member>
+    <member refid="classCylindricalToCartesian_1afde4138188b405fd7185491ddf11fef6" kind="function"><name>CylindricalToCartesian</name></member>
+    <member refid="classCylindricalToCartesian_1a3b1c62cff588c7f21a80b3ef5aeb053d" kind="function"><name>CylindricalToCartesian</name></member>
+    <member refid="classCylindricalToCartesian_1a54f71bf7a3ae7fe121bcfc43c4f57698" kind="function"><name>CylindricalToCartesian</name></member>
+    <member refid="classCylindricalToCartesian_1ae4608cbeddf53ed01c622c3a6c7646e4" kind="function"><name>~CylindricalToCartesian</name></member>
+    <member refid="classCylindricalToCartesian_1a3843aedba2ad3e40509701f57fd9731b" kind="function"><name>operator=</name></member>
+    <member refid="classCylindricalToCartesian_1aee74e1eb673e4b4e403bbf2f591b9f23" kind="function"><name>operator=</name></member>
+    <member refid="classCylindricalToCartesian_1ae4904ff87892e9c3b8c901df57734b11" kind="function"><name>operator()</name></member>
+    <member refid="classCylindricalToCartesian_1a2e4f8ff726356940f7150cf5a74e9234" kind="function"><name>jacobian</name></member>
+    <member refid="classCylindricalToCartesian_1a1a9d378d342e29cf152af56823117f14" kind="function"><name>jacobian_matrix</name></member>
+    <member refid="classCylindricalToCartesian_1a7c882c0b0ea2e38f652235adf705d982" kind="function"><name>jacobian_component</name></member>
+    <member refid="classCylindricalToCartesian_1a07bc2e8d4fc932cb988298561e542750" kind="function"><name>inv_jacobian_matrix</name></member>
+    <member refid="classCylindricalToCartesian_1aba51dfb6eb798e561daf6a3842cd172b" kind="function"><name>inv_jacobian_component</name></member>
+    <member refid="classCylindricalToCartesian_1a72d668c778d7d7ee8d3248ce5737e7c0" kind="function"><name>get_inverse_mapping</name></member>
   </compound>
   <compound refid="classCzarnyToCartesian" kind="class"><name>CzarnyToCartesian</name>
     <member refid="classCzarnyToCartesian_1ab25d063bcbef5fb0f1bff444fc8a98e2" kind="typedef"><name>cartesian_tag_x</name></member>
@@ -1267,14 +1321,6 @@
   <compound refid="classInverseJacobianMatrix" kind="class"><name>InverseJacobianMatrix</name>
     <member refid="classInverseJacobianMatrix_1a2b37da8422924c7625c57d4378486327" kind="typedef"><name>ValidArgIndices</name></member>
     <member refid="classInverseJacobianMatrix_1a7b863a25f1b7db1a32cf7666ce9ec5ca" kind="typedef"><name>ValidResultIndices</name></member>
-    <member refid="classInverseJacobianMatrix_1ac7bbd34190edc4433143092eb8c9bb2e" kind="typedef"><name>DimArg0</name></member>
-    <member refid="classInverseJacobianMatrix_1a40ed99befcb6fbaae3aed7765f502051" kind="typedef"><name>DimArg1</name></member>
-    <member refid="classInverseJacobianMatrix_1abf90ed05669e61bbec35f9092b0bdb9d" kind="typedef"><name>DimArg0_cov</name></member>
-    <member refid="classInverseJacobianMatrix_1a5bf0bf4bb0186cc08001540d4661cd3f" kind="typedef"><name>DimArg1_cov</name></member>
-    <member refid="classInverseJacobianMatrix_1a3ea0d58a822187e25b520de31f1384cc" kind="typedef"><name>DimRes0</name></member>
-    <member refid="classInverseJacobianMatrix_1add1c12c5175f3fee40eba973c74dc256" kind="typedef"><name>DimRes1</name></member>
-    <member refid="classInverseJacobianMatrix_1affaaf958581ae10a00cbf8c76cc105c0" kind="typedef"><name>DimRes0_cov</name></member>
-    <member refid="classInverseJacobianMatrix_1ae44936e2c96002d851c624ef20540046" kind="typedef"><name>DimRes1_cov</name></member>
     <member refid="classInverseJacobianMatrix_1a81c90715177eda38dbbabd977964d6d1" kind="typedef"><name>InverseJacobianTensor</name></member>
     <member refid="classInverseJacobianMatrix_1a9ce3614e0a899f968697d97c2d33e3ed" kind="variable"><name>m_mapping</name></member>
     <member refid="classInverseJacobianMatrix_1a8484531e5dbf59a3ab2a6ef08711a84d" kind="function"><name>InverseJacobianMatrix</name></member>
@@ -2777,13 +2823,13 @@
     <member refid="structY__pC_1a6274201b751e93509509253746e598c1" kind="variable"><name>IS_COVARIANT</name></member>
     <member refid="structY__pC_1a840b5d333654df4c5be30422ce8eeb28" kind="variable"><name>IS_CONTRAVARIANT</name></member>
   </compound>
-  <compound refid="namespace_0d202" kind="namespace"><name>@202</name>
-  </compound>
   <compound refid="namespace_0d204" kind="namespace"><name>@204</name>
   </compound>
   <compound refid="namespace_0d206" kind="namespace"><name>@206</name>
   </compound>
   <compound refid="namespace_0d208" kind="namespace"><name>@208</name>
+  </compound>
+  <compound refid="namespace_0d210" kind="namespace"><name>@210</name>
   </compound>
   <compound refid="namespace_0d73" kind="namespace"><name>@73</name>
   </compound>
@@ -3612,11 +3658,15 @@
   </compound>
   <compound refid="cartesian__to__circular_8hpp" kind="file"><name>cartesian_to_circular.hpp</name>
   </compound>
+  <compound refid="cartesian__to__cylindrical_8hpp" kind="file"><name>cartesian_to_cylindrical.hpp</name>
+  </compound>
   <compound refid="cartesian__to__czarny_8hpp" kind="file"><name>cartesian_to_czarny.hpp</name>
   </compound>
   <compound refid="circular__to__cartesian_8hpp" kind="file"><name>circular_to_cartesian.hpp</name>
   </compound>
   <compound refid="combined__mapping_8hpp" kind="file"><name>combined_mapping.hpp</name>
+  </compound>
+  <compound refid="cylindrical__to__cartesian_8hpp" kind="file"><name>cylindrical_to_cartesian.hpp</name>
   </compound>
   <compound refid="czarny__to__cartesian_8hpp" kind="file"><name>czarny_to_cartesian.hpp</name>
   </compound>
@@ -3680,6 +3730,7 @@
     <member refid="math__tools_8hpp_1adf77a48fdc00d2f05c34a228d1e1c237" kind="function"><name>min</name></member>
     <member refid="math__tools_8hpp_1a3f4ae913e2a7b3479faa6afe7c6948cd" kind="function"><name>max</name></member>
     <member refid="math__tools_8hpp_1abc6ba7d1d05608b655ee20062561f832" kind="function"><name>determinant</name></member>
+    <member refid="math__tools_8hpp_1a2deb990134f24f0c77ece7175c26ff5d" kind="function"><name>determinant</name></member>
     <member refid="math__tools_8hpp_1a9de28c918be129163f42d4ad149ae3ae" kind="function"><name>inverse</name></member>
   </compound>
   <compound refid="spline__1d__partial__derivative_8hpp" kind="file"><name>spline_1d_partial_derivative.hpp</name>

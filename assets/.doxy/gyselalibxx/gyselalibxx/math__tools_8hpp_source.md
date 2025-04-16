@@ -164,6 +164,25 @@ KOKKOS_INLINE_FUNCTION double determinant(
            - ddcHelper::get<RowDim2, ColDim1>(arr) * ddcHelper::get<RowDim1, ColDim2>(arr);
 }
 
+template <class RowDim1, class RowDim2, class RowDim3, class ColDim1, class ColDim2, class ColDim3>
+KOKKOS_INLINE_FUNCTION double determinant(
+        DTensor<VectorIndexSet<RowDim1, RowDim2, RowDim3>,
+                VectorIndexSet<ColDim1, ColDim2, ColDim3>> arr)
+{
+    return ddcHelper::get<RowDim1, ColDim1>(arr) * ddcHelper::get<RowDim2, ColDim2>(arr)
+                   * ddcHelper::get<RowDim3, ColDim3>(arr)
+           + ddcHelper::get<RowDim1, ColDim2>(arr) * ddcHelper::get<RowDim2, ColDim3>(arr)
+                     * ddcHelper::get<RowDim3, ColDim1>(arr)
+           + ddcHelper::get<RowDim1, ColDim3>(arr) * ddcHelper::get<RowDim2, ColDim1>(arr)
+                     * ddcHelper::get<RowDim3, ColDim2>(arr)
+           - ddcHelper::get<RowDim3, ColDim1>(arr) * ddcHelper::get<RowDim2, ColDim2>(arr)
+                     * ddcHelper::get<RowDim1, ColDim3>(arr)
+           - ddcHelper::get<RowDim3, ColDim2>(arr) * ddcHelper::get<RowDim2, ColDim3>(arr)
+                     * ddcHelper::get<RowDim1, ColDim1>(arr)
+           - ddcHelper::get<RowDim3, ColDim3>(arr) * ddcHelper::get<RowDim2, ColDim1>(arr)
+                     * ddcHelper::get<RowDim1, ColDim2>(arr);
+}
+
 template <class RowDim1, class RowDim2, class ColDim1, class ColDim2>
 KOKKOS_INLINE_FUNCTION DTensor<
         VectorIndexSet<typename ColDim1::Dual, typename ColDim2::Dual>,

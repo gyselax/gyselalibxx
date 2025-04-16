@@ -210,15 +210,15 @@
         <qualifiedname>Matrix_Periodic_Banded::calculate_delta_to_factorise</qualifiedname>
         <reimplements refid="classMatrix__Corner__Block_1aed05bf304325853308dffcc6ec17f84e">calculate_delta_to_factorise</reimplements>
         <briefdescription>
-<para>Calculate the contents of the dense matrix <formula id="279">$ delta&apos; $</formula> that will be factorised. This is the element <formula id="279">$ delta&apos; $</formula> of the blockwise LU decomposition of the matrix. </para>
+<para>Calculate the contents of the dense matrix <formula id="310">$ delta&apos; $</formula> that will be factorised. This is the element <formula id="310">$ delta&apos; $</formula> of the blockwise LU decomposition of the matrix. </para>
         </briefdescription>
         <detaileddescription>
 <para><verbatim>L = |   Q    |    0   |
     | lambda | delta&apos; |
 </verbatim> It is defined as:</para>
-<para><formula id="280">$ \delta&apos; = \delta - \lambda \beta $</formula></para>
-<para>With <formula id="281">$ \beta $</formula> the solution of the equation:</para>
-<para><formula id="282">$ Q \beta = \gamma $</formula></para>
+<para><formula id="311">$ \delta&apos; = \delta - \lambda \beta $</formula></para>
+<para>With <formula id="312">$ \beta $</formula> the solution of the equation:</para>
+<para><formula id="313">$ Q \beta = \gamma $</formula></para>
 <para>which should already be stored in the variable Abm_1_gamma when this method is called. </para>
         </detaileddescription>
         <inbodydescription>
@@ -244,8 +244,8 @@
 <para>Calculate the solution to the following equation: </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="283">$ v - \lambda u $</formula></para>
-<para>The result is saved into the argument <formula id="284">$ v $</formula>. This calculation is one of the steps necessary to solve the matrix equation.</para>
+<para><formula id="314">$ v - \lambda u $</formula></para>
+<para>The result is saved into the argument <formula id="315">$ v $</formula>. This calculation is one of the steps necessary to solve the matrix equation.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">v</parametername>
@@ -290,8 +290,8 @@
 <para>Calculate the solution to the following equation: </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="285">$ u - \lambda v $</formula></para>
-<para>The result is saved into the argument <formula id="286">$ u $</formula>. This calculation is one of the steps necessary to solve the matrix equation.</para>
+<para><formula id="316">$ u - \lambda v $</formula></para>
+<para>The result is saved into the argument <formula id="317">$ u $</formula>. This calculation is one of the steps necessary to solve the matrix equation.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">u</parametername>

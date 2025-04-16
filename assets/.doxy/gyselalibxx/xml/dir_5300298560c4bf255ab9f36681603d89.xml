@@ -5,9 +5,11 @@
     <innerfile refid="barycentric__to__cartesian_8hpp">barycentric_to_cartesian.hpp</innerfile>
     <innerfile refid="cartesian__to__barycentric_8hpp">cartesian_to_barycentric.hpp</innerfile>
     <innerfile refid="cartesian__to__circular_8hpp">cartesian_to_circular.hpp</innerfile>
+    <innerfile refid="cartesian__to__cylindrical_8hpp">cartesian_to_cylindrical.hpp</innerfile>
     <innerfile refid="cartesian__to__czarny_8hpp">cartesian_to_czarny.hpp</innerfile>
     <innerfile refid="circular__to__cartesian_8hpp">circular_to_cartesian.hpp</innerfile>
     <innerfile refid="combined__mapping_8hpp">combined_mapping.hpp</innerfile>
+    <innerfile refid="cylindrical__to__cartesian_8hpp">cylindrical_to_cartesian.hpp</innerfile>
     <innerfile refid="czarny__to__cartesian_8hpp">czarny_to_cartesian.hpp</innerfile>
     <innerfile refid="discrete__mapping__builder_8hpp">discrete_mapping_builder.hpp</innerfile>
     <innerfile refid="discrete__to__cartesian_8hpp">discrete_to_cartesian.hpp</innerfile>

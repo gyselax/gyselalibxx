@@ -48,6 +48,7 @@
 
 * [**CartesianToBarycentric**](classCartesianToBarycentric.md)
 * [**CartesianToCircular**](classCartesianToCircular.md)
+* [**CartesianToCylindrical**](classCartesianToCylindrical.md)
 * [**CartesianToCzarny**](classCartesianToCzarny.md)
 * [**CentralFDMPartialDerivative**](classCentralFDMPartialDerivative.md)
 * [**CentralFDMPartialDerivativeCreator**](classCentralFDMPartialDerivativeCreator.md)
@@ -87,6 +88,7 @@
 * [**Corner3Tag**](structPolarBSplines_1_1Impl_1_1Corner3Tag.md)
 ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
 * [**CrankNicolson**](classCrankNicolson.md)
+* [**CylindricalToCartesian**](classCylindricalToCartesian.md)
 * [**CzarnyToCartesian**](classCzarnyToCartesian.md)
 
 

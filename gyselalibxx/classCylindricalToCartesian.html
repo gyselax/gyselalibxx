@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Class CylindricalToCartesian - GyselalibX</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Class CylindricalToCartesian";
+        var mkdocs_page_input_path = "gyselalibxx/classCylindricalToCartesian.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> GyselalibX
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">General</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/getting_started.html">Getting Started</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Installation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../docs/first_steps/install.html">Gyselalib++ Installation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../toolchains/index.html">Pre-made build settings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standards</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/mathematical_and_physical_conventions.html">Math & Physics</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Gyselalib++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Source</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../src/index.html">Gyselalib++ contents</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/advection/index.html">Advection methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/collisions/index.html">Collisions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/data_types/index.html">Data Storage Types</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryRTheta/index.html">Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_field</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/geometry/index.html">Geometry RTheta</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/initialisation/index.html">Initialisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/poisson/index.html">Polar Poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_solver</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/time_solver/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryVparMu</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryVparMu/index.html">Geometry (vpar, mu)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/collisions/index.html">CollisionConfiguration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/geometry/index.html">GeometryVparMu</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXVx/index.html">Geometry (x, v_x)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >boltzmann</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/boltzmann/index.html">Boltzmann solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/geometry/index.html">Geometry X-Vx</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >rhs</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/rhs/index.html">RHS</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/utils/index.html">Utils</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXY/index.html">Geometry (x, y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/geometry/index.html">Geometry XY</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/initialisation/index.html">Initialisation on (x,y) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/time_integration/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXYVxVy</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXYVxVy/index.html">Geometry (x, y, v_x, v_y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/geometry/index.html">Geometry X Y-Vx Vy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vlasov</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/vlasov/index.html">Vlasov solver</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/interpolation/index.html">Interpolation Methods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/polar_splines/index.html">Polar Splines</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >io</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/io/index.html">Functions used for input and output</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mapping</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mapping/index.html">Mappings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >math_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/math_tools/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >matrix_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/matrix_tools/index.html">Matrix tools</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mpi_parallelisation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mpi_parallelisation/index.html">Parallelisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/multipatch/index.html">Multipatch</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >connectivity</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/connectivity/index.html">Multipatch connectivity</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/data_types/index.html">Data Types for Multipatch Geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/utils/index.html">Multipatch utilitary functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >quadrature</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/quadrature/index.html">Quadrature Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >speciesinfo</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/speciesinfo/index.html">SpeciesInfo (x, v_x)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >timestepper</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/timestepper/index.html">Time Stepping Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/utils/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Simulations</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../simulations/index.html">Gyselalib++ simulations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryRTheta/index.html">Simulations in (r, theta) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >diocotron</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/diocotron/index.html">Diocotron instability</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vortex_merger</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/vortex_merger/index.html">Vortex merger</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXVx/index.html">Simulations in (x, vx) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXY/index.html">Simulations in (x, y) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >guiding_centre</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryXY/guiding_centre/index.html">Guiding centre (X,Y) simulation</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tests</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../tests/index.html">Gyselalib++ tests</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/advection/index.html">Tests on the templated advection operators</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/geometryRTheta/index.html">Tests : Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/advection_rtheta/index.html">Tests on the 2D polar advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/polar_poisson/index.html">Tests on the 2D polar poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline_interpolator_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/spline_interpolator_rtheta/index.html">Tests on spline interpolator in polar coordinates</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/multipatch/index.html">Multipatch geometry tests</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometries</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/multipatch/geometries/index.html">Multipatch geometries</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Adding_docs.html">Adding Docs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Using_git.html">Using Git</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Gyselalib++</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" >Classes</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="annotated.html">Class List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="classes.html">Class Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="hierarchy.html">Class Hierarchy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Namespaces</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="namespaces.html">Namespace List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_members.html">Namespace Members</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_functions.html">Namespace Member Functions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_variables.html">Namespace Member Variables</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_typedefs.html">Namespace Member Typedefs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_enums.html">Namespace Member Enumerations</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="macros.html">Macros</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="files.html">Files</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">GyselalibX</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Class CylindricalToCartesian</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classCylindricalToCartesian.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div><h1 id="class-cylindricaltocartesian">Class CylindricalToCartesian</h1>
+<p><strong>template &lt;class <a href="structR.html"><strong>R</strong></a>, class Z, class Zeta, class <a href="structX.html"><strong>X</strong></a>, class <a href="structY.html"><strong>Y</strong></a>&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classCylindricalToCartesian.html"><strong>CylindricalToCartesian</strong></a></p>
+<p><em>A class for describing the cylindrical 3D mapping.</em> <a href="#detailed-description">More...</a></p>
+<ul>
+<li><code>#include &lt;cylindrical_to_cartesian.hpp&gt;</code></li>
+</ul>
+<h2 id="public-types">Public Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef Coord&lt; <a href="structR.html"><strong>R</strong></a>, Z, Zeta &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coordarg"><strong>CoordArg</strong></a>  <br><em>The type of the argument of the function described by this mapping.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a>, Z &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coordresult"><strong>CoordResult</strong></a>  <br><em>The type of the result of the function described by this mapping.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="structR.html#typedef-dual"><strong>R::Dual</strong></a></td>
+<td style="text-align: left;"><a href="#typedef-r_cov"><strong>R_cov</strong></a>  <br><em>The covariant form of the radial cylindrical coordinate.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="structX.html#typedef-dual-14"><strong>X::Dual</strong></a></td>
+<td style="text-align: left;"><a href="#typedef-x_cov"><strong>X_cov</strong></a>  <br><em>The covariant form of the first Cartesian coordinate.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename <a href="structY.html#typedef-dual-13"><strong>Y::Dual</strong></a></td>
+<td style="text-align: left;"><a href="#typedef-y_cov"><strong>Y_cov</strong></a>  <br><em>The covariant form of the second Cartesian coordinate.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename Z::Dual</td>
+<td style="text-align: left;"><a href="#typedef-z_cov"><strong>Z_cov</strong></a>  <br><em>The covariant form of the third Cartesian coordinate and the longitudinal cylindrical coordinate.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename Zeta::Dual</td>
+<td style="text-align: left;"><a href="#typedef-zeta_cov"><strong>Zeta_cov</strong></a>  <br><em>The covariant form of the angular cylindrical coordinate.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="structX.html"><strong>X</strong></a></td>
+<td style="text-align: left;"><a href="#typedef-cartesian_tag_x"><strong>cartesian_tag_x</strong></a>  <br><em>Indicate the first Cartesian coordinate.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="structY.html"><strong>Y</strong></a></td>
+<td style="text-align: left;"><a href="#typedef-cartesian_tag_y"><strong>cartesian_tag_y</strong></a>  <br><em>Indicate the second Cartesian coordinate.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Z</td>
+<td style="text-align: left;"><a href="#typedef-cartesian_tag_z"><strong>cartesian_tag_z</strong></a>  <br><em>Indicate the second Cartesian coordinate.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="structR.html"><strong>R</strong></a></td>
+<td style="text-align: left;"><a href="#typedef-cylindrical_tag_r"><strong>cylindrical_tag_R</strong></a>  <br><em>Indicate the radial cylindrical coordinate.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Z</td>
+<td style="text-align: left;"><a href="#typedef-cylindrical_tag_z"><strong>cylindrical_tag_Z</strong></a>  <br><em>Indicate the longitudinal cylindrical coordinate.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Zeta</td>
+<td style="text-align: left;"><a href="#typedef-cylindrical_tag_zeta"><strong>cylindrical_tag_Zeta</strong></a>  <br><em>Indicate the angular cylindrical coordinate.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions">Public Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-cylindricaltocartesian-13"><strong>CylindricalToCartesian</strong></a> () = default<br></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION</td>
+<td style="text-align: left;"><a href="#function-cylindricaltocartesian-23"><strong>CylindricalToCartesian</strong></a> (<a href="classCylindricalToCartesian.html"><strong>CylindricalToCartesian</strong></a> const &amp; other) <br><em>Instantiate a</em> <a href="classCylindricalToCartesian.html"><em><strong>CylindricalToCartesian</strong></em></a> <em>from another</em><a href="classCylindricalToCartesian.html"><em><strong>CylindricalToCartesian</strong></em></a> <em>(lvalue).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-cylindricaltocartesian-33"><strong>CylindricalToCartesian</strong></a> (<a href="classCylindricalToCartesian.html"><strong>CylindricalToCartesian</strong></a> &amp;&amp; x) = default<br><em>Instantiate a</em> <a href="classCylindricalToCartesian.html"><em><strong>CylindricalToCartesian</strong></em></a> <em>from another temporary</em><a href="classCylindricalToCartesian.html"><em><strong>CylindricalToCartesian</strong></em></a> <em>(rvalue).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="classCartesianToCylindrical.html"><strong>CartesianToCylindrical</strong></a>&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a>, Z, <a href="structR.html"><strong>R</strong></a>, Zeta &gt;</td>
+<td style="text-align: left;"><a href="#function-get_inverse_mapping"><strong>get_inverse_mapping</strong></a> () const<br><em>Get the inverse mapping.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION double</td>
+<td style="text-align: left;"><a href="#function-inv_jacobian_component"><strong>inv_jacobian_component</strong></a> (<a href="classCylindricalToCartesian.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute the (i,j) coefficient of the inverse Jacobian matrix.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; <a href="structR.html"><strong>R</strong></a>, Z, Zeta &gt;, VectorIndexSet&lt; <a href="classCylindricalToCartesian.html#typedef-x_cov"><strong>X_cov</strong></a>, <a href="classCylindricalToCartesian.html#typedef-y_cov"><strong>Y_cov</strong></a>, <a href="classCylindricalToCartesian.html#typedef-z_cov"><strong>Z_cov</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="#function-inv_jacobian_matrix"><strong>inv_jacobian_matrix</strong></a> (<a href="classCylindricalToCartesian.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute full inverse Jacobian matrix.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION double</td>
+<td style="text-align: left;"><a href="#function-jacobian"><strong>jacobian</strong></a> (<a href="classCylindricalToCartesian.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION double</td>
+<td style="text-align: left;"><a href="#function-jacobian_component"><strong>jacobian_component</strong></a> (<a href="classCylindricalToCartesian.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute the (i,j) coefficient of the Jacobian matrix.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a>, Z &gt;, VectorIndexSet&lt; <a href="classCylindricalToCartesian.html#typedef-r_cov"><strong>R_cov</strong></a>, <a href="classCylindricalToCartesian.html#typedef-z_cov"><strong>Z_cov</strong></a>, <a href="classCylindricalToCartesian.html#typedef-zeta_cov"><strong>Zeta_cov</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="#function-jacobian_matrix"><strong>jacobian_matrix</strong></a> (<a href="classCylindricalToCartesian.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute full Jacobian matrix.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION <a href="classCylindricalToCartesian.html#typedef-coordresult"><strong>CoordResult</strong></a></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classCylindricalToCartesian.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Convert the</em>  <em>coordinate to the equivalent (x,y) coordinate.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="classCylindricalToCartesian.html"><strong>CylindricalToCartesian</strong></a> &amp;</td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator=</strong></a> (<a href="classCylindricalToCartesian.html"><strong>CylindricalToCartesian</strong></a> const &amp; x) = default<br><em>Assign a</em> <a href="classCylindricalToCartesian.html"><em><strong>CylindricalToCartesian</strong></em></a> <em>from another</em><a href="classCylindricalToCartesian.html"><em><strong>CylindricalToCartesian</strong></em></a> <em>(lvalue).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="classCylindricalToCartesian.html"><strong>CylindricalToCartesian</strong></a> &amp;</td>
+<td style="text-align: left;"><a href="#function-operator_2"><strong>operator=</strong></a> (<a href="classCylindricalToCartesian.html"><strong>CylindricalToCartesian</strong></a> &amp;&amp; x) = default<br><em>Assign a</em> <a href="classCylindricalToCartesian.html"><em><strong>CylindricalToCartesian</strong></em></a> <em>from another temporary</em><a href="classCylindricalToCartesian.html"><em><strong>CylindricalToCartesian</strong></em></a> <em>(rvalue).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-cylindricaltocartesian"><strong>~CylindricalToCartesian</strong></a> () = default<br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-description">Detailed Description</h2>
+<p>The mapping  is defined as follow :</p>
+<p>It and its Jacobian matrix are invertible everywhere except for .</p>
+<p>The Jacobian matrix coefficients are defined as follow</p>
+<p>and the matrix determinant: . </p>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-coordarg">typedef CoordArg</h3>
+<p><em>The type of the argument of the function described by this mapping.</em> </p>
+<pre><code class="language-C++">using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::CoordArg =  Coord&lt;R, Z, Zeta&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coordresult">typedef CoordResult</h3>
+<p><em>The type of the result of the function described by this mapping.</em> </p>
+<pre><code class="language-C++">using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::CoordResult =  Coord&lt;X, Y, Z&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-r_cov">typedef R_cov</h3>
+<p><em>The covariant form of the radial cylindrical coordinate.</em> </p>
+<pre><code class="language-C++">using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::R_cov =  typename R::Dual;
+</code></pre>
+<hr>
+
+<h3 id="typedef-x_cov">typedef X_cov</h3>
+<p><em>The covariant form of the first Cartesian coordinate.</em> </p>
+<pre><code class="language-C++">using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::X_cov =  typename X::Dual;
+</code></pre>
+<hr>
+
+<h3 id="typedef-y_cov">typedef Y_cov</h3>
+<p><em>The covariant form of the second Cartesian coordinate.</em> </p>
+<pre><code class="language-C++">using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::Y_cov =  typename Y::Dual;
+</code></pre>
+<hr>
+
+<h3 id="typedef-z_cov">typedef Z_cov</h3>
+<p><em>The covariant form of the third Cartesian coordinate and the longitudinal cylindrical coordinate.</em> </p>
+<pre><code class="language-C++">using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::Z_cov =  typename Z::Dual;
+</code></pre>
+<hr>
+
+<h3 id="typedef-zeta_cov">typedef Zeta_cov</h3>
+<p><em>The covariant form of the angular cylindrical coordinate.</em> </p>
+<pre><code class="language-C++">using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::Zeta_cov =  typename Zeta::Dual;
+</code></pre>
+<hr>
+
+<h3 id="typedef-cartesian_tag_x">typedef cartesian_tag_x</h3>
+<p><em>Indicate the first Cartesian coordinate.</em> </p>
+<pre><code class="language-C++">using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::cartesian_tag_x =  X;
+</code></pre>
+<hr>
+
+<h3 id="typedef-cartesian_tag_y">typedef cartesian_tag_y</h3>
+<p><em>Indicate the second Cartesian coordinate.</em> </p>
+<pre><code class="language-C++">using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::cartesian_tag_y =  Y;
+</code></pre>
+<hr>
+
+<h3 id="typedef-cartesian_tag_z">typedef cartesian_tag_z</h3>
+<p><em>Indicate the second Cartesian coordinate.</em> </p>
+<pre><code class="language-C++">using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::cartesian_tag_z =  Z;
+</code></pre>
+<hr>
+
+<h3 id="typedef-cylindrical_tag_r">typedef cylindrical_tag_R</h3>
+<p><em>Indicate the radial cylindrical coordinate.</em> </p>
+<pre><code class="language-C++">using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::cylindrical_tag_R =  R;
+</code></pre>
+<hr>
+
+<h3 id="typedef-cylindrical_tag_z">typedef cylindrical_tag_Z</h3>
+<p><em>Indicate the longitudinal cylindrical coordinate.</em> </p>
+<pre><code class="language-C++">using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::cylindrical_tag_Z =  Z;
+</code></pre>
+<hr>
+
+<h3 id="typedef-cylindrical_tag_zeta">typedef cylindrical_tag_Zeta</h3>
+<p><em>Indicate the angular cylindrical coordinate.</em> </p>
+<pre><code class="language-C++">using CylindricalToCartesian&lt; R, Z, Zeta, X, Y &gt;::cylindrical_tag_Zeta =  Zeta;
+</code></pre>
+<hr>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-cylindricaltocartesian-13">function CylindricalToCartesian [1/3]</h3>
+<pre><code class="language-C++">CylindricalToCartesian::CylindricalToCartesian () = default
+</code></pre>
+<hr>
+
+<h3 id="function-cylindricaltocartesian-23">function CylindricalToCartesian [2/3]</h3>
+<p><em>Instantiate a</em> <a href="classCylindricalToCartesian.html"><em><strong>CylindricalToCartesian</strong></em></a> <em>from another</em><a href="classCylindricalToCartesian.html"><em><strong>CylindricalToCartesian</strong></em></a> <em>(lvalue).</em></p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION CylindricalToCartesian::CylindricalToCartesian (
+    CylindricalToCartesian const &amp; other
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>other</code> <a href="classCylindricalToCartesian.html"><strong>CylindricalToCartesian</strong></a> mapping used to instantiate the new one. </li>
+</ul>
+<hr>
+
+<h3 id="function-cylindricaltocartesian-33">function CylindricalToCartesian [3/3]</h3>
+<p><em>Instantiate a</em> <a href="classCylindricalToCartesian.html"><em><strong>CylindricalToCartesian</strong></em></a> <em>from another temporary</em><a href="classCylindricalToCartesian.html"><em><strong>CylindricalToCartesian</strong></em></a> <em>(rvalue).</em></p>
+<pre><code class="language-C++">CylindricalToCartesian::CylindricalToCartesian (
+    CylindricalToCartesian &amp;&amp; x
+) = default
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>x</code> <a href="classCylindricalToCartesian.html"><strong>CylindricalToCartesian</strong></a> mapping used to instantiate the new one. </li>
+</ul>
+<hr>
+
+<h3 id="function-get_inverse_mapping">function get_inverse_mapping</h3>
+<p><em>Get the inverse mapping.</em> </p>
+<pre><code class="language-C++">inline CartesianToCylindrical &lt; X , Y , Z, R , Zeta &gt; CylindricalToCartesian::get_inverse_mapping () const
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>The inverse mapping. </p>
+<hr>
+
+<h3 id="function-inv_jacobian_component">function inv_jacobian_component</h3>
+<p><em>Compute the (i,j) coefficient of the inverse Jacobian matrix.</em> </p>
+<pre><code class="language-C++">template&lt;class IndexTag1, class IndexTag2&gt;
+inline KOKKOS_FUNCTION double CylindricalToCartesian::inv_jacobian_component (
+    CoordArg const &amp; coord
+) const
+</code></pre>
+<p>Be careful because not all mappings are invertible, especially at the centre point.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>coord</code> The coordinate where we evaluate the inverse Jacobian matrix.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A double with the value of the (i,j) coefficient of the inverse Jacobian matrix. </p>
+<hr>
+
+<h3 id="function-inv_jacobian_matrix">function inv_jacobian_matrix</h3>
+<p><em>Compute full inverse Jacobian matrix.</em> </p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor &lt; VectorIndexSet&lt; R , Z, Zeta &gt;, VectorIndexSet&lt; X_cov , Y_cov , Z_cov &gt; &gt; CylindricalToCartesian::inv_jacobian_matrix (
+    CoordArg const &amp; coord
+) const
+</code></pre>
+<p>For some computations, we need the complete inverse Jacobian matrix or just the coefficients. The coefficients can be given independently with the function inv_jacobian_component.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>coord</code> The coordinate where we evaluate the Jacobian matrix. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The inverse Jacobian matrix. </p>
+<hr>
+
+<h3 id="function-jacobian">function jacobian</h3>
+<p><em>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.</em> </p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION double CylindricalToCartesian::jacobian (
+    CoordArg const &amp; coord
+) const
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>coord</code> The coordinate where we evaluate the Jacobian.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A double with the value of the determinant of the Jacobian matrix. </p>
+<hr>
+
+<h3 id="function-jacobian_component">function jacobian_component</h3>
+<p><em>Compute the (i,j) coefficient of the Jacobian matrix.</em> </p>
+<pre><code class="language-C++">template&lt;class IndexTag1, class IndexTag2&gt;
+inline KOKKOS_FUNCTION double CylindricalToCartesian::jacobian_component (
+    CoordArg const &amp; coord
+) const
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>coord</code> The coordinate where we evaluate the Jacobian matrix.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A double with the value of the (i,j) coefficient of the Jacobian matrix. </p>
+<hr>
+
+<h3 id="function-jacobian_matrix">function jacobian_matrix</h3>
+<p><em>Compute full Jacobian matrix.</em> </p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION DTensor &lt; VectorIndexSet&lt; X , Y , Z &gt;, VectorIndexSet&lt; R_cov , Z_cov , Zeta_cov &gt; &gt; CylindricalToCartesian::jacobian_matrix (
+    CoordArg const &amp; coord
+) const
+</code></pre>
+<p>For some computations, we need the complete Jacobian matrix or just the coefficients. The coefficients can be given independently with the function jacobian_component.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>coord</code> The coordinate where we evaluate the Jacobian matrix. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The Jacobian matrix. </p>
+<hr>
+
+<h3 id="function-operator">function operator()</h3>
+<p><em>Convert the</em>  <em>coordinate to the equivalent (x,y) coordinate.</em></p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION CoordResult CylindricalToCartesian::operator() (
+    CoordArg const &amp; coord
+) const
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>coord</code> The coordinate to be converted.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The equivalent coordinate. </p>
+<hr>
+
+<h3 id="function-operator_1">function operator=</h3>
+<p><em>Assign a</em> <a href="classCylindricalToCartesian.html"><em><strong>CylindricalToCartesian</strong></em></a> <em>from another</em><a href="classCylindricalToCartesian.html"><em><strong>CylindricalToCartesian</strong></em></a> <em>(lvalue).</em></p>
+<pre><code class="language-C++">CylindricalToCartesian &amp; CylindricalToCartesian::operator= (
+    CylindricalToCartesian const &amp; x
+) = default
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>x</code> <a href="classCylindricalToCartesian.html"><strong>CylindricalToCartesian</strong></a> mapping used to assign.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The <a href="classCylindricalToCartesian.html"><strong>CylindricalToCartesian</strong></a> assigned. </p>
+<hr>
+
+<h3 id="function-operator_2">function operator=</h3>
+<p><em>Assign a</em> <a href="classCylindricalToCartesian.html"><em><strong>CylindricalToCartesian</strong></em></a> <em>from another temporary</em><a href="classCylindricalToCartesian.html"><em><strong>CylindricalToCartesian</strong></em></a> <em>(rvalue).</em></p>
+<pre><code class="language-C++">CylindricalToCartesian &amp; CylindricalToCartesian::operator= (
+    CylindricalToCartesian &amp;&amp; x
+) = default
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>x</code> <a href="classCylindricalToCartesian.html"><strong>CylindricalToCartesian</strong></a> mapping used to assign.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The <a href="classCylindricalToCartesian.html"><strong>CylindricalToCartesian</strong></a> assigned. </p>
+<hr>
+
+<h3 id="function-cylindricaltocartesian">function ~CylindricalToCartesian</h3>
+<pre><code class="language-C++">CylindricalToCartesian::~CylindricalToCartesian () = default
+</code></pre>
+<hr>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp</code></p></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/gyselax/gyselalibxx/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../docs/jscript/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

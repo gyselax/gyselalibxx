@@ -85,10 +85,10 @@
 <para>Define an edge of a given patch. </para>
     </briefdescription>
     <detaileddescription>
-<para>An edge is defined by a patch, a dimension and an extremity. For example, in the patch defined on logical index range <formula id="289">$ [a_x, b_x]\times[a_y, b_y] $</formula>,</para>
+<para>An edge is defined by a patch, a dimension and an extremity. For example, in the patch defined on logical index range <formula id="320">$ [a_x, b_x]\times[a_y, b_y] $</formula>,</para>
 <para><itemizedlist>
-<listitem><para>the edge <ref refid="structGridY" kindref="compound">GridY</ref>, BACK refers to the set <formula id="290">$ [a_x, b_x]\times\{b_y\} $</formula>,</para>
-</listitem><listitem><para>and the edge <ref refid="structGridY" kindref="compound">GridY</ref>, FRONT refers to the set <formula id="291">$ [a_x, b_x]\times\{a_y\} $</formula>.</para>
+<listitem><para>the edge <ref refid="structGridY" kindref="compound">GridY</ref>, BACK refers to the set <formula id="321">$ [a_x, b_x]\times\{b_y\} $</formula>,</para>
+</listitem><listitem><para>and the edge <ref refid="structGridY" kindref="compound">GridY</ref>, FRONT refers to the set <formula id="322">$ [a_x, b_x]\times\{a_y\} $</formula>.</para>
 </listitem></itemizedlist>
 </para>
 <para><parameterlist kind="templateparam"><parameteritem>

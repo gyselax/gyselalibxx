@@ -828,7 +828,7 @@
 <para>The superclass from which all timestepping methods inherit. </para>
     </briefdescription>
     <detaileddescription>
-<para>The class exposes three update functions which are used to carry out one step of the chosen timestepping method to solve an ODE of the form: <formula id="323">$\partial_t y(t) = f(t, y(t)) $</formula>, </para>
+<para>The class exposes three update functions which are used to carry out one step of the chosen timestepping method to solve an ODE of the form: <formula id="354">$\partial_t y(t) = f(t, y(t)) $</formula>, </para>
     </detaileddescription>
     <inheritancegraph>
       <node id="2">

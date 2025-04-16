@@ -23,6 +23,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **class** [**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md) _Equilibrium operator as Maxwellian. This initialises all species._ 
 * **class** [**CartesianToBarycentric**](classCartesianToBarycentric.md) _A class to convert Cartesian coordinates to barycentric coordinates on a triangle._ 
 * **class** [**CartesianToCircular**](classCartesianToCircular.md) _A class for describing the circular 2D mapping._ 
+* **class** [**CartesianToCylindrical**](classCartesianToCylindrical.md) _A class for describing the cylindrical 3D mapping._ 
 * **class** [**CartesianToCzarny**](classCartesianToCzarny.md) _A class for describing the Czarny 2D mapping._ 
 * **class** [**IPartialDerivative**](classIPartialDerivative.md) _An abstract class for a partial derivative operator._     
     * **class** [**CentralFDMPartialDerivative**](classCentralFDMPartialDerivative.md) _A class which implements a partial derivative operator using a finite differences calculation of order two. A decentered scheme is used at the boundary, whereas centred finite difference are used inside the domain._ 
@@ -48,6 +49,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **class** [**RK2**](classRK2.md) _A class which provides an implementation of a second-order Runge-Kutta method._ 
     * **class** [**RK3**](classRK3.md) _A class which provides an implementation of a third-order Runge-Kutta method._ 
     * **class** [**RK4**](classRK4.md) _A class which provides an implementation of a fourth-order Runge-Kutta method._ 
+* **class** [**CylindricalToCartesian**](classCylindricalToCartesian.md) _A class for describing the cylindrical 3D mapping._ 
 * **class** [**CzarnyToCartesian**](classCzarnyToCartesian.md) _A class for describing the Czarny 2D mapping._ 
 * **class** [**DerivField**](classDerivField.md) 
 * **class** [**DerivFieldCommon**](classDerivFieldCommon.md) 

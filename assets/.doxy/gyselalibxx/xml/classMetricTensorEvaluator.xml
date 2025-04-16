@@ -149,7 +149,7 @@
 <para>Compute the metric tensor associated with the mapping at a given position in space. </para>
         </briefdescription>
         <detaileddescription>
-<para>The metric tensor matrix is defined as: <formula id="269">$ G = (J_{\mathcal{F}})^T J_{\mathcal{F}} $</formula>. with <formula id="270">$ J_{\mathcal{F}} $</formula> the Jacobian matrix.</para>
+<para>The metric tensor matrix is defined as: <formula id="300">$ G = (J_{\mathcal{F}})^T J_{\mathcal{F}} $</formula>. with <formula id="301">$ J_{\mathcal{F}} $</formula> the Jacobian matrix.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">coord</parametername>
