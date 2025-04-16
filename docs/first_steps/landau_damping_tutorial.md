@@ -43,7 +43,7 @@ We consider a **periodic spatial domain**:
 
 And a **bounded velocity domain**:
 
-- $v \in [-v_{\max}, v_{\max}] $, with $ v_{\max} = 6$
+- $`v \in [-v_{\max}, v_{\max}]`$, with $`v_{\max} = 6`$
 - Homogeneous Dirichlet (zero) boundary conditions in $v$
 
 These boundary choices are typical for Landau damping simulations:
