@@ -253,7 +253,7 @@
 <listitem><para>2D example: (but it is implemented for ND)</para>
 </listitem></itemizedlist>
 </para>
-<para><formula id="350">$ \int_{\Omega_{\text{cart}}} f(x,y) dxdy
+<para><formula id="356">$ \int_{\Omega_{\text{cart}}} f(x,y) dxdy
  = \int_{\Omega} f(r,\theta) |det(J(r,\theta))| drd\theta
  \simeq \sum_{i,j} [q_{i,j}| det(J(r_i,\theta_j))|] f_{ij}$</formula></para>
 <para>This function uses rvalues. It means that coefficients is a temporary input parameter and it returns a temporary coefficient object. The <ref refid="classQuadrature" kindref="compound">Quadrature</ref> object can only be instantiate with rvalues.</para>
@@ -270,7 +270,7 @@
 <parametername direction="in">mapping</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The mapping function from the logical domain <formula id="15">$ (r,\theta) $</formula> to the physical domain <formula id="351">$ (x, y) $</formula>. </para>
+<para>The mapping function from the logical domain <formula id="15">$ (r,\theta) $</formula> to the physical domain <formula id="357">$ (x, y) $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -278,11 +278,11 @@
 <parametername direction="in">coefficients_alloc</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The quadrature coefficients <formula id="352">$\{q_{ij}\}_{ij} $</formula>.</para>
+<para>The quadrature coefficients <formula id="358">$\{q_{ij}\}_{ij} $</formula>.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>A rvalue FieldMem to the modified coefficients <formula id="353">$\{q_{ij}| det(J(r_i,\theta_j))|\}_{ij} $</formula>. </para>
+<simplesect kind="return"><para>A rvalue FieldMem to the modified coefficients <formula id="359">$\{q_{ij}| det(J(r_i,\theta_j))|\}_{ij} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>

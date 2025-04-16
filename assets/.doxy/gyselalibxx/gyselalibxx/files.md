@@ -187,6 +187,7 @@ Here is a list of all files with brief descriptions:
         * **file** [**inverse\_jacobian\_matrix.hpp**](inverse__jacobian__matrix_8hpp.md)     
         * **file** [**mapping\_tools.hpp**](mapping__tools_8hpp.md)     
         * **file** [**metric\_tensor\_evaluator.hpp**](metric__tensor__evaluator_8hpp.md)     
+        * **file** [**toroidal\_to\_cylindrical.hpp**](toroidal__to__cylindrical_8hpp.md)     
         * **file** [**vector\_mapper.hpp**](vector__mapper_8hpp.md)     
     * **dir** [**math\_tools**](dir_3ced5d1c6eac490d7704c2e023d148d8.md)     
         * **file** [**central\_fdm\_partial\_derivatives.hpp**](central__fdm__partial__derivatives_8hpp.md)     

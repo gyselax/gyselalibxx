@@ -236,7 +236,7 @@
 <para>Compute the infinity norm. </para>
         </briefdescription>
         <detaileddescription>
-<para>For a given vector <formula id="157">$ x $</formula> , compute <formula id="302">$|Vert x |Vert_{\infty} = \sup_n |x_n| $</formula>.</para>
+<para>For a given vector <formula id="157">$ x $</formula> , compute <formula id="308">$|Vert x |Vert_{\infty} = \sup_n |x_n| $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">coord</parametername>
@@ -274,7 +274,7 @@
 <para>Compute the infinity norm of a vector on an orthonormal coordinate system. </para>
         </briefdescription>
         <detaileddescription>
-<para>For a given vector <formula id="157">$ x $</formula> , compute <formula id="302">$|Vert x |Vert_{\infty} = \sup_n |x_n| $</formula>.</para>
+<para>For a given vector <formula id="157">$ x $</formula> , compute <formula id="308">$|Vert x |Vert_{\infty} = \sup_n |x_n| $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">vec</parametername>
@@ -594,7 +594,7 @@
 <para>Compute L1 norm of a function with a given quadrature. </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="303">$ \int_{\Omega} |f(X)|  dX $</formula></para>
+<para><formula id="309">$ \int_{\Omega} |f(X)|  dX $</formula></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">exec_space</parametername>
@@ -731,7 +731,7 @@
 <para>Compute L2 norm of a function with a given quadrature. </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="304">$ \sqrt{\int_{\Omega} |f(X)|^2  dX} $</formula></para>
+<para><formula id="310">$ \sqrt{\int_{\Omega} |f(X)|^2  dX} $</formula></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">exec_space</parametername>

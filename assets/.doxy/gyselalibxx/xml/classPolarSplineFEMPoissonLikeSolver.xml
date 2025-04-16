@@ -934,14 +934,14 @@
         </briefdescription>
         <detaileddescription>
 <para>The equation we are studying:</para>
-<para>(1) <formula id="332">$  L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho $</formula>, in <formula id="7">$ \Omega$</formula>,</para>
-<para><formula id="333">$  \phi = 0 $</formula>, on <formula id="334">$ \partial \Omega$</formula>.</para>
+<para>(1) <formula id="338">$  L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho $</formula>, in <formula id="7">$ \Omega$</formula>,</para>
+<para><formula id="339">$  \phi = 0 $</formula>, on <formula id="340">$ \partial \Omega$</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the <formula id="336">$ \alpha $</formula> function in the definition of the Poisson-like equation. </para>
+<para>The spline representation of the <formula id="342">$ \alpha $</formula> function in the definition of the Poisson-like equation. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -949,7 +949,7 @@
 <parametername direction="in">coeff_beta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the <formula id="312">$ \beta $</formula> function in the definition of the Poisson-like equation. </para>
+<para>The spline representation of the <formula id="318">$ \beta $</formula> function in the definition of the Poisson-like equation. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -965,7 +965,7 @@
 <parametername direction="in">spline_evaluator</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>An evaluator for evaluating 2D splines on <formula id="335">$(r,\theta)$</formula>.</para>
+<para>An evaluator for evaluating 2D splines on <formula id="341">$(r,\theta)$</formula>.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -1032,7 +1032,7 @@
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the <formula id="336">$ \alpha $</formula> function in the definition of the Poisson-like equation. </para>
+<para>The spline representation of the <formula id="342">$ \alpha $</formula> function in the definition of the Poisson-like equation. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1040,7 +1040,7 @@
 <parametername direction="in">coeff_beta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the <formula id="312">$ \beta $</formula> function in the definition of the Poisson-like equation. </para>
+<para>The spline representation of the <formula id="318">$ \beta $</formula> function in the definition of the Poisson-like equation. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1056,7 +1056,7 @@
 <parametername direction="in">spline_evaluator</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>An evaluator for evaluating 2D splines on <formula id="335">$(r,\theta)$</formula>. </para>
+<para>An evaluator for evaluating 2D splines on <formula id="341">$(r,\theta)$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1138,7 +1138,7 @@
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the <formula id="336">$ \alpha $</formula> function in the definition of the Poisson-like equation. </para>
+<para>The spline representation of the <formula id="342">$ \alpha $</formula> function in the definition of the Poisson-like equation. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1146,7 +1146,7 @@
 <parametername direction="in">coeff_beta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the <formula id="312">$ \beta $</formula> function in the definition of the Poisson-like equation. </para>
+<para>The spline representation of the <formula id="318">$ \beta $</formula> function in the definition of the Poisson-like equation. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1162,7 +1162,7 @@
 <parametername direction="in">spline_evaluator</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>An evaluator for evaluating 2D splines on <formula id="335">$(r,\theta)$</formula>. </para>
+<para>An evaluator for evaluating 2D splines on <formula id="341">$(r,\theta)$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1244,7 +1244,7 @@
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the <formula id="336">$ \alpha $</formula> function in the definition of the Poisson-like equation. </para>
+<para>The spline representation of the <formula id="342">$ \alpha $</formula> function in the definition of the Poisson-like equation. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1252,7 +1252,7 @@
 <parametername direction="in">coeff_beta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the <formula id="312">$ \beta $</formula> function in the definition of the Poisson-like equation. </para>
+<para>The spline representation of the <formula id="318">$ \beta $</formula> function in the definition of the Poisson-like equation. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1268,7 +1268,7 @@
 <parametername direction="in">spline_evaluator</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>An evaluator for evaluating 2D splines on <formula id="335">$(r,\theta)$</formula>. </para>
+<para>An evaluator for evaluating 2D splines on <formula id="341">$(r,\theta)$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1331,7 +1331,7 @@
 <parametername direction="in">rhs</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The rhs <formula id="337">$ \rho$</formula> of the Poisson-like equation. The type is templated but we can use the <ref refid="classPoissonLikeRHSFunction" kindref="compound">PoissonLikeRHSFunction</ref> class. </para>
+<para>The rhs <formula id="343">$ \rho$</formula> of the Poisson-like equation. The type is templated but we can use the <ref refid="classPoissonLikeRHSFunction" kindref="compound">PoissonLikeRHSFunction</ref> class. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1378,7 +1378,7 @@
 <parametername direction="in">rhs</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The rhs <formula id="337">$ \rho$</formula> of the Poisson-like equation. The type is templated but we can use the <ref refid="classPoissonLikeRHSFunction" kindref="compound">PoissonLikeRHSFunction</ref> class. </para>
+<para>The rhs <formula id="343">$ \rho$</formula> of the Poisson-like equation. The type is templated but we can use the <ref refid="classPoissonLikeRHSFunction" kindref="compound">PoissonLikeRHSFunction</ref> class. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1456,7 +1456,7 @@
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the <formula id="336">$ \alpha $</formula> function in the definition of the Poisson-like equation. </para>
+<para>The spline representation of the <formula id="342">$ \alpha $</formula> function in the definition of the Poisson-like equation. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1464,7 +1464,7 @@
 <parametername direction="in">coeff_beta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the <formula id="312">$ \beta $</formula> function in the definition of the Poisson-like equation. </para>
+<para>The spline representation of the <formula id="318">$ \beta $</formula> function in the definition of the Poisson-like equation. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1503,7 +1503,7 @@
           <declname>nnz</declname>
         </param>
         <briefdescription>
-<para>Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on <formula id="335">$(r,\theta)$</formula> splines. After this function the array will contain: nnz[0] = 0. nnz[1] = 0. nnz[2] = number of non-zero elements in line 0. nnz[3] = number of non-zero elements in lines 0-1. ... nnz[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1). </para>
+<para>Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on <formula id="341">$(r,\theta)$</formula> splines. After this function the array will contain: nnz[0] = 0. nnz[1] = 0. nnz[2] = number of non-zero elements in line 0. nnz[3] = number of non-zero elements in lines 0-1. ... nnz[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1). </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -1558,7 +1558,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The quadrature range corresponding to the <formula id="335">$(r,\theta)$</formula> indices. </para>
+<simplesect kind="return"><para>The quadrature range corresponding to the <formula id="341">$(r,\theta)$</formula> indices. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -1654,7 +1654,7 @@
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the <formula id="336">$ \alpha $</formula> function in the definition of the Poisson-like equation. </para>
+<para>The spline representation of the <formula id="342">$ \alpha $</formula> function in the definition of the Poisson-like equation. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1662,7 +1662,7 @@
 <parametername direction="in">coeff_beta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the <formula id="312">$ \beta $</formula> function in the definition of the Poisson-like equation. </para>
+<para>The spline representation of the <formula id="318">$ \beta $</formula> function in the definition of the Poisson-like equation. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1678,7 +1678,7 @@
 <parametername direction="in">evaluator</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>An evaluator for evaluating 2D splines on <formula id="335">$(r,\theta)$</formula>. </para>
+<para>An evaluator for evaluating 2D splines on <formula id="341">$(r,\theta)$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1937,7 +1937,7 @@
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the <formula id="336">$ \alpha $</formula> function in the definition of the Poisson-like equation. </para>
+<para>The spline representation of the <formula id="342">$ \alpha $</formula> function in the definition of the Poisson-like equation. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1945,7 +1945,7 @@
 <parametername direction="in">coeff_beta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the <formula id="312">$ \beta $</formula> function in the definition of the Poisson-like equation. </para>
+<para>The spline representation of the <formula id="318">$ \beta $</formula> function in the definition of the Poisson-like equation. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1953,7 +1953,7 @@
 <parametername direction="in">spline_evaluator</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>An evaluator for evaluating 2D splines on <formula id="335">$(r,\theta)$</formula>. </para>
+<para>An evaluator for evaluating 2D splines on <formula id="341">$(r,\theta)$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -2018,8 +2018,8 @@
     </briefdescription>
     <detaileddescription>
 <para>Solve the following Partial Differential Equation</para>
-<para>(1) <formula id="332">$  L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho $</formula>, in <formula id="7">$ \Omega$</formula>,</para>
-<para><formula id="333">$  \phi = 0 $</formula>, on <formula id="334">$ \partial \Omega$</formula>,</para>
+<para>(1) <formula id="338">$  L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho $</formula>, in <formula id="7">$ \Omega$</formula>,</para>
+<para><formula id="339">$  \phi = 0 $</formula>, on <formula id="340">$ \partial \Omega$</formula>,</para>
 <para>As finite element basis functions we will use polar b-splines which are divided into two types: 1) Basis splines that can be written as a tensor product of 1d basis splines (&quot;non-singular B-splines&quot;) 2) Basis splines that cover the centre point and are defined as a linear combination of basis splines of type 1 (&quot;singular B-splines&quot;)</para>
 <para>(see in Emily Bourne&apos;s thesis &quot;Non-Uniform Numerical Schemes for the Modelling of Turbulence
  in the 5D GYSELA Code&quot;. December 2022.)</para>
@@ -2044,7 +2044,7 @@
 <parametername><ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref></parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The type of the 2D polar B-splines (on the coordinate system <formula id="335">$(r,\theta)$</formula> including B-splines which traverse the O point). </para>
+<para>The type of the 2D polar B-splines (on the coordinate system <formula id="341">$(r,\theta)$</formula> including B-splines which traverse the O point). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

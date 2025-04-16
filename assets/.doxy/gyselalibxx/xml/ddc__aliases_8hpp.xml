@@ -1731,7 +1731,7 @@
         <argsstring></argsstring>
         <name>Field</name>
         <briefdescription>
-<para>An alias describing the type of a field defined on a grid (e.g. the electric field defined on the grid <formula id="367">${x_0, x_1, .., x_N}$</formula>) </para>
+<para>An alias describing the type of a field defined on a grid (e.g. the electric field defined on the grid <formula id="373">${x_0, x_1, .., x_N}$</formula>) </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -1758,7 +1758,7 @@
         <argsstring></argsstring>
         <name>DField</name>
         <briefdescription>
-<para>An alias describing the type of a field of doubles defined on a grid (e.g. the electric field defined on the grid <formula id="367">${x_0, x_1, .., x_N}$</formula>) </para>
+<para>An alias describing the type of a field of doubles defined on a grid (e.g. the electric field defined on the grid <formula id="373">${x_0, x_1, .., x_N}$</formula>) </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -1788,7 +1788,7 @@
         <argsstring></argsstring>
         <name>ConstField</name>
         <briefdescription>
-<para>An alias describing the type of a constant field defined on a grid (e.g. the electric field defined on the grid <formula id="367">${x_0, x_1, .., x_N}$</formula>) </para>
+<para>An alias describing the type of a constant field defined on a grid (e.g. the electric field defined on the grid <formula id="373">${x_0, x_1, .., x_N}$</formula>) </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -1815,7 +1815,7 @@
         <argsstring></argsstring>
         <name>DConstField</name>
         <briefdescription>
-<para>An alias describing the type of a constant field of doubles defined on a grid (e.g. the electric field defined on the grid <formula id="367">${x_0, x_1, .., x_N}$</formula>) </para>
+<para>An alias describing the type of a constant field of doubles defined on a grid (e.g. the electric field defined on the grid <formula id="373">${x_0, x_1, .., x_N}$</formula>) </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>

@@ -245,7 +245,7 @@
 <para>Solve the matrix equation in place. </para>
         </briefdescription>
         <detaileddescription>
-<para>Solve the following matrix equation: <formula id="305">$ M x = b $</formula> The result <formula id="157">$ x $</formula> is saved into the memory allocated for <formula id="306">$ b $</formula>.</para>
+<para>Solve the following matrix equation: <formula id="311">$ M x = b $</formula> The result <formula id="157">$ x $</formula> is saved into the memory allocated for <formula id="312">$ b $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">b</parametername>
@@ -278,7 +278,7 @@
 <para>Solve the transposed matrix equation in place. </para>
         </briefdescription>
         <detaileddescription>
-<para>Solve the following matrix equation: <formula id="307">$ M^T x = b $</formula> The result <formula id="157">$ x $</formula> is saved into the memory allocated for <formula id="306">$ b $</formula>.</para>
+<para>Solve the following matrix equation: <formula id="313">$ M^T x = b $</formula> The result <formula id="157">$ x $</formula> is saved into the memory allocated for <formula id="312">$ b $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">b</parametername>
@@ -311,7 +311,7 @@
 <para>Solve multiple matrix equations in place. </para>
         </briefdescription>
         <detaileddescription>
-<para>Solve the following matrix equation: <formula id="305">$ M x = b $</formula> for multiple values of <formula id="306">$ b $</formula> and <formula id="157">$ x $</formula>. The first dimension is iterated over with each slice representing an equation to be solved. The result <formula id="157">$ x $</formula> is saved into the memory allocated for <formula id="306">$ b $</formula>.</para>
+<para>Solve the following matrix equation: <formula id="311">$ M x = b $</formula> for multiple values of <formula id="312">$ b $</formula> and <formula id="157">$ x $</formula>. The first dimension is iterated over with each slice representing an equation to be solved. The result <formula id="157">$ x $</formula> is saved into the memory allocated for <formula id="312">$ b $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">bx</parametername>
@@ -389,7 +389,7 @@
 <para>I.e. for <verbatim> bx = A
       B
       C
-</verbatim> with <formula id="309">$ B $</formula> a vector of length nb, return <verbatim> bx = B
+</verbatim> with <formula id="315">$ B $</formula> a vector of length nb, return <verbatim> bx = B
       A
       C
 </verbatim> <parameterlist kind="param"><parameteritem>
@@ -426,7 +426,7 @@
 <para>I.e. for <verbatim> bx = B
       A
       C
-</verbatim> with <formula id="309">$ B $</formula> a vector of length nb, return <verbatim> bx = A
+</verbatim> with <formula id="315">$ B $</formula> a vector of length nb, return <verbatim> bx = A
       B
       C
 </verbatim> <parameterlist kind="param"><parameteritem>
@@ -463,7 +463,7 @@
 <para>I.e. for <verbatim> bx = A
       B
       C
-</verbatim> with <formula id="309">$ B $</formula> a vector of length nb, return <verbatim> bx = B
+</verbatim> with <formula id="315">$ B $</formula> a vector of length nb, return <verbatim> bx = B
       A
       C
 </verbatim> <parameterlist kind="param"><parameteritem>
@@ -500,7 +500,7 @@
 <para>I.e. for <verbatim> bx = B
       A
       C
-</verbatim> with <formula id="309">$ B $</formula> a vector of length nb, return <verbatim> bx = A
+</verbatim> with <formula id="315">$ B $</formula> a vector of length nb, return <verbatim> bx = A
       B
       C
 </verbatim> <parameterlist kind="param"><parameteritem>
@@ -534,7 +534,7 @@ B A C
 H G I
 </verbatim> This new matrix is a corner matrix of the form: <verbatim> |    Q   | gamma |
  | lambda | delta |
-</verbatim> with <formula id="308">$ Q = E $</formula> and <verbatim>gamma = D F
+</verbatim> with <formula id="314">$ Q = E $</formula> and <verbatim>gamma = D F
 
 lambda = B
          H

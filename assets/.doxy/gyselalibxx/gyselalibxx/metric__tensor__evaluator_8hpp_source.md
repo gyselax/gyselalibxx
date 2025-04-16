@@ -25,6 +25,12 @@ class MetricTensorEvaluator
 {
     static_assert(is_mapping_v<Mapping>);
     static_assert(has_jacobian_v<Mapping, PositionCoordinate>);
+    static_assert(
+            (is_covariant_vector_index_set_v<ddc::to_type_seq_t<typename Mapping::CoordResult>>)&&(
+                    is_contravariant_vector_index_set_v<
+                            ddc::to_type_seq_t<typename Mapping::CoordResult>>),
+            "The metric tensor can only be calculated from the Jacobian for coordinate "
+            "transformations which map to the Cartesian space.");
 
     using Dims = ddc::to_type_seq_t<typename Mapping::CoordArg>;
     using Dims_cov = vector_index_set_dual_t<Dims>;

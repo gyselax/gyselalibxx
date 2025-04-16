@@ -457,6 +457,7 @@
 ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * [**ThetaCellDim**](structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim.md)
 ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
+* [**ToroidalToCylindrical**](classToroidalToCylindrical.md)
 * [**ToTuple**](structconnectivity__details_1_1ToTuple.md)
 ([**connectivity\_details**](namespaceconnectivity__details.md))
 * [**ToTuple&lt; ddc::detail::TypeSeq&lt; I... &gt; &gt;**](structconnectivity__details_1_1ToTuple_3_01ddc_1_1detail_1_1TypeSeq_3_01I_8_8_8_01_4_01_4.md)

@@ -915,7 +915,7 @@
         <argsstring></argsstring>
         <name>ConstDeriv12_OnPatch_2D</name>
         <briefdescription>
-<para>Type for <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>: A constant field of the derivatives <formula id="328">$ \partial_1^(n)\partial_2^(m) f(x) $</formula> defined on the index ranges of valid n and m. </para>
+<para>Type for <ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>: A constant field of the derivatives <formula id="334">$ \partial_1^(n)\partial_2^(m) f(x) $</formula> defined on the index ranges of valid n and m. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>

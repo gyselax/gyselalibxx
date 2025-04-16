@@ -18,6 +18,7 @@
     <innerfile refid="inverse__jacobian__matrix_8hpp">inverse_jacobian_matrix.hpp</innerfile>
     <innerfile refid="mapping__tools_8hpp">mapping_tools.hpp</innerfile>
     <innerfile refid="metric__tensor__evaluator_8hpp">metric_tensor_evaluator.hpp</innerfile>
+    <innerfile refid="toroidal__to__cylindrical_8hpp">toroidal_to_cylindrical.hpp</innerfile>
     <innerfile refid="vector__mapper_8hpp">vector_mapper.hpp</innerfile>
     <briefdescription>
     </briefdescription>

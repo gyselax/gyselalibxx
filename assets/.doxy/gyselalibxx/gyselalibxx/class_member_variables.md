@@ -264,6 +264,7 @@
 * **m\_pseudo\_physical\_to\_physical** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **m\_rhs** ([**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md))
 * **m\_data** ([**Tensor**](classTensor.md))
+* **m\_mapping\_2d** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **m\_coord\_changer** ([**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md))
 * **m\_grid** ([**VortexMergerEquilibria**](classVortexMergerEquilibria.md))
 * **m\_tensor** ([**tensor\_tools::IndexedTensor**](classtensor__tools_1_1IndexedTensor.md))

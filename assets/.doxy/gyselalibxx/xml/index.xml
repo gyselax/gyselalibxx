@@ -2688,6 +2688,36 @@
   </compound>
   <compound refid="structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim" kind="struct"><name>PolarSplineFEMPoissonLikeSolver::ThetaCellDim</name>
   </compound>
+  <compound refid="classToroidalToCylindrical" kind="class"><name>ToroidalToCylindrical</name>
+    <member refid="classToroidalToCylindrical_1a2ba3550e813d634fe3906772d7ae4123" kind="typedef"><name>cylindrical_tag_R</name></member>
+    <member refid="classToroidalToCylindrical_1aa349487d3ca8a2d9b27bbd514d4a7ef1" kind="typedef"><name>cylindrical_tag_Z</name></member>
+    <member refid="classToroidalToCylindrical_1a6d68f9f6d0c199982bc689102d60aedb" kind="typedef"><name>cylindrical_tag_Zeta</name></member>
+    <member refid="classToroidalToCylindrical_1a9b335bee1c6524190b5618445423f947" kind="typedef"><name>toroidal_tag_rho</name></member>
+    <member refid="classToroidalToCylindrical_1a9ff2dd518c6e78208661c7e7efa2e6f7" kind="typedef"><name>toroidal_tag_theta</name></member>
+    <member refid="classToroidalToCylindrical_1aa3b5d507e4d1fd654579609d361fd0b1" kind="typedef"><name>toroidal_tag_phi</name></member>
+    <member refid="classToroidalToCylindrical_1a447e9e5af69a413ae8b49f1e1d5f0121" kind="typedef"><name>CoordArg</name></member>
+    <member refid="classToroidalToCylindrical_1aaa80750ea092a63a11fab80d5e0054fa" kind="typedef"><name>CoordResult</name></member>
+    <member refid="classToroidalToCylindrical_1a749485e7afd76637d92fae197443cdf4" kind="typedef"><name>R</name></member>
+    <member refid="classToroidalToCylindrical_1a5aee53516c1125323be46ba11c9b028b" kind="typedef"><name>R_cov</name></member>
+    <member refid="classToroidalToCylindrical_1a0541d74eb00f079baaa4831f31dfcee7" kind="typedef"><name>Z</name></member>
+    <member refid="classToroidalToCylindrical_1a41b99eb3d84106da6a25dd4c5177b3c8" kind="typedef"><name>Z_cov</name></member>
+    <member refid="classToroidalToCylindrical_1a1a1f09b42df640f983b769c84c3c3bf9" kind="typedef"><name>Zeta_cov</name></member>
+    <member refid="classToroidalToCylindrical_1af4ee537db3687038ea1f3739f83ff55d" kind="typedef"><name>Rho</name></member>
+    <member refid="classToroidalToCylindrical_1ac8c8888e02aaa8a4720a5a584052f047" kind="typedef"><name>Rho_cov</name></member>
+    <member refid="classToroidalToCylindrical_1aca1530a99965a521773816579ac9f1fb" kind="typedef"><name>Theta</name></member>
+    <member refid="classToroidalToCylindrical_1ab08e9d4d0348f8e793f721d5804301b8" kind="typedef"><name>Theta_cov</name></member>
+    <member refid="classToroidalToCylindrical_1ada4ba2354b0ccaabbd90f9767055c1ec" kind="typedef"><name>Phi_cov</name></member>
+    <member refid="classToroidalToCylindrical_1ae7e27026cc649d0abd5ebd8f7ea4a9c6" kind="typedef"><name>CoordArg2D</name></member>
+    <member refid="classToroidalToCylindrical_1a7c658672c0f3cbe1d814db5415f165a8" kind="variable"><name>m_mapping_2d</name></member>
+    <member refid="classToroidalToCylindrical_1a7e23755b2802d0cc40a4aa5ff986132b" kind="function"><name>ToroidalToCylindrical</name></member>
+    <member refid="classToroidalToCylindrical_1a7e837689121979e49c6bee7f816072b1" kind="function"><name>operator()</name></member>
+    <member refid="classToroidalToCylindrical_1a1f210df30c7fec0889f55b07a0227cba" kind="function"><name>jacobian</name></member>
+    <member refid="classToroidalToCylindrical_1a705d91d857d3586ada5086670cb812fb" kind="function"><name>jacobian_matrix</name></member>
+    <member refid="classToroidalToCylindrical_1a69d3910660fac6d49270c25b10d59f4b" kind="function"><name>jacobian_component</name></member>
+    <member refid="classToroidalToCylindrical_1aef3f106f64f51d2b6706c8eb34e5c054" kind="function"><name>inv_jacobian_matrix</name></member>
+    <member refid="classToroidalToCylindrical_1a1e3dcf7af3561dbeb9262c578c9e8e40" kind="function"><name>inv_jacobian_component</name></member>
+    <member refid="classToroidalToCylindrical_1adaa7338c681257be7aac6f83998e30fe" kind="function"><name>get_2d_polar_mapping</name></member>
+  </compound>
   <compound refid="structconnectivity__details_1_1ToTuple" kind="struct"><name>connectivity_details::ToTuple</name>
   </compound>
   <compound refid="structconnectivity__details_1_1ToTuple_3_01ddc_1_1detail_1_1TypeSeq_3_01I_8_8_8_01_4_01_4" kind="struct"><name>connectivity_details::ToTuple&lt; ddc::detail::TypeSeq&lt; I... &gt; &gt;</name>
@@ -2843,13 +2873,13 @@
     <member refid="structY__pC_1a6274201b751e93509509253746e598c1" kind="variable"><name>IS_COVARIANT</name></member>
     <member refid="structY__pC_1a840b5d333654df4c5be30422ce8eeb28" kind="variable"><name>IS_CONTRAVARIANT</name></member>
   </compound>
-  <compound refid="namespace_0d205" kind="namespace"><name>@205</name>
+  <compound refid="namespace_0d206" kind="namespace"><name>@206</name>
   </compound>
-  <compound refid="namespace_0d207" kind="namespace"><name>@207</name>
+  <compound refid="namespace_0d208" kind="namespace"><name>@208</name>
   </compound>
-  <compound refid="namespace_0d209" kind="namespace"><name>@209</name>
+  <compound refid="namespace_0d210" kind="namespace"><name>@210</name>
   </compound>
-  <compound refid="namespace_0d211" kind="namespace"><name>@211</name>
+  <compound refid="namespace_0d212" kind="namespace"><name>@212</name>
   </compound>
   <compound refid="namespace_0d73" kind="namespace"><name>@73</name>
   </compound>
@@ -3714,6 +3744,8 @@
     <member refid="mapping__tools_8hpp_1a40c83f9e43b408ef10e0c553b6c97ddf" kind="variable"><name>has_singular_o_point_inv_jacobian_v</name></member>
   </compound>
   <compound refid="metric__tensor__evaluator_8hpp" kind="file"><name>metric_tensor_evaluator.hpp</name>
+  </compound>
+  <compound refid="toroidal__to__cylindrical_8hpp" kind="file"><name>toroidal_to_cylindrical.hpp</name>
   </compound>
   <compound refid="vector__mapper_8hpp" kind="file"><name>vector_mapper.hpp</name>
     <member refid="vector__mapper_8hpp_1a7fbe2683c9aa0bf1709fbf044781546f" kind="function"><name>create_geometry_mirror_view</name></member>

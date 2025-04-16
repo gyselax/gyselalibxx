@@ -438,8 +438,8 @@
     </briefdescription>
     <detaileddescription>
 <para>A class which provides an implementation of an explicit <ref refid="classEuler" kindref="compound">Euler</ref> method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. The values which evolve are defined on an index range.</para>
-<para>For the following ODE : <formula id="354">$\partial_t y(t) = f(t, y(t)) $</formula>,</para>
-<para>the explicit <ref refid="classEuler" kindref="compound">Euler</ref> method is given by : <formula id="358">$ y^{n+1} =  y^{n} + dt f(t^{n}, y^{n})$</formula>.</para>
+<para>For the following ODE : <formula id="360">$\partial_t y(t) = f(t, y(t)) $</formula>,</para>
+<para>the explicit <ref refid="classEuler" kindref="compound">Euler</ref> method is given by : <formula id="364">$ y^{n+1} =  y^{n} + dt f(t^{n}, y^{n})$</formula>.</para>
 <para>The method is order 1. </para>
     </detaileddescription>
     <inheritancegraph>

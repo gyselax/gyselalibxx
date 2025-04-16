@@ -11,7 +11,7 @@
         <name>value</name>
         <qualifiedname>PolarSplineFEMPoissonLikeSolver::EvalDeriv2DType::value</qualifiedname>
         <briefdescription>
-<para>The value of the function <formula id="340">$f(r, \theta)$</formula>. </para>
+<para>The value of the function <formula id="346">$f(r, \theta)$</formula>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -26,7 +26,7 @@
         <name>derivative</name>
         <qualifiedname>PolarSplineFEMPoissonLikeSolver::EvalDeriv2DType::derivative</qualifiedname>
         <briefdescription>
-<para>The gradient of the function <formula id="341">$\nabla f(r, \theta)$</formula>. </para>
+<para>The gradient of the function <formula id="347">$\nabla f(r, \theta)$</formula>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>

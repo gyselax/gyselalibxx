@@ -702,6 +702,23 @@ J (R, Z, \zeta) =
 \end{aligned}
 \right.
 \]</div>
+<h3 id="toroidal-to-cylindrical-transformation">Toroidal to Cylindrical transformation</h3>
+<p>The toroidal to cylindrical transformation combines a 2D transformation in the polar plane of the torus with an orthogonal transformation in the remaining dimension.</p>
+<div class="arithmatex">\[
+\begin{aligned}
+(\rho, \theta) = f(R, Z) \\
+\phi = - \zeta
+\end{aligned}
+\]</div>
+<p>where <span class="arithmatex">\(f\)</span> is a 2D curvilinear to cartesian transformation.</p>
+<div class="arithmatex">\[
+J (R, Z, \zeta) =
+\begin{bmatrix}
+ J_f\.^{\rho}_{\;R} &amp; J_f\.^{\rho}_{\;Z} &amp; 0 \\
+ J_f\.^{\theta}_{\;R} &amp; 0 &amp; J_f\.^{\theta}_{\;Z} &amp; 0
+  0          &amp; 0 &amp;       -1 \\
+\end{bmatrix}.
+\]</div>
 <h2 id="combined-coordinate-transformation-which-combines-two-of-the-coordinate-transformations-above">Combined coordinate transformation which combines two of the coordinate transformations above</h2>
 <p>The tools are:</p>
 <ul>
