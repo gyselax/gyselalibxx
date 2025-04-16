@@ -257,7 +257,7 @@ The function `ddc::init_discrete_space` calls the [constructor of `ddc::UniformB
 
 ### Generating the Grid from the Spline Space
 
-The grid is constructed from the Greville abcissae of the b-splines using DDC as follows:
+The grid is constructed from the Greville abscissae of the b-splines using DDC as follows:
 
 ```cpp
 auto constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
@@ -314,7 +314,7 @@ IdxRange<Vx> const idx_range_vx = init_spline_dependent_idx_range<
 
 ### Defining the Grid of Species
 
-The distribution function depends not only on the spatial and veloctiy dimensions, but also on the species.
+The distribution function depends not only on the spatial and velocity dimensions, but also on the species.
 We therefore also need to initialise the global grid of species. Gyselalib++ provides three functions for initialising the species from a paraconf configuration depending on the kind of species used (fluid, kinetic, adiabatic). For this simulation we will use kinetic and adiabatic species:
 
 ```cpp
@@ -599,7 +599,7 @@ The simulation outputs are saved in **HDF5 format**.
 
 In this tutorial, we have constructed a full 1D-1V Landau damping simulation using Gyselalib++. Starting from the Vlasov–Poisson system, we made explicit numerical choices for spline representation, operator splitting, and semi-Lagrangian advection. Each step that must be described to reproduce the simulation was written explicitly in the body of the simulation as part of a code structure.
 
-The logic required to build this simulation should be analagous to the logic needed to build more complex 1D-1V simulations or simulations in higher dimensions.
+The logic required to build this simulation should be analogous to the logic needed to build more complex 1D-1V simulations or simulations in higher dimensions.
 
 We hope this tutorial helps you get started with Gyselalib++ — good luck with your simulations!
 
