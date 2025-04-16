@@ -7,7 +7,8 @@
  * polar plane @f$(\rho, \theta) \f$ and a perpendicular dimension @f$ \phi @f$. The
  * cylindrical coordinates are @f$ (R, Z, \zeta) @f$. @f$ (R, Z) @f$ describe a Cartesian
  * slice. @f$(\rho, \theta) \f$ are therefore defined from this slice with a 2D
- * coordinate change operator.
+ * coordinate change operator. $\zeta$ is chosen to be equal to $-\zeta$ to preserve
+ * the orientation of the axes (following the right-hand rule).
  *
  * @tparam Curvilinear2DToCartesian An operator describing the coordinate change from
  *      @f$(\rho, \theta) \f$ to @f$ (R, Z) @f$.
