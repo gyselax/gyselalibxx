@@ -496,7 +496,7 @@ The initial condition is given by:
 ```math
 \begin{aligned}
 f(x, v, 0) = f_M(v) \left(1 + \alpha \cos(k x)\right) \\
-\f_M(s, v) = \frac{n}{\sqrt{2\pi T}} \exp(-\frac{(v-u)^2}{2 T})
+f_M(s, v) = \frac{n}{\sqrt{2\pi T}} \exp(-\frac{(v-u)^2}{2 T})
 \end{aligned}
 ```
 
