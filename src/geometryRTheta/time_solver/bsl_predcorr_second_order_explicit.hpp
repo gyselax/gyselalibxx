@@ -90,7 +90,8 @@ private:
             LogicalToPhysicalMapping,
             PreallocatableSplineInterpolator2D<
                     SplineRThetaBuilder,
-                    SplineRThetaEvaluatorNullBound>>;
+                    SplineRThetaEvaluatorNullBound,
+                    IdxRangeRTheta>>;
 
 
     LogicalToPhysicalMapping const& m_logical_to_physical;

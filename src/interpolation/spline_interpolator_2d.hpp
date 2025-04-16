@@ -43,10 +43,13 @@ public:
      * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
      */
-    SplineInterpolator2D(Spline2DBuilder const& builder, Spline2DEvaluator const& evaluator)
+    SplineInterpolator2D(
+            Spline2DBuilder const& builder,
+            Spline2DEvaluator const& evaluator,
+            IdxRangeBatched idx_range_batched)
         : m_builder(builder)
         , m_evaluator(evaluator)
-        , m_coefs(get_spline_idx_range(builder))
+        , m_coefs(builder.batched_spline_domain(idx_range_batched))
     {
     }
 
@@ -92,6 +95,8 @@ private:
 
     Spline2DEvaluator const& m_evaluator;
 
+    IdxRangeBatched m_idx_range_batched;
+
 public:
     /**
      * @brief Create an object capable of creating SplineInterpolator2D objects.
@@ -100,9 +105,11 @@ public:
      */
     PreallocatableSplineInterpolator2D(
             Spline2DBuilder const& builder,
-            Spline2DEvaluator const& evaluator)
+            Spline2DEvaluator const& evaluator,
+            IdxRangeBatched idx_range_batched)
         : m_builder(builder)
         , m_evaluator(evaluator)
+        , m_idx_range_batched(idx_range_batched)
     {
     }
 
@@ -115,7 +122,9 @@ public:
             IInterpolator2D<typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched>>
     preallocate() const override
     {
-        return std::make_unique<
-                SplineInterpolator2D<Spline2DBuilder, Spline2DEvaluator>>(m_builder, m_evaluator);
+        return std::make_unique<SplineInterpolator2D<
+                Spline2DBuilder,
+                Spline2DEvaluator,
+                IdxRangeBatched>>(m_builder, m_evaluator, m_idx_range_batched);
     }
 };

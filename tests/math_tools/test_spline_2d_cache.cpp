@@ -74,10 +74,17 @@ class DummySplineBuilder2D
 public:
     using continuous_dimension_type1 = X;
     using continuous_dimension_type2 = Y;
-    using batched_interpolation_domain_type = IdxRange<GridX, GridY>;
-    using batched_spline_domain_type = IdxRange<BSplinesX, BSplinesY>;
-    using DFieldSplineCoeff = DField<batched_spline_domain_type>;
-    using DConstFieldCoeff = DConstField<batched_interpolation_domain_type>;
+
+    using IdxRangeBSXY = IdxRange<BSplinesX, BSplinesY>;
+    using IdxRangeXY = IdxRange<GridX, GridY>;
+
+    template <class IdxRangeIgnored>
+    using batched_interpolation_domain_type = IdxRangeXY;
+    template <class IdxRangeIgnored>
+    using batched_spline_domain_type = IdxRangeBSXY;
+
+    using DFieldSplineCoeff = DField<IdxRangeBSXY>;
+    using DConstFieldCoeff = DConstField<IdxRangeXY>;
 
     IdxRangeBSXY m_spline_domain;
     int mutable m_builder_call_counter;
@@ -101,7 +108,8 @@ public:
      *
      * @return The domain for the spline coefficients.
      */
-    batched_spline_domain_type batched_spline_domain() const noexcept
+    template<class IdxRangeIgnored>
+    IdxRangeBSXY batched_spline_domain(IdxRangeIgnored) const noexcept
     {
         return m_spline_domain;
     }
@@ -143,7 +151,8 @@ TEST(SplineBuilder2DCache, CountBuilderCalls)
             ddc::discrete_space<BSplinesY>().full_domain());
 
     DummySplineBuilder2D dummy_builder(idxrange_bs_xy);
-    SplineBuilder2DCache<DummySplineBuilder2D> builder_cache(dummy_builder);
+    SplineBuilder2DCache<DummySplineBuilder2D, IdxRangeXY>
+            builder_cache(dummy_builder, idxrange_xy);
 
     DFieldMem<IdxRangeXY> field_xy_alloc(idxrange_xy);
     DField<IdxRangeXY> field_xy = get_field(field_xy_alloc);

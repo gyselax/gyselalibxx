@@ -55,8 +55,22 @@ using SplineX2Builder = ddc::SplineBuilder<
         ddc::SplineSolver::LAPACK>;
 
 
+using MultipatchSplineBuilderX_1d = MultipatchSplineBuilder<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplines1OnPatch,
+        Grid1OnPatch,
+        SplineXBoundary,
+        SplineXBoundary,
+        SplineXBoundary,
+        Connectivity,
+        ddc::SplineSolver::LAPACK,
+        DConstField1OnPatch,
+        Patch1,
+        Patch2>;
 
-using MultipatchSplineBuilderX = MultipatchSplineBuilder<
+
+using MultipatchSplineBuilderX_2d = MultipatchSplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplines1OnPatch,
@@ -221,7 +235,7 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
     SplineX2Builder builder_x2(idx_range_x2);
 
     // Collection of builders for each patch
-    MultipatchSplineBuilderX builder(builder_x1, builder_x2);
+    MultipatchSplineBuilderX_1d builder(builder_x1, builder_x2);
 
 
     // Function tests
@@ -293,7 +307,7 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
     SplineX2Builder builder_x2(idx_range_xy2);
 
     // Collection of builders for each patch
-    MultipatchSplineBuilderX builder(builder_x1, builder_x2);
+    MultipatchSplineBuilderX_2d builder(builder_x1, builder_x2);
 
 
     // Function tests
@@ -316,21 +330,21 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
     // Spline representations
     // --- patch 1
     DFieldMem<IdxRange<BSplinesX<1>, GridY<1>>> function_1_coef_alloc(
-            builder_x1.batched_spline_domain());
+            builder_x1.batched_spline_domain(idx_range_xy1));
     DField<IdxRange<BSplinesX<1>, GridY<1>>> function_1_coef = get_field(function_1_coef_alloc);
 
     DFieldMem<IdxRange<BSplinesX<1>, GridY<1>>> function_1_coef_expected_alloc(
-            builder_x1.batched_spline_domain());
+            builder_x1.batched_spline_domain(idx_range_xy1));
     DField<IdxRange<BSplinesX<1>, GridY<1>>> function_1_coef_expected
             = get_field(function_1_coef_expected_alloc);
 
     // --- patch 2
     DFieldMem<IdxRange<BSplinesX<2>, GridY<2>>> function_2_coef_alloc(
-            builder_x2.batched_spline_domain());
+            builder_x2.batched_spline_domain(idx_range_xy2));
     DField<IdxRange<BSplinesX<2>, GridY<2>>> function_2_coef = get_field(function_2_coef_alloc);
 
     DFieldMem<IdxRange<BSplinesX<2>, GridY<2>>> function_2_coef_expected_alloc(
-            builder_x2.batched_spline_domain());
+            builder_x2.batched_spline_domain(idx_range_xy2));
     DField<IdxRange<BSplinesX<2>, GridY<2>>> function_2_coef_expected
             = get_field(function_2_coef_expected_alloc);
 

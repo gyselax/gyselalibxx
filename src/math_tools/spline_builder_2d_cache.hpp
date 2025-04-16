@@ -35,9 +35,9 @@ public:
     *
     * @param spline_builder A 2D spline builder.
     */
-    explicit SplineBuilder2DCache(SplineBuilder2D const& spline_builder)
+    explicit SplineBuilder2DCache(SplineBuilder2D const& spline_builder, IdxRangeBatched idx_range_batched)
         : m_spline_builder(spline_builder)
-        , m_spline_coeffs(spline_builder.batched_spline_domain())
+        , m_spline_coeffs(spline_builder.batched_spline_domain(idx_range_batched))
         , m_compute_coeffs_dim1(true)
         , m_compute_coeffs_dim2(true)
     {

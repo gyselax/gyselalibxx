@@ -30,7 +30,6 @@ template <
         class... Grid1D>
 class SplineInterpolator : public IInterpolator<GridInterp, Grid1D...>
 {
-    static_assert(false, "To fix");
     using BuilderType = ddc::SplineBuilder<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
@@ -47,6 +46,8 @@ class SplineInterpolator : public IInterpolator<GridInterp, Grid1D...>
             LeftExtrapolationRule,
             RightExtrapolationRule>;
     using deriv_type = typename IInterpolator<GridInterp, Grid1D...>::deriv_type;
+    using batched_spline_domain_type =
+            typename BuilderType::batched_spline_domain_type<IdxRange<Grid1D...>>;
     using batched_derivs_idx_range_type =
             typename IInterpolator<GridInterp, Grid1D...>::batched_derivs_idx_range_type;
     using batched_deriv_field_type = ConstField<double, batched_derivs_idx_range_type>;
@@ -56,7 +57,7 @@ private:
 
     EvaluatorType const& m_evaluator;
 
-    mutable DFieldMem<typename BuilderType::batched_spline_domain_type> m_coefs;
+    mutable DFieldMem<batched_spline_domain_type> m_coefs;
 
 
 public:
@@ -65,10 +66,13 @@ public:
      * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
      */
-    SplineInterpolator(BuilderType const& builder, EvaluatorType const& evaluator)
+    SplineInterpolator(
+            BuilderType const& builder,
+            EvaluatorType const& evaluator,
+            IdxRange<Grid1D...> idx_range_batched)
         : m_builder(builder)
         , m_evaluator(evaluator)
-        , m_coefs(builder.batched_spline_domain())
+        , m_coefs(builder.batched_spline_domain(idx_range_batched))
     {
     }
 
@@ -160,15 +164,21 @@ class PreallocatableSplineInterpolator : public IPreallocatableInterpolator<Grid
 
     EvaluatorType const& m_evaluator;
 
+    IdxRange<Grid1D...> m_idx_range_batched;
+
 public:
     /**
      * @brief Create an object capable of creating SplineInterpolator objects.
      * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
      */
-    PreallocatableSplineInterpolator(BuilderType const& builder, EvaluatorType const& evaluator)
+    PreallocatableSplineInterpolator(
+            BuilderType const& builder,
+            EvaluatorType const& evaluator,
+            IdxRange<Grid1D...> idx_range_batched)
         : m_builder(builder)
         , m_evaluator(evaluator)
+        , m_idx_range_batched(idx_range_batched)
     {
     }
 
@@ -189,6 +199,6 @@ public:
                 LeftExtrapolationRule,
                 RightExtrapolationRule,
                 Solver,
-                Grid1D...>>(m_builder, m_evaluator);
+                Grid1D...>>(m_builder, m_evaluator, m_idx_range_batched);
     }
 };

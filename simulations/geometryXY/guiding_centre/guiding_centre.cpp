@@ -92,8 +92,10 @@ int main(int argc, char** argv)
     SplineYEvaluator_XY const spline_y_evaluator(bv_y_min, bv_y_max);
 
     // Create spline interpolators ---
-    PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
-    PreallocatableSplineInterpolator const spline_y_interpolator(builder_y, spline_y_evaluator);
+    PreallocatableSplineInterpolator const
+            spline_x_interpolator(builder_x, spline_x_evaluator, meshXY);
+    PreallocatableSplineInterpolator const
+            spline_y_interpolator(builder_y, spline_y_evaluator, meshXY);
 
     // Create Poisson solver ---
     FFTPoissonSolver<IdxRangeXY> const poisson_solver(meshXY);

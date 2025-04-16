@@ -56,7 +56,7 @@ public:
             DConstFieldType const field)
         : m_builder(builder)
         , m_evaluator(evaluator)
-        , m_spline_coefs(builder.batched_spline_domain())
+        , m_spline_coefs(builder.batched_spline_domain(get_idx_range(field)))
     {
         m_builder(get_field(m_spline_coefs), field);
     }
@@ -127,6 +127,7 @@ public:
     {
         return std::make_unique<Spline1DPartialDerivative<
                 Spline1DBuilder,
-                Spline1DEvaluator>>(m_builder, m_evaluator, field);
+                Spline1DEvaluator,
+                IdxRangeBatched>>(m_builder, m_evaluator, field);
     }
 };

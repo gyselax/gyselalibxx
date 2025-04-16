@@ -121,13 +121,15 @@ int main(int argc, char** argv)
 
     // Creating operators
     SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
-    PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
+    PreallocatableSplineInterpolator const
+            spline_x_interpolator(builder_x, spline_x_evaluator, meshXVx);
 
     ddc::ConstantExtrapolationRule<Vx> bv_v_min(vx_min);
     ddc::ConstantExtrapolationRule<Vx> bv_v_max(vx_max);
 
     SplineVxEvaluator const spline_vx_evaluator(bv_v_min, bv_v_max);
-    PreallocatableSplineInterpolator const spline_vx_interpolator(builder_vx, spline_vx_evaluator);
+    PreallocatableSplineInterpolator const
+            spline_vx_interpolator(builder_vx, spline_vx_evaluator, meshXVx);
 
     BslAdvectionSpatial<GeometryXVx, GridX> const advection_x(spline_x_interpolator);
     BslAdvectionVelocity<GeometryXVx, GridVx> const advection_vx(spline_vx_interpolator);

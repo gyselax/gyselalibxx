@@ -185,7 +185,7 @@ int main(int argc, char** argv)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator);
+    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, mesh_rtheta);
 
     SplinePolarFootFinder find_feet(
             time_stepper,

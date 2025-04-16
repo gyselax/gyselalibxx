@@ -169,7 +169,8 @@ TEST_F(XAdvection1DTest, AdvectionX)
     ddc::PeriodicExtrapolationRule<X> bv_x_max;
     SplineXEvaluator const spline_evaluator(bv_x_min, bv_x_max);
 
-    PreallocatableSplineInterpolator const spline_interpolator(builder, spline_evaluator);
+    PreallocatableSplineInterpolator const
+            spline_interpolator(builder, spline_evaluator, interpolation_idx_range);
 
 
     RK2<FieldMemX<CoordX>, DFieldMemX> time_stepper(interpolation_idx_range);

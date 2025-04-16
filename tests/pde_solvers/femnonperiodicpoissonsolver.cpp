@@ -45,7 +45,7 @@ using SplineXBuilder = ddc::SplineBuilder<
         ddc::BoundCond::GREVILLE,
         ddc::SplineSolver::LAPACK>;
 
-using SplineXEvaluator_1d = ddc::SplineEvaluator<
+using SplineXEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
@@ -72,8 +72,7 @@ TEST(FemNonPeriodicPoissonSolver, Ordering)
     ddc::NullExtrapolationRule x_extrapolation_rule_min;
     ddc::NullExtrapolationRule x_extrapolation_rule_max;
 
-    SplineXEvaluator_1d const
-            spline_x_evaluator(x_extrapolation_rule_min, x_extrapolation_rule_max);
+    SplineXEvaluator const spline_x_evaluator(x_extrapolation_rule_min, x_extrapolation_rule_max);
 
     FEM1DPoissonSolver poisson(builder_x, spline_x_evaluator);
 

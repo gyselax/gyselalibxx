@@ -115,8 +115,7 @@ using SplineVxBuilder = ddc::SplineBuilder<
         GridVx,
         SplineVxBoundary,
         SplineVxBoundary,
-        ddc::SplineSolver::LAPACK,
-        Species>;
+        ddc::SplineSolver::LAPACK>;
 using SplineVxEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -216,12 +215,12 @@ public:
 
         // Initialisation of the derivatives of the advection field
         DDerivFieldMemSpX advection_field_derivatives_min_alloc(
-                builder_vx.batched_derivs_xmin_domain());
+                builder_vx.batched_derivs_xmin_domain(meshSpXVx));
         DDerivFieldSpX advection_field_derivatives_min
                 = get_field(advection_field_derivatives_min_alloc);
 
         DDerivFieldMemSpX advection_field_derivatives_max_alloc(
-                builder_vx.batched_derivs_xmax_domain());
+                builder_vx.batched_derivs_xmax_domain(meshSpXVx));
         DDerivFieldSpX advection_field_derivatives_max
                 = get_field(advection_field_derivatives_max_alloc);
 
@@ -311,7 +310,7 @@ TEST_F(Velocity1DAdvectionTest, SplineBatched)
 {
     IdxRangeSpXVx meshSpXVx(idx_range_allsp, idx_range_x, idx_range_vx);
 
-    SplineVxBuilder const builder_vx(meshSpXVx);
+    SplineVxBuilder const builder_vx(idx_range_vx);
 
     CoordVx const vx_min = ddc::coordinate(idx_range_vx.front());
     CoordVx const vx_max = vx_min + ddcHelper::total_interval_length(idx_range_vx);
@@ -320,7 +319,8 @@ TEST_F(Velocity1DAdvectionTest, SplineBatched)
     ddc::ConstantExtrapolationRule<Vx> bv_v_max(vx_max);
     SplineVxEvaluator const spline_vx_evaluator(bv_v_min, bv_v_max);
 
-    PreallocatableSplineInterpolator const spline_vx_interpolator(builder_vx, spline_vx_evaluator);
+    PreallocatableSplineInterpolator const
+            spline_vx_interpolator(builder_vx, spline_vx_evaluator, meshSpXVx);
 
     Euler<FieldMemSpXVx<CoordVx>, DFieldMemSpXVx> euler(meshSpXVx);
     BslAdvection1D<

@@ -184,7 +184,7 @@ public:
 
         // Build spline representation of the advection field ....................................
         AdvecFieldSplineMem advection_field_coefs_alloc(
-                m_adv_field_builder.batched_spline_domain());
+                m_adv_field_builder.batched_spline_domain(get_idx_range(advection_field)));
         AdvecFieldSplineCoeffs advection_field_coefs = get_field(advection_field_coefs_alloc);
 
         m_adv_field_builder(

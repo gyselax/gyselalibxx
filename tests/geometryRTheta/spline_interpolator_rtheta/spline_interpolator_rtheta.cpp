@@ -137,7 +137,7 @@ void Interpolation_on_random_coord(
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    SplineInterpolator2D interpolator(builder, spline_evaluator);
+    SplineInterpolator2D interpolator(builder, spline_evaluator, grid);
     interpolator(get_field(function_evaluated), get_const_field(random_coords));
 
     // Compare the obtained values with the exact function. ----------------------------------

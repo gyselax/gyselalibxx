@@ -237,21 +237,21 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2D)
     // Spline representations
     // --- patch 1
     DFieldMem<typename Patch1::IdxRangeBS12> function_1_coef_alloc(
-            builder1.batched_spline_domain());
+            builder1.batched_spline_domain(idx_range_xy1));
     SplineCoeffOnPatch_2D<Patch1> function_1_coef = get_field(function_1_coef_alloc);
 
     DFieldMem<typename Patch1::IdxRangeBS12> function_1_coef_expected_alloc(
-            builder1.batched_spline_domain());
+            builder1.batched_spline_domain(idx_range_xy1));
     SplineCoeffOnPatch_2D<Patch1> function_1_coef_expected
             = get_field(function_1_coef_expected_alloc);
 
     // --- patch 2
     DFieldMem<typename Patch2::IdxRangeBS12> function_2_coef_alloc(
-            builder2.batched_spline_domain());
+            builder2.batched_spline_domain(idx_range_xy2));
     SplineCoeffOnPatch_2D<Patch2> function_2_coef = get_field(function_2_coef_alloc);
 
     DFieldMem<typename Patch2::IdxRangeBS12> function_2_coef_expected_alloc(
-            builder2.batched_spline_domain());
+            builder2.batched_spline_domain(idx_range_xy2));
     SplineCoeffOnPatch_2D<Patch2> function_2_coef_expected
             = get_field(function_2_coef_expected_alloc);
 
@@ -454,21 +454,21 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermite)
     // Spline representations
     // --- patch 1
     DFieldMem<typename Patch1::IdxRangeBS12> function_1_coef_alloc(
-            builder1.batched_spline_domain());
+            builder1.batched_spline_domain(idx_range_xy1));
     SplineCoeffOnPatch_2D<Patch1> function_1_coef = get_field(function_1_coef_alloc);
 
     DFieldMem<typename Patch1::IdxRangeBS12> function_1_coef_expected_alloc(
-            builder1.batched_spline_domain());
+            builder1.batched_spline_domain(idx_range_xy1));
     SplineCoeffOnPatch_2D<Patch1> function_1_coef_expected
             = get_field(function_1_coef_expected_alloc);
 
     // --- patch 2
     DFieldMem<typename Patch2::IdxRangeBS12> function_2_coef_alloc(
-            builder2.batched_spline_domain());
+            builder2.batched_spline_domain(idx_range_xy2));
     SplineCoeffOnPatch_2D<Patch2> function_2_coef = get_field(function_2_coef_alloc);
 
     DFieldMem<typename Patch2::IdxRangeBS12> function_2_coef_expected_alloc(
-            builder2.batched_spline_domain());
+            builder2.batched_spline_domain(idx_range_xy2));
     SplineCoeffOnPatch_2D<Patch2> function_2_coef_expected
             = get_field(function_2_coef_expected_alloc);
 
