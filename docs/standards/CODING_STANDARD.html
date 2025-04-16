@@ -657,7 +657,7 @@ In order to ensure that you are following the functional programming paradigm wh
 <p>All operators should implement the function <code>operator()</code>. Usually this is the only function in the operator other than the constructor.</p>
 <p>If the operator relies on other operators (e.g. a semi-Lagrangian advection which requires an interpolation operator) then this dependency should be passed to the operator's constructor. It should be stored as a reference inside the function.</p>
 <h4 id="data-storage">Data Storage</h4>
-<p>It is rare to need to actually write a data storage class. In most cases they can be defined with a "using-declaration" using DDC types. This ensures that the data is defined on the relevant dimensions which in turn reduces the chance of errors arising from operating on the wrong dimensions of an array. For more information see <a href="https://github.com/Maison-de-la-Simulation/ddchttps://github.com/Maison-de-la-Simulation/ddc">DDC</a>.</p>
+<p>It is rare to need to actually write a data storage class. In most cases they can be defined with a "using-declaration" using DDC types. This ensures that the data is defined on the relevant dimensions which in turn reduces the chance of errors arising from operating on the wrong dimensions of an array. For more information see <a href="https://github.com/CExA-project/ddc">DDC</a>.</p>
 <h3 id="template-strategy">Template Strategy</h3>
 <p>Templating is a very useful tool to improve performance, however it increases compilation overhead and reduces code readability, especially for developers less familiar with C++. We therefore try to strike a balance with the use of templates. Templates are therefore recommended in the following cases:</p>
 <ul>
