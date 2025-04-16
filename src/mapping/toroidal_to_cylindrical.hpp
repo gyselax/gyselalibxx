@@ -115,13 +115,17 @@ public:
     KOKKOS_FUNCTION DTensor<VectorIndexSet<R, Z, Zeta>, VectorIndexSet<Rho_cov, Theta_cov, Phi_cov>>
     jacobian_matrix(CoordArg const& coord) const
     {
-        DTensor<VectorIndexSet<R, Z, Zeta>, VectorIndexSet<Rho_cov, Theta_cov, Phi_cov>> J_3d(0);
+        DTensor<VectorIndexSet<R, Z, Zeta>, VectorIndexSet<Rho_cov, Theta_cov, Phi_cov>> J_3d;
         DTensor<VectorIndexSet<R, Z>, VectorIndexSet<Rho_cov, Theta_cov>> J_2d
                 = m_mapping_2d.jacobian_matrix(CoordArg2D(coord));
         ddcHelper::get<R, Rho_cov>(J_3d) = ddcHelper::get<R, Rho_cov>(J_2d);
         ddcHelper::get<R, Theta_cov>(J_3d) = ddcHelper::get<R, Theta_cov>(J_2d);
+        ddcHelper::get<R, Phi_cov>(J_3d) = 0;
         ddcHelper::get<Z, Rho_cov>(J_3d) = ddcHelper::get<Z, Rho_cov>(J_2d);
         ddcHelper::get<Z, Theta_cov>(J_3d) = ddcHelper::get<Z, Theta_cov>(J_2d);
+        ddcHelper::get<Z, Phi_cov>(J_3d) = 0;
+        ddcHelper::get<Zeta, Rho_cov>(J_3d) = 0;
+        ddcHelper::get<Zeta, Theta_cov>(J_3d) = 0;
         ddcHelper::get<Zeta, Phi_cov>(J_3d) = -1;
         return J_3d;
     }
@@ -175,8 +179,12 @@ public:
                 = inv_jacobian_matrix_2d(CoordArg2D(coord));
         ddcHelper::get<Rho, R_cov>(inv_J_3d) = ddcHelper::get<Rho, R_cov>(inv_J_2d);
         ddcHelper::get<Rho, Z_cov>(inv_J_3d) = ddcHelper::get<Rho, Z_cov>(inv_J_2d);
+        ddcHelper::get<Rho, Zeta_cov>(inv_J_3d) = 0;
         ddcHelper::get<Theta, R_cov>(inv_J_3d) = ddcHelper::get<Theta, R_cov>(inv_J_2d);
         ddcHelper::get<Theta, Z_cov>(inv_J_3d) = ddcHelper::get<Theta, Z_cov>(inv_J_2d);
+        ddcHelper::get<Theta, Zeta_cov>(inv_J_3d) = 0;
+        ddcHelper::get<Phi, R_cov>(inv_J_3d) = 0;
+        ddcHelper::get<Phi, Z_cov>(inv_J_3d) = 0;
         ddcHelper::get<Phi, Zeta_cov>(inv_J_3d) = -1;
         return inv_J_3d;
     }
