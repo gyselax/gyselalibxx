@@ -95,12 +95,16 @@ jobs:
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/run_tests
       - name: Check Test Coverage
-        if: matrix.toolchain == 'tests_coverage_toolchain'
+        if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'tests_coverage_toolchain'
         run: |
           pip install gcovr
           gcovr --filter src --lcov coverage.lcov --merge-mode-functions=merge-use-line-0 build
+          # Remove branch information (causes more problems than it fixes)
+          sed '/^BRDA:/d' -i coverage.lcov
+          sed '/^BRH:/d' -i coverage.lcov
+          sed '/^BRF:/d' -i coverage.lcov
       - name: Archive code coverage results
-        if: matrix.toolchain == 'tests_coverage_toolchain'
+        if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'tests_coverage_toolchain'
         uses: actions/upload-artifact@v4
         with:
           name: code-coverage-report
@@ -108,9 +112,9 @@ jobs:
 
   upload_coverage:
     name: Coverage upload
-    needs: cpu_tests
+    needs: [pre_job, cpu_tests]
     runs-on: ubuntu-latest
-    if: github.event_name != 'workflow_dispatch' || inputs.toolchain == 'tests_coverage_toolchain'
+    if: (github.event_name != 'workflow_dispatch' || inputs.toolchain == 'tests_coverage_toolchain') && needs.pre_job.outputs.should_skip == 'false'
     steps:
       - name: Checkout gyselalibxx
         uses: actions/checkout@v4

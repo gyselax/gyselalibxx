@@ -1,6 +1,6 @@
 # Using DDC in Gyselalib++
 
-[DDC](https://github.com/Maison-de-la-Simulation/ddc) is a library which aims to provide types which represent mathematical/physical concepts.
+[DDC](https://github.com/CExA-project/ddc) is a library which aims to provide types which represent mathematical/physical concepts.
 Representing these concepts with types allows the compiler to enforce the mathematical validity of expressions.
 
 The DDC library is based on templates. The template parameters are based on physical dimensions.

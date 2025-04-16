@@ -103,7 +103,7 @@ If the operator relies on other operators (e.g. a semi-Lagrangian advection whic
 
 #### Data Storage
 
-It is rare to need to actually write a data storage class. In most cases they can be defined with a "using-declaration" using DDC types. This ensures that the data is defined on the relevant dimensions which in turn reduces the chance of errors arising from operating on the wrong dimensions of an array. For more information see [DDC](https://github.com/Maison-de-la-Simulation/ddchttps://github.com/Maison-de-la-Simulation/ddc).
+It is rare to need to actually write a data storage class. In most cases they can be defined with a "using-declaration" using DDC types. This ensures that the data is defined on the relevant dimensions which in turn reduces the chance of errors arising from operating on the wrong dimensions of an array. For more information see [DDC](https://github.com/CExA-project/ddc).
 
 ### Template Strategy
 
