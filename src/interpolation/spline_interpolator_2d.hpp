@@ -9,15 +9,12 @@
  *
  * @tparam RadialExtrapolationRule The extrapolation rule applied at the outer radial bound.
  */
-template <class Spline2DBuilder, class Spline2DEvaluator>
+template <class Spline2DBuilder, class Spline2DEvaluator, class IdxRangeBatched>
 class SplineInterpolator2D
-    : public IInterpolator2D<
-              typename Spline2DBuilder::interpolation_domain_type,
-              typename Spline2DBuilder::batched_interpolation_domain_type>
+    : public IInterpolator2D<typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched>
 {
-    using base_type = IInterpolator2D<
-            typename Spline2DBuilder::interpolation_domain_type,
-            typename Spline2DBuilder::batched_interpolation_domain_type>;
+    using base_type
+            = IInterpolator2D<typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched>;
 
 public:
     using typename base_type::CConstFieldType;
@@ -29,13 +26,16 @@ private:
 
     Spline2DEvaluator const& m_evaluator;
 
-    using IdxRangeBSRTheta = typename Spline2DBuilder::batched_spline_domain_type;
+    using IdxRangeBSRTheta = typename Spline2DBuilder::batched_spline_domain_type<IdxRangeBatched>;
 
     mutable DFieldMem<IdxRangeBSRTheta> m_coefs;
 
-    using r_deriv_type = DConstField<typename Spline2DBuilder::batched_derivs_domain_type1>;
-    using theta_deriv_type = DConstField<typename Spline2DBuilder::batched_derivs_domain_type2>;
-    using mixed_deriv_type = DConstField<typename Spline2DBuilder::batched_derivs_domain_type>;
+    using r_deriv_type
+            = DConstField<typename Spline2DBuilder::batched_derivs_domain_type1<IdxRangeBatched>>;
+    using theta_deriv_type
+            = DConstField<typename Spline2DBuilder::batched_derivs_domain_type2<IdxRangeBatched>>;
+    using mixed_deriv_type
+            = DConstField<typename Spline2DBuilder::batched_derivs_domain_type<IdxRangeBatched>>;
 
 public:
     /**
@@ -81,11 +81,11 @@ public:
  * memory allocated in the private members of the SplineInterpolator2D to be freed when the object is not in use.
  * These objects are: m_coefs.
  */
-template <class Spline2DBuilder, class Spline2DEvaluator>
+template <class Spline2DBuilder, class Spline2DEvaluator, class IdxRangeBatched>
 class PreallocatableSplineInterpolator2D
     : public IPreallocatableInterpolator2D<
               typename Spline2DBuilder::interpolation_domain_type,
-              typename Spline2DBuilder::batched_interpolation_domain_type>
+              IdxRangeBatched>
 {
 private:
     Spline2DBuilder const& m_builder;
@@ -111,9 +111,8 @@ public:
      *
      * @return A pointer to an instance of the SplineInterpolator2D class.
      */
-    std::unique_ptr<IInterpolator2D<
-            typename Spline2DBuilder::interpolation_domain_type,
-            typename Spline2DBuilder::batched_interpolation_domain_type>>
+    std::unique_ptr<
+            IInterpolator2D<typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched>>
     preallocate() const override
     {
         return std::make_unique<

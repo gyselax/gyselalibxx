@@ -30,6 +30,7 @@ template <
         class... Grid1D>
 class SplineInterpolator : public IInterpolator<GridInterp, Grid1D...>
 {
+    static_assert(false, "To fix");
     using BuilderType = ddc::SplineBuilder<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,

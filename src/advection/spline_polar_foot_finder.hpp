@@ -53,7 +53,7 @@ class SplinePolarFootFinder
               typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
               typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
               ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>,
-              typename SplineRThetaBuilderAdvection::batched_interpolation_domain_type,
+              typename TimeStepper::IdxRange,
               typename SplineRThetaBuilderAdvection::memory_space>
 {
     static_assert(is_mapping_v<LogicalToPhysicalMapping>);
@@ -68,18 +68,18 @@ class SplinePolarFootFinder
     static_assert(is_accessible_v<
                   typename SplineRThetaBuilderAdvection::exec_space,
                   LogicalToPseudoPhysicalMapping>);
-    static_assert(
-            std::is_same_v<
-                    typename SplineRThetaBuilderAdvection::batched_interpolation_domain_type,
-                    typename TimeStepper::IdxRange>,
-            "The SplinePolarFootFinder is designed to work with an advection field defined on the "
-            "same grid as the distribution function.");
+    static_assert(ddc::in_tags_v<
+                  typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
+                  ddc::to_type_seq_t<typename TimeStepper::IdxRange>>);
+    static_assert(ddc::in_tags_v<
+                  typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
+                  ddc::to_type_seq_t<typename TimeStepper::IdxRange>>);
 
     using base_type = IPolarFootFinder<
             typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
             typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
             ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>,
-            typename SplineRThetaBuilderAdvection::batched_interpolation_domain_type,
+            typename TimeStepper::IdxRange,
             typename SplineRThetaBuilderAdvection::memory_space>;
 
 public:

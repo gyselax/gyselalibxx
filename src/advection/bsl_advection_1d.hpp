@@ -86,7 +86,8 @@ private:
     using FunctionField = DField<IdxRangeFunction>;
 
     // Type for spline representation of the advection field
-    using IdxRangeBSAdvection = typename AdvectionFieldBuilder::batched_spline_domain_type;
+    using IdxRangeBSAdvection =
+            typename AdvectionFieldBuilder::batched_spline_domain_type<IdxRangeAdvection>;
     using AdvecFieldSplineMem = DFieldMem<IdxRangeBSAdvection>;
     using AdvecFieldSplineCoeffs = DField<IdxRangeBSAdvection>;
 

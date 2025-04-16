@@ -120,13 +120,11 @@ using SplineXEvaluator = ddc::SplineEvaluator<
         GridX,
 #ifdef PERIODIC_RDIMX
         ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>,
+        ddc::PeriodicExtrapolationRule<X>>;
 #else
         ddc::ConstantExtrapolationRule<X>,
-        ddc::ConstantExtrapolationRule<X>,
+        ddc::ConstantExtrapolationRule<X>>;
 #endif
-        GridX,
-        GridVx>;
 using SplineVxBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,

@@ -66,7 +66,7 @@ using SplineXYBuilder = ddc::SplineBuilder2D<
         SplineYBoundary,
         ddc::SplineSolver::LAPACK>;
 
-using IdxRangeBSXY = SplineXYBuilder::batched_spline_domain_type;
+using IdxRangeBSXY = SplineXYBuilder::batched_spline_domain_type<IdxRangeXY>;
 
 // Dummy spline builder class for keeping track of how many times builder is called by spline 2d cache
 class DummySplineBuilder2D

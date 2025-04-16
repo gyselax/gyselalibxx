@@ -94,17 +94,21 @@ class MultipatchSplineBuilder
 
     /// A type alias to get the builder type on a specific patch.
     template <class Patch>
-    using BuilderOnPatch = typename Build_BuilderType<Patch, ValuesOnPatch<Patch>>::type;
+    using BuilderOnPatch = typename Build_BuilderType<Patch>::type;
 
     /// A type alias to get the batched spline coefficients on a specific patch.
     template <class Patch>
-    using SplineOnPatch
-            = DField<typename BuilderOnPatch<Patch>::batched_spline_domain_type, MemorySpace>;
+    using SplineOnPatch = DField<
+            typename BuilderOnPatch<Patch>::batched_spline_domain_type<
+                    typename ValuesOnPatch<Patch>::discrete_domain_type>,
+            MemorySpace>;
 
     /// A type alias to get the batched derivatives on a specific patch.
     template <class Patch>
-    using DerivsOnPatch
-            = DConstField<typename BuilderOnPatch<Patch>::batched_derivs_domain_type, MemorySpace>;
+    using DerivsOnPatch = DConstField<
+            typename BuilderOnPatch<Patch>::batched_derivs_domain_type<
+                    typename ValuesOnPatch<Patch>::discrete_domain_type>,
+            MemorySpace>;
 
     /// The type of the batched spline coefficients.
     using MultipatchSplineCoeffs = MultipatchField<SplineOnPatch, Patches...>;

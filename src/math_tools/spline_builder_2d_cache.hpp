@@ -11,15 +11,15 @@
 /**
  * @brief A class that stores spline builder coefficients and recomputes them when required.
  */
-template <class SplineBuilder2D>
+template <class SplineBuilder2D, class IdxRangeBatched>
 class SplineBuilder2DCache
 {
 private:
     using Dim1 = typename SplineBuilder2D::continuous_dimension_type1;
     using Dim2 = typename SplineBuilder2D::continuous_dimension_type2;
 
-    using IdxRangeBSField = typename SplineBuilder2D::batched_spline_domain_type;
-    using IdxRangeField = typename SplineBuilder2D::batched_interpolation_domain_type;
+    using IdxRangeBSField = typename SplineBuilder2D::batched_spline_domain_type<IdxRangeBatched>;
+    using IdxRangeField = IdxRangeBatched;
 
     using DFieldSplineCoeffMem = DFieldMem<IdxRangeBSField>;
     using DConstFieldSplineCoeffs = DConstField<IdxRangeBSField>;

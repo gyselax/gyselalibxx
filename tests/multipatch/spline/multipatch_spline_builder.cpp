@@ -45,7 +45,7 @@ using SplineX1Builder = ddc::SplineBuilder<
         SplineX1Boundary,
         ddc::SplineSolver::LAPACK>;
 
-using SplineX2Builder_1d = ddc::SplineBuilder<
+using SplineX2Builder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX<2>,
@@ -217,11 +217,11 @@ public:
 TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
 {
     // List of spline builders
-    SplineX1Builder_1d builder_x1(idx_range_x1);
-    SplineX2Builder_1d builder_x2(idx_range_x2);
+    SplineX1Builder builder_x1(idx_range_x1);
+    SplineX2Builder builder_x2(idx_range_x2);
 
     // Collection of builders for each patch
-    MultipatchSplineBuilderX_1d builder(builder_x1, builder_x2);
+    MultipatchSplineBuilderX builder(builder_x1, builder_x2);
 
 
     // Function tests
@@ -289,11 +289,11 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
 
 
     // List of spline builders
-    SplineX1Builder_2d builder_x1(idx_range_xy1);
-    SplineX2Builder_2d builder_x2(idx_range_xy2);
+    SplineX1Builder builder_x1(idx_range_xy1);
+    SplineX2Builder builder_x2(idx_range_xy2);
 
     // Collection of builders for each patch
-    MultipatchSplineBuilderX_2d builder(builder_x1, builder_x2);
+    MultipatchSplineBuilderX builder(builder_x1, builder_x2);
 
 
     // Function tests
