@@ -18,7 +18,7 @@ _An abstract class for a partial derivative operator._ [More...](#detailed-descr
 
 
 
-Inherited by the following classes: [CentralFDMPartialDerivative](classCentralFDMPartialDerivative.md)
+Inherited by the following classes: [CentralFDMPartialDerivative](classCentralFDMPartialDerivative.md),  [CentralFDMPartialDerivativeWithBValue](classCentralFDMPartialDerivativeWithBValue.md)
 
 
 

@@ -333,6 +333,26 @@
     <member refid="classCentralFDMPartialDerivativeCreator_1aca91ad3377b567feffbc6dd3c75656eb" kind="function"><name>CentralFDMPartialDerivativeCreator</name></member>
     <member refid="classCentralFDMPartialDerivativeCreator_1ad19b8c061f9439104762c2c46edbbd6d" kind="function"><name>create_instance</name></member>
   </compound>
+  <compound refid="classCentralFDMPartialDerivativeWithBValue" kind="class"><name>CentralFDMPartialDerivativeWithBValue</name>
+    <member refid="classCentralFDMPartialDerivativeWithBValue_1a7a50a30ad07bb6fc4e0b6779efaa92b4" kind="typedef"><name>base_type</name></member>
+    <member refid="classCentralFDMPartialDerivativeWithBValue_1a523c53585bf83c1972e4d935f9a8b9e5" kind="typedef"><name>DFieldMemType</name></member>
+    <member refid="classCentralFDMPartialDerivativeWithBValue_1a47c973564187001a3097fe9b0eb901d5" kind="typedef"><name>DFieldType</name></member>
+    <member refid="classCentralFDMPartialDerivativeWithBValue_1a85c8b026718b72ff0c996c4503b95136" kind="typedef"><name>DConstFieldType</name></member>
+    <member refid="classCentralFDMPartialDerivativeWithBValue_1ae5e7d597e015b5024376bb27091c096d" kind="typedef"><name>IdxRangeDeriv</name></member>
+    <member refid="classCentralFDMPartialDerivativeWithBValue_1a883ec2b528cf2188db6e593ae849fe0e" kind="typedef"><name>IdxRangeBatch</name></member>
+    <member refid="classCentralFDMPartialDerivativeWithBValue_1ab9d589da0cfdc7fefb9c2c8c17e320cf" kind="variable"><name>m_field</name></member>
+    <member refid="classCentralFDMPartialDerivativeWithBValue_1ae806f08c0f2c0555b1d863ceb98354f3" kind="variable"><name>m_b_value_left</name></member>
+    <member refid="classCentralFDMPartialDerivativeWithBValue_1a8a991398c5d27ca55eabb5f7251c403f" kind="variable"><name>m_b_value_right</name></member>
+    <member refid="classCentralFDMPartialDerivativeWithBValue_1a863a67e5251dd75b98ee699bec3e9881" kind="function"><name>CentralFDMPartialDerivativeWithBValue</name></member>
+    <member refid="classCentralFDMPartialDerivativeWithBValue_1a063c3d40a90ffe5994eb157cca4b0fd1" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="classCentralFDMPartialDerivativeWithBValueCreator" kind="class"><name>CentralFDMPartialDerivativeWithBValueCreator</name>
+    <member refid="classCentralFDMPartialDerivativeWithBValueCreator_1ae76ea92a7ce4f5a29bac6b6852013531" kind="typedef"><name>DConstFieldType</name></member>
+    <member refid="classCentralFDMPartialDerivativeWithBValueCreator_1aa06ab6ccbe935fb935889aaf492734ad" kind="variable"><name>m_b_value_left</name></member>
+    <member refid="classCentralFDMPartialDerivativeWithBValueCreator_1ad8059074fe070b67f2cb0d16d2df3db6" kind="variable"><name>m_b_value_right</name></member>
+    <member refid="classCentralFDMPartialDerivativeWithBValueCreator_1a89c6474897a1f01ffc551c55d02018ee" kind="function"><name>CentralFDMPartialDerivativeWithBValueCreator</name></member>
+    <member refid="classCentralFDMPartialDerivativeWithBValueCreator_1ac9a46cfd75d92432c887212c0fd3dfc0" kind="function"><name>create_instance</name></member>
+  </compound>
   <compound refid="classChargeDensityCalculator" kind="class"><name>ChargeDensityCalculator</name>
     <member refid="classChargeDensityCalculator_1ac662eaddab6ba021670646cc2643fb0a" kind="variable"><name>m_quadrature</name></member>
     <member refid="classChargeDensityCalculator_1a20dcf32beedeac15d43e686f6a6cfcf3" kind="variable"><name>m_quadrature</name></member>
@@ -2823,13 +2843,13 @@
     <member refid="structY__pC_1a6274201b751e93509509253746e598c1" kind="variable"><name>IS_COVARIANT</name></member>
     <member refid="structY__pC_1a840b5d333654df4c5be30422ce8eeb28" kind="variable"><name>IS_CONTRAVARIANT</name></member>
   </compound>
-  <compound refid="namespace_0d204" kind="namespace"><name>@204</name>
+  <compound refid="namespace_0d205" kind="namespace"><name>@205</name>
   </compound>
-  <compound refid="namespace_0d206" kind="namespace"><name>@206</name>
+  <compound refid="namespace_0d207" kind="namespace"><name>@207</name>
   </compound>
-  <compound refid="namespace_0d208" kind="namespace"><name>@208</name>
+  <compound refid="namespace_0d209" kind="namespace"><name>@209</name>
   </compound>
-  <compound refid="namespace_0d210" kind="namespace"><name>@210</name>
+  <compound refid="namespace_0d211" kind="namespace"><name>@211</name>
   </compound>
   <compound refid="namespace_0d73" kind="namespace"><name>@73</name>
   </compound>
@@ -3699,6 +3719,8 @@
     <member refid="vector__mapper_8hpp_1a7fbe2683c9aa0bf1709fbf044781546f" kind="function"><name>create_geometry_mirror_view</name></member>
   </compound>
   <compound refid="central__fdm__partial__derivatives_8hpp" kind="file"><name>central_fdm_partial_derivatives.hpp</name>
+  </compound>
+  <compound refid="central__fdm__partial__derivatives__with__boundary__values_8hpp" kind="file"><name>central_fdm_partial_derivatives_with_boundary_values.hpp</name>
   </compound>
   <compound refid="gradient_8hpp" kind="file"><name>gradient.hpp</name>
   </compound>

@@ -28,6 +28,8 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**CartesianToCzarny**](classCartesianToCzarny.md) _A class for describing the Czarny 2D mapping._     
 * **class** [**CentralFDMPartialDerivative**](classCentralFDMPartialDerivative.md) _A class which implements a partial derivative operator using a finite differences calculation of order two. A decentered scheme is used at the boundary, whereas centred finite difference are used inside the domain._     
 * **class** [**CentralFDMPartialDerivativeCreator**](classCentralFDMPartialDerivativeCreator.md) _A class which stores information necessary to create a pointer to an instance of the_ [_**CentralFDMPartialDerivative**_](classCentralFDMPartialDerivative.md) _class._    
+* **class** [**CentralFDMPartialDerivativeWithBValue**](classCentralFDMPartialDerivativeWithBValue.md) _A class which implements a partial derivative operator using a finite differences calculation of order two. A decentered scheme is used at the boundary, whereas centred finite difference are used inside the domain._     
+* **class** [**CentralFDMPartialDerivativeWithBValueCreator**](classCentralFDMPartialDerivativeWithBValueCreator.md) _A class which stores information necessary to create a pointer to an instance of the_ [_**CentralFDMPartialDerivativeWithBValue**_](classCentralFDMPartialDerivativeWithBValue.md) _class._    
 * **class** [**ChargeDensityCalculator**](classChargeDensityCalculator.md) _A class which computes charges density with Kokkos._     
 * **class** [**CircularToCartesian**](classCircularToCartesian.md) _A class for describing the circular 2D mapping._     
 * **class** [**CollisionConfiguration**](classCollisionConfiguration.md) _Class to collect information to initialise the collision operator for a SpVparMu geometry._     
@@ -257,10 +259,10 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._    
 * **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d73.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d204.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d206.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d208.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d210.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d205.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d207.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d209.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d211.md) 
 * **namespace** [**connectivity\_details**](namespaceconnectivity__details.md)     
     * **struct** [**AddToTypeSeq**](structconnectivity__details_1_1AddToTypeSeq.md) _A class which helps insert an element into a type sequence._ 
     * **struct** [**AddToTypeSeq&lt; ToInsert, TypeSeq, BackInsert &gt;**](structconnectivity__details_1_1AddToTypeSeq_3_01ToInsert_00_01TypeSeq_00_01BackInsert_01_4.md) _Specialisation of_ [_**AddToTypeSeq**_](structconnectivity__details_1_1AddToTypeSeq.md) _to add an element at the back of the type sequence._    

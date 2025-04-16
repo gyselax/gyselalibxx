@@ -18,7 +18,7 @@ _An abstract class which provides a create\_instance function to instantiate an 
 
 
 
-Inherited by the following classes: [CentralFDMPartialDerivativeCreator](classCentralFDMPartialDerivativeCreator.md)
+Inherited by the following classes: [CentralFDMPartialDerivativeCreator](classCentralFDMPartialDerivativeCreator.md),  [CentralFDMPartialDerivativeWithBValueCreator](classCentralFDMPartialDerivativeWithBValueCreator.md)
 
 
 

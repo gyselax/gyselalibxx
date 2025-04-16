@@ -3,6 +3,7 @@
   <compounddef id="classIPartialDerivativeCreator" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>IPartialDerivativeCreator</compoundname>
     <derivedcompoundref refid="classCentralFDMPartialDerivativeCreator" prot="public" virt="non-virtual">CentralFDMPartialDerivativeCreator&lt; IdxRangeFull, DerivativeDimension &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classCentralFDMPartialDerivativeWithBValueCreator" prot="public" virt="non-virtual">CentralFDMPartialDerivativeWithBValueCreator&lt; IdxRangeFull, DerivativeDimension &gt;</derivedcompoundref>
     <includes refid="ipartial__derivative_8hpp" local="no">ipartial_derivative.hpp</includes>
     <templateparamlist>
       <param>
@@ -56,6 +57,12 @@
       <node id="2">
         <label>CentralFDMPartialDerivativeCreator&lt; IdxRangeFull, DerivativeDimension &gt;</label>
         <link refid="classCentralFDMPartialDerivativeCreator"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>CentralFDMPartialDerivativeWithBValueCreator&lt; IdxRangeFull, DerivativeDimension &gt;</label>
+        <link refid="classCentralFDMPartialDerivativeWithBValueCreator"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>

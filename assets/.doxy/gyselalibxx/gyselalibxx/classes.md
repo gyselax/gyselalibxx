@@ -52,6 +52,8 @@
 * [**CartesianToCzarny**](classCartesianToCzarny.md)
 * [**CentralFDMPartialDerivative**](classCentralFDMPartialDerivative.md)
 * [**CentralFDMPartialDerivativeCreator**](classCentralFDMPartialDerivativeCreator.md)
+* [**CentralFDMPartialDerivativeWithBValue**](classCentralFDMPartialDerivativeWithBValue.md)
+* [**CentralFDMPartialDerivativeWithBValueCreator**](classCentralFDMPartialDerivativeWithBValueCreator.md)
 * [**ChargeDensityCalculator**](classChargeDensityCalculator.md)
 * [**CircularToCartesian**](classCircularToCartesian.md)
 * [**CollectAllGridsOnDim**](structconnectivity__details_1_1CollectAllGridsOnDim.md)

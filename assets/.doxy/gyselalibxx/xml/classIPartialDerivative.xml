@@ -3,6 +3,7 @@
   <compounddef id="classIPartialDerivative" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>IPartialDerivative</compoundname>
     <derivedcompoundref refid="classCentralFDMPartialDerivative" prot="public" virt="non-virtual">CentralFDMPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classCentralFDMPartialDerivativeWithBValue" prot="public" virt="non-virtual">CentralFDMPartialDerivativeWithBValue&lt; IdxRangeFull, DerivativeDimension &gt;</derivedcompoundref>
     <includes refid="ipartial__derivative_8hpp" local="no">ipartial_derivative.hpp</includes>
     <templateparamlist>
       <param>
@@ -97,6 +98,7 @@
         <name>operator()</name>
         <qualifiedname>IPartialDerivative::operator()</qualifiedname>
         <reimplementedby refid="classCentralFDMPartialDerivative_1ae3faa9459a609771457f2677ef709bd5">operator()</reimplementedby>
+        <reimplementedby refid="classCentralFDMPartialDerivativeWithBValue_1a063c3d40a90ffe5994eb157cca4b0fd1">operator()</reimplementedby>
         <param>
           <type><ref refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" kindref="member">DFieldType</ref></type>
           <declname>differentiated_field</declname>
@@ -148,6 +150,12 @@
       <node id="2">
         <label>CentralFDMPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</label>
         <link refid="classCentralFDMPartialDerivative"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>CentralFDMPartialDerivativeWithBValue&lt; IdxRangeFull, DerivativeDimension &gt;</label>
+        <link refid="classCentralFDMPartialDerivativeWithBValue"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>

@@ -1,0 +1,299 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classCentralFDMPartialDerivativeWithBValue" kind="class" language="C++" prot="public">
+    <compoundname>CentralFDMPartialDerivativeWithBValue</compoundname>
+    <basecompoundref refid="classIPartialDerivative" prot="public" virt="non-virtual">IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</basecompoundref>
+    <includes refid="central__fdm__partial__derivatives__with__boundary__values_8hpp" local="no">central_fdm_partial_derivatives_with_boundary_values.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class IdxRangeFull</type>
+      </param>
+      <param>
+        <type>class DerivativeDimension</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classCentralFDMPartialDerivativeWithBValue_1a7a50a30ad07bb6fc4e0b6779efaa92b4" prot="private" static="no">
+        <type><ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative</ref>&lt; IdxRangeFull, DerivativeDimension &gt;</type>
+        <definition>using CentralFDMPartialDerivativeWithBValue&lt; IdxRangeFull, DerivativeDimension &gt;::base_type =  IPartialDerivative&lt;IdxRangeFull, DerivativeDimension&gt;</definition>
+        <argsstring></argsstring>
+        <name>base_type</name>
+        <qualifiedname>CentralFDMPartialDerivativeWithBValue::base_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="26" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCentralFDMPartialDerivativeWithBValue_1a523c53585bf83c1972e4d935f9a8b9e5" prot="private" static="no">
+        <type>DFieldMem&lt; IdxRangeFull &gt;</type>
+        <definition>using CentralFDMPartialDerivativeWithBValue&lt; IdxRangeFull, DerivativeDimension &gt;::DFieldMemType =  DFieldMem&lt;IdxRangeFull&gt;</definition>
+        <argsstring></argsstring>
+        <name>DFieldMemType</name>
+        <qualifiedname>CentralFDMPartialDerivativeWithBValue::DFieldMemType</qualifiedname>
+        <briefdescription>
+<para>The type of the field to be differentiated. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="29" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCentralFDMPartialDerivativeWithBValue_1a47c973564187001a3097fe9b0eb901d5" prot="private" static="no">
+        <type>DField&lt; IdxRangeFull &gt;</type>
+        <definition>using IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::DFieldType =  DField&lt;IdxRangeFull&gt;</definition>
+        <argsstring></argsstring>
+        <name>DFieldType</name>
+        <qualifiedname>CentralFDMPartialDerivativeWithBValue::DFieldType</qualifiedname>
+        <briefdescription>
+<para>The type of a reference to the field to be differentiated. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="32" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCentralFDMPartialDerivativeWithBValue_1a85c8b026718b72ff0c996c4503b95136" prot="private" static="no">
+        <type>DConstField&lt; IdxRangeFull &gt;</type>
+        <definition>using IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::DConstFieldType =  DConstField&lt;IdxRangeFull&gt;</definition>
+        <argsstring></argsstring>
+        <name>DConstFieldType</name>
+        <qualifiedname>CentralFDMPartialDerivativeWithBValue::DConstFieldType</qualifiedname>
+        <briefdescription>
+<para>The type of a constant reference to the field to be differentiated. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="35" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCentralFDMPartialDerivativeWithBValue_1ae5e7d597e015b5024376bb27091c096d" prot="private" static="no">
+        <type>IdxRange&lt; <ref refid="classIPartialDerivative_1a5b5bbff2fea1001b2a434b28784f288f" kindref="member">GridDerivativeDimension</ref> &gt;</type>
+        <definition>using IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::IdxRangeDeriv =  IdxRange&lt;GridDerivativeDimension&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeDeriv</name>
+        <qualifiedname>CentralFDMPartialDerivativeWithBValue::IdxRangeDeriv</qualifiedname>
+        <briefdescription>
+<para>The index range of the dimension on which the partial derivative is calculated. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="38" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCentralFDMPartialDerivativeWithBValue_1a883ec2b528cf2188db6e593ae849fe0e" prot="private" static="no">
+        <type>ddc::remove_dims_of_t&lt; IdxRangeFull, <ref refid="classIPartialDerivative_1a5b5bbff2fea1001b2a434b28784f288f" kindref="member">GridDerivativeDimension</ref> &gt;</type>
+        <definition>using IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::IdxRangeBatch =  ddc::remove_dims_of_t&lt;IdxRangeFull, GridDerivativeDimension&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeBatch</name>
+        <qualifiedname>CentralFDMPartialDerivativeWithBValue::IdxRangeBatch</qualifiedname>
+        <briefdescription>
+<para>The index range of all dimensions except DerivativeDimension. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="41" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classCentralFDMPartialDerivativeWithBValue_1ab9d589da0cfdc7fefb9c2c8c17e320cf" prot="private" static="no" mutable="no">
+        <type>DFieldMemType</type>
+        <definition>DFieldMemType CentralFDMPartialDerivativeWithBValue&lt; IdxRangeFull, DerivativeDimension &gt;::m_field</definition>
+        <argsstring></argsstring>
+        <name>m_field</name>
+        <qualifiedname>CentralFDMPartialDerivativeWithBValue::m_field</qualifiedname>
+        <briefdescription>
+<para>The field to be differentiated, with the two boundary values. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="45" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCentralFDMPartialDerivativeWithBValue_1ae806f08c0f2c0555b1d863ceb98354f3" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double CentralFDMPartialDerivativeWithBValue&lt; IdxRangeFull, DerivativeDimension &gt;::m_b_value_left</definition>
+        <argsstring></argsstring>
+        <name>m_b_value_left</name>
+        <qualifiedname>CentralFDMPartialDerivativeWithBValue::m_b_value_left</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="46" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCentralFDMPartialDerivativeWithBValue_1a8a991398c5d27ca55eabb5f7251c403f" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double CentralFDMPartialDerivativeWithBValue&lt; IdxRangeFull, DerivativeDimension &gt;::m_b_value_right</definition>
+        <argsstring></argsstring>
+        <name>m_b_value_right</name>
+        <qualifiedname>CentralFDMPartialDerivativeWithBValue::m_b_value_right</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="47" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classCentralFDMPartialDerivativeWithBValue_1a863a67e5251dd75b98ee699bec3e9881" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>CentralFDMPartialDerivativeWithBValue&lt; IdxRangeFull, DerivativeDimension &gt;::CentralFDMPartialDerivativeWithBValue</definition>
+        <argsstring>(DConstFieldType const field_ref, double bvalue_left, double bvalue_right)</argsstring>
+        <name>CentralFDMPartialDerivativeWithBValue</name>
+        <qualifiedname>CentralFDMPartialDerivativeWithBValue::CentralFDMPartialDerivativeWithBValue</qualifiedname>
+        <param>
+          <type>DConstFieldType const</type>
+          <declname>field_ref</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>bvalue_left</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>bvalue_right</declname>
+        </param>
+        <briefdescription>
+<para>Construct an instance of the class <ref refid="classCentralFDMPartialDerivative" kindref="compound">CentralFDMPartialDerivative</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field_ref</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The field to be differentiated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bvalue_left</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The left boundary value. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bvalue_right</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The right boundary value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="57" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" bodystart="57" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classCentralFDMPartialDerivativeWithBValue_1a063c3d40a90ffe5994eb157cca4b0fd1" prot="public" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="virtual">
+        <type>void</type>
+        <definition>void CentralFDMPartialDerivativeWithBValue&lt; IdxRangeFull, DerivativeDimension &gt;::operator()</definition>
+        <argsstring>(DFieldType differentiated_field) const final</argsstring>
+        <name>operator()</name>
+        <qualifiedname>CentralFDMPartialDerivativeWithBValue::operator()</qualifiedname>
+        <reimplements refid="classIPartialDerivative_1ad0c4758b3151a9bbd01d9fda1d423353">operator()</reimplements>
+        <param>
+          <type>DFieldType</type>
+          <declname>differentiated_field</declname>
+        </param>
+        <briefdescription>
+<para>Compute the partial derivative of a field in a given direction using a finite difference scheme. For more information about the coefficients, see <computeroutput>./README.md</computeroutput> </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">differentiated_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On output, contains values of the differentiated field. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="75" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" bodystart="75" bodyend="152"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class which implements a partial derivative operator using a finite differences calculation of order two. A decentered scheme is used at the boundary, whereas centred finite difference are used inside the domain. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>IdxRangeFull</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range of the field on which the operator acts (with all dimensions, batched and dimension of interest). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DerivativeDimension</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimension on which the partial derivative is calculated. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>CentralFDMPartialDerivativeWithBValue&lt; IdxRangeFull, DerivativeDimension &gt;</label>
+        <link refid="classCentralFDMPartialDerivativeWithBValue"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</label>
+        <link refid="classIPartialDerivative"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>CentralFDMPartialDerivativeWithBValue&lt; IdxRangeFull, DerivativeDimension &gt;</label>
+        <link refid="classCentralFDMPartialDerivativeWithBValue"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</label>
+        <link refid="classIPartialDerivative"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" line="22" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp" bodystart="24" bodyend="153"/>
+    <listofallmembers>
+      <member refid="classCentralFDMPartialDerivativeWithBValue_1a7a50a30ad07bb6fc4e0b6779efaa92b4" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>base_type</name></member>
+      <member refid="classCentralFDMPartialDerivativeWithBValue_1a863a67e5251dd75b98ee699bec3e9881" prot="public" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>CentralFDMPartialDerivativeWithBValue</name></member>
+      <member refid="classCentralFDMPartialDerivativeWithBValue_1a85c8b026718b72ff0c996c4503b95136" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>DConstFieldType</name></member>
+      <member refid="classCentralFDMPartialDerivativeWithBValue_1a523c53585bf83c1972e4d935f9a8b9e5" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>DFieldMemType</name></member>
+      <member refid="classCentralFDMPartialDerivativeWithBValue_1a47c973564187001a3097fe9b0eb901d5" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>DFieldType</name></member>
+      <member refid="classIPartialDerivative_1a5b5bbff2fea1001b2a434b28784f288f" prot="public" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>GridDerivativeDimension</name></member>
+      <member refid="classCentralFDMPartialDerivativeWithBValue_1a883ec2b528cf2188db6e593ae849fe0e" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>IdxRangeBatch</name></member>
+      <member refid="classCentralFDMPartialDerivativeWithBValue_1ae5e7d597e015b5024376bb27091c096d" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>IdxRangeDeriv</name></member>
+      <member refid="classCentralFDMPartialDerivativeWithBValue_1ae806f08c0f2c0555b1d863ceb98354f3" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>m_b_value_left</name></member>
+      <member refid="classCentralFDMPartialDerivativeWithBValue_1a8a991398c5d27ca55eabb5f7251c403f" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>m_b_value_right</name></member>
+      <member refid="classCentralFDMPartialDerivativeWithBValue_1ab9d589da0cfdc7fefb9c2c8c17e320cf" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>m_field</name></member>
+      <member refid="classCentralFDMPartialDerivativeWithBValue_1a063c3d40a90ffe5994eb157cca4b0fd1" prot="public" virt="virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

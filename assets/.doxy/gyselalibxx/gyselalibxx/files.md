@@ -190,6 +190,7 @@ Here is a list of all files with brief descriptions:
         * **file** [**vector\_mapper.hpp**](vector__mapper_8hpp.md)     
     * **dir** [**math\_tools**](dir_3ced5d1c6eac490d7704c2e023d148d8.md)     
         * **file** [**central\_fdm\_partial\_derivatives.hpp**](central__fdm__partial__derivatives_8hpp.md)     
+        * **file** [**central\_fdm\_partial\_derivatives\_with\_boundary\_values.hpp**](central__fdm__partial__derivatives__with__boundary__values_8hpp.md)     
         * **file** [**gradient.hpp**](gradient_8hpp.md)     
         * **file** [**ipartial\_derivative.hpp**](ipartial__derivative_8hpp.md)     
         * **file** [**l\_norm\_tools.hpp**](l__norm__tools_8hpp.md)     
