@@ -14,13 +14,13 @@ Each decision we make in building the simulation from the domain geometry to the
 
 ## Problem Setup: Vlasov–Poisson in 1D-1V
 
-We consider the **electrostatic Vlasov–Poisson system** in one spatial and one velocity dimension. This models the time evolution of the **electron distribution function** $ f(x, v, t) $, which obeys the Vlasov equation:
+We consider the **electrostatic Vlasov–Poisson system** in one spatial and one velocity dimension. This models the time evolution of the **electron distribution function** $f(x, v, t)$, which obeys the Vlasov equation:
 
 ```math
 \frac{\partial f}{\partial t} + v \frac{\partial f}{\partial x} + E(x, t) \frac{\partial f}{\partial v} = 0
 ```
 
-Here, $ E(x, t) $ is the self-consistent electric field, determined by Poisson’s equation:
+Here, $E(x, t)$ is the self-consistent electric field, determined by Poisson’s equation:
 
 ```math
 \frac{\partial E}{\partial x} = \int_{-\infty}^{\infty} q_s f(x, v, t)\, dv - n_{0}
@@ -39,17 +39,17 @@ Before discretizing the system, we must define the **computational domain** for 
 We consider a **periodic spatial domain**:
 
 - $` x \in [0, L_x] `$, with $` L_x = 2\pi `$
-- Periodic boundary conditions in $ x $
+- Periodic boundary conditions in $x$
 
 And a **bounded velocity domain**:
 
-- $ v \in [-v_{\max}, v_{\max}] $, with $ v_{\max} = 6 $
-- Homogeneous Dirichlet (zero) boundary conditions in $ v $
+- $v \in [-v_{\max}, v_{\max}] $, with $ v_{\max} = 6$
+- Homogeneous Dirichlet (zero) boundary conditions in $v$
 
 These boundary choices are typical for Landau damping simulations:
 
-- The periodicity in $ x $ allows us to use **Fourier-based Poisson solvers**
-- The truncation of the $ v $-domain must be large enough to contain the significant support of the distribution function
+- The periodicity in $x$ allows us to use **Fourier-based Poisson solvers**
+- The truncation of the $v$-domain must be large enough to contain the significant support of the distribution function
 
 We can now take the first steps to construct our simulation. We create structures to describe the continuous dimensions of the **computational domain**:
 
@@ -124,7 +124,7 @@ We use a **spectral solver based on FFT**, leveraging the periodic boundary cond
 
 ### Charge Density via Quadrature
 
-To compute the charge density $ \rho(x) $, we integrate the distribution function over velocity space:
+To compute the charge density $\rho(x)$, we integrate the distribution function over velocity space:
 
 ```math
 \rho(x) = \int_{-\infty}^{\infty} f(x, v)\, dv
@@ -160,7 +160,7 @@ This approach is standard in semi-Lagrangian Vlasov solvers, and allows us to tr
 ### Semi-Lagrangian Advection
 
 Each sub-step of the splitting is handled via a **semi-Lagrangian method**. This involves tracing characteristics **backward in time** to find where information originates, and interpolating from that location.
-In our simulation we will use a **spline representation** of $ f $ for the interpolation.
+In our simulation we will use a **spline representation** of $f$ for the interpolation.
 
 Benefits of this approach:
 
@@ -177,12 +177,12 @@ When tracing characteristics backward in time the foot of the characteristic may
 
 ### Spline Representation
 
-The semi-Lagrangian method employed in this simulation requires the representation of the distribution function $ f(x, v, t) $ as a one-dimensional function during each substep of the Strang splitting scheme. Specifically, during advection in configuration space, $ f(\cdot, v) $ is treated as a function of $ x $ for fixed $ v $, and vice versa for velocity space.
+The semi-Lagrangian method employed in this simulation requires the representation of the distribution function $f(x, v, t)$ as a one-dimensional function during each substep of the Strang splitting scheme. Specifically, during advection in configuration space, $f(\cdot, v)$ is treated as a function of $x$ for fixed $v$, and vice versa for velocity space.
 
 We represent these one-dimensional functions using **B-spline interpolation**. The spline spaces used in each dimension are defined as follows:
 
 - **Uniform knot spacing** is used in both the spatial and velocity domains.
-- **Cubic B-splines** (polynomial degree $ p = 3 $) are employed to provide smooth and accurate interpolation.
+- **Cubic B-splines** (polynomial degree $p = 3$) are employed to provide smooth and accurate interpolation.
 
 This representation is used consistently throughout the simulation for both initialisation and interpolation during advection steps.
 
@@ -290,8 +290,6 @@ IdxRange<X> idx_range_x(SplineInterpPointsX::get_domain<GridX>());
 IdxRange<Vx> idx_range_vx(SplineInterpPointsVx::get_domain<GridVx>());
 ```
 
----
-
 #### Spline Dependent Grids with Input
 
 Spline-dependent grids are very common in Gyselalib++ but the required input for initialising these grids depends on:
@@ -299,7 +297,7 @@ Spline-dependent grids are very common in Gyselalib++ but the required input for
 - The uniformity of the cells on which the splines are defined
 - The method of defining the grid points from the splines
 
-This information is often provided as an input via PDI so Gyselalib++ also provides a helper function to initialise both the splines and the grids from a PDI configuration. This can be called as follows:
+This information is often provided as a yaml input using paraconf, so Gyselalib++ also provides a helper function to initialise both the splines and the grids from a paraconf configuration. This can be called as follows:
 
 ```cpp
 IdxRange<X> const idx_range_x = init_spline_dependent_idx_range<
@@ -310,6 +308,17 @@ IdxRange<Vx> const idx_range_vx = init_spline_dependent_idx_range<
         GridVx,
         BSplinesVx,
         SplineInterpPointsVx>(conf_gyselalibxx, "vx");
+```
+
+---
+
+### Defining the Grid of Species
+
+The distribution function depends not only on the spatial and veloctiy dimensions, but also on the species.
+We therefore also need to initialise the global grid of species. Gyselalib++ provides three functions for initialising the species from a paraconf configuration depending on the kind of species used (fluid, kinetic, adiabatic). For this simulation we will use kinetic and adiabatic species:
+
+```cpp
+IdxRangeSp const idx_range_kinsp = init_species(conf_gyselalibxx);
 ```
 
 ---
@@ -424,6 +433,7 @@ SplitVlasovSolver const vlasov(advection_x, advection_vx);
 ### Solving the Poisson Equation
 
 The Poisson equation is solved in two stages:
+
 1. Evaluate the charge density
 2. Solve the equation using an FFT solver
 
@@ -473,4 +483,124 @@ PredCorr const predcorr(vlasov, poisson);
 
 ---
 
-## Initial Conditions
+## Specifying Initial Conditions
+
+To complete the simulation setup, we must define the initial state of the distribution function $f(x, v, t=0)$. In this example, we consider the **classical Landau damping problem**, where an equilibrium Maxwellian is perturbed by a small-amplitude density wave.
+
+---
+
+### Analytical Form
+
+The initial condition is given by:
+
+```math
+\begin{aligned}
+f(x, v, 0) = f_M(v) \left(1 + \alpha \cos(k x)\right) \\
+\f_M(s, v) = \frac{n}{\sqrt{2\pi T}} \exp(-\frac{(v-u)^2}{2 T})
+\end{aligned}
+```
+
+where $n$ is the equilibrium density, $u$ is the mean velocity at equilibrium and $T$ is the equilibrium temperature.
+
+This defines a **spatially modulated Maxwellian**, with small perturbations intended to excite Landau damping of the $k$-mode in the electric field.
+
+---
+
+### Implementation in the code
+
+Gyselalib++ provides an operator `SingleModePerturbInitialisation` describing this equation for the XVx geometry. It takes
+
+```cpp
+// Initialisation of the Maxwellian equilibrium
+DFieldMemSpVx allfequilibrium(meshSpVx);
+MaxwellianEquilibrium const init_fequilibrium
+        = MaxwellianEquilibrium::init_from_input(idx_range_kinsp, conf_gyselalibxx);
+init_fequilibrium(get_field(allfequilibrium));
+
+// Initialisation of the distribution function
+SingleModePerturbInitialisation const init
+        = SingleModePerturbInitialisation::init_from_input(
+                get_const_field(allfequilibrium),
+                idx_range_kinsp,
+                conf_gyselalibxx);
+init(get_field(allfdistribu));
+```
+
+The equilibrium density, mean velocity, and temperature are read from the paraconf configuration.
+
+---
+
+## Diagnostics and output
+
+Gyselalib++ relies on PDI to output data from the simulations. You can find more information about this library in their [documentation](https://pdi.dev/main/).
+
+For this simulation we output one file containing initialisation parameters including the grid, some information about the species and the initial state:
+
+```cpp
+ddc::expose_to_pdi("Nx_spline_cells", ddc::discrete_space<BSplinesX>().ncells());
+ddc::expose_to_pdi("Nvx_spline_cells", ddc::discrete_space<BSplinesVx>().ncells());
+expose_mesh_to_pdi("MeshX", mesh_x);
+expose_mesh_to_pdi("MeshVx", mesh_vx);
+ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
+ddc::expose_to_pdi("Nkinspecies", idx_range_kinsp.size());
+ddc::expose_to_pdi(
+        "fdistribu_charges",
+        ddc::discrete_space<Species>().charges()[idx_range_kinsp]);
+ddc::expose_to_pdi(
+        "fdistribu_masses",
+        ddc::discrete_space<Species>().masses()[idx_range_kinsp]);
+ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);
+```
+
+we also output the distribution function at each step (this is done in the predictor corrector method).
+
+---
+
+## Running the Simulation
+
+Once the simulation has been fully defined, it can be built and executed using CMake as with any Gyselalib++ simulation. The simulation must be linked to each sub-library of Gysela that was used.
+
+In the repository, this simulation is located at:
+
+```
+simulations/geometryXVx/landau/landau_fft.cpp
+```
+
+The paraconf configuration for the simulation input is located at:
+
+```
+simulations/geometryXVx/landau/params.yaml.hpp
+```
+
+The PDI configuration for the simulation output is located at:
+
+```
+simulations/geometryXVx/landau/pdi_out.yml.hpp
+```
+
+The simulation can be built using the usual commands to build the library. See [Compilation](./install.md#Compilation) for more details:
+
+You can then generate an example yaml file:
+
+```bash
+./build/simulations/geometryXVx/landau/landau_fft --dump-config config.yml
+```
+
+and run the simulation:
+
+```bash
+./build/simulations/geometryXVx/landau/landau_fft config.yml
+```
+The simulation outputs are saved in **HDF5 format**.
+
+---
+
+## Conclusion
+
+In this tutorial, we have constructed a full 1D-1V Landau damping simulation using Gyselalib++. Starting from the Vlasov–Poisson system, we made explicit numerical choices for spline representation, operator splitting, and semi-Lagrangian advection. Each step that must be described to reproduce the simulation was written explicitly in the body of the simulation as part of a code structure.
+
+The logic required to build this simulation should be analagous to the logic needed to build more complex 1D-1V simulations or simulations in higher dimensions.
+
+We hope this tutorial helps you get started with Gyselalib++ — good luck with your simulations!
+
+
