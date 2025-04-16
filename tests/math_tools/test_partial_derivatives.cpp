@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 
 #include "central_fdm_partial_derivatives.hpp"
+#include "central_fdm_partial_derivatives_with_boundary_values.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "math_tools.hpp"
@@ -68,7 +69,10 @@ public:
     {
         double const x = ddc::get<X>(coord_xy);
         double const y = ddc::get<Y>(coord_xy);
-        return Kokkos::cos(x) * Kokkos::cos(y);
+        // This function has been chosen because its boundary values are constant
+        // on the domain @f$[-\pi,\pi]\times[-\pi,\pi]@f$.
+        // The 1.5 is an arbitrary offset, to avoid having zero value at the boundary.
+        return (Kokkos::cos(x) + 1) * (Kokkos::cos(y) + 1) + 1.5;
     }
 
     /**
@@ -91,9 +95,9 @@ public:
         double const y = ddc::get<Y>(coord_xy);
 
         if constexpr (std::is_same_v<DerivativeDimension, X>) {
-            return -Kokkos::sin(x) * Kokkos::cos(y);
+            return -Kokkos::sin(x) * (Kokkos::cos(y) + 1);
         } else {
-            return -Kokkos::cos(x) * Kokkos::sin(y);
+            return -(1 + Kokkos::cos(x)) * Kokkos::sin(y);
         }
     }
 };
@@ -519,6 +523,66 @@ public:
     }
 };
 
+/**
+ * @brief A class that represents a test for partial derivatives.
+ * The test can be used with finite difference method for
+ * computing partial derivatives with boundary values.
+ */
+template <std::size_t ncells_x, std::size_t ncells_y>
+class PartialDerivativeTestFDMWithBV : public PartialDerivativeTest<ncells_x, ncells_y>
+{
+private:
+    using base_type = PartialDerivativeTest<ncells_x, ncells_y>;
+
+    using typename base_type::IdxRangeX;
+    using typename base_type::IdxRangeXY;
+    using typename base_type::IdxRangeY;
+
+public:
+    PartialDerivativeTestFDMWithBV(
+            double const xmin,
+            double const xmax,
+            double const ymin,
+            double const ymax)
+        : base_type(xmin, xmax, ymin, ymax)
+    {
+        std::vector<CoordX> point_sampling_x = build_random_non_uniform_break_points(
+                base_type::m_xmin,
+                base_type::m_xmax,
+                base_type::m_ncells_x,
+                0.2);
+        ddc::init_discrete_space<typename base_type::GridX>(point_sampling_x);
+
+        std::vector<CoordY> point_sampling_y = build_random_non_uniform_break_points(
+                base_type::m_ymin,
+                base_type::m_ymax,
+                base_type::m_ncells_y,
+                0.2);
+        ddc::init_discrete_space<typename base_type::GridY>(point_sampling_y);
+    }
+
+    template <class DerivativeDimension>
+    double compute_error(double& max_distance) const
+    {
+        IdxRangeX idxrange_x(typename base_type::IdxX(0), base_type::m_ncells_x + 1);
+        IdxRangeY idxrange_y(typename base_type::IdxY(0), base_type::m_ncells_y + 1);
+        IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
+
+        // the boundary values are the value of the test function at -pi and pi, namely 0.
+        CentralFDMPartialDerivativeWithBValueCreator<IdxRangeXY, DerivativeDimension> const
+                derivative_creator(1.5, 1.5);
+
+        FunctionToDifferentiateCosine function_to_differentiate;
+        double const max_error = base_type::
+                template compute_max_error<DerivativeDimension, FunctionToDifferentiateCosine>(
+                        idxrange_xy,
+                        function_to_differentiate,
+                        derivative_creator,
+                        max_distance);
+
+        return max_error;
+    }
+};
 
 /** 
  * We expect a convergence of the error following error ~ (dx)^d
@@ -621,6 +685,43 @@ TEST(PartialDerivative, CentralFDMPartialDerivative)
 
     PartialDerivativeTestFDM<10, 10> const test_low_res(xmin, xmax, ymin, ymax);
     PartialDerivativeTestFDM<100, 100> const test_high_res(xmin, xmax, ymin, ymax);
+
+    // Partial Derivative in X direction
+    double delta_low_x, delta_high_x; // max distance between points in the derivative direction
+    double const error_low_x = test_low_res.compute_error<X>(delta_low_x);
+    double const error_high_x = test_high_res.compute_error<X>(delta_high_x);
+
+    double const order_x
+            = std::log(error_high_x / error_low_x) / std::log(delta_high_x / delta_low_x);
+    double const relative_error_order_x = std::fabs((expected_order - order_x) / expected_order);
+
+    EXPECT_LE(relative_error_order_x, TOL);
+
+    // Partial Derivative in Y direction
+    double delta_low_y, delta_high_y;
+    double const error_low_y = test_low_res.compute_error<Y>(delta_low_y);
+    double const error_high_y = test_high_res.compute_error<Y>(delta_high_y);
+
+    double const order_y
+            = std::log(error_high_y / error_low_y) / std::log(delta_high_y / delta_low_y);
+    double const relative_error_order_y = std::fabs((expected_order - order_y) / expected_order);
+
+    EXPECT_LE(relative_error_order_y, TOL);
+}
+
+TEST(PartialDerivative, CentralFDMPartialDerivativeWithBV)
+{
+    double const xmin(-M_PI);
+    double const xmax(M_PI);
+    double const ymin(-M_PI);
+    double const ymax(M_PI);
+    // relative error of convergence should be less than 15%
+    double const TOL = 0.15;
+    // due to the boundary values we lose the order two
+    int const expected_order(2);
+
+    PartialDerivativeTestFDMWithBV<10, 10> const test_low_res(xmin, xmax, ymin, ymax);
+    PartialDerivativeTestFDMWithBV<100, 100> const test_high_res(xmin, xmax, ymin, ymax);
 
     // Partial Derivative in X direction
     double delta_low_x, delta_high_x; // max distance between points in the derivative direction

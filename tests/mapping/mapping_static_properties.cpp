@@ -3,9 +3,11 @@
 #include "barycentric_to_cartesian.hpp"
 #include "cartesian_to_barycentric.hpp"
 #include "cartesian_to_circular.hpp"
+#include "cartesian_to_cylindrical.hpp"
 #include "cartesian_to_czarny.hpp"
 #include "circular_to_cartesian.hpp"
 #include "combined_mapping.hpp"
+#include "cylindrical_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "geometry_mapping_tests.hpp"
@@ -64,6 +66,21 @@ TEST(MappingStaticAsserts, CombinedMapping)
     static_assert(is_mapping_v<Mapping>);
     static_assert(has_jacobian_v<Mapping, CoordRTheta>);
     static_assert(has_inv_jacobian_v<Mapping, CoordRTheta>);
+}
+
+TEST(MappingStaticAsserts, CylToCart)
+{
+    static_assert(is_mapping_v<CylindricalToCartesian<R, Z, Zeta, X, Y>>);
+    static_assert(has_jacobian_v<CylindricalToCartesian<R, Z, Zeta, X, Y>, Coord<R, Z, Zeta>>);
+    static_assert(has_inv_jacobian_v<CylindricalToCartesian<R, Z, Zeta, X, Y>, Coord<R, Z, Zeta>>);
+    static_assert(is_analytical_mapping_v<CylindricalToCartesian<R, Z, Zeta, X, Y>>);
+}
+
+TEST(MappingStaticAsserts, CartToCyl)
+{
+    static_assert(is_mapping_v<CartesianToCylindrical<X, Y, Z, R, Zeta>>);
+    static_assert(has_jacobian_v<CartesianToCylindrical<X, Y, Z, R, Zeta>, Coord<X, Y, Z>>);
+    static_assert(is_analytical_mapping_v<CartesianToCylindrical<X, Y, Z, R, Zeta>>);
 }
 
 TEST(MappingStaticAsserts, BarycentricToCart)

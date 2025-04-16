@@ -14,7 +14,7 @@
 
 
 /**
- * @brief Define an advection operator on 2D @f$(r, \theta)@f$ index range.
+ * @brief Define an advection operator on 2D @f$(r, \theta)@f$ domain.
  *
  * The advection operator uses a backward semi-Lagrangian method. The method is based on
  * the property that the solution is constant along the characteristics.

@@ -60,7 +60,7 @@ The same computation can be made for the backward and the centred FDM scheme, an
     \begin{aligned}
         Df(x_1) & = -\frac{2\alpha+\beta}{\alpha(\alpha+\beta)}f(x_1)+\left(\frac{1}{\alpha}+\frac{1}{\beta}\right)f(x_2)-\frac{\alpha}{\beta(\alpha+\beta)}f(x_3) \\
         Df(x_2) & = -\frac{\beta}{\alpha(\alpha+\beta)}f(x_1)+\left(\frac{1}{\alpha}-\frac{1}{\beta}\right)f(x_2)+\frac{\alpha}{\alpha(\alpha+\beta)}f(x_3)        \\
-        Df(x_3) & = \frac{2\alpha+\beta}{\alpha(\alpha+\beta)}f(x_1)-\left(\frac{1}{\alpha}+\frac{1}{\beta}\right)f(x_2)+\frac{\alpha}{\beta(\alpha+\beta)}f(x_3).
+        Df(x_3) & = \frac{2\alpha+\beta}{\alpha(\alpha+\beta)}f(x_3)-\left(\frac{1}{\alpha}+\frac{1}{\beta}\right)f(x_2)+\frac{\alpha}{\beta(\alpha+\beta)}f(x_1).
     \end{aligned}
 ```
 

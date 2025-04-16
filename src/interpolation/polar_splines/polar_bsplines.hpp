@@ -17,7 +17,7 @@
  * A class containing all information describing polar B-splines.
  *
  * Polar B-splines are 2D B-splines with a special treatment for the central singular point
- * of a polar index range. At this singular point new B-splines are created which traverse the
+ * of a polar domain. At this singular point new B-splines are created which traverse the
  * singular point and ensure the desired continuity condition.
  *
  * @tparam BSplinesR  The basis of radial B-splines from which the polar B-splines are constructed.
