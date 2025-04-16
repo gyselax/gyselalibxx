@@ -203,7 +203,7 @@ public:
     template <class IndexTag1, class IndexTag2>
     KOKKOS_INLINE_FUNCTION double inv_jacobian_component(CoordArg const& coord) const
     {
-        static_assert(has_inv_jacobian_v<Curvilinear2DToCartesian>);
+        static_assert(has_inv_jacobian_v<Curvilinear2DToCartesian, CoordArg>);
         static_assert(ddc::in_tags_v<IndexTag1, ddc::detail::TypeSeq<Rho, Theta, Phi>>);
         static_assert(ddc::in_tags_v<IndexTag2, ddc::detail::TypeSeq<R_cov, Z_cov, Zeta_cov>>);
 
@@ -213,7 +213,7 @@ public:
                 (std::is_same_v<IndexTag1, Phi>) || (std::is_same_v<IndexTag2, Zeta_cov>)) {
             return 0;
         } else {
-            return m_mapping_2d.template jacobian_component<IndexTag1, IndexTag2>(
+            return m_mapping_2d.template inv_jacobian_component<IndexTag1, IndexTag2>(
                     CoordArg2D(coord));
         }
     }
