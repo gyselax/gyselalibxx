@@ -18,29 +18,37 @@ class CartesianToCylindrical;
 /**
  * @brief A class for describing the cylindrical 3D mapping.
  *
- * The mapping @f$ (r,\zeta,\phi)\mapsto (x,y,z) @f$ is defined as follow :
+ * The mapping @f$ (R, Z, \zeta)\mapsto (x,y,z) @f$ is defined as follow :
  *
- * @f$ x(R,\zeta, z) = R \cos(\zeta),@f$
+ * @f$ x(R, Z, \zeta) = R \cos(\zeta), @f$
  *
- * @f$ y(R,\zeta, z) = R \sin(\zeta).@f$
+ * @f$ y(R, Z, \zeta) = R \sin(\zeta). @f$
  *
- * @f$ z(R,\zeta, z) = z.@f$
+ * @f$ z(R, Z, \zeta) = z. @f$
  *
  * It and its Jacobian matrix are invertible everywhere except for @f$ R = 0 @f$.
  *
  * The Jacobian matrix coefficients are defined as follow
  *
- * @f$ J_{11}(R,\zeta) = \cos(\zeta)@f$
+ * @f$ J^x_{\;R}(R, Z, \zeta) = \cos(\zeta) @f$
  *
- * @f$ J_{12}(R,\zeta) = - R \sin(\zeta)@f$
+ * @f$ J^x_{\;Z}(R, Z, \zeta) = 0 @f$
  *
- * @f$ J_{21}(R,\zeta) = \sin(\zeta)@f$
+ * @f$ J^x_{\;\zeta}(R, Z, \zeta) = - R \sin(\zeta) @f$
  *
- * @f$ J_{22}(R,\zeta) = R \cos(\zeta)@f$
+ * @f$ J^y_{\;R}(R, Z, \zeta) = \sin(\zeta) @f$
  *
- * @f$ J_{33}(R,\zeta) = 1 @f$
+ * @f$ J^y_{\;Z}(R, Z, \zeta) = 0 @f$
  *
- * and the matrix determinant: @f$ \det(J) = R @f$.
+ * @f$ J^y_{\;\zeta}(R, Z, \zeta) = R \cos(\zeta) @f$
+ *
+ * @f$ J^z_{\;R}(R, Z, \zeta) = 0 @f$
+ *
+ * @f$ J^z_{\;Z}(R, Z, \zeta) = 1 @f$
+ *
+ * @f$ J^z_{\;\zeta}(R, Z, \zeta) = 0 @f$
+ *
+ * and the matrix determinant: @f$ \det(J) = -R @f$.
  *
  */
 template <class R, class Z, class Zeta, class X, class Y>

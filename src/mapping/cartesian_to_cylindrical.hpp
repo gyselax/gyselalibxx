@@ -30,15 +30,25 @@ class CylindricalToCartesian;
  *
  * The Jacobian matrix coefficients are defined as follow
  *
- * @f$ J^R_{\;X}(x,y,z)  =\frac{x}{\sqrt{x^2+y^2}}  @f$
+ * @f$ J^R_{\;x}(x,y,z)  =\frac{x}{\sqrt{x^2+y^2}}  @f$
  *
- * @f$ J^R_{\;Y}(x,y,z)  =\frac{y}{\sqrt{x^2+y^2}}  @f$
+ * @f$ J^R_{\;y}(x,y,z)  =\frac{y}{\sqrt{x^2+y^2}}  @f$
  *
- * @f$ J^{\zeta}_{\;X}(x,y,z)  =\frac{-y}{x^2+y^2}  @f$
+ * @f$ J^R_{\;z}(x,y,z)  =0  @f$
  *
- * @f$ J^{\zeta}_{\;Y}(x,y,z)  =\frac{x}{x^2+y^2}  @f$
+ * @f$ J^Z_{\;x}(x,y,z)  =0  @f$
  *
- * and the matrix determinant: @f$ det(J) = \frac{1}{\sqrt{x^2+y^2}} @f$.
+ * @f$ J^Z_{\;y}(x,y,z)  =0  @f$
+ *
+ * @f$ J^Z_{\;z}(x,y,z)  =1  @f$
+ *
+ * @f$ J^{\zeta}_{\;x}(x,y,z)  =\frac{-y}{x^2+y^2}  @f$
+ *
+ * @f$ J^{\zeta}_{\;y}(x,y,z)  =\frac{x}{x^2+y^2}  @f$
+ *
+ * @f$ J^{\zeta}_{\;z}(x,y,z)  =0  @f$
+ *
+ * and the matrix determinant: @f$ det(J) = -\frac{1}{\sqrt{x^2+y^2}} @f$.
  *
  */
 template <class X, class Y, class Z, class R, class Zeta>
@@ -165,12 +175,17 @@ public:
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
 
-        DTensor<VectorIndexSet<R, Z, Zeta>, VectorIndexSet<X_cov, Y_cov, Z_cov>> matrix(0);
+        DTensor<VectorIndexSet<R, Z, Zeta>, VectorIndexSet<X_cov, Y_cov, Z_cov>> matrix;
         ddcHelper::get<R, X_cov>(matrix) = x / Kokkos::sqrt(x * x + y * y);
         ddcHelper::get<R, Y_cov>(matrix) = y / Kokkos::sqrt(x * x + y * y);
+        ddcHelper::get<R, Z_cov>(matrix) = 0;
+        ddcHelper::get<Z, X_cov>(matrix) = 0;
+        ddcHelper::get<Z, Y_cov>(matrix) = 0;
+        ddcHelper::get<Z, Z_cov>(matrix) = 1;
         ddcHelper::get<Zeta, X_cov>(matrix) = -y / (x * x + y * y);
         ddcHelper::get<Zeta, Y_cov>(matrix) = x / (x * x + y * y);
-        ddcHelper::get<Z, Z_cov>(matrix) = 1;
+        ddcHelper::get<Zeta, Z_cov>(matrix) = 0;
+
         return matrix;
     }
 
