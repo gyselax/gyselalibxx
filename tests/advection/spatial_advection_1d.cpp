@@ -108,9 +108,7 @@ using SplineXBuilder = ddc::SplineBuilder<
         SplineXBoundary,
         SplineXBoundary,
         ddc::SplineSolver::LAPACK,
-        Species,
-        GridX,
-        GridVx>;
+        Species>;
 using SplineXEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,

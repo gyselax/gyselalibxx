@@ -64,9 +64,7 @@ using SplineXYBuilder = ddc::SplineBuilder2D<
         SplineXBoundary,
         SplineYBoundary,
         SplineYBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridX,
-        GridY>;
+        ddc::SplineSolver::LAPACK>;
 
 using IdxRangeBSXY = SplineXYBuilder::batched_spline_domain_type;
 

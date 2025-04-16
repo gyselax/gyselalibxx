@@ -135,8 +135,7 @@ class MultipatchSplineBuilder2D
                 std::is_same_v<upper_matching_edge1, OutsideEdge> ? BcUpper1 : BcTransition,
                 std::is_same_v<lower_matching_edge2, OutsideEdge> ? BcLower2 : BcTransition,
                 std::is_same_v<upper_matching_edge2, OutsideEdge> ? BcUpper2 : BcTransition,
-                Solver,
-                Grid1D...>;
+                Solver>;
     };
 
     /// A type alias to get the builder type on a specific patch.

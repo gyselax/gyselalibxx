@@ -37,8 +37,7 @@ class SplineInterpolator : public IInterpolator<GridInterp, Grid1D...>
             GridInterp,
             BcMin,
             BcMax,
-            Solver,
-            Grid1D...>;
+            Solver>;
     using EvaluatorType = ddc::SplineEvaluator<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
@@ -148,8 +147,7 @@ class PreallocatableSplineInterpolator : public IPreallocatableInterpolator<Grid
             GridInterp,
             BcMin,
             BcMax,
-            Solver,
-            Grid1D...>;
+            Solver>;
     using EvaluatorType = ddc::SplineEvaluator<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,

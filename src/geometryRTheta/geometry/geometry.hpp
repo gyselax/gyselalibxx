@@ -191,9 +191,7 @@ using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
         SplineRBoundary, // boundary at rmax
         SplineThetaBoundary,
         SplineThetaBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridR,
-        GridTheta>;
+        ddc::SplineSolver::LAPACK>;
 
 using SplineRThetaEvaluatorConstBound_host = ddc::SplineEvaluator2D<
         Kokkos::DefaultHostExecutionSpace,
@@ -234,9 +232,7 @@ using SplineRThetaBuilder = ddc::SplineBuilder2D<
         SplineRBoundary, // boundary at rmax
         SplineThetaBoundary,
         SplineThetaBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridR,
-        GridTheta>;
+        ddc::SplineSolver::LAPACK>;
 
 using SplineRThetaEvaluatorConstBound = ddc::SplineEvaluator2D<
         Kokkos::DefaultExecutionSpace,

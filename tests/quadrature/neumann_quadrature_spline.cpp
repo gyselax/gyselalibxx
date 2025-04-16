@@ -36,8 +36,7 @@ using SplineXBuilder_1d = ddc::SplineBuilder<
         GridX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridX>;
+        ddc::SplineSolver::LAPACK>;
 
 using IdxStepX = IdxStep<GridX>;
 using IdxRangeX = IdxRange<GridX>;
@@ -128,8 +127,7 @@ double compute_error(int n_elems)
             GridY,
             ddc::BoundCond::HERMITE,
             ddc::BoundCond::HERMITE,
-            ddc::SplineSolver::LAPACK,
-            GridY>;
+            ddc::SplineSolver::LAPACK>;
     using IdxRangeY = IdxRange<GridY>;
     using DFieldMemY = DFieldMem<IdxRangeY>;
     using DFieldY = DField<IdxRangeY>;

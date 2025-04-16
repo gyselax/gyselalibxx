@@ -158,11 +158,7 @@ using SplineXBuilder = ddc::SplineBuilder<
         GridX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridVx,
-        GridVy,
-        GridX,
-        GridY>;
+        ddc::SplineSolver::LAPACK>;
 using SplineXEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -181,11 +177,7 @@ using SplineYBuilder = ddc::SplineBuilder<
         GridY,
         SplineYBoundary,
         SplineYBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridVx,
-        GridVy,
-        GridX,
-        GridY>;
+        ddc::SplineSolver::LAPACK>;
 using SplineYEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -204,11 +196,7 @@ using SplineVxBuilder = ddc::SplineBuilder<
         GridVx,
         SplineVxBoundary,
         SplineVxBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridX,
-        GridY,
-        GridVx,
-        GridVy>;
+        ddc::SplineSolver::LAPACK>;
 using SplineVxEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -227,11 +215,7 @@ using SplineVyBuilder = ddc::SplineBuilder<
         GridVy,
         SplineVyBoundary,
         SplineVyBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridX,
-        GridY,
-        GridVx,
-        GridVy>;
+        ddc::SplineSolver::LAPACK>;
 using SplineVyEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,

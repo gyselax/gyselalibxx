@@ -36,15 +36,14 @@ using IdxX = Idx<GridX>;
 using IdxStepX = IdxStep<GridX>;
 using IdxRangeX = IdxRange<GridX>;
 
-using SplineXBuilder_1d = ddc::SplineBuilder<
+using SplineXBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
         ddc::BoundCond::GREVILLE,
         ddc::BoundCond::GREVILLE,
-        ddc::SplineSolver::LAPACK,
-        GridX>;
+        ddc::SplineSolver::LAPACK>;
 
 using SplineXEvaluator_1d = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
@@ -69,7 +68,7 @@ TEST(FemNonPeriodicPoissonSolver, Ordering)
     ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
     IdxRange<GridX> gridx(SplineInterpPointsX::get_domain<GridX>());
 
-    SplineXBuilder_1d const builder_x(gridx);
+    SplineXBuilder const builder_x(gridx);
 
     ddc::NullExtrapolationRule x_extrapolation_rule_min;
     ddc::NullExtrapolationRule x_extrapolation_rule_max;

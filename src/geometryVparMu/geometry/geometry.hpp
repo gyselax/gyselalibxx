@@ -85,8 +85,7 @@ using SplineVparBuilder = ddc::SplineBuilder<
         GridVpar,
         SplineVparBoundary,
         SplineVparBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridVpar>;
+        ddc::SplineSolver::LAPACK>;
 using SplineVparEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -103,8 +102,7 @@ using SplineMuBuilder = ddc::SplineBuilder<
         GridMu,
         SplineMuBoundary,
         SplineMuBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridMu>;
+        ddc::SplineSolver::LAPACK>;
 using SplineMuEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,

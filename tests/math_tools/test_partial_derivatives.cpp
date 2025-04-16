@@ -257,9 +257,7 @@ public:
             GridDDim,
             SplineBoundary,
             SplineBoundary,
-            ddc::SplineSolver::LAPACK,
-            GridX,
-            GridY>;
+            ddc::SplineSolver::LAPACK>;
 
     using SplineDDimEvaluator = ddc::SplineEvaluator<
             Kokkos::DefaultExecutionSpace,
@@ -377,9 +375,7 @@ public:
             SplineBoundary,
             SplineBoundary,
             SplineBoundary,
-            ddc::SplineSolver::LAPACK,
-            GridX,
-            GridY>;
+            ddc::SplineSolver::LAPACK>;
 
     using SplineEvaluator2D = ddc::SplineEvaluator2D<
             Kokkos::DefaultExecutionSpace,

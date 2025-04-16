@@ -35,9 +35,7 @@ using SplineXYBuilder = ddc::SplineBuilder2D<
         BC,
         BC,
         BC,
-        ddc::SplineSolver::LAPACK,
-        GridX<PatchIdx>,
-        GridY<PatchIdx>>;
+        ddc::SplineSolver::LAPACK>;
 
 template <ddc::BoundCond BC>
 using MultipatchSplineBuilderXY = MultipatchSplineBuilder2D<

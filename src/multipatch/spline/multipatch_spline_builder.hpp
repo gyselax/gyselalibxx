@@ -72,17 +72,8 @@ class MultipatchSplineBuilder
      * A small structure allowing the multiple grids to be unpacked from a field and repacked into
      * a SplineBuilder type.
      */
-    template <class Patch, class FieldType>
+    template <class Patch>
     struct Build_BuilderType
-    {
-        static_assert(
-                !std::is_same_v<Patch, Patch>,
-                "The values should be saved in a constant field of doubles on the specified memory "
-                "space.");
-    };
-
-    template <class Patch, class... Grid1D>
-    struct Build_BuilderType<Patch, DConstField<IdxRange<Grid1D...>, MemorySpace>>
     {
         using lower_matching_edge = equivalent_edge_t<
                 Edge<Patch, GridOnPatch<Patch>, FRONT>,
@@ -98,8 +89,7 @@ class MultipatchSplineBuilder
                 GridOnPatch<Patch>,
                 std::is_same_v<lower_matching_edge, OutsideEdge> ? BcLower : BcTransition,
                 std::is_same_v<upper_matching_edge, OutsideEdge> ? BcUpper : BcTransition,
-                Solver,
-                Grid1D...>;
+                Solver>;
     };
 
     /// A type alias to get the builder type on a specific patch.

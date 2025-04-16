@@ -51,15 +51,14 @@ using IdxRangeBatch = IdxRange<GridBatch>;
 
 using IdxRangeBatchX = IdxRange<GridBatch, GridX>;
 
-using SplineXBuilder_1d = ddc::SplineBuilder<
+using SplineXBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
         ddc::BoundCond::PERIODIC,
         ddc::BoundCond::PERIODIC,
-        ddc::SplineSolver::LAPACK,
-        GridX>;
+        ddc::SplineSolver::LAPACK>;
 
 using SplineXEvaluator_1d = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
@@ -68,27 +67,6 @@ using SplineXEvaluator_1d = ddc::SplineEvaluator<
         GridX,
         ddc::PeriodicExtrapolationRule<X>,
         ddc::PeriodicExtrapolationRule<X>,
-        GridX>;
-
-using BatchedSplineXBuilder_1d = ddc::SplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
-        ddc::SplineSolver::LAPACK,
-        GridBatch,
-        GridX>;
-
-using BatchedSplineXEvaluator_1d = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>,
-        GridBatch,
         GridX>;
 
 using DFieldMemX = DFieldMem<IdxRangeX>;

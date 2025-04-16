@@ -49,9 +49,7 @@ using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
         ddc::BoundCond::GREVILLE,
         ddc::BoundCond::PERIODIC,
         ddc::BoundCond::PERIODIC,
-        ddc::SplineSolver::LAPACK,
-        GridR<PatchIdx>,
-        GridTheta<PatchIdx>>;
+        ddc::SplineSolver::LAPACK>;
 
 
 template <int PatchIdx, class ExecSpace>

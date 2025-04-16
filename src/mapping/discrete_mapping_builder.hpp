@@ -257,9 +257,7 @@ private:
             BcUpper1,
             BcLower2,
             BcUpper2,
-            Solver,
-            GridROriginal,
-            GridThetaOriginal>>
+            Solver>>
     {
         using type = ddc::SplineBuilder2D<
                 ExecSpace,
@@ -272,9 +270,7 @@ private:
                 BcUpper1,
                 BcLower2,
                 BcUpper2,
-                Solver,
-                GridRRefined,
-                GridThetaRefined>;
+                Solver>;
     };
 
     using RefinedSplineBuilder = typename Build_BuilderType<SplineBuilder>::type;

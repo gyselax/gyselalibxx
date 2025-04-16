@@ -116,9 +116,7 @@ TEST(PolarSplineTest, ConstantEval)
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
-            ddc::SplineSolver::LAPACK,
-            GridR,
-            GridTheta>;
+            ddc::SplineSolver::LAPACK>;
 
     using EvaluatorRTheta = ddc::SplineEvaluator2D<
             Kokkos::DefaultHostExecutionSpace,
@@ -239,9 +237,7 @@ void test_polar_integrals()
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
-            ddc::SplineSolver::LAPACK,
-            GridR,
-            GridTheta>;
+            ddc::SplineSolver::LAPACK>;
 
     using EvaluatorRTheta = ddc::SplineEvaluator2D<
             Kokkos::DefaultHostExecutionSpace,

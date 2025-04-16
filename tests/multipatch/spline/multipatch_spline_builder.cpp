@@ -36,15 +36,14 @@ using SplineInterpPointsY2
         = ddc::GrevilleInterpolationPoints<BSplinesY<2>, SplineY2Boundary, SplineY2Boundary>;
 
 // Operators
-using SplineX1Builder_1d = ddc::SplineBuilder<
+using SplineX1Builder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX<1>,
         GridX<1>,
         SplineX1Boundary,
         SplineX1Boundary,
-        ddc::SplineSolver::LAPACK,
-        GridX<1>>;
+        ddc::SplineSolver::LAPACK>;
 
 using SplineX2Builder_1d = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
@@ -53,34 +52,11 @@ using SplineX2Builder_1d = ddc::SplineBuilder<
         GridX<2>,
         SplineX2Boundary,
         SplineX2Boundary,
-        ddc::SplineSolver::LAPACK,
-        GridX<2>>;
+        ddc::SplineSolver::LAPACK>;
 
 
 
-using SplineX1Builder_2d = ddc::SplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX<1>,
-        GridX<1>,
-        SplineX1Boundary,
-        SplineX1Boundary,
-        ddc::SplineSolver::LAPACK,
-        GridX<1>,
-        GridY<1>>;
-
-using SplineX2Builder_2d = ddc::SplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX<2>,
-        GridX<2>,
-        SplineX2Boundary,
-        SplineX2Boundary,
-        ddc::SplineSolver::LAPACK,
-        GridX<2>,
-        GridY<2>>;
-
-using MultipatchSplineBuilderX_1d = MultipatchSplineBuilder<
+using MultipatchSplineBuilderX = MultipatchSplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplines1OnPatch,
@@ -90,21 +66,6 @@ using MultipatchSplineBuilderX_1d = MultipatchSplineBuilder<
         SplineXBoundary,
         Connectivity,
         ddc::SplineSolver::LAPACK,
-        DConstField1OnPatch,
-        Patch1,
-        Patch2>;
-
-using MultipatchSplineBuilderX_2d = MultipatchSplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplines1OnPatch,
-        Grid1OnPatch,
-        SplineXBoundary,
-        SplineXBoundary,
-        SplineXBoundary,
-        Connectivity,
-        ddc::SplineSolver::LAPACK,
-        DConstFieldOnPatch,
         Patch1,
         Patch2>;
 
