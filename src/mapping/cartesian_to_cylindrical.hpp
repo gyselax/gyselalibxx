@@ -30,13 +30,13 @@ class CylindricalToCartesian;
  *
  * The Jacobian matrix coefficients are defined as follow
  *
- * @f$ J^R_{\.X}(x,y,z)  =\frac{x}{\sqrt{x^2+y^2}}  @f$
+ * @f$ J^R_{\;X}(x,y,z)  =\frac{x}{\sqrt{x^2+y^2}}  @f$
  *
- * @f$ J^R_{\.Y}(x,y,z)  =\frac{y}{\sqrt{x^2+y^2}}  @f$
+ * @f$ J^R_{\;Y}(x,y,z)  =\frac{y}{\sqrt{x^2+y^2}}  @f$
  *
- * @f$ J^{\zeta}_{\.X}(x,y,z)  =\frac{-y}{x^2+y^2}  @f$
+ * @f$ J^{\zeta}_{\;X}(x,y,z)  =\frac{-y}{x^2+y^2}  @f$
  *
- * @f$ J^{\zeta}_{\.Y}(x,y,z)  =\frac{x}{x^2+y^2}  @f$
+ * @f$ J^{\zeta}_{\;Y}(x,y,z)  =\frac{x}{x^2+y^2}  @f$
  *
  * and the matrix determinant: @f$ det(J) = \frac{1}{\sqrt{x^2+y^2}} @f$.
  *
