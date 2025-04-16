@@ -36,9 +36,6 @@ public:
     /// @brief Indicate the third logical coordinate.
     using toroidal_tag_phi = Phi;
 
-    /// The type of the coordinate change on the polar plane.
-    using PolarToCartesian = Curvilinear2DToCartesian;
-
 private:
     using R = cylindrical_tag_R;
     using R_cov = typename R::Dual;
@@ -216,6 +213,16 @@ public:
             return m_mapping_2d.template inv_jacobian_component<IndexTag1, IndexTag2>(
                     CoordArg2D(coord));
         }
+    }
+
+    /**
+     * @brief Get the mapping describing the polar plane.
+     *
+     * @return The mapping describing the polar plane.
+     */
+    Curvilinear2DToCartesian get_2d_polar_mapping() const
+    {
+        return m_mapping_2d;
     }
 };
 
