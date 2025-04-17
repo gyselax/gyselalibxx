@@ -68,8 +68,8 @@ int main(int argc, char** argv)
     IdxRangeSpXVx const meshSpXVx(idx_range_kinsp, meshXVx);
     IdxRangeSpVx const meshSpVx(idx_range_kinsp, mesh_vx);
 
-    SplineXBuilder const builder_x(meshXVx);
-    SplineVxBuilder const builder_vx(meshXVx);
+    SplineXBuilder const builder_x(mesh_x);
+    SplineVxBuilder const builder_vx(mesh_vx);
 
     // Initialisation of the distribution function
     DFieldMemSpVx allfequilibrium(meshSpVx);

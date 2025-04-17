@@ -221,7 +221,7 @@ public:
 TEST_F(XVxAdvection1DTest, AdvectionXVx)
 {
     // CREATING OPERATORS ------------------------------------------------------------------------
-    SplineXBuilder const builder_x(idx_range_xvx);
+    SplineXBuilder const builder_x(idx_range_x);
 
     ddc::PeriodicExtrapolationRule<X> bv_x_min;
     ddc::PeriodicExtrapolationRule<X> bv_x_max;

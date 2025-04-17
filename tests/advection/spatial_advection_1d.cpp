@@ -222,7 +222,7 @@ TEST_F(Spatial1DAdvectionTest, SpatialAdvection)
 {
     IdxRangeSpXVx meshSpXVx(idx_range_allsp, idx_range_x, idx_range_vx);
 
-    SplineXBuilder const builder_x(meshSpXVx);
+    SplineXBuilder const builder_x(idx_range_x);
 
     ddc::PeriodicExtrapolationRule<X> bv_x_min;
     ddc::PeriodicExtrapolationRule<X> bv_x_max;

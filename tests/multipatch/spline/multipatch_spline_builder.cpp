@@ -303,8 +303,8 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
 
 
     // List of spline builders
-    SplineX1Builder builder_x1(idx_range_xy1);
-    SplineX2Builder builder_x2(idx_range_xy2);
+    SplineX1Builder builder_x1(idx_range_x1);
+    SplineX2Builder builder_x2(idx_range_x2);
 
     // Collection of builders for each patch
     MultipatchSplineBuilderX_2d builder(builder_x1, builder_x2);

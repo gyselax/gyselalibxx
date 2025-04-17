@@ -79,8 +79,8 @@ int main(int argc, char** argv)
 
     // DEFINING OPERATORS ------------------------------------------------------------------------
     // Create spline builderss ---
-    SplineXBuilder_XY const builder_x(meshXY);
-    SplineYBuilder_XY const builder_y(meshXY);
+    SplineXBuilder_XY const builder_x(interpolation_idx_range_x);
+    SplineYBuilder_XY const builder_y(interpolation_idx_range_y);
 
     // Create spline evaluators ---
     ddc::PeriodicExtrapolationRule<X> bv_x_min;

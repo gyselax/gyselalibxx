@@ -141,7 +141,7 @@ TEST(FemPeriodicPoissonSolver, BatchedCosineSource)
 
     IdxRangeBatchX gridbx(gridb, gridx);
 
-    SplineXBuilder const builder_x(gridbx);
+    SplineXBuilder const builder_x(gridx);
 
     ddc::PeriodicExtrapolationRule<X> x_extrapolation_rule_min;
     ddc::PeriodicExtrapolationRule<X> x_extrapolation_rule_max;
