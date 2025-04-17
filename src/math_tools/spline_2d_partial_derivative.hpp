@@ -13,6 +13,8 @@
  * using a 2d spline interpolation.
  * @tparam SplineBuilder2D A 2D spline builder.
  * @tparam SplineEvaluator2D A 2D spline evaluator.
+ * @tparam DerivativeDimension The dimension along which we are differentiating.
+ * @tparam IdxRangeBatched The type af the index range over which this operator will operate.
  */
 template <
         class SplineBuilder2D,
@@ -90,6 +92,8 @@ public:
  *
  * @tparam SplineBuilder2D A 2D spline builder.
  * @tparam SplineEvaluator2D A 2D spline evaluator.
+ * @tparam DerivativeDimension The dimension along which we are differentiating.
+ * @tparam IdxRangeBatched The type af the index range over which this operator will operate.
  */
 template <
         class SplineBuilder2D,

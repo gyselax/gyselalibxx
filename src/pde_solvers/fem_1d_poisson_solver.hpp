@@ -16,7 +16,10 @@
  * @f$ -\Delta \phi = \rho @f$
  * using a Finite Element Method.
  *
+ * @tparam SplineBuilder An operator which builds spline coefficients.
  * @tparam SplineEvaluator An evaluator which can be used to evaluate splines.
+ * @tparam IdxRangeBatched The type af the index range over which this operator will operate.
+ *                  By default: the 1D index range of the interpolation points for the spline builder.
  */
 template <
         class SplineBuilder,

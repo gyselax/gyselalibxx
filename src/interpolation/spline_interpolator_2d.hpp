@@ -5,9 +5,15 @@
 #include "i_interpolator_2d.hpp"
 
 /**
- * @brief A class for interpolating a function using splines in polar coordinates.
+ * @brief A class for interpolating a function using a 2D tensor product of splines.
  *
- * @tparam RadialExtrapolationRule The extrapolation rule applied at the outer radial bound.
+ * The class is parametrised by multiple template parameters. Please note that CTAD will deduce all these
+ * template parameters from the Builder and Evaluator passed as constructor arguments.
+ *
+ * @tparam Spline2DBuilder The type of the 2D spline builder.
+ * @tparam Spline2DEvaluator The type of the 2D spline evaluator.
+ * @tparam IdxRangeBatched The type af the index range over which this operator will operate. This is
+ *              necessary to define the internal spline representation.
  */
 template <class Spline2DBuilder, class Spline2DEvaluator, class IdxRangeBatched>
 class SplineInterpolator2D
@@ -40,8 +46,10 @@ private:
 public:
     /**
      * @brief Create a spline interpolator object.
-     * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
+     * @param[in] builder An operator which builds spline coefficients from the values of a function at known
+     *                  interpolation points.
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
+     * @param[in] idx_range_batched The index range on which this operator operates.
      */
     SplineInterpolator2D(
             Spline2DBuilder const& builder,
@@ -83,6 +91,14 @@ public:
  * This class allows an instance of the SplineInterpolator2D class to be instantiated where necessary. This allows the
  * memory allocated in the private members of the SplineInterpolator2D to be freed when the object is not in use.
  * These objects are: m_coefs.
+ *
+ * The class is parametrised by multiple template parameters. Please note that CTAD will deduce all these
+ * template parameters from the Builder and Evaluator passed as constructor arguments.
+ *
+ * @tparam Spline2DBuilder The type of the 2D spline builder.
+ * @tparam Spline2DEvaluator The type of the 2D spline evaluator.
+ * @tparam IdxRangeBatched The type af the index range over which this operator will operate. This is
+ *              necessary to define the internal spline representation.
  */
 template <class Spline2DBuilder, class Spline2DEvaluator, class IdxRangeBatched>
 class PreallocatableSplineInterpolator2D
@@ -100,8 +116,10 @@ private:
 public:
     /**
      * @brief Create an object capable of creating SplineInterpolator2D objects.
-     * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
+     * @param[in] builder An operator which builds spline coefficients from the values of a function at
+     *                      known interpolation points.
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
+     * @param[in] idx_range_batched The index range on which this operator operates.
      */
     PreallocatableSplineInterpolator2D(
             Spline2DBuilder const& builder,

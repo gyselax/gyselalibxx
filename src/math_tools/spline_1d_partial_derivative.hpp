@@ -12,6 +12,7 @@
  * using a 1d spline interpolation.
  * @tparam Spline1DBuilder A 1D spline builder.
  * @tparam Spline1DEvaluator A 1D spline evaluator.
+ * @tparam IdxRangeBatched The type af the index range over which this operator will operate.
  */
 template <class Spline1DBuilder, class Spline1DEvaluator, class IdxRangeBatched>
 class Spline1DPartialDerivative
@@ -84,6 +85,7 @@ public:
  * is required. 
  * @tparam Spline1DBuilder A 1D spline builder.
  * @tparam Spline1DEvaluator A 1D spline evaluator.
+ * @tparam IdxRangeBatched The type af the index range over which this operator will operate.
  */
 template <class Spline1DBuilder, class Spline1DEvaluator, class IdxRangeBatched>
 class Spline1DPartialDerivativeCreator

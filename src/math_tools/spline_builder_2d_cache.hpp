@@ -34,6 +34,7 @@ public:
     * @brief Construct an instance of the class SplineBuilder2DCache.
     *
     * @param spline_builder A 2D spline builder.
+     * @param[in] idx_range_batched The index range on which this operator operates.
     */
     explicit SplineBuilder2DCache(
             SplineBuilder2D const& spline_builder,

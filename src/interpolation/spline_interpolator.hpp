@@ -17,6 +17,11 @@
  * @tparam BSplines The BSplines along the dimension of interest.
  * @tparam BcMin The boundary condition at the lower boundary.
  * @tparam BcMax The boundary condition at the upper boundary.
+ * @tparam LeftExtrapolationRule The extrapolation rule if evaluated out of bounds
+ *              on the left side of the domain.
+ * @tparam RightExtrapolationRule The extrapolation rule if evaluated out of bounds
+ *              on the left side of the domain.
+ * @tparam Solver The kind of solver used to solve the spline matrix equation.
  * @tparam Grid1D... All the dimensions of the interpolation problem (batched + interpolated).
  */
 template <
@@ -63,8 +68,12 @@ private:
 public:
     /**
      * @brief Create a spline interpolator object.
-     * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
-     * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
+     *
+     * @param[in] builder An operator which builds spline coefficients from the values of a
+     *                  function at known interpolation points.
+     * @param[in] evaluator An operator which evaluates the value of a spline at requested
+     *                  coordinates.
+     * @param[in] idx_range_batched The index range on which this operator operates.
      */
     SplineInterpolator(
             BuilderType const& builder,
@@ -169,8 +178,11 @@ class PreallocatableSplineInterpolator : public IPreallocatableInterpolator<Grid
 public:
     /**
      * @brief Create an object capable of creating SplineInterpolator objects.
-     * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
-     * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
+     * @param[in] builder An operator which builds spline coefficients from the values of a
+     *                  function at known interpolation points.
+     * @param[in] evaluator An operator which evaluates the value of a spline at requested
+     *                  coordinates.
+     * @param[in] idx_range_batched The index range on which this operator operates.
      */
     PreallocatableSplineInterpolator(
             BuilderType const& builder,
