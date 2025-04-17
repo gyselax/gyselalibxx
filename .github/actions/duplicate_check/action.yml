@@ -46,7 +46,7 @@ runs:
       run: |
         echo "Found match : ${{ steps.changes_check.outputs.found_match }}"
         echo "Should skip : ${{ steps.duplicate_check.outputs.should_skip }}"
-        SHOULD_SKIP=${{ (steps.changes_check.outputs.found_match == 'False') || (steps.duplicate_check.outputs.should_skip == 'true') }}
+        SHOULD_SKIP=${{ github.event_name != 'push' && ((steps.changes_check.outputs.found_match == 'False') || (steps.duplicate_check.outputs.should_skip == 'true')) }}
         echo "should_skip=${SHOULD_SKIP}" >> $GITHUB_OUTPUT
         echo "should_skip=${SHOULD_SKIP}"
       shell: bash
