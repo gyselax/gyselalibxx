@@ -1,6 +1,6 @@
 # 1D-1V Landau Damping Simulation with Gyselalib++
 
-> **Tutorial Goal:** Learn to use Gyselalib++ to implement a 1D-1V Vlasov–Poisson simulation demonstrating Landau damping, by walking through the scientific and algorithmic choices made in [this simulation](https://github.com/gyselax/gyselalibxx/blob/main/simulations/geometryXVx/landau/landau_fft.cpp).
+> **Tutorial Goal:** Learn to use Gyselalib++ to implement a 1D-1V Vlasov–Poisson simulation demonstrating Landau damping, by walking through the scientific and algorithmic choices made in [this simulation](https://github.com/gyselax/gyselalibxx/blob/devel/simulations/geometryXVx/landau/landau_fft.cpp).
 
 ---
 

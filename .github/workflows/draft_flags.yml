@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: devel
       - run: |
           gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
           RUNNING_WORKFLOW_LINKS=$(gh pr checks ${{ github.event.pull_request.number }} --json state,link --jq '.[] | select(.state == "QUEUED" or .state == "IN_PROGRESS" or .state == "WATING") | .link' | grep github)

@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: devel
       - run: |
           gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
           msg="Please remove the draft status if the PR is ready to review. The 'Ready to review' label will be added automatically when the tests are shown to be passing"

@@ -19,7 +19,7 @@
  * function of different species. It is solved using a explicit time 
  * integrator (RK2 for instance).
  * 
- * The complete description of the operator can be found in [rhs docs](https://github.com/gyselax/gyselalibxx/blob/main/doc/geometryXVx/collisions_intra_inter.pdf). 
+ * The complete description of the operator can be found in [rhs docs](https://github.com/gyselax/gyselalibxx/blob/devel/doc/geometryXVx/collisions_intra_inter.pdf). 
  */
 class CollisionsInter : public IRightHandSide
 {
