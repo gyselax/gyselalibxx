@@ -76,5 +76,3 @@ using UniformGridBase = ddc::UniformPointSampling<Dim>;
 /// An alias describing the type from which a non-uniform grid must inherit.
 template <class Dim>
 using NonUniformGridBase = ddc::NonUniformPointSampling<Dim>;
-
-

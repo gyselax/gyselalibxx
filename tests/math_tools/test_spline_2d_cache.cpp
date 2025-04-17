@@ -108,7 +108,7 @@ public:
      *
      * @return The domain for the spline coefficients.
      */
-    template<class IdxRangeIgnored>
+    template <class IdxRangeIgnored>
     IdxRangeBSXY batched_spline_domain(IdxRangeIgnored) const noexcept
     {
         return m_spline_domain;
