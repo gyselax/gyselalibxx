@@ -11,7 +11,7 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="1">
-        <label>FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator &gt;::GridPDEDimQ</label>
+        <label>FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator, IdxRangeBatched &gt;::GridPDEDimQ</label>
         <link refid="structFEM1DPoissonSolver_1_1GridPDEDimQ"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
@@ -22,7 +22,7 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="1">
-        <label>FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator &gt;::GridPDEDimQ</label>
+        <label>FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator, IdxRangeBatched &gt;::GridPDEDimQ</label>
         <link refid="structFEM1DPoissonSolver_1_1GridPDEDimQ"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
@@ -31,7 +31,7 @@
         <label>NonUniformGridBase&lt; PDEDim &gt;</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="72" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="73" bodyend="74"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="78" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="79" bodyend="80"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

@@ -548,15 +548,12 @@
 #include "ddc_aliases.hpp"
 #include "i_interpolator_2d.hpp"
 
-template &lt;class Spline2DBuilder, class Spline2DEvaluator&gt;
+template &lt;class Spline2DBuilder, class Spline2DEvaluator, class IdxRangeBatched&gt;
 class SplineInterpolator2D
-    : public IInterpolator2D&lt;
-              typename Spline2DBuilder::interpolation_domain_type,
-              typename Spline2DBuilder::batched_interpolation_domain_type&gt;
+    : public IInterpolator2D&lt;typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched&gt;
 {
-    using base_type = IInterpolator2D&lt;
-            typename Spline2DBuilder::interpolation_domain_type,
-            typename Spline2DBuilder::batched_interpolation_domain_type&gt;;
+    using base_type
+            = IInterpolator2D&lt;typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched&gt;;
 
 public:
     using typename base_type::CConstFieldType;
@@ -568,19 +565,25 @@ private:
 
     Spline2DEvaluator const&amp; m_evaluator;
 
-    using IdxRangeBSRTheta = typename Spline2DBuilder::batched_spline_domain_type;
+    using IdxRangeBSRTheta = typename Spline2DBuilder::batched_spline_domain_type&lt;IdxRangeBatched&gt;;
 
     mutable DFieldMem&lt;IdxRangeBSRTheta&gt; m_coefs;
 
-    using r_deriv_type = DConstField&lt;typename Spline2DBuilder::batched_derivs_domain_type1&gt;;
-    using theta_deriv_type = DConstField&lt;typename Spline2DBuilder::batched_derivs_domain_type2&gt;;
-    using mixed_deriv_type = DConstField&lt;typename Spline2DBuilder::batched_derivs_domain_type&gt;;
+    using r_deriv_type
+            = DConstField&lt;typename Spline2DBuilder::batched_derivs_domain_type1&lt;IdxRangeBatched&gt;&gt;;
+    using theta_deriv_type
+            = DConstField&lt;typename Spline2DBuilder::batched_derivs_domain_type2&lt;IdxRangeBatched&gt;&gt;;
+    using mixed_deriv_type
+            = DConstField&lt;typename Spline2DBuilder::batched_derivs_domain_type&lt;IdxRangeBatched&gt;&gt;;
 
 public:
-    SplineInterpolator2D(Spline2DBuilder const&amp; builder, Spline2DEvaluator const&amp; evaluator)
+    SplineInterpolator2D(
+            Spline2DBuilder const&amp; builder,
+            Spline2DEvaluator const&amp; evaluator,
+            IdxRangeBatched idx_range_batched)
         : m_builder(builder)
         , m_evaluator(evaluator)
-        , m_coefs(get_spline_idx_range(builder))
+        , m_coefs(builder.batched_spline_domain(idx_range_batched))
     {
     }
 
@@ -596,33 +599,38 @@ public:
 
 
 
-template &lt;class Spline2DBuilder, class Spline2DEvaluator&gt;
+template &lt;class Spline2DBuilder, class Spline2DEvaluator, class IdxRangeBatched&gt;
 class PreallocatableSplineInterpolator2D
     : public IPreallocatableInterpolator2D&lt;
               typename Spline2DBuilder::interpolation_domain_type,
-              typename Spline2DBuilder::batched_interpolation_domain_type&gt;
+              IdxRangeBatched&gt;
 {
 private:
     Spline2DBuilder const&amp; m_builder;
 
     Spline2DEvaluator const&amp; m_evaluator;
 
+    IdxRangeBatched m_idx_range_batched;
+
 public:
     PreallocatableSplineInterpolator2D(
             Spline2DBuilder const&amp; builder,
-            Spline2DEvaluator const&amp; evaluator)
+            Spline2DEvaluator const&amp; evaluator,
+            IdxRangeBatched idx_range_batched)
         : m_builder(builder)
         , m_evaluator(evaluator)
+        , m_idx_range_batched(idx_range_batched)
     {
     }
 
-    std::unique_ptr&lt;IInterpolator2D&lt;
-            typename Spline2DBuilder::interpolation_domain_type,
-            typename Spline2DBuilder::batched_interpolation_domain_type&gt;&gt;
+    std::unique_ptr&lt;
+            IInterpolator2D&lt;typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched&gt;&gt;
     preallocate() const override
     {
-        return std::make_unique&lt;
-                SplineInterpolator2D&lt;Spline2DBuilder, Spline2DEvaluator&gt;&gt;(m_builder, m_evaluator);
+        return std::make_unique&lt;SplineInterpolator2D&lt;
+                Spline2DBuilder,
+                Spline2DEvaluator,
+                IdxRangeBatched&gt;&gt;(m_builder, m_evaluator, m_idx_range_batched);
     }
 };
 </code></pre></div>

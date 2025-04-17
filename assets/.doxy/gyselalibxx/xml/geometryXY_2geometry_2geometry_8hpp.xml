@@ -231,9 +231,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="88" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="89" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1aaf6b2b7a804fbc791c45b0aa662bbf24" prot="public" static="no">
-        <type>ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <ref refid="structBSplinesX" kindref="compound">BSplinesX</ref>, <ref refid="structGridX" kindref="compound">GridX</ref>, SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK, <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structGridY" kindref="compound">GridY</ref> &gt;</type>
-        <definition>using SplineXBuilder_XY =  ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK, GridX, GridY&gt;</definition>
+      <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1afdfc6bba63e60ac864884be1a4593ba5" prot="public" static="no">
+        <type>ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <ref refid="structBSplinesX" kindref="compound">BSplinesX</ref>, <ref refid="structGridX" kindref="compound">GridX</ref>, SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK &gt;</type>
+        <definition>using SplineXBuilder_XY =  ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK&gt;</definition>
         <argsstring></argsstring>
         <name>SplineXBuilder_XY</name>
         <briefdescription>
@@ -242,11 +242,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="101" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="110" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="101" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="108" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a8663d14d0b4a7f77edf909866583fc0d" prot="public" static="no">
-        <type>ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <ref refid="structBSplinesX" kindref="compound">BSplinesX</ref>, <ref refid="structGridX" kindref="compound">GridX</ref>, ddc::PeriodicExtrapolationRule&lt; <ref refid="structX" kindref="compound">X</ref> &gt;, ddc::PeriodicExtrapolationRule&lt; <ref refid="structX" kindref="compound">X</ref> &gt;, <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structGridY" kindref="compound">GridY</ref> &gt;</type>
-        <definition>using SplineXEvaluator_XY =  ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, ddc::PeriodicExtrapolationRule&lt;X&gt;, ddc::PeriodicExtrapolationRule&lt;X&gt;, GridX, GridY&gt;</definition>
+      <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a3be27201d25e4c617d11e0a71c09ee78" prot="public" static="no">
+        <type>ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <ref refid="structBSplinesX" kindref="compound">BSplinesX</ref>, <ref refid="structGridX" kindref="compound">GridX</ref>, ddc::PeriodicExtrapolationRule&lt; <ref refid="structX" kindref="compound">X</ref> &gt;, ddc::PeriodicExtrapolationRule&lt; <ref refid="structX" kindref="compound">X</ref> &gt; &gt;</type>
+        <definition>using SplineXEvaluator_XY =  ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, ddc::PeriodicExtrapolationRule&lt;X&gt;, ddc::PeriodicExtrapolationRule&lt;X&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>SplineXEvaluator_XY</name>
         <briefdescription>
@@ -255,11 +255,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="111" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="119" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="109" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="115" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a0e64ffffd6db42f9aec1161cf6db797c" prot="public" static="no">
-        <type>ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <ref refid="structBSplinesY" kindref="compound">BSplinesY</ref>, <ref refid="structGridY" kindref="compound">GridY</ref>, SplineYBoundary, SplineYBoundary, ddc::SplineSolver::LAPACK, <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structGridY" kindref="compound">GridY</ref> &gt;</type>
-        <definition>using SplineYBuilder_XY =  ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesY, GridY, SplineYBoundary, SplineYBoundary, ddc::SplineSolver::LAPACK, GridX, GridY&gt;</definition>
+      <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1aad35130bd7f326c04a5df5fd6812cfaf" prot="public" static="no">
+        <type>ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <ref refid="structBSplinesY" kindref="compound">BSplinesY</ref>, <ref refid="structGridY" kindref="compound">GridY</ref>, SplineYBoundary, SplineYBoundary, ddc::SplineSolver::LAPACK &gt;</type>
+        <definition>using SplineYBuilder_XY =  ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesY, GridY, SplineYBoundary, SplineYBoundary, ddc::SplineSolver::LAPACK&gt;</definition>
         <argsstring></argsstring>
         <name>SplineYBuilder_XY</name>
         <briefdescription>
@@ -268,11 +268,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="122" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="131" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="118" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="125" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a18a93d4ae6b6cda836bbeeddabdb7ae3" prot="public" static="no">
-        <type>ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <ref refid="structBSplinesY" kindref="compound">BSplinesY</ref>, <ref refid="structGridY" kindref="compound">GridY</ref>, ddc::PeriodicExtrapolationRule&lt; <ref refid="structY" kindref="compound">Y</ref> &gt;, ddc::PeriodicExtrapolationRule&lt; <ref refid="structY" kindref="compound">Y</ref> &gt;, <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structGridY" kindref="compound">GridY</ref> &gt;</type>
-        <definition>using SplineYEvaluator_XY =  ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesY, GridY, ddc::PeriodicExtrapolationRule&lt;Y&gt;, ddc::PeriodicExtrapolationRule&lt;Y&gt;, GridX, GridY&gt;</definition>
+      <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1adfb307e25d8d8badcf02c28a8d3813c0" prot="public" static="no">
+        <type>ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <ref refid="structBSplinesY" kindref="compound">BSplinesY</ref>, <ref refid="structGridY" kindref="compound">GridY</ref>, ddc::PeriodicExtrapolationRule&lt; <ref refid="structY" kindref="compound">Y</ref> &gt;, ddc::PeriodicExtrapolationRule&lt; <ref refid="structY" kindref="compound">Y</ref> &gt; &gt;</type>
+        <definition>using SplineYEvaluator_XY =  ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesY, GridY, ddc::PeriodicExtrapolationRule&lt;Y&gt;, ddc::PeriodicExtrapolationRule&lt;Y&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>SplineYEvaluator_XY</name>
         <briefdescription>
@@ -281,7 +281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="132" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="140" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="126" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="132" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a41517d293f6a5da56099fd4ca7d8e5df" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structBSplinesX" kindref="compound">BSplinesX</ref> &gt;</type>
@@ -294,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="143" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="143" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="135" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="135" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1ad1a9546bdc7a7952cf6217f7cbbbbf44" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structBSplinesY" kindref="compound">BSplinesY</ref> &gt;</type>
@@ -307,7 +307,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="144" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="144" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="136" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="136" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1aeae9398ecb26b35dc9842cd8387f9f5c" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structBSplinesX" kindref="compound">BSplinesX</ref>, <ref refid="structBSplinesY" kindref="compound">BSplinesY</ref> &gt;</type>
@@ -320,7 +320,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="145" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="145" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="137" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="137" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1ac535f91e8629914762a2c2e17955743a" prot="public" static="no">
         <templateparamlist>
@@ -338,7 +338,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="148" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="148" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="140" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="140" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a645465d7b7dac1f9819d89cc19e63997" prot="public" static="no">
         <type>BSConstFieldXY&lt; double &gt;</type>
@@ -351,7 +351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="149" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="149" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="141" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="141" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a7420811ad88af9c75a4fdace572b389b" prot="public" static="no">
         <type>Idx&lt; <ref refid="structGridX" kindref="compound">GridX</ref> &gt;</type>
@@ -364,7 +364,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="152" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="152" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="144" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="144" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a07e2c8345b43b4014b9544e2c0f2b477" prot="public" static="no">
         <type>Idx&lt; <ref refid="structGridY" kindref="compound">GridY</ref> &gt;</type>
@@ -377,7 +377,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="153" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="153" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="145" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="145" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a2b93083d44a706c27f7584e8dfde511f" prot="public" static="no">
         <type>Idx&lt; <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structGridY" kindref="compound">GridY</ref> &gt;</type>
@@ -390,7 +390,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="154" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="154" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="146" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="146" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a9672b018bcbc8c0ad082f838e185b786" prot="public" static="no">
         <type>IdxStep&lt; <ref refid="structGridX" kindref="compound">GridX</ref> &gt;</type>
@@ -403,7 +403,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="157" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="157" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="149" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="149" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a2de0f1e840806e7b7e2777d792ab1e64" prot="public" static="no">
         <type>IdxStep&lt; <ref refid="structGridY" kindref="compound">GridY</ref> &gt;</type>
@@ -416,7 +416,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="158" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="158" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="150" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="150" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1ab227c52dd27cd245ac79771fe8762986" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structGridX" kindref="compound">GridX</ref> &gt;</type>
@@ -429,7 +429,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="161" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="161" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="153" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="153" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a87884966e53c36e18472bccbe0df9939" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structGridY" kindref="compound">GridY</ref> &gt;</type>
@@ -442,7 +442,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="162" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="162" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="154" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="154" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1aa4faeb10379806b3df4f928015adf816" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structGridY" kindref="compound">GridY</ref> &gt;</type>
@@ -455,7 +455,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="163" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="163" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="155" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="155" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1adebfe0c97a67d44c718c3e5097b40866" prot="public" static="no">
         <templateparamlist>
@@ -473,7 +473,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="168" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="168" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="160" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="160" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a2177a1c0ecc312373af01d96112a9599" prot="public" static="no">
         <type>FieldMemX&lt; double &gt;</type>
@@ -486,7 +486,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="169" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="169" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="161" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="161" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a0e88861478f43ddbfe56ea0c982da899" prot="public" static="no">
         <templateparamlist>
@@ -504,7 +504,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="172" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="172" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="164" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="164" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1aecd8464841a3ee08bf823a3aacafae10" prot="public" static="no">
         <type>FieldMemY&lt; double &gt;</type>
@@ -517,7 +517,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="173" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="173" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="165" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="165" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a6926d8962dd0b43d3341e5c293c8275a" prot="public" static="no">
         <templateparamlist>
@@ -535,7 +535,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="176" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="176" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="168" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="168" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a1012caf28a0a3db920dfc10893124df7" prot="public" static="no">
         <type>FieldMemXY&lt; double &gt;</type>
@@ -548,7 +548,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="177" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="177" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="169" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="169" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1abbe55574f269c6415a34bca0e6b6eb70" prot="public" static="no">
         <templateparamlist>
@@ -566,7 +566,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="182" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="182" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="174" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="174" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1af55207c5cc28b08499fba035dc636abc" prot="public" static="no">
         <type>FieldX&lt; double &gt;</type>
@@ -579,7 +579,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="183" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="183" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="175" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="175" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a26a003609a9f95ba4b456c0db2645d83" prot="public" static="no">
         <templateparamlist>
@@ -597,7 +597,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="186" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="186" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="178" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="178" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a7f0a602072ade545e128df4cc31229fa" prot="public" static="no">
         <type>FieldY&lt; double &gt;</type>
@@ -610,7 +610,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="187" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="187" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="179" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="179" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a79497306d40c30da6eb0a63b84b60655" prot="public" static="no">
         <templateparamlist>
@@ -628,7 +628,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="190" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="190" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="182" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="182" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1abf4686803a31574eef0bd6de84308aa5" prot="public" static="no">
         <type>FieldXY&lt; double &gt;</type>
@@ -641,7 +641,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="191" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="191" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="183" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="183" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a8041d3cd2331f1afff7941a7aacebb14" prot="public" static="no">
         <templateparamlist>
@@ -659,7 +659,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="196" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="196" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="188" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="188" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a4a0ca69b36999899351db5823c34abfa" prot="public" static="no">
         <templateparamlist>
@@ -677,7 +677,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="199" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="199" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="191" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="191" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a9b2b3bf55efff1c5b33e4449adffc601" prot="public" static="no">
         <templateparamlist>
@@ -695,7 +695,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="202" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="202" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="194" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="194" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a03f280f71943aece4bffa9efd47be086" prot="public" static="no">
         <type>ConstFieldXY&lt; double &gt;</type>
@@ -708,7 +708,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="203" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="203" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="195" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="195" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a4805f6b1b159865cb90983ab389daeb5" prot="public" static="no">
         <type><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref>&lt; double, IdxRangeXY, VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, Kokkos::DefaultExecutionSpace::memory_space &gt;</type>
@@ -721,7 +721,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="208" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="212" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="200" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="204" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1af407b77bdcd80902b1b620746b4774e9" prot="public" static="no">
         <type>typename <ref refid="classVectorFieldMem_1a1706adefbd7b99f3421d6ec1a39d845c" kindref="member">VectorFieldMemXY_XY::span_type</ref></type>
@@ -734,7 +734,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="213" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="213" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="205" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="205" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometryXY_2geometry_2geometry_8hpp_1a0f49de3dbee224e5716a389e6f024d2d" prot="public" static="no">
         <type>typename <ref refid="classVectorFieldMem_1a87fe35819bfe4e143f6e1081ce23e726" kindref="member">VectorFieldMemXY_XY::view_type</ref></type>
@@ -747,7 +747,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="214" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="214" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="206" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="206" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -930,113 +930,105 @@
 <codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridX" kindref="compound">GridX</ref>,</highlight></codeline>
 <codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineXBoundary,</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineXBoundary,</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineSolver::LAPACK,</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridX" kindref="compound">GridX</ref>,</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridY" kindref="compound">GridY</ref>&gt;;</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineXEvaluator_XY<sp/>=<sp/>ddc::SplineEvaluator&lt;</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace,</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace::memory_space,</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structBSplinesX" kindref="compound">BSplinesX</ref>,</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridX" kindref="compound">GridX</ref>,</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;X&gt;,</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;X&gt;,</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridX" kindref="compound">GridX</ref>,</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridY" kindref="compound">GridY</ref>&gt;;</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"></highlight></codeline>
-<codeline lineno="121"><highlight class="normal"></highlight></codeline>
-<codeline lineno="122"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineYBuilder_XY<sp/>=<sp/>ddc::SplineBuilder&lt;</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace,</highlight></codeline>
-<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace::memory_space,</highlight></codeline>
-<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structBSplinesY" kindref="compound">BSplinesY</ref>,</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridY" kindref="compound">GridY</ref>,</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineYBoundary,</highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineYBoundary,</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineSolver::LAPACK,</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridX" kindref="compound">GridX</ref>,</highlight></codeline>
-<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridY" kindref="compound">GridY</ref>&gt;;</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineYEvaluator_XY<sp/>=<sp/>ddc::SplineEvaluator&lt;</highlight></codeline>
-<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace,</highlight></codeline>
-<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace::memory_space,</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structBSplinesY" kindref="compound">BSplinesY</ref>,</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridY" kindref="compound">GridY</ref>,</highlight></codeline>
-<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;Y&gt;,</highlight></codeline>
-<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;Y&gt;,</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridX" kindref="compound">GridX</ref>,</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridY" kindref="compound">GridY</ref>&gt;;</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"></highlight></codeline>
-<codeline lineno="142"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Spline<sp/>index<sp/>range</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="143"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBSX<sp/>=<sp/>IdxRange&lt;BSplinesX&gt;;</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBSY<sp/>=<sp/>IdxRange&lt;BSplinesY&gt;;</highlight></codeline>
-<codeline lineno="145"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBSXY<sp/>=<sp/>IdxRange&lt;BSplinesX,<sp/>BSplinesY&gt;;</highlight></codeline>
-<codeline lineno="146"><highlight class="normal"></highlight></codeline>
-<codeline lineno="147"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">BSConstFieldXY<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeBSXY&gt;;</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DBSConstFieldXY<sp/>=<sp/>BSConstFieldXY&lt;double&gt;;</highlight></codeline>
-<codeline lineno="150"><highlight class="normal"></highlight></codeline>
-<codeline lineno="151"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Index<sp/>definitions</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="152"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxX<sp/>=<sp/>Idx&lt;GridX&gt;;</highlight></codeline>
-<codeline lineno="153"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxY<sp/>=<sp/>Idx&lt;GridY&gt;;</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxXY<sp/>=<sp/>Idx&lt;GridX,<sp/>GridY&gt;;</highlight></codeline>
-<codeline lineno="155"><highlight class="normal"></highlight></codeline>
-<codeline lineno="156"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Index<sp/>Step<sp/>definitions</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="157"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxStepX<sp/>=<sp/>IdxStep&lt;GridX&gt;;</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxStepY<sp/>=<sp/>IdxStep&lt;GridY&gt;;</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"></highlight></codeline>
-<codeline lineno="160"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Index<sp/>Range<sp/>definitions</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="161"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeX<sp/>=<sp/>IdxRange&lt;GridX&gt;;</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeY<sp/>=<sp/>IdxRange&lt;GridY&gt;;</highlight></codeline>
-<codeline lineno="163"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeXY<sp/>=<sp/>IdxRange&lt;GridX,<sp/>GridY&gt;;</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"></highlight></codeline>
-<codeline lineno="165"><highlight class="normal"></highlight></codeline>
-<codeline lineno="166"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Field<sp/>definitions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineSolver::LAPACK&gt;;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineXEvaluator_XY<sp/>=<sp/>ddc::SplineEvaluator&lt;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace,</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace::memory_space,</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structBSplinesX" kindref="compound">BSplinesX</ref>,</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridX" kindref="compound">GridX</ref>,</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;X&gt;,</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;X&gt;&gt;;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineYBuilder_XY<sp/>=<sp/>ddc::SplineBuilder&lt;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace,</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace::memory_space,</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structBSplinesY" kindref="compound">BSplinesY</ref>,</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridY" kindref="compound">GridY</ref>,</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineYBoundary,</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineYBoundary,</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineSolver::LAPACK&gt;;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SplineYEvaluator_XY<sp/>=<sp/>ddc::SplineEvaluator&lt;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace,</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace::memory_space,</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structBSplinesY" kindref="compound">BSplinesY</ref>,</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridY" kindref="compound">GridY</ref>,</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;Y&gt;,</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PeriodicExtrapolationRule&lt;Y&gt;&gt;;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Spline<sp/>index<sp/>range</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBSX<sp/>=<sp/>IdxRange&lt;BSplinesX&gt;;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBSY<sp/>=<sp/>IdxRange&lt;BSplinesY&gt;;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBSXY<sp/>=<sp/>IdxRange&lt;BSplinesX,<sp/>BSplinesY&gt;;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">BSConstFieldXY<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeBSXY&gt;;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DBSConstFieldXY<sp/>=<sp/>BSConstFieldXY&lt;double&gt;;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Index<sp/>definitions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxX<sp/>=<sp/>Idx&lt;GridX&gt;;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxY<sp/>=<sp/>Idx&lt;GridY&gt;;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxXY<sp/>=<sp/>Idx&lt;GridX,<sp/>GridY&gt;;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Index<sp/>Step<sp/>definitions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxStepX<sp/>=<sp/>IdxStep&lt;GridX&gt;;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxStepY<sp/>=<sp/>IdxStep&lt;GridY&gt;;</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Index<sp/>Range<sp/>definitions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeX<sp/>=<sp/>IdxRange&lt;GridX&gt;;</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeY<sp/>=<sp/>IdxRange&lt;GridY&gt;;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeXY<sp/>=<sp/>IdxRange&lt;GridX,<sp/>GridY&gt;;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Field<sp/>definitions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemX<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeX&gt;;</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemX<sp/>=<sp/>FieldMemX&lt;double&gt;;</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemY<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeY&gt;;</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemY<sp/>=<sp/>FieldMemY&lt;double&gt;;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
 <codeline lineno="167"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="168"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemX<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeX&gt;;</highlight></codeline>
-<codeline lineno="169"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemX<sp/>=<sp/>FieldMemX&lt;double&gt;;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemXY<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeXY&gt;;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemXY<sp/>=<sp/>FieldMemXY&lt;double&gt;;</highlight></codeline>
 <codeline lineno="170"><highlight class="normal"></highlight></codeline>
-<codeline lineno="171"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="172"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemY<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeY&gt;;</highlight></codeline>
-<codeline lineno="173"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemY<sp/>=<sp/>FieldMemY&lt;double&gt;;</highlight></codeline>
-<codeline lineno="174"><highlight class="normal"></highlight></codeline>
-<codeline lineno="175"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="176"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemXY<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeXY&gt;;</highlight></codeline>
-<codeline lineno="177"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemXY<sp/>=<sp/>FieldMemXY&lt;double&gt;;</highlight></codeline>
-<codeline lineno="178"><highlight class="normal"></highlight></codeline>
-<codeline lineno="179"><highlight class="normal"></highlight></codeline>
-<codeline lineno="180"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/>Field<sp/>definitions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/>Field<sp/>definitions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldX<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeX&gt;;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldX<sp/>=<sp/>FieldX&lt;double&gt;;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldY<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeY&gt;;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldY<sp/>=<sp/>FieldY&lt;double&gt;;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight></codeline>
 <codeline lineno="181"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="182"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldX<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeX&gt;;</highlight></codeline>
-<codeline lineno="183"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldX<sp/>=<sp/>FieldX&lt;double&gt;;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldXY<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeXY&gt;;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldXY<sp/>=<sp/>FieldXY&lt;double&gt;;</highlight></codeline>
 <codeline lineno="184"><highlight class="normal"></highlight></codeline>
-<codeline lineno="185"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="186"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldY<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeY&gt;;</highlight></codeline>
-<codeline lineno="187"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldY<sp/>=<sp/>FieldY&lt;double&gt;;</highlight></codeline>
-<codeline lineno="188"><highlight class="normal"></highlight></codeline>
-<codeline lineno="189"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="190"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldXY<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeXY&gt;;</highlight></codeline>
-<codeline lineno="191"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldXY<sp/>=<sp/>FieldXY&lt;double&gt;;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight><highlight class="comment">//<sp/>ConstField<sp/>definitions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldX<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeX&gt;;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldY<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeY&gt;;</highlight></codeline>
 <codeline lineno="192"><highlight class="normal"></highlight></codeline>
-<codeline lineno="193"><highlight class="normal"></highlight></codeline>
-<codeline lineno="194"><highlight class="normal"></highlight><highlight class="comment">//<sp/>ConstField<sp/>definitions</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="195"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="196"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldX<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeX&gt;;</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldXY<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeXY&gt;;</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstFieldXY<sp/>=<sp/>ConstFieldXY&lt;double&gt;;</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
 <codeline lineno="197"><highlight class="normal"></highlight></codeline>
-<codeline lineno="198"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="199"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldY<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeY&gt;;</highlight></codeline>
-<codeline lineno="200"><highlight class="normal"></highlight></codeline>
-<codeline lineno="201"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="202"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldXY<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeXY&gt;;</highlight></codeline>
-<codeline lineno="203"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstFieldXY<sp/>=<sp/>ConstFieldXY&lt;double&gt;;</highlight></codeline>
-<codeline lineno="204"><highlight class="normal"></highlight></codeline>
-<codeline lineno="205"><highlight class="normal"></highlight></codeline>
-<codeline lineno="206"><highlight class="normal"></highlight><highlight class="comment">//<sp/>VectorFieldMem<sp/>aliases</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="207"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Represent<sp/>a<sp/>vector<sp/>field<sp/>(v_x,<sp/>v_y)<sp/>on<sp/>indices<sp/>(x_i,<sp/>y_j)<sp/>:<sp/>(v_x(x_i,<sp/>y_j),<sp/>v_y(x_i,y_j))</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="208"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMemXY_XY</ref><sp/>=<sp/><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref>&lt;</highlight></codeline>
-<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>double,</highlight></codeline>
-<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeXY,</highlight></codeline>
-<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;X,<sp/>Y&gt;,</highlight></codeline>
-<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace::memory_space&gt;;</highlight></codeline>
-<codeline lineno="213"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">VectorFieldXY_XY<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classVectorFieldMem_1a1706adefbd7b99f3421d6ec1a39d845c" kindref="member">VectorFieldMemXY_XY::span_type</ref>;</highlight></codeline>
-<codeline lineno="214"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">VectorConstFieldXY_XY<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classVectorFieldMem_1a87fe35819bfe4e143f6e1081ce23e726" kindref="member">VectorFieldMemXY_XY::view_type</ref>;</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight><highlight class="comment">//<sp/>VectorFieldMem<sp/>aliases</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Represent<sp/>a<sp/>vector<sp/>field<sp/>(v_x,<sp/>v_y)<sp/>on<sp/>indices<sp/>(x_i,<sp/>y_j)<sp/>:<sp/>(v_x(x_i,<sp/>y_j),<sp/>v_y(x_i,y_j))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMemXY_XY</ref><sp/>=<sp/><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref>&lt;</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>double,</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeXY,</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;X,<sp/>Y&gt;,</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace::memory_space&gt;;</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">VectorFieldXY_XY<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classVectorFieldMem_1a1706adefbd7b99f3421d6ec1a39d845c" kindref="member">VectorFieldMemXY_XY::span_type</ref>;</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">VectorConstFieldXY_XY<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classVectorFieldMem_1a87fe35819bfe4e143f6e1081ce23e726" kindref="member">VectorFieldMemXY_XY::view_type</ref>;</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp"/>
   </compounddef>

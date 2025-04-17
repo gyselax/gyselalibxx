@@ -540,7 +540,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-preallocatablesplineinterpolator2d">Class PreallocatableSplineInterpolator2D</h1>
-<p><strong>template &lt;class Spline2DBuilder, class Spline2DEvaluator&gt;</strong></p>
+<p><strong>template &lt;class Spline2DBuilder, class Spline2DEvaluator, class IdxRangeBatched&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classPreallocatableSplineInterpolator2D.html"><strong>PreallocatableSplineInterpolator2D</strong></a></p>
 <p><em>A class which stores information necessary to create a pointer to an instance of the</em> <a href="classSplineInterpolator2D.html"><em><strong>SplineInterpolator2D</strong></em></a> <em>class.</em><a href="#detailed-description">More...</a></p>
 <ul>
@@ -582,10 +582,10 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-preallocatablesplineinterpolator2d"><strong>PreallocatableSplineInterpolator2D</strong></a> (Spline2DBuilder const &amp; builder, Spline2DEvaluator const &amp; evaluator) <br><em>Create an object capable of creating</em> <a href="classSplineInterpolator2D.html"><em><strong>SplineInterpolator2D</strong></em></a> <em>objects.</em></td>
+<td style="text-align: left;"><a href="#function-preallocatablesplineinterpolator2d"><strong>PreallocatableSplineInterpolator2D</strong></a> (Spline2DBuilder const &amp; builder, Spline2DEvaluator const &amp; evaluator, IdxRangeBatched idx_range_batched) <br><em>Create an object capable of creating</em> <a href="classSplineInterpolator2D.html"><em><strong>SplineInterpolator2D</strong></em></a> <em>objects.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">virtual std::unique_ptr&lt; <a href="classIInterpolator2D.html"><strong>IInterpolator2D</strong></a>&lt; typename Spline2DBuilder::interpolation_domain_type, typename Spline2DBuilder::batched_interpolation_domain_type &gt; &gt;</td>
+<td style="text-align: right;">virtual std::unique_ptr&lt; <a href="classIInterpolator2D.html"><strong>IInterpolator2D</strong></a>&lt; typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched &gt; &gt;</td>
 <td style="text-align: left;"><a href="#function-preallocate"><strong>preallocate</strong></a> () override const<br></td>
 </tr>
 </tbody>
@@ -631,24 +631,33 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>This class allows an instance of the <a href="classSplineInterpolator2D.html"><strong>SplineInterpolator2D</strong></a> class to be instantiated where necessary. This allows the memory allocated in the private members of the <a href="classSplineInterpolator2D.html"><strong>SplineInterpolator2D</strong></a> to be freed when the object is not in use. These objects are: m_coefs. </p>
+<p>This class allows an instance of the <a href="classSplineInterpolator2D.html"><strong>SplineInterpolator2D</strong></a> class to be instantiated where necessary. This allows the memory allocated in the private members of the <a href="classSplineInterpolator2D.html"><strong>SplineInterpolator2D</strong></a> to be freed when the object is not in use. These objects are: m_coefs.</p>
+<p>The class is parametrised by multiple template parameters. Please note that CTAD will deduce all these template parameters from the Builder and Evaluator passed as constructor arguments.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>Spline2DBuilder</code> The type of the 2D spline builder. </li>
+<li><code>Spline2DEvaluator</code> The type of the 2D spline evaluator. </li>
+<li><code>IdxRangeBatched</code> The type af the index range over which this operator will operate. This is necessary to define the internal spline representation. </li>
+</ul>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-preallocatablesplineinterpolator2d">function PreallocatableSplineInterpolator2D</h3>
 <p><em>Create an object capable of creating</em> <a href="classSplineInterpolator2D.html"><em><strong>SplineInterpolator2D</strong></em></a> <em>objects.</em></p>
 <pre><code class="language-C++">inline PreallocatableSplineInterpolator2D::PreallocatableSplineInterpolator2D (
     Spline2DBuilder const &amp; builder,
-    Spline2DEvaluator const &amp; evaluator
+    Spline2DEvaluator const &amp; evaluator,
+    IdxRangeBatched idx_range_batched
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>builder</code> An operator which builds spline coefficients from the values of a function at known interpolation points. </li>
 <li><code>evaluator</code> An operator which evaluates the value of a spline at requested coordinates. </li>
+<li><code>idx_range_batched</code> The index range on which this operator operates. </li>
 </ul>
 <hr>
 
 <h3 id="function-preallocate">function preallocate</h3>
-<pre><code class="language-C++">inline virtual std::unique_ptr&lt; IInterpolator2D &lt; typename Spline2DBuilder::interpolation_domain_type, typename Spline2DBuilder::batched_interpolation_domain_type &gt; &gt; PreallocatableSplineInterpolator2D::preallocate () override const
+<pre><code class="language-C++">inline virtual std::unique_ptr&lt; IInterpolator2D &lt; typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched &gt; &gt; PreallocatableSplineInterpolator2D::preallocate () override const
 </code></pre>
 <p>Create a pointer to an instance of the <a href="classSplineInterpolator2D.html"><strong>SplineInterpolator2D</strong></a> class.</p>
 <p><strong>Returns:</strong></p>

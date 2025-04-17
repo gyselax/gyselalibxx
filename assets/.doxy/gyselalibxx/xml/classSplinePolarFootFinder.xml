@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSplinePolarFootFinder" kind="class" language="C++" prot="public">
     <compoundname>SplinePolarFootFinder</compoundname>
-    <basecompoundref refid="classIPolarFootFinder" prot="public" virt="non-virtual">IPolarFootFinder&lt; SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1, SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2, ddc::to_type_seq_t&lt; LogicalToPhysicalMapping::CoordResult &gt;, SplineRThetaBuilderAdvection::batched_interpolation_domain_type, SplineRThetaBuilderAdvection::memory_space &gt;</basecompoundref>
+    <basecompoundref refid="classIPolarFootFinder" prot="public" virt="non-virtual">IPolarFootFinder&lt; SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1, SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2, ddc::to_type_seq_t&lt; LogicalToPhysicalMapping::CoordResult &gt;, TimeStepper::IdxRange, SplineRThetaBuilderAdvection::memory_space &gt;</basecompoundref>
     <includes refid="spline__polar__foot__finder_8hpp" local="no">spline_polar_foot_finder.hpp</includes>
     <templateparamlist>
       <param>
@@ -22,9 +22,9 @@
       </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classSplinePolarFootFinder_1a7bf80cf33953492037ceffdfac1a27e9" prot="private" static="no">
-        <type><ref refid="classIPolarFootFinder" kindref="compound">IPolarFootFinder</ref>&lt; typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1, typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2, ddc::to_type_seq_t&lt; typename LogicalToPhysicalMapping::CoordResult &gt;, typename SplineRThetaBuilderAdvection::batched_interpolation_domain_type, typename SplineRThetaBuilderAdvection::memory_space &gt;</type>
-        <definition>using SplinePolarFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::base_type =  IPolarFootFinder&lt; typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1, typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2, ddc::to_type_seq_t&lt;typename LogicalToPhysicalMapping::CoordResult&gt;, typename SplineRThetaBuilderAdvection::batched_interpolation_domain_type, typename SplineRThetaBuilderAdvection::memory_space&gt;</definition>
+      <memberdef kind="typedef" id="classSplinePolarFootFinder_1aefa0f60f9d80160cff409fa9aba0cceb" prot="private" static="no">
+        <type><ref refid="classIPolarFootFinder" kindref="compound">IPolarFootFinder</ref>&lt; typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1, typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2, ddc::to_type_seq_t&lt; typename LogicalToPhysicalMapping::CoordResult &gt;, typename TimeStepper::IdxRange, typename SplineRThetaBuilderAdvection::memory_space &gt;</type>
+        <definition>using SplinePolarFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::base_type =  IPolarFootFinder&lt; typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1, typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2, ddc::to_type_seq_t&lt;typename LogicalToPhysicalMapping::CoordResult&gt;, typename TimeStepper::IdxRange, typename SplineRThetaBuilderAdvection::memory_space&gt;</definition>
         <argsstring></argsstring>
         <name>base_type</name>
         <qualifiedname>SplinePolarFootFinder::base_type</qualifiedname>
@@ -845,7 +845,7 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
-        <label>IPolarFootFinder&lt; SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1, SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2, ddc::to_type_seq_t&lt; LogicalToPhysicalMapping::CoordResult &gt;, SplineRThetaBuilderAdvection::batched_interpolation_domain_type, SplineRThetaBuilderAdvection::memory_space &gt;</label>
+        <label>IPolarFootFinder&lt; SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1, SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2, ddc::to_type_seq_t&lt; LogicalToPhysicalMapping::CoordResult &gt;, TimeStepper::IdxRange, SplineRThetaBuilderAdvection::memory_space &gt;</label>
         <link refid="classIPolarFootFinder"/>
       </node>
       <node id="1">
@@ -857,7 +857,7 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="2">
-        <label>IPolarFootFinder&lt; SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1, SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2, ddc::to_type_seq_t&lt; LogicalToPhysicalMapping::CoordResult &gt;, SplineRThetaBuilderAdvection::batched_interpolation_domain_type, SplineRThetaBuilderAdvection::memory_space &gt;</label>
+        <label>IPolarFootFinder&lt; SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1, SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2, ddc::to_type_seq_t&lt; LogicalToPhysicalMapping::CoordResult &gt;, TimeStepper::IdxRange, SplineRThetaBuilderAdvection::memory_space &gt;</label>
         <link refid="classIPolarFootFinder"/>
       </node>
       <node id="1">
@@ -869,7 +869,7 @@
     </collaborationgraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="51" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="58" bodyend="390"/>
     <listofallmembers>
-      <member refid="classSplinePolarFootFinder_1a7bf80cf33953492037ceffdfac1a27e9" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>base_type</name></member>
+      <member refid="classSplinePolarFootFinder_1aefa0f60f9d80160cff409fa9aba0cceb" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>base_type</name></member>
       <member refid="classSplinePolarFootFinder_1a794e96ccde646b5368d68856953a455a" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>BSplinesR</name></member>
       <member refid="classSplinePolarFootFinder_1a45515c86b920bf620921f1bb756be099" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>BSplinesTheta</name></member>
       <member refid="classSplinePolarFootFinder_1a27c99bde5225fc3b4c2f6c1adfb60898" prot="public" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>CConstFieldFeet</name></member>
@@ -899,7 +899,7 @@
       <member refid="classSplinePolarFootFinder_1abf03f0fc21763e9c80ca44de135d9122" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>m_time_stepper</name></member>
       <member refid="classSplinePolarFootFinder_1a89a4b20b79c346032013798317f6b9a7" prot="public" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>memory_space</name></member>
       <member refid="classSplinePolarFootFinder_1a2d77e3176157d88af37d0dae40bb29b5" prot="public" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>operator()</name></member>
-      <member refid="classIPolarFootFinder_1a3da1ab44c93598dee39faac9557db18c" prot="public" virt="pure-virtual" ambiguityscope="IPolarFootFinder&lt; SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1, SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2, ddc::to_type_seq_t&lt; LogicalToPhysicalMapping::CoordResult &gt;, SplineRThetaBuilderAdvection::batched_interpolation_domain_type, SplineRThetaBuilderAdvection::memory_space &gt;::"><scope>SplinePolarFootFinder</scope><name>operator()</name></member>
+      <member refid="classIPolarFootFinder_1a3da1ab44c93598dee39faac9557db18c" prot="public" virt="pure-virtual" ambiguityscope="IPolarFootFinder&lt; SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1, SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2, ddc::to_type_seq_t&lt; LogicalToPhysicalMapping::CoordResult &gt;, TimeStepper::IdxRange, SplineRThetaBuilderAdvection::memory_space &gt;::"><scope>SplinePolarFootFinder</scope><name>operator()</name></member>
       <member refid="classSplinePolarFootFinder_1a2eb6b2f7cad1081525e7e4c0baa6a908" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>PseudoCartesianBasis</name></member>
       <member refid="classSplinePolarFootFinder_1a34de44be5c59ffa3781268c0f74df35e" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>PseudoCartesianToCircular</name></member>
       <member refid="classSplinePolarFootFinder_1af5548ea9c7d1c038868f8b9afa5cfde1" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>PseudoPhysicalToLogicalMapping</name></member>

@@ -61,7 +61,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**DiscreteToCartesian**](classDiscreteToCartesian.md) _A class for describing discrete 2D mappings from the logical domain to the physical domain._ 
 * **class** [**DiscreteToCartesianBuilder**](classDiscreteToCartesianBuilder.md) _A class to create a_ [_**DiscreteToCartesian**_](classDiscreteToCartesian.md) _instance from an analytical mapping. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data._
 * **class** [**EdgeTransformation**](classEdgeTransformation.md) _Transform a coordinate or an index from one edge to the one on the other edge._ 
-* **class** [**IPoissonSolver**](classIPoissonSolver.md) 
+* **class** [**IPoissonSolver**](classIPoissonSolver.md)     
+    * **class** [**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md) 
 * **class** [**FFTPoissonSolver**](classFFTPoissonSolver.md) 
 * **class** [**FluidMoments**](classFluidMoments.md) _A class that computes fluid moments of the distribution function._ 
 * **class** [**GaussLegendre**](classGaussLegendre.md) _An operator for constructing a Gauss-Legendre quadrature._ 
@@ -158,8 +159,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**ConstPolarSpline**](structConstPolarSpline.md) _A structure containing the two ConstFields necessary to define a constant reference to a spline on a set of polar basis splines._ 
 * **struct** [**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md) _Define constant extrapolation rule for onion shape geometries. Struct useful for the MultipatchSplineEvaluator types._  __
 * **struct** [**Edge**](structEdge.md) _Define an edge of a given patch._ 
-* **struct** [**FEM1DPoissonSolver::FEMSplineEvaluatorBuilder**](structFEM1DPoissonSolver_1_1FEMSplineEvaluatorBuilder.md) 
-* **struct** [**FEM1DPoissonSolver::FEMSplineEvaluatorBuilder&lt; IdxRange&lt; DimX... &gt; &gt;**](structFEM1DPoissonSolver_1_1FEMSplineEvaluatorBuilder_3_01IdxRange_3_01DimX_8_8_8_01_4_01_4.md) 
 * **struct** [**FluidMoments::MomentDensity**](structFluidMoments_1_1MomentDensity.md) 
 * **struct** [**FluidMoments::MomentTemperature**](structFluidMoments_1_1MomentTemperature.md) 
 * **struct** [**FluidMoments::MomentVelocity**](structFluidMoments_1_1MomentVelocity.md) 
@@ -172,7 +171,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**MultipatchSplineBuilder2D::Build\_BuilderType**](structMultipatchSplineBuilder2D_1_1Build__BuilderType.md) 
 * **struct** [**MultipatchSplineBuilder2D::Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;**](structMultipatchSplineBuilder2D_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_388990a8744187d12e0f612652c86727.md) 
 * **struct** [**MultipatchSplineBuilder::Build\_BuilderType**](structMultipatchSplineBuilder_1_1Build__BuilderType.md) 
-* **struct** [**MultipatchSplineBuilder::Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;**](structMultipatchSplineBuilder_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_0143963206948829b7e1024cedaaccd580.md) 
 * **struct** [**MultipatchSplineEvaluator2D::eval\_deriv\_type**](structMultipatchSplineEvaluator2D_1_1eval__deriv__type.md) _Tag to indicate that derivative of the spline should be evaluated._ 
 * **struct** [**MultipatchSplineEvaluator2D::eval\_type**](structMultipatchSplineEvaluator2D_1_1eval__type.md) _Tag to indicate that the value of the spline should be evaluated._ 
 * **struct** [**NullExtrapolationRule**](structNullExtrapolationRule.md) _Define null extrapolation rule common to all geometries._ 
@@ -199,7 +197,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**R**](structR.md) _Define non periodic real contravariant_ [_**R**_](structR.md) _dimension._
 * **struct** [**R\_cov**](structR__cov.md) _Define non periodic real covariant_ [_**R**_](structR.md) _dimension._
 * **struct** [**RefinedDiscreteToCartesianBuilder::Build\_BuilderType**](structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType.md) 
-* **struct** [**RefinedDiscreteToCartesianBuilder::Build\_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver, GridROriginal, GridThetaOriginal &gt; &gt;**](structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilder2D_3_01Exe5e607dcd09b0e5dcea3e1a165ab7545e.md) 
+* **struct** [**RefinedDiscreteToCartesianBuilder::Build\_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver &gt; &gt;**](structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilder2D_3_01Exedad782e8118e0de272f3e04e2a3c2f85.md) 
 * **struct** [**T**](structT.md) _A class which describes the real space in the temporal direction._ 
 * **struct** [**Theta**](structTheta.md) _Define periodic real contravariant_ [_**Theta**_](structTheta.md) _dimension._
 * **struct** [**Theta\_cov**](structTheta__cov.md) _Define periodic real covariant_ [_**Theta**_](structTheta.md) _dimension._

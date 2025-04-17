@@ -9,9 +9,9 @@
       </param>
     </templateparamlist>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="classPoissonLikeRHSFunction_1a8a5be6904f96090542b2a617dbfb7bd9" prot="public" static="no">
-        <type>ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>, <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, ddc::PeriodicExtrapolationRule&lt; <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
-        <definition>using PoissonLikeRHSFunction&lt; RadialExtrapolationRule &gt;::evaluator_type =  ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt;Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt;, GridR, GridTheta&gt;</definition>
+      <memberdef kind="typedef" id="classPoissonLikeRHSFunction_1a23ff1f2c942582bde65e4eca26331c55" prot="public" static="no">
+        <type>ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>, <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, ddc::PeriodicExtrapolationRule&lt; <ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
+        <definition>using PoissonLikeRHSFunction&lt; RadialExtrapolationRule &gt;::evaluator_type =  ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt;Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>evaluator_type</name>
         <qualifiedname>PoissonLikeRHSFunction::evaluator_type</qualifiedname>
@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" line="19" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" bodystart="31" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" line="19" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" bodystart="29" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -38,10 +38,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" line="34" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" bodystart="34" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" line="32" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPoissonLikeRHSFunction_1a5570e47ffc7fce005392e3835a6faebd" prot="private" static="no" mutable="no">
-        <type><ref refid="classPoissonLikeRHSFunction_1a8a5be6904f96090542b2a617dbfb7bd9" kindref="member">evaluator_type</ref> const  &amp;</type>
+        <type><ref refid="classPoissonLikeRHSFunction_1a23ff1f2c942582bde65e4eca26331c55" kindref="member">evaluator_type</ref> const  &amp;</type>
         <definition>evaluator_type const&amp; PoissonLikeRHSFunction&lt; RadialExtrapolationRule &gt;::m_evaluator</definition>
         <argsstring></argsstring>
         <name>m_evaluator</name>
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" line="35" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" bodystart="35" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" line="33" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" bodystart="33" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -67,7 +67,7 @@
           <declname>coefs</declname>
         </param>
         <param>
-          <type><ref refid="classPoissonLikeRHSFunction_1a8a5be6904f96090542b2a617dbfb7bd9" kindref="member">evaluator_type</ref> const &amp;</type>
+          <type><ref refid="classPoissonLikeRHSFunction_1a23ff1f2c942582bde65e4eca26331c55" kindref="member">evaluator_type</ref> const &amp;</type>
           <declname>evaluator</declname>
         </param>
         <briefdescription>
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" bodystart="46" bodyend="50"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" line="44" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" bodystart="44" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="classPoissonLikeRHSFunction_1a5bd29b8f01140ea3d8f5642fde150af0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>double</type>
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" line="60" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" bodystart="60" bodyend="63"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" line="58" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" bodystart="58" bodyend="61"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -144,9 +144,9 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" line="15" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" bodystart="16" bodyend="64"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" line="15" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp" bodystart="16" bodyend="62"/>
     <listofallmembers>
-      <member refid="classPoissonLikeRHSFunction_1a8a5be6904f96090542b2a617dbfb7bd9" prot="public" virt="non-virtual"><scope>PoissonLikeRHSFunction</scope><name>evaluator_type</name></member>
+      <member refid="classPoissonLikeRHSFunction_1a23ff1f2c942582bde65e4eca26331c55" prot="public" virt="non-virtual"><scope>PoissonLikeRHSFunction</scope><name>evaluator_type</name></member>
       <member refid="classPoissonLikeRHSFunction_1ac8a11da8bfe5af2a2e752bff21499daf" prot="private" virt="non-virtual"><scope>PoissonLikeRHSFunction</scope><name>m_coefs</name></member>
       <member refid="classPoissonLikeRHSFunction_1a5570e47ffc7fce005392e3835a6faebd" prot="private" virt="non-virtual"><scope>PoissonLikeRHSFunction</scope><name>m_evaluator</name></member>
       <member refid="classPoissonLikeRHSFunction_1a5bd29b8f01140ea3d8f5642fde150af0" prot="public" virt="non-virtual"><scope>PoissonLikeRHSFunction</scope><name>operator()</name></member>

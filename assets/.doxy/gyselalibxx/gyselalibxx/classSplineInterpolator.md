@@ -83,7 +83,7 @@ See [IInterpolator](classIInterpolator.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**SplineInterpolator**](#function-splineinterpolator) (BuilderType const & builder, EvaluatorType const & evaluator) <br>_Create a spline interpolator object._  |
+|   | [**SplineInterpolator**](#function-splineinterpolator) (BuilderType const & builder, EvaluatorType const & evaluator, IdxRange&lt; Grid1D... &gt; idx\_range\_batched) <br>_Create a spline interpolator object._  |
 | virtual batched\_derivs\_idx\_range\_type | [**batched\_derivs\_idx\_range\_xmax**](#function-batched_derivs_idx_range_xmax) (IdxRange&lt; Grid1D... &gt; idx\_range) override const<br>_Get the batched derivs index range on upper boundaries._  |
 | virtual batched\_derivs\_idx\_range\_type | [**batched\_derivs\_idx\_range\_xmin**](#function-batched_derivs_idx_range_xmin) (IdxRange&lt; Grid1D... &gt; idx\_range) override const<br>_Get the batched derivs index range on lower boundaries._  |
 |  Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt; | [**operator()**](#function-operator) (Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt; const inout\_data, ConstField&lt; Coord&lt; typename GridInterp::continuous\_dimension\_type &gt;, IdxRange&lt; Grid1D... &gt; &gt; const coordinates, std::optional&lt; batched\_deriv\_field\_type &gt; derivs\_xmin=std::nullopt, std::optional&lt; batched\_deriv\_field\_type &gt; derivs\_xmax=std::nullopt) override const<br>_Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points._  |
@@ -169,6 +169,9 @@ The class is parametrised by multiple template parameters. Please note that CTAD
 * `BSplines` The BSplines along the dimension of interest. 
 * `BcMin` The boundary condition at the lower boundary. 
 * `BcMax` The boundary condition at the upper boundary. 
+* `LeftExtrapolationRule` The extrapolation rule if evaluated out of bounds on the left side of the domain. 
+* `RightExtrapolationRule` The extrapolation rule if evaluated out of bounds on the left side of the domain. 
+* `Solver` The kind of solver used to solve the spline matrix equation. 
 * `Grid1D...` All the dimensions of the interpolation problem (batched + interpolated). 
 
 
@@ -186,7 +189,8 @@ _Create a spline interpolator object._
 ```C++
 inline SplineInterpolator::SplineInterpolator (
     BuilderType const & builder,
-    EvaluatorType const & evaluator
+    EvaluatorType const & evaluator,
+    IdxRange< Grid1D... > idx_range_batched
 ) 
 ```
 
@@ -199,6 +203,7 @@ inline SplineInterpolator::SplineInterpolator (
 
 * `builder` An operator which builds spline coefficients from the values of a function at known interpolation points. 
 * `evaluator` An operator which evaluates the value of a spline at requested coordinates. 
+* `idx_range_batched` The index range on which this operator operates. 
 
 
 

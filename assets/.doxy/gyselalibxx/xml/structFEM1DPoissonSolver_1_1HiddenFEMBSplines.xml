@@ -12,7 +12,7 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="1">
-        <label>FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator &gt;::HiddenFEMBSplines</label>
+        <label>FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator, IdxRangeBatched &gt;::HiddenFEMBSplines</label>
         <link refid="structFEM1DPoissonSolver_1_1HiddenFEMBSplines"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
@@ -23,7 +23,7 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="1">
-        <label>FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator &gt;::HiddenFEMBSplines</label>
+        <label>FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator, IdxRangeBatched &gt;::HiddenFEMBSplines</label>
         <link refid="structFEM1DPoissonSolver_1_1HiddenFEMBSplines"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
@@ -32,7 +32,7 @@
         <label>ddc::NonUniformBSplines&lt; PDEDim, InputBSplines::degree()&gt;</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="109" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="110" bodyend="111"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="115" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="116" bodyend="117"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

@@ -2,7 +2,7 @@
 
 # Class Spline2DPartialDerivativeCreator
 
-**template &lt;class [**SplineBuilder2DCache**](classSplineBuilder2DCache.md), class SplineEvaluator2D, class DerivativeDimension&gt;**
+**template &lt;class SplineBuilder2D, class SplineEvaluator2D, class DerivativeDimension, class IdxRangeBatched&gt;**
 
 
 
@@ -75,8 +75,8 @@ Inherits the following classes: [IPartialDerivativeCreator](classIPartialDerivat
 
 | Type | Name |
 | ---: | :--- |
-|   | [**Spline2DPartialDerivativeCreator**](#function-spline2dpartialderivativecreator) ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md) & builder\_cache, SplineEvaluator2D const & evaluator) <br>_Construct an instance of the_ [_**Spline2DPartialDerivativeCreator**_](classSpline2DPartialDerivativeCreator.md) _class._ |
-|  std::unique\_ptr&lt; [**IPartialDerivative**](classIPartialDerivative.md)&lt; typename SplineEvaluator2D::batched\_evaluation\_domain\_type, DerivativeDimension &gt; &gt; | [**create\_instance**](#function-create_instance) (DConstFieldType field) const<br> |
+|   | [**Spline2DPartialDerivativeCreator**](#function-spline2dpartialderivativecreator) ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md)&lt; SplineBuilder2D, IdxRangeBatched &gt; & builder\_cache, SplineEvaluator2D const & evaluator) <br>_Construct an instance of the_ [_**Spline2DPartialDerivativeCreator**_](classSpline2DPartialDerivativeCreator.md) _class._ |
+|  std::unique\_ptr&lt; [**IPartialDerivative**](classIPartialDerivative.md)&lt; IdxRangeBatched, DerivativeDimension &gt; &gt; | [**create\_instance**](#function-create_instance) (DConstFieldType field) const<br> |
 
 
 ## Public Functions inherited from IPartialDerivativeCreator
@@ -153,6 +153,8 @@ This class allows an instance of the [**Spline2DPartialDerivative**](classSpline
 
 * `SplineBuilder2D` A 2D spline builder. 
 * `SplineEvaluator2D` A 2D spline evaluator. 
+* `DerivativeDimension` The dimension along which we are differentiating. 
+* `IdxRangeBatched` The type af the index range over which this operator will operate. 
 
 
 
@@ -168,7 +170,7 @@ This class allows an instance of the [**Spline2DPartialDerivative**](classSpline
 _Construct an instance of the_ [_**Spline2DPartialDerivativeCreator**_](classSpline2DPartialDerivativeCreator.md) _class._
 ```C++
 inline Spline2DPartialDerivativeCreator::Spline2DPartialDerivativeCreator (
-    SplineBuilder2DCache & builder_cache,
+    SplineBuilder2DCache < SplineBuilder2D, IdxRangeBatched > & builder_cache,
     SplineEvaluator2D const & evaluator
 ) 
 ```
@@ -195,7 +197,7 @@ inline Spline2DPartialDerivativeCreator::Spline2DPartialDerivativeCreator (
 ### function create\_instance 
 
 ```C++
-inline std::unique_ptr< IPartialDerivative < typename SplineEvaluator2D::batched_evaluation_domain_type, DerivativeDimension > > Spline2DPartialDerivativeCreator::create_instance (
+inline std::unique_ptr< IPartialDerivative < IdxRangeBatched, DerivativeDimension > > Spline2DPartialDerivativeCreator::create_instance (
     DConstFieldType field
 ) const
 ```

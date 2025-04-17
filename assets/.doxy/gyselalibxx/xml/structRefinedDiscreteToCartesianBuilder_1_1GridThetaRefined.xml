@@ -31,7 +31,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="232" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="233" bodyend="234"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="231" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="232" bodyend="233"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

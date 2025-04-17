@@ -631,18 +631,14 @@ using SplineXBuilder_XY = ddc::SplineBuilder&lt;
         GridX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridX,
-        GridY&gt;;
+        ddc::SplineSolver::LAPACK&gt;;
 using SplineXEvaluator_XY = ddc::SplineEvaluator&lt;
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
         ddc::PeriodicExtrapolationRule&lt;X&gt;,
-        ddc::PeriodicExtrapolationRule&lt;X&gt;,
-        GridX,
-        GridY&gt;;
+        ddc::PeriodicExtrapolationRule&lt;X&gt;&gt;;
 
 
 using SplineYBuilder_XY = ddc::SplineBuilder&lt;
@@ -652,18 +648,14 @@ using SplineYBuilder_XY = ddc::SplineBuilder&lt;
         GridY,
         SplineYBoundary,
         SplineYBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridX,
-        GridY&gt;;
+        ddc::SplineSolver::LAPACK&gt;;
 using SplineYEvaluator_XY = ddc::SplineEvaluator&lt;
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesY,
         GridY,
         ddc::PeriodicExtrapolationRule&lt;Y&gt;,
-        ddc::PeriodicExtrapolationRule&lt;Y&gt;,
-        GridX,
-        GridY&gt;;
+        ddc::PeriodicExtrapolationRule&lt;Y&gt;&gt;;
 
 // Spline index range
 using IdxRangeBSX = IdxRange&lt;BSplinesX&gt;;

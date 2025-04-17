@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="395" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="395" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="383" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="383" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structX_1a11361f8ff006d764ec79d4b06fa3f45f" prot="public" static="no">
         <type><ref refid="structX" kindref="compound">X</ref></type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="386" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="386" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="374" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="374" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structX_1a8f2020d96b3716fc6de24ef27e6c158f" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>bool constexpr</type>
@@ -97,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="389" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="389" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="377" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="377" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structX_1a21b0a7c9531a817b3696d54d248192bf" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>bool constexpr</type>
@@ -113,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="392" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="392" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="380" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="380" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -123,7 +123,7 @@
 <para>A class which describes the real space in the first spatial direction <ref refid="structX" kindref="compound">X</ref>.</para>
 <para>A class which describes the real space in the spatial <ref refid="structX" kindref="compound">X</ref> direction. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="380" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="381" bodyend="396"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="368" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="369" bodyend="384"/>
     <listofallmembers>
       <member refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" prot="public" virt="non-virtual"><scope>X</scope><name>Dual</name></member>
       <member refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" prot="public" virt="non-virtual"><scope>X</scope><name>Dual</name></member>

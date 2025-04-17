@@ -83,10 +83,10 @@
 | typedef Idx&lt; [**GridY**](structGridY.md) &gt; | [**IdxY**](#typedef-idxy)  <br> |
 | typedef ddc::GrevilleInterpolationPoints&lt; [**BSplinesX**](structBSplinesX.md), SplineXBoundary, SplineXBoundary &gt; | [**SplineInterpPointsX**](#typedef-splineinterppointsx)  <br> |
 | typedef ddc::GrevilleInterpolationPoints&lt; [**BSplinesY**](structBSplinesY.md), SplineYBoundary, SplineYBoundary &gt; | [**SplineInterpPointsY**](#typedef-splineinterppointsy)  <br> |
-| typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesX**](structBSplinesX.md), [**GridX**](structGridX.md), SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK, [**GridX**](structGridX.md), [**GridY**](structGridY.md) &gt; | [**SplineXBuilder\_XY**](#typedef-splinexbuilder_xy)  <br> |
-| typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesX**](structBSplinesX.md), [**GridX**](structGridX.md), ddc::PeriodicExtrapolationRule&lt; [**X**](structX.md) &gt;, ddc::PeriodicExtrapolationRule&lt; [**X**](structX.md) &gt;, [**GridX**](structGridX.md), [**GridY**](structGridY.md) &gt; | [**SplineXEvaluator\_XY**](#typedef-splinexevaluator_xy)  <br> |
-| typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesY**](structBSplinesY.md), [**GridY**](structGridY.md), SplineYBoundary, SplineYBoundary, ddc::SplineSolver::LAPACK, [**GridX**](structGridX.md), [**GridY**](structGridY.md) &gt; | [**SplineYBuilder\_XY**](#typedef-splineybuilder_xy)  <br> |
-| typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesY**](structBSplinesY.md), [**GridY**](structGridY.md), ddc::PeriodicExtrapolationRule&lt; [**Y**](structY.md) &gt;, ddc::PeriodicExtrapolationRule&lt; [**Y**](structY.md) &gt;, [**GridX**](structGridX.md), [**GridY**](structGridY.md) &gt; | [**SplineYEvaluator\_XY**](#typedef-splineyevaluator_xy)  <br> |
+| typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesX**](structBSplinesX.md), [**GridX**](structGridX.md), SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK &gt; | [**SplineXBuilder\_XY**](#typedef-splinexbuilder_xy)  <br> |
+| typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesX**](structBSplinesX.md), [**GridX**](structGridX.md), ddc::PeriodicExtrapolationRule&lt; [**X**](structX.md) &gt;, ddc::PeriodicExtrapolationRule&lt; [**X**](structX.md) &gt; &gt; | [**SplineXEvaluator\_XY**](#typedef-splinexevaluator_xy)  <br> |
+| typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesY**](structBSplinesY.md), [**GridY**](structGridY.md), SplineYBoundary, SplineYBoundary, ddc::SplineSolver::LAPACK &gt; | [**SplineYBuilder\_XY**](#typedef-splineybuilder_xy)  <br> |
+| typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesY**](structBSplinesY.md), [**GridY**](structGridY.md), ddc::PeriodicExtrapolationRule&lt; [**Y**](structY.md) &gt;, ddc::PeriodicExtrapolationRule&lt; [**Y**](structY.md) &gt; &gt; | [**SplineYEvaluator\_XY**](#typedef-splineyevaluator_xy)  <br> |
 | typedef typename [**VectorFieldMemXY\_XY::view\_type**](classVectorFieldMem.md#typedef-view_type) | [**VectorConstFieldXY\_XY**](#typedef-vectorconstfieldxy_xy)  <br> |
 | typedef [**VectorFieldMem**](classVectorFieldMem.md)&lt; double, IdxRangeXY, VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, Kokkos::DefaultExecutionSpace::memory\_space &gt; | [**VectorFieldMemXY\_XY**](#typedef-vectorfieldmemxy_xy)  <br> |
 | typedef typename [**VectorFieldMemXY\_XY::span\_type**](classVectorFieldMem.md#typedef-span_type) | [**VectorFieldXY\_XY**](#typedef-vectorfieldxy_xy)  <br> |
@@ -598,7 +598,7 @@ using SplineInterpPointsY =  ddc::GrevilleInterpolationPoints<BSplinesY, SplineY
 ### typedef SplineXBuilder\_XY 
 
 ```C++
-using SplineXBuilder_XY =  ddc::SplineBuilder< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK, GridX, GridY>;
+using SplineXBuilder_XY =  ddc::SplineBuilder< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK>;
 ```
 
 
@@ -611,7 +611,7 @@ using SplineXBuilder_XY =  ddc::SplineBuilder< Kokkos::DefaultExecutionSpace, Ko
 ### typedef SplineXEvaluator\_XY 
 
 ```C++
-using SplineXEvaluator_XY =  ddc::SplineEvaluator< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, ddc::PeriodicExtrapolationRule<X>, ddc::PeriodicExtrapolationRule<X>, GridX, GridY>;
+using SplineXEvaluator_XY =  ddc::SplineEvaluator< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, ddc::PeriodicExtrapolationRule<X>, ddc::PeriodicExtrapolationRule<X> >;
 ```
 
 
@@ -624,7 +624,7 @@ using SplineXEvaluator_XY =  ddc::SplineEvaluator< Kokkos::DefaultExecutionSpace
 ### typedef SplineYBuilder\_XY 
 
 ```C++
-using SplineYBuilder_XY =  ddc::SplineBuilder< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesY, GridY, SplineYBoundary, SplineYBoundary, ddc::SplineSolver::LAPACK, GridX, GridY>;
+using SplineYBuilder_XY =  ddc::SplineBuilder< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesY, GridY, SplineYBoundary, SplineYBoundary, ddc::SplineSolver::LAPACK>;
 ```
 
 
@@ -637,7 +637,7 @@ using SplineYBuilder_XY =  ddc::SplineBuilder< Kokkos::DefaultExecutionSpace, Ko
 ### typedef SplineYEvaluator\_XY 
 
 ```C++
-using SplineYEvaluator_XY =  ddc::SplineEvaluator< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesY, GridY, ddc::PeriodicExtrapolationRule<Y>, ddc::PeriodicExtrapolationRule<Y>, GridX, GridY>;
+using SplineYEvaluator_XY =  ddc::SplineEvaluator< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesY, GridY, ddc::PeriodicExtrapolationRule<Y>, ddc::PeriodicExtrapolationRule<Y> >;
 ```
 
 

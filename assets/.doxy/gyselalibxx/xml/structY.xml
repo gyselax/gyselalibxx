@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="415" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="415" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="403" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="403" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structY_1aad98c6afa465f3fb654029648420df1f" prot="public" static="no">
         <type><ref refid="structY" kindref="compound">Y</ref></type>
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="406" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="406" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="394" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="394" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structY_1a9743efa727bd8c0249715bf6ac425bc9" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>bool constexpr</type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="409" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="409" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="397" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="397" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structY_1a36729b36e12627fd69c709e3b26ce176" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>bool constexpr</type>
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="412" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="412" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="400" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="400" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -107,7 +107,7 @@
     <detaileddescription>
 <para>A class which describes the real space in the second spatial direction <ref refid="structY" kindref="compound">Y</ref>. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="400" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="401" bodyend="416"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="388" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="389" bodyend="404"/>
     <listofallmembers>
       <member refid="structY_1aad98c6afa465f3fb654029648420df1f" prot="public" virt="non-virtual"><scope>Y</scope><name>Dual</name></member>
       <member refid="structY_1aad98c6afa465f3fb654029648420df1f" prot="public" virt="non-virtual"><scope>Y</scope><name>Dual</name></member>

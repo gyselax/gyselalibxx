@@ -305,10 +305,6 @@
 * **get\_covariant\_dims\_t** ([**vector\_index\_tools.hpp**](vector__index__tools_8hpp.md))
 * **Grid1OnPatch** ([**types.hpp**](types_8hpp.md))
 * **Grid2OnPatch** ([**types.hpp**](types_8hpp.md))
-* **get\_spline\_batched\_builder1d\_t** ([**ddc\_aliases.hpp**](ddc__aliases_8hpp.md))
-* **get\_spline\_batched\_builder2d\_t** ([**ddc\_aliases.hpp**](ddc__aliases_8hpp.md))
-* **get\_spline\_batched\_evaluator1d\_t** ([**ddc\_aliases.hpp**](ddc__aliases_8hpp.md))
-* **get\_spline\_batched\_evaluator2d\_t** ([**ddc\_aliases.hpp**](ddc__aliases_8hpp.md))
 
 
 ## h
@@ -504,14 +500,10 @@
 * **SplineInterpPointsX** ([**geometry.hpp**](geometryXVx_2geometry_2geometry_8hpp.md), [**geometry.hpp**](geometryXY_2geometry_2geometry_8hpp.md), [**geometry.hpp**](geometryXYVxVy_2geometry_2geometry_8hpp.md))
 * **SplineVxBoundary** ([**geometry.hpp**](geometryXVx_2geometry_2geometry_8hpp.md), [**geometry.hpp**](geometryXYVxVy_2geometry_2geometry_8hpp.md))
 * **SplineVxBuilder** ([**geometry.hpp**](geometryXVx_2geometry_2geometry_8hpp.md), [**geometry.hpp**](geometryXYVxVy_2geometry_2geometry_8hpp.md))
-* **SplineVxBuilder\_1d** ([**geometry.hpp**](geometryXVx_2geometry_2geometry_8hpp.md))
 * **SplineVxEvaluator** ([**geometry.hpp**](geometryXVx_2geometry_2geometry_8hpp.md), [**geometry.hpp**](geometryXYVxVy_2geometry_2geometry_8hpp.md))
-* **SplineVxEvaluator\_1d** ([**geometry.hpp**](geometryXVx_2geometry_2geometry_8hpp.md))
 * **SplineXBoundary** ([**geometry.hpp**](geometryXVx_2geometry_2geometry_8hpp.md), [**geometry.hpp**](geometryXY_2geometry_2geometry_8hpp.md), [**geometry.hpp**](geometryXYVxVy_2geometry_2geometry_8hpp.md))
 * **SplineXBuilder** ([**geometry.hpp**](geometryXVx_2geometry_2geometry_8hpp.md), [**geometry.hpp**](geometryXYVxVy_2geometry_2geometry_8hpp.md))
-* **SplineXBuilder\_1d** ([**geometry.hpp**](geometryXVx_2geometry_2geometry_8hpp.md))
 * **SplineXEvaluator** ([**geometry.hpp**](geometryXVx_2geometry_2geometry_8hpp.md), [**geometry.hpp**](geometryXYVxVy_2geometry_2geometry_8hpp.md))
-* **SplineXEvaluator\_1d** ([**geometry.hpp**](geometryXVx_2geometry_2geometry_8hpp.md))
 * **SplineInterpPointsY** ([**geometry.hpp**](geometryXY_2geometry_2geometry_8hpp.md), [**geometry.hpp**](geometryXYVxVy_2geometry_2geometry_8hpp.md))
 * **SplineXBuilder\_XY** ([**geometry.hpp**](geometryXY_2geometry_2geometry_8hpp.md))
 * **SplineXEvaluator\_XY** ([**geometry.hpp**](geometryXY_2geometry_2geometry_8hpp.md))

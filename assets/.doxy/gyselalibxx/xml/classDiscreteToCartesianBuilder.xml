@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="34" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="34" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="33" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-type">
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="37" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="37" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="36" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classDiscreteToCartesianBuilder_1a3f8037c8259885e752878d00fe5c020c" prot="private" static="no">
         <type>typename SplineBuilder::memory_space</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="38" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="38" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="37" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classDiscreteToCartesianBuilder_1a0436b5afe292e723f5db3570c56f211d" prot="private" static="no">
         <type>typename SplineBuilder::bsplines_type1</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="40" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classDiscreteToCartesianBuilder_1a9d8349559b7316fd87006b13a41fa3fb" prot="private" static="no">
         <type>typename SplineBuilder::bsplines_type2</type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="41" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classDiscreteToCartesianBuilder_1a523d4bec79cfcf9f70de77f6610b0e35" prot="private" static="no">
         <type>typename SplineBuilder::interpolation_domain_type1</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="43" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classDiscreteToCartesianBuilder_1a118d97ec84768b9756eb4bdbe80c747e" prot="private" static="no">
         <type>typename SplineBuilder::interpolation_domain_type2</type>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="44" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="44" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classDiscreteToCartesianBuilder_1aab792d0088365b3752e1fe5dc1af3144" prot="private" static="no">
         <type>IdxRange&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
@@ -131,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="46" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="45" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classDiscreteToCartesianBuilder_1a5bcbafc2862bffa57b36777deb806c65" prot="private" static="no">
         <type>typename SplineBuilder::interpolation_domain_type</type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="47" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="47" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classDiscreteToCartesianBuilder_1a3b0033f22410ab506847cf34a4df6d05" prot="private" static="no">
         <type>typename IdxRangeInterpolationPoints::discrete_element_type</type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="48" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="48" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="47" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classDiscreteToCartesianBuilder_1a34e4c0c847b6d207ba57f60a8201767d" prot="private" static="no">
         <type>DFieldMem&lt; IdxRangeSplines, MemorySpace &gt;</type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="50" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="50" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="49" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classDiscreteToCartesianBuilder_1a9bc72b9e075a618a96a2babccdecfcec" prot="private" static="no">
         <type>typename SplineCoeffsMem::span_type</type>
@@ -187,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="52" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="52" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classDiscreteToCartesianBuilder_1a3608875bc783168fafc493af54a93537" prot="private" static="no">
         <type>DFieldMem&lt; IdxRangeInterpolationPoints, MemorySpace &gt;</type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="54" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classDiscreteToCartesianBuilder_1ae7cafd5d817a767330f7ceaa44a004d1" prot="private" static="no">
         <type>typename InterpolationFieldMem::span_type</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="56" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="56" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="55" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="55" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -231,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="59" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="59" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="58" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classDiscreteToCartesianBuilder_1a5a6690f025282b5eebe40f90f8553515" prot="private" static="no" mutable="no">
         <type>SplineCoeffsMem</type>
@@ -245,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="60" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="60" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="59" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classDiscreteToCartesianBuilder_1a1b57b7569413ae6d635b535739426c63" prot="private" static="no" mutable="no">
         <type>SplineEvaluator</type>
@@ -259,7 +259,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="61" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="61" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="60" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classDiscreteToCartesianBuilder_1ade5e6f4190cdae3c7f53accbbc86550c" prot="private" static="no" mutable="no">
         <type>IdxRange&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
@@ -273,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="62" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="62" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="61" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="61" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -345,7 +345,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="74" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="74" bodyend="103"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="73" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="73" bodyend="102"/>
       </memberdef>
       <memberdef kind="function" id="classDiscreteToCartesianBuilder_1ae85a1541fb4b1695515c7d97526b8d40" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, SplineEvaluator &gt;</type>
@@ -363,7 +363,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="110" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="110" bodyend="117"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="109" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="109" bodyend="116"/>
       </memberdef>
       <memberdef kind="function" id="classDiscreteToCartesianBuilder_1a458cd2e7da2eed26ed4f64612cef71ec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -443,7 +443,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="132" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="132" bodyend="152"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="131" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="131" bodyend="151"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -485,7 +485,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="22" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="23" bodyend="153"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" line="22" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp" bodystart="23" bodyend="152"/>
     <listofallmembers>
       <member refid="classDiscreteToCartesianBuilder_1a0436b5afe292e723f5db3570c56f211d" prot="private" virt="non-virtual"><scope>DiscreteToCartesianBuilder</scope><name>BSplinesR</name></member>
       <member refid="classDiscreteToCartesianBuilder_1a9d8349559b7316fd87006b13a41fa3fb" prot="private" virt="non-virtual"><scope>DiscreteToCartesianBuilder</scope><name>BSplinesTheta</name></member>

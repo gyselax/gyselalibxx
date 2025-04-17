@@ -2,7 +2,7 @@
 
 # Class PreallocatableSplineInterpolator2D
 
-**template &lt;class Spline2DBuilder, class Spline2DEvaluator&gt;**
+**template &lt;class Spline2DBuilder, class Spline2DEvaluator, class IdxRangeBatched&gt;**
 
 
 
@@ -104,8 +104,8 @@ See [IInterpolator2D](classIInterpolator2D.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**PreallocatableSplineInterpolator2D**](#function-preallocatablesplineinterpolator2d) (Spline2DBuilder const & builder, Spline2DEvaluator const & evaluator) <br>_Create an object capable of creating_ [_**SplineInterpolator2D**_](classSplineInterpolator2D.md) _objects._ |
-| virtual std::unique\_ptr&lt; [**IInterpolator2D**](classIInterpolator2D.md)&lt; typename Spline2DBuilder::interpolation\_domain\_type, typename Spline2DBuilder::batched\_interpolation\_domain\_type &gt; &gt; | [**preallocate**](#function-preallocate) () override const<br> |
+|   | [**PreallocatableSplineInterpolator2D**](#function-preallocatablesplineinterpolator2d) (Spline2DBuilder const & builder, Spline2DEvaluator const & evaluator, IdxRangeBatched idx\_range\_batched) <br>_Create an object capable of creating_ [_**SplineInterpolator2D**_](classSplineInterpolator2D.md) _objects._ |
+| virtual std::unique\_ptr&lt; [**IInterpolator2D**](classIInterpolator2D.md)&lt; typename Spline2DBuilder::interpolation\_domain\_type, IdxRangeBatched &gt; &gt; | [**preallocate**](#function-preallocate) () override const<br> |
 
 
 ## Public Functions inherited from IPreallocatableInterpolator2D
@@ -209,7 +209,22 @@ See [IInterpolator2D](classIInterpolator2D.md)
 ## Detailed Description
 
 
-This class allows an instance of the [**SplineInterpolator2D**](classSplineInterpolator2D.md) class to be instantiated where necessary. This allows the memory allocated in the private members of the [**SplineInterpolator2D**](classSplineInterpolator2D.md) to be freed when the object is not in use. These objects are: m\_coefs. 
+This class allows an instance of the [**SplineInterpolator2D**](classSplineInterpolator2D.md) class to be instantiated where necessary. This allows the memory allocated in the private members of the [**SplineInterpolator2D**](classSplineInterpolator2D.md) to be freed when the object is not in use. These objects are: m\_coefs.
+
+
+The class is parametrised by multiple template parameters. Please note that CTAD will deduce all these template parameters from the Builder and Evaluator passed as constructor arguments.
+
+
+
+
+**Template parameters:**
+
+
+* `Spline2DBuilder` The type of the 2D spline builder. 
+* `Spline2DEvaluator` The type of the 2D spline evaluator. 
+* `IdxRangeBatched` The type af the index range over which this operator will operate. This is necessary to define the internal spline representation. 
+
+
 
 
     
@@ -224,7 +239,8 @@ _Create an object capable of creating_ [_**SplineInterpolator2D**_](classSplineI
 ```C++
 inline PreallocatableSplineInterpolator2D::PreallocatableSplineInterpolator2D (
     Spline2DBuilder const & builder,
-    Spline2DEvaluator const & evaluator
+    Spline2DEvaluator const & evaluator,
+    IdxRangeBatched idx_range_batched
 ) 
 ```
 
@@ -237,6 +253,7 @@ inline PreallocatableSplineInterpolator2D::PreallocatableSplineInterpolator2D (
 
 * `builder` An operator which builds spline coefficients from the values of a function at known interpolation points. 
 * `evaluator` An operator which evaluates the value of a spline at requested coordinates. 
+* `idx_range_batched` The index range on which this operator operates. 
 
 
 
@@ -250,7 +267,7 @@ inline PreallocatableSplineInterpolator2D::PreallocatableSplineInterpolator2D (
 ### function preallocate 
 
 ```C++
-inline virtual std::unique_ptr< IInterpolator2D < typename Spline2DBuilder::interpolation_domain_type, typename Spline2DBuilder::batched_interpolation_domain_type > > PreallocatableSplineInterpolator2D::preallocate () override const
+inline virtual std::unique_ptr< IInterpolator2D < typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched > > PreallocatableSplineInterpolator2D::preallocate () override const
 ```
 
 

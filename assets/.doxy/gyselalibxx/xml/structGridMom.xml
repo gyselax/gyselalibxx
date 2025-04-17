@@ -31,7 +31,7 @@
         <link refid="classMoments"/>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" line="191" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" bodystart="192" bodyend="193"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" line="144" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" bodystart="145" bodyend="146"/>
     <listofallmembers>
       <member refid="classMoments_1af6d51149f8e6fb5c7d440599741d6f1f" prot="public" virt="non-virtual"><scope>GridMom</scope><name>discrete_dimension_type</name></member>
     </listofallmembers>

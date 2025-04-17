@@ -104,83 +104,91 @@
 <codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;i_interpolator_2d.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Spline2DBuilder,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Spline2DEvaluator&gt;</highlight></codeline>
-<codeline lineno="13" refid="classSplineInterpolator2D" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSplineInterpolator2D" kindref="compound">SplineInterpolator2D</ref></highlight></codeline>
-<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIInterpolator2D" kindref="compound">IInterpolator2D</ref>&lt;</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typename<sp/>Spline2DBuilder::interpolation_domain_type,</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typename<sp/>Spline2DBuilder::batched_interpolation_domain_type&gt;</highlight></codeline>
-<codeline lineno="17"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIInterpolator2D" kindref="compound">base_type</ref><sp/>=<sp/><ref refid="classIInterpolator2D" kindref="compound">IInterpolator2D</ref>&lt;</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Spline2DBuilder::interpolation_domain_type,</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Spline2DBuilder::batched_interpolation_domain_type&gt;;</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"></highlight></codeline>
-<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classIInterpolator2D_1a42729a16cf23045e851682173916d3cc" kindref="member">base_type::CConstFieldType</ref>;</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classIInterpolator2D_1aa16e2d83b01633e1e88b8f5b84534613" kindref="member">base_type::CoordType</ref>;</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classIInterpolator2D_1a4255ea63affeb96b4ba02e3c53c685c7" kindref="member">base_type::DFieldType</ref>;</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"></highlight></codeline>
-<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>Spline2DBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_builder;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Spline2DBuilder,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Spline2DEvaluator,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeBatched&gt;</highlight></codeline>
+<codeline lineno="19" refid="classSplineInterpolator2D" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSplineInterpolator2D" kindref="compound">SplineInterpolator2D</ref></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIInterpolator2D" kindref="compound">IInterpolator2D</ref>&lt;typename<sp/>Spline2DBuilder::interpolation_domain_type,<sp/>IdxRangeBatched&gt;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIInterpolator2D" kindref="compound">base_type</ref></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="classIInterpolator2D" kindref="compound">IInterpolator2D&lt;typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched&gt;</ref>;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classIInterpolator2D_1a42729a16cf23045e851682173916d3cc" kindref="member">base_type::CConstFieldType</ref>;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classIInterpolator2D_1aa16e2d83b01633e1e88b8f5b84534613" kindref="member">base_type::CoordType</ref>;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classIInterpolator2D_1a4255ea63affeb96b4ba02e3c53c685c7" kindref="member">base_type::DFieldType</ref>;</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"></highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>Spline2DEvaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_evaluator;</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBSRTheta<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Spline2DBuilder::batched_spline_domain_type;</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"></highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>DFieldMem&lt;IdxRangeBSRTheta&gt;<sp/>m_coefs;</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"></highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">r_deriv_type<sp/>=<sp/>DConstField&lt;typename<sp/>Spline2DBuilder::batched_derivs_domain_type1&gt;;</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">theta_deriv_type<sp/>=<sp/>DConstField&lt;typename<sp/>Spline2DBuilder::batched_derivs_domain_type2&gt;;</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">mixed_deriv_type<sp/>=<sp/>DConstField&lt;typename<sp/>Spline2DBuilder::batched_derivs_domain_type&gt;;</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"></highlight></codeline>
-<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="46" refid="classSplineInterpolator2D_1a8f6c46c5c501230611e0bdb7cc749ded" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplineInterpolator2D_1a8f6c46c5c501230611e0bdb7cc749ded" kindref="member">SplineInterpolator2D</ref>(Spline2DBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>builder,<sp/>Spline2DEvaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>evaluator)</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_builder(builder)</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_evaluator(evaluator)</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_coefs(get_spline_idx_range(builder))</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"></highlight></codeline>
-<codeline lineno="65" refid="classSplineInterpolator2D_1ae28765fd22009961faf8c25998138c0f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplineInterpolator2D_1a4255ea63affeb96b4ba02e3c53c685c7" kindref="member">DFieldType</ref><sp/><ref refid="classSplineInterpolator2D_1ae28765fd22009961faf8c25998138c0f" kindref="member">operator()</ref>(<ref refid="classSplineInterpolator2D_1a4255ea63affeb96b4ba02e3c53c685c7" kindref="member">DFieldType</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>inout_data,<sp/><ref refid="classSplineInterpolator2D_1a42729a16cf23045e851682173916d3cc" kindref="member">CConstFieldType</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>coordinates)</highlight><highlight class="keyword"></highlight></codeline>
-<codeline lineno="66"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/>override</highlight></codeline>
-<codeline lineno="67"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_builder(get_field(m_coefs),<sp/>get_const_field(inout_data));</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_evaluator(get_field(inout_data),<sp/>coordinates,<sp/>get_const_field(m_coefs));</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"></highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>inout_data;</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="73"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"></highlight></codeline>
-<codeline lineno="75"><highlight class="normal"></highlight></codeline>
-<codeline lineno="76"><highlight class="normal"></highlight></codeline>
-<codeline lineno="84"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Spline2DBuilder,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Spline2DEvaluator&gt;</highlight></codeline>
-<codeline lineno="85" refid="classPreallocatableSplineInterpolator2D" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classPreallocatableSplineInterpolator2D" kindref="compound">PreallocatableSplineInterpolator2D</ref></highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIPreallocatableInterpolator2D" kindref="compound">IPreallocatableInterpolator2D</ref>&lt;</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typename<sp/>Spline2DBuilder::interpolation_domain_type,</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typename<sp/>Spline2DBuilder::batched_interpolation_domain_type&gt;</highlight></codeline>
-<codeline lineno="89"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>Spline2DBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_builder;</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>Spline2DEvaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_evaluator;</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"></highlight></codeline>
-<codeline lineno="95"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="101" refid="classPreallocatableSplineInterpolator2D_1a0e2f96ac087da46c97d76d53d850f339" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classPreallocatableSplineInterpolator2D_1a0e2f96ac087da46c97d76d53d850f339" kindref="member">PreallocatableSplineInterpolator2D</ref>(</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Spline2DBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>builder,</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Spline2DEvaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>evaluator)</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_builder(builder)</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_evaluator(evaluator)</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"></highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>std::unique_ptr&lt;<ref refid="classIInterpolator2D" kindref="compound">IInterpolator2D</ref>&lt;</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Spline2DBuilder::interpolation_domain_type,</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Spline2DBuilder::batched_interpolation_domain_type&gt;&gt;</highlight></codeline>
-<codeline lineno="117" refid="classPreallocatableSplineInterpolator2D_1aac38c2b54d1d4289063acd103d74a5fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classPreallocatableSplineInterpolator2D_1aac38c2b54d1d4289063acd103d74a5fb" kindref="member">preallocate</ref>()</highlight><highlight class="keyword"><sp/>const<sp/>override</highlight></codeline>
-<codeline lineno="118"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::make_unique&lt;</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSplineInterpolator2D" kindref="compound">SplineInterpolator2D&lt;Spline2DBuilder, Spline2DEvaluator&gt;</ref>&gt;(m_builder,<sp/>m_evaluator);</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="122"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>Spline2DBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_builder;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>Spline2DEvaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_evaluator;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBSRTheta<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Spline2DBuilder::batched_spline_domain_type&lt;IdxRangeBatched&gt;;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>DFieldMem&lt;IdxRangeBSRTheta&gt;<sp/>m_coefs;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">r_deriv_type</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>DConstField&lt;typename<sp/>Spline2DBuilder::batched_derivs_domain_type1&lt;IdxRangeBatched&gt;&gt;;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">theta_deriv_type</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>DConstField&lt;typename<sp/>Spline2DBuilder::batched_derivs_domain_type2&lt;IdxRangeBatched&gt;&gt;;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">mixed_deriv_type</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>DConstField&lt;typename<sp/>Spline2DBuilder::batched_derivs_domain_type&lt;IdxRangeBatched&gt;&gt;;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="54" refid="classSplineInterpolator2D_1a8cdd0b5ed3b376e14c43028fda04f500" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplineInterpolator2D_1a8cdd0b5ed3b376e14c43028fda04f500" kindref="member">SplineInterpolator2D</ref>(</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Spline2DBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>builder,</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Spline2DEvaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>evaluator,</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeBatched<sp/>idx_range_batched)</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_builder(builder)</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_evaluator(evaluator)</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_coefs(builder.batched_spline_domain(idx_range_batched))</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76" refid="classSplineInterpolator2D_1abcb78ec14ed806563b8e61c97ef195d3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplineInterpolator2D_1a4255ea63affeb96b4ba02e3c53c685c7" kindref="member">DFieldType</ref><sp/><ref refid="classSplineInterpolator2D_1abcb78ec14ed806563b8e61c97ef195d3" kindref="member">operator()</ref>(<ref refid="classSplineInterpolator2D_1a4255ea63affeb96b4ba02e3c53c685c7" kindref="member">DFieldType</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>inout_data,<sp/><ref refid="classSplineInterpolator2D_1a42729a16cf23045e851682173916d3cc" kindref="member">CConstFieldType</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>coordinates)</highlight><highlight class="keyword"></highlight></codeline>
+<codeline lineno="77"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/>override</highlight></codeline>
+<codeline lineno="78"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_builder(get_field(m_coefs),<sp/>get_const_field(inout_data));</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_evaluator(get_field(inout_data),<sp/>coordinates,<sp/>get_const_field(m_coefs));</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>inout_data;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="84"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Spline2DBuilder,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Spline2DEvaluator,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeBatched&gt;</highlight></codeline>
+<codeline lineno="104" refid="classPreallocatableSplineInterpolator2D" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classPreallocatableSplineInterpolator2D" kindref="compound">PreallocatableSplineInterpolator2D</ref></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIPreallocatableInterpolator2D" kindref="compound">IPreallocatableInterpolator2D</ref>&lt;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typename<sp/>Spline2DBuilder::interpolation_domain_type,</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeBatched&gt;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>Spline2DBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_builder;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>Spline2DEvaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_evaluator;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeBatched<sp/>m_idx_range_batched;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="124" refid="classPreallocatableSplineInterpolator2D_1a3e650415d1f6b4cd4f8f3a8ca7cc7f72" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classPreallocatableSplineInterpolator2D_1a3e650415d1f6b4cd4f8f3a8ca7cc7f72" kindref="member">PreallocatableSplineInterpolator2D</ref>(</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Spline2DBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>builder,</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Spline2DEvaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>evaluator,</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeBatched<sp/>idx_range_batched)</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_builder(builder)</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_evaluator(evaluator)</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_idx_range_batched(idx_range_batched)</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/>std::unique_ptr&lt;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classIInterpolator2D" kindref="compound">IInterpolator2D&lt;typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched&gt;</ref>&gt;</highlight></codeline>
+<codeline lineno="141" refid="classPreallocatableSplineInterpolator2D_1ad5afce78c69025b666383333c0f532ab" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classPreallocatableSplineInterpolator2D_1ad5afce78c69025b666383333c0f532ab" kindref="member">preallocate</ref>()</highlight><highlight class="keyword"><sp/>const<sp/>override</highlight></codeline>
+<codeline lineno="142"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::make_unique&lt;<ref refid="classSplineInterpolator2D" kindref="compound">SplineInterpolator2D</ref>&lt;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Spline2DBuilder,</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Spline2DEvaluator,</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeBatched&gt;&gt;(m_builder,<sp/>m_evaluator,<sp/>m_idx_range_batched);</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="148"><highlight class="normal">};</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp"/>
   </compounddef>

@@ -540,7 +540,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-spline2dpartialderivativecreator">Class Spline2DPartialDerivativeCreator</h1>
-<p><strong>template &lt;class <a href="classSplineBuilder2DCache.html"><strong>SplineBuilder2DCache</strong></a>, class SplineEvaluator2D, class DerivativeDimension&gt;</strong></p>
+<p><strong>template &lt;class SplineBuilder2D, class SplineEvaluator2D, class DerivativeDimension, class IdxRangeBatched&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classSpline2DPartialDerivativeCreator.html"><strong>Spline2DPartialDerivativeCreator</strong></a></p>
 <p><em>A class which stores information necessary to create a pointer to an instance of the</em> <a href="classSpline2DPartialDerivative.html"><em><strong>Spline2DPartialDerivative</strong></em></a> <em>class.</em><a href="#detailed-description">More...</a></p>
 <ul>
@@ -558,10 +558,10 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-spline2dpartialderivativecreator"><strong>Spline2DPartialDerivativeCreator</strong></a> (<a href="classSplineBuilder2DCache.html"><strong>SplineBuilder2DCache</strong></a> &amp; builder_cache, SplineEvaluator2D const &amp; evaluator) <br><em>Construct an instance of the</em> <a href="classSpline2DPartialDerivativeCreator.html"><em><strong>Spline2DPartialDerivativeCreator</strong></em></a> <em>class.</em></td>
+<td style="text-align: left;"><a href="#function-spline2dpartialderivativecreator"><strong>Spline2DPartialDerivativeCreator</strong></a> (<a href="classSplineBuilder2DCache.html"><strong>SplineBuilder2DCache</strong></a>&lt; SplineBuilder2D, IdxRangeBatched &gt; &amp; builder_cache, SplineEvaluator2D const &amp; evaluator) <br><em>Construct an instance of the</em> <a href="classSpline2DPartialDerivativeCreator.html"><em><strong>Spline2DPartialDerivativeCreator</strong></em></a> <em>class.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">std::unique_ptr&lt; <a href="classIPartialDerivative.html"><strong>IPartialDerivative</strong></a>&lt; typename SplineEvaluator2D::batched_evaluation_domain_type, DerivativeDimension &gt; &gt;</td>
+<td style="text-align: right;">std::unique_ptr&lt; <a href="classIPartialDerivative.html"><strong>IPartialDerivative</strong></a>&lt; IdxRangeBatched, DerivativeDimension &gt; &gt;</td>
 <td style="text-align: left;"><a href="#function-create_instance"><strong>create_instance</strong></a> (DConstFieldType field) const<br></td>
 </tr>
 </tbody>
@@ -588,12 +588,14 @@
 <ul>
 <li><code>SplineBuilder2D</code> A 2D spline builder. </li>
 <li><code>SplineEvaluator2D</code> A 2D spline evaluator. </li>
+<li><code>DerivativeDimension</code> The dimension along which we are differentiating. </li>
+<li><code>IdxRangeBatched</code> The type af the index range over which this operator will operate. </li>
 </ul>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-spline2dpartialderivativecreator">function Spline2DPartialDerivativeCreator</h3>
 <p><em>Construct an instance of the</em> <a href="classSpline2DPartialDerivativeCreator.html"><em><strong>Spline2DPartialDerivativeCreator</strong></em></a> <em>class.</em></p>
 <pre><code class="language-C++">inline Spline2DPartialDerivativeCreator::Spline2DPartialDerivativeCreator (
-    SplineBuilder2DCache &amp; builder_cache,
+    SplineBuilder2DCache &lt; SplineBuilder2D, IdxRangeBatched &gt; &amp; builder_cache,
     SplineEvaluator2D const &amp; evaluator
 ) 
 </code></pre>
@@ -605,7 +607,7 @@
 <hr>
 
 <h3 id="function-create_instance">function create_instance</h3>
-<pre><code class="language-C++">inline std::unique_ptr&lt; IPartialDerivative &lt; typename SplineEvaluator2D::batched_evaluation_domain_type, DerivativeDimension &gt; &gt; Spline2DPartialDerivativeCreator::create_instance (
+<pre><code class="language-C++">inline std::unique_ptr&lt; IPartialDerivative &lt; IdxRangeBatched, DerivativeDimension &gt; &gt; Spline2DPartialDerivativeCreator::create_instance (
     DConstFieldType field
 ) const
 </code></pre>

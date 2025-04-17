@@ -18,11 +18,12 @@
 #include "spline_builder_2d_cache.hpp"
 
 
-template <class SplineBuilder2DCache, class SplineEvaluator2D, class DerivativeDimension>
-class Spline2DPartialDerivative
-    : public IPartialDerivative<
-              typename SplineEvaluator2D::batched_evaluation_domain_type,
-              DerivativeDimension>
+template <
+        class SplineBuilder2D,
+        class SplineEvaluator2D,
+        class DerivativeDimension,
+        class IdxRangeBatched>
+class Spline2DPartialDerivative : public IPartialDerivative<IdxRangeBatched, DerivativeDimension>
 {
     static_assert(
             (std::is_same_v<
@@ -33,23 +34,21 @@ class Spline2DPartialDerivative
                     DerivativeDimension>));
 
 private:
-    using base_type = IPartialDerivative<
-            typename SplineEvaluator2D::batched_evaluation_domain_type,
-            DerivativeDimension>;
+    using base_type = IPartialDerivative<IdxRangeBatched, DerivativeDimension>;
 
     using typename base_type::DConstFieldType;
     using typename base_type::DFieldType;
 
-    using IdxRangeBS = typename SplineEvaluator2D::batched_evaluation_domain_type;
+    using IdxRangeBS = IdxRangeBatched;
     using DFieldBSMem = DFieldMem<IdxRangeBS>;
     using DFieldBS = DField<IdxRangeBS>;
 
-    SplineBuilder2DCache& m_builder_cache;
+    SplineBuilder2DCache<SplineBuilder2D, IdxRangeBatched>& m_builder_cache;
     SplineEvaluator2D const& m_evaluator;
 
 public:
     explicit Spline2DPartialDerivative(
-            SplineBuilder2DCache& builder_cache,
+            SplineBuilder2DCache<SplineBuilder2D, IdxRangeBatched>& builder_cache,
             SplineEvaluator2D const& evaluator,
             DConstFieldType const field)
         : m_builder_cache(builder_cache)
@@ -70,36 +69,37 @@ public:
     }
 };
 
-template <class SplineBuilder2DCache, class SplineEvaluator2D, class DerivativeDimension>
+template <
+        class SplineBuilder2D,
+        class SplineEvaluator2D,
+        class DerivativeDimension,
+        class IdxRangeBatched>
 class Spline2DPartialDerivativeCreator
-    : public IPartialDerivativeCreator<
-              typename SplineEvaluator2D::batched_evaluation_domain_type,
-              DerivativeDimension>
+    : public IPartialDerivativeCreator<IdxRangeBatched, DerivativeDimension>
 {
 private:
-    using DConstFieldType = DConstField<typename SplineEvaluator2D::batched_evaluation_domain_type>;
+    using DConstFieldType = DConstField<IdxRangeBatched>;
 
-    SplineBuilder2DCache& m_builder_cache;
+    SplineBuilder2DCache<SplineBuilder2D, IdxRangeBatched>& m_builder_cache;
     SplineEvaluator2D const& m_evaluator;
 
 public:
     Spline2DPartialDerivativeCreator(
-            SplineBuilder2DCache& builder_cache,
+            SplineBuilder2DCache<SplineBuilder2D, IdxRangeBatched>& builder_cache,
             SplineEvaluator2D const& evaluator)
         : m_builder_cache(builder_cache)
         , m_evaluator(evaluator)
     {
     }
 
-    std::unique_ptr<IPartialDerivative<
-            typename SplineEvaluator2D::batched_evaluation_domain_type,
-            DerivativeDimension>>
-    create_instance(DConstFieldType field) const
+    std::unique_ptr<IPartialDerivative<IdxRangeBatched, DerivativeDimension>> create_instance(
+            DConstFieldType field) const
     {
         return std::make_unique<Spline2DPartialDerivative<
-                SplineBuilder2DCache,
+                SplineBuilder2D,
                 SplineEvaluator2D,
-                DerivativeDimension>>(m_builder_cache, m_evaluator, field);
+                DerivativeDimension,
+                IdxRangeBatched>>(m_builder_cache, m_evaluator, field);
     }
 };
 ```

@@ -17,6 +17,7 @@
 
 
 
+Inherited by the following classes: [FEM1DPoissonSolver](classFEM1DPoissonSolver.md)
 
 
 

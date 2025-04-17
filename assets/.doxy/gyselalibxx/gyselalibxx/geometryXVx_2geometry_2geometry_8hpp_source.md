@@ -101,9 +101,7 @@ using SplineXBuilder = ddc::SplineBuilder<
         GridX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridX,
-        GridVx>;
+        ddc::SplineSolver::LAPACK>;
 using SplineXEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -111,13 +109,11 @@ using SplineXEvaluator = ddc::SplineEvaluator<
         GridX,
 #ifdef PERIODIC_RDIMX
         ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>,
+        ddc::PeriodicExtrapolationRule<X>>;
 #else
         ddc::ConstantExtrapolationRule<X>,
-        ddc::ConstantExtrapolationRule<X>,
+        ddc::ConstantExtrapolationRule<X>>;
 #endif
-        GridX,
-        GridVx>;
 using SplineVxBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -125,57 +121,14 @@ using SplineVxBuilder = ddc::SplineBuilder<
         GridVx,
         SplineVxBoundary,
         SplineVxBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridX,
-        GridVx>;
+        ddc::SplineSolver::LAPACK>;
 using SplineVxEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesVx,
         GridVx,
         ddc::ConstantExtrapolationRule<Vx>,
-        ddc::ConstantExtrapolationRule<Vx>,
-        GridX,
-        GridVx>;
-using SplineXBuilder_1d = ddc::SplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        SplineXBoundary,
-        SplineXBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridX>;
-using SplineXEvaluator_1d = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-#ifdef PERIODIC_RDIMX
-        ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>,
-#else
-        ddc::ConstantExtrapolationRule<X>,
-        ddc::ConstantExtrapolationRule<X>,
-#endif
-        GridX>;
-using SplineVxBuilder_1d = ddc::SplineBuilder<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::HostSpace,
-        BSplinesVx,
-        GridVx,
-        SplineVxBoundary,
-        SplineVxBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridVx>;
-using SplineVxEvaluator_1d = ddc::SplineEvaluator<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::HostSpace,
-        BSplinesVx,
-        GridVx,
-        ddc::ConstantExtrapolationRule<Vx>,
-        ddc::ConstantExtrapolationRule<Vx>,
-        GridVx>;
+        ddc::ConstantExtrapolationRule<Vx>>;
 
 struct GridMom : Moments
 {

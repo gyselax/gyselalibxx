@@ -38,9 +38,8 @@
 * [**Build\_BuilderType**](structMultipatchSplineBuilder2D_1_1Build__BuilderType.md)
 * [**Build\_BuilderType**](structMultipatchSplineBuilder_1_1Build__BuilderType.md)
 * [**Build\_BuilderType**](structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType.md)
-* [**Build\_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver, GridROriginal, GridThetaOriginal &gt; &gt;**](structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilder2D_3_01Exe5e607dcd09b0e5dcea3e1a165ab7545e.md)
+* [**Build\_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver &gt; &gt;**](structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilder2D_3_01Exedad782e8118e0de272f3e04e2a3c2f85.md)
 * [**Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;**](structMultipatchSplineBuilder2D_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_388990a8744187d12e0f612652c86727.md)
-* [**Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;**](structMultipatchSplineBuilder_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_0143963206948829b7e1024cedaaccd580.md)
 * [**BumpontailEquilibrium**](classBumpontailEquilibrium.md)
 
 
@@ -143,8 +142,6 @@
 ## f
 
 * [**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md)
-* [**FEMSplineEvaluatorBuilder**](structFEM1DPoissonSolver_1_1FEMSplineEvaluatorBuilder.md)
-* [**FEMSplineEvaluatorBuilder&lt; IdxRange&lt; DimX... &gt; &gt;**](structFEM1DPoissonSolver_1_1FEMSplineEvaluatorBuilder_3_01IdxRange_3_01DimX_8_8_8_01_4_01_4.md)
 * [**FFTPoissonSolver**](classFFTPoissonSolver.md)
 * [**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md)
 * [**FindInterface**](structconnectivity__details_1_1FindInterface.md)

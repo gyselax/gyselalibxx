@@ -2,7 +2,7 @@
 
 # Class SplineBuilder2DCache
 
-**template &lt;class SplineBuilder2D&gt;**
+**template &lt;class SplineBuilder2D, class IdxRangeBatched&gt;**
 
 
 
@@ -54,7 +54,7 @@ _A class that stores spline builder coefficients and recomputes them when requir
 
 | Type | Name |
 | ---: | :--- |
-|   | [**SplineBuilder2DCache**](#function-splinebuilder2dcache) (SplineBuilder2D const & spline\_builder) <br>_Construct an instance of the class_ [_**SplineBuilder2DCache**_](classSplineBuilder2DCache.md) _._ |
+|   | [**SplineBuilder2DCache**](#function-splinebuilder2dcache) (SplineBuilder2D const & spline\_builder, IdxRangeBatched idx\_range\_batched) <br>_Construct an instance of the class_ [_**SplineBuilder2DCache**_](classSplineBuilder2DCache.md) _._ |
 |  DConstFieldSplineCoeffs | [**compute\_coeffs**](#function-compute_coeffs) (DConstField&lt; IdxRangeField &gt; field\_values) <br>_Compute the spline coefficients of the spline representation of field\_values if required, i.e. if not already computed by the other dimension than DimOfInterest._  |
 |  DConstFieldSplineCoeffs | [**operator()**](#function-operator) () const<br>_Returns a constant field reference to the spline coefficients._  |
 
@@ -95,7 +95,8 @@ _A class that stores spline builder coefficients and recomputes them when requir
 _Construct an instance of the class_ [_**SplineBuilder2DCache**_](classSplineBuilder2DCache.md) _._
 ```C++
 inline explicit SplineBuilder2DCache::SplineBuilder2DCache (
-    SplineBuilder2D const & spline_builder
+    SplineBuilder2D const & spline_builder,
+    IdxRangeBatched idx_range_batched
 ) 
 ```
 
@@ -107,6 +108,7 @@ inline explicit SplineBuilder2DCache::SplineBuilder2DCache (
 
 
 * `spline_builder` A 2D spline builder. 
+* `idx_range_batched` The index range on which this operator operates. 
 
 
 

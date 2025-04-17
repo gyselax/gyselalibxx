@@ -2,7 +2,7 @@
 
 # Class Spline2DPartialDerivative
 
-**template &lt;class [**SplineBuilder2DCache**](classSplineBuilder2DCache.md), class SplineEvaluator2D, class DerivativeDimension&gt;**
+**template &lt;class SplineBuilder2D, class SplineEvaluator2D, class DerivativeDimension, class IdxRangeBatched&gt;**
 
 
 
@@ -86,8 +86,8 @@ See [IPartialDerivative](classIPartialDerivative.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**Spline2DPartialDerivative**](#function-spline2dpartialderivative) ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md) & builder\_cache, SplineEvaluator2D const & evaluator, DConstFieldType const field) <br>_Construct an instance of the class_ [_**Spline2DPartialDerivative**_](classSpline2DPartialDerivative.md) _._ |
-|  void | [**operator()**](#function-operator) (DFieldType differentiated\_field) const<br>_Compute the partial derivative of a field in the direction where the field is represented using 2d splines._  |
+|   | [**Spline2DPartialDerivative**](#function-spline2dpartialderivative) ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md)&lt; SplineBuilder2D, IdxRangeBatched &gt; & builder\_cache, SplineEvaluator2D const & evaluator, [**DConstFieldType**](classIPartialDerivative.md#typedef-dconstfieldtype) const field) <br>_Construct an instance of the class_ [_**Spline2DPartialDerivative**_](classSpline2DPartialDerivative.md) _._ |
+| virtual void | [**operator()**](#function-operator) ([**DFieldType**](classIPartialDerivative.md#typedef-dfieldtype) differentiated\_field) const<br>_Compute the partial derivative of a field in the direction where the field is represented using 2d splines._  |
 
 
 ## Public Functions inherited from IPartialDerivative
@@ -161,6 +161,8 @@ See [IPartialDerivative](classIPartialDerivative.md)
 
 * `SplineBuilder2D` A 2D spline builder. 
 * `SplineEvaluator2D` A 2D spline evaluator. 
+* `DerivativeDimension` The dimension along which we are differentiating. 
+* `IdxRangeBatched` The type af the index range over which this operator will operate. 
 
 
 
@@ -176,7 +178,7 @@ See [IPartialDerivative](classIPartialDerivative.md)
 _Construct an instance of the class_ [_**Spline2DPartialDerivative**_](classSpline2DPartialDerivative.md) _._
 ```C++
 inline explicit Spline2DPartialDerivative::Spline2DPartialDerivative (
-    SplineBuilder2DCache & builder_cache,
+    SplineBuilder2DCache < SplineBuilder2D, IdxRangeBatched > & builder_cache,
     SplineEvaluator2D const & evaluator,
     DConstFieldType const field
 ) 
@@ -206,7 +208,7 @@ inline explicit Spline2DPartialDerivative::Spline2DPartialDerivative (
 
 _Compute the partial derivative of a field in the direction where the field is represented using 2d splines._ 
 ```C++
-inline void Spline2DPartialDerivative::operator() (
+inline virtual void Spline2DPartialDerivative::operator() (
     DFieldType differentiated_field
 ) const
 ```
@@ -224,6 +226,8 @@ inline void Spline2DPartialDerivative::operator() (
 
 
         
+Implements [*IPartialDerivative::operator()*](classIPartialDerivative.md#function-operator)
+
 
 <hr>
 

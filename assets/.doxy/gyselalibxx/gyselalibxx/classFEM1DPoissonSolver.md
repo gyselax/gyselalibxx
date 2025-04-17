@@ -2,7 +2,7 @@
 
 # Class FEM1DPoissonSolver
 
-**template &lt;class SplineBuilder, class SplineEvaluator&gt;**
+**template &lt;class SplineBuilder, class SplineEvaluator, class IdxRangeBatched&gt;**
 
 
 
@@ -152,7 +152,9 @@ A class to solve the following equation:  using a Finite Element Method.
 **Template parameters:**
 
 
+* `SplineBuilder` An operator which builds spline coefficients. 
 * `SplineEvaluator` An evaluator which can be used to evaluate splines. 
+* `IdxRangeBatched` The type af the index range over which this operator will operate. By default: the 1D index range of the interpolation points for the spline builder. 
 
 
 

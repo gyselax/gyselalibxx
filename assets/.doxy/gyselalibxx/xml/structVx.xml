@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="427" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="427" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="415" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="415" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -29,7 +29,7 @@
 <para>A class which describes the real space in the second velocity direction <ref refid="structX" kindref="compound">X</ref>.</para>
 <para>A class which describes the real space in the X-velocity direction. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="421" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="422" bodyend="428"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="409" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="410" bodyend="416"/>
     <listofallmembers>
       <member refid="structVx_1aabb61a786e12232d6e6adaf41a545a4a" prot="public" virt="non-virtual"><scope>Vx</scope><name>PERIODIC</name></member>
     </listofallmembers>

@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classIPoissonSolver" kind="class" language="C++" prot="public">
     <compoundname>IPoissonSolver</compoundname>
+    <derivedcompoundref refid="classFEM1DPoissonSolver" prot="public" virt="non-virtual">FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator, IdxRangeBatched &gt;</derivedcompoundref>
     <templateparamlist>
       <param>
         <type>class IdxRangeLaplacian</type>
@@ -20,6 +21,18 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator, IdxRangeBatched &gt;</label>
+        <link refid="classFEM1DPoissonSolver"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>IPoissonSolver&lt; IdxRangeLaplacian, IdxRangeFull, MemorySpace, LayoutSpace &gt;</label>
+        <link refid="classIPoissonSolver"/>
+      </node>
+    </inheritancegraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp" line="10" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp" bodystart="10" bodyend="-1"/>
     <listofallmembers>
     </listofallmembers>

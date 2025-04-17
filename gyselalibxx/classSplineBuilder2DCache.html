@@ -540,7 +540,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-splinebuilder2dcache">Class SplineBuilder2DCache</h1>
-<p><strong>template &lt;class SplineBuilder2D&gt;</strong></p>
+<p><strong>template &lt;class SplineBuilder2D, class IdxRangeBatched&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classSplineBuilder2DCache.html"><strong>SplineBuilder2DCache</strong></a></p>
 <p><em>A class that stores spline builder coefficients and recomputes them when required.</em> </p>
 <ul>
@@ -557,7 +557,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-splinebuilder2dcache"><strong>SplineBuilder2DCache</strong></a> (SplineBuilder2D const &amp; spline_builder) <br><em>Construct an instance of the class</em> <a href="classSplineBuilder2DCache.html"><em><strong>SplineBuilder2DCache</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-splinebuilder2dcache"><strong>SplineBuilder2DCache</strong></a> (SplineBuilder2D const &amp; spline_builder, IdxRangeBatched idx_range_batched) <br><em>Construct an instance of the class</em> <a href="classSplineBuilder2DCache.html"><em><strong>SplineBuilder2DCache</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">DConstFieldSplineCoeffs</td>
@@ -573,12 +573,14 @@
 <h3 id="function-splinebuilder2dcache">function SplineBuilder2DCache</h3>
 <p><em>Construct an instance of the class</em> <a href="classSplineBuilder2DCache.html"><em><strong>SplineBuilder2DCache</strong></em></a> <em>.</em></p>
 <pre><code class="language-C++">inline explicit SplineBuilder2DCache::SplineBuilder2DCache (
-    SplineBuilder2D const &amp; spline_builder
+    SplineBuilder2D const &amp; spline_builder,
+    IdxRangeBatched idx_range_batched
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>spline_builder</code> A 2D spline builder. </li>
+<li><code>idx_range_batched</code> The index range on which this operator operates. </li>
 </ul>
 <hr>
 

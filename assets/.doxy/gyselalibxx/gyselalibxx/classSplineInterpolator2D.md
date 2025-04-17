@@ -2,7 +2,7 @@
 
 # Class SplineInterpolator2D
 
-**template &lt;class Spline2DBuilder, class Spline2DEvaluator&gt;**
+**template &lt;class Spline2DBuilder, class Spline2DEvaluator, class IdxRangeBatched&gt;**
 
 
 
@@ -10,7 +10,7 @@
 
 
 
-_A class for interpolating a function using splines in polar coordinates._ [More...](#detailed-description)
+_A class for interpolating a function using a 2D tensor product of splines._ [More...](#detailed-description)
 
 * `#include <spline_interpolator_2d.hpp>`
 
@@ -91,7 +91,7 @@ See [IInterpolator2D](classIInterpolator2D.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**SplineInterpolator2D**](#function-splineinterpolator2d) (Spline2DBuilder const & builder, Spline2DEvaluator const & evaluator) <br>_Create a spline interpolator object._  |
+|   | [**SplineInterpolator2D**](#function-splineinterpolator2d) (Spline2DBuilder const & builder, Spline2DEvaluator const & evaluator, IdxRangeBatched idx\_range\_batched) <br>_Create a spline interpolator object._  |
 |  [**DFieldType**](classSplineInterpolator2D.md#typedef-dfieldtype) | [**operator()**](#function-operator) ([**DFieldType**](classSplineInterpolator2D.md#typedef-dfieldtype) const inout\_data, [**CConstFieldType**](classSplineInterpolator2D.md#typedef-cconstfieldtype) const coordinates) override const<br>_Approximate the value of a function at a set of polar coordinates using the current values at a known set of interpolation points._  |
 
 
@@ -160,12 +160,17 @@ See [IInterpolator2D](classIInterpolator2D.md)
 ## Detailed Description
 
 
+The class is parametrised by multiple template parameters. Please note that CTAD will deduce all these template parameters from the Builder and Evaluator passed as constructor arguments.
+
+
 
 
 **Template parameters:**
 
 
-* `RadialExtrapolationRule` The extrapolation rule applied at the outer radial bound. 
+* `Spline2DBuilder` The type of the 2D spline builder. 
+* `Spline2DEvaluator` The type of the 2D spline evaluator. 
+* `IdxRangeBatched` The type af the index range over which this operator will operate. This is necessary to define the internal spline representation. 
 
 
 
@@ -226,7 +231,8 @@ _Create a spline interpolator object._
 ```C++
 inline SplineInterpolator2D::SplineInterpolator2D (
     Spline2DBuilder const & builder,
-    Spline2DEvaluator const & evaluator
+    Spline2DEvaluator const & evaluator,
+    IdxRangeBatched idx_range_batched
 ) 
 ```
 
@@ -239,6 +245,7 @@ inline SplineInterpolator2D::SplineInterpolator2D (
 
 * `builder` An operator which builds spline coefficients from the values of a function at known interpolation points. 
 * `evaluator` An operator which evaluates the value of a spline at requested coordinates. 
+* `idx_range_batched` The index range on which this operator operates. 
 
 
 

@@ -561,7 +561,6 @@ class DiscreteToCartesianBuilder
     static_assert(std::is_same_v&lt;
                   typename SplineBuilder::exec_space,
                   typename SplineEvaluator::exec_space&gt;);
-    static_assert(std::is_same_v&lt;typename SplineBuilder::batch_domain_type, IdxRange&lt;&gt;&gt;);
 
 public:
     using MappingType = DiscreteToCartesian&lt;X, Y, SplineEvaluator&gt;;
@@ -747,9 +746,7 @@ private:
             BcUpper1,
             BcLower2,
             BcUpper2,
-            Solver,
-            GridROriginal,
-            GridThetaOriginal&gt;&gt;
+            Solver&gt;&gt;
     {
         using type = ddc::SplineBuilder2D&lt;
                 ExecSpace,
@@ -762,9 +759,7 @@ private:
                 BcUpper1,
                 BcLower2,
                 BcUpper2,
-                Solver,
-                GridRRefined,
-                GridThetaRefined&gt;;
+                Solver&gt;;
     };
 
     using RefinedSplineBuilder = typename Build_BuilderType&lt;SplineBuilder&gt;::type;
@@ -779,9 +774,7 @@ private:
             typename SplineEvaluator::lower_extrapolation_rule_1_type,
             typename SplineEvaluator::upper_extrapolation_rule_1_type,
             typename SplineEvaluator::lower_extrapolation_rule_2_type,
-            typename SplineEvaluator::upper_extrapolation_rule_2_type,
-            GridRRefined,
-            GridThetaRefined&gt;;
+            typename SplineEvaluator::upper_extrapolation_rule_2_type&gt;;
 
     using IdxRangeSplines = IdxRange&lt;BSplinesRRefined, BSplinesThetaRefined&gt;;
     using IdxRangeInterpolationPoints = IdxRange&lt;GridRRefined, GridThetaRefined&gt;;

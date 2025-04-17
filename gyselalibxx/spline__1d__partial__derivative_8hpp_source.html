@@ -551,28 +551,28 @@
 #include "ipartial_derivative.hpp"
 
 
-template &lt;class Spline1DBuilder, class Spline1DEvaluator&gt;
+template &lt;class Spline1DBuilder, class Spline1DEvaluator, class IdxRangeBatched&gt;
 class Spline1DPartialDerivative
     : public IPartialDerivative&lt;
-              typename Spline1DBuilder::batched_interpolation_domain_type,
+              IdxRangeBatched,
               typename Spline1DBuilder::continuous_dimension_type&gt;
 {
     static_assert(std::is_same_v&lt;
-                  typename Spline1DBuilder::batched_spline_domain_type,
-                  typename Spline1DEvaluator::batched_spline_domain_type&gt;);
-    static_assert(std::is_same_v&lt;
-                  typename Spline1DBuilder::batched_interpolation_domain_type,
-                  typename Spline1DEvaluator::batched_evaluation_domain_type&gt;);
+                  typename Spline1DBuilder::interpolation_discrete_dimension_type,
+                  typename Spline1DEvaluator::evaluation_discrete_dimension_type&gt;);
+    static_assert(ddc::in_tags_v&lt;
+                  typename Spline1DBuilder::interpolation_discrete_dimension_type,
+                  ddc::to_type_seq_t&lt;IdxRangeBatched&gt;&gt;);
 
 private:
     using base_type = IPartialDerivative&lt;
-            typename Spline1DBuilder::batched_interpolation_domain_type,
+            IdxRangeBatched,
             typename Spline1DBuilder::continuous_dimension_type&gt;;
 
     using typename base_type::DConstFieldType;
     using typename base_type::DFieldType;
 
-    using IdxRangeBS = typename Spline1DBuilder::batched_spline_domain_type;
+    using IdxRangeBS = typename Spline1DBuilder::batched_spline_domain_type&lt;IdxRangeBatched&gt;;
     using DFieldBSMem = DFieldMem&lt;IdxRangeBS&gt;;
     using DFieldBS = DField&lt;IdxRangeBS&gt;;
 
@@ -587,7 +587,7 @@ public:
             DConstFieldType const field)
         : m_builder(builder)
         , m_evaluator(evaluator)
-        , m_spline_coefs(builder.batched_spline_domain())
+        , m_spline_coefs(builder.batched_spline_domain(get_idx_range(field)))
     {
         m_builder(get_field(m_spline_coefs), field);
     }
@@ -599,15 +599,14 @@ public:
 };
 
 
-template &lt;class Spline1DBuilder, class Spline1DEvaluator&gt;
+template &lt;class Spline1DBuilder, class Spline1DEvaluator, class IdxRangeBatched&gt;
 class Spline1DPartialDerivativeCreator
     : public IPartialDerivativeCreator&lt;
-              typename Spline1DBuilder::batched_interpolation_domain_type,
+              IdxRangeBatched,
               typename Spline1DBuilder::continuous_dimension_type&gt;
 {
 private:
-    using DConstFieldType
-            = DConstField&lt;typename Spline1DBuilder::batched_interpolation_domain_type&gt;;
+    using DConstFieldType = DConstField&lt;IdxRangeBatched&gt;;
 
     Spline1DBuilder const&amp; m_builder;
     Spline1DEvaluator const&amp; m_evaluator;
@@ -622,13 +621,14 @@ public:
     }
 
     std::unique_ptr&lt;IPartialDerivative&lt;
-            typename Spline1DBuilder::batched_interpolation_domain_type,
+            IdxRangeBatched,
             typename Spline1DBuilder::continuous_dimension_type&gt;&gt;
     create_instance(DConstFieldType field) const final
     {
         return std::make_unique&lt;Spline1DPartialDerivative&lt;
                 Spline1DBuilder,
-                Spline1DEvaluator&gt;&gt;(m_builder, m_evaluator, field);
+                Spline1DEvaluator,
+                IdxRangeBatched&gt;&gt;(m_builder, m_evaluator, field);
     }
 };
 </code></pre></div>

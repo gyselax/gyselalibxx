@@ -603,22 +603,6 @@
 <td style="text-align: right;">typedef ddc::UniformPointSampling&lt; Dim &gt;</td>
 <td style="text-align: left;"><a href="#typedef-uniformgridbase"><strong>UniformGridBase</strong></a>  <br><em>An alias describing the type from which a uniform grid must inherit.</em></td>
 </tr>
-<tr>
-<td style="text-align: right;">typedef typename detail::GetSplineBatchedBuilder1D&lt; ExecSpace, BSplines, InterpolationGrid, BCLBound, BCUBound, SolverType, IdxRangeType &gt;::type</td>
-<td style="text-align: left;"><a href="#typedef-get_spline_batched_builder1d_t"><strong>get_spline_batched_builder1d_t</strong></a>  <br><em>An alias for creating a 1D spline builder based on GetSplineBatchedBuilder1D class.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef typename detail::GetSplineBatchedBuilder2D&lt; ExecSpace, BSplinesX1, BSplinesX2, InterpolationGridX1, InterpolationGridX2, BCLBoundX1, BCUBoundX1, BCLBoundX2, BCUBoundX2, SolverType, IdxRangeType &gt;::type</td>
-<td style="text-align: left;"><a href="#typedef-get_spline_batched_builder2d_t"><strong>get_spline_batched_builder2d_t</strong></a>  <br><em>An alias for creating a 2D spline builder based on GetSplineBatchedBuilder1D class.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef typename detail::GetSplineBatchedEvaluator1D&lt; ExecSpace, BSplines, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule, IdxRangeType &gt;::type</td>
-<td style="text-align: left;"><a href="#typedef-get_spline_batched_evaluator1d_t"><strong>get_spline_batched_evaluator1d_t</strong></a>  <br><em>An alias for creating a 1D spline evaluator based on GetSplineBatchedEvaluator1D class.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef typename detail::GetSplineBatchedEvaluator2D&lt; ExecSpace, BSplinesX1, BSplinesX2, InterpolationGridX1, InterpolationGridX2, LowerExtrapolationRuleX1, UpperExtrapolationRuleX1, LowerExtrapolationRuleX2, UpperExtrapolationRuleX2, IdxRangeType &gt;::type</td>
-<td style="text-align: left;"><a href="#typedef-get_spline_batched_evaluator2d_t"><strong>get_spline_batched_evaluator2d_t</strong></a>  <br><em>An alias for creating a 2D spline evaluator based on GetSplineBatchedEvaluator2D class.</em></td>
-</tr>
 </tbody>
 </table>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
@@ -692,30 +676,6 @@
 <h3 id="typedef-uniformgridbase">typedef UniformGridBase</h3>
 <p><em>An alias describing the type from which a uniform grid must inherit.</em> </p>
 <pre><code class="language-C++">using UniformGridBase =  ddc::UniformPointSampling&lt;Dim&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-get_spline_batched_builder1d_t">typedef get_spline_batched_builder1d_t</h3>
-<p><em>An alias for creating a 1D spline builder based on GetSplineBatchedBuilder1D class.</em> </p>
-<pre><code class="language-C++">using get_spline_batched_builder1d_t =  typename detail::GetSplineBatchedBuilder1D&lt; ExecSpace, BSplines, InterpolationGrid, BCLBound, BCUBound, SolverType, IdxRangeType&gt;::type;
-</code></pre>
-<hr>
-
-<h3 id="typedef-get_spline_batched_builder2d_t">typedef get_spline_batched_builder2d_t</h3>
-<p><em>An alias for creating a 2D spline builder based on GetSplineBatchedBuilder1D class.</em> </p>
-<pre><code class="language-C++">using get_spline_batched_builder2d_t =  typename detail::GetSplineBatchedBuilder2D&lt; ExecSpace, BSplinesX1, BSplinesX2, InterpolationGridX1, InterpolationGridX2, BCLBoundX1, BCUBoundX1, BCLBoundX2, BCUBoundX2, SolverType, IdxRangeType&gt;::type;
-</code></pre>
-<hr>
-
-<h3 id="typedef-get_spline_batched_evaluator1d_t">typedef get_spline_batched_evaluator1d_t</h3>
-<p><em>An alias for creating a 1D spline evaluator based on GetSplineBatchedEvaluator1D class.</em> </p>
-<pre><code class="language-C++">using get_spline_batched_evaluator1d_t =  typename detail::GetSplineBatchedEvaluator1D&lt; ExecSpace, BSplines, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule, IdxRangeType&gt;::type;
-</code></pre>
-<hr>
-
-<h3 id="typedef-get_spline_batched_evaluator2d_t">typedef get_spline_batched_evaluator2d_t</h3>
-<p><em>An alias for creating a 2D spline evaluator based on GetSplineBatchedEvaluator2D class.</em> </p>
-<pre><code class="language-C++">using get_spline_batched_evaluator2d_t =  typename detail::GetSplineBatchedEvaluator2D&lt; ExecSpace, BSplinesX1, BSplinesX2, InterpolationGridX1, InterpolationGridX2, LowerExtrapolationRuleX1, UpperExtrapolationRuleX1, LowerExtrapolationRuleX2, UpperExtrapolationRuleX2, IdxRangeType&gt;::type;
 </code></pre>
 <hr>
 

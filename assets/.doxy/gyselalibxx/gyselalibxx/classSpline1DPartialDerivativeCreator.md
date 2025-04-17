@@ -2,7 +2,7 @@
 
 # Class Spline1DPartialDerivativeCreator
 
-**template &lt;class Spline1DBuilder, class Spline1DEvaluator&gt;**
+**template &lt;class Spline1DBuilder, class Spline1DEvaluator, class IdxRangeBatched&gt;**
 
 
 
@@ -76,7 +76,7 @@ Inherits the following classes: [IPartialDerivativeCreator](classIPartialDerivat
 | Type | Name |
 | ---: | :--- |
 |   | [**Spline1DPartialDerivativeCreator**](#function-spline1dpartialderivativecreator) (Spline1DBuilder const & builder, Spline1DEvaluator const & evaluator) <br>_Construct an instance of the_ [_**Spline1DPartialDerivativeCreator**_](classSpline1DPartialDerivativeCreator.md) _class._ |
-|  std::unique\_ptr&lt; [**IPartialDerivative**](classIPartialDerivative.md)&lt; typename Spline1DBuilder::batched\_interpolation\_domain\_type, typename Spline1DBuilder::continuous\_dimension\_type &gt; &gt; | [**create\_instance**](#function-create_instance) (DConstFieldType field) const<br> |
+|  std::unique\_ptr&lt; [**IPartialDerivative**](classIPartialDerivative.md)&lt; IdxRangeBatched, typename Spline1DBuilder::continuous\_dimension\_type &gt; &gt; | [**create\_instance**](#function-create_instance) (DConstFieldType field) const<br> |
 
 
 ## Public Functions inherited from IPartialDerivativeCreator
@@ -150,6 +150,7 @@ This class allows an instance of the [**Spline1DPartialDerivative**](classSpline
 
 * `Spline1DBuilder` A 1D spline builder. 
 * `Spline1DEvaluator` A 1D spline evaluator. 
+* `IdxRangeBatched` The type af the index range over which this operator will operate. 
 
 
 
@@ -192,7 +193,7 @@ inline Spline1DPartialDerivativeCreator::Spline1DPartialDerivativeCreator (
 ### function create\_instance 
 
 ```C++
-inline std::unique_ptr< IPartialDerivative < typename Spline1DBuilder::batched_interpolation_domain_type, typename Spline1DBuilder::continuous_dimension_type > > Spline1DPartialDerivativeCreator::create_instance (
+inline std::unique_ptr< IPartialDerivative < IdxRangeBatched, typename Spline1DBuilder::continuous_dimension_type > > Spline1DPartialDerivativeCreator::create_instance (
     DConstFieldType field
 ) const
 ```

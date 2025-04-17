@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classIInterpolator2D" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>IInterpolator2D</compoundname>
-    <derivedcompoundref refid="classIPreallocatableInterpolator2D" prot="public" virt="non-virtual">IPreallocatableInterpolator2D&lt; Spline2DBuilder::interpolation_domain_type, Spline2DBuilder::batched_interpolation_domain_type &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classIPreallocatableInterpolator2D" prot="public" virt="non-virtual">IPreallocatableInterpolator2D&lt; Spline2DBuilder::interpolation_domain_type, IdxRangeBatched &gt;</derivedcompoundref>
     <derivedcompoundref refid="classIPreallocatableInterpolator2D" prot="public" virt="non-virtual">IPreallocatableInterpolator2D&lt; IdxRange2D, IdxRangeBatched &gt;</derivedcompoundref>
     <includes refid="i__interpolator__2d_8hpp" local="no">i_interpolator_2d.hpp</includes>
     <templateparamlist>
@@ -112,6 +112,7 @@
         <name>operator()</name>
         <qualifiedname>IInterpolator2D::operator()</qualifiedname>
         <reimplementedby refid="classIPreallocatableInterpolator2D_1af1e25f21907360d777e5e385ccbe599e">operator()</reimplementedby>
+        <reimplementedby refid="classIPreallocatableInterpolator2D_1af1e25f21907360d777e5e385ccbe599e">operator()</reimplementedby>
         <param>
           <type>DField&lt; IdxRangeBatched &gt;</type>
           <declname>inout_data</declname>
@@ -168,13 +169,13 @@
         </childnode>
       </node>
       <node id="2">
-        <label>IPreallocatableInterpolator2D&lt; Spline2DBuilder::interpolation_domain_type, Spline2DBuilder::batched_interpolation_domain_type &gt;</label>
+        <label>IPreallocatableInterpolator2D&lt; Spline2DBuilder::interpolation_domain_type, IdxRangeBatched &gt;</label>
         <link refid="classIPreallocatableInterpolator2D"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
-        <label>PreallocatableSplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator &gt;</label>
+        <label>PreallocatableSplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator, IdxRangeBatched &gt;</label>
         <link refid="classPreallocatableSplineInterpolator2D"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>

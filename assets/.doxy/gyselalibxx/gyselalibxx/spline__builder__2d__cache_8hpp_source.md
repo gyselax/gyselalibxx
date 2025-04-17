@@ -18,15 +18,15 @@
 #include "ddc_aliases.hpp"
 
 
-template <class SplineBuilder2D>
+template <class SplineBuilder2D, class IdxRangeBatched>
 class SplineBuilder2DCache
 {
 private:
     using Dim1 = typename SplineBuilder2D::continuous_dimension_type1;
     using Dim2 = typename SplineBuilder2D::continuous_dimension_type2;
 
-    using IdxRangeBSField = typename SplineBuilder2D::batched_spline_domain_type;
-    using IdxRangeField = typename SplineBuilder2D::batched_interpolation_domain_type;
+    using IdxRangeBSField = typename SplineBuilder2D::batched_spline_domain_type<IdxRangeBatched>;
+    using IdxRangeField = IdxRangeBatched;
 
     using DFieldSplineCoeffMem = DFieldMem<IdxRangeBSField>;
     using DConstFieldSplineCoeffs = DConstField<IdxRangeBSField>;
@@ -37,9 +37,11 @@ private:
     bool m_compute_coeffs_dim2;
 
 public:
-    explicit SplineBuilder2DCache(SplineBuilder2D const& spline_builder)
+    explicit SplineBuilder2DCache(
+            SplineBuilder2D const& spline_builder,
+            IdxRangeBatched idx_range_batched)
         : m_spline_builder(spline_builder)
-        , m_spline_coeffs(spline_builder.batched_spline_domain())
+        , m_spline_coeffs(spline_builder.batched_spline_domain(idx_range_batched))
         , m_compute_coeffs_dim1(true)
         , m_compute_coeffs_dim2(true)
     {

@@ -578,7 +578,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-splineinterpolator"><strong>SplineInterpolator</strong></a> (BuilderType const &amp; builder, EvaluatorType const &amp; evaluator) <br><em>Create a spline interpolator object.</em></td>
+<td style="text-align: left;"><a href="#function-splineinterpolator"><strong>SplineInterpolator</strong></a> (BuilderType const &amp; builder, EvaluatorType const &amp; evaluator, IdxRange&lt; Grid1D... &gt; idx_range_batched) <br><em>Create a spline interpolator object.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual batched_derivs_idx_range_type</td>
@@ -634,6 +634,9 @@
 <li><code>BSplines</code> The BSplines along the dimension of interest. </li>
 <li><code>BcMin</code> The boundary condition at the lower boundary. </li>
 <li><code>BcMax</code> The boundary condition at the upper boundary. </li>
+<li><code>LeftExtrapolationRule</code> The extrapolation rule if evaluated out of bounds on the left side of the domain. </li>
+<li><code>RightExtrapolationRule</code> The extrapolation rule if evaluated out of bounds on the left side of the domain. </li>
+<li><code>Solver</code> The kind of solver used to solve the spline matrix equation. </li>
 <li><code>Grid1D...</code> All the dimensions of the interpolation problem (batched + interpolated). </li>
 </ul>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
@@ -641,13 +644,15 @@
 <p><em>Create a spline interpolator object.</em> </p>
 <pre><code class="language-C++">inline SplineInterpolator::SplineInterpolator (
     BuilderType const &amp; builder,
-    EvaluatorType const &amp; evaluator
+    EvaluatorType const &amp; evaluator,
+    IdxRange&lt; Grid1D... &gt; idx_range_batched
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>builder</code> An operator which builds spline coefficients from the values of a function at known interpolation points. </li>
 <li><code>evaluator</code> An operator which evaluates the value of a spline at requested coordinates. </li>
+<li><code>idx_range_batched</code> The index range on which this operator operates. </li>
 </ul>
 <hr>
 

@@ -613,16 +613,14 @@ using SplineVparBuilder = ddc::SplineBuilder&lt;
         GridVpar,
         SplineVparBoundary,
         SplineVparBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridVpar&gt;;
+        ddc::SplineSolver::LAPACK&gt;;
 using SplineVparEvaluator = ddc::SplineEvaluator&lt;
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesVpar,
         GridVpar,
         ddc::ConstantExtrapolationRule&lt;Vpar&gt;,
-        ddc::ConstantExtrapolationRule&lt;Vpar&gt;,
-        GridVpar&gt;;
+        ddc::ConstantExtrapolationRule&lt;Vpar&gt;&gt;;
 
 using SplineMuBuilder = ddc::SplineBuilder&lt;
         Kokkos::DefaultExecutionSpace,
@@ -631,16 +629,14 @@ using SplineMuBuilder = ddc::SplineBuilder&lt;
         GridMu,
         SplineMuBoundary,
         SplineMuBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridMu&gt;;
+        ddc::SplineSolver::LAPACK&gt;;
 using SplineMuEvaluator = ddc::SplineEvaluator&lt;
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesMu,
         GridMu,
         ddc::ConstantExtrapolationRule&lt;Mu&gt;,
-        ddc::ConstantExtrapolationRule&lt;Mu&gt;,
-        GridMu&gt;;
+        ddc::ConstantExtrapolationRule&lt;Mu&gt;&gt;;
 
 // Idx = index of the point in the point sampling
 using IdxVpar = Idx&lt;GridVpar&gt;;

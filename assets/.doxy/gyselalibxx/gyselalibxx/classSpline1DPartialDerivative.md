@@ -2,7 +2,7 @@
 
 # Class Spline1DPartialDerivative
 
-**template &lt;class Spline1DBuilder, class Spline1DEvaluator&gt;**
+**template &lt;class Spline1DBuilder, class Spline1DEvaluator, class IdxRangeBatched&gt;**
 
 
 
@@ -161,6 +161,7 @@ See [IPartialDerivative](classIPartialDerivative.md)
 
 * `Spline1DBuilder` A 1D spline builder. 
 * `Spline1DEvaluator` A 1D spline evaluator. 
+* `IdxRangeBatched` The type af the index range over which this operator will operate. 
 
 
 

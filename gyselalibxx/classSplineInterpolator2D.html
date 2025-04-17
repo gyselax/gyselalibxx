@@ -540,9 +540,9 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-splineinterpolator2d">Class SplineInterpolator2D</h1>
-<p><strong>template &lt;class Spline2DBuilder, class Spline2DEvaluator&gt;</strong></p>
+<p><strong>template &lt;class Spline2DBuilder, class Spline2DEvaluator, class IdxRangeBatched&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classSplineInterpolator2D.html"><strong>SplineInterpolator2D</strong></a></p>
-<p><em>A class for interpolating a function using splines in polar coordinates.</em> <a href="#detailed-description">More...</a></p>
+<p><em>A class for interpolating a function using a 2D tensor product of splines.</em> <a href="#detailed-description">More...</a></p>
 <ul>
 <li><code>#include &lt;spline_interpolator_2d.hpp&gt;</code></li>
 </ul>
@@ -605,7 +605,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-splineinterpolator2d"><strong>SplineInterpolator2D</strong></a> (Spline2DBuilder const &amp; builder, Spline2DEvaluator const &amp; evaluator) <br><em>Create a spline interpolator object.</em></td>
+<td style="text-align: left;"><a href="#function-splineinterpolator2d"><strong>SplineInterpolator2D</strong></a> (Spline2DBuilder const &amp; builder, Spline2DEvaluator const &amp; evaluator, IdxRangeBatched idx_range_batched) <br><em>Create a spline interpolator object.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classSplineInterpolator2D.html#typedef-dfieldtype"><strong>DFieldType</strong></a></td>
@@ -634,9 +634,12 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
+<p>The class is parametrised by multiple template parameters. Please note that CTAD will deduce all these template parameters from the Builder and Evaluator passed as constructor arguments.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
-<li><code>RadialExtrapolationRule</code> The extrapolation rule applied at the outer radial bound. </li>
+<li><code>Spline2DBuilder</code> The type of the 2D spline builder. </li>
+<li><code>Spline2DEvaluator</code> The type of the 2D spline evaluator. </li>
+<li><code>IdxRangeBatched</code> The type af the index range over which this operator will operate. This is necessary to define the internal spline representation. </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-cconstfieldtype">typedef CConstFieldType</h3>
@@ -661,13 +664,15 @@
 <p><em>Create a spline interpolator object.</em> </p>
 <pre><code class="language-C++">inline SplineInterpolator2D::SplineInterpolator2D (
     Spline2DBuilder const &amp; builder,
-    Spline2DEvaluator const &amp; evaluator
+    Spline2DEvaluator const &amp; evaluator,
+    IdxRangeBatched idx_range_batched
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>builder</code> An operator which builds spline coefficients from the values of a function at known interpolation points. </li>
 <li><code>evaluator</code> An operator which evaluates the value of a spline at requested coordinates. </li>
+<li><code>idx_range_batched</code> The index range on which this operator operates. </li>
 </ul>
 <hr>
 

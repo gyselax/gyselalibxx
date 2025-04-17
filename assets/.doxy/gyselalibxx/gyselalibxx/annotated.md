@@ -59,8 +59,6 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md)     
     * **struct** [**GridPDEDimQ**](structFEM1DPoissonSolver_1_1GridPDEDimQ.md) _The grid of quadrature points along the PDEDim direction._ 
     * **struct** [**HiddenFEMBSplines**](structFEM1DPoissonSolver_1_1HiddenFEMBSplines.md) 
-* **struct** [**FEMSplineEvaluatorBuilder**](structFEM1DPoissonSolver_1_1FEMSplineEvaluatorBuilder.md) 
-* **struct** [**FEMSplineEvaluatorBuilder&lt; IdxRange&lt; DimX... &gt; &gt;**](structFEM1DPoissonSolver_1_1FEMSplineEvaluatorBuilder_3_01IdxRange_3_01DimX_8_8_8_01_4_01_4.md)     
 * **class** [**FFTPoissonSolver**](classFFTPoissonSolver.md) 
 * **class** [**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md) _A class to solve the following equation:_  _using a Fourier transform._    
     * **struct** [**GridFourier**](structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace2aeecfe91d464f5738599cc105fb6087.md) 
@@ -153,8 +151,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md) _A class to call all the builders of all the patches once._     
 * **struct** [**Build\_BuilderType**](structMultipatchSplineBuilder2D_1_1Build__BuilderType.md) 
 * **struct** [**Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;**](structMultipatchSplineBuilder2D_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_388990a8744187d12e0f612652c86727.md)     
-* **struct** [**Build\_BuilderType**](structMultipatchSplineBuilder_1_1Build__BuilderType.md) 
-* **struct** [**Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;**](structMultipatchSplineBuilder_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_0143963206948829b7e1024cedaaccd580.md)     
+* **struct** [**Build\_BuilderType**](structMultipatchSplineBuilder_1_1Build__BuilderType.md)     
 * **class** [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md) _A class to evaluate all the splines of all the patches at once._     
     * **struct** [**eval\_deriv\_type**](structMultipatchSplineEvaluator2D_1_1eval__deriv__type.md) _Tag to indicate that derivative of the spline should be evaluated._ 
     * **struct** [**eval\_type**](structMultipatchSplineEvaluator2D_1_1eval__type.md) _Tag to indicate that the value of the spline should be evaluated._ 
@@ -212,7 +209,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **struct** [**GridRRefined**](structRefinedDiscreteToCartesianBuilder_1_1GridRRefined.md) _The type of the grid of radial points on which the new mapping will be defined._ 
     * **struct** [**GridThetaRefined**](structRefinedDiscreteToCartesianBuilder_1_1GridThetaRefined.md) _The type of the grid of poloidal points on which the new mapping will be defined._ 
 * **struct** [**Build\_BuilderType**](structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType.md) 
-* **struct** [**Build\_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver, GridROriginal, GridThetaOriginal &gt; &gt;**](structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilder2D_3_01Exe5e607dcd09b0e5dcea3e1a165ab7545e.md)     
+* **struct** [**Build\_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver &gt; &gt;**](structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilder2D_3_01Exedad782e8118e0de272f3e04e2a3c2f85.md)     
 * **class** [**RestartInitialisation**](classRestartInitialisation.md) _A class that initialises the distribution function from a previous simulation._     
 * **class** [**SingleModePerturbInitialisation**](classSingleModePerturbInitialisation.md) _A class that initialises the distribution function as a perturbed Maxwellian._     
 * **struct** [**Species**](structSpecies.md) 
@@ -232,7 +229,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **namespace** [**SplineInterpPointsX**](namespaceSplineInterpPointsX.md) 
 * **namespace** [**SplineInterpPointsY**](namespaceSplineInterpPointsY.md) 
 * **class** [**SplineInterpolator**](classSplineInterpolator.md) _A class for interpolating a function using splines._     
-* **class** [**SplineInterpolator2D**](classSplineInterpolator2D.md) _A class for interpolating a function using splines in polar coordinates._     
+* **class** [**SplineInterpolator2D**](classSplineInterpolator2D.md) _A class for interpolating a function using a 2D tensor product of splines._     
 * **class** [**SplinePolarFootFinder**](classSplinePolarFootFinder.md) _A class to find the foot of the characteristics on the_  _plane._    
 * **class** [**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md) _A class that solves a Boltzmann equation using Strang's splitting._     
 * **class** [**SplitVlasovSolver**](classSplitVlasovSolver.md) _A class that solves a Vlasov equation using Strang's splitting._     

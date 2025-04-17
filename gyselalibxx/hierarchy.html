@@ -622,7 +622,10 @@
 <li><strong>class</strong> <a href="classDiscreteToCartesian.html"><strong>DiscreteToCartesian</strong></a> <em>A class for describing discrete 2D mappings from the logical domain to the physical domain.</em> </li>
 <li><strong>class</strong> <a href="classDiscreteToCartesianBuilder.html"><strong>DiscreteToCartesianBuilder</strong></a> <em>A class to create a</em> <a href="classDiscreteToCartesian.html"><em><strong>DiscreteToCartesian</strong></em></a> <em>instance from an analytical mapping. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data.</em></li>
 <li><strong>class</strong> <a href="classEdgeTransformation.html"><strong>EdgeTransformation</strong></a> <em>Transform a coordinate or an index from one edge to the one on the other edge.</em> </li>
-<li><strong>class</strong> <a href="classIPoissonSolver.html"><strong>IPoissonSolver</strong></a> </li>
+<li><strong>class</strong> <a href="classIPoissonSolver.html"><strong>IPoissonSolver</strong></a>     <ul>
+<li><strong>class</strong> <a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a> </li>
+</ul>
+</li>
 <li><strong>class</strong> <a href="classFFTPoissonSolver.html"><strong>FFTPoissonSolver</strong></a> </li>
 <li><strong>class</strong> <a href="classFluidMoments.html"><strong>FluidMoments</strong></a> <em>A class that computes fluid moments of the distribution function.</em> </li>
 <li><strong>class</strong> <a href="classGaussLegendre.html"><strong>GaussLegendre</strong></a> <em>An operator for constructing a Gauss-Legendre quadrature.</em> </li>
@@ -743,8 +746,6 @@
 <li><strong>struct</strong> <a href="structConstPolarSpline.html"><strong>ConstPolarSpline</strong></a> <em>A structure containing the two ConstFields necessary to define a constant reference to a spline on a set of polar basis splines.</em> </li>
 <li><strong>struct</strong> <a href="structConstantExtrapolationRuleOnion.html"><strong>ConstantExtrapolationRuleOnion</strong></a> <em>Define constant extrapolation rule for onion shape geometries. Struct useful for the MultipatchSplineEvaluator types.</em>  __</li>
 <li><strong>struct</strong> <a href="structEdge.html"><strong>Edge</strong></a> <em>Define an edge of a given patch.</em> </li>
-<li><strong>struct</strong> <a href="structFEM1DPoissonSolver_1_1FEMSplineEvaluatorBuilder.html"><strong>FEM1DPoissonSolver::FEMSplineEvaluatorBuilder</strong></a> </li>
-<li><strong>struct</strong> <a href="structFEM1DPoissonSolver_1_1FEMSplineEvaluatorBuilder_3_01IdxRange_3_01DimX_8_8_8_01_4_01_4.html"><strong>FEM1DPoissonSolver::FEMSplineEvaluatorBuilder&lt; IdxRange&lt; DimX... &gt; &gt;</strong></a> </li>
 <li><strong>struct</strong> <a href="structFluidMoments_1_1MomentDensity.html"><strong>FluidMoments::MomentDensity</strong></a> </li>
 <li><strong>struct</strong> <a href="structFluidMoments_1_1MomentTemperature.html"><strong>FluidMoments::MomentTemperature</strong></a> </li>
 <li><strong>struct</strong> <a href="structFluidMoments_1_1MomentVelocity.html"><strong>FluidMoments::MomentVelocity</strong></a> </li>
@@ -757,7 +758,6 @@
 <li><strong>struct</strong> <a href="structMultipatchSplineBuilder2D_1_1Build__BuilderType.html"><strong>MultipatchSplineBuilder2D::Build_BuilderType</strong></a> </li>
 <li><strong>struct</strong> <a href="structMultipatchSplineBuilder2D_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_388990a8744187d12e0f612652c86727.html"><strong>MultipatchSplineBuilder2D::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;</strong></a> </li>
 <li><strong>struct</strong> <a href="structMultipatchSplineBuilder_1_1Build__BuilderType.html"><strong>MultipatchSplineBuilder::Build_BuilderType</strong></a> </li>
-<li><strong>struct</strong> <a href="structMultipatchSplineBuilder_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_0143963206948829b7e1024cedaaccd580.html"><strong>MultipatchSplineBuilder::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;</strong></a> </li>
 <li><strong>struct</strong> <a href="structMultipatchSplineEvaluator2D_1_1eval__deriv__type.html"><strong>MultipatchSplineEvaluator2D::eval_deriv_type</strong></a> <em>Tag to indicate that derivative of the spline should be evaluated.</em> </li>
 <li><strong>struct</strong> <a href="structMultipatchSplineEvaluator2D_1_1eval__type.html"><strong>MultipatchSplineEvaluator2D::eval_type</strong></a> <em>Tag to indicate that the value of the spline should be evaluated.</em> </li>
 <li><strong>struct</strong> <a href="structNullExtrapolationRule.html"><strong>NullExtrapolationRule</strong></a> <em>Define null extrapolation rule common to all geometries.</em> </li>
@@ -784,7 +784,7 @@
 <li><strong>struct</strong> <a href="structR.html"><strong>R</strong></a> <em>Define non periodic real contravariant</em> <a href="structR.html"><em><strong>R</strong></em></a> <em>dimension.</em></li>
 <li><strong>struct</strong> <a href="structR__cov.html"><strong>R_cov</strong></a> <em>Define non periodic real covariant</em> <a href="structR.html"><em><strong>R</strong></em></a> <em>dimension.</em></li>
 <li><strong>struct</strong> <a href="structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType.html"><strong>RefinedDiscreteToCartesianBuilder::Build_BuilderType</strong></a> </li>
-<li><strong>struct</strong> <a href="structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilder2D_3_01Exe5e607dcd09b0e5dcea3e1a165ab7545e.html"><strong>RefinedDiscreteToCartesianBuilder::Build_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver, GridROriginal, GridThetaOriginal &gt; &gt;</strong></a> </li>
+<li><strong>struct</strong> <a href="structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilder2D_3_01Exedad782e8118e0de272f3e04e2a3c2f85.html"><strong>RefinedDiscreteToCartesianBuilder::Build_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver &gt; &gt;</strong></a> </li>
 <li><strong>struct</strong> <a href="structT.html"><strong>T</strong></a> <em>A class which describes the real space in the temporal direction.</em> </li>
 <li><strong>struct</strong> <a href="structTheta.html"><strong>Theta</strong></a> <em>Define periodic real contravariant</em> <a href="structTheta.html"><em><strong>Theta</strong></em></a> <em>dimension.</em></li>
 <li><strong>struct</strong> <a href="structTheta__cov.html"><strong>Theta_cov</strong></a> <em>Define periodic real covariant</em> <a href="structTheta.html"><em><strong>Theta</strong></em></a> <em>dimension.</em></li>

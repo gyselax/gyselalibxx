@@ -21,25 +21,28 @@
 #include "matrix.hpp"
 
 
-template <class SplineBuilder, class SplineEvaluator>
+template <
+        class SplineBuilder,
+        class SplineEvaluator,
+        class IdxRangeBatched = typename SplineBuilder::interpolation_domain_type>
 class FEM1DPoissonSolver
     : public IPoissonSolver<
               typename SplineEvaluator::evaluation_domain_type,
-              typename SplineEvaluator::batched_evaluation_domain_type,
+              IdxRangeBatched,
               typename SplineEvaluator::memory_space,
               Kokkos::layout_right>
 {
     static_assert(std::is_same_v<
-                  typename SplineBuilder::batched_interpolation_domain_type,
-                  typename SplineEvaluator::batched_evaluation_domain_type>);
-    static_assert(std::is_same_v<
                   typename SplineBuilder::interpolation_discrete_dimension_type,
                   typename SplineEvaluator::evaluation_discrete_dimension_type>);
+    static_assert(ddc::in_tags_v<
+                  typename SplineBuilder::interpolation_discrete_dimension_type,
+                  ddc::to_type_seq_t<IdxRangeBatched>>);
 
 private:
     using base_type = IPoissonSolver<
             typename SplineEvaluator::evaluation_domain_type,
-            typename SplineEvaluator::batched_evaluation_domain_type,
+            IdxRangeBatched,
             typename SplineEvaluator::memory_space,
             Kokkos::layout_right>;
 
@@ -102,30 +105,20 @@ private:
             ddc::PeriodicExtrapolationRule<PDEDim>,
             ddc::NullExtrapolationRule>;
 
-    template <class IdxRange>
-    struct FEMSplineEvaluatorBuilder;
-
-    template <class... DimX>
-    struct FEMSplineEvaluatorBuilder<IdxRange<DimX...>>
-    {
-        using type = ddc::SplineEvaluator<
-                Kokkos::DefaultExecutionSpace,
-                Kokkos::DefaultExecutionSpace::memory_space,
-                FEMBSplines,
-                GridPDEDim,
-                FEMEvalExtrapolationRule,
-                FEMEvalExtrapolationRule,
-                DimX...>;
-    };
-
-    using FEMSplineEvaluator = typename FEMSplineEvaluatorBuilder<
-            typename SplineEvaluator::batched_evaluation_domain_type>::type;
+    using FEMSplineEvaluator = ddc::SplineEvaluator<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            FEMBSplines,
+            GridPDEDim,
+            FEMEvalExtrapolationRule,
+            FEMEvalExtrapolationRule>;
 
     using IdxFEMBSplines = Idx<FEMBSplines>;
 
     using IdxRangeFEMBSplines = IdxRange<FEMBSplines>;
 
-    using IdxRangeBatchedFEMBSplines = typename FEMSplineEvaluator::batched_spline_domain_type;
+    using IdxRangeBatchedFEMBSplines =
+            typename FEMSplineEvaluator::batched_spline_domain_type<IdxRangeBatched>;
 
     using FEMBSplinesCoeffMem = DFieldMem<IdxRangeFEMBSplines, memory_space>;
 
@@ -137,20 +130,14 @@ private:
     using IdxRangeBSplines = IdxRange<InputBSplines>;
     using IdxBSplines = Idx<InputBSplines>;
 
-    using IdxRangeBatchedBSplines = typename SplineEvaluator::batched_spline_domain_type;
+    using IdxRangeBatchedBSplines =
+            typename SplineEvaluator::batched_spline_domain_type<IdxRangeBatched>;
 
-    using full_index =
-            typename SplineEvaluator::batched_evaluation_domain_type::discrete_element_type;
+    using full_index = typename IdxRangeBatched::discrete_element_type;
 
-    using CoordFieldMem = FieldMem<
-            CoordPDEDim,
-            typename FEMSplineEvaluator::batched_evaluation_domain_type,
-            memory_space>;
+    using CoordFieldMem = FieldMem<CoordPDEDim, IdxRangeBatched, memory_space>;
 
-    using CoordField
-            = Field<CoordPDEDim,
-                    typename FEMSplineEvaluator::batched_evaluation_domain_type,
-                    memory_space>;
+    using CoordField = Field<CoordPDEDim, IdxRangeBatched, memory_space>;
 
 private:
     using RHSBSplines = InputBSplines;

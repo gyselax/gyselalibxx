@@ -135,14 +135,10 @@
 | typedef Idx&lt; [**GridX**](structGridX.md), [**GridVx**](structGridVx.md) &gt; | [**IdxXVx**](#typedef-idxxvx)  <br> |
 | typedef ddc::GrevilleInterpolationPoints&lt; [**BSplinesVx**](structBSplinesVx.md), SplineVxBoundary, SplineVxBoundary &gt; | [**SplineInterpPointsVx**](#typedef-splineinterppointsvx)  <br> |
 | typedef ddc::GrevilleInterpolationPoints&lt; [**BSplinesX**](structBSplinesX.md), SplineXBoundary, SplineXBoundary &gt; | [**SplineInterpPointsX**](#typedef-splineinterppointsx)  <br> |
-| typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesVx**](structBSplinesVx.md), [**GridVx**](structGridVx.md), SplineVxBoundary, SplineVxBoundary, ddc::SplineSolver::LAPACK, [**GridX**](structGridX.md), [**GridVx**](structGridVx.md) &gt; | [**SplineVxBuilder**](#typedef-splinevxbuilder)  <br> |
-| typedef ddc::SplineBuilder&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, [**BSplinesVx**](structBSplinesVx.md), [**GridVx**](structGridVx.md), SplineVxBoundary, SplineVxBoundary, ddc::SplineSolver::LAPACK, [**GridVx**](structGridVx.md) &gt; | [**SplineVxBuilder\_1d**](#typedef-splinevxbuilder_1d)  <br> |
-| typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesVx**](structBSplinesVx.md), [**GridVx**](structGridVx.md), ddc::ConstantExtrapolationRule&lt; [**Vx**](structVx.md) &gt;, ddc::ConstantExtrapolationRule&lt; [**Vx**](structVx.md) &gt;, [**GridX**](structGridX.md), [**GridVx**](structGridVx.md) &gt; | [**SplineVxEvaluator**](#typedef-splinevxevaluator)  <br> |
-| typedef ddc::SplineEvaluator&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, [**BSplinesVx**](structBSplinesVx.md), [**GridVx**](structGridVx.md), ddc::ConstantExtrapolationRule&lt; [**Vx**](structVx.md) &gt;, ddc::ConstantExtrapolationRule&lt; [**Vx**](structVx.md) &gt;, [**GridVx**](structGridVx.md) &gt; | [**SplineVxEvaluator\_1d**](#typedef-splinevxevaluator_1d)  <br> |
-| typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesX**](structBSplinesX.md), [**GridX**](structGridX.md), SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK, [**GridX**](structGridX.md), [**GridVx**](structGridVx.md) &gt; | [**SplineXBuilder**](#typedef-splinexbuilder)  <br> |
-| typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesX**](structBSplinesX.md), [**GridX**](structGridX.md), SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK, [**GridX**](structGridX.md) &gt; | [**SplineXBuilder\_1d**](#typedef-splinexbuilder_1d)  <br> |
-| typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesX**](structBSplinesX.md), [**GridX**](structGridX.md), ddc::ConstantExtrapolationRule&lt; [**X**](structX.md) &gt;, ddc::ConstantExtrapolationRule&lt; [**X**](structX.md) &gt;, [**GridX**](structGridX.md), [**GridVx**](structGridVx.md) &gt; | [**SplineXEvaluator**](#typedef-splinexevaluator)  <br> |
-| typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesX**](structBSplinesX.md), [**GridX**](structGridX.md), ddc::ConstantExtrapolationRule&lt; [**X**](structX.md) &gt;, ddc::ConstantExtrapolationRule&lt; [**X**](structX.md) &gt;, [**GridX**](structGridX.md) &gt; | [**SplineXEvaluator\_1d**](#typedef-splinexevaluator_1d)  <br> |
+| typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesVx**](structBSplinesVx.md), [**GridVx**](structGridVx.md), SplineVxBoundary, SplineVxBoundary, ddc::SplineSolver::LAPACK &gt; | [**SplineVxBuilder**](#typedef-splinevxbuilder)  <br> |
+| typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesVx**](structBSplinesVx.md), [**GridVx**](structGridVx.md), ddc::ConstantExtrapolationRule&lt; [**Vx**](structVx.md) &gt;, ddc::ConstantExtrapolationRule&lt; [**Vx**](structVx.md) &gt; &gt; | [**SplineVxEvaluator**](#typedef-splinevxevaluator)  <br> |
+| typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesX**](structBSplinesX.md), [**GridX**](structGridX.md), SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK &gt; | [**SplineXBuilder**](#typedef-splinexbuilder)  <br> |
+| typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesX**](structBSplinesX.md), [**GridX**](structGridX.md), ddc::ConstantExtrapolationRule&lt; [**X**](structX.md) &gt;, ddc::ConstantExtrapolationRule&lt; [**X**](structX.md) &gt; &gt; | [**SplineXEvaluator**](#typedef-splinexevaluator)  <br> |
 
 
 
@@ -1288,20 +1284,7 @@ using SplineInterpPointsX =  ddc::GrevilleInterpolationPoints<BSplinesX, SplineX
 ### typedef SplineVxBuilder 
 
 ```C++
-using SplineVxBuilder =  ddc::SplineBuilder< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesVx, GridVx, SplineVxBoundary, SplineVxBoundary, ddc::SplineSolver::LAPACK, GridX, GridVx>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef SplineVxBuilder\_1d 
-
-```C++
-using SplineVxBuilder_1d =  ddc::SplineBuilder< Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesVx, GridVx, SplineVxBoundary, SplineVxBoundary, ddc::SplineSolver::LAPACK, GridVx>;
+using SplineVxBuilder =  ddc::SplineBuilder< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesVx, GridVx, SplineVxBoundary, SplineVxBoundary, ddc::SplineSolver::LAPACK>;
 ```
 
 
@@ -1314,20 +1297,7 @@ using SplineVxBuilder_1d =  ddc::SplineBuilder< Kokkos::DefaultHostExecutionSpac
 ### typedef SplineVxEvaluator 
 
 ```C++
-using SplineVxEvaluator =  ddc::SplineEvaluator< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesVx, GridVx, ddc::ConstantExtrapolationRule<Vx>, ddc::ConstantExtrapolationRule<Vx>, GridX, GridVx>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef SplineVxEvaluator\_1d 
-
-```C++
-using SplineVxEvaluator_1d =  ddc::SplineEvaluator< Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesVx, GridVx, ddc::ConstantExtrapolationRule<Vx>, ddc::ConstantExtrapolationRule<Vx>, GridVx>;
+using SplineVxEvaluator =  ddc::SplineEvaluator< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesVx, GridVx, ddc::ConstantExtrapolationRule<Vx>, ddc::ConstantExtrapolationRule<Vx> >;
 ```
 
 
@@ -1340,20 +1310,7 @@ using SplineVxEvaluator_1d =  ddc::SplineEvaluator< Kokkos::DefaultHostExecution
 ### typedef SplineXBuilder 
 
 ```C++
-using SplineXBuilder =  ddc::SplineBuilder< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK, GridX, GridVx>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef SplineXBuilder\_1d 
-
-```C++
-using SplineXBuilder_1d =  ddc::SplineBuilder< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK, GridX>;
+using SplineXBuilder =  ddc::SplineBuilder< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK>;
 ```
 
 
@@ -1366,20 +1323,7 @@ using SplineXBuilder_1d =  ddc::SplineBuilder< Kokkos::DefaultExecutionSpace, Ko
 ### typedef SplineXEvaluator 
 
 ```C++
-using SplineXEvaluator =  ddc::SplineEvaluator< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, ddc::ConstantExtrapolationRule<X>, ddc::ConstantExtrapolationRule<X>, GridX, GridVx>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef SplineXEvaluator\_1d 
-
-```C++
-using SplineXEvaluator_1d =  ddc::SplineEvaluator< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, ddc::ConstantExtrapolationRule<X>, ddc::ConstantExtrapolationRule<X>, GridX>;
+using SplineXEvaluator =  ddc::SplineEvaluator< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, ddc::ConstantExtrapolationRule<X>, ddc::ConstantExtrapolationRule<X> >;
 ```
 
 

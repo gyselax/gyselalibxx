@@ -672,22 +672,14 @@ using SplineXBuilder = ddc::SplineBuilder&lt;
         GridX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridVx,
-        GridVy,
-        GridX,
-        GridY&gt;;
+        ddc::SplineSolver::LAPACK&gt;;
 using SplineXEvaluator = ddc::SplineEvaluator&lt;
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
         ddc::PeriodicExtrapolationRule&lt;X&gt;,
-        ddc::PeriodicExtrapolationRule&lt;X&gt;,
-        GridVx,
-        GridVy,
-        GridX,
-        GridY&gt;;
+        ddc::PeriodicExtrapolationRule&lt;X&gt;&gt;;
 using SplineYBuilder = ddc::SplineBuilder&lt;
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -695,22 +687,14 @@ using SplineYBuilder = ddc::SplineBuilder&lt;
         GridY,
         SplineYBoundary,
         SplineYBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridVx,
-        GridVy,
-        GridX,
-        GridY&gt;;
+        ddc::SplineSolver::LAPACK&gt;;
 using SplineYEvaluator = ddc::SplineEvaluator&lt;
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesY,
         GridY,
         ddc::PeriodicExtrapolationRule&lt;Y&gt;,
-        ddc::PeriodicExtrapolationRule&lt;Y&gt;,
-        GridVx,
-        GridVy,
-        GridX,
-        GridY&gt;;
+        ddc::PeriodicExtrapolationRule&lt;Y&gt;&gt;;
 using SplineVxBuilder = ddc::SplineBuilder&lt;
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -718,22 +702,14 @@ using SplineVxBuilder = ddc::SplineBuilder&lt;
         GridVx,
         SplineVxBoundary,
         SplineVxBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridX,
-        GridY,
-        GridVx,
-        GridVy&gt;;
+        ddc::SplineSolver::LAPACK&gt;;
 using SplineVxEvaluator = ddc::SplineEvaluator&lt;
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesVx,
         GridVx,
         ddc::ConstantExtrapolationRule&lt;Vx&gt;,
-        ddc::ConstantExtrapolationRule&lt;Vx&gt;,
-        GridX,
-        GridY,
-        GridVx,
-        GridVy&gt;;
+        ddc::ConstantExtrapolationRule&lt;Vx&gt;&gt;;
 using SplineVyBuilder = ddc::SplineBuilder&lt;
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -741,22 +717,14 @@ using SplineVyBuilder = ddc::SplineBuilder&lt;
         GridVy,
         SplineVyBoundary,
         SplineVyBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridX,
-        GridY,
-        GridVx,
-        GridVy&gt;;
+        ddc::SplineSolver::LAPACK&gt;;
 using SplineVyEvaluator = ddc::SplineEvaluator&lt;
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesVy,
         GridVy,
         ddc::ConstantExtrapolationRule&lt;Vy&gt;,
-        ddc::ConstantExtrapolationRule&lt;Vy&gt;,
-        GridX,
-        GridY,
-        GridVx,
-        GridVy&gt;;
+        ddc::ConstantExtrapolationRule&lt;Vy&gt;&gt;;
 
 using IdxRangeBSX = IdxRange&lt;BSplinesX&gt;;
 using IdxRangeBSY = IdxRange&lt;BSplinesY&gt;;

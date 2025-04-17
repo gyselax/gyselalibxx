@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classPreallocatableSplineInterpolator2D" kind="class" language="C++" prot="public">
     <compoundname>PreallocatableSplineInterpolator2D</compoundname>
-    <basecompoundref refid="classIPreallocatableInterpolator2D" prot="public" virt="non-virtual">IPreallocatableInterpolator2D&lt; Spline2DBuilder::interpolation_domain_type, Spline2DBuilder::batched_interpolation_domain_type &gt;</basecompoundref>
+    <basecompoundref refid="classIPreallocatableInterpolator2D" prot="public" virt="non-virtual">IPreallocatableInterpolator2D&lt; Spline2DBuilder::interpolation_domain_type, IdxRangeBatched &gt;</basecompoundref>
     <includes refid="spline__interpolator__2d_8hpp" local="no">spline_interpolator_2d.hpp</includes>
     <templateparamlist>
       <param>
@@ -11,11 +11,14 @@
       <param>
         <type>class Spline2DEvaluator</type>
       </param>
+      <param>
+        <type>class IdxRangeBatched</type>
+      </param>
     </templateparamlist>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classPreallocatableSplineInterpolator2D_1a84affa96d3c30ccc36d4d171dde75dc3" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classPreallocatableSplineInterpolator2D_1ad8226ecfd141ebf4a83b4a68d68a5666" prot="private" static="no" mutable="no">
         <type>Spline2DBuilder const  &amp;</type>
-        <definition>Spline2DBuilder const&amp; PreallocatableSplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator &gt;::m_builder</definition>
+        <definition>Spline2DBuilder const&amp; PreallocatableSplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator, IdxRangeBatched &gt;::m_builder</definition>
         <argsstring></argsstring>
         <name>m_builder</name>
         <qualifiedname>PreallocatableSplineInterpolator2D::m_builder</qualifiedname>
@@ -25,11 +28,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="91" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="91" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="110" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="110" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classPreallocatableSplineInterpolator2D_1a3e30a633404c4accb73b3d24630710cc" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classPreallocatableSplineInterpolator2D_1a376920a51cdb3ec0f916e840f8bfbd6f" prot="private" static="no" mutable="no">
         <type>Spline2DEvaluator const  &amp;</type>
-        <definition>Spline2DEvaluator const&amp; PreallocatableSplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator &gt;::m_evaluator</definition>
+        <definition>Spline2DEvaluator const&amp; PreallocatableSplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator, IdxRangeBatched &gt;::m_evaluator</definition>
         <argsstring></argsstring>
         <name>m_evaluator</name>
         <qualifiedname>PreallocatableSplineInterpolator2D::m_evaluator</qualifiedname>
@@ -39,14 +42,28 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="93" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="93" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="112" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classPreallocatableSplineInterpolator2D_1a33989dc5cec0f340defb38e03d6e6796" prot="private" static="no" mutable="no">
+        <type>IdxRangeBatched</type>
+        <definition>IdxRangeBatched PreallocatableSplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator, IdxRangeBatched &gt;::m_idx_range_batched</definition>
+        <argsstring></argsstring>
+        <name>m_idx_range_batched</name>
+        <qualifiedname>PreallocatableSplineInterpolator2D::m_idx_range_batched</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="114" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="114" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classPreallocatableSplineInterpolator2D_1a0e2f96ac087da46c97d76d53d850f339" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classPreallocatableSplineInterpolator2D_1a3e650415d1f6b4cd4f8f3a8ca7cc7f72" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
-        <definition>PreallocatableSplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator &gt;::PreallocatableSplineInterpolator2D</definition>
-        <argsstring>(Spline2DBuilder const &amp;builder, Spline2DEvaluator const &amp;evaluator)</argsstring>
+        <definition>PreallocatableSplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator, IdxRangeBatched &gt;::PreallocatableSplineInterpolator2D</definition>
+        <argsstring>(Spline2DBuilder const &amp;builder, Spline2DEvaluator const &amp;evaluator, IdxRangeBatched idx_range_batched)</argsstring>
         <name>PreallocatableSplineInterpolator2D</name>
         <qualifiedname>PreallocatableSplineInterpolator2D::PreallocatableSplineInterpolator2D</qualifiedname>
         <param>
@@ -56,6 +73,10 @@
         <param>
           <type>Spline2DEvaluator const &amp;</type>
           <declname>evaluator</declname>
+        </param>
+        <param>
+          <type>IdxRangeBatched</type>
+          <declname>idx_range_batched</declname>
         </param>
         <briefdescription>
 <para>Create an object capable of creating <ref refid="classSplineInterpolator2D" kindref="compound">SplineInterpolator2D</ref> objects. </para>
@@ -77,16 +98,24 @@
 <para>An operator which evaluates the value of a spline at requested coordinates. </para>
 </parameterdescription>
 </parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range_batched</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range on which this operator operates. </para>
+</parameterdescription>
+</parameteritem>
 </parameterlist>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="101" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="101" bodyend="107"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="124" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="124" bodyend="132"/>
       </memberdef>
-      <memberdef kind="function" id="classPreallocatableSplineInterpolator2D_1aac38c2b54d1d4289063acd103d74a5fb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
-        <type>std::unique_ptr&lt; <ref refid="classIInterpolator2D" kindref="compound">IInterpolator2D</ref>&lt; typename Spline2DBuilder::interpolation_domain_type, typename Spline2DBuilder::batched_interpolation_domain_type &gt; &gt;</type>
-        <definition>std::unique_ptr&lt; IInterpolator2D&lt; typename Spline2DBuilder::interpolation_domain_type, typename Spline2DBuilder::batched_interpolation_domain_type &gt; &gt; PreallocatableSplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator &gt;::preallocate</definition>
+      <memberdef kind="function" id="classPreallocatableSplineInterpolator2D_1ad5afce78c69025b666383333c0f532ab" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>std::unique_ptr&lt; <ref refid="classIInterpolator2D" kindref="compound">IInterpolator2D</ref>&lt; typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched &gt; &gt;</type>
+        <definition>std::unique_ptr&lt; IInterpolator2D&lt; typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched &gt; &gt; PreallocatableSplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator, IdxRangeBatched &gt;::preallocate</definition>
         <argsstring>() const override</argsstring>
         <name>preallocate</name>
         <qualifiedname>PreallocatableSplineInterpolator2D::preallocate</qualifiedname>
@@ -101,14 +130,41 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="117" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="117" bodyend="121"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="141" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="141" bodyend="147"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
 <para>A class which stores information necessary to create a pointer to an instance of the <ref refid="classSplineInterpolator2D" kindref="compound">SplineInterpolator2D</ref> class. </para>
     </briefdescription>
     <detaileddescription>
-<para>This class allows an instance of the <ref refid="classSplineInterpolator2D" kindref="compound">SplineInterpolator2D</ref> class to be instantiated where necessary. This allows the memory allocated in the private members of the <ref refid="classSplineInterpolator2D" kindref="compound">SplineInterpolator2D</ref> to be freed when the object is not in use. These objects are: m_coefs. </para>
+<para>This class allows an instance of the <ref refid="classSplineInterpolator2D" kindref="compound">SplineInterpolator2D</ref> class to be instantiated where necessary. This allows the memory allocated in the private members of the <ref refid="classSplineInterpolator2D" kindref="compound">SplineInterpolator2D</ref> to be freed when the object is not in use. These objects are: m_coefs.</para>
+<para>The class is parametrised by multiple template parameters. Please note that CTAD will deduce all these template parameters from the Builder and Evaluator passed as constructor arguments.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Spline2DBuilder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the 2D spline builder. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Spline2DEvaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the 2D spline evaluator. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IdxRangeBatched</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type af the index range over which this operator will operate. This is necessary to define the internal spline representation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
     </detaileddescription>
     <inheritancegraph>
       <node id="3">
@@ -116,13 +172,13 @@
         <link refid="classIInterpolator2D"/>
       </node>
       <node id="2">
-        <label>IPreallocatableInterpolator2D&lt; Spline2DBuilder::interpolation_domain_type, Spline2DBuilder::batched_interpolation_domain_type &gt;</label>
+        <label>IPreallocatableInterpolator2D&lt; Spline2DBuilder::interpolation_domain_type, IdxRangeBatched &gt;</label>
         <link refid="classIPreallocatableInterpolator2D"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
-        <label>PreallocatableSplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator &gt;</label>
+        <label>PreallocatableSplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator, IdxRangeBatched &gt;</label>
         <link refid="classPreallocatableSplineInterpolator2D"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
@@ -134,29 +190,29 @@
         <link refid="classIInterpolator2D"/>
       </node>
       <node id="2">
-        <label>IPreallocatableInterpolator2D&lt; Spline2DBuilder::interpolation_domain_type, Spline2DBuilder::batched_interpolation_domain_type &gt;</label>
+        <label>IPreallocatableInterpolator2D&lt; Spline2DBuilder::interpolation_domain_type, IdxRangeBatched &gt;</label>
         <link refid="classIPreallocatableInterpolator2D"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
-        <label>PreallocatableSplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator &gt;</label>
+        <label>PreallocatableSplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator, IdxRangeBatched &gt;</label>
         <link refid="classPreallocatableSplineInterpolator2D"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="85" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="89" bodyend="122"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="104" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="108" bodyend="148"/>
     <listofallmembers>
       <member refid="classIInterpolator2D_1a42729a16cf23045e851682173916d3cc" prot="public" virt="non-virtual"><scope>PreallocatableSplineInterpolator2D</scope><name>CConstFieldType</name></member>
       <member refid="classIInterpolator2D_1aa16e2d83b01633e1e88b8f5b84534613" prot="public" virt="non-virtual"><scope>PreallocatableSplineInterpolator2D</scope><name>CoordType</name></member>
       <member refid="classIInterpolator2D_1a4255ea63affeb96b4ba02e3c53c685c7" prot="public" virt="non-virtual"><scope>PreallocatableSplineInterpolator2D</scope><name>DFieldType</name></member>
-      <member refid="classPreallocatableSplineInterpolator2D_1a84affa96d3c30ccc36d4d171dde75dc3" prot="private" virt="non-virtual"><scope>PreallocatableSplineInterpolator2D</scope><name>m_builder</name></member>
-      <member refid="classPreallocatableSplineInterpolator2D_1a3e30a633404c4accb73b3d24630710cc" prot="private" virt="non-virtual"><scope>PreallocatableSplineInterpolator2D</scope><name>m_evaluator</name></member>
-      <member refid="classIPreallocatableInterpolator2D_1af1e25f21907360d777e5e385ccbe599e" prot="public" virt="non-virtual"><scope>PreallocatableSplineInterpolator2D</scope><name>operator()</name></member>
-      <member refid="classIInterpolator2D_1ad26242ffd54d4df04b8aa746ba25201e" prot="public" virt="pure-virtual" ambiguityscope="IInterpolator2D::"><scope>PreallocatableSplineInterpolator2D</scope><name>operator()</name></member>
-      <member refid="classPreallocatableSplineInterpolator2D_1a0e2f96ac087da46c97d76d53d850f339" prot="public" virt="non-virtual"><scope>PreallocatableSplineInterpolator2D</scope><name>PreallocatableSplineInterpolator2D</name></member>
-      <member refid="classPreallocatableSplineInterpolator2D_1aac38c2b54d1d4289063acd103d74a5fb" prot="public" virt="virtual"><scope>PreallocatableSplineInterpolator2D</scope><name>preallocate</name></member>
+      <member refid="classPreallocatableSplineInterpolator2D_1ad8226ecfd141ebf4a83b4a68d68a5666" prot="private" virt="non-virtual"><scope>PreallocatableSplineInterpolator2D</scope><name>m_builder</name></member>
+      <member refid="classPreallocatableSplineInterpolator2D_1a376920a51cdb3ec0f916e840f8bfbd6f" prot="private" virt="non-virtual"><scope>PreallocatableSplineInterpolator2D</scope><name>m_evaluator</name></member>
+      <member refid="classPreallocatableSplineInterpolator2D_1a33989dc5cec0f340defb38e03d6e6796" prot="private" virt="non-virtual"><scope>PreallocatableSplineInterpolator2D</scope><name>m_idx_range_batched</name></member>
+      <member refid="classIPreallocatableInterpolator2D_1af1e25f21907360d777e5e385ccbe599e" prot="public" virt="virtual"><scope>PreallocatableSplineInterpolator2D</scope><name>operator()</name></member>
+      <member refid="classPreallocatableSplineInterpolator2D_1a3e650415d1f6b4cd4f8f3a8ca7cc7f72" prot="public" virt="non-virtual"><scope>PreallocatableSplineInterpolator2D</scope><name>PreallocatableSplineInterpolator2D</name></member>
+      <member refid="classPreallocatableSplineInterpolator2D_1ad5afce78c69025b666383333c0f532ab" prot="public" virt="virtual"><scope>PreallocatableSplineInterpolator2D</scope><name>preallocate</name></member>
       <member refid="classIInterpolator2D_1a8ce7c87d9c81fc6fec0581f0315cae2b" prot="public" virt="virtual"><scope>PreallocatableSplineInterpolator2D</scope><name>~IInterpolator2D</name></member>
     </listofallmembers>
   </compounddef>

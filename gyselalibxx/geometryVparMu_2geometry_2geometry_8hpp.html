@@ -787,19 +787,19 @@
 <td style="text-align: left;"><a href="#typedef-splineinterppointsvpar"><strong>SplineInterpPointsVpar</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesMu.html"><strong>BSplinesMu</strong></a>, <a href="structGridMu.html"><strong>GridMu</strong></a>, SplineMuBoundary, SplineMuBoundary, ddc::SplineSolver::LAPACK, <a href="structGridMu.html"><strong>GridMu</strong></a> &gt;</td>
+<td style="text-align: right;">typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesMu.html"><strong>BSplinesMu</strong></a>, <a href="structGridMu.html"><strong>GridMu</strong></a>, SplineMuBoundary, SplineMuBoundary, ddc::SplineSolver::LAPACK &gt;</td>
 <td style="text-align: left;"><a href="#typedef-splinemubuilder"><strong>SplineMuBuilder</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesMu.html"><strong>BSplinesMu</strong></a>, <a href="structGridMu.html"><strong>GridMu</strong></a>, ddc::ConstantExtrapolationRule&lt; <a href="structMu.html"><strong>Mu</strong></a> &gt;, ddc::ConstantExtrapolationRule&lt; <a href="structMu.html"><strong>Mu</strong></a> &gt;, <a href="structGridMu.html"><strong>GridMu</strong></a> &gt;</td>
+<td style="text-align: right;">typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesMu.html"><strong>BSplinesMu</strong></a>, <a href="structGridMu.html"><strong>GridMu</strong></a>, ddc::ConstantExtrapolationRule&lt; <a href="structMu.html"><strong>Mu</strong></a> &gt;, ddc::ConstantExtrapolationRule&lt; <a href="structMu.html"><strong>Mu</strong></a> &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-splinemuevaluator"><strong>SplineMuEvaluator</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesVpar.html"><strong>BSplinesVpar</strong></a>, <a href="structGridVpar.html"><strong>GridVpar</strong></a>, SplineVparBoundary, SplineVparBoundary, ddc::SplineSolver::LAPACK, <a href="structGridVpar.html"><strong>GridVpar</strong></a> &gt;</td>
+<td style="text-align: right;">typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesVpar.html"><strong>BSplinesVpar</strong></a>, <a href="structGridVpar.html"><strong>GridVpar</strong></a>, SplineVparBoundary, SplineVparBoundary, ddc::SplineSolver::LAPACK &gt;</td>
 <td style="text-align: left;"><a href="#typedef-splinevparbuilder"><strong>SplineVparBuilder</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesVpar.html"><strong>BSplinesVpar</strong></a>, <a href="structGridVpar.html"><strong>GridVpar</strong></a>, ddc::ConstantExtrapolationRule&lt; <a href="structVpar.html"><strong>Vpar</strong></a> &gt;, ddc::ConstantExtrapolationRule&lt; <a href="structVpar.html"><strong>Vpar</strong></a> &gt;, <a href="structGridVpar.html"><strong>GridVpar</strong></a> &gt;</td>
+<td style="text-align: right;">typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesVpar.html"><strong>BSplinesVpar</strong></a>, <a href="structGridVpar.html"><strong>GridVpar</strong></a>, ddc::ConstantExtrapolationRule&lt; <a href="structVpar.html"><strong>Vpar</strong></a> &gt;, ddc::ConstantExtrapolationRule&lt; <a href="structVpar.html"><strong>Vpar</strong></a> &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-splinevparevaluator"><strong>SplineVparEvaluator</strong></a>  <br></td>
 </tr>
 </tbody>
@@ -1081,22 +1081,22 @@
 <hr>
 
 <h3 id="typedef-splinemubuilder">typedef SplineMuBuilder</h3>
-<pre><code class="language-C++">using SplineMuBuilder =  ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesMu, GridMu, SplineMuBoundary, SplineMuBoundary, ddc::SplineSolver::LAPACK, GridMu&gt;;
+<pre><code class="language-C++">using SplineMuBuilder =  ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesMu, GridMu, SplineMuBoundary, SplineMuBoundary, ddc::SplineSolver::LAPACK&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-splinemuevaluator">typedef SplineMuEvaluator</h3>
-<pre><code class="language-C++">using SplineMuEvaluator =  ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesMu, GridMu, ddc::ConstantExtrapolationRule&lt;Mu&gt;, ddc::ConstantExtrapolationRule&lt;Mu&gt;, GridMu&gt;;
+<pre><code class="language-C++">using SplineMuEvaluator =  ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesMu, GridMu, ddc::ConstantExtrapolationRule&lt;Mu&gt;, ddc::ConstantExtrapolationRule&lt;Mu&gt; &gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-splinevparbuilder">typedef SplineVparBuilder</h3>
-<pre><code class="language-C++">using SplineVparBuilder =  ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesVpar, GridVpar, SplineVparBoundary, SplineVparBoundary, ddc::SplineSolver::LAPACK, GridVpar&gt;;
+<pre><code class="language-C++">using SplineVparBuilder =  ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesVpar, GridVpar, SplineVparBoundary, SplineVparBoundary, ddc::SplineSolver::LAPACK&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-splinevparevaluator">typedef SplineVparEvaluator</h3>
-<pre><code class="language-C++">using SplineVparEvaluator =  ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesVpar, GridVpar, ddc::ConstantExtrapolationRule&lt;Vpar&gt;, ddc::ConstantExtrapolationRule&lt;Vpar&gt;, GridVpar&gt;;
+<pre><code class="language-C++">using SplineVparEvaluator =  ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesVpar, GridVpar, ddc::ConstantExtrapolationRule&lt;Vpar&gt;, ddc::ConstantExtrapolationRule&lt;Vpar&gt; &gt;;
 </code></pre>
 <hr>
 <h2 id="public-attributes-documentation">Public Attributes Documentation</h2>

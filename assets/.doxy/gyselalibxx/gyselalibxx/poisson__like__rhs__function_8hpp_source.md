@@ -31,9 +31,7 @@ public:
             RadialExtrapolationRule,
             RadialExtrapolationRule,
             ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            GridR,
-            GridTheta>;
+            ddc::PeriodicExtrapolationRule<Theta>>;
 
 private:
     host_t<ConstSpline2D> const m_coefs;

@@ -572,7 +572,8 @@ class BslPredCorrRTheta : public ITimeSolverRTheta
             Mapping,
             PreallocatableSplineInterpolator2D&lt;
                     SplineRThetaBuilder,
-                    SplineRThetaEvaluatorNullBound&gt;&gt;;
+                    SplineRThetaEvaluatorNullBound,
+                    IdxRangeRTheta&gt;&gt;;
 
 private:
     Mapping const&amp; m_mapping;

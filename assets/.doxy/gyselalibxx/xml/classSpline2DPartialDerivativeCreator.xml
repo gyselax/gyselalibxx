@@ -2,11 +2,11 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSpline2DPartialDerivativeCreator" kind="class" language="C++" prot="public">
     <compoundname>Spline2DPartialDerivativeCreator</compoundname>
-    <basecompoundref refid="classIPartialDerivativeCreator" prot="public" virt="non-virtual">IPartialDerivativeCreator&lt; SplineEvaluator2D::batched_evaluation_domain_type, DerivativeDimension &gt;</basecompoundref>
+    <basecompoundref refid="classIPartialDerivativeCreator" prot="public" virt="non-virtual">IPartialDerivativeCreator&lt; IdxRangeBatched, DerivativeDimension &gt;</basecompoundref>
     <includes refid="spline__2d__partial__derivative_8hpp" local="no">spline_2d_partial_derivative.hpp</includes>
     <templateparamlist>
       <param>
-        <type>class <ref refid="classSplineBuilder2DCache" kindref="compound">SplineBuilder2DCache</ref></type>
+        <type>class SplineBuilder2D</type>
       </param>
       <param>
         <type>class SplineEvaluator2D</type>
@@ -14,11 +14,14 @@
       <param>
         <type>class DerivativeDimension</type>
       </param>
+      <param>
+        <type>class IdxRangeBatched</type>
+      </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classSpline2DPartialDerivativeCreator_1a1918afabb724fd90713f3467a44e99d5" prot="private" static="no">
-        <type>DConstField&lt; typename SplineEvaluator2D::batched_evaluation_domain_type &gt;</type>
-        <definition>using Spline2DPartialDerivativeCreator&lt; SplineBuilder2DCache, SplineEvaluator2D, DerivativeDimension &gt;::DConstFieldType =  DConstField&lt;typename SplineEvaluator2D::batched_evaluation_domain_type&gt;</definition>
+      <memberdef kind="typedef" id="classSpline2DPartialDerivativeCreator_1afed02f58619a3ed3e637268f6e9e3488" prot="private" static="no">
+        <type>DConstField&lt; IdxRangeBatched &gt;</type>
+        <definition>using Spline2DPartialDerivativeCreator&lt; SplineBuilder2D, SplineEvaluator2D, DerivativeDimension, IdxRangeBatched &gt;::DConstFieldType =  DConstField&lt;IdxRangeBatched&gt;</definition>
         <argsstring></argsstring>
         <name>DConstFieldType</name>
         <qualifiedname>Spline2DPartialDerivativeCreator::DConstFieldType</qualifiedname>
@@ -28,13 +31,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" line="102" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" bodystart="102" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" line="107" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" bodystart="107" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classSpline2DPartialDerivativeCreator_1aaf94002debecb111c3b34328f4a43a18" prot="private" static="no" mutable="no">
-        <type><ref refid="classSplineBuilder2DCache" kindref="compound">SplineBuilder2DCache</ref> &amp;</type>
-        <definition>SplineBuilder2DCache&amp; Spline2DPartialDerivativeCreator&lt; SplineBuilder2DCache, SplineEvaluator2D, DerivativeDimension &gt;::m_builder_cache</definition>
+      <memberdef kind="variable" id="classSpline2DPartialDerivativeCreator_1a1bd3292ddc3b1bf79c8eed2618119ee9" prot="private" static="no" mutable="no">
+        <type><ref refid="classSplineBuilder2DCache" kindref="compound">SplineBuilder2DCache</ref>&lt; SplineBuilder2D, IdxRangeBatched &gt; &amp;</type>
+        <definition>SplineBuilder2DCache&lt;SplineBuilder2D, IdxRangeBatched&gt;&amp; Spline2DPartialDerivativeCreator&lt; SplineBuilder2D, SplineEvaluator2D, DerivativeDimension, IdxRangeBatched &gt;::m_builder_cache</definition>
         <argsstring></argsstring>
         <name>m_builder_cache</name>
         <qualifiedname>Spline2DPartialDerivativeCreator::m_builder_cache</qualifiedname>
@@ -44,11 +47,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" line="104" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" bodystart="104" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" line="109" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" bodystart="109" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSpline2DPartialDerivativeCreator_1a00f755d233eea2eb16c636e540ab1cb2" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classSpline2DPartialDerivativeCreator_1aaa5f407de80b4bd3825c9ea093fe8093" prot="private" static="no" mutable="no">
         <type>SplineEvaluator2D const  &amp;</type>
-        <definition>SplineEvaluator2D const&amp; Spline2DPartialDerivativeCreator&lt; SplineBuilder2DCache, SplineEvaluator2D, DerivativeDimension &gt;::m_evaluator</definition>
+        <definition>SplineEvaluator2D const&amp; Spline2DPartialDerivativeCreator&lt; SplineBuilder2D, SplineEvaluator2D, DerivativeDimension, IdxRangeBatched &gt;::m_evaluator</definition>
         <argsstring></argsstring>
         <name>m_evaluator</name>
         <qualifiedname>Spline2DPartialDerivativeCreator::m_evaluator</qualifiedname>
@@ -58,18 +61,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" line="105" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" bodystart="105" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" line="110" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" bodystart="110" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classSpline2DPartialDerivativeCreator_1a0bc845a4cd9f170962c1ca93256c2c92" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSpline2DPartialDerivativeCreator_1a4cf1a01fbdb18473fa8deb8f4d8029b1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
-        <definition>Spline2DPartialDerivativeCreator&lt; SplineBuilder2DCache, SplineEvaluator2D, DerivativeDimension &gt;::Spline2DPartialDerivativeCreator</definition>
-        <argsstring>(SplineBuilder2DCache &amp;builder_cache, SplineEvaluator2D const &amp;evaluator)</argsstring>
+        <definition>Spline2DPartialDerivativeCreator&lt; SplineBuilder2D, SplineEvaluator2D, DerivativeDimension, IdxRangeBatched &gt;::Spline2DPartialDerivativeCreator</definition>
+        <argsstring>(SplineBuilder2DCache&lt; SplineBuilder2D, IdxRangeBatched &gt; &amp;builder_cache, SplineEvaluator2D const &amp;evaluator)</argsstring>
         <name>Spline2DPartialDerivativeCreator</name>
         <qualifiedname>Spline2DPartialDerivativeCreator::Spline2DPartialDerivativeCreator</qualifiedname>
         <param>
-          <type><ref refid="classSplineBuilder2DCache" kindref="compound">SplineBuilder2DCache</ref> &amp;</type>
+          <type><ref refid="classSplineBuilder2DCache" kindref="compound">SplineBuilder2DCache</ref>&lt; SplineBuilder2D, IdxRangeBatched &gt; &amp;</type>
           <declname>builder_cache</declname>
         </param>
         <param>
@@ -101,11 +104,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" line="113" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" bodystart="113" bodyend="119"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" line="118" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" bodystart="118" bodyend="124"/>
       </memberdef>
-      <memberdef kind="function" id="classSpline2DPartialDerivativeCreator_1ae6a4c3975b542c507662f0544da044f2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>std::unique_ptr&lt; <ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative</ref>&lt; typename SplineEvaluator2D::batched_evaluation_domain_type, DerivativeDimension &gt; &gt;</type>
-        <definition>std::unique_ptr&lt; IPartialDerivative&lt; typename SplineEvaluator2D::batched_evaluation_domain_type, DerivativeDimension &gt; &gt; Spline2DPartialDerivativeCreator&lt; SplineBuilder2DCache, SplineEvaluator2D, DerivativeDimension &gt;::create_instance</definition>
+      <memberdef kind="function" id="classSpline2DPartialDerivativeCreator_1a16759105e84f15b31e3b9c74e89aefd8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::unique_ptr&lt; <ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative</ref>&lt; IdxRangeBatched, DerivativeDimension &gt; &gt;</type>
+        <definition>std::unique_ptr&lt; IPartialDerivative&lt; IdxRangeBatched, DerivativeDimension &gt; &gt; Spline2DPartialDerivativeCreator&lt; SplineBuilder2D, SplineEvaluator2D, DerivativeDimension, IdxRangeBatched &gt;::create_instance</definition>
         <argsstring>(DConstFieldType field) const</argsstring>
         <name>create_instance</name>
         <qualifiedname>Spline2DPartialDerivativeCreator::create_instance</qualifiedname>
@@ -132,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" line="133" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" bodystart="133" bodyend="139"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" line="135" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" bodystart="135" bodyend="143"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -156,16 +159,32 @@
 <para>A 2D spline evaluator. </para>
 </parameterdescription>
 </parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DerivativeDimension</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimension along which we are differentiating. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IdxRangeBatched</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type af the index range over which this operator will operate. </para>
+</parameterdescription>
+</parameteritem>
 </parameterlist>
 </para>
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
-        <label>IPartialDerivativeCreator&lt; SplineEvaluator2D::batched_evaluation_domain_type, DerivativeDimension &gt;</label>
+        <label>IPartialDerivativeCreator&lt; IdxRangeBatched, DerivativeDimension &gt;</label>
         <link refid="classIPartialDerivativeCreator"/>
       </node>
       <node id="1">
-        <label>Spline2DPartialDerivativeCreator&lt; SplineBuilder2DCache, SplineEvaluator2D, DerivativeDimension &gt;</label>
+        <label>Spline2DPartialDerivativeCreator&lt; SplineBuilder2D, SplineEvaluator2D, DerivativeDimension, IdxRangeBatched &gt;</label>
         <link refid="classSpline2DPartialDerivativeCreator"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
@@ -173,24 +192,24 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="2">
-        <label>IPartialDerivativeCreator&lt; SplineEvaluator2D::batched_evaluation_domain_type, DerivativeDimension &gt;</label>
+        <label>IPartialDerivativeCreator&lt; IdxRangeBatched, DerivativeDimension &gt;</label>
         <link refid="classIPartialDerivativeCreator"/>
       </node>
       <node id="1">
-        <label>Spline2DPartialDerivativeCreator&lt; SplineBuilder2DCache, SplineEvaluator2D, DerivativeDimension &gt;</label>
+        <label>Spline2DPartialDerivativeCreator&lt; SplineBuilder2D, SplineEvaluator2D, DerivativeDimension, IdxRangeBatched &gt;</label>
         <link refid="classSpline2DPartialDerivativeCreator"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" line="96" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" bodystart="100" bodyend="140"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" line="103" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp" bodystart="105" bodyend="144"/>
     <listofallmembers>
-      <member refid="classSpline2DPartialDerivativeCreator_1ae6a4c3975b542c507662f0544da044f2" prot="public" virt="non-virtual"><scope>Spline2DPartialDerivativeCreator</scope><name>create_instance</name></member>
-      <member refid="classIPartialDerivativeCreator_1aa6909a30ce6565221d37736bf059f7a0" prot="public" virt="pure-virtual" ambiguityscope="IPartialDerivativeCreator&lt; SplineEvaluator2D::batched_evaluation_domain_type, DerivativeDimension &gt;::"><scope>Spline2DPartialDerivativeCreator</scope><name>create_instance</name></member>
-      <member refid="classSpline2DPartialDerivativeCreator_1a1918afabb724fd90713f3467a44e99d5" prot="private" virt="non-virtual"><scope>Spline2DPartialDerivativeCreator</scope><name>DConstFieldType</name></member>
-      <member refid="classSpline2DPartialDerivativeCreator_1aaf94002debecb111c3b34328f4a43a18" prot="private" virt="non-virtual"><scope>Spline2DPartialDerivativeCreator</scope><name>m_builder_cache</name></member>
-      <member refid="classSpline2DPartialDerivativeCreator_1a00f755d233eea2eb16c636e540ab1cb2" prot="private" virt="non-virtual"><scope>Spline2DPartialDerivativeCreator</scope><name>m_evaluator</name></member>
-      <member refid="classSpline2DPartialDerivativeCreator_1a0bc845a4cd9f170962c1ca93256c2c92" prot="public" virt="non-virtual"><scope>Spline2DPartialDerivativeCreator</scope><name>Spline2DPartialDerivativeCreator</name></member>
+      <member refid="classSpline2DPartialDerivativeCreator_1a16759105e84f15b31e3b9c74e89aefd8" prot="public" virt="non-virtual"><scope>Spline2DPartialDerivativeCreator</scope><name>create_instance</name></member>
+      <member refid="classIPartialDerivativeCreator_1aa6909a30ce6565221d37736bf059f7a0" prot="public" virt="pure-virtual" ambiguityscope="IPartialDerivativeCreator&lt; IdxRangeBatched, DerivativeDimension &gt;::"><scope>Spline2DPartialDerivativeCreator</scope><name>create_instance</name></member>
+      <member refid="classSpline2DPartialDerivativeCreator_1afed02f58619a3ed3e637268f6e9e3488" prot="private" virt="non-virtual"><scope>Spline2DPartialDerivativeCreator</scope><name>DConstFieldType</name></member>
+      <member refid="classSpline2DPartialDerivativeCreator_1a1bd3292ddc3b1bf79c8eed2618119ee9" prot="private" virt="non-virtual"><scope>Spline2DPartialDerivativeCreator</scope><name>m_builder_cache</name></member>
+      <member refid="classSpline2DPartialDerivativeCreator_1aaa5f407de80b4bd3825c9ea093fe8093" prot="private" virt="non-virtual"><scope>Spline2DPartialDerivativeCreator</scope><name>m_evaluator</name></member>
+      <member refid="classSpline2DPartialDerivativeCreator_1a4cf1a01fbdb18473fa8deb8f4d8029b1" prot="public" virt="non-virtual"><scope>Spline2DPartialDerivativeCreator</scope><name>Spline2DPartialDerivativeCreator</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

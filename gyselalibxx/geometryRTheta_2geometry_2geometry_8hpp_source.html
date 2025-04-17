@@ -681,9 +681,7 @@ using SplineRThetaBuilder_host = ddc::SplineBuilder2D&lt;
         SplineRBoundary, // boundary at rmax
         SplineThetaBoundary,
         SplineThetaBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridR,
-        GridTheta&gt;;
+        ddc::SplineSolver::LAPACK&gt;;
 
 using SplineRThetaEvaluatorConstBound_host = ddc::SplineEvaluator2D&lt;
         Kokkos::DefaultHostExecutionSpace,
@@ -695,9 +693,7 @@ using SplineRThetaEvaluatorConstBound_host = ddc::SplineEvaluator2D&lt;
         ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, // boundary at r=0
         ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, // boundary at rmax
         ddc::PeriodicExtrapolationRule&lt;Theta&gt;,
-        ddc::PeriodicExtrapolationRule&lt;Theta&gt;,
-        GridR,
-        GridTheta&gt;;
+        ddc::PeriodicExtrapolationRule&lt;Theta&gt;&gt;;
 
 using SplineRThetaEvaluatorNullBound_host = ddc::SplineEvaluator2D&lt;
         Kokkos::DefaultHostExecutionSpace,
@@ -709,9 +705,7 @@ using SplineRThetaEvaluatorNullBound_host = ddc::SplineEvaluator2D&lt;
         ddc::NullExtrapolationRule, // boundary at r=0
         ddc::NullExtrapolationRule, // boundary at rmax
         ddc::PeriodicExtrapolationRule&lt;Theta&gt;,
-        ddc::PeriodicExtrapolationRule&lt;Theta&gt;,
-        GridR,
-        GridTheta&gt;;
+        ddc::PeriodicExtrapolationRule&lt;Theta&gt;&gt;;
 
 using SplineRThetaBuilder = ddc::SplineBuilder2D&lt;
         Kokkos::DefaultExecutionSpace,
@@ -724,9 +718,7 @@ using SplineRThetaBuilder = ddc::SplineBuilder2D&lt;
         SplineRBoundary, // boundary at rmax
         SplineThetaBoundary,
         SplineThetaBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridR,
-        GridTheta&gt;;
+        ddc::SplineSolver::LAPACK&gt;;
 
 using SplineRThetaEvaluatorConstBound = ddc::SplineEvaluator2D&lt;
         Kokkos::DefaultExecutionSpace,
@@ -738,9 +730,7 @@ using SplineRThetaEvaluatorConstBound = ddc::SplineEvaluator2D&lt;
         ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, // boundary at r=0
         ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, // boundary at rmax
         ddc::PeriodicExtrapolationRule&lt;Theta&gt;,
-        ddc::PeriodicExtrapolationRule&lt;Theta&gt;,
-        GridR,
-        GridTheta&gt;;
+        ddc::PeriodicExtrapolationRule&lt;Theta&gt;&gt;;
 
 using SplineRThetaEvaluatorNullBound = ddc::SplineEvaluator2D&lt;
         Kokkos::DefaultExecutionSpace,
@@ -752,9 +742,7 @@ using SplineRThetaEvaluatorNullBound = ddc::SplineEvaluator2D&lt;
         ddc::NullExtrapolationRule, // boundary at r=0
         ddc::NullExtrapolationRule, // boundary at rmax
         ddc::PeriodicExtrapolationRule&lt;Theta&gt;,
-        ddc::PeriodicExtrapolationRule&lt;Theta&gt;,
-        GridR,
-        GridTheta&gt;;
+        ddc::PeriodicExtrapolationRule&lt;Theta&gt;&gt;;
 // --- Index definitions
 using IdxR = Idx&lt;GridR&gt;;
 using IdxTheta = Idx&lt;GridTheta&gt;;

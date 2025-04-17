@@ -34,7 +34,7 @@ _Type of right-hand side (rhs) function of the Poisson equation._ [More...](#det
 
 | Type | Name |
 | ---: | :--- |
-| typedef ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md), [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; [**Theta**](structTheta.md) &gt;, ddc::PeriodicExtrapolationRule&lt; [**Theta**](structTheta.md) &gt;, [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md) &gt; | [**evaluator\_type**](#typedef-evaluator_type)  <br>_The type of the 2D Spline Evaluator used by this class._  |
+| typedef ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md), [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; [**Theta**](structTheta.md) &gt;, ddc::PeriodicExtrapolationRule&lt; [**Theta**](structTheta.md) &gt; &gt; | [**evaluator\_type**](#typedef-evaluator_type)  <br>_The type of the 2D Spline Evaluator used by this class._  |
 
 
 
@@ -112,7 +112,7 @@ _Type of right-hand side (rhs) function of the Poisson equation._ [More...](#det
 
 _The type of the 2D Spline Evaluator used by this class._ 
 ```C++
-using PoissonLikeRHSFunction< RadialExtrapolationRule >::evaluator_type =  ddc::SplineEvaluator2D< Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule<Theta>, ddc::PeriodicExtrapolationRule<Theta>, GridR, GridTheta>;
+using PoissonLikeRHSFunction< RadialExtrapolationRule >::evaluator_type =  ddc::SplineEvaluator2D< Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule<Theta>, ddc::PeriodicExtrapolationRule<Theta> >;
 ```
 
 

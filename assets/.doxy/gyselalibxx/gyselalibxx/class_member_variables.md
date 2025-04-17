@@ -237,6 +237,7 @@
 * **m\_weights\_r** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_weights\_theta** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_x\_init** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
+* **m\_idx\_range\_batched** ([**PreallocatableSplineInterpolator**](classPreallocatableSplineInterpolator.md), [**PreallocatableSplineInterpolator2D**](classPreallocatableSplineInterpolator2D.md))
 * **m\_boltzmann\_solver** ([**PredCorr**](classPredCorr.md), [**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md))
 * **m\_vlasov\_solver** ([**PredCorr**](classPredCorr.md))
 * **m\_advection\_x** ([**PredCorrRK2XY**](classPredCorrRK2XY.md))
@@ -294,7 +295,7 @@
 
 * **pos** ([**GaussLegendreCoefficients**](structGaussLegendreCoefficients.md))
 * **PERIODIC** ([**Mu**](structMu.md), [**R**](structR.md), [**R\_cov**](structR__cov.md), [**T**](structT.md), [**Theta**](structTheta.md), [**Theta\_cov**](structTheta__cov.md), [**Vpar**](structVpar.md), [**Vr**](structVr.md), [**Vtheta**](structVtheta.md), [**Vx**](structVx.md), [**Vy**](structVy.md), [**X**](structX.md), [**X\_pC**](structX__pC.md), [**Y**](structY.md), [**Y\_pC**](structY__pC.md))
-* **patch\_id** ([**MultipatchSplineBuilder::Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;**](structMultipatchSplineBuilder_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_0143963206948829b7e1024cedaaccd580.md))
+* **patch\_id** ([**MultipatchSplineBuilder::Build\_BuilderType**](structMultipatchSplineBuilder_1_1Build__BuilderType.md))
 
 
 ## q

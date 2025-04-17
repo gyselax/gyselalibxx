@@ -19,7 +19,7 @@
         <argsstring>() const =0</argsstring>
         <name>preallocate</name>
         <qualifiedname>IPreallocatableInterpolator2D::preallocate</qualifiedname>
-        <reimplementedby refid="classPreallocatableSplineInterpolator2D_1aac38c2b54d1d4289063acd103d74a5fb">preallocate</reimplementedby>
+        <reimplementedby refid="classPreallocatableSplineInterpolator2D_1ad5afce78c69025b666383333c0f532ab">preallocate</reimplementedby>
         <briefdescription>
 <para>Allocate an instance of a pointer to an InterpolatorRTheta. </para>
         </briefdescription>

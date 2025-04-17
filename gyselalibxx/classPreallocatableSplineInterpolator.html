@@ -598,7 +598,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-preallocatablesplineinterpolator"><strong>PreallocatableSplineInterpolator</strong></a> (BuilderType const &amp; builder, EvaluatorType const &amp; evaluator) <br><em>Create an object capable of creating</em> <a href="classSplineInterpolator.html"><em><strong>SplineInterpolator</strong></em></a> <em>objects.</em></td>
+<td style="text-align: left;"><a href="#function-preallocatablesplineinterpolator"><strong>PreallocatableSplineInterpolator</strong></a> (BuilderType const &amp; builder, EvaluatorType const &amp; evaluator, IdxRange&lt; Grid1D... &gt; idx_range_batched) <br><em>Create an object capable of creating</em> <a href="classSplineInterpolator.html"><em><strong>SplineInterpolator</strong></em></a> <em>objects.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual std::unique_ptr&lt; <a href="classIInterpolator.html"><strong>IInterpolator</strong></a>&lt; GridInterp, Grid1D... &gt; &gt;</td>
@@ -677,13 +677,15 @@
 <p><em>Create an object capable of creating</em> <a href="classSplineInterpolator.html"><em><strong>SplineInterpolator</strong></em></a> <em>objects.</em></p>
 <pre><code class="language-C++">inline PreallocatableSplineInterpolator::PreallocatableSplineInterpolator (
     BuilderType const &amp; builder,
-    EvaluatorType const &amp; evaluator
+    EvaluatorType const &amp; evaluator,
+    IdxRange&lt; Grid1D... &gt; idx_range_batched
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>builder</code> An operator which builds spline coefficients from the values of a function at known interpolation points. </li>
 <li><code>evaluator</code> An operator which evaluates the value of a spline at requested coordinates. </li>
+<li><code>idx_range_batched</code> The index range on which this operator operates. </li>
 </ul>
 <hr>
 

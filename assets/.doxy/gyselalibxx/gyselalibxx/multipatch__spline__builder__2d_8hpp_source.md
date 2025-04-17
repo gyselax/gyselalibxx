@@ -111,28 +111,35 @@ class MultipatchSplineBuilder2D
                 std::is_same_v<upper_matching_edge1, OutsideEdge> ? BcUpper1 : BcTransition,
                 std::is_same_v<lower_matching_edge2, OutsideEdge> ? BcLower2 : BcTransition,
                 std::is_same_v<upper_matching_edge2, OutsideEdge> ? BcUpper2 : BcTransition,
-                Solver,
-                Grid1D...>;
+                Solver>;
     };
 
     template <class Patch>
     using BuilderOnPatch = typename Build_BuilderType<Patch, ValuesOnPatch<Patch>>::type;
 
     template <class Patch>
-    using SplineOnPatch
-            = DField<typename BuilderOnPatch<Patch>::batched_spline_domain_type, MemorySpace>;
+    using SplineOnPatch = DField<
+            typename BuilderOnPatch<Patch>::batched_spline_domain_type<
+                    typename ValuesOnPatch<Patch>::discrete_domain_type>,
+            MemorySpace>;
 
     template <class Patch>
-    using Derivs1OnPatch
-            = DConstField<typename BuilderOnPatch<Patch>::batched_derivs_domain_type1, MemorySpace>;
+    using Derivs1OnPatch = DConstField<
+            typename BuilderOnPatch<Patch>::batched_derivs_domain_type1<
+                    typename ValuesOnPatch<Patch>::discrete_domain_type>,
+            MemorySpace>;
 
     template <class Patch>
-    using Derivs2OnPatch
-            = DConstField<typename BuilderOnPatch<Patch>::batched_derivs_domain_type2, MemorySpace>;
+    using Derivs2OnPatch = DConstField<
+            typename BuilderOnPatch<Patch>::batched_derivs_domain_type2<
+                    typename ValuesOnPatch<Patch>::discrete_domain_type>,
+            MemorySpace>;
 
     template <class Patch>
-    using Derivs12OnPatch
-            = DConstField<typename BuilderOnPatch<Patch>::batched_derivs_domain_type, MemorySpace>;
+    using Derivs12OnPatch = DConstField<
+            typename BuilderOnPatch<Patch>::batched_derivs_domain_type<
+                    typename ValuesOnPatch<Patch>::discrete_domain_type>,
+            MemorySpace>;
 
     using MultipatchSplineCoeffs = MultipatchField<SplineOnPatch, Patches...>;
 

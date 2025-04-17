@@ -32,7 +32,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**SplineBuilder2DCache**](classSplineBuilder2DCache.md) &lt;class SplineBuilder2D&gt;<br>_A class that stores spline builder coefficients and recomputes them when required._  |
+| class | [**SplineBuilder2DCache**](classSplineBuilder2DCache.md) &lt;class SplineBuilder2D, class IdxRangeBatched&gt;<br>_A class that stores spline builder coefficients and recomputes them when required._  |
 
 
 

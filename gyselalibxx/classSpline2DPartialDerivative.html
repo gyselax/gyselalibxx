@@ -540,7 +540,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-spline2dpartialderivative">Class Spline2DPartialDerivative</h1>
-<p><strong>template &lt;class <a href="classSplineBuilder2DCache.html"><strong>SplineBuilder2DCache</strong></a>, class SplineEvaluator2D, class DerivativeDimension&gt;</strong></p>
+<p><strong>template &lt;class SplineBuilder2D, class SplineEvaluator2D, class DerivativeDimension, class IdxRangeBatched&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classSpline2DPartialDerivative.html"><strong>Spline2DPartialDerivative</strong></a></p>
 <p><em>A class which implements a partial derivative operator using a 2d spline interpolation.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -590,11 +590,11 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-spline2dpartialderivative"><strong>Spline2DPartialDerivative</strong></a> (<a href="classSplineBuilder2DCache.html"><strong>SplineBuilder2DCache</strong></a> &amp; builder_cache, SplineEvaluator2D const &amp; evaluator, DConstFieldType const field) <br><em>Construct an instance of the class</em> <a href="classSpline2DPartialDerivative.html"><em><strong>Spline2DPartialDerivative</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-spline2dpartialderivative"><strong>Spline2DPartialDerivative</strong></a> (<a href="classSplineBuilder2DCache.html"><strong>SplineBuilder2DCache</strong></a>&lt; SplineBuilder2D, IdxRangeBatched &gt; &amp; builder_cache, SplineEvaluator2D const &amp; evaluator, <a href="classIPartialDerivative.html#typedef-dconstfieldtype"><strong>DConstFieldType</strong></a> const field) <br><em>Construct an instance of the class</em> <a href="classSpline2DPartialDerivative.html"><em><strong>Spline2DPartialDerivative</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (DFieldType differentiated_field) const<br><em>Compute the partial derivative of a field in the direction where the field is represented using 2d splines.</em></td>
+<td style="text-align: right;">virtual void</td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classIPartialDerivative.html#typedef-dfieldtype"><strong>DFieldType</strong></a> differentiated_field) const<br><em>Compute the partial derivative of a field in the direction where the field is represented using 2d splines.</em></td>
 </tr>
 </tbody>
 </table>
@@ -619,12 +619,14 @@
 <ul>
 <li><code>SplineBuilder2D</code> A 2D spline builder. </li>
 <li><code>SplineEvaluator2D</code> A 2D spline evaluator. </li>
+<li><code>DerivativeDimension</code> The dimension along which we are differentiating. </li>
+<li><code>IdxRangeBatched</code> The type af the index range over which this operator will operate. </li>
 </ul>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-spline2dpartialderivative">function Spline2DPartialDerivative</h3>
 <p><em>Construct an instance of the class</em> <a href="classSpline2DPartialDerivative.html"><em><strong>Spline2DPartialDerivative</strong></em></a> <em>.</em></p>
 <pre><code class="language-C++">inline explicit Spline2DPartialDerivative::Spline2DPartialDerivative (
-    SplineBuilder2DCache &amp; builder_cache,
+    SplineBuilder2DCache &lt; SplineBuilder2D, IdxRangeBatched &gt; &amp; builder_cache,
     SplineEvaluator2D const &amp; evaluator,
     DConstFieldType const field
 ) 
@@ -639,7 +641,7 @@
 
 <h3 id="function-operator">function operator()</h3>
 <p><em>Compute the partial derivative of a field in the direction where the field is represented using 2d splines.</em> </p>
-<pre><code class="language-C++">inline void Spline2DPartialDerivative::operator() (
+<pre><code class="language-C++">inline virtual void Spline2DPartialDerivative::operator() (
     DFieldType differentiated_field
 ) const
 </code></pre>
@@ -647,6 +649,7 @@
 <ul>
 <li><code>differentiated_field</code> Contains on output the value of the differentiated field. </li>
 </ul>
+<p>Implements <a href="classIPartialDerivative.html#function-operator"><em>IPartialDerivative::operator()</em></a></p>
 <hr>
 
 <hr>

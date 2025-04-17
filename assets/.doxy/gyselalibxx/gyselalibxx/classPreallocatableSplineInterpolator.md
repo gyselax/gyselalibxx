@@ -111,7 +111,7 @@ See [IInterpolator](classIInterpolator.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**PreallocatableSplineInterpolator**](#function-preallocatablesplineinterpolator) (BuilderType const & builder, EvaluatorType const & evaluator) <br>_Create an object capable of creating_ [_**SplineInterpolator**_](classSplineInterpolator.md) _objects._ |
+|   | [**PreallocatableSplineInterpolator**](#function-preallocatablesplineinterpolator) (BuilderType const & builder, EvaluatorType const & evaluator, IdxRange&lt; Grid1D... &gt; idx\_range\_batched) <br>_Create an object capable of creating_ [_**SplineInterpolator**_](classSplineInterpolator.md) _objects._ |
 | virtual std::unique\_ptr&lt; [**IInterpolator**](classIInterpolator.md)&lt; GridInterp, Grid1D... &gt; &gt; | [**preallocate**](#function-preallocate) () override const<br> |
 |   | [**~PreallocatableSplineInterpolator**](#function-preallocatablesplineinterpolator) () override<br> |
 
@@ -237,7 +237,8 @@ _Create an object capable of creating_ [_**SplineInterpolator**_](classSplineInt
 ```C++
 inline PreallocatableSplineInterpolator::PreallocatableSplineInterpolator (
     BuilderType const & builder,
-    EvaluatorType const & evaluator
+    EvaluatorType const & evaluator,
+    IdxRange< Grid1D... > idx_range_batched
 ) 
 ```
 
@@ -250,6 +251,7 @@ inline PreallocatableSplineInterpolator::PreallocatableSplineInterpolator (
 
 * `builder` An operator which builds spline coefficients from the values of a function at known interpolation points. 
 * `evaluator` An operator which evaluates the value of a spline at requested coordinates. 
+* `idx_range_batched` The index range on which this operator operates. 
 
 
 

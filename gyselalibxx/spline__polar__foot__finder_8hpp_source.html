@@ -567,7 +567,7 @@ class SplinePolarFootFinder
               typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
               typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
               ddc::to_type_seq_t&lt;typename LogicalToPhysicalMapping::CoordResult&gt;,
-              typename SplineRThetaBuilderAdvection::batched_interpolation_domain_type,
+              typename TimeStepper::IdxRange,
               typename SplineRThetaBuilderAdvection::memory_space&gt;
 {
     static_assert(is_mapping_v&lt;LogicalToPhysicalMapping&gt;);
@@ -582,18 +582,18 @@ class SplinePolarFootFinder
     static_assert(is_accessible_v&lt;
                   typename SplineRThetaBuilderAdvection::exec_space,
                   LogicalToPseudoPhysicalMapping&gt;);
-    static_assert(
-            std::is_same_v&lt;
-                    typename SplineRThetaBuilderAdvection::batched_interpolation_domain_type,
-                    typename TimeStepper::IdxRange&gt;,
-            "The SplinePolarFootFinder is designed to work with an advection field defined on the "
-            "same grid as the distribution function.");
+    static_assert(ddc::in_tags_v&lt;
+                  typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
+                  ddc::to_type_seq_t&lt;typename TimeStepper::IdxRange&gt;&gt;);
+    static_assert(ddc::in_tags_v&lt;
+                  typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
+                  ddc::to_type_seq_t&lt;typename TimeStepper::IdxRange&gt;&gt;);
 
     using base_type = IPolarFootFinder&lt;
             typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
             typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
             ddc::to_type_seq_t&lt;typename LogicalToPhysicalMapping::CoordResult&gt;,
-            typename SplineRThetaBuilderAdvection::batched_interpolation_domain_type,
+            typename TimeStepper::IdxRange,
             typename SplineRThetaBuilderAdvection::memory_space&gt;;
 
 public:

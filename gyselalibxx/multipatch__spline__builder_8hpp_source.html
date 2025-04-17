@@ -586,17 +586,8 @@ class MultipatchSplineBuilder
     using PatchOrdering = ddc::detail::TypeSeq&lt;Patches...&gt;;
     static constexpr std::size_t n_patches = ddc::type_seq_size_v&lt;PatchOrdering&gt;;
 
-    template &lt;class Patch, class FieldType&gt;
+    template &lt;class Patch&gt;
     struct Build_BuilderType
-    {
-        static_assert(
-                !std::is_same_v&lt;Patch, Patch&gt;,
-                "The values should be saved in a constant field of doubles on the specified memory "
-                "space.");
-    };
-
-    template &lt;class Patch, class... Grid1D&gt;
-    struct Build_BuilderType&lt;Patch, DConstField&lt;IdxRange&lt;Grid1D...&gt;, MemorySpace&gt;&gt;
     {
         using lower_matching_edge = equivalent_edge_t&lt;
                 Edge&lt;Patch, GridOnPatch&lt;Patch&gt;, FRONT&gt;,
@@ -612,20 +603,23 @@ class MultipatchSplineBuilder
                 GridOnPatch&lt;Patch&gt;,
                 std::is_same_v&lt;lower_matching_edge, OutsideEdge&gt; ? BcLower : BcTransition,
                 std::is_same_v&lt;upper_matching_edge, OutsideEdge&gt; ? BcUpper : BcTransition,
-                Solver,
-                Grid1D...&gt;;
+                Solver&gt;;
     };
 
     template &lt;class Patch&gt;
-    using BuilderOnPatch = typename Build_BuilderType&lt;Patch, ValuesOnPatch&lt;Patch&gt;&gt;::type;
+    using BuilderOnPatch = typename Build_BuilderType&lt;Patch&gt;::type;
 
     template &lt;class Patch&gt;
-    using SplineOnPatch
-            = DField&lt;typename BuilderOnPatch&lt;Patch&gt;::batched_spline_domain_type, MemorySpace&gt;;
+    using SplineOnPatch = DField&lt;
+            typename BuilderOnPatch&lt;Patch&gt;::batched_spline_domain_type&lt;
+                    typename ValuesOnPatch&lt;Patch&gt;::discrete_domain_type&gt;,
+            MemorySpace&gt;;
 
     template &lt;class Patch&gt;
-    using DerivsOnPatch
-            = DConstField&lt;typename BuilderOnPatch&lt;Patch&gt;::batched_derivs_domain_type, MemorySpace&gt;;
+    using DerivsOnPatch = DConstField&lt;
+            typename BuilderOnPatch&lt;Patch&gt;::batched_derivs_domain_type&lt;
+                    typename ValuesOnPatch&lt;Patch&gt;::discrete_domain_type&gt;,
+            MemorySpace&gt;;
 
     using MultipatchSplineCoeffs = MultipatchField&lt;SplineOnPatch, Patches...&gt;;
 

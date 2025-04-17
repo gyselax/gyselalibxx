@@ -32,8 +32,8 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**Spline1DPartialDerivative**](classSpline1DPartialDerivative.md) &lt;class Spline1DBuilder, class Spline1DEvaluator&gt;<br>_A class which implements a partial derivative operator using a 1d spline interpolation._  |
-| class | [**Spline1DPartialDerivativeCreator**](classSpline1DPartialDerivativeCreator.md) &lt;class Spline1DBuilder, class Spline1DEvaluator&gt;<br>_A class which stores information necessary to create a pointer to an instance of the_ [_**Spline1DPartialDerivative**_](classSpline1DPartialDerivative.md) _class._ |
+| class | [**Spline1DPartialDerivative**](classSpline1DPartialDerivative.md) &lt;class Spline1DBuilder, class Spline1DEvaluator, class IdxRangeBatched&gt;<br>_A class which implements a partial derivative operator using a 1d spline interpolation._  |
+| class | [**Spline1DPartialDerivativeCreator**](classSpline1DPartialDerivativeCreator.md) &lt;class Spline1DBuilder, class Spline1DEvaluator, class IdxRangeBatched&gt;<br>_A class which stores information necessary to create a pointer to an instance of the_ [_**Spline1DPartialDerivative**_](classSpline1DPartialDerivative.md) _class._ |
 
 
 

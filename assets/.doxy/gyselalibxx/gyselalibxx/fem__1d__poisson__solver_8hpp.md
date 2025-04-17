@@ -37,7 +37,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md) &lt;class SplineBuilder, class SplineEvaluator&gt;<br> |
+| class | [**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md) &lt;class SplineBuilder, class SplineEvaluator, class IdxRangeBatched&gt;<br> |
 | struct | [**GridPDEDimQ**](structFEM1DPoissonSolver_1_1GridPDEDimQ.md) <br>_The grid of quadrature points along the PDEDim direction._  |
 | struct | [**HiddenFEMBSplines**](structFEM1DPoissonSolver_1_1HiddenFEMBSplines.md) <br> |
 

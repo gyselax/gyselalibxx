@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" line="447" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" bodystart="450" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" line="415" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" bodystart="418" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGeometryVxVyXY_1a5c5c41cdaa9ede1bde1448cb9dd843ec" prot="public" static="no">
         <type>IdxRangeXY</type>
@@ -38,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" line="461" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" bodystart="461" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" line="429" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" bodystart="429" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGeometryVxVyXY_1a26265b9d0fea55e4711a916624a9437a" prot="public" static="no">
         <type>IdxRangeVxVy</type>
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" line="466" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" bodystart="466" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" line="434" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" bodystart="434" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGeometryVxVyXY_1a8cf5d3c93cc964d7d7e448bea0df6417" prot="public" static="no">
         <type>IdxRangeSpVxVyXY</type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" line="471" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" bodystart="471" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" line="439" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" bodystart="439" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -76,7 +76,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" line="440" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" bodystart="441" bodyend="472"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" line="408" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" bodystart="409" bodyend="440"/>
     <listofallmembers>
       <member refid="classGeometryVxVyXY_1a8cf5d3c93cc964d7d7e448bea0df6417" prot="public" virt="non-virtual"><scope>GeometryVxVyXY</scope><name>IdxRangeFdistribu</name></member>
       <member refid="classGeometryVxVyXY_1a5c5c41cdaa9ede1bde1448cb9dd843ec" prot="public" virt="non-virtual"><scope>GeometryVxVyXY</scope><name>IdxRangeSpatial</name></member>

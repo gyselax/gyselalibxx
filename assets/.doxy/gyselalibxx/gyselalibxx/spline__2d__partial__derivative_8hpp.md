@@ -33,8 +33,8 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**Spline2DPartialDerivative**](classSpline2DPartialDerivative.md) &lt;class [**SplineBuilder2DCache**](classSplineBuilder2DCache.md), class SplineEvaluator2D, class DerivativeDimension&gt;<br>_A class which implements a partial derivative operator using a 2d spline interpolation._  |
-| class | [**Spline2DPartialDerivativeCreator**](classSpline2DPartialDerivativeCreator.md) &lt;class [**SplineBuilder2DCache**](classSplineBuilder2DCache.md), class SplineEvaluator2D, class DerivativeDimension&gt;<br>_A class which stores information necessary to create a pointer to an instance of the_ [_**Spline2DPartialDerivative**_](classSpline2DPartialDerivative.md) _class._ |
+| class | [**Spline2DPartialDerivative**](classSpline2DPartialDerivative.md) &lt;class SplineBuilder2D, class SplineEvaluator2D, class DerivativeDimension, class IdxRangeBatched&gt;<br>_A class which implements a partial derivative operator using a 2d spline interpolation._  |
+| class | [**Spline2DPartialDerivativeCreator**](classSpline2DPartialDerivativeCreator.md) &lt;class SplineBuilder2D, class SplineEvaluator2D, class DerivativeDimension, class IdxRangeBatched&gt;<br>_A class which stores information necessary to create a pointer to an instance of the_ [_**Spline2DPartialDerivative**_](classSpline2DPartialDerivative.md) _class._ |
 
 
 

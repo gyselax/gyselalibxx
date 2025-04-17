@@ -7,11 +7,14 @@
       <param>
         <type>class SplineBuilder2D</type>
       </param>
+      <param>
+        <type>class IdxRangeBatched</type>
+      </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classSplineBuilder2DCache_1a9579f262f6bc08f9cbebabed3951a633" prot="private" static="no">
+      <memberdef kind="typedef" id="classSplineBuilder2DCache_1aabe08bb29c81409fd29bc143ba6708d3" prot="private" static="no">
         <type>typename SplineBuilder2D::continuous_dimension_type1</type>
-        <definition>using SplineBuilder2DCache&lt; SplineBuilder2D &gt;::Dim1 =  typename SplineBuilder2D::continuous_dimension_type1</definition>
+        <definition>using SplineBuilder2DCache&lt; SplineBuilder2D, IdxRangeBatched &gt;::Dim1 =  typename SplineBuilder2D::continuous_dimension_type1</definition>
         <argsstring></argsstring>
         <name>Dim1</name>
         <qualifiedname>SplineBuilder2DCache::Dim1</qualifiedname>
@@ -23,9 +26,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" line="18" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" bodystart="18" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSplineBuilder2DCache_1a832812ec3c2c25ab4d7e42decd34fe5f" prot="private" static="no">
+      <memberdef kind="typedef" id="classSplineBuilder2DCache_1a075df92d676e3e0aa82904d9b139aa08" prot="private" static="no">
         <type>typename SplineBuilder2D::continuous_dimension_type2</type>
-        <definition>using SplineBuilder2DCache&lt; SplineBuilder2D &gt;::Dim2 =  typename SplineBuilder2D::continuous_dimension_type2</definition>
+        <definition>using SplineBuilder2DCache&lt; SplineBuilder2D, IdxRangeBatched &gt;::Dim2 =  typename SplineBuilder2D::continuous_dimension_type2</definition>
         <argsstring></argsstring>
         <name>Dim2</name>
         <qualifiedname>SplineBuilder2DCache::Dim2</qualifiedname>
@@ -37,9 +40,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" line="19" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" bodystart="19" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSplineBuilder2DCache_1afe04b9f55e6e6b81a26ead132105ed0d" prot="private" static="no">
-        <type>typename SplineBuilder2D::batched_spline_domain_type</type>
-        <definition>using SplineBuilder2DCache&lt; SplineBuilder2D &gt;::IdxRangeBSField =  typename SplineBuilder2D::batched_spline_domain_type</definition>
+      <memberdef kind="typedef" id="classSplineBuilder2DCache_1a0febe8ebc6d4fad21b2cecd56a96406c" prot="private" static="no">
+        <type>typename SplineBuilder2D::batched_spline_domain_type&lt; IdxRangeBatched &gt;</type>
+        <definition>using SplineBuilder2DCache&lt; SplineBuilder2D, IdxRangeBatched &gt;::IdxRangeBSField =  typename SplineBuilder2D::batched_spline_domain_type&lt;IdxRangeBatched&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeBSField</name>
         <qualifiedname>SplineBuilder2DCache::IdxRangeBSField</qualifiedname>
@@ -51,9 +54,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" line="21" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" bodystart="21" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSplineBuilder2DCache_1ad97835dd5a4c4822cf80599260817425" prot="private" static="no">
-        <type>typename SplineBuilder2D::batched_interpolation_domain_type</type>
-        <definition>using SplineBuilder2DCache&lt; SplineBuilder2D &gt;::IdxRangeField =  typename SplineBuilder2D::batched_interpolation_domain_type</definition>
+      <memberdef kind="typedef" id="classSplineBuilder2DCache_1a458ac17e492de5b87be406ef24e5efb8" prot="private" static="no">
+        <type>IdxRangeBatched</type>
+        <definition>using SplineBuilder2DCache&lt; SplineBuilder2D, IdxRangeBatched &gt;::IdxRangeField =  IdxRangeBatched</definition>
         <argsstring></argsstring>
         <name>IdxRangeField</name>
         <qualifiedname>SplineBuilder2DCache::IdxRangeField</qualifiedname>
@@ -65,9 +68,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" line="22" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" bodystart="22" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSplineBuilder2DCache_1ae1e5433699c95f274e18aee51dc00cb9" prot="private" static="no">
+      <memberdef kind="typedef" id="classSplineBuilder2DCache_1ab85eb69de2c718aef3abbcaef0579e6c" prot="private" static="no">
         <type>DFieldMem&lt; IdxRangeBSField &gt;</type>
-        <definition>using SplineBuilder2DCache&lt; SplineBuilder2D &gt;::DFieldSplineCoeffMem =  DFieldMem&lt;IdxRangeBSField&gt;</definition>
+        <definition>using SplineBuilder2DCache&lt; SplineBuilder2D, IdxRangeBatched &gt;::DFieldSplineCoeffMem =  DFieldMem&lt;IdxRangeBSField&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldSplineCoeffMem</name>
         <qualifiedname>SplineBuilder2DCache::DFieldSplineCoeffMem</qualifiedname>
@@ -79,9 +82,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" line="24" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" bodystart="24" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSplineBuilder2DCache_1ab05b94dc40c8a40cd8726246fedc755e" prot="private" static="no">
+      <memberdef kind="typedef" id="classSplineBuilder2DCache_1a4858fda3e7240ca1fbb9e38458c3c078" prot="private" static="no">
         <type>DConstField&lt; IdxRangeBSField &gt;</type>
-        <definition>using SplineBuilder2DCache&lt; SplineBuilder2D &gt;::DConstFieldSplineCoeffs =  DConstField&lt;IdxRangeBSField&gt;</definition>
+        <definition>using SplineBuilder2DCache&lt; SplineBuilder2D, IdxRangeBatched &gt;::DConstFieldSplineCoeffs =  DConstField&lt;IdxRangeBSField&gt;</definition>
         <argsstring></argsstring>
         <name>DConstFieldSplineCoeffs</name>
         <qualifiedname>SplineBuilder2DCache::DConstFieldSplineCoeffs</qualifiedname>
@@ -95,9 +98,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classSplineBuilder2DCache_1a6a12d6d4dc74c51e2a5a803edea6a171" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classSplineBuilder2DCache_1a188f83ab2eb21bdc006fdd009ba2f2fd" prot="private" static="no" mutable="no">
         <type>SplineBuilder2D const  &amp;</type>
-        <definition>SplineBuilder2D const&amp; SplineBuilder2DCache&lt; SplineBuilder2D &gt;::m_spline_builder</definition>
+        <definition>SplineBuilder2D const&amp; SplineBuilder2DCache&lt; SplineBuilder2D, IdxRangeBatched &gt;::m_spline_builder</definition>
         <argsstring></argsstring>
         <name>m_spline_builder</name>
         <qualifiedname>SplineBuilder2DCache::m_spline_builder</qualifiedname>
@@ -109,9 +112,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" line="27" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" bodystart="27" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSplineBuilder2DCache_1a7318cbb3f5c2c5659bb79d2f6446df96" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classSplineBuilder2DCache_1a084be671d8a664cb3d19d9e0ed40c03c" prot="private" static="no" mutable="no">
         <type>DFieldSplineCoeffMem</type>
-        <definition>DFieldSplineCoeffMem SplineBuilder2DCache&lt; SplineBuilder2D &gt;::m_spline_coeffs</definition>
+        <definition>DFieldSplineCoeffMem SplineBuilder2DCache&lt; SplineBuilder2D, IdxRangeBatched &gt;::m_spline_coeffs</definition>
         <argsstring></argsstring>
         <name>m_spline_coeffs</name>
         <qualifiedname>SplineBuilder2DCache::m_spline_coeffs</qualifiedname>
@@ -123,9 +126,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" line="28" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" bodystart="28" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSplineBuilder2DCache_1a44d6ab6c1dce7fc4294605d3cf06cdb7" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classSplineBuilder2DCache_1af74906afaf3d2cb590c0cfd75c0631b5" prot="private" static="no" mutable="no">
         <type>bool</type>
-        <definition>bool SplineBuilder2DCache&lt; SplineBuilder2D &gt;::m_compute_coeffs_dim1</definition>
+        <definition>bool SplineBuilder2DCache&lt; SplineBuilder2D, IdxRangeBatched &gt;::m_compute_coeffs_dim1</definition>
         <argsstring></argsstring>
         <name>m_compute_coeffs_dim1</name>
         <qualifiedname>SplineBuilder2DCache::m_compute_coeffs_dim1</qualifiedname>
@@ -137,9 +140,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" line="29" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" bodystart="29" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSplineBuilder2DCache_1a4803d8fd495d652eaee031c375265e12" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classSplineBuilder2DCache_1a8266760c044dc5a15396c5cc925ece6a" prot="private" static="no" mutable="no">
         <type>bool</type>
-        <definition>bool SplineBuilder2DCache&lt; SplineBuilder2D &gt;::m_compute_coeffs_dim2</definition>
+        <definition>bool SplineBuilder2DCache&lt; SplineBuilder2D, IdxRangeBatched &gt;::m_compute_coeffs_dim2</definition>
         <argsstring></argsstring>
         <name>m_compute_coeffs_dim2</name>
         <qualifiedname>SplineBuilder2DCache::m_compute_coeffs_dim2</qualifiedname>
@@ -153,15 +156,19 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classSplineBuilder2DCache_1ac624ef52fc21b53eff2be4181376d592" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSplineBuilder2DCache_1a4390aca9de183328600e04e86baaddf2" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
-        <definition>SplineBuilder2DCache&lt; SplineBuilder2D &gt;::SplineBuilder2DCache</definition>
-        <argsstring>(SplineBuilder2D const &amp;spline_builder)</argsstring>
+        <definition>SplineBuilder2DCache&lt; SplineBuilder2D, IdxRangeBatched &gt;::SplineBuilder2DCache</definition>
+        <argsstring>(SplineBuilder2D const &amp;spline_builder, IdxRangeBatched idx_range_batched)</argsstring>
         <name>SplineBuilder2DCache</name>
         <qualifiedname>SplineBuilder2DCache::SplineBuilder2DCache</qualifiedname>
         <param>
           <type>SplineBuilder2D const &amp;</type>
           <declname>spline_builder</declname>
+        </param>
+        <param>
+          <type>IdxRangeBatched</type>
+          <declname>idx_range_batched</declname>
         </param>
         <briefdescription>
 <para>Construct an instance of the class <ref refid="classSplineBuilder2DCache" kindref="compound">SplineBuilder2DCache</ref>. </para>
@@ -175,21 +182,29 @@
 <para>A 2D spline builder. </para>
 </parameterdescription>
 </parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range_batched</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range on which this operator operates. </para>
+</parameterdescription>
+</parameteritem>
 </parameterlist>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" line="38" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" bodystart="38" bodyend="44"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" line="39" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" bodystart="39" bodyend="47"/>
       </memberdef>
-      <memberdef kind="function" id="classSplineBuilder2DCache_1a25d9d6d88b77743ad07907a5960db96e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSplineBuilder2DCache_1a78da48710cb31c905f7e96d5cb7d2bce" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class DimOfInterest</type>
           </param>
         </templateparamlist>
         <type>DConstFieldSplineCoeffs</type>
-        <definition>DConstFieldSplineCoeffs SplineBuilder2DCache&lt; SplineBuilder2D &gt;::compute_coeffs</definition>
+        <definition>DConstFieldSplineCoeffs SplineBuilder2DCache&lt; SplineBuilder2D, IdxRangeBatched &gt;::compute_coeffs</definition>
         <argsstring>(DConstField&lt; IdxRangeField &gt; field_values)</argsstring>
         <name>compute_coeffs</name>
         <qualifiedname>SplineBuilder2DCache::compute_coeffs</qualifiedname>
@@ -219,11 +234,11 @@
 <para>To summarise with <ref refid="structX" kindref="compound">X</ref> and <ref refid="structY" kindref="compound">Y</ref> as the two dimensions: ITERATION N compute_coeff&lt;X&gt;(field) --&gt; calls spline_builder compute_coeff&lt;Y&gt;(field) --&gt; does not call spline_builder</para>
 <para>ITERATION N+1 compute_coeff&lt;X&gt;(field_updated) --&gt; calls spline_builder compute_coeff&lt;Y&gt;(field_updated) --&gt; does not call spline_builder</para>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" line="55" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" bodystart="55" bodyend="85"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" line="58" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" bodystart="58" bodyend="88"/>
       </memberdef>
-      <memberdef kind="function" id="classSplineBuilder2DCache_1aa6aedf4cd2de466e64654217dd559b16" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSplineBuilder2DCache_1aa3f0d45c1e346fd20e29efd81a210a08" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>DConstFieldSplineCoeffs</type>
-        <definition>DConstFieldSplineCoeffs SplineBuilder2DCache&lt; SplineBuilder2D &gt;::operator()</definition>
+        <definition>DConstFieldSplineCoeffs SplineBuilder2DCache&lt; SplineBuilder2D, IdxRangeBatched &gt;::operator()</definition>
         <argsstring>() const</argsstring>
         <name>operator()</name>
         <qualifiedname>SplineBuilder2DCache::operator()</qualifiedname>
@@ -237,7 +252,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" line="92" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" bodystart="92" bodyend="95"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" line="95" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" bodystart="95" bodyend="98"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -245,21 +260,21 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" line="15" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" bodystart="16" bodyend="96"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" line="15" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_builder_2d_cache.hpp" bodystart="16" bodyend="99"/>
     <listofallmembers>
-      <member refid="classSplineBuilder2DCache_1a25d9d6d88b77743ad07907a5960db96e" prot="public" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>compute_coeffs</name></member>
-      <member refid="classSplineBuilder2DCache_1ab05b94dc40c8a40cd8726246fedc755e" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>DConstFieldSplineCoeffs</name></member>
-      <member refid="classSplineBuilder2DCache_1ae1e5433699c95f274e18aee51dc00cb9" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>DFieldSplineCoeffMem</name></member>
-      <member refid="classSplineBuilder2DCache_1a9579f262f6bc08f9cbebabed3951a633" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>Dim1</name></member>
-      <member refid="classSplineBuilder2DCache_1a832812ec3c2c25ab4d7e42decd34fe5f" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>Dim2</name></member>
-      <member refid="classSplineBuilder2DCache_1afe04b9f55e6e6b81a26ead132105ed0d" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>IdxRangeBSField</name></member>
-      <member refid="classSplineBuilder2DCache_1ad97835dd5a4c4822cf80599260817425" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>IdxRangeField</name></member>
-      <member refid="classSplineBuilder2DCache_1a44d6ab6c1dce7fc4294605d3cf06cdb7" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>m_compute_coeffs_dim1</name></member>
-      <member refid="classSplineBuilder2DCache_1a4803d8fd495d652eaee031c375265e12" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>m_compute_coeffs_dim2</name></member>
-      <member refid="classSplineBuilder2DCache_1a6a12d6d4dc74c51e2a5a803edea6a171" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>m_spline_builder</name></member>
-      <member refid="classSplineBuilder2DCache_1a7318cbb3f5c2c5659bb79d2f6446df96" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>m_spline_coeffs</name></member>
-      <member refid="classSplineBuilder2DCache_1aa6aedf4cd2de466e64654217dd559b16" prot="public" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>operator()</name></member>
-      <member refid="classSplineBuilder2DCache_1ac624ef52fc21b53eff2be4181376d592" prot="public" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>SplineBuilder2DCache</name></member>
+      <member refid="classSplineBuilder2DCache_1a78da48710cb31c905f7e96d5cb7d2bce" prot="public" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>compute_coeffs</name></member>
+      <member refid="classSplineBuilder2DCache_1a4858fda3e7240ca1fbb9e38458c3c078" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>DConstFieldSplineCoeffs</name></member>
+      <member refid="classSplineBuilder2DCache_1ab85eb69de2c718aef3abbcaef0579e6c" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>DFieldSplineCoeffMem</name></member>
+      <member refid="classSplineBuilder2DCache_1aabe08bb29c81409fd29bc143ba6708d3" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>Dim1</name></member>
+      <member refid="classSplineBuilder2DCache_1a075df92d676e3e0aa82904d9b139aa08" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>Dim2</name></member>
+      <member refid="classSplineBuilder2DCache_1a0febe8ebc6d4fad21b2cecd56a96406c" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>IdxRangeBSField</name></member>
+      <member refid="classSplineBuilder2DCache_1a458ac17e492de5b87be406ef24e5efb8" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>IdxRangeField</name></member>
+      <member refid="classSplineBuilder2DCache_1af74906afaf3d2cb590c0cfd75c0631b5" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>m_compute_coeffs_dim1</name></member>
+      <member refid="classSplineBuilder2DCache_1a8266760c044dc5a15396c5cc925ece6a" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>m_compute_coeffs_dim2</name></member>
+      <member refid="classSplineBuilder2DCache_1a188f83ab2eb21bdc006fdd009ba2f2fd" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>m_spline_builder</name></member>
+      <member refid="classSplineBuilder2DCache_1a084be671d8a664cb3d19d9e0ed40c03c" prot="private" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>m_spline_coeffs</name></member>
+      <member refid="classSplineBuilder2DCache_1aa3f0d45c1e346fd20e29efd81a210a08" prot="public" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>operator()</name></member>
+      <member refid="classSplineBuilder2DCache_1a4390aca9de183328600e04e86baaddf2" prot="public" virt="non-virtual"><scope>SplineBuilder2DCache</scope><name>SplineBuilder2DCache</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

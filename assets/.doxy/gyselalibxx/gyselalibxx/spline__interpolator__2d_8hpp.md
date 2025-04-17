@@ -32,8 +32,8 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**PreallocatableSplineInterpolator2D**](classPreallocatableSplineInterpolator2D.md) &lt;class Spline2DBuilder, class Spline2DEvaluator&gt;<br>_A class which stores information necessary to create a pointer to an instance of the_ [_**SplineInterpolator2D**_](classSplineInterpolator2D.md) _class._ |
-| class | [**SplineInterpolator2D**](classSplineInterpolator2D.md) &lt;class Spline2DBuilder, class Spline2DEvaluator&gt;<br>_A class for interpolating a function using splines in polar coordinates._  |
+| class | [**PreallocatableSplineInterpolator2D**](classPreallocatableSplineInterpolator2D.md) &lt;class Spline2DBuilder, class Spline2DEvaluator, class IdxRangeBatched&gt;<br>_A class which stores information necessary to create a pointer to an instance of the_ [_**SplineInterpolator2D**_](classSplineInterpolator2D.md) _class._ |
+| class | [**SplineInterpolator2D**](classSplineInterpolator2D.md) &lt;class Spline2DBuilder, class Spline2DEvaluator, class IdxRangeBatched&gt;<br>_A class for interpolating a function using a 2D tensor product of splines._  |
 
 
 

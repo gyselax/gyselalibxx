@@ -35,17 +35,17 @@ class SplineInterpolator : public IInterpolator<GridInterp, Grid1D...>
             GridInterp,
             BcMin,
             BcMax,
-            Solver,
-            Grid1D...>;
+            Solver>;
     using EvaluatorType = ddc::SplineEvaluator<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
             BSplines,
             GridInterp,
             LeftExtrapolationRule,
-            RightExtrapolationRule,
-            Grid1D...>;
+            RightExtrapolationRule>;
     using deriv_type = typename IInterpolator<GridInterp, Grid1D...>::deriv_type;
+    using batched_spline_domain_type =
+            typename BuilderType::batched_spline_domain_type<IdxRange<Grid1D...>>;
     using batched_derivs_idx_range_type =
             typename IInterpolator<GridInterp, Grid1D...>::batched_derivs_idx_range_type;
     using batched_deriv_field_type = ConstField<double, batched_derivs_idx_range_type>;
@@ -55,14 +55,17 @@ private:
 
     EvaluatorType const& m_evaluator;
 
-    mutable DFieldMem<typename BuilderType::batched_spline_domain_type> m_coefs;
+    mutable DFieldMem<batched_spline_domain_type> m_coefs;
 
 
 public:
-    SplineInterpolator(BuilderType const& builder, EvaluatorType const& evaluator)
+    SplineInterpolator(
+            BuilderType const& builder,
+            EvaluatorType const& evaluator,
+            IdxRange<Grid1D...> idx_range_batched)
         : m_builder(builder)
         , m_evaluator(evaluator)
-        , m_coefs(builder.batched_spline_domain())
+        , m_coefs(builder.batched_spline_domain(idx_range_batched))
     {
     }
 
@@ -120,25 +123,29 @@ class PreallocatableSplineInterpolator : public IPreallocatableInterpolator<Grid
             GridInterp,
             BcMin,
             BcMax,
-            Solver,
-            Grid1D...>;
+            Solver>;
     using EvaluatorType = ddc::SplineEvaluator<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
             BSplines,
             GridInterp,
             LeftExtrapolationRule,
-            RightExtrapolationRule,
-            Grid1D...>;
+            RightExtrapolationRule>;
 
     BuilderType const& m_builder;
 
     EvaluatorType const& m_evaluator;
 
+    IdxRange<Grid1D...> m_idx_range_batched;
+
 public:
-    PreallocatableSplineInterpolator(BuilderType const& builder, EvaluatorType const& evaluator)
+    PreallocatableSplineInterpolator(
+            BuilderType const& builder,
+            EvaluatorType const& evaluator,
+            IdxRange<Grid1D...> idx_range_batched)
         : m_builder(builder)
         , m_evaluator(evaluator)
+        , m_idx_range_batched(idx_range_batched)
     {
     }
 
@@ -154,7 +161,7 @@ public:
                 LeftExtrapolationRule,
                 RightExtrapolationRule,
                 Solver,
-                Grid1D...>>(m_builder, m_evaluator);
+                Grid1D...>>(m_builder, m_evaluator, m_idx_range_batched);
     }
 };
 ```
