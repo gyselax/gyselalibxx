@@ -184,7 +184,7 @@ public:
 
 
 /*
-    The global index range is split into two 2D patches on (X1, Y1) and (X2, Y2).
+    The global domain is split into two 2D patches on (X1, Y1) and (X2, Y2).
  */
 TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2D)
 {

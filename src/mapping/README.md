@@ -23,7 +23,7 @@ The current coordinate transformations implemented are:
 J (r,\theta) = 
 \begin{bmatrix} 
  \cos(\theta) & -r\sin(\theta) \\
- \sin(\theta) &  r\cos(\theta) \\
+ \sin(\theta) &  r\cos(\theta)
 \end{bmatrix}.
 ```
 
@@ -124,6 +124,67 @@ with $\det(J) = \frac{-r}{\sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}}\
  & y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta) .
 \end{aligned}
 \right.
+```
+
+## 3D coordinate transformations
+
+### Cylindrical to Cartesian transformation
+
+- Mapping (CylindricalToCartesian):
+
+```math
+\left\{
+\begin{aligned}
+ & x(R,Z,\zeta) = R \cos(\zeta), \\
+ & y(R,Z,\zeta) = R \sin(\zeta), \\
+ & z(R,Z,\zeta) = Z
+\end{aligned}
+\right.
+```
+
+```math
+J (R, Z, \zeta) = 
+\begin{bmatrix} 
+ \cos(\zeta) & 0 & -R\sin(\zeta) \\
+ \sin(\zeta) & 0 &  R\cos(\zeta)
+  0          & 1 &       0 \\
+\end{bmatrix}.
+```
+
+with $\det(J) = -R$.
+
+- Inverse mapping (CartesianToCylindrical):
+
+```math
+\left\{
+\begin{aligned}
+ & R(x,y,z) = \sqrt{x^2 + y^2}, \\
+ & \zeta(x,y,z) = \text{atan2}(y, x), \\
+ & Z(x,y,z) = z.
+\end{aligned}
+\right.
+```
+
+### Toroidal to Cylindrical transformation
+
+The toroidal to cylindrical transformation combines a 2D transformation in the polar plane of the torus with an orthogonal transformation in the remaining dimension.
+
+```math
+\begin{aligned}
+(\rho, \theta) = f(R, Z) \\
+\phi = - \zeta
+\end{aligned}
+```
+
+where $f$ is a 2D curvilinear to cartesian transformation.
+
+```math
+J (R, Z, \zeta) =
+\begin{bmatrix}
+ J_f\.^{\rho}_{\;R} & J_f\.^{\rho}_{\;Z} & 0 \\
+ J_f\.^{\theta}_{\;R} & 0 & J_f\.^{\theta}_{\;Z} & 0
+  0          & 0 &       -1 \\
+\end{bmatrix}.
 ```
 
 ## Combined coordinate transformation which combines two of the coordinate transformations above

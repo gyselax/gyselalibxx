@@ -11,17 +11,19 @@ runs:
         MATCHING_PATHS='["src/**/*.hpp", "src/**/*.cpp", "tests/**/*.hpp", "tests/**/*.cpp", "simulations/**/*.hpp", "simulations/**/*.cpp", "**/CMakeLists.txt", "vendor/**", ".github/actions/**", ".github/workflows/**", "toolchains/docker.gyselalibxx_env/**", "toolchains/v100.persee/**"]'
         echo "MATCHING_PATHS=${MATCHING_PATHS}" >> ${GITHUB_ENV}
       shell: bash
-    - id: pr_check
-      if: github.event_name == 'pull_request'
+    - if: github.event_name == 'pull_request'
       run: |
         gh pr diff ${{ github.event.pull_request.number }} --name-only > changed_files.txt
       shell: bash
       env:
         GH_TOKEN: ${{ github.token }}
-    - id: merge_group_check
-      if: github.event_name == 'merge_group'
+    - if: github.event_name == 'merge_group'
       run: |
         git diff --name-only origin/devel > changed_files.txt
+      shell: bash
+    - if: github.event_name == 'push'
+      run: |
+        git ls-tree --full-tree -r --name-only HEAD > changed_files.txt
       shell: bash
     - id: changes_check
       run: |

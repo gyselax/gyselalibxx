@@ -10,6 +10,8 @@ on:
   merge_group:
     types:
       - checks_requested
+  push:
+    branches: [main, devel]
   workflow_dispatch:
     inputs:
       toolchain:
@@ -20,6 +22,7 @@ on:
           - tests_toolchain
           - tests_release_toolchain
           - tests_release_omp_toolchain
+          - tests_coverage_toolchain
       merge_target:
         description: "The branch to which this branch should be compared to filter out costly tests (default: devel)"
         required: false
@@ -43,9 +46,13 @@ jobs:
       - uses: actions/checkout@v4
       - id: skip_check
         uses: ./.github/actions/duplicate_check
-      - if: github.event_name != 'workflow_dispatch'
+      - if: github.event_name != 'workflow_dispatch' && github.event_name != 'push'
         run: |
-          echo "matrix=['tests_toolchain', 'tests_release_toolchain', 'tests_release_omp_toolchain']" >> $GITHUB_ENV
+          echo "matrix=['tests_toolchain', 'tests_release_toolchain', 'tests_release_omp_toolchain', 'tests_coverage_toolchain']" >> $GITHUB_ENV
+        shell: bash
+      - if: github.event_name == 'push'
+        run: |
+          echo "matrix=['tests_coverage_toolchain']" >> $GITHUB_ENV
         shell: bash
       - if: github.event_name == 'workflow_dispatch'
         run: |
@@ -87,6 +94,40 @@ jobs:
       - name: Run tests
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/run_tests
+      - name: Check Test Coverage
+        if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'tests_coverage_toolchain'
+        run: |
+          pip install gcovr
+          gcovr --filter src --lcov coverage.lcov --merge-mode-functions=merge-use-line-0 build
+          # Remove branch information (causes more problems than it fixes)
+          sed '/^BRDA:/d' -i coverage.lcov
+          sed '/^BRH:/d' -i coverage.lcov
+          sed '/^BRF:/d' -i coverage.lcov
+      - name: Archive code coverage results
+        if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'tests_coverage_toolchain'
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage-report
+          path: coverage.lcov
+
+  upload_coverage:
+    name: Coverage upload
+    needs: [pre_job, cpu_tests]
+    runs-on: ubuntu-latest
+    if: (github.event_name != 'workflow_dispatch' || inputs.toolchain == 'tests_coverage_toolchain') && needs.pre_job.outputs.should_skip == 'false'
+    steps:
+      - name: Checkout gyselalibxx
+        uses: actions/checkout@v4
+      - name: Download a single artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: code-coverage-report
+      - name: Upload coverage reports to Codecov with GitHub Action
+        uses: codecov/codecov-action@v5
+        with:
+          files: coverage.lcov
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
 
   set_pr_status:
     runs-on: ubuntu-latest

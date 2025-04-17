@@ -80,6 +80,7 @@ jobs:
 
   pass_duplicate_gpu_tests:
     runs-on: ubuntu-latest
+    needs: [pre_job]
     if: ${{ needs.pre_job.outputs.should_skip == 'true' }}
     steps:
       - name: "Get bot token"

@@ -4,6 +4,7 @@
 #include <gtest/gtest.h>
 
 #include "circular_to_cartesian.hpp"
+#include "cylindrical_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
@@ -16,6 +17,11 @@
 
 
 class InverseMetricTensor : public testing::TestWithParam<std::tuple<std::size_t, std::size_t>>
+{
+};
+
+class InverseMetricTensor3D
+    : public testing::TestWithParam<std::tuple<std::size_t, std::size_t, std::size_t>>
 {
 };
 
@@ -57,9 +63,33 @@ TEST_P(InverseMetricTensor, InverseMatrixCzarMap)
     });
 }
 
+TEST_P(InverseMetricTensor3D, InverseMatrixCylindricalMap)
+{
+    auto const [Nr, Nz, Nzeta] = GetParam();
+    using Mapping = CylindricalToCartesian<R, Z, Zeta, X, Y>;
+    Mapping mapping;
+
+    FieldMemRZZeta_host<Coord<R, Z, Zeta>> coords
+            = get_example_coords(IdxStepR(Nr), IdxStepZ(Nz), IdxStepZeta(Nzeta));
+    IdxRangeRZZeta grid = get_idx_range(coords);
+
+    MetricTensorEvaluator<Mapping, Coord<R, Z, Zeta>> metric_tensor(mapping);
+    // Test for each coordinates if the inverse_metric_tensor is the inverse of the metric_tensor
+    ddc::for_each(grid, [&](IdxRZZeta const idx) {
+        check_inverse_tensor(metric_tensor(coords(idx)), metric_tensor.inverse(coords(idx)), 1e-10);
+    });
+}
 
 
 INSTANTIATE_TEST_SUITE_P(
         MyGroup,
         InverseMetricTensor,
         testing::Combine(testing::Values<std::size_t>(64), testing::Values<std::size_t>(64)));
+
+INSTANTIATE_TEST_SUITE_P(
+        MyGroup,
+        InverseMetricTensor3D,
+        testing::Combine(
+                testing::Values<std::size_t>(16),
+                testing::Values<std::size_t>(16),
+                testing::Values<std::size_t>(8)));
