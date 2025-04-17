@@ -44,10 +44,13 @@ runs:
           fi
         fi
         # If the PR has been modified then cancel any runs associated with this SHA
-        RUNNING_WORKFLOWS=$(gh run list --commit ${{ inputs.sha }} --json databaseId,status --jq '.[] | select(.status == "completed") | .["databaseId"]')
+        RUNNING_WORKFLOWS=$(gh run list --commit ${{ inputs.sha }} --json databaseId,status --jq '.[] | select(.status != "completed") | .["databaseId"]')
         for workflow_id in ${RUNNING_WORKFLOWS}
         do
-          gh run cancel ${workflow_id}
+          if [[ "${workflow_id}" != "${GITHUB_RUN_ID}" ]]
+          then
+            gh run cancel ${workflow_id} || true
+          fi
         done
       shell: bash
       env:
