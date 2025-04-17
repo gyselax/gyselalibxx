@@ -201,7 +201,7 @@
     </briefdescription>
     <detaileddescription>
 <para>The inter-species collision operator accounts for momentum and energy transfer between the maxwellian parts of the distribution function of different species. It is solved using a explicit time integrator (<ref refid="classRK2" kindref="compound">RK2</ref> for instance).</para>
-<para>The complete description of the operator can be found in <ulink url="https://github.com/gyselax/gyselalibxx/blob/main/doc/geometryXVx/collisions_intra_inter.pdf">rhs docs</ulink>. </para>
+<para>The complete description of the operator can be found in <ulink url="https://github.com/gyselax/gyselalibxx/blob/devel/doc/geometryXVx/collisions_intra_inter.pdf">rhs docs</ulink>. </para>
     </detaileddescription>
     <inheritancegraph>
       <node id="1">

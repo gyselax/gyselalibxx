@@ -420,7 +420,7 @@
  so that the operator conserves locally the charge.</para>
 </listitem></itemizedlist>
 </para>
-<para>The complete description of the operator can be found in <ulink url="https://github.com/gyselax/gyselalibxx/blob/main/doc/geometryXVx/krook_source.pdf">rhs docs</ulink>. </para>
+<para>The complete description of the operator can be found in <ulink url="https://github.com/gyselax/gyselalibxx/blob/devel/doc/geometryXVx/krook_source.pdf">rhs docs</ulink>. </para>
     </detaileddescription>
     <inheritancegraph>
       <node id="2">

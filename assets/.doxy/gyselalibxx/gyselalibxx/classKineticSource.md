@@ -152,7 +152,7 @@ spatial\_extent defines the location where the source is active. spatial\_extent
 velocity\_shape defines the velocity profile of the source in the parallel velocity direction. It is the sum of a source that injects only density, and a source that injects only energy. If the density and energy parameters are equal to one (usual case), the resulting velocity\_shape is maxwellian.
 
 
-The complete description of the operator can be found in [rhs docs](https://github.com/gyselax/gyselalibxx/blob/main/doc/geometryXVx/kinetic_source.pdf). 
+The complete description of the operator can be found in [rhs docs](https://github.com/gyselax/gyselalibxx/blob/devel/doc/geometryXVx/kinetic_source.pdf). 
 
 
     

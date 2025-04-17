@@ -164,7 +164,7 @@ amplitude depends on space, time and the considered species so that:
 
 
 
-The complete description of the operator can be found in [rhs docs](https://github.com/gyselax/gyselalibxx/blob/main/doc/geometryXVx/krook_source.pdf). 
+The complete description of the operator can be found in [rhs docs](https://github.com/gyselax/gyselalibxx/blob/devel/doc/geometryXVx/krook_source.pdf). 
 
 
     
