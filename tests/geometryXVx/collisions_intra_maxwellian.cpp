@@ -131,8 +131,8 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     });
 
     //collfreq
-    DFieldMemSpX collfreq_f(get_idx_range<Species, GridX>(allfdistribu_host));
-    auto collfreq = get_field(collfreq_f);
+    DFieldMemSpX collfreq_alloc(get_idx_range<Species, GridX>(allfdistribu_host));
+    DFieldSpX collfreq = get_field(collfreq_alloc);
 
     DFieldMemSpX density_init(get_idx_range<Species, GridX>(allfdistribu_host));
     ddc::parallel_deepcopy(density_init, density_init_host);
@@ -164,18 +164,18 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     });
 
     // diffusion coefficient
-    FieldMem<double, IdxRange<Species, GridX, CollisionsIntra::GhostedVx>> Dcoll_f(
+    DFieldMem<IdxRange<Species, GridX, CollisionsIntra::GhostedVx>> Dcoll_alloc(
             collisions.get_mesh_ghosted());
-    auto Dcoll = get_field(Dcoll_f);
+    DField<IdxRange<Species, GridX, CollisionsIntra::GhostedVx>> Dcoll = get_field(Dcoll_alloc);
     compute_Dcoll<CollisionsIntra::GhostedVx>(
             Dcoll,
             get_const_field(collfreq),
             get_const_field(density_init),
             get_const_field(temperature_init));
 
-    FieldMem<double, IdxRange<Species, GridX, CollisionsIntra::GhostedVx>> dvDcoll_f(
+    DFieldMem<IdxRange<Species, GridX, CollisionsIntra::GhostedVx>> dvDcoll_alloc(
             collisions.get_mesh_ghosted());
-    auto dvDcoll = get_field(dvDcoll_f);
+    DField<IdxRange<Species, GridX, CollisionsIntra::GhostedVx>> dvDcoll = get_field(dvDcoll_alloc);
     compute_dvDcoll<CollisionsIntra::GhostedVx>(
             dvDcoll,
             get_const_field(collfreq),
@@ -183,10 +183,10 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
             get_const_field(temperature_init));
 
     // kernel maxwellian fluid moments
-    DFieldMemSpX Vcoll_f(get_idx_range<Species, GridX>(allfdistribu_host));
-    DFieldMemSpX Tcoll_f(get_idx_range<Species, GridX>(allfdistribu_host));
-    auto Vcoll = get_field(Vcoll_f);
-    auto Tcoll = get_field(Tcoll_f);
+    DFieldMemSpX Vcoll_alloc(get_idx_range<Species, GridX>(allfdistribu_host));
+    DFieldMemSpX Tcoll_alloc(get_idx_range<Species, GridX>(allfdistribu_host));
+    DFieldSpX Vcoll = get_field(Vcoll_alloc);
+    DFieldSpX Tcoll = get_field(Tcoll_alloc);
     compute_Vcoll_Tcoll<CollisionsIntra::GhostedVx>(
             Vcoll,
             get_field(Tcoll),
