@@ -53,6 +53,9 @@ pdiplugin-trace%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
 pdiplugin-mpi%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
 ginkgo%gcc@13.2.1.mi250+openmp+rocm~shared amdgpu_target=gfx90a arch=linux-rhel8-zen3
 eigen%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
+py-matplotlib arch=linux-rhel8-zen3
+py-xarray arch=linux-rhel8-zen3
+py-h5py arch=linux-rhel8-zen3
 "
 # openblas@0.3.26%gcc@12.1.generic~bignuma~consistent_fpcsr+dynamic_dispatch+fortran~ilp64+locking+pic+shared build_system=makefile symbol_suffix=none threads=none arch=linux-rhel8-zen3
 

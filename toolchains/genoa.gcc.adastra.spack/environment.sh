@@ -25,6 +25,9 @@ module load \
     gcc/13.2.1.genoa/zen4/pdiplugin-trace \
     gcc/13.2.1.genoa/zen4/ginkgo \
     gcc/13.2.1.genoa/zen4/eigen \
-    gcc/13.2.1.genoa/zen4/ninja
+    gcc/13.2.1.genoa/zen4/ninja \
+    gcc/13.2.1.genoa/zen4/py-matplotlib \
+    gcc/13.2.1.genoa/zen4/py-xarray \
+    gcc/13.2.1.genoa/zen4/py-h5py
 
 module list

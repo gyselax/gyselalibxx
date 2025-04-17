@@ -53,6 +53,9 @@ pdiplugin-trace%gcc@13.2.1.genoa arch=linux-rhel8-zen4
 pdiplugin-mpi%gcc@13.2.1.genoa arch=linux-rhel8-zen4
 ginkgo%gcc@13.2.1.genoa+openmp~shared arch=linux-rhel8-zen4
 eigen%gcc@13.2.1.genoa arch=linux-rhel8-zen4
+py-matplotlib arch=linux-rhel8-zen4
+py-xarray arch=linux-rhel8-zen4
+py-h5py arch=linux-rhel8-zen4
 "
 # openblas@0.3.26%gcc@12.1.generic~bignuma~consistent_fpcsr+dynamic_dispatch+fortran~ilp64+locking+pic+shared build_system=makefile symbol_suffix=none threads=none arch=linux-rhel8-zen3
 
