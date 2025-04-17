@@ -36,49 +36,24 @@ using SplineInterpPointsY2
         = ddc::GrevilleInterpolationPoints<BSplinesY<2>, SplineY2Boundary, SplineY2Boundary>;
 
 // Operators
-using SplineX1Builder_1d = ddc::SplineBuilder<
+using SplineX1Builder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX<1>,
         GridX<1>,
         SplineX1Boundary,
         SplineX1Boundary,
-        ddc::SplineSolver::LAPACK,
-        GridX<1>>;
+        ddc::SplineSolver::LAPACK>;
 
-using SplineX2Builder_1d = ddc::SplineBuilder<
+using SplineX2Builder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX<2>,
         GridX<2>,
         SplineX2Boundary,
         SplineX2Boundary,
-        ddc::SplineSolver::LAPACK,
-        GridX<2>>;
+        ddc::SplineSolver::LAPACK>;
 
-
-
-using SplineX1Builder_2d = ddc::SplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX<1>,
-        GridX<1>,
-        SplineX1Boundary,
-        SplineX1Boundary,
-        ddc::SplineSolver::LAPACK,
-        GridX<1>,
-        GridY<1>>;
-
-using SplineX2Builder_2d = ddc::SplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX<2>,
-        GridX<2>,
-        SplineX2Boundary,
-        SplineX2Boundary,
-        ddc::SplineSolver::LAPACK,
-        GridX<2>,
-        GridY<2>>;
 
 using MultipatchSplineBuilderX_1d = MultipatchSplineBuilder<
         Kokkos::DefaultExecutionSpace,
@@ -93,6 +68,7 @@ using MultipatchSplineBuilderX_1d = MultipatchSplineBuilder<
         DConstField1OnPatch,
         Patch1,
         Patch2>;
+
 
 using MultipatchSplineBuilderX_2d = MultipatchSplineBuilder<
         Kokkos::DefaultExecutionSpace,
@@ -255,8 +231,8 @@ public:
 TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
 {
     // List of spline builders
-    SplineX1Builder_1d builder_x1(idx_range_x1);
-    SplineX2Builder_1d builder_x2(idx_range_x2);
+    SplineX1Builder builder_x1(idx_range_x1);
+    SplineX2Builder builder_x2(idx_range_x2);
 
     // Collection of builders for each patch
     MultipatchSplineBuilderX_1d builder(builder_x1, builder_x2);
@@ -327,8 +303,8 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
 
 
     // List of spline builders
-    SplineX1Builder_2d builder_x1(idx_range_xy1);
-    SplineX2Builder_2d builder_x2(idx_range_xy2);
+    SplineX1Builder builder_x1(idx_range_x1);
+    SplineX2Builder builder_x2(idx_range_x2);
 
     // Collection of builders for each patch
     MultipatchSplineBuilderX_2d builder(builder_x1, builder_x2);
@@ -354,21 +330,21 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
     // Spline representations
     // --- patch 1
     DFieldMem<IdxRange<BSplinesX<1>, GridY<1>>> function_1_coef_alloc(
-            builder_x1.batched_spline_domain());
+            builder_x1.batched_spline_domain(idx_range_xy1));
     DField<IdxRange<BSplinesX<1>, GridY<1>>> function_1_coef = get_field(function_1_coef_alloc);
 
     DFieldMem<IdxRange<BSplinesX<1>, GridY<1>>> function_1_coef_expected_alloc(
-            builder_x1.batched_spline_domain());
+            builder_x1.batched_spline_domain(idx_range_xy1));
     DField<IdxRange<BSplinesX<1>, GridY<1>>> function_1_coef_expected
             = get_field(function_1_coef_expected_alloc);
 
     // --- patch 2
     DFieldMem<IdxRange<BSplinesX<2>, GridY<2>>> function_2_coef_alloc(
-            builder_x2.batched_spline_domain());
+            builder_x2.batched_spline_domain(idx_range_xy2));
     DField<IdxRange<BSplinesX<2>, GridY<2>>> function_2_coef = get_field(function_2_coef_alloc);
 
     DFieldMem<IdxRange<BSplinesX<2>, GridY<2>>> function_2_coef_expected_alloc(
-            builder_x2.batched_spline_domain());
+            builder_x2.batched_spline_domain(idx_range_xy2));
     DField<IdxRange<BSplinesX<2>, GridY<2>>> function_2_coef_expected
             = get_field(function_2_coef_expected_alloc);
 

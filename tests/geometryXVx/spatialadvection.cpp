@@ -96,11 +96,12 @@ TEST(SpatialAdvection, SplineBatched)
 {
     auto [idx_range_x, idx_range_vx] = Init_idx_range_spatial_adv();
     IdxRangeXVx meshXVx(idx_range_x, idx_range_vx);
-    SplineXBuilder const builder_x(meshXVx);
+    SplineXBuilder const builder_x(idx_range_x);
     ddc::PeriodicExtrapolationRule<X> bv_x_min;
     ddc::PeriodicExtrapolationRule<X> bv_x_max;
     SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
-    PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
+    PreallocatableSplineInterpolator const
+            spline_x_interpolator(builder_x, spline_x_evaluator, meshXVx);
     BslAdvectionSpatial<GeometryXVx, GridX> const spline_advection_x(spline_x_interpolator);
     double const err
             = SpatialAdvection<GeometryXVx, GridX>(spline_advection_x, idx_range_x, idx_range_vx);

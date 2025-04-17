@@ -261,9 +261,7 @@ public:
             GridDDim,
             SplineBoundary,
             SplineBoundary,
-            ddc::SplineSolver::LAPACK,
-            GridX,
-            GridY>;
+            ddc::SplineSolver::LAPACK>;
 
     using SplineDDimEvaluator = ddc::SplineEvaluator<
             Kokkos::DefaultExecutionSpace,
@@ -271,9 +269,7 @@ public:
             BSplinesDDim,
             GridDDim,
             ddc::ConstantExtrapolationRule<DDim>,
-            ddc::ConstantExtrapolationRule<DDim>,
-            GridX,
-            GridY>;
+            ddc::ConstantExtrapolationRule<DDim>>;
 
 public:
     PartialDerivativeTestSpline1D(
@@ -322,7 +318,7 @@ public:
         SplineDDimBuilder const spline_builder(idxrange);
         SplineDDimEvaluator const spline_evaluator(bv_min, bv_max);
 
-        Spline1DPartialDerivativeCreator<SplineDDimBuilder, SplineDDimEvaluator> const
+        Spline1DPartialDerivativeCreator<SplineDDimBuilder, SplineDDimEvaluator, IdxRangeXY> const
                 derivative_creator(spline_builder, spline_evaluator);
 
         FunctionToDifferentiateCosine function_to_differentiate;
@@ -381,9 +377,7 @@ public:
             SplineBoundary,
             SplineBoundary,
             SplineBoundary,
-            ddc::SplineSolver::LAPACK,
-            GridX,
-            GridY>;
+            ddc::SplineSolver::LAPACK>;
 
     using SplineEvaluator2D = ddc::SplineEvaluator2D<
             Kokkos::DefaultExecutionSpace,
@@ -395,9 +389,7 @@ public:
             ddc::ConstantExtrapolationRule<X, Y>,
             ddc::ConstantExtrapolationRule<X, Y>,
             ddc::ConstantExtrapolationRule<Y, X>,
-            ddc::ConstantExtrapolationRule<Y, X>,
-            GridX,
-            GridY>;
+            ddc::ConstantExtrapolationRule<Y, X>>;
 
     ddc::ConstantExtrapolationRule<X, Y> const m_bv_xmin;
     ddc::ConstantExtrapolationRule<X, Y> const m_bv_xmax;
@@ -442,13 +434,11 @@ public:
         IdxRangeXY const idxrange = IdxRangeXY(idxrange_x, idxrange_y);
 
         SplineBuilder2D builder(idxrange);
-        SplineBuilder2DCache<SplineBuilder2D> builder_cache(builder);
+        SplineBuilder2DCache<SplineBuilder2D, IdxRangeXY> builder_cache(builder, idxrange);
         SplineEvaluator2D evaluator(m_bv_xmin, m_bv_xmax, m_bv_ymin, m_bv_ymax);
 
-        Spline2DPartialDerivativeCreator<
-                SplineBuilder2DCache<SplineBuilder2D>,
-                SplineEvaluator2D,
-                DDim> const derivative_creator(builder_cache, evaluator);
+        Spline2DPartialDerivativeCreator<SplineBuilder2D, SplineEvaluator2D, DDim, IdxRangeXY> const
+                derivative_creator(builder_cache, evaluator);
 
         FunctionToDifferentiateCosine function_to_differentiate;
         double const max_error = base_type::

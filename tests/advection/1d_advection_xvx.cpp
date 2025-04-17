@@ -107,18 +107,14 @@ using SplineXBuilder = ddc::SplineBuilder<
         GridX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridX,
-        GridVx>;
+        ddc::SplineSolver::LAPACK>;
 using SplineXEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
         ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>,
-        GridX,
-        GridVx>;
+        ddc::PeriodicExtrapolationRule<X>>;
 
 
 class XVxAdvection1DTest : public ::testing::Test
@@ -225,13 +221,14 @@ public:
 TEST_F(XVxAdvection1DTest, AdvectionXVx)
 {
     // CREATING OPERATORS ------------------------------------------------------------------------
-    SplineXBuilder const builder_x(idx_range_xvx);
+    SplineXBuilder const builder_x(idx_range_x);
 
     ddc::PeriodicExtrapolationRule<X> bv_x_min;
     ddc::PeriodicExtrapolationRule<X> bv_x_max;
     SplineXEvaluator const spline_evaluator_x(bv_x_min, bv_x_max);
 
-    PreallocatableSplineInterpolator const spline_interpolator_x(builder_x, spline_evaluator_x);
+    PreallocatableSplineInterpolator const
+            spline_interpolator_x(builder_x, spline_evaluator_x, idx_range_xvx);
 
     RK2<FieldMemXVx<CoordX>, DFieldMemXVx> time_stepper(idx_range_xvx);
     BslAdvection1D<

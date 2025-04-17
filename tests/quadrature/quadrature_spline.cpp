@@ -54,8 +54,7 @@ TEST(SplineUniformQuadrature, ExactForConstantFunc)
             GridX,
             SplineXBoundary,
             SplineXBoundary,
-            ddc::SplineSolver::LAPACK,
-            GridX>;
+            ddc::SplineSolver::LAPACK>;
 
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
@@ -110,8 +109,7 @@ double compute_error(int n_elems)
             GridY,
             SplineYBoundary,
             SplineYBoundary,
-            ddc::SplineSolver::LAPACK,
-            GridY>;
+            ddc::SplineSolver::LAPACK>;
     using IdxRangeY = IdxRange<GridY>;
     using DFieldMemY = DFieldMem<IdxRangeY>;
     using DFieldY = DField<IdxRangeY>;

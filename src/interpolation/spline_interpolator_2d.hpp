@@ -5,19 +5,22 @@
 #include "i_interpolator_2d.hpp"
 
 /**
- * @brief A class for interpolating a function using splines in polar coordinates.
+ * @brief A class for interpolating a function using a 2D tensor product of splines.
  *
- * @tparam RadialExtrapolationRule The extrapolation rule applied at the outer radial bound.
+ * The class is parametrised by multiple template parameters. Please note that CTAD will deduce all these
+ * template parameters from the Builder and Evaluator passed as constructor arguments.
+ *
+ * @tparam Spline2DBuilder The type of the 2D spline builder.
+ * @tparam Spline2DEvaluator The type of the 2D spline evaluator.
+ * @tparam IdxRangeBatched The type af the index range over which this operator will operate. This is
+ *              necessary to define the internal spline representation.
  */
-template <class Spline2DBuilder, class Spline2DEvaluator>
+template <class Spline2DBuilder, class Spline2DEvaluator, class IdxRangeBatched>
 class SplineInterpolator2D
-    : public IInterpolator2D<
-              typename Spline2DBuilder::interpolation_domain_type,
-              typename Spline2DBuilder::batched_interpolation_domain_type>
+    : public IInterpolator2D<typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched>
 {
-    using base_type = IInterpolator2D<
-            typename Spline2DBuilder::interpolation_domain_type,
-            typename Spline2DBuilder::batched_interpolation_domain_type>;
+    using base_type
+            = IInterpolator2D<typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched>;
 
 public:
     using typename base_type::CConstFieldType;
@@ -29,24 +32,32 @@ private:
 
     Spline2DEvaluator const& m_evaluator;
 
-    using IdxRangeBSRTheta = typename Spline2DBuilder::batched_spline_domain_type;
+    using IdxRangeBSRTheta = typename Spline2DBuilder::batched_spline_domain_type<IdxRangeBatched>;
 
     mutable DFieldMem<IdxRangeBSRTheta> m_coefs;
 
-    using r_deriv_type = DConstField<typename Spline2DBuilder::batched_derivs_domain_type1>;
-    using theta_deriv_type = DConstField<typename Spline2DBuilder::batched_derivs_domain_type2>;
-    using mixed_deriv_type = DConstField<typename Spline2DBuilder::batched_derivs_domain_type>;
+    using r_deriv_type
+            = DConstField<typename Spline2DBuilder::batched_derivs_domain_type1<IdxRangeBatched>>;
+    using theta_deriv_type
+            = DConstField<typename Spline2DBuilder::batched_derivs_domain_type2<IdxRangeBatched>>;
+    using mixed_deriv_type
+            = DConstField<typename Spline2DBuilder::batched_derivs_domain_type<IdxRangeBatched>>;
 
 public:
     /**
      * @brief Create a spline interpolator object.
-     * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
+     * @param[in] builder An operator which builds spline coefficients from the values of a function at known
+     *                  interpolation points.
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
+     * @param[in] idx_range_batched The index range on which this operator operates.
      */
-    SplineInterpolator2D(Spline2DBuilder const& builder, Spline2DEvaluator const& evaluator)
+    SplineInterpolator2D(
+            Spline2DBuilder const& builder,
+            Spline2DEvaluator const& evaluator,
+            IdxRangeBatched idx_range_batched)
         : m_builder(builder)
         , m_evaluator(evaluator)
-        , m_coefs(get_spline_idx_range(builder))
+        , m_coefs(builder.batched_spline_domain(idx_range_batched))
     {
     }
 
@@ -80,29 +91,43 @@ public:
  * This class allows an instance of the SplineInterpolator2D class to be instantiated where necessary. This allows the
  * memory allocated in the private members of the SplineInterpolator2D to be freed when the object is not in use.
  * These objects are: m_coefs.
+ *
+ * The class is parametrised by multiple template parameters. Please note that CTAD will deduce all these
+ * template parameters from the Builder and Evaluator passed as constructor arguments.
+ *
+ * @tparam Spline2DBuilder The type of the 2D spline builder.
+ * @tparam Spline2DEvaluator The type of the 2D spline evaluator.
+ * @tparam IdxRangeBatched The type af the index range over which this operator will operate. This is
+ *              necessary to define the internal spline representation.
  */
-template <class Spline2DBuilder, class Spline2DEvaluator>
+template <class Spline2DBuilder, class Spline2DEvaluator, class IdxRangeBatched>
 class PreallocatableSplineInterpolator2D
     : public IPreallocatableInterpolator2D<
               typename Spline2DBuilder::interpolation_domain_type,
-              typename Spline2DBuilder::batched_interpolation_domain_type>
+              IdxRangeBatched>
 {
 private:
     Spline2DBuilder const& m_builder;
 
     Spline2DEvaluator const& m_evaluator;
 
+    IdxRangeBatched m_idx_range_batched;
+
 public:
     /**
      * @brief Create an object capable of creating SplineInterpolator2D objects.
-     * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
+     * @param[in] builder An operator which builds spline coefficients from the values of a function at
+     *                      known interpolation points.
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
+     * @param[in] idx_range_batched The index range on which this operator operates.
      */
     PreallocatableSplineInterpolator2D(
             Spline2DBuilder const& builder,
-            Spline2DEvaluator const& evaluator)
+            Spline2DEvaluator const& evaluator,
+            IdxRangeBatched idx_range_batched)
         : m_builder(builder)
         , m_evaluator(evaluator)
+        , m_idx_range_batched(idx_range_batched)
     {
     }
 
@@ -111,12 +136,13 @@ public:
      *
      * @return A pointer to an instance of the SplineInterpolator2D class.
      */
-    std::unique_ptr<IInterpolator2D<
-            typename Spline2DBuilder::interpolation_domain_type,
-            typename Spline2DBuilder::batched_interpolation_domain_type>>
+    std::unique_ptr<
+            IInterpolator2D<typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched>>
     preallocate() const override
     {
-        return std::make_unique<
-                SplineInterpolator2D<Spline2DBuilder, Spline2DEvaluator>>(m_builder, m_evaluator);
+        return std::make_unique<SplineInterpolator2D<
+                Spline2DBuilder,
+                Spline2DEvaluator,
+                IdxRangeBatched>>(m_builder, m_evaluator, m_idx_range_batched);
     }
 };
