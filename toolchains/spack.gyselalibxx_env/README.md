@@ -4,7 +4,7 @@
 
 Start the following tutorial from a clean installation:
 
-- Be careful with the content of your `.bashrc`, any environment variable or other package manager might get you into trouble
+- Be careful with the content of your `.bashrc`, any environment variable or other package manager (conda, conan...) might get you into trouble
 - Remove any old spack installation `$HOME/.spack`
 - Start from a clean bash session: no modules loaded!
 
