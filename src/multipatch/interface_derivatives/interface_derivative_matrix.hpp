@@ -53,6 +53,7 @@ class InterfaceDerivativeMatrix
     using interface_collection =
             typename Connectivity::get_all_interfaces_along_direction_t<Grid1D>;
     using all_patches = typename Connectivity::all_patches; // TypeSeq
+    using grid_collection = collect_grids_on_dim_t<Grid1D>;
 
     // TODO: remove Interfaces with OutsideEdge
     using inner_interface_collection = ddc::detail::TypeSeq<
@@ -61,38 +62,38 @@ class InterfaceDerivativeMatrix
 
 
     // HELPFUL ALIASES ===========================================================================
-    // template <typename Grid>
-    // using get_patch_on_grid = find_patch_t<Grid, all_patches>;
+    template <typename Grid>
+    using get_patch_on_grid = find_patch_t<Grid, all_patches>;
 
 
-    // template <typename T>
-    // struct get_grid;
+    template <typename T>
+    struct get_grid;
 
-    // template <template <typename P> typename T, typename Grid>
-    // struct get_grid<T<Grid>>
-    // {
-    //     using type = Grid;
-    // };
+    template <template <typename P> typename T, typename Grid>
+    struct get_grid<T<Grid>>
+    {
+        using type = Grid;
+    };
 
-    // template <typename T>
-    // using get_grid_t = typename get_grid<T>::type;
-
-
-    // template <typename IdxRange1D>
-    // using get_patch_of_idx_range_1d = get_patch_on_grid<get_grid_t<IdxRange1D>>;
+    template <typename T>
+    using get_grid_t = typename get_grid<T>::type;
 
 
-    // template <template <typename P> typename T, class InterfacesTypeSeq>
-    // struct get_tuple_on_interfaces;
+    template <typename IdxRange1D>
+    using get_patch_of_idx_range_1d = get_patch_on_grid<get_grid_t<IdxRange1D>>;
 
-    // template <template <typename P> typename T, class InterfacesTypeSeq>
-    // using get_tuple_on_interfaces_t = typename get_tuple_on_interfaces<T, InterfacesTypeSeq>::type;
 
-    // template <template <typename P> typename T, class... Interfaces>
-    // struct get_tuple_on_interfaces<T, ddc::detail::TypeSeq<Interfaces...>>
-    // {
-    //     using type = std::tuple<T<Interfaces> const&...>;
-    // };
+    template <template <typename P> typename T, class InterfacesTypeSeq>
+    struct get_tuple_on_interfaces;
+
+    template <template <typename P> typename T, class InterfacesTypeSeq>
+    using get_tuple_on_interfaces_t = typename get_tuple_on_interfaces<T, InterfacesTypeSeq>::type;
+
+    template <template <typename P> typename T, class... Interfaces>
+    struct get_tuple_on_interfaces<T, ddc::detail::TypeSeq<Interfaces...>>
+    {
+        using type = std::tuple<T<Interfaces> const&...>;
+    };
 
     template <typename InterfaceCollection>
     struct get_tuple_deriv_calculator;
@@ -138,7 +139,8 @@ class InterfaceDerivativeMatrix
             = ddc::type_seq_size_v<inner_interface_collection>;
     static constexpr std::size_t n_values = n_inner_interfaces * 3 - 2;
 
-    using Matrix = gko::matrix::Csr<double>;
+    // using Matrix = gko::matrix::Csr<double>;
+    using Matrix = gko::matrix::Dense<double>;
 
 
 
@@ -187,32 +189,33 @@ public:
     }
 
 
-    // void solve(
-    //         MultipatchField<ValuesOnPatch, Patches...> const& function_values,
-    //         MultipatchField<DerivsOnPatch, Patches...> const& derivs_min,
-    //         MultipatchField<DerivsOnPatch, Patches...> const& derivs_max)
-    // {
-    //     std::tuple sorted_idx_ranges_tuple
-    //             = Connectivity::template get_all_idx_ranges_along_direction<Grid1D>(m_idx_ranges);
-    //     using FirstIdxRange = std::tuple_element_t<0, decltype(sorted_idx_ranges_tuple)>;
-    //     using FirstPatch = get_patch_of_idx_range_1d<FirstIdxRange>;
-    //     auto par_idx_range = ddc::remove_dims_of(
-    //             m_idx_ranges.template get<FirstPatch>(),
-    //             std::get<0>(sorted_idx_ranges_tuple));
+    void solve(
+            MultipatchField<ValuesOnPatch, Patches...> const& function_values,
+            MultipatchField<DerivsOnPatch, Patches...> const& derivs_min,
+            MultipatchField<DerivsOnPatch, Patches...> const& derivs_max)
+    {
+        std::tuple sorted_idx_ranges_tuple
+                = Connectivity::template get_all_idx_ranges_along_direction<Grid1D>(m_idx_ranges);
+        using FirstIdxRange = std::tuple_element_t<0, decltype(sorted_idx_ranges_tuple)>;
+        using FirstPatch = get_patch_of_idx_range_1d<FirstIdxRange>;
+        // using FirstPatch = connectivity_details::FindPatch<Grid1D, all_patches>;
+        auto par_idx_range = ddc::remove_dims_of(
+                m_idx_ranges.template get<FirstPatch>(),
+                std::get<0>(sorted_idx_ranges_tuple));
 
-    //     ddc::for_each(par_idx_range, [&](auto const& idx) {
-    //         std::array<double, n_elements> derivs_at_interfaces
-    //                 = this->solve_single_line(idx, function_values, derivs_min, derivs_max);
+        ddc::for_each(par_idx_range, [&](auto const& idx) {
+            std::array<double, n_inner_interfaces> derivs_at_interfaces
+                    = this->solve_single_line(idx, function_values, derivs_min, derivs_max);
 
-    //         update_derivatives(
-    //                 derivs_min,
-    //                 derivs_max,
-    //                 derivs_at_interfaces,
-    //                 function_values,
-    //                 idx,
-    //                 std::make_integer_sequence<std::size_t, n_elements> {});
-    //     });
-    // }
+            update_derivatives(
+                    derivs_min,
+                    derivs_max,
+                    derivs_at_interfaces,
+                    function_values,
+                    idx,
+                    std::make_integer_sequence<std::size_t, n_inner_interfaces> {});
+        });
+    }
 
 
 private:
@@ -232,7 +235,7 @@ private:
     template <std::size_t I>
     void set_line_matrix()
     {
-        auto [vals, cols, rows] = m_matrix->get_batch_csr();
+        // auto [vals, cols, rows] = m_matrix->get_batch_csr();
 
         double coeff_right = std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_1();
         double coeff_left = std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_2();
@@ -251,9 +254,10 @@ private:
         // }
         for (auto dofs : {-1, 0, 1}) {
             if (0 <= I + dofs && I + dofs < n_inner_interfaces) {
-                vals(3 * I + dofs) = coefs[dofs + 1];
-                cols(3 * I + dofs) = I + dofs;
-                rows(I) = I - 1;
+                // vals(3 * I + dofs) = coefs[dofs + 1];
+                // cols(3 * I + dofs) = I + dofs;
+                // rows(I) = I - 1;
+                matrix->at(I, I + dofs) = coefs[dofs + 1];
             }
         }
     }
@@ -261,7 +265,7 @@ private:
 
 
     template <class OGrid1D>
-    std::array<double, n_elements> solve_single_line(
+    std::array<double, n_inner_interfaces> solve_single_line(
             Idx<OGrid1D> const& slice_idx,
             MultipatchField<ValuesOnPatch, Patches...> const& function_values,
             MultipatchField<DerivsOnPatch, Patches...> const& derivs_min,
@@ -272,12 +276,12 @@ private:
                 function_values,
                 derivs_min,
                 derivs_max,
-                std::make_integer_sequence<std::size_t, n_elements> {});
+                std::make_integer_sequence<std::size_t, n_inner_interfaces> {});
 
         // S = (I - M)^{-1} C = m_matrix^{-1} m_vector
-        std::array<double, n_elements> derivs_at_interfaces;
+        std::array<double, n_inner_interfaces> derivs_at_interfaces;
         // ...
-        std::array<std::array<double, n_elements>, n_elements> inverse_matrix;
+        std::array<std::array<double, n_inner_interfaces>, n_inner_interfaces> inverse_matrix;
         double det = m_matrix[0][0] * m_matrix[1][1] - m_matrix[1][0] * m_matrix[0][1];
         inverse_matrix[0][0] = m_matrix[1][1] / det;
         inverse_matrix[0][1] = -m_matrix[0][1] / det;
@@ -314,9 +318,9 @@ private:
 
         IdxRange<OGrid1D> idx_range_1d_first_patch(m_idx_ranges.template get<FirstPatch>());
         int slice_idx_value = (slice_idx - idx_range_1d_first_patch.front()).value();
-        for (int n(0); n < n_elements; n++) {
-            m_vector[n] = 0;
-        }
+        // for (int n(0); n < n_inner_interfaces; n++) {
+        //     m_vector->get_values()[n] = 0;
+        // }
         (set_line_vector<I>(slice_idx_value, function_values, derivs_min, derivs_max), ...);
     }
 
@@ -332,7 +336,8 @@ private:
         // hyp: all_patches and sorted_idx_ranges_tuple have same organisation.
         std::tuple sorted_idx_ranges_tuple
                 = Connectivity::template get_all_idx_ranges_along_direction<Grid1D>(m_idx_ranges);
-        static_assert(std::tuple_size_v<decltype(sorted_idx_ranges_tuple)> == n_elements + 1);
+        static_assert(
+                std::tuple_size_v<decltype(sorted_idx_ranges_tuple)> == n_inner_interfaces + 1);
 
         using Patch1 = get_patch_of_idx_range_1d<
                 std::tuple_element_t<I, decltype(sorted_idx_ranges_tuple)>>;
@@ -350,15 +355,15 @@ private:
         // using Interface = typename ddc::type_seq_element_t<0, interfaces_typeseq>;
         // MatchingIdxSlice<Interface> matching_idx(other_idx_range_1d_1, other_idx_range_1d_2);
 
+        // Get the 2D index ranges of each patch where the function is interpolated.
+        auto const idx_range_2d_function_1 = get_idx_range(function_values.template get<Patch1>());
+        auto const idx_range_2d_function_2 = get_idx_range(function_values.template get<Patch2>());
 
-
-        auto const function_idx_range_2d_1 = get_idx_range(function_values.template get<Patch1>());
-        auto const function_idx_range_2d_2 = get_idx_range(function_values.template get<Patch2>());
-
-        auto const function_other_idx_range_1d_1
-                = ddc::remove_dims_of(function_idx_range_2d_1, idx_range_1d_1);
-        auto const function_other_idx_range_1d_2
-                = ddc::remove_dims_of(function_idx_range_2d_2, idx_range_1d_2);
+        // Get the 1D index ranges parallel to the Interface.
+        auto const other_idx_range_1d_function_1
+                = ddc::remove_dims_of(idx_range_2d_function_1, idx_range_1d_1);
+        auto const other_idx_range_1d_function_2
+                = ddc::remove_dims_of(idx_range_2d_function_2, idx_range_1d_2);
 
 
         auto slice_indexes = get_slice_indexes<
@@ -368,6 +373,7 @@ private:
         auto slice_idx_1 = std::get<0>(slice_indexes);
         auto slice_idx_2 = std::get<1>(slice_indexes);
 
+        // Get a MultipatchField of the function on a perpendicular slice.
         auto function_slice_1
                 = get_function_on_idx_range(idx_range_1d_1, slice_idx_1, function_values);
         auto function_slice_2
@@ -376,35 +382,64 @@ private:
         double fct_coeff = std::get<I>(m_derivatives_calculators)
                                    .get_function_coefficients(function_slice_1, function_slice_2);
 
+        // SUGESTION =============================================================================
+        auto const idx_range_perp_1 = std::get<I>(sorted_idx_ranges_tuple);
+        auto const idx_range_perp_2 = std::get<I + 1>(sorted_idx_ranges_tuple);
+
+        ValuesOnPatch<Patch1> function_1 = function_values.template get<Patch1>();
+        ValuesOnPatch<Patch2> function_2 = function_values.template get<Patch2>();
+
+        auto const idx_range_2d_1 = get_idx_range(function_1);
+        auto const idx_range_2d_2 = get_idx_range(function_2);
+
+        auto const idx_range_parell_1 = ddc::remove_dims_of(idx_range_2d_1, idx_range_perp_1);
+        auto const idx_range_parell_2 = ddc::remove_dims_of(idx_range_2d_2, idx_range_perp_2);
+
+        auto slice_indexes = get_slice_indexes<
+                I,
+                Patch1,
+                Patch2>(slice_idx_1_value, sorted_idx_ranges_tuple, function_values);
+        auto slice_idx_1 = std::get<0>(slice_indexes);
+        auto slice_idx_2 = std::get<1>(slice_indexes);
+
+        auto function_slice_1 = function_1[slice_idx_1]; 
+        auto function_slice_2 = function_2[slice_idx_2]; 
+
+        double lin_comb_funct = std::get<I>(m_derivatives_calculators)
+        .get_function_coefficients(function_slice_1, function_slice_2);
+        // =======================================================================================
+
         if (I == 0) {
             if (LowerBound == ddc::BoundCond::GREVILLE) {
-                m_vector[I] = fct_coeff;
+                m_vector->get_values()[I] = fct_coeff;
             } else {
                 double coeff_plus = std::get<I>(m_derivatives_calculators).get_coeff_plus();
                 auto deriv_min = derivs_min.template get<Patch1>();
                 auto idx_range_deriv_1 = ddc::
-                        remove_dims_of(get_idx_range(deriv_min), function_other_idx_range_1d_1);
+                        remove_dims_of(get_idx_range(deriv_min), other_idx_range_1d_function_1);
 
-                m_vector[I] = fct_coeff
-                              + coeff_plus * deriv_min(idx_range_deriv_1.front(), slice_idx_1);
+                m_vector->get_values()[I]
+                        = fct_coeff
+                          + coeff_plus * deriv_min(idx_range_deriv_1.front(), slice_idx_1);
             }
 
 
 
-        } else if (1 < I && I < n_interfaces - 1) {
-            m_vector[I] = fct_coeff;
+        } else if (1 < I && I < n_inner_interfaces - 1) {
+            m_vector->get_values()[I] = fct_coeff;
 
-        } else if (I == n_elements - 1) {
+        } else if (I == n_inner_interfaces - 1) {
             if (UpperBound == ddc::BoundCond::GREVILLE) {
-                m_vector[I] = fct_coeff;
+                m_vector->get_values()[I] = fct_coeff;
             } else {
                 double coeff_minus = std::get<I>(m_derivatives_calculators).get_coeff_minus();
                 auto deriv_max = derivs_max.template get<Patch2>();
                 auto idx_range_deriv_2 = ddc::
-                        remove_dims_of(get_idx_range(deriv_max), function_other_idx_range_1d_2);
+                        remove_dims_of(get_idx_range(deriv_max), other_idx_range_1d_function_2);
 
-                m_vector[I] = fct_coeff
-                              + coeff_minus * deriv_max(idx_range_deriv_2.front(), slice_idx_2);
+                m_vector->get_values()[I]
+                        = fct_coeff
+                          + coeff_minus * deriv_max(idx_range_deriv_2.front(), slice_idx_2);
             }
         }
     }
@@ -414,7 +449,7 @@ private:
     void update_derivatives(
             MultipatchField<DerivsOnPatch, Patches...> const& derivs_min,
             MultipatchField<DerivsOnPatch, Patches...> const& derivs_max,
-            std::array<double, n_elements> const& derivs_at_interfaces,
+            std::array<double, n_inner_interfaces> const& derivs_at_interfaces,
             MultipatchField<ValuesOnPatch, Patches...> const& function_values,
             Idx<OGrid1D> const& slice_idx,
             std::integer_sequence<std::size_t, I...>)
@@ -441,13 +476,14 @@ private:
     void update_derivatives_at_interface(
             MultipatchField<DerivsOnPatch, Patches...> const& derivs_min,
             MultipatchField<DerivsOnPatch, Patches...> const& derivs_max,
-            std::array<double, n_elements> const& derivs_at_interfaces,
+            std::array<double, n_inner_interfaces> const& derivs_at_interfaces,
             MultipatchField<ValuesOnPatch, Patches...> const& function_values,
             int& slice_idx_1_value)
     {
         std::tuple sorted_idx_ranges_tuple
                 = Connectivity::template get_all_idx_ranges_along_direction<Grid1D>(m_idx_ranges);
-        static_assert(std::tuple_size_v<decltype(sorted_idx_ranges_tuple)> == n_elements + 1);
+        static_assert(
+                std::tuple_size_v<decltype(sorted_idx_ranges_tuple)> == n_inner_interfaces + 1);
 
         using Patch1 = get_patch_of_idx_range_1d<
                 std::tuple_element_t<I, decltype(sorted_idx_ranges_tuple)>>;
@@ -469,9 +505,9 @@ private:
         auto const function_idx_range_2d_1 = get_idx_range(function_values.template get<Patch1>());
         auto const function_idx_range_2d_2 = get_idx_range(function_values.template get<Patch2>());
 
-        auto const function_other_idx_range_1d_1
+        auto const other_idx_range_1d_function_1
                 = ddc::remove_dims_of(function_idx_range_2d_1, idx_range_1d_1);
-        auto const function_other_idx_range_1d_2
+        auto const other_idx_range_1d_function_2
                 = ddc::remove_dims_of(function_idx_range_2d_2, idx_range_1d_2);
 
 
@@ -484,10 +520,10 @@ private:
 
         auto idx_range_deriv_1 = ddc::remove_dims_of(
                 get_idx_range(derivs_min.template get<Patch1>()),
-                function_other_idx_range_1d_1);
+                other_idx_range_1d_function_1);
         auto idx_range_deriv_2 = ddc::remove_dims_of(
                 get_idx_range(derivs_min.template get<Patch2>()),
-                function_other_idx_range_1d_2);
+                other_idx_range_1d_function_2);
 
 
         // Update derivatives
@@ -535,9 +571,9 @@ private:
         auto const function_idx_range_2d_1 = get_idx_range(function_values.template get<Patch1>());
         auto const function_idx_range_2d_2 = get_idx_range(function_values.template get<Patch2>());
 
-        auto const function_other_idx_range_1d_1
+        auto const other_idx_range_1d_function_1
                 = ddc::remove_dims_of(function_idx_range_2d_1, idx_range_1d_1);
-        auto const function_other_idx_range_1d_2
+        auto const other_idx_range_1d_function_2
                 = ddc::remove_dims_of(function_idx_range_2d_2, idx_range_1d_2);
 
 
@@ -545,13 +581,13 @@ private:
         // Get slice indexes
         EdgeTransformation<Interface> index_converter(other_idx_range_1d_1, other_idx_range_1d_2);
 
-        using OIdx1 = typename decltype(function_other_idx_range_1d_1)::discrete_element_type;
-        using OIdx2 = typename decltype(function_other_idx_range_1d_2)::discrete_element_type;
+        using OIdx1 = typename decltype(other_idx_range_1d_function_1)::discrete_element_type;
+        using OIdx2 = typename decltype(other_idx_range_1d_function_2)::discrete_element_type;
         OIdx1 slice_idx_1;
         OIdx2 slice_idx_2;
         if constexpr (std::is_same_v<
                               decltype(other_idx_range_1d_2),
-                              decltype(function_other_idx_range_1d_2)>) {
+                              decltype(other_idx_range_1d_function_2)>) {
             slice_idx_1 = OIdx1(slice_idx_1_value);
             slice_idx_2 = OIdx2(index_converter(slice_idx_1));
             slice_idx_1_value = (slice_idx_2 - other_idx_range_1d_2.front()).value();
