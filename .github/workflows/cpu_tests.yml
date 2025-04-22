@@ -24,9 +24,9 @@ on:
           - tests_release_omp_toolchain
           - tests_coverage_toolchain
       merge_target:
-        description: "The branch to which this branch should be compared to filter out costly tests (default: main)"
+        description: "The branch to which this branch should be compared to filter out costly tests (default: devel)"
         required: false
-        default: main
+        default: devel
         type: string
 
 concurrency:

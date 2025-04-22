@@ -123,9 +123,7 @@ public:
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
-            ddc::SplineSolver::LAPACK,
-            GridR,
-            GridTheta>;
+            ddc::SplineSolver::LAPACK>;
 
     using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
             Kokkos::DefaultHostExecutionSpace,
@@ -137,9 +135,7 @@ public:
             ddc::NullExtrapolationRule,
             ddc::NullExtrapolationRule,
             ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            GridR,
-            GridTheta>;
+            ddc::PeriodicExtrapolationRule<Theta>>;
 
 
     using spline_idx_range = IdxRange<BSplinesR, BSplinesTheta>;

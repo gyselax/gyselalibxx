@@ -27,7 +27,6 @@ class DiscreteToCartesianBuilder
     static_assert(std::is_same_v<
                   typename SplineBuilder::exec_space,
                   typename SplineEvaluator::exec_space>);
-    static_assert(std::is_same_v<typename SplineBuilder::batch_domain_type, IdxRange<>>);
 
 public:
     /// The type of the mapping that will be created.
@@ -257,9 +256,7 @@ private:
             BcUpper1,
             BcLower2,
             BcUpper2,
-            Solver,
-            GridROriginal,
-            GridThetaOriginal>>
+            Solver>>
     {
         using type = ddc::SplineBuilder2D<
                 ExecSpace,
@@ -272,9 +269,7 @@ private:
                 BcUpper1,
                 BcLower2,
                 BcUpper2,
-                Solver,
-                GridRRefined,
-                GridThetaRefined>;
+                Solver>;
     };
 
     using RefinedSplineBuilder = typename Build_BuilderType<SplineBuilder>::type;
@@ -289,9 +284,7 @@ private:
             typename SplineEvaluator::lower_extrapolation_rule_1_type,
             typename SplineEvaluator::upper_extrapolation_rule_1_type,
             typename SplineEvaluator::lower_extrapolation_rule_2_type,
-            typename SplineEvaluator::upper_extrapolation_rule_2_type,
-            GridRRefined,
-            GridThetaRefined>;
+            typename SplineEvaluator::upper_extrapolation_rule_2_type>;
 
     using IdxRangeSplines = IdxRange<BSplinesRRefined, BSplinesThetaRefined>;
     using IdxRangeInterpolationPoints = IdxRange<GridRRefined, GridThetaRefined>;

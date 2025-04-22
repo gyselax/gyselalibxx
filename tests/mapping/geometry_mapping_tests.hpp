@@ -29,6 +29,23 @@ struct Z
     using Dual = Z;
 };
 
+struct Rho_cov;
+struct Rho
+{
+    static bool constexpr PERIODIC = false;
+    static bool constexpr IS_COVARIANT = false;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    /// The corresponding type in the dual space.
+    using Dual = Rho_cov;
+};
+struct Rho_cov
+{
+    static bool constexpr PERIODIC = false;
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = false;
+    /// The corresponding type in the dual space.
+    using Dual = Rho;
+};
 struct Zeta_cov;
 struct Zeta
 {
@@ -153,9 +170,7 @@ using SplineRThetaBuilder = ddc::SplineBuilder2D<
         ddc::BoundCond::GREVILLE,
         ddc::BoundCond::PERIODIC,
         ddc::BoundCond::PERIODIC,
-        ddc::SplineSolver::LAPACK,
-        GridR,
-        GridTheta>;
+        ddc::SplineSolver::LAPACK>;
 using SplineRThetaBuilder_host = SplineRThetaBuilder<Kokkos::DefaultHostExecutionSpace>;
 
 template <class ExecSpace>
@@ -169,9 +184,7 @@ using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
         ddc::NullExtrapolationRule,
         ddc::NullExtrapolationRule,
         ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        GridR,
-        GridTheta>;
+        ddc::PeriodicExtrapolationRule<Theta>>;
 using SplineRThetaEvaluator_host = SplineRThetaEvaluator<Kokkos::DefaultHostExecutionSpace>;
 
 using IdxRangeBSR = IdxRange<BSplinesR>;

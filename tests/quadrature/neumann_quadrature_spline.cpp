@@ -29,15 +29,14 @@ struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
 };
 
-using SplineXBuilder_1d = ddc::SplineBuilder<
+using SplineXBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridX>;
+        ddc::SplineSolver::LAPACK>;
 
 using IdxStepX = IdxStep<GridX>;
 using IdxRangeX = IdxRange<GridX>;
@@ -56,7 +55,7 @@ TEST(NeumannSplineUniformQuadrature1D, ExactForConstantFuncHost)
     ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
     IdxRangeX gridx(SplineInterpPointsX::get_domain<GridX>());
 
-    SplineXBuilder_1d const builder_x(gridx);
+    SplineXBuilder const builder_x(gridx);
 
     host_t<DFieldMemX> const quadrature_coeffs(
             neumann_spline_quadrature_coefficients<
@@ -83,7 +82,7 @@ TEST(NeumannSplineUniformQuadrature1D, ExactForConstantFuncDefaultExecSpace)
     ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
     IdxRangeX gridx(SplineInterpPointsX::get_domain<GridX>());
 
-    SplineXBuilder_1d const builder_x(gridx);
+    SplineXBuilder const builder_x(gridx);
 
     DFieldMemX const quadrature_coeffs(neumann_spline_quadrature_coefficients<
                                        Kokkos::DefaultExecutionSpace>(gridx, builder_x));
@@ -128,8 +127,7 @@ double compute_error(int n_elems)
             GridY,
             ddc::BoundCond::HERMITE,
             ddc::BoundCond::HERMITE,
-            ddc::SplineSolver::LAPACK,
-            GridY>;
+            ddc::SplineSolver::LAPACK>;
     using IdxRangeY = IdxRange<GridY>;
     using DFieldMemY = DFieldMem<IdxRangeY>;
     using DFieldY = DField<IdxRangeY>;
