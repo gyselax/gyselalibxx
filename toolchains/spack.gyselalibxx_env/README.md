@@ -57,55 +57,7 @@ spack repo add --scope site spack-0.23.0/var/spack/repos/pdi
 
 > :warning: This step takes some time
 
-Using the following `gyselalibxx-env-0.23.0.yaml`
-
-```yaml
-spack:
-  concretizer:
-    unify: true
-  definitions:
-  - compilers:
-    - 'gcc@11:'
-  - packages:
-    - 'benchmark'
-    - 'cmake@3.22:3'
-    - 'eigen'
-    - 'fftw precision=float,double'
-    - 'gdb ~debuginfod'
-    - 'ginkgo@1.8'
-    - 'googletest +gmock'
-    - 'openmpi'
-    - 'paraconf'
-    - 'pdi@1.6:1'
-    - 'pdiplugin-decl-hdf5 +mpi'
-    - 'pdiplugin-decl-netcdf +mpi'
-    - 'pdiplugin-mpi'
-    - 'pdiplugin-set-value'
-    - 'pdiplugin-trace'
-  - python-packages:
-    - 'py-dask'
-    - 'py-h5netcdf'
-    - 'py-h5py'
-    - 'py-imageio'
-    - 'py-matplotlib'
-    - 'py-netcdf4 +mpi'
-    - 'py-numpy'
-    - 'py-scipy'
-    - 'py-sympy'
-    - 'py-xarray'
-  specs:
-  - lapack
-  - matrix:
-    - [$packages]
-    - [$%compilers]
-  - matrix:
-    - [$python-packages]
-    - [$%compilers]
-  view: true
-  packages:
-    all:
-      variants: ~mpi ~openmp cxxstd=17
-```
+Using the file [`gyselalibxx-env-0.23.0.yaml`](https://github.com/gyselax/gyselalibxx/blob/devel/toolchains/spack.gyselalibxx_env/README.md)
 
 ```bash
 spack env create gyselalibxx-env gyselalibxx-env-0.23.0.yaml
