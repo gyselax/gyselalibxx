@@ -225,17 +225,23 @@ if __name__ == '__main__':
             suggested_expressions.append(Expression(expr.start_pos, expr.end_pos, '['+suggestion+expr.closing_tag))
 
         # Examine text
+        badge_tag = re.compile(r'^\[!.*\)$')
         for expr in expressions["markdown"]:
             suggestion = expr.contents
             unquoted_underscore_problems = list(unquoted_underscore.finditer(suggestion))
             if unquoted_underscore_problems:
-                success = False
                 for p in unquoted_underscore_problems:
                     internal_line_info = index_to_line_info(p.start(), suggestion)
                     if internal_line_info.line == 1:
                         line_info = LineInfo(expr.start_pos.line, expr.start_pos.char + internal_line_info.char-1)
                     else:
                         line_info = LineInfo(expr.start_pos.line + internal_line_info.line-1, internal_line_info.char)
+
+                    # Ignore errors in badge images
+                    if badge_tag.match(content_lines[line_info.line-1]):
+                        continue
+
+                    success = False
                     print(f"::error file={file},line={line_info.line}:: Found non-escaped underscore. Please escape underscores and use *a* to indicate italics. ({file}: Line {line_info.line}, position {line_info.char})", file=sys.stderr)
                 suggestion = unquoted_underscore.sub(r'\_', suggestion)
             suggested_expressions.append(Expression(expr.start_pos, expr.end_pos, suggestion))
