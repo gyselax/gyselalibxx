@@ -105,7 +105,7 @@ protected:
     /**
      * @brief Construct an uninitialised tensor object.
      */
-    KOKKOS_FUNCTION TensorCommon(mdspan_type data) : m_data(data) {}
+    explicit KOKKOS_FUNCTION TensorCommon(mdspan_type data) : m_data(data) {}
 
     /**
      * @brief Construct a tensor object by copying an existing tensor of exactly the
