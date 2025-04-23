@@ -38,7 +38,7 @@
  * @tparam GridR The radial grid type.
  * @tparam GridR The poloidal grid type.
  * @tparam PolarBSplinesRTheta The type of the 2D polar B-splines (on the coordinate
- * system @f$(r,\theta)@f$ including B-splines which traverse the O point).
+ *          system @f$(r,\theta)@f$ including B-splines which traverse the O point).
  * @tparam SplineRThetaEvaluatorNullBound The type of the 2D (cross-product) spline evaluator.
  * @tparam IdxRangeFull The full index range of @f$ \phi @f$ including any batch dimensions.
  */
