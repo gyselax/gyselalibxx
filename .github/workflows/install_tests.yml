@@ -44,20 +44,20 @@ jobs:
       - name: Install spack
         run: |
           mkdir -p spack_setup && cd spack_setup
-          ../toolchains/mi250.hipcc.adastra.spack/prepare.sh
+          ../toolchains/spack.gyselalibxx_env/prepare.sh
           
         shell: bash
       - name: Build code
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/build_code
         with:
-          toolchain: toolchains/mi250.hipcc.adastra.spack/toolchain.cmake
-          environment_command: 'cd spack_setup; source ../toolchains/mi250.hipcc.adastra.spack/environment.sh; cd ..'
+          toolchain: toolchains/spack.gyselalibxx_env/toolchain.cmake
+          environment_command: 'cd spack_setup; source ../toolchains/spack.gyselalibxx_env/environment.sh; cd ..'
       - name: Run tests
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/run_tests
         with:
-          environment_command: 'cd spack_setup; source ../toolchains/mi250.hipcc.adastra.spack/environment.sh; cd ..'
+          environment_command: 'cd spack_setup; source ../toolchains/spack.gyselalibxx_env/environment.sh; cd ..'
 
   set_pr_status:
     runs-on: ubuntu-latest
