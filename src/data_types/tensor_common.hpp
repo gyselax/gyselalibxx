@@ -58,10 +58,17 @@ public:
     using index_set = ddc::detail::TypeSeq<ValidIndexSet...>;
 
 protected:
+    /// The number of elements in the mdspan
     static constexpr std::size_t s_n_elements = (ddc::type_seq_size_v<ValidIndexSet> * ...);
-    using layout_type = Kokkos::layout_right;
+    /// The type of the Kokkos mdspan layout
+    using layout_type = std::conditional_t<
+            std::is_same_v<ExecutionSpace, detail::LocalExecutionSpace>,
+            Kokkos::layout_right,
+            Kokkos::layout_stride>;
+    /// The type of the Kokkos mdspan that will be used to access the data
     using mdspan_type
             = Kokkos::mdspan<ElementType, Kokkos::extents<std::size_t, s_n_elements>, layout_type>;
+    /// The 1D object that lets us access the data
     mdspan_type m_data;
 
 public:
@@ -364,9 +371,9 @@ template <
         class TensorType,
         class OElementType,
         std::enable_if_t<is_tensor_type_v<TensorType>, bool> = true>
-KOKKOS_FUNCTION TensorType operator*(OElementType val, TensorType const& t)
+KOKKOS_FUNCTION TensorType operator*(OElementType val, TensorType const& tensor)
 {
-    TensorType result(t);
+    TensorType result(tensor);
     result *= val;
     return result;
 }
@@ -374,6 +381,7 @@ KOKKOS_FUNCTION TensorType operator*(OElementType val, TensorType const& t)
 /**
  * @brief An operator to multiply all the element of the current tensor by
  * a value.
+ * @param tensor The tensor being multiplied.
  * @param val The value by which the elements should be multiplied.
  * @return A new tensor containing the result of the multiplication.
  */
@@ -381,16 +389,17 @@ template <
         class TensorType,
         class OElementType,
         std::enable_if_t<is_tensor_type_v<TensorType>, bool> = true>
-KOKKOS_FUNCTION TensorType operator*(TensorType const& t, OElementType val)
+KOKKOS_FUNCTION TensorType operator*(TensorType const& tensor, OElementType val)
 {
-    TensorType result(t);
+    TensorType result(tensor);
     result *= val;
     return result;
 }
 
 /**
- * @brief An operator to multiply all the element of the current tensor by
+ * @brief An operator to divide all the element of the current tensor by
  * a value.
+ * @param tensor The tensor being divided.
  * @param val The value by which the elements should be multiplied.
  * @return A new tensor containing the result of the multiplication.
  */
@@ -398,50 +407,53 @@ template <
         class TensorType,
         class OElementType,
         std::enable_if_t<is_tensor_type_v<TensorType>, bool> = true>
-KOKKOS_FUNCTION TensorType operator/(TensorType const& t, OElementType val)
+KOKKOS_FUNCTION TensorType operator/(TensorType const& tensor, OElementType val)
 {
-    TensorType result(t);
+    TensorType result(tensor);
     result /= val;
     return result;
 }
 
 /**
  * @brief An operator to add two tensors elementwise.
- * @param val The tensor that should be added to the current tensor.
+ * @param tensor The first tensor in the addition.
+ * @param val The second tensor in the addition.
  * @return A new tensor containing the result of the addition.
  */
 template <
         class TensorType,
         class OElementType,
         std::enable_if_t<is_tensor_type_v<TensorType>, bool> = true>
-KOKKOS_FUNCTION TensorType operator+(TensorType const& t, OElementType val)
+KOKKOS_FUNCTION TensorType operator+(TensorType const& tensor, OElementType val)
 {
-    TensorType result(t);
+    TensorType result(tensor);
     result += val;
     return result;
 }
 
 /**
  * @brief An operator to subtract one tensor from another elementwise.
- * @param val The tensor that should be subtracted from the current tensor.
+ * @param tensor The tensor which is subtracted from.
+ * @param val The tensor that should be subtracted.
  * @return A new tensor containing the result of the subtraction.
  */
 template <class TensorType, std::enable_if_t<is_tensor_type_v<TensorType>, bool> = true>
-KOKKOS_FUNCTION TensorType operator-(TensorType const& t, TensorType const& val)
+KOKKOS_FUNCTION TensorType operator-(TensorType const& tensor, TensorType const& val)
 {
-    TensorType result(t);
+    TensorType result(tensor);
     result -= val;
     return result;
 }
 
 /**
  * @brief An operator to get the negation of a tensor elementwise.
- * @return A new tensor containing the result of the subtraction.
+ * @param tensor The tensor to be negated.
+ * @return A new tensor containing the result of the negation.
  */
 template <class TensorType, std::enable_if_t<is_tensor_type_v<TensorType>, bool> = true>
-KOKKOS_FUNCTION TensorType operator-(TensorType const& t)
+KOKKOS_FUNCTION TensorType operator-(TensorType const& tensor)
 {
     TensorType result(0);
-    result -= t;
+    result -= tensor;
     return result;
 }
