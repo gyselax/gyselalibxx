@@ -25,7 +25,6 @@ public:
     using typename base_type::index_set;
 
     using base_type::rank;
-    using base_type::size;
 
 private:
     using base_type::s_n_elements;
@@ -60,14 +59,15 @@ public:
     template <
             class... Params,
             class = std::enable_if_t<(std::is_convertible_v<Params, ElementType> && ...)>,
-            class = std::enable_if_t<sizeof...(Params) == size() && sizeof...(Params) != 1>>
+            class = std::enable_if_t<
+                    sizeof...(Params) == base_type::size() && sizeof...(Params) != 1>>
     explicit KOKKOS_FUNCTION Tensor(Params... elements)
         : base_type(mdspan_type(m_data_alloc.data()))
     {
         static_assert(
                 rank() == 1,
                 "Filling the tensor on initialisation is only permitted for 1D vector objects");
-        m_data_alloc = std::array<ElementType, size()>({elements...});
+        m_data_alloc = std::array<ElementType, base_type::size()>({elements...});
     }
 
     /**
@@ -77,8 +77,7 @@ public:
      */
     template <class... Dims>
     explicit KOKKOS_FUNCTION Tensor(Coord<Dims...> coord)
-        : m_data_alloc(coord.array())
-        , base_type(m_data_alloc.data())
+        : base_type(mdspan_type(m_data_alloc.data()))
     {
         static_assert(
                 rank() == 1,
@@ -86,6 +85,7 @@ public:
         static_assert(
                 std::is_same_v<VectorIndexSet<Dims...>, ddc::type_seq_element_t<0, index_set>>,
                 "The coordinate must have the same memory layout to make a clean conversion.");
+        m_data_alloc = coord.array();
     }
 
     /**
@@ -95,7 +95,8 @@ public:
      * @param o_tensor The tensor to be copied.
      */
     template <class OTensorType, std::enable_if_t<is_tensor_type_v<OTensorType>, bool> = true>
-    explicit KOKKOS_FUNCTION Tensor(const OTensorType& o_tensor) : base_type(m_data_alloc.data())
+    explicit KOKKOS_FUNCTION Tensor(const OTensorType& o_tensor)
+        : base_type(mdspan_type(m_data_alloc.data()))
     {
         static_assert(
                 std::is_same_v<typename OTensorType::index_set, index_set>,
