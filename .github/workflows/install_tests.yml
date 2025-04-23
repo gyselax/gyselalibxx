@@ -1,0 +1,73 @@
+name: Installation tests
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+  merge_group:
+    types:
+      - checks_requested
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  pre_job:
+    name: 'Check for unnecessary runs'
+    runs-on: ubuntu-latest
+    if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
+    # Map a step output to a job output
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: skip_check
+        uses: ./.github/actions/duplicate_check
+        with:
+          MATCHING_PATHS: '[".github/workflows/install_tests.yml", "toolchains/spack.gyselalibxx_env/*", "CMakeLists.txt"]'
+
+  spack_test:
+    runs-on: ubuntu-latest
+    needs: pre_job
+    name: Install Test
+    steps:
+      - name: Checkout gyselalibxx
+        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install spack
+        run: |
+          mkdir -p spack_setup && cd spack_setup
+          ../toolchains/mi250.hipcc.adastra.spack/prepare.sh
+          
+        shell: bash
+      - name: Build code
+        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
+        uses: ./.github/actions/build_code
+        with:
+          toolchain: toolchains/mi250.hipcc.adastra.spack/toolchain.cmake
+          environment_command: 'cd spack_setup; source ../toolchains/mi250.hipcc.adastra.spack/environment.sh; cd ..'
+      - name: Run tests
+        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
+        uses: ./.github/actions/run_tests
+        with:
+          environment_command: 'cd spack_setup; source ../toolchains/mi250.hipcc.adastra.spack/environment.sh; cd ..'
+
+  set_pr_status:
+    runs-on: ubuntu-latest
+    name: Spack PR result
+    needs: [spack_tests]
+    if: always() && (github.event_name == 'pull_request' && github.event.pull_request.draft == false)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/set_pr_status
+        with:
+          status: ${{ needs.spack_test.result }}
+          pr_number: ${{ github.event.pull_request.number }}
+          sha: ${{ github.sha }}
