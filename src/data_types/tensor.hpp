@@ -129,6 +129,19 @@ public:
         , base_type(mdspan_type(m_data_alloc.data()))
     {
     }
+
+    /**
+     * @brief A copy operator.
+     * @param other The tensor to be copied.
+     * @return A reference to the current tensor.
+     */
+    KOKKOS_FUNCTION Tensor& operator=(Tensor const& other)
+    {
+        for (std::size_t i(0); i < s_n_elements; ++i) {
+            m_data[i] = other.m_data[i];
+        }
+        return *this;
+    }
 };
 
 namespace detail {
