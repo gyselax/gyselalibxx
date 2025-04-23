@@ -136,17 +136,43 @@ public:
     }
 
     /**
-     * @brief Construct a tensor object by copying an existing tensor.
+     * @brief Construct a tensor object by copying an existing compatible tensor.
+     * A tensor is compatible if it is defined on the same dimensions.
      *
      * @param o_tensor The tensor to be copied.
      */
     template <class OElementType>
-    explicit KOKKOS_FUNCTION Tensor(Tensor<OElementType, ValidIndexSet...> const& o_tensor)
+    explicit KOKKOS_FUNCTION Tensor(const Tensor<OElementType, ValidIndexSet...>& o_tensor)
         : m_data(m_data_alloc.data())
     {
         for (std::size_t i(0); i < s_n_elements; ++i) {
             m_data[i] = o_tensor.m_data[i];
         }
+    }
+
+    /**
+     * @brief Construct a tensor object by copying an existing tensor of exactly the
+     * same type. This method can be called implicitly.
+     *
+     * @param o_tensor The tensor to be copied.
+     */
+    KOKKOS_FUNCTION Tensor(Tensor const& o_tensor) : m_data(m_data_alloc.data())
+    {
+        for (std::size_t i(0); i < s_n_elements; ++i) {
+            m_data[i] = o_tensor.m_data[i];
+        }
+    }
+
+    /**
+     * @brief Construct a tensor object by moving an existing tensor of exactly the
+     * same type. This method can be called implicitly.
+     *
+     * @param o_tensor The tensor to be copied.
+     */
+    explicit KOKKOS_FUNCTION Tensor(Tensor&& o_tensor)
+        : m_data_alloc(std::move(o_tensor.m_data_alloc))
+        , m_data(m_data_alloc.data())
+    {
     }
 
     /**
@@ -158,7 +184,7 @@ public:
     KOKKOS_FUNCTION ElementType& get()
     {
         static_assert(tensor_tools::is_tensor_index_element_v<QueryTensorIndexElement>);
-        return m_data_alloc[QueryTensorIndexElement::index()];
+        return m_data[QueryTensorIndexElement::index()];
     }
 
     /**
