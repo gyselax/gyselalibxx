@@ -249,14 +249,13 @@ namespace ddcHelper {
  * @param tensor The tensor whose elements are examined.
  * @return The relevant element of the tensor.
  */
-template <
-        class... QueryIndexTag,
-        class TensorType,
-        std::enable_if_t<is_tensor_type_v<TensorType>, bool> = true>
-KOKKOS_INLINE_FUNCTION typename TensorType::element_type& get(TensorType& tensor)
+template <class... QueryIndexTag, class ElementType, class ExecutionSpace, class... ValidIndexSet>
+KOKKOS_INLINE_FUNCTION ElementType& get(
+        TensorCommon<ElementType, ExecutionSpace, ValidIndexSet...>& tensor)
 {
-    return tensor.template get<
-            tensor_tools::TensorIndexElement<typename TensorType::index_set, QueryIndexTag...>>();
+    return tensor.template get<tensor_tools::TensorIndexElement<
+            ddc::detail::TypeSeq<ValidIndexSet...>,
+            QueryIndexTag...>>();
 }
 
 /**
@@ -265,14 +264,13 @@ KOKKOS_INLINE_FUNCTION typename TensorType::element_type& get(TensorType& tensor
  * @param tensor The tensor whose elements are examined.
  * @return The relevant element of the tensor.
  */
-template <
-        class... QueryIndexTag,
-        class TensorType,
-        std::enable_if_t<is_tensor_type_v<TensorType>, bool> = true>
-KOKKOS_INLINE_FUNCTION typename TensorType::element_type const& get(TensorType const& tensor)
+template <class... QueryIndexTag, class ElementType, class ExecutionSpace, class... ValidIndexSet>
+KOKKOS_INLINE_FUNCTION ElementType const& get(
+        TensorCommon<ElementType, ExecutionSpace, ValidIndexSet...> const& tensor)
 {
-    return tensor.template get<
-            tensor_tools::TensorIndexElement<typename TensorType::index_set, QueryIndexTag...>>();
+    return tensor.template get<tensor_tools::TensorIndexElement<
+            ddc::detail::TypeSeq<ValidIndexSet...>,
+            QueryIndexTag...>>();
 }
 
 /**
