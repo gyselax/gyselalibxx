@@ -2,10 +2,11 @@
 
 Thank you for your interest in contributing to this project. This codebase is part of an academic research effort and is maintained with a focus on accuracy, reproducibility, and clarity. We welcome contributions that improve the project within these boundaries. However, due to the sensitive and specific nature of the research goals, we ask that all proposed changes—especially new features or significant modifications—be discussed with the core team before any work begins.
 
-# Bug Reports
+## Bug Reports
 
 One of the most valuable contributions you can make is to report bugs.
 Bugs can take a variety of forms including:
+
 - incorrect results
 - unexpected behaviour
 - unclear documentation
@@ -13,13 +14,13 @@ Bugs can take a variety of forms including:
 Identifying and documenting these issues plays a crucial role in maintaining the integrity and reliability of the code.
 If you encounter a bug, please [open an issue](https://github.com/gyselax/gyselalibxx/issues/new/choose) providing as much detail as possible (as indicated by the template). This helps us address problems efficiently and ensures the project remains robust and trustworthy.
 
-# Feature Requests
+## Feature Requests
 
 We welcome thoughtful suggestions that enhance the usability, flexibility, or performance of the code. Suggestions should ensure that they are applicable to multiple simulations and can therefore benefit the community. Feature requests that are highly specific to individual test cases are unlikely to be accepted unless a clear benefit to the wider user base can be demonstrated.
 
 To propose a new feature, please [open an issue](https://github.com/gyselax/gyselalibxx/issues/new?template=feature_request.yml) to discuss your idea with the team. This helps ensure alignment with the project’s goals and avoids duplication of effort.
 
-# Contributing Code
+## Contributing Code
 
 We appreciate and encourage all contributions that improve the clarity and accuracy of the documentation. Bug fixes that are well-scoped and consistent with the existing codebase are also encouraged.
 
