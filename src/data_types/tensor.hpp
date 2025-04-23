@@ -45,7 +45,11 @@ public:
 
 private:
     static constexpr std::size_t s_n_elements = (ddc::type_seq_size_v<ValidIndexSet> * ...);
-    std::array<ElementType, s_n_elements> m_data;
+    using layout_type = Kokkos::layout_right;
+    using mdspan_type
+            = Kokkos::mdspan<ElementType, Kokkos::extents<std::size_t, s_n_elements>, layout_type>;
+    std::array<ElementType, s_n_elements> m_data_alloc;
+    mdspan_type m_data;
 
 public:
     /// The type of the elements of the tensor.
@@ -81,13 +85,13 @@ public:
     /**
      * @brief Construct an uninitialised tensor object.
      */
-    KOKKOS_DEFAULTED_FUNCTION Tensor() = default;
+    KOKKOS_FUNCTION Tensor() : m_data(m_data_alloc.data()) {}
 
     /**
      * @brief Construct a tensor object initialised with a value.
      * @param fill_value The value with which the tensor should be filled.
      */
-    explicit KOKKOS_FUNCTION Tensor(ElementType fill_value)
+    explicit KOKKOS_FUNCTION Tensor(ElementType fill_value) : m_data(m_data_alloc.data())
     {
         for (std::size_t i(0); i < s_n_elements; ++i) {
             m_data[i] = fill_value;
@@ -104,7 +108,9 @@ public:
             class... Params,
             class = std::enable_if_t<(std::is_convertible_v<Params, ElementType> && ...)>,
             class = std::enable_if_t<sizeof...(Params) == size() && sizeof...(Params) != 1>>
-    explicit KOKKOS_FUNCTION Tensor(Params... elements) : m_data({elements...})
+    explicit KOKKOS_FUNCTION Tensor(Params... elements)
+        : m_data_alloc({elements...})
+        , m_data(m_data_alloc.data())
     {
         static_assert(
                 rank() == 1,
@@ -117,7 +123,9 @@ public:
      * @param coord The coordinate.
      */
     template <class... Dims>
-    explicit KOKKOS_FUNCTION Tensor(Coord<Dims...> coord) : m_data(coord.array())
+    explicit KOKKOS_FUNCTION Tensor(Coord<Dims...> coord)
+        : m_data_alloc(coord.array())
+        , m_data(m_data_alloc.data())
     {
         static_assert(
                 rank() == 1,
@@ -134,8 +142,11 @@ public:
      */
     template <class OElementType>
     explicit KOKKOS_FUNCTION Tensor(Tensor<OElementType, ValidIndexSet...> const& o_tensor)
-        : m_data(o_tensor.m_data)
+        : m_data(m_data_alloc.data())
     {
+        for (std::size_t i(0); i < s_n_elements; ++i) {
+            m_data[i] = o_tensor.m_data[i];
+        }
     }
 
     /**
@@ -147,7 +158,7 @@ public:
     KOKKOS_FUNCTION ElementType& get()
     {
         static_assert(tensor_tools::is_tensor_index_element_v<QueryTensorIndexElement>);
-        return m_data[QueryTensorIndexElement::index()];
+        return m_data_alloc[QueryTensorIndexElement::index()];
     }
 
     /**
@@ -167,7 +178,13 @@ public:
      * @param other The tensor to be copied.
      * @return A reference to the current tensor.
      */
-    KOKKOS_DEFAULTED_FUNCTION Tensor& operator=(Tensor const& other) = default;
+    KOKKOS_FUNCTION Tensor& operator=(Tensor const& other)
+    {
+        for (std::size_t i(0); i < s_n_elements; ++i) {
+            m_data[i] = other.m_data[i];
+        }
+        return *this;
+    }
 
     /**
      * @brief A copy operator.
@@ -183,7 +200,7 @@ public:
         static_assert(
                 std::is_same_v<VectorIndexSet<Dims...>, ddc::type_seq_element_t<0, index_set>>,
                 "The coordinate must have the same memory layout to make a clean conversion.");
-        m_data = coord.array();
+        m_data_alloc = coord.array();
         return *this;
     }
 
