@@ -42,6 +42,7 @@ authors:
 - given-names: Abdelhadi
   surname: Kara
   affiliation: 2
+  orcid: 0009-0000-9693-5828
 
 - given-names: Philipp
   surname: Krah
