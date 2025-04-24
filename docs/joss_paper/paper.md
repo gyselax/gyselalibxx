@@ -89,7 +89,7 @@ affiliations:
 - name: CEA, IRFM, 13108 Saint-Paul-lez-Durance Cedex, France
   index: 2
 - name: >-
-    Universite Paris-Saclay, UVSQ, CNRS, CEA,
+    Université Paris-Saclay, UVSQ, CNRS, CEA,
     Maison de la Simulation,
     91191, Gif-sur-Yvette, France
   index: 3
