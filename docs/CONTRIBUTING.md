@@ -1,6 +1,6 @@
 # Contributing to Gyselalib++
 
-Thank you for your interest in contributing to this project. This codebase is part of an academic research effort and is maintained with a focus on accuracy, reproducibility, and clarity. We welcome contributions that improve the project within these boundaries. However, due to the sensitive and specific nature of the research goals, we ask that all proposed changes—especially new features or significant modifications—be discussed with the core team before any work begins.
+Thank you for your interest in contributing to this project. This codebase is part of an academic research effort and is maintained with a focus on accuracy, reproducibility, and clarity. We welcome contributions that improve the project within these boundaries. However, due to the sensitive and specific nature of the research goals, we ask that all proposed changes, especially new features or significant modifications, be discussed with the core team before any work begins.
 
 ## Bug Reports
 
