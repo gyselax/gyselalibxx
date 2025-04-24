@@ -57,6 +57,7 @@ authors:
 - given-names: Dorian
   surname: Midou
   affiliation: 2
+  orcid: 0009-0009-9593-8176
 
 - given-names: Mathieu
   surname: Peybernes
