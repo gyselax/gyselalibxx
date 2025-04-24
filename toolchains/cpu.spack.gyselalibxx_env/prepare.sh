@@ -39,6 +39,18 @@ spack config --scope site add 'packages:all:providers:lapack:[openblas]'
 git clone https://github.com/pdidev/spack.git spack-0.23.0/var/spack/repos/pdi
 spack repo add --scope site spack-0.23.0/var/spack/repos/pdi
 
+spack compiler find
+
+AVAILABLE_COMPILERS=$(spack compilers)
+
+if [[ "${AVAILABLE_COMPILERS}" != *"gcc@11"* ]]
+then
+    echo "gcc-11 was not found. Installing compiler"
+    spack install gcc@11
+    spack load gcc@11
+    spack compiler find
+fi
+
 spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-0.23.0.yaml
 spack --env gyselalibxx-env install --jobs 2
 
