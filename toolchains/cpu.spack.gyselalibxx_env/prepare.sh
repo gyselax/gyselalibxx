@@ -41,11 +41,11 @@ spack repo add --scope site spack-0.23.0/var/spack/repos/pdi
 
 spack compiler find
 
-AVAILABLE_COMPILERS=$(spack compilers)
+AVAILABLE_COMPILERS=$(spack compilers | grep "gcc@1[1-9]" || true)
 
-if [[ "${AVAILABLE_COMPILERS}" != *"gcc@11"* ]]
+if [ -z "${AVAILABLE_COMPILERS}" ]
 then
-    echo "gcc-11 was not found. Installing compiler"
+    echo "A gcc compiler with a version of at least 11 was not found. Installing compiler"
     spack install gcc@11
     spack load gcc@11
     spack compiler find
