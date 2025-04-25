@@ -16,9 +16,9 @@
  * @tparam ValidIndexSet The indices that can be used along each dimension of the tensor.
  */
 template <class ElementType, class... ValidIndexSet>
-class Tensor : public TensorCommon<ElementType, detail::LocalExecutionSpace, ValidIndexSet...>
+class Tensor : public TensorCommon<ElementType, Kokkos::layout_right, ValidIndexSet...>
 {
-    using base_type = TensorCommon<ElementType, detail::LocalExecutionSpace, ValidIndexSet...>;
+    using base_type = TensorCommon<ElementType, Kokkos::layout_right, ValidIndexSet...>;
 
 public:
     /// The TensorIndexSet describing the possible indices.
