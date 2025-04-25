@@ -52,6 +52,7 @@ jobs:
           mkdir -p spack_setup && cd spack_setup
           ../toolchains/cpu.spack.gyselalibxx_env/prepare.sh
         shell: bash
+        timeout-minutes: 180
       - name: Build code
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/build_code
