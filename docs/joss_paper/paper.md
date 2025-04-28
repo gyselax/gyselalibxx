@@ -125,7 +125,7 @@ Despite the reduction in dimensionality scuh simulations still require massively
 The most popular numerical methods for such simulations are particle-in-cell (PIC) methods and Eulerian methods, however both methods have inherent disadvantages.
 PIC methods are limited by numerical noise which, without complex noise reduction techniques, is only slowly attenuated $1 / \sqrt{N}$ as resource usage is increased.
 Eulerian methods avoid marker sampling noise by discretising the distribution function on a fixed grid, however explicit time integration leads to a Courant-Friedrichs-Lewy (CFL) stability condition which can severely limit the maximum possible time step.
-An alterative approach is to combine these techniques using semi-Lagrangian advection.
+An alternative approach is to combine these techniques using semi-Lagrangian advection.
 
 The pre-existing Gysela code[@grandgirard2016], written in Fortran, originally aimed to simulate plasma in the core region of a tokamak using semi-Lagrangian advection with a distribution function discretised in phase space on a fixed grid.
 This approach was shown to work well and allowed the study of many interesting physical phenomena[@TODO1;@TODO2;@ETC].
