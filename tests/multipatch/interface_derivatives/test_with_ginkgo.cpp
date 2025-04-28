@@ -123,7 +123,8 @@ int main(int argc, char* argv[])
                       .with_preconditioner(bj::build().with_max_block_size(8u).on(exec))
                       .on(exec);
     // Create solver
-    auto solver = solver_factory->generate(matrix);
+    std::unique_ptr<cg> solver; 
+    solver = std::move(solver_factory->generate(matrix));
 
     // Solve system
     // solver->apply(gko::lend(vec), gko::lend(sol));
