@@ -3146,10 +3146,6 @@
   </compound>
   <compound refid="fluid__moments_8hpp" kind="file"><name>fluid_moments.hpp</name>
   </compound>
-  <compound refid="initialisation__Kelvin__Helmholtz_8hpp" kind="file"><name>initialisation_Kelvin_Helmholtz.hpp</name>
-  </compound>
-  <compound refid="predcorr__RK2_8hpp" kind="file"><name>predcorr_RK2.hpp</name>
-  </compound>
   <compound refid="geometryRTheta_2geometry_2geometry_8hpp" kind="file"><name>geometry.hpp</name>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a3cd8a3421aa474d31f7046b09c1056ab" kind="typedef"><name>CoordR</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a4d50f0edb50ea8db41c4c69e7f343939" kind="typedef"><name>CoordTheta</name></member>
@@ -3535,6 +3531,10 @@
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a708bc02c7393e78aec4ac6ba9b1709af" kind="variable"><name>SplineYBoundary</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a3b0117d0dac4046287f6ca7e9fb498e1" kind="variable"><name>SplineVxBoundary</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a2fef8aca81ca6554971e30628ddb8be2" kind="variable"><name>SplineVyBoundary</name></member>
+  </compound>
+  <compound refid="initialisation__Kelvin__Helmholtz_8hpp" kind="file"><name>initialisation_Kelvin_Helmholtz.hpp</name>
+  </compound>
+  <compound refid="predcorr__RK2_8hpp" kind="file"><name>predcorr_RK2.hpp</name>
   </compound>
   <compound refid="geometryVparMu_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
   </compound>
