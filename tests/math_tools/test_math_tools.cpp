@@ -93,3 +93,56 @@ TEST(MathTools, VectorFieldNorm)
 {
     vector_field_norm_test();
 }
+
+TEST(MathTools, Inverse)
+{
+    using IndexSet = VectorIndexSet<X, Y, Z>;
+    DTensor<IndexSet, IndexSet> matrix;
+    ddcHelper::get<X, X>(matrix) = 1;
+    ddcHelper::get<X, Y>(matrix) = 2;
+    ddcHelper::get<X, Z>(matrix) = 3;
+    ddcHelper::get<Y, X>(matrix) = 0;
+    ddcHelper::get<Y, Y>(matrix) = 1;
+    ddcHelper::get<Y, Z>(matrix) = 4;
+    ddcHelper::get<Z, X>(matrix) = 5;
+    ddcHelper::get<Z, Y>(matrix) = 6;
+    ddcHelper::get<Z, Z>(matrix) = 0;
+    std::cout << ddcHelper::get<X, X>(matrix) << " ";
+    std::cout << ddcHelper::get<X, Y>(matrix) << " ";
+    std::cout << ddcHelper::get<X, Z>(matrix) << std::endl;
+    std::cout << ddcHelper::get<Y, X>(matrix) << " ";
+    std::cout << ddcHelper::get<Y, Y>(matrix) << " ";
+    std::cout << ddcHelper::get<Y, Z>(matrix) << std::endl;
+    std::cout << ddcHelper::get<Z, X>(matrix) << " ";
+    std::cout << ddcHelper::get<Z, Y>(matrix) << " ";
+    std::cout << ddcHelper::get<Z, Z>(matrix) << std::endl;
+
+    DTensor<IndexSet, IndexSet> inv_matrix = inverse(matrix);
+    std::cout << ddcHelper::get<X, X>(inv_matrix) << " ";
+    std::cout << ddcHelper::get<X, Y>(inv_matrix) << " ";
+    std::cout << ddcHelper::get<X, Z>(inv_matrix) << std::endl;
+    std::cout << ddcHelper::get<Y, X>(inv_matrix) << " ";
+    std::cout << ddcHelper::get<Y, Y>(inv_matrix) << " ";
+    std::cout << ddcHelper::get<Y, Z>(inv_matrix) << std::endl;
+    std::cout << ddcHelper::get<Z, X>(inv_matrix) << " ";
+    std::cout << ddcHelper::get<Z, Y>(inv_matrix) << " ";
+    std::cout << ddcHelper::get<Z, Z>(inv_matrix) << std::endl;
+    double test_val = ddcHelper::get<X, X>(inv_matrix);
+    ASSERT_NEAR(test_val, -24, 1e-12);
+    test_val = ddcHelper::get<X, Y>(inv_matrix);
+    ASSERT_NEAR(test_val, 18, 1e-12);
+    test_val = ddcHelper::get<X, Z>(inv_matrix);
+    ASSERT_NEAR(test_val, 5, 1e-12);
+    test_val = ddcHelper::get<Y, X>(inv_matrix);
+    ASSERT_NEAR(test_val, 20, 1e-12);
+    test_val = ddcHelper::get<Y, Y>(inv_matrix);
+    ASSERT_NEAR(test_val, -15, 1e-12);
+    test_val = ddcHelper::get<Y, Z>(inv_matrix);
+    ASSERT_NEAR(test_val, -4, 1e-12);
+    test_val = ddcHelper::get<Z, X>(inv_matrix);
+    ASSERT_NEAR(test_val, -5, 1e-12);
+    test_val = ddcHelper::get<Z, Y>(inv_matrix);
+    ASSERT_NEAR(test_val, 4, 1e-12);
+    test_val = ddcHelper::get<Z, Z>(inv_matrix);
+    ASSERT_NEAR(test_val, 1, 1e-12);
+}
