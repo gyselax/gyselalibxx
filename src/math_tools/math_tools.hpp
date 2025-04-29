@@ -193,7 +193,7 @@ inverse(DTensor<VectorIndexSet<RowDim1, RowDim2>, VectorIndexSet<ColDim1, ColDim
 }
 
 template <class RowDim1, class RowDim2, class RowDim3, class ColDim1, class ColDim2, class ColDim3>
-KOKKOS_INLINE_FUNCTION DTensor<
+KOKKOS_FUNCTION DTensor<
         VectorIndexSet<typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual>,
         VectorIndexSet<typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual>>
 inverse(
