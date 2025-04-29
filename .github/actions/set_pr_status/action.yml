@@ -31,11 +31,11 @@ runs:
     - if: github.repository == 'gyselax/gyselalibxx' && inputs.status == 'failure'
       # If any required tests are failing
       run: |
-        is_draft=$(gh pr view ${{ inputs.pr_number }} --json isDraft --jq '.["isDraft"]')
-        if [[ "${is_draft}" == "false" ]]
+        LATEST_SHA=$(gh pr view ${{ inputs.pr_number }} --json headRefOid --jq '.["headRefOid"]')
+        if [[ "${LATEST_SHA}" == "${{ inputs.sha }}" ]]
         then
-          LATEST_SHA=$(gh pr view ${{ inputs.pr_number }} --json headRefOid --jq '.["headRefOid"]')
-          if [[ "${LATEST_SHA}" == "${{ inputs.sha }}" ]]
+          is_draft=$(gh pr view ${{ inputs.pr_number }} --json isDraft --jq '.["isDraft"]')
+          if [[ "${is_draft}" == "false" ]]
           then
             # If the PR hasn't been modified since then put it into draft
             gh pr comment ${{ github.event.pull_request.number }} -b "This PR is failing tests so it has been put back into draft. Please remove the draft status when the tests pass."
