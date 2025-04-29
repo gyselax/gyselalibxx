@@ -8,7 +8,7 @@ git fetch
 
 if [ -z "${REMOTE}" ]
 then
-  REMOTE=origin/main
+  REMOTE=origin/devel
 fi
 
 

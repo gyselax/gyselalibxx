@@ -1,0 +1,32 @@
+name: Performance Issue
+description: Report a performance bottleneck
+title: "[Performance]: "
+labels: ["performance"]
+body:
+  - type: markdown
+    attributes:
+      value: "## Performance Issue\nDescribe the bottleneck."
+  - type: textarea
+    attributes:
+      label: Description
+      description: "Where is the performance issue occurring?"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps to Reproduce
+      description: "Provide steps to reproduce the performance issue."
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Profiling Data or Benchmarks
+      description: "If possible, provide profiling logs, CPU/memory usage, or benchmarks."
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Environment
+      description: "Supercomputer/cluster/personal computer, operating system, CPU/GPU type, etc."
+    validations:
+      required: true

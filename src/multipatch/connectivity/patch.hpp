@@ -46,7 +46,7 @@ struct Patch<grid1, grid2, bsplines_dim1, bsplines_dim2>
     using Coord1 = Coord<Dim1>;
     /// @brief Coordinate type on the second continuous dimension.
     using Coord2 = Coord<Dim2>;
-    /// @brief Coordinate type on the 2D continuous index range.
+    /// @brief Coordinate type on the 2D continuous dimensions.
     using Coord12 = Coord<Dim1, Dim2>;
 
     /// @brief 1D index of a grid point along the first dimension.

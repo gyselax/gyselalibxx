@@ -71,9 +71,7 @@ class MirrorTestClass
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
-            ddc::SplineSolver::LAPACK,
-            GridR,
-            GridTheta>;
+            ddc::SplineSolver::LAPACK>;
 
     CoordR const r0 {0.};
     CoordR const rN {1.};

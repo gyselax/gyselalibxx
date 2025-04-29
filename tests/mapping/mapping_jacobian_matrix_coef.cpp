@@ -36,8 +36,8 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCircMap)
     FieldMemRTheta_host<CoordRTheta> coords = get_example_coords(IdxStepR(Nr), IdxStepTheta(Nt));
     IdxRangeRTheta grid = get_idx_range(coords);
 
-    static_assert(has_2d_jacobian_v<decltype(mapping), CoordRTheta>);
-    static_assert(has_2d_inv_jacobian_v<decltype(mapping), CoordRTheta>);
+    static_assert(has_jacobian_v<decltype(mapping), CoordRTheta>);
+    static_assert(has_inv_jacobian_v<decltype(mapping), CoordRTheta>);
 
     // Test for each coordinates if the coefficients defined by the coefficients functions
     //are the same as the coefficients in the matrix function.
@@ -87,7 +87,7 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCzarMap)
     FieldMemRTheta_host<CoordRTheta> coords = get_example_coords(IdxStepR(Nr), IdxStepTheta(Nt));
     IdxRangeRTheta grid = get_idx_range(coords);
 
-    static_assert(has_2d_jacobian_v<decltype(mapping), CoordRTheta>);
+    static_assert(has_jacobian_v<decltype(mapping), CoordRTheta>);
 
     // Test for each coordinates if the coefficients defined by the coefficients functions
     //are the same as the coefficients in the matrix function.
@@ -106,6 +106,7 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCzarMap)
                 = mapping.template jacobian_component<Y, Theta_cov>(coords(irtheta));
 
         EXPECT_TRUE(Jacobian_matrix == Jacobian_matrix_coeff);
+        EXPECT_NEAR(determinant(Jacobian_matrix), mapping.jacobian(coords(irtheta)), 1e-14);
     });
 
     InverseJacobianMatrix inv_jacobian(mapping);
@@ -175,7 +176,7 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
                     evaluator);
     DiscreteToCartesian mapping = mapping_builder();
 
-    static_assert(has_2d_jacobian_v<decltype(mapping), CoordRTheta>);
+    static_assert(has_jacobian_v<decltype(mapping), CoordRTheta>);
     InverseJacobianMatrix inv_jacobian(mapping);
 
     // Test for each coordinates if the coefficients defined by the coefficients functions

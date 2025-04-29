@@ -38,7 +38,7 @@
  * @tparam GridR The radial grid type.
  * @tparam GridR The poloidal grid type.
  * @tparam PolarBSplinesRTheta The type of the 2D polar B-splines (on the coordinate
- * system @f$(r,\theta)@f$ including B-splines which traverse the O point).
+ *          system @f$(r,\theta)@f$ including B-splines which traverse the O point).
  * @tparam SplineRThetaEvaluatorNullBound The type of the 2D (cross-product) spline evaluator.
  * @tparam IdxRangeFull The full index range of @f$ \phi @f$ including any batch dimensions.
  */
@@ -271,7 +271,7 @@ public:
      *      The spline representation of the  @f$ \beta @f$ function in the
      *      definition of the Poisson-like equation.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
@@ -330,7 +330,7 @@ public:
                   ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
                           - ddc::discrete_space<BSplinesTheta>().nbasis())
     {
-        static_assert(has_2d_jacobian_v<Mapping, CoordRTheta>);
+        static_assert(has_jacobian_v<Mapping, CoordRTheta>);
         //initialise x_init
         Kokkos::deep_copy(m_x_init, 0);
         // Get break points
@@ -502,7 +502,7 @@ public:
      *      The spline representation of the  @f$ \beta @f$ function in the
      *      definition of the Poisson-like equation.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
@@ -583,7 +583,7 @@ public:
      *      The spline representation of the  @f$ \beta @f$ function in the
      *      definition of the Poisson-like equation.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
@@ -722,7 +722,7 @@ public:
      *      The spline representation of the  @f$ \beta @f$ function in the
      *      definition of the Poisson-like equation.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
@@ -1072,7 +1072,7 @@ public:
      *      The spline representation of the  @f$ \beta @f$ function in the
      *      definition of the Poisson-like equation.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @param[in] evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
@@ -1258,7 +1258,7 @@ public:
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @param[in] int_volume
      *      The integral volume associated with each point used in the quadrature scheme.
@@ -1342,7 +1342,7 @@ public:
      * @param[in] evaluator
      *      An evaluator for evaluating 2D splines on @f$ (r, \theta) @f$.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @return 
      *      The value of the matrix element.

@@ -90,10 +90,10 @@ int main(int argc, char** argv)
 
     IdxRangeVxVyXY idxrange_vxvyxy_v2Dsplit(idxrange_spvxvyxy_v2Dsplit);
     IdxRangeXYVxVy idxrange_xyvxvy_x2Dsplit(idxrange_spxyvxvy_x2Dsplit);
-    SplineXBuilder const builder_x(idxrange_vxvyxy_v2Dsplit);
-    SplineYBuilder const builder_y(idxrange_vxvyxy_v2Dsplit);
-    SplineVxBuilder const builder_vx(idxrange_xyvxvy_x2Dsplit);
-    SplineVyBuilder const builder_vy(idxrange_xyvxvy_x2Dsplit);
+    SplineXBuilder const builder_x(idxrange_x);
+    SplineYBuilder const builder_y(idxrange_y);
+    SplineVxBuilder const builder_vx(idxrange_vx);
+    SplineVyBuilder const builder_vy(idxrange_vy);
 
     IdxRangeSpVxVy idxrange_spvxvy_local(idxrange_spxyvxvy_x2Dsplit);
     // Initialisation of the distribution function
@@ -120,25 +120,29 @@ int main(int argc, char** argv)
     ddc::PeriodicExtrapolationRule<X> bv_x_max;
     SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
 
-    PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
+    PreallocatableSplineInterpolator const
+            spline_x_interpolator(builder_x, spline_x_evaluator, idxrange_vxvyxy_v2Dsplit);
 
     ddc::PeriodicExtrapolationRule<Y> bv_y_min;
     ddc::PeriodicExtrapolationRule<Y> bv_y_max;
     SplineYEvaluator const spline_y_evaluator(bv_y_min, bv_y_max);
 
-    PreallocatableSplineInterpolator const spline_y_interpolator(builder_y, spline_y_evaluator);
+    PreallocatableSplineInterpolator const
+            spline_y_interpolator(builder_y, spline_y_evaluator, idxrange_vxvyxy_v2Dsplit);
 
     ddc::ConstantExtrapolationRule<Vx> bv_vx_min(ddc::coordinate(idxrange_vx.front()));
     ddc::ConstantExtrapolationRule<Vx> bv_vx_max(ddc::coordinate(idxrange_vx.back()));
     SplineVxEvaluator const spline_vx_evaluator(bv_vx_min, bv_vx_max);
 
-    PreallocatableSplineInterpolator const spline_vx_interpolator(builder_vx, spline_vx_evaluator);
+    PreallocatableSplineInterpolator const
+            spline_vx_interpolator(builder_vx, spline_vx_evaluator, idxrange_xyvxvy_x2Dsplit);
 
     ddc::ConstantExtrapolationRule<Vy> bv_vy_min(ddc::coordinate(idxrange_vy.front()));
     ddc::ConstantExtrapolationRule<Vy> bv_vy_max(ddc::coordinate(idxrange_vy.back()));
     SplineVyEvaluator const spline_vy_evaluator(bv_vy_min, bv_vy_max);
 
-    PreallocatableSplineInterpolator const spline_vy_interpolator(builder_vy, spline_vy_evaluator);
+    PreallocatableSplineInterpolator const
+            spline_vy_interpolator(builder_vy, spline_vy_evaluator, idxrange_xyvxvy_x2Dsplit);
 
     // Create advection operator
     BslAdvectionSpatial<GeometryVxVyXY, GridX> const advection_x(spline_x_interpolator);

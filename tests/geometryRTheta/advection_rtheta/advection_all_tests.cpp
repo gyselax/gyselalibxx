@@ -12,7 +12,7 @@
 #include <ddc/ddc.hpp>
 
 #include "advection_simulation_utils.hpp"
-#include "bsl_advection_rtheta.hpp"
+#include "bsl_advection_polar.hpp"
 #include "cartesian_to_circular.hpp"
 #include "cartesian_to_czarny.hpp"
 #include "circular_to_cartesian.hpp"
@@ -182,8 +182,10 @@ public:
 struct GeneralParameters
 {
     IdxRangeRTheta grid;
-    PreallocatableSplineInterpolator2D<SplineRThetaBuilder, SplineRThetaEvaluatorNullBound> const&
-            interpolator;
+    PreallocatableSplineInterpolator2D<
+            SplineRThetaBuilder,
+            SplineRThetaEvaluatorNullBound,
+            IdxRangeRTheta> const& interpolator;
     SplineRThetaBuilder const& advection_builder;
     SplineRThetaEvaluatorConstBound& advection_evaluator;
     double final_time;
@@ -222,8 +224,7 @@ void run_simulations_with_methods(
             params.advection_builder,
             params.advection_evaluator);
 
-    BslAdvectionRTheta
-            advection_operator(params.interpolator, foot_finder, sim.to_physical_mapping);
+    BslAdvectionPolar advection_operator(params.interpolator, foot_finder, sim.to_physical_mapping);
 
     run_simulations(
             sim.to_physical_mapping_host,
@@ -324,7 +325,7 @@ int main(int argc, char** argv)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator);
+    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, grid);
 
 
     // --- Evaluator for the test advection field:

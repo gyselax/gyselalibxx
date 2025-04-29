@@ -49,9 +49,7 @@ using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
         ddc::BoundCond::GREVILLE,
         ddc::BoundCond::PERIODIC,
         ddc::BoundCond::PERIODIC,
-        ddc::SplineSolver::LAPACK,
-        GridR<PatchIdx>,
-        GridTheta<PatchIdx>>;
+        ddc::SplineSolver::LAPACK>;
 
 
 template <int PatchIdx, class ExecSpace>
@@ -65,9 +63,7 @@ using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
         ddc::ConstantExtrapolationRule<R, Theta>,
         ddc::ConstantExtrapolationRule<R, Theta>,
         ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        GridR<PatchIdx>,
-        GridTheta<PatchIdx>>;
+        ddc::PeriodicExtrapolationRule<Theta>>;
 
 
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;

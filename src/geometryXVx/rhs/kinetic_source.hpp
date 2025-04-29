@@ -26,7 +26,7 @@
  * and energy parameters are equal to one (usual case), the resulting velocity_shape 
  * is maxwellian. 
  * 
- * The complete description of the operator can be found in [rhs docs](https://github.com/gyselax/gyselalibxx/blob/main/doc/geometryXVx/kinetic_source.pdf). 
+ * The complete description of the operator can be found in [rhs docs](https://github.com/gyselax/gyselalibxx/blob/devel/doc/geometryXVx/kinetic_source.pdf). 
  */
 class KineticSource : public IRightHandSide
 {

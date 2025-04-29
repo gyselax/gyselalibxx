@@ -40,9 +40,9 @@ If a Field is given as input, it computes the spline representation (on the cros
 The spline representation is needed to compute the derivatives of the function $`\phi`$.
 If the PolarSplineMem representation is given as input, it can directly compute the derivatives of the function $`\phi`$.
 
-Once the advection field computed, it is given as input to the BslAdvectionRTheta operator to advect the density $`\rho`$ function.
-The BslAdvectionRTheta operator can handle the advection with an advection field along $`(x,y)`$ and with an advection field along $`(r,\theta)`$.
-But as the BslAdvectionRTheta operator advects in the physical domain, it is recommended to work with the advection field along $`(x,y)`$.
+Once the advection field computed, it is given as input to the BslAdvectionPolar operator to advect the density $`\rho`$ function.
+The BslAdvectionPolar operator can handle the advection with an advection field along $`(x,y)`$ and with an advection field along $`(r,\theta)`$.
+But as the BslAdvectionPolar operator advects in the physical domain, it is recommended to work with the advection field along $`(x,y)`$.
 
 ### Advection field along the physical domain axis
 

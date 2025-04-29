@@ -1,0 +1,22 @@
+name: Refactoring Request
+description: Suggest improvements to existing code
+title: "[Refactor]: "
+labels: ["refactoring"]
+body:
+  - type: markdown
+    attributes:
+      value: "## Refactoring Request\nSuggest a cleaner or more efficient approach."
+  - type: textarea
+    attributes:
+      label: Current Implementation
+      description: "What part of the code needs refactoring?"
+  - type: textarea
+    attributes:
+      label: Suggested Improvement
+      description: "How would you improve it?"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Benefits
+      description: "Why is this refactoring needed?"

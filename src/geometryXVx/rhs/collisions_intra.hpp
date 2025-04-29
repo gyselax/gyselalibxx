@@ -33,7 +33,7 @@
  * that needs to be resolved at each spatial position of the simulation box. Note that this linear 
  * system depends on the considered spatial position. 
  * 
- * The complete description of the operator can be found in [rhs docs](https://github.com/gyselax/gyselalibxx/blob/main/doc/geometryXVx/collisions_intra_inter.pdf).
+ * The complete description of the operator can be found in [rhs docs](https://github.com/gyselax/gyselalibxx/blob/devel/doc/geometryXVx/collisions_intra_inter.pdf).
  */
 class CollisionsIntra : public IRightHandSide
 {

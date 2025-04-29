@@ -21,8 +21,53 @@ struct Y
     /// The corresponding type in the dual space.
     using Dual = Y;
 };
+struct Z
+{
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    /// The corresponding type in the dual space.
+    using Dual = Z;
+};
+
+struct Rho_cov;
+struct Rho
+{
+    static bool constexpr PERIODIC = false;
+    static bool constexpr IS_COVARIANT = false;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    /// The corresponding type in the dual space.
+    using Dual = Rho_cov;
+};
+struct Rho_cov
+{
+    static bool constexpr PERIODIC = false;
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = false;
+    /// The corresponding type in the dual space.
+    using Dual = Rho;
+};
+struct Zeta_cov;
+struct Zeta
+{
+    static bool constexpr PERIODIC = true;
+    static bool constexpr IS_COVARIANT = false;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    /// The corresponding type in the dual space.
+    using Dual = Zeta_cov;
+};
+struct Zeta_cov
+{
+    static bool constexpr PERIODIC = true;
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = false;
+    /// The corresponding type in the dual space.
+    using Dual = Zeta;
+};
+
 struct R_cov;
 struct Theta_cov;
+struct Phi_cov;
+
 struct R
 {
     static bool constexpr PERIODIC = false;
@@ -31,7 +76,6 @@ struct R
     /// The corresponding type in the dual space.
     using Dual = R_cov;
 };
-
 struct Theta
 {
     static bool constexpr PERIODIC = true;
@@ -40,6 +84,15 @@ struct Theta
     /// The corresponding type in the dual space.
     using Dual = Theta_cov;
 };
+struct Phi
+{
+    static bool constexpr PERIODIC = true;
+    static bool constexpr IS_COVARIANT = false;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    /// The corresponding type in the dual space.
+    using Dual = Phi_cov;
+};
+
 struct R_cov
 {
     static bool constexpr PERIODIC = false;
@@ -48,7 +101,6 @@ struct R_cov
     /// The corresponding type in the dual space.
     using Dual = R;
 };
-
 struct Theta_cov
 {
     static bool constexpr PERIODIC = true;
@@ -57,10 +109,21 @@ struct Theta_cov
     /// The corresponding type in the dual space.
     using Dual = Theta;
 };
+struct Phi_cov
+{
+    static bool constexpr PERIODIC = true;
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = false;
+    /// The corresponding type in the dual space.
+    using Dual = Phi;
+};
 
 using CoordR = Coord<R>;
 using CoordTheta = Coord<Theta>;
+using CoordPhi = Coord<Phi>;
 using CoordRTheta = Coord<R, Theta>;
+using CoordRThetaPhi = Coord<R, Theta, Phi>;
+using CoordRZZeta = Coord<R, Z, Zeta>;
 using CoordXY = Coord<X, Y>;
 
 int constexpr BSDegree = 3;
@@ -85,6 +148,15 @@ struct GridR : InterpPointsR::interpolation_discrete_dimension_type
 struct GridTheta : InterpPointsTheta::interpolation_discrete_dimension_type
 {
 };
+struct GridPhi : UniformGridBase<Phi>
+{
+};
+struct GridZeta : UniformGridBase<Zeta>
+{
+};
+struct GridZ : UniformGridBase<Z>
+{
+};
 
 template <class ExecSpace>
 using SplineRThetaBuilder = ddc::SplineBuilder2D<
@@ -98,9 +170,7 @@ using SplineRThetaBuilder = ddc::SplineBuilder2D<
         ddc::BoundCond::GREVILLE,
         ddc::BoundCond::PERIODIC,
         ddc::BoundCond::PERIODIC,
-        ddc::SplineSolver::LAPACK,
-        GridR,
-        GridTheta>;
+        ddc::SplineSolver::LAPACK>;
 using SplineRThetaBuilder_host = SplineRThetaBuilder<Kokkos::DefaultHostExecutionSpace>;
 
 template <class ExecSpace>
@@ -114,9 +184,7 @@ using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
         ddc::NullExtrapolationRule,
         ddc::NullExtrapolationRule,
         ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        GridR,
-        GridTheta>;
+        ddc::PeriodicExtrapolationRule<Theta>>;
 using SplineRThetaEvaluator_host = SplineRThetaEvaluator<Kokkos::DefaultHostExecutionSpace>;
 
 using IdxRangeBSR = IdxRange<BSplinesR>;
@@ -125,14 +193,23 @@ using IdxRangeBSRTheta = IdxRange<BSplinesR, BSplinesTheta>;
 
 using IdxRangeR = IdxRange<GridR>;
 using IdxRangeTheta = IdxRange<GridTheta>;
+using IdxRangePhi = IdxRange<GridPhi>;
 using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
+using IdxRangeRThetaPhi = IdxRange<GridR, GridTheta, GridPhi>;
+using IdxRangeRZZeta = IdxRange<GridR, GridZ, GridZeta>;
 
 using IdxR = Idx<GridR>;
 using IdxTheta = Idx<GridTheta>;
+using IdxPhi = Idx<GridPhi>;
 using IdxRTheta = Idx<GridR, GridTheta>;
+using IdxRThetaPhi = Idx<GridR, GridTheta, GridPhi>;
+using IdxRZZeta = Idx<GridR, GridZ, GridZeta>;
 
 using IdxStepR = IdxStep<GridR>;
 using IdxStepTheta = IdxStep<GridTheta>;
+using IdxStepPhi = IdxStep<GridPhi>;
+using IdxStepZ = IdxStep<GridZ>;
+using IdxStepZeta = IdxStep<GridZeta>;
 using IdxStepRTheta = IdxStep<GridR, GridTheta>;
 
 using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
@@ -140,6 +217,12 @@ using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 
 template <class ElementType>
 using FieldMemRTheta_host = host_t<FieldMem<ElementType, IdxRangeRTheta>>;
+
+template <class ElementType>
+using FieldMemRThetaPhi_host = host_t<FieldMem<ElementType, IdxRangeRThetaPhi>>;
+
+template <class ElementType>
+using FieldMemRZZeta_host = host_t<FieldMem<ElementType, IdxRangeRZZeta>>;
 
 /**
  * @brief Check if the product of the matrix and inv_matrix gives the identity matrix.
