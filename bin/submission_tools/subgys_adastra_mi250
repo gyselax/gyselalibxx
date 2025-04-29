@@ -1,0 +1,137 @@
+#!/bin/bash
+
+# -----------------------------------------------------------------
+# script used for submit gysela5D job
+# -----------------------------------------------------------------
+arg=$#
+
+if [ $# -lt 2 ]; then
+    echo " Syntaxe:  subgys DATA_filename nbGPU"
+fi
+
+INPUTYAML=$1
+((NBGPU="$2"))
+
+# data name
+# ---------
+DATANAME=${INPUTYAML}
+echo "DATANAME= ${DATANAME}"
+
+# case name
+# ---------
+CASENAME=`basename ${DATANAME} .yaml | tr '[:lower:]' '[:upper:]'`
+MACHNAME=`echo $ARCH | tr '[:lower:]' '[:upper:]'`
+
+CASE=D$(echo ${MACHNAME} | sed -r -e "s/([A-Z])[A-Z]*/\\1/g" -e "s/_//g")_${CASENAME}_NBGPU${NBGPU}
+echo "CASE = ${CASE}"
+
+
+# job parameters
+# --------------
+# time in seconds format
+TIMEH="01:00:00"
+TIME=$(echo $TIMEH |awk -F: '{print 3600*$1+60*$2+$3}')
+# job Name
+JOBNAME='Landau4D'
+STATUSOK=0
+
+
+# Environment
+# -----------
+DIR=$(basename $(dirname $PWD))
+exec_file="/lus/work/CT5/gen2224/gdgirard/gyselalibxx_github/build-mi250/simulations/geometryXYVxVy/landau/landau4d_fft"
+go_file_cmd="go_"$DATANAME"_nbgpu"$NBGPU".cmd"
+
+HOMEDIR="$(readlink -f "$(dirname "$0")/..")"
+WKDIR=${HOMEDIR}/wk
+RESDIR1=${SCRATCHDIR}/${DIR}
+echo "DIR = ${DIR}"
+echo "HOMEDIR = ${HOMEDIR}"
+echo "WKDIR = ${WKDIR}"
+echo "RESDIR1 = ${RESDIR1}"
+
+# Creation of the work directory
+# ------------------------------
+if [ ! -d ${RESDIR1} ]
+then
+    mkdir -p ${RESDIR1}
+fi
+RESDIR=${RESDIR1}/${CASE}
+if [ ! -d ${RESDIR} ]; then
+    mkdir -p ${RESDIR}
+    ln -s ${RESDIR} ${CASE}
+fi
+echo "RESDIR = ${RESDIR}"
+
+# Batch control
+# -------------
+NPES="$NBGPU"
+NTHREAD=1
+
+THREAD_PER_NODE=128
+MAXIMUM_RANK_PER_NODE=8
+
+if ((NTHREAD > (THREAD_PER_NODE/MAXIMUM_RANK_PER_NODE))); then
+    echo "Oversubscribing threads is not supported. We assume at most 16 threads per rank and 1 GPU per rank."
+    # Though it has been useful in Linpack runs.
+    exit 1
+fi
+
+NODE_COUNT="$(((NPES + (MAXIMUM_RANK_PER_NODE - 1))/MAXIMUM_RANK_PER_NODE))"
+echo "NODE_COUNT= ${NODE_COUNT}"
+
+PROFILE_COMMAND=""
+# PROFILE_COMMAND="rocprof --stats"
+# PROFILE_COMMAND="rocprof --hip-trace"
+
+# NOTE: Used by adastra.embind.sh
+export BINDING_VARIANT="Adastra_MI250_8TasksWith16ThreadsAnd1GPU"
+CMD_MPIRUN="srun --label --nodes=${NODE_COUNT} --ntasks=${NPES} --ntasks-per-node=${MAXIMUM_RANK_PER_NODE} --cpu-bind=none --mem-bind=none -- ${exec_file} ${INPUTYAML} 1>> ${RESDIR}/gyselalibxx.out 2>> ${RESDIR}/gyselalibxx.err"
+#VG#CMD_MPIRUN="srun --label --nodes=${NODE_COUNT} --ntasks=${NPES} --ntasks-per-node=${MAXIMUM_RANK_PER_NODE} --cpu-bind=none --mem-bind=none -- ./binding/adastra.embind.sh ${PROFILE_COMMAND} ${exec_file} ${INPUTYAML} 1>> ${RESDIR}/gyselalibxx.out 2>> ${RESDIR}/gyselalibxx.err"
+#VG##VG#CMD_MPIRUN="timedatectl; echo \"Software \$(sha1sum -- \"${exec_file}\") hash.\"; ${CMD_MPIRUN}"
+
+#VG#CMD_MPIRUN="srun -l -c \${SLURM_CPUS_PER_TASK} --cpu-bind=verbose,cores --gpu-bind=verbose,closest -- ${exec_file} ${INPUTYAML} 1>> ${RESDIR}/gyselalibxx.out 2>> ${RESDIR}/gyselalibxx.err"
+
+CMD_SUB="sbatch ${go_file_cmd}"
+
+
+cat <<EOF > ${go_file_cmd}
+#!/bin/bash
+#SBATCH --account="${ACTIVE_PROJECT}"
+#SBATCH --job-name="${JOBNAME}"
+#SBATCH --constraint=MI250
+#SBATCH --mem=0
+#SBATCH --nodes=${NODE_COUNT}
+#SBATCH --exclusive
+#SBATCH --time=${TIMEH}
+#SBATCH -o $JOBNAME.o.%j.out
+#SBATCH -e $JOBNAME.e.%j.out
+
+ulimit -s unlimited
+ulimit -c 0
+
+source  ${HOMEDIR}/toolchains/mi250.hipcc.adastra.spack/environment.sh
+
+export KOKKOS_TOOLS_LIBS=$WORKDIR/kokkos-tools/install/lib64/libkp_kernel_timer.so
+export MPICH_GPU_SUPPORT_ENABLED=1
+
+set +v
+
+EOF
+
+cat <<EOF >> ${go_file_cmd}
+cp ${INPUTYAML} ${RESDIR}
+cd ${RESDIR}
+${CMD_MPIRUN}
+EOF
+
+#VG#printf " #Watch your job with:\n  squeue -u \$USER\n" 
+#VG#printf " #Delete your job with:\n scancel Job_ID\n" 
+
+# --------------------------------------------------------------------- 
+# Launch submission
+# -----------------------------------------------------------------
+chmod +x ${go_file_cmd}
+cd ${WKDIR}
+echo " ... ${CMD_SUB}"
+${CMD_SUB}
