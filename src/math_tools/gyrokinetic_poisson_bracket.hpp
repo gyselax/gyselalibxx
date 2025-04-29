@@ -12,6 +12,10 @@
  * @brief A class which implements a gyrokinetic Poisson bracket operator.
  * The implemented equation is:
  * @f$ \{F, G\} = b\dot(\nabla F \cross \nabla G) @f$
+ * with @f$ b= \mathbf{B} / B @f$ the unitary magnetic field, i.e:
+ * @f$ \{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k @f$
+ * with @f$ {\cal J}_{\rm x} @f$ the jacobian of the system,
+ * @f$ b_k @f$ the covariant components of b and @f$\epsilon^{ijk} @f$ the Levi-Civita symbol.
  * @tparam Mapping3D A type representing a mapping in 3 dimensions.
  */
 template <class Mapping3D>
