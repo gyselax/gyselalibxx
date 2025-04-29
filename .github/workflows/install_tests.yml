@@ -34,7 +34,7 @@ jobs:
           MATCHING_PATHS: '[".github/workflows/install_tests.yml", "toolchains/cpu.spack.gyselalibxx_env/*", "CMakeLists.txt"]'
 
   spack_test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: pre_job
     name: Install Test
     steps:
