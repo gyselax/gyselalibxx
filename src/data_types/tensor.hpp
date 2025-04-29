@@ -36,15 +36,18 @@ public:
     /**
      * @brief Construct an uninitialised tensor object.
      */
-    KOKKOS_FUNCTION Tensor() : base_type(mdspan_type(m_data_alloc.data())) {}
+    KOKKOS_FUNCTION Tensor()
+    {
+        m_data = mdspan_type(m_data_alloc.data());
+    }
 
     /**
      * @brief Construct a tensor object initialised with a value.
      * @param fill_value The value with which the tensor should be filled.
      */
     explicit KOKKOS_FUNCTION Tensor(ElementType fill_value)
-        : base_type(mdspan_type(m_data_alloc.data()))
     {
+        m_data = mdspan_type(m_data_alloc.data());
         for (std::size_t i(0); i < s_n_elements; ++i) {
             m_data[i] = fill_value;
         }
@@ -62,11 +65,11 @@ public:
             class = std::enable_if_t<
                     sizeof...(Params) == base_type::size() && sizeof...(Params) != 1>>
     explicit KOKKOS_FUNCTION Tensor(Params... elements)
-        : base_type(mdspan_type(m_data_alloc.data()))
     {
         static_assert(
                 rank() == 1,
                 "Filling the tensor on initialisation is only permitted for 1D vector objects");
+        m_data = mdspan_type(m_data_alloc.data());
         m_data_alloc = std::array<ElementType, base_type::size()>({elements...});
     }
 
@@ -77,7 +80,6 @@ public:
      */
     template <class... Dims>
     explicit KOKKOS_FUNCTION Tensor(Coord<Dims...> coord)
-        : base_type(mdspan_type(m_data_alloc.data()))
     {
         static_assert(
                 rank() == 1,
@@ -85,6 +87,7 @@ public:
         static_assert(
                 std::is_same_v<VectorIndexSet<Dims...>, ddc::type_seq_element_t<0, index_set>>,
                 "The coordinate must have the same memory layout to make a clean conversion.");
+        m_data = mdspan_type(m_data_alloc.data());
         m_data_alloc = coord.array();
     }
 
@@ -96,11 +99,11 @@ public:
      */
     template <class OTensorType, std::enable_if_t<is_tensor_type_v<OTensorType>, bool> = true>
     explicit KOKKOS_FUNCTION Tensor(const OTensorType& o_tensor)
-        : base_type(mdspan_type(m_data_alloc.data()))
     {
         static_assert(
                 std::is_same_v<typename OTensorType::index_set, index_set>,
                 "The coordinate must have the same memory layout to make a clean conversion.");
+        m_data = mdspan_type(m_data_alloc.data());
         for (std::size_t i(0); i < s_n_elements; ++i) {
             m_data[i] = o_tensor.m_data[i];
         }
@@ -112,8 +115,9 @@ public:
      *
      * @param o_tensor The tensor to be copied.
      */
-    KOKKOS_FUNCTION Tensor(Tensor const& o_tensor) : base_type(mdspan_type(m_data_alloc.data()))
+    KOKKOS_FUNCTION Tensor(Tensor const& o_tensor)
     {
+        m_data = mdspan_type(m_data_alloc.data());
         for (std::size_t i(0); i < s_n_elements; ++i) {
             m_data[i] = o_tensor.m_data[i];
         }
@@ -127,8 +131,8 @@ public:
      */
     explicit KOKKOS_FUNCTION Tensor(Tensor&& o_tensor)
         : m_data_alloc(std::move(o_tensor.m_data_alloc))
-        , base_type(mdspan_type(m_data_alloc.data()))
     {
+        m_data = mdspan_type(m_data_alloc.data());
     }
 
     /**
