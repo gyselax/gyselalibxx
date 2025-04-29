@@ -34,7 +34,7 @@ jobs:
           MATCHING_PATHS: '[".github/workflows/install_tests.yml", "toolchains/cpu.spack.gyselalibxx_env/*", "CMakeLists.txt"]'
 
   spack_test:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     needs: pre_job
     name: Install Test
     steps:
@@ -53,6 +53,14 @@ jobs:
           ../toolchains/cpu.spack.gyselalibxx_env/prepare.sh
         shell: bash
         timeout-minutes: 180
+      - name: Save logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: spack-log-artifact
+          path: spack_setup/spack-logs
+          retention-days: 1
+          include-hidden-files: true
       - name: Build code
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/build_code
