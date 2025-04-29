@@ -7,7 +7,7 @@
 
 /**
  * @brief Tag the first non periodic dimension
- * in the pseudo_Cartesian index range.
+ * in the pseudo physical domain (pseudo-Cartesian coordinates).
  */
 struct X_pC
 {
@@ -29,7 +29,7 @@ struct X_pC
 
 /**
  * @brief Tag the second non periodic dimension
- * in the pseudo_Cartesian index range.
+ * in the pseudo physical domain (pseudo-Cartesian coordinates).
  */
 struct Y_pC
 {

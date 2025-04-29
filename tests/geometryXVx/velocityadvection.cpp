@@ -119,11 +119,12 @@ TEST(VelocityAdvection, SplineBatched)
     auto [idx_range_x, idx_range_vx] = Init_idx_range_velocity_adv();
     IdxRangeXVx meshXVx(idx_range_x, idx_range_vx);
 
-    SplineVxBuilder const builder_vx(meshXVx);
+    SplineVxBuilder const builder_vx(idx_range_vx);
     ddc::ConstantExtrapolationRule<Vx> bv_v_min(vx_min);
     ddc::ConstantExtrapolationRule<Vx> bv_v_max(vx_max);
     SplineVxEvaluator const spline_vx_evaluator(bv_v_min, bv_v_max);
-    PreallocatableSplineInterpolator const spline_vx_interpolator(builder_vx, spline_vx_evaluator);
+    PreallocatableSplineInterpolator const
+            spline_vx_interpolator(builder_vx, spline_vx_evaluator, meshXVx);
     BslAdvectionVelocity<GeometryXVx, GridVx> const spline_advection_vx(spline_vx_interpolator);
     double const err = VelocityAdvection<
             GeometryXVx,

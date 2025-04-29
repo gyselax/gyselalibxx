@@ -17,19 +17,9 @@
 template <class Mapping, class PositionCoordinate = typename Mapping::CoordArg>
 class InverseJacobianMatrix
 {
-    static_assert(Mapping::CoordArg::size() == 2);
-
 private:
     using ValidArgIndices = ddc::to_type_seq_t<typename Mapping::CoordArg>;
     using ValidResultIndices = ddc::to_type_seq_t<typename Mapping::CoordResult>;
-    using DimArg0 = ddc::type_seq_element_t<0, ValidArgIndices>;
-    using DimArg1 = ddc::type_seq_element_t<1, ValidArgIndices>;
-    using DimArg0_cov = typename DimArg0::Dual;
-    using DimArg1_cov = typename ddc::type_seq_element_t<1, ValidArgIndices>::Dual;
-    using DimRes0 = typename ddc::type_seq_element_t<0, ValidResultIndices>;
-    using DimRes1 = typename ddc::type_seq_element_t<1, ValidResultIndices>;
-    using DimRes0_cov = typename ddc::type_seq_element_t<0, ValidResultIndices>::Dual;
-    using DimRes1_cov = typename ddc::type_seq_element_t<1, ValidResultIndices>::Dual;
 
 public:
     /// The type of the tensor representing the inverse Jacobian.
@@ -83,13 +73,24 @@ public:
     template <class IndexTag1, class IndexTag2>
     KOKKOS_INLINE_FUNCTION double inv_jacobian_component(PositionCoordinate const& coord) const
     {
-        static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<DimArg0, DimArg1>>);
-        static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<DimRes0_cov, DimRes1_cov>>);
+        static_assert(ddc::in_tags_v<IndexTag1, ValidArgIndices>);
+        static_assert(ddc::in_tags_v<IndexTag2, get_covariant_dims_t<ValidResultIndices>>);
 
         if constexpr (has_inv_jacobian_v<Mapping, PositionCoordinate, false>) {
             return m_mapping.template inv_jacobian_component<IndexTag1, IndexTag2>(coord);
         } else {
             static_assert(has_jacobian_v<Mapping, PositionCoordinate>);
+            static_assert(Mapping::CoordArg::size() == 2);
+
+            using DimArg0 = ddc::type_seq_element_t<0, ValidArgIndices>;
+            using DimArg1 = ddc::type_seq_element_t<1, ValidArgIndices>;
+            using DimArg0_cov = typename DimArg0::Dual;
+            using DimArg1_cov = typename ddc::type_seq_element_t<1, ValidArgIndices>::Dual;
+            using DimRes0 = typename ddc::type_seq_element_t<0, ValidResultIndices>;
+            using DimRes1 = typename ddc::type_seq_element_t<1, ValidResultIndices>;
+            using DimRes0_cov = typename ddc::type_seq_element_t<0, ValidResultIndices>::Dual;
+            using DimRes1_cov = typename ddc::type_seq_element_t<1, ValidResultIndices>::Dual;
+
             double jacob = m_mapping.jacobian(coord);
             assert(fabs(jacob) > 1e-15);
             if constexpr (

@@ -34,8 +34,8 @@
  * @param[in] exec_space
  *     The space on which the function is executed (CPU/GPU).
  * @param[in] mapping
- *      The mapping function from the logical index range @f$ (r,\theta) @f$
- *      to the physical index range @f$ (x, y) @f$.
+ *      The mapping function from the logical domain @f$ (r,\theta) @f$
+ *      to the physical domain @f$ (x, y) @f$.
  * @param[in] coefficients_alloc
  *      The quadrature coefficients @f$\{q_{ij}\}_{ij} @f$.
  *

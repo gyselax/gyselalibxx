@@ -135,8 +135,7 @@ class MultipatchSplineBuilder2D
                 std::is_same_v<upper_matching_edge1, OutsideEdge> ? BcUpper1 : BcTransition,
                 std::is_same_v<lower_matching_edge2, OutsideEdge> ? BcLower2 : BcTransition,
                 std::is_same_v<upper_matching_edge2, OutsideEdge> ? BcUpper2 : BcTransition,
-                Solver,
-                Grid1D...>;
+                Solver>;
     };
 
     /// A type alias to get the builder type on a specific patch.
@@ -145,23 +144,31 @@ class MultipatchSplineBuilder2D
 
     /// A type alias to get the batched spline coefficients on a specific patch.
     template <class Patch>
-    using SplineOnPatch
-            = DField<typename BuilderOnPatch<Patch>::batched_spline_domain_type, MemorySpace>;
+    using SplineOnPatch = DField<
+            typename BuilderOnPatch<Patch>::batched_spline_domain_type<
+                    typename ValuesOnPatch<Patch>::discrete_domain_type>,
+            MemorySpace>;
 
     /// A type alias to get the batched derivatives along the first dimension on a specific patch.
     template <class Patch>
-    using Derivs1OnPatch
-            = DConstField<typename BuilderOnPatch<Patch>::batched_derivs_domain_type1, MemorySpace>;
+    using Derivs1OnPatch = DConstField<
+            typename BuilderOnPatch<Patch>::batched_derivs_domain_type1<
+                    typename ValuesOnPatch<Patch>::discrete_domain_type>,
+            MemorySpace>;
 
     /// A type alias to get the batched derivatives along the first dimension on a specific patch.
     template <class Patch>
-    using Derivs2OnPatch
-            = DConstField<typename BuilderOnPatch<Patch>::batched_derivs_domain_type2, MemorySpace>;
+    using Derivs2OnPatch = DConstField<
+            typename BuilderOnPatch<Patch>::batched_derivs_domain_type2<
+                    typename ValuesOnPatch<Patch>::discrete_domain_type>,
+            MemorySpace>;
 
     /// A type alias to get the batched cross-derivatives on a specific patch.
     template <class Patch>
-    using Derivs12OnPatch
-            = DConstField<typename BuilderOnPatch<Patch>::batched_derivs_domain_type, MemorySpace>;
+    using Derivs12OnPatch = DConstField<
+            typename BuilderOnPatch<Patch>::batched_derivs_domain_type<
+                    typename ValuesOnPatch<Patch>::discrete_domain_type>,
+            MemorySpace>;
 
     /// The type of the batched spline coefficients.
     using MultipatchSplineCoeffs = MultipatchField<SplineOnPatch, Patches...>;

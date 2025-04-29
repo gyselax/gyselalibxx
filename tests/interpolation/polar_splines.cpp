@@ -116,9 +116,7 @@ TEST(PolarSplineTest, ConstantEval)
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
-            ddc::SplineSolver::LAPACK,
-            GridR,
-            GridTheta>;
+            ddc::SplineSolver::LAPACK>;
 
     using EvaluatorRTheta = ddc::SplineEvaluator2D<
             Kokkos::DefaultHostExecutionSpace,
@@ -130,9 +128,7 @@ TEST(PolarSplineTest, ConstantEval)
             ddc::NullExtrapolationRule,
             ddc::NullExtrapolationRule,
             ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            GridR,
-            GridTheta>;
+            ddc::PeriodicExtrapolationRule<Theta>>;
 
     CoordR constexpr r0(0.);
     CoordR constexpr rN(1.);
@@ -239,9 +235,7 @@ void test_polar_integrals()
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
-            ddc::SplineSolver::LAPACK,
-            GridR,
-            GridTheta>;
+            ddc::SplineSolver::LAPACK>;
 
     using EvaluatorRTheta = ddc::SplineEvaluator2D<
             Kokkos::DefaultHostExecutionSpace,
@@ -253,9 +247,7 @@ void test_polar_integrals()
             ddc::NullExtrapolationRule,
             ddc::NullExtrapolationRule,
             ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            GridR,
-            GridTheta>;
+            ddc::PeriodicExtrapolationRule<Theta>>;
 
     CoordR constexpr r0(0.);
     CoordR constexpr rN(1.);

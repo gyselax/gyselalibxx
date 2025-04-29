@@ -29,8 +29,8 @@ public:
      * @brief Instantiate a VortexMergerDensitySolution.
      *
      * @param[in] mapping
-     *      A mapping function from the logical index range
-     *      to the physical index range.
+     *      A mapping function from the logical domain
+     *      to the physical domain.
      */
     explicit VortexMergerDensitySolution(Mapping const& mapping) : m_mapping(mapping) {}
 

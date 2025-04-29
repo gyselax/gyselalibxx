@@ -68,8 +68,8 @@ int main(int argc, char** argv)
     IdxRangeSpXVx const meshSpXVx(idx_range_kinsp, meshXVx);
     IdxRangeSpVx const meshSpVx(idx_range_kinsp, mesh_vx);
 
-    SplineXBuilder const builder_x(meshXVx);
-    SplineVxBuilder const builder_vx(meshXVx);
+    SplineXBuilder const builder_x(mesh_x);
+    SplineVxBuilder const builder_vx(mesh_vx);
 
     // Initialisation of the distribution function
     DFieldMemSpVx allfequilibrium(meshSpVx);
@@ -112,13 +112,15 @@ int main(int argc, char** argv)
 
     // Creating operators
     SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
-    PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
+    PreallocatableSplineInterpolator const
+            spline_x_interpolator(builder_x, spline_x_evaluator, meshXVx);
 
     ddc::ConstantExtrapolationRule<Vx> bv_v_min(ddc::coordinate(mesh_vx.front()));
     ddc::ConstantExtrapolationRule<Vx> bv_v_max(ddc::coordinate(mesh_vx.back()));
 
     SplineVxEvaluator const spline_vx_evaluator(bv_v_min, bv_v_max);
-    PreallocatableSplineInterpolator const spline_vx_interpolator(builder_vx, spline_vx_evaluator);
+    PreallocatableSplineInterpolator const
+            spline_vx_interpolator(builder_vx, spline_vx_evaluator, meshXVx);
 
     BslAdvectionSpatial<GeometryXVx, GridX> const advection_x(spline_x_interpolator);
     BslAdvectionVelocity<GeometryXVx, GridVx> const advection_vx(spline_vx_interpolator);

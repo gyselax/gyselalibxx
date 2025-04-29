@@ -537,7 +537,7 @@ TEST(VectorField2DTest, IdxRangeSliceXTooearly)
     // the error message is checked with clang & gcc only
     EXPECT_DEATH(
             field[subidx_range_x],
-            R"rgx([Aa]ssert.*uid<ODDims>\(m_element_begin\).*uid<ODDims>\(odomain\.m_element_begin\))rgx");
+            R"rgx([Aa]ssert.*DiscreteElement<ODDims>\(m_element_begin\) <= DiscreteElement<ODDims>\(odomain.m_element_begin\).*)rgx");
 #endif
 }
 
@@ -551,7 +551,7 @@ TEST(VectorField2DTest, IdxRangeSliceXToolate)
     // the error message is checked with clang & gcc only
     EXPECT_DEATH(
             field[subidx_range_x],
-            R"rgx([Aa]ssert.*uid<ODDims>\(m_element_end\).*uid<ODDims>\(odomain\.m_element_end\).*)rgx");
+            R"rgx([Aa]ssert.*DiscreteElement<ODDims>\(m_element_end\) >= DiscreteElement<ODDims>\(odomain.m_element_end\).*)rgx");
 #endif
 }
 
