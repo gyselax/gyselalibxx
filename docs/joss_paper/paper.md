@@ -120,7 +120,7 @@ All operators are designed to function correctly or raise compiler errors on non
 Plasma simulations are essential for the development of magnetic confinement fusion devices for energy production.
 The low collisionality of such plasmas make kinetic models a judicious choice.
 In particular gyrokinetic theory[@brizard2007; @krommes2012], which reduces the 6D problem to a 5D problem by removing high frequency dynamics, is a popular tool for such simlations [@garbet2010].
-Despite the reduction in dimensionality scuh simulations still require massively powerful high-performance computing (HPC) resources.
+Despite the reduction in dimensionality such simulations still require massively powerful high-performance computing (HPC) resources.
 
 The most popular numerical methods for such simulations are particle-in-cell (PIC) methods and Eulerian methods, however both methods have inherent disadvantages.
 PIC methods are limited by numerical noise which, without complex noise reduction techniques, is only slowly attenuated $1 / \sqrt{N}$ as resource usage is increased.
