@@ -20,12 +20,15 @@
  * The functions in this mapping are defined on the coordinate system associated
  * with the domain @f$ \Omega_{mid} @f$.
  */
-template <class Mapping1, class Mapping2>
+template <class Mapping1, class Mapping2, class CoordJacobian = typename Mapping2::CoordResult>
 class CombinedMapping
 {
     static_assert(is_mapping_v<Mapping1>);
     static_assert(is_mapping_v<Mapping2>);
     static_assert(std::is_same_v<typename Mapping2::CoordResult, typename Mapping1::CoordArg>);
+    static_assert(
+            (std::is_same_v<CoordJacobian, typename Mapping2::CoordArg>)
+            || (std::is_same_v<CoordJacobian, typename Mapping2::CoordResult>));
 
 public:
     /// The type of the argument of the function described by this mapping.
@@ -46,6 +49,9 @@ private:
     using DimArg2 = ddc::type_seq_element_t<1, ddc::to_type_seq_t<CoordArg>>;
     using DimResult1 = ddc::type_seq_element_t<0, ddc::to_type_seq_t<CoordResult>>;
     using DimResult2 = ddc::type_seq_element_t<1, ddc::to_type_seq_t<CoordResult>>;
+
+    /// The type of the intermediate coordinate of the transformations.
+    using CoordIntermediate = typename Mapping2::CoordResult;
 
 private:
     Mapping1 m_mapping_1;
@@ -71,14 +77,8 @@ public:
     {
         if constexpr (is_analytical_mapping_v<Mapping2>) {
             if constexpr (
-                    (has_singular_o_point_inv_jacobian_v<inverse_mapping_t<Mapping1>>)
-                    || (has_singular_o_point_inv_jacobian_v<Mapping2>)) {
-                assert(epsilon != 0.0);
-            }
-        } else {
-            if constexpr (
                     (has_singular_o_point_inv_jacobian_v<Mapping1>)
-                    || (has_singular_o_point_inv_jacobian_v<Mapping2>)) {
+                    || (has_singular_o_point_inv_jacobian_v<inverse_mapping_t<Mapping2>>)) {
                 assert(epsilon != 0.0);
             }
         }
@@ -113,12 +113,6 @@ public:
      * @param[in] coord The coordinate where we evaluate the Jacobian matrix.
      * @return The calculated Jacobian matrix.
      */
-    template <
-            class CoordJacobian,
-            std::enable_if_t<
-                    (std::is_same_v<CoordJacobian, typename Mapping2::CoordArg>)
-                            || (std::is_same_v<CoordJacobian, typename Mapping2::CoordResult>),
-                    bool> = true>
     KOKKOS_INLINE_FUNCTION JacobianMatrixType jacobian_matrix(CoordJacobian const& coord) const
     {
         if constexpr (std::is_same_v<CoordJacobian, typename Mapping2::CoordResult>) {
@@ -134,9 +128,10 @@ public:
                     index<'j', 'k'>(jacobian_mapping_2(coord)));
         } else {
             typename Mapping1::CoordArg coord_map1 = m_mapping_2(coord);
+            std::cout << "Equivalent to : " << coord_map1 << std::endl;
             return tensor_mul(
                     index<'i', 'j'>(m_mapping_1.jacobian_matrix(coord_map1)),
-                    index<'j', 'k'>(jacobian_mapping_2(coord)));
+                    index<'j', 'k'>(m_mapping_2.jacobian_matrix(coord)));
         }
     }
 
@@ -146,7 +141,7 @@ public:
      * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @return The (i,j) component of the Jacobian matrix.
      */
-    template <class IndexTag1, class IndexTag2, class CoordJacobian>
+    template <class IndexTag1, class IndexTag2>
     KOKKOS_INLINE_FUNCTION double jacobian_component(CoordJacobian const& coord_rtheta) const
     {
         JacobianMatrixType J = jacobian_matrix(coord_rtheta);
@@ -159,7 +154,6 @@ public:
      * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @returns The determinant of the Jacobian matrix.
      */
-    template <class CoordJacobian>
     KOKKOS_INLINE_FUNCTION double jacobian(CoordJacobian const& coord_rtheta) const
     {
         return determinant(jacobian_matrix(coord_rtheta));
@@ -180,38 +174,26 @@ public:
      *
      * @see non_singular_inverse_jacobian_matrix
      */
-    template <
-            class CoordJacobian,
-            std::enable_if_t<
-                    (std::is_same_v<CoordJacobian, typename Mapping2::CoordArg>)
-                            || (std::is_same_v<CoordJacobian, typename Mapping2::CoordResult>),
-                    bool> = true>
-    KOKKOS_FUNCTION InvJacobianMatrixType inv_jacobian_matrix(CoordJacobian const& coord) const
+    KOKKOS_FUNCTION InvJacobianMatrixType inv_jacobian_matrix(CoordIntermediate const& coord) const
     {
-        if constexpr (std::is_same_v<CoordJacobian, typename Mapping2::CoordResult>) {
-            using InverseMapping2 = inverse_mapping_t<Mapping2>;
-            if constexpr (
-                    (has_singular_o_point_inv_jacobian_v<Mapping1>)
-                    || (has_singular_o_point_inv_jacobian_v<InverseMapping2>)) {
-                using R = ddc::type_seq_element_t<0, ddc::to_type_seq_t<CoordJacobian>>;
-                using Theta = ddc::type_seq_element_t<1, ddc::to_type_seq_t<CoordJacobian>>;
-                double r = ddc::get<R>(coord);
-                if (r < m_epsilon) {
-                    InvJacobianOPoint<CombinedMapping<Mapping1, Mapping2>, CoordJacobian>
-                            o_point_val(*this);
-                    CoordJacobian coord_eps(m_epsilon, ddc::get<Theta>(coord));
-                    Tensor J_0 = o_point_val();
-                    Tensor J_eps = non_singular_inverse_jacobian_matrix(coord_eps);
-                    return (1 - r / m_epsilon) * J_0 + r / m_epsilon * J_eps;
-                } else {
-                    return non_singular_inverse_jacobian_matrix(coord);
-                }
+        using InverseMapping2 = inverse_mapping_t<Mapping2>;
+        if constexpr (
+                (has_singular_o_point_inv_jacobian_v<Mapping1>)
+                || (has_singular_o_point_inv_jacobian_v<InverseMapping2>)) {
+            using R = ddc::type_seq_element_t<0, ddc::to_type_seq_t<CoordJacobian>>;
+            using Theta = ddc::type_seq_element_t<1, ddc::to_type_seq_t<CoordJacobian>>;
+            double r = ddc::get<R>(coord);
+            if (r < m_epsilon) {
+                InvJacobianOPoint<CombinedMapping<Mapping1, Mapping2>, CoordJacobian> o_point_val(
+                        *this);
+                CoordJacobian coord_eps(m_epsilon, ddc::get<Theta>(coord));
+                Tensor J_0 = o_point_val();
+                Tensor J_eps = non_singular_inverse_jacobian_matrix(coord_eps);
+                return (1 - r / m_epsilon) * J_0 + r / m_epsilon * J_eps;
             } else {
                 return non_singular_inverse_jacobian_matrix(coord);
             }
         } else {
-            static_assert((!has_singular_o_point_inv_jacobian_v<Mapping1>)&&(
-                    !has_singular_o_point_inv_jacobian_v<Mapping2>));
             return non_singular_inverse_jacobian_matrix(coord);
         }
     }
@@ -222,8 +204,9 @@ public:
      * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @return The (i,j) coefficient of the Jacobian matrix.
      */
-    template <class IndexTag1, class IndexTag2, class CoordJacobian>
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_component(CoordJacobian const& coord_rtheta) const
+    template <class IndexTag1, class IndexTag2>
+    KOKKOS_INLINE_FUNCTION double inv_jacobian_component(
+            CoordIntermediate const& coord_rtheta) const
     {
         InvJacobianMatrixType J = inv_jacobian_matrix(coord_rtheta);
         return ddcHelper::get<IndexTag1, IndexTag2>(J);
@@ -236,8 +219,7 @@ public:
      * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @returns The determinant of the Jacobian matrix.
      */
-    template <class CoordJacobian>
-    KOKKOS_INLINE_FUNCTION double inv_jacobian(CoordJacobian const& coord_rtheta) const
+    KOKKOS_INLINE_FUNCTION double inv_jacobian(CoordIntermediate const& coord_rtheta) const
     {
         return determinant(inv_jacobian_matrix(coord_rtheta));
     }
@@ -274,9 +256,8 @@ private:
      *
      * @param[in] coord The coordinate where we evaluate the Jacobian matrix.
      */
-    template <class CoordJacobian>
     KOKKOS_INLINE_FUNCTION InvJacobianMatrixType
-    non_singular_inverse_jacobian_matrix(CoordJacobian const& coord) const
+    non_singular_inverse_jacobian_matrix(CoordIntermediate const& coord) const
     {
         static_assert(
                 (std::is_same_v<CoordJacobian, typename Mapping2::CoordArg>)
@@ -296,7 +277,7 @@ private:
             typename Mapping1::CoordArg coord_map1 = m_mapping_2(coord);
             return tensor_mul(
                     index<'i', 'j'>(inv_jacobian_matrix_2(coord)),
-                    index<'j', 'k'>(inv_jacobian_matrix_1(coord)));
+                    index<'j', 'k'>(inv_jacobian_matrix_1(coord_map1)));
         }
     }
 };
