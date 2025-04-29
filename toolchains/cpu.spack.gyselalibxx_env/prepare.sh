@@ -6,14 +6,14 @@ if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
     return 1
 fi
 
-if [ -d ${HOME}/.spack ]; then
-    echo "It is recommended to remove any old spack installation `$HOME/.spack` before running this script."
-    echo "`$HOME/.spack` detected, continue anyway? [YyNn]"
+if [ -d "${HOME}/.spack" ]; then
+    echo "It is recommended to remove any old spack installation $HOME/.spack before running this script."
+    echo "$HOME/.spack detected, continue anyway? [YyNn]"
     read ignore_existing
     if [[ $ignore_existing == y* ]]; then
         echo "Ignoring `$HOME/.spack`"
     else
-        return 1
+        exit 1
     fi
 fi
 
