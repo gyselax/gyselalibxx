@@ -52,5 +52,5 @@ then
 fi
 
 spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-0.23.0.yaml
-spack --env gyselalibxx-env install --jobs 2
+spack --env gyselalibxx-env install -v -d --jobs 2
 
