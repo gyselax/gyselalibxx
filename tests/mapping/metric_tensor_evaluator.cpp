@@ -95,7 +95,9 @@ TEST_P(InverseMetricTensor3D, InverseMatrixToroidalMap)
 
     FieldMemRhoThetaPhi_host<Coord<Rho, Theta, Phi>> coords
             = get_example_coords(IdxStepRho(Nrho), IdxStepTheta(Ntheta), IdxStepPhi(Nphi));
-    IdxRangeRhoThetaPhi grid = get_idx_range(coords);
+    // Exclude the centre point where the inversion is singular
+    IdxStepRhoThetaPhi skip_index_step(IdxStepRho(1), IdxStepTheta(0), IdxStepPhi(0));
+    IdxRangeRhoThetaPhi grid = get_idx_range(coords).remove_first(skip_index_step);
 
     MetricTensorEvaluator<Mapping, Coord<Rho, Theta, Phi>> metric_tensor(mapping);
     // Test for each coordinates if the inverse_metric_tensor is the inverse of the metric_tensor

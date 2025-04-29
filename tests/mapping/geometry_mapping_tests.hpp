@@ -217,6 +217,7 @@ using IdxStepZ = IdxStep<GridZ>;
 using IdxStepZeta = IdxStep<GridZeta>;
 using IdxStepRho = IdxStep<GridRho>;
 using IdxStepRTheta = IdxStep<GridR, GridTheta>;
+using IdxStepRhoThetaPhi = IdxStep<GridRho, GridTheta, GridPhi>;
 
 using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 
