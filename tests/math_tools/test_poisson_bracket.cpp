@@ -1,31 +1,24 @@
+#include <gtest/gtest.h>
+
 #include "../mapping/geometry_mapping_tests.hpp"
 
-namespace {
+#include "circular_to_cartesian.hpp"
+#include "combined_mapping.hpp"
+#include "cylindrical_to_cartesian.hpp"
+#include "toroidal_to_cylindrical.hpp"
 
-struct Phi_cov;
 
-struct Phi
+TEST(GyrokineticPoissonBracket, Anticommutativity)
 {
-    static bool constexpr PERIODIC = true;
-    static bool constexpr IS_COVARIANT = false;
-    static bool constexpr IS_CONTRAVARIANT = true;
-    /// The corresponding type in the dual space.
-    using Dual = Phi_cov;
-};
-
-struct Phi_cov
-{
-    static bool constexpr PERIODIC = true;
-    static bool constexpr IS_COVARIANT = true;
-    static bool constexpr IS_CONTRAVARIANT = false;
-    /// The corresponding type in the dual space.
-    using Dual = Phi;
-};
-
-} // namespace
-
-
-TEST(GyrokineticPoissonBracket, Anticommutativity) {}
+    using Mapping2D = CircularToCartesian<R, Z, Rho, Theta>;
+    using ToroidalMapping = ToroidalToCylindrical<Mapping2D, Zeta, Phi>;
+    using CylindricalMapping = CylindricalToCartesian<R, Z, Zeta, X, Y>;
+    Mapping2D polar_to_RZ;
+    ToroidalMapping toroidal_to_cylindrical(polar_to_RZ);
+    CylindricalMapping cylindrical_to_cartesian;
+    CombinedMapping<CylindricalMapping, ToroidalMapping>
+            mapping(toroidal_to_cylindrical, cylindrical_to_cartesian);
+}
 
 TEST(GyrokineticPoissonBracket, Bilinearity) {}
 
