@@ -106,9 +106,9 @@ int main(int argc, char** argv)
 
 
 #if defined(CIRCULAR_MAPPING)
-    const Mapping mapping;
+    const Mapping mapping(4.5);
 #elif defined(CZARNY_MAPPING)
-    const Mapping mapping(0.3, 1.4);
+    const Mapping mapping(0.3, 1.4, 6.1);
 #endif
 
     ddc::NullExtrapolationRule bv_r_min;
