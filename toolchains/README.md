@@ -17,6 +17,18 @@ source ../toolchains/mi250.hipcc.adastra.spack/environment.sh
 cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchains/mi250.hipcc.adastra.spack/toolchain.cmake
 ```
 
+## Available systems
+
+This folder contains sub-folders with `prepare.sh`, `environment.sh`, and `toolchain.cmake` files. Each sub-folder is designed to work in a different environment. You should choose the folder which best fits your work environment. The available sub-folders are:
+
+- `a100.leonardo.spack` : Designed for use with the A100 hardware available on Cineca's Leonardo supercomputer.
+- `cpu.spack.gyselalibxx_env` : Designed for use on a local computer. Installation is handled by spack.
+- `docker.gyselalibxx_env` : Designed for use with a docker container. This is used by the CI. It is also possible to use these toolchains if all the dependencies have been installed locally.
+- `mi250.hipcc.adastra.spack` : Designed for use with the MI250 hardware available on CINES's Adastra supercomputer.
+- `v100.persee` : Designed for use with the V100 hardware available on IRFM's Persee cluster.
+- `v100.ruche` : Designed for use with the V100 hardware available on Mésocentre's Ruche cluster.
+- `xeon.persee` : Designed for use with the CPU hardware available on IRFM's Persee cluster.
+
 ## Toolchains
 
 The [toolchains](https://en.wikipedia.org/wiki/Toolchain) are represented using a toolchain file. It summarises CMake build settings for the appropriate machine environment and hardware.
