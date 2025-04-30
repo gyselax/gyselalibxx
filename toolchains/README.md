@@ -24,6 +24,7 @@ This folder contains sub-folders with `prepare.sh`, `environment.sh`, and `toolc
 - `a100.leonardo.spack` : Designed for use with the A100 hardware available on Cineca's Leonardo supercomputer.
 - `cpu.spack.gyselalibxx_env` : Designed for use on a local computer. Installation is handled by spack.
 - `docker.gyselalibxx_env` : Designed for use with a docker container. This is used by the CI. It is also possible to use these toolchains if all the dependencies have been installed locally.
+    Should you wish to try Gyselalib++ rapidly, the docker container can be found hosted on the GitHub Container Registry : [`ghcr.io/gyselax/gyselalibxx_env:latest`](https://github.com/gyselax/gyselalibxx/pkgs/container/gyselalibxx_env). The provided `environment.sh` file will drop you into a container with access to Gyselalib++'s files.
 - `mi250.hipcc.adastra.spack` : Designed for use with the MI250 hardware available on CINES's Adastra supercomputer.
 - `v100.persee` : Designed for use with the V100 hardware available on IRFM's Persee cluster.
 - `v100.ruche` : Designed for use with the V100 hardware available on Mésocentre's Ruche cluster.
