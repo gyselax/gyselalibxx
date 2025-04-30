@@ -16,11 +16,11 @@ class CzarnyToCartesian;
  *
  * The mapping @f$ (x,y)  \mapsto (r,\theta)@f$ is defined by
  *
- * @f$ r(x,y) = \sqrt{\frac{y^2 (1+\epsilon x)^2}{e^2\xi^2+0.25(\epsilon x^2-2x-\epsilon)^2}},@f$
+ * @f$ r(x,y) = \sqrt{\frac{\hat{y}^2 (1+\epsilon \hat{x})^2}{e^2\xi^2+0.25(\epsilon \hat{x}^2-2\hat{x}-\epsilon)^2}},@f$
  *
- * @f$ \theta (x,y)) = atan2(2. y (1+\epsilon x), (e \xi (\epsilon x^2 - 2x-\epsilon))), @f$
+ * @f$ \theta (x,y)) = atan2(2. \hat{y} (1+\epsilon \hat{x}), (e \xi (\epsilon \hat{x}^2 - 2\hat{x}-\epsilon))), @f$
  *
- * with @f$ \xi = 1/\sqrt{1 - \epsilon^2 /4} @f$ and @f$ e @f$ and @f$ \epsilon @f$ given as parameters.
+ * with @f$ \hat{x} = x-x_0 @f$, @f$ \hat{y} = y-y_0 @f$, @f$ \xi = 1/\sqrt{1 - \epsilon^2 /4} @f$ and @f$ e @f$ and @f$ \epsilon @f$ given as parameters.
  */
 template <class X, class Y, class R, class Theta>
 class CartesianToCzarny
@@ -43,6 +43,8 @@ public:
 private:
     double m_epsilon;
     double m_e;
+    double m_x0;
+    double m_y0;
 
 public:
     /**
@@ -50,13 +52,20 @@ public:
      *
      * @param[in] epsilon
      * 			The @f$ \epsilon @f$ parameter in the definition of the mapping CartesianToCzarny.
-     *
      * @param[in] e
      * 			The @f$ e @f$ parameter in the definition of the mapping CartesianToCzarny.
+     * @param[in] x0 The x-coordinate of the centre of the circle (0 by default).
+     * @param[in] y0 The y-coordinate of the centre of the circle (0 by default).
      *
      * @see CartesianToCzarny
      */
-    CartesianToCzarny(double epsilon, double e) : m_epsilon(epsilon), m_e(e) {}
+    CartesianToCzarny(double epsilon, double e, double x0 = 0.0, double y0 = 0.0)
+        : m_epsilon(epsilon)
+        , m_e(e)
+        , m_x0(x0)
+        , m_y0(y0)
+    {
+    }
 
     /**
      * @brief Instantiate a CartesianToCzarny from another CartesianToCzarny (lvalue).
@@ -64,11 +73,7 @@ public:
      * @param[in] other
      * 		CartesianToCzarny mapping used to instantiate the new one.
      */
-    KOKKOS_FUNCTION CartesianToCzarny(CartesianToCzarny const& other)
-        : m_epsilon(other.epsilon())
-        , m_e(other.e())
-    {
-    }
+    KOKKOS_DEFAULTED_FUNCTION CartesianToCzarny(CartesianToCzarny const& other) = default;
 
     /**
      * @brief Instantiate a CartesianToCzarny from another temporary CartesianToCzarny (rvalue).
@@ -78,7 +83,7 @@ public:
      */
     CartesianToCzarny(CartesianToCzarny&& x) = default;
 
-    ~CartesianToCzarny() = default;
+    KOKKOS_DEFAULTED_FUNCTION ~CartesianToCzarny() = default;
 
     /**
      * @brief Assign a CartesianToCzarny from another CartesianToCzarny (lvalue).
@@ -133,8 +138,8 @@ public:
      */
     KOKKOS_FUNCTION Coord<R, Theta> operator()(Coord<X, Y> const& coord) const
     {
-        const double x = ddc::get<X>(coord);
-        const double y = ddc::get<Y>(coord);
+        const double x = ddc::get<X>(coord) - m_x0;
+        const double y = ddc::get<Y>(coord) - m_y0;
         const double ex = 1. + m_epsilon * x;
         const double ex2 = (m_epsilon * x * x - 2. * x - m_epsilon);
         const double xi2 = 1. / (1. - m_epsilon * m_epsilon * 0.25);
