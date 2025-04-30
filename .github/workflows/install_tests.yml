@@ -43,24 +43,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
-      - name: Check gcc
-        run: |
-          gcc --version
-        shell: bash
       - name: Install spack
         run: |
           mkdir -p spack_setup && cd spack_setup
           ../toolchains/cpu.spack.gyselalibxx_env/prepare.sh
         shell: bash
         timeout-minutes: 180
-      - name: Save logs
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: spack-log-artifact
-          path: spack_setup/spack-logs
-          retention-days: 1
-          include-hidden-files: true
       - name: Build code
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/build_code
