@@ -58,6 +58,6 @@ spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-0.23.0.yaml
 export SPACK_DEBUG_LOG_DIR=spack-logs
 export SPACK_VERBOSE=1
 export SPACK_DEBUG=1
-spack --env gyselalibxx-env install --fail-fast --show-log-on-error --jobs 2
+spack --env gyselalibxx-env install --jobs 2
 
 
