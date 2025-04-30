@@ -17,6 +17,7 @@ nav:
             - docs/first_steps/install.md # Installation guide
             - toolchains/README.md
         - DDC in Gyselalib++: docs/first_steps/DDC_in_gyselalibxx.md
+      - Contributing: docs/CONTRIBUTING.md
       - Tutorials:
         - docs/first_steps/landau_damping_tutorial.md
   - Standards:
