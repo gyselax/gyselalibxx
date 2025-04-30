@@ -610,11 +610,11 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-circulartocartesian-13"><strong>CircularToCartesian</strong></a> () = default<br></td>
+<td style="text-align: left;"><a href="#function-circulartocartesian-13"><strong>CircularToCartesian</strong></a> (double x0=0.0, double y0=0.0) <br><em>Instantiate a</em> <a href="classCircularToCartesian.html"><em><strong>CircularToCartesian</strong></em></a> <em>from parameters.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION</td>
-<td style="text-align: left;"><a href="#function-circulartocartesian-23"><strong>CircularToCartesian</strong></a> (<a href="classCircularToCartesian.html"><strong>CircularToCartesian</strong></a> const &amp; other) <br><em>Instantiate a</em> <a href="classCircularToCartesian.html"><em><strong>CircularToCartesian</strong></em></a> <em>from another</em><a href="classCircularToCartesian.html"><em><strong>CircularToCartesian</strong></em></a> <em>(lvalue).</em></td>
+<td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION</td>
+<td style="text-align: left;"><a href="#function-circulartocartesian-23"><strong>CircularToCartesian</strong></a> (<a href="classCircularToCartesian.html"><strong>CircularToCartesian</strong></a> const &amp; other) = default<br><em>Instantiate a</em> <a href="classCircularToCartesian.html"><em><strong>CircularToCartesian</strong></em></a> <em>from another</em><a href="classCircularToCartesian.html"><em><strong>CircularToCartesian</strong></em></a> <em>(lvalue).</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
@@ -657,7 +657,7 @@
 <td style="text-align: left;"><a href="#function-operator_2"><strong>operator=</strong></a> (<a href="classCircularToCartesian.html"><strong>CircularToCartesian</strong></a> &amp;&amp; x) = default<br><em>Assign a</em> <a href="classCircularToCartesian.html"><em><strong>CircularToCartesian</strong></em></a> <em>from another temporary</em><a href="classCircularToCartesian.html"><em><strong>CircularToCartesian</strong></em></a> <em>(rvalue).</em></td>
 </tr>
 <tr>
-<td style="text-align: right;"></td>
+<td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION</td>
 <td style="text-align: left;"><a href="#function-circulartocartesian"><strong>~CircularToCartesian</strong></a> () = default<br></td>
 </tr>
 </tbody>
@@ -729,15 +729,24 @@
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-circulartocartesian-13">function CircularToCartesian [1/3]</h3>
-<pre><code class="language-C++">CircularToCartesian::CircularToCartesian () = default
+<p><em>Instantiate a</em> <a href="classCircularToCartesian.html"><em><strong>CircularToCartesian</strong></em></a> <em>from parameters.</em></p>
+<pre><code class="language-C++">inline explicit CircularToCartesian::CircularToCartesian (
+    double x0=0.0,
+    double y0=0.0
+) 
 </code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>x0</code> The x-coordinate of the centre of the circle (0 by default). </li>
+<li><code>y0</code> The y-coordinate of the centre of the circle (0 by default). </li>
+</ul>
 <hr>
 
 <h3 id="function-circulartocartesian-23">function CircularToCartesian [2/3]</h3>
 <p><em>Instantiate a</em> <a href="classCircularToCartesian.html"><em><strong>CircularToCartesian</strong></em></a> <em>from another</em><a href="classCircularToCartesian.html"><em><strong>CircularToCartesian</strong></em></a> <em>(lvalue).</em></p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION CircularToCartesian::CircularToCartesian (
+<pre><code class="language-C++">KOKKOS_DEFAULTED_FUNCTION CircularToCartesian::CircularToCartesian (
     CircularToCartesian const &amp; other
-) 
+) = default
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -883,7 +892,7 @@ inline KOKKOS_FUNCTION double CircularToCartesian::jacobian_component (
 <hr>
 
 <h3 id="function-circulartocartesian">function ~CircularToCartesian</h3>
-<pre><code class="language-C++">CircularToCartesian::~CircularToCartesian () = default
+<pre><code class="language-C++">KOKKOS_DEFAULTED_FUNCTION CircularToCartesian::~CircularToCartesian () = default
 </code></pre>
 <hr>
 

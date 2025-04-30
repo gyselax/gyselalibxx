@@ -68,8 +68,8 @@ _A class for describing the circular 2D mapping._ [More...](#detailed-descriptio
 
 | Type | Name |
 | ---: | :--- |
-|   | [**CartesianToCircular**](#function-cartesiantocircular-13) () = default<br> |
-|  KOKKOS\_FUNCTION | [**CartesianToCircular**](#function-cartesiantocircular-23) ([**CartesianToCircular**](classCartesianToCircular.md) const & other) <br>_Instantiate a_ [_**CartesianToCircular**_](classCartesianToCircular.md) _from another_[_**CartesianToCircular**_](classCartesianToCircular.md) _(lvalue)._ |
+|   | [**CartesianToCircular**](#function-cartesiantocircular-13) (double x0=0.0, double y0=0.0) <br>_Instantiate a_ [_**CartesianToCircular**_](classCartesianToCircular.md) _from parameters._ |
+|  KOKKOS\_DEFAULTED\_FUNCTION | [**CartesianToCircular**](#function-cartesiantocircular-23) ([**CartesianToCircular**](classCartesianToCircular.md) const & other) = default<br>_Instantiate a_ [_**CartesianToCircular**_](classCartesianToCircular.md) _from another_[_**CartesianToCircular**_](classCartesianToCircular.md) _(lvalue)._ |
 |   | [**CartesianToCircular**](#function-cartesiantocircular-33) ([**CartesianToCircular**](classCartesianToCircular.md) && x) = default<br>_Instantiate a Curvilinear2DToCartesian from another temporary_ [_**CartesianToCircular**_](classCartesianToCircular.md) _(rvalue)._ |
 |  [**CircularToCartesian**](classCircularToCartesian.md)&lt; [**R**](structR.md), [**Theta**](structTheta.md), [**X**](structX.md), [**Y**](structY.md) &gt; | [**get\_inverse\_mapping**](#function-get_inverse_mapping) () const<br>_Get the inverse mapping._  |
 |  KOKKOS\_FUNCTION double | [**jacobian**](#function-jacobian) (Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; const & coord) <br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping._  |
@@ -78,7 +78,7 @@ _A class for describing the circular 2D mapping._ [More...](#detailed-descriptio
 |  KOKKOS\_FUNCTION Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; | [**operator()**](#function-operator) (Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; const & coord) const<br>_Convert the coordinate (x,y) to the equivalent_  _coordinate._ |
 |  [**CartesianToCircular**](classCartesianToCircular.md) & | [**operator=**](#function-operator_1) ([**CartesianToCircular**](classCartesianToCircular.md) const & x) = default<br>_Assign a_ [_**CartesianToCircular**_](classCartesianToCircular.md) _from another_[_**CartesianToCircular**_](classCartesianToCircular.md) _(lvalue)._ |
 |  [**CartesianToCircular**](classCartesianToCircular.md) & | [**operator=**](#function-operator_2) ([**CartesianToCircular**](classCartesianToCircular.md) && x) = default<br>_Assign a_ [_**CartesianToCircular**_](classCartesianToCircular.md) _from another temporary_[_**CartesianToCircular**_](classCartesianToCircular.md) _(rvalue)._ |
-|   | [**~CartesianToCircular**](#function-cartesiantocircular) () = default<br> |
+|  KOKKOS\_DEFAULTED\_FUNCTION | [**~CartesianToCircular**](#function-cartesiantocircular) () = default<br> |
 
 
 
@@ -290,12 +290,28 @@ using CartesianToCircular< X, Y, R, Theta >::curvilinear_tag_theta =  Theta;
 
 ### function CartesianToCircular [1/3]
 
+_Instantiate a_ [_**CartesianToCircular**_](classCartesianToCircular.md) _from parameters._
 ```C++
-CartesianToCircular::CartesianToCircular () = default
+inline explicit CartesianToCircular::CartesianToCircular (
+    double x0=0.0,
+    double y0=0.0
+) 
 ```
 
 
 
+
+
+**Parameters:**
+
+
+* `x0` The x-coordinate of the centre of the circle (0 by default). 
+* `y0` The y-coordinate of the centre of the circle (0 by default). 
+
+
+
+
+        
 
 <hr>
 
@@ -305,9 +321,9 @@ CartesianToCircular::CartesianToCircular () = default
 
 _Instantiate a_ [_**CartesianToCircular**_](classCartesianToCircular.md) _from another_[_**CartesianToCircular**_](classCartesianToCircular.md) _(lvalue)._
 ```C++
-inline KOKKOS_FUNCTION CartesianToCircular::CartesianToCircular (
+KOKKOS_DEFAULTED_FUNCTION CartesianToCircular::CartesianToCircular (
     CartesianToCircular const & other
-) 
+) = default
 ```
 
 
@@ -591,7 +607,7 @@ The [**CartesianToCircular**](classCartesianToCircular.md) assigned.
 ### function ~CartesianToCircular 
 
 ```C++
-CartesianToCircular::~CartesianToCircular () = default
+KOKKOS_DEFAULTED_FUNCTION CartesianToCircular::~CartesianToCircular () = default
 ```
 
 

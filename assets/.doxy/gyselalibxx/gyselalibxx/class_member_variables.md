@@ -89,6 +89,8 @@
 * **m\_epsilon\_bot** ([**BumpontailEquilibrium**](classBumpontailEquilibrium.md))
 * **m\_mean\_velocity\_bot** ([**BumpontailEquilibrium**](classBumpontailEquilibrium.md))
 * **m\_temperature\_bot** ([**BumpontailEquilibrium**](classBumpontailEquilibrium.md))
+* **m\_x0** ([**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md))
+* **m\_y0** ([**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md))
 * **m\_e** ([**CartesianToCzarny**](classCartesianToCzarny.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md))
 * **m\_field** ([**CentralFDMPartialDerivative**](classCentralFDMPartialDerivative.md), [**CentralFDMPartialDerivativeWithBValue**](classCentralFDMPartialDerivativeWithBValue.md))
 * **m\_b\_value\_left** ([**CentralFDMPartialDerivativeWithBValue**](classCentralFDMPartialDerivativeWithBValue.md), [**CentralFDMPartialDerivativeWithBValueCreator**](classCentralFDMPartialDerivativeWithBValueCreator.md))

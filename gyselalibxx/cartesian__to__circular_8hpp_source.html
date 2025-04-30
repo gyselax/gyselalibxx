@@ -575,14 +575,18 @@ public:
     using R_cov = typename R::Dual;
     using Theta_cov = typename Theta::Dual;
 
-public:
-    CartesianToCircular() = default;
+private:
+    double m_x0;
+    double m_y0;
 
-    KOKKOS_FUNCTION CartesianToCircular(CartesianToCircular const&amp; other) {}
+public:
+    explicit CartesianToCircular(double x0 = 0.0, double y0 = 0.0) : m_x0(x0), m_y0(y0) {}
+
+    KOKKOS_DEFAULTED_FUNCTION CartesianToCircular(CartesianToCircular const&amp; other) = default;
 
     CartesianToCircular(CartesianToCircular&amp;&amp; x) = default;
 
-    ~CartesianToCircular() = default;
+    KOKKOS_DEFAULTED_FUNCTION ~CartesianToCircular() = default;
 
     CartesianToCircular&amp; operator=(CartesianToCircular const&amp; x) = default;
 
@@ -590,8 +594,8 @@ public:
 
     KOKKOS_FUNCTION Coord&lt;R, Theta&gt; operator()(Coord&lt;X, Y&gt; const&amp; coord) const
     {
-        const double x = ddc::get&lt;X&gt;(coord);
-        const double y = ddc::get&lt;Y&gt;(coord);
+        const double x = ddc::get&lt;X&gt;(coord) - m_x0;
+        const double y = ddc::get&lt;Y&gt;(coord) - m_y0;
         const double r = Kokkos::sqrt(x * x + y * y);
         const double theta_pi_to_pi(Kokkos::atan2(y, x));
         const double theta = theta_pi_to_pi * (theta_pi_to_pi &gt;= 0)
@@ -601,8 +605,8 @@ public:
 
     KOKKOS_FUNCTION double jacobian(Coord&lt;X, Y&gt; const&amp; coord)
     {
-        const double x = ddc::get&lt;X&gt;(coord);
-        const double y = ddc::get&lt;Y&gt;(coord);
+        const double x = ddc::get&lt;X&gt;(coord) - m_x0;
+        const double y = ddc::get&lt;Y&gt;(coord) - m_y0;
         return 1. / Kokkos::sqrt(x * x + y * y);
     }
 
@@ -610,8 +614,8 @@ public:
             Coord&lt;X, Y&gt; const&amp; coord) const
 
     {
-        const double x = ddc::get&lt;X&gt;(coord);
-        const double y = ddc::get&lt;Y&gt;(coord);
+        const double x = ddc::get&lt;X&gt;(coord) - m_x0;
+        const double y = ddc::get&lt;Y&gt;(coord) - m_y0;
         DTensor&lt;VectorIndexSet&lt;R, Theta&gt;, VectorIndexSet&lt;X_cov, Y_cov&gt;&gt; jacobian_matrix;
         const double r2 = x * x + y * y;
         const double r = Kokkos::sqrt(r2);
@@ -628,8 +632,8 @@ public:
         static_assert(ddc::in_tags_v&lt;IndexTag1, VectorIndexSet&lt;R, Theta&gt;&gt;);
         static_assert(ddc::in_tags_v&lt;IndexTag2, VectorIndexSet&lt;X_cov, Y_cov&gt;&gt;);
 
-        const double x = ddc::get&lt;X&gt;(coord);
-        const double y = ddc::get&lt;Y&gt;(coord);
+        const double x = ddc::get&lt;X&gt;(coord) - m_x0;
+        const double y = ddc::get&lt;Y&gt;(coord) - m_y0;
         if constexpr (std::is_same_v&lt;IndexTag1, R&gt; &amp;&amp; std::is_same_v&lt;IndexTag2, X_cov&gt;) {
             // Component (1,1), i.e dr/dx
             return x / Kokkos::pow(x * x + y * y, 0.5);
@@ -647,7 +651,7 @@ public:
 
     CircularToCartesian&lt;R, Theta, X, Y&gt; get_inverse_mapping() const
     {
-        return CircularToCartesian&lt;R, Theta, X, Y&gt;();
+        return CircularToCartesian&lt;R, Theta, X, Y&gt;(m_x0, m_y0);
     }
 };
 

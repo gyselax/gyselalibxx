@@ -44,19 +44,23 @@ public:
 private:
     double m_epsilon;
     double m_e;
+    double m_x0;
+    double m_y0;
 
 public:
-    CzarnyToCartesian(double epsilon, double e) : m_epsilon(epsilon), m_e(e) {}
-
-    KOKKOS_FUNCTION CzarnyToCartesian(CzarnyToCartesian const& other)
-        : m_epsilon(other.epsilon())
-        , m_e(other.e())
+    explicit CzarnyToCartesian(double epsilon, double e, double x0 = 0.0, double y0 = 0.0)
+        : m_epsilon(epsilon)
+        , m_e(e)
+        , m_x0(x0)
+        , m_y0(y0)
     {
     }
 
+    KOKKOS_DEFAULTED_FUNCTION CzarnyToCartesian(CzarnyToCartesian const& other) = default;
+
     CzarnyToCartesian(CzarnyToCartesian&& x) = default;
 
-    ~CzarnyToCartesian() = default;
+    KOKKOS_DEFAULTED_FUNCTION ~CzarnyToCartesian() = default;
 
     CzarnyToCartesian& operator=(CzarnyToCartesian const& x) = default;
 
@@ -79,9 +83,10 @@ public:
         const double tmp1
                 = Kokkos::sqrt(m_epsilon * (m_epsilon + 2.0 * r * Kokkos::cos(theta)) + 1.0);
 
-        const double x = (1.0 - tmp1) / m_epsilon;
+        const double x = (1.0 - tmp1) / m_epsilon + m_x0;
         const double y = m_e * r * Kokkos::sin(theta)
-                         / (Kokkos::sqrt(1.0 - 0.25 * m_epsilon * m_epsilon) * (2.0 - tmp1));
+                                 / (Kokkos::sqrt(1.0 - 0.25 * m_epsilon * m_epsilon) * (2.0 - tmp1))
+                         + m_y0;
 
         return Coord<X, Y>(x, y);
     }

@@ -594,11 +594,11 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-cartesiantoczarny-13"><strong>CartesianToCzarny</strong></a> (double epsilon, double e) <br><em>Instantiate a</em> <a href="classCartesianToCzarny.html"><em><strong>CartesianToCzarny</strong></em></a> <em>from parameters.</em></td>
+<td style="text-align: left;"><a href="#function-cartesiantoczarny-13"><strong>CartesianToCzarny</strong></a> (double epsilon, double e, double x0=0.0, double y0=0.0) <br><em>Instantiate a</em> <a href="classCartesianToCzarny.html"><em><strong>CartesianToCzarny</strong></em></a> <em>from parameters.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION</td>
-<td style="text-align: left;"><a href="#function-cartesiantoczarny-23"><strong>CartesianToCzarny</strong></a> (<a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a> const &amp; other) <br><em>Instantiate a</em> <a href="classCartesianToCzarny.html"><em><strong>CartesianToCzarny</strong></em></a> <em>from another</em><a href="classCartesianToCzarny.html"><em><strong>CartesianToCzarny</strong></em></a> <em>(lvalue).</em></td>
+<td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION</td>
+<td style="text-align: left;"><a href="#function-cartesiantoczarny-23"><strong>CartesianToCzarny</strong></a> (<a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a> const &amp; other) = default<br><em>Instantiate a</em> <a href="classCartesianToCzarny.html"><em><strong>CartesianToCzarny</strong></em></a> <em>from another</em><a href="classCartesianToCzarny.html"><em><strong>CartesianToCzarny</strong></em></a> <em>(lvalue).</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
@@ -629,14 +629,14 @@
 <td style="text-align: left;"><a href="#function-operator_2"><strong>operator=</strong></a> (<a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a> &amp;&amp; x) = default<br><em>Assign a</em> <a href="classCartesianToCzarny.html"><em><strong>CartesianToCzarny</strong></em></a> <em>from another temporary</em><a href="classCartesianToCzarny.html"><em><strong>CartesianToCzarny</strong></em></a> <em>(rvalue).</em></td>
 </tr>
 <tr>
-<td style="text-align: right;"></td>
+<td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION</td>
 <td style="text-align: left;"><a href="#function-cartesiantoczarny"><strong>~CartesianToCzarny</strong></a> () = default<br></td>
 </tr>
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
 <p>The mapping  is defined by</p>
-<p>with  and  and  given as parameters. </p>
+<p>with , ,  and  and  given as parameters. </p>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-coordarg">typedef CoordArg</h3>
 <p><em>The type of the argument of the function described by this mapping.</em> </p>
@@ -676,24 +676,28 @@
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-cartesiantoczarny-13">function CartesianToCzarny [1/3]</h3>
 <p><em>Instantiate a</em> <a href="classCartesianToCzarny.html"><em><strong>CartesianToCzarny</strong></em></a> <em>from parameters.</em></p>
-<pre><code class="language-C++">inline CartesianToCzarny::CartesianToCzarny (
+<pre><code class="language-C++">inline explicit CartesianToCzarny::CartesianToCzarny (
     double epsilon,
-    double e
+    double e,
+    double x0=0.0,
+    double y0=0.0
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>epsilon</code> The  parameter in the definition of the mapping <a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a>.</li>
-<li><code>e</code> The  parameter in the definition of the mapping <a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a>.</li>
+<li><code>epsilon</code> The  parameter in the definition of the mapping <a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a>. </li>
+<li><code>e</code> The  parameter in the definition of the mapping <a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a>. </li>
+<li><code>x0</code> The x-coordinate of the centre of the circle (0 by default). </li>
+<li><code>y0</code> The y-coordinate of the centre of the circle (0 by default).</li>
 </ul>
 <p><strong>See also:</strong> <a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a> </p>
 <hr>
 
 <h3 id="function-cartesiantoczarny-23">function CartesianToCzarny [2/3]</h3>
 <p><em>Instantiate a</em> <a href="classCartesianToCzarny.html"><em><strong>CartesianToCzarny</strong></em></a> <em>from another</em><a href="classCartesianToCzarny.html"><em><strong>CartesianToCzarny</strong></em></a> <em>(lvalue).</em></p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION CartesianToCzarny::CartesianToCzarny (
+<pre><code class="language-C++">KOKKOS_DEFAULTED_FUNCTION CartesianToCzarny::CartesianToCzarny (
     CartesianToCzarny const &amp; other
-) 
+) = default
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -782,7 +786,7 @@
 <hr>
 
 <h3 id="function-cartesiantoczarny">function ~CartesianToCzarny</h3>
-<pre><code class="language-C++">CartesianToCzarny::~CartesianToCzarny () = default
+<pre><code class="language-C++">KOKKOS_DEFAULTED_FUNCTION CartesianToCzarny::~CartesianToCzarny () = default
 </code></pre>
 <hr>
 

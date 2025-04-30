@@ -68,8 +68,8 @@ _A class for describing the Czarny 2D mapping._ [More...](#detailed-description)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**CzarnyToCartesian**](#function-czarnytocartesian-13) (double epsilon, double e) <br>_Instantiate a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from parameters._ |
-|  KOKKOS\_FUNCTION | [**CzarnyToCartesian**](#function-czarnytocartesian-23) ([**CzarnyToCartesian**](classCzarnyToCartesian.md) const & other) <br>_Instantiate a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from another_[_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _(lvalue)._ |
+|   | [**CzarnyToCartesian**](#function-czarnytocartesian-13) (double epsilon, double e, double x0=0.0, double y0=0.0) <br>_Instantiate a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from parameters._ |
+|  KOKKOS\_DEFAULTED\_FUNCTION | [**CzarnyToCartesian**](#function-czarnytocartesian-23) ([**CzarnyToCartesian**](classCzarnyToCartesian.md) const & other) = default<br>_Instantiate a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from another_[_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _(lvalue)._ |
 |   | [**CzarnyToCartesian**](#function-czarnytocartesian-33) ([**CzarnyToCartesian**](classCzarnyToCartesian.md) && x) = default<br>_Instantiate a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from another temporary_[_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _(rvalue)._ |
 |  KOKKOS\_FUNCTION double | [**e**](#function-e) () const<br>_Return the_  _parameter._ |
 |  KOKKOS\_FUNCTION double | [**epsilon**](#function-epsilon) () const<br>_Return the_  _parameter._ |
@@ -82,7 +82,7 @@ _A class for describing the Czarny 2D mapping._ [More...](#detailed-description)
 |  KOKKOS\_FUNCTION Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**operator()**](#function-operator) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Convert the_  _coordinate to the equivalent (x,y) coordinate._ |
 |  [**CzarnyToCartesian**](classCzarnyToCartesian.md) & | [**operator=**](#function-operator_1) ([**CzarnyToCartesian**](classCzarnyToCartesian.md) const & x) = default<br>_Assign a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from another_[_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _(lvalue)._ |
 |  [**CzarnyToCartesian**](classCzarnyToCartesian.md) & | [**operator=**](#function-operator_2) ([**CzarnyToCartesian**](classCzarnyToCartesian.md) && x) = default<br>_Assign a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from another temporary_[_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _(rvalue)._ |
-|   | [**~CzarnyToCartesian**](#function-czarnytocartesian) () = default<br> |
+|  KOKKOS\_DEFAULTED\_FUNCTION | [**~CzarnyToCartesian**](#function-czarnytocartesian) () = default<br> |
 
 
 
@@ -296,9 +296,11 @@ using CzarnyToCartesian< R, Theta, X, Y >::curvilinear_tag_theta =  Theta;
 
 _Instantiate a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from parameters._
 ```C++
-inline CzarnyToCartesian::CzarnyToCartesian (
+inline explicit CzarnyToCartesian::CzarnyToCartesian (
     double epsilon,
-    double e
+    double e,
+    double x0=0.0,
+    double y0=0.0
 ) 
 ```
 
@@ -309,8 +311,10 @@ inline CzarnyToCartesian::CzarnyToCartesian (
 **Parameters:**
 
 
-* `epsilon` The  parameter in the definition of the mapping [**CzarnyToCartesian**](classCzarnyToCartesian.md).
-* `e` The  parameter in the definition of the mapping [**CzarnyToCartesian**](classCzarnyToCartesian.md).
+* `epsilon` The  parameter in the definition of the mapping [**CzarnyToCartesian**](classCzarnyToCartesian.md). 
+* `e` The  parameter in the definition of the mapping [**CzarnyToCartesian**](classCzarnyToCartesian.md). 
+* `x0` The x-coordinate of the centre of the circle (0 by default). 
+* `y0` The y-coordinate of the centre of the circle (0 by default).
 
 
 
@@ -328,9 +332,9 @@ inline CzarnyToCartesian::CzarnyToCartesian (
 
 _Instantiate a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from another_[_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _(lvalue)._
 ```C++
-inline KOKKOS_FUNCTION CzarnyToCartesian::CzarnyToCartesian (
+KOKKOS_DEFAULTED_FUNCTION CzarnyToCartesian::CzarnyToCartesian (
     CzarnyToCartesian const & other
-) 
+) = default
 ```
 
 
@@ -745,7 +749,7 @@ The [**CzarnyToCartesian**](classCzarnyToCartesian.md) assigned.
 ### function ~CzarnyToCartesian 
 
 ```C++
-CzarnyToCartesian::~CzarnyToCartesian () = default
+KOKKOS_DEFAULTED_FUNCTION CzarnyToCartesian::~CzarnyToCartesian () = default
 ```
 
 

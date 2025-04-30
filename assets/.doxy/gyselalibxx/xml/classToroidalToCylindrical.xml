@@ -328,7 +328,7 @@
 <parametername direction="in">mapping_2d</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The mapping governing the transformation from <formula id="302">$(\rho, \theta) $</formula> to <formula id="304">$ (R, Z) $</formula>. </para>
+<para>The mapping governing the transformation from <formula id="304">$(\rho, \theta) $</formula> to <formula id="306">$ (R, Z) $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -349,7 +349,7 @@
           <declname>coord</declname>
         </param>
         <briefdescription>
-<para>Convert the <formula id="307">$ (\rho, \theta, \phi) $</formula> coordinate to the equivalent <formula id="303">$ (R, Z, \zeta) $</formula> coordinate. </para>
+<para>Convert the <formula id="309">$ (\rho, \theta, \phi) $</formula> coordinate to the equivalent <formula id="305">$ (R, Z, \zeta) $</formula> coordinate. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -596,7 +596,7 @@
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>A class describing a coordinate change from a toroidal system of coordinates to a cylindrical system of coordinates. The toroidal coordinates are described by a polar plane <formula id="302">$(\rho, \theta) $</formula> and a perpendicular dimension <formula id="36">$ \phi $</formula>. The cylindrical coordinates are <formula id="303">$ (R, Z, \zeta) $</formula>. <formula id="304">$ (R, Z) $</formula> describe a Cartesian slice. <formula id="302">$(\rho, \theta) $</formula> are therefore defined from this slice with a 2D coordinate change operator. <formula id="305">$ \zeta $</formula> is chosen to be equal to <formula id="306">$ -\phi $</formula> to preserve the orientation of the axes (following the right-hand rule). </para>
+<para>A class describing a coordinate change from a toroidal system of coordinates to a cylindrical system of coordinates. The toroidal coordinates are described by a polar plane <formula id="304">$(\rho, \theta) $</formula> and a perpendicular dimension <formula id="36">$ \phi $</formula>. The cylindrical coordinates are <formula id="305">$ (R, Z, \zeta) $</formula>. <formula id="306">$ (R, Z) $</formula> describe a Cartesian slice. <formula id="304">$(\rho, \theta) $</formula> are therefore defined from this slice with a 2D coordinate change operator. <formula id="307">$ \zeta $</formula> is chosen to be equal to <formula id="308">$ -\phi $</formula> to preserve the orientation of the axes (following the right-hand rule). </para>
     </briefdescription>
     <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>
@@ -604,7 +604,7 @@
 <parametername>Curvilinear2DToCartesian</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>An operator describing the coordinate change from <formula id="302">$(\rho, \theta) $</formula> to <formula id="304">$ (R, Z) $</formula>. </para>
+<para>An operator describing the coordinate change from <formula id="304">$(\rho, \theta) $</formula> to <formula id="306">$ (R, Z) $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

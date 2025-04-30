@@ -377,7 +377,7 @@
           <declname>coord</declname>
         </param>
         <briefdescription>
-<para>Convert the <formula id="248">$ (r, \zeta) $</formula> coordinate to the equivalent (x,y) coordinate. </para>
+<para>Convert the <formula id="250">$ (r, \zeta) $</formula> coordinate to the equivalent (x,y) coordinate. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -594,22 +594,22 @@
 <para>A class for describing the cylindrical 3D mapping. </para>
     </briefdescription>
     <detaileddescription>
-<para>The mapping <formula id="234">$ (R, Z, \zeta)\mapsto (x,y,z) $</formula> is defined as follow :</para>
-<para><formula id="235">$ x(R, Z, \zeta) = R \cos(\zeta), $</formula></para>
-<para><formula id="236">$ y(R, Z, \zeta) = R \sin(\zeta). $</formula></para>
-<para><formula id="237">$ z(R, Z, \zeta) = z. $</formula></para>
+<para>The mapping <formula id="236">$ (R, Z, \zeta)\mapsto (x,y,z) $</formula> is defined as follow :</para>
+<para><formula id="237">$ x(R, Z, \zeta) = R \cos(\zeta), $</formula></para>
+<para><formula id="238">$ y(R, Z, \zeta) = R \sin(\zeta). $</formula></para>
+<para><formula id="239">$ z(R, Z, \zeta) = z. $</formula></para>
 <para>It and its Jacobian matrix are invertible everywhere except for <formula id="191">$ R = 0 $</formula>.</para>
 <para>The Jacobian matrix coefficients are defined as follow</para>
-<para><formula id="238">$ J^x_{\;R}(R, Z, \zeta) = \cos(\zeta) $</formula></para>
-<para><formula id="239">$ J^x_{\;Z}(R, Z, \zeta) = 0 $</formula></para>
-<para><formula id="240">$ J^x_{\;\zeta}(R, Z, \zeta) = - R \sin(\zeta) $</formula></para>
-<para><formula id="241">$ J^y_{\;R}(R, Z, \zeta) = \sin(\zeta) $</formula></para>
-<para><formula id="242">$ J^y_{\;Z}(R, Z, \zeta) = 0 $</formula></para>
-<para><formula id="243">$ J^y_{\;\zeta}(R, Z, \zeta) = R \cos(\zeta) $</formula></para>
-<para><formula id="244">$ J^z_{\;R}(R, Z, \zeta) = 0 $</formula></para>
-<para><formula id="245">$ J^z_{\;Z}(R, Z, \zeta) = 1 $</formula></para>
-<para><formula id="246">$ J^z_{\;\zeta}(R, Z, \zeta) = 0 $</formula></para>
-<para>and the matrix determinant: <formula id="247">$ \det(J) = -R $</formula>. </para>
+<para><formula id="240">$ J^x_{\;R}(R, Z, \zeta) = \cos(\zeta) $</formula></para>
+<para><formula id="241">$ J^x_{\;Z}(R, Z, \zeta) = 0 $</formula></para>
+<para><formula id="242">$ J^x_{\;\zeta}(R, Z, \zeta) = - R \sin(\zeta) $</formula></para>
+<para><formula id="243">$ J^y_{\;R}(R, Z, \zeta) = \sin(\zeta) $</formula></para>
+<para><formula id="244">$ J^y_{\;Z}(R, Z, \zeta) = 0 $</formula></para>
+<para><formula id="245">$ J^y_{\;\zeta}(R, Z, \zeta) = R \cos(\zeta) $</formula></para>
+<para><formula id="246">$ J^z_{\;R}(R, Z, \zeta) = 0 $</formula></para>
+<para><formula id="247">$ J^z_{\;Z}(R, Z, \zeta) = 1 $</formula></para>
+<para><formula id="248">$ J^z_{\;\zeta}(R, Z, \zeta) = 0 $</formula></para>
+<para>and the matrix determinant: <formula id="249">$ \det(J) = -R $</formula>. </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" line="55" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp" bodystart="56" bodyend="304"/>
     <listofallmembers>
