@@ -24,6 +24,9 @@ wget https://github.com/spack/spack/releases/download/v0.23.0/spack-0.23.0.tar.g
 tar -xvf spack-0.23.0.tar.gz
 rm spack-0.23.0.tar.gz
 
+# Bug fix for spack < 0.24 and gcc>=14
+wget https://raw.githubusercontent.com/spack/spack/b369d8b2509794c4f46f62c81f25c247ca58418e/var/spack/repos/builtin/packages/py-netcdf4/package.py -O spack-0.23.0/var/spack/repos/builtin/packages/py-netcdf4/package.py
+
 # Activate spack
 . spack-0.23.0/share/spack/setup-env.sh
 
