@@ -105,10 +105,11 @@ int main(int argc, char** argv)
     SplineRThetaBuilder_host const builder_host(grid);
 
     double major_radius = 6.1;
+    double vertical_offset = 0.3;
 #if defined(CIRCULAR_MAPPING)
-    const Mapping mapping(major_radius);
+    const Mapping mapping(major_radius, vertical_offset);
 #elif defined(CZARNY_MAPPING)
-    const Mapping mapping(0.3, 1.4, major_radius);
+    const Mapping mapping(0.3, 1.4, major_radius, vertical_offset);
 #endif
 
     ddc::NullExtrapolationRule bv_r_min;
@@ -193,7 +194,7 @@ int main(int argc, char** argv)
                          .count()
               << "ms" << std::endl;
 
-    LHSFunction lhs(mapping, major_radius, 0.0);
+    LHSFunction lhs(mapping, major_radius, vertical_offset);
     RHSFunction rhs(mapping);
     host_t<FieldMemRTheta<CoordRTheta>> coords(grid);
     DFieldMemRTheta result_alloc(grid);

@@ -347,11 +347,12 @@ int main(int argc, char** argv)
 
 
     // SET THE DIFFERENT PARAMETERS OF THE TESTS ------------------------------------------------
-    CircularToCartMapping const from_circ_map(6.2);
-    CircularToPseudoCartMapping const to_pseudo_circ_map(6.2);
-    CartesianToCircular<X, Y, R, Theta> to_circ_map(6.2);
-    CzarnyToCartMapping const from_czarny_map(0.3, 1.4, 6.2);
-    CartesianToCzarny<X, Y, R, Theta> const to_czarny_map(0.3, 1.4, 6.2);
+    // Offset the centre of the circle to ensure that this is correctly handled
+    CircularToCartMapping const from_circ_map(6.2, 0.8);
+    CircularToPseudoCartMapping const to_pseudo_circ_map(6.2, 0.8);
+    CartesianToCircular<X, Y, R, Theta> to_circ_map(6.2, 0.8);
+    CzarnyToCartMapping const from_czarny_map(0.3, 1.4, 6.2, 0.8);
+    CartesianToCzarny<X, Y, R, Theta> const to_czarny_map(0.3, 1.4, 6.2, 0.8);
     DiscreteMappingBuilderHost const discrete_czarny_map_builder_host(
             Kokkos::DefaultHostExecutionSpace(),
             from_czarny_map,
