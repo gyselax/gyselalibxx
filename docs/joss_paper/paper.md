@@ -54,16 +54,6 @@ authors:
   affiliation: 5
   orcid: 0009-0007-3320-1406
 
-- given-names: Dorian
-  surname: Midou
-  affiliation: 2
-  orcid: 0009-0009-9593-8176
-
-- given-names: Mathieu
-  surname: Peybernes
-  affiliation: 1
-  orcid: 0009-0000-4011-9047
-
 - given-names: Matthieu
   surname: Protais
   affiliation: 2
