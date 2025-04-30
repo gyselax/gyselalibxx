@@ -20,9 +20,9 @@ class CartesianToCircular;
  *
  * The mapping @f$ (r,\theta)\mapsto (x,y) @f$ is defined as follow :
  *
- * @f$ x(r,\theta) = r \cos(\theta),@f$
+ * @f$ x(r,\theta) = r \cos(\theta) + x_0,@f$
  *
- * @f$ y(r,\theta) = r \sin(\theta).@f$
+ * @f$ y(r,\theta) = r \sin(\theta) + y_0.@f$
  *
  * It and its Jacobian matrix are invertible everywhere except for @f$ r = 0 @f$.
  *
@@ -66,8 +66,18 @@ public:
     /// @brief The covariant form of the second logical coordinate.
     using Theta_cov = typename Theta::Dual;
 
+private:
+    double m_x0;
+    double m_y0;
+
 public:
-    CircularToCartesian() = default;
+    /**
+     * @brief Instantiate a CircularToCartesian from parameters.
+     *
+     * @param[in] x0 The x-coordinate of the centre of the circle (0 by default).
+     * @param[in] y0 The y-coordinate of the centre of the circle (0 by default).
+     */
+    explicit CircularToCartesian(double x0 = 0.0, double y0 = 0.0) : m_x0(x0), m_y0(y0) {}
 
     /**
      * @brief Instantiate a CircularToCartesian from another CircularToCartesian (lvalue).
@@ -75,7 +85,7 @@ public:
      * @param[in] other
      * 		CircularToCartesian mapping used to instantiate the new one.
      */
-    KOKKOS_FUNCTION CircularToCartesian(CircularToCartesian const& other) {}
+    KOKKOS_DEFAULTED_FUNCTION CircularToCartesian(CircularToCartesian const& other) = default;
 
     /**
      * @brief Instantiate a CircularToCartesian from another temporary CircularToCartesian (rvalue).
@@ -85,7 +95,7 @@ public:
      */
     CircularToCartesian(CircularToCartesian&& x) = default;
 
-    ~CircularToCartesian() = default;
+    KOKKOS_DEFAULTED_FUNCTION ~CircularToCartesian() = default;
 
     /**
      * @brief Assign a CircularToCartesian from another CircularToCartesian (lvalue).
@@ -118,8 +128,8 @@ public:
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
-        const double x = r * Kokkos::cos(theta);
-        const double y = r * Kokkos::sin(theta);
+        const double x = r * Kokkos::cos(theta) + m_x0;
+        const double y = r * Kokkos::sin(theta) + m_y0;
         return Coord<X, Y>(x, y);
     }
 
@@ -267,7 +277,7 @@ public:
      */
     CartesianToCircular<X, Y, R, Theta> get_inverse_mapping() const
     {
-        return CartesianToCircular<X, Y, R, Theta>();
+        return CartesianToCircular<X, Y, R, Theta>(m_x0, m_y0);
     }
 };
 
