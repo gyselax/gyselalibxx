@@ -128,7 +128,6 @@ public:
                     index<'j', 'k'>(jacobian_mapping_2(coord)));
         } else {
             typename Mapping1::CoordArg coord_map1 = m_mapping_2(coord);
-            std::cout << "Equivalent to : " << coord_map1 << std::endl;
             return tensor_mul(
                     index<'i', 'j'>(m_mapping_1.jacobian_matrix(coord_map1)),
                     index<'j', 'k'>(m_mapping_2.jacobian_matrix(coord)));
