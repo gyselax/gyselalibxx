@@ -59,7 +59,11 @@ public:
      *
      * @see CartesianToCzarny
      */
-    explicit KOKKOS_FUNCTION CartesianToCzarny(double epsilon, double e, double x0 = 0.0, double y0 = 0.0)
+    explicit KOKKOS_FUNCTION CartesianToCzarny(
+            double epsilon,
+            double e,
+            double x0 = 0.0,
+            double y0 = 0.0)
         : m_epsilon(epsilon)
         , m_e(e)
         , m_x0(x0)
