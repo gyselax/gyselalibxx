@@ -2,6 +2,8 @@ spack:
   concretizer:
     unify: true
   definitions:
+  - compilers:
+    - 'gcc@11:'
   - packages:
     - 'cmake@3.30'
     - 'eigen@3.4'
@@ -31,8 +33,10 @@ spack:
   - lapack
   - matrix:
     - [$packages]
+    - [$%compilers]
   - matrix:
     - [$python-packages]
+    - [$%compilers]
   view: true
   packages:
     all:
