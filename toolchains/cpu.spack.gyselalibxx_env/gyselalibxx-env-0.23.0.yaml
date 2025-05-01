@@ -3,7 +3,7 @@ spack:
     unify: true
   definitions:
   - compilers:
-    - 'gcc@11:'
+    - 'gcc@11:' #gcc should be used on mac as apple-clang has no fortran compiler
   - packages:
     - 'cmake@3.30'
     - 'eigen@3.4'
