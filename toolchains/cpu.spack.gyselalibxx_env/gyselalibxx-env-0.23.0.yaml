@@ -31,10 +31,8 @@ spack:
   - lapack
   - matrix:
     - [$packages]
-    - [$%compilers]
   - matrix:
     - [$python-packages]
-    - [$%compilers]
   view: true
   packages:
     all:
