@@ -264,7 +264,7 @@ private:
         if constexpr (std::is_same_v<CoordJacobian, typename Mapping2::CoordResult>) {
             static_assert(is_analytical_mapping_v<Mapping2>);
             using InverseMapping2 = inverse_mapping_t<Mapping2>;
-            InverseMapping2 inv_mapping_2(m_mapping_2);
+            InverseMapping2 inv_mapping_2 = m_mapping_2.get_inverse_mapping();
             InverseJacobianMatrix<Mapping1, CoordJacobian> inv_jacobian_matrix_1(m_mapping_1);
             return tensor_mul(
                     index<'i', 'j'>(inv_mapping_2.jacobian_matrix(coord)),
