@@ -5,6 +5,7 @@
 #include "ddc_aliases.hpp"
 #include "gradient.hpp"
 #include "metric_tensor_evaluator.hpp"
+#include "static_tensors.hpp"
 #include "vector_field.hpp"
 
 
@@ -22,13 +23,15 @@ template <class Mapping3D>
 class GyrokineticPoissonBracket
 {
     static_assert(is_mapping_v<Mapping3D>);
-    static_assert(Mapping3D::CoordArg::size() == 3);
+    using MappingCoord = typename Mapping3D::CoordArg;
+    static_assert(MappingCoord::size() == 3);
 
     using BasisSpatial = ddc::to_type_seq_t<typename Mapping3D::CoordArg>;
     using CovBasisSpatial = get_covariant_dims_t<BasisSpatial>;
 
 private:
     Mapping3D m_mapping;
+    MetricTensorEvaluator<Mapping3D> m_metric_tensor;
     Gradient<MetricTensorEvaluator<Mapping3D>> m_grad;
 
 public:
@@ -39,7 +42,8 @@ public:
      */
     explicit GyrokineticPoissonBracket(Mapping3D const& mapping)
         : m_mapping(mapping)
-        , m_grad(MetricTensorEvaluator<Mapping3D>(mapping))
+        , m_metric_tensor(mapping)
+        , m_grad(m_metric_tensor)
     {
     }
 
@@ -58,10 +62,10 @@ public:
             DTensor<CovBasisSpatial> const& partial_derivatives_f,
             DTensor<CovBasisSpatial> const& partial_derivatives_g,
             DTensor<BasisSpatial> const& B,
-            CoordArg const& coord) const
+            MappingCoord const& coord) const
     {
-        LeviCivitaTensor<double, ValidIndexSet> eps;
-        double B_norm = norm(B);
+        LeviCivitaTensor<double, CovBasisSpatial> eps;
+        double B_norm = norm(m_metric_tensor(coord), B);
         return tensor_mul(
                        index<'i', 'j', 'k'>(eps),
                        index<'i'>(m_grad(partial_derivatives_f, coord)),
@@ -92,19 +96,17 @@ public:
             DVectorConstField<IdxRange, BasisSpatial, MemorySpace> const B)
     {
         static_assert(is_accessible_v<ExecSpace, Mapping3D>);
-        static_assert(Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>);
+        static_assert(Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible);
         using IdxType = typename IdxRange::discrete_element_type;
         ddc::parallel_for_each(
                 exec_space,
                 get_idx_range(poisson_bracket),
                 KOKKOS_CLASS_LAMBDA(IdxType const idx) {
-                    DVectorType poisson_bracket_elem = (*this)(
+                    poisson_bracket(idx) = (*this)(
                             partial_derivatives_f(idx),
                             partial_derivatives_g(idx),
                             B(idx),
                             ddc::coordinate(idx));
-                    ddcHelper::
-                            assign_vector_field_element(poisson_bracket, idx, poisson_bracket_elem);
                 });
     }
 };
