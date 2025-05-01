@@ -142,9 +142,6 @@ using InterpPointsTheta = ddc::GrevilleInterpolationPoints<
         ddc::BoundCond::PERIODIC,
         ddc::BoundCond::PERIODIC>;
 
-struct GridRho : UniformGridBase<Rho>
-{
-};
 struct GridR : InterpPointsR::interpolation_discrete_dimension_type
 {
 };
