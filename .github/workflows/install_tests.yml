@@ -10,12 +10,10 @@ on:
   merge_group:
     types:
       - checks_requested
-  push:
-    branches: [ebourne_spack_docs]
 
-#concurrency:
-#  group: ${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.run_id }}
-#  cancel-in-progress: true
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.run_id }}
+  cancel-in-progress: true
 
 jobs:
   pre_job:
