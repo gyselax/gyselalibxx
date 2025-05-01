@@ -74,7 +74,7 @@ public:
      * @param[in] x0 The x-coordinate of the centre of the circle (0 by default).
      * @param[in] y0 The y-coordinate of the centre of the circle (0 by default).
      */
-    explicit CartesianToCircular(double x0 = 0.0, double y0 = 0.0) : m_x0(x0), m_y0(y0) {}
+    explicit KOKKOS_FUNCTION CartesianToCircular(double x0 = 0.0, double y0 = 0.0) : m_x0(x0), m_y0(y0) {}
 
     /**
      * @brief Instantiate a CartesianToCircular from another CartesianToCircular (lvalue).
@@ -210,7 +210,7 @@ public:
      *
      * @return The inverse mapping.
      */
-    CircularToCartesian<R, Theta, X, Y> get_inverse_mapping() const
+    KOKKOS_INLINE_FUNCTION CircularToCartesian<R, Theta, X, Y> get_inverse_mapping() const
     {
         return CircularToCartesian<R, Theta, X, Y>(m_x0, m_y0);
     }
