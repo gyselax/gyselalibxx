@@ -21,7 +21,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # Download spack
 wget https://github.com/spack/spack/releases/download/v0.23.0/spack-0.23.0.tar.gz
-tar -xvf spack-0.23.0.tar.gz
+tar -xf spack-0.23.0.tar.gz
 rm spack-0.23.0.tar.gz
 
 # Bug fix for spack < 0.24 and gcc>=14
@@ -42,6 +42,7 @@ spack config --scope site add 'packages:all:providers:lapack:[openblas]'
 git clone https://github.com/pdidev/spack.git spack-0.23.0/var/spack/repos/pdi
 spack repo add --scope site spack-0.23.0/var/spack/repos/pdi
 
+spack arch
 spack compiler find
 
 spack compilers
