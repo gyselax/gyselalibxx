@@ -283,8 +283,8 @@ private:
 
 
 namespace mapping_detail {
-template <class Mapping1, class Mapping2, class ExecSpace>
-struct MappingAccessibility<ExecSpace, CombinedMapping<Mapping1, Mapping2>>
+template <class Mapping1, class Mapping2, class CoordJacobian, class ExecSpace>
+struct MappingAccessibility<ExecSpace, CombinedMapping<Mapping1, Mapping2, CoordJacobian>>
 {
     static constexpr bool value = MappingAccessibility<ExecSpace, Mapping1>::value
                                   && MappingAccessibility<ExecSpace, Mapping2>::value;
