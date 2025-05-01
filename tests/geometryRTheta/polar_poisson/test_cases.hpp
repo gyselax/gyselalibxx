@@ -85,7 +85,10 @@ public:
      *      The mapping function which converts the logical (polar)
      *      coordinates into the physical (Cartesian) coordinates.
      */
-    explicit CurvilinearSolution(CurvilinearToCartesian const& coordinate_converter)
+    explicit CurvilinearSolution(
+            CurvilinearToCartesian const& coordinate_converter,
+            double x0,
+            double y0)
         : PoissonSolution<CurvilinearToCartesian>(coordinate_converter)
     {
     }
@@ -102,7 +105,7 @@ public:
  * @brief Define a Cartesian solution of the Poisson equation.
  *
  * The solution is given by
- * * @f$ \phi (x,y) = C (1+r(x,y))^6  (1 - r(x,y))^6 \cos(2\pi x) \sin(2\pi y) @f$,
+ * * @f$ \phi (x,y) = C (1+r(x,y))^6  (1 - r(x,y))^6 \cos(2\pi x-x0) \sin(2\pi y-y0) @f$,
  *
  * with @f$C = 2^{12}1e-4 @f$.
  *
@@ -119,6 +122,8 @@ class CartesianSolution : public PoissonSolution<CurvilinearToCartesian>
 {
 private:
     InverseJacobianMatrix<CurvilinearToCartesian, Coord<R, Theta>> m_inverse_jacobian;
+    double m_x0;
+    double m_y0;
 
 public:
     /**
@@ -128,9 +133,14 @@ public:
      *      The mapping function which converts the logical (polar)
      *      coordinates into the physical (Cartesian) coordinates.
      */
-    explicit CartesianSolution(CurvilinearToCartesian const& coordinate_converter)
+    explicit CartesianSolution(
+            CurvilinearToCartesian const& coordinate_converter,
+            double x0,
+            double y0)
         : PoissonSolution<CurvilinearToCartesian>(coordinate_converter)
         , m_inverse_jacobian(coordinate_converter)
+        , m_x0(x0)
+        , m_y0(y0)
     {
     }
 
@@ -139,8 +149,8 @@ public:
         const double s = ddc::get<R>(coord);
         const Coord<X, Y> cart_coord
                 = PoissonSolution<CurvilinearToCartesian>::m_coordinate_converter(coord);
-        const double x = ddc::get<X>(cart_coord);
-        const double y = ddc::get<Y>(cart_coord);
+        const double x = ddc::get<X>(cart_coord) - m_x0;
+        const double y = ddc::get<Y>(cart_coord) - m_y0;
         return 1e-4 * ipow(1 + s, 6) * ipow(1 - s, 6) * std::cos(2 * M_PI * x)
                * std::sin(2 * M_PI * y) / ipow(0.5, 12);
     }

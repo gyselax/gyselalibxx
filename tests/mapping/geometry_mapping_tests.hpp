@@ -151,6 +151,9 @@ struct GridR : InterpPointsR::interpolation_discrete_dimension_type
 struct GridTheta : InterpPointsTheta::interpolation_discrete_dimension_type
 {
 };
+struct GridRho : UniformGridBase<Rho>
+{
+};
 struct GridPhi : UniformGridBase<Phi>
 {
 };
@@ -202,6 +205,7 @@ using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 using IdxRangeRThetaPhi = IdxRange<GridR, GridTheta, GridPhi>;
 using IdxRangeRhoThetaPhi = IdxRange<GridRho, GridTheta, GridPhi>;
 using IdxRangeRZZeta = IdxRange<GridR, GridZ, GridZeta>;
+using IdxRangeRhoThetaPhi = IdxRange<GridRho, GridTheta, GridPhi>;
 
 using IdxRho = Idx<GridRho>;
 using IdxR = Idx<GridR>;
@@ -210,6 +214,7 @@ using IdxPhi = Idx<GridPhi>;
 using IdxRTheta = Idx<GridR, GridTheta>;
 using IdxRThetaPhi = Idx<GridR, GridTheta, GridPhi>;
 using IdxRZZeta = Idx<GridR, GridZ, GridZeta>;
+using IdxRhoThetaPhi = Idx<GridRho, GridTheta, GridPhi>;
 
 using IdxStepRho = IdxStep<GridRho>;
 using IdxStepR = IdxStep<GridR>;
@@ -217,7 +222,9 @@ using IdxStepTheta = IdxStep<GridTheta>;
 using IdxStepPhi = IdxStep<GridPhi>;
 using IdxStepZ = IdxStep<GridZ>;
 using IdxStepZeta = IdxStep<GridZeta>;
+using IdxStepRho = IdxStep<GridRho>;
 using IdxStepRTheta = IdxStep<GridR, GridTheta>;
+using IdxStepRhoThetaPhi = IdxStep<GridRho, GridTheta, GridPhi>;
 
 using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 
@@ -230,6 +237,9 @@ using FieldMemRThetaPhi_host = host_t<FieldMem<ElementType, IdxRangeRThetaPhi>>;
 
 template <class ElementType>
 using FieldMemRZZeta_host = host_t<FieldMem<ElementType, IdxRangeRZZeta>>;
+
+template <class ElementType>
+using FieldMemRhoThetaPhi_host = host_t<FieldMem<ElementType, IdxRangeRhoThetaPhi>>;
 
 /**
  * @brief Check if the product of the matrix and inv_matrix gives the identity matrix.
