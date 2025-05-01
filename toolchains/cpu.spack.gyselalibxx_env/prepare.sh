@@ -42,6 +42,7 @@ spack config --scope site add 'packages:all:providers:lapack:[openblas]'
 git clone https://github.com/pdidev/spack.git spack-0.23.0/var/spack/repos/pdi
 spack repo add --scope site spack-0.23.0/var/spack/repos/pdi
 
+gcc -v
 spack arch
 spack compiler find
 
