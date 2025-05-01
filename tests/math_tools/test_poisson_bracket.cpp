@@ -18,6 +18,52 @@ TEST(GyrokineticPoissonBracket, Anticommutativity)
     CylindricalMapping cylindrical_to_cartesian;
     CombinedMapping<CylindricalMapping, ToroidalMapping>
             mapping(toroidal_to_cylindrical, cylindrical_to_cartesian);
+    GyrokineticPoissonBracket calculate_poisson_bracket(mapping);
+
+    using BasisSpatial = VectorIndexSet<Rho, Theta, Phi>;
+    using CovBasisSpatial = get_covariant_dims_t<BasisSpatial>;
+
+    IdxStepRho nrho(10);
+    IdxStepTheta nrho(10);
+    IdxStepPhi nrho(10);
+    ddc::init_discrete_space<GridRho>(GridRho::init<GridRho>(0.0, 1.0, nrho));
+    ddc::init_discrete_space<GridTheta>(GridTheta::init<GridTheta>(0.0, 2 * M_PI, ntheta));
+    ddc::init_discrete_space<GridPhi>(GridPhi::init<GridPhi>(0.0, 2 * M_PI, nphi));
+
+    IdxRangeRho idx_range_rho(IdxRho(0), nrho);
+    IdxRangeTheta idx_range_theta(IdxTheta(0), ntheta);
+    IdxRangePhi idx_range_phi(IdxPhi(0), nphi);
+    IdxRangeRhoThetaPhi idx_range(idx_range_rho, idx_range_theta, idx_range_phi);
+    DField<IdxRangeRhoThetaPhi> poisson_bracket(idx_range);
+    DField<IdxRangeRhoThetaPhi> reverse_poisson_bracket(idx_range);
+    DVectorConstField<IdxRange, CovBasisSpatial> df(idx_range);
+    DVectorConstField<IdxRange, CovBasisSpatial> dg(idx_range);
+    DVectorConstField<IdxRange, BasisSpatial> B(idx_range);
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            idx_range,
+            KOKKOS_LAMBDA(IdxRhoThetaPhi idx) {
+                // f(rho, theta, phi) = rho
+                ddcHelper::get<Rho_cov>(df)(idx) = 1;
+                ddcHelper::get<Theta_cov>(df)(idx) = 0;
+                ddcHelper::get<Phi_cov>(df)(idx) = 0;
+                // g(rho, theta, phi) = phi
+                ddcHelper::get<Rho_cov>(df)(idx) = 0;
+                ddcHelper::get<Theta_cov>(df)(idx) = 0;
+                ddcHelper::get<Phi_cov>(df)(idx) = 1;
+                // B(rho, theta, phi) = 0.1 \hat{theta} + 0.9 \hat{phi}
+                ddcHelper::get<Rho_cov>(df)(idx) = 0;
+                ddcHelper::get<Theta_cov>(df)(idx) = 0.1;
+                ddcHelper::get<Phi_cov>(df)(idx) = 0.9;
+            });
+    calculate_poisson_bracket(poisson_bracket, df, dg, B);
+    calculate_poisson_bracket(reverse_poisson_bracket, dg, df, B);
+
+    auto poisson_bracket_host = ddc::create_mirror_view_and_copy(poisson_bracket);
+    auto reverse_poisson_bracket_host = ddc::create_mirror_view_and_copy(reverse_poisson_bracket);
+    ddc::for_each(idx_range, [&](IdxRhoThetaPhi idx) {
+        EXPECT_NEAR(poisson_bracket_host(idx), -reverse_poisson_bracket_host(idx), 1e-13);
+    });
 }
 
 TEST(GyrokineticPoissonBracket, Bilinearity) {}
