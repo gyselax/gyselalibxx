@@ -1,15 +1,15 @@
 name: Docker update
 
 inputs:
+  always_push:
+    description: 'Indicates if the docker should be pushed and tagged with the SHA regardless of whether it was rebuilt or not'
+    type: bool
+    required: true
   release_tag:
     description: 'A tag for the release version'
     type: string
     required: false
     default: ''
-  always_push:
-    description: 'Indicates if the docker should be pushed and tagged with the SHA regardless of whether it was rebuilt or not'
-    type: bool
-    required: true
 secrets:
   GITHUB_TOKEN:
     required: true
