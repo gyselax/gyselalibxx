@@ -10,9 +10,6 @@ inputs:
     type: string
     required: false
     default: ''
-secrets:
-  GITHUB_TOKEN:
-    required: true
 outputs:
   image_tag:
     description: "The image tag that should be used after this action"
@@ -32,10 +29,11 @@ runs:
         else
           echo "rebuild=false" >> $GITHUB_OUTPUT
         fi
+      shell: bash
     - name: Build final tags
       id: get-tags
       if: inputs.always_push || steps.rebuild-check.outputs.rebuild
-      runs: |
+      run: |
         import os
         sha_tag = "ghcr.io/gyselax/gyselalibxx_env:${{ github.SHA }}"
         release_tag = "ghcr.io/gyselax/gyselalibxx_env:${{ inputs.release_tag }}"
@@ -56,7 +54,7 @@ runs:
       with:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ github.token }}
     - name: Build and push to tag
       if: inputs.always_push || steps.rebuild-check.outputs.rebuild
       uses: docker/build-push-action@v3
@@ -68,7 +66,7 @@ runs:
         call: ${{ steps.rebuild-check.outputs.rebuild && 'build' || 'call' }}
         tags: ${{ steps.get-tags.outputs.full_tags }}
     - name: Pick image tag for subsequent jobs
-      runs: |
+      run: |
         if [ "${{ inputs.always_push || steps.rebuild-check.outputs.rebuild }}" == "true" ]
         then
           echo "image_tag=ghcr.io/gyselax/gyselalibxx_env:${{ github.SHA }}"
