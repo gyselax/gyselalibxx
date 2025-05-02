@@ -37,7 +37,7 @@ runs:
       if: inputs.always_push || (steps.rebuild-check.outputs.rebuild == 'true')
       run: |
         import os
-        sha_tag = "ghcr.io/gyselax/gyselalibxx_env:${{ github.SHA }}"
+        sha_tag = "ghcr.io/gyselax/gyselalibxx_env:${{ github.event.pull_request.head.sha || github.SHA }}"
         release_tag = "ghcr.io/gyselax/gyselalibxx_env:${{ inputs.release_tag }}"
         # Build a CSV representation of the tags
         full_tags = sha_tag + ('' if release_tag.endswith(":") else (','+release_tag))
@@ -71,7 +71,7 @@ runs:
       run: |
         if [ "${{ inputs.always_push || (steps.rebuild-check.outputs.rebuild == 'true') }}" == "true" ]
         then
-          echo "image_tag=ghcr.io/gyselax/gyselalibxx_env:${{ github.SHA }}"
+          echo "image_tag=ghcr.io/gyselax/gyselalibxx_env:${{ github.event.pull_request.head.sha || github.SHA }}"
         else
           echo "image_tag=ghcr.io/gyselax/gyselalibxx_env:latest"
         fi
