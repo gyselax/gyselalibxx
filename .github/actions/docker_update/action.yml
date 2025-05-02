@@ -27,11 +27,11 @@ runs:
         # Use the modification status of docker/gyselalibxx_env/Dockerfile to decide if the docker should be rebuilt
         if [ -n "${changed_docker_file}" ]
         then
-          echo "rebuild=true"
-          echo "rebuild=true" >> $GITHUB_OUTPUT
+          echo "rebuild=True"
+          echo "rebuild=True" >> $GITHUB_OUTPUT
         else
-          echo "rebuild=false"
-          echo "rebuild=false" >> $GITHUB_OUTPUT
+          echo "rebuild=False"
+          echo "rebuild=False" >> $GITHUB_OUTPUT
         fi
       shell: bash
     - name: Build final tags
@@ -40,11 +40,11 @@ runs:
       run: |
         import os
         sha_tag = "ghcr.io/gyselax/gyselalibxx_env:${{ github.SHA }}"
-        release_tag = "ghcr.io/gyselax/gyselalibxx_env:${{ inputs.release_tag }}"
+        release_tag = "ghcr.io/gyselax/gyselalibxx_env:${{ inputs.release_tag }}".strip()
         # Build a CSV representation of the tags
         full_tags = sha_tag + ((','+release_tag) if release_tag.endswith(":") else '')
         # Save the CSV to the outputs for use in the build-push-action
-        print("full_tags='", full_tags, "'", file=open(os.environ["GITHUB_OUTPUT"], 'a'), sep='')
+        print("full_tags=", full_tags, file=open(os.environ["GITHUB_OUTPUT"], 'a'), sep='')
       shell: python
     - name: Set up QEMU
       if: inputs.always_push || steps.rebuild-check.outputs.rebuild
