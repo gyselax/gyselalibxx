@@ -42,8 +42,6 @@ private:
     double const m_omega;
     double const m_xc;
     double const m_yc;
-    double const m_x_bar;
-    double const m_y_bar;
 
 public:
     /// @brief Instantiate an ElectrostaticPotentialSimulation_decentred_rotation advection field.
@@ -51,8 +49,6 @@ public:
         : m_omega(2 * M_PI)
         , m_xc(0.25)
         , m_yc(0.)
-        , m_x_bar(0.)
-        , m_y_bar(0.)
     {
     }
 
