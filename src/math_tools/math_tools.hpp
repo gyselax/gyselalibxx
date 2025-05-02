@@ -191,3 +191,60 @@ inverse(DTensor<VectorIndexSet<RowDim1, RowDim2>, VectorIndexSet<ColDim1, ColDim
     ddcHelper::get<OutRowDim2, OutColDim2>(inv) = ddcHelper::get<RowDim1, ColDim1>(arr) / det;
     return inv;
 }
+
+template <class RowDim1, class RowDim2, class RowDim3, class ColDim1, class ColDim2, class ColDim3>
+KOKKOS_FUNCTION DTensor<
+        VectorIndexSet<typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual>,
+        VectorIndexSet<typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual>>
+inverse(
+        DTensor<VectorIndexSet<RowDim1, RowDim2, RowDim3>,
+                VectorIndexSet<ColDim1, ColDim2, ColDim3>> arr)
+{
+    using OutRowDim1 = typename ColDim1::Dual;
+    using OutRowDim2 = typename ColDim2::Dual;
+    using OutRowDim3 = typename ColDim3::Dual;
+    using OutColDim1 = typename RowDim1::Dual;
+    using OutColDim2 = typename RowDim2::Dual;
+    using OutColDim3 = typename RowDim3::Dual;
+    DTensor<VectorIndexSet<OutRowDim1, OutRowDim2, OutRowDim3>,
+            VectorIndexSet<OutColDim1, OutColDim2, OutColDim3>>
+            inv;
+    double det = determinant(arr);
+    ddcHelper::get<OutRowDim1, OutColDim1>(inv)
+            = (ddcHelper::get<RowDim2, ColDim2>(arr) * ddcHelper::get<RowDim3, ColDim3>(arr)
+               - ddcHelper::get<RowDim2, ColDim3>(arr) * ddcHelper::get<RowDim3, ColDim2>(arr))
+              / det;
+    ddcHelper::get<OutRowDim2, OutColDim1>(inv)
+            = (ddcHelper::get<RowDim2, ColDim3>(arr) * ddcHelper::get<RowDim3, ColDim1>(arr)
+               - ddcHelper::get<RowDim2, ColDim1>(arr) * ddcHelper::get<RowDim3, ColDim3>(arr))
+              / det;
+    ddcHelper::get<OutRowDim3, OutColDim1>(inv)
+            = (ddcHelper::get<RowDim2, ColDim1>(arr) * ddcHelper::get<RowDim3, ColDim2>(arr)
+               - ddcHelper::get<RowDim2, ColDim2>(arr) * ddcHelper::get<RowDim3, ColDim1>(arr))
+              / det;
+    ddcHelper::get<OutRowDim1, OutColDim2>(inv)
+            = (ddcHelper::get<RowDim1, ColDim3>(arr) * ddcHelper::get<RowDim3, ColDim2>(arr)
+               - ddcHelper::get<RowDim1, ColDim2>(arr) * ddcHelper::get<RowDim3, ColDim3>(arr))
+              / det;
+    ddcHelper::get<OutRowDim2, OutColDim2>(inv)
+            = (ddcHelper::get<RowDim1, ColDim1>(arr) * ddcHelper::get<RowDim3, ColDim3>(arr)
+               - ddcHelper::get<RowDim1, ColDim3>(arr) * ddcHelper::get<RowDim3, ColDim1>(arr))
+              / det;
+    ddcHelper::get<OutRowDim3, OutColDim2>(inv)
+            = (ddcHelper::get<RowDim1, ColDim2>(arr) * ddcHelper::get<RowDim3, ColDim1>(arr)
+               - ddcHelper::get<RowDim1, ColDim1>(arr) * ddcHelper::get<RowDim3, ColDim2>(arr))
+              / det;
+    ddcHelper::get<OutRowDim1, OutColDim3>(inv)
+            = (ddcHelper::get<RowDim1, ColDim2>(arr) * ddcHelper::get<RowDim2, ColDim3>(arr)
+               - ddcHelper::get<RowDim1, ColDim3>(arr) * ddcHelper::get<RowDim2, ColDim2>(arr))
+              / det;
+    ddcHelper::get<OutRowDim2, OutColDim3>(inv)
+            = (ddcHelper::get<RowDim1, ColDim3>(arr) * ddcHelper::get<RowDim2, ColDim1>(arr)
+               - ddcHelper::get<RowDim1, ColDim1>(arr) * ddcHelper::get<RowDim2, ColDim3>(arr))
+              / det;
+    ddcHelper::get<OutRowDim3, OutColDim3>(inv)
+            = (ddcHelper::get<RowDim1, ColDim1>(arr) * ddcHelper::get<RowDim2, ColDim2>(arr)
+               - ddcHelper::get<RowDim1, ColDim2>(arr) * ddcHelper::get<RowDim2, ColDim1>(arr))
+              / det;
+    return inv;
+}
