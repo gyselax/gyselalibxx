@@ -44,20 +44,21 @@ spack repo add --scope site spack-0.23.0/var/spack/repos/pdi
 
 spack compiler find
 
-AVAILABLE_COMPILERS=$(spack compilers | grep "gcc@1[1-9]" || true)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  spack env create gyselalibxx-env ${SCRIPT_DIR}/macos-gyselalibxx-env-0.23.0.yaml
+else
+  AVAILABLE_COMPILERS=$(spack compilers | grep "gcc@1[1-9]" || true)
 
-if [ -z "${AVAILABLE_COMPILERS}" ]
-then
-    echo "A gcc compiler with a version of at least 11 was not found. Installing compiler"
-    spack install gcc@11
-    spack load gcc@11
-    spack compiler find
+  if [ -z "${AVAILABLE_COMPILERS}" ]
+  then
+      echo "A gcc compiler with a version of at least 11 was not found. Installing compiler"
+      spack install gcc@11
+      spack load gcc@11
+      spack compiler find
+  fi
+
+  spack env create gyselalibxx-env ${SCRIPT_DIR}/linux-gyselalibxx-env-0.23.0.yaml
 fi
-
-spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-0.23.0.yaml
-export SPACK_DEBUG_LOG_DIR=spack-logs
-export SPACK_VERBOSE=1
-export SPACK_DEBUG=1
 spack --env gyselalibxx-env install --jobs 2
 
 
