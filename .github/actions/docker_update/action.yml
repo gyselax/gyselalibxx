@@ -18,7 +18,7 @@ runs:
   using: "composite"
   steps:
     - uses: ./.github/actions/changed_files
-    - id: docker-check
+    - id: rebuild-check
       run: |
         echo cat changed_files.txt
         # Check if docker/gyselalibxx_env/Dockerfile has been modified
@@ -31,12 +31,6 @@ runs:
         else
           echo "rebuild=false" >> $GITHUB_OUTPUT
         fi
-      shell: bash
-    - name: "Check"
-      run: |
-        echo ${{ steps.rebuild-check.outputs.rebuild }}
-        echo ${{ inputs.always_push }}
-        echo ${{ inputs.always_push || (steps.rebuild-check.outputs.rebuild == 'true') }}
       shell: bash
     - name: Build final tags
       id: get-tags
