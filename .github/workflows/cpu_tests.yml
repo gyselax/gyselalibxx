@@ -74,7 +74,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       image_tag: ${{ steps.docker.outputs.image_tag }}
-    if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
+    #if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
     steps:
       - uses: actions/checkout@v4
       - id: docker
