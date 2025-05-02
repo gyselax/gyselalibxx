@@ -20,13 +20,17 @@ runs:
     - uses: ./.github/actions/changed_files
     - id: docker-check
       run: |
+        echo cat changed_files.txt
         # Check if docker/gyselalibxx_env/Dockerfile has been modified
         changed_docker_file=$(cat changed_files.txt | grep docker/gyselalibxx_env/Dockerfile || true)
+        echo "${changed_docker_file}"
         # Use the modification status of docker/gyselalibxx_env/Dockerfile to decide if the docker should be rebuilt
         if [ -n "${changed_docker_file}" ]
         then
+          echo "rebuild=true"
           echo "rebuild=true" >> $GITHUB_OUTPUT
         else
+          echo "rebuild=false"
           echo "rebuild=false" >> $GITHUB_OUTPUT
         fi
       shell: bash
@@ -57,7 +61,7 @@ runs:
         password: ${{ github.token }}
     - name: Build and push to tag
       if: inputs.always_push || steps.rebuild-check.outputs.rebuild
-      uses: docker/build-push-action@v3
+      uses: docker/build-push-action@v6
       with:
         context: ./docker/gyselalibxx_env
         cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
