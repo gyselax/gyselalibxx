@@ -25,7 +25,6 @@ RUN chmod +x /bin/bash_run \
  && apt-get update -y \
  && apt-get install -y --no-install-recommends \
     build-essential \
-    clang \
     clang-format \
     doxygen \
     pkg-config \
