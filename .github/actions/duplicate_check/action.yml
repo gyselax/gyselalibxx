@@ -7,7 +7,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - uses: .github/actions/changed_files
+    - uses: ./.github/actions/changed_files
     - id: changes_check
       run: |
         import fnmatch
