@@ -40,7 +40,7 @@ runs:
         # Build a CSV representation of the tags
         full_tags = sha_tag + ((','+release_tag) if release_tag.endswith(":") else '')
         # Save the CSV to the outputs for use in the build-push-action
-        print("full_tags='", full_tags, "'", file=open(os.environ["GITHUB_OUTPUT"], sep='')
+        print("full_tags='", full_tags, "'", file=open(os.environ["GITHUB_OUTPUT"]), sep='')
       shell: python
     - name: Set up QEMU
       if: inputs.always_push || steps.rebuild-check.outputs.rebuild
