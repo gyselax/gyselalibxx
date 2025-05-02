@@ -13,6 +13,7 @@ inputs:
 outputs:
   image_tag:
     description: "The image tag that should be used after this action"
+    value: ${{ steps.image_tag.outputs.image_tag }}
 
 runs:
   using: "composite"
@@ -31,6 +32,12 @@ runs:
         else
           echo "rebuild=false" >> $GITHUB_OUTPUT
         fi
+      shell: bash
+    - name: Test
+      run: |
+        echo ${{ inputs.always_push }}
+        echo ${{ (steps.rebuild-check.outputs.rebuild == 'true') }}
+        echo ${{ inputs.always_push || (steps.rebuild-check.outputs.rebuild == 'true') }}
       shell: bash
     - name: Build final tags
       id: get-tags
@@ -68,6 +75,7 @@ runs:
         call: ${{ (steps.rebuild-check.outputs.rebuild == 'true') && 'build' || 'check' }}
         tags: ${{ steps.get-tags.outputs.full_tags }}
     - name: Pick image tag for subsequent jobs
+      id: image_tag
       run: |
         if [ "${{ inputs.always_push || (steps.rebuild-check.outputs.rebuild == 'true') }}" == "true" ]
         then

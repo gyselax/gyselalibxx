@@ -92,6 +92,10 @@ jobs:
       options: --user root
     name: CPU Test (${{ matrix.toolchain }})
     steps:
+      - name: Debug
+        run: |
+          echo ${{ needs.docker_update.outputs.image_tag }}
+        shell: bash
       - name: Checkout gyselalibxx
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: actions/checkout@v4
