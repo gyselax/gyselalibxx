@@ -1,12 +1,13 @@
 name: Docker update
 
 inputs:
-  release:
-    required: true
-    type: bool
   rebuild:
     required: true
     type: bool
+  release_tags:
+    description: 'A list of tags for release versions'
+    required: false
+    default: '[]'
 secrets:
   GITHUB_TOKEN:
     required: true
@@ -24,6 +25,14 @@ runs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build final tags
+        id: get-tags
+        runs: |
+          import os
+          release_tags = ${{ inputs.release_tags }}
+          full_tags = ["ghcr.io/gyselax/gyselalibxx_env:${{ github.SHA }}"] + [f"ghcr.io/gyselax/gyselalibxx_env:{t}" for t in release_tags]
+          print("full_tags='", ','.join(full_tags), "'", file=open(os.environ["GITHUB_OUTPUT"], sep='')
+        shell: python
       - name: Build and push to tag
         uses: docker/build-push-action@v3
         with:
@@ -32,5 +41,5 @@ runs:
           pull: true
           push: true
           call: ${{ inputs.rebuild && 'build' || 'call' }}
-          tags: 'ghcr.io/gyselax/gyselalibxx_env:${{ github.SHA }}${{ inputs.release && ',ghcr.io/gyselax/gyselalibxx_env:latest' || ''}}'
+          tags: ${{ steps.get-tags.outputs.full_tags }}
 
