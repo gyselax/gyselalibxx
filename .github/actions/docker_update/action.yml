@@ -32,6 +32,12 @@ runs:
           echo "rebuild=false" >> $GITHUB_OUTPUT
         fi
       shell: bash
+    - name: Test
+      run: |
+        echo ${{ inputs.always_push }}
+        echo ${{ steps.rebuild-check.outputs.rebuild }}
+        echo ${{ (inputs.always_push || (steps.rebuild-check.outputs.rebuild == 'true')) }}
+      shell: bash
     - name: Build final tags
       id: get-tags
       if: (inputs.always_push == 'true') || (steps.rebuild-check.outputs.rebuild == 'true')
