@@ -64,12 +64,12 @@ _A class for describing the Czarny 2D mapping._ [More...](#detailed-description)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**CartesianToCzarny**](#function-cartesiantoczarny-13) (double epsilon, double e, double x0=0.0, double y0=0.0) <br>_Instantiate a_ [_**CartesianToCzarny**_](classCartesianToCzarny.md) _from parameters._ |
+|  KOKKOS\_FUNCTION | [**CartesianToCzarny**](#function-cartesiantoczarny-13) (double epsilon, double e, double x0=0.0, double y0=0.0) <br>_Instantiate a_ [_**CartesianToCzarny**_](classCartesianToCzarny.md) _from parameters._ |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**CartesianToCzarny**](#function-cartesiantoczarny-23) ([**CartesianToCzarny**](classCartesianToCzarny.md) const & other) = default<br>_Instantiate a_ [_**CartesianToCzarny**_](classCartesianToCzarny.md) _from another_[_**CartesianToCzarny**_](classCartesianToCzarny.md) _(lvalue)._ |
 |   | [**CartesianToCzarny**](#function-cartesiantoczarny-33) ([**CartesianToCzarny**](classCartesianToCzarny.md) && x) = default<br>_Instantiate a_ [_**CartesianToCzarny**_](classCartesianToCzarny.md) _from another temporary_[_**CartesianToCzarny**_](classCartesianToCzarny.md) _(rvalue)._ |
 |  KOKKOS\_FUNCTION double | [**e**](#function-e) () const<br>_Return the_  _parameter._ |
 |  KOKKOS\_FUNCTION double | [**epsilon**](#function-epsilon) () const<br>_Return the_  _parameter._ |
-|  [**CzarnyToCartesian**](classCzarnyToCartesian.md)&lt; [**R**](structR.md), [**Theta**](structTheta.md), [**X**](structX.md), [**Y**](structY.md) &gt; | [**get\_inverse\_mapping**](#function-get_inverse_mapping) () const<br>_Get the inverse mapping._  |
+|  KOKKOS\_INLINE\_FUNCTION [**CzarnyToCartesian**](classCzarnyToCartesian.md)&lt; [**R**](structR.md), [**Theta**](structTheta.md), [**X**](structX.md), [**Y**](structY.md) &gt; | [**get\_inverse\_mapping**](#function-get_inverse_mapping) () const<br>_Get the inverse mapping._  |
 |  KOKKOS\_FUNCTION Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; | [**operator()**](#function-operator) (Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; const & coord) const<br>_Convert the coordinate (x,y) to the equivalent_  _coordinate._ |
 |  [**CartesianToCzarny**](classCartesianToCzarny.md) & | [**operator=**](#function-operator_1) ([**CartesianToCzarny**](classCartesianToCzarny.md) const & x) = default<br>_Assign a_ [_**CartesianToCzarny**_](classCartesianToCzarny.md) _from another_[_**CartesianToCzarny**_](classCartesianToCzarny.md) _(lvalue)._ |
 |  [**CartesianToCzarny**](classCartesianToCzarny.md) & | [**operator=**](#function-operator_2) ([**CartesianToCzarny**](classCartesianToCzarny.md) && x) = default<br>_Assign a_ [_**CartesianToCzarny**_](classCartesianToCzarny.md) _from another temporary_[_**CartesianToCzarny**_](classCartesianToCzarny.md) _(rvalue)._ |
@@ -213,7 +213,7 @@ using CartesianToCzarny< X, Y, R, Theta >::curvilinear_tag_theta =  Theta;
 
 _Instantiate a_ [_**CartesianToCzarny**_](classCartesianToCzarny.md) _from parameters._
 ```C++
-inline explicit CartesianToCzarny::CartesianToCzarny (
+inline explicit KOKKOS_FUNCTION CartesianToCzarny::CartesianToCzarny (
     double epsilon,
     double e,
     double x0=0.0,
@@ -359,7 +359,7 @@ The value of .
 
 _Get the inverse mapping._ 
 ```C++
-inline CzarnyToCartesian < R , Theta , X , Y > CartesianToCzarny::get_inverse_mapping () const
+inline KOKKOS_INLINE_FUNCTION CzarnyToCartesian < R , Theta , X , Y > CartesianToCzarny::get_inverse_mapping () const
 ```
 
 

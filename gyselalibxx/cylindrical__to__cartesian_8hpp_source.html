@@ -718,6 +718,11 @@ struct MappingAccessibility&lt;ExecSpace, CylindricalToCartesian&lt;R, Z, Zeta, 
 {
 };
 
+template &lt;class X, class Y, class Z, class R, class Zeta&gt;
+struct SingularOPointInvJacobian&lt;CylindricalToCartesian&lt;R, Z, Zeta, X, Y&gt;&gt; : std::true_type
+{
+};
+
 } // namespace mapping_detail
 </code></pre></div>
               

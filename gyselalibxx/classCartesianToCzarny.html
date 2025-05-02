@@ -593,7 +593,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;"></td>
+<td style="text-align: right;">KOKKOS_FUNCTION</td>
 <td style="text-align: left;"><a href="#function-cartesiantoczarny-13"><strong>CartesianToCzarny</strong></a> (double epsilon, double e, double x0=0.0, double y0=0.0) <br><em>Instantiate a</em> <a href="classCartesianToCzarny.html"><em><strong>CartesianToCzarny</strong></em></a> <em>from parameters.</em></td>
 </tr>
 <tr>
@@ -613,7 +613,7 @@
 <td style="text-align: left;"><a href="#function-epsilon"><strong>epsilon</strong></a> () const<br><em>Return the</em>  <em>parameter.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;"><a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a>, <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;</td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a>, <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#function-get_inverse_mapping"><strong>get_inverse_mapping</strong></a> () const<br><em>Get the inverse mapping.</em></td>
 </tr>
 <tr>
@@ -676,7 +676,7 @@
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-cartesiantoczarny-13">function CartesianToCzarny [1/3]</h3>
 <p><em>Instantiate a</em> <a href="classCartesianToCzarny.html"><em><strong>CartesianToCzarny</strong></em></a> <em>from parameters.</em></p>
-<pre><code class="language-C++">inline explicit CartesianToCzarny::CartesianToCzarny (
+<pre><code class="language-C++">inline explicit KOKKOS_FUNCTION CartesianToCzarny::CartesianToCzarny (
     double epsilon,
     double e,
     double x0=0.0,
@@ -737,7 +737,7 @@
 
 <h3 id="function-get_inverse_mapping">function get_inverse_mapping</h3>
 <p><em>Get the inverse mapping.</em> </p>
-<pre><code class="language-C++">inline CzarnyToCartesian &lt; R , Theta , X , Y &gt; CartesianToCzarny::get_inverse_mapping () const
+<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION CzarnyToCartesian &lt; R , Theta , X , Y &gt; CartesianToCzarny::get_inverse_mapping () const
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>The inverse mapping. </p>

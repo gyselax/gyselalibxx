@@ -559,14 +559,15 @@ template &lt;class Mapping, class CoordRTheta&gt;
 class InvJacobianOPoint;
 
 // Pre-declaration of CombinedMapping.
-template &lt;class Mapping1, class Mapping2&gt;
+template &lt;class Mapping1, class Mapping2, class CoordJacobian&gt;
 class CombinedMapping;
 
 template &lt;class X, class Y, class R, class Theta, class Xpc, class Ypc&gt;
 class InvJacobianOPoint&lt;
         CombinedMapping&lt;
                 CircularToCartesian&lt;R, Theta, X, Y&gt;,
-                CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;&gt;,
+                CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;,
+                Coord&lt;R, Theta&gt;&gt;,
         Coord&lt;R, Theta&gt;&gt;
 {
     using CoordRTheta = Coord&lt;R, Theta&gt;;
@@ -577,7 +578,8 @@ class InvJacobianOPoint&lt;
 private:
     using Mapping = CombinedMapping&lt;
             CircularToCartesian&lt;R, Theta, X, Y&gt;,
-            CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;&gt;;
+            CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;,
+            Coord&lt;R, Theta&gt;&gt;;
 
 private:
     Mapping m_mapping;
@@ -599,7 +601,10 @@ public:
 
 template &lt;class X, class Y, class R, class Theta, class Xpc, class Ypc&gt;
 class InvJacobianOPoint&lt;
-        CombinedMapping&lt;CzarnyToCartesian&lt;R, Theta, X, Y&gt;, CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;&gt;,
+        CombinedMapping&lt;
+                CzarnyToCartesian&lt;R, Theta, X, Y&gt;,
+                CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;,
+                Coord&lt;R, Theta&gt;&gt;,
         Coord&lt;R, Theta&gt;&gt;
 {
     using CoordRTheta = Coord&lt;R, Theta&gt;;
@@ -609,7 +614,10 @@ class InvJacobianOPoint&lt;
 
 private:
     using CzarnyToCart = CzarnyToCartesian&lt;R, Theta, X, Y&gt;;
-    using Mapping = CombinedMapping&lt;CzarnyToCart, CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;&gt;;
+    using Mapping = CombinedMapping&lt;
+            CzarnyToCart,
+            CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;,
+            Coord&lt;R, Theta&gt;&gt;;
 
 private:
     Mapping m_mapping;
@@ -646,7 +654,8 @@ template &lt;
 class InvJacobianOPoint&lt;
         CombinedMapping&lt;
                 DiscreteToCartesian&lt;X, Y, SplineEvaluator, R, Theta, MemorySpace&gt;,
-                CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;&gt;,
+                CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;,
+                Coord&lt;R, Theta&gt;&gt;,
         Coord&lt;R, Theta&gt;&gt;
 {
     using CoordRTheta = Coord&lt;R, Theta&gt;;
@@ -661,7 +670,8 @@ class InvJacobianOPoint&lt;
 private:
     using Mapping = CombinedMapping&lt;
             DiscreteToCartesian&lt;X, Y, SplineEvaluator, R, Theta, MemorySpace&gt;,
-            CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;&gt;;
+            CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;,
+            Coord&lt;R, Theta&gt;&gt;;
 
     using IdxRangeR = typename SplineEvaluator::evaluation_domain_type1;
     using IdxRangeTheta = typename SplineEvaluator::evaluation_domain_type2;

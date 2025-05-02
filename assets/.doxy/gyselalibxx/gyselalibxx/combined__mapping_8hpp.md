@@ -33,7 +33,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**CombinedMapping**](classCombinedMapping.md) &lt;class Mapping1, class Mapping2&gt;<br>_A class which describes a mapping which is constructed by combining two mappings. Let us denote Mapping1 as_  _and Mapping2 as_ _then this mapping represents:_ _._ |
+| class | [**CombinedMapping**](classCombinedMapping.md) &lt;class Mapping1, class Mapping2, class CoordJacobian&gt;<br>_A class which describes a mapping which is constructed by combining two mappings. Let us denote Mapping1 as_  _and Mapping2 as_ _then this mapping represents:_ _._ |
 
 
 

@@ -259,7 +259,7 @@
     <member refid="classCartesianToCircular_1a1d38114e75c30437baa95e8fb3e27fd0" kind="typedef"><name>Theta_cov</name></member>
     <member refid="classCartesianToCircular_1af9234716ccc3a28021edcf9d5f11ff89" kind="variable"><name>m_x0</name></member>
     <member refid="classCartesianToCircular_1a24ff268bdd1e392afdd5ce4a38f90738" kind="variable"><name>m_y0</name></member>
-    <member refid="classCartesianToCircular_1ae74b286eaf90f51f7952c67f21ed1eb7" kind="function"><name>CartesianToCircular</name></member>
+    <member refid="classCartesianToCircular_1af148dba09e25aca287f087d27642bfc4" kind="function"><name>CartesianToCircular</name></member>
     <member refid="classCartesianToCircular_1ae176c056f6c47a7228d5f694121f3bcd" kind="function"><name>CartesianToCircular</name></member>
     <member refid="classCartesianToCircular_1abe8adddabf03ac964a31590c69e89f29" kind="function"><name>CartesianToCircular</name></member>
     <member refid="classCartesianToCircular_1ab44f97fd7abb545237a399a54ab1d00f" kind="function"><name>~CartesianToCircular</name></member>
@@ -269,7 +269,7 @@
     <member refid="classCartesianToCircular_1a275832f34d53e29ba6a1304819d040fe" kind="function"><name>jacobian</name></member>
     <member refid="classCartesianToCircular_1a15d8b8ccc837c4e57c000ac4307713f5" kind="function"><name>jacobian_matrix</name></member>
     <member refid="classCartesianToCircular_1af69ebbdc58f56c521d3c25589fe16769" kind="function"><name>jacobian_component</name></member>
-    <member refid="classCartesianToCircular_1a12006646133b008b23ec0467dc76886a" kind="function"><name>get_inverse_mapping</name></member>
+    <member refid="classCartesianToCircular_1a2abacca05657095a5f3747031b92fef6" kind="function"><name>get_inverse_mapping</name></member>
   </compound>
   <compound refid="classCartesianToCylindrical" kind="class"><name>CartesianToCylindrical</name>
     <member refid="classCartesianToCylindrical_1aa3b112e49eee9555a87c8590c4770c8a" kind="typedef"><name>cartesian_tag_x</name></member>
@@ -308,7 +308,7 @@
     <member refid="classCartesianToCzarny_1a4d338285b9c960669286063f5dd196cc" kind="variable"><name>m_e</name></member>
     <member refid="classCartesianToCzarny_1abc16d8019400e6e06a13fcabb1bc467a" kind="variable"><name>m_x0</name></member>
     <member refid="classCartesianToCzarny_1a184dbb59a385c52a7cd7860dc89dd553" kind="variable"><name>m_y0</name></member>
-    <member refid="classCartesianToCzarny_1af0efed23f4b0d490c485528f0ac4d754" kind="function"><name>CartesianToCzarny</name></member>
+    <member refid="classCartesianToCzarny_1a4c4629edce04ee5a99fd4e96a7642156" kind="function"><name>CartesianToCzarny</name></member>
     <member refid="classCartesianToCzarny_1a6ecbd05f4a3b5a71f1effe0ae2789bff" kind="function"><name>CartesianToCzarny</name></member>
     <member refid="classCartesianToCzarny_1a4ce68c3eff3e32b912a64e0b47f5b8c2" kind="function"><name>CartesianToCzarny</name></member>
     <member refid="classCartesianToCzarny_1a8a627ae58db6c82f5cdb0d0368859923" kind="function"><name>~CartesianToCzarny</name></member>
@@ -317,7 +317,7 @@
     <member refid="classCartesianToCzarny_1ad07227744d116c27999558d962d1fe35" kind="function"><name>epsilon</name></member>
     <member refid="classCartesianToCzarny_1adecffb5ebcb81bf40068adbc53d2c268" kind="function"><name>e</name></member>
     <member refid="classCartesianToCzarny_1a9f826ab7a55354292ddd39b9cbd2a6a9" kind="function"><name>operator()</name></member>
-    <member refid="classCartesianToCzarny_1a208767628db193c5b3b727e5ea8dbc7e" kind="function"><name>get_inverse_mapping</name></member>
+    <member refid="classCartesianToCzarny_1a00367ac2ea336f4e7f4dd25f1dc34ee9" kind="function"><name>get_inverse_mapping</name></member>
   </compound>
   <compound refid="classCentralFDMPartialDerivative" kind="class"><name>CentralFDMPartialDerivative</name>
     <member refid="classCentralFDMPartialDerivative_1a7bdf59407f13c8b5910573a98bf3cac8" kind="typedef"><name>base_type</name></member>
@@ -376,7 +376,7 @@
     <member refid="classCircularToCartesian_1a11728cf484228e3530ab90bfe831895f" kind="typedef"><name>Theta_cov</name></member>
     <member refid="classCircularToCartesian_1a179ec8c07441070a43a07925f7bbc68d" kind="variable"><name>m_x0</name></member>
     <member refid="classCircularToCartesian_1a88c0b13f799d60c9e9f28605924e2162" kind="variable"><name>m_y0</name></member>
-    <member refid="classCircularToCartesian_1a31be1ed4b6adee5259dc1a9273945e00" kind="function"><name>CircularToCartesian</name></member>
+    <member refid="classCircularToCartesian_1a641bada12f92cf2bebf8f3cf04234059" kind="function"><name>CircularToCartesian</name></member>
     <member refid="classCircularToCartesian_1ac39d088e0e162abe4653e3646a1a127b" kind="function"><name>CircularToCartesian</name></member>
     <member refid="classCircularToCartesian_1aa3817016c3dfae92ba0d48248eff156d" kind="function"><name>CircularToCartesian</name></member>
     <member refid="classCircularToCartesian_1a110dc0c6d1d97b270dac8810d3219d1c" kind="function"><name>~CircularToCartesian</name></member>
@@ -388,7 +388,7 @@
     <member refid="classCircularToCartesian_1a61f5a58fc058b1d9c2b2a034d12309d1" kind="function"><name>jacobian_component</name></member>
     <member refid="classCircularToCartesian_1ad6a44656287d8f142c833f109fdfedc6" kind="function"><name>inv_jacobian_matrix</name></member>
     <member refid="classCircularToCartesian_1a25b6d57a41e9e8f9138b5ad2ddc54045" kind="function"><name>inv_jacobian_component</name></member>
-    <member refid="classCircularToCartesian_1a933c7fa215c360fe24e6fa3b2e2cb646" kind="function"><name>get_inverse_mapping</name></member>
+    <member refid="classCircularToCartesian_1a6ce3ab4a4fa9a80c52479be9fbdd62b7" kind="function"><name>get_inverse_mapping</name></member>
   </compound>
   <compound refid="structconnectivity__details_1_1CollectAllGridsOnDim" kind="struct"><name>connectivity_details::CollectAllGridsOnDim</name>
     <member refid="structconnectivity__details_1_1CollectAllGridsOnDim_1af63c952e5dd5c666fe92c78d7dfe46fd" kind="typedef"><name>BackwardTypeSeq</name></member>
@@ -487,32 +487,28 @@
     <member refid="classCollisionsIntra_1a8f9e7a4e2131b1641f821f4bb4a78b03" kind="function"><name>fill_matrix_with_coeff</name></member>
   </compound>
   <compound refid="classCombinedMapping" kind="class"><name>CombinedMapping</name>
-    <member refid="classCombinedMapping_1a967567a14f47ca5d71be6aab594b1f14" kind="typedef"><name>CoordArg</name></member>
-    <member refid="classCombinedMapping_1a72884aba7cc176b42af7cfd3053cbe4d" kind="typedef"><name>CoordResult</name></member>
-    <member refid="classCombinedMapping_1adb0b420bad29ecc3a1fcec5252421d6d" kind="typedef"><name>CoordJacobian</name></member>
-    <member refid="classCombinedMapping_1a0c929e7836a5a62c9a9fbb4770e5b996" kind="typedef"><name>JacobianMatrixType</name></member>
-    <member refid="classCombinedMapping_1ae7c680b6476d5fbf069f06df1211ae7e" kind="typedef"><name>InvJacobianMatrixType</name></member>
-    <member refid="classCombinedMapping_1a89cba3d17d64de6d3d4e9109537633c7" kind="typedef"><name>DimArg1</name></member>
-    <member refid="classCombinedMapping_1a0d0851b9b68ad101501b6f802f29a1b3" kind="typedef"><name>DimArg2</name></member>
-    <member refid="classCombinedMapping_1aeac0cf706f03cbe8f0e4e02edab8e144" kind="typedef"><name>DimResult1</name></member>
-    <member refid="classCombinedMapping_1ac1e877868150f43cf82668e3cf76ebc7" kind="typedef"><name>DimResult2</name></member>
-    <member refid="classCombinedMapping_1a42688dcc8f750418a02969d0430d6e37" kind="typedef"><name>InverseMapping2</name></member>
-    <member refid="classCombinedMapping_1ae766fd6b9225075a0e0a326a18ff11cb" kind="variable"><name>m_mapping_1</name></member>
-    <member refid="classCombinedMapping_1aa1a57e43201e0448cadc57006474aed7" kind="variable"><name>m_mapping_2</name></member>
-    <member refid="classCombinedMapping_1a1ac79143361e611c008aae212f6a1e83" kind="variable"><name>m_inv_mapping_2</name></member>
-    <member refid="classCombinedMapping_1a3406ce65912845a4f92e898766d112cb" kind="variable"><name>m_jacobian_mapping_2</name></member>
-    <member refid="classCombinedMapping_1a18aa30ab891cdc7b6db84afa0b4dcc76" kind="variable"><name>m_epsilon</name></member>
-    <member refid="classCombinedMapping_1a5394e02f2afbc5bd43ea1a90ffe0dcb0" kind="function"><name>CombinedMapping</name></member>
-    <member refid="classCombinedMapping_1a8fb44b1366eb67dced71e18066a3d064" kind="function"><name>CombinedMapping</name></member>
-    <member refid="classCombinedMapping_1ae6bdf142f7b26378f0dc1326e9045fde" kind="function"><name>operator()</name></member>
-    <member refid="classCombinedMapping_1a6f4358592aca13d79f589bd0628121e8" kind="function"><name>jacobian_matrix</name></member>
-    <member refid="classCombinedMapping_1a351825cd8f426ab07ee619dacda35db7" kind="function"><name>jacobian_component</name></member>
-    <member refid="classCombinedMapping_1aef4b5216c34ee7a72285a45da9a86ef4" kind="function"><name>jacobian</name></member>
-    <member refid="classCombinedMapping_1ab3cb98e450447ccb284380d288490674" kind="function"><name>inv_jacobian_matrix</name></member>
-    <member refid="classCombinedMapping_1afc14b0f67ae144b58073713107f25ab1" kind="function"><name>inv_jacobian_component</name></member>
-    <member refid="classCombinedMapping_1ac60309ab3ffb26c973f521c862ce5ed1" kind="function"><name>inv_jacobian</name></member>
-    <member refid="classCombinedMapping_1ad7043f25e2074ab5befc28233e7a7a88" kind="function"><name>get</name></member>
-    <member refid="classCombinedMapping_1ac9fdfa73578e1671839ce4bfc96c75f5" kind="function"><name>non_singular_inverse_jacobian_matrix</name></member>
+    <member refid="classCombinedMapping_1a0a6fc201daf7fdc131e1339b65f9eeb1" kind="typedef"><name>CoordArg</name></member>
+    <member refid="classCombinedMapping_1a92e4e4bfb2facf0c0e703d9888e1fa8e" kind="typedef"><name>CoordResult</name></member>
+    <member refid="classCombinedMapping_1aeb5bdc342de256e848444c90f43d3600" kind="typedef"><name>JacobianMatrixType</name></member>
+    <member refid="classCombinedMapping_1a353142f793996a334261050aa86d5362" kind="typedef"><name>InvJacobianMatrixType</name></member>
+    <member refid="classCombinedMapping_1a75731b814f1c15a8019771c6a74376f1" kind="typedef"><name>DimArg1</name></member>
+    <member refid="classCombinedMapping_1a7f1328da8921e6166502204e50628ea1" kind="typedef"><name>DimArg2</name></member>
+    <member refid="classCombinedMapping_1afc806186e03eb44cdebd69cae0592c93" kind="typedef"><name>DimResult1</name></member>
+    <member refid="classCombinedMapping_1a4f9e1ec1b25522bb813093785a90ecb0" kind="typedef"><name>DimResult2</name></member>
+    <member refid="classCombinedMapping_1a2700c112761ec2e0b4d4d91eb99ab3e0" kind="typedef"><name>CoordIntermediate</name></member>
+    <member refid="classCombinedMapping_1a486be4a6a7c767639c0f97e07674b1f0" kind="variable"><name>m_mapping_1</name></member>
+    <member refid="classCombinedMapping_1aaabc9668ab9ef3313652fa5faa297fe5" kind="variable"><name>m_mapping_2</name></member>
+    <member refid="classCombinedMapping_1a2151be690a35ffd000350cafe1281113" kind="variable"><name>m_epsilon</name></member>
+    <member refid="classCombinedMapping_1a3d86e39e302dd02dd29940f7054ad887" kind="function"><name>CombinedMapping</name></member>
+    <member refid="classCombinedMapping_1af60af036228bd9af75a981fbf33decbb" kind="function"><name>operator()</name></member>
+    <member refid="classCombinedMapping_1aada62e0f83f82145999839f6ea86ad2f" kind="function"><name>jacobian_matrix</name></member>
+    <member refid="classCombinedMapping_1a9086a293a35e42e6335424d7d0019c17" kind="function"><name>jacobian_component</name></member>
+    <member refid="classCombinedMapping_1a3cf493392e89a6e6a313707fc70acebd" kind="function"><name>jacobian</name></member>
+    <member refid="classCombinedMapping_1ad7885c0273971197b5f2cc253c04c73a" kind="function"><name>inv_jacobian_matrix</name></member>
+    <member refid="classCombinedMapping_1a08bf82d43aab692a40fd77c36bea7d35" kind="function"><name>inv_jacobian_component</name></member>
+    <member refid="classCombinedMapping_1a08bf5e0778f028d8206a949b52648359" kind="function"><name>inv_jacobian</name></member>
+    <member refid="classCombinedMapping_1a63926f3b00b3915286ec10878304e514" kind="function"><name>get</name></member>
+    <member refid="classCombinedMapping_1a1f8a2e2a2a0ea52d4531041f29e41ec6" kind="function"><name>non_singular_inverse_jacobian_matrix</name></member>
   </compound>
   <compound refid="structConstantExtrapolationRuleOnion" kind="struct"><name>ConstantExtrapolationRuleOnion</name>
     <member refid="structConstantExtrapolationRuleOnion_1a0632822e7212fdbe203d64498c651d8f" kind="typedef"><name>PatchOrdering</name></member>
@@ -604,7 +600,7 @@
     <member refid="classCzarnyToCartesian_1a5ae99d9c13bc2352931deaaad5aaf18e" kind="variable"><name>m_e</name></member>
     <member refid="classCzarnyToCartesian_1ab6da2335765dfabab8a35e2cec379eff" kind="variable"><name>m_x0</name></member>
     <member refid="classCzarnyToCartesian_1a509f60892557d0b17edb9f0adbf987cb" kind="variable"><name>m_y0</name></member>
-    <member refid="classCzarnyToCartesian_1aee695a35bafa7f5775f10bb0c8b24f40" kind="function"><name>CzarnyToCartesian</name></member>
+    <member refid="classCzarnyToCartesian_1a669604298c66bcbb489e1192dff250ef" kind="function"><name>CzarnyToCartesian</name></member>
     <member refid="classCzarnyToCartesian_1a7750839e50a3ac1825ce484dce3c0c77" kind="function"><name>CzarnyToCartesian</name></member>
     <member refid="classCzarnyToCartesian_1ad999ca35e162f88c5e84a11afeb18301" kind="function"><name>CzarnyToCartesian</name></member>
     <member refid="classCzarnyToCartesian_1ab54f5de9c7f61a67d2aa694b7170e583" kind="function"><name>~CzarnyToCartesian</name></member>
@@ -618,7 +614,7 @@
     <member refid="classCzarnyToCartesian_1a0c75f9ca9bf65206ac349adb07acc497" kind="function"><name>jacobian_component</name></member>
     <member refid="classCzarnyToCartesian_1a3efb06a52c04cacab4474cd2475823ff" kind="function"><name>inv_jacobian_matrix</name></member>
     <member refid="classCzarnyToCartesian_1a948fc7c66c6eb94232bb6f89c3792d77" kind="function"><name>inv_jacobian_component</name></member>
-    <member refid="classCzarnyToCartesian_1a3db743b369fe2c5b63c993abb1429bb1" kind="function"><name>get_inverse_mapping</name></member>
+    <member refid="classCzarnyToCartesian_1a02522ce492399ee921d77ec48d2ef8f9" kind="function"><name>get_inverse_mapping</name></member>
   </compound>
   <compound refid="classDerivField" kind="class"><name>DerivField</name>
   </compound>
@@ -1350,42 +1346,42 @@
   </compound>
   <compound refid="classInvJacobianOPoint" kind="class"><name>InvJacobianOPoint</name>
   </compound>
-  <compound refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_01be6b75c3c69e2165a260584a5fd55276" kind="class"><name>InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</name>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_01be6b75c3c69e2165a260584a5fd55276_1a11f61fa984773382c83aa6816641e1ea" kind="typedef"><name>CoordRTheta</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_01be6b75c3c69e2165a260584a5fd55276_1a1c8a4c288b9f679b52b7e54c518e51de" kind="typedef"><name>X_cov</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_01be6b75c3c69e2165a260584a5fd55276_1a98bac791f7d5c040a4a746ac0fcbe7d8" kind="typedef"><name>Y_cov</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_01be6b75c3c69e2165a260584a5fd55276_1a117ad1733a2368e7b0d9aec8874630ad" kind="typedef"><name>Mapping</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_01be6b75c3c69e2165a260584a5fd55276_1a11d786817e0c980e0426b880bcc56032" kind="variable"><name>m_mapping</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_01be6b75c3c69e2165a260584a5fd55276_1a9a872eef08634a96602df890ab1bdec0" kind="function"><name>InvJacobianOPoint</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_01be6b75c3c69e2165a260584a5fd55276_1ac0c8e06daa0feca9a7c3bec1a75173b0" kind="function"><name>operator()</name></member>
+  <compound refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f" kind="class"><name>InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</name>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1a2ddce5131e465098eecf35c4686f3bbe" kind="typedef"><name>CoordRTheta</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1a44b3e4518ef429c39f95a09453e353ed" kind="typedef"><name>X_cov</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1a12d771a92e754aa4b3a5a34e270d6522" kind="typedef"><name>Y_cov</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1ad98fb2fb04b9c241f9643125f4069fed" kind="typedef"><name>Mapping</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1ac8cbc6c55c78f4bcbcb3500dd02491f2" kind="variable"><name>m_mapping</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1a82112d29decc49118b332f5adefbf362" kind="function"><name>InvJacobianOPoint</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1aae48865b7f1b1d592a92ce539c0c1ebe" kind="function"><name>operator()</name></member>
   </compound>
-  <compound refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_399a54ae9b96ca8e75637deab2a35d95" kind="class"><name>InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</name>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_399a54ae9b96ca8e75637deab2a35d95_1aefae323496a82bba3e906852e1f62756" kind="typedef"><name>CoordRTheta</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_399a54ae9b96ca8e75637deab2a35d95_1a50ef9217dd6dd76b7f39212b4a63e1ba" kind="typedef"><name>X_cov</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_399a54ae9b96ca8e75637deab2a35d95_1a725f05292e2f17146231c7768df22267" kind="typedef"><name>Y_cov</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_399a54ae9b96ca8e75637deab2a35d95_1a439c4e632021191eebf3636d05ffeea1" kind="typedef"><name>CzarnyToCart</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_399a54ae9b96ca8e75637deab2a35d95_1a2ab672788b756b8763066b2c7b6b4253" kind="typedef"><name>Mapping</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_399a54ae9b96ca8e75637deab2a35d95_1a24a975a88a8b1ca047e7064eeb17c0e4" kind="variable"><name>m_mapping</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_399a54ae9b96ca8e75637deab2a35d95_1a419eebcc414e7455d782c1bf800215b4" kind="function"><name>InvJacobianOPoint</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_399a54ae9b96ca8e75637deab2a35d95_1a54f1cac446907b0a7427e99cada4266a" kind="function"><name>operator()</name></member>
+  <compound refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9" kind="class"><name>InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</name>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9_1ad6480bdc907b313cdb2364ca1dde4e87" kind="typedef"><name>CoordRTheta</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9_1aaee722b9f8f6684245abe5b49294c069" kind="typedef"><name>X_cov</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9_1ad95150ec525360e585d47b4f2383989c" kind="typedef"><name>Y_cov</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9_1a6c4fd33d03a54a0a395effad2ad0064e" kind="typedef"><name>CzarnyToCart</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9_1a476f1bc1a18b06035d00466ce35937b4" kind="typedef"><name>Mapping</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9_1a31310bd71285aa406169313c7c4d5e00" kind="variable"><name>m_mapping</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9_1a755ef2b433106ec410ccfa743dac3393" kind="function"><name>InvJacobianOPoint</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9_1a9b4712e64671e3d412d0c9d3d4c9bb77" kind="function"><name>operator()</name></member>
   </compound>
-  <compound refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864" kind="class"><name>InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</name>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864_1a18256aa3685eb887d025970b659bcfbb" kind="typedef"><name>CoordRTheta</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864_1acf6c0a4ec4dae19215bb414d8102de40" kind="typedef"><name>X_cov</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864_1abfced63688c456358871a35146d9cc50" kind="typedef"><name>Y_cov</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864_1a81cefce1a2110c7ffe26c2a3ef5eaabd" kind="typedef"><name>Xpc_cov</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864_1a15e3437fe058b12413a67a01b8bfeb33" kind="typedef"><name>Ypc_cov</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864_1a846701ba5ddf95a92892397881e08558" kind="typedef"><name>R_cov</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864_1a115fcce9f9bd1b2457ac660a3be15f2f" kind="typedef"><name>Theta_cov</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864_1a4acce231ecc6c140bbcd3f5ccf8ff4de" kind="typedef"><name>Mapping</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864_1aad17f4fee02dcd49e536a9f2e8419688" kind="typedef"><name>IdxRangeR</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864_1aa1a24e3947669b9954f1eb5f48ecdc27" kind="typedef"><name>IdxRangeTheta</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864_1aca97a186ae503f015fdd3c9a7664c922" kind="typedef"><name>IdxRangeRTheta</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864_1a4bdc82557830394268d0a7c7395d8912" kind="typedef"><name>IdxR</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864_1a6c82da3a00d01e22c86707b45753c4e6" kind="typedef"><name>IdxTheta</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864_1ad63f35bfdbf5dbabf2771d8bd6d303b6" kind="variable"><name>m_mapping</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864_1ae5a754ceb5d84ce9413717a1ab8b0fc4" kind="function"><name>InvJacobianOPoint</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864_1ae8230461c70b952dffa81768bea261ac" kind="function"><name>operator()</name></member>
+  <compound refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b" kind="class"><name>InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</name>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1aaed3cc420188b6b11d99d39af1c686bf" kind="typedef"><name>CoordRTheta</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1ad7b40f7d82e8ce9d2440e9c8fc4d8a9f" kind="typedef"><name>X_cov</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1ab07fbd1b318f6e53be6d8ca07c2dd4ce" kind="typedef"><name>Y_cov</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1ab438df2067129aef3a65b2e14113855b" kind="typedef"><name>Xpc_cov</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1aeec3008016c3dbe7de8f7cfac7bf513a" kind="typedef"><name>Ypc_cov</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a3f9fa9ba9276c9df69a285f59c92aa01" kind="typedef"><name>R_cov</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a7a803e4859ff08d6667582eb18b60b9e" kind="typedef"><name>Theta_cov</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a4497f9bbbabb34420898458b229f2292" kind="typedef"><name>Mapping</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a01feb6a249fd7da981393afadaeb77d8" kind="typedef"><name>IdxRangeR</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a72be074cc99432b0ffbbf8d860b8eba7" kind="typedef"><name>IdxRangeTheta</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a3d22d8997db55b507de11c2278c21931" kind="typedef"><name>IdxRangeRTheta</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1ae2d6c1fa3a2d2392c979c0a7432ace71" kind="typedef"><name>IdxR</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a0ba5a1fbdf3fbe9a122d91c8d4f3e6b2" kind="typedef"><name>IdxTheta</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a2f5d5b4c7b568ff1615df675c698ef03" kind="variable"><name>m_mapping</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a3184b7b72cd5621d627f62e793c94ecc" kind="function"><name>InvJacobianOPoint</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a762e83a88cdb2b379becdb9f87b31872" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classIPartialDerivative" kind="class"><name>IPartialDerivative</name>
     <member refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" kind="typedef"><name>DFieldType</name></member>

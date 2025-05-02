@@ -47,7 +47,11 @@ private:
     double m_y0;
 
 public:
-    explicit CircularToCartesian(double x0 = 0.0, double y0 = 0.0) : m_x0(x0), m_y0(y0) {}
+    explicit KOKKOS_FUNCTION CircularToCartesian(double x0 = 0.0, double y0 = 0.0)
+        : m_x0(x0)
+        , m_y0(y0)
+    {
+    }
 
     KOKKOS_DEFAULTED_FUNCTION CircularToCartesian(CircularToCartesian const& other) = default;
 
@@ -157,7 +161,7 @@ public:
     }
 
 
-    CartesianToCircular<X, Y, R, Theta> get_inverse_mapping() const
+    KOKKOS_INLINE_FUNCTION CartesianToCircular<X, Y, R, Theta> get_inverse_mapping() const
     {
         return CartesianToCircular<X, Y, R, Theta>(m_x0, m_y0);
     }

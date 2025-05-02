@@ -306,7 +306,12 @@
 <codeline lineno="309"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="310"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="311"><highlight class="normal"></highlight></codeline>
-<codeline lineno="312"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>mapping_detail</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="312"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>X,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Y,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Z,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>R,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Zeta&gt;</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">SingularOPointInvJacobian&lt;<ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref>&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/>Z,<sp/>Zeta,<sp/><ref refid="structX" kindref="compound">X</ref>,<sp/><ref refid="structY" kindref="compound">Y</ref>&gt;&gt;<sp/>:<sp/>std::true_type</highlight></codeline>
+<codeline lineno="314"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="315"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>mapping_detail</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp"/>
   </compounddef>

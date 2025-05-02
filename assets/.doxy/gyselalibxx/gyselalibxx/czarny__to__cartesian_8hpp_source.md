@@ -48,7 +48,11 @@ private:
     double m_y0;
 
 public:
-    explicit CzarnyToCartesian(double epsilon, double e, double x0 = 0.0, double y0 = 0.0)
+    explicit KOKKOS_FUNCTION CzarnyToCartesian(
+            double epsilon,
+            double e,
+            double x0 = 0.0,
+            double y0 = 0.0)
         : m_epsilon(epsilon)
         , m_e(e)
         , m_x0(x0)
@@ -244,7 +248,7 @@ public:
     }
 
 
-    CartesianToCzarny<X, Y, R, Theta> get_inverse_mapping() const
+    KOKKOS_INLINE_FUNCTION CartesianToCzarny<X, Y, R, Theta> get_inverse_mapping() const
     {
         return CartesianToCzarny<X, Y, R, Theta>(m_epsilon, m_e);
     }

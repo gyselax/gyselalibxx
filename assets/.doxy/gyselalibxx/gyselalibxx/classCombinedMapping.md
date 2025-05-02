@@ -2,7 +2,7 @@
 
 # Class CombinedMapping
 
-**template &lt;class Mapping1, class Mapping2&gt;**
+**template &lt;class Mapping1, class Mapping2, class CoordJacobian&gt;**
 
 
 
@@ -35,7 +35,6 @@ _A class which describes a mapping which is constructed by combining two mapping
 | Type | Name |
 | ---: | :--- |
 | typedef typename Mapping2::CoordArg | [**CoordArg**](#typedef-coordarg)  <br>_The type of the argument of the function described by this mapping._  |
-| typedef typename Mapping2::CoordResult | [**CoordJacobian**](#typedef-coordjacobian)  <br>_The coordinate system on which the Jacobian is described._  |
 | typedef typename Mapping1::CoordResult | [**CoordResult**](#typedef-coordresult)  <br>_The type of the result of the function described by this mapping._  |
 | typedef [**DTensor**](classTensor.md)&lt; ddc::to\_type\_seq\_t&lt; [**CoordArg**](classCombinedMapping.md#typedef-coordarg) &gt;, vector\_index\_set\_dual\_t&lt; ddc::to\_type\_seq\_t&lt; [**CoordResult**](classCombinedMapping.md#typedef-coordresult) &gt; &gt; &gt; | [**InvJacobianMatrixType**](#typedef-invjacobianmatrixtype)  <br>_The type of the inverse Jacobian matrix._  |
 | typedef [**DTensor**](classTensor.md)&lt; ddc::to\_type\_seq\_t&lt; [**CoordResult**](classCombinedMapping.md#typedef-coordresult) &gt;, vector\_index\_set\_dual\_t&lt; ddc::to\_type\_seq\_t&lt; [**CoordArg**](classCombinedMapping.md#typedef-coordarg) &gt; &gt; &gt; | [**JacobianMatrixType**](#typedef-jacobianmatrixtype)  <br>_The type of the Jacobian matrix._  |
@@ -63,15 +62,14 @@ _A class which describes a mapping which is constructed by combining two mapping
 
 | Type | Name |
 | ---: | :--- |
-|   | [**CombinedMapping**](#function-combinedmapping-12) (Map1 mapping\_1, Mapping2 mapping\_2, double epsilon) <br>_Build a_ [_**CombinedMapping**_](classCombinedMapping.md) _from the component mappings. This constructor should be used if the inverse jacobian of the first mapping, or the jacobian of the second mapping cannot be evaluated at the O-point._ |
-|   | [**CombinedMapping**](#function-combinedmapping-22) (Map1 mapping\_1, Mapping2 mapping\_2) <br>_Build a_ [_**CombinedMapping**_](classCombinedMapping.md) _from the component mappings. This constructor should be used if both mappings can be safely evaluated at all points in space._ |
+|   | [**CombinedMapping**](#function-combinedmapping) (Mapping1 mapping\_1, Mapping2 mapping\_2, double epsilon=0.0) <br>_Build a_ [_**CombinedMapping**_](classCombinedMapping.md) _from the component mappings. This constructor should be used if the inverse jacobian of the first mapping, or the jacobian of the second mapping cannot be evaluated at the O-point._ |
 |  KOKKOS\_INLINE\_FUNCTION Mapping const & | [**get**](#function-get) () const<br>_Get access to one of the internal mappings._  |
-|  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian**](#function-inv_jacobian) ([**CoordJacobian**](classCombinedMapping.md#typedef-coordjacobian) const & coord\_rtheta) const<br>_Compute the determinant of the Jacobian matrix._  |
-|  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian\_component**](#function-inv_jacobian_component) ([**CoordJacobian**](classCombinedMapping.md#typedef-coordjacobian) const & coord\_rtheta) const<br>_Compute the (i,j) coefficient of the inverse Jacobian matrix._  |
-|  KOKKOS\_FUNCTION [**InvJacobianMatrixType**](classCombinedMapping.md#typedef-invjacobianmatrixtype) | [**inv\_jacobian\_matrix**](#function-inv_jacobian_matrix) ([**CoordJacobian**](classCombinedMapping.md#typedef-coordjacobian) const & coord) const<br>_Compute the full inverse Jacobian matrix._  |
-|  KOKKOS\_INLINE\_FUNCTION double | [**jacobian**](#function-jacobian) ([**CoordJacobian**](classCombinedMapping.md#typedef-coordjacobian) const & coord\_rtheta) const<br>_Compute the determinant of the Jacobian matrix._  |
-|  KOKKOS\_INLINE\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) ([**CoordJacobian**](classCombinedMapping.md#typedef-coordjacobian) const & coord\_rtheta) const<br>_Compute the (i,j) component of the Jacobian matrix._  |
-|  KOKKOS\_INLINE\_FUNCTION [**JacobianMatrixType**](classCombinedMapping.md#typedef-jacobianmatrixtype) | [**jacobian\_matrix**](#function-jacobian_matrix) ([**CoordJacobian**](classCombinedMapping.md#typedef-coordjacobian) const & coord) const<br>_Compute full Jacobian matrix._  |
+|  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian**](#function-inv_jacobian) (CoordIntermediate const & coord\_rtheta) const<br>_Compute the determinant of the Jacobian matrix._  |
+|  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian\_component**](#function-inv_jacobian_component) (CoordIntermediate const & coord\_rtheta) const<br>_Compute the (i,j) coefficient of the inverse Jacobian matrix._  |
+|  KOKKOS\_FUNCTION [**InvJacobianMatrixType**](classCombinedMapping.md#typedef-invjacobianmatrixtype) | [**inv\_jacobian\_matrix**](#function-inv_jacobian_matrix) (CoordIntermediate const & coord) const<br>_Compute the full inverse Jacobian matrix._  |
+|  KOKKOS\_INLINE\_FUNCTION double | [**jacobian**](#function-jacobian) (CoordJacobian const & coord\_rtheta) const<br>_Compute the determinant of the Jacobian matrix._  |
+|  KOKKOS\_INLINE\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) (CoordJacobian const & coord\_rtheta) const<br>_Compute the (i,j) component of the Jacobian matrix._  |
+|  KOKKOS\_INLINE\_FUNCTION [**JacobianMatrixType**](classCombinedMapping.md#typedef-jacobianmatrixtype) | [**jacobian\_matrix**](#function-jacobian_matrix) (CoordJacobian const & coord) const<br>_Compute full Jacobian matrix._  |
 |  [**CoordResult**](classCombinedMapping.md#typedef-coordresult) | [**operator()**](#function-operator) ([**CoordArg**](classCombinedMapping.md#typedef-coordarg) coord) <br>_Convert the argument coordinate to the equivalent result coordinate._  |
 
 
@@ -120,21 +118,7 @@ The functions in this mapping are defined on the coordinate system associated wi
 
 _The type of the argument of the function described by this mapping._ 
 ```C++
-using CombinedMapping< Mapping1, Mapping2 >::CoordArg =  typename Mapping2::CoordArg;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef CoordJacobian 
-
-_The coordinate system on which the Jacobian is described._ 
-```C++
-using CombinedMapping< Mapping1, Mapping2 >::CoordJacobian =  typename Mapping2::CoordResult;
+using CombinedMapping< Mapping1, Mapping2, CoordJacobian >::CoordArg =  typename Mapping2::CoordArg;
 ```
 
 
@@ -148,7 +132,7 @@ using CombinedMapping< Mapping1, Mapping2 >::CoordJacobian =  typename Mapping2:
 
 _The type of the result of the function described by this mapping._ 
 ```C++
-using CombinedMapping< Mapping1, Mapping2 >::CoordResult =  typename Mapping1::CoordResult;
+using CombinedMapping< Mapping1, Mapping2, CoordJacobian >::CoordResult =  typename Mapping1::CoordResult;
 ```
 
 
@@ -162,7 +146,7 @@ using CombinedMapping< Mapping1, Mapping2 >::CoordResult =  typename Mapping1::C
 
 _The type of the inverse Jacobian matrix._ 
 ```C++
-using CombinedMapping< Mapping1, Mapping2 >::InvJacobianMatrixType =  DTensor< ddc::to_type_seq_t<CoordArg>, vector_index_set_dual_t<ddc::to_type_seq_t<CoordResult> >>;
+using CombinedMapping< Mapping1, Mapping2, CoordJacobian >::InvJacobianMatrixType =  DTensor< ddc::to_type_seq_t<CoordArg>, vector_index_set_dual_t<ddc::to_type_seq_t<CoordResult> >>;
 ```
 
 
@@ -176,7 +160,7 @@ using CombinedMapping< Mapping1, Mapping2 >::InvJacobianMatrixType =  DTensor< d
 
 _The type of the Jacobian matrix._ 
 ```C++
-using CombinedMapping< Mapping1, Mapping2 >::JacobianMatrixType =  DTensor< ddc::to_type_seq_t<CoordResult>, vector_index_set_dual_t<ddc::to_type_seq_t<CoordArg> >>;
+using CombinedMapping< Mapping1, Mapping2, CoordJacobian >::JacobianMatrixType =  DTensor< ddc::to_type_seq_t<CoordResult>, vector_index_set_dual_t<ddc::to_type_seq_t<CoordArg> >>;
 ```
 
 
@@ -188,15 +172,14 @@ using CombinedMapping< Mapping1, Mapping2 >::JacobianMatrixType =  DTensor< ddc:
 
 
 
-### function CombinedMapping [1/2]
+### function CombinedMapping 
 
 _Build a_ [_**CombinedMapping**_](classCombinedMapping.md) _from the component mappings. This constructor should be used if the inverse jacobian of the first mapping, or the jacobian of the second mapping cannot be evaluated at the O-point._
 ```C++
-template<class Map1, std::enable_if_t<(has_singular_o_point_inv_jacobian_v< Map1 >)||(has_singular_o_point_inv_jacobian_v< InverseMapping2 >), bool >>
 inline CombinedMapping::CombinedMapping (
-    Map1 mapping_1,
+    Mapping1 mapping_1,
     Mapping2 mapping_2,
-    double epsilon
+    double epsilon=0.0
 ) 
 ```
 
@@ -210,36 +193,6 @@ inline CombinedMapping::CombinedMapping (
 * `mapping_1` The first mapping. 
 * `mapping_2` The second mapping. 
 * `epsilon` The parameter  which determines when a point is close enough to the central O-point for linearisation to be required when calculating the inverse of the Jacobian. The Jacobian is linearised on . 
-
-
-
-
-        
-
-<hr>
-
-
-
-### function CombinedMapping [2/2]
-
-_Build a_ [_**CombinedMapping**_](classCombinedMapping.md) _from the component mappings. This constructor should be used if both mappings can be safely evaluated at all points in space._
-```C++
-template<class Map1, std::enable_if_t< !((has_singular_o_point_inv_jacobian_v< Map1 >)||(has_singular_o_point_inv_jacobian_v< InverseMapping2 >)), bool >>
-inline CombinedMapping::CombinedMapping (
-    Map1 mapping_1,
-    Mapping2 mapping_2
-) 
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `mapping_1` The first mapping. 
-* `mapping_2` The second mapping. 
 
 
 
@@ -288,7 +241,7 @@ A constant reference to the internal mapping.
 _Compute the determinant of the Jacobian matrix._ 
 ```C++
 inline KOKKOS_INLINE_FUNCTION double CombinedMapping::inv_jacobian (
-    CoordJacobian const & coord_rtheta
+    CoordIntermediate const & coord_rtheta
 ) const
 ```
 
@@ -326,7 +279,7 @@ _Compute the (i,j) coefficient of the inverse Jacobian matrix._
 ```C++
 template<class IndexTag1, class IndexTag2>
 inline KOKKOS_INLINE_FUNCTION double CombinedMapping::inv_jacobian_component (
-    CoordJacobian const & coord_rtheta
+    CoordIntermediate const & coord_rtheta
 ) const
 ```
 
@@ -363,7 +316,7 @@ The (i,j) coefficient of the Jacobian matrix.
 _Compute the full inverse Jacobian matrix._ 
 ```C++
 inline KOKKOS_FUNCTION InvJacobianMatrixType CombinedMapping::inv_jacobian_matrix (
-    CoordJacobian const & coord
+    CoordIntermediate const & coord
 ) const
 ```
 
