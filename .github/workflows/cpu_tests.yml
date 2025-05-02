@@ -76,7 +76,7 @@ jobs:
       - id: docker
         uses: ./.github/actions/docker_update
         with:
-          always_push: github.event_name == 'push' || github.event_name == 'release'
+          always_push: ${{ github.event_name == 'push' || github.event_name == 'release' }}
           # Build the release tag with a ternary expression
           # 'latest' if push else (release.tag_name if release else '')
           release_tag: ${{ github.event_name == 'push' && 'latest' || ( github.event_name == 'release' && github.event.release.tag_name || '') }}
