@@ -41,7 +41,7 @@ runs:
       shell: bash
     - name: Build final tags
       id: get-tags
-      if: inputs.always_push || (steps.rebuild-check.outputs.rebuild == 'true')
+      if: ${{ inputs.always_push || (steps.rebuild-check.outputs.rebuild == 'true') }}
       run: |
         import os
         sha_tag = "ghcr.io/gyselax/gyselalibxx_env:${{ github.event.pull_request.head.sha || github.SHA }}"
