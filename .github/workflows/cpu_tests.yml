@@ -103,20 +103,20 @@ jobs:
       CXX: ${{ matrix.compiler == 'gnu' && 'g++' || 'clang++' }}
     steps:
       - name: Checkout gyselalibxx
-        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
+        #if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: "Filter tests"
-        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
+        #if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/test_filter
       - name: Build code
-        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
+        #if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/build_code
         with:
           toolchain: toolchains/docker.gyselalibxx_env/${{ matrix.toolchain }}.cmake
       - name: Run tests
-        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
+        #if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/run_tests
       - name: Check Test Coverage
         if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'tests_coverage_toolchain'
