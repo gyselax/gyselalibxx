@@ -213,12 +213,7 @@ public:
      * @brief Instantiate an AdvectionField_decentred_rotation advection field.
      *
      */
-    AdvectionField_decentred_rotation()
-        : m_omega(2 * M_PI)
-        , m_xc(0.25)
-        , m_yc(0.)
-    {
-    }
+    AdvectionField_decentred_rotation() : m_omega(2 * M_PI), m_xc(0.25), m_yc(0.) {}
 
     /// Copy operator
     explicit KOKKOS_DEFAULTED_FUNCTION AdvectionField_decentred_rotation(
