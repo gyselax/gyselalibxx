@@ -40,9 +40,9 @@ runs:
       run: |
         import os
         sha_tag = "ghcr.io/gyselax/gyselalibxx_env:${{ github.SHA }}"
-        release_tag = "ghcr.io/gyselax/gyselalibxx_env:${{ inputs.release_tag }}".strip()
+        release_tag = "ghcr.io/gyselax/gyselalibxx_env:${{ inputs.release_tag }}"
         # Build a CSV representation of the tags
-        full_tags = sha_tag + ((','+release_tag) if release_tag.endswith(":") else '')
+        full_tags = sha_tag + ('' if release_tag.endswith(":") else (','+release_tag))
         # Save the CSV to the outputs for use in the build-push-action
         print("full_tags=", full_tags, file=open(os.environ["GITHUB_OUTPUT"], 'a'), sep='')
       shell: python
