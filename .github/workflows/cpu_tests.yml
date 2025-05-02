@@ -83,7 +83,7 @@ jobs:
 
   cpu_tests:
     runs-on: ubuntu-latest
-    needs: pre_job, docker_update
+    needs: [pre_job, docker_update]
     strategy:
       matrix: ${{fromJson(needs.pre_job.outputs.matrix)}}
       fail-fast: false
