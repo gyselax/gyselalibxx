@@ -84,3 +84,7 @@ runs:
           echo "image_tag=ghcr.io/gyselax/gyselalibxx_env:latest"
         fi
       shell: bash
+    - name: Debug
+      run: |
+        echo ${{ steps.image_tag.outputs.image_tag }}
+      shell: bash
