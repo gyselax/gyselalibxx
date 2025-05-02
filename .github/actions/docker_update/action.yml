@@ -21,10 +21,8 @@ runs:
     - uses: ./.github/actions/changed_files
     - id: rebuild-check
       run: |
-        echo cat changed_files.txt
         # Check if docker/gyselalibxx_env/Dockerfile has been modified
         changed_docker_file=$(cat changed_files.txt | grep docker/gyselalibxx_env/Dockerfile || true)
-        echo "${changed_docker_file}"
         # Use the modification status of docker/gyselalibxx_env/Dockerfile to decide if the docker should be rebuilt
         if [ -n "${changed_docker_file}" ]
         then
@@ -32,12 +30,6 @@ runs:
         else
           echo "rebuild=false" >> $GITHUB_OUTPUT
         fi
-      shell: bash
-    - name: Test
-      run: |
-        echo ${{ inputs.always_push }}
-        echo ${{ (steps.rebuild-check.outputs.rebuild == 'true') }}
-        echo ${{ inputs.always_push || (steps.rebuild-check.outputs.rebuild == 'true') }}
       shell: bash
     - name: Build final tags
       id: get-tags
@@ -83,8 +75,4 @@ runs:
         else
           echo "image_tag=ghcr.io/gyselax/gyselalibxx_env:latest" >> $GITHUB_OUTPUT
         fi
-      shell: bash
-    - name: Debug
-      run: |
-        echo ${{ steps.image_tag.outputs.image_tag }}
       shell: bash
