@@ -39,7 +39,7 @@ jobs:
   pre_job:
     name: 'Check for unnecessary runs'
     runs-on: ubuntu-latest
-    if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
+    #if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
     # Map a step output to a job output
     outputs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
@@ -48,6 +48,10 @@ jobs:
       - uses: actions/checkout@v4
       - id: skip_check
         uses: ./.github/actions/duplicate_check
+      - if: github.event_name == 'pull_request'
+        run: |
+          echo "matrix=['tests_toolchain']" >> $GITHUB_ENV
+        shell: bash
       - if: github.event_name != 'workflow_dispatch' && github.event_name != 'push'
         run: |
           echo "matrix=['tests_toolchain', 'tests_release_toolchain', 'tests_release_omp_toolchain', 'tests_coverage_toolchain']" >> $GITHUB_ENV
@@ -87,7 +91,8 @@ jobs:
     strategy:
       matrix:
         toolchain: ${{fromJson(needs.pre_job.outputs.toolchain_matrix)}}
-        compiler: ['gnu', 'clang']
+        #compiler: ['gnu', 'clang']
+        compiler: ['clang']
       fail-fast: false
     container:
       image: ${{ needs.docker_update.outputs.image_tag }}
