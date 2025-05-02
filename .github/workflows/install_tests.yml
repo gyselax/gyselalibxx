@@ -32,7 +32,10 @@ jobs:
           MATCHING_PATHS: '[".github/workflows/install_tests.yml", "toolchains/cpu.spack.gyselalibxx_env/*", "CMakeLists.txt"]'
 
   spack_test:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     needs: pre_job
     name: Install Test
     steps:
