@@ -3784,6 +3784,7 @@
     <member refid="math__tools_8hpp_1abc6ba7d1d05608b655ee20062561f832" kind="function"><name>determinant</name></member>
     <member refid="math__tools_8hpp_1a2deb990134f24f0c77ece7175c26ff5d" kind="function"><name>determinant</name></member>
     <member refid="math__tools_8hpp_1a9de28c918be129163f42d4ad149ae3ae" kind="function"><name>inverse</name></member>
+    <member refid="math__tools_8hpp_1a172c1d036e64e6ab1cc7492799011b97" kind="function"><name>inverse</name></member>
   </compound>
   <compound refid="spline__1d__partial__derivative_8hpp" kind="file"><name>spline_1d_partial_derivative.hpp</name>
   </compound>

@@ -62,6 +62,7 @@
 |  KOKKOS\_INLINE\_FUNCTION double | [**determinant**](#function-determinant) ([**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr) <br> |
 |  std::size\_t | [**factorial**](#function-factorial) (std::size\_t f) <br> |
 |  KOKKOS\_INLINE\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual &gt; &gt; | [**inverse**](#function-inverse) ([**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr) <br> |
+|  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual &gt; &gt; | [**inverse**](#function-inverse) ([**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr) <br> |
 |  KOKKOS\_INLINE\_FUNCTION constexpr double | [**ipow**](#function-ipow) (double a, std::size\_t i) <br> |
 |  KOKKOS\_INLINE\_FUNCTION double | [**ipow**](#function-ipow) (double a, int i) <br> |
 |  [**T**](structT.md) | [**max**](#function-max) ([**T**](structT.md) x, [**T**](structT.md) y) <br> |
@@ -158,6 +159,22 @@ inline std::size_t factorial (
 template<class RowDim1, class RowDim2, class ColDim1, class ColDim2>
 KOKKOS_INLINE_FUNCTION DTensor < VectorIndexSet< typename ColDim1::Dual, typename ColDim2::Dual >, VectorIndexSet< typename RowDim1::Dual, typename RowDim2::Dual > > inverse (
     DTensor < VectorIndexSet< RowDim1, RowDim2 >, VectorIndexSet< ColDim1, ColDim2 > > arr
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function inverse 
+
+```C++
+template<class RowDim1, class RowDim2, class RowDim3, class ColDim1, class ColDim2, class ColDim3>
+KOKKOS_FUNCTION DTensor < VectorIndexSet< typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual >, VectorIndexSet< typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual > > inverse (
+    DTensor < VectorIndexSet< RowDim1, RowDim2, RowDim3 >, VectorIndexSet< ColDim1, ColDim2, ColDim3 > > arr
 ) 
 ```
 

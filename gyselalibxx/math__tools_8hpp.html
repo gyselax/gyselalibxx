@@ -579,6 +579,10 @@
 <td style="text-align: left;"><a href="#function-inverse"><strong>inverse</strong></a> (<a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr) <br></td>
 </tr>
 <tr>
+<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual &gt; &gt;</td>
+<td style="text-align: left;"><a href="#function-inverse"><strong>inverse</strong></a> (<a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr) <br></td>
+</tr>
+<tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION constexpr double</td>
 <td style="text-align: left;"><a href="#function-ipow"><strong>ipow</strong></a> (double a, std::size_t i) <br></td>
 </tr>
@@ -648,6 +652,14 @@ KOKKOS_INLINE_FUNCTION double determinant (
 <pre><code class="language-C++">template&lt;class RowDim1, class RowDim2, class ColDim1, class ColDim2&gt;
 KOKKOS_INLINE_FUNCTION DTensor &lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual &gt; &gt; inverse (
     DTensor &lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr
+) 
+</code></pre>
+<hr>
+
+<h3 id="function-inverse_1">function inverse</h3>
+<pre><code class="language-C++">template&lt;class RowDim1, class RowDim2, class RowDim3, class ColDim1, class ColDim2, class ColDim3&gt;
+KOKKOS_FUNCTION DTensor &lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual &gt; &gt; inverse (
+    DTensor &lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr
 ) 
 </code></pre>
 <hr>

@@ -734,6 +734,43 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" line="180" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" bodystart="180" bodyend="193"/>
       </memberdef>
+      <memberdef kind="function" id="math__tools_8hpp_1a172c1d036e64e6ab1cc7492799011b97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class RowDim1</type>
+          </param>
+          <param>
+            <type>class RowDim2</type>
+          </param>
+          <param>
+            <type>class RowDim3</type>
+          </param>
+          <param>
+            <type>class ColDim1</type>
+          </param>
+          <param>
+            <type>class ColDim2</type>
+          </param>
+          <param>
+            <type>class ColDim3</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual &gt; &gt;</type>
+        <definition>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual &gt; &gt; inverse</definition>
+        <argsstring>(DTensor&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr)</argsstring>
+        <name>inverse</name>
+        <param>
+          <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt;</type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" line="199" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" bodystart="199" bodyend="250"/>
+      </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
@@ -933,6 +970,63 @@
 <codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/>ddcHelper::get&lt;OutRowDim2,<sp/>OutColDim2&gt;(inv)<sp/>=<sp/>ddcHelper::get&lt;RowDim1,<sp/>ColDim1&gt;(arr)<sp/>/<sp/>det;</highlight></codeline>
 <codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>inv;</highlight></codeline>
 <codeline lineno="193"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>RowDim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>RowDim2,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>RowDim3,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ColDim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ColDim2,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ColDim3&gt;</highlight></codeline>
+<codeline lineno="196"><highlight class="normal">KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">DTensor</ref>&lt;</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;typename<sp/>ColDim1::Dual,<sp/>typename<sp/>ColDim2::Dual,<sp/>typename<sp/>ColDim3::Dual&gt;,</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;typename<sp/>RowDim1::Dual,<sp/>typename<sp/>RowDim2::Dual,<sp/>typename<sp/>RowDim3::Dual&gt;&gt;</highlight></codeline>
+<codeline lineno="199"><highlight class="normal">inverse(</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor</ref>&lt;VectorIndexSet&lt;RowDim1,<sp/>RowDim2,<sp/>RowDim3&gt;,</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;ColDim1,<sp/>ColDim2,<sp/>ColDim3&gt;&gt;<sp/>arr)</highlight></codeline>
+<codeline lineno="202"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OutRowDim1<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ColDim1::Dual;</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OutRowDim2<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ColDim2::Dual;</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OutRowDim3<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ColDim3::Dual;</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OutColDim1<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RowDim1::Dual;</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OutColDim2<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RowDim2::Dual;</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OutColDim3<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RowDim3::Dual;</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;OutRowDim1, OutRowDim2, OutRowDim3&gt;</ref>,</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;OutColDim1,<sp/>OutColDim2,<sp/>OutColDim3&gt;&gt;</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inv;</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>det<sp/>=<sp/>determinant(arr);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/>ddcHelper::get&lt;OutRowDim1,<sp/>OutColDim1&gt;(inv)</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(ddcHelper::get&lt;RowDim2,<sp/>ColDim2&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim3,<sp/>ColDim3&gt;(arr)</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>ddcHelper::get&lt;RowDim2,<sp/>ColDim3&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim3,<sp/>ColDim2&gt;(arr))</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/>det;</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/>ddcHelper::get&lt;OutRowDim2,<sp/>OutColDim1&gt;(inv)</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(ddcHelper::get&lt;RowDim2,<sp/>ColDim3&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim3,<sp/>ColDim1&gt;(arr)</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>ddcHelper::get&lt;RowDim2,<sp/>ColDim1&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim3,<sp/>ColDim3&gt;(arr))</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/>det;</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/>ddcHelper::get&lt;OutRowDim3,<sp/>OutColDim1&gt;(inv)</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(ddcHelper::get&lt;RowDim2,<sp/>ColDim1&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim3,<sp/>ColDim2&gt;(arr)</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>ddcHelper::get&lt;RowDim2,<sp/>ColDim2&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim3,<sp/>ColDim1&gt;(arr))</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/>det;</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/>ddcHelper::get&lt;OutRowDim1,<sp/>OutColDim2&gt;(inv)</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(ddcHelper::get&lt;RowDim1,<sp/>ColDim3&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim3,<sp/>ColDim2&gt;(arr)</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>ddcHelper::get&lt;RowDim1,<sp/>ColDim2&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim3,<sp/>ColDim3&gt;(arr))</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/>det;</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/>ddcHelper::get&lt;OutRowDim2,<sp/>OutColDim2&gt;(inv)</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(ddcHelper::get&lt;RowDim1,<sp/>ColDim1&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim3,<sp/>ColDim3&gt;(arr)</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>ddcHelper::get&lt;RowDim1,<sp/>ColDim3&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim3,<sp/>ColDim1&gt;(arr))</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/>det;</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/>ddcHelper::get&lt;OutRowDim3,<sp/>OutColDim2&gt;(inv)</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(ddcHelper::get&lt;RowDim1,<sp/>ColDim2&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim3,<sp/>ColDim1&gt;(arr)</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>ddcHelper::get&lt;RowDim1,<sp/>ColDim1&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim3,<sp/>ColDim2&gt;(arr))</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/>det;</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/>ddcHelper::get&lt;OutRowDim1,<sp/>OutColDim3&gt;(inv)</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(ddcHelper::get&lt;RowDim1,<sp/>ColDim2&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim2,<sp/>ColDim3&gt;(arr)</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>ddcHelper::get&lt;RowDim1,<sp/>ColDim3&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim2,<sp/>ColDim2&gt;(arr))</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/>det;</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/>ddcHelper::get&lt;OutRowDim2,<sp/>OutColDim3&gt;(inv)</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(ddcHelper::get&lt;RowDim1,<sp/>ColDim3&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim2,<sp/>ColDim1&gt;(arr)</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>ddcHelper::get&lt;RowDim1,<sp/>ColDim1&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim2,<sp/>ColDim3&gt;(arr))</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/>det;</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/>ddcHelper::get&lt;OutRowDim3,<sp/>OutColDim3&gt;(inv)</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(ddcHelper::get&lt;RowDim1,<sp/>ColDim1&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim2,<sp/>ColDim2&gt;(arr)</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>ddcHelper::get&lt;RowDim1,<sp/>ColDim2&gt;(arr)<sp/>*<sp/>ddcHelper::get&lt;RowDim2,<sp/>ColDim1&gt;(arr))</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/>det;</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>inv;</highlight></codeline>
+<codeline lineno="250"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp"/>
   </compounddef>
