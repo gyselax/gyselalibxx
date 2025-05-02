@@ -5,12 +5,14 @@ runs:
   steps:
     - if: github.event_name == 'pull_request'
       run: |
+        git config --global --add safe.directory $(pwd)
+        git fetch --no-recurse-submodules origin ${{ github.event.pull_request.base.sha }}
         git diff --name-only ${{ github.event.pull_request.base.sha }} > changed_files.txt
       shell: bash
-      env:
-        GH_TOKEN: ${{ github.token }}
     - if: github.event_name == 'merge_group'
       run: |
+        git config --global --add safe.directory $(pwd)
+        git fetch --no-recurse-submodules origin ${{ github.event.merge_group.base_sha }}
         git diff --name-only ${{ github.event.merge_group.base_sha }} > changed_files.txt
       shell: bash
     - if: github.event_name != 'pull_request' && github.event_name != 'merge_group'

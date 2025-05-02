@@ -3,11 +3,6 @@ name: "Filter tests"
 runs:
   using: "composite"
   steps:
-  - name: "Fetch reference case"
-    run: |
-      git config --global --add safe.directory $(pwd)
-      git fetch --no-recurse-submodules origin
-    shell: bash
   - uses: ./.github/actions/changed_files
   - name: "Check filters"
     if: github.event_name == 'pull_request' || github.event_name == 'merge_request'
