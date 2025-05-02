@@ -7,10 +7,6 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: |
-        MATCHING_PATHS='["src/**/*.hpp", "src/**/*.cpp", "tests/**/*.hpp", "tests/**/*.cpp", "simulations/**/*.hpp", "simulations/**/*.cpp", "**/CMakeLists.txt", "vendor/**", ".github/actions/**", ".github/workflows/**", "toolchains/docker.gyselalibxx_env/**", "toolchains/v100.persee/**"]'
-        echo "MATCHING_PATHS=${MATCHING_PATHS}" >> ${GITHUB_ENV}
-      shell: bash
     - uses: .github/actions/changed_files
     - id: changes_check
       run: |
@@ -18,7 +14,7 @@ runs:
         import os
         with open("changed_files.txt") as f:
           lines = [l.strip() for l in f.readlines()]
-        matching_paths = [si.strip('"') for si in os.environ['MATCHING_PATHS'].split('[')[1].split(']')[0].split(', ')]
+        matching_paths=[ "src/**/*.hpp", "src/**/*.cpp", "tests/**/*.hpp", "tests/**/*.cpp", "simulations/**/*.hpp", "simulations/**/*.cpp", "**/CMakeLists.txt", "vendor/**", ".github/actions/**", ".github/workflows/**", "toolchains/docker.gyselalibxx_env/**", "toolchains/v100.persee/**" ]
         matches = [m for pat in matching_paths for m in fnmatch.filter(lines, pat)]
         print(matches)
         with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
@@ -31,9 +27,10 @@ runs:
         skip_after_successful_duplicate: 'true'
     - id: outcome
       run: |
+        echo "Trigger anyway : ${{ github.event_name == 'push' || github.event_name == 'release' }}"
         echo "Found match : ${{ steps.changes_check.outputs.found_match }}"
         echo "Should skip : ${{ steps.duplicate_check.outputs.should_skip }}"
-        SHOULD_SKIP=${{ github.event_name != 'push' && ((steps.changes_check.outputs.found_match == 'False') || (steps.duplicate_check.outputs.should_skip == 'true')) }}
+        SHOULD_SKIP=${{ github.event_name != 'push' && github.event_name != 'release' && ((steps.changes_check.outputs.found_match == 'False') || (steps.duplicate_check.outputs.should_skip == 'true')) }}
         echo "should_skip=${SHOULD_SKIP}" >> $GITHUB_OUTPUT
         echo "should_skip=${SHOULD_SKIP}"
       shell: bash
