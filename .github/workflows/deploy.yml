@@ -7,28 +7,6 @@ on:
 
 
 jobs:
-  docker:
-    if: github.repository == 'gyselax/gyselalibxx'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: "Check if rebuild is necessary"
-        id: rebuild-check
-        run: |
-          changed_docker_file=$(git show ${{ github.sha }} --name-only --pretty= | grep docker/gyselalibxx_env/Dockerfile || true)
-          if [ -n "${changed_docker_file}" ]
-          then
-            echo "rebuild=true" >> $GITHUB_OUTPUT
-          else
-            echo "rebuild=false" >> $GITHUB_OUTPUT
-          fi
-      - name: Checkout
-        uses: ./github/actions/docker_update
-        with:
-          release: true
-          rebuild: ${{ steps.rebuild-check.outputs.rebuild }}
-
   Docs:
     if: github.repository == 'gyselax/gyselalibxx'
     runs-on: ubuntu-latest
