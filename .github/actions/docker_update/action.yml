@@ -65,7 +65,7 @@ runs:
         cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
         pull: true
         push: true
-        call: ${{ (steps.rebuild-check.outputs.rebuild == 'true') && 'build' || 'call' }}
+        call: ${{ (steps.rebuild-check.outputs.rebuild == 'true') && 'build' || 'check' }}
         tags: ${{ steps.get-tags.outputs.full_tags }}
     - name: Pick image tag for subsequent jobs
       run: |
