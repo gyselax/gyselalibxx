@@ -11,7 +11,9 @@ on:
     types:
       - checks_requested
   push:
-    branches: [main, devel]
+    branches: [devel]
+  release:
+    types: [published]
   workflow_dispatch:
     inputs:
       toolchain:
@@ -64,14 +66,45 @@ jobs:
           echo "matrix={\"toolchain\": $matrix}" >> $GITHUB_OUTPUT
         shell: bash
 
+  docker_update:
+    runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ steps.image_tag.outputs.image_tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: .github/actions/changed_files
+      - id: docker-check
+        run: |
+          changed_docker_file=$(cat changed_files.txt | grep docker/gyselalibxx_env/Dockerfile || true)
+          if [ -n "${changed_docker_file}" ]
+          then
+            echo "rebuild=true" >> $GITHUB_OUTPUT
+          else
+            echo "rebuild=false" >> $GITHUB_OUTPUT
+          fi
+      - uses: ./.github/actions/docker_update
+        if: github.event_name == 'push' || github.event_name == 'release' || steps.rebuild-check.outputs.rebuild
+        with:
+          rebuild: ${{ steps.rebuild-check.outputs.rebuild }}
+          release_tags: ${{ github.event_name == 'push' && 'latest' || ( github.event_name == 'release' && github.event.release.tag_name || '') }}
+      - id: image_tag
+        run: |
+          if [ "${{ github.event_name == 'push' || github.event_name == 'release' || steps.rebuild-check.outputs.rebuild }}" == "true" ]
+          then
+            echo "image_tag='${{ github.SHA }}'" >> $GITHUB_OUTPUT
+          else
+            echo "image_tag='latest'" >> $GITHUB_OUTPUT
+          fi
+        shell: bash
+
   cpu_tests:
     runs-on: ubuntu-latest
-    needs: pre_job
+    needs: pre_job, docker_update
     strategy:
       matrix: ${{fromJson(needs.pre_job.outputs.matrix)}}
       fail-fast: false
     container:
-      image: ghcr.io/gyselax/gyselalibxx_env:latest
+      image: ghcr.io/gyselax/gyselalibxx_env:${{ needs.docker_update.outputs.image_tag }}
       options: --user root
     name: CPU Test (${{ matrix.toolchain }})
     steps:
