@@ -2,10 +2,11 @@ spack:
   concretizer:
     unify: true
   definitions:
-  - compilers:
-    - 'gcc@11:'
+  - linux-compilers:
+    - 'gcc@11: platform=linux'
+  - macos-compilers:
+    - 'gcc@11: platform=darwin'
   - packages:
-    - 'benchmark@1.8'
     - 'cmake@3.30'
     - 'eigen@3.4'
     - 'fftw@3.3 precision=float,double'
@@ -13,12 +14,12 @@ spack:
     - 'googletest@1.14 +gmock'
     - 'openmpi@5.0'
     - 'paraconf@1.0'
-    - 'pdi@1.8'
-    - 'pdiplugin-decl-hdf5@1.8 +mpi'
-    - 'pdiplugin-decl-netcdf@1.8 +mpi'
-    - 'pdiplugin-mpi@1.8'
-    - 'pdiplugin-set-value@1.8'
-    - 'pdiplugin-trace@1.8'
+    - 'pdi@1.9 -fortran -python'
+    - 'pdiplugin-decl-hdf5@1.9 +mpi -fortran'
+    - 'pdiplugin-decl-netcdf@1.9 +mpi'
+    - 'pdiplugin-mpi@1.9'
+    - 'pdiplugin-set-value@1.9'
+    - 'pdiplugin-trace@1.9'
   - python-packages:
     - 'py-dask@2024.7'
     - 'py-h5netcdf'
@@ -34,10 +35,16 @@ spack:
   - lapack
   - matrix:
     - [$packages]
-    - [$%compilers]
+    - [$%linux-compilers]
+  - matrix:
+    - [$packages]
+    - [$%linux-compilers]
   - matrix:
     - [$python-packages]
-    - [$%compilers]
+    - [$%linux-compilers]
+  - matrix:
+    - [$python-packages]
+    - [$%macos-compilers]
   view: true
   packages:
     all:
