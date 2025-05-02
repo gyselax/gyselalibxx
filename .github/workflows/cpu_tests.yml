@@ -69,40 +69,17 @@ jobs:
   docker_update:
     runs-on: ubuntu-latest
     outputs:
-      image_tag: ${{ steps.image_tag.outputs.image_tag }}
+      image_tag: ${{ steps.dcoker.outputs.image_tag }}
     if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/changed_files
-      - id: docker-check
-        run: |
-          # Check if docker/gyselalibxx_env/Dockerfile has been modified
-          changed_docker_file=$(cat changed_files.txt | grep docker/gyselalibxx_env/Dockerfile || true)
-          # Use the modification status of docker/gyselalibxx_env/Dockerfile to decide if the docker should be rebuilt
-          if [ -n "${changed_docker_file}" ]
-          then
-            echo "rebuild=true" >> $GITHUB_OUTPUT
-          else
-            echo "rebuild=false" >> $GITHUB_OUTPUT
-          fi
-      - uses: ./.github/actions/docker_update
-        if: github.event_name == 'push' || github.event_name == 'release' || steps.rebuild-check.outputs.rebuild
+      - id: docker
+        uses: ./.github/actions/docker_update
         with:
-          # Rebuild if Dockerfile has changed
-          rebuild: ${{ steps.rebuild-check.outputs.rebuild }}
+          always_push: github.event_name == 'push' || github.event_name == 'release'
           # Build the release tag with a ternary expression
           # 'latest' if push else (release.tag_name if release else '')
           release_tag: ${{ github.event_name == 'push' && 'latest' || ( github.event_name == 'release' && github.event.release.tag_name || '') }}
-      - id: image_tag
-        run: |
-          # If the file was rebuilt then it must be used. Otherwise latest is sufficient
-          if [ "${{ github.event_name == 'push' || github.event_name == 'release' || steps.rebuild-check.outputs.rebuild }}" == "true" ]
-          then
-            echo "image_tag='${{ github.SHA }}'" >> $GITHUB_OUTPUT
-          else
-            echo "image_tag='latest'" >> $GITHUB_OUTPUT
-          fi
-        shell: bash
 
   cpu_tests:
     runs-on: ubuntu-latest
@@ -111,7 +88,7 @@ jobs:
       matrix: ${{fromJson(needs.pre_job.outputs.matrix)}}
       fail-fast: false
     container:
-      image: ghcr.io/gyselax/gyselalibxx_env:${{ needs.docker_update.outputs.image_tag }}
+      image: ${{ needs.docker_update.outputs.image_tag }}
       options: --user root
     name: CPU Test (${{ matrix.toolchain }})
     steps:
