@@ -2,10 +2,8 @@ spack:
   concretizer:
     unify: true
   definitions:
-  - linux-compilers:
-    - 'gcc@11: platform=linux'
-  - macos-compilers:
-    - 'gcc@11: platform=darwin'
+  - compilers:
+    - 'gcc@11:'
   - packages:
     - 'cmake@3.30'
     - 'eigen@3.4'
@@ -35,16 +33,10 @@ spack:
   - lapack
   - matrix:
     - [$packages]
-    - [$%linux-compilers]
-  - matrix:
-    - [$packages]
-    - [$%linux-compilers]
+    - [$%compilers]
   - matrix:
     - [$python-packages]
-    - [$%linux-compilers]
-  - matrix:
-    - [$python-packages]
-    - [$%macos-compilers]
+    - [$%compilers]
   view: true
   packages:
     all:
