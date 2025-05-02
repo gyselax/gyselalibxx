@@ -75,7 +75,9 @@ jobs:
       - uses: .github/actions/changed_files
       - id: docker-check
         run: |
+          # Check if docker/gyselalibxx_env/Dockerfile has been modified
           changed_docker_file=$(cat changed_files.txt | grep docker/gyselalibxx_env/Dockerfile || true)
+          # Use the modification status of docker/gyselalibxx_env/Dockerfile to decide if the docker should be rebuilt
           if [ -n "${changed_docker_file}" ]
           then
             echo "rebuild=true" >> $GITHUB_OUTPUT
@@ -85,10 +87,14 @@ jobs:
       - uses: ./.github/actions/docker_update
         if: github.event_name == 'push' || github.event_name == 'release' || steps.rebuild-check.outputs.rebuild
         with:
+          # Rebuild if Dockerfile has changed
           rebuild: ${{ steps.rebuild-check.outputs.rebuild }}
-          release_tags: ${{ github.event_name == 'push' && 'latest' || ( github.event_name == 'release' && github.event.release.tag_name || '') }}
+          # Build the release tag with a ternary expression
+          # 'latest' if push else (release.tag_name if release else '')
+          release_tag: ${{ github.event_name == 'push' && 'latest' || ( github.event_name == 'release' && github.event.release.tag_name || '') }}
       - id: image_tag
         run: |
+          # If the file was rebuilt then it must be used. Otherwise latest is sufficient
           if [ "${{ github.event_name == 'push' || github.event_name == 'release' || steps.rebuild-check.outputs.rebuild }}" == "true" ]
           then
             echo "image_tag='${{ github.SHA }}'" >> $GITHUB_OUTPUT
