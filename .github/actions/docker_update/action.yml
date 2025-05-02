@@ -34,6 +34,7 @@ runs:
           fi
       - name: Build final tags
         id: get-tags
+        if: inputs.always_push || steps.rebuild-check.outputs.rebuild
         runs: |
           import os
           sha_tag = "ghcr.io/gyselax/gyselalibxx_env:${{ github.SHA }}"
