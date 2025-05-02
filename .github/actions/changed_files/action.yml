@@ -5,13 +5,13 @@ runs:
   steps:
     - if: github.event_name == 'pull_request'
       run: |
-        gh pr diff ${{ github.event.pull_request.number }} --name-only > changed_files.txt
+        git diff --name-only ${{ github.event.pull_request.base.sha }} > changed_files.txt
       shell: bash
       env:
         GH_TOKEN: ${{ github.token }}
     - if: github.event_name == 'merge_group'
       run: |
-        git diff --name-only origin/devel > changed_files.txt
+        git diff --name-only ${{ github.event.merge_group.base_sha }} > changed_files.txt
       shell: bash
     - if: github.event_name != 'pull_request' && github.event_name != 'merge_group'
       run: |
