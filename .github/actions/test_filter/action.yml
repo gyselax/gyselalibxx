@@ -1,17 +1,12 @@
 name: "Filter tests"
 
-inputs:
-  base_sha:
-    description: "The SHA or branch of the PR base"
-    required: true
-
 runs:
   using: "composite"
   steps:
   - name: "Fetch reference case"
     run: |
       git config --global --add safe.directory $(pwd)
-      git fetch --no-recurse-submodules origin ${{ inputs.base_sha }}
+      git fetch --no-recurse-submodules origin
     shell: bash
   - uses: ./.github/actions/changed_files
   - name: "Check filters"
