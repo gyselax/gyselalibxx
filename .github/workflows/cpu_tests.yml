@@ -39,7 +39,7 @@ jobs:
   pre_job:
     name: 'Check for unnecessary runs'
     runs-on: ubuntu-latest
-    #if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
+    if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
     # Map a step output to a job output
     outputs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
@@ -48,11 +48,7 @@ jobs:
       - uses: actions/checkout@v4
       - id: skip_check
         uses: ./.github/actions/duplicate_check
-      - if: github.event_name == 'pull_request'
-        run: |
-          echo "matrix=['tests_toolchain']" >> $GITHUB_ENV
-        shell: bash
-      - if: github.event_name != 'workflow_dispatch' && github.event_name != 'push' && github.event_name != 'pull_request'
+      - if: github.event_name != 'workflow_dispatch' && github.event_name != 'push'
         run: |
           echo "matrix=['tests_toolchain', 'tests_release_toolchain', 'tests_release_omp_toolchain', 'tests_coverage_toolchain']" >> $GITHUB_ENV
         shell: bash
@@ -74,7 +70,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       image_tag: ${{ steps.docker.outputs.image_tag }}
-    #if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
+    if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
     steps:
       - uses: actions/checkout@v4
       - id: docker
@@ -91,8 +87,7 @@ jobs:
     strategy:
       matrix:
         toolchain: ${{fromJson(needs.pre_job.outputs.toolchain_matrix)}}
-        #compiler: ['gnu', 'clang']
-        compiler: ['clang']
+        compiler: ['gnu', 'clang']
       fail-fast: false
     container:
       image: ${{ needs.docker_update.outputs.image_tag }}
@@ -110,20 +105,20 @@ jobs:
           clang++ --version
         shell: bash
       - name: Checkout gyselalibxx
-        #if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
+        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: "Filter tests"
-        #if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
+        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/test_filter
       - name: Build code
-        #if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
+        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/build_code
         with:
           toolchain: toolchains/docker.gyselalibxx_env/${{ matrix.toolchain }}.cmake
       - name: Run tests
-        #if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
+        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/run_tests
       - name: Check Test Coverage
         if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'tests_coverage_toolchain'
