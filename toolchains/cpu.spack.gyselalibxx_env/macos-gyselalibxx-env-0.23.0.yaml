@@ -3,7 +3,7 @@ spack:
     unify: true
   definitions:
   - compilers:
-    - 'gcc@11: platform=darwin'
+    - 'apple-clang@14:'
   - packages:
     - 'cmake@3.30'
     - 'eigen@3.4'
