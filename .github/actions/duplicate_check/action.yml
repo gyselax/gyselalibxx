@@ -1,4 +1,9 @@
 name: "Check if CPU/GPU tests can be skipped"
+inputs:
+  MATCHING_PATHS:
+    description: "The paths to be checked"
+    required: false
+    default: '["src/**/*.hpp", "src/**/*.cpp", "tests/**/*.hpp", "tests/**/*.cpp", "simulations/**/*.hpp", "simulations/**/*.cpp", "**/CMakeLists.txt", "vendor/**", ".github/actions/**", ".github/workflows/**", "toolchains/docker.gyselalibxx_env/**", "toolchains/v100.persee/**"]'
 outputs:
   should_skip:
     description: "True if the tests should be run, False otherwise."
@@ -8,8 +13,7 @@ runs:
   using: "composite"
   steps:
     - run: |
-        MATCHING_PATHS='["src/**/*.hpp", "src/**/*.cpp", "tests/**/*.hpp", "tests/**/*.cpp", "simulations/**/*.hpp", "simulations/**/*.cpp", "**/CMakeLists.txt", "vendor/**", ".github/actions/**", ".github/workflows/**", "toolchains/docker.gyselalibxx_env/**", "toolchains/v100.persee/**"]'
-        echo "MATCHING_PATHS=${MATCHING_PATHS}" >> ${GITHUB_ENV}
+        echo "MATCHING_PATHS=${{ inputs.MATCHING_PATHS }}" >> ${GITHUB_ENV}
       shell: bash
     - if: github.event_name == 'pull_request'
       run: |
