@@ -21,7 +21,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # Download spack
 wget https://github.com/spack/spack/releases/download/v0.23.0/spack-0.23.0.tar.gz
-tar -xvf spack-0.23.0.tar.gz
+tar -xf spack-0.23.0.tar.gz
 rm spack-0.23.0.tar.gz
 
 # Bug fix for spack < 0.24 and gcc>=14
