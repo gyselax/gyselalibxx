@@ -207,22 +207,13 @@ private:
     double const m_omega;
     double const m_xc;
     double const m_yc;
-    double const m_x_bar;
-    double const m_y_bar;
 
 public:
     /**
      * @brief Instantiate an AdvectionField_decentred_rotation advection field.
      *
      */
-    AdvectionField_decentred_rotation()
-        : m_omega(2 * M_PI)
-        , m_xc(0.25)
-        , m_yc(0.)
-        , m_x_bar(0.)
-        , m_y_bar(0.)
-    {
-    }
+    AdvectionField_decentred_rotation() : m_omega(2 * M_PI), m_xc(0.25), m_yc(0.) {}
 
     /// Copy operator
     explicit KOKKOS_DEFAULTED_FUNCTION AdvectionField_decentred_rotation(

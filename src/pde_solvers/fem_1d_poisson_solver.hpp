@@ -140,7 +140,7 @@ private:
     using IdxRangeFEMBSplines = IdxRange<FEMBSplines>;
 
     using IdxRangeBatchedFEMBSplines =
-            typename FEMSplineEvaluator::batched_spline_domain_type<IdxRangeBatched>;
+            typename FEMSplineEvaluator::template batched_spline_domain_type<IdxRangeBatched>;
 
     using FEMBSplinesCoeffMem = DFieldMem<IdxRangeFEMBSplines, memory_space>;
 
@@ -153,7 +153,7 @@ private:
     using IdxBSplines = Idx<InputBSplines>;
 
     using IdxRangeBatchedBSplines =
-            typename SplineEvaluator::batched_spline_domain_type<IdxRangeBatched>;
+            typename SplineEvaluator::template batched_spline_domain_type<IdxRangeBatched>;
 
     using full_index = typename IdxRangeBatched::discrete_element_type;
 
