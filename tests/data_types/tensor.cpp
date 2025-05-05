@@ -13,7 +13,7 @@
 using namespace tensor_tools;
 
 
-int dot_product(Vector<int, R_cov, Theta_cov> a, Vector<int, R, Theta> b)
+int dot_product(Vector<int, R_cov, Theta_cov> const& a, Vector<int, R, Theta> const& b)
 {
     return ddcHelper::get<R_cov>(a) * ddcHelper::get<R>(b)
            + ddcHelper::get<Theta_cov>(a) * ddcHelper::get<Theta>(b);
