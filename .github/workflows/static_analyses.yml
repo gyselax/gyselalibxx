@@ -161,7 +161,7 @@ jobs:
           base_sha: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
           trigger_type: ${{ github.event_name }}
       - run: |
-          python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
+          python3 bin/ci_tools/gyselalib_static_analysis.py
 
   cmake_static_analysis:
     name: CMake static analysis
