@@ -136,11 +136,24 @@ public:
     }
 
     /**
-     * @brief A copy operator.
+     * @brief A copy assign operator.
      * @param other The tensor to be copied.
      * @return A reference to the current tensor.
      */
     KOKKOS_FUNCTION Tensor& operator=(Tensor const& other) noexcept
+    {
+        for (std::size_t i(0); i < s_n_elements; ++i) {
+            m_data[i] = other.m_data[i];
+        }
+        return *this;
+    }
+
+    /**
+     * @brief A move assign operator.
+     * @param other The tensor to be copied.
+     * @return A r-value reference to the current tensor.
+     */
+    KOKKOS_FUNCTION Tensor& operator=(Tensor&& other) noexcept
     {
         for (std::size_t i(0); i < s_n_elements; ++i) {
             m_data[i] = other.m_data[i];
