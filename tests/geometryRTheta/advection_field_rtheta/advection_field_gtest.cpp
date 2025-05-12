@@ -291,8 +291,8 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     auto advection_field_xy_device = ddcHelper::
             create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), advection_field_xy);
 
-    auto density_rtheta_device = ddc::
-            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), density_rtheta);
+    auto density_rtheta_device
+            = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), density_rtheta);
     auto advection_field_rtheta_device = ddcHelper::
             create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), advection_field_rtheta);
 

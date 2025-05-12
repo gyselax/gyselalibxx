@@ -394,9 +394,8 @@ void simulate(
                 simulation.advection_field(coord_xy, 0.));
     });
 
-    auto density = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(density_test));
+    auto density = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), get_field(density_test));
 
     auto advection_field_xy = ddcHelper::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),

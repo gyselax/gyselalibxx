@@ -166,22 +166,18 @@ public:
                 };
 
         std::function<void(host_t<DFieldRTheta>, host_t<DConstVectorFieldRTheta<X, Y>>, double)>
-                advect_density
-                = [&](host_t<DFieldRTheta> density_host,
-                      host_t<DConstVectorFieldRTheta<X, Y>> advection_field_host,
-                      double dt) {
-                      auto density = ddc::create_mirror_view_and_copy(
-                              Kokkos::DefaultExecutionSpace(),
-                              density_host);
-                      auto advection_field = ddcHelper::create_mirror_view_and_copy(
-                              Kokkos::DefaultExecutionSpace(),
-                              advection_field_host);
-                      m_advection_solver(
-                              get_field(density),
-                              get_const_field(advection_field),
-                              dt);
-                      ddc::parallel_deepcopy(density_host, density);
-                  };
+                advect_density = [&](host_t<DFieldRTheta> density_host,
+                                     host_t<DConstVectorFieldRTheta<X, Y>> advection_field_host,
+                                     double dt) {
+                    auto density = ddc::create_mirror_view_and_copy(
+                            Kokkos::DefaultExecutionSpace(),
+                            density_host);
+                    auto advection_field = ddcHelper::create_mirror_view_and_copy(
+                            Kokkos::DefaultExecutionSpace(),
+                            advection_field_host);
+                    m_advection_solver(get_field(density), get_const_field(advection_field), dt);
+                    ddc::parallel_deepcopy(density_host, density);
+                };
 
         RK2<host_t<DFieldMemRTheta>,
             host_t<DVectorFieldMemRTheta<X, Y>>,
