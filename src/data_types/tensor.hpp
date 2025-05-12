@@ -36,7 +36,7 @@ public:
     /**
      * @brief Construct an uninitialised tensor object.
      */
-    KOKKOS_FUNCTION Tensor()
+    KOKKOS_FUNCTION Tensor() noexcept
     {
         m_data = mdspan_type(m_data_alloc.data());
     }
@@ -79,7 +79,7 @@ public:
      * @param coord The coordinate.
      */
     template <class... Dims>
-    explicit KOKKOS_FUNCTION Tensor(Coord<Dims...> coord)
+    explicit KOKKOS_FUNCTION Tensor(Coord<Dims...> coord) noexcept
     {
         static_assert(
                 rank() == 1,
@@ -98,7 +98,7 @@ public:
      * @param o_tensor The tensor to be copied.
      */
     template <class OTensorType, std::enable_if_t<is_tensor_type_v<OTensorType>, bool> = true>
-    explicit KOKKOS_FUNCTION Tensor(const OTensorType& o_tensor)
+    explicit KOKKOS_FUNCTION Tensor(const OTensorType& o_tensor) noexcept
     {
         static_assert(
                 std::is_same_v<typename OTensorType::index_set, index_set>,
@@ -115,7 +115,7 @@ public:
      *
      * @param o_tensor The tensor to be copied.
      */
-    KOKKOS_FUNCTION Tensor(Tensor const& o_tensor)
+    KOKKOS_FUNCTION Tensor(Tensor const& o_tensor) noexcept
     {
         m_data = mdspan_type(m_data_alloc.data());
         for (std::size_t i(0); i < s_n_elements; ++i) {
@@ -129,7 +129,7 @@ public:
      *
      * @param o_tensor The tensor to be copied.
      */
-    explicit KOKKOS_FUNCTION Tensor(Tensor&& o_tensor)
+    explicit KOKKOS_FUNCTION Tensor(Tensor&& o_tensor) noexcept
         : m_data_alloc(std::move(o_tensor.m_data_alloc))
     {
         m_data = mdspan_type(m_data_alloc.data());
@@ -140,7 +140,7 @@ public:
      * @param other The tensor to be copied.
      * @return A reference to the current tensor.
      */
-    KOKKOS_FUNCTION Tensor& operator=(Tensor const& other)
+    KOKKOS_FUNCTION Tensor& operator=(Tensor const& other) noexcept
     {
         for (std::size_t i(0); i < s_n_elements; ++i) {
             m_data[i] = other.m_data[i];
