@@ -204,21 +204,46 @@ TEST_F(OnionPatchLocator2PatchesTest, DeviceCzarnyOnionPatchLocator2PatchesTest)
     Kokkos::View<int*, Kokkos::DefaultHostExecutionSpace>
             patches_host("patches_host 1", n_elements);
 
-    // Test range edge
+    // Test outside range (below)
     coords_host(0) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(0, 0)));
+    // Test lower bound
     coords_host(1) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(0.2, 0)));
+    // Test in patch 1
     coords_host(2) = PhysicalCoordXY(0.25, .03);
+    // Test in patch 2
     coords_host(3) = PhysicalCoordXY(1, 1);
+    // Test patch boundary
     coords_host(4) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(1, 0)));
+    // Test upper bound
     coords_host(5) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(1.5, 0)));
+    // Test outside range (above)
     coords_host(6) = PhysicalCoordXY(-2.1, 0);
 
+    // Test outside range (below)
     patches_host(0) = PatchLocator::outside_rmin_domain;
-    patches_host(1) = 0;
+    // Test lower bound
+    if (ddc::select<R>(to_logical_mapping(coords_host(1))) - 0.2 < 0) {
+        patches_host(1) = PatchLocator::outside_rmin_domain;
+    } else {
+        patches_host(1) = 0;
+    }
+    // Test in patch 1
     patches_host(2) = 0;
+    // Test in patch 2
     patches_host(3) = 1;
-    patches_host(4) = 1;
-    patches_host(5) = 1;
+    // Test patch boundary
+    if (ddc::select<R>(to_logical_mapping(coords_host(4))) - 1 <= 0) {
+        patches_host(4) = 0;
+    } else {
+        patches_host(4) = 1;
+    }
+    // Test upper bound
+    if (ddc::select<R>(to_logical_mapping(coords_host(5))) - 1.5 <= 0) {
+        patches_host(5) = 1;
+    } else {
+        patches_host(5) = PatchLocator::outside_rmax_domain;
+    }
+    // Test outside range (above)
     patches_host(6) = PatchLocator::outside_rmax_domain;
 
     Kokkos::deep_copy(coords, coords_host);
@@ -295,7 +320,11 @@ TEST_F(OnionPatchLocator2PatchesTest, HostCzarnyOnionPatchLocator2PatchesTest)
 
     // Test lower bound
     coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(0.2, 0)));
-    EXPECT_EQ(patch_locator(coord), 0);
+    if (ddc::select<R>(to_logical_mapping(coord)) - 0.2 < 0) {
+        EXPECT_EQ(patch_locator(coord), PatchLocator::outside_rmin_domain);
+    } else {
+        EXPECT_EQ(patch_locator(coord), 0);
+    }
 
     // Test in patch 1
     coord = PhysicalCoordXY(0.25, .03);
@@ -313,7 +342,7 @@ TEST_F(OnionPatchLocator2PatchesTest, HostCzarnyOnionPatchLocator2PatchesTest)
         EXPECT_EQ(patch_locator(coord), 1);
     }
 
-    // Test in patch 2
+    // Test upper bound
     coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(1.5, 0)));
     if (ddc::select<R>(to_logical_mapping(coord)) - 1.5 <= 0) {
         EXPECT_EQ(patch_locator(coord), 1);
