@@ -5,7 +5,7 @@
 #include "circular_to_cartesian.hpp"
 #include "combined_mapping.hpp"
 #include "cylindrical_to_cartesian.hpp"
-#include "gyrokinetic_poisson_bracket.hpp"
+#include "lie_poisson_bracket.hpp"
 #include "mesh_builder.hpp"
 #include "toroidal_to_cylindrical.hpp"
 
