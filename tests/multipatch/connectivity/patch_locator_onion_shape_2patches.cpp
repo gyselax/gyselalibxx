@@ -204,6 +204,7 @@ TEST_F(OnionPatchLocator2PatchesTest, DeviceCzarnyOnionPatchLocator2PatchesTest)
     Kokkos::View<int*, Kokkos::DefaultHostExecutionSpace>
             patches_host("patches_host 1", n_elements);
 
+    // Test range edge
     coords_host(0) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(0, 0)));
     coords_host(1) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(0.2, 0)));
     coords_host(2) = PhysicalCoordXY(0.25, .03);
@@ -288,24 +289,39 @@ TEST_F(OnionPatchLocator2PatchesTest, HostCzarnyOnionPatchLocator2PatchesTest)
             Kokkos::DefaultHostExecutionSpace>
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
 
+    // Test outside range (below)
     PhysicalCoordXY coord(-0.05, .03);
     EXPECT_EQ(patch_locator(coord), PatchLocator::outside_rmin_domain);
 
+    // Test lower bound
     coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(0.2, 0)));
     EXPECT_EQ(patch_locator(coord), 0);
 
+    // Test in patch 1
     coord = PhysicalCoordXY(0.25, .03);
     EXPECT_EQ(patch_locator(coord), 0);
 
+    // Test in patch 2
     coord = PhysicalCoordXY(1, 1);
     EXPECT_EQ(patch_locator(coord), 1);
 
+    // Test patch boundary
     coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(1, 0)));
-    EXPECT_EQ(patch_locator(coord), 1);
+    if (ddc::select<R>(to_logical_mapping(coord)) - 1 <= 0) {
+        EXPECT_EQ(patch_locator(coord), 0);
+    } else {
+        EXPECT_EQ(patch_locator(coord), 1);
+    }
 
+    // Test in patch 2
     coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(1.5, 0)));
-    EXPECT_EQ(patch_locator(coord), 1);
+    if (ddc::select<R>(to_logical_mapping(coord)) - 1.5 <= 0) {
+        EXPECT_EQ(patch_locator(coord), 1);
+    } else {
+        EXPECT_EQ(patch_locator(coord), PatchLocator::outside_rmax_domain);
+    }
 
+    // Test outside range (above)
     coord = PhysicalCoordXY(-2.1, 0);
     EXPECT_EQ(patch_locator(coord), PatchLocator::outside_rmax_domain);
 }
