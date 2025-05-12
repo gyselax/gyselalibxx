@@ -53,7 +53,7 @@ Inherited by the following classes: [NullQNSolver](classNullQNSolver.md),  [Null
 
 | Type | Name |
 | ---: | :--- |
-| virtual void | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; electrostatic\_potential, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; electric\_field, host\_t&lt; DConstFieldRTheta &gt; allfdistribu) const = 0<br>_Compute the electrical potential and the electric field from the Quasi-Neutrality equation._  |
+| virtual void | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; electrostatic\_potential, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; electric\_field, host\_t&lt; DConstFieldRTheta &gt; density) const = 0<br>_Compute the electrical potential and the electric field from the Quasi-Neutrality equation._  |
 | virtual void | [**operator()**](#function-operator_1) (DFieldX electrostatic\_potential, DFieldX electric\_field, DConstFieldSpXVx allfdistribu) const = 0<br> |
 | virtual void | [**operator()**](#function-operator_2) (DFieldXY electrostatic\_potential, DFieldXY electric\_field\_x, DFieldXY electric\_field\_y, DConstFieldSpVxVyXY allfdistribu) const = 0<br> |
 | virtual  | [**~IQNSolver**](#function-iqnsolver-13) () = default<br> |
@@ -115,7 +115,7 @@ _Compute the electrical potential and the electric field from the Quasi-Neutrali
 virtual void IQNSolver::operator() (
     host_t< DFieldRTheta > electrostatic_potential,
     host_t< DVectorFieldRTheta < X , Y > > electric_field,
-    host_t< DConstFieldRTheta > allfdistribu
+    host_t< DConstFieldRTheta > density
 ) const = 0
 ```
 
@@ -128,7 +128,7 @@ virtual void IQNSolver::operator() (
 
 * `electrostatic_potential` The solution of the Quasi-Neutrality equation. 
 * `electric_field` The electric field . 
-* `allfdistribu` The rhs of the Quasi-Neutrality equation. 
+* `density` The rhs of the Quasi-Neutrality equation. 
 
 
 

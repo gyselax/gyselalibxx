@@ -20,7 +20,7 @@ public:
     virtual ~ITimeSolverRTheta() = default;
 
     virtual host_t<DFieldRTheta> operator()(
-            host_t<DFieldRTheta> allfdistribu,
+            host_t<DFieldRTheta> density,
             double const dt,
             int const steps = 1) const = 0;
 

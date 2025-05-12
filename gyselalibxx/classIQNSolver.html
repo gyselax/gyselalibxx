@@ -559,7 +559,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">virtual void</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (host_t&lt; DFieldRTheta &gt; electrostatic_potential, host_t&lt; <a href="classVectorField.html"><strong>DVectorFieldRTheta</strong></a>&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; &gt; electric_field, host_t&lt; DConstFieldRTheta &gt; allfdistribu) const = 0<br><em>Compute the electrical potential and the electric field from the Quasi-Neutrality equation.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (host_t&lt; DFieldRTheta &gt; electrostatic_potential, host_t&lt; <a href="classVectorField.html"><strong>DVectorFieldRTheta</strong></a>&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; &gt; electric_field, host_t&lt; DConstFieldRTheta &gt; density) const = 0<br><em>Compute the electrical potential and the electric field from the Quasi-Neutrality equation.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual void</td>
@@ -594,14 +594,14 @@
 <pre><code class="language-C++">virtual void IQNSolver::operator() (
     host_t&lt; DFieldRTheta &gt; electrostatic_potential,
     host_t&lt; DVectorFieldRTheta &lt; X , Y &gt; &gt; electric_field,
-    host_t&lt; DConstFieldRTheta &gt; allfdistribu
+    host_t&lt; DConstFieldRTheta &gt; density
 ) const = 0
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>electrostatic_potential</code> The solution of the Quasi-Neutrality equation. </li>
 <li><code>electric_field</code> The electric field . </li>
-<li><code>allfdistribu</code> The rhs of the Quasi-Neutrality equation. </li>
+<li><code>density</code> The rhs of the Quasi-Neutrality equation. </li>
 </ul>
 <hr>
 

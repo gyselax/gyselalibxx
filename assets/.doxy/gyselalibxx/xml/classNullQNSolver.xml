@@ -224,7 +224,7 @@
       <member refid="classNullQNSolver_1aa191a148e484d4c9a3fda39a37ede2f7" prot="public" virt="non-virtual"><scope>NullQNSolver</scope><name>NullQNSolver</name></member>
       <member refid="classNullQNSolver_1ac636ac6b797e8bf883a53955f191d4ed" prot="public" virt="virtual"><scope>NullQNSolver</scope><name>operator()</name></member>
       <member refid="classNullQNSolver_1a561aab367f8d3aa403f59a9a59faa51b" prot="public" virt="virtual"><scope>NullQNSolver</scope><name>operator()</name></member>
-      <member refid="classIQNSolver_1a1398a276bd2f959a0a3474c9d10b94c3" prot="public" virt="pure-virtual" ambiguityscope="IQNSolver::"><scope>NullQNSolver</scope><name>operator()</name></member>
+      <member refid="classIQNSolver_1a948a4ff8d3e0310b132cf7e9a3e27555" prot="public" virt="pure-virtual" ambiguityscope="IQNSolver::"><scope>NullQNSolver</scope><name>operator()</name></member>
       <member refid="classIQNSolver_1a9ebf91996421a1ebfffe7d0225bc37ec" prot="public" virt="virtual"><scope>NullQNSolver</scope><name>~IQNSolver</name></member>
       <member refid="classIQNSolver_1a9ebf91996421a1ebfffe7d0225bc37ec" prot="public" virt="virtual"><scope>NullQNSolver</scope><name>~IQNSolver</name></member>
       <member refid="classIQNSolver_1a9ebf91996421a1ebfffe7d0225bc37ec" prot="public" virt="virtual"><scope>NullQNSolver</scope><name>~IQNSolver</name></member>

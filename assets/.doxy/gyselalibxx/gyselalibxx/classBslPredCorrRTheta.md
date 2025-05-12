@@ -76,7 +76,7 @@ Inherits the following classes: [ITimeSolverRTheta](classITimeSolverRTheta.md)
 | Type | Name |
 | ---: | :--- |
 |   | [**BslPredCorrRTheta**](#function-bslpredcorrrtheta) (Mapping const & mapping, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, SplineRThetaBuilder\_host const & builder, SplineRThetaEvaluatorNullBound\_host const & rhs\_evaluator, [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md)&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), SplineRThetaEvaluatorNullBound &gt; const & poisson\_solver) <br>_Instantiate a_ [_**BslPredCorrRTheta**_](classBslPredCorrRTheta.md) _._ |
-| virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; allfdistribu, double const dt, int const steps) override const<br>_Solves on_  _the equations system._ |
+| virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps) override const<br>_Solves on_  _the equations system._ |
 
 
 ## Public Functions inherited from ITimeSolverRTheta
@@ -85,7 +85,7 @@ See [ITimeSolverRTheta](classITimeSolverRTheta.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](classITimeSolverRTheta.md#function-operator) (host\_t&lt; DFieldRTheta &gt; allfdistribu, double const dt, int const steps=1) const = 0<br>_Solves on_  _the equations system._ |
+| virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](classITimeSolverRTheta.md#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps=1) const = 0<br>_Solves on_  _the equations system._ |
 | virtual  | [**~ITimeSolverRTheta**](classITimeSolverRTheta.md#function-itimesolverrtheta) () = default<br> |
 
 
@@ -244,7 +244,7 @@ inline BslPredCorrRTheta::BslPredCorrRTheta (
 _Solves on_  _the equations system._
 ```C++
 inline virtual host_t< DFieldRTheta > BslPredCorrRTheta::operator() (
-    host_t< DFieldRTheta > allfdistribu,
+    host_t< DFieldRTheta > density,
     double const dt,
     int const steps
 ) override const
@@ -257,7 +257,7 @@ inline virtual host_t< DFieldRTheta > BslPredCorrRTheta::operator() (
 **Parameters:**
 
 
-* `allfdistribu` On input: the initial condition. On output: the solution at . 
+* `density` On input: the initial condition. On output: the solution at . 
 * `dt` The time step. 
 * `steps` The number  of time interactions.
 
@@ -265,7 +265,7 @@ inline virtual host_t< DFieldRTheta > BslPredCorrRTheta::operator() (
 
 **Returns:**
 
-A Field toward allfdistribu. 
+A Field toward density. 
 
 
 

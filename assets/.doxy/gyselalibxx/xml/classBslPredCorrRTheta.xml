@@ -178,16 +178,16 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="98" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="98" bodyend="114"/>
       </memberdef>
-      <memberdef kind="function" id="classBslPredCorrRTheta_1ab4b18b2f58e93e38933d46e3c3da5c5f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+      <memberdef kind="function" id="classBslPredCorrRTheta_1aa1f25f66a355af5b80febe9155fa50f4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>host_t&lt; DFieldRTheta &gt;</type>
         <definition>host_t&lt; DFieldRTheta &gt; BslPredCorrRTheta&lt; Mapping, FootFinder &gt;::operator()</definition>
-        <argsstring>(host_t&lt; DFieldRTheta &gt; allfdistribu_host, double const dt, int const steps) const override</argsstring>
+        <argsstring>(host_t&lt; DFieldRTheta &gt; density_host, double const dt, int const steps) const override</argsstring>
         <name>operator()</name>
         <qualifiedname>BslPredCorrRTheta::operator()</qualifiedname>
-        <reimplements refid="classITimeSolverRTheta_1a5e17feb3b5b1c2cf535b2bf58732e137">operator()</reimplements>
+        <reimplements refid="classITimeSolverRTheta_1ac089fcf48f7648eb92c307453213ba97">operator()</reimplements>
         <param>
           <type>host_t&lt; DFieldRTheta &gt;</type>
-          <declname>allfdistribu</declname>
+          <declname>density</declname>
         </param>
         <param>
           <type>double const</type>
@@ -203,7 +203,7 @@
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername direction="inout">allfdistribu</parametername>
+<parametername direction="inout">density</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>On input: the initial condition. On output: the solution at <formula id="134">$ dt *N$</formula>. </para>
@@ -226,13 +226,13 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>A Field toward allfdistribu. </para>
+<simplesect kind="return"><para>A Field toward density. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="116" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="116" bodyend="218"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="116" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="116" bodyend="214"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -304,7 +304,7 @@
         <link refid="classITimeSolverRTheta"/>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="55" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="56" bodyend="219"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="55" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="56" bodyend="215"/>
     <listofallmembers>
       <member refid="classBslPredCorrRTheta_1ae1e9de22b859cabec7f5f22287e2e3c4" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>BslAdvectionRTheta</name></member>
       <member refid="classBslPredCorrRTheta_1abde2ca091bc04f4ccd7ae310d9a04a04" prot="public" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>BslPredCorrRTheta</name></member>
@@ -314,7 +314,7 @@
       <member refid="classBslPredCorrRTheta_1a5aa7b962bb5276873ce770e8ebf22c44" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>m_mapping</name></member>
       <member refid="classBslPredCorrRTheta_1a143881b77cdfb39a66b38f4afafa4adc" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>m_poisson_solver</name></member>
       <member refid="classBslPredCorrRTheta_1a56194097c5f870bc664f3d65f2993c40" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>m_spline_evaluator</name></member>
-      <member refid="classBslPredCorrRTheta_1ab4b18b2f58e93e38933d46e3c3da5c5f" prot="public" virt="virtual"><scope>BslPredCorrRTheta</scope><name>operator()</name></member>
+      <member refid="classBslPredCorrRTheta_1aa1f25f66a355af5b80febe9155fa50f4" prot="public" virt="virtual"><scope>BslPredCorrRTheta</scope><name>operator()</name></member>
       <member refid="classITimeSolverRTheta_1afc3a0e07f492d601b0793a9dfba47bfb" prot="public" virt="virtual"><scope>BslPredCorrRTheta</scope><name>~ITimeSolverRTheta</name></member>
     </listofallmembers>
   </compounddef>

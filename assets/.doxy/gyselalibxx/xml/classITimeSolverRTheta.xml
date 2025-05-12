@@ -21,18 +21,18 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/itimesolver.hpp" line="13" column="13"/>
       </memberdef>
-      <memberdef kind="function" id="classITimeSolverRTheta_1a5e17feb3b5b1c2cf535b2bf58732e137" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+      <memberdef kind="function" id="classITimeSolverRTheta_1ac089fcf48f7648eb92c307453213ba97" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>host_t&lt; DFieldRTheta &gt;</type>
         <definition>virtual host_t&lt; DFieldRTheta &gt; ITimeSolverRTheta::operator()</definition>
-        <argsstring>(host_t&lt; DFieldRTheta &gt; allfdistribu, double const dt, int const steps=1) const =0</argsstring>
+        <argsstring>(host_t&lt; DFieldRTheta &gt; density, double const dt, int const steps=1) const =0</argsstring>
         <name>operator()</name>
         <qualifiedname>ITimeSolverRTheta::operator()</qualifiedname>
-        <reimplementedby refid="classBslExplicitPredCorrRTheta_1a73344fb86202d79193d2bb3da2a6fae3">operator()</reimplementedby>
-        <reimplementedby refid="classBslImplicitPredCorrRTheta_1aa9c8a28861bf06a7d477ef7e9cf1a4c4">operator()</reimplementedby>
-        <reimplementedby refid="classBslPredCorrRTheta_1ab4b18b2f58e93e38933d46e3c3da5c5f">operator()</reimplementedby>
+        <reimplementedby refid="classBslExplicitPredCorrRTheta_1a4a2276bdff30b6251ee191e7b46b8129">operator()</reimplementedby>
+        <reimplementedby refid="classBslImplicitPredCorrRTheta_1adc590a931bd7c3e2e526feaf8ae9b49e">operator()</reimplementedby>
+        <reimplementedby refid="classBslPredCorrRTheta_1aa1f25f66a355af5b80febe9155fa50f4">operator()</reimplementedby>
         <param>
           <type>host_t&lt; DFieldRTheta &gt;</type>
-          <declname>allfdistribu</declname>
+          <declname>density</declname>
         </param>
         <param>
           <type>double const</type>
@@ -49,7 +49,7 @@
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername direction="inout">allfdistribu</parametername>
+<parametername direction="inout">density</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>On input: the initial condition. On output: the solution at <formula id="134">$ dt *N$</formula>. </para>
@@ -72,7 +72,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>A Field toward allfdistribu. </para>
+<simplesect kind="return"><para>A Field toward density. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -169,7 +169,7 @@
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/itimesolver.hpp" line="10" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/itimesolver.hpp" bodystart="11" bodyend="65"/>
     <listofallmembers>
       <member refid="classITimeSolverRTheta_1a5503beee2f7240e8b09ef8ac3be2af24" prot="protected" virt="non-virtual"><scope>ITimeSolverRTheta</scope><name>display_time_difference</name></member>
-      <member refid="classITimeSolverRTheta_1a5e17feb3b5b1c2cf535b2bf58732e137" prot="public" virt="pure-virtual"><scope>ITimeSolverRTheta</scope><name>operator()</name></member>
+      <member refid="classITimeSolverRTheta_1ac089fcf48f7648eb92c307453213ba97" prot="public" virt="pure-virtual"><scope>ITimeSolverRTheta</scope><name>operator()</name></member>
       <member refid="classITimeSolverRTheta_1afc3a0e07f492d601b0793a9dfba47bfb" prot="public" virt="virtual"><scope>ITimeSolverRTheta</scope><name>~ITimeSolverRTheta</name></member>
     </listofallmembers>
   </compounddef>

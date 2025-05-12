@@ -340,7 +340,7 @@
       <member refid="classQNSolver_1a477aa8a214b2de0f9c73797237a8e2aa" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>m_solve_poisson</name></member>
       <member refid="classQNSolver_1a866ea0a8cd34e7789d8847aaf963fdf2" prot="public" virt="virtual"><scope>QNSolver</scope><name>operator()</name></member>
       <member refid="classQNSolver_1a2472bab9fe832f065531f90c605df7dc" prot="public" virt="virtual"><scope>QNSolver</scope><name>operator()</name></member>
-      <member refid="classIQNSolver_1a1398a276bd2f959a0a3474c9d10b94c3" prot="public" virt="pure-virtual" ambiguityscope="IQNSolver::"><scope>QNSolver</scope><name>operator()</name></member>
+      <member refid="classIQNSolver_1a948a4ff8d3e0310b132cf7e9a3e27555" prot="public" virt="pure-virtual" ambiguityscope="IQNSolver::"><scope>QNSolver</scope><name>operator()</name></member>
       <member refid="classQNSolver_1a6447567016ca2420c44ca68c93359e7f" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>PoissonSolver</name></member>
       <member refid="classQNSolver_1afd497ed74760ba783f099dff65865448" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>PoissonSolver</name></member>
       <member refid="classQNSolver_1a8e24e91f5ed1c4bb590e93eb4f1f81ba" prot="public" virt="non-virtual"><scope>QNSolver</scope><name>QNSolver</name></member>

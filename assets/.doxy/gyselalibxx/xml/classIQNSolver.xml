@@ -22,10 +22,10 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/iqnsolver.hpp" line="15" column="13"/>
       </memberdef>
-      <memberdef kind="function" id="classIQNSolver_1a1398a276bd2f959a0a3474c9d10b94c3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+      <memberdef kind="function" id="classIQNSolver_1a948a4ff8d3e0310b132cf7e9a3e27555" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
         <definition>virtual void IQNSolver::operator()</definition>
-        <argsstring>(host_t&lt; DFieldRTheta &gt; electrostatic_potential, host_t&lt; DVectorFieldRTheta&lt; X, Y &gt; &gt; electric_field, host_t&lt; DConstFieldRTheta &gt; allfdistribu) const =0</argsstring>
+        <argsstring>(host_t&lt; DFieldRTheta &gt; electrostatic_potential, host_t&lt; DVectorFieldRTheta&lt; X, Y &gt; &gt; electric_field, host_t&lt; DConstFieldRTheta &gt; density) const =0</argsstring>
         <name>operator()</name>
         <qualifiedname>IQNSolver::operator()</qualifiedname>
         <param>
@@ -38,7 +38,7 @@
         </param>
         <param>
           <type>host_t&lt; DConstFieldRTheta &gt;</type>
-          <declname>allfdistribu</declname>
+          <declname>density</declname>
         </param>
         <briefdescription>
 <para>Compute the electrical potential and the electric field from the Quasi-Neutrality equation. </para>
@@ -62,7 +62,7 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="in">allfdistribu</parametername>
+<parametername direction="in">density</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>The rhs of the Quasi-Neutrality equation. </para>
@@ -259,7 +259,7 @@
     </inheritancegraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/iqnsolver.hpp" line="12" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/iqnsolver.hpp" bodystart="13" bodyend="32"/>
     <listofallmembers>
-      <member refid="classIQNSolver_1a1398a276bd2f959a0a3474c9d10b94c3" prot="public" virt="pure-virtual"><scope>IQNSolver</scope><name>operator()</name></member>
+      <member refid="classIQNSolver_1a948a4ff8d3e0310b132cf7e9a3e27555" prot="public" virt="pure-virtual"><scope>IQNSolver</scope><name>operator()</name></member>
       <member refid="classIQNSolver_1a0a2d3c31695c821a43582f1c2cd4e928" prot="public" virt="pure-virtual"><scope>IQNSolver</scope><name>operator()</name></member>
       <member refid="classIQNSolver_1a2d17c3f1156a26b08313ba199b7c2fc4" prot="public" virt="pure-virtual"><scope>IQNSolver</scope><name>operator()</name></member>
       <member refid="classIQNSolver_1a9ebf91996421a1ebfffe7d0225bc37ec" prot="public" virt="virtual"><scope>IQNSolver</scope><name>~IQNSolver</name></member>

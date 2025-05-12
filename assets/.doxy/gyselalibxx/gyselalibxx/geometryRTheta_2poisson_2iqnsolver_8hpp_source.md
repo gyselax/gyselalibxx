@@ -24,7 +24,7 @@ public:
     virtual void operator()(
             host_t<DFieldRTheta> electrostatic_potential,
             host_t<DVectorFieldRTheta<X, Y>> electric_field,
-            host_t<DConstFieldRTheta> allfdistribu) const = 0;
+            host_t<DConstFieldRTheta> density) const = 0;
 };
 ```
 

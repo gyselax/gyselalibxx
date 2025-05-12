@@ -286,16 +286,16 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_explicit.hpp" line="136" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_explicit.hpp" bodystart="136" bodyend="161"/>
       </memberdef>
-      <memberdef kind="function" id="classBslExplicitPredCorrRTheta_1a73344fb86202d79193d2bb3da2a6fae3" prot="public" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="virtual">
+      <memberdef kind="function" id="classBslExplicitPredCorrRTheta_1a4a2276bdff30b6251ee191e7b46b8129" prot="public" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="virtual">
         <type>host_t&lt; DFieldRTheta &gt;</type>
         <definition>host_t&lt; DFieldRTheta &gt; BslExplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;::operator()</definition>
-        <argsstring>(host_t&lt; DFieldRTheta &gt; allfdistribu_host, double const dt, int const steps) const final</argsstring>
+        <argsstring>(host_t&lt; DFieldRTheta &gt; density_host, double const dt, int const steps) const final</argsstring>
         <name>operator()</name>
         <qualifiedname>BslExplicitPredCorrRTheta::operator()</qualifiedname>
-        <reimplements refid="classITimeSolverRTheta_1a5e17feb3b5b1c2cf535b2bf58732e137">operator()</reimplements>
+        <reimplements refid="classITimeSolverRTheta_1ac089fcf48f7648eb92c307453213ba97">operator()</reimplements>
         <param>
           <type>host_t&lt; DFieldRTheta &gt;</type>
-          <declname>allfdistribu</declname>
+          <declname>density</declname>
         </param>
         <param>
           <type>double const</type>
@@ -311,7 +311,7 @@
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername direction="inout">allfdistribu</parametername>
+<parametername direction="inout">density</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>On input: the initial condition. On output: the solution at <formula id="134">$ dt *N$</formula>. </para>
@@ -334,7 +334,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>A Field toward allfdistribu. </para>
+<simplesect kind="return"><para>A Field toward density. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -428,7 +428,7 @@
       <member refid="classBslExplicitPredCorrRTheta_1a6a6546bba2fe4df3a59e90e86bbd94e5" prot="private" virt="non-virtual"><scope>BslExplicitPredCorrRTheta</scope><name>m_find_feet</name></member>
       <member refid="classBslExplicitPredCorrRTheta_1a55a0f1429b18dd3ad7efd78bde327aba" prot="private" virt="non-virtual"><scope>BslExplicitPredCorrRTheta</scope><name>m_logical_to_physical</name></member>
       <member refid="classBslExplicitPredCorrRTheta_1ae371ae1d0d4d194decbe71a6e413e248" prot="private" virt="non-virtual"><scope>BslExplicitPredCorrRTheta</scope><name>m_poisson_solver</name></member>
-      <member refid="classBslExplicitPredCorrRTheta_1a73344fb86202d79193d2bb3da2a6fae3" prot="public" virt="virtual"><scope>BslExplicitPredCorrRTheta</scope><name>operator()</name></member>
+      <member refid="classBslExplicitPredCorrRTheta_1a4a2276bdff30b6251ee191e7b46b8129" prot="public" virt="virtual"><scope>BslExplicitPredCorrRTheta</scope><name>operator()</name></member>
       <member refid="classBslExplicitPredCorrRTheta_1aa0c43f7fbedc63fc427f430d3c82496c" prot="private" virt="non-virtual"><scope>BslExplicitPredCorrRTheta</scope><name>SplinePolarFootFinderType</name></member>
       <member refid="classBslExplicitPredCorrRTheta_1a96e06524fd78bb7f78de6792c4d877e9" prot="private" virt="non-virtual"><scope>BslExplicitPredCorrRTheta</scope><name>SplinePolarFootFinderType_host</name></member>
       <member refid="classITimeSolverRTheta_1afc3a0e07f492d601b0793a9dfba47bfb" prot="public" virt="virtual"><scope>BslExplicitPredCorrRTheta</scope><name>~ITimeSolverRTheta</name></member>

@@ -53,7 +53,7 @@ Inherited by the following classes: [BslExplicitPredCorrRTheta](classBslExplicit
 
 | Type | Name |
 | ---: | :--- |
-| virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; allfdistribu, double const dt, int const steps=1) const = 0<br>_Solves on_  _the equations system._ |
+| virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps=1) const = 0<br>_Solves on_  _the equations system._ |
 | virtual  | [**~ITimeSolverRTheta**](#function-itimesolverrtheta) () = default<br> |
 
 
@@ -98,7 +98,7 @@ Inherited by the following classes: [BslExplicitPredCorrRTheta](classBslExplicit
 _Solves on_  _the equations system._
 ```C++
 virtual host_t< DFieldRTheta > ITimeSolverRTheta::operator() (
-    host_t< DFieldRTheta > allfdistribu,
+    host_t< DFieldRTheta > density,
     double const dt,
     int const steps=1
 ) const = 0
@@ -111,7 +111,7 @@ virtual host_t< DFieldRTheta > ITimeSolverRTheta::operator() (
 **Parameters:**
 
 
-* `allfdistribu` On input: the initial condition. On output: the solution at . 
+* `density` On input: the initial condition. On output: the solution at . 
 * `dt` The time step. 
 * `steps` The number  of time interactions.
 
@@ -119,7 +119,7 @@ virtual host_t< DFieldRTheta > ITimeSolverRTheta::operator() (
 
 **Returns:**
 
-A Field toward allfdistribu. 
+A Field toward density. 
 
 
 

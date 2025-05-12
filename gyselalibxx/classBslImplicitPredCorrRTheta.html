@@ -564,7 +564,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">virtual host_t&lt; DFieldRTheta &gt;</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (host_t&lt; DFieldRTheta &gt; allfdistribu, double const dt, int const steps) const<br><em>Solves on</em>  <em>the equations system.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (host_t&lt; DFieldRTheta &gt; density, double const dt, int const steps) const<br><em>Solves on</em>  <em>the equations system.</em></td>
 </tr>
 </tbody>
 </table>
@@ -580,7 +580,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">virtual host_t&lt; DFieldRTheta &gt;</td>
-<td style="text-align: left;"><a href="classITimeSolverRTheta.html#function-operator"><strong>operator()</strong></a> (host_t&lt; DFieldRTheta &gt; allfdistribu, double const dt, int const steps=1) const = 0<br><em>Solves on</em>  <em>the equations system.</em></td>
+<td style="text-align: left;"><a href="classITimeSolverRTheta.html#function-operator"><strong>operator()</strong></a> (host_t&lt; DFieldRTheta &gt; density, double const dt, int const steps=1) const = 0<br><em>Solves on</em>  <em>the equations system.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual</td>
@@ -659,19 +659,19 @@
 <h3 id="function-operator">function operator()</h3>
 <p><em>Solves on</em>  <em>the equations system.</em></p>
 <pre><code class="language-C++">inline virtual host_t&lt; DFieldRTheta &gt; BslImplicitPredCorrRTheta::operator() (
-    host_t&lt; DFieldRTheta &gt; allfdistribu,
+    host_t&lt; DFieldRTheta &gt; density,
     double const dt,
     int const steps
 ) const
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>allfdistribu</code> On input: the initial condition. On output: the solution at . </li>
+<li><code>density</code> On input: the initial condition. On output: the solution at . </li>
 <li><code>dt</code> The time step. </li>
 <li><code>steps</code> The number  of time interactions.</li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>A Field toward allfdistribu. </p>
+<p>A Field toward density. </p>
 <p>Implements <a href="classITimeSolverRTheta.html#function-operator"><em>ITimeSolverRTheta::operator()</em></a></p>
 <hr>
 

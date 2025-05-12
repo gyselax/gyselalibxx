@@ -146,7 +146,7 @@
     <member refid="classBslExplicitPredCorrRTheta_1a9b55ed58b927066d14a236c8148cef8c" kind="variable"><name>m_builder</name></member>
     <member refid="classBslExplicitPredCorrRTheta_1a1c205dcdd73840091438d740c1de0fe6" kind="variable"><name>m_evaluator</name></member>
     <member refid="classBslExplicitPredCorrRTheta_1a6ba23add7a9312e9feb6ea80d0204d79" kind="function"><name>BslExplicitPredCorrRTheta</name></member>
-    <member refid="classBslExplicitPredCorrRTheta_1a73344fb86202d79193d2bb3da2a6fae3" kind="function"><name>operator()</name></member>
+    <member refid="classBslExplicitPredCorrRTheta_1a4a2276bdff30b6251ee191e7b46b8129" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classBslImplicitPredCorrRTheta" kind="class"><name>BslImplicitPredCorrRTheta</name>
     <member refid="classBslImplicitPredCorrRTheta_1a4a0005626551c918d876f493374cd555" kind="typedef"><name>EulerMethod</name></member>
@@ -162,7 +162,7 @@
     <member refid="classBslImplicitPredCorrRTheta_1a30dec681fdf8580f57b31ae75663f229" kind="variable"><name>m_builder</name></member>
     <member refid="classBslImplicitPredCorrRTheta_1ac2e3fd41adc80b455d6d971f0cd8087a" kind="variable"><name>m_evaluator</name></member>
     <member refid="classBslImplicitPredCorrRTheta_1a8b2254fdb0e99c8cd064d1d9403a8bd6" kind="function"><name>BslImplicitPredCorrRTheta</name></member>
-    <member refid="classBslImplicitPredCorrRTheta_1aa9c8a28861bf06a7d477ef7e9cf1a4c4" kind="function"><name>operator()</name></member>
+    <member refid="classBslImplicitPredCorrRTheta_1adc590a931bd7c3e2e526feaf8ae9b49e" kind="function"><name>operator()</name></member>
     <member refid="classBslImplicitPredCorrRTheta_1a21996db8281effe305258715e9fb3bda" kind="function"><name>compute_square_polar_distance</name></member>
     <member refid="classBslImplicitPredCorrRTheta_1a546d332dc643c3ceb532b9e2ea778e05" kind="function"><name>implicit_loop</name></member>
   </compound>
@@ -174,7 +174,7 @@
     <member refid="classBslPredCorrRTheta_1a556c9f8698d5c8b5b8ec9e40799fa4bc" kind="variable"><name>m_builder</name></member>
     <member refid="classBslPredCorrRTheta_1a56194097c5f870bc664f3d65f2993c40" kind="variable"><name>m_spline_evaluator</name></member>
     <member refid="classBslPredCorrRTheta_1abde2ca091bc04f4ccd7ae310d9a04a04" kind="function"><name>BslPredCorrRTheta</name></member>
-    <member refid="classBslPredCorrRTheta_1ab4b18b2f58e93e38933d46e3c3da5c5f" kind="function"><name>operator()</name></member>
+    <member refid="classBslPredCorrRTheta_1aa1f25f66a355af5b80febe9155fa50f4" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structBSplinesMu" kind="struct"><name>BSplinesMu</name>
   </compound>
@@ -1439,7 +1439,7 @@
   </compound>
   <compound refid="classIQNSolver" kind="class"><name>IQNSolver</name>
     <member refid="classIQNSolver_1a9ebf91996421a1ebfffe7d0225bc37ec" kind="function"><name>~IQNSolver</name></member>
-    <member refid="classIQNSolver_1a1398a276bd2f959a0a3474c9d10b94c3" kind="function"><name>operator()</name></member>
+    <member refid="classIQNSolver_1a948a4ff8d3e0310b132cf7e9a3e27555" kind="function"><name>operator()</name></member>
     <member refid="classIQNSolver_1a9ebf91996421a1ebfffe7d0225bc37ec" kind="function"><name>~IQNSolver</name></member>
     <member refid="classIQNSolver_1a0a2d3c31695c821a43582f1c2cd4e928" kind="function"><name>operator()</name></member>
     <member refid="classIQNSolver_1a9ebf91996421a1ebfffe7d0225bc37ec" kind="function"><name>~IQNSolver</name></member>
@@ -1483,7 +1483,7 @@
   </compound>
   <compound refid="classITimeSolverRTheta" kind="class"><name>ITimeSolverRTheta</name>
     <member refid="classITimeSolverRTheta_1afc3a0e07f492d601b0793a9dfba47bfb" kind="function"><name>~ITimeSolverRTheta</name></member>
-    <member refid="classITimeSolverRTheta_1a5e17feb3b5b1c2cf535b2bf58732e137" kind="function"><name>operator()</name></member>
+    <member refid="classITimeSolverRTheta_1ac089fcf48f7648eb92c307453213ba97" kind="function"><name>operator()</name></member>
     <member refid="classITimeSolverRTheta_1a5503beee2f7240e8b09ef8ac3be2af24" kind="function"><name>display_time_difference</name></member>
   </compound>
   <compound refid="classITimeStepper" kind="class"><name>ITimeStepper</name>
@@ -3088,67 +3088,13 @@
   </compound>
   <compound refid="splitrighthandsidesolver_8hpp" kind="file"><name>splitrighthandsidesolver.hpp</name>
   </compound>
-  <compound refid="bumpontailequilibrium_8cpp" kind="file"><name>bumpontailequilibrium.cpp</name>
+  <compound refid="geometryXVx_2boltzmann_2splitvlasovsolver_8cpp" kind="file"><name>splitvlasovsolver.cpp</name>
   </compound>
-  <compound refid="bumpontailequilibrium_8hpp" kind="file"><name>bumpontailequilibrium.hpp</name>
+  <compound refid="geometryXYVxVy_2vlasov_2splitvlasovsolver_8cpp" kind="file"><name>splitvlasovsolver.cpp</name>
   </compound>
-  <compound refid="restartinitialisation_8cpp" kind="file"><name>restartinitialisation.cpp</name>
+  <compound refid="geometryXVx_2boltzmann_2splitvlasovsolver_8hpp" kind="file"><name>splitvlasovsolver.hpp</name>
   </compound>
-  <compound refid="restartinitialisation_8hpp" kind="file"><name>restartinitialisation.hpp</name>
-  </compound>
-  <compound refid="collisions__inter_8cpp" kind="file"><name>collisions_inter.cpp</name>
-  </compound>
-  <compound refid="collisions__inter_8hpp" kind="file"><name>collisions_inter.hpp</name>
-  </compound>
-  <compound refid="collisions__intra_8cpp" kind="file"><name>collisions_intra.cpp</name>
-  </compound>
-  <compound refid="collisions__intra_8hpp" kind="file"><name>collisions_intra.hpp</name>
-  </compound>
-  <compound refid="collisions__utils_8cpp" kind="file"><name>collisions_utils.cpp</name>
-    <member refid="collisions__utils_8cpp_1a061c9339377734f3a5ac33a1992af90b" kind="function"><name>compute_nustar_profile</name></member>
-    <member refid="collisions__utils_8cpp_1a81aa94f23c0077eb246cc7c61d0847d4" kind="function"><name>compute_collfreq</name></member>
-    <member refid="collisions__utils_8cpp_1a515158104a83129c9debd5291e24ec51" kind="function"><name>compute_collfreq_ab</name></member>
-    <member refid="collisions__utils_8cpp_1a9f38a9a1c55a34e7ec0bf7b9f0952ba6" kind="function"><name>compute_momentum_energy_exchange</name></member>
-  </compound>
-  <compound refid="collisions__utils_8hpp" kind="file"><name>collisions_utils.hpp</name>
-    <member refid="collisions__utils_8hpp_1a061c9339377734f3a5ac33a1992af90b" kind="function"><name>compute_nustar_profile</name></member>
-    <member refid="collisions__utils_8hpp_1a81aa94f23c0077eb246cc7c61d0847d4" kind="function"><name>compute_collfreq</name></member>
-    <member refid="collisions__utils_8hpp_1a6601cfb5435dce4dcf3c42305f4fe294" kind="function"><name>compute_Dcoll</name></member>
-    <member refid="collisions__utils_8hpp_1af5a055a05abac0aab12076f9959077c5" kind="function"><name>compute_dvDcoll</name></member>
-    <member refid="collisions__utils_8hpp_1a9a732a52c1ffebbbe75ee4ceed3c0df6" kind="function"><name>compute_Vcoll_Tcoll</name></member>
-    <member refid="collisions__utils_8hpp_1aaf3eecb83672e2ea25fb81b8ca4a13ce" kind="function"><name>compute_Nucoll</name></member>
-    <member refid="collisions__utils_8hpp_1a515158104a83129c9debd5291e24ec51" kind="function"><name>compute_collfreq_ab</name></member>
-    <member refid="collisions__utils_8hpp_1a9f38a9a1c55a34e7ec0bf7b9f0952ba6" kind="function"><name>compute_momentum_energy_exchange</name></member>
-  </compound>
-  <compound refid="irighthandside_8hpp" kind="file"><name>irighthandside.hpp</name>
-    <member refid="irighthandside_8hpp_1a53951f67243a4ec3517b6ac499e14ad9" kind="enum"><name>RhsType</name></member>
-    <member refid="irighthandside_8hpp_1a53951f67243a4ec3517b6ac499e14ad9af31bbdd1b3e85bccd652680e16935819" kind="enumvalue"><name>Source</name></member>
-    <member refid="irighthandside_8hpp_1a53951f67243a4ec3517b6ac499e14ad9a1eb558b5d865ebabb06575f5f0042599" kind="enumvalue"><name>Sink</name></member>
-  </compound>
-  <compound refid="kinetic__source_8cpp" kind="file"><name>kinetic_source.cpp</name>
-  </compound>
-  <compound refid="kinetic__source_8hpp" kind="file"><name>kinetic_source.hpp</name>
-  </compound>
-  <compound refid="krook__source__adaptive_8cpp" kind="file"><name>krook_source_adaptive.cpp</name>
-  </compound>
-  <compound refid="krook__source__adaptive_8hpp" kind="file"><name>krook_source_adaptive.hpp</name>
-  </compound>
-  <compound refid="krook__source__constant_8cpp" kind="file"><name>krook_source_constant.cpp</name>
-  </compound>
-  <compound refid="krook__source__constant_8hpp" kind="file"><name>krook_source_constant.hpp</name>
-  </compound>
-  <compound refid="mask__tanh_8cpp" kind="file"><name>mask_tanh.cpp</name>
-    <member refid="mask__tanh_8cpp_1a6598f4553f2760641903518fcd1c8d34" kind="function"><name>mask_tanh</name></member>
-  </compound>
-  <compound refid="mask__tanh_8hpp" kind="file"><name>mask_tanh.hpp</name>
-    <member refid="mask__tanh_8hpp_1a6f9734fca864f135565da5376b5c3e72" kind="enum"><name>MaskType</name></member>
-    <member refid="mask__tanh_8hpp_1a6f9734fca864f135565da5376b5c3e72a960b44c579bc2f6818d2daaf9e4c16f0" kind="enumvalue"><name>Normal</name></member>
-    <member refid="mask__tanh_8hpp_1a6f9734fca864f135565da5376b5c3e72acf4c2a4bf7c328c4e51f902350475343" kind="enumvalue"><name>Inverted</name></member>
-    <member refid="mask__tanh_8hpp_1a1d4432f5d3a7e655b4faae141b2d4eea" kind="function"><name>mask_tanh</name></member>
-  </compound>
-  <compound refid="fluid__moments_8cpp" kind="file"><name>fluid_moments.cpp</name>
-  </compound>
-  <compound refid="fluid__moments_8hpp" kind="file"><name>fluid_moments.hpp</name>
+  <compound refid="geometryXYVxVy_2vlasov_2splitvlasovsolver_8hpp" kind="file"><name>splitvlasovsolver.hpp</name>
   </compound>
   <compound refid="geometryRTheta_2geometry_2geometry_8hpp" kind="file"><name>geometry.hpp</name>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a3cd8a3421aa474d31f7046b09c1056ab" kind="typedef"><name>CoordR</name></member>
@@ -3536,9 +3482,9 @@
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a3b0117d0dac4046287f6ca7e9fb498e1" kind="variable"><name>SplineVxBoundary</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a2fef8aca81ca6554971e30628ddb8be2" kind="variable"><name>SplineVyBoundary</name></member>
   </compound>
-  <compound refid="initialisation__Kelvin__Helmholtz_8hpp" kind="file"><name>initialisation_Kelvin_Helmholtz.hpp</name>
+  <compound refid="bumpontailequilibrium_8cpp" kind="file"><name>bumpontailequilibrium.cpp</name>
   </compound>
-  <compound refid="predcorr__RK2_8hpp" kind="file"><name>predcorr_RK2.hpp</name>
+  <compound refid="bumpontailequilibrium_8hpp" kind="file"><name>bumpontailequilibrium.hpp</name>
   </compound>
   <compound refid="geometryVparMu_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
   </compound>
@@ -3563,6 +3509,10 @@
   <compound refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
   </compound>
   <compound refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
+  </compound>
+  <compound refid="restartinitialisation_8cpp" kind="file"><name>restartinitialisation.cpp</name>
+  </compound>
+  <compound refid="restartinitialisation_8hpp" kind="file"><name>restartinitialisation.hpp</name>
   </compound>
   <compound refid="geometryXVx_2initialisation_2singlemodeperturbinitialisation_8cpp" kind="file"><name>singlemodeperturbinitialisation.cpp</name>
   </compound>
@@ -3590,10 +3540,6 @@
   </compound>
   <compound refid="geometryXYVxVy_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
   </compound>
-  <compound refid="mpichargedensitycalculator_8cpp" kind="file"><name>mpichargedensitycalculator.cpp</name>
-  </compound>
-  <compound refid="mpichargedensitycalculator_8hpp" kind="file"><name>mpichargedensitycalculator.hpp</name>
-  </compound>
   <compound refid="geometryXVx_2poisson_2nullqnsolver_8cpp" kind="file"><name>nullqnsolver.cpp</name>
   </compound>
   <compound refid="geometryXYVxVy_2poisson_2nullqnsolver_8cpp" kind="file"><name>nullqnsolver.cpp</name>
@@ -3610,6 +3556,56 @@
   </compound>
   <compound refid="geometryXYVxVy_2poisson_2qnsolver_8hpp" kind="file"><name>qnsolver.hpp</name>
   </compound>
+  <compound refid="collisions__inter_8cpp" kind="file"><name>collisions_inter.cpp</name>
+  </compound>
+  <compound refid="collisions__inter_8hpp" kind="file"><name>collisions_inter.hpp</name>
+  </compound>
+  <compound refid="collisions__intra_8cpp" kind="file"><name>collisions_intra.cpp</name>
+  </compound>
+  <compound refid="collisions__intra_8hpp" kind="file"><name>collisions_intra.hpp</name>
+  </compound>
+  <compound refid="collisions__utils_8cpp" kind="file"><name>collisions_utils.cpp</name>
+    <member refid="collisions__utils_8cpp_1a061c9339377734f3a5ac33a1992af90b" kind="function"><name>compute_nustar_profile</name></member>
+    <member refid="collisions__utils_8cpp_1a81aa94f23c0077eb246cc7c61d0847d4" kind="function"><name>compute_collfreq</name></member>
+    <member refid="collisions__utils_8cpp_1a515158104a83129c9debd5291e24ec51" kind="function"><name>compute_collfreq_ab</name></member>
+    <member refid="collisions__utils_8cpp_1a9f38a9a1c55a34e7ec0bf7b9f0952ba6" kind="function"><name>compute_momentum_energy_exchange</name></member>
+  </compound>
+  <compound refid="collisions__utils_8hpp" kind="file"><name>collisions_utils.hpp</name>
+    <member refid="collisions__utils_8hpp_1a061c9339377734f3a5ac33a1992af90b" kind="function"><name>compute_nustar_profile</name></member>
+    <member refid="collisions__utils_8hpp_1a81aa94f23c0077eb246cc7c61d0847d4" kind="function"><name>compute_collfreq</name></member>
+    <member refid="collisions__utils_8hpp_1a6601cfb5435dce4dcf3c42305f4fe294" kind="function"><name>compute_Dcoll</name></member>
+    <member refid="collisions__utils_8hpp_1af5a055a05abac0aab12076f9959077c5" kind="function"><name>compute_dvDcoll</name></member>
+    <member refid="collisions__utils_8hpp_1a9a732a52c1ffebbbe75ee4ceed3c0df6" kind="function"><name>compute_Vcoll_Tcoll</name></member>
+    <member refid="collisions__utils_8hpp_1aaf3eecb83672e2ea25fb81b8ca4a13ce" kind="function"><name>compute_Nucoll</name></member>
+    <member refid="collisions__utils_8hpp_1a515158104a83129c9debd5291e24ec51" kind="function"><name>compute_collfreq_ab</name></member>
+    <member refid="collisions__utils_8hpp_1a9f38a9a1c55a34e7ec0bf7b9f0952ba6" kind="function"><name>compute_momentum_energy_exchange</name></member>
+  </compound>
+  <compound refid="irighthandside_8hpp" kind="file"><name>irighthandside.hpp</name>
+    <member refid="irighthandside_8hpp_1a53951f67243a4ec3517b6ac499e14ad9" kind="enum"><name>RhsType</name></member>
+    <member refid="irighthandside_8hpp_1a53951f67243a4ec3517b6ac499e14ad9af31bbdd1b3e85bccd652680e16935819" kind="enumvalue"><name>Source</name></member>
+    <member refid="irighthandside_8hpp_1a53951f67243a4ec3517b6ac499e14ad9a1eb558b5d865ebabb06575f5f0042599" kind="enumvalue"><name>Sink</name></member>
+  </compound>
+  <compound refid="kinetic__source_8cpp" kind="file"><name>kinetic_source.cpp</name>
+  </compound>
+  <compound refid="kinetic__source_8hpp" kind="file"><name>kinetic_source.hpp</name>
+  </compound>
+  <compound refid="krook__source__adaptive_8cpp" kind="file"><name>krook_source_adaptive.cpp</name>
+  </compound>
+  <compound refid="krook__source__adaptive_8hpp" kind="file"><name>krook_source_adaptive.hpp</name>
+  </compound>
+  <compound refid="krook__source__constant_8cpp" kind="file"><name>krook_source_constant.cpp</name>
+  </compound>
+  <compound refid="krook__source__constant_8hpp" kind="file"><name>krook_source_constant.hpp</name>
+  </compound>
+  <compound refid="mask__tanh_8cpp" kind="file"><name>mask_tanh.cpp</name>
+    <member refid="mask__tanh_8cpp_1a6598f4553f2760641903518fcd1c8d34" kind="function"><name>mask_tanh</name></member>
+  </compound>
+  <compound refid="mask__tanh_8hpp" kind="file"><name>mask_tanh.hpp</name>
+    <member refid="mask__tanh_8hpp_1a6f9734fca864f135565da5376b5c3e72" kind="enum"><name>MaskType</name></member>
+    <member refid="mask__tanh_8hpp_1a6f9734fca864f135565da5376b5c3e72a960b44c579bc2f6818d2daaf9e4c16f0" kind="enumvalue"><name>Normal</name></member>
+    <member refid="mask__tanh_8hpp_1a6f9734fca864f135565da5376b5c3e72acf4c2a4bf7c328c4e51f902350475343" kind="enumvalue"><name>Inverted</name></member>
+    <member refid="mask__tanh_8hpp_1a1d4432f5d3a7e655b4faae141b2d4eea" kind="function"><name>mask_tanh</name></member>
+  </compound>
   <compound refid="geometryRTheta_2time__solver_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
   </compound>
   <compound refid="geometryXVx_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
@@ -3624,19 +3620,23 @@
   </compound>
   <compound refid="geometryXYVxVy_2time__integration_2predcorr_8hpp" kind="file"><name>predcorr.hpp</name>
   </compound>
+  <compound refid="fluid__moments_8cpp" kind="file"><name>fluid_moments.cpp</name>
+  </compound>
+  <compound refid="fluid__moments_8hpp" kind="file"><name>fluid_moments.hpp</name>
+  </compound>
+  <compound refid="initialisation__Kelvin__Helmholtz_8hpp" kind="file"><name>initialisation_Kelvin_Helmholtz.hpp</name>
+  </compound>
+  <compound refid="predcorr__RK2_8hpp" kind="file"><name>predcorr_RK2.hpp</name>
+  </compound>
+  <compound refid="mpichargedensitycalculator_8cpp" kind="file"><name>mpichargedensitycalculator.cpp</name>
+  </compound>
+  <compound refid="mpichargedensitycalculator_8hpp" kind="file"><name>mpichargedensitycalculator.hpp</name>
+  </compound>
   <compound refid="ivlasovsolver_8hpp" kind="file"><name>ivlasovsolver.hpp</name>
   </compound>
   <compound refid="mpisplitvlasovsolver_8cpp" kind="file"><name>mpisplitvlasovsolver.cpp</name>
   </compound>
   <compound refid="mpisplitvlasovsolver_8hpp" kind="file"><name>mpisplitvlasovsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2boltzmann_2splitvlasovsolver_8cpp" kind="file"><name>splitvlasovsolver.cpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2vlasov_2splitvlasovsolver_8cpp" kind="file"><name>splitvlasovsolver.cpp</name>
-  </compound>
-  <compound refid="geometryXVx_2boltzmann_2splitvlasovsolver_8hpp" kind="file"><name>splitvlasovsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2vlasov_2splitvlasovsolver_8hpp" kind="file"><name>splitvlasovsolver.hpp</name>
   </compound>
   <compound refid="i__interpolator__2d_8hpp" kind="file"><name>i_interpolator_2d.hpp</name>
   </compound>
