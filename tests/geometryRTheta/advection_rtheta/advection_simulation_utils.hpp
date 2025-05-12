@@ -213,7 +213,7 @@ host_t<FieldMemRTheta<CoordRTheta>> compute_exact_feet_rtheta(
  *      domain.
  * @param[in] grid
  *      An index range spanning the logical domain where the function is defined.
- * @param[in] allfdistribu_advected
+ * @param[in] density_advected
  *      The computed function.
  * @param[in] function_to_be_advected
  *      The exact function.
@@ -227,7 +227,7 @@ template <class LogicalToPhysicalMapping, class Function>
 double compute_difference_L2_norm(
         LogicalToPhysicalMapping const& to_physical_mapping,
         IdxRangeRTheta const& grid,
-        host_t<DFieldRTheta> allfdistribu_advected,
+        host_t<DFieldRTheta> density_advected,
         Function& function_to_be_advected,
         host_t<FieldRTheta<CoordRTheta>> const& feet_coord)
 {
@@ -235,7 +235,7 @@ double compute_difference_L2_norm(
     host_t<DFieldMemRTheta> difference_function(grid);
     ddc::for_each(grid, [&](IdxRTheta const irtheta) {
         exact_function(irtheta) = function_to_be_advected(feet_coord(irtheta));
-        difference_function(irtheta) = exact_function(irtheta) - allfdistribu_advected(irtheta);
+        difference_function(irtheta) = exact_function(irtheta) - density_advected(irtheta);
     });
 
     host_t<DFieldMemRTheta> const quadrature_coeffs = compute_coeffs_on_mapping(
@@ -363,7 +363,7 @@ void simulate(
     double const end_time = dt * iteration_number;
 
 
-    host_t<DFieldMemRTheta> allfdistribu_test(grid);
+    host_t<DFieldMemRTheta> density_test(grid);
 
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_test_vec_host(grid);
 
@@ -377,7 +377,7 @@ void simulate(
         if (ddc::get<R>(coord) <= 1e-15) {
             ddc::get<Theta>(coord) = 0;
         }
-        allfdistribu_test(irtheta) = simulation.advected_function(coord);
+        density_test(irtheta) = simulation.advected_function(coord);
     });
 
 
@@ -394,9 +394,8 @@ void simulate(
                 simulation.advection_field(coord_xy, 0.));
     });
 
-    auto allfdistribu = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(allfdistribu_test));
+    auto density = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), get_field(density_test));
 
     auto advection_field_xy = ddcHelper::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
@@ -405,16 +404,16 @@ void simulate(
     // SIMULATION -------------------------------------------------------------------------------
     // Advect "iteration_number" times:
     for (int i(0); i < iteration_number; ++i) {
-        advection_operator(get_field(allfdistribu), get_const_field(advection_field_xy), dt);
+        advection_operator(get_field(density), get_const_field(advection_field_xy), dt);
 
         // Save the advected function for each iteration:
         if (save_curves) {
-            ddc::parallel_deepcopy(allfdistribu_test, allfdistribu);
+            ddc::parallel_deepcopy(density_test, density);
             std::string const name = output_folder + "/after_" + std::to_string(i + 1) + ".txt";
-            saving_computed(to_physical_mapping_host, get_field(allfdistribu_test), name);
+            saving_computed(to_physical_mapping_host, get_field(density_test), name);
         }
     }
-    ddc::parallel_deepcopy(allfdistribu_test, allfdistribu);
+    ddc::parallel_deepcopy(density_test, density);
 
 
 
@@ -440,7 +439,7 @@ void simulate(
     double max_err = 0.;
     ddc::for_each(grid, [&](IdxRTheta const irtheta) {
         double const err
-                = fabs(allfdistribu_test(irtheta)
+                = fabs(density_test(irtheta)
                        - simulation.advected_function(feet_coords_rtheta_end_time(irtheta)));
         max_err = max_err > err ? max_err : err;
     });
@@ -456,7 +455,7 @@ void simulate(
               << compute_difference_L2_norm(
                          to_physical_mapping_host,
                          grid,
-                         get_field(allfdistribu_test),
+                         get_field(density_test),
                          simulation.advected_function,
                          get_field(feet_coords_rtheta_end_time))
               << std::endl;
