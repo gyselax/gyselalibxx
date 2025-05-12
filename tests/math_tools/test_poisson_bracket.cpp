@@ -10,7 +10,7 @@
 #include "toroidal_to_cylindrical.hpp"
 
 
-TEST(GyrokineticPoissonBracket, Anticommutativity)
+TEST(LiePoissonBracket, Anticommutativity)
 {
     using Mapping2D = CircularToCartesian<Rho, Theta, R, Z>;
     using ToroidalMapping = ToroidalToCylindrical<Mapping2D, Zeta, Phi>;
@@ -21,7 +21,7 @@ TEST(GyrokineticPoissonBracket, Anticommutativity)
     CylindricalMapping cylindrical_to_cartesian;
     CombinedMapping<CylindricalMapping, ToroidalMapping, Coord<Rho, Theta, Phi>>
             mapping(cylindrical_to_cartesian, toroidal_to_cylindrical);
-    GyrokineticPoissonBracket calculate_poisson_bracket(mapping);
+    LiePoissonBracket calculate_poisson_bracket(mapping);
 
     using BasisSpatial = VectorIndexSet<Rho, Theta, Phi>;
     using CovBasisSpatial = get_covariant_dims_t<BasisSpatial>;

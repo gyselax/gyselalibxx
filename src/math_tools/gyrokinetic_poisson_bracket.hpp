@@ -20,7 +20,7 @@
  * @tparam Mapping3D A type representing a mapping in 3 dimensions.
  */
 template <class Mapping3D>
-class GyrokineticPoissonBracket
+class LiePoissonBracket
 {
     static_assert(is_mapping_v<Mapping3D>);
     using MappingCoord = typename Mapping3D::CoordArg;
@@ -36,11 +36,11 @@ private:
 
 public:
     /**
-     * @brief Build a GyrokineticPoissonBracket operator.
+     * @brief Build a LiePoissonBracket operator.
      * @param mapping The mapping describing the system of coordinates on which the
      *              expression is calculated.
      */
-    explicit GyrokineticPoissonBracket(Mapping3D const& mapping)
+    explicit LiePoissonBracket(Mapping3D const& mapping)
         : m_mapping(mapping)
         , m_metric_tensor(mapping)
         , m_grad(m_metric_tensor)
