@@ -87,20 +87,28 @@ jobs:
     strategy:
       matrix:
         toolchain: ${{fromJson(needs.pre_job.outputs.toolchain_matrix)}}
-        compiler: ['gnu', 'clang']
+        compiler:
+          - name: 'gnu'
+            c_compiler: 'gcc'
+            cxx_compiler: 'g++'
+          - name: 'clang'
+            c_compiler: 'clang'
+            cxx_compiler: 'clang++'
         exclude:
           - toolchain: 'tests_coverage_toolchain'
-            compiler: 'clang'
+            compiler:
+              name: 'clang'
           - toolchain: 'tests_release_omp_toolchain' # Clang + OpenMP leads to compiler failure with Clang 14.0.0
-            compiler: 'clang'
+            compiler:
+              name: 'clang'
       fail-fast: false
     container:
       image: ${{ needs.docker_update.outputs.image_tag }}
       options: --user root
-    name: CPU Test (${{ matrix.toolchain }}, ${{ matrix.compiler }})
+    name: CPU Test (${{ matrix.toolchain }}, ${{ matrix.compiler.name }})
     env:
-      CC: ${{ matrix.compiler == 'gnu' && 'gcc' || 'clang' }}
-      CXX: ${{ matrix.compiler == 'gnu' && 'g++' || 'clang++' }}
+      CC: ${{ matrix.compiler.c_compiler }}
+      CXX: ${{ matrix.compiler.cxx_compiler }}
     steps:
       - name: Checkout gyselalibxx
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
