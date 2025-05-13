@@ -888,17 +888,13 @@ public:
 
         ddc::for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx) {
             const IdxBSRTheta idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
-            const std::size_t idx_r(ddc::select<BSplinesR>(idx_2d).uid());
-            const std::size_t idx_theta(ddc::select<BSplinesTheta>(idx_2d).uid());
+            const Idx<BSplinesR> idx_r(idx_2d);
+            const Idx<BSplinesTheta> idx_theta(idx_2d);
 
             // Find the cells on which the bspline is non-zero
-            int first_cell_r(idx_r - BSplinesR::degree());
-            int first_cell_theta(idx_theta - BSplinesTheta::degree());
-            std::size_t last_cell_r(idx_r + 1);
-            if (first_cell_r < 0)
-                first_cell_r = 0;
-            if (last_cell_r > ncells_r)
-                last_cell_r = ncells_r;
+            Idx<RCellDim> first_cell_r = get_first_cell(idx_r);
+            Idx<ThetaCellDim> first_cell_theta = get_first_cell(idx_theta);
+            Idx<RCellDim> last_cell_r = get_last_cell(idx);
             IdxStep<RCellDim> const r_length(last_cell_r - first_cell_r);
             IdxStep<ThetaCellDim> const theta_length(BSplinesTheta::degree() + 1);
 
@@ -1568,8 +1564,48 @@ public:
         static_assert(std::is_same_v<BSpl, BSplinesR> || std::is_same_v<BSpl, BSplinesTheta>);
         using CellDim = std::conditional_t<std::is_same_v<BSpl, BSplinesR>, RCellDim, ThetaCellDim>;
         using KnotDim = knot_discrete_dimension_t<BSpl>;
-        KnotDim first_break_point = ddc::discrete_space<BSpl>().break_point_domain().front();
-        KnotDim k_idx = ddc::discrete_space<BSpl>().get_first_support_knot(idx);
-        return CellDim((k_idx - first_break_point).value());
+        IdxRange<KnotDim> break_point_idx_range = ddc::discrete_space<BSpl>().break_point_domain();
+        Idx<KnotDim> first_break_point = break_point_idx_range.front();
+        Idx<KnotDim> k_idx = ddc::discrete_space<BSpl>().get_first_support_knot(idx);
+        if constexpr (Bspl::is_periodic) {
+            if (k_idx < first_break_point) {
+                return CellDim(
+                        (k_idx + break_point_idx_range.extents() - first_break_point).value());
+            } else {
+                return CellDim((k_idx - first_break_point).value());
+            }
+        } else {
+            if (k_idx < first_break_point) {
+                return CellDim(0);
+            } else {
+                return CellDim((k_idx - first_break_point).value());
+            }
+        }
+    }
+
+    template <class Bspl>
+    auto get_last_cell(Idx<BSpl> idx)
+    {
+        static_assert(std::is_same_v<BSpl, BSplinesR> || std::is_same_v<BSpl, BSplinesTheta>);
+        using CellDim = std::conditional_t<std::is_same_v<BSpl, BSplinesR>, RCellDim, ThetaCellDim>;
+        using KnotDim = knot_discrete_dimension_t<BSpl>;
+        IdxRange<KnotDim> break_point_idx_range = ddc::discrete_space<BSpl>().break_point_domain();
+        Idx<KnotDim> first_break_point = break_point_idx_range.front();
+        Idx<KnotDim> last_break_point = break_point_idx_range.back();
+        Idx<KnotDim> k_idx = ddc::discrete_space<BSpl>().get_last_support_knot(idx);
+        if constexpr (Bspl::is_periodic) {
+            if (k_idx > last_break_point) {
+                return CellDim(
+                        (k_idx - break_point_idx_range.extents() - first_break_point - 1).value());
+            } else {
+                return CellDim((k_idx - first_break_point - 1).value());
+            }
+        } else {
+            if (k_idx > last_break_point) {
+                return CellDim(last_break_point - first_break_point - 1);
+            } else {
+                return CellDim((k_idx - first_break_point - 1).value());
+            }
+        }
     }
 };
