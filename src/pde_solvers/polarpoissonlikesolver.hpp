@@ -84,7 +84,6 @@ public:
     {
     };
 
-
 public:
     /**
      * @brief Tag the first dimension for the quadrature mesh.
@@ -637,15 +636,12 @@ public:
                 const Idx<BSplinesTheta> idx_trial_theta(ddc::select<BSplinesTheta>(idx_trial));
 
                 // Find the index range covering the cells where both the test and trial functions are non-zero
-                const Idx<RCellDim> first_overlap_element_r(
-                        idx_trial_r.uid() < BSplinesR::degree()
-                                ? 0
-                                : idx_trial_r.uid() - BSplinesR::degree());
+                const Idx<RCellDim> first_overlap_element_r(get_first_cell(idx_trial_r));
                 const Idx<ThetaCellDim> first_overlap_element_theta(
-                        theta_mod(idx_trial_theta.uid() - BSplinesTheta::degree()));
+                        get_first_cell(idx_trial_theta));
 
                 const IdxStep<RCellDim> n_overlap_r(
-                        s_n_overlap_cells - first_overlap_element_r.uid());
+                        IdxStep<RCellDim>(s_n_overlap_cells) - first_overlap_element_r);
                 const IdxStep<ThetaCellDim> n_overlap_theta(BSplinesTheta::degree() + 1);
 
                 const IdxRange<RCellDim> r_cells(first_overlap_element_r, n_overlap_r);
@@ -1564,5 +1560,16 @@ public:
                     nnz(1) = 0;
                 });
         Kokkos::Profiling::popRegion();
+    }
+
+    template <class Bspl>
+    auto get_first_cell(Idx<BSpl> idx)
+    {
+        static_assert(std::is_same_v<BSpl, BSplinesR> || std::is_same_v<BSpl, BSplinesTheta>);
+        using CellDim = std::conditional_t<std::is_same_v<BSpl, BSplinesR>, RCellDim, ThetaCellDim>;
+        using KnotDim = knot_discrete_dimension_t<BSpl>;
+        KnotDim first_break_point = ddc::discrete_space<BSpl>().break_point_domain().front();
+        KnotDim k_idx = ddc::discrete_space<BSpl>().get_first_support_knot(idx);
+        return CellDim((k_idx - first_break_point).value());
     }
 };
