@@ -98,7 +98,7 @@ protected:
     /**
      * @brief Construct an uninitialised tensor object.
      */
-    explicit KOKKOS_FUNCTION TensorCommon() {}
+    KOKKOS_DEFAULTED_FUNCTION TensorCommon() = default;
 
     /**
      * @brief Construct a tensor object by copying an existing tensor of exactly the
@@ -141,6 +141,19 @@ public:
      * @return A reference to the current tensor.
      */
     KOKKOS_FUNCTION TensorCommon& operator=(TensorCommon const& other)
+    {
+        for (std::size_t i(0); i < s_n_elements; ++i) {
+            m_data[i] = other.m_data[i];
+        }
+        return *this;
+    }
+
+    /**
+     * @brief A move assign operator.
+     * @param other The tensor to be copied.
+     * @return A reference to the current tensor.
+     */
+    KOKKOS_FUNCTION TensorCommon& operator=(TensorCommon&& other)
     {
         for (std::size_t i(0); i < s_n_elements; ++i) {
             m_data[i] = other.m_data[i];
