@@ -35,6 +35,8 @@ public:
     /// The index range of all dimensions except DerivativeDimension.
     using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeFull, GridDerivativeDimension>;
 
+    virtual ~IPartialDerivative() = default;
+
     /**
      * @brief Compute the partial derivative of a field in a given direction.
      *
