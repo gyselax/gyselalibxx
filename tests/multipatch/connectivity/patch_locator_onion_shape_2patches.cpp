@@ -204,24 +204,24 @@ TEST_F(OnionPatchLocator2PatchesTest, DeviceCzarnyOnionPatchLocator2PatchesTest)
     Kokkos::View<int*, Kokkos::DefaultHostExecutionSpace>
             patches_host("patches_host 1", n_elements);
 
-    // Test outside range (below)
+    // Test outside domain (radius smaller than the minimum radius)
     coords_host(0) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(0, 0)));
-    // Test lower bound
+    // Test radial lower bound
     coords_host(1) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(0.2, 0)));
     // Test in patch 1
     coords_host(2) = PhysicalCoordXY(0.25, .03);
     // Test in patch 2
     coords_host(3) = PhysicalCoordXY(1, 1);
-    // Test patch boundary
+    // Test patch interface
     coords_host(4) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(1, 0)));
-    // Test upper bound
+    // Test radial upper bound
     coords_host(5) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(1.5, 0)));
-    // Test outside range (above)
+    // Test outside domain (radius bigger than the maximum radius)
     coords_host(6) = PhysicalCoordXY(-2.1, 0);
 
-    // Test outside range (below)
+    // Test outside domain (radius smaller than the minimum radius)
     patches_host(0) = PatchLocator::outside_rmin_domain;
-    // Test lower bound
+    // Test radial lower bound
     if (ddc::select<R>(to_logical_mapping(coords_host(1))) - 0.2 < 0) {
         patches_host(1) = PatchLocator::outside_rmin_domain;
     } else {
@@ -231,19 +231,19 @@ TEST_F(OnionPatchLocator2PatchesTest, DeviceCzarnyOnionPatchLocator2PatchesTest)
     patches_host(2) = 0;
     // Test in patch 2
     patches_host(3) = 1;
-    // Test patch boundary
+    // Test patch interface
     if (ddc::select<R>(to_logical_mapping(coords_host(4))) - 1 <= 0) {
         patches_host(4) = 0;
     } else {
         patches_host(4) = 1;
     }
-    // Test upper bound
+    // Test radial upper bound
     if (ddc::select<R>(to_logical_mapping(coords_host(5))) - 1.5 <= 0) {
         patches_host(5) = 1;
     } else {
         patches_host(5) = PatchLocator::outside_rmax_domain;
     }
-    // Test outside range (above)
+    // Test outside domain (radius bigger than the maximum radius)
     patches_host(6) = PatchLocator::outside_rmax_domain;
 
     Kokkos::deep_copy(coords, coords_host);
@@ -314,11 +314,11 @@ TEST_F(OnionPatchLocator2PatchesTest, HostCzarnyOnionPatchLocator2PatchesTest)
             Kokkos::DefaultHostExecutionSpace>
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
 
-    // Test outside range (below)
+    // Test outside domain (radius smaller than the minimum radius)
     PhysicalCoordXY coord(-0.05, .03);
     EXPECT_EQ(patch_locator(coord), PatchLocator::outside_rmin_domain);
 
-    // Test lower bound
+    // Test radial lower bound
     coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(0.2, 0)));
     if (ddc::select<R>(to_logical_mapping(coord)) - 0.2 < 0) {
         EXPECT_EQ(patch_locator(coord), PatchLocator::outside_rmin_domain);
@@ -334,7 +334,7 @@ TEST_F(OnionPatchLocator2PatchesTest, HostCzarnyOnionPatchLocator2PatchesTest)
     coord = PhysicalCoordXY(1, 1);
     EXPECT_EQ(patch_locator(coord), 1);
 
-    // Test patch boundary
+    // Test patch interface
     coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(1, 0)));
     if (ddc::select<R>(to_logical_mapping(coord)) - 1 <= 0) {
         EXPECT_EQ(patch_locator(coord), 0);
@@ -342,7 +342,7 @@ TEST_F(OnionPatchLocator2PatchesTest, HostCzarnyOnionPatchLocator2PatchesTest)
         EXPECT_EQ(patch_locator(coord), 1);
     }
 
-    // Test upper bound
+    // Test radial upper bound
     coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(1.5, 0)));
     if (ddc::select<R>(to_logical_mapping(coord)) - 1.5 <= 0) {
         EXPECT_EQ(patch_locator(coord), 1);
@@ -350,7 +350,7 @@ TEST_F(OnionPatchLocator2PatchesTest, HostCzarnyOnionPatchLocator2PatchesTest)
         EXPECT_EQ(patch_locator(coord), PatchLocator::outside_rmax_domain);
     }
 
-    // Test outside range (above)
+    // Test outside domain (radius bigger than the maximum radius)
     coord = PhysicalCoordXY(-2.1, 0);
     EXPECT_EQ(patch_locator(coord), PatchLocator::outside_rmax_domain);
 }
