@@ -61,4 +61,16 @@ else
 fi
 spack --env gyselalibxx-env install --jobs 2
 
+CURRENT_DIR=$(pwd)
 
+cat >${SCRIPT_DIR}/environment.sh <<EOL
+if [ "\${BASH_SOURCE[0]}" -ef "\$0" ]
+then
+    echo "This script must be sourced not executed."
+    echo ". $0"
+    exit 1
+fi
+
+. ${CURRENT_DIR}/spack-0.23.0/share/spack/setup-env.sh
+spack env activate -p gyselalibxx-env
+EOL
