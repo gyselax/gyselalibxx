@@ -7,6 +7,16 @@ stages:
 include:
   - local: 'bin/ci_tools/reusable_ci_jobs.yml'
 
+cmake_clang_tests:
+  extends: .cmake_tests
+  image: ghcr.io/gyselax/gyselalibxx_env
+  variables:
+    RELATIVE_RESTART_TOLERANCE: '0.0'
+    ABSOLUTE_RESTART_TOLERANCE: '0.0'
+    CC: 'clang'
+    CXX: 'clang++'
+    TOOLCHAIN: '${CI_PROJECT_DIR}/toolchains/docker.gyselalibxx_env/tests_toolchain.cmake'
+
 cmake_tests:
   extends: .cmake_tests
   image: ghcr.io/gyselax/gyselalibxx_env
