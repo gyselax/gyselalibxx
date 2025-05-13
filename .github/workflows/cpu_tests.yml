@@ -94,7 +94,7 @@ jobs:
       options: --user root
     name: CPU Test (${{ matrix.toolchain }}, ${{ matrix.compiler }})
     # Don't run coverage for clang (too slow)
-    if: ${{ matrix.toolchain }} != 'tests_coverage_toolchain' || ${{ matrix.compiler }} != 'gnu'
+    if: matrix.toolchain != 'tests_coverage_toolchain' || matrix.compiler != 'gnu'
     env:
       CC: ${{ matrix.compiler == 'gnu' && 'gcc' || 'clang' }}
       CXX: ${{ matrix.compiler == 'gnu' && 'g++' || 'clang++' }}
