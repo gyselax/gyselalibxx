@@ -99,13 +99,6 @@ jobs:
       CC: ${{ matrix.compiler == 'gnu' && 'gcc' || 'clang' }}
       CXX: ${{ matrix.compiler == 'gnu' && 'g++' || 'clang++' }}
     steps:
-      - name: Test compiler
-        run: |
-          echo $CC
-          echo $CXX
-          clang --version
-          clang++ --version
-        shell: bash
       - name: Checkout gyselalibxx
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: actions/checkout@v4
