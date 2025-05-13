@@ -92,7 +92,7 @@ jobs:
     container:
       image: ${{ needs.docker_update.outputs.image_tag }}
       options: --user root
-    name: CPU Test (${{ matrix.toolchain }})
+    name: CPU Test (${{ matrix.toolchain }}, ${{ matrix.compiler }})
     env:
       CC: ${{ matrix.compiler == 'gnu' && 'gcc' || 'clang' }}
       CXX: ${{ matrix.compiler == 'gnu' && 'g++' || 'clang++' }}
