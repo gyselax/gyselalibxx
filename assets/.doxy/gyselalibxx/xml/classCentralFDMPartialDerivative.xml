@@ -240,6 +240,7 @@
       <member refid="classCentralFDMPartialDerivative_1ae5e7d597e015b5024376bb27091c096d" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivative</scope><name>IdxRangeDeriv</name></member>
       <member refid="classCentralFDMPartialDerivative_1a64a1c06f33429b26b0314b5093032a90" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivative</scope><name>m_field</name></member>
       <member refid="classCentralFDMPartialDerivative_1ae3faa9459a609771457f2677ef709bd5" prot="public" virt="virtual"><scope>CentralFDMPartialDerivative</scope><name>operator()</name></member>
+      <member refid="classIPartialDerivative_1a596b5a8933c387935c35461a3c5f1fcb" prot="public" virt="virtual"><scope>CentralFDMPartialDerivative</scope><name>~IPartialDerivative</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

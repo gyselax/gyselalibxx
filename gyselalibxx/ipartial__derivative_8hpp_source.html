@@ -569,6 +569,8 @@ public:
 
     using IdxRangeBatch = ddc::remove_dims_of_t&lt;IdxRangeFull, GridDerivativeDimension&gt;;
 
+    virtual ~IPartialDerivative() = default;
+
     virtual void operator()(DFieldType differentiated_field) const = 0;
 };
 

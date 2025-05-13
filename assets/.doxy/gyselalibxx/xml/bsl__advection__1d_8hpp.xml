@@ -316,7 +316,7 @@
 <codeline lineno="87"><highlight class="normal"></highlight></codeline>
 <codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Type<sp/>for<sp/>spline<sp/>representation<sp/>of<sp/>the<sp/>advection<sp/>field</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeBSAdvection<sp/>=</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AdvectionFieldBuilder::batched_spline_domain_type&lt;IdxRangeAdvection&gt;;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AdvectionFieldBuilder::template<sp/>batched_spline_domain_type&lt;IdxRangeAdvection&gt;;</highlight></codeline>
 <codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">AdvecFieldSplineMem<sp/>=<sp/>DFieldMem&lt;IdxRangeBSAdvection&gt;;</highlight></codeline>
 <codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">AdvecFieldSplineCoeffs<sp/>=<sp/>DField&lt;IdxRangeBSAdvection&gt;;</highlight></codeline>
 <codeline lineno="93"><highlight class="normal"></highlight></codeline>

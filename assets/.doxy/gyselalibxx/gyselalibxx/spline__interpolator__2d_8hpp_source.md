@@ -31,16 +31,17 @@ private:
 
     Spline2DEvaluator const& m_evaluator;
 
-    using IdxRangeBSRTheta = typename Spline2DBuilder::batched_spline_domain_type<IdxRangeBatched>;
+    using IdxRangeBSRTheta =
+            typename Spline2DBuilder::template batched_spline_domain_type<IdxRangeBatched>;
 
     mutable DFieldMem<IdxRangeBSRTheta> m_coefs;
 
-    using r_deriv_type
-            = DConstField<typename Spline2DBuilder::batched_derivs_domain_type1<IdxRangeBatched>>;
-    using theta_deriv_type
-            = DConstField<typename Spline2DBuilder::batched_derivs_domain_type2<IdxRangeBatched>>;
-    using mixed_deriv_type
-            = DConstField<typename Spline2DBuilder::batched_derivs_domain_type<IdxRangeBatched>>;
+    using r_deriv_type = DConstField<
+            typename Spline2DBuilder::template batched_derivs_domain_type1<IdxRangeBatched>>;
+    using theta_deriv_type = DConstField<
+            typename Spline2DBuilder::template batched_derivs_domain_type2<IdxRangeBatched>>;
+    using mixed_deriv_type = DConstField<
+            typename Spline2DBuilder::template batched_derivs_domain_type<IdxRangeBatched>>;
 
 public:
     SplineInterpolator2D(

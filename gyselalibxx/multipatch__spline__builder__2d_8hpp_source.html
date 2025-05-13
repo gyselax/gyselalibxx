@@ -655,25 +655,25 @@ class MultipatchSplineBuilder2D
 
     template &lt;class Patch&gt;
     using SplineOnPatch = DField&lt;
-            typename BuilderOnPatch&lt;Patch&gt;::batched_spline_domain_type&lt;
+            typename BuilderOnPatch&lt;Patch&gt;::template batched_spline_domain_type&lt;
                     typename ValuesOnPatch&lt;Patch&gt;::discrete_domain_type&gt;,
             MemorySpace&gt;;
 
     template &lt;class Patch&gt;
     using Derivs1OnPatch = DConstField&lt;
-            typename BuilderOnPatch&lt;Patch&gt;::batched_derivs_domain_type1&lt;
+            typename BuilderOnPatch&lt;Patch&gt;::template batched_derivs_domain_type1&lt;
                     typename ValuesOnPatch&lt;Patch&gt;::discrete_domain_type&gt;,
             MemorySpace&gt;;
 
     template &lt;class Patch&gt;
     using Derivs2OnPatch = DConstField&lt;
-            typename BuilderOnPatch&lt;Patch&gt;::batched_derivs_domain_type2&lt;
+            typename BuilderOnPatch&lt;Patch&gt;::template batched_derivs_domain_type2&lt;
                     typename ValuesOnPatch&lt;Patch&gt;::discrete_domain_type&gt;,
             MemorySpace&gt;;
 
     template &lt;class Patch&gt;
     using Derivs12OnPatch = DConstField&lt;
-            typename BuilderOnPatch&lt;Patch&gt;::batched_derivs_domain_type&lt;
+            typename BuilderOnPatch&lt;Patch&gt;::template batched_derivs_domain_type&lt;
                     typename ValuesOnPatch&lt;Patch&gt;::discrete_domain_type&gt;,
             MemorySpace&gt;;
 

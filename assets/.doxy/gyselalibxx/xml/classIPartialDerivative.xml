@@ -91,6 +91,20 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
+      <memberdef kind="function" id="classIPartialDerivative_1a596b5a8933c387935c35461a3c5f1fcb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::~IPartialDerivative</definition>
+        <argsstring>()=default</argsstring>
+        <name>~IPartialDerivative</name>
+        <qualifiedname>IPartialDerivative::~IPartialDerivative</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" line="38" column="13"/>
+      </memberdef>
       <memberdef kind="function" id="classIPartialDerivative_1ad0c4758b3151a9bbd01d9fda1d423353" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
         <definition>virtual void IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::operator()</definition>
@@ -121,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" line="43" column="18"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" line="45" column="18"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -165,7 +179,7 @@
         <link refid="classIPartialDerivative"/>
       </node>
     </inheritancegraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" line="19" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" bodystart="20" bodyend="44"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" line="19" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" bodystart="20" bodyend="46"/>
     <listofallmembers>
       <member refid="classIPartialDerivative_1a85c8b026718b72ff0c996c4503b95136" prot="public" virt="non-virtual"><scope>IPartialDerivative</scope><name>DConstFieldType</name></member>
       <member refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" prot="public" virt="non-virtual"><scope>IPartialDerivative</scope><name>DFieldType</name></member>
@@ -173,6 +187,7 @@
       <member refid="classIPartialDerivative_1a883ec2b528cf2188db6e593ae849fe0e" prot="public" virt="non-virtual"><scope>IPartialDerivative</scope><name>IdxRangeBatch</name></member>
       <member refid="classIPartialDerivative_1ae5e7d597e015b5024376bb27091c096d" prot="public" virt="non-virtual"><scope>IPartialDerivative</scope><name>IdxRangeDeriv</name></member>
       <member refid="classIPartialDerivative_1ad0c4758b3151a9bbd01d9fda1d423353" prot="public" virt="pure-virtual"><scope>IPartialDerivative</scope><name>operator()</name></member>
+      <member refid="classIPartialDerivative_1a596b5a8933c387935c35461a3c5f1fcb" prot="public" virt="virtual"><scope>IPartialDerivative</scope><name>~IPartialDerivative</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

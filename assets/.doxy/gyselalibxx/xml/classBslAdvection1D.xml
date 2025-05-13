@@ -193,9 +193,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="86" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="86" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classBslAdvection1D_1ac65eb1b0c293ec2af7b268190990fd25" prot="private" static="no">
-        <type>typename AdvectionFieldBuilder::batched_spline_domain_type&lt; IdxRangeAdvection &gt;</type>
-        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::IdxRangeBSAdvection =  typename AdvectionFieldBuilder::batched_spline_domain_type&lt;IdxRangeAdvection&gt;</definition>
+      <memberdef kind="typedef" id="classBslAdvection1D_1ab7339439ed47cc59a9c72be639f59bfb" prot="private" static="no">
+        <type>typename AdvectionFieldBuilder::template batched_spline_domain_type&lt; IdxRangeAdvection &gt;</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::IdxRangeBSAdvection =  typename AdvectionFieldBuilder::template batched_spline_domain_type&lt;IdxRangeAdvection&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeBSAdvection</name>
         <qualifiedname>BslAdvection1D::IdxRangeBSAdvection</qualifiedname>
@@ -645,7 +645,7 @@
       <member refid="classBslAdvection1D_1ab36f0187be8b1f56073da6afca870606" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>IdxFunction</name></member>
       <member refid="classBslAdvection1D_1a9a71f16dd1c80959d4d5ac586e6fd05e" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>IdxInterest</name></member>
       <member refid="classBslAdvection1D_1a19d27590fb6b218cae8505ef2baf274e" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>IdxRangeAdvecFieldDeriv</name></member>
-      <member refid="classBslAdvection1D_1ac65eb1b0c293ec2af7b268190990fd25" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>IdxRangeBSAdvection</name></member>
+      <member refid="classBslAdvection1D_1ab7339439ed47cc59a9c72be639f59bfb" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>IdxRangeBSAdvection</name></member>
       <member refid="classBslAdvection1D_1affe864a0f821b367d52e65c6d997dcbd" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>IdxRangeFunctionDeriv</name></member>
       <member refid="classBslAdvection1D_1a43a0cde49c5d68402de2ef703272a484" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>IdxRangeInterest</name></member>
       <member refid="classBslAdvection1D_1a1d37a2d009c65d63de04f1bca3b3a451" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>m_adv_field_builder</name></member>

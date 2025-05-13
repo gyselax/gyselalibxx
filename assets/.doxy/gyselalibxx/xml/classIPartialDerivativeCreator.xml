@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" line="64" column="29"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" line="66" column="29"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -71,7 +71,7 @@
         <link refid="classIPartialDerivativeCreator"/>
       </node>
     </inheritancegraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" line="52" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" bodystart="53" bodyend="66"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" line="54" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" bodystart="55" bodyend="68"/>
     <listofallmembers>
       <member refid="classIPartialDerivativeCreator_1aa6909a30ce6565221d37736bf059f7a0" prot="public" virt="pure-virtual"><scope>IPartialDerivativeCreator</scope><name>create_instance</name></member>
     </listofallmembers>

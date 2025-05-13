@@ -476,6 +476,7 @@
 * **~IInitialisation** ([**IInitialisation**](classIInitialisation.md))
 * **~IInterpolator** ([**IInterpolator**](classIInterpolator.md))
 * **~IInterpolator2D** ([**IInterpolator2D**](classIInterpolator2D.md))
+* **~IPartialDerivative** ([**IPartialDerivative**](classIPartialDerivative.md))
 * **~IPolarFootFinder** ([**IPolarFootFinder**](classIPolarFootFinder.md))
 * **~IPreallocatableInterpolator** ([**IPreallocatableInterpolator**](classIPreallocatableInterpolator.md))
 * **~IQNSolver** ([**IQNSolver**](classIQNSolver.md))

@@ -294,6 +294,7 @@
       <member refid="classCentralFDMPartialDerivativeWithBValue_1a8a991398c5d27ca55eabb5f7251c403f" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>m_b_value_right</name></member>
       <member refid="classCentralFDMPartialDerivativeWithBValue_1ab9d589da0cfdc7fefb9c2c8c17e320cf" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>m_field</name></member>
       <member refid="classCentralFDMPartialDerivativeWithBValue_1a063c3d40a90ffe5994eb157cca4b0fd1" prot="public" virt="virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>operator()</name></member>
+      <member refid="classIPartialDerivative_1a596b5a8933c387935c35461a3c5f1fcb" prot="public" virt="virtual"><scope>CentralFDMPartialDerivativeWithBValue</scope><name>~IPartialDerivative</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

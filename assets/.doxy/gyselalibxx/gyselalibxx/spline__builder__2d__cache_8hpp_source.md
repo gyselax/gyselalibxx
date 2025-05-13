@@ -25,7 +25,8 @@ private:
     using Dim1 = typename SplineBuilder2D::continuous_dimension_type1;
     using Dim2 = typename SplineBuilder2D::continuous_dimension_type2;
 
-    using IdxRangeBSField = typename SplineBuilder2D::batched_spline_domain_type<IdxRangeBatched>;
+    using IdxRangeBSField =
+            typename SplineBuilder2D::template batched_spline_domain_type<IdxRangeBatched>;
     using IdxRangeField = IdxRangeBatched;
 
     using DFieldSplineCoeffMem = DFieldMem<IdxRangeBSField>;

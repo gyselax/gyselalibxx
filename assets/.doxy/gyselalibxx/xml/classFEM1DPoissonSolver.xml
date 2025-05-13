@@ -382,9 +382,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="140" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="140" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1aaf012ecd342a2a27382bac3b9b5ab888" prot="private" static="no">
-        <type>typename FEMSplineEvaluator::batched_spline_domain_type&lt; IdxRangeBatched &gt;</type>
-        <definition>using FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator, IdxRangeBatched &gt;::IdxRangeBatchedFEMBSplines =  typename FEMSplineEvaluator::batched_spline_domain_type&lt;IdxRangeBatched&gt;</definition>
+      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a82a643647020f3bba8d2973ab81e497c" prot="private" static="no">
+        <type>typename FEMSplineEvaluator::template batched_spline_domain_type&lt; IdxRangeBatched &gt;</type>
+        <definition>using FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator, IdxRangeBatched &gt;::IdxRangeBatchedFEMBSplines =  typename FEMSplineEvaluator::template batched_spline_domain_type&lt;IdxRangeBatched&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeBatchedFEMBSplines</name>
         <qualifiedname>FEM1DPoissonSolver::IdxRangeBatchedFEMBSplines</qualifiedname>
@@ -466,9 +466,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" line="153" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp" bodystart="153" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1aa948bf7197e68761917243e71b204662" prot="private" static="no">
-        <type>typename SplineEvaluator::batched_spline_domain_type&lt; IdxRangeBatched &gt;</type>
-        <definition>using FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator, IdxRangeBatched &gt;::IdxRangeBatchedBSplines =  typename SplineEvaluator::batched_spline_domain_type&lt;IdxRangeBatched&gt;</definition>
+      <memberdef kind="typedef" id="classFEM1DPoissonSolver_1a9b04135a13b10c3447ff398e4e28f786" prot="private" static="no">
+        <type>typename SplineEvaluator::template batched_spline_domain_type&lt; IdxRangeBatched &gt;</type>
+        <definition>using FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator, IdxRangeBatched &gt;::IdxRangeBatchedBSplines =  typename SplineEvaluator::template batched_spline_domain_type&lt;IdxRangeBatched&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeBatchedBSplines</name>
         <qualifiedname>FEM1DPoissonSolver::IdxRangeBatchedBSplines</qualifiedname>
@@ -1041,8 +1041,8 @@
       <member refid="classFEM1DPoissonSolver_1a54be768cc07a675f1d2e4b5f5cec5082" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxFEMBSplines</name></member>
       <member refid="classFEM1DPoissonSolver_1abbd5dd33a6e2357ce6570bb898812cef" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxPDEDim</name></member>
       <member refid="classFEM1DPoissonSolver_1a536c2cb3b58c08374f39c42e9a18812c" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxQ</name></member>
-      <member refid="classFEM1DPoissonSolver_1aa948bf7197e68761917243e71b204662" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxRangeBatchedBSplines</name></member>
-      <member refid="classFEM1DPoissonSolver_1aaf012ecd342a2a27382bac3b9b5ab888" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxRangeBatchedFEMBSplines</name></member>
+      <member refid="classFEM1DPoissonSolver_1a9b04135a13b10c3447ff398e4e28f786" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxRangeBatchedBSplines</name></member>
+      <member refid="classFEM1DPoissonSolver_1a82a643647020f3bba8d2973ab81e497c" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxRangeBatchedFEMBSplines</name></member>
       <member refid="classFEM1DPoissonSolver_1a9714ba54cfea2fda8bbc1b1ce9789e04" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxRangeBSplines</name></member>
       <member refid="classFEM1DPoissonSolver_1a51fa1981c00143b7b913bb8ee0bb609f" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxRangeFEMBSplines</name></member>
       <member refid="classFEM1DPoissonSolver_1ab8fc86b4e2009841ca2e1c80d51418a9" prot="private" virt="non-virtual"><scope>FEM1DPoissonSolver</scope><name>IdxRangeQ</name></member>

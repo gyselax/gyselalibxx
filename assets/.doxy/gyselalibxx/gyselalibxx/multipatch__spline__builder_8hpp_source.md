@@ -77,13 +77,13 @@ class MultipatchSplineBuilder
 
     template <class Patch>
     using SplineOnPatch = DField<
-            typename BuilderOnPatch<Patch>::batched_spline_domain_type<
+            typename BuilderOnPatch<Patch>::template batched_spline_domain_type<
                     typename ValuesOnPatch<Patch>::discrete_domain_type>,
             MemorySpace>;
 
     template <class Patch>
     using DerivsOnPatch = DConstField<
-            typename BuilderOnPatch<Patch>::batched_derivs_domain_type<
+            typename BuilderOnPatch<Patch>::template batched_derivs_domain_type<
                     typename ValuesOnPatch<Patch>::discrete_domain_type>,
             MemorySpace>;
 

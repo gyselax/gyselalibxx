@@ -574,7 +574,8 @@ private:
     using typename base_type::DConstFieldType;
     using typename base_type::DFieldType;
 
-    using IdxRangeBS = typename Spline1DBuilder::batched_spline_domain_type&lt;IdxRangeBatched&gt;;
+    using IdxRangeBS =
+            typename Spline1DBuilder::template batched_spline_domain_type&lt;IdxRangeBatched&gt;;
     using DFieldBSMem = DFieldMem&lt;IdxRangeBS&gt;;
     using DFieldBS = DField&lt;IdxRangeBS&gt;;
 

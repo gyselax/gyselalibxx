@@ -81,9 +81,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp" bodystart="53" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSplineInterpolator_1a88e44170bd91346783617327a3ef7c92" prot="private" static="no">
-        <type>typename BuilderType::batched_spline_domain_type&lt; IdxRange&lt; Grid1D... &gt; &gt;</type>
-        <definition>using SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;::batched_spline_domain_type =  typename BuilderType::batched_spline_domain_type&lt;IdxRange&lt;Grid1D...&gt; &gt;</definition>
+      <memberdef kind="typedef" id="classSplineInterpolator_1a9969315a15aa8cf4c3d26b7ec47e1e01" prot="private" static="no">
+        <type>typename BuilderType::template batched_spline_domain_type&lt; IdxRange&lt; Grid1D... &gt; &gt;</type>
+        <definition>using SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;::batched_spline_domain_type =  typename BuilderType::template batched_spline_domain_type&lt;IdxRange&lt;Grid1D...&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>batched_spline_domain_type</name>
         <qualifiedname>SplineInterpolator::batched_spline_domain_type</qualifiedname>
@@ -474,7 +474,7 @@
       <member refid="classSplineInterpolator_1a604d2cc6f28885bf7120179bb5a4b2d9" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>batched_derivs_idx_range_type</name></member>
       <member refid="classSplineInterpolator_1ab7b38622e403a5a5dc9e09d737a9dfe8" prot="public" virt="virtual"><scope>SplineInterpolator</scope><name>batched_derivs_idx_range_xmax</name></member>
       <member refid="classSplineInterpolator_1a9cfc0e637f271993f61b0270d12e5703" prot="public" virt="virtual"><scope>SplineInterpolator</scope><name>batched_derivs_idx_range_xmin</name></member>
-      <member refid="classSplineInterpolator_1a88e44170bd91346783617327a3ef7c92" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>batched_spline_domain_type</name></member>
+      <member refid="classSplineInterpolator_1a9969315a15aa8cf4c3d26b7ec47e1e01" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>batched_spline_domain_type</name></member>
       <member refid="classSplineInterpolator_1a0178cfed8217e7d7838444f56ea31694" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>BuilderType</name></member>
       <member refid="classSplineInterpolator_1a1f4ea33c0cb2a9ecb4658c7f536843b7" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>deriv_type</name></member>
       <member refid="classSplineInterpolator_1a4c1ce88f6419a4fe9ef1073cfb1924ae" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>EvaluatorType</name></member>

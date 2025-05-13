@@ -38,7 +38,8 @@ private:
     using typename base_type::DConstFieldType;
     using typename base_type::DFieldType;
 
-    using IdxRangeBS = typename Spline1DBuilder::batched_spline_domain_type<IdxRangeBatched>;
+    using IdxRangeBS =
+            typename Spline1DBuilder::template batched_spline_domain_type<IdxRangeBatched>;
     using DFieldBSMem = DFieldMem<IdxRangeBS>;
     using DFieldBS = DField<IdxRangeBS>;
 

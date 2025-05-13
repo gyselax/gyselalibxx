@@ -30,9 +30,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="22" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="23" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSplineInterpolator2D_1a27806984cf0d10ac0fa92acacf80e751" prot="private" static="no">
-        <type>typename Spline2DBuilder::batched_spline_domain_type&lt; IdxRangeBatched &gt;</type>
-        <definition>using SplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator, IdxRangeBatched &gt;::IdxRangeBSRTheta =  typename Spline2DBuilder::batched_spline_domain_type&lt;IdxRangeBatched&gt;</definition>
+      <memberdef kind="typedef" id="classSplineInterpolator2D_1a55540d3f00a283fe2e5b44f026229a2f" prot="private" static="no">
+        <type>typename Spline2DBuilder::template batched_spline_domain_type&lt; IdxRangeBatched &gt;</type>
+        <definition>using SplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator, IdxRangeBatched &gt;::IdxRangeBSRTheta =  typename Spline2DBuilder::template batched_spline_domain_type&lt;IdxRangeBatched&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeBSRTheta</name>
         <qualifiedname>SplineInterpolator2D::IdxRangeBSRTheta</qualifiedname>
@@ -42,11 +42,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="35" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="35" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="35" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="36" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSplineInterpolator2D_1af068c79ce06f2550d3b53766190fc4b8" prot="private" static="no">
-        <type>DConstField&lt; typename Spline2DBuilder::batched_derivs_domain_type1&lt; IdxRangeBatched &gt; &gt;</type>
-        <definition>using SplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator, IdxRangeBatched &gt;::r_deriv_type =  DConstField&lt;typename Spline2DBuilder::batched_derivs_domain_type1&lt;IdxRangeBatched&gt; &gt;</definition>
+      <memberdef kind="typedef" id="classSplineInterpolator2D_1a67bff504abc2ede9902d047d1c1d7d0d" prot="private" static="no">
+        <type>DConstField&lt; typename Spline2DBuilder::template batched_derivs_domain_type1&lt; IdxRangeBatched &gt; &gt;</type>
+        <definition>using SplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator, IdxRangeBatched &gt;::r_deriv_type =  DConstField&lt; typename Spline2DBuilder::template batched_derivs_domain_type1&lt;IdxRangeBatched&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>r_deriv_type</name>
         <qualifiedname>SplineInterpolator2D::r_deriv_type</qualifiedname>
@@ -56,11 +56,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="40" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="41" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSplineInterpolator2D_1a196cb3bc21573291f2360afd8e5643ab" prot="private" static="no">
-        <type>DConstField&lt; typename Spline2DBuilder::batched_derivs_domain_type2&lt; IdxRangeBatched &gt; &gt;</type>
-        <definition>using SplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator, IdxRangeBatched &gt;::theta_deriv_type =  DConstField&lt;typename Spline2DBuilder::batched_derivs_domain_type2&lt;IdxRangeBatched&gt; &gt;</definition>
+      <memberdef kind="typedef" id="classSplineInterpolator2D_1a250f4052d2216778427d3cde6d6b1738" prot="private" static="no">
+        <type>DConstField&lt; typename Spline2DBuilder::template batched_derivs_domain_type2&lt; IdxRangeBatched &gt; &gt;</type>
+        <definition>using SplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator, IdxRangeBatched &gt;::theta_deriv_type =  DConstField&lt; typename Spline2DBuilder::template batched_derivs_domain_type2&lt;IdxRangeBatched&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>theta_deriv_type</name>
         <qualifiedname>SplineInterpolator2D::theta_deriv_type</qualifiedname>
@@ -70,11 +70,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="42" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="43" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSplineInterpolator2D_1a79a21e8a321bef5ddca3d5fc64feab68" prot="private" static="no">
-        <type>DConstField&lt; typename Spline2DBuilder::batched_derivs_domain_type&lt; IdxRangeBatched &gt; &gt;</type>
-        <definition>using SplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator, IdxRangeBatched &gt;::mixed_deriv_type =  DConstField&lt;typename Spline2DBuilder::batched_derivs_domain_type&lt;IdxRangeBatched&gt; &gt;</definition>
+      <memberdef kind="typedef" id="classSplineInterpolator2D_1a89ac0bdf5b77a0330a1ba38ddd89f560" prot="private" static="no">
+        <type>DConstField&lt; typename Spline2DBuilder::template batched_derivs_domain_type&lt; IdxRangeBatched &gt; &gt;</type>
+        <definition>using SplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator, IdxRangeBatched &gt;::mixed_deriv_type =  DConstField&lt; typename Spline2DBuilder::template batched_derivs_domain_type&lt;IdxRangeBatched&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>mixed_deriv_type</name>
         <qualifiedname>SplineInterpolator2D::mixed_deriv_type</qualifiedname>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="44" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="44" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="45" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="37" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="37" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="38" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="38" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -183,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="54" bodyend="62"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="55" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="55" bodyend="63"/>
       </memberdef>
       <memberdef kind="function" id="classSplineInterpolator2D_1abcb78ec14ed806563b8e61c97ef195d3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classSplineInterpolator2D_1a4255ea63affeb96b4ba02e3c53c685c7" kindref="member">DFieldType</ref></type>
@@ -226,7 +226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="76" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="76" bodyend="83"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="77" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="77" bodyend="84"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -332,22 +332,22 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="19" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="21" bodyend="84"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" line="19" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator_2d.hpp" bodystart="21" bodyend="85"/>
     <listofallmembers>
       <member refid="classSplineInterpolator2D_1a710ece4c148100aa05307b140deb709a" prot="private" virt="non-virtual"><scope>SplineInterpolator2D</scope><name>base_type</name></member>
       <member refid="classSplineInterpolator2D_1a42729a16cf23045e851682173916d3cc" prot="public" virt="non-virtual"><scope>SplineInterpolator2D</scope><name>CConstFieldType</name></member>
       <member refid="classSplineInterpolator2D_1aa16e2d83b01633e1e88b8f5b84534613" prot="public" virt="non-virtual"><scope>SplineInterpolator2D</scope><name>CoordType</name></member>
       <member refid="classSplineInterpolator2D_1a4255ea63affeb96b4ba02e3c53c685c7" prot="public" virt="non-virtual"><scope>SplineInterpolator2D</scope><name>DFieldType</name></member>
-      <member refid="classSplineInterpolator2D_1a27806984cf0d10ac0fa92acacf80e751" prot="private" virt="non-virtual"><scope>SplineInterpolator2D</scope><name>IdxRangeBSRTheta</name></member>
+      <member refid="classSplineInterpolator2D_1a55540d3f00a283fe2e5b44f026229a2f" prot="private" virt="non-virtual"><scope>SplineInterpolator2D</scope><name>IdxRangeBSRTheta</name></member>
       <member refid="classSplineInterpolator2D_1a39e5af10cf34e95c70980535f0f0ba0c" prot="private" virt="non-virtual"><scope>SplineInterpolator2D</scope><name>m_builder</name></member>
       <member refid="classSplineInterpolator2D_1afb18701648b423e7c687a4fb82ff0325" prot="private" virt="non-virtual"><scope>SplineInterpolator2D</scope><name>m_coefs</name></member>
       <member refid="classSplineInterpolator2D_1a97ce9931431f7fddb4b0e6de28ae66a3" prot="private" virt="non-virtual"><scope>SplineInterpolator2D</scope><name>m_evaluator</name></member>
-      <member refid="classSplineInterpolator2D_1a79a21e8a321bef5ddca3d5fc64feab68" prot="private" virt="non-virtual"><scope>SplineInterpolator2D</scope><name>mixed_deriv_type</name></member>
+      <member refid="classSplineInterpolator2D_1a89ac0bdf5b77a0330a1ba38ddd89f560" prot="private" virt="non-virtual"><scope>SplineInterpolator2D</scope><name>mixed_deriv_type</name></member>
       <member refid="classSplineInterpolator2D_1abcb78ec14ed806563b8e61c97ef195d3" prot="public" virt="non-virtual"><scope>SplineInterpolator2D</scope><name>operator()</name></member>
       <member refid="classIInterpolator2D_1ad26242ffd54d4df04b8aa746ba25201e" prot="public" virt="pure-virtual" ambiguityscope="IInterpolator2D&lt; Spline2DBuilder::interpolation_domain_type, IdxRangeBatched &gt;::"><scope>SplineInterpolator2D</scope><name>operator()</name></member>
-      <member refid="classSplineInterpolator2D_1af068c79ce06f2550d3b53766190fc4b8" prot="private" virt="non-virtual"><scope>SplineInterpolator2D</scope><name>r_deriv_type</name></member>
+      <member refid="classSplineInterpolator2D_1a67bff504abc2ede9902d047d1c1d7d0d" prot="private" virt="non-virtual"><scope>SplineInterpolator2D</scope><name>r_deriv_type</name></member>
       <member refid="classSplineInterpolator2D_1a8cdd0b5ed3b376e14c43028fda04f500" prot="public" virt="non-virtual"><scope>SplineInterpolator2D</scope><name>SplineInterpolator2D</name></member>
-      <member refid="classSplineInterpolator2D_1a196cb3bc21573291f2360afd8e5643ab" prot="private" virt="non-virtual"><scope>SplineInterpolator2D</scope><name>theta_deriv_type</name></member>
+      <member refid="classSplineInterpolator2D_1a250f4052d2216778427d3cde6d6b1738" prot="private" virt="non-virtual"><scope>SplineInterpolator2D</scope><name>theta_deriv_type</name></member>
       <member refid="classIInterpolator2D_1a8ce7c87d9c81fc6fec0581f0315cae2b" prot="public" virt="virtual"><scope>SplineInterpolator2D</scope><name>~IInterpolator2D</name></member>
     </listofallmembers>
   </compounddef>

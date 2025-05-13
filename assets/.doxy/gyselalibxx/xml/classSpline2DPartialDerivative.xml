@@ -269,6 +269,7 @@
       <member refid="classSpline2DPartialDerivative_1a3c22b53a10e88290efb0e59748fa5f23" prot="private" virt="non-virtual"><scope>Spline2DPartialDerivative</scope><name>m_evaluator</name></member>
       <member refid="classSpline2DPartialDerivative_1a00db393d2502537edc676a8a2773516c" prot="public" virt="virtual"><scope>Spline2DPartialDerivative</scope><name>operator()</name></member>
       <member refid="classSpline2DPartialDerivative_1a122667c2e7ee9defc12b2c1dadd2d48b" prot="public" virt="non-virtual"><scope>Spline2DPartialDerivative</scope><name>Spline2DPartialDerivative</name></member>
+      <member refid="classIPartialDerivative_1a596b5a8933c387935c35461a3c5f1fcb" prot="public" virt="virtual"><scope>Spline2DPartialDerivative</scope><name>~IPartialDerivative</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

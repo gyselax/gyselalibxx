@@ -65,6 +65,7 @@ Inherited by the following classes: [CentralFDMPartialDerivative](classCentralFD
 | Type | Name |
 | ---: | :--- |
 | virtual void | [**operator()**](#function-operator) ([**DFieldType**](classIPartialDerivative.md#typedef-dfieldtype) differentiated\_field) const = 0<br>_Compute the partial derivative of a field in a given direction._  |
+| virtual  | [**~IPartialDerivative**](#function-ipartialderivative) () = default<br> |
 
 
 
@@ -207,6 +208,19 @@ virtual void IPartialDerivative::operator() (
 
 
         
+
+<hr>
+
+
+
+### function ~IPartialDerivative 
+
+```C++
+virtual IPartialDerivative::~IPartialDerivative () = default
+```
+
+
+
 
 <hr>
 

@@ -97,6 +97,7 @@ See [IPartialDerivative](classIPartialDerivative.md)
 | Type | Name |
 | ---: | :--- |
 | virtual void | [**operator()**](classIPartialDerivative.md#function-operator) ([**DFieldType**](classIPartialDerivative.md#typedef-dfieldtype) differentiated\_field) const = 0<br>_Compute the partial derivative of a field in a given direction._  |
+| virtual  | [**~IPartialDerivative**](classIPartialDerivative.md#function-ipartialderivative) () = default<br> |
 
 
 

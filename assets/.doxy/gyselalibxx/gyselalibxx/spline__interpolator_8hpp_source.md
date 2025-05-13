@@ -45,7 +45,7 @@ class SplineInterpolator : public IInterpolator<GridInterp, Grid1D...>
             RightExtrapolationRule>;
     using deriv_type = typename IInterpolator<GridInterp, Grid1D...>::deriv_type;
     using batched_spline_domain_type =
-            typename BuilderType::batched_spline_domain_type<IdxRange<Grid1D...>>;
+            typename BuilderType::template batched_spline_domain_type<IdxRange<Grid1D...>>;
     using batched_derivs_idx_range_type =
             typename IInterpolator<GridInterp, Grid1D...>::batched_derivs_idx_range_type;
     using batched_deriv_field_type = ConstField<double, batched_derivs_idx_range_type>;

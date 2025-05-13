@@ -581,7 +581,7 @@ class SplineInterpolator : public IInterpolator&lt;GridInterp, Grid1D...&gt;
             RightExtrapolationRule&gt;;
     using deriv_type = typename IInterpolator&lt;GridInterp, Grid1D...&gt;::deriv_type;
     using batched_spline_domain_type =
-            typename BuilderType::batched_spline_domain_type&lt;IdxRange&lt;Grid1D...&gt;&gt;;
+            typename BuilderType::template batched_spline_domain_type&lt;IdxRange&lt;Grid1D...&gt;&gt;;
     using batched_derivs_idx_range_type =
             typename IInterpolator&lt;GridInterp, Grid1D...&gt;::batched_derivs_idx_range_type;
     using batched_deriv_field_type = ConstField&lt;double, batched_derivs_idx_range_type&gt;;
