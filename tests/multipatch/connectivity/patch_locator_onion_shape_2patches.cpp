@@ -36,17 +36,17 @@ public:
             CircularToCartesian<R, Theta, X, Y>,
             CartesianToCircular<X, Y, R, Theta>>;
 
-    static constexpr Patch1::Coord1 r1_min(0.2);
-    static constexpr Patch1::Coord1 r1_max(1.0);
+    static constexpr Patch1::Coord1 r1_min = Patch1::Coord1(0.2);
+    static constexpr Patch1::Coord1 r1_max = Patch1::Coord1(1.0);
 
-    static constexpr Patch1::Coord2 theta1_min(0.0);
-    static constexpr Patch1::Coord2 theta1_max(2 * M_PI);
+    static constexpr Patch1::Coord2 theta1_min = Patch1::Coord2(0.0);
+    static constexpr Patch1::Coord2 theta1_max = Patch1::Coord2(2 * M_PI);
 
-    static constexpr Patch2::Coord1 r2_min(1.0);
-    static constexpr Patch2::Coord1 r2_max(1.5);
+    static constexpr Patch2::Coord1 r2_min = Patch2::Coord1(1.0);
+    static constexpr Patch2::Coord1 r2_max = Patch2::Coord1(1.5);
 
-    static constexpr Patch2::Coord2 theta2_min(0.0);
-    static constexpr Patch2::Coord2 theta2_max(2 * M_PI);
+    static constexpr Patch2::Coord2 theta2_min = Patch2::Coord2(0.0);
+    static constexpr Patch2::Coord2 theta2_max = Patch2::Coord2(2 * M_PI);
 
     Patch1::IdxRange1 const idx_range_r1;
     Patch1::IdxRange2 const idx_range_theta1;
