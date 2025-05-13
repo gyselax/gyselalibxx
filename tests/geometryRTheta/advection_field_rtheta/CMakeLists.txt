@@ -24,8 +24,6 @@ function (advection_field_test_executable SIMULATION)
 
             PDI::pdi
             
-            Eigen3::Eigen
-
             GTest::gtest
             GTest::gmock
             
