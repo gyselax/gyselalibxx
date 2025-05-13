@@ -1,4 +1,4 @@
-# First installation of spack 0.23.0
+# First installation of spack 0.23.1
 
 ## Preparation
 
@@ -13,15 +13,15 @@ Start the following tutorial from a clean installation:
 ### Download
 
 ```bash
-wget https://github.com/spack/spack/releases/download/v0.23.0/spack-0.23.0.tar.gz
-tar -xvf spack-0.23.0.tar.gz
-rm spack-0.23.0.tar.gz
+wget https://github.com/spack/spack/releases/download/v0.23.1/spack-0.23.1.tar.gz
+tar -xvf spack-0.23.1.tar.gz
+rm spack-0.23.1.tar.gz
 ```
 
 ### Activation
 
 ```bash
-. spack-0.23.0/share/spack/setup-env.sh
+. spack-0.23.1/share/spack/setup-env.sh
 ```
 
 ## Configuration
@@ -49,18 +49,18 @@ spack config --scope site add 'packages:all:providers:lapack:[openblas]'
 - Add PDI repository
 
 ```bash
-git clone https://github.com/pdidev/spack.git spack-0.23.0/var/spack/repos/pdi
-spack repo add --scope site spack-0.23.0/var/spack/repos/pdi
+git clone https://github.com/pdidev/spack.git spack-0.23.1/var/spack/repos/pdi
+spack repo add --scope site spack-0.23.1/var/spack/repos/pdi
 ```
 
 ## Gyselalibxx environment installation
 
 > :warning: This step takes some time
 
-Using the file [`gyselalibxx-env-0.23.0.yaml`](https://github.com/gyselax/gyselalibxx/blob/devel/toolchains/spack.gyselalibxx_env/README.md)
+Using the file [`gyselalibxx-env-0.23.1.yaml`](https://github.com/gyselax/gyselalibxx/blob/devel/toolchains/spack.gyselalibxx_env/README.md)
 
 ```bash
-spack env create gyselalibxx-env gyselalibxx-env-0.23.0.yaml
+spack env create gyselalibxx-env gyselalibxx-env-0.23.1.yaml
 spack --env gyselalibxx-env install --jobs 2
 ```
 

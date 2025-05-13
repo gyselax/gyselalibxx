@@ -20,15 +20,15 @@ fi
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # Download spack
-wget https://github.com/spack/spack/releases/download/v0.23.0/spack-0.23.0.tar.gz
-tar -xf spack-0.23.0.tar.gz
-rm spack-0.23.0.tar.gz
+wget https://github.com/spack/spack/releases/download/v0.23.1/spack-0.23.1.tar.gz
+tar -xf spack-0.23.1.tar.gz
+rm spack-0.23.1.tar.gz
 
 # Bug fix for spack < 0.24 and gcc>=14
-wget https://raw.githubusercontent.com/spack/spack/b369d8b2509794c4f46f62c81f25c247ca58418e/var/spack/repos/builtin/packages/py-netcdf4/package.py -O spack-0.23.0/var/spack/repos/builtin/packages/py-netcdf4/package.py
+wget https://raw.githubusercontent.com/spack/spack/b369d8b2509794c4f46f62c81f25c247ca58418e/var/spack/repos/builtin/packages/py-netcdf4/package.py -O spack-0.23.1/var/spack/repos/builtin/packages/py-netcdf4/package.py
 
 # Activate spack
-. spack-0.23.0/share/spack/setup-env.sh
+. spack-0.23.1/share/spack/setup-env.sh
 
 # Reduce the naming scheme of packages to avoid shebang issues.
 # Increase the time out that is by default too short for some packages (like PDI)
@@ -39,13 +39,13 @@ spack config --scope site add 'packages:all:providers:blas:[openblas]'
 spack config --scope site add 'packages:all:providers:lapack:[openblas]'
 
 # Add PDI repository
-git clone https://github.com/pdidev/spack.git spack-0.23.0/var/spack/repos/pdi
-spack repo add --scope site spack-0.23.0/var/spack/repos/pdi
+git clone https://github.com/pdidev/spack.git spack-0.23.1/var/spack/repos/pdi
+spack repo add --scope site spack-0.23.1/var/spack/repos/pdi
 
 spack compiler find
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  spack env create gyselalibxx-env ${SCRIPT_DIR}/macos-gyselalibxx-env-0.23.0.yaml
+  spack env create gyselalibxx-env ${SCRIPT_DIR}/macos-gyselalibxx-env-0.23.1.yaml
   COMPILER='apple-clang@14:'
 else
   AVAILABLE_COMPILERS=$(spack compilers | grep "gcc@1[1-9]" || true)
@@ -61,10 +61,10 @@ else
   COMPILER='gcc@11:'
 fi
 
-cp ${SCRIPT_DIR}/gyselalibxx-env-0.23.0.yaml .
-sed -i "s/<COMPILER>/${COMPILER}/g" gyselalibxx-env-0.23.0.yaml
+cp ${SCRIPT_DIR}/gyselalibxx-env-0.23.1.yaml .
+sed -i "s/<COMPILER>/${COMPILER}/g" gyselalibxx-env-0.23.1.yaml
 
-spack env create gyselalibxx-env gyselalibxx-env-0.23.0.yaml
+spack env create gyselalibxx-env gyselalibxx-env-0.23.1.yaml
 spack --env gyselalibxx-env install --jobs 2
 
 CURRENT_DIR=$(pwd)
@@ -77,6 +77,6 @@ then
     exit 1
 fi
 
-. ${CURRENT_DIR}/spack-0.23.0/share/spack/setup-env.sh
+. ${CURRENT_DIR}/spack-0.23.1/share/spack/setup-env.sh
 spack env activate -p gyselalibxx-env
 EOL
