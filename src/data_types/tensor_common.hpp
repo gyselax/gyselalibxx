@@ -262,9 +262,9 @@ namespace ddcHelper {
  * @param tensor The tensor whose elements are examined.
  * @return The relevant element of the tensor.
  */
-template <class... QueryIndexTag, class ElementType, class ExecutionSpace, class... ValidIndexSet>
+template <class... QueryIndexTag, class ElementType, class LayoutSpace, class... ValidIndexSet>
 KOKKOS_INLINE_FUNCTION ElementType& get(
-        TensorCommon<ElementType, ExecutionSpace, ValidIndexSet...>& tensor)
+        TensorCommon<ElementType, LayoutSpace, ValidIndexSet...>& tensor)
 {
     return tensor.template get<tensor_tools::TensorIndexElement<
             ddc::detail::TypeSeq<ValidIndexSet...>,
@@ -277,9 +277,9 @@ KOKKOS_INLINE_FUNCTION ElementType& get(
  * @param tensor The tensor whose elements are examined.
  * @return The relevant element of the tensor.
  */
-template <class... QueryIndexTag, class ElementType, class ExecutionSpace, class... ValidIndexSet>
+template <class... QueryIndexTag, class ElementType, class LayoutSpace, class... ValidIndexSet>
 KOKKOS_INLINE_FUNCTION ElementType const& get(
-        TensorCommon<ElementType, ExecutionSpace, ValidIndexSet...> const& tensor)
+        TensorCommon<ElementType, LayoutSpace, ValidIndexSet...> const& tensor)
 {
     return tensor.template get<tensor_tools::TensorIndexElement<
             ddc::detail::TypeSeq<ValidIndexSet...>,
@@ -293,9 +293,9 @@ KOKKOS_INLINE_FUNCTION ElementType const& get(
  * @param tensor The tensor to be converted.
  * @return The new coordinate.
  */
-template <class ElementType, class ExecutionSpace, class... Dims>
+template <class ElementType, class LayoutSpace, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord<Dims...> to_coord(
-        TensorCommon<ElementType, ExecutionSpace, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<ElementType, LayoutSpace, ddc::detail::TypeSeq<Dims...>> const& tensor)
 {
     return Coord<Dims...>(get<Dims>(tensor)...);
 }
@@ -309,10 +309,10 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> to_coord(
  * @param[in] tensor The tensor to be added to the coordinate.
  * @return The new coordinate.
  */
-template <class... Dims, class ExecutionSpace>
+template <class... Dims, class LayoutSpace>
 KOKKOS_INLINE_FUNCTION Coord<Dims...> operator+(
         Coord<Dims...> const& coord,
-        TensorCommon<double, ExecutionSpace, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<double, LayoutSpace, ddc::detail::TypeSeq<Dims...>> const& tensor)
 {
     return Coord<Dims...>((ddc::get<Dims>(coord) + ddcHelper::get<Dims>(tensor))...);
 }
@@ -325,10 +325,10 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> operator+(
  * @param[in] tensor The tensor to be subtracted from the coordinate.
  * @return The new coordinate.
  */
-template <class... Dims, class ExecutionSpace>
+template <class... Dims, class LayoutSpace>
 KOKKOS_INLINE_FUNCTION Coord<Dims...> operator-(
         Coord<Dims...> const& coord,
-        TensorCommon<double, ExecutionSpace, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<double, LayoutSpace, ddc::detail::TypeSeq<Dims...>> const& tensor)
 {
     return Coord<Dims...>((ddc::get<Dims>(coord) - ddcHelper::get<Dims>(tensor))...);
 }
@@ -341,10 +341,10 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> operator-(
  * @param[in] tensor The tensor to be added to the coordinate.
  * @return The new coordinate.
  */
-template <class... Dims, class ExecutionSpace>
+template <class... Dims, class LayoutSpace>
 KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(
         Coord<Dims...>& coord,
-        TensorCommon<double, ExecutionSpace, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<double, LayoutSpace, ddc::detail::TypeSeq<Dims...>> const& tensor)
 {
     ((ddc::get<Dims>(coord) += ddcHelper::get<Dims>(tensor)), ...);
     return coord;
@@ -358,10 +358,10 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(
  * @param[in] tensor The tensor to be subtracted from the coordinate.
  * @return The new coordinate.
  */
-template <class... Dims, class ExecutionSpace>
+template <class... Dims, class LayoutSpace>
 KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator-=(
         Coord<Dims...>& coord,
-        TensorCommon<double, ExecutionSpace, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<double, LayoutSpace, ddc::detail::TypeSeq<Dims...>> const& tensor)
 {
     ((ddc::get<Dims>(coord) -= ddcHelper::get<Dims>(tensor)), ...);
     return coord;
