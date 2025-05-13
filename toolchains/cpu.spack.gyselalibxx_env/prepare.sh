@@ -46,6 +46,7 @@ spack compiler find
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   spack env create gyselalibxx-env ${SCRIPT_DIR}/macos-gyselalibxx-env-0.23.0.yaml
+  COMPILER='apple-clang@14:'
 else
   AVAILABLE_COMPILERS=$(spack compilers | grep "gcc@1[1-9]" || true)
 
@@ -57,8 +58,13 @@ else
       spack compiler find
   fi
 
-  spack env create gyselalibxx-env ${SCRIPT_DIR}/linux-gyselalibxx-env-0.23.0.yaml
+  COMPILER='gcc@11:'
 fi
+
+cp ${SCRIPT_DIR}/gyselalibxx-env-0.23.0.yaml .
+sed -i "s/<COMPILER>/${COMPILER}/g" gyselalibxx-env-0.23.0.yaml
+
+spack env create gyselalibxx-env gyselalibxx-env-0.23.0.yaml
 spack --env gyselalibxx-env install --jobs 2
 
 CURRENT_DIR=$(pwd)
