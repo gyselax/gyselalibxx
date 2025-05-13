@@ -91,6 +91,8 @@ jobs:
         exclude:
           - toolchain: 'tests_coverage_toolchain'
             compiler: 'clang'
+          - toolchain: 'tests_release_omp_toolchain' # Clang + OpenMP leads to compiler failure with Clang 14.0.0
+            compiler: 'clang'
       fail-fast: false
     container:
       image: ${{ needs.docker_update.outputs.image_tag }}
