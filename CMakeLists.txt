@@ -91,12 +91,6 @@ if(NOT "${KokkosKernels_FOUND}")
   add_subdirectory("vendor/kokkos-kernels/" "kokkos-kernels") # SYSTEM)
 endif()
 
-find_package (Eigen3 3.3 NO_MODULE)
-if (NOT EIGEN3_FOUND)
-  ## Use Eigen from `vendor/`
-  set(EIGEN_BUILD_DOC OFF CACHE BOOL "Don't build eigen docs")
-  add_subdirectory("vendor/eigen/" "eigen") # SYSTEM)
-endif (NOT EIGEN3_FOUND)
 
 find_package(DDC 0.5 QUIET COMPONENTS fft pdi splines)
 if(NOT "${DDC_FOUND}")
