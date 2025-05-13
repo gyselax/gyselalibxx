@@ -25,7 +25,7 @@ cd gyselalibxx
 ### HTTPS Method
 
 ```bash
-git clone --recurse-submodules https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx.git gyselalibxx
+git clone --recurse-submodules https://github.com/gyselax/gyselalibxx gyselalibxx
 cd gyselalibxx
 ./bin/install-hooks
 ```
