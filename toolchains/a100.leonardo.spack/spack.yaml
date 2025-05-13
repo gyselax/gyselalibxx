@@ -7,7 +7,6 @@ spack:
   - packages:
     - cmake@3.22:3
     - cuda
-    - eigen
     - googletest +gmock
     - fftw precision=float,double
     - gdb

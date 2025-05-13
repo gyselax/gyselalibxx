@@ -27,7 +27,6 @@ module load \
     gcc/13.2.1.mi250/zen3/pdiplugin-set-value \
     gcc/13.2.1.mi250/zen3/pdiplugin-trace \
     gcc/13.2.1.mi250/zen3/ginkgo \
-    gcc/13.2.1.mi250/zen3/eigen \
     gcc/13.2.1.mi250/zen3/ninja
 
 module list
