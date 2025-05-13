@@ -37,11 +37,11 @@ mkdir "${RSTDIR}"
 cd "${RSTDIR}"
 
 "${GYSELALIBXX_EXEC}" "--dump-config" "${PWD}/bumpontail.yaml"
-sed -i 's/^  x_size: .*/  x_size: 16/' bumpontail.yaml
-sed -i 's/^  vx_size: .*/  vx_size: 16/' bumpontail.yaml
-sed -i 's/^  nbiter: .*/  nbiter: 10/' bumpontail.yaml
-sed -i 's/^  deltat: .*/  deltat: 0.125/' bumpontail.yaml
-sed -i 's/^  time_diag: .*/  time_diag: 0.25/' bumpontail.yaml
+sed -i.save 's/^  x_size: .*/  x_size: 16/' bumpontail.yaml
+sed -i.save 's/^  vx_size: .*/  vx_size: 16/' bumpontail.yaml
+sed -i.save 's/^  nbiter: .*/  nbiter: 10/' bumpontail.yaml
+sed -i.save 's/^  deltat: .*/  deltat: 0.125/' bumpontail.yaml
+sed -i.save 's/^  time_diag: .*/  time_diag: 0.25/' bumpontail.yaml
 
 "${GYSELALIBXX_EXEC}" "${PWD}/bumpontail.yaml"
 
