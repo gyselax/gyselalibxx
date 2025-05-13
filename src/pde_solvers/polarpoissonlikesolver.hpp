@@ -203,7 +203,7 @@ private:
     static constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
     static constexpr int s_n_gauss_legendre_theta = BSplinesTheta::degree() + 1;
     // The number of cells (in the radial direction) in which both types of basis splines can be found
-    static constexpr int m_n_overlap_cells = PolarBSplinesRTheta::continuity + 1;
+    static constexpr int s_n_overlap_cells = PolarBSplinesRTheta::continuity + 1;
 
     // Number of cells over which a radial B-splines has its support
     // This is the case for b-splines which are not affected by the higher knot multiplicity at the boundary.
@@ -284,14 +284,14 @@ public:
             ConstSpline2D coeff_beta,
             Mapping const& mapping,
             SplineRThetaEvaluatorNullBound const& spline_evaluator)
-        : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - m_n_overlap_cells - 1)
+        : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - s_n_overlap_cells - 1)
         , m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
         , m_matrix_size(ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - m_nbasis_theta)
         , m_idxrange_fem_non_singular(
                   ddc::discrete_space<PolarBSplinesRTheta>().tensor_bspline_idx_range().remove_last(
                           IdxStep<PolarBSplinesRTheta> {m_nbasis_theta}))
         , m_idxrange_bsplines_r(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
-                  IdxStep<BSplinesR> {m_n_overlap_cells}))
+                  IdxStep<BSplinesR> {s_n_overlap_cells}))
         , m_idxrange_bsplines_theta(ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
                   IdxStep<BSplinesTheta> {m_nbasis_theta}))
         , m_idxrange_quadrature_r(
@@ -304,7 +304,7 @@ public:
                           s_n_gauss_legendre_theta * ddc::discrete_space<BSplinesTheta>().ncells()))
         , m_idxrange_quadrature_singular(
                   m_idxrange_quadrature_r.take_first(
-                          IdxStep<QDimRMesh> {m_n_overlap_cells * s_n_gauss_legendre_r}),
+                          IdxStep<QDimRMesh> {s_n_overlap_cells * s_n_gauss_legendre_r}),
                   m_idxrange_quadrature_theta)
         , m_weights_r(m_idxrange_quadrature_r)
         , m_weights_theta(m_idxrange_quadrature_theta)
@@ -645,7 +645,7 @@ public:
                         theta_mod(idx_trial_theta.uid() - BSplinesTheta::degree()));
 
                 const IdxStep<RCellDim> n_overlap_r(
-                        m_n_overlap_cells - first_overlap_element_r.uid());
+                        s_n_overlap_cells - first_overlap_element_r.uid());
                 const IdxStep<ThetaCellDim> n_overlap_theta(BSplinesTheta::degree() + 1);
 
                 const IdxRange<RCellDim> r_cells(first_overlap_element_r, n_overlap_r);
