@@ -21,7 +21,6 @@ spack:
     - 'pdiplugin-trace@1.9'
   - python-packages:
     - 'py-dask@2024.7'
-    - 'py-h5netcdf'
     - 'py-h5py@3.12'
     - 'py-imageio@2.35'
     - 'py-matplotlib@3.9'
