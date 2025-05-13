@@ -36,6 +36,18 @@ public:
             CircularToCartesian<R, Theta, X, Y>,
             CartesianToCircular<X, Y, R, Theta>>;
 
+    static constexpr Patch1::Coord1 r1_min(0.2);
+    static constexpr Patch1::Coord1 r1_max(1.0);
+
+    static constexpr Patch1::Coord2 theta1_min(0.0);
+    static constexpr Patch1::Coord2 theta1_max(2 * M_PI);
+
+    static constexpr Patch2::Coord1 r2_min(1.0);
+    static constexpr Patch2::Coord1 r2_max(1.5);
+
+    static constexpr Patch2::Coord2 theta2_min(0.0);
+    static constexpr Patch2::Coord2 theta2_max(2 * M_PI);
+
     Patch1::IdxRange1 const idx_range_r1;
     Patch1::IdxRange2 const idx_range_theta1;
 
@@ -53,23 +65,11 @@ public:
     {
         // Creating of meshes and supports ...........................................................
         // Patch 1
-        Patch1::Coord1 const r1_min(0.2);
-        Patch1::Coord1 const r1_max(1.0);
-
-        Patch1::Coord2 const theta1_min(0.0);
-        Patch1::Coord2 const theta1_max(2 * M_PI);
-
         ddc::init_discrete_space<GridR<1>>(GridR<1>::init(r1_min, r1_max, r1_size));
         ddc::init_discrete_space<GridTheta<1>>(
                 GridTheta<1>::init(theta1_min, theta1_max, theta1_size));
 
         // Patch 2
-        Patch2::Coord1 const r2_min(1.0);
-        Patch2::Coord1 const r2_max(1.5);
-
-        Patch2::Coord2 const theta2_min(0.0);
-        Patch2::Coord2 const theta2_max(2 * M_PI);
-
         ddc::init_discrete_space<GridR<2>>(GridR<2>::init(r2_min, r2_max, r2_size));
         ddc::init_discrete_space<GridTheta<2>>(
                 GridTheta<2>::init(theta2_min, theta2_max, theta2_size));
@@ -207,22 +207,22 @@ TEST_F(OnionPatchLocator2PatchesTest, DeviceCzarnyOnionPatchLocator2PatchesTest)
     // Test outside domain (radius smaller than the minimum radius)
     coords_host(0) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(0, 0)));
     // Test radial lower bound
-    coords_host(1) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(0.2, 0)));
+    coords_host(1) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(r1_min, theta1_min)));
     // Test in patch 1
     coords_host(2) = PhysicalCoordXY(0.25, .03);
     // Test in patch 2
     coords_host(3) = PhysicalCoordXY(1, 1);
     // Test patch interface
-    coords_host(4) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(1, 0)));
+    coords_host(4) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(r1_max, theta1_min)));
     // Test radial upper bound
-    coords_host(5) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(1.5, 0)));
+    coords_host(5) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(r2_max, theta2_min)));
     // Test outside domain (radius bigger than the maximum radius)
     coords_host(6) = PhysicalCoordXY(-2.1, 0);
 
     // Test outside domain (radius smaller than the minimum radius)
     patches_host(0) = PatchLocator::outside_rmin_domain;
     // Test radial lower bound
-    if (ddc::select<R>(to_logical_mapping(coords_host(1))) - 0.2 < 0) {
+    if (ddc::select<R>(to_logical_mapping(coords_host(1))) - r1_min < 0) {
         patches_host(1) = PatchLocator::outside_rmin_domain;
     } else {
         patches_host(1) = 0;
@@ -232,13 +232,13 @@ TEST_F(OnionPatchLocator2PatchesTest, DeviceCzarnyOnionPatchLocator2PatchesTest)
     // Test in patch 2
     patches_host(3) = 1;
     // Test patch interface
-    if (ddc::select<R>(to_logical_mapping(coords_host(4))) - 1 <= 0) {
+    if (ddc::select<R>(to_logical_mapping(coords_host(4))) - r1_max <= 0) {
         patches_host(4) = 0;
     } else {
         patches_host(4) = 1;
     }
     // Test radial upper bound
-    if (ddc::select<R>(to_logical_mapping(coords_host(5))) - 1.5 <= 0) {
+    if (ddc::select<R>(to_logical_mapping(coords_host(5))) - r2_max <= 0) {
         patches_host(5) = 1;
     } else {
         patches_host(5) = PatchLocator::outside_rmax_domain;
@@ -319,8 +319,8 @@ TEST_F(OnionPatchLocator2PatchesTest, HostCzarnyOnionPatchLocator2PatchesTest)
     EXPECT_EQ(patch_locator(coord), PatchLocator::outside_rmin_domain);
 
     // Test radial lower bound
-    coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(0.2, 0)));
-    if (ddc::select<R>(to_logical_mapping(coord)) - 0.2 < 0) {
+    coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(r1_min, theta1_min)));
+    if (ddc::select<R>(to_logical_mapping(coord)) - r1_min < 0) {
         EXPECT_EQ(patch_locator(coord), PatchLocator::outside_rmin_domain);
     } else {
         EXPECT_EQ(patch_locator(coord), 0);
@@ -335,16 +335,16 @@ TEST_F(OnionPatchLocator2PatchesTest, HostCzarnyOnionPatchLocator2PatchesTest)
     EXPECT_EQ(patch_locator(coord), 1);
 
     // Test patch interface
-    coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(1, 0)));
-    if (ddc::select<R>(to_logical_mapping(coord)) - 1 <= 0) {
+    coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(r1_max, theta1_min)));
+    if (ddc::select<R>(to_logical_mapping(coord)) - r1_max <= 0) {
         EXPECT_EQ(patch_locator(coord), 0);
     } else {
         EXPECT_EQ(patch_locator(coord), 1);
     }
 
     // Test radial upper bound
-    coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(1.5, 0)));
-    if (ddc::select<R>(to_logical_mapping(coord)) - 1.5 <= 0) {
+    coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(r2_max, theta2_min)));
+    if (ddc::select<R>(to_logical_mapping(coord)) - r2_max <= 0) {
         EXPECT_EQ(patch_locator(coord), 1);
     } else {
         EXPECT_EQ(patch_locator(coord), PatchLocator::outside_rmax_domain);
