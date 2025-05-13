@@ -17,6 +17,8 @@ if [ -d "${HOME}/.spack" ]; then
     fi
 fi
 
+set -e
+
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # Download spack
@@ -61,8 +63,7 @@ else
   COMPILER='gcc@11:'
 fi
 
-cp ${SCRIPT_DIR}/gyselalibxx-env-0.23.1.yaml .
-sed -i "s/<COMPILER>/${COMPILER}/g" gyselalibxx-env-0.23.1.yaml
+sed "s/<COMPILER>/${COMPILER}/g" ${SCRIPT_DIR}/gyselalibxx-env-0.23.1.yaml > gyselalibxx-env-0.23.1.yaml
 
 spack env create gyselalibxx-env gyselalibxx-env-0.23.1.yaml
 spack --env gyselalibxx-env install --jobs 2
