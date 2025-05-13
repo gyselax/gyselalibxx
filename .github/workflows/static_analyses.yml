@@ -139,9 +139,6 @@ jobs:
       - uses: ./.github/actions/linux_static_analysis_install
       - uses: ./.github/actions/python-static-analysis-setup
       - uses: ./.github/actions/test_filter
-        with:
-          base_sha: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
-          trigger_type: ${{ github.event_name }}
       - run: |
           python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES} --errors-only
 
@@ -157,9 +154,6 @@ jobs:
       - uses: ./.github/actions/linux_static_analysis_install
       - uses: ./.github/actions/python-static-analysis-setup
       - uses: ./.github/actions/test_filter
-        with:
-          base_sha: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
-          trigger_type: ${{ github.event_name }}
       - run: |
           python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
 

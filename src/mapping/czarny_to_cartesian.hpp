@@ -19,9 +19,9 @@ class CartesianToCzarny;
  *
  * The mapping @f$ (r,\theta)\mapsto (x,y) @f$ is defined by
  *
- * @f$ x(r,\theta) = \frac{1}{\epsilon} \left( 1 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right),@f$
+ * @f$ x(r,\theta) = \frac{1}{\epsilon} \left( 1 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right) + x_0,@f$
  *
- * @f$ y(r,\theta) = \frac{e\xi r \sin(\theta)}{2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} },@f$
+ * @f$ y(r,\theta) = \frac{e\xi r \sin(\theta)}{2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } + y_0,@f$
  *
  * with @f$ \xi = 1/\sqrt{1 - \epsilon^2 /4} @f$ and @f$ e @f$ and @f$ \epsilon @f$ given as parameters.
  * It and its Jacobian matrix are invertible everywhere except for @f$ r = 0 @f$.
@@ -76,6 +76,8 @@ public:
 private:
     double m_epsilon;
     double m_e;
+    double m_x0;
+    double m_y0;
 
 public:
     /**
@@ -83,13 +85,24 @@ public:
      *
      * @param[in] epsilon
      * 			The @f$ \epsilon @f$ parameter in the definition of the mapping CzarnyToCartesian.
-     *
      * @param[in] e
      * 			The @f$ e @f$ parameter in the definition of the mapping CzarnyToCartesian.
+     * @param[in] x0 The x-coordinate of the centre of the circle (0 by default).
+     * @param[in] y0 The y-coordinate of the centre of the circle (0 by default).
      *
      * @see CzarnyToCartesian
      */
-    CzarnyToCartesian(double epsilon, double e) : m_epsilon(epsilon), m_e(e) {}
+    explicit KOKKOS_FUNCTION CzarnyToCartesian(
+            double epsilon,
+            double e,
+            double x0 = 0.0,
+            double y0 = 0.0)
+        : m_epsilon(epsilon)
+        , m_e(e)
+        , m_x0(x0)
+        , m_y0(y0)
+    {
+    }
 
     /**
      * @brief Instantiate a CzarnyToCartesian from another CzarnyToCartesian (lvalue).
@@ -97,11 +110,7 @@ public:
      * @param[in] other
      * 		CzarnyToCartesian mapping used to instantiate the new one.
      */
-    KOKKOS_FUNCTION CzarnyToCartesian(CzarnyToCartesian const& other)
-        : m_epsilon(other.epsilon())
-        , m_e(other.e())
-    {
-    }
+    KOKKOS_DEFAULTED_FUNCTION CzarnyToCartesian(CzarnyToCartesian const& other) = default;
 
     /**
      * @brief Instantiate a CzarnyToCartesian from another temporary CzarnyToCartesian (rvalue).
@@ -111,7 +120,7 @@ public:
      */
     CzarnyToCartesian(CzarnyToCartesian&& x) = default;
 
-    ~CzarnyToCartesian() = default;
+    KOKKOS_DEFAULTED_FUNCTION ~CzarnyToCartesian() = default;
 
     /**
      * @brief Assign a CzarnyToCartesian from another CzarnyToCartesian (lvalue).
@@ -171,9 +180,10 @@ public:
         const double tmp1
                 = Kokkos::sqrt(m_epsilon * (m_epsilon + 2.0 * r * Kokkos::cos(theta)) + 1.0);
 
-        const double x = (1.0 - tmp1) / m_epsilon;
+        const double x = (1.0 - tmp1) / m_epsilon + m_x0;
         const double y = m_e * r * Kokkos::sin(theta)
-                         / (Kokkos::sqrt(1.0 - 0.25 * m_epsilon * m_epsilon) * (2.0 - tmp1));
+                                 / (Kokkos::sqrt(1.0 - 0.25 * m_epsilon * m_epsilon) * (2.0 - tmp1))
+                         + m_y0;
 
         return Coord<X, Y>(x, y);
     }
@@ -385,7 +395,7 @@ public:
      *
      * @return The inverse mapping.
      */
-    CartesianToCzarny<X, Y, R, Theta> get_inverse_mapping() const
+    KOKKOS_INLINE_FUNCTION CartesianToCzarny<X, Y, R, Theta> get_inverse_mapping() const
     {
         return CartesianToCzarny<X, Y, R, Theta>(m_epsilon, m_e);
     }

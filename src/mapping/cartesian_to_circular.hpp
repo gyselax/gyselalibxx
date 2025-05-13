@@ -17,23 +17,23 @@ class CircularToCartesian;
  *
  * The mapping @f$ (x,y)\mapsto (r,\theta) @f$ is defined as follow :
  *
- * @f$ r(x,y) = \sqrt x^2+y^2 ,@f$
+ * @f$ r(x,y) = \sqrt (x-x_0)^2+(y-y_0)^2 ,@f$
  *
- * @f$ \theta(x,y) = atan2(\frac{y}{x}) .@f$
+ * @f$ \theta(x,y) = atan2(\frac{y-y_0}{x-x_0}) .@f$
  *
  * It and its Jacobian matrix are invertible everywhere except for @f$ r = 0 @f$.
  *
  * The Jacobian matrix coefficients are defined as follow
  *
- * @f$ J_{11}(x,y)  =\frac{x}{\sqrt{x^2+y^2}}  @f$
+ * @f$ J_{11}(x,y)  =\frac{x-x_0}{\sqrt{(x-x_0)^2+(y-y_0)^2}}  @f$
  *
- * @f$ J_{12}(x,y)  =\frac{y}{\sqrt{x^2+y^2}}  @f$
+ * @f$ J_{12}(x,y)  =\frac{y-y_0}{\sqrt{(x-x_0)^2+(y-y_0)^2}}  @f$
  *
- * @f$ J_{21}(x,y)  =\frac{-y}{x^2+y^2}  @f$
+ * @f$ J_{21}(x,y)  =\frac{-(y-y_0)}{(x-x_0)^2+(y-y_0)^2}  @f$
  *
- * @f$ J_{22}(x,y)  =\frac{x}{x^2+y^2}  @f$
+ * @f$ J_{22}(x,y)  =\frac{x-x_0}{(x-x_0)^2+(y-y_0)^2}  @f$
  *
- * and the matrix determinant: @f$ det(J) = 1/(x^2+y^2) @f$.
+ * and the matrix determinant: @f$ det(J) = 1/((x-x_0)^2+(y-y_0)^2) @f$.
  *
  */
 template <class X, class Y, class R, class Theta>
@@ -63,8 +63,22 @@ public:
     /// @brief The covariant form of the second logical coordinate.
     using Theta_cov = typename Theta::Dual;
 
+private:
+    double m_x0;
+    double m_y0;
+
 public:
-    CartesianToCircular() = default;
+    /**
+     * @brief Instantiate a CartesianToCircular from parameters.
+     *
+     * @param[in] x0 The x-coordinate of the centre of the circle (0 by default).
+     * @param[in] y0 The y-coordinate of the centre of the circle (0 by default).
+     */
+    explicit KOKKOS_FUNCTION CartesianToCircular(double x0 = 0.0, double y0 = 0.0)
+        : m_x0(x0)
+        , m_y0(y0)
+    {
+    }
 
     /**
      * @brief Instantiate a CartesianToCircular from another CartesianToCircular (lvalue).
@@ -72,7 +86,7 @@ public:
      * @param[in] other
      * 		CartesianToCircular mapping used to instantiate the new one.
      */
-    KOKKOS_FUNCTION CartesianToCircular(CartesianToCircular const& other) {}
+    KOKKOS_DEFAULTED_FUNCTION CartesianToCircular(CartesianToCircular const& other) = default;
 
     /**
      * @brief Instantiate a Curvilinear2DToCartesian from another temporary CartesianToCircular (rvalue).
@@ -82,7 +96,7 @@ public:
      */
     CartesianToCircular(CartesianToCircular&& x) = default;
 
-    ~CartesianToCircular() = default;
+    KOKKOS_DEFAULTED_FUNCTION ~CartesianToCircular() = default;
 
     /**
      * @brief Assign a CartesianToCircular from another CartesianToCircular (lvalue).
@@ -113,8 +127,8 @@ public:
      */
     KOKKOS_FUNCTION Coord<R, Theta> operator()(Coord<X, Y> const& coord) const
     {
-        const double x = ddc::get<X>(coord);
-        const double y = ddc::get<Y>(coord);
+        const double x = ddc::get<X>(coord) - m_x0;
+        const double y = ddc::get<Y>(coord) - m_y0;
         const double r = Kokkos::sqrt(x * x + y * y);
         const double theta_pi_to_pi(Kokkos::atan2(y, x));
         const double theta = theta_pi_to_pi * (theta_pi_to_pi >= 0)
@@ -132,8 +146,8 @@ public:
      */
     KOKKOS_FUNCTION double jacobian(Coord<X, Y> const& coord)
     {
-        const double x = ddc::get<X>(coord);
-        const double y = ddc::get<Y>(coord);
+        const double x = ddc::get<X>(coord) - m_x0;
+        const double y = ddc::get<Y>(coord) - m_y0;
         return 1. / Kokkos::sqrt(x * x + y * y);
     }
 
@@ -152,8 +166,8 @@ public:
             Coord<X, Y> const& coord) const
 
     {
-        const double x = ddc::get<X>(coord);
-        const double y = ddc::get<Y>(coord);
+        const double x = ddc::get<X>(coord) - m_x0;
+        const double y = ddc::get<Y>(coord) - m_y0;
         DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X_cov, Y_cov>> jacobian_matrix;
         const double r2 = x * x + y * y;
         const double r = Kokkos::sqrt(r2);
@@ -178,8 +192,8 @@ public:
         static_assert(ddc::in_tags_v<IndexTag1, VectorIndexSet<R, Theta>>);
         static_assert(ddc::in_tags_v<IndexTag2, VectorIndexSet<X_cov, Y_cov>>);
 
-        const double x = ddc::get<X>(coord);
-        const double y = ddc::get<Y>(coord);
+        const double x = ddc::get<X>(coord) - m_x0;
+        const double y = ddc::get<Y>(coord) - m_y0;
         if constexpr (std::is_same_v<IndexTag1, R> && std::is_same_v<IndexTag2, X_cov>) {
             // Component (1,1), i.e dr/dx
             return x / Kokkos::pow(x * x + y * y, 0.5);
@@ -200,9 +214,9 @@ public:
      *
      * @return The inverse mapping.
      */
-    CircularToCartesian<R, Theta, X, Y> get_inverse_mapping() const
+    KOKKOS_INLINE_FUNCTION CircularToCartesian<R, Theta, X, Y> get_inverse_mapping() const
     {
-        return CircularToCartesian<R, Theta, X, Y>();
+        return CircularToCartesian<R, Theta, X, Y>(m_x0, m_y0);
     }
 };
 

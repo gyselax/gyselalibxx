@@ -309,4 +309,9 @@ struct MappingAccessibility<ExecSpace, CylindricalToCartesian<R, Z, Zeta, X, Y>>
 {
 };
 
+template <class X, class Y, class Z, class R, class Zeta>
+struct SingularOPointInvJacobian<CylindricalToCartesian<R, Z, Zeta, X, Y>> : std::true_type
+{
+};
+
 } // namespace mapping_detail
