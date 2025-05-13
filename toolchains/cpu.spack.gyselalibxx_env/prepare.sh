@@ -47,7 +47,6 @@ spack repo add --scope site spack-0.23.1/var/spack/repos/pdi
 spack compiler find
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  spack env create gyselalibxx-env ${SCRIPT_DIR}/macos-gyselalibxx-env-0.23.1.yaml
   COMPILER='apple-clang@14:'
 else
   AVAILABLE_COMPILERS=$(spack compilers | grep "gcc@1[1-9]" || true)
