@@ -2,7 +2,7 @@
 include(${CMAKE_CURRENT_LIST_DIR}/../cicd_default_toolchain.cmake)
 
 # Specify Python version to ensure spack packages are used
-set(Python3_EXECUTABLE <SPACK_PYTHON_PATH>)
+set(Python3_EXECUTABLE $ENV{PYTHON_EXECUTABLE})
 
 # CMake options
 set(CMAKE_BUILD_TYPE Release)
