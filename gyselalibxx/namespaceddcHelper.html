@@ -647,6 +647,10 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION constexpr double</td>
+<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> (<a href="classIdentityTensor.html"><strong>IdentityTensor</strong></a>&lt; ElementType, ValidIndexSetRow, ValidIndexSetCol &gt; const &amp; tensor) <br><em>A helper function to get a modifiable reference to an element of the tensor.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION constexpr double</td>
 <td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> (<a href="classLeviCivitaTensor.html"><strong>LeviCivitaTensor</strong></a>&lt; ElementType, ValidIndexSet &gt; const &amp; tensor) <br><em>A helper function to get a modifiable reference to an element of the tensor.</em></td>
 </tr>
 <tr>
@@ -852,6 +856,25 @@ inline void ddcHelper::dump_coordinates (
 
 <h3 id="function-get">function get</h3>
 <p><em>A helper function to get a modifiable reference to an element of the tensor.</em> </p>
+<pre><code class="language-C++">template&lt;class... QueryIndexTag, class ElementType, class ValidIndexSetRow, class ValidIndexSetCol&gt;
+KOKKOS_INLINE_FUNCTION constexpr double ddcHelper::get (
+    IdentityTensor &lt; ElementType, ValidIndexSetRow, ValidIndexSetCol &gt; const &amp; tensor
+) 
+</code></pre>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>QueryIndexTag</code> A type describing the relevant index. </li>
+</ul>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>tensor</code> The tensor whose elements are examined. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The relevant element of the tensor. </p>
+<hr>
+
+<h3 id="function-get_1">function get</h3>
+<p><em>A helper function to get a modifiable reference to an element of the tensor.</em> </p>
 <pre><code class="language-C++">template&lt;class... QueryIndexTag, class ElementType, class ValidIndexSet&gt;
 KOKKOS_INLINE_FUNCTION constexpr double ddcHelper::get (
     LeviCivitaTensor &lt; ElementType, ValidIndexSet &gt; const &amp; tensor
@@ -869,7 +892,7 @@ KOKKOS_INLINE_FUNCTION constexpr double ddcHelper::get (
 <p>The relevant element of the tensor. </p>
 <hr>
 
-<h3 id="function-get_1">function get</h3>
+<h3 id="function-get_2">function get</h3>
 <p><em>A helper function to get a modifiable reference to an element of the tensor.</em> </p>
 <pre><code class="language-C++">template&lt;class... QueryIndexTag, class ElementType, class... ValidIndexSet&gt;
 KOKKOS_INLINE_FUNCTION ElementType &amp; ddcHelper::get (
@@ -888,7 +911,7 @@ KOKKOS_INLINE_FUNCTION ElementType &amp; ddcHelper::get (
 <p>The relevant element of the tensor. </p>
 <hr>
 
-<h3 id="function-get_2">function get</h3>
+<h3 id="function-get_3">function get</h3>
 <p><em>A helper function to get an element of the tensor.</em> </p>
 <pre><code class="language-C++">template&lt;class... QueryIndexTag, class ElementType, class... ValidIndexSet&gt;
 KOKKOS_INLINE_FUNCTION ElementType const &amp; ddcHelper::get (
@@ -907,7 +930,7 @@ KOKKOS_INLINE_FUNCTION ElementType const &amp; ddcHelper::get (
 <p>The relevant element of the tensor. </p>
 <hr>
 
-<h3 id="function-get_3">function get</h3>
+<h3 id="function-get_4">function get</h3>
 <pre><code class="language-C++">template&lt;class QueryTag, class VectorFieldType&gt;
 inline constexpr auto ddcHelper::get (
     VectorFieldType const &amp; field
@@ -915,7 +938,7 @@ inline constexpr auto ddcHelper::get (
 </code></pre>
 <hr>
 
-<h3 id="function-get_4">function get</h3>
+<h3 id="function-get_5">function get</h3>
 <pre><code class="language-C++">template&lt;class QueryTag, class VectorFieldType&gt;
 inline constexpr auto ddcHelper::get (
     VectorFieldType &amp; field

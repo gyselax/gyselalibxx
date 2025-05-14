@@ -37,6 +37,7 @@
 
 | Type | Name |
 | ---: | :--- |
+| class | [**IdentityTensor**](classIdentityTensor.md) &lt;class ElementType, class ValidIndexSetRow, class ValidIndexSetCol&gt;<br> |
 | class | [**LeviCivitaTensor**](classLeviCivitaTensor.md) &lt;class ElementType, class ValidIndexSet&gt;<br> |
 
 

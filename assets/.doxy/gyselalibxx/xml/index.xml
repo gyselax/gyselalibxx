@@ -1139,6 +1139,15 @@
     <member refid="classIChargeDensityCalculator_1a33642031ef4d350e865b9b3d81f6bc76" kind="function"><name>operator()</name></member>
     <member refid="classIChargeDensityCalculator_1a35eed3a25d6d2b7a80246d204f15b66a" kind="function"><name>operator()</name></member>
   </compound>
+  <compound refid="classIdentityTensor" kind="class"><name>IdentityTensor</name>
+    <member refid="classIdentityTensor_1a27a7de561c7c5ea7b5789abcfa85810e" kind="typedef"><name>element_type</name></member>
+    <member refid="classIdentityTensor_1abdb0049eae9e619f3a545a474de1777b" kind="typedef"><name>index_set</name></member>
+    <member refid="classIdentityTensor_1ae90497b7184dc9f1fbf5bfa1a75b3254" kind="typedef"><name>vector_index_set_t</name></member>
+    <member refid="classIdentityTensor_1a2a80ec08e6bb253d22d2944a2dc3641f" kind="function"><name>rank</name></member>
+    <member refid="classIdentityTensor_1a8226c063830730770e62aee983ccbc7f" kind="function"><name>size</name></member>
+    <member refid="classIdentityTensor_1ac03c37d10bf94bfcea328f4d4822a13d" kind="function"><name>get</name></member>
+    <member refid="classIdentityTensor_1a831d9f57e21b2848a6e30a8db4a7d809" kind="function"><name>IdentityTensor</name></member>
+  </compound>
   <compound refid="classIdxRangeSlice" kind="class"><name>IdxRangeSlice</name>
     <member refid="classIdxRangeSlice_1ae49932089fe31921b0cdb4aea133d650" kind="typedef"><name>tags_seq</name></member>
     <member refid="classIdxRangeSlice_1ae029737c01f6337cc2775510bf436f64" kind="variable"><name>m_front</name></member>
@@ -2896,6 +2905,7 @@
     <member refid="non__uniform__interpolation__points_8hpp_1a6ba00773b16df1063519790796f9c1dd" kind="variable"><name>is_non_uniform_interpolation_points_v</name></member>
     <member refid="derivative__field_8hpp_1a9a2d3927b6e69a7dee15d2d617bf6655" kind="function"><name>deepcopy</name></member>
     <member refid="derivative__field_8hpp_1ada5630e0ff2c91e9524e0c32aaa8ad77" kind="function"><name>deepcopy</name></member>
+    <member refid="static__tensors_8hpp_1ad0fdb229d43d6ace239e79e446a2c9db" kind="function"><name>get</name></member>
     <member refid="static__tensors_8hpp_1a1991befd522c601fffc2248514baa52d" kind="function"><name>get</name></member>
     <member refid="tensor_8hpp_1ad3ef4581d179399169e4128657f9bf76" kind="function"><name>get</name></member>
     <member refid="tensor_8hpp_1adcacf7bf8173bf14f4591918285aa2f0" kind="function"><name>get</name></member>

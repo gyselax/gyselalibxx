@@ -552,6 +552,51 @@
 #include "type_seq_tools.hpp"
 #include "vector_index_tools.hpp"
 
+template &lt;class ElementType, class ValidIndexSetRow, class ValidIndexSetCol&gt;
+class IdentityTensor
+{
+    static_assert(is_vector_index_set_v&lt;ValidIndexSetRow&gt;);
+    static_assert(is_vector_index_set_v&lt;ValidIndexSetCol&gt;);
+    static_assert(ddc::type_seq_size_v&lt;ValidIndexSetRow&gt; == ddc::type_seq_size_v&lt;ValidIndexSetCol&gt;);
+
+public:
+    using element_type = ElementType;
+
+    KOKKOS_FUNCTION static constexpr std::size_t rank()
+    {
+        return 2;
+    }
+
+    KOKKOS_FUNCTION static constexpr std::size_t size()
+    {
+        return ddc::type_seq_size_v&lt;ValidIndexSetRow&gt; * ddc::type_seq_size_v&lt;ValidIndexSetCol&gt;;
+    }
+
+    using index_set = ddc::detail::TypeSeq&lt;ValidIndexSetRow, ValidIndexSetCol&gt;;
+
+    KOKKOS_DEFAULTED_FUNCTION IdentityTensor() = default;
+
+    template &lt;class QueryTensorIndexElement&gt;
+    static constexpr KOKKOS_FUNCTION ElementType get()
+    {
+        static_assert(tensor_tools::is_tensor_index_element_v&lt;QueryTensorIndexElement&gt;);
+        constexpr int row_index = ddc::type_seq_rank_v&lt;
+                typename QueryTensorIndexElement::template index_on_dim_t&lt;0&gt;,
+                ValidIndexSetRow&gt;;
+        constexpr int col_index = ddc::type_seq_rank_v&lt;
+                typename QueryTensorIndexElement::template index_on_dim_t&lt;1&gt;,
+                ValidIndexSetCol&gt;;
+        if constexpr (row_index == col_index) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    template &lt;std::size_t dim&gt;
+    using vector_index_set_t = std::conditional_t&lt;dim == 0, ValidIndexSetRow, ValidIndexSetCol&gt;;
+};
+
 template &lt;class ElementType, class ValidIndexSet&gt;
 class LeviCivitaTensor
 {
@@ -594,6 +639,15 @@ public:
 
 
 namespace ddcHelper {
+template &lt;class... QueryIndexTag, class ElementType, class ValidIndexSetRow, class ValidIndexSetCol&gt;
+KOKKOS_INLINE_FUNCTION constexpr double get(
+        IdentityTensor&lt;ElementType, ValidIndexSetRow, ValidIndexSetCol&gt; const&amp; tensor)
+{
+    return tensor.template get&lt;tensor_tools::TensorIndexElement&lt;
+            typename IdentityTensor&lt;ElementType, ValidIndexSetRow, ValidIndexSetCol&gt;::index_set,
+            QueryIndexTag...&gt;&gt;();
+}
+
 template &lt;class... QueryIndexTag, class ElementType, class ValidIndexSet&gt;
 KOKKOS_INLINE_FUNCTION constexpr double get(
         LeviCivitaTensor&lt;ElementType, ValidIndexSet&gt; const&amp; tensor)

@@ -25,7 +25,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="22" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="22" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="102" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="102" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classLeviCivitaTensor_1ae7830c67e0842b80b8b9566fe83fc7b0" prot="public" static="no">
         <type>type_seq_duplicate_t&lt; ValidIndexSet, <ref refid="classLeviCivitaTensor_1a861d4050938002b7643f5d106da33054" kindref="member">rank</ref>()&gt;</type>
@@ -40,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="48" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="48" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="128" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="128" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classLeviCivitaTensor_1a0e1c1e6577d4c49cceaf6f338361084f" prot="public" static="no">
         <templateparamlist>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="80" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="80" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="160" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="160" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="31" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="31" bodyend="34"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="111" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="111" bodyend="114"/>
       </memberdef>
       <memberdef kind="function" id="classLeviCivitaTensor_1a9d2c687cdde551ff289df0020e0d5dc7" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION constexpr std::size_t</type>
@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="42" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="42" bodyend="45"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="122" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="122" bodyend="125"/>
       </memberdef>
       <memberdef kind="function" id="classLeviCivitaTensor_1a9f9c8c9bbbbe3356be9837195a510b43" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="61" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="61" bodyend="72"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="141" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="141" bodyend="152"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="53" column="31"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="133" column="31"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -184,7 +184,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="16" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="17" bodyend="81"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="96" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="97" bodyend="161"/>
     <listofallmembers>
       <member refid="classLeviCivitaTensor_1a75ae281b08da04242aa4b8fe07a61c67" prot="public" virt="non-virtual"><scope>LeviCivitaTensor</scope><name>element_type</name></member>
       <member refid="classLeviCivitaTensor_1a9f9c8c9bbbbe3356be9837195a510b43" prot="public" virt="non-virtual"><scope>LeviCivitaTensor</scope><name>get</name></member>

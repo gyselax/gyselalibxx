@@ -106,6 +106,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**ITimeSolverRTheta**](classITimeSolverRTheta.md) _Base class for the time solvers._     
 * **class** [**ITimeStepper**](classITimeStepper.md) _The superclass from which all timestepping methods inherit._     
 * **class** [**IVlasovSolver**](classIVlasovSolver.md) _An abstract class for solving a Vlasov equation._     
+* **class** [**IdentityTensor**](classIdentityTensor.md)     
 * **class** [**IdxRangeSlice**](classIdxRangeSlice.md) _A class which describes a collection of equally spaced Idxs which form a index range._     
 * **struct** [**IdxRangeSliceIterator**](structIdxRangeSliceIterator.md) _An iterator type for the_ [_**IdxRangeSlice**_](classIdxRangeSlice.md) _._    
 * **struct** [**IdxRangeToSlice**](structIdxRangeToSlice.md) _A class to create a_ [_**IdxRangeSlice**_](classIdxRangeSlice.md) _type from a TypeSeq._
