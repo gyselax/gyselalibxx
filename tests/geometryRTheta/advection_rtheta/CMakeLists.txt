@@ -35,8 +35,6 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING_PHYSICAL" "CZARNY_MAPPING_PHYSICAL" "CZAR
 
                 PDI::pdi
 
-                Eigen3::Eigen
-
                 gslx::advection
                 gslx::geometry_RTheta
                 gslx::interpolation
@@ -75,9 +73,6 @@ target_link_libraries(advection_ALL
 		paraconf::paraconf
 
 		PDI::pdi
-
-		Eigen3::Eigen
-
 
 		gslx::advection
 		gslx::geometry_RTheta

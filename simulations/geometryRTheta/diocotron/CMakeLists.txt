@@ -25,8 +25,6 @@ function (diocotron_executable PREDCORR_METHOD TIME_METHOD )
 
             PDI::pdi
 
-            Eigen3::Eigen
-
             gslx::advection
             gslx::diocotron_init_eq
             gslx::geometry_RTheta
