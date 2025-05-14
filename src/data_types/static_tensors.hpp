@@ -65,10 +65,10 @@ public:
     {
         static_assert(tensor_tools::is_tensor_index_element_v<QueryTensorIndexElement>);
         constexpr int row_index = ddc::type_seq_rank_v<
-                typename QueryTensorIndexElement::index_on_dim_t<0>,
+                typename QueryTensorIndexElement::template index_on_dim_t<0>,
                 ValidIndexSetRow>;
         constexpr int col_index = ddc::type_seq_rank_v<
-                typename QueryTensorIndexElement::index_on_dim_t<1>,
+                typename QueryTensorIndexElement::template index_on_dim_t<1>,
                 ValidIndexSetCol>;
         if constexpr (row_index == col_index) {
             return 1;
