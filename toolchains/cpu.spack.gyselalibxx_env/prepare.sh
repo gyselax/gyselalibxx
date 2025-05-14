@@ -62,7 +62,6 @@ else
   COMPILER='gcc@11:'
 fi
 
-spack env deactivate
 spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-0.23.1.yaml
 spack --env gyselalibxx-env add --list-name compilers ${COMPILER}
 spack --env gyselalibxx-env install --jobs 2
