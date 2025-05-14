@@ -15,7 +15,7 @@ struct MappingAccessibility : std::false_type
 {
 };
 
-template <typename T, template <typename ClassType> typename Attribute>
+template <typename Type, template <typename ClassType> typename Attribute>
 class CheckClassAttributeExistence
 {
     template <typename C, typename = Attribute<C>>
@@ -24,7 +24,7 @@ class CheckClassAttributeExistence
     static std::false_type test(...);
 
 public:
-    static constexpr bool value = decltype(test<T>(0))::value;
+    static constexpr bool value = decltype(test<Type>(0))::value;
 };
 
 /**
