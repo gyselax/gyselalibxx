@@ -79,4 +79,5 @@ fi
 
 . ${CURRENT_DIR}/spack-0.23.1/share/spack/setup-env.sh
 spack env activate -p gyselalibxx-env
+export PYTHON_EXECUTABLE=$(which python3)
 EOL
