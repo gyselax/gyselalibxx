@@ -5,7 +5,6 @@ spack:
   - compilers: []
   - packages:
     - 'cmake@3.30'
-    - 'eigen@3.4'
     - 'fftw@3.3 precision=float,double'
     - 'ginkgo@1.8'
     - 'googletest@1.14 +gmock'
