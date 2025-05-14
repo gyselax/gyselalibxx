@@ -15,7 +15,8 @@ runs:
     - name: Compile code
       run: |
         ${{ inputs.environment_command }}
-        cmake -DCMAKE_TOOLCHAIN_FILE=${{ inputs.toolchain }} -B build -S .
+        echo "Python exe: ${PYTHON_EXECUTABLE}"
+        cmake -DCMAKE_TOOLCHAIN_FILE=${{ inputs.toolchain }} -DPython3_EXECUTABLE=$(which python3) -B build -S .
         cmake --build build --parallel 4
       shell: bash
 
