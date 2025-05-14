@@ -151,6 +151,11 @@ public:
         return r;
     }
 
+    KOKKOS_INLINE_FUNCTION double jacobian(Coord<R> const& coord) const
+    {
+        return ddc::get<R>(coord);
+    }
+
     /**
      * @brief Compute full Jacobian matrix.
      *
