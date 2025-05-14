@@ -62,9 +62,8 @@ else
   COMPILER='gcc@11:'
 fi
 
-sed "s/<COMPILER>/${COMPILER}/g" ${SCRIPT_DIR}/gyselalibxx-env-0.23.1.yaml > gyselalibxx-env-0.23.1.yaml
-
-spack env create gyselalibxx-env gyselalibxx-env-0.23.1.yaml
+spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-0.23.1.yaml
+spack --env gyselalibxx-env add --list-name compilers ${COMPILER}
 spack --env gyselalibxx-env install --jobs 2
 
 CURRENT_DIR=$(pwd)
