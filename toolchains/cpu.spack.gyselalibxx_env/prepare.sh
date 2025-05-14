@@ -11,7 +11,7 @@ if [ -d "${HOME}/.spack" ]; then
     echo "$HOME/.spack detected, continue anyway? [YyNn]"
     read ignore_existing
     if [[ $ignore_existing == y* ]]; then
-        echo "Ignoring `$HOME/.spack`"
+        echo "Ignoring $HOME/.spack"
     else
         exit 1
     fi
