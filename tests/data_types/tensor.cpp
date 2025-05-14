@@ -480,3 +480,12 @@ TEST(TensorTest, LeviCivitaMul)
     val = ddcHelper::get<Y, Y>(I);
     EXPECT_EQ(val, -1);
 }
+
+TEST(TensorTest, Identity2D)
+{
+    IdentityTensor<int, VectorIndexSet<R, Z>, VectorIndexSet<R, Z>> identity;
+    static_assert(ddcHelper::get<R, R>(identity) == 1);
+    static_assert(ddcHelper::get<R, Z>(identity) == 0);
+    static_assert(ddcHelper::get<Z, R>(identity) == 0);
+    static_assert(ddcHelper::get<Z, Z>(identity) == 1);
+}
