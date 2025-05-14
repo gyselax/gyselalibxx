@@ -17,15 +17,15 @@
 
 namespace {
 
-inline void expect_near(double d1, double d2, double Tol)
+inline void expect_double_eq(double d1, double d2)
 {
-    EXPECT_NEAR(d1, d2, Tol);
+    EXPECT_DOUBLE_EQ(d1, d2);
 }
 
 template <class... Dims>
-void compare_coord(Coord<Dims...> const& coord1, Coord<Dims...> const& coord2, double Tol)
+void compare_coord(Coord<Dims...> const& coord1, Coord<Dims...> const& coord2)
 {
-    ((expect_near(ddc::get<Dims>(coord1), ddc::get<Dims>(coord2), Tol)), ...);
+    ((expect_double_eq(ddc::get<Dims>(coord1), ddc::get<Dims>(coord2))), ...);
 }
 
 template <class Mapping>
@@ -41,7 +41,7 @@ void test_analytical_inverse(Mapping map, typename Mapping::CoordArg coord_start
     // Choose a theta value with no chance of a modulo issue
     CoordResult coord_xy = map(coord_start);
     CoordArg coord_end = inv_map(coord_xy);
-    compare_coord(coord_start, coord_end, 1e-14);
+    compare_coord(coord_start, coord_end);
 }
 
 template <class Mapping>
@@ -59,12 +59,11 @@ void test_analytical_inverse_jacobian(Mapping map, typename Mapping::CoordArg co
             map.jacobian_matrix(coord_arg),
             inv_map.jacobian_matrix(coord_result),
             1e-14);
-    EXPECT_NEAR(map.jacobian(coord_arg) * inv_map.jacobian(coord_result), 1.0, 1e-14);
-    EXPECT_NEAR(map.jacobian(coord_arg), determinant(map.jacobian_matrix(coord_arg)), 1e-14);
-    EXPECT_NEAR(
+    EXPECT_DOUBLE_EQ(map.jacobian(coord_arg) * inv_map.jacobian(coord_result), 1.0);
+    EXPECT_DOUBLE_EQ(map.jacobian(coord_arg), determinant(map.jacobian_matrix(coord_arg)));
+    EXPECT_DOUBLE_EQ(
             inv_map.jacobian(coord_result),
-            determinant(inv_map.jacobian_matrix(coord_result)),
-            1e-14);
+            determinant(inv_map.jacobian_matrix(coord_result)));
 }
 
 } // namespace
