@@ -51,8 +51,8 @@ cp "${RSTDIR}/GYSELALIBXX_00003.h5" .
 cp "${RSTDIR}/bumpontail.yaml" bumpontail_restart.yaml
 
 "${GYSELALIBXX_EXEC}" --iter-restart 3 "${PWD}/bumpontail_restart.yaml"
-sed -i 's/^  nbiter: .*/  nbiter: 2/' bumpontail_restart.yaml
-sed -i 's/^  time_diag: .*/  time_diag: 0.5/' bumpontail_restart.yaml
+sed -i.save 's/^  nbiter: .*/  nbiter: 2/' bumpontail_restart.yaml
+sed -i.save 's/^  time_diag: .*/  time_diag: 0.5/' bumpontail_restart.yaml
 
 h5ls -d ${PWD}/GYSELALIBXX_00005.h5/time_saved ${RSTDIR}/GYSELALIBXX_00005.h5/time_saved
 ${PYTHON3_EXE} ${GYSELALIBXX_SRCDIR}/post-process/PythonScripts/compare_hdf5_results.py ${PWD}/GYSELALIBXX_00005.h5 ${RSTDIR}/GYSELALIBXX_00005.h5 time_saved -R ${RELATIVE_RESTART_TOLERANCE} -A ${ABSOLUTE_RESTART_TOLERANCE}
