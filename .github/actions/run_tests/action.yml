@@ -13,8 +13,8 @@ runs:
       run: |
         ${{ inputs.environment_command }}
         ctest -j 2 --timeout 5 --output-junit tests.xml --output-on-failure
-        working-directory: build
       shell: bash
+      working-directory: ./build
       env:
         OMPI_ALLOW_RUN_AS_ROOT: 1
         OMPI_ALLOW_RUN_AS_ROOT_CONFIRM: 1
