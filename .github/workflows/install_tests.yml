@@ -55,12 +55,12 @@ jobs:
         uses: ./.github/actions/build_code
         with:
           toolchain: toolchains/cpu.spack.gyselalibxx_env/toolchain.cmake
-          environment_command: 'source toolchains/cpu.spack.gyselalibxx_env/environment.sh'
+          environment_command: 'source ${GITHUB_WORKSPACE}/toolchains/cpu.spack.gyselalibxx_env/environment.sh'
       - name: Run tests
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/run_tests
         with:
-          environment_command: 'source toolchains/cpu.spack.gyselalibxx_env/environment.sh'
+          environment_command: 'source ${GITHUB_WORKSPACE}/toolchains/cpu.spack.gyselalibxx_env/environment.sh'
 
   set_pr_status:
     runs-on: ubuntu-latest
