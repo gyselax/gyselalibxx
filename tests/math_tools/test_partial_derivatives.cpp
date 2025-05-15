@@ -607,7 +607,6 @@ public:
                 partial_derivative_creator;
 
         DFieldMemType field_to_differentiate(idxrange_xy);
-        DFieldType field_to_differentiate_proxy = get_field(field_to_differentiate);
 
         std::unique_ptr<IPartialDerivative<IdxRangeXY, DerivativeDimension>> const
                 partial_derivative_creator_pointer
@@ -799,6 +798,6 @@ TEST(PartialDerivative, NullPartialDerivative)
     PartialDerivativeTestNull<10, 10> const test;
 
     // Partial Derivative in X direction
-    EXPECT_DOUBLE_EQ(test.compute_error<X>(), 0.0);
+    EXPECT_DOUBLE_EQ(test.template compute_error<X>(), 0.0);
 }
 } // namespace
