@@ -50,5 +50,6 @@ then
   echo -e "${DEFAULT}git config user.name ${ORANGE}<USERNAME>"
   echo -e "${DEFAULT}git config user.email ${ORANGE}<USER@EMAIL.COM>"
   echo -e "${RED}Commit aborted"
+  echo -e "${DEFAULT}"
   exit 1
 fi
