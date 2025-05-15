@@ -30,12 +30,12 @@ struct TensorDataInnards
 
     std::array<ElementType, s_n_elements> m_data_alloc;
 
-    const_mdspan_type operator()() const
+    KOKKOS_INLINE_FUNCTION const_mdspan_type operator()() const
     {
         return const_mdspan_type(m_data_alloc.data());
     }
 
-    mdspan_type operator()()
+    KOKKOS_INLINE_FUNCTION mdspan_type operator()()
     {
         return mdspan_type(m_data_alloc.data());
     }
