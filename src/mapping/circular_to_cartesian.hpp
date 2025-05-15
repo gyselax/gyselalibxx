@@ -152,6 +152,20 @@ public:
     }
 
     /**
+     * @brief Compute the Jacobian, the determinant of the Jacobian matrix of the mapping
+     * as a function of the radius.
+     *
+     * @param[in] coord
+     *          The radial coordinate where we evaluate the Jacobian.
+     *
+     * @return A double with the value of the determinant of the Jacobian matrix.
+     */
+    KOKKOS_INLINE_FUNCTION double jacobian(Coord<R> const& coord) const
+    {
+        return ddc::get<R>(coord);
+    }
+
+    /**
      * @brief Compute full Jacobian matrix.
      *
      * For some computations, we need the complete Jacobian matrix or just the

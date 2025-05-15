@@ -1,0 +1,41 @@
+spack:
+  concretizer:
+    unify: true
+  definitions:
+  - compilers: []
+  - packages:
+    - 'cmake@3.30'
+    - 'fftw@3.3 precision=float,double'
+    - 'ginkgo@1.8'
+    - 'googletest@1.14 +gmock'
+    - 'kokkos@4.4.1:4.4'
+    - 'openmpi@5.0'
+    - 'paraconf@1.0'
+    - 'pdi@1.9 ~fortran ~python'
+    - 'pdiplugin-decl-hdf5@1.9 +mpi ~fortran'
+    - 'pdiplugin-decl-netcdf@1.9 +mpi'
+    - 'pdiplugin-mpi@1.9'
+    - 'pdiplugin-set-value@1.9'
+    - 'pdiplugin-trace@1.9'
+  - python-packages:
+    - 'py-dask@2024.7'
+    - 'py-h5py@3.12'
+    - 'py-imageio@2.35'
+    - 'py-matplotlib@3.9'
+    - 'py-netcdf4@1.7 +mpi'
+    - 'py-numpy@2.1'
+    - 'py-scipy@1.14'
+    - 'py-sympy@1.13'
+    - 'py-xarray@2024.7'
+  specs:
+  - lapack
+  - matrix:
+    - [$packages]
+    - [$%compilers]
+  - matrix:
+    - [$python-packages]
+    - [$%compilers]
+  view: true
+  packages:
+    all:
+      variants: ~mpi ~openmp cxxstd=17

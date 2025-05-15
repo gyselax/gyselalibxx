@@ -4,12 +4,17 @@ inputs:
   toolchain:
     description: "The toolchain that describes the parameters for cmake"
     required: true
+  environment_command:
+    description: "The command required to setup the environment"
+    required: false
+    default: ''
 
 runs:
   using: "composite"
   steps:
     - name: Compile code
       run: |
+        ${{ inputs.environment_command }}
         cmake -DCMAKE_TOOLCHAIN_FILE=${{ inputs.toolchain }} -B build -S .
         cmake --build build --parallel 4
       shell: bash
