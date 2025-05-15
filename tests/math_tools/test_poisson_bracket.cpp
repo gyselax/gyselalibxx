@@ -119,5 +119,5 @@ void compute_and_test_Lie_Poisson_Bracket()
 
 TEST(LiePoissonBracket, axisymmetric_tokamak)
 {
-  compute_and_test_Lie_Poisson_Bracket();
+    compute_and_test_Lie_Poisson_Bracket();
 }
