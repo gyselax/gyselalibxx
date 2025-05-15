@@ -52,7 +52,7 @@ public:
      * @return A pointer to an IPartialDerivative object.
      */
     std::unique_ptr<IPartialDerivative<IdxRangeFull, DerivativeDimension>> create_instance(
-            DConstField<IdxRangeFull> field_ref) const final
+            DConstField<IdxRangeFull> field) const final
     {
         return std::make_unique<NullPartialDerivative<IdxRangeFull, DerivativeDimension>>();
     }
