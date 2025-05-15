@@ -35,10 +35,9 @@ void compute_and_test_Lie_Poisson_Bracket()
 
     using BasisSpatial = VectorIndexSet<Rho, Theta, Phi>;
     using CovBasisSpatial = get_covariant_dims_t<BasisSpatial>;
-
     IdxStepRho nrho(10);
     IdxStepTheta ntheta(10);
-    IdxStepPhi nphi(10);
+    IdxStepPhi nphi(2);
     ddc::init_discrete_space<GridRho>(
             GridRho::init<GridRho>(Coord<Rho>(0.0), Coord<Rho>(1.0), nrho));
     ddc::init_discrete_space<GridTheta>(GridTheta::init<GridTheta>(
@@ -54,12 +53,14 @@ void compute_and_test_Lie_Poisson_Bracket()
     IdxRangeRhoThetaPhi idx_range(idx_range_rho, idx_range_theta, idx_range_phi);
 
     DFieldMem<IdxRangeRhoThetaPhi> poisson_bracket_alloc(idx_range);
+    DFieldMem<IdxRangeRhoThetaPhi> anal_alloc(idx_range);
     DVectorFieldMem<IdxRangeRhoThetaPhi, CovBasisSpatial> df_alloc(idx_range);
     DVectorFieldMem<IdxRangeRhoThetaPhi, CovBasisSpatial> dg_alloc(idx_range);
     DVectorFieldMem<IdxRangeRhoThetaPhi, BasisSpatial> B_alloc(idx_range);
 
     DField<IdxRangeRhoThetaPhi> poisson_bracket_a = get_field(poisson_bracket_alloc);
     DField<IdxRangeRhoThetaPhi> poisson_bracket_b = get_field(poisson_bracket_alloc);
+    DField<IdxRangeRhoThetaPhi> analytical_matrix = get_field(anal_alloc);
     DVectorField<IdxRangeRhoThetaPhi, CovBasisSpatial> df_a = get_field(df_alloc);
     DVectorField<IdxRangeRhoThetaPhi, CovBasisSpatial> dg_a = get_field(dg_alloc);
     DVectorField<IdxRangeRhoThetaPhi, CovBasisSpatial> df_b = get_field(df_alloc);
@@ -72,6 +73,9 @@ void compute_and_test_Lie_Poisson_Bracket()
             KOKKOS_LAMBDA(IdxRhoThetaPhi idx) {
                 const double rho = ddc::coordinate(ddc::select<GridRho>(idx));
                 const double theta = ddc::coordinate(ddc::select<GridTheta>(idx));
+		const double phi = ddc::coordinate(ddc::select<GridPhi>(idx));
+		Coord<Rho,Theta,Phi> coord = ddc :: coordinate(idx);
+		//		IdxRangeRhoThetaPhi coord = ddc :: coordinate(idx); 
                 // f_a(rho, theta, phi) = 0.5 * rho^2
                 ddcHelper::get<Rho_cov>(df_a)(idx) = rho;
                 ddcHelper::get<Theta_cov>(df_a)(idx) = 0;
@@ -91,9 +95,15 @@ void compute_and_test_Lie_Poisson_Bracket()
                 ddcHelper::get<Phi_cov>(dg_b)(idx) = 0;
 
                 // B(rho, theta, phi) = 0.1 \hat{theta} + 0.9 \hat{phi}
+		const double B_theta = 0.1;
+		const double B_phi = 0.9;
+		const double norm_B = sqrt(B_theta*B_theta + B_phi*B_phi);
                 ddcHelper::get<Rho>(B)(idx) = 0;
-                ddcHelper::get<Theta>(B)(idx) = 0.1;
-                ddcHelper::get<Phi>(B)(idx) = 0.9;
+                ddcHelper::get<Theta>(B)(idx) = B_theta;
+                ddcHelper::get<Phi>(B)(idx) = B_phi;
+
+		const double Jx = mapping.jacobian(coord);
+		analytical_matrix(idx) = (B_phi/norm_B)*rho*theta/Jx;
             });
 
     calculate_poisson_bracket(
@@ -111,10 +121,15 @@ void compute_and_test_Lie_Poisson_Bracket()
 
     auto poisson_bracket_a_host = ddc::create_mirror_view_and_copy(poisson_bracket_a);
     auto poisson_bracket_b_host = ddc::create_mirror_view_and_copy(poisson_bracket_b);
+    auto analytical_matrix_host = ddc::create_mirror_view_and_copy(analytical_matrix);
 
     ddc::for_each(idx_range, [&](IdxRhoThetaPhi idx) {
         EXPECT_NEAR(poisson_bracket_a_host(idx), poisson_bracket_b_host(idx), 1e-13);
     });
+    ddc::for_each(idx_range, [&](IdxRhoThetaPhi idx) {
+        EXPECT_NEAR(poisson_bracket_a_host(idx), analytical_matrix_host(idx), 1e-13);
+    });
+
 }
 
 TEST(LiePoissonBracket, axisymmetric_tokamak)
