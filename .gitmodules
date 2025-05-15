@@ -5,9 +5,6 @@
 [submodule "vendor/kokkos"]
 	path = vendor/kokkos
 	url = https://github.com/kokkos/kokkos.git
-[submodule "vendor/eigen"]
-	path = vendor/eigen
-	url = https://gitlab.com/libeigen/eigen.git
 [submodule "vendor/koliop"]
 	path = vendor/koliop
 	url = https://gitlab.com/cines/code.gysela/koliop.git
