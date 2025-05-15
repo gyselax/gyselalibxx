@@ -65,7 +65,7 @@ void test_analytical_inverse_jacobian(Mapping map, typename Mapping::CoordArg co
     EXPECT_NEAR(map.jacobian(coord_arg) / jacobian, 1.0, 1e-14);
     double inv_jacobian = determinant(inv_map.jacobian_matrix(coord_result));
     // Use relative tolerance
-    EXPECT_NEAR(inv_map.jacobian(coord_result) / inv_jacobian, 1.0 1e-14);
+    EXPECT_NEAR(inv_map.jacobian(coord_result) / inv_jacobian, 1.0, 1e-14);
 }
 
 } // namespace
