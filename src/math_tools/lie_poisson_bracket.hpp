@@ -18,6 +18,9 @@
  * with @f$ {\cal J}_{\rm x} @f$ the jacobian of the system,
  * @f$ b_k @f$ the covariant components of b and @f$\epsilon^{ijk} @f$ the Levi-Civita symbol.
  * @tparam Mapping3D A type representing a mapping in 3 dimensions.
+ * @tparam MappingCoord The type of the coordinate that will be used to evaluate the
+ *                  mapping. This coordinate is used to calculate the determinant of
+ *                  the Jacobian and the metric tensor.
  */
 template <class Mapping3D, class MappingCoord = typename Mapping3D::CoordArg>
 class LiePoissonBracket
@@ -29,7 +32,7 @@ class LiePoissonBracket
 
 private:
     Mapping3D m_mapping;
-    MetricTensorEvaluator<Mapping3D> m_metric_tensor;
+    MetricTensorEvaluator<Mapping3D, MappingCoord> m_metric_tensor;
     Gradient<MetricTensorEvaluator<Mapping3D>> m_grad;
 
 public:
