@@ -20,7 +20,10 @@
  * @tparam Mapping3D A type representing a mapping in 3 dimensions.
  * @tparam MappingCoord The type of the coordinate that will be used to evaluate the
  *                  mapping. This coordinate is used to calculate the determinant of
- *                  the Jacobian and the metric tensor.
+ *                  the Jacobian and the metric tensor. It is almost always equal to
+ *                  the argument type of the 3D mapping but axi-symmetry may make it
+ *                  useful to evaluate the mapping on a coordinate with a reduced
+ *                  dimensionality.
  */
 template <class Mapping3D, class MappingCoord = typename Mapping3D::CoordArg>
 class LiePoissonBracket
@@ -33,7 +36,7 @@ class LiePoissonBracket
 private:
     Mapping3D m_mapping;
     MetricTensorEvaluator<Mapping3D, MappingCoord> m_metric_tensor;
-    Gradient<MetricTensorEvaluator<Mapping3D>> m_grad;
+    Gradient<MetricTensorEvaluator<Mapping3D, MappingCoord>> m_grad;
 
 public:
     /**
