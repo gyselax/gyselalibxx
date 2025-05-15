@@ -15,7 +15,7 @@ public:
     /**
      * @brief Solves on @f$ T = dt*N @f$ the equations system.
      *
-     * @param[in, out] allfdistribu
+     * @param[in, out] density
      *      On input: the initial condition.
      *      On output: the solution at @f$ dt *N@f$.
      * @param[in] dt
@@ -23,10 +23,10 @@ public:
      * @param[in] steps
      *      The number @f$ N@f$ of time interactions.
      *
-     * @return A Field toward allfdistribu.
+     * @return A Field toward density.
      */
     virtual host_t<DFieldRTheta> operator()(
-            host_t<DFieldRTheta> allfdistribu,
+            host_t<DFieldRTheta> density,
             double const dt,
             int const steps = 1) const = 0;
 
