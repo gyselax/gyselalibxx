@@ -55,6 +55,8 @@
     <ul class="current">
     <li class="toctree-l4"><a class="reference internal" href="#general-usage">General usage</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#available-systems">Available systems</a>
+    </li>
     <li class="toctree-l4"><a class="reference internal" href="#toolchains">Toolchains</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#environments">Environments</a>
@@ -570,6 +572,18 @@
 source ../toolchains/mi250.hipcc.adastra.spack/environment.sh
 cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchains/mi250.hipcc.adastra.spack/toolchain.cmake
 </code></pre>
+<h2 id="available-systems">Available systems</h2>
+<p>This folder contains sub-folders with <code>prepare.sh</code>, <code>environment.sh</code>, and <code>toolchain.cmake</code> files. Each sub-folder is designed to work in a different environment. You should choose the folder which best fits your work environment. The available sub-folders are:</p>
+<ul>
+<li><code>a100.leonardo.spack</code> : Designed for use with the A100 hardware available on Cineca's Leonardo supercomputer.</li>
+<li><code>cpu.spack.gyselalibxx_env</code> : Designed for use on a local computer. Installation is handled by spack.</li>
+<li><code>docker.gyselalibxx_env</code> : Designed for use with a docker container. This is used by the CI. It is also possible to use these toolchains if all the dependencies have been installed locally.
+    Should you wish to try Gyselalib++ rapidly, the docker container can be found hosted on the GitHub Container Registry : <a href="https://github.com/gyselax/gyselalibxx/pkgs/container/gyselalibxx_env"><code>ghcr.io/gyselax/gyselalibxx_env:latest</code></a>. The provided <code>environment.sh</code> file will drop you into a container with access to Gyselalib++'s files.</li>
+<li><code>mi250.hipcc.adastra.spack</code> : Designed for use with the MI250 hardware available on CINES's Adastra supercomputer.</li>
+<li><code>v100.persee</code> : Designed for use with the V100 hardware available on IRFM's Persee cluster.</li>
+<li><code>v100.ruche</code> : Designed for use with the V100 hardware available on Mésocentre's Ruche cluster.</li>
+<li><code>xeon.persee</code> : Designed for use with the CPU hardware available on IRFM's Persee cluster.</li>
+</ul>
 <h2 id="toolchains">Toolchains</h2>
 <p>The <a href="https://en.wikipedia.org/wiki/Toolchain">toolchains</a> are represented using a toolchain file. It summarises CMake build settings for the appropriate machine environment and hardware.</p>
 <p>You can use the toolchains like so:</p>
