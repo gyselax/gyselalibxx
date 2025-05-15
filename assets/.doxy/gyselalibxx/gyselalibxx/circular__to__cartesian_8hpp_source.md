@@ -78,6 +78,11 @@ public:
         return r;
     }
 
+    KOKKOS_INLINE_FUNCTION double jacobian(Coord<R> const& coord) const
+    {
+        return ddc::get<R>(coord);
+    }
+
     KOKKOS_FUNCTION DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> jacobian_matrix(
             Coord<R, Theta> const& coord) const
     {

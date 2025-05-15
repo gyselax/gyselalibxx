@@ -634,7 +634,11 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-jacobian"><strong>jacobian</strong></a> (Coord&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; const &amp; coord) const<br><em>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.</em></td>
+<td style="text-align: left;"><a href="#function-jacobian-12"><strong>jacobian</strong></a> (Coord&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; const &amp; coord) const<br><em>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
+<td style="text-align: left;"><a href="#function-jacobian-22"><strong>jacobian</strong></a> (Coord&lt; <a href="structR.html"><strong>R</strong></a> &gt; const &amp; coord) const<br><em>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping as a function of the radius.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION double</td>
@@ -805,7 +809,7 @@ inline KOKKOS_FUNCTION double CircularToCartesian::inv_jacobian_component (
 <p>The inverse Jacobian matrix. </p>
 <hr>
 
-<h3 id="function-jacobian">function jacobian</h3>
+<h3 id="function-jacobian-12">function jacobian [1/2]</h3>
 <p><em>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.</em> </p>
 <pre><code class="language-C++">inline KOKKOS_FUNCTION double CircularToCartesian::jacobian (
     Coord&lt; R , Theta &gt; const &amp; coord
@@ -814,6 +818,20 @@ inline KOKKOS_FUNCTION double CircularToCartesian::inv_jacobian_component (
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>coord</code> The coordinate where we evaluate the Jacobian.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A double with the value of the determinant of the Jacobian matrix. </p>
+<hr>
+
+<h3 id="function-jacobian-22">function jacobian [2/2]</h3>
+<p><em>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping as a function of the radius.</em> </p>
+<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double CircularToCartesian::jacobian (
+    Coord&lt; R &gt; const &amp; coord
+) const
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>coord</code> The radial coordinate where we evaluate the Jacobian.</li>
 </ul>
 <p><strong>Returns:</strong></p>
 <p>A double with the value of the determinant of the Jacobian matrix. </p>

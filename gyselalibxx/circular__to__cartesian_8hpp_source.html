@@ -614,6 +614,11 @@ public:
         return r;
     }
 
+    KOKKOS_INLINE_FUNCTION double jacobian(Coord&lt;R&gt; const&amp; coord) const
+    {
+        return ddc::get&lt;R&gt;(coord);
+    }
+
     KOKKOS_FUNCTION DTensor&lt;VectorIndexSet&lt;X, Y&gt;, VectorIndexSet&lt;R_cov, Theta_cov&gt;&gt; jacobian_matrix(
             Coord&lt;R, Theta&gt; const&amp; coord) const
     {

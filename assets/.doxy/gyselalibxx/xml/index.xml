@@ -384,6 +384,7 @@
     <member refid="classCircularToCartesian_1a15f1433a21a446994169a7d06fd0b49c" kind="function"><name>operator=</name></member>
     <member refid="classCircularToCartesian_1a13b2f19c27365cf45aa62c15b6c9da48" kind="function"><name>operator()</name></member>
     <member refid="classCircularToCartesian_1a3a3dc427c587611aa1beac39556c8523" kind="function"><name>jacobian</name></member>
+    <member refid="classCircularToCartesian_1a7bca4fb266adef7d7a4d5158500c4e69" kind="function"><name>jacobian</name></member>
     <member refid="classCircularToCartesian_1a9adea9d8d953ca89baa8ebc15ad71dee" kind="function"><name>jacobian_matrix</name></member>
     <member refid="classCircularToCartesian_1a61f5a58fc058b1d9c2b2a034d12309d1" kind="function"><name>jacobian_component</name></member>
     <member refid="classCircularToCartesian_1ad6a44656287d8f142c833f109fdfedc6" kind="function"><name>inv_jacobian_matrix</name></member>

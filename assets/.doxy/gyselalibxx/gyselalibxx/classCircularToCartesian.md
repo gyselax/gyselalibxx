@@ -74,7 +74,8 @@ _A class for describing the circular 2D mapping._ [More...](#detailed-descriptio
 |  KOKKOS\_INLINE\_FUNCTION [**CartesianToCircular**](classCartesianToCircular.md)&lt; [**X**](structX.md), [**Y**](structY.md), [**R**](structR.md), [**Theta**](structTheta.md) &gt; | [**get\_inverse\_mapping**](#function-get_inverse_mapping) () const<br>_Get the inverse mapping._  |
 |  KOKKOS\_FUNCTION double | [**inv\_jacobian\_component**](#function-inv_jacobian_component) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the (i,j) coefficient of the inverse Jacobian matrix._  |
 |  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt;, VectorIndexSet&lt; [**X\_cov**](classCircularToCartesian.md#typedef-x_cov), [**Y\_cov**](classCircularToCartesian.md#typedef-y_cov) &gt; &gt; | [**inv\_jacobian\_matrix**](#function-inv_jacobian_matrix) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute full inverse Jacobian matrix._  |
-|  KOKKOS\_FUNCTION double | [**jacobian**](#function-jacobian) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping._  |
+|  KOKKOS\_FUNCTION double | [**jacobian**](#function-jacobian-12) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping._  |
+|  KOKKOS\_INLINE\_FUNCTION double | [**jacobian**](#function-jacobian-22) (Coord&lt; [**R**](structR.md) &gt; const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping as a function of the radius._  |
 |  KOKKOS\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |
 |  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, VectorIndexSet&lt; [**R\_cov**](classCircularToCartesian.md#typedef-r_cov), [**Theta\_cov**](classCircularToCartesian.md#typedef-theta_cov) &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute full Jacobian matrix._  |
 |  KOKKOS\_FUNCTION Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**operator()**](#function-operator) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Convert the_  _coordinate to the equivalent (x,y) coordinate._ |
@@ -473,7 +474,7 @@ The inverse Jacobian matrix.
 
 
 
-### function jacobian 
+### function jacobian [1/2]
 
 _Compute the Jacobian, the determinant of the Jacobian matrix of the mapping._ 
 ```C++
@@ -490,6 +491,40 @@ inline KOKKOS_FUNCTION double CircularToCartesian::jacobian (
 
 
 * `coord` The coordinate where we evaluate the Jacobian.
+
+
+
+**Returns:**
+
+A double with the value of the determinant of the Jacobian matrix. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function jacobian [2/2]
+
+_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping as a function of the radius._ 
+```C++
+inline KOKKOS_INLINE_FUNCTION double CircularToCartesian::jacobian (
+    Coord< R > const & coord
+) const
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `coord` The radial coordinate where we evaluate the Jacobian.
 
 
 

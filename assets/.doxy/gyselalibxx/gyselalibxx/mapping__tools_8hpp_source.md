@@ -28,23 +28,13 @@ struct MappingAccessibility : std::false_type
 template <typename Type, template <typename ClassType> typename Attribute>
 class CheckClassAttributeExistence
 {
-private:
-    // Class for SFINAE deduction
-    template <typename U>
-    class check
-    {
-    };
-
-    // Function that will be chosen if ClassType has a attribute called idx_range with 0 arguments
-    template <typename ClassType>
-    static char attribute(check<Attribute<ClassType>>*);
-
-    // Function that will be chosen by default
-    template <typename ClassType>
-    static long attribute(...);
+    template <typename C, typename = Attribute<C>>
+    static std::true_type test(int);
+    template <typename C>
+    static std::false_type test(...);
 
 public:
-    static constexpr bool has_attribute = (sizeof(attribute<Type>(0)) == sizeof(char));
+    static constexpr bool value = decltype(test<Type>(0))::value;
 };
 
 template <typename Type>
@@ -57,9 +47,8 @@ class IsMapping
 
     static bool constexpr is_mapping()
     {
-        constexpr bool success
-                = CheckClassAttributeExistence<Type, coord_arg_type>::has_attribute
-                  && CheckClassAttributeExistence<Type, coord_result_type>::has_attribute;
+        constexpr bool success = CheckClassAttributeExistence<Type, coord_arg_type>::value
+                                 && CheckClassAttributeExistence<Type, coord_result_type>::value;
         if constexpr (success) {
             using CoordArg = typename Type::CoordArg;
             using CoordResult = typename Type::CoordResult;
@@ -77,23 +66,26 @@ class DefinesJacobian
 {
     struct IdxTag;
     template <typename ClassType>
-    using jacobian_matrix = decltype(&ClassType::jacobian_matrix);
+    using jacobian_matrix
+            = decltype(std::declval<ClassType>().jacobian_matrix(std::declval<CoordinateType>()));
     template <typename ClassType>
-    using jacobian_component = decltype(&ClassType::template jacobian_component<IdxTag, IdxTag>);
+    using jacobian_component
+            = decltype(std::declval<ClassType>().template jacobian_component<IdxTag, IdxTag>(
+                    std::declval<CoordinateType>()));
     template <typename ClassType>
-    using jacobian = decltype(&ClassType::jacobian);
+    using jacobian = decltype(std::declval<ClassType>().jacobian(std::declval<CoordinateType>()));
 
     static bool constexpr has_jacobian_methods()
     {
-        if constexpr (!CheckClassAttributeExistence<Type, jacobian_matrix>::has_attribute) {
+        if constexpr (!CheckClassAttributeExistence<Type, jacobian_matrix>::value) {
             static_assert(HideError, "A Mapping must define the jacobian_matrix function");
             return false;
         }
-        if constexpr (!CheckClassAttributeExistence<Type, jacobian_component>::has_attribute) {
+        if constexpr (!CheckClassAttributeExistence<Type, jacobian_component>::value) {
             static_assert(HideError, "A Mapping must define the jacobian_component function");
             return false;
         }
-        if constexpr (!CheckClassAttributeExistence<Type, jacobian>::has_attribute) {
+        if constexpr (!CheckClassAttributeExistence<Type, jacobian>::value) {
             static_assert(HideError, "A Mapping must define the jacobian function");
             return false;
         }
@@ -108,33 +100,23 @@ class DefinesJacobian
             using ArgBasisCov = get_covariant_dims_t<ddc::to_type_seq_t<typename Type::CoordArg>>;
             using ResultBasis
                     = get_contravariant_dims_t<ddc::to_type_seq_t<typename Type::CoordResult>>;
-            if constexpr (!std::is_invocable_r_v<
+            if constexpr (!std::is_same_v<
                                   DTensor<ResultBasis, ArgBasisCov>,
-                                  decltype(&Type::jacobian_matrix),
-                                  Type,
-                                  CoordinateType>) {
+                                  jacobian_matrix<Type>>) {
                 static_assert(
                         HideError,
                         "The jacobian_matrix method of a Mapping must take a Coordinate as an "
                         "argument and return a Tensor.");
                 return false;
             }
-            if constexpr (!std::is_invocable_r_v<
-                                  double,
-                                  jacobian_component<Type>,
-                                  Type,
-                                  CoordinateType>) {
+            if constexpr (!std::is_same_v<double, jacobian_component<Type>>) {
                 static_assert(
                         HideError,
                         "The jacobian_component method of a Mapping must take a Coordinate as an "
                         "argument and return a double.");
                 return false;
             }
-            if constexpr (!std::is_invocable_r_v<
-                                  double,
-                                  decltype(&Type::jacobian),
-                                  Type,
-                                  CoordinateType>) {
+            if constexpr (!std::is_same_v<double, jacobian<Type>>) {
                 static_assert(
                         HideError,
                         "The jacobian method of a Mapping must take a Coordinate as an argument "
@@ -155,18 +137,20 @@ class DefinesInvJacobian
 {
     struct IdxTag;
     template <typename ClassType>
-    using inv_jacobian_type = decltype(&ClassType::inv_jacobian_matrix);
+    using inv_jacobian_matrix = decltype(std::declval<ClassType>().inv_jacobian_matrix(
+            std::declval<CoordinateType>()));
     template <typename ClassType>
     using inv_jacobian_component
-            = decltype(&ClassType::template inv_jacobian_component<IdxTag, IdxTag>);
+            = decltype(std::declval<ClassType>().template inv_jacobian_component<IdxTag, IdxTag>(
+                    std::declval<CoordinateType>()));
 
     static bool constexpr has_inv_jacobian_methods()
     {
-        if constexpr (!CheckClassAttributeExistence<Type, inv_jacobian_type>::has_attribute) {
+        if constexpr (!CheckClassAttributeExistence<Type, inv_jacobian_matrix>::value) {
             static_assert(HideError, "A Mapping must define the inv_jacobian_matrix function");
             return false;
         }
-        if constexpr (!CheckClassAttributeExistence<Type, inv_jacobian_component>::has_attribute) {
+        if constexpr (!CheckClassAttributeExistence<Type, inv_jacobian_component>::value) {
             static_assert(HideError, "A Mapping must define the inv_jacobian_component function");
             return false;
         }
@@ -181,22 +165,16 @@ class DefinesInvJacobian
             using ResultBasisCov
                     = get_covariant_dims_t<ddc::to_type_seq_t<typename Type::CoordResult>>;
             using ArgBasis = get_contravariant_dims_t<ddc::to_type_seq_t<typename Type::CoordArg>>;
-            if constexpr (!std::is_invocable_r_v<
+            if constexpr (!std::is_same_v<
                                   DTensor<ArgBasis, ResultBasisCov>,
-                                  decltype(&Type::inv_jacobian_matrix),
-                                  Type,
-                                  CoordinateType>) {
+                                  inv_jacobian_matrix<Type>>) {
                 static_assert(
                         HideError,
                         "The inv_jacobian_matrix method of a Mapping must take a Coordinate as an "
                         "argument and return a Tensor.");
                 return false;
             }
-            if constexpr (!std::is_invocable_r_v<
-                                  double,
-                                  inv_jacobian_component<Type>,
-                                  Type,
-                                  CoordinateType>) {
+            if constexpr (!std::is_same_v<double, inv_jacobian_component<Type>>) {
                 static_assert(
                         HideError,
                         "The inv_jacobian_component method of a Mapping must take a Coordinate as "
@@ -226,7 +204,7 @@ private:
 
     static bool constexpr is_analytical_mapping()
     {
-        constexpr bool success = CheckClassAttributeExistence<Type, inverse_mapping>::has_attribute;
+        constexpr bool success = CheckClassAttributeExistence<Type, inverse_mapping>::value;
         if constexpr (success) {
             return std::is_invocable_v<inverse_mapping<Type>, Type>;
         }
