@@ -597,7 +597,7 @@ private:
     double m_deriv_value;
 
 public:
-    PartialDerivativeTestConstant(double const deriv_value)
+    explicit PartialDerivativeTestConstant(double const deriv_value)
         : base_type(0.0, 1.0, 0.0, 1.0)
         , m_deriv_value(deriv_value)
     {
