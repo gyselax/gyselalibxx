@@ -37,12 +37,12 @@ inline constexpr bool is_tensor_type_v
  * from this class. The class Tensor will represent most Tensors but other subclasses may
  * be necessary (e.g. to access a Vector in a VectorField).
  *
- * @tparam ElementType The type of the elements of the tensor (usually double/complex).
+ * @tparam element_type The type of the elements of the tensor (usually double/complex).
  * @tparam LayoutType The way in which the underlying mdspan will be laid out in memory,
  *                    usually Kokkos::layout_right or Kokkos::layout_stride.
  * @tparam ValidIndexSet The indices that can be used along each dimension of the tensor.
  */
-template <class ElementType, class LayoutType, class... ValidIndexSet>
+template <class DataStorageType, class... ValidIndexSet>
 class TensorCommon
 {
     static_assert((is_vector_index_set_v<ValidIndexSet> && ...));
@@ -58,15 +58,12 @@ public:
 protected:
     /// The number of elements in the mdspan
     static constexpr std::size_t s_n_elements = (ddc::type_seq_size_v<ValidIndexSet> * ...);
-    /// The type of the Kokkos mdspan that will be used to access the data
-    using mdspan_type
-            = Kokkos::mdspan<ElementType, Kokkos::extents<std::size_t, s_n_elements>, LayoutType>;
-    /// The 1D object that lets us access the data
-    mdspan_type m_data;
+
+    DataStorageType m_data;
 
 public:
     /// The type of the elements of the tensor.
-    using element_type = ElementType;
+    using element_type = typename DataStorageType::element_type;
 
     /**
      * @brief The rank of the tensor.
@@ -106,9 +103,9 @@ protected:
      *
      * @param o_tensor The tensor to be copied.
      */
-    KOKKOS_DEFAULTED_FUNCTION TensorCommon(TensorCommon const& o_tensor) = delete;
+    KOKKOS_DEFAULTED_FUNCTION TensorCommon(TensorCommon const& o_tensor) = default;
 
-    KOKKOS_DEFAULTED_FUNCTION TensorCommon(TensorCommon&& o_tensor) = delete;
+    KOKKOS_DEFAULTED_FUNCTION TensorCommon(TensorCommon&& o_tensor) = default;
 
 public:
     /**
@@ -117,10 +114,11 @@ public:
      * @return The relevant element of the tensor.
      */
     template <class QueryTensorIndexElement>
-    KOKKOS_FUNCTION ElementType& get()
+    KOKKOS_FUNCTION element_type& get()
     {
         static_assert(tensor_tools::is_tensor_index_element_v<QueryTensorIndexElement>);
-        return m_data[QueryTensorIndexElement::index()];
+        typename DataStorageType::mdspan_type data = m_data();
+        return data[QueryTensorIndexElement::index()];
     }
 
     /**
@@ -129,10 +127,11 @@ public:
      * @return The relevant element of the tensor.
      */
     template <class QueryTensorIndexElement>
-    KOKKOS_FUNCTION ElementType const& get() const
+    KOKKOS_FUNCTION element_type const& get() const
     {
         static_assert(tensor_tools::is_tensor_index_element_v<QueryTensorIndexElement>);
-        return m_data[QueryTensorIndexElement::index()];
+        typename DataStorageType::const_mdspan_type data = m_data();
+        return data[QueryTensorIndexElement::index()];
     }
 
     /**
@@ -143,7 +142,7 @@ public:
     KOKKOS_FUNCTION TensorCommon& operator=(TensorCommon const& other)
     {
         for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] = other.m_data[i];
+            m_data()[i] = other.m_data()[i];
         }
         return *this;
     }
@@ -156,7 +155,7 @@ public:
     KOKKOS_FUNCTION TensorCommon& operator=(TensorCommon&& other)
     {
         for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] = other.m_data[i];
+            m_data()[i] = other.m_data()[i];
         }
         return *this;
     }
@@ -167,11 +166,11 @@ public:
      * @param val The value by which the elements should be multiplied.
      * @return A reference to the current modified tensor.
      */
-    template <class OElementType>
-    KOKKOS_FUNCTION TensorCommon& operator*=(OElementType val)
+    template <class Oelement_type>
+    KOKKOS_FUNCTION TensorCommon& operator*=(Oelement_type val)
     {
         for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] *= val;
+            m_data()[i] *= val;
         }
         return *this;
     }
@@ -182,11 +181,11 @@ public:
      * @param val The value by which the elements should be multiplied.
      * @return A reference to the current modified tensor.
      */
-    template <class OElementType>
-    KOKKOS_FUNCTION TensorCommon& operator/=(OElementType val)
+    template <class Oelement_type>
+    KOKKOS_FUNCTION TensorCommon& operator/=(Oelement_type val)
     {
         for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] /= val;
+            m_data()[i] /= val;
         }
         return *this;
     }
@@ -199,7 +198,7 @@ public:
     KOKKOS_FUNCTION TensorCommon& operator+=(TensorCommon const& val)
     {
         for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] += val.m_data[i];
+            m_data()[i] += val.m_data()[i];
         }
         return *this;
     }
@@ -212,7 +211,7 @@ public:
     KOKKOS_FUNCTION TensorCommon& operator-=(TensorCommon const& val)
     {
         for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] -= val.m_data[i];
+            m_data()[i] -= val.m_data()[i];
         }
         return *this;
     }
@@ -226,7 +225,7 @@ public:
     {
         bool equal(true);
         for (std::size_t i(0); i < s_n_elements; ++i) {
-            equal = equal && (m_data[i] == o_tensor.m_data[i]);
+            equal = equal && (m_data()[i] == o_tensor.m_data()[i]);
         }
         return equal;
     }
@@ -262,9 +261,9 @@ namespace ddcHelper {
  * @param tensor The tensor whose elements are examined.
  * @return The relevant element of the tensor.
  */
-template <class... QueryIndexTag, class ElementType, class LayoutSpace, class... ValidIndexSet>
-KOKKOS_INLINE_FUNCTION ElementType& get(
-        TensorCommon<ElementType, LayoutSpace, ValidIndexSet...>& tensor)
+template <class... QueryIndexTag, class storage_type, class... ValidIndexSet>
+KOKKOS_INLINE_FUNCTION typename storage_type::element_type& get(
+        TensorCommon<storage_type, ValidIndexSet...>& tensor)
 {
     return tensor.template get<tensor_tools::TensorIndexElement<
             ddc::detail::TypeSeq<ValidIndexSet...>,
@@ -277,9 +276,9 @@ KOKKOS_INLINE_FUNCTION ElementType& get(
  * @param tensor The tensor whose elements are examined.
  * @return The relevant element of the tensor.
  */
-template <class... QueryIndexTag, class ElementType, class LayoutSpace, class... ValidIndexSet>
-KOKKOS_INLINE_FUNCTION ElementType const& get(
-        TensorCommon<ElementType, LayoutSpace, ValidIndexSet...> const& tensor)
+template <class... QueryIndexTag, class storage_type, class... ValidIndexSet>
+KOKKOS_INLINE_FUNCTION typename storage_type::element_type const& get(
+        TensorCommon<storage_type, ValidIndexSet...> const& tensor)
 {
     return tensor.template get<tensor_tools::TensorIndexElement<
             ddc::detail::TypeSeq<ValidIndexSet...>,
@@ -293,9 +292,9 @@ KOKKOS_INLINE_FUNCTION ElementType const& get(
  * @param tensor The tensor to be converted.
  * @return The new coordinate.
  */
-template <class ElementType, class LayoutSpace, class... Dims>
+template <class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord<Dims...> to_coord(
-        TensorCommon<ElementType, LayoutSpace, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<storage_type, ddc::detail::TypeSeq<Dims...>> const& tensor)
 {
     return Coord<Dims...>(get<Dims>(tensor)...);
 }
@@ -309,11 +308,12 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> to_coord(
  * @param[in] tensor The tensor to be added to the coordinate.
  * @return The new coordinate.
  */
-template <class... Dims, class LayoutSpace>
+template <class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord<Dims...> operator+(
         Coord<Dims...> const& coord,
-        TensorCommon<double, LayoutSpace, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<storage_type, ddc::detail::TypeSeq<Dims...>> const& tensor)
 {
+    static_assert(std::is_same_v<typename storage_type::element_type, double>);
     return Coord<Dims...>((ddc::get<Dims>(coord) + ddcHelper::get<Dims>(tensor))...);
 }
 
@@ -325,11 +325,12 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> operator+(
  * @param[in] tensor The tensor to be subtracted from the coordinate.
  * @return The new coordinate.
  */
-template <class... Dims, class LayoutSpace>
+template <class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord<Dims...> operator-(
         Coord<Dims...> const& coord,
-        TensorCommon<double, LayoutSpace, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<storage_type, ddc::detail::TypeSeq<Dims...>> const& tensor)
 {
+    static_assert(std::is_same_v<typename storage_type::element_type, double>);
     return Coord<Dims...>((ddc::get<Dims>(coord) - ddcHelper::get<Dims>(tensor))...);
 }
 
@@ -341,11 +342,12 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> operator-(
  * @param[in] tensor The tensor to be added to the coordinate.
  * @return The new coordinate.
  */
-template <class... Dims, class LayoutSpace>
+template <class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(
         Coord<Dims...>& coord,
-        TensorCommon<double, LayoutSpace, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<storage_type, ddc::detail::TypeSeq<Dims...>> const& tensor)
 {
+    static_assert(std::is_same_v<typename storage_type::element_type, double>);
     ((ddc::get<Dims>(coord) += ddcHelper::get<Dims>(tensor)), ...);
     return coord;
 }
@@ -358,11 +360,12 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(
  * @param[in] tensor The tensor to be subtracted from the coordinate.
  * @return The new coordinate.
  */
-template <class... Dims, class LayoutSpace>
+template <class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator-=(
         Coord<Dims...>& coord,
-        TensorCommon<double, LayoutSpace, ddc::detail::TypeSeq<Dims...>> const& tensor)
+        TensorCommon<storage_type, ddc::detail::TypeSeq<Dims...>> const& tensor)
 {
+    static_assert(std::is_same_v<typename storage_type::element_type, double>);
     ((ddc::get<Dims>(coord) -= ddcHelper::get<Dims>(tensor)), ...);
     return coord;
 }
@@ -375,9 +378,9 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator-=(
  */
 template <
         class TensorType,
-        class OElementType,
+        class Oelement_type,
         std::enable_if_t<is_tensor_type_v<TensorType>, bool> = true>
-KOKKOS_FUNCTION TensorType operator*(OElementType val, TensorType const& tensor)
+KOKKOS_FUNCTION TensorType operator*(Oelement_type val, TensorType const& tensor)
 {
     TensorType result(tensor);
     result *= val;
@@ -393,9 +396,9 @@ KOKKOS_FUNCTION TensorType operator*(OElementType val, TensorType const& tensor)
  */
 template <
         class TensorType,
-        class OElementType,
+        class Oelement_type,
         std::enable_if_t<is_tensor_type_v<TensorType>, bool> = true>
-KOKKOS_FUNCTION TensorType operator*(TensorType const& tensor, OElementType val)
+KOKKOS_FUNCTION TensorType operator*(TensorType const& tensor, Oelement_type val)
 {
     TensorType result(tensor);
     result *= val;
@@ -411,9 +414,9 @@ KOKKOS_FUNCTION TensorType operator*(TensorType const& tensor, OElementType val)
  */
 template <
         class TensorType,
-        class OElementType,
+        class Oelement_type,
         std::enable_if_t<is_tensor_type_v<TensorType>, bool> = true>
-KOKKOS_FUNCTION TensorType operator/(TensorType const& tensor, OElementType val)
+KOKKOS_FUNCTION TensorType operator/(TensorType const& tensor, Oelement_type val)
 {
     TensorType result(tensor);
     result /= val;
@@ -428,9 +431,9 @@ KOKKOS_FUNCTION TensorType operator/(TensorType const& tensor, OElementType val)
  */
 template <
         class TensorType,
-        class OElementType,
+        class Oelement_type,
         std::enable_if_t<is_tensor_type_v<TensorType>, bool> = true>
-KOKKOS_FUNCTION TensorType operator+(TensorType const& tensor, OElementType val)
+KOKKOS_FUNCTION TensorType operator+(TensorType const& tensor, Oelement_type val)
 {
     TensorType result(tensor);
     result += val;
