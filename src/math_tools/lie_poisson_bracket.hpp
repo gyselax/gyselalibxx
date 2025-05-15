@@ -100,8 +100,11 @@ public:
                 exec_space,
                 get_idx_range(poisson_bracket),
                 KOKKOS_CLASS_LAMBDA(IdxType const idx) {
-                    poisson_bracket(idx)
-                            = (*this)(partial_derivatives_f(idx), partial_derivatives_g(idx), B(idx), ddc::coordinate(idx));
+                    poisson_bracket(idx) = (*this)(
+                            partial_derivatives_f(idx),
+                            partial_derivatives_g(idx),
+                            B(idx),
+                            ddc::coordinate(idx));
                 });
     }
 };
