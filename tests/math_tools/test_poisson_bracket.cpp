@@ -73,9 +73,9 @@ void compute_and_test_Lie_Poisson_Bracket()
             KOKKOS_LAMBDA(IdxRhoThetaPhi idx) {
                 const double rho = ddc::coordinate(ddc::select<GridRho>(idx));
                 const double theta = ddc::coordinate(ddc::select<GridTheta>(idx));
-		const double phi = ddc::coordinate(ddc::select<GridPhi>(idx));
-		Coord<Rho,Theta,Phi> coord = ddc :: coordinate(idx);
-		//		IdxRangeRhoThetaPhi coord = ddc :: coordinate(idx); 
+                const double phi = ddc::coordinate(ddc::select<GridPhi>(idx));
+                Coord<Rho, Theta, Phi> coord = ddc ::coordinate(idx);
+                //		IdxRangeRhoThetaPhi coord = ddc :: coordinate(idx);
                 // f_a(rho, theta, phi) = 0.5 * rho^2
                 ddcHelper::get<Rho_cov>(df_a)(idx) = rho;
                 ddcHelper::get<Theta_cov>(df_a)(idx) = 0;
@@ -95,15 +95,15 @@ void compute_and_test_Lie_Poisson_Bracket()
                 ddcHelper::get<Phi_cov>(dg_b)(idx) = 0;
 
                 // B(rho, theta, phi) = 0.1 \hat{theta} + 0.9 \hat{phi}
-		const double B_theta = 0.1;
-		const double B_phi = 0.9;
-		const double norm_B = sqrt(B_theta*B_theta + B_phi*B_phi);
+                const double B_theta = 0.1;
+                const double B_phi = 0.9;
+                const double norm_B = sqrt(B_theta * B_theta + B_phi * B_phi);
                 ddcHelper::get<Rho>(B)(idx) = 0;
                 ddcHelper::get<Theta>(B)(idx) = B_theta;
                 ddcHelper::get<Phi>(B)(idx) = B_phi;
 
-		const double Jx = mapping.jacobian(coord);
-		analytical_matrix(idx) = (B_phi/norm_B)*rho*theta/Jx;
+                const double Jx = mapping.jacobian(coord);
+                analytical_matrix(idx) = (B_phi / norm_B) * rho * theta / Jx;
             });
 
     calculate_poisson_bracket(
@@ -129,7 +129,6 @@ void compute_and_test_Lie_Poisson_Bracket()
     ddc::for_each(idx_range, [&](IdxRhoThetaPhi idx) {
         EXPECT_NEAR(poisson_bracket_a_host(idx), analytical_matrix_host(idx), 1e-13);
     });
-
 }
 
 TEST(LiePoissonBracket, axisymmetric_tokamak)
