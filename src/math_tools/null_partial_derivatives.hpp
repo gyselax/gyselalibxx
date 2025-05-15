@@ -14,6 +14,8 @@ template <class IdxRangeFull, class DerivativeDimension>
 class NullPartialDerivative : public IPartialDerivative<IdxRangeFull, DerivativeDimension>
 {
 private:
+    using base_type = IPartialDerivative<IdxRangeFull, DerivativeDimension>;
+
     /// The type of a reference to the field to be differentiated.
     using typename base_type::DFieldType;
 
@@ -41,6 +43,7 @@ template <class IdxRangeFull, class DerivativeDimension>
 class NullPartialDerivativeCreator
     : public IPartialDerivativeCreator<IdxRangeFull, DerivativeDimension>
 {
+public:
     /**
      * @brief Create an instance of a pointer to an IPartialDerivative object.
      *
@@ -49,7 +52,7 @@ class NullPartialDerivativeCreator
      * @return A pointer to an IPartialDerivative object.
      */
     std::unique_ptr<IPartialDerivative<IdxRangeFull, DerivativeDimension>> create_instance(
-            DConstFieldType field_ref) const final
+            DConstField<IdxRangeFull> field_ref) const final
     {
         return std::make_unique<NullPartialDerivative<IdxRangeFull, DerivativeDimension>>();
     }
