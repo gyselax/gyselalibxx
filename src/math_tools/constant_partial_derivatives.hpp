@@ -11,7 +11,7 @@
  * (used for inheritance).
  */
 template <class IdxRangeFull, class DerivativeDimension>
-class NullPartialDerivative : public IPartialDerivative<IdxRangeFull, DerivativeDimension>
+class ConstantPartialDerivative : public IPartialDerivative<IdxRangeFull, DerivativeDimension>
 {
 private:
     using base_type = IPartialDerivative<IdxRangeFull, DerivativeDimension>;
@@ -19,7 +19,18 @@ private:
     /// The type of a reference to the field to be differentiated.
     using typename base_type::DFieldType;
 
+private:
+    double m_deriv_value;
+
 public:
+    /**
+     * @brief Create an instance of ConstantPartialDerivative.
+     *
+     * @param[in] deriv_value The value that should be returned as the constant value of
+     *          the derivative.
+     */
+    ConstantPartialDerivative(double deriv_value) : m_deriv_value(deriv_value) {}
+
     /**
      * @brief Set the partial derivative of a field to 0.
      *
@@ -27,12 +38,12 @@ public:
      */
     void operator()(DFieldType differentiated_field) const final
     {
-        ddc::parallel_fill(differentiated_field, 0.0);
+        ddc::parallel_fill(differentiated_field, m_deriv_value);
     }
 };
 
 /**
- * @brief A class to create a NullPartialDerivative via a create_instance function.
+ * @brief A class to create a ConstantPartialDerivative via a create_instance function.
  *
  * @tparam IdxRangeFull The index range of the field on which the operator acts 
  * (with all dimensions, batched and dimension of interest, used for inheritance).
@@ -40,10 +51,21 @@ public:
  * (used for inheritance).
  */
 template <class IdxRangeFull, class DerivativeDimension>
-class NullPartialDerivativeCreator
+class ConstantPartialDerivativeCreator
     : public IPartialDerivativeCreator<IdxRangeFull, DerivativeDimension>
 {
+private:
+    double m_deriv_value;
+
 public:
+    /**
+     * @brief Create an instance of ConstantPartialDerivativeCreator.
+     *
+     * @param[in] deriv_value The value that should be returned as the constant value of
+     *          the derivative.
+     */
+    ConstantPartialDerivativeCreator(double deriv_value) : m_deriv_value(deriv_value) {}
+
     /**
      * @brief Create an instance of a pointer to an IPartialDerivative object.
      *
@@ -54,6 +76,7 @@ public:
     std::unique_ptr<IPartialDerivative<IdxRangeFull, DerivativeDimension>> create_instance(
             DConstField<IdxRangeFull> field) const final
     {
-        return std::make_unique<NullPartialDerivative<IdxRangeFull, DerivativeDimension>>();
+        return std::make_unique<ConstantPartialDerivative<IdxRangeFull, DerivativeDimension>>(
+                m_deriv_value);
     }
 };

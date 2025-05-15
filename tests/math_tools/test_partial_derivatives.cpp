@@ -6,11 +6,11 @@
 
 #include "central_fdm_partial_derivatives.hpp"
 #include "central_fdm_partial_derivatives_with_boundary_values.hpp"
+#include "constant_partial_derivatives.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "math_tools.hpp"
 #include "mesh_builder.hpp"
-#include "null_partial_derivatives.hpp"
 #include "spline_1d_partial_derivative.hpp"
 #include "spline_2d_partial_derivative.hpp"
 
@@ -581,7 +581,7 @@ public:
  * computing partial derivatives.
  */
 template <std::size_t ncells_x, std::size_t ncells_y>
-class PartialDerivativeTestNull : public PartialDerivativeTest<ncells_x, ncells_y>
+class PartialDerivativeTestConstant : public PartialDerivativeTest<ncells_x, ncells_y>
 {
 private:
     using base_type = PartialDerivativeTest<ncells_x, ncells_y>;
@@ -593,8 +593,15 @@ private:
     using typename base_type::IdxRangeY;
     using typename base_type::IdxXY;
 
+private:
+    double m_deriv_value;
+
 public:
-    PartialDerivativeTestNull() : base_type(0.0, 1.0, 0.0, 1.0) {}
+    PartialDerivativeTestConstant(double const deriv_value)
+        : base_type(0.0, 1.0, 0.0, 1.0)
+        , m_deriv_value(deriv_value)
+    {
+    }
 
     template <class DerivativeDimension>
     double compute_error() const
@@ -603,8 +610,8 @@ public:
         IdxRangeY idxrange_y(typename base_type::IdxY(0), base_type::m_ncells_y + 1);
         IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
 
-        NullPartialDerivativeCreator<IdxRangeXY, DerivativeDimension> const
-                partial_derivative_creator;
+        ConstantPartialDerivativeCreator<IdxRangeXY, DerivativeDimension> const
+                partial_derivative_creator(m_deriv_value);
 
         DFieldMemType field_to_differentiate(idxrange_xy);
 
@@ -793,11 +800,12 @@ TEST(PartialDerivative, CentralFDMPartialDerivativeWithBV)
     EXPECT_LE(relative_error_order_y, TOL);
 }
 
-TEST(PartialDerivative, NullPartialDerivative)
+TEST(PartialDerivative, ConstantPartialDerivative)
 {
-    PartialDerivativeTestNull<10, 10> const test;
+    const double val(3.5);
+    PartialDerivativeTestConstant<10, 10> const test(val);
 
     // Partial Derivative in X direction
-    EXPECT_DOUBLE_EQ(test.template compute_error<X>(), 0.0);
+    EXPECT_DOUBLE_EQ(test.template compute_error<X>(), val);
 }
 } // namespace
