@@ -59,6 +59,11 @@ protected:
     /// The number of elements in the mdspan
     static constexpr std::size_t s_n_elements = (ddc::type_seq_size_v<ValidIndexSet> * ...);
 
+    /**
+     * The object providing access to the underlying mdspan via an operator().
+     * The data in this object may be references or owned data depending on
+     * the subclass.
+     */
     DataStorageType m_data;
 
 public:
@@ -105,6 +110,12 @@ protected:
      */
     KOKKOS_DEFAULTED_FUNCTION TensorCommon(TensorCommon const& o_tensor) = default;
 
+    /**
+     * @brief Move-construct a tensor object by copying an existing tensor of exactly the
+     * same type. This method can be called implicitly.
+     *
+     * @param o_tensor The tensor to be copied.
+     */
     KOKKOS_DEFAULTED_FUNCTION TensorCommon(TensorCommon&& o_tensor) = default;
 
 public:
