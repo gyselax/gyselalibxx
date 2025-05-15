@@ -132,7 +132,7 @@ class DefinesInvJacobian
 {
     struct IdxTag;
     template <typename ClassType>
-    using inv_jacobian_matrix = decltype(std::declval<ClassType>().template inv_jacobian_matrix(
+    using inv_jacobian_matrix = decltype(std::declval<ClassType>().inv_jacobian_matrix(
             std::declval<CoordinateType>()));
     template <typename ClassType>
     using inv_jacobian_component
