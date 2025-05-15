@@ -19,12 +19,10 @@
  * @f$ b_k @f$ the covariant components of b and @f$\epsilon^{ijk} @f$ the Levi-Civita symbol.
  * @tparam Mapping3D A type representing a mapping in 3 dimensions.
  */
-template <class Mapping3D>
+template <class Mapping3D, class MappingCoord = typename Mapping3D::CoordArg>
 class LiePoissonBracket
 {
     static_assert(is_mapping_v<Mapping3D>);
-    using MappingCoord = typename Mapping3D::CoordArg;
-    static_assert(MappingCoord::size() == 3);
 
     using BasisSpatial = ddc::to_type_seq_t<typename Mapping3D::CoordArg>;
     using CovBasisSpatial = get_covariant_dims_t<BasisSpatial>;
