@@ -1,4 +1,9 @@
 name: "Check if CPU/GPU tests can be skipped"
+inputs:
+  MATCHING_PATHS:
+    description: "The paths to be checked"
+    required: false
+    default: '["src/**/*.hpp", "src/**/*.cpp", "tests/**/*.hpp", "tests/**/*.cpp", "simulations/**/*.hpp", "simulations/**/*.cpp", "**/CMakeLists.txt", "vendor/**", ".github/actions/**", ".github/workflows/**", "toolchains/docker.gyselalibxx_env/**", "toolchains/v100.persee/**"]'
 outputs:
   should_skip:
     description: "True if the tests should be run, False otherwise."
@@ -14,7 +19,7 @@ runs:
         import os
         with open("changed_files.txt") as f:
           lines = [l.strip() for l in f.readlines()]
-        matching_paths=[ "src/**/*.hpp", "src/**/*.cpp", "tests/**/*.hpp", "tests/**/*.cpp", "simulations/**/*.hpp", "simulations/**/*.cpp", "**/CMakeLists.txt", "vendor/**", ".github/actions/**", ".github/workflows/**", "toolchains/docker.gyselalibxx_env/**", "toolchains/v100.persee/**" ]
+        matching_paths=${{ inputs.MATCHING_PATHS }}
         matches = [m for pat in matching_paths for m in fnmatch.filter(lines, pat)]
         print(matches)
         with open(os.environ['GITHUB_OUTPUT'], 'a') as f:

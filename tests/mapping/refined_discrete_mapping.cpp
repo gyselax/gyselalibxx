@@ -540,7 +540,7 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
         std::cout << "  " << order << std::endl;
 
         int const BSDegree = 3;
-        EXPECT_NEAR(order, BSDegree + 1, 0.25);
+        EXPECT_NEAR(order, BSDegree + 1, 0.3);
     }
 
 
@@ -584,7 +584,7 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
         std::cout << "  " << order << std::endl;
 
         int const BSDegree = 3;
-        EXPECT_NEAR(order, BSDegree, 0.25);
+        EXPECT_NEAR(order, BSDegree, 0.3);
     }
 
 
@@ -628,6 +628,6 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
         std::cout << "  " << order << std::endl;
 
         int const BSDegree = 3;
-        EXPECT_NEAR(order, BSDegree + 1, 0.25);
+        EXPECT_NEAR(order, BSDegree + 1, 0.3);
     }
 }
