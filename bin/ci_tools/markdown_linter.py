@@ -213,13 +213,22 @@ if __name__ == '__main__':
             suggestion = expr.contents
             unquoted_underscore_problems = list(unquoted_underscore.finditer(suggestion))
             if unquoted_underscore_problems:
-                success = False
+                code_tags = list(inline_code_tag.finditer(suggestion))
+                if len(code_tags) % 2 == 0:
+                    code_snippets = [[index_to_line_info(code_tags[2*i].start(), suggestion),
+                                      index_to_line_info(code_tags[2*i+1].start(), suggestion)]
+                                     for i in range(len(code_tags)//2)]
+                else:
+                    code_snippets = []
                 for p in unquoted_underscore_problems:
                     internal_line_info = index_to_line_info(p.start(), suggestion)
+                    if any(c[0] <= internal_line_info <= c[1] for c in code_snippets):
+                        continue
                     if internal_line_info.line == 1:
                         line_info = LineInfo(expr.start_pos.line, expr.start_pos.char + internal_line_info.char-1)
                     else:
                         line_info = LineInfo(expr.start_pos.line + internal_line_info.line-1, internal_line_info.char)
+                    success = False
                     print(f"::error file={file},line={line_info.line}:: Found non-escaped underscore. Please escape underscores and use *a* to indicate italics. ({file}: Line {line_info.line}, position {line_info.char})", file=sys.stderr)
                 suggestion = unquoted_underscore.sub(r'\_', suggestion)
             suggested_expressions.append(Expression(expr.start_pos, expr.end_pos, '['+suggestion+expr.closing_tag))

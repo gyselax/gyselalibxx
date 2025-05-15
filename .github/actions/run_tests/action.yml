@@ -1,10 +1,17 @@
 name: "Run tests"
 
+inputs:
+  environment_command:
+    description: "The command required to setup the environment"
+    required: false
+    default: ''
+
 runs:
   using: "composite"
   steps:
     - name: "Run tests"
       run: |
+        ${{ inputs.environment_command }}
         ctest -j 2 --timeout 5 --output-junit tests.xml --output-on-failure
       shell: bash
       working-directory: ./build
