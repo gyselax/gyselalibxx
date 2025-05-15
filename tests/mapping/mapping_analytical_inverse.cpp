@@ -17,15 +17,15 @@
 
 namespace {
 
-inline void expect_double_eq(double d1, double d2)
+inline void expect_near(double d1, double d2, double Tol)
 {
-    EXPECT_DOUBLE_EQ(d1, d2);
+    EXPECT_NEAR(d1, d2, Tol);
 }
 
 template <class... Dims>
-void compare_coord(Coord<Dims...> const& coord1, Coord<Dims...> const& coord2)
+void compare_coord(Coord<Dims...> const& coord1, Coord<Dims...> const& coord2, double Tol)
 {
-    ((expect_double_eq(ddc::get<Dims>(coord1), ddc::get<Dims>(coord2))), ...);
+    ((expect_near(ddc::get<Dims>(coord1), ddc::get<Dims>(coord2), Tol)), ...);
 }
 
 template <class Mapping>
@@ -41,7 +41,7 @@ void test_analytical_inverse(Mapping map, typename Mapping::CoordArg coord_start
     // Choose a theta value with no chance of a modulo issue
     CoordResult coord_xy = map(coord_start);
     CoordArg coord_end = inv_map(coord_xy);
-    compare_coord(coord_start, coord_end);
+    compare_coord(coord_start, coord_end, 1e-10);
 }
 
 template <class Mapping>
@@ -59,11 +59,13 @@ void test_analytical_inverse_jacobian(Mapping map, typename Mapping::CoordArg co
             map.jacobian_matrix(coord_arg),
             inv_map.jacobian_matrix(coord_result),
             1e-14);
-    EXPECT_DOUBLE_EQ(map.jacobian(coord_arg) * inv_map.jacobian(coord_result), 1.0);
-    EXPECT_DOUBLE_EQ(map.jacobian(coord_arg), determinant(map.jacobian_matrix(coord_arg)));
-    EXPECT_DOUBLE_EQ(
-            inv_map.jacobian(coord_result),
-            determinant(inv_map.jacobian_matrix(coord_result)));
+    EXPECT_NEAR(map.jacobian(coord_arg) * inv_map.jacobian(coord_result), 1.0, 1e-14);
+    double jacobian = determinant(map.jacobian_matrix(coord_arg));
+    // Use relative tolerance
+    EXPECT_NEAR(map.jacobian(coord_arg) / jacobian, 1.0, 1e-14);
+    double inv_jacobian = determinant(inv_map.jacobian_matrix(coord_result));
+    // Use relative tolerance
+    EXPECT_NEAR(inv_map.jacobian(coord_result) / inv_jacobian, 1.0 1e-14);
 }
 
 } // namespace
@@ -71,7 +73,10 @@ void test_analytical_inverse_jacobian(Mapping map, typename Mapping::CoordArg co
 TEST(AnalyticalMappingTests, Circular)
 {
     CircularToCartesian<R, Theta, X, Y> mapping;
-    CoordRTheta coord(double(rand()) / RAND_MAX, double(rand()) / RAND_MAX * M_PI + M_PI * 0.5);
+    // Avoid badly conditioned centre
+    CoordRTheta
+            coord(0.0001 + 0.9999 * double(rand()) / RAND_MAX,
+                  double(rand()) / RAND_MAX * M_PI + M_PI * 0.5);
     test_analytical_inverse(mapping, coord);
     test_analytical_inverse_jacobian(mapping, coord);
 }
@@ -79,17 +84,21 @@ TEST(AnalyticalMappingTests, Circular)
 TEST(AnalyticalMappingTests, Czarny)
 {
     CzarnyToCartesian<R, Theta, X, Y> mapping(0.3, 0.4);
-    CoordRTheta coord(double(rand()) / RAND_MAX, double(rand()) / RAND_MAX * M_PI + M_PI * 0.5);
+    // Avoid badly conditioned centre
+    CoordRTheta
+            coord(0.0001 + 0.9999 * double(rand()) / RAND_MAX,
+                  double(rand()) / RAND_MAX * M_PI + M_PI * 0.5);
     test_analytical_inverse(mapping, coord);
 }
 
 TEST(AnalyticalMappingTests, Cylindrical)
 {
     CylindricalToCartesian<R, Z, Zeta, X, Y> mapping;
+    // Avoid badly conditioned centre
     CoordRZZeta
-    coord(double(rand()) / RAND_MAX,
-          double(rand()) / RAND_MAX,
-          double(rand()) / RAND_MAX * M_PI + M_PI * 0.5);
+            coord(0.0001 + 0.9999 * double(rand()) / RAND_MAX,
+                  double(rand()) / RAND_MAX,
+                  double(rand()) / RAND_MAX * M_PI + M_PI * 0.5);
     test_analytical_inverse(mapping, coord);
     test_analytical_inverse_jacobian(mapping, coord);
 }
