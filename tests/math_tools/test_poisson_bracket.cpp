@@ -139,7 +139,6 @@ TEST(LiePoissonBracket, axisymmetric_tokamak)
     IdxRangeRhoThetaPhi idx_range(idx_range_rho, idx_range_theta, idx_range_phi);
 
     DFieldMem<IdxRangeRhoThetaPhi> poisson_bracket_alloc(idx_range);
-    DFieldMem<IdxRangeRhoThetaPhi> reverse_poisson_bracket_alloc(idx_range);
     DVectorFieldMem<IdxRangeRhoThetaPhi, CovBasisSpatial> df_alloc(idx_range);
     DVectorFieldMem<IdxRangeRhoThetaPhi, CovBasisSpatial> dg_alloc(idx_range);
     DVectorFieldMem<IdxRangeRhoThetaPhi, BasisSpatial> B_alloc(idx_range);
@@ -156,22 +155,26 @@ TEST(LiePoissonBracket, axisymmetric_tokamak)
             Kokkos::DefaultExecutionSpace(),
             idx_range,
             KOKKOS_LAMBDA(IdxRhoThetaPhi idx) {
-                // f_a(rho, theta, phi) = 4*rho
-                ddcHelper::get<Rho_cov>(df_a)(idx) = 4;
+                const double rho = ddc::coordinate(ddc::select<GridRho>(idx));
+                const double theta = ddc::coordinate(ddc::select<GridTheta>(idx));
+                // f_a(rho, theta, phi) = 0.5 * rho^2
+                ddcHelper::get<Rho_cov>(df_a)(idx) = rho;
                 ddcHelper::get<Theta_cov>(df_a)(idx) = 0;
                 ddcHelper::get<Phi_cov>(df_a)(idx) = 0;
-                // f_b(rho, theta, phi) = 2*theta
-                ddcHelper::get<Rho_cov>(df_b)(idx) = 0;
-                ddcHelper::get<Theta_cov>(df_b)(idx) = 2;
-                ddcHelper::get<Phi_cov>(df_b)(idx) = 0;
-                // g_a(rho, theta, phi) = 3*theta
+                // g_a(rho, theta, phi) = 0.5 * theta^2
                 ddcHelper::get<Rho_cov>(dg_a)(idx) = 0;
-                ddcHelper::get<Theta_cov>(dg_a)(idx) = 3;
+                ddcHelper::get<Theta_cov>(dg_a)(idx) = theta;
                 ddcHelper::get<Phi_cov>(dg_a)(idx) = 0;
-                // g_b(rho, theta, phi) = 6*rho
-                ddcHelper::get<Rho_cov>(dg_b)(idx) = 6;
+
+                // f_b(rho, theta, phi) = -0.5 * theta^2
+                ddcHelper::get<Rho_cov>(df_b)(idx) = 0;
+                ddcHelper::get<Theta_cov>(df_b)(idx) = -theta;
+                ddcHelper::get<Phi_cov>(df_b)(idx) = 0;
+                // g_b(rho, theta, phi) = 0.5 * rho^2
+                ddcHelper::get<Rho_cov>(dg_b)(idx) = rho;
                 ddcHelper::get<Theta_cov>(dg_b)(idx) = 0;
                 ddcHelper::get<Phi_cov>(dg_b)(idx) = 0;
+
                 // B(rho, theta, phi) = 0.1 \hat{theta} + 0.9 \hat{phi}
                 ddcHelper::get<Rho>(B)(idx) = 0;
                 ddcHelper::get<Theta>(B)(idx) = 0.1;
@@ -195,6 +198,6 @@ TEST(LiePoissonBracket, axisymmetric_tokamak)
     auto poisson_bracket_b_host = ddc::create_mirror_view_and_copy(poisson_bracket_b);
 
     ddc::for_each(idx_range, [&](IdxRhoThetaPhi idx) {
-        EXPECT_NEAR(poisson_bracket_a_host(idx), -poisson_bracket_b_host(idx), 1e-13);
+        EXPECT_NEAR(poisson_bracket_a_host(idx), poisson_bracket_b_host(idx), 1e-13);
     });
 }
