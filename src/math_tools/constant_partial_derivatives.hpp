@@ -29,7 +29,7 @@ public:
      * @param[in] deriv_value The value that should be returned as the constant value of
      *          the derivative.
      */
-    ConstantPartialDerivative(double deriv_value) : m_deriv_value(deriv_value) {}
+    explicit ConstantPartialDerivative(double deriv_value) : m_deriv_value(deriv_value) {}
 
     /**
      * @brief Set the partial derivative of a field to 0.
@@ -64,7 +64,7 @@ public:
      * @param[in] deriv_value The value that should be returned as the constant value of
      *          the derivative.
      */
-    ConstantPartialDerivativeCreator(double deriv_value) : m_deriv_value(deriv_value) {}
+    explicit ConstantPartialDerivativeCreator(double deriv_value) : m_deriv_value(deriv_value) {}
 
     /**
      * @brief Create an instance of a pointer to an IPartialDerivative object.
