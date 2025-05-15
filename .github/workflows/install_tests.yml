@@ -38,9 +38,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     needs: pre_job
     name: Install Test
+    if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
     steps:
       - name: Checkout gyselalibxx
-        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: actions/checkout@v4
         with:
           submodules: recursive
@@ -51,13 +51,11 @@ jobs:
         shell: bash
         timeout-minutes: 180
       - name: Build code
-        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/build_code
         with:
           toolchain: toolchains/cpu.spack.gyselalibxx_env/toolchain.cmake
           environment_command: 'source ${GITHUB_WORKSPACE}/toolchains/cpu.spack.gyselalibxx_env/environment.sh'
       - name: Run tests
-        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/run_tests
         with:
           environment_command: 'source ${GITHUB_WORKSPACE}/toolchains/cpu.spack.gyselalibxx_env/environment.sh'
