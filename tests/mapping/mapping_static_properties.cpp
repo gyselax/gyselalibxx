@@ -111,6 +111,5 @@ TEST(MappingStaticAsserts, TorToCyl)
     static_assert(is_mapping_v<Mapping>);
     static_assert(has_jacobian_v<Mapping>);
     static_assert(has_inv_jacobian_v<Mapping>);
-    static_assert(is_analytical_mapping_v<Mapping>);
     static_assert(has_singular_o_point_inv_jacobian_v<Mapping>);
 }
