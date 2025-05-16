@@ -55,22 +55,29 @@ public:
     static constexpr bool value = is_mapping();
 };
 
-template <typename Type, typename CoordinateType, bool HideError>
+template <typename Type, bool HideError>
 class DefinesJacobian
 {
     struct IdxTag;
     template <typename ClassType>
-    using jacobian_matrix
-            = decltype(std::declval<ClassType>().jacobian_matrix(std::declval<CoordinateType>()));
+    using coord_arg_type = typename ClassType::CoordJacobian;
+    template <typename ClassType>
+    using jacobian_matrix = decltype(std::declval<ClassType>().jacobian_matrix(
+            std::declval<typename ClassType::CoordJacobian>()));
     template <typename ClassType>
     using jacobian_component
             = decltype(std::declval<ClassType>().template jacobian_component<IdxTag, IdxTag>(
-                    std::declval<CoordinateType>()));
+                    std::declval<typename ClassType::CoordJacobian>()));
     template <typename ClassType>
-    using jacobian = decltype(std::declval<ClassType>().jacobian(std::declval<CoordinateType>()));
+    using jacobian = decltype(std::declval<ClassType>().jacobian(
+            std::declval<typename ClassType::CoordJacobian>()));
 
     static bool constexpr has_jacobian_methods()
     {
+        if constexpr (!CheckClassAttributeExistence<Type, coord_arg_type>::value) {
+            static_assert(HideError, "A Mapping must define the CoordJacobian alias");
+            return false;
+        };
         if constexpr (!CheckClassAttributeExistence<Type, jacobian_matrix>::value) {
             static_assert(HideError, "A Mapping must define the jacobian_matrix function");
             return false;
@@ -127,17 +134,17 @@ public:
     static constexpr bool value = has_jacobian();
 };
 
-template <typename Type, typename CoordinateType, bool HideError>
+template <typename Type, bool HideError>
 class DefinesInvJacobian
 {
     struct IdxTag;
     template <typename ClassType>
     using inv_jacobian_matrix = decltype(std::declval<ClassType>().inv_jacobian_matrix(
-            std::declval<CoordinateType>()));
+            std::declval<typename ClassType::CoordJacobian>()));
     template <typename ClassType>
     using inv_jacobian_component
             = decltype(std::declval<ClassType>().template inv_jacobian_component<IdxTag, IdxTag>(
-                    std::declval<CoordinateType>()));
+                    std::declval<typename ClassType::CoordJacobian>()));
 
     static bool constexpr has_inv_jacobian_methods()
     {
@@ -154,6 +161,12 @@ class DefinesInvJacobian
 
     static bool constexpr has_inv_jacobian()
     {
+        if constexpr (!DefinesJacobian<Type, HideError>::value) {
+            static_assert(
+                    HideError,
+                    "A Mapping must define its Jacobian before defining its inverse");
+            return false;
+        }
         static_assert(mapping_detail::IsMapping<Type>::value);
         constexpr bool success = has_inv_jacobian_methods();
         if constexpr (success) {
@@ -226,13 +239,12 @@ static constexpr bool is_accessible_v = mapping_detail::
 template <class Mapping>
 static constexpr bool is_mapping_v = mapping_detail::IsMapping<Mapping>::value;
 
-template <class Mapping, class CoordinateType, bool RaiseError = true>
-static constexpr bool has_jacobian_v
-        = mapping_detail::DefinesJacobian<Mapping, CoordinateType, !RaiseError>::value;
+template <class Mapping, bool RaiseError = true>
+static constexpr bool has_jacobian_v = mapping_detail::DefinesJacobian<Mapping, !RaiseError>::value;
 
-template <class Mapping, class CoordinateType, bool RaiseError = true>
+template <class Mapping, bool RaiseError = true>
 static constexpr bool has_inv_jacobian_v
-        = mapping_detail::DefinesInvJacobian<Mapping, CoordinateType, !RaiseError>::value;
+        = mapping_detail::DefinesInvJacobian<Mapping, !RaiseError>::value;
 
 template <class Mapping>
 static constexpr bool is_curvilinear_2d_mapping_v = mapping_detail::IsCurvilinear2DMapping<
