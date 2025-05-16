@@ -102,3 +102,12 @@ TEST(MappingStaticAsserts, CartToBarycentric)
     static_assert(is_mapping_v<Mapping>);
     static_assert(is_analytical_mapping_v<Mapping>);
 }
+
+TEST(MappingStaticAsserts, Identity)
+{
+    using Mapping = IdentityCoordinateChange<VectorIndexSet<X, Y, Z>, VectorIndexSet<X, Y, Z>>;
+    static_assert(is_mapping_v<Mapping>);
+    static_assert(has_jacobian_v<Mapping, Coord<X, Y, Z>>);
+    static_assert(has_inv_jacobian_v<Mapping, Coord<X, Y, Z>>);
+    static_assert(is_analytical_mapping_v<Mapping>);
+}
