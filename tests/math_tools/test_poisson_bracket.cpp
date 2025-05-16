@@ -73,9 +73,7 @@ void compute_and_test_Lie_Poisson_Bracket()
             KOKKOS_LAMBDA(IdxRhoThetaPhi idx) {
                 const double rho = ddc::coordinate(ddc::select<GridRho>(idx));
                 const double theta = ddc::coordinate(ddc::select<GridTheta>(idx));
-                const double phi = ddc::coordinate(ddc::select<GridPhi>(idx));
                 Coord<Rho, Theta, Phi> coord = ddc ::coordinate(idx);
-                //		IdxRangeRhoThetaPhi coord = ddc :: coordinate(idx);
                 // f_a(rho, theta, phi) = 0.5 * rho^2
                 ddcHelper::get<Rho_cov>(df_a)(idx) = rho;
                 ddcHelper::get<Theta_cov>(df_a)(idx) = 0;
@@ -84,7 +82,6 @@ void compute_and_test_Lie_Poisson_Bracket()
                 ddcHelper::get<Rho_cov>(dg_a)(idx) = 0;
                 ddcHelper::get<Theta_cov>(dg_a)(idx) = theta;
                 ddcHelper::get<Phi_cov>(dg_a)(idx) = 0;
-
                 // f_b(rho, theta, phi) = -0.5 * theta^2
                 ddcHelper::get<Rho_cov>(df_b)(idx) = 0;
                 ddcHelper::get<Theta_cov>(df_b)(idx) = -theta;
@@ -93,16 +90,16 @@ void compute_and_test_Lie_Poisson_Bracket()
                 ddcHelper::get<Rho_cov>(dg_b)(idx) = rho;
                 ddcHelper::get<Theta_cov>(dg_b)(idx) = 0;
                 ddcHelper::get<Phi_cov>(dg_b)(idx) = 0;
-
                 // B(rho, theta, phi) = 0.1 \hat{theta} + 0.9 \hat{phi}
                 const double B_theta = 0.1;
                 const double B_phi = 0.9;
-                const double norm_B = sqrt(B_theta * B_theta + B_phi * B_phi);
-                ddcHelper::get<Rho>(B)(idx) = 0;
-                ddcHelper::get<Theta>(B)(idx) = B_theta;
-                ddcHelper::get<Phi>(B)(idx) = B_phi;
-
+                DVector<Rho_cov, Theta_cov, Phi_cov> B_cov(0.0, B_theta, B_phi);
+                DTensor<BasisSpatial, BasisSpatial> metric_tensor = m_metric_tensor.inverse(coord);
+                DVector<Rho, Theta, Phi> B_cont
+                        = tensor_mul(index<'i', 'j'>(metric_tensor), index<'j'>(B_cov));
+                ddcHelper::assign_vector_field_element(B, idx, B_cont);
                 const double Jx = mapping.jacobian(coord);
+                const double norm_B = tensor_mul(index<'i'>(B_cov), index<'i'>(B(idx)));
                 analytical_matrix(idx) = (B_phi / norm_B) * rho * theta / Jx;
             });
 
