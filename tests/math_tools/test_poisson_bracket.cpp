@@ -5,9 +5,13 @@
 #include "circular_to_cartesian.hpp"
 #include "combined_mapping.hpp"
 #include "cylindrical_to_cartesian.hpp"
+#include "indexed_tensor.hpp"
 #include "lie_poisson_bracket.hpp"
 #include "mesh_builder.hpp"
+#include "metric_tensor_evaluator.hpp"
+#include "tensor.hpp"
 #include "toroidal_to_cylindrical.hpp"
+#include "vector_field.hpp"
 
 
 
@@ -32,6 +36,7 @@ void compute_and_test_Lie_Poisson_Bracket()
     CombinedMapping<CylindricalMapping, ToroidalMapping, Coord<Rho, Theta, Phi>>
             mapping(cylindrical_to_cartesian, toroidal_to_cylindrical);
     LiePoissonBracket calculate_poisson_bracket(mapping);
+    MetricTensorEvaluator get_metric_tensor(mapping);
 
     using BasisSpatial = VectorIndexSet<Rho, Theta, Phi>;
     using CovBasisSpatial = get_covariant_dims_t<BasisSpatial>;
@@ -94,7 +99,8 @@ void compute_and_test_Lie_Poisson_Bracket()
                 const double B_theta = 0.1;
                 const double B_phi = 0.9;
                 DVector<Rho_cov, Theta_cov, Phi_cov> B_cov(0.0, B_theta, B_phi);
-                DTensor<BasisSpatial, BasisSpatial> metric_tensor = m_metric_tensor.inverse(coord);
+                DTensor<BasisSpatial, BasisSpatial> metric_tensor
+                        = get_metric_tensor.inverse(coord);
                 DVector<Rho, Theta, Phi> B_cont
                         = tensor_mul(index<'i', 'j'>(metric_tensor), index<'j'>(B_cov));
                 ddcHelper::assign_vector_field_element(B, idx, B_cont);
