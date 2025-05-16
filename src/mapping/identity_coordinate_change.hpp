@@ -1,14 +1,16 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 
 template <class ArgBasis, class ResultBasis>
 class IdentityCoordinateChange
 {
 public:
     /// The type of the argument of the function described by this mapping
-    using CoordArg = to_coord_t<ArgBasis>;
+    using CoordArg = ddcHelper::to_coord_t<ArgBasis>;
     /// The type of the result of the function described by this mapping
-    using CoordResult = to_coord<ResultBasis>;
+    using CoordResult = ddcHelper::to_coord_t<ResultBasis>;
 
 private:
     using ArgBasisCov = vector_index_set_dual_t<ArgBasis>;
@@ -36,7 +38,7 @@ public:
      *
      * @return A double with the value of the determinant of the Jacobian matrix.
      */
-    static constexpr double jacobian(CoordArg const& coord) const
+    KOKKOS_INLINE_FUNCTION double jacobian(CoordArg const& coord) const
     {
         return 1;
     }
@@ -64,7 +66,7 @@ public:
      * @return A double with the value of the (i,j) coefficient of the Jacobian matrix.
      */
     template <class IndexTag1, class IndexTag2>
-    static constexpr double jacobian_component(Coord<R, Theta> const& coord) const
+    KOKKOS_INLINE_FUNCTION double jacobian_component(CoordArg const& coord) const
     {
         static_assert(ddc::in_tags_v<IndexTag1, ResultBasis>);
         static_assert(ddc::in_tags_v<IndexTag2, ArgBasisCov>);
@@ -85,7 +87,7 @@ public:
      *
      * @return A double with the value of the determinant of the Jacobian matrix.
      */
-    static constexpr double inv_jacobian(CoordArg const& coord) const
+    KOKKOS_INLINE_FUNCTION double inv_jacobian(CoordArg const& coord) const
     {
         return 1;
     }
@@ -114,7 +116,7 @@ public:
      * @return A double with the value of the (i,j) coefficient of the Jacobian matrix.
      */
     template <class IndexTag1, class IndexTag2>
-    static constexpr double inv_jacobian_component(Coord<R, Theta> const& coord) const
+    KOKKOS_INLINE_FUNCTION double inv_jacobian_component(CoordArg const& coord) const
     {
         static_assert(ddc::in_tags_v<IndexTag1, ResultBasis>);
         static_assert(ddc::in_tags_v<IndexTag2, ArgBasisCov>);

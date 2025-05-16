@@ -295,7 +295,7 @@ template <class ValidIndexSet>
 struct ToCoord;
 
 template <class... Dims>
-struct ToCoord<VectorIndexSet<Dims...>>
+struct ToCoord<ddc::detail::TypeSeq<Dims...>>
 {
     using type = Coord<Dims...>;
 };
@@ -338,5 +338,5 @@ using type_seq_intersection_t =
 
 /// Get a coordinate from a TypeSeq
 template <class ValidIndexSet>
-using to_coord_t = typename ToCoord<ValidIndexSet>::type;
+using to_coord_t = typename detail::ToCoord<ValidIndexSet>::type;
 } // namespace ddcHelper

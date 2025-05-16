@@ -11,6 +11,7 @@
 #include "czarny_to_cartesian.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "geometry_mapping_tests.hpp"
+#include "identity_coordinate_change.hpp"
 #include "mapping_tools.hpp"
 
 
