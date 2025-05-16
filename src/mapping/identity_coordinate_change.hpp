@@ -3,6 +3,18 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 
+/**
+ * @brief A class describing an identity transformation.
+ *
+ * It is not expected that this class appear in a final simulation,
+ * but it may be useful when debugging vector calculations on
+ * general coordinates.
+ *
+ * @tparam ArgBasis A VectorIndexSet containing the continuous
+ *      dimensions on which the argument is described.
+ * @tparam ResultBasis A VectorIndexSet containing the continuous
+ *      dimensions on which the result is described.
+ */
 template <class ArgBasis, class ResultBasis>
 class IdentityCoordinateChange
 {
