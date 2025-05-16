@@ -46,6 +46,15 @@ struct FindGrid<Dim, ddc::detail::TypeSeq<>>
     using type = void;
 };
 
+template <class CoordType, class IdxRangeType>
+struct FindIdxType;
+
+template <class... Dims, class IdxRangeType>
+struct FindIdxType<Coord<Dims...>, IdxRangeType>
+{
+    using type = Idx<typename FindGrid<Dims, ddc::to_type_seq_t<IdxRangeType>>::type...>;
+};
+
 template <class... TypeSeqs>
 struct TypeSeqCat;
 
@@ -203,3 +212,11 @@ constexpr int type_seq_permutation_parity_v
 template <class Element, std::size_t n_elements>
 using type_seq_duplicate_t =
         typename detail::TypeSeqDuplicate<Element, std::make_index_sequence<n_elements>>::type;
+
+/**
+ * @brief Find the type of an index which allows access to a Coordinate of the specified type.
+ * @tparam CoordType The type of the coordinate
+ * @tparam IdxRangeType The type of the index range that the index will come from.
+ */
+template <class CoordType, class IdxRangeType>
+using find_idx_t = typename detail::FindIdxType<CoordType, IdxRangeType>::type;
