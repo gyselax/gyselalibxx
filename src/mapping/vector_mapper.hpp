@@ -90,11 +90,12 @@ public:
                     });
         } else {
             InverseJacobianMatrix<Mapping, ddc::coordinate_of_t<IdxType>> inv_mapping(m_mapping);
+            using IdxType = find_idx_t<typename Mapping::CoordJacobian, IdxRangeType>;
             ddc::parallel_for_each(
                     exec_space,
                     get_idx_range(vector_field_input),
                     KOKKOS_LAMBDA(IdxType idx) {
-                        Tensor map_J = inv_mapping(ddc::coordinate(idx));
+                        Tensor map_J = inv_mapping(ddc::coordinate(IdxType(idx)));
 
                         DVector<XOut, YOut> vector_out = tensor_mul(
                                 index<'i', 'j'>(map_J),
