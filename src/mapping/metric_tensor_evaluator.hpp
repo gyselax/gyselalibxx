@@ -19,7 +19,7 @@ template <class Mapping, class PositionCoordinate = typename Mapping::CoordArg>
 class MetricTensorEvaluator
 {
     static_assert(is_mapping_v<Mapping>);
-    static_assert(has_jacobian_v<Mapping, PositionCoordinate>);
+    static_assert(has_jacobian_v<Mapping>);
     static_assert(
             (is_covariant_vector_index_set_v<ddc::to_type_seq_t<typename Mapping::CoordResult>>)&&(
                     is_contravariant_vector_index_set_v<

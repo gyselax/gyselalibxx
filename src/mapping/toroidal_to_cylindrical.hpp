@@ -55,6 +55,8 @@ public:
     using CoordArg = Coord<Rho, Theta, Phi>;
     /// The type of the result of the function described by this mapping.
     using CoordResult = Coord<R, Z, Zeta>;
+    /// The type of the coordinate that can be used to evaluate the Jacobian of this mapping
+    using CoordJacobian = CoordArg;
 
 private:
     Curvilinear2DToCartesian m_mapping_2d;
@@ -200,7 +202,7 @@ public:
     template <class IndexTag1, class IndexTag2>
     KOKKOS_INLINE_FUNCTION double inv_jacobian_component(CoordArg const& coord) const
     {
-        static_assert(has_inv_jacobian_v<Curvilinear2DToCartesian, CoordArg>);
+        static_assert(has_inv_jacobian_v<Curvilinear2DToCartesian>);
         static_assert(ddc::in_tags_v<IndexTag1, ddc::detail::TypeSeq<Rho, Theta, Phi>>);
         static_assert(ddc::in_tags_v<IndexTag2, ddc::detail::TypeSeq<R_cov, Z_cov, Zeta_cov>>);
 

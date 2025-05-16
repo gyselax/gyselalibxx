@@ -72,6 +72,8 @@ public:
     using CoordArg = Coord<X, Y, Z>;
     /// The type of the result of the function described by this mapping
     using CoordResult = Coord<R, Z, Zeta>;
+    /// The type of the coordinate that can be used to evaluate the Jacobian of this mapping
+    using CoordJacobian = CoordArg;
 
     /// @brief The covariant form of the first Cartesian coordinate.
     using X_cov = typename X::Dual;

@@ -48,10 +48,10 @@ public:
      */
     KOKKOS_INLINE_FUNCTION InverseJacobianTensor operator()(PositionCoordinate const& coord) const
     {
-        if constexpr (has_inv_jacobian_v<Mapping, PositionCoordinate, false>) {
+        if constexpr (has_inv_jacobian_v<Mapping, false>) {
             return m_mapping.inv_jacobian_matrix(coord);
         } else {
-            static_assert(has_jacobian_v<Mapping, PositionCoordinate>);
+            static_assert(has_jacobian_v<Mapping>);
             DTensor<ValidResultIndices, vector_index_set_dual_t<ValidArgIndices>> jacobian
                     = m_mapping.jacobian_matrix(coord);
             assert(fabs(determinant(jacobian)) > 1e-15);
@@ -76,10 +76,10 @@ public:
         static_assert(ddc::in_tags_v<IndexTag1, ValidArgIndices>);
         static_assert(ddc::in_tags_v<IndexTag2, get_covariant_dims_t<ValidResultIndices>>);
 
-        if constexpr (has_inv_jacobian_v<Mapping, PositionCoordinate, false>) {
+        if constexpr (has_inv_jacobian_v<Mapping, false>) {
             return m_mapping.template inv_jacobian_component<IndexTag1, IndexTag2>(coord);
         } else {
-            static_assert(has_jacobian_v<Mapping, PositionCoordinate>);
+            static_assert(has_jacobian_v<Mapping>);
             static_assert(Mapping::CoordArg::size() == 2);
 
             using DimArg0 = ddc::type_seq_element_t<0, ValidArgIndices>;
