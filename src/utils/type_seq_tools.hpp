@@ -3,6 +3,24 @@
 
 namespace detail {
 
+template <class GridDim, typename = void>
+struct GetCDim
+{
+    using type = GridDim;
+};
+
+template <class GridDim>
+struct GetCDim<
+        GridDim,
+        std::enable_if_t<
+                std::is_same_v<
+                        typename GridDim::continuous_dimension_type,
+                        typename GridDim::continuous_dimension_type>,
+                void>>
+{
+    using type = typename GridDim::continuous_dimension_type;
+};
+
 template <
         class TypeSeqIn,
         std::size_t Start,
@@ -34,7 +52,7 @@ template <class Dim, class HeadGrid, class... Grids>
 struct FindGrid<Dim, ddc::detail::TypeSeq<HeadGrid, Grids...>>
 {
     using type = std::conditional_t<
-            std::is_same_v<typename HeadGrid::continuous_dimension_type, Dim>,
+            std::is_same_v<typename GetCDim<HeadGrid>::type, Dim>,
             HeadGrid,
             typename FindGrid<Dim, ddc::detail::TypeSeq<Grids...>>::type>;
 };
