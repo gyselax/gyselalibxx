@@ -68,7 +68,7 @@ public:
             DTensor<BasisSpatial> const& B,
             MappingCoord const& coord) const
     {
-        LeviCivitaTensor<double, BasisSpatial> eps(m_mapping, coord);
+        LeviCivitaTensor<double, BasisSpatial> eps;
         DTensor<CovBasisSpatial, CovBasisSpatial> metric_tensor = m_metric_tensor(coord);
         double B_norm = norm(metric_tensor, B);
         return tensor_mul(
