@@ -89,7 +89,7 @@ public:
                                 = ddcHelper::get<YOut>(vector_field_out);
                     });
         } else {
-            InverseJacobianMatrix<Mapping, typename Mapping::CoordJacobian> inv_mapping(m_mapping);
+            InverseJacobianMatrix<Mapping> inv_mapping(m_mapping);
             using CoordIdxType = find_idx_t<typename Mapping::CoordJacobian, IdxRangeType>;
             ddc::parallel_for_each(
                     exec_space,

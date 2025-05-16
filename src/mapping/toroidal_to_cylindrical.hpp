@@ -171,8 +171,7 @@ public:
     KOKKOS_FUNCTION DTensor<VectorIndexSet<Rho, Theta, Phi>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>>
     inv_jacobian_matrix(CoordArg const& coord) const
     {
-        InverseJacobianMatrix<Curvilinear2DToCartesian, CoordArg2D> inv_jacobian_matrix_2d(
-                m_mapping_2d);
+        InverseJacobianMatrix inv_jacobian_matrix_2d(m_mapping_2d);
         DTensor<VectorIndexSet<Rho, Theta, Phi>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>> inv_J_3d;
         DTensor<VectorIndexSet<Rho, Theta>, VectorIndexSet<R_cov, Z_cov>> inv_J_2d
                 = inv_jacobian_matrix_2d(CoordArg2D(coord));

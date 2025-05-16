@@ -12,14 +12,15 @@
  * Otherwise the inverse is calculated from the Jacobian matrix.
  *
  * @tparam Mapping The mapping whose inverse we are interested in.
- * @tparam PositionCoordinate The coordinate system in which the inverse should be calculated.
+ * @tparam CoordJacobian The coordinate system in which the inverse should be calculated.
  */
-template <class Mapping, class PositionCoordinate = typename Mapping::CoordArg>
+template <class Mapping>
 class InverseJacobianMatrix
 {
 private:
     using ValidArgIndices = ddc::to_type_seq_t<typename Mapping::CoordArg>;
     using ValidResultIndices = ddc::to_type_seq_t<typename Mapping::CoordResult>;
+    using CoordJacobian = typename Mapping::CoordJacobian;
 
 public:
     /// The type of the tensor representing the inverse Jacobian.
@@ -46,7 +47,7 @@ public:
      * @param[in] coord The coordinate where we evaluate the Jacobian matrix.
      * @returns The inverse Jacobian matrix returned.
      */
-    KOKKOS_INLINE_FUNCTION InverseJacobianTensor operator()(PositionCoordinate const& coord) const
+    KOKKOS_INLINE_FUNCTION InverseJacobianTensor operator()(CoordJacobian const& coord) const
     {
         if constexpr (has_inv_jacobian_v<Mapping, false>) {
             return m_mapping.inv_jacobian_matrix(coord);
@@ -71,7 +72,7 @@ public:
      * @return A double with the value of the (i,j) coefficient of the inverse Jacobian matrix.
      */
     template <class IndexTag1, class IndexTag2>
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_component(PositionCoordinate const& coord) const
+    KOKKOS_INLINE_FUNCTION double inv_jacobian_component(CoordJacobian const& coord) const
     {
         static_assert(ddc::in_tags_v<IndexTag1, ValidArgIndices>);
         static_assert(ddc::in_tags_v<IndexTag2, get_covariant_dims_t<ValidResultIndices>>);
