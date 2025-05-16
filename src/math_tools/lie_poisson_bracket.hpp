@@ -68,14 +68,15 @@ public:
             DTensor<BasisSpatial> const& B,
             MappingCoord const& coord) const
     {
-        LeviCivitaTensor<double, CovBasisSpatial> eps;
-        double B_norm = norm(m_metric_tensor(coord), B);
+        LeviCivitaTensor<double, BasisSpatial> eps(m_mapping, coord);
+        DTensor<CovBasisSpatial, CovBasisSpatial> metric_tensor = m_metric_tensor(coord);
+        double B_norm = norm(metric_tensor, B);
         return tensor_mul(
-                       index<'i', 'j', 'k'>(eps),
-                       index<'i'>(m_grad(partial_derivatives_f, coord)),
-                       index<'j'>(m_grad(partial_derivatives_g, coord)),
-                       index<'k'>(B / B_norm))
-               / m_mapping.jacobian(coord);
+                index<'i', 'j', 'k'>(eps),
+                index<'i', 'l'>(metric_tensor),
+                index<'l'>(B / B_norm),
+                index<'j'>(partial_derivatives_f),
+                index<'k'>(partial_derivatives_g));
     }
 
     /**
