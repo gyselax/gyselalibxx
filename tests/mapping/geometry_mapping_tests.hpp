@@ -194,14 +194,17 @@ using IdxRangeBSR = IdxRange<BSplinesR>;
 using IdxRangeBSTheta = IdxRange<BSplinesTheta>;
 using IdxRangeBSRTheta = IdxRange<BSplinesR, BSplinesTheta>;
 
+using IdxRangeRho = IdxRange<GridRho>;
 using IdxRangeR = IdxRange<GridR>;
 using IdxRangeTheta = IdxRange<GridTheta>;
 using IdxRangePhi = IdxRange<GridPhi>;
 using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 using IdxRangeRThetaPhi = IdxRange<GridR, GridTheta, GridPhi>;
+using IdxRangeRhoThetaPhi = IdxRange<GridRho, GridTheta, GridPhi>;
 using IdxRangeRZZeta = IdxRange<GridR, GridZ, GridZeta>;
 using IdxRangeRhoThetaPhi = IdxRange<GridRho, GridTheta, GridPhi>;
 
+using IdxRho = Idx<GridRho>;
 using IdxR = Idx<GridR>;
 using IdxTheta = Idx<GridTheta>;
 using IdxPhi = Idx<GridPhi>;
@@ -210,6 +213,7 @@ using IdxRThetaPhi = Idx<GridR, GridTheta, GridPhi>;
 using IdxRZZeta = Idx<GridR, GridZ, GridZeta>;
 using IdxRhoThetaPhi = Idx<GridRho, GridTheta, GridPhi>;
 
+using IdxStepRho = IdxStep<GridRho>;
 using IdxStepR = IdxStep<GridR>;
 using IdxStepTheta = IdxStep<GridTheta>;
 using IdxStepPhi = IdxStep<GridPhi>;
