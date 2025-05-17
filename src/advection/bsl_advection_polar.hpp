@@ -5,6 +5,7 @@
 #include "ddc_aliases.hpp"
 #include "i_interpolator_2d.hpp"
 #include "indexed_tensor.hpp"
+#include "l_norm_tools.hpp"
 #include "metric_tensor_evaluator.hpp"
 #include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"

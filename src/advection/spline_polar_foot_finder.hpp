@@ -113,9 +113,11 @@ private:
 
     using CoordRTheta = Coord<R, Theta>;
 
+    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeOperator, GridR, GridTheta>;
     using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
     using IdxRangeR = IdxRange<GridR>;
     using IdxRangeTheta = IdxRange<GridTheta>;
+    using IdxBatch = typename IdxRangeBatch::discrete_element_type;
     using IdxRTheta = Idx<GridR, GridTheta>;
     using IdxR = Idx<GridR>;
     using IdxTheta = Idx<GridTheta>;
@@ -242,7 +244,7 @@ public:
             double dt) const final
     {
         VectorSplineCoeffsMem advection_field_in_adv_domain_coefs(
-                get_spline_idx_range(m_builder_advection_field));
+                m_builder_advection_field.batched_spline_domain(get_idx_range(advection_field)));
 
         // Compute the advection field in the advection domain.
         auto advection_field_in_adv_domain = create_geometry_mirror_view(
@@ -336,24 +338,28 @@ public:
      *
      */
     template <class T>
-    void is_unified(Field<T, IdxRangeRTheta, memory_space> const& values) const
+    void is_unified(Field<T, IdxRangeOperator, memory_space> const& values) const
     {
-        IdxRangeR const r_idx_range = get_idx_range<GridR>(values);
-        IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(values);
+        IdxRangeOperator full_idx_range = get_idx_range(values);
+        IdxRangeBatch const b_idx_range(full_idx_range);
+        IdxRangeR const r_idx_range(full_idx_range);
+        IdxRangeTheta const theta_idx_range(full_idx_range);
         IdxR r0_idx = r_idx_range.front();
+        IdxTheta theta0_idx = theta_idx_range.front();
         if (Kokkos::fabs(ddc::coordinate(r0_idx)) < 1e-15) {
             ddc::parallel_for_each(
                     ExecSpace(),
-                    theta_idx_range,
-                    KOKKOS_LAMBDA(const IdxTheta itheta) {
-                        if (norm_inf(
-                                    values(r0_idx, itheta)
-                                    - values(r0_idx, theta_idx_range.front()))
-                            > 1e-15) {
-                            Kokkos::printf("WARNING ! -> Discontinuous at the centre point.");
+                    b_idx_range,
+                    KOKKOS_LAMBDA(const IdxBatch ib) {
+                        for (IdxTheta itheta : theta_idx_range) {
+                            if (norm_inf(
+                                        values(ib, r0_idx, itheta) - values(ib, r0_idx, theta0_idx))
+                                > 1e-15) {
+                                Kokkos::printf("WARNING ! -> Discontinuous at the centre point.");
+                            }
+                            KOKKOS_ASSERT(
+                                    values(ib, r0_idx, itheta) == values(ib, r0_idx, theta0_idx));
                         }
-                        KOKKOS_ASSERT(
-                                values(r0_idx, itheta) == values(r0_idx, theta_idx_range.front()));
                     });
         }
     }
@@ -373,17 +379,22 @@ public:
      *      The table of values we want to unify at the central point.
      */
     template <class T>
-    void unify_value_at_centre_pt(Field<T, IdxRangeRTheta, memory_space> values) const
+    void unify_value_at_centre_pt(Field<T, IdxRangeOperator, memory_space> values) const
     {
-        IdxRangeR const r_idx_range = get_idx_range<GridR>(values);
-        IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(values);
+        IdxRangeOperator full_idx_range = get_idx_range(values);
+        IdxRangeBatch const b_idx_range(full_idx_range);
+        IdxRangeR const r_idx_range(full_idx_range);
+        IdxRangeTheta const theta_idx_range(full_idx_range);
         IdxR r0_idx = r_idx_range.front();
+        IdxTheta theta0_idx = theta_idx_range.front();
         if (std::fabs(ddc::coordinate(r0_idx)) < 1e-15) {
             ddc::parallel_for_each(
                     ExecSpace(),
-                    theta_idx_range,
-                    KOKKOS_LAMBDA(const IdxTheta itheta) {
-                        values(r0_idx, itheta) = values(r0_idx, theta_idx_range.front());
+                    b_idx_range,
+                    KOKKOS_LAMBDA(const IdxBatch ib) {
+                        for (IdxTheta itheta : theta_idx_range) {
+                            values(ib, r0_idx, itheta) = values(ib, r0_idx, theta0_idx);
+                        }
                     });
         }
     }
