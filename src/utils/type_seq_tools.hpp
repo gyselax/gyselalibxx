@@ -117,21 +117,23 @@ struct GetPermutationParity<
         ddc::detail::TypeSeq<HeadType, TailTypeSeq...>,
         ddc::detail::TypeSeq<HeadType, TailOrderedTypeSeq...>>
 {
-    static_assert(
-            std::is_same_v<
-                    ddc::detail::TypeSeq<HeadType, TailOrderedTypeSeq...>,
-                    typename detail::GetUnique<
-                            ddc::detail::TypeSeq<HeadType, TailOrderedTypeSeq...>>::type>,
-            "Cannot calculate the permutation parity of a type seq with duplicate elements.");
-    static_assert(
-            std::is_same_v<
-                    ddc::detail::TypeSeq<HeadType, TailTypeSeq...>,
-                    typename detail::GetUnique<
-                            ddc::detail::TypeSeq<HeadType, TailTypeSeq...>>::type>,
-            "Cannot calculate the permutation parity of a type seq with duplicate elements.");
-    static constexpr int value = GetPermutationParity<
-            ddc::detail::TypeSeq<TailTypeSeq...>,
-            ddc::detail::TypeSeq<TailOrderedTypeSeq...>>::value;
+private:
+    static constexpr bool contains_duplicate
+            = (!std::is_same_v<
+                      ddc::detail::TypeSeq<HeadType, TailOrderedTypeSeq...>,
+                      typename detail::GetUnique<
+                              ddc::detail::TypeSeq<HeadType, TailOrderedTypeSeq...>>::type>)
+              || (!std::is_same_v<
+                      ddc::detail::TypeSeq<HeadType, TailTypeSeq...>,
+                      typename detail::GetUnique<
+                              ddc::detail::TypeSeq<HeadType, TailTypeSeq...>>::type>);
+
+public:
+    static constexpr int value
+            = contains_duplicate ? 0
+                                 : GetPermutationParity<
+                                         ddc::detail::TypeSeq<TailTypeSeq...>,
+                                         ddc::detail::TypeSeq<TailOrderedTypeSeq...>>::value;
 };
 
 template <class HeadType, class... TailTypeSeq, class OrderedHeadType, class... TailOrderedTypeSeq>
@@ -139,24 +141,26 @@ struct GetPermutationParity<
         ddc::detail::TypeSeq<HeadType, TailTypeSeq...>,
         ddc::detail::TypeSeq<OrderedHeadType, TailOrderedTypeSeq...>>
 {
-    static_assert(
-            std::is_same_v<
-                    ddc::detail::TypeSeq<OrderedHeadType, TailOrderedTypeSeq...>,
-                    typename detail::GetUnique<
-                            ddc::detail::TypeSeq<OrderedHeadType, TailOrderedTypeSeq...>>::type>,
-            "Cannot calculate the permutation parity of a type seq with duplicate elements.");
-    static_assert(
-            std::is_same_v<
-                    ddc::detail::TypeSeq<HeadType, TailTypeSeq...>,
-                    typename detail::GetUnique<
-                            ddc::detail::TypeSeq<HeadType, TailTypeSeq...>>::type>,
-            "Cannot calculate the permutation parity of a type seq with duplicate elements.");
-    static constexpr int value = -GetPermutationParity<
-            ddc::type_seq_replace_t<
-                    ddc::detail::TypeSeq<TailTypeSeq...>,
-                    ddc::detail::TypeSeq<OrderedHeadType>,
-                    ddc::detail::TypeSeq<HeadType>>,
-            ddc::detail::TypeSeq<TailOrderedTypeSeq...>>::value;
+private:
+    static constexpr bool contains_duplicate
+            = (!std::is_same_v<
+                      ddc::detail::TypeSeq<OrderedHeadType, TailOrderedTypeSeq...>,
+                      typename detail::GetUnique<
+                              ddc::detail::TypeSeq<OrderedHeadType, TailOrderedTypeSeq...>>::type>)
+              || (!std::is_same_v<
+                      ddc::detail::TypeSeq<HeadType, TailTypeSeq...>,
+                      typename detail::GetUnique<
+                              ddc::detail::TypeSeq<HeadType, TailTypeSeq...>>::type>);
+
+public:
+    static constexpr int value
+            = contains_duplicate ? 0
+                                 : -GetPermutationParity<
+                                         ddc::type_seq_replace_t<
+                                                 ddc::detail::TypeSeq<TailTypeSeq...>,
+                                                 ddc::detail::TypeSeq<OrderedHeadType>,
+                                                 ddc::detail::TypeSeq<HeadType>>,
+                                         ddc::detail::TypeSeq<TailOrderedTypeSeq...>>::value;
 };
 
 template <>
