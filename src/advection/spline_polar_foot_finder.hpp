@@ -245,10 +245,8 @@ public:
                 get_spline_idx_range(m_builder_advection_field));
 
         // Compute the advection field in the advection domain.
-        auto advection_field_in_adv_domain = create_geometry_mirror_view(
-                ExecSpace(),
-                advection_field,
-                m_pseudo_physical_to_physical);
+        auto advection_field_in_adv_domain = create_mirror_view_and_copy_on_vector_space<
+                PseudoCartesianBasis>(ExecSpace(), advection_field, m_pseudo_physical_to_physical);
 
         // Get the coefficients of the advection field in the advection domain.
         m_builder_advection_field(
