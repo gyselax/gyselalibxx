@@ -201,7 +201,7 @@ public:
     template <class IndexTag1, class IndexTag2>
     KOKKOS_INLINE_FUNCTION double inv_jacobian_component(CoordArg const& coord) const
     {
-        static_assert(has_inv_jacobian_v<Curvilinear2DToCartesian, CoordArg>);
+        static_assert(has_inv_jacobian_v<Curvilinear2DToCartesian>);
         static_assert(ddc::in_tags_v<IndexTag1, ddc::detail::TypeSeq<Rho, Theta, Phi>>);
         static_assert(ddc::in_tags_v<IndexTag2, ddc::detail::TypeSeq<R_cov, Z_cov, Zeta_cov>>);
 
