@@ -154,7 +154,7 @@ public:
 
 private:
     template <class... RowDims, class... ColDims>
-    void fill_diagonal_elems(
+    void fill_diagonal_elements(
             DTensor<VectorIndexSet<RowDims...>, VectorIndexSet<ColDims...>>& matrix)
     {
         ((ddcHelper::get<RowDims, ColDims>(matrix) = 1.0), ...);
