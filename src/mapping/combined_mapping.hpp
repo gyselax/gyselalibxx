@@ -125,8 +125,7 @@ public:
             static_assert(std::is_same_v<CoordJacobian, typename Mapping1::CoordJacobian>);
             static_assert(std::is_same_v<CoordJacobian, typename InverseMapping2::CoordJacobian>);
             // The Jacobian defined on CoordJacobian is the inverse of the inverse mapping
-            InverseJacobianMatrix<InverseMapping2, CoordJacobian> jacobian_mapping_2(
-                    m_mapping_2.get_inverse_mapping());
+            InverseJacobianMatrix jacobian_mapping_2(m_mapping_2.get_inverse_mapping());
             return tensor_mul(
                     index<'i', 'j'>(m_mapping_1.jacobian_matrix(coord)),
                     index<'j', 'k'>(jacobian_mapping_2(coord)));
