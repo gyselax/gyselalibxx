@@ -9,6 +9,8 @@
 #include <Kokkos_Core.hpp>
 
 #include "indexed_tensor.hpp"
+#include "mapping_tools.hpp"
+#include "static_tensors.hpp"
 #include "tensor.hpp"
 #include "vector_field.hpp"
 
@@ -247,4 +249,37 @@ inverse(
                - ddcHelper::get<RowDim1, ColDim2>(arr) * ddcHelper::get<RowDim2, ColDim1>(arr))
               / det;
     return inv;
+}
+
+template <class ElementType, class VectorIndexSetType>
+KOKKOS_INLINE_FUNCTION double scalar_product(
+        Tensor<ElementType, VectorIndexSetType> const& a,
+        Tensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>> const& b)
+{
+    return tensor_mul(index<'i'>(a), index<'i'>(b));
+}
+
+template <class ElementType, class VectorIndexSetType>
+KOKKOS_INLINE_FUNCTION double scalar_product(
+        Tensor<ElementType, VectorIndexSetType, VectorIndexSetType> const& metric,
+        Tensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>> const& a,
+        Tensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>> const& b)
+{
+    return tensor_mul(index<'i'>(a), index<'i', 'j'>(metric), index<'j'>(b));
+}
+
+template <class Mapping, class CoordType, class ElementType, class VectorIndexSetType>
+KOKKOS_INLINE_FUNCTION Tensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>>
+tensor_product(
+        Mapping const& mapping,
+        CoordType const& coord,
+        Tensor<ElementType, VectorIndexSetType> const& a,
+        Tensor<ElementType, VectorIndexSetType> const& b)
+{
+    static_assert(ddc::type_seq_size_v<VectorIndexSetType> == 3);
+    static_assert(is_mapping_v<Mapping>);
+    static_assert(has_jacobian_v<Mapping, CoordType>);
+    LeviCivitaTensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>> eps(
+            mapping.jacobian(coord));
+    return tensor_mul(index<'i', 'j', 'k'>(eps), index<'j'>(a), index<'k'>(b));
 }
