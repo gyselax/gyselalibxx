@@ -121,18 +121,21 @@ auto create_mirror_view_and_copy_on_vector_space(
     } else {
         using IdxType = typename IdxRangeType::discrete_element_type;
         using CoordType = typename Mapping::CoordJacobian;
+        using CoordIdxType = find_idx_t<CoordType, IdxRangeType>;
         VectorFieldMem<
                 std::remove_const_t<ElementType>,
                 IdxRangeType,
                 OutVectorSpace,
                 typename ExecSpace::memory_space>
-                vector_field_out(get_idx_range(vector_field));
+                vector_field_out_alloc(get_idx_range(vector_field));
+        VectorField vector_field_out = get_field(vector_field_out_alloc);
         ddc::parallel_for_each(
                 exec_space,
                 get_idx_range(vector_field),
                 KOKKOS_LAMBDA(IdxType idx) {
-                    CoordType coord = ddc::coordinate(idx);
-                    assign_vector_field_element(
+                    CoordIdxType coord_idx(idx);
+                    CoordType coord = ddc::coordinate(coord_idx);
+                    ddcHelper::assign_vector_field_element(
                             vector_field_out,
                             idx,
                             to_vector_space<OutVectorSpace>(mapping, coord, vector_field(idx)));

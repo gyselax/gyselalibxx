@@ -151,12 +151,13 @@ TEST(MappingChange, VectorFieldChange)
     auto polar_vector_field = create_mirror_view_and_copy_on_vector_space<
             PolarBasis>(Kokkos::DefaultExecutionSpace(), get_field(cart_vector_field), mapping);
 
-    auto polar_vector_field_host = ddcHelper::create_mirror_view_and_copy(polar_vector_field);
+    auto polar_vector_field_host = ddcHelper::create_mirror_view_and_copy(
+            Kokkos::DefaultHostExecutionSpace(),
+            get_field(polar_vector_field));
 
     ddc::for_each(idx_range, [&](Idx<Species, GridR, GridTheta> idx) {
-        double r = ddc::coordinate(ddc::select<GridR>(idx));
-        double r_vec = ddc::get<R>(polar_vector_field_host)(idx);
-        double theta_vec = ddc::get<Theta>(polar_vector_field_host)(idx);
+        double r_vec = ddcHelper::get<R>(polar_vector_field_host)(idx);
+        double theta_vec = ddcHelper::get<Theta>(polar_vector_field_host)(idx);
         EXPECT_NEAR(r_vec, std::sqrt(2), 1e-14);
         EXPECT_NEAR(theta_vec, 0.0, 1e-14);
     });
