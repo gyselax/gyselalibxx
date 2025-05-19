@@ -18,6 +18,7 @@ target_link_libraries(unit_tests_mapping
         GTest::gtest
         GTest::gmock
         gslx::mapping
+        gslx::speciesinfo
         gslx::utils
 )
 gtest_discover_tests(unit_tests_mapping DISCOVERY_MODE PRE_TEST)
