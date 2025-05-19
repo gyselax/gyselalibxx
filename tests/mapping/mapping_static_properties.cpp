@@ -12,6 +12,7 @@
 #include "discrete_to_cartesian.hpp"
 #include "geometry_mapping_tests.hpp"
 #include "mapping_tools.hpp"
+#include "toroidal_to_cylindrical.hpp"
 
 
 TEST(MappingStaticAsserts, CirctoCart)
@@ -101,4 +102,14 @@ TEST(MappingStaticAsserts, CartToBarycentric)
     using Mapping = CartesianToBarycentric<X, Y, Corner1, Corner2, Corner3>;
     static_assert(is_mapping_v<Mapping>);
     static_assert(is_analytical_mapping_v<Mapping>);
+}
+
+TEST(MappingStaticAsserts, TorToCyl)
+{
+    using Mapping2D = CircularToCartesian<R, Theta, X, Y>;
+    using Mapping = ToroidalToCylindrical<Mapping2D, Zeta, Phi>;
+    static_assert(is_mapping_v<Mapping>);
+    static_assert(has_jacobian_v<Mapping>);
+    static_assert(has_inv_jacobian_v<Mapping>);
+    static_assert(has_singular_o_point_inv_jacobian_v<Mapping>);
 }
