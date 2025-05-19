@@ -55,6 +55,8 @@ public:
     using CoordArg = Coord<Rho, Theta, Phi>;
     /// The type of the result of the function described by this mapping.
     using CoordResult = Coord<R, Z, Zeta>;
+    /// The type of the coordinate that can be used to evaluate the Jacobian of this mapping
+    using CoordJacobian = CoordArg;
 
 private:
     Curvilinear2DToCartesian m_mapping_2d;

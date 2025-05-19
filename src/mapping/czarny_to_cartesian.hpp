@@ -63,6 +63,8 @@ public:
     using CoordArg = Coord<R, Theta>;
     /// The type of the result of the function described by this mapping
     using CoordResult = Coord<X, Y>;
+    /// The type of the coordinate that can be used to evaluate the Jacobian of this mapping
+    using CoordJacobian = CoordArg;
 
     /// @brief The covariant form of the first physical coordinate.
     using X_cov = typename X::Dual;
