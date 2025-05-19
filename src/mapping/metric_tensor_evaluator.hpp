@@ -19,7 +19,12 @@ template <class Mapping, class PositionCoordinate = typename Mapping::CoordArg>
 class MetricTensorEvaluator
 {
     static_assert(is_mapping_v<Mapping>);
-    static_assert(has_jacobian_v<Mapping, PositionCoordinate>);
+    static_assert(has_jacobian_v<Mapping>);
+    static_assert(
+            std::is_same_v<PositionCoordinate, typename Mapping::CoordJacobian>,
+            "The metric tensor is calculated from the Jacobian matrix. In order to evaluate the "
+            "metric tensor on a coordinate different to the one given as argument to the mapping, "
+            "please define a specialisation of this class.");
     static_assert(
             (is_covariant_vector_index_set_v<ddc::to_type_seq_t<typename Mapping::CoordResult>>)&&(
                     is_contravariant_vector_index_set_v<

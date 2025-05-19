@@ -120,8 +120,10 @@ public:
         if constexpr (std::is_same_v<CoordJacobian, typename Mapping2::CoordResult>) {
             static_assert(is_analytical_mapping_v<Mapping2>);
             using InverseMapping2 = inverse_mapping_t<Mapping2>;
-            static_assert(has_jacobian_v<Mapping1, CoordJacobian>);
-            static_assert(has_jacobian_v<InverseMapping2, CoordJacobian>);
+            static_assert(has_jacobian_v<Mapping1>);
+            static_assert(has_jacobian_v<InverseMapping2>);
+            static_assert(std::is_same_v<CoordJacobian, typename Mapping1::CoordJacobian>);
+            static_assert(std::is_same_v<CoordJacobian, typename InverseMapping2::CoordJacobian>);
             // The Jacobian defined on CoordJacobian is the inverse of the inverse mapping
             InverseJacobianMatrix<InverseMapping2, CoordJacobian> jacobian_mapping_2(
                     m_mapping_2.get_inverse_mapping());
