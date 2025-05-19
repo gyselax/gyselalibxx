@@ -6,8 +6,10 @@
 #include "../coord_transformations/geometry_coord_transformations_tests.hpp"
 
 #include "circular_to_cartesian.hpp"
+#include "cylindrical_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "identity_coordinate_change.hpp"
 #include "math_tools.hpp"
 #include "mesh_builder.hpp"
 #include "metric_tensor_evaluator.hpp"
@@ -127,4 +129,71 @@ TEST(MathTools, Inverse)
     ASSERT_NEAR(test_val, 4, 1e-12);
     test_val = ddcHelper::get<Z, Z>(inv_matrix);
     ASSERT_NEAR(test_val, 1, 1e-12);
+}
+
+TEST(MathTools, ScalarProdCart)
+{
+    using IndexSet = VectorIndexSet<X, Y, Z>;
+    Tensor<double, IndexSet> A, B;
+    ddcHelper::get<X>(A) = 3;
+    ddcHelper::get<Y>(A) = 6;
+    ddcHelper::get<Z>(A) = -3;
+    ddcHelper::get<X>(B) = 1;
+    ddcHelper::get<Y>(B) = -4;
+    ddcHelper::get<Z>(B) = 2;
+    EXPECT_EQ(scalar_product(A, B), -27);
+    Coord<X, Y, Z> test_coord(0.0, 0.0, 0.0);
+    IdentityCoordinateChange<IndexSet, IndexSet> mapping;
+    MetricTensorEvaluator get_metric(mapping);
+    EXPECT_DOUBLE_EQ(scalar_product(get_metric(test_coord), A, B), -27);
+}
+
+TEST(MathTools, ScalarProdCyl)
+{
+    using IndexSet = VectorIndexSet<R, Z, Zeta>;
+    Tensor<double, IndexSet> A, B;
+    ddcHelper::get<R>(A) = 3;
+    ddcHelper::get<Z>(A) = 6;
+    ddcHelper::get<Zeta>(A) = 6;
+    ddcHelper::get<R>(B) = 1;
+    ddcHelper::get<Z>(B) = 2;
+    ddcHelper::get<Zeta>(B) = -4;
+    Coord<R, Z, Zeta> test_coord(2.5, -4.0, 0.3);
+    CylindricalToCartesian<R, Z, Zeta, X, Y> mapping;
+    MetricTensorEvaluator get_metric(mapping);
+    EXPECT_DOUBLE_EQ(scalar_product(get_metric(test_coord), A, B), -135);
+}
+
+TEST(MathTools, TensorProdCart)
+{
+    using IndexSet = VectorIndexSet<X, Y, Z>;
+    Tensor<double, IndexSet> A, B, C;
+    ddcHelper::get<X>(A) = 3;
+    ddcHelper::get<Y>(A) = 6;
+    ddcHelper::get<Z>(A) = -3;
+    ddcHelper::get<X>(B) = 1;
+    ddcHelper::get<Y>(B) = -4;
+    ddcHelper::get<Z>(B) = 2;
+    Coord<X, Y, Z> test_coord(0.0, 0.0, 0.0);
+    IdentityCoordinateChange<IndexSet, IndexSet> mapping;
+    C = tensor_product(mapping, test_coord, A, B);
+    EXPECT_NEAR(ddcHelper::get<X>(C), 0, 1e-14);
+    EXPECT_NEAR(ddcHelper::get<Y>(C), -9, 1e-14);
+    EXPECT_NEAR(ddcHelper::get<Z>(C), -18, 1e-14);
+}
+
+TEST(MathTools, TensorProdCyl)
+{
+    using IndexSet = VectorIndexSet<R, Z, Zeta>;
+    Tensor<double, IndexSet> A, B, C;
+    ddcHelper::get<R>(A) = 3;
+    ddcHelper::get<Z>(A) = 6;
+    ddcHelper::get<Zeta>(A) = -3;
+    ddcHelper::get<R>(B) = 1;
+    ddcHelper::get<Z>(B) = -4;
+    ddcHelper::get<Zeta>(B) = 2;
+    Coord<R, Z, Zeta> test_coord(2.5, -4.0, 0.3);
+    CylindricalToCartesian<R, Z, Zeta, X, Y> mapping;
+    C = tensor_product(mapping, test_coord, A, B);
+    // TODO: Complete test
 }
