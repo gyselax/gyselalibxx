@@ -121,7 +121,7 @@ template <class CurvilinearToCartesian>
 class CartesianSolution : public PoissonSolution<CurvilinearToCartesian>
 {
 private:
-    InverseJacobianMatrix<CurvilinearToCartesian, Coord<R, Theta>> m_inverse_jacobian;
+    InverseJacobianMatrix<CurvilinearToCartesian> m_inverse_jacobian;
     double m_x0;
     double m_y0;
 

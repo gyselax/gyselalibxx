@@ -269,14 +269,13 @@ private:
             static_assert(is_analytical_mapping_v<Mapping2>);
             using InverseMapping2 = inverse_mapping_t<Mapping2>;
             InverseMapping2 inv_mapping_2 = m_mapping_2.get_inverse_mapping();
-            InverseJacobianMatrix<Mapping1, CoordJacobian> inv_jacobian_matrix_1(m_mapping_1);
+            InverseJacobianMatrix inv_jacobian_matrix_1(m_mapping_1);
             return tensor_mul(
                     index<'i', 'j'>(inv_mapping_2.jacobian_matrix(coord)),
                     index<'j', 'k'>(inv_jacobian_matrix_1(coord)));
         } else {
-            InverseJacobianMatrix<Mapping1, typename Mapping1::CoordArg> inv_jacobian_matrix_1(
-                    m_mapping_1);
-            InverseJacobianMatrix<Mapping2, CoordJacobian> inv_jacobian_matrix_2(m_mapping_2);
+            InverseJacobianMatrix inv_jacobian_matrix_1(m_mapping_1);
+            InverseJacobianMatrix inv_jacobian_matrix_2(m_mapping_2);
             typename Mapping1::CoordArg coord_map1 = m_mapping_2(coord);
             return tensor_mul(
                     index<'i', 'j'>(inv_jacobian_matrix_2(coord)),

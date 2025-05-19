@@ -84,7 +84,7 @@ public:
      */
     KOKKOS_FUNCTION DTensor<Dims, Dims> inverse(CoordArg const& coord) const
     {
-        InverseJacobianMatrix<Mapping, PositionCoordinate> get_inverse_jacobian(m_mapping);
+        InverseJacobianMatrix get_inverse_jacobian(m_mapping);
         Tensor inv_J = get_inverse_jacobian(coord);
         return tensor_mul(index<'i', 'j'>(inv_J), index<'k', 'j'>(inv_J));
     }
