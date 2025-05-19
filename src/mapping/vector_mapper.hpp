@@ -1,10 +1,86 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include "inverse_jacobian_matrix.hpp"
+#include "metric_tensor_evaluator.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
 #include "view.hpp"
+
+template <
+        class OutVectorSpace,
+        class Mapping,
+        class CoordType,
+        class ElementType,
+        class InVectorSpace>
+KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
+        Mapping const& mapping,
+        CoordType const& coord,
+        Tensor<ElementType, InVectorSpace> const& in_vector)
+{
+    if constexpr (std::is_same_v<OutVectorSpace, InVectorSpace>) {
+        // If in and out tensor are already defined on the same basis
+        return in_vector;
+
+    } else if constexpr (std::is_same_v<OutVectorSpace, vector_index_set_dual_t<InVectorSpace>>) {
+        // If in and out tensor are defined on co/contra variant bases associated with the same coordinate system
+        if constexpr (is_contravariant_vector_index_set_v<InVectorSpace>) {
+            MetricTensorEvaluator<Mapping, CoordType> metric(mapping);
+            return tensor_mul(index<'i', 'j'>(metric(coord)), index<'j'>(in_vector));
+        } else {
+            MetricTensorEvaluator<Mapping, CoordType> metric(mapping);
+            return tensor_mul(index<'i', 'j'>(metric.inverse(coord)), index<'j'>(in_vector));
+        }
+
+    } else if constexpr (!has_same_variance_v<InVectorSpace, OutVectorSpace>) {
+        // If different variance (co/contra)
+        using OutVectorSpaceDual = vector_index_set_dual_t<OutVectorSpace>;
+        Tensor<ElementType, OutVectorSpaceDual> dual_out_vector
+                = to_vector_space<OutVectorSpaceDual>(mapping, coord, in_vector);
+        return to_vector_space<OutVectorSpace>(mapping, coord, dual_out_vector);
+
+    } else {
+        using ArgBasis = ddc::to_type_seq_t<typename Mapping::CoordArg>;
+        using ResultBasis = ddc::to_type_seq_t<typename Mapping::CoordResult>;
+        using InContraVectorSpace = get_contravariant_dims_t<InVectorSpace>;
+        using OutContraVectorSpace = get_contravariant_dims_t<OutVectorSpace>;
+        if constexpr ((std::is_same_v<InContraVectorSpace, ArgBasis>)&&(
+                              std::is_same_v<OutContraVectorSpace, ResultBasis>)) {
+            if constexpr ((is_contravariant_vector_index_set_v<InVectorSpace>)&&(
+                                  is_contravariant_vector_index_set_v<OutVectorSpace>)) {
+                // A_{\{p\}}^i = J_{\{q\rightarrow p\}}^i_j A_{\{q\}}^j
+                return tensor_mul(
+                        index<'i', 'j'>(mapping.jacobian_matrix(coord)),
+                        index<'j'>(in_vector));
+            } else {
+                // A_{\{p\} i} = (J_{\{q\rightarrow p\}}^{-T})_i^j A_{\{q\} j}
+                //             = (J_{\{q\rightarrow p\}}^{-1})_j^i A_{\{q\} j}
+                InverseJacobianMatrix inv_jacobian(mapping);
+                return tensor_mul(index<'j', 'i'>(inv_jacobian(coord)), index<'j'>(in_vector));
+            }
+        } else {
+            static_assert((std::is_same_v<InContraVectorSpace, ResultBasis>)&&(
+                    std::is_same_v<OutContraVectorSpace, ArgBasis>));
+            if constexpr ((is_contravariant_vector_index_set_v<InVectorSpace>)&&(
+                                  is_contravariant_vector_index_set_v<OutVectorSpace>)) {
+                static_assert(is_contravariant_vector_index_set_v<OutVectorSpace>);
+                // A_{\{q\}}^i = (J_{\{q\rightarrow p\}}^{-1})^i_j A_{\{q\}}^j
+                InverseJacobianMatrix inv_jacobian(mapping);
+                DTensor<OutVectorSpace, get_covariant_dims_t<InVectorSpace>> I_J
+                        = inv_jacobian(coord);
+                return tensor_mul(index<'i', 'j'>(I_J), index<'j'>(in_vector));
+            } else {
+                // A_{\{p\} i} = (J_{\{q\rightarrow p\}}^{-T})_i^j A_{\{q\} j}
+                //             = (J_{\{q\rightarrow p\}}^{-1})_j^i A_{\{q\} j}
+                //             = (J_{\{p\rightarrow q\}})_j^i A_{\{q\} j}
+                return tensor_mul(
+                        index<'j', 'i'>(mapping.jacobian_matrix(coord)),
+                        index<'j'>(in_vector));
+            }
+        }
+    }
+}
 
 /** The general predeclaration of VectorMapper.
  * @see @ref VectorMapperImplementation
