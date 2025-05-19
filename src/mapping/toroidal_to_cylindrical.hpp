@@ -234,4 +234,10 @@ struct MappingAccessibility<ExecSpace, ToroidalToCylindrical<Curvilinear2DToCart
 {
 };
 
+template <class Curvilinear2DToCartesian, class Zeta, class Phi>
+struct SingularOPointInvJacobian<ToroidalToCylindrical<Curvilinear2DToCartesian, Zeta, Phi>>
+    : std::true_type
+{
+};
+
 } // namespace mapping_detail
