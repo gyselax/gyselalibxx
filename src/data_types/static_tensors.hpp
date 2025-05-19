@@ -89,14 +89,15 @@ public:
 
 /**
  * A class containing only static constexpr methods which describes
- * the Levi-Civita tensor.
+ * the Levi-Civita tensor in Cartesian coordinates.
  * @tparam ElementType The type of the elements of the tensor (usually double/complex).
  * @tparam ValidIndexSet The indices that can be used along any of the dimensions of the tensor.
  */
 template <class ElementType, class ValidIndexSet>
-class LeviCivitaTensor
+class CartesianLeviCivitaTensor
 {
     static_assert(is_vector_index_set_v<ValidIndexSet>);
+    static_assert(std::is_same_v<ValidIndexSet, vector_index_set_dual_t<ValidIndexSet>>);
 
 public:
     /// The type of the elements of the tensor.
@@ -131,7 +132,7 @@ public:
     /**
      * @brief Construct an uninitialised tensor object.
      */
-    KOKKOS_DEFAULTED_FUNCTION LeviCivitaTensor() = default;
+    KOKKOS_DEFAULTED_FUNCTION CartesianLeviCivitaTensor() = default;
 
     /**
      * @brief Get an element of the tensor.
@@ -142,14 +143,9 @@ public:
     static constexpr KOKKOS_FUNCTION ElementType get()
     {
         static_assert(tensor_tools::is_tensor_index_element_v<QueryTensorIndexElement>);
-        if constexpr (type_seq_has_unique_elements_v<
-                              typename QueryTensorIndexElement::IdxTypeSeq>) {
-            return type_seq_permutation_parity_v<
-                    typename QueryTensorIndexElement::IdxTypeSeq,
-                    ValidIndexSet>;
-        } else {
-            return 0;
-        }
+        return type_seq_permutation_parity_v<
+                typename QueryTensorIndexElement::IdxTypeSeq,
+                ValidIndexSet>;
     }
 
     /**
@@ -160,7 +156,6 @@ public:
     template <std::size_t dim>
     using vector_index_set_t = ValidIndexSet;
 };
-
 
 namespace ddcHelper {
 /**
@@ -186,10 +181,10 @@ KOKKOS_INLINE_FUNCTION constexpr double get(
  */
 template <class... QueryIndexTag, class ElementType, class ValidIndexSet>
 KOKKOS_INLINE_FUNCTION constexpr double get(
-        LeviCivitaTensor<ElementType, ValidIndexSet> const& tensor)
+        CartesianLeviCivitaTensor<ElementType, ValidIndexSet> const& tensor)
 {
     return tensor.template get<tensor_tools::TensorIndexElement<
-            typename LeviCivitaTensor<ElementType, ValidIndexSet>::index_set,
+            typename CartesianLeviCivitaTensor<ElementType, ValidIndexSet>::index_set,
             QueryIndexTag...>>();
 }
 } // namespace ddcHelper
