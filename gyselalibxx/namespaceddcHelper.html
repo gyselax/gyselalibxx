@@ -580,6 +580,10 @@
 <td style="text-align: left;"><a href="#typedef-apply_template_to_type_seq_t"><strong>apply_template_to_type_seq_t</strong></a>  <br><em>A helper to get a type sequence by applying a template to a sequence of type tags.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef typename detail::ToCoord&lt; ValidIndexSet &gt;::type</td>
+<td style="text-align: left;"><a href="#typedef-to_coord_t"><strong>to_coord_t</strong></a>  <br><em>Get a coordinate from a TypeSeq.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef typename detail::TypeSeqIntersection&lt; TypeSeq1, TypeSeq2, ddc::detail::TypeSeq&lt;&gt; &gt;::type</td>
 <td style="text-align: left;"><a href="#typedef-type_seq_intersection_t"><strong>type_seq_intersection_t</strong></a>  <br><em>A helper to find all types which are found in both TypeSeq1 and TypeSeq2.</em></td>
 </tr>
@@ -703,6 +707,12 @@
 <h3 id="typedef-apply_template_to_type_seq_t">typedef apply_template_to_type_seq_t</h3>
 <p><em>A helper to get a type sequence by applying a template to a sequence of type tags.</em> </p>
 <pre><code class="language-C++">using ddcHelper::apply_template_to_type_seq_t = typedef typename detail::ApplyTemplateToTypeSeq&lt;Templ, TypeSeq&gt;::type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-to_coord_t">typedef to_coord_t</h3>
+<p><em>Get a coordinate from a TypeSeq.</em> </p>
+<pre><code class="language-C++">using ddcHelper::to_coord_t = typedef typename detail::ToCoord&lt;ValidIndexSet&gt;::type;
 </code></pre>
 <hr>
 

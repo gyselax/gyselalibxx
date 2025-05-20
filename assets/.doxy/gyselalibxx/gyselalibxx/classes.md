@@ -226,6 +226,7 @@
 * [**IAdvectionVelocity**](classIAdvectionVelocity.md)
 * [**IBoltzmannSolver**](classIBoltzmannSolver.md)
 * [**IChargeDensityCalculator**](classIChargeDensityCalculator.md)
+* [**IdentityCoordinateChange**](classIdentityCoordinateChange.md)
 * [**IdentityTensor**](classIdentityTensor.md)
 * [**IdxRangeSlice**](classIdxRangeSlice.md)
 * [**IdxRangeSliceIterator**](structIdxRangeSliceIterator.md)

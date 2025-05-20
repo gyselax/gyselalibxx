@@ -210,6 +210,16 @@ struct TypeSeqIntersection<
 };
 
 
+template <class ValidIndexSet>
+struct ToCoord;
+
+template <class... Dims>
+struct ToCoord<ddc::detail::TypeSeq<Dims...>>
+{
+    using type = Coord<Dims...>;
+};
+
+
 } // namespace detail
 
 template <class MemorySpace, class C>
@@ -230,6 +240,9 @@ using apply_template_to_type_seq_t = typename detail::ApplyTemplateToTypeSeq<Tem
 template <class TypeSeq1, class TypeSeq2>
 using type_seq_intersection_t =
         typename detail::TypeSeqIntersection<TypeSeq1, TypeSeq2, ddc::detail::TypeSeq<>>::type;
+
+template <class ValidIndexSet>
+using to_coord_t = typename detail::ToCoord<ValidIndexSet>::type;
 } // namespace ddcHelper
 ```
 

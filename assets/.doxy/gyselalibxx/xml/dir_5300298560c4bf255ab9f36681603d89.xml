@@ -14,6 +14,7 @@
     <innerfile refid="discrete__mapping__builder_8hpp">discrete_mapping_builder.hpp</innerfile>
     <innerfile refid="discrete__to__cartesian_8hpp">discrete_to_cartesian.hpp</innerfile>
     <innerfile refid="geometry__pseudo__cartesian_8hpp">geometry_pseudo_cartesian.hpp</innerfile>
+    <innerfile refid="identity__coordinate__change_8hpp">identity_coordinate_change.hpp</innerfile>
     <innerfile refid="inv__jacobian__o__point_8hpp">inv_jacobian_o_point.hpp</innerfile>
     <innerfile refid="inverse__jacobian__matrix_8hpp">inverse_jacobian_matrix.hpp</innerfile>
     <innerfile refid="mapping__tools_8hpp">mapping_tools.hpp</innerfile>

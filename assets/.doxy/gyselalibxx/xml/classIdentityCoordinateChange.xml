@@ -1,0 +1,394 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classIdentityCoordinateChange" kind="class" language="C++" prot="public">
+    <compoundname>IdentityCoordinateChange</compoundname>
+    <includes refid="identity__coordinate__change_8hpp" local="no">identity_coordinate_change.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class ArgBasis</type>
+      </param>
+      <param>
+        <type>class ResultBasis</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classIdentityCoordinateChange_1af7f3e085c8a6d862d307556182b83f4a" prot="public" static="no">
+        <type>ddcHelper::to_coord_t&lt; ArgBasis &gt;</type>
+        <definition>using IdentityCoordinateChange&lt; ArgBasis, ResultBasis &gt;::CoordArg =  ddcHelper::to_coord_t&lt;ArgBasis&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoordArg</name>
+        <qualifiedname>IdentityCoordinateChange::CoordArg</qualifiedname>
+        <briefdescription>
+<para>The type of the argument of the function described by this mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="23" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classIdentityCoordinateChange_1a71e3c0dc21f0aa02946c5c1cf087efb3" prot="public" static="no">
+        <type>ddcHelper::to_coord_t&lt; ResultBasis &gt;</type>
+        <definition>using IdentityCoordinateChange&lt; ArgBasis, ResultBasis &gt;::CoordResult =  ddcHelper::to_coord_t&lt;ResultBasis&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoordResult</name>
+        <qualifiedname>IdentityCoordinateChange::CoordResult</qualifiedname>
+        <briefdescription>
+<para>The type of the result of the function described by this mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="25" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classIdentityCoordinateChange_1abc2159f19eb9676ac90b4f63bb1edbec" prot="private" static="no">
+        <type>vector_index_set_dual_t&lt; ArgBasis &gt;</type>
+        <definition>using IdentityCoordinateChange&lt; ArgBasis, ResultBasis &gt;::ArgBasisCov =  vector_index_set_dual_t&lt;ArgBasis&gt;</definition>
+        <argsstring></argsstring>
+        <name>ArgBasisCov</name>
+        <qualifiedname>IdentityCoordinateChange::ArgBasisCov</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="28" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classIdentityCoordinateChange_1a65fbdae62596581f7499bed81c696345" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>ArgDims</declname>
+            <defname>ArgDims</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION <ref refid="classIdentityCoordinateChange_1a71e3c0dc21f0aa02946c5c1cf087efb3" kindref="member">CoordResult</ref></type>
+        <definition>KOKKOS_FUNCTION CoordResult IdentityCoordinateChange&lt; ArgBasis, ResultBasis &gt;::operator()</definition>
+        <argsstring>(Coord&lt; ArgDims... &gt; const &amp;coord) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>IdentityCoordinateChange::operator()</qualifiedname>
+        <param>
+          <type>Coord&lt; ArgDims... &gt; const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Convert the coordinate in the argument basis to the equivalent coordinate in the result basis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate to be converted.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The equivalent coordinate. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="39" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="39" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdentityCoordinateChange_1afb356aea031e07efbd962c2a2c8aecb0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double IdentityCoordinateChange&lt; ArgBasis, ResultBasis &gt;::jacobian</definition>
+        <argsstring>(CoordArg const &amp;coord) const</argsstring>
+        <name>jacobian</name>
+        <qualifiedname>IdentityCoordinateChange::jacobian</qualifiedname>
+        <param>
+          <type><ref refid="classIdentityCoordinateChange_1af7f3e085c8a6d862d307556182b83f4a" kindref="member">CoordArg</ref> const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A double with the value of the determinant of the Jacobian matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="53" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="53" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdentityCoordinateChange_1aee43e63adcd94fb44fa8683b54f239f7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; ResultBasis, ArgBasisCov &gt;</type>
+        <definition>KOKKOS_FUNCTION DTensor&lt; ResultBasis, ArgBasisCov &gt; IdentityCoordinateChange&lt; ArgBasis, ResultBasis &gt;::jacobian_matrix</definition>
+        <argsstring>(CoordArg const &amp;coord) const</argsstring>
+        <name>jacobian_matrix</name>
+        <qualifiedname>IdentityCoordinateChange::jacobian_matrix</qualifiedname>
+        <param>
+          <type><ref refid="classIdentityCoordinateChange_1af7f3e085c8a6d862d307556182b83f4a" kindref="member">CoordArg</ref> const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute full Jacobian matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian matrix. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The Jacobian matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="65" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="65" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdentityCoordinateChange_1a67ee0151d1d3597b16a4a56a46b1ce55" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IndexTag1</type>
+          </param>
+          <param>
+            <type>class IndexTag2</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double IdentityCoordinateChange&lt; ArgBasis, ResultBasis &gt;::jacobian_component</definition>
+        <argsstring>(CoordArg const &amp;coord) const</argsstring>
+        <name>jacobian_component</name>
+        <qualifiedname>IdentityCoordinateChange::jacobian_component</qualifiedname>
+        <param>
+          <type><ref refid="classIdentityCoordinateChange_1af7f3e085c8a6d862d307556182b83f4a" kindref="member">CoordArg</ref> const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the (i,j) coefficient of the Jacobian matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian matrix.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A double with the value of the (i,j) coefficient of the Jacobian matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="81" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="81" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdentityCoordinateChange_1a15f89e18a32fec3ddc30de3fab9584f3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double IdentityCoordinateChange&lt; ArgBasis, ResultBasis &gt;::inv_jacobian</definition>
+        <argsstring>(CoordArg const &amp;coord) const</argsstring>
+        <name>inv_jacobian</name>
+        <qualifiedname>IdentityCoordinateChange::inv_jacobian</qualifiedname>
+        <param>
+          <type><ref refid="classIdentityCoordinateChange_1af7f3e085c8a6d862d307556182b83f4a" kindref="member">CoordArg</ref> const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A double with the value of the determinant of the Jacobian matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="102" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="102" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdentityCoordinateChange_1a8123641d097b9a83c292c23f99dd15c9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; ResultBasis, ArgBasisCov &gt;</type>
+        <definition>KOKKOS_FUNCTION DTensor&lt; ResultBasis, ArgBasisCov &gt; IdentityCoordinateChange&lt; ArgBasis, ResultBasis &gt;::inv_jacobian_matrix</definition>
+        <argsstring>(CoordArg const &amp;coord) const</argsstring>
+        <name>inv_jacobian_matrix</name>
+        <qualifiedname>IdentityCoordinateChange::inv_jacobian_matrix</qualifiedname>
+        <param>
+          <type><ref refid="classIdentityCoordinateChange_1af7f3e085c8a6d862d307556182b83f4a" kindref="member">CoordArg</ref> const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute full Jacobian matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian matrix. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The Jacobian matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="114" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="114" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdentityCoordinateChange_1ac2e0cd202f39a69f3b018685f4529240" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IndexTag1</type>
+          </param>
+          <param>
+            <type>class IndexTag2</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double IdentityCoordinateChange&lt; ArgBasis, ResultBasis &gt;::inv_jacobian_component</definition>
+        <argsstring>(CoordArg const &amp;coord) const</argsstring>
+        <name>inv_jacobian_component</name>
+        <qualifiedname>IdentityCoordinateChange::inv_jacobian_component</qualifiedname>
+        <param>
+          <type><ref refid="classIdentityCoordinateChange_1af7f3e085c8a6d862d307556182b83f4a" kindref="member">CoordArg</ref> const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the (i,j) coefficient of the Jacobian matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where we evaluate the Jacobian matrix.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A double with the value of the (i,j) coefficient of the Jacobian matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="131" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="131" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="classIdentityCoordinateChange_1a6a5a7a7cee7431f4550b61e99d6cc48d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION <ref refid="classIdentityCoordinateChange" kindref="compound">IdentityCoordinateChange</ref>&lt; ResultBasis, ArgBasis &gt;</type>
+        <definition>KOKKOS_INLINE_FUNCTION IdentityCoordinateChange&lt; ResultBasis, ArgBasis &gt; IdentityCoordinateChange&lt; ArgBasis, ResultBasis &gt;::get_inverse_mapping</definition>
+        <argsstring>() const</argsstring>
+        <name>get_inverse_mapping</name>
+        <qualifiedname>IdentityCoordinateChange::get_inverse_mapping</qualifiedname>
+        <briefdescription>
+<para>Get the inverse mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The inverse mapping. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="149" column="53" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="149" bodyend="153"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classIdentityCoordinateChange_1a2d38162a100101efa0f080bc47ea3a2b" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>RowDims</declname>
+            <defname>RowDims</defname>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>ColDims</declname>
+            <defname>ColDims</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void IdentityCoordinateChange&lt; ArgBasis, ResultBasis &gt;::fill_diagonal_elements</definition>
+        <argsstring>(DTensor&lt; VectorIndexSet&lt; RowDims... &gt;, VectorIndexSet&lt; ColDims... &gt; &gt; &amp;matrix) const</argsstring>
+        <name>fill_diagonal_elements</name>
+        <qualifiedname>IdentityCoordinateChange::fill_diagonal_elements</qualifiedname>
+        <param>
+          <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; RowDims... &gt;, VectorIndexSet&lt; ColDims... &gt; &gt; &amp;</type>
+          <declname>matrix</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="157" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="157" bodyend="161"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class describing an identity transformation. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>It is not expected that this class appear in a final simulation, but it may be useful when debugging vector calculations on general coordinates.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ArgBasis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A VectorIndexSet containing the continuous dimensions on which the argument is described. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ResultBasis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A VectorIndexSet containing the continuous dimensions on which the result is described. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="19" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="20" bodyend="162"/>
+    <listofallmembers>
+      <member refid="classIdentityCoordinateChange_1abc2159f19eb9676ac90b4f63bb1edbec" prot="private" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>ArgBasisCov</name></member>
+      <member refid="classIdentityCoordinateChange_1af7f3e085c8a6d862d307556182b83f4a" prot="public" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>CoordArg</name></member>
+      <member refid="classIdentityCoordinateChange_1a71e3c0dc21f0aa02946c5c1cf087efb3" prot="public" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>CoordResult</name></member>
+      <member refid="classIdentityCoordinateChange_1a2d38162a100101efa0f080bc47ea3a2b" prot="private" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>fill_diagonal_elements</name></member>
+      <member refid="classIdentityCoordinateChange_1a6a5a7a7cee7431f4550b61e99d6cc48d" prot="public" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>get_inverse_mapping</name></member>
+      <member refid="classIdentityCoordinateChange_1a15f89e18a32fec3ddc30de3fab9584f3" prot="public" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>inv_jacobian</name></member>
+      <member refid="classIdentityCoordinateChange_1ac2e0cd202f39a69f3b018685f4529240" prot="public" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>inv_jacobian_component</name></member>
+      <member refid="classIdentityCoordinateChange_1a8123641d097b9a83c292c23f99dd15c9" prot="public" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>inv_jacobian_matrix</name></member>
+      <member refid="classIdentityCoordinateChange_1afb356aea031e07efbd962c2a2c8aecb0" prot="public" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>jacobian</name></member>
+      <member refid="classIdentityCoordinateChange_1a67ee0151d1d3597b16a4a56a46b1ce55" prot="public" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>jacobian_component</name></member>
+      <member refid="classIdentityCoordinateChange_1aee43e63adcd94fb44fa8683b54f239f7" prot="public" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>jacobian_matrix</name></member>
+      <member refid="classIdentityCoordinateChange_1a65fbdae62596581f7499bed81c696345" prot="public" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

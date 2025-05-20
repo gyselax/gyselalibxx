@@ -555,22 +555,6 @@
 #include "tensor_index_tools.hpp"
 #include "vector_index_tools.hpp"
 
-namespace detail {
-
-template &lt;class ValidIndexSet&gt;
-struct ToCoord;
-
-template &lt;class... Dims&gt;
-struct ToCoord&lt;VectorIndexSet&lt;Dims...&gt;&gt;
-{
-    using type = Coord&lt;Dims...&gt;;
-};
-
-template &lt;class ValidIndexSet&gt;
-using to_coord_t = typename ToCoord&lt;ValidIndexSet&gt;::type;
-
-} // namespace detail
-
 template &lt;class ElementType, class... ValidIndexSet&gt;
 class Tensor
 {

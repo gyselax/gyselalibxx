@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="322" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="322" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="332" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="332" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="ddc__helper_8hpp_1aa238a8fb325126a81a31cd8fc6a436cc" prot="public" static="no">
         <templateparamlist>
@@ -52,7 +52,27 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="326" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="327" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="336" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="337" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="ddc__helper_8hpp_1a8fe773985cd825fa9ddac001aef03324" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ValidIndexSet</type>
+          </param>
+        </templateparamlist>
+        <type>typename detail::ToCoord&lt; ValidIndexSet &gt;::type</type>
+        <definition>using ddcHelper::to_coord_t = typedef typename detail::ToCoord&lt;ValidIndexSet&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>to_coord_t</name>
+        <qualifiedname>ddcHelper::to_coord_t</qualifiedname>
+        <briefdescription>
+<para>Get a coordinate from a TypeSeq. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="341" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="341" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -357,7 +377,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="399" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="399" bodyend="404"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="383" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="383" bodyend="388"/>
       </memberdef>
       <memberdef kind="function" id="tensor_8hpp_1adcacf7bf8173bf14f4591918285aa2f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -412,7 +432,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="413" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="413" bodyend="418"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="397" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="397" bodyend="402"/>
       </memberdef>
       <memberdef kind="function" id="tensor_8hpp_1af2697d1baeaea2e5fe1bcc8311767029" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -453,7 +473,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="428" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="428" bodyend="431"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="412" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="412" bodyend="415"/>
       </memberdef>
       <memberdef kind="function" id="vector__field_8hpp_1aa57ad767fdb365aaa4bf5b7e8929c576" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>

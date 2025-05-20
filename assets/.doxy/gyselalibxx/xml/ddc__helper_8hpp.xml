@@ -31,6 +31,7 @@
     <includedby refid="bernstein_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</includedby>
     <includedby refid="polar__bsplines_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp</includedby>
     <includedby refid="polar__spline_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp</includedby>
+    <includedby refid="identity__coordinate__change_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp</includedby>
     <includedby refid="mpitransposealltoall_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp</includedby>
     <includedby refid="edge__transformation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp</includedby>
     <includedby refid="matching__idx__slice_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp</includedby>
@@ -137,10 +138,10 @@
         <childnode refid="13" relation="include">
         </childnode>
       </node>
-      <node id="85">
+      <node id="86">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_common_configuration.hpp</label>
         <link refid="collision__common__configuration_8hpp_source"/>
-        <childnode refid="86" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
       </node>
       <node id="8">
@@ -233,7 +234,7 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp</label>
         <link refid="bsl__predcorr__second__order__implicit_8hpp_source"/>
       </node>
-      <node id="86">
+      <node id="87">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp</label>
         <link refid="collision__configuration_8hpp_source"/>
       </node>
@@ -241,11 +242,11 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry.hpp</label>
         <link refid="geometryVparMu_2geometry_2geometry_8hpp_source"/>
       </node>
-      <node id="87">
+      <node id="88">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp</label>
         <link refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8hpp_source"/>
       </node>
-      <node id="88">
+      <node id="89">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/noperturbinitialisation.hpp</label>
         <link refid="noperturbinitialisation_8hpp_source"/>
       </node>
@@ -253,23 +254,23 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp</label>
         <link refid="geometryXVx_2geometry_2geometry_8hpp_source"/>
       </node>
-      <node id="89">
+      <node id="90">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/bumpontailequilibrium.hpp</label>
         <link refid="bumpontailequilibrium_8hpp_source"/>
       </node>
-      <node id="90">
+      <node id="91">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp</label>
         <link refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp_source"/>
       </node>
-      <node id="91">
+      <node id="92">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp</label>
         <link refid="restartinitialisation_8hpp_source"/>
       </node>
-      <node id="92">
+      <node id="93">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.hpp</label>
         <link refid="geometryXVx_2initialisation_2singlemodeperturbinitialisation_8hpp_source"/>
       </node>
-      <node id="78">
+      <node id="79">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/chargedensitycalculator.hpp</label>
         <link refid="geometryXVx_2poisson_2chargedensitycalculator_8hpp_source"/>
       </node>
@@ -277,19 +278,19 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp</label>
         <link refid="geometryXVx_2poisson_2qnsolver_8hpp_source"/>
       </node>
-      <node id="79">
+      <node id="80">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_inter.hpp</label>
         <link refid="collisions__inter_8hpp_source"/>
       </node>
-      <node id="80">
+      <node id="81">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp</label>
         <link refid="collisions__intra_8hpp_source"/>
       </node>
-      <node id="81">
+      <node id="82">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_utils.hpp</label>
         <link refid="collisions__utils_8hpp_source"/>
       </node>
-      <node id="82">
+      <node id="83">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp</label>
         <link refid="fluid__moments_8hpp_source"/>
       </node>
@@ -305,11 +306,11 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp</label>
         <link refid="geometryXYVxVy_2geometry_2geometry_8hpp_source"/>
       </node>
-      <node id="93">
+      <node id="94">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp</label>
         <link refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8hpp_source"/>
       </node>
-      <node id="94">
+      <node id="95">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.hpp</label>
         <link refid="geometryXYVxVy_2initialisation_2singlemodeperturbinitialisation_8hpp_source"/>
       </node>
@@ -411,6 +412,10 @@
         <childnode refid="33" relation="include">
         </childnode>
       </node>
+      <node id="73">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp</label>
+        <link refid="identity__coordinate__change_8hpp_source"/>
+      </node>
       <node id="33">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inv_jacobian_o_point.hpp</label>
         <link refid="inv__jacobian__o__point_8hpp_source"/>
@@ -489,7 +494,7 @@
         <childnode refid="36" relation="include">
         </childnode>
       </node>
-      <node id="73">
+      <node id="74">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp</label>
         <link refid="mpitransposealltoall_8hpp_source"/>
         <childnode refid="7" relation="include">
@@ -499,13 +504,13 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp</label>
         <link refid="connectivity_8hpp_source"/>
       </node>
-      <node id="74">
+      <node id="75">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp</label>
         <link refid="edge__transformation_8hpp_source"/>
-        <childnode refid="75" relation="include">
+        <childnode refid="76" relation="include">
         </childnode>
       </node>
-      <node id="75">
+      <node id="76">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp</label>
         <link refid="matching__idx__slice_8hpp_source"/>
       </node>
@@ -635,7 +640,7 @@
         <childnode refid="13" relation="include">
         </childnode>
       </node>
-      <node id="76">
+      <node id="77">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp</label>
         <link refid="gauss__legendre__integration_8hpp_source"/>
         <childnode refid="58" relation="include">
@@ -643,11 +648,9 @@
         <childnode refid="36" relation="include">
         </childnode>
       </node>
-      <node id="77">
+      <node id="78">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp</label>
         <link refid="quadrature_8hpp_source"/>
-        <childnode refid="78" relation="include">
-        </childnode>
         <childnode refid="79" relation="include">
         </childnode>
         <childnode refid="80" relation="include">
@@ -656,41 +659,41 @@
         </childnode>
         <childnode refid="82" relation="include">
         </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
         <childnode refid="64" relation="include">
         </childnode>
         <childnode refid="65" relation="include">
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="84" relation="include">
         </childnode>
       </node>
-      <node id="83">
+      <node id="84">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/volume_quadrature_nd.hpp</label>
         <link refid="volume__quadrature__nd_8hpp"/>
         <childnode refid="36" relation="include">
         </childnode>
       </node>
-      <node id="84">
+      <node id="85">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp</label>
         <link refid="species__info_8hpp_source"/>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="69" relation="include">
         </childnode>
-        <childnode refid="85" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="61" relation="include">
         </childnode>
-        <childnode refid="87" relation="include">
-        </childnode>
         <childnode refid="88" relation="include">
         </childnode>
-        <childnode refid="62" relation="include">
-        </childnode>
         <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
         </childnode>
         <childnode refid="90" relation="include">
         </childnode>
@@ -698,16 +701,18 @@
         </childnode>
         <childnode refid="92" relation="include">
         </childnode>
-        <childnode refid="63" relation="include">
-        </childnode>
         <childnode refid="93" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
         </childnode>
         <childnode refid="94" relation="include">
         </childnode>
         <childnode refid="95" relation="include">
         </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
       </node>
-      <node id="95">
+      <node id="96">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.hpp</label>
         <link refid="species__init_8hpp_source"/>
       </node>
@@ -798,6 +803,8 @@
         </childnode>
         <childnode refid="75" relation="include">
         </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
         <childnode refid="38" relation="include">
         </childnode>
         <childnode refid="42" relation="include">
@@ -808,13 +815,13 @@
         </childnode>
         <childnode refid="55" relation="include">
         </childnode>
-        <childnode refid="76" relation="include">
-        </childnode>
         <childnode refid="77" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="78" relation="include">
         </childnode>
-        <childnode refid="95" relation="include">
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
@@ -850,7 +857,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="301" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="301" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="311" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="311" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="ddc__helper_8hpp_1ae267268c298dc5c65995ab49226b33ca" prot="public" static="no">
         <templateparamlist>
@@ -869,7 +876,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="308" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="308" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="318" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="318" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="ddc__helper_8hpp_1a18971f72a6f0372d735e7536356d2b66" prot="public" static="no">
         <templateparamlist>
@@ -888,7 +895,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="315" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="315" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="325" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="325" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1098,27 +1105,40 @@
 <codeline lineno="291"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="292"><highlight class="normal"></highlight></codeline>
 <codeline lineno="293"><highlight class="normal"></highlight></codeline>
-<codeline lineno="294"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>detail</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="295"><highlight class="normal"></highlight></codeline>
-<codeline lineno="300"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemorySpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>C&gt;</highlight></codeline>
-<codeline lineno="301"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">on_memory_space_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::OnMemorySpace&lt;MemorySpace,<sp/>C&gt;::type;</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Val</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">IndexSet&gt;</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ToCoord;</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"></highlight></codeline>
+<codeline lineno="297"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims&gt;</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ToCoord&lt;ddc::detail::TypeSeq&lt;Dims...&gt;&gt;</highlight></codeline>
+<codeline lineno="299"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>Coord&lt;Dims...&gt;;</highlight></codeline>
+<codeline lineno="301"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="302"><highlight class="normal"></highlight></codeline>
-<codeline lineno="307"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>C&gt;</highlight></codeline>
-<codeline lineno="308"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">host_t<sp/>=<sp/>on_memory_space_t&lt;Kokkos::HostSpace,<sp/>C&gt;;</highlight></codeline>
-<codeline lineno="309"><highlight class="normal"></highlight></codeline>
-<codeline lineno="314"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>C&gt;</highlight></codeline>
-<codeline lineno="315"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">device_t<sp/>=<sp/>on_memory_space_t&lt;Kokkos::DefaultExecutionSpace::memory_space,<sp/>C&gt;;</highlight></codeline>
-<codeline lineno="316"><highlight class="normal"></highlight></codeline>
-<codeline lineno="317"><highlight class="normal"></highlight></codeline>
-<codeline lineno="318"><highlight class="normal"></highlight></codeline>
-<codeline lineno="319"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ddcHelper<sp/>{</highlight></codeline>
-<codeline lineno="321"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Tag&gt;<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Templ,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TypeSeq&gt;</highlight></codeline>
-<codeline lineno="322"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">apply_template_to_type_seq_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::ApplyTemplateToTypeSeq&lt;Templ,<sp/>TypeSeq&gt;::type;</highlight></codeline>
-<codeline lineno="323"><highlight class="normal"></highlight></codeline>
-<codeline lineno="325"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeq1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeq2&gt;</highlight></codeline>
-<codeline lineno="326"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_intersection_t<sp/>=</highlight></codeline>
-<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqIntersection&lt;TypeSeq1,<sp/>TypeSeq2,<sp/>ddc::detail::TypeSeq&lt;&gt;&gt;::type;</highlight></codeline>
-<codeline lineno="328"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>ddcHelper</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="303"><highlight class="normal"></highlight></codeline>
+<codeline lineno="304"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>detail</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="305"><highlight class="normal"></highlight></codeline>
+<codeline lineno="310"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemorySpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>C&gt;</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">on_memory_space_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::OnMemorySpace&lt;MemorySpace,<sp/>C&gt;::type;</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>C&gt;</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">host_t<sp/>=<sp/>on_memory_space_t&lt;Kokkos::HostSpace,<sp/>C&gt;;</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"></highlight></codeline>
+<codeline lineno="324"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>C&gt;</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">device_t<sp/>=<sp/>on_memory_space_t&lt;Kokkos::DefaultExecutionSpace::memory_space,<sp/>C&gt;;</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"></highlight></codeline>
+<codeline lineno="327"><highlight class="normal"></highlight></codeline>
+<codeline lineno="328"><highlight class="normal"></highlight></codeline>
+<codeline lineno="329"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ddcHelper<sp/>{</highlight></codeline>
+<codeline lineno="331"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Tag&gt;<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Templ,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TypeSeq&gt;</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">apply_template_to_type_seq_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::ApplyTemplateToTypeSeq&lt;Templ,<sp/>TypeSeq&gt;::type;</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"></highlight></codeline>
+<codeline lineno="335"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeq1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeq2&gt;</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_intersection_t<sp/>=</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqIntersection&lt;TypeSeq1,<sp/>TypeSeq2,<sp/>ddc::detail::TypeSeq&lt;&gt;&gt;::type;</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"></highlight></codeline>
+<codeline lineno="340"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Val</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">IndexSet&gt;</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">to_coord_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::ToCoord&lt;ValidIndexSet&gt;::type;</highlight></codeline>
+<codeline lineno="342"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>ddcHelper</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp"/>
   </compounddef>

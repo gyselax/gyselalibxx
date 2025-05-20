@@ -183,6 +183,7 @@ Here is a list of all files with brief descriptions:
         * **file** [**discrete\_mapping\_builder.hpp**](discrete__mapping__builder_8hpp.md)     
         * **file** [**discrete\_to\_cartesian.hpp**](discrete__to__cartesian_8hpp.md)     
         * **file** [**geometry\_pseudo\_cartesian.hpp**](geometry__pseudo__cartesian_8hpp.md)     
+        * **file** [**identity\_coordinate\_change.hpp**](identity__coordinate__change_8hpp.md)     
         * **file** [**inv\_jacobian\_o\_point.hpp**](inv__jacobian__o__point_8hpp.md)     
         * **file** [**inverse\_jacobian\_matrix.hpp**](inverse__jacobian__matrix_8hpp.md)     
         * **file** [**mapping\_tools.hpp**](mapping__tools_8hpp.md)     

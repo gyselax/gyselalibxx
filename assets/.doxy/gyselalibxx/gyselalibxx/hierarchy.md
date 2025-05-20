@@ -101,6 +101,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**IVlasovSolver**](classIVlasovSolver.md) _An abstract class for solving a Vlasov equation._     
     * **class** [**MpiSplitVlasovSolver**](classMpiSplitVlasovSolver.md) _A class that solves a Vlasov equation using Strang's splitting on an MPI distributed mesh._ 
     * **class** [**SplitVlasovSolver**](classSplitVlasovSolver.md) _A class that solves a Vlasov equation using Strang's splitting._ 
+* **class** [**IdentityCoordinateChange**](classIdentityCoordinateChange.md) _A class describing an identity transformation._ 
 * **class** [**IdentityTensor**](classIdentityTensor.md) 
 * **class** [**IdxRangeSlice**](classIdxRangeSlice.md) _A class which describes a collection of equally spaced Idxs which form a index range._ 
 * **class** [**InvJacobianOPoint**](classInvJacobianOPoint.md) _An operator for calculating the inverse of the Jacobian at an O-point. This class is used in_ [_**CombinedMapping**_](classCombinedMapping.md) _to calculate the inverse of the Jacobian at an O-point when one of the mappings does not allow the evaluation of its Jacobian/inverse Jacobian at the O-point._

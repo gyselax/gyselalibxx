@@ -74,6 +74,7 @@
 ## t
 
 * **to\_coord** ([**ddcHelper**](namespaceddcHelper.md))
+* **to\_coord\_t** ([**ddcHelper**](namespaceddcHelper.md))
 * **total\_interval\_length** ([**ddcHelper**](namespaceddcHelper.md))
 * **type\_seq\_intersection\_t** ([**ddcHelper**](namespaceddcHelper.md))
 * **to\_tensor\_index\_element\_t** ([**tensor\_tools**](namespacetensor__tools.md))

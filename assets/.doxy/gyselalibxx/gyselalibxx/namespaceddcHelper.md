@@ -39,6 +39,7 @@
 | Type | Name |
 | ---: | :--- |
 | typedef typename detail::ApplyTemplateToTypeSeq&lt; Templ, TypeSeq &gt;::type | [**apply\_template\_to\_type\_seq\_t**](#typedef-apply_template_to_type_seq_t)  <br>_A helper to get a type sequence by applying a template to a sequence of type tags._  |
+| typedef typename detail::ToCoord&lt; ValidIndexSet &gt;::type | [**to\_coord\_t**](#typedef-to_coord_t)  <br>_Get a coordinate from a TypeSeq._  |
 | typedef typename detail::TypeSeqIntersection&lt; TypeSeq1, TypeSeq2, ddc::detail::TypeSeq&lt;&gt; &gt;::type | [**type\_seq\_intersection\_t**](#typedef-type_seq_intersection_t)  <br>_A helper to find all types which are found in both TypeSeq1 and TypeSeq2._  |
 
 
@@ -129,6 +130,20 @@
 _A helper to get a type sequence by applying a template to a sequence of type tags._ 
 ```C++
 using ddcHelper::apply_template_to_type_seq_t = typedef typename detail::ApplyTemplateToTypeSeq<Templ, TypeSeq>::type;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef to\_coord\_t 
+
+_Get a coordinate from a TypeSeq._ 
+```C++
+using ddcHelper::to_coord_t = typedef typename detail::ToCoord<ValidIndexSet>::type;
 ```
 
 
