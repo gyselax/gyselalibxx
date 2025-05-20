@@ -11,7 +11,7 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
-#include "ddc/uniform_point_sampling.hpp"
+#include <ddc/ddc.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"

@@ -41,6 +41,8 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**CombinedMapping**](classCombinedMapping.md) _A class which describes a mapping which is constructed by combining two mappings. Let us denote Mapping1 as_  _and Mapping2 as_ _then this mapping represents:_ _._    
 * **struct** [**ConstPolarSpline**](structConstPolarSpline.md) _A structure containing the two ConstFields necessary to define a constant reference to a spline on a set of polar basis splines._     
 * **struct** [**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md) _Define constant extrapolation rule for onion shape geometries. Struct useful for the MultipatchSplineEvaluator types._  __    
+* **class** [**ConstantPartialDerivative**](classConstantPartialDerivative.md) _A class to get the derivative of a constant function. When the derivative of a function is known to be 0 but the dimension is still needed this class can be used to avoid unnecessary calculations._     
+* **class** [**ConstantPartialDerivativeCreator**](classConstantPartialDerivativeCreator.md) _A class to create a_ [_**ConstantPartialDerivative**_](classConstantPartialDerivative.md) _via a create\_instance function._    
 * **class** [**CrankNicolson**](classCrankNicolson.md) _A class which provides an implementation of a Crank-Nicolson method._     
 * **class** [**CylindricalToCartesian**](classCylindricalToCartesian.md) _A class for describing the cylindrical 3D mapping._     
 * **class** [**CzarnyToCartesian**](classCzarnyToCartesian.md) _A class for describing the Czarny 2D mapping._     
@@ -259,10 +261,10 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._    
 * **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d73.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d207.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d209.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d211.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d213.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d208.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d210.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d212.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d214.md) 
 * **namespace** [**connectivity\_details**](namespaceconnectivity__details.md)     
     * **struct** [**AddToTypeSeq**](structconnectivity__details_1_1AddToTypeSeq.md) _A class which helps insert an element into a type sequence._ 
     * **struct** [**AddToTypeSeq&lt; ToInsert, TypeSeq, BackInsert &gt;**](structconnectivity__details_1_1AddToTypeSeq_3_01ToInsert_00_01TypeSeq_00_01BackInsert_01_4.md) _Specialisation of_ [_**AddToTypeSeq**_](structconnectivity__details_1_1AddToTypeSeq.md) _to add an element at the back of the type sequence._    

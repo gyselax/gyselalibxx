@@ -108,6 +108,7 @@
 * **m\_mesh\_ghosted\_staggered** ([**CollisionsIntra**](classCollisionsIntra.md))
 * **m\_mapping\_1** ([**CombinedMapping**](classCombinedMapping.md))
 * **m\_mapping\_2** ([**CombinedMapping**](classCombinedMapping.md))
+* **m\_deriv\_value** ([**ConstantPartialDerivative**](classConstantPartialDerivative.md), [**ConstantPartialDerivativeCreator**](classConstantPartialDerivativeCreator.md))
 * **m\_idx\_range** ([**CrankNicolson**](classCrankNicolson.md), [**Euler**](classEuler.md), [**Lagrange**](classLagrange.md), [**RK2**](classRK2.md), [**RK3**](classRK3.md), [**RK4**](classRK4.md))
 * **m\_max\_counter** ([**CrankNicolson**](classCrankNicolson.md))
 * **m\_cross\_derivative\_idx\_range** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))

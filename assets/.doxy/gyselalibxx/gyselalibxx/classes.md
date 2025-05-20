@@ -81,6 +81,8 @@
 * [**CollisionsIntra**](classCollisionsIntra.md)
 * [**CombinedMapping**](classCombinedMapping.md)
 * [**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md)
+* [**ConstantPartialDerivative**](classConstantPartialDerivative.md)
+* [**ConstantPartialDerivativeCreator**](classConstantPartialDerivativeCreator.md)
 * [**ConstPolarSpline**](structConstPolarSpline.md)
 * [**Corner1Tag**](structPolarBSplines_1_1Impl_1_1Corner1Tag.md)
 ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))

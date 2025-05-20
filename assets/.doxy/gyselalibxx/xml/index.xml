@@ -525,6 +525,18 @@
     <member refid="structConstantExtrapolationRuleOnion_1af9e46e05ba3bc87e5df2f8d1f7a6393d" kind="function"><name>ConstantExtrapolationRuleOnion</name></member>
     <member refid="structConstantExtrapolationRuleOnion_1a2fc1ed58f951dd2d5ae6878853524664" kind="function"><name>operator()</name></member>
   </compound>
+  <compound refid="classConstantPartialDerivative" kind="class"><name>ConstantPartialDerivative</name>
+    <member refid="classConstantPartialDerivative_1a98fa7b6754607c4c83f90c1a507deacf" kind="typedef"><name>base_type</name></member>
+    <member refid="classConstantPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" kind="typedef"><name>DFieldType</name></member>
+    <member refid="classConstantPartialDerivative_1a45bde529b890d4cbff488664f87c915c" kind="variable"><name>m_deriv_value</name></member>
+    <member refid="classConstantPartialDerivative_1ae97e955a695b5bf344398fcb2bcf9726" kind="function"><name>ConstantPartialDerivative</name></member>
+    <member refid="classConstantPartialDerivative_1a072ae7b5ddc4342530f5939e1c4d0215" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="classConstantPartialDerivativeCreator" kind="class"><name>ConstantPartialDerivativeCreator</name>
+    <member refid="classConstantPartialDerivativeCreator_1ac03417f847c40bdd6f811791c3dfd73b" kind="variable"><name>m_deriv_value</name></member>
+    <member refid="classConstantPartialDerivativeCreator_1a6021c28edc48bc8432f0c257c87d9604" kind="function"><name>ConstantPartialDerivativeCreator</name></member>
+    <member refid="classConstantPartialDerivativeCreator_1adfb5a8d2fe710548e1608c119c9a359a" kind="function"><name>create_instance</name></member>
+  </compound>
   <compound refid="structConstPolarSpline" kind="struct"><name>ConstPolarSpline</name>
     <member refid="structConstPolarSpline_1abb8ad3be7f39e385d8fa90e991437648" kind="typedef"><name>BSplinesR</name></member>
     <member refid="structConstPolarSpline_1a45b2e9a326fa2fcfac0a2ef640be63f2" kind="typedef"><name>BSplinesTheta</name></member>
@@ -2892,13 +2904,13 @@
     <member refid="structY__pC_1a6274201b751e93509509253746e598c1" kind="variable"><name>IS_COVARIANT</name></member>
     <member refid="structY__pC_1a840b5d333654df4c5be30422ce8eeb28" kind="variable"><name>IS_CONTRAVARIANT</name></member>
   </compound>
-  <compound refid="namespace_0d207" kind="namespace"><name>@207</name>
+  <compound refid="namespace_0d208" kind="namespace"><name>@208</name>
   </compound>
-  <compound refid="namespace_0d209" kind="namespace"><name>@209</name>
+  <compound refid="namespace_0d210" kind="namespace"><name>@210</name>
   </compound>
-  <compound refid="namespace_0d211" kind="namespace"><name>@211</name>
+  <compound refid="namespace_0d212" kind="namespace"><name>@212</name>
   </compound>
-  <compound refid="namespace_0d213" kind="namespace"><name>@213</name>
+  <compound refid="namespace_0d214" kind="namespace"><name>@214</name>
   </compound>
   <compound refid="namespace_0d73" kind="namespace"><name>@73</name>
   </compound>
@@ -3769,6 +3781,8 @@
   <compound refid="central__fdm__partial__derivatives_8hpp" kind="file"><name>central_fdm_partial_derivatives.hpp</name>
   </compound>
   <compound refid="central__fdm__partial__derivatives__with__boundary__values_8hpp" kind="file"><name>central_fdm_partial_derivatives_with_boundary_values.hpp</name>
+  </compound>
+  <compound refid="constant__partial__derivatives_8hpp" kind="file"><name>constant_partial_derivatives.hpp</name>
   </compound>
   <compound refid="gradient_8hpp" kind="file"><name>gradient.hpp</name>
   </compound>

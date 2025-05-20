@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classConstantPartialDerivativeCreator" kind="class" language="C++" prot="public">
+    <compoundname>ConstantPartialDerivativeCreator</compoundname>
+    <basecompoundref refid="classIPartialDerivativeCreator" prot="public" virt="non-virtual">IPartialDerivativeCreator&lt; IdxRangeFull, DerivativeDimension &gt;</basecompoundref>
+    <includes refid="constant__partial__derivatives_8hpp" local="no">constant_partial_derivatives.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class IdxRangeFull</type>
+      </param>
+      <param>
+        <type>class DerivativeDimension</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classConstantPartialDerivativeCreator_1ac03417f847c40bdd6f811791c3dfd73b" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double ConstantPartialDerivativeCreator&lt; IdxRangeFull, DerivativeDimension &gt;::m_deriv_value</definition>
+        <argsstring></argsstring>
+        <name>m_deriv_value</name>
+        <qualifiedname>ConstantPartialDerivativeCreator::m_deriv_value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/constant_partial_derivatives.hpp" line="58" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/constant_partial_derivatives.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classConstantPartialDerivativeCreator_1a6021c28edc48bc8432f0c257c87d9604" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ConstantPartialDerivativeCreator&lt; IdxRangeFull, DerivativeDimension &gt;::ConstantPartialDerivativeCreator</definition>
+        <argsstring>(double deriv_value)</argsstring>
+        <name>ConstantPartialDerivativeCreator</name>
+        <qualifiedname>ConstantPartialDerivativeCreator::ConstantPartialDerivativeCreator</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>deriv_value</declname>
+        </param>
+        <briefdescription>
+<para>Create an instance of <ref refid="classConstantPartialDerivativeCreator" kindref="compound">ConstantPartialDerivativeCreator</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">deriv_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value that should be returned as the constant value of the derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/constant_partial_derivatives.hpp" line="67" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/constant_partial_derivatives.hpp" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classConstantPartialDerivativeCreator_1adfb5a8d2fe710548e1608c119c9a359a" prot="public" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="virtual">
+        <type>std::unique_ptr&lt; <ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative</ref>&lt; IdxRangeFull, DerivativeDimension &gt; &gt;</type>
+        <definition>std::unique_ptr&lt; IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt; &gt; ConstantPartialDerivativeCreator&lt; IdxRangeFull, DerivativeDimension &gt;::create_instance</definition>
+        <argsstring>(DConstField&lt; IdxRangeFull &gt; field) const final</argsstring>
+        <name>create_instance</name>
+        <qualifiedname>ConstantPartialDerivativeCreator::create_instance</qualifiedname>
+        <reimplements refid="classIPartialDerivativeCreator_1aa6909a30ce6565221d37736bf059f7a0">create_instance</reimplements>
+        <param>
+          <type>DConstField&lt; IdxRangeFull &gt;</type>
+          <declname>field</declname>
+        </param>
+        <briefdescription>
+<para>Create an instance of a pointer to an <ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative</ref> object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The field whose derivative should be calculated.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pointer to an <ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative</ref> object. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/constant_partial_derivatives.hpp" line="76" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/constant_partial_derivatives.hpp" bodystart="76" bodyend="81"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class to create a <ref refid="classConstantPartialDerivative" kindref="compound">ConstantPartialDerivative</ref> via a create_instance function. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>IdxRangeFull</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range of the field on which the operator acts (with all dimensions, batched and dimension of interest, used for inheritance). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DerivativeDimension</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimension on which the partial derivative is calculated. (used for inheritance). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>ConstantPartialDerivativeCreator&lt; IdxRangeFull, DerivativeDimension &gt;</label>
+        <link refid="classConstantPartialDerivativeCreator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>IPartialDerivativeCreator&lt; IdxRangeFull, DerivativeDimension &gt;</label>
+        <link refid="classIPartialDerivativeCreator"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>ConstantPartialDerivativeCreator&lt; IdxRangeFull, DerivativeDimension &gt;</label>
+        <link refid="classConstantPartialDerivativeCreator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>IPartialDerivativeCreator&lt; IdxRangeFull, DerivativeDimension &gt;</label>
+        <link refid="classIPartialDerivativeCreator"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/constant_partial_derivatives.hpp" line="54" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/constant_partial_derivatives.hpp" bodystart="56" bodyend="82"/>
+    <listofallmembers>
+      <member refid="classConstantPartialDerivativeCreator_1a6021c28edc48bc8432f0c257c87d9604" prot="public" virt="non-virtual"><scope>ConstantPartialDerivativeCreator</scope><name>ConstantPartialDerivativeCreator</name></member>
+      <member refid="classConstantPartialDerivativeCreator_1adfb5a8d2fe710548e1608c119c9a359a" prot="public" virt="virtual"><scope>ConstantPartialDerivativeCreator</scope><name>create_instance</name></member>
+      <member refid="classConstantPartialDerivativeCreator_1ac03417f847c40bdd6f811791c3dfd73b" prot="private" virt="non-virtual"><scope>ConstantPartialDerivativeCreator</scope><name>m_deriv_value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
