@@ -21,6 +21,9 @@ class CzarnyToCartesian;
  * @f$ \theta (x,y)) = atan2(2. \hat{y} (1+\epsilon \hat{x}), (e \xi (\epsilon \hat{x}^2 - 2\hat{x}-\epsilon))), @f$
  *
  * with @f$ \hat{x} = x-x_0 @f$, @f$ \hat{y} = y-y_0 @f$, @f$ \xi = 1/\sqrt{1 - \epsilon^2 /4} @f$ and @f$ e @f$ and @f$ \epsilon @f$ given as parameters.
+ *
+ * See O. Czarny and G. Huysmans. Bézier surfaces and finite elements for MHD simulations.
+ * Journal of Computational Physics, 227(16):7423–7445, 2008. doi:10.1016/j.jcp.2008.04.001.
  */
 template <class X, class Y, class R, class Theta>
 class CartesianToCzarny

@@ -24,6 +24,10 @@ class CartesianToCzarny;
  * @f$ y(r,\theta) = \frac{e\xi r \sin(\theta)}{2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } + y_0,@f$
  *
  * with @f$ \xi = 1/\sqrt{1 - \epsilon^2 /4} @f$ and @f$ e @f$ and @f$ \epsilon @f$ given as parameters.
+ *
+ * See O. Czarny and G. Huysmans. Bézier surfaces and finite elements for MHD simulations.
+ * Journal of Computational Physics, 227(16):7423–7445, 2008. doi:10.1016/j.jcp.2008.04.001.
+ *
  * It and its Jacobian matrix are invertible everywhere except for @f$ r = 0 @f$.
  *
  * Its Jacobian coefficients are defined as follow
