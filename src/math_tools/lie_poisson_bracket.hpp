@@ -72,11 +72,12 @@ public:
         DTensor<CovBasisSpatial, CovBasisSpatial> metric_tensor = m_metric_tensor(coord);
         double B_norm = norm(metric_tensor, B);
         return tensor_mul(
-                index<'i', 'j', 'k'>(eps),
-                index<'i', 'l'>(metric_tensor),
-                index<'l'>(B / B_norm),
-                index<'j'>(partial_derivatives_f),
-                index<'k'>(partial_derivatives_g));
+                       index<'i', 'j', 'k'>(eps),
+                       index<'i', 'l'>(metric_tensor),
+                       index<'l'>(B / B_norm),
+                       index<'j'>(partial_derivatives_f),
+                       index<'k'>(partial_derivatives_g))
+               / m_mapping.jacobian(coord);
     }
 
     /**
@@ -107,8 +108,11 @@ public:
                 exec_space,
                 get_idx_range(poisson_bracket),
                 KOKKOS_CLASS_LAMBDA(IdxType const idx) {
-                    poisson_bracket(idx)
-                            = (*this)(partial_derivatives_f(idx), partial_derivatives_g(idx), B(idx), ddc::coordinate(idx));
+                    poisson_bracket(idx) = (*this)(
+                            partial_derivatives_f(idx),
+                            partial_derivatives_g(idx),
+                            B(idx),
+                            ddc::coordinate(idx));
                 });
     }
 };
