@@ -4,6 +4,7 @@
 #include <gtest/gtest.h>
 
 #include "circular_to_cartesian.hpp"
+#include "coord_transformations_testing_tools.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
@@ -11,7 +12,6 @@
 #include "discrete_to_cartesian.hpp"
 #include "geometry_coord_transformations_tests.hpp"
 #include "inverse_jacobian_matrix.hpp"
-#include "mapping_testing_tools.hpp"
 #include "mesh_builder.hpp"
 #include "toroidal_to_cylindrical.hpp"
 

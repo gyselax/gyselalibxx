@@ -3,8 +3,8 @@
 
 #include <gtest/gtest.h>
 
+#include "../mapping/coord_transformations_testing_tools.hpp"
 #include "../mapping/geometry_coord_transformations_tests.hpp"
-#include "../mapping/mapping_testing_tools.hpp"
 
 #include "circular_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
