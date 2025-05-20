@@ -47,8 +47,9 @@ then
   DEFAULT='\033[0m'
   echo "If this is a false-positive please contact the repository maintainers."
   echo "Please set your username and email and re-attempt this commit. This can be done using the following commands:"
-  echo -e "${DEFAULT}git config --user.name ${ORANGE}<USERNAME>"
-  echo -e "${DEFAULT}git config --user.email ${ORANGE}<USER@EMAIL.COM>"
+  echo -e "${DEFAULT}git config user.name ${ORANGE}<USERNAME>"
+  echo -e "${DEFAULT}git config user.email ${ORANGE}<USER@EMAIL.COM>"
   echo -e "${RED}Commit aborted"
+  echo -e "${DEFAULT}"
   exit 1
 fi
