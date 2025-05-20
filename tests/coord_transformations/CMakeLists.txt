@@ -9,7 +9,7 @@ add_executable(unit_tests_coord_transformations
     coord_transformations_static_properties.cpp
     metric_tensor_evaluator.cpp
     pseudo_cartesian_jacobian_matrix.cpp
-    refined_discrete_coord_transformations.cpp
+    refined_discrete_mapping.cpp
 )
 target_compile_features(unit_tests_coord_transformations PUBLIC cxx_std_17)
 target_link_libraries(unit_tests_coord_transformations
