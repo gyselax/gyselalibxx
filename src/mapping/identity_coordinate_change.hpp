@@ -23,6 +23,8 @@ public:
     using CoordArg = ddcHelper::to_coord_t<ArgBasis>;
     /// The type of the result of the function described by this mapping
     using CoordResult = ddcHelper::to_coord_t<ResultBasis>;
+    /// The type of the coordinate that can be used to evaluate the Jacobian of this mapping
+    using CoordJacobian = ddcHelper::to_coord_t<ArgBasis>;
 
 private:
     using ArgBasisCov = vector_index_set_dual_t<ArgBasis>;

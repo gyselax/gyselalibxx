@@ -20,21 +20,23 @@
  * The functions in this mapping are defined on the coordinate system associated
  * with the domain @f$ \Omega_{mid} @f$.
  */
-template <class Mapping1, class Mapping2, class CoordJacobian = typename Mapping2::CoordResult>
+template <class Mapping1, class Mapping2, class CoordJacobianType = typename Mapping2::CoordResult>
 class CombinedMapping
 {
     static_assert(is_mapping_v<Mapping1>);
     static_assert(is_mapping_v<Mapping2>);
     static_assert(std::is_same_v<typename Mapping2::CoordResult, typename Mapping1::CoordArg>);
     static_assert(
-            (std::is_same_v<CoordJacobian, typename Mapping2::CoordArg>)
-            || (std::is_same_v<CoordJacobian, typename Mapping2::CoordResult>));
+            (std::is_same_v<CoordJacobianType, typename Mapping2::CoordArg>)
+            || (std::is_same_v<CoordJacobianType, typename Mapping2::CoordResult>));
 
 public:
     /// The type of the argument of the function described by this mapping.
     using CoordArg = typename Mapping2::CoordArg;
     /// The type of the result of the function described by this mapping.
     using CoordResult = typename Mapping1::CoordResult;
+    /// The type of the coordinate that can be used to evaluate the Jacobian of this mapping
+    using CoordJacobian = CoordJacobianType;
     /// The type of the Jacobian matrix.
     using JacobianMatrixType = DTensor<
             ddc::to_type_seq_t<CoordResult>,
@@ -118,11 +120,12 @@ public:
         if constexpr (std::is_same_v<CoordJacobian, typename Mapping2::CoordResult>) {
             static_assert(is_analytical_mapping_v<Mapping2>);
             using InverseMapping2 = inverse_mapping_t<Mapping2>;
-            static_assert(has_jacobian_v<Mapping1, CoordJacobian>);
-            static_assert(has_jacobian_v<InverseMapping2, CoordJacobian>);
+            static_assert(has_jacobian_v<Mapping1>);
+            static_assert(has_jacobian_v<InverseMapping2>);
+            static_assert(std::is_same_v<CoordJacobian, typename Mapping1::CoordJacobian>);
+            static_assert(std::is_same_v<CoordJacobian, typename InverseMapping2::CoordJacobian>);
             // The Jacobian defined on CoordJacobian is the inverse of the inverse mapping
-            InverseJacobianMatrix<InverseMapping2, CoordJacobian> jacobian_mapping_2(
-                    m_mapping_2.get_inverse_mapping());
+            InverseJacobianMatrix jacobian_mapping_2(m_mapping_2.get_inverse_mapping());
             return tensor_mul(
                     index<'i', 'j'>(m_mapping_1.jacobian_matrix(coord)),
                     index<'j', 'k'>(jacobian_mapping_2(coord)));
@@ -265,14 +268,13 @@ private:
             static_assert(is_analytical_mapping_v<Mapping2>);
             using InverseMapping2 = inverse_mapping_t<Mapping2>;
             InverseMapping2 inv_mapping_2 = m_mapping_2.get_inverse_mapping();
-            InverseJacobianMatrix<Mapping1, CoordJacobian> inv_jacobian_matrix_1(m_mapping_1);
+            InverseJacobianMatrix inv_jacobian_matrix_1(m_mapping_1);
             return tensor_mul(
                     index<'i', 'j'>(inv_mapping_2.jacobian_matrix(coord)),
                     index<'j', 'k'>(inv_jacobian_matrix_1(coord)));
         } else {
-            InverseJacobianMatrix<Mapping1, typename Mapping1::CoordArg> inv_jacobian_matrix_1(
-                    m_mapping_1);
-            InverseJacobianMatrix<Mapping2, CoordJacobian> inv_jacobian_matrix_2(m_mapping_2);
+            InverseJacobianMatrix inv_jacobian_matrix_1(m_mapping_1);
+            InverseJacobianMatrix inv_jacobian_matrix_2(m_mapping_2);
             typename Mapping1::CoordArg coord_map1 = m_mapping_2(coord);
             return tensor_mul(
                     index<'i', 'j'>(inv_jacobian_matrix_2(coord)),
