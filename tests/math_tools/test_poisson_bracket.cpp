@@ -105,7 +105,8 @@ void compute_and_test_Lie_Poisson_Bracket()
                         = tensor_mul(index<'i', 'j'>(metric_tensor), index<'j'>(B_cov));
                 ddcHelper::assign_vector_field_element(B, idx, B_cont);
                 const double Jx = mapping.jacobian(coord);
-                const double norm_B = tensor_mul(index<'i'>(B_cov), index<'i'>(B(idx)));
+                const double norm_B
+                        = Kokkos::sqrt(tensor_mul(index<'i'>(B_cov), index<'i'>(B(idx))));
                 analytical_matrix(idx) = (B_phi / norm_B) * rho * theta / Jx;
             });
 
