@@ -7,15 +7,11 @@
       <param>
         <type>class Mapping</type>
       </param>
-      <param>
-        <type>class PositionCoordinate</type>
-        <defval>typename Mapping::CoordArg</defval>
-      </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classInverseJacobianMatrix_1a2b37da8422924c7625c57d4378486327" prot="private" static="no">
+      <memberdef kind="typedef" id="classInverseJacobianMatrix_1a7988d90c0e9ad18cff9a1e635943428b" prot="private" static="no">
         <type>ddc::to_type_seq_t&lt; typename Mapping::CoordArg &gt;</type>
-        <definition>using InverseJacobianMatrix&lt; Mapping, PositionCoordinate &gt;::ValidArgIndices =  ddc::to_type_seq_t&lt;typename Mapping::CoordArg&gt;</definition>
+        <definition>using InverseJacobianMatrix&lt; Mapping &gt;::ValidArgIndices =  ddc::to_type_seq_t&lt;typename Mapping::CoordArg&gt;</definition>
         <argsstring></argsstring>
         <name>ValidArgIndices</name>
         <qualifiedname>InverseJacobianMatrix::ValidArgIndices</qualifiedname>
@@ -25,14 +21,28 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" line="21" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" bodystart="21" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" line="20" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" bodystart="20" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classInverseJacobianMatrix_1a7b863a25f1b7db1a32cf7666ce9ec5ca" prot="private" static="no">
+      <memberdef kind="typedef" id="classInverseJacobianMatrix_1ad1067073595d216dd797c33f776213f1" prot="private" static="no">
         <type>ddc::to_type_seq_t&lt; typename Mapping::CoordResult &gt;</type>
-        <definition>using InverseJacobianMatrix&lt; Mapping, PositionCoordinate &gt;::ValidResultIndices =  ddc::to_type_seq_t&lt;typename Mapping::CoordResult&gt;</definition>
+        <definition>using InverseJacobianMatrix&lt; Mapping &gt;::ValidResultIndices =  ddc::to_type_seq_t&lt;typename Mapping::CoordResult&gt;</definition>
         <argsstring></argsstring>
         <name>ValidResultIndices</name>
         <qualifiedname>InverseJacobianMatrix::ValidResultIndices</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" line="21" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInverseJacobianMatrix_1a7155a023ee821ce8ba9b5cc0dbc705c7" prot="private" static="no">
+        <type>typename Mapping::CoordJacobian</type>
+        <definition>using InverseJacobianMatrix&lt; Mapping &gt;::CoordJacobian =  typename Mapping::CoordJacobian</definition>
+        <argsstring></argsstring>
+        <name>CoordJacobian</name>
+        <qualifiedname>InverseJacobianMatrix::CoordJacobian</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -43,9 +53,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="classInverseJacobianMatrix_1a81c90715177eda38dbbabd977964d6d1" prot="public" static="no">
+      <memberdef kind="typedef" id="classInverseJacobianMatrix_1afee91d99884e83906b8305101c004fa3" prot="public" static="no">
         <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; ValidArgIndices, vector_index_set_dual_t&lt; ValidResultIndices &gt; &gt;</type>
-        <definition>using InverseJacobianMatrix&lt; Mapping, PositionCoordinate &gt;::InverseJacobianTensor =  DTensor&lt;ValidArgIndices, vector_index_set_dual_t&lt;ValidResultIndices&gt; &gt;</definition>
+        <definition>using InverseJacobianMatrix&lt; Mapping &gt;::InverseJacobianTensor =  DTensor&lt;ValidArgIndices, vector_index_set_dual_t&lt;ValidResultIndices&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>InverseJacobianTensor</name>
         <qualifiedname>InverseJacobianMatrix::InverseJacobianTensor</qualifiedname>
@@ -60,9 +70,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classInverseJacobianMatrix_1a9ce3614e0a899f968697d97c2d33e3ed" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classInverseJacobianMatrix_1aa5383dafda57c25e4d11b33b1be20ba3" prot="private" static="no" mutable="no">
         <type>Mapping</type>
-        <definition>Mapping InverseJacobianMatrix&lt; Mapping, PositionCoordinate &gt;::m_mapping</definition>
+        <definition>Mapping InverseJacobianMatrix&lt; Mapping &gt;::m_mapping</definition>
         <argsstring></argsstring>
         <name>m_mapping</name>
         <qualifiedname>InverseJacobianMatrix::m_mapping</qualifiedname>
@@ -76,9 +86,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classInverseJacobianMatrix_1a8484531e5dbf59a3ab2a6ef08711a84d" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classInverseJacobianMatrix_1a7a7e680d119463119a007860a890646b" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION</type>
-        <definition>KOKKOS_FUNCTION InverseJacobianMatrix&lt; Mapping, PositionCoordinate &gt;::InverseJacobianMatrix</definition>
+        <definition>KOKKOS_FUNCTION InverseJacobianMatrix&lt; Mapping &gt;::InverseJacobianMatrix</definition>
         <argsstring>(Mapping const &amp;mapping)</argsstring>
         <name>InverseJacobianMatrix</name>
         <qualifiedname>InverseJacobianMatrix::InverseJacobianMatrix</qualifiedname>
@@ -105,14 +115,14 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" line="37" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" bodystart="37" bodyend="37"/>
       </memberdef>
-      <memberdef kind="function" id="classInverseJacobianMatrix_1a57305c9d836bb953313a1dc648952b29" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_INLINE_FUNCTION <ref refid="classInverseJacobianMatrix_1a81c90715177eda38dbbabd977964d6d1" kindref="member">InverseJacobianTensor</ref></type>
-        <definition>KOKKOS_INLINE_FUNCTION InverseJacobianTensor InverseJacobianMatrix&lt; Mapping, PositionCoordinate &gt;::operator()</definition>
-        <argsstring>(PositionCoordinate const &amp;coord) const</argsstring>
+      <memberdef kind="function" id="classInverseJacobianMatrix_1a828224bc52aa59a25ee034e64c5bca94" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION <ref refid="classInverseJacobianMatrix_1afee91d99884e83906b8305101c004fa3" kindref="member">InverseJacobianTensor</ref></type>
+        <definition>KOKKOS_INLINE_FUNCTION InverseJacobianTensor InverseJacobianMatrix&lt; Mapping &gt;::operator()</definition>
+        <argsstring>(CoordJacobian const &amp;coord) const</argsstring>
         <name>operator()</name>
         <qualifiedname>InverseJacobianMatrix::operator()</qualifiedname>
         <param>
-          <type>PositionCoordinate const &amp;</type>
+          <type>CoordJacobian const &amp;</type>
           <declname>coord</declname>
         </param>
         <briefdescription>
@@ -137,7 +147,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" line="49" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" bodystart="49" bodyend="60"/>
       </memberdef>
-      <memberdef kind="function" id="classInverseJacobianMatrix_1abe1ceae03b4c3e213456dd38eca1b63a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classInverseJacobianMatrix_1ad6330ea616e27c98e5967ae5e57b70ba" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class IndexTag1</type>
@@ -147,12 +157,12 @@
           </param>
         </templateparamlist>
         <type>KOKKOS_INLINE_FUNCTION double</type>
-        <definition>KOKKOS_INLINE_FUNCTION double InverseJacobianMatrix&lt; Mapping, PositionCoordinate &gt;::inv_jacobian_component</definition>
-        <argsstring>(PositionCoordinate const &amp;coord) const</argsstring>
+        <definition>KOKKOS_INLINE_FUNCTION double InverseJacobianMatrix&lt; Mapping &gt;::inv_jacobian_component</definition>
+        <argsstring>(CoordJacobian const &amp;coord) const</argsstring>
         <name>inv_jacobian_component</name>
         <qualifiedname>InverseJacobianMatrix::inv_jacobian_component</qualifiedname>
         <param>
-          <type>PositionCoordinate const &amp;</type>
+          <type>CoordJacobian const &amp;</type>
           <declname>coord</declname>
         </param>
         <briefdescription>
@@ -190,26 +200,19 @@
 <para>The mapping whose inverse we are interested in. </para>
 </parameterdescription>
 </parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>PositionCoordinate</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The coordinate system in which the inverse should be calculated. </para>
-</parameterdescription>
-</parameteritem>
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" line="18" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" bodystart="19" bodyend="118"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" line="17" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp" bodystart="18" bodyend="118"/>
     <listofallmembers>
-      <member refid="classInverseJacobianMatrix_1abe1ceae03b4c3e213456dd38eca1b63a" prot="public" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>inv_jacobian_component</name></member>
-      <member refid="classInverseJacobianMatrix_1a8484531e5dbf59a3ab2a6ef08711a84d" prot="public" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>InverseJacobianMatrix</name></member>
-      <member refid="classInverseJacobianMatrix_1a81c90715177eda38dbbabd977964d6d1" prot="public" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>InverseJacobianTensor</name></member>
-      <member refid="classInverseJacobianMatrix_1a9ce3614e0a899f968697d97c2d33e3ed" prot="private" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>m_mapping</name></member>
-      <member refid="classInverseJacobianMatrix_1a57305c9d836bb953313a1dc648952b29" prot="public" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>operator()</name></member>
-      <member refid="classInverseJacobianMatrix_1a2b37da8422924c7625c57d4378486327" prot="private" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>ValidArgIndices</name></member>
-      <member refid="classInverseJacobianMatrix_1a7b863a25f1b7db1a32cf7666ce9ec5ca" prot="private" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>ValidResultIndices</name></member>
+      <member refid="classInverseJacobianMatrix_1a7155a023ee821ce8ba9b5cc0dbc705c7" prot="private" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>CoordJacobian</name></member>
+      <member refid="classInverseJacobianMatrix_1ad6330ea616e27c98e5967ae5e57b70ba" prot="public" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>inv_jacobian_component</name></member>
+      <member refid="classInverseJacobianMatrix_1a7a7e680d119463119a007860a890646b" prot="public" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>InverseJacobianMatrix</name></member>
+      <member refid="classInverseJacobianMatrix_1afee91d99884e83906b8305101c004fa3" prot="public" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>InverseJacobianTensor</name></member>
+      <member refid="classInverseJacobianMatrix_1aa5383dafda57c25e4d11b33b1be20ba3" prot="private" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>m_mapping</name></member>
+      <member refid="classInverseJacobianMatrix_1a828224bc52aa59a25ee034e64c5bca94" prot="public" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>operator()</name></member>
+      <member refid="classInverseJacobianMatrix_1a7988d90c0e9ad18cff9a1e635943428b" prot="private" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>ValidArgIndices</name></member>
+      <member refid="classInverseJacobianMatrix_1ad1067073595d216dd797c33f776213f1" prot="private" virt="non-virtual"><scope>InverseJacobianMatrix</scope><name>ValidResultIndices</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -542,7 +542,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-combinedmapping">Class CombinedMapping</h1>
-<p><strong>template &lt;class Mapping1, class Mapping2, class CoordJacobian&gt;</strong></p>
+<p><strong>template &lt;class Mapping1, class Mapping2, class CoordJacobianType&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classCombinedMapping.html"><strong>CombinedMapping</strong></a></p>
 <p><em>A class which describes a mapping which is constructed by combining two mappings. Let us denote Mapping1 as</em>  <em>and Mapping2 as</em> <em>then this mapping represents:</em> <em>.</em><a href="#detailed-description">More...</a></p>
 <ul>
@@ -560,6 +560,10 @@
 <tr>
 <td style="text-align: right;">typedef typename Mapping2::CoordArg</td>
 <td style="text-align: left;"><a href="#typedef-coordarg"><strong>CoordArg</strong></a>  <br><em>The type of the argument of the function described by this mapping.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef CoordJacobianType</td>
+<td style="text-align: left;"><a href="#typedef-coordjacobian"><strong>CoordJacobian</strong></a>  <br><em>The type of the coordinate that can be used to evaluate the Jacobian of this mapping.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename Mapping1::CoordResult</td>
@@ -606,15 +610,15 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-jacobian"><strong>jacobian</strong></a> (CoordJacobian const &amp; coord_rtheta) const<br><em>Compute the determinant of the Jacobian matrix.</em></td>
+<td style="text-align: left;"><a href="#function-jacobian"><strong>jacobian</strong></a> (<a href="classCombinedMapping.html#typedef-coordjacobian"><strong>CoordJacobian</strong></a> const &amp; coord_rtheta) const<br><em>Compute the determinant of the Jacobian matrix.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-jacobian_component"><strong>jacobian_component</strong></a> (CoordJacobian const &amp; coord_rtheta) const<br><em>Compute the (i,j) component of the Jacobian matrix.</em></td>
+<td style="text-align: left;"><a href="#function-jacobian_component"><strong>jacobian_component</strong></a> (<a href="classCombinedMapping.html#typedef-coordjacobian"><strong>CoordJacobian</strong></a> const &amp; coord_rtheta) const<br><em>Compute the (i,j) component of the Jacobian matrix.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION <a href="classCombinedMapping.html#typedef-jacobianmatrixtype"><strong>JacobianMatrixType</strong></a></td>
-<td style="text-align: left;"><a href="#function-jacobian_matrix"><strong>jacobian_matrix</strong></a> (CoordJacobian const &amp; coord) const<br><em>Compute full Jacobian matrix.</em></td>
+<td style="text-align: left;"><a href="#function-jacobian_matrix"><strong>jacobian_matrix</strong></a> (<a href="classCombinedMapping.html#typedef-coordjacobian"><strong>CoordJacobian</strong></a> const &amp; coord) const<br><em>Compute full Jacobian matrix.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classCombinedMapping.html#typedef-coordresult"><strong>CoordResult</strong></a></td>
@@ -628,25 +632,31 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-coordarg">typedef CoordArg</h3>
 <p><em>The type of the argument of the function described by this mapping.</em> </p>
-<pre><code class="language-C++">using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobian &gt;::CoordArg =  typename Mapping2::CoordArg;
+<pre><code class="language-C++">using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::CoordArg =  typename Mapping2::CoordArg;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coordjacobian">typedef CoordJacobian</h3>
+<p><em>The type of the coordinate that can be used to evaluate the Jacobian of this mapping.</em> </p>
+<pre><code class="language-C++">using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::CoordJacobian =  CoordJacobianType;
 </code></pre>
 <hr>
 
 <h3 id="typedef-coordresult">typedef CoordResult</h3>
 <p><em>The type of the result of the function described by this mapping.</em> </p>
-<pre><code class="language-C++">using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobian &gt;::CoordResult =  typename Mapping1::CoordResult;
+<pre><code class="language-C++">using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::CoordResult =  typename Mapping1::CoordResult;
 </code></pre>
 <hr>
 
 <h3 id="typedef-invjacobianmatrixtype">typedef InvJacobianMatrixType</h3>
 <p><em>The type of the inverse Jacobian matrix.</em> </p>
-<pre><code class="language-C++">using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobian &gt;::InvJacobianMatrixType =  DTensor&lt; ddc::to_type_seq_t&lt;CoordArg&gt;, vector_index_set_dual_t&lt;ddc::to_type_seq_t&lt;CoordResult&gt; &gt;&gt;;
+<pre><code class="language-C++">using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::InvJacobianMatrixType =  DTensor&lt; ddc::to_type_seq_t&lt;CoordArg&gt;, vector_index_set_dual_t&lt;ddc::to_type_seq_t&lt;CoordResult&gt; &gt;&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-jacobianmatrixtype">typedef JacobianMatrixType</h3>
 <p><em>The type of the Jacobian matrix.</em> </p>
-<pre><code class="language-C++">using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobian &gt;::JacobianMatrixType =  DTensor&lt; ddc::to_type_seq_t&lt;CoordResult&gt;, vector_index_set_dual_t&lt;ddc::to_type_seq_t&lt;CoordArg&gt; &gt;&gt;;
+<pre><code class="language-C++">using CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::JacobianMatrixType =  DTensor&lt; ddc::to_type_seq_t&lt;CoordResult&gt;, vector_index_set_dual_t&lt;ddc::to_type_seq_t&lt;CoordArg&gt; &gt;&gt;;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>

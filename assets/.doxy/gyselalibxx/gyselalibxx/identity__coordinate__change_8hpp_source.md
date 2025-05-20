@@ -19,6 +19,7 @@ class IdentityCoordinateChange
 public:
     using CoordArg = ddcHelper::to_coord_t<ArgBasis>;
     using CoordResult = ddcHelper::to_coord_t<ResultBasis>;
+    using CoordJacobian = ddcHelper::to_coord_t<ArgBasis>;
 
 private:
     using ArgBasisCov = vector_index_set_dual_t<ArgBasis>;

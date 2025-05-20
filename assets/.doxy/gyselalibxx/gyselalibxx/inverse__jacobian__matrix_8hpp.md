@@ -33,7 +33,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**InverseJacobianMatrix**](classInverseJacobianMatrix.md) &lt;class Mapping, class PositionCoordinate&gt;<br> |
+| class | [**InverseJacobianMatrix**](classInverseJacobianMatrix.md) &lt;class Mapping&gt;<br> |
 
 
 

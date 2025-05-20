@@ -670,7 +670,7 @@ private:
                 get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
 
-        InverseJacobianMatrix&lt;Mapping, CoordRTheta&gt; inv_jacobian_matrix(m_mapping);
+        InverseJacobianMatrix inv_jacobian_matrix(m_mapping);
 
         // &gt; computation of the electric field
         ddc::for_each(grid, [&amp;](IdxRTheta const irtheta) {

@@ -2,7 +2,7 @@
 
 # Class InverseJacobianMatrix
 
-**template &lt;class Mapping, class PositionCoordinate&gt;**
+**template &lt;class Mapping&gt;**
 
 
 
@@ -60,8 +60,8 @@
 | Type | Name |
 | ---: | :--- |
 |  KOKKOS\_FUNCTION | [**InverseJacobianMatrix**](#function-inversejacobianmatrix) (Mapping const & mapping) <br>_A constructor for the_ [_**InverseJacobianMatrix**_](classInverseJacobianMatrix.md) _._ |
-|  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian\_component**](#function-inv_jacobian_component) (PositionCoordinate const & coord) const<br>_Compute the (i,j) coefficient of the inverse Jacobian matrix._  |
-|  KOKKOS\_INLINE\_FUNCTION [**InverseJacobianTensor**](classInverseJacobianMatrix.md#typedef-inversejacobiantensor) | [**operator()**](#function-operator) (PositionCoordinate const & coord) const<br>_Compute full inverse Jacobian matrix._  |
+|  KOKKOS\_INLINE\_FUNCTION double | [**inv\_jacobian\_component**](#function-inv_jacobian_component) (CoordJacobian const & coord) const<br>_Compute the (i,j) coefficient of the inverse Jacobian matrix._  |
+|  KOKKOS\_INLINE\_FUNCTION [**InverseJacobianTensor**](classInverseJacobianMatrix.md#typedef-inversejacobiantensor) | [**operator()**](#function-operator) (CoordJacobian const & coord) const<br>_Compute full inverse Jacobian matrix._  |
 
 
 
@@ -102,7 +102,6 @@ A class to calculate the inverse of the Jacobian matrix. If specialised methods 
 
 
 * `Mapping` The mapping whose inverse we are interested in. 
-* `PositionCoordinate` The coordinate system in which the inverse should be calculated. 
 
 
 
@@ -117,7 +116,7 @@ A class to calculate the inverse of the Jacobian matrix. If specialised methods 
 
 _The type of the tensor representing the inverse Jacobian._ 
 ```C++
-using InverseJacobianMatrix< Mapping, PositionCoordinate >::InverseJacobianTensor =  DTensor<ValidArgIndices, vector_index_set_dual_t<ValidResultIndices> >;
+using InverseJacobianMatrix< Mapping >::InverseJacobianTensor =  DTensor<ValidArgIndices, vector_index_set_dual_t<ValidResultIndices> >;
 ```
 
 
@@ -162,7 +161,7 @@ _Compute the (i,j) coefficient of the inverse Jacobian matrix._
 ```C++
 template<class IndexTag1, class IndexTag2>
 inline KOKKOS_INLINE_FUNCTION double InverseJacobianMatrix::inv_jacobian_component (
-    PositionCoordinate const & coord
+    CoordJacobian const & coord
 ) const
 ```
 
@@ -199,7 +198,7 @@ A double with the value of the (i,j) coefficient of the inverse Jacobian matrix.
 _Compute full inverse Jacobian matrix._ 
 ```C++
 inline KOKKOS_INLINE_FUNCTION InverseJacobianTensor InverseJacobianMatrix::operator() (
-    PositionCoordinate const & coord
+    CoordJacobian const & coord
 ) const
 ```
 

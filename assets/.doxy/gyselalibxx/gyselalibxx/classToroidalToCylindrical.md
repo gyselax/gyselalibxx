@@ -35,6 +35,7 @@ _A class describing a coordinate change from a toroidal system of coordinates to
 | Type | Name |
 | ---: | :--- |
 | typedef Coord&lt; Rho, [**Theta**](structTheta.md), Phi &gt; | [**CoordArg**](#typedef-coordarg)  <br>_The type of the argument of the function described by this mapping._  |
+| typedef [**CoordArg**](classToroidalToCylindrical.md#typedef-coordarg) | [**CoordJacobian**](#typedef-coordjacobian)  <br>_The type of the coordinate that can be used to evaluate the Jacobian of this mapping._  |
 | typedef Coord&lt; [**R**](structR.md), Z, Zeta &gt; | [**CoordResult**](#typedef-coordresult)  <br>_The type of the result of the function described by this mapping._  |
 | typedef typename Curvilinear2DToCartesian::cartesian\_tag\_x | [**cylindrical\_tag\_R**](#typedef-cylindrical_tag_r)  <br>_Indicate the first physical coordinate._  |
 | typedef typename Curvilinear2DToCartesian::cartesian\_tag\_y | [**cylindrical\_tag\_Z**](#typedef-cylindrical_tag_z)  <br>_Indicate the second physical coordinate._  |
@@ -128,6 +129,20 @@ _A class describing a coordinate change from a toroidal system of coordinates to
 _The type of the argument of the function described by this mapping._ 
 ```C++
 using ToroidalToCylindrical< Curvilinear2DToCartesian, Zeta, Phi >::CoordArg =  Coord<Rho, Theta, Phi>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef CoordJacobian 
+
+_The type of the coordinate that can be used to evaluate the Jacobian of this mapping._ 
+```C++
+using ToroidalToCylindrical< Curvilinear2DToCartesian, Zeta, Phi >::CoordJacobian =  CoordArg;
 ```
 
 

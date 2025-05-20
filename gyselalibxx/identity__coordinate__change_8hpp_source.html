@@ -555,6 +555,7 @@ class IdentityCoordinateChange
 public:
     using CoordArg = ddcHelper::to_coord_t&lt;ArgBasis&gt;;
     using CoordResult = ddcHelper::to_coord_t&lt;ResultBasis&gt;;
+    using CoordJacobian = ddcHelper::to_coord_t&lt;ArgBasis&gt;;
 
 private:
     using ArgBasisCov = vector_index_set_dual_t&lt;ArgBasis&gt;;

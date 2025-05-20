@@ -571,6 +571,7 @@ public:
 
     using CoordArg = Coord&lt;R, Theta&gt;;
     using CoordResult = Coord&lt;X, Y&gt;;
+    using CoordJacobian = CoordArg;
 
     using X_cov = typename X::Dual;
     using Y_cov = typename Y::Dual;

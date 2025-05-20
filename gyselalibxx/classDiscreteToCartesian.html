@@ -570,6 +570,10 @@
 <td style="text-align: left;"><a href="#typedef-coordarg"><strong>CoordArg</strong></a>  <br><em>The type of the argument of the function described by this mapping.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef <a href="classDiscreteToCartesian.html#typedef-coordarg"><strong>CoordArg</strong></a></td>
+<td style="text-align: left;"><a href="#typedef-coordjacobian"><strong>CoordJacobian</strong></a>  <br><em>The type of the coordinate that can be used to evaluate the Jacobian of this mapping.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#typedef-coordresult"><strong>CoordResult</strong></a>  <br><em>The type of the result of the function described by this mapping.</em></td>
 </tr>
@@ -669,6 +673,12 @@
 <h3 id="typedef-coordarg">typedef CoordArg</h3>
 <p><em>The type of the argument of the function described by this mapping.</em> </p>
 <pre><code class="language-C++">using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::CoordArg =  Coord&lt;R, Theta&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coordjacobian">typedef CoordJacobian</h3>
+<p><em>The type of the coordinate that can be used to evaluate the Jacobian of this mapping.</em> </p>
+<pre><code class="language-C++">using DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::CoordJacobian =  CoordArg;
 </code></pre>
 <hr>
 

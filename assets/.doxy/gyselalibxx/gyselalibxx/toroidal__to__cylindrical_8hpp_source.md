@@ -44,6 +44,7 @@ private:
 public:
     using CoordArg = Coord<Rho, Theta, Phi>;
     using CoordResult = Coord<R, Z, Zeta>;
+    using CoordJacobian = CoordArg;
 
 private:
     Curvilinear2DToCartesian m_mapping_2d;
@@ -102,8 +103,7 @@ public:
     KOKKOS_FUNCTION DTensor<VectorIndexSet<Rho, Theta, Phi>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>>
     inv_jacobian_matrix(CoordArg const& coord) const
     {
-        InverseJacobianMatrix<Curvilinear2DToCartesian, CoordArg2D> inv_jacobian_matrix_2d(
-                m_mapping_2d);
+        InverseJacobianMatrix inv_jacobian_matrix_2d(m_mapping_2d);
         DTensor<VectorIndexSet<Rho, Theta, Phi>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>> inv_J_3d;
         DTensor<VectorIndexSet<Rho, Theta>, VectorIndexSet<R_cov, Z_cov>> inv_J_2d
                 = inv_jacobian_matrix_2d(CoordArg2D(coord));
@@ -122,7 +122,7 @@ public:
     template <class IndexTag1, class IndexTag2>
     KOKKOS_INLINE_FUNCTION double inv_jacobian_component(CoordArg const& coord) const
     {
-        static_assert(has_inv_jacobian_v<Curvilinear2DToCartesian, CoordArg>);
+        static_assert(has_inv_jacobian_v<Curvilinear2DToCartesian>);
         static_assert(ddc::in_tags_v<IndexTag1, ddc::detail::TypeSeq<Rho, Theta, Phi>>);
         static_assert(ddc::in_tags_v<IndexTag2, ddc::detail::TypeSeq<R_cov, Z_cov, Zeta_cov>>);
 
@@ -147,6 +147,12 @@ namespace mapping_detail {
 template <class Curvilinear2DToCartesian, class Zeta, class Phi, class ExecSpace>
 struct MappingAccessibility<ExecSpace, ToroidalToCylindrical<Curvilinear2DToCartesian, Zeta, Phi>>
     : MappingAccessibility<ExecSpace, Curvilinear2DToCartesian>
+{
+};
+
+template <class Curvilinear2DToCartesian, class Zeta, class Phi>
+struct SingularOPointInvJacobian<ToroidalToCylindrical<Curvilinear2DToCartesian, Zeta, Phi>>
+    : std::true_type
 {
 };
 

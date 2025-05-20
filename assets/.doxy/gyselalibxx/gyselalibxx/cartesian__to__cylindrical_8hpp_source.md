@@ -38,6 +38,7 @@ public:
 
     using CoordArg = Coord<X, Y, Z>;
     using CoordResult = Coord<R, Z, Zeta>;
+    using CoordJacobian = CoordArg;
 
     using X_cov = typename X::Dual;
     using Y_cov = typename Y::Dual;

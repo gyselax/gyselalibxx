@@ -37,6 +37,7 @@ _A class for describing discrete 2D mappings from the logical domain to the phys
 | typedef typename SplineEvaluator::bsplines\_type1 | [**BSplineR**](#typedef-bspliner)  <br>_Indicate the bspline type of the first logical dimension._  |
 | typedef typename SplineEvaluator::bsplines\_type2 | [**BSplineTheta**](#typedef-bsplinetheta)  <br>_Indicate the bspline type of the second logical dimension._  |
 | typedef Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; | [**CoordArg**](#typedef-coordarg)  <br>_The type of the argument of the function described by this mapping._  |
+| typedef [**CoordArg**](classDiscreteToCartesian.md#typedef-coordarg) | [**CoordJacobian**](#typedef-coordjacobian)  <br>_The type of the coordinate that can be used to evaluate the Jacobian of this mapping._  |
 | typedef Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**CoordResult**](#typedef-coordresult)  <br>_The type of the result of the function described by this mapping._  |
 | typedef typename [**R::Dual**](structR.md#typedef-dual) | [**R\_cov**](#typedef-r_cov)  <br>_The covariant form of the first logical coordinate._  |
 | typedef typename [**Theta::Dual**](structTheta.md#typedef-dual) | [**Theta\_cov**](#typedef-theta_cov)  <br>_The covariant form of the second logical coordinate._  |
@@ -160,6 +161,20 @@ using DiscreteToCartesian< X, Y, SplineEvaluator, R, Theta, MemorySpace >::BSpli
 _The type of the argument of the function described by this mapping._ 
 ```C++
 using DiscreteToCartesian< X, Y, SplineEvaluator, R, Theta, MemorySpace >::CoordArg =  Coord<R, Theta>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef CoordJacobian 
+
+_The type of the coordinate that can be used to evaluate the Jacobian of this mapping._ 
+```C++
+using DiscreteToCartesian< X, Y, SplineEvaluator, R, Theta, MemorySpace >::CoordJacobian =  CoordArg;
 ```
 
 

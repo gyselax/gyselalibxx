@@ -574,6 +574,7 @@ public:
 
     using CoordArg = Coord&lt;R, Z, Zeta&gt;;
     using CoordResult = Coord&lt;X, Y, Z&gt;;
+    using CoordJacobian = CoordArg;
 
     using X_cov = typename X::Dual;
     using Y_cov = typename Y::Dual;

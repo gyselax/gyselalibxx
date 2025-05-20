@@ -562,6 +562,10 @@
 <td style="text-align: left;"><a href="#typedef-coordarg"><strong>CoordArg</strong></a>  <br><em>The type of the argument of the function described by this mapping.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef ddcHelper::to_coord_t&lt; ArgBasis &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coordjacobian"><strong>CoordJacobian</strong></a>  <br><em>The type of the coordinate that can be used to evaluate the Jacobian of this mapping.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef ddcHelper::to_coord_t&lt; ResultBasis &gt;</td>
 <td style="text-align: left;"><a href="#typedef-coordresult"><strong>CoordResult</strong></a>  <br><em>The type of the result of the function described by this mapping.</em></td>
 </tr>
@@ -621,6 +625,12 @@
 <h3 id="typedef-coordarg">typedef CoordArg</h3>
 <p><em>The type of the argument of the function described by this mapping.</em> </p>
 <pre><code class="language-C++">using IdentityCoordinateChange&lt; ArgBasis, ResultBasis &gt;::CoordArg =  ddcHelper::to_coord_t&lt;ArgBasis&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coordjacobian">typedef CoordJacobian</h3>
+<p><em>The type of the coordinate that can be used to evaluate the Jacobian of this mapping.</em> </p>
+<pre><code class="language-C++">using IdentityCoordinateChange&lt; ArgBasis, ResultBasis &gt;::CoordJacobian =  ddcHelper::to_coord_t&lt;ArgBasis&gt;;
 </code></pre>
 <hr>
 

@@ -35,6 +35,7 @@ _A class describing an identity transformation._ [More...](#detailed-description
 | Type | Name |
 | ---: | :--- |
 | typedef ddcHelper::to\_coord\_t&lt; ArgBasis &gt; | [**CoordArg**](#typedef-coordarg)  <br>_The type of the argument of the function described by this mapping._  |
+| typedef ddcHelper::to\_coord\_t&lt; ArgBasis &gt; | [**CoordJacobian**](#typedef-coordjacobian)  <br>_The type of the coordinate that can be used to evaluate the Jacobian of this mapping._  |
 | typedef ddcHelper::to\_coord\_t&lt; ResultBasis &gt; | [**CoordResult**](#typedef-coordresult)  <br>_The type of the result of the function described by this mapping._  |
 
 
@@ -124,6 +125,20 @@ It is not expected that this class appear in a final simulation, but it may be u
 _The type of the argument of the function described by this mapping._ 
 ```C++
 using IdentityCoordinateChange< ArgBasis, ResultBasis >::CoordArg =  ddcHelper::to_coord_t<ArgBasis>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef CoordJacobian 
+
+_The type of the coordinate that can be used to evaluate the Jacobian of this mapping._ 
+```C++
+using IdentityCoordinateChange< ArgBasis, ResultBasis >::CoordJacobian =  ddcHelper::to_coord_t<ArgBasis>;
 ```
 
 

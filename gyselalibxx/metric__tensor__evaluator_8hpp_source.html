@@ -556,11 +556,16 @@
 #include "vector_index_tools.hpp"
 #include "view.hpp"
 
-template &lt;class Mapping, class PositionCoordinate = typename Mapping::CoordArg&gt;
+template &lt;class Mapping, class PositionCoordinate = typename Mapping::CoordJacobian&gt;
 class MetricTensorEvaluator
 {
     static_assert(is_mapping_v&lt;Mapping&gt;);
-    static_assert(has_jacobian_v&lt;Mapping, PositionCoordinate&gt;);
+    static_assert(has_jacobian_v&lt;Mapping&gt;);
+    static_assert(
+            std::is_same_v&lt;PositionCoordinate, typename Mapping::CoordJacobian&gt;,
+            "The metric tensor is calculated from the Jacobian matrix. In order to evaluate the "
+            "metric tensor on a coordinate different to the one given as argument to the mapping, "
+            "please define a specialisation of this class.");
     static_assert(
             (is_covariant_vector_index_set_v&lt;ddc::to_type_seq_t&lt;typename Mapping::CoordResult&gt;&gt;)&amp;&amp;(
                     is_contravariant_vector_index_set_v&lt;
@@ -592,7 +597,7 @@ public:
 
     KOKKOS_FUNCTION DTensor&lt;Dims, Dims&gt; inverse(CoordArg const&amp; coord) const
     {
-        InverseJacobianMatrix&lt;Mapping, PositionCoordinate&gt; get_inverse_jacobian(m_mapping);
+        InverseJacobianMatrix get_inverse_jacobian(m_mapping);
         Tensor inv_J = get_inverse_jacobian(coord);
         return tensor_mul(index&lt;'i', 'j'&gt;(inv_J), index&lt;'k', 'j'&gt;(inv_J));
     }

@@ -48,8 +48,8 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**has\_inv\_jacobian\_v**](#variable-has_inv_jacobian_v)   = `mapping\_detail::DefinesInvJacobian&lt;Mapping, CoordinateType, !RaiseError&gt;::value`<br> |
-|  constexpr bool | [**has\_jacobian\_v**](#variable-has_jacobian_v)   = `mapping\_detail::DefinesJacobian&lt;Mapping, CoordinateType, !RaiseError&gt;::value`<br> |
+|  constexpr bool | [**has\_inv\_jacobian\_v**](#variable-has_inv_jacobian_v)   = `mapping\_detail::DefinesInvJacobian&lt;Mapping, !RaiseError&gt;::value`<br> |
+|  constexpr bool | [**has\_jacobian\_v**](#variable-has_jacobian_v)   = `mapping\_detail::DefinesJacobian&lt;Mapping, !RaiseError&gt;::value`<br> |
 |  constexpr bool | [**has\_singular\_o\_point\_inv\_jacobian\_v**](#variable-has_singular_o_point_inv_jacobian_v)   = `/* multi line expression */`<br> |
 |  constexpr bool | [**is\_accessible\_v**](#variable-is_accessible_v)   = `/* multi line expression */`<br> |
 |  constexpr bool | [**is\_analytical\_mapping\_v**](#variable-is_analytical_mapping_v)   = `mapping\_detail::IsAnalyticalMapping&lt;Mapping&gt;::value`<br> |

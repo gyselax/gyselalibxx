@@ -552,12 +552,13 @@
 #include "math_tools.hpp"
 #include "view.hpp"
 
-template &lt;class Mapping, class PositionCoordinate = typename Mapping::CoordArg&gt;
+template &lt;class Mapping&gt;
 class InverseJacobianMatrix
 {
 private:
     using ValidArgIndices = ddc::to_type_seq_t&lt;typename Mapping::CoordArg&gt;;
     using ValidResultIndices = ddc::to_type_seq_t&lt;typename Mapping::CoordResult&gt;;
+    using CoordJacobian = typename Mapping::CoordJacobian;
 
 public:
     using InverseJacobianTensor
@@ -569,12 +570,12 @@ private:
 public:
     KOKKOS_FUNCTION explicit InverseJacobianMatrix(Mapping const&amp; mapping) : m_mapping(mapping) {}
 
-    KOKKOS_INLINE_FUNCTION InverseJacobianTensor operator()(PositionCoordinate const&amp; coord) const
+    KOKKOS_INLINE_FUNCTION InverseJacobianTensor operator()(CoordJacobian const&amp; coord) const
     {
-        if constexpr (has_inv_jacobian_v&lt;Mapping, PositionCoordinate, false&gt;) {
+        if constexpr (has_inv_jacobian_v&lt;Mapping, false&gt;) {
             return m_mapping.inv_jacobian_matrix(coord);
         } else {
-            static_assert(has_jacobian_v&lt;Mapping, PositionCoordinate&gt;);
+            static_assert(has_jacobian_v&lt;Mapping&gt;);
             DTensor&lt;ValidResultIndices, vector_index_set_dual_t&lt;ValidArgIndices&gt;&gt; jacobian
                     = m_mapping.jacobian_matrix(coord);
             assert(fabs(determinant(jacobian)) &gt; 1e-15);
@@ -584,15 +585,15 @@ public:
 
 
     template &lt;class IndexTag1, class IndexTag2&gt;
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_component(PositionCoordinate const&amp; coord) const
+    KOKKOS_INLINE_FUNCTION double inv_jacobian_component(CoordJacobian const&amp; coord) const
     {
         static_assert(ddc::in_tags_v&lt;IndexTag1, ValidArgIndices&gt;);
         static_assert(ddc::in_tags_v&lt;IndexTag2, get_covariant_dims_t&lt;ValidResultIndices&gt;&gt;);
 
-        if constexpr (has_inv_jacobian_v&lt;Mapping, PositionCoordinate, false&gt;) {
+        if constexpr (has_inv_jacobian_v&lt;Mapping, false&gt;) {
             return m_mapping.template inv_jacobian_component&lt;IndexTag1, IndexTag2&gt;(coord);
         } else {
-            static_assert(has_jacobian_v&lt;Mapping, PositionCoordinate&gt;);
+            static_assert(has_jacobian_v&lt;Mapping&gt;);
             static_assert(Mapping::CoordArg::size() == 2);
 
             using DimArg0 = ddc::type_seq_element_t&lt;0, ValidArgIndices&gt;;

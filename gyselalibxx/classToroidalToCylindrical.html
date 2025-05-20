@@ -562,6 +562,10 @@
 <td style="text-align: left;"><a href="#typedef-coordarg"><strong>CoordArg</strong></a>  <br><em>The type of the argument of the function described by this mapping.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef <a href="classToroidalToCylindrical.html#typedef-coordarg"><strong>CoordArg</strong></a></td>
+<td style="text-align: left;"><a href="#typedef-coordjacobian"><strong>CoordJacobian</strong></a>  <br><em>The type of the coordinate that can be used to evaluate the Jacobian of this mapping.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef Coord&lt; <a href="structR.html"><strong>R</strong></a>, Z, Zeta &gt;</td>
 <td style="text-align: left;"><a href="#typedef-coordresult"><strong>CoordResult</strong></a>  <br><em>The type of the result of the function described by this mapping.</em></td>
 </tr>
@@ -645,6 +649,12 @@
 <h3 id="typedef-coordarg">typedef CoordArg</h3>
 <p><em>The type of the argument of the function described by this mapping.</em> </p>
 <pre><code class="language-C++">using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::CoordArg =  Coord&lt;Rho, Theta, Phi&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coordjacobian">typedef CoordJacobian</h3>
+<p><em>The type of the coordinate that can be used to evaluate the Jacobian of this mapping.</em> </p>
+<pre><code class="language-C++">using ToroidalToCylindrical&lt; Curvilinear2DToCartesian, Zeta, Phi &gt;::CoordJacobian =  CoordArg;
 </code></pre>
 <hr>
 

@@ -35,6 +35,7 @@ _A class for describing the cylindrical 3D mapping._ [More...](#detailed-descrip
 | Type | Name |
 | ---: | :--- |
 | typedef Coord&lt; [**X**](structX.md), [**Y**](structY.md), Z &gt; | [**CoordArg**](#typedef-coordarg)  <br>_The type of the argument of the function described by this mapping._  |
+| typedef [**CoordArg**](classCartesianToCylindrical.md#typedef-coordarg) | [**CoordJacobian**](#typedef-coordjacobian)  <br>_The type of the coordinate that can be used to evaluate the Jacobian of this mapping._  |
 | typedef Coord&lt; [**R**](structR.md), Z, Zeta &gt; | [**CoordResult**](#typedef-coordresult)  <br>_The type of the result of the function described by this mapping._  |
 | typedef typename [**R::Dual**](structR.md#typedef-dual) | [**R\_cov**](#typedef-r_cov)  <br>_The covariant form of the radial cylindrical coordinate._  |
 | typedef typename [**X::Dual**](structX.md#typedef-dual-14) | [**X\_cov**](#typedef-x_cov)  <br>_The covariant form of the first Cartesian coordinate._  |
@@ -172,6 +173,20 @@ and the matrix determinant: .
 _The type of the argument of the function described by this mapping._ 
 ```C++
 using CartesianToCylindrical< X, Y, Z, R, Zeta >::CoordArg =  Coord<X, Y, Z>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef CoordJacobian 
+
+_The type of the coordinate that can be used to evaluate the Jacobian of this mapping._ 
+```C++
+using CartesianToCylindrical< X, Y, Z, R, Zeta >::CoordJacobian =  CoordArg;
 ```
 
 

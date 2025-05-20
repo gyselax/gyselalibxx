@@ -609,7 +609,7 @@ public:
                                 = ddcHelper::get&lt;YOut&gt;(vector_field_out);
                     });
         } else {
-            InverseJacobianMatrix&lt;Mapping, ddc::coordinate_of_t&lt;IdxType&gt;&gt; inv_mapping(m_mapping);
+            InverseJacobianMatrix&lt;Mapping&gt; inv_mapping(m_mapping);
             ddc::parallel_for_each(
                     exec_space,
                     get_idx_range(vector_field_input),

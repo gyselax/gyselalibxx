@@ -585,7 +585,7 @@
 <codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(coords),</highlight></codeline>
 <codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(electrostatic_potential_coef));</highlight></codeline>
 <codeline lineno="244"><highlight class="normal"></highlight></codeline>
-<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classInverseJacobianMatrix" kindref="compound">InverseJacobianMatrix&lt;Mapping, CoordRTheta&gt;</ref><sp/>inv_jacobian_matrix(m_mapping);</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classInverseJacobianMatrix" kindref="compound">InverseJacobianMatrix</ref><sp/>inv_jacobian_matrix(m_mapping);</highlight></codeline>
 <codeline lineno="246"><highlight class="normal"></highlight></codeline>
 <codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>&gt;<sp/>computation<sp/>of<sp/>the<sp/>electric<sp/>field</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::for_each(grid,<sp/>[&amp;](IdxRTheta<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>irtheta)<sp/>{</highlight></codeline>

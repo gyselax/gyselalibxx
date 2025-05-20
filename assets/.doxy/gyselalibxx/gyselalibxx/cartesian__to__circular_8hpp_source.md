@@ -33,6 +33,7 @@ public:
 
     using CoordArg = Coord<X, Y>;
     using CoordResult = Coord<R, Theta>;
+    using CoordJacobian = CoordArg;
 
     using X_cov = typename X::Dual;
     using Y_cov = typename Y::Dual;
