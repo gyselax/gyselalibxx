@@ -7,12 +7,12 @@
 #include "cartesian_to_czarny.hpp"
 #include "circular_to_cartesian.hpp"
 #include "combined_mapping.hpp"
+#include "coord_transformation_tools.hpp"
 #include "cylindrical_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "geometry_mapping_tests.hpp"
 #include "identity_coordinate_change.hpp"
-#include "mapping_tools.hpp"
 #include "toroidal_to_cylindrical.hpp"
 
 

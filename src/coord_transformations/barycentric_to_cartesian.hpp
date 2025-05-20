@@ -3,8 +3,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include "coord_transformation_tools.hpp"
 #include "ddc_aliases.hpp"
-#include "mapping_tools.hpp"
 
 template <class X, class Y, class Corner1Tag, class Corner2Tag, class Corner3Tag>
 class CartesianToBarycentric;
