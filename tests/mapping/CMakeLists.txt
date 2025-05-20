@@ -16,7 +16,7 @@ target_link_libraries(unit_tests_mapping
     PUBLIC
         GTest::gtest
         GTest::gmock
-        gslx::mapping
+        gslx::coord_transformations
         gslx::utils
 )
 gtest_discover_tests(unit_tests_mapping DISCOVERY_MODE PRE_TEST)

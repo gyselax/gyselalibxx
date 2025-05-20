@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: MIT
 
-add_library("mapping" INTERFACE)
+add_library("coord_transformations" INTERFACE)
 
-target_include_directories("mapping"
+target_include_directories("coord_transformations"
     INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
-target_link_libraries("mapping"
+target_link_libraries("coord_transformations"
     INTERFACE
         DDC::core
         gslx::data_types
@@ -14,5 +14,5 @@ target_link_libraries("mapping"
         gslx::utils
 )
 
-add_library("gslx::mapping" ALIAS "mapping")
+add_library("gslx::coord_transformations" ALIAS "coord_transformations")
 
