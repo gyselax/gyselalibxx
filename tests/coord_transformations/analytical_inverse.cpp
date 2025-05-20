@@ -12,7 +12,7 @@
 #include "circular_to_cartesian.hpp"
 #include "cylindrical_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
-#include "geometry_mapping_tests.hpp"
+#include "geometry_coord_transformations_tests.hpp"
 #include "math_tools.hpp"
 
 namespace {

@@ -10,7 +10,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
-#include "geometry_mapping_tests.hpp"
+#include "geometry_coord_transformations_tests.hpp"
 #include "mapping_testing_tools.hpp"
 #include "metric_tensor_evaluator.hpp"
 #include "toroidal_to_cylindrical.hpp"

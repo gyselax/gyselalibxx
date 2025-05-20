@@ -13,7 +13,7 @@
 #include "ddc_helper.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
-#include "geometry_mapping_tests.hpp"
+#include "geometry_coord_transformations_tests.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "inv_jacobian_o_point.hpp"
 
