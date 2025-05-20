@@ -10,6 +10,7 @@ target_link_libraries("math_tools"
     INTERFACE
         DDC::core
         gslx::data_types
+        gslx::mapping
         gslx::quadrature
 )
 
