@@ -11,6 +11,7 @@
 #include "czarny_to_cartesian.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "geometry_mapping_tests.hpp"
+#include "identity_coordinate_change.hpp"
 #include "mapping_tools.hpp"
 #include "toroidal_to_cylindrical.hpp"
 
@@ -101,6 +102,15 @@ TEST(MappingStaticAsserts, CartToBarycentric)
     struct Corner3;
     using Mapping = CartesianToBarycentric<X, Y, Corner1, Corner2, Corner3>;
     static_assert(is_mapping_v<Mapping>);
+    static_assert(is_analytical_mapping_v<Mapping>);
+}
+
+TEST(MappingStaticAsserts, Identity)
+{
+    using Mapping = IdentityCoordinateChange<VectorIndexSet<X, Y, Z>, VectorIndexSet<X, Y, Z>>;
+    static_assert(is_mapping_v<Mapping>);
+    static_assert(has_jacobian_v<Mapping, Coord<X, Y, Z>>);
+    static_assert(has_inv_jacobian_v<Mapping, Coord<X, Y, Z>>);
     static_assert(is_analytical_mapping_v<Mapping>);
 }
 

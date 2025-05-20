@@ -6,6 +6,7 @@
 
 #include "central_fdm_partial_derivatives.hpp"
 #include "central_fdm_partial_derivatives_with_boundary_values.hpp"
+#include "constant_partial_derivatives.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "math_tools.hpp"
@@ -574,6 +575,69 @@ public:
     }
 };
 
+/**
+ * @brief A class that represents a test for partial derivatives.
+ * The test can be used with finite difference method for
+ * computing partial derivatives.
+ */
+template <std::size_t ncells_x, std::size_t ncells_y>
+class PartialDerivativeTestConstant : public PartialDerivativeTest<ncells_x, ncells_y>
+{
+private:
+    using base_type = PartialDerivativeTest<ncells_x, ncells_y>;
+
+    using typename base_type::DFieldMemType;
+    using typename base_type::DFieldType;
+    using typename base_type::IdxRangeX;
+    using typename base_type::IdxRangeXY;
+    using typename base_type::IdxRangeY;
+    using typename base_type::IdxXY;
+
+private:
+    double m_deriv_value;
+
+public:
+    explicit PartialDerivativeTestConstant(double const deriv_value)
+        : base_type(0.0, 1.0, 0.0, 1.0)
+        , m_deriv_value(deriv_value)
+    {
+    }
+
+    template <class DerivativeDimension>
+    double compute_error() const
+    {
+        IdxRangeX idxrange_x(typename base_type::IdxX(0), base_type::m_ncells_x + 1);
+        IdxRangeY idxrange_y(typename base_type::IdxY(0), base_type::m_ncells_y + 1);
+        IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
+
+        ConstantPartialDerivativeCreator<IdxRangeXY, DerivativeDimension> const
+                partial_derivative_creator(m_deriv_value);
+
+        DFieldMemType field_to_differentiate(idxrange_xy);
+
+        std::unique_ptr<IPartialDerivative<IdxRangeXY, DerivativeDimension>> const
+                partial_derivative_creator_pointer
+                = partial_derivative_creator.create_instance(
+                        get_const_field(field_to_differentiate));
+
+        IPartialDerivative<IdxRangeXY, DerivativeDimension> const& partial_derivative
+                = *partial_derivative_creator_pointer;
+
+        DFieldMemType field_differentiated_alloc(idxrange_xy);
+        DFieldType field_differentiated = get_field(field_differentiated_alloc);
+        partial_derivative(field_differentiated);
+
+        double const max_error = ddc::parallel_transform_reduce(
+                Kokkos::DefaultExecutionSpace(),
+                idxrange_xy,
+                0.,
+                ddc::reducer::max<double>(),
+                KOKKOS_LAMBDA(IdxXY const idx) { return Kokkos::abs(field_differentiated(idx)); });
+
+        return max_error;
+    }
+};
+
 /** 
  * We expect a convergence of the error following error ~ (dx)^d
  * with d the degree of the splines. 
@@ -734,5 +798,14 @@ TEST(PartialDerivative, CentralFDMPartialDerivativeWithBV)
     double const relative_error_order_y = std::fabs((expected_order - order_y) / expected_order);
 
     EXPECT_LE(relative_error_order_y, TOL);
+}
+
+TEST(PartialDerivative, ConstantPartialDerivative)
+{
+    const double val(3.5);
+    PartialDerivativeTestConstant<10, 5> const test(val);
+
+    // Partial Derivative in X direction
+    EXPECT_DOUBLE_EQ(test.template compute_error<X>(), val);
 }
 } // namespace
