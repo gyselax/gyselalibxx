@@ -2,6 +2,7 @@
 
 add_library("time_integration_xyvxvy" STATIC
     predcorr.cpp
+    hybridsplitting.cpp
 )
 
 target_include_directories("time_integration_xyvxvy"
@@ -13,6 +14,7 @@ target_link_libraries("time_integration_xyvxvy"
         DDC::core
         DDC::pdi
         gslx::poisson_xy
+        gslx::hybrid_field_solver_xyvxvy
         gslx::speciesinfo
         gslx::vlasov_xyvxvy
         gslx::utils

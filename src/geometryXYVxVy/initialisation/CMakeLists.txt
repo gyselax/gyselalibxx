@@ -3,6 +3,7 @@
 add_library("initialisation_xyvxvy" STATIC
     maxwellianequilibrium.cpp
     singlemodeperturbinitialisation.cpp
+    hybridmodel_field_initialisation.cpp
 )
 
 target_include_directories("initialisation_xyvxvy"

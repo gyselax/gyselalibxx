@@ -70,9 +70,8 @@ public:
         InterpolatorType const& interpolator_x = *interpolator_x_ptr;
 
         IdxRangeBatch batch_idx_range(idx_range);
-
         for (IdxSp const isp : sp_idx_range) {
-            double const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
+            //double const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
             ddc::parallel_for_each(
                     Kokkos::DefaultExecutionSpace(),
                     batch_idx_range,
@@ -80,7 +79,8 @@ public:
                         // compute the displacement
                         IdxV const iv(ib);
                         Coord<DimV> const coord_iv = ddc::coordinate(iv);
-                        double const dx = sqrt_me_on_mspecies * dt * coord_iv;
+                        //double const dx = sqrt_me_on_mspecies * dt * coord_iv;
+                        double const dx =  dt * coord_iv;
 
                         // compute the coordinates of the feet
                         for (IdxX const ix : x_idx_range) {
@@ -89,7 +89,6 @@ public:
                     });
             interpolator_x(allfdistribu[isp], get_const_field(feet_coords));
         }
-
         Kokkos::Profiling::popRegion();
         return allfdistribu;
     }

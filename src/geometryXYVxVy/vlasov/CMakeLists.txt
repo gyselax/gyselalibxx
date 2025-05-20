@@ -2,6 +2,7 @@
 
 add_library("vlasov_xyvxvy" STATIC
     mpisplitvlasovsolver.cpp
+    mpisplithybridvlasovsolver.cpp
     splitvlasovsolver.cpp
 )
 

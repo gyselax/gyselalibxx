@@ -14,6 +14,7 @@ target_link_libraries("pde_solvers"
         gslx::mapping
         gslx::matrix_tools
         gslx::utils
+        gslx::speciesinfo
 )
 
 add_library("gslx::pde_solvers" ALIAS "pde_solvers")

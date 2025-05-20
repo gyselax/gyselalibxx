@@ -249,6 +249,7 @@ using IdxRangeXYVxVy = IdxRange<GridX, GridY, GridVx, GridVy>;
 using IdxRangeVxVyXY = IdxRange<GridVx, GridVy, GridX, GridY>;
 using IdxRangeVxVy = IdxRange<GridVx, GridVy>;
 using IdxRangeSpVxVy = IdxRange<Species, GridVx, GridVy>;
+using IdxRangeSpXY = IdxRange<Species, GridX, GridY>;
 using IdxRangeSpXYVxVy = IdxRange<Species, GridX, GridY, GridVx, GridVy>;
 using IdxRangeSpVxVyXY = IdxRange<Species, GridVx, GridVy, GridX, GridY>;
 
@@ -281,6 +282,10 @@ using DFieldMemXYVxVy = FieldMemXYVxVy<double>;
 template <class ElementType>
 using FieldMemSpVxVy = FieldMem<ElementType, IdxRangeSpVxVy>;
 using DFieldMemSpVxVy = FieldMemSpVxVy<double>;
+
+template <class ElementType>
+using FieldMemSpXY = FieldMem<ElementType, IdxRangeSpXY>;
+using DFieldMemSpXY = FieldMemSpXY<double>;
 
 template <class ElementType>
 using FieldMemSpXYVxVy = FieldMem<ElementType, IdxRangeSpXYVxVy>;
@@ -320,6 +325,10 @@ using FieldSpVxVy = Field<ElementType, IdxRangeSpVxVy>;
 using DFieldSpVxVy = FieldSpVxVy<double>;
 
 template <class ElementType>
+using FieldSpXY = Field<ElementType, IdxRangeSpXY>;
+using DFieldSpXY = FieldSpXY<double>;
+
+template <class ElementType>
 using FieldSpXYVxVy = Field<ElementType, IdxRangeSpXYVxVy>;
 using DFieldSpXYVxVy = FieldSpXYVxVy<double>;
 
@@ -353,6 +362,10 @@ using ConstFieldSpVxVy = Field<ElementType const, IdxRangeSpVxVy>;
 using DConstFieldSpVxVy = ConstFieldSpVxVy<double>;
 
 template <class ElementType>
+using ConstFieldSpXY = Field<ElementType const, IdxRangeSpXY>;
+using DConstFieldSpXY = ConstFieldSpXY<double>;
+
+template <class ElementType>
 using ConstFieldSpXYVxVy = Field<ElementType const, IdxRangeSpXYVxVy>;
 using DConstFieldSpXYVxVy = ConstFieldSpXYVxVy<double>;
 
@@ -378,6 +391,15 @@ public:
             std::is_same_v<T, GridX>,
             GridVx,
             std::conditional_t<std::is_same_v<T, GridY>, GridVy, void>>;
+
+    /**
+     * @brief A templated type giving the other velocity discretised Grid type associated to a given GridV type.
+     */
+    template <class T>
+    using the_other_velocity_dim = std::conditional_t<
+            std::is_same_v<T, GridVx>,
+            GridVy,
+            std::conditional_t<std::is_same_v<T, GridVy>, GridVx, void>>;
 
     /**
      * @brief A templated type giving the spatial discretised dimension type associated to a velocity discretised dimension type.
