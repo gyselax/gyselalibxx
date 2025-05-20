@@ -121,7 +121,7 @@ auto create_mirror_view_and_copy_on_vector_space(
     } else {
         using IdxType = typename IdxRangeType::discrete_element_type;
         using CoordType = typename Mapping::CoordJacobian;
-        using CoordIdxType = find_idx_t<CoordType, IdxRangeType>;
+        using IdxJacobianType = find_idx_t<CoordType, IdxRangeType>;
         VectorFieldMem<
                 std::remove_const_t<ElementType>,
                 IdxRangeType,
@@ -133,7 +133,7 @@ auto create_mirror_view_and_copy_on_vector_space(
                 exec_space,
                 get_idx_range(vector_field),
                 KOKKOS_LAMBDA(IdxType idx) {
-                    CoordIdxType coord_idx(idx);
+                    IdxJacobianType coord_idx(idx);
                     CoordType coord = ddc::coordinate(coord_idx);
                     ddcHelper::assign_vector_field_element(
                             vector_field_out,
