@@ -803,7 +803,7 @@ TEST(PartialDerivative, CentralFDMPartialDerivativeWithBV)
 TEST(PartialDerivative, ConstantPartialDerivative)
 {
     const double val(3.5);
-    PartialDerivativeTestConstant<10, 10> const test(val);
+    PartialDerivativeTestConstant<10, 5> const test(val);
 
     // Partial Derivative in X direction
     EXPECT_DOUBLE_EQ(test.template compute_error<X>(), val);
