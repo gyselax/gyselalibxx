@@ -99,9 +99,8 @@ public:
                 batched_basis_idx_range(m_function_builder, batched_feet_idx_range));
 
         IdxRangeBatch batch_idx_range(idx_range);
-
         for (IdxSp const isp : sp_idx_range) {
-            DataType const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
+            //DataType const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
             ddc::parallel_for_each(
                     Kokkos::DefaultExecutionSpace(),
                     batch_idx_range,
@@ -109,7 +108,8 @@ public:
                         // compute the displacement
                         IdxV const iv(ib);
                         Coord<DimV> const coord_iv = ddc::coordinate(iv);
-                        DataType const dx = sqrt_me_on_mspecies * dt * coord_iv;
+                        //DataType const dx = sqrt_me_on_mspecies * dt * coord_iv;
+                        DataType const dx =  dt * coord_iv;
 
                         // compute the coordinates of the feet
                         for (IdxX const ix : x_idx_range) {
@@ -122,7 +122,6 @@ public:
                     get_const_field(feet_coords),
                     get_const_field(function_coefs_alloc));
         }
-
         Kokkos::Profiling::popRegion();
         return allfdistribu;
     }
