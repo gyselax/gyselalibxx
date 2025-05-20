@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "../mapping/geometry_coord_transformations_tests.hpp"
+#include "../coord_transformations/geometry_coord_transformations_tests.hpp"
 
 #include "circular_to_cartesian.hpp"
 #include "combined_mapping.hpp"
