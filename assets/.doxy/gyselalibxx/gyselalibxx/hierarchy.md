@@ -109,6 +109,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**KelvinHelmholtzInstabilityInitialisation**](classKelvinHelmholtzInstabilityInitialisation.md) _Initialise the allfdistribu function._ 
 * **class** [**Lagrange**](classLagrange.md) _A class which implements_ [_**Lagrange**_](classLagrange.md) _polynomials._
 * **class** [**LeviCivitaTensor**](classLeviCivitaTensor.md) 
+* **class** [**LiePoissonBracket**](classLiePoissonBracket.md) _A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is:_  _with_ _the unitary magnetic field, i.e:_ _with_ _the jacobian of the system,_ _the covariant components of b and_ _the Levi-Civita symbol._
 * **class** [**MatchingIdxSlice**](classMatchingIdxSlice.md) _Store the conforming indexes of each patch of a given interface._ 
 * **class** [**Matrix**](classMatrix.md) _The super class from which matrix classes should inherit. This class is used to solve matrix equations._     
     * **class** [**Matrix\_Banded**](classMatrix__Banded.md) _A matrix class representing a banded matrix._ 

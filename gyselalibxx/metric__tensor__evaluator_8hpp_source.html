@@ -597,6 +597,14 @@ public:
         return tensor_mul(index&lt;'i', 'j'&gt;(inv_J), index&lt;'k', 'j'&gt;(inv_J));
     }
 };
+
+namespace mapping_detail {
+template &lt;class Mapping, class PositionCoordinate, class ExecSpace&gt;
+struct MappingAccessibility&lt;ExecSpace, MetricTensorEvaluator&lt;Mapping, PositionCoordinate&gt;&gt;
+    : MappingAccessibility&lt;ExecSpace, Mapping&gt;
+{
+};
+} // namespace mapping_detail
 </code></pre></div>
               
             </div>

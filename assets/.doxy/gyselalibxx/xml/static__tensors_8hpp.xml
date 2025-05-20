@@ -5,6 +5,7 @@
     <includes local="no">ddc/ddc.hpp</includes>
     <includes refid="type__seq__tools_8hpp" local="yes">type_seq_tools.hpp</includes>
     <includes refid="vector__index__tools_8hpp" local="yes">vector_index_tools.hpp</includes>
+    <includedby refid="lie__poisson__bracket_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp</includedby>
     <incdepgraph>
       <node id="1">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp</label>
@@ -30,6 +31,18 @@
         <label>ddc/ddc.hpp</label>
       </node>
     </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp</label>
+        <link refid="static__tensors_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp</label>
+        <link refid="lie__poisson__bracket_8hpp_source"/>
+      </node>
+    </invincdepgraph>
     <innerclass refid="classIdentityTensor" prot="public">IdentityTensor</innerclass>
     <innerclass refid="classLeviCivitaTensor" prot="public">LeviCivitaTensor</innerclass>
     <innernamespace refid="namespaceddcHelper">ddcHelper</innernamespace>

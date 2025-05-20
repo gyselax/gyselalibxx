@@ -1089,7 +1089,7 @@
     <member refid="classGradient_1a22184971638dfd5c6b5a69909118f21f" kind="typedef"><name>DVectorFieldType</name></member>
     <member refid="classGradient_1a9648b8683142a384c35bbe571034afdb" kind="typedef"><name>DVectorFieldCovType</name></member>
     <member refid="classGradient_1a8c4dee3271b238efbdb603210affdc8b" kind="typedef"><name>DVectorConstFieldCovType</name></member>
-    <member refid="classGradient_1ad8996205b8fb9e102f7665a728a44159" kind="variable"><name>m_metric_tensor</name></member>
+    <member refid="classGradient_1adb51fa11ae19b2221fe6e45b8161ce16" kind="variable"><name>m_metric_tensor</name></member>
     <member refid="classGradient_1a089c6838004a0e19b761a4933ef0d034" kind="function"><name>Gradient</name></member>
     <member refid="classGradient_1a18b2e093f6d021c5297507d1f0a69394" kind="function"><name>operator()</name></member>
     <member refid="classGradient_1a1388160bf8e4ba98bc79760d4729d6ea" kind="function"><name>operator()</name></member>
@@ -1605,6 +1605,16 @@
     <member refid="classLeviCivitaTensor_1a9d2c687cdde551ff289df0020e0d5dc7" kind="function"><name>size</name></member>
     <member refid="classLeviCivitaTensor_1a9f9c8c9bbbbe3356be9837195a510b43" kind="function"><name>get</name></member>
     <member refid="classLeviCivitaTensor_1afdc799fa85d9418c2b5490feb24f948e" kind="function"><name>LeviCivitaTensor</name></member>
+  </compound>
+  <compound refid="classLiePoissonBracket" kind="class"><name>LiePoissonBracket</name>
+    <member refid="classLiePoissonBracket_1ad4f13fd2924cd042582abb251b766055" kind="typedef"><name>BasisSpatial</name></member>
+    <member refid="classLiePoissonBracket_1a76ca386b6c4baa90e13d482ae634cde4" kind="typedef"><name>CovBasisSpatial</name></member>
+    <member refid="classLiePoissonBracket_1a735e1114727601256ec766b1b171019f" kind="variable"><name>m_mapping</name></member>
+    <member refid="classLiePoissonBracket_1ad5e7f68495472c72bb4e2e1d9cee3bf9" kind="variable"><name>m_metric_tensor</name></member>
+    <member refid="classLiePoissonBracket_1aed5de814c919d1b2638cfab754b98d8f" kind="variable"><name>m_grad</name></member>
+    <member refid="classLiePoissonBracket_1aac0f5603dc34c4615f1800e49c120c5c" kind="function"><name>LiePoissonBracket</name></member>
+    <member refid="classLiePoissonBracket_1a8de77d77628c8ea4bd87f5f1b73e58f9" kind="function"><name>operator()</name></member>
+    <member refid="classLiePoissonBracket_1a8e2fab8a06f1669f7a73b598a5babf02" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classMatchingIdxSlice" kind="class"><name>MatchingIdxSlice</name>
     <member refid="classMatchingIdxSlice_1a6ae1a3ffc067ecc5a7a59a30ff2e2395" kind="typedef"><name>Patch1</name></member>
@@ -2882,13 +2892,13 @@
     <member refid="structY__pC_1a6274201b751e93509509253746e598c1" kind="variable"><name>IS_COVARIANT</name></member>
     <member refid="structY__pC_1a840b5d333654df4c5be30422ce8eeb28" kind="variable"><name>IS_CONTRAVARIANT</name></member>
   </compound>
-  <compound refid="namespace_0d206" kind="namespace"><name>@206</name>
+  <compound refid="namespace_0d207" kind="namespace"><name>@207</name>
   </compound>
-  <compound refid="namespace_0d208" kind="namespace"><name>@208</name>
+  <compound refid="namespace_0d209" kind="namespace"><name>@209</name>
   </compound>
-  <compound refid="namespace_0d210" kind="namespace"><name>@210</name>
+  <compound refid="namespace_0d211" kind="namespace"><name>@211</name>
   </compound>
-  <compound refid="namespace_0d212" kind="namespace"><name>@212</name>
+  <compound refid="namespace_0d213" kind="namespace"><name>@213</name>
   </compound>
   <compound refid="namespace_0d73" kind="namespace"><name>@73</name>
   </compound>
@@ -3776,6 +3786,8 @@
     <member refid="l__norm__tools_8hpp_1a27082a4ff6b4ad2c890a613983f6f287" kind="function"><name>error_norm_L1</name></member>
     <member refid="l__norm__tools_8hpp_1a14de4af65e74d5300abfafe870ef954b" kind="function"><name>norm_L2</name></member>
     <member refid="l__norm__tools_8hpp_1a67052dc8560915ab8cf2d26716926883" kind="function"><name>error_norm_L2</name></member>
+  </compound>
+  <compound refid="lie__poisson__bracket_8hpp" kind="file"><name>lie_poisson_bracket.hpp</name>
   </compound>
   <compound refid="math__tools_8hpp" kind="file"><name>math_tools.hpp</name>
     <member refid="math__tools_8hpp_1a84374f2ef799f6e7015d484b1eb77ac7" kind="function"><name>sum</name></member>

@@ -574,7 +574,7 @@ class Gradient
     template &lt;class IdxRange&gt;
     using DVectorConstFieldCovType = DVectorConstField&lt;IdxRange, Dims_cov&gt;;
 
-    MetricTensorType const&amp; m_metric_tensor;
+    MetricTensorType m_metric_tensor;
 
 public:
     explicit KOKKOS_FUNCTION Gradient(MetricTensorType const&amp; metric_tensor)
@@ -608,6 +608,7 @@ public:
             DVectorFieldType&lt;IdxRange&gt; const gradient,
             DVectorConstFieldCovType&lt;IdxRange&gt; const partial_derivatives) const
     {
+        static_assert(is_accessible_v&lt;Kokkos::DefaultExecutionSpace, MetricTensorType&gt;);
         using IdxType = typename IdxRange::discrete_element_type;
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),

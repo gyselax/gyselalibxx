@@ -10,6 +10,7 @@
 ```C++
 // SPDX-License-Identifier: MIT
 #pragma once
+#include "inverse_jacobian_matrix.hpp"
 
 template <class Curvilinear2DToCartesian, class Zeta, class Phi>
 class ToroidalToCylindrical

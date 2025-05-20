@@ -138,9 +138,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classGradient_1ad8996205b8fb9e102f7665a728a44159" prot="private" static="no" mutable="no">
-        <type>MetricTensorType const  &amp;</type>
-        <definition>MetricTensorType const&amp; Gradient&lt; MetricTensorType &gt;::m_metric_tensor</definition>
+      <memberdef kind="variable" id="classGradient_1adb51fa11ae19b2221fe6e45b8161ce16" prot="private" static="no" mutable="no">
+        <type>MetricTensorType</type>
+        <definition>MetricTensorType Gradient&lt; MetricTensorType &gt;::m_metric_tensor</definition>
         <argsstring></argsstring>
         <name>m_metric_tensor</name>
         <qualifiedname>Gradient::m_metric_tensor</qualifiedname>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="35" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="35" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="35" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="35" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -349,7 +349,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="118" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="118" bodyend="131"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="118" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="118" bodyend="132"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -367,7 +367,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="16" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="17" bodyend="132"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" line="16" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp" bodystart="17" bodyend="133"/>
     <listofallmembers>
       <member refid="classGradient_1a64e4e9fca6da517e2146ac091ed82fdc" prot="private" virt="non-virtual"><scope>Gradient</scope><name>CoordArg</name></member>
       <member refid="classGradient_1a797578524c97ebe981f62dab1975fa62" prot="private" virt="non-virtual"><scope>Gradient</scope><name>Dims</name></member>
@@ -378,7 +378,7 @@
       <member refid="classGradient_1a22184971638dfd5c6b5a69909118f21f" prot="private" virt="non-virtual"><scope>Gradient</scope><name>DVectorFieldType</name></member>
       <member refid="classGradient_1a46b3388d269d4812b86c0742d8ce2228" prot="private" virt="non-virtual"><scope>Gradient</scope><name>DVectorType</name></member>
       <member refid="classGradient_1a089c6838004a0e19b761a4933ef0d034" prot="public" virt="non-virtual"><scope>Gradient</scope><name>Gradient</name></member>
-      <member refid="classGradient_1ad8996205b8fb9e102f7665a728a44159" prot="private" virt="non-virtual"><scope>Gradient</scope><name>m_metric_tensor</name></member>
+      <member refid="classGradient_1adb51fa11ae19b2221fe6e45b8161ce16" prot="private" virt="non-virtual"><scope>Gradient</scope><name>m_metric_tensor</name></member>
       <member refid="classGradient_1a18b2e093f6d021c5297507d1f0a69394" prot="public" virt="non-virtual"><scope>Gradient</scope><name>operator()</name></member>
       <member refid="classGradient_1a1388160bf8e4ba98bc79760d4729d6ea" prot="public" virt="non-virtual"><scope>Gradient</scope><name>operator()</name></member>
       <member refid="classGradient_1a91c56b0cb7dc0ec63a708029db468ab4" prot="public" virt="non-virtual"><scope>Gradient</scope><name>operator()</name></member>

@@ -1,0 +1,308 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classLiePoissonBracket" kind="class" language="C++" prot="public">
+    <compoundname>LiePoissonBracket</compoundname>
+    <includes refid="lie__poisson__bracket_8hpp" local="no">lie_poisson_bracket.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Mapping3D</type>
+      </param>
+      <param>
+        <type>class MappingCoord</type>
+        <defval>typename Mapping3D::CoordArg</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classLiePoissonBracket_1ad4f13fd2924cd042582abb251b766055" prot="private" static="no">
+        <type>ddc::to_type_seq_t&lt; typename Mapping3D::CoordArg &gt;</type>
+        <definition>using LiePoissonBracket&lt; Mapping3D, MappingCoord &gt;::BasisSpatial =  ddc::to_type_seq_t&lt;typename Mapping3D::CoordArg&gt;</definition>
+        <argsstring></argsstring>
+        <name>BasisSpatial</name>
+        <qualifiedname>LiePoissonBracket::BasisSpatial</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classLiePoissonBracket_1a76ca386b6c4baa90e13d482ae634cde4" prot="private" static="no">
+        <type>get_covariant_dims_t&lt; BasisSpatial &gt;</type>
+        <definition>using LiePoissonBracket&lt; Mapping3D, MappingCoord &gt;::CovBasisSpatial =  get_covariant_dims_t&lt;BasisSpatial&gt;</definition>
+        <argsstring></argsstring>
+        <name>CovBasisSpatial</name>
+        <qualifiedname>LiePoissonBracket::CovBasisSpatial</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="34" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classLiePoissonBracket_1a735e1114727601256ec766b1b171019f" prot="private" static="no" mutable="no">
+        <type>Mapping3D</type>
+        <definition>Mapping3D LiePoissonBracket&lt; Mapping3D, MappingCoord &gt;::m_mapping</definition>
+        <argsstring></argsstring>
+        <name>m_mapping</name>
+        <qualifiedname>LiePoissonBracket::m_mapping</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="37" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classLiePoissonBracket_1ad5e7f68495472c72bb4e2e1d9cee3bf9" prot="private" static="no" mutable="no">
+        <type><ref refid="classMetricTensorEvaluator" kindref="compound">MetricTensorEvaluator</ref>&lt; Mapping3D, MappingCoord &gt;</type>
+        <definition>MetricTensorEvaluator&lt;Mapping3D, MappingCoord&gt; LiePoissonBracket&lt; Mapping3D, MappingCoord &gt;::m_metric_tensor</definition>
+        <argsstring></argsstring>
+        <name>m_metric_tensor</name>
+        <qualifiedname>LiePoissonBracket::m_metric_tensor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="38" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classLiePoissonBracket_1aed5de814c919d1b2638cfab754b98d8f" prot="private" static="no" mutable="no">
+        <type><ref refid="classGradient" kindref="compound">Gradient</ref>&lt; <ref refid="classMetricTensorEvaluator" kindref="compound">MetricTensorEvaluator</ref>&lt; Mapping3D, MappingCoord &gt; &gt;</type>
+        <definition>Gradient&lt;MetricTensorEvaluator&lt;Mapping3D, MappingCoord&gt; &gt; LiePoissonBracket&lt; Mapping3D, MappingCoord &gt;::m_grad</definition>
+        <argsstring></argsstring>
+        <name>m_grad</name>
+        <qualifiedname>LiePoissonBracket::m_grad</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="39" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classLiePoissonBracket_1aac0f5603dc34c4615f1800e49c120c5c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LiePoissonBracket&lt; Mapping3D, MappingCoord &gt;::LiePoissonBracket</definition>
+        <argsstring>(Mapping3D const &amp;mapping)</argsstring>
+        <name>LiePoissonBracket</name>
+        <qualifiedname>LiePoissonBracket::LiePoissonBracket</qualifiedname>
+        <param>
+          <type>Mapping3D const &amp;</type>
+          <declname>mapping</declname>
+        </param>
+        <briefdescription>
+<para>Build a <ref refid="classLiePoissonBracket" kindref="compound">LiePoissonBracket</ref> operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mapping describing the system of coordinates on which the expression is calculated. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="47" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="47" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classLiePoissonBracket_1a8de77d77628c8ea4bd87f5f1b73e58f9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double LiePoissonBracket&lt; Mapping3D, MappingCoord &gt;::operator()</definition>
+        <argsstring>(DTensor&lt; CovBasisSpatial &gt; const &amp;partial_derivatives_f, DTensor&lt; CovBasisSpatial &gt; const &amp;partial_derivatives_g, DTensor&lt; BasisSpatial &gt; const &amp;B, MappingCoord const &amp;coord) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>LiePoissonBracket::operator()</qualifiedname>
+        <param>
+          <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; CovBasisSpatial &gt; const &amp;</type>
+          <declname>partial_derivatives_f</declname>
+        </param>
+        <param>
+          <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; CovBasisSpatial &gt; const &amp;</type>
+          <declname>partial_derivatives_g</declname>
+        </param>
+        <param>
+          <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; BasisSpatial &gt; const &amp;</type>
+          <declname>B</declname>
+        </param>
+        <param>
+          <type>MappingCoord const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Compute the gyrokinetic Poisson bracket at a given coordinate, from the partial derivatives of the two fields, and the magnetic field. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">partial_derivatives_f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector containing the partial derivatives of the scalar field f expressed at the given coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">partial_derivatives_g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector containing the partial derivatives of the scalar field g expressed at the given coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">B</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector containing the magnetic field at the given coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where the calculation is carried out. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="65" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="65" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classLiePoissonBracket_1a8e2fab8a06f1669f7a73b598a5babf02" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ExecSpace</type>
+          </param>
+          <param>
+            <type>class IdxRange</type>
+          </param>
+          <param>
+            <type>class MemorySpace</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void LiePoissonBracket&lt; Mapping3D, MappingCoord &gt;::operator()</definition>
+        <argsstring>(ExecSpace exec_space, DField&lt; IdxRange, MemorySpace &gt; poisson_bracket, DVectorConstField&lt; IdxRange, CovBasisSpatial, MemorySpace &gt; const partial_derivatives_f, DVectorConstField&lt; IdxRange, CovBasisSpatial, MemorySpace &gt; const partial_derivatives_g, DVectorConstField&lt; IdxRange, BasisSpatial, MemorySpace &gt; const B)</argsstring>
+        <name>operator()</name>
+        <qualifiedname>LiePoissonBracket::operator()</qualifiedname>
+        <param>
+          <type>ExecSpace</type>
+          <declname>exec_space</declname>
+        </param>
+        <param>
+          <type>DField&lt; IdxRange, MemorySpace &gt;</type>
+          <declname>poisson_bracket</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">DVectorConstField</ref>&lt; IdxRange, CovBasisSpatial, MemorySpace &gt; const</type>
+          <declname>partial_derivatives_f</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">DVectorConstField</ref>&lt; IdxRange, CovBasisSpatial, MemorySpace &gt; const</type>
+          <declname>partial_derivatives_g</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">DVectorConstField</ref>&lt; IdxRange, BasisSpatial, MemorySpace &gt; const</type>
+          <declname>B</declname>
+        </param>
+        <briefdescription>
+<para>Compute the gyrokinetic Poisson bracket at every point on a grid from the partial derivatives of the fields f and g, and the magnetic field. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">exec_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The space (CPU/GPU) where the calculation should be executed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">poisson_bracket</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The result of the calculation of the gyrokinetic Poisson bracket at every point on a grid. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">partial_derivatives_f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector field containing the partial derivatives of f at each point on the grid. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">partial_derivatives_g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector field containing the partial derivatives of f at each point on the grid. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">B</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector field describing the magnetic field. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="97" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="97" bodyend="117"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is: <formula id="313">$ \{F, G\} = b\dot(\nabla F \cross \nabla G) $</formula> with <formula id="314">$ b= \mathbf{B} / B $</formula> the unitary magnetic field, i.e: <formula id="315">$ \{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k $</formula> with <formula id="316">$ {\cal J}_{\rm x} $</formula> the jacobian of the system, <formula id="317">$ b_k $</formula> the covariant components of b and <formula id="318">$\epsilon^{ijk} $</formula> the Levi-Civita symbol. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Mapping3D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A type representing a mapping in 3 dimensions. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>MappingCoord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the coordinate that will be used to evaluate the mapping. This coordinate is used to calculate the determinant of the Jacobian and the metric tensor. It is almost always equal to the argument type of the 3D mapping but axi-symmetry may make it useful to evaluate the mapping on a coordinate with a reduced dimensionality. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="29" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="30" bodyend="118"/>
+    <listofallmembers>
+      <member refid="classLiePoissonBracket_1ad4f13fd2924cd042582abb251b766055" prot="private" virt="non-virtual"><scope>LiePoissonBracket</scope><name>BasisSpatial</name></member>
+      <member refid="classLiePoissonBracket_1a76ca386b6c4baa90e13d482ae634cde4" prot="private" virt="non-virtual"><scope>LiePoissonBracket</scope><name>CovBasisSpatial</name></member>
+      <member refid="classLiePoissonBracket_1aac0f5603dc34c4615f1800e49c120c5c" prot="public" virt="non-virtual"><scope>LiePoissonBracket</scope><name>LiePoissonBracket</name></member>
+      <member refid="classLiePoissonBracket_1aed5de814c919d1b2638cfab754b98d8f" prot="private" virt="non-virtual"><scope>LiePoissonBracket</scope><name>m_grad</name></member>
+      <member refid="classLiePoissonBracket_1a735e1114727601256ec766b1b171019f" prot="private" virt="non-virtual"><scope>LiePoissonBracket</scope><name>m_mapping</name></member>
+      <member refid="classLiePoissonBracket_1ad5e7f68495472c72bb4e2e1d9cee3bf9" prot="private" virt="non-virtual"><scope>LiePoissonBracket</scope><name>m_metric_tensor</name></member>
+      <member refid="classLiePoissonBracket_1a8de77d77628c8ea4bd87f5f1b73e58f9" prot="public" virt="non-virtual"><scope>LiePoissonBracket</scope><name>operator()</name></member>
+      <member refid="classLiePoissonBracket_1a8e2fab8a06f1669f7a73b598a5babf02" prot="public" virt="non-virtual"><scope>LiePoissonBracket</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

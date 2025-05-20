@@ -195,6 +195,7 @@ Here is a list of all files with brief descriptions:
         * **file** [**gradient.hpp**](gradient_8hpp.md)     
         * **file** [**ipartial\_derivative.hpp**](ipartial__derivative_8hpp.md)     
         * **file** [**l\_norm\_tools.hpp**](l__norm__tools_8hpp.md)     
+        * **file** [**lie\_poisson\_bracket.hpp**](lie__poisson__bracket_8hpp.md)     
         * **file** [**math\_tools.hpp**](math__tools_8hpp.md)     
         * **file** [**spline\_1d\_partial\_derivative.hpp**](spline__1d__partial__derivative_8hpp.md)     
         * **file** [**spline\_2d\_partial\_derivative.hpp**](spline__2d__partial__derivative_8hpp.md)     

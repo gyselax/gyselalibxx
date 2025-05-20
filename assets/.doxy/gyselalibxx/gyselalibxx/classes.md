@@ -302,6 +302,7 @@
 * [**Lagrange**](classLagrange.md)
 * [**LagrangeInterpolator**](classLagrangeInterpolator.md)
 * [**LeviCivitaTensor**](classLeviCivitaTensor.md)
+* [**LiePoissonBracket**](classLiePoissonBracket.md)
 
 
 ## m
