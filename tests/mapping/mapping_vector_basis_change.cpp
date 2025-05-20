@@ -156,9 +156,13 @@ TEST(MappingChange, VectorFieldChange)
             get_field(polar_vector_field));
 
     ddc::for_each(idx_range, [&](Idx<Species, GridR, GridTheta> idx) {
+        CoordRTheta coord = ddc::coordinate(IdxRTheta(idx));
+        Tensor J = mapping.inv_jacobian_matrix(coord);
         double r_vec = ddcHelper::get<R>(polar_vector_field_host)(idx);
         double theta_vec = ddcHelper::get<Theta>(polar_vector_field_host)(idx);
-        EXPECT_NEAR(r_vec, std::sqrt(2), 1e-14);
-        EXPECT_NEAR(theta_vec, 0.0, 1e-14);
+        double expected_r_vec = ddcHelper::get<R, X>(J) + ddcHelper::get<R, Y>(J);
+        double expected_theta_vec = ddcHelper::get<Theta, X>(J) + ddcHelper::get<Theta, Y>(J);
+        EXPECT_NEAR(r_vec, expected_r_vec, 1e-14);
+        EXPECT_NEAR(theta_vec, expected_theta_vec, 1e-14);
     });
 }
