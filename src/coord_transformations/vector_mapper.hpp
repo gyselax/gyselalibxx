@@ -100,10 +100,12 @@ KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
  * @brief A helper method to get a vector field on a different vector space.
  *
  * @param[in] exec_space The space on which the function is executed (CPU/GPU).
- * @param[in] vector_field The vector field to be mapped to the new vector space.
+ * @param[in] vector_field_out The vector field where the vectors on the new vector
+ *              space should be saved.
  * @param[in] mapping A mapping describing the relation between the 2 vector
  *              spaces (or describing the relation between the vector space and
  *              the Cartesian space if a change of variance is required.
+ * @param[in] vector_field The vector field to be mapped to the new vector space.
  *
  * @returns A VectorField or VectorFieldMem containing the vectors in the
  *      requested vector space.
