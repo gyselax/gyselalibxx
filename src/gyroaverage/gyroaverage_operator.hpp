@@ -10,7 +10,7 @@ namespace detail {
  *
  * This class performs the gyroaveraging operation on a batched field defined on a polar grid (r, theta).
  * The gyroaverage is computed by integrating the field over a set of points along a circle (the Larmor orbit)
- * centered at each grid point, with radius given by the local Larmor radius field (rho_L).
+ * centred at each grid point, with radius given by the local Larmor radius field (rho_L).
  *
  * The class uses 2D B-spline interpolation to evaluate the field at off-grid points along the orbit.
  * The operation is performed in parallel over the (r, theta) grid.
@@ -108,7 +108,7 @@ public:
      * @brief Applies the gyroaverage operator to a batched field.
      *
      * For each batch, and for each (r, theta) grid point, computes the gyroaverage by
-     * integrating the field along a circle of radius rho_L centered at (r, theta).
+     * integrating the field along a circle of radius rho_L centred at (r, theta).
      * The field is interpolated at off-grid points using 2D B-splines.
      *
      * @tparam CoordinateTransformFunction
