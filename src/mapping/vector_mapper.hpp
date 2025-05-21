@@ -140,6 +140,6 @@ auto create_mirror_view_and_copy_on_vector_space(
                             idx,
                             to_vector_space<OutVectorSpace>(mapping, coord, vector_field(idx)));
                 });
-        return vector_field_out;
+        return vector_field_out_alloc;
     }
 }
