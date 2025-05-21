@@ -85,7 +85,9 @@ You can use the toolchains like so:
 cmake -B build -DCMAKE_TOOLCHAIN_FILE=toolchains/<FOLDER>/<CONFIG>.cmake .
 ```
 
-Kokkos options are one notable reason for the machine dependency. The correct backend must be activated to benefit from the acceleration available on the machine. In order to ensure that the best optimisation flags are used, a `toolchain.cmake` file is provided for each cluster. When using a local installation, or when a non-optimised compilation is wanted (e.g. a debug compilation) a less specific toolchain can be used. You can find common toolchain choices in the folder `toolchains/common_toolchains`
+Kokkos options are one notable reason for the machine dependency. The correct backend must be activated to benefit from the acceleration available on the machine. In order to ensure that the best optimisation flags are used, a `toolchain.cmake` file is provided for each cluster. When using a local installation, or when a non-optimised compilation is wanted (e.g. a debug compilation) a less specific toolchain can be used. You can find common toolchain choices in the folder `toolchains/common_toolchains`.
+
+:warning: Developers are advised to work with a debug configuration. It is usually simpler to begin with a serial debug configuration and only move onto more complex configurations (e.g. machine specific GPU debug configuration) once the CPU version is working. Serial configurations are found in the folder `toolchains/common_toolchains`.
 
 ## Running Tests
 
