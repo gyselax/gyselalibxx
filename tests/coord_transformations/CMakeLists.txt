@@ -18,6 +18,7 @@ target_link_libraries(unit_tests_coord_transformations
         GTest::gtest
         GTest::gmock
         gslx::coord_transformations
+        gslx::speciesinfo
         gslx::utils
 )
 gtest_discover_tests(unit_tests_coord_transformations DISCOVERY_MODE PRE_TEST)

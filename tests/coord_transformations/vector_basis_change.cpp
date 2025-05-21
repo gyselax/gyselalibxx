@@ -5,7 +5,7 @@
 
 #include "cartesian_to_circular.hpp"
 #include "circular_to_cartesian.hpp"
-#include "geometry_mapping_tests.hpp"
+#include "geometry_coord_transformations_tests.hpp"
 #include "mesh_builder.hpp"
 #include "species_info.hpp"
 #include "vector_mapper.hpp"
