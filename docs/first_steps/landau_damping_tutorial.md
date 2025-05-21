@@ -580,7 +580,7 @@ The PDI configuration for the simulation output is located at:
 simulations/geometryXVx/landau/pdi_out.yml.hpp
 ```
 
-The simulation can be built using the usual commands to build the library. See [Compilation](../toolchains/README.md#compilation) for more details:
+The simulation can be built using the usual commands to build the library. See [Compilation](../../toolchains/README.md#compilation) for more details:
 
 You can then generate an example yaml file:
 
