@@ -128,6 +128,9 @@ void copy_to_vector_space(
                 typename ExecSpace::memory_space,
                 LayoutStridedPolicy> vector_field)
 {
+    using IdxType = typename IdxRangeType::discrete_element_type;
+    using CoordType = typename Mapping::CoordJacobian;
+    using IdxJacobianType = find_idx_t<CoordType, IdxRangeType>;
     ddc::parallel_for_each(
             exec_space,
             get_idx_range(vector_field),
@@ -180,9 +183,6 @@ auto create_mirror_view_and_copy_on_vector_space(
     if constexpr (std::is_same_v<InVectorSpace, OutVectorSpace>) {
         return vector_field;
     } else {
-        using IdxType = typename IdxRangeType::discrete_element_type;
-        using CoordType = typename Mapping::CoordJacobian;
-        using IdxJacobianType = find_idx_t<CoordType, IdxRangeType>;
         VectorFieldMem<
                 std::remove_const_t<ElementType>,
                 IdxRangeType,
@@ -192,8 +192,8 @@ auto create_mirror_view_and_copy_on_vector_space(
         copy_to_vector_space(
                 exec_space,
                 get_field(vector_field_out),
-                get_const_field(vector_field),
-                mapping);
+                mapping,
+                get_const_field(vector_field));
         return vector_field_out;
     }
 }
