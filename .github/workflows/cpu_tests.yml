@@ -21,10 +21,10 @@ on:
         required: true
         type: choice
         options:
-          - tests_toolchain
-          - tests_release_toolchain
-          - tests_release_omp_toolchain
-          - tests_coverage_toolchain
+          - serial_debug_toolchain
+          - serial_release_toolchain
+          - openmp_release_toolchain
+          - ci_coverage_toolchain
       merge_target:
         description: "The branch to which this branch should be compared to filter out costly tests (default: devel)"
         required: false
@@ -50,11 +50,11 @@ jobs:
         uses: ./.github/actions/duplicate_check
       - if: github.event_name != 'workflow_dispatch' && github.event_name != 'push'
         run: |
-          echo "matrix=['tests_toolchain', 'tests_release_toolchain', 'tests_release_omp_toolchain', 'tests_coverage_toolchain']" >> $GITHUB_ENV
+          echo "matrix=['serial_debug_toolchain', 'serial_release_toolchain', 'openmp_release_toolchain', 'ci_coverage_toolchain']" >> $GITHUB_ENV
         shell: bash
       - if: github.event_name == 'push'
         run: |
-          echo "matrix=['tests_coverage_toolchain']" >> $GITHUB_ENV
+          echo "matrix=['ci_coverage_toolchain']" >> $GITHUB_ENV
         shell: bash
       - if: github.event_name == 'workflow_dispatch'
         run: |
@@ -95,10 +95,10 @@ jobs:
             c_compiler: 'clang'
             cxx_compiler: 'clang++'
         exclude:
-          - toolchain: 'tests_coverage_toolchain'
+          - toolchain: 'ci_coverage_toolchain'
             compiler:
               name: 'clang'
-          - toolchain: 'tests_release_omp_toolchain' # Clang + OpenMP leads to compiler failure with Clang 14.0.0
+          - toolchain: 'openmp_release_toolchain' # Clang + OpenMP leads to compiler failure with Clang 14.0.0
             compiler:
               name: 'clang'
       fail-fast: false
@@ -122,12 +122,12 @@ jobs:
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/build_code
         with:
-          toolchain: toolchains/docker.gyselalibxx_env/${{ matrix.toolchain }}.cmake
+          toolchain: toolchains/common_toolchains/${{ matrix.toolchain }}.cmake
       - name: Run tests
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/run_tests
       - name: Check Test Coverage
-        if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'tests_coverage_toolchain'
+        if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'ci_coverage_toolchain'
         run: |
           pip install gcovr
           gcovr --filter src --lcov coverage.lcov --merge-mode-functions=merge-use-line-0 build
@@ -136,7 +136,7 @@ jobs:
           sed '/^BRH:/d' -i coverage.lcov
           sed '/^BRF:/d' -i coverage.lcov
       - name: Archive code coverage results
-        if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'tests_coverage_toolchain'
+        if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'ci_coverage_toolchain'
         uses: actions/upload-artifact@v4
         with:
           name: code-coverage-report
@@ -146,7 +146,7 @@ jobs:
     name: Coverage upload
     needs: [pre_job, cpu_tests]
     runs-on: ubuntu-latest
-    if: (github.event_name != 'workflow_dispatch' || inputs.toolchain == 'tests_coverage_toolchain') && needs.pre_job.outputs.should_skip == 'false'
+    if: (github.event_name != 'workflow_dispatch' || inputs.toolchain == 'ci_coverage_toolchain') && needs.pre_job.outputs.should_skip == 'false'
     steps:
       - name: Checkout gyselalibxx
         uses: actions/checkout@v4
