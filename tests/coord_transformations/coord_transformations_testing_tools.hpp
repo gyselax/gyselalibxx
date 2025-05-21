@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
+
 template <class GridR, class GridTheta>
 auto get_example_coords(IdxStep<GridR> r_ncells, IdxStep<GridTheta> theta_ncells)
 {
