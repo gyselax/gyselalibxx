@@ -14,3 +14,4 @@ fi
 
 spack load gcc@12
 spack env activate gyselalibxx-env-omp
+export OMP_NUM_THREADS=16
