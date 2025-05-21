@@ -79,7 +79,7 @@ using DFieldRTheta = Field<double, IdxRangeRTheta>;
 using DFieldRThetaBatch = Field<double, IdxRangeRThetaBatch>;
 
 template <typename Field2DType, typename Field3DType>
-void initialize(
+void initialise(
         Field2DType const& Rcoord,
         Field2DType const& Zcoord,
         Field2DType const& rho_L,
@@ -92,7 +92,7 @@ void initialize(
 {
     IdxRangeRTheta const rtheta_mesh = get_idx_range<GridR, GridTheta>(A);
 
-    // Initialize R, Z and rho_L
+    // Initialise R, Z and rho_L
     ddc::parallel_for_each(
             rtheta_mesh,
             KOKKOS_LAMBDA(IdxRTheta const irtheta) {
@@ -108,7 +108,7 @@ void initialize(
                 rho_L(ir, itheta) = gyroradius / Kokkos::sqrt(B / B0);
             });
 
-    // Initialize A with Fourier mode
+    // Initialise A with Fourier mode
     IdxRangeRThetaBatch const rthetabatch_mesh = get_idx_range<GridR, GridTheta, GridBatch>(A);
     ddc::parallel_for_each(
             rthetabatch_mesh,
@@ -144,7 +144,7 @@ protected:
         // Number of discretization points in the R dimension
         std::size_t const nb_r_points = 200;
 
-        // Initialization of the global domain in R
+        // Initialisation of the global domain in R
         ddc::init_discrete_space<BSplinesR>(CoordR(r_start), CoordR(r_end), nb_r_points);
         ddc::init_discrete_space<GridR>(SplineInterpPointsR::get_sampling<GridR>());
 
@@ -157,7 +157,7 @@ protected:
         // Number of discretization points in the Theta dimension
         std::size_t const nb_theta_points = 200;
 
-        // Initialization of the global domain in Theta
+        // Initialisation of the global domain in Theta
         ddc::init_discrete_space<
                 BSplinesTheta>(CoordTheta(theta_start), CoordTheta(theta_end), nb_theta_points);
         ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
@@ -172,7 +172,7 @@ protected:
         // Number of discretization points in the batch dimension
         std::size_t const nb_batch_points = 2;
 
-        // Initialization of the global domain in batch
+        // Initialisation of the global domain in batch
         auto const batch_domain = ddc::init_discrete_space<GridBatch>(GridBatch::init<GridBatch>(
                 ddc::Coordinate<Batch>(batch_start),
                 ddc::Coordinate<Batch>(batch_end),
@@ -189,7 +189,7 @@ protected:
         m_A_alloc = DFieldMemRThetaBatch(rthetabatch_mesh, ddc::DeviceAllocator<double>());
         m_A_bar_alloc = DFieldMemRThetaBatch(rthetabatch_mesh, ddc::DeviceAllocator<double>());
 
-        // Initialize R, Z and rho_L
+        // Initialise R, Z and rho_L
         DFieldRTheta Rcoord = get_field(m_Rcoord_alloc);
         DFieldRTheta Zcoord = get_field(m_Zcoord_alloc);
         DFieldRTheta rho_L = get_field(m_rho_L_alloc);
@@ -197,7 +197,7 @@ protected:
         m_kx = m_kperp * 1.0 / Kokkos::sqrt(2.0);
         m_ky = m_kx;
         DFieldRThetaBatch A = get_field(m_A_alloc);
-        initialize(Rcoord, Zcoord, rho_L, A, m_B0, m_R0, m_gyroradius, m_kx, m_ky);
+        initialise(Rcoord, Zcoord, rho_L, A, m_B0, m_R0, m_gyroradius, m_kx, m_ky);
     }
 
 protected:
@@ -332,7 +332,7 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
     });
 }
 
-// Parameterization over Larmor radius
+// Parameterisation over Larmor radius
 INSTANTIATE_TEST_SUITE_P(
         GyroAverageCircular,
         GyroAverageCircularParamTests,
