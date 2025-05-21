@@ -101,7 +101,7 @@ bibliography: paper.bib
 
 Gyselalib++ provides the mathematical building blocks to construct gyrokinetic plasma simulations in C++, simulating a distribution function discretised in phase space on a fixed grid.
 It relies on the DDC library[@ddc] to statically type the discretisation dimensions; thus preventing many common sources of errors.
-Via DDC, Gyselalib++ also leverages the Kokkos framework, ensuring portability across both CPU and various GPU architectures.
+Via DDC, Gyselalib++ also leverages the Kokkos framework[@trott2022], ensuring portability across both CPU and various GPU architectures.
 The library provides a variety of tools including semi-Lagrangian advection operators, solvers for partial differential equations (PDEs), quadrature rules, and time steppers.
 All operators are designed to function correctly or raise compiler errors on non-orthonormal coordinate systems thanks to the static typing.
 
@@ -109,8 +109,9 @@ All operators are designed to function correctly or raise compiler errors on non
 
 Plasma simulations are essential for the development of magnetic confinement fusion devices for energy production.
 The low collisionality of such plasmas make kinetic models a judicious choice.
-In particular gyrokinetic theory[@brizard2007; @krommes2012], which reduces the 6D problem to a 5D problem by removing high frequency dynamics, is a popular tool for such simlations [@garbet2010].
+In particular gyrokinetic theory[@brizard2007; @krommes2012], which reduces the 6D problem to a 5D problem by removing high frequency dynamics, is a popular tool for such simulations [@garbet2010].
 Despite the reduction in dimensionality such simulations still require massively powerful high-performance computing (HPC) resources.
+For ITER-sized simulations, exa-scale resources would still be required.
 
 The most popular numerical methods for such simulations are particle-in-cell (PIC) methods and Eulerian methods, however both methods have inherent disadvantages.
 PIC methods are limited by numerical noise which, without complex noise reduction techniques, is only slowly attenuated $1 / \sqrt{N}$ as resource usage is increased.
@@ -144,5 +145,6 @@ This work has been carried out within the framework of the EUROfusion Consortium
 Views and opinions expressed are those of the author(s) only and do not necessarily reflect those of the European Union or the European Commission.
 Neither the European Union nor the European Commission can be held responsible for them.
 Emily Bourne’s salary was paid for by the EUROfusion Advanced Computing Hub (ACH).
+This project was provided with computer and storage resources by GENCI CINES thanks to the grant 2024-A0160502224 on the supercomputer  on the supercomputer Adastra’s the GENOA partition.
 
 ## References
