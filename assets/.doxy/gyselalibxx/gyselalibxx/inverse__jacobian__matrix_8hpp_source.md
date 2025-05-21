@@ -2,7 +2,7 @@
 
 # File inverse\_jacobian\_matrix.hpp
 
-[**File List**](files.md) **>** [**mapping**](dir_5300298560c4bf255ab9f36681603d89.md) **>** [**inverse\_jacobian\_matrix.hpp**](inverse__jacobian__matrix_8hpp.md)
+[**File List**](files.md) **>** [**coord\_transformations**](dir_67161c4ffadea73fddf46ea451c2f62c.md) **>** [**inverse\_jacobian\_matrix.hpp**](inverse__jacobian__matrix_8hpp.md)
 
 [Go to the documentation of this file](inverse__jacobian__matrix_8hpp.md)
 
@@ -11,8 +11,8 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include "coord_transformation_tools.hpp"
 #include "ddc_aliases.hpp"
-#include "mapping_tools.hpp"
 #include "math_tools.hpp"
 #include "view.hpp"
 

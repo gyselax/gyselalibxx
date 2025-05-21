@@ -185,5 +185,5 @@ inline void VectorMapper< VectorIndexSet< XIn, YIn >, VectorIndexSet< XOut, YOut
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/vector_mapper.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp`
 

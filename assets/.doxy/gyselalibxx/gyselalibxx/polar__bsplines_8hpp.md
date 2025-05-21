@@ -15,9 +15,9 @@
 * `#include <ddc/ddc.hpp>`
 * `#include "bernstein.hpp"`
 * `#include "cartesian_to_barycentric.hpp"`
+* `#include "coord_transformation_tools.hpp"`
 * `#include "ddc_helper.hpp"`
 * `#include "discrete_to_cartesian.hpp"`
-* `#include "mapping_tools.hpp"`
 * `#include "polar_spline.hpp"`
 * `#include "view.hpp"`
 

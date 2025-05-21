@@ -3,10 +3,10 @@
   <compounddef id="metric__tensor__evaluator_8hpp" kind="file" language="C++">
     <compoundname>metric_tensor_evaluator.hpp</compoundname>
     <includes local="no">type_traits</includes>
+    <includes refid="coord__transformation__tools_8hpp" local="yes">coord_transformation_tools.hpp</includes>
     <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
     <includes refid="indexed__tensor_8hpp" local="yes">indexed_tensor.hpp</includes>
     <includes refid="inverse__jacobian__matrix_8hpp" local="yes">inverse_jacobian_matrix.hpp</includes>
-    <includes refid="mapping__tools_8hpp" local="yes">mapping_tools.hpp</includes>
     <includes refid="tensor_8hpp" local="yes">tensor.hpp</includes>
     <includes refid="vector__index__tools_8hpp" local="yes">vector_index_tools.hpp</includes>
     <includes refid="view_8hpp" local="yes">view.hpp</includes>
@@ -16,120 +16,14 @@
     <includedby refid="lie__poisson__bracket_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp</includedby>
     <includedby refid="polarpoissonlikesolver_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</includedby>
     <incdepgraph>
-      <node id="6">
-        <label>indexed_tensor.hpp</label>
-        <link refid="indexed__tensor_8hpp"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-      </node>
-      <node id="7">
-        <label>tensor.hpp</label>
-        <link refid="tensor_8hpp_source"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
+      <node id="3">
+        <label>coord_transformation_tools.hpp</label>
+        <link refid="coord__transformation__tools_8hpp_source"/>
         <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-      </node>
-      <node id="10">
-        <label>tensor_index_tools.hpp</label>
-        <link refid="tensor__index__tools_8hpp_source"/>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-      </node>
-      <node id="22">
-        <label>vector_field.hpp</label>
-        <link refid="vector__field_8hpp_source"/>
-        <childnode refid="23" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="24" relation="include">
-        </childnode>
-        <childnode refid="25" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-      </node>
-      <node id="26">
-        <label>vector_field_common.hpp</label>
-        <link refid="vector__field__common_8hpp_source"/>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-      </node>
-      <node id="25">
-        <label>vector_field_mem.hpp</label>
-        <link refid="vector__field__mem_8hpp_source"/>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="23" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="24" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-      </node>
-      <node id="12">
-        <label>vector_index_tools.hpp</label>
-        <link refid="vector__index__tools_8hpp_source"/>
-        <childnode refid="4" relation="include">
-        </childnode>
-      </node>
-      <node id="13">
-        <label>inverse_jacobian_matrix.hpp</label>
-        <link refid="inverse__jacobian__matrix_8hpp_source"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-      </node>
-      <node id="14">
-        <label>mapping_tools.hpp</label>
-        <link refid="mapping__tools_8hpp_source"/>
-        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-      </node>
-      <node id="1">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp</label>
-        <link refid="metric__tensor__evaluator_8hpp"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
@@ -137,11 +31,117 @@
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
+      </node>
+      <node id="18">
+        <label>inverse_jacobian_matrix.hpp</label>
+        <link refid="inverse__jacobian__matrix_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp</label>
+        <link refid="metric__tensor__evaluator_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>indexed_tensor.hpp</label>
+        <link refid="indexed__tensor_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>tensor.hpp</label>
+        <link refid="tensor_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>tensor_index_tools.hpp</label>
+        <link refid="tensor__index__tools_8hpp_source"/>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>vector_field.hpp</label>
+        <link refid="vector__field_8hpp_source"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>vector_field_common.hpp</label>
+        <link refid="vector__field__common_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>vector_field_mem.hpp</label>
+        <link refid="vector__field__mem_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>vector_index_tools.hpp</label>
+        <link refid="vector__index__tools_8hpp_source"/>
+        <childnode refid="8" relation="include">
         </childnode>
       </node>
       <node id="19">
@@ -151,13 +151,13 @@
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
@@ -167,77 +167,77 @@
         <link refid="ddc__alias__inline__functions_8hpp_source"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="3" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="3">
+      <node id="9">
         <label>ddc_aliases.hpp</label>
         <link refid="ddc__aliases_8hpp_source"/>
-        <childnode refid="4" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="24">
         <label>ddc_helper.hpp</label>
         <link refid="ddc__helper_8hpp_source"/>
-        <childnode refid="9" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="3" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>type_seq_tools.hpp</label>
         <link refid="type__seq__tools_8hpp_source"/>
       </node>
-      <node id="16">
+      <node id="14">
         <label>view.hpp</label>
         <link refid="view_8hpp_source"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="16">
         <label>Kokkos_Core.hpp</label>
       </node>
       <node id="20">
         <label>algorithm</label>
       </node>
-      <node id="8">
+      <node id="4">
         <label>array</label>
       </node>
-      <node id="9">
+      <node id="7">
         <label>cassert</label>
       </node>
       <node id="21">
         <label>cmath</label>
       </node>
-      <node id="4">
+      <node id="8">
         <label>ddc/ddc.hpp</label>
       </node>
-      <node id="5">
+      <node id="10">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="17">
+      <node id="15">
         <label>ostream</label>
       </node>
       <node id="2">
         <label>type_traits</label>
       </node>
-      <node id="15">
+      <node id="5">
         <label>utility</label>
       </node>
     </incdepgraph>
@@ -250,6 +250,20 @@
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp</label>
+        <link refid="metric__tensor__evaluator_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
       <node id="6">
@@ -283,20 +297,6 @@
       <node id="5">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp</label>
         <link refid="bsl__predcorr__second__order__implicit_8hpp_source"/>
-      </node>
-      <node id="1">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp</label>
-        <link refid="metric__tensor__evaluator_8hpp"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
       </node>
       <node id="7">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp</label>
@@ -333,10 +333,10 @@
 <codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;type_traits&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="4"><highlight class="normal"></highlight></codeline>
-<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="indexed__tensor_8hpp" kindref="compound">indexed_tensor.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;inverse_jacobian_matrix.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;mapping_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;coord_transformation_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="indexed__tensor_8hpp" kindref="compound">indexed_tensor.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;inverse_jacobian_matrix.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;tensor.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_index_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;view.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
@@ -396,6 +396,6 @@
 <codeline lineno="98"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="99"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>mapping_detail</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp"/>
   </compounddef>
 </doxygen>

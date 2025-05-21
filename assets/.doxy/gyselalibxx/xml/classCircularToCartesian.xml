@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="47" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="47" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="47" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCircularToCartesian_1ac5171ea2a53d148012365e778c790726" prot="public" static="no">
         <type><ref refid="structY" kindref="compound">Y</ref></type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="49" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="49" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="49" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCircularToCartesian_1a85920bf056d72b2afd47bbf270fc3ab7" prot="public" static="no">
         <type><ref refid="structR" kindref="compound">R</ref></type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="51" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCircularToCartesian_1ad391094efa9fde76191826ee2bf7fdd7" prot="public" static="no">
         <type><ref refid="structTheta" kindref="compound">Theta</ref></type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="53" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCircularToCartesian_1aab7b6b6c27724e574dbe848135fd4516" prot="public" static="no">
         <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="56" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="56" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="56" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCircularToCartesian_1a8a4853559a7c6034072c69e1fcf64d59" prot="public" static="no">
         <type>Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="58" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="58" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="58" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCircularToCartesian_1a0dbf19e168e992efee5cb955ba4c2eeb" prot="public" static="no">
         <type><ref refid="classCircularToCartesian_1aab7b6b6c27724e574dbe848135fd4516" kindref="member">CoordArg</ref></type>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="60" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="60" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="60" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCircularToCartesian_1acb13de22eb215b860dfed57b2dfe96a3" prot="public" static="no">
         <type>typename <ref refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" kindref="member">X::Dual</ref></type>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="63" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCircularToCartesian_1aa8fd7fc7b680f23dfd45e37f3de75ff8" prot="public" static="no">
         <type>typename <ref refid="structY_1aad98c6afa465f3fb654029648420df1f" kindref="member">Y::Dual</ref></type>
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="65" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="65" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="65" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCircularToCartesian_1a35f4f63e3d95fdffec7f9ba69d384c85" prot="public" static="no">
         <type>typename <ref refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kindref="member">R::Dual</ref></type>
@@ -166,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="67" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="67" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="67" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="67" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCircularToCartesian_1a11728cf484228e3530ab90bfe831895f" prot="public" static="no">
         <type>typename <ref refid="structTheta_1a1f99557f831a14c03c9d03e1a5e33d40" kindref="member">Theta::Dual</ref></type>
@@ -181,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="69" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="69" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -197,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="72" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="72" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="72" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classCircularToCartesian_1a88c0b13f799d60c9e9f28605924e2162" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -211,7 +211,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="73" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="73" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="73" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="73" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -256,7 +256,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="82" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="82" bodyend="86"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="82" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="82" bodyend="86"/>
       </memberdef>
       <memberdef kind="function" id="classCircularToCartesian_1ac39d088e0e162abe4653e3646a1a127b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>KOKKOS_DEFAULTED_FUNCTION</type>
@@ -285,7 +285,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="94" column="31"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="94" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classCircularToCartesian_1aa3817016c3dfae92ba0d48248eff156d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -314,7 +314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="102" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="102" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classCircularToCartesian_1a110dc0c6d1d97b270dac8810d3219d1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>KOKKOS_DEFAULTED_FUNCTION</type>
@@ -328,7 +328,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="104" column="31"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="104" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classCircularToCartesian_1a64c96bba014d3d4dd7e8a61cb39a3760" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classCircularToCartesian" kindref="compound">CircularToCartesian</ref> &amp;</type>
@@ -359,7 +359,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="114" column="25"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="114" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classCircularToCartesian_1a15f1433a21a446994169a7d06fd0b49c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classCircularToCartesian" kindref="compound">CircularToCartesian</ref> &amp;</type>
@@ -390,7 +390,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="124" column="25"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="124" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classCircularToCartesian_1a13b2f19c27365cf45aa62c15b6c9da48" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
@@ -403,7 +403,7 @@
           <declname>coord</declname>
         </param>
         <briefdescription>
-<para>Convert the <formula id="186">$ (r, \theta) $</formula> coordinate to the equivalent (x,y) coordinate. </para>
+<para>Convert the <formula id="32">$ (r, \theta) $</formula> coordinate to the equivalent (x,y) coordinate. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -421,7 +421,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="133" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="133" bodyend="140"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="133" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="133" bodyend="140"/>
       </memberdef>
       <memberdef kind="function" id="classCircularToCartesian_1a3a3dc427c587611aa1beac39556c8523" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION double</type>
@@ -452,7 +452,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="150" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="150" bodyend="154"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="150" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="150" bodyend="154"/>
       </memberdef>
       <memberdef kind="function" id="classCircularToCartesian_1a7bca4fb266adef7d7a4d5158500c4e69" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION double</type>
@@ -483,7 +483,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="165" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="165" bodyend="168"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="165" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="165" bodyend="168"/>
       </memberdef>
       <memberdef kind="function" id="classCircularToCartesian_1a9adea9d8d953ca89baa8ebc15ad71dee" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, VectorIndexSet&lt; <ref refid="classCircularToCartesian_1a35f4f63e3d95fdffec7f9ba69d384c85" kindref="member">R_cov</ref>, <ref refid="classCircularToCartesian_1a11728cf484228e3530ab90bfe831895f" kindref="member">Theta_cov</ref> &gt; &gt;</type>
@@ -515,7 +515,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="181" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="181" bodyend="192"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="181" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="181" bodyend="192"/>
       </memberdef>
       <memberdef kind="function" id="classCircularToCartesian_1a61f5a58fc058b1d9c2b2a034d12309d1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -554,7 +554,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="203" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="203" bodyend="225"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="203" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="203" bodyend="225"/>
       </memberdef>
       <memberdef kind="function" id="classCircularToCartesian_1ad6a44656287d8f142c833f109fdfedc6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, VectorIndexSet&lt; <ref refid="classCircularToCartesian_1acb13de22eb215b860dfed57b2dfe96a3" kindref="member">X_cov</ref>, <ref refid="classCircularToCartesian_1aa8fd7fc7b680f23dfd45e37f3de75ff8" kindref="member">Y_cov</ref> &gt; &gt;</type>
@@ -586,7 +586,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="240" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="240" bodyend="252"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="240" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="240" bodyend="252"/>
       </memberdef>
       <memberdef kind="function" id="classCircularToCartesian_1a25b6d57a41e9e8f9138b5ad2ddc54045" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -626,7 +626,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="266" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="266" bodyend="290"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="266" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="266" bodyend="290"/>
       </memberdef>
       <memberdef kind="function" id="classCircularToCartesian_1a6ce3ab4a4fa9a80c52479be9fbdd62b7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION <ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
@@ -644,25 +644,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="298" column="48" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="298" bodyend="301"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="298" column="48" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="298" bodyend="301"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
 <para>A class for describing the circular 2D mapping. </para>
     </briefdescription>
     <detaileddescription>
-<para>The mapping <formula id="211">$ (r,\theta)\mapsto (x,y) $</formula> is defined as follow :</para>
-<para><formula id="212">$ x(r,\theta) = r \cos(\theta) + x_0,$</formula></para>
-<para><formula id="213">$ y(r,\theta) = r \sin(\theta) + y_0.$</formula></para>
+<para>The mapping <formula id="57">$ (r,\theta)\mapsto (x,y) $</formula> is defined as follow :</para>
+<para><formula id="58">$ x(r,\theta) = r \cos(\theta) + x_0,$</formula></para>
+<para><formula id="59">$ y(r,\theta) = r \sin(\theta) + y_0.$</formula></para>
 <para>It and its Jacobian matrix are invertible everywhere except for <formula id="18">$ r = 0 $</formula>.</para>
 <para>The Jacobian matrix coefficients are defined as follow</para>
-<para><formula id="214">$ J_{11}(r,\theta)  = \cos(\theta)$</formula></para>
-<para><formula id="215">$ J_{12}(r,\theta)  = - r \sin(\theta)$</formula></para>
-<para><formula id="216">$ J_{21}(r,\theta)  = \sin(\theta)$</formula></para>
-<para><formula id="217">$ J_{22}(r,\theta)  = r \cos(\theta)$</formula></para>
-<para>and the matrix determinant: <formula id="218">$ det(J) = r $</formula>. </para>
+<para><formula id="60">$ J_{11}(r,\theta)  = \cos(\theta)$</formula></para>
+<para><formula id="61">$ J_{12}(r,\theta)  = - r \sin(\theta)$</formula></para>
+<para><formula id="62">$ J_{21}(r,\theta)  = \sin(\theta)$</formula></para>
+<para><formula id="63">$ J_{22}(r,\theta)  = r \cos(\theta)$</formula></para>
+<para>and the matrix determinant: <formula id="64">$ det(J) = r $</formula>. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" line="43" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp" bodystart="44" bodyend="302"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" line="43" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp" bodystart="44" bodyend="302"/>
     <listofallmembers>
       <member refid="classCircularToCartesian_1a5da224f282c0518de1eb5f9533ef8382" prot="public" virt="non-virtual"><scope>CircularToCartesian</scope><name>cartesian_tag_x</name></member>
       <member refid="classCircularToCartesian_1ac5171ea2a53d148012365e778c790726" prot="public" virt="non-virtual"><scope>CircularToCartesian</scope><name>cartesian_tag_y</name></member>

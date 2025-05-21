@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>File mapping_tools.hpp - GyselalibX</title>
+    <title>Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "File mapping_tools.hpp";
-        var mkdocs_page_input_path = "gyselalibxx/mapping__tools_8hpp_source.md";
+        var mkdocs_page_name = "Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations";
+        var mkdocs_page_input_path = "gyselalibxx/dir_67161c4ffadea73fddf46ea451c2f62c.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -90,6 +90,12 @@
                 <li class="toctree-l2"><a class="reference internal" >collisions</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/collisions/index.html">Collisions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >coord_transformations</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/coord_transformations/index.html">Mappings</a>
                 </li>
     </ul>
                 </li>
@@ -282,12 +288,6 @@
                 <li class="toctree-l2"><a class="reference internal" >io</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/io/index.html">Functions used for input and output</a>
-                </li>
-    </ul>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" >mapping</a>
-    <ul>
-                <li class="toctree-l3"><a class="reference internal" href="../src/mapping/index.html">Mappings</a>
                 </li>
     </ul>
                 </li>
@@ -531,9 +531,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">File mapping_tools.hpp</li>
+      <li class="breadcrumb-item active">Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/mapping__tools_8hpp_source.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/dir_67161c4ffadea73fddf46ea451c2f62c.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -541,265 +541,97 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="file-mapping_toolshpp">File mapping_tools.hpp</h1>
-<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_5300298560c4bf255ab9f36681603d89.html"><strong>mapping</strong></a> <strong>&gt;</strong> <a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a></p>
-<p><a href="mapping__tools_8hpp.html">Go to the documentation of this file</a></p>
-<pre><code class="language-C++">// SPDX-License-Identifier: MIT
-#pragma once
-
-#include &lt;array&gt;
-#include &lt;type_traits&gt;
-#include &lt;utility&gt;
-
-#include "tensor.hpp"
-#include "vector_index_tools.hpp"
-#include "view.hpp"
-
-namespace mapping_detail {
-template &lt;class ExecSpace, class Type&gt;
-struct MappingAccessibility : std::false_type
-{
-};
-
-template &lt;typename Type, template &lt;typename ClassType&gt; typename Attribute&gt;
-class CheckClassAttributeExistence
-{
-    template &lt;typename C, typename = Attribute&lt;C&gt;&gt;
-    static std::true_type test(int);
-    template &lt;typename C&gt;
-    static std::false_type test(...);
-
-public:
-    static constexpr bool value = decltype(test&lt;Type&gt;(0))::value;
-};
-
-template &lt;typename Type&gt;
-class IsMapping
-{
-    template &lt;typename ClassType&gt;
-    using coord_arg_type = typename ClassType::CoordArg;
-    template &lt;typename ClassType&gt;
-    using coord_result_type = typename ClassType::CoordResult;
-
-    static bool constexpr is_mapping()
-    {
-        constexpr bool success = CheckClassAttributeExistence&lt;Type, coord_arg_type&gt;::value
-                                 &amp;&amp; CheckClassAttributeExistence&lt;Type, coord_result_type&gt;::value;
-        if constexpr (success) {
-            using CoordArg = typename Type::CoordArg;
-            using CoordResult = typename Type::CoordResult;
-            return std::is_invocable_r_v&lt;CoordResult, Type, CoordArg&gt;;
-        }
-        return success;
-    }
-
-public:
-    static constexpr bool value = is_mapping();
-};
-
-template &lt;typename Type, bool HideError&gt;
-class DefinesJacobian
-{
-    struct IdxTag;
-    template &lt;typename ClassType&gt;
-    using coord_arg_type = typename ClassType::CoordJacobian;
-    template &lt;typename ClassType&gt;
-    using jacobian_matrix = decltype(std::declval&lt;ClassType&gt;().jacobian_matrix(
-            std::declval&lt;typename ClassType::CoordJacobian&gt;()));
-    template &lt;typename ClassType&gt;
-    using jacobian_component
-            = decltype(std::declval&lt;ClassType&gt;().template jacobian_component&lt;IdxTag, IdxTag&gt;(
-                    std::declval&lt;typename ClassType::CoordJacobian&gt;()));
-    template &lt;typename ClassType&gt;
-    using jacobian = decltype(std::declval&lt;ClassType&gt;().jacobian(
-            std::declval&lt;typename ClassType::CoordJacobian&gt;()));
-
-    static bool constexpr has_jacobian_methods()
-    {
-        if constexpr (!CheckClassAttributeExistence&lt;Type, coord_arg_type&gt;::value) {
-            static_assert(HideError, "A Mapping must define the CoordJacobian alias");
-            return false;
-        };
-        if constexpr (!CheckClassAttributeExistence&lt;Type, jacobian_matrix&gt;::value) {
-            static_assert(HideError, "A Mapping must define the jacobian_matrix function");
-            return false;
-        }
-        if constexpr (!CheckClassAttributeExistence&lt;Type, jacobian_component&gt;::value) {
-            static_assert(HideError, "A Mapping must define the jacobian_component function");
-            return false;
-        }
-        if constexpr (!CheckClassAttributeExistence&lt;Type, jacobian&gt;::value) {
-            static_assert(HideError, "A Mapping must define the jacobian function");
-            return false;
-        }
-        return true;
-    }
-
-    static bool constexpr has_jacobian()
-    {
-        static_assert(mapping_detail::IsMapping&lt;Type&gt;::value);
-        constexpr bool success = has_jacobian_methods();
-        if constexpr (success) {
-            using ArgBasisCov = get_covariant_dims_t&lt;ddc::to_type_seq_t&lt;typename Type::CoordArg&gt;&gt;;
-            using ResultBasis
-                    = get_contravariant_dims_t&lt;ddc::to_type_seq_t&lt;typename Type::CoordResult&gt;&gt;;
-            if constexpr (!std::is_same_v&lt;
-                                  DTensor&lt;ResultBasis, ArgBasisCov&gt;,
-                                  jacobian_matrix&lt;Type&gt;&gt;) {
-                static_assert(
-                        HideError,
-                        "The jacobian_matrix method of a Mapping must take a Coordinate as an "
-                        "argument and return a Tensor.");
-                return false;
-            }
-            if constexpr (!std::is_same_v&lt;double, jacobian_component&lt;Type&gt;&gt;) {
-                static_assert(
-                        HideError,
-                        "The jacobian_component method of a Mapping must take a Coordinate as an "
-                        "argument and return a double.");
-                return false;
-            }
-            if constexpr (!std::is_same_v&lt;double, jacobian&lt;Type&gt;&gt;) {
-                static_assert(
-                        HideError,
-                        "The jacobian method of a Mapping must take a Coordinate as an argument "
-                        "and return a double.");
-                return false;
-            }
-            return true;
-        }
-        return success;
-    }
-
-public:
-    static constexpr bool value = has_jacobian();
-};
-
-template &lt;typename Type, bool HideError&gt;
-class DefinesInvJacobian
-{
-    struct IdxTag;
-    template &lt;typename ClassType&gt;
-    using inv_jacobian_matrix = decltype(std::declval&lt;ClassType&gt;().inv_jacobian_matrix(
-            std::declval&lt;typename ClassType::CoordJacobian&gt;()));
-    template &lt;typename ClassType&gt;
-    using inv_jacobian_component
-            = decltype(std::declval&lt;ClassType&gt;().template inv_jacobian_component&lt;IdxTag, IdxTag&gt;(
-                    std::declval&lt;typename ClassType::CoordJacobian&gt;()));
-
-    static bool constexpr has_inv_jacobian_methods()
-    {
-        if constexpr (!CheckClassAttributeExistence&lt;Type, inv_jacobian_matrix&gt;::value) {
-            static_assert(HideError, "A Mapping must define the inv_jacobian_matrix function");
-            return false;
-        }
-        if constexpr (!CheckClassAttributeExistence&lt;Type, inv_jacobian_component&gt;::value) {
-            static_assert(HideError, "A Mapping must define the inv_jacobian_component function");
-            return false;
-        }
-        return true;
-    }
-
-    static bool constexpr has_inv_jacobian()
-    {
-        if constexpr (!DefinesJacobian&lt;Type, HideError&gt;::value) {
-            static_assert(
-                    HideError,
-                    "A Mapping must define its Jacobian before defining its inverse");
-            return false;
-        }
-        static_assert(mapping_detail::IsMapping&lt;Type&gt;::value);
-        constexpr bool success = has_inv_jacobian_methods();
-        if constexpr (success) {
-            using ResultBasisCov
-                    = get_covariant_dims_t&lt;ddc::to_type_seq_t&lt;typename Type::CoordResult&gt;&gt;;
-            using ArgBasis = get_contravariant_dims_t&lt;ddc::to_type_seq_t&lt;typename Type::CoordArg&gt;&gt;;
-            if constexpr (!std::is_same_v&lt;
-                                  DTensor&lt;ArgBasis, ResultBasisCov&gt;,
-                                  inv_jacobian_matrix&lt;Type&gt;&gt;) {
-                static_assert(
-                        HideError,
-                        "The inv_jacobian_matrix method of a Mapping must take a Coordinate as an "
-                        "argument and return a Tensor.");
-                return false;
-            }
-            if constexpr (!std::is_same_v&lt;double, inv_jacobian_component&lt;Type&gt;&gt;) {
-                static_assert(
-                        HideError,
-                        "The inv_jacobian_component method of a Mapping must take a Coordinate as "
-                        "an argument and return a double.");
-                return false;
-            }
-            return true;
-        }
-        return success;
-    }
-
-public:
-    static constexpr bool value = has_inv_jacobian();
-};
-
-template &lt;class Mapping&gt;
-struct IsCurvilinear2DMapping : std::false_type
-{
-};
-
-template &lt;typename Type&gt;
-class IsAnalyticalMapping
-{
-private:
-    template &lt;typename ClassType&gt;
-    using inverse_mapping = decltype(&amp;ClassType::get_inverse_mapping);
-
-    static bool constexpr is_analytical_mapping()
-    {
-        constexpr bool success = CheckClassAttributeExistence&lt;Type, inverse_mapping&gt;::value;
-        if constexpr (success) {
-            return std::is_invocable_v&lt;inverse_mapping&lt;Type&gt;, Type&gt;;
-        }
-        return false;
-    }
-
-public:
-    static constexpr bool value = is_analytical_mapping();
-};
-
-template &lt;class Mapping&gt;
-struct SingularOPointInvJacobian : std::false_type
-{
-};
-
-} // namespace mapping_detail
-
-template &lt;class ExecSpace, class Type&gt;
-static constexpr bool is_accessible_v = mapping_detail::
-        MappingAccessibility&lt;ExecSpace, std::remove_const_t&lt;std::remove_reference_t&lt;Type&gt;&gt;&gt;::value;
-
-template &lt;class Mapping&gt;
-static constexpr bool is_mapping_v = mapping_detail::IsMapping&lt;Mapping&gt;::value;
-
-template &lt;class Mapping, bool RaiseError = true&gt;
-static constexpr bool has_jacobian_v = mapping_detail::DefinesJacobian&lt;Mapping, !RaiseError&gt;::value;
-
-template &lt;class Mapping, bool RaiseError = true&gt;
-static constexpr bool has_inv_jacobian_v
-        = mapping_detail::DefinesInvJacobian&lt;Mapping, !RaiseError&gt;::value;
-
-template &lt;class Mapping&gt;
-static constexpr bool is_curvilinear_2d_mapping_v = mapping_detail::IsCurvilinear2DMapping&lt;
-        std::remove_const_t&lt;std::remove_reference_t&lt;Mapping&gt;&gt;&gt;::value;
-
-template &lt;class Mapping&gt;
-static constexpr bool is_analytical_mapping_v = mapping_detail::IsAnalyticalMapping&lt;Mapping&gt;::value;
-
-template &lt;class Mapping&gt;
-using inverse_mapping_t = decltype(std::declval&lt;Mapping&gt;().get_inverse_mapping());
-
-template &lt;class Mapping&gt;
-static constexpr bool has_singular_o_point_inv_jacobian_v
-        = mapping_detail::SingularOPointInvJacobian&lt;
-                std::remove_const_t&lt;std::remove_reference_t&lt;Mapping&gt;&gt;&gt;::value;
-</code></pre></div>
+                <div><h1 id="dir-homerunnerworkgyselalibxxgyselalibxxcode_branchsrccoord_transformations">Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations</h1>
+<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_67161c4ffadea73fddf46ea451c2f62c.html"><strong>coord_transformations</strong></a></p>
+<h2 id="files">Files</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="barycentric__to__cartesian_8hpp.html"><strong>barycentric_to_cartesian.hpp</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="cartesian__to__barycentric_8hpp.html"><strong>cartesian_to_barycentric.hpp</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="cartesian__to__circular_8hpp.html"><strong>cartesian_to_circular.hpp</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="cartesian__to__cylindrical_8hpp.html"><strong>cartesian_to_cylindrical.hpp</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="cartesian__to__czarny_8hpp.html"><strong>cartesian_to_czarny.hpp</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="circular__to__cartesian_8hpp.html"><strong>circular_to_cartesian.hpp</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="combined__mapping_8hpp.html"><strong>combined_mapping.hpp</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="coord__transformation__tools_8hpp.html"><strong>coord_transformation_tools.hpp</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="cylindrical__to__cartesian_8hpp.html"><strong>cylindrical_to_cartesian.hpp</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="czarny__to__cartesian_8hpp.html"><strong>czarny_to_cartesian.hpp</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="discrete__mapping__builder_8hpp.html"><strong>discrete_mapping_builder.hpp</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="discrete__to__cartesian_8hpp.html"><strong>discrete_to_cartesian.hpp</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="geometry__pseudo__cartesian_8hpp.html"><strong>geometry_pseudo_cartesian.hpp</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="identity__coordinate__change_8hpp.html"><strong>identity_coordinate_change.hpp</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="inv__jacobian__o__point_8hpp.html"><strong>inv_jacobian_o_point.hpp</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="inverse__jacobian__matrix_8hpp.html"><strong>inverse_jacobian_matrix.hpp</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="metric__tensor__evaluator_8hpp.html"><strong>metric_tensor_evaluator.hpp</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="toroidal__to__cylindrical_8hpp.html"><strong>toroidal_to_cylindrical.hpp</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">file</td>
+<td style="text-align: left;"><a href="vector__mapper_8hpp.html"><strong>vector_mapper.hpp</strong></a> <br></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/</code></p></div>
               
             </div>
           </div><footer>

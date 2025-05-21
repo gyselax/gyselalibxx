@@ -316,7 +316,7 @@
 <para>Solve the matrix equation in place. </para>
         </briefdescription>
         <detaileddescription>
-<para>Solve the following matrix equation: <formula id="319">$ M x = b $</formula> The result <formula id="157">$ x $</formula> is saved into the memory allocated for <formula id="320">$ b $</formula>.</para>
+<para>Solve the following matrix equation: <formula id="319">$ M x = b $</formula> The result <formula id="109">$ x $</formula> is saved into the memory allocated for <formula id="320">$ b $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">b</parametername>
@@ -326,7 +326,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The solution <formula id="157">$ x $</formula>. </para>
+<simplesect kind="return"><para>The solution <formula id="109">$ x $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -350,7 +350,7 @@
 <para>Solve the transposed matrix equation in place. </para>
         </briefdescription>
         <detaileddescription>
-<para>Solve the following matrix equation: <formula id="321">$ M^T x = b $</formula> The result <formula id="157">$ x $</formula> is saved into the memory allocated for <formula id="320">$ b $</formula>.</para>
+<para>Solve the following matrix equation: <formula id="321">$ M^T x = b $</formula> The result <formula id="109">$ x $</formula> is saved into the memory allocated for <formula id="320">$ b $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">b</parametername>
@@ -360,7 +360,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The solution <formula id="157">$ x $</formula>. </para>
+<simplesect kind="return"><para>The solution <formula id="109">$ x $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -384,7 +384,7 @@
 <para>Solve multiple matrix equations in place. </para>
         </briefdescription>
         <detaileddescription>
-<para>Solve the following matrix equation: <formula id="319">$ M x = b $</formula> for multiple values of <formula id="320">$ b $</formula> and <formula id="157">$ x $</formula>. The first dimension is iterated over with each slice representing an equation to be solved. The result <formula id="157">$ x $</formula> is saved into the memory allocated for <formula id="320">$ b $</formula>.</para>
+<para>Solve the following matrix equation: <formula id="319">$ M x = b $</formula> for multiple values of <formula id="320">$ b $</formula> and <formula id="109">$ x $</formula>. The first dimension is iterated over with each slice representing an equation to be solved. The result <formula id="109">$ x $</formula> is saved into the memory allocated for <formula id="320">$ b $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">bx</parametername>
@@ -394,7 +394,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The solution <formula id="157">$ x $</formula>. </para>
+<simplesect kind="return"><para>The solution <formula id="109">$ x $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>

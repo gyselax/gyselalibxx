@@ -2,7 +2,7 @@
 
 # File barycentric\_to\_cartesian.hpp
 
-[**File List**](files.md) **>** [**mapping**](dir_5300298560c4bf255ab9f36681603d89.md) **>** [**barycentric\_to\_cartesian.hpp**](barycentric__to__cartesian_8hpp.md)
+[**File List**](files.md) **>** [**coord\_transformations**](dir_67161c4ffadea73fddf46ea451c2f62c.md) **>** [**barycentric\_to\_cartesian.hpp**](barycentric__to__cartesian_8hpp.md)
 
 [Go to the documentation of this file](barycentric__to__cartesian_8hpp.md)
 
@@ -13,8 +13,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include "coord_transformation_tools.hpp"
 #include "ddc_aliases.hpp"
-#include "mapping_tools.hpp"
 
 template <class X, class Y, class Corner1Tag, class Corner2Tag, class Corner3Tag>
 class CartesianToBarycentric;

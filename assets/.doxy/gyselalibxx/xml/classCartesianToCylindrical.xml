@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="59" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="59" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="59" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCartesianToCylindrical_1a3c79d722649020f1a871fd8011e01b98" prot="public" static="no">
         <type><ref refid="structY" kindref="compound">Y</ref></type>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="61" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="61" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="61" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="61" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCartesianToCylindrical_1a1bf22d31c32a6dc0e6707e3b2c058f0b" prot="public" static="no">
         <type>Z</type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="63" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCartesianToCylindrical_1aa0610127921f962d7a9e4b9881a1a5ff" prot="public" static="no">
         <type><ref refid="structR" kindref="compound">R</ref></type>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="65" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="65" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="65" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCartesianToCylindrical_1a78b198363986b0644fce386e52c6c500" prot="public" static="no">
         <type>Z</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="67" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="67" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="67" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="67" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCartesianToCylindrical_1a3488fcd6d0e017d27be68cce5e822a8d" prot="public" static="no">
         <type>Zeta</type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="69" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCartesianToCylindrical_1a7e5a21ac904038306057075a17c14c37" prot="public" static="no">
         <type>Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, Z &gt;</type>
@@ -124,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="72" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="72" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="72" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCartesianToCylindrical_1a6752b9f89115c9db812ff06851c9b946" prot="public" static="no">
         <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, Z, Zeta &gt;</type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="74" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="74" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="74" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="74" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCartesianToCylindrical_1ad8c2213f220f589d0e72b1fdaf5d2631" prot="public" static="no">
         <type><ref refid="classCartesianToCylindrical_1a7e5a21ac904038306057075a17c14c37" kindref="member">CoordArg</ref></type>
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="76" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="76" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCartesianToCylindrical_1ad563f0ab35cd67ea9967bb5e74a36d4e" prot="public" static="no">
         <type>typename <ref refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" kindref="member">X::Dual</ref></type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="79" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="79" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="79" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="79" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCartesianToCylindrical_1a46a76590600f745c0e18b4aa26eecdcd" prot="public" static="no">
         <type>typename <ref refid="structY_1aad98c6afa465f3fb654029648420df1f" kindref="member">Y::Dual</ref></type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="81" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="81" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="81" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCartesianToCylindrical_1a451e79e9e22b7697cab071ffac776e82" prot="public" static="no">
         <type>typename Z::Dual</type>
@@ -199,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="83" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="83" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="83" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCartesianToCylindrical_1abcbc425ce9688bc66906c88014bb3b53" prot="public" static="no">
         <type>typename <ref refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kindref="member">R::Dual</ref></type>
@@ -214,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="85" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="85" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="85" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="85" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCartesianToCylindrical_1abcafcc6698663207e665f1a1d85bc371" prot="public" static="no">
         <type>typename Zeta::Dual</type>
@@ -229,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="87" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="87" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="87" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="87" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -245,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="90" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="90" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classCartesianToCylindrical_1ad9520ba39e7646f0e7cacdc4e854b703" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION</type>
@@ -274,7 +274,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="98" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="98" bodyend="98"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="98" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="98" bodyend="98"/>
       </memberdef>
       <memberdef kind="function" id="classCartesianToCylindrical_1adfa8c0b868c30b7a15fa8bf5fbf97308" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -303,7 +303,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="106" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="106" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classCartesianToCylindrical_1a7e3a8af1616ab01c558e057dfa0dbea0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -317,7 +317,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="108" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="108" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classCartesianToCylindrical_1a3997bb373bcc5809b1bdfb7c1bf1c07c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classCartesianToCylindrical" kindref="compound">CartesianToCylindrical</ref> &amp;</type>
@@ -348,7 +348,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="118" column="28"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="118" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classCartesianToCylindrical_1a5578c461691f0c81a513c4b626ec9135" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classCartesianToCylindrical" kindref="compound">CartesianToCylindrical</ref> &amp;</type>
@@ -379,7 +379,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="128" column="28"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="128" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classCartesianToCylindrical_1afea84c9965d1fa33b5573d3140db8df6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classCartesianToCylindrical_1a6752b9f89115c9db812ff06851c9b946" kindref="member">CoordResult</ref></type>
@@ -392,7 +392,7 @@
           <declname>coord</declname>
         </param>
         <briefdescription>
-<para>Convert the coordinate (x,y,z) to the equivalent <formula id="202">$ (r, z, \zeta) $</formula> coordinate. </para>
+<para>Convert the coordinate (x,y,z) to the equivalent <formula id="48">$ (r, z, \zeta) $</formula> coordinate. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -410,7 +410,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="137" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="137" bodyend="146"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="137" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="137" bodyend="146"/>
       </memberdef>
       <memberdef kind="function" id="classCartesianToCylindrical_1a2c6b83170ea4878792ffd0d4be1ecffb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION double</type>
@@ -441,7 +441,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="156" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="156" bodyend="161"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="156" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="156" bodyend="161"/>
       </memberdef>
       <memberdef kind="function" id="classCartesianToCylindrical_1a5f5945e50e313ce3c5927d4591629d3e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structR" kindref="compound">R</ref>, Z, Zeta &gt;, VectorIndexSet&lt; <ref refid="classCartesianToCylindrical_1ad563f0ab35cd67ea9967bb5e74a36d4e" kindref="member">X_cov</ref>, <ref refid="classCartesianToCylindrical_1a46a76590600f745c0e18b4aa26eecdcd" kindref="member">Y_cov</ref>, <ref refid="classCartesianToCylindrical_1a451e79e9e22b7697cab071ffac776e82" kindref="member">Z_cov</ref> &gt; &gt;</type>
@@ -473,7 +473,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="175" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="175" bodyend="192"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="175" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="175" bodyend="192"/>
       </memberdef>
       <memberdef kind="function" id="classCartesianToCylindrical_1a7d4dc83cf1c3950a783fc4e482f33815" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -513,7 +513,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="206" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="206" bodyend="232"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="206" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="206" bodyend="232"/>
       </memberdef>
       <memberdef kind="function" id="classCartesianToCylindrical_1ab9aa77a76d9efd4cd3194cdf1b0186ea" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classCylindricalToCartesian" kindref="compound">CylindricalToCartesian</ref>&lt; <ref refid="structR" kindref="compound">R</ref>, Z, Zeta, <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
@@ -531,31 +531,31 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="239" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="239" bodyend="242"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="239" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="239" bodyend="242"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
 <para>A class for describing the cylindrical 3D mapping. </para>
     </briefdescription>
     <detaileddescription>
-<para>The mapping <formula id="187">$ (x,y,z) \mapsto (r,z, \zeta) $</formula> is defined as follow :</para>
-<para><formula id="188">$ R(x,y,z) = \sqrt{x^2+y^2} ,$</formula></para>
-<para><formula id="189">$ \zeta(x,y,z) = atan2(\frac{y}{x}) .$</formula></para>
-<para><formula id="190">$ Z(x,y,z) = z $</formula></para>
-<para>It and its Jacobian matrix are invertible everywhere except for <formula id="191">$ R = 0 $</formula>.</para>
+<para>The mapping <formula id="33">$ (x,y,z) \mapsto (r,z, \zeta) $</formula> is defined as follow :</para>
+<para><formula id="34">$ R(x,y,z) = \sqrt{x^2+y^2} ,$</formula></para>
+<para><formula id="35">$ \zeta(x,y,z) = atan2(\frac{y}{x}) .$</formula></para>
+<para><formula id="36">$ Z(x,y,z) = z $</formula></para>
+<para>It and its Jacobian matrix are invertible everywhere except for <formula id="37">$ R = 0 $</formula>.</para>
 <para>The Jacobian matrix coefficients are defined as follow</para>
-<para><formula id="192">$ J^R_{\;x}(x,y,z)  =\frac{x}{\sqrt{x^2+y^2}}  $</formula></para>
-<para><formula id="193">$ J^R_{\;y}(x,y,z)  =\frac{y}{\sqrt{x^2+y^2}}  $</formula></para>
-<para><formula id="194">$ J^R_{\;z}(x,y,z)  =0  $</formula></para>
-<para><formula id="195">$ J^Z_{\;x}(x,y,z)  =0  $</formula></para>
-<para><formula id="196">$ J^Z_{\;y}(x,y,z)  =0  $</formula></para>
-<para><formula id="197">$ J^Z_{\;z}(x,y,z)  =1  $</formula></para>
-<para><formula id="198">$ J^{\zeta}_{\;x}(x,y,z)  =\frac{-y}{x^2+y^2}  $</formula></para>
-<para><formula id="199">$ J^{\zeta}_{\;y}(x,y,z)  =\frac{x}{x^2+y^2}  $</formula></para>
-<para><formula id="200">$ J^{\zeta}_{\;z}(x,y,z)  =0  $</formula></para>
-<para>and the matrix determinant: <formula id="201">$ det(J) = -\frac{1}{\sqrt{x^2+y^2}} $</formula>. </para>
+<para><formula id="38">$ J^R_{\;x}(x,y,z)  =\frac{x}{\sqrt{x^2+y^2}}  $</formula></para>
+<para><formula id="39">$ J^R_{\;y}(x,y,z)  =\frac{y}{\sqrt{x^2+y^2}}  $</formula></para>
+<para><formula id="40">$ J^R_{\;z}(x,y,z)  =0  $</formula></para>
+<para><formula id="41">$ J^Z_{\;x}(x,y,z)  =0  $</formula></para>
+<para><formula id="42">$ J^Z_{\;y}(x,y,z)  =0  $</formula></para>
+<para><formula id="43">$ J^Z_{\;z}(x,y,z)  =1  $</formula></para>
+<para><formula id="44">$ J^{\zeta}_{\;x}(x,y,z)  =\frac{-y}{x^2+y^2}  $</formula></para>
+<para><formula id="45">$ J^{\zeta}_{\;y}(x,y,z)  =\frac{x}{x^2+y^2}  $</formula></para>
+<para><formula id="46">$ J^{\zeta}_{\;z}(x,y,z)  =0  $</formula></para>
+<para>and the matrix determinant: <formula id="47">$ det(J) = -\frac{1}{\sqrt{x^2+y^2}} $</formula>. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" line="55" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp" bodystart="56" bodyend="243"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="55" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="56" bodyend="243"/>
     <listofallmembers>
       <member refid="classCartesianToCylindrical_1aa3b112e49eee9555a87c8590c4770c8a" prot="public" virt="non-virtual"><scope>CartesianToCylindrical</scope><name>cartesian_tag_x</name></member>
       <member refid="classCartesianToCylindrical_1a3c79d722649020f1a871fd8011e01b98" prot="public" virt="non-virtual"><scope>CartesianToCylindrical</scope><name>cartesian_tag_y</name></member>

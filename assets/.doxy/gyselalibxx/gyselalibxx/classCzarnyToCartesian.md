@@ -124,7 +124,13 @@ The mapping  is defined by
 
 
 
-with  and  and  given as parameters. It and its Jacobian matrix are invertible everywhere except for .
+with  and  and  given as parameters.
+
+
+See O. Czarny and G. Huysmans. Bézier surfaces and finite elements for MHD simulations. Journal of Computational Physics, 227(16):7423–7445, 2008. doi:10.1016/j.jcp.2008.04.001.
+
+
+It and its Jacobian matrix are invertible everywhere except for .
 
 
 Its Jacobian coefficients are defined as follow
@@ -773,5 +779,5 @@ KOKKOS_DEFAULTED_FUNCTION CzarnyToCartesian::~CzarnyToCartesian () = default
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp`
 

@@ -57,7 +57,7 @@
 <parametername direction="out">electric_field</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The electric field <formula id="102">$E = -\nabla \phi$</formula>. </para>
+<para>The electric field <formula id="236">$E = -\nabla \phi$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -232,8 +232,8 @@
     <detaileddescription>
 <para>An operator which solves the Quasi-Neutrality equation using a fast Fourier transform.</para>
 <para>An operator which solves the Quasi-Neutrality equation.</para>
-<para>An operator which solves the Quasi-Neutrality equation: <formula id="142">$ - \frac{d^2 \phi}{dx^2} = \rho $</formula></para>
-<para>An operator which solves the Quasi-Neutrality equation: <formula id="142">$ - \frac{d^2 \phi}{dx^2} = \rho $</formula> using a fast Fourier transform on a periodic domain. This operator only works for equidistant points. </para>
+<para>An operator which solves the Quasi-Neutrality equation: <formula id="276">$ - \frac{d^2 \phi}{dx^2} = \rho $</formula></para>
+<para>An operator which solves the Quasi-Neutrality equation: <formula id="276">$ - \frac{d^2 \phi}{dx^2} = \rho $</formula> using a fast Fourier transform on a periodic domain. This operator only works for equidistant points. </para>
     </detaileddescription>
     <inheritancegraph>
       <node id="1">

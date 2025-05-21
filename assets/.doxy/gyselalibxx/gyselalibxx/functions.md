@@ -16,6 +16,7 @@
 
 ## c
 
+* **create\_geometry\_mirror\_view** ([**vector\_mapper.hpp**](vector__mapper_8hpp.md))
 * **compute\_collfreq** ([**collisions\_utils.cpp**](collisions__utils_8cpp.md), [**collisions\_utils.hpp**](collisions__utils_8hpp.md))
 * **compute\_collfreq\_ab** ([**collisions\_utils.cpp**](collisions__utils_8cpp.md), [**collisions\_utils.hpp**](collisions__utils_8hpp.md))
 * **compute\_momentum\_energy\_exchange** ([**collisions\_utils.cpp**](collisions__utils_8cpp.md), [**collisions\_utils.hpp**](collisions__utils_8hpp.md))
@@ -28,7 +29,6 @@
 * **create\_mirror\_and\_copy** ([**polar\_spline.hpp**](polar__spline_8hpp.md))
 * **create\_mirror\_view** ([**polar\_spline.hpp**](polar__spline_8hpp.md))
 * **create\_mirror\_view\_and\_copy** ([**polar\_spline.hpp**](polar__spline_8hpp.md))
-* **create\_geometry\_mirror\_view** ([**vector\_mapper.hpp**](vector__mapper_8hpp.md))
 * **convert\_coo\_to\_csr** ([**matrix\_batch\_csr.hpp**](matrix__batch__csr_8hpp.md))
 * **check\_conv** ([**matrix\_utils.hpp**](matrix__utils_8hpp.md))
 * **compute\_coeffs\_on\_mapping** ([**volume\_quadrature\_nd.hpp**](volume__quadrature__nd_8hpp.md))

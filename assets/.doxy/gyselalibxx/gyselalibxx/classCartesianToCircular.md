@@ -631,5 +631,5 @@ KOKKOS_DEFAULTED_FUNCTION CartesianToCircular::~CartesianToCircular () = default
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_circular.hpp`
 

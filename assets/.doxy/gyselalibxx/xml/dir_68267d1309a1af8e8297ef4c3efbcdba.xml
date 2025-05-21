@@ -4,6 +4,7 @@
     <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src</compoundname>
     <innerdir refid="dir_b90fde0f10c67a9aef841a6e6700f1f6">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection</innerdir>
     <innerdir refid="dir_64163437c27c8707f17f92558da22106">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions</innerdir>
+    <innerdir refid="dir_67161c4ffadea73fddf46ea451c2f62c">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations</innerdir>
     <innerdir refid="dir_eaa769653453aaefd8cc10e98e9bb3eb">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types</innerdir>
     <innerdir refid="dir_e9f169004bcfe9f3cb1f8a27ce024e59">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta</innerdir>
     <innerdir refid="dir_9a2f28dc8f538ee0f4428810facf29b8">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu</innerdir>
@@ -12,7 +13,6 @@
     <innerdir refid="dir_e4674dab6493cf35bbeb1b23e7fbbddd">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy</innerdir>
     <innerdir refid="dir_264890e5c091f8c8d7fe1f842870c25e">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation</innerdir>
     <innerdir refid="dir_c184e51c84f2c3f0345bbc8a0d75d3e1">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io</innerdir>
-    <innerdir refid="dir_5300298560c4bf255ab9f36681603d89">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping</innerdir>
     <innerdir refid="dir_3ced5d1c6eac490d7704c2e023d148d8">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools</innerdir>
     <innerdir refid="dir_8cedd1260cc2f2819c8df2fc66ad98b5">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools</innerdir>
     <innerdir refid="dir_a35b8fd75f8fad0c2619b083ab571e51">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation</innerdir>

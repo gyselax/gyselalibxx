@@ -198,7 +198,7 @@
           <declname>steps</declname>
         </param>
         <briefdescription>
-<para>Solves on <formula id="133">$ T = dt*N $</formula> the equations system. </para>
+<para>Solves on <formula id="267">$ T = dt*N $</formula> the equations system. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -206,7 +206,7 @@
 <parametername direction="inout">density</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>On input: the initial condition. On output: the solution at <formula id="134">$ dt *N$</formula>. </para>
+<para>On input: the initial condition. On output: the solution at <formula id="268">$ dt *N$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -222,7 +222,7 @@
 <parametername direction="in">steps</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The number <formula id="135">$ N$</formula> of time interactions.</para>
+<para>The number <formula id="269">$ N$</formula> of time interactions.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -241,24 +241,24 @@
     <detaileddescription>
 <para>It solves in time the following Vlasov-Poisson equations system:</para>
 <para><itemizedlist>
-<listitem><para><formula id="103">$  - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho $</formula>,</para>
-</listitem><listitem><para><formula id="104">$ E = - \nabla \phi $</formula>,</para>
-</listitem><listitem><para><formula id="105">$ \partial_t \rho - E_y \partial_x \rho + E_x \partial_y \rho = 0$</formula>,</para>
+<listitem><para><formula id="237">$  - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho $</formula>,</para>
+</listitem><listitem><para><formula id="238">$ E = - \nabla \phi $</formula>,</para>
+</listitem><listitem><para><formula id="239">$ \partial_t \rho - E_y \partial_x \rho + E_x \partial_y \rho = 0$</formula>,</para>
 </listitem></itemizedlist>
 </para>
-<para>we write <formula id="106">$ (A_x, A_y) =  (-E_y, E_x)$</formula>.</para>
+<para>we write <formula id="240">$ (A_x, A_y) =  (-E_y, E_x)$</formula>.</para>
 <para>This method is mainly a Runge-Kutta 2 method:</para>
-<para>for <formula id="107">$ n \geq 0 $</formula>,</para>
+<para>for <formula id="241">$ n \geq 0 $</formula>,</para>
 <para>First, it advects on a half time step:<itemizedlist>
-<listitem><para>1. From <formula id="108">$\rho^n$</formula>, it computes <formula id="109">$\phi^n$</formula> with a <ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref>;</para>
-</listitem><listitem><para>2. From <formula id="109">$\phi^n$</formula>, it computes <formula id="110">$A^n$</formula> with a <ref refid="classAdvectionFieldFinder" kindref="compound">AdvectionFieldFinder</ref>;</para>
-</listitem><listitem><para>3. From <formula id="108">$\rho^n$</formula> and <formula id="110">$A^n$</formula>, it computes <formula id="111">$\rho^{n+1/2}$</formula> with a <ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionPolar</ref> on <formula id="112">$\frac{dt}{2}$</formula>;</para>
+<listitem><para>1. From <formula id="242">$\rho^n$</formula>, it computes <formula id="243">$\phi^n$</formula> with a <ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref>;</para>
+</listitem><listitem><para>2. From <formula id="243">$\phi^n$</formula>, it computes <formula id="244">$A^n$</formula> with a <ref refid="classAdvectionFieldFinder" kindref="compound">AdvectionFieldFinder</ref>;</para>
+</listitem><listitem><para>3. From <formula id="242">$\rho^n$</formula> and <formula id="244">$A^n$</formula>, it computes <formula id="245">$\rho^{n+1/2}$</formula> with a <ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionPolar</ref> on <formula id="246">$\frac{dt}{2}$</formula>;</para>
 </listitem></itemizedlist>
 </para>
 <para>Secondly, it advects on a full time step:<itemizedlist>
-<listitem><para>4. From <formula id="111">$\rho^{n+1/2}$</formula>, it computes <formula id="113">$\phi^{n+1/2}$</formula> with a <ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref>;</para>
-</listitem><listitem><para>5. From <formula id="113">$\phi^{n+1/2}$</formula>, it computes <formula id="114">$A^{n+1/2}$</formula> with a <ref refid="classAdvectionFieldFinder" kindref="compound">AdvectionFieldFinder</ref>;</para>
-</listitem><listitem><para>6. From <formula id="108">$\rho^n$</formula> and <formula id="114">$A^{n+1/2}$</formula>, it computes <formula id="115">$\rho^{n+1}$</formula> with a <ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionPolar</ref> on <formula id="116">$dt$</formula>.</para>
+<listitem><para>4. From <formula id="245">$\rho^{n+1/2}$</formula>, it computes <formula id="247">$\phi^{n+1/2}$</formula> with a <ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref>;</para>
+</listitem><listitem><para>5. From <formula id="247">$\phi^{n+1/2}$</formula>, it computes <formula id="248">$A^{n+1/2}$</formula> with a <ref refid="classAdvectionFieldFinder" kindref="compound">AdvectionFieldFinder</ref>;</para>
+</listitem><listitem><para>6. From <formula id="242">$\rho^n$</formula> and <formula id="248">$A^{n+1/2}$</formula>, it computes <formula id="249">$\rho^{n+1}$</formula> with a <ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionPolar</ref> on <formula id="250">$dt$</formula>.</para>
 </listitem></itemizedlist>
 </para>
 <para><parameterlist kind="templateparam"><parameteritem>

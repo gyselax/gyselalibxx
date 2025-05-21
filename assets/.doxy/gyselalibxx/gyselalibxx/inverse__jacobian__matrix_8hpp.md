@@ -4,14 +4,14 @@
 
 
 
-[**FileList**](files.md) **>** [**mapping**](dir_5300298560c4bf255ab9f36681603d89.md) **>** [**inverse\_jacobian\_matrix.hpp**](inverse__jacobian__matrix_8hpp.md)
+[**FileList**](files.md) **>** [**coord\_transformations**](dir_67161c4ffadea73fddf46ea451c2f62c.md) **>** [**inverse\_jacobian\_matrix.hpp**](inverse__jacobian__matrix_8hpp.md)
 
 [Go to the source code of this file](inverse__jacobian__matrix_8hpp_source.md)
 
 
 
+* `#include "coord_transformation_tools.hpp"`
 * `#include "ddc_aliases.hpp"`
-* `#include "mapping_tools.hpp"`
 * `#include "math_tools.hpp"`
 * `#include "view.hpp"`
 
@@ -86,5 +86,5 @@
 
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inverse_jacobian_matrix.hpp`
 

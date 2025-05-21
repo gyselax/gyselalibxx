@@ -9,12 +9,12 @@
     <includes refid="vector__field__common_8hpp" local="yes">vector_field_common.hpp</includes>
     <includes refid="vector__index__tools_8hpp" local="yes">vector_index_tools.hpp</includes>
     <includedby refid="bsl__advection__polar_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp</includedby>
+    <includedby refid="vector__mapper_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp</includedby>
     <includedby refid="vector__field_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp</includedby>
     <includedby refid="advection__field__rtheta_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp</includedby>
     <includedby refid="geometryRTheta_2geometry_2geometry_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp</includedby>
     <includedby refid="geometryXY_2geometry_2geometry_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp</includedby>
     <includedby refid="predcorr__RK2_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp</includedby>
-    <includedby refid="vector__mapper_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/vector_mapper.hpp</includedby>
     <includedby refid="types_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp</includedby>
     <incdepgraph>
       <node id="12">
@@ -135,7 +135,7 @@
       <node id="43">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp</label>
         <link refid="bsl__advection__1d_8hpp_source"/>
-        <childnode refid="12" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -148,13 +148,13 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="7">
+      <node id="9">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/ipolar_foot_finder.hpp</label>
         <link refid="ipolar__foot__finder_8hpp_source"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="8">
+      <node id="7">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp</label>
         <link refid="spline__polar__foot__finder_8hpp_source"/>
         <childnode refid="2" relation="include">
@@ -164,14 +164,74 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
+      <node id="22">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp</label>
+        <link refid="combined__mapping_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping_builder.hpp</label>
+        <link refid="discrete__mapping__builder_8hpp_source"/>
+      </node>
+      <node id="23">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp</label>
+        <link refid="discrete__to__cartesian_8hpp_source"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp</label>
+        <link refid="inv__jacobian__o__point_8hpp_source"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inverse_jacobian_matrix.hpp</label>
+        <link refid="inverse__jacobian__matrix_8hpp_source"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp</label>
+        <link refid="metric__tensor__evaluator_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp</label>
+        <link refid="toroidal__to__cylindrical_8hpp_source"/>
+      </node>
       <node id="6">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp</label>
+        <link refid="vector__mapper_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp</label>
         <link refid="vector__field_8hpp_source"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
         <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
@@ -201,7 +261,7 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
@@ -214,7 +274,7 @@
         <childnode refid="32" relation="include">
         </childnode>
       </node>
-      <node id="9">
+      <node id="10">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp</label>
         <link refid="advection__field__rtheta_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -224,7 +284,7 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="10">
+      <node id="11">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp</label>
         <link refid="geometryRTheta_2geometry_2geometry_8hpp_source"/>
       </node>
@@ -254,11 +314,11 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp</label>
         <link refid="geometryXVx_2poisson_2qnsolver_8hpp_source"/>
       </node>
-      <node id="11">
+      <node id="12">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp</label>
         <link refid="geometryXY_2geometry_2geometry_8hpp_source"/>
       </node>
-      <node id="12">
+      <node id="13">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp</label>
         <link refid="predcorr__RK2_8hpp_source"/>
       </node>
@@ -266,76 +326,16 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp</label>
         <link refid="geometryXYVxVy_2poisson_2qnsolver_8hpp_source"/>
       </node>
-      <node id="22">
+      <node id="31">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</label>
         <link refid="bernstein_8hpp_source"/>
-        <childnode refid="23" relation="include">
-        </childnode>
-      </node>
-      <node id="23">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp</label>
-        <link refid="polar__bsplines_8hpp_source"/>
-        <childnode refid="10" relation="include">
-        </childnode>
-      </node>
-      <node id="24">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp</label>
-        <link refid="combined__mapping_8hpp_source"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
       </node>
       <node id="26">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp</label>
-        <link refid="discrete__mapping__builder_8hpp_source"/>
-      </node>
-      <node id="25">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp</label>
-        <link refid="discrete__to__cartesian_8hpp_source"/>
-        <childnode refid="23" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
-        <childnode refid="27" relation="include">
-        </childnode>
-      </node>
-      <node id="27">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inv_jacobian_o_point.hpp</label>
-        <link refid="inv__jacobian__o__point_8hpp_source"/>
-        <childnode refid="24" relation="include">
-        </childnode>
-      </node>
-      <node id="28">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp</label>
-        <link refid="inverse__jacobian__matrix_8hpp_source"/>
-        <childnode refid="24" relation="include">
-        </childnode>
-        <childnode refid="29" relation="include">
-        </childnode>
-        <childnode refid="31" relation="include">
-        </childnode>
-      </node>
-      <node id="29">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp</label>
-        <link refid="metric__tensor__evaluator_8hpp_source"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="30" relation="include">
-        </childnode>
-      </node>
-      <node id="31">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/toroidal_to_cylindrical.hpp</label>
-        <link refid="toroidal__to__cylindrical_8hpp_source"/>
-      </node>
-      <node id="13">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/vector_mapper.hpp</label>
-        <link refid="vector__mapper_8hpp_source"/>
-        <childnode refid="8" relation="include">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp</label>
+        <link refid="polar__bsplines_8hpp_source"/>
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="14">
@@ -351,7 +351,7 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
@@ -367,13 +367,13 @@
         <link refid="math__tools_8hpp_source"/>
         <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="28" relation="include">
+        <childnode refid="31" relation="include">
         </childnode>
-        <childnode refid="30" relation="include">
+        <childnode refid="29" relation="include">
         </childnode>
       </node>
       <node id="38">
@@ -492,10 +492,10 @@
         <childnode refid="54" relation="include">
         </childnode>
       </node>
-      <node id="30">
+      <node id="29">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</label>
         <link refid="polarpoissonlikesolver_8hpp_source"/>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
@@ -537,7 +537,7 @@
         <link refid="rk2_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
       </node>
       <node id="45">

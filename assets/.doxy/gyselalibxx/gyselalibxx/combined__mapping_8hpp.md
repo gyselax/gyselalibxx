@@ -4,15 +4,15 @@
 
 
 
-[**FileList**](files.md) **>** [**mapping**](dir_5300298560c4bf255ab9f36681603d89.md) **>** [**combined\_mapping.hpp**](combined__mapping_8hpp.md)
+[**FileList**](files.md) **>** [**coord\_transformations**](dir_67161c4ffadea73fddf46ea451c2f62c.md) **>** [**combined\_mapping.hpp**](combined__mapping_8hpp.md)
 
 [Go to the source code of this file](combined__mapping_8hpp_source.md)
 
 
 
+* `#include "coord_transformation_tools.hpp"`
 * `#include "inv_jacobian_o_point.hpp"`
 * `#include "inverse_jacobian_matrix.hpp"`
-* `#include "mapping_tools.hpp"`
 * `#include "math_tools.hpp"`
 
 
@@ -86,5 +86,5 @@
 
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp`
 

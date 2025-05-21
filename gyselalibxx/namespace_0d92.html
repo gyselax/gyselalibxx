@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>File mapping_tools.hpp - GyselalibX</title>
+    <title>Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_utils.cpp} - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "File mapping_tools.hpp";
-        var mkdocs_page_input_path = "gyselalibxx/mapping__tools_8hpp.md";
+        var mkdocs_page_name = "Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_utils.cpp}";
+        var mkdocs_page_input_path = "gyselalibxx/namespace_0d92.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -90,6 +90,12 @@
                 <li class="toctree-l2"><a class="reference internal" >collisions</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/collisions/index.html">Collisions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >coord_transformations</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/coord_transformations/index.html">Mappings</a>
                 </li>
     </ul>
                 </li>
@@ -282,12 +288,6 @@
                 <li class="toctree-l2"><a class="reference internal" >io</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/io/index.html">Functions used for input and output</a>
-                </li>
-    </ul>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" >mapping</a>
-    <ul>
-                <li class="toctree-l3"><a class="reference internal" href="../src/mapping/index.html">Mappings</a>
                 </li>
     </ul>
                 </li>
@@ -531,9 +531,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">File mapping_tools.hpp</li>
+      <li class="breadcrumb-item active">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_utils.cpp}</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/mapping__tools_8hpp.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/namespace_0d92.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -541,114 +541,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="file-mapping_toolshpp">File mapping_tools.hpp</h1>
-<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_5300298560c4bf255ab9f36681603d89.html"><strong>mapping</strong></a> <strong>&gt;</strong> <a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a></p>
-<p><a href="mapping__tools_8hpp_source.html">Go to the source code of this file</a></p>
-<ul>
-<li><code>#include &lt;array&gt;</code></li>
-<li><code>#include &lt;type_traits&gt;</code></li>
-<li><code>#include &lt;utility&gt;</code></li>
-<li><code>#include "tensor.hpp"</code></li>
-<li><code>#include "vector_index_tools.hpp"</code></li>
-<li><code>#include "view.hpp"</code></li>
-</ul>
-<h2 id="public-types">Public Types</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">typedef decltype(std::declval&lt; Mapping &gt;().get_inverse_mapping())</td>
-<td style="text-align: left;"><a href="#typedef-inverse_mapping_t"><strong>inverse_mapping_t</strong></a>  <br></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-static-attributes">Public Static Attributes</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-has_inv_jacobian_v"><strong>has_inv_jacobian_v</strong></a>   = <code>mapping\_detail::DefinesInvJacobian&amp;lt;Mapping, !RaiseError&amp;gt;::value</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-has_jacobian_v"><strong>has_jacobian_v</strong></a>   = <code>mapping\_detail::DefinesJacobian&amp;lt;Mapping, !RaiseError&amp;gt;::value</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-has_singular_o_point_inv_jacobian_v"><strong>has_singular_o_point_inv_jacobian_v</strong></a>   = <code>/* multi line expression */</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-is_accessible_v"><strong>is_accessible_v</strong></a>   = <code>/* multi line expression */</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-is_analytical_mapping_v"><strong>is_analytical_mapping_v</strong></a>   = <code>mapping\_detail::IsAnalyticalMapping&amp;lt;Mapping&amp;gt;::value</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-is_curvilinear_2d_mapping_v"><strong>is_curvilinear_2d_mapping_v</strong></a>   = <code>/* multi line expression */</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-is_mapping_v"><strong>is_mapping_v</strong></a>   = <code>mapping\_detail::IsMapping&amp;lt;Mapping&amp;gt;::value</code><br></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-types-documentation">Public Types Documentation</h2>
-<h3 id="typedef-inverse_mapping_t">typedef inverse_mapping_t</h3>
-<pre><code class="language-C++">using inverse_mapping_t =  decltype(std::declval&lt;Mapping&gt;().get_inverse_mapping());
-</code></pre>
+                <div><h1 id="namespace-anonymous-namespacehomerunnerworkgyselalibxxgyselalibxxcode_branchsrcgeometryxvxrhscollisions_utilscpp">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_utils.cpp}</h1>
+<p><a href="namespaces.html"><strong>Namespace List</strong></a> <strong>&gt;</strong> <a href="namespace_0d92.html"><strong>anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_utils.cpp}</strong></a></p>
 <hr>
-<h2 id="public-static-attributes-documentation">Public Static Attributes Documentation</h2>
-<h3 id="variable-has_inv_jacobian_v">variable has_inv_jacobian_v</h3>
-<pre><code class="language-C++">constexpr bool has_inv_jacobian_v;
-</code></pre>
-<hr>
-
-<h3 id="variable-has_jacobian_v">variable has_jacobian_v</h3>
-<pre><code class="language-C++">constexpr bool has_jacobian_v;
-</code></pre>
-<hr>
-
-<h3 id="variable-has_singular_o_point_inv_jacobian_v">variable has_singular_o_point_inv_jacobian_v</h3>
-<pre><code class="language-C++">constexpr bool has_singular_o_point_inv_jacobian_v;
-</code></pre>
-<hr>
-
-<h3 id="variable-is_accessible_v">variable is_accessible_v</h3>
-<pre><code class="language-C++">constexpr bool is_accessible_v;
-</code></pre>
-<hr>
-
-<h3 id="variable-is_analytical_mapping_v">variable is_analytical_mapping_v</h3>
-<pre><code class="language-C++">constexpr bool is_analytical_mapping_v;
-</code></pre>
-<hr>
-
-<h3 id="variable-is_curvilinear_2d_mapping_v">variable is_curvilinear_2d_mapping_v</h3>
-<pre><code class="language-C++">constexpr bool is_curvilinear_2d_mapping_v;
-</code></pre>
-<hr>
-
-<h3 id="variable-is_mapping_v">variable is_mapping_v</h3>
-<pre><code class="language-C++">constexpr bool is_mapping_v;
-</code></pre>
-<hr>
-
-<hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp</code></p></div>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_utils.cpp</code></p></div>
               
             </div>
           </div><footer>

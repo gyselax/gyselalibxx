@@ -782,7 +782,7 @@
           <declname>rho</declname>
         </param>
         <briefdescription>
-<para>An operator which calculates the solution <formula id="57">$\phi$</formula> to Poisson&apos;s equation: <formula id="343">$ -\Delta \phi = \rho $</formula>. </para>
+<para>An operator which calculates the solution <formula id="191">$\phi$</formula> to Poisson&apos;s equation: <formula id="343">$ -\Delta \phi = \rho $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -829,7 +829,7 @@
           <declname>rho</declname>
         </param>
         <briefdescription>
-<para>An operator which calculates the solution <formula id="57">$\phi$</formula> to Poisson&apos;s equation and its derivative: <formula id="344">$ - \Delta \phi = \rho $</formula> <formula id="104">$ E = - \nabla \phi $</formula>. </para>
+<para>An operator which calculates the solution <formula id="191">$\phi$</formula> to Poisson&apos;s equation and its derivative: <formula id="344">$ - \Delta \phi = \rho $</formula> <formula id="238">$ E = - \nabla \phi $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>

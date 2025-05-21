@@ -755,5 +755,5 @@ CylindricalToCartesian::~CylindricalToCartesian () = default
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cylindrical_to_cartesian.hpp`
 

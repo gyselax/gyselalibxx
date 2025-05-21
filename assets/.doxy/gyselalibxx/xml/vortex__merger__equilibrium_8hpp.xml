@@ -12,6 +12,54 @@
     <includes refid="polarpoissonlikesolver_8hpp" local="yes">polarpoissonlikesolver.hpp</includes>
     <includedby refid="vortex__merger__initialisation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp</includedby>
     <incdepgraph>
+      <node id="26">
+        <label>coord_transformation_tools.hpp</label>
+        <link refid="coord__transformation__tools_8hpp_source"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>inverse_jacobian_matrix.hpp</label>
+        <link refid="inverse__jacobian__matrix_8hpp_source"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>metric_tensor_evaluator.hpp</label>
+        <link refid="metric__tensor__evaluator_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
       <node id="33">
         <label>indexed_tensor.hpp</label>
         <link refid="indexed__tensor_8hpp"/>
@@ -135,55 +183,7 @@
         <link refid="polar__spline__evaluator_8hpp_source"/>
         <childnode refid="41" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
-        </childnode>
-      </node>
-      <node id="40">
-        <label>inverse_jacobian_matrix.hpp</label>
-        <link refid="inverse__jacobian__matrix_8hpp_source"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="28" relation="include">
-        </childnode>
-        <childnode refid="31" relation="include">
-        </childnode>
-        <childnode refid="29" relation="include">
-        </childnode>
-      </node>
-      <node id="28">
-        <label>mapping_tools.hpp</label>
-        <link refid="mapping__tools_8hpp_source"/>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="23" relation="include">
-        </childnode>
-        <childnode refid="29" relation="include">
-        </childnode>
-      </node>
-      <node id="39">
-        <label>metric_tensor_evaluator.hpp</label>
-        <link refid="metric__tensor__evaluator_8hpp_source"/>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="33" relation="include">
-        </childnode>
-        <childnode refid="40" relation="include">
-        </childnode>
-        <childnode refid="28" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="23" relation="include">
-        </childnode>
-        <childnode refid="29" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
       </node>
       <node id="10">
@@ -221,7 +221,7 @@
         <link refid="matrix__batch_8hpp_source"/>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
       </node>
       <node id="34">
@@ -251,13 +251,13 @@
         <link refid="polarpoissonlikesolver_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
-        <childnode refid="28" relation="include">
+        <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
@@ -271,17 +271,17 @@
         </childnode>
         <childnode refid="43" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
         <childnode refid="44" relation="include">
         </childnode>
       </node>
-      <node id="26">
+      <node id="29">
         <label>gauss_legendre_integration.hpp</label>
         <link refid="gauss__legendre__integration_8hpp_source"/>
         <childnode refid="20" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
@@ -321,11 +321,11 @@
         <link refid="volume__quadrature__nd_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="28" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
@@ -366,12 +366,12 @@
         <label>type_seq_tools.hpp</label>
         <link refid="type__seq__tools_8hpp_source"/>
       </node>
-      <node id="29">
+      <node id="27">
         <label>view.hpp</label>
         <link refid="view_8hpp_source"/>
         <childnode refid="20" relation="include">
         </childnode>
-        <childnode refid="30" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
@@ -411,7 +411,7 @@
       <node id="36">
         <label>ginkgo/ginkgo.hpp</label>
       </node>
-      <node id="30">
+      <node id="28">
         <label>ostream</label>
       </node>
       <node id="5">
@@ -420,7 +420,7 @@
       <node id="6">
         <label>utility</label>
       </node>
-      <node id="27">
+      <node id="30">
         <label>vector</label>
       </node>
     </incdepgraph>

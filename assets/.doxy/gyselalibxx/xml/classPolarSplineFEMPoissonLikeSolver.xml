@@ -1325,7 +1325,7 @@
 <para>Solve the Poisson-like equation. </para>
         </briefdescription>
         <detaileddescription>
-<para>This operator returns the coefficients associated with the B-Splines of the solution <formula id="57">$\phi$</formula>.</para>
+<para>This operator returns the coefficients associated with the B-Splines of the solution <formula id="191">$\phi$</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">rhs</parametername>
@@ -1339,7 +1339,7 @@
 <parametername direction="inout">spline</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the solution <formula id="57">$\phi$</formula>, also used as initial data for the iterative solver. </para>
+<para>The spline representation of the solution <formula id="191">$\phi$</formula>, also used as initial data for the iterative solver. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -1372,7 +1372,7 @@
 <para>Solve the Poisson-like equation. </para>
         </briefdescription>
         <detaileddescription>
-<para>This operator uses the other operator () and returns the values on the grid of the solution <formula id="57">$\phi$</formula>.</para>
+<para>This operator uses the other operator () and returns the values on the grid of the solution <formula id="191">$\phi$</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">rhs</parametername>
@@ -1386,7 +1386,7 @@
 <parametername direction="inout">phi</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The values of the solution <formula id="57">$\phi$</formula> on the given coords_eval, also used as initial data for the iterative solver. </para>
+<para>The values of the solution <formula id="191">$\phi$</formula> on the given coords_eval, also used as initial data for the iterative solver. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -1472,7 +1472,7 @@
 <parametername direction="in">evaluator</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>An evaluator for evaluating 2D splines on <formula id="186">$ (r, \theta) $</formula>. </para>
+<para>An evaluator for evaluating 2D splines on <formula id="32">$ (r, \theta) $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1737,7 +1737,7 @@
 <parametername direction="out">derivs</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>derivatives over <formula id="186">$ (r, \theta) $</formula> directions.</para>
+<para>derivatives over <formula id="32">$ (r, \theta) $</formula> directions.</para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1801,7 +1801,7 @@
 <parametername direction="out">derivs</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>derivatives over <formula id="186">$ (r, \theta) $</formula> directions.</para>
+<para>derivatives over <formula id="32">$ (r, \theta) $</formula> directions.</para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -2060,7 +2060,7 @@
 <parametername>IdxRangeFull</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The full index range of <formula id="36">$ \phi $</formula> including any batch dimensions. </para>
+<para>The full index range of <formula id="155">$ \phi $</formula> including any batch dimensions. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>

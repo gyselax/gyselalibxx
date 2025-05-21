@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
-  <compounddef id="mapping__tools_8hpp" kind="file" language="C++">
-    <compoundname>mapping_tools.hpp</compoundname>
+  <compounddef id="coord__transformation__tools_8hpp" kind="file" language="C++">
+    <compoundname>coord_transformation_tools.hpp</compoundname>
     <includes local="no">array</includes>
     <includes local="no">type_traits</includes>
     <includes local="no">utility</includes>
@@ -9,24 +9,40 @@
     <includes refid="vector__index__tools_8hpp" local="yes">vector_index_tools.hpp</includes>
     <includes refid="view_8hpp" local="yes">view.hpp</includes>
     <includedby refid="spline__polar__foot__finder_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp</includedby>
+    <includedby refid="barycentric__to__cartesian_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/barycentric_to_cartesian.hpp</includedby>
+    <includedby refid="cartesian__to__barycentric_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_barycentric.hpp</includedby>
+    <includedby refid="cartesian__to__circular_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_circular.hpp</includedby>
+    <includedby refid="cartesian__to__cylindrical_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp</includedby>
+    <includedby refid="cartesian__to__czarny_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_czarny.hpp</includedby>
+    <includedby refid="circular__to__cartesian_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp</includedby>
+    <includedby refid="combined__mapping_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp</includedby>
+    <includedby refid="cylindrical__to__cartesian_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cylindrical_to_cartesian.hpp</includedby>
+    <includedby refid="czarny__to__cartesian_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp</includedby>
+    <includedby refid="discrete__to__cartesian_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp</includedby>
+    <includedby refid="inv__jacobian__o__point_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp</includedby>
+    <includedby refid="inverse__jacobian__matrix_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inverse_jacobian_matrix.hpp</includedby>
+    <includedby refid="metric__tensor__evaluator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp</includedby>
     <includedby refid="polar__bsplines_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp</includedby>
-    <includedby refid="barycentric__to__cartesian_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp</includedby>
-    <includedby refid="cartesian__to__barycentric_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp</includedby>
-    <includedby refid="cartesian__to__circular_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp</includedby>
-    <includedby refid="cartesian__to__cylindrical_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp</includedby>
-    <includedby refid="cartesian__to__czarny_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_czarny.hpp</includedby>
-    <includedby refid="circular__to__cartesian_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp</includedby>
-    <includedby refid="combined__mapping_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp</includedby>
-    <includedby refid="cylindrical__to__cartesian_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp</includedby>
-    <includedby refid="czarny__to__cartesian_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp</includedby>
-    <includedby refid="discrete__to__cartesian_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp</includedby>
-    <includedby refid="inv__jacobian__o__point_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inv_jacobian_o_point.hpp</includedby>
-    <includedby refid="inverse__jacobian__matrix_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp</includedby>
-    <includedby refid="metric__tensor__evaluator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp</includedby>
     <includedby refid="onion__patch__locator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/onion_patch_locator.hpp</includedby>
     <includedby refid="polarpoissonlikesolver_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</includedby>
     <includedby refid="volume__quadrature__nd_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/volume_quadrature_nd.hpp</includedby>
     <incdepgraph>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp</label>
+        <link refid="coord__transformation__tools_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
       <node id="5">
         <label>tensor.hpp</label>
         <link refid="tensor_8hpp_source"/>
@@ -55,22 +71,6 @@
         <label>vector_index_tools.hpp</label>
         <link refid="vector__index__tools_8hpp_source"/>
         <childnode refid="7" relation="include">
-        </childnode>
-      </node>
-      <node id="1">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp</label>
-        <link refid="mapping__tools_8hpp"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
         </childnode>
       </node>
       <node id="8">
@@ -143,6 +143,144 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
+      <node id="7">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/barycentric_to_cartesian.hpp</label>
+        <link refid="barycentric__to__cartesian_8hpp_source"/>
+      </node>
+      <node id="8">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_barycentric.hpp</label>
+        <link refid="cartesian__to__barycentric_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_circular.hpp</label>
+        <link refid="cartesian__to__circular_8hpp_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp</label>
+        <link refid="cartesian__to__cylindrical_8hpp_source"/>
+      </node>
+      <node id="16">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_czarny.hpp</label>
+        <link refid="cartesian__to__czarny_8hpp_source"/>
+      </node>
+      <node id="17">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp</label>
+        <link refid="circular__to__cartesian_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp</label>
+        <link refid="combined__mapping_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp</label>
+        <link refid="coord__transformation__tools_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cylindrical_to_cartesian.hpp</label>
+        <link refid="cylindrical__to__cartesian_8hpp_source"/>
+      </node>
+      <node id="19">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp</label>
+        <link refid="czarny__to__cartesian_8hpp_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping_builder.hpp</label>
+        <link refid="discrete__mapping__builder_8hpp_source"/>
+      </node>
+      <node id="20">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp</label>
+        <link refid="discrete__to__cartesian_8hpp_source"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp</label>
+        <link refid="inv__jacobian__o__point_8hpp_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inverse_jacobian_matrix.hpp</label>
+        <link refid="inverse__jacobian__matrix_8hpp_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp</label>
+        <link refid="metric__tensor__evaluator_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp</label>
+        <link refid="toroidal__to__cylindrical_8hpp_source"/>
+      </node>
       <node id="24">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp</label>
         <link refid="advection__field__rtheta_8hpp_source"/>
@@ -153,7 +291,7 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="8">
+      <node id="11">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp</label>
         <link refid="geometryRTheta_2geometry_2geometry_8hpp_source"/>
       </node>
@@ -179,155 +317,17 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp</label>
         <link refid="bsl__predcorr__second__order__implicit_8hpp_source"/>
       </node>
-      <node id="11">
+      <node id="9">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</label>
         <link refid="bernstein_8hpp_source"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-      </node>
-      <node id="7">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp</label>
-        <link refid="polar__bsplines_8hpp_source"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-      </node>
-      <node id="9">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp</label>
-        <link refid="barycentric__to__cartesian_8hpp_source"/>
-      </node>
-      <node id="10">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_barycentric.hpp</label>
-        <link refid="cartesian__to__barycentric_8hpp_source"/>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-      </node>
-      <node id="12">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_circular.hpp</label>
-        <link refid="cartesian__to__circular_8hpp_source"/>
-        <childnode refid="13" relation="include">
-        </childnode>
-      </node>
-      <node id="15">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_cylindrical.hpp</label>
-        <link refid="cartesian__to__cylindrical_8hpp_source"/>
-      </node>
-      <node id="16">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_czarny.hpp</label>
-        <link refid="cartesian__to__czarny_8hpp_source"/>
-      </node>
-      <node id="17">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/circular_to_cartesian.hpp</label>
-        <link refid="circular__to__cartesian_8hpp_source"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-      </node>
-      <node id="14">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/combined_mapping.hpp</label>
-        <link refid="combined__mapping_8hpp_source"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-      </node>
-      <node id="18">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cylindrical_to_cartesian.hpp</label>
-        <link refid="cylindrical__to__cartesian_8hpp_source"/>
-      </node>
-      <node id="19">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/czarny_to_cartesian.hpp</label>
-        <link refid="czarny__to__cartesian_8hpp_source"/>
-        <childnode refid="13" relation="include">
-        </childnode>
-      </node>
-      <node id="21">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_mapping_builder.hpp</label>
-        <link refid="discrete__mapping__builder_8hpp_source"/>
-      </node>
-      <node id="20">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/discrete_to_cartesian.hpp</label>
-        <link refid="discrete__to__cartesian_8hpp_source"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-      </node>
-      <node id="13">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inv_jacobian_o_point.hpp</label>
-        <link refid="inv__jacobian__o__point_8hpp_source"/>
-        <childnode refid="14" relation="include">
-        </childnode>
-      </node>
-      <node id="22">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/inverse_jacobian_matrix.hpp</label>
-        <link refid="inverse__jacobian__matrix_8hpp_source"/>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="23" relation="include">
-        </childnode>
-        <childnode refid="30" relation="include">
-        </childnode>
-      </node>
-      <node id="1">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp</label>
-        <link refid="mapping__tools_8hpp"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="23" relation="include">
-        </childnode>
-        <childnode refid="31" relation="include">
-        </childnode>
-        <childnode refid="27" relation="include">
-        </childnode>
-        <childnode refid="35" relation="include">
-        </childnode>
       </node>
-      <node id="23">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/metric_tensor_evaluator.hpp</label>
-        <link refid="metric__tensor__evaluator_8hpp_source"/>
-        <childnode refid="3" relation="include">
+      <node id="10">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp</label>
+        <link refid="polar__bsplines_8hpp_source"/>
+        <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
-        </childnode>
-        <childnode refid="25" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
-        <childnode refid="27" relation="include">
-        </childnode>
-      </node>
-      <node id="30">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/toroidal_to_cylindrical.hpp</label>
-        <link refid="toroidal__to__cylindrical_8hpp_source"/>
       </node>
       <node id="25">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp</label>
@@ -385,7 +385,7 @@
       </node>
     </invincdepgraph>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="mapping__tools_8hpp_1a73b10b1b7a6d6f065a61b7cd3e07715d" prot="public" static="no">
+      <memberdef kind="typedef" id="coord__transformation__tools_8hpp_1a73b10b1b7a6d6f065a61b7cd3e07715d" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class Mapping</type>
@@ -401,11 +401,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp" line="257" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp" bodystart="257" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="257" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" bodystart="257" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="mapping__tools_8hpp_1af4d26b36a5a227ac1dc9de0e85602530" prot="public" static="yes" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="coord__transformation__tools_8hpp_1af4d26b36a5a227ac1dc9de0e85602530" prot="public" static="yes" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>class ExecSpace</type>
@@ -426,9 +426,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp" line="236" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp" bodystart="236" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="236" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" bodystart="236" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="mapping__tools_8hpp_1a91e6734a3ddaeb51dcccfdd2a518e219" prot="public" static="yes" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="coord__transformation__tools_8hpp_1a91e6734a3ddaeb51dcccfdd2a518e219" prot="public" static="yes" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>class Mapping</type>
@@ -445,9 +445,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp" line="240" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp" bodystart="240" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="240" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" bodystart="240" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="mapping__tools_8hpp_1a72103cf68def64391cfa042b9711a86b" prot="public" static="yes" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="coord__transformation__tools_8hpp_1a72103cf68def64391cfa042b9711a86b" prot="public" static="yes" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>class Mapping</type>
@@ -470,9 +470,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp" line="243" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp" bodystart="243" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="243" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" bodystart="243" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="mapping__tools_8hpp_1aa3638126a7736141cba45402354ece26" prot="public" static="yes" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="coord__transformation__tools_8hpp_1aa3638126a7736141cba45402354ece26" prot="public" static="yes" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>class Mapping</type>
@@ -495,9 +495,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp" line="246" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp" bodystart="247" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="246" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" bodystart="247" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="mapping__tools_8hpp_1a230c6bfb2a4c17a294b86fd030d2ab2f" prot="public" static="yes" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="coord__transformation__tools_8hpp_1a230c6bfb2a4c17a294b86fd030d2ab2f" prot="public" static="yes" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>class Mapping</type>
@@ -515,9 +515,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp" line="250" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp" bodystart="250" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="250" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" bodystart="250" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="mapping__tools_8hpp_1a489e6f5039f572e0f76796a376857cd5" prot="public" static="yes" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="coord__transformation__tools_8hpp_1a489e6f5039f572e0f76796a376857cd5" prot="public" static="yes" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>class Mapping</type>
@@ -534,9 +534,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp" line="254" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp" bodystart="254" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="254" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" bodystart="254" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="mapping__tools_8hpp_1a40c83f9e43b408ef10e0c553b6c97ddf" prot="public" static="yes" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="coord__transformation__tools_8hpp_1a40c83f9e43b408ef10e0c553b6c97ddf" prot="public" static="yes" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>class Mapping</type>
@@ -554,7 +554,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp" line="260" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp" bodystart="261" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="260" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" bodystart="261" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -818,6 +818,6 @@
 <codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>mapping_detail::SingularOPointInvJacobian&lt;</highlight></codeline>
 <codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::remove_const_t&lt;std::remove_reference_t&lt;Mapping&gt;&gt;&gt;::value;</highlight></codeline>
     </programlisting>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/mapping_tools.hpp"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp"/>
   </compounddef>
 </doxygen>

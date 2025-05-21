@@ -236,7 +236,7 @@
 <para>Compute the infinity norm. </para>
         </briefdescription>
         <detaileddescription>
-<para>For a given vector <formula id="157">$ x $</formula> , compute <formula id="310">$|Vert x |Vert_{\infty} = \sup_n |x_n| $</formula>.</para>
+<para>For a given vector <formula id="109">$ x $</formula> , compute <formula id="310">$|Vert x |Vert_{\infty} = \sup_n |x_n| $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">coord</parametername>
@@ -274,7 +274,7 @@
 <para>Compute the infinity norm of a vector on an orthonormal coordinate system. </para>
         </briefdescription>
         <detaileddescription>
-<para>For a given vector <formula id="157">$ x $</formula> , compute <formula id="310">$|Vert x |Vert_{\infty} = \sup_n |x_n| $</formula>.</para>
+<para>For a given vector <formula id="109">$ x $</formula> , compute <formula id="310">$|Vert x |Vert_{\infty} = \sup_n |x_n| $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">vec</parametername>

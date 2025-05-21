@@ -75,7 +75,7 @@
         <name>vector_field_type</name>
         <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;::vector_field_type</qualifiedname>
         <briefdescription>
-<para>The type of the derivative of <formula id="36">$ \phi $</formula>. </para>
+<para>The type of the derivative of <formula id="155">$ \phi $</formula>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -626,7 +626,7 @@
           <declname>rho</declname>
         </param>
         <briefdescription>
-<para>An operator which calculates the solution <formula id="57">$\phi$</formula> to Poisson&apos;s equation: <formula id="344">$ - \Delta \phi = \rho $</formula>. </para>
+<para>An operator which calculates the solution <formula id="191">$\phi$</formula> to Poisson&apos;s equation: <formula id="344">$ - \Delta \phi = \rho $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -673,7 +673,7 @@
           <declname>rho</declname>
         </param>
         <briefdescription>
-<para>An operator which calculates the solution <formula id="57">$\phi$</formula> to Poisson&apos;s equation and its derivative: <formula id="344">$ - \Delta \phi = \rho $</formula> <formula id="104">$ E = - \nabla \phi $</formula>. </para>
+<para>An operator which calculates the solution <formula id="191">$\phi$</formula> to Poisson&apos;s equation and its derivative: <formula id="344">$ - \Delta \phi = \rho $</formula> <formula id="238">$ E = - \nabla \phi $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>

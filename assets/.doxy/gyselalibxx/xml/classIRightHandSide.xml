@@ -46,7 +46,7 @@
 <para>Operator for applying the source term on the distribution function. </para>
         </briefdescription>
         <detaileddescription>
-<para>The source <formula id="152">$S$</formula> acts on the distribution function following the evolution equation df/dt = S <parameterlist kind="param"><parameteritem>
+<para>The source <formula id="286">$S$</formula> acts on the distribution function following the evolution equation df/dt = S <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">allfdistribu</parametername>
 </parameternamelist>

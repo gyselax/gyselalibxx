@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/geometry_pseudo_cartesian.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/geometry_pseudo_cartesian.hpp" bodystart="27" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/geometry_pseudo_cartesian.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/geometry_pseudo_cartesian.hpp" bodystart="27" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/geometry_pseudo_cartesian.hpp" line="18" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/geometry_pseudo_cartesian.hpp" bodystart="18" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/geometry_pseudo_cartesian.hpp" line="18" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/geometry_pseudo_cartesian.hpp" bodystart="18" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structX__pC_1a9dd92bb7100f1957ec459d9db1785510" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>bool constexpr</type>
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/geometry_pseudo_cartesian.hpp" line="21" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/geometry_pseudo_cartesian.hpp" bodystart="21" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/geometry_pseudo_cartesian.hpp" line="21" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/geometry_pseudo_cartesian.hpp" bodystart="21" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structX__pC_1a8576602fe7c14f6940877518ca6c80e8" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>bool constexpr</type>
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/geometry_pseudo_cartesian.hpp" line="24" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/geometry_pseudo_cartesian.hpp" bodystart="24" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/geometry_pseudo_cartesian.hpp" line="24" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/geometry_pseudo_cartesian.hpp" bodystart="24" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -75,7 +75,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/geometry_pseudo_cartesian.hpp" line="12" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/geometry_pseudo_cartesian.hpp" bodystart="13" bodyend="28"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/geometry_pseudo_cartesian.hpp" line="12" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/geometry_pseudo_cartesian.hpp" bodystart="13" bodyend="28"/>
     <listofallmembers>
       <member refid="structX__pC_1abed64025e8d38764331cf6d02e1e3051" prot="public" virt="non-virtual"><scope>X_pC</scope><name>Dual</name></member>
       <member refid="structX__pC_1a8576602fe7c14f6940877518ca6c80e8" prot="public" virt="non-virtual"><scope>X_pC</scope><name>IS_CONTRAVARIANT</name></member>

@@ -93,6 +93,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >coord_transformations</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/coord_transformations/index.html">Mappings</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >data_types</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/data_types/index.html">Data Storage Types</a>
@@ -282,12 +288,6 @@
                 <li class="toctree-l2"><a class="reference internal" >io</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/io/index.html">Functions used for input and output</a>
-                </li>
-    </ul>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" >mapping</a>
-    <ul>
-                <li class="toctree-l3"><a class="reference internal" href="../src/mapping/index.html">Mappings</a>
                 </li>
     </ul>
                 </li>
@@ -542,14 +542,14 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="file-combined_mappinghpp">File combined_mapping.hpp</h1>
-<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_5300298560c4bf255ab9f36681603d89.html"><strong>mapping</strong></a> <strong>&gt;</strong> <a href="combined__mapping_8hpp.html"><strong>combined_mapping.hpp</strong></a></p>
+<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_67161c4ffadea73fddf46ea451c2f62c.html"><strong>coord_transformations</strong></a> <strong>&gt;</strong> <a href="combined__mapping_8hpp.html"><strong>combined_mapping.hpp</strong></a></p>
 <p><a href="combined__mapping_8hpp.html">Go to the documentation of this file</a></p>
 <pre><code class="language-C++">// SPDX-License-Identifier: MIT
 #pragma once
 
+#include "coord_transformation_tools.hpp"
 #include "inv_jacobian_o_point.hpp"
 #include "inverse_jacobian_matrix.hpp"
-#include "mapping_tools.hpp"
 #include "math_tools.hpp"
 
 template &lt;class Mapping1, class Mapping2, class CoordJacobianType = typename Mapping2::CoordResult&gt;

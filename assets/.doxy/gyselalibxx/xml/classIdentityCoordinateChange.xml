@@ -25,7 +25,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="23" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="23" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" line="23" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classIdentityCoordinateChange_1a71e3c0dc21f0aa02946c5c1cf087efb3" prot="public" static="no">
         <type>ddcHelper::to_coord_t&lt; ResultBasis &gt;</type>
@@ -40,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="25" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="25" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" line="25" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classIdentityCoordinateChange_1a3829a6a283ce80c2c610df6b2988e816" prot="public" static="no">
         <type>ddcHelper::to_coord_t&lt; ArgBasis &gt;</type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="27" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" bodystart="27" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-type">
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="30" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" bodystart="30" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="41" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="41" bodyend="45"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" line="41" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" bodystart="41" bodyend="45"/>
       </memberdef>
       <memberdef kind="function" id="classIdentityCoordinateChange_1afb356aea031e07efbd962c2a2c8aecb0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION double</type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="55" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="55" bodyend="58"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" line="55" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" bodystart="55" bodyend="58"/>
       </memberdef>
       <memberdef kind="function" id="classIdentityCoordinateChange_1aee43e63adcd94fb44fa8683b54f239f7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; ResultBasis, ArgBasisCov &gt;</type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="67" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="67" bodyend="72"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" line="67" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" bodystart="67" bodyend="72"/>
       </memberdef>
       <memberdef kind="function" id="classIdentityCoordinateChange_1a67ee0151d1d3597b16a4a56a46b1ce55" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -212,7 +212,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="83" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="83" bodyend="94"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" line="83" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" bodystart="83" bodyend="94"/>
       </memberdef>
       <memberdef kind="function" id="classIdentityCoordinateChange_1a15f89e18a32fec3ddc30de3fab9584f3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION double</type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="104" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="104" bodyend="107"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" line="104" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" bodystart="104" bodyend="107"/>
       </memberdef>
       <memberdef kind="function" id="classIdentityCoordinateChange_1a8123641d097b9a83c292c23f99dd15c9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; ResultBasis, ArgBasisCov &gt;</type>
@@ -274,7 +274,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="116" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="116" bodyend="122"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" line="116" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" bodystart="116" bodyend="122"/>
       </memberdef>
       <memberdef kind="function" id="classIdentityCoordinateChange_1ac2e0cd202f39a69f3b018685f4529240" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -313,7 +313,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="133" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="133" bodyend="144"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" line="133" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" bodystart="133" bodyend="144"/>
       </memberdef>
       <memberdef kind="function" id="classIdentityCoordinateChange_1a6a5a7a7cee7431f4550b61e99d6cc48d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION <ref refid="classIdentityCoordinateChange" kindref="compound">IdentityCoordinateChange</ref>&lt; ResultBasis, ArgBasis &gt;</type>
@@ -331,7 +331,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="151" column="53" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="151" bodyend="155"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" line="151" column="53" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" bodystart="151" bodyend="155"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -363,7 +363,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="159" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="159" bodyend="163"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" line="159" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" bodystart="159" bodyend="163"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -390,7 +390,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" line="19" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp" bodystart="20" bodyend="164"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" line="19" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" bodystart="20" bodyend="164"/>
     <listofallmembers>
       <member refid="classIdentityCoordinateChange_1abc2159f19eb9676ac90b4f63bb1edbec" prot="private" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>ArgBasisCov</name></member>
       <member refid="classIdentityCoordinateChange_1af7f3e085c8a6d862d307556182b83f4a" prot="public" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>CoordArg</name></member>

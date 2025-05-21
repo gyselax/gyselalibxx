@@ -4,23 +4,39 @@
     <compoundname>onion_patch_locator.hpp</compoundname>
     <includes local="no">stdexcept</includes>
     <includes local="no">ddc/ddc.hpp</includes>
+    <includes refid="coord__transformation__tools_8hpp" local="yes">coord_transformation_tools.hpp</includes>
     <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
-    <includes refid="mapping__tools_8hpp" local="yes">mapping_tools.hpp</includes>
     <includes refid="multipatch__type_8hpp" local="yes">multipatch_type.hpp</includes>
     <includes refid="types_8hpp" local="yes">types.hpp</includes>
     <includedby refid="utils__patch__locators_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/utils_patch_locators.hpp</includedby>
     <includedby refid="constant__extrapolation__rules__onion_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</includedby>
     <incdepgraph>
-      <node id="10">
-        <label>tensor.hpp</label>
-        <link refid="tensor_8hpp_source"/>
+      <node id="4">
+        <label>coord_transformation_tools.hpp</label>
+        <link refid="coord__transformation__tools_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>tensor.hpp</label>
+        <link refid="tensor_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -40,7 +56,7 @@
         <link refid="vector__field_8hpp_source"/>
         <childnode refid="19" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
@@ -54,9 +70,9 @@
         <link refid="vector__field__common_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
         <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
         </childnode>
       </node>
       <node id="24">
@@ -66,7 +82,7 @@
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
@@ -81,22 +97,6 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="6">
-        <label>mapping_tools.hpp</label>
-        <link refid="mapping__tools_8hpp_source"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-      </node>
       <node id="1">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/onion_patch_locator.hpp</label>
         <link refid="onion__patch__locator_8hpp"/>
@@ -106,7 +106,7 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="18" relation="include">
         </childnode>
@@ -118,7 +118,7 @@
         <link refid="multipatch__type_8hpp_source"/>
         <childnode refid="19" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="20" relation="include">
         </childnode>
@@ -126,9 +126,9 @@
       <node id="20">
         <label>types.hpp</label>
         <link refid="types_8hpp_source"/>
-        <childnode refid="5" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
@@ -142,33 +142,33 @@
       <node id="19">
         <label>ddc_alias_inline_functions.hpp</label>
         <link refid="ddc__alias__inline__functions_8hpp_source"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="4">
+      <node id="10">
         <label>ddc_aliases.hpp</label>
         <link refid="ddc__aliases_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="21">
         <label>ddc_helper.hpp</label>
         <link refid="ddc__helper_8hpp_source"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="13">
@@ -178,11 +178,11 @@
       <node id="15">
         <label>view.hpp</label>
         <link refid="view_8hpp_source"/>
-        <childnode refid="7" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
@@ -190,10 +190,10 @@
       <node id="17">
         <label>Kokkos_Core.hpp</label>
       </node>
-      <node id="7">
+      <node id="5">
         <label>array</label>
       </node>
-      <node id="11">
+      <node id="9">
         <label>cassert</label>
       </node>
       <node id="22">
@@ -202,7 +202,7 @@
       <node id="3">
         <label>ddc/ddc.hpp</label>
       </node>
-      <node id="5">
+      <node id="11">
         <label>ddc/kernels/splines.hpp</label>
       </node>
       <node id="16">
@@ -211,10 +211,10 @@
       <node id="2">
         <label>stdexcept</label>
       </node>
-      <node id="8">
+      <node id="6">
         <label>type_traits</label>
       </node>
-      <node id="9">
+      <node id="7">
         <label>utility</label>
       </node>
     </incdepgraph>
@@ -299,8 +299,8 @@
 <codeline lineno="5"><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ddc/ddc.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;mapping_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;coord_transformation_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;multipatch_type.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;types.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight></codeline>

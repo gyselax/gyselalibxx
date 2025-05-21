@@ -2936,7 +2936,7 @@
   </compound>
   <compound refid="namespace_0d215" kind="namespace"><name>@215</name>
   </compound>
-  <compound refid="namespace_0d73" kind="namespace"><name>@73</name>
+  <compound refid="namespace_0d92" kind="namespace"><name>@92</name>
   </compound>
   <compound refid="namespaceconnectivity__details" kind="namespace"><name>connectivity_details</name>
     <member refid="connectivity__details_8hpp_1a466fdaea6f003eafe6cf608ff6593e35" kind="enum"><name>InsertPosition</name></member>
@@ -3045,6 +3045,56 @@
     <member refid="collision__operator_8cpp_1a878048a648864a786105b0b734c3532d" kind="variable"><name>is_limiter_mask_enabled</name></member>
   </compound>
   <compound refid="collision__operator_8hpp" kind="file"><name>collision_operator.hpp</name>
+  </compound>
+  <compound refid="barycentric__to__cartesian_8hpp" kind="file"><name>barycentric_to_cartesian.hpp</name>
+  </compound>
+  <compound refid="cartesian__to__barycentric_8hpp" kind="file"><name>cartesian_to_barycentric.hpp</name>
+  </compound>
+  <compound refid="cartesian__to__circular_8hpp" kind="file"><name>cartesian_to_circular.hpp</name>
+  </compound>
+  <compound refid="cartesian__to__cylindrical_8hpp" kind="file"><name>cartesian_to_cylindrical.hpp</name>
+  </compound>
+  <compound refid="cartesian__to__czarny_8hpp" kind="file"><name>cartesian_to_czarny.hpp</name>
+  </compound>
+  <compound refid="circular__to__cartesian_8hpp" kind="file"><name>circular_to_cartesian.hpp</name>
+  </compound>
+  <compound refid="combined__mapping_8hpp" kind="file"><name>combined_mapping.hpp</name>
+  </compound>
+  <compound refid="coord__transformation__tools_8hpp" kind="file"><name>coord_transformation_tools.hpp</name>
+    <member refid="coord__transformation__tools_8hpp_1a73b10b1b7a6d6f065a61b7cd3e07715d" kind="typedef"><name>inverse_mapping_t</name></member>
+    <member refid="coord__transformation__tools_8hpp_1af4d26b36a5a227ac1dc9de0e85602530" kind="variable"><name>is_accessible_v</name></member>
+    <member refid="coord__transformation__tools_8hpp_1a91e6734a3ddaeb51dcccfdd2a518e219" kind="variable"><name>is_mapping_v</name></member>
+    <member refid="coord__transformation__tools_8hpp_1a72103cf68def64391cfa042b9711a86b" kind="variable"><name>has_jacobian_v</name></member>
+    <member refid="coord__transformation__tools_8hpp_1aa3638126a7736141cba45402354ece26" kind="variable"><name>has_inv_jacobian_v</name></member>
+    <member refid="coord__transformation__tools_8hpp_1a230c6bfb2a4c17a294b86fd030d2ab2f" kind="variable"><name>is_curvilinear_2d_mapping_v</name></member>
+    <member refid="coord__transformation__tools_8hpp_1a489e6f5039f572e0f76796a376857cd5" kind="variable"><name>is_analytical_mapping_v</name></member>
+    <member refid="coord__transformation__tools_8hpp_1a40c83f9e43b408ef10e0c553b6c97ddf" kind="variable"><name>has_singular_o_point_inv_jacobian_v</name></member>
+  </compound>
+  <compound refid="cylindrical__to__cartesian_8hpp" kind="file"><name>cylindrical_to_cartesian.hpp</name>
+  </compound>
+  <compound refid="czarny__to__cartesian_8hpp" kind="file"><name>czarny_to_cartesian.hpp</name>
+  </compound>
+  <compound refid="discrete__mapping__builder_8hpp" kind="file"><name>discrete_mapping_builder.hpp</name>
+  </compound>
+  <compound refid="discrete__to__cartesian_8hpp" kind="file"><name>discrete_to_cartesian.hpp</name>
+  </compound>
+  <compound refid="geometry__pseudo__cartesian_8hpp" kind="file"><name>geometry_pseudo_cartesian.hpp</name>
+    <member refid="geometry__pseudo__cartesian_8hpp_1a56e674ac7c43bffaa8becca4fb0e0202" kind="typedef"><name>CoordX_pC</name></member>
+    <member refid="geometry__pseudo__cartesian_8hpp_1ac6c85b64c2ed56351568c29ccc35da14" kind="typedef"><name>CoordY_pC</name></member>
+    <member refid="geometry__pseudo__cartesian_8hpp_1ac8b92869b81eb86e12d0323a21c42be1" kind="typedef"><name>CoordXY_pC</name></member>
+  </compound>
+  <compound refid="identity__coordinate__change_8hpp" kind="file"><name>identity_coordinate_change.hpp</name>
+  </compound>
+  <compound refid="inv__jacobian__o__point_8hpp" kind="file"><name>inv_jacobian_o_point.hpp</name>
+  </compound>
+  <compound refid="inverse__jacobian__matrix_8hpp" kind="file"><name>inverse_jacobian_matrix.hpp</name>
+  </compound>
+  <compound refid="metric__tensor__evaluator_8hpp" kind="file"><name>metric_tensor_evaluator.hpp</name>
+  </compound>
+  <compound refid="toroidal__to__cylindrical_8hpp" kind="file"><name>toroidal_to_cylindrical.hpp</name>
+  </compound>
+  <compound refid="vector__mapper_8hpp" kind="file"><name>vector_mapper.hpp</name>
+    <member refid="vector__mapper_8hpp_1a7fbe2683c9aa0bf1709fbf044781546f" kind="function"><name>create_geometry_mirror_view</name></member>
   </compound>
   <compound refid="deriv__details_8hpp" kind="file"><name>deriv_details.hpp</name>
   </compound>
@@ -3755,56 +3805,6 @@
     <member refid="pdi__helper_8hpp_1aa2ab641263b1485955b31ea87905f461" kind="function"><name>PDI_get_arrays</name></member>
     <member refid="pdi__helper_8hpp_1aea675cbc4b87809def239d711c8b5516" kind="function"><name>PDI_expose_idx_range</name></member>
   </compound>
-  <compound refid="barycentric__to__cartesian_8hpp" kind="file"><name>barycentric_to_cartesian.hpp</name>
-  </compound>
-  <compound refid="cartesian__to__barycentric_8hpp" kind="file"><name>cartesian_to_barycentric.hpp</name>
-  </compound>
-  <compound refid="cartesian__to__circular_8hpp" kind="file"><name>cartesian_to_circular.hpp</name>
-  </compound>
-  <compound refid="cartesian__to__cylindrical_8hpp" kind="file"><name>cartesian_to_cylindrical.hpp</name>
-  </compound>
-  <compound refid="cartesian__to__czarny_8hpp" kind="file"><name>cartesian_to_czarny.hpp</name>
-  </compound>
-  <compound refid="circular__to__cartesian_8hpp" kind="file"><name>circular_to_cartesian.hpp</name>
-  </compound>
-  <compound refid="combined__mapping_8hpp" kind="file"><name>combined_mapping.hpp</name>
-  </compound>
-  <compound refid="cylindrical__to__cartesian_8hpp" kind="file"><name>cylindrical_to_cartesian.hpp</name>
-  </compound>
-  <compound refid="czarny__to__cartesian_8hpp" kind="file"><name>czarny_to_cartesian.hpp</name>
-  </compound>
-  <compound refid="discrete__mapping__builder_8hpp" kind="file"><name>discrete_mapping_builder.hpp</name>
-  </compound>
-  <compound refid="discrete__to__cartesian_8hpp" kind="file"><name>discrete_to_cartesian.hpp</name>
-  </compound>
-  <compound refid="geometry__pseudo__cartesian_8hpp" kind="file"><name>geometry_pseudo_cartesian.hpp</name>
-    <member refid="geometry__pseudo__cartesian_8hpp_1a56e674ac7c43bffaa8becca4fb0e0202" kind="typedef"><name>CoordX_pC</name></member>
-    <member refid="geometry__pseudo__cartesian_8hpp_1ac6c85b64c2ed56351568c29ccc35da14" kind="typedef"><name>CoordY_pC</name></member>
-    <member refid="geometry__pseudo__cartesian_8hpp_1ac8b92869b81eb86e12d0323a21c42be1" kind="typedef"><name>CoordXY_pC</name></member>
-  </compound>
-  <compound refid="identity__coordinate__change_8hpp" kind="file"><name>identity_coordinate_change.hpp</name>
-  </compound>
-  <compound refid="inv__jacobian__o__point_8hpp" kind="file"><name>inv_jacobian_o_point.hpp</name>
-  </compound>
-  <compound refid="inverse__jacobian__matrix_8hpp" kind="file"><name>inverse_jacobian_matrix.hpp</name>
-  </compound>
-  <compound refid="mapping__tools_8hpp" kind="file"><name>mapping_tools.hpp</name>
-    <member refid="mapping__tools_8hpp_1a73b10b1b7a6d6f065a61b7cd3e07715d" kind="typedef"><name>inverse_mapping_t</name></member>
-    <member refid="mapping__tools_8hpp_1af4d26b36a5a227ac1dc9de0e85602530" kind="variable"><name>is_accessible_v</name></member>
-    <member refid="mapping__tools_8hpp_1a91e6734a3ddaeb51dcccfdd2a518e219" kind="variable"><name>is_mapping_v</name></member>
-    <member refid="mapping__tools_8hpp_1a72103cf68def64391cfa042b9711a86b" kind="variable"><name>has_jacobian_v</name></member>
-    <member refid="mapping__tools_8hpp_1aa3638126a7736141cba45402354ece26" kind="variable"><name>has_inv_jacobian_v</name></member>
-    <member refid="mapping__tools_8hpp_1a230c6bfb2a4c17a294b86fd030d2ab2f" kind="variable"><name>is_curvilinear_2d_mapping_v</name></member>
-    <member refid="mapping__tools_8hpp_1a489e6f5039f572e0f76796a376857cd5" kind="variable"><name>is_analytical_mapping_v</name></member>
-    <member refid="mapping__tools_8hpp_1a40c83f9e43b408ef10e0c553b6c97ddf" kind="variable"><name>has_singular_o_point_inv_jacobian_v</name></member>
-  </compound>
-  <compound refid="metric__tensor__evaluator_8hpp" kind="file"><name>metric_tensor_evaluator.hpp</name>
-  </compound>
-  <compound refid="toroidal__to__cylindrical_8hpp" kind="file"><name>toroidal_to_cylindrical.hpp</name>
-  </compound>
-  <compound refid="vector__mapper_8hpp" kind="file"><name>vector_mapper.hpp</name>
-    <member refid="vector__mapper_8hpp_1a7fbe2683c9aa0bf1709fbf044781546f" kind="function"><name>create_geometry_mirror_view</name></member>
-  </compound>
   <compound refid="central__fdm__partial__derivatives_8hpp" kind="file"><name>central_fdm_partial_derivatives.hpp</name>
   </compound>
   <compound refid="central__fdm__partial__derivatives__with__boundary__values_8hpp" kind="file"><name>central_fdm_partial_derivatives_with_boundary_values.hpp</name>
@@ -4216,6 +4216,8 @@
   </compound>
   <compound refid="dir_28b51abc9241105ab41b66c468e7d019" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity</name>
   </compound>
+  <compound refid="dir_67161c4ffadea73fddf46ea451c2f62c" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations</name>
+  </compound>
   <compound refid="dir_eaa769653453aaefd8cc10e98e9bb3eb" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types</name>
   </compound>
   <compound refid="dir_2cbcac1ff0802c0a6551cceb4db325f2" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types</name>
@@ -4253,8 +4255,6 @@
   <compound refid="dir_264890e5c091f8c8d7fe1f842870c25e" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation</name>
   </compound>
   <compound refid="dir_c184e51c84f2c3f0345bbc8a0d75d3e1" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io</name>
-  </compound>
-  <compound refid="dir_5300298560c4bf255ab9f36681603d89" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping</name>
   </compound>
   <compound refid="dir_3ced5d1c6eac490d7704c2e023d148d8" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools</name>
   </compound>

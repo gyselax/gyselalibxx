@@ -7,33 +7,79 @@
     <includes local="no">ddc/ddc.hpp</includes>
     <includes refid="bernstein_8hpp" local="yes">bernstein.hpp</includes>
     <includes refid="cartesian__to__barycentric_8hpp" local="yes">cartesian_to_barycentric.hpp</includes>
+    <includes refid="coord__transformation__tools_8hpp" local="yes">coord_transformation_tools.hpp</includes>
     <includes refid="ddc__helper_8hpp" local="yes">ddc_helper.hpp</includes>
     <includes refid="discrete__to__cartesian_8hpp" local="yes">discrete_to_cartesian.hpp</includes>
-    <includes refid="mapping__tools_8hpp" local="yes">mapping_tools.hpp</includes>
     <includes refid="polar__spline_8hpp" local="yes">polar_spline.hpp</includes>
     <includes refid="view_8hpp" local="yes">view.hpp</includes>
     <includedby refid="geometryRTheta_2geometry_2geometry_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp</includedby>
     <incdepgraph>
+      <node id="6">
+        <label>cartesian_to_barycentric.hpp</label>
+        <link refid="cartesian__to__barycentric_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>coord_transformation_tools.hpp</label>
+        <link refid="coord__transformation__tools_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>discrete_to_cartesian.hpp</label>
+        <link refid="discrete__to__cartesian_8hpp_source"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
       <node id="24">
         <label>indexed_tensor.hpp</label>
         <link refid="indexed__tensor_8hpp"/>
-        <childnode refid="12" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="12">
+      <node id="10">
         <label>tensor.hpp</label>
         <link refid="tensor_8hpp_source"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
@@ -53,7 +99,7 @@
         <link refid="vector__field_8hpp_source"/>
         <childnode refid="26" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="20" relation="include">
         </childnode>
@@ -67,9 +113,9 @@
         <link refid="vector__field__common_8hpp_source"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
         <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="27">
@@ -79,7 +125,7 @@
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="20" relation="include">
         </childnode>
@@ -101,7 +147,7 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="20" relation="include">
         </childnode>
@@ -123,11 +169,11 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
         <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
@@ -144,52 +190,6 @@
         <childnode refid="20" relation="include">
         </childnode>
       </node>
-      <node id="6">
-        <label>cartesian_to_barycentric.hpp</label>
-        <link refid="cartesian__to__barycentric_8hpp_source"/>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-      </node>
-      <node id="29">
-        <label>discrete_to_cartesian.hpp</label>
-        <link refid="discrete__to__cartesian_8hpp_source"/>
-        <childnode refid="30" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-      </node>
-      <node id="9">
-        <label>mapping_tools.hpp</label>
-        <link refid="mapping__tools_8hpp_source"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-      </node>
       <node id="22">
         <label>math_tools.hpp</label>
         <link refid="math__tools_8hpp_source"/>
@@ -203,7 +203,7 @@
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>
@@ -211,33 +211,33 @@
       <node id="26">
         <label>ddc_alias_inline_functions.hpp</label>
         <link refid="ddc__alias__inline__functions_8hpp_source"/>
-        <childnode refid="10" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="7">
+      <node id="12">
         <label>ddc_aliases.hpp</label>
         <link refid="ddc__aliases_8hpp_source"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
       </node>
       <node id="20">
         <label>ddc_helper.hpp</label>
         <link refid="ddc__helper_8hpp_source"/>
-        <childnode refid="13" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
       </node>
       <node id="15">
@@ -251,7 +251,7 @@
         </childnode>
         <childnode refid="18" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
@@ -265,7 +265,7 @@
       <node id="2">
         <label>array</label>
       </node>
-      <node id="13">
+      <node id="11">
         <label>cassert</label>
       </node>
       <node id="21">
@@ -274,7 +274,7 @@
       <node id="4">
         <label>ddc/ddc.hpp</label>
       </node>
-      <node id="8">
+      <node id="13">
         <label>ddc/kernels/splines.hpp</label>
       </node>
       <node id="30">
@@ -283,10 +283,10 @@
       <node id="18">
         <label>ostream</label>
       </node>
-      <node id="10">
+      <node id="8">
         <label>type_traits</label>
       </node>
-      <node id="11">
+      <node id="9">
         <label>utility</label>
       </node>
       <node id="3">
@@ -361,9 +361,9 @@
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;bernstein.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;cartesian_to_barycentric.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_helper.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;discrete_to_cartesian.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;mapping_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;coord_transformation_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_helper.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;discrete_to_cartesian.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;polar_spline.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;view.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight></codeline>

@@ -4,15 +4,15 @@
 
 
 
-[**FileList**](files.md) **>** [**mapping**](dir_5300298560c4bf255ab9f36681603d89.md) **>** [**barycentric\_to\_cartesian.hpp**](barycentric__to__cartesian_8hpp.md)
+[**FileList**](files.md) **>** [**coord\_transformations**](dir_67161c4ffadea73fddf46ea451c2f62c.md) **>** [**barycentric\_to\_cartesian.hpp**](barycentric__to__cartesian_8hpp.md)
 
 [Go to the source code of this file](barycentric__to__cartesian_8hpp_source.md)
 
 
 
 * `#include <ddc/ddc.hpp>`
+* `#include "coord_transformation_tools.hpp"`
 * `#include "ddc_aliases.hpp"`
-* `#include "mapping_tools.hpp"`
 
 
 
@@ -85,5 +85,5 @@
 
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/barycentric_to_cartesian.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/barycentric_to_cartesian.hpp`
 

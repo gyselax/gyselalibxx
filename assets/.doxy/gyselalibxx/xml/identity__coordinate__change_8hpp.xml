@@ -6,7 +6,7 @@
     <includes refid="ddc__helper_8hpp" local="yes">ddc_helper.hpp</includes>
     <incdepgraph>
       <node id="1">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp</label>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp</label>
         <link refid="identity__coordinate__change_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -152,6 +152,6 @@
 <codeline lineno="171"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="172"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>mapping_detail</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/identity_coordinate_change.hpp"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp"/>
   </compounddef>
 </doxygen>

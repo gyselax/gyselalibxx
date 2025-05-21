@@ -93,6 +93,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" >coord_transformations</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/coord_transformations/index.html">Mappings</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l2"><a class="reference internal" >data_types</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/data_types/index.html">Data Storage Types</a>
@@ -282,12 +288,6 @@
                 <li class="toctree-l2"><a class="reference internal" >io</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/io/index.html">Functions used for input and output</a>
-                </li>
-    </ul>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" >mapping</a>
-    <ul>
-                <li class="toctree-l3"><a class="reference internal" href="../src/mapping/index.html">Mappings</a>
                 </li>
     </ul>
                 </li>
@@ -612,6 +612,9 @@
 </ul>
 <h2 id="c">c</h2>
 <ul>
+<li><strong>CoordXY_pC</strong> (<a href="geometry__pseudo__cartesian_8hpp.html"><strong>geometry_pseudo_cartesian.hpp</strong></a>)</li>
+<li><strong>CoordX_pC</strong> (<a href="geometry__pseudo__cartesian_8hpp.html"><strong>geometry_pseudo_cartesian.hpp</strong></a>)</li>
+<li><strong>CoordY_pC</strong> (<a href="geometry__pseudo__cartesian_8hpp.html"><strong>geometry_pseudo_cartesian.hpp</strong></a>)</li>
 <li><strong>ConstFieldR</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
 <li><strong>ConstFieldRTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
 <li><strong>ConstFieldTheta</strong> (<a href="geometryRTheta_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
@@ -650,9 +653,6 @@
 <li><strong>ConstFieldSpXYVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
 <li><strong>ConstFieldVxVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
 <li><strong>ConstFieldVy</strong> (<a href="geometryXYVxVy_2geometry_2geometry_8hpp.html"><strong>geometry.hpp</strong></a>)</li>
-<li><strong>CoordXY_pC</strong> (<a href="geometry__pseudo__cartesian_8hpp.html"><strong>geometry_pseudo_cartesian.hpp</strong></a>)</li>
-<li><strong>CoordX_pC</strong> (<a href="geometry__pseudo__cartesian_8hpp.html"><strong>geometry_pseudo_cartesian.hpp</strong></a>)</li>
-<li><strong>CoordY_pC</strong> (<a href="geometry__pseudo__cartesian_8hpp.html"><strong>geometry_pseudo_cartesian.hpp</strong></a>)</li>
 <li><strong>collect_grids_on_dim_t</strong> (<a href="connectivity__details_8hpp.html"><strong>connectivity_details.hpp</strong></a>)</li>
 <li><strong>collect_interfaces_on_dim_t</strong> (<a href="connectivity__details_8hpp.html"><strong>connectivity_details.hpp</strong></a>)</li>
 <li><strong>ConstDeriv12_OnPatch_2D</strong> (<a href="types_8hpp.html"><strong>types.hpp</strong></a>)</li>
@@ -884,9 +884,9 @@
 </ul>
 <h2 id="h">h</h2>
 <ul>
-<li><strong>has_inv_jacobian_v</strong> (<a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a>)</li>
-<li><strong>has_jacobian_v</strong> (<a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a>)</li>
-<li><strong>has_singular_o_point_inv_jacobian_v</strong> (<a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a>)</li>
+<li><strong>has_inv_jacobian_v</strong> (<a href="coord__transformation__tools_8hpp.html"><strong>coord_transformation_tools.hpp</strong></a>)</li>
+<li><strong>has_jacobian_v</strong> (<a href="coord__transformation__tools_8hpp.html"><strong>coord_transformation_tools.hpp</strong></a>)</li>
+<li><strong>has_singular_o_point_inv_jacobian_v</strong> (<a href="coord__transformation__tools_8hpp.html"><strong>coord_transformation_tools.hpp</strong></a>)</li>
 <li><strong>has_data_access_methods_v</strong> (<a href="ddc__alias__inline__functions_8hpp.html"><strong>ddc_alias_inline_functions.hpp</strong></a>)</li>
 <li><strong>has_idx_range_v</strong> (<a href="ddc__alias__inline__functions_8hpp.html"><strong>ddc_alias_inline_functions.hpp</strong></a>)</li>
 <li><strong>host_t</strong> (<a href="ddc__helper_8hpp.html"><strong>ddc_helper.hpp</strong></a>)</li>
@@ -895,6 +895,11 @@
 <ul>
 <li><strong>is_limiter_mask_enabled</strong> (<a href="collision__operator_8cpp.html"><strong>collision_operator.cpp</strong></a>)</li>
 <li><strong>is_sol_enabled</strong> (<a href="collision__operator_8cpp.html"><strong>collision_operator.cpp</strong></a>)</li>
+<li><strong>inverse_mapping_t</strong> (<a href="coord__transformation__tools_8hpp.html"><strong>coord_transformation_tools.hpp</strong></a>)</li>
+<li><strong>is_accessible_v</strong> (<a href="coord__transformation__tools_8hpp.html"><strong>coord_transformation_tools.hpp</strong></a>)</li>
+<li><strong>is_analytical_mapping_v</strong> (<a href="coord__transformation__tools_8hpp.html"><strong>coord_transformation_tools.hpp</strong></a>)</li>
+<li><strong>is_curvilinear_2d_mapping_v</strong> (<a href="coord__transformation__tools_8hpp.html"><strong>coord_transformation_tools.hpp</strong></a>)</li>
+<li><strong>is_mapping_v</strong> (<a href="coord__transformation__tools_8hpp.html"><strong>coord_transformation_tools.hpp</strong></a>)</li>
 <li><strong>is_borrowed_deriv_field_v</strong> (<a href="derivative__field__common_8hpp.html"><strong>derivative_field_common.hpp</strong></a>)</li>
 <li><strong>is_deriv_field_v</strong> (<a href="derivative__field__common_8hpp.html"><strong>derivative_field_common.hpp</strong></a>)</li>
 <li><strong>is_subidx_range_collection_v</strong> (<a href="idx__range__slice_8hpp.html"><strong>idx_range_slice.hpp</strong></a>)</li>
@@ -986,11 +991,6 @@
 <li><strong>is_polar_spline_v&lt; PolarSpline&lt; PolarBSplinesType, MemSpace &gt; &gt;</strong> (<a href="polar__spline_8hpp.html"><strong>polar_spline.hpp</strong></a>)</li>
 <li><strong>is_polar_spline_v&lt; PolarSplineMem&lt; PolarBSplinesType, MemSpace &gt; &gt;</strong> (<a href="polar__spline_8hpp.html"><strong>polar_spline.hpp</strong></a>)</li>
 <li><strong>interpolator_on_idx_range_t</strong> (<a href="iinterpolator_8hpp.html"><strong>iinterpolator.hpp</strong></a>)</li>
-<li><strong>inverse_mapping_t</strong> (<a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a>)</li>
-<li><strong>is_accessible_v</strong> (<a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a>)</li>
-<li><strong>is_analytical_mapping_v</strong> (<a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a>)</li>
-<li><strong>is_curvilinear_2d_mapping_v</strong> (<a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a>)</li>
-<li><strong>is_mapping_v</strong> (<a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a>)</li>
 <li><strong>insert_into_seq_before_t</strong> (<a href="mpitools_8hpp.html"><strong>mpitools.hpp</strong></a>)</li>
 <li><strong>insert_into_type_seq_t</strong> (<a href="mpitools_8hpp.html"><strong>mpitools.hpp</strong></a>)</li>
 <li><strong>insert_mpi_tags_into_seq_t</strong> (<a href="mpitools_8hpp.html"><strong>mpitools.hpp</strong></a>)</li>

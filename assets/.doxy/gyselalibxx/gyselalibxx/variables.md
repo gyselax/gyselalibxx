@@ -32,6 +32,9 @@
 
 ## c
 
+* **CoordXY\_pC** ([**geometry\_pseudo\_cartesian.hpp**](geometry__pseudo__cartesian_8hpp.md))
+* **CoordX\_pC** ([**geometry\_pseudo\_cartesian.hpp**](geometry__pseudo__cartesian_8hpp.md))
+* **CoordY\_pC** ([**geometry\_pseudo\_cartesian.hpp**](geometry__pseudo__cartesian_8hpp.md))
 * **ConstFieldR** ([**geometry.hpp**](geometryRTheta_2geometry_2geometry_8hpp.md))
 * **ConstFieldRTheta** ([**geometry.hpp**](geometryRTheta_2geometry_2geometry_8hpp.md))
 * **ConstFieldTheta** ([**geometry.hpp**](geometryRTheta_2geometry_2geometry_8hpp.md))
@@ -70,9 +73,6 @@
 * **ConstFieldSpXYVxVy** ([**geometry.hpp**](geometryXYVxVy_2geometry_2geometry_8hpp.md))
 * **ConstFieldVxVy** ([**geometry.hpp**](geometryXYVxVy_2geometry_2geometry_8hpp.md))
 * **ConstFieldVy** ([**geometry.hpp**](geometryXYVxVy_2geometry_2geometry_8hpp.md))
-* **CoordXY\_pC** ([**geometry\_pseudo\_cartesian.hpp**](geometry__pseudo__cartesian_8hpp.md))
-* **CoordX\_pC** ([**geometry\_pseudo\_cartesian.hpp**](geometry__pseudo__cartesian_8hpp.md))
-* **CoordY\_pC** ([**geometry\_pseudo\_cartesian.hpp**](geometry__pseudo__cartesian_8hpp.md))
 * **collect\_grids\_on\_dim\_t** ([**connectivity\_details.hpp**](connectivity__details_8hpp.md))
 * **collect\_interfaces\_on\_dim\_t** ([**connectivity\_details.hpp**](connectivity__details_8hpp.md))
 * **ConstDeriv12\_OnPatch\_2D** ([**types.hpp**](types_8hpp.md))
@@ -309,9 +309,9 @@
 
 ## h
 
-* **has\_inv\_jacobian\_v** ([**mapping\_tools.hpp**](mapping__tools_8hpp.md))
-* **has\_jacobian\_v** ([**mapping\_tools.hpp**](mapping__tools_8hpp.md))
-* **has\_singular\_o\_point\_inv\_jacobian\_v** ([**mapping\_tools.hpp**](mapping__tools_8hpp.md))
+* **has\_inv\_jacobian\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
+* **has\_jacobian\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
+* **has\_singular\_o\_point\_inv\_jacobian\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
 * **has\_data\_access\_methods\_v** ([**ddc\_alias\_inline\_functions.hpp**](ddc__alias__inline__functions_8hpp.md))
 * **has\_idx\_range\_v** ([**ddc\_alias\_inline\_functions.hpp**](ddc__alias__inline__functions_8hpp.md))
 * **host\_t** ([**ddc\_helper.hpp**](ddc__helper_8hpp.md))
@@ -321,6 +321,11 @@
 
 * **is\_limiter\_mask\_enabled** ([**collision\_operator.cpp**](collision__operator_8cpp.md))
 * **is\_sol\_enabled** ([**collision\_operator.cpp**](collision__operator_8cpp.md))
+* **inverse\_mapping\_t** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
+* **is\_accessible\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
+* **is\_analytical\_mapping\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
+* **is\_curvilinear\_2d\_mapping\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
+* **is\_mapping\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
 * **is\_borrowed\_deriv\_field\_v** ([**derivative\_field\_common.hpp**](derivative__field__common_8hpp.md))
 * **is\_deriv\_field\_v** ([**derivative\_field\_common.hpp**](derivative__field__common_8hpp.md))
 * **is\_subidx\_range\_collection\_v** ([**idx\_range\_slice.hpp**](idx__range__slice_8hpp.md))
@@ -412,11 +417,6 @@
 * **is\_polar\_spline\_v&lt; PolarSpline&lt; PolarBSplinesType, MemSpace &gt; &gt;** ([**polar\_spline.hpp**](polar__spline_8hpp.md))
 * **is\_polar\_spline\_v&lt; PolarSplineMem&lt; PolarBSplinesType, MemSpace &gt; &gt;** ([**polar\_spline.hpp**](polar__spline_8hpp.md))
 * **interpolator\_on\_idx\_range\_t** ([**iinterpolator.hpp**](iinterpolator_8hpp.md))
-* **inverse\_mapping\_t** ([**mapping\_tools.hpp**](mapping__tools_8hpp.md))
-* **is\_accessible\_v** ([**mapping\_tools.hpp**](mapping__tools_8hpp.md))
-* **is\_analytical\_mapping\_v** ([**mapping\_tools.hpp**](mapping__tools_8hpp.md))
-* **is\_curvilinear\_2d\_mapping\_v** ([**mapping\_tools.hpp**](mapping__tools_8hpp.md))
-* **is\_mapping\_v** ([**mapping\_tools.hpp**](mapping__tools_8hpp.md))
 * **insert\_into\_seq\_before\_t** ([**mpitools.hpp**](mpitools_8hpp.md))
 * **insert\_into\_type\_seq\_t** ([**mpitools.hpp**](mpitools_8hpp.md))
 * **insert\_mpi\_tags\_into\_seq\_t** ([**mpitools.hpp**](mpitools_8hpp.md))

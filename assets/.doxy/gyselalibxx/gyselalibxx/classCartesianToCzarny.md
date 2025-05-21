@@ -114,7 +114,10 @@ The mapping  is defined by
 
 
 
-with , ,  and  and  given as parameters. 
+with , ,  and  and  given as parameters.
+
+
+See O. Czarny and G. Huysmans. Bézier surfaces and finite elements for MHD simulations. Journal of Computational Physics, 227(16):7423–7445, 2008. doi:10.1016/j.jcp.2008.04.001. 
 
 
     
@@ -494,5 +497,5 @@ KOKKOS_DEFAULTED_FUNCTION CartesianToCzarny::~CartesianToCzarny () = default
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/cartesian_to_czarny.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_czarny.hpp`
 

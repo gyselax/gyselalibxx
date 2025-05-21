@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping - GyselalibX</title>
+    <title>File coord_transformation_tools.hpp - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping";
-        var mkdocs_page_input_path = "gyselalibxx/dir_5300298560c4bf255ab9f36681603d89.md";
+        var mkdocs_page_name = "File coord_transformation_tools.hpp";
+        var mkdocs_page_input_path = "gyselalibxx/coord__transformation__tools_8hpp.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -90,6 +90,12 @@
                 <li class="toctree-l2"><a class="reference internal" >collisions</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/collisions/index.html">Collisions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >coord_transformations</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/coord_transformations/index.html">Mappings</a>
                 </li>
     </ul>
                 </li>
@@ -282,12 +288,6 @@
                 <li class="toctree-l2"><a class="reference internal" >io</a>
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/io/index.html">Functions used for input and output</a>
-                </li>
-    </ul>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" >mapping</a>
-    <ul>
-                <li class="toctree-l3"><a class="reference internal" href="../src/mapping/index.html">Mappings</a>
                 </li>
     </ul>
                 </li>
@@ -531,9 +531,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping</li>
+      <li class="breadcrumb-item active">File coord_transformation_tools.hpp</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/dir_5300298560c4bf255ab9f36681603d89.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/coord__transformation__tools_8hpp.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -541,9 +541,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="dir-homerunnerworkgyselalibxxgyselalibxxcode_branchsrcmapping">Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping</h1>
-<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_5300298560c4bf255ab9f36681603d89.html"><strong>mapping</strong></a></p>
-<h2 id="files">Files</h2>
+                <div><h1 id="file-coord_transformation_toolshpp">File coord_transformation_tools.hpp</h1>
+<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_67161c4ffadea73fddf46ea451c2f62c.html"><strong>coord_transformations</strong></a> <strong>&gt;</strong> <a href="coord__transformation__tools_8hpp.html"><strong>coord_transformation_tools.hpp</strong></a></p>
+<p><a href="coord__transformation__tools_8hpp_source.html">Go to the source code of this file</a></p>
+<ul>
+<li><code>#include &lt;array&gt;</code></li>
+<li><code>#include &lt;type_traits&gt;</code></li>
+<li><code>#include &lt;utility&gt;</code></li>
+<li><code>#include "tensor.hpp"</code></li>
+<li><code>#include "vector_index_tools.hpp"</code></li>
+<li><code>#include "view.hpp"</code></li>
+</ul>
+<h2 id="public-types">Public Types</h2>
 <table>
 <thead>
 <tr>
@@ -553,85 +562,93 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="barycentric__to__cartesian_8hpp.html"><strong>barycentric_to_cartesian.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="cartesian__to__barycentric_8hpp.html"><strong>cartesian_to_barycentric.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="cartesian__to__circular_8hpp.html"><strong>cartesian_to_circular.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="cartesian__to__cylindrical_8hpp.html"><strong>cartesian_to_cylindrical.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="cartesian__to__czarny_8hpp.html"><strong>cartesian_to_czarny.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="circular__to__cartesian_8hpp.html"><strong>circular_to_cartesian.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="combined__mapping_8hpp.html"><strong>combined_mapping.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="cylindrical__to__cartesian_8hpp.html"><strong>cylindrical_to_cartesian.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="czarny__to__cartesian_8hpp.html"><strong>czarny_to_cartesian.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="discrete__mapping__builder_8hpp.html"><strong>discrete_mapping_builder.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="discrete__to__cartesian_8hpp.html"><strong>discrete_to_cartesian.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="geometry__pseudo__cartesian_8hpp.html"><strong>geometry_pseudo_cartesian.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="identity__coordinate__change_8hpp.html"><strong>identity_coordinate_change.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="inv__jacobian__o__point_8hpp.html"><strong>inv_jacobian_o_point.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="inverse__jacobian__matrix_8hpp.html"><strong>inverse_jacobian_matrix.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="mapping__tools_8hpp.html"><strong>mapping_tools.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="metric__tensor__evaluator_8hpp.html"><strong>metric_tensor_evaluator.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="toroidal__to__cylindrical_8hpp.html"><strong>toroidal_to_cylindrical.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="vector__mapper_8hpp.html"><strong>vector_mapper.hpp</strong></a> <br></td>
+<td style="text-align: right;">typedef decltype(std::declval&lt; Mapping &gt;().get_inverse_mapping())</td>
+<td style="text-align: left;"><a href="#typedef-inverse_mapping_t"><strong>inverse_mapping_t</strong></a>  <br></td>
 </tr>
 </tbody>
 </table>
+<h2 id="public-static-attributes">Public Static Attributes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: left;"><a href="#variable-has_inv_jacobian_v"><strong>has_inv_jacobian_v</strong></a>   = <code>mapping\_detail::DefinesInvJacobian&amp;lt;Mapping, !RaiseError&amp;gt;::value</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: left;"><a href="#variable-has_jacobian_v"><strong>has_jacobian_v</strong></a>   = <code>mapping\_detail::DefinesJacobian&amp;lt;Mapping, !RaiseError&amp;gt;::value</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: left;"><a href="#variable-has_singular_o_point_inv_jacobian_v"><strong>has_singular_o_point_inv_jacobian_v</strong></a>   = <code>/* multi line expression */</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: left;"><a href="#variable-is_accessible_v"><strong>is_accessible_v</strong></a>   = <code>/* multi line expression */</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: left;"><a href="#variable-is_analytical_mapping_v"><strong>is_analytical_mapping_v</strong></a>   = <code>mapping\_detail::IsAnalyticalMapping&amp;lt;Mapping&amp;gt;::value</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: left;"><a href="#variable-is_curvilinear_2d_mapping_v"><strong>is_curvilinear_2d_mapping_v</strong></a>   = <code>/* multi line expression */</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: left;"><a href="#variable-is_mapping_v"><strong>is_mapping_v</strong></a>   = <code>mapping\_detail::IsMapping&amp;lt;Mapping&amp;gt;::value</code><br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-inverse_mapping_t">typedef inverse_mapping_t</h3>
+<pre><code class="language-C++">using inverse_mapping_t =  decltype(std::declval&lt;Mapping&gt;().get_inverse_mapping());
+</code></pre>
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mapping/</code></p></div>
+<h2 id="public-static-attributes-documentation">Public Static Attributes Documentation</h2>
+<h3 id="variable-has_inv_jacobian_v">variable has_inv_jacobian_v</h3>
+<pre><code class="language-C++">constexpr bool has_inv_jacobian_v;
+</code></pre>
+<hr>
+
+<h3 id="variable-has_jacobian_v">variable has_jacobian_v</h3>
+<pre><code class="language-C++">constexpr bool has_jacobian_v;
+</code></pre>
+<hr>
+
+<h3 id="variable-has_singular_o_point_inv_jacobian_v">variable has_singular_o_point_inv_jacobian_v</h3>
+<pre><code class="language-C++">constexpr bool has_singular_o_point_inv_jacobian_v;
+</code></pre>
+<hr>
+
+<h3 id="variable-is_accessible_v">variable is_accessible_v</h3>
+<pre><code class="language-C++">constexpr bool is_accessible_v;
+</code></pre>
+<hr>
+
+<h3 id="variable-is_analytical_mapping_v">variable is_analytical_mapping_v</h3>
+<pre><code class="language-C++">constexpr bool is_analytical_mapping_v;
+</code></pre>
+<hr>
+
+<h3 id="variable-is_curvilinear_2d_mapping_v">variable is_curvilinear_2d_mapping_v</h3>
+<pre><code class="language-C++">constexpr bool is_curvilinear_2d_mapping_v;
+</code></pre>
+<hr>
+
+<h3 id="variable-is_mapping_v">variable is_mapping_v</h3>
+<pre><code class="language-C++">constexpr bool is_mapping_v;
+</code></pre>
+<hr>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp</code></p></div>
               
             </div>
           </div><footer>
