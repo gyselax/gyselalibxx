@@ -35,8 +35,10 @@ Yann Munschy
 - Developments in the (x, vx) geometry
 
 Thomas Padioleau <thomas.padioleau@cea.fr>
+- Initial C++ design
 - Fortran to C++ port
-- Optimisation
+- Developments in the (x, vx) geometry
+- Packaging
 
 Mathieu Protais
 - FDM operators
