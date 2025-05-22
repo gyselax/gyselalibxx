@@ -6,6 +6,7 @@ Please complete the checklist to ensure that all tasks are completed before mark
 
 ### All Submissions
 
+- [ ] Have you ensured that all lines changed in this PR are justified by a comment found in the description ?
 - [ ] Have you updated the [CHANGELOG.md](https://github.com/gyselax/gyselalibxx/blob/devel/CHANGELOG.md) ?
 - [ ] Have you linked any issues that should be closed when this PR is merged (using closing keywords) ?
 - [ ] Have you checked that the AUTHORS file is up to date ?
