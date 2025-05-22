@@ -10,8 +10,8 @@ target_link_libraries("pde_solvers"
     INTERFACE
         DDC::core
         DDC::fft
+        gslx::coord_transformations
         gslx::data_types
-        gslx::mapping
         gslx::matrix_tools
         gslx::utils
 )

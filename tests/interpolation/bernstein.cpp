@@ -5,8 +5,8 @@
 #include <gtest/gtest.h>
 
 #include "bernstein.hpp"
+#include "coord_transformation_tools.hpp"
 #include "ddc_alias_inline_functions.hpp"
-#include "mapping_tools.hpp"
 #include "test_utils.hpp"
 
 template <class Tag1, class Tag2>

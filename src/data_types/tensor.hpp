@@ -9,22 +9,6 @@
 #include "tensor_index_tools.hpp"
 #include "vector_index_tools.hpp"
 
-namespace detail {
-
-template <class ValidIndexSet>
-struct ToCoord;
-
-template <class... Dims>
-struct ToCoord<VectorIndexSet<Dims...>>
-{
-    using type = Coord<Dims...>;
-};
-
-template <class ValidIndexSet>
-using to_coord_t = typename ToCoord<ValidIndexSet>::type;
-
-} // namespace detail
-
 /**
  * @brief A class representing a Tensor.
  * @tparam ElementType The type of the elements of the tensor (usually double/complex).
