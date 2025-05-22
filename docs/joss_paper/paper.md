@@ -126,7 +126,7 @@ A common source of error is writing equations with implicit assumptions, such as
 In Gyselalib++, equations are either expressed in tensor notation, so that they are either accurate for all geometries or do not compile, or they explicitly state their dependencies.
 C++ further enables us to add static assertions for cases with restricted applicability to prevent their misuse.
 
-In contrast to Gysela, Gyselalib++ has been conceived as a library whose independent elements are each unit tested and can be combined to build a final simulation.
+In contrast to Gysela, Gyselalib++ has been conceived as a library, similar to the SeLaLib Fortran library[@selalib], whose independent elements are each unit tested and can be combined to build a final simulation.
 This design makes the library more versatile, since its elements are not tied to a specific simulation and can be adapted to different needs.
 The shared elements also provide more confidence in the reliability of the implementation as they can prove their validity across multiple applications.
 
