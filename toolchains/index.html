@@ -5,14 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Pre-made build settings - GyselalibX</title>
+    <title>Installation - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../docs/stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Pre-made build settings";
+        var mkdocs_page_name = "Installation";
         var mkdocs_page_input_path = "toolchains/README.md";
         var mkdocs_page_url = null;
       </script>
@@ -47,26 +48,36 @@
     <ul class="current">
                 <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/getting_started.html">Getting Started</a>
                 </li>
-                <li class="toctree-l2 current"><a class="reference internal current" >Installation</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Installation</a>
     <ul class="current">
-                <li class="toctree-l3"><a class="reference internal" href="../docs/first_steps/install.html">Gyselalib++ Installation</a>
-                </li>
-                <li class="toctree-l3 current"><a class="reference internal current" href="#">Pre-made build settings</a>
-    <ul class="current">
-    <li class="toctree-l4"><a class="reference internal" href="#general-usage">General usage</a>
+    <li class="toctree-l3"><a class="reference internal" href="#table-of-contents">Table of Contents</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cloning-the-repository">Cloning the Repository</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ssh-method-required-for-developers-who-want-to-push-to-the-repository">SSH Method (required for developers who want to push to the repository)</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#https-method">HTTPS Method</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dependencies-management">Dependencies Management</a>
+        <ul>
     <li class="toctree-l4"><a class="reference internal" href="#available-systems">Available systems</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#toolchains">Toolchains</a>
+        </ul>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#environments">Environments</a>
+    <li class="toctree-l3"><a class="reference internal" href="#environment-setup">Environment Setup</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#preparing-environments">Preparing environments</a>
+    <li class="toctree-l3"><a class="reference internal" href="#compilation">Compilation</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#general-notes">General notes</a>
+    <li class="toctree-l3"><a class="reference internal" href="#running-tests">Running Tests</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#expected-test-results">Expected Test Results</a>
     </li>
-    </ul>
-                </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#general-notes">General notes</a>
+    </li>
     </ul>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
@@ -547,8 +558,7 @@
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">General</li>
           <li class="breadcrumb-item">First Steps</li>
-          <li class="breadcrumb-item">Installation</li>
-      <li class="breadcrumb-item active">Pre-made build settings</li>
+      <li class="breadcrumb-item active">Installation</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/gyselax/gyselalibxx/edit/main/toolchains/README.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
@@ -558,61 +568,87 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="pre-made-build-settings">Pre-made build settings</h1>
-<h2 id="general-usage">General usage</h2>
-<p>In order to build Gyselalib++ the necessary steps are:</p>
+                <div><h1 id="gyselalib-installation">Gyselalib++ Installation</h1>
+<p>This document provides comprehensive instructions for installing, compiling, and running Gyselalib++ on various systems.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
 <ol>
-<li>Prepare the environment</li>
-<li>Source the environment</li>
-<li>Use the environment to build</li>
+<li><a href="#cloning-the-repository">Cloning the Repository</a></li>
+<li><a href="#dependencies-management">Dependencies Management</a></li>
+<li><a href="#environment-setup">Environment Setup</a></li>
+<li><a href="#compilation">Compilation</a></li>
+<li><a href="#running-tests">Running Tests</a></li>
 </ol>
-<p>For example on Adastra the necessary commands are:</p>
-<pre><code class="language-sh">mkdir -p build &amp;&amp; cd build
-../toolchains/mi250.hipcc.adastra.spack/prepare.sh
-source ../toolchains/mi250.hipcc.adastra.spack/environment.sh
-cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchains/mi250.hipcc.adastra.spack/toolchain.cmake
+<h2 id="cloning-the-repository">Cloning the Repository</h2>
+<p>To get started with Gyselalib++, you'll need to clone the repository along with its submodules. You can do this using either SSH or HTTPS:</p>
+<h3 id="ssh-method-required-for-developers-who-want-to-push-to-the-repository">SSH Method (required for developers who want to push to the repository)</h3>
+<pre><code class="language-bash">git clone --recurse-submodules git@github.com:gyselax/gyselalibxx.git gyselalibxx
+cd gyselalibxx
+./bin/install-hooks
 </code></pre>
-<h2 id="available-systems">Available systems</h2>
-<p>This folder contains sub-folders with <code>prepare.sh</code>, <code>environment.sh</code>, and <code>toolchain.cmake</code> files. Each sub-folder is designed to work in a different environment. You should choose the folder which best fits your work environment. The available sub-folders are:</p>
+<h3 id="https-method">HTTPS Method</h3>
+<pre><code class="language-bash">git clone --recurse-submodules https://github.com/gyselax/gyselalibxx.git gyselalibxx
+cd gyselalibxx
+./bin/install-hooks
+</code></pre>
+<p>The <code>install-hooks</code> script sets up necessary git hooks for the repository.</p>
+<h2 id="dependencies-management">Dependencies Management</h2>
+<p>Dependencies can be installed using a script called <code>prepare.sh</code>. The best way to install dependencies is machine dependent, so the correct file will depend on the machine where you want to run.</p>
+<p>Ideally this script should be run exactly once per machine. The script should be <strong>working directory agnostic</strong>, in other words it should behave in the same way regardless of the folder it is run from. The preparation file is used like so:</p>
+<pre><code class="language-sh">./toolchains/&lt;CONFIG&gt;/prepare.sh
+</code></pre>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:"> Installation can take a few hours.</p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:"> Where possible, on commonly-used machines we install the dependencies in a location that is accessible for all users. In this case no <code>prepare.sh</code> script is provided. Only the administrator who controls the location where the dependencies were installed will need to look at installation scripts.</p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:"> Ideally, if files are produced by the prepare script (such as the installation of a dependency), these should be placed in the appropriate location for the machine. For example, in the WORK file system area often found on HPC machines.</p>
+<h3 id="available-systems">Available systems</h3>
+<p>The folder <a href="https://github.com/gyselax/gyselalibxx/tree/devel/toolchains">toolchains/</a> contains sub-folders with files that can be used for dependency management (<code>prepare.sh</code>, environment setup (<code>environment.sh</code>), and compilation <code>toolchain.cmake</code>. Each sub-folder is designed to work in a different environment. You should choose the folder which best fits your work environment. The available sub-folders are:</p>
 <ul>
 <li><code>a100.leonardo.spack</code> : Designed for use with the A100 hardware available on Cineca's Leonardo supercomputer.</li>
 <li><code>cpu.spack.gyselalibxx_env</code> : Designed for use on a local computer. Installation is handled by spack.</li>
-<li><code>docker.gyselalibxx_env</code> : Designed for use with a docker container. This is used by the CI. It is also possible to use these toolchains if all the dependencies have been installed locally.
+<li><code>docker.gyselalibxx_env</code> : Designed for use with a docker container. This is used by the CI.
     Should you wish to try Gyselalib++ rapidly, the docker container can be found hosted on the GitHub Container Registry : <a href="https://github.com/gyselax/gyselalibxx/pkgs/container/gyselalibxx_env"><code>ghcr.io/gyselax/gyselalibxx_env:latest</code></a>. The provided <code>environment.sh</code> file will drop you into a container with access to Gyselalib++'s files.</li>
 <li><code>mi250.hipcc.adastra.spack</code> : Designed for use with the MI250 hardware available on CINES's Adastra supercomputer.</li>
 <li><code>v100.persee</code> : Designed for use with the V100 hardware available on IRFM's Persee cluster.</li>
 <li><code>v100.ruche</code> : Designed for use with the V100 hardware available on Mésocentre's Ruche cluster.</li>
 <li><code>xeon.persee</code> : Designed for use with the CPU hardware available on IRFM's Persee cluster.</li>
 </ul>
-<h2 id="toolchains">Toolchains</h2>
-<p>The <a href="https://en.wikipedia.org/wiki/Toolchain">toolchains</a> are represented using a toolchain file. It summarises CMake build settings for the appropriate machine environment and hardware.</p>
-<p>You can use the toolchains like so:</p>
-<pre><code class="language-sh">mkdir -p build &amp;&amp; cd build
-cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchains/&lt;CONFIG&gt;/toolchain.cmake
-</code></pre>
-<p>The toolchains files are found in the <code>toolchains</code> folder and have the extension <code>.cmake</code>. The <code>CONFIG</code> folders are named after the environment where they run. E.g. <code>mi250.hipcc.adastra.spack</code> contains the files necessary to run on MI250 GPUs using <code>hipcc</code> on Adastra. <code>v100.persee</code> contains the files necessary to run on V100 GPUs on Persee.</p>
-<p>Additionally the folder <code>docker.gyselalibxx_env</code> provides toolchains which will work on most platforms. These toolchains are designed to work with the docker environment.</p>
-<h2 id="environments">Environments</h2>
-<p>Toolchains may require a non default environment. For that purpose environment scripts are provided. Each <code>CONFIG</code> folder in <code>toolchains</code> should contain (a potentially empty) environment file named <code>environment.sh</code>. The environment file is used like so:</p>
+<h2 id="environment-setup">Environment Setup</h2>
+<p>Once all the dependencies have been installed the environment must be set up in order to access the installed components. This can be done using a script called <code>environment.sh</code>. The steps required to set up depend on how the dependencies were installed, so the correct file will depend on the machine where you want to run.</p>
+<p>For this purpose, environment scripts are provided. Each <code>CONFIG</code> folder in <code>toolchains</code> should contain (a potentially empty) environment file named <code>environment.sh</code>. The script should be <strong>working directory agnostic</strong>, in other words it should behave in the same way regardless of the folder it is run from. The environment file is used like so:</p>
 <pre><code class="language-sh">source toolchains/&lt;CONFIG&gt;/environment.sh
 </code></pre>
 <p>The <em>sourcing</em> of an environment file will generally happen before the build or usage of the built product.</p>
-<h2 id="preparing-environments">Preparing environments</h2>
-<p>The environment may need preparation (for example if the dependencies are not available on the machine). For that purpose the <code>CONFIG</code> folders should contain (a potentially empty) preparation file named <code>prepare.sh</code>. The preparation file is used like so:</p>
-<pre><code class="language-sh">toolchains/&lt;CONFIG&gt;/prepare.sh
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:"> This script modifies environment variables so it must be executed every time you connect to a cluster, or everytime you open a new terminal on a local machine.</p>
+<h2 id="compilation">Compilation</h2>
+<p>Once the dependencies are installed and the environment has been set up the compilation is mostly machine independent. There are however a few parameters which may depend on the machine. We use <a href="https://en.wikipedia.org/wiki/Toolchain">toolchains</a> to describe the CMake build settings for the appropriate machine environment and hardware.</p>
+<p>You can use the toolchains by running the following command from the project root directory:</p>
+<pre><code class="language-sh">cmake -B build -DCMAKE_TOOLCHAIN_FILE=toolchains/&lt;FOLDER&gt;/&lt;CONFIG&gt;.cmake .
 </code></pre>
+<p>Kokkos options are one notable reason for the machine dependency. The correct backend must be activated to benefit from the acceleration available on the machine. In order to ensure that the best optimisation flags are used, a <code>toolchain.cmake</code> file is provided for each cluster. When using a local installation, or when a non-optimised compilation is wanted (e.g. a debug compilation) a less specific toolchain can be used. You can find common toolchain choices in the folder <code>toolchains/common_toolchains</code>.</p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:"> Developers are advised to work with a debug configuration. It is usually simpler to begin with a serial debug configuration and only move onto more complex configurations (e.g. machine specific GPU debug configuration) once the CPU version is working. Serial configurations are found in the folder <code>toolchains/common_toolchains</code>.</p>
+<h2 id="running-tests">Running Tests</h2>
+<p>After successful compilation, you can run the test suite with:</p>
+<pre><code class="language-bash">ctest --output-on-failure
+</code></pre>
+<p>If you want to run a specific test you can use the ctest flag <code>-R</code> which will use a regex to search for tests with a name containing the specified keyword. For example, for tests related to splines:</p>
+<pre><code class="language-bash">ctest -R Splines --verbose --output-on-failure
+</code></pre>
+<h3 id="expected-test-results">Expected Test Results</h3>
+<p>Upon successful execution, you should see all tests passing. You can also find output plots demonstrating the Landau damping characteristics:</p>
+<ol>
+<li><strong>Landau Damping Rate</strong>
+    Growth Rate Plot: <code>tests/geometryXVx/landau/fft/growthrate\_t0.0to45.0.png</code></li>
+<li><strong>Landau Damping Frequency</strong>
+    Frequency Plot: <code>tests/geometryXVx/landau/fft/frequency\_t0.0to45.0.png</code></li>
+</ol>
 <h2 id="general-notes">General notes</h2>
 <ul>
-<li>The environment and preparation script should be <strong>working directory agnostic</strong>;</li>
-<li>Ideally, if producing files (such as the installation of a dependency), placing them in the appropriate location such as the WORK file system area often found on HPC machines;</li>
-<li>A way to test if a toolchain is valid is to run the <code>prepare.gyselalibxx.sh</code> script;</li>
 <li>HPC machines evolve, are notoriously heterogenous, unstable and buggy, you should document issues and workarounds explored as part of the code of the toolchain.</li>
 </ul></div>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../docs/first_steps/install.html" class="btn btn-neutral float-left" title="Gyselalib++ Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../docs/first_steps/getting_started.html" class="btn btn-neutral float-left" title="Getting Started"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../docs/first_steps/DDC_in_gyselalibxx.html" class="btn btn-neutral float-right" title="DDC in Gyselalib++">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -640,7 +676,7 @@ cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchains/&lt;CONFIG&gt;/toolchain.cmake
         </span>
     
     
-      <span><a href="../docs/first_steps/install.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../docs/first_steps/getting_started.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../docs/first_steps/DDC_in_gyselalibxx.html" style="color: #fcfcfc">Next &raquo;</a></span>

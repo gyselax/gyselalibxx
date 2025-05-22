@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -47,13 +48,7 @@
     <ul class="current">
                 <li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" >Installation</a>
-    <ul>
-                <li class="toctree-l3"><a class="reference internal" href="install.html">Gyselalib++ Installation</a>
-                </li>
-                <li class="toctree-l3"><a class="reference internal" href="../../toolchains/index.html">Pre-made build settings</a>
-                </li>
-    </ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../toolchains/index.html">Installation</a>
                 </li>
                 <li class="toctree-l2 current"><a class="reference internal current" href="#">DDC in Gyselalib++</a>
     <ul class="current">
@@ -732,7 +727,7 @@ FieldXVx&lt;double&gt; distribution_function_2d(distribution_function_2d_alloc);
 </code></pre>
 <p>As for <code>FieldMem</code> an additional alias <code>DFieldX</code> is defined to simplify the notation for doubles.</p>
 <p>Finally we also define the aliases <code>ConstFieldX</code> and <code>DConstFieldX</code> to represent constant versions of <code>FieldX</code> and <code>DFieldX</code>. These objects are used for function arguments when the contents of the array must not be altered. As they are aliases, not new objects, all the same functions that work for <code>Field</code> can also be used for <code>ConstField</code>. A <code>ConstField</code> can be obtained from a field using the function <code>get_const_field</code>.</p>
-<p>:warning: Beware a <code>DConstFieldX</code> is not equivalent to a <code>DFieldX const</code>. The latter indicates only that the field will always be associated with the same <code>FieldMem</code> object. Its contents can still be modified.</p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:"> Beware a <code>DConstFieldX</code> is not equivalent to a <code>DFieldX const</code>. The latter indicates only that the field will always be associated with the same <code>FieldMem</code> object. Its contents can still be modified.</p>
 <p>A <code>Field</code> is indexed using either multiple 1D <code>Idx</code>s, or one ND <code>Idx</code>. As the <code>Idx</code>s contain information about the dimension on which they act it is not necessary to pass these arguments in a specific order. Thus the following two functions are equivalent:</p>
 <pre><code class="language-cpp">double get_element_1(DFieldXVx my_chunk, IdxX i, IdxY j) {
     return my_chunk(i, j);
@@ -827,7 +822,7 @@ $$</p>
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../toolchains/index.html" class="btn btn-neutral float-left" title="Pre-made build settings"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../toolchains/index.html" class="btn btn-neutral float-left" title="Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../CONTRIBUTING.html" class="btn btn-neutral float-right" title="Contributing">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
