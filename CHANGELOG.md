@@ -27,12 +27,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Tokamak-shaped Czarny coordinates <-> Cartesian coordinates
     - Toroidal coordinates -> Cylindrical coordinates
     - Discrete coordinates -> Cartesian coordinates
+    - Identity transformation
     - Composite coordinate transformation
   - Tools to manage coordinate transformations by:
     - Getting the inverse Jacobian matrix at a given coordinate
     - Getting the inverse Jacobian matrix at the O-point (to provide explicit equations without an if)
     - Evaluate the metric tensor at a given coordinate
     - Map a vector from one vector space to another
+- Additional data types
+  - DerivativeField to store a field and its boundary derivatives
+  - VectorField
+  - Tensor type and tools
+    - Levi-Civita tensor
+    - Identity tensor
+    - Tensor multiplication operator
 - Interpolation operators
   - Lagrange interpolation
   - Spline interpolation
@@ -42,6 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Derivative calculators
     - Finite differences method (with and without known boundary values)
     - Derivatives from 1D or 2D spline representations
+    - Constant derivatives of a known value
   - Miscellaneous
     - sum
     - norm
