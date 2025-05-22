@@ -113,21 +113,15 @@ In particular gyrokinetic theory[@brizard2007; @krommes2012], which reduces the 
 Despite the reduction in dimensionality such simulations still require massively powerful high-performance computing (HPC) resources.
 For ITER-sized simulations, exa-scale resources would still be required.
 
-The most popular numerical methods for such simulations are particle-in-cell (PIC) methods and Eulerian methods, however both methods have inherent disadvantages.
-PIC methods are limited by numerical noise which, without complex noise reduction techniques, is only slowly attenuated $1 / \sqrt{N}$ as resource usage is increased.
-Eulerian methods avoid marker sampling noise by discretising the distribution function on a fixed grid, however explicit time integration leads to a Courant-Friedrichs-Lewy (CFL) stability condition which can severely limit the maximum possible time step.
-An alternative approach is to combine these techniques using semi-Lagrangian advection.
-
 The pre-existing Gysela code[@grandgirard2016], written in Fortran, originally aimed to simulate plasma in the core region of a tokamak using semi-Lagrangian advection with a distribution function discretised in phase space on a fixed grid.
 This approach was shown to work well and allowed the study of many interesting physical phenomena[@TODO1;@TODO2;@ETC].
 However expanding this code to use more complex mathematical methods such as non-uniform points (vital for handling the different magnitudes of physical quantities in the core and edge regions), and increasingly complex geometries (such as D-shape geometries, geometries including both closed and open field lines, and potentially stellarator geometries) has proved to be challenging and sometimes error-prone.
-The challenges of such extensions are further amplified when trying to organise such a code for use on new GPU architectures.
+The challenges of such extensions are further amplified when trying to organise such a code for use on new GPU architectures, necessary for exa-scale simulations.
 This is a challenge shared by other gyrokinetic codes[@trilaksono2023].
 
 In the case of Gysela, several of the required changes would have affected a large percentage of the code base.
 This means that the effort required was comparable to a complete rewrite, without the advantages such a rewrite can bring.
-Gyselalib++ is one of the first gyrokinetic codes to be written from scratch in C++.
-This has allowed us to capitalise on C++'s strengths by using template programming to enforce the correctness of the implemented equations.
+For example, we have been able to capitalise on C++'s strengths by using template programming to enforce the correctness of the implemented equations.
 A common source of error is writing equations with implicit assumptions, such as assuming an orthonormal coordinate system, or specific properties like those of a circular coordinate system.
 In Gyselalib++, equations are either expressed in tensor notation, so that they are either accurate for all geometries or do not compile, or they explicitly state their dependencies.
 C++ further enables us to add static assertions for cases with restricted applicability to prevent their misuse.
@@ -136,7 +130,15 @@ In contrast to Gysela, Gyselalib++ has been conceived as a library whose indepen
 This design makes the library more versatile, since its elements are not tied to a specific simulation and can be adapted to different needs.
 The shared elements also provide more confidence in the reliability of the implementation as they can prove their validity across multiple applications.
 
+Gyselalib++ includes a range of reusable mathematical operators for plasma simulations. These include, but are not limited to, semi-Lagrangian advection schemes, numerical quadrature, differential operators (e.g. finite difference methods), and solvers for common partial differential equations.
+A complete list of available operators can be found in the [documentation](https://gyselax.github.io/gyselalibxx/).
+Many of these tools are designed to work on a variety of grids, including non-uniform grids, which are especially important in edge-region simulations.
+The library also supports MPI-based parallelism, either with distributed operators or with transpositions between different multi-rank storage layouts.
+
 The VOICE code[@bourne2023] has already been rewritten in C++ using the mathematical tools provided by Gyselalib++.
+Several common simulations including Landau damping (in 2D or 4D Cartesian phase-space coordinates), a bump-on-tail instability (in 2D Cartesian phase-space coordinates), and a guiding-centre model (on polar coordinates) have also been implemented.
+While these examples are included primarily for illustration, they also serve as valuable test-beds for developing and validating new numerical methods.
+As such, these examples are ideal for mathematicians looking to validate new methods in realistic, publication-ready test cases.
 
 ## Acknowledgements
 
