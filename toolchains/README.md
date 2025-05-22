@@ -79,7 +79,7 @@ The *sourcing* of an environment file will generally happen before the build or 
 
 Once the dependencies are installed and the environment has been set up the compilation is mostly machine independent. There are however a few parameters which may depend on the machine. We use [toolchains](https://en.wikipedia.org/wiki/Toolchain) to describe the CMake build settings for the appropriate machine environment and hardware.
 
-You can use the toolchains like so:
+You can use the toolchains by running the following command from the project root directory:
 
 ```sh
 cmake -B build -DCMAKE_TOOLCHAIN_FILE=toolchains/<FOLDER>/<CONFIG>.cmake .
