@@ -11,18 +11,6 @@
 
 namespace detail {
 
-template <class ValidIndexSet>
-struct ToCoord;
-
-template <class... Dims>
-struct ToCoord<VectorIndexSet<Dims...>>
-{
-    using type = Coord<Dims...>;
-};
-
-template <class ValidIndexSet>
-using to_coord_t = typename ToCoord<ValidIndexSet>::type;
-
 template <class T>
 inline constexpr bool enable_tensor_type = false;
 
