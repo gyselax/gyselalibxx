@@ -8,4 +8,6 @@ While the operator is in C++, the interface with Fortran and other C++ code is m
 
 To integrate Koliop into Gyselalib++, we wrap its functionalities into a DDC aware operator present in `collision_operator.hpp`. In Gyselalib++, operator are expected to support multiple if not all kind of geometries. But Koliop expect some data in layout right [sp, phi, theta, r, vpar, mu] instead of the [sp, phi, r, theta, vpar, mu] layout that is going to be favoured in Gyselalib++. We have some machinery that setup input configuration data depending on the geometry. These are in `collision_configuration_sprvparmu.hpp`, `collision_configuration_spvparmu.hpp`.
 
-More information can be found in the [Gysela collision operator](../../docs/latex/collisions/Gysela_collision.pdf)
+More information can be found in the [Gysela collision operator](../../docs/latex/collisions/Gysela_collision.pdf) or the associated paper[^Donnel].
+
+[^Donnel]: P. Donnel et al., Computer Physics Communications (2019), ”A multi-species collisional operator for full-F global gyrokinetics codes: Numerical aspects and verification with the GYSELA code”
