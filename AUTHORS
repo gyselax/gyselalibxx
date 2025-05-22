@@ -11,7 +11,7 @@ Emily Bourne <emily.bourne@epfl.ch>
 - Spline related development
 - Fortran to C++ porting
 - Data type developments
-- Multipatch developments
+- Multi-patch developments
 - Developments in the (x, y, vx, vy) geometry
 
 Virginie Grandgirard <virginie.grandgirard@cea.fr>
@@ -19,7 +19,7 @@ Virginie Grandgirard <virginie.grandgirard@cea.fr>
 - Maintainer
 
 Alex Hoffmann
-- Multipatch developments
+- Multi-patch developments
 
 Abdelhadi Kara
 - Sparse matrix solvers
@@ -50,4 +50,4 @@ Pauline Vidal
 - Developments in the (r, theta) geometry
   - Guiding-centre simulations (Diocotron and Vortex-Merger)
 - Developments in the (x, y) geometry
-- Multipatch developments
+- Multi-patch developments
