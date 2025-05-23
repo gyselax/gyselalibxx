@@ -48,14 +48,22 @@ struct TensorDataInnards
  * @tparam ElementType The type of the elements of the tensor (usually double/complex).
  * @tparam ValidIndexSet The indices that can be used along each dimension of the tensor.
  */
-template <class ElementType, class... ValidIndexSet>
+template <class ElementType, class ValidIndexSetFirstDim, class... ValidIndexSet>
 class Tensor
     : public TensorCommon<
-              detail::TensorDataInnards<ElementType, (ddc::type_seq_size_v<ValidIndexSet> * ...)>,
+              detail::TensorDataInnards<
+                      ElementType,
+                      (ddc::type_seq_size_v<ValidIndexSet> * ...
+                       * ddc::type_seq_size_v<ValidIndexSetFirstDim>)>,
+              ValidIndexSetFirstDim,
               ValidIndexSet...>
 {
     using base_type = TensorCommon<
-            detail::TensorDataInnards<ElementType, (ddc::type_seq_size_v<ValidIndexSet> * ...)>,
+            detail::TensorDataInnards<
+                    ElementType,
+                    (ddc::type_seq_size_v<ValidIndexSet> * ...
+                     * ddc::type_seq_size_v<ValidIndexSetFirstDim>)>,
+            ValidIndexSetFirstDim,
             ValidIndexSet...>;
 
 public:
