@@ -10,6 +10,7 @@
     <innerfile refid="indexed__tensor_8hpp">indexed_tensor.hpp</innerfile>
     <innerfile refid="static__tensors_8hpp">static_tensors.hpp</innerfile>
     <innerfile refid="tensor_8hpp">tensor.hpp</innerfile>
+    <innerfile refid="tensor__common_8hpp">tensor_common.hpp</innerfile>
     <innerfile refid="tensor__index__tools_8hpp">tensor_index_tools.hpp</innerfile>
     <innerfile refid="vector__field_8hpp">vector_field.hpp</innerfile>
     <innerfile refid="vector__field__common_8hpp">vector_field_common.hpp</innerfile>

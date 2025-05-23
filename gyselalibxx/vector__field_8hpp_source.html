@@ -918,7 +918,7 @@ KOKKOS_INLINE_FUNCTION void assign_vector_field_element(
                 MemorySpace,
                 LayoutStridedPolicy&gt; field,
         typename IdxRangeType::discrete_element_type idx,
-        Vector&lt;ElementType, Dims...&gt; vector)
+        Vector&lt;ElementType, Dims...&gt; const&amp; vector)
 {
     ((ddcHelper::get&lt;Dims&gt;(field)(idx) = ddcHelper::get&lt;Dims&gt;(vector)), ...);
 }

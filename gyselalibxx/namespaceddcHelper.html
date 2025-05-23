@@ -610,7 +610,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION void</td>
-<td style="text-align: left;"><a href="#function-assign_vector_field_element"><strong>assign_vector_field_element</strong></a> (<a href="classVectorField.html"><strong>VectorField</strong></a>&lt; ElementType, IdxRangeType, VectorIndexSet&lt; Dims... &gt;, MemorySpace, LayoutStridedPolicy &gt; field, typename IdxRangeType::discrete_element_type idx, <a href="classTensor.html"><strong>Vector</strong></a>&lt; ElementType, Dims... &gt; vector) <br><em>Copy the elements of a vector into a vector field at a given index.</em></td>
+<td style="text-align: left;"><a href="#function-assign_vector_field_element"><strong>assign_vector_field_element</strong></a> (<a href="classVectorField.html"><strong>VectorField</strong></a>&lt; ElementType, IdxRangeType, VectorIndexSet&lt; Dims... &gt;, MemorySpace, LayoutStridedPolicy &gt; field, typename IdxRangeType::discrete_element_type idx, <a href="classTensor.html"><strong>Vector</strong></a>&lt; ElementType, Dims... &gt; const &amp; vector) <br><em>Copy the elements of a vector into a vector field at a given index.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">auto</td>
@@ -653,12 +653,12 @@
 <td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> (<a href="classLeviCivitaTensor.html"><strong>LeviCivitaTensor</strong></a>&lt; ElementType, ValidIndexSet &gt; const &amp; tensor) <br><em>A helper function to get a modifiable reference to an element of the tensor.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_INLINE_FUNCTION ElementType &amp;</td>
-<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> (<a href="classTensor.html"><strong>Tensor</strong></a>&lt; ElementType, ValidIndexSet... &gt; &amp; tensor) <br><em>A helper function to get a modifiable reference to an element of the tensor.</em></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION storage_type::element_type &amp;</td>
+<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> (<a href="classTensorCommon.html"><strong>TensorCommon</strong></a>&lt; storage_type, ValidIndexSet... &gt; &amp; tensor) <br><em>A helper function to get a modifiable reference to an element of the tensor.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_INLINE_FUNCTION ElementType const &amp;</td>
-<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> (<a href="classTensor.html"><strong>Tensor</strong></a>&lt; ElementType, ValidIndexSet... &gt; const &amp; tensor) <br><em>A helper function to get an element of the tensor.</em></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION storage_type::element_type const &amp;</td>
+<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> (<a href="classTensorCommon.html"><strong>TensorCommon</strong></a>&lt; storage_type, ValidIndexSet... &gt; const &amp; tensor) <br><em>A helper function to get an element of the tensor.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">constexpr auto</td>
@@ -682,7 +682,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt;</td>
-<td style="text-align: left;"><a href="#function-to_coord"><strong>to_coord</strong></a> (<a href="classTensor.html"><strong>Vector</strong></a>&lt; ElementType, Dims... &gt; const &amp; tensor) <br><em>A helper function to convert a vector to a coordinate. This is useful in order to add a Vector to a coordinate to obtain a new coordinate (e.g. when calculating the foot of a characteristic.</em></td>
+<td style="text-align: left;"><a href="#function-to_coord"><strong>to_coord</strong></a> (<a href="classTensorCommon.html"><strong>TensorCommon</strong></a>&lt; storage_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const &amp; tensor) <br><em>A helper function to convert a vector to a coordinate. This is useful in order to add a Vector to a coordinate to obtain a new coordinate (e.g. when calculating the foot of a characteristic.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">constexpr std::enable_if_t&lt;!IDim::continuous_dimension_type::PERIODIC, double &gt;</td>
@@ -728,7 +728,7 @@
 KOKKOS_INLINE_FUNCTION void ddcHelper::assign_vector_field_element (
     VectorField &lt; ElementType, IdxRangeType, VectorIndexSet&lt; Dims... &gt;, MemorySpace, LayoutStridedPolicy &gt; field,
     typename IdxRangeType::discrete_element_type idx,
-    Vector &lt; ElementType, Dims... &gt; vector
+    Vector &lt; ElementType, Dims... &gt; const &amp; vector
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -899,9 +899,9 @@ KOKKOS_INLINE_FUNCTION constexpr double ddcHelper::get (
 
 <h3 id="function-get_2">function get</h3>
 <p><em>A helper function to get a modifiable reference to an element of the tensor.</em> </p>
-<pre><code class="language-C++">template&lt;class... QueryIndexTag, class ElementType, class... ValidIndexSet&gt;
-KOKKOS_INLINE_FUNCTION ElementType &amp; ddcHelper::get (
-    Tensor &lt; ElementType, ValidIndexSet... &gt; &amp; tensor
+<pre><code class="language-C++">template&lt;class... QueryIndexTag, class storage_type, class... ValidIndexSet&gt;
+KOKKOS_INLINE_FUNCTION storage_type::element_type &amp; ddcHelper::get (
+    TensorCommon &lt; storage_type, ValidIndexSet... &gt; &amp; tensor
 ) 
 </code></pre>
 <p><strong>Template parameters:</strong></p>
@@ -918,9 +918,9 @@ KOKKOS_INLINE_FUNCTION ElementType &amp; ddcHelper::get (
 
 <h3 id="function-get_3">function get</h3>
 <p><em>A helper function to get an element of the tensor.</em> </p>
-<pre><code class="language-C++">template&lt;class... QueryIndexTag, class ElementType, class... ValidIndexSet&gt;
-KOKKOS_INLINE_FUNCTION ElementType const &amp; ddcHelper::get (
-    Tensor &lt; ElementType, ValidIndexSet... &gt; const &amp; tensor
+<pre><code class="language-C++">template&lt;class... QueryIndexTag, class storage_type, class... ValidIndexSet&gt;
+KOKKOS_INLINE_FUNCTION storage_type::element_type const &amp; ddcHelper::get (
+    TensorCommon &lt; storage_type, ValidIndexSet... &gt; const &amp; tensor
 ) 
 </code></pre>
 <p><strong>Template parameters:</strong></p>
@@ -936,7 +936,7 @@ KOKKOS_INLINE_FUNCTION ElementType const &amp; ddcHelper::get (
 <hr>
 
 <h3 id="function-get_4">function get</h3>
-<pre><code class="language-C++">template&lt;class QueryTag, class VectorFieldType&gt;
+<pre><code class="language-C++">template&lt;class QueryTag, class VectorFieldType, std::enable_if_t&lt; is_vector_field_v&lt; VectorFieldType &gt;, bool &gt;&gt;
 inline constexpr auto ddcHelper::get (
     VectorFieldType const &amp; field
 ) noexcept
@@ -944,7 +944,7 @@ inline constexpr auto ddcHelper::get (
 <hr>
 
 <h3 id="function-get_5">function get</h3>
-<pre><code class="language-C++">template&lt;class QueryTag, class VectorFieldType&gt;
+<pre><code class="language-C++">template&lt;class QueryTag, class VectorFieldType, std::enable_if_t&lt; is_vector_field_v&lt; VectorFieldType &gt;, bool &gt;&gt;
 inline constexpr auto ddcHelper::get (
     VectorFieldType &amp; field
 ) noexcept
@@ -1002,9 +1002,9 @@ constexpr std::enable_if_t&lt; IDim::continuous_dimension_type::PERIODIC, Coord&
 
 <h3 id="function-to_coord">function to_coord</h3>
 <p><em>A helper function to convert a vector to a coordinate. This is useful in order to add a Vector to a coordinate to obtain a new coordinate (e.g. when calculating the foot of a characteristic.</em> </p>
-<pre><code class="language-C++">template&lt;class ElementType, class... Dims&gt;
+<pre><code class="language-C++">template&lt;class storage_type, class... Dims&gt;
 KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; ddcHelper::to_coord (
-    Vector &lt; ElementType, Dims... &gt; const &amp; tensor
+    TensorCommon &lt; storage_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const &amp; tensor
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>

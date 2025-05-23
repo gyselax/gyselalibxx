@@ -585,14 +585,20 @@ auto deepcopy(FieldDst&amp;&amp; dst, FieldSrc&amp;&amp; src)
     return get_field(dst);
 }
 
-template &lt;class QueryTag, class VectorFieldType&gt;
+template &lt;
+        class QueryTag,
+        class VectorFieldType,
+        std::enable_if_t&lt;is_vector_field_v&lt;VectorFieldType&gt;, bool&gt; = true&gt;
 inline constexpr auto get(VectorFieldType const&amp; field) noexcept
 {
     static_assert(is_vector_field_v&lt;VectorFieldType&gt;);
     return field.template get&lt;QueryTag&gt;();
 }
 
-template &lt;class QueryTag, class VectorFieldType&gt;
+template &lt;
+        class QueryTag,
+        class VectorFieldType,
+        std::enable_if_t&lt;is_vector_field_v&lt;VectorFieldType&gt;, bool&gt; = true&gt;
 inline constexpr auto get(VectorFieldType&amp; field) noexcept
 {
     static_assert(is_vector_field_v&lt;VectorFieldType&gt;);

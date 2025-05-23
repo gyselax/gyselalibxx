@@ -2,7 +2,7 @@
 
 # Class Tensor
 
-**template &lt;class ElementType, class... ValidIndexSet&gt;**
+**template &lt;class ElementType, class ValidIndexSetFirstDim, class... ValidIndexSet&gt;**
 
 
 
@@ -16,6 +16,7 @@ _A class representing a_ [_**Tensor**_](classTensor.md) _._[More...](#detailed-d
 
 
 
+Inherits the following classes: [TensorCommon](classTensorCommon.md)
 
 
 
@@ -30,13 +31,35 @@ _A class representing a_ [_**Tensor**_](classTensor.md) _._[More...](#detailed-d
 
 
 
-## Public Types
+
+
+## Public Types inherited from TensorCommon
+
+See [TensorCommon](classTensorCommon.md)
 
 | Type | Name |
 | ---: | :--- |
-| typedef ElementType | [**element\_type**](#typedef-element_type)  <br>_The type of the elements of the tensor._  |
-| typedef ddc::detail::TypeSeq&lt; ValidIndexSet... &gt; | [**index\_set**](#typedef-index_set)  <br>_The TensorIndexSet describing the possible indices._  |
-| typedef ddc::type\_seq\_element\_t&lt; dim, [**index\_set**](classTensor.md#typedef-index_set) &gt; | [**vector\_index\_set\_t**](#typedef-vector_index_set_t)  <br>_A helper type alias to get all possible indices along a specified dimension._  |
+| typedef typename DataStorageType::element\_type | [**element\_type**](classTensorCommon.md#typedef-element_type)  <br>_The type of the elements of the tensor._  |
+| typedef ddc::detail::TypeSeq&lt; ValidIndexSet... &gt; | [**index\_set**](classTensorCommon.md#typedef-index_set)  <br>_The TensorIndexSet describing the possible indices._  |
+| typedef ddc::type\_seq\_element\_t&lt; dim, [**index\_set**](classTensorCommon.md#typedef-index_set) &gt; | [**vector\_index\_set\_t**](classTensorCommon.md#typedef-vector_index_set_t)  <br>_A helper type alias to get all possible indices along a specified dimension._  |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -61,34 +84,75 @@ _A class representing a_ [_**Tensor**_](classTensor.md) _._[More...](#detailed-d
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_DEFAULTED\_FUNCTION | [**Tensor**](#function-tensor-15) () = default<br>_Construct an uninitialised tensor object._  |
-|  KOKKOS\_FUNCTION | [**Tensor**](#function-tensor-25) (ElementType fill\_value) <br>_Construct a tensor object initialised with a value._  |
-|  KOKKOS\_FUNCTION | [**Tensor**](#function-tensor-35) (Params... elements) <br>_Construct a 1D tensor object by providing the elements that should be saved in the vector._  |
-|  KOKKOS\_FUNCTION | [**Tensor**](#function-tensor-45) (Coord&lt; Dims... &gt; coord) <br>_Construct a 1D tensor object from a coordinate._  |
-|  KOKKOS\_FUNCTION | [**Tensor**](#function-tensor-55) ([**Tensor**](classTensor.md)&lt; OElementType, ValidIndexSet... &gt; const & o\_tensor) <br>_Construct a tensor object by copying an existing tensor._  |
-|  KOKKOS\_FUNCTION ElementType & | [**get**](#function-get-12) () <br>_Get a modifiable reference to an element of the tensor._  |
-|  KOKKOS\_FUNCTION ElementType const & | [**get**](#function-get-22) () const<br>_Get an element of the tensor._  |
-|  KOKKOS\_FUNCTION bool | [**operator!=**](#function-operator) ([**Tensor**](classTensor.md) const & o\_tensor) const<br>_An operator to compare one tensor to another elementwise._  |
-|  KOKKOS\_FUNCTION [**Tensor**](classTensor.md) | [**operator\***](#function-operator_1) (OElementType val) const<br>_An operator to multiply all the element of the current tensor by a value._  |
-|  KOKKOS\_FUNCTION [**Tensor**](classTensor.md) & | [**operator\*=**](#function-operator_2) (OElementType val) <br>_An operator to multiply all the element of the current tensor by a value._  |
-|  KOKKOS\_FUNCTION [**Tensor**](classTensor.md) | [**operator+**](#function-operator_3) ([**Tensor**](classTensor.md) const & val) const<br>_An operator to add two tensors elementwise._  |
-|  KOKKOS\_FUNCTION [**Tensor**](classTensor.md) & | [**operator+=**](#function-operator_4) ([**Tensor**](classTensor.md) const & val) <br>_An operator to add two tensors elementwise._  |
-|  KOKKOS\_FUNCTION [**Tensor**](classTensor.md) | [**operator-**](#function-operator-) ([**Tensor**](classTensor.md) const & val) const<br>_An operator to subtract one tensor from another elementwise._  |
-|  KOKKOS\_FUNCTION [**Tensor**](classTensor.md) | [**operator-**](#function-operator-_1) () const<br>_An operator to get the negation of a tensor elementwise._  |
-|  KOKKOS\_FUNCTION [**Tensor**](classTensor.md) & | [**operator-=**](#function-operator-_2) ([**Tensor**](classTensor.md) const & val) <br>_An operator to subtract one tensor from another elementwise._  |
-|  KOKKOS\_FUNCTION [**Tensor**](classTensor.md) | [**operator/**](#function-operator_5) (OElementType val) const<br>_An operator to multiply all the element of the current tensor by a value._  |
-|  KOKKOS\_FUNCTION [**Tensor**](classTensor.md) & | [**operator/=**](#function-operator_6) (OElementType val) <br>_An operator to divide all the element of the current tensor by a value._  |
-|  KOKKOS\_DEFAULTED\_FUNCTION [**Tensor**](classTensor.md) & | [**operator=**](#function-operator_7) ([**Tensor**](classTensor.md) const & other) = default<br>_A copy operator._  |
-|  KOKKOS\_FUNCTION [**Tensor**](classTensor.md) & | [**operator=**](#function-operator_8) (Coord&lt; Dims... &gt; coord) <br>_A copy operator._  |
-|  KOKKOS\_FUNCTION bool | [**operator==**](#function-operator_9) ([**Tensor**](classTensor.md) const & o\_tensor) const<br>_An operator to compare one tensor to another elementwise._  |
+|  KOKKOS\_DEFAULTED\_FUNCTION | [**Tensor**](#function-tensor-17) () = default<br>_Construct an uninitialised tensor object._  |
+|  KOKKOS\_FUNCTION | [**Tensor**](#function-tensor-27) (ElementType fill\_value) <br>_Construct a tensor object initialised with a value._  |
+|  KOKKOS\_FUNCTION | [**Tensor**](#function-tensor-37) (Params... elements) <br>_Construct a 1D tensor object by providing the elements that should be saved in the vector._  |
+|  KOKKOS\_FUNCTION | [**Tensor**](#function-tensor-47) (Coord&lt; Dims... &gt; coord) noexcept<br>_Construct a 1D tensor object from a coordinate._  |
+|  KOKKOS\_FUNCTION | [**Tensor**](#function-tensor-57) (const OTensorType & o\_tensor) noexcept<br>_Construct a tensor object by copying an existing compatible tensor. A tensor is compatible if it is defined on the same dimensions._  |
+|  KOKKOS\_DEFAULTED\_FUNCTION | [**Tensor**](#function-tensor-67) ([**Tensor**](classTensor.md) const & o\_tensor) = default<br>_Construct a tensor object by copying an existing tensor of exactly the same type. This method can be called implicitly._  |
+|  KOKKOS\_DEFAULTED\_FUNCTION | [**Tensor**](#function-tensor-77) ([**Tensor**](classTensor.md) && o\_tensor) = default<br>_Construct a tensor object by moving an existing tensor of exactly the same type. This method can be called implicitly._  |
+|  KOKKOS\_DEFAULTED\_FUNCTION [**Tensor**](classTensor.md) & | [**operator=**](#function-operator) ([**Tensor**](classTensor.md) const & other) = default<br>_A copy assign operator._  |
+|  KOKKOS\_DEFAULTED\_FUNCTION [**Tensor**](classTensor.md) & | [**operator=**](#function-operator_1) ([**Tensor**](classTensor.md) && other) = default<br>_A move assign operator._  |
 
 
-## Public Static Functions
+## Public Functions inherited from TensorCommon
+
+See [TensorCommon](classTensorCommon.md)
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_FUNCTION constexpr std::size\_t | [**rank**](#function-rank) () <br>_The rank of the tensor. This is equivalent to the number of indices required to access an element of the tensor._  |
-|  KOKKOS\_FUNCTION constexpr std::size\_t | [**size**](#function-size) () <br>_The size of the tensor. This is the number of elements in the tensor._  |
+|  KOKKOS\_FUNCTION [**element\_type**](classTensorCommon.md#typedef-element_type) & | [**get**](classTensorCommon.md#function-get-12) () <br>_Get a modifiable reference to an element of the tensor._  |
+|  KOKKOS\_FUNCTION [**element\_type**](classTensorCommon.md#typedef-element_type) const & | [**get**](classTensorCommon.md#function-get-22) () const<br>_Get an element of the tensor._  |
+|  KOKKOS\_FUNCTION bool | [**operator!=**](classTensorCommon.md#function-operator) ([**TensorCommon**](classTensorCommon.md) const & o\_tensor) const<br>_An operator to compare one tensor to another elementwise._  |
+|  KOKKOS\_FUNCTION [**TensorCommon**](classTensorCommon.md) & | [**operator\*=**](classTensorCommon.md#function-operator_1) (Oelement\_type val) <br>_An operator to multiply all the element of the current tensor by a value._  |
+|  KOKKOS\_FUNCTION [**TensorCommon**](classTensorCommon.md) & | [**operator+=**](classTensorCommon.md#function-operator_2) ([**TensorCommon**](classTensorCommon.md) const & val) <br>_An operator to add two tensors elementwise._  |
+|  KOKKOS\_FUNCTION [**TensorCommon**](classTensorCommon.md) & | [**operator-=**](classTensorCommon.md#function-operator-) ([**TensorCommon**](classTensorCommon.md) const & val) <br>_An operator to subtract one tensor from another elementwise._  |
+|  KOKKOS\_FUNCTION [**TensorCommon**](classTensorCommon.md) & | [**operator/=**](classTensorCommon.md#function-operator_3) (Oelement\_type val) <br>_An operator to divide all the element of the current tensor by a value._  |
+|  KOKKOS\_FUNCTION [**TensorCommon**](classTensorCommon.md) & | [**operator=**](classTensorCommon.md#function-operator_4) ([**TensorCommon**](classTensorCommon.md) const & other) <br>_A copy operator._  |
+|  KOKKOS\_FUNCTION [**TensorCommon**](classTensorCommon.md) & | [**operator=**](classTensorCommon.md#function-operator_5) ([**TensorCommon**](classTensorCommon.md) && other) <br>_A move assign operator._  |
+|  KOKKOS\_FUNCTION bool | [**operator==**](classTensorCommon.md#function-operator_6) ([**TensorCommon**](classTensorCommon.md) const & o\_tensor) const<br>_An operator to compare one tensor to another elementwise._  |
+
+
+
+
+## Public Static Functions inherited from TensorCommon
+
+See [TensorCommon](classTensorCommon.md)
+
+| Type | Name |
+| ---: | :--- |
+|  KOKKOS\_FUNCTION constexpr std::size\_t | [**rank**](classTensorCommon.md#function-rank) () <br>_The rank of the tensor. This is equivalent to the number of indices required to access an element of the tensor._  |
+|  KOKKOS\_FUNCTION constexpr std::size\_t | [**size**](classTensorCommon.md#function-size) () <br>_The size of the tensor. This is the number of elements in the tensor._  |
+
+
+
+
+
+
+
+
+
+
+
+
+## Protected Attributes inherited from TensorCommon
+
+See [TensorCommon](classTensorCommon.md)
+
+| Type | Name |
+| ---: | :--- |
+|  DataStorageType | [**m\_data**](classTensorCommon.md#variable-m_data)  <br> |
+
+
+
+
+## Protected Static Attributes inherited from TensorCommon
+
+See [TensorCommon](classTensorCommon.md)
+
+| Type | Name |
+| ---: | :--- |
+|  constexpr std::size\_t | [**s\_n\_elements**](classTensorCommon.md#variable-s_n_elements)   = `(ddc::type\_seq\_size\_v&lt;ValidIndexSet&gt; \* ...)`<br>_The number of elements in the mdspan._  |
 
 
 
@@ -109,6 +173,23 @@ _A class representing a_ [_**Tensor**_](classTensor.md) _._[More...](#detailed-d
 
 
 
+
+
+
+
+
+
+
+
+## Protected Functions inherited from TensorCommon
+
+See [TensorCommon](classTensorCommon.md)
+
+| Type | Name |
+| ---: | :--- |
+|  KOKKOS\_DEFAULTED\_FUNCTION | [**TensorCommon**](classTensorCommon.md#function-tensorcommon-13) () = default<br>_Construct an uninitialised tensor object._  |
+|  KOKKOS\_DEFAULTED\_FUNCTION | [**TensorCommon**](classTensorCommon.md#function-tensorcommon-23) ([**TensorCommon**](classTensorCommon.md) const & o\_tensor) = default<br>_Construct a tensor object by copying an existing tensor of exactly the same type. This method can be called implicitly._  |
+|  KOKKOS\_DEFAULTED\_FUNCTION | [**TensorCommon**](classTensorCommon.md#function-tensorcommon-33) ([**TensorCommon**](classTensorCommon.md) && o\_tensor) = default<br>_Move-construct a tensor object by copying an existing tensor of exactly the same type. This method can be called implicitly._  |
 
 
 
@@ -130,67 +211,12 @@ _A class representing a_ [_**Tensor**_](classTensor.md) _._[More...](#detailed-d
 
 
     
-## Public Types Documentation
-
-
-
-
-### typedef element\_type 
-
-_The type of the elements of the tensor._ 
-```C++
-using Tensor< ElementType, ValidIndexSet >::element_type =  ElementType;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef index\_set 
-
-_The TensorIndexSet describing the possible indices._ 
-```C++
-using Tensor< ElementType, ValidIndexSet >::index_set =  ddc::detail::TypeSeq<ValidIndexSet...>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef vector\_index\_set\_t 
-
-_A helper type alias to get all possible indices along a specified dimension._ 
-```C++
-using Tensor< ElementType, ValidIndexSet >::vector_index_set_t =  ddc::type_seq_element_t<dim, index_set>;
-```
-
-
-
-
-
-**Template parameters:**
-
-
-* `Dim` The dimension of interest (0 &lt;= dim &lt; [**rank()**](classTensor.md#function-rank)). 
-
-
-
-
-        
-
-<hr>
 ## Public Functions Documentation
 
 
 
 
-### function Tensor [1/5]
+### function Tensor [1/7]
 
 _Construct an uninitialised tensor object._ 
 ```C++
@@ -204,7 +230,7 @@ KOKKOS_DEFAULTED_FUNCTION Tensor::Tensor () = default
 
 
 
-### function Tensor [2/5]
+### function Tensor [2/7]
 
 _Construct a tensor object initialised with a value._ 
 ```C++
@@ -231,7 +257,7 @@ inline explicit KOKKOS_FUNCTION Tensor::Tensor (
 
 
 
-### function Tensor [3/5]
+### function Tensor [3/7]
 
 _Construct a 1D tensor object by providing the elements that should be saved in the vector._ 
 ```C++
@@ -259,14 +285,14 @@ inline explicit KOKKOS_FUNCTION Tensor::Tensor (
 
 
 
-### function Tensor [4/5]
+### function Tensor [4/7]
 
 _Construct a 1D tensor object from a coordinate._ 
 ```C++
 template<class... Dims>
 inline explicit KOKKOS_FUNCTION Tensor::Tensor (
     Coord< Dims... > coord
-) 
+) noexcept
 ```
 
 
@@ -287,14 +313,14 @@ inline explicit KOKKOS_FUNCTION Tensor::Tensor (
 
 
 
-### function Tensor [5/5]
+### function Tensor [5/7]
 
-_Construct a tensor object by copying an existing tensor._ 
+_Construct a tensor object by copying an existing compatible tensor. A tensor is compatible if it is defined on the same dimensions._ 
 ```C++
-template<class OElementType>
+template<class OTensorType, std::enable_if_t< is_tensor_type_v< OTensorType >, bool >>
 inline explicit KOKKOS_FUNCTION Tensor::Tensor (
-    Tensor < OElementType, ValidIndexSet... > const & o_tensor
-) 
+    const OTensorType & o_tensor
+) noexcept
 ```
 
 
@@ -315,79 +341,13 @@ inline explicit KOKKOS_FUNCTION Tensor::Tensor (
 
 
 
-### function get [1/2]
+### function Tensor [6/7]
 
-_Get a modifiable reference to an element of the tensor._ 
+_Construct a tensor object by copying an existing tensor of exactly the same type. This method can be called implicitly._ 
 ```C++
-template<class QueryTensorIndexElement>
-inline KOKKOS_FUNCTION ElementType & Tensor::get () 
-```
-
-
-
-
-
-**Template parameters:**
-
-
-* `QueryIndexTag` A type describing the relevant index. 
-
-
-
-**Returns:**
-
-The relevant element of the tensor. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function get [2/2]
-
-_Get an element of the tensor._ 
-```C++
-template<class QueryTensorIndexElement>
-inline KOKKOS_FUNCTION ElementType const & Tensor::get () const
-```
-
-
-
-
-
-**Template parameters:**
-
-
-* `QueryIndexTag` A type describing the relevant index. 
-
-
-
-**Returns:**
-
-The relevant element of the tensor. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator!= 
-
-_An operator to compare one tensor to another elementwise._ 
-```C++
-inline KOKKOS_FUNCTION bool Tensor::operator!= (
+KOKKOS_DEFAULTED_FUNCTION Tensor::Tensor (
     Tensor const & o_tensor
-) const
+) = default
 ```
 
 
@@ -397,14 +357,7 @@ inline KOKKOS_FUNCTION bool Tensor::operator!= (
 **Parameters:**
 
 
-* `o_tensor` The tensor that should be compared with the current tensor. 
-
-
-
-**Returns:**
-
-False if the tensors are equal, true otherwise. 
-
+* `o_tensor` The tensor to be copied. 
 
 
 
@@ -415,14 +368,13 @@ False if the tensors are equal, true otherwise.
 
 
 
-### function operator\* 
+### function Tensor [7/7]
 
-_An operator to multiply all the element of the current tensor by a value._ 
+_Construct a tensor object by moving an existing tensor of exactly the same type. This method can be called implicitly._ 
 ```C++
-template<class OElementType>
-inline KOKKOS_FUNCTION Tensor Tensor::operator* (
-    OElementType val
-) const
+KOKKOS_DEFAULTED_FUNCTION Tensor::Tensor (
+    Tensor && o_tensor
+) = default
 ```
 
 
@@ -432,280 +384,7 @@ inline KOKKOS_FUNCTION Tensor Tensor::operator* (
 **Parameters:**
 
 
-* `val` The value by which the elements should be multiplied. 
-
-
-
-**Returns:**
-
-A new tensor containing the result of the multiplication. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator\*= 
-
-_An operator to multiply all the element of the current tensor by a value._ 
-```C++
-template<class OElementType>
-inline KOKKOS_FUNCTION Tensor & Tensor::operator*= (
-    OElementType val
-) 
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `val` The value by which the elements should be multiplied. 
-
-
-
-**Returns:**
-
-A reference to the current modified tensor. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator+ 
-
-_An operator to add two tensors elementwise._ 
-```C++
-inline KOKKOS_FUNCTION Tensor Tensor::operator+ (
-    Tensor const & val
-) const
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `val` The tensor that should be added to the current tensor. 
-
-
-
-**Returns:**
-
-A new tensor containing the result of the addition. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator+= 
-
-_An operator to add two tensors elementwise._ 
-```C++
-inline KOKKOS_FUNCTION Tensor & Tensor::operator+= (
-    Tensor const & val
-) 
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `val` The tensor that should be added to the current tensor. 
-
-
-
-**Returns:**
-
-A reference to the current modified tensor. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator- 
-
-_An operator to subtract one tensor from another elementwise._ 
-```C++
-inline KOKKOS_FUNCTION Tensor Tensor::operator- (
-    Tensor const & val
-) const
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `val` The tensor that should be subtracted from the current tensor. 
-
-
-
-**Returns:**
-
-A new tensor containing the result of the subtraction. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator- 
-
-_An operator to get the negation of a tensor elementwise._ 
-```C++
-inline KOKKOS_FUNCTION Tensor Tensor::operator- () const
-```
-
-
-
-
-
-**Returns:**
-
-A new tensor containing the result of the subtraction. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator-= 
-
-_An operator to subtract one tensor from another elementwise._ 
-```C++
-inline KOKKOS_FUNCTION Tensor & Tensor::operator-= (
-    Tensor const & val
-) 
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `val` The tensor that should be subtracted from the current tensor. 
-
-
-
-**Returns:**
-
-A reference to the current modified tensor. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator/ 
-
-_An operator to multiply all the element of the current tensor by a value._ 
-```C++
-template<class OElementType>
-inline KOKKOS_FUNCTION Tensor Tensor::operator/ (
-    OElementType val
-) const
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `val` The value by which the elements should be multiplied. 
-
-
-
-**Returns:**
-
-A new tensor containing the result of the multiplication. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator/= 
-
-_An operator to divide all the element of the current tensor by a value._ 
-```C++
-template<class OElementType>
-inline KOKKOS_FUNCTION Tensor & Tensor::operator/= (
-    OElementType val
-) 
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `val` The value by which the elements should be multiplied. 
-
-
-
-**Returns:**
-
-A reference to the current modified tensor. 
-
+* `o_tensor` The tensor to be copied. 
 
 
 
@@ -718,7 +397,7 @@ A reference to the current modified tensor.
 
 ### function operator= 
 
-_A copy operator._ 
+_A copy assign operator._ 
 ```C++
 KOKKOS_DEFAULTED_FUNCTION Tensor & Tensor::operator= (
     Tensor const & other
@@ -752,12 +431,11 @@ A reference to the current tensor.
 
 ### function operator= 
 
-_A copy operator._ 
+_A move assign operator._ 
 ```C++
-template<class... Dims>
-inline KOKKOS_FUNCTION Tensor & Tensor::operator= (
-    Coord< Dims... > coord
-) 
+KOKKOS_DEFAULTED_FUNCTION Tensor & Tensor::operator= (
+    Tensor && other
+) = default
 ```
 
 
@@ -767,99 +445,13 @@ inline KOKKOS_FUNCTION Tensor & Tensor::operator= (
 **Parameters:**
 
 
-* `coord` The coordinate to be copied into the vector. 
+* `other` The tensor to be copied. 
 
 
 
 **Returns:**
 
-A reference to the current tensor. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator== 
-
-_An operator to compare one tensor to another elementwise._ 
-```C++
-inline KOKKOS_FUNCTION bool Tensor::operator== (
-    Tensor const & o_tensor
-) const
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `o_tensor` The tensor that should be compared with the current tensor. 
-
-
-
-**Returns:**
-
-True if the tensors are equal, false otherwise. 
-
-
-
-
-
-        
-
-<hr>
-## Public Static Functions Documentation
-
-
-
-
-### function rank 
-
-_The rank of the tensor. This is equivalent to the number of indices required to access an element of the tensor._ 
-```C++
-static inline KOKKOS_FUNCTION constexpr std::size_t Tensor::rank () 
-```
-
-
-
-
-
-**Returns:**
-
-The rank of the tensor. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function size 
-
-_The size of the tensor. This is the number of elements in the tensor._ 
-```C++
-static inline KOKKOS_FUNCTION constexpr std::size_t Tensor::size () 
-```
-
-
-
-
-
-**Returns:**
-
-The number of elements in the tensor. 
+A r-value reference to the current tensor. 
 
 
 

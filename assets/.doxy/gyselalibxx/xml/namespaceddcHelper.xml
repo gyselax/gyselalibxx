@@ -269,7 +269,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="172" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="172" bodyend="178"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="173" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="173" bodyend="179"/>
       </memberdef>
       <memberdef kind="function" id="static__tensors_8hpp_1a1991befd522c601fffc2248514baa52d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -322,9 +322,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="187" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="187" bodyend="193"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="188" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="188" bodyend="194"/>
       </memberdef>
-      <memberdef kind="function" id="tensor_8hpp_1ad3ef4581d179399169e4128657f9bf76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="tensor__common_8hpp_1aaf4377a1b44ab11de52a968fd43821e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class...</type>
@@ -332,7 +332,7 @@
             <defname>QueryIndexTag</defname>
           </param>
           <param>
-            <type>class ElementType</type>
+            <type>class storage_type</type>
           </param>
           <param>
             <type>class...</type>
@@ -340,13 +340,13 @@
             <defname>ValidIndexSet</defname>
           </param>
         </templateparamlist>
-        <type>KOKKOS_INLINE_FUNCTION ElementType &amp;</type>
-        <definition>KOKKOS_INLINE_FUNCTION ElementType &amp; ddcHelper::get</definition>
-        <argsstring>(Tensor&lt; ElementType, ValidIndexSet... &gt; &amp;tensor)</argsstring>
+        <type>KOKKOS_INLINE_FUNCTION storage_type::element_type &amp;</type>
+        <definition>KOKKOS_INLINE_FUNCTION storage_type::element_type &amp; ddcHelper::get</definition>
+        <argsstring>(TensorCommon&lt; storage_type, ValidIndexSet... &gt; &amp;tensor)</argsstring>
         <name>get</name>
         <qualifiedname>ddcHelper::get</qualifiedname>
         <param>
-          <type><ref refid="classTensor" kindref="compound">Tensor</ref>&lt; ElementType, ValidIndexSet... &gt; &amp;</type>
+          <type><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt; storage_type, ValidIndexSet... &gt; &amp;</type>
           <declname>tensor</declname>
         </param>
         <briefdescription>
@@ -377,9 +377,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="383" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="383" bodyend="388"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="264" column="60" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="264" bodyend="270"/>
       </memberdef>
-      <memberdef kind="function" id="tensor_8hpp_1adcacf7bf8173bf14f4591918285aa2f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="tensor__common_8hpp_1af27e89e895316fa48d3702f1ae445bf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class...</type>
@@ -387,7 +387,7 @@
             <defname>QueryIndexTag</defname>
           </param>
           <param>
-            <type>class ElementType</type>
+            <type>class storage_type</type>
           </param>
           <param>
             <type>class...</type>
@@ -395,13 +395,13 @@
             <defname>ValidIndexSet</defname>
           </param>
         </templateparamlist>
-        <type>KOKKOS_INLINE_FUNCTION ElementType const &amp;</type>
-        <definition>KOKKOS_INLINE_FUNCTION ElementType const  &amp; ddcHelper::get</definition>
-        <argsstring>(Tensor&lt; ElementType, ValidIndexSet... &gt; const &amp;tensor)</argsstring>
+        <type>KOKKOS_INLINE_FUNCTION storage_type::element_type const &amp;</type>
+        <definition>KOKKOS_INLINE_FUNCTION storage_type::element_type const  &amp; ddcHelper::get</definition>
+        <argsstring>(TensorCommon&lt; storage_type, ValidIndexSet... &gt; const &amp;tensor)</argsstring>
         <name>get</name>
         <qualifiedname>ddcHelper::get</qualifiedname>
         <param>
-          <type><ref refid="classTensor" kindref="compound">Tensor</ref>&lt; ElementType, ValidIndexSet... &gt; const &amp;</type>
+          <type><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt; storage_type, ValidIndexSet... &gt; const &amp;</type>
           <declname>tensor</declname>
         </param>
         <briefdescription>
@@ -432,12 +432,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="397" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="397" bodyend="402"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="279" column="66" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="279" bodyend="285"/>
       </memberdef>
-      <memberdef kind="function" id="tensor_8hpp_1af2697d1baeaea2e5fe1bcc8311767029" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="tensor__common_8hpp_1af48ed18fbce09d9f7ff47eeb0b61bf41" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>class ElementType</type>
+            <type>class storage_type</type>
           </param>
           <param>
             <type>class...</type>
@@ -447,11 +447,11 @@
         </templateparamlist>
         <type>KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt;</type>
         <definition>KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; ddcHelper::to_coord</definition>
-        <argsstring>(Vector&lt; ElementType, Dims... &gt; const &amp;tensor)</argsstring>
+        <argsstring>(TensorCommon&lt; storage_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const &amp;tensor)</argsstring>
         <name>to_coord</name>
         <qualifiedname>ddcHelper::to_coord</qualifiedname>
         <param>
-          <type><ref refid="classTensor" kindref="compound">Vector</ref>&lt; ElementType, Dims... &gt; const &amp;</type>
+          <type><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt; storage_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const &amp;</type>
           <declname>tensor</declname>
         </param>
         <briefdescription>
@@ -473,7 +473,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="412" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="412" bodyend="415"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="295" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="295" bodyend="299"/>
       </memberdef>
       <memberdef kind="function" id="vector__field_8hpp_1aa57ad767fdb365aaa4bf5b7e8929c576" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -519,7 +519,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" line="483" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" bodystart="483" bodyend="505"/>
       </memberdef>
-      <memberdef kind="function" id="vector__field_8hpp_1a4e12bc01a8d8959494712fb8a71acbdc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="vector__field_8hpp_1a0a990d73f5440550ebb60058ea19544c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class ElementType</type>
@@ -541,7 +541,7 @@
         </templateparamlist>
         <type>KOKKOS_INLINE_FUNCTION void</type>
         <definition>KOKKOS_INLINE_FUNCTION void ddcHelper::assign_vector_field_element</definition>
-        <argsstring>(VectorField&lt; ElementType, IdxRangeType, VectorIndexSet&lt; Dims... &gt;, MemorySpace, LayoutStridedPolicy &gt; field, typename IdxRangeType::discrete_element_type idx, Vector&lt; ElementType, Dims... &gt; vector)</argsstring>
+        <argsstring>(VectorField&lt; ElementType, IdxRangeType, VectorIndexSet&lt; Dims... &gt;, MemorySpace, LayoutStridedPolicy &gt; field, typename IdxRangeType::discrete_element_type idx, Vector&lt; ElementType, Dims... &gt; const &amp;vector)</argsstring>
         <name>assign_vector_field_element</name>
         <qualifiedname>ddcHelper::assign_vector_field_element</qualifiedname>
         <param>
@@ -553,7 +553,7 @@
           <declname>idx</declname>
         </param>
         <param>
-          <type><ref refid="classTensor" kindref="compound">Vector</ref>&lt; ElementType, Dims... &gt;</type>
+          <type><ref refid="classTensor" kindref="compound">Vector</ref>&lt; ElementType, Dims... &gt; const &amp;</type>
           <declname>vector</declname>
         </param>
         <briefdescription>
@@ -591,13 +591,17 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" line="522" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp" bodystart="522" bodyend="533"/>
       </memberdef>
-      <memberdef kind="function" id="vector__field__common_8hpp_1a6e1d8ae4a15bc95c69ac104c288af30a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="vector__field__common_8hpp_1a3073ccd7095e44121805d560d53db101" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class QueryTag</type>
           </param>
           <param>
             <type>class VectorFieldType</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; is_vector_field_v&lt; VectorFieldType &gt;, bool &gt;</type>
+            <defval>true</defval>
           </param>
         </templateparamlist>
         <type>constexpr auto</type>
@@ -615,15 +619,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp" line="48" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp" bodystart="48" bodyend="52"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp" line="51" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp" bodystart="51" bodyend="55"/>
       </memberdef>
-      <memberdef kind="function" id="vector__field__common_8hpp_1abef007443ceadfa034348735ab4bbdf3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="vector__field__common_8hpp_1a7e96ce78fa06b6f47073469aeeb550a4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class QueryTag</type>
           </param>
           <param>
             <type>class VectorFieldType</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; is_vector_field_v&lt; VectorFieldType &gt;, bool &gt;</type>
+            <defval>true</defval>
           </param>
         </templateparamlist>
         <type>constexpr auto</type>
@@ -641,7 +649,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp" line="55" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp" bodystart="55" bodyend="59"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp" line="61" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp" bodystart="61" bodyend="65"/>
       </memberdef>
       <memberdef kind="function" id="multipatch__field_8hpp_1a1c7e7fe53e09d748ce27fe0421a2ef34" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>

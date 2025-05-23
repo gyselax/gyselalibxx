@@ -11,6 +11,7 @@
 
 
 * `#include <ddc/ddc.hpp>`
+* `#include "tensor_common.hpp"`
 * `#include "type_seq_tools.hpp"`
 * `#include "vector_index_tools.hpp"`
 

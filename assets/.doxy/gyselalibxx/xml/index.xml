@@ -2696,33 +2696,39 @@
     <member refid="structT_1a5f940fd4eca16aa26decb85142708203" kind="variable"><name>PERIODIC</name></member>
   </compound>
   <compound refid="classTensor" kind="class"><name>Tensor</name>
-    <member refid="classTensor_1a9c45ebb12d858cff471aedf396889708" kind="typedef"><name>index_set</name></member>
-    <member refid="classTensor_1ae41b35ad6cc6110daeaff56fff57bc2b" kind="typedef"><name>element_type</name></member>
-    <member refid="classTensor_1a19169c8af9ca4025b5779c69761f4b8e" kind="typedef"><name>vector_index_set_t</name></member>
-    <member refid="classTensor_1a9fdd8732e175b57b6f866126ab5251f1" kind="variable"><name>s_n_elements</name></member>
-    <member refid="classTensor_1ad2729efb6a2f1ee13a5735de71169fb5" kind="variable"><name>m_data</name></member>
-    <member refid="classTensor_1ac7619bb6c3891c90bb2c59f7515f474f" kind="function"><name>rank</name></member>
-    <member refid="classTensor_1a44e2cf57c4cb50f22c3537d5bd8edde0" kind="function"><name>size</name></member>
-    <member refid="classTensor_1a32957d1f871e67a58974059c1ff6b178" kind="function"><name>Tensor</name></member>
-    <member refid="classTensor_1a4a3910af9ebdd5a36e6999e2d4b274ac" kind="function"><name>Tensor</name></member>
-    <member refid="classTensor_1a7d405bd91e2e89a1ee4c973badd821a6" kind="function"><name>Tensor</name></member>
-    <member refid="classTensor_1a1c1d599698457fd792ee9012fdb3b5b4" kind="function"><name>Tensor</name></member>
-    <member refid="classTensor_1a783dddf339a00723800683e528ef9bc3" kind="function"><name>Tensor</name></member>
-    <member refid="classTensor_1afffb2e308bfc979b45c83c2f2cdff57d" kind="function"><name>get</name></member>
-    <member refid="classTensor_1a539ea3ced7ffa549f2b6b7e282895f13" kind="function"><name>get</name></member>
-    <member refid="classTensor_1ab427e698416968e0341852bd84203b75" kind="function"><name>operator=</name></member>
-    <member refid="classTensor_1a865e540a3ab70a849b4f181404cd9fba" kind="function"><name>operator=</name></member>
-    <member refid="classTensor_1af0da6591449a8769614164b605781983" kind="function"><name>operator*=</name></member>
-    <member refid="classTensor_1aef89751059895c9befb75892ca348a68" kind="function"><name>operator/=</name></member>
-    <member refid="classTensor_1a4e1e34b7fc6c2fd076736053e5cf3ec6" kind="function"><name>operator+=</name></member>
-    <member refid="classTensor_1ab023077f54456efd237358613f819993" kind="function"><name>operator-=</name></member>
-    <member refid="classTensor_1a1b1faf34db4a030d44560352b18d0c0c" kind="function"><name>operator*</name></member>
-    <member refid="classTensor_1a0f64f0f2afb76cb6f701ffd8e8b55d8d" kind="function"><name>operator/</name></member>
-    <member refid="classTensor_1a02ea288d5a36d155e4c6ed3cd7e50c23" kind="function"><name>operator+</name></member>
-    <member refid="classTensor_1a52e9979367ea03d4498124b32ec9a821" kind="function"><name>operator-</name></member>
-    <member refid="classTensor_1a0a4985762ba9e45713294996fdae7268" kind="function"><name>operator-</name></member>
-    <member refid="classTensor_1ad6f543ad919df72d4566b89a86bc4975" kind="function"><name>operator==</name></member>
-    <member refid="classTensor_1a7c3c2bce8859c632c8a36ed0bb978069" kind="function"><name>operator!=</name></member>
+    <member refid="classTensor_1a90babc948cc76e5741f04a45395c0498" kind="typedef"><name>base_type</name></member>
+    <member refid="classTensor_1a4c6e65e8f6674042fe4cac88479330d1" kind="variable"><name>m_data_alloc</name></member>
+    <member refid="classTensor_1a4a47cd908de66325add93143756fb97f" kind="function"><name>Tensor</name></member>
+    <member refid="classTensor_1a489f7ef71c36797a6b710794cd2a30d5" kind="function"><name>Tensor</name></member>
+    <member refid="classTensor_1a1f97f16958ee4928665a38df7d129a98" kind="function"><name>Tensor</name></member>
+    <member refid="classTensor_1a706ab53bc12245f195db879d9ce4cec6" kind="function"><name>Tensor</name></member>
+    <member refid="classTensor_1a7e4279d6af9d2290c6bb4c5556e02ead" kind="function"><name>Tensor</name></member>
+    <member refid="classTensor_1a2adcf14b0c73758f9d7a4530699f5f28" kind="function"><name>Tensor</name></member>
+    <member refid="classTensor_1a12e2b6f5f2fc74784794a91bc6675670" kind="function"><name>Tensor</name></member>
+    <member refid="classTensor_1af6e516caedbe34eacbd831697ec9ee42" kind="function"><name>operator=</name></member>
+    <member refid="classTensor_1a5c8a0f4e6be0c24c592985595e05e219" kind="function"><name>operator=</name></member>
+  </compound>
+  <compound refid="classTensorCommon" kind="class"><name>TensorCommon</name>
+    <member refid="classTensorCommon_1a3a831b0fd1b2831b2a084ec757adf7f1" kind="typedef"><name>index_set</name></member>
+    <member refid="classTensorCommon_1a71fe0ef37137a48f7d12adda3c520389" kind="typedef"><name>element_type</name></member>
+    <member refid="classTensorCommon_1a9f7a456d992a92df2da216c8ac15b3af" kind="typedef"><name>vector_index_set_t</name></member>
+    <member refid="classTensorCommon_1a576aa8abdcff0bd9a24f793a41807fc1" kind="variable"><name>s_n_elements</name></member>
+    <member refid="classTensorCommon_1a65d56a8afbc8d4a6b3653f260fa8b485" kind="variable"><name>m_data</name></member>
+    <member refid="classTensorCommon_1affb30d1a9046620f49820775fdfa9245" kind="function"><name>rank</name></member>
+    <member refid="classTensorCommon_1a6b4297c4947e2dd7413dfb9cbb27878b" kind="function"><name>size</name></member>
+    <member refid="classTensorCommon_1aa8113a619dcbfad32c34654774c384a5" kind="function"><name>TensorCommon</name></member>
+    <member refid="classTensorCommon_1acdf95bf254452d33669b38f9440af326" kind="function"><name>TensorCommon</name></member>
+    <member refid="classTensorCommon_1a6c206cff210a3d26b21887376ebe2f53" kind="function"><name>TensorCommon</name></member>
+    <member refid="classTensorCommon_1a8b68d6c91d0c9cfefc36cc2e306e39c7" kind="function"><name>get</name></member>
+    <member refid="classTensorCommon_1a99533cab0e32eb13237a1a840c728346" kind="function"><name>get</name></member>
+    <member refid="classTensorCommon_1a8fb59fb9f5a445a3f117e2ff6537fb6c" kind="function"><name>operator=</name></member>
+    <member refid="classTensorCommon_1a8d10c1c855937e53bcfca91e505f82b7" kind="function"><name>operator=</name></member>
+    <member refid="classTensorCommon_1ad5e7461817e43e4367d3e677dde92349" kind="function"><name>operator*=</name></member>
+    <member refid="classTensorCommon_1a1e58949185d88ddeb9037dfed2cf80d0" kind="function"><name>operator/=</name></member>
+    <member refid="classTensorCommon_1ae948365692ffa2783d1238fe082a2471" kind="function"><name>operator+=</name></member>
+    <member refid="classTensorCommon_1a1363f71acd75042817d6bd15c842ef14" kind="function"><name>operator-=</name></member>
+    <member refid="classTensorCommon_1aebc5450cc9ba0498b98af2355e60dc61" kind="function"><name>operator==</name></member>
+    <member refid="classTensorCommon_1a94caffe0ab423d056c9b6193a4613f1e" kind="function"><name>operator!=</name></member>
   </compound>
   <compound refid="classtensor__tools_1_1TensorIndexElement" kind="class"><name>tensor_tools::TensorIndexElement</name>
   </compound>
@@ -2928,15 +2934,15 @@
     <member refid="structY__pC_1a6274201b751e93509509253746e598c1" kind="variable"><name>IS_COVARIANT</name></member>
     <member refid="structY__pC_1a840b5d333654df4c5be30422ce8eeb28" kind="variable"><name>IS_CONTRAVARIANT</name></member>
   </compound>
-  <compound refid="namespace_0d209" kind="namespace"><name>@209</name>
+  <compound refid="namespace_0d210" kind="namespace"><name>@210</name>
   </compound>
-  <compound refid="namespace_0d211" kind="namespace"><name>@211</name>
+  <compound refid="namespace_0d212" kind="namespace"><name>@212</name>
   </compound>
-  <compound refid="namespace_0d213" kind="namespace"><name>@213</name>
+  <compound refid="namespace_0d214" kind="namespace"><name>@214</name>
   </compound>
-  <compound refid="namespace_0d215" kind="namespace"><name>@215</name>
+  <compound refid="namespace_0d216" kind="namespace"><name>@216</name>
   </compound>
-  <compound refid="namespace_0d92" kind="namespace"><name>@92</name>
+  <compound refid="namespace_0d93" kind="namespace"><name>@93</name>
   </compound>
   <compound refid="namespaceconnectivity__details" kind="namespace"><name>connectivity_details</name>
     <member refid="connectivity__details_8hpp_1a466fdaea6f003eafe6cf608ff6593e35" kind="enum"><name>InsertPosition</name></member>
@@ -2955,13 +2961,13 @@
     <member refid="derivative__field_8hpp_1ada5630e0ff2c91e9524e0c32aaa8ad77" kind="function"><name>deepcopy</name></member>
     <member refid="static__tensors_8hpp_1ad0fdb229d43d6ace239e79e446a2c9db" kind="function"><name>get</name></member>
     <member refid="static__tensors_8hpp_1a1991befd522c601fffc2248514baa52d" kind="function"><name>get</name></member>
-    <member refid="tensor_8hpp_1ad3ef4581d179399169e4128657f9bf76" kind="function"><name>get</name></member>
-    <member refid="tensor_8hpp_1adcacf7bf8173bf14f4591918285aa2f0" kind="function"><name>get</name></member>
-    <member refid="tensor_8hpp_1af2697d1baeaea2e5fe1bcc8311767029" kind="function"><name>to_coord</name></member>
+    <member refid="tensor__common_8hpp_1aaf4377a1b44ab11de52a968fd43821e0" kind="function"><name>get</name></member>
+    <member refid="tensor__common_8hpp_1af27e89e895316fa48d3702f1ae445bf4" kind="function"><name>get</name></member>
+    <member refid="tensor__common_8hpp_1af48ed18fbce09d9f7ff47eeb0b61bf41" kind="function"><name>to_coord</name></member>
     <member refid="vector__field_8hpp_1aa57ad767fdb365aaa4bf5b7e8929c576" kind="function"><name>create_mirror_view_and_copy</name></member>
-    <member refid="vector__field_8hpp_1a4e12bc01a8d8959494712fb8a71acbdc" kind="function"><name>assign_vector_field_element</name></member>
-    <member refid="vector__field__common_8hpp_1a6e1d8ae4a15bc95c69ac104c288af30a" kind="function"><name>get</name></member>
-    <member refid="vector__field__common_8hpp_1abef007443ceadfa034348735ab4bbdf3" kind="function"><name>get</name></member>
+    <member refid="vector__field_8hpp_1a0a990d73f5440550ebb60058ea19544c" kind="function"><name>assign_vector_field_element</name></member>
+    <member refid="vector__field__common_8hpp_1a3073ccd7095e44121805d560d53db101" kind="function"><name>get</name></member>
+    <member refid="vector__field__common_8hpp_1a7e96ce78fa06b6f47073469aeeb550a4" kind="function"><name>get</name></member>
     <member refid="multipatch__field_8hpp_1a1c7e7fe53e09d748ce27fe0421a2ef34" kind="function"><name>deepcopy</name></member>
     <member refid="ddc__helper_8hpp_1ab85a32309a76aeb021f849ea7bfd2773" kind="function"><name>total_interval_length</name></member>
     <member refid="ddc__helper_8hpp_1a4d5446b992979ca3b2382c0277626048" kind="function"><name>total_interval_length</name></member>
@@ -3130,11 +3136,19 @@
     <member refid="tensor_8hpp_1a6aee6677463b93014f0a19113c1e4260" kind="typedef"><name>DTensor</name></member>
     <member refid="tensor_8hpp_1ae3239ebdbab479a3e67907f2d16e8eb1" kind="typedef"><name>Vector</name></member>
     <member refid="tensor_8hpp_1ab4d2f0aa26d0a1f32bae61fe748501dc" kind="typedef"><name>DVector</name></member>
-    <member refid="tensor_8hpp_1a8c09432fdcf7e7e87cbf80a8c484b13a" kind="function"><name>operator*</name></member>
-    <member refid="tensor_8hpp_1ae5e406e02d6b387823086b71eefb676b" kind="function"><name>operator+</name></member>
-    <member refid="tensor_8hpp_1ae261d91e0f1e71db5f42d54551546d83" kind="function"><name>operator-</name></member>
-    <member refid="tensor_8hpp_1aeb2336de3f3d9e1236ce85bb85af9f00" kind="function"><name>operator+=</name></member>
-    <member refid="tensor_8hpp_1a91e7258aa1fd0e4b9c7a6f764b554be8" kind="function"><name>operator-=</name></member>
+  </compound>
+  <compound refid="tensor__common_8hpp" kind="file"><name>tensor_common.hpp</name>
+    <member refid="tensor__common_8hpp_1afa45bc00e523f8d9d237de8417630539" kind="variable"><name>is_tensor_type_v</name></member>
+    <member refid="tensor__common_8hpp_1a241ccf94176120442552197f184ba007" kind="function"><name>operator+</name></member>
+    <member refid="tensor__common_8hpp_1ab20ddce7890d758eb2f676e3148d7903" kind="function"><name>operator-</name></member>
+    <member refid="tensor__common_8hpp_1a8dad1027cbe8844eed5d961c7c7a31cf" kind="function"><name>operator+=</name></member>
+    <member refid="tensor__common_8hpp_1a9dffd3c662313b211f099beb1b5c7326" kind="function"><name>operator-=</name></member>
+    <member refid="tensor__common_8hpp_1a21a60b8d604003f554c790a734471b24" kind="function"><name>operator*</name></member>
+    <member refid="tensor__common_8hpp_1aaae65328bd77430ec82331d74f33caaa" kind="function"><name>operator*</name></member>
+    <member refid="tensor__common_8hpp_1a1789570df938da121c33669df52f4244" kind="function"><name>operator/</name></member>
+    <member refid="tensor__common_8hpp_1aaf06f488ec3de2a5d18b6322ea0343a3" kind="function"><name>operator+</name></member>
+    <member refid="tensor__common_8hpp_1ada4db5346b9c20698885d1a189706ad0" kind="function"><name>operator-</name></member>
+    <member refid="tensor__common_8hpp_1a8595263316e38b76855bd4e03cb6956c" kind="function"><name>operator-</name></member>
   </compound>
   <compound refid="tensor__index__tools_8hpp" kind="file"><name>tensor_index_tools.hpp</name>
   </compound>

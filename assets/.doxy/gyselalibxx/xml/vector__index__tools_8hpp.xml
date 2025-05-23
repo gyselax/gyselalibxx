@@ -10,6 +10,7 @@
     <includedby refid="indexed__tensor_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp</includedby>
     <includedby refid="static__tensors_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp</includedby>
     <includedby refid="tensor_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp</includedby>
+    <includedby refid="tensor__common_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp</includedby>
     <includedby refid="tensor__index__tools_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp</includedby>
     <includedby refid="vector__field_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp</includedby>
     <includedby refid="vector__field__mem_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp</includedby>
@@ -253,11 +254,21 @@
         </childnode>
       </node>
       <node id="70">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp</label>
+        <link refid="tensor__common_8hpp_source"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="71">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp</label>
         <link refid="tensor__index__tools_8hpp_source"/>
         <childnode refid="38" relation="include">
         </childnode>
         <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
         </childnode>
       </node>
       <node id="44">
@@ -344,6 +355,8 @@
         <childnode refid="41" relation="include">
         </childnode>
         <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
         </childnode>
         <childnode refid="44" relation="include">
         </childnode>

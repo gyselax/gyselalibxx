@@ -544,6 +544,7 @@
 
 #include &lt;ddc/ddc.hpp&gt;
 
+#include "tensor_common.hpp"
 #include "type_seq_tools.hpp"
 #include "vector_index_tools.hpp"
 
@@ -652,6 +653,13 @@ KOKKOS_INLINE_FUNCTION constexpr double get(
             QueryIndexTag...&gt;&gt;();
 }
 } // namespace ddcHelper
+
+namespace detail {
+
+template &lt;class ElementType, class ValidIndexSet&gt;
+inline constexpr bool enable_tensor_type&lt;LeviCivitaTensor&lt;ElementType, ValidIndexSet&gt;&gt; = true;
+
+}
 </code></pre></div>
               
             </div>

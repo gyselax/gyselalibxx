@@ -2,10 +2,14 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classTensor" kind="class" language="C++" prot="public">
     <compoundname>Tensor</compoundname>
+    <basecompoundref refid="classTensorCommon" prot="public" virt="non-virtual">TensorCommon&lt; detail::TensorDataInnards&lt; ElementType,(ddc::type_seq_size_v&lt; ValidIndexSet &gt; *... *ddc::type_seq_size_v&lt; ValidIndexSetFirstDim &gt;)&gt;, ValidIndexSetFirstDim, ValidIndexSet... &gt;</basecompoundref>
     <includes refid="tensor_8hpp" local="no">tensor.hpp</includes>
     <templateparamlist>
       <param>
         <type>class ElementType</type>
+      </param>
+      <param>
+        <type>class ValidIndexSetFirstDim</type>
       </param>
       <param>
         <type>class...</type>
@@ -13,145 +17,42 @@
         <defname>ValidIndexSet</defname>
       </param>
     </templateparamlist>
-    <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="classTensor_1a9c45ebb12d858cff471aedf396889708" prot="public" static="no">
-        <type>ddc::detail::TypeSeq&lt; ValidIndexSet... &gt;</type>
-        <definition>using Tensor&lt; ElementType, ValidIndexSet &gt;::index_set =  ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;</definition>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classTensor_1a90babc948cc76e5741f04a45395c0498" prot="private" static="no">
+        <type><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt; detail::TensorDataInnards&lt; ElementType,(ddc::type_seq_size_v&lt; ValidIndexSet &gt; *... *ddc::type_seq_size_v&lt; ValidIndexSetFirstDim &gt;)&gt;, ValidIndexSetFirstDim, ValidIndexSet... &gt;</type>
+        <definition>using Tensor&lt; ElementType, ValidIndexSetFirstDim, ValidIndexSet &gt;::base_type =  TensorCommon&lt; detail::TensorDataInnards&lt; ElementType, (ddc::type_seq_size_v&lt;ValidIndexSet&gt; * ... * ddc::type_seq_size_v&lt;ValidIndexSetFirstDim&gt;)&gt;, ValidIndexSetFirstDim, ValidIndexSet...&gt;</definition>
         <argsstring></argsstring>
-        <name>index_set</name>
-        <qualifiedname>Tensor::index_set</qualifiedname>
-        <briefdescription>
-<para>The TensorIndexSet describing the possible indices. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="28" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="28" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classTensor_1ae41b35ad6cc6110daeaff56fff57bc2b" prot="public" static="no">
-        <type>ElementType</type>
-        <definition>using Tensor&lt; ElementType, ValidIndexSet &gt;::element_type =  ElementType</definition>
-        <argsstring></argsstring>
-        <name>element_type</name>
-        <qualifiedname>Tensor::element_type</qualifiedname>
-        <briefdescription>
-<para>The type of the elements of the tensor. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="36" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="36" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classTensor_1a19169c8af9ca4025b5779c69761f4b8e" prot="public" static="no">
-        <templateparamlist>
-          <param>
-            <type>std::size_t</type>
-            <declname>dim</declname>
-            <defname>dim</defname>
-          </param>
-        </templateparamlist>
-        <type>ddc::type_seq_element_t&lt; dim, <ref refid="classTensor_1a9c45ebb12d858cff471aedf396889708" kindref="member">index_set</ref> &gt;</type>
-        <definition>using Tensor&lt; ElementType, ValidIndexSet &gt;::vector_index_set_t =  ddc::type_seq_element_t&lt;dim, index_set&gt;</definition>
-        <argsstring></argsstring>
-        <name>vector_index_set_t</name>
-        <qualifiedname>Tensor::vector_index_set_t</qualifiedname>
-        <briefdescription>
-<para>A helper type alias to get all possible indices along a specified dimension. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="templateparam"><parameteritem>
-<parameternamelist>
-<parametername>Dim</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The dimension of interest (0 &lt;= dim &lt; <ref refid="classTensor_1ac7619bb6c3891c90bb2c59f7515f474f" kindref="member">rank()</ref>). </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="325" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="325" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="private-static-attrib">
-      <memberdef kind="variable" id="classTensor_1a9fdd8732e175b57b6f866126ab5251f1" prot="private" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr std::size_t</type>
-        <definition>constexpr std::size_t Tensor&lt; ElementType, ValidIndexSet &gt;::s_n_elements</definition>
-        <argsstring></argsstring>
-        <name>s_n_elements</name>
-        <qualifiedname>Tensor::s_n_elements</qualifiedname>
-        <initializer>= (ddc::type_seq_size_v&lt;ValidIndexSet&gt; * ...)</initializer>
+        <name>base_type</name>
+        <qualifiedname>Tensor::base_type</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="31" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="31" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="61" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="67" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classTensor_1ad2729efb6a2f1ee13a5735de71169fb5" prot="private" static="no" mutable="no">
-        <type>std::array&lt; ElementType, s_n_elements &gt;</type>
-        <definition>std::array&lt;ElementType, s_n_elements&gt; Tensor&lt; ElementType, ValidIndexSet &gt;::m_data</definition>
+      <memberdef kind="variable" id="classTensor_1a4c6e65e8f6674042fe4cac88479330d1" prot="private" static="no" mutable="no">
+        <type>std::array&lt; ElementType, <ref refid="classTensorCommon_1a576aa8abdcff0bd9a24f793a41807fc1" kindref="member">s_n_elements</ref> &gt;</type>
+        <definition>std::array&lt;ElementType, s_n_elements&gt; Tensor&lt; ElementType, ValidIndexSetFirstDim, ValidIndexSet &gt;::m_data_alloc</definition>
         <argsstring></argsstring>
-        <name>m_data</name>
-        <qualifiedname>Tensor::m_data</qualifiedname>
+        <name>m_data_alloc</name>
+        <qualifiedname>Tensor::m_data_alloc</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="32" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="32" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="classTensor_1ac7619bb6c3891c90bb2c59f7515f474f" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION constexpr std::size_t</type>
-        <definition>static KOKKOS_FUNCTION constexpr std::size_t Tensor&lt; ElementType, ValidIndexSet &gt;::rank</definition>
-        <argsstring>()</argsstring>
-        <name>rank</name>
-        <qualifiedname>Tensor::rank</qualifiedname>
-        <briefdescription>
-<para>The rank of the tensor. This is equivalent to the number of indices required to access an element of the tensor. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>The rank of the tensor. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="45" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="45" bodyend="48"/>
-      </memberdef>
-      <memberdef kind="function" id="classTensor_1a44e2cf57c4cb50f22c3537d5bd8edde0" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION constexpr std::size_t</type>
-        <definition>static KOKKOS_FUNCTION constexpr std::size_t Tensor&lt; ElementType, ValidIndexSet &gt;::size</definition>
-        <argsstring>()</argsstring>
-        <name>size</name>
-        <qualifiedname>Tensor::size</qualifiedname>
-        <briefdescription>
-<para>The size of the tensor. This is the number of elements in the tensor. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>The number of elements in the tensor. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="56" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="56" bodyend="59"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="77" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="77" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classTensor_1a32957d1f871e67a58974059c1ff6b178" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classTensor_1a4a47cd908de66325add93143756fb97f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>KOKKOS_DEFAULTED_FUNCTION</type>
-        <definition>KOKKOS_DEFAULTED_FUNCTION Tensor&lt; ElementType, ValidIndexSet &gt;::Tensor</definition>
+        <definition>KOKKOS_DEFAULTED_FUNCTION Tensor&lt; ElementType, ValidIndexSetFirstDim, ValidIndexSet &gt;::Tensor</definition>
         <argsstring>()=default</argsstring>
         <name>Tensor</name>
         <qualifiedname>Tensor::Tensor</qualifiedname>
@@ -162,11 +63,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="68" column="31"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="84" column="31"/>
       </memberdef>
-      <memberdef kind="function" id="classTensor_1a4a3910af9ebdd5a36e6999e2d4b274ac" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classTensor_1a489f7ef71c36797a6b710794cd2a30d5" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION</type>
-        <definition>KOKKOS_FUNCTION Tensor&lt; ElementType, ValidIndexSet &gt;::Tensor</definition>
+        <definition>KOKKOS_FUNCTION Tensor&lt; ElementType, ValidIndexSetFirstDim, ValidIndexSet &gt;::Tensor</definition>
         <argsstring>(ElementType fill_value)</argsstring>
         <name>Tensor</name>
         <qualifiedname>Tensor::Tensor</qualifiedname>
@@ -191,9 +92,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="74" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="74" bodyend="79"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="90" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="90" bodyend="95"/>
       </memberdef>
-      <memberdef kind="function" id="classTensor_1a7d405bd91e2e89a1ee4c973badd821a6" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classTensor_1a1f97f16958ee4928665a38df7d129a98" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class...</type>
@@ -206,11 +107,11 @@
           </param>
           <param>
             <type>class</type>
-            <defval>std::enable_if_t&lt;sizeof...(Params) == <ref refid="classTensor_1a44e2cf57c4cb50f22c3537d5bd8edde0" kindref="member">size</ref>() &amp;&amp; sizeof...(Params) != 1&gt;</defval>
+            <defval>std::enable_if_t&lt;                    sizeof...(Params) == <ref refid="classTensorCommon_1a6b4297c4947e2dd7413dfb9cbb27878b" kindref="member">base_type::size</ref>() &amp;&amp; sizeof...(Params) != 1&gt;</defval>
           </param>
         </templateparamlist>
         <type>KOKKOS_FUNCTION</type>
-        <definition>KOKKOS_FUNCTION Tensor&lt; ElementType, ValidIndexSet &gt;::Tensor</definition>
+        <definition>KOKKOS_FUNCTION Tensor&lt; ElementType, ValidIndexSetFirstDim, ValidIndexSet &gt;::Tensor</definition>
         <argsstring>(Params... elements)</argsstring>
         <name>Tensor</name>
         <qualifiedname>Tensor::Tensor</qualifiedname>
@@ -235,9 +136,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="91" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="91" bodyend="96"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="108" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="108" bodyend="114"/>
       </memberdef>
-      <memberdef kind="function" id="classTensor_1a1c1d599698457fd792ee9012fdb3b5b4" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classTensor_1a706ab53bc12245f195db879d9ce4cec6" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class...</type>
@@ -246,8 +147,8 @@
           </param>
         </templateparamlist>
         <type>KOKKOS_FUNCTION</type>
-        <definition>KOKKOS_FUNCTION Tensor&lt; ElementType, ValidIndexSet &gt;::Tensor</definition>
-        <argsstring>(Coord&lt; Dims... &gt; coord)</argsstring>
+        <definition>KOKKOS_FUNCTION Tensor&lt; ElementType, ValidIndexSetFirstDim, ValidIndexSet &gt;::Tensor</definition>
+        <argsstring>(Coord&lt; Dims... &gt; coord) noexcept</argsstring>
         <name>Tensor</name>
         <qualifiedname>Tensor::Tensor</qualifiedname>
         <param>
@@ -271,25 +172,29 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="104" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="104" bodyend="112"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="122" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="122" bodyend="131"/>
       </memberdef>
-      <memberdef kind="function" id="classTensor_1a783dddf339a00723800683e528ef9bc3" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classTensor_1a7e4279d6af9d2290c6bb4c5556e02ead" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>class OElementType</type>
+            <type>class OTensorType</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; is_tensor_type_v&lt; OTensorType &gt;, bool &gt;</type>
+            <defval>true</defval>
           </param>
         </templateparamlist>
         <type>KOKKOS_FUNCTION</type>
-        <definition>KOKKOS_FUNCTION Tensor&lt; ElementType, ValidIndexSet &gt;::Tensor</definition>
-        <argsstring>(Tensor&lt; OElementType, ValidIndexSet... &gt; const &amp;o_tensor)</argsstring>
+        <definition>KOKKOS_FUNCTION Tensor&lt; ElementType, ValidIndexSetFirstDim, ValidIndexSet &gt;::Tensor</definition>
+        <argsstring>(const OTensorType &amp;o_tensor) noexcept</argsstring>
         <name>Tensor</name>
         <qualifiedname>Tensor::Tensor</qualifiedname>
         <param>
-          <type><ref refid="classTensor" kindref="compound">Tensor</ref>&lt; OElementType, ValidIndexSet... &gt; const &amp;</type>
+          <type>const OTensorType &amp;</type>
           <declname>o_tensor</declname>
         </param>
         <briefdescription>
-<para>Construct a tensor object by copying an existing tensor. </para>
+<para>Construct a tensor object by copying an existing compatible tensor. A tensor is compatible if it is defined on the same dimensions. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -305,75 +210,69 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="120" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="120" bodyend="123"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="140" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="140" bodyend="148"/>
       </memberdef>
-      <memberdef kind="function" id="classTensor_1afffb2e308bfc979b45c83c2f2cdff57d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class QueryTensorIndexElement</type>
-          </param>
-        </templateparamlist>
-        <type>KOKKOS_FUNCTION ElementType &amp;</type>
-        <definition>KOKKOS_FUNCTION ElementType &amp; Tensor&lt; ElementType, ValidIndexSet &gt;::get</definition>
-        <argsstring>()</argsstring>
-        <name>get</name>
-        <qualifiedname>Tensor::get</qualifiedname>
+      <memberdef kind="function" id="classTensor_1a2adcf14b0c73758f9d7a4530699f5f28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>KOKKOS_DEFAULTED_FUNCTION</type>
+        <definition>KOKKOS_DEFAULTED_FUNCTION Tensor&lt; ElementType, ValidIndexSetFirstDim, ValidIndexSet &gt;::Tensor</definition>
+        <argsstring>(Tensor const &amp;o_tensor)=default</argsstring>
+        <name>Tensor</name>
+        <qualifiedname>Tensor::Tensor</qualifiedname>
+        <param>
+          <type><ref refid="classTensor" kindref="compound">Tensor</ref> const &amp;</type>
+          <declname>o_tensor</declname>
+        </param>
         <briefdescription>
-<para>Get a modifiable reference to an element of the tensor. </para>
+<para>Construct a tensor object by copying an existing tensor of exactly the same type. This method can be called implicitly. </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="templateparam"><parameteritem>
+<para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>QueryIndexTag</parametername>
+<parametername>o_tensor</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A type describing the relevant index. </para>
+<para>The tensor to be copied. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The relevant element of the tensor. </para>
-</simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="131" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="131" bodyend="135"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="156" column="31"/>
       </memberdef>
-      <memberdef kind="function" id="classTensor_1a539ea3ced7ffa549f2b6b7e282895f13" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class QueryTensorIndexElement</type>
-          </param>
-        </templateparamlist>
-        <type>KOKKOS_FUNCTION ElementType const &amp;</type>
-        <definition>KOKKOS_FUNCTION ElementType const  &amp; Tensor&lt; ElementType, ValidIndexSet &gt;::get</definition>
-        <argsstring>() const</argsstring>
-        <name>get</name>
-        <qualifiedname>Tensor::get</qualifiedname>
+      <memberdef kind="function" id="classTensor_1a12e2b6f5f2fc74784794a91bc6675670" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>KOKKOS_DEFAULTED_FUNCTION</type>
+        <definition>KOKKOS_DEFAULTED_FUNCTION Tensor&lt; ElementType, ValidIndexSetFirstDim, ValidIndexSet &gt;::Tensor</definition>
+        <argsstring>(Tensor &amp;&amp;o_tensor)=default</argsstring>
+        <name>Tensor</name>
+        <qualifiedname>Tensor::Tensor</qualifiedname>
+        <param>
+          <type><ref refid="classTensor" kindref="compound">Tensor</ref> &amp;&amp;</type>
+          <declname>o_tensor</declname>
+        </param>
         <briefdescription>
-<para>Get an element of the tensor. </para>
+<para>Construct a tensor object by moving an existing tensor of exactly the same type. This method can be called implicitly. </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="templateparam"><parameteritem>
+<para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>QueryIndexTag</parametername>
+<parametername>o_tensor</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A type describing the relevant index. </para>
+<para>The tensor to be copied. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The relevant element of the tensor. </para>
-</simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="143" column="39" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="143" bodyend="147"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="164" column="31"/>
       </memberdef>
-      <memberdef kind="function" id="classTensor_1ab427e698416968e0341852bd84203b75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classTensor_1af6e516caedbe34eacbd831697ec9ee42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>KOKKOS_DEFAULTED_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref> &amp;</type>
-        <definition>KOKKOS_DEFAULTED_FUNCTION Tensor &amp; Tensor&lt; ElementType, ValidIndexSet &gt;::operator=</definition>
+        <definition>KOKKOS_DEFAULTED_FUNCTION Tensor &amp; Tensor&lt; ElementType, ValidIndexSetFirstDim, ValidIndexSet &gt;::operator=</definition>
         <argsstring>(Tensor const &amp;other)=default</argsstring>
         <name>operator=</name>
         <qualifiedname>Tensor::operator=</qualifiedname>
@@ -382,7 +281,7 @@
           <declname>other</declname>
         </param>
         <briefdescription>
-<para>A copy operator. </para>
+<para>A copy assign operator. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -400,393 +299,38 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="154" column="38"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="171" column="38"/>
       </memberdef>
-      <memberdef kind="function" id="classTensor_1a865e540a3ab70a849b4f181404cd9fba" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class...</type>
-            <declname>Dims</declname>
-            <defname>Dims</defname>
-          </param>
-        </templateparamlist>
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref> &amp;</type>
-        <definition>KOKKOS_FUNCTION Tensor &amp; Tensor&lt; ElementType, ValidIndexSet &gt;::operator=</definition>
-        <argsstring>(Coord&lt; Dims... &gt; coord)</argsstring>
+      <memberdef kind="function" id="classTensor_1a5c8a0f4e6be0c24c592985595e05e219" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>KOKKOS_DEFAULTED_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref> &amp;</type>
+        <definition>KOKKOS_DEFAULTED_FUNCTION Tensor &amp; Tensor&lt; ElementType, ValidIndexSetFirstDim, ValidIndexSet &gt;::operator=</definition>
+        <argsstring>(Tensor &amp;&amp;other)=default</argsstring>
         <name>operator=</name>
         <qualifiedname>Tensor::operator=</qualifiedname>
         <param>
-          <type>Coord&lt; Dims... &gt;</type>
-          <declname>coord</declname>
+          <type><ref refid="classTensor" kindref="compound">Tensor</ref> &amp;&amp;</type>
+          <declname>other</declname>
         </param>
         <briefdescription>
-<para>A copy operator. </para>
+<para>A move assign operator. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>coord</parametername>
+<parametername>other</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The coordinate to be copied into the vector. </para>
+<para>The tensor to be copied. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>A reference to the current tensor. </para>
+<simplesect kind="return"><para>A r-value reference to the current tensor. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="162" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="162" bodyend="172"/>
-      </memberdef>
-      <memberdef kind="function" id="classTensor_1af0da6591449a8769614164b605781983" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class OElementType</type>
-          </param>
-        </templateparamlist>
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref> &amp;</type>
-        <definition>KOKKOS_FUNCTION Tensor &amp; Tensor&lt; ElementType, ValidIndexSet &gt;::operator*=</definition>
-        <argsstring>(OElementType val)</argsstring>
-        <name>operator*=</name>
-        <qualifiedname>Tensor::operator*=</qualifiedname>
-        <param>
-          <type>OElementType</type>
-          <declname>val</declname>
-        </param>
-        <briefdescription>
-<para>An operator to multiply all the element of the current tensor by a value. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>val</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The value by which the elements should be multiplied. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>A reference to the current modified tensor. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="181" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="181" bodyend="187"/>
-      </memberdef>
-      <memberdef kind="function" id="classTensor_1aef89751059895c9befb75892ca348a68" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class OElementType</type>
-          </param>
-        </templateparamlist>
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref> &amp;</type>
-        <definition>KOKKOS_FUNCTION Tensor &amp; Tensor&lt; ElementType, ValidIndexSet &gt;::operator/=</definition>
-        <argsstring>(OElementType val)</argsstring>
-        <name>operator/=</name>
-        <qualifiedname>Tensor::operator/=</qualifiedname>
-        <param>
-          <type>OElementType</type>
-          <declname>val</declname>
-        </param>
-        <briefdescription>
-<para>An operator to divide all the element of the current tensor by a value. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>val</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The value by which the elements should be multiplied. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>A reference to the current modified tensor. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="196" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="196" bodyend="202"/>
-      </memberdef>
-      <memberdef kind="function" id="classTensor_1a4e1e34b7fc6c2fd076736053e5cf3ec6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref> &amp;</type>
-        <definition>KOKKOS_FUNCTION Tensor &amp; Tensor&lt; ElementType, ValidIndexSet &gt;::operator+=</definition>
-        <argsstring>(Tensor const &amp;val)</argsstring>
-        <name>operator+=</name>
-        <qualifiedname>Tensor::operator+=</qualifiedname>
-        <param>
-          <type><ref refid="classTensor" kindref="compound">Tensor</ref> const &amp;</type>
-          <declname>val</declname>
-        </param>
-        <briefdescription>
-<para>An operator to add two tensors elementwise. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>val</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The tensor that should be added to the current tensor. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>A reference to the current modified tensor. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="209" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="209" bodyend="215"/>
-      </memberdef>
-      <memberdef kind="function" id="classTensor_1ab023077f54456efd237358613f819993" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref> &amp;</type>
-        <definition>KOKKOS_FUNCTION Tensor &amp; Tensor&lt; ElementType, ValidIndexSet &gt;::operator-=</definition>
-        <argsstring>(Tensor const &amp;val)</argsstring>
-        <name>operator-=</name>
-        <qualifiedname>Tensor::operator-=</qualifiedname>
-        <param>
-          <type><ref refid="classTensor" kindref="compound">Tensor</ref> const &amp;</type>
-          <declname>val</declname>
-        </param>
-        <briefdescription>
-<para>An operator to subtract one tensor from another elementwise. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>val</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The tensor that should be subtracted from the current tensor. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>A reference to the current modified tensor. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="222" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="222" bodyend="228"/>
-      </memberdef>
-      <memberdef kind="function" id="classTensor_1a1b1faf34db4a030d44560352b18d0c0c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class OElementType</type>
-          </param>
-        </templateparamlist>
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref></type>
-        <definition>KOKKOS_FUNCTION Tensor Tensor&lt; ElementType, ValidIndexSet &gt;::operator*</definition>
-        <argsstring>(OElementType val) const</argsstring>
-        <name>operator*</name>
-        <qualifiedname>Tensor::operator*</qualifiedname>
-        <param>
-          <type>OElementType</type>
-          <declname>val</declname>
-        </param>
-        <briefdescription>
-<para>An operator to multiply all the element of the current tensor by a value. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>val</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The value by which the elements should be multiplied. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>A new tensor containing the result of the multiplication. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="237" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="237" bodyend="242"/>
-      </memberdef>
-      <memberdef kind="function" id="classTensor_1a0f64f0f2afb76cb6f701ffd8e8b55d8d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class OElementType</type>
-          </param>
-        </templateparamlist>
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref></type>
-        <definition>KOKKOS_FUNCTION Tensor Tensor&lt; ElementType, ValidIndexSet &gt;::operator/</definition>
-        <argsstring>(OElementType val) const</argsstring>
-        <name>operator/</name>
-        <qualifiedname>Tensor::operator/</qualifiedname>
-        <param>
-          <type>OElementType</type>
-          <declname>val</declname>
-        </param>
-        <briefdescription>
-<para>An operator to multiply all the element of the current tensor by a value. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>val</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The value by which the elements should be multiplied. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>A new tensor containing the result of the multiplication. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="251" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="251" bodyend="256"/>
-      </memberdef>
-      <memberdef kind="function" id="classTensor_1a02ea288d5a36d155e4c6ed3cd7e50c23" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref></type>
-        <definition>KOKKOS_FUNCTION Tensor Tensor&lt; ElementType, ValidIndexSet &gt;::operator+</definition>
-        <argsstring>(Tensor const &amp;val) const</argsstring>
-        <name>operator+</name>
-        <qualifiedname>Tensor::operator+</qualifiedname>
-        <param>
-          <type><ref refid="classTensor" kindref="compound">Tensor</ref> const &amp;</type>
-          <declname>val</declname>
-        </param>
-        <briefdescription>
-<para>An operator to add two tensors elementwise. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>val</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The tensor that should be added to the current tensor. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>A new tensor containing the result of the addition. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="263" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="263" bodyend="268"/>
-      </memberdef>
-      <memberdef kind="function" id="classTensor_1a52e9979367ea03d4498124b32ec9a821" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref></type>
-        <definition>KOKKOS_FUNCTION Tensor Tensor&lt; ElementType, ValidIndexSet &gt;::operator-</definition>
-        <argsstring>(Tensor const &amp;val) const</argsstring>
-        <name>operator-</name>
-        <qualifiedname>Tensor::operator-</qualifiedname>
-        <param>
-          <type><ref refid="classTensor" kindref="compound">Tensor</ref> const &amp;</type>
-          <declname>val</declname>
-        </param>
-        <briefdescription>
-<para>An operator to subtract one tensor from another elementwise. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>val</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The tensor that should be subtracted from the current tensor. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>A new tensor containing the result of the subtraction. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="275" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="275" bodyend="280"/>
-      </memberdef>
-      <memberdef kind="function" id="classTensor_1a0a4985762ba9e45713294996fdae7268" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref></type>
-        <definition>KOKKOS_FUNCTION Tensor Tensor&lt; ElementType, ValidIndexSet &gt;::operator-</definition>
-        <argsstring>() const</argsstring>
-        <name>operator-</name>
-        <qualifiedname>Tensor::operator-</qualifiedname>
-        <briefdescription>
-<para>An operator to get the negation of a tensor elementwise. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>A new tensor containing the result of the subtraction. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="286" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="286" bodyend="293"/>
-      </memberdef>
-      <memberdef kind="function" id="classTensor_1ad6f543ad919df72d4566b89a86bc4975" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION bool</type>
-        <definition>KOKKOS_FUNCTION bool Tensor&lt; ElementType, ValidIndexSet &gt;::operator==</definition>
-        <argsstring>(Tensor const &amp;o_tensor) const</argsstring>
-        <name>operator==</name>
-        <qualifiedname>Tensor::operator==</qualifiedname>
-        <param>
-          <type><ref refid="classTensor" kindref="compound">Tensor</ref> const &amp;</type>
-          <declname>o_tensor</declname>
-        </param>
-        <briefdescription>
-<para>An operator to compare one tensor to another elementwise. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>o_tensor</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The tensor that should be compared with the current tensor. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>True if the tensors are equal, false otherwise. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="300" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="300" bodyend="307"/>
-      </memberdef>
-      <memberdef kind="function" id="classTensor_1a7c3c2bce8859c632c8a36ed0bb978069" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>KOKKOS_FUNCTION bool</type>
-        <definition>KOKKOS_FUNCTION bool Tensor&lt; ElementType, ValidIndexSet &gt;::operator!=</definition>
-        <argsstring>(Tensor const &amp;o_tensor) const</argsstring>
-        <name>operator!=</name>
-        <qualifiedname>Tensor::operator!=</qualifiedname>
-        <param>
-          <type><ref refid="classTensor" kindref="compound">Tensor</ref> const &amp;</type>
-          <declname>o_tensor</declname>
-        </param>
-        <briefdescription>
-<para>An operator to compare one tensor to another elementwise. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>o_tensor</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The tensor that should be compared with the current tensor. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>False if the tensors are equal, true otherwise. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="314" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="314" bodyend="317"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="178" column="38"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -812,35 +356,47 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="18" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="19" bodyend="326"/>
+    <inheritancegraph>
+      <node id="1">
+        <label>Tensor&lt; ElementType, ValidIndexSetFirstDim, ValidIndexSet &gt;</label>
+        <link refid="classTensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TensorCommon&lt; detail::TensorDataInnards&lt; ElementType,(ddc::type_seq_size_v&lt; ValidIndexSet &gt; *... *ddc::type_seq_size_v&lt; ValidIndexSetFirstDim &gt;)&gt;, ValidIndexSetFirstDim, ValidIndexSet... &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>Tensor&lt; ElementType, ValidIndexSetFirstDim, ValidIndexSet &gt;</label>
+        <link refid="classTensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TensorCommon&lt; detail::TensorDataInnards&lt; ElementType,(ddc::type_seq_size_v&lt; ValidIndexSet &gt; *... *ddc::type_seq_size_v&lt; ValidIndexSetFirstDim &gt;)&gt;, ValidIndexSetFirstDim, ValidIndexSet... &gt;</label>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>detail::TensorDataInnards&lt; ElementType,(ddc::type_seq_size_v&lt; ValidIndexSet &gt; *... *ddc::type_seq_size_v&lt; ValidIndexSetFirstDim &gt;)&gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="52" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="60" bodyend="179"/>
     <listofallmembers>
-      <member refid="classTensor_1ae41b35ad6cc6110daeaff56fff57bc2b" prot="public" virt="non-virtual"><scope>Tensor</scope><name>element_type</name></member>
-      <member refid="classTensor_1afffb2e308bfc979b45c83c2f2cdff57d" prot="public" virt="non-virtual"><scope>Tensor</scope><name>get</name></member>
-      <member refid="classTensor_1a539ea3ced7ffa549f2b6b7e282895f13" prot="public" virt="non-virtual"><scope>Tensor</scope><name>get</name></member>
-      <member refid="classTensor_1a9c45ebb12d858cff471aedf396889708" prot="public" virt="non-virtual"><scope>Tensor</scope><name>index_set</name></member>
-      <member refid="classTensor_1ad2729efb6a2f1ee13a5735de71169fb5" prot="private" virt="non-virtual"><scope>Tensor</scope><name>m_data</name></member>
-      <member refid="classTensor_1a7c3c2bce8859c632c8a36ed0bb978069" prot="public" virt="non-virtual"><scope>Tensor</scope><name>operator!=</name></member>
-      <member refid="classTensor_1a1b1faf34db4a030d44560352b18d0c0c" prot="public" virt="non-virtual"><scope>Tensor</scope><name>operator*</name></member>
-      <member refid="classTensor_1af0da6591449a8769614164b605781983" prot="public" virt="non-virtual"><scope>Tensor</scope><name>operator*=</name></member>
-      <member refid="classTensor_1a02ea288d5a36d155e4c6ed3cd7e50c23" prot="public" virt="non-virtual"><scope>Tensor</scope><name>operator+</name></member>
-      <member refid="classTensor_1a4e1e34b7fc6c2fd076736053e5cf3ec6" prot="public" virt="non-virtual"><scope>Tensor</scope><name>operator+=</name></member>
-      <member refid="classTensor_1a52e9979367ea03d4498124b32ec9a821" prot="public" virt="non-virtual"><scope>Tensor</scope><name>operator-</name></member>
-      <member refid="classTensor_1a0a4985762ba9e45713294996fdae7268" prot="public" virt="non-virtual"><scope>Tensor</scope><name>operator-</name></member>
-      <member refid="classTensor_1ab023077f54456efd237358613f819993" prot="public" virt="non-virtual"><scope>Tensor</scope><name>operator-=</name></member>
-      <member refid="classTensor_1a0f64f0f2afb76cb6f701ffd8e8b55d8d" prot="public" virt="non-virtual"><scope>Tensor</scope><name>operator/</name></member>
-      <member refid="classTensor_1aef89751059895c9befb75892ca348a68" prot="public" virt="non-virtual"><scope>Tensor</scope><name>operator/=</name></member>
-      <member refid="classTensor_1ab427e698416968e0341852bd84203b75" prot="public" virt="non-virtual"><scope>Tensor</scope><name>operator=</name></member>
-      <member refid="classTensor_1a865e540a3ab70a849b4f181404cd9fba" prot="public" virt="non-virtual"><scope>Tensor</scope><name>operator=</name></member>
-      <member refid="classTensor_1ad6f543ad919df72d4566b89a86bc4975" prot="public" virt="non-virtual"><scope>Tensor</scope><name>operator==</name></member>
-      <member refid="classTensor_1ac7619bb6c3891c90bb2c59f7515f474f" prot="public" virt="non-virtual"><scope>Tensor</scope><name>rank</name></member>
-      <member refid="classTensor_1a9fdd8732e175b57b6f866126ab5251f1" prot="private" virt="non-virtual"><scope>Tensor</scope><name>s_n_elements</name></member>
-      <member refid="classTensor_1a44e2cf57c4cb50f22c3537d5bd8edde0" prot="public" virt="non-virtual"><scope>Tensor</scope><name>size</name></member>
-      <member refid="classTensor_1a32957d1f871e67a58974059c1ff6b178" prot="public" virt="non-virtual"><scope>Tensor</scope><name>Tensor</name></member>
-      <member refid="classTensor_1a4a3910af9ebdd5a36e6999e2d4b274ac" prot="public" virt="non-virtual"><scope>Tensor</scope><name>Tensor</name></member>
-      <member refid="classTensor_1a7d405bd91e2e89a1ee4c973badd821a6" prot="public" virt="non-virtual"><scope>Tensor</scope><name>Tensor</name></member>
-      <member refid="classTensor_1a1c1d599698457fd792ee9012fdb3b5b4" prot="public" virt="non-virtual"><scope>Tensor</scope><name>Tensor</name></member>
-      <member refid="classTensor_1a783dddf339a00723800683e528ef9bc3" prot="public" virt="non-virtual"><scope>Tensor</scope><name>Tensor</name></member>
-      <member refid="classTensor_1a19169c8af9ca4025b5779c69761f4b8e" prot="public" virt="non-virtual"><scope>Tensor</scope><name>vector_index_set_t</name></member>
+      <member refid="classTensor_1a90babc948cc76e5741f04a45395c0498" prot="private" virt="non-virtual"><scope>Tensor</scope><name>base_type</name></member>
+      <member refid="classTensor_1a4c6e65e8f6674042fe4cac88479330d1" prot="private" virt="non-virtual"><scope>Tensor</scope><name>m_data_alloc</name></member>
+      <member refid="classTensor_1af6e516caedbe34eacbd831697ec9ee42" prot="public" virt="non-virtual"><scope>Tensor</scope><name>operator=</name></member>
+      <member refid="classTensor_1a5c8a0f4e6be0c24c592985595e05e219" prot="public" virt="non-virtual"><scope>Tensor</scope><name>operator=</name></member>
+      <member refid="classTensor_1a4a47cd908de66325add93143756fb97f" prot="public" virt="non-virtual"><scope>Tensor</scope><name>Tensor</name></member>
+      <member refid="classTensor_1a489f7ef71c36797a6b710794cd2a30d5" prot="public" virt="non-virtual"><scope>Tensor</scope><name>Tensor</name></member>
+      <member refid="classTensor_1a1f97f16958ee4928665a38df7d129a98" prot="public" virt="non-virtual"><scope>Tensor</scope><name>Tensor</name></member>
+      <member refid="classTensor_1a706ab53bc12245f195db879d9ce4cec6" prot="public" virt="non-virtual"><scope>Tensor</scope><name>Tensor</name></member>
+      <member refid="classTensor_1a7e4279d6af9d2290c6bb4c5556e02ead" prot="public" virt="non-virtual"><scope>Tensor</scope><name>Tensor</name></member>
+      <member refid="classTensor_1a2adcf14b0c73758f9d7a4530699f5f28" prot="public" virt="non-virtual"><scope>Tensor</scope><name>Tensor</name></member>
+      <member refid="classTensor_1a12e2b6f5f2fc74784794a91bc6675670" prot="public" virt="non-virtual"><scope>Tensor</scope><name>Tensor</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

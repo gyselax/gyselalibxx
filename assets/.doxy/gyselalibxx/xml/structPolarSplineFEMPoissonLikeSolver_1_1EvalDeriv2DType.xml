@@ -51,6 +51,12 @@
       <node id="2">
         <label>Tensor&lt; R_cov, Theta_cov &gt;</label>
         <link refid="classTensor"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>TensorCommon&lt; DataStorageType, ValidIndexSet &gt;</label>
+        <link refid="classTensorCommon"/>
       </node>
     </collaborationgraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="189" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="190" bodyend="195"/>

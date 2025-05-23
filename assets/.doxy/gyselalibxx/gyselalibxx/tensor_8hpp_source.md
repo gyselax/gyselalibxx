@@ -16,40 +16,67 @@
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
+#include "tensor_common.hpp"
 #include "tensor_index_tools.hpp"
 #include "vector_index_tools.hpp"
 
-template <class ElementType, class... ValidIndexSet>
-class Tensor
+namespace detail {
+template <class ElementType, std::size_t n_elements>
+struct TensorDataInnards
 {
-    static_assert((is_vector_index_set_v<ValidIndexSet> && ...));
-    static_assert(
-            (((is_covariant_vector_index_set_v<ValidIndexSet>)
-              || (is_contravariant_vector_index_set_v<ValidIndexSet>))
-             && ...));
-
-public:
-    using index_set = ddc::detail::TypeSeq<ValidIndexSet...>;
-
-private:
-    static constexpr std::size_t s_n_elements = (ddc::type_seq_size_v<ValidIndexSet> * ...);
-    std::array<ElementType, s_n_elements> m_data;
-
-public:
     using element_type = ElementType;
 
-    KOKKOS_FUNCTION static constexpr std::size_t rank()
+    static constexpr std::size_t s_n_elements = n_elements;
+
+    using mdspan_type = Kokkos::
+            mdspan<ElementType, Kokkos::extents<std::size_t, s_n_elements>, Kokkos::layout_right>;
+    using const_mdspan_type = Kokkos::mdspan<
+            const ElementType,
+            Kokkos::extents<std::size_t, s_n_elements>,
+            Kokkos::layout_right>;
+
+    std::array<ElementType, s_n_elements> m_data_alloc;
+
+    KOKKOS_INLINE_FUNCTION const_mdspan_type operator()() const
     {
-        return sizeof...(ValidIndexSet);
+        return const_mdspan_type(m_data_alloc.data());
     }
 
-    KOKKOS_FUNCTION static constexpr std::size_t size()
+    KOKKOS_INLINE_FUNCTION mdspan_type operator()()
     {
-        return s_n_elements;
+        return mdspan_type(m_data_alloc.data());
     }
+};
+} // namespace detail
+
+
+template <class ElementType, class ValidIndexSetFirstDim, class... ValidIndexSet>
+class Tensor
+    : public TensorCommon<
+              detail::TensorDataInnards<
+                      ElementType,
+                      (ddc::type_seq_size_v<ValidIndexSet> * ...
+                       * ddc::type_seq_size_v<ValidIndexSetFirstDim>)>,
+              ValidIndexSetFirstDim,
+              ValidIndexSet...>
+{
+    using base_type = TensorCommon<
+            detail::TensorDataInnards<
+                    ElementType,
+                    (ddc::type_seq_size_v<ValidIndexSet> * ...
+                     * ddc::type_seq_size_v<ValidIndexSetFirstDim>)>,
+            ValidIndexSetFirstDim,
+            ValidIndexSet...>;
+
+public:
+    using typename base_type::index_set;
+
+    using base_type::rank;
 
 private:
-    static_assert(rank() > 0);
+    using base_type::s_n_elements;
+    std::array<ElementType, s_n_elements> m_data_alloc;
+    using base_type::m_data;
 
 public:
     KOKKOS_DEFAULTED_FUNCTION Tensor() = default;
@@ -57,23 +84,25 @@ public:
     explicit KOKKOS_FUNCTION Tensor(ElementType fill_value)
     {
         for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] = fill_value;
+            m_data()[i] = fill_value;
         }
     }
 
     template <
             class... Params,
             class = std::enable_if_t<(std::is_convertible_v<Params, ElementType> && ...)>,
-            class = std::enable_if_t<sizeof...(Params) == size() && sizeof...(Params) != 1>>
-    explicit KOKKOS_FUNCTION Tensor(Params... elements) : m_data({elements...})
+            class = std::enable_if_t<
+                    sizeof...(Params) == base_type::size() && sizeof...(Params) != 1>>
+    explicit KOKKOS_FUNCTION Tensor(Params... elements)
     {
         static_assert(
                 rank() == 1,
                 "Filling the tensor on initialisation is only permitted for 1D vector objects");
+        m_data.m_data_alloc = std::array<ElementType, base_type::size()>({elements...});
     }
 
     template <class... Dims>
-    explicit KOKKOS_FUNCTION Tensor(Coord<Dims...> coord) : m_data(coord.array())
+    explicit KOKKOS_FUNCTION Tensor(Coord<Dims...> coord) noexcept
     {
         static_assert(
                 rank() == 1,
@@ -81,132 +110,27 @@ public:
         static_assert(
                 std::is_same_v<VectorIndexSet<Dims...>, ddc::type_seq_element_t<0, index_set>>,
                 "The coordinate must have the same memory layout to make a clean conversion.");
+        m_data.m_data_alloc = coord.array();
     }
 
-    template <class OElementType>
-    explicit KOKKOS_FUNCTION Tensor(Tensor<OElementType, ValidIndexSet...> const& o_tensor)
-        : m_data(o_tensor.m_data)
+    template <class OTensorType, std::enable_if_t<is_tensor_type_v<OTensorType>, bool> = true>
+    explicit KOKKOS_FUNCTION Tensor(const OTensorType& o_tensor) noexcept
     {
+        static_assert(
+                std::is_same_v<typename OTensorType::index_set, index_set>,
+                "The coordinate must have the same memory layout to make a clean conversion.");
+        for (std::size_t i(0); i < s_n_elements; ++i) {
+            m_data()[i] = o_tensor.m_data()[i];
+        }
     }
 
-    template <class QueryTensorIndexElement>
-    KOKKOS_FUNCTION ElementType& get()
-    {
-        static_assert(tensor_tools::is_tensor_index_element_v<QueryTensorIndexElement>);
-        return m_data[QueryTensorIndexElement::index()];
-    }
+    KOKKOS_DEFAULTED_FUNCTION Tensor(Tensor const& o_tensor) = default;
 
-    template <class QueryTensorIndexElement>
-    KOKKOS_FUNCTION ElementType const& get() const
-    {
-        static_assert(tensor_tools::is_tensor_index_element_v<QueryTensorIndexElement>);
-        return m_data[QueryTensorIndexElement::index()];
-    }
+    KOKKOS_DEFAULTED_FUNCTION Tensor(Tensor&& o_tensor) = default;
 
     KOKKOS_DEFAULTED_FUNCTION Tensor& operator=(Tensor const& other) = default;
 
-    template <class... Dims>
-    KOKKOS_FUNCTION Tensor& operator=(Coord<Dims...> coord)
-    {
-        static_assert(
-                rank() == 1,
-                "Copying a coordinate into a tensor is only possible for 1D tensor objects");
-        static_assert(
-                std::is_same_v<VectorIndexSet<Dims...>, ddc::type_seq_element_t<0, index_set>>,
-                "The coordinate must have the same memory layout to make a clean conversion.");
-        m_data = coord.array();
-        return *this;
-    }
-
-    template <class OElementType>
-    KOKKOS_FUNCTION Tensor& operator*=(OElementType val)
-    {
-        for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] *= val;
-        }
-        return *this;
-    }
-
-    template <class OElementType>
-    KOKKOS_FUNCTION Tensor& operator/=(OElementType val)
-    {
-        for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] /= val;
-        }
-        return *this;
-    }
-
-    KOKKOS_FUNCTION Tensor& operator+=(Tensor const& val)
-    {
-        for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] += val.m_data[i];
-        }
-        return *this;
-    }
-
-    KOKKOS_FUNCTION Tensor& operator-=(Tensor const& val)
-    {
-        for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] -= val.m_data[i];
-        }
-        return *this;
-    }
-
-    template <class OElementType>
-    KOKKOS_FUNCTION Tensor operator*(OElementType val) const
-    {
-        Tensor result(*this);
-        result *= val;
-        return result;
-    }
-
-    template <class OElementType>
-    KOKKOS_FUNCTION Tensor operator/(OElementType val) const
-    {
-        Tensor result(*this);
-        result /= val;
-        return result;
-    }
-
-    KOKKOS_FUNCTION Tensor operator+(Tensor const& val) const
-    {
-        Tensor result(*this);
-        result += val;
-        return result;
-    }
-
-    KOKKOS_FUNCTION Tensor operator-(Tensor const& val) const
-    {
-        Tensor result(*this);
-        result -= val;
-        return result;
-    }
-
-    KOKKOS_FUNCTION Tensor operator-() const
-    {
-        Tensor result;
-        for (std::size_t i(0); i < s_n_elements; ++i) {
-            result.m_data[i] = -m_data[i];
-        }
-        return result;
-    }
-
-    KOKKOS_FUNCTION bool operator==(Tensor const& o_tensor) const
-    {
-        bool equal(true);
-        for (std::size_t i(0); i < s_n_elements; ++i) {
-            equal = equal && (m_data[i] == o_tensor.m_data[i]);
-        }
-        return equal;
-    }
-
-    KOKKOS_FUNCTION bool operator!=(Tensor const& o_tensor) const
-    {
-        return !(*this == o_tensor);
-    }
-
-    template <std::size_t dim>
-    using vector_index_set_t = ddc::type_seq_element_t<dim, index_set>;
+    KOKKOS_DEFAULTED_FUNCTION Tensor& operator=(Tensor&& other) = default;
 };
 
 namespace detail {
@@ -236,73 +160,11 @@ using Vector = Tensor<ElementType, VectorIndexSet<Dims...>>;
 template <class... Dims>
 using DVector = Vector<double, Dims...>;
 
-//                         Operators
+namespace detail {
 
-namespace ddcHelper {
+template <class ElementType, class... ValidIndexSet>
+inline constexpr bool enable_tensor_type<Tensor<ElementType, ValidIndexSet...>> = true;
 
-template <class... QueryIndexTag, class ElementType, class... ValidIndexSet>
-KOKKOS_INLINE_FUNCTION ElementType& get(Tensor<ElementType, ValidIndexSet...>& tensor)
-{
-    return tensor.template get<tensor_tools::TensorIndexElement<
-            ddc::detail::TypeSeq<ValidIndexSet...>,
-            QueryIndexTag...>>();
-}
-
-template <class... QueryIndexTag, class ElementType, class... ValidIndexSet>
-KOKKOS_INLINE_FUNCTION ElementType const& get(Tensor<ElementType, ValidIndexSet...> const& tensor)
-{
-    return tensor.template get<tensor_tools::TensorIndexElement<
-            ddc::detail::TypeSeq<ValidIndexSet...>,
-            QueryIndexTag...>>();
-}
-
-template <class ElementType, class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...> to_coord(Vector<ElementType, Dims...> const& tensor)
-{
-    return Coord<Dims...>(get<Dims>(tensor)...);
-}
-} // namespace ddcHelper
-
-template <class ElementType, class OElementType, class... ValidIndexSet>
-KOKKOS_INLINE_FUNCTION Tensor<ElementType, ValidIndexSet...> operator*(
-        OElementType val,
-        Tensor<ElementType, ValidIndexSet...> const& tensor)
-{
-    return tensor * val;
-}
-
-template <class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...> operator+(
-        Coord<Dims...> const& coord,
-        DVector<Dims...> const& tensor)
-{
-    return Coord<Dims...>((ddc::get<Dims>(coord) + ddcHelper::get<Dims>(tensor))...);
-}
-
-template <class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...> operator-(
-        Coord<Dims...> const& coord,
-        DVector<Dims...> const& tensor)
-{
-    return Coord<Dims...>((ddc::get<Dims>(coord) - ddcHelper::get<Dims>(tensor))...);
-}
-
-template <class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(
-        Coord<Dims...>& coord,
-        DVector<Dims...> const& tensor)
-{
-    ((ddc::get<Dims>(coord) += ddcHelper::get<Dims>(tensor)), ...);
-    return coord;
-}
-
-template <class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator-=(
-        Coord<Dims...>& coord,
-        DVector<Dims...> const& tensor)
-{
-    ((ddc::get<Dims>(coord) -= ddcHelper::get<Dims>(tensor)), ...);
-    return coord;
 }
 ```
 

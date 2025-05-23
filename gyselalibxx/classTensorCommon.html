@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp} - GyselalibX</title>
+    <title>Class TensorCommon - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp}";
-        var mkdocs_page_input_path = "gyselalibxx/namespace_0d211.md";
+        var mkdocs_page_name = "Class TensorCommon";
+        var mkdocs_page_input_path = "gyselalibxx/classTensorCommon.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -526,9 +526,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp}</li>
+      <li class="breadcrumb-item active">Class TensorCommon</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/namespace_0d211.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classTensorCommon.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -536,10 +536,390 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="namespace-anonymous-namespacehomerunnerworkgyselalibxxgyselalibxxcode_branchsrcquadratureneumann_spline_quadraturehpp">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp}</h1>
-<p><a href="namespaces.html"><strong>Namespace List</strong></a> <strong>&gt;</strong> <a href="namespace_0d211.html"><strong>anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp}</strong></a></p>
+                <div><h1 id="class-tensorcommon">Class TensorCommon</h1>
+<p><strong>template &lt;class DataStorageType, class... ValidIndexSet&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classTensorCommon.html"><strong>TensorCommon</strong></a></p>
+<p><em>A superclass for</em> <a href="classTensor.html"><em><strong>Tensor</strong></em></a> <em>calculations.</em><a href="classTensor.html"><em><strong>Tensor</strong></em></a> <em>classes containing data will inherit from this class. The class</em><a href="classTensor.html"><em><strong>Tensor</strong></em></a> <em>will represent most Tensors but other subclasses may be necessary (e.g. to access a Vector in a</em><a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>).</em><a href="#detailed-description">More...</a></p>
+<ul>
+<li><code>#include &lt;tensor_common.hpp&gt;</code></li>
+</ul>
+<p>Inherited by the following classes: <a href="classTensor.html">Tensor</a></p>
+<h2 id="public-types">Public Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef typename DataStorageType::element_type</td>
+<td style="text-align: left;"><a href="#typedef-element_type"><strong>element_type</strong></a>  <br><em>The type of the elements of the tensor.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::detail::TypeSeq&lt; ValidIndexSet... &gt;</td>
+<td style="text-align: left;"><a href="#typedef-index_set"><strong>index_set</strong></a>  <br><em>The TensorIndexSet describing the possible indices.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::type_seq_element_t&lt; dim, <a href="classTensorCommon.html#typedef-index_set"><strong>index_set</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-vector_index_set_t"><strong>vector_index_set_t</strong></a>  <br><em>A helper type alias to get all possible indices along a specified dimension.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions">Public Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensorCommon.html#typedef-element_type"><strong>element_type</strong></a> &amp;</td>
+<td style="text-align: left;"><a href="#function-get-12"><strong>get</strong></a> () <br><em>Get a modifiable reference to an element of the tensor.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensorCommon.html#typedef-element_type"><strong>element_type</strong></a> const &amp;</td>
+<td style="text-align: left;"><a href="#function-get-22"><strong>get</strong></a> () const<br><em>Get an element of the tensor.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION bool</td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator!=</strong></a> (<a href="classTensorCommon.html"><strong>TensorCommon</strong></a> const &amp; o_tensor) const<br><em>An operator to compare one tensor to another elementwise.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensorCommon.html"><strong>TensorCommon</strong></a> &amp;</td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator*=</strong></a> (Oelement_type val) <br><em>An operator to multiply all the element of the current tensor by a value.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensorCommon.html"><strong>TensorCommon</strong></a> &amp;</td>
+<td style="text-align: left;"><a href="#function-operator_2"><strong>operator+=</strong></a> (<a href="classTensorCommon.html"><strong>TensorCommon</strong></a> const &amp; val) <br><em>An operator to add two tensors elementwise.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensorCommon.html"><strong>TensorCommon</strong></a> &amp;</td>
+<td style="text-align: left;"><a href="#function-operator-"><strong>operator-=</strong></a> (<a href="classTensorCommon.html"><strong>TensorCommon</strong></a> const &amp; val) <br><em>An operator to subtract one tensor from another elementwise.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensorCommon.html"><strong>TensorCommon</strong></a> &amp;</td>
+<td style="text-align: left;"><a href="#function-operator_3"><strong>operator/=</strong></a> (Oelement_type val) <br><em>An operator to divide all the element of the current tensor by a value.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensorCommon.html"><strong>TensorCommon</strong></a> &amp;</td>
+<td style="text-align: left;"><a href="#function-operator_4"><strong>operator=</strong></a> (<a href="classTensorCommon.html"><strong>TensorCommon</strong></a> const &amp; other) <br><em>A copy operator.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensorCommon.html"><strong>TensorCommon</strong></a> &amp;</td>
+<td style="text-align: left;"><a href="#function-operator_5"><strong>operator=</strong></a> (<a href="classTensorCommon.html"><strong>TensorCommon</strong></a> &amp;&amp; other) <br><em>A move assign operator.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION bool</td>
+<td style="text-align: left;"><a href="#function-operator_6"><strong>operator==</strong></a> (<a href="classTensorCommon.html"><strong>TensorCommon</strong></a> const &amp; o_tensor) const<br><em>An operator to compare one tensor to another elementwise.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-static-functions">Public Static Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION constexpr std::size_t</td>
+<td style="text-align: left;"><a href="#function-rank"><strong>rank</strong></a> () <br><em>The rank of the tensor. This is equivalent to the number of indices required to access an element of the tensor.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION constexpr std::size_t</td>
+<td style="text-align: left;"><a href="#function-size"><strong>size</strong></a> () <br><em>The size of the tensor. This is the number of elements in the tensor.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-attributes">Protected Attributes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">DataStorageType</td>
+<td style="text-align: left;"><a href="#variable-m_data"><strong>m_data</strong></a>  <br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-static-attributes">Protected Static Attributes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">constexpr std::size_t</td>
+<td style="text-align: left;"><a href="#variable-s_n_elements"><strong>s_n_elements</strong></a>   = <code>(ddc::type\_seq\_size\_v&amp;lt;ValidIndexSet&amp;gt; \* ...)</code><br><em>The number of elements in the mdspan.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-functions">Protected Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION</td>
+<td style="text-align: left;"><a href="#function-tensorcommon-13"><strong>TensorCommon</strong></a> () = default<br><em>Construct an uninitialised tensor object.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION</td>
+<td style="text-align: left;"><a href="#function-tensorcommon-23"><strong>TensorCommon</strong></a> (<a href="classTensorCommon.html"><strong>TensorCommon</strong></a> const &amp; o_tensor) = default<br><em>Construct a tensor object by copying an existing tensor of exactly the same type. This method can be called implicitly.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION</td>
+<td style="text-align: left;"><a href="#function-tensorcommon-33"><strong>TensorCommon</strong></a> (<a href="classTensorCommon.html"><strong>TensorCommon</strong></a> &amp;&amp; o_tensor) = default<br><em>Move-construct a tensor object by copying an existing tensor of exactly the same type. This method can be called implicitly.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-description">Detailed Description</h2>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>element_type</code> The type of the elements of the tensor (usually double/complex). </li>
+<li><code>LayoutType</code> The way in which the underlying mdspan will be laid out in memory, usually Kokkos::layout_right or Kokkos::layout_stride. </li>
+<li><code>ValidIndexSet</code> The indices that can be used along each dimension of the tensor. </li>
+</ul>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-element_type">typedef element_type</h3>
+<p><em>The type of the elements of the tensor.</em> </p>
+<pre><code class="language-C++">using TensorCommon&lt; DataStorageType, ValidIndexSet &gt;::element_type =  typename DataStorageType::element_type;
+</code></pre>
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp</code></p></div>
+
+<h3 id="typedef-index_set">typedef index_set</h3>
+<p><em>The TensorIndexSet describing the possible indices.</em> </p>
+<pre><code class="language-C++">using TensorCommon&lt; DataStorageType, ValidIndexSet &gt;::index_set =  ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-vector_index_set_t">typedef vector_index_set_t</h3>
+<p><em>A helper type alias to get all possible indices along a specified dimension.</em> </p>
+<pre><code class="language-C++">using TensorCommon&lt; DataStorageType, ValidIndexSet &gt;::vector_index_set_t =  ddc::type_seq_element_t&lt;dim, index_set&gt;;
+</code></pre>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>Dim</code> The dimension of interest (0 &lt;= dim &lt; <a href="classTensorCommon.html#function-rank"><strong>rank()</strong></a>). </li>
+</ul>
+<hr>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-get-12">function get [1/2]</h3>
+<p><em>Get a modifiable reference to an element of the tensor.</em> </p>
+<pre><code class="language-C++">template&lt;class QueryTensorIndexElement&gt;
+inline KOKKOS_FUNCTION element_type &amp; TensorCommon::get () 
+</code></pre>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>QueryIndexTag</code> A type describing the relevant index. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The relevant element of the tensor. </p>
+<hr>
+
+<h3 id="function-get-22">function get [2/2]</h3>
+<p><em>Get an element of the tensor.</em> </p>
+<pre><code class="language-C++">template&lt;class QueryTensorIndexElement&gt;
+inline KOKKOS_FUNCTION element_type const &amp; TensorCommon::get () const
+</code></pre>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>QueryIndexTag</code> A type describing the relevant index. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The relevant element of the tensor. </p>
+<hr>
+
+<h3 id="function-operator">function operator!=</h3>
+<p><em>An operator to compare one tensor to another elementwise.</em> </p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION bool TensorCommon::operator!= (
+    TensorCommon const &amp; o_tensor
+) const
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>o_tensor</code> The tensor that should be compared with the current tensor. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>False if the tensors are equal, true otherwise. </p>
+<hr>
+
+<h3 id="function-operator_1">function operator*=</h3>
+<p><em>An operator to multiply all the element of the current tensor by a value.</em> </p>
+<pre><code class="language-C++">template&lt;class Oelement_type&gt;
+inline KOKKOS_FUNCTION TensorCommon &amp; TensorCommon::operator*= (
+    Oelement_type val
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>val</code> The value by which the elements should be multiplied. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A reference to the current modified tensor. </p>
+<hr>
+
+<h3 id="function-operator_2">function operator+=</h3>
+<p><em>An operator to add two tensors elementwise.</em> </p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION TensorCommon &amp; TensorCommon::operator+= (
+    TensorCommon const &amp; val
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>val</code> The tensor that should be added to the current tensor. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A reference to the current modified tensor. </p>
+<hr>
+
+<h3 id="function-operator-">function operator-=</h3>
+<p><em>An operator to subtract one tensor from another elementwise.</em> </p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION TensorCommon &amp; TensorCommon::operator-= (
+    TensorCommon const &amp; val
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>val</code> The tensor that should be subtracted from the current tensor. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A reference to the current modified tensor. </p>
+<hr>
+
+<h3 id="function-operator_3">function operator/=</h3>
+<p><em>An operator to divide all the element of the current tensor by a value.</em> </p>
+<pre><code class="language-C++">template&lt;class Oelement_type&gt;
+inline KOKKOS_FUNCTION TensorCommon &amp; TensorCommon::operator/= (
+    Oelement_type val
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>val</code> The value by which the elements should be multiplied. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A reference to the current modified tensor. </p>
+<hr>
+
+<h3 id="function-operator_4">function operator=</h3>
+<p><em>A copy operator.</em> </p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION TensorCommon &amp; TensorCommon::operator= (
+    TensorCommon const &amp; other
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>other</code> The tensor to be copied. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A reference to the current tensor. </p>
+<hr>
+
+<h3 id="function-operator_5">function operator=</h3>
+<p><em>A move assign operator.</em> </p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION TensorCommon &amp; TensorCommon::operator= (
+    TensorCommon &amp;&amp; other
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>other</code> The tensor to be copied. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A reference to the current tensor. </p>
+<hr>
+
+<h3 id="function-operator_6">function operator==</h3>
+<p><em>An operator to compare one tensor to another elementwise.</em> </p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION bool TensorCommon::operator== (
+    TensorCommon const &amp; o_tensor
+) const
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>o_tensor</code> The tensor that should be compared with the current tensor. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>True if the tensors are equal, false otherwise. </p>
+<hr>
+<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
+<h3 id="function-rank">function rank</h3>
+<p><em>The rank of the tensor. This is equivalent to the number of indices required to access an element of the tensor.</em> </p>
+<pre><code class="language-C++">static inline KOKKOS_FUNCTION constexpr std::size_t TensorCommon::rank () 
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>The rank of the tensor. </p>
+<hr>
+
+<h3 id="function-size">function size</h3>
+<p><em>The size of the tensor. This is the number of elements in the tensor.</em> </p>
+<pre><code class="language-C++">static inline KOKKOS_FUNCTION constexpr std::size_t TensorCommon::size () 
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>The number of elements in the tensor. </p>
+<hr>
+<h2 id="protected-attributes-documentation">Protected Attributes Documentation</h2>
+<h3 id="variable-m_data">variable m_data</h3>
+<pre><code class="language-C++">DataStorageType TensorCommon&lt; DataStorageType, ValidIndexSet &gt;::m_data;
+</code></pre>
+<p>The object providing access to the underlying mdspan via an operator(). The data in this object may be references or owned data depending on the subclass. </p>
+<hr>
+<h2 id="protected-static-attributes-documentation">Protected Static Attributes Documentation</h2>
+<h3 id="variable-s_n_elements">variable s_n_elements</h3>
+<p><em>The number of elements in the mdspan.</em> </p>
+<pre><code class="language-C++">constexpr std::size_t TensorCommon&lt; DataStorageType, ValidIndexSet &gt;::s_n_elements;
+</code></pre>
+<hr>
+<h2 id="protected-functions-documentation">Protected Functions Documentation</h2>
+<h3 id="function-tensorcommon-13">function TensorCommon [1/3]</h3>
+<p><em>Construct an uninitialised tensor object.</em> </p>
+<pre><code class="language-C++">KOKKOS_DEFAULTED_FUNCTION TensorCommon::TensorCommon () = default
+</code></pre>
+<hr>
+
+<h3 id="function-tensorcommon-23">function TensorCommon [2/3]</h3>
+<p><em>Construct a tensor object by copying an existing tensor of exactly the same type. This method can be called implicitly.</em> </p>
+<pre><code class="language-C++">KOKKOS_DEFAULTED_FUNCTION TensorCommon::TensorCommon (
+    TensorCommon const &amp; o_tensor
+) = default
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>o_tensor</code> The tensor to be copied. </li>
+</ul>
+<hr>
+
+<h3 id="function-tensorcommon-33">function TensorCommon [3/3]</h3>
+<p><em>Move-construct a tensor object by copying an existing tensor of exactly the same type. This method can be called implicitly.</em> </p>
+<pre><code class="language-C++">KOKKOS_DEFAULTED_FUNCTION TensorCommon::TensorCommon (
+    TensorCommon &amp;&amp; o_tensor
+) = default
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>o_tensor</code> The tensor to be copied. </li>
+</ul>
+<hr>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp</code></p></div>
               
             </div>
           </div><footer>

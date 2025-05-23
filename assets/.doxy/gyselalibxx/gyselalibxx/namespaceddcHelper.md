@@ -70,7 +70,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_INLINE\_FUNCTION void | [**assign\_vector\_field\_element**](#function-assign_vector_field_element) ([**VectorField**](classVectorField.md)&lt; ElementType, IdxRangeType, VectorIndexSet&lt; Dims... &gt;, MemorySpace, LayoutStridedPolicy &gt; field, typename IdxRangeType::discrete\_element\_type idx, [**Vector**](classTensor.md)&lt; ElementType, Dims... &gt; vector) <br>_Copy the elements of a vector into a vector field at a given index._  |
+|  KOKKOS\_INLINE\_FUNCTION void | [**assign\_vector\_field\_element**](#function-assign_vector_field_element) ([**VectorField**](classVectorField.md)&lt; ElementType, IdxRangeType, VectorIndexSet&lt; Dims... &gt;, MemorySpace, LayoutStridedPolicy &gt; field, typename IdxRangeType::discrete\_element\_type idx, [**Vector**](classTensor.md)&lt; ElementType, Dims... &gt; const & vector) <br>_Copy the elements of a vector into a vector field at a given index._  |
 |  auto | [**create\_mirror\_view\_and\_copy**](#function-create_mirror_view_and_copy) (ExecSpace exec\_space, [**VectorField**](classVectorField.md)&lt; ElementType, IdxRangeType, VectorIndexSet&lt; Dims... &gt;, MemorySpace, LayoutStridedPolicy &gt; field) <br> |
 |  auto | [**create\_transpose\_mirror**](#function-create_transpose_mirror) (ExecSpace const & execution\_space, Field&lt; ElementType, Domain, MemSpace, FieldLayoutType &gt; src) <br>_Create a data object in the requested dimension ordering using as allocations as possible. This function does not copy data._  |
 |  auto | [**create\_transpose\_mirror\_view\_and\_copy**](#function-create_transpose_mirror_view_and_copy) (ExecSpace const & execution\_space, Field&lt; ElementType, Domain, MemSpace, FieldLayoutType &gt; src) <br>_If necessary transpose data into the requested dimension ordering._  |
@@ -81,14 +81,14 @@
 |  void | [**dump\_coordinates**](#function-dump_coordinates) (ExecSpace exec\_space, Field&lt; Coord&lt; typename Grid1D::continuous\_dimension\_type &gt;, IdxRange&lt; Grid1D &gt;, Layout, MemorySpace &gt; dump\_coord) <br>_Dump the coordinates of a field into the field._  |
 |  KOKKOS\_INLINE\_FUNCTION constexpr double | [**get**](#function-get) ([**IdentityTensor**](classIdentityTensor.md)&lt; ElementType, ValidIndexSetRow, ValidIndexSetCol &gt; const & tensor) <br>_A helper function to get a modifiable reference to an element of the tensor._  |
 |  KOKKOS\_INLINE\_FUNCTION constexpr double | [**get**](#function-get) ([**LeviCivitaTensor**](classLeviCivitaTensor.md)&lt; ElementType, ValidIndexSet &gt; const & tensor) <br>_A helper function to get a modifiable reference to an element of the tensor._  |
-|  KOKKOS\_INLINE\_FUNCTION ElementType & | [**get**](#function-get) ([**Tensor**](classTensor.md)&lt; ElementType, ValidIndexSet... &gt; & tensor) <br>_A helper function to get a modifiable reference to an element of the tensor._  |
-|  KOKKOS\_INLINE\_FUNCTION ElementType const & | [**get**](#function-get) ([**Tensor**](classTensor.md)&lt; ElementType, ValidIndexSet... &gt; const & tensor) <br>_A helper function to get an element of the tensor._  |
+|  KOKKOS\_INLINE\_FUNCTION storage\_type::element\_type & | [**get**](#function-get) ([**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ValidIndexSet... &gt; & tensor) <br>_A helper function to get a modifiable reference to an element of the tensor._  |
+|  KOKKOS\_INLINE\_FUNCTION storage\_type::element\_type const & | [**get**](#function-get) ([**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ValidIndexSet... &gt; const & tensor) <br>_A helper function to get an element of the tensor._  |
 |  constexpr auto | [**get**](#function-get) (VectorFieldType const & field) noexcept<br> |
 |  constexpr auto | [**get**](#function-get) (VectorFieldType & field) noexcept<br> |
 |  double | [**maximum\_distance\_between\_adjacent\_points**](#function-maximum_distance_between_adjacent_points) (IdxRange&lt; GridDim &gt; const & idx\_range) <br>_Computes the maximum distance between two adjacent points within an IdxRange._  |
 |  KOKKOS\_INLINE\_FUNCTION void | [**restrict\_to\_bspline\_domain**](#function-restrict_to_bspline_domain) (Coord&lt; typename BSpline::continuous\_dimension\_type &gt; & coord) <br>_Calculate the Coordinate inside the domain._  |
 |  constexpr std::enable\_if\_t&lt; IDim::continuous\_dimension\_type::PERIODIC, Coord&lt; typename IDim::continuous\_dimension\_type &gt; &gt; | [**restrict\_to\_idx\_range**](#function-restrict_to_idx_range) (Coord&lt; typename IDim::continuous\_dimension\_type &gt; coord, IdxRange&lt; IDim &gt; const & idx\_range) <br>_Calculate the Coordinate inside the domain._  |
-|  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; | [**to\_coord**](#function-to_coord) ([**Vector**](classTensor.md)&lt; ElementType, Dims... &gt; const & tensor) <br>_A helper function to convert a vector to a coordinate. This is useful in order to add a Vector to a coordinate to obtain a new coordinate (e.g. when calculating the foot of a characteristic._  |
+|  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; | [**to\_coord**](#function-to_coord) ([**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const & tensor) <br>_A helper function to convert a vector to a coordinate. This is useful in order to add a Vector to a coordinate to obtain a new coordinate (e.g. when calculating the foot of a characteristic._  |
 |  constexpr std::enable\_if\_t&lt;!IDim::continuous\_dimension\_type::PERIODIC, double &gt; | [**total\_interval\_length**](#function-total_interval_length) (IdxRange&lt; IDim &gt; const & idx\_range) <br> |
 |  constexpr std::enable\_if\_t&lt; IDim::continuous\_dimension\_type::PERIODIC &&ddc::is\_uniform\_point\_sampling\_v&lt; IDim &gt;, double &gt; | [**total\_interval\_length**](#function-total_interval_length) (IdxRange&lt; IDim &gt; const & idx\_range) <br> |
 |  constexpr std::enable\_if\_t&lt; IDim::continuous\_dimension\_type::PERIODIC &&ddc::is\_non\_uniform\_point\_sampling\_v&lt; IDim &gt;, double &gt; | [**total\_interval\_length**](#function-total_interval_length) (IdxRange&lt; IDim &gt; const & idx\_range) <br> |
@@ -192,7 +192,7 @@ template<class ElementType, class IdxRangeType, class... Dims, class MemorySpace
 KOKKOS_INLINE_FUNCTION void ddcHelper::assign_vector_field_element (
     VectorField < ElementType, IdxRangeType, VectorIndexSet< Dims... >, MemorySpace, LayoutStridedPolicy > field,
     typename IdxRangeType::discrete_element_type idx,
-    Vector < ElementType, Dims... > vector
+    Vector < ElementType, Dims... > const & vector
 ) 
 ```
 
@@ -547,9 +547,9 @@ The relevant element of the tensor.
 
 _A helper function to get a modifiable reference to an element of the tensor._ 
 ```C++
-template<class... QueryIndexTag, class ElementType, class... ValidIndexSet>
-KOKKOS_INLINE_FUNCTION ElementType & ddcHelper::get (
-    Tensor < ElementType, ValidIndexSet... > & tensor
+template<class... QueryIndexTag, class storage_type, class... ValidIndexSet>
+KOKKOS_INLINE_FUNCTION storage_type::element_type & ddcHelper::get (
+    TensorCommon < storage_type, ValidIndexSet... > & tensor
 ) 
 ```
 
@@ -589,9 +589,9 @@ The relevant element of the tensor.
 
 _A helper function to get an element of the tensor._ 
 ```C++
-template<class... QueryIndexTag, class ElementType, class... ValidIndexSet>
-KOKKOS_INLINE_FUNCTION ElementType const & ddcHelper::get (
-    Tensor < ElementType, ValidIndexSet... > const & tensor
+template<class... QueryIndexTag, class storage_type, class... ValidIndexSet>
+KOKKOS_INLINE_FUNCTION storage_type::element_type const & ddcHelper::get (
+    TensorCommon < storage_type, ValidIndexSet... > const & tensor
 ) 
 ```
 
@@ -630,7 +630,7 @@ The relevant element of the tensor.
 ### function get 
 
 ```C++
-template<class QueryTag, class VectorFieldType>
+template<class QueryTag, class VectorFieldType, std::enable_if_t< is_vector_field_v< VectorFieldType >, bool >>
 inline constexpr auto ddcHelper::get (
     VectorFieldType const & field
 ) noexcept
@@ -646,7 +646,7 @@ inline constexpr auto ddcHelper::get (
 ### function get 
 
 ```C++
-template<class QueryTag, class VectorFieldType>
+template<class QueryTag, class VectorFieldType, std::enable_if_t< is_vector_field_v< VectorFieldType >, bool >>
 inline constexpr auto ddcHelper::get (
     VectorFieldType & field
 ) noexcept
@@ -776,9 +776,9 @@ The equivalent coordinate inside the domain.
 
 _A helper function to convert a vector to a coordinate. This is useful in order to add a Vector to a coordinate to obtain a new coordinate (e.g. when calculating the foot of a characteristic._ 
 ```C++
-template<class ElementType, class... Dims>
+template<class storage_type, class... Dims>
 KOKKOS_INLINE_FUNCTION Coord< Dims... > ddcHelper::to_coord (
-    Vector < ElementType, Dims... > const & tensor
+    TensorCommon < storage_type, ddc::detail::TypeSeq< Dims... > > const & tensor
 ) 
 ```
 

@@ -329,6 +329,7 @@
 * **is\_borrowed\_deriv\_field\_v** ([**derivative\_field\_common.hpp**](derivative__field__common_8hpp.md))
 * **is\_deriv\_field\_v** ([**derivative\_field\_common.hpp**](derivative__field__common_8hpp.md))
 * **is\_subidx\_range\_collection\_v** ([**idx\_range\_slice.hpp**](idx__range__slice_8hpp.md))
+* **is\_tensor\_type\_v** ([**tensor\_common.hpp**](tensor__common_8hpp.md))
 * **is\_borrowed\_vector\_field\_v** ([**vector\_field\_common.hpp**](vector__field__common_8hpp.md))
 * **is\_vector\_field\_v** ([**vector\_field\_common.hpp**](vector__field__common_8hpp.md))
 * **is\_contravariant\_vector\_index\_set\_v** ([**vector\_index\_tools.hpp**](vector__index__tools_8hpp.md))

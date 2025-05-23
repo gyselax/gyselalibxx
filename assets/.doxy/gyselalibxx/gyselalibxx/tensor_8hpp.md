@@ -14,6 +14,7 @@
 * `#include <cassert>`
 * `#include <ddc/ddc.hpp>`
 * `#include "ddc_aliases.hpp"`
+* `#include "tensor_common.hpp"`
 * `#include "tensor_index_tools.hpp"`
 * `#include "vector_index_tools.hpp"`
 
@@ -29,18 +30,13 @@
 
 
 
-## Namespaces
-
-| Type | Name |
-| ---: | :--- |
-| namespace | [**ddcHelper**](namespaceddcHelper.md) <br> |
 
 
 ## Classes
 
 | Type | Name |
 | ---: | :--- |
-| class | [**Tensor**](classTensor.md) &lt;class ElementType, ValidIndexSet&gt;<br>_A class representing a_ [_**Tensor**_](classTensor.md) _._ |
+| class | [**Tensor**](classTensor.md) &lt;class ElementType, class ValidIndexSetFirstDim, ValidIndexSet&gt;<br>_A class representing a_ [_**Tensor**_](classTensor.md) _._ |
 
 
 ## Public Types
@@ -71,15 +67,6 @@
 
 
 
-## Public Functions
-
-| Type | Name |
-| ---: | :--- |
-|  KOKKOS\_INLINE\_FUNCTION [**Tensor**](classTensor.md)&lt; ElementType, ValidIndexSet... &gt; | [**operator\***](#function-operator) (OElementType val, [**Tensor**](classTensor.md)&lt; ElementType, ValidIndexSet... &gt; const & tensor) <br>_An operator to multiply all a tensor by a value._  |
-|  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; | [**operator+**](#function-operator_1) (Coord&lt; Dims... &gt; const & coord, [**DVector**](classTensor.md)&lt; Dims... &gt; const & tensor) <br> |
-|  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; & | [**operator+=**](#function-operator_2) (Coord&lt; Dims... &gt; & coord, [**DVector**](classTensor.md)&lt; Dims... &gt; const & tensor) <br> |
-|  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; | [**operator-**](#function-operator-) (Coord&lt; Dims... &gt; const & coord, [**DVector**](classTensor.md)&lt; Dims... &gt; const & tensor) <br> |
-|  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; & | [**operator-=**](#function-operator-_1) (Coord&lt; Dims... &gt; & coord, [**DVector**](classTensor.md)&lt; Dims... &gt; const & tensor) <br> |
 
 
 
@@ -197,189 +184,6 @@ using to_tensor_t =  typename detail::ToTensor<ElementType, TypeSeqValidIndexSet
 
 
 
-
-<hr>
-## Public Functions Documentation
-
-
-
-
-### function operator\* 
-
-_An operator to multiply all a tensor by a value._ 
-```C++
-template<class ElementType, class OElementType, class... ValidIndexSet>
-KOKKOS_INLINE_FUNCTION Tensor < ElementType, ValidIndexSet... > operator* (
-    OElementType val,
-    Tensor < ElementType, ValidIndexSet... > const & tensor
-) 
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `val` The value by which the elements should be multiplied. 
-* `tensor` The tensor being multiplied. 
-
-
-
-**Returns:**
-
-A new tensor containing the result of the multiplication. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator+ 
-
-```C++
-template<class... Dims>
-KOKKOS_INLINE_FUNCTION Coord< Dims... > operator+ (
-    Coord< Dims... > const & coord,
-    DVector < Dims... > const & tensor
-) 
-```
-
-
-
-An operator to add the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. 
-
-**Parameters:**
-
-
-* `coord` The coordinate to which the tensor is added. 
-* `tensor` The tensor to be added to the coordinate. 
-
-
-
-**Returns:**
-
-The new coordinate. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator+= 
-
-```C++
-template<class... Dims>
-KOKKOS_INLINE_FUNCTION Coord< Dims... > & operator+= (
-    Coord< Dims... > & coord,
-    DVector < Dims... > const & tensor
-) 
-```
-
-
-
-An operator to add the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. 
-
-**Parameters:**
-
-
-* `coord` The coordinate to which the tensor is added. 
-* `tensor` The tensor to be added to the coordinate. 
-
-
-
-**Returns:**
-
-The new coordinate. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator- 
-
-```C++
-template<class... Dims>
-KOKKOS_INLINE_FUNCTION Coord< Dims... > operator- (
-    Coord< Dims... > const & coord,
-    DVector < Dims... > const & tensor
-) 
-```
-
-
-
-An operator to add the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. 
-
-**Parameters:**
-
-
-* `coord` The coordinate from which the tensor is subtracted. 
-* `tensor` The tensor to be subtracted from the coordinate. 
-
-
-
-**Returns:**
-
-The new coordinate. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator-= 
-
-```C++
-template<class... Dims>
-KOKKOS_INLINE_FUNCTION Coord< Dims... > & operator-= (
-    Coord< Dims... > & coord,
-    DVector < Dims... > const & tensor
-) 
-```
-
-
-
-An operator to add the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. 
-
-**Parameters:**
-
-
-* `coord` The coordinate from which the tensor is subtracted. 
-* `tensor` The tensor to be subtracted from the coordinate. 
-
-
-
-**Returns:**
-
-The new coordinate. 
-
-
-
-
-
-        
 
 <hr>
 

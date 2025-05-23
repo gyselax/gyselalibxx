@@ -266,7 +266,8 @@
 * **m\_pseudo\_physical\_to\_logical** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **m\_pseudo\_physical\_to\_physical** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **m\_rhs** ([**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md))
-* **m\_data** ([**Tensor**](classTensor.md))
+* **m\_data\_alloc** ([**Tensor**](classTensor.md))
+* **m\_data** ([**TensorCommon**](classTensorCommon.md))
 * **m\_mapping\_2d** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **m\_coord\_changer** ([**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md))
 * **m\_grid** ([**VortexMergerEquilibria**](classVortexMergerEquilibria.md))
@@ -319,7 +320,7 @@
 * **same\_evaluation\_idx\_range\_types** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **s\_n\_gauss\_legendre\_r** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **s\_n\_gauss\_legendre\_theta** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
-* **s\_n\_elements** ([**Tensor**](classTensor.md))
+* **s\_n\_elements** ([**TensorCommon**](classTensorCommon.md))
 
 
 ## t
