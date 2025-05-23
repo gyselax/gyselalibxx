@@ -132,9 +132,11 @@ The shared elements also provide more confidence in the reliability of the imple
 
 Gyselalib++ includes a range of reusable mathematical operators for plasma simulations.
 These include, but are not limited to, semi-Lagrangian advection schemes, numerical quadrature, differential operators (e.g. finite difference methods), and solvers for common partial differential equations.
-A complete list of available operators can be found in the [documentation](https://gyselax.github.io/gyselalibxx/).
+A complete list of available operators can be found in the documentation[^doc].
 Many of these tools are designed to work on a variety of grids, including non-uniform grids, which are especially important in edge-region simulations.
 The library also supports MPI-based parallelism, either with distributed operators or with transpositions between different multi-rank storage layouts.
+
+[^doc]: https://gyselax.github.io/gyselalibxx/
 
 The VOICE code [@bourne2023] has already been rewritten in C++ using the mathematical tools provided by Gyselalib++.
 Several common simulations including Landau damping (in 2D or 4D Cartesian phase-space coordinates), a bump-on-tail instability (in 2D Cartesian phase-space coordinates), and a guiding-centre model (on polar coordinates) have also been implemented.
