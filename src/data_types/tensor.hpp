@@ -11,14 +11,14 @@
 #include "vector_index_tools.hpp"
 
 namespace detail {
-template <class ElementType, class... ValidIndexSet>
+template <class ElementType, std::size_t n_elements>
 struct TensorDataInnards
 {
     /// The type of the elements of the tensor.
     using element_type = ElementType;
 
     /// The number of elements in the mdspan
-    static constexpr std::size_t s_n_elements = (ddc::type_seq_size_v<ValidIndexSet> * ...);
+    static constexpr std::size_t s_n_elements = n_elements;
 
     /// The type of the Kokkos mdspan that will be used to access the data
     using mdspan_type = Kokkos::
@@ -51,11 +51,11 @@ struct TensorDataInnards
 template <class ElementType, class... ValidIndexSet>
 class Tensor
     : public TensorCommon<
-              detail::TensorDataInnards<ElementType, ValidIndexSet...>,
+              detail::TensorDataInnards<ElementType, (ddc::type_seq_size_v<ValidIndexSet> * ...)>,
               ValidIndexSet...>
 {
     using base_type = TensorCommon<
-            detail::TensorDataInnards<ElementType, ValidIndexSet...>,
+            detail::TensorDataInnards<ElementType, (ddc::type_seq_size_v<ValidIndexSet> * ...)>,
             ValidIndexSet...>;
 
 public:
