@@ -54,11 +54,6 @@ authors:
   affiliation: 5
   orcid: 0009-0007-3320-1406
 
-- given-names: Matthieu
-  surname: Protais
-  affiliation: 2
-  orcid: 0009-0003-5852-7446
-
 - given-names: Kevin
   surname: Obrejan
   affiliation: 2
@@ -68,6 +63,11 @@ authors:
   surname: Padioleau
   affiliation: 3
   orcid: 0000-0001-5496-0013
+
+- given-names: Matthieu
+  surname: Protais
+  affiliation: 2
+  orcid: 0009-0003-5852-7446
 
 - given-names: Pauline
   surname: Vidal
