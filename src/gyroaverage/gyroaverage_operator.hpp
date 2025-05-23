@@ -83,11 +83,15 @@ public:
     using IdxRangeBatch = IdxRange<GridBatch>;
     using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
     using IdxRangeRThetaBatch = IdxRange<GridR, GridTheta, GridBatch>;
+    using IdxRangeBSRTheta = IdxRange<BSplinesR, BSplinesTheta>;
 
-    using DFieldMemRTheta = FieldMem<double, IdxRangeRTheta>;
-    using DFieldMemRThetaBatch = FieldMem<double, IdxRangeRThetaBatch>;
-    using DFieldRTheta = Field<double, IdxRangeRTheta>;
-    using DFieldRThetaBatch = Field<double, IdxRangeRThetaBatch>;
+    using DFieldMemRTheta = DFieldMem<IdxRangeRTheta>;
+    using DFieldMemRThetaBatch = DFieldMem<IdxRangeRThetaBatch>;
+    using DFieldMemBSRTheta = DFieldMem<IdxRangeBSRTheta>;
+    using DFieldRTheta = DField<IdxRangeRTheta>;
+    using DFieldRThetaBatch = DField<IdxRangeRThetaBatch>;
+    using DFieldBSRTheta = DField<IdxRangeBSRTheta>;
+    using DConstFieldRTheta = ConstField<double, IdxRangeRTheta>;
 
     using CoordRTheta = ddc::Coordinate<DimensionRType, DimensionThetaType>;
 
@@ -144,21 +148,26 @@ public:
                 theta_extrapolation_rule);
 
         // Instantiate chunk of spline coefs to receive output of spline_builder (r, theta)
-        ddc::Chunk coef_alloc(
+        DFieldMemBSRTheta coef_alloc(
                 spline_builder.batched_spline_domain(rtheta_mesh),
                 ddc::DeviceAllocator<double>());
-        ddc::ChunkSpan const coef = get_field(coef_alloc);
-        ddc::ChunkSpan const rho_L = get_const_field(m_rho_L);
+        DFieldBSRTheta const coef = get_field(coef_alloc);
+        DConstFieldRTheta const rho_L = get_const_field(m_rho_L);
+
+        using SubDFieldRTheta = DField<
+                IdxRangeRTheta,
+                typename ExecutionSpace::memory_space,
+                Kokkos::layout_stride>;
 
         ddc::for_each(batch_domain, [&](IdxBatch const ib) {
             // FIXME
             // The input of the spline builder must be LayoutRight
             // We allocate a buffer in LayoutRight whereto the slice is copied
-            ddc::ChunkSpan const sub_A = A[ib];
-            ddc::ChunkSpan sub_A_bar = A_bar[ib];
+            SubDFieldRTheta const sub_A = A[ib];
+            SubDFieldRTheta sub_A_bar = A_bar[ib];
             DFieldMemRTheta sub_A_alloc(rtheta_mesh, ddc::DeviceAllocator<double>());
             ddc::parallel_deepcopy(sub_A_alloc, sub_A);
-            spline_builder(coef, sub_A_alloc.span_cview());
+            spline_builder(coef, get_const_field(sub_A_alloc));
 
             // Loop over r, theta
             ddc::parallel_for_each(
@@ -184,7 +193,7 @@ public:
                             CoordRTheta p = coordinate_transform(R_p, Z_p);
 
                             // Spline interpolation in (r, theta) coordinate
-                            tmp += spline_evaluator(p, coef.span_cview());
+                            tmp += spline_evaluator(p, get_const_field(coef));
                         }
                         sub_A_bar(ir, itheta) = tmp / static_cast<double>(nb_gyro_points);
                     });
