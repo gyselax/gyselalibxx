@@ -130,7 +130,8 @@ In contrast to Gysela, Gyselalib++ has been conceived as a library, similar to t
 This design makes the library more versatile, since its elements are not tied to a specific simulation and can be adapted to different needs.
 The shared elements also provide more confidence in the reliability of the implementation as they can prove their validity across multiple applications.
 
-Gyselalib++ includes a range of reusable mathematical operators for plasma simulations. These include, but are not limited to, semi-Lagrangian advection schemes, numerical quadrature, differential operators (e.g. finite difference methods), and solvers for common partial differential equations.
+Gyselalib++ includes a range of reusable mathematical operators for plasma simulations.
+These include, but are not limited to, semi-Lagrangian advection schemes, numerical quadrature, differential operators (e.g. finite difference methods), and solvers for common partial differential equations.
 A complete list of available operators can be found in the [documentation](https://gyselax.github.io/gyselalibxx/).
 Many of these tools are designed to work on a variety of grids, including non-uniform grids, which are especially important in edge-region simulations.
 The library also supports MPI-based parallelism, either with distributed operators or with transpositions between different multi-rank storage layouts.
