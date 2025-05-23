@@ -131,7 +131,7 @@ The shared elements also provide more confidence in the reliability of the imple
 
 Gyselalib++ includes a range of reusable mathematical operators for plasma simulations.
 These include, but are not limited to, semi-Lagrangian advection schemes, numerical quadrature, differential operators (e.g. finite difference methods), and solvers for common PDEs.
-A complete list of available operators can be found in the documentation[^doc].
+A complete list of operators is available in the documentation[^doc].
 Many of these tools are designed to work on a variety of grids, including non-uniform grids, which are especially important in edge-region simulations.
 The library also supports MPI-based parallelism, either with distributed operators or with transpositions between different multi-rank storage layouts.
 
