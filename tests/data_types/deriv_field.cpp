@@ -320,7 +320,7 @@ TEST(DerivFieldTest, ElementAccess)
         ddc::for_each(idx_range_y, [&](IdxY idx_y) {
             ddc::for_each(x_deriv_block, [&](Idx<dX> idx_dx) {
                 dx_vals(idx_dx - x_deriv_block.front(),
-                        deriv_idx_range_x.get_index(idx_x),
+                        ::get_index(deriv_idx_range_x, idx_x),
                         idx_y - idx_range_y.front())
                         = example_grid(Idx_dXdYXY(idx_x, idx_y, idx_dx, no_deriv_idx_y));
             });
@@ -342,7 +342,7 @@ TEST(DerivFieldTest, ElementAccess)
             ddc::for_each(y_deriv_block, [&](Idx<dY> idx_dy) {
                 dy_vals(idx_dy - y_deriv_block.front(),
                         idx_x - idx_range_x.front(),
-                        deriv_idx_range_y.get_index(idx_y))
+                        ::get_index(deriv_idx_range_y, idx_y))
                         = example_grid(Idx_dXdYXY(idx_x, idx_y, no_deriv_idx_x, idx_dy));
             });
         });
@@ -365,8 +365,8 @@ TEST(DerivFieldTest, ElementAccess)
                     dx_dy_vals(
                             idx_dx - x_deriv_block.front(),
                             idx_dy - y_deriv_block.front(),
-                            deriv_idx_range_x.get_index(idx_x),
-                            deriv_idx_range_y.get_index(idx_y))
+                            ::get_index(deriv_idx_range_x, idx_x),
+                            ::get_index(deriv_idx_range_y, idx_y))
                             = example_grid(Idx_dXdYXY(idx_x, idx_y, idx_dx, idx_dy));
                 }
             }
@@ -454,7 +454,7 @@ void test_DerivField_GPUElementAccess()
                     Idx<dX> idx_dx(idx_dx_y);
                     Idx<GridY> idx_y(idx_dx_y);
                     dx_vals(idx_dx - x_deriv_block.front(),
-                            deriv_idx_range_x.get_index(idx_x),
+                            ::get_index(deriv_idx_range_x, idx_x),
                             idx_y - idx_range_y.front())
                             = example_grid(Idx_dXdYXY(idx_x, idx_y, idx_dx, no_deriv_idx_y));
                 });
@@ -482,7 +482,7 @@ void test_DerivField_GPUElementAccess()
                     Idx<GridX> idx_x(idx_x_dy);
                     dy_vals(idx_dy - y_deriv_block.front(),
                             idx_x - idx_range_x.front(),
-                            deriv_idx_range_y.get_index(idx_y))
+                            ::get_index(deriv_idx_range_y, idx_y))
                             = example_grid(Idx_dXdYXY(idx_x, idx_y, no_deriv_idx_x, idx_dy));
                 });
     }
@@ -511,8 +511,8 @@ void test_DerivField_GPUElementAccess()
                         dx_dy_vals(
                                 idx_dx - x_deriv_block.front(),
                                 idx_dy - y_deriv_block.front(),
-                                deriv_idx_range_x.get_index(idx_x),
-                                deriv_idx_range_y.get_index(idx_y))
+                                ::get_index(deriv_idx_range_x, idx_x),
+                                ::get_index(deriv_idx_range_y, idx_y))
                                 = example_grid(Idx_dXdYXY(idx_x, idx_y, idx_dx, idx_dy));
                     }
                 }
