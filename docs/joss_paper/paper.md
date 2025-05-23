@@ -124,6 +124,8 @@ For example, we have been able to capitalise on C++'s strengths by using templat
 A common source of error is writing equations with implicit assumptions, such as assuming an orthonormal coordinate system, or specific properties like those of a circular coordinate system.
 In Gyselalib++, equations are either expressed in tensor notation, so that they are either accurate for all geometries or do not compile, or they explicitly state their dependencies.
 C++ further enables us to add static assertions for cases with restricted applicability to prevent their misuse.
+Additionally, DDC is used to encode grid information directly in the type of each field, allowing the compiler to catch indexing errors at compile time.
+This is particularly useful when working with multiple grids along the same dimension; or when assigning different memory layouts to different fields.
 
 In contrast to GYSELA, Gyselalib++ has been conceived as a library, similar to the SeLaLib Fortran library [@selalib], whose independent elements are each unit-tested and can be combined to build a final simulation.
 This design makes the library more versatile, since its elements are not tied to a specific simulation and can be adapted to different needs.
