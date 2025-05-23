@@ -249,7 +249,7 @@ TEST_P(GyroAverageCircularParamTests, TestPeriodicity)
     gyroaverage(A, A_bar, CartesianToPolar(), this->m_nb_gyro_points);
 
     auto h_A_bar_alloc = ddc::create_mirror_and_copy(Kokkos::HostSpace {}, A_bar);
-    auto h_A_bar = get_field(h_A_bar_alloc);
+    host_t<DFieldRThetaBatch> h_A_bar = get_field(h_A_bar_alloc);
 
     IdxRangeTheta const theta_domain = get_idx_range<GridTheta>(A_bar);
     IdxRangeRBatch const rbatch_mesh = get_idx_range<GridR, GridBatch>(A_bar);
