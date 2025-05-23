@@ -10,6 +10,7 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "gyroaverage_operator.hpp"
 
 namespace {
@@ -51,7 +52,7 @@ struct GridR : SplineInterpPointsR::interpolation_discrete_dimension_type
 struct GridTheta : SplineInterpPointsTheta::interpolation_discrete_dimension_type
 {
 };
-struct GridBatch : ddc::UniformPointSampling<Batch>
+struct GridBatch : UniformGridBase<Batch>
 {
 };
 
@@ -73,10 +74,10 @@ using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 using IdxRangeRBatch = IdxRange<GridR, GridBatch>;
 using IdxRangeRThetaBatch = IdxRange<GridR, GridTheta, GridBatch>;
 
-using DFieldMemRTheta = FieldMem<double, IdxRangeRTheta>;
-using DFieldMemRThetaBatch = FieldMem<double, IdxRangeRThetaBatch>;
-using DFieldRTheta = Field<double, IdxRangeRTheta>;
-using DFieldRThetaBatch = Field<double, IdxRangeRThetaBatch>;
+using DFieldMemRTheta = DFieldMem<IdxRangeRTheta>;
+using DFieldMemRThetaBatch = DFieldMem<IdxRangeRThetaBatch>;
+using DFieldRTheta = DField<IdxRangeRTheta>;
+using DFieldRThetaBatch = DField<IdxRangeRThetaBatch>;
 
 template <typename Field2DType, typename Field3DType>
 void initialise(
@@ -148,7 +149,7 @@ protected:
         ddc::init_discrete_space<BSplinesR>(CoordR(r_start), CoordR(r_end), nb_r_points);
         ddc::init_discrete_space<GridR>(SplineInterpPointsR::get_sampling<GridR>());
 
-        auto const r_domain = SplineInterpPointsR::get_domain<GridR>();
+        IdxRangeR const r_domain = SplineInterpPointsR::get_domain<GridR>();
 
         // Start of the domain of interest in the Theta dimension
         double const theta_start = 0.;
@@ -162,7 +163,7 @@ protected:
                 BSplinesTheta>(CoordTheta(theta_start), CoordTheta(theta_end), nb_theta_points);
         ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
 
-        auto const theta_domain = SplineInterpPointsTheta::get_domain<GridTheta>();
+        IdxRangeTheta const theta_domain = SplineInterpPointsTheta::get_domain<GridTheta>();
 
         // Start of the domain of interest in the batch dimension (likely a mixture of
         // phi and vpar)
@@ -173,10 +174,11 @@ protected:
         std::size_t const nb_batch_points = 2;
 
         // Initialisation of the global domain in batch
-        auto const batch_domain = ddc::init_discrete_space<GridBatch>(GridBatch::init<GridBatch>(
-                ddc::Coordinate<Batch>(batch_start),
-                ddc::Coordinate<Batch>(batch_end),
-                ddc::DiscreteVector<GridBatch>(nb_batch_points)));
+        IdxRangeBatch const batch_domain
+                = ddc::init_discrete_space<GridBatch>(GridBatch::init<GridBatch>(
+                        ddc::Coordinate<Batch>(batch_start),
+                        ddc::Coordinate<Batch>(batch_end),
+                        IdxStep<GridBatch>(nb_batch_points)));
 
         // Allocate members with move assign operator
         IdxRangeRTheta const rtheta_mesh = IdxRangeRTheta(r_domain, theta_domain);
@@ -247,7 +249,7 @@ TEST_P(GyroAverageCircularParamTests, TestPeriodicity)
     gyroaverage(A, A_bar, CartesianToPolar(), this->m_nb_gyro_points);
 
     auto h_A_bar_alloc = ddc::create_mirror_and_copy(Kokkos::HostSpace {}, A_bar);
-    auto h_A_bar = h_A_bar_alloc.span_view();
+    auto h_A_bar = get_field(h_A_bar_alloc);
 
     IdxRangeTheta const theta_domain = get_idx_range<GridTheta>(A_bar);
     IdxRangeRBatch const rbatch_mesh = get_idx_range<GridR, GridBatch>(A_bar);
@@ -280,15 +282,15 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
 
     auto h_Rcoord_alloc
             = ddc::create_mirror_and_copy(Kokkos::HostSpace {}, get_field(this->m_Rcoord_alloc));
-    auto h_Rcoord = h_Rcoord_alloc.span_view();
+    host_t<DFieldRTheta> h_Rcoord = get_field(h_Rcoord_alloc);
     auto h_Zcoord_alloc
             = ddc::create_mirror_and_copy(Kokkos::HostSpace {}, get_field(this->m_Zcoord_alloc));
-    auto h_Zcoord = h_Zcoord_alloc.span_view();
+    host_t<DFieldRTheta> h_Zcoord = get_field(h_Zcoord_alloc);
     auto h_rho_L_alloc
             = ddc::create_mirror_and_copy(Kokkos::HostSpace {}, get_field(this->m_rho_L_alloc));
-    auto h_rho_L = h_rho_L_alloc.span_view();
+    host_t<DFieldRTheta> h_rho_L = get_field(h_rho_L_alloc);
     auto h_A_bar_alloc = ddc::create_mirror_and_copy(Kokkos::HostSpace {}, A_bar);
-    auto h_A_bar = h_A_bar_alloc.span_view();
+    host_t<DFieldRThetaBatch> h_A_bar = get_field(h_A_bar_alloc);
 
     IdxRangeTheta const theta_domain = get_idx_range<GridTheta>(A_bar);
     IdxRangeRThetaBatch const rthetabatch_mesh = get_idx_range<GridR, GridTheta, GridBatch>(A_bar);
