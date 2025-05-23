@@ -113,25 +113,25 @@ In particular gyrokinetic theory [@brizard2007; @krommes2012], which reduces the
 Despite the reduction in dimensionality such simulations still require massively powerful high-performance computing (HPC) resources.
 For ITER-sized simulations, exascale resources would still be required.
 
-The pre-existing Gysela code [@grandgirard2016], written in Fortran, originally aimed to simulate plasma in the core region of a tokamak using semi-Lagrangian advection with a distribution function discretised in phase space on a fixed grid.
+The pre-existing GYSELA code [@grandgirard2016], written in Fortran, originally aimed to simulate plasma in the core region of a tokamak using semi-Lagrangian advection with a distribution function discretised in phase space on a fixed grid.
 This approach was shown to work well and allowed the study of many interesting physical phenomena [@Esteve2018;@Sarazin2021;@DifPradalier2022].
 However expanding this code to use more complex mathematical methods such as non-uniform points (vital for handling the different magnitudes of physical quantities in the core and edge regions), and increasingly complex geometries (such as D-shape geometries, geometries including both closed and open field lines, and potentially stellarator geometries) has proved to be challenging and sometimes error-prone.
 The challenges of such extensions are further amplified when trying to organise such a code for use on new GPU architectures, necessary for exascale simulations.
 This is a challenge shared by other gyrokinetic codes [@trilaksono2023].
 
-In the case of Gysela, several of the required changes would have affected a large percentage of the code base.
+In the case of GYSELA, several of the required changes would have affected a large percentage of the code base.
 This means that the effort required was comparable to a complete rewrite, without the advantages such a rewrite can bring.
 For example, we have been able to capitalise on C++'s strengths by using template programming to enforce the correctness of the implemented equations.
 A common source of error is writing equations with implicit assumptions, such as assuming an orthonormal coordinate system, or specific properties like those of a circular coordinate system.
 In Gyselalib++, equations are either expressed in tensor notation, so that they are either accurate for all geometries or do not compile, or they explicitly state their dependencies.
 C++ further enables us to add static assertions for cases with restricted applicability to prevent their misuse.
 
-In contrast to Gysela, Gyselalib++ has been conceived as a library, similar to the SeLaLib Fortran library [@selalib], whose independent elements are each unit tested and can be combined to build a final simulation.
+In contrast to GYSELA, Gyselalib++ has been conceived as a library, similar to the SeLaLib Fortran library [@selalib], whose independent elements are each unit tested and can be combined to build a final simulation.
 This design makes the library more versatile, since its elements are not tied to a specific simulation and can be adapted to different needs.
 The shared elements also provide more confidence in the reliability of the implementation as they can prove their validity across multiple applications.
 
 Gyselalib++ includes a range of reusable mathematical operators for plasma simulations.
-These include, but are not limited to, semi-Lagrangian advection schemes, numerical quadrature, differential operators (e.g. finite difference methods), and solvers for common partial differential equations.
+These include, but are not limited to, semi-Lagrangian advection schemes, numerical quadrature, differential operators (e.g. finite difference methods), and solvers for common PDEs.
 A complete list of available operators can be found in the documentation[^doc].
 Many of these tools are designed to work on a variety of grids, including non-uniform grids, which are especially important in edge-region simulations.
 The library also supports MPI-based parallelism, either with distributed operators or with transpositions between different multi-rank storage layouts.
