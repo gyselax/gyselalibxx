@@ -119,8 +119,7 @@ However expanding this code to use more complex mathematical methods such as non
 The challenges of such extensions are further amplified when trying to organise such a code for use on new GPU architectures, necessary for exascale simulations.
 This is a challenge shared by other gyrokinetic codes [@trilaksono2023].
 
-In the case of GYSELA, several of the required changes would have affected a large percentage of the code base.
-This means that the effort required was comparable to a complete rewrite, without the advantages such a rewrite can bring.
+In the case of GYSELA, the necessary changes would have required an effort comparable to a complete rewrite; whereas, actually performing such a rewrite brings additional benefits for design and portability.
 For example, we have been able to capitalise on C++'s strengths by using template programming to enforce the correctness of the implemented equations.
 A common source of error is writing equations with implicit assumptions, such as assuming an orthonormal coordinate system, or specific properties like those of a circular coordinate system.
 In Gyselalib++, equations are either expressed in tensor notation, so that they are either accurate for all geometries or do not compile, or they explicitly state their dependencies.
