@@ -3,6 +3,9 @@
 
 #include <ddc/ddc.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+
 namespace detail {
 
 /**
@@ -199,13 +202,7 @@ public:
                     });
 
             // Apply periodic boundary condition in theta direction
-            ddc::parallel_for_each(
-                    r_domain,
-                    KOKKOS_LAMBDA(IdxR const ir) {
-                        IdxTheta const theta_front = theta_domain.front();
-                        IdxTheta const theta_back = theta_domain.back();
-                        sub_A_bar(ir, theta_back) = sub_A_bar(ir, theta_front);
-                    });
+            ddc::parallel_deepcopy(sub_A_bar[theta_domain.back()], sub_A_bar[theta_domain.front()]);
         });
     }
 };
