@@ -99,7 +99,7 @@ bibliography: paper.bib
 
 ## Summary
 
-Gyselalib++ provides the mathematical building blocks to construct gyrokinetic plasma simulations in C++, simulating a distribution function discretised in phase space on a fixed grid.
+Gyselalib++ provides the mathematical building blocks to construct gyrokinetic plasma simulation codes in C++, simulating a distribution function discretised in phase space on a fixed grid.
 It relies on the DDC library [@ddc] to statically type the discretisation dimensions; thus preventing many common sources of errors.
 Via DDC, Gyselalib++ also leverages the Kokkos framework [@trott2022], ensuring performance portability across various CPU and GPU architectures.
 The library provides a variety of tools including semi-Lagrangian advection operators, solvers for partial differential equations (PDEs), quadrature rules, and time integrators.
