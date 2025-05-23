@@ -114,7 +114,7 @@ Despite the reduction in dimensionality such simulations still require massively
 For ITER-sized simulations, exa-scale resources would still be required.
 
 The pre-existing Gysela code[@grandgirard2016], written in Fortran, originally aimed to simulate plasma in the core region of a tokamak using semi-Lagrangian advection with a distribution function discretised in phase space on a fixed grid.
-This approach was shown to work well and allowed the study of many interesting physical phenomena[@TODO1;@TODO2;@ETC].
+This approach was shown to work well and allowed the study of many interesting physical phenomena[@Esteve2018;@Sarazin2021;@DifPradalier2022].
 However expanding this code to use more complex mathematical methods such as non-uniform points (vital for handling the different magnitudes of physical quantities in the core and edge regions), and increasingly complex geometries (such as D-shape geometries, geometries including both closed and open field lines, and potentially stellarator geometries) has proved to be challenging and sometimes error-prone.
 The challenges of such extensions are further amplified when trying to organise such a code for use on new GPU architectures, necessary for exa-scale simulations.
 This is a challenge shared by other gyrokinetic codes[@trilaksono2023].
