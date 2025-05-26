@@ -11,6 +11,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include "../../advection/r_theta_test_cases.hpp"
+
 #include "advection_simulation_utils.hpp"
 #include "bsl_advection_polar.hpp"
 #include "cartesian_to_circular.hpp"
@@ -35,7 +37,6 @@
 #include "rk4.hpp"
 #include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
-#include "test_cases.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 

@@ -17,7 +17,6 @@ target_link_libraries(1d_advection
         GTest::gtest
         GTest::gmock
 
-
         gslx::advection
         gslx::speciesinfo
         gslx::timestepper

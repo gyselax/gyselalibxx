@@ -2,7 +2,7 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
-#include "../advection_rtheta/test_cases.hpp"
+#include "../../advection/r_theta_test_cases.hpp"
 
 #include "circular_to_cartesian.hpp"
 #include "ddc_aliases.hpp"

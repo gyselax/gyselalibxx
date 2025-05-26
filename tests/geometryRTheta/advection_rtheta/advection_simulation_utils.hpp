@@ -9,6 +9,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include "../../advection/r_theta_test_cases.hpp"
+
 #include "bsl_advection_polar.hpp"
 #include "geometry.hpp"
 #include "l_norm_tools.hpp"
@@ -19,7 +21,6 @@
 #include "polar_spline_evaluator.hpp"
 #include "quadrature.hpp"
 #include "spline_quadrature.hpp"
-#include "test_cases.hpp"
 #include "trapezoid_quadrature.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
