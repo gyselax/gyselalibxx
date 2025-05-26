@@ -152,5 +152,6 @@ Views and opinions expressed are those of the author(s) only and do not necessar
 Neither the European Union nor the European Commission can be held responsible for them.
 Emily Bourne’s salary was paid for by the EUROfusion Advanced Computing Hub (ACH).
 This project was provided with computer and storage resources by GENCI CINES thanks to the grant 2024-A0160502224 on the supercomputer  on the supercomputer Adastra’s the GENOA partition.
+We acknowledge the financial support of the Cross-Disciplinary Program on "Numerical simulation" of CEA, the French Alternative Energies and Atomic Energy Commission.
 
 ## References
