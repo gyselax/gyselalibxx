@@ -1,5 +1,9 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#include <cstddef>
+
+#include <Kokkos_Core.hpp>
+
 #include "ddc_aliases.hpp"
 
 /**
@@ -11,9 +15,9 @@ class GridBuilder
 private:
     using type_seq = ddc::detail::TypeSeq<Grid1D...>;
 
-    std::array<std::size_t, sizeof...(Grid1D)> m_steps;
-
     IdxRange<Grid1D...> m_idx_range;
+
+    Kokkos::layout_right::mapping<Kokkos::dextents<std::size_t, sizeof...(Grid1D)>> m_mapping;
 
 public:
     /**
@@ -21,9 +25,11 @@ public:
      *
      * @param[in] idx_range The valid index ranges for the operator.
      */
-    explicit GridBuilder(IdxRange<Grid1D...> idx_range) : m_idx_range(idx_range)
+    explicit GridBuilder(IdxRange<Grid1D...> idx_range)
+        : m_idx_range(idx_range)
+        , m_mapping(Kokkos::dextents<std::size_t, sizeof...(Grid1D)>(
+                  idx_range.template extent<Grid1D>()...))
     {
-        fill_steps<0>(idx_range);
     }
 
     /**
@@ -33,21 +39,7 @@ public:
      */
     KOKKOS_FUNCTION std::size_t operator()(Idx<Grid1D...> idx) const
     {
-        return (((ddc::select<Grid1D>(idx) - ddc::select<Grid1D>(m_idx_range.front())).value()
-                 * m_steps[ddc::type_seq_rank_v<Grid1D, type_seq>])
-                + ...);
-    }
-
-private:
-    template <int I, class HeadGrid1D, class... TailGrid1D>
-    void fill_steps(IdxRange<HeadGrid1D, TailGrid1D...> idx_range)
-    {
-        if constexpr (I == (sizeof...(Grid1D) - 1)) {
-            m_steps[I] = 1;
-        } else if constexpr (I < sizeof...(Grid1D)) {
-            IdxRange<TailGrid1D...> sub_idx_range(idx_range);
-            m_steps[I] = sub_idx_range.size();
-            fill_steps<I + 1>(sub_idx_range);
-        }
+        return m_mapping(
+                (ddc::select<Grid1D>(idx) - ddc::select<Grid1D>(m_idx_range.front())).value()...);
     }
 };
