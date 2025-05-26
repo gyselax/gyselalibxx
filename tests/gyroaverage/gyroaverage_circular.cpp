@@ -78,6 +78,7 @@ using DFieldMemRTheta = DFieldMem<IdxRangeRTheta>;
 using DFieldMemRThetaBatch = DFieldMem<IdxRangeRThetaBatch>;
 using DFieldRTheta = DField<IdxRangeRTheta>;
 using DFieldRThetaBatch = DField<IdxRangeRThetaBatch>;
+using DConstFieldRThetaBatch = ConstField<double, IdxRangeRThetaBatch>;
 
 template <typename Field2DType, typename Field3DType>
 void initialise(
@@ -234,7 +235,7 @@ struct CartesianToPolar
 
 TEST_P(GyroAverageCircularParamTests, TestPeriodicity)
 {
-    DFieldRThetaBatch A = get_field(this->m_A_alloc);
+    DConstFieldRThetaBatch A = get_const_field(this->m_A_alloc);
     DFieldRThetaBatch A_bar = get_field(this->m_A_bar_alloc);
     DFieldRTheta rho_L = get_field(this->m_rho_L_alloc);
 
@@ -267,7 +268,7 @@ TEST_P(GyroAverageCircularParamTests, TestPeriodicity)
 
 TEST_P(GyroAverageCircularParamTests, TestAnalytical)
 {
-    DFieldRThetaBatch A = get_field(this->m_A_alloc);
+    DConstFieldRThetaBatch A = get_const_field(this->m_A_alloc);
     DFieldRThetaBatch A_bar = get_field(this->m_A_bar_alloc);
 
     using GyroAverageOperatorType = detail::GyroAverageOperator<

@@ -76,17 +76,17 @@ class GyroAverageOperator
             ddc::PeriodicExtrapolationRule<DimensionThetaType>>;
 
 public:
-    using IdxR = Idx<GridR>;
-    using IdxTheta = Idx<GridTheta>;
-    using IdxBatch = Idx<GridBatch>;
-    using IdxRTheta = Idx<GridR, GridTheta>;
-
     using IdxRangeR = IdxRange<GridR>;
     using IdxRangeTheta = IdxRange<GridTheta>;
-    using IdxRangeBatch = IdxRange<GridBatch>;
     using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
     using IdxRangeRThetaBatch = IdxRange<GridR, GridTheta, GridBatch>;
+    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeRThetaBatch, GridR, GridTheta>;
     using IdxRangeBSRTheta = IdxRange<BSplinesR, BSplinesTheta>;
+
+    using IdxR = Idx<GridR>;
+    using IdxTheta = Idx<GridTheta>;
+    using IdxBatch = typename IdxRangeBatch::discrete_element_type;
+    using IdxRTheta = Idx<GridR, GridTheta>;
 
     using DFieldMemRTheta = DFieldMem<IdxRangeRTheta>;
     using DFieldMemRThetaBatch = DFieldMem<IdxRangeRThetaBatch>;
@@ -95,6 +95,7 @@ public:
     using DFieldRThetaBatch = DField<IdxRangeRThetaBatch>;
     using DFieldBSRTheta = DField<IdxRangeBSRTheta>;
     using DConstFieldRTheta = ConstField<double, IdxRangeRTheta>;
+    using DConstFieldRThetaBatch = ConstField<double, IdxRangeRThetaBatch>;
 
     using CoordRTheta = ddc::Coordinate<DimensionRType, DimensionThetaType>;
 
@@ -127,7 +128,7 @@ public:
      */
     template <class CoordinateTransformFunction>
     void operator()(
-            DFieldRThetaBatch const& A,
+            DConstFieldRThetaBatch const& A,
             DFieldRThetaBatch const& A_bar,
             CoordinateTransformFunction coordinate_transform,
             std::size_t nb_gyro_points = 8) const
@@ -157,6 +158,11 @@ public:
         DFieldBSRTheta const coef = get_field(coef_alloc);
         DConstFieldRTheta const rho_L = get_const_field(m_rho_L);
 
+        using SubConstDFieldRTheta = ConstField<
+                double,
+                IdxRangeRTheta,
+                typename ExecutionSpace::memory_space,
+                Kokkos::layout_stride>;
         using SubDFieldRTheta = DField<
                 IdxRangeRTheta,
                 typename ExecutionSpace::memory_space,
@@ -166,7 +172,7 @@ public:
             // FIXME
             // The input of the spline builder must be LayoutRight
             // We allocate a buffer in LayoutRight whereto the slice is copied
-            SubDFieldRTheta const sub_A = A[ib];
+            SubConstDFieldRTheta const sub_A = A[ib];
             SubDFieldRTheta sub_A_bar = A_bar[ib];
             DFieldMemRTheta sub_A_alloc(rtheta_mesh, ddc::DeviceAllocator<double>());
             ddc::parallel_deepcopy(sub_A_alloc, sub_A);
