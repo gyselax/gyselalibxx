@@ -370,4 +370,3 @@ inline constexpr bool enable_is_timestepper_builder<ExplicitTimeStepperBuilder<T
 template <typename Type>
 inline constexpr bool is_timestepper_builder_v
         = detail::enable_is_timestepper_builder<std::remove_const_t<std::remove_reference_t<Type>>>;
-
