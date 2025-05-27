@@ -103,7 +103,7 @@ Gyselalib++ provides the mathematical building blocks to construct gyrokinetic p
 It relies on the DDC library [@ddc] to statically type the discretisation dimensions; thus preventing many common sources of errors.
 Via DDC, Gyselalib++ also leverages the Kokkos framework [@trott2022], ensuring performance portability across various CPU and GPU architectures.
 The library provides a variety of tools including semi-Lagrangian advection operators, solvers for partial differential equations (PDEs), quadrature rules, and time integrators.
-All operators are designed to function correctly or raise compiler errors on non-orthonormal coordinate systems thanks to the static typing.
+The majority of the operators are designed to work on non-orthonormal coordinate systems; those that don't use the static typing to raise compiler errors preventing their misuse.
 
 ## Statement of Need
 
