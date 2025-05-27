@@ -63,6 +63,8 @@ namespace {
             = ddc::GrevilleInterpolationPoints<BSplinesR, SplineRBoundary, SplineRBoundary>;
     using SplineInterpPointsTheta = ddc::
             GrevilleInterpolationPoints<BSplinesTheta, SplineThetaBoundary, SplineThetaBoundary>;
+
+    using IdxRangeRTheta = IdxRange<R, Theta>;
 };
 
 template<class TimeStepperType>
@@ -113,8 +115,8 @@ public:
     }
 };
 
-using Cases = ::testing::Types<RK3<FieldMem,
-        VectorFieldMem,
+using Cases = ::testing::Types<RK3<DField<IdxRangeRTheta>,
+        DVectorFieldMem<IdxRangeRTheta, VectorIndexSet<X_adv, Y_adv>,
         Kokkos::DefaultExecutionSpace>>>;
 
 TYPED_TEST_SUITE(PolarBsplineFixture, Cases);
