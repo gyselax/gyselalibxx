@@ -195,7 +195,7 @@ private:
     double const m_epsilon;
 
 public:
-    CrankNicolsonBuilder(int const counter = int(20), double const epsilon = 1e-12)
+    explicit CrankNicolsonBuilder(int const counter = int(20), double const epsilon = 1e-12)
         : m_max_counter(counter)
         , m_epsilon(epsilon)
     {
