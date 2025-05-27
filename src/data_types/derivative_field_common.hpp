@@ -157,6 +157,23 @@ protected:
 
 protected:
     /**
+     * @brief Get the index of the Idx within m_cross_derivative_idx_range.
+     * This function is particularly useful to index an mdspan over an index range slice.
+     *
+     * @param elem A 1D Idx which is inside the index range slice.
+     *
+     * @returns The index of the element.
+     */
+    template <class QueryDim>
+    KOKKOS_FUNCTION std::size_t get_index(Idx<QueryDim> elem) const noexcept
+    {
+        assert(IdxRangeSlice<QueryDim>(m_cross_derivative_idx_range).contains(elem));
+        return IdxRangeSlice<QueryDim>(m_cross_derivative_idx_range)
+                .distance_from_front(elem)
+                .value();
+    }
+
+    /**
      * @brief An internal function which provides the index of a field inside the internal_fields array.
      * An Idx describes the derivatives of interest. n-th order derivatives are stored in the
      * same field for all n!=0 so it is sufficient to provide any valid element from the derivatives.
@@ -202,9 +219,7 @@ protected:
                 // If information is available about the physical index range
                 if (array_idx & (1 << ddc::type_seq_rank_v<ddc::Deriv<QueryDDim>, deriv_tags>)) {
                     // If the derivative is being requested
-                    return ::get_index(
-                            m_cross_derivative_idx_range,
-                            ddc::select<QueryDDim>(slice_idx));
+                    return get_index(ddc::select<QueryDDim>(slice_idx));
                 }
             }
             if constexpr (ddc::in_tags_v<QueryDDim, physical_grids>) {
@@ -253,9 +268,8 @@ protected:
                     // If the derivative is being requested
                     assert(::contains(m_cross_derivative_idx_range, idx_range_requested));
                     return std::pair<std::size_t, std::size_t>(
-                            ::get_index(m_cross_derivative_idx_range, idx_range_requested.front()),
-                            ::get_index(m_cross_derivative_idx_range, idx_range_requested.back())
-                                    + 1);
+                            get_index(idx_range_requested.front()),
+                            get_index(idx_range_requested.back()) + 1);
                 }
             }
             if constexpr (ddc::in_tags_v<QueryDDim, physical_grids>) {
