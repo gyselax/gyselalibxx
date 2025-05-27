@@ -7,10 +7,6 @@
 #include "ddc_aliases.hpp"
 #include "indexed_tensor.hpp"
 #include "math_tools.hpp"
-#include "paraconfpp.hpp"
-#include "params.yaml.hpp"
-#include "polar_spline.hpp"
-#include "polar_spline_evaluator.hpp"
 
 /*
  *  This file defines
@@ -267,7 +263,7 @@ public:
                               - (y - m_yc) * Kokkos::sin(m_omega * -t);
         double const foot_y = m_yc + (x - m_xc) * Kokkos::sin(m_omega * -t)
                               + (y - m_yc) * Kokkos::cos(m_omega * -t);
-        return CoordXY(foot_x, foot_y);
+        return Coord<X, Y>(foot_x, foot_y);
     }
 };
 
