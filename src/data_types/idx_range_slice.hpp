@@ -10,24 +10,6 @@ template <class... DDims>
 using IdxRangeSlice = ddc::StridedDiscreteDomain<DDims...>;
 
 /**
- * @brief Get the index of the Idx within an index range slice.
- * This function is particularly useful to index an mdspan over an index range slice.
- *
- * @param idx_range_slice An index range slice.
- * @param elem A 1D Idx which is inside the index range slice.
- *
- * @returns The index of the element.
- */
-template <class QueryDim, class... Dims>
-KOKKOS_FUNCTION std::size_t get_index(
-        IdxRangeSlice<Dims...> const& idx_range_slice,
-        Idx<QueryDim> elem)
-{
-    assert(IdxRangeSlice<QueryDim>(idx_range_slice).contains(elem));
-    return IdxRangeSlice<QueryDim>(idx_range_slice).distance_from_front(elem).value();
-}
-
-/**
  * @brief Check if all elements of the specified IdxRange are found in an index range slice.
  *
  * @param idx_range_slice An index range slice.
