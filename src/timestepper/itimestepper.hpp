@@ -345,7 +345,7 @@ public:
     using time_stepper_t = TimeStepper<FieldMem, DerivFieldMem, ExecSpace>;
 
     template <class ChosenTimeStepper>
-    auto preallocate(typename ChosenTimeStepper::IdxRange const m_idx_range)
+    auto preallocate(typename ChosenTimeStepper::IdxRange const m_idx_range) const
     {
         static_assert(std::is_same_v<
                       ChosenTimeStepper,

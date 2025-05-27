@@ -208,7 +208,7 @@ public:
     using time_stepper_t = CrankNicolson<FieldMem, DerivFieldMem, ExecSpace>;
 
     template <class TimeStepper>
-    auto preallocate(typename TimeStepper::IdxRange const m_idx_range)
+    auto preallocate(typename TimeStepper::IdxRange const m_idx_range) const
     {
         static_assert(std::is_same_v<
                       TimeStepper,
