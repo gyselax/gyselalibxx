@@ -72,7 +72,18 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCircMap)
         ddcHelper::get<Theta, Y>(inv_Jacobian_matrix_coeff)
                 = mapping.template inv_jacobian_component<Theta, Y>(coords(irtheta));
 
-        EXPECT_TRUE(inv_Jacobian_matrix == inv_Jacobian_matrix_coeff);
+        double mat_elem = ddcHelper::get<R, X>(inv_Jacobian_matrix);
+        double coeff = ddcHelper::get<R, X>(inv_Jacobian_matrix_coeff);
+        EXPECT_DOUBLE_EQ(mat_elem, coeff);
+        mat_elem = ddcHelper::get<R, Y>(inv_Jacobian_matrix);
+        coeff = ddcHelper::get<R, Y>(inv_Jacobian_matrix_coeff);
+        EXPECT_DOUBLE_EQ(mat_elem, coeff);
+        mat_elem = ddcHelper::get<Theta, X>(inv_Jacobian_matrix);
+        coeff = ddcHelper::get<Theta, X>(inv_Jacobian_matrix_coeff);
+        EXPECT_DOUBLE_EQ(mat_elem, coeff);
+        mat_elem = ddcHelper::get<Theta, Y>(inv_Jacobian_matrix);
+        coeff = ddcHelper::get<Theta, Y>(inv_Jacobian_matrix_coeff);
+        EXPECT_DOUBLE_EQ(mat_elem, coeff);
     });
 }
 
@@ -126,7 +137,18 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCzarMap)
         ddcHelper::get<Theta, Y_cov>(inv_Jacobian_matrix_coeff)
                 = mapping.template inv_jacobian_component<Theta, Y_cov>(coords(irtheta));
 
-        EXPECT_TRUE(inv_Jacobian_matrix == inv_Jacobian_matrix_coeff);
+        double mat_elem = ddcHelper::get<R, X>(inv_Jacobian_matrix);
+        double coeff = ddcHelper::get<R, X>(inv_Jacobian_matrix_coeff);
+        EXPECT_DOUBLE_EQ(mat_elem, coeff);
+        mat_elem = ddcHelper::get<R, Y>(inv_Jacobian_matrix);
+        coeff = ddcHelper::get<R, Y>(inv_Jacobian_matrix_coeff);
+        EXPECT_DOUBLE_EQ(mat_elem, coeff);
+        mat_elem = ddcHelper::get<Theta, X>(inv_Jacobian_matrix);
+        coeff = ddcHelper::get<Theta, X>(inv_Jacobian_matrix_coeff);
+        EXPECT_DOUBLE_EQ(mat_elem, coeff);
+        mat_elem = ddcHelper::get<Theta, Y>(inv_Jacobian_matrix);
+        coeff = ddcHelper::get<Theta, Y>(inv_Jacobian_matrix_coeff);
+        EXPECT_DOUBLE_EQ(mat_elem, coeff);
     });
 }
 
