@@ -65,6 +65,7 @@ public:
     /// The constant type of the derivatives values of the function being evolved.
     using DerivConstField = typename DerivFieldMem::view_type;
 
+    /// The space (CPU/GPU) where the calculations are carried out.
     using exec_space = ExecSpace;
 
 public:
