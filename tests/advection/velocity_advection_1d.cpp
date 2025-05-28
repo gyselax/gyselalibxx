@@ -289,14 +289,14 @@ TEST_F(Velocity1DAdvectionTest, BatchedLagrange)
     SplineVxEvaluator const spline_vx_evaluator(bv_v_min, bv_v_max);
 
 
-    Euler<FieldMemSpXVx<CoordVx>, DFieldMemSpXVx> euler(meshSpXVx);
+    EulerBuilder euler;
     BslAdvection1D<
             GridVx,
             IdxRangeSpXVx,
             IdxRangeSpXVx,
             SplineVxBuilder,
             SplineVxEvaluator,
-            Euler<FieldMemSpXVx<CoordVx>, DFieldMemSpXVx>> const
+            EulerBuilder> const
             lagrange_advection_vx(lagrange_vx_interpolator, builder_vx, spline_vx_evaluator, euler);
 
 
@@ -322,14 +322,14 @@ TEST_F(Velocity1DAdvectionTest, SplineBatched)
     PreallocatableSplineInterpolator const
             spline_vx_interpolator(builder_vx, spline_vx_evaluator, meshSpXVx);
 
-    Euler<FieldMemSpXVx<CoordVx>, DFieldMemSpXVx> euler(meshSpXVx);
+    EulerBuilder euler;
     BslAdvection1D<
             GridVx,
             IdxRangeSpXVx,
             IdxRangeSpXVx,
             SplineVxBuilder,
             SplineVxEvaluator,
-            Euler<FieldMemSpXVx<CoordVx>, DFieldMemSpXVx>> const
+            EulerBuilder> const
             spline_advection_vx(spline_vx_interpolator, builder_vx, spline_vx_evaluator, euler);
 
 

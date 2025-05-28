@@ -232,36 +232,23 @@ int main(int argc, char** argv)
 
     // SELECTION OF THE TIME INTEGRATION METHOD.
 #if defined(EULER_METHOD)
-    Euler<FieldMemRTheta<CoordRTheta>,
-          DVectorFieldMemRTheta<X_adv, Y_adv>,
-          Kokkos::DefaultExecutionSpace>
-            time_stepper(grid);
+    EulerBuilder time_stepper;
     std::string const method_name = "EULER";
     key += "euler";
 
 #elif defined(CRANK_NICOLSON_METHOD)
     double const epsilon_CN = 1e-8;
-    CrankNicolson<
-            FieldMemRTheta<CoordRTheta>,
-            DVectorFieldMemRTheta<X_adv, Y_adv>,
-            Kokkos::DefaultExecutionSpace>
-            time_stepper(grid, 20, epsilon_CN);
+    CrankNicolsonBuilder time_stepper(20, epsilon_CN);
     std::string const method_name = "CRANK NICOLSON";
     key += "crank_nicolson";
 
 #elif defined(RK3_METHOD)
-    RK3<FieldMemRTheta<CoordRTheta>,
-        DVectorFieldMemRTheta<X_adv, Y_adv>,
-        Kokkos::DefaultExecutionSpace>
-            time_stepper(grid);
+    RK3Builder time_stepper;
     std::string const method_name = "RK3";
     key += "rk3";
 
 #elif defined(RK4_METHOD)
-    RK4<FieldMemRTheta<CoordRTheta>,
-        DVectorFieldMemRTheta<X_adv, Y_adv>,
-        Kokkos::DefaultExecutionSpace>
-            time_stepper(grid);
+    RK4Builder time_stepper;
     std::string const method_name = "RK4";
     key += "rk4";
 #endif
@@ -292,6 +279,7 @@ int main(int argc, char** argv)
     }
 
     SplinePolarFootFinder const foot_finder(
+            grid,
             time_stepper,
             to_physical_mapping,
             logical_to_pseudo_cart_mapping,

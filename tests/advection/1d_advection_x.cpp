@@ -173,14 +173,8 @@ TEST_F(XAdvection1DTest, AdvectionX)
             spline_interpolator(builder, spline_evaluator, interpolation_idx_range);
 
 
-    RK2<FieldMemX<CoordX>, DFieldMemX> time_stepper(interpolation_idx_range);
-    BslAdvection1D<
-            GridX,
-            IdxRangeX,
-            IdxRangeX,
-            SplineXBuilder,
-            SplineXEvaluator,
-            RK2<FieldMemX<CoordX>, DFieldMemX>> const
+    RK2Builder time_stepper;
+    BslAdvection1D<GridX, IdxRangeX, IdxRangeX, SplineXBuilder, SplineXEvaluator, RK2Builder> const
             advection(spline_interpolator, builder, spline_evaluator, time_stepper);
 
     double const max_relative_error = AdvectionX(advection);

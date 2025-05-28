@@ -147,26 +147,17 @@ int main(int argc, char** argv)
 
     // --- Time integration method --------------------------------------------------------------------
 #if defined(EULER_METHOD)
-    Euler<FieldMemRTheta<CoordRTheta>,
-          DVectorFieldMemRTheta<X, Y>,
-          Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rtheta);
+    EulerBuilder const time_stepper;
 
 #elif defined(CRANK_NICOLSON_METHOD)
     double const epsilon_CN = 1e-8;
-    CrankNicolson<
-            FieldMemRTheta<CoordRTheta>,
-            DVectorFieldMemRTheta<X, Y>,
-            Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rtheta, 20, epsilon_CN);
+    CrankNicolsonBuilder const time_stepper(20, epsilon_CN);
 
 #elif defined(RK3_METHOD)
-    RK3<FieldMemRTheta<CoordRTheta>,
-        DVectorFieldMemRTheta<X, Y>,
-        Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rtheta);
+    RK3Builder const time_stepper;
 
 #elif defined(RK4_METHOD)
-    RK4<FieldMemRTheta<CoordRTheta>,
-        DVectorFieldMemRTheta<X, Y>,
-        Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rtheta);
+    RK4Builder const time_stepper;
 
 #endif
 
@@ -188,6 +179,7 @@ int main(int argc, char** argv)
     PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, mesh_rtheta);
 
     SplinePolarFootFinder find_feet(
+            mesh_rtheta,
             time_stepper,
             to_physical_mapping,
             to_physical_mapping,

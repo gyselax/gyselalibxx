@@ -340,8 +340,7 @@ TEST_F(XYVxVyAdvection1DTest, AdvectionXY)
             function_spline_y_interpolator(builder_y, spline_evaluator_y, xyvxvy_grid);
 
 
-    RK2<FieldMemXY<CoordX>, DFieldMemXY> time_stepper_x(xy_grid);
-    RK2<FieldMemXY<CoordY>, DFieldMemXY> time_stepper_y(xy_grid);
+    RK2Builder time_stepper;
 
     BslAdvection1D<
             GridX,
@@ -349,24 +348,24 @@ TEST_F(XYVxVyAdvection1DTest, AdvectionXY)
             IdxRangeXYVxVy,
             SplineXBuilder,
             SplineXEvaluator,
-            RK2<FieldMemXY<CoordX>, DFieldMemXY>> const
+            RK2Builder> const
             advection_x(
                     function_spline_x_interpolator,
                     builder_x,
                     spline_evaluator_x,
-                    time_stepper_x);
+                    time_stepper);
     BslAdvection1D<
             GridY,
             IdxRangeXY,
             IdxRangeXYVxVy,
             SplineYBuilder,
             SplineYEvaluator,
-            RK2<FieldMemXY<CoordY>, DFieldMemXY>> const
+            RK2Builder> const
             advection_y(
                     function_spline_y_interpolator,
                     builder_y,
                     spline_evaluator_y,
-                    time_stepper_y);
+                    time_stepper);
 
 
     double const max_relative_error = AdvectionXY(advection_x, advection_y);
