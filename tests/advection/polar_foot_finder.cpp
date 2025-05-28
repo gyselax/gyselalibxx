@@ -194,12 +194,13 @@ AdvectionField init_field()
     }
 }
 
-void fill_feet(
+void fill_feet_and_advection_field(
         Field<CoordRTheta, IdxRangeSpRTheta> feet,
         Field<CoordRTheta, IdxRangeSpRTheta> exact_feet,
         DVectorField<IdxRangeSpRTheta, CartBasis> adv_field,
         IdxRangeSpRTheta batched_idx_range)
 {
+    // This function is required for GPU compilation
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             batched_idx_range,
@@ -291,7 +292,7 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
     Field<CoordRTheta, IdxRangeSpRTheta> feet = get_field(feet_alloc);
     Field<CoordRTheta, IdxRangeSpRTheta> exact_feet = get_field(exact_feet_alloc);
 
-    fill_feet(feet, exact_feet, adv_field, batched_idx_range);
+    fill_feet_and_advection_field(feet, exact_feet, adv_field, batched_idx_range);
 
     batched_foot_finder(feet, adv_field, dt);
 
