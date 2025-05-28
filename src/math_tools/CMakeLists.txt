@@ -9,6 +9,7 @@ target_include_directories("math_tools"
 target_link_libraries("math_tools"
     INTERFACE
         DDC::core
+        gslx::coord_transformations
         gslx::data_types
         gslx::quadrature
 )
