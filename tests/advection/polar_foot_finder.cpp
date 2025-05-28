@@ -125,24 +125,34 @@ using CartBasis = VectorIndexSet<X, Y>;
 
 using CoordXY = Coord<X, Y>;
 using CoordRTheta = Coord<R, Theta>;
-}; // namespace
+
+struct AnalyticalCircular
+{
+    using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
+    using LogicalToPseudoPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
+};
+
+struct AnalyticalCzarny
+{
+    using LogicalToPhysicalMapping = CzarnyToCartesian<R, Theta, X, Y>;
+    using LogicalToPseudoPhysicalMapping = CzarnyToCartesian<R, Theta, X, Y>;
+};
+
+struct PseudoCartCzarny
+{
+    using LogicalToPhysicalMapping = CzarnyToCartesian<R, Theta, X, Y>;
+    using LogicalToPseudoPhysicalMapping = CircularToCartesian<R, Theta, X_pC, Y_pC>;
+};
 
 template <class T>
 struct PolarAdvectionFixture;
 
-template <
-        class TimeStepperBuilderType,
-        class LogicalToPhysicalMappingType,
-        class LogicalToPseudoPhysicalMappingType,
-        class AdvectionFieldType>
-struct PolarAdvectionFixture<std::tuple<
-        TimeStepperBuilderType,
-        LogicalToPhysicalMappingType,
-        LogicalToPseudoPhysicalMappingType,
-        AdvectionFieldType>> : public testing::Test
+template <class TimeStepperBuilderType, class Mappings, class AdvectionFieldType>
+struct PolarAdvectionFixture<std::tuple<TimeStepperBuilderType, Mappings, AdvectionFieldType>>
+    : public testing::Test
 {
-    using LogicalToPhysicalMapping = LogicalToPhysicalMappingType;
-    using LogicalToPseudoPhysicalMapping = LogicalToPseudoPhysicalMappingType;
+    using LogicalToPhysicalMapping = typename Mappings::LogicalToPhysicalMapping;
+    using LogicalToPseudoPhysicalMapping = typename Mappings::LogicalToPseudoPhysicalMapping;
     using X_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
     using Y_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
     using TimeStepperBuilder = TimeStepperBuilderType;
@@ -182,31 +192,11 @@ AdvectionField init_field()
 }
 
 using Cases = ::testing::Types<
-        std::tuple<
-                EulerBuilder,
-                CircularToCartesian<R, Theta, X, Y>,
-                CircularToCartesian<R, Theta, X, Y>,
-                AdvectionField_translation<X, Y>>,
-        std::tuple<
-                EulerBuilder,
-                CircularToCartesian<R, Theta, X, Y>,
-                CircularToCartesian<R, Theta, X, Y>,
-                AdvectionField_rotation<X, Y, R, Theta>>,
-        std::tuple<
-                RK2Builder,
-                CircularToCartesian<R, Theta, X, Y>,
-                CircularToCartesian<R, Theta, X, Y>,
-                AdvectionField_decentred_rotation<X, Y>>,
-        std::tuple<
-                EulerBuilder,
-                CzarnyToCartesian<R, Theta, X, Y>,
-                CzarnyToCartesian<R, Theta, X, Y>,
-                AdvectionField_decentred_rotation<X, Y>>,
-        std::tuple<
-                RK3Builder,
-                CzarnyToCartesian<R, Theta, X, Y>,
-                CircularToCartesian<R, Theta, X_pC, Y_pC>,
-                AdvectionField_translation<X, Y>>>;
+        std::tuple<EulerBuilder, AnalyticalCircular, AdvectionField_translation<X, Y>>,
+        std::tuple<EulerBuilder, AnalyticalCircular, AdvectionField_rotation<X, Y, R, Theta>>,
+        std::tuple<RK2Builder, AnalyticalCircular, AdvectionField_decentred_rotation<X, Y>>,
+        std::tuple<EulerBuilder, AnalyticalCzarny, AdvectionField_decentred_rotation<X, Y>>,
+        std::tuple<RK3Builder, PseudoCartCzarny, AdvectionField_translation<X, Y>>>;
 
 TYPED_TEST_SUITE(PolarAdvectionFixture, Cases);
 
@@ -292,3 +282,5 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
     double TOL = 1e-12;
     EXPECT_NEAR(error, 0.0, TOL);
 }
+
+}; // namespace
