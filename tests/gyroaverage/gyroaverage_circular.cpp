@@ -243,11 +243,13 @@ TEST_P(GyroAverageCircularParamTests, TestPeriodicity)
             Kokkos::DefaultExecutionSpace,
             GridR,
             GridTheta,
-            GridBatch,
+            IdxRangeRThetaBatch,
             BSplinesR,
-            BSplinesTheta>;
-    GyroAverageOperatorType gyroaverage(get_field(this->m_rho_L_alloc));
-    gyroaverage(A, A_bar, CartesianToPolar(), this->m_nb_gyro_points);
+            BSplinesTheta,
+            CartesianToPolar>;
+    GyroAverageOperatorType
+            gyroaverage(get_field(this->m_rho_L_alloc), CartesianToPolar(), this->m_nb_gyro_points);
+    gyroaverage(A, A_bar);
 
     auto h_A_bar_alloc = ddc::create_mirror_and_copy(Kokkos::HostSpace {}, A_bar);
     host_t<DFieldRThetaBatch> h_A_bar = get_field(h_A_bar_alloc);
@@ -275,11 +277,13 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
             Kokkos::DefaultExecutionSpace,
             GridR,
             GridTheta,
-            GridBatch,
+            IdxRangeRThetaBatch,
             BSplinesR,
-            BSplinesTheta>;
-    GyroAverageOperatorType gyroaverage(get_field(this->m_rho_L_alloc));
-    gyroaverage(A, A_bar, CartesianToPolar(), this->m_nb_gyro_points);
+            BSplinesTheta,
+            CartesianToPolar>;
+    GyroAverageOperatorType
+            gyroaverage(get_field(this->m_rho_L_alloc), CartesianToPolar(), this->m_nb_gyro_points);
+    gyroaverage(A, A_bar);
 
     auto h_Rcoord_alloc
             = ddc::create_mirror_and_copy(Kokkos::HostSpace {}, get_field(this->m_Rcoord_alloc));
