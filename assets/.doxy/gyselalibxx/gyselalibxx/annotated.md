@@ -22,6 +22,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**BslImplicitPredCorrRTheta**](classBslImplicitPredCorrRTheta.md) _A second order implicit predictor-corrector for the Vlasov-Poisson equations._     
 * **class** [**BslPredCorrRTheta**](classBslPredCorrRTheta.md) _Predictor-corrector for the Vlasov-Poisson equations._     
 * **class** [**BumpontailEquilibrium**](classBumpontailEquilibrium.md) _A class that initialises the distribution function as a sum of two Maxwellian functions._     
+* **class** [**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md)     
 * **class** [**CartesianToBarycentric**](classCartesianToBarycentric.md) _A class to convert Cartesian coordinates to barycentric coordinates on a triangle._     
 * **class** [**CartesianToCircular**](classCartesianToCircular.md) _A class for describing the circular 2D mapping._     
 * **class** [**CartesianToCylindrical**](classCartesianToCylindrical.md) _A class for describing the cylindrical 3D mapping._     

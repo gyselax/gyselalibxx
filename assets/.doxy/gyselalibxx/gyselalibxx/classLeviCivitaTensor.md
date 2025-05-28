@@ -61,14 +61,14 @@
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_DEFAULTED\_FUNCTION | [**LeviCivitaTensor**](#function-levicivitatensor) () = default<br>_Construct an uninitialised tensor object._  |
+|  KOKKOS\_FUNCTION | [**LeviCivitaTensor**](#function-levicivitatensor) (double jacobian) <br>_Construct an uninitialised tensor object._  |
+|  KOKKOS\_INLINE\_FUNCTION ElementType | [**get**](#function-get) () const<br>_Get an element of the tensor._  |
 
 
 ## Public Static Functions
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr KOKKOS\_FUNCTION ElementType | [**get**](#function-get) () <br>_Get an element of the tensor._  |
 |  KOKKOS\_FUNCTION constexpr std::size\_t | [**rank**](#function-rank) () <br>_The rank of the tensor. This is equivalent to the number of indices required to access an element of the tensor._  |
 |  KOKKOS\_FUNCTION constexpr std::size\_t | [**size**](#function-size) () <br>_The size of the tensor. This is the number of elements in the tensor._  |
 
@@ -100,7 +100,7 @@
 ## Detailed Description
 
 
-A class containing only static constexpr methods which describes the Levi-Civita tensor. 
+A class containing methods which describe the Levi-Civita tensor in general coordinates. 
 
 **Template parameters:**
 
@@ -176,15 +176,15 @@ using LeviCivitaTensor< ElementType, ValidIndexSet >::vector_index_set_t =  Vali
 
 _Construct an uninitialised tensor object._ 
 ```C++
-KOKKOS_DEFAULTED_FUNCTION LeviCivitaTensor::LeviCivitaTensor () = default
+inline explicit KOKKOS_FUNCTION LeviCivitaTensor::LeviCivitaTensor (
+    double jacobian
+) 
 ```
 
 
 
 
 <hr>
-## Public Static Functions Documentation
-
 
 
 
@@ -193,7 +193,7 @@ KOKKOS_DEFAULTED_FUNCTION LeviCivitaTensor::LeviCivitaTensor () = default
 _Get an element of the tensor._ 
 ```C++
 template<class QueryTensorIndexElement>
-static inline constexpr KOKKOS_FUNCTION ElementType LeviCivitaTensor::get () 
+inline KOKKOS_INLINE_FUNCTION ElementType LeviCivitaTensor::get () const
 ```
 
 
@@ -218,6 +218,8 @@ The relevant element of the tensor.
         
 
 <hr>
+## Public Static Functions Documentation
+
 
 
 

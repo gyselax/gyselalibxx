@@ -335,7 +335,7 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
-      <memberdef kind="function" id="classIdentityCoordinateChange_1a2d38162a100101efa0f080bc47ea3a2b" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classIdentityCoordinateChange_1afdfb2dc996572378b66c6e9b0063036e" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class...</type>
@@ -348,8 +348,8 @@
             <defname>ColDims</defname>
           </param>
         </templateparamlist>
-        <type>void</type>
-        <definition>void IdentityCoordinateChange&lt; ArgBasis, ResultBasis &gt;::fill_diagonal_elements</definition>
+        <type>KOKKOS_FUNCTION void</type>
+        <definition>KOKKOS_FUNCTION void IdentityCoordinateChange&lt; ArgBasis, ResultBasis &gt;::fill_diagonal_elements</definition>
         <argsstring>(DTensor&lt; VectorIndexSet&lt; RowDims... &gt;, VectorIndexSet&lt; ColDims... &gt; &gt; &amp;matrix) const</argsstring>
         <name>fill_diagonal_elements</name>
         <qualifiedname>IdentityCoordinateChange::fill_diagonal_elements</qualifiedname>
@@ -363,7 +363,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" line="159" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" bodystart="159" bodyend="163"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" line="159" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/identity_coordinate_change.hpp" bodystart="159" bodyend="163"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -396,7 +396,7 @@
       <member refid="classIdentityCoordinateChange_1af7f3e085c8a6d862d307556182b83f4a" prot="public" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>CoordArg</name></member>
       <member refid="classIdentityCoordinateChange_1a3829a6a283ce80c2c610df6b2988e816" prot="public" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>CoordJacobian</name></member>
       <member refid="classIdentityCoordinateChange_1a71e3c0dc21f0aa02946c5c1cf087efb3" prot="public" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>CoordResult</name></member>
-      <member refid="classIdentityCoordinateChange_1a2d38162a100101efa0f080bc47ea3a2b" prot="private" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>fill_diagonal_elements</name></member>
+      <member refid="classIdentityCoordinateChange_1afdfb2dc996572378b66c6e9b0063036e" prot="private" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>fill_diagonal_elements</name></member>
       <member refid="classIdentityCoordinateChange_1a6a5a7a7cee7431f4550b61e99d6cc48d" prot="public" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>get_inverse_mapping</name></member>
       <member refid="classIdentityCoordinateChange_1a15f89e18a32fec3ddc30de3fab9584f3" prot="public" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>inv_jacobian</name></member>
       <member refid="classIdentityCoordinateChange_1ac2e0cd202f39a69f3b018685f4529240" prot="public" virt="non-virtual"><scope>IdentityCoordinateChange</scope><name>inv_jacobian_component</name></member>

@@ -137,7 +137,7 @@
 <codeline lineno="156"><highlight class="normal"></highlight></codeline>
 <codeline lineno="157"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>RowDims,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ColDims&gt;</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>fill_diagonal_elements(</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>fill_diagonal_elements(</highlight></codeline>
 <codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor</ref>&lt;VectorIndexSet&lt;RowDims...&gt;,<sp/>VectorIndexSet&lt;ColDims...&gt;&gt;&amp;<sp/>matrix)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="161"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((ddcHelper::get&lt;RowDims,<sp/>ColDims&gt;(matrix)<sp/>=<sp/>1.0),<sp/>...);</highlight></codeline>

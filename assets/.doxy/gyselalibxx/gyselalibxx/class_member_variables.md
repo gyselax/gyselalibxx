@@ -169,6 +169,7 @@
 * **m\_right\_bound** ([**Lagrange**](classLagrange.md))
 * **m\_degree** ([**LagrangeInterpolator**](classLagrangeInterpolator.md))
 * **m\_ghost** ([**LagrangeInterpolator**](classLagrangeInterpolator.md))
+* **m\_coeff** ([**LeviCivitaTensor**](classLeviCivitaTensor.md))
 * **m\_grad** ([**LiePoissonBracket**](classLiePoissonBracket.md))
 * **m\_comm\_size** ([**MPITransposeAllToAll**](classMPITransposeAllToAll.md))
 * **m\_layout\_1** ([**MPITransposeAllToAll**](classMPITransposeAllToAll.md))

@@ -549,7 +549,9 @@
 
 #include &lt;Kokkos_Core.hpp&gt;
 
+#include "coord_transformation_tools.hpp"
 #include "indexed_tensor.hpp"
+#include "static_tensors.hpp"
 #include "tensor.hpp"
 #include "vector_field.hpp"
 
@@ -788,6 +790,39 @@ inverse(
                - ddcHelper::get&lt;RowDim1, ColDim2&gt;(arr) * ddcHelper::get&lt;RowDim2, ColDim1&gt;(arr))
               / det;
     return inv;
+}
+
+template &lt;class ElementType, class VectorIndexSetType&gt;
+KOKKOS_INLINE_FUNCTION double scalar_product(
+        Tensor&lt;ElementType, VectorIndexSetType&gt; const&amp; a,
+        Tensor&lt;ElementType, vector_index_set_dual_t&lt;VectorIndexSetType&gt;&gt; const&amp; b)
+{
+    return tensor_mul(index&lt;'i'&gt;(a), index&lt;'i'&gt;(b));
+}
+
+template &lt;class ElementType, class VectorIndexSetType&gt;
+KOKKOS_INLINE_FUNCTION double scalar_product(
+        Tensor&lt;ElementType, VectorIndexSetType, VectorIndexSetType&gt; const&amp; metric,
+        Tensor&lt;ElementType, vector_index_set_dual_t&lt;VectorIndexSetType&gt;&gt; const&amp; a,
+        Tensor&lt;ElementType, vector_index_set_dual_t&lt;VectorIndexSetType&gt;&gt; const&amp; b)
+{
+    return tensor_mul(index&lt;'i'&gt;(a), index&lt;'i', 'j'&gt;(metric), index&lt;'j'&gt;(b));
+}
+
+template &lt;class Mapping, class CoordType, class ElementType, class VectorIndexSetType&gt;
+KOKKOS_INLINE_FUNCTION Tensor&lt;ElementType, vector_index_set_dual_t&lt;VectorIndexSetType&gt;&gt;
+tensor_product(
+        Mapping const&amp; mapping,
+        CoordType const&amp; coord,
+        Tensor&lt;ElementType, VectorIndexSetType&gt; const&amp; a,
+        Tensor&lt;ElementType, VectorIndexSetType&gt; const&amp; b)
+{
+    static_assert(ddc::type_seq_size_v&lt;VectorIndexSetType&gt; == 3);
+    static_assert(is_mapping_v&lt;Mapping&gt;);
+    static_assert(has_jacobian_v&lt;Mapping&gt;);
+    LeviCivitaTensor&lt;ElementType, vector_index_set_dual_t&lt;VectorIndexSetType&gt;&gt; eps(
+            mapping.jacobian(coord));
+    return tensor_mul(index&lt;'i', 'j', 'k'&gt;(eps), index&lt;'j'&gt;(a), index&lt;'k'&gt;(b));
 }
 </code></pre></div>
               

@@ -226,6 +226,15 @@
     <member refid="classBumpontailEquilibrium_1a8c7af3f669150f90350907d721f22314" kind="function"><name>mean_velocity_bot</name></member>
     <member refid="classBumpontailEquilibrium_1aaf1579e93047ccd045a1ccc10ffb1a32" kind="function"><name>init_from_input</name></member>
   </compound>
+  <compound refid="classCartesianLeviCivitaTensor" kind="class"><name>CartesianLeviCivitaTensor</name>
+    <member refid="classCartesianLeviCivitaTensor_1a46108038ed89fc61152be2653c0c41d7" kind="typedef"><name>element_type</name></member>
+    <member refid="classCartesianLeviCivitaTensor_1ae7475b5ff0e11bf3a4328c9ddafe1493" kind="typedef"><name>index_set</name></member>
+    <member refid="classCartesianLeviCivitaTensor_1a80cee0d09c3172393519e8e41c8b6ea1" kind="typedef"><name>vector_index_set_t</name></member>
+    <member refid="classCartesianLeviCivitaTensor_1af7f8f379b022f9c0a966a4530df1fdb7" kind="function"><name>rank</name></member>
+    <member refid="classCartesianLeviCivitaTensor_1ad70c0f0045352fa847b7861dfbdcefc7" kind="function"><name>size</name></member>
+    <member refid="classCartesianLeviCivitaTensor_1a23f31e27b014ef50783740dc3377d6a7" kind="function"><name>get</name></member>
+    <member refid="classCartesianLeviCivitaTensor_1afe409e1296d58dd222a2307757b38574" kind="function"><name>CartesianLeviCivitaTensor</name></member>
+  </compound>
   <compound refid="classCartesianToBarycentric" kind="class"><name>CartesianToBarycentric</name>
     <member refid="classCartesianToBarycentric_1a70561133dc99e67073a2b6079b9fa71d" kind="typedef"><name>CoordResult</name></member>
     <member refid="classCartesianToBarycentric_1add315dc9c3efd0d306bf29b8f17bf03e" kind="typedef"><name>CoordArg</name></member>
@@ -1181,7 +1190,7 @@
     <member refid="classIdentityCoordinateChange_1a8123641d097b9a83c292c23f99dd15c9" kind="function"><name>inv_jacobian_matrix</name></member>
     <member refid="classIdentityCoordinateChange_1ac2e0cd202f39a69f3b018685f4529240" kind="function"><name>inv_jacobian_component</name></member>
     <member refid="classIdentityCoordinateChange_1a6a5a7a7cee7431f4550b61e99d6cc48d" kind="function"><name>get_inverse_mapping</name></member>
-    <member refid="classIdentityCoordinateChange_1a2d38162a100101efa0f080bc47ea3a2b" kind="function"><name>fill_diagonal_elements</name></member>
+    <member refid="classIdentityCoordinateChange_1afdfb2dc996572378b66c6e9b0063036e" kind="function"><name>fill_diagonal_elements</name></member>
   </compound>
   <compound refid="classIdentityTensor" kind="class"><name>IdentityTensor</name>
     <member refid="classIdentityTensor_1a27a7de561c7c5ea7b5789abcfa85810e" kind="typedef"><name>element_type</name></member>
@@ -1648,10 +1657,11 @@
     <member refid="classLeviCivitaTensor_1a75ae281b08da04242aa4b8fe07a61c67" kind="typedef"><name>element_type</name></member>
     <member refid="classLeviCivitaTensor_1ae7830c67e0842b80b8b9566fe83fc7b0" kind="typedef"><name>index_set</name></member>
     <member refid="classLeviCivitaTensor_1a0e1c1e6577d4c49cceaf6f338361084f" kind="typedef"><name>vector_index_set_t</name></member>
+    <member refid="classLeviCivitaTensor_1ac964d2254ea09312b9aa0498e24b46b2" kind="variable"><name>m_coeff</name></member>
     <member refid="classLeviCivitaTensor_1a861d4050938002b7643f5d106da33054" kind="function"><name>rank</name></member>
     <member refid="classLeviCivitaTensor_1a9d2c687cdde551ff289df0020e0d5dc7" kind="function"><name>size</name></member>
-    <member refid="classLeviCivitaTensor_1a9f9c8c9bbbbe3356be9837195a510b43" kind="function"><name>get</name></member>
-    <member refid="classLeviCivitaTensor_1afdc799fa85d9418c2b5490feb24f948e" kind="function"><name>LeviCivitaTensor</name></member>
+    <member refid="classLeviCivitaTensor_1a21bb487458fcecb9331f6a877e7a3f70" kind="function"><name>LeviCivitaTensor</name></member>
+    <member refid="classLeviCivitaTensor_1a673eb02fe7eb428a85eaf0233ab2c4a2" kind="function"><name>get</name></member>
   </compound>
   <compound refid="classLiePoissonBracket" kind="class"><name>LiePoissonBracket</name>
     <member refid="classLiePoissonBracket_1ad4f13fd2924cd042582abb251b766055" kind="typedef"><name>BasisSpatial</name></member>
@@ -2966,6 +2976,7 @@
     <member refid="derivative__field_8hpp_1a9a2d3927b6e69a7dee15d2d617bf6655" kind="function"><name>deepcopy</name></member>
     <member refid="derivative__field_8hpp_1ada5630e0ff2c91e9524e0c32aaa8ad77" kind="function"><name>deepcopy</name></member>
     <member refid="static__tensors_8hpp_1ad0fdb229d43d6ace239e79e446a2c9db" kind="function"><name>get</name></member>
+    <member refid="static__tensors_8hpp_1aa53e82e4fe8ae67bc807a35a0c8dbf06" kind="function"><name>get</name></member>
     <member refid="static__tensors_8hpp_1a1991befd522c601fffc2248514baa52d" kind="function"><name>get</name></member>
     <member refid="tensor__common_8hpp_1aaf4377a1b44ab11de52a968fd43821e0" kind="function"><name>get</name></member>
     <member refid="tensor__common_8hpp_1af27e89e895316fa48d3702f1ae445bf4" kind="function"><name>get</name></member>
@@ -3870,6 +3881,9 @@
     <member refid="math__tools_8hpp_1a2deb990134f24f0c77ece7175c26ff5d" kind="function"><name>determinant</name></member>
     <member refid="math__tools_8hpp_1a9de28c918be129163f42d4ad149ae3ae" kind="function"><name>inverse</name></member>
     <member refid="math__tools_8hpp_1a172c1d036e64e6ab1cc7492799011b97" kind="function"><name>inverse</name></member>
+    <member refid="math__tools_8hpp_1a4b94584345d8207149d6605394979122" kind="function"><name>scalar_product</name></member>
+    <member refid="math__tools_8hpp_1a094865009892a55b1c1221dbbb818a66" kind="function"><name>scalar_product</name></member>
+    <member refid="math__tools_8hpp_1a390eb9ac6774591ccf0ec39facd40c25" kind="function"><name>tensor_product</name></member>
   </compound>
   <compound refid="spline__1d__partial__derivative_8hpp" kind="file"><name>spline_1d_partial_derivative.hpp</name>
   </compound>

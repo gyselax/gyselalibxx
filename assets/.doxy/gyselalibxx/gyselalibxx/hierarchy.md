@@ -21,6 +21,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **class** [**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md) _Equilibrium operator as Maxwellian. This initialises all species._ 
     * **class** [**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md) _Equilibrium operator as Maxwellian. This initialises all species._ 
     * **class** [**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md) _Equilibrium operator as Maxwellian. This initialises all species._ 
+* **class** [**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md) 
 * **class** [**CartesianToBarycentric**](classCartesianToBarycentric.md) _A class to convert Cartesian coordinates to barycentric coordinates on a triangle._ 
 * **class** [**CartesianToCircular**](classCartesianToCircular.md) _A class for describing the circular 2D mapping._ 
 * **class** [**CartesianToCylindrical**](classCartesianToCylindrical.md) _A class for describing the cylindrical 3D mapping._ 

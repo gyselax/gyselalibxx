@@ -577,16 +577,16 @@ public:
             DTensor&lt;BasisSpatial&gt; const&amp; B,
             MappingCoord const&amp; coord) const
     {
-        LeviCivitaTensor&lt;double, BasisSpatial&gt; eps;
+        double J = m_mapping.jacobian(coord);
+        LeviCivitaTensor&lt;double, BasisSpatial&gt; eps(J);
         DTensor&lt;CovBasisSpatial, CovBasisSpatial&gt; metric_tensor = m_metric_tensor(coord);
         double B_norm = norm(metric_tensor, B);
         return tensor_mul(
-                       index&lt;'i', 'j', 'k'&gt;(eps),
-                       index&lt;'i', 'l'&gt;(metric_tensor),
-                       index&lt;'l'&gt;(B / B_norm),
-                       index&lt;'j'&gt;(partial_derivatives_f),
-                       index&lt;'k'&gt;(partial_derivatives_g))
-               / m_mapping.jacobian(coord);
+                index&lt;'i', 'j', 'k'&gt;(eps),
+                index&lt;'i', 'l'&gt;(metric_tensor),
+                index&lt;'l'&gt;(B / B_norm),
+                index&lt;'j'&gt;(partial_derivatives_f),
+                index&lt;'k'&gt;(partial_derivatives_g));
     }
 
     template &lt;class ExecSpace, class IdxRange, class MemorySpace&gt;

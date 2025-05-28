@@ -137,6 +137,7 @@
 
 ## s
 
+* **scalar\_product** ([**math\_tools.hpp**](math__tools_8hpp.md))
 * **sum** ([**math\_tools.hpp**](math__tools_8hpp.md))
 * **save\_logger** ([**matrix\_utils.hpp**](matrix__utils_8hpp.md))
 * **simpson\_quadrature\_coefficients** ([**simpson\_quadrature.hpp**](simpson__quadrature_8hpp.md))
@@ -150,6 +151,7 @@
 
 * **to\_vector\_space** ([**vector\_mapper.hpp**](vector__mapper_8hpp.md))
 * **tensor\_mul** ([**indexed\_tensor.hpp**](indexed__tensor_8hpp.md))
+* **tensor\_product** ([**math\_tools.hpp**](math__tools_8hpp.md))
 * **to\_gko\_multivector** ([**matrix\_utils.hpp**](matrix__utils_8hpp.md))
 * **trapezoid\_quadrature\_coefficients** ([**trapezoid\_quadrature.hpp**](trapezoid__quadrature_8hpp.md))
 * **trapezoid\_quadrature\_coefficients\_1d** ([**trapezoid\_quadrature.hpp**](trapezoid__quadrature_8hpp.md))

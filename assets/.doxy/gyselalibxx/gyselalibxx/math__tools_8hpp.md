@@ -14,7 +14,9 @@
 * `#include <cmath>`
 * `#include <ddc/ddc.hpp>`
 * `#include <Kokkos_Core.hpp>`
+* `#include "coord_transformation_tools.hpp"`
 * `#include "indexed_tensor.hpp"`
+* `#include "static_tensors.hpp"`
 * `#include "tensor.hpp"`
 * `#include "vector_field.hpp"`
 
@@ -70,9 +72,12 @@
 |  [**T**](structT.md) | [**modulo**](#function-modulo) ([**T**](structT.md) x, [**T**](structT.md) y) <br> |
 |  KOKKOS\_INLINE\_FUNCTION ElementType | [**norm**](#function-norm) ([**Tensor**](classTensor.md)&lt; ElementType, VectorIndexSetType, VectorIndexSetType &gt; const & metric, [**Tensor**](classTensor.md)&lt; ElementType, vector\_index\_set\_dual\_t&lt; VectorIndexSetType &gt; &gt; const & vec) <br> |
 |  void | [**norm**](#function-norm) (ExecSpace exec\_space, DField&lt; IdxRangeType, typename ExecSpace::memory\_space &gt; norm\_vals, [**MetricTensorEvaluator**](classMetricTensorEvaluator.md) const & get\_metric, [**DVectorConstField**](classVectorField.md)&lt; IdxRangeType, VectorIndexSetType, typename ExecSpace::memory\_space &gt; vals) <br> |
+|  KOKKOS\_INLINE\_FUNCTION double | [**scalar\_product**](#function-scalar_product) ([**Tensor**](classTensor.md)&lt; ElementType, VectorIndexSetType &gt; const & a, [**Tensor**](classTensor.md)&lt; ElementType, vector\_index\_set\_dual\_t&lt; VectorIndexSetType &gt; &gt; const & b) <br> |
+|  KOKKOS\_INLINE\_FUNCTION double | [**scalar\_product**](#function-scalar_product) ([**Tensor**](classTensor.md)&lt; ElementType, VectorIndexSetType, VectorIndexSetType &gt; const & metric, [**Tensor**](classTensor.md)&lt; ElementType, vector\_index\_set\_dual\_t&lt; VectorIndexSetType &gt; &gt; const & a, [**Tensor**](classTensor.md)&lt; ElementType, vector\_index\_set\_dual\_t&lt; VectorIndexSetType &gt; &gt; const & b) <br> |
 |  KOKKOS\_INLINE\_FUNCTION [**T**](structT.md) | [**sum**](#function-sum) (const [**T**](structT.md) \* array, int size) <br> |
 |  KOKKOS\_INLINE\_FUNCTION ElementType | [**sum**](#function-sum) (Kokkos::mdspan&lt; ElementType, Kokkos::extents&lt; std::size\_t, Ext &gt;, LayoutPolicy, AccessorPolicy &gt; const & array) <br> |
 |  KOKKOS\_INLINE\_FUNCTION ElementType | [**sum**](#function-sum) (Kokkos::mdspan&lt; ElementType, Kokkos::extents&lt; std::size\_t, Ext &gt;, LayoutPolicy, AccessorPolicy &gt; const & array, int start, int end) <br> |
+|  KOKKOS\_INLINE\_FUNCTION [**Tensor**](classTensor.md)&lt; ElementType, vector\_index\_set\_dual\_t&lt; VectorIndexSetType &gt; &gt; | [**tensor\_product**](#function-tensor_product) (Mapping const & mapping, CoordType const & coord, [**Tensor**](classTensor.md)&lt; ElementType, VectorIndexSetType &gt; const & a, [**Tensor**](classTensor.md)&lt; ElementType, VectorIndexSetType &gt; const & b) <br> |
 
 
 
@@ -304,6 +309,41 @@ void norm (
 
 
 
+### function scalar\_product 
+
+```C++
+template<class ElementType, class VectorIndexSetType>
+KOKKOS_INLINE_FUNCTION double scalar_product (
+    Tensor < ElementType, VectorIndexSetType > const & a,
+    Tensor < ElementType, vector_index_set_dual_t< VectorIndexSetType > > const & b
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function scalar\_product 
+
+```C++
+template<class ElementType, class VectorIndexSetType>
+KOKKOS_INLINE_FUNCTION double scalar_product (
+    Tensor < ElementType, VectorIndexSetType, VectorIndexSetType > const & metric,
+    Tensor < ElementType, vector_index_set_dual_t< VectorIndexSetType > > const & a,
+    Tensor < ElementType, vector_index_set_dual_t< VectorIndexSetType > > const & b
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function sum 
 
 ```C++
@@ -345,6 +385,25 @@ KOKKOS_INLINE_FUNCTION ElementType sum (
     Kokkos::mdspan< ElementType, Kokkos::extents< std::size_t, Ext >, LayoutPolicy, AccessorPolicy > const & array,
     int start,
     int end
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function tensor\_product 
+
+```C++
+template<class Mapping, class CoordType, class ElementType, class VectorIndexSetType>
+KOKKOS_INLINE_FUNCTION Tensor < ElementType, vector_index_set_dual_t< VectorIndexSetType > > tensor_product (
+    Mapping const & mapping,
+    CoordType const & coord,
+    Tensor < ElementType, VectorIndexSetType > const & a,
+    Tensor < ElementType, VectorIndexSetType > const & b
 ) 
 ```
 

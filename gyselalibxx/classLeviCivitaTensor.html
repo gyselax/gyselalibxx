@@ -576,8 +576,12 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION</td>
-<td style="text-align: left;"><a href="#function-levicivitatensor"><strong>LeviCivitaTensor</strong></a> () = default<br><em>Construct an uninitialised tensor object.</em></td>
+<td style="text-align: right;">KOKKOS_FUNCTION</td>
+<td style="text-align: left;"><a href="#function-levicivitatensor"><strong>LeviCivitaTensor</strong></a> (double jacobian) <br><em>Construct an uninitialised tensor object.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION ElementType</td>
+<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> () const<br><em>Get an element of the tensor.</em></td>
 </tr>
 </tbody>
 </table>
@@ -591,10 +595,6 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">constexpr KOKKOS_FUNCTION ElementType</td>
-<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> () <br><em>Get an element of the tensor.</em></td>
-</tr>
-<tr>
 <td style="text-align: right;">KOKKOS_FUNCTION constexpr std::size_t</td>
 <td style="text-align: left;"><a href="#function-rank"><strong>rank</strong></a> () <br><em>The rank of the tensor. This is equivalent to the number of indices required to access an element of the tensor.</em></td>
 </tr>
@@ -605,7 +605,7 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>A class containing only static constexpr methods which describes the Levi-Civita tensor. </p>
+<p>A class containing methods which describe the Levi-Civita tensor in general coordinates. </p>
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>ElementType</code> The type of the elements of the tensor (usually double/complex). </li>
@@ -636,14 +636,16 @@
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-levicivitatensor">function LeviCivitaTensor</h3>
 <p><em>Construct an uninitialised tensor object.</em> </p>
-<pre><code class="language-C++">KOKKOS_DEFAULTED_FUNCTION LeviCivitaTensor::LeviCivitaTensor () = default
+<pre><code class="language-C++">inline explicit KOKKOS_FUNCTION LeviCivitaTensor::LeviCivitaTensor (
+    double jacobian
+) 
 </code></pre>
 <hr>
-<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
+
 <h3 id="function-get">function get</h3>
 <p><em>Get an element of the tensor.</em> </p>
 <pre><code class="language-C++">template&lt;class QueryTensorIndexElement&gt;
-static inline constexpr KOKKOS_FUNCTION ElementType LeviCivitaTensor::get () 
+inline KOKKOS_INLINE_FUNCTION ElementType LeviCivitaTensor::get () const
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
@@ -652,7 +654,7 @@ static inline constexpr KOKKOS_FUNCTION ElementType LeviCivitaTensor::get ()
 <p><strong>Returns:</strong></p>
 <p>The relevant element of the tensor. </p>
 <hr>
-
+<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
 <h3 id="function-rank">function rank</h3>
 <p><em>The rank of the tensor. This is equivalent to the number of indices required to access an element of the tensor.</em> </p>
 <pre><code class="language-C++">static inline KOKKOS_FUNCTION constexpr std::size_t LeviCivitaTensor::rank () 

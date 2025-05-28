@@ -44,6 +44,7 @@
 * **compute\_advection\_field\_XY** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md))
 * **compute\_square\_polar\_distance** ([**BslImplicitPredCorrRTheta**](classBslImplicitPredCorrRTheta.md))
 * **compute\_twomaxwellian** ([**BumpontailEquilibrium**](classBumpontailEquilibrium.md))
+* **CartesianLeviCivitaTensor** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md))
 * **CartesianToBarycentric** ([**CartesianToBarycentric**](classCartesianToBarycentric.md))
 * **CartesianToCircular** ([**CartesianToCircular**](classCartesianToCircular.md))
 * **CartesianToCylindrical** ([**CartesianToCylindrical**](classCartesianToCylindrical.md))
@@ -154,12 +155,12 @@
 ## g
 
 * **get\_inverse\_mapping** ([**BarycentricToCartesian**](classBarycentricToCartesian.md), [**CartesianToBarycentric**](classCartesianToBarycentric.md), [**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**IdentityCoordinateChange**](classIdentityCoordinateChange.md))
+* **get** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**CombinedMapping**](classCombinedMapping.md), [**IdentityTensor**](classIdentityTensor.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**MatchingIdxSlice**](classMatchingIdxSlice.md), [**MultipatchField**](classMultipatchField.md), [**MultipatchFieldMem**](classMultipatchFieldMem.md), [**MultipatchType**](classMultipatchType.md), [**TensorCommon**](classTensorCommon.md), [**VectorField**](classVectorField.md), [**VectorFieldMem**](classVectorFieldMem.md))
 * **get\_derivative** ([**CollisionsInter**](classCollisionsInter.md), [**KrookSourceAdaptive**](classKrookSourceAdaptive.md))
 * **get\_nustar0** ([**CollisionsInter**](classCollisionsInter.md), [**CollisionsIntra**](classCollisionsIntra.md))
 * **get\_gridvx\_ghosted** ([**CollisionsIntra**](classCollisionsIntra.md))
 * **get\_gridvx\_ghosted\_staggered** ([**CollisionsIntra**](classCollisionsIntra.md))
 * **get\_mesh\_ghosted** ([**CollisionsIntra**](classCollisionsIntra.md))
-* **get** ([**CombinedMapping**](classCombinedMapping.md), [**IdentityTensor**](classIdentityTensor.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**MatchingIdxSlice**](classMatchingIdxSlice.md), [**MultipatchField**](classMultipatchField.md), [**MultipatchFieldMem**](classMultipatchFieldMem.md), [**MultipatchType**](classMultipatchType.md), [**TensorCommon**](classTensorCommon.md), [**VectorField**](classVectorField.md), [**VectorFieldMem**](classVectorFieldMem.md))
 * **get\_chunk\_subidx\_range\_1d\_idx** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md))
 * **get\_chunk\_subidx\_range\_idx** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md))
 * **get\_kokkos\_view\_from\_internal\_chunk** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md))
@@ -365,7 +366,7 @@
 
 ## r
 
-* **rank** ([**IdentityTensor**](classIdentityTensor.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**TensorCommon**](classTensorCommon.md), [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md))
+* **rank** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**IdentityTensor**](classIdentityTensor.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**TensorCommon**](classTensorCommon.md), [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md))
 * **recursive\_dispatch\_patch\_function** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **replace\_periodic\_coord\_inside** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **RK2** ([**RK2**](classRK2.md))
@@ -377,13 +378,13 @@
 
 ## s
 
+* **size** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**IdentityTensor**](classIdentityTensor.md), [**IdxRangeSlice**](classIdxRangeSlice.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**MatrixBatch**](classMatrixBatch.md), [**MultipatchType**](classMultipatchType.md), [**TensorCommon**](classTensorCommon.md))
 * **span\_cview** ([**ConstPolarSpline**](structConstPolarSpline.md), [**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md), [**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md), [**MultipatchField**](classMultipatchField.md), [**MultipatchFieldMem**](classMultipatchFieldMem.md), [**PolarSpline**](structPolarSpline.md), [**PolarSplineMem**](structPolarSplineMem.md), [**VectorField**](classVectorField.md), [**VectorFieldMem**](classVectorFieldMem.md))
 * **span\_view** ([**ConstPolarSpline**](structConstPolarSpline.md), [**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md), [**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md), [**MultipatchField**](classMultipatchField.md), [**MultipatchFieldMem**](classMultipatchFieldMem.md), [**PolarSpline**](structPolarSpline.md), [**PolarSplineMem**](structPolarSplineMem.md), [**VectorField**](classVectorField.md), [**VectorFieldMem**](classVectorFieldMem.md))
 * **set\_curvilinear\_to\_cartesian\_values** ([**DiscreteToCartesianBuilder**](classDiscreteToCartesianBuilder.md), [**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md))
 * **search\_for\_match** ([**EdgeTransformation**](classEdgeTransformation.md))
 * **solve\_matrix\_system** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **solve\_poisson\_equation** ([**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md))
-* **size** ([**IdentityTensor**](classIdentityTensor.md), [**IdxRangeSlice**](classIdxRangeSlice.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**MatrixBatch**](classMatrixBatch.md), [**MultipatchType**](classMultipatchType.md), [**TensorCommon**](classTensorCommon.md))
 * **stride** ([**IdxRangeSlice**](classIdxRangeSlice.md))
 * **strides** ([**IdxRangeSlice**](classIdxRangeSlice.md))
 * **set\_element** ([**Matrix**](classMatrix.md), [**Matrix\_Banded**](classMatrix__Banded.md), [**Matrix\_Centre\_Block**](classMatrix__Centre__Block.md), [**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md), [**Matrix\_Dense**](classMatrix__Dense.md), [**Matrix\_PDS\_Tridiag**](classMatrix__PDS__Tridiag.md), [**Matrix\_Periodic\_Banded**](classMatrix__Periodic__Banded.md))

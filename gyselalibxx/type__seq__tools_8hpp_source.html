@@ -658,21 +658,23 @@ struct GetPermutationParity&lt;
         ddc::detail::TypeSeq&lt;HeadType, TailTypeSeq...&gt;,
         ddc::detail::TypeSeq&lt;HeadType, TailOrderedTypeSeq...&gt;&gt;
 {
-    static_assert(
-            std::is_same_v&lt;
-                    ddc::detail::TypeSeq&lt;HeadType, TailOrderedTypeSeq...&gt;,
-                    typename detail::GetUnique&lt;
-                            ddc::detail::TypeSeq&lt;HeadType, TailOrderedTypeSeq...&gt;&gt;::type&gt;,
-            "Cannot calculate the permutation parity of a type seq with duplicate elements.");
-    static_assert(
-            std::is_same_v&lt;
-                    ddc::detail::TypeSeq&lt;HeadType, TailTypeSeq...&gt;,
-                    typename detail::GetUnique&lt;
-                            ddc::detail::TypeSeq&lt;HeadType, TailTypeSeq...&gt;&gt;::type&gt;,
-            "Cannot calculate the permutation parity of a type seq with duplicate elements.");
-    static constexpr int value = GetPermutationParity&lt;
-            ddc::detail::TypeSeq&lt;TailTypeSeq...&gt;,
-            ddc::detail::TypeSeq&lt;TailOrderedTypeSeq...&gt;&gt;::value;
+private:
+    static constexpr bool contains_duplicate
+            = (!std::is_same_v&lt;
+                      ddc::detail::TypeSeq&lt;HeadType, TailOrderedTypeSeq...&gt;,
+                      typename detail::GetUnique&lt;
+                              ddc::detail::TypeSeq&lt;HeadType, TailOrderedTypeSeq...&gt;&gt;::type&gt;)
+              || (!std::is_same_v&lt;
+                      ddc::detail::TypeSeq&lt;HeadType, TailTypeSeq...&gt;,
+                      typename detail::GetUnique&lt;
+                              ddc::detail::TypeSeq&lt;HeadType, TailTypeSeq...&gt;&gt;::type&gt;);
+
+public:
+    static constexpr int value
+            = contains_duplicate ? 0
+                                 : GetPermutationParity&lt;
+                                         ddc::detail::TypeSeq&lt;TailTypeSeq...&gt;,
+                                         ddc::detail::TypeSeq&lt;TailOrderedTypeSeq...&gt;&gt;::value;
 };
 
 template &lt;class HeadType, class... TailTypeSeq, class OrderedHeadType, class... TailOrderedTypeSeq&gt;
@@ -680,24 +682,26 @@ struct GetPermutationParity&lt;
         ddc::detail::TypeSeq&lt;HeadType, TailTypeSeq...&gt;,
         ddc::detail::TypeSeq&lt;OrderedHeadType, TailOrderedTypeSeq...&gt;&gt;
 {
-    static_assert(
-            std::is_same_v&lt;
-                    ddc::detail::TypeSeq&lt;OrderedHeadType, TailOrderedTypeSeq...&gt;,
-                    typename detail::GetUnique&lt;
-                            ddc::detail::TypeSeq&lt;OrderedHeadType, TailOrderedTypeSeq...&gt;&gt;::type&gt;,
-            "Cannot calculate the permutation parity of a type seq with duplicate elements.");
-    static_assert(
-            std::is_same_v&lt;
-                    ddc::detail::TypeSeq&lt;HeadType, TailTypeSeq...&gt;,
-                    typename detail::GetUnique&lt;
-                            ddc::detail::TypeSeq&lt;HeadType, TailTypeSeq...&gt;&gt;::type&gt;,
-            "Cannot calculate the permutation parity of a type seq with duplicate elements.");
-    static constexpr int value = -GetPermutationParity&lt;
-            ddc::type_seq_replace_t&lt;
-                    ddc::detail::TypeSeq&lt;TailTypeSeq...&gt;,
-                    ddc::detail::TypeSeq&lt;OrderedHeadType&gt;,
-                    ddc::detail::TypeSeq&lt;HeadType&gt;&gt;,
-            ddc::detail::TypeSeq&lt;TailOrderedTypeSeq...&gt;&gt;::value;
+private:
+    static constexpr bool contains_duplicate
+            = (!std::is_same_v&lt;
+                      ddc::detail::TypeSeq&lt;OrderedHeadType, TailOrderedTypeSeq...&gt;,
+                      typename detail::GetUnique&lt;
+                              ddc::detail::TypeSeq&lt;OrderedHeadType, TailOrderedTypeSeq...&gt;&gt;::type&gt;)
+              || (!std::is_same_v&lt;
+                      ddc::detail::TypeSeq&lt;HeadType, TailTypeSeq...&gt;,
+                      typename detail::GetUnique&lt;
+                              ddc::detail::TypeSeq&lt;HeadType, TailTypeSeq...&gt;&gt;::type&gt;);
+
+public:
+    static constexpr int value
+            = contains_duplicate ? 0
+                                 : -GetPermutationParity&lt;
+                                         ddc::type_seq_replace_t&lt;
+                                                 ddc::detail::TypeSeq&lt;TailTypeSeq...&gt;,
+                                                 ddc::detail::TypeSeq&lt;OrderedHeadType&gt;,
+                                                 ddc::detail::TypeSeq&lt;HeadType&gt;&gt;,
+                                         ddc::detail::TypeSeq&lt;TailOrderedTypeSeq...&gt;&gt;::value;
 };
 
 template &lt;&gt;
