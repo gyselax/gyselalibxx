@@ -84,13 +84,13 @@ class SplinePolarFootFinder
             "This class is designed to work with a spline builder which does not require "
             "additional information at the boundaries (e.g. Hermite boundary conditions require "
             "information about the derivatives and therefore will not work with this class. Please "
-            "check the choice of boundary conditions.");
+            "check the choice of boundary conditions).");
     static_assert(
             SplineRThetaBuilderAdvection::builder_type1::s_nbc_xmax == 0,
             "This class is designed to work with a spline builder which does not require "
             "additional information at the boundaries (e.g. Hermite boundary conditions require "
             "information about the derivatives and therefore will not work with this class. Please "
-            "check the choice of boundary conditions.");
+            "check the choice of boundary conditions).");
     static_assert(
             SplineRThetaBuilderAdvection::builder_type1::s_bc_xmin != ddc::BoundCond::PERIODIC,
             "Periodic boundary conditions in the radial direction are nonsensical.");
