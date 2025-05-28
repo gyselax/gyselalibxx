@@ -19,43 +19,41 @@ namespace detail {
  * The operation is performed in parallel over the (r, theta) grid.
  *
  * @tparam ExecutionSpace      The Kokkos execution space.
- * @tparam GridR               The radial grid type.
+ * @tparam GridRminor          The radial grid type.
  * @tparam GridTheta           The poloidal angle grid type.
- * @tparam GridBatch           The batch grid type (for batched operations).
- * @tparam BSplinesR           The B-spline basis for the radial direction.
+ * @tparam IdxRangeRminorThetaBatch The index range over R, Theta and Batch directions.
+ * @tparam BSplinesRminor      The B-spline basis for the radial direction.
  * @tparam BSplinesTheta       The B-spline basis for the theta direction.
+ * @tparam CoordinateTransformFunction The Coordinate transform Functor.
  */
 template <
         class ExecutionSpace,
-        class GridR,
+        class GridRminor,
         class GridTheta,
-        class GridBatch,
-        class BSplinesR,
-        class BSplinesTheta>
+        class IdxRangeRminorThetaBatch,
+        class BSplinesRminor,
+        class BSplinesTheta,
+        class CoordinateTransformFunction>
 class GyroAverageOperator
 {
     /**
      * @brief R grid.
      */
-    using GridRType = GridR;
+    using GridRminorType = GridRminor;
     /**
      * @brief Theta grid.
      */
     using GridThetaType = GridTheta;
-    /**
-     * @brief Batch grid.
-     */
-    using GridBatchType = GridBatch;
 
-    using DimensionRType = typename GridRType::continuous_dimension_type;
+    using DimensionRminorType = typename GridRminorType::continuous_dimension_type;
     using DimensionThetaType = typename GridThetaType::continuous_dimension_type;
 
     using SplineRThetaBuilder = ddc::SplineBuilder2D<
             ExecutionSpace,
             typename ExecutionSpace::memory_space,
-            BSplinesR,
+            BSplinesRminor,
             BSplinesTheta,
-            GridR,
+            GridRminor,
             GridTheta,
             ddc::BoundCond::GREVILLE, // boundary at r=0
             ddc::BoundCond::GREVILLE, // boundary at rmax
@@ -66,9 +64,9 @@ class GyroAverageOperator
     using SplineRThetaEvaluatorNullBound = ddc::SplineEvaluator2D<
             ExecutionSpace,
             typename ExecutionSpace::memory_space,
-            BSplinesR,
+            BSplinesRminor,
             BSplinesTheta,
-            GridR,
+            GridRminor,
             GridTheta,
             ddc::NullExtrapolationRule, // boundary at r=0
             ddc::NullExtrapolationRule, // boundary at rmax
@@ -76,41 +74,60 @@ class GyroAverageOperator
             ddc::PeriodicExtrapolationRule<DimensionThetaType>>;
 
 public:
-    using IdxRangeR = IdxRange<GridR>;
+    using IdxRangeRminor = IdxRange<GridRminor>;
     using IdxRangeTheta = IdxRange<GridTheta>;
-    using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
-    using IdxRangeRThetaBatch = IdxRange<GridR, GridTheta, GridBatch>;
-    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeRThetaBatch, GridR, GridTheta>;
-    using IdxRangeBSRTheta = IdxRange<BSplinesR, BSplinesTheta>;
+    using IdxRangeRminorTheta = IdxRange<GridRminor, GridTheta>;
+    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeRminorThetaBatch, GridRminor, GridTheta>;
+    using IdxRangeBSRminorTheta = IdxRange<BSplinesRminor, BSplinesTheta>;
 
-    using IdxR = Idx<GridR>;
+    using IdxRminor = Idx<GridRminor>;
     using IdxTheta = Idx<GridTheta>;
     using IdxBatch = typename IdxRangeBatch::discrete_element_type;
-    using IdxRTheta = Idx<GridR, GridTheta>;
+    using IdxRminorTheta = Idx<GridRminor, GridTheta>;
 
-    using DFieldMemRTheta = DFieldMem<IdxRangeRTheta>;
-    using DFieldMemRThetaBatch = DFieldMem<IdxRangeRThetaBatch>;
-    using DFieldMemBSRTheta = DFieldMem<IdxRangeBSRTheta>;
-    using DFieldRTheta = DField<IdxRangeRTheta>;
-    using DFieldRThetaBatch = DField<IdxRangeRThetaBatch>;
-    using DFieldBSRTheta = DField<IdxRangeBSRTheta>;
-    using DConstFieldRTheta = ConstField<double, IdxRangeRTheta>;
-    using DConstFieldRThetaBatch = ConstField<double, IdxRangeRThetaBatch>;
+    using DFieldMemRminorTheta = DFieldMem<IdxRangeRminorTheta>;
+    using DFieldMemRminorThetaBatch = DFieldMem<IdxRangeRminorThetaBatch>;
+    using DFieldMemBSRminorTheta = DFieldMem<IdxRangeBSRminorTheta>;
+    using DFieldRminorTheta = DField<IdxRangeRminorTheta>;
+    using DFieldRminorThetaBatch = DField<IdxRangeRminorThetaBatch>;
+    using DFieldBSRminorTheta = DField<IdxRangeBSRminorTheta>;
+    using DConstFieldRminorTheta = ConstField<double, IdxRangeRminorTheta>;
+    using DConstFieldRminorThetaBatch = ConstField<double, IdxRangeRminorThetaBatch>;
 
-    using CoordRTheta = ddc::Coordinate<DimensionRType, DimensionThetaType>;
+    using CoordRminorTheta = ddc::Coordinate<DimensionRminorType, DimensionThetaType>;
 
 private:
     /**
      * @brief Field of local Larmor radii (rho_L) on the (r, theta) grid.
      */
-    DFieldRTheta m_rho_L;
+    DFieldRminorTheta m_rho_L;
+
+    /**
+     * @brief Number of points to use in the gyroaverage integration (default: 8)
+     */
+    std::size_t const m_nb_gyro_points;
+
+    /**
+     * @brief coordinate_transform Function to convert (R, Z) to (r, theta).
+     */
+    CoordinateTransformFunction m_coordinate_transform;
 
 public:
     /**
      * @brief Constructor.
      * @param[in] rho_L Field of Larmor radii on the (r, theta) grid.
+     * @param[in] coordinate_transform Function to convert (R, Z) to (r, theta).
+     * @param[in] nb_gyro_points Number of points to use in the gyroaverage integration (default: 8).
      */
-    explicit GyroAverageOperator(DFieldRTheta const& rho_L) : m_rho_L(rho_L) {}
+    explicit GyroAverageOperator(
+            DFieldRminorTheta const& rho_L,
+            CoordinateTransformFunction coordinate_transform,
+            std::size_t const nb_gyro_points = 8)
+        : m_rho_L(rho_L)
+        , m_coordinate_transform(coordinate_transform)
+        , m_nb_gyro_points(nb_gyro_points)
+    {
+    }
 
     /**
      * @brief Applies the gyroaverage operator to a batched field.
@@ -124,22 +141,16 @@ public:
      * @param[in] A Input field to be gyroaveraged (batched).
      * @param[out] A_bar Output field to store the gyroaveraged result (batched).
      * @param[in] coordinate_transform Function to convert (R, Z) to (r, theta).
-     * @param[in] nb_gyro_points Number of points to use in the gyroaverage integration (default: 8).
      */
-    template <class CoordinateTransformFunction>
-    void operator()(
-            DConstFieldRThetaBatch const& A,
-            DFieldRThetaBatch const& A_bar,
-            CoordinateTransformFunction coordinate_transform,
-            std::size_t nb_gyro_points = 8) const
+    void operator()(DConstFieldRminorThetaBatch const& A, DFieldRminorThetaBatch const& A_bar) const
     {
         static_assert(
                 std::is_invocable_v<CoordinateTransformFunction, double, double>,
                 "CoordinateTransformFunction must be a functor on (double, double)");
-        IdxRangeR const r_domain = get_idx_range<GridR>(A);
+        IdxRangeRminor const r_domain = get_idx_range<GridRminor>(A);
         IdxRangeTheta const theta_domain = get_idx_range<GridTheta>(A);
-        IdxRangeBatch const batch_domain = get_idx_range<GridBatch>(A);
-        IdxRangeRTheta const rtheta_mesh = get_idx_range<GridR, GridTheta>(A);
+        IdxRangeBatch const batch_domain(get_idx_range(A));
+        IdxRangeRminorTheta const rtheta_mesh = get_idx_range<GridRminor, GridTheta>(A);
 
         ddc::NullExtrapolationRule r_extrapolation_rule;
         ddc::PeriodicExtrapolationRule<DimensionThetaType> theta_extrapolation_rule;
@@ -152,19 +163,19 @@ public:
                 theta_extrapolation_rule);
 
         // Instantiate chunk of spline coefs to receive output of spline_builder (r, theta)
-        DFieldMemBSRTheta coef_alloc(
+        DFieldMemBSRminorTheta coef_alloc(
                 spline_builder.batched_spline_domain(rtheta_mesh),
                 ddc::DeviceAllocator<double>());
-        DFieldBSRTheta const coef = get_field(coef_alloc);
-        DConstFieldRTheta const rho_L = get_const_field(m_rho_L);
+        DFieldBSRminorTheta const coef = get_field(coef_alloc);
+        DConstFieldRminorTheta const rho_L = get_const_field(m_rho_L);
 
-        using SubConstDFieldRTheta = ConstField<
+        using SubConstDFieldRminorTheta = ConstField<
                 double,
-                IdxRangeRTheta,
+                IdxRangeRminorTheta,
                 typename ExecutionSpace::memory_space,
                 Kokkos::layout_stride>;
-        using SubDFieldRTheta = DField<
-                IdxRangeRTheta,
+        using SubDFieldRminorTheta = DField<
+                IdxRangeRminorTheta,
                 typename ExecutionSpace::memory_space,
                 Kokkos::layout_stride>;
 
@@ -172,17 +183,19 @@ public:
             // FIXME
             // The input of the spline builder must be LayoutRight
             // We allocate a buffer in LayoutRight whereto the slice is copied
-            SubConstDFieldRTheta const sub_A = A[ib];
-            SubDFieldRTheta sub_A_bar = A_bar[ib];
-            DFieldMemRTheta sub_A_alloc(rtheta_mesh, ddc::DeviceAllocator<double>());
+            SubConstDFieldRminorTheta const sub_A = A[ib];
+            SubDFieldRminorTheta sub_A_bar = A_bar[ib];
+            DFieldMemRminorTheta sub_A_alloc(rtheta_mesh, ddc::DeviceAllocator<double>());
             ddc::parallel_deepcopy(sub_A_alloc, sub_A);
             spline_builder(coef, get_const_field(sub_A_alloc));
 
+            CoordinateTransformFunction coordinate_transform = m_coordinate_transform;
+            std::size_t nb_gyro_points = m_nb_gyro_points;
             // Loop over r, theta
             ddc::parallel_for_each(
                     rtheta_mesh,
-                    KOKKOS_LAMBDA(IdxRTheta const irtheta) {
-                        IdxR const ir(irtheta);
+                    KOKKOS_LAMBDA(IdxRminorTheta const irtheta) {
+                        IdxRminor const ir(irtheta);
                         IdxTheta const itheta(irtheta);
                         double const r = ddc::coordinate(ir);
                         double const theta = ddc::coordinate(itheta);
@@ -199,7 +212,7 @@ public:
                                                + rho_L(ir, itheta) * Kokkos::sin(alpha);
 
                             // Convert from (R, Z) into (r, theta) coordinate
-                            CoordRTheta p = coordinate_transform(R_p, Z_p);
+                            CoordRminorTheta p = coordinate_transform(R_p, Z_p);
 
                             // Spline interpolation in (r, theta) coordinate
                             tmp += spline_evaluator(p, get_const_field(coef));
