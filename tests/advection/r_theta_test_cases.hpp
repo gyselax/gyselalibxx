@@ -299,7 +299,7 @@ public:
      * @param[in] vy
      *      The constant second component of the advection field in the physical domain.
      */
-    AdvectionField_translation(DVector<X, Y> const& velocity) : m_velocity(velocity) {}
+    explicit AdvectionField_translation(DVector<X, Y> const& velocity) : m_velocity(velocity) {}
 
     /// Copy operator
     KOKKOS_DEFAULTED_FUNCTION AdvectionField_translation(AdvectionField_translation const&)
@@ -375,7 +375,7 @@ public:
      * @param[in] vtheta
      *      The constant second polar component of the advection field in the physical domain.
      */
-    AdvectionField_rotation(DVector<R, Theta> const& velocity)
+    explicit AdvectionField_rotation(DVector<R, Theta> const& velocity)
         : m_v(velocity)
         , m_physical_to_logical_mapping()
         , m_logical_to_physical_mapping()
