@@ -13,7 +13,8 @@
  *
  * @param[in] mapping A mapping describing the relation between the 2 vector
  *              spaces (or describing the relation between the vector space and
- *              the Cartesian space if a change of variance is required.
+ *              the Cartesian space if a change of variance
+ *              (covariant <-> contravariant) is required).
  * @param[in] coord The coordinate where the vector is defined.
  * @param[in] in_vector The vector on the original vector space.
  *
@@ -104,7 +105,8 @@ KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
  *              space should be saved.
  * @param[in] mapping A mapping describing the relation between the 2 vector
  *              spaces (or describing the relation between the vector space and
- *              the Cartesian space if a change of variance is required.
+ *              the Cartesian space if a change of variance
+ *              (covariant <-> contravariant) is required).
  * @param[in] vector_field The vector field to be mapped to the new vector space.
  *
  * @returns A VectorField or VectorFieldMem containing the vectors in the
@@ -157,7 +159,8 @@ void copy_to_vector_space(
  * @param[in] vector_field The vector field to be mapped to the new vector space.
  * @param[in] mapping A mapping describing the relation between the 2 vector
  *              spaces (or describing the relation between the vector space and
- *              the Cartesian space if a change of variance is required.
+ *              the Cartesian space if a change of variance
+ *              (covariant <-> contravariant) is required).
  *
  * @tparam OutVectorSpace The vector space of the final vector.
  *
