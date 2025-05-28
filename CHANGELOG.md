@@ -61,6 +61,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - max
     - determinant
     - inverse
+    - scalar product
+    - tensor product
 - Solvers for matrix equations with different sparsity patterns
   - Banded matrix
   - Batched CSR (compressed sparse row) matrix
