@@ -1,5 +1,5 @@
 
-include(${CMAKE_CURRENT_LIST_DIR}/../cicd_default_toolchain.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/importable_defaults.cmake)
 
 # CMake options
 set(CMAKE_BUILD_TYPE Release)
@@ -11,5 +11,4 @@ set(CMAKE_CXX_FLAGS "-Wall -Wno-sign-compare")
 set(Kokkos_ENABLE_OPENMP ON CACHE BOOL "Activate OpenMP parallelisation" FORCE)
 
 # Activate/deactivate parts of the code
-set(BUILD_BENCHMARKS ON)
 set(ACTIVATE_RESTART_TESTS ON)

@@ -1,5 +1,5 @@
 
-include(${CMAKE_CURRENT_LIST_DIR}/../cicd_default_toolchain.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/../common_toolchains/importable_defaults.cmake)
 
 # Specify Python version to ensure spack packages are used
 set(Python3_EXECUTABLE $ENV{PYTHON_EXECUTABLE})

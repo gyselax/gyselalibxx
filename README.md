@@ -20,7 +20,7 @@ https://gyselax.github.io/publication/)
 
 ## First steps
 
-- If you want to install Gyselalib++ follow: [installation](docs/first_steps/install.md).
+- If you want to install Gyselalib++ follow: [installation](toolchains/README.md).
 - [Getting Started with Gyselalib++](docs/first_steps/getting_started.md).
 
 ## Questions?

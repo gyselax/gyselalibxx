@@ -13,9 +13,7 @@ nav:
       - Home: README.md                         # Main landing page
       - First Steps:
         - Getting Started: docs/first_steps/getting_started.md
-        - Installation:
-            - docs/first_steps/install.md # Installation guide
-            - toolchains/README.md
+        - Installation: toolchains/README.md
         - DDC in Gyselalib++: docs/first_steps/DDC_in_gyselalibxx.md
       - Contributing: docs/CONTRIBUTING.md
       - Tutorials:
@@ -101,9 +99,15 @@ markdown_extensions:
   - attr_list             # Allows setting attributes in markdown elements
   - pymdownx.arithmatex:  # Enables MathJax for LaTeX-style math rendering
       generic: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 # Additional JavaScript for Enhanced Functionality
 extra_javascript:
   - docs/jscript/mathjax.js                               # Custom script for MathJax integration
   - https://polyfill.io/v3/polyfill.min.js?features=es6   # Ensures compatibility with older browsers
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js     # Loads MathJax for rendering mathematical equations
+
+extra_css:
+  - docs/stylesheets/extra.css
