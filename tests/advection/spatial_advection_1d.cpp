@@ -231,14 +231,14 @@ TEST_F(Spatial1DAdvectionTest, SpatialAdvection)
     PreallocatableSplineInterpolator const
             spline_x_interpolator(builder_x, spline_x_evaluator, meshSpXVx);
 
-    Euler<FieldMemSpXVx<CoordX>, DFieldMemSpXVx> euler(meshSpXVx);
+    EulerBuilder euler;
     BslAdvection1D<
             GridX,
             IdxRangeSpXVx,
             IdxRangeSpXVx,
             SplineXBuilder,
             SplineXEvaluator,
-            Euler<FieldMemSpXVx<CoordX>, DFieldMemSpXVx>> const
+            EulerBuilder> const
             spline_advection_x(spline_x_interpolator, builder_x, spline_x_evaluator, euler);
 
     double const err = SpatialAdvection(spline_advection_x);

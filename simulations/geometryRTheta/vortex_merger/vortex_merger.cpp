@@ -139,9 +139,7 @@ int main(int argc, char** argv)
 
 
     // --- Time integration method --------------------------------------------------------------------
-    Euler<FieldMemRTheta<CoordRTheta>,
-          DVectorFieldMemRTheta<X, Y>,
-          Kokkos::DefaultExecutionSpace> const time_stepper(grid);
+    EulerBuilder const time_stepper;
 
 
     // --- Advection operator -------------------------------------------------------------------------
@@ -161,6 +159,7 @@ int main(int argc, char** argv)
     PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, grid);
 
     SplinePolarFootFinder find_feet(
+            grid,
             time_stepper,
             to_physical_mapping,
             to_physical_mapping,

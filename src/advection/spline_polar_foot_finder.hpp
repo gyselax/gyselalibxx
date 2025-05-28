@@ -9,6 +9,7 @@
 #include "ddc_aliases.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "ipolar_foot_finder.hpp"
+#include "itimestepper.hpp"
 #include "vector_index_tools.hpp"
 #include "vector_mapper.hpp"
 
@@ -25,8 +26,9 @@
  * More details can be found in Edoardo Zoni's article
  * (https://doi.org/10.1016/j.jcp.2019.108889).
  *
- * @tparam TimeStepper
- *      A child class of ITimeStepper providing a time integration method.
+ * @tparam TimeStepperBuilder
+ *      A time stepper builder indicating which time integration method should be
+ *      applied to solve the characteristic equation. 
  * @tparam LogicalToPhysicalMapping
  *      A mapping from the logical domain to the physical domain.
  * @tparam LogicalToPseudoPhysicalMapping
@@ -43,7 +45,8 @@
  * @see BslAdvectionPolar
  */
 template <
-        class TimeStepper,
+        class IdxRangeBatched,
+        class TimeStepperBuilder,
         class LogicalToPhysicalMapping,
         class LogicalToPseudoPhysicalMapping,
         class SplineRThetaBuilderAdvection,
@@ -53,9 +56,10 @@ class SplinePolarFootFinder
               typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
               typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
               ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>,
-              typename TimeStepper::IdxRange,
+              IdxRangeBatched,
               typename SplineRThetaBuilderAdvection::memory_space>
 {
+    static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
     static_assert(is_mapping_v<LogicalToPhysicalMapping>);
     static_assert(is_mapping_v<LogicalToPseudoPhysicalMapping>);
     static_assert(is_analytical_mapping_v<LogicalToPseudoPhysicalMapping>);
@@ -70,16 +74,16 @@ class SplinePolarFootFinder
                   LogicalToPseudoPhysicalMapping>);
     static_assert(ddc::in_tags_v<
                   typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
-                  ddc::to_type_seq_t<typename TimeStepper::IdxRange>>);
+                  ddc::to_type_seq_t<IdxRangeBatched>>);
     static_assert(ddc::in_tags_v<
                   typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
-                  ddc::to_type_seq_t<typename TimeStepper::IdxRange>>);
+                  ddc::to_type_seq_t<IdxRangeBatched>>);
 
     using base_type = IPolarFootFinder<
             typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
             typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
             ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>,
-            typename TimeStepper::IdxRange,
+            IdxRangeBatched,
             typename SplineRThetaBuilderAdvection::memory_space>;
 
 public:
@@ -96,6 +100,7 @@ private:
 
 private:
     using ExecSpace = typename SplineRThetaBuilderAdvection::exec_space;
+    using MemSpace = typename ExecSpace::memory_space;
     /**
      * @brief Tag the first dimension in the advection domain.
      */
@@ -134,7 +139,12 @@ private:
                     ddc::detail::TypeSeq<GridR, GridTheta>,
                     ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
 
-    TimeStepper const& m_time_stepper;
+    using TimeStepper = typename TimeStepperBuilder::template time_stepper_t<
+            FieldMem<CoordRTheta, IdxRangeBatched, MemSpace>,
+            DVectorFieldMem<IdxRangeBatched, VectorIndexSet<X_adv, Y_adv>, MemSpace>,
+            ExecSpace>;
+
+    TimeStepperBuilder const& m_time_stepper_builder;
 
     LogicalToPseudoPhysicalMapping m_logical_to_pseudo_physical;
     PseudoPhysicalToLogicalMapping m_pseudo_physical_to_logical;
@@ -182,9 +192,11 @@ public:
      * @brief Instantiate a time integration method for the advection
      * operator.
      *
-     * @param[in] time_stepper
-     *      The time integration method used to solve the characteristic
-     *      equation (ITimeStepper).
+     * @param[in] idx_range_operator
+     *      The index range on which the operator should act.
+     * @param[in] time_stepper_builder
+     *      A builder for the time integration method used for the
+     *      characteristic equation. 
      * @param[in] logical_to_physical_mapping
      *      The mapping from the logical domain to the physical domain.
      * @param[in] logical_to_pseudo_physical_mapping
@@ -201,13 +213,14 @@ public:
      * @see ITimeStepper
      */
     SplinePolarFootFinder(
-            TimeStepper const& time_stepper,
+            IdxRangeBatched const& idx_range_operator,
+            TimeStepperBuilder const& time_stepper_builder,
             LogicalToPhysicalMapping const& logical_to_physical_mapping,
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical_mapping,
             SplineRThetaBuilderAdvection const& builder_advection_field,
             SplineRThetaEvaluatorAdvection const& evaluator_advection_field,
             double epsilon = 1e-12)
-        : m_time_stepper(time_stepper)
+        : m_time_stepper_builder(time_stepper_builder)
         , m_logical_to_pseudo_physical(logical_to_pseudo_physical_mapping)
         , m_pseudo_physical_to_logical(logical_to_pseudo_physical_mapping.get_inverse_mapping())
         , m_pseudo_physical_to_physical(
@@ -312,9 +325,11 @@ public:
                       is_unified(feet);
                   };
 
+        TimeStepper time_stepper
+                = m_time_stepper_builder.template preallocate<TimeStepper>(get_idx_range(feet));
 
         // Solve the characteristic equation
-        m_time_stepper.update(ExecSpace(), feet, dt, dy, update_function);
+        time_stepper.update(ExecSpace(), feet, dt, dy, update_function);
 
         is_unified(feet);
     }
