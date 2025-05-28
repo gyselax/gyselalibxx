@@ -590,6 +590,7 @@ def check_exec_space_usage(file):
 
         # Find all markers indicating a Kokkos scope and note the correct execution space
         kokkos_scope_markers = chain(config.data_xml.findall(".token[@str='KOKKOS_LAMBDA']"),
+                                     config.data_xml.findall(".token[@str='KOKKOS_CLASS_LAMBDA']"),
                                      config.data_xml.findall(".token[@str='KOKKOS_FUNCTION']"),
                                      config.data_xml.findall(".token[@str='KOKKOS_INLINE_FUNCTION']"))
 
