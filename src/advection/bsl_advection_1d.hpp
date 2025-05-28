@@ -46,9 +46,9 @@
  *          The type of the spline builder for the advection field (see SplineBuilder). 
  * @tparam AdvectionFieldEvaluator
  *          The type of the spline evaluator for the advection field (see SplineEvaluator).  
- * @tparam TimeStepper 
- *          The time integration method applied to solve the characteristic equation. 
- *          The method is picked among the child classes of ITimeStepper. 
+ * @tparam TimeStepperBuilder
+ *          A time stepper builder indicating which time integration method should be
+ *          applied to solve the characteristic equation. 
  */
 template <
         class GridInterest,
@@ -130,13 +130,14 @@ public:
      * We can also use it when we want two different interpolators but defined on the same 
      * domain (e.g. different boundary conditions for the evaluators).
      * 
-     * @param[in] function_interpolator interpolator along the GridInterest direction to interpolate 
+     * @param[in] function_interpolator Interpolator along the GridInterest direction to interpolate 
      *          the advected function (allfdistribu) on the domain of the function.
-     * @param[in] adv_field_builder builder along the GridInterest direction to build a spline representation
+     * @param[in] adv_field_builder Builder along the GridInterest direction to build a spline representation
      *          of the advection field on the function domain. 
-     * @param[in] adv_field_evaluator evaluator along the GridInterest direction to evaluate 
+     * @param[in] adv_field_evaluator Evaluator along the GridInterest direction to evaluate 
      *          the advection field spline representation on the function domain.  
-     * @param[in] time_stepper time integration method for the characteristic equation. 
+     * @param[in] time_stepper_builder A builder for the time integration method used
+     *          for the characteristic equation. 
      */
     explicit BslAdvection1D(
             FunctionPreallocatableInterpolatorType const& function_interpolator,

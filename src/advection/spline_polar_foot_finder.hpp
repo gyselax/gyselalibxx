@@ -26,7 +26,8 @@
  * (https://doi.org/10.1016/j.jcp.2019.108889).
  *
  * @tparam TimeStepperBuilder
- *      A child class of ITimeStepper providing a time integration method.
+ *      A time stepper builder indicating which time integration method should be
+ *      applied to solve the characteristic equation. 
  * @tparam LogicalToPhysicalMapping
  *      A mapping from the logical domain to the physical domain.
  * @tparam LogicalToPseudoPhysicalMapping
@@ -57,6 +58,7 @@ class SplinePolarFootFinder
               IdxRangeBatched,
               typename SplineRThetaBuilderAdvection::memory_space>
 {
+    static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
     static_assert(is_mapping_v<LogicalToPhysicalMapping>);
     static_assert(is_mapping_v<LogicalToPseudoPhysicalMapping>);
     static_assert(is_analytical_mapping_v<LogicalToPseudoPhysicalMapping>);
@@ -189,9 +191,11 @@ public:
      * @brief Instantiate a time integration method for the advection
      * operator.
      *
+     * @param[in] idx_range_operator
+     *      The index range on which the operator should act.
      * @param[in] time_stepper
-     *      The time integration method used to solve the characteristic
-     *      equation (ITimeStepper).
+     *      A builder for the time integration method used for the
+     *      characteristic equation. 
      * @param[in] logical_to_physical_mapping
      *      The mapping from the logical domain to the physical domain.
      * @param[in] logical_to_pseudo_physical_mapping
