@@ -224,7 +224,7 @@ public:
     AdvectionField_decentred_rotation() : m_omega(2 * M_PI), m_xc(0.25), m_yc(0.) {}
 
     /// Copy operator
-    explicit KOKKOS_DEFAULTED_FUNCTION AdvectionField_decentred_rotation(
+    KOKKOS_DEFAULTED_FUNCTION AdvectionField_decentred_rotation(
             AdvectionField_decentred_rotation const&)
             = default;
 
