@@ -139,7 +139,7 @@ private:
                     ddc::detail::TypeSeq<GridR, GridTheta>,
                     ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
 
-    using TimeStepper = typename TimeStepperBuilder::time_stepper_t<
+    using TimeStepper = typename TimeStepperBuilder::template time_stepper_t<
             FieldMem<CoordRTheta, IdxRangeBatched, MemSpace>,
             DVectorFieldMem<IdxRangeBatched, VectorIndexSet<X_adv, Y_adv>, MemSpace>,
             ExecSpace>;

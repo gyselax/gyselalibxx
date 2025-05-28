@@ -109,7 +109,7 @@ private:
     using IdxRangeFunctionDeriv = typename FunctionInterpolatorType::batched_derivs_idx_range_type;
     using FunctionDerivFieldMem = DFieldMem<IdxRangeFunctionDeriv>;
 
-    using TimeStepper = typename TimeStepperBuilder::time_stepper_t<
+    using TimeStepper = typename TimeStepperBuilder::template time_stepper_t<
             FieldMem<Coord<typename GridInterest::continuous_dimension_type>, IdxRangeAdvection>,
             DFieldMem<IdxRangeAdvection>>;
 
