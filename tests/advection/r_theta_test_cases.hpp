@@ -174,14 +174,14 @@ public:
     {
         // Gaussian centred in (x0, y0):
         Coord<X, Y> const coord_xy(m_mapping(coord_rtheta));
-        double const dx = ddc::select<X>(coord_xy) - m_x0;
-        double const dy = ddc::select<Y>(coord_xy) - m_y0;
+        double const deviation_x = ddc::select<X>(coord_xy) - m_x0;
+        double const deviation_y = ddc::select<Y>(coord_xy) - m_y0;
         Coord<R> const r = ddc::select<R>(coord_rtheta);
         if ((m_rmin <= r) and (r <= m_rmax)) {
             return m_constant
                    * Kokkos::exp(
-                           -ipow(dx, 2) / (2 * m_sig_x * m_sig_x)
-                           - ipow(dy, 2) / (2 * m_sig_y * m_sig_y));
+                           -ipow(deviation_x, 2) / (2 * m_sig_x * m_sig_x)
+                           - ipow(deviation_y, 2) / (2 * m_sig_y * m_sig_y));
         } else {
             return 0.0;
         }
