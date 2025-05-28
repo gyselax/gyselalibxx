@@ -333,20 +333,40 @@ private:
     }
 };
 
+/**
+ * @brief A class to indicate that an explicit time stepper should be constructed for use in other operators.
+ *
+ * This class is a time stepper builder. A time stepper builder is designed to construct a
+ * time stepper upon request. This allows the simulation to choose the method without
+ * needing to know the specifics of the types with which it should be initialised.
+ * This class should be specialised for the explicit time stepper builders.
+ */
 template <template <class FieldMem, class DerivFieldMem, class ExecSpace> typename TimeStepper>
 class ExplicitTimeStepperBuilder
 {
 public:
+    /**
+     * @brief A constructor for the TimeStepperBuilder
+     */
     ExplicitTimeStepperBuilder() {}
 
+    /**
+     * The type of the TimeStepper that will be constructed to solve an equation whose field
+     * and derivative(s) have the specified type.
+     */
     template <
             class FieldMem,
             class DerivFieldMem = FieldMem,
             class ExecSpace = Kokkos::DefaultExecutionSpace>
     using time_stepper_t = TimeStepper<FieldMem, DerivFieldMem, ExecSpace>;
 
+    /**
+     * @brief Allocate the TimeStepper object
+     * @tparam ChosenTimeStepper The type of the TimeStepper to be constructed (obtained from time_stepper_t).
+     * @param[in] idx_range The index range on which the operator will act (and allocate memory).
+     */
     template <class ChosenTimeStepper>
-    auto preallocate(typename ChosenTimeStepper::IdxRange const m_idx_range) const
+    auto preallocate(typename ChosenTimeStepper::IdxRange const idx_range) const
     {
         static_assert(std::is_same_v<
                       ChosenTimeStepper,
@@ -354,7 +374,7 @@ public:
                               typename ChosenTimeStepper::ValFieldMem,
                               typename ChosenTimeStepper::DerivFieldMem,
                               typename ChosenTimeStepper::exec_space>>);
-        return ChosenTimeStepper(m_idx_range);
+        return ChosenTimeStepper(idx_range);
     }
 };
 

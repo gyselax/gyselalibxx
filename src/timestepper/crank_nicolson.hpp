@@ -188,6 +188,13 @@ public:
     }
 };
 
+/**
+ * @brief A class to indicate that a Crank-Nicolson time stepper should be constructed for use in other operators.
+ *
+ * This class is a time stepper builder. A time stepper builder is designed to construct a
+ * time stepper upon request. This allows the simulation to choose the method without
+ * needing to know the specifics of the types with which it should be initialised.
+ */
 class CrankNicolsonBuilder
 {
 private:
@@ -195,18 +202,35 @@ private:
     double const m_epsilon;
 
 public:
-    explicit CrankNicolsonBuilder(int const counter = int(20), double const epsilon = 1e-12)
+    /**
+     * @brief A constructor for the CrankNicolsonBuilder.
+     * @param[in] counter
+     *      The maximal number of loops for the implicit method.
+     * @param[in] epsilon
+     *      The @f$ \varepsilon @f$ upperbound of the difference of two steps
+     *      in the implicit method: @f$ |y^{k+1} -  y^{k}| < \varepsilon @f$.
+     */
+    explicit CrankNicolsonBuilder(int const counter = 20, double const epsilon = 1e-12)
         : m_max_counter(counter)
         , m_epsilon(epsilon)
     {
     }
 
+    /**
+     * The type of the TimeStepper that will be constructed to solve an equation whose field
+     * and derivative(s) have the specified type.
+     */
     template <
             class FieldMem,
             class DerivFieldMem = FieldMem,
             class ExecSpace = Kokkos::DefaultExecutionSpace>
     using time_stepper_t = CrankNicolson<FieldMem, DerivFieldMem, ExecSpace>;
 
+    /**
+     * @brief Allocate the TimeStepper object
+     * @tparam ChosenTimeStepper The type of the TimeStepper to be constructed (obtained from time_stepper_t).
+     * @param[in] idx_range The index range on which the operator will act (and allocate memory).
+     */
     template <class TimeStepper>
     auto preallocate(typename TimeStepper::IdxRange const m_idx_range) const
     {
