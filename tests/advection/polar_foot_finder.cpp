@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 #include <gtest/gtest.h>
 
+#include "../test_utils.hpp"
+
 #include "cartesian_to_circular.hpp"
 #include "cartesian_to_czarny.hpp"
 #include "circular_to_cartesian.hpp"
@@ -191,12 +193,15 @@ AdvectionField init_field()
     }
 }
 
-using Cases = ::testing::Types<
-        std::tuple<EulerBuilder, AnalyticalCircular, AdvectionField_translation<X, Y>>,
-        std::tuple<EulerBuilder, AnalyticalCircular, AdvectionField_rotation<X, Y, R, Theta>>,
-        std::tuple<RK2Builder, AnalyticalCircular, AdvectionField_decentred_rotation<X, Y>>,
-        std::tuple<EulerBuilder, AnalyticalCzarny, AdvectionField_decentred_rotation<X, Y>>,
-        std::tuple<RK3Builder, PseudoCartCzarny, AdvectionField_translation<X, Y>>>;
+using TimeSteppers = std::tuple<EulerBuilder, RK2Builder, RK3Builder>;
+using Mappings = std::tuple<AnalyticalCircular, AnalyticalCzarny, PseudoCartCzarny>;
+using AdvectionFieldTypes = std::tuple<
+        AdvectionField_translation<X, Y>,
+        AdvectionField_rotation<X, Y, R, Theta>,
+        AdvectionField_decentred_rotation<X, Y>>;
+
+using Cases = tuple_to_types_t<cartesian_product_t<TimeSteppers, Mappings, AdvectionFieldTypes>>;
+
 
 TYPED_TEST_SUITE(PolarAdvectionFixture, Cases);
 
