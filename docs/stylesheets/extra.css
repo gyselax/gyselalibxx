@@ -1,0 +1,6 @@
+
+/* Normalize emoji image size */
+img.twemoji {
+    height: 1em;
+    vertical-align: middle;
+}
