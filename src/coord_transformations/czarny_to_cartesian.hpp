@@ -403,7 +403,7 @@ public:
      */
     KOKKOS_INLINE_FUNCTION CartesianToCzarny<X, Y, R, Theta> get_inverse_mapping() const
     {
-        return CartesianToCzarny<X, Y, R, Theta>(m_epsilon, m_e);
+        return CartesianToCzarny<X, Y, R, Theta>(m_epsilon, m_e, m_x0, m_y0);
     }
 };
 

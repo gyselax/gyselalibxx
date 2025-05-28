@@ -17,7 +17,7 @@
  */
 template <
         class FieldMem,
-        class DerivFieldMem = FieldMem,
+        class DerivFieldMemType = FieldMem,
         class ExecSpace = Kokkos::DefaultExecutionSpace>
 class ITimeStepper
 {
@@ -25,26 +25,30 @@ class ITimeStepper
             (ddc::is_chunk_v<FieldMem>) or (is_vector_field_v<FieldMem>)
             or (is_multipatch_field_mem_v<FieldMem>));
     static_assert(
-            (ddc::is_chunk_v<DerivFieldMem>) or (is_vector_field_v<DerivFieldMem>)
-            or (is_multipatch_field_mem_v<DerivFieldMem>));
+            (ddc::is_chunk_v<DerivFieldMemType>) or (is_vector_field_v<DerivFieldMemType>)
+            or (is_multipatch_field_mem_v<DerivFieldMemType>));
 
     static_assert(
             (std::is_same_v<
                     typename FieldMem::discrete_domain_type,
-                    typename DerivFieldMem::discrete_domain_type>)
-            || (is_multipatch_field_mem_v<FieldMem> && is_multipatch_field_mem_v<DerivFieldMem>));
+                    typename DerivFieldMemType::discrete_domain_type>)
+            || (is_multipatch_field_mem_v<
+                        FieldMem> && is_multipatch_field_mem_v<DerivFieldMemType>));
 
     static_assert(
             Kokkos::SpaceAccessibility<ExecSpace, typename FieldMem::memory_space>::accessible,
             "MemorySpace has to be accessible for ExecutionSpace.");
     static_assert(
-            Kokkos::SpaceAccessibility<ExecSpace, typename DerivFieldMem::memory_space>::accessible,
+            Kokkos::SpaceAccessibility<ExecSpace, typename DerivFieldMemType::memory_space>::
+                    accessible,
             "MemorySpace has to be accessible for ExecutionSpace.");
 
 public:
     /// The type of the index range on which the values of the function are defined.
     using IdxRange = typename FieldMem::discrete_domain_type;
 
+    /// The type of the memory allocation for the values of the function being evolved.
+    using ValFieldMem = FieldMem;
 
     /// The type of the values of the function being evolved.
     using ValField = typename FieldMem::span_type;
@@ -52,11 +56,17 @@ public:
     /// The constant type of the values of the function being evolved.
     using ValConstField = typename FieldMem::view_type;
 
+    /// The type of the memory allocation for the derivatives of the function being evolved.
+    using DerivFieldMem = DerivFieldMemType;
+
     /// The type of the derivatives of the function being evolved.
     using DerivField = typename DerivFieldMem::span_type;
 
     /// The constant type of the derivatives values of the function being evolved.
     using DerivConstField = typename DerivFieldMem::view_type;
+
+    /// The space (CPU/GPU) where the calculations are carried out.
+    using exec_space = ExecSpace;
 
 public:
     /**
@@ -322,3 +332,62 @@ private:
          ...);
     }
 };
+
+/**
+ * @brief A class to indicate that an explicit time stepper should be constructed for use in other operators.
+ *
+ * This class is a time stepper builder. A time stepper builder is designed to construct a
+ * time stepper upon request. This allows the simulation to choose the method without
+ * needing to know the specifics of the types with which it should be initialised.
+ * This class should be specialised for the explicit time stepper builders.
+ */
+template <template <class FieldMem, class DerivFieldMem, class ExecSpace> typename TimeStepper>
+class ExplicitTimeStepperBuilder
+{
+public:
+    /**
+     * @brief A constructor for the TimeStepperBuilder
+     */
+    ExplicitTimeStepperBuilder() {}
+
+    /**
+     * The type of the TimeStepper that will be constructed to solve an equation whose field
+     * and derivative(s) have the specified type.
+     */
+    template <
+            class FieldMem,
+            class DerivFieldMem = FieldMem,
+            class ExecSpace = Kokkos::DefaultExecutionSpace>
+    using time_stepper_t = TimeStepper<FieldMem, DerivFieldMem, ExecSpace>;
+
+    /**
+     * @brief Allocate the TimeStepper object
+     * @tparam ChosenTimeStepper The type of the TimeStepper to be constructed (obtained from time_stepper_t).
+     * @param[in] idx_range The index range on which the operator will act (and allocate memory).
+     */
+    template <class ChosenTimeStepper>
+    auto preallocate(typename ChosenTimeStepper::IdxRange const idx_range) const
+    {
+        static_assert(std::is_same_v<
+                      ChosenTimeStepper,
+                      time_stepper_t<
+                              typename ChosenTimeStepper::ValFieldMem,
+                              typename ChosenTimeStepper::DerivFieldMem,
+                              typename ChosenTimeStepper::exec_space>>);
+        return ChosenTimeStepper(idx_range);
+    }
+};
+
+namespace detail {
+
+template <class T>
+inline constexpr bool enable_is_timestepper_builder = false;
+
+template <template <class FieldMem, class DerivFieldMem, class ExecSpace> typename TimeStepper>
+inline constexpr bool enable_is_timestepper_builder<ExplicitTimeStepperBuilder<TimeStepper>> = true;
+
+} // namespace detail
+
+template <typename Type>
+inline constexpr bool is_timestepper_builder_v
+        = detail::enable_is_timestepper_builder<std::remove_const_t<std::remove_reference_t<Type>>>;

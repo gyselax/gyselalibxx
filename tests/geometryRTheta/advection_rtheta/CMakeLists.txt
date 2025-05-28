@@ -23,7 +23,6 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING_PHYSICAL" "CZARNY_MAPPING_PHYSICAL" "CZAR
     foreach(SIMULATION "TRANSLATION_SIMULATION" "ROTATION_SIMULATION" "DECENTRED_ROTATION_SIMULATION")
         set(test_name "advection_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION}")
         add_executable("${test_name}"
-            test_cases.hpp
             advection_selected_test.cpp
         )
         target_link_libraries("${test_name}"
@@ -62,7 +61,6 @@ endforeach()
 ##################################################################
 
 add_executable(advection_ALL
-	test_cases.hpp
 	advection_all_tests.cpp
 )
 target_link_libraries(advection_ALL

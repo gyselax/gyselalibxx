@@ -230,14 +230,14 @@ TEST_F(XVxAdvection1DTest, AdvectionXVx)
     PreallocatableSplineInterpolator const
             spline_interpolator_x(builder_x, spline_evaluator_x, idx_range_xvx);
 
-    RK2<FieldMemXVx<CoordX>, DFieldMemXVx> time_stepper(idx_range_xvx);
+    RK2Builder time_stepper;
     BslAdvection1D<
             GridX,
             IdxRangeXVx,
             IdxRangeXVx,
             SplineXBuilder,
             SplineXEvaluator,
-            RK2<FieldMemXVx<CoordX>, DFieldMemXVx>> const
+            RK2Builder> const
             advection(spline_interpolator_x, builder_x, spline_evaluator_x, time_stepper);
 
     double const max_relative_error = AdvectionXVx(advection);
