@@ -1,7 +1,7 @@
 name: Check release candidate
 
 on:
-  push:
+  pull_request:
     branches:
     - 'main'
 
