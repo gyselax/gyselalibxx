@@ -118,8 +118,6 @@ void initialise(
                 IdxR const ir(irthetabatch);
                 IdxTheta const itheta(irthetabatch);
                 IdxBatch const ibatch(irthetabatch);
-                double const r = ddc::coordinate(ir);
-                double const theta = ddc::coordinate(itheta);
 
                 // In non-circular case, it should be computed by
                 // (Rcoord(0,Ntheta/2) + Rcoord(0,0)) / 2
@@ -237,7 +235,6 @@ TEST_P(GyroAverageCircularParamTests, TestPeriodicity)
 {
     DConstFieldRThetaBatch A = get_const_field(this->m_A_alloc);
     DFieldRThetaBatch A_bar = get_field(this->m_A_bar_alloc);
-    DFieldRTheta rho_L = get_field(this->m_rho_L_alloc);
 
     using GyroAverageOperatorType = detail::GyroAverageOperator<
             Kokkos::DefaultExecutionSpace,
@@ -311,7 +308,6 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
         IdxTheta const itheta(irthetabatch);
         IdxBatch const ibatch(irthetabatch);
         double const r = ddc::coordinate(ir);
-        double const theta = ddc::coordinate(itheta);
         double const R0eff = R0;
         double const gyroradius = h_rho_L(ir, itheta);
         double const kperprho = kperp * gyroradius;

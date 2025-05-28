@@ -103,14 +103,14 @@ private:
     DFieldRminorTheta m_rho_L;
 
     /**
-     * @brief Number of points to use in the gyroaverage integration (default: 8)
-     */
-    std::size_t const m_nb_gyro_points;
-
-    /**
      * @brief coordinate_transform Function to convert (R, Z) to (r, theta).
      */
     CoordinateTransformFunction m_coordinate_transform;
+
+    /**
+     * @brief Number of points to use in the gyroaverage integration (default: 8)
+     */
+    std::size_t const m_nb_gyro_points;
 
 public:
     /**
@@ -147,7 +147,6 @@ public:
         static_assert(
                 std::is_invocable_v<CoordinateTransformFunction, double, double>,
                 "CoordinateTransformFunction must be a functor on (double, double)");
-        IdxRangeRminor const r_domain = get_idx_range<GridRminor>(A);
         IdxRangeTheta const theta_domain = get_idx_range<GridTheta>(A);
         IdxRangeBatch const batch_domain(get_idx_range(A));
         IdxRangeRminorTheta const rtheta_mesh = get_idx_range<GridRminor, GridTheta>(A);
