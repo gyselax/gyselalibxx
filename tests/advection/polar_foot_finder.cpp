@@ -5,28 +5,58 @@
 #include "czarny_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
 #include "euler.hpp"
-#include "rk2.hpp"
-#include "rk3.hpp"
 #include "mesh_builder.hpp"
 #include "r_theta_test_cases.hpp"
+#include "rk2.hpp"
+#include "rk3.hpp"
+#include "species_info.hpp"
+#include "spline_polar_foot_finder.hpp"
 
 namespace {
 struct X
 {
     static constexpr bool PERIODIC = false;
+    static constexpr bool IS_CONTRAVARIANT = true;
+    static constexpr bool IS_COVARIANT = true;
+    using Dual = X;
 };
 struct Y
 {
     static constexpr bool PERIODIC = false;
+    static constexpr bool IS_CONTRAVARIANT = true;
+    static constexpr bool IS_COVARIANT = true;
+    using Dual = Y;
 };
 
+struct R_cov;
+struct Theta_cov;
 struct R
 {
     static constexpr bool PERIODIC = false;
+    static constexpr bool IS_CONTRAVARIANT = true;
+    static constexpr bool IS_COVARIANT = false;
+    using Dual = R_cov;
 };
 struct Theta
 {
     static constexpr bool PERIODIC = true;
+    static constexpr bool IS_CONTRAVARIANT = true;
+    static constexpr bool IS_COVARIANT = false;
+    using Dual = Theta_cov;
+};
+struct R_cov
+{
+    static constexpr bool PERIODIC = false;
+    static constexpr bool IS_CONTRAVARIANT = false;
+    static constexpr bool IS_COVARIANT = true;
+    using Dual = R;
+};
+struct Theta_cov
+{
+    static constexpr bool PERIODIC = false;
+    static constexpr bool IS_CONTRAVARIANT = false;
+    static constexpr bool IS_COVARIANT = true;
+    using Dual = Theta;
 };
 
 struct GridR : NonUniformGridBase<R>
@@ -81,21 +111,23 @@ using SplineInterpPointsTheta
 using IdxRangeRTheta = IdxRange<R, Theta>;
 }; // namespace
 
+template <class T>
+struct PolarAdvectionFixture;
+
 template <
-        template <class FieldMem, class DerivFieldMem, class ExecSpace>
-        typename TimeStepperBuilder,
+        class TimeStepperBuilderType,
         class LogicalToPhysicalMappingType,
         class LogicalToPseudoPhysicalMappingType>
-struct PolarAdvectionFixture : public testing::Test
+struct PolarAdvectionFixture<std::tuple<
+        TimeStepperBuilderType,
+        LogicalToPhysicalMappingType,
+        LogicalToPseudoPhysicalMappingType>> : public testing::Test
 {
     using LogicalToPhysicalMapping = LogicalToPhysicalMappingType;
     using LogicalToPseudoPhysicalMapping = LogicalToPseudoPhysicalMappingType;
     using X_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
     using Y_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
-    using TimeStepper = TimeStepperBuilder<
-            DField<IdxRangeRTheta>,
-            DVectorFieldMem<IdxRangeRTheta, VectorIndexSet<X_adv, Y_adv>>,
-            Kokkos::DefaultExecutionSpace>;
+    using TimeStepperBuilder = TimeStepperBuilderType;
 };
 
 template <class LogicalToOtherMapping>
@@ -116,8 +148,10 @@ LogicalToOtherMapping init_mapping()
     }
 }
 
-using Cases = ::testing::
-        Types<std::tuple<Euler, CartesianToCircular<X, Y, R, Theta>, CartesianToCircular<X, Y, R, Theta>>, >;
+using Cases = ::testing::Types<std::tuple<
+        EulerBuilder,
+        CircularToCartesian<R, Theta, X, Y>,
+        CircularToCartesian<R, Theta, X, Y>>>;
 
 TYPED_TEST_SUITE(PolarAdvectionFixture, Cases);
 
@@ -125,7 +159,7 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
 {
     using LogicalToPhysicalMapping = typename TestFixture::LogicalToPhysicalMapping;
     using LogicalToPseudoPhysicalMapping = typename TestFixture::LogicalToPseudoPhysicalMapping;
-    using TimeStepper = typename TestFixture::TimeStepper;
+    using TimeStepperBuilder = typename TestFixture::TimeStepperBuilder;
 
     Coord<R> const r_min(0.0);
     Coord<R> const r_max(1.0);
@@ -134,6 +168,9 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
     Coord<Theta> const theta_min(0.0);
     Coord<Theta> const theta_max(2.0 * M_PI);
     IdxStep<GridTheta> const ntheta_cells(10);
+
+    IdxStepSp const nb_kinspecies(2);
+    IdxRangeSp const idx_range_sp(IdxSp(0), nb_kinspecies);
 
     ddc::init_discrete_space<BSplinesR>(
             build_random_non_uniform_break_points(r_min, r_max, nr_cells, 0.5));
@@ -147,6 +184,7 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
     IdxRange<GridR> r_idx_range(SplineInterpPointsR::template get_domain<GridR>());
     IdxRange<GridTheta> theta_idx_range(SplineInterpPointsTheta::template get_domain<GridTheta>());
     IdxRange<GridR, GridTheta> idx_range(r_idx_range, theta_idx_range);
+    IdxRange<Species, GridR, GridTheta> batched_idx_range(idx_range_sp, idx_range);
 
     ddc::NullExtrapolationRule r_min_extrap;
     ddc::PeriodicExtrapolationRule<Theta> theta_extrap;
@@ -158,8 +196,21 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
     LogicalToPseudoPhysicalMapping to_pseudo_physical
             = init_mapping<LogicalToPseudoPhysicalMapping>();
 
-    TimeStepper time_stepper(idx_range);
+    TimeStepperBuilder time_stepper;
 
-    SplinePolarFootFinder const
-            foot_finder(time_stepper, to_physical, to_pseudo_physical, builder, evaluator);
+    SplinePolarFootFinder const foot_finder(
+            idx_range,
+            time_stepper,
+            to_physical,
+            to_pseudo_physical,
+            builder,
+            evaluator);
+
+    SplinePolarFootFinder const batched_foot_finder(
+            batched_idx_range,
+            time_stepper,
+            to_physical,
+            to_pseudo_physical,
+            builder,
+            evaluator);
 }
