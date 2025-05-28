@@ -102,21 +102,21 @@ bibliography: paper.bib
 Gyselalib++ provides the mathematical building blocks to construct gyrokinetic plasma simulation codes in C++, simulating a distribution function discretised in phase space on a fixed grid.
 It relies on the DDC library [@ddc] to statically type the discretisation dimensions; thus preventing many common sources of errors.
 Via DDC, Gyselalib++ also leverages the Kokkos framework [@trott2022], ensuring performance portability across various CPU and GPU architectures.
-The library provides a variety of tools including semi-Lagrangian advection operators, solvers for partial differential equations (PDEs), quadrature rules, and time integrators.
+The library provides a variety of tools including semi-Lagrangian advection operators, quadrature rules, and solvers for elliptical and hyperbolic partial differential equations (PDEs).
 The majority of the operators are designed to work on non-orthonormal coordinate systems; those that don't use the static typing to raise compiler errors preventing their misuse.
 
 ## Statement of Need
 
 Plasma simulations are essential for the development of magnetic confinement fusion devices for energy production.
-The low collisionality of such plasmas make kinetic models a judicious choice.
-In particular gyrokinetic theory [@brizard2007; @krommes2012], which reduces the 6D problem to a 5D problem by removing high frequency gyromotion, is a popular tool for such simulations [@garbet2010].
+The low collisionality of such plasmas makes kinetic models a judicious choice.
+In particular gyrokinetic theory [@brizard2007; @krommes2012], which reduces the 6D problem to a 5D problem by removing high frequency gyromotion, is a popular framework for plasma simulation [@garbet2010].
 Despite the reduction in dimensionality such simulations still require massively powerful high-performance computing (HPC) resources.
 For ITER-sized simulations, exascale resources would still be required.
 
 The pre-existing GYSELA code [@grandgirard2016], written in Fortran, originally aimed to simulate plasma in the core region of a tokamak using semi-Lagrangian advection with a distribution function discretised in phase space on a uniform grid.
 This approach was shown to work well and allowed the study of many interesting physical phenomena [@Esteve2018;@Sarazin2021;@DifPradalier2022].
 However expanding this code to use more complex mathematical methods such as non-uniform points (vital for handling the different magnitudes of physical quantities in the core and edge regions), and increasingly complex geometries (such as D-shape geometries, geometries including both open and closed field lines, X-points, and potentially stellarator geometries) has proved to be challenging and sometimes error-prone.
-The challenges of such extensions are further amplified when trying to organise such a code for use on new GPU architectures, necessary for exascale simulations.
+These complexities are further amplified when trying to organise such a code for use on new GPU architectures, necessary for exascale simulations.
 This is a challenge shared by other gyrokinetic codes [@trilaksono2023].
 
 In the case of GYSELA, the necessary changes would have required an effort comparable to a complete rewrite; whereas, actually performing such a rewrite brings additional benefits for design and portability.
