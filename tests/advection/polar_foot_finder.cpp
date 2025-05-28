@@ -194,12 +194,18 @@ AdvectionField init_field()
     }
 }
 
+template <class LogicalToPhysicalMapping, class AdvectionField>
 void fill_feet_and_advection_field(
         Field<CoordRTheta, IdxRangeSpRTheta> feet,
         Field<CoordRTheta, IdxRangeSpRTheta> exact_feet,
         DVectorField<IdxRangeSpRTheta, CartBasis> adv_field,
-        IdxRangeSpRTheta batched_idx_range)
+        IdxRangeSpRTheta batched_idx_range,
+        LogicalToPhysicalMapping const& to_physical,
+        AdvectionField const& advection_field,
+        double t,
+        double dt)
 {
+    inverse_mapping_t<LogicalToPhysicalMapping> from_physical = to_physical.get_inverse_mapping();
     // This function is required for GPU compilation
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
@@ -268,7 +274,6 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
     LogicalToPhysicalMapping to_physical = init_mapping<LogicalToPhysicalMapping>();
     LogicalToPseudoPhysicalMapping to_pseudo_physical
             = init_mapping<LogicalToPseudoPhysicalMapping>();
-    inverse_mapping_t<LogicalToPhysicalMapping> from_physical = to_physical.get_inverse_mapping();
 
     TimeStepperBuilder time_stepper;
     AdvectionField advection_field = init_field<AdvectionField>();
@@ -292,7 +297,15 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
     Field<CoordRTheta, IdxRangeSpRTheta> feet = get_field(feet_alloc);
     Field<CoordRTheta, IdxRangeSpRTheta> exact_feet = get_field(exact_feet_alloc);
 
-    fill_feet_and_advection_field(feet, exact_feet, adv_field, batched_idx_range);
+    fill_feet_and_advection_field(
+            feet,
+            exact_feet,
+            adv_field,
+            batched_idx_range,
+            to_physical,
+            advection_field,
+            t,
+            dt);
 
     batched_foot_finder(feet, adv_field, dt);
 
