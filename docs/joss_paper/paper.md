@@ -89,7 +89,7 @@ affiliations:
     Max-Planck-Institut für Plasmaphysik, Garching,
     Germany
   index: 4
-- name: CINES, France
+- name: CINES, 34000 Montpellier, France
   index: 5
 
 date: 24 April 2025
