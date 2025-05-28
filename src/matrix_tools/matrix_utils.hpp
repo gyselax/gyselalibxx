@@ -19,7 +19,7 @@ auto to_gko_multivector(
     static_assert((Kokkos::is_view_v<KokkosViewType> && KokkosViewType::rank == 2));
     using value_type = typename KokkosViewType::traits::value_type;
 
-    assert(view.stride_1() == 1);
+    assert(view.stride(1) == 1);
     return gko::share(
             gko::batch::MultiVector<value_type>::
                     create(gko_exec,
@@ -113,12 +113,12 @@ void save_logger(
             create(gko_exec,
                    gko::dim<2>(x_view.extent(0), 1),
                    gko::array<double>::view(gko_exec, x_view.span(), x_view.data()),
-                   x_view.stride_0());
+                   x_view.stride(0));
     auto b = gko::matrix::Dense<double>::
             create(gko_exec,
                    gko::dim<2>(b_view.extent(0), 1),
                    gko::array<double>::view(gko_exec, b_view.span(), b_view.data()),
-                   b_view.stride_0());
+                   b_view.stride(0));
 
     // allocate the residual
     auto res = gko::matrix::Dense<double>::create(gko_exec, gko::dim<2>(b_view.extent(0), 1));
