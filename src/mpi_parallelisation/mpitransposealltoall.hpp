@@ -327,20 +327,14 @@ private:
             Field<ElementType, MPIRecvIdxRange, MemSpace> recv_field,
             ConstField<ElementType, MPISendIdxRange, MemSpace> send_field) const
     {
-        // No Cuda-aware MPI yet
-        auto send_buffer = ddc::create_mirror_view_and_copy(send_field);
-        auto recv_buffer = ddc::create_mirror_view(recv_field);
         MPI_Alltoall(
-                send_buffer.data_handle(),
-                send_buffer.size() / m_comm_size,
+                send_field.data_handle(),
+                send_field.size() / m_comm_size,
                 MPI_type_descriptor_t<ElementType>,
-                recv_buffer.data_handle(),
-                recv_buffer.size() / m_comm_size,
+                recv_field.data_handle(),
+                recv_field.size() / m_comm_size,
                 MPI_type_descriptor_t<ElementType>,
                 IMPITranspose<Layout1, Layout2>::m_comm);
-        if constexpr (!ddc::is_borrowed_chunk_v<decltype(recv_buffer)>) {
-            ddc::parallel_deepcopy(execution_space, recv_field, recv_buffer);
-        }
     }
 
     template <class... DistributedDims>
