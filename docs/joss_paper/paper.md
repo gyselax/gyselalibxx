@@ -128,7 +128,7 @@ Additionally, DDC is used to encode grid information directly in the type of eac
 This is particularly useful when working with multiple grids along the same dimension; or when assigning different memory layouts to different fields.
 
 In contrast to GYSELA, Gyselalib++ has been conceived as a library, similar to the SeLaLib Fortran library [@selalib], whose independent elements are each unit-tested and can be combined to build a final simulation.
-This design makes the library more versatile, since its elements are not tied to a specific simulation and can be adapted to different needs.
+This design makes the library more versatile, enabling users to rapidly assemble a wide range of simulations, including high-dimensional test cases.
 The shared elements also provide more confidence in the reliability of the implementation as they can prove their validity across multiple applications.
 
 Gyselalib++ includes a range of reusable mathematical operators for plasma simulations.
@@ -140,7 +140,7 @@ The library also supports MPI-based parallelism, either with distributed operato
 [^doc]: <https://gyselax.github.io/gyselalibxx/>
 
 The VOICE code [@bourne2023] has already been rewritten in C++ using the mathematical tools provided by Gyselalib++.
-Several common simulations including Landau damping (in 2D or 4D Cartesian phase-space coordinates), a bump-on-tail instability (in 2D Cartesian phase-space coordinates), and a guiding-centre model (on polar coordinates) have also been implemented.
+Several common simulations including Landau damping (in 2D or in a 4D MPI-parallelised Cartesian phase-space coordinates), a bump-on-tail instability (in 2D Cartesian phase-space coordinates), and a guiding-centre model (on polar coordinates) have also been implemented.
 While these examples are included primarily for illustration, they also serve as valuable test-beds for developing and validating new numerical methods.
 As such, these examples are ideal for mathematicians looking to validate new methods in realistic, publication-ready test cases.
 
