@@ -544,6 +544,24 @@
 
 namespace detail {
 
+template &lt;class GridDim, typename = void&gt;
+struct GetCDim
+{
+    using type = GridDim;
+};
+
+template &lt;class GridDim&gt;
+struct GetCDim&lt;
+        GridDim,
+        std::enable_if_t&lt;
+                std::is_same_v&lt;
+                        typename GridDim::continuous_dimension_type,
+                        typename GridDim::continuous_dimension_type&gt;,
+                void&gt;&gt;
+{
+    using type = typename GridDim::continuous_dimension_type;
+};
+
 template &lt;
         class TypeSeqIn,
         std::size_t Start,
@@ -575,7 +593,7 @@ template &lt;class Dim, class HeadGrid, class... Grids&gt;
 struct FindGrid&lt;Dim, ddc::detail::TypeSeq&lt;HeadGrid, Grids...&gt;&gt;
 {
     using type = std::conditional_t&lt;
-            std::is_same_v&lt;typename HeadGrid::continuous_dimension_type, Dim&gt;,
+            std::is_same_v&lt;typename GetCDim&lt;HeadGrid&gt;::type, Dim&gt;,
             HeadGrid,
             typename FindGrid&lt;Dim, ddc::detail::TypeSeq&lt;Grids...&gt;&gt;::type&gt;;
 };
@@ -585,6 +603,15 @@ struct FindGrid&lt;Dim, ddc::detail::TypeSeq&lt;&gt;&gt;
 {
     static_assert(std::is_same_v&lt;Dim, Dim&gt;, "Grid not found");
     using type = void;
+};
+
+template &lt;class CoordType, class IdxRangeType&gt;
+struct FindIdxType;
+
+template &lt;class... Dims, class IdxRangeType&gt;
+struct FindIdxType&lt;Coord&lt;Dims...&gt;, IdxRangeType&gt;
+{
+    using type = Idx&lt;typename FindGrid&lt;Dims, ddc::to_type_seq_t&lt;IdxRangeType&gt;&gt;::type...&gt;;
 };
 
 template &lt;class... TypeSeqs&gt;
@@ -718,6 +745,9 @@ constexpr int type_seq_permutation_parity_v
 template &lt;class Element, std::size_t n_elements&gt;
 using type_seq_duplicate_t =
         typename detail::TypeSeqDuplicate&lt;Element, std::make_index_sequence&lt;n_elements&gt;&gt;::type;
+
+template &lt;class CoordType, class IdxRangeType&gt;
+using find_idx_t = typename detail::FindIdxType&lt;CoordType, IdxRangeType&gt;::type;
 </code></pre></div>
               
             </div>

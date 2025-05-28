@@ -32,6 +32,7 @@
 | Type | Name |
 | ---: | :--- |
 | typedef typename detail::FindGrid&lt; Dim, TypeSeqGrid &gt;::type | [**find\_grid\_t**](#typedef-find_grid_t)  <br>_A tool to find the grid that is defined along the specified dimension (e.g. get_ [_**GridX**_](structGridX.md) _from_[_**X**_](structX.md) _)_ |
+| typedef typename detail::FindIdxType&lt; CoordType, IdxRangeType &gt;::type | [**find\_idx\_t**](#typedef-find_idx_t)  <br>_Find the type of an index which allows access to a Coordinate of the specified type._  |
 | typedef typename detail::TypeSeqCat&lt; TypeSeqs... &gt;::type | [**type\_seq\_cat\_t**](#typedef-type_seq_cat_t)  <br>_Concatenate type sequences into a new type sequence. This is similar to type\_seq\_merge\_t but it does not remove duplicate elements._  |
 | typedef typename detail::TypeSeqDuplicate&lt; Element, std::make\_index\_sequence&lt; n\_elements &gt; &gt;::type | [**type\_seq\_duplicate\_t**](#typedef-type_seq_duplicate_t)  <br>_Create a type sequence containing the element Element, repeated n times._  |
 | typedef typename detail::TypeSeqRange&lt; TypeSeqIn, Start, End, Start &gt;::type | [**type\_seq\_range\_t**](#typedef-type_seq_range_t)  <br>_A tool to get a subset of a TypeSeq by slicing [Start:End]._  |
@@ -104,6 +105,32 @@ using find_grid_t =  typename detail::FindGrid<Dim, TypeSeqGrid>::type;
 
 
 
+
+<hr>
+
+
+
+### typedef find\_idx\_t 
+
+_Find the type of an index which allows access to a Coordinate of the specified type._ 
+```C++
+using find_idx_t =  typename detail::FindIdxType<CoordType, IdxRangeType>::type;
+```
+
+
+
+
+
+**Template parameters:**
+
+
+* `CoordType` The type of the coordinate 
+* `IdxRangeType` The type of the index range that the index will come from. 
+
+
+
+
+        
 
 <hr>
 

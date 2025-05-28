@@ -249,8 +249,6 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**VectorField**](classVectorField.md) _A class which holds multiple (scalar) fields in order to represent a vector field._     
 * **class** [**VectorFieldCommon**](classVectorFieldCommon.md) 
 * **class** [**VectorFieldMem**](classVectorFieldMem.md) _Pre-declaration of_ [_**VectorFieldMem**_](classVectorFieldMem.md) _._    
-* **class** [**VectorMapper**](classVectorMapper.md) 
-* **class** [**VectorMapper&lt; VectorIndexSet&lt; XIn, YIn &gt;, VectorIndexSet&lt; XOut, YOut &gt;, Mapping, ExecSpace &gt;**](classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.md) _A class to map vector fields from one coordinate system to another._     
 * **class** [**VortexMergerDensitySolution**](classVortexMergerDensitySolution.md) _Initial condition for the vortex merger simulation._     
 * **class** [**VortexMergerEquilibria**](classVortexMergerEquilibria.md) _Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates._     
 * **struct** [**Vpar**](structVpar.md) _Define non periodic parallel velocity_  _._    

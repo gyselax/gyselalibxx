@@ -553,6 +553,10 @@
 <td style="text-align: left;"><a href="#typedef-find_grid_t"><strong>find_grid_t</strong></a>  <br><em>A tool to find the grid that is defined along the specified dimension (e.g. get</em> <a href="structGridX.html"><em><strong>GridX</strong></em></a> <em>from</em><a href="structX.html"><em><strong>X</strong></em></a> <em>)</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef typename detail::FindIdxType&lt; CoordType, IdxRangeType &gt;::type</td>
+<td style="text-align: left;"><a href="#typedef-find_idx_t"><strong>find_idx_t</strong></a>  <br><em>Find the type of an index which allows access to a Coordinate of the specified type.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef typename detail::TypeSeqCat&lt; TypeSeqs... &gt;::type</td>
 <td style="text-align: left;"><a href="#typedef-type_seq_cat_t"><strong>type_seq_cat_t</strong></a>  <br><em>Concatenate type sequences into a new type sequence. This is similar to type_seq_merge_t but it does not remove duplicate elements.</em></td>
 </tr>
@@ -594,6 +598,17 @@
 <p><em>A tool to find the grid that is defined along the specified dimension (e.g. get</em> <a href="structGridX.html"><em><strong>GridX</strong></em></a> <em>from</em><a href="structX.html"><em><strong>X</strong></em></a> <em>)</em></p>
 <pre><code class="language-C++">using find_grid_t =  typename detail::FindGrid&lt;Dim, TypeSeqGrid&gt;::type;
 </code></pre>
+<hr>
+
+<h3 id="typedef-find_idx_t">typedef find_idx_t</h3>
+<p><em>Find the type of an index which allows access to a Coordinate of the specified type.</em> </p>
+<pre><code class="language-C++">using find_idx_t =  typename detail::FindIdxType&lt;CoordType, IdxRangeType&gt;::type;
+</code></pre>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>CoordType</code> The type of the coordinate </li>
+<li><code>IdxRangeType</code> The type of the index range that the index will come from. </li>
+</ul>
 <hr>
 
 <h3 id="typedef-type_seq_cat_t">typedef type_seq_cat_t</h3>

@@ -155,8 +155,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md) _A class which evaluates the triangular Bernstein polynomials._ 
 * **class** [**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md) 
 * **class** [**VectorFieldCommon**](classVectorFieldCommon.md) 
-* **class** [**VectorMapper**](classVectorMapper.md) 
-* **class** [**VectorMapper&lt; VectorIndexSet&lt; XIn, YIn &gt;, VectorIndexSet&lt; XOut, YOut &gt;, Mapping, ExecSpace &gt;**](classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.md) _A class to map vector fields from one coordinate system to another._ 
 * **class** [**VortexMergerDensitySolution**](classVortexMergerDensitySolution.md) _Initial condition for the vortex merger simulation._ 
 * **class** [**VortexMergerEquilibria**](classVortexMergerEquilibria.md) _Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates._ 
 * **class** [**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md) _Helper class for the initialisation of the mesh of interpolation points._ 

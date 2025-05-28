@@ -231,6 +231,10 @@
       <node id="65">
         <label>vector_mapper.hpp</label>
         <link refid="vector__mapper_8hpp_source"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
         <childnode refid="33" relation="include">
         </childnode>
         <childnode refid="35" relation="include">

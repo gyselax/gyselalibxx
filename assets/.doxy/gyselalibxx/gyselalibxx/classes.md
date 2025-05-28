@@ -479,8 +479,6 @@
 * [**VectorFieldMem**](classVectorFieldMem.md)
 * [**VectorIndexIdMap**](structtensor__tools_1_1VectorIndexIdMap.md)
 ([**tensor\_tools**](namespacetensor__tools.md))
-* [**VectorMapper**](classVectorMapper.md)
-* [**VectorMapper&lt; VectorIndexSet&lt; XIn, YIn &gt;, VectorIndexSet&lt; XOut, YOut &gt;, Mapping, ExecSpace &gt;**](classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.md)
 * [**VortexMergerDensitySolution**](classVortexMergerDensitySolution.md)
 * [**VortexMergerEquilibria**](classVortexMergerEquilibria.md)
 * [**Vpar**](structVpar.md)

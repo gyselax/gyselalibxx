@@ -16,7 +16,8 @@
 
 ## c
 
-* **create\_geometry\_mirror\_view** ([**vector\_mapper.hpp**](vector__mapper_8hpp.md))
+* **copy\_to\_vector\_space** ([**vector\_mapper.hpp**](vector__mapper_8hpp.md))
+* **create\_mirror\_view\_and\_copy\_on\_vector\_space** ([**vector\_mapper.hpp**](vector__mapper_8hpp.md))
 * **compute\_collfreq** ([**collisions\_utils.cpp**](collisions__utils_8cpp.md), [**collisions\_utils.hpp**](collisions__utils_8hpp.md))
 * **compute\_collfreq\_ab** ([**collisions\_utils.cpp**](collisions__utils_8cpp.md), [**collisions\_utils.hpp**](collisions__utils_8hpp.md))
 * **compute\_momentum\_energy\_exchange** ([**collisions\_utils.cpp**](collisions__utils_8cpp.md), [**collisions\_utils.hpp**](collisions__utils_8hpp.md))
@@ -147,6 +148,7 @@
 
 ## t
 
+* **to\_vector\_space** ([**vector\_mapper.hpp**](vector__mapper_8hpp.md))
 * **tensor\_mul** ([**indexed\_tensor.hpp**](indexed__tensor_8hpp.md))
 * **to\_gko\_multivector** ([**matrix\_utils.hpp**](matrix__utils_8hpp.md))
 * **trapezoid\_quadrature\_coefficients** ([**trapezoid\_quadrature.hpp**](trapezoid__quadrature_8hpp.md))

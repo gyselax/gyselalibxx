@@ -39,33 +39,33 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="32">
+      <node id="33">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/barycentric_to_cartesian.hpp</label>
         <link refid="barycentric__to__cartesian_8hpp_source"/>
       </node>
-      <node id="33">
+      <node id="34">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_barycentric.hpp</label>
         <link refid="cartesian__to__barycentric_8hpp_source"/>
-        <childnode refid="26" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
       </node>
-      <node id="28">
+      <node id="29">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_circular.hpp</label>
         <link refid="cartesian__to__circular_8hpp_source"/>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="29">
+      <node id="30">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp</label>
         <link refid="cartesian__to__cylindrical_8hpp_source"/>
       </node>
-      <node id="34">
+      <node id="35">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_czarny.hpp</label>
         <link refid="cartesian__to__czarny_8hpp_source"/>
       </node>
-      <node id="30">
+      <node id="31">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp</label>
         <link refid="circular__to__cartesian_8hpp_source"/>
         <childnode refid="12" relation="include">
@@ -79,68 +79,68 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="31">
+      <node id="32">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp</label>
         <link refid="coord__transformation__tools_8hpp_source"/>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="32" relation="include">
-        </childnode>
         <childnode refid="33" relation="include">
-        </childnode>
-        <childnode refid="28" relation="include">
-        </childnode>
-        <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
-        <childnode refid="30" relation="include">
+        <childnode refid="29" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
         <childnode refid="36" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="24" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="41" relation="include">
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
         </childnode>
       </node>
-      <node id="35">
+      <node id="36">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cylindrical_to_cartesian.hpp</label>
         <link refid="cylindrical__to__cartesian_8hpp_source"/>
       </node>
-      <node id="36">
+      <node id="37">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp</label>
         <link refid="czarny__to__cartesian_8hpp_source"/>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="21">
+      <node id="22">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping_builder.hpp</label>
         <link refid="discrete__mapping__builder_8hpp_source"/>
       </node>
-      <node id="20">
+      <node id="21">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp</label>
         <link refid="discrete__to__cartesian_8hpp_source"/>
-        <childnode refid="21" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
       </node>
       <node id="10">
@@ -149,14 +149,16 @@
         <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="24">
+      <node id="25">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inverse_jacobian_matrix.hpp</label>
         <link refid="inverse__jacobian__matrix_8hpp_source"/>
         <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
         </childnode>
       </node>
       <node id="13">
@@ -168,16 +170,18 @@
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
         <childnode refid="16" relation="include">
         </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
       </node>
-      <node id="25">
+      <node id="26">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp</label>
         <link refid="toroidal__to__cylindrical_8hpp_source"/>
       </node>
-      <node id="44">
+      <node id="14">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp</label>
         <link refid="vector__mapper_8hpp_source"/>
         <childnode refid="12" relation="include">
@@ -192,7 +196,7 @@
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -201,30 +205,30 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="27">
+      <node id="28">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp</label>
         <link refid="tensor_8hpp_source"/>
-        <childnode refid="28" relation="include">
-        </childnode>
         <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
-        <childnode refid="35" relation="include">
+        <childnode refid="32" relation="include">
         </childnode>
         <childnode refid="36" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="42" relation="include">
+        <childnode refid="43" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
       </node>
       <node id="71">
@@ -232,7 +236,7 @@
         <link refid="tensor__common_8hpp_source"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
       </node>
       <node id="4">
@@ -240,7 +244,7 @@
         <link refid="tensor__index__tools_8hpp_source"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
         <childnode refid="71" relation="include">
         </childnode>
@@ -252,33 +256,33 @@
         </childnode>
         <childnode refid="46" relation="include">
         </childnode>
-        <childnode refid="44" relation="include">
-        </childnode>
         <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="23" relation="include">
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
         </childnode>
         <childnode refid="47" relation="include">
         </childnode>
         <childnode refid="48" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="49" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="52" relation="include">
         </childnode>
         <childnode refid="66" relation="include">
         </childnode>
       </node>
-      <node id="42">
+      <node id="43">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp</label>
         <link refid="vector__field__common_8hpp_source"/>
-        <childnode refid="43" relation="include">
+        <childnode refid="44" relation="include">
         </childnode>
         <childnode refid="51" relation="include">
         </childnode>
@@ -291,18 +295,18 @@
         <childnode refid="62" relation="include">
         </childnode>
       </node>
-      <node id="43">
+      <node id="44">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp</label>
         <link refid="vector__field__mem_8hpp_source"/>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="44" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="45" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="23" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
         <childnode refid="47" relation="include">
         </childnode>
@@ -311,7 +315,7 @@
         <childnode refid="52" relation="include">
         </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp</label>
         <link refid="advection__field__rtheta_8hpp_source"/>
         <childnode refid="7" relation="include">
@@ -321,17 +325,17 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="23">
+      <node id="24">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp</label>
         <link refid="geometryRTheta_2geometry_2geometry_8hpp_source"/>
       </node>
-      <node id="17">
+      <node id="18">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp</label>
         <link refid="vortex__merger__equilibrium_8hpp_source"/>
-        <childnode refid="18" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="19">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp</label>
         <link refid="vortex__merger__initialisation_8hpp_source"/>
       </node>
@@ -367,16 +371,16 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/mpisplitvlasovsolver.hpp</label>
         <link refid="mpisplitvlasovsolver_8hpp_source"/>
       </node>
-      <node id="26">
+      <node id="27">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</label>
         <link refid="bernstein_8hpp_source"/>
-        <childnode refid="22" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
       </node>
-      <node id="22">
+      <node id="23">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp</label>
         <link refid="polar__bsplines_8hpp_source"/>
-        <childnode refid="23" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
       </node>
       <node id="73">
@@ -387,7 +391,7 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp</label>
         <link refid="central__fdm__partial__derivatives__with__boundary__values_8hpp_source"/>
       </node>
-      <node id="15">
+      <node id="16">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp</label>
         <link refid="gradient_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -408,7 +412,7 @@
       <node id="49">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/l_norm_tools.hpp</label>
         <link refid="l__norm__tools_8hpp"/>
-        <childnode refid="17" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
@@ -423,18 +427,18 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp</label>
         <link refid="lie__poisson__bracket_8hpp_source"/>
       </node>
-      <node id="19">
+      <node id="20">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp</label>
         <link refid="math__tools_8hpp_source"/>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
-        <childnode refid="26" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="75">
@@ -455,20 +459,20 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp</label>
         <link refid="connectivity_8hpp_source"/>
       </node>
-      <node id="37">
+      <node id="38">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/onion_patch_locator.hpp</label>
         <link refid="onion__patch__locator_8hpp_source"/>
-        <childnode refid="38" relation="include">
-        </childnode>
-        <childnode refid="39" relation="include">
-        </childnode>
-      </node>
-      <node id="38">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/utils_patch_locators.hpp</label>
-        <link refid="utils__patch__locators_8hpp_source"/>
         <childnode refid="39" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/utils_patch_locators.hpp</label>
+        <link refid="utils__patch__locators_8hpp_source"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
         </childnode>
       </node>
       <node id="55">
@@ -476,7 +480,7 @@
         <link refid="multipatch__field_8hpp_source"/>
         <childnode refid="56" relation="include">
         </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="40" relation="include">
         </childnode>
         <childnode refid="50" relation="include">
         </childnode>
@@ -494,19 +498,19 @@
         <link refid="multipatch__type_8hpp_source"/>
         <childnode refid="54" relation="include">
         </childnode>
-        <childnode refid="37" relation="include">
+        <childnode refid="38" relation="include">
         </childnode>
         <childnode refid="55" relation="include">
         </childnode>
         <childnode refid="56" relation="include">
         </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="40" relation="include">
         </childnode>
         <childnode refid="63" relation="include">
         </childnode>
         <childnode refid="64" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
+        <childnode refid="41" relation="include">
         </childnode>
         <childnode refid="65" relation="include">
         </childnode>
@@ -514,14 +518,14 @@
       <node id="52">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp</label>
         <link refid="types_8hpp_source"/>
-        <childnode refid="37" relation="include">
+        <childnode refid="38" relation="include">
         </childnode>
         <childnode refid="53" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
+        <childnode refid="41" relation="include">
         </childnode>
       </node>
-      <node id="39">
+      <node id="40">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</label>
         <link refid="constant__extrapolation__rules__onion_8hpp_source"/>
       </node>
@@ -533,7 +537,7 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp</label>
         <link refid="multipatch__spline__builder__2d_8hpp_source"/>
       </node>
-      <node id="40">
+      <node id="41">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp</label>
         <link refid="multipatch__spline__evaluator__2d_8hpp_source"/>
       </node>
@@ -567,12 +571,12 @@
         <childnode refid="70" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="17">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</label>
         <link refid="polarpoissonlikesolver_8hpp_source"/>
-        <childnode refid="14" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
@@ -581,10 +585,10 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="41">
+      <node id="42">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/volume_quadrature_nd.hpp</label>
         <link refid="volume__quadrature__nd_8hpp"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="51">
@@ -676,7 +680,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="159" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="159" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="186" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="186" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1aa14f1774e052704c69d90ca494bdb8f6" prot="public" static="no">
         <templateparamlist>
@@ -707,7 +711,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="167" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="167" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="194" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="194" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1ac95562d656c2ae2f82f9bc55881627f6" prot="public" static="no">
         <templateparamlist>
@@ -729,7 +733,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="171" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="171" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="198" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="198" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1a77a5e0ba78f573fcf19e118cc8d08b61" prot="public" static="no">
         <templateparamlist>
@@ -758,7 +762,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="178" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="178" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="205" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="205" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1a8d61e6a1acbf461eacb2729f96286f58" prot="public" static="no">
         <templateparamlist>
@@ -800,7 +804,47 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="204" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="205" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="231" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="232" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="type__seq__tools_8hpp_1add882d1d787f328ab85f39c86132221b" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class CoordType</type>
+          </param>
+          <param>
+            <type>class IdxRangeType</type>
+          </param>
+        </templateparamlist>
+        <type>typename detail::FindIdxType&lt; CoordType, IdxRangeType &gt;::type</type>
+        <definition>using find_idx_t =  typename detail::FindIdxType&lt;CoordType, IdxRangeType&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>find_idx_t</name>
+        <briefdescription>
+<para>Find the type of an index which allows access to a Coordinate of the specified type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CoordType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the coordinate </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IdxRangeType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the index range that the index will come from. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="240" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="240" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -832,7 +876,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="185" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="186" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="212" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="213" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="type__seq__tools_8hpp_1ae2b505ec732fa7a34361c329e7d1e66b" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -881,7 +925,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="195" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="196" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="222" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="223" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -894,180 +938,210 @@
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
 <codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">detail<sp/>{</highlight></codeline>
 <codeline lineno="5"><highlight class="normal"></highlight></codeline>
-<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
-<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TypeSeqIn,</highlight></codeline>
-<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::size_t<sp/>Start,</highlight></codeline>
-<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::size_t<sp/>End,</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::size_t<sp/>Idx<sp/>=<sp/>0,</highlight></codeline>
-<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TypeSeqOut<sp/>=<sp/>ddc::detail::TypeSeq&lt;&gt;&gt;</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqRange</highlight></codeline>
-<codeline lineno="13"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(End<sp/>&lt;=<sp/>ddc::type_seq_size_v&lt;TypeSeqIn&gt;);</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">new_result_type<sp/>=<sp/>std::conditional_t&lt;</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(Start<sp/>&lt;=<sp/>Idx)<sp/>&amp;&amp;<sp/>(Idx<sp/>&lt;<sp/>End),</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::type_seq_merge_t&lt;</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TypeSeqOut,</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;ddc::type_seq_element_t&lt;Idx,<sp/>TypeSeqIn&gt;&gt;&gt;,</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TypeSeqOut&gt;;</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TypeSeqRange&lt;TypeSeqIn,<sp/>Start,<sp/>End,<sp/>Idx<sp/>+<sp/>1,<sp/>new_result_type&gt;::type;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Gr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">Dim,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetCDim</highlight></codeline>
+<codeline lineno="8"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>GridDim;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Gr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">Dim&gt;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetCDim&lt;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GridDim,</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::enable_if_t&lt;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typename<sp/>GridDim::continuous_dimension_type,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typename<sp/>GridDim::continuous_dimension_type&gt;,</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>void&gt;&gt;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>GridDim::continuous_dimension_type;</highlight></codeline>
 <codeline lineno="22"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight></codeline>
-<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqIn,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Start,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>End,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqOut&gt;</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqRange&lt;TypeSeqIn,<sp/>Start,<sp/>End,<sp/>End,<sp/>TypeSeqOut&gt;</highlight></codeline>
-<codeline lineno="26"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>TypeSeqOut;</highlight></codeline>
-<codeline lineno="28"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight></codeline>
-<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqGr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">&gt;</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">FindGrid;</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Dim,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HeadGrid,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Grids&gt;</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">FindGrid&lt;Dim,<sp/>ddc::detail::TypeSeq&lt;HeadGrid,<sp/>Grids...&gt;&gt;</highlight></codeline>
-<codeline lineno="35"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>std::conditional_t&lt;</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;typename<sp/>HeadGrid::continuous_dimension_type,<sp/>Dim&gt;,</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>HeadGrid,</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>FindGrid&lt;Dim,<sp/>ddc::detail::TypeSeq&lt;Grids...&gt;&gt;::type&gt;;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TypeSeqIn,</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::size_t<sp/>Start,</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::size_t<sp/>End,</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::size_t<sp/>Idx<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TypeSeqOut<sp/>=<sp/>ddc::detail::TypeSeq&lt;&gt;&gt;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqRange</highlight></codeline>
+<codeline lineno="31"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(End<sp/>&lt;=<sp/>ddc::type_seq_size_v&lt;TypeSeqIn&gt;);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">new_result_type<sp/>=<sp/>std::conditional_t&lt;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(Start<sp/>&lt;=<sp/>Idx)<sp/>&amp;&amp;<sp/>(Idx<sp/>&lt;<sp/>End),</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::type_seq_merge_t&lt;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TypeSeqOut,</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;ddc::type_seq_element_t&lt;Idx,<sp/>TypeSeqIn&gt;&gt;&gt;,</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TypeSeqOut&gt;;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TypeSeqRange&lt;TypeSeqIn,<sp/>Start,<sp/>End,<sp/>Idx<sp/>+<sp/>1,<sp/>new_result_type&gt;::type;</highlight></codeline>
 <codeline lineno="40"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight></codeline>
-<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim&gt;</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">FindGrid&lt;Dim,<sp/>ddc::detail::TypeSeq&lt;&gt;&gt;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqIn,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Start,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>End,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqOut&gt;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqRange&lt;TypeSeqIn,<sp/>Start,<sp/>End,<sp/>End,<sp/>TypeSeqOut&gt;</highlight></codeline>
 <codeline lineno="44"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_same_v&lt;Dim,<sp/>Dim&gt;,<sp/></highlight><highlight class="stringliteral">&quot;Grid<sp/>not<sp/>found&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>void;</highlight></codeline>
-<codeline lineno="47"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"></highlight></codeline>
-<codeline lineno="49"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TypeSeqs&gt;</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqCat;</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>First,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Second,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailTypeSeqs&gt;</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqCat&lt;ddc::detail::TypeSeq&lt;First...&gt;,<sp/>ddc::detail::TypeSeq&lt;Second...&gt;,<sp/>TailTypeSeqs...&gt;</highlight></codeline>
-<codeline lineno="54"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TypeSeqCat&lt;ddc::detail::TypeSeq&lt;First...,<sp/>Second...&gt;,<sp/>TailTypeSeqs...&gt;::type;</highlight></codeline>
-<codeline lineno="57"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"></highlight></codeline>
-<codeline lineno="59"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>First,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Second&gt;</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqCat&lt;ddc::detail::TypeSeq&lt;First...&gt;,<sp/>ddc::detail::TypeSeq&lt;Second...&gt;&gt;</highlight></codeline>
-<codeline lineno="61"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>ddc::detail::TypeSeq&lt;First...,<sp/>Second...&gt;;</highlight></codeline>
-<codeline lineno="63"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"></highlight></codeline>
-<codeline lineno="65"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>StartTypeSeq,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ResultTypeSeq<sp/>=<sp/>ddc::detail::TypeSeq&lt;&gt;&gt;</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetUnique;</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"></highlight></codeline>
-<codeline lineno="68"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HeadElem,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailElems,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ResultElems&gt;</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetUnique&lt;ddc::detail::TypeSeq&lt;HeadElem,<sp/>TailElems...&gt;,<sp/>ddc::detail::TypeSeq&lt;ResultElems...&gt;&gt;</highlight></codeline>
-<codeline lineno="70"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>GetUnique&lt;</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailElems...&gt;,</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::conditional_t&lt;</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::in_tags_v&lt;HeadElem,<sp/>ddc::detail::TypeSeq&lt;ResultElems...&gt;&gt;,</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;ResultElems...&gt;,</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;ResultElems...,<sp/>HeadElem&gt;&gt;&gt;::type;</highlight></codeline>
-<codeline lineno="77"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>TypeSeqOut;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqGr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">FindGrid;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Dim,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HeadGrid,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Grids&gt;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">FindGrid&lt;Dim,<sp/>ddc::detail::TypeSeq&lt;HeadGrid,<sp/>Grids...&gt;&gt;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>std::conditional_t&lt;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;typename<sp/>GetCDim&lt;HeadGrid&gt;::type,<sp/>Dim&gt;,</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>HeadGrid,</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>FindGrid&lt;Dim,<sp/>ddc::detail::TypeSeq&lt;Grids...&gt;&gt;::type&gt;;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim&gt;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">FindGrid&lt;Dim,<sp/>ddc::detail::TypeSeq&lt;&gt;&gt;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_same_v&lt;Dim,<sp/>Dim&gt;,<sp/></highlight><highlight class="stringliteral">&quot;Grid<sp/>not<sp/>found&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>void;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>CoordType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeType&gt;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">FindIdxType;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">IdxRangeType&gt;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">FindIdxType&lt;Coord&lt;Dims...&gt;,<sp/>IdxRangeType&gt;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>Idx&lt;typename<sp/>FindGrid&lt;Dims,<sp/>ddc::to_type_seq_t&lt;IdxRangeType&gt;&gt;::type...&gt;;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TypeSeqs&gt;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqCat;</highlight></codeline>
 <codeline lineno="78"><highlight class="normal"></highlight></codeline>
-<codeline lineno="79"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ResultTypeSeq&gt;</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetUnique&lt;ddc::detail::TypeSeq&lt;&gt;,<sp/>ResultTypeSeq&gt;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>First,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Second,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailTypeSeqs&gt;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqCat&lt;ddc::detail::TypeSeq&lt;First...&gt;,<sp/>ddc::detail::TypeSeq&lt;Second...&gt;,<sp/>TailTypeSeqs...&gt;</highlight></codeline>
 <codeline lineno="81"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>ResultTypeSeq;</highlight></codeline>
-<codeline lineno="83"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"></highlight></codeline>
-<codeline lineno="85"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OrderedTypeSeqType&gt;</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity;</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"></highlight></codeline>
-<codeline lineno="88"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HeadType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailTypeSeq,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailOrderedTypeSeq&gt;</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity&lt;</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;</highlight></codeline>
-<codeline lineno="92"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;</highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailOrderedTypeSeq...&gt;,</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;::type&gt;,</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Cannot<sp/>calculate<sp/>the<sp/>permutation<sp/>parity<sp/>of<sp/>a<sp/>type<sp/>seq<sp/>with<sp/>duplicate<sp/>elements.&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;&gt;::type&gt;,</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Cannot<sp/>calculate<sp/>the<sp/>permutation<sp/>parity<sp/>of<sp/>a<sp/>type<sp/>seq<sp/>with<sp/>duplicate<sp/>elements.&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>value<sp/>=<sp/>GetPermutationParity&lt;</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailTypeSeq...&gt;,</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailOrderedTypeSeq...&gt;&gt;::value;</highlight></codeline>
-<codeline lineno="108"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"></highlight></codeline>
-<codeline lineno="110"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HeadType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailTypeSeq,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">OrderedHeadType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailOrderedTypeSeq&gt;</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity&lt;</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;</highlight></codeline>
-<codeline lineno="114"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType,<sp/>TailOrderedTypeSeq...&gt;,</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;::type&gt;,</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Cannot<sp/>calculate<sp/>the<sp/>permutation<sp/>parity<sp/>of<sp/>a<sp/>type<sp/>seq<sp/>with<sp/>duplicate<sp/>elements.&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
-<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
-<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;&gt;::type&gt;,</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Cannot<sp/>calculate<sp/>the<sp/>permutation<sp/>parity<sp/>of<sp/>a<sp/>type<sp/>seq<sp/>with<sp/>duplicate<sp/>elements.&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>value<sp/>=<sp/>-GetPermutationParity&lt;</highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::type_seq_replace_t&lt;</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailTypeSeq...&gt;,</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType&gt;,</highlight></codeline>
-<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType&gt;&gt;,</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailOrderedTypeSeq...&gt;&gt;::value;</highlight></codeline>
-<codeline lineno="133"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="134"><highlight class="normal"></highlight></codeline>
-<codeline lineno="135"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;&gt;</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity&lt;ddc::detail::TypeSeq&lt;&gt;,<sp/>ddc::detail::TypeSeq&lt;&gt;&gt;</highlight></codeline>
-<codeline lineno="137"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>value<sp/>=<sp/>1;</highlight></codeline>
-<codeline lineno="139"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"></highlight></codeline>
-<codeline lineno="141"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Element,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IndexSequence&gt;</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqDuplicate;</highlight></codeline>
-<codeline lineno="143"><highlight class="normal"></highlight></codeline>
-<codeline lineno="144"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Element,<sp/>std::size_t...<sp/>Is&gt;</highlight></codeline>
-<codeline lineno="145"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqDuplicate&lt;Element,<sp/>std::index_sequence&lt;Is...&gt;&gt;</highlight></codeline>
-<codeline lineno="146"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="147"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">&gt;</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">get_element<sp/>=<sp/>Element;</highlight></codeline>
-<codeline lineno="150"><highlight class="normal"></highlight></codeline>
-<codeline lineno="151"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>ddc::detail::TypeSeq&lt;get_element&lt;Is&gt;...&gt;;</highlight></codeline>
-<codeline lineno="153"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"></highlight></codeline>
-<codeline lineno="155"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>detail</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="156"><highlight class="normal"></highlight></codeline>
-<codeline lineno="158"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqIn,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Start,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>End&gt;</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_range_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqRange&lt;TypeSeqIn,<sp/>Start,<sp/>End,<sp/>Start&gt;::type;</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"></highlight></codeline>
-<codeline lineno="166"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TypeSeqs&gt;</highlight></codeline>
-<codeline lineno="167"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_cat_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqCat&lt;TypeSeqs...&gt;::type;</highlight></codeline>
-<codeline lineno="168"><highlight class="normal"></highlight></codeline>
-<codeline lineno="170"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqGr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">&gt;</highlight></codeline>
-<codeline lineno="171"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_grid_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::FindGrid&lt;Dim,<sp/>TypeSeqGrid&gt;::type;</highlight></codeline>
-<codeline lineno="172"><highlight class="normal"></highlight></codeline>
-<codeline lineno="177"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>StartTypeSeq&gt;</highlight></codeline>
-<codeline lineno="178"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_unique_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;StartTypeSeq&gt;::type;</highlight></codeline>
-<codeline lineno="179"><highlight class="normal"></highlight></codeline>
-<codeline lineno="184"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType&gt;</highlight></codeline>
-<codeline lineno="185"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>type_seq_has_unique_elements_v</highlight></codeline>
-<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>std::is_same_v&lt;TypeSeqType,<sp/>type_seq_unique_t&lt;TypeSeqType&gt;&gt;;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TypeSeqCat&lt;ddc::detail::TypeSeq&lt;First...,<sp/>Second...&gt;,<sp/>TailTypeSeqs...&gt;::type;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>First,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Second&gt;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqCat&lt;ddc::detail::TypeSeq&lt;First...&gt;,<sp/>ddc::detail::TypeSeq&lt;Second...&gt;&gt;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>ddc::detail::TypeSeq&lt;First...,<sp/>Second...&gt;;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>StartTypeSeq,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ResultTypeSeq<sp/>=<sp/>ddc::detail::TypeSeq&lt;&gt;&gt;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetUnique;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HeadElem,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailElems,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ResultElems&gt;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetUnique&lt;ddc::detail::TypeSeq&lt;HeadElem,<sp/>TailElems...&gt;,<sp/>ddc::detail::TypeSeq&lt;ResultElems...&gt;&gt;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>GetUnique&lt;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailElems...&gt;,</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::conditional_t&lt;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::in_tags_v&lt;HeadElem,<sp/>ddc::detail::TypeSeq&lt;ResultElems...&gt;&gt;,</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;ResultElems...&gt;,</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;ResultElems...,<sp/>HeadElem&gt;&gt;&gt;::type;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ResultTypeSeq&gt;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetUnique&lt;ddc::detail::TypeSeq&lt;&gt;,<sp/>ResultTypeSeq&gt;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>ResultTypeSeq;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OrderedTypeSeqType&gt;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HeadType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailTypeSeq,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailOrderedTypeSeq&gt;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity&lt;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailOrderedTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;::type&gt;,</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Cannot<sp/>calculate<sp/>the<sp/>permutation<sp/>parity<sp/>of<sp/>a<sp/>type<sp/>seq<sp/>with<sp/>duplicate<sp/>elements.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;&gt;::type&gt;,</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Cannot<sp/>calculate<sp/>the<sp/>permutation<sp/>parity<sp/>of<sp/>a<sp/>type<sp/>seq<sp/>with<sp/>duplicate<sp/>elements.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>value<sp/>=<sp/>GetPermutationParity&lt;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailOrderedTypeSeq...&gt;&gt;::value;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HeadType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailTypeSeq,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">OrderedHeadType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailOrderedTypeSeq&gt;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity&lt;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType,<sp/>TailOrderedTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;::type&gt;,</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Cannot<sp/>calculate<sp/>the<sp/>permutation<sp/>parity<sp/>of<sp/>a<sp/>type<sp/>seq<sp/>with<sp/>duplicate<sp/>elements.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;&gt;::type&gt;,</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Cannot<sp/>calculate<sp/>the<sp/>permutation<sp/>parity<sp/>of<sp/>a<sp/>type<sp/>seq<sp/>with<sp/>duplicate<sp/>elements.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>value<sp/>=<sp/>-GetPermutationParity&lt;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::type_seq_replace_t&lt;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType&gt;,</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType&gt;&gt;,</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailOrderedTypeSeq...&gt;&gt;::value;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;&gt;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity&lt;ddc::detail::TypeSeq&lt;&gt;,<sp/>ddc::detail::TypeSeq&lt;&gt;&gt;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>value<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Element,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IndexSequence&gt;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqDuplicate;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Element,<sp/>std::size_t...<sp/>Is&gt;</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqDuplicate&lt;Element,<sp/>std::index_sequence&lt;Is...&gt;&gt;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">get_element<sp/>=<sp/>Element;</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>ddc::detail::TypeSeq&lt;get_element&lt;Is&gt;...&gt;;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>detail</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqIn,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Start,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>End&gt;</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_range_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqRange&lt;TypeSeqIn,<sp/>Start,<sp/>End,<sp/>Start&gt;::type;</highlight></codeline>
 <codeline lineno="187"><highlight class="normal"></highlight></codeline>
-<codeline lineno="194"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OrderedTypeSeq&gt;</highlight></codeline>
-<codeline lineno="195"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>type_seq_permutation_parity_v</highlight></codeline>
-<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>detail::GetPermutationParity&lt;TypeSeqType,<sp/>OrderedTypeSeq&gt;::value;</highlight></codeline>
-<codeline lineno="197"><highlight class="normal"></highlight></codeline>
-<codeline lineno="203"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Element,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>n_elements&gt;</highlight></codeline>
-<codeline lineno="204"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_duplicate_t<sp/>=</highlight></codeline>
-<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqDuplicate&lt;Element,<sp/>std::make_index_sequence&lt;n_elements&gt;&gt;::type;</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TypeSeqs&gt;</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_cat_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqCat&lt;TypeSeqs...&gt;::type;</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqGr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_grid_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::FindGrid&lt;Dim,<sp/>TypeSeqGrid&gt;::type;</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>StartTypeSeq&gt;</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_unique_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;StartTypeSeq&gt;::type;</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType&gt;</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>type_seq_has_unique_elements_v</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>std::is_same_v&lt;TypeSeqType,<sp/>type_seq_unique_t&lt;TypeSeqType&gt;&gt;;</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OrderedTypeSeq&gt;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>type_seq_permutation_parity_v</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>detail::GetPermutationParity&lt;TypeSeqType,<sp/>OrderedTypeSeq&gt;::value;</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Element,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>n_elements&gt;</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_duplicate_t<sp/>=</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqDuplicate&lt;Element,<sp/>std::make_index_sequence&lt;n_elements&gt;&gt;::type;</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>CoordType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeType&gt;</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_idx_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::FindIdxType&lt;CoordType,<sp/>IdxRangeType&gt;::type;</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp"/>
   </compounddef>

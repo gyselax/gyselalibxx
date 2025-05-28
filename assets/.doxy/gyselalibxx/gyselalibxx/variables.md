@@ -297,6 +297,7 @@
 * **Field** ([**ddc\_aliases.hpp**](ddc__aliases_8hpp.md))
 * **FieldMem** ([**ddc\_aliases.hpp**](ddc__aliases_8hpp.md))
 * **find\_grid\_t** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))
+* **find\_idx\_t** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))
 
 
 ## g
@@ -312,6 +313,7 @@
 * **has\_inv\_jacobian\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
 * **has\_jacobian\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
 * **has\_singular\_o\_point\_inv\_jacobian\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
+* **has\_same\_variance\_v** ([**vector\_index\_tools.hpp**](vector__index__tools_8hpp.md))
 * **has\_data\_access\_methods\_v** ([**ddc\_alias\_inline\_functions.hpp**](ddc__alias__inline__functions_8hpp.md))
 * **has\_idx\_range\_v** ([**ddc\_alias\_inline\_functions.hpp**](ddc__alias__inline__functions_8hpp.md))
 * **host\_t** ([**ddc\_helper.hpp**](ddc__helper_8hpp.md))
@@ -332,6 +334,7 @@
 * **is\_tensor\_type\_v** ([**tensor\_common.hpp**](tensor__common_8hpp.md))
 * **is\_borrowed\_vector\_field\_v** ([**vector\_field\_common.hpp**](vector__field__common_8hpp.md))
 * **is\_vector\_field\_v** ([**vector\_field\_common.hpp**](vector__field__common_8hpp.md))
+* **is\_cartesian\_vector\_index\_set\_v** ([**vector\_index\_tools.hpp**](vector__index__tools_8hpp.md))
 * **is\_contravariant\_vector\_index\_set\_v** ([**vector\_index\_tools.hpp**](vector__index__tools_8hpp.md))
 * **is\_covariant\_vector\_index\_set\_v** ([**vector\_index\_tools.hpp**](vector__index__tools_8hpp.md))
 * **is\_vector\_index\_set\_v** ([**vector\_index\_tools.hpp**](vector__index__tools_8hpp.md))

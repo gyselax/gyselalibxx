@@ -2,115 +2,17 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="vector__mapper_8hpp" kind="file" language="C++">
     <compoundname>vector_mapper.hpp</compoundname>
+    <includes refid="inverse__jacobian__matrix_8hpp" local="yes">inverse_jacobian_matrix.hpp</includes>
+    <includes refid="metric__tensor__evaluator_8hpp" local="yes">metric_tensor_evaluator.hpp</includes>
     <includes refid="vector__field_8hpp" local="yes">vector_field.hpp</includes>
     <includes refid="vector__field__mem_8hpp" local="yes">vector_field_mem.hpp</includes>
     <includes refid="vector__index__tools_8hpp" local="yes">vector_index_tools.hpp</includes>
     <includes refid="view_8hpp" local="yes">view.hpp</includes>
     <includedby refid="spline__polar__foot__finder_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp</includedby>
     <incdepgraph>
-      <node id="1">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp</label>
-        <link refid="vector__mapper_8hpp"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-      </node>
-      <node id="14">
-        <label>tensor.hpp</label>
-        <link refid="tensor_8hpp_source"/>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-      </node>
-      <node id="16">
-        <label>tensor_common.hpp</label>
-        <link refid="tensor__common_8hpp_source"/>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-      </node>
-      <node id="17">
-        <label>tensor_index_tools.hpp</label>
-        <link refid="tensor__index__tools_8hpp_source"/>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-      </node>
-      <node id="2">
-        <label>vector_field.hpp</label>
-        <link refid="vector__field_8hpp_source"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-      </node>
-      <node id="13">
-        <label>vector_field_common.hpp</label>
-        <link refid="vector__field__common_8hpp_source"/>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-      </node>
-      <node id="12">
-        <label>vector_field_mem.hpp</label>
-        <link refid="vector__field__mem_8hpp_source"/>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-      </node>
-      <node id="19">
-        <label>vector_index_tools.hpp</label>
-        <link refid="vector__index__tools_8hpp_source"/>
-        <childnode refid="6" relation="include">
-        </childnode>
-      </node>
       <node id="3">
-        <label>ddc_alias_inline_functions.hpp</label>
-        <link refid="ddc__alias__inline__functions_8hpp_source"/>
+        <label>coord_transformation_tools.hpp</label>
+        <link refid="coord__transformation__tools_8hpp_source"/>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
@@ -119,68 +21,251 @@
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>inverse_jacobian_matrix.hpp</label>
+        <link refid="inverse__jacobian__matrix_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>metric_tensor_evaluator.hpp</label>
+        <link refid="metric__tensor__evaluator_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp</label>
+        <link refid="vector__mapper_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>indexed_tensor.hpp</label>
+        <link refid="indexed__tensor_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
       </node>
       <node id="7">
-        <label>ddc_aliases.hpp</label>
-        <link refid="ddc__aliases_8hpp_source"/>
-        <childnode refid="6" relation="include">
+        <label>tensor.hpp</label>
+        <link refid="tensor_8hpp_source"/>
+        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-      </node>
-      <node id="9">
-        <label>ddc_helper.hpp</label>
-        <link refid="ddc__helper_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>tensor_common.hpp</label>
+        <link refid="tensor__common_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>tensor_index_tools.hpp</label>
+        <link refid="tensor__index__tools_8hpp_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>vector_field.hpp</label>
+        <link refid="vector__field_8hpp_source"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>vector_field_common.hpp</label>
+        <link refid="vector__field__common_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="18">
-        <label>type_seq_tools.hpp</label>
-        <link refid="type__seq__tools_8hpp_source"/>
-      </node>
-      <node id="20">
-        <label>view.hpp</label>
-        <link refid="view_8hpp_source"/>
+      <node id="26">
+        <label>vector_field_mem.hpp</label>
+        <link refid="vector__field__mem_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
         <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>vector_index_tools.hpp</label>
+        <link refid="vector__index__tools_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>math_tools.hpp</label>
+        <link refid="math__tools_8hpp_source"/>
+        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
       </node>
-      <node id="22">
-        <label>Kokkos_Core.hpp</label>
-      </node>
-      <node id="15">
-        <label>array</label>
+      <node id="24">
+        <label>ddc_alias_inline_functions.hpp</label>
+        <link refid="ddc__alias__inline__functions_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
       </node>
       <node id="10">
-        <label>cassert</label>
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
       </node>
-      <node id="11">
-        <label>cmath</label>
+      <node id="25">
+        <label>ddc_helper.hpp</label>
+        <link refid="ddc__helper_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
       </node>
-      <node id="6">
-        <label>ddc/ddc.hpp</label>
+      <node id="14">
+        <label>type_seq_tools.hpp</label>
+        <link refid="type__seq__tools_8hpp_source"/>
       </node>
-      <node id="8">
-        <label>ddc/kernels/splines.hpp</label>
+      <node id="16">
+        <label>view.hpp</label>
+        <link refid="view_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
       </node>
-      <node id="21">
-        <label>ostream</label>
+      <node id="18">
+        <label>Kokkos_Core.hpp</label>
+      </node>
+      <node id="20">
+        <label>algorithm</label>
       </node>
       <node id="4">
-        <label>type_traits</label>
+        <label>array</label>
+      </node>
+      <node id="8">
+        <label>cassert</label>
+      </node>
+      <node id="21">
+        <label>cmath</label>
+      </node>
+      <node id="9">
+        <label>ddc/ddc.hpp</label>
+      </node>
+      <node id="11">
+        <label>ddc/kernels/splines.hpp</label>
+      </node>
+      <node id="17">
+        <label>ostream</label>
       </node>
       <node id="5">
+        <label>type_traits</label>
+      </node>
+      <node id="6">
         <label>utility</label>
       </node>
     </incdepgraph>
@@ -224,10 +309,92 @@
         <link refid="bsl__predcorr__second__order__implicit_8hpp_source"/>
       </node>
     </invincdepgraph>
-    <innerclass refid="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c" prot="public">VectorMapper&lt; VectorIndexSet&lt; XIn, YIn &gt;, VectorIndexSet&lt; XOut, YOut &gt;, Mapping, ExecSpace &gt;</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="vector__mapper_8hpp_1a7fbe2683c9aa0bf1709fbf044781546f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="vector__mapper_8hpp_1a38e55c617792a81e7b09c659e8e81d98" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
+          <param>
+            <type>class OutVectorSpace</type>
+          </param>
+          <param>
+            <type>class Mapping</type>
+          </param>
+          <param>
+            <type>class CoordType</type>
+          </param>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>class InVectorSpace</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref>&lt; ElementType, OutVectorSpace &gt;</type>
+        <definition>KOKKOS_INLINE_FUNCTION Tensor&lt; ElementType, OutVectorSpace &gt; to_vector_space</definition>
+        <argsstring>(Mapping const &amp;mapping, CoordType const &amp;coord, Tensor&lt; ElementType, InVectorSpace &gt; const &amp;in_vector)</argsstring>
+        <name>to_vector_space</name>
+        <param>
+          <type>Mapping const &amp;</type>
+          <declname>mapping</declname>
+        </param>
+        <param>
+          <type>CoordType const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <param>
+          <type><ref refid="classTensor" kindref="compound">Tensor</ref>&lt; ElementType, InVectorSpace &gt; const &amp;</type>
+          <declname>in_vector</declname>
+        </param>
+        <briefdescription>
+<para>A helper method to get a vector on a different vector space. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A mapping describing the relation between the 2 vector spaces (or describing the relation between the vector space and the Cartesian space if a change of variance (covariant &lt;-&gt; contravariant) is required). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where the vector is defined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">in_vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The vector on the original vector space.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>OutVectorSpace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The vector space of the final vector.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A <ref refid="classVectorField" kindref="compound">VectorField</ref> or <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> containing the vectors in the requested vector space. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" line="32" column="31" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" bodystart="32" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="vector__mapper_8hpp_1ae435497dfdb31b0436f5e272ae3f230b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class OutVectorSpace</type>
+          </param>
           <param>
             <type>class ExecSpace</type>
           </param>
@@ -241,25 +408,111 @@
             <type>class IdxRangeType</type>
           </param>
           <param>
-            <type>class <ref refid="structX" kindref="compound">X</ref></type>
+            <type>class InVectorSpace</type>
           </param>
           <param>
-            <type>class <ref refid="structY" kindref="compound">Y</ref></type>
+            <type>class LayoutStridedPolicy</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void copy_to_vector_space</definition>
+        <argsstring>(ExecSpace exec_space, VectorField&lt; ElementType, IdxRangeType, OutVectorSpace, typename ExecSpace::memory_space &gt; vector_field_out, Mapping mapping, VectorConstField&lt; ElementType, IdxRangeType, InVectorSpace, typename ExecSpace::memory_space, LayoutStridedPolicy &gt; vector_field)</argsstring>
+        <name>copy_to_vector_space</name>
+        <param>
+          <type>ExecSpace</type>
+          <declname>exec_space</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; ElementType, IdxRangeType, OutVectorSpace, typename ExecSpace::memory_space &gt;</type>
+          <declname>vector_field_out</declname>
+        </param>
+        <param>
+          <type>Mapping</type>
+          <declname>mapping</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">VectorConstField</ref>&lt; ElementType, IdxRangeType, InVectorSpace, typename ExecSpace::memory_space, LayoutStridedPolicy &gt;</type>
+          <declname>vector_field</declname>
+        </param>
+        <briefdescription>
+<para>A helper method to get a vector field on a different vector space. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">exec_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The space on which the function is executed (CPU/GPU). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">vector_field_out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The vector field where the vectors on the new vector space should be saved. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A mapping describing the relation between the 2 vector spaces (or describing the relation between the vector space and the Cartesian space if a change of variance (covariant &lt;-&gt; contravariant) is required). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">vector_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The vector field to be mapped to the new vector space.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A <ref refid="classVectorField" kindref="compound">VectorField</ref> or <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> containing the vectors in the requested vector space. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" line="123" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" bodystart="123" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="vector__mapper_8hpp_1a71e6927e680d5568b2a898114a85c8cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class OutVectorSpace</type>
+          </param>
+          <param>
+            <type>class ExecSpace</type>
+          </param>
+          <param>
+            <type>class Mapping</type>
+          </param>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>class IdxRangeType</type>
+          </param>
+          <param>
+            <type>class InVectorSpace</type>
           </param>
           <param>
             <type>class LayoutStridedPolicy</type>
           </param>
         </templateparamlist>
         <type>auto</type>
-        <definition>auto create_geometry_mirror_view</definition>
-        <argsstring>(ExecSpace exec_space, VectorField&lt; ElementType, IdxRangeType, VectorIndexSet&lt; X, Y &gt;, typename ExecSpace::memory_space, LayoutStridedPolicy &gt; vector_field, Mapping mapping)</argsstring>
-        <name>create_geometry_mirror_view</name>
+        <definition>auto create_mirror_view_and_copy_on_vector_space</definition>
+        <argsstring>(ExecSpace exec_space, VectorField&lt; ElementType, IdxRangeType, InVectorSpace, typename ExecSpace::memory_space, LayoutStridedPolicy &gt; vector_field, Mapping mapping)</argsstring>
+        <name>create_mirror_view_and_copy_on_vector_space</name>
         <param>
           <type>ExecSpace</type>
           <declname>exec_space</declname>
         </param>
         <param>
-          <type><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; ElementType, IdxRangeType, VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, typename ExecSpace::memory_space, LayoutStridedPolicy &gt;</type>
+          <type><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; ElementType, IdxRangeType, InVectorSpace, typename ExecSpace::memory_space, LayoutStridedPolicy &gt;</type>
           <declname>vector_field</declname>
         </param>
         <param>
@@ -267,7 +520,7 @@
           <declname>mapping</declname>
         </param>
         <briefdescription>
-<para>A helper class to get a vector field on a pseudo-Cartesian geometry. If the pseudo-Cartesian geometry is the same as the Cartesian geometry then the same vector field is returned. If the pseudo-Cartesian geometry is different then the vectors in the vector field are mapped to the new geometry and a <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> is returned. </para>
+<para>A helper method to get a vector field on a different vector space. If the requested vector space is the same as the current vector space then the same vector field is returned. If the vector space is different then the vectors in the vector field are mapped to the new vector space and a <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> is returned. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -283,7 +536,7 @@
 <parametername direction="in">vector_field</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The vector field to be mapped to the pseudo-Cartesian geometry. </para>
+<para>The vector field to be mapped to the new vector space. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -291,17 +544,26 @@
 <parametername direction="in">mapping</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A mapping describing the relation between the Cartesian and pseudo-Cartesian geometries.</para>
+<para>A mapping describing the relation between the 2 vector spaces (or describing the relation between the vector space and the Cartesian space if a change of variance (covariant &lt;-&gt; contravariant) is required).</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>A <ref refid="classVectorField" kindref="compound">VectorField</ref> or <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> containing the vectors in the pseudo-Cartesian geometry. </para>
+<parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>OutVectorSpace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The vector space of the final vector.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A <ref refid="classVectorField" kindref="compound">VectorField</ref> or <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> containing the vectors in the requested vector space. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" line="136" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" bodystart="136" bodyend="166"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" line="178" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp" bodystart="178" bodyend="204"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -312,127 +574,158 @@
 <codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
-<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_field.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_field_mem.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_index_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;view.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>InVectorSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OutVectorSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ExecSpace&gt;</highlight></codeline>
-<codeline lineno="13" refid="classVectorMapper" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classVectorMapper" kindref="compound">VectorMapper</ref>;</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight></codeline>
-<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>XIn,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>YIn,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>XOut,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>YOut,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ExecSpace&gt;</highlight></codeline>
-<codeline lineno="26" refid="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classVectorMapper" kindref="compound">VectorMapper</ref>&lt;VectorIndexSet&lt;XIn,<sp/>YIn&gt;,<sp/>VectorIndexSet&lt;XOut,<sp/>YOut&gt;,<sp/>Mapping,<sp/>ExecSpace&gt;</highlight></codeline>
-<codeline lineno="27"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(is_accessible_v&lt;ExecSpace,<sp/>Mapping&gt;);</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(std::is_same_v&lt;Coord&lt;XIn,<sp/>YIn&gt;,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Mapping::CoordArg&gt;)</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>||<sp/>(std::is_same_v&lt;Coord&lt;XIn,<sp/>YIn&gt;,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Mapping::CoordResult&gt;));</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(std::is_same_v&lt;Coord&lt;XOut,<sp/>YOut&gt;,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Mapping::CoordArg&gt;)</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>||<sp/>(std::is_same_v&lt;Coord&lt;XOut,<sp/>YOut&gt;,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Mapping::CoordResult&gt;));</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"></highlight></codeline>
-<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="38" refid="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c_1a6619429f4a45d957a5b821f76ab7ed35" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c_1a6619429f4a45d957a5b821f76ab7ed35" kindref="member">memory_space</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ExecSpace::memory_space;</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"></highlight></codeline>
-<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>Mapping<sp/>m_mapping;</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"></highlight></codeline>
-<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="48" refid="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c_1ab036919c0c99391dbe70caf3f6524486" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c_1ab036919c0c99391dbe70caf3f6524486" kindref="member">VectorMapper</ref>(Mapping<sp/>mapping)<sp/>:<sp/>m_mapping(mapping)<sp/>{}</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"></highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>LayoutStr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">edPolicy1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>LayoutStr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">edPolicy2&gt;</highlight></codeline>
-<codeline lineno="59" refid="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c_1a787c7ed77c430264e17d73ee15802098" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c_1a787c7ed77c430264e17d73ee15802098" kindref="member">operator()</ref>(</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace<sp/>exec_space,</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt;</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal">,</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeType,</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;XOut,<sp/>YOut&gt;,</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c_1a6619429f4a45d957a5b821f76ab7ed35" kindref="member">memory_space</ref>,</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LayoutStridedPolicy1&gt;<sp/>vector_field_output,</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">VectorConstField</ref>&lt;</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal">,</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeType,</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;XIn,<sp/>YIn&gt;,</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c_1a6619429f4a45d957a5b821f76ab7ed35" kindref="member">memory_space</ref>,</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LayoutStridedPolicy2&gt;<sp/>vector_field_input)</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxType<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IdxRangeType::discrete_element_type;</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"></highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;Coord&lt;XIn,<sp/>YIn&gt;,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Mapping::CoordArg&gt;)<sp/>{</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Mapping<sp/>mapping_proxy<sp/>=<sp/>m_mapping;</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::parallel_for_each(</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exec_space,</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_idx_range(vector_field_input),</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KOKKOS_LAMBDA(IdxType<sp/>idx)<sp/>{</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">Tensor</ref><sp/>jacobian<sp/>=<sp/>mapping_proxy.jacobian_matrix(ddc::coordinate(idx));</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DVector&lt;XOut, YOut&gt;</ref><sp/>vector_field_out<sp/>=<sp/><ref refid="indexed__tensor_8hpp_1ad8dde2095d734c21601a6cf275da4223" kindref="member">tensor_mul</ref>(</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;i&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(jacobian),</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(vector_field_input));</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;XOut&gt;(vector_field_output)(idx)</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ddcHelper::get&lt;XOut&gt;(vector_field_out);</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;YOut&gt;(vector_field_output)(idx)</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ddcHelper::get&lt;YOut&gt;(vector_field_out);</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classInverseJacobianMatrix" kindref="compound">InverseJacobianMatrix&lt;Mapping&gt;</ref><sp/>inv_mapping(m_mapping);</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::parallel_for_each(</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exec_space,</highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_idx_range(vector_field_input),</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KOKKOS_LAMBDA(IdxType<sp/>idx)<sp/>{</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">Tensor</ref><sp/>map_J<sp/>=<sp/>inv_mapping(ddc::coordinate(idx));</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"></highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DVector&lt;XOut, YOut&gt;</ref><sp/>vector_out<sp/>=<sp/><ref refid="indexed__tensor_8hpp_1ad8dde2095d734c21601a6cf275da4223" kindref="member">tensor_mul</ref>(</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;i&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(map_J),</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(vector_field_input(idx)));</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;XOut&gt;(vector_field_output)(idx)</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ddcHelper::get&lt;XOut&gt;(vector_out);</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;YOut&gt;(vector_field_output)(idx)</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ddcHelper::get&lt;YOut&gt;(vector_out);</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="109"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"></highlight></codeline>
-<codeline lineno="111"><highlight class="normal"></highlight></codeline>
-<codeline lineno="128"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ExecSpace,</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Mapping,</highlight></codeline>
-<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">IdxRangeType,</highlight></codeline>
-<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="structX" kindref="compound">X</ref>,</highlight></codeline>
-<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="structY" kindref="compound">Y</ref>,</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">LayoutStridedPolicy&gt;</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>create_geometry_mirror_view(</highlight></codeline>
-<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace<sp/>exec_space,</highlight></codeline>
-<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt;</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ElementType,</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeType,</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;X,<sp/>Y&gt;,</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ExecSpace::memory_space,</highlight></codeline>
-<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LayoutStridedPolicy&gt;<sp/>vector_field,</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Mapping<sp/>mapping)</highlight></codeline>
-<codeline lineno="145"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordOut<sp/>=<sp/>std::conditional_t&lt;</highlight></codeline>
-<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;typename<sp/>Mapping::CoordArg,<sp/>Coord&lt;X,<sp/>Y&gt;&gt;,</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Mapping::CoordResult,</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Mapping::CoordArg&gt;;</highlight></codeline>
-<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;CoordOut,<sp/>Coord&lt;X,<sp/>Y&gt;&gt;)<sp/>{</highlight></codeline>
-<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>vector_field;</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">X_out<sp/>=<sp/>ddc::type_seq_element_t&lt;0,<sp/>ddc::to_type_seq_t&lt;CoordOut&gt;&gt;;</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Y_out<sp/>=<sp/>ddc::type_seq_element_t&lt;1,<sp/>ddc::to_type_seq_t&lt;CoordOut&gt;&gt;;</highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref>&lt;</highlight></codeline>
-<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::remove_const_t&lt;ElementType&gt;,</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeType,</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VectorIndexSet&lt;X_out,<sp/>Y_out&gt;,</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ExecSpace::memory_space&gt;</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vector_field_out(get_idx_range(vector_field));</highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorMapper" kindref="compound">VectorMapper&lt;VectorIndexSet&lt;X, Y&gt;</ref>,<sp/>VectorIndexSet&lt;X_out,<sp/>Y_out&gt;,<sp/>Mapping,<sp/>ExecSpace&gt;</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vector_mapping(mapping);</highlight></codeline>
-<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vector_mapping(exec_space,<sp/>get_field(vector_field_out),<sp/>get_const_field(vector_field));</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>vector_field_out;</highlight></codeline>
-<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="166"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;inverse_jacobian_matrix.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;metric_tensor_evaluator.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_field.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_field_mem.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_index_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;view.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">OutVectorSpace,</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Mapping,</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CoordType,</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">InVectorSpace&gt;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/><ref refid="classTensor" kindref="compound">Tensor&lt;ElementType, OutVectorSpace&gt;</ref><sp/>to_vector_space(</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Mapping<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>mapping,</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CoordType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord,</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">Tensor&lt;ElementType, InVectorSpace&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>in_vector)</highlight></codeline>
+<codeline lineno="36"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;OutVectorSpace,<sp/>InVectorSpace&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>If<sp/>in<sp/>and<sp/>out<sp/>tensor<sp/>are<sp/>already<sp/>defined<sp/>on<sp/>the<sp/>same<sp/>basis</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>in_vector;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;OutVectorSpace,<sp/>vector_index_set_dual_t&lt;InVectorSpace&gt;&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>If<sp/>in<sp/>and<sp/>out<sp/>tensor<sp/>are<sp/>defined<sp/>on<sp/>co/contra<sp/>variant<sp/>bases<sp/>associated<sp/>with<sp/>the<sp/>same<sp/>coordinate<sp/>system</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(is_contravariant_vector_index_set_v&lt;InVectorSpace&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classMetricTensorEvaluator" kindref="compound">MetricTensorEvaluator&lt;Mapping, CoordType&gt;</ref><sp/>metric(mapping);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="indexed__tensor_8hpp_1ad8dde2095d734c21601a6cf275da4223" kindref="member">tensor_mul</ref>(<ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;i&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(metric(coord)),<sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(in_vector));</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classMetricTensorEvaluator" kindref="compound">MetricTensorEvaluator&lt;Mapping, CoordType&gt;</ref><sp/>metric(mapping);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="indexed__tensor_8hpp_1ad8dde2095d734c21601a6cf275da4223" kindref="member">tensor_mul</ref>(<ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;i&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(metric.inverse(coord)),<sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(in_vector));</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(!has_same_variance_v&lt;InVectorSpace,<sp/>OutVectorSpace&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>If<sp/>different<sp/>variance<sp/>(co/contra)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OutVectorSpaceDual<sp/>=<sp/>vector_index_set_dual_t&lt;OutVectorSpace&gt;;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">Tensor&lt;ElementType, OutVectorSpaceDual&gt;</ref><sp/>dual_out_vector</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>to_vector_space&lt;OutVectorSpaceDual&gt;(mapping,<sp/>coord,<sp/>in_vector);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>to_vector_space&lt;OutVectorSpace&gt;(mapping,<sp/>coord,<sp/>dual_out_vector);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ArgBasis<sp/>=<sp/>ddc::to_type_seq_t&lt;typename<sp/>Mapping::CoordArg&gt;;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ResultBasis<sp/>=<sp/>ddc::to_type_seq_t&lt;typename<sp/>Mapping::CoordResult&gt;;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">InContraVectorSpace<sp/>=<sp/>get_contravariant_dims_t&lt;InVectorSpace&gt;;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OutContraVectorSpace<sp/>=<sp/>get_contravariant_dims_t&lt;OutVectorSpace&gt;;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>((std::is_same_v&lt;InContraVectorSpace,<sp/>ArgBasis&gt;)&amp;&amp;(</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;OutContraVectorSpace,<sp/>ResultBasis&gt;))<sp/>{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>((is_contravariant_vector_index_set_v&lt;InVectorSpace&gt;)&amp;&amp;(</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>is_contravariant_vector_index_set_v&lt;OutVectorSpace&gt;))<sp/>{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>A_{\{p\}}^i<sp/>=<sp/>J_{\{q\rightarrow<sp/>p\}}^i_j<sp/>A_{\{q\}}^j</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="indexed__tensor_8hpp_1ad8dde2095d734c21601a6cf275da4223" kindref="member">tensor_mul</ref>(</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;i&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(mapping.jacobian_matrix(coord)),</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(in_vector));</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>A_{\{p\}<sp/>i}<sp/>=<sp/>(J_{\{q\rightarrow<sp/>p\}}^{-T})_i^j<sp/>A_{\{q\}<sp/>j}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(J_{\{q\rightarrow<sp/>p\}}^{-1})_j^i<sp/>A_{\{q\}<sp/>j}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classInverseJacobianMatrix" kindref="compound">InverseJacobianMatrix</ref><sp/>inv_jacobian(mapping);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="indexed__tensor_8hpp_1ad8dde2095d734c21601a6cf275da4223" kindref="member">tensor_mul</ref>(<ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;i&apos;</highlight><highlight class="normal">&gt;(inv_jacobian(coord)),<sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(in_vector));</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">((std::is_same_v&lt;InContraVectorSpace,<sp/>ResultBasis&gt;)&amp;&amp;(</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;OutContraVectorSpace,<sp/>ArgBasis&gt;));</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>((is_contravariant_vector_index_set_v&lt;InVectorSpace&gt;)&amp;&amp;(</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>is_contravariant_vector_index_set_v&lt;OutVectorSpace&gt;))<sp/>{</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(is_contravariant_vector_index_set_v&lt;OutVectorSpace&gt;);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>A_{\{q\}}^i<sp/>=<sp/>(J_{\{q\rightarrow<sp/>p\}}^{-1})^i_j<sp/>A_{\{q\}}^j</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classInverseJacobianMatrix" kindref="compound">InverseJacobianMatrix</ref><sp/>inv_jacobian(mapping);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;OutVectorSpace, get_covariant_dims_t&lt;InVectorSpace&gt;</ref>&gt;<sp/>I_J</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>inv_jacobian(coord);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="indexed__tensor_8hpp_1ad8dde2095d734c21601a6cf275da4223" kindref="member">tensor_mul</ref>(<ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;i&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(I_J),<sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(in_vector));</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>A_{\{p\}<sp/>i}<sp/>=<sp/>(J_{\{q\rightarrow<sp/>p\}}^{-T})_i^j<sp/>A_{\{q\}<sp/>j}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(J_{\{q\rightarrow<sp/>p\}}^{-1})_j^i<sp/>A_{\{q\}<sp/>j}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(J_{\{p\rightarrow<sp/>q\}})_j^i<sp/>A_{\{q\}<sp/>j}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="indexed__tensor_8hpp_1ad8dde2095d734c21601a6cf275da4223" kindref="member">tensor_mul</ref>(</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;i&apos;</highlight><highlight class="normal">&gt;(mapping.jacobian_matrix(coord)),</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(in_vector));</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="98"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">OutVectorSpace,</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ExecSpace,</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Mapping,</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">IdxRangeType,</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">InVectorSpace,</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">LayoutStridedPolicy&gt;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>copy_to_vector_space(</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace<sp/>exec_space,</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">VectorField&lt;ElementType, IdxRangeType, OutVectorSpace, typename ExecSpace::memory_space&gt;</ref></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vector_field_out,</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Mapping<sp/>mapping,</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">VectorConstField</ref>&lt;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ElementType,</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeType,</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>InVectorSpace,</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ExecSpace::memory_space,</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LayoutStridedPolicy&gt;<sp/>vector_field)</highlight></codeline>
+<codeline lineno="134"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxType<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IdxRangeType::discrete_element_type;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordType<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Mapping::CoordJacobian;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxJacobianType<sp/>=<sp/>find_idx_t&lt;CoordType,<sp/>IdxRangeType&gt;;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_for_each(</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exec_space,</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_idx_range(vector_field),</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KOKKOS_LAMBDA(IdxType<sp/>idx)<sp/>{</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxJacobianType<sp/>coord_idx(idx);</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CoordType<sp/>coord<sp/>=<sp/>ddc::coordinate(coord_idx);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::assign_vector_field_element(</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vector_field_out,</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>idx,</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>to_vector_space&lt;OutVectorSpace&gt;(mapping,<sp/>coord,<sp/>vector_field(idx)));</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="149"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">OutVectorSpace,</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ExecSpace,</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Mapping,</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ElementType,</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">IdxRangeType,</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">InVectorSpace,</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">LayoutStridedPolicy&gt;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>create_mirror_view_and_copy_on_vector_space(</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace<sp/>exec_space,</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt;</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ElementType,</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeType,</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>InVectorSpace,</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ExecSpace::memory_space,</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LayoutStridedPolicy&gt;<sp/>vector_field,</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Mapping<sp/>mapping)</highlight></codeline>
+<codeline lineno="187"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;InVectorSpace,<sp/>OutVectorSpace&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>vector_field;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref>&lt;</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::remove_const_t&lt;ElementType&gt;,</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeType,</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>OutVectorSpace,</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ExecSpace::memory_space&gt;</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vector_field_out(get_idx_range(vector_field));</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>copy_to_vector_space(</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exec_space,</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_field(vector_field_out),</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mapping,</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(vector_field));</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>vector_field_out;</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="204"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp"/>
   </compounddef>

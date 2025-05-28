@@ -11,124 +11,155 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include "inverse_jacobian_matrix.hpp"
+#include "metric_tensor_evaluator.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
 #include "view.hpp"
 
-template <class InVectorSpace, class OutVectorSpace, class Mapping, class ExecSpace>
-class VectorMapper;
-
-template <class XIn, class YIn, class XOut, class YOut, class Mapping, class ExecSpace>
-class VectorMapper<VectorIndexSet<XIn, YIn>, VectorIndexSet<XOut, YOut>, Mapping, ExecSpace>
+template <
+        class OutVectorSpace,
+        class Mapping,
+        class CoordType,
+        class ElementType,
+        class InVectorSpace>
+KOKKOS_INLINE_FUNCTION Tensor<ElementType, OutVectorSpace> to_vector_space(
+        Mapping const& mapping,
+        CoordType const& coord,
+        Tensor<ElementType, InVectorSpace> const& in_vector)
 {
-    static_assert(is_accessible_v<ExecSpace, Mapping>);
-    static_assert(
-            (std::is_same_v<Coord<XIn, YIn>, typename Mapping::CoordArg>)
-            || (std::is_same_v<Coord<XIn, YIn>, typename Mapping::CoordResult>));
-    static_assert(
-            (std::is_same_v<Coord<XOut, YOut>, typename Mapping::CoordArg>)
-            || (std::is_same_v<Coord<XOut, YOut>, typename Mapping::CoordResult>));
+    if constexpr (std::is_same_v<OutVectorSpace, InVectorSpace>) {
+        // If in and out tensor are already defined on the same basis
+        return in_vector;
 
-public:
-    using memory_space = typename ExecSpace::memory_space;
-
-private:
-    Mapping m_mapping;
-
-public:
-    explicit VectorMapper(Mapping mapping) : m_mapping(mapping) {}
-
-    template <class IdxRangeType, class LayoutStridedPolicy1, class LayoutStridedPolicy2>
-    void operator()(
-            ExecSpace exec_space,
-            VectorField<
-                    double,
-                    IdxRangeType,
-                    VectorIndexSet<XOut, YOut>,
-                    memory_space,
-                    LayoutStridedPolicy1> vector_field_output,
-            VectorConstField<
-                    double,
-                    IdxRangeType,
-                    VectorIndexSet<XIn, YIn>,
-                    memory_space,
-                    LayoutStridedPolicy2> vector_field_input)
-    {
-        using IdxType = typename IdxRangeType::discrete_element_type;
-
-        if constexpr (std::is_same_v<Coord<XIn, YIn>, typename Mapping::CoordArg>) {
-            Mapping mapping_proxy = m_mapping;
-            ddc::parallel_for_each(
-                    exec_space,
-                    get_idx_range(vector_field_input),
-                    KOKKOS_LAMBDA(IdxType idx) {
-                        Tensor jacobian = mapping_proxy.jacobian_matrix(ddc::coordinate(idx));
-                        DVector<XOut, YOut> vector_field_out = tensor_mul(
-                                index<'i', 'j'>(jacobian),
-                                index<'j'>(vector_field_input));
-                        ddcHelper::get<XOut>(vector_field_output)(idx)
-                                = ddcHelper::get<XOut>(vector_field_out);
-                        ddcHelper::get<YOut>(vector_field_output)(idx)
-                                = ddcHelper::get<YOut>(vector_field_out);
-                    });
+    } else if constexpr (std::is_same_v<OutVectorSpace, vector_index_set_dual_t<InVectorSpace>>) {
+        // If in and out tensor are defined on co/contra variant bases associated with the same coordinate system
+        if constexpr (is_contravariant_vector_index_set_v<InVectorSpace>) {
+            MetricTensorEvaluator<Mapping, CoordType> metric(mapping);
+            return tensor_mul(index<'i', 'j'>(metric(coord)), index<'j'>(in_vector));
         } else {
-            InverseJacobianMatrix<Mapping> inv_mapping(m_mapping);
-            ddc::parallel_for_each(
-                    exec_space,
-                    get_idx_range(vector_field_input),
-                    KOKKOS_LAMBDA(IdxType idx) {
-                        Tensor map_J = inv_mapping(ddc::coordinate(idx));
+            MetricTensorEvaluator<Mapping, CoordType> metric(mapping);
+            return tensor_mul(index<'i', 'j'>(metric.inverse(coord)), index<'j'>(in_vector));
+        }
 
-                        DVector<XOut, YOut> vector_out = tensor_mul(
-                                index<'i', 'j'>(map_J),
-                                index<'j'>(vector_field_input(idx)));
-                        ddcHelper::get<XOut>(vector_field_output)(idx)
-                                = ddcHelper::get<XOut>(vector_out);
-                        ddcHelper::get<YOut>(vector_field_output)(idx)
-                                = ddcHelper::get<YOut>(vector_out);
-                    });
+    } else if constexpr (!has_same_variance_v<InVectorSpace, OutVectorSpace>) {
+        // If different variance (co/contra)
+        using OutVectorSpaceDual = vector_index_set_dual_t<OutVectorSpace>;
+        Tensor<ElementType, OutVectorSpaceDual> dual_out_vector
+                = to_vector_space<OutVectorSpaceDual>(mapping, coord, in_vector);
+        return to_vector_space<OutVectorSpace>(mapping, coord, dual_out_vector);
+
+    } else {
+        using ArgBasis = ddc::to_type_seq_t<typename Mapping::CoordArg>;
+        using ResultBasis = ddc::to_type_seq_t<typename Mapping::CoordResult>;
+        using InContraVectorSpace = get_contravariant_dims_t<InVectorSpace>;
+        using OutContraVectorSpace = get_contravariant_dims_t<OutVectorSpace>;
+        if constexpr ((std::is_same_v<InContraVectorSpace, ArgBasis>)&&(
+                              std::is_same_v<OutContraVectorSpace, ResultBasis>)) {
+            if constexpr ((is_contravariant_vector_index_set_v<InVectorSpace>)&&(
+                                  is_contravariant_vector_index_set_v<OutVectorSpace>)) {
+                // A_{\{p\}}^i = J_{\{q\rightarrow p\}}^i_j A_{\{q\}}^j
+                return tensor_mul(
+                        index<'i', 'j'>(mapping.jacobian_matrix(coord)),
+                        index<'j'>(in_vector));
+            } else {
+                // A_{\{p\} i} = (J_{\{q\rightarrow p\}}^{-T})_i^j A_{\{q\} j}
+                //             = (J_{\{q\rightarrow p\}}^{-1})_j^i A_{\{q\} j}
+                InverseJacobianMatrix inv_jacobian(mapping);
+                return tensor_mul(index<'j', 'i'>(inv_jacobian(coord)), index<'j'>(in_vector));
+            }
+        } else {
+            static_assert((std::is_same_v<InContraVectorSpace, ResultBasis>)&&(
+                    std::is_same_v<OutContraVectorSpace, ArgBasis>));
+            if constexpr ((is_contravariant_vector_index_set_v<InVectorSpace>)&&(
+                                  is_contravariant_vector_index_set_v<OutVectorSpace>)) {
+                static_assert(is_contravariant_vector_index_set_v<OutVectorSpace>);
+                // A_{\{q\}}^i = (J_{\{q\rightarrow p\}}^{-1})^i_j A_{\{q\}}^j
+                InverseJacobianMatrix inv_jacobian(mapping);
+                DTensor<OutVectorSpace, get_covariant_dims_t<InVectorSpace>> I_J
+                        = inv_jacobian(coord);
+                return tensor_mul(index<'i', 'j'>(I_J), index<'j'>(in_vector));
+            } else {
+                // A_{\{p\} i} = (J_{\{q\rightarrow p\}}^{-T})_i^j A_{\{q\} j}
+                //             = (J_{\{q\rightarrow p\}}^{-1})_j^i A_{\{q\} j}
+                //             = (J_{\{p\rightarrow q\}})_j^i A_{\{q\} j}
+                return tensor_mul(
+                        index<'j', 'i'>(mapping.jacobian_matrix(coord)),
+                        index<'j'>(in_vector));
+            }
         }
     }
-};
-
+}
 
 template <
+        class OutVectorSpace,
         class ExecSpace,
         class Mapping,
         class ElementType,
         class IdxRangeType,
-        class X,
-        class Y,
+        class InVectorSpace,
         class LayoutStridedPolicy>
-auto create_geometry_mirror_view(
+void copy_to_vector_space(
+        ExecSpace exec_space,
+        VectorField<ElementType, IdxRangeType, OutVectorSpace, typename ExecSpace::memory_space>
+                vector_field_out,
+        Mapping mapping,
+        VectorConstField<
+                ElementType,
+                IdxRangeType,
+                InVectorSpace,
+                typename ExecSpace::memory_space,
+                LayoutStridedPolicy> vector_field)
+{
+    using IdxType = typename IdxRangeType::discrete_element_type;
+    using CoordType = typename Mapping::CoordJacobian;
+    using IdxJacobianType = find_idx_t<CoordType, IdxRangeType>;
+    ddc::parallel_for_each(
+            exec_space,
+            get_idx_range(vector_field),
+            KOKKOS_LAMBDA(IdxType idx) {
+                IdxJacobianType coord_idx(idx);
+                CoordType coord = ddc::coordinate(coord_idx);
+                ddcHelper::assign_vector_field_element(
+                        vector_field_out,
+                        idx,
+                        to_vector_space<OutVectorSpace>(mapping, coord, vector_field(idx)));
+            });
+}
+
+template <
+        class OutVectorSpace,
+        class ExecSpace,
+        class Mapping,
+        class ElementType,
+        class IdxRangeType,
+        class InVectorSpace,
+        class LayoutStridedPolicy>
+auto create_mirror_view_and_copy_on_vector_space(
         ExecSpace exec_space,
         VectorField<
                 ElementType,
                 IdxRangeType,
-                VectorIndexSet<X, Y>,
+                InVectorSpace,
                 typename ExecSpace::memory_space,
                 LayoutStridedPolicy> vector_field,
         Mapping mapping)
 {
-    using CoordOut = std::conditional_t<
-            std::is_same_v<typename Mapping::CoordArg, Coord<X, Y>>,
-            typename Mapping::CoordResult,
-            typename Mapping::CoordArg>;
-    if constexpr (std::is_same_v<CoordOut, Coord<X, Y>>) {
+    if constexpr (std::is_same_v<InVectorSpace, OutVectorSpace>) {
         return vector_field;
     } else {
-        using X_out = ddc::type_seq_element_t<0, ddc::to_type_seq_t<CoordOut>>;
-        using Y_out = ddc::type_seq_element_t<1, ddc::to_type_seq_t<CoordOut>>;
         VectorFieldMem<
                 std::remove_const_t<ElementType>,
                 IdxRangeType,
-                VectorIndexSet<X_out, Y_out>,
+                OutVectorSpace,
                 typename ExecSpace::memory_space>
                 vector_field_out(get_idx_range(vector_field));
-        VectorMapper<VectorIndexSet<X, Y>, VectorIndexSet<X_out, Y_out>, Mapping, ExecSpace>
-                vector_mapping(mapping);
-        vector_mapping(exec_space, get_field(vector_field_out), get_const_field(vector_field));
+        copy_to_vector_space(
+                exec_space,
+                get_field(vector_field_out),
+                mapping,
+                get_const_field(vector_field));
         return vector_field_out;
     }
 }

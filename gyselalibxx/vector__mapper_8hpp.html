@@ -540,26 +540,13 @@
 <p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_67161c4ffadea73fddf46ea451c2f62c.html"><strong>coord_transformations</strong></a> <strong>&gt;</strong> <a href="vector__mapper_8hpp.html"><strong>vector_mapper.hpp</strong></a></p>
 <p><a href="vector__mapper_8hpp_source.html">Go to the source code of this file</a></p>
 <ul>
+<li><code>#include "inverse_jacobian_matrix.hpp"</code></li>
+<li><code>#include "metric_tensor_evaluator.hpp"</code></li>
 <li><code>#include "vector_field.hpp"</code></li>
 <li><code>#include "vector_field_mem.hpp"</code></li>
 <li><code>#include "vector_index_tools.hpp"</code></li>
 <li><code>#include "view.hpp"</code></li>
 </ul>
-<h2 id="classes">Classes</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.html"><strong>VectorMapper&lt; VectorIndexSet&lt; XIn, YIn &gt;, VectorIndexSet&lt; XOut, YOut &gt;, Mapping, ExecSpace &gt;</strong></a> &lt;class XIn, class YIn, class XOut, class YOut, class Mapping, class ExecSpace&gt;<br><em>A class to map vector fields from one coordinate system to another.</em></td>
-</tr>
-</tbody>
-</table>
 <h2 id="public-functions">Public Functions</h2>
 <table>
 <thead>
@@ -570,29 +557,85 @@
 </thead>
 <tbody>
 <tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-copy_to_vector_space"><strong>copy_to_vector_space</strong></a> (ExecSpace exec_space, <a href="classVectorField.html"><strong>VectorField</strong></a>&lt; ElementType, IdxRangeType, OutVectorSpace, typename ExecSpace::memory_space &gt; vector_field_out, Mapping mapping, <a href="classVectorField.html"><strong>VectorConstField</strong></a>&lt; ElementType, IdxRangeType, InVectorSpace, typename ExecSpace::memory_space, LayoutStridedPolicy &gt; vector_field) <br><em>A helper method to get a vector field on a different vector space.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">auto</td>
-<td style="text-align: left;"><a href="#function-create_geometry_mirror_view"><strong>create_geometry_mirror_view</strong></a> (ExecSpace exec_space, <a href="classVectorField.html"><strong>VectorField</strong></a>&lt; ElementType, IdxRangeType, VectorIndexSet&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;, typename ExecSpace::memory_space, LayoutStridedPolicy &gt; vector_field, Mapping mapping) <br><em>A helper class to get a vector field on a pseudo-Cartesian geometry. If the pseudo-Cartesian geometry is the same as the Cartesian geometry then the same vector field is returned. If the pseudo-Cartesian geometry is different then the vectors in the vector field are mapped to the new geometry and a</em> <a href="classVectorFieldMem.html"><em><strong>VectorFieldMem</strong></em></a> <em>is returned.</em></td>
+<td style="text-align: left;"><a href="#function-create_mirror_view_and_copy_on_vector_space"><strong>create_mirror_view_and_copy_on_vector_space</strong></a> (ExecSpace exec_space, <a href="classVectorField.html"><strong>VectorField</strong></a>&lt; ElementType, IdxRangeType, InVectorSpace, typename ExecSpace::memory_space, LayoutStridedPolicy &gt; vector_field, Mapping mapping) <br><em>A helper method to get a vector field on a different vector space. If the requested vector space is the same as the current vector space then the same vector field is returned. If the vector space is different then the vectors in the vector field are mapped to the new vector space and a</em> <a href="classVectorFieldMem.html"><em><strong>VectorFieldMem</strong></em></a> <em>is returned.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION <a href="classTensor.html"><strong>Tensor</strong></a>&lt; ElementType, OutVectorSpace &gt;</td>
+<td style="text-align: left;"><a href="#function-to_vector_space"><strong>to_vector_space</strong></a> (Mapping const &amp; mapping, CoordType const &amp; coord, <a href="classTensor.html"><strong>Tensor</strong></a>&lt; ElementType, InVectorSpace &gt; const &amp; in_vector) <br><em>A helper method to get a vector on a different vector space.</em></td>
 </tr>
 </tbody>
 </table>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-create_geometry_mirror_view">function create_geometry_mirror_view</h3>
-<p><em>A helper class to get a vector field on a pseudo-Cartesian geometry. If the pseudo-Cartesian geometry is the same as the Cartesian geometry then the same vector field is returned. If the pseudo-Cartesian geometry is different then the vectors in the vector field are mapped to the new geometry and a</em> <a href="classVectorFieldMem.html"><em><strong>VectorFieldMem</strong></em></a> <em>is returned.</em></p>
-<pre><code class="language-C++">template&lt;class ExecSpace, class Mapping, class ElementType, class IdxRangeType, class X, class Y, class LayoutStridedPolicy&gt;
-auto create_geometry_mirror_view (
+<h3 id="function-copy_to_vector_space">function copy_to_vector_space</h3>
+<p><em>A helper method to get a vector field on a different vector space.</em> </p>
+<pre><code class="language-C++">template&lt;class OutVectorSpace, class ExecSpace, class Mapping, class ElementType, class IdxRangeType, class InVectorSpace, class LayoutStridedPolicy&gt;
+void copy_to_vector_space (
     ExecSpace exec_space,
-    VectorField &lt; ElementType, IdxRangeType, VectorIndexSet&lt; X , Y &gt;, typename ExecSpace::memory_space, LayoutStridedPolicy &gt; vector_field,
+    VectorField &lt; ElementType, IdxRangeType, OutVectorSpace, typename ExecSpace::memory_space &gt; vector_field_out,
+    Mapping mapping,
+    VectorConstField &lt; ElementType, IdxRangeType, InVectorSpace, typename ExecSpace::memory_space, LayoutStridedPolicy &gt; vector_field
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>exec_space</code> The space on which the function is executed (CPU/GPU). </li>
+<li><code>vector_field_out</code> The vector field where the vectors on the new vector space should be saved. </li>
+<li><code>mapping</code> A mapping describing the relation between the 2 vector spaces (or describing the relation between the vector space and the Cartesian space if a change of variance (covariant &lt;-&gt; contravariant) is required). </li>
+<li><code>vector_field</code> The vector field to be mapped to the new vector space.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A <a href="classVectorField.html"><strong>VectorField</strong></a> or <a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a> containing the vectors in the requested vector space. </p>
+<hr>
+
+<h3 id="function-create_mirror_view_and_copy_on_vector_space">function create_mirror_view_and_copy_on_vector_space</h3>
+<p><em>A helper method to get a vector field on a different vector space. If the requested vector space is the same as the current vector space then the same vector field is returned. If the vector space is different then the vectors in the vector field are mapped to the new vector space and a</em> <a href="classVectorFieldMem.html"><em><strong>VectorFieldMem</strong></em></a> <em>is returned.</em></p>
+<pre><code class="language-C++">template&lt;class OutVectorSpace, class ExecSpace, class Mapping, class ElementType, class IdxRangeType, class InVectorSpace, class LayoutStridedPolicy&gt;
+auto create_mirror_view_and_copy_on_vector_space (
+    ExecSpace exec_space,
+    VectorField &lt; ElementType, IdxRangeType, InVectorSpace, typename ExecSpace::memory_space, LayoutStridedPolicy &gt; vector_field,
     Mapping mapping
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>exec_space</code> The space on which the function is executed (CPU/GPU). </li>
-<li><code>vector_field</code> The vector field to be mapped to the pseudo-Cartesian geometry. </li>
-<li><code>mapping</code> A mapping describing the relation between the Cartesian and pseudo-Cartesian geometries.</li>
+<li><code>vector_field</code> The vector field to be mapped to the new vector space. </li>
+<li><code>mapping</code> A mapping describing the relation between the 2 vector spaces (or describing the relation between the vector space and the Cartesian space if a change of variance (covariant &lt;-&gt; contravariant) is required).</li>
+</ul>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>OutVectorSpace</code> The vector space of the final vector.</li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>A <a href="classVectorField.html"><strong>VectorField</strong></a> or <a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a> containing the vectors in the pseudo-Cartesian geometry. </p>
+<p>A <a href="classVectorField.html"><strong>VectorField</strong></a> or <a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a> containing the vectors in the requested vector space. </p>
+<hr>
+
+<h3 id="function-to_vector_space">function to_vector_space</h3>
+<p><em>A helper method to get a vector on a different vector space.</em> </p>
+<pre><code class="language-C++">template&lt;class OutVectorSpace, class Mapping, class CoordType, class ElementType, class InVectorSpace&gt;
+KOKKOS_INLINE_FUNCTION Tensor &lt; ElementType, OutVectorSpace &gt; to_vector_space (
+    Mapping const &amp; mapping,
+    CoordType const &amp; coord,
+    Tensor &lt; ElementType, InVectorSpace &gt; const &amp; in_vector
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>mapping</code> A mapping describing the relation between the 2 vector spaces (or describing the relation between the vector space and the Cartesian space if a change of variance (covariant &lt;-&gt; contravariant) is required). </li>
+<li><code>coord</code> The coordinate where the vector is defined. </li>
+<li><code>in_vector</code> The vector on the original vector space.</li>
+</ul>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>OutVectorSpace</code> The vector space of the final vector.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A <a href="classVectorField.html"><strong>VectorField</strong></a> or <a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a> containing the vectors in the requested vector space. </p>
 <hr>
 
 <hr>

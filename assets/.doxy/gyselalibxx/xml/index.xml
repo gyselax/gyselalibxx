@@ -2867,14 +2867,6 @@
     <member refid="structtensor__tools_1_1VectorIndexIdMap_1a4a0f8f4aa796771a193f3b5437f26fd0" kind="typedef"><name>possible_idx_values</name></member>
     <member refid="structtensor__tools_1_1VectorIndexIdMap_1a413bb8e930c9dbaa44463d5736d6e366" kind="variable"><name>id</name></member>
   </compound>
-  <compound refid="classVectorMapper" kind="class"><name>VectorMapper</name>
-  </compound>
-  <compound refid="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c" kind="class"><name>VectorMapper&lt; VectorIndexSet&lt; XIn, YIn &gt;, VectorIndexSet&lt; XOut, YOut &gt;, Mapping, ExecSpace &gt;</name>
-    <member refid="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c_1a6619429f4a45d957a5b821f76ab7ed35" kind="typedef"><name>memory_space</name></member>
-    <member refid="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c_1a79a9bcd0e57aeef494fd01ac72a7416c" kind="variable"><name>m_mapping</name></member>
-    <member refid="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c_1ab036919c0c99391dbe70caf3f6524486" kind="function"><name>VectorMapper</name></member>
-    <member refid="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c_1a787c7ed77c430264e17d73ee15802098" kind="function"><name>operator()</name></member>
-  </compound>
   <compound refid="classVortexMergerDensitySolution" kind="class"><name>VortexMergerDensitySolution</name>
     <member refid="classVortexMergerDensitySolution_1a8cf2a5a55272ef42f54c34b445f52ecd" kind="variable"><name>m_mapping</name></member>
     <member refid="classVortexMergerDensitySolution_1a75f051a4a9d1ccfee6c1976e4a914c75" kind="function"><name>VortexMergerDensitySolution</name></member>
@@ -3100,7 +3092,9 @@
   <compound refid="toroidal__to__cylindrical_8hpp" kind="file"><name>toroidal_to_cylindrical.hpp</name>
   </compound>
   <compound refid="vector__mapper_8hpp" kind="file"><name>vector_mapper.hpp</name>
-    <member refid="vector__mapper_8hpp_1a7fbe2683c9aa0bf1709fbf044781546f" kind="function"><name>create_geometry_mirror_view</name></member>
+    <member refid="vector__mapper_8hpp_1a38e55c617792a81e7b09c659e8e81d98" kind="function"><name>to_vector_space</name></member>
+    <member refid="vector__mapper_8hpp_1ae435497dfdb31b0436f5e272ae3f230b" kind="function"><name>copy_to_vector_space</name></member>
+    <member refid="vector__mapper_8hpp_1a71e6927e680d5568b2a898114a85c8cd" kind="function"><name>create_mirror_view_and_copy_on_vector_space</name></member>
   </compound>
   <compound refid="deriv__details_8hpp" kind="file"><name>deriv_details.hpp</name>
   </compound>
@@ -3180,6 +3174,8 @@
     <member refid="vector__index__tools_8hpp_1a4348cb7a8c7c85076d81c23206a5774b" kind="variable"><name>is_vector_index_set_v</name></member>
     <member refid="vector__index__tools_8hpp_1a8e15b3b1030cca34415e36c91502513f" kind="variable"><name>is_covariant_vector_index_set_v</name></member>
     <member refid="vector__index__tools_8hpp_1a0a3164fdbf36dd731b95e14c55d7abac" kind="variable"><name>is_contravariant_vector_index_set_v</name></member>
+    <member refid="vector__index__tools_8hpp_1aa6e8d71d3d07ff464cc77ee3348b5ac3" kind="variable"><name>is_cartesian_vector_index_set_v</name></member>
+    <member refid="vector__index__tools_8hpp_1af5756e47debeaa77e5e9d4349c128cf5" kind="variable"><name>has_same_variance_v</name></member>
   </compound>
   <compound refid="advection__field__rtheta_8hpp" kind="file"><name>advection_field_rtheta.hpp</name>
   </compound>
@@ -4195,6 +4191,7 @@
     <member refid="type__seq__tools_8hpp_1ac95562d656c2ae2f82f9bc55881627f6" kind="typedef"><name>find_grid_t</name></member>
     <member refid="type__seq__tools_8hpp_1a77a5e0ba78f573fcf19e118cc8d08b61" kind="typedef"><name>type_seq_unique_t</name></member>
     <member refid="type__seq__tools_8hpp_1a8d61e6a1acbf461eacb2729f96286f58" kind="typedef"><name>type_seq_duplicate_t</name></member>
+    <member refid="type__seq__tools_8hpp_1add882d1d787f328ab85f39c86132221b" kind="typedef"><name>find_idx_t</name></member>
     <member refid="type__seq__tools_8hpp_1a4d7dffaef6d65b35876eff7fe8ce3730" kind="variable"><name>type_seq_has_unique_elements_v</name></member>
     <member refid="type__seq__tools_8hpp_1ae2b505ec732fa7a34361c329e7d1e66b" kind="variable"><name>type_seq_permutation_parity_v</name></member>
   </compound>

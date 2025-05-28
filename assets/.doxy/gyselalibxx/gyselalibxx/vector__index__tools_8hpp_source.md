@@ -105,6 +105,18 @@ static constexpr bool is_covariant_vector_index_set_v
 template <class VectorIndexSet>
 static constexpr bool is_contravariant_vector_index_set_v
         = tensor_tools::is_contravariant_vector_index_set<VectorIndexSet>::value;
+
+template <class VectorIndexSet>
+static constexpr bool is_cartesian_vector_index_set_v
+        = is_covariant_vector_index_set_v<VectorIndexSet>&&
+                is_contravariant_vector_index_set_v<VectorIndexSet>;
+
+template <class VectorIndexSet1, class VectorIndexSet2>
+static constexpr bool has_same_variance_v
+        = (is_covariant_vector_index_set_v<
+                   VectorIndexSet1> == is_covariant_vector_index_set_v<VectorIndexSet2>)
+          || (is_contravariant_vector_index_set_v<
+                      VectorIndexSet1> == is_contravariant_vector_index_set_v<VectorIndexSet2>);
 ```
 
 
