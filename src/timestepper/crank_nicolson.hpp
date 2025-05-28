@@ -232,7 +232,7 @@ public:
      * @param[in] idx_range The index range on which the operator will act (and allocate memory).
      */
     template <class TimeStepper>
-    auto preallocate(typename TimeStepper::IdxRange const m_idx_range) const
+    auto preallocate(typename TimeStepper::IdxRange const idx_range) const
     {
         static_assert(std::is_same_v<
                       TimeStepper,
@@ -240,7 +240,7 @@ public:
                               typename TimeStepper::ValFieldMem,
                               typename TimeStepper::DerivFieldMem,
                               typename TimeStepper::exec_space>>);
-        return TimeStepper(m_idx_range, m_max_counter, m_epsilon);
+        return TimeStepper(idx_range, m_max_counter, m_epsilon);
     }
 };
 
