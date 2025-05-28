@@ -170,7 +170,7 @@ LogicalToOtherMapping init_mapping()
     } else if constexpr (std::is_same_v<
                                  LogicalToOtherMapping,
                                  CzarnyToCartesian<R, Theta, OtherX, OtherY>>) {
-        return LogicalToOtherMapping(0.3, 1.4, y0, y0);
+        return LogicalToOtherMapping(0.3, 1.4, x0, y0);
     }
 }
 
