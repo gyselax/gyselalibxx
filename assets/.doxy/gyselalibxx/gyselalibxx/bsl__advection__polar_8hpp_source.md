@@ -15,6 +15,7 @@
 #include "ddc_aliases.hpp"
 #include "i_interpolator_2d.hpp"
 #include "indexed_tensor.hpp"
+#include "l_norm_tools.hpp"
 #include "metric_tensor_evaluator.hpp"
 #include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
@@ -41,10 +42,12 @@ class BslAdvectionPolar
     using GridTheta = find_grid_t<Theta, ddc::to_type_seq_t<IdxRangeBatched>>;
 
     using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
+    using IdxRangeR = IdxRange<GridR>;
     using IdxRangeTheta = IdxRange<GridTheta>;
 
     using IdxRTheta = typename IdxRangeRTheta::discrete_element_type;
-    using IdxStepRTheta = typename IdxRangeRTheta::discrete_vector_type;
+    using IdxBatched = typename IdxRangeBatched::discrete_element_type;
+    using IdxStepR = typename IdxRangeR::discrete_vector_type;
 
     using MemorySpace = typename FootFinder::memory_space;
 
@@ -93,7 +96,7 @@ public:
             double dt) const
     {
         // Pre-allocate some memory to prevent allocation later in loop
-        std::unique_ptr<IInterpolator2D<IdxRangeRTheta, IdxRangeRTheta>> const interpolator_ptr
+        std::unique_ptr<IInterpolator2D<IdxRangeRTheta, IdxRangeBatched>> const interpolator_ptr
                 = m_interpolator.preallocate();
 
         // Initialise the feet
@@ -102,8 +105,9 @@ public:
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(advection_field_xy),
-                KOKKOS_LAMBDA(IdxRTheta const irtheta) {
-                    feet_rtheta(irtheta) = ddc::coordinate(irtheta);
+                KOKKOS_LAMBDA(IdxBatched const idx) {
+                    IdxRTheta const irtheta(idx);
+                    feet_rtheta(idx) = ddc::coordinate(irtheta);
                 });
 
         // Compute the feet of the characteristics at tn -----------------------------------------
@@ -122,12 +126,15 @@ public:
             DTensor<CartesianBasis> const& advection_field_xy_centre,
             double dt) const
     {
+        using IdxRangeBatchedWithoutR = ddc::remove_dims_of_t<IdxRangeBatched, GridR>;
         Kokkos::Profiling::pushRegion("PolarAdvection");
-        IdxRangeRTheta grid(get_idx_range(allfdistribu));
+        IdxRangeBatched grid(get_idx_range(allfdistribu));
+        IdxRangeR radial_grid(grid);
+        IdxRangeBatchedWithoutR no_r_grid(grid);
 
-        const int npoints_theta = IdxRangeTheta(grid).size();
-        IdxRangeRTheta const grid_without_Opoint(grid.remove_first(IdxStepRTheta(1, 0)));
-        IdxRangeRTheta const Opoint_grid(grid.take_first(IdxStepRTheta(1, npoints_theta)));
+        IdxRangeBatched const
+                grid_without_Opoint(radial_grid.remove_first(IdxStep<GridR>(1)), no_r_grid);
+        IdxRangeBatched const Opoint_grid(radial_grid.take_first(IdxStepR(1)), no_r_grid);
 
 
         // Convert advection field on RTheta to advection field on XY
@@ -141,26 +148,27 @@ public:
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 grid_without_Opoint,
-                KOKKOS_LAMBDA(IdxRTheta const irtheta) {
+                KOKKOS_LAMBDA(IdxBatched const idx) {
+                    IdxRTheta irtheta(idx);
                     CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
                     Tensor J = logical_to_physical_mapping_proxy.jacobian_matrix(coord_rtheta);
 
                     ddcHelper::assign_vector_field_element(
                             advection_field_xy,
-                            irtheta,
+                            idx,
                             tensor_mul(
                                     index<'i', 'j'>(J),
-                                    index<'j'>(advection_field_rtheta(irtheta))));
+                                    index<'j'>(advection_field_rtheta(idx))));
                 });
 
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 Opoint_grid,
-                KOKKOS_LAMBDA(IdxRTheta const irtheta) {
+                KOKKOS_LAMBDA(IdxBatched const idx) {
                     ddcHelper::assign_vector_field_element(
                             advection_field_xy,
-                            irtheta,
+                            idx,
                             advection_field_xy_centre);
                 });
 

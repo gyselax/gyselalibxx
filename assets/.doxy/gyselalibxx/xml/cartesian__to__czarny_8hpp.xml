@@ -220,7 +220,7 @@
 <codeline lineno="161"><highlight class="normal"></highlight></codeline>
 <codeline lineno="167" refid="classCartesianToCzarny_1a00367ac2ea336f4e7f4dd25f1dc34ee9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_INLINE_FUNCTION<sp/><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian&lt;R, Theta, X, Y&gt;</ref><sp/><ref refid="classCartesianToCzarny_1a00367ac2ea336f4e7f4dd25f1dc34ee9" kindref="member">get_inverse_mapping</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="168"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian&lt;R, Theta, X, Y&gt;</ref>(m_epsilon,<sp/>m_e);</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian&lt;R, Theta, X, Y&gt;</ref>(m_epsilon,<sp/>m_e,<sp/>m_x0,<sp/>m_y0);</highlight></codeline>
 <codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="171"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="172"><highlight class="normal"></highlight></codeline>

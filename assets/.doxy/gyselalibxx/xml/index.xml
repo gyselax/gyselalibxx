@@ -84,9 +84,11 @@
     <member refid="classBslAdvectionPolar_1a3646781b6749c4c31150aa4edd9d2f3b" kind="typedef"><name>GridR</name></member>
     <member refid="classBslAdvectionPolar_1a8a85ec6c6224b7cdec2312022feb315f" kind="typedef"><name>GridTheta</name></member>
     <member refid="classBslAdvectionPolar_1a762c97833b975daf18f51645dd5faffe" kind="typedef"><name>IdxRangeRTheta</name></member>
+    <member refid="classBslAdvectionPolar_1af46c74c3d67efe053962060b8c69e0ad" kind="typedef"><name>IdxRangeR</name></member>
     <member refid="classBslAdvectionPolar_1a2a1417b460e3cd255519f322ad3e7252" kind="typedef"><name>IdxRangeTheta</name></member>
     <member refid="classBslAdvectionPolar_1aa76d1a0189fd247de9d99f54c3ac2e09" kind="typedef"><name>IdxRTheta</name></member>
-    <member refid="classBslAdvectionPolar_1a885a69a084f8a12ce564b689b7de52a7" kind="typedef"><name>IdxStepRTheta</name></member>
+    <member refid="classBslAdvectionPolar_1a54cea6adea8d51a1d805378991bc3e16" kind="typedef"><name>IdxBatched</name></member>
+    <member refid="classBslAdvectionPolar_1a47056fd5e3aa02293b61968b51bca9f7" kind="typedef"><name>IdxStepR</name></member>
     <member refid="classBslAdvectionPolar_1ad6a4f116e593ed9f9bd81082e0fa621a" kind="typedef"><name>MemorySpace</name></member>
     <member refid="classBslAdvectionPolar_1ac9b81b38809973d2e89d604cb21b5310" kind="typedef"><name>DFieldFDistribu</name></member>
     <member refid="classBslAdvectionPolar_1a7ab43aed4c153c73e51a548a144b42a8" kind="typedef"><name>CFieldMemFeetRTheta</name></member>
@@ -2643,9 +2645,11 @@
     <member refid="classSplinePolarFootFinder_1abc1e2fdffb10bf667b803e59302c1e33" kind="typedef"><name>CoordXY_adv</name></member>
     <member refid="classSplinePolarFootFinder_1a5f940bf9c6a3bacedcf0a64490193eab" kind="typedef"><name>PseudoCartesianBasis</name></member>
     <member refid="classSplinePolarFootFinder_1ad1831b40ec656daa4ab67826a13b61d4" kind="typedef"><name>CoordRTheta</name></member>
+    <member refid="classSplinePolarFootFinder_1acb1720003e7865b126975459f0f7e380" kind="typedef"><name>IdxRangeBatch</name></member>
     <member refid="classSplinePolarFootFinder_1a2ec51a7c30387d6ac531352768a9f2ba" kind="typedef"><name>IdxRangeRTheta</name></member>
     <member refid="classSplinePolarFootFinder_1abfb99e756e53309eab48e31c07d79f8a" kind="typedef"><name>IdxRangeR</name></member>
     <member refid="classSplinePolarFootFinder_1ae68b5e8f83571ca243efd7d0d0195d7e" kind="typedef"><name>IdxRangeTheta</name></member>
+    <member refid="classSplinePolarFootFinder_1a48a043c9c6127af52f2d49e7131fc612" kind="typedef"><name>IdxBatch</name></member>
     <member refid="classSplinePolarFootFinder_1a2373f04a62dab3f7fada0b6c6d8ed082" kind="typedef"><name>IdxRTheta</name></member>
     <member refid="classSplinePolarFootFinder_1aab1eb09e44e2626910dbb7e36321d6cc" kind="typedef"><name>IdxR</name></member>
     <member refid="classSplinePolarFootFinder_1af90b24a4664d3d635e2ea859a8356ac5" kind="typedef"><name>IdxTheta</name></member>
@@ -2676,8 +2680,8 @@
     <member refid="classSplinePolarFootFinder_1a042eaa82d42cf9060fa4029cff1bfd99" kind="variable"><name>m_evaluator_advection_field</name></member>
     <member refid="classSplinePolarFootFinder_1a9253aaee6ab75941419a5020398757f2" kind="function"><name>SplinePolarFootFinder</name></member>
     <member refid="classSplinePolarFootFinder_1acd4731e29b30f28ded8b3e9a98b995ee" kind="function"><name>operator()</name></member>
-    <member refid="classSplinePolarFootFinder_1a124851469507722a115dd4d443ffdf1b" kind="function"><name>is_unified</name></member>
-    <member refid="classSplinePolarFootFinder_1a233cea99033352973d7864a8e356c7ec" kind="function"><name>unify_value_at_centre_pt</name></member>
+    <member refid="classSplinePolarFootFinder_1afbd816fc87cf702e6692740c09065253" kind="function"><name>is_unified</name></member>
+    <member refid="classSplinePolarFootFinder_1a5d70325daef4d1687f452a5d066d2829" kind="function"><name>unify_value_at_centre_pt</name></member>
   </compound>
   <compound refid="classSplitRightHandSideSolver" kind="class"><name>SplitRightHandSideSolver</name>
     <member refid="classSplitRightHandSideSolver_1a7e5370269a62df4762937b97dc9b2757" kind="variable"><name>m_boltzmann_solver</name></member>

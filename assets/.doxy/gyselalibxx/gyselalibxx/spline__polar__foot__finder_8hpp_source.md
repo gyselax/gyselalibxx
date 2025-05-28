@@ -20,6 +20,7 @@
 #include "geometry_pseudo_cartesian.hpp"
 #include "ipolar_foot_finder.hpp"
 #include "itimestepper.hpp"
+#include "l_norm_tools.hpp"
 #include "vector_index_tools.hpp"
 #include "vector_mapper.hpp"
 
@@ -57,6 +58,30 @@ class SplinePolarFootFinder
     static_assert(ddc::in_tags_v<
                   typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
                   ddc::to_type_seq_t<IdxRangeBatched>>);
+    static_assert(
+            SplineRThetaBuilderAdvection::builder_type1::s_nbc_xmin == 0,
+            "This class is designed to work with a spline builder which does not require "
+            "additional information at the boundaries (e.g. Hermite boundary conditions require "
+            "information about the derivatives and therefore will not work with this class. Please "
+            "check the choice of boundary conditions).");
+    static_assert(
+            SplineRThetaBuilderAdvection::builder_type1::s_nbc_xmax == 0,
+            "This class is designed to work with a spline builder which does not require "
+            "additional information at the boundaries (e.g. Hermite boundary conditions require "
+            "information about the derivatives and therefore will not work with this class. Please "
+            "check the choice of boundary conditions).");
+    static_assert(
+            SplineRThetaBuilderAdvection::builder_type1::s_bc_xmin != ddc::BoundCond::PERIODIC,
+            "Periodic boundary conditions in the radial direction are nonsensical.");
+    static_assert(
+            SplineRThetaBuilderAdvection::builder_type1::s_bc_xmax != ddc::BoundCond::PERIODIC,
+            "Periodic boundary conditions in the radial direction are nonsensical.");
+    static_assert(
+            SplineRThetaBuilderAdvection::builder_type2::s_bc_xmin == ddc::BoundCond::PERIODIC,
+            "Expected periodic boundary conditions in the poloidal direction.");
+    static_assert(
+            SplineRThetaBuilderAdvection::builder_type2::s_bc_xmax == ddc::BoundCond::PERIODIC,
+            "Expected periodic boundary conditions in the poloidal direction.");
 
     using base_type = IPolarFootFinder<
             typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
@@ -88,9 +113,11 @@ private:
 
     using CoordRTheta = Coord<R, Theta>;
 
+    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeOperator, GridR, GridTheta>;
     using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
     using IdxRangeR = IdxRange<GridR>;
     using IdxRangeTheta = IdxRange<GridTheta>;
+    using IdxBatch = typename IdxRangeBatch::discrete_element_type;
     using IdxRTheta = Idx<GridR, GridTheta>;
     using IdxR = Idx<GridR>;
     using IdxTheta = Idx<GridTheta>;
@@ -165,7 +192,7 @@ public:
             double dt) const final
     {
         VectorSplineCoeffsMem advection_field_in_adv_domain_coefs(
-                get_spline_idx_range(m_builder_advection_field));
+                m_builder_advection_field.batched_spline_domain(get_idx_range(advection_field)));
 
         // Compute the advection field in the advection domain.
         auto advection_field_in_adv_domain = create_mirror_view_and_copy_on_vector_space<
@@ -247,41 +274,50 @@ public:
 
 
     template <class T>
-    void is_unified(Field<T, IdxRangeRTheta, memory_space> const& values) const
+    void is_unified(Field<T, IdxRangeOperator, memory_space> const& values) const
     {
-        IdxRangeR const r_idx_range = get_idx_range<GridR>(values);
-        IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(values);
+        IdxRangeOperator full_idx_range = get_idx_range(values);
+        IdxRangeBatch const batched_idx_range(full_idx_range);
+        IdxRangeR const r_idx_range(full_idx_range);
+        IdxRangeTheta const theta_idx_range(full_idx_range);
         IdxR r0_idx = r_idx_range.front();
+        IdxTheta theta0_idx = theta_idx_range.front();
         if (Kokkos::fabs(ddc::coordinate(r0_idx)) < 1e-15) {
             ddc::parallel_for_each(
                     ExecSpace(),
-                    theta_idx_range,
-                    KOKKOS_LAMBDA(const IdxTheta itheta) {
-                        if (norm_inf(
-                                    values(r0_idx, itheta)
-                                    - values(r0_idx, theta_idx_range.front()))
-                            > 1e-15) {
-                            Kokkos::printf("WARNING ! -> Discontinuous at the centre point.");
+                    batched_idx_range,
+                    KOKKOS_LAMBDA(const IdxBatch ib) {
+                        for (IdxTheta itheta : theta_idx_range) {
+                            if (norm_inf(
+                                        values(ib, r0_idx, itheta) - values(ib, r0_idx, theta0_idx))
+                                > 1e-15) {
+                                Kokkos::printf("WARNING ! -> Discontinuous at the centre point.");
+                            }
+                            KOKKOS_ASSERT(
+                                    values(ib, r0_idx, itheta) == values(ib, r0_idx, theta0_idx));
                         }
-                        KOKKOS_ASSERT(
-                                values(r0_idx, itheta) == values(r0_idx, theta_idx_range.front()));
                     });
         }
     }
 
 
     template <class T>
-    void unify_value_at_centre_pt(Field<T, IdxRangeRTheta, memory_space> values) const
+    void unify_value_at_centre_pt(Field<T, IdxRangeOperator, memory_space> values) const
     {
-        IdxRangeR const r_idx_range = get_idx_range<GridR>(values);
-        IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(values);
+        IdxRangeOperator full_idx_range = get_idx_range(values);
+        IdxRangeBatch const batched_idx_range(full_idx_range);
+        IdxRangeR const r_idx_range(full_idx_range);
+        IdxRangeTheta const theta_idx_range(full_idx_range);
         IdxR r0_idx = r_idx_range.front();
+        IdxTheta theta0_idx = theta_idx_range.front();
         if (std::fabs(ddc::coordinate(r0_idx)) < 1e-15) {
             ddc::parallel_for_each(
                     ExecSpace(),
-                    theta_idx_range,
-                    KOKKOS_LAMBDA(const IdxTheta itheta) {
-                        values(r0_idx, itheta) = values(r0_idx, theta_idx_range.front());
+                    batched_idx_range,
+                    KOKKOS_LAMBDA(const IdxBatch ib) {
+                        for (IdxTheta itheta : theta_idx_range) {
+                            values(ib, r0_idx, itheta) = values(ib, r0_idx, theta0_idx);
+                        }
                     });
         }
     }

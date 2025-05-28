@@ -90,7 +90,7 @@ public:
 
     KOKKOS_INLINE_FUNCTION CzarnyToCartesian<R, Theta, X, Y> get_inverse_mapping() const
     {
-        return CzarnyToCartesian<R, Theta, X, Y>(m_epsilon, m_e);
+        return CzarnyToCartesian<R, Theta, X, Y>(m_epsilon, m_e, m_x0, m_y0);
     }
 };
 

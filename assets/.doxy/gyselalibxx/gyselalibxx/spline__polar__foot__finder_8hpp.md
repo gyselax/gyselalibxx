@@ -19,6 +19,7 @@
 * `#include "geometry_pseudo_cartesian.hpp"`
 * `#include "ipolar_foot_finder.hpp"`
 * `#include "itimestepper.hpp"`
+* `#include "l_norm_tools.hpp"`
 * `#include "vector_index_tools.hpp"`
 * `#include "vector_mapper.hpp"`
 
