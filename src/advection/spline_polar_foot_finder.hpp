@@ -379,7 +379,7 @@ public:
     void is_unified(Field<T, IdxRangeOperator, memory_space> const& values) const
     {
         IdxRangeOperator full_idx_range = get_idx_range(values);
-        IdxRangeBatch const b_idx_range(full_idx_range);
+        IdxRangeBatch const batched_idx_range(full_idx_range);
         IdxRangeR const r_idx_range(full_idx_range);
         IdxRangeTheta const theta_idx_range(full_idx_range);
         IdxR r0_idx = r_idx_range.front();
@@ -387,7 +387,7 @@ public:
         if (Kokkos::fabs(ddc::coordinate(r0_idx)) < 1e-15) {
             ddc::parallel_for_each(
                     ExecSpace(),
-                    b_idx_range,
+                    batched_idx_range,
                     KOKKOS_LAMBDA(const IdxBatch ib) {
                         for (IdxTheta itheta : theta_idx_range) {
                             if (norm_inf(
@@ -420,7 +420,7 @@ public:
     void unify_value_at_centre_pt(Field<T, IdxRangeOperator, memory_space> values) const
     {
         IdxRangeOperator full_idx_range = get_idx_range(values);
-        IdxRangeBatch const b_idx_range(full_idx_range);
+        IdxRangeBatch const batched_idx_range(full_idx_range);
         IdxRangeR const r_idx_range(full_idx_range);
         IdxRangeTheta const theta_idx_range(full_idx_range);
         IdxR r0_idx = r_idx_range.front();
@@ -428,7 +428,7 @@ public:
         if (std::fabs(ddc::coordinate(r0_idx)) < 1e-15) {
             ddc::parallel_for_each(
                     ExecSpace(),
-                    b_idx_range,
+                    batched_idx_range,
                     KOKKOS_LAMBDA(const IdxBatch ib) {
                         for (IdxTheta itheta : theta_idx_range) {
                             values(ib, r0_idx, itheta) = values(ib, r0_idx, theta0_idx);
