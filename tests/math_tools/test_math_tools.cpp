@@ -16,6 +16,7 @@
 #include "tensor.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
+#include "vector_mapper.hpp"
 
 namespace {
 void vector_field_norm_test()
@@ -184,16 +185,34 @@ TEST(MathTools, TensorProdCart)
 
 TEST(MathTools, TensorProdCyl)
 {
+    using CartIndexSet = VectorIndexSet<X, Y, Z>;
     using IndexSet = VectorIndexSet<R, Z, Zeta>;
-    Tensor<double, IndexSet> A, B, C;
+
+    Coord<R, Z, Zeta> test_coord(2.5, -4.0, 0.3);
+    CylindricalToCartesian<R, Z, Zeta, X, Y> cyl_to_cart;
+    IdentityCoordinateChange<CartIndexSet, CartIndexSet> identity_mapping;
+
+    DTensor<IndexSet> A, B;
+    DTensor<vector_index_set_dual_t<IndexSet>> C_cov;
+    DTensor<CartIndexSet> A_cart, B_cart, C_cart, C_cart_via_mapping;
+
     ddcHelper::get<R>(A) = 3;
     ddcHelper::get<Z>(A) = 6;
     ddcHelper::get<Zeta>(A) = -3;
     ddcHelper::get<R>(B) = 1;
     ddcHelper::get<Z>(B) = -4;
     ddcHelper::get<Zeta>(B) = 2;
-    Coord<R, Z, Zeta> test_coord(2.5, -4.0, 0.3);
-    CylindricalToCartesian<R, Z, Zeta, X, Y> mapping;
-    C = tensor_product(mapping, test_coord, A, B);
-    // TODO: Complete test
+    A_cart = to_vector_space<CartIndexSet>(cyl_to_cart, test_coord, A);
+    B_cart = to_vector_space<CartIndexSet>(cyl_to_cart, test_coord, B);
+
+    // Calculate the tensor product in cylindrical coordinates
+    C_cov = tensor_product(cyl_to_cart, test_coord, A, B);
+    // Calculate the tensor product in cartesian coordinates
+    C_cart = tensor_product(identity_mapping, cyl_to_cart(test_coord), A_cart, B_cart);
+
+    // Compare the results of the calculations in different coordinate systems
+    C_cart_via_mapping = to_vector_space<CartIndexSet>(cyl_to_cart, test_coord, C_cov);
+    EXPECT_NEAR(ddcHelper::get<X>(C_cart_via_mapping), ddcHelper::get<X>(C_cart), 1e-14);
+    EXPECT_NEAR(ddcHelper::get<Y>(C_cart_via_mapping), ddcHelper::get<Y>(C_cart), 1e-14);
+    EXPECT_NEAR(ddcHelper::get<Z>(C_cart_via_mapping), ddcHelper::get<Z>(C_cart), 1e-14);
 }
