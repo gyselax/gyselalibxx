@@ -236,11 +236,11 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
 
     Coord<R> const r_min(0.0);
     Coord<R> const r_max(1.0);
-    IdxStep<GridR> const nr_cells(40);
+    IdxStep<GridR> const nr_cells(25);
 
     Coord<Theta> const theta_min(0.0);
     Coord<Theta> const theta_max(2.0 * M_PI);
-    IdxStep<GridTheta> const ntheta_cells(30);
+    IdxStep<GridTheta> const ntheta_cells(50);
 
     IdxStepSp const nb_kinspecies(2);
     IdxRangeSp const idx_range_sp(IdxSp(0), nb_kinspecies);
