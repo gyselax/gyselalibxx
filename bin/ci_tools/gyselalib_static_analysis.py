@@ -41,7 +41,7 @@ ddc_keyword_map = {'DiscreteElement': 'Idx',
                    'NonUniformPointSampling' : 'NonUniformGridBase'}
 
 mirror_functions = {'create_mirror', 'create_mirror_and_copy', 'create_mirror_view', 'create_mirror_view_and_copy',
-                    'create_transpose_mirror', 'create_transpose_mirror_view_and_copy'}
+                    'create_transpose_mirror', 'create_transpose_mirror_view_and_copy', 'create_mirror_view_and_copy_on_vector_space'}
 
 parallel_functions = ['parallel_for', 'parallel_for_each', 'parallel_transform_reduce']
 
