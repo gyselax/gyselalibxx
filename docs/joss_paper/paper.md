@@ -1,5 +1,5 @@
 ---
-title: 'Gyselalib++: A Portable C++ Library for Semi-Lagrangian Gyrokinetic Simulations'
+title: 'Gyselalib++: A Portable C++ Library for Semi-Lagrangian Kinetic and Gyrokinetic Simulations'
 tags:
 
 - C++
