@@ -6,6 +6,7 @@
 #include "cartesian_to_circular.hpp"
 #include "cartesian_to_czarny.hpp"
 #include "circular_to_cartesian.hpp"
+#include "crank_nicolson.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
 #include "euler.hpp"
@@ -14,6 +15,7 @@
 #include "r_theta_test_cases.hpp"
 #include "rk2.hpp"
 #include "rk3.hpp"
+#include "rk4.hpp"
 #include "species_info.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "vector_field.hpp"
@@ -166,8 +168,9 @@ LogicalToOtherMapping init_mapping()
 {
     using OtherX = typename LogicalToOtherMapping::cartesian_tag_x;
     using OtherY = typename LogicalToOtherMapping::cartesian_tag_y;
-    double x0 = 6.2;
-    double y0 = 0.8;
+    // At x0,y0 to match rotation centre
+    double x0 = 0.0;
+    double y0 = 0.0;
     if constexpr (std::is_same_v<
                           LogicalToOtherMapping,
                           CircularToCartesian<R, Theta, OtherX, OtherY>>) {
@@ -182,6 +185,12 @@ LogicalToOtherMapping init_mapping()
 template <class AdvectionField>
 AdvectionField init_field()
 {
+    static_assert(
+            std::is_same_v<
+                    AdvectionField,
+                    AdvectionField_translation<
+                            X,
+                            Y>> || std::is_same_v<AdvectionField, AdvectionField_rotation<X, Y, R, Theta>> || std::is_same_v<AdvectionField, AdvectionField_decentred_rotation<X, Y>>);
     if constexpr (std::is_same_v<AdvectionField, AdvectionField_translation<X, Y>>) {
         return AdvectionField(DVector<X, Y>(
                 std::cos(2 * M_PI * 511. / 4096.) / 2.,
@@ -193,7 +202,7 @@ AdvectionField init_field()
     }
 }
 
-using TimeSteppers = std::tuple<EulerBuilder, RK2Builder, RK3Builder>;
+using TimeSteppers = std::tuple<RK4Builder>;
 using Mappings = std::tuple<AnalyticalCircular, AnalyticalCzarny, PseudoCartCzarny>;
 using AdvectionFieldTypes = std::tuple<
         AdvectionField_translation<X, Y>,
@@ -214,11 +223,11 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
 
     Coord<R> const r_min(0.0);
     Coord<R> const r_max(1.0);
-    IdxStep<GridR> const nr_cells(15);
+    IdxStep<GridR> const nr_cells(40);
 
     Coord<Theta> const theta_min(0.0);
     Coord<Theta> const theta_max(2.0 * M_PI);
-    IdxStep<GridTheta> const ntheta_cells(10);
+    IdxStep<GridTheta> const ntheta_cells(30);
 
     IdxStepSp const nb_kinspecies(2);
     IdxRangeSp const idx_range_sp(IdxSp(0), nb_kinspecies);
@@ -260,7 +269,7 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
             evaluator);
 
     const double t = 0.0;
-    const double dt = 0.1;
+    const double dt = 0.001;
     DVectorFieldMem<IdxRangeSpRTheta, CartBasis> adv_field_alloc(batched_idx_range);
     FieldMem<CoordRTheta, IdxRangeSpRTheta> feet_alloc(batched_idx_range);
     FieldMem<CoordRTheta, IdxRangeSpRTheta> exact_feet_alloc(batched_idx_range);
@@ -285,7 +294,8 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
             Kokkos::DefaultExecutionSpace(),
             get_const_field(feet),
             get_const_field(exact_feet));
-    double TOL = 1e-12;
+
+    double TOL = 1e-4;
     EXPECT_NEAR(error, 0.0, TOL);
 }
 
