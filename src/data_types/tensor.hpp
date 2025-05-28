@@ -110,7 +110,8 @@ public:
         static_assert(
                 rank() == 1,
                 "Filling the tensor on initialisation is only permitted for 1D vector objects");
-        m_data.m_data_alloc = std::array<ElementType, base_type::size()>({elements...});
+        m_data.m_data_alloc
+                = std::array<ElementType, base_type::size()>({ElementType(elements)...});
     }
 
     /**
