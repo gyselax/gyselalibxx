@@ -206,7 +206,7 @@ public:
     /**
      * @brief Construct an uninitialised tensor object.
      */
-    KOKKOS_FUNCTION LeviCivitaTensor(double jacobian)
+    explicit KOKKOS_FUNCTION LeviCivitaTensor(double jacobian)
     {
         if constexpr (is_covariant_vector_index_set_v<ValidIndexSet>) {
             m_coeff = jacobian;
