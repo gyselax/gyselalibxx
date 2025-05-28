@@ -91,6 +91,7 @@
 * [**Corner3Tag**](structPolarBSplines_1_1Impl_1_1Corner3Tag.md)
 ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
 * [**CrankNicolson**](classCrankNicolson.md)
+* [**CrankNicolsonBuilder**](classCrankNicolsonBuilder.md)
 * [**CylindricalToCartesian**](classCylindricalToCartesian.md)
 * [**CzarnyToCartesian**](classCzarnyToCartesian.md)
 
@@ -133,6 +134,7 @@
 ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * [**EvalDeriv2DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.md)
 ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
+* [**ExplicitTimeStepperBuilder**](classExplicitTimeStepperBuilder.md)
 * [**ExtractPatches**](structconnectivity__details_1_1ExtractPatches.md)
 ([**connectivity\_details**](namespaceconnectivity__details.md))
 * [**ExtractPatches&lt; ddc::detail::TypeSeq&lt; EdgeType1, EdgeTypes... &gt; &gt;**](structconnectivity__details_1_1ExtractPatches_3_01ddc_1_1detail_1_1TypeSeq_3_01EdgeType1_00_01EdgeTypes_8_8_8_01_4_01_4.md)

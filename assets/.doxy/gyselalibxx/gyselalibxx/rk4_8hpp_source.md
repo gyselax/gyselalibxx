@@ -126,6 +126,8 @@ public:
         y_update(y, get_const_field(k_total), dt / 6.);
     }
 };
+
+using RK4Builder = ExplicitTimeStepperBuilder<RK4>;
 ```
 
 

@@ -68,6 +68,7 @@
 * **ConstantPartialDerivative** ([**ConstantPartialDerivative**](classConstantPartialDerivative.md))
 * **ConstantPartialDerivativeCreator** ([**ConstantPartialDerivativeCreator**](classConstantPartialDerivativeCreator.md))
 * **CrankNicolson** ([**CrankNicolson**](classCrankNicolson.md))
+* **CrankNicolsonBuilder** ([**CrankNicolsonBuilder**](classCrankNicolsonBuilder.md))
 * **CylindricalToCartesian** ([**CylindricalToCartesian**](classCylindricalToCartesian.md))
 * **CzarnyToCartesian** ([**CzarnyToCartesian**](classCzarnyToCartesian.md))
 * **control\_point** ([**DiscreteToCartesian**](classDiscreteToCartesian.md))
@@ -120,6 +121,7 @@
 * **equilibrium** ([**DiocotronDensitySolution**](classDiocotronDensitySolution.md))
 * **EdgeTransformation** ([**EdgeTransformation**](classEdgeTransformation.md))
 * **Euler** ([**Euler**](classEuler.md))
+* **ExplicitTimeStepperBuilder** ([**ExplicitTimeStepperBuilder**](classExplicitTimeStepperBuilder.md))
 * **end** ([**IdxRangeSlice**](classIdxRangeSlice.md))
 * **extent** ([**IdxRangeSlice**](classIdxRangeSlice.md))
 * **extents** ([**IdxRangeSlice**](classIdxRangeSlice.md))
@@ -341,7 +343,7 @@
 
 ## p
 
-* **preallocate** ([**IPreallocatableInterpolator**](classIPreallocatableInterpolator.md), [**IPreallocatableInterpolator2D**](classIPreallocatableInterpolator2D.md), [**PreallocatableLagrangeInterpolator**](classPreallocatableLagrangeInterpolator.md), [**PreallocatableSplineInterpolator**](classPreallocatableSplineInterpolator.md), [**PreallocatableSplineInterpolator2D**](classPreallocatableSplineInterpolator2D.md))
+* **preallocate** ([**CrankNicolsonBuilder**](classCrankNicolsonBuilder.md), [**ExplicitTimeStepperBuilder**](classExplicitTimeStepperBuilder.md), [**IPreallocatableInterpolator**](classIPreallocatableInterpolator.md), [**IPreallocatableInterpolator2D**](classIPreallocatableInterpolator2D.md), [**PreallocatableLagrangeInterpolator**](classPreallocatableLagrangeInterpolator.md), [**PreallocatableSplineInterpolator**](classPreallocatableSplineInterpolator.md), [**PreallocatableSplineInterpolator2D**](classPreallocatableSplineInterpolator2D.md))
 * **PoissonLikeRHSFunction** ([**PoissonLikeRHSFunction**](classPoissonLikeRHSFunction.md))
 * **PolarSpline** ([**PolarSpline**](structPolarSpline.md))
 * **PolarSplineEvaluator** ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md))

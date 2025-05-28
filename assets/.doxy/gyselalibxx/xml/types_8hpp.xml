@@ -175,21 +175,45 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="13">
+      <node id="11">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp</label>
         <link refid="bsl__advection__1d_8hpp_source"/>
-        <childnode refid="14" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="14">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp</label>
+        <link refid="bsl__advection__polar_8hpp_source"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp</label>
+        <link refid="spline__polar__foot__finder_8hpp_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp</label>
         <link refid="bsl__predcorr_8hpp_source"/>
       </node>
-      <node id="15">
+      <node id="16">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_explicit.hpp</label>
         <link refid="bsl__predcorr__second__order__explicit_8hpp_source"/>
       </node>
-      <node id="14">
+      <node id="17">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp</label>
+        <link refid="bsl__predcorr__second__order__implicit_8hpp_source"/>
+      </node>
+      <node id="12">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp</label>
         <link refid="predcorr__RK2_8hpp_source"/>
       </node>
@@ -220,7 +244,7 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
@@ -244,13 +268,13 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="23" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -267,11 +291,11 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</label>
         <link refid="constant__extrapolation__rules__onion_8hpp_source"/>
       </node>
-      <node id="21">
+      <node id="24">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp</label>
         <link refid="multipatch__spline__builder_8hpp_source"/>
       </node>
-      <node id="22">
+      <node id="25">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp</label>
         <link refid="multipatch__spline__builder__2d_8hpp_source"/>
       </node>
@@ -279,26 +303,28 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp</label>
         <link refid="multipatch__spline__evaluator__2d_8hpp_source"/>
       </node>
-      <node id="23">
+      <node id="26">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/null_extrapolation_rules.hpp</label>
         <link refid="null__extrapolation__rules_8hpp_source"/>
       </node>
-      <node id="20">
+      <node id="23">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/utils/multipatch_math_tools.hpp</label>
         <link refid="multipatch__math__tools_8hpp_source"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
       </node>
-      <node id="11">
+      <node id="18">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp</label>
         <link refid="crank__nicolson_8hpp_source"/>
       </node>
-      <node id="12">
+      <node id="19">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/euler.hpp</label>
         <link refid="euler_8hpp_source"/>
-        <childnode refid="13" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="10">
@@ -306,28 +332,32 @@
         <link refid="itimestepper_8hpp_source"/>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
       </node>
-      <node id="16">
+      <node id="20">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk2.hpp</label>
         <link refid="rk2_8hpp_source"/>
-        <childnode refid="17" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="21">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk3.hpp</label>
         <link refid="rk3_8hpp_source"/>
       </node>
-      <node id="19">
+      <node id="22">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp</label>
         <link refid="rk4_8hpp_source"/>
       </node>

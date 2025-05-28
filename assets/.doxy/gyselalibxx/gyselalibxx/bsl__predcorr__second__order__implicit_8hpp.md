@@ -20,6 +20,7 @@
 * `#include "bsl_advection_polar.hpp"`
 * `#include "ddc_alias_inline_functions.hpp"`
 * `#include "ddc_aliases.hpp"`
+* `#include "euler.hpp"`
 * `#include "geometry.hpp"`
 * `#include "itimesolver.hpp"`
 * `#include "poisson_like_rhs_function.hpp"`

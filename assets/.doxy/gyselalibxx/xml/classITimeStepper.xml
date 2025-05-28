@@ -13,7 +13,7 @@
         <type>class FieldMem</type>
       </param>
       <param>
-        <type>class <ref refid="classDerivFieldMem" kindref="compound">DerivFieldMem</ref></type>
+        <type>class DerivFieldMemType</type>
         <defval>FieldMem</defval>
       </param>
       <param>
@@ -22,9 +22,9 @@
       </param>
     </templateparamlist>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="classITimeStepper_1a468e0909ac8b50f109dc810879253134" prot="public" static="no">
+      <memberdef kind="typedef" id="classITimeStepper_1afdbd0d8a324c9f3a169e5776127e174f" prot="public" static="no">
         <type>typename FieldMem::discrete_domain_type</type>
-        <definition>using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::IdxRange =  typename FieldMem::discrete_domain_type</definition>
+        <definition>using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::IdxRange =  typename FieldMem::discrete_domain_type</definition>
         <argsstring></argsstring>
         <name>IdxRange</name>
         <qualifiedname>ITimeStepper::IdxRange</qualifiedname>
@@ -35,11 +35,26 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="46" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="48" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="48" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classITimeStepper_1aaba53f61442e763c05fbd7614c3e1c05" prot="public" static="no">
+      <memberdef kind="typedef" id="classITimeStepper_1aefaad1f5fe74ef88c3d18942c11e9b48" prot="public" static="no">
+        <type>FieldMem</type>
+        <definition>using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::ValFieldMem =  FieldMem</definition>
+        <argsstring></argsstring>
+        <name>ValFieldMem</name>
+        <qualifiedname>ITimeStepper::ValFieldMem</qualifiedname>
+        <briefdescription>
+<para>The type of the memory allocation for the values of the function being evolved. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classITimeStepper_1ae1fa0645a608965479f0974abcff81ff" prot="public" static="no">
         <type>typename FieldMem::span_type</type>
-        <definition>using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::ValField =  typename FieldMem::span_type</definition>
+        <definition>using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::ValField =  typename FieldMem::span_type</definition>
         <argsstring></argsstring>
         <name>ValField</name>
         <qualifiedname>ITimeStepper::ValField</qualifiedname>
@@ -50,11 +65,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="50" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="50" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="54" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classITimeStepper_1ad0949984fa0c2d0004f6b7a10e19cd69" prot="public" static="no">
+      <memberdef kind="typedef" id="classITimeStepper_1a8b67d47c34f88b2838fe16f98ce61372" prot="public" static="no">
         <type>typename FieldMem::view_type</type>
-        <definition>using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::ValConstField =  typename FieldMem::view_type</definition>
+        <definition>using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::ValConstField =  typename FieldMem::view_type</definition>
         <argsstring></argsstring>
         <name>ValConstField</name>
         <qualifiedname>ITimeStepper::ValConstField</qualifiedname>
@@ -65,11 +80,26 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="53" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="57" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="57" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classITimeStepper_1a58d11b9c1e57348b94e50b1ea284886f" prot="public" static="no">
+      <memberdef kind="typedef" id="classITimeStepper_1a6d59a37a2b1374291a1af0a3fc4ca1ec" prot="public" static="no">
+        <type>DerivFieldMemType</type>
+        <definition>using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::DerivFieldMem =  DerivFieldMemType</definition>
+        <argsstring></argsstring>
+        <name>DerivFieldMem</name>
+        <qualifiedname>ITimeStepper::DerivFieldMem</qualifiedname>
+        <briefdescription>
+<para>The type of the memory allocation for the derivatives of the function being evolved. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="60" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classITimeStepper_1adb99057a5a7ea3b43495c356cdc68b45" prot="public" static="no">
         <type>typename DerivFieldMem::span_type</type>
-        <definition>using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::DerivField =  typename DerivFieldMem::span_type</definition>
+        <definition>using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::DerivField =  typename DerivFieldMem::span_type</definition>
         <argsstring></argsstring>
         <name>DerivField</name>
         <qualifiedname>ITimeStepper::DerivField</qualifiedname>
@@ -80,11 +110,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="56" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="56" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="63" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classITimeStepper_1a7ee2d8a1e9031e625d0861031891bd52" prot="public" static="no">
+      <memberdef kind="typedef" id="classITimeStepper_1a32837c6aa6ab0a17eb422efd8e0f933e" prot="public" static="no">
         <type>typename DerivFieldMem::view_type</type>
-        <definition>using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::DerivConstField =  typename DerivFieldMem::view_type</definition>
+        <definition>using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::DerivConstField =  typename DerivFieldMem::view_type</definition>
         <argsstring></argsstring>
         <name>DerivConstField</name>
         <qualifiedname>ITimeStepper::DerivConstField</qualifiedname>
@@ -95,18 +125,33 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="59" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="59" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="66" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classITimeStepper_1a05d1482e28b0b24d18e0fd2366ba3ce7" prot="public" static="no">
+        <type>ExecSpace</type>
+        <definition>using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::exec_space =  ExecSpace</definition>
+        <argsstring></argsstring>
+        <name>exec_space</name>
+        <qualifiedname>ITimeStepper::exec_space</qualifiedname>
+        <briefdescription>
+<para>The space (CPU/GPU) where the calculations are carried out. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="69" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classITimeStepper_1abf7ce877cffa5f112975e0c8ebaf5b28" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classITimeStepper_1a0580b80dd9c61ac350895e80958c15dc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::update</definition>
+        <definition>void ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::update</definition>
         <argsstring>(ValField y, double dt, std::function&lt; void(DerivField, ValConstField)&gt; dy_calculator) const</argsstring>
         <name>update</name>
         <qualifiedname>ITimeStepper::update</qualifiedname>
         <param>
-          <type><ref refid="classITimeStepper_1aaba53f61442e763c05fbd7614c3e1c05" kindref="member">ValField</ref></type>
+          <type><ref refid="classITimeStepper_1ae1fa0645a608965479f0974abcff81ff" kindref="member">ValField</ref></type>
           <declname>y</declname>
         </param>
         <param>
@@ -114,7 +159,7 @@
           <declname>dt</declname>
         </param>
         <param>
-          <type>std::function&lt; void(<ref refid="classITimeStepper_1a58d11b9c1e57348b94e50b1ea284886f" kindref="member">DerivField</ref>, <ref refid="classITimeStepper_1ad0949984fa0c2d0004f6b7a10e19cd69" kindref="member">ValConstField</ref>)&gt;</type>
+          <type>std::function&lt; void(<ref refid="classITimeStepper_1adb99057a5a7ea3b43495c356cdc68b45" kindref="member">DerivField</ref>, <ref refid="classITimeStepper_1a8b67d47c34f88b2838fe16f98ce61372" kindref="member">ValConstField</ref>)&gt;</type>
           <declname>dy_calculator</declname>
         </param>
         <briefdescription>
@@ -151,11 +196,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="78" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="78" bodyend="82"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="88" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="88" bodyend="92"/>
       </memberdef>
-      <memberdef kind="function" id="classITimeStepper_1a9a7f95c2396c54b9f6323cbd444dd8c1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classITimeStepper_1a55c46c1cd9abbf8299648add1589d51d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::update</definition>
+        <definition>void ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::update</definition>
         <argsstring>(ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(DerivField, ValConstField)&gt; dy_calculator) const</argsstring>
         <name>update</name>
         <qualifiedname>ITimeStepper::update</qualifiedname>
@@ -164,7 +209,7 @@
           <declname>exec_space</declname>
         </param>
         <param>
-          <type><ref refid="classITimeStepper_1aaba53f61442e763c05fbd7614c3e1c05" kindref="member">ValField</ref></type>
+          <type><ref refid="classITimeStepper_1ae1fa0645a608965479f0974abcff81ff" kindref="member">ValField</ref></type>
           <declname>y</declname>
         </param>
         <param>
@@ -172,7 +217,7 @@
           <declname>dt</declname>
         </param>
         <param>
-          <type>std::function&lt; void(<ref refid="classITimeStepper_1a58d11b9c1e57348b94e50b1ea284886f" kindref="member">DerivField</ref>, <ref refid="classITimeStepper_1ad0949984fa0c2d0004f6b7a10e19cd69" kindref="member">ValConstField</ref>)&gt;</type>
+          <type>std::function&lt; void(<ref refid="classITimeStepper_1adb99057a5a7ea3b43495c356cdc68b45" kindref="member">DerivField</ref>, <ref refid="classITimeStepper_1a8b67d47c34f88b2838fe16f98ce61372" kindref="member">ValConstField</ref>)&gt;</type>
           <declname>dy_calculator</declname>
         </param>
         <briefdescription>
@@ -217,11 +262,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="102" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="102" bodyend="116"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="112" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="112" bodyend="126"/>
       </memberdef>
-      <memberdef kind="function" id="classITimeStepper_1aa431ffdb2dd991945d59d5d94adf4bef" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+      <memberdef kind="function" id="classITimeStepper_1abb0814af8999ce3f3d724a42233e2c97" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
-        <definition>virtual void ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::update</definition>
+        <definition>virtual void ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::update</definition>
         <argsstring>(ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(DerivField, ValConstField)&gt; dy_calculator, std::function&lt; void(ValField, DerivConstField, double)&gt; y_update) const =0</argsstring>
         <name>update</name>
         <qualifiedname>ITimeStepper::update</qualifiedname>
@@ -230,17 +275,17 @@
         <reimplementedby refid="classRK2_1af39ff8c3200cb2b37a4254030288963d">update</reimplementedby>
         <reimplementedby refid="classRK3_1a5b66359b6132c575734d8970fda25a56">update</reimplementedby>
         <reimplementedby refid="classRK4_1aa00962aea26427ba1af53522b7dc1395">update</reimplementedby>
-        <reimplementedby refid="classCrankNicolson_1afdf22291a9a2f9180e1904d3a0728737">update</reimplementedby>
-        <reimplementedby refid="classEuler_1afdf22291a9a2f9180e1904d3a0728737">update</reimplementedby>
-        <reimplementedby refid="classRK2_1afdf22291a9a2f9180e1904d3a0728737">update</reimplementedby>
-        <reimplementedby refid="classRK3_1afdf22291a9a2f9180e1904d3a0728737">update</reimplementedby>
-        <reimplementedby refid="classRK4_1afdf22291a9a2f9180e1904d3a0728737">update</reimplementedby>
+        <reimplementedby refid="classCrankNicolson_1a86f1b0334df3fae50bd69fbfa32f9954">update</reimplementedby>
+        <reimplementedby refid="classEuler_1a86f1b0334df3fae50bd69fbfa32f9954">update</reimplementedby>
+        <reimplementedby refid="classRK2_1a86f1b0334df3fae50bd69fbfa32f9954">update</reimplementedby>
+        <reimplementedby refid="classRK3_1a86f1b0334df3fae50bd69fbfa32f9954">update</reimplementedby>
+        <reimplementedby refid="classRK4_1a86f1b0334df3fae50bd69fbfa32f9954">update</reimplementedby>
         <param>
           <type>ExecSpace const &amp;</type>
           <declname>exec_space</declname>
         </param>
         <param>
-          <type><ref refid="classITimeStepper_1aaba53f61442e763c05fbd7614c3e1c05" kindref="member">ValField</ref></type>
+          <type><ref refid="classITimeStepper_1ae1fa0645a608965479f0974abcff81ff" kindref="member">ValField</ref></type>
           <declname>y</declname>
         </param>
         <param>
@@ -248,11 +293,11 @@
           <declname>dt</declname>
         </param>
         <param>
-          <type>std::function&lt; void(<ref refid="classITimeStepper_1a58d11b9c1e57348b94e50b1ea284886f" kindref="member">DerivField</ref>, <ref refid="classITimeStepper_1ad0949984fa0c2d0004f6b7a10e19cd69" kindref="member">ValConstField</ref>)&gt;</type>
+          <type>std::function&lt; void(<ref refid="classITimeStepper_1adb99057a5a7ea3b43495c356cdc68b45" kindref="member">DerivField</ref>, <ref refid="classITimeStepper_1a8b67d47c34f88b2838fe16f98ce61372" kindref="member">ValConstField</ref>)&gt;</type>
           <declname>dy_calculator</declname>
         </param>
         <param>
-          <type>std::function&lt; void(<ref refid="classITimeStepper_1aaba53f61442e763c05fbd7614c3e1c05" kindref="member">ValField</ref>, <ref refid="classITimeStepper_1a7ee2d8a1e9031e625d0861031891bd52" kindref="member">DerivConstField</ref>, double)&gt;</type>
+          <type>std::function&lt; void(<ref refid="classITimeStepper_1ae1fa0645a608965479f0974abcff81ff" kindref="member">ValField</ref>, <ref refid="classITimeStepper_1a32837c6aa6ab0a17eb422efd8e0f933e" kindref="member">DerivConstField</ref>, double)&gt;</type>
           <declname>y_update</declname>
         </param>
         <briefdescription>
@@ -304,9 +349,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="133" column="18"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="143" column="18"/>
       </memberdef>
-      <memberdef kind="function" id="classITimeStepper_1ace32467b0d2e375becbfe913755d5851" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classITimeStepper_1a31d847cdc043162216055bd9445d6172" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class FieldType</type>
@@ -321,7 +366,7 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::assemble_field_k_total</definition>
+        <definition>void ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::assemble_field_k_total</definition>
         <argsstring>(ExecSpace const &amp;exec_space, FieldType k_total, FuncType func, std::array&lt; FieldType, n_args &gt; k_arr) const</argsstring>
         <name>assemble_field_k_total</name>
         <qualifiedname>ITimeStepper::assemble_field_k_total</qualifiedname>
@@ -382,9 +427,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="214" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="214" bodyend="232"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="224" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="224" bodyend="242"/>
       </memberdef>
-      <memberdef kind="function" id="classITimeStepper_1a7047fa6fd6122b8dcea1f283461aa2ee" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classITimeStepper_1a317441863bfb699241f81150ae1a9ea5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class FieldType</type>
@@ -399,7 +444,7 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::assemble_vector_field_k_total</definition>
+        <definition>void ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::assemble_vector_field_k_total</definition>
         <argsstring>(ExecSpace const &amp;exec_space, FieldType k_total, FuncType func, std::array&lt; FieldType, n_args &gt; k_arr) const</argsstring>
         <name>assemble_vector_field_k_total</name>
         <qualifiedname>ITimeStepper::assemble_vector_field_k_total</qualifiedname>
@@ -460,22 +505,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="244" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="244" bodyend="263"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="254" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="254" bodyend="273"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
-      <memberdef kind="function" id="classITimeStepper_1ac976ff8bc85dbfed9f7b378f69bd52b4" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classITimeStepper_1af0b2c72cbd3c7be4d2b3767b4a4c2857" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::copy</definition>
+        <definition>void ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::copy</definition>
         <argsstring>(ValField copy_to, ValConstField copy_from) const</argsstring>
         <name>copy</name>
         <qualifiedname>ITimeStepper::copy</qualifiedname>
         <param>
-          <type><ref refid="classITimeStepper_1aaba53f61442e763c05fbd7614c3e1c05" kindref="member">ValField</ref></type>
+          <type><ref refid="classITimeStepper_1ae1fa0645a608965479f0974abcff81ff" kindref="member">ValField</ref></type>
           <declname>copy_to</declname>
         </param>
         <param>
-          <type><ref refid="classITimeStepper_1ad0949984fa0c2d0004f6b7a10e19cd69" kindref="member">ValConstField</ref></type>
+          <type><ref refid="classITimeStepper_1a8b67d47c34f88b2838fe16f98ce61372" kindref="member">ValConstField</ref></type>
           <declname>copy_from</declname>
         </param>
         <briefdescription>
@@ -503,9 +548,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="147" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="147" bodyend="154"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="157" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="157" bodyend="164"/>
       </memberdef>
-      <memberdef kind="function" id="classITimeStepper_1a7d94fc389aad94e1af939a5f32c81edd" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classITimeStepper_1a77be010c79547fa1d809afcd793c0f20" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class FuncType</type>
@@ -517,7 +562,7 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::assemble_k_total</definition>
+        <definition>void ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::assemble_k_total</definition>
         <argsstring>(ExecSpace const &amp;exec_space, DerivField k_total, FuncType func, T... k) const</argsstring>
         <name>assemble_k_total</name>
         <qualifiedname>ITimeStepper::assemble_k_total</qualifiedname>
@@ -526,7 +571,7 @@
           <declname>exec_space</declname>
         </param>
         <param>
-          <type><ref refid="classITimeStepper_1a58d11b9c1e57348b94e50b1ea284886f" kindref="member">DerivField</ref></type>
+          <type><ref refid="classITimeStepper_1adb99057a5a7ea3b43495c356cdc68b45" kindref="member">DerivField</ref></type>
           <declname>k_total</declname>
         </param>
         <param>
@@ -578,11 +623,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="185" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="185" bodyend="201"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="195" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="195" bodyend="211"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-static-func">
-      <memberdef kind="function" id="classITimeStepper_1a5600be32cf869c3f33d83f5aff7e7c62" prot="protected" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classITimeStepper_1a32de68ecf77ae389c4ef267b6d37e7c6" prot="protected" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class DerivFieldType</type>
@@ -597,7 +642,7 @@
           </param>
         </templateparamlist>
         <type>KOKKOS_FUNCTION void</type>
-        <definition>static KOKKOS_FUNCTION void ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::fill_k_total</definition>
+        <definition>static KOKKOS_FUNCTION void ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::fill_k_total</definition>
         <argsstring>(DerivFieldType k_total, Idx i, DVector&lt; DDims... &gt; new_val)</argsstring>
         <name>fill_k_total</name>
         <qualifiedname>ITimeStepper::fill_k_total</qualifiedname>
@@ -646,11 +691,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="164" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="164" bodyend="173"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="174" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="174" bodyend="183"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
-      <memberdef kind="function" id="classITimeStepper_1ad3373c79d74f54aebb6bd634b5c6493e" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classITimeStepper_1a73e8b665f637dd49d92ffd2dc347ad28" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
@@ -675,7 +720,7 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::assemble_multipatch_field_k_total_on_patch</definition>
+        <definition>void ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::assemble_multipatch_field_k_total_on_patch</definition>
         <argsstring>(ExecSpace const &amp;exec_space, MultipatchField&lt; T, Patches... &gt; k_total, FuncType func, std::array&lt; MultipatchField&lt; T, Patches... &gt;, n_args &gt; k_arr) const</argsstring>
         <name>assemble_multipatch_field_k_total_on_patch</name>
         <qualifiedname>ITimeStepper::assemble_multipatch_field_k_total_on_patch</qualifiedname>
@@ -736,9 +781,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="281" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="281" bodyend="299"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="291" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="291" bodyend="309"/>
       </memberdef>
-      <memberdef kind="function" id="classITimeStepper_1ad12fb5b24fcf305628507144b77be8d2" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classITimeStepper_1afdeb848ce8ca8b935373f065fbf22535" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>template&lt; typename P &gt; typename</type>
@@ -760,7 +805,7 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::assemble_multipatch_field_k_total</definition>
+        <definition>void ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::assemble_multipatch_field_k_total</definition>
         <argsstring>(ExecSpace const &amp;exec_space, MultipatchField&lt; T, Patches... &gt; k_total, FuncType func, std::array&lt; MultipatchField&lt; T, Patches... &gt;, n_args &gt; k_arr) const</argsstring>
         <name>assemble_multipatch_field_k_total</name>
         <qualifiedname>ITimeStepper::assemble_multipatch_field_k_total</qualifiedname>
@@ -821,7 +866,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="315" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="315" bodyend="323"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="325" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="325" bodyend="333"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -844,7 +889,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</label>
+        <label>ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;</label>
         <link refid="classITimeStepper"/>
       </node>
       <node id="4">
@@ -866,23 +911,26 @@
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="22" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="23" bodyend="324"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="22" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="23" bodyend="334"/>
     <listofallmembers>
-      <member refid="classITimeStepper_1ace32467b0d2e375becbfe913755d5851" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>assemble_field_k_total</name></member>
-      <member refid="classITimeStepper_1a7d94fc389aad94e1af939a5f32c81edd" prot="protected" virt="non-virtual"><scope>ITimeStepper</scope><name>assemble_k_total</name></member>
-      <member refid="classITimeStepper_1ad12fb5b24fcf305628507144b77be8d2" prot="private" virt="non-virtual"><scope>ITimeStepper</scope><name>assemble_multipatch_field_k_total</name></member>
-      <member refid="classITimeStepper_1ad3373c79d74f54aebb6bd634b5c6493e" prot="private" virt="non-virtual"><scope>ITimeStepper</scope><name>assemble_multipatch_field_k_total_on_patch</name></member>
-      <member refid="classITimeStepper_1a7047fa6fd6122b8dcea1f283461aa2ee" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>assemble_vector_field_k_total</name></member>
-      <member refid="classITimeStepper_1ac976ff8bc85dbfed9f7b378f69bd52b4" prot="protected" virt="non-virtual"><scope>ITimeStepper</scope><name>copy</name></member>
-      <member refid="classITimeStepper_1a7ee2d8a1e9031e625d0861031891bd52" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>DerivConstField</name></member>
-      <member refid="classITimeStepper_1a58d11b9c1e57348b94e50b1ea284886f" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>DerivField</name></member>
-      <member refid="classITimeStepper_1a5600be32cf869c3f33d83f5aff7e7c62" prot="protected" virt="non-virtual"><scope>ITimeStepper</scope><name>fill_k_total</name></member>
-      <member refid="classITimeStepper_1a468e0909ac8b50f109dc810879253134" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>IdxRange</name></member>
-      <member refid="classITimeStepper_1abf7ce877cffa5f112975e0c8ebaf5b28" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>update</name></member>
-      <member refid="classITimeStepper_1a9a7f95c2396c54b9f6323cbd444dd8c1" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>update</name></member>
-      <member refid="classITimeStepper_1aa431ffdb2dd991945d59d5d94adf4bef" prot="public" virt="pure-virtual"><scope>ITimeStepper</scope><name>update</name></member>
-      <member refid="classITimeStepper_1ad0949984fa0c2d0004f6b7a10e19cd69" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>ValConstField</name></member>
-      <member refid="classITimeStepper_1aaba53f61442e763c05fbd7614c3e1c05" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>ValField</name></member>
+      <member refid="classITimeStepper_1a31d847cdc043162216055bd9445d6172" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>assemble_field_k_total</name></member>
+      <member refid="classITimeStepper_1a77be010c79547fa1d809afcd793c0f20" prot="protected" virt="non-virtual"><scope>ITimeStepper</scope><name>assemble_k_total</name></member>
+      <member refid="classITimeStepper_1afdeb848ce8ca8b935373f065fbf22535" prot="private" virt="non-virtual"><scope>ITimeStepper</scope><name>assemble_multipatch_field_k_total</name></member>
+      <member refid="classITimeStepper_1a73e8b665f637dd49d92ffd2dc347ad28" prot="private" virt="non-virtual"><scope>ITimeStepper</scope><name>assemble_multipatch_field_k_total_on_patch</name></member>
+      <member refid="classITimeStepper_1a317441863bfb699241f81150ae1a9ea5" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>assemble_vector_field_k_total</name></member>
+      <member refid="classITimeStepper_1af0b2c72cbd3c7be4d2b3767b4a4c2857" prot="protected" virt="non-virtual"><scope>ITimeStepper</scope><name>copy</name></member>
+      <member refid="classITimeStepper_1a32837c6aa6ab0a17eb422efd8e0f933e" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>DerivConstField</name></member>
+      <member refid="classITimeStepper_1adb99057a5a7ea3b43495c356cdc68b45" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>DerivField</name></member>
+      <member refid="classITimeStepper_1a6d59a37a2b1374291a1af0a3fc4ca1ec" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>DerivFieldMem</name></member>
+      <member refid="classITimeStepper_1a05d1482e28b0b24d18e0fd2366ba3ce7" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>exec_space</name></member>
+      <member refid="classITimeStepper_1a32de68ecf77ae389c4ef267b6d37e7c6" prot="protected" virt="non-virtual"><scope>ITimeStepper</scope><name>fill_k_total</name></member>
+      <member refid="classITimeStepper_1afdbd0d8a324c9f3a169e5776127e174f" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>IdxRange</name></member>
+      <member refid="classITimeStepper_1a0580b80dd9c61ac350895e80958c15dc" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>update</name></member>
+      <member refid="classITimeStepper_1a55c46c1cd9abbf8299648add1589d51d" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>update</name></member>
+      <member refid="classITimeStepper_1abb0814af8999ce3f3d724a42233e2c97" prot="public" virt="pure-virtual"><scope>ITimeStepper</scope><name>update</name></member>
+      <member refid="classITimeStepper_1a8b67d47c34f88b2838fe16f98ce61372" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>ValConstField</name></member>
+      <member refid="classITimeStepper_1ae1fa0645a608965479f0974abcff81ff" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>ValField</name></member>
+      <member refid="classITimeStepper_1aefaad1f5fe74ef88c3d18942c11e9b48" prot="public" virt="non-virtual"><scope>ITimeStepper</scope><name>ValFieldMem</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

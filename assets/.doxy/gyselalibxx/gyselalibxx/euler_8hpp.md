@@ -35,7 +35,14 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**Euler**](classEuler.md) &lt;class FieldMem, class [**DerivFieldMem**](classDerivFieldMem.md), class ExecSpace&gt;<br>_A class which provides an implementation of an explicit_ [_**Euler**_](classEuler.md) _method._ |
+| class | [**Euler**](classEuler.md) &lt;class FieldMem, class [**DerivFieldMem**](classITimeStepper.md#typedef-derivfieldmem), class ExecSpace&gt;<br>_A class which provides an implementation of an explicit_ [_**Euler**_](classEuler.md) _method._ |
+
+
+## Public Types
+
+| Type | Name |
+| ---: | :--- |
+| typedef [**ExplicitTimeStepperBuilder**](classExplicitTimeStepperBuilder.md)&lt; [**Euler**](classEuler.md) &gt; | [**EulerBuilder**](#typedef-eulerbuilder)  <br> |
 
 
 
@@ -84,8 +91,21 @@
 
 
 
+## Public Types Documentation
 
 
+
+
+### typedef EulerBuilder 
+
+```C++
+using EulerBuilder =  ExplicitTimeStepperBuilder<Euler>;
+```
+
+
+
+
+<hr>
 
 ------------------------------
 The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/euler.hpp`

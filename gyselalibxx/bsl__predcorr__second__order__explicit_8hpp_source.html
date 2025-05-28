@@ -567,25 +567,17 @@ template &lt;class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMappin
 class BslExplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
-    using EulerMethod
-            = Euler&lt;FieldMemRTheta&lt;CoordRTheta&gt;,
-                    DVectorFieldMemRTheta&lt;X, Y&gt;,
-                    Kokkos::DefaultExecutionSpace&gt;;
-
-    using EulerMethod_host
-            = Euler&lt;host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt;&gt;,
-                    host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt;,
-                    Kokkos::DefaultHostExecutionSpace&gt;;
-
     using SplinePolarFootFinderType = SplinePolarFootFinder&lt;
-            EulerMethod,
+            IdxRangeRTheta,
+            EulerBuilder,
             LogicalToPhysicalMapping,
             LogicalToPseudoPhysicalMapping,
             SplineRThetaBuilder,
             SplineRThetaEvaluatorConstBound&gt;;
 
     using SplinePolarFootFinderType_host = SplinePolarFootFinder&lt;
-            EulerMethod_host,
+            IdxRangeRTheta,
+            EulerBuilder,
             LogicalToPhysicalMapping,
             LogicalToPseudoPhysicalMapping,
             SplineRThetaBuilder_host,
@@ -604,7 +596,7 @@ private:
 
     BslAdvectionRTheta const&amp; m_advection_solver;
 
-    EulerMethod_host const m_euler;
+    EulerBuilder const m_euler;
     SplinePolarFootFinderType_host const m_find_feet;
 
     PolarSplineFEMPoissonLikeSolver&lt;
@@ -633,8 +625,8 @@ public:
             SplineRThetaEvaluatorConstBound_host const&amp; advection_evaluator)
         : m_logical_to_physical(logical_to_physical)
         , m_advection_solver(advection_solver)
-        , m_euler(grid)
         , m_find_feet(
+                  grid,
                   m_euler,
                   logical_to_physical,
                   logical_to_pseudo_physical,

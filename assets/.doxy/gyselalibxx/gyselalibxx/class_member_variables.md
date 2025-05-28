@@ -63,7 +63,7 @@
 
 ## m
 
-* **m\_epsilon** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CombinedMapping**](classCombinedMapping.md), [**CrankNicolson**](classCrankNicolson.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**KelvinHelmholtzInstabilityInitialisation**](classKelvinHelmholtzInstabilityInitialisation.md))
+* **m\_epsilon** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CombinedMapping**](classCombinedMapping.md), [**CrankNicolson**](classCrankNicolson.md), [**CrankNicolsonBuilder**](classCrankNicolsonBuilder.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**KelvinHelmholtzInstabilityInitialisation**](classKelvinHelmholtzInstabilityInitialisation.md))
 * **m\_mapping** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md), [**BslPredCorrRTheta**](classBslPredCorrRTheta.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b.md), [**InverseJacobianMatrix**](classInverseJacobianMatrix.md), [**LiePoissonBracket**](classLiePoissonBracket.md), [**MetricTensorEvaluator**](classMetricTensorEvaluator.md), [**VortexMergerDensitySolution**](classVortexMergerDensitySolution.md), [**VortexMergerEquilibria**](classVortexMergerEquilibria.md))
 * **m\_polar\_spline\_evaluator** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_spline\_evaluator** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md), [**BslPredCorrRTheta**](classBslPredCorrRTheta.md), [**DiscreteToCartesian**](classDiscreteToCartesian.md), [**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
@@ -73,7 +73,7 @@
 * **m\_adv\_field\_builder** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **m\_adv\_field\_evaluator** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **m\_function\_interpolator** ([**BslAdvection1D**](classBslAdvection1D.md))
-* **m\_time\_stepper** ([**BslAdvection1D**](classBslAdvection1D.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
+* **m\_time\_stepper\_builder** ([**BslAdvection1D**](classBslAdvection1D.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **m\_find\_feet** ([**BslAdvectionPolar**](classBslAdvectionPolar.md), [**BslExplicitPredCorrRTheta**](classBslExplicitPredCorrRTheta.md))
 * **m\_interpolator** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
 * **m\_logical\_to\_physical\_mapping** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
@@ -110,7 +110,7 @@
 * **m\_mapping\_2** ([**CombinedMapping**](classCombinedMapping.md))
 * **m\_deriv\_value** ([**ConstantPartialDerivative**](classConstantPartialDerivative.md), [**ConstantPartialDerivativeCreator**](classConstantPartialDerivativeCreator.md))
 * **m\_idx\_range** ([**CrankNicolson**](classCrankNicolson.md), [**Euler**](classEuler.md), [**Lagrange**](classLagrange.md), [**RK2**](classRK2.md), [**RK3**](classRK3.md), [**RK4**](classRK4.md))
-* **m\_max\_counter** ([**CrankNicolson**](classCrankNicolson.md))
+* **m\_max\_counter** ([**CrankNicolson**](classCrankNicolson.md), [**CrankNicolsonBuilder**](classCrankNicolsonBuilder.md))
 * **m\_cross\_derivative\_idx\_range** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
 * **m\_deriv\_idx\_range** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
 * **m\_physical\_idx\_range** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))

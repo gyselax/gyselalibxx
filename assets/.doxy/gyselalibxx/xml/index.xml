@@ -42,35 +42,36 @@
     <member refid="classBarycentricToCartesian_1a0d989e44273714f226c63ae78657214c" kind="function"><name>get_inverse_mapping</name></member>
   </compound>
   <compound refid="classBslAdvection1D" kind="class"><name>BslAdvection1D</name>
-    <member refid="classBslAdvection1D_1a0996b693977e61dbbace09073d40a92f" kind="typedef"><name>IdxAdvection</name></member>
-    <member refid="classBslAdvection1D_1ab36f0187be8b1f56073da6afca870606" kind="typedef"><name>IdxFunction</name></member>
-    <member refid="classBslAdvection1D_1ab0bb90f023da9f5b3e84e431fd6b1e0f" kind="typedef"><name>DimInterest</name></member>
-    <member refid="classBslAdvection1D_1aa1f7a18b84f42d918786e3b3a2319e92" kind="typedef"><name>CoordInterest</name></member>
-    <member refid="classBslAdvection1D_1a43a0cde49c5d68402de2ef703272a484" kind="typedef"><name>IdxRangeInterest</name></member>
-    <member refid="classBslAdvection1D_1a9a71f16dd1c80959d4d5ac586e6fd05e" kind="typedef"><name>IdxInterest</name></member>
-    <member refid="classBslAdvection1D_1a838fdb38632c5c89b023b060a78cc1e7" kind="typedef"><name>FeetFieldMem</name></member>
-    <member refid="classBslAdvection1D_1a2a7966fc2f138afe441555f2f5dee540" kind="typedef"><name>FeetField</name></member>
-    <member refid="classBslAdvection1D_1a5b1490a6ecf1025c649336cf6947ac37" kind="typedef"><name>FeetConstField</name></member>
-    <member refid="classBslAdvection1D_1a04c3d32914cdeb0c31bc3932eac80c4e" kind="typedef"><name>AdvecFieldMem</name></member>
-    <member refid="classBslAdvection1D_1a258e3c3483313645cb8db29ede6881d6" kind="typedef"><name>AdvecField</name></member>
-    <member refid="classBslAdvection1D_1ac9c29f5e35b448444fdbe9f038059160" kind="typedef"><name>FunctionField</name></member>
-    <member refid="classBslAdvection1D_1ab7339439ed47cc59a9c72be639f59bfb" kind="typedef"><name>IdxRangeBSAdvection</name></member>
-    <member refid="classBslAdvection1D_1ac532261ba9c54f779bc90782e9b842aa" kind="typedef"><name>AdvecFieldSplineMem</name></member>
-    <member refid="classBslAdvection1D_1ad3a9cef0bf1239bb6a28e5cd4537d1a8" kind="typedef"><name>AdvecFieldSplineCoeffs</name></member>
-    <member refid="classBslAdvection1D_1a60ed7c8bb7052e29abd13c8b1fcba5f6" kind="typedef"><name>DerivDim</name></member>
-    <member refid="classBslAdvection1D_1a19d27590fb6b218cae8505ef2baf274e" kind="typedef"><name>IdxRangeAdvecFieldDeriv</name></member>
-    <member refid="classBslAdvection1D_1a62a6a0897fd7c4e4d9c0c9ddbfda6c62" kind="typedef"><name>AdvecFieldDerivConstField</name></member>
-    <member refid="classBslAdvection1D_1af754ecb866db219fb7556796047a7a5a" kind="typedef"><name>FunctionPreallocatableInterpolatorType</name></member>
-    <member refid="classBslAdvection1D_1a5da12d33f6861ee5d8d48be4644209a1" kind="typedef"><name>FunctionInterpolatorType</name></member>
-    <member refid="classBslAdvection1D_1affe864a0f821b367d52e65c6d997dcbd" kind="typedef"><name>IdxRangeFunctionDeriv</name></member>
-    <member refid="classBslAdvection1D_1a59b910fb4007cc0eff44574178a90be9" kind="typedef"><name>FunctionDerivFieldMem</name></member>
-    <member refid="classBslAdvection1D_1a91809c90211ee339d12375528ffeaa99" kind="variable"><name>m_function_interpolator</name></member>
-    <member refid="classBslAdvection1D_1a1d37a2d009c65d63de04f1bca3b3a451" kind="variable"><name>m_adv_field_builder</name></member>
-    <member refid="classBslAdvection1D_1a7d983ad5e4ee050ca8e1bd0141f7c184" kind="variable"><name>m_adv_field_evaluator</name></member>
-    <member refid="classBslAdvection1D_1a806153ec462ed69d874a460bbb52a12f" kind="variable"><name>m_time_stepper</name></member>
-    <member refid="classBslAdvection1D_1a7ae25b90d5ed98e07638f207bb18a0a6" kind="function"><name>BslAdvection1D</name></member>
-    <member refid="classBslAdvection1D_1a39d23b247f9017824d2a49e292235d24" kind="function"><name>~BslAdvection1D</name></member>
-    <member refid="classBslAdvection1D_1ab6c09fdec0ac2ec060d846a03a775766" kind="function"><name>operator()</name></member>
+    <member refid="classBslAdvection1D_1ae5ea5aafe141b9ac37fb70993d850532" kind="typedef"><name>IdxAdvection</name></member>
+    <member refid="classBslAdvection1D_1ac452c9b13f678ad3623adb53fd61a1b7" kind="typedef"><name>IdxFunction</name></member>
+    <member refid="classBslAdvection1D_1a0eb514cc395b40d6a17352a69ddbffb7" kind="typedef"><name>DimInterest</name></member>
+    <member refid="classBslAdvection1D_1ad12abf3c972f8589a6e421940570aa94" kind="typedef"><name>CoordInterest</name></member>
+    <member refid="classBslAdvection1D_1a5a1f30580212bbaad4eb3ca700b8efbc" kind="typedef"><name>IdxRangeInterest</name></member>
+    <member refid="classBslAdvection1D_1ad7135d9c31c1efe0501ea9a5a173542f" kind="typedef"><name>IdxInterest</name></member>
+    <member refid="classBslAdvection1D_1aa8e2659830e9ed71ff37c649c26f4198" kind="typedef"><name>FeetFieldMem</name></member>
+    <member refid="classBslAdvection1D_1ab9c24e643552d03e38356ac12c192364" kind="typedef"><name>FeetField</name></member>
+    <member refid="classBslAdvection1D_1a9aef7039fbcb471974e833573fd267b0" kind="typedef"><name>FeetConstField</name></member>
+    <member refid="classBslAdvection1D_1a3fb88989054d134bbe30df786fdcf2e4" kind="typedef"><name>AdvecFieldMem</name></member>
+    <member refid="classBslAdvection1D_1a70850e072ea75a46a581062011a96cb6" kind="typedef"><name>AdvecField</name></member>
+    <member refid="classBslAdvection1D_1a85e2030efc9d0bc6784cc6b6f0e38cd5" kind="typedef"><name>FunctionField</name></member>
+    <member refid="classBslAdvection1D_1a2593de33345b4e83b85059091ad8997b" kind="typedef"><name>IdxRangeBSAdvection</name></member>
+    <member refid="classBslAdvection1D_1af31d6b92c0bf51aff81bbe1197a94ff7" kind="typedef"><name>AdvecFieldSplineMem</name></member>
+    <member refid="classBslAdvection1D_1ad36d478eb8b8c6ec133aca98ca5651f5" kind="typedef"><name>AdvecFieldSplineCoeffs</name></member>
+    <member refid="classBslAdvection1D_1aaf113f31757344d34e5f55250cdd13fc" kind="typedef"><name>DerivDim</name></member>
+    <member refid="classBslAdvection1D_1af8a301148c054c24dd751aa247467e0d" kind="typedef"><name>IdxRangeAdvecFieldDeriv</name></member>
+    <member refid="classBslAdvection1D_1a5ffce9debb7187251c12b9c7dc015835" kind="typedef"><name>AdvecFieldDerivConstField</name></member>
+    <member refid="classBslAdvection1D_1a05a7ef8c4e74e0a78707f2ad7ed9fbe3" kind="typedef"><name>FunctionPreallocatableInterpolatorType</name></member>
+    <member refid="classBslAdvection1D_1abde42e671040ef85c9c343af6c9a5945" kind="typedef"><name>FunctionInterpolatorType</name></member>
+    <member refid="classBslAdvection1D_1a960f5886c11741da0725199d65766adc" kind="typedef"><name>IdxRangeFunctionDeriv</name></member>
+    <member refid="classBslAdvection1D_1a0a79451dcce297ce5e7b206df6f315f5" kind="typedef"><name>FunctionDerivFieldMem</name></member>
+    <member refid="classBslAdvection1D_1a1a640f19e8977dc305043b15b2bc2c12" kind="typedef"><name>TimeStepper</name></member>
+    <member refid="classBslAdvection1D_1ac600ce7e5dbed2089fbde21065c8b3ad" kind="variable"><name>m_function_interpolator</name></member>
+    <member refid="classBslAdvection1D_1ae87783bd1ba711394c63b406cb061270" kind="variable"><name>m_adv_field_builder</name></member>
+    <member refid="classBslAdvection1D_1a7dd819d156552de193c720285cf616c8" kind="variable"><name>m_adv_field_evaluator</name></member>
+    <member refid="classBslAdvection1D_1afd89cbfa130ed74242df232dc974dc12" kind="variable"><name>m_time_stepper_builder</name></member>
+    <member refid="classBslAdvection1D_1adf1e271587e2895c99f80543aedfd7dd" kind="function"><name>BslAdvection1D</name></member>
+    <member refid="classBslAdvection1D_1a7e1d227f798ef3b9ff0b952ca6b93b34" kind="function"><name>~BslAdvection1D</name></member>
+    <member refid="classBslAdvection1D_1aa1b6eb51ab09a4763f31445917d96dd4" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classBslAdvectionPolar" kind="class"><name>BslAdvectionPolar</name>
     <member refid="classBslAdvectionPolar_1a2154c15f9649423dac0af9a62f6e483f" kind="typedef"><name>R</name></member>
@@ -133,14 +134,12 @@
     <member refid="classBslAdvectionVelocity_1a9774e52704d997107ddeeb0d4041a0a9" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classBslExplicitPredCorrRTheta" kind="class"><name>BslExplicitPredCorrRTheta</name>
-    <member refid="classBslExplicitPredCorrRTheta_1a3201c5ad88f722bd9d8a9a6aea69147f" kind="typedef"><name>EulerMethod</name></member>
-    <member refid="classBslExplicitPredCorrRTheta_1a15aed7793d52e82fc2f688c82b8081b0" kind="typedef"><name>EulerMethod_host</name></member>
-    <member refid="classBslExplicitPredCorrRTheta_1aa0c43f7fbedc63fc427f430d3c82496c" kind="typedef"><name>SplinePolarFootFinderType</name></member>
-    <member refid="classBslExplicitPredCorrRTheta_1a96e06524fd78bb7f78de6792c4d877e9" kind="typedef"><name>SplinePolarFootFinderType_host</name></member>
+    <member refid="classBslExplicitPredCorrRTheta_1ab7c824b049b06986c80a63e9f409bac8" kind="typedef"><name>SplinePolarFootFinderType</name></member>
+    <member refid="classBslExplicitPredCorrRTheta_1a7f31c6061ba0f8b9df8acfde24cc1a2a" kind="typedef"><name>SplinePolarFootFinderType_host</name></member>
     <member refid="classBslExplicitPredCorrRTheta_1a5c15ca506982294709980c4db94b125b" kind="typedef"><name>BslAdvectionRTheta</name></member>
     <member refid="classBslExplicitPredCorrRTheta_1a55a0f1429b18dd3ad7efd78bde327aba" kind="variable"><name>m_logical_to_physical</name></member>
     <member refid="classBslExplicitPredCorrRTheta_1adad79ef837f236e7da4ff2b163dd41b4" kind="variable"><name>m_advection_solver</name></member>
-    <member refid="classBslExplicitPredCorrRTheta_1a78348cf5c6d31efbc4dfe1cc27e8a0b9" kind="variable"><name>m_euler</name></member>
+    <member refid="classBslExplicitPredCorrRTheta_1a2b62d67b6fae8dd2969d4838923d0a48" kind="variable"><name>m_euler</name></member>
     <member refid="classBslExplicitPredCorrRTheta_1a6a6546bba2fe4df3a59e90e86bbd94e5" kind="variable"><name>m_find_feet</name></member>
     <member refid="classBslExplicitPredCorrRTheta_1ae371ae1d0d4d194decbe71a6e413e248" kind="variable"><name>m_poisson_solver</name></member>
     <member refid="classBslExplicitPredCorrRTheta_1a9b55ed58b927066d14a236c8148cef8c" kind="variable"><name>m_builder</name></member>
@@ -149,14 +148,12 @@
     <member refid="classBslExplicitPredCorrRTheta_1a4a2276bdff30b6251ee191e7b46b8129" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classBslImplicitPredCorrRTheta" kind="class"><name>BslImplicitPredCorrRTheta</name>
-    <member refid="classBslImplicitPredCorrRTheta_1a4a0005626551c918d876f493374cd555" kind="typedef"><name>EulerMethod</name></member>
-    <member refid="classBslImplicitPredCorrRTheta_1a284d9991b6b3a79fcbeaf2374c7a3a2e" kind="typedef"><name>EulerMethod_host</name></member>
-    <member refid="classBslImplicitPredCorrRTheta_1a8fb89254b562099a229de9e9801dbde2" kind="typedef"><name>SplinePolarFootFinderType</name></member>
-    <member refid="classBslImplicitPredCorrRTheta_1ac3e05e729fa98cadf42d8119423e1a6d" kind="typedef"><name>SplinePolarFootFinderType_host</name></member>
+    <member refid="classBslImplicitPredCorrRTheta_1a8cb6bf81e33e6596bc3f4ca141a05cca" kind="typedef"><name>SplinePolarFootFinderType</name></member>
+    <member refid="classBslImplicitPredCorrRTheta_1a1dd31052c8b84b74ba9a626a92b538ea" kind="typedef"><name>SplinePolarFootFinderType_host</name></member>
     <member refid="classBslImplicitPredCorrRTheta_1aa6cef51ca7547bb1eefbc2ec2ebb4bc5" kind="typedef"><name>BslAdvectionRTheta</name></member>
     <member refid="classBslImplicitPredCorrRTheta_1ab35d97776c7595b150b7042456a689a1" kind="variable"><name>m_logical_to_physical</name></member>
     <member refid="classBslImplicitPredCorrRTheta_1a0482fb0e6c2f8821700a0d1b57087bd8" kind="variable"><name>m_advection_solver</name></member>
-    <member refid="classBslImplicitPredCorrRTheta_1a241cdc5679b7f9b30fd1e5c83da61b9a" kind="variable"><name>m_euler</name></member>
+    <member refid="classBslImplicitPredCorrRTheta_1a648e3af28189e0ed060a7c0393b5334c" kind="variable"><name>m_euler</name></member>
     <member refid="classBslImplicitPredCorrRTheta_1aaca5b6d7122b87323ad6627e31c02aac" kind="variable"><name>m_foot_finder</name></member>
     <member refid="classBslImplicitPredCorrRTheta_1a0c81ab9a45d8515e7648d31731fee7ac" kind="variable"><name>m_poisson_solver</name></member>
     <member refid="classBslImplicitPredCorrRTheta_1a30dec681fdf8580f57b31ae75663f229" kind="variable"><name>m_builder</name></member>
@@ -565,14 +562,21 @@
     <member refid="classCrankNicolson_1acee28614e8739edfb476a51aa7c2fe91" kind="function"><name>CrankNicolson</name></member>
     <member refid="classCrankNicolson_1aae3a7f2977fb6afa91841769d3fad20b" kind="function"><name>update</name></member>
     <member refid="classCrankNicolson_1a7b3fb7a2fee1adc8bda9d98920d071e0" kind="function"><name>have_converged</name></member>
-    <member refid="classCrankNicolson_1abf7ce877cffa5f112975e0c8ebaf5b28" kind="function"><name>update</name></member>
-    <member refid="classCrankNicolson_1a9a7f95c2396c54b9f6323cbd444dd8c1" kind="function"><name>update</name></member>
-    <member refid="classCrankNicolson_1afdf22291a9a2f9180e1904d3a0728737" kind="function"><name>update</name></member>
-    <member refid="classCrankNicolson_1a468e0909ac8b50f109dc810879253134" kind="typedef"><name>IdxRange</name></member>
-    <member refid="classCrankNicolson_1ad0949984fa0c2d0004f6b7a10e19cd69" kind="typedef"><name>ValConstField</name></member>
-    <member refid="classCrankNicolson_1aaba53f61442e763c05fbd7614c3e1c05" kind="typedef"><name>ValField</name></member>
-    <member refid="classCrankNicolson_1a7ee2d8a1e9031e625d0861031891bd52" kind="typedef"><name>DerivConstField</name></member>
-    <member refid="classCrankNicolson_1a58d11b9c1e57348b94e50b1ea284886f" kind="typedef"><name>DerivField</name></member>
+    <member refid="classCrankNicolson_1a0580b80dd9c61ac350895e80958c15dc" kind="function"><name>update</name></member>
+    <member refid="classCrankNicolson_1a55c46c1cd9abbf8299648add1589d51d" kind="function"><name>update</name></member>
+    <member refid="classCrankNicolson_1a86f1b0334df3fae50bd69fbfa32f9954" kind="function"><name>update</name></member>
+    <member refid="classCrankNicolson_1afdbd0d8a324c9f3a169e5776127e174f" kind="typedef"><name>IdxRange</name></member>
+    <member refid="classCrankNicolson_1a8b67d47c34f88b2838fe16f98ce61372" kind="typedef"><name>ValConstField</name></member>
+    <member refid="classCrankNicolson_1ae1fa0645a608965479f0974abcff81ff" kind="typedef"><name>ValField</name></member>
+    <member refid="classCrankNicolson_1a32837c6aa6ab0a17eb422efd8e0f933e" kind="typedef"><name>DerivConstField</name></member>
+    <member refid="classCrankNicolson_1adb99057a5a7ea3b43495c356cdc68b45" kind="typedef"><name>DerivField</name></member>
+  </compound>
+  <compound refid="classCrankNicolsonBuilder" kind="class"><name>CrankNicolsonBuilder</name>
+    <member refid="classCrankNicolsonBuilder_1a2b8c0af37ff0168399e6f19dc646095b" kind="typedef"><name>time_stepper_t</name></member>
+    <member refid="classCrankNicolsonBuilder_1a92f8655c93471b44fac07aad81812fbc" kind="variable"><name>m_max_counter</name></member>
+    <member refid="classCrankNicolsonBuilder_1a0a2eebd9e1569e4ac6c8b276b91724ad" kind="variable"><name>m_epsilon</name></member>
+    <member refid="classCrankNicolsonBuilder_1a3a21ef1dbfdd98ea8b0e1d17f40a2a3e" kind="function"><name>CrankNicolsonBuilder</name></member>
+    <member refid="classCrankNicolsonBuilder_1a24223feb261747e262c51a08ce2a834a" kind="function"><name>preallocate</name></member>
   </compound>
   <compound refid="classCylindricalToCartesian" kind="class"><name>CylindricalToCartesian</name>
     <member refid="classCylindricalToCartesian_1a5b9d946ab8eaacbfe7ee1cd4c6218f7d" kind="typedef"><name>cartesian_tag_x</name></member>
@@ -871,14 +875,14 @@
     <member refid="classEuler_1a722897362aa3fc1bc7cd6a2a1ac47008" kind="variable"><name>m_idx_range</name></member>
     <member refid="classEuler_1af50845d5ab16f17f2008250aee1bacb0" kind="function"><name>Euler</name></member>
     <member refid="classEuler_1acf769dde50a76d24b37794eb4bfc812f" kind="function"><name>update</name></member>
-    <member refid="classEuler_1abf7ce877cffa5f112975e0c8ebaf5b28" kind="function"><name>update</name></member>
-    <member refid="classEuler_1a9a7f95c2396c54b9f6323cbd444dd8c1" kind="function"><name>update</name></member>
-    <member refid="classEuler_1afdf22291a9a2f9180e1904d3a0728737" kind="function"><name>update</name></member>
-    <member refid="classEuler_1a468e0909ac8b50f109dc810879253134" kind="typedef"><name>IdxRange</name></member>
-    <member refid="classEuler_1ad0949984fa0c2d0004f6b7a10e19cd69" kind="typedef"><name>ValConstField</name></member>
-    <member refid="classEuler_1aaba53f61442e763c05fbd7614c3e1c05" kind="typedef"><name>ValField</name></member>
-    <member refid="classEuler_1a7ee2d8a1e9031e625d0861031891bd52" kind="typedef"><name>DerivConstField</name></member>
-    <member refid="classEuler_1a58d11b9c1e57348b94e50b1ea284886f" kind="typedef"><name>DerivField</name></member>
+    <member refid="classEuler_1a0580b80dd9c61ac350895e80958c15dc" kind="function"><name>update</name></member>
+    <member refid="classEuler_1a55c46c1cd9abbf8299648add1589d51d" kind="function"><name>update</name></member>
+    <member refid="classEuler_1a86f1b0334df3fae50bd69fbfa32f9954" kind="function"><name>update</name></member>
+    <member refid="classEuler_1afdbd0d8a324c9f3a169e5776127e174f" kind="typedef"><name>IdxRange</name></member>
+    <member refid="classEuler_1a8b67d47c34f88b2838fe16f98ce61372" kind="typedef"><name>ValConstField</name></member>
+    <member refid="classEuler_1ae1fa0645a608965479f0974abcff81ff" kind="typedef"><name>ValField</name></member>
+    <member refid="classEuler_1a32837c6aa6ab0a17eb422efd8e0f933e" kind="typedef"><name>DerivConstField</name></member>
+    <member refid="classEuler_1adb99057a5a7ea3b43495c356cdc68b45" kind="typedef"><name>DerivField</name></member>
   </compound>
   <compound refid="structPolarSplineEvaluator_1_1eval__deriv__r__theta__type" kind="struct"><name>PolarSplineEvaluator::eval_deriv_r_theta_type</name>
   </compound>
@@ -903,6 +907,11 @@
   <compound refid="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType" kind="struct"><name>PolarSplineFEMPoissonLikeSolver::EvalDeriv2DType</name>
     <member refid="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType_1a8ec2e7ec83bedae738b096e1930b6093" kind="variable"><name>value</name></member>
     <member refid="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType_1a85e12c01584beb77b03e7ba61e740233" kind="variable"><name>derivative</name></member>
+  </compound>
+  <compound refid="classExplicitTimeStepperBuilder" kind="class"><name>ExplicitTimeStepperBuilder</name>
+    <member refid="classExplicitTimeStepperBuilder_1a37ec04e4a03c1080891a68fb27395573" kind="typedef"><name>time_stepper_t</name></member>
+    <member refid="classExplicitTimeStepperBuilder_1a7878f402b4b32ffd49b5dbb23ecd75c2" kind="function"><name>ExplicitTimeStepperBuilder</name></member>
+    <member refid="classExplicitTimeStepperBuilder_1af949d058cd0686c13dccca5df26a02be" kind="function"><name>preallocate</name></member>
   </compound>
   <compound refid="structconnectivity__details_1_1ExtractPatches" kind="struct"><name>connectivity_details::ExtractPatches</name>
   </compound>
@@ -1533,21 +1542,24 @@
     <member refid="classITimeSolverRTheta_1a5503beee2f7240e8b09ef8ac3be2af24" kind="function"><name>display_time_difference</name></member>
   </compound>
   <compound refid="classITimeStepper" kind="class"><name>ITimeStepper</name>
-    <member refid="classITimeStepper_1a468e0909ac8b50f109dc810879253134" kind="typedef"><name>IdxRange</name></member>
-    <member refid="classITimeStepper_1aaba53f61442e763c05fbd7614c3e1c05" kind="typedef"><name>ValField</name></member>
-    <member refid="classITimeStepper_1ad0949984fa0c2d0004f6b7a10e19cd69" kind="typedef"><name>ValConstField</name></member>
-    <member refid="classITimeStepper_1a58d11b9c1e57348b94e50b1ea284886f" kind="typedef"><name>DerivField</name></member>
-    <member refid="classITimeStepper_1a7ee2d8a1e9031e625d0861031891bd52" kind="typedef"><name>DerivConstField</name></member>
-    <member refid="classITimeStepper_1abf7ce877cffa5f112975e0c8ebaf5b28" kind="function"><name>update</name></member>
-    <member refid="classITimeStepper_1a9a7f95c2396c54b9f6323cbd444dd8c1" kind="function"><name>update</name></member>
-    <member refid="classITimeStepper_1aa431ffdb2dd991945d59d5d94adf4bef" kind="function"><name>update</name></member>
-    <member refid="classITimeStepper_1ace32467b0d2e375becbfe913755d5851" kind="function"><name>assemble_field_k_total</name></member>
-    <member refid="classITimeStepper_1a7047fa6fd6122b8dcea1f283461aa2ee" kind="function"><name>assemble_vector_field_k_total</name></member>
-    <member refid="classITimeStepper_1ac976ff8bc85dbfed9f7b378f69bd52b4" kind="function"><name>copy</name></member>
-    <member refid="classITimeStepper_1a7d94fc389aad94e1af939a5f32c81edd" kind="function"><name>assemble_k_total</name></member>
-    <member refid="classITimeStepper_1a5600be32cf869c3f33d83f5aff7e7c62" kind="function"><name>fill_k_total</name></member>
-    <member refid="classITimeStepper_1ad3373c79d74f54aebb6bd634b5c6493e" kind="function"><name>assemble_multipatch_field_k_total_on_patch</name></member>
-    <member refid="classITimeStepper_1ad12fb5b24fcf305628507144b77be8d2" kind="function"><name>assemble_multipatch_field_k_total</name></member>
+    <member refid="classITimeStepper_1afdbd0d8a324c9f3a169e5776127e174f" kind="typedef"><name>IdxRange</name></member>
+    <member refid="classITimeStepper_1aefaad1f5fe74ef88c3d18942c11e9b48" kind="typedef"><name>ValFieldMem</name></member>
+    <member refid="classITimeStepper_1ae1fa0645a608965479f0974abcff81ff" kind="typedef"><name>ValField</name></member>
+    <member refid="classITimeStepper_1a8b67d47c34f88b2838fe16f98ce61372" kind="typedef"><name>ValConstField</name></member>
+    <member refid="classITimeStepper_1a6d59a37a2b1374291a1af0a3fc4ca1ec" kind="typedef"><name>DerivFieldMem</name></member>
+    <member refid="classITimeStepper_1adb99057a5a7ea3b43495c356cdc68b45" kind="typedef"><name>DerivField</name></member>
+    <member refid="classITimeStepper_1a32837c6aa6ab0a17eb422efd8e0f933e" kind="typedef"><name>DerivConstField</name></member>
+    <member refid="classITimeStepper_1a05d1482e28b0b24d18e0fd2366ba3ce7" kind="typedef"><name>exec_space</name></member>
+    <member refid="classITimeStepper_1a0580b80dd9c61ac350895e80958c15dc" kind="function"><name>update</name></member>
+    <member refid="classITimeStepper_1a55c46c1cd9abbf8299648add1589d51d" kind="function"><name>update</name></member>
+    <member refid="classITimeStepper_1abb0814af8999ce3f3d724a42233e2c97" kind="function"><name>update</name></member>
+    <member refid="classITimeStepper_1a31d847cdc043162216055bd9445d6172" kind="function"><name>assemble_field_k_total</name></member>
+    <member refid="classITimeStepper_1a317441863bfb699241f81150ae1a9ea5" kind="function"><name>assemble_vector_field_k_total</name></member>
+    <member refid="classITimeStepper_1af0b2c72cbd3c7be4d2b3767b4a4c2857" kind="function"><name>copy</name></member>
+    <member refid="classITimeStepper_1a77be010c79547fa1d809afcd793c0f20" kind="function"><name>assemble_k_total</name></member>
+    <member refid="classITimeStepper_1a32de68ecf77ae389c4ef267b6d37e7c6" kind="function"><name>fill_k_total</name></member>
+    <member refid="classITimeStepper_1a73e8b665f637dd49d92ffd2dc347ad28" kind="function"><name>assemble_multipatch_field_k_total_on_patch</name></member>
+    <member refid="classITimeStepper_1afdeb848ce8ca8b935373f065fbf22535" kind="function"><name>assemble_multipatch_field_k_total</name></member>
   </compound>
   <compound refid="classIVlasovSolver" kind="class"><name>IVlasovSolver</name>
     <member refid="classIVlasovSolver_1a10c7130ab540e2f3502ecea9bf67da1e" kind="function"><name>~IVlasovSolver</name></member>
@@ -2465,42 +2477,42 @@
     <member refid="classRK2_1a0a635e6e8a7e3dcb1d44c3e7603eb77d" kind="variable"><name>m_idx_range</name></member>
     <member refid="classRK2_1a0fca8b7c95e42ae9d8ca939677e8ff8e" kind="function"><name>RK2</name></member>
     <member refid="classRK2_1af39ff8c3200cb2b37a4254030288963d" kind="function"><name>update</name></member>
-    <member refid="classRK2_1abf7ce877cffa5f112975e0c8ebaf5b28" kind="function"><name>update</name></member>
-    <member refid="classRK2_1a9a7f95c2396c54b9f6323cbd444dd8c1" kind="function"><name>update</name></member>
-    <member refid="classRK2_1afdf22291a9a2f9180e1904d3a0728737" kind="function"><name>update</name></member>
-    <member refid="classRK2_1a468e0909ac8b50f109dc810879253134" kind="typedef"><name>IdxRange</name></member>
-    <member refid="classRK2_1ad0949984fa0c2d0004f6b7a10e19cd69" kind="typedef"><name>ValConstField</name></member>
-    <member refid="classRK2_1aaba53f61442e763c05fbd7614c3e1c05" kind="typedef"><name>ValField</name></member>
-    <member refid="classRK2_1a7ee2d8a1e9031e625d0861031891bd52" kind="typedef"><name>DerivConstField</name></member>
-    <member refid="classRK2_1a58d11b9c1e57348b94e50b1ea284886f" kind="typedef"><name>DerivField</name></member>
+    <member refid="classRK2_1a0580b80dd9c61ac350895e80958c15dc" kind="function"><name>update</name></member>
+    <member refid="classRK2_1a55c46c1cd9abbf8299648add1589d51d" kind="function"><name>update</name></member>
+    <member refid="classRK2_1a86f1b0334df3fae50bd69fbfa32f9954" kind="function"><name>update</name></member>
+    <member refid="classRK2_1afdbd0d8a324c9f3a169e5776127e174f" kind="typedef"><name>IdxRange</name></member>
+    <member refid="classRK2_1a8b67d47c34f88b2838fe16f98ce61372" kind="typedef"><name>ValConstField</name></member>
+    <member refid="classRK2_1ae1fa0645a608965479f0974abcff81ff" kind="typedef"><name>ValField</name></member>
+    <member refid="classRK2_1a32837c6aa6ab0a17eb422efd8e0f933e" kind="typedef"><name>DerivConstField</name></member>
+    <member refid="classRK2_1adb99057a5a7ea3b43495c356cdc68b45" kind="typedef"><name>DerivField</name></member>
   </compound>
   <compound refid="classRK3" kind="class"><name>RK3</name>
     <member refid="classRK3_1a4e035359670b272d53dff67d9e7c0716" kind="typedef"><name>base_type</name></member>
     <member refid="classRK3_1adf9f896127748637d8afca8c22104c61" kind="variable"><name>m_idx_range</name></member>
     <member refid="classRK3_1aa007e2d8c88c0213ead0a9159a03e054" kind="function"><name>RK3</name></member>
     <member refid="classRK3_1a5b66359b6132c575734d8970fda25a56" kind="function"><name>update</name></member>
-    <member refid="classRK3_1abf7ce877cffa5f112975e0c8ebaf5b28" kind="function"><name>update</name></member>
-    <member refid="classRK3_1a9a7f95c2396c54b9f6323cbd444dd8c1" kind="function"><name>update</name></member>
-    <member refid="classRK3_1afdf22291a9a2f9180e1904d3a0728737" kind="function"><name>update</name></member>
-    <member refid="classRK3_1a468e0909ac8b50f109dc810879253134" kind="typedef"><name>IdxRange</name></member>
-    <member refid="classRK3_1ad0949984fa0c2d0004f6b7a10e19cd69" kind="typedef"><name>ValConstField</name></member>
-    <member refid="classRK3_1aaba53f61442e763c05fbd7614c3e1c05" kind="typedef"><name>ValField</name></member>
-    <member refid="classRK3_1a7ee2d8a1e9031e625d0861031891bd52" kind="typedef"><name>DerivConstField</name></member>
-    <member refid="classRK3_1a58d11b9c1e57348b94e50b1ea284886f" kind="typedef"><name>DerivField</name></member>
+    <member refid="classRK3_1a0580b80dd9c61ac350895e80958c15dc" kind="function"><name>update</name></member>
+    <member refid="classRK3_1a55c46c1cd9abbf8299648add1589d51d" kind="function"><name>update</name></member>
+    <member refid="classRK3_1a86f1b0334df3fae50bd69fbfa32f9954" kind="function"><name>update</name></member>
+    <member refid="classRK3_1afdbd0d8a324c9f3a169e5776127e174f" kind="typedef"><name>IdxRange</name></member>
+    <member refid="classRK3_1a8b67d47c34f88b2838fe16f98ce61372" kind="typedef"><name>ValConstField</name></member>
+    <member refid="classRK3_1ae1fa0645a608965479f0974abcff81ff" kind="typedef"><name>ValField</name></member>
+    <member refid="classRK3_1a32837c6aa6ab0a17eb422efd8e0f933e" kind="typedef"><name>DerivConstField</name></member>
+    <member refid="classRK3_1adb99057a5a7ea3b43495c356cdc68b45" kind="typedef"><name>DerivField</name></member>
   </compound>
   <compound refid="classRK4" kind="class"><name>RK4</name>
     <member refid="classRK4_1a509cfc736d56cbb71043ed266e2f6f81" kind="typedef"><name>base_type</name></member>
     <member refid="classRK4_1a53572e5cd405f7af9221d8333e7562ba" kind="variable"><name>m_idx_range</name></member>
     <member refid="classRK4_1a5956fc372c34f2d14a030fd0dd66be5f" kind="function"><name>RK4</name></member>
     <member refid="classRK4_1aa00962aea26427ba1af53522b7dc1395" kind="function"><name>update</name></member>
-    <member refid="classRK4_1abf7ce877cffa5f112975e0c8ebaf5b28" kind="function"><name>update</name></member>
-    <member refid="classRK4_1a9a7f95c2396c54b9f6323cbd444dd8c1" kind="function"><name>update</name></member>
-    <member refid="classRK4_1afdf22291a9a2f9180e1904d3a0728737" kind="function"><name>update</name></member>
-    <member refid="classRK4_1a468e0909ac8b50f109dc810879253134" kind="typedef"><name>IdxRange</name></member>
-    <member refid="classRK4_1ad0949984fa0c2d0004f6b7a10e19cd69" kind="typedef"><name>ValConstField</name></member>
-    <member refid="classRK4_1aaba53f61442e763c05fbd7614c3e1c05" kind="typedef"><name>ValField</name></member>
-    <member refid="classRK4_1a7ee2d8a1e9031e625d0861031891bd52" kind="typedef"><name>DerivConstField</name></member>
-    <member refid="classRK4_1a58d11b9c1e57348b94e50b1ea284886f" kind="typedef"><name>DerivField</name></member>
+    <member refid="classRK4_1a0580b80dd9c61ac350895e80958c15dc" kind="function"><name>update</name></member>
+    <member refid="classRK4_1a55c46c1cd9abbf8299648add1589d51d" kind="function"><name>update</name></member>
+    <member refid="classRK4_1a86f1b0334df3fae50bd69fbfa32f9954" kind="function"><name>update</name></member>
+    <member refid="classRK4_1afdbd0d8a324c9f3a169e5776127e174f" kind="typedef"><name>IdxRange</name></member>
+    <member refid="classRK4_1a8b67d47c34f88b2838fe16f98ce61372" kind="typedef"><name>ValConstField</name></member>
+    <member refid="classRK4_1ae1fa0645a608965479f0974abcff81ff" kind="typedef"><name>ValField</name></member>
+    <member refid="classRK4_1a32837c6aa6ab0a17eb422efd8e0f933e" kind="typedef"><name>DerivConstField</name></member>
+    <member refid="classRK4_1adb99057a5a7ea3b43495c356cdc68b45" kind="typedef"><name>DerivField</name></member>
   </compound>
   <compound refid="structconnectivity__details_1_1SelectRelevantIdxRangeType" kind="struct"><name>connectivity_details::SelectRelevantIdxRangeType</name>
   </compound>
@@ -2612,31 +2624,33 @@
     <member refid="classSplineInterpolator2D_1a4255ea63affeb96b4ba02e3c53c685c7" kind="typedef"><name>DFieldType</name></member>
   </compound>
   <compound refid="classSplinePolarFootFinder" kind="class"><name>SplinePolarFootFinder</name>
-    <member refid="classSplinePolarFootFinder_1aefa0f60f9d80160cff409fa9aba0cceb" kind="typedef"><name>base_type</name></member>
-    <member refid="classSplinePolarFootFinder_1af5548ea9c7d1c038868f8b9afa5cfde1" kind="typedef"><name>PseudoPhysicalToLogicalMapping</name></member>
-    <member refid="classSplinePolarFootFinder_1a23d80eeda37589c341d114252bc8c80d" kind="typedef"><name>ExecSpace</name></member>
-    <member refid="classSplinePolarFootFinder_1a1a00e6a2be0896c2ff0802477315f1b9" kind="typedef"><name>X_adv</name></member>
-    <member refid="classSplinePolarFootFinder_1a0de3d534bc04839b831166801972ea64" kind="typedef"><name>Y_adv</name></member>
-    <member refid="classSplinePolarFootFinder_1a13db0526d491eb4dd009609754404202" kind="typedef"><name>CoordXY_adv</name></member>
-    <member refid="classSplinePolarFootFinder_1a2eb6b2f7cad1081525e7e4c0baa6a908" kind="typedef"><name>PseudoCartesianBasis</name></member>
-    <member refid="classSplinePolarFootFinder_1a579be5b6be7c7007624e1c05bffbbeed" kind="typedef"><name>CoordRTheta</name></member>
-    <member refid="classSplinePolarFootFinder_1a03522029abb66f449e3e6233e0f37ca8" kind="typedef"><name>IdxRangeRTheta</name></member>
-    <member refid="classSplinePolarFootFinder_1acfc5bea6930d73fdd6905c510171b9c4" kind="typedef"><name>IdxRangeR</name></member>
-    <member refid="classSplinePolarFootFinder_1a8d6e6bd3139c69caa3dfc0e45cdb8a2d" kind="typedef"><name>IdxRangeTheta</name></member>
-    <member refid="classSplinePolarFootFinder_1a4336380cfb29576e2777e346c3afcdd5" kind="typedef"><name>IdxRTheta</name></member>
-    <member refid="classSplinePolarFootFinder_1a541f7d4e29a9c14326a6c1a6447fd8f9" kind="typedef"><name>IdxR</name></member>
-    <member refid="classSplinePolarFootFinder_1acda0821c7d36e8d8fb21cdff1503a598" kind="typedef"><name>IdxTheta</name></member>
-    <member refid="classSplinePolarFootFinder_1ae706453f2b71f5dcc58eaf67fa7bb3d5" kind="typedef"><name>IdxOperator</name></member>
-    <member refid="classSplinePolarFootFinder_1a34de44be5c59ffa3781268c0f74df35e" kind="typedef"><name>PseudoCartesianToCircular</name></member>
-    <member refid="classSplinePolarFootFinder_1a18acf7e48798cdd94b042c401f5d641f" kind="typedef"><name>PseudoPhysicalToPhysicalMapping</name></member>
-    <member refid="classSplinePolarFootFinder_1a794e96ccde646b5368d68856953a455a" kind="typedef"><name>BSplinesR</name></member>
-    <member refid="classSplinePolarFootFinder_1a45515c86b920bf620921f1bb756be099" kind="typedef"><name>BSplinesTheta</name></member>
-    <member refid="classSplinePolarFootFinder_1a0ffd641ab3550bdc29be323852534ded" kind="typedef"><name>IdxRangeSplineBatched</name></member>
-    <member refid="classSplinePolarFootFinder_1ae560ecc7480d784752bd48674a211069" kind="typedef"><name>CFieldFeet</name></member>
-    <member refid="classSplinePolarFootFinder_1a27c99bde5225fc3b4c2f6c1adfb60898" kind="typedef"><name>CConstFieldFeet</name></member>
-    <member refid="classSplinePolarFootFinder_1a82c40f32aa5bad0a9420d5c89e25b250" kind="typedef"><name>DVectorFieldAdvection</name></member>
-    <member refid="classSplinePolarFootFinder_1a610635dd209309125b0c3857a0ef0295" kind="typedef"><name>DVectorConstFieldAdvection</name></member>
-    <member refid="classSplinePolarFootFinder_1a201770c4f544bbf509fa9712273a5b6c" kind="typedef"><name>VectorSplineCoeffsMem</name></member>
+    <member refid="classSplinePolarFootFinder_1aea7bc16fdc724a4d2cee1076dc58f95d" kind="typedef"><name>base_type</name></member>
+    <member refid="classSplinePolarFootFinder_1a583f7299c6887d40a5ec363549e89ba9" kind="typedef"><name>PseudoPhysicalToLogicalMapping</name></member>
+    <member refid="classSplinePolarFootFinder_1adc90a7a89091b5ae0dff71697666b57d" kind="typedef"><name>ExecSpace</name></member>
+    <member refid="classSplinePolarFootFinder_1a41cccd0c523184a0385fd810ac0bb852" kind="typedef"><name>MemSpace</name></member>
+    <member refid="classSplinePolarFootFinder_1a92638aa678780ecb35339709edf6c8ed" kind="typedef"><name>X_adv</name></member>
+    <member refid="classSplinePolarFootFinder_1aa5bdd1105b7fefc51f520a1e573561ab" kind="typedef"><name>Y_adv</name></member>
+    <member refid="classSplinePolarFootFinder_1abc1e2fdffb10bf667b803e59302c1e33" kind="typedef"><name>CoordXY_adv</name></member>
+    <member refid="classSplinePolarFootFinder_1a5f940bf9c6a3bacedcf0a64490193eab" kind="typedef"><name>PseudoCartesianBasis</name></member>
+    <member refid="classSplinePolarFootFinder_1ad1831b40ec656daa4ab67826a13b61d4" kind="typedef"><name>CoordRTheta</name></member>
+    <member refid="classSplinePolarFootFinder_1a2ec51a7c30387d6ac531352768a9f2ba" kind="typedef"><name>IdxRangeRTheta</name></member>
+    <member refid="classSplinePolarFootFinder_1abfb99e756e53309eab48e31c07d79f8a" kind="typedef"><name>IdxRangeR</name></member>
+    <member refid="classSplinePolarFootFinder_1ae68b5e8f83571ca243efd7d0d0195d7e" kind="typedef"><name>IdxRangeTheta</name></member>
+    <member refid="classSplinePolarFootFinder_1a2373f04a62dab3f7fada0b6c6d8ed082" kind="typedef"><name>IdxRTheta</name></member>
+    <member refid="classSplinePolarFootFinder_1aab1eb09e44e2626910dbb7e36321d6cc" kind="typedef"><name>IdxR</name></member>
+    <member refid="classSplinePolarFootFinder_1af90b24a4664d3d635e2ea859a8356ac5" kind="typedef"><name>IdxTheta</name></member>
+    <member refid="classSplinePolarFootFinder_1adec2782ed7ecdff09e6940f13bc0e52c" kind="typedef"><name>IdxOperator</name></member>
+    <member refid="classSplinePolarFootFinder_1a6730b616673dd6d5475d04ef6805f5cc" kind="typedef"><name>PseudoCartesianToCircular</name></member>
+    <member refid="classSplinePolarFootFinder_1a527685c0362c862a43f8ee7775d94d80" kind="typedef"><name>PseudoPhysicalToPhysicalMapping</name></member>
+    <member refid="classSplinePolarFootFinder_1ac4cbe709d1cb35200bcc9966bcad5026" kind="typedef"><name>BSplinesR</name></member>
+    <member refid="classSplinePolarFootFinder_1ae5abd972e6dd0a0877f48234354d85d4" kind="typedef"><name>BSplinesTheta</name></member>
+    <member refid="classSplinePolarFootFinder_1a30d3c2a5477eebd67cf96d90d71fc2b3" kind="typedef"><name>IdxRangeSplineBatched</name></member>
+    <member refid="classSplinePolarFootFinder_1ad9757fb91afefddf169426ae59204f6b" kind="typedef"><name>TimeStepper</name></member>
+    <member refid="classSplinePolarFootFinder_1ad07796a01c78348d540d9f80a404d1dc" kind="typedef"><name>CFieldFeet</name></member>
+    <member refid="classSplinePolarFootFinder_1a2039ffcb222e9318d4b65a78f66f30b4" kind="typedef"><name>CConstFieldFeet</name></member>
+    <member refid="classSplinePolarFootFinder_1adbf76668dde4d640ee4fe9a541904c32" kind="typedef"><name>DVectorFieldAdvection</name></member>
+    <member refid="classSplinePolarFootFinder_1a473fb430dbdadb3e420074a6ef137811" kind="typedef"><name>DVectorConstFieldAdvection</name></member>
+    <member refid="classSplinePolarFootFinder_1a5c95805a7ed946296977d376561395e7" kind="typedef"><name>VectorSplineCoeffsMem</name></member>
     <member refid="classSplinePolarFootFinder_1a51e91cc4664a2e74009c09a44cbe61fe" kind="typedef"><name>GridR</name></member>
     <member refid="classSplinePolarFootFinder_1aa0be268c091cead51c2ca1368f95ee76" kind="typedef"><name>GridTheta</name></member>
     <member refid="classSplinePolarFootFinder_1a592e542edca9e79dd8786ce11327582a" kind="typedef"><name>IdxRangeOperator</name></member>
@@ -2644,16 +2658,16 @@
     <member refid="classSplinePolarFootFinder_1ace88cae6d3bedc6053d79f8b1489566c" kind="typedef"><name>R</name></member>
     <member refid="classSplinePolarFootFinder_1a62a4d72ada8c3cad0dc33f0637568793" kind="typedef"><name>Theta</name></member>
     <member refid="classSplinePolarFootFinder_1a8a0925a2865c4685111cc1d5ff7bff4c" kind="typedef"><name>VectorIndexSetAdvectionDims</name></member>
-    <member refid="classSplinePolarFootFinder_1abf03f0fc21763e9c80ca44de135d9122" kind="variable"><name>m_time_stepper</name></member>
-    <member refid="classSplinePolarFootFinder_1a1010f1e778addca69eec7d415c3cfb0a" kind="variable"><name>m_logical_to_pseudo_physical</name></member>
-    <member refid="classSplinePolarFootFinder_1a9a2439669df3264c24ff2186d3654538" kind="variable"><name>m_pseudo_physical_to_logical</name></member>
-    <member refid="classSplinePolarFootFinder_1a46900cd3655fc3acb05dab58fb301dde" kind="variable"><name>m_pseudo_physical_to_physical</name></member>
-    <member refid="classSplinePolarFootFinder_1ae6ed60356edcf62a88c1145a433dc3ba" kind="variable"><name>m_builder_advection_field</name></member>
-    <member refid="classSplinePolarFootFinder_1a2423e08c42e63477f69822f20fabf75c" kind="variable"><name>m_evaluator_advection_field</name></member>
-    <member refid="classSplinePolarFootFinder_1aa86e5ba4c206fc1d478b18fcf773d1b8" kind="function"><name>SplinePolarFootFinder</name></member>
-    <member refid="classSplinePolarFootFinder_1a2d77e3176157d88af37d0dae40bb29b5" kind="function"><name>operator()</name></member>
-    <member refid="classSplinePolarFootFinder_1ae1843f113d9913319e264bc07f78c37c" kind="function"><name>is_unified</name></member>
-    <member refid="classSplinePolarFootFinder_1a71801d81d8c3be8274998ee06b8abf31" kind="function"><name>unify_value_at_centre_pt</name></member>
+    <member refid="classSplinePolarFootFinder_1aa34618ceff859c9532754a4295f35b36" kind="variable"><name>m_time_stepper_builder</name></member>
+    <member refid="classSplinePolarFootFinder_1a9b088c0e7e7cd0d837d38718cfdb6c9c" kind="variable"><name>m_logical_to_pseudo_physical</name></member>
+    <member refid="classSplinePolarFootFinder_1aab1186eff57dce5e9ef175fe6d16e351" kind="variable"><name>m_pseudo_physical_to_logical</name></member>
+    <member refid="classSplinePolarFootFinder_1a56d2f3dabe971daf5e8de82417d1cbe9" kind="variable"><name>m_pseudo_physical_to_physical</name></member>
+    <member refid="classSplinePolarFootFinder_1a2070c2208ecf9c2426269db6ec8f7254" kind="variable"><name>m_builder_advection_field</name></member>
+    <member refid="classSplinePolarFootFinder_1a042eaa82d42cf9060fa4029cff1bfd99" kind="variable"><name>m_evaluator_advection_field</name></member>
+    <member refid="classSplinePolarFootFinder_1a9253aaee6ab75941419a5020398757f2" kind="function"><name>SplinePolarFootFinder</name></member>
+    <member refid="classSplinePolarFootFinder_1acd4731e29b30f28ded8b3e9a98b995ee" kind="function"><name>operator()</name></member>
+    <member refid="classSplinePolarFootFinder_1a124851469507722a115dd4d443ffdf1b" kind="function"><name>is_unified</name></member>
+    <member refid="classSplinePolarFootFinder_1a233cea99033352973d7864a8e356c7ec" kind="function"><name>unify_value_at_centre_pt</name></member>
   </compound>
   <compound refid="classSplitRightHandSideSolver" kind="class"><name>SplitRightHandSideSolver</name>
     <member refid="classSplitRightHandSideSolver_1a7e5370269a62df4762937b97dc9b2757" kind="variable"><name>m_boltzmann_solver</name></member>
@@ -4114,14 +4128,19 @@
   <compound refid="crank__nicolson_8hpp" kind="file"><name>crank_nicolson.hpp</name>
   </compound>
   <compound refid="euler_8hpp" kind="file"><name>euler.hpp</name>
+    <member refid="euler_8hpp_1ae28fbdd16583a9f41834978bd71e4912" kind="typedef"><name>EulerBuilder</name></member>
   </compound>
   <compound refid="itimestepper_8hpp" kind="file"><name>itimestepper.hpp</name>
+    <member refid="itimestepper_8hpp_1aa1864aefae587ccf689d4931f46991ed" kind="variable"><name>is_timestepper_builder_v</name></member>
   </compound>
   <compound refid="rk2_8hpp" kind="file"><name>rk2.hpp</name>
+    <member refid="rk2_8hpp_1ab00fec780a256ae2884de31ec449b145" kind="typedef"><name>RK2Builder</name></member>
   </compound>
   <compound refid="rk3_8hpp" kind="file"><name>rk3.hpp</name>
+    <member refid="rk3_8hpp_1a61bf07b1760a58283035f7ee69f64daf" kind="typedef"><name>RK3Builder</name></member>
   </compound>
   <compound refid="rk4_8hpp" kind="file"><name>rk4.hpp</name>
+    <member refid="rk4_8hpp_1a13e45729c350bf78e94b203ef8c051eb" kind="typedef"><name>RK4Builder</name></member>
   </compound>
   <compound refid="assert_8cpp" kind="file"><name>assert.cpp</name>
   </compound>

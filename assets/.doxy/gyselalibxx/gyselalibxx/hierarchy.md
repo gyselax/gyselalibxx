@@ -53,6 +53,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **class** [**RK2**](classRK2.md) _A class which provides an implementation of a second-order Runge-Kutta method._ 
     * **class** [**RK3**](classRK3.md) _A class which provides an implementation of a third-order Runge-Kutta method._ 
     * **class** [**RK4**](classRK4.md) _A class which provides an implementation of a fourth-order Runge-Kutta method._ 
+* **class** [**CrankNicolsonBuilder**](classCrankNicolsonBuilder.md) _A class to indicate that a Crank-Nicolson time stepper should be constructed for use in other operators._ 
 * **class** [**CylindricalToCartesian**](classCylindricalToCartesian.md) _A class for describing the cylindrical 3D mapping._ 
 * **class** [**CzarnyToCartesian**](classCzarnyToCartesian.md) _A class for describing the Czarny 2D mapping._ 
 * **class** [**DerivField**](classDerivField.md) 
@@ -63,6 +64,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**DiscreteToCartesian**](classDiscreteToCartesian.md) _A class for describing discrete 2D mappings from the logical domain to the physical domain._ 
 * **class** [**DiscreteToCartesianBuilder**](classDiscreteToCartesianBuilder.md) _A class to create a_ [_**DiscreteToCartesian**_](classDiscreteToCartesian.md) _instance from an analytical mapping. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data._
 * **class** [**EdgeTransformation**](classEdgeTransformation.md) _Transform a coordinate or an index from one edge to the one on the other edge._ 
+* **class** [**ExplicitTimeStepperBuilder**](classExplicitTimeStepperBuilder.md) _A class to indicate that an explicit time stepper should be constructed for use in other operators._ 
 * **class** [**IPoissonSolver**](classIPoissonSolver.md)     
     * **class** [**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md) 
 * **class** [**FFTPoissonSolver**](classFFTPoissonSolver.md) 

@@ -34,7 +34,19 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**ITimeStepper**](classITimeStepper.md) &lt;class FieldMem, class [**DerivFieldMem**](classDerivFieldMem.md), class ExecSpace&gt;<br>_The superclass from which all timestepping methods inherit._  |
+| class | [**ExplicitTimeStepperBuilder**](classExplicitTimeStepperBuilder.md) &lt;TimeStepper&gt;<br>_A class to indicate that an explicit time stepper should be constructed for use in other operators._  |
+| class | [**ITimeStepper**](classITimeStepper.md) &lt;class FieldMem, class DerivFieldMemType, class ExecSpace&gt;<br>_The superclass from which all timestepping methods inherit._  |
+
+
+
+
+
+
+## Public Attributes
+
+| Type | Name |
+| ---: | :--- |
+|  constexpr bool | [**is\_timestepper\_builder\_v**](#variable-is_timestepper_builder_v)   = `detail::enable\_is\_timestepper\_builder&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;Type&gt;&gt;&gt;`<br> |
 
 
 
@@ -79,12 +91,21 @@
 
 
 
+## Public Attributes Documentation
 
 
 
 
+### variable is\_timestepper\_builder\_v 
+
+```C++
+constexpr bool is_timestepper_builder_v;
+```
 
 
+
+
+<hr>
 
 ------------------------------
 The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp`

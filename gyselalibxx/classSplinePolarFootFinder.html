@@ -537,7 +537,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-splinepolarfootfinder">Class SplinePolarFootFinder</h1>
-<p><strong>template &lt;class TimeStepper, class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping, class SplineRThetaBuilderAdvection, class SplineRThetaEvaluatorAdvection&gt;</strong></p>
+<p><strong>template &lt;class IdxRangeBatched, class TimeStepperBuilder, class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping, class SplineRThetaBuilderAdvection, class SplineRThetaEvaluatorAdvection&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a></p>
 <p><em>A class to find the foot of the characteristics on the</em>  <em>plane.</em><a href="#detailed-description">More...</a></p>
 <ul>
@@ -634,7 +634,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-splinepolarfootfinder"><strong>SplinePolarFootFinder</strong></a> (TimeStepper const &amp; time_stepper, LogicalToPhysicalMapping const &amp; logical_to_physical_mapping, LogicalToPseudoPhysicalMapping const &amp; logical_to_pseudo_physical_mapping, SplineRThetaBuilderAdvection const &amp; builder_advection_field, SplineRThetaEvaluatorAdvection const &amp; evaluator_advection_field, double epsilon=1e-12) <br><em>Instantiate a time integration method for the advection operator.</em></td>
+<td style="text-align: left;"><a href="#function-splinepolarfootfinder"><strong>SplinePolarFootFinder</strong></a> (IdxRangeBatched const &amp; idx_range_operator, TimeStepperBuilder const &amp; time_stepper_builder, LogicalToPhysicalMapping const &amp; logical_to_physical_mapping, LogicalToPseudoPhysicalMapping const &amp; logical_to_pseudo_physical_mapping, SplineRThetaBuilderAdvection const &amp; builder_advection_field, SplineRThetaEvaluatorAdvection const &amp; evaluator_advection_field, double epsilon=1e-12) <br><em>Instantiate a time integration method for the advection operator.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -707,7 +707,7 @@
 <p>More details can be found in Edoardo Zoni's article (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>).</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
-<li><code>TimeStepper</code> A child class of <a href="classITimeStepper.html"><strong>ITimeStepper</strong></a> providing a time integration method. </li>
+<li><code>TimeStepperBuilder</code> A time stepper builder indicating which time integration method should be applied to solve the characteristic equation. </li>
 <li><code>LogicalToPhysicalMapping</code> A mapping from the logical domain to the physical domain. </li>
 <li><code>LogicalToPseudoPhysicalMapping</code> A mapping from the logical domain to the domain where the advection is carried out. This may be a pseudo-physical domain or the physical domain itself. </li>
 <li><code>SplineRThetaBuilderAdvection</code> A 2D SplineBuilder to construct a spline on a polar domain. </li>
@@ -717,25 +717,25 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-cconstfieldfeet">typedef CConstFieldFeet</h3>
 <p><em>The type of a constant field of (r, theta) coordinates at every grid point, saved on a compatible memory space.</em> </p>
-<pre><code class="language-C++">using SplinePolarFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::CConstFieldFeet =  ConstField&lt;CoordRTheta, IdxRangeOperator, memory_space&gt;;
+<pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::CConstFieldFeet =  ConstField&lt;CoordRTheta, IdxRangeOperator, memory_space&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-cfieldfeet">typedef CFieldFeet</h3>
 <p><em>The type of a field of (r, theta) coordinates at every grid point, saved on a compatible memory space.</em> </p>
-<pre><code class="language-C++">using SplinePolarFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::CFieldFeet =  Field&lt;CoordRTheta, IdxRangeOperator, memory_space&gt;;
+<pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::CFieldFeet =  Field&lt;CoordRTheta, IdxRangeOperator, memory_space&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-dvectorconstfieldadvection">typedef DVectorConstFieldAdvection</h3>
 <p><em>The type of a constant vector field defined on the pseudo-Cartesian basis at every grid point, saved on a compatible memory space.</em> </p>
-<pre><code class="language-C++">using SplinePolarFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::DVectorConstFieldAdvection =  DVectorConstField&lt;IdxRangeOperator, PseudoCartesianBasis, memory_space&gt;;
+<pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::DVectorConstFieldAdvection =  DVectorConstField&lt;IdxRangeOperator, PseudoCartesianBasis, memory_space&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-dvectorfieldadvection">typedef DVectorFieldAdvection</h3>
 <p><em>The type of a vector field defined on the pseudo-Cartesian basis at every grid point, saved on a compatible memory space.</em> </p>
-<pre><code class="language-C++">using SplinePolarFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::DVectorFieldAdvection =  DVectorField&lt;IdxRangeOperator, PseudoCartesianBasis, memory_space&gt;;
+<pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::DVectorFieldAdvection =  DVectorField&lt;IdxRangeOperator, PseudoCartesianBasis, memory_space&gt;;
 </code></pre>
 <hr>
 
@@ -777,7 +777,7 @@
 
 <h3 id="typedef-vectorsplinecoeffsmem">typedef VectorSplineCoeffsMem</h3>
 <p><em>The type of 2 batched splines representing the x and y components of a vector on the polar plane on a compatible memory space.</em> </p>
-<pre><code class="language-C++">using SplinePolarFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::VectorSplineCoeffsMem =  DVectorFieldMem&lt;IdxRangeSplineBatched, PseudoCartesianBasis, memory_space&gt;;
+<pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::VectorSplineCoeffsMem =  DVectorFieldMem&lt;IdxRangeSplineBatched, PseudoCartesianBasis, memory_space&gt;;
 </code></pre>
 <hr>
 
@@ -790,7 +790,8 @@
 <h3 id="function-splinepolarfootfinder">function SplinePolarFootFinder</h3>
 <p><em>Instantiate a time integration method for the advection operator.</em> </p>
 <pre><code class="language-C++">inline SplinePolarFootFinder::SplinePolarFootFinder (
-    TimeStepper const &amp; time_stepper,
+    IdxRangeBatched const &amp; idx_range_operator,
+    TimeStepperBuilder const &amp; time_stepper_builder,
     LogicalToPhysicalMapping const &amp; logical_to_physical_mapping,
     LogicalToPseudoPhysicalMapping const &amp; logical_to_pseudo_physical_mapping,
     SplineRThetaBuilderAdvection const &amp; builder_advection_field,
@@ -800,7 +801,8 @@
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>time_stepper</code> The time integration method used to solve the characteristic equation (<a href="classITimeStepper.html"><strong>ITimeStepper</strong></a>). </li>
+<li><code>idx_range_operator</code> The index range on which the operator should act. </li>
+<li><code>time_stepper_builder</code> A builder for the time integration method used for the characteristic equation. </li>
 <li><code>logical_to_physical_mapping</code> The mapping from the logical domain to the physical domain. </li>
 <li><code>logical_to_pseudo_physical_mapping</code> The mapping from the logical domain to the pseudo-physical domain. </li>
 <li><code>builder_advection_field</code> The spline builder which computes the spline representation of the advection field. </li>

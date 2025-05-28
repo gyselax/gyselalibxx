@@ -19,6 +19,7 @@
 #include "ddc_helper.hpp"
 #include "euler.hpp"
 #include "iinterpolator.hpp"
+#include "itimestepper.hpp"
 
 
 template <
@@ -27,13 +28,11 @@ template <
         class IdxRangeFunction,
         class AdvectionFieldBuilder,
         class AdvectionFieldEvaluator,
-        class TimeStepper
-        = Euler<FieldMem<
-                        Coord<typename GridInterest::continuous_dimension_type>,
-                        IdxRangeAdvection>,
-                DFieldMem<IdxRangeAdvection>>>
+        class TimeStepperBuilder = EulerBuilder>
 class BslAdvection1D
 {
+    static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
+
 private:
     // Advection index range element:
     using IdxAdvection = typename IdxRangeAdvection::discrete_element_type;
@@ -82,23 +81,27 @@ private:
     using IdxRangeFunctionDeriv = typename FunctionInterpolatorType::batched_derivs_idx_range_type;
     using FunctionDerivFieldMem = DFieldMem<IdxRangeFunctionDeriv>;
 
+    using TimeStepper = typename TimeStepperBuilder::template time_stepper_t<
+            FieldMem<Coord<typename GridInterest::continuous_dimension_type>, IdxRangeAdvection>,
+            DFieldMem<IdxRangeAdvection>>;
+
     FunctionPreallocatableInterpolatorType const& m_function_interpolator;
 
     AdvectionFieldBuilder const& m_adv_field_builder;
     AdvectionFieldEvaluator const& m_adv_field_evaluator;
 
-    TimeStepper const& m_time_stepper;
+    TimeStepperBuilder const& m_time_stepper_builder;
 
 public:
     explicit BslAdvection1D(
             FunctionPreallocatableInterpolatorType const& function_interpolator,
             AdvectionFieldBuilder const& adv_field_builder,
             AdvectionFieldEvaluator const& adv_field_evaluator,
-            TimeStepper const& time_stepper)
+            TimeStepperBuilder const& time_stepper_builder)
         : m_function_interpolator(function_interpolator)
         , m_adv_field_builder(adv_field_builder)
         , m_adv_field_evaluator(adv_field_evaluator)
-        , m_time_stepper(time_stepper)
+        , m_time_stepper_builder(time_stepper_builder)
     {
     }
 
@@ -175,9 +178,11 @@ public:
                               get_const_field(advection_field_coefs));
                   };
 
+        TimeStepper time_stepper
+                = m_time_stepper_builder.template preallocate<TimeStepper>(idx_range_advection);
 
         // Solve the characteristic equation with a time integration method
-        m_time_stepper
+        time_stepper
                 .update(Kokkos::DefaultExecutionSpace(),
                         get_field(slice_feet),
                         -dt,

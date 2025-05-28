@@ -557,10 +557,35 @@
 <tbody>
 <tr>
 <td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classITimeStepper.html"><strong>ITimeStepper</strong></a> &lt;class FieldMem, class <a href="classDerivFieldMem.html"><strong>DerivFieldMem</strong></a>, class ExecSpace&gt;<br><em>The superclass from which all timestepping methods inherit.</em></td>
+<td style="text-align: left;"><a href="classExplicitTimeStepperBuilder.html"><strong>ExplicitTimeStepperBuilder</strong></a> &lt;TimeStepper&gt;<br><em>A class to indicate that an explicit time stepper should be constructed for use in other operators.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">class</td>
+<td style="text-align: left;"><a href="classITimeStepper.html"><strong>ITimeStepper</strong></a> &lt;class FieldMem, class DerivFieldMemType, class ExecSpace&gt;<br><em>The superclass from which all timestepping methods inherit.</em></td>
 </tr>
 </tbody>
 </table>
+<h2 id="public-attributes">Public Attributes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: left;"><a href="#variable-is_timestepper_builder_v"><strong>is_timestepper_builder_v</strong></a>   = <code>detail::enable\_is\_timestepper\_builder&amp;lt;std::remove\_const\_t&amp;lt;std::remove\_reference\_t&amp;lt;Type&amp;gt;&amp;gt;&amp;gt;</code><br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
+<h3 id="variable-is_timestepper_builder_v">variable is_timestepper_builder_v</h3>
+<pre><code class="language-C++">constexpr bool is_timestepper_builder_v;
+</code></pre>
+<hr>
+
 <hr>
 <p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp</code></p></div>
               

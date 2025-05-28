@@ -66,9 +66,11 @@
         </childnode>
         <childnode refid="42" relation="include">
         </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
         <childnode refid="17" relation="include">
         </childnode>
-        <childnode refid="43" relation="include">
+        <childnode refid="48" relation="include">
         </childnode>
       </node>
       <node id="37">
@@ -225,7 +227,7 @@
         <childnode refid="20" relation="include">
         </childnode>
       </node>
-      <node id="43">
+      <node id="48">
         <label>vector_mapper.hpp</label>
         <link refid="vector__mapper_8hpp_source"/>
         <childnode refid="23" relation="include">
@@ -373,6 +375,60 @@
         <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>multipatch_field.hpp</label>
+        <link refid="multipatch__field_8hpp_source"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>multipatch_field_mem.hpp</label>
+        <link refid="multipatch__field__mem_8hpp_source"/>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>multipatch_type.hpp</label>
+        <link refid="multipatch__type_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>types.hpp</label>
+        <link refid="types_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>itimestepper.hpp</label>
+        <link refid="itimestepper_8hpp_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
         </childnode>
       </node>
       <node id="2">

@@ -537,7 +537,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-itimestepper">Class ITimeStepper</h1>
-<p><strong>template &lt;class FieldMem, class <a href="classDerivFieldMem.html"><strong>DerivFieldMem</strong></a>, class ExecSpace&gt;</strong></p>
+<p><strong>template &lt;class FieldMem, class DerivFieldMemType, class ExecSpace&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classITimeStepper.html"><strong>ITimeStepper</strong></a></p>
 <p><em>The superclass from which all timestepping methods inherit.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -562,6 +562,10 @@
 <td style="text-align: left;"><a href="#typedef-derivfield"><strong>DerivField</strong></a>  <br><em>The type of the derivatives of the function being evolved.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef DerivFieldMemType</td>
+<td style="text-align: left;"><a href="#typedef-derivfieldmem"><strong>DerivFieldMem</strong></a>  <br><em>The type of the memory allocation for the derivatives of the function being evolved.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef typename FieldMem::discrete_domain_type</td>
 <td style="text-align: left;"><a href="#typedef-idxrange"><strong>IdxRange</strong></a>  <br><em>The type of the index range on which the values of the function are defined.</em></td>
 </tr>
@@ -572,6 +576,14 @@
 <tr>
 <td style="text-align: right;">typedef typename FieldMem::span_type</td>
 <td style="text-align: left;"><a href="#typedef-valfield"><strong>ValField</strong></a>  <br><em>The type of the values of the function being evolved.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef FieldMem</td>
+<td style="text-align: left;"><a href="#typedef-valfieldmem"><strong>ValFieldMem</strong></a>  <br><em>The type of the memory allocation for the values of the function being evolved.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ExecSpace</td>
+<td style="text-align: left;"><a href="#typedef-exec_space"><strong>exec_space</strong></a>  <br><em>The space (CPU/GPU) where the calculations are carried out.</em></td>
 </tr>
 </tbody>
 </table>
@@ -645,31 +657,49 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-derivconstfield">typedef DerivConstField</h3>
 <p><em>The constant type of the derivatives values of the function being evolved.</em> </p>
-<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::DerivConstField =  typename DerivFieldMem::view_type;
+<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::DerivConstField =  typename DerivFieldMem::view_type;
 </code></pre>
 <hr>
 
 <h3 id="typedef-derivfield">typedef DerivField</h3>
 <p><em>The type of the derivatives of the function being evolved.</em> </p>
-<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::DerivField =  typename DerivFieldMem::span_type;
+<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::DerivField =  typename DerivFieldMem::span_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-derivfieldmem">typedef DerivFieldMem</h3>
+<p><em>The type of the memory allocation for the derivatives of the function being evolved.</em> </p>
+<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::DerivFieldMem =  DerivFieldMemType;
 </code></pre>
 <hr>
 
 <h3 id="typedef-idxrange">typedef IdxRange</h3>
 <p><em>The type of the index range on which the values of the function are defined.</em> </p>
-<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::IdxRange =  typename FieldMem::discrete_domain_type;
+<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::IdxRange =  typename FieldMem::discrete_domain_type;
 </code></pre>
 <hr>
 
 <h3 id="typedef-valconstfield">typedef ValConstField</h3>
 <p><em>The constant type of the values of the function being evolved.</em> </p>
-<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::ValConstField =  typename FieldMem::view_type;
+<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::ValConstField =  typename FieldMem::view_type;
 </code></pre>
 <hr>
 
 <h3 id="typedef-valfield">typedef ValField</h3>
 <p><em>The type of the values of the function being evolved.</em> </p>
-<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::ValField =  typename FieldMem::span_type;
+<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::ValField =  typename FieldMem::span_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-valfieldmem">typedef ValFieldMem</h3>
+<p><em>The type of the memory allocation for the values of the function being evolved.</em> </p>
+<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::ValFieldMem =  FieldMem;
+</code></pre>
+<hr>
+
+<h3 id="typedef-exec_space">typedef exec_space</h3>
+<p><em>The space (CPU/GPU) where the calculations are carried out.</em> </p>
+<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::exec_space =  ExecSpace;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>

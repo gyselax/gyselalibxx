@@ -10,6 +10,7 @@
     <includes refid="vector__field__common_8hpp" local="yes">vector_field_common.hpp</includes>
     <includedby refid="bsl__advection__1d_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp</includedby>
     <includedby refid="bsl__predcorr__second__order__explicit_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_explicit.hpp</includedby>
+    <includedby refid="bsl__predcorr__second__order__implicit_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp</includedby>
     <incdepgraph>
       <node id="19">
         <label>tensor.hpp</label>
@@ -238,6 +239,10 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_explicit.hpp</label>
         <link refid="bsl__predcorr__second__order__explicit_8hpp_source"/>
       </node>
+      <node id="5">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp</label>
+        <link refid="bsl__predcorr__second__order__implicit_8hpp_source"/>
+      </node>
       <node id="3">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp</label>
         <link refid="predcorr__RK2_8hpp_source"/>
@@ -249,9 +254,26 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
       </node>
     </invincdepgraph>
     <innerclass refid="classEuler" prot="public">Euler</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="euler_8hpp_1ae28fbdd16583a9f41834978bd71e4912" prot="public" static="no">
+        <type><ref refid="classExplicitTimeStepperBuilder" kindref="compound">ExplicitTimeStepperBuilder</ref>&lt; <ref refid="classEuler" kindref="compound">Euler</ref> &gt;</type>
+        <definition>using EulerBuilder =  ExplicitTimeStepperBuilder&lt;Euler&gt;</definition>
+        <argsstring></argsstring>
+        <name>EulerBuilder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/euler.hpp" line="93" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/euler.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -276,29 +298,29 @@
 <codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classITimeStepper" kindref="compound">base_type</ref><sp/>=<sp/><ref refid="classITimeStepper" kindref="compound">ITimeStepper&lt;FieldMem, DerivFieldMem, ExecSpace&gt;</ref>;</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1a468e0909ac8b50f109dc810879253134" kindref="member">base_type::IdxRange</ref>;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1afdbd0d8a324c9f3a169e5776127e174f" kindref="member">base_type::IdxRange</ref>;</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1ad0949984fa0c2d0004f6b7a10e19cd69" kindref="member">base_type::ValConstField</ref>;</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1aaba53f61442e763c05fbd7614c3e1c05" kindref="member">base_type::ValField</ref>;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1a8b67d47c34f88b2838fe16f98ce61372" kindref="member">base_type::ValConstField</ref>;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1ae1fa0645a608965479f0974abcff81ff" kindref="member">base_type::ValField</ref>;</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1a7ee2d8a1e9031e625d0861031891bd52" kindref="member">base_type::DerivConstField</ref>;</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1a58d11b9c1e57348b94e50b1ea284886f" kindref="member">base_type::DerivField</ref>;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1a32837c6aa6ab0a17eb422efd8e0f933e" kindref="member">base_type::DerivConstField</ref>;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1adb99057a5a7ea3b43495c356cdc68b45" kindref="member">base_type::DerivField</ref>;</highlight></codeline>
 <codeline lineno="44"><highlight class="normal"></highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRange<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>m_idx_range;</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classITimeStepper_1abf7ce877cffa5f112975e0c8ebaf5b28" kindref="member">base_type::update</ref>;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classITimeStepper_1a0580b80dd9c61ac350895e80958c15dc" kindref="member">base_type::update</ref>;</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"></highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="56" refid="classEuler_1af50845d5ab16f17f2008250aee1bacb0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classEuler_1af50845d5ab16f17f2008250aee1bacb0" kindref="member">Euler</ref>(IdxRange<sp/>idx_range)<sp/>:<sp/>m_idx_range(idx_range)<sp/>{}</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"></highlight></codeline>
 <codeline lineno="73" refid="classEuler_1acf769dde50a76d24b37794eb4bfc812f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classEuler_1acf769dde50a76d24b37794eb4bfc812f" kindref="member">update</ref>(</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>exec_space,</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classEuler_1aaba53f61442e763c05fbd7614c3e1c05" kindref="member">ValField</ref><sp/>y,</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classITimeStepper_1a05d1482e28b0b24d18e0fd2366ba3ce7" kindref="member">exec_space</ref>,</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classEuler_1ae1fa0645a608965479f0974abcff81ff" kindref="member">ValField</ref><sp/>y,</highlight></codeline>
 <codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dt,</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(<ref refid="classDerivField" kindref="compound">DerivField</ref>,<sp/><ref refid="classEuler_1ad0949984fa0c2d0004f6b7a10e19cd69" kindref="member">ValConstField</ref>)&gt;<sp/>dy_calculator,</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(<ref refid="classEuler_1aaba53f61442e763c05fbd7614c3e1c05" kindref="member">ValField</ref>,<sp/><ref refid="classEuler_1a7ee2d8a1e9031e625d0861031891bd52" kindref="member">DerivConstField</ref>,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal">)&gt;<sp/>y_update)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">final</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(<ref refid="classDerivField" kindref="compound">DerivField</ref>,<sp/><ref refid="classEuler_1a8b67d47c34f88b2838fe16f98ce61372" kindref="member">ValConstField</ref>)&gt;<sp/>dy_calculator,</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(<ref refid="classEuler_1ae1fa0645a608965479f0974abcff81ff" kindref="member">ValField</ref>,<sp/><ref refid="classEuler_1a32837c6aa6ab0a17eb422efd8e0f933e" kindref="member">DerivConstField</ref>,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal">)&gt;<sp/>y_update)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">final</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDerivFieldMem" kindref="compound">DerivFieldMem</ref><sp/>k1_alloc(m_idx_range);</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDerivField" kindref="compound">DerivField</ref><sp/>k1(k1_alloc);</highlight></codeline>
@@ -312,6 +334,8 @@
 <codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>y_update(y,<sp/>get_const_field(k1),<sp/>dt);</highlight></codeline>
 <codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="91"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classExplicitTimeStepperBuilder" kindref="compound">EulerBuilder</ref><sp/>=<sp/><ref refid="classExplicitTimeStepperBuilder" kindref="compound">ExplicitTimeStepperBuilder&lt;Euler&gt;</ref>;</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/euler.hpp"/>
   </compounddef>

@@ -34,7 +34,14 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**RK4**](classRK4.md) &lt;class FieldMem, class [**DerivFieldMem**](classDerivFieldMem.md), class ExecSpace&gt;<br>_A class which provides an implementation of a fourth-order Runge-Kutta method._  |
+| class | [**RK4**](classRK4.md) &lt;class FieldMem, class [**DerivFieldMem**](classITimeStepper.md#typedef-derivfieldmem), class ExecSpace&gt;<br>_A class which provides an implementation of a fourth-order Runge-Kutta method._  |
+
+
+## Public Types
+
+| Type | Name |
+| ---: | :--- |
+| typedef [**ExplicitTimeStepperBuilder**](classExplicitTimeStepperBuilder.md)&lt; [**RK4**](classRK4.md) &gt; | [**RK4Builder**](#typedef-rk4builder)  <br> |
 
 
 
@@ -83,8 +90,21 @@
 
 
 
+## Public Types Documentation
 
 
+
+
+### typedef RK4Builder 
+
+```C++
+using RK4Builder =  ExplicitTimeStepperBuilder<RK4>;
+```
+
+
+
+
+<hr>
 
 ------------------------------
 The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp`

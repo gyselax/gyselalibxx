@@ -537,7 +537,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-bsladvection1d">Class BslAdvection1D</h1>
-<p><strong>template &lt;class GridInterest, class IdxRangeAdvection, class IdxRangeFunction, class AdvectionFieldBuilder, class AdvectionFieldEvaluator, class TimeStepper&gt;</strong></p>
+<p><strong>template &lt;class GridInterest, class IdxRangeAdvection, class IdxRangeFunction, class AdvectionFieldBuilder, class AdvectionFieldEvaluator, class TimeStepperBuilder&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a></p>
 <p><em>A class which computes the advection along the dimension of interest GridInterest.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -554,7 +554,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-bsladvection1d"><strong>BslAdvection1D</strong></a> (FunctionPreallocatableInterpolatorType const &amp; function_interpolator, AdvectionFieldBuilder const &amp; adv_field_builder, AdvectionFieldEvaluator const &amp; adv_field_evaluator, TimeStepper const &amp; time_stepper) <br><em>Constructor when the advection domain and the function domain are different.</em></td>
+<td style="text-align: left;"><a href="#function-bsladvection1d"><strong>BslAdvection1D</strong></a> (FunctionPreallocatableInterpolatorType const &amp; function_interpolator, AdvectionFieldBuilder const &amp; adv_field_builder, AdvectionFieldEvaluator const &amp; adv_field_evaluator, TimeStepperBuilder const &amp; time_stepper_builder) <br><em>Constructor when the advection domain and the function domain are different.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">FunctionField</td>
@@ -584,7 +584,7 @@
 <p><code>AdvectionFieldEvaluator</code> The type of the spline evaluator for the advection field (see SplineEvaluator). </p>
 </li>
 <li>
-<p><code>TimeStepper</code> The time integration method applied to solve the characteristic equation. The method is picked among the child classes of <a href="classITimeStepper.html"><strong>ITimeStepper</strong></a>. </p>
+<p><code>TimeStepperBuilder</code> A time stepper builder indicating which time integration method should be applied to solve the characteristic equation. </p>
 </li>
 </ul>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
@@ -594,20 +594,20 @@
     FunctionPreallocatableInterpolatorType const &amp; function_interpolator,
     AdvectionFieldBuilder const &amp; adv_field_builder,
     AdvectionFieldEvaluator const &amp; adv_field_evaluator,
-    TimeStepper const &amp; time_stepper
+    TimeStepperBuilder const &amp; time_stepper_builder
 ) 
 </code></pre>
 <p>When IdxRangeAdvection and IdxRangeFunction are different, we need one interpolator for each index range.</p>
 <p>We can also use it when we want two different interpolators but defined on the same domain (e.g. different boundary conditions for the evaluators).</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>function_interpolator</code> interpolator along the GridInterest direction to interpolate the advected function (allfdistribu) on the domain of the function. </li>
-<li><code>adv_field_builder</code> builder along the GridInterest direction to build a spline representation of the advection field on the function domain. </li>
+<li><code>function_interpolator</code> Interpolator along the GridInterest direction to interpolate the advected function (allfdistribu) on the domain of the function. </li>
+<li><code>adv_field_builder</code> Builder along the GridInterest direction to build a spline representation of the advection field on the function domain. </li>
 <li>
-<p><code>adv_field_evaluator</code> evaluator along the GridInterest direction to evaluate the advection field spline representation on the function domain. </p>
+<p><code>adv_field_evaluator</code> Evaluator along the GridInterest direction to evaluate the advection field spline representation on the function domain. </p>
 </li>
 <li>
-<p><code>time_stepper</code> time integration method for the characteristic equation. </p>
+<p><code>time_stepper_builder</code> A builder for the time integration method used for the characteristic equation. </p>
 </li>
 </ul>
 <hr>

@@ -2,7 +2,7 @@
 
 # Class CrankNicolson
 
-**template &lt;class FieldMem, class [**DerivFieldMem**](classDerivFieldMem.md), class ExecSpace&gt;**
+**template &lt;class FieldMem, class [**DerivFieldMem**](classITimeStepper.md#typedef-derivfieldmem), class ExecSpace&gt;**
 
 
 
@@ -50,9 +50,12 @@ See [ITimeStepper](classITimeStepper.md)
 | ---: | :--- |
 | typedef typename DerivFieldMem::view\_type | [**DerivConstField**](classITimeStepper.md#typedef-derivconstfield)  <br>_The constant type of the derivatives values of the function being evolved._  |
 | typedef typename DerivFieldMem::span\_type | [**DerivField**](classITimeStepper.md#typedef-derivfield)  <br>_The type of the derivatives of the function being evolved._  |
+| typedef DerivFieldMemType | [**DerivFieldMem**](classITimeStepper.md#typedef-derivfieldmem)  <br>_The type of the memory allocation for the derivatives of the function being evolved._  |
 | typedef typename FieldMem::discrete\_domain\_type | [**IdxRange**](classITimeStepper.md#typedef-idxrange)  <br>_The type of the index range on which the values of the function are defined._  |
 | typedef typename FieldMem::view\_type | [**ValConstField**](classITimeStepper.md#typedef-valconstfield)  <br>_The constant type of the values of the function being evolved._  |
 | typedef typename FieldMem::span\_type | [**ValField**](classITimeStepper.md#typedef-valfield)  <br>_The type of the values of the function being evolved._  |
+| typedef FieldMem | [**ValFieldMem**](classITimeStepper.md#typedef-valfieldmem)  <br>_The type of the memory allocation for the values of the function being evolved._  |
+| typedef ExecSpace | [**exec\_space**](classITimeStepper.md#typedef-exec_space)  <br>_The space (CPU/GPU) where the calculations are carried out._  |
 
 
 
@@ -211,7 +214,7 @@ The method is order 2.
 
 _The constant type of the derivatives values of the function being evolved._ 
 ```C++
-using ITimeStepper< FieldMem, DerivFieldMem, ExecSpace >::DerivConstField =  typename DerivFieldMem::view_type;
+using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::DerivConstField =  typename DerivFieldMem::view_type;
 ```
 
 
@@ -225,7 +228,7 @@ using ITimeStepper< FieldMem, DerivFieldMem, ExecSpace >::DerivConstField =  typ
 
 _The type of the derivatives of the function being evolved._ 
 ```C++
-using ITimeStepper< FieldMem, DerivFieldMem, ExecSpace >::DerivField =  typename DerivFieldMem::span_type;
+using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::DerivField =  typename DerivFieldMem::span_type;
 ```
 
 
@@ -239,7 +242,7 @@ using ITimeStepper< FieldMem, DerivFieldMem, ExecSpace >::DerivField =  typename
 
 _The type of the index range on which the values of the function are defined._ 
 ```C++
-using ITimeStepper< FieldMem, DerivFieldMem, ExecSpace >::IdxRange =  typename FieldMem::discrete_domain_type;
+using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::IdxRange =  typename FieldMem::discrete_domain_type;
 ```
 
 
@@ -253,7 +256,7 @@ using ITimeStepper< FieldMem, DerivFieldMem, ExecSpace >::IdxRange =  typename F
 
 _The constant type of the values of the function being evolved._ 
 ```C++
-using ITimeStepper< FieldMem, DerivFieldMem, ExecSpace >::ValConstField =  typename FieldMem::view_type;
+using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::ValConstField =  typename FieldMem::view_type;
 ```
 
 
@@ -267,7 +270,7 @@ using ITimeStepper< FieldMem, DerivFieldMem, ExecSpace >::ValConstField =  typen
 
 _The type of the values of the function being evolved._ 
 ```C++
-using ITimeStepper< FieldMem, DerivFieldMem, ExecSpace >::ValField =  typename FieldMem::span_type;
+using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::ValField =  typename FieldMem::span_type;
 ```
 
 

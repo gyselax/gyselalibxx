@@ -234,6 +234,7 @@
 * **enable\_multipatch\_type&lt; MultipatchFieldMem&lt; T, Patches... &gt; &gt;** ([**multipatch\_field\_mem.hpp**](multipatch__field__mem_8hpp.md))
 * **enable\_multipatch\_type** ([**multipatch\_type.hpp**](multipatch__type_8hpp.md))
 * **enable\_multipatch\_type&lt; MultipatchType&lt; T, Patches... &gt; &gt;** ([**multipatch\_type.hpp**](multipatch__type_8hpp.md))
+* **EulerBuilder** ([**euler.hpp**](euler_8hpp.md))
 * **enable\_data\_access\_methods** ([**ddc\_alias\_inline\_functions.hpp**](ddc__alias__inline__functions_8hpp.md))
 * **enable\_data\_access\_methods&lt; Field&lt; ElementType, IdxRangeType, LayoutType, MemoryType &gt; &gt;** ([**ddc\_alias\_inline\_functions.hpp**](ddc__alias__inline__functions_8hpp.md))
 * **enable\_data\_access\_methods&lt; FieldMem&lt; ElementType, IdxRangeType, MemoryType &gt; &gt;** ([**ddc\_alias\_inline\_functions.hpp**](ddc__alias__inline__functions_8hpp.md))
@@ -437,6 +438,7 @@
 * **IdxSp** ([**species\_info.hpp**](species__info_8hpp.md))
 * **IdxStepSp** ([**species\_info.hpp**](species__info_8hpp.md))
 * **is\_species\_information\_v** ([**species\_info.hpp**](species__info_8hpp.md))
+* **is\_timestepper\_builder\_v** ([**itimestepper.hpp**](itimestepper_8hpp.md))
 * **is\_gslx\_field\_v** ([**ddc\_alias\_inline\_functions.hpp**](ddc__alias__inline__functions_8hpp.md))
 * **is\_mem\_type\_v** ([**ddc\_alias\_inline\_functions.hpp**](ddc__alias__inline__functions_8hpp.md))
 * **Idx** ([**ddc\_aliases.hpp**](ddc__aliases_8hpp.md))
@@ -476,6 +478,9 @@
 ## r
 
 * **RhsType** ([**irighthandside.hpp**](irighthandside_8hpp.md))
+* **RK2Builder** ([**rk2.hpp**](rk2_8hpp.md))
+* **RK3Builder** ([**rk3.hpp**](rk3_8hpp.md))
+* **RK4Builder** ([**rk4.hpp**](rk4_8hpp.md))
 
 
 ## s

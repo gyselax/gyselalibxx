@@ -63,6 +63,8 @@ public:
         y_update(y, get_const_field(k1), dt);
     }
 };
+
+using EulerBuilder = ExplicitTimeStepperBuilder<Euler>;
 ```
 
 

@@ -223,6 +223,21 @@
       </node>
     </incdepgraph>
     <innerclass refid="classRK4" prot="public">RK4</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="rk4_8hpp_1a13e45729c350bf78e94b203ef8c051eb" prot="public" static="no">
+        <type><ref refid="classExplicitTimeStepperBuilder" kindref="compound">ExplicitTimeStepperBuilder</ref>&lt; <ref refid="classRK4" kindref="compound">RK4</ref> &gt;</type>
+        <definition>using RK4Builder =  ExplicitTimeStepperBuilder&lt;RK4&gt;</definition>
+        <argsstring></argsstring>
+        <name>RK4Builder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp" line="160" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp" bodystart="160" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -247,29 +262,29 @@
 <codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classITimeStepper" kindref="compound">base_type</ref><sp/>=<sp/><ref refid="classITimeStepper" kindref="compound">ITimeStepper&lt;FieldMem, DerivFieldMem, ExecSpace&gt;</ref>;</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1a468e0909ac8b50f109dc810879253134" kindref="member">base_type::IdxRange</ref>;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1afdbd0d8a324c9f3a169e5776127e174f" kindref="member">base_type::IdxRange</ref>;</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1ad0949984fa0c2d0004f6b7a10e19cd69" kindref="member">base_type::ValConstField</ref>;</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1aaba53f61442e763c05fbd7614c3e1c05" kindref="member">base_type::ValField</ref>;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1a8b67d47c34f88b2838fe16f98ce61372" kindref="member">base_type::ValConstField</ref>;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1ae1fa0645a608965479f0974abcff81ff" kindref="member">base_type::ValField</ref>;</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1a7ee2d8a1e9031e625d0861031891bd52" kindref="member">base_type::DerivConstField</ref>;</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1a58d11b9c1e57348b94e50b1ea284886f" kindref="member">base_type::DerivField</ref>;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1a32837c6aa6ab0a17eb422efd8e0f933e" kindref="member">base_type::DerivConstField</ref>;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">typename<sp/><ref refid="classITimeStepper_1adb99057a5a7ea3b43495c356cdc68b45" kindref="member">base_type::DerivField</ref>;</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight></codeline>
 <codeline lineno="49"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRange<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>m_idx_range;</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
 <codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classITimeStepper_1abf7ce877cffa5f112975e0c8ebaf5b28" kindref="member">base_type::update</ref>;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classITimeStepper_1a0580b80dd9c61ac350895e80958c15dc" kindref="member">base_type::update</ref>;</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight></codeline>
 <codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="60" refid="classRK4_1a5956fc372c34f2d14a030fd0dd66be5f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classRK4_1a5956fc372c34f2d14a030fd0dd66be5f" kindref="member">RK4</ref>(IdxRange<sp/>idx_range)<sp/>:<sp/>m_idx_range(idx_range)<sp/>{}</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"></highlight></codeline>
 <codeline lineno="77" refid="classRK4_1aa00962aea26427ba1af53522b7dc1395" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classRK4_1aa00962aea26427ba1af53522b7dc1395" kindref="member">update</ref>(</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>exec_space,</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classRK4_1aaba53f61442e763c05fbd7614c3e1c05" kindref="member">ValField</ref><sp/>y,</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classITimeStepper_1a05d1482e28b0b24d18e0fd2366ba3ce7" kindref="member">exec_space</ref>,</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classRK4_1ae1fa0645a608965479f0974abcff81ff" kindref="member">ValField</ref><sp/>y,</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dt,</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(<ref refid="classDerivField" kindref="compound">DerivField</ref>,<sp/><ref refid="classRK4_1ad0949984fa0c2d0004f6b7a10e19cd69" kindref="member">ValConstField</ref>)&gt;<sp/>dy_calculator,</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(<ref refid="classRK4_1aaba53f61442e763c05fbd7614c3e1c05" kindref="member">ValField</ref>,<sp/><ref refid="classRK4_1a7ee2d8a1e9031e625d0861031891bd52" kindref="member">DerivConstField</ref>,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal">)&gt;<sp/>y_update)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">final</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(<ref refid="classDerivField" kindref="compound">DerivField</ref>,<sp/><ref refid="classRK4_1a8b67d47c34f88b2838fe16f98ce61372" kindref="member">ValConstField</ref>)&gt;<sp/>dy_calculator,</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(<ref refid="classRK4_1ae1fa0645a608965479f0974abcff81ff" kindref="member">ValField</ref>,<sp/><ref refid="classRK4_1a32837c6aa6ab0a17eb422efd8e0f933e" kindref="member">DerivConstField</ref>,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal">)&gt;<sp/>y_update)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">final</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
 <codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::SpaceAccessibility&lt;ExecSpace,<sp/>typename<sp/>FieldMem::memory_space&gt;::accessible,</highlight></codeline>
@@ -285,7 +300,7 @@
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDerivFieldMem" kindref="compound">DerivFieldMem</ref><sp/>k4_alloc(m_idx_range);</highlight></codeline>
 <codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDerivFieldMem" kindref="compound">DerivFieldMem</ref><sp/>k_total_alloc(m_idx_range);</highlight></codeline>
 <codeline lineno="97"><highlight class="normal"></highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classRK4_1aaba53f61442e763c05fbd7614c3e1c05" kindref="member">ValField</ref><sp/>y_prime<sp/>=<sp/>get_field(y_prime_alloc);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classRK4_1ae1fa0645a608965479f0974abcff81ff" kindref="member">ValField</ref><sp/>y_prime<sp/>=<sp/>get_field(y_prime_alloc);</highlight></codeline>
 <codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDerivField" kindref="compound">DerivField</ref><sp/>k1<sp/>=<sp/>get_field(k1_alloc);</highlight></codeline>
 <codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDerivField" kindref="compound">DerivField</ref><sp/>k2<sp/>=<sp/>get_field(k2_alloc);</highlight></codeline>
 <codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDerivField" kindref="compound">DerivField</ref><sp/>k3<sp/>=<sp/>get_field(k3_alloc);</highlight></codeline>
@@ -294,7 +309,7 @@
 <codeline lineno="104"><highlight class="normal"></highlight></codeline>
 <codeline lineno="105"><highlight class="normal"></highlight></codeline>
 <codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Save<sp/>initial<sp/>conditions</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classITimeStepper_1ac976ff8bc85dbfed9f7b378f69bd52b4" kindref="member">base_type::copy</ref>(y_prime,<sp/>get_const_field(y));</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classITimeStepper_1af0b2c72cbd3c7be4d2b3767b4a4c2857" kindref="member">base_type::copy</ref>(y_prime,<sp/>get_const_field(y));</highlight></codeline>
 <codeline lineno="108"><highlight class="normal"></highlight></codeline>
 <codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>---------<sp/>Calculate<sp/>k1<sp/>------------</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>k1<sp/>=<sp/>f(y)</highlight><highlight class="normal"></highlight></codeline>
@@ -309,7 +324,7 @@
 <codeline lineno="119"><highlight class="normal"></highlight></codeline>
 <codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>---------<sp/>Calculate<sp/>k3<sp/>------------</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Collect<sp/>initial<sp/>conditions</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classITimeStepper_1ac976ff8bc85dbfed9f7b378f69bd52b4" kindref="member">base_type::copy</ref>(y_prime,<sp/>get_const_field(y));</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classITimeStepper_1af0b2c72cbd3c7be4d2b3767b4a4c2857" kindref="member">base_type::copy</ref>(y_prime,<sp/>get_const_field(y));</highlight></codeline>
 <codeline lineno="123"><highlight class="normal"></highlight></codeline>
 <codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>y_new<sp/>:=<sp/>y_n<sp/>+<sp/>h/2*k_2</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>y_update(y_prime,<sp/>get_const_field(k2),<sp/>0.5<sp/>*<sp/>dt);</highlight></codeline>
@@ -319,7 +334,7 @@
 <codeline lineno="129"><highlight class="normal"></highlight></codeline>
 <codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>---------<sp/>Calculate<sp/>k3<sp/>------------</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Collect<sp/>initial<sp/>conditions</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classITimeStepper_1ac976ff8bc85dbfed9f7b378f69bd52b4" kindref="member">base_type::copy</ref>(y_prime,<sp/>get_const_field(y));</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classITimeStepper_1af0b2c72cbd3c7be4d2b3767b4a4c2857" kindref="member">base_type::copy</ref>(y_prime,<sp/>get_const_field(y));</highlight></codeline>
 <codeline lineno="133"><highlight class="normal"></highlight></codeline>
 <codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>y_new<sp/>:=<sp/>y_n<sp/>+<sp/>h*k_3</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>y_update(y_prime,<sp/>get_const_field(k3),<sp/>dt);</highlight></codeline>
@@ -331,8 +346,8 @@
 <codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculation<sp/>of<sp/>step</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>k_total<sp/>=<sp/>k1<sp/>+<sp/>4<sp/>*<sp/>k2<sp/>+<sp/>k3</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">element_type<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>DerivField::element_type;</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classITimeStepper_1a7d94fc389aad94e1af939a5f32c81edd" kindref="member">base_type::assemble_k_total</ref>(</highlight></codeline>
-<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exec_space,</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classITimeStepper_1a77be010c79547fa1d809afcd793c0f20" kindref="member">base_type::assemble_k_total</ref>(</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classITimeStepper_1a05d1482e28b0b24d18e0fd2366ba3ce7" kindref="member">exec_space</ref>,</highlight></codeline>
 <codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>k_total,</highlight></codeline>
 <codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KOKKOS_LAMBDA(std::array&lt;element_type,<sp/>4&gt;<sp/>k)<sp/>{</highlight></codeline>
 <codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>k[0]<sp/>+<sp/>2<sp/>*<sp/>k[1]<sp/>+<sp/>2<sp/>*<sp/>k[2]<sp/>+<sp/>k[3];</highlight></codeline>
@@ -346,6 +361,8 @@
 <codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>y_update(y,<sp/>get_const_field(k_total),<sp/>dt<sp/>/<sp/>6.);</highlight></codeline>
 <codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="158"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classExplicitTimeStepperBuilder" kindref="compound">RK4Builder</ref><sp/>=<sp/><ref refid="classExplicitTimeStepperBuilder" kindref="compound">ExplicitTimeStepperBuilder&lt;RK4&gt;</ref>;</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp"/>
   </compounddef>

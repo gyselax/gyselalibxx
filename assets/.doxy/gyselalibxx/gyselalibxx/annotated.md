@@ -44,6 +44,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**ConstantPartialDerivative**](classConstantPartialDerivative.md) _A class to get the derivative of a constant function. When the derivative of a function is known to be 0 but the dimension is still needed this class can be used to avoid unnecessary calculations._     
 * **class** [**ConstantPartialDerivativeCreator**](classConstantPartialDerivativeCreator.md) _A class to create a_ [_**ConstantPartialDerivative**_](classConstantPartialDerivative.md) _via a create\_instance function._    
 * **class** [**CrankNicolson**](classCrankNicolson.md) _A class which provides an implementation of a Crank-Nicolson method._     
+* **class** [**CrankNicolsonBuilder**](classCrankNicolsonBuilder.md) _A class to indicate that a Crank-Nicolson time stepper should be constructed for use in other operators._     
 * **class** [**CylindricalToCartesian**](classCylindricalToCartesian.md) _A class for describing the cylindrical 3D mapping._     
 * **class** [**CzarnyToCartesian**](classCzarnyToCartesian.md) _A class for describing the Czarny 2D mapping._     
 * **class** [**DerivField**](classDerivField.md) 
@@ -58,6 +59,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**Edge**](structEdge.md) _Define an edge of a given patch._     
 * **class** [**EdgeTransformation**](classEdgeTransformation.md) _Transform a coordinate or an index from one edge to the one on the other edge._     
 * **class** [**Euler**](classEuler.md) _A class which provides an implementation of an explicit_ [_**Euler**_](classEuler.md) _method._    
+* **class** [**ExplicitTimeStepperBuilder**](classExplicitTimeStepperBuilder.md) _A class to indicate that an explicit time stepper should be constructed for use in other operators._     
 * **class** [**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md)     
     * **struct** [**GridPDEDimQ**](structFEM1DPoissonSolver_1_1GridPDEDimQ.md) _The grid of quadrature points along the PDEDim direction._ 
     * **struct** [**HiddenFEMBSplines**](structFEM1DPoissonSolver_1_1HiddenFEMBSplines.md) 

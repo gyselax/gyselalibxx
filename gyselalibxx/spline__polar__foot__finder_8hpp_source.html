@@ -550,11 +550,13 @@
 #include "ddc_aliases.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "ipolar_foot_finder.hpp"
+#include "itimestepper.hpp"
 #include "vector_index_tools.hpp"
 #include "vector_mapper.hpp"
 
 template &lt;
-        class TimeStepper,
+        class IdxRangeBatched,
+        class TimeStepperBuilder,
         class LogicalToPhysicalMapping,
         class LogicalToPseudoPhysicalMapping,
         class SplineRThetaBuilderAdvection,
@@ -564,9 +566,10 @@ class SplinePolarFootFinder
               typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
               typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
               ddc::to_type_seq_t&lt;typename LogicalToPhysicalMapping::CoordResult&gt;,
-              typename TimeStepper::IdxRange,
+              IdxRangeBatched,
               typename SplineRThetaBuilderAdvection::memory_space&gt;
 {
+    static_assert(is_timestepper_builder_v&lt;TimeStepperBuilder&gt;);
     static_assert(is_mapping_v&lt;LogicalToPhysicalMapping&gt;);
     static_assert(is_mapping_v&lt;LogicalToPseudoPhysicalMapping&gt;);
     static_assert(is_analytical_mapping_v&lt;LogicalToPseudoPhysicalMapping&gt;);
@@ -581,16 +584,16 @@ class SplinePolarFootFinder
                   LogicalToPseudoPhysicalMapping&gt;);
     static_assert(ddc::in_tags_v&lt;
                   typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
-                  ddc::to_type_seq_t&lt;typename TimeStepper::IdxRange&gt;&gt;);
+                  ddc::to_type_seq_t&lt;IdxRangeBatched&gt;&gt;);
     static_assert(ddc::in_tags_v&lt;
                   typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
-                  ddc::to_type_seq_t&lt;typename TimeStepper::IdxRange&gt;&gt;);
+                  ddc::to_type_seq_t&lt;IdxRangeBatched&gt;&gt;);
 
     using base_type = IPolarFootFinder&lt;
             typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
             typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
             ddc::to_type_seq_t&lt;typename LogicalToPhysicalMapping::CoordResult&gt;,
-            typename TimeStepper::IdxRange,
+            IdxRangeBatched,
             typename SplineRThetaBuilderAdvection::memory_space&gt;;
 
 public:
@@ -607,6 +610,7 @@ private:
 
 private:
     using ExecSpace = typename SplineRThetaBuilderAdvection::exec_space;
+    using MemSpace = typename ExecSpace::memory_space;
     using X_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
     using Y_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
     using CoordXY_adv = typename LogicalToPseudoPhysicalMapping::CoordResult;
@@ -636,7 +640,12 @@ private:
                     ddc::detail::TypeSeq&lt;GridR, GridTheta&gt;,
                     ddc::detail::TypeSeq&lt;BSplinesR, BSplinesTheta&gt;&gt;&gt;;
 
-    TimeStepper const&amp; m_time_stepper;
+    using TimeStepper = typename TimeStepperBuilder::template time_stepper_t&lt;
+            FieldMem&lt;CoordRTheta, IdxRangeBatched, MemSpace&gt;,
+            DVectorFieldMem&lt;IdxRangeBatched, VectorIndexSet&lt;X_adv, Y_adv&gt;, MemSpace&gt;,
+            ExecSpace&gt;;
+
+    TimeStepperBuilder const&amp; m_time_stepper_builder;
 
     LogicalToPseudoPhysicalMapping m_logical_to_pseudo_physical;
     PseudoPhysicalToLogicalMapping m_pseudo_physical_to_logical;
@@ -661,13 +670,14 @@ public:
 
 public:
     SplinePolarFootFinder(
-            TimeStepper const&amp; time_stepper,
+            IdxRangeBatched const&amp; idx_range_operator,
+            TimeStepperBuilder const&amp; time_stepper_builder,
             LogicalToPhysicalMapping const&amp; logical_to_physical_mapping,
             LogicalToPseudoPhysicalMapping const&amp; logical_to_pseudo_physical_mapping,
             SplineRThetaBuilderAdvection const&amp; builder_advection_field,
             SplineRThetaEvaluatorAdvection const&amp; evaluator_advection_field,
             double epsilon = 1e-12)
-        : m_time_stepper(time_stepper)
+        : m_time_stepper_builder(time_stepper_builder)
         , m_logical_to_pseudo_physical(logical_to_pseudo_physical_mapping)
         , m_pseudo_physical_to_logical(logical_to_pseudo_physical_mapping.get_inverse_mapping())
         , m_pseudo_physical_to_physical(
@@ -756,9 +766,11 @@ public:
                       is_unified(feet);
                   };
 
+        TimeStepper time_stepper
+                = m_time_stepper_builder.template preallocate&lt;TimeStepper&gt;(get_idx_range(feet));
 
         // Solve the characteristic equation
-        m_time_stepper.update(ExecSpace(), feet, dt, dy, update_function);
+        time_stepper.update(ExecSpace(), feet, dt, dy, update_function);
 
         is_unified(feet);
     }

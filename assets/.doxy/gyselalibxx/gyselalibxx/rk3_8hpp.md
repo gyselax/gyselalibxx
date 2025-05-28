@@ -34,7 +34,14 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**RK3**](classRK3.md) &lt;class FieldMem, class [**DerivFieldMem**](classDerivFieldMem.md), class ExecSpace&gt;<br>_A class which provides an implementation of a third-order Runge-Kutta method._  |
+| class | [**RK3**](classRK3.md) &lt;class FieldMem, class [**DerivFieldMem**](classITimeStepper.md#typedef-derivfieldmem), class ExecSpace&gt;<br>_A class which provides an implementation of a third-order Runge-Kutta method._  |
+
+
+## Public Types
+
+| Type | Name |
+| ---: | :--- |
+| typedef [**ExplicitTimeStepperBuilder**](classExplicitTimeStepperBuilder.md)&lt; [**RK3**](classRK3.md) &gt; | [**RK3Builder**](#typedef-rk3builder)  <br> |
 
 
 
@@ -83,8 +90,21 @@
 
 
 
+## Public Types Documentation
 
 
+
+
+### typedef RK3Builder 
+
+```C++
+using RK3Builder =  ExplicitTimeStepperBuilder<RK3>;
+```
+
+
+
+
+<hr>
 
 ------------------------------
 The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk3.hpp`

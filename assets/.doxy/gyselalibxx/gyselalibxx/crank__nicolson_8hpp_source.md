@@ -136,6 +136,45 @@ public:
         return (max_diff / norm_old) < m_epsilon;
     }
 };
+
+class CrankNicolsonBuilder
+{
+private:
+    int const m_max_counter;
+    double const m_epsilon;
+
+public:
+    explicit CrankNicolsonBuilder(int const counter = 20, double const epsilon = 1e-12)
+        : m_max_counter(counter)
+        , m_epsilon(epsilon)
+    {
+    }
+
+    template <
+            class FieldMem,
+            class DerivFieldMem = FieldMem,
+            class ExecSpace = Kokkos::DefaultExecutionSpace>
+    using time_stepper_t = CrankNicolson<FieldMem, DerivFieldMem, ExecSpace>;
+
+    template <class TimeStepper>
+    auto preallocate(typename TimeStepper::IdxRange const idx_range) const
+    {
+        static_assert(std::is_same_v<
+                      TimeStepper,
+                      time_stepper_t<
+                              typename TimeStepper::ValFieldMem,
+                              typename TimeStepper::DerivFieldMem,
+                              typename TimeStepper::exec_space>>);
+        return TimeStepper(idx_range, m_max_counter, m_epsilon);
+    }
+};
+
+namespace detail {
+
+template <>
+inline constexpr bool enable_is_timestepper_builder<CrankNicolsonBuilder> = true;
+
+}
 ```
 
 

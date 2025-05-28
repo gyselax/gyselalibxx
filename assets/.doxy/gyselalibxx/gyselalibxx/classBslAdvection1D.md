@@ -2,7 +2,7 @@
 
 # Class BslAdvection1D
 
-**template &lt;class GridInterest, class IdxRangeAdvection, class IdxRangeFunction, class AdvectionFieldBuilder, class AdvectionFieldEvaluator, class TimeStepper&gt;**
+**template &lt;class GridInterest, class IdxRangeAdvection, class IdxRangeFunction, class AdvectionFieldBuilder, class AdvectionFieldEvaluator, class TimeStepperBuilder&gt;**
 
 
 
@@ -54,7 +54,7 @@ _A class which computes the advection along the dimension of interest GridIntere
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslAdvection1D**](#function-bsladvection1d) (FunctionPreallocatableInterpolatorType const & function\_interpolator, AdvectionFieldBuilder const & adv\_field\_builder, AdvectionFieldEvaluator const & adv\_field\_evaluator, TimeStepper const & time\_stepper) <br>_Constructor when the advection domain and the function domain are different._  |
+|   | [**BslAdvection1D**](#function-bsladvection1d) (FunctionPreallocatableInterpolatorType const & function\_interpolator, AdvectionFieldBuilder const & adv\_field\_builder, AdvectionFieldEvaluator const & adv\_field\_evaluator, TimeStepperBuilder const & time\_stepper\_builder) <br>_Constructor when the advection domain and the function domain are different._  |
 |  FunctionField | [**operator()**](#function-operator) (FunctionField const allfdistribu, AdvecField const advection\_field, double const dt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection\_field\_derivatives\_min=std::nullopt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection\_field\_derivatives\_max=std::nullopt) const<br>_Advects allfdistribu along the advection dimension GridInterest for a duration dt._  |
 |   | [**~BslAdvection1D**](#function-bsladvection1d) () = default<br> |
 
@@ -119,7 +119,7 @@ The characteristic equation is solved using a time integration method ([**ITimeS
 * `AdvectionFieldBuilder` The type of the spline builder for the advection field (see SplineBuilder). 
 * `AdvectionFieldEvaluator` The type of the spline evaluator for the advection field (see SplineEvaluator). 
  
-* `TimeStepper` The time integration method applied to solve the characteristic equation. The method is picked among the child classes of [**ITimeStepper**](classITimeStepper.md). 
+* `TimeStepperBuilder` A time stepper builder indicating which time integration method should be applied to solve the characteristic equation. 
 
 
 
@@ -138,7 +138,7 @@ inline explicit BslAdvection1D::BslAdvection1D (
     FunctionPreallocatableInterpolatorType const & function_interpolator,
     AdvectionFieldBuilder const & adv_field_builder,
     AdvectionFieldEvaluator const & adv_field_evaluator,
-    TimeStepper const & time_stepper
+    TimeStepperBuilder const & time_stepper_builder
 ) 
 ```
 
@@ -155,11 +155,11 @@ We can also use it when we want two different interpolators but defined on the s
 **Parameters:**
 
 
-* `function_interpolator` interpolator along the GridInterest direction to interpolate the advected function (allfdistribu) on the domain of the function. 
-* `adv_field_builder` builder along the GridInterest direction to build a spline representation of the advection field on the function domain. 
-* `adv_field_evaluator` evaluator along the GridInterest direction to evaluate the advection field spline representation on the function domain. 
+* `function_interpolator` Interpolator along the GridInterest direction to interpolate the advected function (allfdistribu) on the domain of the function. 
+* `adv_field_builder` Builder along the GridInterest direction to build a spline representation of the advection field on the function domain. 
+* `adv_field_evaluator` Evaluator along the GridInterest direction to evaluate the advection field spline representation on the function domain. 
  
-* `time_stepper` time integration method for the characteristic equation. 
+* `time_stepper_builder` A builder for the time integration method used for the characteristic equation. 
 
 
 

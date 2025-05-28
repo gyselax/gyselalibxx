@@ -20,7 +20,7 @@
 
 template <
         class FieldMem,
-        class DerivFieldMem = FieldMem,
+        class DerivFieldMemType = FieldMem,
         class ExecSpace = Kokkos::DefaultExecutionSpace>
 class ITimeStepper
 {
@@ -28,33 +28,40 @@ class ITimeStepper
             (ddc::is_chunk_v<FieldMem>) or (is_vector_field_v<FieldMem>)
             or (is_multipatch_field_mem_v<FieldMem>));
     static_assert(
-            (ddc::is_chunk_v<DerivFieldMem>) or (is_vector_field_v<DerivFieldMem>)
-            or (is_multipatch_field_mem_v<DerivFieldMem>));
+            (ddc::is_chunk_v<DerivFieldMemType>) or (is_vector_field_v<DerivFieldMemType>)
+            or (is_multipatch_field_mem_v<DerivFieldMemType>));
 
     static_assert(
             (std::is_same_v<
                     typename FieldMem::discrete_domain_type,
-                    typename DerivFieldMem::discrete_domain_type>)
-            || (is_multipatch_field_mem_v<FieldMem> && is_multipatch_field_mem_v<DerivFieldMem>));
+                    typename DerivFieldMemType::discrete_domain_type>)
+            || (is_multipatch_field_mem_v<
+                        FieldMem> && is_multipatch_field_mem_v<DerivFieldMemType>));
 
     static_assert(
             Kokkos::SpaceAccessibility<ExecSpace, typename FieldMem::memory_space>::accessible,
             "MemorySpace has to be accessible for ExecutionSpace.");
     static_assert(
-            Kokkos::SpaceAccessibility<ExecSpace, typename DerivFieldMem::memory_space>::accessible,
+            Kokkos::SpaceAccessibility<ExecSpace, typename DerivFieldMemType::memory_space>::
+                    accessible,
             "MemorySpace has to be accessible for ExecutionSpace.");
 
 public:
     using IdxRange = typename FieldMem::discrete_domain_type;
 
+    using ValFieldMem = FieldMem;
 
     using ValField = typename FieldMem::span_type;
 
     using ValConstField = typename FieldMem::view_type;
 
+    using DerivFieldMem = DerivFieldMemType;
+
     using DerivField = typename DerivFieldMem::span_type;
 
     using DerivConstField = typename DerivFieldMem::view_type;
+
+    using exec_space = ExecSpace;
 
 public:
     void update(ValField y, double dt, std::function<void(DerivField, ValConstField)> dy_calculator)
@@ -215,6 +222,45 @@ private:
          ...);
     }
 };
+
+template <template <class FieldMem, class DerivFieldMem, class ExecSpace> typename TimeStepper>
+class ExplicitTimeStepperBuilder
+{
+public:
+    ExplicitTimeStepperBuilder() {}
+
+    template <
+            class FieldMem,
+            class DerivFieldMem = FieldMem,
+            class ExecSpace = Kokkos::DefaultExecutionSpace>
+    using time_stepper_t = TimeStepper<FieldMem, DerivFieldMem, ExecSpace>;
+
+    template <class ChosenTimeStepper>
+    auto preallocate(typename ChosenTimeStepper::IdxRange const idx_range) const
+    {
+        static_assert(std::is_same_v<
+                      ChosenTimeStepper,
+                      time_stepper_t<
+                              typename ChosenTimeStepper::ValFieldMem,
+                              typename ChosenTimeStepper::DerivFieldMem,
+                              typename ChosenTimeStepper::exec_space>>);
+        return ChosenTimeStepper(idx_range);
+    }
+};
+
+namespace detail {
+
+template <class T>
+inline constexpr bool enable_is_timestepper_builder = false;
+
+template <template <class FieldMem, class DerivFieldMem, class ExecSpace> typename TimeStepper>
+inline constexpr bool enable_is_timestepper_builder<ExplicitTimeStepperBuilder<TimeStepper>> = true;
+
+} // namespace detail
+
+template <typename Type>
+inline constexpr bool is_timestepper_builder_v
+        = detail::enable_is_timestepper_builder<std::remove_const_t<std::remove_reference_t<Type>>>;
 ```
 
 

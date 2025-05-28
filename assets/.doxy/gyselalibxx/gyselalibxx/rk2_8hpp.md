@@ -36,7 +36,14 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**RK2**](classRK2.md) &lt;class FieldMem, class [**DerivFieldMem**](classDerivFieldMem.md), class ExecSpace&gt;<br>_A class which provides an implementation of a second-order Runge-Kutta method._  |
+| class | [**RK2**](classRK2.md) &lt;class FieldMem, class [**DerivFieldMem**](classITimeStepper.md#typedef-derivfieldmem), class ExecSpace&gt;<br>_A class which provides an implementation of a second-order Runge-Kutta method._  |
+
+
+## Public Types
+
+| Type | Name |
+| ---: | :--- |
+| typedef [**ExplicitTimeStepperBuilder**](classExplicitTimeStepperBuilder.md)&lt; [**RK2**](classRK2.md) &gt; | [**RK2Builder**](#typedef-rk2builder)  <br> |
 
 
 
@@ -85,8 +92,21 @@
 
 
 
+## Public Types Documentation
 
 
+
+
+### typedef RK2Builder 
+
+```C++
+using RK2Builder =  ExplicitTimeStepperBuilder<RK2>;
+```
+
+
+
+
+<hr>
 
 ------------------------------
 The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk2.hpp`
