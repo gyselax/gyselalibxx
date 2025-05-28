@@ -8,8 +8,8 @@
 
 #include <Kokkos_Core.hpp>
 
+#include "coord_transformation_tools.hpp"
 #include "indexed_tensor.hpp"
-#include "mapping_tools.hpp"
 #include "static_tensors.hpp"
 #include "tensor.hpp"
 #include "vector_field.hpp"
@@ -278,7 +278,7 @@ tensor_product(
 {
     static_assert(ddc::type_seq_size_v<VectorIndexSetType> == 3);
     static_assert(is_mapping_v<Mapping>);
-    static_assert(has_jacobian_v<Mapping, CoordType>);
+    static_assert(has_jacobian_v<Mapping>);
     LeviCivitaTensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>> eps(
             mapping.jacobian(coord));
     return tensor_mul(index<'i', 'j', 'k'>(eps), index<'j'>(a), index<'k'>(b));
