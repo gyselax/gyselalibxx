@@ -39,8 +39,8 @@ jobs:
         uses: DavidAnson/markdownlint-cli2-action@v19
         with:
           config: './.markdownlint.json'
-          globs: |
-            **/*.md
+          globs: '**/*.md,!.github/**/*.md,!.gitlab/**/*.md'
+          separator: ','
       - name: Check files
         id: markdown
         shell: bash
