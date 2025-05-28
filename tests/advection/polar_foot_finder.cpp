@@ -261,10 +261,10 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
 
     const double t = 0.0;
     const double dt = 0.1;
-    DVectorFieldMem<IdxRangeSpRTheta, CartBasis> function_alloc(batched_idx_range);
+    DVectorFieldMem<IdxRangeSpRTheta, CartBasis> adv_field_alloc(batched_idx_range);
     FieldMem<CoordRTheta, IdxRangeSpRTheta> feet_alloc(batched_idx_range);
     FieldMem<CoordRTheta, IdxRangeSpRTheta> exact_feet_alloc(batched_idx_range);
-    DVectorField<IdxRangeSpRTheta, CartBasis> function = get_field(function_alloc);
+    DVectorField<IdxRangeSpRTheta, CartBasis> adv_field = get_field(adv_field_alloc);
     Field<CoordRTheta, IdxRangeSpRTheta> feet = get_field(feet_alloc);
     Field<CoordRTheta, IdxRangeSpRTheta> exact_feet = get_field(exact_feet_alloc);
     ddc::parallel_for_each(
@@ -274,11 +274,12 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
                 IdxRTheta idx_rtheta(idx);
                 CoordRTheta coord_rtheta = ddc::coordinate(idx_rtheta);
                 CoordXY coord_xy = to_physical(coord_rtheta);
-                ddcHelper::assign_vector_field_element(function, idx, advection_field(coord_xy, t));
+                ddcHelper::
+                        assign_vector_field_element(adv_field, idx, advection_field(coord_xy, t));
                 feet(idx) = coord_rtheta;
                 exact_feet(idx) = from_physical(advection_field.exact_feet(coord_xy, dt));
             });
-    batched_foot_finder(feet, function, dt);
+    batched_foot_finder(feet, adv_field, dt);
 
     double error = error_norm_inf(
             Kokkos::DefaultExecutionSpace(),
