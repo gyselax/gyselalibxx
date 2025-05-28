@@ -546,7 +546,15 @@
 <p>It was rewritten from Fortran into C++. The operator's name is KOkkos coLIsion OPerator (KOLIOP) and is provided as a submodule (see <code>/vendor</code>).</p>
 <p>While the operator is in C++, the interface with Fortran and other C++ code is made through a C layer. This is also known as the hourglass pattern (conceptually, the narrow neck of the device represent the lowering to C).</p>
 <p>To integrate Koliop into Gyselalib++, we wrap its functionalities into a DDC aware operator present in <code>collision_operator.hpp</code>. In Gyselalib++, operator are expected to support multiple if not all kind of geometries. But Koliop expect some data in layout right [sp, phi, theta, r, vpar, mu] instead of the [sp, phi, r, theta, vpar, mu] layout that is going to be favoured in Gyselalib++. We have some machinery that setup input configuration data depending on the geometry. These are in <code>collision_configuration_sprvparmu.hpp</code>, <code>collision_configuration_spvparmu.hpp</code>.</p>
-<p>More information can be found in the <a href="../../docs/latex/collisions/Gysela_collision.pdf">Gysela collision operator</a></p></div>
+<p>More information can be found in the <a href="../../docs/latex/collisions/Gysela_collision.pdf">Gysela collision operator</a> or the associated paper<sup id="fnref:Donnel"><a class="footnote-ref" href="#fn:Donnel">1</a></sup>.</p>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:Donnel">
+<p>P. Donnel et al., Computer Physics Communications (2019), ”A multi-species collisional operator for full-F global gyrokinetics codes: Numerical aspects and verification with the GYSELA code” <a class="footnote-backref" href="#fnref:Donnel" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+</ol>
+</div></div>
               
             </div>
           </div><footer>
