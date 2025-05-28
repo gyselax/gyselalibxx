@@ -109,13 +109,13 @@ The majority of the operators are designed to work on non-orthonormal coordinate
 
 Plasma simulations are essential for the development of magnetic confinement fusion devices for energy production.
 The low collisionality of such plasmas makes kinetic models a judicious choice.
-In particular gyrokinetic theory [@brizard2007; @krommes2012], which reduces the 6D problem to a 5D problem by removing high frequency gyromotion, is a popular framework for plasma simulation [@garbet2010].
-Despite the reduction in dimensionality such simulations still require massively powerful high-performance computing (HPC) resources.
+In particular, gyrokinetic theory [@brizard2007; @krommes2012], which reduces the 6D problem to a 5D problem by removing high frequency gyromotion, is a popular framework for plasma simulation [@garbet2010].
+Despite the reduction in dimensionality, such simulations still require massively powerful high-performance computing (HPC) resources.
 For ITER-sized simulations, exascale resources would still be required.
 
 The pre-existing GYSELA code [@grandgirard2016], written in Fortran, originally aimed to simulate plasma in the core region of a tokamak using semi-Lagrangian advection with a distribution function discretised in phase space on a uniform grid.
 This approach was shown to work well and allowed the study of many interesting physical phenomena [@Esteve2018;@Sarazin2021;@DifPradalier2022].
-However expanding this code to use more complex mathematical methods such as non-uniform points (vital for handling the different magnitudes of physical quantities in the core and edge regions), and increasingly complex geometries (such as D-shape geometries, geometries including both open and closed field lines, X-points, and potentially stellarator geometries) has proved to be challenging and sometimes error-prone.
+However, expanding this code to use more complex mathematical methods such as non-uniform points (vital for handling the different magnitudes of physical quantities in the core and edge regions), and increasingly complex geometries (such as D-shape geometries, geometries including both open and closed field lines, X-points, and potentially stellarator geometries) has proved to be challenging and sometimes error-prone.
 These complexities are further amplified when trying to organise such a code for use on new GPU architectures, necessary for exascale simulations.
 This is a challenge shared by other gyrokinetic codes [@trilaksono2023].
 
@@ -129,7 +129,7 @@ This is particularly useful when working with multiple grids along the same dime
 
 In contrast to GYSELA, Gyselalib++ has been conceived as a library, similar to the SeLaLib Fortran library [@selalib], whose independent elements are each unit-tested and can be combined to build a final simulation.
 This design makes the library more versatile, enabling users to rapidly assemble a wide range of simulations, including high-dimensional test cases.
-The shared elements also provide more confidence in the reliability of the implementation as they can prove their validity across multiple applications.
+The shared elements also provide more confidence in the reliability of the implementation, as they can prove their validity across multiple applications.
 
 Gyselalib++ includes a range of reusable mathematical operators for plasma simulations.
 These include, but are not limited to, semi-Lagrangian advection schemes, numerical quadrature, differential operators (e.g. finite difference methods), solvers for common PDEs, and a multi-species collision operator [@Donnel2019].
