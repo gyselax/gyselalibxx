@@ -193,7 +193,7 @@ public:
      *
      * @param[in] idx_range_operator
      *      The index range on which the operator should act.
-     * @param[in] time_stepper
+     * @param[in] time_stepper_builder
      *      A builder for the time integration method used for the
      *      characteristic equation. 
      * @param[in] logical_to_physical_mapping
