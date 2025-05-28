@@ -475,9 +475,7 @@ auto get_translation_simulation(Mapping const& mapping, double const rmin, doubl
     using X = typename Mapping::cartesian_tag_x;
     using Y = typename Mapping::cartesian_tag_y;
     return AdvectionSimulation<
-            AdvectionField_translation<
-                    typename Mapping::cartesian_tag_x,
-                    typename Mapping::cartesian_tag_y>,
+            AdvectionField_translation<X, Y>,
             FunctionToBeAdvected_gaussian<Mapping>>(
             {AdvectionField_translation(DVector<X, Y>(
                      std::cos(2 * M_PI * 511. / 4096.) / 2.,
