@@ -18,7 +18,7 @@
 - We take out/inout-parameters (those we modify) first
 - For in-parameters (those we use but don't modify)
   - if it's a scalar native type (int, double, ...) we take it by copy
-  - if it's a const-view type (`ConstField<...>`, `DVectorConstField<...>`, ...) we take it by copy
+  - if it's a const view type (`ConstField<...>`, `DVectorConstField<...>`, ...) we take it by copy
   - otherwise, we take a const-ref: `Type const&`
 - For inout-parameters
   - if it's a modifiable view type (`Field<...>`, `DVectorField<...>`, ...) we take it by copy
