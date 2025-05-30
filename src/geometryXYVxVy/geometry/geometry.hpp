@@ -9,6 +9,10 @@
 #include "ddc_helper.hpp"
 #include "mpilayout.hpp"
 #include "species_info.hpp"
+#include "vector_index_tools.hpp"
+#include "vector_field.hpp"
+#include "vector_field_mem.hpp"
+
 
 /**
  * @brief A class which describes the real space in the first spatial direction X.
@@ -265,6 +269,10 @@ using FieldMemXY = FieldMem<ElementType, IdxRangeXY>;
 using DFieldMemXY = FieldMemXY<double>;
 
 template <class ElementType>
+using VectorFieldMemXY = VectorFieldMem<ElementType, IdxRangeXY, VectorIndexSet<X, Y>>;
+using DVectorFieldMemXY = VectorFieldMemXY<double>;
+
+template <class ElementType>
 using FieldMemVx = FieldMem<ElementType, IdxRangeVx>;
 
 template <class ElementType>
@@ -302,6 +310,10 @@ using DFieldY = FieldY<double>;
 template <class ElementType>
 using FieldXY = Field<ElementType, IdxRangeXY>;
 using DFieldXY = FieldXY<double>;
+
+template <class ElementType>
+using VectorFieldXY = VectorField<ElementType, IdxRangeXY, VectorIndexSet<X, Y>>;
+using DVectorFieldXY = VectorFieldXY<double>;
 
 template <class ElementType>
 using FieldVx = Field<ElementType, IdxRangeVx>;

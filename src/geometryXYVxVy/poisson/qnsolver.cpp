@@ -20,8 +20,7 @@ QNSolver::QNSolver(PoissonSolver const& solve_poisson, IChargeDensityCalculator 
 
 void QNSolver::operator()(
         DFieldXY const electrostatic_potential,
-        DFieldXY const electric_field_x,
-        DFieldXY const electric_field_y,
+        DVectorFieldXY const electric_field,
         DConstFieldSpVxVyXY const allfdistribu) const
 {
     Kokkos::Profiling::pushRegion("QNSolver");
@@ -33,13 +32,6 @@ void QNSolver::operator()(
     DFieldMemVxVy contiguous_slice_vxvy(get_idx_range<GridVx, GridVy>(allfdistribu));
     m_compute_rho(get_field(rho), allfdistribu);
 
-    VectorField<
-            double,
-            IdxRangeXY,
-            VectorIndexSet<X, Y>,
-            Kokkos::DefaultExecutionSpace::memory_space,
-            typename DFieldMemXY::layout_type>
-            electric_field(electric_field_x, electric_field_y);
     m_solve_poisson(electrostatic_potential, electric_field, get_field(rho));
 
     Kokkos::Profiling::popRegion();

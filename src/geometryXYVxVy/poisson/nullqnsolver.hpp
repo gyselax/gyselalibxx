@@ -25,7 +25,6 @@ public:
      */
     void operator()(
             DFieldXY electrostatic_potential,
-            DFieldXY electric_field_x,
-            DFieldXY electric_field_y,
+            DVectorFieldXY electric_field,
             DConstFieldSpVxVyXY allfdistribu) const override;
 };
