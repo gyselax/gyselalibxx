@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Update remaining use of `ddc::Coordinate` to use Gyselalib++ conventions (`Coord`).
+- Update coding conventions to match what is applied.
+
 ### Changed
 
 ### Deprecated

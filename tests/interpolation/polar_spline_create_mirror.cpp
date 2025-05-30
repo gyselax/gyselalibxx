@@ -47,9 +47,9 @@ struct BSplines : PolarBSplines<BSplinesR, BSplinesTheta, continuity>
 {
 };
 
-using PolarCoord = ddc::Coordinate<R, Theta>;
-using CoordR = ddc::Coordinate<R>;
-using CoordTheta = ddc::Coordinate<Theta>;
+using PolarCoord = Coord<R, Theta>;
+using CoordR = Coord<R>;
+using CoordTheta = Coord<Theta>;
 using SplineMem_h = PolarSplineMem<BSplines, Kokkos::HostSpace>;
 using SplineMem_d = PolarSplineMem<BSplines>;
 using Spline_h = PolarSpline<BSplines, Kokkos::HostSpace>;
