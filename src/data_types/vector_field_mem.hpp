@@ -248,11 +248,11 @@ public:
      *
      * @return A constant reference to the vector field on the sliced index range.
      */
-    template <class... QueryDDims>
-    auto operator[](Idx<QueryDDims...> const& slice_spec) const
-    {
-        return span_cview()[slice_spec];
-    }
+    //template <class... QueryDDims>
+    //auto operator[](Idx<QueryDDims...> const& slice_spec) const
+    //{
+    //    return span_cview()[slice_spec];
+    //}
 
     /**
      * @brief Slice out some dimensions.
@@ -264,11 +264,11 @@ public:
      *
      * @return A modifiable reference to the vector field on the sliced index range.
      */
-    template <class... QueryDDims>
-    auto operator[](Idx<QueryDDims...> const& slice_spec)
-    {
-        return span_view()[slice_spec];
-    }
+    //template <class... QueryDDims>
+    //auto operator[](Idx<QueryDDims...> const& slice_spec)
+    //{
+    //    return span_view()[slice_spec];
+    //}
 
     /**
      * @brief Slice out some dimensions.
@@ -279,11 +279,11 @@ public:
      *
      * @return A modifiable reference to the vector field on the sliced index range.
      */
-    template <class... QueryDDims>
-    auto operator[](IdxRange<QueryDDims...> const& oidx_range) const
-    {
-        return span_cview()[oidx_range];
-    }
+    //template <class... QueryDDims>
+    //auto operator[](IdxRange<QueryDDims...> const& oidx_range) const
+    //{
+    //    return span_cview()[oidx_range];
+    //}
 
     /**
      * @brief Slice out some dimensions.
@@ -294,11 +294,11 @@ public:
      *
      * @return A modifiable reference to the vector field on the sliced index range.
      */
-    template <class... QueryDDims>
-    auto operator[](IdxRange<QueryDDims...> const& oidx_range)
-    {
-        return span_view()[oidx_range];
-    }
+    //template <class... QueryDDims>
+    //auto operator[](IdxRange<QueryDDims...> const& oidx_range)
+    //{
+    //    return span_view()[oidx_range];
+    //}
 
     /**
      * @brief Get the Field describing the component in the QueryTag direction.

@@ -189,20 +189,20 @@ private:
     {
     }
 
-    template <class SliceType, std::size_t... Is>
-    constexpr auto get_slice(SliceType const& slice_spec, std::index_sequence<Is...> const&)
-    {
-        auto chunk_slices = std::make_tuple(
-                this->template get<
-                        ddc::type_seq_element_t<Is, VectorIndexSetType>>()[slice_spec]...);
-        using FieldType = std::tuple_element_t<0, decltype(chunk_slices)>;
-        return VectorField<
-                ElementType,
-                typename FieldType::discrete_domain_type,
-                VectorIndexSetType,
-                typename FieldType::memory_space,
-                typename FieldType::layout_type>(std::move(std::get<Is>(chunk_slices))...);
-    }
+    //template <class SliceType, std::size_t... Is>
+    //constexpr auto get_slice(SliceType const& slice_spec, std::index_sequence<Is...> const&)
+    //{
+    //    auto chunk_slices = std::make_tuple(
+    //            this->template get<
+    //                    ddc::type_seq_element_t<Is, VectorIndexSetType>>()[slice_spec]...);
+    //    using FieldType = std::tuple_element_t<0, decltype(chunk_slices)>;
+    //    return VectorField<
+    //            ElementType,
+    //            typename FieldType::discrete_domain_type,
+    //            VectorIndexSetType,
+    //            typename FieldType::memory_space,
+    //            typename FieldType::layout_type>(std::move(std::get<Is>(chunk_slices))...);
+    //}
 
     /** Element access using a multi-dimensional Idx
      * @param delems discrete coordinates
@@ -295,12 +295,12 @@ public:
     /** Constructs a new VectorField containing references to Field.
      * @param fields The Fields.
      */
-    template <
-            class... FieldType,
-            class = std::enable_if_t<std::conjunction_v<std::is_same<FieldType, field_type>...>>>
-    KOKKOS_FUNCTION constexpr VectorField(FieldType... fields) : base_type(std::move(fields)...)
-    {
-    }
+    //template <
+    //        class... FieldType,
+    //        class = std::enable_if_t<std::conjunction_v<std::is_same<FieldType, field_type>...>>>
+    //KOKKOS_FUNCTION constexpr VectorField(FieldType... fields) : base_type(std::move(fields)...)
+    //{
+    //}
 
     /** Copy-assigns a new value to this VectorField, yields a new view to the same data
      * @param other the VectorField to copy
@@ -374,11 +374,11 @@ public:
      *
      * @return A reference to the vector field on the sliced index range.
      */
-    template <class... QueryDDims>
-    constexpr auto operator[](Idx<QueryDDims...> const& slice_spec)
-    {
-        return get_slice(slice_spec, std::make_index_sequence<base_type::NDims> {});
-    }
+    //template <class... QueryDDims>
+    //constexpr auto operator[](Idx<QueryDDims...> const& slice_spec)
+    //{
+    //    return get_slice(slice_spec, std::make_index_sequence<base_type::NDims> {});
+    //}
 
     /**
      * @brief Slice out some dimensions.
@@ -389,11 +389,11 @@ public:
      *
      * @return A reference to the vector field on the sliced index range.
      */
-    template <class... QueryDDims>
-    constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range)
-    {
-        return get_slice(oidx_range, std::make_index_sequence<base_type::NDims> {});
-    }
+    //template <class... QueryDDims>
+    //constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range)
+    //{
+    //    return get_slice(oidx_range, std::make_index_sequence<base_type::NDims> {});
+    //}
 
     /**
      * @brief Get the Field describing the component in the QueryTag direction.

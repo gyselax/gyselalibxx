@@ -5,6 +5,7 @@
 
 #include "ddc_aliases.hpp"
 #include "tensor.hpp"
+#include "vector_index_tools.hpp"
 
 template <class FieldType, class NDTypeSeq>
 class VectorFieldCommon;
@@ -68,7 +69,7 @@ inline constexpr auto get(VectorFieldType& field) noexcept
 } // namespace ddcHelper
 
 template <class FieldType, class... DDims>
-class VectorFieldCommon<FieldType, ddc::detail::TypeSeq<DDims...>>
+class VectorFieldCommon<FieldType, VectorIndexSet<DDims...>>
 {
     static_assert(ddc::is_chunk_v<FieldType>);
     using data_type = typename FieldType::element_type;
@@ -91,16 +92,27 @@ public:
     using element_ref_type = Vector<data_type&, DDims...>;
 
     /// @brief The tags describing the dimensions which make up the elements of the vector.
-    using NDTypeTag = ddc::detail::TypeSeq<DDims...>;
+    using NDTypeTag = VectorIndexSet<DDims...>;
 
     /// @brief The type of a modifiable span of one of these field. This is a DDC keyword used to make this class interchangeable with Field.
     using chunk_span_type = typename FieldType::span_type;
     /// @brief The type of a constant view of one of these field. This is a DDC keyword used to make this class interchangeable with Field.
     using chunk_view_type = typename FieldType::view_type;
 
+private:
+    using internal_index_range_type = ddc::detail::convert_type_seq_to_discrete_domain_t<
+            ddc::type_seq_cat_t<NDTypeTag, ddc::to_type_seq_t<index_range_type>>>;
+
 protected:
     static constexpr std::size_t NDims = sizeof...(DDims);
 
+    static constexpr IdxRange<NDTypeTag> s_vector_index_range
+            = IdxRange<NDTypeTag>(Idx<NDTypeTag>(0), IdxStep<NDTypeTag>(NDims));
+    Field<data_type,
+          internal_index_range_type,
+          typename FieldType::memory_space,
+          typename FieldType::layout_type>
+            m_field;
     std::array<FieldType, NDims> m_values;
 
 protected:
@@ -134,6 +146,7 @@ protected:
 public:
     constexpr index_range_type idx_range() const noexcept
     {
+        //return index_range_type(get_index_range(m_field));
         return m_values[0].domain();
     }
 
