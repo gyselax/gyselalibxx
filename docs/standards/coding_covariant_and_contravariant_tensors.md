@@ -108,7 +108,7 @@ This tells the library:
 
 You will use these sets as the type parameters for `Tensor` later.
 
-###  Compile-Time Verification
+### Compile-Time Verification
 
 Several compile-time tools are available to help ensure correctness and introspection of basis sets:
 
@@ -136,6 +136,7 @@ Tensor<double, EtaBasis, BBasis_cov> M;
 ```
 
 Since most tensors use `double` as their value type, the shorthand template DTensor is provided:
+
 ```cpp
 DTensor<EtaBasis, BBasis_cov> M;
 ```
@@ -151,6 +152,7 @@ DTensor<EtaBasis> v;
 Vector<double, Eta1, Eta2> v;
 DVector<Eta1, Eta2> v;
 ```
+
 These are all equivalent and represent a 1D contravariant vector.
 
 ### Assigning Components
@@ -380,4 +382,3 @@ ddcHelper::select<X>(z) =
 ddcHelper::select<Y>(z) = ...;
 ddcHelper::select<Z>(z) = ...;
 ```
-
