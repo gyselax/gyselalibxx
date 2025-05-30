@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Deprecated
 
+- Deprecate `VectorField` constructor creating a `VectorField` of references to pre-existing `Field`s.
+
 ## [v0.1.1] - 2025-05-30
 
 ### Fixed

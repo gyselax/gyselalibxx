@@ -292,16 +292,6 @@ public:
     {
     }
 
-    /** Constructs a new VectorField containing references to Field.
-     * @param fields The Fields.
-     */
-    //template <
-    //        class... FieldType,
-    //        class = std::enable_if_t<std::conjunction_v<std::is_same<FieldType, field_type>...>>>
-    //KOKKOS_FUNCTION constexpr VectorField(FieldType... fields) : base_type(std::move(fields)...)
-    //{
-    //}
-
     /** Copy-assigns a new value to this VectorField, yields a new view to the same data
      * @param other the VectorField to copy
      * @return *this
