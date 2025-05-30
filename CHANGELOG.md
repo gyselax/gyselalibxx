@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v0.1.1] - 2025-05-30
+
+### Fixed
+
+- Fix paths in root `CMakeLists.txt` file to ensure it can be correctly used in a submodule.
+- Update remaining use of `ddc::Coordinate` to use Gyselalib++ conventions (`Coord`).
+- Update coding conventions to match what is applied.
+
 ## [v0.1.0] - 2025-05-28
 
 ### Added
