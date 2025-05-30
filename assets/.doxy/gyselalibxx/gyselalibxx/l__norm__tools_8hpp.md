@@ -61,7 +61,7 @@
 |  double | [**error\_norm\_inf**](#function-error_norm_inf) (ExecSpace exec\_space, [**VectorConstField**](classVectorField.md)&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory\_space &gt; function, [**VectorConstField**](classVectorField.md)&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory\_space &gt; exact\_function) <br>_Compute the infinity norm of the error between 2 VectorFields._  |
 |  double | [**norm\_L1**](#function-norm_l1) (ExecSpace exec\_space, [**Quadrature**](classQuadrature.md)&lt; IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory\_space &gt; quadrature, DField&lt; IdxRangeQuad, typename ExecSpace::memory\_space &gt; function) <br>_Compute L1 norm of a function with a given quadrature._  |
 |  double | [**norm\_L2**](#function-norm_l2) (ExecSpace exec\_space, [**Quadrature**](classQuadrature.md)&lt; IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory\_space &gt; quadrature, DField&lt; IdxRangeQuad, typename ExecSpace::memory\_space &gt; function) <br>_Compute L2 norm of a function with a given quadrature._  |
-|  KOKKOS\_FUNCTION double | [**norm\_inf**](#function-norm_inf) (ddc::Coordinate&lt; Tags... &gt; coord) <br>_Compute the infinity norm._  |
+|  KOKKOS\_FUNCTION double | [**norm\_inf**](#function-norm_inf) (Coord&lt; Tags... &gt; coord) <br>_Compute the infinity norm._  |
 |  KOKKOS\_FUNCTION double | [**norm\_inf**](#function-norm_inf) ([**DVector**](classTensor.md)&lt; Tags... &gt; vec) <br>_Compute the infinity norm of a vector on an orthonormal coordinate system._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**norm\_inf**](#function-norm_inf) (double const coord) <br>_Compute the infinity norm._  |
 |  double | [**norm\_inf**](#function-norm_inf) (ExecSpace exec\_space, ConstField&lt; ElementType, IdxRange, typename ExecSpace::memory\_space &gt; function) <br>_Compute the infinity norm for a Field._  |
@@ -356,7 +356,7 @@ _Compute the infinity norm._
 ```C++
 template<class... Tags>
 KOKKOS_FUNCTION double norm_inf (
-    ddc::Coordinate< Tags... > coord
+    Coord< Tags... > coord
 ) 
 ```
 

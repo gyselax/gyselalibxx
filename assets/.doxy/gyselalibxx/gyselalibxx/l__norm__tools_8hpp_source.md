@@ -18,7 +18,7 @@
 #include "vector_index_tools.hpp"
 
 template <class... Tags>
-KOKKOS_FUNCTION double norm_inf(ddc::Coordinate<Tags...> coord)
+KOKKOS_FUNCTION double norm_inf(Coord<Tags...> coord)
 {
     double result = 0.0;
     ((result = Kokkos::max(result, Kokkos::fabs(coord.template get<Tags>()))), ...);

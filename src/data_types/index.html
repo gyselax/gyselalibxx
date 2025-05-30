@@ -550,7 +550,7 @@
                 <div><h1 id="data-storage-types">Data Storage Types</h1>
 <h2 id="vectorfield">VectorField</h2>
 <p>The classes VectorFieldMem and VectorField provide a way to represent a vector field. The two classes are required as VectorFieldMem contains FieldMem objects while VectorField contains Field objects.</p>
-<p>A VectorFieldMem or VectorField contains an array of FieldMem or Field objects. When the VectorField is indexed using the <code>operator()</code> a Vector type is returned. This is similar to a <code>ddc::Coordinate</code> and can be accessed in the same way.
+<p>A VectorFieldMem or VectorField contains an array of FieldMem or Field objects. When the VectorField is indexed using the <code>operator()</code> a Vector type is returned. This is similar to a <code>Coord</code> and can be accessed in the same way.
 Internally the information for the vector fields along each dimension is stored in separate memory chunks. As a result it is not possible to obtain a reference to an element of a VectorField. Instead you must access the internal chunk using <code>ddcHelper::get</code>.</p>
 <p>In order to facilitate the usage of VectorField the utility functions <code>get_idx_range</code>, <code>ddcHelper::deepcopy</code>, and <code>ddcHelper::get</code> are provided. However for the best access it is advised to retrieve the Field and use this directly.</p>
 <h2 id="derivfield">DerivField</h2>

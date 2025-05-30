@@ -572,7 +572,7 @@ inline IdxRange&lt;Grid1D&gt; init_spline_dependent_idx_range(
         std::string const&amp; mesh_identifier)
 {
     using Dim = typename Grid1D::continuous_dimension_type;
-    using Coord1D = ddc::Coordinate&lt;Dim&gt;;
+    using Coord1D = Coord&lt;Dim&gt;;
 
     std::vector&lt;Coord1D&gt; breakpoints;
 

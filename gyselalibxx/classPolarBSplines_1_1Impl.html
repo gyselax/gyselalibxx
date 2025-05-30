@@ -626,19 +626,19 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION <a href="classPolarBSplines.html#typedef-tensor_product_index_type"><strong>tensor_product_index_type</strong></a></td>
-<td style="text-align: left;"><a href="#function-eval_basis"><strong>eval_basis</strong></a> (DSpan1D singular_values, DSpan2D values, ddc::Coordinate&lt; <a href="classPolarBSplines.html#typedef-dimr"><strong>DimR</strong></a>, <a href="classPolarBSplines.html#typedef-dimtheta"><strong>DimTheta</strong></a> &gt; p) const<br><em>Evaluate the polar basis splines at the coordinate p.</em></td>
+<td style="text-align: left;"><a href="#function-eval_basis"><strong>eval_basis</strong></a> (DSpan1D singular_values, DSpan2D values, Coord&lt; <a href="classPolarBSplines.html#typedef-dimr"><strong>DimR</strong></a>, <a href="classPolarBSplines.html#typedef-dimtheta"><strong>DimTheta</strong></a> &gt; p) const<br><em>Evaluate the polar basis splines at the coordinate p.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION <a href="classPolarBSplines.html#typedef-tensor_product_index_type"><strong>tensor_product_index_type</strong></a></td>
-<td style="text-align: left;"><a href="#function-eval_deriv_r"><strong>eval_deriv_r</strong></a> (DSpan1D singular_derivs, DSpan2D derivs, ddc::Coordinate&lt; <a href="classPolarBSplines.html#typedef-dimr"><strong>DimR</strong></a>, <a href="classPolarBSplines.html#typedef-dimtheta"><strong>DimTheta</strong></a> &gt; p) const<br><em>Evaluate the radial derivative of the polar basis splines at the coordinate p.</em></td>
+<td style="text-align: left;"><a href="#function-eval_deriv_r"><strong>eval_deriv_r</strong></a> (DSpan1D singular_derivs, DSpan2D derivs, Coord&lt; <a href="classPolarBSplines.html#typedef-dimr"><strong>DimR</strong></a>, <a href="classPolarBSplines.html#typedef-dimtheta"><strong>DimTheta</strong></a> &gt; p) const<br><em>Evaluate the radial derivative of the polar basis splines at the coordinate p.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION <a href="classPolarBSplines.html#typedef-tensor_product_index_type"><strong>tensor_product_index_type</strong></a></td>
-<td style="text-align: left;"><a href="#function-eval_deriv_r_and_theta"><strong>eval_deriv_r_and_theta</strong></a> (DSpan1D singular_derivs, DSpan2D derivs, ddc::Coordinate&lt; <a href="classPolarBSplines.html#typedef-dimr"><strong>DimR</strong></a>, <a href="classPolarBSplines.html#typedef-dimtheta"><strong>DimTheta</strong></a> &gt; p) const<br><em>Evaluate the second order derivative of the polar basis splines in the radial and poloidal directions, at the coordinate p.</em></td>
+<td style="text-align: left;"><a href="#function-eval_deriv_r_and_theta"><strong>eval_deriv_r_and_theta</strong></a> (DSpan1D singular_derivs, DSpan2D derivs, Coord&lt; <a href="classPolarBSplines.html#typedef-dimr"><strong>DimR</strong></a>, <a href="classPolarBSplines.html#typedef-dimtheta"><strong>DimTheta</strong></a> &gt; p) const<br><em>Evaluate the second order derivative of the polar basis splines in the radial and poloidal directions, at the coordinate p.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION <a href="classPolarBSplines.html#typedef-tensor_product_index_type"><strong>tensor_product_index_type</strong></a></td>
-<td style="text-align: left;"><a href="#function-eval_deriv_theta"><strong>eval_deriv_theta</strong></a> (DSpan1D singular_derivs, DSpan2D derivs, ddc::Coordinate&lt; <a href="classPolarBSplines.html#typedef-dimr"><strong>DimR</strong></a>, <a href="classPolarBSplines.html#typedef-dimtheta"><strong>DimTheta</strong></a> &gt; p) const<br><em>Evaluate the poloidal derivative of the polar basis splines at the coordinate p.</em></td>
+<td style="text-align: left;"><a href="#function-eval_deriv_theta"><strong>eval_deriv_theta</strong></a> (DSpan1D singular_derivs, DSpan2D derivs, Coord&lt; <a href="classPolarBSplines.html#typedef-dimr"><strong>DimR</strong></a>, <a href="classPolarBSplines.html#typedef-dimtheta"><strong>DimTheta</strong></a> &gt; p) const<br><em>Evaluate the poloidal derivative of the polar basis splines at the coordinate p.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classPolarBSplines_1_1Impl.html#typedef-discrete_domain_type"><strong>discrete_domain_type</strong></a></td>
@@ -756,7 +756,7 @@ inline explicit PolarBSplines::Impl::Impl (
 <pre><code class="language-C++">KOKKOS_FUNCTION tensor_product_index_type PolarBSplines::Impl::eval_basis (
     DSpan1D singular_values,
     DSpan2D values,
-    ddc::Coordinate&lt; DimR , DimTheta &gt; p
+    Coord&lt; DimR , DimTheta &gt; p
 ) const
 </code></pre>
 <p>Evaluate all the b-spline elements near the singular point which cannot be expressed as a tensor product of 1D B-splines, as well as the non-zero b-spline elements which can be expressed as a tensor product of 1D B-splines.</p>
@@ -775,7 +775,7 @@ inline explicit PolarBSplines::Impl::Impl (
 <pre><code class="language-C++">KOKKOS_FUNCTION tensor_product_index_type PolarBSplines::Impl::eval_deriv_r (
     DSpan1D singular_derivs,
     DSpan2D derivs,
-    ddc::Coordinate&lt; DimR , DimTheta &gt; p
+    Coord&lt; DimR , DimTheta &gt; p
 ) const
 </code></pre>
 <p>Evaluate the radial derivative of all the b-spline elements near the singular point which cannot be expressed as a tensor product of 1D B-splines, as well as the non-zero b-spline elements which can be expressed as a tensor product of 1D B-splines.</p>
@@ -794,7 +794,7 @@ inline explicit PolarBSplines::Impl::Impl (
 <pre><code class="language-C++">KOKKOS_FUNCTION tensor_product_index_type PolarBSplines::Impl::eval_deriv_r_and_theta (
     DSpan1D singular_derivs,
     DSpan2D derivs,
-    ddc::Coordinate&lt; DimR , DimTheta &gt; p
+    Coord&lt; DimR , DimTheta &gt; p
 ) const
 </code></pre>
 <p>Evaluate the 2nd order derivative of all the b-spline elements near the singular point which cannot be expressed as a tensor product of 1D B-splines, as well as the non-zero b-spline elements which can be expressed as a tensor product of 1D B-splines.</p>
@@ -813,7 +813,7 @@ inline explicit PolarBSplines::Impl::Impl (
 <pre><code class="language-C++">KOKKOS_FUNCTION tensor_product_index_type PolarBSplines::Impl::eval_deriv_theta (
     DSpan1D singular_derivs,
     DSpan2D derivs,
-    ddc::Coordinate&lt; DimR , DimTheta &gt; p
+    Coord&lt; DimR , DimTheta &gt; p
 ) const
 </code></pre>
 <p>Evaluate the poloidal derivative of all the b-spline elements near the singular point which cannot be expressed as a tensor product of 1D B-splines, as well as the non-zero b-spline elements which can be expressed as a tensor product of 1D B-splines.</p>

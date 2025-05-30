@@ -75,6 +75,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#style">Style</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#gpu-management">GPU management</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#operators">Operators</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#interfaces">Interfaces</a>
@@ -578,43 +580,47 @@
 <li>We don't use raw pointers</li>
 <li>We don't use plain C arrays</li>
 <li>We try not to use macros</li>
-<li>The <code>auto</code> keyword should be used for types as <code>auto&amp;&amp;</code> and only in one of the following cases:</li>
-<li>in iterations either in range based for or to refer to iterators</li>
+<li>We try to <code>static_assert</code> all assumed information that can be known at compile-time</li>
+<li>We use <code>std::runtime_error</code> on CPU and <code>Kokkos::abort</code> on GPU to enforce suppositions which are dependent on user input. These checks should appear in constructors</li>
+<li>We use <code>assert</code> on CPU and <code>KOKKOS_ASSERT</code> on GPU to enforce suppositions which are independent of user input.</li>
+<li>The <code>auto</code> keyword should be avoided where possible. It is permitted in one of the following cases:</li>
 <li>to store objects that can not be typed otherwise (e.g. lambdas)</li>
 <li>to store the result of an expression specifically specifying the type of the generated value</li>
 </ul>
 <h2 id="parameter-passing">Parameter passing</h2>
 <ul>
 <li>We take out/inout-parameters (those we modify) first</li>
-<li>If there is a single out/inout-parameter, we return it</li>
 <li>For in-parameters (those we use but don't modify)</li>
 <li>if it's a scalar native type (int, double, ...) we take it by copy</li>
-<li>if it's a const view type (<code>std::span&lt;const T&gt;</code>, <code>BlockView&lt;T&gt;</code>, ...) we take it by copy</li>
+<li>if it's a const view type (<code>ConstField&lt;...&gt;</code>, <code>DVectorConstField&lt;...&gt;</code>, ...) we take it by copy</li>
 <li>otherwise, we take a const-ref: <code>Type const&amp;</code></li>
-<li>For out/inout-parameters</li>
-<li>if it's a modifiable view type (<code>std::span&lt;T&gt;</code>, <code>BlockSpan&lt;T&gt;</code>, ...) we take it by copy</li>
+<li>For inout-parameters</li>
+<li>if it's a modifiable view type (<code>Field&lt;...&gt;</code>, <code>DVectorField&lt;...&gt;</code>, ...) we take it by copy</li>
 <li>otherwise, we take a ref: <code>Type&amp;</code></li>
 </ul>
 <h2 id="naming">Naming</h2>
 <ul>
-<li>we name everything using expressive English names (e.g. <code>temperature</code>) and don't use variable
-  names from the equations (e.g. <code>u</code>, <code>u_bar_star</code>)</li>
-<li>files, functions and variables use <code>snake_case</code></li>
-<li>types use <code>CamelCase</code></li>
-<li>macros use <code>ALL_CAPS</code></li>
-<li>non-static member variables names begin with an <code>m_</code> prefix</li>
-<li>static member variables names begin with an <code>s_</code> prefix</li>
-<li>we don't use single letter variables</li>
-<li>we don't rely on case to distinguish between variables</li>
-<li>there are two types of DDC objects representing a multidimensional array : <code>ddc::Chunk</code> (which possesses the data) and <code>ddc::ChunkSpan</code> (which does not own the data but can be captured by <code>KOKKOS_LAMBDA</code>). We suffix <code>Chunk</code> with <code>_alloc</code> if both variables are needed locally.</li>
-<li>if a variable is mirrored between host (CPU) and device (GPU) memories, the variable representing data on host is <code>_host</code> suffixed</li>
-<li>capturing classes members through <code>KOKKOS_LAMBDA</code> or <code>KOKKOS_CLASS_LAMBDA</code> may be complicated, we often need to copy-by-reference the member to a local variable, which must be <code>_proxy</code> suffixed</li>
+<li>Files, functions and variables use <code>snake_case</code>.</li>
+<li>Types use <code>CamelCase</code>.</li>
+<li>Macros use <code>ALL_CAPS</code>.</li>
+<li>Non-static member variables names begin with an <code>m_</code> prefix.</li>
+<li>Static member variables names begin with an <code>s_</code> prefix.</li>
+<li>We don't use single letter variables.</li>
+<li>We don't rely on case to distinguish between variables.</li>
+<li>There are two types of DDC objects representing a multidimensional array : <code>FieldMem</code> (which possesses the data) and <code>Field</code> (which does not own the data but can be captured by <code>KOKKOS_LAMBDA</code>). We suffix <code>FieldMem</code> objects with <code>_alloc</code> if both variables are needed locally.</li>
+<li>If a variable is mirrored between host (CPU) and device (GPU) memories, the variable representing data on host is <code>_host</code> suffixed.</li>
+<li>Capturing classes members through <code>KOKKOS_LAMBDA</code> or <code>KOKKOS_CLASS_LAMBDA</code> may be complicated, we often need to copy-by-reference the member to a local variable, which must be <code>_proxy</code> suffixed.</li>
+<li>Types representing continuous dimensions (<span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span>, <span class="arithmatex">\(r\)</span>, <span class="arithmatex">\(\theta\)</span>, etc) are named similarly to the mathematical dimension (<code>X</code>, <code>Y</code>, <code>R</code>, <code>Theta</code>, etc).</li>
+<li>Types representing a discretised grid along a continuous dimension are named <code>GridDim</code> where <code>Dim</code> is the continuous dimension.</li>
+<li>Types representing B-splines along a continuous dimension are named <code>BSplinesDim</code> where <code>Dim</code> is the continuous dimension.</li>
+<li>Grids on an unknown dimension are named <code>Grid1D</code>.</li>
+<li>Aliases for <code>Idx&lt;..&gt;</code>, <code>IdxStep&lt;..&gt;</code>, <code>IdxRange&lt;..&gt;</code> should begin with the name of the template (e.g. <code>IdxX</code>).</li>
 </ul>
 <h2 id="style">Style</h2>
 <ul>
-<li>We use the style specified by the <code>.clang-format</code> file using clang-format 10</li>
+<li>We use the style specified by the <code>.clang-format</code> file using clang-format 10.</li>
 <li>we do not use numerical values in the code except to initialise a named constexpr documenting
-  the semantic of the value</li>
+  the semantic of the value.</li>
 <li>In a class</li>
 <li>we put all member types first (public, then protected, then private),</li>
 <li>followed by static member variables (public, then protected, then private),</li>
@@ -628,9 +634,15 @@
 <li>then the more complex functions</li>
 </ul>
 </li>
-<li>We comment our code with Doxygen</li>
-<li>We use at @@keywords in Doxygen</li>
-<li>we use east-const: <code>int const</code> rather than <code>const int</code></li>
+<li>We comment our code with Doxygen.</li>
+<li>We use at @@keywords in Doxygen.</li>
+<li>we use east-const: <code>int const</code> rather than <code>const int</code>.</li>
+</ul>
+<h2 id="gpu-management">GPU management</h2>
+<ul>
+<li>GPU code is the default.</li>
+<li>When calling methods beginning with the prefix <code>parallel_</code> we always specify the execution space.</li>
+<li>When calling mirror functions, the host execution space is never passed as an argument.</li>
 </ul>
 <h2 id="operators">Operators</h2>
 <h3 id="interfaces">Interfaces</h3>

@@ -1326,15 +1326,15 @@
     <member refid="classPolarBSplines_1_1Impl_1aa4c6ff5c6a2e63283fc779ef1a6befd2" kind="function"><name>~Impl</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a954186a181dc16f537322080f4484a1f" kind="function"><name>operator=</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a44b135ad2f6adec16d22471819ed98c1" kind="function"><name>operator=</name></member>
-    <member refid="classPolarBSplines_1_1Impl_1a769bcf1a461b8a95ce433eade266abe0" kind="function"><name>eval_basis</name></member>
-    <member refid="classPolarBSplines_1_1Impl_1a26cb42c2179c32c3a896f6e04392bbd2" kind="function"><name>eval_deriv_r</name></member>
-    <member refid="classPolarBSplines_1_1Impl_1acf9b19d29e5ed2ffee1a9795fc7774ea" kind="function"><name>eval_deriv_theta</name></member>
-    <member refid="classPolarBSplines_1_1Impl_1ae600480dcb012c8817f6a72dcbb46407" kind="function"><name>eval_deriv_r_and_theta</name></member>
+    <member refid="classPolarBSplines_1_1Impl_1ae2e211339e4f422185855aae61cdfe21" kind="function"><name>eval_basis</name></member>
+    <member refid="classPolarBSplines_1_1Impl_1a317d92a0b68d1e3f140e3a3e7dd9c935" kind="function"><name>eval_deriv_r</name></member>
+    <member refid="classPolarBSplines_1_1Impl_1acf922f8d53f4283419d5c0b35417f298" kind="function"><name>eval_deriv_theta</name></member>
+    <member refid="classPolarBSplines_1_1Impl_1ad028692e16475906b674664272f43862" kind="function"><name>eval_deriv_r_and_theta</name></member>
     <member refid="classPolarBSplines_1_1Impl_1af11b5fa49f044552020019eb1b8f4457" kind="function"><name>integrals</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a1ca0df2d7f5defe89ecf42ef6bcfb9fa" kind="function"><name>nbasis</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a244d6ebb4a31d96e25c1844614979cc7" kind="function"><name>full_domain</name></member>
     <member refid="classPolarBSplines_1_1Impl_1af3133a4ea7b7cc4796da428de9bba352" kind="function"><name>tensor_bspline_idx_range</name></member>
-    <member refid="classPolarBSplines_1_1Impl_1a3a1161b84239146c5a75e70b8d39607b" kind="function"><name>eval</name></member>
+    <member refid="classPolarBSplines_1_1Impl_1a8c685688dc3d1dcce7f57a40a0dd519c" kind="function"><name>eval</name></member>
   </compound>
   <compound refid="classSpeciesInformation_1_1Impl" kind="class"><name>SpeciesInformation::Impl</name>
     <member refid="classSpeciesInformation_1_1Impl_1aa6c24a482e96e93bc60948619fe4a8da" kind="typedef"><name>discrete_element_type</name></member>
@@ -2267,17 +2267,17 @@
     <member refid="classPolarSplineEvaluator_1a286fe6663e3004aead728b7d8acb38a9" kind="function"><name>~PolarSplineEvaluator</name></member>
     <member refid="classPolarSplineEvaluator_1a6d675b7b73943862d1ffb2930f886213" kind="function"><name>operator=</name></member>
     <member refid="classPolarSplineEvaluator_1ad283c37ae44c6a72f43bf2b6e48d43a8" kind="function"><name>operator=</name></member>
-    <member refid="classPolarSplineEvaluator_1ae6eafb664ed50f902c2a07236d1c062d" kind="function"><name>operator()</name></member>
-    <member refid="classPolarSplineEvaluator_1ae4fffa5d618015f463908c3fd9d019f0" kind="function"><name>operator()</name></member>
-    <member refid="classPolarSplineEvaluator_1a356422a6f27926627564ed93467a70cc" kind="function"><name>deriv_dim_1</name></member>
-    <member refid="classPolarSplineEvaluator_1ab9a2c68c9daadb1253edbfc7e8361b8e" kind="function"><name>deriv_dim_2</name></member>
-    <member refid="classPolarSplineEvaluator_1a91d593b5d3e4428e9f21e5ad466ae681" kind="function"><name>deriv_1_and_2</name></member>
-    <member refid="classPolarSplineEvaluator_1a60df7dfcabe059e03db5f2fbb79e1427" kind="function"><name>deriv_dim_1</name></member>
-    <member refid="classPolarSplineEvaluator_1a9abd2555ecadb05d2b22481c348514f3" kind="function"><name>deriv_dim_2</name></member>
-    <member refid="classPolarSplineEvaluator_1a0101fa4d466cd4ea6d04eb6b83362445" kind="function"><name>deriv_dim_1_and_2</name></member>
+    <member refid="classPolarSplineEvaluator_1acc41de295e024a786987b9cbc6c43549" kind="function"><name>operator()</name></member>
+    <member refid="classPolarSplineEvaluator_1a38695f4712532c63801d396e34fd0381" kind="function"><name>operator()</name></member>
+    <member refid="classPolarSplineEvaluator_1a8df81e702756747c087129bb05dab262" kind="function"><name>deriv_dim_1</name></member>
+    <member refid="classPolarSplineEvaluator_1af8f846533577fb2fe2ed8a590ab4a067" kind="function"><name>deriv_dim_2</name></member>
+    <member refid="classPolarSplineEvaluator_1a0685dc7e2b51638f4012daf46feeaf58" kind="function"><name>deriv_1_and_2</name></member>
+    <member refid="classPolarSplineEvaluator_1ab4826adbf2f4c067db2b53928eaa90a8" kind="function"><name>deriv_dim_1</name></member>
+    <member refid="classPolarSplineEvaluator_1a52f06fda4736c14e058da6623d91d7b5" kind="function"><name>deriv_dim_2</name></member>
+    <member refid="classPolarSplineEvaluator_1a2a91b0b649ce5c6c8832d341b69944de" kind="function"><name>deriv_dim_1_and_2</name></member>
     <member refid="classPolarSplineEvaluator_1a69142a057d1608a206282a44d33bc080" kind="function"><name>integrate</name></member>
-    <member refid="classPolarSplineEvaluator_1a40ef1f6086c9ee5dc64f4978cfb66d09" kind="function"><name>eval</name></member>
-    <member refid="classPolarSplineEvaluator_1a7737a6b898a60de7624a8292dc01afcb" kind="function"><name>eval_no_bc</name></member>
+    <member refid="classPolarSplineEvaluator_1a1c207ea8a83068bf28e989e75f136fae" kind="function"><name>eval</name></member>
+    <member refid="classPolarSplineEvaluator_1ac80f9ef5c25a755b602ab91e2c589be0" kind="function"><name>eval_no_bc</name></member>
   </compound>
   <compound refid="classPolarSplineFEMPoissonLikeSolver" kind="class"><name>PolarSplineFEMPoissonLikeSolver</name>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1aea7575e5ec7f7e2a776c1677a79137d9" kind="typedef"><name>R</name></member>
@@ -3855,7 +3855,7 @@
   <compound refid="ipartial__derivative_8hpp" kind="file"><name>ipartial_derivative.hpp</name>
   </compound>
   <compound refid="l__norm__tools_8hpp" kind="file"><name>l_norm_tools.hpp</name>
-    <member refid="l__norm__tools_8hpp_1a939e3995d29bdb32c073e38494563009" kind="function"><name>norm_inf</name></member>
+    <member refid="l__norm__tools_8hpp_1a053b3b58add1e97a59c6998fadd051dc" kind="function"><name>norm_inf</name></member>
     <member refid="l__norm__tools_8hpp_1ae78caab94d9b010c79a18002ffc99331" kind="function"><name>norm_inf</name></member>
     <member refid="l__norm__tools_8hpp_1af586948949594fb53ccfd4010d0a0fd6" kind="function"><name>norm_inf</name></member>
     <member refid="l__norm__tools_8hpp_1a4c8219dfeea80b86bff16a853e188f8d" kind="function"><name>norm_inf</name></member>
