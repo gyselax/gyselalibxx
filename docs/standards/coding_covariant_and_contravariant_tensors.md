@@ -308,7 +308,7 @@ Elementwise the operation is carried out at a given coordinate (as the metric te
 
 ```cpp
 using PolarBasis = VectorIndexSet<R, Theta>;
-Coord<R, Theta> coord; // The coordinate where d phi was calculated
+Coord<R, Theta> coord; // The coordinate where d_phi was calculated
 DVector<R_cov, Theta_cov> d_phi; // The derivative with respect to phi
 CircularToCartesian<R, Theta, X, Y> coord_transform;
 DVector<R, Theta> grad_phi = to_vector_space<EtaBasis>(coord_transform, coord, d_phi);
