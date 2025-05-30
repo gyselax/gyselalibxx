@@ -74,7 +74,6 @@ public:
 
 private:
     using base_type::s_n_elements;
-    std::array<ElementType, s_n_elements> m_data_alloc;
     using base_type::m_data;
 
 public:
