@@ -373,7 +373,7 @@ ddcHelper::select<Y>(z) = ...;
 ddcHelper::select<Z>(z) = ...;
 ```
 
-As long as at least `-O1` optimistations are activated, the compiler will optimise away the multiplications by 0, effectively turning this into the standard form of a cross product:
+As long as at least `-O1` optimisations are activated, the compiler will optimise away the multiplications by 0, effectively turning this into the standard form of a cross product:
 
 ```cpp
 ddcHelper::select<X>(z) = 
