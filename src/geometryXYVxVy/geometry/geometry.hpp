@@ -9,9 +9,9 @@
 #include "ddc_helper.hpp"
 #include "mpilayout.hpp"
 #include "species_info.hpp"
-#include "vector_index_tools.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
+#include "vector_index_tools.hpp"
 
 
 /**
@@ -349,6 +349,10 @@ using ConstFieldY = Field<ElementType const, IdxRangeY>;
 template <class ElementType>
 using ConstFieldXY = Field<ElementType const, IdxRangeXY>;
 using DConstFieldXY = ConstFieldXY<double>;
+
+template <class ElementType>
+using VectorConstFieldXY = VectorConstField<ElementType, IdxRangeXY, VectorIndexSet<X, Y>>;
+using DVectorConstFieldXY = VectorConstFieldXY<double>;
 
 template <class ElementType>
 using ConstFieldVx = Field<ElementType const, IdxRangeVx>;

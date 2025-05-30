@@ -71,8 +71,7 @@ DFieldSpVxVyXY PredCorr::operator()(
         // predictor
         m_vlasov_solver(
                 get_field(allfdistribu_half_t),
-                get_const_field(ddcHelper::get<X>(electric_field)),
-                get_const_field(ddcHelper::get<Y>(electric_field)),
+                get_const_field(electric_field),
                 dt / 2);
 
         // computation of the electrostatic potential at time tn+1/2
@@ -85,8 +84,7 @@ DFieldSpVxVyXY PredCorr::operator()(
         // correction on a dt
         m_vlasov_solver(
                 get_field(allfdistribu_v2D_split),
-                get_const_field(ddcHelper::get<X>(electric_field)),
-                get_const_field(ddcHelper::get<Y>(electric_field)),
+                get_const_field(electric_field),
                 dt);
     }
 
