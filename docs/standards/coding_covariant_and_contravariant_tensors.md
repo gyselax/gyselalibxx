@@ -188,7 +188,7 @@ $$
 w^i = M^i_{\;j} \cdot v^j
 $$
 
-This is the contraction of a rank-2 tensor with a vector expressed on a contravariant basis (i.e., matrix-vector multiplication in index notation). In Gyselalib++, this is writen as:
+This is the contraction of a rank-2 tensor with a vector expressed on a contravariant basis (i.e., matrix-vector multiplication in index notation). In Gyselalib++, this is written as:
 
 ```cpp
 DVector<Eta1, Eta2> w = tensor_mul(index<'i','j'>(M), index<'j'>(v));
@@ -225,7 +225,7 @@ The system performs strict compile-time checks:
 
 - Rejecting operations like contracting two covariant indices, or producing mismatched output types.
 
-This not only enforces mathematical correctness but ensures that operations reflect the physical and geometrical structure of the problem being modeled.
+This not only enforces mathematical correctness but ensures that operations reflect the physical and geometrical structure of the problem being modelled.
 
 ### Example: Matrix–Matrix Multiplication
 
@@ -333,7 +333,7 @@ CircularToCartesian<R, Theta, Eta1, Eta2> coord_transform;
 DVector<Eta1, Eta2> grad_phi = to_vector_space<EtaBasis>(coord_transform, coord, d_phi);
 ```
 
-## Static Tensors and Compile-Time Optimization
+## Static Tensors and Compile-Time Optimisation
 
 Some tensors, like the identity tensor or the Levi-Civita symbol, are independent of runtime coordinates and can be fully defined at compile time. These are available through implementations in `static_tensors.hpp`.
 
