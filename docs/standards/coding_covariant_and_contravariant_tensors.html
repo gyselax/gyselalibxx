@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Getting Started - GyselalibX</title>
+    <title>Coding Covariant and Contravariant Tensors - GyselalibX</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Getting Started";
-        var mkdocs_page_input_path = "docs/first_steps/getting_started.md";
+        var mkdocs_page_name = "Coding Covariant and Contravariant Tensors";
+        var mkdocs_page_input_path = "docs/standards/coding_covariant_and_contravariant_tensors.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -41,30 +41,16 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">General</span></p>
-              <ul class="current">
+              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" >First Steps</a>
-    <ul class="current">
-                <li class="toctree-l2 current"><a class="reference internal current" href="#">Getting Started</a>
-    <ul class="current">
-    <li class="toctree-l3"><a class="reference internal" href="#understanding-functional-programming-in-gyselalib">Understanding Functional Programming in Gyselalib++</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#key-difference-functional-vs-object-oriented-programming-oop">Key Difference: Functional vs. Object-Oriented Programming (OOP)</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#operators-and-data-structures">Operators and Data Structures</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#navigating-the-gyselalib-codebase">Navigating the Gyselalib++ Codebase</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#recommended-steps-for-getting-started">Recommended Steps for Getting Started</a>
-    </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../first_steps/getting_started.html">Getting Started</a>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../../toolchains/index.html">Installation</a>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" href="DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
+                <li class="toctree-l2"><a class="reference internal" href="../first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
                 </li>
     </ul>
                   </li>
@@ -72,18 +58,80 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" >Tutorials</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="landau_damping_tutorial.html">1D-1V Landau Damping Simulation with Gyselalib++</a>
+                <li class="toctree-l2"><a class="reference internal" href="../first_steps/landau_damping_tutorial.html">1D-1V Landau Damping Simulation with Gyselalib++</a>
                 </li>
     </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Standards</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../standards/CODING_STANDARD.html">Coding Standard</a>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="CODING_STANDARD.html">Coding Standard</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../standards/mathematical_and_physical_conventions.html">Maths and Physics</a>
+                  <li class="toctree-l1"><a class="reference internal" href="mathematical_and_physical_conventions.html">Maths and Physics</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../standards/coding_covariant_and_contravariant_tensors.html">Coding Covariant and Contravariant Tensors</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Coding Covariant and Contravariant Tensors</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#defining-continuous-dimensions-and-variance">Defining Continuous Dimensions and Variance</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#naming-convention">Naming Convention</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cartesian-coordinates">Cartesian Coordinates</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#grouping-dimensions-into-a-bases">Grouping Dimensions into a Bases</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#example-defining-bases">Example: Defining Bases</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#compile-time-verification">Compile-Time Verification</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#defining-vectors-and-tensors">Defining Vectors and Tensors</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#vectors">Vectors</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#assigning-components">Assigning Components</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tensor-multiplication">Tensor Multiplication</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#example-matrixvector-multiplication">Example: Matrix–Vector Multiplication</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#einstein-summation-and-compile-time-matching">Einstein Summation and Compile-Time Matching</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-matrixmatrix-multiplication">Example: Matrix–Matrix Multiplication</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#einstein-summation-and-compile-time-matching_1">Einstein Summation and Compile-Time Matching</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#vector-fields">Vector Fields</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#syntax">Syntax</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#component-access-and-assignment">Component Access and Assignment</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#changing-vector-space">Changing Vector Space</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#example-converting-covariant-to-contravariant">Example: Converting Covariant to Contravariant</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-converting-between-bases">Example: Converting Between Bases</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#static-tensors-and-compile-time-optimisation">Static Tensors and Compile-Time Optimisation</a>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Gyselalib++</span></p>
@@ -542,11 +590,10 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">General</li>
-          <li class="breadcrumb-item">First Steps</li>
-      <li class="breadcrumb-item active">Getting Started</li>
+          <li class="breadcrumb-item">Standards</li>
+      <li class="breadcrumb-item active">Coding Covariant and Contravariant Tensors</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/docs/first_steps/getting_started.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/docs/standards/coding_covariant_and_contravariant_tensors.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -554,83 +601,314 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="getting-started-with-gyselalib">Getting Started with Gyselalib++</h1>
-<p>Welcome to the Gyselalib++ project! This guide is designed to help new developers understand how to get started with the project. Please bear in mind that developers unfamiliar with C++ will not find the answers to all their questions in the documentation. While we aim to provide documentation where relevant, this is not a replacement for foundational C++ knowledge; instead, it focuses on the specific challenges and paradigms relevant to Gyselalib++. If you encounter unfamiliar keywords or concepts in the code, we recommend looking them up online as a first step. This will help you build a deeper understanding and use your time more effectively before seeking further assistance.</p>
-<hr>
-<h2 id="understanding-functional-programming-in-gyselalib">Understanding Functional Programming in Gyselalib++</h2>
-<p>There are multiple coding paradigms possible when writing code in C++. Two of the most common are object-oriented programming and functional programming. You may be familiar with object-oriented programming however Gyselalib++ uses functional programming.</p>
-<h3 id="key-difference-functional-vs-object-oriented-programming-oop">Key Difference: Functional vs. Object-Oriented Programming (OOP)</h3>
-<p><strong>Object-Oriented Programming (OOP)</strong> is built around the concept of objects that encapsulate data and behaviour. Developers used to OOP often think in terms of classes, inheritance, and polymorphism. While these are powerful concepts, they are not central to how Gyselalib++ is structured. This is notably because inheritance, and polymorphism are often incompatible with GPU programming.</p>
-<p><strong>Functional Programming (FP)</strong> aims to make code more readable by making it more obvious where data is modified. This is done by separating data storage from operators. This way, data can never be modified inside its class without passing through an operator. In our code the functional programming paradigm was chosen as it allows us to write the code in a way which more closely resembles the equations.</p>
-<h3 id="operators-and-data-structures">Operators and Data Structures</h3>
-<p>When using functional programming classes fit into one of two groups:</p>
+                <div><h1 id="coding-covariant-contravariant-tensors">Coding Covariant &amp; Contravariant Tensors</h1>
+<h2 id="introduction">Introduction</h2>
+<p>This page explains how core mathematical concepts such as covariant and contravariant vectors and tensors are expressed in Gyselalib++.
+It focuses on how these concepts are implemented using C++ templates, static typing, and compile-time structures.
+We assume that you are already familiar with the mathematical and physical theory behind these ideas.
+If not, please read the <a href="mathematical_and_physical_conventions.html">Mathematical and Physical Conventions documentation</a> first.</p>
+<p>In tensor calculus, the distinction between covariant (lower index) and contravariant (upper index) components plays a critical role in how tensors transform under coordinate changes. In Gyselalib++, that distinction is encoded directly in the type system. This enables:</p>
 <ul>
-<li><strong>Data Structures</strong>:</li>
-<li>Serve as containers for data, often passed into operators for processing.</li>
 <li>
-<p>Avoid embedding behaviour directly into data structures; instead, let operators handle transformations.</p>
+<p>Static verification of tensor operations (e.g., contraction only occurs between dual index types),</p>
 </li>
 <li>
-<p><strong>Operators</strong>:</p>
-</li>
-<li>Should implement an <code>operator()</code> method, allowing them to be used as callable objects.</li>
-<li>Their internal variables should remain constant to align with functional programming principles.</li>
-<li>Break problems into small, composable functions. Avoid the temptation to design large, monolithic classes.</li>
-<li>Can be thought of as a function. Classes are used instead so the functions called by this function can be decided at compile time.</li>
-</ul>
-<p>By separating operators (behaviour) from data structures (data), you ensure clarity, reusability, and better adherence to the functional programming style.</p>
-<p>For example consider the case of a semi-Lagrangian advection. The operator is similar to a function which modifies a data structure containing the distribution function. By using a class the method used to interpolate the function (e.g. spline interpolation or Lagrange interpolation) can be specified without duplicating code.</p>
-<hr>
-<h2 id="navigating-the-gyselalib-codebase">Navigating the Gyselalib++ Codebase</h2>
-<p>The Gyselalib++ codebase is organised into several folders. The main folders of interest are:</p>
-<ul>
-<li><strong>src/</strong> : This folder contains the source code for the library. It contains folders grouping the code by subject. The <code>src/</code> folder and each sub-folder contains a <code>README.md</code> detailing its contents. It is simple to navigate within this documentation : <a href="../../src/index.html">src</a></li>
-<li>
-<p><strong>geometry...</strong> : The <code>src/</code> folder contains sub-folders whose names begin with <code>geometry</code>. These sub-folders contain code which is specific to a given geometry. Each geometry is defined by the dimensions on which its equations are defined. In these folders you will also find sub-folders grouping the code by subject. Each <code>geometry...</code> folder will contain a folder called <code>geometry</code> containing a file <code>geometry.hpp</code>. This file contains type aliases which are useful for this geometry. This includes the definition of the classes representing the dimensions. If a <code>geometry.hpp</code> is included in a file then this file can only be used for that specific geometry. Therefore files in a <code>geometry...</code> folder cannot be used for other geometries even if the two appear to be compatible at first glance (e.g. files from the <code>geometryRTheta</code> folder cannot be used for the <code>geometryAxi</code> simulations, files from the <code>geometryXVx</code> folder cannot be used for the <code>geometryXYVxVy</code> simulations).</p>
+<p>Efficient tensor algebra with no runtime penalty,</p>
 </li>
 <li>
-<p><strong>tests/</strong> : This folder contains the unit tests for the library. The folder structure is similar to that found in the <code>src/</code> folder.</p>
-</li>
-<li>
-<p><strong>simulations/</strong> : This folder contains examples of simulations. In order to use the Gyselalib++ library for research applications we usually create a new repository which contains this repository as a sub-module, however there are still some simulations hosted in this repository. This is notably the case for simulations which have known properties that can be used as end-to-end tests. For example the Landau damping case.</p>
+<p>Self-documenting code that closely reflects mathematical intent.</p>
 </li>
 </ul>
-<hr>
-<h2 id="recommended-steps-for-getting-started">Recommended Steps for Getting Started</h2>
-<ol>
+<p>The variance of an object is enforced via its type (as explained below) but it can also be deduced from the naming convention. If nothing is specified, contravariant behaviour can be assumed.
+Covariant types are specified with a suffix <code>_cov</code>.</p>
+<h2 id="defining-continuous-dimensions-and-variance">Defining Continuous Dimensions and Variance</h2>
+<p>In tensor analysis, a vector space is defined over a basis. For example, a vector expressed in a basis <span class="arithmatex">\(\{\boldsymbol{\eta}_1, \boldsymbol{\eta}_2\}\)</span> would be written as:</p>
+<div class="arithmatex">\[
+v = v^1 \boldsymbol{\eta}_1 + v^2 \boldsymbol{\eta}_2
+\]</div>
+<p>In this context, <span class="arithmatex">\(\boldsymbol{\eta}_1\)</span> and <span class="arithmatex">\(\boldsymbol{\eta}_2\)</span> are contravariant basis elements of a continuous vector space. The associated covariant basis elements are denoted <span class="arithmatex">\(\{\boldsymbol{\eta}^1, \boldsymbol{\eta}^2\}\)</span>.
+These concepts have a direct equivalent in the code.</p>
+<p>Every basis element that may appear in a tensor expression must define the following three pieces of compile-time information:</p>
+<ul>
+<li>Whether the element can be used as a <strong>contravariant</strong> basis element</li>
+<li>Whether the element can be used as a <strong>covariant</strong> basis element</li>
+<li>What the associated basis element is in the <strong>dual space</strong> (the contravariant element associated with the covariant element and vice-versa).</li>
+</ul>
+<p>This leads to the following code:</p>
+<pre><code class="language-cpp">struct Eta1_cov;
+struct Eta1 {
+    static constexpr bool IS_CONTRAVARIANT = true;
+    static constexpr bool IS_COVARIANT = false;
+    using Dual = Eta1_cov;
+};
+
+struct Eta1_cov {
+    static constexpr bool IS_CONTRAVARIANT = false;
+    static constexpr bool IS_COVARIANT = true;
+    using Dual = Eta1;
+};
+</code></pre>
+<p>Here:</p>
+<ul>
+<li><code>Eta1</code> represents the <strong>contravariant</strong> basis element <span class="arithmatex">\(\boldsymbol{\eta}_1\)</span>,</li>
+<li><code>Eta1_cov</code> represents the <strong>covariant dual</strong> basis element <span class="arithmatex">\(\boldsymbol{\eta}^1\)</span>,</li>
+<li>Each type declares its <strong>dual</strong>, linking the <strong>contravariant</strong> and <strong>covariant</strong> basis elements.</li>
+</ul>
+<h3 id="naming-convention">Naming Convention</h3>
+<p>By convention:</p>
+<ul>
+<li>Contravariant dimensions are named <code>Eta1</code>, <code>Eta2</code>, <code>X</code>, <code>R</code>, etc.</li>
+<li>Covariant dimensions use the <code>_cov</code> suffix, such as <code>Eta1_cov</code>, <code>Eta2_cov</code>, <code>X_cov</code>, <code>R_cov</code>, etc.</li>
+</ul>
+<h3 id="cartesian-coordinates">Cartesian Coordinates</h3>
+<p>In Cartesian coordinate systems, basis elements <span class="arithmatex">\(\{\boldsymbol{e}_i\}\)</span> are <strong>self-dual</strong>. In other words, they can be used as both contravariant and covariant bases. In such cases, it is valid to write:
+$$
+v = v^1e_1 + v^2e_2 = v_1e_1 + v_2e_2
+$$</p>
+<p>The corresponding code Cartesian basis elements is therefore simpler:</p>
+<pre><code class="language-cpp">struct X {
+    static constexpr bool IS_CONTRAVARIANT = true;
+    static constexpr bool IS_COVARIANT = true;
+    using Dual = X;
+};
+</code></pre>
+<p>This reflects the fact that <span class="arithmatex">\(\boldsymbol{e}_1 = \boldsymbol{e}^1\)</span>, and no separate type is needed for the dual.</p>
+<h2 id="grouping-dimensions-into-a-bases">Grouping Dimensions into a Bases</h2>
+<p>Once you have defined your continuous dimensions (e.g., <code>Eta1</code>, <code>Eta2</code>, <code>X</code>, <code>R</code>, etc.), you must group them into a set of basis elements to describe the basis on which a vector is defined.
+This is done using the <code>VectorIndexSet</code> construct.</p>
+<p>A <code>VectorIndexSet</code> represents an <strong>ordered list of basis directions</strong>. It is used as a template parameter to vector and tensor types and describes:</p>
+<ul>
+<li>Which basis elements are involved (e.g., <code>Eta1</code>, <code>Eta2</code>),</li>
+<li>In what order.</li>
+</ul>
+<h3 id="example-defining-bases">Example: Defining Bases</h3>
+<pre><code class="language-cpp">using EtaBasis = VectorIndexSet&lt;Eta1, Eta2&gt;;         // Contravariant basis
+using EtaBasis_cov = VectorIndexSet&lt;Eta1_cov, Eta2_cov&gt;; // Covariant basis
+</code></pre>
+<p>This tells the library:</p>
+<ul>
+<li><code>EtaBasis</code> defines a 2D contravariant space with directions <code>Eta1</code> and <code>Eta2</code>,</li>
+<li><code>EtaBasis_cov</code> defines the associated covariant dual space.</li>
+</ul>
+<p>You will use these sets as the type parameters for <code>Tensor</code> later.</p>
+<h3 id="compile-time-verification">Compile-Time Verification</h3>
+<p>Several compile-time tools are available to help ensure correctness and introspection of basis sets:</p>
+<pre><code class="language-cpp">static_assert(is_contravariant_vector_index_set_v&lt;UnknownBasis&gt;); // Ensures all elements are contravariant
+static_assert(is_covariant_vector_index_set_v&lt;UnknownBasis&gt;);     // Ensures all elements are covariant
+using UnknownBasisDual = vector_index_set_dual_t&lt;UnknownBasis&gt;);  // Computes the dual basis
+</code></pre>
+<p>Such verifications are used throughout the codebase. They ensure that tensor operations like contraction and multiplication are only performed between compatible spaces—that is, between elements with matching dual variances.</p>
+<h2 id="defining-vectors-and-tensors">Defining Vectors and Tensors</h2>
+<p>With your basis defined via <code>VectorIndexSet</code>, you can now create actual vector and tensor objects. In Gyselalib++, these are represented by <code>Tensor</code>. A tensor is a multidimensional array of components defined over a tensor product of basis elements.
+For example, consider a 2D tensor <code>M</code> written as:
+$$
+M = m^i_{\;j} \boldsymbol{\eta}_i \otimes boldsymbol{b}^j
+$$</p>
+<p>This object is defined over the tensor product of the contravariant basis <span class="arithmatex">\(\{\boldsymbol{\eta}_i\}\)</span> and the covariant basis <span class="arithmatex">\(boldsymbol{b}^j\)</span>.
+Supposing the tensor components are of type <code>double</code>, this can be declared in Gyselalib++ as:</p>
+<pre><code class="language-cpp">Tensor&lt;double, EtaBasis, BBasis_cov&gt; M;
+</code></pre>
+<p>Since most tensors use <code>double</code> as their value type, the shorthand template DTensor is provided:</p>
+<pre><code class="language-cpp">DTensor&lt;EtaBasis, BBasis_cov&gt; M;
+</code></pre>
+<h3 id="vectors">Vectors</h3>
+<p>A vector is simply a rank-1 tensor. The same logic applies, and several equivalent declarations are supported for convenience.
+For a vector expressed on the contravariant basis <span class="arithmatex">\(\{\boldsymbol{\eta}_1, \boldsymbol{\eta}_2\}\)</span>, any of the following are valid:</p>
+<pre><code class="language-cpp">Tensor&lt;double, EtaBasis&gt; v;
+DTensor&lt;EtaBasis&gt; v;
+Vector&lt;double, Eta1, Eta2&gt; v;
+DVector&lt;Eta1, Eta2&gt; v;
+</code></pre>
+<p>These are all equivalent and represent a 1D contravariant vector.</p>
+<h3 id="assigning-components">Assigning Components</h3>
+<p>Component-wise assignment uses ddcHelper::select to target specific directions:</p>
+<pre><code class="language-cpp">ddcHelper::select&lt;Eta1&gt;(v) = 2.0;
+ddcHelper::select&lt;Eta2&gt;(v) = 3.0;
+
+ddcHelper::select&lt;Eta1, B1_cov&gt;(M) = 1.0;
+ddcHelper::select&lt;Eta1, B2_cov&gt;(M) = 0.0;
+ddcHelper::select&lt;Eta2, B1_cov&gt;(M) = 0.0;
+ddcHelper::select&lt;Eta2, B2_cov&gt;(M) = 1.0;
+</code></pre>
+<p>This system ensures type safety: only combinations of indices consistent with the tensor’s declared basis are allowed, enabling early compile-time error detection.</p>
+<h2 id="tensor-multiplication">Tensor Multiplication</h2>
+<p>One of the most powerful features of Gyselalib++ is its support for tensor operations with variance-aware contraction, using Einstein notation at compile time.
+Tensor contraction, such as a matrix-vector or matrix-matrix multiplication, is written using the <code>tensor_mul</code> function and <code>index</code> labels, ensuring:</p>
+<ul>
 <li>
-<p><strong>Familiarise yourself with DDC:</strong></p>
+<p><strong>Variance correctness</strong>: contraction only compiles when applied between compatible covariant and contravariant indices.</p>
 </li>
 <li>
-<p>Gyselalib++ relies heavily on <a href="https://ddc.mdls.fr/">DDC (Discrete Domain Decomposition Library)</a> for data management. Understanding its usage is key to contributing effectively.</p>
+<p><strong>Readability</strong>: expressions resemble their mathematical form.</p>
 </li>
 <li>
-<p>See our detailed guide on DDC integration: <a href="DDC_in_gyselalibxx.html">Using DDC in Gyselalib++</a>.</p>
+<p><strong>Performance</strong>: evaluation is resolved statically with no runtime overhead.</p>
+</li>
+</ul>
+<h3 id="example-matrixvector-multiplication">Example: Matrix–Vector Multiplication</h3>
+<p>Consider the tensor product:</p>
+<div class="arithmatex">\[
+w^i = M^i_{\;j} \cdot v^j
+\]</div>
+<p>This is the contraction of a rank-2 tensor with a vector expressed on a contravariant basis (i.e., matrix-vector multiplication in index notation). In Gyselalib++, this is written as:</p>
+<pre><code class="language-cpp">DVector&lt;Eta1, Eta2&gt; w = tensor_mul(index&lt;'i','j'&gt;(M), index&lt;'j'&gt;(v));
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li><code>M</code> is a <code>DTensor&lt;EtaBasis, EtaBasis_cov&gt;</code>, we are interested in the elements <span class="arithmatex">\(M^i_{\;j}\)</span></li>
+<li>'i' in the first dimension, i.e. the dimension associated with the contravariant basis <span class="arithmatex">\(\{\boldsymbol{\eta}_i\}\)</span></li>
+<li>'j' in the second dimension, i.e. the dimension associated with the covariant basis <span class="arithmatex">\(\{\boldsymbol{\eta}^i\}\)</span></li>
+<li><code>v</code> is a <code>DVector&lt;EtaBasis&gt;</code>, we are interested in the elements <span class="arithmatex">\(v^j\)</span></li>
+<li>'j' in the first (only) dimension, i.e. the dimension associated with the contravariant basis <span class="arithmatex">\(\{\boldsymbol{\eta}_i\}\)</span></li>
+<li>The result is a contravariant vector (<code>DVector&lt;Eta1, Eta2&gt;</code>) thanks to the Einstein summation we know that we are interested in the elements <span class="arithmatex">\(w^i\)</span>.</li>
+</ul>
+<p>The indices used in <code>index&lt;'i','j'&gt;</code> are <strong>compile-time labels</strong> that identify how dimensions are mapped and contracted.</p>
+<h4 id="einstein-summation-and-compile-time-matching">Einstein Summation and Compile-Time Matching</h4>
+<p>This syntax uses Einstein summation convention, which means:</p>
+<ul>
+<li>
+<p>Any repeated index (like 'j' here) implies a summation over that index.</p>
 </li>
 <li>
-<p><strong>Build the project:</strong></p>
+<p>All unrepeated (free) indices appear in the result — here, 'i'.</p>
+</li>
+</ul>
+<p>In this case:</p>
+<ul>
+<li>
+<p>The 'j' index appears once as covariant index (in M) and once as contravariant index (in v), forming a valid contraction pair.</p>
 </li>
 <li>
-<p>Follow the build instructions in the repository's README.</p>
+<p>The resulting tensor w has the free index 'i', matching the contravariant structure of the output vector.</p>
+</li>
+</ul>
+<p>The system performs strict compile-time checks:</p>
+<ul>
+<li>
+<p>Ensuring contraction only occurs between dual variance pairs (e.g., contravariant ↔ covariant),</p>
 </li>
 <li>
-<p>More detailed instructions especially instructions for specific systems like the CEA's persee can be found in the toolchain documentation: <a href="../../toolchains/index.html">Pre-made build settings</a>.</p>
+<p>Rejecting operations like contracting two covariant indices, or producing mismatched output types.</p>
+</li>
+</ul>
+<p>This not only enforces mathematical correctness but ensures that operations reflect the physical and geometrical structure of the problem being modelled.</p>
+<h3 id="example-matrixmatrix-multiplication">Example: Matrix–Matrix Multiplication</h3>
+<p>Now consider multiplying two tensors:</p>
+<div class="arithmatex">\[
+P_i^{\;k} = M_{ij} \cdot N^{jk}
+\]</div>
+<p>This represents a standard matrix–matrix multiplication via contraction over index <span class="arithmatex">\(j\)</span>.</p>
+<p>In code:</p>
+<pre><code class="language-cpp">DTensor&lt;EtaBasis_cov, EtaBasis_cov&gt; M;
+DTensor&lt;EtaBasis, EtaBasis&gt; N;
+DTensor&lt;EtaBasis_cov, EtaBasis&gt; P = tensor_mul(index&lt;'i','j'&gt;(M), index&lt;'j','k'&gt;(N));
+</code></pre>
+<h4 id="einstein-summation-and-compile-time-matching_1">Einstein Summation and Compile-Time Matching</h4>
+<p>As in the Vector-Matrix case Einstein summation is used. To summarise:</p>
+<ul>
+<li><code>index&lt;'i','j'&gt;(M)</code> specifies how to label the dimensions of <code>M</code></li>
+<li><code>index&lt;'i','j'&gt;(N)</code> specifies how to label the dimensions of <code>N</code></li>
+<li>Since <code>'j'</code> appears once in each tensor, and each occurrence involves <strong>dual variance types</strong>, a <strong>valid contraction</strong> is performed</li>
+<li>The resulting tensor <code>P</code> has dimensions <code>'i'</code> and <code>'k'</code>, both preserved from the inputs as they are not repeated</li>
+<li>Variance is inferred based on the types of the basis elements used in each dimension, here <code>'i'</code> represents elements of the covariant basis on both sides of the equation, while <code>'k'</code> represents elements of the contravariant basis.</li>
+</ul>
+<h2 id="vector-fields">Vector Fields</h2>
+<p>In many physical applications (including plasma physics) fields are not just scalar quantities, but vector-valued functions defined over a spatial domain. For example, the electric field <span class="arithmatex">\(\mathbf{E}(\mathbf{x})\)</span> associates a vector to each point in space.</p>
+<p>In Gyselalib++, this is represented using <code>VectorField</code>, a field whose values are vectors, defined at each point on a discretised grid.</p>
+<p>You can think of a DVectorField as a Field where each element is a DVector.</p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:"> If you’re not yet familiar with scalar <code>Field&lt;T, Idx&gt;</code> types, refer to the documentation about <a href="../first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a> for an introduction.</p>
+<h3 id="syntax">Syntax</h3>
+<pre><code class="language-cpp">DVectorField&lt;
+    IdxRange&lt;GridR, GridTheta&gt;, // Discretised grid as for a scalar field
+    CartesianBasis              // The basis on which the vectors are defined
+&gt; E;
+</code></pre>
+<p>This corresponds, for example, to defining a contravariant electric field <span class="arithmatex">\(\boldsymbol{E}(\boldsymbol{r}) = E^1(r_i, \theta_j) \boldsymbol{e}_1 + E^2(r_i, \theta_j) \boldsymbol{\e}_2 = E_x(r_i, \theta_j) \hat{x} + E_y(r_i, \theta_j) \hat{y}\)</span> on a polar mesh.</p>
+<h3 id="component-access-and-assignment">Component Access and Assignment</h3>
+<p>The scalar fields in the vector fields can be extracted using <code>ddcHelper::select</code>. This allows components to be assigned as for scalar fields :</p>
+<pre><code class="language-cpp">IdxEta1 i;
+ddcHelper::select&lt;X&gt;(E)(i) = 4.2; // Assign to component E_x at index i without a temporary
+DField&lt;IdxRange&lt;GridR, GridTheta&gt;&gt; E_x = ddcHelper::select&lt;X&gt;(E);
+E_x(i) = -0.3;                    // Assign to component E_x at index i via a temporary field
+</code></pre>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:"> Currently it is only possible to get a constant vector from a vector field so it is not possible to directly assign a vector to an element of a vector field. The method <code>assign_vector_field_element</code> automatically carries out the elementwise assignment.</p>
+<h2 id="changing-vector-space">Changing Vector Space</h2>
+<p>In many simulations, you may need to <strong>transform a vector from one basis to another</strong> — for example:</p>
+<ul>
+<li>Switching between covariant and contravariant representations</li>
+<li>Applying a coordinate transformation (e.g., from Cartesian to curvilinear basis)</li>
+</ul>
+<p>This is done using the <code>to_vector_space</code> function and a coordinate transformation class.</p>
+<h3 id="example-converting-covariant-to-contravariant">Example: Converting Covariant to Contravariant</h3>
+<p>Suppose you have a <strong>covariant vector field</strong> (e.g., a gradient) and want to convert it into a <strong>contravariant representation</strong>. This calculation requires a metric tensor. The metric tensor is defined from a coordinate transformation to/from a Cartesian basis.</p>
+<p>Elementwise the operation is carried out at a given coordinate (as the metric tensor may depend on the coordinate:</p>
+<pre><code class="language-cpp">using PolarBasis = VectorIndexSet&lt;R, Theta&gt;;
+Coord&lt;R, Theta&gt; coord; // The coordinate where d_phi was calculated
+DVector&lt;R_cov, Theta_cov&gt; d_phi; // The derivative with respect to phi
+CircularToCartesian&lt;R, Theta, X, Y&gt; coord_transform;
+DVector&lt;R, Theta&gt; grad_phi = to_vector_space&lt;EtaBasis&gt;(coord_transform, coord, d_phi);
+</code></pre>
+<p>For a vector field the code is:</p>
+<pre><code class="language-cpp">DVectorField&lt;IdxRange&lt;GridR, GridTheta&gt;, VectorIndexSet&lt;R_cov, Theta_cov&gt;&gt; d_phi;
+DVectorField&lt;IdxRange&lt;GridR, GridTheta&gt;, VectorIndexSet&lt;R, Theta&gt;&gt; grad_phi; 
+copy_to_vector_space&lt;PolarBasis&gt;(Kokkos::DefaultExecutionSpace(), grad_phi, coord_transform, d_phi);
+</code></pre>
+<h3 id="example-converting-between-bases">Example: Converting Between Bases</h3>
+<p>Converting between bases works very similarly to converting between covariant and contravariant bases. This time though it is important that the coordinate transformation maps between the coordinates that we are switching from/to.</p>
+<pre><code class="language-cpp">using PolarBasis = VectorIndexSet&lt;R, Theta&gt;;
+using EtaBasis = VectorIndexSet&lt;Eta1, Eta2&gt;;
+Coord&lt;R, Theta&gt; coord; // The coordinate where the vector was calculated
+DVector&lt;R_cov, Theta_cov&gt; E;
+CircularToCartesian&lt;R, Theta, Eta1, Eta2&gt; coord_transform;
+DVector&lt;Eta1, Eta2&gt; grad_phi = to_vector_space&lt;EtaBasis&gt;(coord_transform, coord, d_phi);
+</code></pre>
+<h2 id="static-tensors-and-compile-time-optimisation">Static Tensors and Compile-Time Optimisation</h2>
+<p>Some tensors, like the identity tensor or the Levi-Civita symbol, are independent of runtime coordinates and can be fully defined at compile time. These are available through implementations in <code>static_tensors.hpp</code>.</p>
+<p>Using static tensors enables:</p>
+<ul>
+<li>
+<p>Efficient algebra with no runtime allocation or lookup</p>
 </li>
 <li>
-<p><strong>Identify a simple task:</strong></p>
+<p>Compile-time elimination of zero terms (e.g., sparse tensors, skew-symmetry)</p>
 </li>
 <li>
-<p>Start with a small, well-scoped issue to familiarise yourself with the contribution process and code review workflow.</p>
+<p>Clean expression of tensor identities and symmetries</p>
 </li>
-</ol>
-<hr>
-<p>We hope this guide sets you on the right path to contributing to Gyselalib++. Happy coding!</p></div>
+</ul>
+<p>For example, a cross product can be expressed with the Levi-Civita tensor as:</p>
+<pre><code class="language-cpp">CartesianLeviCivitaTensor&lt;double, X, Y, Z&gt; eps;
+DVector&lt;X, Y, Z&gt; v;
+DVector&lt;X, Y, Z&gt; w;
+DVector&lt;X, Y, Z&gt; z = tensor_mul(index&lt;'i','j','k'&gt;(eps), index&lt;'i'&gt;(v), index&lt;'j'&gt;(w));
+</code></pre>
+<p>Thanks to inlining and the Einstein summation notation, the compiler understands the last line to mean:</p>
+<pre><code class="language-cpp">ddcHelper::select&lt;X&gt;(z) = 
+          0*ddcHelper::select&lt;X&gt;(v)*ddcHelper::select&lt;X&gt;(w)  // i=X, j=X, k=X
+        + 0*ddcHelper::select&lt;X&gt;(v)*ddcHelper::select&lt;Y&gt;(w)  // i=X, j=X, k=Y
+        + 0*ddcHelper::select&lt;X&gt;(v)*ddcHelper::select&lt;Z&gt;(w)  // i=X, j=X, k=Z
+        + 0*ddcHelper::select&lt;Y&gt;(v)*ddcHelper::select&lt;X&gt;(w)  // i=X, j=Y, k=X
+        + 0*ddcHelper::select&lt;Y&gt;(v)*ddcHelper::select&lt;Y&gt;(w)  // i=X, j=Y, k=Y
+        + 1*ddcHelper::select&lt;Y&gt;(v)*ddcHelper::select&lt;Z&gt;(w)  // i=X, j=Y, k=Z
+        + 0*ddcHelper::select&lt;Z&gt;(v)*ddcHelper::select&lt;X&gt;(w)  // i=X, j=Z, k=X
+        - 1*ddcHelper::select&lt;Z&gt;(v)*ddcHelper::select&lt;Y&gt;(w)  // i=X, j=Z, k=Y
+        + 0*ddcHelper::select&lt;Z&gt;(v)*ddcHelper::select&lt;Z&gt;(w); // i=X, j=Z, k=Z
+ddcHelper::select&lt;Y&gt;(z) = ...;
+ddcHelper::select&lt;Z&gt;(z) = ...;
+</code></pre>
+<p>As long as at least <code>-O1</code> optimisations are activated, the compiler will optimise away the multiplications by 0, effectively turning this into the standard form of a cross product:</p>
+<pre><code class="language-cpp">ddcHelper::select&lt;X&gt;(z) = 
+          ddcHelper::select&lt;Y&gt;(v)*ddcHelper::select&lt;Z&gt;(w) // i=X, j=Y, k=Z
+        - ddcHelper::select&lt;Z&gt;(v)*ddcHelper::select&lt;Y&gt;(w); // i=X, j=Z, k=Y
+ddcHelper::select&lt;Y&gt;(z) = ...;
+ddcHelper::select&lt;Z&gt;(z) = ...;
+</code></pre></div>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../index.html" class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../toolchains/index.html" class="btn btn-neutral float-right" title="Installation">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="mathematical_and_physical_conventions.html" class="btn btn-neutral float-left" title="Maths and Physics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../src/index.html" class="btn btn-neutral float-right" title="Gyselalib++ contents">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -657,10 +935,10 @@
         </span>
     
     
-      <span><a href="../../index.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="mathematical_and_physical_conventions.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../toolchains/index.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../src/index.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

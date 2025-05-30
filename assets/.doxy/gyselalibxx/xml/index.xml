@@ -3226,30 +3226,6 @@
   </compound>
   <compound refid="collision__configuration_8hpp" kind="file"><name>collision_configuration.hpp</name>
   </compound>
-  <compound refid="geometryVparMu_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
-  </compound>
-  <compound refid="geometryVparMu_2initialisation_2iinitialisation_8hpp" kind="file"><name>iinitialisation.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2initialisation_2iinitialisation_8hpp" kind="file"><name>iinitialisation.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2initialisation_2iinitialisation_8hpp" kind="file"><name>iinitialisation.hpp</name>
-  </compound>
-  <compound refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8cpp" kind="file"><name>maxwellianequilibrium.cpp</name>
-  </compound>
-  <compound refid="geometryXVx_2initialisation_2maxwellianequilibrium_8cpp" kind="file"><name>maxwellianequilibrium.cpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8cpp" kind="file"><name>maxwellianequilibrium.cpp</name>
-  </compound>
-  <compound refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
-  </compound>
   <compound refid="noperturbinitialisation_8cpp" kind="file"><name>noperturbinitialisation.cpp</name>
   </compound>
   <compound refid="noperturbinitialisation_8hpp" kind="file"><name>noperturbinitialisation.hpp</name>
@@ -3711,6 +3687,30 @@
   <compound refid="initialisation__Kelvin__Helmholtz_8hpp" kind="file"><name>initialisation_Kelvin_Helmholtz.hpp</name>
   </compound>
   <compound refid="predcorr__RK2_8hpp" kind="file"><name>predcorr_RK2.hpp</name>
+  </compound>
+  <compound refid="geometryVparMu_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
+  </compound>
+  <compound refid="geometryVparMu_2initialisation_2iinitialisation_8hpp" kind="file"><name>iinitialisation.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2initialisation_2iinitialisation_8hpp" kind="file"><name>iinitialisation.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2initialisation_2iinitialisation_8hpp" kind="file"><name>iinitialisation.hpp</name>
+  </compound>
+  <compound refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8cpp" kind="file"><name>maxwellianequilibrium.cpp</name>
+  </compound>
+  <compound refid="geometryXVx_2initialisation_2maxwellianequilibrium_8cpp" kind="file"><name>maxwellianequilibrium.cpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8cpp" kind="file"><name>maxwellianequilibrium.cpp</name>
+  </compound>
+  <compound refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
   </compound>
   <compound refid="geometryXVx_2initialisation_2singlemodeperturbinitialisation_8cpp" kind="file"><name>singlemodeperturbinitialisation.cpp</name>
   </compound>
