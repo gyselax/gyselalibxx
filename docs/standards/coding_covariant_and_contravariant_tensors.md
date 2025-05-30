@@ -252,7 +252,7 @@ DTensor<EtaBasis_cov, EtaBasis> P = tensor_mul(index<'i','j'>(M), index<'j','k'>
 As in the Vector-Matrix case Einstein summation is used. To summarise:
 
 - `index<'i','j'>(M)` specifies how to label the dimensions of `M`
-- `index<'i','j'>(M)` specifies how to label the dimensions of `N`
+- `index<'i','j'>(N)` specifies how to label the dimensions of `N`
 - Since `'j'` appears once in each tensor, and each occurrence involves **dual variance types**, a **valid contraction** is performed
 - The resulting tensor `P` has dimensions `'i'` and `'k'`, both preserved from the inputs as they are not repeated
 - Variance is inferred based on the types of the basis elements used in each dimension, here `'i'` represents elements of the covariant basis on both sides of the equation, while `'k'` represents elements of the contravariant basis.
