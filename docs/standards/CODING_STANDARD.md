@@ -6,37 +6,41 @@
 - We don't use raw pointers
 - We don't use plain C arrays
 - We try not to use macros
-- The `auto` keyword should be used for types as `auto&&` and only in one of the following cases:
-  - in iterations either in range based for or to refer to iterators
+- We try to `static_assert` all assumed information that can be known at compile-time
+- We use `std::runtime_error` on CPU and `Kokkos::abort` on GPU to enforce suppositions which are dependent on user input. These checks should appear in constructors
+- We use `assert` on CPU and `KOKKOS_ASSERT` on GPU to enforce suppositions which are independent of user input.
+- The `auto` keyword should be avoided where possible. It is permitted in one of the following cases:
   - to store objects that can not be typed otherwise (e.g. lambdas)
   - to store the result of an expression specifically specifying the type of the generated value
 
 ## Parameter passing
 
 - We take out/inout-parameters (those we modify) first
-- If there is a single out/inout-parameter, we return it
 - For in-parameters (those we use but don't modify)
   - if it's a scalar native type (int, double, ...) we take it by copy
-  - if it's a const view type (`std::span<const T>`, `BlockView<T>`, ...) we take it by copy
+  - if it's a const-view type (`ConstField<...>`, `DVectorConstField<...>`, ...) we take it by copy
   - otherwise, we take a const-ref: `Type const&`
-- For out/inout-parameters
-  - if it's a modifiable view type (`std::span<T>`, `BlockSpan<T>`, ...) we take it by copy
+- For inout-parameters
+  - if it's a modifiable view type (`Field<...>`, `DVectorField<...>`, ...) we take it by copy
   - otherwise, we take a ref: `Type&`
 
 ## Naming
 
-- we name everything using expressive English names (e.g. `temperature`) and don't use variable
-  names from the equations (e.g. `u`, `u_bar_star`)
-- files, functions and variables use `snake_case`
-- types use `CamelCase`
-- macros use `ALL_CAPS`
-- non-static member variables names begin with an `m_` prefix
-- static member variables names begin with an `s_` prefix
-- we don't use single letter variables
-- we don't rely on case to distinguish between variables
-- there are two types of DDC objects representing a multidimensional array : `ddc::Chunk` (which possesses the data) and `ddc::ChunkSpan` (which does not own the data but can be captured by `KOKKOS_LAMBDA`). We suffix `Chunk` with `_alloc` if both variables are needed locally.
-- if a variable is mirrored between host (CPU) and device (GPU) memories, the variable representing data on host is `_host` suffixed
-- capturing classes members through `KOKKOS_LAMBDA` or `KOKKOS_CLASS_LAMBDA` may be complicated, we often need to copy-by-reference the member to a local variable, which must be `_proxy` suffixed
+- Files, functions and variables use `snake_case`
+- Types use `CamelCase`
+- Macros use `ALL_CAPS`
+- Non-static member variables names begin with an `m_` prefix
+- Static member variables names begin with an `s_` prefix
+- We don't use single letter variables
+- We don't rely on case to distinguish between variables
+- There are two types of DDC objects representing a multidimensional array : `FieldMem` (which possesses the data) and `Field` (which does not own the data but can be captured by `KOKKOS_LAMBDA`). We suffix `FieldMem` objects with `_alloc` if both variables are needed locally.
+- If a variable is mirrored between host (CPU) and device (GPU) memories, the variable representing data on host is `_host` suffixed
+- Capturing classes members through `KOKKOS_LAMBDA` or `KOKKOS_CLASS_LAMBDA` may be complicated, we often need to copy-by-reference the member to a local variable, which must be `_proxy` suffixed
+- Types representing continuous dimensions ($x$, $y$, $r$, $\theta$, etc) are named similarly to the mathematical dimension (`X`, `Y`, `R`, `Theta`, etc)
+- Types representing a discretised grid along a continuous dimension are named `GridDim` where `Dim` is the continuous dimension.
+- Types representing B-splines along a continuous dimension are named `BSplinesDim` where `Dim` is the continuous dimension.
+- Grids on an unknown dimension are named `Grid1D`
+- Aliases for `Idx<..>`, `IdxStep<..>`, `IdxRange<..>` should begin with the name of the template (e.g. `IdxX`)
 
 ## Style
 
