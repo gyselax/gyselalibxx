@@ -26,27 +26,27 @@
 
 ## Naming
 
-- Files, functions and variables use `snake_case`
-- Types use `CamelCase`
-- Macros use `ALL_CAPS`
-- Non-static member variables names begin with an `m_` prefix
-- Static member variables names begin with an `s_` prefix
-- We don't use single letter variables
-- We don't rely on case to distinguish between variables
+- Files, functions and variables use `snake_case`.
+- Types use `CamelCase`.
+- Macros use `ALL_CAPS`.
+- Non-static member variables names begin with an `m_` prefix.
+- Static member variables names begin with an `s_` prefix.
+- We don't use single letter variables.
+- We don't rely on case to distinguish between variables.
 - There are two types of DDC objects representing a multidimensional array : `FieldMem` (which possesses the data) and `Field` (which does not own the data but can be captured by `KOKKOS_LAMBDA`). We suffix `FieldMem` objects with `_alloc` if both variables are needed locally.
-- If a variable is mirrored between host (CPU) and device (GPU) memories, the variable representing data on host is `_host` suffixed
-- Capturing classes members through `KOKKOS_LAMBDA` or `KOKKOS_CLASS_LAMBDA` may be complicated, we often need to copy-by-reference the member to a local variable, which must be `_proxy` suffixed
-- Types representing continuous dimensions ($x$, $y$, $r$, $\theta$, etc) are named similarly to the mathematical dimension (`X`, `Y`, `R`, `Theta`, etc)
+- If a variable is mirrored between host (CPU) and device (GPU) memories, the variable representing data on host is `_host` suffixed.
+- Capturing classes members through `KOKKOS_LAMBDA` or `KOKKOS_CLASS_LAMBDA` may be complicated, we often need to copy-by-reference the member to a local variable, which must be `_proxy` suffixed.
+- Types representing continuous dimensions ($x$, $y$, $r$, $\theta$, etc) are named similarly to the mathematical dimension (`X`, `Y`, `R`, `Theta`, etc).
 - Types representing a discretised grid along a continuous dimension are named `GridDim` where `Dim` is the continuous dimension.
 - Types representing B-splines along a continuous dimension are named `BSplinesDim` where `Dim` is the continuous dimension.
-- Grids on an unknown dimension are named `Grid1D`
-- Aliases for `Idx<..>`, `IdxStep<..>`, `IdxRange<..>` should begin with the name of the template (e.g. `IdxX`)
+- Grids on an unknown dimension are named `Grid1D`.
+- Aliases for `Idx<..>`, `IdxStep<..>`, `IdxRange<..>` should begin with the name of the template (e.g. `IdxX`).
 
 ## Style
 
-- We use the style specified by the `.clang-format` file using clang-format 10
+- We use the style specified by the `.clang-format` file using clang-format 10.
 - we do not use numerical values in the code except to initialise a named constexpr documenting
-  the semantic of the value
+  the semantic of the value.
 - In a class
   - we put all member types first (public, then protected, then private),
   - followed by static member variables (public, then protected, then private),
@@ -58,9 +58,15 @@
     - then the various operators
     - then the accessors
     - then the more complex functions
-- We comment our code with Doxygen
-- We use at @@keywords in Doxygen
-- we use east-const: `int const` rather than `const int`
+- We comment our code with Doxygen.
+- We use at @@keywords in Doxygen.
+- we use east-const: `int const` rather than `const int`.
+
+## GPU management
+
+- GPU code is the default.
+- When calling methods beginning with the prefix `parallel_` we always specify the execution space.
+- When calling mirror functions, the host execution space is never passed as an argument.
 
 ## Operators
 
