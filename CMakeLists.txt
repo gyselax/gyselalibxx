@@ -3,7 +3,7 @@
 cmake_minimum_required(VERSION 3.20)
 
 # Read version from external file
-file(READ "${CMAKE_SOURCE_DIR}/src/version.txt" GYSELALIBXX_VERSION_STRING)
+file(READ "${CMAKE_CURRENT_SOURCE_DIR}/src/version.txt" GYSELALIBXX_VERSION_STRING)
 string(STRIP "${GYSELALIBXX_VERSION_STRING}" GYSELALIBXX_VERSION_STRING)
 
 # Split into components
@@ -18,10 +18,6 @@ project(gyselalibxx
     VERSION ${GYSELALIBXX_VERSION_MAJOR}.${GYSELALIBXX_VERSION_MINOR}.${GYSELALIBXX_VERSION_PATCH})
 
 set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
-
-# Our CMake module path
-
-list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
 
 # Configuration
 
