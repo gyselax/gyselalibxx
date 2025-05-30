@@ -24,13 +24,11 @@ public:
      * The operator which solves the equation using the method described by the class.
      *
      * @param[out] electrostatic_potential The electrostatic potential, the result of the poisson solver.
-     * @param[out] electric_field_x The x-component of the electric field, the gradient of the electrostatic potential.
-     * @param[out] electric_field_y The y-component of the electric field, the gradient of the electrostatic potential.
+     * @param[out] electric_field The electric field, the gradient of the electrostatic potential.
      * @param[in] allfdistribu The distribution function.
      */
     virtual void operator()(
             DFieldXY electrostatic_potential,
-            DFieldXY electric_field_x,
-            DFieldXY electric_field_y,
+            DVectorFieldXY electric_field,
             DConstFieldSpVxVyXY allfdistribu) const = 0;
 };

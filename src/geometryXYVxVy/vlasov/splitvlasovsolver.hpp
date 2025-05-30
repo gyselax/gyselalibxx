@@ -53,15 +53,13 @@ public:
      * @param[in, out] allfdistribu On input : the initial value of the distribution function.
      *                              On output : the value of the distribution function after solving 
      *                              the Vlasov equation.
-     * @param[in] electric_field_x The electric field in the x direction computed at all spatial positions. 
-     * @param[in] electric_field_y The electric field in the y direction computed at all spatial positions. 
+     * @param[in] electric_field The electric field computed at all spatial positions.
      * @param[in] dt The timestep. 
      *
      * @return The distribution function after solving the Vlasov equation.
      */
     DFieldSpVxVyXY operator()(
             DFieldSpVxVyXY allfdistribu,
-            DConstFieldXY electric_field_x,
-            DConstFieldXY electric_field_y,
+            DVectorConstFieldXY electric_field,
             double dt) const override;
 };

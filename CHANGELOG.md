@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Change the interface of `IVlasovSolver` and `IQNSolver` in `geometryXYVxVy` to store the electric field in a `VectorField`.
+
 ### Deprecated
 
 ## [v0.1.0] - 2025-05-28

@@ -18,8 +18,7 @@ MpiSplitVlasovSolver::MpiSplitVlasovSolver(
 
 DFieldSpVxVyXY MpiSplitVlasovSolver::operator()(
         DFieldSpVxVyXY const allfdistribu_v2Dsplit,
-        DConstFieldXY const electric_field_x,
-        DConstFieldXY const electric_field_y,
+        DVectorConstFieldXY const electric_field,
         double const dt) const
 {
     IdxRangeSpVxVyXY idxrange_v2Dsplit(m_transpose.get_local_idx_range<V2DSplit>());
@@ -33,10 +32,10 @@ DFieldSpVxVyXY MpiSplitVlasovSolver::operator()(
     DFieldMemXY local_electric_field_y(idx_range_xy_v2Dsplit);
     ddc::parallel_deepcopy(
             get_field(local_electric_field_x),
-            electric_field_x[idx_range_xy_v2Dsplit]);
+            ddcHelper::get<X>(electric_field)[idx_range_xy_v2Dsplit]);
     ddc::parallel_deepcopy(
             get_field(local_electric_field_y),
-            electric_field_y[idx_range_xy_v2Dsplit]);
+            ddcHelper::get<Y>(electric_field)[idx_range_xy_v2Dsplit]);
 
     // Advect in spatial dimensions
     m_advec_x(allfdistribu_v2Dsplit, dt / 2);
