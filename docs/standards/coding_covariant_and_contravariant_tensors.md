@@ -30,6 +30,7 @@ In this context, $`\boldsymbol{\eta}_1`$ and $`\boldsymbol{\eta}_2`$ are contrav
 These concepts have a direct equivalent in the code.
 
 Every basis element that may appear in a tensor expression must define the following three pieces of compile-time information:
+
 - Whether the element can be used as a **contravariant** basis element
 - Whether the element can be used as a **covariant** basis element
 - What the associated basis element is in the **dual space** (the contravariant element associated with the covariant element and vice-versa).
@@ -53,16 +54,16 @@ struct Eta1_cov {
 
 Here:
 
-* `Eta1` represents the **contravariant** basis element $`\boldsymbol{\eta}_1`$,
-* `Eta1_cov` represents the **covariant dual** basis element $\boldsymbol{\eta}^1$,
-* Each type declares its **dual**, linking the **contravariant** and **covariant** basis elements.
+- `Eta1` represents the **contravariant** basis element $`\boldsymbol{\eta}_1`$,
+- `Eta1_cov` represents the **covariant dual** basis element $\boldsymbol{\eta}^1$,
+- Each type declares its **dual**, linking the **contravariant** and **covariant** basis elements.
 
 ### Naming Convention
 
 By convention:
 
-* Contravariant dimensions are named `Eta1`, `Eta2`, `X`, `R`, etc.
-* Covariant dimensions use the `_cov` suffix, such as `Eta1_cov`, `Eta2_cov`, `X_cov`, `R_cov`, etc.
+- Contravariant dimensions are named `Eta1`, `Eta2`, `X`, `R`, etc.
+- Covariant dimensions use the `_cov` suffix, such as `Eta1_cov`, `Eta2_cov`, `X_cov`, `R_cov`, etc.
 
 ### Cartesian Coordinates
 
@@ -90,8 +91,8 @@ This is done using the `VectorIndexSet` construct.
 
 A `VectorIndexSet` represents an **ordered list of basis directions**. It is used as a template parameter to vector and tensor types and describes:
 
-* Which basis elements are involved (e.g., `Eta1`, `Eta2`),
-* In what order.
+- Which basis elements are involved (e.g., `Eta1`, `Eta2`),
+- In what order.
 
 ### Example: Defining Bases
 
@@ -102,8 +103,8 @@ using EtaBasis_cov = VectorIndexSet<Eta1_cov, Eta2_cov>; // Covariant basis
 
 This tells the library:
 
-* `EtaBasis` defines a 2D contravariant space with directions `Eta1` and `Eta2`,
-* `EtaBasis_cov` defines the associated covariant dual space.
+- `EtaBasis` defines a 2D contravariant space with directions `Eta1` and `Eta2`,
+- `EtaBasis_cov` defines the associated covariant dual space.
 
 You will use these sets as the type parameters for `Tensor` later.
 
@@ -129,6 +130,7 @@ $$
 
 This object is defined over the tensor product of the contravariant basis $`\{\boldsymbol{\eta}_i\}`$ and the covariant basis $boldsymbol{b}^j$.
 Supposing the tensor components are of type `double`, this can be declared in Gyselalib++ as:
+
 ```cpp
 Tensor<double, EtaBasis, BBasis_cov> M;
 ```
@@ -142,6 +144,7 @@ DTensor<EtaBasis, BBasis_cov> M;
 
 A vector is simply a rank-1 tensor. The same logic applies, and several equivalent declarations are supported for convenience.
 For a vector expressed on the contravariant basis $`\{\boldsymbol{\eta}_1, \boldsymbol{\eta}_2\}`$, any of the following are valid:
+
 ```cpp
 Tensor<double, EtaBasis> v;
 DTensor<EtaBasis> v;
@@ -196,9 +199,9 @@ Explanation:
 - `M` is a `DTensor<EtaBasis, EtaBasis_cov>`, we are interested in the elements $`M^i_{\;j}`$
   - 'i' in the first dimension, i.e. the dimension associated with the contravariant basis $`\{\boldsymbol{\eta}_i\}`$
   - 'j' in the second dimension, i.e. the dimension associated with the covariant basis $`\{\boldsymbol{\eta}^i\}`$
-* `v` is a `DVector<EtaBasis>`, we are interested in the elements $v^j$
+- `v` is a `DVector<EtaBasis>`, we are interested in the elements $v^j$
   - 'j' in the first (only) dimension, i.e. the dimension associated with the contravariant basis $`\{\boldsymbol{\eta}_i\}`$
-* The result is a contravariant vector (`DVector<Eta1, Eta2>`) thanks to the Einstein summation we know that we are interested in the elements $w^i$.
+- The result is a contravariant vector (`DVector<Eta1, Eta2>`) thanks to the Einstein summation we know that we are interested in the elements $w^i$.
 
 The indices used in `index<'i','j'>` are **compile-time labels** that identify how dimensions are mapped and contracted.
 
@@ -276,6 +279,7 @@ This corresponds, for example, to defining a contravariant electric field $`\bol
 ### Component Access and Assignment
 
 The scalar fields in the vector fields can be extracted using `ddcHelper::select`. This allows components to be assigned as for scalar fields :
+
 ```cpp
 IdxEta1 i;
 ddcHelper::select<X>(E)(i) = 4.2; // Assign to component E_x at index i without a temporary
@@ -299,6 +303,7 @@ This is done using the `to_vector_space` function and a coordinate transformatio
 Suppose you have a **covariant vector field** (e.g., a gradient) and want to convert it into a **contravariant representation**. This calculation requires a metric tensor. The metric tensor is defined from a coordinate transformation to/from a Cartesian basis.
 
 Elementwise the operation is carried out at a given coordinate (as the metric tensor may depend on the coordinate:
+
 ```cpp
 using PolarBasis = VectorIndexSet<R, Theta>;
 Coord<R, Theta> coord; // The coordinate where d phi was calculated
@@ -341,6 +346,7 @@ Using static tensors enables:
 - Clean expression of tensor identities and symmetries
 
 For example, a cross product can be expressed with the Levi-Civita tensor as:
+
 ```cpp
 CartesianLeviCivitaTensor<double, X, Y, Z> eps;
 DVector<X, Y, Z> v;
@@ -349,6 +355,7 @@ DVector<X, Y, Z> z = tensor_mul(index<'i','j','k'>(eps), index<'i'>(v), index<'j
 ```
 
 Thanks to inlining and the Einstein summation notation, the compiler understands the last line to mean:
+
 ```cpp
 ddcHelper::select<X>(z) = 
           0*ddcHelper::select<X>(v)*ddcHelper::select<X>(w)  // i=X, j=X, k=X
@@ -363,7 +370,9 @@ ddcHelper::select<X>(z) =
 ddcHelper::select<Y>(z) = ...;
 ddcHelper::select<Z>(z) = ...;
 ```
+
 As long as at least `-O1` optimistations are activated, the compiler will optimise away the multiplications by 0, effectively turning this into the standard form of a cross product:
+
 ```cpp
 ddcHelper::select<X>(z) = 
           ddcHelper::select<Y>(v)*ddcHelper::select<Z>(w) // i=X, j=Y, k=Z
