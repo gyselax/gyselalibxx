@@ -230,24 +230,20 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp" line="40" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="classQNSolver_1a2472bab9fe832f065531f90c605df7dc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classQNSolver_1aa32f5284dd9ce1e47665705cb7783268" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
         <definition>void QNSolver::operator()</definition>
-        <argsstring>(DFieldXY electrostatic_potential, DFieldXY electric_field_x, DFieldXY electric_field_y, DConstFieldSpVxVyXY allfdistribu) const override</argsstring>
+        <argsstring>(DFieldXY electrostatic_potential, DVectorFieldXY electric_field, DConstFieldSpVxVyXY allfdistribu) const override</argsstring>
         <name>operator()</name>
         <qualifiedname>QNSolver::operator()</qualifiedname>
-        <reimplements refid="classIQNSolver_1a2d17c3f1156a26b08313ba199b7c2fc4">operator()</reimplements>
+        <reimplements refid="classIQNSolver_1a376bd80dc5d9a6c33bdaf7cba829a0a8">operator()</reimplements>
         <param>
           <type>DFieldXY</type>
           <declname>electrostatic_potential</declname>
         </param>
         <param>
-          <type>DFieldXY</type>
-          <declname>electric_field_x</declname>
-        </param>
-        <param>
-          <type>DFieldXY</type>
-          <declname>electric_field_y</declname>
+          <type><ref refid="classVectorField" kindref="compound">DVectorFieldXY</ref></type>
+          <declname>electric_field</declname>
         </param>
         <param>
           <type>DConstFieldSpVxVyXY</type>
@@ -267,18 +263,10 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="out">electric_field_x</parametername>
+<parametername direction="out">electric_field</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The x-component of the electric field, the gradient of the electrostatic potential. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="out">electric_field_y</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The y-component of the electric field, the gradient of the electrostatic potential. </para>
+<para>The electric field, the gradient of the electrostatic potential. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -294,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp" line="50" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.cpp" bodystart="21" bodyend="46"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp" line="49" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.cpp" bodystart="21" bodyend="38"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -339,7 +327,7 @@
       <member refid="classQNSolver_1acb8175fc24afa3b213cf20e11aa4135e" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>m_compute_rho</name></member>
       <member refid="classQNSolver_1a477aa8a214b2de0f9c73797237a8e2aa" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>m_solve_poisson</name></member>
       <member refid="classQNSolver_1a866ea0a8cd34e7789d8847aaf963fdf2" prot="public" virt="virtual"><scope>QNSolver</scope><name>operator()</name></member>
-      <member refid="classQNSolver_1a2472bab9fe832f065531f90c605df7dc" prot="public" virt="virtual"><scope>QNSolver</scope><name>operator()</name></member>
+      <member refid="classQNSolver_1aa32f5284dd9ce1e47665705cb7783268" prot="public" virt="virtual"><scope>QNSolver</scope><name>operator()</name></member>
       <member refid="classIQNSolver_1a948a4ff8d3e0310b132cf7e9a3e27555" prot="public" virt="pure-virtual" ambiguityscope="IQNSolver::"><scope>QNSolver</scope><name>operator()</name></member>
       <member refid="classQNSolver_1a6447567016ca2420c44ca68c93359e7f" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>PoissonSolver</name></member>
       <member refid="classQNSolver_1afd497ed74760ba783f099dff65865448" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>PoissonSolver</name></member>

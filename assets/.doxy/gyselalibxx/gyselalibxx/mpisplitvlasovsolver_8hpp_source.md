@@ -40,8 +40,7 @@ public:
 
     DFieldSpVxVyXY operator()(
             DFieldSpVxVyXY allfdistribu,
-            DConstFieldXY electric_field_x,
-            DConstFieldXY electric_field_y,
+            DVectorConstFieldXY electric_field,
             double dt) const override;
 };
 ```

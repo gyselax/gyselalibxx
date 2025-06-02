@@ -1509,7 +1509,7 @@
     <member refid="classIQNSolver_1a9ebf91996421a1ebfffe7d0225bc37ec" kind="function"><name>~IQNSolver</name></member>
     <member refid="classIQNSolver_1a0a2d3c31695c821a43582f1c2cd4e928" kind="function"><name>operator()</name></member>
     <member refid="classIQNSolver_1a9ebf91996421a1ebfffe7d0225bc37ec" kind="function"><name>~IQNSolver</name></member>
-    <member refid="classIQNSolver_1a2d17c3f1156a26b08313ba199b7c2fc4" kind="function"><name>operator()</name></member>
+    <member refid="classIQNSolver_1a376bd80dc5d9a6c33bdaf7cba829a0a8" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classIRightHandSide" kind="class"><name>IRightHandSide</name>
     <member refid="classIRightHandSide_1a46c157197ef52a7dd221e687584b3d1c" kind="function"><name>~IRightHandSide</name></member>
@@ -1574,7 +1574,7 @@
   </compound>
   <compound refid="classIVlasovSolver" kind="class"><name>IVlasovSolver</name>
     <member refid="classIVlasovSolver_1a10c7130ab540e2f3502ecea9bf67da1e" kind="function"><name>~IVlasovSolver</name></member>
-    <member refid="classIVlasovSolver_1acebf6983052fcf3d3f359a43bf83f451" kind="function"><name>operator()</name></member>
+    <member refid="classIVlasovSolver_1a83a3669cbcd898b25e7e5613030b9fb9" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classKelvinHelmholtzInstabilityInitialisation" kind="class"><name>KelvinHelmholtzInstabilityInitialisation</name>
     <member refid="classKelvinHelmholtzInstabilityInitialisation_1aea24b966a750ad0e02d276c3df240d96" kind="variable"><name>m_epsilon</name></member>
@@ -1934,7 +1934,7 @@
     <member refid="classMpiSplitVlasovSolver_1a4d259de973ade7f3e5b85f0490178dd7" kind="variable"><name>m_transpose</name></member>
     <member refid="classMpiSplitVlasovSolver_1ad78d5874fde8002d6dd15a50cb44d3d3" kind="function"><name>MpiSplitVlasovSolver</name></member>
     <member refid="classMpiSplitVlasovSolver_1ac26547260517518488b52b800ff82845" kind="function"><name>~MpiSplitVlasovSolver</name></member>
-    <member refid="classMpiSplitVlasovSolver_1a56c9ea30c1c357155f5e5624d604ab3b" kind="function"><name>operator()</name></member>
+    <member refid="classMpiSplitVlasovSolver_1ae0988246c635b451aecb09d916bdca9a" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classMPITransposeAllToAll" kind="class"><name>MPITransposeAllToAll</name>
     <member refid="classMPITransposeAllToAll_1aaaab817292b16b7950c336c245618f35" kind="typedef"><name>idx_range_type1</name></member>
@@ -2148,7 +2148,7 @@
     <member refid="classNullQNSolver_1ac636ac6b797e8bf883a53955f191d4ed" kind="function"><name>operator()</name></member>
     <member refid="classNullQNSolver_1aa191a148e484d4c9a3fda39a37ede2f7" kind="function"><name>NullQNSolver</name></member>
     <member refid="classNullQNSolver_1af88ab5772e4ae0767b8d44449bd307d4" kind="function"><name>~NullQNSolver</name></member>
-    <member refid="classNullQNSolver_1a561aab367f8d3aa403f59a9a59faa51b" kind="function"><name>operator()</name></member>
+    <member refid="classNullQNSolver_1ae374abc707f0fad8f196d58b3d23ca63" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classOnionPatchLocator" kind="class"><name>OnionPatchLocator</name>
   </compound>
@@ -2421,7 +2421,7 @@
     <member refid="classQNSolver_1a866ea0a8cd34e7789d8847aaf963fdf2" kind="function"><name>operator()</name></member>
     <member refid="classQNSolver_1a8e24e91f5ed1c4bb590e93eb4f1f81ba" kind="function"><name>QNSolver</name></member>
     <member refid="classQNSolver_1afbc0b4cd0f70f63c93dc6d8c540a2d9d" kind="function"><name>~QNSolver</name></member>
-    <member refid="classQNSolver_1a2472bab9fe832f065531f90c605df7dc" kind="function"><name>operator()</name></member>
+    <member refid="classQNSolver_1aa32f5284dd9ce1e47665705cb7783268" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classQuadrature" kind="class"><name>Quadrature</name>
     <member refid="classQuadrature_1a21847eb865943b66e0f6aad3d18b6a22" kind="typedef"><name>IdxQuadrature</name></member>
@@ -2702,7 +2702,7 @@
     <member refid="classSplitVlasovSolver_1a958b142757ef330191c9c25188294f15" kind="function"><name>operator()</name></member>
     <member refid="classSplitVlasovSolver_1a34d062e615cb10c3bd82c9b13bf4ebc2" kind="function"><name>SplitVlasovSolver</name></member>
     <member refid="classSplitVlasovSolver_1a07f850f4fba0e3750db3aa95ebaa5fdd" kind="function"><name>~SplitVlasovSolver</name></member>
-    <member refid="classSplitVlasovSolver_1ad8ad688aa43f231851bbd11072e2c9c1" kind="function"><name>operator()</name></member>
+    <member refid="classSplitVlasovSolver_1aa8a784e4a072df4ae935cae97094119f" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structconnectivity__details_1_1StripOutsideEdges" kind="struct"><name>connectivity_details::StripOutsideEdges</name>
   </compound>
@@ -3625,6 +3625,8 @@
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1aecd8464841a3ee08bf823a3aacafae10" kind="typedef"><name>DFieldMemY</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a6926d8962dd0b43d3341e5c293c8275a" kind="typedef"><name>FieldMemXY</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a1012caf28a0a3db920dfc10893124df7" kind="typedef"><name>DFieldMemXY</name></member>
+    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a32cc743aaf2680ad14658ba167bd69e0" kind="typedef"><name>VectorFieldMemXY</name></member>
+    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a22ed1da55db00cf5062d7f6f205ce947" kind="typedef"><name>DVectorFieldMemXY</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a1ff5b78ce0200235476285383dcd2058" kind="typedef"><name>FieldMemVx</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1aa0dbeac5a6833f0703dc8baa5e55d435" kind="typedef"><name>FieldMemVy</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a31ee626ddacf4775e5580c3effb57cf8" kind="typedef"><name>FieldMemVxVy</name></member>
@@ -3643,6 +3645,8 @@
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a7f0a602072ade545e128df4cc31229fa" kind="typedef"><name>DFieldY</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a79497306d40c30da6eb0a63b84b60655" kind="typedef"><name>FieldXY</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1abf4686803a31574eef0bd6de84308aa5" kind="typedef"><name>DFieldXY</name></member>
+    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a9823b62b6394efbf7550435bcc8ccab9" kind="typedef"><name>VectorFieldXY</name></member>
+    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1adc7d466e8c95f4d5326b92cbe3213a2c" kind="typedef"><name>DVectorFieldXY</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1aea6f7648d7fbb2d38f585f3a1823b504" kind="typedef"><name>FieldVx</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a532c7d6d0740c47ff13da899ffe7e02d" kind="typedef"><name>DFieldVx</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a7378029b28720e726400afff0bcbbc49" kind="typedef"><name>FieldVy</name></member>
@@ -3659,6 +3663,8 @@
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a4a0ca69b36999899351db5823c34abfa" kind="typedef"><name>ConstFieldY</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a9b2b3bf55efff1c5b33e4449adffc601" kind="typedef"><name>ConstFieldXY</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a03f280f71943aece4bffa9efd47be086" kind="typedef"><name>DConstFieldXY</name></member>
+    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1ac98466a89c20154f7363c7dcf623ad96" kind="typedef"><name>VectorConstFieldXY</name></member>
+    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a3b8ada9d3eb6c88ab0322c3414970bcb" kind="typedef"><name>DVectorConstFieldXY</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1adb839d0310c926528957d0e5c9e7a73b" kind="typedef"><name>ConstFieldVx</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a3be2e97ce92467d0c17972cf24ed2a70" kind="typedef"><name>ConstFieldVy</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a2aca7efb643d75fca9bd022d3399d03e" kind="typedef"><name>ConstFieldVxVy</name></member>

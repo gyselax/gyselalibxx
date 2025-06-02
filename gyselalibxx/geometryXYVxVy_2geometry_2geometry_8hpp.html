@@ -549,6 +549,9 @@
 <li><code>#include "ddc_helper.hpp"</code></li>
 <li><code>#include "mpilayout.hpp"</code></li>
 <li><code>#include "species_info.hpp"</code></li>
+<li><code>#include "vector_field.hpp"</code></li>
+<li><code>#include "vector_field_mem.hpp"</code></li>
+<li><code>#include "vector_index_tools.hpp"</code></li>
 </ul>
 <h2 id="classes">Classes</h2>
 <table>
@@ -777,6 +780,18 @@
 <tr>
 <td style="text-align: right;">typedef FieldY&lt; double &gt;</td>
 <td style="text-align: left;"><a href="#typedef-dfieldy"><strong>DFieldY</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="classVectorField.html"><strong>VectorConstFieldXY</strong></a>&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dvectorconstfieldxy"><strong>DVectorConstFieldXY</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="classVectorFieldMem.html"><strong>VectorFieldMemXY</strong></a>&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dvectorfieldmemxy"><strong>DVectorFieldMemXY</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="classVectorField.html"><strong>VectorFieldXY</strong></a>&lt; double &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dvectorfieldxy"><strong>DVectorFieldXY</strong></a>  <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef FieldMem&lt; ElementType, IdxRangeSpVxVy &gt;</td>
@@ -1021,6 +1036,18 @@
 <tr>
 <td style="text-align: right;">typedef <a href="classMPILayout.html"><strong>MPILayout</strong></a>&lt; IdxRangeSpVxVyXY, <a href="structGridVx.html"><strong>GridVx</strong></a>, <a href="structGridVy.html"><strong>GridVy</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#typedef-v2dsplit"><strong>V2DSplit</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="classVectorField.html"><strong>VectorConstField</strong></a>&lt; ElementType, IdxRangeXY, VectorIndexSet&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-vectorconstfieldxy"><strong>VectorConstFieldXY</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a>&lt; ElementType, IdxRangeXY, VectorIndexSet&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-vectorfieldmemxy"><strong>VectorFieldMemXY</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="classVectorField.html"><strong>VectorField</strong></a>&lt; ElementType, IdxRangeXY, VectorIndexSet&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-vectorfieldxy"><strong>VectorFieldXY</strong></a>  <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef <a href="classMPILayout.html"><strong>MPILayout</strong></a>&lt; IdxRangeSpXYVxVy, <a href="structGridX.html"><strong>GridX</strong></a>, <a href="structGridY.html"><strong>GridY</strong></a> &gt;</td>
@@ -1275,6 +1302,21 @@
 
 <h3 id="typedef-dfieldy">typedef DFieldY</h3>
 <pre><code class="language-C++">using DFieldY =  FieldY&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dvectorconstfieldxy">typedef DVectorConstFieldXY</h3>
+<pre><code class="language-C++">using DVectorConstFieldXY =  VectorConstFieldXY&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dvectorfieldmemxy">typedef DVectorFieldMemXY</h3>
+<pre><code class="language-C++">using DVectorFieldMemXY =  VectorFieldMemXY&lt;double&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dvectorfieldxy">typedef DVectorFieldXY</h3>
+<pre><code class="language-C++">using DVectorFieldXY =  VectorFieldXY&lt;double&gt;;
 </code></pre>
 <hr>
 
@@ -1580,6 +1622,21 @@
 
 <h3 id="typedef-v2dsplit">typedef V2DSplit</h3>
 <pre><code class="language-C++">using V2DSplit =  MPILayout&lt;IdxRangeSpVxVyXY, GridVx, GridVy&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-vectorconstfieldxy">typedef VectorConstFieldXY</h3>
+<pre><code class="language-C++">using VectorConstFieldXY =  VectorConstField&lt;ElementType, IdxRangeXY, VectorIndexSet&lt;X, Y&gt; &gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-vectorfieldmemxy">typedef VectorFieldMemXY</h3>
+<pre><code class="language-C++">using VectorFieldMemXY =  VectorFieldMem&lt;ElementType, IdxRangeXY, VectorIndexSet&lt;X, Y&gt; &gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-vectorfieldxy">typedef VectorFieldXY</h3>
+<pre><code class="language-C++">using VectorFieldXY =  VectorField&lt;ElementType, IdxRangeXY, VectorIndexSet&lt;X, Y&gt; &gt;;
 </code></pre>
 <hr>
 

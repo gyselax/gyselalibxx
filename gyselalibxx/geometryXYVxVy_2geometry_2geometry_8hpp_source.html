@@ -552,6 +552,10 @@
 #include "ddc_helper.hpp"
 #include "mpilayout.hpp"
 #include "species_info.hpp"
+#include "vector_field.hpp"
+#include "vector_field_mem.hpp"
+#include "vector_index_tools.hpp"
+
 
 struct X
 {
@@ -778,6 +782,10 @@ using FieldMemXY = FieldMem&lt;ElementType, IdxRangeXY&gt;;
 using DFieldMemXY = FieldMemXY&lt;double&gt;;
 
 template &lt;class ElementType&gt;
+using VectorFieldMemXY = VectorFieldMem&lt;ElementType, IdxRangeXY, VectorIndexSet&lt;X, Y&gt;&gt;;
+using DVectorFieldMemXY = VectorFieldMemXY&lt;double&gt;;
+
+template &lt;class ElementType&gt;
 using FieldMemVx = FieldMem&lt;ElementType, IdxRangeVx&gt;;
 
 template &lt;class ElementType&gt;
@@ -817,6 +825,10 @@ using FieldXY = Field&lt;ElementType, IdxRangeXY&gt;;
 using DFieldXY = FieldXY&lt;double&gt;;
 
 template &lt;class ElementType&gt;
+using VectorFieldXY = VectorField&lt;ElementType, IdxRangeXY, VectorIndexSet&lt;X, Y&gt;&gt;;
+using DVectorFieldXY = VectorFieldXY&lt;double&gt;;
+
+template &lt;class ElementType&gt;
 using FieldVx = Field&lt;ElementType, IdxRangeVx&gt;;
 using DFieldVx = FieldVx&lt;double&gt;;
 
@@ -850,6 +862,10 @@ using ConstFieldY = Field&lt;ElementType const, IdxRangeY&gt;;
 template &lt;class ElementType&gt;
 using ConstFieldXY = Field&lt;ElementType const, IdxRangeXY&gt;;
 using DConstFieldXY = ConstFieldXY&lt;double&gt;;
+
+template &lt;class ElementType&gt;
+using VectorConstFieldXY = VectorConstField&lt;ElementType, IdxRangeXY, VectorIndexSet&lt;X, Y&gt;&gt;;
+using DVectorConstFieldXY = VectorConstFieldXY&lt;double&gt;;
 
 template &lt;class ElementType&gt;
 using ConstFieldVx = Field&lt;ElementType const, IdxRangeVx&gt;;

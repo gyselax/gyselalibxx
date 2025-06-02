@@ -288,24 +288,20 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/splitvlasovsolver.hpp" line="48" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="classSplitVlasovSolver_1ad8ad688aa43f231851bbd11072e2c9c1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classSplitVlasovSolver_1aa8a784e4a072df4ae935cae97094119f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>DFieldSpVxVyXY</type>
         <definition>DFieldSpVxVyXY SplitVlasovSolver::operator()</definition>
-        <argsstring>(DFieldSpVxVyXY allfdistribu, DConstFieldXY electric_field_x, DConstFieldXY electric_field_y, double dt) const override</argsstring>
+        <argsstring>(DFieldSpVxVyXY allfdistribu, DVectorConstFieldXY electric_field, double dt) const override</argsstring>
         <name>operator()</name>
         <qualifiedname>SplitVlasovSolver::operator()</qualifiedname>
-        <reimplements refid="classIVlasovSolver_1acebf6983052fcf3d3f359a43bf83f451">operator()</reimplements>
+        <reimplements refid="classIVlasovSolver_1a83a3669cbcd898b25e7e5613030b9fb9">operator()</reimplements>
         <param>
           <type>DFieldSpVxVyXY</type>
           <declname>allfdistribu</declname>
         </param>
         <param>
-          <type>DConstFieldXY</type>
-          <declname>electric_field_x</declname>
-        </param>
-        <param>
-          <type>DConstFieldXY</type>
-          <declname>electric_field_y</declname>
+          <type><ref refid="classVectorField" kindref="compound">DVectorConstFieldXY</ref></type>
+          <declname>electric_field</declname>
         </param>
         <param>
           <type>double</type>
@@ -325,18 +321,10 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="in">electric_field_x</parametername>
+<parametername direction="in">electric_field</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The electric field in the x direction computed at all spatial positions. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">electric_field_y</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The electric field in the y direction computed at all spatial positions. </para>
+<para>The electric field computed at all spatial positions. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -354,7 +342,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/splitvlasovsolver.hpp" line="62" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/splitvlasovsolver.cpp" bodystart="19" bodyend="34"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/splitvlasovsolver.hpp" line="61" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/splitvlasovsolver.cpp" bodystart="19" bodyend="33"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -409,7 +397,7 @@
       <member refid="classSplitVlasovSolver_1aa84d1b719041dae600eb0049299321d6" prot="private" virt="non-virtual"><scope>SplitVlasovSolver</scope><name>m_advec_x</name></member>
       <member refid="classSplitVlasovSolver_1a8dffff7f87c466d2856e4454254e3cf9" prot="private" virt="non-virtual"><scope>SplitVlasovSolver</scope><name>m_advec_y</name></member>
       <member refid="classSplitVlasovSolver_1a958b142757ef330191c9c25188294f15" prot="public" virt="virtual"><scope>SplitVlasovSolver</scope><name>operator()</name></member>
-      <member refid="classSplitVlasovSolver_1ad8ad688aa43f231851bbd11072e2c9c1" prot="public" virt="virtual"><scope>SplitVlasovSolver</scope><name>operator()</name></member>
+      <member refid="classSplitVlasovSolver_1aa8a784e4a072df4ae935cae97094119f" prot="public" virt="virtual"><scope>SplitVlasovSolver</scope><name>operator()</name></member>
       <member refid="classSplitVlasovSolver_1aad8ce76367a0be688bfbd8e5a2830040" prot="public" virt="non-virtual"><scope>SplitVlasovSolver</scope><name>SplitVlasovSolver</name></member>
       <member refid="classSplitVlasovSolver_1a34d062e615cb10c3bd82c9b13bf4ebc2" prot="public" virt="non-virtual"><scope>SplitVlasovSolver</scope><name>SplitVlasovSolver</name></member>
       <member refid="classIBoltzmannSolver_1adedfcbd6d713c24cd39272d512ae8f1b" prot="public" virt="virtual"><scope>SplitVlasovSolver</scope><name>~IBoltzmannSolver</name></member>

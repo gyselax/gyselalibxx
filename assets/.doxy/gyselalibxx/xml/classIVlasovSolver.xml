@@ -20,25 +20,21 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/ivlasovsolver.hpp" line="13" column="13"/>
       </memberdef>
-      <memberdef kind="function" id="classIVlasovSolver_1acebf6983052fcf3d3f359a43bf83f451" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+      <memberdef kind="function" id="classIVlasovSolver_1a83a3669cbcd898b25e7e5613030b9fb9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>DFieldSpVxVyXY</type>
         <definition>virtual DFieldSpVxVyXY IVlasovSolver::operator()</definition>
-        <argsstring>(DFieldSpVxVyXY allfdistribu, DConstFieldXY efield_x, DConstFieldXY efield_y, double dt) const =0</argsstring>
+        <argsstring>(DFieldSpVxVyXY allfdistribu, DVectorConstFieldXY efield, double dt) const =0</argsstring>
         <name>operator()</name>
         <qualifiedname>IVlasovSolver::operator()</qualifiedname>
-        <reimplementedby refid="classMpiSplitVlasovSolver_1a56c9ea30c1c357155f5e5624d604ab3b">operator()</reimplementedby>
-        <reimplementedby refid="classSplitVlasovSolver_1ad8ad688aa43f231851bbd11072e2c9c1">operator()</reimplementedby>
+        <reimplementedby refid="classMpiSplitVlasovSolver_1ae0988246c635b451aecb09d916bdca9a">operator()</reimplementedby>
+        <reimplementedby refid="classSplitVlasovSolver_1aa8a784e4a072df4ae935cae97094119f">operator()</reimplementedby>
         <param>
           <type>DFieldSpVxVyXY</type>
           <declname>allfdistribu</declname>
         </param>
         <param>
-          <type>DConstFieldXY</type>
-          <declname>efield_x</declname>
-        </param>
-        <param>
-          <type>DConstFieldXY</type>
-          <declname>efield_y</declname>
+          <type><ref refid="classVectorField" kindref="compound">DVectorConstFieldXY</ref></type>
+          <declname>efield</declname>
         </param>
         <param>
           <type>double</type>
@@ -58,18 +54,10 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="in">efield_x</parametername>
+<parametername direction="in">efield</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The electric field in the x direction computed at all spatial positions. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">efield_y</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The electric field in the y direction computed at all spatial positions. </para>
+<para>The electric field computed at all spatial positions. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -87,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/ivlasovsolver.hpp" line="27" column="28"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/ivlasovsolver.hpp" line="26" column="28"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -113,9 +101,9 @@
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/ivlasovsolver.hpp" line="10" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/ivlasovsolver.hpp" bodystart="11" bodyend="32"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/ivlasovsolver.hpp" line="10" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/ivlasovsolver.hpp" bodystart="11" bodyend="30"/>
     <listofallmembers>
-      <member refid="classIVlasovSolver_1acebf6983052fcf3d3f359a43bf83f451" prot="public" virt="pure-virtual"><scope>IVlasovSolver</scope><name>operator()</name></member>
+      <member refid="classIVlasovSolver_1a83a3669cbcd898b25e7e5613030b9fb9" prot="public" virt="pure-virtual"><scope>IVlasovSolver</scope><name>operator()</name></member>
       <member refid="classIVlasovSolver_1a10c7130ab540e2f3502ecea9bf67da1e" prot="public" virt="virtual"><scope>IVlasovSolver</scope><name>~IVlasovSolver</name></member>
     </listofallmembers>
   </compounddef>

@@ -55,7 +55,7 @@ Inherited by the following classes: [NullQNSolver](classNullQNSolver.md),  [Null
 | ---: | :--- |
 | virtual void | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; electrostatic\_potential, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; electric\_field, host\_t&lt; DConstFieldRTheta &gt; density) const = 0<br>_Compute the electrical potential and the electric field from the Quasi-Neutrality equation._  |
 | virtual void | [**operator()**](#function-operator_1) (DFieldX electrostatic\_potential, DFieldX electric\_field, DConstFieldSpXVx allfdistribu) const = 0<br> |
-| virtual void | [**operator()**](#function-operator_2) (DFieldXY electrostatic\_potential, DFieldXY electric\_field\_x, DFieldXY electric\_field\_y, DConstFieldSpVxVyXY allfdistribu) const = 0<br> |
+| virtual void | [**operator()**](#function-operator_2) (DFieldXY electrostatic\_potential, [**DVectorFieldXY**](classVectorField.md) electric\_field, DConstFieldSpVxVyXY allfdistribu) const = 0<br> |
 | virtual  | [**~IQNSolver**](#function-iqnsolver-13) () = default<br> |
 | virtual  | [**~IQNSolver**](#function-iqnsolver-13) () = default<br> |
 | virtual  | [**~IQNSolver**](#function-iqnsolver-13) () = default<br> |
@@ -177,8 +177,7 @@ The operator which solves the equation using the method described by the class.
 ```C++
 virtual void IQNSolver::operator() (
     DFieldXY electrostatic_potential,
-    DFieldXY electric_field_x,
-    DFieldXY electric_field_y,
+    DVectorFieldXY electric_field,
     DConstFieldSpVxVyXY allfdistribu
 ) const = 0
 ```
@@ -194,8 +193,7 @@ The operator which solves the equation using the method described by the class.
 
 
 * `electrostatic_potential` The electrostatic potential, the result of the poisson solver. 
-* `electric_field_x` The x-component of the electric field, the gradient of the electrostatic potential. 
-* `electric_field_y` The y-component of the electric field, the gradient of the electrostatic potential. 
+* `electric_field` The electric field, the gradient of the electrostatic potential. 
 * `allfdistribu` The distribution function. 
 
 

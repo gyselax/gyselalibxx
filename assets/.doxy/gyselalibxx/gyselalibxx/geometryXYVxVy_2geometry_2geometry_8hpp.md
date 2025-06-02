@@ -17,6 +17,9 @@
 * `#include "ddc_helper.hpp"`
 * `#include "mpilayout.hpp"`
 * `#include "species_info.hpp"`
+* `#include "vector_field.hpp"`
+* `#include "vector_field_mem.hpp"`
+* `#include "vector_index_tools.hpp"`
 
 
 
@@ -94,6 +97,9 @@
 | typedef FieldX&lt; double &gt; | [**DFieldX**](#typedef-dfieldx)  <br> |
 | typedef FieldXY&lt; double &gt; | [**DFieldXY**](#typedef-dfieldxy)  <br> |
 | typedef FieldY&lt; double &gt; | [**DFieldY**](#typedef-dfieldy)  <br> |
+| typedef [**VectorConstFieldXY**](classVectorField.md)&lt; double &gt; | [**DVectorConstFieldXY**](#typedef-dvectorconstfieldxy)  <br> |
+| typedef [**VectorFieldMemXY**](classVectorFieldMem.md)&lt; double &gt; | [**DVectorFieldMemXY**](#typedef-dvectorfieldmemxy)  <br> |
+| typedef [**VectorFieldXY**](classVectorField.md)&lt; double &gt; | [**DVectorFieldXY**](#typedef-dvectorfieldxy)  <br> |
 | typedef FieldMem&lt; ElementType, IdxRangeSpVxVy &gt; | [**FieldMemSpVxVy**](#typedef-fieldmemspvxvy)  <br> |
 | typedef FieldMem&lt; ElementType, IdxRangeSpVxVyXY &gt; | [**FieldMemSpVxVyXY**](#typedef-fieldmemspvxvyxy)  <br> |
 | typedef FieldMem&lt; ElementType, IdxRangeSpXYVxVy &gt; | [**FieldMemSpXYVxVy**](#typedef-fieldmemspxyvxvy)  <br> |
@@ -155,6 +161,9 @@
 | typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesY**](structBSplinesY.md), [**GridY**](structGridY.md), SplineYBoundary, SplineYBoundary, ddc::SplineSolver::LAPACK &gt; | [**SplineYBuilder**](#typedef-splineybuilder)  <br> |
 | typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesY**](structBSplinesY.md), [**GridY**](structGridY.md), ddc::PeriodicExtrapolationRule&lt; [**Y**](structY.md) &gt;, ddc::PeriodicExtrapolationRule&lt; [**Y**](structY.md) &gt; &gt; | [**SplineYEvaluator**](#typedef-splineyevaluator)  <br> |
 | typedef [**MPILayout**](classMPILayout.md)&lt; IdxRangeSpVxVyXY, [**GridVx**](structGridVx.md), [**GridVy**](structGridVy.md) &gt; | [**V2DSplit**](#typedef-v2dsplit)  <br> |
+| typedef [**VectorConstField**](classVectorField.md)&lt; ElementType, IdxRangeXY, VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; | [**VectorConstFieldXY**](#typedef-vectorconstfieldxy)  <br> |
+| typedef [**VectorFieldMem**](classVectorFieldMem.md)&lt; ElementType, IdxRangeXY, VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; | [**VectorFieldMemXY**](#typedef-vectorfieldmemxy)  <br> |
+| typedef [**VectorField**](classVectorField.md)&lt; ElementType, IdxRangeXY, VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; | [**VectorFieldXY**](#typedef-vectorfieldxy)  <br> |
 | typedef [**MPILayout**](classMPILayout.md)&lt; IdxRangeSpXYVxVy, [**GridX**](structGridX.md), [**GridY**](structGridY.md) &gt; | [**X2DSplit**](#typedef-x2dsplit)  <br> |
 
 
@@ -710,6 +719,45 @@ using DFieldXY =  FieldXY<double>;
 
 ```C++
 using DFieldY =  FieldY<double>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef DVectorConstFieldXY 
+
+```C++
+using DVectorConstFieldXY =  VectorConstFieldXY<double>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef DVectorFieldMemXY 
+
+```C++
+using DVectorFieldMemXY =  VectorFieldMemXY<double>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef DVectorFieldXY 
+
+```C++
+using DVectorFieldXY =  VectorFieldXY<double>;
 ```
 
 
@@ -1503,6 +1551,45 @@ using SplineYEvaluator =  ddc::SplineEvaluator< Kokkos::DefaultExecutionSpace, K
 
 ```C++
 using V2DSplit =  MPILayout<IdxRangeSpVxVyXY, GridVx, GridVy>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef VectorConstFieldXY 
+
+```C++
+using VectorConstFieldXY =  VectorConstField<ElementType, IdxRangeXY, VectorIndexSet<X, Y> >;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef VectorFieldMemXY 
+
+```C++
+using VectorFieldMemXY =  VectorFieldMem<ElementType, IdxRangeXY, VectorIndexSet<X, Y> >;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef VectorFieldXY 
+
+```C++
+using VectorFieldXY =  VectorField<ElementType, IdxRangeXY, VectorIndexSet<X, Y> >;
 ```
 
 

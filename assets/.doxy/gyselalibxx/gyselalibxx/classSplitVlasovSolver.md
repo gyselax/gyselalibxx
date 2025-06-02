@@ -96,7 +96,7 @@ Inherits the following classes: [IBoltzmannSolver](classIBoltzmannSolver.md),  [
 |   | [**SplitVlasovSolver**](#function-splitvlasovsolver-12) ([**IAdvectionSpatial**](classIAdvectionSpatial.md)&lt; [**GeometryXVx**](classGeometryXVx.md), [**GridX**](structGridX.md) &gt; const & advec\_x, [**IAdvectionVelocity**](classIAdvectionVelocity.md)&lt; [**GeometryXVx**](classGeometryXVx.md), [**GridVx**](structGridVx.md) &gt; const & advec\_vx) <br>_Creates an instance of the split vlasov solver class._  |
 |   | [**SplitVlasovSolver**](#function-splitvlasovsolver-22) ([**IAdvectionSpatial**](classIAdvectionSpatial.md)&lt; [**GeometryVxVyXY**](classGeometryVxVyXY.md), [**GridX**](structGridX.md) &gt; const & advec\_x, [**IAdvectionSpatial**](classIAdvectionSpatial.md)&lt; [**GeometryVxVyXY**](classGeometryVxVyXY.md), [**GridY**](structGridY.md) &gt; const & advec\_y, [**IAdvectionVelocity**](classIAdvectionVelocity.md)&lt; [**GeometryVxVyXY**](classGeometryVxVyXY.md), [**GridVx**](structGridVx.md) &gt; const & advec\_vx, [**IAdvectionVelocity**](classIAdvectionVelocity.md)&lt; [**GeometryVxVyXY**](classGeometryVxVyXY.md), [**GridVy**](structGridVy.md) &gt; const & advec\_vy) <br>_Creates an instance of the split vlasov solver class._  |
 | virtual DFieldSpXVx | [**operator()**](#function-operator) (DFieldSpXVx allfdistribu, DConstFieldX electric\_field, double dt) override const<br>_Solves a Vlasov equation on a timestep dt._  |
-| virtual DFieldSpVxVyXY | [**operator()**](#function-operator_1) (DFieldSpVxVyXY allfdistribu, DConstFieldXY electric\_field\_x, DConstFieldXY electric\_field\_y, double dt) override const<br>_Solves a Vlasov equation on a timestep dt._  |
+| virtual DFieldSpVxVyXY | [**operator()**](#function-operator_1) (DFieldSpVxVyXY allfdistribu, [**DVectorConstFieldXY**](classVectorField.md) electric\_field, double dt) override const<br>_Solves a Vlasov equation on a timestep dt._  |
 |   | [**~SplitVlasovSolver**](#function-splitvlasovsolver-12) () override<br> |
 |   | [**~SplitVlasovSolver**](#function-splitvlasovsolver-12) () override<br> |
 
@@ -117,7 +117,7 @@ See [IVlasovSolver](classIVlasovSolver.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual DFieldSpVxVyXY | [**operator()**](classIVlasovSolver.md#function-operator) (DFieldSpVxVyXY allfdistribu, DConstFieldXY efield\_x, DConstFieldXY efield\_y, double dt) const = 0<br>_Solves a Vlasov equation on a timestep dt._  |
+| virtual DFieldSpVxVyXY | [**operator()**](classIVlasovSolver.md#function-operator) (DFieldSpVxVyXY allfdistribu, [**DVectorConstFieldXY**](classVectorField.md) efield, double dt) const = 0<br>_Solves a Vlasov equation on a timestep dt._  |
 | virtual  | [**~IVlasovSolver**](classIVlasovSolver.md#function-ivlasovsolver) () = default<br> |
 
 
@@ -322,8 +322,7 @@ _Solves a Vlasov equation on a timestep dt._
 ```C++
 virtual DFieldSpVxVyXY SplitVlasovSolver::operator() (
     DFieldSpVxVyXY allfdistribu,
-    DConstFieldXY electric_field_x,
-    DConstFieldXY electric_field_y,
+    DVectorConstFieldXY electric_field,
     double dt
 ) override const
 ```
@@ -336,8 +335,7 @@ virtual DFieldSpVxVyXY SplitVlasovSolver::operator() (
 
 
 * `allfdistribu` On input : the initial value of the distribution function. On output : the value of the distribution function after solving the Vlasov equation. 
-* `electric_field_x` The electric field in the x direction computed at all spatial positions. 
-* `electric_field_y` The electric field in the y direction computed at all spatial positions. 
+* `electric_field` The electric field computed at all spatial positions. 
 * `dt` The timestep.
 
 

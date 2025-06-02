@@ -116,24 +116,20 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/nullqnsolver.hpp" line="17" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="classNullQNSolver_1a561aab367f8d3aa403f59a9a59faa51b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classNullQNSolver_1ae374abc707f0fad8f196d58b3d23ca63" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
         <definition>void NullQNSolver::operator()</definition>
-        <argsstring>(DFieldXY electrostatic_potential, DFieldXY electric_field_x, DFieldXY electric_field_y, DConstFieldSpVxVyXY allfdistribu) const override</argsstring>
+        <argsstring>(DFieldXY electrostatic_potential, DVectorFieldXY electric_field, DConstFieldSpVxVyXY allfdistribu) const override</argsstring>
         <name>operator()</name>
         <qualifiedname>NullQNSolver::operator()</qualifiedname>
-        <reimplements refid="classIQNSolver_1a2d17c3f1156a26b08313ba199b7c2fc4">operator()</reimplements>
+        <reimplements refid="classIQNSolver_1a376bd80dc5d9a6c33bdaf7cba829a0a8">operator()</reimplements>
         <param>
           <type>DFieldXY</type>
           <declname>electrostatic_potential</declname>
         </param>
         <param>
-          <type>DFieldXY</type>
-          <declname>electric_field_x</declname>
-        </param>
-        <param>
-          <type>DFieldXY</type>
-          <declname>electric_field_y</declname>
+          <type><ref refid="classVectorField" kindref="compound">DVectorFieldXY</ref></type>
+          <declname>electric_field</declname>
         </param>
         <param>
           <type>DConstFieldSpVxVyXY</type>
@@ -153,18 +149,10 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="out">electric_field_x</parametername>
+<parametername direction="out">electric_field</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The x-component of the electric field, the gradient of the electrostatic potential. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="out">electric_field_y</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The y-component of the electric field, the gradient of the electrostatic potential. </para>
+<para>The electric field, the gradient of the electrostatic potential. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -180,7 +168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/nullqnsolver.hpp" line="26" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/nullqnsolver.cpp" bodystart="5" bodyend="11"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/nullqnsolver.hpp" line="25" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/nullqnsolver.cpp" bodystart="5" bodyend="7"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -223,7 +211,7 @@
       <member refid="classNullQNSolver_1aa191a148e484d4c9a3fda39a37ede2f7" prot="public" virt="non-virtual"><scope>NullQNSolver</scope><name>NullQNSolver</name></member>
       <member refid="classNullQNSolver_1aa191a148e484d4c9a3fda39a37ede2f7" prot="public" virt="non-virtual"><scope>NullQNSolver</scope><name>NullQNSolver</name></member>
       <member refid="classNullQNSolver_1ac636ac6b797e8bf883a53955f191d4ed" prot="public" virt="virtual"><scope>NullQNSolver</scope><name>operator()</name></member>
-      <member refid="classNullQNSolver_1a561aab367f8d3aa403f59a9a59faa51b" prot="public" virt="virtual"><scope>NullQNSolver</scope><name>operator()</name></member>
+      <member refid="classNullQNSolver_1ae374abc707f0fad8f196d58b3d23ca63" prot="public" virt="virtual"><scope>NullQNSolver</scope><name>operator()</name></member>
       <member refid="classIQNSolver_1a948a4ff8d3e0310b132cf7e9a3e27555" prot="public" virt="pure-virtual" ambiguityscope="IQNSolver::"><scope>NullQNSolver</scope><name>operator()</name></member>
       <member refid="classIQNSolver_1a9ebf91996421a1ebfffe7d0225bc37ec" prot="public" virt="virtual"><scope>NullQNSolver</scope><name>~IQNSolver</name></member>
       <member refid="classIQNSolver_1a9ebf91996421a1ebfffe7d0225bc37ec" prot="public" virt="virtual"><scope>NullQNSolver</scope><name>~IQNSolver</name></member>

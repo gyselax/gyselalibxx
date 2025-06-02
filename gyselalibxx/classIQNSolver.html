@@ -564,7 +564,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">virtual void</td>
-<td style="text-align: left;"><a href="#function-operator_2"><strong>operator()</strong></a> (DFieldXY electrostatic_potential, DFieldXY electric_field_x, DFieldXY electric_field_y, DConstFieldSpVxVyXY allfdistribu) const = 0<br></td>
+<td style="text-align: left;"><a href="#function-operator_2"><strong>operator()</strong></a> (DFieldXY electrostatic_potential, <a href="classVectorField.html"><strong>DVectorFieldXY</strong></a> electric_field, DConstFieldSpVxVyXY allfdistribu) const = 0<br></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual</td>
@@ -621,8 +621,7 @@
 <h3 id="function-operator_2">function operator()</h3>
 <pre><code class="language-C++">virtual void IQNSolver::operator() (
     DFieldXY electrostatic_potential,
-    DFieldXY electric_field_x,
-    DFieldXY electric_field_y,
+    DVectorFieldXY electric_field,
     DConstFieldSpVxVyXY allfdistribu
 ) const = 0
 </code></pre>
@@ -630,8 +629,7 @@
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>electrostatic_potential</code> The electrostatic potential, the result of the poisson solver. </li>
-<li><code>electric_field_x</code> The x-component of the electric field, the gradient of the electrostatic potential. </li>
-<li><code>electric_field_y</code> The y-component of the electric field, the gradient of the electrostatic potential. </li>
+<li><code>electric_field</code> The electric field, the gradient of the electrostatic potential. </li>
 <li><code>allfdistribu</code> The distribution function. </li>
 </ul>
 <hr>

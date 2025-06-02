@@ -28,15 +28,14 @@ SplitVlasovSolver::SplitVlasovSolver(
 
 DFieldSpVxVyXY SplitVlasovSolver::operator()(
         DFieldSpVxVyXY const allfdistribu,
-        DConstFieldXY const electric_field_x,
-        DConstFieldXY const electric_field_y,
+        DVectorConstFieldXY const electric_field,
         double const dt) const
 {
     m_advec_x(allfdistribu, dt / 2);
     m_advec_y(allfdistribu, dt / 2);
-    m_advec_vx(allfdistribu, electric_field_x, dt / 2);
-    m_advec_vy(allfdistribu, electric_field_y, dt);
-    m_advec_vx(allfdistribu, electric_field_x, dt / 2);
+    m_advec_vx(allfdistribu, ddcHelper::get<X>(electric_field), dt / 2);
+    m_advec_vy(allfdistribu, ddcHelper::get<Y>(electric_field), dt);
+    m_advec_vx(allfdistribu, ddcHelper::get<X>(electric_field), dt / 2);
     m_advec_y(allfdistribu, dt / 2);
     m_advec_x(allfdistribu, dt / 2);
 

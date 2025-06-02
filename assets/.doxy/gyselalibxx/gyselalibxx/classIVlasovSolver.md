@@ -53,7 +53,7 @@ Inherited by the following classes: [MpiSplitVlasovSolver](classMpiSplitVlasovSo
 
 | Type | Name |
 | ---: | :--- |
-| virtual DFieldSpVxVyXY | [**operator()**](#function-operator) (DFieldSpVxVyXY allfdistribu, DConstFieldXY efield\_x, DConstFieldXY efield\_y, double dt) const = 0<br>_Solves a Vlasov equation on a timestep dt._  |
+| virtual DFieldSpVxVyXY | [**operator()**](#function-operator) (DFieldSpVxVyXY allfdistribu, [**DVectorConstFieldXY**](classVectorField.md) efield, double dt) const = 0<br>_Solves a Vlasov equation on a timestep dt._  |
 | virtual  | [**~IVlasovSolver**](#function-ivlasovsolver) () = default<br> |
 
 
@@ -94,8 +94,7 @@ _Solves a Vlasov equation on a timestep dt._
 ```C++
 virtual DFieldSpVxVyXY IVlasovSolver::operator() (
     DFieldSpVxVyXY allfdistribu,
-    DConstFieldXY efield_x,
-    DConstFieldXY efield_y,
+    DVectorConstFieldXY efield,
     double dt
 ) const = 0
 ```
@@ -108,8 +107,7 @@ virtual DFieldSpVxVyXY IVlasovSolver::operator() (
 
 
 * `allfdistribu` On input : the initial value of the distribution function. On output : the value of the distribution function after solving the Vlasov equation. 
-* `efield_x` The electric field in the x direction computed at all spatial positions. 
-* `efield_y` The electric field in the y direction computed at all spatial positions. 
+* `efield` The electric field computed at all spatial positions. 
 * `dt` The timestep.
 
 
