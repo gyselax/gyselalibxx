@@ -108,3 +108,5 @@ public:
         y_update(y, get_const_field(k2), dt);
     }
 };
+
+using RK2Builder = ExplicitTimeStepperBuilder<RK2>;

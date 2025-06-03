@@ -11,6 +11,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include "../../advection/r_theta_test_cases.hpp"
+
 #include "advection_simulation_utils.hpp"
 #include "bsl_advection_polar.hpp"
 #include "cartesian_to_circular.hpp"
@@ -35,7 +37,6 @@
 #include "rk4.hpp"
 #include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
-#include "test_cases.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 
@@ -131,18 +132,11 @@ private:
     NumericalParams params;
 
 public:
-    using ValFieldMem = FieldMemRTheta<CoordRTheta>;
-    using DerivFieldMem = DVectorFieldMemRTheta<X_adv, Y_adv>;
-
     using NumericalTuple = std::tuple<
-            NumericalMethodParameters<
-                    Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>,
-            NumericalMethodParameters<
-                    CrankNicolson<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>,
-            NumericalMethodParameters<
-                    RK3<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>,
-            NumericalMethodParameters<
-                    RK4<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>>;
+            NumericalMethodParameters<EulerBuilder>,
+            NumericalMethodParameters<CrankNicolsonBuilder>,
+            NumericalMethodParameters<RK3Builder>,
+            NumericalMethodParameters<RK4Builder>>;
 
     static constexpr int size_tuple = std::tuple_size<NumericalTuple> {};
 
@@ -151,28 +145,13 @@ public:
     explicit Numerics(NumericalParams m_params)
         : params(m_params)
         , numerics(std::make_tuple(
+                  NumericalMethodParameters(EulerBuilder(), params.dt * 0.1, "EULER"),
                   NumericalMethodParameters(
-                          Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>(
-                                  params.grid),
-                          params.dt * 0.1,
-                          "EULER"),
-                  NumericalMethodParameters(
-                          CrankNicolson<
-                                  ValFieldMem,
-                                  DerivFieldMem,
-                                  Kokkos::DefaultExecutionSpace>(params.grid, 20, 1e-12),
+                          CrankNicolsonBuilder(20, 1e-12),
                           params.dt,
                           "CRANK NICOLSON"),
-                  NumericalMethodParameters(
-                          RK3<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>(
-                                  params.grid),
-                          params.dt,
-                          "RK3"),
-                  NumericalMethodParameters(
-                          RK4<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>(
-                                  params.grid),
-                          params.dt,
-                          "RK4")))
+                  NumericalMethodParameters(RK3Builder(), params.dt, "RK3"),
+                  NumericalMethodParameters(RK4Builder(), params.dt, "RK4")))
     {
     }
 };
@@ -218,6 +197,7 @@ void run_simulations_with_methods(
     std::string output_stem = output_stream.str();
 
     SplinePolarFootFinder const foot_finder(
+            params.grid,
             num.time_stepper,
             sim.to_physical_mapping,
             sim.analytical_to_pseudo_physical_mapping,

@@ -6,60 +6,76 @@
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
+#include "tensor_common.hpp"
 #include "tensor_index_tools.hpp"
 #include "vector_index_tools.hpp"
+
+namespace detail {
+template <class ElementType, std::size_t n_elements>
+struct TensorDataInnards
+{
+    /// The type of the elements of the tensor.
+    using element_type = ElementType;
+
+    /// The number of elements in the mdspan
+    static constexpr std::size_t s_n_elements = n_elements;
+
+    /// The type of the Kokkos mdspan that will be used to access the data
+    using mdspan_type = Kokkos::
+            mdspan<ElementType, Kokkos::extents<std::size_t, s_n_elements>, Kokkos::layout_right>;
+    using const_mdspan_type = Kokkos::mdspan<
+            const ElementType,
+            Kokkos::extents<std::size_t, s_n_elements>,
+            Kokkos::layout_right>;
+
+    std::array<ElementType, s_n_elements> m_data_alloc;
+
+    KOKKOS_INLINE_FUNCTION const_mdspan_type operator()() const
+    {
+        return const_mdspan_type(m_data_alloc.data());
+    }
+
+    KOKKOS_INLINE_FUNCTION mdspan_type operator()()
+    {
+        return mdspan_type(m_data_alloc.data());
+    }
+};
+} // namespace detail
+
 
 /**
  * @brief A class representing a Tensor.
  * @tparam ElementType The type of the elements of the tensor (usually double/complex).
  * @tparam ValidIndexSet The indices that can be used along each dimension of the tensor.
  */
-template <class ElementType, class... ValidIndexSet>
+template <class ElementType, class ValidIndexSetFirstDim, class... ValidIndexSet>
 class Tensor
+    : public TensorCommon<
+              detail::TensorDataInnards<
+                      ElementType,
+                      (ddc::type_seq_size_v<ValidIndexSet> * ...
+                       * ddc::type_seq_size_v<ValidIndexSetFirstDim>)>,
+              ValidIndexSetFirstDim,
+              ValidIndexSet...>
 {
-    static_assert((is_vector_index_set_v<ValidIndexSet> && ...));
-    static_assert(
-            (((is_covariant_vector_index_set_v<ValidIndexSet>)
-              || (is_contravariant_vector_index_set_v<ValidIndexSet>))
-             && ...));
+    using base_type = TensorCommon<
+            detail::TensorDataInnards<
+                    ElementType,
+                    (ddc::type_seq_size_v<ValidIndexSet> * ...
+                     * ddc::type_seq_size_v<ValidIndexSetFirstDim>)>,
+            ValidIndexSetFirstDim,
+            ValidIndexSet...>;
 
 public:
     /// The TensorIndexSet describing the possible indices.
-    using index_set = ddc::detail::TypeSeq<ValidIndexSet...>;
+    using typename base_type::index_set;
+
+    using base_type::rank;
 
 private:
-    static constexpr std::size_t s_n_elements = (ddc::type_seq_size_v<ValidIndexSet> * ...);
-    std::array<ElementType, s_n_elements> m_data;
-
-public:
-    /// The type of the elements of the tensor.
-    using element_type = ElementType;
-
-    /**
-     * @brief The rank of the tensor.
-     * This is equivalent to the number of indices required to
-     * access an element of the tensor.
-     *
-     * @return The rank of the tensor.
-     */
-    KOKKOS_FUNCTION static constexpr std::size_t rank()
-    {
-        return sizeof...(ValidIndexSet);
-    }
-
-    /**
-     * @brief The size of the tensor.
-     * This is the number of elements in the tensor.
-     *
-     * @return The number of elements in the tensor.
-     */
-    KOKKOS_FUNCTION static constexpr std::size_t size()
-    {
-        return s_n_elements;
-    }
-
-private:
-    static_assert(rank() > 0);
+    using base_type::s_n_elements;
+    std::array<ElementType, s_n_elements> m_data_alloc;
+    using base_type::m_data;
 
 public:
     /**
@@ -74,7 +90,7 @@ public:
     explicit KOKKOS_FUNCTION Tensor(ElementType fill_value)
     {
         for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] = fill_value;
+            m_data()[i] = fill_value;
         }
     }
 
@@ -87,12 +103,15 @@ public:
     template <
             class... Params,
             class = std::enable_if_t<(std::is_convertible_v<Params, ElementType> && ...)>,
-            class = std::enable_if_t<sizeof...(Params) == size() && sizeof...(Params) != 1>>
-    explicit KOKKOS_FUNCTION Tensor(Params... elements) : m_data({elements...})
+            class = std::enable_if_t<
+                    sizeof...(Params) == base_type::size() && sizeof...(Params) != 1>>
+    explicit KOKKOS_FUNCTION Tensor(Params... elements)
     {
         static_assert(
                 rank() == 1,
                 "Filling the tensor on initialisation is only permitted for 1D vector objects");
+        m_data.m_data_alloc
+                = std::array<ElementType, base_type::size()>({ElementType(elements)...});
     }
 
     /**
@@ -101,7 +120,7 @@ public:
      * @param coord The coordinate.
      */
     template <class... Dims>
-    explicit KOKKOS_FUNCTION Tensor(Coord<Dims...> coord) : m_data(coord.array())
+    explicit KOKKOS_FUNCTION Tensor(Coord<Dims...> coord) noexcept
     {
         static_assert(
                 rank() == 1,
@@ -109,220 +128,55 @@ public:
         static_assert(
                 std::is_same_v<VectorIndexSet<Dims...>, ddc::type_seq_element_t<0, index_set>>,
                 "The coordinate must have the same memory layout to make a clean conversion.");
+        m_data.m_data_alloc = coord.array();
     }
 
     /**
-     * @brief Construct a tensor object by copying an existing tensor.
+     * @brief Construct a tensor object by copying an existing compatible tensor.
+     * A tensor is compatible if it is defined on the same dimensions.
      *
      * @param o_tensor The tensor to be copied.
      */
-    template <class OElementType>
-    explicit KOKKOS_FUNCTION Tensor(Tensor<OElementType, ValidIndexSet...> const& o_tensor)
-        : m_data(o_tensor.m_data)
+    template <class OTensorType, std::enable_if_t<is_tensor_type_v<OTensorType>, bool> = true>
+    explicit KOKKOS_FUNCTION Tensor(const OTensorType& o_tensor) noexcept
     {
+        static_assert(
+                std::is_same_v<typename OTensorType::index_set, index_set>,
+                "The coordinate must have the same memory layout to make a clean conversion.");
+        for (std::size_t i(0); i < s_n_elements; ++i) {
+            m_data()[i] = o_tensor.m_data()[i];
+        }
     }
 
     /**
-     * @brief Get a modifiable reference to an element of the tensor.
-     * @tparam QueryIndexTag A type describing the relevant index.
-     * @return The relevant element of the tensor.
+     * @brief Construct a tensor object by copying an existing tensor of exactly the
+     * same type. This method can be called implicitly.
+     *
+     * @param o_tensor The tensor to be copied.
      */
-    template <class QueryTensorIndexElement>
-    KOKKOS_FUNCTION ElementType& get()
-    {
-        static_assert(tensor_tools::is_tensor_index_element_v<QueryTensorIndexElement>);
-        return m_data[QueryTensorIndexElement::index()];
-    }
+    KOKKOS_DEFAULTED_FUNCTION Tensor(Tensor const& o_tensor) = default;
 
     /**
-     * @brief Get an element of the tensor.
-     * @tparam QueryIndexTag A type describing the relevant index.
-     * @return The relevant element of the tensor.
+     * @brief Construct a tensor object by moving an existing tensor of exactly the
+     * same type. This method can be called implicitly.
+     *
+     * @param o_tensor The tensor to be copied.
      */
-    template <class QueryTensorIndexElement>
-    KOKKOS_FUNCTION ElementType const& get() const
-    {
-        static_assert(tensor_tools::is_tensor_index_element_v<QueryTensorIndexElement>);
-        return m_data[QueryTensorIndexElement::index()];
-    }
+    KOKKOS_DEFAULTED_FUNCTION Tensor(Tensor&& o_tensor) = default;
 
     /**
-     * @brief A copy operator.
+     * @brief A copy assign operator.
      * @param other The tensor to be copied.
      * @return A reference to the current tensor.
      */
     KOKKOS_DEFAULTED_FUNCTION Tensor& operator=(Tensor const& other) = default;
 
     /**
-     * @brief A copy operator.
-     * @param coord The coordinate to be copied into the vector.
-     * @return A reference to the current tensor.
+     * @brief A move assign operator.
+     * @param other The tensor to be copied.
+     * @return A r-value reference to the current tensor.
      */
-    template <class... Dims>
-    KOKKOS_FUNCTION Tensor& operator=(Coord<Dims...> coord)
-    {
-        static_assert(
-                rank() == 1,
-                "Copying a coordinate into a tensor is only possible for 1D tensor objects");
-        static_assert(
-                std::is_same_v<VectorIndexSet<Dims...>, ddc::type_seq_element_t<0, index_set>>,
-                "The coordinate must have the same memory layout to make a clean conversion.");
-        m_data = coord.array();
-        return *this;
-    }
-
-    /**
-     * @brief An operator to multiply all the element of the current tensor by
-     * a value.
-     * @param val The value by which the elements should be multiplied.
-     * @return A reference to the current modified tensor.
-     */
-    template <class OElementType>
-    KOKKOS_FUNCTION Tensor& operator*=(OElementType val)
-    {
-        for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] *= val;
-        }
-        return *this;
-    }
-
-    /**
-     * @brief An operator to divide all the element of the current tensor by
-     * a value.
-     * @param val The value by which the elements should be multiplied.
-     * @return A reference to the current modified tensor.
-     */
-    template <class OElementType>
-    KOKKOS_FUNCTION Tensor& operator/=(OElementType val)
-    {
-        for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] /= val;
-        }
-        return *this;
-    }
-
-    /**
-     * @brief An operator to add two tensors elementwise.
-     * @param val The tensor that should be added to the current tensor.
-     * @return A reference to the current modified tensor.
-     */
-    KOKKOS_FUNCTION Tensor& operator+=(Tensor const& val)
-    {
-        for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] += val.m_data[i];
-        }
-        return *this;
-    }
-
-    /**
-     * @brief An operator to subtract one tensor from another elementwise.
-     * @param val The tensor that should be subtracted from the current tensor.
-     * @return A reference to the current modified tensor.
-     */
-    KOKKOS_FUNCTION Tensor& operator-=(Tensor const& val)
-    {
-        for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] -= val.m_data[i];
-        }
-        return *this;
-    }
-
-    /**
-     * @brief An operator to multiply all the element of the current tensor by
-     * a value.
-     * @param val The value by which the elements should be multiplied.
-     * @return A new tensor containing the result of the multiplication.
-     */
-    template <class OElementType>
-    KOKKOS_FUNCTION Tensor operator*(OElementType val) const
-    {
-        Tensor result(*this);
-        result *= val;
-        return result;
-    }
-
-    /**
-     * @brief An operator to multiply all the element of the current tensor by
-     * a value.
-     * @param val The value by which the elements should be multiplied.
-     * @return A new tensor containing the result of the multiplication.
-     */
-    template <class OElementType>
-    KOKKOS_FUNCTION Tensor operator/(OElementType val) const
-    {
-        Tensor result(*this);
-        result /= val;
-        return result;
-    }
-
-    /**
-     * @brief An operator to add two tensors elementwise.
-     * @param val The tensor that should be added to the current tensor.
-     * @return A new tensor containing the result of the addition.
-     */
-    KOKKOS_FUNCTION Tensor operator+(Tensor const& val) const
-    {
-        Tensor result(*this);
-        result += val;
-        return result;
-    }
-
-    /**
-     * @brief An operator to subtract one tensor from another elementwise.
-     * @param val The tensor that should be subtracted from the current tensor.
-     * @return A new tensor containing the result of the subtraction.
-     */
-    KOKKOS_FUNCTION Tensor operator-(Tensor const& val) const
-    {
-        Tensor result(*this);
-        result -= val;
-        return result;
-    }
-
-    /**
-     * @brief An operator to get the negation of a tensor elementwise.
-     * @return A new tensor containing the result of the subtraction.
-     */
-    KOKKOS_FUNCTION Tensor operator-() const
-    {
-        Tensor result;
-        for (std::size_t i(0); i < s_n_elements; ++i) {
-            result.m_data[i] = -m_data[i];
-        }
-        return result;
-    }
-
-    /**
-     * @brief An operator to compare one tensor to another elementwise.
-     * @param o_tensor The tensor that should be compared with the current tensor.
-     * @return True if the tensors are equal, false otherwise.
-     */
-    KOKKOS_FUNCTION bool operator==(Tensor const& o_tensor) const
-    {
-        bool equal(true);
-        for (std::size_t i(0); i < s_n_elements; ++i) {
-            equal = equal && (m_data[i] == o_tensor.m_data[i]);
-        }
-        return equal;
-    }
-
-    /**
-     * @brief An operator to compare one tensor to another elementwise.
-     * @param o_tensor The tensor that should be compared with the current tensor.
-     * @return False if the tensors are equal, true otherwise.
-     */
-    KOKKOS_FUNCTION bool operator!=(Tensor const& o_tensor) const
-    {
-        return !(*this == o_tensor);
-    }
-
-    /**
-     * @brief A helper type alias to get all possible indices along a
-     * specified dimension.
-     * @tparam Dim The dimension of interest (0 <= dim < rank()).
-     */
-    template <std::size_t dim>
-    using vector_index_set_t = ddc::type_seq_element_t<dim, index_set>;
+    KOKKOS_DEFAULTED_FUNCTION Tensor& operator=(Tensor&& other) = default;
 };
 
 namespace detail {
@@ -367,130 +221,9 @@ using Vector = Tensor<ElementType, VectorIndexSet<Dims...>>;
 template <class... Dims>
 using DVector = Vector<double, Dims...>;
 
-//////////////////////////////////////////////////////////////////////////
-//                         Operators
-//////////////////////////////////////////////////////////////////////////
+namespace detail {
 
-namespace ddcHelper {
+template <class ElementType, class... ValidIndexSet>
+inline constexpr bool enable_tensor_type<Tensor<ElementType, ValidIndexSet...>> = true;
 
-/**
- * @brief A helper function to get a modifiable reference to an element of the tensor.
- * @tparam QueryIndexTag A type describing the relevant index.
- * @param tensor The tensor whose elements are examined.
- * @return The relevant element of the tensor.
- */
-template <class... QueryIndexTag, class ElementType, class... ValidIndexSet>
-KOKKOS_INLINE_FUNCTION ElementType& get(Tensor<ElementType, ValidIndexSet...>& tensor)
-{
-    return tensor.template get<tensor_tools::TensorIndexElement<
-            ddc::detail::TypeSeq<ValidIndexSet...>,
-            QueryIndexTag...>>();
-}
-
-/**
- * @brief A helper function to get an element of the tensor.
- * @tparam QueryIndexTag A type describing the relevant index.
- * @param tensor The tensor whose elements are examined.
- * @return The relevant element of the tensor.
- */
-template <class... QueryIndexTag, class ElementType, class... ValidIndexSet>
-KOKKOS_INLINE_FUNCTION ElementType const& get(Tensor<ElementType, ValidIndexSet...> const& tensor)
-{
-    return tensor.template get<tensor_tools::TensorIndexElement<
-            ddc::detail::TypeSeq<ValidIndexSet...>,
-            QueryIndexTag...>>();
-}
-
-/**
- * @brief A helper function to convert a vector to a coordinate.
- * This is useful in order to add a Vector to a coordinate to obtain a
- * new coordinate (e.g. when calculating the foot of a characteristic.
- * @param tensor The tensor to be converted.
- * @return The new coordinate.
- */
-template <class ElementType, class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...> to_coord(Vector<ElementType, Dims...> const& tensor)
-{
-    return Coord<Dims...>(get<Dims>(tensor)...);
-}
-} // namespace ddcHelper
-
-/**
- * @brief An operator to multiply all a tensor by a value.
- * @param val The value by which the elements should be multiplied.
- * @param tensor The tensor being multiplied.
- * @return A new tensor containing the result of the multiplication.
- */
-template <class ElementType, class OElementType, class... ValidIndexSet>
-KOKKOS_INLINE_FUNCTION Tensor<ElementType, ValidIndexSet...> operator*(
-        OElementType val,
-        Tensor<ElementType, ValidIndexSet...> const& tensor)
-{
-    return tensor * val;
-}
-
-/**
- * An operator to add the elements of a tensor to a coordinate.
- * This can be useful in some calculations, e.g when calculating the foot
- * of a characteristic.
- * @param[in] coord The coordinate to which the tensor is added.
- * @param[in] tensor The tensor to be added to the coordinate.
- * @return The new coordinate.
- */
-template <class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...> operator+(
-        Coord<Dims...> const& coord,
-        DVector<Dims...> const& tensor)
-{
-    return Coord<Dims...>((ddc::get<Dims>(coord) + ddcHelper::get<Dims>(tensor))...);
-}
-
-/**
- * An operator to add the elements of a tensor to a coordinate.
- * This can be useful in some calculations, e.g when calculating the foot
- * of a characteristic.
- * @param[in] coord The coordinate from which the tensor is subtracted.
- * @param[in] tensor The tensor to be subtracted from the coordinate.
- * @return The new coordinate.
- */
-template <class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...> operator-(
-        Coord<Dims...> const& coord,
-        DVector<Dims...> const& tensor)
-{
-    return Coord<Dims...>((ddc::get<Dims>(coord) - ddcHelper::get<Dims>(tensor))...);
-}
-
-/**
- * An operator to add the elements of a tensor to a coordinate.
- * This can be useful in some calculations, e.g when calculating the foot
- * of a characteristic.
- * @param[inout] coord The coordinate to which the tensor is added.
- * @param[in] tensor The tensor to be added to the coordinate.
- * @return The new coordinate.
- */
-template <class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(
-        Coord<Dims...>& coord,
-        DVector<Dims...> const& tensor)
-{
-    ((ddc::get<Dims>(coord) += ddcHelper::get<Dims>(tensor)), ...);
-    return coord;
-}
-
-/**
- * An operator to add the elements of a tensor to a coordinate.
- * This can be useful in some calculations, e.g when calculating the foot
- * of a characteristic.
- * @param[inout] coord The coordinate from which the tensor is subtracted.
- * @param[in] tensor The tensor to be subtracted from the coordinate.
- * @return The new coordinate.
- */
-template <class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator-=(
-        Coord<Dims...>& coord,
-        DVector<Dims...> const& tensor)
-{
-    ((ddc::get<Dims>(coord) -= ddcHelper::get<Dims>(tensor)), ...);
-    return coord;
 }

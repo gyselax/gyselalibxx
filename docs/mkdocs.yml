@@ -20,7 +20,8 @@ nav:
         - docs/first_steps/landau_damping_tutorial.md
   - Standards:
       - Coding Standard: docs/standards/CODING_STANDARD.md
-      - Math & Physics: docs/standards/mathematical_and_physical_conventions.md
+      - Maths and Physics: docs/standards/mathematical_and_physical_conventions.md
+      - Coding Covariant and Contravariant Tensors: docs/standards/coding_covariant_and_contravariant_tensors.md
   - Gyselalib++:
       - Source: src
       - Simulations: simulations

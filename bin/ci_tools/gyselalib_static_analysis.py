@@ -33,6 +33,7 @@ ddc_keyword_map = {'DiscreteElement': 'Idx',
                    'Chunk'          : 'FieldMem',
                    'ChunkSpan'      : 'Field',
                    'ChunkView'      : 'ConstField',
+                   'Coordinate'     : 'Coord',
                    'span_view'      : 'get_field',
                    'span_cview'     : 'get_const_field',
                    'domain'         : 'get_idx_range',
@@ -41,7 +42,7 @@ ddc_keyword_map = {'DiscreteElement': 'Idx',
                    'NonUniformPointSampling' : 'NonUniformGridBase'}
 
 mirror_functions = {'create_mirror', 'create_mirror_and_copy', 'create_mirror_view', 'create_mirror_view_and_copy',
-                    'create_transpose_mirror', 'create_transpose_mirror_view_and_copy'}
+                    'create_transpose_mirror', 'create_transpose_mirror_view_and_copy', 'create_mirror_view_and_copy_on_vector_space'}
 
 parallel_functions = ['parallel_for', 'parallel_for_each', 'parallel_transform_reduce']
 
@@ -590,6 +591,7 @@ def check_exec_space_usage(file):
 
         # Find all markers indicating a Kokkos scope and note the correct execution space
         kokkos_scope_markers = chain(config.data_xml.findall(".token[@str='KOKKOS_LAMBDA']"),
+                                     config.data_xml.findall(".token[@str='KOKKOS_CLASS_LAMBDA']"),
                                      config.data_xml.findall(".token[@str='KOKKOS_FUNCTION']"),
                                      config.data_xml.findall(".token[@str='KOKKOS_INLINE_FUNCTION']"))
 

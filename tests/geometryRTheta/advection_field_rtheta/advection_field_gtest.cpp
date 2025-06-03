@@ -144,10 +144,9 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, grid);
 
-    RK3<FieldMemRTheta<CoordRTheta>,
-        DVectorFieldMemRTheta<X, Y>,
-        Kokkos::DefaultExecutionSpace> const time_stepper(grid);
+    RK3Builder const time_stepper;
     SplinePolarFootFinder find_feet(
+            grid,
             time_stepper,
             to_physical_mapping,
             to_physical_mapping,

@@ -13,7 +13,7 @@
 using namespace tensor_tools;
 
 
-int dot_product(Vector<int, R_cov, Theta_cov> a, Vector<int, R, Theta> b)
+int dot_product(Vector<int, R_cov, Theta_cov> const& a, Vector<int, R, Theta> const& b)
 {
     return ddcHelper::get<R_cov>(a) * ddcHelper::get<R>(b)
            + ddcHelper::get<Theta_cov>(a) * ddcHelper::get<Theta>(b);
@@ -398,7 +398,7 @@ TEST(TensorTest, MulOrthonormal)
 
 TEST(TensorTest, LeviCivita2D)
 {
-    LeviCivitaTensor<int, VectorIndexSet<X, Y>> levi_civita;
+    CartesianLeviCivitaTensor<int, VectorIndexSet<X, Y>> levi_civita;
     static_assert(ddcHelper::get<X, X>(levi_civita) == 0);
     static_assert(ddcHelper::get<X, Y>(levi_civita) == 1);
     static_assert(ddcHelper::get<Y, X>(levi_civita) == -1);
@@ -407,7 +407,7 @@ TEST(TensorTest, LeviCivita2D)
 
 TEST(TensorTest, LeviCivita3D)
 {
-    LeviCivitaTensor<int, VectorIndexSet<X, Y, Z>> levi_civita;
+    CartesianLeviCivitaTensor<int, VectorIndexSet<X, Y, Z>> levi_civita;
     static_assert(ddcHelper::get<X, X, X>(levi_civita) == 0);
     static_assert(ddcHelper::get<X, X, Y>(levi_civita) == 0);
     static_assert(ddcHelper::get<X, X, Z>(levi_civita) == 0);
@@ -441,7 +441,7 @@ TEST(TensorTest, LeviCivita3D)
 
 TEST(TensorTest, LeviCivitaMul)
 {
-    LeviCivitaTensor<int, VectorIndexSet<X, Y>> levi_civita;
+    CartesianLeviCivitaTensor<int, VectorIndexSet<X, Y>> levi_civita;
     using Tensor2D = Tensor<int, VectorIndexSet<X, Y>, VectorIndexSet<X, Y>>;
     Tensor2D A;
     ddcHelper::get<X, X>(A) = 1;

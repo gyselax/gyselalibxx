@@ -83,13 +83,13 @@ gtest_discover_tests(unit_tests_lagrange
     TEST_SUFFIX "_${lagrange}"
     DISCOVERY_MODE PRE_TEST)
 
-add_executable(unit_tests_advection
+add_executable(unit_tests_advection_1d
     velocityadvection.cpp
     spatialadvection.cpp
     ../main.cpp
 )
 
-target_link_libraries(unit_tests_advection	 
+target_link_libraries(unit_tests_advection_1d
     PUBLIC
         GTest::gtest
         GTest::gmock
