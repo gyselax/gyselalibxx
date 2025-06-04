@@ -157,7 +157,7 @@ jobs:
       - uses: ./.github/actions/python-static-analysis-setup
       - uses: ./.github/actions/test_filter
       - run: |
-          python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
+          python3 bin/ci_tools/gyselalib_static_analysis.py
 
   cmake_static_analysis:
     name: CMake static analysis
