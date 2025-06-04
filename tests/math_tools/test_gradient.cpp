@@ -56,22 +56,6 @@ public:
     KOKKOS_DEFAULTED_FUNCTION ~GradientTestFunction() = default;
 
     /**
-     * @brief Get the value of the function at given coordinate.
-     *
-     * @param[in] coord_rth The coordinate where we want to evaluate
-     * the function.
-     *
-     * @return The value of the function at the coordinate.
-     */
-    KOKKOS_INLINE_FUNCTION double operator()(CoordRTheta const coord_rth) const
-    {
-        double const r = ddc::get<R>(coord_rth);
-        double const theta = ddc::get<Theta>(coord_rth);
-
-        return ipow(r, 2) * Kokkos::cos(theta) + 2 * ipow(r, 3) * Kokkos::sin(theta);
-    }
-
-    /**
      * @brief Get the value of the gradient of the field 
      * at a given coordinate. The gradient is expressed in 
      * the contravariant basis of the circular geometry. 
