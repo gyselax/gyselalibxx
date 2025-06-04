@@ -28,6 +28,9 @@ using IdxStep = ddc::DiscreteVector<GridTypes...>;
 template <class... GridTypes>
 using IdxRange = ddc::DiscreteDomain<GridTypes...>;
 
+template <class... DDims>
+using IdxRangeSlice = ddc::StridedDiscreteDomain<DDims...>;
+
 /// An alias describing the type of an object which will allocate memory for a field when it is created.
 template <
         class ElementType,

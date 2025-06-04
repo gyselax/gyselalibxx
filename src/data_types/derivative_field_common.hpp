@@ -266,7 +266,11 @@ protected:
                 IdxRange<QueryDDim> idx_range_requested(slice_idx_range);
                 if (array_idx & (1 << ddc::type_seq_rank_v<ddc::Deriv<QueryDDim>, deriv_tags>)) {
                     // If the derivative is being requested
-                    assert(::contains(m_cross_derivative_idx_range, idx_range_requested));
+                    assert(IdxRangeSlice<QueryDDim>(m_cross_derivative_idx_range)
+                                   .contains(idx_range_requested.front())
+                           && (idx_range_requested.extents() == 1
+                               || IdxRangeSlice<QueryDDim>(m_cross_derivative_idx_range).strides()
+                                          == 1));
                     return std::pair<std::size_t, std::size_t>(
                             get_index(idx_range_requested.front()),
                             get_index(idx_range_requested.back()) + 1);
