@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 add_subdirectory(advection)
+add_subdirectory(coord_transformations)
 add_subdirectory(collisions)
 add_subdirectory(data_types)
 add_subdirectory(io)
@@ -10,7 +11,6 @@ add_subdirectory(geometryRTheta)
 add_subdirectory(geometryXYVxVy)
 add_subdirectory(geometryVparMu)
 add_subdirectory(interpolation)
-add_subdirectory(mapping)
 add_subdirectory(math_tools)
 add_subdirectory(matrix_tools)
 add_subdirectory(mpi_parallelisation)

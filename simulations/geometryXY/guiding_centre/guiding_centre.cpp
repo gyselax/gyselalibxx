@@ -101,25 +101,24 @@ int main(int argc, char** argv)
     FFTPoissonSolver<IdxRangeXY> const poisson_solver(meshXY);
 
     // Create advection operators ---
-    Euler<FieldMemXY<CoordX>, DFieldMemXY> euler_x(meshXY);
+    EulerBuilder euler;
     BslAdvection1D<
             GridX,
             IdxRangeXY,
             IdxRangeXY,
             SplineXBuilder_XY,
             SplineXEvaluator_XY,
-            Euler<FieldMemXY<CoordX>, DFieldMemXY>>
-            advection_x(spline_x_interpolator, builder_x, spline_x_evaluator, euler_x);
+            EulerBuilder>
+            advection_x(spline_x_interpolator, builder_x, spline_x_evaluator, euler);
 
-    Euler<FieldMemXY<CoordY>, DFieldMemXY> euler_y(meshXY);
     BslAdvection1D<
             GridY,
             IdxRangeXY,
             IdxRangeXY,
             SplineYBuilder_XY,
             SplineYEvaluator_XY,
-            Euler<FieldMemXY<CoordY>, DFieldMemXY>>
-            advection_y(spline_y_interpolator, builder_y, spline_y_evaluator, euler_y);
+            EulerBuilder>
+            advection_y(spline_y_interpolator, builder_y, spline_y_evaluator, euler);
 
 
     // Create an initialiser ---

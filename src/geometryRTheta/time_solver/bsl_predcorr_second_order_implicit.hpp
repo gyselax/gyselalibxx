@@ -13,6 +13,7 @@
 #include "bsl_advection_polar.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "euler.hpp"
 #include "geometry.hpp"
 #include "itimesolver.hpp"
 #include "poisson_like_rhs_function.hpp"
@@ -61,25 +62,17 @@ template <class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping>
 class BslImplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
-    using EulerMethod
-            = Euler<FieldMemRTheta<CoordRTheta>,
-                    DVectorFieldMemRTheta<X, Y>,
-                    Kokkos::DefaultExecutionSpace>;
-
-    using EulerMethod_host
-            = Euler<host_t<FieldMemRTheta<CoordRTheta>>,
-                    host_t<DVectorFieldMemRTheta<X, Y>>,
-                    Kokkos::DefaultHostExecutionSpace>;
-
     using SplinePolarFootFinderType = SplinePolarFootFinder<
-            EulerMethod,
+            IdxRangeRTheta,
+            EulerBuilder,
             LogicalToPhysicalMapping,
             LogicalToPseudoPhysicalMapping,
             SplineRThetaBuilder,
             SplineRThetaEvaluatorConstBound>;
 
     using SplinePolarFootFinderType_host = SplinePolarFootFinder<
-            EulerMethod_host,
+            IdxRangeRTheta,
+            EulerBuilder,
             LogicalToPhysicalMapping,
             LogicalToPseudoPhysicalMapping,
             SplineRThetaBuilder_host,
@@ -97,7 +90,7 @@ private:
 
     BslAdvectionRTheta const& m_advection_solver;
 
-    EulerMethod_host const m_euler;
+    EulerBuilder const m_euler;
     SplinePolarFootFinderType_host const m_foot_finder;
 
     PolarSplineFEMPoissonLikeSolver<
@@ -146,8 +139,8 @@ public:
             SplineRThetaEvaluatorConstBound_host const& advection_evaluator)
         : m_logical_to_physical(logical_to_physical)
         , m_advection_solver(advection_solver)
-        , m_euler(grid)
         , m_foot_finder(
+                  grid,
                   m_euler,
                   logical_to_physical,
                   logical_to_pseudo_physical,
@@ -163,7 +156,7 @@ public:
 
 
     host_t<DFieldRTheta> operator()(
-            host_t<DFieldRTheta> allfdistribu_host,
+            host_t<DFieldRTheta> density_host,
             double const dt,
             int const steps) const final
     {
@@ -171,7 +164,7 @@ public:
         std::chrono::time_point<std::chrono::system_clock> end_time;
 
         // Grid. ------------------------------------------------------------------------------------------
-        IdxRangeRTheta const grid(get_idx_range<GridR, GridTheta>(allfdistribu_host));
+        IdxRangeRTheta const grid(get_idx_range<GridR, GridTheta>(density_host));
 
         host_t<FieldMemRTheta<CoordRTheta>> coords(grid);
         ddc::for_each(grid, [&](IdxRTheta const irtheta) {
@@ -205,10 +198,10 @@ public:
         start_time = std::chrono::system_clock::now();
         for (int iter(0); iter < steps; ++iter) {
             // STEP 1: From rho^n, we compute phi^n: Poisson equation
-            host_t<Spline2DMem> allfdistribu_coef(get_spline_idx_range(m_builder));
-            m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu_host));
+            host_t<Spline2DMem> density_coef(get_spline_idx_range(m_builder));
+            m_builder(get_field(density_coef), get_const_field(density_host));
             PoissonLikeRHSFunction const
-                    charge_density_coord_1(get_const_field(allfdistribu_coef), m_evaluator);
+                    charge_density_coord_1(get_const_field(density_coef), m_evaluator);
             m_poisson_solver(charge_density_coord_1, electrostatic_potential_coef);
 
             polar_spline_evaluator(
@@ -219,7 +212,7 @@ public:
             ddc::PdiEvent("iteration")
                     .with("iter", iter)
                     .with("time", iter * dt)
-                    .with("density", allfdistribu_host)
+                    .with("density", density_host)
                     .with("electrical_potential", electrical_potential_host);
 
 
@@ -282,13 +275,13 @@ public:
 
             // X^P = X^n - dt/2 * ( E^n(X^n) + E^n(X^P) )/2:
             // --- Copy rho^n because it will be modified:
-            DFieldMemRTheta allfdistribu_predicted(grid);
-            ddc::parallel_deepcopy(allfdistribu_predicted, allfdistribu_host);
+            DFieldMemRTheta density_predicted(grid);
+            ddc::parallel_deepcopy(density_predicted, density_host);
             auto advection_field_k_tot = ddcHelper::create_mirror_view_and_copy(
                     Kokkos::DefaultExecutionSpace(),
                     get_field(advection_field_k_tot_host));
             m_advection_solver(
-                    get_field(allfdistribu_predicted),
+                    get_field(density_predicted),
                     get_const_field(advection_field_k_tot),
                     dt / 2.);
 
@@ -303,11 +296,11 @@ public:
 
 
             // STEP 4: From rho^P, we compute phi^P: Poisson equation
-            auto allfdistribu_predicted_host
-                    = ddc::create_mirror_view_and_copy(get_field(allfdistribu_predicted));
-            m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu_predicted_host));
+            auto density_predicted_host
+                    = ddc::create_mirror_view_and_copy(get_field(density_predicted));
+            m_builder(get_field(density_coef), get_const_field(density_predicted_host));
             PoissonLikeRHSFunction const
-                    charge_density_coord_4(get_const_field(allfdistribu_coef), m_evaluator);
+                    charge_density_coord_4(get_const_field(density_coef), m_evaluator);
             m_poisson_solver(charge_density_coord_4, electrostatic_potential_coef);
 
             // STEP 5: From phi^P, we compute A^P:
@@ -357,38 +350,37 @@ public:
                           / 2.;
             });
             // X^k = X^n - dt * ( A^P(X^n) + A^P(X^P) )/2
-            auto allfdistribu = ddc::
-                    create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), allfdistribu_host);
+            auto density = ddc::
+                    create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), density_host);
             ddc::parallel_deepcopy(
                     ddcHelper::get<X>(advection_field_k_tot),
                     ddcHelper::get<X>(advection_field_k_tot_host));
             ddc::parallel_deepcopy(
                     ddcHelper::get<Y>(advection_field_k_tot),
                     ddcHelper::get<Y>(advection_field_k_tot_host));
-            m_advection_solver(get_field(allfdistribu), get_const_field(advection_field_k_tot), dt);
-            ddc::parallel_deepcopy(allfdistribu_host, get_const_field(allfdistribu));
+            m_advection_solver(get_field(density), get_const_field(advection_field_k_tot), dt);
+            ddc::parallel_deepcopy(density_host, get_const_field(density));
         }
 
         // STEP 1: From rho^n, we compute phi^n: Poisson equation
-        host_t<Spline2DMem> allfdistribu_coef(get_spline_idx_range(m_builder));
-        m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu_host));
+        host_t<Spline2DMem> density_coef(get_spline_idx_range(m_builder));
+        m_builder(get_field(density_coef), get_const_field(density_host));
         PoissonLikeRHSFunction const
-                charge_density_coord(get_const_field(allfdistribu_coef), m_evaluator);
+                charge_density_coord(get_const_field(density_coef), m_evaluator);
         m_poisson_solver(charge_density_coord, get_field(electrical_potential));
         ddc::parallel_deepcopy(electrical_potential_host, electrical_potential);
 
         ddc::PdiEvent("last_iteration")
                 .with("iter", steps)
                 .with("time", steps * dt)
-                .with("density", allfdistribu_host)
+                .with("density", density_host)
                 .with("electrical_potential", electrical_potential_host);
 
         end_time = std::chrono::system_clock::now();
         display_time_difference("Iterations time: ", start_time, end_time);
 
 
-
-        return allfdistribu_host;
+        return density_host;
     }
 
 

@@ -170,3 +170,25 @@ static constexpr bool is_covariant_vector_index_set_v
 template <class VectorIndexSet>
 static constexpr bool is_contravariant_vector_index_set_v
         = tensor_tools::is_contravariant_vector_index_set<VectorIndexSet>::value;
+
+/**
+ * @brief A compile-time boolean to check if all the dimensions in a
+ * VectorIndexSet can represent both covariant and contravariant indices
+ * and are therefore represent a Cartesian coordinate system.
+ */
+template <class VectorIndexSet>
+static constexpr bool is_cartesian_vector_index_set_v
+        = is_covariant_vector_index_set_v<VectorIndexSet>&&
+                is_contravariant_vector_index_set_v<VectorIndexSet>;
+
+/**
+ * @brief A compile-time boolean to check if two VectorIndexSets have the
+ * same variance. In other words to check if both are covariant or both
+ * are contravariant.
+ */
+template <class VectorIndexSet1, class VectorIndexSet2>
+static constexpr bool has_same_variance_v
+        = (is_covariant_vector_index_set_v<
+                   VectorIndexSet1> == is_covariant_vector_index_set_v<VectorIndexSet2>)
+          || (is_contravariant_vector_index_set_v<
+                      VectorIndexSet1> == is_contravariant_vector_index_set_v<VectorIndexSet2>);

@@ -4,15 +4,51 @@ contributions.
 
 
 Julien Bigot <julien.bigot@cea.fr>
-* Initial C++ design
+- Initial C++ design
 
-Emily Bourne <emily.bourne@cea.fr>
-* Spline related development
+Emily Bourne <emily.bourne@epfl.ch>
+- Maintainer
+- Spline related development
+- Fortran to C++ porting
+- Data type developments
+- Multi-patch developments
+- Developments in the (x, y, vx, vy) geometry
 
 Virginie Grandgirard <virginie.grandgirard@cea.fr>
-* Initial designer and Fortran version
-* Maintainer
+- Initial designer and Fortran version
+- Maintainer
+
+Alex Hoffmann
+- Multi-patch developments
+
+Abdelhadi Kara
+- Sparse matrix solvers
+
+Philipp Krah
+- Documentation
+
+Baptiste Legouix
+- DDC integration
+- GPU porting
+
+Etienne Malaboeuf
+- Coupling to Koliop
+
+Yann Munschy
+- Developments in the (x, vx) geometry
 
 Thomas Padioleau <thomas.padioleau@cea.fr>
-* Fortran to C++ port
-* Optimisation
+- Initial C++ design
+- Fortran to C++ port
+- Developments in the (x, vx) geometry
+- Packaging
+- DDC integration
+
+Mathieu Protais
+- FDM operators
+
+Pauline Vidal
+- Developments in the (r, theta) geometry
+  - Guiding-centre simulations (Diocotron and Vortex-Merger)
+- Developments in the (x, y) geometry
+- Multi-patch developments

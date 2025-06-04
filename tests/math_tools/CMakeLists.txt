@@ -8,6 +8,7 @@ add_executable(unit_tests_math_tools
     test_lnorm_tools.cpp
     test_math_tools.cpp
     test_partial_derivatives.cpp
+    test_poisson_bracket.cpp
     test_spline_2d_cache.cpp
     ../main.cpp
 )
@@ -17,8 +18,8 @@ target_link_libraries(unit_tests_math_tools
         GTest::gtest
         GTest::gmock
         paraconf::paraconf
+        gslx::coord_transformations
         gslx::math_tools
-        gslx::mapping
         gslx::utils
 )
 

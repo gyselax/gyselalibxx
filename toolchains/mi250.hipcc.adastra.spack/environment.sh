@@ -32,6 +32,6 @@ module load \
     gcc/13.2.1.mi250/zen3/ninja \
     gcc/13.2.1.mi250/zen3/py-matplotlib \
     gcc/13.2.1.mi250/zen3/py-xarray \
-    gcc/13.2.1.mi250/zen3/py-h5py \
+    gcc/13.2.1.mi250/zen3/py-h5py
 
 module list

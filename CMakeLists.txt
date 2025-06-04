@@ -1,13 +1,23 @@
 # SPDX-License-Identifier: MIT
 
 cmake_minimum_required(VERSION 3.20)
-project(gyselalibxx C CXX)
+
+# Read version from external file
+file(READ "${CMAKE_CURRENT_SOURCE_DIR}/src/version.txt" GYSELALIBXX_VERSION_STRING)
+string(STRIP "${GYSELALIBXX_VERSION_STRING}" GYSELALIBXX_VERSION_STRING)
+
+# Split into components
+string(REPLACE "." ";" VERSION_LIST ${GYSELALIBXX_VERSION_STRING})
+list(GET VERSION_LIST 0 GYSELALIBXX_VERSION_MAJOR)
+list(GET VERSION_LIST 1 GYSELALIBXX_VERSION_MINOR)
+list(GET VERSION_LIST 2 GYSELALIBXX_VERSION_PATCH)
+
+# Set project language and version
+project(gyselalibxx
+    LANGUAGES C CXX
+    VERSION ${GYSELALIBXX_VERSION_MAJOR}.${GYSELALIBXX_VERSION_MINOR}.${GYSELALIBXX_VERSION_PATCH})
 
 set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
-
-# Our CMake module path
-
-list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
 
 # Configuration
 
@@ -91,12 +101,6 @@ if(NOT "${KokkosKernels_FOUND}")
   add_subdirectory("vendor/kokkos-kernels/" "kokkos-kernels") # SYSTEM)
 endif()
 
-find_package (Eigen3 3.3 NO_MODULE)
-if (NOT EIGEN3_FOUND)
-  ## Use Eigen from `vendor/`
-  set(EIGEN_BUILD_DOC OFF CACHE BOOL "Don't build eigen docs")
-  add_subdirectory("vendor/eigen/" "eigen") # SYSTEM)
-endif (NOT EIGEN3_FOUND)
 
 find_package(DDC 0.5 QUIET COMPONENTS fft pdi splines)
 if(NOT "${DDC_FOUND}")

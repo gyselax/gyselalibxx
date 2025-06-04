@@ -9,7 +9,6 @@ target_include_directories(time_integration_RTheta
 target_link_libraries(time_integration_RTheta 
     INTERFACE
         DDC::core
-        Eigen3::Eigen
         gslx::advection
         gslx::advection_field_RTheta
         gslx::geometry_RTheta

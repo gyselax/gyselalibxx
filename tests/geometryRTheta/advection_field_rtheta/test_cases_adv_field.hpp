@@ -2,7 +2,7 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
-#include "../advection_rtheta/test_cases.hpp"
+#include "../../advection/r_theta_test_cases.hpp"
 
 #include "circular_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
@@ -42,8 +42,6 @@ private:
     double const m_omega;
     double const m_xc;
     double const m_yc;
-    double const m_x_bar;
-    double const m_y_bar;
 
 public:
     /// @brief Instantiate an ElectrostaticPotentialSimulation_decentred_rotation advection field.
@@ -51,8 +49,6 @@ public:
         : m_omega(2 * M_PI)
         , m_xc(0.25)
         , m_yc(0.)
-        , m_x_bar(0.)
-        , m_y_bar(0.)
     {
     }
 
@@ -322,11 +318,7 @@ struct AdvectionFieldSimulation
  * @see AdvectionField_translation
  */
 template <class Mapping>
-AdvectionFieldSimulation<
-        ElectrostaticPotentialSimulation_translation,
-        FunctionToBeAdvected_gaussian<Mapping>,
-        AdvectionField_translation>
-get_translation_advection_field_simulation(
+auto get_translation_advection_field_simulation(
         Mapping const& mapping,
         double const rmin,
         double const rmax)
@@ -334,14 +326,14 @@ get_translation_advection_field_simulation(
     return AdvectionFieldSimulation<
             ElectrostaticPotentialSimulation_translation,
             FunctionToBeAdvected_gaussian<Mapping>,
-            AdvectionField_translation>(
+            AdvectionField_translation<X, Y>>(
             {ElectrostaticPotentialSimulation_translation(
                      CoordVx(-std::cos(2 * M_PI * 511. / 4096.) / 2.),
                      CoordVy(-std::sin(2 * M_PI * 511. / 4096.) / 2.)),
              FunctionToBeAdvected_gaussian<Mapping>(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax),
-             AdvectionField_translation(
-                     CoordVx(-std::cos(2 * M_PI * 511. / 4096.) / 2.),
-                     CoordVy(-std::sin(2 * M_PI * 511. / 4096.) / 2.))});
+             AdvectionField_translation<X, Y>(DVector<X, Y>(
+                     -std::cos(2 * M_PI * 511. / 4096.) / 2.,
+                     -std::sin(2 * M_PI * 511. / 4096.) / 2.))});
 }
 
 
@@ -378,11 +370,7 @@ get_translation_advection_field_simulation(
  * @see AdvectionField_rotation
  */
 template <class Mapping>
-AdvectionFieldSimulation<
-        ElectrostaticPotentialSimulation_rotation,
-        FunctionToBeAdvected_gaussian<Mapping>,
-        AdvectionField_rotation>
-get_rotation_advection_field_simulation(
+auto get_rotation_advection_field_simulation(
         Mapping const& mapping,
         double const rmin,
         double const rmax)
@@ -390,10 +378,10 @@ get_rotation_advection_field_simulation(
     return AdvectionFieldSimulation<
             ElectrostaticPotentialSimulation_rotation,
             FunctionToBeAdvected_gaussian<Mapping>,
-            AdvectionField_rotation>(
+            AdvectionField_rotation<X, Y, R, Theta>>(
             {ElectrostaticPotentialSimulation_rotation(CoordVtheta(2 * M_PI)),
              FunctionToBeAdvected_gaussian<Mapping>(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax),
-             AdvectionField_rotation(CoordVr(0), CoordVtheta(2 * M_PI))});
+             AdvectionField_rotation<X, Y, R, Theta>(DVector<R, Theta>(0, 2 * M_PI))});
 }
 
 
@@ -426,17 +414,13 @@ get_rotation_advection_field_simulation(
  * @see AdvectionField_decentred_rotation
  */
 template <class Mapping>
-AdvectionFieldSimulation<
-        ElectrostaticPotentialSimulation_decentred_rotation,
-        FunctionToBeAdvected_cos_4_ellipse<Mapping>,
-        AdvectionField_decentred_rotation>
-get_decentred_rotation_advection_field_simulation(Mapping const& mapping)
+auto get_decentred_rotation_advection_field_simulation(Mapping const& mapping)
 {
     return AdvectionFieldSimulation<
             ElectrostaticPotentialSimulation_decentred_rotation,
             FunctionToBeAdvected_cos_4_ellipse<Mapping>,
-            AdvectionField_decentred_rotation>(
+            AdvectionField_decentred_rotation<X, Y>>(
             {ElectrostaticPotentialSimulation_decentred_rotation(),
              FunctionToBeAdvected_cos_4_ellipse<Mapping>(mapping),
-             AdvectionField_decentred_rotation()});
+             AdvectionField_decentred_rotation<X, Y>()});
 }

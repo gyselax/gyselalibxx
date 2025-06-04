@@ -3,10 +3,10 @@
 
 #include <ddc/ddc.hpp>
 
+#include "coord_transformation_tools.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "gauss_legendre_integration.hpp"
-#include "mapping_tools.hpp"
 #include "math_tools.hpp"
 #include "matrix_batch_csr.hpp"
 #include "metric_tensor_evaluator.hpp"
@@ -330,7 +330,7 @@ public:
                   ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
                           - ddc::discrete_space<BSplinesTheta>().nbasis())
     {
-        static_assert(has_jacobian_v<Mapping, CoordRTheta>);
+        static_assert(has_jacobian_v<Mapping>);
         //initialise x_init
         Kokkos::deep_copy(m_x_init, 0);
         // Get break points
@@ -530,9 +530,6 @@ public:
         auto singular_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
                 Kokkos::DefaultExecutionSpace(),
                 get_field(m_singular_basis_vals_and_derivs));
-        auto r_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                get_field(m_r_basis_vals_and_derivs));
         Field<EvalDeriv2DType, IdxRange<PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh>>
                 singular_basis_vals_and_derivs = get_field(singular_basis_vals_and_derivs_alloc);
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume);

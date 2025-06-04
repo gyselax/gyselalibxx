@@ -1,0 +1,76 @@
+name: Installation tests
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+    branches-ignore:
+      - main
+  merge_group:
+    types:
+      - checks_requested
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  pre_job:
+    name: 'Check for unnecessary runs'
+    runs-on: ubuntu-latest
+    if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
+    # Map a step output to a job output
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: skip_check
+        uses: ./.github/actions/duplicate_check
+        with:
+          MATCHING_PATHS: '[".github/workflows/install_tests.yml", "toolchains/cpu.spack.gyselalibxx_env/*", "CMakeLists.txt"]'
+
+  spack_test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    needs: pre_job
+    name: Install Test
+    if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
+    steps:
+      - name: Checkout gyselalibxx
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install spack
+        run: |
+          mkdir -p spack_setup && cd spack_setup
+          ../toolchains/cpu.spack.gyselalibxx_env/prepare.sh
+        shell: bash
+        timeout-minutes: 180
+      - name: Build code
+        uses: ./.github/actions/build_code
+        with:
+          toolchain: toolchains/cpu.spack.gyselalibxx_env/toolchain.cmake
+          environment_command: 'source ${GITHUB_WORKSPACE}/toolchains/cpu.spack.gyselalibxx_env/environment.sh'
+      - name: Run tests
+        uses: ./.github/actions/run_tests
+        with:
+          environment_command: 'source ${GITHUB_WORKSPACE}/toolchains/cpu.spack.gyselalibxx_env/environment.sh'
+
+  set_pr_status:
+    runs-on: ubuntu-latest
+    name: Spack PR result
+    needs: [spack_test]
+    if: always() && (github.event_name == 'pull_request' && github.event.pull_request.draft == false) && needs.pre_job.outputs.should_skip == 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/set_pr_status
+        with:
+          status: ${{ needs.spack_test.result }}
+          pr_number: ${{ github.event.pull_request.number }}
+          sha: ${{ github.sha }}

@@ -7,8 +7,8 @@ target_include_directories("multipatch_connectivity"
 )
 target_link_libraries("multipatch_connectivity" INTERFACE
     DDC::core
+    gslx::coord_transformations
     gslx::data_types
-    gslx::mapping
     gslx::multipatch_data_types
     gslx::utils
 )

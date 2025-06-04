@@ -25,7 +25,7 @@ echo "Create the input YAML file by default" $INPUT_YAML_FILE
 
 # --> Change deltat to 0. in the input YAML file
 new_deltat=0.
-sed -i "s/\(deltat:\) .*/\1 $new_deltat/" "${INPUT_YAML_FILE}"
+sed -i.save "s/\(deltat:\) .*/\1 $new_deltat/" "${INPUT_YAML_FILE}"
 
 # --> Run the code
 "${COLL_EXEC}" "${INPUT_YAML_FILE}"

@@ -4,11 +4,13 @@
 
 #include "circular_to_cartesian.hpp"
 #include "combined_mapping.hpp"
+#include "coord_transformation_tools.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "ipolar_foot_finder.hpp"
-#include "mapping_tools.hpp"
+#include "itimestepper.hpp"
+#include "l_norm_tools.hpp"
 #include "vector_index_tools.hpp"
 #include "vector_mapper.hpp"
 
@@ -25,8 +27,9 @@
  * More details can be found in Edoardo Zoni's article
  * (https://doi.org/10.1016/j.jcp.2019.108889).
  *
- * @tparam TimeStepper
- *      A child class of ITimeStepper providing a time integration method.
+ * @tparam TimeStepperBuilder
+ *      A time stepper builder indicating which time integration method should be
+ *      applied to solve the characteristic equation. 
  * @tparam LogicalToPhysicalMapping
  *      A mapping from the logical domain to the physical domain.
  * @tparam LogicalToPseudoPhysicalMapping
@@ -43,7 +46,8 @@
  * @see BslAdvectionPolar
  */
 template <
-        class TimeStepper,
+        class IdxRangeBatched,
+        class TimeStepperBuilder,
         class LogicalToPhysicalMapping,
         class LogicalToPseudoPhysicalMapping,
         class SplineRThetaBuilderAdvection,
@@ -53,9 +57,10 @@ class SplinePolarFootFinder
               typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
               typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
               ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>,
-              typename TimeStepper::IdxRange,
+              IdxRangeBatched,
               typename SplineRThetaBuilderAdvection::memory_space>
 {
+    static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
     static_assert(is_mapping_v<LogicalToPhysicalMapping>);
     static_assert(is_mapping_v<LogicalToPseudoPhysicalMapping>);
     static_assert(is_analytical_mapping_v<LogicalToPseudoPhysicalMapping>);
@@ -70,16 +75,40 @@ class SplinePolarFootFinder
                   LogicalToPseudoPhysicalMapping>);
     static_assert(ddc::in_tags_v<
                   typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
-                  ddc::to_type_seq_t<typename TimeStepper::IdxRange>>);
+                  ddc::to_type_seq_t<IdxRangeBatched>>);
     static_assert(ddc::in_tags_v<
                   typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
-                  ddc::to_type_seq_t<typename TimeStepper::IdxRange>>);
+                  ddc::to_type_seq_t<IdxRangeBatched>>);
+    static_assert(
+            SplineRThetaBuilderAdvection::builder_type1::s_nbc_xmin == 0,
+            "This class is designed to work with a spline builder which does not require "
+            "additional information at the boundaries (e.g. Hermite boundary conditions require "
+            "information about the derivatives and therefore will not work with this class. Please "
+            "check the choice of boundary conditions).");
+    static_assert(
+            SplineRThetaBuilderAdvection::builder_type1::s_nbc_xmax == 0,
+            "This class is designed to work with a spline builder which does not require "
+            "additional information at the boundaries (e.g. Hermite boundary conditions require "
+            "information about the derivatives and therefore will not work with this class. Please "
+            "check the choice of boundary conditions).");
+    static_assert(
+            SplineRThetaBuilderAdvection::builder_type1::s_bc_xmin != ddc::BoundCond::PERIODIC,
+            "Periodic boundary conditions in the radial direction are nonsensical.");
+    static_assert(
+            SplineRThetaBuilderAdvection::builder_type1::s_bc_xmax != ddc::BoundCond::PERIODIC,
+            "Periodic boundary conditions in the radial direction are nonsensical.");
+    static_assert(
+            SplineRThetaBuilderAdvection::builder_type2::s_bc_xmin == ddc::BoundCond::PERIODIC,
+            "Expected periodic boundary conditions in the poloidal direction.");
+    static_assert(
+            SplineRThetaBuilderAdvection::builder_type2::s_bc_xmax == ddc::BoundCond::PERIODIC,
+            "Expected periodic boundary conditions in the poloidal direction.");
 
     using base_type = IPolarFootFinder<
             typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
             typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
             ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>,
-            typename TimeStepper::IdxRange,
+            IdxRangeBatched,
             typename SplineRThetaBuilderAdvection::memory_space>;
 
 public:
@@ -96,6 +125,7 @@ private:
 
 private:
     using ExecSpace = typename SplineRThetaBuilderAdvection::exec_space;
+    using MemSpace = typename ExecSpace::memory_space;
     /**
      * @brief Tag the first dimension in the advection domain.
      */
@@ -113,9 +143,11 @@ private:
 
     using CoordRTheta = Coord<R, Theta>;
 
+    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeOperator, GridR, GridTheta>;
     using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
     using IdxRangeR = IdxRange<GridR>;
     using IdxRangeTheta = IdxRange<GridTheta>;
+    using IdxBatch = typename IdxRangeBatch::discrete_element_type;
     using IdxRTheta = Idx<GridR, GridTheta>;
     using IdxR = Idx<GridR>;
     using IdxTheta = Idx<GridTheta>;
@@ -134,7 +166,12 @@ private:
                     ddc::detail::TypeSeq<GridR, GridTheta>,
                     ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
 
-    TimeStepper const& m_time_stepper;
+    using TimeStepper = typename TimeStepperBuilder::template time_stepper_t<
+            FieldMem<CoordRTheta, IdxRangeBatched, MemSpace>,
+            DVectorFieldMem<IdxRangeBatched, VectorIndexSet<X_adv, Y_adv>, MemSpace>,
+            ExecSpace>;
+
+    TimeStepperBuilder const& m_time_stepper_builder;
 
     LogicalToPseudoPhysicalMapping m_logical_to_pseudo_physical;
     PseudoPhysicalToLogicalMapping m_pseudo_physical_to_logical;
@@ -182,9 +219,11 @@ public:
      * @brief Instantiate a time integration method for the advection
      * operator.
      *
-     * @param[in] time_stepper
-     *      The time integration method used to solve the characteristic
-     *      equation (ITimeStepper).
+     * @param[in] idx_range_operator
+     *      The index range on which the operator should act.
+     * @param[in] time_stepper_builder
+     *      A builder for the time integration method used for the
+     *      characteristic equation. 
      * @param[in] logical_to_physical_mapping
      *      The mapping from the logical domain to the physical domain.
      * @param[in] logical_to_pseudo_physical_mapping
@@ -201,13 +240,14 @@ public:
      * @see ITimeStepper
      */
     SplinePolarFootFinder(
-            TimeStepper const& time_stepper,
+            IdxRangeBatched const& idx_range_operator,
+            TimeStepperBuilder const& time_stepper_builder,
             LogicalToPhysicalMapping const& logical_to_physical_mapping,
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical_mapping,
             SplineRThetaBuilderAdvection const& builder_advection_field,
             SplineRThetaEvaluatorAdvection const& evaluator_advection_field,
             double epsilon = 1e-12)
-        : m_time_stepper(time_stepper)
+        : m_time_stepper_builder(time_stepper_builder)
         , m_logical_to_pseudo_physical(logical_to_pseudo_physical_mapping)
         , m_pseudo_physical_to_logical(logical_to_pseudo_physical_mapping.get_inverse_mapping())
         , m_pseudo_physical_to_physical(
@@ -242,13 +282,11 @@ public:
             double dt) const final
     {
         VectorSplineCoeffsMem advection_field_in_adv_domain_coefs(
-                get_spline_idx_range(m_builder_advection_field));
+                m_builder_advection_field.batched_spline_domain(get_idx_range(advection_field)));
 
         // Compute the advection field in the advection domain.
-        auto advection_field_in_adv_domain = create_geometry_mirror_view(
-                ExecSpace(),
-                advection_field,
-                m_pseudo_physical_to_physical);
+        auto advection_field_in_adv_domain = create_mirror_view_and_copy_on_vector_space<
+                PseudoCartesianBasis>(ExecSpace(), advection_field, m_pseudo_physical_to_physical);
 
         // Get the coefficients of the advection field in the advection domain.
         m_builder_advection_field(
@@ -314,9 +352,11 @@ public:
                       is_unified(feet);
                   };
 
+        TimeStepper time_stepper
+                = m_time_stepper_builder.template preallocate<TimeStepper>(get_idx_range(feet));
 
         // Solve the characteristic equation
-        m_time_stepper.update(ExecSpace(), feet, dt, dy, update_function);
+        time_stepper.update(ExecSpace(), feet, dt, dy, update_function);
 
         is_unified(feet);
     }
@@ -336,24 +376,28 @@ public:
      *
      */
     template <class T>
-    void is_unified(Field<T, IdxRangeRTheta, memory_space> const& values) const
+    void is_unified(Field<T, IdxRangeOperator, memory_space> const& values) const
     {
-        IdxRangeR const r_idx_range = get_idx_range<GridR>(values);
-        IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(values);
+        IdxRangeOperator full_idx_range = get_idx_range(values);
+        IdxRangeBatch const batched_idx_range(full_idx_range);
+        IdxRangeR const r_idx_range(full_idx_range);
+        IdxRangeTheta const theta_idx_range(full_idx_range);
         IdxR r0_idx = r_idx_range.front();
+        IdxTheta theta0_idx = theta_idx_range.front();
         if (Kokkos::fabs(ddc::coordinate(r0_idx)) < 1e-15) {
             ddc::parallel_for_each(
                     ExecSpace(),
-                    theta_idx_range,
-                    KOKKOS_LAMBDA(const IdxTheta itheta) {
-                        if (norm_inf(
-                                    values(r0_idx, itheta)
-                                    - values(r0_idx, theta_idx_range.front()))
-                            > 1e-15) {
-                            Kokkos::printf("WARNING ! -> Discontinuous at the centre point.");
+                    batched_idx_range,
+                    KOKKOS_LAMBDA(const IdxBatch ib) {
+                        for (IdxTheta itheta : theta_idx_range) {
+                            if (norm_inf(
+                                        values(ib, r0_idx, itheta) - values(ib, r0_idx, theta0_idx))
+                                > 1e-15) {
+                                Kokkos::printf("WARNING ! -> Discontinuous at the centre point.");
+                            }
+                            KOKKOS_ASSERT(
+                                    values(ib, r0_idx, itheta) == values(ib, r0_idx, theta0_idx));
                         }
-                        KOKKOS_ASSERT(
-                                values(r0_idx, itheta) == values(r0_idx, theta_idx_range.front()));
                     });
         }
     }
@@ -373,17 +417,22 @@ public:
      *      The table of values we want to unify at the central point.
      */
     template <class T>
-    void unify_value_at_centre_pt(Field<T, IdxRangeRTheta, memory_space> values) const
+    void unify_value_at_centre_pt(Field<T, IdxRangeOperator, memory_space> values) const
     {
-        IdxRangeR const r_idx_range = get_idx_range<GridR>(values);
-        IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(values);
+        IdxRangeOperator full_idx_range = get_idx_range(values);
+        IdxRangeBatch const batched_idx_range(full_idx_range);
+        IdxRangeR const r_idx_range(full_idx_range);
+        IdxRangeTheta const theta_idx_range(full_idx_range);
         IdxR r0_idx = r_idx_range.front();
+        IdxTheta theta0_idx = theta_idx_range.front();
         if (std::fabs(ddc::coordinate(r0_idx)) < 1e-15) {
             ddc::parallel_for_each(
                     ExecSpace(),
-                    theta_idx_range,
-                    KOKKOS_LAMBDA(const IdxTheta itheta) {
-                        values(r0_idx, itheta) = values(r0_idx, theta_idx_range.front());
+                    batched_idx_range,
+                    KOKKOS_LAMBDA(const IdxBatch ib) {
+                        for (IdxTheta itheta : theta_idx_range) {
+                            values(ib, r0_idx, itheta) = values(ib, r0_idx, theta0_idx);
+                        }
                     });
         }
     }
