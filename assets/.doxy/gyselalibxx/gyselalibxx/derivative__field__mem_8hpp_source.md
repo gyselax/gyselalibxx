@@ -189,7 +189,7 @@ public:
     template <class... DerivDoms>
     DerivFieldMem(
             physical_idx_range_type val_idx_range,
-            IdxRangeSlice<DerivDoms>... m_deriv_idx_range)
+            ddc::StridedDiscreteDomain<DerivDoms>... m_deriv_idx_range)
         : DerivFieldMem(allocator_type(), val_idx_range, m_deriv_idx_range...)
     {
     }
@@ -198,7 +198,7 @@ public:
     DerivFieldMem(
             allocator_type allocator,
             physical_idx_range_type val_idx_range,
-            IdxRangeSlice<DerivDoms>... m_deriv_idx_range)
+            ddc::StridedDiscreteDomain<DerivDoms>... m_deriv_idx_range)
         : base_type(
                 val_idx_range,
                 discrete_deriv_idx_range_type(IdxRange<ddc::Deriv<DerivDoms>>(

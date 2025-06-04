@@ -608,11 +608,11 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-derivfieldmem-12"><strong>DerivFieldMem</strong></a> (<a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html#typedef-physical_idx_range_type"><strong>physical_idx_range_type</strong></a> val_idx_range, <a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>&lt; DerivDoms &gt;... m_deriv_idx_range) <br><em>The constructor for</em> <a href="classDerivFieldMem.html"><em><strong>DerivFieldMem</strong></em></a> <em>. The constructor initialises the chunks using the provided index ranges.</em></td>
+<td style="text-align: left;"><a href="#function-derivfieldmem-12"><strong>DerivFieldMem</strong></a> (<a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html#typedef-physical_idx_range_type"><strong>physical_idx_range_type</strong></a> val_idx_range, ddc::StridedDiscreteDomain&lt; DerivDoms &gt;... m_deriv_idx_range) <br><em>The constructor for</em> <a href="classDerivFieldMem.html"><em><strong>DerivFieldMem</strong></em></a> <em>. The constructor initialises the chunks using the provided index ranges.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-derivfieldmem-22"><strong>DerivFieldMem</strong></a> (allocator_type allocator, <a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html#typedef-physical_idx_range_type"><strong>physical_idx_range_type</strong></a> val_idx_range, <a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>&lt; DerivDoms &gt;... m_deriv_idx_range) <br><em>The constructor for</em> <a href="classDerivFieldMem.html"><em><strong>DerivFieldMem</strong></em></a> <em>. The constructor initialises the chunks using the provided index ranges.</em></td>
+<td style="text-align: left;"><a href="#function-derivfieldmem-22"><strong>DerivFieldMem</strong></a> (allocator_type allocator, <a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html#typedef-physical_idx_range_type"><strong>physical_idx_range_type</strong></a> val_idx_range, ddc::StridedDiscreteDomain&lt; DerivDoms &gt;... m_deriv_idx_range) <br><em>The constructor for</em> <a href="classDerivFieldMem.html"><em><strong>DerivFieldMem</strong></em></a> <em>. The constructor initialises the chunks using the provided index ranges.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html#typedef-element_type"><strong>element_type</strong></a> &amp;</td>
@@ -726,7 +726,7 @@
 <pre><code class="language-C++">template&lt;class... DerivDoms&gt;
 inline DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::DerivFieldMem (
     physical_idx_range_type val_idx_range,
-    IdxRangeSlice &lt; DerivDoms &gt;... m_deriv_idx_range
+    ddc::StridedDiscreteDomain&lt; DerivDoms &gt;... m_deriv_idx_range
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -742,7 +742,7 @@ inline DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSp
 inline DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::DerivFieldMem (
     allocator_type allocator,
     physical_idx_range_type val_idx_range,
-    IdxRangeSlice &lt; DerivDoms &gt;... m_deriv_idx_range
+    ddc::StridedDiscreteDomain&lt; DerivDoms &gt;... m_deriv_idx_range
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>

@@ -636,14 +636,13 @@ protected:
     to_subidx_range_collection&lt;physical_deriv_grids&gt; m_cross_derivative_idx_range;
 
 protected:
-    template &lt;class DElem&gt;
-    KOKKOS_FUNCTION std::pair&lt;int, index_type&gt; get_index(DElem elem) const
+    template &lt;class QueryDim&gt;
+    KOKKOS_FUNCTION std::size_t get_index(Idx&lt;QueryDim&gt; elem) const noexcept
     {
-        discrete_deriv_index_type default_derivatives = detail::no_derivative_element&lt;deriv_tags&gt;();
-        discrete_deriv_index_type deriv_index(detail::select_default(elem, default_derivatives));
-        physical_index_type physical_index(elem);
-        index_type index(physical_index, deriv_index);
-        return std::pair&lt;int, index_type&gt;(get_array_index(deriv_index), index);
+        assert(IdxRangeSlice&lt;QueryDim&gt;(m_cross_derivative_idx_range).contains(elem));
+        return IdxRangeSlice&lt;QueryDim&gt;(m_cross_derivative_idx_range)
+                .distance_from_front(elem)
+                .value();
     }
 
     template &lt;class... Tag&gt;
@@ -667,8 +666,7 @@ protected:
                 // If information is available about the physical index range
                 if (array_idx &amp; (1 &lt;&lt; ddc::type_seq_rank_v&lt;ddc::Deriv&lt;QueryDDim&gt;, deriv_tags&gt;)) {
                     // If the derivative is being requested
-                    return m_cross_derivative_idx_range.get_index(
-                            ddc::select&lt;QueryDDim&gt;(slice_idx));
+                    return get_index(ddc::select&lt;QueryDDim&gt;(slice_idx));
                 }
             }
             if constexpr (ddc::in_tags_v&lt;QueryDDim, physical_grids&gt;) {
@@ -705,10 +703,14 @@ protected:
                 IdxRange&lt;QueryDDim&gt; idx_range_requested(slice_idx_range);
                 if (array_idx &amp; (1 &lt;&lt; ddc::type_seq_rank_v&lt;ddc::Deriv&lt;QueryDDim&gt;, deriv_tags&gt;)) {
                     // If the derivative is being requested
-                    assert(m_cross_derivative_idx_range.contains(idx_range_requested));
+                    assert(IdxRangeSlice&lt;QueryDDim&gt;(m_cross_derivative_idx_range)
+                                   .contains(idx_range_requested.front())
+                           &amp;&amp; (idx_range_requested.extents() == 1
+                               || IdxRangeSlice&lt;QueryDDim&gt;(m_cross_derivative_idx_range).strides()
+                                          == 1));
                     return std::pair&lt;std::size_t, std::size_t&gt;(
-                            m_cross_derivative_idx_range.get_index(idx_range_requested.front()),
-                            m_cross_derivative_idx_range.get_index(idx_range_requested.back()) + 1);
+                            get_index(idx_range_requested.front()),
+                            get_index(idx_range_requested.back()) + 1);
                 }
             }
             if constexpr (ddc::in_tags_v&lt;QueryDDim, physical_grids&gt;) {

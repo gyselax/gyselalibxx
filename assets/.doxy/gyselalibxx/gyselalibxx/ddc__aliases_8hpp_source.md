@@ -26,6 +26,9 @@ using IdxStep = ddc::DiscreteVector<GridTypes...>;
 template <class... GridTypes>
 using IdxRange = ddc::DiscreteDomain<GridTypes...>;
 
+template <class... GridTypes>
+using IdxRangeSlice = ddc::StridedDiscreteDomain<GridTypes...>;
+
 template <
         class ElementType,
         class IdxRange,

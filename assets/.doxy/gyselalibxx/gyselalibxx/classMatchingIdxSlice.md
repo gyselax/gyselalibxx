@@ -56,8 +56,8 @@ _Store the conforming indexes of each patch of a given interface._ [More...](#de
 | ---: | :--- |
 |   | [**MatchingIdxSlice**](#function-matchingidxslice-12) (IdxRange1D\_1 const & idx\_range\_1, IdxRange1D\_2 const & idx\_range\_2) <br>_Instantiate the class from 1D index ranges._  |
 |   | [**MatchingIdxSlice**](#function-matchingidxslice-22) (IdxRange2D\_1 const & idx\_range\_1, IdxRange2D\_2 const & idx\_range\_2) <br>_Instantiate the class from 2D index ranges._  |
-|  [**IdxRangeSlice**](classIdxRangeSlice.md)&lt; ParallelGrid &gt; | [**get**](#function-get) () const<br>_Get the_ [_**IdxRangeSlice**_](classIdxRangeSlice.md) _containing the conforming indexes._ |
-|  auto | [**get\_from\_perp**](#function-get_from_perp) () const<br>_Get the_ [_**IdxRangeSlice**_](classIdxRangeSlice.md) _containing the conforming indexes._ |
+|  IdxRangeSlice&lt; ParallelGrid &gt; | [**get**](#function-get) () const<br>_Get the IdxRangeSlice containing the conforming indexes._  |
+|  auto | [**get\_from\_perp**](#function-get_from_perp) () const<br>_Get the IdxRangeSlice containing the conforming indexes._  |
 |   | [**~MatchingIdxSlice**](#function-matchingidxslice) () = default<br> |
 
 
@@ -90,7 +90,7 @@ _Store the conforming indexes of each patch of a given interface._ [More...](#de
 ## Detailed Description
 
 
-The conforming indexes are the indexes with an equivalent index on the parallel grid of the other edge of a given interface. The conforming indexes are stored in an [**IdxRangeSlice**](classIdxRangeSlice.md). The index step between two indexes in the [**IdxRangeSlice**](classIdxRangeSlice.md) are supposed to be uniform. If they are not, the instantiation of the class fails.
+The conforming indexes are the indexes with an equivalent index on the parallel grid of the other edge of a given interface. The conforming indexes are stored in an IdxRangeSlice. The index step between two indexes in the IdxRangeSlice are supposed to be uniform. If they are not, the instantiation of the class fails.
 
 
 If the grids are uniform, the index steps between the conforming indexes are uniform. The uniform index steps can be deduced from the greatest common divisor.
@@ -133,10 +133,10 @@ inline MatchingIdxSlice::MatchingIdxSlice (
 To define the IdxRangeSlices containing the conforming indexes, we first check that the index steps between two conforming indexes are uniform, for the 1D grid of each edge of the interface.
 
 
-If true, the index step of the patch is applied to instantiate the associated [**IdxRangeSlice**](classIdxRangeSlice.md).
+If true, the index step of the patch is applied to instantiate the associated IdxRangeSlice.
 
 
-If the grids are uniform, it is true and we can use the greatest common divisor between the two number of cells to compute the index steps of each [**IdxRangeSlice**](classIdxRangeSlice.md).
+If the grids are uniform, it is true and we can use the greatest common divisor between the two number of cells to compute the index steps of each IdxRangeSlice.
 
 
 
@@ -171,10 +171,10 @@ inline MatchingIdxSlice::MatchingIdxSlice (
 To define the IdxRangeSlices containing the conforming indexes, we first check that the index steps between two conforming indexes are uniform, for the 1D grid of each edge of the interface.
 
 
-If true, the index step of the patch is applied to instantiate the associated [**IdxRangeSlice**](classIdxRangeSlice.md).
+If true, the index step of the patch is applied to instantiate the associated IdxRangeSlice.
 
 
-If the grids are uniform, it is true and we can use the greatest common divisor between the two number of cells to compute the index steps of each [**IdxRangeSlice**](classIdxRangeSlice.md).
+If the grids are uniform, it is true and we can use the greatest common divisor between the two number of cells to compute the index steps of each IdxRangeSlice.
 
 
 
@@ -196,10 +196,10 @@ If the grids are uniform, it is true and we can use the greatest common divisor 
 
 ### function get 
 
-_Get the_ [_**IdxRangeSlice**_](classIdxRangeSlice.md) _containing the conforming indexes._
+_Get the IdxRangeSlice containing the conforming indexes._ 
 ```C++
 template<class ParallelGrid, std::enable_if_t<(std::is_same_v< ParallelGrid, EdgeGrid1 >)||(std::is_same_v< ParallelGrid, EdgeGrid2 >), bool >>
-inline IdxRangeSlice < ParallelGrid > MatchingIdxSlice::get () const
+inline IdxRangeSlice< ParallelGrid > MatchingIdxSlice::get () const
 ```
 
 
@@ -215,7 +215,7 @@ inline IdxRangeSlice < ParallelGrid > MatchingIdxSlice::get () const
 
 **Returns:**
 
-[**IdxRangeSlice**](classIdxRangeSlice.md) of conforming indexes on the given ParallelGrid. 
+IdxRangeSlice of conforming indexes on the given ParallelGrid. 
 
 
 
@@ -229,7 +229,7 @@ inline IdxRangeSlice < ParallelGrid > MatchingIdxSlice::get () const
 
 ### function get\_from\_perp 
 
-_Get the_ [_**IdxRangeSlice**_](classIdxRangeSlice.md) _containing the conforming indexes._
+_Get the IdxRangeSlice containing the conforming indexes._ 
 ```C++
 template<class PerpendicularGrid, std::enable_if_t<(std::is_same_v< PerpendicularGrid, PerpEdgeGrid1 >)||(std::is_same_v< PerpendicularGrid, PerpEdgeGrid2 >), bool >>
 inline auto MatchingIdxSlice::get_from_perp () const
@@ -248,7 +248,7 @@ inline auto MatchingIdxSlice::get_from_perp () const
 
 **Returns:**
 
-[**IdxRangeSlice**](classIdxRangeSlice.md) of conforming indexes on the perpendicular grid to the given PerpendicularGrid. 
+IdxRangeSlice of conforming indexes on the perpendicular grid to the given PerpendicularGrid. 
 
 
 

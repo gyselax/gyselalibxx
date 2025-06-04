@@ -89,8 +89,8 @@ Inherits the following classes: [DerivFieldCommon](classDerivFieldCommon.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**DerivFieldMem**](#function-derivfieldmem-12) ([**physical\_idx\_range\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-physical_idx_range_type) val\_idx\_range, [**IdxRangeSlice**](classIdxRangeSlice.md)&lt; DerivDoms &gt;... m\_deriv\_idx\_range) <br>_The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constructor initialises the chunks using the provided index ranges._ |
-|   | [**DerivFieldMem**](#function-derivfieldmem-22) (allocator\_type allocator, [**physical\_idx\_range\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-physical_idx_range_type) val\_idx\_range, [**IdxRangeSlice**](classIdxRangeSlice.md)&lt; DerivDoms &gt;... m\_deriv\_idx\_range) <br>_The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constructor initialises the chunks using the provided index ranges._ |
+|   | [**DerivFieldMem**](#function-derivfieldmem-12) ([**physical\_idx\_range\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-physical_idx_range_type) val\_idx\_range, ddc::StridedDiscreteDomain&lt; DerivDoms &gt;... m\_deriv\_idx\_range) <br>_The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constructor initialises the chunks using the provided index ranges._ |
+|   | [**DerivFieldMem**](#function-derivfieldmem-22) (allocator\_type allocator, [**physical\_idx\_range\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-physical_idx_range_type) val\_idx\_range, ddc::StridedDiscreteDomain&lt; DerivDoms &gt;... m\_deriv\_idx\_range) <br>_The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constructor initialises the chunks using the provided index ranges._ |
 |  [**element\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-element_type) & | [**operator()**](#function-operator) (DElem... elems) noexcept<br>_Get a modifiable reference to an element from a constant field. A Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested._  |
 |  [**element\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-element_type) const & | [**operator()**](#function-operator_1) (DElem... elems) noexcept const<br>_Get an element from a constant field. A Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested._  |
 |  [**DerivFieldMem**](classDerivFieldMem.md) & | [**operator=**](#function-operator_2) ([**DerivFieldMem**](classDerivFieldMem.md) const & other) = delete<br>_Deleted copy operator._  |
@@ -341,7 +341,7 @@ _The constructor for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _. The constr
 template<class... DerivDoms>
 inline DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::DerivFieldMem (
     physical_idx_range_type val_idx_range,
-    IdxRangeSlice < DerivDoms >... m_deriv_idx_range
+    ddc::StridedDiscreteDomain< DerivDoms >... m_deriv_idx_range
 ) 
 ```
 
@@ -372,7 +372,7 @@ template<class... DerivDoms>
 inline DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::DerivFieldMem (
     allocator_type allocator,
     physical_idx_range_type val_idx_range,
-    IdxRangeSlice < DerivDoms >... m_deriv_idx_range
+    ddc::StridedDiscreteDomain< DerivDoms >... m_deriv_idx_range
 ) 
 ```
 

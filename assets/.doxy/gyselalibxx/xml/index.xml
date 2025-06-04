@@ -714,7 +714,7 @@
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a7ec2324db04ca9d7820072ce06b6d23d" kind="variable"><name>m_physical_idx_range</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a6116f365fe51e5a8f6c5915195c2ce1a" kind="variable"><name>m_deriv_idx_range</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a4a048b0b6feed6a33b0c7a78257438d4" kind="variable"><name>m_cross_derivative_idx_range</name></member>
-    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1aca0752ae1b3cc1d2885e6644fbe1d6f2" kind="function"><name>get_index</name></member>
+    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a1544c678e280360ddde4876dbd957b9f" kind="function"><name>get_index</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a58c249fa7954db05b6d6bedbdab15823" kind="function"><name>get_array_index</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a868ed39fa484e90af6985b22c78df50c" kind="function"><name>get_slicer_for</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a87810847a0ebdc91930bdb5d861396c9" kind="function"><name>get_slicer_for</name></member>
@@ -758,8 +758,8 @@
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a6d6b4af2eae39ae4777b8014987f3198" kind="function"><name>get_mdspan_size</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a71930d8ab2a366995e95669f4d35dd2c" kind="function"><name>make_internal_mdspan</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1aa15a282ff001c56164f83e2437ddee69" kind="function"><name>initialise_chunks</name></member>
-    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a1675bc7159ba70d8c70c4017ea610fe2" kind="function"><name>DerivFieldMem</name></member>
-    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1abd291fdb248e85ba48ec74c19087e864" kind="function"><name>DerivFieldMem</name></member>
+    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a11a38217dc28cf66cada14781ce30b43" kind="function"><name>DerivFieldMem</name></member>
+    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a09a41faf825170dbedd7a225db47bc45" kind="function"><name>DerivFieldMem</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a7af910528c9b40eb599439539340925d" kind="function"><name>~DerivFieldMem</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ac897e84a086c7cf6b4577833a8093e69" kind="function"><name>operator=</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a031703d7536e1b06d4f9dedfad0448fd" kind="function"><name>operator=</name></member>
@@ -1203,56 +1203,6 @@
     <member refid="classIdentityTensor_1ac03c37d10bf94bfcea328f4d4822a13d" kind="function"><name>get</name></member>
     <member refid="classIdentityTensor_1a831d9f57e21b2848a6e30a8db4a7d809" kind="function"><name>IdentityTensor</name></member>
   </compound>
-  <compound refid="classIdxRangeSlice" kind="class"><name>IdxRangeSlice</name>
-    <member refid="classIdxRangeSlice_1ae49932089fe31921b0cdb4aea133d650" kind="typedef"><name>tags_seq</name></member>
-    <member refid="classIdxRangeSlice_1ae029737c01f6337cc2775510bf436f64" kind="variable"><name>m_front</name></member>
-    <member refid="classIdxRangeSlice_1a95bbe456cf1e3c5fb3722b2a36160f33" kind="variable"><name>m_size</name></member>
-    <member refid="classIdxRangeSlice_1a9fb8cff425e72dc16b2bc818dcc84466" kind="variable"><name>m_stride</name></member>
-    <member refid="classIdxRangeSlice_1a45709058680b07f2af213c19e73c33d4" kind="friend"><name>IdxRangeSlice</name></member>
-    <member refid="classIdxRangeSlice_1af5cb71c4e5ef820d8774388eb6f44414" kind="function"><name>IdxRangeSlice</name></member>
-    <member refid="classIdxRangeSlice_1a14b43890dfd560f54e3de3c3859bd31d" kind="function"><name>IdxRangeSlice</name></member>
-    <member refid="classIdxRangeSlice_1a2b89aee054545931b156449008fd8fff" kind="function"><name>IdxRangeSlice</name></member>
-    <member refid="classIdxRangeSlice_1aa1cc7ec0912e5195f762b6176b2aa085" kind="function"><name>contains</name></member>
-    <member refid="classIdxRangeSlice_1af94edc7f3cecfc5b987d37f7929b719f" kind="function"><name>contains</name></member>
-    <member refid="classIdxRangeSlice_1a2ee4615ebb6864cdea1f6d93dc3e6add" kind="function"><name>get_index</name></member>
-    <member refid="classIdxRangeSlice_1af6daea2b71b8e34e4b1c0a8b2a3fc95e" kind="function"><name>extents</name></member>
-    <member refid="classIdxRangeSlice_1a64ad71f7659189ff1ce4bfff4420a894" kind="function"><name>extent</name></member>
-    <member refid="classIdxRangeSlice_1a3669efc69bfe9261cfc3ed85380e354c" kind="function"><name>size</name></member>
-    <member refid="classIdxRangeSlice_1a7f97c317c82426f237b421e036200973" kind="function"><name>front</name></member>
-    <member refid="classIdxRangeSlice_1ae9abf3cd2e4f039672b79ceb7967c682" kind="function"><name>back</name></member>
-    <member refid="classIdxRangeSlice_1a855885bf7216d0efb3641ea5e54d6e34" kind="function"><name>stride</name></member>
-    <member refid="classIdxRangeSlice_1ada67052c26c46493280f7afcbe1d9551" kind="function"><name>strides</name></member>
-    <member refid="classIdxRangeSlice_1a904892c0a225dd5fe2c16448f7070266" kind="function"><name>begin</name></member>
-    <member refid="classIdxRangeSlice_1a77ce2afa2b2a692ba19d2caa02dd57bb" kind="function"><name>end</name></member>
-  </compound>
-  <compound refid="structIdxRangeSliceIterator" kind="struct"><name>IdxRangeSliceIterator</name>
-    <member refid="structIdxRangeSliceIterator_1ae433765c9e433256f44fae63b22c8dd3" kind="typedef"><name>iterator_category</name></member>
-    <member refid="structIdxRangeSliceIterator_1aa3784446d2f1f986e069a084cec61160" kind="typedef"><name>value_type</name></member>
-    <member refid="structIdxRangeSliceIterator_1a186ef24babacb71c2a78f6966d82cdb2" kind="typedef"><name>stride_type</name></member>
-    <member refid="structIdxRangeSliceIterator_1a96c7777c808fa57c6fa4da36a6e9830e" kind="typedef"><name>difference_type</name></member>
-    <member refid="structIdxRangeSliceIterator_1a721cdf4ac0eb28afcab2ac78bd415da1" kind="variable"><name>m_value</name></member>
-    <member refid="structIdxRangeSliceIterator_1ac42ff01de66fca3012b218b35a2130a8" kind="variable"><name>m_stride</name></member>
-    <member refid="structIdxRangeSliceIterator_1a2f22d954e2203515d1e2f7af4e55eebb" kind="function"><name>IdxRangeSliceIterator</name></member>
-    <member refid="structIdxRangeSliceIterator_1a51e30a5240e788d2617746e1e0e3106a" kind="function"><name>IdxRangeSliceIterator</name></member>
-    <member refid="structIdxRangeSliceIterator_1aa0e84d0ad195d6b35f0d567da81b8ab8" kind="function"><name>operator*</name></member>
-    <member refid="structIdxRangeSliceIterator_1a428daf3ced0f82c06eb2a2c9eef543c6" kind="function"><name>operator++</name></member>
-    <member refid="structIdxRangeSliceIterator_1a58387aeb6b23bade952ee6c6f17af075" kind="function"><name>operator++</name></member>
-    <member refid="structIdxRangeSliceIterator_1a54ae7139ec113bb5154889dd69c34459" kind="function"><name>operator--</name></member>
-    <member refid="structIdxRangeSliceIterator_1aa5734dbd3f9f99ba7f354330a1f8fede" kind="function"><name>operator--</name></member>
-    <member refid="structIdxRangeSliceIterator_1a7f68c5678b29c6091de746305c7c7807" kind="function"><name>operator+=</name></member>
-    <member refid="structIdxRangeSliceIterator_1aaf0b7e03e22115a3531bc5158986c5b6" kind="function"><name>operator-=</name></member>
-    <member refid="structIdxRangeSliceIterator_1a2fbcfc79ed570291cd4fe9ec34bdec60" kind="function"><name>operator[]</name></member>
-    <member refid="structIdxRangeSliceIterator_1a407dc73b77575c1e846ba9c3f3cef165" kind="friend"><name>operator==</name></member>
-    <member refid="structIdxRangeSliceIterator_1a9c97b510fa95c83eb250ad2888d1614f" kind="friend"><name>operator!=</name></member>
-    <member refid="structIdxRangeSliceIterator_1adce70917996571583d5e289de0873794" kind="friend"><name>operator&lt;</name></member>
-    <member refid="structIdxRangeSliceIterator_1a1e37f4a4026b90bd62412946e907e0ad" kind="friend"><name>operator&gt;</name></member>
-    <member refid="structIdxRangeSliceIterator_1a066cb10f031579b3c9416502f746def9" kind="friend"><name>operator&lt;=</name></member>
-    <member refid="structIdxRangeSliceIterator_1a0d6d96f92a4a45d06b6da3bbacadba5b" kind="friend"><name>operator&gt;=</name></member>
-    <member refid="structIdxRangeSliceIterator_1a72cd1010b51d205c6dfeb7d86c2a52cc" kind="friend"><name>operator+</name></member>
-    <member refid="structIdxRangeSliceIterator_1a9e1f33547deedae501feaeea8c1d6376" kind="friend"><name>operator+</name></member>
-    <member refid="structIdxRangeSliceIterator_1a50c6ca0cecd29fc2195cc18c9183a133" kind="friend"><name>operator-</name></member>
-    <member refid="structIdxRangeSliceIterator_1a5eb3d57f669cb12e33c94ba7c933bb8d" kind="friend"><name>operator-</name></member>
-  </compound>
   <compound refid="structIdxRangeToSlice" kind="struct"><name>IdxRangeToSlice</name>
   </compound>
   <compound refid="classIEquilibrium" kind="class"><name>IEquilibrium</name>
@@ -1532,10 +1482,6 @@
   <compound refid="structis__onion__patch__locator" kind="struct"><name>is_onion_patch_locator</name>
   </compound>
   <compound refid="structis__onion__patch__locator_3_01OnionPatchLocator_3_01MultipatchIdxRanges_00_01LogicalToPhys15c96379834346672a2b2d644897e91f" kind="struct"><name>is_onion_patch_locator&lt; OnionPatchLocator&lt; MultipatchIdxRanges, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt; &gt;</name>
-  </compound>
-  <compound refid="structis__subidx__range__collection" kind="struct"><name>is_subidx_range_collection</name>
-  </compound>
-  <compound refid="structis__subidx__range__collection_3_01IdxRangeSlice_3_01Tags_8_8_8_01_4_01_4" kind="struct"><name>is_subidx_range_collection&lt; IdxRangeSlice&lt; Tags... &gt; &gt;</name>
   </compound>
   <compound refid="structtensor__tools_1_1is__vector__index__set" kind="struct"><name>tensor_tools::is_vector_index_set</name>
   </compound>
@@ -3146,7 +3092,6 @@
   </compound>
   <compound refid="idx__range__slice_8hpp" kind="file"><name>idx_range_slice.hpp</name>
     <member refid="idx__range__slice_8hpp_1a0a449d9bc3f57dff7ffc206773fff1f6" kind="typedef"><name>to_subidx_range_collection</name></member>
-    <member refid="idx__range__slice_8hpp_1a3a175e05ae16543a8058c88fd17ae37b" kind="variable"><name>is_subidx_range_collection_v</name></member>
   </compound>
   <compound refid="indexed__tensor_8hpp" kind="file"><name>indexed_tensor.hpp</name>
     <member refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kind="function"><name>index</name></member>
@@ -4195,6 +4140,7 @@
     <member refid="ddc__aliases_8hpp_1a683dae06229f489fa1f03b545205a606" kind="typedef"><name>Idx</name></member>
     <member refid="ddc__aliases_8hpp_1aa0efcc86b2377594f972b1c24ce8ad35" kind="typedef"><name>IdxStep</name></member>
     <member refid="ddc__aliases_8hpp_1a72a6b6202b455e81c603c8a28f39f3ff" kind="typedef"><name>IdxRange</name></member>
+    <member refid="ddc__aliases_8hpp_1ac914ec20f010c401b7b0d510d61d8b53" kind="typedef"><name>IdxRangeSlice</name></member>
     <member refid="ddc__aliases_8hpp_1abda38dfd03ef2a3c48f3818a2abe1171" kind="typedef"><name>FieldMem</name></member>
     <member refid="ddc__aliases_8hpp_1aa48725aeb9266e64d6c53eeb9ea4c8e5" kind="typedef"><name>DFieldMem</name></member>
     <member refid="ddc__aliases_8hpp_1a6c61b73b9169b94cd563d2bf3ccac76d" kind="typedef"><name>Field</name></member>

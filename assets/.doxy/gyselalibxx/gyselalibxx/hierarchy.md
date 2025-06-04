@@ -106,7 +106,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **class** [**SplitVlasovSolver**](classSplitVlasovSolver.md) _A class that solves a Vlasov equation using Strang's splitting._ 
 * **class** [**IdentityCoordinateChange**](classIdentityCoordinateChange.md) _A class describing an identity transformation._ 
 * **class** [**IdentityTensor**](classIdentityTensor.md) 
-* **class** [**IdxRangeSlice**](classIdxRangeSlice.md) _A class which describes a collection of equally spaced Idxs which form a index range._ 
 * **class** [**InvJacobianOPoint**](classInvJacobianOPoint.md) _An operator for calculating the inverse of the Jacobian at an O-point. This class is used in_ [_**CombinedMapping**_](classCombinedMapping.md) _to calculate the inverse of the Jacobian at an O-point when one of the mappings does not allow the evaluation of its Jacobian/inverse Jacobian at the O-point._
 * **class** [**InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f.md) 
 * **class** [**InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9.md) 
@@ -170,8 +169,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**FluidMoments::MomentTemperature**](structFluidMoments_1_1MomentTemperature.md) 
 * **struct** [**FluidMoments::MomentVelocity**](structFluidMoments_1_1MomentVelocity.md) 
 * **struct** [**GaussLegendreCoefficients**](structGaussLegendreCoefficients.md) _A structure containing the weights and positions associated with a Gauss-Legendre quadrature using NPoints points._ 
-* **struct** [**IdxRangeSliceIterator**](structIdxRangeSliceIterator.md) _An iterator type for the_ [_**IdxRangeSlice**_](classIdxRangeSlice.md) _._
-* **struct** [**IdxRangeToSlice**](structIdxRangeToSlice.md) _A class to create a_ [_**IdxRangeSlice**_](classIdxRangeSlice.md) _type from a TypeSeq._
+* **struct** [**IdxRangeToSlice**](structIdxRangeToSlice.md) _A class to create a IdxRangeSlice type from a TypeSeq._ 
 * **struct** [**Interface**](structInterface.md) _Represent a simple sticking of two edges._ 
 * **struct** [**MPIDim**](structMPIDim.md) _An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered information will be sent to or where the gathered information will be collected from._ 
 * **struct** [**Mu**](structMu.md) _Define non periodic magnetic momentum_  _._
@@ -342,11 +340,9 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** **std::false_type**    
     * **struct** [**ddcHelper::is\_non\_uniform\_interpolation\_points**](structddcHelper_1_1is__non__uniform__interpolation__points.md) 
     * **struct** [**is\_onion\_patch\_locator**](structis__onion__patch__locator.md) _Struct to identify if the patch locator is adapted to onion geometry._ 
-    * **struct** [**is\_subidx\_range\_collection**](structis__subidx__range__collection.md) 
     * **struct** [**tensor\_tools::is\_vector\_index\_set**](structtensor__tools_1_1is__vector__index__set.md) _A helper structure to recognise a VectorIndexSet type._ 
 * **class** **std::true_type**    
     * **struct** [**ddcHelper::is\_non\_uniform\_interpolation\_points&lt; NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt; &gt;**](structddcHelper_1_1is__non__uniform__interpolation__points_3_01NonUniformInterpolationPoints_3_047d1c8570873e3c052e2e394afcf9270.md) 
     * **struct** [**is\_onion\_patch\_locator&lt; OnionPatchLocator&lt; MultipatchIdxRanges, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt; &gt;**](structis__onion__patch__locator_3_01OnionPatchLocator_3_01MultipatchIdxRanges_00_01LogicalToPhys15c96379834346672a2b2d644897e91f.md) 
-    * **struct** [**is\_subidx\_range\_collection&lt; IdxRangeSlice&lt; Tags... &gt; &gt;**](structis__subidx__range__collection_3_01IdxRangeSlice_3_01Tags_8_8_8_01_4_01_4.md) 
     * **struct** [**tensor\_tools::is\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md) 
 

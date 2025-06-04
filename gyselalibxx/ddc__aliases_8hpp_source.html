@@ -559,6 +559,9 @@ using IdxStep = ddc::DiscreteVector&lt;GridTypes...&gt;;
 template &lt;class... GridTypes&gt;
 using IdxRange = ddc::DiscreteDomain&lt;GridTypes...&gt;;
 
+template &lt;class... GridTypes&gt;
+using IdxRangeSlice = ddc::StridedDiscreteDomain&lt;GridTypes...&gt;;
+
 template &lt;
         class ElementType,
         class IdxRange,

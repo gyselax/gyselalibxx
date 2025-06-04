@@ -542,38 +542,9 @@
 <p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_eaa769653453aaefd8cc10e98e9bb3eb.html"><strong>data_types</strong></a> <strong>&gt;</strong> <a href="idx__range__slice_8hpp.html"><strong>idx_range_slice.hpp</strong></a></p>
 <p><a href="idx__range__slice_8hpp_source.html">Go to the source code of this file</a></p>
 <ul>
-<li><code>#include &lt;map&gt;</code></li>
-<li><code>#include &lt;vector&gt;</code></li>
 <li><code>#include &lt;ddc/ddc.hpp&gt;</code></li>
 <li><code>#include "ddc_aliases.hpp"</code></li>
 </ul>
-<h2 id="classes">Classes</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a> &lt;Dims&gt;<br><em>A class which describes a collection of equally spaced Idxs which form a index range.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structIdxRangeSliceIterator.html"><strong>IdxRangeSliceIterator</strong></a> &lt;class Grid1D&gt;<br><em>An iterator type for the</em> <a href="classIdxRangeSlice.html"><em><strong>IdxRangeSlice</strong></em></a> <em>.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structis__subidx__range__collection.html"><strong>is_subidx_range_collection</strong></a> &lt;class <a href="structT.html"><strong>T</strong></a>&gt;<br></td>
-</tr>
-<tr>
-<td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structis__subidx__range__collection_3_01IdxRangeSlice_3_01Tags_8_8_8_01_4_01_4.html"><strong>is_subidx_range_collection&lt; IdxRangeSlice&lt; Tags... &gt; &gt;</strong></a> &lt;Tags&gt;<br></td>
-</tr>
-</tbody>
-</table>
 <h2 id="public-types">Public Types</h2>
 <table>
 <thead>
@@ -585,35 +556,14 @@
 <tbody>
 <tr>
 <td style="text-align: right;">typedef typename <a href="structIdxRangeToSlice.html"><strong>IdxRangeToSlice</strong></a>&lt; <a href="structT.html"><strong>T</strong></a> &gt;::value</td>
-<td style="text-align: left;"><a href="#typedef-to_subidx_range_collection"><strong>to_subidx_range_collection</strong></a>  <br><em>A templated type for creating a</em> <a href="classIdxRangeSlice.html"><em><strong>IdxRangeSlice</strong></em></a> <em>from a TypeSeq.</em></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-attributes">Public Attributes</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-is_subidx_range_collection_v"><strong>is_subidx_range_collection_v</strong></a>   = <code>[**is\_subidx\_range\_collection**](structis__subidx__range__collection.md)&amp;lt;[**T**](structT.md)&amp;gt;::value</code><br><em>A templated value to determine if a type is a</em> <a href="classIdxRangeSlice.html"><em><strong>IdxRangeSlice</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#typedef-to_subidx_range_collection"><strong>to_subidx_range_collection</strong></a>  <br><em>A templated type for creating a IdxRangeSlice from a TypeSeq.</em></td>
 </tr>
 </tbody>
 </table>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-to_subidx_range_collection">typedef to_subidx_range_collection</h3>
-<p><em>A templated type for creating a</em> <a href="classIdxRangeSlice.html"><em><strong>IdxRangeSlice</strong></em></a> <em>from a TypeSeq.</em></p>
+<p><em>A templated type for creating a IdxRangeSlice from a TypeSeq.</em> </p>
 <pre><code class="language-C++">using to_subidx_range_collection =  typename IdxRangeToSlice&lt;T&gt;::value;
-</code></pre>
-<hr>
-<h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
-<h3 id="variable-is_subidx_range_collection_v">variable is_subidx_range_collection_v</h3>
-<p><em>A templated value to determine if a type is a</em> <a href="classIdxRangeSlice.html"><em><strong>IdxRangeSlice</strong></em></a> <em>.</em></p>
-<pre><code class="language-C++">constexpr bool is_subidx_range_collection_v;
 </code></pre>
 <hr>
 

@@ -436,23 +436,23 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
-      <memberdef kind="function" id="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1aca0752ae1b3cc1d2885e6644fbe1d6f2" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a1544c678e280360ddde4876dbd957b9f" prot="protected" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>class DElem</type>
+            <type>class QueryDim</type>
           </param>
         </templateparamlist>
-        <type>KOKKOS_FUNCTION std::pair&lt; int, <ref refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a5f7df456b19ca5dbdc9ffcdb4c13a1de" kindref="member">index_type</ref> &gt;</type>
-        <definition>KOKKOS_FUNCTION std::pair&lt; int, index_type &gt; DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_index</definition>
-        <argsstring>(DElem elem) const</argsstring>
+        <type>KOKKOS_FUNCTION std::size_t</type>
+        <definition>KOKKOS_FUNCTION std::size_t DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_index</definition>
+        <argsstring>(Idx&lt; QueryDim &gt; elem) const noexcept</argsstring>
         <name>get_index</name>
         <qualifiedname>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_index</qualifiedname>
         <param>
-          <type>DElem</type>
+          <type>Idx&lt; QueryDim &gt;</type>
           <declname>elem</declname>
         </param>
         <briefdescription>
-<para>An internal function which provides the index of an element inside the internal_fields. An Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested. </para>
+<para>Get the index of the Idx within m_cross_derivative_idx_range. This function is particularly useful to index an mdspan over an index range slice. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -460,19 +460,17 @@
 <parametername>elem</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The element of interest.</para>
+<para>A 1D Idx which is inside the index range slice.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>int The index of the internal field inside the array internal_fields. </para>
-</simplesect>
-<simplesect kind="return"><para>index_type The index of the element of interest inside the field of interest. </para>
+<simplesect kind="return"><para>The index of the element. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp" line="170" column="31" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp" bodystart="170" bodyend="177"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp" line="168" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp" bodystart="168" bodyend="174"/>
       </memberdef>
       <memberdef kind="function" id="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a58c249fa7954db05b6d6bedbdab15823" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -513,7 +511,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp" line="195" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp" bodystart="195" bodyend="201"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp" line="192" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp" bodystart="192" bodyend="198"/>
       </memberdef>
       <memberdef kind="function" id="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a868ed39fa484e90af6985b22c78df50c" prot="protected" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -575,7 +573,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp" line="214" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp" bodystart="214" bodyend="247"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp" line="211" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp" bodystart="211" bodyend="243"/>
       </memberdef>
       <memberdef kind="function" id="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a87810847a0ebdc91930bdb5d861396c9" prot="protected" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -637,7 +635,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp" line="260" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp" bodystart="260" bodyend="303"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp" line="256" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp" bodystart="256" bodyend="303"/>
       </memberdef>
       <memberdef kind="function" id="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1ab37c3af17859ce88bd4842eb614c75ce" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1082,7 +1080,7 @@
       <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a8536f9be8c43d695b9424648f8dbdf8f" prot="public" virt="non-virtual"><scope>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</scope><name>discrete_element_type</name></member>
       <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a8df83185147fa5fdbcf1d54fbbb734a2" prot="public" virt="non-virtual"><scope>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</scope><name>element_type</name></member>
       <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a58c249fa7954db05b6d6bedbdab15823" prot="protected" virt="non-virtual"><scope>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</scope><name>get_array_index</name></member>
-      <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1aca0752ae1b3cc1d2885e6644fbe1d6f2" prot="protected" virt="non-virtual"><scope>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</scope><name>get_index</name></member>
+      <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a1544c678e280360ddde4876dbd957b9f" prot="protected" virt="non-virtual"><scope>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</scope><name>get_index</name></member>
       <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1ab37c3af17859ce88bd4842eb614c75ce" prot="protected" virt="non-virtual"><scope>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</scope><name>get_internal_field</name></member>
       <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1ac7bdb7d57cf9d0ba344724a0a9797457" prot="protected" virt="non-virtual"><scope>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</scope><name>get_internal_field</name></member>
       <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1afb79eb00f2eb1a1b757d190663c085d1" prot="public" virt="non-virtual"><scope>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</scope><name>get_mdspan</name></member>

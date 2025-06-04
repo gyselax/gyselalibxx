@@ -10,7 +10,7 @@
 
 
 
-_A class to create a_ [_**IdxRangeSlice**_](classIdxRangeSlice.md) _type from a TypeSeq._
+_A class to create a IdxRangeSlice type from a TypeSeq._ 
 
 
 

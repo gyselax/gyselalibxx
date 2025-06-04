@@ -746,8 +746,8 @@
 <td style="text-align: left;"><a href="#function-get_array_index"><strong>get_array_index</strong></a> (Idx&lt; Tag... &gt; idx) const<br><em>An internal function which provides the index of a field inside the internal_fields array. An Idx describes the derivatives of interest. n-th order derivatives are stored in the same field for all n!=0 so it is sufficient to provide any valid element from the derivatives.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION std::pair&lt; int, <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-index_type"><strong>index_type</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#function-get_index"><strong>get_index</strong></a> (DElem elem) const<br><em>An internal function which provides the index of an element inside the internal_fields. An Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.</em></td>
+<td style="text-align: right;">KOKKOS_FUNCTION std::size_t</td>
+<td style="text-align: left;"><a href="#function-get_index"><strong>get_index</strong></a> (Idx&lt; QueryDim &gt; elem) noexcept const<br><em>Get the index of the Idx within m_cross_derivative_idx_range. This function is particularly useful to index an mdspan over an index range slice.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION auto</td>
@@ -1057,20 +1057,18 @@ inline KOKKOS_FUNCTION int DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims...
 <hr>
 
 <h3 id="function-get_index">function get_index</h3>
-<p><em>An internal function which provides the index of an element inside the internal_fields. An Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.</em> </p>
-<pre><code class="language-C++">template&lt;class DElem&gt;
-inline KOKKOS_FUNCTION std::pair&lt; int, index_type &gt; DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_index (
-    DElem elem
-) const
+<p><em>Get the index of the Idx within m_cross_derivative_idx_range. This function is particularly useful to index an mdspan over an index range slice.</em> </p>
+<pre><code class="language-C++">template&lt;class QueryDim&gt;
+inline KOKKOS_FUNCTION std::size_t DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_index (
+    Idx&lt; QueryDim &gt; elem
+) noexcept const
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>elem</code> The element of interest.</li>
+<li><code>elem</code> A 1D Idx which is inside the index range slice.</li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>int The index of the internal field inside the array internal_fields. </p>
-<p><strong>Returns:</strong></p>
-<p>index_type The index of the element of interest inside the field of interest. </p>
+<p>The index of the element. </p>
 <hr>
 
 <h3 id="function-get_internal_field-12">function get_internal_field [1/2]</h3>

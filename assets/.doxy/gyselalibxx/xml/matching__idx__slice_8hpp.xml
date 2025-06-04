@@ -14,10 +14,6 @@
       <node id="14">
         <label>idx_range_slice.hpp</label>
         <link refid="idx__range__slice_8hpp_source"/>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
@@ -113,17 +109,11 @@
       <node id="6">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="15">
-        <label>map</label>
-      </node>
       <node id="2">
         <label>numeric</label>
       </node>
       <node id="3">
         <label>stdexcept</label>
-      </node>
-      <node id="16">
-        <label>vector</label>
       </node>
     </incdepgraph>
     <innerclass refid="classMatchingIdxSlice" prot="public">MatchingIdxSlice</innerclass>
@@ -170,8 +160,8 @@
 <codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRange2D_1<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Patch1::IdxRange12;</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRange2D_2<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Patch2::IdxRange12;</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"></highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice1</ref><sp/>=<sp/><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice&lt;EdgeGrid1&gt;</ref>;</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice2</ref><sp/>=<sp/><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice&lt;EdgeGrid2&gt;</ref>;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeSlice1<sp/>=<sp/>IdxRangeSlice&lt;EdgeGrid1&gt;;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeSlice2<sp/>=<sp/>IdxRangeSlice&lt;EdgeGrid2&gt;;</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"></highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>are_grids_uniform<sp/>=<sp/>(ddc::is_uniform_point_sampling_v&lt;EdgeGrid1&gt;)&amp;&amp;(</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::is_uniform_point_sampling_v&lt;EdgeGrid2&gt;);</highlight></codeline>
@@ -179,8 +169,8 @@
 <codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRange1D_1<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>m_idx_range_edge_1;</highlight></codeline>
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRange1D_2<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>m_idx_range_edge_2;</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"></highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice1</ref><sp/>m_conforming_idx_1;</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice2</ref><sp/>m_conforming_idx_2;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeSlice1<sp/>m_conforming_idx_1;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeSlice2<sp/>m_conforming_idx_2;</highlight></codeline>
 <codeline lineno="71"><highlight class="normal"></highlight></codeline>
 <codeline lineno="72"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatchingIdxSlice" kindref="compound">~MatchingIdxSlice</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
@@ -211,7 +201,7 @@
 <codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(std::is_same_v&lt;ParallelGrid,<sp/>EdgeGrid1&gt;)</highlight></codeline>
 <codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>||<sp/>(std::is_same_v&lt;ParallelGrid,<sp/>EdgeGrid2&gt;),</highlight></codeline>
 <codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">&gt;</highlight></codeline>
-<codeline lineno="136" refid="classMatchingIdxSlice_1a230c16e68ddde60704030d6763dc3eb9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice&lt;ParallelGrid&gt;</ref><sp/><ref refid="classMatchingIdxSlice_1a230c16e68ddde60704030d6763dc3eb9" kindref="member">get</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="136" refid="classMatchingIdxSlice_1a230c16e68ddde60704030d6763dc3eb9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeSlice&lt;ParallelGrid&gt;<sp/><ref refid="classMatchingIdxSlice_1a230c16e68ddde60704030d6763dc3eb9" kindref="member">get</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="137"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;ParallelGrid,<sp/>EdgeGrid1&gt;)<sp/>{</highlight></codeline>
 <codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_conforming_idx_1;</highlight></codeline>
@@ -284,14 +274,14 @@
 <codeline lineno="214"><highlight class="normal"></highlight></codeline>
 <codeline lineno="215"><highlight class="normal"></highlight></codeline>
 <codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Gr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">1D&gt;</highlight></codeline>
-<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice&lt;Grid1D&gt;</ref><sp/>get_idx_range_slice(</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeSlice&lt;Grid1D&gt;<sp/>get_idx_range_slice(</highlight></codeline>
 <codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;Grid1D&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>idx_range,</highlight></codeline>
 <codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;Idx&lt;Grid1D&gt;&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>conforming_idx_vec)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="221"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;Grid1D&gt;<sp/>idx_front<sp/>=<sp/>idx_range.<ref refid="classIdxRangeSlice_1a7f97c317c82426f237b421e036200973" kindref="member">front</ref>();</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;Grid1D&gt;<sp/>idx_front<sp/>=<sp/>idx_range.front();</highlight></codeline>
 <codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxStep&lt;Grid1D&gt;<sp/>stride<sp/>=<sp/>get_idx_step(conforming_idx_vec);</highlight></codeline>
 <codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxStep&lt;Grid1D&gt;<sp/>size((idx_range.size()<sp/>-<sp/>1)<sp/>/<sp/>stride.value()<sp/>+<sp/>1);</highlight></codeline>
-<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice&lt;Grid1D&gt;</ref>(idx_front,<sp/>size,<sp/>stride);</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>IdxRangeSlice&lt;Grid1D&gt;(idx_front,<sp/>size,<sp/>stride);</highlight></codeline>
 <codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="227"><highlight class="normal">};</highlight></codeline>
     </programlisting>

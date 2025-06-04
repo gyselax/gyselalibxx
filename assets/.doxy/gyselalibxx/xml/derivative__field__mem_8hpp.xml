@@ -59,10 +59,6 @@
       <node id="12">
         <label>idx_range_slice.hpp</label>
         <link refid="idx__range__slice_8hpp_source"/>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
@@ -97,17 +93,11 @@
       <node id="7">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="13">
-        <label>map</label>
-      </node>
       <node id="4">
         <label>type_traits</label>
       </node>
       <node id="5">
         <label>utility</label>
-      </node>
-      <node id="14">
-        <label>vector</label>
       </node>
     </incdepgraph>
     <innerclass refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4" prot="public">DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</innerclass>
@@ -350,7 +340,7 @@
 <codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(ddc::in_tags_v&lt;QueryDDim,<sp/>physical_deriv_grids&gt;)<sp/>{</highlight></codeline>
 <codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(</highlight></codeline>
 <codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ArrayIndex<sp/>&amp;<sp/>(1<sp/>&lt;&lt;<sp/>ddc::type_seq_rank_v&lt;ddc::Deriv&lt;QueryDDim&gt;,<sp/>deriv_tags&gt;))<sp/>{</highlight></codeline>
-<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice&lt;QueryDDim&gt;</ref><sp/>idx_range_local(base_type::m_cross_derivative_idx_range);</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeSlice&lt;QueryDDim&gt;<sp/>idx_range_local(base_type::m_cross_derivative_idx_range);</highlight></codeline>
 <codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>idx_range_local.extents().value();</highlight></codeline>
 <codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;QueryDDim&gt;<sp/>idx_range_local(base_type::m_physical_idx_range);</highlight></codeline>
@@ -387,18 +377,18 @@
 <codeline lineno="240"><highlight class="normal"></highlight></codeline>
 <codeline lineno="241"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>DerivDoms&gt;</highlight></codeline>
-<codeline lineno="250" refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a1675bc7159ba70d8c70c4017ea610fe2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a1675bc7159ba70d8c70c4017ea610fe2" kindref="member">DerivFieldMem</ref>(</highlight></codeline>
+<codeline lineno="250" refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a11a38217dc28cf66cada14781ce30b43" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a11a38217dc28cf66cada14781ce30b43" kindref="member">DerivFieldMem</ref>(</highlight></codeline>
 <codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a9d746620e71965623275a8fc318eb497" kindref="member">physical_idx_range_type</ref><sp/>val_idx_range,</highlight></codeline>
-<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice&lt;DerivDoms&gt;</ref>...<sp/>m_deriv_idx_range)</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::StridedDiscreteDomain&lt;DerivDoms&gt;...<sp/>m_deriv_idx_range)</highlight></codeline>
 <codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classDerivFieldMem" kindref="compound">DerivFieldMem</ref>(allocator_type(),<sp/>val_idx_range,<sp/>m_deriv_idx_range...)</highlight></codeline>
 <codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="256"><highlight class="normal"></highlight></codeline>
 <codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>DerivDoms&gt;</highlight></codeline>
-<codeline lineno="266" refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1abd291fdb248e85ba48ec74c19087e864" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1abd291fdb248e85ba48ec74c19087e864" kindref="member">DerivFieldMem</ref>(</highlight></codeline>
+<codeline lineno="266" refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a09a41faf825170dbedd7a225db47bc45" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a09a41faf825170dbedd7a225db47bc45" kindref="member">DerivFieldMem</ref>(</highlight></codeline>
 <codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>allocator_type<sp/>allocator,</highlight></codeline>
 <codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a9d746620e71965623275a8fc318eb497" kindref="member">physical_idx_range_type</ref><sp/>val_idx_range,</highlight></codeline>
-<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice&lt;DerivDoms&gt;</ref>...<sp/>m_deriv_idx_range)</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::StridedDiscreteDomain&lt;DerivDoms&gt;...<sp/>m_deriv_idx_range)</highlight></codeline>
 <codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classDerivFieldCommon" kindref="compound">base_type</ref>(</highlight></codeline>
 <codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>val_idx_range,</highlight></codeline>
 <codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>discrete_deriv_idx_range_type(IdxRange&lt;ddc::Deriv&lt;DerivDoms&gt;&gt;(</highlight></codeline>

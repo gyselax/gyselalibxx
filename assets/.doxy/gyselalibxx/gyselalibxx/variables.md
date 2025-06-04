@@ -334,7 +334,6 @@
 * **is\_mapping\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
 * **is\_borrowed\_deriv\_field\_v** ([**derivative\_field\_common.hpp**](derivative__field__common_8hpp.md))
 * **is\_deriv\_field\_v** ([**derivative\_field\_common.hpp**](derivative__field__common_8hpp.md))
-* **is\_subidx\_range\_collection\_v** ([**idx\_range\_slice.hpp**](idx__range__slice_8hpp.md))
 * **is\_tensor\_type\_v** ([**tensor\_common.hpp**](tensor__common_8hpp.md))
 * **is\_borrowed\_vector\_field\_v** ([**vector\_field\_common.hpp**](vector__field__common_8hpp.md))
 * **is\_vector\_field\_v** ([**vector\_field\_common.hpp**](vector__field__common_8hpp.md))
@@ -446,6 +445,7 @@
 * **is\_mem\_type\_v** ([**ddc\_alias\_inline\_functions.hpp**](ddc__alias__inline__functions_8hpp.md))
 * **Idx** ([**ddc\_aliases.hpp**](ddc__aliases_8hpp.md))
 * **IdxRange** ([**ddc\_aliases.hpp**](ddc__aliases_8hpp.md))
+* **IdxRangeSlice** ([**ddc\_aliases.hpp**](ddc__aliases_8hpp.md))
 * **IdxStep** ([**ddc\_aliases.hpp**](ddc__aliases_8hpp.md))
 
 

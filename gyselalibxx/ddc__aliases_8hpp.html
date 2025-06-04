@@ -591,6 +591,10 @@
 <td style="text-align: left;"><a href="#typedef-idxrange"><strong>IdxRange</strong></a>  <br><em>An alias describing the type of an index range describing the subsection of a grid on which a field is defined.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef ddc::StridedDiscreteDomain&lt; GridTypes... &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrangeslice"><strong>IdxRangeSlice</strong></a>  <br></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef ddc::DiscreteVector&lt; GridTypes... &gt;</td>
 <td style="text-align: left;"><a href="#typedef-idxstep"><strong>IdxStep</strong></a>  <br><em>An alias describing the type of a distance between two indexes.</em></td>
 </tr>
@@ -657,6 +661,11 @@
 <h3 id="typedef-idxrange">typedef IdxRange</h3>
 <p><em>An alias describing the type of an index range describing the subsection of a grid on which a field is defined.</em> </p>
 <pre><code class="language-C++">using IdxRange =  ddc::DiscreteDomain&lt;GridTypes...&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrangeslice">typedef IdxRangeSlice</h3>
+<pre><code class="language-C++">using IdxRangeSlice =  ddc::StridedDiscreteDomain&lt;GridTypes...&gt;;
 </code></pre>
 <hr>
 

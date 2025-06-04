@@ -563,12 +563,12 @@
 <td style="text-align: left;"><a href="#function-matchingidxslice-22"><strong>MatchingIdxSlice</strong></a> (IdxRange2D_1 const &amp; idx_range_1, IdxRange2D_2 const &amp; idx_range_2) <br><em>Instantiate the class from 2D index ranges.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;"><a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>&lt; ParallelGrid &gt;</td>
-<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> () const<br><em>Get the</em> <a href="classIdxRangeSlice.html"><em><strong>IdxRangeSlice</strong></em></a> <em>containing the conforming indexes.</em></td>
+<td style="text-align: right;">IdxRangeSlice&lt; ParallelGrid &gt;</td>
+<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> () const<br><em>Get the IdxRangeSlice containing the conforming indexes.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">auto</td>
-<td style="text-align: left;"><a href="#function-get_from_perp"><strong>get_from_perp</strong></a> () const<br><em>Get the</em> <a href="classIdxRangeSlice.html"><em><strong>IdxRangeSlice</strong></em></a> <em>containing the conforming indexes.</em></td>
+<td style="text-align: left;"><a href="#function-get_from_perp"><strong>get_from_perp</strong></a> () const<br><em>Get the IdxRangeSlice containing the conforming indexes.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
@@ -577,7 +577,7 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>The conforming indexes are the indexes with an equivalent index on the parallel grid of the other edge of a given interface. The conforming indexes are stored in an <a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>. The index step between two indexes in the <a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a> are supposed to be uniform. If they are not, the instantiation of the class fails.</p>
+<p>The conforming indexes are the indexes with an equivalent index on the parallel grid of the other edge of a given interface. The conforming indexes are stored in an IdxRangeSlice. The index step between two indexes in the IdxRangeSlice are supposed to be uniform. If they are not, the instantiation of the class fails.</p>
 <p>If the grids are uniform, the index steps between the conforming indexes are uniform. The uniform index steps can be deduced from the greatest common divisor.</p>
 <p>E.g. for a first grid of N cells and a second grid of M cells, gcd = gcd(M, N) idx_step on the first grid: N / gcd idx_step on the second grid: M / gcd
 * </p>
@@ -594,8 +594,8 @@
 ) 
 </code></pre>
 <p>To define the IdxRangeSlices containing the conforming indexes, we first check that the index steps between two conforming indexes are uniform, for the 1D grid of each edge of the interface.</p>
-<p>If true, the index step of the patch is applied to instantiate the associated <a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>.</p>
-<p>If the grids are uniform, it is true and we can use the greatest common divisor between the two number of cells to compute the index steps of each <a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>.</p>
+<p>If true, the index step of the patch is applied to instantiate the associated IdxRangeSlice.</p>
+<p>If the grids are uniform, it is true and we can use the greatest common divisor between the two number of cells to compute the index steps of each IdxRangeSlice.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>idx_range_1</code> 1D IdxRange of the first <a href="structEdge.html"><strong>Edge</strong></a> of the <a href="structInterface.html"><strong>Interface</strong></a>. </li>
@@ -611,8 +611,8 @@
 ) 
 </code></pre>
 <p>To define the IdxRangeSlices containing the conforming indexes, we first check that the index steps between two conforming indexes are uniform, for the 1D grid of each edge of the interface.</p>
-<p>If true, the index step of the patch is applied to instantiate the associated <a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>.</p>
-<p>If the grids are uniform, it is true and we can use the greatest common divisor between the two number of cells to compute the index steps of each <a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a>.</p>
+<p>If true, the index step of the patch is applied to instantiate the associated IdxRangeSlice.</p>
+<p>If the grids are uniform, it is true and we can use the greatest common divisor between the two number of cells to compute the index steps of each IdxRangeSlice.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>idx_range_1</code> 2D IdxRange of the first <a href="structEdge.html"><strong>Edge</strong></a> of the <a href="structInterface.html"><strong>Interface</strong></a>. </li>
@@ -621,20 +621,20 @@
 <hr>
 
 <h3 id="function-get">function get</h3>
-<p><em>Get the</em> <a href="classIdxRangeSlice.html"><em><strong>IdxRangeSlice</strong></em></a> <em>containing the conforming indexes.</em></p>
+<p><em>Get the IdxRangeSlice containing the conforming indexes.</em> </p>
 <pre><code class="language-C++">template&lt;class ParallelGrid, std::enable_if_t&lt;(std::is_same_v&lt; ParallelGrid, EdgeGrid1 &gt;)||(std::is_same_v&lt; ParallelGrid, EdgeGrid2 &gt;), bool &gt;&gt;
-inline IdxRangeSlice &lt; ParallelGrid &gt; MatchingIdxSlice::get () const
+inline IdxRangeSlice&lt; ParallelGrid &gt; MatchingIdxSlice::get () const
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>ParallelGrid</code> The parallel grid to the edge. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p><a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a> of conforming indexes on the given ParallelGrid. </p>
+<p>IdxRangeSlice of conforming indexes on the given ParallelGrid. </p>
 <hr>
 
 <h3 id="function-get_from_perp">function get_from_perp</h3>
-<p><em>Get the</em> <a href="classIdxRangeSlice.html"><em><strong>IdxRangeSlice</strong></em></a> <em>containing the conforming indexes.</em></p>
+<p><em>Get the IdxRangeSlice containing the conforming indexes.</em> </p>
 <pre><code class="language-C++">template&lt;class PerpendicularGrid, std::enable_if_t&lt;(std::is_same_v&lt; PerpendicularGrid, PerpEdgeGrid1 &gt;)||(std::is_same_v&lt; PerpendicularGrid, PerpEdgeGrid2 &gt;), bool &gt;&gt;
 inline auto MatchingIdxSlice::get_from_perp () const
 </code></pre>
@@ -643,7 +643,7 @@ inline auto MatchingIdxSlice::get_from_perp () const
 <li><code>PerpendicularGrid</code> The perpendicular grid to the edge. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p><a href="classIdxRangeSlice.html"><strong>IdxRangeSlice</strong></a> of conforming indexes on the perpendicular grid to the given PerpendicularGrid. </p>
+<p>IdxRangeSlice of conforming indexes on the perpendicular grid to the given PerpendicularGrid. </p>
 <hr>
 
 <h3 id="function-matchingidxslice">function ~MatchingIdxSlice</h3>

@@ -8,11 +8,11 @@
       </param>
     </templateparamlist>
     <briefdescription>
-<para>A class to create a <ref refid="classIdxRangeSlice" kindref="compound">IdxRangeSlice</ref> type from a TypeSeq. </para>
+<para>A class to create a IdxRangeSlice type from a TypeSeq. </para>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="452" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="452" bodyend="-1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" line="11" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp" bodystart="11" bodyend="-1"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

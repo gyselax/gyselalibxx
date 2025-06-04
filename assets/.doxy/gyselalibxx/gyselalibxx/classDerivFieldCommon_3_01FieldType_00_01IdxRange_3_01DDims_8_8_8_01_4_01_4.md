@@ -132,7 +132,7 @@ _An abstract class which holds a chunk of memory describing a field and its deri
 | ---: | :--- |
 |  KOKKOS\_FUNCTION | [**DerivFieldCommon**](#function-derivfieldcommon) ([**physical\_idx\_range\_type**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-physical_idx_range_type) physical\_idx\_range, [**discrete\_deriv\_idx\_range\_type**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-discrete_deriv_idx_range_type) deriv\_idx\_range, to\_subidx\_range\_collection&lt; [**physical\_deriv\_grids**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-physical_deriv_grids) &gt; cross\_derivative\_idx\_range) <br>_Protected constructor to be used by subclasses to initialise index ranges._  |
 |  KOKKOS\_FUNCTION int | [**get\_array\_index**](#function-get_array_index) (Idx&lt; Tag... &gt; idx) const<br>_An internal function which provides the index of a field inside the internal\_fields array. An Idx describes the derivatives of interest. n-th order derivatives are stored in the same field for all n!=0 so it is sufficient to provide any valid element from the derivatives._  |
-|  KOKKOS\_FUNCTION std::pair&lt; int, [**index\_type**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-index_type) &gt; | [**get\_index**](#function-get_index) (DElem elem) const<br>_An internal function which provides the index of an element inside the internal\_fields. An Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested._  |
+|  KOKKOS\_FUNCTION std::size\_t | [**get\_index**](#function-get_index) (Idx&lt; QueryDim &gt; elem) noexcept const<br>_Get the index of the Idx within m\_cross\_derivative\_idx\_range. This function is particularly useful to index an mdspan over an index range slice._  |
 |  KOKKOS\_FUNCTION auto | [**get\_internal\_field**](#function-get_internal_field-12) (IdxRange&lt; ODims... &gt; idx\_range) const<br> |
 |  KOKKOS\_FUNCTION auto | [**get\_internal\_field**](#function-get_internal_field-22) (Idx&lt; ODims... &gt; elem) const<br> |
 |  KOKKOS\_FUNCTION constexpr auto | [**get\_slicer\_for**](#function-get_slicer_for-12) (Idx&lt; ODDims... &gt; const & slice\_idx, int array\_idx) const<br>_Get an object which can be used to slice an mdspan._  |
@@ -856,12 +856,12 @@ discrete\_deriv\_idx\_range\_type The index range of the derivatives at the fiel
 
 ### function get\_index 
 
-_An internal function which provides the index of an element inside the internal\_fields. An Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested._ 
+_Get the index of the Idx within m\_cross\_derivative\_idx\_range. This function is particularly useful to index an mdspan over an index range slice._ 
 ```C++
-template<class DElem>
-inline KOKKOS_FUNCTION std::pair< int, index_type > DerivFieldCommon< FieldType, IdxRange< DDims... > >::get_index (
-    DElem elem
-) const
+template<class QueryDim>
+inline KOKKOS_FUNCTION std::size_t DerivFieldCommon< FieldType, IdxRange< DDims... > >::get_index (
+    Idx< QueryDim > elem
+) noexcept const
 ```
 
 
@@ -871,20 +871,13 @@ inline KOKKOS_FUNCTION std::pair< int, index_type > DerivFieldCommon< FieldType,
 **Parameters:**
 
 
-* `elem` The element of interest.
+* `elem` A 1D Idx which is inside the index range slice.
 
 
 
 **Returns:**
 
-int The index of the internal field inside the array internal\_fields. 
-
-
-
-
-**Returns:**
-
-index\_type The index of the element of interest inside the field of interest. 
+The index of the element. 
 
 
 

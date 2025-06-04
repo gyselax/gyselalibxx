@@ -113,9 +113,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**IVlasovSolver**](classIVlasovSolver.md) _An abstract class for solving a Vlasov equation._     
 * **class** [**IdentityCoordinateChange**](classIdentityCoordinateChange.md) _A class describing an identity transformation._     
 * **class** [**IdentityTensor**](classIdentityTensor.md)     
-* **class** [**IdxRangeSlice**](classIdxRangeSlice.md) _A class which describes a collection of equally spaced Idxs which form a index range._     
-* **struct** [**IdxRangeSliceIterator**](structIdxRangeSliceIterator.md) _An iterator type for the_ [_**IdxRangeSlice**_](classIdxRangeSlice.md) _._    
-* **struct** [**IdxRangeToSlice**](structIdxRangeToSlice.md) _A class to create a_ [_**IdxRangeSlice**_](classIdxRangeSlice.md) _type from a TypeSeq._
+* **struct** [**IdxRangeToSlice**](structIdxRangeToSlice.md) _A class to create a IdxRangeSlice type from a TypeSeq._ 
 * **struct** [**Interface**](structInterface.md) _Represent a simple sticking of two edges._     
 * **class** [**InvJacobianOPoint**](classInvJacobianOPoint.md) _An operator for calculating the inverse of the Jacobian at an O-point. This class is used in_ [_**CombinedMapping**_](classCombinedMapping.md) _to calculate the inverse of the Jacobian at an O-point when one of the mappings does not allow the evaluation of its Jacobian/inverse Jacobian at the O-point._
 * **class** [**InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f.md)     
@@ -326,8 +324,6 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**interpolator\_on\_idx\_range&lt; Interp, GridInterp, IdxRange&lt; Grid1D... &gt; &gt;**](structinterpolator__on__idx__range_3_01Interp_00_01GridInterp_00_01IdxRange_3_01Grid1D_8_8_8_01_4_01_4.md)     
 * **struct** [**is\_onion\_patch\_locator**](structis__onion__patch__locator.md) _Struct to identify if the patch locator is adapted to onion geometry._ 
 * **struct** [**is\_onion\_patch\_locator&lt; OnionPatchLocator&lt; MultipatchIdxRanges, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt; &gt;**](structis__onion__patch__locator_3_01OnionPatchLocator_3_01MultipatchIdxRanges_00_01LogicalToPhys15c96379834346672a2b2d644897e91f.md) 
-* **struct** [**is\_subidx\_range\_collection**](structis__subidx__range__collection.md) 
-* **struct** [**is\_subidx\_range\_collection&lt; IdxRangeSlice&lt; Tags... &gt; &gt;**](structis__subidx__range__collection_3_01IdxRangeSlice_3_01Tags_8_8_8_01_4_01_4.md) 
 * **namespace** [**std**](namespacestd.md) _STL namespace._     
 * **namespace** [**tensor\_tools**](namespacetensor__tools.md)     
     * **struct** [**GetContravariantDims**](structtensor__tools_1_1GetContravariantDims.md) _A class to get a VectorIndexSet containing only contravariant dimensions._ 

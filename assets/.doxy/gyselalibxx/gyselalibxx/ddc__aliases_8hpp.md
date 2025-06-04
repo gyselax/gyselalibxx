@@ -42,6 +42,7 @@
 | typedef ddc::Chunk&lt; ElementType, IdxRange, ddc::KokkosAllocator&lt; ElementType, MemSpace &gt; &gt; | [**FieldMem**](#typedef-fieldmem)  <br>_An alias describing the type of an object which will allocate memory for a field when it is created._  |
 | typedef ddc::DiscreteElement&lt; GridTypes... &gt; | [**Idx**](#typedef-idx)  <br>_An alias describing the type of an index that is used to access the values of a field defined on a grid._  |
 | typedef ddc::DiscreteDomain&lt; GridTypes... &gt; | [**IdxRange**](#typedef-idxrange)  <br>_An alias describing the type of an index range describing the subsection of a grid on which a field is defined._  |
+| typedef ddc::StridedDiscreteDomain&lt; GridTypes... &gt; | [**IdxRangeSlice**](#typedef-idxrangeslice)  <br> |
 | typedef ddc::DiscreteVector&lt; GridTypes... &gt; | [**IdxStep**](#typedef-idxstep)  <br>_An alias describing the type of a distance between two indexes._  |
 | typedef ddc::NonUniformPointSampling&lt; Dim &gt; | [**NonUniformGridBase**](#typedef-nonuniformgridbase)  <br>_An alias describing the type from which a non-uniform grid must inherit._  |
 | typedef ddc::UniformPointSampling&lt; Dim &gt; | [**UniformGridBase**](#typedef-uniformgridbase)  <br>_An alias describing the type from which a uniform grid must inherit._  |
@@ -219,6 +220,19 @@ using Idx =  ddc::DiscreteElement<GridTypes...>;
 _An alias describing the type of an index range describing the subsection of a grid on which a field is defined._ 
 ```C++
 using IdxRange =  ddc::DiscreteDomain<GridTypes...>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef IdxRangeSlice 
+
+```C++
+using IdxRangeSlice =  ddc::StridedDiscreteDomain<GridTypes...>;
 ```
 
 
