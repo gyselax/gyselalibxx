@@ -4,7 +4,7 @@ module purge
 
 module load cpe/24.07
 module load craype-x86-genoa
-module load PrgEnv-gnu 
+module load PrgEnv-gnu
 
 module load cray-fftw
 module load cray-hdf5-parallel
