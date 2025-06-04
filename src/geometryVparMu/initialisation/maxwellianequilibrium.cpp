@@ -28,7 +28,6 @@ DFieldSpVparMu MaxwellianEquilibrium::operator()(DFieldSpVparMu const allfequili
     // Initialisation of the maxwellian
     DFieldMemVparMu maxwellian_alloc(idxrange_vparmu);
     DFieldVparMu maxwellian = get_field(maxwellian_alloc);
-    double const magnetic_field(1.0);
     ddc::for_each(idxrange_sp, [&](IdxSp const isp) {
         compute_maxwellian(
                 maxwellian,
@@ -36,7 +35,7 @@ DFieldSpVparMu MaxwellianEquilibrium::operator()(DFieldSpVparMu const allfequili
                 m_density_eq(isp),
                 m_temperature_eq(isp),
                 m_mean_velocity_eq(isp),
-                magnetic_field);
+                m_magnetic_field);
 
         ddc::parallel_deepcopy(allfequilibrium[isp], maxwellian);
     });
