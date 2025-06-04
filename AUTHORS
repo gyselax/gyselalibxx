@@ -42,6 +42,7 @@ Thomas Padioleau <thomas.padioleau@cea.fr>
 - Fortran to C++ port
 - Developments in the (x, vx) geometry
 - Packaging
+- DDC integration
 
 Mathieu Protais
 - FDM operators
