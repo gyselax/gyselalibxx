@@ -6,9 +6,10 @@ module load cpe/24.07
 # FIXME:
 # craype-accel-amd-gfx90a Error with the cray wrappers clang: error: unsupported option '-fopenmp-targets=' for language mode 'HIP'
 module load craype-x86-trento
-module load PrgEnv-cray-amd amd-mixed/6.1.2
+# NOTE: Force 6.3.3 due to startup failures (https://github.com/gyselax/gyselalibxx/pull/198#issuecomment-2943081411)
+module load PrgEnv-cray-amd amd-mixed/6.3.3
 
-module load rocm/6.1.2
+module load rocm/6.3.3
 module load cray-fftw
 module load cray-hdf5-parallel
 module load cray-python
