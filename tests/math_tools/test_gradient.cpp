@@ -34,7 +34,7 @@ using FieldRTheta = Field<ElementType, IdxRangeRTheta>;
 
 
 /**
- * @brief A class that represents a scalar field.
+ * @brief A class that represents a scalar field: \f$(r, \theta) \mapsto r^2 \cos(\theta) + 2 r^3 \sin(\theta)\f$.
  * To be used to compute the gradient of the field.
  */
 class GradientTestFunction
