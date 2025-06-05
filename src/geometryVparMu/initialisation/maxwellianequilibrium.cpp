@@ -46,26 +46,26 @@ MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input(
         IdxRangeSp idx_range_kinsp,
         PC_tree_t const& yaml_input_file)
 {
-    host_t<DFieldMemSp> mass(idx_range_kinsp);
-    host_t<DFieldMemSp> density_eq(idx_range_kinsp);
-    host_t<DFieldMemSp> temperature_eq(idx_range_kinsp);
-    host_t<DFieldMemSp> mean_velocity_eq(idx_range_kinsp);
+    host_t<DFieldMemSp> mass_input_file(idx_range_kinsp);
+    host_t<DFieldMemSp> density_eq_input_file(idx_range_kinsp);
+    host_t<DFieldMemSp> temperature_eq_input_file(idx_range_kinsp);
+    host_t<DFieldMemSp> mean_velocity_eq_input_file(idx_range_kinsp);
     double const magnetic_field = 1.0;
 
     for (IdxSp const isp : idx_range_kinsp) {
         PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp.uid());
 
-        mass(isp) = PCpp_double(conf_isp, ".mass");
-        density_eq(isp) = PCpp_double(conf_isp, ".density_eq");
-        temperature_eq(isp) = PCpp_double(conf_isp, ".temperature_eq");
-        mean_velocity_eq(isp) = PCpp_double(conf_isp, ".mean_velocity_eq");
+        mass_input_file(isp) = PCpp_double(conf_isp, ".mass");
+        density_eq_input_file(isp) = PCpp_double(conf_isp, ".density_eq");
+        temperature_eq_input_file(isp) = PCpp_double(conf_isp, ".temperature_eq");
+        mean_velocity_eq_input_file(isp) = PCpp_double(conf_isp, ".mean_velocity_eq");
     }
 
     return MaxwellianEquilibrium(
-            std::move(mass),
-            std::move(density_eq),
-            std::move(temperature_eq),
-            std::move(mean_velocity_eq),
+            std::move(mass_input_file),
+            std::move(density_eq_input_file),
+            std::move(temperature_eq_input_file),
+            std::move(mean_velocity_eq_input_file),
             magnetic_field);
 }
 
