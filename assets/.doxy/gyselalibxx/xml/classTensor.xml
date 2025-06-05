@@ -33,22 +33,6 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="61" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="67" bodyend="-1"/>
       </memberdef>
     </sectiondef>
-    <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classTensor_1a4c6e65e8f6674042fe4cac88479330d1" prot="private" static="no" mutable="no">
-        <type>std::array&lt; ElementType, <ref refid="classTensorCommon_1a576aa8abdcff0bd9a24f793a41807fc1" kindref="member">s_n_elements</ref> &gt;</type>
-        <definition>std::array&lt;ElementType, s_n_elements&gt; Tensor&lt; ElementType, ValidIndexSetFirstDim, ValidIndexSet &gt;::m_data_alloc</definition>
-        <argsstring></argsstring>
-        <name>m_data_alloc</name>
-        <qualifiedname>Tensor::m_data_alloc</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="77" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="77" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classTensor_1a4a47cd908de66325add93143756fb97f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>KOKKOS_DEFAULTED_FUNCTION</type>
@@ -63,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="84" column="31"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="83" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classTensor_1a489f7ef71c36797a6b710794cd2a30d5" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION</type>
@@ -92,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="90" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="90" bodyend="95"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="89" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="89" bodyend="94"/>
       </memberdef>
       <memberdef kind="function" id="classTensor_1a1f97f16958ee4928665a38df7d129a98" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -136,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="108" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="108" bodyend="115"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="107" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="107" bodyend="114"/>
       </memberdef>
       <memberdef kind="function" id="classTensor_1a706ab53bc12245f195db879d9ce4cec6" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -172,7 +156,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="123" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="123" bodyend="132"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="122" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="122" bodyend="131"/>
       </memberdef>
       <memberdef kind="function" id="classTensor_1a7e4279d6af9d2290c6bb4c5556e02ead" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -210,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="141" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="141" bodyend="149"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="140" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="140" bodyend="148"/>
       </memberdef>
       <memberdef kind="function" id="classTensor_1a2adcf14b0c73758f9d7a4530699f5f28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>KOKKOS_DEFAULTED_FUNCTION</type>
@@ -239,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="157" column="31"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="156" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classTensor_1a12e2b6f5f2fc74784794a91bc6675670" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>KOKKOS_DEFAULTED_FUNCTION</type>
@@ -268,7 +252,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="165" column="31"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="164" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classTensor_1af6e516caedbe34eacbd831697ec9ee42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>KOKKOS_DEFAULTED_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref> &amp;</type>
@@ -299,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="172" column="38"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="171" column="38"/>
       </memberdef>
       <memberdef kind="function" id="classTensor_1a5c8a0f4e6be0c24c592985595e05e219" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>KOKKOS_DEFAULTED_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref> &amp;</type>
@@ -330,7 +314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="179" column="38"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="178" column="38"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -384,10 +368,9 @@
         <label>detail::TensorDataInnards&lt; ElementType,(ddc::type_seq_size_v&lt; ValidIndexSet &gt; *... *ddc::type_seq_size_v&lt; ValidIndexSetFirstDim &gt;)&gt;</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="52" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="60" bodyend="180"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="52" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="60" bodyend="179"/>
     <listofallmembers>
       <member refid="classTensor_1a90babc948cc76e5741f04a45395c0498" prot="private" virt="non-virtual"><scope>Tensor</scope><name>base_type</name></member>
-      <member refid="classTensor_1a4c6e65e8f6674042fe4cac88479330d1" prot="private" virt="non-virtual"><scope>Tensor</scope><name>m_data_alloc</name></member>
       <member refid="classTensor_1af6e516caedbe34eacbd831697ec9ee42" prot="public" virt="non-virtual"><scope>Tensor</scope><name>operator=</name></member>
       <member refid="classTensor_1a5c8a0f4e6be0c24c592985595e05e219" prot="public" virt="non-virtual"><scope>Tensor</scope><name>operator=</name></member>
       <member refid="classTensor_1a4a47cd908de66325add93143756fb97f" prot="public" virt="non-virtual"><scope>Tensor</scope><name>Tensor</name></member>

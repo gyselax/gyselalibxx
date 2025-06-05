@@ -2671,7 +2671,6 @@
   </compound>
   <compound refid="classTensor" kind="class"><name>Tensor</name>
     <member refid="classTensor_1a90babc948cc76e5741f04a45395c0498" kind="typedef"><name>base_type</name></member>
-    <member refid="classTensor_1a4c6e65e8f6674042fe4cac88479330d1" kind="variable"><name>m_data_alloc</name></member>
     <member refid="classTensor_1a4a47cd908de66325add93143756fb97f" kind="function"><name>Tensor</name></member>
     <member refid="classTensor_1a489f7ef71c36797a6b710794cd2a30d5" kind="function"><name>Tensor</name></member>
     <member refid="classTensor_1a1f97f16958ee4928665a38df7d129a98" kind="function"><name>Tensor</name></member>
