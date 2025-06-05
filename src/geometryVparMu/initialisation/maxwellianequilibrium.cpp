@@ -53,12 +53,13 @@ MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input(
     double const magnetic_field = 1.0;
 
     for (IdxSp const isp : idx_range_kinsp) {
-        PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp.uid());
+        IdxStepSp const step_sp = isp - idx_range_kinsp.front();
+        PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", step_sp.value());
 
-        mass_input_file(isp) = PCpp_double(conf_isp, ".mass");
-        density_eq_input_file(isp) = PCpp_double(conf_isp, ".density_eq");
-        temperature_eq_input_file(isp) = PCpp_double(conf_isp, ".temperature_eq");
-        mean_velocity_eq_input_file(isp) = PCpp_double(conf_isp, ".mean_velocity_eq");
+        mass_input_file(step_sp) = PCpp_double(conf_isp, ".mass");
+        density_eq_input_file(step_sp) = PCpp_double(conf_isp, ".density_eq");
+        temperature_eq_input_file(step_sp) = PCpp_double(conf_isp, ".temperature_eq");
+        mean_velocity_eq_input_file(step_sp) = PCpp_double(conf_isp, ".mean_velocity_eq");
     }
 
     return MaxwellianEquilibrium(
