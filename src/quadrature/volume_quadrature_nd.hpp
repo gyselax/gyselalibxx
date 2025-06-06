@@ -47,7 +47,7 @@ DFieldMem<IdxRangeCoeffs, typename ExecSpace::memory_space> compute_coeffs_on_ma
         Mapping& mapping,
         DFieldMem<IdxRangeCoeffs, typename ExecSpace::memory_space>&& coefficients_alloc)
 {
-    static_assert(is_curvilinear_2d_mapping_v<Mapping>);
+    static_assert(is_mapping_v<Mapping>);
     static_assert(has_jacobian_v<Mapping>);
 
     using CoordJ = typename Mapping::CoordJacobian;
