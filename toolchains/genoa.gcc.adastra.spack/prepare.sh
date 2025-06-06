@@ -14,7 +14,7 @@ cd -- "${TOOLCHAIN_ROOT_DIRECTORY}"
 
 SPACK_USER_VERSION="spack-user-4.0.0"
 
-export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-MI250/Configuration.${SPACK_USER_VERSION}"
+export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-GENOA/Configuration.${SPACK_USER_VERSION}"
 export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
 
 module purge
@@ -53,19 +53,19 @@ echo "Preparing the Spack environment..."
 
 # We use GCC as a base compiler (c/c++/fortran) and implicitly, ROCm's hipcc when the +rocm variant is specified.
 PRODUCT_SPEC_LIST="
-ninja%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
-libyaml%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
-paraconf%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
-pdi%gcc@13.2.1.mi250+python arch=linux-rhel8-zen3
-pdiplugin-decl-hdf5%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
-pdiplugin-set-value%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
-pdiplugin-trace%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
-pdiplugin-mpi%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
-ginkgo%gcc@13.2.1.mi250+openmp+rocm~shared amdgpu_target=gfx90a arch=linux-rhel8-zen3
-eigen%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
-py-matplotlib%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
-py-xarray%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
-py-h5py%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
+ninja%gcc@13.2.1.genoa arch=linux-rhel8-zen4
+libyaml%gcc@13.2.1.genoa arch=linux-rhel8-zen4
+paraconf%gcc@13.2.1.genoa arch=linux-rhel8-zen4
+pdi%gcc@13.2.1.genoa+python arch=linux-rhel8-zen4
+pdiplugin-decl-hdf5%gcc@13.2.1.genoa arch=linux-rhel8-zen4
+pdiplugin-set-value%gcc@13.2.1.genoa arch=linux-rhel8-zen4
+pdiplugin-trace%gcc@13.2.1.genoa arch=linux-rhel8-zen4
+pdiplugin-mpi%gcc@13.2.1.genoa arch=linux-rhel8-zen4
+ginkgo%gcc@13.2.1.genoa+openmp~shared arch=linux-rhel8-zen4
+eigen%gcc@13.2.1.genoa arch=linux-rhel8-zen4
+py-matplotlib%gcc@13.2.1.genoa arch=linux-rhel8-zen4
+py-xarray%gcc@13.2.1.genoa arch=linux-rhel8-zen4
+py-h5py%gcc@13.2.1.genoa arch=linux-rhel8-zen4
 "
 # openblas@0.3.26%gcc@12.1.generic~bignuma~consistent_fpcsr+dynamic_dispatch+fortran~ilp64+locking+pic+shared build_system=makefile symbol_suffix=none threads=none arch=linux-rhel8-zen3
 
