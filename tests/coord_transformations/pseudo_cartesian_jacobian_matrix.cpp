@@ -50,7 +50,6 @@ public:
     };
     struct R_cov
     {
-        static bool constexpr PERIODIC = false;
         static bool constexpr IS_COVARIANT = true;
         static bool constexpr IS_CONTRAVARIANT = false;
         using Dual = R;
@@ -58,7 +57,6 @@ public:
 
     struct Theta_cov
     {
-        static bool constexpr PERIODIC = true;
         static bool constexpr IS_COVARIANT = true;
         static bool constexpr IS_CONTRAVARIANT = false;
         using Dual = Theta;
