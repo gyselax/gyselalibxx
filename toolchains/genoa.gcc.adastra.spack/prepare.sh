@@ -32,7 +32,7 @@ spack debug report
 
 # Inject PDI recipes into our local repo.
 git clone https://github.com/pdidev/spack pdi.spack || true
-cd pdi.spack && git checkout ac5b78d && cd ..
+cd pdi.spack && git fetch && git checkout ac5b78d && cd ..
 # NOTE: We could do a: spack repo add
 cp -rf -- pdi.spack/packages "${SPACK_USER_CONFIG_PATH}/local-repo"
 

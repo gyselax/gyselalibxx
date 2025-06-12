@@ -10,7 +10,9 @@ module load cray-fftw
 module load cray-hdf5-parallel
 module load cray-python
 
-export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-GENOA"
+SPACK_USER_VERSION="spack-user-4.0.0"
+
+export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-GENOA/Configuration.${SPACK_USER_VERSION}"
 module use "${SPACK_USER_PREFIX}/modules/tcl/linux-rhel8-zen4"
 
 module load \
