@@ -14,9 +14,7 @@ module load cray-fftw
 module load cray-hdf5-parallel
 module load cray-python
 
-SPACK_USER_VERSION="spack-user-4.0.0"
-
-export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-MI250/Configuration.${SPACK_USER_VERSION}"
+export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-MI250/"
 module use "${SPACK_USER_PREFIX}/modules/tcl/linux-rhel8-zen3"
 
 module load \
