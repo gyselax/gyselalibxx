@@ -35,6 +35,8 @@ git clone https://github.com/pdidev/spack pdi.spack || true
 cd pdi.spack && git fetch && git checkout ac5b78d && cd ..
 # NOTE: We could do a: spack repo add
 cp -rf -- pdi.spack/packages "${SPACK_USER_CONFIG_PATH}/local-repo"
+sed -i "s/version('1.8.0',   sha256='5d353bfa64f45ee4715b88bd30330030f79f2020cd6bede0ad9b8f9beddadea9')/version(\"1.9.1\", sha256=\"5bb6257efb32674db69e2d89a8947015a2f1e284dbe8dcfdc601f6412640b551\")/g" "${SPACK_USER_CONFIG_PATH}/local-repo/packages/"*"/package.py"
+sed -i "s/depends_on('pdi@1.8.0',   type=('link', 'run'), when='@1.8.0')/depends_on('pdi@1.9.1',   type=('link', 'run'), when='@1.9.1')/g" "${SPACK_USER_CONFIG_PATH}/local-repo/packages/"*"/package.py"
 
 # NOTE: A sparse checkout would be great.
 git clone https://github.com/spack/spack spack.spack || true
