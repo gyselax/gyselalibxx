@@ -327,6 +327,7 @@ private:
             Field<ElementType, MPIRecvIdxRange, MemSpace> recv_field,
             ConstField<ElementType, MPISendIdxRange, MemSpace> send_field) const
     {
+        Kokkos::fence("fencing before mpi_all_to_all");
         MPI_Alltoall(
                 send_field.data_handle(),
                 send_field.size() / m_comm_size,
