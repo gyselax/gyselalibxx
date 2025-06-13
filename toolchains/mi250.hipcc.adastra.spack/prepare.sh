@@ -33,7 +33,7 @@ spack debug report
 # Inject PDI recipes into our repos.
 mkdir -p -- "${SPACK_USER_CONFIG_PATH}/external-repositories"
 git clone https://github.com/pdidev/spack "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi.spack" || true
-cd -- "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi.spack" && git fetch && git checkout e80f7857fbdc1c21d11b0bba9372541c8a8b2c46 && cd -
+cd -- "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi.spack" && git fetch && git checkout 5483cfea7d2d39d654c2962114248f597b3ecf46 && cd -
 spack repo add --scope user "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi.spack" || true
 
 # NOTE: A sparse checkout would be great.
