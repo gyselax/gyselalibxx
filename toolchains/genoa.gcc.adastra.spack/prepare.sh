@@ -30,13 +30,11 @@ spack config --scope user add 'concretizer:unify:true'
 # spack config --scope user add 'modules:default:tcl:hash_length:4'
 spack debug report
 
-# Inject PDI recipes into our local repo.
-git clone https://github.com/pdidev/spack pdi.spack || true
-cd pdi.spack && git fetch && git checkout ac5b78d && cd ..
-# NOTE: We could do a: spack repo add
-cp -rf -- pdi.spack/packages "${SPACK_USER_CONFIG_PATH}/local-repo"
-sed -i "s/version('1.8.0',   sha256='5d353bfa64f45ee4715b88bd30330030f79f2020cd6bede0ad9b8f9beddadea9')/version(\"1.9.1\", sha256=\"5bb6257efb32674db69e2d89a8947015a2f1e284dbe8dcfdc601f6412640b551\")/g" "${SPACK_USER_CONFIG_PATH}/local-repo/packages/"*"/package.py"
-sed -i "s/depends_on('pdi@1.8.0',   type=('link', 'run'), when='@1.8.0')/depends_on('pdi@1.9.1',   type=('link', 'run'), when='@1.9.1')/g" "${SPACK_USER_CONFIG_PATH}/local-repo/packages/"*"/package.py"
+# Inject PDI recipes into our repos.
+mkdir -p -- "${SPACK_USER_CONFIG_PATH}/external-repositories"
+git clone https://github.com/pdidev/spack "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi.spack" || true
+cd -- "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi.spack" && git fetch && git checkout e80f7857fbdc1c21d11b0bba9372541c8a8b2c46 && cd -
+spack repo add --scope user "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi.spack" || true
 
 # NOTE: A sparse checkout would be great.
 git clone https://github.com/spack/spack spack.spack || true
