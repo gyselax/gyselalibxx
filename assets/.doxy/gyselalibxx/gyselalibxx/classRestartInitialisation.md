@@ -73,7 +73,7 @@ Inherits the following classes: [IInitialisation](classIInitialisation.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**RestartInitialisation**](#function-restartinitialisation) (int iter\_start, double & time\_start) <br>_Create an initialisation object._  |
+|   | [**RestartInitialisation**](#function-restartinitialisation) (double & time\_start) <br>_Create an initialisation object._  |
 | virtual DFieldSpXVx | [**operator()**](#function-operator) (DFieldSpXVx allfdistribu) override const<br>_Triggers a PDI event to fill the distribution function with values from a hdf5 file._  |
 |   | [**~RestartInitialisation**](#function-restartinitialisation) () override<br> |
 
@@ -160,8 +160,7 @@ A class that triggers a PDI event to read the values of a distribution function 
 
 _Create an initialisation object._ 
 ```C++
-RestartInitialisation::RestartInitialisation (
-    int iter_start,
+explicit RestartInitialisation::RestartInitialisation (
     double & time_start
 ) 
 ```
@@ -173,7 +172,6 @@ RestartInitialisation::RestartInitialisation (
 **Parameters:**
 
 
-* `iter_start` An integer representing the number of iteration already performed to produce the distribution function used to initialise the current simulation. 
 * `time_start` The physical time corresponding to iter\_start. 
 
 

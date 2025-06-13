@@ -556,7 +556,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-restartinitialisation"><strong>RestartInitialisation</strong></a> (int iter_start, double &amp; time_start) <br><em>Create an initialisation object.</em></td>
+<td style="text-align: left;"><a href="#function-restartinitialisation"><strong>RestartInitialisation</strong></a> (double &amp; time_start) <br><em>Create an initialisation object.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual DFieldSpXVx</td>
@@ -609,14 +609,12 @@
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-restartinitialisation">function RestartInitialisation</h3>
 <p><em>Create an initialisation object.</em> </p>
-<pre><code class="language-C++">RestartInitialisation::RestartInitialisation (
-    int iter_start,
+<pre><code class="language-C++">explicit RestartInitialisation::RestartInitialisation (
     double &amp; time_start
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>iter_start</code> An integer representing the number of iteration already performed to produce the distribution function used to initialise the current simulation. </li>
 <li><code>time_start</code> The physical time corresponding to iter_start. </li>
 </ul>
 <hr>

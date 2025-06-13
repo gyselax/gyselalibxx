@@ -245,7 +245,6 @@
 * **m\_compute\_rho** ([**QNSolver**](classQNSolver.md))
 * **m\_solve\_poisson** ([**QNSolver**](classQNSolver.md))
 * **m\_coefficients** ([**Quadrature**](classQuadrature.md))
-* **m\_iter\_start** ([**RestartInitialisation**](classRestartInitialisation.md))
 * **m\_time\_start** ([**RestartInitialisation**](classRestartInitialisation.md))
 * **m\_init\_perturb\_amplitude** ([**SingleModePerturbInitialisation**](classSingleModePerturbInitialisation.md))
 * **m\_init\_perturb\_mode** ([**SingleModePerturbInitialisation**](classSingleModePerturbInitialisation.md))

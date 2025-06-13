@@ -15,11 +15,7 @@
 
 #include "restartinitialisation.hpp"
 
-RestartInitialisation::RestartInitialisation(int iter_start, double& time_start)
-    : m_iter_start(iter_start)
-    , m_time_start(time_start)
-{
-}
+RestartInitialisation::RestartInitialisation(double& time_start) : m_time_start(time_start) {}
 
 DFieldSpXVx RestartInitialisation::operator()(DFieldSpXVx const allfdistribu) const
 {

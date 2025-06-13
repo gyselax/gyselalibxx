@@ -5,20 +5,6 @@
     <basecompoundref refid="classIInitialisation" prot="public" virt="non-virtual">IInitialisation</basecompoundref>
     <includes refid="restartinitialisation_8hpp" local="no">restartinitialisation.hpp</includes>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classRestartInitialisation_1a7e8dd11bf32602ee708ec2d411b69ec2" prot="private" static="no" mutable="no">
-        <type>int</type>
-        <definition>int RestartInitialisation::m_iter_start</definition>
-        <argsstring></argsstring>
-        <name>m_iter_start</name>
-        <qualifiedname>RestartInitialisation::m_iter_start</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp" line="22" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp" bodystart="22" bodyend="-1"/>
-      </memberdef>
       <memberdef kind="variable" id="classRestartInitialisation_1a53e9c1841bea892ecfd9a256909da63f" prot="private" static="no" mutable="no">
         <type>double &amp;</type>
         <definition>double&amp; RestartInitialisation::m_time_start</definition>
@@ -31,20 +17,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp" line="23" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp" bodystart="23" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp" line="22" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp" bodystart="22" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classRestartInitialisation_1a58cbc5c3181227724dcdfcd76da97c2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classRestartInitialisation_1a49f064ca13468e9490dfb150265aa809" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
         <definition>RestartInitialisation::RestartInitialisation</definition>
-        <argsstring>(int iter_start, double &amp;time_start)</argsstring>
+        <argsstring>(double &amp;time_start)</argsstring>
         <name>RestartInitialisation</name>
         <qualifiedname>RestartInitialisation::RestartInitialisation</qualifiedname>
-        <param>
-          <type>int</type>
-          <declname>iter_start</declname>
-        </param>
         <param>
           <type>double &amp;</type>
           <declname>time_start</declname>
@@ -54,14 +36,6 @@
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">iter_start</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>An integer representing the number of iteration already performed to produce the distribution function used to initialise the current simulation. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
 <parameternamelist>
 <parametername direction="in">time_start</parametername>
 </parameternamelist>
@@ -74,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp" line="32" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.cpp" bodystart="8" bodyend="12"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp" line="29" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.cpp" bodystart="8" bodyend="8"/>
       </memberdef>
       <memberdef kind="function" id="classRestartInitialisation_1a755c1f0e81df81b360fabc8f0f807cf0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -88,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp" line="34" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp" line="31" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classRestartInitialisation_1a5dcc26f6971e00320fa74261c9d382f0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>DFieldSpXVx</type>
@@ -120,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp" line="42" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.cpp" bodystart="14" bodyend="20"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp" line="39" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.cpp" bodystart="10" bodyend="16"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -153,14 +127,13 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp" line="19" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp" bodystart="20" bodyend="43"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp" line="19" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp" bodystart="20" bodyend="40"/>
     <listofallmembers>
-      <member refid="classRestartInitialisation_1a7e8dd11bf32602ee708ec2d411b69ec2" prot="private" virt="non-virtual"><scope>RestartInitialisation</scope><name>m_iter_start</name></member>
       <member refid="classRestartInitialisation_1a53e9c1841bea892ecfd9a256909da63f" prot="private" virt="non-virtual"><scope>RestartInitialisation</scope><name>m_time_start</name></member>
       <member refid="classRestartInitialisation_1a5dcc26f6971e00320fa74261c9d382f0" prot="public" virt="virtual"><scope>RestartInitialisation</scope><name>operator()</name></member>
       <member refid="classIInitialisation_1ae27774990fe287904bf424adb15a9772" prot="public" virt="pure-virtual" ambiguityscope="IInitialisation::"><scope>RestartInitialisation</scope><name>operator()</name></member>
       <member refid="classIInitialisation_1ae08dacb88d913d1854652b86a6828c49" prot="public" virt="pure-virtual" ambiguityscope="IInitialisation::"><scope>RestartInitialisation</scope><name>operator()</name></member>
-      <member refid="classRestartInitialisation_1a58cbc5c3181227724dcdfcd76da97c2f" prot="public" virt="non-virtual"><scope>RestartInitialisation</scope><name>RestartInitialisation</name></member>
+      <member refid="classRestartInitialisation_1a49f064ca13468e9490dfb150265aa809" prot="public" virt="non-virtual"><scope>RestartInitialisation</scope><name>RestartInitialisation</name></member>
       <member refid="classIInitialisation_1a1031f0b5ddc471102c6024eea4aa74df" prot="public" virt="virtual"><scope>RestartInitialisation</scope><name>~IInitialisation</name></member>
       <member refid="classIInitialisation_1a1031f0b5ddc471102c6024eea4aa74df" prot="public" virt="virtual"><scope>RestartInitialisation</scope><name>~IInitialisation</name></member>
       <member refid="classIInitialisation_1a1031f0b5ddc471102c6024eea4aa74df" prot="public" virt="virtual"><scope>RestartInitialisation</scope><name>~IInitialisation</name></member>

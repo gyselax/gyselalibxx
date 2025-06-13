@@ -111,16 +111,15 @@
 <codeline lineno="19" refid="classRestartInitialisation" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classRestartInitialisation" kindref="compound">RestartInitialisation</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIInitialisation" kindref="compound">IInitialisation</ref></highlight></codeline>
 <codeline lineno="20"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>m_iter_start;<sp/></highlight><highlight class="comment">/*<sp/>iteration<sp/>number<sp/>to<sp/>perform<sp/>the<sp/>restart<sp/>from<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal">&amp;<sp/>m_time_start;<sp/></highlight><highlight class="comment">/*<sp/>corresponding<sp/>simulation<sp/>time<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="24"><highlight class="normal"></highlight></codeline>
-<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classRestartInitialisation" kindref="compound">RestartInitialisation</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>iter_start,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal">&amp;<sp/>time_start);</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"></highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classRestartInitialisation" kindref="compound">~RestartInitialisation</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"></highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/><ref refid="classRestartInitialisation_1a5dcc26f6971e00320fa74261c9d382f0" kindref="member">operator()</ref>(DFieldSpXVx<sp/>allfdistribu)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="43"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal">&amp;<sp/>m_time_start;<sp/></highlight><highlight class="comment">/*<sp/>corresponding<sp/>simulation<sp/>time<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classRestartInitialisation" kindref="compound">RestartInitialisation</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">&amp;<sp/>time_start);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classRestartInitialisation" kindref="compound">~RestartInitialisation</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/><ref refid="classRestartInitialisation_1a5dcc26f6971e00320fa74261c9d382f0" kindref="member">operator()</ref>(DFieldSpXVx<sp/>allfdistribu)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal">};</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp"/>
   </compounddef>

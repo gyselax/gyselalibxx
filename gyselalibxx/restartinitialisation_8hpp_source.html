@@ -554,11 +554,10 @@
 class RestartInitialisation : public IInitialisation
 {
 private:
-    int m_iter_start; /* iteration number to perform the restart from */
     double&amp; m_time_start; /* corresponding simulation time */
 
 public:
-    RestartInitialisation(int iter_start, double&amp; time_start);
+    explicit RestartInitialisation(double&amp; time_start);
 
     ~RestartInitialisation() override = default;
 
