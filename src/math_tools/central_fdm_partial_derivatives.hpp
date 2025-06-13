@@ -1,10 +1,7 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
-#include <iostream>
-
-#include "ddc/discrete_domain.hpp"
-#include "ddc/uniform_point_sampling.hpp"
+#include <ddc/ddc.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
@@ -161,6 +158,11 @@ private:
     using DConstFieldType = DConstField<IdxRangeFull>;
 
 public:
+    /**
+     * @brief Construct an instance of the CentralFDMPartialDerivativeCreator class.
+     */
+    CentralFDMPartialDerivativeCreator() = default;
+
     /**
      * Create a pointer to an instance of the abstract class IPartialDerivative.
      * The type of the returned object will be determined when the pointer is 

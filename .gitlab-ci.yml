@@ -5,7 +5,17 @@ stages:
   - test
 
 include:
-  - local: 'ci_tools/reusable_ci_jobs.yml'
+  - local: 'bin/ci_tools/reusable_ci_jobs.yml'
+
+cmake_clang_tests:
+  extends: .cmake_tests
+  image: ghcr.io/gyselax/gyselalibxx_env
+  variables:
+    RELATIVE_RESTART_TOLERANCE: '0.0'
+    ABSOLUTE_RESTART_TOLERANCE: '0.0'
+    CC: 'clang'
+    CXX: 'clang++'
+    TOOLCHAIN: '${CI_PROJECT_DIR}/toolchains/common_toolchains/serial_debug_toolchain.cmake'
 
 cmake_tests:
   extends: .cmake_tests
@@ -13,7 +23,7 @@ cmake_tests:
   variables:
     RELATIVE_RESTART_TOLERANCE: '0.0'
     ABSOLUTE_RESTART_TOLERANCE: '0.0'
-    TOOLCHAIN: '${CI_PROJECT_DIR}/toolchains/docker.gyselalibxx_env/tests_toolchain.cmake'
+    TOOLCHAIN: '${CI_PROJECT_DIR}/toolchains/common_toolchains/serial_debug_toolchain.cmake'
 
 cmake_tests_Release:
   extends: .cmake_tests
@@ -21,7 +31,7 @@ cmake_tests_Release:
   variables:
     RELATIVE_RESTART_TOLERANCE: '0.0'
     ABSOLUTE_RESTART_TOLERANCE: '0.0'
-    TOOLCHAIN: '${CI_PROJECT_DIR}/toolchains/docker.gyselalibxx_env/tests_release_toolchain.cmake'
+    TOOLCHAIN: '${CI_PROJECT_DIR}/toolchains/common_toolchains/serial_release_toolchain.cmake'
 
 cmake_tests_Release_OMP:
   extends: .cmake_tests
@@ -29,7 +39,7 @@ cmake_tests_Release_OMP:
   variables:
     RELATIVE_RESTART_TOLERANCE: '1e-14'
     ABSOLUTE_RESTART_TOLERANCE: '1e-14'
-    TOOLCHAIN: '${CI_PROJECT_DIR}/toolchains/docker.gyselalibxx_env/tests_release_omp_toolchain.cmake'
+    TOOLCHAIN: '${CI_PROJECT_DIR}/toolchains/common_toolchains/openmp_release_toolchain.cmake'
   before_script: |
     . ${CI_PROJECT_DIR}/toolchains/docker.gyselalibxx_env/tests_omp_environment.sh
 
@@ -69,8 +79,8 @@ python_best_practices:
     export PYTHONPATH="./post-process/PythonScripts"
   script: |
     pylint $(find tests -iname *.py)
-    pylint $(find doc -iname *.py)
-    pylint $(find ci_tools -iname *.py)
+    pylint $(find docs -iname *.py)
+    pylint $(find bin -iname *.py)
     # Find all files with no extension or a .py extension in post-process/PythonScripts/
     POST_PROCESS_PYTHON_FILES=$(find post-process/PythonScripts/ -type f ! -name "*.*"; find post-process/PythonScripts -iname *.py)
     # Get pylint errors without failing
@@ -101,18 +111,37 @@ documentation:
   before_script: |
     git config --global --add safe.directory $CI_PROJECT_DIR
     git fetch origin ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME} --recurse-submodules=no
+    pip install -r docs/requirements.txt --prefix docs/pip_install
+    export PYTHONPATH=$(pwd)/docs/pip_install/local/lib/python3.10/dist-packages/
   script: |
-    rm -rf build || true
-    # Make docs
-    cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DGYSELALIBXX_BUILD_DOCUMENTATION=1 -B build-docs .
-    cmake --build build-docs || true
-    cat build-docs/docs/doxygen.log
+    rm -rf docs/mkdoc docs/site || true
+    python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc
+    cd docs
+    pip_install/local/bin/mkdocs build
+    cat doxygen.log
+    cd ..
     # Get files which have changed in this merge request
     git diff origin/${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}..HEAD --no-indent-heuristic --unified=0 --output=pull_new_files.txt --no-color --diff-filter=A
-    python3 ci_tools/check_readme_presence.py pull_new_files.txt
-    if [ -s build-docs/docs/doxygen.log ]; then exit 1; fi
+    python3 bin/ci_tools/check_readme_presence.py pull_new_files.txt
+    if [ -s docs/doxygen.log ]; then exit 1; fi
 
 markdown_best_practices:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  stage: static_analysis
+  needs: []
+  variables:
+    GIT_SUBMODULE_STRATEGY: none
+  before_script: |
+    apt-get update -qy
+    apt-get install -y nodejs
+    apt-get install -y npm
+    npm install markdownlint-cli2 --global
+  script: |
+    markdownlint-cli2 --config "./.markdownlint.json" "**/*.md" "!vendor"
+
+markdown_equations:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
@@ -125,7 +154,7 @@ markdown_best_practices:
     MARKDOWN_FILES=$(find . -name "*.md" -not -path "./vendor/*")
     echo $MARKDOWN_FILES
     set +e
-    python3 ci_tools/markdown_linter.py ${MARKDOWN_FILES}
+    python3 bin/ci_tools/markdown_linter.py ${MARKDOWN_FILES}
   allow_failure:
     exit_codes: 2
 
@@ -139,7 +168,7 @@ cppcheck_static_analysis:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
     set +e
-    python3 ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
+    python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
   allow_failure:
     exit_codes: [1, 2] # Allow failure due to style or error but not fatal
 
@@ -152,4 +181,19 @@ cmake_static_analysis:
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
-    python3 ci_tools/cmake_checker.py
+    python3 bin/ci_tools/cmake_checker.py
+
+spelling:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  stage: static_analysis
+  needs: []
+  before_script: |
+    apt-get update -qy
+    apt-get install -y wget
+    mkdir typos
+    cd typos
+    wget -qO- https://github.com/crate-ci/typos/releases/download/v1.30.3/typos-v1.30.3-x86_64-unknown-linux-musl.tar.gz | gunzip | tar xvf -
+    cd ..
+  script: |
+    ./typos/typos ./AUTHORS ./CMakeLists.txt ./docs/ ./post-process ./README.md ./simulations ./src ./tests/ ./bin

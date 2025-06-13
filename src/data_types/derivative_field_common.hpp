@@ -157,23 +157,20 @@ protected:
 
 protected:
     /**
-     * @brief An internal function which provides the index of an element inside the internal_fields.
-     * An Idx describes the element of interest. If information about the derivatives is
-     * missing then it is assumed that the 0-th order derivative is requested.
+     * @brief Get the index of the Idx within m_cross_derivative_idx_range.
+     * This function is particularly useful to index an mdspan over an index range slice.
      *
-     * @param elem The element of interest.
+     * @param elem A 1D Idx which is inside the index range slice.
      *
-     * @returns int The index of the internal field inside the array internal_fields.
-     * @returns index_type The index of the element of interest inside the field of interest.
+     * @returns The index of the element.
      */
-    template <class DElem>
-    KOKKOS_FUNCTION std::pair<int, index_type> get_index(DElem elem) const
+    template <class QueryDim>
+    KOKKOS_FUNCTION std::size_t get_index(Idx<QueryDim> elem) const noexcept
     {
-        discrete_deriv_index_type default_derivatives = detail::no_derivative_element<deriv_tags>();
-        discrete_deriv_index_type deriv_index(detail::select_default(elem, default_derivatives));
-        physical_index_type physical_index(elem);
-        index_type index(physical_index, deriv_index);
-        return std::pair<int, index_type>(get_array_index(deriv_index), index);
+        assert(IdxRangeSlice<QueryDim>(m_cross_derivative_idx_range).contains(elem));
+        return IdxRangeSlice<QueryDim>(m_cross_derivative_idx_range)
+                .distance_from_front(elem)
+                .value();
     }
 
     /**
@@ -222,8 +219,7 @@ protected:
                 // If information is available about the physical index range
                 if (array_idx & (1 << ddc::type_seq_rank_v<ddc::Deriv<QueryDDim>, deriv_tags>)) {
                     // If the derivative is being requested
-                    return m_cross_derivative_idx_range.get_index(
-                            ddc::select<QueryDDim>(slice_idx));
+                    return get_index(ddc::select<QueryDDim>(slice_idx));
                 }
             }
             if constexpr (ddc::in_tags_v<QueryDDim, physical_grids>) {
@@ -270,10 +266,14 @@ protected:
                 IdxRange<QueryDDim> idx_range_requested(slice_idx_range);
                 if (array_idx & (1 << ddc::type_seq_rank_v<ddc::Deriv<QueryDDim>, deriv_tags>)) {
                     // If the derivative is being requested
-                    assert(m_cross_derivative_idx_range.contains(idx_range_requested));
+                    assert(IdxRangeSlice<QueryDDim>(m_cross_derivative_idx_range)
+                                   .contains(idx_range_requested.front())
+                           && (idx_range_requested.extents() == 1
+                               || IdxRangeSlice<QueryDDim>(m_cross_derivative_idx_range).strides()
+                                          == 1));
                     return std::pair<std::size_t, std::size_t>(
-                            m_cross_derivative_idx_range.get_index(idx_range_requested.front()),
-                            m_cross_derivative_idx_range.get_index(idx_range_requested.back()) + 1);
+                            get_index(idx_range_requested.front()),
+                            get_index(idx_range_requested.back()) + 1);
                 }
             }
             if constexpr (ddc::in_tags_v<QueryDDim, physical_grids>) {

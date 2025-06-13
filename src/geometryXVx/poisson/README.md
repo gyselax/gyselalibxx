@@ -22,8 +22,8 @@ The charge density is calculated by integrating the distribution function. The s
 
 The Quasi-Neutrality equation can be solved with a variety of different methods. Here we have implemented:
 
--   FftQNSolver
--   FemNonPeriodicQNSolver
--   FemPeriodicQNSolver
+- FftQNSolver
+- FemNonPeriodicQNSolver
+- FemPeriodicQNSolver
 
 These classes return the electric potential $\phi$ and the electric field $\frac{d \phi}{dx}$.

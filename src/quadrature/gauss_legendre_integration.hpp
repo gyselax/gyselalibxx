@@ -208,10 +208,8 @@ private:
  *
  * Calculate the quadrature coefficients for the spline quadrature method defined on the provided index range.
  *
- * @param[in] idx_range
- *      The index range on which the coefficients will be defined.
- * @param[in] builders
- *      The spline builder used for the quadrature coefficients in the different dimensions.
+ * @param[in] gl
+ *      The Gauss-Legendre quadrature objects describing each dimension.
  *
  * @return The coefficients which define the spline quadrature method in ND.
  */

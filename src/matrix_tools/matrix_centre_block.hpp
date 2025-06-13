@@ -81,7 +81,7 @@ protected:
      *           B
      *           C
      *
-     * with $f$ B @f$ a vector of length nb, return
+     * with @f$ B @f$ a vector of length nb, return
      *
      *      bx = B
      *           A
@@ -102,7 +102,7 @@ protected:
      *           A
      *           C
      *
-     * with $f$ B @f$ a vector of length nb, return
+     * with @f$ B @f$ a vector of length nb, return
      *
      *      bx = A
      *           B
@@ -123,7 +123,7 @@ protected:
      *           B
      *           C
      *
-     * with $f$ B @f$ a vector of length nb, return
+     * with @f$ B @f$ a vector of length nb, return
      *
      *      bx = B
      *           A
@@ -144,7 +144,7 @@ protected:
      *           A
      *           C
      *
-     * with $f$ B @f$ a vector of length nb, return
+     * with @f$ B @f$ a vector of length nb, return
      *
      *      bx = A
      *           B

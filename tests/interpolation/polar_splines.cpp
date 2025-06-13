@@ -17,19 +17,33 @@
 
 namespace {
 
+struct R_cov;
+struct Theta_cov;
 struct R
 {
     static constexpr bool PERIODIC = false;
+    using Dual = R_cov;
 };
 struct Theta
 {
     static constexpr bool PERIODIC = true;
+    using Dual = Theta_cov;
+};
+struct R_cov
+{
+    using Dual = R;
+};
+struct Theta_cov
+{
+    using Dual = Theta;
 };
 struct X
 {
+    using Dual = X;
 };
 struct Y
 {
+    using Dual = Y;
 };
 
 static constexpr std::size_t spline_r_degree = DEGREE_R;
@@ -90,9 +104,7 @@ TEST(PolarSplineTest, ConstantEval)
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
-            ddc::SplineSolver::LAPACK,
-            GridR,
-            GridTheta>;
+            ddc::SplineSolver::LAPACK>;
 
     using EvaluatorRTheta = ddc::SplineEvaluator2D<
             Kokkos::DefaultHostExecutionSpace,
@@ -104,9 +116,7 @@ TEST(PolarSplineTest, ConstantEval)
             ddc::NullExtrapolationRule,
             ddc::NullExtrapolationRule,
             ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            GridR,
-            GridTheta>;
+            ddc::PeriodicExtrapolationRule<Theta>>;
 
     CoordR constexpr r0(0.);
     CoordR constexpr rN(1.);
@@ -213,9 +223,7 @@ void test_polar_integrals()
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
-            ddc::SplineSolver::LAPACK,
-            GridR,
-            GridTheta>;
+            ddc::SplineSolver::LAPACK>;
 
     using EvaluatorRTheta = ddc::SplineEvaluator2D<
             Kokkos::DefaultHostExecutionSpace,
@@ -227,9 +235,7 @@ void test_polar_integrals()
             ddc::NullExtrapolationRule,
             ddc::NullExtrapolationRule,
             ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            GridR,
-            GridTheta>;
+            ddc::PeriodicExtrapolationRule<Theta>>;
 
     CoordR constexpr r0(0.);
     CoordR constexpr rN(1.);

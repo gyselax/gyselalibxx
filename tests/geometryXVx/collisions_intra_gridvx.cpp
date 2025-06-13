@@ -47,8 +47,8 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
     IdxRangeX gridx(SplineInterpPointsX::get_domain<GridX>());
     IdxRangeVx gridvx(SplineInterpPointsVx::get_domain<GridVx>());
 
-    SplineXBuilder_1d const builder_x(gridx);
-    SplineVxBuilder_1d const builder_vx(gridvx);
+    SplineXBuilder const builder_x(gridx);
+    SplineVxBuilder const builder_vx(gridvx);
 
     IdxRangeSpXVx const mesh(idx_range_sp, gridx, gridvx);
 
@@ -75,7 +75,7 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
     std::vector<CoordVx> gridvx_ghosted_staggered_pred
             = build_uniform_break_points(vx_min - dv / 2., vx_max + dv / 2., gridvx.extents());
 
-    ddc::for_each(gridvx_ghosted, [&](auto const ivx_gh) {
+    ddc::for_each(gridvx_ghosted, [&](Idx<CollisionsIntra::GhostedVx> const ivx_gh) {
         EXPECT_LE(
                 std::fabs(
                         ddc::coordinate(ivx_gh)
@@ -83,14 +83,16 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
                 1.e-12);
     });
 
-    ddc::for_each(gridvx_ghosted_staggered, [&](auto const ivx_ghs) {
-        EXPECT_LE(
-                std::fabs(
-                        ddc::coordinate(ivx_ghs)
-                        - gridvx_ghosted_staggered_pred[(ivx_ghs - gridvx_ghosted_staggered.front())
-                                                                .value()]),
-                1.e-12);
-    });
+    ddc::for_each(
+            gridvx_ghosted_staggered,
+            [&](Idx<CollisionsIntra::GhostedVxStaggered> const ivx_ghs) {
+                EXPECT_LE(
+                        std::fabs(
+                                ddc::coordinate(ivx_ghs)
+                                - gridvx_ghosted_staggered_pred
+                                        [(ivx_ghs - gridvx_ghosted_staggered.front()).value()]),
+                        1.e-12);
+            });
 
     PC_tree_destroy(&conf_pdi);
     PDI_finalize();

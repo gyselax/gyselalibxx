@@ -38,8 +38,8 @@ public:
      * @brief Instantiate a VortexMergerEquilibria.
      *
      * @param[in] mapping
-     *      The mapping function from the logical index range
-     *      to the physical index range.
+     *      The mapping function from the logical domain
+     *      to the physical domain.
      * @param[in] grid
      *      The index range where the equilibrium is defined.
      * @param[in] builder

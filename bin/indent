@@ -63,7 +63,7 @@ fi
 if (( TEST_ONLY > 0 ))
 then
     FORMAT_PARAMS="-n -Werror"
-    RUN_IF_OK='echo Identation is Ok!'
+    RUN_IF_OK='echo Indentation is Ok!'
 else
     FORMAT_PARAMS="-i"
     RUN_IF_OK='true'

@@ -42,8 +42,8 @@ TEST(Physics, FluidMoments)
     IdxRangeX gridx(SplineInterpPointsX::get_domain<GridX>());
     IdxRangeVx gridvx(SplineInterpPointsVx::get_domain<GridVx>());
 
-    SplineXBuilder_1d const builder_x(gridx);
-    SplineVxBuilder_1d const builder_vx(gridvx);
+    SplineXBuilder const builder_x(gridx);
+    SplineVxBuilder const builder_vx(gridvx);
 
     IdxRangeSpXVx const mesh(IdxRangeSp(my_iion, IdxStepSp(1)), gridx, gridvx);
 

@@ -12,9 +12,7 @@ target_link_libraries(vortex_merger
 
         PDI::pdi
 
-        Eigen3::Eigen
-
-        gslx::advection_RTheta
+        gslx::advection
         gslx::geometry_RTheta
         gslx::io
         gslx::interpolation

@@ -107,18 +107,14 @@ using SplineXBuilder = ddc::SplineBuilder<
         GridX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridX,
-        GridVx>;
+        ddc::SplineSolver::LAPACK>;
 using SplineXEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
         ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>,
-        GridX,
-        GridVx>;
+        ddc::PeriodicExtrapolationRule<X>>;
 
 
 class XVxAdvection1DTest : public ::testing::Test
@@ -187,7 +183,7 @@ public:
             double const x0 = ddc::coordinate(IdxX(xv_idx));
             double const v = ddc::coordinate(IdxVx(xv_idx));
             double x = x0 - final_t * v;
-            // Replace inside the index range the feet if the dimension if periodic
+            // Replace the feet inside the domain if the dimension is periodic
             if (X::PERIODIC) {
                 x = fmod(x - double(x_min), double(x_max - x_min)) + double(x_min);
                 x = x > double(x_min) ? x : x + double(x_max - x_min);
@@ -225,22 +221,23 @@ public:
 TEST_F(XVxAdvection1DTest, AdvectionXVx)
 {
     // CREATING OPERATORS ------------------------------------------------------------------------
-    SplineXBuilder const builder_x(idx_range_xvx);
+    SplineXBuilder const builder_x(idx_range_x);
 
     ddc::PeriodicExtrapolationRule<X> bv_x_min;
     ddc::PeriodicExtrapolationRule<X> bv_x_max;
     SplineXEvaluator const spline_evaluator_x(bv_x_min, bv_x_max);
 
-    PreallocatableSplineInterpolator const spline_interpolator_x(builder_x, spline_evaluator_x);
+    PreallocatableSplineInterpolator const
+            spline_interpolator_x(builder_x, spline_evaluator_x, idx_range_xvx);
 
-    RK2<FieldMemXVx<CoordX>, DFieldMemXVx> time_stepper(idx_range_xvx);
+    RK2Builder time_stepper;
     BslAdvection1D<
             GridX,
             IdxRangeXVx,
             IdxRangeXVx,
             SplineXBuilder,
             SplineXEvaluator,
-            RK2<FieldMemXVx<CoordX>, DFieldMemXVx>> const
+            RK2Builder> const
             advection(spline_interpolator_x, builder_x, spline_evaluator_x, time_stepper);
 
     double const max_relative_error = AdvectionXVx(advection);

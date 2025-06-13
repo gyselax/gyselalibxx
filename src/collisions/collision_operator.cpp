@@ -39,9 +39,6 @@ namespace detail {
 {
     ::koliop_Operator operator_handle;
 
-    std::size_t const r_extent = tor1_extent;
-    std::size_t const theta_extent = tor2_extent;
-
     if (::koliop_Create(
                 &operator_handle,
                 mu_extent,
@@ -50,8 +47,8 @@ namespace detail {
                 tor2_extent,
                 tor3_extent,
                 species_extent,
-                r_extent, // NOTE: No MPI index range decomposition.
-                theta_extent, // NOTE: No MPI index range decomposition.
+                tor1_extent, // NOTE: No MPI index range decomposition.
+                tor2_extent, // NOTE: No MPI index range decomposition.
                 local_idx_range_r_offset,
                 local_idx_range_theta_offset,
                 collision_interspecies,

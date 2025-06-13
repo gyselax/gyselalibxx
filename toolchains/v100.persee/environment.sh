@@ -5,7 +5,12 @@ then
     exit 1
 fi
 
-. /data/gyselarunner/spack-0.23.0/share/spack/setup-env.sh
+if [ -f "$(which spack)" ]
+then
+  spack env deactivate
+else
+  . /data/gyselarunner/spack-0.23.0/share/spack/setup-env.sh
+fi
 
 spack load gcc@12
 spack env activate gyselalibxx-env-omp-cuda

@@ -22,21 +22,49 @@ struct PolarBsplineFixture<std::tuple<
         std::integral_constant<int, C>,
         std::integral_constant<bool, Uniform>>> : public testing::Test
 {
+    struct R_cov;
+    struct Theta_cov;
     struct R
     {
-        static constexpr bool PERIODIC = false;
+        static bool constexpr PERIODIC = false;
+        static bool constexpr IS_COVARIANT = false;
+        static bool constexpr IS_CONTRAVARIANT = true;
+        using Dual = R_cov;
     };
+
     struct Theta
     {
-        static constexpr bool PERIODIC = true;
+        static bool constexpr PERIODIC = true;
+        static bool constexpr IS_COVARIANT = false;
+        static bool constexpr IS_CONTRAVARIANT = true;
+        using Dual = Theta_cov;
+    };
+    struct R_cov
+    {
+        static bool constexpr PERIODIC = false;
+        static bool constexpr IS_COVARIANT = true;
+        static bool constexpr IS_CONTRAVARIANT = false;
+        using Dual = R;
+    };
+
+    struct Theta_cov
+    {
+        static bool constexpr PERIODIC = true;
+        static bool constexpr IS_COVARIANT = true;
+        static bool constexpr IS_CONTRAVARIANT = false;
+        using Dual = Theta;
     };
     struct X
     {
-        static constexpr bool PERIODIC = false;
+        static bool constexpr IS_COVARIANT = true;
+        static bool constexpr IS_CONTRAVARIANT = true;
+        using Dual = X;
     };
     struct Y
     {
-        static constexpr bool PERIODIC = false;
+        static bool constexpr IS_COVARIANT = true;
+        static bool constexpr IS_CONTRAVARIANT = true;
+        using Dual = Y;
     };
     static constexpr std::size_t spline_degree = D;
     static constexpr int continuity = C;
@@ -104,9 +132,7 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
-            ddc::SplineSolver::LAPACK,
-            GridR,
-            GridTheta>;
+            ddc::SplineSolver::LAPACK>;
     using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,
@@ -117,9 +143,7 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
             ddc::NullExtrapolationRule,
             ddc::NullExtrapolationRule,
             ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            GridR,
-            GridTheta>;
+            ddc::PeriodicExtrapolationRule<Theta>>;
     using BSplines = typename TestFixture::BSplines;
     using CoordR = Coord<R>;
     using CoordTheta = Coord<Theta>;

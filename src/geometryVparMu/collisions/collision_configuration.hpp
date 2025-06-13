@@ -68,8 +68,8 @@ public:
             IdxRangeDistributionFunctionType,
             GridSpType,
             GridPhiType,
-            GridThetaType,
             GridRType,
+            GridThetaType,
             GridVparType,
             GridMuType>;
 

@@ -79,8 +79,8 @@ int main(int argc, char** argv)
 
     // DEFINING OPERATORS ------------------------------------------------------------------------
     // Create spline builderss ---
-    SplineXBuilder_XY const builder_x(meshXY);
-    SplineYBuilder_XY const builder_y(meshXY);
+    SplineXBuilder_XY const builder_x(interpolation_idx_range_x);
+    SplineYBuilder_XY const builder_y(interpolation_idx_range_y);
 
     // Create spline evaluators ---
     ddc::PeriodicExtrapolationRule<X> bv_x_min;
@@ -92,32 +92,33 @@ int main(int argc, char** argv)
     SplineYEvaluator_XY const spline_y_evaluator(bv_y_min, bv_y_max);
 
     // Create spline interpolators ---
-    PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
-    PreallocatableSplineInterpolator const spline_y_interpolator(builder_y, spline_y_evaluator);
+    PreallocatableSplineInterpolator const
+            spline_x_interpolator(builder_x, spline_x_evaluator, meshXY);
+    PreallocatableSplineInterpolator const
+            spline_y_interpolator(builder_y, spline_y_evaluator, meshXY);
 
     // Create Poisson solver ---
     FFTPoissonSolver<IdxRangeXY> const poisson_solver(meshXY);
 
     // Create advection operators ---
-    Euler<FieldMemXY<CoordX>, DFieldMemXY> euler_x(meshXY);
+    EulerBuilder euler;
     BslAdvection1D<
             GridX,
             IdxRangeXY,
             IdxRangeXY,
             SplineXBuilder_XY,
             SplineXEvaluator_XY,
-            Euler<FieldMemXY<CoordX>, DFieldMemXY>>
-            advection_x(spline_x_interpolator, builder_x, spline_x_evaluator, euler_x);
+            EulerBuilder>
+            advection_x(spline_x_interpolator, builder_x, spline_x_evaluator, euler);
 
-    Euler<FieldMemXY<CoordY>, DFieldMemXY> euler_y(meshXY);
     BslAdvection1D<
             GridY,
             IdxRangeXY,
             IdxRangeXY,
             SplineYBuilder_XY,
             SplineYEvaluator_XY,
-            Euler<FieldMemXY<CoordY>, DFieldMemXY>>
-            advection_y(spline_y_interpolator, builder_y, spline_y_evaluator, euler_y);
+            EulerBuilder>
+            advection_y(spline_y_interpolator, builder_y, spline_y_evaluator, euler);
 
 
     // Create an initialiser ---

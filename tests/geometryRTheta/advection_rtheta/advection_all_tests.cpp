@@ -11,8 +11,10 @@
 
 #include <ddc/ddc.hpp>
 
+#include "../../advection/r_theta_test_cases.hpp"
+
 #include "advection_simulation_utils.hpp"
-#include "bsl_advection_rtheta.hpp"
+#include "bsl_advection_polar.hpp"
 #include "cartesian_to_circular.hpp"
 #include "cartesian_to_czarny.hpp"
 #include "circular_to_cartesian.hpp"
@@ -35,7 +37,6 @@
 #include "rk4.hpp"
 #include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
-#include "test_cases.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 
@@ -131,18 +132,11 @@ private:
     NumericalParams params;
 
 public:
-    using ValFieldMem = FieldMemRTheta<CoordRTheta>;
-    using DerivFieldMem = DVectorFieldMemRTheta<X_adv, Y_adv>;
-
     using NumericalTuple = std::tuple<
-            NumericalMethodParameters<
-                    Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>,
-            NumericalMethodParameters<
-                    CrankNicolson<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>,
-            NumericalMethodParameters<
-                    RK3<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>,
-            NumericalMethodParameters<
-                    RK4<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>>;
+            NumericalMethodParameters<EulerBuilder>,
+            NumericalMethodParameters<CrankNicolsonBuilder>,
+            NumericalMethodParameters<RK3Builder>,
+            NumericalMethodParameters<RK4Builder>>;
 
     static constexpr int size_tuple = std::tuple_size<NumericalTuple> {};
 
@@ -151,28 +145,13 @@ public:
     explicit Numerics(NumericalParams m_params)
         : params(m_params)
         , numerics(std::make_tuple(
+                  NumericalMethodParameters(EulerBuilder(), params.dt * 0.1, "EULER"),
                   NumericalMethodParameters(
-                          Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>(
-                                  params.grid),
-                          params.dt * 0.1,
-                          "EULER"),
-                  NumericalMethodParameters(
-                          CrankNicolson<
-                                  ValFieldMem,
-                                  DerivFieldMem,
-                                  Kokkos::DefaultExecutionSpace>(params.grid, 20, 1e-12),
+                          CrankNicolsonBuilder(20, 1e-12),
                           params.dt,
                           "CRANK NICOLSON"),
-                  NumericalMethodParameters(
-                          RK3<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>(
-                                  params.grid),
-                          params.dt,
-                          "RK3"),
-                  NumericalMethodParameters(
-                          RK4<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>(
-                                  params.grid),
-                          params.dt,
-                          "RK4")))
+                  NumericalMethodParameters(RK3Builder(), params.dt, "RK3"),
+                  NumericalMethodParameters(RK4Builder(), params.dt, "RK4")))
     {
     }
 };
@@ -182,8 +161,10 @@ public:
 struct GeneralParameters
 {
     IdxRangeRTheta grid;
-    PreallocatableSplineInterpolator2D<SplineRThetaBuilder, SplineRThetaEvaluatorNullBound> const&
-            interpolator;
+    PreallocatableSplineInterpolator2D<
+            SplineRThetaBuilder,
+            SplineRThetaEvaluatorNullBound,
+            IdxRangeRTheta> const& interpolator;
     SplineRThetaBuilder const& advection_builder;
     SplineRThetaEvaluatorConstBound& advection_evaluator;
     double final_time;
@@ -216,14 +197,14 @@ void run_simulations_with_methods(
     std::string output_stem = output_stream.str();
 
     SplinePolarFootFinder const foot_finder(
+            params.grid,
             num.time_stepper,
             sim.to_physical_mapping,
             sim.analytical_to_pseudo_physical_mapping,
             params.advection_builder,
             params.advection_evaluator);
 
-    BslAdvectionRTheta
-            advection_operator(params.interpolator, foot_finder, sim.to_physical_mapping);
+    BslAdvectionPolar advection_operator(params.interpolator, foot_finder, sim.to_physical_mapping);
 
     run_simulations(
             sim.to_physical_mapping_host,
@@ -324,7 +305,7 @@ int main(int argc, char** argv)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator);
+    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, grid);
 
 
     // --- Evaluator for the test advection field:
@@ -346,11 +327,12 @@ int main(int argc, char** argv)
 
 
     // SET THE DIFFERENT PARAMETERS OF THE TESTS ------------------------------------------------
-    CircularToCartMapping const from_circ_map;
-    CircularToPseudoCartMapping const to_pseudo_circ_map;
-    CartesianToCircular<X, Y, R, Theta> to_circ_map;
-    CzarnyToCartMapping const from_czarny_map(0.3, 1.4);
-    CartesianToCzarny<X, Y, R, Theta> const to_czarny_map(0.3, 1.4);
+    // Offset the centre of the circle to ensure that this is correctly handled
+    CircularToCartMapping const from_circ_map(6.2, 0.8);
+    CircularToPseudoCartMapping const to_pseudo_circ_map(6.2, 0.8);
+    CartesianToCircular<X, Y, R, Theta> to_circ_map(6.2, 0.8);
+    CzarnyToCartMapping const from_czarny_map(0.3, 1.4, 6.2, 0.8);
+    CartesianToCzarny<X, Y, R, Theta> const to_czarny_map(0.3, 1.4, 6.2, 0.8);
     DiscreteMappingBuilderHost const discrete_czarny_map_builder_host(
             Kokkos::DefaultHostExecutionSpace(),
             from_czarny_map,

@@ -39,7 +39,6 @@ class EdgeTransformation
                     OutsideEdge> && !std::is_same_v<typename Interface::Edge2, OutsideEdge>,
             "The interface cannot be an interface with the outside domain.");
 
-
     using EdgeGrid1 = typename Interface::Edge1::parallel_grid;
     using EdgeGrid2 = typename Interface::Edge2::parallel_grid;
 
@@ -51,6 +50,9 @@ class EdgeTransformation
 
     using IdxEdge1 = Idx<EdgeGrid1>;
     using IdxEdge2 = Idx<EdgeGrid2>;
+
+    using Patch1 = typename Interface::Edge1::associated_patch;
+    using Patch2 = typename Interface::Edge2::associated_patch;
 
     IdxRangeEdge1 const& m_idx_range_patch_1;
     IdxRangeEdge2 const& m_idx_range_patch_2;
@@ -84,23 +86,53 @@ public:
      *      The current continuous dimension of the given coordinate coord. 
      * 
      * @return The analogous coordinate on the target patch. 
+     * @warning This operator is ill-defined when the two patches have the same
+     * continuous dimension. 
     */
     template <class CurrentDim>
     Coord<std::conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, EdgeDim2, EdgeDim1>> operator()(
             Coord<CurrentDim> const& current_coord) const
     {
-        // The other continuous dimension
+        static_assert(
+                !std::is_same_v<EdgeDim1, EdgeDim2>,
+                "The two patches have the same conditinous dimension. "
+                "Please specify the input Patch as template parameter "
+                "using .transform_edge_coord<CurrentPatch>()(current_coord).");
+        using CurrentPatch
+                = std::conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, Patch1, Patch2>;
+        return transform_edge_coord<CurrentPatch>(current_coord);
+    }
+
+    /**
+     * @brief Transform a coordinate on the edge in the dimension 
+     * of the current patch to the analogous coordinate on the target patch. 
+     * 
+     * @param current_coord
+     *      A coordinate on the edge of the current patch.
+     * 
+     * @tparam CurrentPatch 
+     *      The current patch of the given coordinate coord. 
+     * 
+     * @return The analogous coordinate on the target patch. 
+    */
+    template <class CurrentPatch>
+    Coord<std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeDim2, EdgeDim1>>
+    transform_edge_coord(Coord<std::conditional_t<
+                                 std::is_same_v<CurrentPatch, Patch1>,
+                                 EdgeDim1,
+                                 EdgeDim2>> const& current_coord) const
+    {
+        using CurrentDim
+                = std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeDim1, EdgeDim2>;
         using TargetDim
-                = std::conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, EdgeDim2, EdgeDim1>;
+                = std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeDim2, EdgeDim1>;
 
-        // The index range of CurrentDim
-        using IdxRangeCurrent = std::
-                conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, IdxRangeEdge1, IdxRangeEdge2>;
-        // The index range of other dimension
-        using IdxRangeTarget = std::
-                conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, IdxRangeEdge2, IdxRangeEdge1>;
+        using IdxRangeCurrent = IdxRange<
+                std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeGrid1, EdgeGrid2>>;
+        using IdxRangeTarget = IdxRange<
+                std::conditional_t<std::is_same_v<CurrentPatch, Patch1>, EdgeGrid2, EdgeGrid1>>;
 
-        // Get min and length on each 1D index ranges:
+        // Get min and length on each 1D index range:
         IdxRange<EdgeGrid1, EdgeGrid2> const
                 combined_idx_range(m_idx_range_patch_1, m_idx_range_patch_2);
         IdxRangeCurrent const current_idx_range(combined_idx_range);
@@ -117,6 +149,9 @@ public:
         bool constexpr orientations_agree = Interface::orientations_agree;
         if constexpr (!orientations_agree) {
             rescale_x = target_length - rescale_x;
+        }
+        if constexpr (TargetDim::PERIODIC) {
+            rescale_x = std::fmod(rescale_x, target_length);
         }
         return target_min + rescale_x;
     }
@@ -211,7 +246,7 @@ public:
      * 
      */
     template <class CurrentGrid, class TargetGrid>
-    bool search_for_match(Idx<TargetGrid>& target_idx, Idx<CurrentGrid> const& current_idx) const
+    bool search_for_match(Idx<TargetGrid>& target_idx, Idx<CurrentGrid> current_idx) const
     {
         static_assert(
                 std::is_same_v<CurrentGrid, EdgeGrid1> || std::is_same_v<CurrentGrid, EdgeGrid2>,
@@ -223,28 +258,57 @@ public:
                 !std::is_same_v<TargetGrid, CurrentGrid>,
                 "The types of the indices should be different");
 
+        using TargetPatch
+                = std::conditional_t<std::is_same_v<TargetGrid, EdgeGrid1>, Patch1, Patch2>;
+
         // Index range of CurrentIdx.
         using IdxRangeCurrent = IdxRange<CurrentGrid>;
         // Index range of other dimension.
         using IdxRangeTarget = IdxRange<TargetGrid>;
         // Coordinate on the discontinuous dimension of the current grid.
         using CurrentCoord = Coord<typename CurrentGrid::continuous_dimension_type>;
-        // Index on the target grid
-        using IdxTarget = typename IdxRangeTarget::discrete_element_type;
         // Index step on the target grid
         using IdxStepTarget = typename IdxRangeTarget::discrete_vector_type;
+
+        /*
+            Add a point for the periodic case where the last interpolation point
+            is usually not on the last break point. 
+        */
+        IdxRangeEdge1 const idx_range_patch_1_full(
+                m_idx_range_patch_1.front(),
+                m_idx_range_patch_1.extents() + int(EdgeDim1::PERIODIC));
+        IdxRangeEdge2 const idx_range_patch_2_full(
+                m_idx_range_patch_2.front(),
+                m_idx_range_patch_2.extents() + int(EdgeDim2::PERIODIC));
 
 
         bool is_equivalent_idx = false;
 
         // Get the 1D index range corresponding to the current and target domains.
         IdxRange<EdgeGrid1, EdgeGrid2> const
-                combined_idx_range(m_idx_range_patch_1, m_idx_range_patch_2);
+                combined_idx_range(idx_range_patch_1_full, idx_range_patch_2_full);
         IdxRangeCurrent const current_idx_range(combined_idx_range);
         IdxRangeTarget const target_idx_range(combined_idx_range);
 
         int const n_cells_current = current_idx_range.size() - 1;
         int const n_cells_target = target_idx_range.size() - 1;
+
+        // Periodicity property.
+        if constexpr (CurrentGrid::continuous_dimension_type::PERIODIC) {
+            // current_idx is provided by the user so it may be outside the expected range.
+            std::size_t counter = 0;
+            while ((current_idx < current_idx_range.front()) && (counter < 10)) {
+                counter++;
+                current_idx += n_cells_current;
+            }
+            counter = 0;
+            while ((current_idx >= current_idx_range.back()) && (counter < 10)) {
+                counter++;
+                current_idx -= n_cells_current;
+            }
+        }
+        assert(current_idx <= current_idx_range.back());
+        assert(current_idx >= current_idx_range.front());
 
         if constexpr ( // Uniform case
                 ddc::is_uniform_point_sampling_v<
@@ -265,20 +329,29 @@ public:
             if (is_equivalent_idx) {
                 double const rescaling_factor = double(n_cells_current) / double(n_cells_target);
                 IdxStepTarget target_idx_step_rescaled(int(current_idx_value / rescaling_factor));
-                target_idx = IdxTarget(target_idx_range.front());
-                target_idx += target_idx_step_rescaled;
+                target_idx = target_idx_range.front() + target_idx_step_rescaled;
 
                 if constexpr (!Interface::orientations_agree) {
-                    IdxStepTarget target_idx_step = IdxTarget(target_idx_range.back()) - target_idx;
-                    target_idx = IdxTarget(target_idx_range.front());
-                    target_idx += target_idx_step;
+                    IdxStepTarget target_idx_step = target_idx_range.back() - target_idx;
+                    target_idx = target_idx_range.front() + target_idx_step;
+                }
+
+                assert(target_idx <= target_idx_range.back());
+                assert(target_idx >= target_idx_range.front());
+
+                // Apply periodicity property of the domain.
+                if constexpr (TargetGrid::continuous_dimension_type::PERIODIC) {
+                    if (target_idx == target_idx_range.back()) {
+                        target_idx = target_idx_range.front();
+                    }
                 }
             }
         } else { // Non uniform case
             // Dichotomy method comparing the coordinates of indexes of the target edge.
             target_idx = get_target_idx(target_idx_range, current_idx);
             CurrentCoord const current_coord(ddc::coordinate(current_idx));
-            CurrentCoord const target_equivalent_coord((*this)(ddc::coordinate(target_idx)));
+            CurrentCoord target_equivalent_coord
+                    = transform_edge_coord<TargetPatch>(ddc::coordinate(target_idx));
             is_equivalent_idx = (abs(current_coord - target_equivalent_coord) < 1e-14);
         }
 
@@ -295,12 +368,16 @@ private:
         return idx_1 + (idx_2 - idx_1) / 2;
     }
 
+
     /// @brief Get the closest target index which is supposed to be the equivalent to the current index.
     template <class TargetGrid, class CurrentGrid>
     Idx<TargetGrid> const get_target_idx(
             IdxRange<TargetGrid> const& target_idx_range,
             Idx<CurrentGrid> const& current_idx) const
     {
+        using TargetPatch
+                = std::conditional_t<std::is_same_v<TargetGrid, EdgeGrid1>, Patch1, Patch2>;
+
         // Coordinate on the discontinuous dimension of the current grid.
         using CurrentCoord = Coord<typename CurrentGrid::continuous_dimension_type>;
         // Index on the target grid
@@ -317,7 +394,8 @@ private:
 
         IdxStepTarget target_idx_step_diff = target_idx_max - target_idx_min;
         while (target_idx_step_diff != IdxStepTarget(1)) {
-            CurrentCoord target_equivalent_coord_mid((*this)(ddc::coordinate(target_idx_mid)));
+            CurrentCoord target_equivalent_coord_mid
+                    = transform_edge_coord<TargetPatch>(ddc::coordinate(target_idx_mid));
 
             if ((current_coord > target_equivalent_coord_mid && Interface::orientations_agree)
                 || (current_coord <= target_equivalent_coord_mid
@@ -331,8 +409,23 @@ private:
             target_idx_step_diff = target_idx_max - target_idx_min;
         }
 
-        CurrentCoord target_coord_min((*this)(ddc::coordinate(target_idx_min)));
-        CurrentCoord target_coord_max((*this)(ddc::coordinate(target_idx_max)));
+        assert(target_idx_min <= target_idx_range.back());
+        assert(target_idx_min >= target_idx_range.front());
+        assert(target_idx_max <= target_idx_range.back());
+        assert(target_idx_max >= target_idx_range.front());
+
+        // Periodicity property.
+        if constexpr (TargetGrid::continuous_dimension_type::PERIODIC) {
+            if (target_idx_max == target_idx_range.back()) {
+                target_idx_max = target_idx_range.front();
+            }
+        }
+
+        CurrentCoord target_coord_min
+                = transform_edge_coord<TargetPatch>(ddc::coordinate(target_idx_min));
+        CurrentCoord target_coord_max
+                = transform_edge_coord<TargetPatch>(ddc::coordinate(target_idx_max));
+
         if (abs(current_coord - target_coord_min) < abs(current_coord - target_coord_max)) {
             return target_idx_min;
         } else {

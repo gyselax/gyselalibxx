@@ -11,7 +11,7 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "bsl_advection_rtheta.hpp"
+#include "bsl_advection_polar.hpp"
 #include "bsl_predcorr.hpp"
 #include "bsl_predcorr_second_order_explicit.hpp"
 #include "bsl_predcorr_second_order_implicit.hpp"
@@ -139,9 +139,7 @@ int main(int argc, char** argv)
 
 
     // --- Time integration method --------------------------------------------------------------------
-    Euler<FieldMemRTheta<CoordRTheta>,
-          DVectorFieldMemRTheta<X, Y>,
-          Kokkos::DefaultExecutionSpace> const time_stepper(grid);
+    EulerBuilder const time_stepper;
 
 
     // --- Advection operator -------------------------------------------------------------------------
@@ -158,16 +156,17 @@ int main(int argc, char** argv)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator);
+    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, grid);
 
     SplinePolarFootFinder find_feet(
+            grid,
             time_stepper,
             to_physical_mapping,
             to_physical_mapping,
             builder,
             spline_evaluator_extrapol);
 
-    BslAdvectionRTheta advection_operator(interpolator, find_feet, to_physical_mapping);
+    BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
 
 
 

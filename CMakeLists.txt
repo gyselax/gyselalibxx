@@ -1,13 +1,23 @@
 # SPDX-License-Identifier: MIT
 
 cmake_minimum_required(VERSION 3.20)
-project(gyselalibxx C CXX)
+
+# Read version from external file
+file(READ "${CMAKE_CURRENT_SOURCE_DIR}/src/version.txt" GYSELALIBXX_VERSION_STRING)
+string(STRIP "${GYSELALIBXX_VERSION_STRING}" GYSELALIBXX_VERSION_STRING)
+
+# Split into components
+string(REPLACE "." ";" VERSION_LIST ${GYSELALIBXX_VERSION_STRING})
+list(GET VERSION_LIST 0 GYSELALIBXX_VERSION_MAJOR)
+list(GET VERSION_LIST 1 GYSELALIBXX_VERSION_MINOR)
+list(GET VERSION_LIST 2 GYSELALIBXX_VERSION_PATCH)
+
+# Set project language and version
+project(gyselalibxx
+    LANGUAGES C CXX
+    VERSION ${GYSELALIBXX_VERSION_MAJOR}.${GYSELALIBXX_VERSION_MINOR}.${GYSELALIBXX_VERSION_PATCH})
 
 set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
-
-# Our CMake module path
-
-list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
 
 # Configuration
 
@@ -15,7 +25,6 @@ list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
 set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
 
 ## List of options
-option(GYSELALIBXX_BUILD_DOCUMENTATION "Build the documentation." OFF)
 option(GYSELALIBXX_BUILD_SIMULATIONS "Build the simulations." ON)
 option(GYSELALIBXX_BUILD_TESTING "Build the tests." ON)
 option(GYSELALIBXX_ENABLE_DEPRECATED "Enable deprecated code" OFF)
@@ -24,30 +33,13 @@ set(GYSELALIBXX_DEFAULT_CXX_FLAGS "-O1" CACHE STRING "Default flags for C++ spec
 option(ACTIVATE_RESTART_TESTS "Activate tests which check that a simulation gives the same results after restart." ON)
 
 set(GYSELALIBXX_DEPENDENCY_POLICIES "AUTO" "EMBEDDED" "INSTALLED")
-option(GYSELALIBXX_BUILD_DOCUMENTATION "Build the documentation." OFF)
 
 set(GYSELALIBXX_INCLUDE_TESTING_DEPENDENCIES ${GYSELALIBXX_BUILD_TESTING} CACHE BOOL "Indicates if the testing dependencies should be included. By default they are only included if the tests are built.")
 
 # Set default DDC options when included in GYSELA
 option(DDC_BUILD_BENCHMARKS       "Build DDC benchmarks." OFF)
-option(DDC_BUILD_DOCUMENTATION    "Build DDC documentation/website" OFF)
 option(DDC_BUILD_EXAMPLES         "Build DDC examples" OFF)
 option(DDC_BUILD_TESTS            "Build DDC tests if BUILD_TESTING is enabled" OFF)
-
-###############################################################################################
-#                                  Build documentation
-###############################################################################################
-
-## if documentation is enabled, build it
-if("${GYSELALIBXX_BUILD_DOCUMENTATION}")
-  ## Look for a pre-installed Doxygen
-  find_package(Doxygen REQUIRED OPTIONAL_COMPONENTS dot)
-
-  add_subdirectory(docs/)
-endif()
-
-## Turn off documentation for subpackages
-set(BUILD_DOCUMENTATION OFF)
 
 ###############################################################################################
 #                                     Get dependencies
@@ -109,12 +101,6 @@ if(NOT "${KokkosKernels_FOUND}")
   add_subdirectory("vendor/kokkos-kernels/" "kokkos-kernels") # SYSTEM)
 endif()
 
-find_package (Eigen3 3.3 NO_MODULE)
-if (NOT EIGEN3_FOUND)
-  ## Use Eigen from `vendor/`
-  set(EIGEN_BUILD_DOC OFF CACHE BOOL "Don't build eigen docs")
-  add_subdirectory("vendor/eigen/" "eigen") # SYSTEM)
-endif (NOT EIGEN3_FOUND)
 
 find_package(DDC 0.5 QUIET COMPONENTS fft pdi splines)
 if(NOT "${DDC_FOUND}")

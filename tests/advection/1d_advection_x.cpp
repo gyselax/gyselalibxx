@@ -64,8 +64,7 @@ using SplineXBuilder = ddc::SplineBuilder<
         GridX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridX>;
+        ddc::SplineSolver::LAPACK>;
 
 using SplineXEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
@@ -73,8 +72,7 @@ using SplineXEvaluator = ddc::SplineEvaluator<
         BSplinesX,
         GridX,
         ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>,
-        GridX>;
+        ddc::PeriodicExtrapolationRule<X>>;
 
 
 class XAdvection1DTest : public ::testing::Test
@@ -128,7 +126,7 @@ public:
         ddc::for_each(interpolation_idx_range, [&](IdxX const idx) {
             double const x0 = ddc::coordinate(idx);
             double x = 2 * std::atan(std::tan(x0 / 2.) * std::exp(-final_t));
-            // Replace inside the index range the feet if the dimension if periodic
+            // Replace the feet inside the domain if the dimension is periodic
             if (X::PERIODIC) {
                 x = fmod(x - double(x_min), double(x_max - x_min)) + double(x_min);
                 x = x > double(x_min) ? x : x + double(x_max - x_min);
@@ -171,17 +169,12 @@ TEST_F(XAdvection1DTest, AdvectionX)
     ddc::PeriodicExtrapolationRule<X> bv_x_max;
     SplineXEvaluator const spline_evaluator(bv_x_min, bv_x_max);
 
-    PreallocatableSplineInterpolator const spline_interpolator(builder, spline_evaluator);
+    PreallocatableSplineInterpolator const
+            spline_interpolator(builder, spline_evaluator, interpolation_idx_range);
 
 
-    RK2<FieldMemX<CoordX>, DFieldMemX> time_stepper(interpolation_idx_range);
-    BslAdvection1D<
-            GridX,
-            IdxRangeX,
-            IdxRangeX,
-            SplineXBuilder,
-            SplineXEvaluator,
-            RK2<FieldMemX<CoordX>, DFieldMemX>> const
+    RK2Builder time_stepper;
+    BslAdvection1D<GridX, IdxRangeX, IdxRangeX, SplineXBuilder, SplineXEvaluator, RK2Builder> const
             advection(spline_interpolator, builder, spline_evaluator, time_stepper);
 
     double const max_relative_error = AdvectionX(advection);

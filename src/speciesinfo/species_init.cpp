@@ -2,7 +2,7 @@
 
 #include "species_init.hpp"
 
-/**
+/*
  * @brief Initialise the species domain
  * @param[out] kinetic species domain 
  * @param[out] fluid species domain 
@@ -91,7 +91,7 @@ void init_all_species(
 }
 
 
-/**
+/*
  * @brief Initialise the species domain in the case of adiabatic and kinetic species
  * @param[in] conf_gyselalibxx is the YAML input file
  * @return the kinetic species domain 
@@ -112,7 +112,7 @@ IdxRangeSp init_species(PC_tree_t conf_gyselalibxx)
 }
 
 
-/**
+/*
  * @brief Initialise the species domain in the specific case of fluid species 
  *   added to adiabatic and kinetic species
  * @param[out] kinetic species domain 
@@ -135,7 +135,7 @@ void init_species_withfluid(
 }
 
 
-/**
+/*
  * @brief Initialise the kinetic species domain 
  * @return the kinetic species domain 
  */

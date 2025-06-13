@@ -12,7 +12,7 @@
 #include "ddc_helper.hpp"
 
 /**
- * @brief A class providing an operator for integrating functions defined on a discrete index range.
+ * @brief A class providing an operator for integrating functions defined on known grid points.
  *
  * @tparam IdxRangeQuadrature The index range over which the function is integrated.
  * @tparam IdxRangeTotal The index range of the chunk which can be passed to the operator(). This is the
@@ -44,7 +44,7 @@ public:
     explicit Quadrature(QuadConstField coeffs) : m_coefficients(coeffs) {}
 
     /**
-     * @brief An operator for calculating the integral of a function defined on a discrete index range.
+     * @brief An operator for calculating the integral of a function defined on known grid points.
      *
      * @param[in] exec_space
      *        The space on which the function is executed (CPU/GPU).
@@ -54,7 +54,7 @@ public:
      *        It should be noted that a Field fulfils these criteria and can be passed as the function to be integrated.
      *        If the exec_space is a GPU the function that is passed must be accessible from GPU.
      *
-     * @returns The integral of the function over the index range.
+     * @returns The integral of the function over the domain.
      */
     template <class ExecutionSpace, class IntegratorFunction>
     double operator()(ExecutionSpace exec_space, IntegratorFunction integrated_function) const
@@ -94,7 +94,7 @@ public:
     }
 
     /**
-     * @brief An operator for calculating the integral of a function defined on a discrete index range
+     * @brief An operator for calculating the integral of a function defined on a discrete domain
      * by cycling over batch dimensions.
      *
      * @param[in] exec_space

@@ -9,7 +9,9 @@
 
 #include <ddc/ddc.hpp>
 
-#include "bsl_advection_rtheta.hpp"
+#include "../../advection/r_theta_test_cases.hpp"
+
+#include "bsl_advection_polar.hpp"
 #include "geometry.hpp"
 #include "l_norm_tools.hpp"
 #include "math_tools.hpp"
@@ -19,7 +21,6 @@
 #include "polar_spline_evaluator.hpp"
 #include "quadrature.hpp"
 #include "spline_quadrature.hpp"
-#include "test_cases.hpp"
 #include "trapezoid_quadrature.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
@@ -49,7 +50,7 @@ std::string to_lower(std::string s)
  * @param[in] to_physical_mapping
  *      The mapping function from the logical domain to the physical domain.
  * @param[in] idx_range_theta
- *      The index range to which the poloidal coordinate should be restricted.
+ *      An index range spanning the domain to which the poloidal coordinate should be restricted.
  */
 template <class LogicalToPhysicalMapping>
 void print_coordinate(
@@ -212,8 +213,8 @@ host_t<FieldMemRTheta<CoordRTheta>> compute_exact_feet_rtheta(
  *      The mapping function from the logical domain to the physical
  *      domain.
  * @param[in] grid
- *      The logical index range where the function is defined.
- * @param[in] allfdistribu_advected
+ *      An index range spanning the logical domain where the function is defined.
+ * @param[in] density_advected
  *      The computed function.
  * @param[in] function_to_be_advected
  *      The exact function.
@@ -227,7 +228,7 @@ template <class LogicalToPhysicalMapping, class Function>
 double compute_difference_L2_norm(
         LogicalToPhysicalMapping const& to_physical_mapping,
         IdxRangeRTheta const& grid,
-        host_t<DFieldRTheta> allfdistribu_advected,
+        host_t<DFieldRTheta> density_advected,
         Function& function_to_be_advected,
         host_t<FieldRTheta<CoordRTheta>> const& feet_coord)
 {
@@ -235,7 +236,7 @@ double compute_difference_L2_norm(
     host_t<DFieldMemRTheta> difference_function(grid);
     ddc::for_each(grid, [&](IdxRTheta const irtheta) {
         exact_function(irtheta) = function_to_be_advected(feet_coord(irtheta));
-        difference_function(irtheta) = exact_function(irtheta) - allfdistribu_advected(irtheta);
+        difference_function(irtheta) = exact_function(irtheta) - density_advected(irtheta);
     });
 
     host_t<DFieldMemRTheta> const quadrature_coeffs = compute_coeffs_on_mapping(
@@ -296,7 +297,7 @@ void display_time(
  *      The analytical version of the mapping.
  *      It can be different from the mapping if the mapping is discrete.
  * @param[in] grid
- *      The logical index range on which the advected function is defined.
+ *      An index range spanning the logical domain on which the advected function is defined.
  * @param[in] time_stepper
  *      The time integration method used to solve the characteristic
  *      equation.
@@ -363,7 +364,7 @@ void simulate(
     double const end_time = dt * iteration_number;
 
 
-    host_t<DFieldMemRTheta> allfdistribu_test(grid);
+    host_t<DFieldMemRTheta> density_test(grid);
 
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_test_vec_host(grid);
 
@@ -377,7 +378,7 @@ void simulate(
         if (ddc::get<R>(coord) <= 1e-15) {
             ddc::get<Theta>(coord) = 0;
         }
-        allfdistribu_test(irtheta) = simulation.advected_function(coord);
+        density_test(irtheta) = simulation.advected_function(coord);
     });
 
 
@@ -386,16 +387,16 @@ void simulate(
     ddc::for_each(grid, [&](IdxRTheta const irtheta) {
         // Moving the coordinates in the physical domain:
         CoordXY const coord_xy = to_physical_mapping_host(ddc::coordinate(irtheta));
-        CoordXY const advection_field = simulation.advection_field(coord_xy, 0.);
 
         // Define the advection field on the physical domain:
-        ddcHelper::get<X>(advection_field_test_vec_host)(irtheta) = ddc::get<X>(advection_field);
-        ddcHelper::get<Y>(advection_field_test_vec_host)(irtheta) = ddc::get<Y>(advection_field);
+        ddcHelper::assign_vector_field_element(
+                get_field(advection_field_test_vec_host),
+                irtheta,
+                simulation.advection_field(coord_xy, 0.));
     });
 
-    auto allfdistribu = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(allfdistribu_test));
+    auto density = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), get_field(density_test));
 
     auto advection_field_xy = ddcHelper::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
@@ -404,16 +405,16 @@ void simulate(
     // SIMULATION -------------------------------------------------------------------------------
     // Advect "iteration_number" times:
     for (int i(0); i < iteration_number; ++i) {
-        advection_operator(get_field(allfdistribu), get_const_field(advection_field_xy), dt);
+        advection_operator(get_field(density), get_const_field(advection_field_xy), dt);
 
         // Save the advected function for each iteration:
         if (save_curves) {
-            ddc::parallel_deepcopy(allfdistribu_test, allfdistribu);
+            ddc::parallel_deepcopy(density_test, density);
             std::string const name = output_folder + "/after_" + std::to_string(i + 1) + ".txt";
-            saving_computed(to_physical_mapping_host, get_field(allfdistribu_test), name);
+            saving_computed(to_physical_mapping_host, get_field(density_test), name);
         }
     }
-    ddc::parallel_deepcopy(allfdistribu_test, allfdistribu);
+    ddc::parallel_deepcopy(density_test, density);
 
 
 
@@ -439,7 +440,7 @@ void simulate(
     double max_err = 0.;
     ddc::for_each(grid, [&](IdxRTheta const irtheta) {
         double const err
-                = fabs(allfdistribu_test(irtheta)
+                = fabs(density_test(irtheta)
                        - simulation.advected_function(feet_coords_rtheta_end_time(irtheta)));
         max_err = max_err > err ? max_err : err;
     });
@@ -455,7 +456,7 @@ void simulate(
               << compute_difference_L2_norm(
                          to_physical_mapping_host,
                          grid,
-                         get_field(allfdistribu_test),
+                         get_field(density_test),
                          simulation.advected_function,
                          get_field(feet_coords_rtheta_end_time))
               << std::endl;
@@ -536,7 +537,7 @@ void simulate(
  *      The analytical version of the mapping.
  *      It can be different from the mapping if the mapping is discrete.
  * @param[in] grid
- *      The logical index range on which the advected function is defined.
+ *      An index range spanning the logical domain on which the advected function is defined.
  * @param[in] time_stepper
  *      The time integration method used to solve the characteristic
  *      equation.

@@ -325,6 +325,12 @@ public:
     }
 };
 
+template <
+        class IdxRangeType,
+        class VectorIndexSetType,
+        class MemSpace = Kokkos::DefaultExecutionSpace::memory_space>
+using DVectorFieldMem = VectorFieldMem<double, IdxRangeType, VectorIndexSetType, MemSpace>;
+
 namespace detail {
 /**
  * @brief Set a `VectorFieldMem` on a given NewMemorySpace.

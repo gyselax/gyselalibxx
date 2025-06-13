@@ -1,40 +1,27 @@
 name: "Filter tests"
 
-inputs:
-  base_sha:
-    description: "The SHA or branch of the PR base"
-    required: true
-  trigger_type:
-    description: "The SHA of the PR base"
-    required: true
-
 runs:
   using: "composite"
   steps:
-  - name: "Fetch reference case"
-    run: |
-      git config --global --add safe.directory $(pwd)
-      git fetch --no-recurse-submodules origin ${{ inputs.base_sha }}
-    shell: bash
-  - name: "Get changed files"
-    if: inputs.trigger_type == 'workflow_dispatch'
-    run: |
-      base_sha=$(git log -1 ${{ inputs.base_sha }} --pretty=%H)
-      git diff --name-only ${base_sha} > changed_files.txt
-    shell: bash
-  - name: "Get changed files"
-    if: inputs.trigger_type != 'workflow_dispatch'
-    run: |
-      git diff --name-only ${{ inputs.base_sha }} > changed_files.txt
-    shell: bash
+  - uses: ./.github/actions/changed_files
   - name: "Check filters"
+    if: github.event_name == 'pull_request' || github.event_name == 'merge_request'
     run: |
       changed_files=$(awk '{printf("%s ",$0)} END { printf "\n" }' changed_files.txt)
       echo "CHANGED_FILES=${changed_files}" >> $GITHUB_ENV
       FOUND_POLAR_SPLINES=$(grep "src/interpolation/polar_splines/.*" -x changed_files.txt || true)
-      if [ -n "$FOUND_POLAR_SPLINES" ]; then echo "POLAR_SPLINES_TEST_DEGREE_MIN=1" >> build.env; echo "POLAR_SPLINES_TEST_DEGREE_MIN=6" >> $GITHUB_ENV; fi
-      FOUND_POISSON_2D=$(grep "src/geometryRTheta/poisson/.*" -x changed_files.txt || true)
+      if [ -n "$FOUND_POLAR_SPLINES" ]; then echo "POLAR_SPLINES_TEST_DEGREE_MIN=1" >> $GITHUB_ENV; echo "POLAR_SPLINES_TEST_DEGREE_MIN=6" >> $GITHUB_ENV; fi
+      FOUND_POISSON_2D=$(grep -P "(src/geometryRTheta/poisson/.*)|(tests/geometryRTheta/polar_poisson/.*)" -x changed_files.txt || true)
       if [ -z "$FOUND_POISSON_2D" ]; then echo "POISSON_2D_BUILD_TESTING=OFF" >> $GITHUB_ENV; else echo "POISSON_2D_BUILD_TESTING=ON" >> $GITHUB_ENV; fi
+      FOUND_DDC=$(grep "vendor/ddc" changed_files.txt || true)
+      if [ -z "$FOUND_DDC" ]; then echo "DDC_BUILD_TESTING=OFF" >> $GITHUB_ENV; else echo "DDC_BUILD_TESTING=ON" >> $GITHUB_ENV; fi
+    shell: bash
+  - name: "Check filters"
+    if: github.event_name != 'pull_request' && github.event_name != 'merge_request'
+    run: |
+      echo "POLAR_SPLINES_TEST_DEGREE_MIN=1" >> $GITHUB_ENV
+      echo "POLAR_SPLINES_TEST_DEGREE_MIN=6" >> $GITHUB_ENV
+      echo "POISSON_2D_BUILD_TESTING=OFF" >> $GITHUB_ENV
       FOUND_DDC=$(grep "vendor/ddc" changed_files.txt || true)
       if [ -z "$FOUND_DDC" ]; then echo "DDC_BUILD_TESTING=OFF" >> $GITHUB_ENV; else echo "DDC_BUILD_TESTING=ON" >> $GITHUB_ENV; fi
     shell: bash

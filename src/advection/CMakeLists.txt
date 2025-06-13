@@ -10,6 +10,7 @@ target_link_libraries("advection"
     INTERFACE
         DDC::core
         gslx::interpolation
+        gslx::math_tools
         gslx::speciesinfo
         gslx::timestepper
         gslx::utils

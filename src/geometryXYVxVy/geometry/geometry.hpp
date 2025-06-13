@@ -9,6 +9,10 @@
 #include "ddc_helper.hpp"
 #include "mpilayout.hpp"
 #include "species_info.hpp"
+#include "vector_field.hpp"
+#include "vector_field_mem.hpp"
+#include "vector_index_tools.hpp"
+
 
 /**
  * @brief A class which describes the real space in the first spatial direction X.
@@ -158,22 +162,14 @@ using SplineXBuilder = ddc::SplineBuilder<
         GridX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridVx,
-        GridVy,
-        GridX,
-        GridY>;
+        ddc::SplineSolver::LAPACK>;
 using SplineXEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
         ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>,
-        GridVx,
-        GridVy,
-        GridX,
-        GridY>;
+        ddc::PeriodicExtrapolationRule<X>>;
 using SplineYBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -181,22 +177,14 @@ using SplineYBuilder = ddc::SplineBuilder<
         GridY,
         SplineYBoundary,
         SplineYBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridVx,
-        GridVy,
-        GridX,
-        GridY>;
+        ddc::SplineSolver::LAPACK>;
 using SplineYEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesY,
         GridY,
         ddc::PeriodicExtrapolationRule<Y>,
-        ddc::PeriodicExtrapolationRule<Y>,
-        GridVx,
-        GridVy,
-        GridX,
-        GridY>;
+        ddc::PeriodicExtrapolationRule<Y>>;
 using SplineVxBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -204,22 +192,14 @@ using SplineVxBuilder = ddc::SplineBuilder<
         GridVx,
         SplineVxBoundary,
         SplineVxBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridX,
-        GridY,
-        GridVx,
-        GridVy>;
+        ddc::SplineSolver::LAPACK>;
 using SplineVxEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesVx,
         GridVx,
         ddc::ConstantExtrapolationRule<Vx>,
-        ddc::ConstantExtrapolationRule<Vx>,
-        GridX,
-        GridY,
-        GridVx,
-        GridVy>;
+        ddc::ConstantExtrapolationRule<Vx>>;
 using SplineVyBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -227,22 +207,14 @@ using SplineVyBuilder = ddc::SplineBuilder<
         GridVy,
         SplineVyBoundary,
         SplineVyBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridX,
-        GridY,
-        GridVx,
-        GridVy>;
+        ddc::SplineSolver::LAPACK>;
 using SplineVyEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesVy,
         GridVy,
         ddc::ConstantExtrapolationRule<Vy>,
-        ddc::ConstantExtrapolationRule<Vy>,
-        GridX,
-        GridY,
-        GridVx,
-        GridVy>;
+        ddc::ConstantExtrapolationRule<Vy>>;
 
 using IdxRangeBSX = IdxRange<BSplinesX>;
 using IdxRangeBSY = IdxRange<BSplinesY>;
@@ -297,6 +269,10 @@ using FieldMemXY = FieldMem<ElementType, IdxRangeXY>;
 using DFieldMemXY = FieldMemXY<double>;
 
 template <class ElementType>
+using VectorFieldMemXY = VectorFieldMem<ElementType, IdxRangeXY, VectorIndexSet<X, Y>>;
+using DVectorFieldMemXY = VectorFieldMemXY<double>;
+
+template <class ElementType>
 using FieldMemVx = FieldMem<ElementType, IdxRangeVx>;
 
 template <class ElementType>
@@ -336,6 +312,10 @@ using FieldXY = Field<ElementType, IdxRangeXY>;
 using DFieldXY = FieldXY<double>;
 
 template <class ElementType>
+using VectorFieldXY = VectorField<ElementType, IdxRangeXY, VectorIndexSet<X, Y>>;
+using DVectorFieldXY = VectorFieldXY<double>;
+
+template <class ElementType>
 using FieldVx = Field<ElementType, IdxRangeVx>;
 using DFieldVx = FieldVx<double>;
 
@@ -369,6 +349,10 @@ using ConstFieldY = Field<ElementType const, IdxRangeY>;
 template <class ElementType>
 using ConstFieldXY = Field<ElementType const, IdxRangeXY>;
 using DConstFieldXY = ConstFieldXY<double>;
+
+template <class ElementType>
+using VectorConstFieldXY = VectorConstField<ElementType, IdxRangeXY, VectorIndexSet<X, Y>>;
+using DVectorConstFieldXY = VectorConstFieldXY<double>;
 
 template <class ElementType>
 using ConstFieldVx = Field<ElementType const, IdxRangeVx>;

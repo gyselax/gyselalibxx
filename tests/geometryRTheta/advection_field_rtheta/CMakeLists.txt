@@ -24,12 +24,10 @@ function (advection_field_test_executable SIMULATION)
 
             PDI::pdi
             
-            Eigen3::Eigen
-
             GTest::gtest
             GTest::gmock
             
-            gslx::advection_RTheta
+            gslx::advection
             gslx::diocotron_init_eq
             gslx::geometry_RTheta
             gslx::interpolation

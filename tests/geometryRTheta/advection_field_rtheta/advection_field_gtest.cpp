@@ -15,7 +15,7 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "bsl_advection_rtheta.hpp"
+#include "bsl_advection_polar.hpp"
 #include "bsl_predcorr.hpp"
 #include "bsl_predcorr_second_order_explicit.hpp"
 #include "bsl_predcorr_second_order_implicit.hpp"
@@ -142,19 +142,18 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator);
+    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, grid);
 
-    RK3<FieldMemRTheta<CoordRTheta>,
-        DVectorFieldMemRTheta<X, Y>,
-        Kokkos::DefaultExecutionSpace> const time_stepper(grid);
+    RK3Builder const time_stepper;
     SplinePolarFootFinder find_feet(
+            grid,
             time_stepper,
             to_physical_mapping,
             to_physical_mapping,
             builder,
             spline_evaluator_extrapol);
 
-    BslAdvectionRTheta advection_operator(interpolator, find_feet, to_physical_mapping);
+    BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
 
     // --- Advection field finder ---------------------------------------------------------------------
     AdvectionFieldFinder advection_field_computer(to_physical_mapping);
@@ -182,25 +181,23 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     // ================================================================================================
     // INITIALISATION                                                                                 |
     // ================================================================================================
-    host_t<DFieldMemRTheta> allfdistribu_rtheta_alloc(grid);
-    host_t<DFieldMemRTheta> allfdistribu_xy_alloc(grid);
+    host_t<DFieldMemRTheta> density_rtheta_alloc(grid);
+    host_t<DFieldMemRTheta> density_xy_alloc(grid);
 
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_exact_alloc(grid);
-    host_t<DVectorFieldMemRTheta<R_cov, Theta_cov>> advection_field_rtheta_alloc(
-            grid_without_Opoint);
+    host_t<DVectorFieldMemRTheta<R, Theta>> advection_field_rtheta_alloc(grid_without_Opoint);
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_alloc(grid);
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_from_rtheta_alloc(grid);
-    CoordXY advection_field_xy_centre;
+    DVector<X, Y> advection_field_xy_centre;
 
     host_t<DFieldMemRTheta> electrostatic_potential_alloc(grid);
 
-    host_t<DFieldRTheta> allfdistribu_rtheta(allfdistribu_rtheta_alloc);
-    host_t<DFieldRTheta> allfdistribu_xy(allfdistribu_xy_alloc);
+    host_t<DFieldRTheta> density_rtheta(density_rtheta_alloc);
+    host_t<DFieldRTheta> density_xy(density_xy_alloc);
     host_t<DFieldRTheta> electrostatic_potential(electrostatic_potential_alloc);
 
     host_t<DVectorFieldRTheta<X, Y>> advection_field_exact(advection_field_exact_alloc);
-    host_t<DVectorFieldRTheta<R_cov, Theta_cov>> advection_field_rtheta(
-            advection_field_rtheta_alloc);
+    host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta(advection_field_rtheta_alloc);
     host_t<DVectorFieldRTheta<X, Y>> advection_field_xy(advection_field_xy_alloc);
     host_t<DVectorFieldRTheta<X, Y>> advection_field_xy_from_rtheta(
             advection_field_xy_from_rtheta_alloc);
@@ -212,13 +209,14 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
         CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
         CoordXY const coord_xy(to_physical_mapping(coord_rtheta));
 
-        allfdistribu_rtheta(irtheta) = simulation.function(coord_rtheta);
-        allfdistribu_xy(irtheta) = allfdistribu_rtheta(irtheta);
+        density_rtheta(irtheta) = simulation.function(coord_rtheta);
+        density_xy(irtheta) = density_rtheta(irtheta);
         electrostatic_potential(irtheta) = simulation.electrostatical_potential(coord_xy, 0);
 
-        CoordXY const evaluated_advection_field = simulation.advection_field(coord_xy, 0);
-        ddcHelper::get<X>(advection_field_exact)(irtheta) = CoordX(evaluated_advection_field);
-        ddcHelper::get<Y>(advection_field_exact)(irtheta) = CoordY(evaluated_advection_field);
+        ddcHelper::assign_vector_field_element(
+                advection_field_exact,
+                irtheta,
+                simulation.advection_field(coord_xy, 0));
     });
 
 
@@ -234,59 +232,48 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     host_t<DVectorFieldMemRTheta<X, Y>> difference_between_fields_exact_and_xy(grid);
     // > Compare the advection field computed on XY to the exact advection field
     ddc::for_each(grid, [&](IdxRTheta const irtheta) {
-        ddcHelper::get<X>(difference_between_fields_exact_and_xy)(irtheta)
-                = ddcHelper::get<X>(advection_field_exact)(irtheta)
-                  - ddcHelper::get<X>(advection_field_xy)(irtheta);
-        ddcHelper::get<Y>(difference_between_fields_exact_and_xy)(irtheta)
-                = ddcHelper::get<Y>(advection_field_exact)(irtheta)
-                  - ddcHelper::get<Y>(advection_field_xy)(irtheta);
+        ddcHelper::assign_vector_field_element(
+                get_field(difference_between_fields_exact_and_xy),
+                irtheta,
+                advection_field_exact(irtheta) - advection_field_xy(irtheta));
     });
 
 
     // > Compare the advection field computed on RTheta to the advection field computed on XY
     host_t<DVectorFieldMemRTheta<X, Y>> difference_between_fields_xy_and_rtheta(grid);
 
-    MetricTensorEvaluator<LogicalToPhysicalMapping, CoordRTheta> metric_tensor(to_physical_mapping);
     ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
         CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
-        std::array<std::array<double, 2>, 2> inv_J; // inverse Jacobian matrix
-        to_physical_mapping.inv_jacobian_matrix(coord_rtheta, inv_J);
-        double const jacobian = to_physical_mapping.jacobian(coord_rtheta);
+        // Jacobian matrix
+        DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> J
+                = to_physical_mapping.jacobian_matrix(coord_rtheta);
 
         // computation made in BslAdvectionRTheta operator:
-        ddcHelper::get<X>(advection_field_xy_from_rtheta)(irtheta)
-                = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * inv_J[0][0] * jacobian
-                  + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * inv_J[1][0]
-                            * jacobian;
-        ddcHelper::get<Y>(advection_field_xy_from_rtheta)(irtheta)
-                = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * inv_J[0][1] * jacobian
-                  + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * inv_J[1][1]
-                            * jacobian;
+        ddcHelper::assign_vector_field_element(
+                advection_field_xy_from_rtheta,
+                irtheta,
+                tensor_mul(index<'i', 'j'>(J), index<'j'>(advection_field_rtheta(irtheta))));
 
         // compare
-        ddcHelper::get<X>(difference_between_fields_xy_and_rtheta)(irtheta)
-                = ddcHelper::get<X>(advection_field_xy_from_rtheta)(irtheta)
-                  - ddcHelper::get<X>(advection_field_xy)(irtheta);
-        ddcHelper::get<Y>(difference_between_fields_xy_and_rtheta)(irtheta)
-                = ddcHelper::get<Y>(advection_field_xy_from_rtheta)(irtheta)
-                  - ddcHelper::get<Y>(advection_field_xy)(irtheta);
+        ddcHelper::assign_vector_field_element(
+                get_field(difference_between_fields_xy_and_rtheta),
+                irtheta,
+                advection_field_xy_from_rtheta(irtheta) - advection_field_xy(irtheta));
     });
 
     ddc::for_each(Opoint_grid, [&](IdxRTheta const irtheta) {
         // computation made in BslAdvectionRTheta operator:
-        ddcHelper::get<X>(advection_field_xy_from_rtheta)(irtheta)
-                = CoordX(advection_field_xy_centre);
-        ddcHelper::get<Y>(advection_field_xy_from_rtheta)(irtheta)
-                = CoordY(advection_field_xy_centre);
+        ddcHelper::assign_vector_field_element(
+                advection_field_xy_from_rtheta,
+                irtheta,
+                advection_field_xy_centre);
 
         // compare
-        ddcHelper::get<X>(difference_between_fields_xy_and_rtheta)(irtheta)
-                = ddcHelper::get<X>(advection_field_xy_from_rtheta)(irtheta)
-                  - ddcHelper::get<X>(advection_field_xy)(irtheta);
-        ddcHelper::get<Y>(difference_between_fields_xy_and_rtheta)(irtheta)
-                = ddcHelper::get<Y>(advection_field_xy_from_rtheta)(irtheta)
-                  - ddcHelper::get<Y>(advection_field_xy)(irtheta);
+        ddcHelper::assign_vector_field_element(
+                get_field(difference_between_fields_xy_and_rtheta),
+                irtheta,
+                advection_field_xy_from_rtheta(irtheta) - advection_field_xy(irtheta));
     });
 
     // --- Check the difference on advection fields  --------------------------------------------------
@@ -298,30 +285,36 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
         EXPECT_LE(abs(ddcHelper::get<Y>(difference_between_fields_xy_and_rtheta)(irtheta)), 1e-13);
     });
 
-    auto allfdistribu_xy_device
-            = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), allfdistribu_xy);
+    auto density_xy_device
+            = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), density_xy);
     auto advection_field_xy_device = ddcHelper::
             create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), advection_field_xy);
+
+    auto density_rtheta_device
+            = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), density_rtheta);
+    auto advection_field_rtheta_device = ddcHelper::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), advection_field_rtheta);
 
     // ================================================================================================
     // SIMULATION                                                                                     |
     // ================================================================================================
     for (int iter(0); iter < iter_nb; ++iter) {
         advection_operator(
-                allfdistribu_rtheta,
-                advection_field_rtheta,
+                get_field(density_rtheta_device),
+                get_const_field(advection_field_rtheta_device),
                 advection_field_xy_centre,
                 dt);
         advection_operator(
-                get_field(allfdistribu_xy_device),
+                get_field(density_xy_device),
                 get_const_field(advection_field_xy_device),
                 dt);
 
-        ddc::parallel_deepcopy(allfdistribu_xy, get_const_field(allfdistribu_xy_device));
+        ddc::parallel_deepcopy(density_xy, get_const_field(density_xy_device));
+        ddc::parallel_deepcopy(density_rtheta, get_const_field(density_rtheta_device));
 
         // Check the advected functions ---
         ddc::for_each(grid, [&](IdxRTheta const irtheta) {
-            EXPECT_NEAR(allfdistribu_rtheta(irtheta), allfdistribu_xy(irtheta), 1e-13);
+            EXPECT_NEAR(density_rtheta(irtheta), density_xy(irtheta), 5e-13);
         });
     }
 

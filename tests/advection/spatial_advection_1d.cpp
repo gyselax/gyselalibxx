@@ -107,20 +107,14 @@ using SplineXBuilder = ddc::SplineBuilder<
         GridX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::LAPACK,
-        Species,
-        GridX,
-        GridVx>;
+        ddc::SplineSolver::LAPACK>;
 using SplineXEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
         ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>,
-        Species,
-        GridX,
-        GridVx>;
+        ddc::PeriodicExtrapolationRule<X>>;
 
 
 class Spatial1DAdvectionTest : public ::testing::Test
@@ -228,22 +222,23 @@ TEST_F(Spatial1DAdvectionTest, SpatialAdvection)
 {
     IdxRangeSpXVx meshSpXVx(idx_range_allsp, idx_range_x, idx_range_vx);
 
-    SplineXBuilder const builder_x(meshSpXVx);
+    SplineXBuilder const builder_x(idx_range_x);
 
     ddc::PeriodicExtrapolationRule<X> bv_x_min;
     ddc::PeriodicExtrapolationRule<X> bv_x_max;
     SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
 
-    PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
+    PreallocatableSplineInterpolator const
+            spline_x_interpolator(builder_x, spline_x_evaluator, meshSpXVx);
 
-    Euler<FieldMemSpXVx<CoordX>, DFieldMemSpXVx> euler(meshSpXVx);
+    EulerBuilder euler;
     BslAdvection1D<
             GridX,
             IdxRangeSpXVx,
             IdxRangeSpXVx,
             SplineXBuilder,
             SplineXEvaluator,
-            Euler<FieldMemSpXVx<CoordX>, DFieldMemSpXVx>> const
+            EulerBuilder> const
             spline_advection_x(spline_x_interpolator, builder_x, spline_x_evaluator, euler);
 
     double const err = SpatialAdvection(spline_advection_x);

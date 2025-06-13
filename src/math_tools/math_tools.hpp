@@ -8,7 +8,11 @@
 
 #include <Kokkos_Core.hpp>
 
+#include "coord_transformation_tools.hpp"
+#include "indexed_tensor.hpp"
+#include "static_tensors.hpp"
 #include "tensor.hpp"
+#include "vector_field.hpp"
 
 template <typename T>
 KOKKOS_INLINE_FUNCTION T sum(const T* array, int size)
@@ -51,6 +55,46 @@ sum(Kokkos::mdspan<
     return val;
 }
 
+template <class ElementType, class VectorIndexSetType>
+KOKKOS_INLINE_FUNCTION ElementType
+norm(Tensor<ElementType, VectorIndexSetType, VectorIndexSetType> const& metric,
+     Tensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>> const& vec)
+{
+    return Kokkos::sqrt(tensor_mul(index<'i'>(vec), index<'i', 'j'>(metric), index<'j'>(vec)));
+}
+
+template <
+        class ExecSpace,
+        class IdxRangeType,
+        class MetricTensorEvaluator,
+        class VectorIndexSetType>
+void norm(
+        ExecSpace exec_space,
+        DField<IdxRangeType, typename ExecSpace::memory_space> norm_vals,
+        MetricTensorEvaluator const& get_metric,
+        DVectorConstField<IdxRangeType, VectorIndexSetType, typename ExecSpace::memory_space> vals)
+{
+    using IdxType = typename IdxRangeType::discrete_element_type;
+
+    if constexpr (is_contravariant_vector_index_set_v<VectorIndexSetType>) {
+        ddc::parallel_for_each(
+                exec_space,
+                get_idx_range(vals),
+                KOKKOS_LAMBDA(IdxType idx) {
+                    Tensor metric = get_metric(ddc::coordinate(idx));
+                    norm_vals(idx) = norm(metric, vals(idx));
+                });
+    } else {
+        ddc::parallel_for_each(
+                exec_space,
+                get_idx_range(vals),
+                KOKKOS_LAMBDA(IdxType idx) {
+                    Tensor metric = get_metric.inverse(ddc::coordinate(idx));
+                    norm_vals(idx) = norm(metric, vals(idx));
+                });
+    }
+}
+
 template <typename T>
 inline T modulo(T x, T y)
 {
@@ -91,13 +135,6 @@ inline std::size_t factorial(std::size_t f)
     return r;
 }
 
-template <class T, class... Dims>
-KOKKOS_INLINE_FUNCTION T
-dot_product(Vector<T, Dims...> const& a, Vector<T, typename Dims::Dual...> const& b)
-{
-    return ((ddcHelper::get<Dims>(a) * ddcHelper::get<typename Dims::Dual>(b)) + ...);
-}
-
 
 template <typename T>
 inline T min(T x, T y)
@@ -111,51 +148,138 @@ inline T max(T x, T y)
     return x > y ? x : y;
 }
 
-template <std::size_t N, std::size_t M, std::size_t P>
-KOKKOS_INLINE_FUNCTION std::array<std::array<double, N>, P> mat_mul(
-        std::array<std::array<double, N>, M> const& a,
-        std::array<std::array<double, M>, P> const& b)
+template <class RowDim1, class RowDim2, class ColDim1, class ColDim2>
+KOKKOS_INLINE_FUNCTION double determinant(
+        DTensor<VectorIndexSet<RowDim1, RowDim2>, VectorIndexSet<ColDim1, ColDim2>> arr)
 {
-    std::array<std::array<double, N>, P> result;
-    for (std::size_t i(0); i < N; ++i) {
-        for (std::size_t j(0); j < P; ++j) {
-            result[i][j] = 0.0;
-            for (std::size_t k(0); k < M; ++k) {
-                result[i][j] += a[i][k] * b[k][j];
-            }
-        }
-    }
-    return result;
+    return ddcHelper::get<RowDim1, ColDim1>(arr) * ddcHelper::get<RowDim2, ColDim2>(arr)
+           - ddcHelper::get<RowDim2, ColDim1>(arr) * ddcHelper::get<RowDim1, ColDim2>(arr);
 }
 
-template <std::size_t N, std::size_t M>
-KOKKOS_INLINE_FUNCTION std::array<double, N> mat_vec_mul(
-        std::array<std::array<double, N>, M> const& a,
-        std::array<double, M> const& b)
+template <class RowDim1, class RowDim2, class RowDim3, class ColDim1, class ColDim2, class ColDim3>
+KOKKOS_INLINE_FUNCTION double determinant(
+        DTensor<VectorIndexSet<RowDim1, RowDim2, RowDim3>,
+                VectorIndexSet<ColDim1, ColDim2, ColDim3>> arr)
 {
-    std::array<double, N> result;
-    for (std::size_t i(0); i < N; ++i) {
-        result[i] = 0.0;
-        for (std::size_t k(0); k < M; ++k) {
-            result[i] += a[i][k] * b[k];
-        }
-    }
-    return result;
+    return ddcHelper::get<RowDim1, ColDim1>(arr) * ddcHelper::get<RowDim2, ColDim2>(arr)
+                   * ddcHelper::get<RowDim3, ColDim3>(arr)
+           + ddcHelper::get<RowDim1, ColDim2>(arr) * ddcHelper::get<RowDim2, ColDim3>(arr)
+                     * ddcHelper::get<RowDim3, ColDim1>(arr)
+           + ddcHelper::get<RowDim1, ColDim3>(arr) * ddcHelper::get<RowDim2, ColDim1>(arr)
+                     * ddcHelper::get<RowDim3, ColDim2>(arr)
+           - ddcHelper::get<RowDim3, ColDim1>(arr) * ddcHelper::get<RowDim2, ColDim2>(arr)
+                     * ddcHelper::get<RowDim1, ColDim3>(arr)
+           - ddcHelper::get<RowDim3, ColDim2>(arr) * ddcHelper::get<RowDim2, ColDim3>(arr)
+                     * ddcHelper::get<RowDim1, ColDim1>(arr)
+           - ddcHelper::get<RowDim3, ColDim3>(arr) * ddcHelper::get<RowDim2, ColDim1>(arr)
+                     * ddcHelper::get<RowDim1, ColDim2>(arr);
 }
 
-KOKKOS_INLINE_FUNCTION double determinant(std::array<std::array<double, 2>, 2> arr)
+template <class RowDim1, class RowDim2, class ColDim1, class ColDim2>
+KOKKOS_INLINE_FUNCTION DTensor<
+        VectorIndexSet<typename ColDim1::Dual, typename ColDim2::Dual>,
+        VectorIndexSet<typename RowDim1::Dual, typename RowDim2::Dual>>
+inverse(DTensor<VectorIndexSet<RowDim1, RowDim2>, VectorIndexSet<ColDim1, ColDim2>> arr)
 {
-    return arr[0][0] * arr[1][1] - arr[0][1] * arr[1][0];
-}
-
-KOKKOS_INLINE_FUNCTION std::array<std::array<double, 2>, 2> inverse(
-        std::array<std::array<double, 2>, 2> arr)
-{
-    std::array<std::array<double, 2>, 2> inv;
+    using OutRowDim1 = typename ColDim1::Dual;
+    using OutRowDim2 = typename ColDim2::Dual;
+    using OutColDim1 = typename RowDim1::Dual;
+    using OutColDim2 = typename RowDim2::Dual;
+    DTensor<VectorIndexSet<OutRowDim1, OutRowDim2>, VectorIndexSet<OutColDim1, OutColDim2>> inv;
     double det = determinant(arr);
-    inv[0][0] = arr[1][1] / det;
-    inv[1][0] = -arr[1][0] / det;
-    inv[0][1] = -arr[0][1] / det;
-    inv[1][1] = arr[0][0] / det;
+    ddcHelper::get<OutRowDim1, OutColDim1>(inv) = ddcHelper::get<RowDim2, ColDim2>(arr) / det;
+    ddcHelper::get<OutRowDim2, OutColDim1>(inv) = -ddcHelper::get<RowDim2, ColDim1>(arr) / det;
+    ddcHelper::get<OutRowDim1, OutColDim2>(inv) = -ddcHelper::get<RowDim1, ColDim2>(arr) / det;
+    ddcHelper::get<OutRowDim2, OutColDim2>(inv) = ddcHelper::get<RowDim1, ColDim1>(arr) / det;
     return inv;
+}
+
+template <class RowDim1, class RowDim2, class RowDim3, class ColDim1, class ColDim2, class ColDim3>
+KOKKOS_FUNCTION DTensor<
+        VectorIndexSet<typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual>,
+        VectorIndexSet<typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual>>
+inverse(
+        DTensor<VectorIndexSet<RowDim1, RowDim2, RowDim3>,
+                VectorIndexSet<ColDim1, ColDim2, ColDim3>> arr)
+{
+    using OutRowDim1 = typename ColDim1::Dual;
+    using OutRowDim2 = typename ColDim2::Dual;
+    using OutRowDim3 = typename ColDim3::Dual;
+    using OutColDim1 = typename RowDim1::Dual;
+    using OutColDim2 = typename RowDim2::Dual;
+    using OutColDim3 = typename RowDim3::Dual;
+    DTensor<VectorIndexSet<OutRowDim1, OutRowDim2, OutRowDim3>,
+            VectorIndexSet<OutColDim1, OutColDim2, OutColDim3>>
+            inv;
+    double det = determinant(arr);
+    ddcHelper::get<OutRowDim1, OutColDim1>(inv)
+            = (ddcHelper::get<RowDim2, ColDim2>(arr) * ddcHelper::get<RowDim3, ColDim3>(arr)
+               - ddcHelper::get<RowDim2, ColDim3>(arr) * ddcHelper::get<RowDim3, ColDim2>(arr))
+              / det;
+    ddcHelper::get<OutRowDim2, OutColDim1>(inv)
+            = (ddcHelper::get<RowDim2, ColDim3>(arr) * ddcHelper::get<RowDim3, ColDim1>(arr)
+               - ddcHelper::get<RowDim2, ColDim1>(arr) * ddcHelper::get<RowDim3, ColDim3>(arr))
+              / det;
+    ddcHelper::get<OutRowDim3, OutColDim1>(inv)
+            = (ddcHelper::get<RowDim2, ColDim1>(arr) * ddcHelper::get<RowDim3, ColDim2>(arr)
+               - ddcHelper::get<RowDim2, ColDim2>(arr) * ddcHelper::get<RowDim3, ColDim1>(arr))
+              / det;
+    ddcHelper::get<OutRowDim1, OutColDim2>(inv)
+            = (ddcHelper::get<RowDim1, ColDim3>(arr) * ddcHelper::get<RowDim3, ColDim2>(arr)
+               - ddcHelper::get<RowDim1, ColDim2>(arr) * ddcHelper::get<RowDim3, ColDim3>(arr))
+              / det;
+    ddcHelper::get<OutRowDim2, OutColDim2>(inv)
+            = (ddcHelper::get<RowDim1, ColDim1>(arr) * ddcHelper::get<RowDim3, ColDim3>(arr)
+               - ddcHelper::get<RowDim1, ColDim3>(arr) * ddcHelper::get<RowDim3, ColDim1>(arr))
+              / det;
+    ddcHelper::get<OutRowDim3, OutColDim2>(inv)
+            = (ddcHelper::get<RowDim1, ColDim2>(arr) * ddcHelper::get<RowDim3, ColDim1>(arr)
+               - ddcHelper::get<RowDim1, ColDim1>(arr) * ddcHelper::get<RowDim3, ColDim2>(arr))
+              / det;
+    ddcHelper::get<OutRowDim1, OutColDim3>(inv)
+            = (ddcHelper::get<RowDim1, ColDim2>(arr) * ddcHelper::get<RowDim2, ColDim3>(arr)
+               - ddcHelper::get<RowDim1, ColDim3>(arr) * ddcHelper::get<RowDim2, ColDim2>(arr))
+              / det;
+    ddcHelper::get<OutRowDim2, OutColDim3>(inv)
+            = (ddcHelper::get<RowDim1, ColDim3>(arr) * ddcHelper::get<RowDim2, ColDim1>(arr)
+               - ddcHelper::get<RowDim1, ColDim1>(arr) * ddcHelper::get<RowDim2, ColDim3>(arr))
+              / det;
+    ddcHelper::get<OutRowDim3, OutColDim3>(inv)
+            = (ddcHelper::get<RowDim1, ColDim1>(arr) * ddcHelper::get<RowDim2, ColDim2>(arr)
+               - ddcHelper::get<RowDim1, ColDim2>(arr) * ddcHelper::get<RowDim2, ColDim1>(arr))
+              / det;
+    return inv;
+}
+
+template <class ElementType, class VectorIndexSetType>
+KOKKOS_INLINE_FUNCTION double scalar_product(
+        Tensor<ElementType, VectorIndexSetType> const& a,
+        Tensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>> const& b)
+{
+    return tensor_mul(index<'i'>(a), index<'i'>(b));
+}
+
+template <class ElementType, class VectorIndexSetType>
+KOKKOS_INLINE_FUNCTION double scalar_product(
+        Tensor<ElementType, VectorIndexSetType, VectorIndexSetType> const& metric,
+        Tensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>> const& a,
+        Tensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>> const& b)
+{
+    return tensor_mul(index<'i'>(a), index<'i', 'j'>(metric), index<'j'>(b));
+}
+
+template <class Mapping, class CoordType, class ElementType, class VectorIndexSetType>
+KOKKOS_INLINE_FUNCTION Tensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>>
+tensor_product(
+        Mapping const& mapping,
+        CoordType const& coord,
+        Tensor<ElementType, VectorIndexSetType> const& a,
+        Tensor<ElementType, VectorIndexSetType> const& b)
+{
+    static_assert(ddc::type_seq_size_v<VectorIndexSetType> == 3);
+    static_assert(is_mapping_v<Mapping>);
+    static_assert(has_jacobian_v<Mapping>);
+    LeviCivitaTensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>> eps(
+            mapping.jacobian(coord));
+    return tensor_mul(index<'i', 'j', 'k'>(eps), index<'j'>(a), index<'k'>(b));
 }

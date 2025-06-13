@@ -1,0 +1,29 @@
+name: Installation Issue
+description: Problems installing or setting up the project
+title: "[Install]: "
+labels: ["packaging"]
+body:
+  - type: markdown
+    attributes:
+      value: "## Installation Issue\nDescribe your problem with setup or installation."
+  - type: textarea
+    attributes:
+      label: Issue Description
+      description: "What error are you encountering?"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps Taken
+      description: "What have you tried so far?"
+  - type: input
+    attributes:
+      label: Version of the code used
+      description: The exact version of the code used. Either a commit SHA or a tag. This can be obtained with the command `git log -1 --pretty=format:%H`
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Environment
+      description: "Supercomputer/cluster/personal computer, operating system, CPU/GPU type, etc."
+

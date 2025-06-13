@@ -5,6 +5,7 @@
 
 #include "geometry_tensor.hpp"
 #include "indexed_tensor.hpp"
+#include "static_tensors.hpp"
 #include "tensor.hpp"
 #include "tensor_index_tools.hpp"
 #include "vector_index_tools.hpp"
@@ -12,7 +13,7 @@
 using namespace tensor_tools;
 
 
-int dot_product(Vector<int, R_cov, Theta_cov> a, Vector<int, R, Theta> b)
+int dot_product(Vector<int, R_cov, Theta_cov> const& a, Vector<int, R, Theta> const& b)
 {
     return ddcHelper::get<R_cov>(a) * ddcHelper::get<R>(b)
            + ddcHelper::get<Theta_cov>(a) * ddcHelper::get<Theta>(b);
@@ -393,4 +394,98 @@ TEST(TensorTest, MulOrthonormal)
     EXPECT_EQ(val, 28);
     int E = tensor_mul(index<'i', 'j'>(A), index<'j', 'i'>(B));
     EXPECT_EQ(E, 42);
+}
+
+TEST(TensorTest, LeviCivita2D)
+{
+    CartesianLeviCivitaTensor<int, VectorIndexSet<X, Y>> levi_civita;
+    static_assert(ddcHelper::get<X, X>(levi_civita) == 0);
+    static_assert(ddcHelper::get<X, Y>(levi_civita) == 1);
+    static_assert(ddcHelper::get<Y, X>(levi_civita) == -1);
+    static_assert(ddcHelper::get<Y, Y>(levi_civita) == 0);
+}
+
+TEST(TensorTest, LeviCivita3D)
+{
+    CartesianLeviCivitaTensor<int, VectorIndexSet<X, Y, Z>> levi_civita;
+    static_assert(ddcHelper::get<X, X, X>(levi_civita) == 0);
+    static_assert(ddcHelper::get<X, X, Y>(levi_civita) == 0);
+    static_assert(ddcHelper::get<X, X, Z>(levi_civita) == 0);
+    static_assert(ddcHelper::get<X, Y, X>(levi_civita) == 0);
+    static_assert(ddcHelper::get<X, Y, Y>(levi_civita) == 0);
+    static_assert(ddcHelper::get<X, Y, Z>(levi_civita) == 1);
+    static_assert(ddcHelper::get<X, Z, X>(levi_civita) == 0);
+    static_assert(ddcHelper::get<X, Z, Y>(levi_civita) == -1);
+    static_assert(ddcHelper::get<X, Z, Z>(levi_civita) == 0);
+
+    static_assert(ddcHelper::get<Y, X, X>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Y, X, Y>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Y, X, Z>(levi_civita) == -1);
+    static_assert(ddcHelper::get<Y, Y, X>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Y, Y, Y>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Y, Y, Z>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Y, Z, X>(levi_civita) == 1);
+    static_assert(ddcHelper::get<Y, Z, Y>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Y, Z, Z>(levi_civita) == 0);
+
+    static_assert(ddcHelper::get<Z, X, X>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Z, X, Y>(levi_civita) == 1);
+    static_assert(ddcHelper::get<Z, X, Z>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Z, Y, X>(levi_civita) == -1);
+    static_assert(ddcHelper::get<Z, Y, Y>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Z, Y, Z>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Z, Z, X>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Z, Z, Y>(levi_civita) == 0);
+    static_assert(ddcHelper::get<Z, Z, Z>(levi_civita) == 0);
+}
+
+TEST(TensorTest, LeviCivitaMul)
+{
+    CartesianLeviCivitaTensor<int, VectorIndexSet<X, Y>> levi_civita;
+    using Tensor2D = Tensor<int, VectorIndexSet<X, Y>, VectorIndexSet<X, Y>>;
+    Tensor2D A;
+    ddcHelper::get<X, X>(A) = 1;
+    ddcHelper::get<X, Y>(A) = 0;
+    ddcHelper::get<Y, X>(A) = 2;
+    ddcHelper::get<Y, Y>(A) = 4;
+
+    Tensor2D L = tensor_mul(index<'i', 'j'>(levi_civita), index<'j', 'k'>(A));
+    Tensor2D R = tensor_mul(index<'i', 'j'>(A), index<'j', 'k'>(levi_civita));
+    Tensor2D I = tensor_mul(index<'i', 'j'>(levi_civita), index<'j', 'k'>(levi_civita));
+
+    int val = ddcHelper::get<X, X>(L);
+    EXPECT_EQ(val, 2);
+    val = ddcHelper::get<X, Y>(L);
+    EXPECT_EQ(val, 4);
+    val = ddcHelper::get<Y, X>(L);
+    EXPECT_EQ(val, -1);
+    val = ddcHelper::get<Y, Y>(L);
+    EXPECT_EQ(val, 0);
+
+    val = ddcHelper::get<X, X>(R);
+    EXPECT_EQ(val, 0);
+    val = ddcHelper::get<X, Y>(R);
+    EXPECT_EQ(val, 1);
+    val = ddcHelper::get<Y, X>(R);
+    EXPECT_EQ(val, -4);
+    val = ddcHelper::get<Y, Y>(R);
+    EXPECT_EQ(val, 2);
+
+    val = ddcHelper::get<X, X>(I);
+    EXPECT_EQ(val, -1);
+    val = ddcHelper::get<X, Y>(I);
+    EXPECT_EQ(val, 0);
+    val = ddcHelper::get<Y, X>(I);
+    EXPECT_EQ(val, 0);
+    val = ddcHelper::get<Y, Y>(I);
+    EXPECT_EQ(val, -1);
+}
+
+TEST(TensorTest, Identity2D)
+{
+    IdentityTensor<int, VectorIndexSet<R, Z>, VectorIndexSet<R, Z>> identity;
+    static_assert(ddcHelper::get<R, R>(identity) == 1);
+    static_assert(ddcHelper::get<R, Z>(identity) == 0);
+    static_assert(ddcHelper::get<Z, R>(identity) == 0);
+    static_assert(ddcHelper::get<Z, Z>(identity) == 1);
 }

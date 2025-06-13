@@ -3,10 +3,10 @@
 
 #include <ddc/ddc.hpp>
 
+#include "coord_transformation_tools.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "gauss_legendre_integration.hpp"
-#include "mapping_tools.hpp"
 #include "math_tools.hpp"
 #include "matrix_batch_csr.hpp"
 #include "metric_tensor_evaluator.hpp"
@@ -38,7 +38,7 @@
  * @tparam GridR The radial grid type.
  * @tparam GridR The poloidal grid type.
  * @tparam PolarBSplinesRTheta The type of the 2D polar B-splines (on the coordinate
- * system @f$(r,\theta)@f$ including B-splines which traverse the O point).
+ *          system @f$(r,\theta)@f$ including B-splines which traverse the O point).
  * @tparam SplineRThetaEvaluatorNullBound The type of the 2D (cross-product) spline evaluator.
  * @tparam IdxRangeFull The full index range of @f$ \phi @f$ including any batch dimensions.
  */
@@ -176,7 +176,9 @@ public:
     */
     struct EvalDeriv1DType
     {
+        /// The value of the function @f$f(x)@f$.
         double value;
+        /// The derivative of the function @f$\partial_x f(x)@f$.
         double derivative;
     };
 
@@ -186,8 +188,10 @@ public:
     */
     struct EvalDeriv2DType
     {
+        /// The value of the function @f$f(r, \theta)@f$.
         double value;
-        DVector<R, Theta> derivative;
+        /// The gradient of the function @f$\nabla f(r, \theta)@f$.
+        DVector<R_cov, Theta_cov> derivative;
     };
 
     /**
@@ -267,7 +271,7 @@ public:
      *      The spline representation of the  @f$ \beta @f$ function in the
      *      definition of the Poisson-like equation.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
@@ -326,7 +330,7 @@ public:
                   ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
                           - ddc::discrete_space<BSplinesTheta>().nbasis())
     {
-        static_assert(has_2d_jacobian_v<Mapping, CoordRTheta>);
+        static_assert(has_jacobian_v<Mapping>);
         //initialise x_init
         Kokkos::deep_copy(m_x_init, 0);
         // Get break points
@@ -403,14 +407,15 @@ public:
             // Calculate the radial derivative
             ddc::discrete_space<PolarBSplinesRTheta>().eval_deriv_r(singular_vals, vals, coord);
             for (IdxBSPolar ib : idxrange_singular) {
-                ddcHelper::get<R>(m_singular_basis_vals_and_derivs(ib, idx_r, idx_theta).derivative)
+                ddcHelper::get<R_cov>(
+                        m_singular_basis_vals_and_derivs(ib, idx_r, idx_theta).derivative)
                         = singular_vals[ib - idxrange_singular.front()];
             }
 
             // Calculate the poloidal derivative
             ddc::discrete_space<PolarBSplinesRTheta>().eval_deriv_theta(singular_vals, vals, coord);
             for (IdxBSPolar ib : idxrange_singular) {
-                ddcHelper::get<Theta>(
+                ddcHelper::get<Theta_cov>(
                         m_singular_basis_vals_and_derivs(ib, idx_r, idx_theta).derivative)
                         = singular_vals[ib - idxrange_singular.front()];
             }
@@ -497,7 +502,7 @@ public:
      *      The spline representation of the  @f$ \beta @f$ function in the
      *      definition of the Poisson-like equation.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
@@ -525,9 +530,6 @@ public:
         auto singular_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
                 Kokkos::DefaultExecutionSpace(),
                 get_field(m_singular_basis_vals_and_derivs));
-        auto r_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                get_field(m_r_basis_vals_and_derivs));
         Field<EvalDeriv2DType, IdxRange<PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh>>
                 singular_basis_vals_and_derivs = get_field(singular_basis_vals_and_derivs_alloc);
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume);
@@ -578,7 +580,7 @@ public:
      *      The spline representation of the  @f$ \beta @f$ function in the
      *      definition of the Poisson-like equation.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
@@ -717,7 +719,7 @@ public:
      *      The spline representation of the  @f$ \beta @f$ function in the
      *      definition of the Poisson-like equation.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
@@ -1067,7 +1069,7 @@ public:
      *      The spline representation of the  @f$ \beta @f$ function in the
      *      definition of the Poisson-like equation.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @param[in] evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
@@ -1199,13 +1201,13 @@ public:
      */
     static KOKKOS_INLINE_FUNCTION void get_value_and_gradient(
             double& value,
-            DVector<R, Theta>& derivs,
+            DVector<R_cov, Theta_cov>& derivs,
             EvalDeriv1DType const& r_basis,
             EvalDeriv1DType const& theta_basis)
     {
         value = r_basis.value * theta_basis.value;
-        ddcHelper::get<R>(derivs) = r_basis.derivative * theta_basis.value;
-        ddcHelper::get<Theta>(derivs) = r_basis.value * theta_basis.derivative;
+        ddcHelper::get<R_cov>(derivs) = r_basis.derivative * theta_basis.value;
+        ddcHelper::get<Theta_cov>(derivs) = r_basis.value * theta_basis.derivative;
     }
 
     /**
@@ -1220,7 +1222,7 @@ public:
      */
     static KOKKOS_INLINE_FUNCTION void get_value_and_gradient(
             double& value,
-            DVector<R, Theta>& derivs,
+            DVector<R_cov, Theta_cov>& derivs,
             EvalDeriv2DType const& basis,
             EvalDeriv2DType const&) // Last argument is duplicate
     {
@@ -1253,7 +1255,7 @@ public:
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @param[in] int_volume
      *      The integral volume associated with each point used in the quadrature scheme.
@@ -1293,8 +1295,8 @@ public:
         // Define the value and gradient of the test and trial basis functions
         double basis_val_test_space;
         double basis_val_trial_space;
-        DVector<R, Theta> basis_derivs_test_space;
-        DVector<R, Theta> basis_derivs_trial_space;
+        DVector<R_cov, Theta_cov> basis_derivs_test_space;
+        DVector<R_cov, Theta_cov> basis_derivs_trial_space;
         get_value_and_gradient(
                 basis_val_test_space,
                 basis_derivs_test_space,
@@ -1337,7 +1339,7 @@ public:
      * @param[in] evaluator
      *      An evaluator for evaluating 2D splines on @f$ (r, \theta) @f$.
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
+     *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
      * @return 
      *      The value of the matrix element.

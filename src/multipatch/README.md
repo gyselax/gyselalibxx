@@ -1,4 +1,4 @@
-# Multipatch 
+# Multipatch
 
 The `multipatch` folder contains all the code describing methods and classes which are specific to a multipatch geometry. It is broken up into the following sub-folders:
 
