@@ -19,17 +19,14 @@
 class RestartInitialisation : public IInitialisation
 {
 private:
-    int m_iter_start; /* iteration number to perform the restart from */
     double& m_time_start; /* corresponding simulation time */
 
 public:
     /**
      * @brief Create an initialisation object.
-     * @param[in] iter_start An integer representing the number of iteration already performed 
-     *                       to produce the distribution function used to initialise the current simulation.
      * @param[in] time_start The physical time corresponding to iter_start.
      */
-    RestartInitialisation(int iter_start, double& time_start);
+    explicit RestartInitialisation(double& time_start);
 
     ~RestartInitialisation() override = default;
 
