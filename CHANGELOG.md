@@ -14,11 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fix uninitialized warning in the `Tensor` class.
+- Fix unused `m_magnetic_field` variable in `MaxwellianEquilibrium` class.
 
 ### Changed
 
 - Change the interface of `IVlasovSolver` and `IQNSolver` in `geometryXYVxVy` to store the electric field in a `VectorField`.
 - Integration of `ddc::StridedDiscreteDomain` by making `IdxRangeSlice` a type alias.
+- The parameter `iter_start` has been removed from the constructor of `RestartInitialisation`.
 
 ### Deprecated
 
