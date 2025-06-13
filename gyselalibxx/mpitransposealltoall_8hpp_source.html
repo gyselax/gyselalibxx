@@ -644,6 +644,7 @@ public:
             Field&lt;ElementType, IdxRangeOut, MemSpace&gt; recv_field,
             ConstField&lt;ElementType, InIdxRange, MemSpace&gt; send_field) const
     {
+        Kokkos::Profiling::pushRegion("MpiTranspose");
         static_assert(!std::is_same_v&lt;InIdxRange, IdxRangeOut&gt;);
         static_assert(
                 (std::is_same_v&lt;InIdxRange, typename Layout1::discrete_domain_type&gt;)
@@ -656,6 +657,7 @@ public:
                 Layout1,
                 Layout2&gt;;
         this-&gt;transpose_to&lt;OutLayout&gt;(execution_space, recv_field, send_field);
+        Kokkos::Profiling::popRegion();
     }
 
     template &lt;class OutLayout, class ElementType, class MemSpace, class ExecSpace, class InIdxRange&gt;
