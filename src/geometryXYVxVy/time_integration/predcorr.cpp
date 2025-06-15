@@ -50,6 +50,7 @@ DFieldSpVxVyXY PredCorr::operator()(
                 get_field(electric_field),
                 get_const_field(allfdistribu_v2D_split));
 
+        Kokkos::Profiling::pushRegion("PDIWrite");
         transpose_layout(
                 Kokkos::DefaultExecutionSpace(),
                 get_field(allfdistribu_v2D_split_output_layout),
@@ -64,7 +65,7 @@ DFieldSpVxVyXY PredCorr::operator()(
                 .with("time_saved", iter_time)
                 .with("fdistribu", allfdistribu_host)
                 .with("electrostatic_potential", electrostatic_potential_host);
-
+        Kokkos::Profiling::popRegion();
         // copy fdistribu
         ddc::parallel_deepcopy(allfdistribu_half_t, allfdistribu_v2D_split);
 
@@ -88,7 +89,7 @@ DFieldSpVxVyXY PredCorr::operator()(
             get_field(electric_field),
             get_const_field(allfdistribu_v2D_split));
 
-
+    Kokkos::Profiling::pushRegion("PDIWrite");
     transpose_layout(
             Kokkos::DefaultExecutionSpace(),
             get_field(allfdistribu_v2D_split_output_layout),
@@ -103,6 +104,7 @@ DFieldSpVxVyXY PredCorr::operator()(
             .with("time_saved", final_time)
             .with("fdistribu", allfdistribu_host)
             .with("electrostatic_potential", electrostatic_potential_host);
+    Kokkos::Profiling::popRegion();
 
     return allfdistribu_v2D_split;
 }
