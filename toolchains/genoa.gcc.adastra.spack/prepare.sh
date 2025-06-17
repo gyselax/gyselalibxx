@@ -18,7 +18,6 @@ export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-GENOA/Confi
 export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
 
 module purge
-module load develop
 module load "${SPACK_USER_VERSION}"
 module list
 
