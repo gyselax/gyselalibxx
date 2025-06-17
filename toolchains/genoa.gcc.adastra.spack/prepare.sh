@@ -61,7 +61,6 @@ pdiplugin-set-value%gcc@13.2.1.genoa arch=linux-rhel8-zen4
 pdiplugin-trace%gcc@13.2.1.genoa arch=linux-rhel8-zen4
 pdiplugin-mpi%gcc@13.2.1.genoa arch=linux-rhel8-zen4
 ginkgo%gcc@13.2.1.genoa+openmp~shared arch=linux-rhel8-zen4
-eigen%gcc@13.2.1.genoa arch=linux-rhel8-zen4
 py-matplotlib%gcc@13.2.1.genoa arch=linux-rhel8-zen4
 py-xarray%gcc@13.2.1.genoa arch=linux-rhel8-zen4
 py-h5py%gcc@13.2.1.genoa arch=linux-rhel8-zen4
