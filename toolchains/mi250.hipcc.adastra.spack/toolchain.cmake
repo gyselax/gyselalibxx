@@ -1,5 +1,3 @@
-set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/installation")
-
 set(CMAKE_CXX_COMPILER hipcc)
 set(CMAKE_C_COMPILER amdclang)
 set(CMAKE_Fortran_COMPILER amdflang)

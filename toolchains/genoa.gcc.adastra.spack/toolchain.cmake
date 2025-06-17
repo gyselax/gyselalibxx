@@ -1,5 +1,3 @@
-set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/installation")
-
 set(CMAKE_CXX_COMPILER g++)
 set(CMAKE_C_COMPILER gcc)
 set(CMAKE_Fortran_COMPILER gfortran)
