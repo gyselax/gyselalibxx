@@ -22,6 +22,7 @@ set(Kokkos_ARCH_ZEN3 ON CACHE BOOL "Optimize for AMD Zen3 architecture (HOST).")
 set(KokkosKernels_ENABLE_ALL_COMPONENTS OFF CACHE BOOL "")
 set(KokkosKernels_ENABLE_COMPONENT_BATCHED ON CACHE BOOL "")
 set(KokkosKernels_ENABLE_COMPONENT_BLAS ON CACHE BOOL "")
+set(KokkosKernels_ADD_DEFAULT_ETI OFF CACHE BOOL "")
 
 # Koliop options:
 
