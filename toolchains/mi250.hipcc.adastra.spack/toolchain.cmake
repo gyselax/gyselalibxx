@@ -40,9 +40,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -Wcast-align -W
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem $ENV{CRAY_LIBSCI_PREFIX}/include" CACHE STRING "")
 
 # NOTE: People often export this as environment variable instead.
-set(BLAS_LIBRARIES "$ENV{CRAY_LIBSCI_PREFIX}/lib/libsci_cray.so;" CACHE STRING "")
-# set(LAPACK_LIBRARIES "$ENV{CRAY_LIBSCI_PREFIX}/lib/libsci_cray.so;" CACHE STRING "")
-# set(LAPACKE_LIBRARIES "$ENV{CRAY_LIBSCI_PREFIX}/lib/libsci_cray.so;" CACHE STRING "")
+set(BLAS_LIBRARIES "$ENV{CRAY_LIBSCI_PREFIX}/lib/libsci_gnu_mp.so;" CACHE STRING "")
+# set(LAPACK_LIBRARIES "$ENV{CRAY_LIBSCI_PREFIX}/lib/libsci_gnu_mp.so;" CACHE STRING "")
+# set(LAPACKE_LIBRARIES "$ENV{CRAY_LIBSCI_PREFIX}/lib/libsci_gnu_mp.so;" CACHE STRING "")
 
 # FIXME: SLL compiler crash
 set(SLL_BUILD_TESTING OFF CACHE BOOL "")
