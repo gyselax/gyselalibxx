@@ -1,14 +1,8 @@
+#!/bin/bash
+
 ENVIRONMENT_ROOT_DIRECTORY="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)"
 
 module purge
-
-module load cpe/24.07
-module load craype-x86-genoa
-module load PrgEnv-gnu
-
-module load cray-fftw
-module load cray-hdf5-parallel
-module load cray-python
 
 SPACK_USER_VERSION="spack-user-4.0.0"
 
@@ -30,5 +24,13 @@ module load \
     gcc/13.2.1.genoa/zen4/py-matplotlib \
     gcc/13.2.1.genoa/zen4/py-xarray \
     gcc/13.2.1.genoa/zen4/py-h5py
+
+module load cpe/24.07
+module load craype-x86-genoa
+module load PrgEnv-gnu
+
+module load cray-fftw
+module load cray-hdf5-parallel
+module load cray-python
 
 module list
