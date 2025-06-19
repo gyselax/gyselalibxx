@@ -11,8 +11,6 @@ set(CMAKE_BUILD_TYPE Release) # Debug, Release, RelWithDebInfo and MinSizeRel
 set(Kokkos_ENABLE_HIP ON CACHE BOOL "Defined if the HIP execution space is enabled.")
 set(Kokkos_ENABLE_HIP_MULTIPLE_KERNEL_INSTANTIATIONS ON CACHE BOOL "If defined, multiple kernel versions are instantiated potentially improving run time.")
 set(Kokkos_ARCH_AMD_GFX90A ON CACHE BOOL "Enable support for AMD GPU MI200 series (GFX90A).")
-# FIXME: According to tpadioleau this is needed. In practice I did not help the
-# build. Note that it can be detrimental to performance.
 set(Kokkos_ENABLE_HIP_RELOCATABLE_DEVICE_CODE ON CACHE BOOL "")
 
 set(Kokkos_ENABLE_OPENMP OFF CACHE BOOL "")
