@@ -13,7 +13,7 @@ spack:
     - pdiplugin-set-value
     - pdiplugin-trace
 
-    # - py-dask
+    - py-dask
     - py-h5py
     # - py-imageio
     - py-matplotlib
@@ -22,6 +22,7 @@ spack:
     # - py-scipy
     # - py-sympy
     - py-xarray
+    - py-pyyaml
   - compilers:
     - gcc@13.2.1.mi250
   - architectures:
