@@ -10,11 +10,14 @@ export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
 module purge
 module load "${SPACK_USER_VERSION}"
 
+module load cmake
 module load cpe/24.07
 module load craype-x86-genoa
+
 module load PrgEnv-gnu
 
 module load cray-fftw
+module load cray-hdf5-parallel
 module load cray-python
 
 module list
