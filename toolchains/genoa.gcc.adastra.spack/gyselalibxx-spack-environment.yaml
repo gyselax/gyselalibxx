@@ -8,19 +8,19 @@ spack:
     - paraconf
     - pdi
     - pdiplugin-decl-hdf5
-    # - pdiplugin-decl-netcdf
+    - pdiplugin-decl-netcdf
     - pdiplugin-mpi
     - pdiplugin-set-value
     - pdiplugin-trace
 
     - py-dask
     - py-h5py
-    # - py-imageio
+    - py-imageio
     - py-matplotlib
-    # - py-netcdf4
-    # - py-numpy
-    # - py-scipy
-    # - py-sympy
+    - py-netcdf4
+    - py-numpy
+    - py-scipy
+    - py-sympy
     - py-xarray
     - py-pyyaml
   - compilers:
