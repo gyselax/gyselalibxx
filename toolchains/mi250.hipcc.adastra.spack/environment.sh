@@ -11,8 +11,8 @@ module load "${SPACK_USER_VERSION}"
 which spack
 spack debug report
 # Spack must work in a clean, purged environment so it can load modules without
-# having to purge itself (which it does not do..). When we spack env activate,
-# the same constraint applies.
+# having to purge itself or clearing environment variables (which it does not
+# do..). When we spack env activate, the same constraint applies.
 eval -- "$(spack env activate --prompt --sh gyselalibxx-spack-environment)"
 
 module load cmake
@@ -20,7 +20,6 @@ module load cpe/24.07
 module load craype-x86-trento craype-accel-amd-gfx90a
 # NOTE: Force 6.3.3 due to startup failures (https://github.com/gyselax/gyselalibxx/pull/198#issuecomment-2943081411)
 module load PrgEnv-gnu-amd amd-mixed/6.3.3
-module load rocm/6.3.3
 module load cray-fftw
 module load cray-hdf5-parallel
 module load cray-python
