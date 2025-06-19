@@ -1,0 +1,48 @@
+spack:
+  definitions:
+  - packages:
+    - cmake
+    - ginkgo+openmp+rocm~shared amdgpu_target=gfx90a
+    - libyaml
+    - ninja
+    - paraconf
+    - pdi
+    - pdiplugin-decl-hdf5
+    - pdiplugin-decl-netcdf
+    - pdiplugin-mpi
+    - pdiplugin-set-value
+    - pdiplugin-trace
+
+    - py-dask
+    - py-h5py
+    - py-imageio
+    - py-matplotlib
+    - py-netcdf4
+    - py-numpy
+    - py-scipy
+    - py-sympy
+    - py-xarray
+  - compilers:
+    - gcc@13.2.1.mi250
+  - architectures:
+    - arch=linux-rhel8-zen3
+  specs:
+  - matrix:
+    - [$packages]
+    - [$%compilers]
+    - [$architectures]
+  concretizer:
+    unify: true
+    reuse: false
+    duplicates:
+      strategy: none
+  packages:
+    all:
+      permissions:
+        read: world
+        write: group
+  modules:
+    default:
+      roots: {}
+      enable: []
+  view: true
