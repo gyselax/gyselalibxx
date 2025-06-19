@@ -1,7 +1,5 @@
 #!/bin/bash
 
-TOOLCHAIN_ROOT_DIRECTORY="$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]:-${0}}")")"
-
 SPACK_USER_VERSION="spack-user-4.0.0"
 
 export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-GENOA/Configuration.${SPACK_USER_VERSION}"
