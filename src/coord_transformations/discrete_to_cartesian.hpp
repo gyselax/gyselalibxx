@@ -78,11 +78,15 @@ private:
     using IdxRangeTheta = typename SplineEvaluator::evaluation_domain_type2;
     using IdxTheta = typename IdxRangeTheta::discrete_element_type;
 
+    using IdxRTheta = typename IdxRangeRTheta::discrete_element_type;
+    using IdxStepRTheta = typename IdxRangeRTheta::discrete_vector_type;
+
 private:
     SplineType m_x_spline_representation;
     SplineType m_y_spline_representation;
     SplineEvaluator m_spline_evaluator;
     IdxRangeRTheta m_idx_range_singular_point;
+    Coord<X, Y> m_o_point;
 
 public:
     /**
@@ -115,7 +119,7 @@ public:
      * @see DiscreteToCartesian::operator()
      * @see SplineBoundaryValue
      */
-    KOKKOS_FUNCTION DiscreteToCartesian(
+    DiscreteToCartesian(
             SplineType curvilinear_to_x,
             SplineType curvilinear_to_y,
             SplineEvaluator const& evaluator,
@@ -125,6 +129,26 @@ public:
         , m_spline_evaluator(evaluator)
         , m_idx_range_singular_point(idx_range_singular_point)
     {
+        if constexpr (Kokkos::SpaceAccessibility<Kokkos::DefaultHostExecutionSpace, MemorySpace>::
+                              accessible) {
+            Coord<R, Theta> centre_coord(0.0, 0.0);
+            m_o_point = (*this)(centre_coord);
+        } else {
+            IdxRangeRTheta idx_range_o_point
+                    = m_idx_range_singular_point.take_first(IdxStepRTheta(1, 1));
+            FieldMem<Coord<X, Y>, IdxRangeRTheta> coord_centre_field_alloc(idx_range_o_point);
+            Field<Coord<X, Y>, IdxRangeRTheta> coord_centre_field
+                    = get_field(coord_centre_field_alloc);
+            using ExecSpace = SplineEvaluator::exec_space;
+            ddc::parallel_for_each(
+                    ExecSpace(),
+                    idx_range_centre,
+                    KOKKOS_CLASS_LAMBDA(IdxRTheta idx) {
+                        coord_centre_field(idx) = (*this)(ddc::coordinate(idx));
+                    });
+            auto coord_centre_field_host = ddc::create_mirror_view_and_copy(coord_centre_field);
+            m_o_point = coord_centre_field_host(idx_range_centre.front());
+        }
     }
 
     /**
