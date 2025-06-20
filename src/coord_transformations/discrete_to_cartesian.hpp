@@ -139,15 +139,15 @@ public:
             FieldMem<Coord<X, Y>, IdxRangeRTheta> coord_centre_field_alloc(idx_range_o_point);
             Field<Coord<X, Y>, IdxRangeRTheta> coord_centre_field
                     = get_field(coord_centre_field_alloc);
-            using ExecSpace = SplineEvaluator::exec_space;
+            using ExecSpace = typename SplineEvaluator::exec_space;
             ddc::parallel_for_each(
                     ExecSpace(),
-                    idx_range_centre,
+                    idx_range_o_point,
                     KOKKOS_CLASS_LAMBDA(IdxRTheta idx) {
                         coord_centre_field(idx) = (*this)(ddc::coordinate(idx));
                     });
             auto coord_centre_field_host = ddc::create_mirror_view_and_copy(coord_centre_field);
-            m_o_point = coord_centre_field_host(idx_range_centre.front());
+            m_o_point = coord_centre_field_host(idx_range_o_point.front());
         }
     }
 
