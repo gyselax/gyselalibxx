@@ -46,7 +46,7 @@ echo "Preparing the Spack environment..."
 spack --env gyselalibxx-spack-environment concretize --force
 
 for ((i = 0; i < 8; ++i)); do
-    spack --env gyselalibxx-spack-environment install --jobs 12 &
+    spack --env gyselalibxx-spack-environment install --jobs 48 &
 done
 
 wait

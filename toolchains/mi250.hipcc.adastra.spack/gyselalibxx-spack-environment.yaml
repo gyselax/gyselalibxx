@@ -1,9 +1,10 @@
 spack:
   definitions:
   - packages:
-    # - cmake
-    - ginkgo+openmp+rocm~shared amdgpu_target=gfx90a
-    - libyaml
+    - cmake
+    - fftw
+    - ginkgo~openmp+rocm amdgpu_target=gfx90a
+    - googletest
     - ninja
     - paraconf
     - pdi
@@ -12,6 +13,7 @@ spack:
     - pdiplugin-mpi
     - pdiplugin-set-value
     - pdiplugin-trace
+    - python
 
     - py-dask
     - py-h5py
@@ -46,4 +48,4 @@ spack:
     default:
       roots: {}
       enable: []
-  view: true
+  view: false
