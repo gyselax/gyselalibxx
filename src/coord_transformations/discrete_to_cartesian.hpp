@@ -152,6 +152,19 @@ public:
     }
 
     /**
+     * @brief Get the O-point in Cartesian coordinates.
+     *
+     * Get the O-point of this mapping in Cartesian coordinates. This is calculated in
+     * the constructor.
+     *
+     * @return The O-point.
+     */
+    KOKKOS_INLINE_FUNCTION Coord<X, Y> o_point() const
+    {
+        return m_o_point;
+    }
+
+    /**
      * @brief Compute the physical coordinates from the logical coordinates.
      *
      * It evaluates the decomposed mapping on B-splines at the coordinate point

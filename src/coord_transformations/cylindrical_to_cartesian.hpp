@@ -128,6 +128,19 @@ public:
     CylindricalToCartesian& operator=(CylindricalToCartesian&& x) = default;
 
     /**
+     * @brief Get the O-point in Cartesian coordinates.
+     *
+     * Get the O-point of this mapping in Cartesian coordinates. This is calculated in
+     * the constructor.
+     *
+     * @return The O-point.
+     */
+    KOKKOS_INLINE_FUNCTION Coord<X, Y> o_point() const
+    {
+        return Coord<X, Y>(0.0, 0.0);
+    }
+
+    /**
      * @brief Convert the @f$ (r, \zeta) @f$ coordinate to the equivalent (x,y) coordinate.
      *
      * @param[in] coord The coordinate to be converted.
