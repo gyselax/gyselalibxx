@@ -1,0 +1,51 @@
+spack:
+  definitions:
+  - packages:
+    - cmake
+    - fftw+openmp
+    - ginkgo+openmp
+    - googletest
+    - ninja
+    - paraconf
+    - pdi
+    - pdiplugin-decl-hdf5
+    - pdiplugin-decl-netcdf
+    - pdiplugin-mpi
+    - pdiplugin-set-value
+    - pdiplugin-trace
+    - python
+
+    - py-dask
+    - py-h5py
+    - py-imageio
+    - py-matplotlib
+    - py-netcdf4
+    - py-numpy
+    - py-scipy
+    - py-sympy
+    - py-xarray
+    - py-pyyaml
+  - compilers:
+    - gcc@13.2.1.genoa
+  - architectures:
+    - arch=linux-rhel8-zen4
+  specs:
+  - matrix:
+    - [$packages]
+    - [$%compilers]
+    - [$architectures]
+  concretizer:
+    unify: true
+    reuse: false
+    duplicates:
+      strategy: none
+  packages:
+    all:
+      permissions:
+        read: world
+        write: group
+  modules:
+    default:
+      roots: {}
+      enable: []
+  view: false
