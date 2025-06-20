@@ -83,9 +83,10 @@ using SplineRThetaEvaluatorNullBoundType = ddc::SplineEvaluator2D<
         ddc::PeriodicExtrapolationRule<Theta>,
         ddc::PeriodicExtrapolationRule<Theta>>;
 
-using CoordR = ddc::Coordinate<R>;
-using CoordTheta = ddc::Coordinate<Theta>;
-using CoordRTheta = ddc::Coordinate<R, Theta>;
+using CoordR = Coord<R>;
+using CoordTheta = Coord<Theta>;
+using CoordRTheta = Coord<R, Theta>;
+using CoordBatch = Coord<Batch>;
 
 using IdxR = Idx<GridR>;
 using IdxTheta = Idx<GridTheta>;
@@ -204,8 +205,8 @@ protected:
         // Initialisation of the global domain in batch
         IdxRangeBatch const batch_domain
                 = ddc::init_discrete_space<GridBatch>(GridBatch::init<GridBatch>(
-                        ddc::Coordinate<Batch>(batch_start),
-                        ddc::Coordinate<Batch>(batch_end),
+                        CoordBatch(batch_start),
+                        CoordBatch(batch_end),
                         IdxStep<GridBatch>(nb_batch_points)));
 
         // Allocate members with move assign operator
