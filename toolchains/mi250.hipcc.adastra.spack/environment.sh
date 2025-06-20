@@ -52,9 +52,9 @@ eval -- "$(
 )"
 
 # Due to https://github.com/gyselax/gyselalibxx/pull/198#issuecomment-2943081411
-# we use a different HIP compiler to build dependencies and to build gyselalib. It is
-# fine except we must unset some environment variables defined by spack's HIP
-# packages so they do not interfere with HIPCC/clang in the 6.3.3 version.
+# we use a different HIP compiler to build dependencies and to build gyselalib. 
+# It is fine except we must unset some environment variables defined by spack's 
+# HIP packages so they do not interfere with HIPCC/clang in the 6.3.3 version.
 # Notably:
 unset ROCM_PATH                  # /opt/rocm-6.1.2
 unset HIP_CLANG_PATH             # /opt/rocm-6.1.2/llvm/bin
