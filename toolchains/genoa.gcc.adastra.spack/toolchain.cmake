@@ -1,8 +1,8 @@
 set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/installation")
 
-set(CMAKE_CXX_COMPILER hipcc)
-set(CMAKE_C_COMPILER amdclang)
-set(CMAKE_Fortran_COMPILER amdflang)
+set(CMAKE_CXX_COMPILER g++)
+set(CMAKE_C_COMPILER gcc)
+set(CMAKE_Fortran_COMPILER gfortran)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
 # NOTE: We are not supposed to define CMAKE_BUILD_TYPE here.
@@ -10,16 +10,9 @@ set(CMAKE_BUILD_TYPE Release) # Debug, Release, RelWithDebInfo and MinSizeRel
 
 # Kokkos options:
 
-set(Kokkos_ENABLE_HIP ON CACHE BOOL "Defined if the HIP execution space is enabled.")
-set(Kokkos_ENABLE_HIP_MULTIPLE_KERNEL_INSTANTIATIONS ON CACHE BOOL "If defined, multiple kernel versions are instantiated potentially improving run time.")
-set(Kokkos_ARCH_VEGA90A ON CACHE BOOL "Enable support for AMD GPU MI200 series (GFX90A).")
-# FIXME: According to Thomas this is needed.In practice I did not help the
-# build. Note that it can be detrimental to performance.
-set(Kokkos_ENABLE_HIP_RELOCATABLE_DEVICE_CODE ON CACHE BOOL "")
-
-set(Kokkos_ENABLE_OPENMP OFF CACHE BOOL "")
+set(Kokkos_ENABLE_OPENMP ON CACHE BOOL "")
 set(Kokkos_ENABLE_SERIAL ON CACHE BOOL "")
-set(Kokkos_ARCH_ZEN3 ON CACHE BOOL "Optimize for AMD Zen3 architecture (HOST).")
+set(Kokkos_ARCH_ZEN4 ON CACHE BOOL "Optimize for AMD Zen4 architecture (HOST).")
 
 # Kokkos kernels options:
 
