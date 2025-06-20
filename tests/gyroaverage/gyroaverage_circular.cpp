@@ -56,6 +56,33 @@ struct GridBatch : UniformGridBase<Batch>
 {
 };
 
+template <class ExecutionSpace>
+using SplineRThetaBuilderType = ddc::SplineBuilder2D<
+        ExecutionSpace,
+        typename ExecutionSpace::memory_space,
+        BSplinesR,
+        BSplinesTheta,
+        GridR,
+        GridTheta,
+        SplineRBoundary, // boundary at r=0
+        SplineRBoundary, // boundary at rmax
+        SplineThetaBoundary,
+        SplineThetaBoundary,
+        ddc::SplineSolver::LAPACK>;
+
+template <class ExecutionSpace>
+using SplineRThetaEvaluatorNullBoundType = ddc::SplineEvaluator2D<
+        ExecutionSpace,
+        typename ExecutionSpace::memory_space,
+        BSplinesR,
+        BSplinesTheta,
+        GridR,
+        GridTheta,
+        ddc::NullExtrapolationRule, // boundary at r=0
+        ddc::NullExtrapolationRule, // boundary at rmax
+        ddc::PeriodicExtrapolationRule<Theta>,
+        ddc::PeriodicExtrapolationRule<Theta>>;
+
 using CoordR = ddc::Coordinate<R>;
 using CoordTheta = ddc::Coordinate<Theta>;
 using CoordRTheta = ddc::Coordinate<R, Theta>;
@@ -92,11 +119,12 @@ void initialise(
         double const kx,
         double const ky)
 {
-    IdxRangeRTheta const rtheta_mesh = get_idx_range<GridR, GridTheta>(A);
+    IdxRangeRTheta const rtheta_idx_range = get_idx_range<GridR, GridTheta>(A);
 
     // Initialise R, Z and rho_L
     ddc::parallel_for_each(
-            rtheta_mesh,
+            Kokkos::DefaultExecutionSpace(),
+            rtheta_idx_range,
             KOKKOS_LAMBDA(IdxRTheta const irtheta) {
                 IdxR const ir(irtheta);
                 IdxTheta const itheta(irtheta);
@@ -111,9 +139,10 @@ void initialise(
             });
 
     // Initialise A with Fourier mode
-    IdxRangeRThetaBatch const rthetabatch_mesh = get_idx_range<GridR, GridTheta, GridBatch>(A);
+    IdxRangeRThetaBatch const rthetabatch_idx_range = get_idx_range(A);
     ddc::parallel_for_each(
-            rthetabatch_mesh,
+            Kokkos::DefaultExecutionSpace(),
+            rthetabatch_idx_range,
             KOKKOS_LAMBDA(IdxRThetaBatch const irthetabatch) {
                 IdxR const ir(irthetabatch);
                 IdxTheta const itheta(irthetabatch);
@@ -233,32 +262,47 @@ struct CartesianToPolar
 
 TEST_P(GyroAverageCircularParamTests, TestPeriodicity)
 {
-    DConstFieldRThetaBatch A = get_const_field(this->m_A_alloc);
-    DFieldRThetaBatch A_bar = get_field(this->m_A_bar_alloc);
+    DConstFieldRThetaBatch A = get_const_field(m_A_alloc);
+    DFieldRThetaBatch A_bar = get_field(m_A_bar_alloc);
+
+    using SplineRThetaBuilder = SplineRThetaBuilderType<Kokkos::DefaultExecutionSpace>;
+    using SplineRThetaEvaluatorNullBound
+            = SplineRThetaEvaluatorNullBoundType<Kokkos::DefaultExecutionSpace>;
+
+    IdxRangeRTheta const rtheta_idx_range = get_idx_range<GridR, GridTheta>(A_bar);
+    ddc::NullExtrapolationRule r_extrapolation_rule;
+    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
+    SplineRThetaBuilder const spline_builder(rtheta_idx_range);
+    SplineRThetaEvaluatorNullBound const spline_evaluator(
+            r_extrapolation_rule,
+            r_extrapolation_rule,
+            theta_extrapolation_rule,
+            theta_extrapolation_rule);
 
     using GyroAverageOperatorType = detail::GyroAverageOperator<
-            Kokkos::DefaultExecutionSpace,
-            GridR,
-            GridTheta,
+            SplineRThetaBuilder,
+            SplineRThetaEvaluatorNullBound,
             IdxRangeRThetaBatch,
-            BSplinesR,
-            BSplinesTheta,
             CartesianToPolar>;
-    GyroAverageOperatorType
-            gyroaverage(get_field(this->m_rho_L_alloc), CartesianToPolar(), this->m_nb_gyro_points);
+    GyroAverageOperatorType gyroaverage(
+            get_const_field(m_rho_L_alloc),
+            spline_builder,
+            spline_evaluator,
+            CartesianToPolar(),
+            m_nb_gyro_points);
     gyroaverage(A, A_bar);
 
-    auto h_A_bar_alloc = ddc::create_mirror_and_copy(Kokkos::HostSpace {}, A_bar);
+    auto h_A_bar_alloc = ddc::create_mirror_and_copy(A_bar);
     host_t<DFieldRThetaBatch> h_A_bar = get_field(h_A_bar_alloc);
 
-    IdxRangeTheta const theta_domain = get_idx_range<GridTheta>(A_bar);
-    IdxRangeRBatch const rbatch_mesh = get_idx_range<GridR, GridBatch>(A_bar);
+    IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(A_bar);
+    IdxRangeRBatch const rbatch_idx_range = get_idx_range<GridR, GridBatch>(A_bar);
 
-    ddc::for_each(rbatch_mesh, [&](IdxRBatch const irbatch) {
+    ddc::for_each(rbatch_idx_range, [&](IdxRBatch const irbatch) {
         IdxR const ir(irbatch);
         IdxBatch const ibatch(irbatch);
-        IdxTheta const theta_front = theta_domain.front();
-        IdxTheta const theta_back = theta_domain.back();
+        IdxTheta const theta_front = theta_idx_range.front();
+        IdxTheta const theta_back = theta_idx_range.back();
         double A_theta_0 = h_A_bar(ir, theta_front, ibatch);
         double A_theta_2PI = h_A_bar(ir, theta_back, ibatch);
         EXPECT_LE(std::abs(A_theta_2PI - A_theta_0), 1e-12);
@@ -267,43 +311,55 @@ TEST_P(GyroAverageCircularParamTests, TestPeriodicity)
 
 TEST_P(GyroAverageCircularParamTests, TestAnalytical)
 {
-    DConstFieldRThetaBatch A = get_const_field(this->m_A_alloc);
-    DFieldRThetaBatch A_bar = get_field(this->m_A_bar_alloc);
+    DConstFieldRThetaBatch A = get_const_field(m_A_alloc);
+    DFieldRThetaBatch A_bar = get_field(m_A_bar_alloc);
+
+    using SplineRThetaBuilder = SplineRThetaBuilderType<Kokkos::DefaultExecutionSpace>;
+    using SplineRThetaEvaluatorNullBound
+            = SplineRThetaEvaluatorNullBoundType<Kokkos::DefaultExecutionSpace>;
+
+    IdxRangeRThetaBatch const rthetabatch_idx_range = get_idx_range(A_bar);
+    IdxRangeRTheta const rtheta_idx_range(rthetabatch_idx_range);
+    ddc::NullExtrapolationRule r_extrapolation_rule;
+    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
+    SplineRThetaBuilder const spline_builder(rtheta_idx_range);
+    SplineRThetaEvaluatorNullBound const spline_evaluator(
+            r_extrapolation_rule,
+            r_extrapolation_rule,
+            theta_extrapolation_rule,
+            theta_extrapolation_rule);
 
     using GyroAverageOperatorType = detail::GyroAverageOperator<
-            Kokkos::DefaultExecutionSpace,
-            GridR,
-            GridTheta,
+            SplineRThetaBuilder,
+            SplineRThetaEvaluatorNullBound,
             IdxRangeRThetaBatch,
-            BSplinesR,
-            BSplinesTheta,
             CartesianToPolar>;
-    GyroAverageOperatorType
-            gyroaverage(get_field(this->m_rho_L_alloc), CartesianToPolar(), this->m_nb_gyro_points);
+    GyroAverageOperatorType gyroaverage(
+            get_const_field(m_rho_L_alloc),
+            spline_builder,
+            spline_evaluator,
+            CartesianToPolar(),
+            m_nb_gyro_points);
     gyroaverage(A, A_bar);
 
-    auto h_Rcoord_alloc
-            = ddc::create_mirror_and_copy(Kokkos::HostSpace {}, get_field(this->m_Rcoord_alloc));
+    auto h_Rcoord_alloc = ddc::create_mirror_and_copy(get_field(m_Rcoord_alloc));
     host_t<DFieldRTheta> h_Rcoord = get_field(h_Rcoord_alloc);
-    auto h_Zcoord_alloc
-            = ddc::create_mirror_and_copy(Kokkos::HostSpace {}, get_field(this->m_Zcoord_alloc));
+    auto h_Zcoord_alloc = ddc::create_mirror_and_copy(get_field(m_Zcoord_alloc));
     host_t<DFieldRTheta> h_Zcoord = get_field(h_Zcoord_alloc);
-    auto h_rho_L_alloc
-            = ddc::create_mirror_and_copy(Kokkos::HostSpace {}, get_field(this->m_rho_L_alloc));
+    auto h_rho_L_alloc = ddc::create_mirror_and_copy(get_field(m_rho_L_alloc));
     host_t<DFieldRTheta> h_rho_L = get_field(h_rho_L_alloc);
-    auto h_A_bar_alloc = ddc::create_mirror_and_copy(Kokkos::HostSpace {}, A_bar);
+    auto h_A_bar_alloc = ddc::create_mirror_and_copy(A_bar);
     host_t<DFieldRThetaBatch> h_A_bar = get_field(h_A_bar_alloc);
 
-    IdxRangeTheta const theta_domain = get_idx_range<GridTheta>(A_bar);
-    IdxRangeRThetaBatch const rthetabatch_mesh = get_idx_range<GridR, GridTheta, GridBatch>(A_bar);
+    IdxRangeTheta const theta_idx_range(rthetabatch_idx_range);
 
-    double const r0 = this->m_r0;
-    double const R0 = this->m_R0;
-    double const kperp = this->m_kperp;
-    double const kx = this->m_kx;
-    double const ky = this->m_ky;
-    int const nb_gyro_points = this->m_nb_gyro_points;
-    ddc::for_each(rthetabatch_mesh, [&](IdxRThetaBatch const irthetabatch) {
+    double const r0 = m_r0;
+    double const R0 = m_R0;
+    double const kperp = m_kperp;
+    double const kx = m_kx;
+    double const ky = m_ky;
+    int const nb_gyro_points = m_nb_gyro_points;
+    ddc::for_each(rthetabatch_idx_range, [&](IdxRThetaBatch const irthetabatch) {
         IdxR const ir(irthetabatch);
         IdxTheta const itheta(irthetabatch);
         IdxBatch const ibatch(irthetabatch);
@@ -329,7 +385,7 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
         // In the outer region, the particle position can be out of small radius (r), where the values are considered to be zero.
         // Also the gyroaveraged value has the periodicity along theta direction (tested separately above)
         // These conditions are not taken into account in the analytical formula, so we do not test these cases.
-        if (r < r0 * 0.8 && itheta < theta_domain.back()) {
+        if (r < r0 * 0.8 && itheta < theta_idx_range.back()) {
             EXPECT_LE(std::abs(err_J0_num - err_J0_th), 5e-2);
         }
     });
