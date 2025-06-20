@@ -107,9 +107,9 @@ int main(int argc, char** argv)
             SplineInterpPointsR>(conf_gyselalibxx, "r");
     PC_tree_destroy(&conf_gyselalibxx);
 
-    std::vector<CoordTheta> theta_knots
+    std::vector<CoordTheta> theta_break_points
             = build_uniform_break_points(theta_min, theta_max, theta_ncells);
-    ddc::init_discrete_space<BSplinesTheta>(theta_knots);
+    ddc::init_discrete_space<BSplinesTheta>(theta_break_points);
     ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
     IdxRangeTheta const interpolation_idx_range_theta(
             SplineInterpPointsTheta::get_domain<GridTheta>());
@@ -124,7 +124,7 @@ int main(int argc, char** argv)
               << "WITH NrxNt = " << interpolation_idx_range_r.size() << "x"
               << interpolation_idx_range_theta.size() << " AND dt = " << dt << ": " << std::endl;
 
-    std::ofstream file("r_knots.txt");
+    std::ofstream file("r_interpolation_points.txt");
     for_each(interpolation_idx_range_r, [&](IdxR ir) {
         file << (ir - interpolation_idx_range_r.front()).value() << " "
              << double(ddc::coordinate(ir)) << std::endl;

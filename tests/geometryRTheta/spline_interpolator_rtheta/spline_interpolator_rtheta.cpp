@@ -295,20 +295,20 @@ int main(int argc, char** argv)
     double const dr((r_max - r_min) / r_size);
     double const dp((theta_max - theta_min) / theta_size);
 
-    std::vector<CoordR> r_knots(r_size + 1);
-    std::vector<CoordTheta> theta_knots(theta_size + 1);
+    std::vector<CoordR> r_break_points(r_size + 1);
+    std::vector<CoordTheta> theta_break_points(theta_size + 1);
 
     for (int i(0); i < r_size + 1; ++i) {
-        r_knots[i] = CoordR(r_min + i * dr);
+        r_break_points[i] = CoordR(r_min + i * dr);
     }
     for (int i(0); i < theta_size + 1; ++i) {
-        theta_knots[i] = CoordTheta(theta_min + i * dp);
+        theta_break_points[i] = CoordTheta(theta_min + i * dp);
     }
 
 
     // Creating mesh & supports
-    ddc::init_discrete_space<BSplinesR>(r_knots);
-    ddc::init_discrete_space<BSplinesTheta>(theta_knots);
+    ddc::init_discrete_space<BSplinesR>(r_break_points);
+    ddc::init_discrete_space<BSplinesTheta>(theta_break_points);
 
     ddc::init_discrete_space<GridR>(SplineInterpPointsR::get_sampling<GridR>());
     ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());

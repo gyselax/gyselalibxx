@@ -23,12 +23,12 @@ void setup_coordinates()
     CoordTheta const theta_max(2.0 * M_PI);
     IdxStepTheta const theta_ncells(N_cells_theta);
 
-    std::vector<CoordR> r_knots = build_uniform_break_points(r_min, r_max, r_ncells);
-    std::vector<CoordTheta> theta_knots
+    std::vector<CoordR> r_break_points = build_uniform_break_points(r_min, r_max, r_ncells);
+    std::vector<CoordTheta> theta_break_points
             = build_uniform_break_points(theta_min, theta_max, theta_ncells);
 
-    ddc::init_discrete_space<BSplinesR>(r_knots);
-    ddc::init_discrete_space<BSplinesTheta>(theta_knots);
+    ddc::init_discrete_space<BSplinesR>(r_break_points);
+    ddc::init_discrete_space<BSplinesTheta>(theta_break_points);
 
     ddc::init_discrete_space<GridR>(InterpPointsR::get_sampling<GridR>());
     ddc::init_discrete_space<GridTheta>(InterpPointsTheta::get_sampling<GridTheta>());
