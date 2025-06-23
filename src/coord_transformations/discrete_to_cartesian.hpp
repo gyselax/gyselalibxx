@@ -368,6 +368,48 @@ public:
     {
         return Coord<X, Y>(m_x_spline_representation(el), m_y_spline_representation(el));
     }
+
+    /**
+     * @brief Get a set of control points of the mapping on B-splines.
+     *
+     * The mapping @f$ (r,\theta) \mapsto (x,y) @f$ decomposed on B-splines can be
+     * identified by its control points @f$ \{(c_{x,k}, c_{y,k})\}_{k}  @f$ where
+     * @f$ c_{x,k} @f$ and @f$ c_{y,k} @f$ are the B-splines coefficients:
+     *
+     * @f$ x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k{r,\theta} @f$,
+     *
+     * @f$ y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k{r,\theta} @f$,
+     *
+     * where @f$ N_r\times N_{\theta} @f$ is the number of B-splines.
+     *
+     * The control points can be obtained by interpolating the mapping on interpolation
+     * points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints).
+     * We can also note that the first control points @f$ \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}} @f$
+     * are equal to the pole @f$ (c_{x,k}, c_{y,k}) = (x_0,y_0) @f$, @f$ \forall k = 0, ..., N_{\theta}-1 @f$
+     * where @f$ x(0,\theta), y(0,\theta) = (x_0,y_0) @f$ @f$ \forall \theta @f$.
+     *
+     *
+     * @param[in] exec_space
+     * 			The number of the control point.
+     *
+     * @return The el-th control point.
+     *
+     * @see GrevilleInterpolationPoints
+     * @see KnotsAsInterpolationPoints
+     */
+    template <class ExecSpace>
+    void control_points(
+            ExecSpace exec_space,
+            Field<Coord<X, Y>, IdxRange<BSplineR, BSplineTheta>, MemorySpace> pts) const
+    {
+        static_assert(Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible);
+        ddc::parallel_for_each(
+                exec_space,
+                get_idx_range(pts),
+                KOKKOS_CLASS_LAMBDA(Idx<BSplineR, BSplineTheta> idx) {
+                    pts(idx) = control_point(idx);
+                });
+    }
 };
 
 

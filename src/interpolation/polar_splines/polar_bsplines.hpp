@@ -256,30 +256,25 @@ public:
                     std::is_same_v<EvalMemorySpace, Kokkos::HostSpace>,
                     Kokkos::DefaultHostExecutionSpace,
                     Kokkos::DefaultExecutionSpace>;
-            using mapping_tensor_product_index_type = Idx<BSplinesR, BSplinesTheta>;
             if constexpr (C > -1) {
-                FieldMem<Coord<X, Y>, IdxRange<BSplinesTheta>, EvalMemorySpace>
-                        control_pts_eval_space_mem(
-                                ddc::discrete_space<BSplinesTheta>().full_domain());
-                Field<Coord<X, Y>, IdxRange<BSplinesTheta>, EvalMemorySpace> control_pts_eval_space
-                        = get_field(control_pts_eval_space_mem);
-
-                Idx<BSplinesR> idx_r_control_pts(1);
-                ddc::parallel_for_each(
-                        EvalExecSpace(),
-                        get_idx_range(control_pts_eval_space),
-                        KOKKOS_LAMBDA(Idx<BSplinesTheta> idx) {
-                            control_pts_eval_space(idx) = curvilinear_to_cartesian.control_point(
-                                    mapping_tensor_product_index_type(idx_r_control_pts, idx));
-                        });
-
-                auto control_pts = ddc::create_mirror_and_copy(control_pts_eval_space);
+                IdxRange<BSplinesR> idx_range_r_ctrl_pts(Idx<BSplinesR>(1), IdxStep<BSplinesR>(1));
+                IdxRange<BSplinesR, BSplinesTheta> idx_range_ctrl_pts(
+                        idx_range_r_ctrl_pts,
+                        ddc::discrete_space<BSplinesTheta>().full_domain());
+                FieldMem<Coord<X, Y>, IdxRange<BSplinesR, BSplinesTheta>, EvalMemorySpace>
+                        control_pts_eval_space_mem(idx_range_ctrl_pts);
+                curvilinear_to_cartesian
+                        .control_points(EvalExecSpace(), get_field(control_pts_eval_space_mem));
+                auto control_pts_mem
+                        = ddc::create_mirror_and_copy(get_const_field(control_pts_eval_space_mem));
+                host_t<Field<Coord<X, Y>, IdxRange<BSplinesTheta>>> control_pts
+                        = control_pts_mem[Idx<BSplinesR>(1)];
 
                 const Coord<X, Y> pole = curvilinear_to_cartesian.o_point();
                 const double x0 = ddc::get<X>(pole);
                 const double y0 = ddc::get<Y>(pole);
                 double tau = 0.0;
-                for (Idx<BSplinesTheta> i : get_idx_range(control_pts_eval_space)) {
+                for (Idx<BSplinesTheta> i : get_idx_range(control_pts)) {
                     const Coord<X, Y> point = control_pts(i);
 
                     const double c_x = ddc::get<X>(point);
