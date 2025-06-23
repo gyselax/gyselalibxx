@@ -77,7 +77,7 @@ public:
      *
      * @param[in] o_point The (x,y)-coordinate of the centre of the circle ((0,0) by default).
      */
-    explicit KOKKOS_FUNCTION CircularToCartesian(Coord<X, Y> o_point = Coord<X,Y>(0.0, 0.0))
+    explicit KOKKOS_FUNCTION CircularToCartesian(Coord<X, Y> o_point = Coord<X, Y>(0.0, 0.0))
         : m_o_point(o_point)
     {
     }

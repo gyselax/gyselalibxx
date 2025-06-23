@@ -100,7 +100,7 @@ public:
     explicit KOKKOS_FUNCTION CzarnyToCartesian(
             double epsilon,
             double e,
-            Coord<X, Y> o_point = Coord<X,Y>(0.0, 0.0))
+            Coord<X, Y> o_point = Coord<X, Y>(0.0, 0.0))
         : m_epsilon(epsilon)
         , m_e(e)
         , m_o_point(o_point)
