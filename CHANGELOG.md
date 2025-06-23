@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change the interface of `IVlasovSolver` and `IQNSolver` in `geometryXYVxVy` to store the electric field in a `VectorField`.
 - Integration of `ddc::StridedDiscreteDomain` by making `IdxRangeSlice` a type alias.
 - The parameter `iter_start` has been removed from the constructor of `RestartInitialisation`.
+- Generalise `compute_coeffs_on_mapping` to work with any mapping.
 
 ### Deprecated
 
