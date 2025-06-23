@@ -106,10 +106,11 @@ int main(int argc, char** argv)
 
     double major_radius = 6.1;
     double vertical_offset = 0.3;
+    Coord<X, Y> o_point(major_radius, vertical_offset);
 #if defined(CIRCULAR_MAPPING)
-    const Mapping mapping(major_radius, vertical_offset);
+    const Mapping mapping(o_point);
 #elif defined(CZARNY_MAPPING)
-    const Mapping mapping(0.3, 1.4, major_radius, vertical_offset);
+    const Mapping mapping(0.3, 1.4, o_point);
 #endif
 
     ddc::NullExtrapolationRule bv_r_min;

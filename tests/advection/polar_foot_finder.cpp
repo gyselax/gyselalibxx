@@ -161,16 +161,15 @@ LogicalToOtherMapping init_mapping()
     using OtherX = typename LogicalToOtherMapping::cartesian_tag_x;
     using OtherY = typename LogicalToOtherMapping::cartesian_tag_y;
     // At x0,y0 to match rotation centre
-    double x0 = 0.0;
-    double y0 = 0.0;
+    Coord<OtherX, OtherY> o_point(0.0, 0.0);
     if constexpr (std::is_same_v<
                           LogicalToOtherMapping,
                           CircularToCartesian<R, Theta, OtherX, OtherY>>) {
-        return LogicalToOtherMapping(x0, y0);
+        return LogicalToOtherMapping(o_point);
     } else if constexpr (std::is_same_v<
                                  LogicalToOtherMapping,
                                  CzarnyToCartesian<R, Theta, OtherX, OtherY>>) {
-        return LogicalToOtherMapping(0.3, 1.4, x0, y0);
+        return LogicalToOtherMapping(0.3, 1.4, o_point);
     }
 }
 
