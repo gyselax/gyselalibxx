@@ -558,12 +558,11 @@ DFieldMem&lt;IdxRangeCoeffs, typename ExecSpace::memory_space&gt; compute_coeffs
         Mapping&amp; mapping,
         DFieldMem&lt;IdxRangeCoeffs, typename ExecSpace::memory_space&gt;&amp;&amp; coefficients_alloc)
 {
-    static_assert(is_curvilinear_2d_mapping_v&lt;Mapping&gt;);
-
-    using R = typename Mapping::curvilinear_tag_r;
-    using Theta = typename Mapping::curvilinear_tag_theta;
-
+    static_assert(is_mapping_v&lt;Mapping&gt;);
     static_assert(has_jacobian_v&lt;Mapping&gt;);
+
+    using CoordJ = typename Mapping::CoordJacobian;
+    using IdxJ = find_idx_t&lt;CoordJ, IdxRangeCoeffs&gt;;
 
     using IdxCoeffs = typename IdxRangeCoeffs::discrete_element_type;
     IdxRangeCoeffs grid = get_idx_range(coefficients_alloc);
@@ -572,7 +571,7 @@ DFieldMem&lt;IdxRangeCoeffs, typename ExecSpace::memory_space&gt; compute_coeffs
             exec_space,
             grid,
             KOKKOS_LAMBDA(IdxCoeffs const idx) {
-                Coord&lt;R, Theta&gt; coord(ddc::coordinate(idx));
+                CoordJ coord(ddc::coordinate(IdxJ(idx)));
                 coefficients(idx) *= fabs(mapping.jacobian(coord));
             });
     return std::move(coefficients_alloc);
