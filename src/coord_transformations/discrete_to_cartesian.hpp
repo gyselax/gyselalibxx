@@ -140,12 +140,7 @@ public:
             Field<Coord<X, Y>, IdxRangeRTheta> coord_centre_field
                     = get_field(coord_centre_field_alloc);
             using ExecSpace = typename SplineEvaluator::exec_space;
-            ddc::parallel_for_each(
-                    ExecSpace(),
-                    idx_range_o_point,
-                    KOKKOS_CLASS_LAMBDA(IdxRTheta idx) {
-                        coord_centre_field(idx) = (*this)(ddc::coordinate(idx));
-                    });
+            (*this)(ExecSpace(), coord_centre_field(idx));
             auto coord_centre_field_host = ddc::create_mirror_view_and_copy(coord_centre_field);
             m_o_point = coord_centre_field_host(idx_range_o_point.front());
         }
@@ -183,6 +178,34 @@ public:
         const double x = m_spline_evaluator(coord, get_const_field(m_x_spline_representation));
         const double y = m_spline_evaluator(coord, get_const_field(m_y_spline_representation));
         return Coord<X, Y>(x, y);
+    }
+
+    /**
+     * @brief Compute the physical coordinates at the points on the logical grid.
+     *
+     * It evaluates the decomposed mapping on B-splines at the coordinate point
+     * with a SplineEvaluator2D.
+     *
+     * @param[in] exec_space
+     *          The execution space where the calculation should be carried out.
+     * @param[out] coords
+     * 			The coordinates of the mapping in the physical domain at the
+     * 			grid points.
+     *
+     * @see SplineEvaluator2D
+     */
+    template <class ExecSpace, class GridR, class GridTheta>
+    void operator()(ExecSpace exec_space, Field<Coord<X, Y>, IdxRange<GridR, GridTheta>> coords)
+    {
+        static_assert(Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible);
+        static_assert(std::is_same_v < R, typename GridR::continuous_dimension_type);
+        static_assert(std::is_same_v < Theta, typename GridTheta::continuous_dimension_type);
+        ddc::parallel_for_each(
+                ExecSpace(),
+                get_idx_range(coords),
+                KOKKOS_CLASS_LAMBDA(IdxRTheta idx) {
+                    coords(idx) = (*this)(ddc::coordinate(idx));
+                });
     }
 
     /**
