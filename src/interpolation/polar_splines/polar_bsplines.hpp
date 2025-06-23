@@ -243,24 +243,44 @@ public:
          *                                  singular point and determine the Barycentric coordinates which are used to define
          *                                  the new basis splines which cross the singular point.
          */
-        template <class DiscreteMapping>
-        explicit Impl(const DiscreteMapping& curvilinear_to_cartesian)
+        template <class X, class Y, class SplineEvaluator, class EvalMemorySpace>
+        explicit Impl(const DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, EvalMemorySpace>&
+                              curvilinear_to_cartesian)
         {
-            static_assert(is_accessible_v<Kokkos::DefaultHostExecutionSpace, DiscreteMapping>);
             static_assert(std::is_same_v<MemorySpace, Kokkos::HostSpace>);
-            using X = typename DiscreteMapping::cartesian_tag_x;
-            using Y = typename DiscreteMapping::cartesian_tag_y;
-            using mapping_tensor_product_index_type
-                    = Idx<typename DiscreteMapping::BSplineR,
-                          typename DiscreteMapping::BSplineTheta>;
+            using DiscreteMapping
+                    = DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, EvalMemorySpace>;
+            static_assert(std::is_same_v<typename DiscreteMapping::BSplineR, BSplinesR>);
+            static_assert(std::is_same_v<typename DiscreteMapping::BSplineTheta, BSplinesTheta>);
+            using EvalExecSpace = std::conditional_t<
+                    std::is_same_v<EvalMemorySpace, Kokkos::HostSpace>,
+                    Kokkos::DefaultHostExecutionSpace,
+                    Kokkos::DefaultExecutionSpace>;
+            using mapping_tensor_product_index_type = Idx<BSplinesR, BSplinesTheta>;
             if constexpr (C > -1) {
-                const Coord<X, Y> pole = curvilinear_to_cartesian(Coord<R, Theta>(0.0, 0.0));
+                FieldMem<Coord<X, Y>, IdxRange<BSplinesTheta>, EvalMemorySpace>
+                        control_pts_eval_space_mem(
+                                ddc::discrete_space<BSplinesTheta>().full_domain());
+                Field<Coord<X, Y>, IdxRange<BSplinesTheta>, EvalMemorySpace> control_pts_eval_space
+                        = get_field(control_pts_eval_space_mem);
+
+                Idx<BSplinesR> idx_r_control_pts(1);
+                ddc::parallel_for_each(
+                        EvalExecSpace(),
+                        get_idx_range(control_pts_eval_space),
+                        KOKKOS_LAMBDA(Idx<BSplinesTheta> idx) {
+                            control_pts_eval_space(idx) = curvilinear_to_cartesian.control_point(
+                                    mapping_tensor_product_index_type(idx_r_control_pts, idx));
+                        });
+
+                auto control_pts = ddc::create_mirror_and_copy(control_pts_eval_space);
+
+                const Coord<X, Y> pole = curvilinear_to_cartesian.o_point();
                 const double x0 = ddc::get<X>(pole);
                 const double y0 = ddc::get<Y>(pole);
                 double tau = 0.0;
-                for (std::size_t i(0); i < ddc::discrete_space<BSplinesTheta>().size(); ++i) {
-                    const Coord<X, Y> point = curvilinear_to_cartesian.control_point(
-                            mapping_tensor_product_index_type(1, i));
+                for (Idx<BSplinesTheta> i : get_idx_range(control_pts_eval_space)) {
+                    const Coord<X, Y> point = control_pts(i);
 
                     const double c_x = ddc::get<X>(point);
                     const double c_y = ddc::get<Y>(point);
@@ -313,6 +333,7 @@ public:
                 IdxRange<BernsteinBasis> bernstein_idx_range(
                         Idx<BernsteinBasis> {0},
                         IdxStep<BernsteinBasis> {n_singular_basis()});
+                host_t<DFieldMem<IdxRange<BernsteinBasis>>> bernstein_vals(bernstein_idx_range);
 
                 IdxRange<BSplinesTheta> poloidal_spline_idx_range
                         = ddc::discrete_space<BSplinesTheta>().full_domain();
@@ -320,10 +341,7 @@ public:
                 for (IdxR const ir : IdxRange<BSplinesR>(IdxR(0), IdxStepR(C + 1))) {
                     for (IdxTheta const itheta :
                          poloidal_spline_idx_range.take_first(n_theta_in_singular)) {
-                        const Coord<X, Y> point = curvilinear_to_cartesian.control_point(
-                                mapping_tensor_product_index_type(ir, itheta));
-                        host_t<DFieldMem<IdxRange<BernsteinBasis>>> bernstein_vals(
-                                bernstein_idx_range);
+                        const Coord<X, Y> point = control_pts(itheta);
                         ddc::discrete_space<BernsteinBasis>()
                                 .eval_basis(get_field(bernstein_vals), point);
                         // Fill spline coefficients
