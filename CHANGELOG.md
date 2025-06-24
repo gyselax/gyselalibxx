@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Curvilinear coordinate change classes have an o-point method to retrieve the o-point in the non-curvilinear coordinates.
+
 ### Fixed
 
 - Fix uninitialized warning in the `Tensor` class.
@@ -21,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change the interface of `IVlasovSolver` and `IQNSolver` in `geometryXYVxVy` to store the electric field in a `VectorField`.
 - Integration of `ddc::StridedDiscreteDomain` by making `IdxRangeSlice` a type alias.
 - The parameter `iter_start` has been removed from the constructor of `RestartInitialisation`.
+- Curvilinear coordinate change classes take a `Coord` type to specify the o-point in the constructor.
 
 ### Deprecated
 
