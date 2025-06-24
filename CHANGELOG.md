@@ -15,12 +15,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fix uninitialized warning in the `Tensor` class.
 - Fix unused `m_magnetic_field` variable in `MaxwellianEquilibrium` class.
+- Fix break points incorrectly labelled as knots.
 
 ### Changed
 
 - Change the interface of `IVlasovSolver` and `IQNSolver` in `geometryXYVxVy` to store the electric field in a `VectorField`.
 - Integration of `ddc::StridedDiscreteDomain` by making `IdxRangeSlice` a type alias.
 - The parameter `iter_start` has been removed from the constructor of `RestartInitialisation`.
+- Generalise `compute_coeffs_on_mapping` to work with any mapping.
 - Rely on GPU-aware MPI to allow GPU-direct MPI for `MPITransposeAllToAll`.
 
 ### Deprecated

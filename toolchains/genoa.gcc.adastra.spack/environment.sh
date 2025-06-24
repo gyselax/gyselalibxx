@@ -1,34 +1,58 @@
-ENVIRONMENT_ROOT_DIRECTORY="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)"
-
-module purge
-
-module load cpe/24.07
-module load craype-x86-genoa
-module load PrgEnv-gnu
-
-module load cray-fftw
-module load cray-hdf5-parallel
-module load cray-python
+#!/bin/bash
 
 SPACK_USER_VERSION="spack-user-4.0.0"
 
 export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-GENOA/Configuration.${SPACK_USER_VERSION}"
-module use "${SPACK_USER_PREFIX}/modules/tcl/linux-rhel8-zen4"
+export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
 
-module load \
-    cmake \
-    gcc/13.2.1.genoa/zen4/libyaml \
-    gcc/13.2.1.genoa/zen4/paraconf \
-    gcc/13.2.1.genoa/zen4/pdi \
-    gcc/13.2.1.genoa/zen4/pdiplugin-decl-hdf5 \
-    gcc/13.2.1.genoa/zen4/pdiplugin-mpi \
-    gcc/13.2.1.genoa/zen4/pdiplugin-set-value \
-    gcc/13.2.1.genoa/zen4/pdiplugin-trace \
-    gcc/13.2.1.genoa/zen4/ginkgo \
-    gcc/13.2.1.genoa/zen4/eigen \
-    gcc/13.2.1.genoa/zen4/ninja \
-    gcc/13.2.1.genoa/zen4/py-matplotlib \
-    gcc/13.2.1.genoa/zen4/py-xarray \
-    gcc/13.2.1.genoa/zen4/py-h5py
+module purge
+
+module load "${SPACK_USER_VERSION}"
+which spack
+spack debug report
+# Spack must work in a clean, purged environment so it can load modules without
+# having to purge itself or clearing environment variables (which it does not
+# do..). When we spack env activate, the same constraint applies.
+# Use spack load instead of an environment activation as it should limit the
+# inode produced by the environment's view.
+# eval -- "$(spack env activate --prompt --sh gyselalibxx-spack-environment)"
+# unalias despacktivate
+# unset despacktivate
+# function despacktivate() {
+#     eval "$(spack env deactivate --sh)"
+# }
+
+eval -- "$(
+    spack \
+        --env gyselalibxx-spack-environment \
+        load --sh \
+        cmake \
+        fftw \
+        ginkgo \
+        googletest \
+        ninja \
+        paraconf \
+        pdi \
+        pdiplugin-decl-hdf5 \
+        pdiplugin-decl-netcdf \
+        pdiplugin-mpi \
+        pdiplugin-set-value \
+        pdiplugin-trace \
+        python \
+        py-dask \
+        py-h5py \
+        py-imageio \
+        py-matplotlib \
+        py-netcdf4 \
+        py-numpy \
+        py-scipy \
+        py-sympy \
+        py-xarray \
+        py-pyyaml
+)"
+
+module load cpe/24.07
+module load craype-x86-genoa
+module load PrgEnv-gnu
 
 module list
