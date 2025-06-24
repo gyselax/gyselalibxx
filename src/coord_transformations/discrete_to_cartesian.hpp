@@ -390,9 +390,9 @@ public:
      *
      *
      * @param[in] exec_space
-     * 			The number of the control point.
-     *
-     * @return The el-th control point.
+     *          The execution space where the calculation should be carried out.
+     * @param[out] pts
+     *          The control points of the mapping.
      *
      * @see GrevilleInterpolationPoints
      * @see KnotsAsInterpolationPoints
