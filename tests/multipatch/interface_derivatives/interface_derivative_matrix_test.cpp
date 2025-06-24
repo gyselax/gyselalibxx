@@ -22,6 +22,7 @@
 #include "mesh_builder.hpp"
 #include "non_uniform_interpolation_points.hpp"
 #include "single_interface_derivatives_calculator.hpp"
+#include "interface_derivatives_test_utils.hpp"
 
 
 /*
@@ -34,7 +35,6 @@
 namespace {
 // Multi-patch ---
 using namespace periodic_strips_non_uniform_2d_9patches;
-// using namespace onion_shape_non_uniform_2d_global;
 
 // Equivalent global mesh ---
 struct Xg
@@ -120,66 +120,68 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         ddc::ConstantExtrapolationRule<Yg, Xg>>;
 
 
-/**
- *  @brief Get interpolation points from the break points by placing 
- * the interpolation points on the break points and adding one on the
- * left boundary cell at 2/3 of the cell. 
- */
-template <class CoordType>
-std::vector<CoordType> get_interpolation_points_add_one_on_left(
-        std::vector<CoordType> const& break_points)
-{
-    CoordType additional_point(break_points[0] * 2. / 3. + break_points[1] * 1. / 3.);
-    std::vector<CoordType> interpolation_points(break_points);
-    interpolation_points.insert(interpolation_points.begin() + 1, additional_point);
-    return interpolation_points;
-}
+// TODO: Add the functions defined here in another file. 
 
-/**
- *  @brief Get interpolation points from the break points by placing 
- * the interpolation points on the break points and adding one on the
- * right boundary cell at 1/3 of the cell. 
- */
-template <class CoordType>
-std::vector<CoordType> get_interpolation_points_add_one_on_right(
-        std::vector<CoordType> const& break_points)
-{
-    int n_bpoints = break_points.size();
-    CoordType additional_point(
-            break_points[n_bpoints - 1] * 2. / 3. + break_points[n_bpoints - 2] * 1. / 3.);
-    std::vector<CoordType> interpolation_points(break_points);
-    interpolation_points.insert(interpolation_points.end() - 1, additional_point);
-    return interpolation_points;
-}
+// /**
+//  *  @brief Get interpolation points from the break points by placing 
+//  * the interpolation points on the break points and adding one on the
+//  * left boundary cell at 2/3 of the cell. 
+//  */
+// template <class CoordType>
+// std::vector<CoordType> get_interpolation_points_add_one_on_left(
+//         std::vector<CoordType> const& break_points)
+// {
+//     CoordType additional_point(break_points[0] * 2. / 3. + break_points[1] * 1. / 3.);
+//     std::vector<CoordType> interpolation_points(break_points);
+//     interpolation_points.insert(interpolation_points.begin() + 1, additional_point);
+//     return interpolation_points;
+// }
 
-/**
- * @brief Fill in a vector of points for the equivalent global mesh 
- * by conserving the same order of the given points.
- */
-template <class CoordTypeG, class CoordTypeP>
-void fill_in(std::vector<CoordTypeG>& points_global, std::vector<CoordTypeP> const& points_patch)
-{
-    for (CoordTypeP pt : points_patch) {
-        points_global.push_back(CoordTypeG {double(pt)});
-    }
-}
+// /**
+//  *  @brief Get interpolation points from the break points by placing 
+//  * the interpolation points on the break points and adding one on the
+//  * right boundary cell at 1/3 of the cell. 
+//  */
+// template <class CoordType>
+// std::vector<CoordType> get_interpolation_points_add_one_on_right(
+//         std::vector<CoordType> const& break_points)
+// {
+//     int n_bpoints = break_points.size();
+//     CoordType additional_point(
+//             break_points[n_bpoints - 1] * 2. / 3. + break_points[n_bpoints - 2] * 1. / 3.);
+//     std::vector<CoordType> interpolation_points(break_points);
+//     interpolation_points.insert(interpolation_points.end() - 1, additional_point);
+//     return interpolation_points;
+// }
 
-/**
- * @brief Fill in a vector of points for the equivalent global mesh
- *  by reversing the order of the given points.
- */
-template <class CoordTypeG, class CoordTypeP>
-void fill_in_reverse(
-        std::vector<CoordTypeG>& points_global,
-        std::vector<CoordTypeP> const& points_patch)
-{
-    std::size_t const n_pt = points_patch.size();
-    CoordTypeP const max = points_patch[n_pt - 1];
-    CoordTypeP const min = points_patch[0];
-    for (int i(0); i < n_pt; ++i) {
-        points_global.push_back(CoordTypeG {double(min + max - points_patch[n_pt - 1 - i])});
-    }
-}
+// /**
+//  * @brief Fill in a vector of points for the equivalent global mesh 
+//  * by conserving the same order of the given points.
+//  */
+// template <class CoordTypeG, class CoordTypeP>
+// void fill_in(std::vector<CoordTypeG>& points_global, std::vector<CoordTypeP> const& points_patch)
+// {
+//     for (CoordTypeP pt : points_patch) {
+//         points_global.push_back(CoordTypeG {double(pt)});
+//     }
+// }
+
+// /**
+//  * @brief Fill in a vector of points for the equivalent global mesh
+//  *  by reversing the order of the given points.
+//  */
+// template <class CoordTypeG, class CoordTypeP>
+// void fill_in_reverse(
+//         std::vector<CoordTypeG>& points_global,
+//         std::vector<CoordTypeP> const& points_patch)
+// {
+//     std::size_t const n_pt = points_patch.size();
+//     CoordTypeP const max = points_patch[n_pt - 1];
+//     CoordTypeP const min = points_patch[0];
+//     for (int i(0); i < n_pt; ++i) {
+//         points_global.push_back(CoordTypeG {double(min + max - points_patch[n_pt - 1 - i])});
+//     }
+// }
 
 /// @brief Initialise the function with f(r,theta) = r(3-r)sin(theta).
 template <class Grid1, class Grid2>
@@ -496,126 +498,6 @@ public:
 
 
     // TEST OPERATORS ----------------------------------------------------------------------------
-    /**
-     * @brief Check that the computed interface derivatives match with the equivalent global spline
-     * derivatives for the exact formula. 
-     * Check that error of the computed interface derivatives with respect to the equivalent global 
-     * spline derivatives for the approximation are smaller than a given bound.
-     * Test with different number of cells. 
-     */
-    //     void check_exact_and_approximation(
-    //             int const n_cells,
-    //             double const approximation_error_bound,
-    //             host_t<DField<Patch1::IdxRange12>> const& function_1,
-    //             host_t<DField<Patch2::IdxRange12>> const& function_2,
-    //             SplineRThetagEvaluator const& evaluator_g,
-    //             host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
-    //             EdgeTransformation<Interface_1_2> const& idx_convertor_12)
-    //     {
-    //         std::size_t n_points_1 = Kokkos::min(n_cells + 1, int(x1_ncells.value()));
-    //         std::size_t n_points_2 = Kokkos::min(n_cells + 1, int(y2_ncells.value()));
-    //         // --- select the cells in patch 1
-    //         Patch1::IdxRange1 reduced_idx_range_perp1;
-    //         if constexpr (std::is_same_v<Edge1, EastEdge1>) {
-    //             reduced_idx_range_perp1 = idx_range_r1.take_last(Patch1::IdxStep1(n_points_1));
-    //         } else if (std::is_same_v<Edge1, WestEdge1>) {
-    //             reduced_idx_range_perp1 = idx_range_r1.take_first(Patch1::IdxStep1(n_points_1));
-    //         }
-
-    //         // --- select the cells in patch 2
-    //         using IdxRangePerp2 = std::conditional_t<
-    //                 std::is_same_v<Edge2, SouthEdge2>,
-    //                 Patch2::IdxRange2,
-    //                 Patch2::IdxRange1>;
-    //         IdxRangePerp2 reduced_idx_range_perp2;
-    //         if constexpr (std::is_same_v<Edge2, EastEdge2>) {
-    //             reduced_idx_range_perp2 = idx_range_eta2.take_last(Patch2::IdxStep1(n_points_2));
-    //         } else if constexpr (std::is_same_v<Edge2, WestEdge2>) {
-    //             reduced_idx_range_perp2 = idx_range_eta2.take_first(Patch2::IdxStep1(n_points_2));
-    //         } else if constexpr (std::is_same_v<Edge2, SouthEdge2>) {
-    //             reduced_idx_range_perp2 = idx_range_xi2.take_first(Patch2::IdxStep2(n_points_2));
-    //         }
-
-    //         SingleInterfaceDerivativesCalculator<Interface_1_2> const
-    //                 derivatives_calculator(reduced_idx_range_perp1, reduced_idx_range_perp2);
-
-    //         // Coefficients a and b
-    //         double const coeff_deriv_patch_1 = derivatives_calculator.get_coeff_deriv_patch_1();
-    //         double const coeff_deriv_patch_2 = derivatives_calculator.get_coeff_deriv_patch_2();
-
-    //         EXPECT_EQ(
-    //                 coeff_deriv_patch_1,
-    //                 derivatives_calculator.template get_coeff_deriv_on_patch<Patch1>());
-    //         EXPECT_EQ(
-    //                 coeff_deriv_patch_2,
-    //                 derivatives_calculator.template get_coeff_deriv_on_patch<Patch2>());
-
-    //         using IdxPar2
-    //                 = std::conditional_t<std::is_same_v<Edge2, SouthEdge2>, Patch2::Idx1, Patch2::Idx2>;
-
-    //         ddc::for_each(idx_range_theta1, [&](Patch1::Idx2 const& idx_par_1) {
-    //             IdxPar2 idx_par_2 = idx_convertor_12(idx_par_1);
-
-    //             // Coordinates to evaluate the derivative of the equivalent global spline.
-    //             // --- coordinate of the boundary on the patch 1 (left of the interface)
-    //             double coord_theta;
-    //             Coord<Rg, Thetag> interface_minus_coord;
-    //             if constexpr (std::is_same_v<Edge1, EastEdge1>) {
-    //                 coord_theta = double(ddc::coordinate(idx_par_1));
-    //                 interface_minus_coord = Coord<Rg, Thetag>(
-    //                         double(ddc::coordinate(reduced_idx_range_perp1.front())),
-    //                         coord_theta);
-    //             } else if (std::is_same_v<Edge1, WestEdge1>) {
-    //                 coord_theta = double(theta1_max - ddc::coordinate(idx_par_1));
-    //                 interface_minus_coord = Coord<Rg, Thetag>(
-    //                         double(r1_max - ddc::coordinate(reduced_idx_range_perp1.back())),
-    //                         coord_theta);
-    //             }
-
-    //             // --- coordinate at the interface
-    //             Coord<Rg, Thetag> interface_coord(double(r1_max), coord_theta);
-
-    //             // --- coordinate of the boundary on the patch 2 (right of the interface)
-    //             Coord<Rg, Thetag> interface_plus_coord;
-    //             if constexpr (std::is_same_v<Edge2, EastEdge2>) {
-    //                 interface_plus_coord = Coord<Rg, Thetag>(
-    //                         double(eta2_max - ddc::coordinate(reduced_idx_range_perp2.front())
-    //                                + r1_max),
-    //                         coord_theta);
-    //             } else if (std::is_same_v<Edge2, WestEdge2>) {
-    //                 interface_plus_coord = Coord<Rg, Thetag>(
-    //                         double(ddc::coordinate(reduced_idx_range_perp2.back())),
-    //                         coord_theta);
-    //             } else if (std::is_same_v<Edge2, SouthEdge2>) {
-    //                 interface_plus_coord = Coord<Rg, Thetag>(
-    //                         double(ddc::coordinate(reduced_idx_range_perp2.back()) / xi2_max)
-    //                                 + double(r1_max),
-    //                         coord_theta);
-    //             }
-
-    //             // Coefficient c
-    //             double sum_values = derivatives_calculator.get_function_coefficients(
-    //                     get_const_field(function_1[idx_par_1][reduced_idx_range_perp1]),
-    //                     get_const_field(function_2[idx_par_2][reduced_idx_range_perp2]));
-
-    //             double global_deriv
-    //                     = evaluator_g.deriv_dim_1(interface_coord, get_const_field(function_g_coef));
-
-    //             // Exact formula ---------------------------------------------------------------------
-    //             double const deriv_patch_1
-    //                     = evaluator_g
-    //                               .deriv_dim_1(interface_minus_coord, get_const_field(function_g_coef));
-    //             double const deriv_patch_2
-    //                     = evaluator_g
-    //                               .deriv_dim_1(interface_plus_coord, get_const_field(function_g_coef));
-    //             double const local_deriv = sum_values + coeff_deriv_patch_1 * deriv_patch_1
-    //                                        + coeff_deriv_patch_2 * deriv_patch_2;
-    //             EXPECT_NEAR(local_deriv, global_deriv, 5e-13);
-
-    //             // Approximation ---------------------------------------------------------------------
-    //             EXPECT_NEAR(sum_values, global_deriv, approximation_error_bound);
-    //         });
-    //     };
 };
 
 } // end namespace
@@ -750,35 +632,35 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
     // SingleInterfaceDerivativesCalculators along x.
     SingleInterfaceDerivativesCalculator<
             Interface_1_4,
-            ddc::BoundCond::HERMITE,
-            ddc::BoundCond::GREVILLE> const derivatives_calculator_1_4(idx_range_xy1, idx_range_xy4);
+            ddc::BoundCond::GREVILLE,
+            ddc::BoundCond::HERMITE> const derivatives_calculator_1_4(idx_range_xy1, idx_range_xy4);
 
     SingleInterfaceDerivativesCalculator<
             Interface_4_7,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::HERMITE> const
+            ddc::BoundCond::HERMITE,
+            ddc::BoundCond::GREVILLE> const
             derivatives_calculator_4_7(idx_range_xy4, idx_range_xy7);
 
     SingleInterfaceDerivativesCalculator<
             Interface_2_5,
-            ddc::BoundCond::HERMITE,
-            ddc::BoundCond::GREVILLE> const derivatives_calculator_2_5(idx_range_xy2, idx_range_xy5);
+            ddc::BoundCond::GREVILLE,
+            ddc::BoundCond::HERMITE> const derivatives_calculator_2_5(idx_range_xy2, idx_range_xy5);
 
     SingleInterfaceDerivativesCalculator<
             Interface_5_8,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::HERMITE> const
+            ddc::BoundCond::HERMITE,
+            ddc::BoundCond::GREVILLE> const
             derivatives_calculator_5_8(idx_range_xy5, idx_range_xy8);
 
     SingleInterfaceDerivativesCalculator<
             Interface_3_6,
-            ddc::BoundCond::HERMITE,
-            ddc::BoundCond::GREVILLE> const derivatives_calculator_3_6(idx_range_xy3, idx_range_xy6);
+            ddc::BoundCond::GREVILLE,
+            ddc::BoundCond::HERMITE> const derivatives_calculator_3_6(idx_range_xy3, idx_range_xy6);
 
     SingleInterfaceDerivativesCalculator<
             Interface_6_9,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::HERMITE> const
+            ddc::BoundCond::HERMITE,
+            ddc::BoundCond::GREVILLE> const
             derivatives_calculator_6_9(idx_range_xy6, idx_range_xy9);
 
 
@@ -814,7 +696,7 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
     MultipatchType<IdxRangeOnPatch, Patch3, Patch6, Patch9>
             idx_ranges_369(idx_range_xy3, idx_range_xy6, idx_range_xy9);
 
-            
+
     // Define the matrix calculators.
     InterfaceDerivativeMatrix<
             Connectivity,
@@ -902,6 +784,8 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             Patch6,
             Patch9>
             matrix_369(idx_ranges_369, derivative_calculators_369);
+
+
 
     // using interface_collection =
     //         typename Connectivity::get_all_interfaces_along_direction_t<GridX<1>>;

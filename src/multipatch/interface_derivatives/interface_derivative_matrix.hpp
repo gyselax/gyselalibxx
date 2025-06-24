@@ -18,25 +18,25 @@
 #include "types.hpp"
 
 /**
- * TODO: 
- *  - How does it work? 
+ * TODO:
+ *  - How does it work?
  *      - Constructor
- *          - Take a list of "parallel" interfaces. 
+ *          - Take a list of "parallel" interfaces.
  *          - For each "conforming" lines, get the coefficients a and b.
- *          - Fill in the matrix. 
+ *          - Fill in the matrix.
  *      - operator()
- *          - get the coefficient c. 
- *          - Fill in the vector. 
+ *          - get the coefficient c.
+ *          - Fill in the vector.
  *          - Inverse the matrix system. (See how it is done in the SplineBuilder.)
- *          - update derivatives. How to assert values? 
- * 
- *  - Remarks: 
- *      - Should we restrain to the conforming case first? 
- *      - And then the non-conforming case in another operator? 
- *      - Treat only "one block line/direction"? 
- *      - And build another operator to manage the whole geometry? 
- *      - Including treatment for T-joints? 
- *      - Deal with periodic case here or in another operator? 
+ *          - update derivatives. How to assert values?
+ *
+ *  - Remarks:
+ *      - Should we restrain to the conforming case first?
+ *      - And then the non-conforming case in another operator?
+ *      - Treat only "one block line/direction"?
+ *      - And build another operator to manage the whole geometry?
+ *      - Including treatment for T-joints?
+ *      - Deal with periodic case here or in another operator?
  */
 
 template <
@@ -53,7 +53,7 @@ template <
         class... Patches>
 class InterfaceDerivativeMatrix
 {
-    // using interface_collection = typename Connectivity::interface_collection; // TypeSeq
+    using all_interface_collection = typename Connectivity::interface_collection; // TypeSeq
     using interface_collection =
             typename Connectivity::get_all_interfaces_along_direction_t<Grid1D>;
 
@@ -121,88 +121,15 @@ class InterfaceDerivativeMatrix
         using type = std::tuple<T<Interfaces> const&...>;
     };
 
+
+    // Get the type of the interface given to define the Connectivity class.
+    template <typename CurrentInterface>
+    using get_equivalent_interface_t = find_associated_interface_t<
+            typename CurrentInterface::Edge1,
+            all_interface_collection>;
+
+
     // Get a tuple of SingleInterfaceDerivativesCalculator from an Interface collection.
-    // template <class Interface>
-    // struct get_deriv_calculator;
-
-    // template <class Interface>
-    // struct get_deriv_calculator // <Interface, InterfaceCollection>
-    // {
-    //     using type = SingleInterfaceDerivativesCalculator<Interface>;
-    // };
-
-    // // template <
-    // //         class Interface,
-    // //         // class InterfaceCollection,
-    // //         class = std::enable_if_t<
-    // //                 std::is_same_v<Interface, ddc::type_seq_element_t<0, inner_interface_collection>>,
-    // //                 bool>>
-    // template <>
-    // struct get_deriv_calculator<ddc::type_seq_element_t<0, inner_interface_collection>>
-    // {
-    //     using Interface = ddc::type_seq_element_t<0, inner_interface_collection>;
-    //     using type = SingleInterfaceDerivativesCalculator<
-    //             Interface,
-    //             LowerBound,
-    //             ddc::BoundCond::HERMITE>;
-    // };
-
-    // // template <
-    // //         class Interface,
-    // //         // class InterfaceCollection,
-    // //         class = std::enable_if_t<
-    // //                 std::is_same_v<
-    // //                         Interface,
-    // //                         ddc::type_seq_element_t<
-    // //                                 ddc::type_seq_size_v<inner_interface_collection> - 1,
-    // //                                 inner_interface_collection>>,
-    // //                 bool>>
-    // template <>
-    // struct get_deriv_calculator<ddc::type_seq_element_t<
-    //         ddc::type_seq_size_v<inner_interface_collection> - 1,
-    //         inner_interface_collection>> // <
-    // //         ddc::type_seq_element_t<
-    // //                 ddc::type_seq_size_v<InterfaceCollection> - 1,
-    // //                 InterfaceCollection>,
-    // //         InterfaceCollection>
-    // {
-    //     using Interface = ddc::type_seq_element_t<
-    //             ddc::type_seq_size_v<inner_interface_collection> - 1,
-    //             inner_interface_collection>;
-    //     using type = SingleInterfaceDerivativesCalculator<
-    //             Interface,
-    //             ddc::BoundCond::HERMITE,
-    //             UpperBound>;
-    // };
-
-    // template <class Interface>
-    // struct get_deriv_calculator // <Interface, InterfaceCollection>
-    // {
-    //     using type = SingleInterfaceDerivativesCalculator<Interface>;
-    // };
-
-    // {
-    //     std::size_t nb_interface = ddc::type_seq_size_v<InterfaceCollection>;
-
-    //     if constexpr (std::is_same_v<Interface, ddc::type_seq_element_t<0, InterfaceCollection>>) {
-    //         using type = SingleInterfaceDerivativesCalculator<
-    //                 Interface,
-    //                 LowerBound,
-    //                 ddc::BoundCond::HERMITE>;
-    //     } else if (std::is_same_v<
-    //                        Interface,
-    //                        ddc::type_seq_element_t<nb_interface - 1, InterfaceCollection>>) {
-    //         using type = SingleInterfaceDerivativesCalculator<
-    //                 Interface,
-    //                 ddc::BoundCond::HERMITE,
-    //                 UpperBound>;
-    //     } else {
-    //         using type = SingleInterfaceDerivativesCalculator<Interface>;
-    //     }
-    // }
-
-
-
     template <bool is_periodic, typename InterfaceCollection>
     struct get_tuple_deriv_calculator;
 
@@ -210,10 +137,9 @@ class InterfaceDerivativeMatrix
     struct get_tuple_deriv_calculator<true, ddc::detail::TypeSeq<Interfaces...>>
     {
         using InterfaceCollection = ddc::detail::TypeSeq<Interfaces...>;
-        using type = std::tuple<SingleInterfaceDerivativesCalculator<Interfaces> const&...>;
+        using type = std::tuple<SingleInterfaceDerivativesCalculator<
+                get_equivalent_interface_t<Interfaces>> const&...>;
     };
-
-
 
     template <class... Interfaces>
     struct get_tuple_deriv_calculator<false, ddc::detail::TypeSeq<Interfaces...>>
@@ -225,40 +151,49 @@ class InterfaceDerivativeMatrix
                 ddc::type_seq_size_v<InterfaceCollection> - 1,
                 InterfaceCollection>;
 
+        using EquivalentFirstInterface = get_equivalent_interface_t<FirstInterface>;
+        using EquivalentLastInterface = get_equivalent_interface_t<LastInterface>;
+
+        static constexpr bool is_first_interface_same_orientation
+                = std::is_same_v<FirstInterface, EquivalentFirstInterface>;
+        static constexpr bool is_last_interface_same_orientation
+                = std::is_same_v<LastInterface, EquivalentLastInterface>;
+
         using inner_inner_interface_collection = ddc::type_seq_remove_t<
                 InterfaceCollection,
                 ddc::detail::TypeSeq<FirstInterface, LastInterface>>;
 
 
-        using inner_deriv_calculators
-                = typename get_tuple_deriv_calculator<true, inner_inner_interface_collection>::type;
+        using inner_deriv_calculators =
+                typename get_tuple_deriv_calculator<true, inner_inner_interface_collection>::type;
 
+        using first_deriv_calculator = std::conditional_t<
+                is_first_interface_same_orientation,
+                std::tuple<SingleInterfaceDerivativesCalculator<
+                        FirstInterface,
+                        LowerBound,
+                        ddc::BoundCond::HERMITE> const&>,
+                std::tuple<SingleInterfaceDerivativesCalculator<
+                        EquivalentFirstInterface,
+                        ddc::BoundCond::HERMITE,
+                        LowerBound> const&>>;
 
-        // using FirstInterface = ddc::type_seq_element_t<0, inner_interface_collection>;
-        // using LastInterface = ddc::type_seq_element_t<
-        //         ddc::type_seq_size_v<inner_interface_collection> - 1,
-        //         inner_interface_collection>;
-
-        using first_deriv_calculator = std::tuple<SingleInterfaceDerivativesCalculator<
-                FirstInterface,
-                LowerBound,
-                ddc::BoundCond::HERMITE> const&>;
-        using last_deriv_calculator = std::tuple<SingleInterfaceDerivativesCalculator<
-                LastInterface,
-                ddc::BoundCond::HERMITE,
-                UpperBound> const&>;
+        using last_deriv_calculator = std::conditional_t<
+                is_last_interface_same_orientation,
+                std::tuple<SingleInterfaceDerivativesCalculator<
+                        LastInterface,
+                        ddc::BoundCond::HERMITE,
+                        UpperBound> const&>,
+                std::tuple<SingleInterfaceDerivativesCalculator<
+                        EquivalentLastInterface,
+                        UpperBound,
+                        ddc::BoundCond::HERMITE> const&>>;
 
         using type = decltype(std::tuple_cat(
                 std::declval<first_deriv_calculator>(),
                 std::declval<inner_deriv_calculators>(),
                 std::declval<last_deriv_calculator>()));
     };
-
-
-
-    // template <class... Interfaces>
-    // using get_tuple_deriv_calculator_t =
-    //         typename get_tuple_deriv_calculator<ddc::detail::TypeSeq<Interfaces...>>::type;
 
     template <typename InterfaceTypSeq>
     using get_tuple_deriv_calculator_t =
@@ -268,7 +203,6 @@ class InterfaceDerivativeMatrix
 
     // ===========================================================================================
 
-    // static constexpr std::size_t n_interfaces = ddc::type_seq_size_v<interface_collection>;
     static constexpr std::size_t n_inner_interfaces
             = ddc::type_seq_size_v<inner_interface_collection>;
     // static constexpr std::size_t n_values = n_inner_interfaces * 3 - 2; // TODO: if periodic, we do remove 2.
@@ -697,9 +631,9 @@ private:
         OIdx2 slice_idx_2;
         /*
             If function is defined on the same index range than the ones given,
-            then it corresponds to the values of the function we are working on. 
-            Otherwise, it corresponds to the first derivatives of the function 
-            we are working. The operator is applied to compute the cross-derivatives. 
+            then it corresponds to the values of the function we are working on.
+            Otherwise, it corresponds to the first derivatives of the function
+            we are working. The operator is applied to compute the cross-derivatives.
         */
         if constexpr (std::is_same_v<
                               decltype(idx_range_parell_1),

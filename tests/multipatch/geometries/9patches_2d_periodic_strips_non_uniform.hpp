@@ -169,13 +169,13 @@ using NorthInterface1 = Interface<NorthEdge<1>, OutsideEdge, true>;
 using NorthInterface2 = Interface<NorthEdge<2>, OutsideEdge, true>;
 using NorthInterface3 = Interface<NorthEdge<3>, OutsideEdge, true>;
 
-using Interface_1_4 = Interface<NorthEdge<4>, SouthEdge<1>, true>;
-using Interface_2_5 = Interface<NorthEdge<5>, SouthEdge<2>, true>;
-using Interface_3_6 = Interface<NorthEdge<6>, SouthEdge<3>, true>;
+using Interface_1_4 = Interface<SouthEdge<1>, NorthEdge<4>, true>;
+using Interface_2_5 = Interface<SouthEdge<2>, NorthEdge<5>, true>;
+using Interface_3_6 = Interface<SouthEdge<3>, NorthEdge<6>, true>;
 
-using Interface_4_7 = Interface<NorthEdge<7>, SouthEdge<4>, true>;
-using Interface_5_8 = Interface<NorthEdge<8>, SouthEdge<5>, true>;
-using Interface_6_9 = Interface<NorthEdge<9>, SouthEdge<6>, true>;
+using Interface_4_7 = Interface<SouthEdge<4>, NorthEdge<7>, true>;
+using Interface_5_8 = Interface<SouthEdge<5>, NorthEdge<8>, true>;
+using Interface_6_9 = Interface<SouthEdge<6>, NorthEdge<9>, true>;
 
 using SouthInterface7 = Interface<OutsideEdge, SouthEdge<7>, true>;
 using SouthInterface8 = Interface<OutsideEdge, SouthEdge<8>, true>;
@@ -190,9 +190,9 @@ using Interface_2_3 = Interface<EastEdge<2>, WestEdge<3>, true>;
 using Interface_5_6 = Interface<EastEdge<5>, WestEdge<6>, true>;
 using Interface_8_9 = Interface<EastEdge<8>, WestEdge<9>, true>;
 
-using Interface_3_1 = Interface<EastEdge<3>, WestEdge<1>, true>;
-using Interface_6_4 = Interface<EastEdge<6>, WestEdge<4>, true>;
-using Interface_9_7 = Interface<EastEdge<9>, WestEdge<7>, true>;
+using Interface_3_1 = Interface<WestEdge<1>, EastEdge<3>, true>;
+using Interface_6_4 = Interface<WestEdge<4>, EastEdge<6>, true>;
+using Interface_9_7 = Interface<WestEdge<7>, EastEdge<9>, true>;
 
 
 // CONNECTIVITY ----------------------------------------------------------------------------------
@@ -219,4 +219,4 @@ using Connectivity = MultipatchConnectivity<
         Interface_6_4,
         Interface_9_7>;
 
-} // namespace periodic_strips_uniform_2d_9patches
+} // namespace periodic_strips_non_uniform_2d_9patches
