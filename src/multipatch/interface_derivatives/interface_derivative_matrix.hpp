@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include <Eigen>
+// #include <Eigen>
 
 #include <ddc/ddc.hpp>
 
@@ -13,8 +13,8 @@
 #include "matching_idx_slice.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
-// #include "single_interface_derivatives_calculator.hpp"
-#include "geometry_descriptor.hpp"
+#include "single_interface_derivatives_calculator.hpp"
+// #include "geometry_descriptor.hpp"
 #include "types.hpp"
 
 /**
@@ -28,6 +28,7 @@
  *          - get the coefficient c. 
  *          - Fill in the vector. 
  *          - Inverse the matrix system. (See how it is done in the SplineBuilder.)
+ *          - update derivatives. How to assert values? 
  * 
  *  - Remarks: 
  *      - Should we restrain to the conforming case first? 
@@ -35,6 +36,7 @@
  *      - Treat only "one block line/direction"? 
  *      - And build another operator to manage the whole geometry? 
  *      - Including treatment for T-joints? 
+ *      - Deal with periodic case here or in another operator? 
  */
 
 template <
@@ -44,6 +46,7 @@ template <
         typename ValuesOnPatch,
         template <typename P>
         typename DerivsOnPatch,
+        bool PERIODIC,
         ddc::BoundCond LowerBound = ddc::BoundCond::HERMITE,
         ddc::BoundCond UpperBound = ddc::BoundCond::HERMITE,
         class ExecSpace = Kokkos::DefaultHostExecutionSpace,
@@ -53,13 +56,33 @@ class InterfaceDerivativeMatrix
     // using interface_collection = typename Connectivity::interface_collection; // TypeSeq
     using interface_collection =
             typename Connectivity::get_all_interfaces_along_direction_t<Grid1D>;
+
     using all_patches = typename Connectivity::all_patches; // TypeSeq
-    using grid_collection = collect_grids_on_dim_t<Grid1D>;
+
+    // using grid_collection = collect_grids_on_dim_t<Patch1, Grid1D, interface_collection>;
 
     // TODO: remove Interfaces with OutsideEdge
-    using inner_interface_collection = ddc::detail::TypeSeq<
-            ddc::type_seq_element_t<8, interface_collection>,
-            ddc::type_seq_element_t<9, interface_collection>>;
+    // using inner_interface_collection = ddc::detail::TypeSeq<
+    //         ddc::type_seq_element_t<8, interface_collection>,
+    //         ddc::type_seq_element_t<9, interface_collection>>;
+
+    static constexpr std::size_t number_of_interfaces = ddc::type_seq_size_v<interface_collection>;
+
+    // Remove all the interfaces with an OutsideEdge.
+    using outer_interface_collection = std::conditional_t<
+            PERIODIC,
+            ddc::detail::TypeSeq<>,
+            ddc::detail::TypeSeq<
+                    ddc::type_seq_element_t<0, interface_collection>,
+                    ddc::type_seq_element_t<number_of_interfaces - 1, interface_collection>>>;
+
+    using inner_interface_collection
+            = ddc::type_seq_remove_t<interface_collection, outer_interface_collection>;
+
+    // using inner_inner_interface_collection = ddc::type_seq_remove_t<
+    //         ddc::type_seq_element_t<1, interface_collection>,
+    //         ddc::type_seq_element_t<number_of_interfaces - 2, interface_collection>,
+    //         inner_interface_collection>;
 
 
     // HELPFUL ALIASES ===========================================================================
@@ -99,40 +122,147 @@ class InterfaceDerivativeMatrix
     };
 
     // Get a tuple of SingleInterfaceDerivativesCalculator from an Interface collection.
-    template <typename InterfaceCollection>
+    // template <class Interface>
+    // struct get_deriv_calculator;
+
+    // template <class Interface>
+    // struct get_deriv_calculator // <Interface, InterfaceCollection>
+    // {
+    //     using type = SingleInterfaceDerivativesCalculator<Interface>;
+    // };
+
+    // // template <
+    // //         class Interface,
+    // //         // class InterfaceCollection,
+    // //         class = std::enable_if_t<
+    // //                 std::is_same_v<Interface, ddc::type_seq_element_t<0, inner_interface_collection>>,
+    // //                 bool>>
+    // template <>
+    // struct get_deriv_calculator<ddc::type_seq_element_t<0, inner_interface_collection>>
+    // {
+    //     using Interface = ddc::type_seq_element_t<0, inner_interface_collection>;
+    //     using type = SingleInterfaceDerivativesCalculator<
+    //             Interface,
+    //             LowerBound,
+    //             ddc::BoundCond::HERMITE>;
+    // };
+
+    // // template <
+    // //         class Interface,
+    // //         // class InterfaceCollection,
+    // //         class = std::enable_if_t<
+    // //                 std::is_same_v<
+    // //                         Interface,
+    // //                         ddc::type_seq_element_t<
+    // //                                 ddc::type_seq_size_v<inner_interface_collection> - 1,
+    // //                                 inner_interface_collection>>,
+    // //                 bool>>
+    // template <>
+    // struct get_deriv_calculator<ddc::type_seq_element_t<
+    //         ddc::type_seq_size_v<inner_interface_collection> - 1,
+    //         inner_interface_collection>> // <
+    // //         ddc::type_seq_element_t<
+    // //                 ddc::type_seq_size_v<InterfaceCollection> - 1,
+    // //                 InterfaceCollection>,
+    // //         InterfaceCollection>
+    // {
+    //     using Interface = ddc::type_seq_element_t<
+    //             ddc::type_seq_size_v<inner_interface_collection> - 1,
+    //             inner_interface_collection>;
+    //     using type = SingleInterfaceDerivativesCalculator<
+    //             Interface,
+    //             ddc::BoundCond::HERMITE,
+    //             UpperBound>;
+    // };
+
+    // template <class Interface>
+    // struct get_deriv_calculator // <Interface, InterfaceCollection>
+    // {
+    //     using type = SingleInterfaceDerivativesCalculator<Interface>;
+    // };
+
+    // {
+    //     std::size_t nb_interface = ddc::type_seq_size_v<InterfaceCollection>;
+
+    //     if constexpr (std::is_same_v<Interface, ddc::type_seq_element_t<0, InterfaceCollection>>) {
+    //         using type = SingleInterfaceDerivativesCalculator<
+    //                 Interface,
+    //                 LowerBound,
+    //                 ddc::BoundCond::HERMITE>;
+    //     } else if (std::is_same_v<
+    //                        Interface,
+    //                        ddc::type_seq_element_t<nb_interface - 1, InterfaceCollection>>) {
+    //         using type = SingleInterfaceDerivativesCalculator<
+    //                 Interface,
+    //                 ddc::BoundCond::HERMITE,
+    //                 UpperBound>;
+    //     } else {
+    //         using type = SingleInterfaceDerivativesCalculator<Interface>;
+    //     }
+    // }
+
+
+
+    template <bool is_periodic, typename InterfaceCollection>
     struct get_tuple_deriv_calculator;
 
     template <class... Interfaces>
-    struct get_tuple_deriv_calculator<ddc::detail::TypeSeq<Interfaces...>>
+    struct get_tuple_deriv_calculator<true, ddc::detail::TypeSeq<Interfaces...>>
     {
         using InterfaceCollection = ddc::detail::TypeSeq<Interfaces...>;
-        using type = std::tuple<get_deriv_calculator_t<Interfaces, InterfaceCollection> const&...>;
+        using type = std::tuple<SingleInterfaceDerivativesCalculator<Interfaces> const&...>;
     };
 
-    template <class... Interfaces>
-    using get_tuple_deriv_calculator_t
-            = get_tuple_deriv_calculator<ddc::detail::TypeSeq<Interfaces...>>::type;
 
-    template <class Interface, class InterfaceCollection>
-    struct get_deriv_calculator
+
+    template <class... Interfaces>
+    struct get_tuple_deriv_calculator<false, ddc::detail::TypeSeq<Interfaces...>>
     {
-        std::size_t nb_interface = ddc::type_seq_size_v<InterfaceCollection>;
-        if constexpr (std::is_same_v<Interface, ddc::type_seq_element_t<0, InterfaceCollection>>) {
-            using type = SingleInterfaceDerivativesCalculator<
-                    Interface,
-                    LowerBound,
-                    ddc::BoundCond::HERMITE>;
-        } else if (std::is_same_v<
-                           Interface,
-                           ddc::type_seq_element_t<nb_interface - 1, InterfaceCollection>>) {
-            using type = SingleInterfaceDerivativesCalculator<
-                    Interface,
-                    ddc::BoundCond::HERMITE,
-                    UpperBound>;
-        } else {
-            using type = SingleInterfaceDerivativesCalculator<Interface>;
-        }
-    }
+        using InterfaceCollection = ddc::detail::TypeSeq<Interfaces...>;
+
+        using FirstInterface = ddc::type_seq_element_t<0, InterfaceCollection>;
+        using LastInterface = ddc::type_seq_element_t<
+                ddc::type_seq_size_v<InterfaceCollection> - 1,
+                InterfaceCollection>;
+
+        using inner_inner_interface_collection = ddc::type_seq_remove_t<
+                InterfaceCollection,
+                ddc::detail::TypeSeq<FirstInterface, LastInterface>>;
+
+
+        using inner_deriv_calculators
+                = typename get_tuple_deriv_calculator<true, inner_inner_interface_collection>::type;
+
+
+        // using FirstInterface = ddc::type_seq_element_t<0, inner_interface_collection>;
+        // using LastInterface = ddc::type_seq_element_t<
+        //         ddc::type_seq_size_v<inner_interface_collection> - 1,
+        //         inner_interface_collection>;
+
+        using first_deriv_calculator = std::tuple<SingleInterfaceDerivativesCalculator<
+                FirstInterface,
+                LowerBound,
+                ddc::BoundCond::HERMITE> const&>;
+        using last_deriv_calculator = std::tuple<SingleInterfaceDerivativesCalculator<
+                LastInterface,
+                ddc::BoundCond::HERMITE,
+                UpperBound> const&>;
+
+        using type = decltype(std::tuple_cat(
+                std::declval<first_deriv_calculator>(),
+                std::declval<inner_deriv_calculators>(),
+                std::declval<last_deriv_calculator>()));
+    };
+
+
+
+    // template <class... Interfaces>
+    // using get_tuple_deriv_calculator_t =
+    //         typename get_tuple_deriv_calculator<ddc::detail::TypeSeq<Interfaces...>>::type;
+
+    template <typename InterfaceTypSeq>
+    using get_tuple_deriv_calculator_t =
+            typename get_tuple_deriv_calculator<PERIODIC, InterfaceTypSeq>::type;
 
 
 
@@ -180,6 +310,8 @@ private:
     //                 ddc::BoundCond::HERMITE,
     //                 UpperBound> const&>;
 
+
+    // WARNING, BE ABLE TO DEAL WITH DIFFERENT ORIENTATION INTERFACES.
     using SingleInterfaceDerivativesCalculatorTuple
             = get_tuple_deriv_calculator_t<inner_interface_collection>;
     SingleInterfaceDerivativesCalculatorTuple const& m_derivatives_calculators;
@@ -189,12 +321,12 @@ public:
 
     InterfaceDerivativeMatrix(
             MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-            SingleInterfaceDerivativesCalculatorTuple const& derivatives_calculators)
+            SingleInterfaceDerivativesCalculatorTuple const derivatives_calculators)
         : m_idx_ranges(idx_ranges)
         , m_derivatives_calculators(derivatives_calculators)
     {
-        const auto exec = gko::ReferenceExecutor::create() m_matrix
-                = gko::share(Matrix::create(exec, gko::dim<2>(n_inner_interfaces)));
+        const auto exec = gko::ReferenceExecutor::create();
+        m_matrix = gko::share(Matrix::create(exec, gko::dim<2>(n_inner_interfaces)));
 
         set_matrix(std::make_integer_sequence<std::size_t, n_inner_interfaces> {});
 
@@ -244,9 +376,9 @@ public:
             update_derivatives(
                     derivs_min,
                     derivs_max,
-                    derivs_at_interfaces,
+                    m_interface_derivatives,
                     function_values,
-                    idx,
+                    idx_par,
                     std::make_integer_sequence<std::size_t, n_inner_interfaces> {});
         });
     }
@@ -263,13 +395,13 @@ private:
     template <std::size_t I>
     void set_line_matrix()
     {
-        double coeff_right = std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_1();
-        double coeff_left = std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_2();
+        const double coeff_right = std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_1();
+        const double coeff_left = std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_2();
         const double coefs[] = {-coeff_left, 1, -coeff_right};
 
         for (auto dofs : {-1, 0, 1}) {
             if (0 <= I + dofs && I + dofs < n_inner_interfaces) {
-                matrix->at(I, I + dofs) = coefs[dofs + 1];
+                m_matrix->at(I, I + dofs) = coefs[dofs + 1];
             }
         }
     }
@@ -377,7 +509,7 @@ private:
                                                         ? derivs_min.template get<Patch1>()
                                                         : derivs_max.template get<Patch1>();
                 // Idx<ddc::Deriv<>>?
-                Idx<ddc::Deriv<PerpGrid1::continuous_dimension_type>> idx_first_deriv_1
+                Idx<ddc::Deriv<typename PerpGrid1::continuous_dimension_type>> idx_first_deriv_1
                         = ddc::remove_dims_of(get_idx_range(deriv_1), idx_range_fct_parell_1)
                                   .front();
 
@@ -397,7 +529,7 @@ private:
                 DerivsOnPatch<Patch2> deriv_2 = (extermity_2 == Extremity::BACK)
                                                         ? derivs_min.template get<Patch2>()
                                                         : derivs_max.template get<Patch2>();
-                Idx<ddc::Deriv<PerpGrid2::continuous_dimension_type>> idx_first_deriv_2
+                Idx<ddc::Deriv<typename PerpGrid2::continuous_dimension_type>> idx_first_deriv_2
                         = ddc::remove_dims_of(get_idx_range(deriv_2), idx_range_fct_parell_2)
                                   .front();
 
@@ -462,8 +594,8 @@ private:
         using PerpGrid1 = typename Interface::Edge1::perpendicular_grid;
         using PerpGrid2 = typename Interface::Edge2::perpendicular_grid;
 
-        using ParallGrid1 = typename Interface::Edge1::parallel_grid;
-        using ParallGrid2 = typename Interface::Edge2::parallel_grid;
+        // using ParallGrid1 = typename Interface::Edge1::parallel_grid;
+        // using ParallGrid2 = typename Interface::Edge2::parallel_grid;
 
         // Define all the different index ranges
         IdxRange<PerpGrid1> const idx_range_perp_1 = std::get<I>(sorted_idx_ranges_tuple);
@@ -501,9 +633,9 @@ private:
                                                 ? derivs_min.template get<Patch2>()
                                                 : derivs_max.template get<Patch2>();
 
-        Idx<ddc::Deriv<PerpGrid1::continuous_dimension_type>> idx_first_deriv_1
+        Idx<ddc::Deriv<typename PerpGrid1::continuous_dimension_type>> idx_first_deriv_1
                 = ddc::remove_dims_of(get_idx_range(deriv_1), idx_range_fct_parell_1).front();
-        Idx<ddc::Deriv<PerpGrid2::continuous_dimension_type>> idx_first_deriv_2
+        Idx<ddc::Deriv<typename PerpGrid2::continuous_dimension_type>> idx_first_deriv_2
                 = ddc::remove_dims_of(get_idx_range(deriv_2), idx_range_fct_parell_2).front();
 
 
@@ -577,7 +709,7 @@ private:
             slice_idx_1_value = (slice_idx_2 - idx_range_parell_2.front()).value();
 
         } else {
-            // Stay index for the first derivatives. 
+            // Stay index for the first derivatives.
             slice_idx_1 = OIdx1(1);
             slice_idx_2 = OIdx2(1);
         }
