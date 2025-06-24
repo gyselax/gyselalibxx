@@ -140,7 +140,7 @@ public:
             Field<Coord<X, Y>, IdxRangeRTheta> coord_centre_field
                     = get_field(coord_centre_field_alloc);
             using ExecSpace = typename SplineEvaluator::exec_space;
-            (*this)(ExecSpace(), coord_centre_field(idx));
+            (*this)(ExecSpace(), coord_centre_field);
             auto coord_centre_field_host = ddc::create_mirror_view_and_copy(coord_centre_field);
             m_o_point = coord_centre_field_host(idx_range_o_point.front());
         }
@@ -198,8 +198,8 @@ public:
     void operator()(ExecSpace exec_space, Field<Coord<X, Y>, IdxRange<GridR, GridTheta>> coords)
     {
         static_assert(Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible);
-        static_assert(std::is_same_v < R, typename GridR::continuous_dimension_type);
-        static_assert(std::is_same_v < Theta, typename GridTheta::continuous_dimension_type);
+        static_assert(std::is_same_v<R, typename GridR::continuous_dimension_type>);
+        static_assert(std::is_same_v<Theta, typename GridTheta::continuous_dimension_type>);
         ddc::parallel_for_each(
                 ExecSpace(),
                 get_idx_range(coords),
