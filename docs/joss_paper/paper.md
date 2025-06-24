@@ -117,7 +117,7 @@ The pre-existing GYSELA code [@grandgirard2016], written in Fortran, originally 
 This approach was shown to work well and allowed the study of many interesting physical phenomena [@Esteve2018;@Sarazin2021;@DifPradalier2022].
 However, expanding this code to use more complex mathematical methods such as non-uniform points (vital for handling the different magnitudes of physical quantities in the core and edge regions), and increasingly complex geometries (such as D-shape geometries, geometries including both open and closed field lines, X-points, and potentially stellarator geometries) has proved to be challenging and sometimes error-prone.
 These complexities are further amplified when trying to organise such a code for use on new GPU architectures, necessary for exascale simulations.
-This is a challenge shared by other gyrokinetic codes [@trilaksono2023].
+This is a challenge shared by other gyrokinetic codes [@trilaksono2025].
 
 In the case of GYSELA, the necessary changes would have required an effort comparable to a complete rewrite; whereas, actually performing such a rewrite brings additional benefits for design and portability.
 For example, we have been able to capitalise on C++'s strengths by using template programming to enforce the correctness of the implemented equations.
