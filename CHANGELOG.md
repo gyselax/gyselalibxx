@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Curvilinear coordinate change classes have an o-point method to retrieve the o-point in the non-curvilinear coordinates.
+- Add a batched `operator()` to `DiscreteToCartesian` allowing a field of coordinates to be converted.
 
 ### Fixed
 
