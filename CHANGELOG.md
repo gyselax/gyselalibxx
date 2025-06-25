@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix unused `m_magnetic_field` variable in `MaxwellianEquilibrium` class.
 - Fix break points incorrectly labelled as knots.
 - Fix environment in the CPU Spack toolchain.
+- Fix some floating point test comparisons in JacobianMatrixAndJacobianCoefficients/MatrixCzarMap
 
 ### Changed
 
