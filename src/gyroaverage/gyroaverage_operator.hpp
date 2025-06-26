@@ -30,6 +30,10 @@ template <
         class CoordinateTransformFunction>
 class GyroAverageOperator
 {
+    // FIXME
+    // Need to add a static assert to check evaluator is addmissible to builder
+    // using ddc::is_evaluator_admissible
+    // This will be available from DDC 0.9.0
     using ExecutionSpace = typename SplineRThetaBuilder::exec_space;
 
     using GridRminor = typename SplineRThetaBuilder::interpolation_discrete_dimension_type1;
@@ -38,8 +42,8 @@ class GyroAverageOperator
     using Rminor = typename GridRminor::continuous_dimension_type;
     using Theta = typename GridTheta::continuous_dimension_type;
 
-    using BSplinesRminor = typename SplineRThetaBuilder::builder_type1::bsplines_type;
-    using BSplinesTheta = typename SplineRThetaBuilder::builder_type2::bsplines_type;
+    using BSplinesRminor = typename SplineRThetaBuilder::bsplines_type1;
+    using BSplinesTheta = typename SplineRThetaBuilder::bsplines_type2;
 
 public:
     using IdxRangeRminor = IdxRange<GridRminor>;
