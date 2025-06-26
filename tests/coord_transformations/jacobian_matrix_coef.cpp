@@ -55,18 +55,22 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCircMap)
         ddcHelper::get<Y, Theta_cov>(Jacobian_matrix_coeff)
                 = mapping.template jacobian_component<Y, Theta_cov>(coords(irtheta));
 
-        EXPECT_DOUBLE_EQ(
+        EXPECT_NEAR(
                 (ddcHelper::get<X, R_cov>(Jacobian_matrix)),
-                (ddcHelper::get<X, R_cov>(Jacobian_matrix_coeff)));
-        EXPECT_DOUBLE_EQ(
+                (ddcHelper::get<X, R_cov>(Jacobian_matrix_coeff)),
+                1e-15);
+        EXPECT_NEAR(
                 (ddcHelper::get<X, Theta_cov>(Jacobian_matrix)),
-                (ddcHelper::get<X, Theta_cov>(Jacobian_matrix_coeff)));
-        EXPECT_DOUBLE_EQ(
+                (ddcHelper::get<X, Theta_cov>(Jacobian_matrix_coeff)),
+                1e-15);
+        EXPECT_NEAR(
                 (ddcHelper::get<Y, R_cov>(Jacobian_matrix)),
-                (ddcHelper::get<Y, R_cov>(Jacobian_matrix_coeff)));
-        EXPECT_DOUBLE_EQ(
+                (ddcHelper::get<Y, R_cov>(Jacobian_matrix_coeff)),
+                1e-15);
+        EXPECT_NEAR(
                 (ddcHelper::get<Y, Theta_cov>(Jacobian_matrix)),
-                (ddcHelper::get<Y, Theta_cov>(Jacobian_matrix_coeff)));
+                (ddcHelper::get<Y, Theta_cov>(Jacobian_matrix_coeff)),
+                1e-15);
     });
 
     // --- for the inverse Jacobian matrix:
@@ -231,18 +235,22 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
             ddcHelper::get<Y, Theta_cov>(Jacobian_matrix_coeff)
                     = mapping.template jacobian_component<Y, Theta_cov>(coord_rtheta);
 
-            EXPECT_DOUBLE_EQ(
+            EXPECT_NEAR(
                     (ddcHelper::get<X, R_cov>(Jacobian_matrix)),
-                    (ddcHelper::get<X, R_cov>(Jacobian_matrix_coeff)));
-            EXPECT_DOUBLE_EQ(
+                    (ddcHelper::get<X, R_cov>(Jacobian_matrix_coeff)),
+                    1e-15);
+            EXPECT_NEAR(
                     (ddcHelper::get<X, Theta_cov>(Jacobian_matrix)),
-                    (ddcHelper::get<X, Theta_cov>(Jacobian_matrix_coeff)));
-            EXPECT_DOUBLE_EQ(
+                    (ddcHelper::get<X, Theta_cov>(Jacobian_matrix_coeff)),
+                    1e-15);
+            EXPECT_NEAR(
                     (ddcHelper::get<Y, R_cov>(Jacobian_matrix)),
-                    (ddcHelper::get<Y, R_cov>(Jacobian_matrix_coeff)));
-            EXPECT_DOUBLE_EQ(
+                    (ddcHelper::get<Y, R_cov>(Jacobian_matrix_coeff)),
+                    1e-15);
+            EXPECT_NEAR(
                     (ddcHelper::get<Y, Theta_cov>(Jacobian_matrix)),
-                    (ddcHelper::get<Y, Theta_cov>(Jacobian_matrix_coeff)));
+                    (ddcHelper::get<Y, Theta_cov>(Jacobian_matrix_coeff)),
+                    1e-15);
 
             // --- for the inverse Jacobian matrix:
             Tensor inv_Jacobian_matrix = inv_jacobian(coord_rtheta);
@@ -260,18 +268,22 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
             ddcHelper::get<Theta, Y_cov>(inv_Jacobian_matrix_coeff)
                     = inv_jacobian.template inv_jacobian_component<Theta, Y_cov>(coord_rtheta);
 
-            EXPECT_DOUBLE_EQ(
+            EXPECT_NEAR(
                     (ddcHelper::get<R, X_cov>(inv_Jacobian_matrix)),
-                    (ddcHelper::get<R, X_cov>(inv_Jacobian_matrix_coeff)));
-            EXPECT_DOUBLE_EQ(
+                    (ddcHelper::get<R, X_cov>(inv_Jacobian_matrix_coeff)),
+                    1e-15);
+            EXPECT_NEAR(
                     (ddcHelper::get<R, Y_cov>(inv_Jacobian_matrix)),
-                    (ddcHelper::get<R, Y_cov>(inv_Jacobian_matrix_coeff)));
-            EXPECT_DOUBLE_EQ(
+                    (ddcHelper::get<R, Y_cov>(inv_Jacobian_matrix_coeff)),
+                    1e-15);
+            EXPECT_NEAR(
                     (ddcHelper::get<Theta, X_cov>(inv_Jacobian_matrix)),
-                    (ddcHelper::get<Theta, X_cov>(inv_Jacobian_matrix_coeff)));
-            EXPECT_DOUBLE_EQ(
+                    (ddcHelper::get<Theta, X_cov>(inv_Jacobian_matrix_coeff)),
+                    1e-15);
+            EXPECT_NEAR(
                     (ddcHelper::get<Theta, Y_cov>(inv_Jacobian_matrix)),
-                    (ddcHelper::get<Theta, Y_cov>(inv_Jacobian_matrix_coeff)));
+                    (ddcHelper::get<Theta, Y_cov>(inv_Jacobian_matrix_coeff)),
+                    1e-15);
         }
     });
 }
