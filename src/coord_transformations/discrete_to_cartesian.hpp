@@ -78,11 +78,15 @@ private:
     using IdxRangeTheta = typename SplineEvaluator::evaluation_domain_type2;
     using IdxTheta = typename IdxRangeTheta::discrete_element_type;
 
+    using IdxRTheta = typename IdxRangeRTheta::discrete_element_type;
+    using IdxStepRTheta = typename IdxRangeRTheta::discrete_vector_type;
+
 private:
     SplineType m_x_spline_representation;
     SplineType m_y_spline_representation;
     SplineEvaluator m_spline_evaluator;
     IdxRangeRTheta m_idx_range_singular_point;
+    Coord<X, Y> m_o_point;
 
 public:
     /**
@@ -115,7 +119,7 @@ public:
      * @see DiscreteToCartesian::operator()
      * @see SplineBoundaryValue
      */
-    KOKKOS_FUNCTION DiscreteToCartesian(
+    DiscreteToCartesian(
             SplineType curvilinear_to_x,
             SplineType curvilinear_to_y,
             SplineEvaluator const& evaluator,
@@ -125,6 +129,34 @@ public:
         , m_spline_evaluator(evaluator)
         , m_idx_range_singular_point(idx_range_singular_point)
     {
+        if constexpr (Kokkos::SpaceAccessibility<Kokkos::DefaultHostExecutionSpace, MemorySpace>::
+                              accessible) {
+            Coord<R, Theta> centre_coord(0.0, 0.0);
+            m_o_point = (*this)(centre_coord);
+        } else {
+            IdxRangeRTheta idx_range_o_point
+                    = m_idx_range_singular_point.take_first(IdxStepRTheta(1, 1));
+            FieldMem<Coord<X, Y>, IdxRangeRTheta> coord_centre_field_alloc(idx_range_o_point);
+            Field<Coord<X, Y>, IdxRangeRTheta> coord_centre_field
+                    = get_field(coord_centre_field_alloc);
+            using ExecSpace = typename SplineEvaluator::exec_space;
+            (*this)(ExecSpace(), coord_centre_field);
+            auto coord_centre_field_host = ddc::create_mirror_view_and_copy(coord_centre_field);
+            m_o_point = coord_centre_field_host(idx_range_o_point.front());
+        }
+    }
+
+    /**
+     * @brief Get the O-point in Cartesian coordinates.
+     *
+     * Get the O-point of this mapping in Cartesian coordinates. This is calculated in
+     * the constructor.
+     *
+     * @return The O-point.
+     */
+    KOKKOS_INLINE_FUNCTION Coord<X, Y> o_point() const
+    {
+        return m_o_point;
     }
 
     /**
@@ -146,6 +178,34 @@ public:
         const double x = m_spline_evaluator(coord, get_const_field(m_x_spline_representation));
         const double y = m_spline_evaluator(coord, get_const_field(m_y_spline_representation));
         return Coord<X, Y>(x, y);
+    }
+
+    /**
+     * @brief Compute the physical coordinates at the points on the logical grid.
+     *
+     * It evaluates the decomposed mapping on B-splines at the coordinate point
+     * with a SplineEvaluator2D.
+     *
+     * @param[in] exec_space
+     *          The execution space where the calculation should be carried out.
+     * @param[out] coords
+     *          The coordinates of the mapping in the physical domain at the grid
+     *          points.
+     *
+     * @see SplineEvaluator2D
+     */
+    template <class ExecSpace, class GridR, class GridTheta>
+    void operator()(ExecSpace exec_space, Field<Coord<X, Y>, IdxRange<GridR, GridTheta>> coords)
+    {
+        static_assert(Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible);
+        static_assert(std::is_same_v<R, typename GridR::continuous_dimension_type>);
+        static_assert(std::is_same_v<Theta, typename GridTheta::continuous_dimension_type>);
+        ddc::parallel_for_each(
+                ExecSpace(),
+                get_idx_range(coords),
+                KOKKOS_CLASS_LAMBDA(IdxRTheta idx) {
+                    coords(idx) = (*this)(ddc::coordinate(idx));
+                });
     }
 
     /**
