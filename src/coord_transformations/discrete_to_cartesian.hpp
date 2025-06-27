@@ -189,8 +189,8 @@ public:
      * @param[in] exec_space
      *          The execution space where the calculation should be carried out.
      * @param[out] coords
-     * 			The coordinates of the mapping in the physical domain at the
-     * 			grid points.
+     *          The coordinates of the mapping in the physical domain at the grid
+     *          points.
      *
      * @see SplineEvaluator2D
      */
