@@ -88,8 +88,8 @@ TEST_P(InverseMetricTensor3D, InverseMatrixToroidalMap)
     using ToroidalMapping = ToroidalToCylindrical<Mapping2D, Zeta, Phi>;
     using CylindricalMapping = CylindricalToCartesian<R, Z, Zeta, X, Y>;
     using Mapping = CombinedMapping<CylindricalMapping, ToroidalMapping, Coord<Rho, Theta, Phi>>;
-    Coord<R, Z> o_point(6.2, 0.0);
-    Mapping2D polar_to_RZ(o_point);
+    Coord<R, Z> origin_point(6.2, 0.0);
+    Mapping2D polar_to_RZ(origin_point);
     ToroidalMapping toroidal_to_cylindrical(polar_to_RZ);
     CylindricalMapping cylindrical_to_cartesian;
     Mapping mapping(cylindrical_to_cartesian, toroidal_to_cylindrical);
