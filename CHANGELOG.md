@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Curvilinear coordinate change classes have an O-point method to retrieve the O-point in the non-curvilinear coordinates.
+- Add a batched `operator()` to `DiscreteToCartesian` allowing a field of coordinates to be converted.
+
 ### Fixed
 
 - Fix uninitialized warning in the `Tensor` class.
@@ -26,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The parameter `iter_start` has been removed from the constructor of `RestartInitialisation`.
 - Generalise `compute_coeffs_on_mapping` to work with any mapping.
 - Rely on GPU-aware MPI to allow GPU-direct MPI for `MPITransposeAllToAll`.
+- Curvilinear coordinate change classes take a `Coord` type to specify the O-point in the constructor.
 
 ### Deprecated
 
