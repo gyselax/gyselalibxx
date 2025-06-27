@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Integration of `ddc::StridedDiscreteDomain` by making `IdxRangeSlice` a type alias.
 - The parameter `iter_start` has been removed from the constructor of `RestartInitialisation`.
 - Generalise `compute_coeffs_on_mapping` to work with any mapping.
+- Rely on GPU-aware MPI to allow GPU-direct MPI for `MPITransposeAllToAll`.
 
 ### Deprecated
 
