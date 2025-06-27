@@ -178,8 +178,9 @@ public:
      */
     KOKKOS_INLINE_FUNCTION Coord<X, Y> o_point() const
     {
-        const Coord<X> x = (1.0 - Kokkos::sqrt(m_epsilon * m_epsilon + 1.0)) / m_epsilon
-                           + ddc::get<X>(m_coordinate_origin);
+        const Coord<X> x(
+                (1.0 - Kokkos::sqrt(m_epsilon * m_epsilon + 1.0)) / m_epsilon
+                + ddc::get<X>(m_coordinate_origin));
         const Coord<Y> y(m_coordinate_origin);
         return Coord<X, Y>(x, y);
     }
