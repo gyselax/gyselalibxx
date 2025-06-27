@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix uninitialized warning in the `Tensor` class.
 - Fix unused `m_magnetic_field` variable in `MaxwellianEquilibrium` class.
 - Fix break points incorrectly labelled as knots.
+- Fix minimum version requirement of Kokkos.
+- Fix tolerance of floating point comparisons in JacobianMatrixAndJacobianCoefficients and MultipatchSplineEvaluatorTest tests
 
 ### Changed
 
