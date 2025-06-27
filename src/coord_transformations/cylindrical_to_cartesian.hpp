@@ -130,8 +130,8 @@ public:
     /**
      * @brief Get the O-point in Cartesian coordinates.
      *
-     * Get the O-point of this mapping in Cartesian coordinates. This is calculated in
-     * the constructor.
+     * Get the O-point of this mapping in Cartesian coordinates. This is (0,0) for the
+     * cylindrical coordinates.
      *
      * @return The O-point.
      */
