@@ -120,6 +120,13 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         ddc::ConstantExtrapolationRule<Yg, Xg>>;
 
 
+Coord<Xg, Yg> get_global_coord(Coord<X, Y> const& local_coord)
+{
+    double const x = ddc::select<X>(local_coord);
+    double const y = ddc::select<Y>(local_coord);
+    return Coord<Xg, Yg>(x, y);
+}
+
 /// @brief Initialise the function with f(x,y) = cos(2/3*pi*x)sin(y).
 template <class Grid1, class Grid2>
 void initialise_2D_function(host_t<DField<IdxRange<Grid1, Grid2>>> function)
@@ -132,56 +139,43 @@ void initialise_2D_function(host_t<DField<IdxRange<Grid1, Grid2>>> function)
     });
 }
 
-/// @brief Initialise the function with dxf(x,y) = -2/3*pi*sin(2/3*pi*x)sin(y).
-template <class Grid1, class Grid2>
-void initialise_2D_x_derivative(
-        host_t<DField<IdxRange<ddc::Deriv<typename Grid1::continuous_dimension_type>, Grid2>>>
-                deriv_x,
-        Idx<Grid1> const& idx_x)
-{
-    double const xg = ddc::coordinate(idx_x);
-    ddc::for_each(
-            get_idx_range(deriv_x),
-            [&](Idx<ddc::Deriv<typename Grid1::continuous_dimension_type>, Grid2> idx) {
-                // Get the coordinate on the equivalent global mesh.
-                double const yg = ddc::coordinate(Idx<Grid2>(idx));
-                deriv_x(idx) = -2. / 3. * M_PI * Kokkos::sin(xg * 2. / 3. * M_PI) * Kokkos::sin(yg);
-            });
-}
 
-
-/// @brief Initialise the function with dyf(x,y) = cos(2/3*pi*x)cos(y).
+/// @brief Initialise the y-derivatives from the global spline.
 template <class Grid1, class Grid2>
 void initialise_2D_y_derivative(
         host_t<DField<IdxRange<Grid1, ddc::Deriv<typename Grid2::continuous_dimension_type>>>>
                 deriv_y,
-        Idx<Grid2> const& idx_y)
+        Idx<Grid2> const& idx_y,
+        SplineRThetagEvaluator const& evaluator_g,
+        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef)
 {
-    double const yg = ddc::coordinate(idx_y);
     ddc::for_each(
             get_idx_range(deriv_y),
             [&](Idx<Grid1, ddc::Deriv<typename Grid2::continuous_dimension_type>> idx) {
                 // Get the coordinate on the equivalent global mesh.
-                double const xg = ddc::coordinate(Idx<Grid1>(idx));
-                deriv_y(idx) = Kokkos::cos(xg * 2. / 3. * M_PI) * Kokkos::cos(yg);
+                Idx<Grid1, Grid2> idx_xy(Idx<Grid1>(idx), idx_y);
+                Coord<Xg, Yg> interface_coord(get_global_coord(ddc::coordinate(idx_xy)));
+                deriv_y(idx) = evaluator_g.deriv_dim_2(interface_coord, function_g_coef);
             });
 }
 
 
-/// @brief Initialise the function with dxyf(x,y) = -2/3*pi*sin(2/3*pi*x)cos(y).
+/// @brief Initialise the cross derivatives from the global spline.
 template <class Grid1, class Grid2>
 void initialise_2D_xy_derivative(
         host_t<DField<IdxRange<
                 ddc::Deriv<typename Grid1::continuous_dimension_type>,
                 ddc::Deriv<typename Grid2::continuous_dimension_type>>>> deriv_xy,
         Idx<Grid1> const& idx_x,
-        Idx<Grid2> const& idx_y)
+        Idx<Grid2> const& idx_y,
+        SplineRThetagEvaluator const& evaluator_g,
+        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef)
 {
     // Get the coordinate on the equivalent global mesh.
-    double const xg = ddc::coordinate(Idx<Grid1>(idx_x));
-    double const yg = ddc::coordinate(Idx<Grid2>(idx_y));
+    Idx<Grid1, Grid2> idx(idx_x, idx_y);
+    Coord<Xg, Yg> interface_coord(get_global_coord(ddc::coordinate(idx)));
     deriv_xy(get_idx_range(deriv_xy).front())
-            = -2. / 3. * M_PI * Kokkos::sin(xg * 2. / 3. * M_PI) * Kokkos::cos(yg);
+            = evaluator_g.deriv_1_and_2(interface_coord, function_g_coef);
 }
 
 
@@ -493,18 +487,6 @@ public:
     }
 
 
-    Coord<Xg, Yg> get_global_coord(Coord<X, Y> const& local_coord)
-    {
-        double const x = ddc::select<X>(local_coord);
-        double const y = ddc::select<Y>(local_coord);
-        return Coord<Xg, Yg>(x, y);
-    }
-
-    // Coord<X,Y> get_local_coord(Coord<Xg,Yg> const& global_coord){
-    //     double const x = ddc::select<Xg>(global_coord);
-    //     double const y = ddc::select<Yg>(global_coord);
-    //     return Coord<X, Y>(x,y);
-    // }
 
     // TEST OPERATORS ----------------------------------------------------------------------------
     template <class... Patches>
@@ -583,31 +565,19 @@ public:
             host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
             typename Patch::Idx2 const& idx_perp)
     {
-        // Some derivatives are given as boundary conditions and are exact. We don't test them.
-        constexpr bool is_patch_lower_line
-                = ddc::in_tags_v<Patch, ddc::detail::TypeSeq<Patch7, Patch8, Patch9>>;
-        constexpr bool is_patch_lower_upper
-                = ddc::in_tags_v<Patch, ddc::detail::TypeSeq<Patch1, Patch2, Patch3>>;
-        constexpr bool is_deriv_supposed_exact
-                = ((is_patch_lower_line && is_deriv_min)
-                   || (is_patch_lower_upper && !is_deriv_min));
+        typename Patch::IdxRange1 idx_range_par(get_idx_range(local_derivs));
+        IdxRange<ddc::Deriv<typename Patch::Dim2>> idx_range_deriv(get_idx_range(local_derivs));
+        Idx<ddc::Deriv<typename Patch::Dim2>> idx_deriv = idx_range_deriv.front();
 
-        if constexpr (!is_deriv_supposed_exact) {
-            typename Patch::IdxRange1 idx_range_par(get_idx_range(local_derivs));
-            IdxRange<ddc::Deriv<typename Patch::Dim2>> idx_range_deriv(get_idx_range(local_derivs));
-            Idx<ddc::Deriv<typename Patch::Dim2>> idx_deriv = idx_range_deriv.front();
+        ddc::for_each(idx_range_par, [&](typename Patch::Idx1 const& idx_par) {
+            typename Patch::Idx12 idx(idx_par, idx_perp);
+            Coord<Xg, Yg> interface_coord(get_global_coord(ddc::coordinate(idx)));
 
-            ddc::for_each(idx_range_par, [&](typename Patch::Idx1 const& idx_par) {
-                typename Patch::Idx12 idx(idx_par, idx_perp);
-                Coord<Xg, Yg> interface_coord(get_global_coord(ddc::coordinate(idx)));
+            double const local_deriv = local_derivs(idx_par, idx_deriv);
+            double const global_deriv = evaluator_g.deriv_dim_2(interface_coord, function_g_coef);
 
-                double const local_deriv = local_derivs(idx_par, idx_deriv);
-                double const global_deriv
-                        = evaluator_g.deriv_dim_2(interface_coord, function_g_coef);
-
-                EXPECT_NEAR(local_deriv, global_deriv, 2e-14);
-            });
-        }
+            EXPECT_NEAR(local_deriv, global_deriv, 2e-14);
+        });
     }
 
     template <std::size_t Index>
@@ -663,27 +633,16 @@ public:
             typename Patch::Idx1 const& idx_1,
             typename Patch::Idx2 const& idx_2)
     {
-        // Some derivatives are given as boundary conditions and are exact. We don't test them.
-        constexpr bool is_patch_lower_line
-                = ddc::in_tags_v<Patch, ddc::detail::TypeSeq<Patch7, Patch8, Patch9>>;
-        constexpr bool is_patch_lower_upper
-                = ddc::in_tags_v<Patch, ddc::detail::TypeSeq<Patch1, Patch2, Patch3>>;
-        constexpr bool is_deriv_supposed_exact
-                = ((is_patch_lower_line && is_deriv2_min)
-                   || (is_patch_lower_upper && !is_deriv2_min));
+        typename Patch::Idx12 idx(idx_1, idx_2);
+        Coord<Xg, Yg> interface_coord(get_global_coord(ddc::coordinate(idx)));
 
-        if constexpr (!is_deriv_supposed_exact) {
-            typename Patch::Idx12 idx(idx_1, idx_2);
-            Coord<Xg, Yg> interface_coord(get_global_coord(ddc::coordinate(idx)));
+        Idx<ddc::Deriv<typename Patch::Dim1>, ddc::Deriv<typename Patch::Dim2>> idx_deriv(
+                get_idx_range(local_derivs).front());
 
-            Idx<ddc::Deriv<typename Patch::Dim1>, ddc::Deriv<typename Patch::Dim2>> idx_deriv(
-                    get_idx_range(local_derivs).front());
+        double const local_deriv = local_derivs(idx_deriv);
+        double const global_deriv = evaluator_g.deriv_1_and_2(interface_coord, function_g_coef);
 
-            double const local_deriv = local_derivs(idx_deriv);
-            double const global_deriv = evaluator_g.deriv_1_and_2(interface_coord, function_g_coef);
-
-            EXPECT_NEAR(local_deriv, global_deriv, 6e-14);
-        }
+        EXPECT_NEAR(local_deriv, global_deriv, 6e-14);
     }
 };
 
@@ -980,7 +939,7 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
     // std::cout << boost::typeindex::type_id_with_cvr<ddc::type_seq_element_t<3,interface_collection>>().pretty_name() << std::endl;
 
 
-    // Initialise test function values ===========================================================
+    // Instantiate test function values ==========================================================
     // --- patch 1
     host_t<DFieldMem<Patch1::IdxRange12>> function_1_alloc(idx_range_xy1);
     host_t<DField<Patch1::IdxRange12>> function_1 = get_field(function_1_alloc);
@@ -1038,19 +997,8 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             functions_369(function_3, function_6, function_9);
 
 
-    initialise_2D_function<GridX<1>, GridY<1>>(function_1);
-    initialise_2D_function<GridX<2>, GridY<2>>(function_2);
-    initialise_2D_function<GridX<3>, GridY<3>>(function_3);
-    initialise_2D_function<GridX<4>, GridY<4>>(function_4);
-    initialise_2D_function<GridX<5>, GridY<5>>(function_5);
-    initialise_2D_function<GridX<6>, GridY<6>>(function_6);
-    initialise_2D_function<GridX<7>, GridY<7>>(function_7);
-    initialise_2D_function<GridX<8>, GridY<8>>(function_8);
-    initialise_2D_function<GridX<9>, GridY<9>>(function_9);
-    initialise_2D_function<GridXg, GridYg>(function_g);
-
-
-    // Initialise derivatives of the test functions ==============================================
+    // Instantiate derivatives of the test functions ==============================================
+    // --- derivatives along x.
     Idx<ddc::Deriv<X>> first_deriv_x(1);
     IdxStep<ddc::Deriv<X>> n_deriv_x(1);
     IdxRange<ddc::Deriv<X>> deriv_x_idx_range(first_deriv_x, n_deriv_x);
@@ -1125,7 +1073,7 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             = get_field(derivs_xmax_9_alloc);
 
 
-
+    // --- derivatives along y.
     Idx<ddc::Deriv<Y>> first_deriv_y(1);
     IdxStep<ddc::Deriv<Y>> n_deriv_y(1);
     IdxRange<ddc::Deriv<Y>> deriv_y_idx_range(first_deriv_y, n_deriv_y);
@@ -1338,16 +1286,8 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
     MultipatchField<Deriv2_OnPatch_2D_host, Patch7, Patch8, Patch9>
             derivs_ymin_789(derivs_ymin_7, derivs_ymin_8, derivs_ymin_9);
 
-    // Initiliase the boundary derivatives needed.
-    initialise_2D_y_derivative<GridX<7>, GridY<7>>(derivs_ymin_7, idx_range_y7.front());
-    initialise_2D_y_derivative<GridX<8>, GridY<8>>(derivs_ymin_8, idx_range_y8.front());
-    initialise_2D_y_derivative<GridX<9>, GridY<9>>(derivs_ymin_9, idx_range_y9.front());
 
-    initialise_2D_y_derivative<GridX<1>, GridY<1>>(derivs_ymax_1, idx_range_y1.back());
-    initialise_2D_y_derivative<GridX<2>, GridY<2>>(derivs_ymax_2, idx_range_y2.back());
-    initialise_2D_y_derivative<GridX<3>, GridY<3>>(derivs_ymax_3, idx_range_y3.back());
-
-    // Initialise cross-derivatives of the test functions ========================================
+    // Instantiate cross-derivatives of the test functions ========================================
     IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>
             derivs_xy_idx_range(deriv_x_idx_range, deriv_y_idx_range);
 
@@ -1506,7 +1446,7 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
     host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_9(
             get_field(derivs_xy_max_max_9_alloc));
 
-
+    // Collect the cross-derivatives.
     std::tuple derivs_xy_min_min(
             derivs_xy_min_min_1,
             derivs_xy_min_min_2,
@@ -1571,48 +1511,148 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
     std::tuple derivs_xy_max_min_789(derivs_xy_max_min_7, derivs_xy_max_min_8, derivs_xy_max_min_9);
 
 
+    // Initialise the data =======================================================================
 
-    initialise_2D_xy_derivative<
-            GridX<1>,
-            GridY<1>>(derivs_xy_min_max_1, idx_range_x1.front(), idx_range_y1.back());
-    initialise_2D_xy_derivative<
-            GridX<1>,
-            GridY<1>>(derivs_xy_max_max_1, idx_range_x1.back(), idx_range_y1.back());
+    initialise_2D_function<GridX<1>, GridY<1>>(function_1);
+    initialise_2D_function<GridX<2>, GridY<2>>(function_2);
+    initialise_2D_function<GridX<3>, GridY<3>>(function_3);
+    initialise_2D_function<GridX<4>, GridY<4>>(function_4);
+    initialise_2D_function<GridX<5>, GridY<5>>(function_5);
+    initialise_2D_function<GridX<6>, GridY<6>>(function_6);
+    initialise_2D_function<GridX<7>, GridY<7>>(function_7);
+    initialise_2D_function<GridX<8>, GridY<8>>(function_8);
+    initialise_2D_function<GridX<9>, GridY<9>>(function_9);
+    initialise_2D_function<GridXg, GridYg>(function_g);
 
-    initialise_2D_xy_derivative<
-            GridX<2>,
-            GridY<2>>(derivs_xy_min_max_2, idx_range_x2.front(), idx_range_y2.back());
-    initialise_2D_xy_derivative<
-            GridX<2>,
-            GridY<2>>(derivs_xy_max_max_2, idx_range_x2.back(), idx_range_y2.back());
+    // Build global spline representation ---
+    SplineRThetagBuilder builder_g(idx_range_xy_g);
 
-    initialise_2D_xy_derivative<
-            GridX<3>,
-            GridY<3>>(derivs_xy_min_max_3, idx_range_x3.front(), idx_range_y3.back());
-    initialise_2D_xy_derivative<
-            GridX<3>,
-            GridY<3>>(derivs_xy_max_max_3, idx_range_x3.back(), idx_range_y3.back());
+    host_t<DFieldMem<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef_alloc(
+            builder_g.batched_spline_domain(idx_range_xy_g));
+    host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef
+            = get_field(function_g_coef_alloc);
 
-    initialise_2D_xy_derivative<
-            GridX<7>,
-            GridY<7>>(derivs_xy_min_min_7, idx_range_x7.front(), idx_range_y7.front());
-    initialise_2D_xy_derivative<
-            GridX<7>,
-            GridY<7>>(derivs_xy_max_min_7, idx_range_x7.back(), idx_range_y7.front());
+    builder_g(function_g_coef, get_const_field(function_g));
 
-    initialise_2D_xy_derivative<
-            GridX<8>,
-            GridY<8>>(derivs_xy_min_min_8, idx_range_x8.front(), idx_range_y8.front());
-    initialise_2D_xy_derivative<
-            GridX<8>,
-            GridY<8>>(derivs_xy_max_min_8, idx_range_x8.back(), idx_range_y8.front());
+    // Global spline evaluator ---
+    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymin_g(yg_min);
+    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymax_g(yg_max);
+    ddc::PeriodicExtrapolationRule<Xg> bc_x_g;
+    SplineRThetagEvaluator evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g);
 
-    initialise_2D_xy_derivative<
-            GridX<9>,
-            GridY<9>>(derivs_xy_min_min_9, idx_range_x9.front(), idx_range_y9.front());
-    initialise_2D_xy_derivative<
-            GridX<9>,
-            GridY<9>>(derivs_xy_max_min_9, idx_range_x9.back(), idx_range_y9.front());
+
+    // Initiliase the boundary derivatives.
+    initialise_2D_y_derivative<GridX<7>, GridY<7>>(
+            derivs_ymin_7,
+            idx_range_y7.front(),
+            evaluator_g,
+            get_const_field(function_g_coef));
+    initialise_2D_y_derivative<GridX<8>, GridY<8>>(
+            derivs_ymin_8,
+            idx_range_y8.front(),
+            evaluator_g,
+            get_const_field(function_g_coef));
+    initialise_2D_y_derivative<GridX<9>, GridY<9>>(
+            derivs_ymin_9,
+            idx_range_y9.front(),
+            evaluator_g,
+            get_const_field(function_g_coef));
+
+    initialise_2D_y_derivative<GridX<1>, GridY<1>>(
+            derivs_ymax_1,
+            idx_range_y1.back(),
+            evaluator_g,
+            get_const_field(function_g_coef));
+    initialise_2D_y_derivative<GridX<2>, GridY<2>>(
+            derivs_ymax_2,
+            idx_range_y2.back(),
+            evaluator_g,
+            get_const_field(function_g_coef));
+    initialise_2D_y_derivative<GridX<3>, GridY<3>>(
+            derivs_ymax_3,
+            idx_range_y3.back(),
+            evaluator_g,
+            get_const_field(function_g_coef));
+
+
+    initialise_2D_xy_derivative<GridX<1>, GridY<1>>(
+            derivs_xy_min_max_1,
+            idx_range_x1.front(),
+            idx_range_y1.back(),
+            evaluator_g,
+            get_const_field(function_g_coef));
+    initialise_2D_xy_derivative<GridX<1>, GridY<1>>(
+            derivs_xy_max_max_1,
+            idx_range_x1.back(),
+            idx_range_y1.back(),
+            evaluator_g,
+            get_const_field(function_g_coef));
+
+    initialise_2D_xy_derivative<GridX<2>, GridY<2>>(
+            derivs_xy_min_max_2,
+            idx_range_x2.front(),
+            idx_range_y2.back(),
+            evaluator_g,
+            get_const_field(function_g_coef));
+    initialise_2D_xy_derivative<GridX<2>, GridY<2>>(
+            derivs_xy_max_max_2,
+            idx_range_x2.back(),
+            idx_range_y2.back(),
+            evaluator_g,
+            get_const_field(function_g_coef));
+
+    initialise_2D_xy_derivative<GridX<3>, GridY<3>>(
+            derivs_xy_min_max_3,
+            idx_range_x3.front(),
+            idx_range_y3.back(),
+            evaluator_g,
+            get_const_field(function_g_coef));
+    initialise_2D_xy_derivative<GridX<3>, GridY<3>>(
+            derivs_xy_max_max_3,
+            idx_range_x3.back(),
+            idx_range_y3.back(),
+            evaluator_g,
+            get_const_field(function_g_coef));
+
+    initialise_2D_xy_derivative<GridX<7>, GridY<7>>(
+            derivs_xy_min_min_7,
+            idx_range_x7.front(),
+            idx_range_y7.front(),
+            evaluator_g,
+            get_const_field(function_g_coef));
+    initialise_2D_xy_derivative<GridX<7>, GridY<7>>(
+            derivs_xy_max_min_7,
+            idx_range_x7.back(),
+            idx_range_y7.front(),
+            evaluator_g,
+            get_const_field(function_g_coef));
+
+    initialise_2D_xy_derivative<GridX<8>, GridY<8>>(
+            derivs_xy_min_min_8,
+            idx_range_x8.front(),
+            idx_range_y8.front(),
+            evaluator_g,
+            get_const_field(function_g_coef));
+    initialise_2D_xy_derivative<GridX<8>, GridY<8>>(
+            derivs_xy_max_min_8,
+            idx_range_x8.back(),
+            idx_range_y8.front(),
+            evaluator_g,
+            get_const_field(function_g_coef));
+
+    initialise_2D_xy_derivative<GridX<9>, GridY<9>>(
+            derivs_xy_min_min_9,
+            idx_range_x9.front(),
+            idx_range_y9.front(),
+            evaluator_g,
+            get_const_field(function_g_coef));
+    initialise_2D_xy_derivative<GridX<9>, GridY<9>>(
+            derivs_xy_max_min_9,
+            idx_range_x9.back(),
+            idx_range_y9.front(),
+            evaluator_g,
+            get_const_field(function_g_coef));
+
 
 
     // Solve each matrix system ==================================================================
@@ -1632,21 +1672,21 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
     matrix_456.solve(derivs_ymin_456, derivs_xy_min_min_456, derivs_xy_max_min_456);
 
     // Test the values of the derivatives ========================================================
-    // Build global spline representation ---
-    SplineRThetagBuilder builder_g(idx_range_xy_g);
+    // // Build global spline representation ---
+    // SplineRThetagBuilder builder_g(idx_range_xy_g);
 
-    host_t<DFieldMem<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef_alloc(
-            builder_g.batched_spline_domain(idx_range_xy_g));
-    host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef
-            = get_field(function_g_coef_alloc);
+    // host_t<DFieldMem<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef_alloc(
+    //         builder_g.batched_spline_domain(idx_range_xy_g));
+    // host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef
+    //         = get_field(function_g_coef_alloc);
 
-    builder_g(function_g_coef, get_const_field(function_g));
+    // builder_g(function_g_coef, get_const_field(function_g));
 
-    // Global spline evaluator ---
-    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymin_g(yg_min);
-    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymax_g(yg_max);
-    ddc::PeriodicExtrapolationRule<Xg> bc_x_g;
-    SplineRThetagEvaluator evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g);
+    // // Global spline evaluator ---
+    // ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymin_g(yg_min);
+    // ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymax_g(yg_max);
+    // ddc::PeriodicExtrapolationRule<Xg> bc_x_g;
+    // SplineRThetagEvaluator evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g);
 
     // Check only the derivatives values ---
     MultipatchType<
