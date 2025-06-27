@@ -13,15 +13,15 @@
  * @brief Compute the derivative of an equivalent global spline 
  * at the interface between two patches. 
  * 
- * For a given Interface, this operator computes the coefficients 
+ * For a given InterfaceType, this operator computes the coefficients 
  * a, b and c of the following relation: 
  * @f$ s'(X_I) = c + a s'(X_{I+1}) + b s'(X_{I+1})@f$, 
  * 
  * with 
- * * s'(X_I) the derivative at the Interface of the two local splines on the patches. 
- * * s'(X_{I+1}) the derivative at the next (or right) Interface of the local splines 
+ * * s'(X_I) the derivative at the InterfaceType of the two local splines on the patches. 
+ * * s'(X_{I+1}) the derivative at the next (or right) InterfaceType of the local splines 
  *      on patch 1. 
- * * s'(X_{I-1}) the derivative at the previous (or left) Interface of the local splines 
+ * * s'(X_{I-1}) the derivative at the previous (or left) InterfaceType of the local splines 
  *      on patch 2. 
  * * a,b scalars depending on the meshes of the two patches. 
  * * c a linear combination of the function values on the two patches. 
@@ -44,7 +44,7 @@
  * 
  * All the formulae and more details are given in the README.md. 
  * 
- * @tparam Interface The interface between two patches where we want 
+ * @tparam InterfaceType The interface between two patches where we want 
  * to compute the derivatives. 
  * @tparam Bound1 The interpolation condition for the spline on the patch 1
  * of the interface. By default the value is set to ddc::BoundCond::HERMITE. 
@@ -62,24 +62,24 @@
  * (especially in the non-uniform case). 
  */
 template <
-        class Interface,
+        class InterfaceType,
         ddc::BoundCond Bound1 = ddc::BoundCond::HERMITE,
         ddc::BoundCond Bound2 = ddc::BoundCond::HERMITE>
 class SingleInterfaceDerivativesCalculator
 {
     static_assert(
-            (!std::is_same_v<typename Interface::Edge1, OutsideEdge>)&&(
-                    !std::is_same_v<typename Interface::Edge2, OutsideEdge>),
+            (!std::is_same_v<typename InterfaceType::Edge1, OutsideEdge>)&&(
+                    !std::is_same_v<typename InterfaceType::Edge2, OutsideEdge>),
             "The interface cannot be an interface with the outside domain.");
 
-    using EdgePerpGrid1 = typename Interface::Edge1::perpendicular_grid;
-    using EdgePerpGrid2 = typename Interface::Edge2::perpendicular_grid;
+    using EdgePerpGrid1 = typename InterfaceType::Edge1::perpendicular_grid;
+    using EdgePerpGrid2 = typename InterfaceType::Edge2::perpendicular_grid;
 
-    using EdgeParGrid1 = typename Interface::Edge1::parallel_grid;
-    using EdgeParGrid2 = typename Interface::Edge2::parallel_grid;
+    using EdgeParGrid1 = typename InterfaceType::Edge1::parallel_grid;
+    using EdgeParGrid2 = typename InterfaceType::Edge2::parallel_grid;
 
-    using Patch1 = typename Interface::Edge1::associated_patch;
-    using Patch2 = typename Interface::Edge2::associated_patch;
+    using Patch1 = typename InterfaceType::Edge1::associated_patch;
+    using Patch2 = typename InterfaceType::Edge2::associated_patch;
 
     using IdxRange2D_1 = typename Patch1::IdxRange12;
     using IdxRange2D_2 = typename Patch2::IdxRange12;
@@ -117,11 +117,15 @@ class SingleInterfaceDerivativesCalculator
     using IdxRangeBreakPt1 = IdxRange<GridBreakPt1>;
     using IdxRangeBreakPt2 = IdxRange<GridBreakPt2>;
 
+public:
+    using associated_interface = InterfaceType;
+
+private:
     IdxRange1DPerp_1 const m_idx_range_perp_1;
     IdxRange1DPerp_2 const m_idx_range_perp_2;
 
-    static Extremity constexpr m_extremity_1 = Interface::Edge1::extremity;
-    static Extremity constexpr m_extremity_2 = Interface::Edge2::extremity;
+    static Extremity constexpr m_extremity_1 = InterfaceType::Edge1::extremity;
+    static Extremity constexpr m_extremity_2 = InterfaceType::Edge2::extremity;
 
     double m_coeff_deriv_patch_2;
     double m_coeff_deriv_patch_1;
@@ -149,9 +153,9 @@ public:
      * with an explicit formula. Otherwise, it uses the recursive formula 
      * (see README.md).
      *  
-     * @param idx_range_1d_1 1D index range perpendicular to the Interface, 
+     * @param idx_range_1d_1 1D index range perpendicular to the InterfaceType, 
      * on the patch 1. 
-     * @param idx_range_1d_2 1D index range perpendicular to the Interface, 
+     * @param idx_range_1d_2 1D index range perpendicular to the InterfaceType, 
      * on the patch 2. 
      */
     SingleInterfaceDerivativesCalculator(
@@ -225,7 +229,7 @@ public:
     }
 
     /**
-     * @brief Get the coefficient (a) in front of the derivative on the patch 1 of the given Interface.
+     * @brief Get the coefficient (a) in front of the derivative on the patch 1 of the given InterfaceType.
      * @return The value of the coefficient a. 
      */
     double get_coeff_deriv_patch_1() const
@@ -234,7 +238,7 @@ public:
     }
 
     /**
-     * @brief Get the coefficient (b) in front of the derivative on the patch 2 of the given Interface.
+     * @brief Get the coefficient (b) in front of the derivative on the patch 2 of the given InterfaceType.
      * @return The value of the coefficient b. 
      */
     double get_coeff_deriv_patch_2() const
@@ -243,7 +247,7 @@ public:
     }
 
     /**
-     * @brief Get the coefficient (a) or (b) in front of the derivative on the given patch of the given Interface.
+     * @brief Get the coefficient (a) or (b) in front of the derivative on the given patch of the given InterfaceType.
      * @return The value of the coefficient (a) or (b). 
      */
     template <class Patch>
@@ -252,7 +256,7 @@ public:
         static_assert(
                 (std::is_same_v<Patch, Patch1>) || (std::is_same_v<Patch, Patch2>),
                 "The given Patch template parameter is not one of the Patch of the given "
-                "Interface.");
+                "InterfaceType.");
         if constexpr (std::is_same_v<Patch, Patch1>) {
             return m_coeff_deriv_patch_1;
         } else {
