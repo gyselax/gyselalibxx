@@ -56,7 +56,7 @@ public:
      * 			The @f$ \epsilon @f$ parameter in the definition of the mapping CartesianToCzarny.
      * @param[in] e
      * 			The @f$ e @f$ parameter in the definition of the mapping CartesianToCzarny.
-     * @param[in] o_point The (x,y)-coordinate of the centre of the circle ((0,0) by default).
+     * @param[in] o_point The (x,y)-coordinate of the O-point ((0,0) by default).
      *
      * @see CartesianToCzarny
      */
