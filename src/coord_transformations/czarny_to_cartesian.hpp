@@ -82,7 +82,7 @@ public:
 private:
     double m_epsilon;
     double m_e;
-    Coord<X, Y> m_o_point;
+    Coord<X, Y> m_coordinate_origin;
 
 public:
     /**
@@ -92,17 +92,18 @@ public:
      * 			The @f$ \epsilon @f$ parameter in the definition of the mapping CzarnyToCartesian.
      * @param[in] e
      * 			The @f$ e @f$ parameter in the definition of the mapping CzarnyToCartesian.
-     * @param[in] o_point The (x,y)-coordinate of the centre of the circle ((0,0) by default).
+     * @param[in] coordinate_origin The (x,y)-coordinate defining the origin @f$(x_0, y_0)@f$
+     *                              of the coordinate-system.
      *
      * @see CzarnyToCartesian
      */
     explicit KOKKOS_FUNCTION CzarnyToCartesian(
             double epsilon,
             double e,
-            Coord<X, Y> o_point = Coord<X, Y>(0.0, 0.0))
+            Coord<X, Y> coordinate_origin = Coord<X, Y>(0.0, 0.0))
         : m_epsilon(epsilon)
         , m_e(e)
-        , m_o_point(o_point)
+        , m_coordinate_origin(coordinate_origin)
     {
     }
 
@@ -178,7 +179,10 @@ public:
      */
     KOKKOS_INLINE_FUNCTION Coord<X, Y> o_point() const
     {
-        return m_o_point;
+        const Coord<X> x = (1.0 - Kokkos::sqrt(m_epsilon * m_epsilon + 1.0)) / m_epsilon
+                           + ddc::get<X>(m_coordinate_origin);
+        const Coord<Y> y(m_coordinate_origin);
+        return Coord<X, Y>(x, y);
     }
 
     /**
@@ -195,10 +199,10 @@ public:
         const double tmp1
                 = Kokkos::sqrt(m_epsilon * (m_epsilon + 2.0 * r * Kokkos::cos(theta)) + 1.0);
 
-        const double x = (1.0 - tmp1) / m_epsilon + ddc::get<X>(m_o_point);
+        const double x = (1.0 - tmp1) / m_epsilon + ddc::get<X>(m_coordinate_origin);
         const double y = m_e * r * Kokkos::sin(theta)
                                  / (Kokkos::sqrt(1.0 - 0.25 * m_epsilon * m_epsilon) * (2.0 - tmp1))
-                         + ddc::get<Y>(m_o_point);
+                         + ddc::get<Y>(m_coordinate_origin);
 
         return Coord<X, Y>(x, y);
     }
@@ -412,7 +416,7 @@ public:
      */
     KOKKOS_INLINE_FUNCTION CartesianToCzarny<X, Y, R, Theta> get_inverse_mapping() const
     {
-        return CartesianToCzarny<X, Y, R, Theta>(m_epsilon, m_e, m_o_point);
+        return CartesianToCzarny<X, Y, R, Theta>(m_epsilon, m_e, m_coordinate_origin);
     }
 };
 
