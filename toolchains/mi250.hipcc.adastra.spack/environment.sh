@@ -73,3 +73,5 @@ module load craype-x86-trento craype-accel-amd-gfx90a
 module load PrgEnv-gnu-amd amd-mixed/6.3.3
 
 module list
+
+export MPICH_GPU_SUPPORT_ENABLED=1
