@@ -545,6 +545,10 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <hr>
 <h2 id="unreleased">[UNRELEASED]</h2>
 <h3 id="added">Added</h3>
+<ul>
+<li>Curvilinear coordinate change classes have an O-point method to retrieve the O-point in the non-curvilinear coordinates.</li>
+<li>Add a batched <code>operator()</code> to <code>DiscreteToCartesian</code> allowing a field of coordinates to be converted.</li>
+</ul>
 <h3 id="fixed">Fixed</h3>
 <ul>
 <li>Fix uninitialized warning in the <code>Tensor</code> class.</li>
@@ -560,6 +564,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>The parameter <code>iter_start</code> has been removed from the constructor of <code>RestartInitialisation</code>.</li>
 <li>Generalise <code>compute_coeffs_on_mapping</code> to work with any mapping.</li>
 <li>Rely on GPU-aware MPI to allow GPU-direct MPI for <code>MPITransposeAllToAll</code>.</li>
+<li>Curvilinear coordinate change classes take a <code>Coord</code> type to specify the O-point in the constructor.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <h2 id="v011-2025-05-30">[v0.1.1] - 2025-05-30</h2>

@@ -69,7 +69,7 @@ _A class for describing the circular 2D mapping._ [More...](#detailed-descriptio
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_FUNCTION | [**CircularToCartesian**](#function-circulartocartesian-13) (double x0=0.0, double y0=0.0) <br>_Instantiate a_ [_**CircularToCartesian**_](classCircularToCartesian.md) _from parameters._ |
+|  KOKKOS\_FUNCTION | [**CircularToCartesian**](#function-circulartocartesian-13) (Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; o\_point=Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt;(0.0, 0.0)) <br>_Instantiate a_ [_**CircularToCartesian**_](classCircularToCartesian.md) _from parameters._ |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**CircularToCartesian**](#function-circulartocartesian-23) ([**CircularToCartesian**](classCircularToCartesian.md) const & other) = default<br>_Instantiate a_ [_**CircularToCartesian**_](classCircularToCartesian.md) _from another_[_**CircularToCartesian**_](classCircularToCartesian.md) _(lvalue)._ |
 |   | [**CircularToCartesian**](#function-circulartocartesian-33) ([**CircularToCartesian**](classCircularToCartesian.md) && x) = default<br>_Instantiate a_ [_**CircularToCartesian**_](classCircularToCartesian.md) _from another temporary_[_**CircularToCartesian**_](classCircularToCartesian.md) _(rvalue)._ |
 |  KOKKOS\_INLINE\_FUNCTION [**CartesianToCircular**](classCartesianToCircular.md)&lt; [**X**](structX.md), [**Y**](structY.md), [**R**](structR.md), [**Theta**](structTheta.md) &gt; | [**get\_inverse\_mapping**](#function-get_inverse_mapping) () const<br>_Get the inverse mapping._  |
@@ -79,6 +79,7 @@ _A class for describing the circular 2D mapping._ [More...](#detailed-descriptio
 |  KOKKOS\_INLINE\_FUNCTION double | [**jacobian**](#function-jacobian-22) (Coord&lt; [**R**](structR.md) &gt; const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping as a function of the radius._  |
 |  KOKKOS\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |
 |  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, VectorIndexSet&lt; [**R\_cov**](classCircularToCartesian.md#typedef-r_cov), [**Theta\_cov**](classCircularToCartesian.md#typedef-theta_cov) &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute full Jacobian matrix._  |
+|  KOKKOS\_INLINE\_FUNCTION Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**o\_point**](#function-o_point) () const<br>_Get the O-point in Cartesian coordinates._  |
 |  KOKKOS\_FUNCTION Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**operator()**](#function-operator) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Convert the_  _coordinate to the equivalent (x,y) coordinate._ |
 |  [**CircularToCartesian**](classCircularToCartesian.md) & | [**operator=**](#function-operator_1) ([**CircularToCartesian**](classCircularToCartesian.md) const & x) = default<br>_Assign a_ [_**CircularToCartesian**_](classCircularToCartesian.md) _from another_[_**CircularToCartesian**_](classCircularToCartesian.md) _(lvalue)._ |
 |  [**CircularToCartesian**](classCircularToCartesian.md) & | [**operator=**](#function-operator_2) ([**CircularToCartesian**](classCircularToCartesian.md) && x) = default<br>_Assign a_ [_**CircularToCartesian**_](classCircularToCartesian.md) _from another temporary_[_**CircularToCartesian**_](classCircularToCartesian.md) _(rvalue)._ |
@@ -311,8 +312,7 @@ using CircularToCartesian< R, Theta, X, Y >::curvilinear_tag_theta =  Theta;
 _Instantiate a_ [_**CircularToCartesian**_](classCircularToCartesian.md) _from parameters._
 ```C++
 inline explicit KOKKOS_FUNCTION CircularToCartesian::CircularToCartesian (
-    double x0=0.0,
-    double y0=0.0
+    Coord< X , Y > o_point=Coord< X , Y >(0.0, 0.0)
 ) 
 ```
 
@@ -323,8 +323,7 @@ inline explicit KOKKOS_FUNCTION CircularToCartesian::CircularToCartesian (
 **Parameters:**
 
 
-* `x0` The x-coordinate of the centre of the circle (0 by default). 
-* `y0` The y-coordinate of the centre of the circle (0 by default). 
+* `o_point` The (x,y)-coordinate of the centre of the circle ((0,0) by default). 
 
 
 
@@ -618,6 +617,34 @@ For some computations, we need the complete Jacobian matrix or just the coeffici
 **Returns:**
 
 The Jacobian matrix. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function o\_point 
+
+_Get the O-point in Cartesian coordinates._ 
+```C++
+inline KOKKOS_INLINE_FUNCTION Coord< X , Y > CircularToCartesian::o_point () const
+```
+
+
+
+Get the O-point of this mapping in Cartesian coordinates. This is calculated in the constructor.
+
+
+
+
+**Returns:**
+
+The O-point. 
 
 
 

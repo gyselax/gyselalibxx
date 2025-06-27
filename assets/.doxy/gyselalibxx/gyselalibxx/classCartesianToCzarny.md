@@ -64,7 +64,7 @@ _A class for describing the Czarny 2D mapping._ [More...](#detailed-description)
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_FUNCTION | [**CartesianToCzarny**](#function-cartesiantoczarny-13) (double epsilon, double e, double x0=0.0, double y0=0.0) <br>_Instantiate a_ [_**CartesianToCzarny**_](classCartesianToCzarny.md) _from parameters._ |
+|  KOKKOS\_FUNCTION | [**CartesianToCzarny**](#function-cartesiantoczarny-13) (double epsilon, double e, Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; o\_point=Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt;(0.0, 0.0)) <br>_Instantiate a_ [_**CartesianToCzarny**_](classCartesianToCzarny.md) _from parameters._ |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**CartesianToCzarny**](#function-cartesiantoczarny-23) ([**CartesianToCzarny**](classCartesianToCzarny.md) const & other) = default<br>_Instantiate a_ [_**CartesianToCzarny**_](classCartesianToCzarny.md) _from another_[_**CartesianToCzarny**_](classCartesianToCzarny.md) _(lvalue)._ |
 |   | [**CartesianToCzarny**](#function-cartesiantoczarny-33) ([**CartesianToCzarny**](classCartesianToCzarny.md) && x) = default<br>_Instantiate a_ [_**CartesianToCzarny**_](classCartesianToCzarny.md) _from another temporary_[_**CartesianToCzarny**_](classCartesianToCzarny.md) _(rvalue)._ |
 |  KOKKOS\_FUNCTION double | [**e**](#function-e) () const<br>_Return the_  _parameter._ |
@@ -219,8 +219,7 @@ _Instantiate a_ [_**CartesianToCzarny**_](classCartesianToCzarny.md) _from param
 inline explicit KOKKOS_FUNCTION CartesianToCzarny::CartesianToCzarny (
     double epsilon,
     double e,
-    double x0=0.0,
-    double y0=0.0
+    Coord< X , Y > o_point=Coord< X , Y >(0.0, 0.0)
 ) 
 ```
 
@@ -233,8 +232,7 @@ inline explicit KOKKOS_FUNCTION CartesianToCzarny::CartesianToCzarny (
 
 * `epsilon` The  parameter in the definition of the mapping [**CartesianToCzarny**](classCartesianToCzarny.md). 
 * `e` The  parameter in the definition of the mapping [**CartesianToCzarny**](classCartesianToCzarny.md). 
-* `x0` The x-coordinate of the centre of the circle (0 by default). 
-* `y0` The y-coordinate of the centre of the circle (0 by default).
+* `o_point` The (x,y)-coordinate of the O-point ((0,0) by default).
 
 
 

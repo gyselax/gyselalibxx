@@ -611,7 +611,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION</td>
-<td style="text-align: left;"><a href="#function-circulartocartesian-13"><strong>CircularToCartesian</strong></a> (double x0=0.0, double y0=0.0) <br><em>Instantiate a</em> <a href="classCircularToCartesian.html"><em><strong>CircularToCartesian</strong></em></a> <em>from parameters.</em></td>
+<td style="text-align: left;"><a href="#function-circulartocartesian-13"><strong>CircularToCartesian</strong></a> (Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; o_point=Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;(0.0, 0.0)) <br><em>Instantiate a</em> <a href="classCircularToCartesian.html"><em><strong>CircularToCartesian</strong></em></a> <em>from parameters.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION</td>
@@ -648,6 +648,10 @@
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;, VectorIndexSet&lt; <a href="classCircularToCartesian.html#typedef-r_cov"><strong>R_cov</strong></a>, <a href="classCircularToCartesian.html#typedef-theta_cov"><strong>Theta_cov</strong></a> &gt; &gt;</td>
 <td style="text-align: left;"><a href="#function-jacobian_matrix"><strong>jacobian_matrix</strong></a> (Coord&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; const &amp; coord) const<br><em>Compute full Jacobian matrix.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#function-o_point"><strong>o_point</strong></a> () const<br><em>Get the O-point in Cartesian coordinates.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;</td>
@@ -742,14 +746,12 @@
 <h3 id="function-circulartocartesian-13">function CircularToCartesian [1/3]</h3>
 <p><em>Instantiate a</em> <a href="classCircularToCartesian.html"><em><strong>CircularToCartesian</strong></em></a> <em>from parameters.</em></p>
 <pre><code class="language-C++">inline explicit KOKKOS_FUNCTION CircularToCartesian::CircularToCartesian (
-    double x0=0.0,
-    double y0=0.0
+    Coord&lt; X , Y &gt; o_point=Coord&lt; X , Y &gt;(0.0, 0.0)
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>x0</code> The x-coordinate of the centre of the circle (0 by default). </li>
-<li><code>y0</code> The y-coordinate of the centre of the circle (0 by default). </li>
+<li><code>o_point</code> The (x,y)-coordinate of the centre of the circle ((0,0) by default). </li>
 </ul>
 <hr>
 
@@ -872,6 +874,15 @@ inline KOKKOS_FUNCTION double CircularToCartesian::jacobian_component (
 </ul>
 <p><strong>Returns:</strong></p>
 <p>The Jacobian matrix. </p>
+<hr>
+
+<h3 id="function-o_point">function o_point</h3>
+<p><em>Get the O-point in Cartesian coordinates.</em> </p>
+<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION Coord&lt; X , Y &gt; CircularToCartesian::o_point () const
+</code></pre>
+<p>Get the O-point of this mapping in Cartesian coordinates. This is calculated in the constructor.</p>
+<p><strong>Returns:</strong></p>
+<p>The O-point. </p>
 <hr>
 
 <h3 id="function-operator">function operator()</h3>

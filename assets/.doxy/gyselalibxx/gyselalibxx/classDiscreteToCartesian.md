@@ -71,14 +71,16 @@ _A class for describing discrete 2D mappings from the logical domain to the phys
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_FUNCTION | [**DiscreteToCartesian**](#function-discretetocartesian) (SplineType curvilinear\_to\_x, SplineType curvilinear\_to\_y, SplineEvaluator const & evaluator, IdxRangeRTheta idx\_range\_singular\_point) <br>_Instantiate a_ [_**DiscreteToCartesian**_](classDiscreteToCartesian.md) _from the coefficients of 2D splines approximating the mapping._ |
+|   | [**DiscreteToCartesian**](#function-discretetocartesian) (SplineType curvilinear\_to\_x, SplineType curvilinear\_to\_y, SplineEvaluator const & evaluator, IdxRangeRTheta idx\_range\_singular\_point) <br>_Instantiate a_ [_**DiscreteToCartesian**_](classDiscreteToCartesian.md) _from the coefficients of 2D splines approximating the mapping._ |
 |  KOKKOS\_INLINE\_FUNCTION const Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**control\_point**](#function-control_point) (Idx&lt; [**BSplineR**](classDiscreteToCartesian.md#typedef-bspliner), [**BSplineTheta**](classDiscreteToCartesian.md#typedef-bsplinetheta) &gt; const & el) const<br>_Get a control point of the mapping on B-splines._  |
 |  KOKKOS\_INLINE\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, VectorIndexSet&lt; [**R\_cov**](classDiscreteToCartesian.md#typedef-r_cov), [**Theta\_cov**](classDiscreteToCartesian.md#typedef-theta_cov) &gt; &gt; | [**first\_order\_jacobian\_matrix\_r\_rtheta**](#function-first_order_jacobian_matrix_r_rtheta) (Coord&lt; [**curvilinear\_tag\_r**](classDiscreteToCartesian.md#typedef-curvilinear_tag_r), [**curvilinear\_tag\_theta**](classDiscreteToCartesian.md#typedef-curvilinear_tag_theta) &gt; const & coord) const<br>_Get the first order expansion of the Jacobian matrix with the theta component divided by r. The expansion is carried out around_  _. The returned matrix_ _is defined as:_ __ __ __ _._ |
 |  KOKKOS\_INLINE\_FUNCTION IdxRangeRTheta | [**idx\_range\_singular\_point**](#function-idx_range_singular_point) () const<br>_Get the index range describing the points which should be used to evaluate functions at the central point._  |
 |  KOKKOS\_FUNCTION double | [**jacobian**](#function-jacobian) (Coord&lt; [**curvilinear\_tag\_r**](classDiscreteToCartesian.md#typedef-curvilinear_tag_r), [**curvilinear\_tag\_theta**](classDiscreteToCartesian.md#typedef-curvilinear_tag_theta) &gt; const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |
 |  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, VectorIndexSet&lt; [**R\_cov**](classDiscreteToCartesian.md#typedef-r_cov), [**Theta\_cov**](classDiscreteToCartesian.md#typedef-theta_cov) &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute full Jacobian matrix._  |
+|  KOKKOS\_INLINE\_FUNCTION Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**o\_point**](#function-o_point) () const<br>_Get the O-point in Cartesian coordinates._  |
 |  KOKKOS\_FUNCTION Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**operator()**](#function-operator) (Coord&lt; [**curvilinear\_tag\_r**](classDiscreteToCartesian.md#typedef-curvilinear_tag_r), [**curvilinear\_tag\_theta**](classDiscreteToCartesian.md#typedef-curvilinear_tag_theta) &gt; const & coord) const<br>_Compute the physical coordinates from the logical coordinates._  |
+|  void | [**operator()**](#function-operator_1) (ExecSpace exec\_space, Field&lt; Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, IdxRange&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md) &gt; &gt; coords) <br>_Compute the physical coordinates at the points on the logical grid._  |
 
 
 
@@ -316,7 +318,7 @@ using DiscreteToCartesian< X, Y, SplineEvaluator, R, Theta, MemorySpace >::curvi
 
 _Instantiate a_ [_**DiscreteToCartesian**_](classDiscreteToCartesian.md) _from the coefficients of 2D splines approximating the mapping._
 ```C++
-inline KOKKOS_FUNCTION DiscreteToCartesian::DiscreteToCartesian (
+inline DiscreteToCartesian::DiscreteToCartesian (
     SplineType curvilinear_to_x,
     SplineType curvilinear_to_y,
     SplineEvaluator const & evaluator,
@@ -589,6 +591,34 @@ The Jacobian matrix.
 
 
 
+### function o\_point 
+
+_Get the O-point in Cartesian coordinates._ 
+```C++
+inline KOKKOS_INLINE_FUNCTION Coord< X , Y > DiscreteToCartesian::o_point () const
+```
+
+
+
+Get the O-point of this mapping in Cartesian coordinates. This is calculated in the constructor.
+
+
+
+
+**Returns:**
+
+The O-point. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
 ### function operator() 
 
 _Compute the physical coordinates from the logical coordinates._ 
@@ -616,6 +646,42 @@ It evaluates the decomposed mapping on B-splines at the coordinate point with a 
 
 The coordinates of the mapping in the physical domain.
 
+
+
+
+**See also:** SplineEvaluator2D 
+
+
+
+        
+
+<hr>
+
+
+
+### function operator() 
+
+_Compute the physical coordinates at the points on the logical grid._ 
+```C++
+template<class ExecSpace, class GridR, class GridTheta>
+inline void DiscreteToCartesian::operator() (
+    ExecSpace exec_space,
+    Field< Coord< X , Y >, IdxRange< GridR , GridTheta > > coords
+) 
+```
+
+
+
+It evaluates the decomposed mapping on B-splines at the coordinate point with a SplineEvaluator2D.
+
+
+
+
+**Parameters:**
+
+
+* `exec_space` The execution space where the calculation should be carried out. 
+* `coords` The coordinates of the mapping in the physical domain at the grid points.
 
 
 

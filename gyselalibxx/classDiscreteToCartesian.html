@@ -618,7 +618,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION</td>
+<td style="text-align: right;"></td>
 <td style="text-align: left;"><a href="#function-discretetocartesian"><strong>DiscreteToCartesian</strong></a> (SplineType curvilinear_to_x, SplineType curvilinear_to_y, SplineEvaluator const &amp; evaluator, IdxRangeRTheta idx_range_singular_point) <br><em>Instantiate a</em> <a href="classDiscreteToCartesian.html"><em><strong>DiscreteToCartesian</strong></em></a> <em>from the coefficients of 2D splines approximating the mapping.</em></td>
 </tr>
 <tr>
@@ -646,8 +646,16 @@
 <td style="text-align: left;"><a href="#function-jacobian_matrix"><strong>jacobian_matrix</strong></a> (Coord&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; const &amp; coord) const<br><em>Compute full Jacobian matrix.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#function-o_point"><strong>o_point</strong></a> () const<br><em>Get the O-point in Cartesian coordinates.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">KOKKOS_FUNCTION Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (Coord&lt; <a href="classDiscreteToCartesian.html#typedef-curvilinear_tag_r"><strong>curvilinear_tag_r</strong></a>, <a href="classDiscreteToCartesian.html#typedef-curvilinear_tag_theta"><strong>curvilinear_tag_theta</strong></a> &gt; const &amp; coord) const<br><em>Compute the physical coordinates from the logical coordinates.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (ExecSpace exec_space, Field&lt; Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;, IdxRange&lt; <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a> &gt; &gt; coords) <br><em>Compute the physical coordinates at the points on the logical grid.</em></td>
 </tr>
 </tbody>
 </table>
@@ -735,7 +743,7 @@
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-discretetocartesian">function DiscreteToCartesian</h3>
 <p><em>Instantiate a</em> <a href="classDiscreteToCartesian.html"><em><strong>DiscreteToCartesian</strong></em></a> <em>from the coefficients of 2D splines approximating the mapping.</em></p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION DiscreteToCartesian::DiscreteToCartesian (
+<pre><code class="language-C++">inline DiscreteToCartesian::DiscreteToCartesian (
     SplineType curvilinear_to_x,
     SplineType curvilinear_to_y,
     SplineEvaluator const &amp; evaluator,
@@ -846,6 +854,15 @@ inline KOKKOS_INLINE_FUNCTION double DiscreteToCartesian::jacobian_component (
 <p>The Jacobian matrix. </p>
 <hr>
 
+<h3 id="function-o_point">function o_point</h3>
+<p><em>Get the O-point in Cartesian coordinates.</em> </p>
+<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION Coord&lt; X , Y &gt; DiscreteToCartesian::o_point () const
+</code></pre>
+<p>Get the O-point of this mapping in Cartesian coordinates. This is calculated in the constructor.</p>
+<p><strong>Returns:</strong></p>
+<p>The O-point. </p>
+<hr>
+
 <h3 id="function-operator">function operator()</h3>
 <p><em>Compute the physical coordinates from the logical coordinates.</em> </p>
 <pre><code class="language-C++">inline KOKKOS_FUNCTION Coord&lt; X , Y &gt; DiscreteToCartesian::operator() (
@@ -859,6 +876,23 @@ inline KOKKOS_INLINE_FUNCTION double DiscreteToCartesian::jacobian_component (
 </ul>
 <p><strong>Returns:</strong></p>
 <p>The coordinates of the mapping in the physical domain.</p>
+<p><strong>See also:</strong> SplineEvaluator2D </p>
+<hr>
+
+<h3 id="function-operator_1">function operator()</h3>
+<p><em>Compute the physical coordinates at the points on the logical grid.</em> </p>
+<pre><code class="language-C++">template&lt;class ExecSpace, class GridR, class GridTheta&gt;
+inline void DiscreteToCartesian::operator() (
+    ExecSpace exec_space,
+    Field&lt; Coord&lt; X , Y &gt;, IdxRange&lt; GridR , GridTheta &gt; &gt; coords
+) 
+</code></pre>
+<p>It evaluates the decomposed mapping on B-splines at the coordinate point with a SplineEvaluator2D.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>exec_space</code> The execution space where the calculation should be carried out. </li>
+<li><code>coords</code> The coordinates of the mapping in the physical domain at the grid points.</li>
+</ul>
 <p><strong>See also:</strong> SplineEvaluator2D </p>
 <hr>
 

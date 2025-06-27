@@ -578,19 +578,16 @@ public:
 private:
     double m_epsilon;
     double m_e;
-    double m_x0;
-    double m_y0;
+    Coord&lt;X, Y&gt; m_coordinate_origin;
 
 public:
     explicit KOKKOS_FUNCTION CzarnyToCartesian(
             double epsilon,
             double e,
-            double x0 = 0.0,
-            double y0 = 0.0)
+            Coord&lt;X, Y&gt; coordinate_origin = Coord&lt;X, Y&gt;(0.0, 0.0))
         : m_epsilon(epsilon)
         , m_e(e)
-        , m_x0(x0)
-        , m_y0(y0)
+        , m_coordinate_origin(coordinate_origin)
     {
     }
 
@@ -614,6 +611,15 @@ public:
         return m_e;
     }
 
+    KOKKOS_INLINE_FUNCTION Coord&lt;X, Y&gt; o_point() const
+    {
+        const Coord&lt;X&gt; x(
+                (1.0 - Kokkos::sqrt(m_epsilon * m_epsilon + 1.0)) / m_epsilon
+                + ddc::get&lt;X&gt;(m_coordinate_origin));
+        const Coord&lt;Y&gt; y(m_coordinate_origin);
+        return Coord&lt;X, Y&gt;(x, y);
+    }
+
     KOKKOS_FUNCTION Coord&lt;X, Y&gt; operator()(Coord&lt;R, Theta&gt; const&amp; coord) const
     {
         const double r = ddc::get&lt;R&gt;(coord);
@@ -621,10 +627,10 @@ public:
         const double tmp1
                 = Kokkos::sqrt(m_epsilon * (m_epsilon + 2.0 * r * Kokkos::cos(theta)) + 1.0);
 
-        const double x = (1.0 - tmp1) / m_epsilon + m_x0;
+        const double x = (1.0 - tmp1) / m_epsilon + ddc::get&lt;X&gt;(m_coordinate_origin);
         const double y = m_e * r * Kokkos::sin(theta)
                                  / (Kokkos::sqrt(1.0 - 0.25 * m_epsilon * m_epsilon) * (2.0 - tmp1))
-                         + m_y0;
+                         + ddc::get&lt;Y&gt;(m_coordinate_origin);
 
         return Coord&lt;X, Y&gt;(x, y);
     }
@@ -784,7 +790,7 @@ public:
 
     KOKKOS_INLINE_FUNCTION CartesianToCzarny&lt;X, Y, R, Theta&gt; get_inverse_mapping() const
     {
-        return CartesianToCzarny&lt;X, Y, R, Theta&gt;(m_epsilon, m_e, m_x0, m_y0);
+        return CartesianToCzarny&lt;X, Y, R, Theta&gt;(m_epsilon, m_e, m_coordinate_origin);
     }
 };
 

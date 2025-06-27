@@ -591,7 +591,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION</td>
-<td style="text-align: left;"><a href="#function-cartesiantoczarny-13"><strong>CartesianToCzarny</strong></a> (double epsilon, double e, double x0=0.0, double y0=0.0) <br><em>Instantiate a</em> <a href="classCartesianToCzarny.html"><em><strong>CartesianToCzarny</strong></em></a> <em>from parameters.</em></td>
+<td style="text-align: left;"><a href="#function-cartesiantoczarny-13"><strong>CartesianToCzarny</strong></a> (double epsilon, double e, Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; o_point=Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;(0.0, 0.0)) <br><em>Instantiate a</em> <a href="classCartesianToCzarny.html"><em><strong>CartesianToCzarny</strong></em></a> <em>from parameters.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION</td>
@@ -677,16 +677,14 @@
 <pre><code class="language-C++">inline explicit KOKKOS_FUNCTION CartesianToCzarny::CartesianToCzarny (
     double epsilon,
     double e,
-    double x0=0.0,
-    double y0=0.0
+    Coord&lt; X , Y &gt; o_point=Coord&lt; X , Y &gt;(0.0, 0.0)
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>epsilon</code> The  parameter in the definition of the mapping <a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a>. </li>
 <li><code>e</code> The  parameter in the definition of the mapping <a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a>. </li>
-<li><code>x0</code> The x-coordinate of the centre of the circle (0 by default). </li>
-<li><code>y0</code> The y-coordinate of the centre of the circle (0 by default).</li>
+<li><code>o_point</code> The (x,y)-coordinate of the O-point ((0,0) by default).</li>
 </ul>
 <p><strong>See also:</strong> <a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a> </p>
 <hr>

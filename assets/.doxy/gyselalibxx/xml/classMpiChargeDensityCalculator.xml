@@ -123,7 +123,7 @@
 <para>A class which computes charges density with Kokkos. </para>
     </briefdescription>
     <detaileddescription>
-<para>A class which computes charges density by solving the equation: <formula id="301">$ \int_{vx} \int_{vy} q_s f_s(x,y,vx,vy) dvx dvy $</formula> where <formula id="273">$ q_s $</formula> is the charge of the species <formula id="274">$ s $</formula> and <formula id="302">$ f_s(x,y,vx,vy) $</formula> is the distribution function. </para>
+<para>A class which computes charges density by solving the equation: <formula id="302">$ \int_{vx} \int_{vy} q_s f_s(x,y,vx,vy) dvx dvy $</formula> where <formula id="274">$ q_s $</formula> is the charge of the species <formula id="275">$ s $</formula> and <formula id="303">$ f_s(x,y,vx,vy) $</formula> is the distribution function. </para>
     </detaileddescription>
     <inheritancegraph>
       <node id="2">

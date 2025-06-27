@@ -81,6 +81,7 @@ _A class for describing the cylindrical 3D mapping._ [More...](#detailed-descrip
 |  KOKKOS\_FUNCTION double | [**jacobian**](#function-jacobian) ([**CoordArg**](classCylindricalToCartesian.md#typedef-coordarg) const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping._  |
 |  KOKKOS\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) ([**CoordArg**](classCylindricalToCartesian.md#typedef-coordarg) const & coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |
 |  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md), Z &gt;, VectorIndexSet&lt; [**R\_cov**](classCylindricalToCartesian.md#typedef-r_cov), [**Z\_cov**](classCylindricalToCartesian.md#typedef-z_cov), [**Zeta\_cov**](classCylindricalToCartesian.md#typedef-zeta_cov) &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) ([**CoordArg**](classCylindricalToCartesian.md#typedef-coordarg) const & coord) const<br>_Compute full Jacobian matrix._  |
+|  KOKKOS\_INLINE\_FUNCTION Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**o\_point**](#function-o_point) () const<br>_Get the O-point in Cartesian coordinates._  |
 |  KOKKOS\_FUNCTION [**CoordResult**](classCylindricalToCartesian.md#typedef-coordresult) | [**operator()**](#function-operator) ([**CoordArg**](classCylindricalToCartesian.md#typedef-coordarg) const & coord) const<br>_Convert the_  _coordinate to the equivalent (x,y) coordinate._ |
 |  [**CylindricalToCartesian**](classCylindricalToCartesian.md) & | [**operator=**](#function-operator_1) ([**CylindricalToCartesian**](classCylindricalToCartesian.md) const & x) = default<br>_Assign a_ [_**CylindricalToCartesian**_](classCylindricalToCartesian.md) _from another_[_**CylindricalToCartesian**_](classCylindricalToCartesian.md) _(lvalue)._ |
 |  [**CylindricalToCartesian**](classCylindricalToCartesian.md) & | [**operator=**](#function-operator_2) ([**CylindricalToCartesian**](classCylindricalToCartesian.md) && x) = default<br>_Assign a_ [_**CylindricalToCartesian**_](classCylindricalToCartesian.md) _from another temporary_[_**CylindricalToCartesian**_](classCylindricalToCartesian.md) _(rvalue)._ |
@@ -630,6 +631,34 @@ For some computations, we need the complete Jacobian matrix or just the coeffici
 **Returns:**
 
 The Jacobian matrix. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function o\_point 
+
+_Get the O-point in Cartesian coordinates._ 
+```C++
+inline KOKKOS_INLINE_FUNCTION Coord< X , Y > CylindricalToCartesian::o_point () const
+```
+
+
+
+Get the O-point of this mapping in Cartesian coordinates. This is (0,0) for the cylindrical coordinates.
+
+
+
+
+**Returns:**
+
+The O-point. 
 
 
 

@@ -44,14 +44,17 @@ public:
     using Theta_cov = typename Theta::Dual;
 
 private:
-    double m_x0;
-    double m_y0;
+    Coord<X, Y> m_o_point;
 
 public:
-    explicit KOKKOS_FUNCTION CircularToCartesian(double x0 = 0.0, double y0 = 0.0)
-        : m_x0(x0)
-        , m_y0(y0)
+    explicit KOKKOS_FUNCTION CircularToCartesian(Coord<X, Y> o_point = Coord<X, Y>(0.0, 0.0))
+        : m_o_point(o_point)
     {
+    }
+
+    KOKKOS_INLINE_FUNCTION Coord<X, Y> o_point() const
+    {
+        return m_o_point;
     }
 
     KOKKOS_DEFAULTED_FUNCTION CircularToCartesian(CircularToCartesian const& other) = default;
@@ -68,8 +71,8 @@ public:
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
-        const double x = r * Kokkos::cos(theta) + m_x0;
-        const double y = r * Kokkos::sin(theta) + m_y0;
+        const double x = r * Kokkos::cos(theta) + ddc::get<X>(m_o_point);
+        const double y = r * Kokkos::sin(theta) + ddc::get<Y>(m_o_point);
         return Coord<X, Y>(x, y);
     }
 
@@ -169,7 +172,7 @@ public:
 
     KOKKOS_INLINE_FUNCTION CartesianToCircular<X, Y, R, Theta> get_inverse_mapping() const
     {
-        return CartesianToCircular<X, Y, R, Theta>(m_x0, m_y0);
+        return CartesianToCircular<X, Y, R, Theta>(m_o_point);
     }
 };
 

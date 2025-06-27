@@ -69,7 +69,7 @@ _A class for describing the circular 2D mapping._ [More...](#detailed-descriptio
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_FUNCTION | [**CartesianToCircular**](#function-cartesiantocircular-13) (double x0=0.0, double y0=0.0) <br>_Instantiate a_ [_**CartesianToCircular**_](classCartesianToCircular.md) _from parameters._ |
+|  KOKKOS\_FUNCTION | [**CartesianToCircular**](#function-cartesiantocircular-13) (Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; o\_point=Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt;(0.0, 0.0)) <br>_Instantiate a_ [_**CartesianToCircular**_](classCartesianToCircular.md) _from parameters._ |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**CartesianToCircular**](#function-cartesiantocircular-23) ([**CartesianToCircular**](classCartesianToCircular.md) const & other) = default<br>_Instantiate a_ [_**CartesianToCircular**_](classCartesianToCircular.md) _from another_[_**CartesianToCircular**_](classCartesianToCircular.md) _(lvalue)._ |
 |   | [**CartesianToCircular**](#function-cartesiantocircular-33) ([**CartesianToCircular**](classCartesianToCircular.md) && x) = default<br>_Instantiate a Curvilinear2DToCartesian from another temporary_ [_**CartesianToCircular**_](classCartesianToCircular.md) _(rvalue)._ |
 |  KOKKOS\_INLINE\_FUNCTION [**CircularToCartesian**](classCircularToCartesian.md)&lt; [**R**](structR.md), [**Theta**](structTheta.md), [**X**](structX.md), [**Y**](structY.md) &gt; | [**get\_inverse\_mapping**](#function-get_inverse_mapping) () const<br>_Get the inverse mapping._  |
@@ -308,8 +308,7 @@ using CartesianToCircular< X, Y, R, Theta >::curvilinear_tag_theta =  Theta;
 _Instantiate a_ [_**CartesianToCircular**_](classCartesianToCircular.md) _from parameters._
 ```C++
 inline explicit KOKKOS_FUNCTION CartesianToCircular::CartesianToCircular (
-    double x0=0.0,
-    double y0=0.0
+    Coord< X , Y > o_point=Coord< X , Y >(0.0, 0.0)
 ) 
 ```
 
@@ -320,8 +319,7 @@ inline explicit KOKKOS_FUNCTION CartesianToCircular::CartesianToCircular (
 **Parameters:**
 
 
-* `x0` The x-coordinate of the centre of the circle (0 by default). 
-* `y0` The y-coordinate of the centre of the circle (0 by default). 
+* `o_point` The (x,y)-coordinate of the centre of the circle ((0,0) by default). 
 
 
 

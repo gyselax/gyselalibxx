@@ -213,40 +213,26 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="84" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="84" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classCzarnyToCartesian_1ab6da2335765dfabab8a35e2cec379eff" prot="private" static="no" mutable="no">
-        <type>double</type>
-        <definition>double CzarnyToCartesian&lt; R, Theta, X, Y &gt;::m_x0</definition>
+      <memberdef kind="variable" id="classCzarnyToCartesian_1a8322b944585218c158b0f11449433c47" prot="private" static="no" mutable="no">
+        <type>Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
+        <definition>Coord&lt;X, Y&gt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;::m_coordinate_origin</definition>
         <argsstring></argsstring>
-        <name>m_x0</name>
-        <qualifiedname>CzarnyToCartesian::m_x0</qualifiedname>
+        <name>m_coordinate_origin</name>
+        <qualifiedname>CzarnyToCartesian::m_coordinate_origin</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="85" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="85" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classCzarnyToCartesian_1a509f60892557d0b17edb9f0adbf987cb" prot="private" static="no" mutable="no">
-        <type>double</type>
-        <definition>double CzarnyToCartesian&lt; R, Theta, X, Y &gt;::m_y0</definition>
-        <argsstring></argsstring>
-        <name>m_y0</name>
-        <qualifiedname>CzarnyToCartesian::m_y0</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="86" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="86" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="85" column="11" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="85" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classCzarnyToCartesian_1a669604298c66bcbb489e1192dff250ef" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classCzarnyToCartesian_1a1e14a3e8744ba8db0a674b318638ec39" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION</type>
         <definition>KOKKOS_FUNCTION CzarnyToCartesian&lt; R, Theta, X, Y &gt;::CzarnyToCartesian</definition>
-        <argsstring>(double epsilon, double e, double x0=0.0, double y0=0.0)</argsstring>
+        <argsstring>(double epsilon, double e, Coord&lt; X, Y &gt; coordinate_origin=Coord&lt; X, Y &gt;(0.0, 0.0))</argsstring>
         <name>CzarnyToCartesian</name>
         <qualifiedname>CzarnyToCartesian::CzarnyToCartesian</qualifiedname>
         <param>
@@ -258,14 +244,9 @@
           <declname>e</declname>
         </param>
         <param>
-          <type>double</type>
-          <declname>x0</declname>
-          <defval>0.0</defval>
-        </param>
-        <param>
-          <type>double</type>
-          <declname>y0</declname>
-          <defval>0.0</defval>
+          <type>Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
+          <declname>coordinate_origin</declname>
+          <defval>Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;(0.0, 0.0)</defval>
         </param>
         <briefdescription>
 <para>Instantiate a <ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref> from parameters. </para>
@@ -289,18 +270,10 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="in">x0</parametername>
+<parametername direction="in">coordinate_origin</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The x-coordinate of the centre of the circle (0 by default). </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">y0</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The y-coordinate of the centre of the circle (0 by default).</para>
+<para>The (x,y)-coordinate defining the origin <formula id="105">$(x_0, y_0)$</formula> of the coordinate-system.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -310,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="101" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="101" bodyend="111"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="100" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="100" bodyend="108"/>
       </memberdef>
       <memberdef kind="function" id="classCzarnyToCartesian_1a7750839e50a3ac1825ce484dce3c0c77" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>KOKKOS_DEFAULTED_FUNCTION</type>
@@ -339,7 +312,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="119" column="31"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="116" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classCzarnyToCartesian_1ad999ca35e162f88c5e84a11afeb18301" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -368,7 +341,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="127" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="124" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classCzarnyToCartesian_1ab54f5de9c7f61a67d2aa694b7170e583" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>KOKKOS_DEFAULTED_FUNCTION</type>
@@ -382,7 +355,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="129" column="31"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="126" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classCzarnyToCartesian_1a9447c8ec44ae0e2bb26ece0e450a33c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref> &amp;</type>
@@ -413,7 +386,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="139" column="23"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="136" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classCzarnyToCartesian_1af66a2728aa39532d16926223b65d8b8d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref> &amp;</type>
@@ -444,7 +417,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="149" column="23"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="146" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classCzarnyToCartesian_1a52971f527d1e9cd03a16c4c4dd2df48f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION double</type>
@@ -464,7 +437,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="158" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="158" bodyend="161"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="155" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="155" bodyend="158"/>
       </memberdef>
       <memberdef kind="function" id="classCzarnyToCartesian_1a04b554d096dec68781d36d57680e59a0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION double</type>
@@ -484,7 +457,26 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="170" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="170" bodyend="173"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="167" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="167" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="classCzarnyToCartesian_1aa2bd96569f836350bb1e75ec9ceb0169" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
+        <definition>KOKKOS_INLINE_FUNCTION Coord&lt; X, Y &gt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;::o_point</definition>
+        <argsstring>() const</argsstring>
+        <name>o_point</name>
+        <qualifiedname>CzarnyToCartesian::o_point</qualifiedname>
+        <briefdescription>
+<para>Get the O-point in Cartesian coordinates. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the O-point of this mapping in Cartesian coordinates.</para>
+<para><simplesect kind="return"><para>The O-point. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="179" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="179" bodyend="186"/>
       </memberdef>
       <memberdef kind="function" id="classCzarnyToCartesian_1a68b19d0cc414ccc2153b8d35e3bc7077" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
@@ -515,7 +507,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="182" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="182" bodyend="195"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="195" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="195" bodyend="208"/>
       </memberdef>
       <memberdef kind="function" id="classCzarnyToCartesian_1af037b527bbc6cbf89a44580d288b8a5f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION double</type>
@@ -546,7 +538,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="205" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="205" bodyend="213"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="218" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="218" bodyend="226"/>
       </memberdef>
       <memberdef kind="function" id="classCzarnyToCartesian_1a633cf2b257d6da39fcb04d154a36f06c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, VectorIndexSet&lt; <ref refid="classCzarnyToCartesian_1a15bf99762215733076b5a4c20ff8338c" kindref="member">R_cov</ref>, <ref refid="classCzarnyToCartesian_1aced2a90b42b1647181bbfece8eac8708" kindref="member">Theta_cov</ref> &gt; &gt;</type>
@@ -578,7 +570,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="227" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="227" bodyend="252"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="240" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="240" bodyend="265"/>
       </memberdef>
       <memberdef kind="function" id="classCzarnyToCartesian_1a0c75f9ca9bf65206ac349adb07acc497" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -617,7 +609,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="265" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="265" bodyend="299"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="278" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="278" bodyend="312"/>
       </memberdef>
       <memberdef kind="function" id="classCzarnyToCartesian_1a3efb06a52c04cacab4474cd2475823ff" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, VectorIndexSet&lt; <ref refid="classCzarnyToCartesian_1a01671e9f90dfeda7700cd6226b3f4007" kindref="member">X_cov</ref>, <ref refid="classCzarnyToCartesian_1afff1c38ec37833746294d5ef53ac3631" kindref="member">Y_cov</ref> &gt; &gt;</type>
@@ -649,7 +641,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="314" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="314" bodyend="338"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="327" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="327" bodyend="351"/>
       </memberdef>
       <memberdef kind="function" id="classCzarnyToCartesian_1a948fc7c66c6eb94232bb6f89c3792d77" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -689,7 +681,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="351" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="351" bodyend="396"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="364" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="364" bodyend="409"/>
       </memberdef>
       <memberdef kind="function" id="classCzarnyToCartesian_1a02522ce492399ee921d77ec48d2ef8f9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION <ref refid="classCartesianToCzarny" kindref="compound">CartesianToCzarny</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
@@ -707,7 +699,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="404" column="46" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="404" bodyend="407"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="417" column="46" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="417" bodyend="420"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -732,7 +724,7 @@
 <para>and  <formula id="104">$ \det(J(r, \theta)) = \frac{- r}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}}
  \frac{e\xi}{2 -  \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}}. $</formula> </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="54" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="55" bodyend="408"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="54" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="55" bodyend="421"/>
     <listofallmembers>
       <member refid="classCzarnyToCartesian_1ab25d063bcbef5fb0f1bff444fc8a98e2" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>cartesian_tag_x</name></member>
       <member refid="classCzarnyToCartesian_1afdc40195f47edbbf18a26245ce9516f9" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>cartesian_tag_y</name></member>
@@ -741,7 +733,7 @@
       <member refid="classCzarnyToCartesian_1acdb23773d132aa5c581f35fa3d31953f" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>CoordResult</name></member>
       <member refid="classCzarnyToCartesian_1ade4b789de130ce79e60c7b35f0551b63" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>curvilinear_tag_r</name></member>
       <member refid="classCzarnyToCartesian_1a293ee4cfdbbb0349873c5a8494536dd8" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>curvilinear_tag_theta</name></member>
-      <member refid="classCzarnyToCartesian_1a669604298c66bcbb489e1192dff250ef" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>CzarnyToCartesian</name></member>
+      <member refid="classCzarnyToCartesian_1a1e14a3e8744ba8db0a674b318638ec39" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>CzarnyToCartesian</name></member>
       <member refid="classCzarnyToCartesian_1a7750839e50a3ac1825ce484dce3c0c77" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>CzarnyToCartesian</name></member>
       <member refid="classCzarnyToCartesian_1ad999ca35e162f88c5e84a11afeb18301" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>CzarnyToCartesian</name></member>
       <member refid="classCzarnyToCartesian_1a04b554d096dec68781d36d57680e59a0" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>e</name></member>
@@ -752,10 +744,10 @@
       <member refid="classCzarnyToCartesian_1af037b527bbc6cbf89a44580d288b8a5f" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>jacobian</name></member>
       <member refid="classCzarnyToCartesian_1a0c75f9ca9bf65206ac349adb07acc497" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>jacobian_component</name></member>
       <member refid="classCzarnyToCartesian_1a633cf2b257d6da39fcb04d154a36f06c" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>jacobian_matrix</name></member>
+      <member refid="classCzarnyToCartesian_1a8322b944585218c158b0f11449433c47" prot="private" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>m_coordinate_origin</name></member>
       <member refid="classCzarnyToCartesian_1a5ae99d9c13bc2352931deaaad5aaf18e" prot="private" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>m_e</name></member>
       <member refid="classCzarnyToCartesian_1ab1383eb61e5b33d91ac279ed123eec26" prot="private" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>m_epsilon</name></member>
-      <member refid="classCzarnyToCartesian_1ab6da2335765dfabab8a35e2cec379eff" prot="private" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>m_x0</name></member>
-      <member refid="classCzarnyToCartesian_1a509f60892557d0b17edb9f0adbf987cb" prot="private" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>m_y0</name></member>
+      <member refid="classCzarnyToCartesian_1aa2bd96569f836350bb1e75ec9ceb0169" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>o_point</name></member>
       <member refid="classCzarnyToCartesian_1a68b19d0cc414ccc2153b8d35e3bc7077" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>operator()</name></member>
       <member refid="classCzarnyToCartesian_1a9447c8ec44ae0e2bb26ece0e450a33c1" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>operator=</name></member>
       <member refid="classCzarnyToCartesian_1af66a2728aa39532d16926223b65d8b8d" prot="public" virt="non-virtual"><scope>CzarnyToCartesian</scope><name>operator=</name></member>

@@ -69,7 +69,7 @@ _A class for describing the Czarny 2D mapping._ [More...](#detailed-description)
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_FUNCTION | [**CzarnyToCartesian**](#function-czarnytocartesian-13) (double epsilon, double e, double x0=0.0, double y0=0.0) <br>_Instantiate a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from parameters._ |
+|  KOKKOS\_FUNCTION | [**CzarnyToCartesian**](#function-czarnytocartesian-13) (double epsilon, double e, Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; coordinate\_origin=Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt;(0.0, 0.0)) <br>_Instantiate a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from parameters._ |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**CzarnyToCartesian**](#function-czarnytocartesian-23) ([**CzarnyToCartesian**](classCzarnyToCartesian.md) const & other) = default<br>_Instantiate a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from another_[_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _(lvalue)._ |
 |   | [**CzarnyToCartesian**](#function-czarnytocartesian-33) ([**CzarnyToCartesian**](classCzarnyToCartesian.md) && x) = default<br>_Instantiate a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from another temporary_[_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _(rvalue)._ |
 |  KOKKOS\_FUNCTION double | [**e**](#function-e) () const<br>_Return the_  _parameter._ |
@@ -80,6 +80,7 @@ _A class for describing the Czarny 2D mapping._ [More...](#detailed-description)
 |  KOKKOS\_FUNCTION double | [**jacobian**](#function-jacobian) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping._  |
 |  KOKKOS\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |
 |  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, VectorIndexSet&lt; [**R\_cov**](classCzarnyToCartesian.md#typedef-r_cov), [**Theta\_cov**](classCzarnyToCartesian.md#typedef-theta_cov) &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute full Jacobian matrix._  |
+|  KOKKOS\_INLINE\_FUNCTION Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**o\_point**](#function-o_point) () const<br>_Get the O-point in Cartesian coordinates._  |
 |  KOKKOS\_FUNCTION Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**operator()**](#function-operator) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Convert the_  _coordinate to the equivalent (x,y) coordinate._ |
 |  [**CzarnyToCartesian**](classCzarnyToCartesian.md) & | [**operator=**](#function-operator_1) ([**CzarnyToCartesian**](classCzarnyToCartesian.md) const & x) = default<br>_Assign a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from another_[_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _(lvalue)._ |
 |  [**CzarnyToCartesian**](classCzarnyToCartesian.md) & | [**operator=**](#function-operator_2) ([**CzarnyToCartesian**](classCzarnyToCartesian.md) && x) = default<br>_Assign a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from another temporary_[_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _(rvalue)._ |
@@ -320,8 +321,7 @@ _Instantiate a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from param
 inline explicit KOKKOS_FUNCTION CzarnyToCartesian::CzarnyToCartesian (
     double epsilon,
     double e,
-    double x0=0.0,
-    double y0=0.0
+    Coord< X , Y > coordinate_origin=Coord< X , Y >(0.0, 0.0)
 ) 
 ```
 
@@ -334,8 +334,7 @@ inline explicit KOKKOS_FUNCTION CzarnyToCartesian::CzarnyToCartesian (
 
 * `epsilon` The  parameter in the definition of the mapping [**CzarnyToCartesian**](classCzarnyToCartesian.md). 
 * `e` The  parameter in the definition of the mapping [**CzarnyToCartesian**](classCzarnyToCartesian.md). 
-* `x0` The x-coordinate of the centre of the circle (0 by default). 
-* `y0` The y-coordinate of the centre of the circle (0 by default).
+* `coordinate_origin` The (x,y)-coordinate defining the origin  of the coordinate-system.
 
 
 
@@ -654,6 +653,34 @@ For some computations, we need the complete Jacobian matrix or just the coeffici
 **Returns:**
 
 The Jacobian matrix. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function o\_point 
+
+_Get the O-point in Cartesian coordinates._ 
+```C++
+inline KOKKOS_INLINE_FUNCTION Coord< X , Y > CzarnyToCartesian::o_point () const
+```
+
+
+
+Get the O-point of this mapping in Cartesian coordinates.
+
+
+
+
+**Returns:**
+
+The O-point. 
 
 
 

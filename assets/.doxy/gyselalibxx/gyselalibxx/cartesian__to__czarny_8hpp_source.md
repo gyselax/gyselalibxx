@@ -36,19 +36,16 @@ public:
 private:
     double m_epsilon;
     double m_e;
-    double m_x0;
-    double m_y0;
+    Coord<X, Y> m_o_point;
 
 public:
     explicit KOKKOS_FUNCTION CartesianToCzarny(
             double epsilon,
             double e,
-            double x0 = 0.0,
-            double y0 = 0.0)
+            Coord<X, Y> o_point = Coord<X, Y>(0.0, 0.0))
         : m_epsilon(epsilon)
         , m_e(e)
-        , m_x0(x0)
-        , m_y0(y0)
+        , m_o_point(o_point)
     {
     }
 
@@ -74,8 +71,8 @@ public:
 
     KOKKOS_FUNCTION Coord<R, Theta> operator()(Coord<X, Y> const& coord) const
     {
-        const double x = ddc::get<X>(coord) - m_x0;
-        const double y = ddc::get<Y>(coord) - m_y0;
+        const double x = ddc::get<X>(coord) - ddc::get<X>(m_o_point);
+        const double y = ddc::get<Y>(coord) - ddc::get<Y>(m_o_point);
         const double ex = 1. + m_epsilon * x;
         const double ex2 = (m_epsilon * x * x - 2. * x - m_epsilon);
         const double xi2 = 1. / (1. - m_epsilon * m_epsilon * 0.25);
@@ -90,7 +87,7 @@ public:
 
     KOKKOS_INLINE_FUNCTION CzarnyToCartesian<R, Theta, X, Y> get_inverse_mapping() const
     {
-        return CzarnyToCartesian<R, Theta, X, Y>(m_epsilon, m_e, m_x0, m_y0);
+        return CzarnyToCartesian<R, Theta, X, Y>(m_epsilon, m_e, m_o_point);
     }
 };
 

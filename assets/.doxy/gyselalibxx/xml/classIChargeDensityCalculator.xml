@@ -102,7 +102,7 @@
     <detaileddescription>
 <para>A class which calculates the charge density.</para>
 <para>A class which calculates the charge density. This is then used as the right hand side of the Quasi-Neutrality equation.</para>
-<para>A class which computes charges density by solving the equation: <formula id="303">$ \int_{v} q_s f_s(x,v) dv $</formula> where <formula id="273">$ q_s $</formula> is the charge of the species <formula id="274">$ s $</formula> and <formula id="275">$ f_s(x,v) $</formula> is the distribution function. </para>
+<para>A class which computes charges density by solving the equation: <formula id="304">$ \int_{v} q_s f_s(x,v) dv $</formula> where <formula id="274">$ q_s $</formula> is the charge of the species <formula id="275">$ s $</formula> and <formula id="276">$ f_s(x,v) $</formula> is the distribution function. </para>
     </detaileddescription>
     <inheritancegraph>
       <node id="2">

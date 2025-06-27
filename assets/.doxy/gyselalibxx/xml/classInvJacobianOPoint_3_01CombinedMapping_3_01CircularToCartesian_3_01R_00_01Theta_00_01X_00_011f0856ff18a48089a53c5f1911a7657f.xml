@@ -140,11 +140,11 @@
 <para>Compute the full inverse Jacobian matrix from a coordinate system (x_pc, y_pc) to a coordinate system (x, y). </para>
         </briefdescription>
         <detaileddescription>
-<para>Here, as <formula id="135">$ \mathcal{G}^{-1} =  \mathcal{F} $</formula>, the Jacobian matrix of <formula id="136">$(\mathcal{F} \circ \mathcal{G}^{-1})^{-1} $</formula> is the identity matrix. So, the pseudo-Cartesian Jacobian matrix for a circular mapping is given by :<itemizedlist>
-<listitem><para><formula id="137">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = 1, $</formula></para>
-</listitem><listitem><para><formula id="138">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0, $</formula></para>
-</listitem><listitem><para><formula id="139">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0, $</formula></para>
-</listitem><listitem><para><formula id="140">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = 1. $</formula></para>
+<para>Here, as <formula id="136">$ \mathcal{G}^{-1} =  \mathcal{F} $</formula>, the Jacobian matrix of <formula id="137">$(\mathcal{F} \circ \mathcal{G}^{-1})^{-1} $</formula> is the identity matrix. So, the pseudo-Cartesian Jacobian matrix for a circular mapping is given by :<itemizedlist>
+<listitem><para><formula id="138">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = 1, $</formula></para>
+</listitem><listitem><para><formula id="139">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0, $</formula></para>
+</listitem><listitem><para><formula id="140">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0, $</formula></para>
+</listitem><listitem><para><formula id="141">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = 1. $</formula></para>
 </listitem></itemizedlist>
 </para>
 <para><simplesect kind="return"><para>The matrix evaluated at the central point. </para>
@@ -159,7 +159,7 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<para>A specialisation of <ref refid="classInvJacobianOPoint" kindref="compound">InvJacobianOPoint</ref> for a combined mapping <formula id="67">$ \mathcal{F} \circ \mathcal{G} $</formula> where <formula id="65">$ \mathcal{F} $</formula> is a circular mapping from logical to physical, and <formula id="66">$ \mathcal{G} $</formula> is an inverse circular mapping from physical to logical. The combined mapping <formula id="67">$ \mathcal{F} \circ \mathcal{G} $</formula> therefore maps from a physical domain <formula id="133">$ (X_{pc}, Y_{pc}) $</formula> to a physical domain <formula id="134">$ (X, Y) $</formula> (this mapping is equivalent to the identity). </para>
+<para>A specialisation of <ref refid="classInvJacobianOPoint" kindref="compound">InvJacobianOPoint</ref> for a combined mapping <formula id="67">$ \mathcal{F} \circ \mathcal{G} $</formula> where <formula id="65">$ \mathcal{F} $</formula> is a circular mapping from logical to physical, and <formula id="66">$ \mathcal{G} $</formula> is an inverse circular mapping from physical to logical. The combined mapping <formula id="67">$ \mathcal{F} \circ \mathcal{G} $</formula> therefore maps from a physical domain <formula id="134">$ (X_{pc}, Y_{pc}) $</formula> to a physical domain <formula id="135">$ (X, Y) $</formula> (this mapping is equivalent to the identity). </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="42" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="48" bodyend="97"/>
     <listofallmembers>

@@ -59,6 +59,11 @@ public:
 
     CylindricalToCartesian& operator=(CylindricalToCartesian&& x) = default;
 
+    KOKKOS_INLINE_FUNCTION Coord<X, Y> o_point() const
+    {
+        return Coord<X, Y>(0.0, 0.0);
+    }
+
     KOKKOS_FUNCTION CoordResult operator()(CoordArg const& coord) const
     {
         const double r = ddc::get<R>(coord);

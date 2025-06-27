@@ -96,12 +96,12 @@
 <para>Set an initial condition for the vortex merger simulation. </para>
         </briefdescription>
         <detaileddescription>
-<para>The initial condition is given by  <formula id="229">$ \rho(0, x, y) = \rho_{eq}(x,y) + \varepsilon
+<para>The initial condition is given by  <formula id="230">$ \rho(0, x, y) = \rho_{eq}(x,y) + \varepsilon
      \left(
          \exp\left[-\frac{(x - x_1^*)^2 + (y - y_1^*)^2}{2\sigma^2}\right]
       +  \exp\left[-\frac{(x - x_2^*)^2 + (y - y_2^*)^2}{2\sigma^2}\right]
      \right)$</formula></para>
-<para>with <formula id="230">$ \rho_{eq}$</formula> given by <ref refid="classVortexMergerEquilibria_1afcf358db72fd433f4470facfecd25019" kindref="member">VortexMergerEquilibria::set_equilibrium</ref>.</para>
+<para>with <formula id="231">$ \rho_{eq}$</formula> given by <ref refid="classVortexMergerEquilibria_1afcf358db72fd433f4470facfecd25019" kindref="member">VortexMergerEquilibria::set_equilibrium</ref>.</para>
 <para>The initial condition is also given in Edoardo Zoni&apos;s article (<ulink url="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</ulink>).</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
@@ -132,7 +132,7 @@
 <parametername direction="in">sigma</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <formula id="231">$ \sigma $</formula> of the Gaussian functions. </para>
+<para>The <formula id="232">$ \sigma $</formula> of the Gaussian functions. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -140,7 +140,7 @@
 <parametername direction="in">x_star_1</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <formula id="232">$ x_1^*$</formula> parameter. </para>
+<para>The <formula id="233">$ x_1^*$</formula> parameter. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -148,7 +148,7 @@
 <parametername direction="in">y_star_1</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <formula id="233">$ y_1^*$</formula> parameter. </para>
+<para>The <formula id="234">$ y_1^*$</formula> parameter. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -156,7 +156,7 @@
 <parametername direction="in">x_star_2</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <formula id="234">$ x_2^*$</formula> parameter. </para>
+<para>The <formula id="235">$ x_2^*$</formula> parameter. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -164,7 +164,7 @@
 <parametername direction="in">y_star_2</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <formula id="235">$ y_2^*$</formula> parameter. </para>
+<para>The <formula id="236">$ y_2^*$</formula> parameter. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
