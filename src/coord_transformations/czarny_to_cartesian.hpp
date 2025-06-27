@@ -92,8 +92,8 @@ public:
      * 			The @f$ \epsilon @f$ parameter in the definition of the mapping CzarnyToCartesian.
      * @param[in] e
      * 			The @f$ e @f$ parameter in the definition of the mapping CzarnyToCartesian.
-     * @param[in] coordinate_origin The (x,y)-coordinate defining the origin @f$(x_0, y_0)@f$
-     *                              of the coordinate-system.
+     * @param[in] coordinate_origin
+     *          The (x,y)-coordinate defining the origin @f$(x_0, y_0)@f$ of the coordinate-system.
      *
      * @see CzarnyToCartesian
      */
@@ -172,8 +172,7 @@ public:
     /**
      * @brief Get the O-point in Cartesian coordinates.
      *
-     * Get the O-point of this mapping in Cartesian coordinates. This is calculated in
-     * the constructor.
+     * Get the O-point of this mapping in Cartesian coordinates.
      *
      * @return The O-point.
      */
