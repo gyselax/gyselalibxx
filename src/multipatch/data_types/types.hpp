@@ -58,7 +58,7 @@ template <class Patch>
 using DConstField1OnPatch = DConstField<typename Patch::IdxRange1>;
 
 template <class Patch>
-using DConstFieldOnPatch_host = host_t<DConstFieldOnPatch<Patch>>; 
+using DConstFieldOnPatch_host = host_t<DConstFieldOnPatch<Patch>>;
 
 // VECTOR FIELDS ---------------------------------------------------------------------------------
 
@@ -133,12 +133,22 @@ template <class Patch>
 using BSplines2OnPatch = typename Patch::BSplines2;
 
 
+template <class Patch>
+using SplineCoeffMemOnPatch_2D = DFieldMem<typename Patch::IdxRangeBS12>;
+
+template <class Patch>
+using SplineCoeffMemOnPatch_2D_host = host_t<SplineCoeffMemOnPatch_2D<Patch>>;
+
+
 /**
  * @brief Type for MultipatchType: A field of 2D spline coefficients for a non-batched spline defined
  * on both of the Patch's logical dimensions.
  */
 template <class Patch>
 using SplineCoeffOnPatch_2D = DField<typename Patch::IdxRangeBS12>;
+
+template <class Patch>
+using SplineCoeffOnPatch_2D_host = host_t<SplineCoeffOnPatch_2D<Patch>>;
 
 /**
  * @brief Type for MultipatchType: A field of 2D spline coefficients for a non-batched spline defined
@@ -235,6 +245,27 @@ using Deriv12_OnPatch_2D
         = DField<IdxRange<ddc::Deriv<typename Patch::Dim1>, ddc::Deriv<typename Patch::Dim2>>>;
 
 
+template <class Patch>
+using DerivMem1_OnPatch_2D
+        = DFieldMem<IdxRange<ddc::Deriv<typename Patch::Dim1>, typename Patch::Grid2>>;
+
+template <class Patch>
+using DerivMem2_OnPatch_2D
+        = DFieldMem<IdxRange<typename Patch::Grid1, ddc::Deriv<typename Patch::Dim2>>>;
+
+template <class Patch>
+using DerivMem12_OnPatch_2D
+        = DFieldMem<IdxRange<ddc::Deriv<typename Patch::Dim1>, ddc::Deriv<typename Patch::Dim2>>>;
+
+template <class Patch>
+using DerivMem1_OnPatch_2D_host = host_t<DerivMem1_OnPatch_2D<Patch>>;
+
+template <class Patch>
+using DerivMem2_OnPatch_2D_host = host_t<DerivMem2_OnPatch_2D<Patch>>;
+
+template <class Patch>
+using DerivMem12_OnPatch_2D_host = host_t<DerivMem12_OnPatch_2D<Patch>>;
+
 /**
  * @brief Type for MultipatchType: A field defined on host of the n-th derivatives in the direction of Patch's first
  * logical grid defined on the index range of n and the Patch's second logical grid.
@@ -259,10 +290,10 @@ using Deriv12_OnPatch_2D_host = host_t<Deriv12_OnPatch_2D<Patch>>;
 
 
 template <class Patch>
-using ConstDeriv1_OnPatch_2D_host = host_t<ConstDeriv1_OnPatch_2D<Patch>>; 
+using ConstDeriv1_OnPatch_2D_host = host_t<ConstDeriv1_OnPatch_2D<Patch>>;
 
 template <class Patch>
-using ConstDeriv2_OnPatch_2D_host = host_t<ConstDeriv2_OnPatch_2D<Patch>>; 
+using ConstDeriv2_OnPatch_2D_host = host_t<ConstDeriv2_OnPatch_2D<Patch>>;
 
 template <class Patch>
-using ConstDeriv12_OnPatch_2D_host = host_t<ConstDeriv12_OnPatch_2D<Patch>>; 
+using ConstDeriv12_OnPatch_2D_host = host_t<ConstDeriv12_OnPatch_2D<Patch>>;

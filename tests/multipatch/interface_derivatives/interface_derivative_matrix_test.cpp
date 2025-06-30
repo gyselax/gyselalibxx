@@ -1,22 +1,13 @@
 // SPDX-License-Identifier: MIT
+
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
 #include <gtest/gtest.h>
 
-// #include "2patches_2d_onion_shape_non_uniform.hpp"
-// #include "../../test_utils.hpp"
-
 #include "9patches_2d_periodic_strips_non_uniform.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
-// #include "global_2d_onion_shape_non_uniform.hpp"
-
-
-#include <typeinfo>
-
-#include <boost/type_index.hpp>
-
 #include "interface.hpp"
 #include "interface_derivative_matrix.hpp"
 #include "interface_derivatives_test_utils.hpp"
@@ -35,6 +26,9 @@
 namespace {
 // Multi-patch ---
 using namespace periodic_strips_non_uniform_2d_9patches;
+
+template <std::size_t Index>
+using PatchI = ddc::type_seq_element_t<Index, PatchOrdering>;
 
 // Equivalent global mesh ---
 struct Xg
@@ -120,6 +114,7 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         ddc::ConstantExtrapolationRule<Yg, Xg>>;
 
 
+// USEFUL FUNCTIONS ==============================================================================
 Coord<Xg, Yg> get_global_coord(Coord<X, Y> const& local_coord)
 {
     double const x = ddc::select<X>(local_coord);
@@ -152,7 +147,6 @@ void initialise_2D_y_derivative(
     ddc::for_each(
             get_idx_range(deriv_y),
             [&](Idx<Grid1, ddc::Deriv<typename Grid2::continuous_dimension_type>> idx) {
-                // Get the coordinate on the equivalent global mesh.
                 Idx<Grid1, Grid2> idx_xy(Idx<Grid1>(idx), idx_y);
                 Coord<Xg, Yg> interface_coord(get_global_coord(ddc::coordinate(idx_xy)));
                 deriv_y(idx) = evaluator_g.deriv_dim_2(interface_coord, function_g_coef);
@@ -171,7 +165,6 @@ void initialise_2D_xy_derivative(
         SplineRThetagEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef)
 {
-    // Get the coordinate on the equivalent global mesh.
     Idx<Grid1, Grid2> idx(idx_x, idx_y);
     Coord<Xg, Yg> interface_coord(get_global_coord(ddc::coordinate(idx)));
     deriv_xy(get_idx_range(deriv_xy).front())
@@ -488,7 +481,7 @@ public:
 
 
 
-    // TEST OPERATORS ----------------------------------------------------------------------------
+    // TEST OPERATORS ============================================================================
     template <class... Patches>
     void check_all_x_derivatives(
             MultipatchField<Deriv1_OnPatch_2D_host, Patches...> const& local_derivs_min,
@@ -511,7 +504,6 @@ public:
          ...);
     }
 
-
     template <class Patch>
     void check_x_derivatives(
             Deriv1_OnPatch_2D_host<Patch> const& local_derivs,
@@ -526,7 +518,6 @@ public:
         ddc::for_each(idx_range_par, [&](typename Patch::Idx2 const& idx_par) {
             typename Patch::Idx12 idx(idx_perp, idx_par);
             Coord<Xg, Yg> interface_coord(get_global_coord(ddc::coordinate(idx)));
-            // std::cout << "interface coordinate: " << interface_coord << std::endl;
 
             double const local_deriv = local_derivs(idx_deriv, idx_par);
             double const global_deriv = evaluator_g.deriv_dim_1(interface_coord, function_g_coef);
@@ -534,6 +525,7 @@ public:
             EXPECT_NEAR(local_deriv, global_deriv, 2e-14);
         });
     }
+
 
     template <class... Patches>
     void check_all_y_derivatives(
@@ -557,7 +549,6 @@ public:
          ...);
     }
 
-
     template <class Patch, bool is_deriv_min>
     void check_y_derivatives(
             Deriv2_OnPatch_2D_host<Patch> const& local_derivs,
@@ -580,8 +571,6 @@ public:
         });
     }
 
-    template <std::size_t Index>
-    using PatchI = ddc::type_seq_element_t<Index, PatchOrdering>;
 
     template <class... Patches, std::size_t... I>
     void check_all_xy_derivatives(
@@ -643,6 +632,179 @@ public:
         double const global_deriv = evaluator_g.deriv_1_and_2(interface_coord, function_g_coef);
 
         EXPECT_NEAR(local_deriv, global_deriv, 6e-14);
+    }
+
+
+    template <class... Patches, std::size_t... I>
+    void check_all_spline_representation_conformity(
+            MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
+            MultipatchField<DFieldOnPatch_host, Patches...> const& functions,
+            MultipatchField<Deriv1_OnPatch_2D_host, Patches...> const& local_derivs_xmin,
+            MultipatchField<Deriv1_OnPatch_2D_host, Patches...> const& local_derivs_xmax,
+            MultipatchField<Deriv2_OnPatch_2D_host, Patches...> const& local_derivs_ymin,
+            MultipatchField<Deriv2_OnPatch_2D_host, Patches...> const& local_derivs_ymax,
+            std::tuple<Deriv12_OnPatch_2D_host<Patches>...> const& local_derivs_min_min,
+            std::tuple<Deriv12_OnPatch_2D_host<Patches>...> const& local_derivs_max_min,
+            std::tuple<Deriv12_OnPatch_2D_host<Patches>...> const& local_derivs_min_max,
+            std::tuple<Deriv12_OnPatch_2D_host<Patches>...> const& local_derivs_max_max,
+            SplineRThetagEvaluator const& evaluator_g,
+            host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
+            std::integer_sequence<std::size_t, I...>)
+    {
+        (check_spline_representation_conformity<PatchI<I>, I>(
+                 idx_ranges.template get<PatchI<I>>(),
+                 functions.template get<PatchI<I>>(),
+                 local_derivs_xmin.template get<PatchI<I>>(),
+                 local_derivs_xmax.template get<PatchI<I>>(),
+                 local_derivs_ymin.template get<PatchI<I>>(),
+                 local_derivs_ymax.template get<PatchI<I>>(),
+                 std::get<I>(local_derivs_min_min),
+                 std::get<I>(local_derivs_max_min),
+                 std::get<I>(local_derivs_min_max),
+                 std::get<I>(local_derivs_max_max),
+                 evaluator_g,
+                 get_const_field(function_g_coef)),
+         ...);
+    };
+
+    template <class Patch, std::size_t I>
+    void check_spline_representation_conformity(
+            typename Patch::IdxRange12 const& idx_range_xy,
+            host_t<DFieldOnPatch<Patch>> const& function,
+            Deriv1_OnPatch_2D_host<Patch> const& deriv_xmin,
+            Deriv1_OnPatch_2D_host<Patch> const& deriv_xmax,
+            Deriv2_OnPatch_2D_host<Patch> const& deriv_ymin,
+            Deriv2_OnPatch_2D_host<Patch> const& deriv_ymax,
+            Deriv12_OnPatch_2D_host<Patch> const& deriv_xy_min_min,
+            Deriv12_OnPatch_2D_host<Patch> const& deriv_xy_max_min,
+            Deriv12_OnPatch_2D_host<Patch> const& deriv_xy_min_max,
+            Deriv12_OnPatch_2D_host<Patch> const& deriv_xy_max_max,
+            SplineRThetagEvaluator const& evaluator_g,
+            host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef)
+    {
+        const ddc::BoundCond BoundCondY1
+                = (I >= 6) ? ddc::BoundCond::GREVILLE : ddc::BoundCond::HERMITE;
+        const ddc::BoundCond BoundCondY2
+                = (I <= 2) ? ddc::BoundCond::GREVILLE : ddc::BoundCond::HERMITE;
+
+        // Build the local spline representation -------------------------------------------------
+        ddc::SplineBuilder2D<
+                HostExecSpace,
+                typename HostExecSpace::memory_space,
+                typename Patch::BSplines1,
+                typename Patch::BSplines2,
+                typename Patch::Grid1,
+                typename Patch::Grid2,
+                ddc::BoundCond::HERMITE,
+                ddc::BoundCond::HERMITE,
+                BoundCondY1,
+                BoundCondY2,
+                ddc::SplineSolver::LAPACK>
+                builder(idx_range_xy);
+
+        SplineCoeffMemOnPatch_2D_host<Patch> function_coef_alloc(
+                builder.batched_spline_domain(idx_range_xy));
+        SplineCoeffOnPatch_2D_host<Patch> function_coef = get_field(function_coef_alloc);
+
+        if constexpr (
+                (BoundCondY1 == ddc::BoundCond::HERMITE)
+                && (BoundCondY2 == ddc::BoundCond::HERMITE)) {
+            builder(function_coef,
+                    get_const_field(function),
+                    std::optional(get_const_field(deriv_xmin)),
+                    std::optional(get_const_field(deriv_xmax)),
+                    std::optional(get_const_field(deriv_ymin)),
+                    std::optional(get_const_field(deriv_ymax)),
+                    std::optional(get_const_field(deriv_xy_min_min)),
+                    std::optional(get_const_field(deriv_xy_max_min)),
+                    std::optional(get_const_field(deriv_xy_min_max)),
+                    std::optional(get_const_field(deriv_xy_max_max)));
+        } else if constexpr (
+                (BoundCondY1 == ddc::BoundCond::HERMITE)
+                && !(BoundCondY2 == ddc::BoundCond::HERMITE)) {
+            builder(function_coef,
+                    get_const_field(function),
+                    std::optional(get_const_field(deriv_xmin)),
+                    std::optional(get_const_field(deriv_xmax)),
+                    std::optional(get_const_field(deriv_ymin)),
+                    std::optional<ConstDeriv2_OnPatch_2D_host<Patch>> {std::nullopt},
+                    std::optional(get_const_field(deriv_xy_min_min)),
+                    std::optional(get_const_field(deriv_xy_max_min)),
+                    std::optional<ConstDeriv12_OnPatch_2D_host<Patch>> {std::nullopt},
+                    std::optional<ConstDeriv12_OnPatch_2D_host<Patch>> {std::nullopt});
+        } else if constexpr (
+                !(BoundCondY1 == ddc::BoundCond::HERMITE)
+                && (BoundCondY2 == ddc::BoundCond::HERMITE)) {
+            builder(function_coef,
+                    get_const_field(function),
+                    std::optional(get_const_field(deriv_xmin)),
+                    std::optional(get_const_field(deriv_xmax)),
+                    std::optional<ConstDeriv2_OnPatch_2D_host<Patch>> {std::nullopt},
+                    std::optional(get_const_field(deriv_ymax)),
+                    std::optional<ConstDeriv12_OnPatch_2D_host<Patch>> {std::nullopt},
+                    std::optional<ConstDeriv12_OnPatch_2D_host<Patch>> {std::nullopt},
+                    std::optional(get_const_field(deriv_xy_min_max)),
+                    std::optional(get_const_field(deriv_xy_max_max)));
+        } else {
+            builder(function_coef,
+                    get_const_field(function),
+                    std::optional(get_const_field(deriv_xmin)),
+                    std::optional(get_const_field(deriv_xmax)),
+                    std::optional<ConstDeriv2_OnPatch_2D_host<Patch>> {std::nullopt},
+                    std::optional<ConstDeriv2_OnPatch_2D_host<Patch>> {std::nullopt},
+                    std::optional<ConstDeriv12_OnPatch_2D_host<Patch>> {std::nullopt},
+                    std::optional<ConstDeriv12_OnPatch_2D_host<Patch>> {std::nullopt},
+                    std::optional<ConstDeriv12_OnPatch_2D_host<Patch>> {std::nullopt},
+                    std::optional<ConstDeriv12_OnPatch_2D_host<Patch>> {std::nullopt});
+        }
+
+        // Define local spline evaluator ---------------------------------------------------------
+        Coord<X> const x_min(ddc::discrete_space<typename Patch::BSplines1>().rmin());
+        Coord<X> const x_max(ddc::discrete_space<typename Patch::BSplines1>().rmax());
+        Coord<Y> const y_min(ddc::discrete_space<typename Patch::BSplines2>().rmin());
+        Coord<Y> const y_max(ddc::discrete_space<typename Patch::BSplines2>().rmax());
+        ddc::ConstantExtrapolationRule<X, Y> bc_xmin(x_min, y_min, y_max);
+        ddc::ConstantExtrapolationRule<X, Y> bc_xmax(x_max, y_min, y_max);
+        ddc::ConstantExtrapolationRule<Y, X> bc_ymin(y_min, x_min, x_max);
+        ddc::ConstantExtrapolationRule<Y, X> bc_ymax(y_max, x_min, x_max);
+        ddc::SplineEvaluator2D<
+                HostExecSpace,
+                typename HostExecSpace::memory_space,
+                typename Patch::BSplines1,
+                typename Patch::BSplines2,
+                typename Patch::Grid1,
+                typename Patch::Grid2,
+                ddc::ConstantExtrapolationRule<X, Y>,
+                ddc::ConstantExtrapolationRule<X, Y>,
+                ddc::ConstantExtrapolationRule<Y, X>,
+                ddc::ConstantExtrapolationRule<Y, X>>
+                evaluator(bc_xmin, bc_xmax, bc_ymin, bc_ymax);
+
+        // Define evaluation points at the center of the cells -----------------------------------
+        host_t<CoordFieldMemOnPatch<Patch>> eval_points_alloc(idx_range_xy);
+        host_t<CoordFieldOnPatch<Patch>> eval_points(eval_points_alloc);
+
+        ddc::for_each(idx_range_xy, [&](typename Patch::Idx12 const idx) {
+            Coord<X, Y> const mesh_point(ddc::coordinate(idx));
+            typename Patch::Idx1 idx_1(idx);
+            typename Patch::Idx2 idx_2(idx);
+            Coord<X> dx = (idx_1 != typename Patch::IdxRange1(idx_range_xy).back())
+                          * distance_at_right(idx_1);
+            Coord<Y> dy = (idx_2 != typename Patch::IdxRange2(idx_range_xy).back())
+                          * distance_at_right(idx_2);
+            eval_points(idx) = mesh_point + Coord<X, Y>(dx, dy);
+        });
+
+        // Evaluate and compare the local and global spline representations ----------------------
+        ddc::for_each(idx_range_xy, [&](typename Patch::Idx12 const idx) {
+            Coord<Xg, Yg> const eval_point_g(get_global_coord(eval_points(idx)));
+
+            double const local_spline = evaluator(eval_points(idx), get_const_field(function_coef));
+            double const global_spline
+                    = evaluator_g(eval_point_g, get_const_field(function_g_coef));
+
+            EXPECT_NEAR(local_spline, global_spline, 1e-14);
+        });
     }
 };
 
@@ -838,8 +1000,6 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             Connectivity,
             GridX<1>,
             DConstFieldOnPatch_host,
-            // Deriv1_OnPatch_2D_host,
-            true,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
             Kokkos::DefaultHostExecutionSpace,
@@ -852,8 +1012,6 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             Connectivity,
             GridX<4>,
             DConstFieldOnPatch_host,
-            // Deriv1_OnPatch_2D_host,
-            true,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
             Kokkos::DefaultHostExecutionSpace,
@@ -866,8 +1024,6 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             Connectivity,
             GridX<7>,
             DConstFieldOnPatch_host,
-            // Deriv1_OnPatch_2D_host,
-            true,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
             Kokkos::DefaultHostExecutionSpace,
@@ -882,8 +1038,6 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             Connectivity,
             GridY<1>,
             DConstFieldOnPatch_host,
-            // Deriv2_OnPatch_2D_host,
-            false,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::GREVILLE,
             Kokkos::DefaultHostExecutionSpace,
@@ -896,8 +1050,6 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             Connectivity,
             GridY<2>,
             DConstFieldOnPatch_host,
-            // Deriv2_OnPatch_2D_host,
-            false,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::GREVILLE,
             Kokkos::DefaultHostExecutionSpace,
@@ -911,8 +1063,6 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             Connectivity,
             GridY<3>,
             DConstFieldOnPatch_host,
-            // Deriv2_OnPatch_2D_host,
-            false,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::GREVILLE,
             Kokkos::DefaultHostExecutionSpace,
@@ -921,67 +1071,53 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             Patch9>
             matrix_369(idx_ranges_369, derivative_calculators_369);
 
-    // using interface_collection =
-    //         typename Connectivity::get_all_interfaces_along_direction_t<GridX<1>>;
-
-    // std::cout << boost::typeindex::type_id_with_cvr<
-    //                      ddc::type_seq_element_t<0, interface_collection>>()
-    //                      .pretty_name()
-    //           << std::endl;
-    // std::cout << boost::typeindex::type_id_with_cvr<
-    //                      ddc::type_seq_element_t<1, interface_collection>>()
-    //                      .pretty_name()
-    //           << std::endl;
-    // std::cout << boost::typeindex::type_id_with_cvr<
-    //                      ddc::type_seq_element_t<2, interface_collection>>()
-    //                      .pretty_name()
-    //           << std::endl;
-    // std::cout << boost::typeindex::type_id_with_cvr<ddc::type_seq_element_t<3,interface_collection>>().pretty_name() << std::endl;
-
-
     // Instantiate test function values ==========================================================
-    // --- patch 1
-    host_t<DFieldMem<Patch1::IdxRange12>> function_1_alloc(idx_range_xy1);
-    host_t<DField<Patch1::IdxRange12>> function_1 = get_field(function_1_alloc);
+    host_t<DFieldMemOnPatch<Patch1>> function_1_alloc(idx_range_xy1);
+    host_t<DFieldMemOnPatch<Patch2>> function_2_alloc(idx_range_xy2);
+    host_t<DFieldMemOnPatch<Patch3>> function_3_alloc(idx_range_xy3);
+    host_t<DFieldMemOnPatch<Patch4>> function_4_alloc(idx_range_xy4);
+    host_t<DFieldMemOnPatch<Patch5>> function_5_alloc(idx_range_xy5);
+    host_t<DFieldMemOnPatch<Patch6>> function_6_alloc(idx_range_xy6);
+    host_t<DFieldMemOnPatch<Patch7>> function_7_alloc(idx_range_xy7);
+    host_t<DFieldMemOnPatch<Patch8>> function_8_alloc(idx_range_xy8);
+    host_t<DFieldMemOnPatch<Patch9>> function_9_alloc(idx_range_xy9);
 
-    // --- patch 2
-    host_t<DFieldMem<Patch2::IdxRange12>> function_2_alloc(idx_range_xy2);
-    host_t<DField<Patch2::IdxRange12>> function_2 = get_field(function_2_alloc);
+    host_t<DFieldOnPatch<Patch1>> function_1(get_field(function_1_alloc));
+    host_t<DFieldOnPatch<Patch2>> function_2(get_field(function_2_alloc));
+    host_t<DFieldOnPatch<Patch3>> function_3(get_field(function_3_alloc));
+    host_t<DFieldOnPatch<Patch4>> function_4(get_field(function_4_alloc));
+    host_t<DFieldOnPatch<Patch5>> function_5(get_field(function_5_alloc));
+    host_t<DFieldOnPatch<Patch6>> function_6(get_field(function_6_alloc));
+    host_t<DFieldOnPatch<Patch7>> function_7(get_field(function_7_alloc));
+    host_t<DFieldOnPatch<Patch8>> function_8(get_field(function_8_alloc));
+    host_t<DFieldOnPatch<Patch9>> function_9(get_field(function_9_alloc));
 
-    // --- patch 3
-    host_t<DFieldMem<Patch3::IdxRange12>> function_3_alloc(idx_range_xy3);
-    host_t<DField<Patch3::IdxRange12>> function_3 = get_field(function_3_alloc);
-
-    // --- patch 4
-    host_t<DFieldMem<Patch4::IdxRange12>> function_4_alloc(idx_range_xy4);
-    host_t<DField<Patch4::IdxRange12>> function_4 = get_field(function_4_alloc);
-
-    // --- patch 5
-    host_t<DFieldMem<Patch5::IdxRange12>> function_5_alloc(idx_range_xy5);
-    host_t<DField<Patch5::IdxRange12>> function_5 = get_field(function_5_alloc);
-
-    // --- patch 6
-    host_t<DFieldMem<Patch6::IdxRange12>> function_6_alloc(idx_range_xy6);
-    host_t<DField<Patch6::IdxRange12>> function_6 = get_field(function_6_alloc);
-
-    // --- patch 7
-    host_t<DFieldMem<Patch7::IdxRange12>> function_7_alloc(idx_range_xy7);
-    host_t<DField<Patch7::IdxRange12>> function_7 = get_field(function_7_alloc);
-
-    // --- patch 8
-    host_t<DFieldMem<Patch8::IdxRange12>> function_8_alloc(idx_range_xy8);
-    host_t<DField<Patch8::IdxRange12>> function_8 = get_field(function_8_alloc);
-
-    // --- patch 9
-    host_t<DFieldMem<Patch9::IdxRange12>> function_9_alloc(idx_range_xy9);
-    host_t<DField<Patch9::IdxRange12>> function_9 = get_field(function_9_alloc);
-
-    // --- global
     host_t<DFieldMem<IdxRange<GridXg, GridYg>>> function_g_alloc(idx_range_xy_g);
     host_t<DField<IdxRange<GridXg, GridYg>>> function_g = get_field(function_g_alloc);
 
-
     // Collect the function values.
+    MultipatchField<
+            DFieldOnPatch_host,
+            Patch1,
+            Patch2,
+            Patch3,
+            Patch4,
+            Patch5,
+            Patch6,
+            Patch7,
+            Patch8,
+            Patch9>
+            functions(
+                    function_1,
+                    function_2,
+                    function_3,
+                    function_4,
+                    function_5,
+                    function_6,
+                    function_7,
+                    function_8,
+                    function_9);
+
     MultipatchField<DFieldOnPatch_host, Patch1, Patch2, Patch3>
             functions_123(function_1, function_2, function_3);
     MultipatchField<DFieldOnPatch_host, Patch4, Patch5, Patch6>
@@ -1013,64 +1149,46 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
     IdxRange<ddc::Deriv<X>, GridY<8>> derivs_x_idx_range_8(deriv_x_idx_range, idx_range_y8);
     IdxRange<ddc::Deriv<X>, GridY<9>> derivs_x_idx_range_9(deriv_x_idx_range, idx_range_y9);
 
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, GridY<1>>>> derivs_xmin_1_alloc(derivs_x_idx_range_1);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, GridY<2>>>> derivs_xmin_2_alloc(derivs_x_idx_range_2);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, GridY<3>>>> derivs_xmin_3_alloc(derivs_x_idx_range_3);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, GridY<4>>>> derivs_xmin_4_alloc(derivs_x_idx_range_4);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, GridY<5>>>> derivs_xmin_5_alloc(derivs_x_idx_range_5);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, GridY<6>>>> derivs_xmin_6_alloc(derivs_x_idx_range_6);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, GridY<7>>>> derivs_xmin_7_alloc(derivs_x_idx_range_7);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, GridY<8>>>> derivs_xmin_8_alloc(derivs_x_idx_range_8);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, GridY<9>>>> derivs_xmin_9_alloc(derivs_x_idx_range_9);
+    DerivMem1_OnPatch_2D_host<Patch1> derivs_xmin_1_alloc(derivs_x_idx_range_1);
+    DerivMem1_OnPatch_2D_host<Patch2> derivs_xmin_2_alloc(derivs_x_idx_range_2);
+    DerivMem1_OnPatch_2D_host<Patch3> derivs_xmin_3_alloc(derivs_x_idx_range_3);
+    DerivMem1_OnPatch_2D_host<Patch4> derivs_xmin_4_alloc(derivs_x_idx_range_4);
+    DerivMem1_OnPatch_2D_host<Patch5> derivs_xmin_5_alloc(derivs_x_idx_range_5);
+    DerivMem1_OnPatch_2D_host<Patch6> derivs_xmin_6_alloc(derivs_x_idx_range_6);
+    DerivMem1_OnPatch_2D_host<Patch7> derivs_xmin_7_alloc(derivs_x_idx_range_7);
+    DerivMem1_OnPatch_2D_host<Patch8> derivs_xmin_8_alloc(derivs_x_idx_range_8);
+    DerivMem1_OnPatch_2D_host<Patch9> derivs_xmin_9_alloc(derivs_x_idx_range_9);
 
-    host_t<DField<IdxRange<ddc::Deriv<X>, GridY<1>>>> derivs_xmin_1
-            = get_field(derivs_xmin_1_alloc);
-    host_t<DField<IdxRange<ddc::Deriv<X>, GridY<2>>>> derivs_xmin_2
-            = get_field(derivs_xmin_2_alloc);
-    host_t<DField<IdxRange<ddc::Deriv<X>, GridY<3>>>> derivs_xmin_3
-            = get_field(derivs_xmin_3_alloc);
-    host_t<DField<IdxRange<ddc::Deriv<X>, GridY<4>>>> derivs_xmin_4
-            = get_field(derivs_xmin_4_alloc);
-    host_t<DField<IdxRange<ddc::Deriv<X>, GridY<5>>>> derivs_xmin_5
-            = get_field(derivs_xmin_5_alloc);
-    host_t<DField<IdxRange<ddc::Deriv<X>, GridY<6>>>> derivs_xmin_6
-            = get_field(derivs_xmin_6_alloc);
-    host_t<DField<IdxRange<ddc::Deriv<X>, GridY<7>>>> derivs_xmin_7
-            = get_field(derivs_xmin_7_alloc);
-    host_t<DField<IdxRange<ddc::Deriv<X>, GridY<8>>>> derivs_xmin_8
-            = get_field(derivs_xmin_8_alloc);
-    host_t<DField<IdxRange<ddc::Deriv<X>, GridY<9>>>> derivs_xmin_9
-            = get_field(derivs_xmin_9_alloc);
+    Deriv1_OnPatch_2D_host<Patch1> derivs_xmin_1 = get_field(derivs_xmin_1_alloc);
+    Deriv1_OnPatch_2D_host<Patch2> derivs_xmin_2 = get_field(derivs_xmin_2_alloc);
+    Deriv1_OnPatch_2D_host<Patch3> derivs_xmin_3 = get_field(derivs_xmin_3_alloc);
+    Deriv1_OnPatch_2D_host<Patch4> derivs_xmin_4 = get_field(derivs_xmin_4_alloc);
+    Deriv1_OnPatch_2D_host<Patch5> derivs_xmin_5 = get_field(derivs_xmin_5_alloc);
+    Deriv1_OnPatch_2D_host<Patch6> derivs_xmin_6 = get_field(derivs_xmin_6_alloc);
+    Deriv1_OnPatch_2D_host<Patch7> derivs_xmin_7 = get_field(derivs_xmin_7_alloc);
+    Deriv1_OnPatch_2D_host<Patch8> derivs_xmin_8 = get_field(derivs_xmin_8_alloc);
+    Deriv1_OnPatch_2D_host<Patch9> derivs_xmin_9 = get_field(derivs_xmin_9_alloc);
 
 
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, GridY<1>>>> derivs_xmax_1_alloc(derivs_x_idx_range_1);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, GridY<2>>>> derivs_xmax_2_alloc(derivs_x_idx_range_2);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, GridY<3>>>> derivs_xmax_3_alloc(derivs_x_idx_range_3);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, GridY<4>>>> derivs_xmax_4_alloc(derivs_x_idx_range_4);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, GridY<5>>>> derivs_xmax_5_alloc(derivs_x_idx_range_5);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, GridY<6>>>> derivs_xmax_6_alloc(derivs_x_idx_range_6);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, GridY<7>>>> derivs_xmax_7_alloc(derivs_x_idx_range_7);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, GridY<8>>>> derivs_xmax_8_alloc(derivs_x_idx_range_8);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, GridY<9>>>> derivs_xmax_9_alloc(derivs_x_idx_range_9);
+    DerivMem1_OnPatch_2D_host<Patch1> derivs_xmax_1_alloc(derivs_x_idx_range_1);
+    DerivMem1_OnPatch_2D_host<Patch2> derivs_xmax_2_alloc(derivs_x_idx_range_2);
+    DerivMem1_OnPatch_2D_host<Patch3> derivs_xmax_3_alloc(derivs_x_idx_range_3);
+    DerivMem1_OnPatch_2D_host<Patch4> derivs_xmax_4_alloc(derivs_x_idx_range_4);
+    DerivMem1_OnPatch_2D_host<Patch5> derivs_xmax_5_alloc(derivs_x_idx_range_5);
+    DerivMem1_OnPatch_2D_host<Patch6> derivs_xmax_6_alloc(derivs_x_idx_range_6);
+    DerivMem1_OnPatch_2D_host<Patch7> derivs_xmax_7_alloc(derivs_x_idx_range_7);
+    DerivMem1_OnPatch_2D_host<Patch8> derivs_xmax_8_alloc(derivs_x_idx_range_8);
+    DerivMem1_OnPatch_2D_host<Patch9> derivs_xmax_9_alloc(derivs_x_idx_range_9);
 
-    host_t<DField<IdxRange<ddc::Deriv<X>, GridY<1>>>> derivs_xmax_1
-            = get_field(derivs_xmax_1_alloc);
-    host_t<DField<IdxRange<ddc::Deriv<X>, GridY<2>>>> derivs_xmax_2
-            = get_field(derivs_xmax_2_alloc);
-    host_t<DField<IdxRange<ddc::Deriv<X>, GridY<3>>>> derivs_xmax_3
-            = get_field(derivs_xmax_3_alloc);
-    host_t<DField<IdxRange<ddc::Deriv<X>, GridY<4>>>> derivs_xmax_4
-            = get_field(derivs_xmax_4_alloc);
-    host_t<DField<IdxRange<ddc::Deriv<X>, GridY<5>>>> derivs_xmax_5
-            = get_field(derivs_xmax_5_alloc);
-    host_t<DField<IdxRange<ddc::Deriv<X>, GridY<6>>>> derivs_xmax_6
-            = get_field(derivs_xmax_6_alloc);
-    host_t<DField<IdxRange<ddc::Deriv<X>, GridY<7>>>> derivs_xmax_7
-            = get_field(derivs_xmax_7_alloc);
-    host_t<DField<IdxRange<ddc::Deriv<X>, GridY<8>>>> derivs_xmax_8
-            = get_field(derivs_xmax_8_alloc);
-    host_t<DField<IdxRange<ddc::Deriv<X>, GridY<9>>>> derivs_xmax_9
-            = get_field(derivs_xmax_9_alloc);
+    Deriv1_OnPatch_2D_host<Patch1> derivs_xmax_1 = get_field(derivs_xmax_1_alloc);
+    Deriv1_OnPatch_2D_host<Patch2> derivs_xmax_2 = get_field(derivs_xmax_2_alloc);
+    Deriv1_OnPatch_2D_host<Patch3> derivs_xmax_3 = get_field(derivs_xmax_3_alloc);
+    Deriv1_OnPatch_2D_host<Patch4> derivs_xmax_4 = get_field(derivs_xmax_4_alloc);
+    Deriv1_OnPatch_2D_host<Patch5> derivs_xmax_5 = get_field(derivs_xmax_5_alloc);
+    Deriv1_OnPatch_2D_host<Patch6> derivs_xmax_6 = get_field(derivs_xmax_6_alloc);
+    Deriv1_OnPatch_2D_host<Patch7> derivs_xmax_7 = get_field(derivs_xmax_7_alloc);
+    Deriv1_OnPatch_2D_host<Patch8> derivs_xmax_8 = get_field(derivs_xmax_8_alloc);
+    Deriv1_OnPatch_2D_host<Patch9> derivs_xmax_9 = get_field(derivs_xmax_9_alloc);
 
 
     // --- derivatives along y.
@@ -1088,64 +1206,46 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
     IdxRange<GridX<8>, ddc::Deriv<Y>> derivs_y_idx_range_8(idx_range_x8, deriv_y_idx_range);
     IdxRange<GridX<9>, ddc::Deriv<Y>> derivs_y_idx_range_9(idx_range_x9, deriv_y_idx_range);
 
-    host_t<DFieldMem<IdxRange<GridX<1>, ddc::Deriv<Y>>>> derivs_ymin_1_alloc(derivs_y_idx_range_1);
-    host_t<DFieldMem<IdxRange<GridX<2>, ddc::Deriv<Y>>>> derivs_ymin_2_alloc(derivs_y_idx_range_2);
-    host_t<DFieldMem<IdxRange<GridX<3>, ddc::Deriv<Y>>>> derivs_ymin_3_alloc(derivs_y_idx_range_3);
-    host_t<DFieldMem<IdxRange<GridX<4>, ddc::Deriv<Y>>>> derivs_ymin_4_alloc(derivs_y_idx_range_4);
-    host_t<DFieldMem<IdxRange<GridX<5>, ddc::Deriv<Y>>>> derivs_ymin_5_alloc(derivs_y_idx_range_5);
-    host_t<DFieldMem<IdxRange<GridX<6>, ddc::Deriv<Y>>>> derivs_ymin_6_alloc(derivs_y_idx_range_6);
-    host_t<DFieldMem<IdxRange<GridX<7>, ddc::Deriv<Y>>>> derivs_ymin_7_alloc(derivs_y_idx_range_7);
-    host_t<DFieldMem<IdxRange<GridX<8>, ddc::Deriv<Y>>>> derivs_ymin_8_alloc(derivs_y_idx_range_8);
-    host_t<DFieldMem<IdxRange<GridX<9>, ddc::Deriv<Y>>>> derivs_ymin_9_alloc(derivs_y_idx_range_9);
+    DerivMem2_OnPatch_2D_host<Patch1> derivs_ymin_1_alloc(derivs_y_idx_range_1);
+    DerivMem2_OnPatch_2D_host<Patch2> derivs_ymin_2_alloc(derivs_y_idx_range_2);
+    DerivMem2_OnPatch_2D_host<Patch3> derivs_ymin_3_alloc(derivs_y_idx_range_3);
+    DerivMem2_OnPatch_2D_host<Patch4> derivs_ymin_4_alloc(derivs_y_idx_range_4);
+    DerivMem2_OnPatch_2D_host<Patch5> derivs_ymin_5_alloc(derivs_y_idx_range_5);
+    DerivMem2_OnPatch_2D_host<Patch6> derivs_ymin_6_alloc(derivs_y_idx_range_6);
+    DerivMem2_OnPatch_2D_host<Patch7> derivs_ymin_7_alloc(derivs_y_idx_range_7);
+    DerivMem2_OnPatch_2D_host<Patch8> derivs_ymin_8_alloc(derivs_y_idx_range_8);
+    DerivMem2_OnPatch_2D_host<Patch9> derivs_ymin_9_alloc(derivs_y_idx_range_9);
 
-    host_t<DField<IdxRange<GridX<1>, ddc::Deriv<Y>>>> derivs_ymin_1
-            = get_field(derivs_ymin_1_alloc);
-    host_t<DField<IdxRange<GridX<2>, ddc::Deriv<Y>>>> derivs_ymin_2
-            = get_field(derivs_ymin_2_alloc);
-    host_t<DField<IdxRange<GridX<3>, ddc::Deriv<Y>>>> derivs_ymin_3
-            = get_field(derivs_ymin_3_alloc);
-    host_t<DField<IdxRange<GridX<4>, ddc::Deriv<Y>>>> derivs_ymin_4
-            = get_field(derivs_ymin_4_alloc);
-    host_t<DField<IdxRange<GridX<5>, ddc::Deriv<Y>>>> derivs_ymin_5
-            = get_field(derivs_ymin_5_alloc);
-    host_t<DField<IdxRange<GridX<6>, ddc::Deriv<Y>>>> derivs_ymin_6
-            = get_field(derivs_ymin_6_alloc);
-    host_t<DField<IdxRange<GridX<7>, ddc::Deriv<Y>>>> derivs_ymin_7
-            = get_field(derivs_ymin_7_alloc);
-    host_t<DField<IdxRange<GridX<8>, ddc::Deriv<Y>>>> derivs_ymin_8
-            = get_field(derivs_ymin_8_alloc);
-    host_t<DField<IdxRange<GridX<9>, ddc::Deriv<Y>>>> derivs_ymin_9
-            = get_field(derivs_ymin_9_alloc);
+    Deriv2_OnPatch_2D_host<Patch1> derivs_ymin_1 = get_field(derivs_ymin_1_alloc);
+    Deriv2_OnPatch_2D_host<Patch2> derivs_ymin_2 = get_field(derivs_ymin_2_alloc);
+    Deriv2_OnPatch_2D_host<Patch3> derivs_ymin_3 = get_field(derivs_ymin_3_alloc);
+    Deriv2_OnPatch_2D_host<Patch4> derivs_ymin_4 = get_field(derivs_ymin_4_alloc);
+    Deriv2_OnPatch_2D_host<Patch5> derivs_ymin_5 = get_field(derivs_ymin_5_alloc);
+    Deriv2_OnPatch_2D_host<Patch6> derivs_ymin_6 = get_field(derivs_ymin_6_alloc);
+    Deriv2_OnPatch_2D_host<Patch7> derivs_ymin_7 = get_field(derivs_ymin_7_alloc);
+    Deriv2_OnPatch_2D_host<Patch8> derivs_ymin_8 = get_field(derivs_ymin_8_alloc);
+    Deriv2_OnPatch_2D_host<Patch9> derivs_ymin_9 = get_field(derivs_ymin_9_alloc);
 
 
-    host_t<DFieldMem<IdxRange<GridX<1>, ddc::Deriv<Y>>>> derivs_ymax_1_alloc(derivs_y_idx_range_1);
-    host_t<DFieldMem<IdxRange<GridX<2>, ddc::Deriv<Y>>>> derivs_ymax_2_alloc(derivs_y_idx_range_2);
-    host_t<DFieldMem<IdxRange<GridX<3>, ddc::Deriv<Y>>>> derivs_ymax_3_alloc(derivs_y_idx_range_3);
-    host_t<DFieldMem<IdxRange<GridX<4>, ddc::Deriv<Y>>>> derivs_ymax_4_alloc(derivs_y_idx_range_4);
-    host_t<DFieldMem<IdxRange<GridX<5>, ddc::Deriv<Y>>>> derivs_ymax_5_alloc(derivs_y_idx_range_5);
-    host_t<DFieldMem<IdxRange<GridX<6>, ddc::Deriv<Y>>>> derivs_ymax_6_alloc(derivs_y_idx_range_6);
-    host_t<DFieldMem<IdxRange<GridX<7>, ddc::Deriv<Y>>>> derivs_ymax_7_alloc(derivs_y_idx_range_7);
-    host_t<DFieldMem<IdxRange<GridX<8>, ddc::Deriv<Y>>>> derivs_ymax_8_alloc(derivs_y_idx_range_8);
-    host_t<DFieldMem<IdxRange<GridX<9>, ddc::Deriv<Y>>>> derivs_ymax_9_alloc(derivs_y_idx_range_9);
+    DerivMem2_OnPatch_2D_host<Patch1> derivs_ymax_1_alloc(derivs_y_idx_range_1);
+    DerivMem2_OnPatch_2D_host<Patch2> derivs_ymax_2_alloc(derivs_y_idx_range_2);
+    DerivMem2_OnPatch_2D_host<Patch3> derivs_ymax_3_alloc(derivs_y_idx_range_3);
+    DerivMem2_OnPatch_2D_host<Patch4> derivs_ymax_4_alloc(derivs_y_idx_range_4);
+    DerivMem2_OnPatch_2D_host<Patch5> derivs_ymax_5_alloc(derivs_y_idx_range_5);
+    DerivMem2_OnPatch_2D_host<Patch6> derivs_ymax_6_alloc(derivs_y_idx_range_6);
+    DerivMem2_OnPatch_2D_host<Patch7> derivs_ymax_7_alloc(derivs_y_idx_range_7);
+    DerivMem2_OnPatch_2D_host<Patch8> derivs_ymax_8_alloc(derivs_y_idx_range_8);
+    DerivMem2_OnPatch_2D_host<Patch9> derivs_ymax_9_alloc(derivs_y_idx_range_9);
 
-    host_t<DField<IdxRange<GridX<1>, ddc::Deriv<Y>>>> derivs_ymax_1
-            = get_field(derivs_ymax_1_alloc);
-    host_t<DField<IdxRange<GridX<2>, ddc::Deriv<Y>>>> derivs_ymax_2
-            = get_field(derivs_ymax_2_alloc);
-    host_t<DField<IdxRange<GridX<3>, ddc::Deriv<Y>>>> derivs_ymax_3
-            = get_field(derivs_ymax_3_alloc);
-    host_t<DField<IdxRange<GridX<4>, ddc::Deriv<Y>>>> derivs_ymax_4
-            = get_field(derivs_ymax_4_alloc);
-    host_t<DField<IdxRange<GridX<5>, ddc::Deriv<Y>>>> derivs_ymax_5
-            = get_field(derivs_ymax_5_alloc);
-    host_t<DField<IdxRange<GridX<6>, ddc::Deriv<Y>>>> derivs_ymax_6
-            = get_field(derivs_ymax_6_alloc);
-    host_t<DField<IdxRange<GridX<7>, ddc::Deriv<Y>>>> derivs_ymax_7
-            = get_field(derivs_ymax_7_alloc);
-    host_t<DField<IdxRange<GridX<8>, ddc::Deriv<Y>>>> derivs_ymax_8
-            = get_field(derivs_ymax_8_alloc);
-    host_t<DField<IdxRange<GridX<9>, ddc::Deriv<Y>>>> derivs_ymax_9
-            = get_field(derivs_ymax_9_alloc);
+    Deriv2_OnPatch_2D_host<Patch1> derivs_ymax_1 = get_field(derivs_ymax_1_alloc);
+    Deriv2_OnPatch_2D_host<Patch2> derivs_ymax_2 = get_field(derivs_ymax_2_alloc);
+    Deriv2_OnPatch_2D_host<Patch3> derivs_ymax_3 = get_field(derivs_ymax_3_alloc);
+    Deriv2_OnPatch_2D_host<Patch4> derivs_ymax_4 = get_field(derivs_ymax_4_alloc);
+    Deriv2_OnPatch_2D_host<Patch5> derivs_ymax_5 = get_field(derivs_ymax_5_alloc);
+    Deriv2_OnPatch_2D_host<Patch6> derivs_ymax_6 = get_field(derivs_ymax_6_alloc);
+    Deriv2_OnPatch_2D_host<Patch7> derivs_ymax_7 = get_field(derivs_ymax_7_alloc);
+    Deriv2_OnPatch_2D_host<Patch8> derivs_ymax_8 = get_field(derivs_ymax_8_alloc);
+    Deriv2_OnPatch_2D_host<Patch9> derivs_ymax_9 = get_field(derivs_ymax_9_alloc);
 
 
     // Collect the derivatives.
@@ -1291,160 +1391,88 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
     IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>
             derivs_xy_idx_range(deriv_x_idx_range, deriv_y_idx_range);
 
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_min_1_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_min_2_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_min_3_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_min_4_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_min_5_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_min_6_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_min_7_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_min_8_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_min_9_alloc(
-            derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_min_min_1_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_min_min_2_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_min_min_3_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_min_min_4_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_min_min_5_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_min_min_6_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_min_min_7_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_min_min_8_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_min_min_9_alloc(derivs_xy_idx_range);
 
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_min_1(
-            get_field(derivs_xy_min_min_1_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_min_2(
-            get_field(derivs_xy_min_min_2_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_min_3(
-            get_field(derivs_xy_min_min_3_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_min_4(
-            get_field(derivs_xy_min_min_4_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_min_5(
-            get_field(derivs_xy_min_min_5_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_min_6(
-            get_field(derivs_xy_min_min_6_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_min_7(
-            get_field(derivs_xy_min_min_7_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_min_8(
-            get_field(derivs_xy_min_min_8_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_min_9(
-            get_field(derivs_xy_min_min_9_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_min_min_1(get_field(derivs_xy_min_min_1_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_min_min_2(get_field(derivs_xy_min_min_2_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_min_min_3(get_field(derivs_xy_min_min_3_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_min_min_4(get_field(derivs_xy_min_min_4_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_min_min_5(get_field(derivs_xy_min_min_5_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_min_min_6(get_field(derivs_xy_min_min_6_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_min_min_7(get_field(derivs_xy_min_min_7_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_min_min_8(get_field(derivs_xy_min_min_8_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_min_min_9(get_field(derivs_xy_min_min_9_alloc));
 
 
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_max_1_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_max_2_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_max_3_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_max_4_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_max_5_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_max_6_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_max_7_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_max_8_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_max_9_alloc(
-            derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_min_max_1_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_min_max_2_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_min_max_3_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_min_max_4_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_min_max_5_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_min_max_6_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_min_max_7_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_min_max_8_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_min_max_9_alloc(derivs_xy_idx_range);
 
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_max_1(
-            get_field(derivs_xy_min_max_1_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_max_2(
-            get_field(derivs_xy_min_max_2_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_max_3(
-            get_field(derivs_xy_min_max_3_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_max_4(
-            get_field(derivs_xy_min_max_4_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_max_5(
-            get_field(derivs_xy_min_max_5_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_max_6(
-            get_field(derivs_xy_min_max_6_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_max_7(
-            get_field(derivs_xy_min_max_7_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_max_8(
-            get_field(derivs_xy_min_max_8_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_min_max_9(
-            get_field(derivs_xy_min_max_9_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_min_max_1(get_field(derivs_xy_min_max_1_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_min_max_2(get_field(derivs_xy_min_max_2_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_min_max_3(get_field(derivs_xy_min_max_3_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_min_max_4(get_field(derivs_xy_min_max_4_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_min_max_5(get_field(derivs_xy_min_max_5_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_min_max_6(get_field(derivs_xy_min_max_6_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_min_max_7(get_field(derivs_xy_min_max_7_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_min_max_8(get_field(derivs_xy_min_max_8_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_min_max_9(get_field(derivs_xy_min_max_9_alloc));
 
 
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_min_1_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_min_2_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_min_3_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_min_4_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_min_5_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_min_6_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_min_7_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_min_8_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_min_9_alloc(
-            derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_max_min_1_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_max_min_2_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_max_min_3_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_max_min_4_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_max_min_5_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_max_min_6_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_max_min_7_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_max_min_8_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_max_min_9_alloc(derivs_xy_idx_range);
 
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_min_1(
-            get_field(derivs_xy_max_min_1_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_min_2(
-            get_field(derivs_xy_max_min_2_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_min_3(
-            get_field(derivs_xy_max_min_3_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_min_4(
-            get_field(derivs_xy_max_min_4_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_min_5(
-            get_field(derivs_xy_max_min_5_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_min_6(
-            get_field(derivs_xy_max_min_6_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_min_7(
-            get_field(derivs_xy_max_min_7_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_min_8(
-            get_field(derivs_xy_max_min_8_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_min_9(
-            get_field(derivs_xy_max_min_9_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_max_min_1(get_field(derivs_xy_max_min_1_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_max_min_2(get_field(derivs_xy_max_min_2_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_max_min_3(get_field(derivs_xy_max_min_3_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_max_min_4(get_field(derivs_xy_max_min_4_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_max_min_5(get_field(derivs_xy_max_min_5_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_max_min_6(get_field(derivs_xy_max_min_6_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_max_min_7(get_field(derivs_xy_max_min_7_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_max_min_8(get_field(derivs_xy_max_min_8_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_max_min_9(get_field(derivs_xy_max_min_9_alloc));
 
 
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_1_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_2_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_3_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_4_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_5_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_6_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_7_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_8_alloc(
-            derivs_xy_idx_range);
-    host_t<DFieldMem<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_9_alloc(
-            derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch1> derivs_xy_max_max_1_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch2> derivs_xy_max_max_2_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch3> derivs_xy_max_max_3_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch4> derivs_xy_max_max_4_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch5> derivs_xy_max_max_5_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch6> derivs_xy_max_max_6_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch7> derivs_xy_max_max_7_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch8> derivs_xy_max_max_8_alloc(derivs_xy_idx_range);
+    DerivMem12_OnPatch_2D_host<Patch9> derivs_xy_max_max_9_alloc(derivs_xy_idx_range);
 
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_1(
-            get_field(derivs_xy_max_max_1_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_2(
-            get_field(derivs_xy_max_max_2_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_3(
-            get_field(derivs_xy_max_max_3_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_4(
-            get_field(derivs_xy_max_max_4_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_5(
-            get_field(derivs_xy_max_max_5_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_6(
-            get_field(derivs_xy_max_max_6_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_7(
-            get_field(derivs_xy_max_max_7_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_8(
-            get_field(derivs_xy_max_max_8_alloc));
-    host_t<DField<IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>>> derivs_xy_max_max_9(
-            get_field(derivs_xy_max_max_9_alloc));
+    Deriv12_OnPatch_2D_host<Patch1> derivs_xy_max_max_1(get_field(derivs_xy_max_max_1_alloc));
+    Deriv12_OnPatch_2D_host<Patch2> derivs_xy_max_max_2(get_field(derivs_xy_max_max_2_alloc));
+    Deriv12_OnPatch_2D_host<Patch3> derivs_xy_max_max_3(get_field(derivs_xy_max_max_3_alloc));
+    Deriv12_OnPatch_2D_host<Patch4> derivs_xy_max_max_4(get_field(derivs_xy_max_max_4_alloc));
+    Deriv12_OnPatch_2D_host<Patch5> derivs_xy_max_max_5(get_field(derivs_xy_max_max_5_alloc));
+    Deriv12_OnPatch_2D_host<Patch6> derivs_xy_max_max_6(get_field(derivs_xy_max_max_6_alloc));
+    Deriv12_OnPatch_2D_host<Patch7> derivs_xy_max_max_7(get_field(derivs_xy_max_max_7_alloc));
+    Deriv12_OnPatch_2D_host<Patch8> derivs_xy_max_max_8(get_field(derivs_xy_max_max_8_alloc));
+    Deriv12_OnPatch_2D_host<Patch9> derivs_xy_max_max_9(get_field(derivs_xy_max_max_9_alloc));
 
     // Collect the cross-derivatives.
     std::tuple derivs_xy_min_min(
@@ -1512,7 +1540,6 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
 
 
     // Initialise the data =======================================================================
-
     initialise_2D_function<GridX<1>, GridY<1>>(function_1);
     initialise_2D_function<GridX<2>, GridY<2>>(function_2);
     initialise_2D_function<GridX<3>, GridY<3>>(function_3);
@@ -1653,42 +1680,23 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             evaluator_g,
             get_const_field(function_g_coef));
 
-
-
     // Solve each matrix system ==================================================================
     // TODO: modify order: call derivatives first then functions.
-    matrix_123.solve(functions_123, derivs_xmin_123, derivs_xmax_123);
-    matrix_456.solve(functions_456, derivs_xmin_456, derivs_xmax_456);
-    matrix_789.solve(functions_789, derivs_xmin_789, derivs_xmax_789);
+    matrix_123.solve(get_const_field(functions_123), derivs_xmin_123, derivs_xmax_123);
+    matrix_456.solve(get_const_field(functions_456), derivs_xmin_456, derivs_xmax_456);
+    matrix_789.solve(get_const_field(functions_789), derivs_xmin_789, derivs_xmax_789);
 
-    matrix_147.solve(functions_147, derivs_ymin_147, derivs_ymax_147);
-    matrix_258.solve(functions_258, derivs_ymin_258, derivs_ymax_258);
-    matrix_369.solve(functions_369, derivs_ymin_369, derivs_ymax_369);
+    matrix_147.solve(get_const_field(functions_147), derivs_ymin_147, derivs_ymax_147);
+    matrix_258.solve(get_const_field(functions_258), derivs_ymin_258, derivs_ymax_258);
+    matrix_369.solve(get_const_field(functions_369), derivs_ymin_369, derivs_ymax_369);
 
-    matrix_456.solve(derivs_ymax_456, derivs_xy_min_max_456, derivs_xy_max_max_456);
-    matrix_789.solve(derivs_ymax_789, derivs_xy_min_max_789, derivs_xy_max_max_789);
+    matrix_456.solve(get_const_field(derivs_ymax_456), derivs_xy_min_max_456, derivs_xy_max_max_456);
+    matrix_789.solve(get_const_field(derivs_ymax_789), derivs_xy_min_max_789, derivs_xy_max_max_789);
 
-    matrix_123.solve(derivs_ymin_123, derivs_xy_min_min_123, derivs_xy_max_min_123);
-    matrix_456.solve(derivs_ymin_456, derivs_xy_min_min_456, derivs_xy_max_min_456);
+    matrix_123.solve(get_const_field(derivs_ymin_123), derivs_xy_min_min_123, derivs_xy_max_min_123);
+    matrix_456.solve(get_const_field(derivs_ymin_456), derivs_xy_min_min_456, derivs_xy_max_min_456);
 
     // Test the values of the derivatives ========================================================
-    // // Build global spline representation ---
-    // SplineRThetagBuilder builder_g(idx_range_xy_g);
-
-    // host_t<DFieldMem<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef_alloc(
-    //         builder_g.batched_spline_domain(idx_range_xy_g));
-    // host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef
-    //         = get_field(function_g_coef_alloc);
-
-    // builder_g(function_g_coef, get_const_field(function_g));
-
-    // // Global spline evaluator ---
-    // ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymin_g(yg_min);
-    // ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymax_g(yg_max);
-    // ddc::PeriodicExtrapolationRule<Xg> bc_x_g;
-    // SplineRThetagEvaluator evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g);
-
-    // Check only the derivatives values ---
     MultipatchType<
             IdxRangeOnPatch,
             Patch1,
@@ -1742,5 +1750,22 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             evaluator_g,
             get_const_field(function_g_coef),
             idx_ranges,
+            std::make_integer_sequence<std::size_t, 9> {});
+
+
+    // Test the spline representations ===========================================================
+    check_all_spline_representation_conformity(
+            idx_ranges,
+            functions,
+            derivs_xmin,
+            derivs_xmax,
+            derivs_ymin,
+            derivs_ymax,
+            derivs_xy_min_min,
+            derivs_xy_max_min,
+            derivs_xy_min_max,
+            derivs_xy_max_max,
+            evaluator_g,
+            get_const_field(function_g_coef),
             std::make_integer_sequence<std::size_t, 9> {});
 }

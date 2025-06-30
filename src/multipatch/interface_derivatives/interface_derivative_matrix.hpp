@@ -37,31 +37,41 @@
  *      - Deal with periodic case here or in another operator?
  */
 
+ /**
+  * @brief 
+  */
 template <
         class Connectivity,
         class Grid1D,
         template <typename P>
         typename ValuesOnPatch,
-        bool PERIODIC,
         ddc::BoundCond LowerBound = ddc::BoundCond::HERMITE,
         ddc::BoundCond UpperBound = ddc::BoundCond::HERMITE,
         class ExecSpace = Kokkos::DefaultHostExecutionSpace,
         class... Patches>
 class InterfaceDerivativeMatrix
 {
-    using all_interface_collection = typename Connectivity::interface_collection; // TypeSeq
+    using all_interface_collection = typename Connectivity::interface_collection;
     using interface_collection =
             typename Connectivity::get_all_interfaces_along_direction_t<Grid1D>;
 
-    using all_patches = typename Connectivity::all_patches; // TypeSeq
+    using all_patches = typename Connectivity::all_patches;
 
     static constexpr std::size_t number_of_interfaces = ddc::type_seq_size_v<interface_collection>;
+
+    static_assert(
+            ((LowerBound == ddc::BoundCond::PERIODIC) && (UpperBound == ddc::BoundCond::PERIODIC))
+                    || ((LowerBound != ddc::BoundCond::PERIODIC)
+                        && (UpperBound != ddc::BoundCond::PERIODIC)),
+            "If one boundary is periodic, the other boundary should be too.");
+
+    static constexpr bool is_periodic = (LowerBound == ddc::BoundCond::PERIODIC);
 
     // TODO: remove Interfaces with OutsideEdge
     // Remove all the interfaces with an OutsideEdge.
     // Rely on the get_all_interfaces_along_direction_t that orders the interfaces.
     using outer_interface_collection = std::conditional_t<
-            PERIODIC,
+            is_periodic,
             ddc::detail::TypeSeq<>,
             ddc::detail::TypeSeq<
                     ddc::type_seq_element_t<0, interface_collection>,
@@ -76,13 +86,20 @@ class InterfaceDerivativeMatrix
             inner_interface_collection>;
 
     using FirstPatch = std::conditional_t<
-            PERIODIC,
+            is_periodic,
             find_patch_t<Grid1D, all_patches>,
             typename FirstInterface::Edge2::associated_patch>;
     using Grid1DSeq = collect_grids_on_dim_t<
             find_patch_t<Grid1D, all_patches>,
             Grid1D,
             interface_collection>;
+
+    static constexpr std::size_t n_inner_interfaces
+            = ddc::type_seq_size_v<inner_interface_collection>;
+
+    static_assert(
+            ddc::type_seq_size_v<Grid1DSeq> == n_inner_interfaces + !is_periodic,
+            "The number of 1D grids and inner interfaces should fit.");
 
 
     template <typename Patch>
@@ -128,48 +145,11 @@ class InterfaceDerivativeMatrix
             typename ExecSpace::memory_space>;
 
     // HELPFUL ALIASES ===========================================================================
-    template <typename Grid>
-    using get_patch_on_grid = find_patch_t<Grid, all_patches>;
-
-
-    // Get the grid tag from a tag templated on the grid.
-    template <typename T>
-    struct get_grid;
-
-    template <template <typename P> typename T, typename Grid>
-    struct get_grid<T<Grid>>
-    {
-        using type = Grid;
-    };
-
-    template <typename T>
-    using get_grid_t = typename get_grid<T>::type;
-
-    // Get the Patch defined with the given IdxRange tag.
-    template <typename IdxRange1D>
-    using get_patch_of_idx_range_1d = get_patch_on_grid<get_grid_t<IdxRange1D>>;
-
-    // Get a tuple of tags templated on the Interface with the order of the
-    // given Interface collection.
-    template <template <typename P> typename T, class InterfacesTypeSeq>
-    struct get_tuple_on_interfaces;
-
-    template <template <typename P> typename T, class InterfacesTypeSeq>
-    using get_tuple_on_interfaces_t = typename get_tuple_on_interfaces<T, InterfacesTypeSeq>::type;
-
-    template <template <typename P> typename T, class... Interfaces>
-    struct get_tuple_on_interfaces<T, ddc::detail::TypeSeq<Interfaces...>>
-    {
-        using type = std::tuple<T<Interfaces> const&...>;
-    };
-
-
     // Get the type of the interface given to define the Connectivity class.
     template <typename CurrentInterface>
     using get_equivalent_interface_t = find_associated_interface_t<
             typename CurrentInterface::Edge1,
             all_interface_collection>;
-
 
     // Get a tuple of SingleInterfaceDerivativesCalculator from an Interface collection.
     template <bool is_periodic, typename InterfaceCollection>
@@ -234,32 +214,14 @@ class InterfaceDerivativeMatrix
 
     template <typename InterfaceTypSeq>
     using get_tuple_deriv_calculator_t =
-            typename get_tuple_deriv_calculator<PERIODIC, InterfaceTypSeq>::type;
-
-
-
-    // Transfrom a tuple type into a TypeSeq.
-    template <class Tuple>
-    struct TupleToTypeSeq;
-
-    template <class... Elements>
-    struct TupleToTypeSeq<std::tuple<Elements...>>
-    {
-        using type = ddc::detail::TypeSeq<Elements...>;
-    };
-
-    template <class Tuple>
-    using tuple_to_type_seq_t = typename TupleToTypeSeq<Tuple>::type;
-
+            typename get_tuple_deriv_calculator<is_periodic, InterfaceTypSeq>::type;
 
     // ===========================================================================================
 
-    static constexpr std::size_t n_inner_interfaces
-            = ddc::type_seq_size_v<inner_interface_collection>;
-
     using Matrix = gko::matrix::Dense<double>;
 
-
+public:
+    using first_patch = FirstPatch;
 
 private:
     // Matrix m_matrix;
@@ -276,8 +238,7 @@ private:
 
     MultipatchType<IdxRangeOnPatch, Patches...> const& m_idx_ranges;
 
-
-    // WARNING, BE ABLE TO DEAL WITH DIFFERENT ORIENTATION INTERFACES.
+    // TODO: WARNING, BE ABLE TO DEAL WITH DIFFERENT ORIENTATION INTERFACES.
     using SingleInterfaceDerivativesCalculatorTuple
             = get_tuple_deriv_calculator_t<inner_interface_collection>;
     SingleInterfaceDerivativesCalculatorTuple const& m_derivatives_calculators;
@@ -316,16 +277,51 @@ public:
         m_interface_derivatives = Matrix::create(exec, gko::dim<2>(n_inner_interfaces, 1));
     }
 
-    template <class IdxPar>
-    void solve(
+
+    template <class IdxPar, template <typename P> class FieldOnPatch, class DerivsTypeCollection>
+    void solve( // Should be useful for non-conforming case (later).
             IdxPar const& idx_par,
-            MultipatchField<ValuesOnPatch, Patches...> const& function_values,
-            MultipatchField<DerivsPerpOnPatch, Patches...> const& derivs_min,
-            MultipatchField<DerivsPerpOnPatch, Patches...> const& derivs_max)
+            MultipatchField<FieldOnPatch, Patches...> const& function_values,
+            DerivsTypeCollection const& derivs_min,
+            DerivsTypeCollection const& derivs_max)
     {
+        // Check the input types.
         static_assert(
                 (std::is_same_v<IdxPar, typename FirstPatch::Idx1>)
-                || (std::is_same_v<IdxPar, typename FirstPatch::Idx2>));
+                        || (std::is_same_v<IdxPar, typename FirstPatch::Idx2>),
+                "The given index has to be a 1D index defined on the first patch. See "
+                "InterfaceDerivativeMatrix<...>::first_patch.");
+        static_assert(
+                (std::is_same_v<FieldOnPatch<FirstPatch>, ValuesOnPatch<FirstPatch>>)
+                        || (std::is_same_v<
+                                FieldOnPatch<FirstPatch>,
+                                ConstDerivsParOnPatch<FirstPatch>>),
+                "The `function_values` parameter has to be a MultipatchField collection of "
+                "function values (see ValuesOnPatch) or first derivative fields.");
+        // It seems to not recognise MultipatchField<DerivsPerpOnPatch, Patches...> being equal to 
+        // MultipatchField<Deriv[1/2]_OnPatch_2D_host, Patches...>
+        static_assert(
+                (std::is_same_v<
+                        DerivsTypeCollection,
+                        MultipatchField<DerivsPerpOnPatch, Patches...>>)
+                        || (std::is_same_v<
+                                DerivsTypeCollection,
+                                MultipatchField<Deriv1_OnPatch_2D_host, Patches...>>)
+                        || (std::is_same_v<
+                                DerivsTypeCollection,
+                                MultipatchField<Deriv2_OnPatch_2D_host, Patches...>>)
+                        || (std::is_same_v<
+                                DerivsTypeCollection,
+                                MultipatchField<Deriv1_OnPatch_2D, Patches...>>)
+                        || (std::is_same_v<
+                                DerivsTypeCollection,
+                                MultipatchField<Deriv2_OnPatch_2D, Patches...>>)
+                        || (std::is_same_v<
+                                DerivsTypeCollection,
+                                std::tuple<CrossDerivsPerpOnPatch<Patches>...>>),
+                "The `derivs_min/max` parameters are either first derivative field MultipatchField "
+                "collection, or cross-derivative field tuple collection.");
+
         // Update m_vector.
         set_vector(
                 idx_par,
@@ -337,29 +333,6 @@ public:
         // Update m_interface_derivatives.
         m_solver->apply(m_vector, m_interface_derivatives);
 
-        // // generate_stencil_matrix(gko::lend(matrix));
-        // for (int i = 0; i < n_inner_interfaces; ++i) {
-        //     for (int j = 0; j < n_inner_interfaces; ++j) {
-        //         std::cout << "matrix = "
-        //                   << m_matrix->get_values()[i * (n_inner_interfaces) + j]
-        //                   << "   ";
-        //     }
-        //     std::cout << std::endl;
-        // }
-        // std::cout << std::endl;
-
-        // auto values = m_vector->get_values();
-        // for (int i = 0; i < n_inner_interfaces; ++i) {
-        //     std::cout << "vector = " << values[i] << std::endl;
-        // }
-        // std::cout << std::endl;
-
-        // auto sol = m_interface_derivatives->get_values();
-        // for (int i = 0; i < n_inner_interfaces; ++i) {
-        //     std::cout << "sol = " << sol[i] << std::endl;
-        // }
-        // std::cout << std::endl;
-
         // Update derivatives.
         update_derivatives(
                 derivs_min,
@@ -369,83 +342,25 @@ public:
                 std::make_integer_sequence<std::size_t, n_inner_interfaces> {});
     }
 
-
+    template <template <typename P> class FieldOnPatch, class DerivsTypeCollection>
     void solve(
-            MultipatchField<ValuesOnPatch, Patches...> const& function_values,
-            MultipatchField<DerivsPerpOnPatch, Patches...> const& derivs_min,
-            MultipatchField<DerivsPerpOnPatch, Patches...> const& derivs_max)
+            MultipatchField<FieldOnPatch, Patches...> const& function_values,
+            DerivsTypeCollection const& derivs_min,
+            DerivsTypeCollection const& derivs_max)
     {
-        std::tuple sorted_idx_ranges_perp_tuple
-                = Connectivity::template get_all_idx_ranges_along_direction<Grid1D>(m_idx_ranges);
-
-        using IdxRangePerpType = tuple_to_type_seq_t<decltype(sorted_idx_ranges_perp_tuple)>;
         constexpr bool is_first_idx_range_perp_on_dim1
-                = ddc::in_tags_v<typename FirstPatch::IdxRange1, IdxRangePerpType>;
-
-        using IdxRangePerpFirstType = std::conditional_t<
-                is_first_idx_range_perp_on_dim1,
-                typename FirstPatch::IdxRange1,
-                typename FirstPatch::IdxRange2>;
+                = ddc::in_tags_v<typename FirstPatch::Grid1, Grid1DSeq>;
         using IdxRangeParFirstType = std::conditional_t<
                 is_first_idx_range_perp_on_dim1,
                 typename FirstPatch::IdxRange2,
                 typename FirstPatch::IdxRange1>;
 
-        IdxRangeParFirstType idx_range_par_first = ddc::remove_dims_of(
-                m_idx_ranges.template get<FirstPatch>(),
-                std::get<IdxRangePerpFirstType>(sorted_idx_ranges_perp_tuple));
+        IdxRangeParFirstType idx_range_par_first(m_idx_ranges.template get<FirstPatch>());
 
         ddc::for_each(
                 idx_range_par_first,
                 [&](typename IdxRangeParFirstType::discrete_element_type const& idx_par) {
                     (*this).solve(idx_par, function_values, derivs_min, derivs_max);
-                });
-    }
-
-
-    void solve(
-            MultipatchField<ConstDerivsParOnPatch, Patches...> const& derivs,
-            std::tuple<CrossDerivsPerpOnPatch<Patches>...> const& cross_derivs_min,
-            std::tuple<CrossDerivsPerpOnPatch<Patches>...> const& cross_derivs_max)
-    {
-        std::tuple sorted_idx_ranges_perp_tuple
-                = Connectivity::template get_all_idx_ranges_along_direction<Grid1D>(m_idx_ranges);
-
-        using IdxRangePerpType = tuple_to_type_seq_t<decltype(sorted_idx_ranges_perp_tuple)>;
-        constexpr bool is_first_idx_range_perp_on_dim1
-                = ddc::in_tags_v<typename FirstPatch::IdxRange1, IdxRangePerpType>;
-
-        using IdxRangePerpFirstType = std::conditional_t<
-                is_first_idx_range_perp_on_dim1,
-                typename FirstPatch::IdxRange1,
-                typename FirstPatch::IdxRange2>;
-        using IdxRangeParFirstType = std::conditional_t<
-                is_first_idx_range_perp_on_dim1,
-                typename FirstPatch::IdxRange2,
-                typename FirstPatch::IdxRange1>;
-
-        IdxRangeParFirstType idx_range_par_first = ddc::remove_dims_of(
-                m_idx_ranges.template get<FirstPatch>(),
-                std::get<IdxRangePerpFirstType>(sorted_idx_ranges_perp_tuple));
-
-        ddc::for_each(
-                idx_range_par_first,
-                [&](typename IdxRangeParFirstType::discrete_element_type const& idx_par) {
-                    // Update the m_interface_derivatives vector.
-                    set_vector(
-                            idx_par,
-                            derivs,
-                            cross_derivs_min,
-                            cross_derivs_max,
-                            std::make_integer_sequence<std::size_t, n_inner_interfaces> {});
-                    m_solver->apply(m_vector, m_interface_derivatives);
-
-                    update_derivatives(
-                            cross_derivs_min,
-                            cross_derivs_max,
-                            derivs,
-                            idx_par,
-                            std::make_integer_sequence<std::size_t, n_inner_interfaces> {});
                 });
     }
 
@@ -483,10 +398,10 @@ private:
             }
         }
 
-        if constexpr (LowerBound == ddc::BoundCond::PERIODIC && I == 0) {
+        if constexpr (is_periodic && I == 0) {
             m_matrix->at(I, n_inner_interfaces - 1) = coefs[0];
         }
-        if constexpr (UpperBound == ddc::BoundCond::PERIODIC && I == n_inner_interfaces - 1) {
+        if constexpr (is_periodic && I == n_inner_interfaces - 1) {
             m_matrix->at(I, 0) = coefs[2];
         }
     }
@@ -523,9 +438,6 @@ private:
             DerivCollectionType const& derivs_min,
             DerivCollectionType const& derivs_max)
     {
-        // RMK: only needed for I = 0 and I =  n_inner_interfaces - 1 but computed for each I.
-        // auto [deriv_1, deriv_2] = get_interface_derivatives<I>(derivs_min, derivs_min);
-
         using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
 
         constexpr bool is_same_orientation = std::is_same_v<
@@ -542,10 +454,6 @@ private:
         FieldOnPatch<Patch1> function_1 = functions.template get<Patch1>();
         FieldOnPatch<Patch2> function_2 = functions.template get<Patch2>();
 
-        auto function_slice_1 = function_1[idx_slice_1];
-        auto function_slice_2 = function_2[idx_slice_2];
-
-
         // Check that we select the correct derivative calculator.
         // TODO: use a MultipathType over the interfaces?
         using DerivativeCalculator
@@ -560,10 +468,11 @@ private:
                 || (!is_same_orientation
                     && std::is_same_v<InterfaceI, InterfaceDerivativeCalculatorSymmetrical>));
 
-        double lin_comb_funct
-                = sign
-                  * std::get<I>(m_derivatives_calculators)
-                            .get_function_coefficients(function_slice_1, function_slice_2);
+        double lin_comb_funct = sign
+                                * std::get<I>(m_derivatives_calculators)
+                                          .get_function_coefficients(
+                                                  function_1[idx_slice_1],
+                                                  function_2[idx_slice_2]);
 
         m_vector->get_values()[I] = lin_comb_funct;
 
@@ -715,12 +624,6 @@ private:
             int& slice_idx_1_value,
             MultipatchField<FieldOnPatch, Patches...> const& functions)
     {
-        std::tuple sorted_idx_ranges_perp_tuple
-                = Connectivity::template get_all_idx_ranges_along_direction<Grid1D>(m_idx_ranges);
-        static_assert(
-                std::tuple_size_v<
-                        decltype(sorted_idx_ranges_perp_tuple)> == n_inner_interfaces + !PERIODIC);
-
         using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
 
         using Patch1 = typename InterfaceI::Edge1::associated_patch;
@@ -730,28 +633,20 @@ private:
         using PerpGrid2 = typename InterfaceI::Edge2::perpendicular_grid;
 
         // Define all the different index ranges
-        IdxRange<PerpGrid1> const idx_range_perp_1
-                = std::get<IdxRange<PerpGrid1>>(sorted_idx_ranges_perp_tuple);
-        IdxRange<PerpGrid2> const idx_range_perp_2
-                = std::get<IdxRange<PerpGrid2>>(sorted_idx_ranges_perp_tuple);
+        IdxRange<PerpGrid1> const idx_range_perp_1(m_idx_ranges.template get<Patch1>());
+        IdxRange<PerpGrid2> const idx_range_perp_2(m_idx_ranges.template get<Patch2>());
 
         FieldOnPatch<Patch1> function_1 = functions.template get<Patch1>();
         FieldOnPatch<Patch2> function_2 = functions.template get<Patch2>();
 
-        auto const idx_range_fct_2d_1 = get_idx_range(function_1);
-        auto const idx_range_fct_2d_2 = get_idx_range(function_2);
-
+        // Index range on Grid(s) or ddc::Deriv(s).
         auto const idx_range_fct_parell_1
-                = ddc::remove_dims_of(idx_range_fct_2d_1, idx_range_perp_1);
+                = ddc::remove_dims_of(get_idx_range(function_1), idx_range_perp_1);
         auto const idx_range_fct_parell_2
-                = ddc::remove_dims_of(idx_range_fct_2d_2, idx_range_perp_2);
-
+                = ddc::remove_dims_of(get_idx_range(function_2), idx_range_perp_2);
 
         // Determine the perpendicular indexes.
-        auto slice_indexes = get_slice_indexes<
-                I,
-                Patch1,
-                Patch2>(slice_idx_1_value, sorted_idx_ranges_perp_tuple, functions);
+        auto slice_indexes = get_slice_indexes<I, Patch1, Patch2>(slice_idx_1_value, functions);
         auto slice_idx_1 = std::get<0>(slice_indexes);
         auto slice_idx_2 = std::get<1>(slice_indexes);
 
@@ -770,12 +665,6 @@ private:
             DerivFieldOnPatch1 const& deriv_1,
             DerivFieldOnPatch2 const& deriv_2)
     {
-        std::tuple sorted_idx_ranges_perp_tuple
-                = Connectivity::template get_all_idx_ranges_along_direction<Grid1D>(m_idx_ranges);
-        static_assert(
-                std::tuple_size_v<
-                        decltype(sorted_idx_ranges_perp_tuple)> == n_inner_interfaces + !PERIODIC);
-
         using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
 
         using Patch1 = typename InterfaceI::Edge1::associated_patch;
@@ -784,53 +673,29 @@ private:
         using PerpGrid1 = typename InterfaceI::Edge1::perpendicular_grid;
         using PerpGrid2 = typename InterfaceI::Edge2::perpendicular_grid;
 
-        // Define all the different index ranges
-        IdxRange<PerpGrid1> const idx_range_perp_1
-                = std::get<IdxRange<PerpGrid1>>(sorted_idx_ranges_perp_tuple);
-        IdxRange<PerpGrid2> const idx_range_perp_2
-                = std::get<IdxRange<PerpGrid2>>(sorted_idx_ranges_perp_tuple);
-
-        FieldOnPatch<Patch1> function_1 = functions.template get<Patch1>();
-        FieldOnPatch<Patch2> function_2 = functions.template get<Patch2>();
-
-        auto const idx_range_fct_2d_1 = get_idx_range(function_1);
-        auto const idx_range_fct_2d_2 = get_idx_range(function_2);
-
-        auto const idx_range_fct_parell_1
-                = ddc::remove_dims_of(idx_range_fct_2d_1, idx_range_perp_1);
-        auto const idx_range_fct_parell_2
-                = ddc::remove_dims_of(idx_range_fct_2d_2, idx_range_perp_2);
-
+        using PerpDim1 = typename PerpGrid1::continuous_dimension_type;
+        using PerpDim2 = typename PerpGrid2::continuous_dimension_type;
 
         // Determine the perpendicular indexes.
-        auto slice_indexes = get_slice_indexes<
-                I,
-                Patch1,
-                Patch2>(slice_idx_1_value, sorted_idx_ranges_perp_tuple, functions);
+        auto slice_indexes = get_slice_indexes<I, Patch1, Patch2>(slice_idx_1_value, functions);
         auto slice_idx_1 = std::get<0>(slice_indexes);
         auto slice_idx_2 = std::get<1>(slice_indexes);
 
         // Determine the parallel indexes.
-        Idx<ddc::Deriv<typename PerpGrid1::continuous_dimension_type>> idx_first_deriv_1
-                = ddc::remove_dims_of(get_idx_range(deriv_1), idx_range_fct_parell_1).front();
-        Idx<ddc::Deriv<typename PerpGrid2::continuous_dimension_type>> idx_first_deriv_2
-                = ddc::remove_dims_of(get_idx_range(deriv_2), idx_range_fct_parell_2).front();
+        IdxRange<ddc::Deriv<PerpDim1>> idx_range_first_deriv_1(get_idx_range(deriv_1));
+        IdxRange<ddc::Deriv<PerpDim2>> idx_range_first_deriv_2(get_idx_range(deriv_2));
+
+        Idx<ddc::Deriv<PerpDim1>> idx_first_deriv_1(idx_range_first_deriv_1.front());
+        Idx<ddc::Deriv<PerpDim2>> idx_first_deriv_2(idx_range_first_deriv_2.front());
 
         return std::make_tuple(slice_idx_1, slice_idx_2, idx_first_deriv_1, idx_first_deriv_2);
     }
 
 
     // Get the equivalent index slice on the two patches.
-    template <
-            std::size_t I,
-            class Patch1,
-            class Patch2,
-            class IdxRangeTuple,
-            template <typename P>
-            class FieldOnPatch>
+    template <std::size_t I, class Patch1, class Patch2, template <typename P> class FieldOnPatch>
     auto get_slice_indexes(
             int& slice_idx_1_value,
-            IdxRangeTuple const& sorted_idx_ranges_tuple,
             MultipatchField<FieldOnPatch, Patches...> const& function_values)
     {
         using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
@@ -841,33 +706,23 @@ private:
         using ParallGrid1 = typename InterfaceI::Edge1::parallel_grid;
         using ParallGrid2 = typename InterfaceI::Edge2::parallel_grid;
 
-        // Define all the different index ranges
-        IdxRange<PerpGrid1> const idx_range_perp_1
-                = std::get<IdxRange<PerpGrid1>>(sorted_idx_ranges_tuple);
-        IdxRange<PerpGrid2> const idx_range_perp_2
-                = std::get<IdxRange<PerpGrid2>>(sorted_idx_ranges_tuple);
+        // Define all the different index ranges.
+        IdxRange<PerpGrid1> const idx_range_perp_1(m_idx_ranges.template get<Patch1>());
+        IdxRange<PerpGrid2> const idx_range_perp_2(m_idx_ranges.template get<Patch2>());
 
-        typename Patch1::IdxRange12 const idx_range_2d_1 = m_idx_ranges.template get<Patch1>();
-        typename Patch2::IdxRange12 const idx_range_2d_2 = m_idx_ranges.template get<Patch2>();
-
-        IdxRange<ParallGrid1> const idx_range_parell_1
-                = ddc::remove_dims_of(idx_range_2d_1, idx_range_perp_1);
-        IdxRange<ParallGrid2> const idx_range_parell_2
-                = ddc::remove_dims_of(idx_range_2d_2, idx_range_perp_2);
-
+        IdxRange<ParallGrid1> const idx_range_parell_1(m_idx_ranges.template get<Patch1>());
+        IdxRange<ParallGrid2> const idx_range_parell_2(m_idx_ranges.template get<Patch2>());
 
         FieldOnPatch<Patch1> function_1 = function_values.template get<Patch1>();
         FieldOnPatch<Patch2> function_2 = function_values.template get<Patch2>();
 
-        auto const idx_range_fct_2d_1 = get_idx_range(function_1);
-        auto const idx_range_fct_2d_2 = get_idx_range(function_2);
-
+        // Index range on Grid(s) or ddc::Deriv(s).
         auto const idx_range_fct_parall_1
-                = ddc::remove_dims_of(idx_range_fct_2d_1, idx_range_perp_1);
+                = ddc::remove_dims_of(get_idx_range(function_1), idx_range_perp_1);
         auto const idx_range_fct_parall_2
-                = ddc::remove_dims_of(idx_range_fct_2d_2, idx_range_perp_2);
+                = ddc::remove_dims_of(get_idx_range(function_2), idx_range_perp_2);
 
-        // Get slice indexes
+        // Get slice indexes.
         EdgeTransformation<InterfaceI> index_converter(idx_range_parell_1, idx_range_parell_2);
 
         using OIdx1 = typename decltype(idx_range_fct_parall_1)::discrete_element_type;
