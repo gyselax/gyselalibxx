@@ -8,6 +8,7 @@
 
 #include <Kokkos_Core.hpp>
 
+#include "cartesian_to_circular.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
@@ -15,14 +16,21 @@
 
 namespace {
 
+struct R_cov;
+struct Theta_cov;
+
 struct R
 {
     static constexpr bool PERIODIC = false;
+    /// The corresponding type in the dual space.
+    using Dual = R_cov;
 };
 
 struct Theta
 {
     static constexpr bool PERIODIC = true;
+    /// The corresponding type in the dual space.
+    using Dual = Theta_cov;
 };
 
 struct Batch;
@@ -249,17 +257,7 @@ protected:
     DFieldMemRThetaBatch m_A_bar_alloc;
 };
 
-struct CartesianToPolar
-{
-    KOKKOS_INLINE_FUNCTION CoordRTheta operator()(double const x, double const y) const
-    {
-        double r = Kokkos::hypot(x, y);
-        double theta = Kokkos::atan2(y, x);
-        if (theta < 0)
-            theta += M_PI * 2.0;
-        return CoordRTheta(r, theta);
-    }
-};
+using CartesianToPolar = CartesianToCircular<X_pC, Y_pC, R, Theta>;
 
 TEST_P(GyroAverageCircularParamTests, TestPeriodicity)
 {

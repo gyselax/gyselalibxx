@@ -5,6 +5,7 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "geometry_pseudo_cartesian.hpp"
 
 namespace detail {
 
@@ -67,6 +68,7 @@ public:
     using DConstFieldRminorThetaBatch = ConstField<double, IdxRangeRminorThetaBatch>;
 
     using CoordRminorTheta = Coord<Rminor, Theta>;
+    using CoordRZ = CoordXY_pC;
 
 private:
     /**
@@ -115,6 +117,14 @@ public:
         , m_coordinate_transform(coordinate_transform)
         , m_nb_gyro_points(nb_gyro_points)
     {
+        static_assert(
+                is_mapping_v<CoordinateTransformFunction>,
+                "CoordinateTransformFunction must be a mapping");
+        static_assert(std::is_same_v<typename CoordinateTransformFunction::CoordArg, CoordRZ>);
+        static_assert(std::is_same_v<
+                      typename CoordinateTransformFunction::CoordResult,
+                      CoordRminorTheta>);
+        static_assert(is_accessible_v<ExecutionSpace, CoordinateTransformFunction>);
     }
 
     /**
@@ -132,9 +142,6 @@ public:
      */
     void operator()(DConstFieldRminorThetaBatch const& A, DFieldRminorThetaBatch const& A_bar) const
     {
-        static_assert(
-                std::is_invocable_v<CoordinateTransformFunction, double, double>,
-                "CoordinateTransformFunction must be a functor on (double, double)");
         IdxRangeRminorThetaBatch const rthetabatch_idx_range = get_idx_range(A);
         IdxRangeTheta const theta_idx_range(rthetabatch_idx_range);
         IdxRangeBatch const batch_idx_range(rthetabatch_idx_range);
@@ -190,7 +197,7 @@ public:
                                                + rho_L(ir, itheta) * Kokkos::sin(alpha);
 
                             // Convert from (R, Z) into (r, theta) coordinate
-                            CoordRminorTheta p = coordinate_transform(R_p, Z_p);
+                            CoordRminorTheta p = coordinate_transform(CoordRZ {R_p, Z_p});
 
                             // Spline interpolation in (r, theta) coordinate
                             sum_over_gyro_points += spline_evaluator(p, get_const_field(coef));
