@@ -318,7 +318,7 @@ public:
 
         ddc::for_each(batch_idx_range, [&](batch_index_type ib) {
             solve_poisson_equation(intermediate_chunk, rho[ib]);
-            get_gradient(E[ib], fourier_efield, intermediate_chunk);
+            //get_gradient(E[ib], fourier_efield, intermediate_chunk);
 
             // Perform the inverse 1D FFT of the solution to deduce the electrostatic potential
             ddc::

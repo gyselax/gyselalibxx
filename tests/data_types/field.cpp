@@ -111,7 +111,7 @@ static IdxRangeXY constexpr idx_range_x_y(lbound_x_y, nelems_x_y);
 
 TEST(VectorFieldMem0DTest, LayoutType)
 {
-    EXPECT_TRUE((std::is_same_v<DVectorFieldMem0D::chunk_type::layout_type, Kokkos::layout_right>));
+    EXPECT_TRUE((std::is_same_v<DVectorFieldMem0D::layout_type, Kokkos::layout_right>));
 }
 
 TEST(VectorField1DTest, LayoutType)
@@ -119,7 +119,7 @@ TEST(VectorField1DTest, LayoutType)
     DVectorFieldMemX field(idx_range_x);
 
     EXPECT_TRUE((std::is_same_v<
-                 std::decay_t<decltype(field)::chunk_type>::layout_type,
+                 std::decay_t<decltype(field)>::layout_type,
                  Kokkos::layout_right>));
 }
 

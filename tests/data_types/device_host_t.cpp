@@ -85,7 +85,7 @@ TEST(MemorySpace, VectorFieldOnDeviceT)
     device_t<VectorFieldX<double>> vector_field_test = get_field(vector_field_test_alloc);
     VectorFieldMem<double, IdxRangeX, Direction, Kokkos::DefaultExecutionSpace::memory_space>
             vector_field_alloc(idx_range_x);
-    VectorField vector_field = get_field(vector_field_alloc);
+    VectorField<double, IdxRangeX, Direction> vector_field = get_field(vector_field_alloc);
     EXPECT_TRUE(typeid(vector_field_test) == typeid(vector_field));
 }
 
@@ -122,6 +122,6 @@ TEST(MemorySpace, VectorFieldOnHostT)
     host_t<VectorFieldMemX<double>> vector_field_test_alloc(idx_range_x);
     host_t<VectorFieldX<double>> vector_field_test = get_field(vector_field_test_alloc);
     VectorFieldMem<double, IdxRangeX, Direction, Kokkos::HostSpace> vector_field_alloc(idx_range_x);
-    VectorField vector_field = get_field(vector_field_alloc);
+    host_t<VectorField<double, IdxRangeX, Direction>> vector_field = get_field(vector_field_alloc);
     EXPECT_TRUE(typeid(vector_field_test) == typeid(vector_field));
 }
