@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 #include <array>
+#include <type_traits>
 #include <vector>
 
 #include <ddc/ddc.hpp>
@@ -119,6 +120,7 @@ public:
     template <class DDim>
     static constexpr IdxRange<DDim> singular_idx_range()
     {
+        static_assert(std::is_base_of_v<PolarBSplines, DDim>);
         return IdxRange<DDim>(Idx<DDim> {0}, IdxStep<DDim> {n_singular_basis()});
     }
 
@@ -160,6 +162,40 @@ public:
         Idx<BSplinesR> r_idx_elem(r_idx + C + 1);
         Idx<BSplinesTheta> theta_idx_elem(theta_idx);
         return Idx<BSplinesR, BSplinesTheta>(r_idx_elem, theta_idx_elem);
+    }
+
+    template <class ElementType, class DDim, class MemorySpace>
+    static Field<ElementType, IdxRange<DDim>, MemorySpace> get_singular_subset(
+            Field<ElementType, IdxRange<DDim>, MemorySpace> coeffs)
+    {
+        static_assert(std::is_base_of_v<PolarBSplines, DDim>);
+        return coeffs[singular_idx_range<DDim>()];
+    }
+
+    template <class ElementType, class DDim, class MemorySpace>
+    static Field<ElementType, tensor_product_idx_range_type, MemorySpace> get_tensor_product_subset(
+            Field<ElementType, IdxRange<DDim>, MemorySpace> coeffs)
+    {
+        static_assert(std::is_base_of_v<PolarBSplines, DDim>);
+        IdxRange<DDim> current_idx_range(get_idx_range(coeffs));
+        //assert(current_idx_range.contains(singular_idx_range<DDim>()));
+        IdxRange<DDim> relevant_idx_range(
+                current_idx_range.remove_first(IdxStep<DDim>(n_singular_basis())));
+        Field<ElementType, IdxRange<DDim>, MemorySpace> relevant_coeffs
+                = coeffs[relevant_idx_range];
+
+        tensor_product_index_type start_idx = get_2d_index(relevant_idx_range.front());
+        tensor_product_index_type end_idx
+                = get_2d_index(relevant_idx_range.front() + relevant_idx_range.extents());
+        tensor_product_idx_step_type idx_step = end_idx - start_idx;
+
+        tensor_product_idx_range_type tensor_idx_range(start_idx, idx_step);
+        assert(tensor_idx_range.size() == relevant_coeffs.size());
+
+        return Field<
+                ElementType,
+                tensor_product_idx_range_type,
+                MemorySpace>(relevant_coeffs.data_handle(), tensor_idx_range);
     }
 
 public:
