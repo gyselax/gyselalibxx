@@ -9,6 +9,7 @@ target_link_libraries(gyroaverage
     INTERFACE
         DDC::core
         gslx::utils
+        gslx::coord_transformations
 )
 
 add_library(gslx::gyroaverage ALIAS gyroaverage)
