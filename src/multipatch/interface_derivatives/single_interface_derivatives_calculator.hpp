@@ -118,6 +118,7 @@ class SingleInterfaceDerivativesCalculator
     using IdxRangeBreakPt2 = IdxRange<GridBreakPt2>;
 
 public:
+    /// @brief Interface between the two involved patches. 
     using associated_interface = InterfaceType;
 
 private:

@@ -267,7 +267,7 @@ class InterfaceDerivativeMatrix
     using Matrix = gko::matrix::Dense<double>;
 
 public:
-    // First patch of the collection of patches in the direction of the given Grid1D.
+    /// @brief First patch of the collection of patches in the direction of the given Grid1D.
     using first_patch = FirstPatch;
 
 private:
@@ -495,7 +495,7 @@ private:
                           : std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_1();
         const double coefs[] = {-coeff_left, 1, -coeff_right};
 
-        for (auto dofs : {-1, 0, 1}) {
+        for (int dofs : {-1, 0, 1}) {
             if (0 <= I + dofs && I + dofs < n_inner_interfaces) {
                 m_matrix->at(I, I + dofs) = coefs[dofs + 1];
             }
