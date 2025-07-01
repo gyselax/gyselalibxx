@@ -35,6 +35,8 @@
   * @brief Class to compute the interface derivatives along a given direction 
   * on all the interfaces.  
   * 
+  * This operator is implemented for conforming equivalent global meshes. 
+  * 
   * During the instantiation of the class, the matrix (I-M) is computed are stored in the class. 
   * When we call the operator .solve(), 
   *     - InterfaceDerivativeMatrix computes the vector C from the given values. 
@@ -56,7 +58,7 @@ template <
         class Connectivity,
         class Grid1D,
         template <typename P>
-        typename ValuesOnPatch,
+        typename ValuesOnPatch, // Fix type ? 
         ddc::BoundCond LowerBound = ddc::BoundCond::HERMITE,
         ddc::BoundCond UpperBound = ddc::BoundCond::HERMITE,
         class ExecSpace = Kokkos::DefaultHostExecutionSpace,
@@ -344,10 +346,10 @@ public:
      * @tparam DerivsTypeCollection MultipatchField or std::tuple of first derivatives or cross-derivatives 
      *              we want to compute.
      * 
-     * @param idx_par Index of the line in the Grid1D direction where we compute all the interface derivatives. 
-     * @param function_values Constant field collection of function values or first derivatives on the patch list. 
-     * @param derivs_min Collection first derivatives or cross-derivatives on the west/south side we want to compute.
-     * @param derivs_max Collection first derivatives or cross-derivatives on the east/north side we want to compute.
+     * @param derivs_min[out] Collection first derivatives or cross-derivatives on the west/south side we want to compute.
+     * @param derivs_max[out] Collection first derivatives or cross-derivatives on the east/north side we want to compute.
+     * @param idx_par[in] Index of the line in the Grid1D direction where we compute all the interface derivatives. 
+     * @param function_values[in] Constant field collection of function values or first derivatives on the patch list. 
      */
     template <class IdxPar, template <typename P> class FieldOnPatch, class DerivsTypeCollection>
     void solve( // Should be useful for non-conforming case (later).
@@ -422,9 +424,9 @@ public:
      * @tparam DerivsTypeCollection MultipatchField or std::tuple of first derivatives or cross-derivatives 
      *              we want to compute.
      * 
-     * @param function_values Constant field collection of function values or first derivatives on the patch list. 
-     * @param derivs_min Collection first derivatives or cross-derivatives on the west/south side we want to compute.
-     * @param derivs_max Collection first derivatives or cross-derivatives on the east/north side we want to compute.
+     * @param derivs_min[out] Collection first derivatives or cross-derivatives on the west/south side we want to compute.
+     * @param derivs_max[out] Collection first derivatives or cross-derivatives on the east/north side we want to compute.
+     * @param function_values[in] Constant field collection of function values or first derivatives on the patch list. 
      */
     template <template <typename P> class FieldOnPatch, class DerivsTypeCollection>
     void solve(
