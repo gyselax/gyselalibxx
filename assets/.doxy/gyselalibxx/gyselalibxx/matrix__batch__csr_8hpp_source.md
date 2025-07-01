@@ -97,16 +97,11 @@ public:
                 batch_sparse_type::
                         create(gko_exec,
                                gko::batch_dim<2>(batch_size(), gko::dim<2>(size(), size())),
-                               std::move(gko::array<double>::
-                                                 view(gko_exec,
-                                                      batch_values.span(),
-                                                      batch_values.data())),
-                               std::move(gko::array<
-                                         int>::view(gko_exec, cols_idx.span(), cols_idx.data())),
-                               std::move(gko::array<int>::
-                                                 view(gko_exec,
-                                                      nnz_per_row.span(),
-                                                      nnz_per_row.data()))));
+                               gko::array<double>::
+                                       view(gko_exec, batch_values.span(), batch_values.data()),
+                               gko::array<int>::view(gko_exec, cols_idx.span(), cols_idx.data()),
+                               gko::array<int>::
+                                       view(gko_exec, nnz_per_row.span(), nnz_per_row.data())));
     }
 
     std::tuple<

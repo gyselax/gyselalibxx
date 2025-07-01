@@ -595,7 +595,7 @@ public:
 
     template &lt;class MultipatchObj&gt;
     explicit MultipatchFieldMem(MultipatchObj&amp; other)
-        : base_type(std::move(T&lt;Patches&gt;(other.template get&lt;Patches&gt;()))...)
+        : base_type(T&lt;Patches&gt;(other.template get&lt;Patches&gt;())...)
     {
         static_assert(is_multipatch_type_v&lt;MultipatchObj&gt;);
     }

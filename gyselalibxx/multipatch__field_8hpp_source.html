@@ -599,14 +599,14 @@ public:
 
     template &lt;class MultipatchObj, std::enable_if_t&lt;!is_mem_type_v&lt;MultipatchObj&gt;, bool&gt; = true&gt;
     KOKKOS_FUNCTION MultipatchField(MultipatchObj&amp; other)
-        : base_type(std::move(T&lt;Patches&gt;(other.template get&lt;Patches&gt;()))...)
+        : base_type(T&lt;Patches&gt;(other.template get&lt;Patches&gt;())...)
     {
         static_assert(is_multipatch_type_v&lt;MultipatchObj&gt;);
     }
 
     template &lt;class MultipatchObj, std::enable_if_t&lt;is_mem_type_v&lt;MultipatchObj&gt;, bool&gt; = true&gt;
     explicit MultipatchField(MultipatchObj&amp; other)
-        : base_type(std::move(T&lt;Patches&gt;(other.template get&lt;Patches&gt;()))...)
+        : base_type(T&lt;Patches&gt;(other.template get&lt;Patches&gt;())...)
     {
         static_assert(is_multipatch_type_v&lt;MultipatchObj&gt;);
     }

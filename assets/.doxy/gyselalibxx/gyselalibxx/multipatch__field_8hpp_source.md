@@ -66,14 +66,14 @@ public:
 
     template <class MultipatchObj, std::enable_if_t<!is_mem_type_v<MultipatchObj>, bool> = true>
     KOKKOS_FUNCTION MultipatchField(MultipatchObj& other)
-        : base_type(std::move(T<Patches>(other.template get<Patches>()))...)
+        : base_type(T<Patches>(other.template get<Patches>())...)
     {
         static_assert(is_multipatch_type_v<MultipatchObj>);
     }
 
     template <class MultipatchObj, std::enable_if_t<is_mem_type_v<MultipatchObj>, bool> = true>
     explicit MultipatchField(MultipatchObj& other)
-        : base_type(std::move(T<Patches>(other.template get<Patches>()))...)
+        : base_type(T<Patches>(other.template get<Patches>())...)
     {
         static_assert(is_multipatch_type_v<MultipatchObj>);
     }
