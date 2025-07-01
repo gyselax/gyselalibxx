@@ -257,7 +257,7 @@ public:
                     Kokkos::DefaultHostExecutionSpace,
                     Kokkos::DefaultExecutionSpace>;
             if constexpr (C > -1) {
-                IdxRange<BSplinesR> idx_range_r_ctrl_pts(Idx<BSplinesR>(1), IdxStep<BSplinesR>(1));
+                IdxRange<BSplinesR> idx_range_r_ctrl_pts(IdxR(0), IdxStepR(C + 1));
                 IdxRange<BSplinesR, BSplinesTheta> idx_range_ctrl_pts(
                         idx_range_r_ctrl_pts,
                         ddc::discrete_space<BSplinesTheta>().full_domain());
@@ -267,15 +267,16 @@ public:
                         .control_points(EvalExecSpace(), get_field(control_pts_eval_space_mem));
                 auto control_pts_mem
                         = ddc::create_mirror_and_copy(get_const_field(control_pts_eval_space_mem));
-                host_t<Field<Coord<X, Y>, IdxRange<BSplinesTheta>>> control_pts
-                        = control_pts_mem[Idx<BSplinesR>(1)];
+                host_t<Field<Coord<X, Y>, IdxRange<BSplinesR, BSplinesTheta>>> control_pts
+                        = get_field(control_pts_mem);
 
                 const Coord<X, Y> pole = curvilinear_to_cartesian.o_point();
                 const double x0 = ddc::get<X>(pole);
                 const double y0 = ddc::get<Y>(pole);
                 double tau = 0.0;
-                for (Idx<BSplinesTheta> i : get_idx_range(control_pts)) {
-                    const Coord<X, Y> point = control_pts(i);
+                Idx<BSplinesR> ctrl_pt_row_1(1);
+                for (Idx<BSplinesTheta> i : get_idx_range<BSplinesTheta>(control_pts)) {
+                    const Coord<X, Y> point = control_pts(ctrl_pt_row_1, i);
 
                     const double c_x = ddc::get<X>(point);
                     const double c_y = ddc::get<Y>(point);
@@ -333,10 +334,10 @@ public:
                 IdxRange<BSplinesTheta> poloidal_spline_idx_range
                         = ddc::discrete_space<BSplinesTheta>().full_domain();
 
-                for (IdxR const ir : IdxRange<BSplinesR>(IdxR(0), IdxStepR(C + 1))) {
+                for (IdxR const ir : idx_range_r_ctrl_pts) {
                     for (IdxTheta const itheta :
                          poloidal_spline_idx_range.take_first(n_theta_in_singular)) {
-                        const Coord<X, Y> point = control_pts(itheta);
+                        const Coord<X, Y> point = control_pts(ir, itheta);
                         ddc::discrete_space<BernsteinBasis>()
                                 .eval_basis(get_field(bernstein_vals), point);
                         // Fill spline coefficients
