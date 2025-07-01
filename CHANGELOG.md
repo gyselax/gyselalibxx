@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix break points incorrectly labelled as knots.
 - Fix minimum version requirement of Kokkos.
 - Fix tolerance of floating point comparisons in JacobianMatrixAndJacobianCoefficients and MultipatchSplineEvaluatorTest tests
-- Fix unnecessary std::move calls
+- Fix unnecessary `std::move` calls.
 
 ### Changed
 
