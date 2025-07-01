@@ -11,11 +11,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Curvilinear coordinate change classes have an O-point method to retrieve the O-point in the non-curvilinear coordinates.
+- Add a batched `operator()` to `DiscreteToCartesian` allowing a field of coordinates to be converted.
+
 ### Fixed
+
+- Fix uninitialized warning in the `Tensor` class.
+- Fix unused `m_magnetic_field` variable in `MaxwellianEquilibrium` class.
+- Fix break points incorrectly labelled as knots.
+- Fix minimum version requirement of Kokkos.
+- Fix tolerance of floating point comparisons in JacobianMatrixAndJacobianCoefficients and MultipatchSplineEvaluatorTest tests
+- Fix unnecessary `std::move` calls.
 
 ### Changed
 
 - Change the interface of `IVlasovSolver` and `IQNSolver` in `geometryXYVxVy` to store the electric field in a `VectorField`.
+- Integration of `ddc::StridedDiscreteDomain` by making `IdxRangeSlice` a type alias.
+- The parameter `iter_start` has been removed from the constructor of `RestartInitialisation`.
+- Generalise `compute_coeffs_on_mapping` to work with any mapping.
+- Rely on GPU-aware MPI to allow GPU-direct MPI for `MPITransposeAllToAll`.
+- Curvilinear coordinate change classes take a `Coord` type to specify the O-point in the constructor.
 
 ### Deprecated
 

@@ -1,20 +1,3 @@
-# To remove ======================================================================================
-# set(test_name_gtest "Ginkgo_test")
-# add_executable("${test_name_gtest}"
-#     test_with_ginkgo.cpp
-#     #../../main.cpp
-# )
-# target_link_libraries("${test_name_gtest}"
-# PUBLIC
-#     DDC::core
-#     gslx::utils
-#     # GTest::gtest
-#     # GTest::gmock
-# )
-# target_compile_definitions("${test_name_gtest}" PUBLIC)
-# gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
-# ================================================================================================
-
 # SingleInterfaceDerivativeCalculator test =======================================================
 function (multipatch_single_interface_derivatives_executable MESH_TYPE)
     set(test_name_gtest "multipatch_single_interface_derivatives_${MESH_TYPE}_test")

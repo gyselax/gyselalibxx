@@ -50,7 +50,6 @@ public:
     };
     struct R_cov
     {
-        static bool constexpr PERIODIC = false;
         static bool constexpr IS_COVARIANT = true;
         static bool constexpr IS_CONTRAVARIANT = false;
         using Dual = R;
@@ -58,7 +57,6 @@ public:
 
     struct Theta_cov
     {
-        static bool constexpr PERIODIC = true;
         static bool constexpr IS_COVARIANT = true;
         static bool constexpr IS_CONTRAVARIANT = false;
         using Dual = Theta;
@@ -179,22 +177,22 @@ public:
         double const dtheta((theta_max - theta_min) / theta_size);
 
 
-        std::vector<CoordR> r_knots(r_size + 1);
-        std::vector<CoordTheta> theta_knots(theta_size + 1);
+        std::vector<CoordR> r_break_points(r_size + 1);
+        std::vector<CoordTheta> theta_break_points(theta_size + 1);
 
 
-        r_knots[0] = r_min;
+        r_break_points[0] = r_min;
         for (int i(1); i < r_size; ++i) {
-            r_knots[i] = CoordR(r_min + i * dr);
+            r_break_points[i] = CoordR(r_min + i * dr);
         }
-        r_knots[r_size] = r_max;
+        r_break_points[r_size] = r_max;
         for (int i(0); i < theta_size + 1; ++i) {
-            theta_knots[i] = CoordTheta(theta_min + i * dtheta);
+            theta_break_points[i] = CoordTheta(theta_min + i * dtheta);
         }
 
         // Creating mesh & supports
-        ddc::init_discrete_space<BSplinesR>(r_knots);
-        ddc::init_discrete_space<BSplinesTheta>(theta_knots);
+        ddc::init_discrete_space<BSplinesR>(r_break_points);
+        ddc::init_discrete_space<BSplinesTheta>(theta_break_points);
 
         ddc::init_discrete_space<GridR>(InterpPointsR::template get_sampling<GridR>());
         ddc::init_discrete_space<GridTheta>(InterpPointsTheta::template get_sampling<GridTheta>());
