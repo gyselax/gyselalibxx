@@ -142,6 +142,13 @@ public:
     {
     }
 
+    explicit PolarSpline<PolarBSplinesType, MemSpace>(
+            DField<IdxRange<PolarBSplinesType>, MemSpace> const& spline_coef_field)
+        : spline_coef(PolarBSplinesType::get_tensor_product_subset(spline_coef_field))
+        , singular_spline_coef(PolarBSplinesType::get_singular_subset(spline_coef_field))
+    {
+    }
+
     /**
      * Get a modifiable reference to the polar spline referenced by this polar spline view.
      *
@@ -213,6 +220,13 @@ public:
             PolarSpline<PolarBSplinesType, MemSpace> const& spl)
         : spline_coef(get_const_field(spl.spline_coef))
         , singular_spline_coef(get_const_field(spl.singular_spline_coef))
+    {
+    }
+
+    explicit ConstPolarSpline<PolarBSplinesType, MemSpace>(
+            DConstField<IdxRange<PolarBSplinesType>, MemSpace> const& spline_coef_field)
+        : spline_coef(PolarBSplinesType::get_tensor_product_subset(spline_coef_field))
+        , singular_spline_coef(PolarBSplinesType::get_singular_subset(spline_coef_field))
     {
     }
 
