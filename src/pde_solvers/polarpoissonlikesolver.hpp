@@ -118,6 +118,8 @@ private:
     using IdxRangeBSRTheta = IdxRange<BSplinesR, BSplinesTheta>;
     using IdxBSRTheta = Idx<BSplinesR, BSplinesTheta>;
 
+    using IdxStepBSTheta = IdxStep<BSplinesTheta>;
+
     using IdxRangeBatchedBSRTheta
             = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
                     ddc::to_type_seq_t<IdxRangeFull>,
@@ -163,7 +165,7 @@ private:
     using KnotsTheta = ddc::NonUniformBsplinesKnots<BSplinesTheta>;
 
     using ConstSpline2D = DConstField<IdxRangeBatchedBSRTheta>;
-    using PolarSplineMemRTheta = PolarSplineMem<PolarBSplinesRTheta>;
+    using PolarSplineMemRTheta = DFieldMem<IdxRange<PolarBSplinesRTheta>>;
 
     using CoordFieldMemRTheta = FieldMem<CoordRTheta, IdxRangeRTheta>;
     using CoordFieldRTheta = Field<CoordRTheta, IdxRangeRTheta>;
@@ -319,11 +321,7 @@ public:
                           ThetaBasisSubset,
                           QDimThetaMesh>(m_non_zero_bases_theta, m_idxrange_quadrature_theta))
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
-        , m_phi_spline_coef(
-                  PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>(),
-                  IdxRangeBSRTheta(
-                          m_idxrange_bsplines_r,
-                          ddc::discrete_space<BSplinesTheta>().full_domain()))
+        , m_phi_spline_coef(ddc::discrete_space<PolarBSplinesRTheta>().full_domain())
         , m_x_init(
                   "x_init",
                   1,
@@ -967,14 +965,13 @@ public:
                                          - PolarBSplinesRTheta::template singular_idx_range<
                                                    PolarBSplinesRTheta>()
                                                    .front();
-                    spline.singular_spline_coef(idx) = x_init_host(0, bspl_idx);
+                    spline(idx) = x_init_host(0, bspl_idx);
                 });
         ddc::for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx) {
-            const IdxBSRTheta idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
-            spline.spline_coef(idx_2d) = x_init_host(0, idx.uid());
+            spline(idx) = x_init_host(0, idx.uid());
         });
         ddc::for_each(dirichlet_boundary_idx_range, [&](IdxBSRTheta const idx) {
-            spline.spline_coef(idx) = 0.0;
+            spline(PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(idx)) = 0.0;
         });
 
         // Copy the periodic elements
@@ -982,12 +979,11 @@ public:
                 m_idxrange_bsplines_r,
                 idxrange_polar.remove_first(
                         IdxStep<BSplinesTheta>(ddc::discrete_space<BSplinesTheta>().nbasis())));
+        IdxStepBSTheta nb_theta(m_nbasis_theta);
         ddc::for_each(copy_idx_range, [&](IdxBSRTheta const idx_2d) {
-            spline.spline_coef(ddc::select<BSplinesR>(idx_2d), ddc::select<BSplinesTheta>(idx_2d))
-                    = spline.spline_coef(
-                            ddc::select<BSplinesR>(idx_2d),
-                            ddc::select<BSplinesTheta>(idx_2d)
-                                    - ddc::discrete_space<BSplinesTheta>().nbasis());
+            spline(PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(idx_2d))
+                    = spline(PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(
+                            idx_2d - nb_theta));
         });
         Kokkos::Profiling::popRegion();
     }
