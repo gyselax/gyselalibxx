@@ -258,9 +258,9 @@ class InterfaceDerivativeMatrix
                 std::declval<last_deriv_calculator>()));
     };
 
-    template <typename InterfaceTypSeq>
+    template <typename InterfaceTypeSeq>
     using get_tuple_deriv_calculator_t =
-            typename get_tuple_deriv_calculator<is_periodic, InterfaceTypSeq>::type;
+            typename get_tuple_deriv_calculator<is_periodic, InterfaceTypeSeq>::type;
 
     // ===========================================================================================
 
