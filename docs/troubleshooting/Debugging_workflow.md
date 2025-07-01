@@ -2,7 +2,7 @@
 
 This is a quick guide for approaching and fixing simple bugs in Gyselalib++.
 Gyselalib++ runs on both CPU and GPU, debugging works best if you first confirm whether a bug appears on CPU (where bugs are easier to diagnose) before diving into GPU-specific issues.
-Tools specific to CPU or GPU can be used to help debugging. The use of these tools is not described here but 
+Tools specific to CPU or GPU can be used to help debugging. The use of these tools is not described here but some tools are recommended. More detailed information about their usage can be found online.
 
 ## CPU Debug Build
 
