@@ -28,8 +28,8 @@ void compute_and_test_Lie_Poisson_Bracket()
     using Mapping2D = CircularToCartesian<Rho, Theta, R, Z>;
     using ToroidalMapping = ToroidalToCylindrical<Mapping2D, Zeta, Phi>;
     using CylindricalMapping = CylindricalToCartesian<R, Z, Zeta, X, Y>;
-    double major_radius(6.2);
-    Mapping2D polar_to_RZ(major_radius);
+    Coord<R, Z> origin_point(6.2, 0.0);
+    Mapping2D polar_to_RZ(origin_point);
     ToroidalMapping toroidal_to_cylindrical(polar_to_RZ);
     CylindricalMapping cylindrical_to_cartesian;
     CombinedMapping<CylindricalMapping, ToroidalMapping, Coord<Rho, Theta, Phi>>
