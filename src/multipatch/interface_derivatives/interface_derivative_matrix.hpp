@@ -72,7 +72,7 @@ class InterfaceDerivativeMatrix
     using interface_collection =
             typename Connectivity::get_all_interfaces_along_direction_t<Grid1D>;
 
-    // All the paches of the geometry.
+    // All the patches of the geometry.
     using all_patches = typename Connectivity::all_patches;
 
     static constexpr std::size_t number_of_interfaces = ddc::type_seq_size_v<interface_collection>;

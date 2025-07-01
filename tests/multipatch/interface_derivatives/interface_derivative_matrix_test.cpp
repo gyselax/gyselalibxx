@@ -960,7 +960,7 @@ public:
                 ddc::ConstantExtrapolationRule<Y, X>>
                 evaluator(bc_xmin, bc_xmax, bc_ymin, bc_ymax);
 
-        // Define evaluation points at the center of the cells -----------------------------------
+        // Define evaluation points at the centre of the cells -----------------------------------
         host_t<CoordFieldMemOnPatch<Patch>> eval_points_alloc(idx_range_xy);
         host_t<CoordFieldOnPatch<Patch>> eval_points(eval_points_alloc);
 
@@ -1676,7 +1676,7 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
     SplineRThetagEvaluator evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g);
 
 
-    // Initiliase the boundary derivatives.
+    // Initialise the boundary derivatives.
     initialise_all_y_derivatives_min(
             derivs_ymin_789,
             idx_ranges_789,
@@ -1688,7 +1688,7 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             evaluator_g,
             get_const_field(function_g_coef));
 
-    // Initiliase the boundary cross-derivatives.
+    // Initialise the boundary cross-derivatives.
     initialise_all_xy_derivatives_min_min(
             derivs_xy_min_min_789,
             idx_ranges_789,

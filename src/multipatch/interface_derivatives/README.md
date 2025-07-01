@@ -179,7 +179,7 @@ and $`\Delta x^+_{i} = x^+_{i+1} -  x^+_{i} \text{, } \Delta x^-_{i} = x^-_{i} -
 and $`\{f^{+/-}_{i+k}\}_k`$ the function values at the interpolation points on patch 1 (+) and
 patch 2 (-).
 
-**Remark:** As mentionned above, the coefficient $`c^i_{N^L,N^R}`$ can be written as a linear combination
+**Remark:** As mentioned above, the coefficient $`c^i_{N^L,N^R}`$ can be written as a linear combination
 of the interpolating function values. In the code, we store the weights in front of each interpolating function value
 as they depend only on the grids. For the same reason, we store $`\gamma_i`$ as a vector,
 
