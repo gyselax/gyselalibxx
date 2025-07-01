@@ -11,11 +11,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add a `LiePoissonBracket::operator()` overload which takes a 2D tensor as the second argument to the bracket.
+
 ### Fixed
 
 - Fix uninitialized warning in the `Tensor` class.
 - Fix unused `m_magnetic_field` variable in `MaxwellianEquilibrium` class.
 - Fix break points incorrectly labelled as knots.
+- Fix missing assertion in `LeviCivitaTensor` to prevent division by 0 when Jacobian is calculated at singular point.
+- Fix bad result of `is_tensor_v` for `IdentityTensor`.
 
 ### Changed
 
