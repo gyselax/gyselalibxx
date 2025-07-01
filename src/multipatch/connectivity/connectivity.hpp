@@ -101,8 +101,7 @@ public:
     template <class Grid1D, template <typename P> typename T, class... Patches>
     static auto get_all_idx_ranges_along_direction(MultipatchType<T, Patches...> all_idx_ranges)
     {
-        // WHY IS THIS STATIC_ASSERT IMPORTANT? CAN WE REMOVE IT?
-        // static_assert(ddc::type_seq_same_v<all_patches, ddc::detail::TypeSeq<Patches...>>);
+        static_assert(ddc::type_seq_same_v<all_patches, ddc::detail::TypeSeq<Patches...>>);
         return get_all_idx_ranges_along_direction<Grid1D>(all_idx_ranges.get_tuple());
     }
 
