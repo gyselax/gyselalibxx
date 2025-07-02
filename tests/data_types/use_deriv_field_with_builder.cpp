@@ -279,10 +279,10 @@ TEST(DerivFieldTest, SplineBuilderUse)
     });
 
     derivs_xy_min_min(first_deriv_x_deriv_y) = derivs_xy_exacted(
-            deriv_block_x.front() - deriv_block_x.front(),  // IdxStep<dX>(0)
-            deriv_block_y.front() - deriv_block_y.front(),  // IdxStep<dY>(0)
+            deriv_block_x.front() - deriv_block_x.front(), // IdxStep<dX>(0)
+            deriv_block_y.front() - deriv_block_y.front(), // IdxStep<dY>(0)
             idx_range_slice_dx.distance_from_front(idx_range_slice_dx.front()).value(), // int(0)
-            idx_range_slice_dy.distance_from_front(idx_range_slice_dy.front()).value());// int(0)
+            idx_range_slice_dy.distance_from_front(idx_range_slice_dy.front()).value()); // int(0)
 
     derivs_xy_max_min(first_deriv_x_deriv_y) = derivs_xy_exacted(
             deriv_block_x.back() - deriv_block_x.front(),
@@ -297,10 +297,10 @@ TEST(DerivFieldTest, SplineBuilderUse)
             idx_range_slice_dy.distance_from_front(idx_range_slice_dy.back()).value());
 
     derivs_xy_max_max(first_deriv_x_deriv_y) = derivs_xy_exacted(
-            deriv_block_x.back() - deriv_block_x.front(),  // IdxStep<dX>(1)
-            deriv_block_y.back() - deriv_block_y.front(),  // IdxStep<dY>(1)
+            deriv_block_x.back() - deriv_block_x.front(), // IdxStep<dX>(1)
+            deriv_block_y.back() - deriv_block_y.front(), // IdxStep<dY>(1)
             idx_range_slice_dx.distance_from_front(idx_range_slice_dx.back()).value(), // int(1)
-            idx_range_slice_dy.distance_from_front(idx_range_slice_dy.back()).value());// int(1)
+            idx_range_slice_dy.distance_from_front(idx_range_slice_dy.back()).value()); // int(1)
 
     // --- Build the spline representation
     builder(function_coef,
