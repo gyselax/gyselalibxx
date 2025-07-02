@@ -3,6 +3,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include "cartesian_to_circular.hpp"
+#include "circular_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry_pseudo_cartesian.hpp"
@@ -46,6 +48,23 @@ class GyroAverageOperator
     using BSplinesRminor = typename SplineRThetaBuilder::bsplines_type1;
     using BSplinesTheta = typename SplineRThetaBuilder::bsplines_type2;
 
+    struct R_gyro_cov;
+    struct Theta_gyro_cov;
+
+    struct R_gyro
+    {
+        static constexpr bool PERIODIC = false;
+        // The corresponding type in the dual space.
+        using Dual = R_gyro_cov;
+    };
+
+    struct Theta_gyro
+    {
+        static constexpr bool PERIODIC = true;
+        // The corresponding type in the dual space.
+        using Dual = Theta_gyro_cov;
+    };
+
 public:
     using IdxRangeRminor = IdxRange<GridRminor>;
     using IdxRangeTheta = IdxRange<GridTheta>;
@@ -68,7 +87,10 @@ public:
     using DConstFieldRminorThetaBatch = ConstField<double, IdxRangeRminorThetaBatch>;
 
     using CoordRminorTheta = Coord<Rminor, Theta>;
-    using CoordRZ = CoordXY_pC;
+    using CoordR_gyroTheta_gyro = Coord<R_gyro, Theta_gyro>;
+    using Rmajor = X_pC;
+    using Z = Y_pC;
+    using CoordRZ = Coord<Rmajor, Z>;
 
 private:
     /**
@@ -191,13 +213,16 @@ public:
                             // Compute the particle position in (R, Z) coordinate
                             double const alpha = M_PI * 2.0 / static_cast<double>(nb_gyro_points)
                                                  * static_cast<double>(igyro);
-                            double const R_p = r * Kokkos::cos(theta)
-                                               + rho_L(ir, itheta) * Kokkos::cos(alpha);
-                            double const Z_p = r * Kokkos::sin(theta)
-                                               + rho_L(ir, itheta) * Kokkos::sin(alpha);
+                            inverse_mapping_t<CoordinateTransformFunction> inv_coordinate_transform
+                                    = coordinate_transform.get_inverse_mapping();
+                            CoordRZ gyrocentre = inv_coordinate_transform(ddc::coordinate(irtheta));
+                            CircularToCartesian<R_gyro, Theta_gyro, Rmajor, Z> circ_to_cart(
+                                    gyrocentre);
+                            CoordRZ particle_position = circ_to_cart(
+                                    CoordR_gyroTheta_gyro {rho_L(ir, itheta), alpha});
 
                             // Convert from (R, Z) into (r, theta) coordinate
-                            CoordRminorTheta p = coordinate_transform(CoordRZ {R_p, Z_p});
+                            CoordRminorTheta p = coordinate_transform(particle_position);
 
                             // Spline interpolation in (r, theta) coordinate
                             sum_over_gyro_points += spline_evaluator(p, get_const_field(coef));
