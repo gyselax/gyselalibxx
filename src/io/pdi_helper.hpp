@@ -103,7 +103,7 @@ void PDI_expose_idx_range(IdxRange<Grids...> index_range, std::string name)
  */
 template <class ElementType, class IdxRangeType, class... IndexTag, class... Args>
 void PDI_expose_vector_field(
-        std::string name_stem,
+        std::string const& name_stem,
         VectorConstField<ElementType, IdxRangeType, VectorIndexSet<IndexTag...>, Kokkos::HostSpace>
                 out_vector,
         Args const&... name_suffixes)
