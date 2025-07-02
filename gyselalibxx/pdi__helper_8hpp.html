@@ -544,7 +544,10 @@
 <p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_c184e51c84f2c3f0345bbc8a0d75d3e1.html"><strong>io</strong></a> <strong>&gt;</strong> <a href="pdi__helper_8hpp.html"><strong>pdi_helper.hpp</strong></a></p>
 <p><a href="pdi__helper_8hpp_source.html">Go to the source code of this file</a></p>
 <ul>
+<li><code>#include &lt;ddc/ddc.hpp&gt;</code></li>
+<li><code>#include &lt;ddc/pdi.hpp&gt;</code></li>
 <li><code>#include &lt;pdi.h&gt;</code></li>
+<li><code>#include "vector_field.hpp"</code></li>
 </ul>
 <h2 id="public-functions">Public Functions</h2>
 <table>
@@ -561,6 +564,10 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-pdi_expose_vector_field"><strong>PDI_expose_vector_field</strong></a> (std::string const &amp; name_stem, <a href="classVectorField.html"><strong>VectorConstField</strong></a>&lt; ElementType, IdxRangeType, VectorIndexSet&lt; IndexTag... &gt;, Kokkos::HostSpace &gt; out_vector, StringType const &amp;... name_suffixes) <br><em>A helper function to expose a vector field to PDI ready for output to a file.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
 <td style="text-align: left;"><a href="#function-pdi_get_arrays"><strong>PDI_get_arrays</strong></a> (std::string const &amp; event_name, std::string const &amp; name, std::vector&lt; <a href="structT.html"><strong>T</strong></a> &gt; &amp; out_vector, Args &amp;... input_args) <br></td>
 </tr>
 </tbody>
@@ -573,6 +580,23 @@ void PDI_expose_idx_range (
     std::string name
 ) 
 </code></pre>
+<hr>
+
+<h3 id="function-pdi_expose_vector_field">function PDI_expose_vector_field</h3>
+<p><em>A helper function to expose a vector field to PDI ready for output to a file.</em> </p>
+<pre><code class="language-C++">template&lt;class ElementType, class IdxRangeType, class... IndexTag, class... StringType&gt;
+void PDI_expose_vector_field (
+    std::string const &amp; name_stem,
+    VectorConstField &lt; ElementType, IdxRangeType, VectorIndexSet&lt; IndexTag... &gt;, Kokkos::HostSpace &gt; out_vector,
+    StringType const &amp;... name_suffixes
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>name_stem</code> The prefix for the names of the elements of the vector field. </li>
+<li><code>out_vector</code> The vector field to be exposed. </li>
+<li><code>name_suffixes</code> The suffixes for the names of the elements of the vector field. There must be the same number of suffixes as there are dimensions in the vector field. </li>
+</ul>
 <hr>
 
 <h3 id="function-pdi_get_arrays">function PDI_get_arrays</h3>

@@ -121,6 +121,7 @@
 
 * **parse\_executable\_arguments** ([**input.cpp**](input_8cpp.md), [**input.hpp**](input_8hpp.md))
 * **PDI\_expose\_idx\_range** ([**pdi\_helper.hpp**](pdi__helper_8hpp.md))
+* **PDI\_expose\_vector\_field** ([**pdi\_helper.hpp**](pdi__helper_8hpp.md))
 * **PDI\_get\_arrays** ([**pdi\_helper.hpp**](pdi__helper_8hpp.md))
 * **PCpp\_bool** ([**paraconfpp.hpp**](paraconfpp_8hpp.md))
 * **PCpp\_double** ([**paraconfpp.hpp**](paraconfpp_8hpp.md))

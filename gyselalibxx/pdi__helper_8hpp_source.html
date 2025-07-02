@@ -545,8 +545,12 @@
 <p><a href="pdi__helper_8hpp.html">Go to the documentation of this file</a></p>
 <pre><code class="language-C++">// SPDX-License-Identifier: MIT
 #pragma once
+#include &lt;ddc/ddc.hpp&gt;
+#include &lt;ddc/pdi.hpp&gt;
 
 #include &lt;pdi.h&gt;
+
+#include "vector_field.hpp"
 
 namespace detail {
 
@@ -587,6 +591,12 @@ auto get_vector_tuple(TupleType input_args, std::integer_sequence&lt;size_t, I..
     return std::tie(std::get&lt;I * 2 + 1&gt;(input_args)...);
 }
 
+template &lt;class TupleType, class StringTupleType, size_t... I&gt;
+void expose_arrays(TupleType out_obj, StringTupleType names, std::integer_sequence&lt;size_t, I...&gt;)
+{
+    ((ddc::expose_to_pdi(std::get&lt;I&gt;(names).c_str(), std::get&lt;I&gt;(out_obj))), ...);
+}
+
 } // namespace detail
 
 template &lt;class T, class... Args&gt;
@@ -622,6 +632,20 @@ void PDI_expose_idx_range(IdxRange&lt;Grids...&gt; index_range, std::string name
     }
     PDI_expose((name + "_starts").c_str(), starts_s_arr.data(), PDI_OUT);
     PDI_expose((name + "_extents").c_str(), extents_s_arr.data(), PDI_OUT);
+}
+
+template &lt;class ElementType, class IdxRangeType, class... IndexTag, class... StringType&gt;
+void PDI_expose_vector_field(
+        std::string const&amp; name_stem,
+        VectorConstField&lt;ElementType, IdxRangeType, VectorIndexSet&lt;IndexTag...&gt;, Kokkos::HostSpace&gt;
+                out_vector,
+        StringType const&amp;... name_suffixes)
+{
+    static_assert(sizeof...(StringType) == sizeof...(IndexTag));
+    static_assert((std::is_convertible_v&lt;StringType, std::string&gt; &amp;&amp; ...));
+    std::tuple names = {(name_stem + name_suffixes)...};
+    std::tuple out_obj = std::make_tuple(ddcHelper::get&lt;IndexTag&gt;(out_vector)...);
+    detail::expose_arrays(out_obj, names, std::make_index_sequence&lt;sizeof...(StringType)&gt; {});
 }
 </code></pre></div>
               

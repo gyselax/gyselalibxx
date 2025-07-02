@@ -3797,6 +3797,7 @@
   <compound refid="pdi__helper_8hpp" kind="file"><name>pdi_helper.hpp</name>
     <member refid="pdi__helper_8hpp_1aa2ab641263b1485955b31ea87905f461" kind="function"><name>PDI_get_arrays</name></member>
     <member refid="pdi__helper_8hpp_1aea675cbc4b87809def239d711c8b5516" kind="function"><name>PDI_expose_idx_range</name></member>
+    <member refid="pdi__helper_8hpp_1a3e4dbf7d0b1e5149acd662828b1891f3" kind="function"><name>PDI_expose_vector_field</name></member>
   </compound>
   <compound refid="central__fdm__partial__derivatives_8hpp" kind="file"><name>central_fdm_partial_derivatives.hpp</name>
   </compound>
