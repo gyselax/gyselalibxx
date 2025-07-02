@@ -664,6 +664,8 @@ public:
         if constexpr (is_covariant_vector_index_set_v&lt;ValidIndexSet&gt;) {
             m_coeff = jacobian;
         } else {
+            // Evaluating at a singular point will lead to NaN
+            assert(fabs(jacobian) &gt;= 1e-19);
             m_coeff = 1.0 / jacobian;
         }
     }
@@ -713,10 +715,14 @@ KOKKOS_INLINE_FUNCTION constexpr double get(
 
 namespace detail {
 
+template &lt;class ElementType, class ValidIndexSetRow, class ValidIndexSetCol&gt;
+inline constexpr bool
+        enable_tensor_type&lt;IdentityTensor&lt;ElementType, ValidIndexSetRow, ValidIndexSetCol&gt;&gt; = true;
+
 template &lt;class ElementType, class ValidIndexSet&gt;
 inline constexpr bool enable_tensor_type&lt;LeviCivitaTensor&lt;ElementType, ValidIndexSet&gt;&gt; = true;
 
-}
+} // namespace detail
 </code></pre></div>
               
             </div>

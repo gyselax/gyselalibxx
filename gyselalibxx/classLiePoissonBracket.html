@@ -561,12 +561,16 @@
 <td style="text-align: left;"><a href="#function-liepoissonbracket"><strong>LiePoissonBracket</strong></a> (Mapping3D const &amp; mapping) <br><em>Build a</em> <a href="classLiePoissonBracket.html"><em><strong>LiePoissonBracket</strong></em></a> <em>operator.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION auto</td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classTensor.html"><strong>DTensor</strong></a>&lt; CovBasisSpatial &gt; const &amp; partial_derivatives_f, TensorType const &amp; partial_derivatives_g, <a href="classTensor.html"><strong>DTensor</strong></a>&lt; BasisSpatial &gt; const &amp; B, MappingCoord const &amp; coord) const<br><em>Compute the gyrokinetic Poisson bracket at a given coordinate, from the partial derivatives of the two fields, and the magnetic field.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classTensor.html"><strong>DTensor</strong></a>&lt; CovBasisSpatial &gt; const &amp; partial_derivatives_f, <a href="classTensor.html"><strong>DTensor</strong></a>&lt; CovBasisSpatial &gt; const &amp; partial_derivatives_g, <a href="classTensor.html"><strong>DTensor</strong></a>&lt; BasisSpatial &gt; const &amp; B, MappingCoord const &amp; coord) const<br><em>Compute the gyrokinetic Poisson bracket at a given coordinate, from the partial derivatives of the two fields, and the magnetic field.</em></td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (<a href="classTensor.html"><strong>DTensor</strong></a>&lt; CovBasisSpatial &gt; const &amp; partial_derivatives_f, <a href="classTensor.html"><strong>DTensor</strong></a>&lt; CovBasisSpatial &gt; const &amp; partial_derivatives_g, <a href="classTensor.html"><strong>DTensor</strong></a>&lt; BasisSpatial &gt; const &amp; B, MappingCoord const &amp; coord) const<br><em>Compute the gyrokinetic Poisson bracket at a given coordinate, from the partial derivatives of the two fields, and the magnetic field.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (ExecSpace exec_space, DField&lt; IdxRange, MemorySpace &gt; poisson_bracket, <a href="classVectorField.html"><strong>DVectorConstField</strong></a>&lt; IdxRange, CovBasisSpatial, MemorySpace &gt; const partial_derivatives_f, <a href="classVectorField.html"><strong>DVectorConstField</strong></a>&lt; IdxRange, CovBasisSpatial, MemorySpace &gt; const partial_derivatives_g, <a href="classVectorField.html"><strong>DVectorConstField</strong></a>&lt; IdxRange, BasisSpatial, MemorySpace &gt; const B) <br><em>Compute the gyrokinetic Poisson bracket at every point on a grid from the partial derivatives of the fields f and g, and the magnetic field.</em></td>
+<td style="text-align: left;"><a href="#function-operator_2"><strong>operator()</strong></a> (ExecSpace exec_space, DField&lt; IdxRange, MemorySpace &gt; poisson_bracket, <a href="classVectorField.html"><strong>DVectorConstField</strong></a>&lt; IdxRange, CovBasisSpatial, MemorySpace &gt; const partial_derivatives_f, <a href="classVectorField.html"><strong>DVectorConstField</strong></a>&lt; IdxRange, CovBasisSpatial, MemorySpace &gt; const partial_derivatives_g, <a href="classVectorField.html"><strong>DVectorConstField</strong></a>&lt; IdxRange, BasisSpatial, MemorySpace &gt; const B) <br><em>Compute the gyrokinetic Poisson bracket at every point on a grid from the partial derivatives of the fields f and g, and the magnetic field.</em></td>
 </tr>
 </tbody>
 </table>
@@ -591,6 +595,25 @@
 
 <h3 id="function-operator">function operator()</h3>
 <p><em>Compute the gyrokinetic Poisson bracket at a given coordinate, from the partial derivatives of the two fields, and the magnetic field.</em> </p>
+<pre><code class="language-C++">template&lt;class TensorType, class&gt;
+inline KOKKOS_INLINE_FUNCTION auto LiePoissonBracket::operator() (
+    DTensor &lt; CovBasisSpatial &gt; const &amp; partial_derivatives_f,
+    TensorType const &amp; partial_derivatives_g,
+    DTensor &lt; BasisSpatial &gt; const &amp; B,
+    MappingCoord const &amp; coord
+) const
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>partial_derivatives_f</code> A vector containing the partial derivatives of the scalar field f expressed at the given coordinate. </li>
+<li><code>partial_derivatives_g</code> A vector containing the partial derivatives of the scalar field g expressed at the given coordinate. </li>
+<li><code>B</code> A vector containing the magnetic field at the given coordinate. </li>
+<li><code>coord</code> The coordinate where the calculation is carried out. </li>
+</ul>
+<hr>
+
+<h3 id="function-operator_1">function operator()</h3>
+<p><em>Compute the gyrokinetic Poisson bracket at a given coordinate, from the partial derivatives of the two fields, and the magnetic field.</em> </p>
 <pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double LiePoissonBracket::operator() (
     DTensor &lt; CovBasisSpatial &gt; const &amp; partial_derivatives_f,
     DTensor &lt; CovBasisSpatial &gt; const &amp; partial_derivatives_g,
@@ -607,7 +630,7 @@
 </ul>
 <hr>
 
-<h3 id="function-operator_1">function operator()</h3>
+<h3 id="function-operator_2">function operator()</h3>
 <p><em>Compute the gyrokinetic Poisson bracket at every point on a grid from the partial derivatives of the fields f and g, and the magnetic field.</em> </p>
 <pre><code class="language-C++">template&lt;class ExecSpace, class IdxRange, class MemorySpace&gt;
 inline void LiePoissonBracket::operator() (

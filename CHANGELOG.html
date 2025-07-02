@@ -550,6 +550,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <ul>
 <li>Curvilinear coordinate change classes have an O-point method to retrieve the O-point in the non-curvilinear coordinates.</li>
 <li>Add a batched <code>operator()</code> to <code>DiscreteToCartesian</code> allowing a field of coordinates to be converted.</li>
+<li>Add a <code>LiePoissonBracket::operator()</code> overload which takes a 2D tensor as the second argument to the bracket.</li>
 </ul>
 <h3 id="fixed">Fixed</h3>
 <ul>
@@ -559,6 +560,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Fix minimum version requirement of Kokkos.</li>
 <li>Fix tolerance of floating point comparisons in JacobianMatrixAndJacobianCoefficients and MultipatchSplineEvaluatorTest tests</li>
 <li>Fix unnecessary <code>std::move</code> calls.</li>
+<li>Fix missing assertion in <code>LeviCivitaTensor</code> to prevent division by 0 when Jacobian is calculated at singular point.</li>
+<li>Fix bad result of <code>is_tensor_v</code> for <code>IdentityTensor</code>.</li>
 </ul>
 <h3 id="changed">Changed</h3>
 <ul>

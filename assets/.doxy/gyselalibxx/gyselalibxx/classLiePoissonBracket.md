@@ -55,8 +55,9 @@ _A class which implements a gyrokinetic Poisson bracket operator. The implemente
 | Type | Name |
 | ---: | :--- |
 |   | [**LiePoissonBracket**](#function-liepoissonbracket) (Mapping3D const & mapping) <br>_Build a_ [_**LiePoissonBracket**_](classLiePoissonBracket.md) _operator._ |
-|  KOKKOS\_INLINE\_FUNCTION double | [**operator()**](#function-operator) ([**DTensor**](classTensor.md)&lt; CovBasisSpatial &gt; const & partial\_derivatives\_f, [**DTensor**](classTensor.md)&lt; CovBasisSpatial &gt; const & partial\_derivatives\_g, [**DTensor**](classTensor.md)&lt; BasisSpatial &gt; const & B, MappingCoord const & coord) const<br>_Compute the gyrokinetic Poisson bracket at a given coordinate, from the partial derivatives of the two fields, and the magnetic field._  |
-|  void | [**operator()**](#function-operator_1) (ExecSpace exec\_space, DField&lt; IdxRange, MemorySpace &gt; poisson\_bracket, [**DVectorConstField**](classVectorField.md)&lt; IdxRange, CovBasisSpatial, MemorySpace &gt; const partial\_derivatives\_f, [**DVectorConstField**](classVectorField.md)&lt; IdxRange, CovBasisSpatial, MemorySpace &gt; const partial\_derivatives\_g, [**DVectorConstField**](classVectorField.md)&lt; IdxRange, BasisSpatial, MemorySpace &gt; const B) <br>_Compute the gyrokinetic Poisson bracket at every point on a grid from the partial derivatives of the fields f and g, and the magnetic field._  |
+|  KOKKOS\_INLINE\_FUNCTION auto | [**operator()**](#function-operator) ([**DTensor**](classTensor.md)&lt; CovBasisSpatial &gt; const & partial\_derivatives\_f, TensorType const & partial\_derivatives\_g, [**DTensor**](classTensor.md)&lt; BasisSpatial &gt; const & B, MappingCoord const & coord) const<br>_Compute the gyrokinetic Poisson bracket at a given coordinate, from the partial derivatives of the two fields, and the magnetic field._  |
+|  KOKKOS\_INLINE\_FUNCTION double | [**operator()**](#function-operator_1) ([**DTensor**](classTensor.md)&lt; CovBasisSpatial &gt; const & partial\_derivatives\_f, [**DTensor**](classTensor.md)&lt; CovBasisSpatial &gt; const & partial\_derivatives\_g, [**DTensor**](classTensor.md)&lt; BasisSpatial &gt; const & B, MappingCoord const & coord) const<br>_Compute the gyrokinetic Poisson bracket at a given coordinate, from the partial derivatives of the two fields, and the magnetic field._  |
+|  void | [**operator()**](#function-operator_2) (ExecSpace exec\_space, DField&lt; IdxRange, MemorySpace &gt; poisson\_bracket, [**DVectorConstField**](classVectorField.md)&lt; IdxRange, CovBasisSpatial, MemorySpace &gt; const partial\_derivatives\_f, [**DVectorConstField**](classVectorField.md)&lt; IdxRange, CovBasisSpatial, MemorySpace &gt; const partial\_derivatives\_g, [**DVectorConstField**](classVectorField.md)&lt; IdxRange, BasisSpatial, MemorySpace &gt; const B) <br>_Compute the gyrokinetic Poisson bracket at every point on a grid from the partial derivatives of the fields f and g, and the magnetic field._  |
 
 
 
@@ -122,6 +123,40 @@ inline explicit LiePoissonBracket::LiePoissonBracket (
 
 
 * `mapping` The mapping describing the system of coordinates on which the expression is calculated. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function operator() 
+
+_Compute the gyrokinetic Poisson bracket at a given coordinate, from the partial derivatives of the two fields, and the magnetic field._ 
+```C++
+template<class TensorType, class>
+inline KOKKOS_INLINE_FUNCTION auto LiePoissonBracket::operator() (
+    DTensor < CovBasisSpatial > const & partial_derivatives_f,
+    TensorType const & partial_derivatives_g,
+    DTensor < BasisSpatial > const & B,
+    MappingCoord const & coord
+) const
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `partial_derivatives_f` A vector containing the partial derivatives of the scalar field f expressed at the given coordinate. 
+* `partial_derivatives_g` A vector containing the partial derivatives of the scalar field g expressed at the given coordinate. 
+* `B` A vector containing the magnetic field at the given coordinate. 
+* `coord` The coordinate where the calculation is carried out. 
 
 
 

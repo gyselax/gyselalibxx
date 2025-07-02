@@ -575,6 +575,27 @@ public:
     {
     }
 
+    template &lt;
+            class TensorType,
+            class = std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt; &amp;&amp; TensorType::rank() == 2&gt;&gt;
+    KOKKOS_INLINE_FUNCTION auto operator()(
+            DTensor&lt;CovBasisSpatial&gt; const&amp; partial_derivatives_f,
+            TensorType const&amp; partial_derivatives_g,
+            DTensor&lt;BasisSpatial&gt; const&amp; B,
+            MappingCoord const&amp; coord) const
+    {
+        double J = m_mapping.jacobian(coord);
+        LeviCivitaTensor&lt;double, BasisSpatial&gt; eps(J);
+        DTensor&lt;CovBasisSpatial, CovBasisSpatial&gt; metric_tensor = m_metric_tensor(coord);
+        double B_norm = norm(metric_tensor, B);
+        return tensor_mul(
+                index&lt;'i', 'j', 'k'&gt;(eps),
+                index&lt;'i', 'l'&gt;(metric_tensor),
+                index&lt;'l'&gt;(B / B_norm),
+                index&lt;'j'&gt;(partial_derivatives_f),
+                index&lt;'m', 'k'&gt;(partial_derivatives_g));
+    }
+
     KOKKOS_INLINE_FUNCTION double operator()(
             DTensor&lt;CovBasisSpatial&gt; const&amp; partial_derivatives_f,
             DTensor&lt;CovBasisSpatial&gt; const&amp; partial_derivatives_g,
