@@ -49,7 +49,7 @@ Before analysing the code ensure that there are no compilation warnings.
 The GPU compiler is less verbose than the CPU compiler but the majority of the warnings that it manages to raise are critical so make sure all warnings are eliminated before trying to run the program.
 
 The most common cause of GPU errors comes from trying to access an object saved on CPU from the GPU or from trying to access an object saved on GPU from the CPU.
-This is important when handling a Kokkos object or anything containing a Kokkos object. In particular care should be taken when accessing a `Field` or using a **coordinate transformation operator**.
+This is important when handling a Kokkos object or anything containing a Kokkos object. Particular care should be taken when accessing a `Field` or using a **coordinate transformation operator**.
 In both cases static assertions are available to let you check at compile time if you are allowed to use a particular object.
 
 For example if you want to access a `DFieldX` from GPU you can use:
