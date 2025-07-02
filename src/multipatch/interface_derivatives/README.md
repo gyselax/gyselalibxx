@@ -19,7 +19,7 @@ the boundary cells.
 ## Contents
 
 - [Relation between derivatives on the boundaries of two connected patches](#relation-between-derivatives-on-the-boundaries-of-two-connected-patches): It documents the `SingleInterfaceDerivativesCalculator` operator.
-  - [How to use the `SingleInterfaceDerivativesCalculator` operator?](#how-to-use-the-singleinterfacederivativescalculator-operator): It documents how to use the operator in the code. 
+  - [How to use the `SingleInterfaceDerivativesCalculator` operator?](#how-to-use-the-singleinterfacederivativescalculator-operator): It documents how to use the operator in the code.
   - [Formulae](#formulae): It details the formulae applies in the operator.
 - [Relation between the interface derivatives along one direction](#relation-between-the-interface-derivatives-along-one-direction): It documents the `InterfaceDerivativeMatrix` operator.
   - [How to use the `InterfaceDerivativeMatrix` operator?](#how-to-use-the-interfacederivativematrix-operator): It documents how to use the operator in the code.
@@ -509,11 +509,11 @@ All these relations can be stored in a matrix system as follows,
 
 with
 
-* $`a^I, b^I \text{ and } c^I`$ the coefficients computed with `SingleInterfaceDerivativeCalculator`
+- $`a^I, b^I \text{ and } c^I`$ the coefficients computed with `SingleInterfaceDerivativeCalculator`
 for a given interface *I* (and given number of cells on the right and the left patches that we do not
 precise here to lighten the notation).
-* $`\{\mathcal{X}_I\}_I`$ a set of parallel interfaces.
-* $`s'(\mathcal{X})`$ the derivative at the *I*th interface.
+- $`\{\mathcal{X}_I\}_I`$ a set of parallel interfaces.
+- $`s'(\mathcal{X})`$ the derivative at the *I*th interface.
 
 We simply refer it as
 
