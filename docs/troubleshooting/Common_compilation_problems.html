@@ -502,7 +502,11 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#x-is-not-defined">X is not defined</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#incomplete-type-is-not-allowed">Incomplete type is not allowed</a>
+    </li>
     </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="Debugging_workflow.html">Debugging</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">API</span></p>
@@ -661,13 +665,27 @@ ${GYSELALIBXX_HOME}/vendor/ddc/include/ddc/chunk.hpp(109): here cannot be refere
 <p>For example static functions are sometimes used to initialise classes from a PDI input.</p>
 <p>As the static function can be called without having an instance of a class, this error arises when you try to use the members of the class. If the function needs to use the members of the class and not simply call the constructor then the function should not be static.</p>
 <h2 id="x-is-not-defined">X is not defined</h2>
-<p>This usually occurs when the file containing the definition of <code>X</code> is not correctly included. Double check if the <code>#include &lt;X.hpp&gt;</code> line is in your file.</p></div>
+<p>This usually occurs when the file containing the definition of <code>X</code> is not correctly included. Double check if the <code>#include &lt;X.hpp&gt;</code> line is in your file.</p>
+<h2 id="incomplete-type-is-not-allowed">Incomplete type is not allowed</h2>
+<p>Gyselalib++ includes a certain number of assumptions about the types describing the dimensions. If these assumptions are not respected then errors may be seen when the code tries to access the expected attribute. For example you may see:</p>
+<pre><code class="language-bash">${GYSELALIBXX_HOME}/src/data_types/vector_index_tools.hpp(82): error: incomplete type is not allowed
+      static constexpr bool value = (Dims::IS_COVARIANT &amp;&amp; ...);
+</code></pre>
+<p>The attributes that may be mentioned are:</p>
+<ul>
+<li><code>IS_COVARIANT</code></li>
+<li><code>IS_CONTRAVARIANT</code></li>
+<li><code>Dual</code></li>
+<li><code>PERIODIC</code></li>
+</ul>
+<p>The first 3 attributes are related to covariant and contravariant tensors. For more details see <a href="../standards/coding_covariant_and_contravariant_tensors.html">Coding Covariant &amp; Contravariant Tensors</a>. The documentation about <a href="../standards/mathematical_and_physical_conventions.html">Mathematical and physical conventions</a> may also be useful if you are not familiar with the concept of covariant and contravariant tensors.</p>
+<p>The <code>PERIODIC</code> attribute is required by DDC. It is a <code>static constexpr boolean</code> indicating if the dimension is periodic or not.</p></div>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../development/developer_FAQ.html" class="btn btn-neutral float-left" title="Developer FAQ"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../gyselalibxx/annotated.html" class="btn btn-neutral float-right" title="Class List">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="Debugging_workflow.html" class="btn btn-neutral float-right" title="Debugging">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -697,7 +715,7 @@ ${GYSELALIBXX_HOME}/vendor/ddc/include/ddc/chunk.hpp(109): here cannot be refere
       <span><a href="../development/developer_FAQ.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../gyselalibxx/annotated.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="Debugging_workflow.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
