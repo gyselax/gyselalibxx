@@ -257,7 +257,7 @@ public:
                     Kokkos::DefaultHostExecutionSpace,
                     Kokkos::DefaultExecutionSpace>;
             if constexpr (C > -1) {
-                IdxRange<BSplinesR> idx_range_r_ctrl_pts(IdxR(0), IdxStepR(C + 1));
+                IdxRange<BSplinesR> idx_range_r_ctrl_pts(IdxR(0), IdxStepR(std::max(2, C + 1)));
                 IdxRange<BSplinesR, BSplinesTheta> idx_range_ctrl_pts(
                         idx_range_r_ctrl_pts,
                         ddc::discrete_space<BSplinesTheta>().full_domain());
@@ -334,7 +334,7 @@ public:
                 IdxRange<BSplinesTheta> poloidal_spline_idx_range
                         = ddc::discrete_space<BSplinesTheta>().full_domain();
 
-                for (IdxR const ir : idx_range_r_ctrl_pts) {
+                for (IdxR const ir : idx_range_r_ctrl_pts.take_first(IdxStepR(C + 1))) {
                     for (IdxTheta const itheta :
                          poloidal_spline_idx_range.take_first(n_theta_in_singular)) {
                         const Coord<X, Y> point = control_pts(ir, itheta);
