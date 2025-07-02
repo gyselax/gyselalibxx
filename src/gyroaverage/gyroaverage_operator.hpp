@@ -59,7 +59,6 @@ class GyroAverageOperator
         using Dual = Theta_gyro_cov;
     };
 
-public:
     using IdxRangeRminor = IdxRange<GridRminor>;
     using IdxRangeTheta = IdxRange<GridTheta>;
     using IdxRangeRminorTheta = IdxRange<GridRminor, GridTheta>;
@@ -97,7 +96,6 @@ public:
     static_assert(std::is_same_v<typename ToLogicalCoordTransform::CoordResult, CoordRminorTheta>);
     static_assert(is_accessible_v<ExecutionSpace, ToLogicalCoordTransform>);
 
-private:
     /**
      * @brief Field of local Larmor radii (rho_L) on the (r, theta) grid.
      */
