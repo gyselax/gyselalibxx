@@ -92,6 +92,15 @@ void PDI_expose_idx_range(IdxRange<Grids...> index_range, std::string name)
     PDI_expose((name + "_extents").c_str(), extents_s_arr.data(), PDI_OUT);
 }
 
+/**
+ * @brief A helper function to expose a vector field to PDI ready for output to a file.
+ *
+ * @param[in] name_stem The prefix for the names of the elements of the vector field.
+ * @param[in] out_vector The vector field to be exposed.
+ * @param[in] name_suffixes The suffixes for the names of the elements of the vector field.
+ *                          There must be the same number of suffixes as there are dimensions
+ *                          in the vector field.
+ */
 template <class ElementType, class IdxRangeType, class... IndexTag, class... Args>
 void PDI_expose_vector_field(
         std::string name_stem,
