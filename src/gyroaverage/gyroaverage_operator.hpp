@@ -204,8 +204,6 @@ public:
                     KOKKOS_LAMBDA(IdxRminorTheta const irtheta) {
                         IdxRminor const ir(irtheta);
                         IdxTheta const itheta(irtheta);
-                        double const r = ddc::coordinate(ir);
-                        double const theta = ddc::coordinate(itheta);
 
                         // Average over gyro points
                         double sum_over_gyro_points = 0.0;
