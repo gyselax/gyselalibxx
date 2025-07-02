@@ -101,16 +101,16 @@ void PDI_expose_idx_range(IdxRange<Grids...> index_range, std::string name)
  *                          There must be the same number of suffixes as there are dimensions
  *                          in the vector field.
  */
-template <class ElementType, class IdxRangeType, class... IndexTag, class... Args>
+template <class ElementType, class IdxRangeType, class... IndexTag, class... StringType>
 void PDI_expose_vector_field(
         std::string const& name_stem,
         VectorConstField<ElementType, IdxRangeType, VectorIndexSet<IndexTag...>, Kokkos::HostSpace>
                 out_vector,
-        Args const&... name_suffixes)
+        StringType const&... name_suffixes)
 {
-    static_assert(sizeof...(Args) == sizeof...(IndexTag));
-    static_assert((std::is_convertible_v<Args, std::string> && ...));
+    static_assert(sizeof...(StringType) == sizeof...(IndexTag));
+    static_assert((std::is_convertible_v<StringType, std::string> && ...));
     std::tuple names = {(name_stem + name_suffixes)...};
     std::tuple out_obj = std::make_tuple(ddcHelper::get<IndexTag>(out_vector)...);
-    detail::expose_arrays(out_obj, names, std::make_index_sequence<sizeof...(Args)> {});
+    detail::expose_arrays(out_obj, names, std::make_index_sequence<sizeof...(StringType)> {});
 }
