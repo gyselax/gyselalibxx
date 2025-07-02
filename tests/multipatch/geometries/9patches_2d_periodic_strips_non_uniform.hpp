@@ -34,7 +34,6 @@ int constexpr BSplineDegree = 3;
 // CONTINUOUS DIMENSIONS -------------------------------------------------------------------------
 /**
  * @brief First continuous dimension of patch PatchIdx.
- * @tparam PatchIdx Index of the patch. 
  */
 struct X
 {
@@ -50,7 +49,6 @@ struct X
 
 /**
  * @brief Second continuous dimension of patch PatchIdx.
- * @tparam PatchIdx Index of the patch. 
  */
 struct Y
 {
