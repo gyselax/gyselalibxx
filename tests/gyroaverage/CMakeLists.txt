@@ -11,6 +11,7 @@ target_link_libraries(unit_tests_gyroaverage
     PUBLIC
         GTest::gtest
         GTest::gmock
+        DDC::core
         DDC::splines
         gslx::utils
         gslx::gyroaverage

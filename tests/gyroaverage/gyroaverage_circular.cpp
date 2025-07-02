@@ -176,57 +176,54 @@ protected:
         m_gyroradius = GetParam();
 
         // Start of the domain of interest in the R dimension
-        double const r_start = 0.;
-        double const r_end = m_r0;
+        CoordR const r_start(0.);
+        CoordR const r_end(m_r0);
 
         // Number of discretization points in the R dimension
         std::size_t const nb_r_points = 200;
 
         // Initialisation of the global domain in R
-        ddc::init_discrete_space<BSplinesR>(CoordR(r_start), CoordR(r_end), nb_r_points);
+        ddc::init_discrete_space<BSplinesR>(r_start, r_end, nb_r_points);
         ddc::init_discrete_space<GridR>(SplineInterpPointsR::get_sampling<GridR>());
 
         IdxRangeR const r_domain = SplineInterpPointsR::get_domain<GridR>();
 
         // Start of the domain of interest in the Theta dimension
-        double const theta_start = 0.;
-        double const theta_end = M_PI * 2.0;
+        CoordTheta const theta_start(0.);
+        CoordTheta const theta_end(M_PI * 2.0);
 
         // Number of discretization points in the Theta dimension
         std::size_t const nb_theta_points = 200;
 
         // Initialisation of the global domain in Theta
-        ddc::init_discrete_space<
-                BSplinesTheta>(CoordTheta(theta_start), CoordTheta(theta_end), nb_theta_points);
+        ddc::init_discrete_space<BSplinesTheta>(theta_start, theta_end, nb_theta_points);
         ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
 
         IdxRangeTheta const theta_domain = SplineInterpPointsTheta::get_domain<GridTheta>();
 
         // Start of the domain of interest in the batch dimension (likely a mixture of
         // phi and vpar)
-        double const batch_start = 0.;
-        double const batch_end = M_PI * 2.0;
+        CoordBatch const batch_start(0.);
+        CoordBatch const batch_end(M_PI * 2.0);
 
         // Number of discretization points in the batch dimension
         std::size_t const nb_batch_points = 2;
 
         // Initialisation of the global domain in batch
-        IdxRangeBatch const batch_domain
-                = ddc::init_discrete_space<GridBatch>(GridBatch::init<GridBatch>(
-                        CoordBatch(batch_start),
-                        CoordBatch(batch_end),
-                        IdxStep<GridBatch>(nb_batch_points)));
+        IdxRangeBatch const batch_domain = ddc::init_discrete_space<GridBatch>(
+                GridBatch::init<
+                        GridBatch>(batch_start, batch_end, IdxStep<GridBatch>(nb_batch_points)));
 
         // Allocate members with move assign operator
         IdxRangeRTheta const rtheta_mesh = IdxRangeRTheta(r_domain, theta_domain);
         IdxRangeRThetaBatch const rthetabatch_mesh
                 = IdxRangeRThetaBatch(r_domain, theta_domain, batch_domain);
-        m_Rcoord_alloc = DFieldMemRTheta(rtheta_mesh, ddc::DeviceAllocator<double>());
-        m_Zcoord_alloc = DFieldMemRTheta(rtheta_mesh, ddc::DeviceAllocator<double>());
-        m_rho_L_alloc = DFieldMemRTheta(rtheta_mesh, ddc::DeviceAllocator<double>());
+        m_Rcoord_alloc = DFieldMemRTheta(rtheta_mesh);
+        m_Zcoord_alloc = DFieldMemRTheta(rtheta_mesh);
+        m_rho_L_alloc = DFieldMemRTheta(rtheta_mesh);
 
-        m_A_alloc = DFieldMemRThetaBatch(rthetabatch_mesh, ddc::DeviceAllocator<double>());
-        m_A_bar_alloc = DFieldMemRThetaBatch(rthetabatch_mesh, ddc::DeviceAllocator<double>());
+        m_A_alloc = DFieldMemRThetaBatch(rthetabatch_mesh);
+        m_A_bar_alloc = DFieldMemRThetaBatch(rthetabatch_mesh);
 
         // Initialise R, Z and rho_L
         DFieldRTheta Rcoord = get_field(m_Rcoord_alloc);
@@ -278,7 +275,7 @@ TEST_P(GyroAverageCircularParamTests, TestPeriodicity)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    using GyroAverageOperatorType = detail::GyroAverageOperator<
+    using GyroAverageOperatorType = GyroAverageOperator<
             SplineRThetaBuilder,
             SplineRThetaEvaluatorNullBound,
             IdxRangeRThetaBatch,
@@ -289,10 +286,10 @@ TEST_P(GyroAverageCircularParamTests, TestPeriodicity)
             spline_evaluator,
             CartesianToPolar(),
             m_nb_gyro_points);
-    gyroaverage(A, A_bar);
+    gyroaverage(A_bar, A);
 
-    auto h_A_bar_alloc = ddc::create_mirror_and_copy(A_bar);
-    host_t<DFieldRThetaBatch> h_A_bar = get_field(h_A_bar_alloc);
+    auto A_bar_alloc_host = ddc::create_mirror_and_copy(A_bar);
+    host_t<DFieldRThetaBatch> A_bar_host = get_field(A_bar_alloc_host);
 
     IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(A_bar);
     IdxRangeRBatch const rbatch_idx_range = get_idx_range<GridR, GridBatch>(A_bar);
@@ -302,9 +299,9 @@ TEST_P(GyroAverageCircularParamTests, TestPeriodicity)
         IdxBatch const ibatch(irbatch);
         IdxTheta const theta_front = theta_idx_range.front();
         IdxTheta const theta_back = theta_idx_range.back();
-        double A_theta_0 = h_A_bar(ir, theta_front, ibatch);
-        double A_theta_2PI = h_A_bar(ir, theta_back, ibatch);
-        EXPECT_LE(std::abs(A_theta_2PI - A_theta_0), 1e-12);
+        double A_theta_0 = A_bar_host(ir, theta_front, ibatch);
+        double A_theta_2PI = A_bar_host(ir, theta_back, ibatch);
+        EXPECT_NEAR(A_theta_2PI, A_theta_0, 1e-12);
     });
 }
 
@@ -328,7 +325,7 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    using GyroAverageOperatorType = detail::GyroAverageOperator<
+    using GyroAverageOperatorType = GyroAverageOperator<
             SplineRThetaBuilder,
             SplineRThetaEvaluatorNullBound,
             IdxRangeRThetaBatch,
@@ -339,16 +336,16 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
             spline_evaluator,
             CartesianToPolar(),
             m_nb_gyro_points);
-    gyroaverage(A, A_bar);
+    gyroaverage(A_bar, A);
 
-    auto h_Rcoord_alloc = ddc::create_mirror_and_copy(get_field(m_Rcoord_alloc));
-    host_t<DFieldRTheta> h_Rcoord = get_field(h_Rcoord_alloc);
-    auto h_Zcoord_alloc = ddc::create_mirror_and_copy(get_field(m_Zcoord_alloc));
-    host_t<DFieldRTheta> h_Zcoord = get_field(h_Zcoord_alloc);
-    auto h_rho_L_alloc = ddc::create_mirror_and_copy(get_field(m_rho_L_alloc));
-    host_t<DFieldRTheta> h_rho_L = get_field(h_rho_L_alloc);
-    auto h_A_bar_alloc = ddc::create_mirror_and_copy(A_bar);
-    host_t<DFieldRThetaBatch> h_A_bar = get_field(h_A_bar_alloc);
+    auto Rcoord_alloc_host = ddc::create_mirror_and_copy(get_field(m_Rcoord_alloc));
+    host_t<DFieldRTheta> Rcoord_host = get_field(Rcoord_alloc_host);
+    auto Zcoord_alloc_host = ddc::create_mirror_and_copy(get_field(m_Zcoord_alloc));
+    host_t<DFieldRTheta> Zcoord_host = get_field(Zcoord_alloc_host);
+    auto rho_L_alloc_host = ddc::create_mirror_and_copy(get_field(m_rho_L_alloc));
+    host_t<DFieldRTheta> rho_L_host = get_field(rho_L_alloc_host);
+    auto A_bar_alloc_host = ddc::create_mirror_and_copy(A_bar);
+    host_t<DFieldRThetaBatch> A_bar_host = get_field(A_bar_alloc_host);
 
     IdxRangeTheta const theta_idx_range(rthetabatch_idx_range);
 
@@ -364,11 +361,11 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
         IdxBatch const ibatch(irthetabatch);
         double const r = ddc::coordinate(ir);
         double const R0eff = R0;
-        double const gyroradius = h_rho_L(ir, itheta);
+        double const gyroradius = rho_L_host(ir, itheta);
         double const kperprho = kperp * gyroradius;
-        double const phase = kx * (h_Rcoord(ir, itheta) - R0eff) + ky * h_Zcoord(ir, itheta);
+        double const phase = kx * (Rcoord_host(ir, itheta) - R0eff) + ky * Zcoord_host(ir, itheta);
         double const phik
-                = std::atan2(h_Zcoord(ir, itheta), h_Rcoord(ir, itheta) - R0eff) - M_PI / 4;
+                = std::atan2(Zcoord_host(ir, itheta), Rcoord_host(ir, itheta) - R0eff) - M_PI / 4;
         std::size_t nb_gyro_points_half = m_nb_gyro_points / 2;
         double const sgn = std::pow(-1.0, static_cast<double>(nb_gyro_points_half));
         double const sgn_tmp = nb_gyro_points % 2 == 0 ? sgn : -sgn;
@@ -379,13 +376,13 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
                              * std::cos(phase) * sgn_tmp
                      + std::cyl_bessel_j(2 * nb_gyro_points, kperprho)
                                * std::cos(2 * nb_gyro_points * phik) * std::cos(phase));
-        double const err_J0_num = h_A_bar(ir, itheta, ibatch) - res_th;
+        double const err_J0_num = A_bar_host(ir, itheta, ibatch) - res_th;
 
         // In the outer region, the particle position can be out of small radius (r), where the values are considered to be zero.
         // Also the gyroaveraged value has the periodicity along theta direction (tested separately above)
         // These conditions are not taken into account in the analytical formula, so we do not test these cases.
         if (r < r0 * 0.8 && itheta < theta_idx_range.back()) {
-            EXPECT_LE(std::abs(err_J0_num - err_J0_th), 5e-2);
+            EXPECT_NEAR(err_J0_num, err_J0_th, 5e-2);
         }
     });
 }

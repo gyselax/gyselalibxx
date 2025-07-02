@@ -9,8 +9,6 @@
 #include "ddc_aliases.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 
-namespace detail {
-
 /**
  * @brief Operator to compute the gyroaverage of a field in (r, theta) coordinates.
  *
@@ -24,19 +22,15 @@ namespace detail {
  * @tparam SplineRThetaBuilder      The type of the spline builder for the rtheta interpolation
  * @tparam SplineRThetaEvaluator    The type of the spline evaluator for the rtheta interpolation
  * @tparam IdxRangeRminorThetaBatch The index range over R, Theta and Batch directions.
- * @tparam CoordinateTransformFunction The Coordinate transform Functor.
+ * @tparam ToLogicalCoordTransform  Function to convert (R, Z) to (r, theta).
  */
 template <
         class SplineRThetaBuilder,
         class SplineRThetaEvaluator,
         class IdxRangeRminorThetaBatch,
-        class CoordinateTransformFunction>
+        class ToLogicalCoordTransform>
 class GyroAverageOperator
 {
-    // FIXME
-    // Need to add a static assert to check evaluator is addmissible to builder
-    // using ddc::is_evaluator_admissible
-    // This will be available from DDC 0.9.0
     using ExecutionSpace = typename SplineRThetaBuilder::exec_space;
 
     using GridRminor = typename SplineRThetaBuilder::interpolation_discrete_dimension_type1;
@@ -83,14 +77,25 @@ public:
     using DFieldRminorTheta = DField<IdxRangeRminorTheta>;
     using DFieldRminorThetaBatch = DField<IdxRangeRminorThetaBatch>;
     using DFieldBSRminorTheta = DField<IdxRangeBSRminorTheta>;
-    using DConstFieldRminorTheta = ConstField<double, IdxRangeRminorTheta>;
-    using DConstFieldRminorThetaBatch = ConstField<double, IdxRangeRminorThetaBatch>;
+    using DConstFieldRminorTheta = DConstField<IdxRangeRminorTheta>;
+    using DConstFieldRminorThetaBatch = DConstField<IdxRangeRminorThetaBatch>;
 
     using CoordRminorTheta = Coord<Rminor, Theta>;
     using CoordR_gyroTheta_gyro = Coord<R_gyro, Theta_gyro>;
-    using Rmajor = X_pC;
-    using Z = Y_pC;
+    using Rmajor = typename ToLogicalCoordTransform::cartesian_tag_x;
+    using Z = typename ToLogicalCoordTransform::cartesian_tag_y;
     using CoordRZ = Coord<Rmajor, Z>;
+
+    // FIXME
+    // Need to add a static assert to check evaluator is addmissible to builder
+    // using ddc::is_evaluator_admissible
+    // This will be available from DDC 0.9.0
+    static_assert(
+            is_mapping_v<ToLogicalCoordTransform>,
+            "CoordinateTransformFunction must be a mapping");
+    static_assert(std::is_same_v<typename ToLogicalCoordTransform::CoordArg, CoordRZ>);
+    static_assert(std::is_same_v<typename ToLogicalCoordTransform::CoordResult, CoordRminorTheta>);
+    static_assert(is_accessible_v<ExecutionSpace, ToLogicalCoordTransform>);
 
 private:
     /**
@@ -111,7 +116,7 @@ private:
     /**
      * @brief coordinate_transform Function to convert (R, Z) to (r, theta).
      */
-    CoordinateTransformFunction m_coordinate_transform;
+    ToLogicalCoordTransform m_coordinate_transform;
 
     /**
      * @brief Number of points to use in the gyroaverage integration (default: 8)
@@ -131,7 +136,7 @@ public:
             DConstFieldRminorTheta const& rho_L,
             SplineRThetaBuilder const& spline_builder,
             SplineRThetaEvaluator const& spline_evaluator,
-            CoordinateTransformFunction coordinate_transform,
+            ToLogicalCoordTransform coordinate_transform,
             std::size_t const nb_gyro_points = 8)
         : m_rho_L(rho_L)
         , m_spline_builder(spline_builder)
@@ -139,14 +144,6 @@ public:
         , m_coordinate_transform(coordinate_transform)
         , m_nb_gyro_points(nb_gyro_points)
     {
-        static_assert(
-                is_mapping_v<CoordinateTransformFunction>,
-                "CoordinateTransformFunction must be a mapping");
-        static_assert(std::is_same_v<typename CoordinateTransformFunction::CoordArg, CoordRZ>);
-        static_assert(std::is_same_v<
-                      typename CoordinateTransformFunction::CoordResult,
-                      CoordRminorTheta>);
-        static_assert(is_accessible_v<ExecutionSpace, CoordinateTransformFunction>);
     }
 
     /**
@@ -156,13 +153,10 @@ public:
      * integrating the field along a circle of radius rho_L centred at (r, theta).
      * The field is interpolated at off-grid points using 2D B-splines.
      *
-     * @tparam CoordinateTransformFunction
-     *         Callable type that transforms (R, Z) coordinates to (r, theta) coordinates.
-     * @param[in] A Input field to be gyroaveraged (batched).
      * @param[out] A_bar Output field to store the gyroaveraged result (batched).
-     * @param[in] coordinate_transform Function to convert (R, Z) to (r, theta).
+     * @param[in] A Input field to be gyroaveraged (batched).
      */
-    void operator()(DConstFieldRminorThetaBatch const& A, DFieldRminorThetaBatch const& A_bar) const
+    void operator()(DFieldRminorThetaBatch const& A_bar, DConstFieldRminorThetaBatch const& A) const
     {
         IdxRangeRminorThetaBatch const rthetabatch_idx_range = get_idx_range(A);
         IdxRangeTheta const theta_idx_range(rthetabatch_idx_range);
@@ -174,8 +168,7 @@ public:
         DFieldBSRminorTheta const coef = get_field(coef_alloc);
         DConstFieldRminorTheta const rho_L = get_const_field(m_rho_L);
 
-        using SubConstDFieldRminorTheta = ConstField<
-                double,
+        using SubConstDFieldRminorTheta = DConstField<
                 IdxRangeRminorTheta,
                 typename ExecutionSpace::memory_space,
                 Kokkos::layout_stride>;
@@ -195,7 +188,7 @@ public:
             m_spline_builder(coef, get_const_field(sub_A_alloc));
             SplineRThetaEvaluator spline_evaluator = m_spline_evaluator;
 
-            CoordinateTransformFunction coordinate_transform = m_coordinate_transform;
+            ToLogicalCoordTransform coordinate_transform = m_coordinate_transform;
             std::size_t nb_gyro_points = m_nb_gyro_points;
             // Loop over r, theta
             ddc::parallel_for_each(
@@ -211,7 +204,7 @@ public:
                             // Compute the particle position in (R, Z) coordinate
                             double const alpha = M_PI * 2.0 / static_cast<double>(nb_gyro_points)
                                                  * static_cast<double>(igyro);
-                            inverse_mapping_t<CoordinateTransformFunction> inv_coordinate_transform
+                            inverse_mapping_t<ToLogicalCoordTransform> inv_coordinate_transform
                                     = coordinate_transform.get_inverse_mapping();
                             CoordRZ gyrocentre = inv_coordinate_transform(ddc::coordinate(irtheta));
                             CircularToCartesian<R_gyro, Theta_gyro, Rmajor, Z> circ_to_cart(
@@ -236,5 +229,3 @@ public:
         });
     }
 };
-
-} // namespace detail
