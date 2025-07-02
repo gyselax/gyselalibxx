@@ -8,6 +8,7 @@ add_executable(unit_tests_data_types
     device_host_t.cpp
     field.cpp
     tensor.cpp
+    use_deriv_field_with_builder.cpp
     ../main.cpp
 )
 target_link_libraries(unit_tests_data_types
