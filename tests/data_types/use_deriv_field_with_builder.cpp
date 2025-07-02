@@ -9,7 +9,6 @@
 #include "ddc_helper.hpp"
 #include "derivative_field.hpp"
 #include "derivative_field_mem.hpp"
-#include "grid_builder.hpp"
 #include "view.hpp"
 
 namespace {
@@ -225,6 +224,10 @@ TEST(DerivFieldTest, SplineBuilderUse)
     host_t<DField<IdxRange<BSplinesX, BSplinesY>>> function_coef = get_field(function_coef_alloc);
 
     // Copy the function values and its derivatives in the correct types -------------------------
+    /*
+        The SplineBuilder2D works with different types for the derivatives. 
+        It words better for layout_right instead of layout_stride. 
+    */
     Idx<DerivX> first_deriv_x(1);
     IdxStep<DerivX> n_deriv_x(1);
     IdxRange<DerivX> idx_range_deriv_x(first_deriv_x, n_deriv_x);
@@ -316,6 +319,11 @@ TEST(DerivFieldTest, SplineBuilderUse)
 
 
     // Test the spline representation ------------------------------------------------------------
+    /*
+        We verify here that the built spline representation is the expected one. 
+        The spline is exact on the interpolation points. Its boundary derivatives 
+        and corner cross-derivatives are also exact. 
+    */
     // --- Define an evaluator
     ddc::ConstantExtrapolationRule<X, Y> bc_xmin(xmin, ymin, ymax);
     ddc::ConstantExtrapolationRule<X, Y> bc_xmax(xmax, ymin, ymax);
