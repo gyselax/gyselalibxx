@@ -176,9 +176,6 @@ public:
                 Kokkos::layout_stride>;
 
         ddc::for_each(batch_idx_range, [&](IdxBatch const ib) {
-            // FIXME
-            // The input of the spline builder must be LayoutRight
-            // We allocate a buffer in LayoutRight whereto the slice is copied
             SubConstDFieldRminorTheta const sub_A = A[ib];
             SubDFieldRminorTheta sub_A_bar = A_bar[ib];
             DFieldMemRminorTheta sub_A_alloc(rtheta_idx_range);

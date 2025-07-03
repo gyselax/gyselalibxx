@@ -157,8 +157,8 @@ void initialise(
                 IdxTheta const itheta(irthetabatch);
                 IdxBatch const ibatch(irthetabatch);
 
-                // In non-circular case, it should be computed by
-                // (Rcoord(0,Ntheta/2) + Rcoord(0,0)) / 2
+                // In non-circular case, R0 effective should be computed by
+                // R0eff = (Rcoord(0,Ntheta/2) + Rcoord(0,0)) / 2
                 double const R0eff = R0;
                 A(ir, itheta, ibatch)
                         = Kokkos::cos(kx * (Rcoord(ir, itheta) - R0eff) + ky * Zcoord(ir, itheta));
