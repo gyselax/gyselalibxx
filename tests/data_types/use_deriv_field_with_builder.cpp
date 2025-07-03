@@ -136,32 +136,32 @@ TEST(DerivFieldTest, SplineBuilderUse)
     Idx<dX> first_dx(1);
     Idx<dY> first_dy(1);
 
-    DField<IdxRange<GridX, GridY>, Kokkos::HostSpace, Kokkos::layout_stride> function_exacted
+    DField<IdxRange<GridX, GridY>, Kokkos::HostSpace, Kokkos::layout_stride> function_extracted
             = function_and_derivs.get_values_field();
 
-    DField<IdxRange<GridY>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_xmin_exacted
+    DField<IdxRange<GridY>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_xmin_extracted
             = function_and_derivs[IdxdXX(first_dx, idx_range_slice_dx.front())];
-    DField<IdxRange<GridY>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_xmax_exacted
+    DField<IdxRange<GridY>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_xmax_extracted
             = function_and_derivs[IdxdXX(first_dx, idx_range_slice_dx.back())];
 
-    DField<IdxRange<GridX>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_ymin_exacted
+    DField<IdxRange<GridX>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_ymin_extracted
             = function_and_derivs[IdxdYY(first_dy, idx_range_slice_dy.front())];
-    DField<IdxRange<GridX>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_ymax_exacted
+    DField<IdxRange<GridX>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_ymax_extracted
             = function_and_derivs[IdxdYY(first_dy, idx_range_slice_dy.back())];
 
     /*
         EXAMPLE OF USE FOR THE FIRST DERIVATIVES. 
 
     // Defined on (dX, GridX, slice GridY)
-    detail::ViewNDMaker<3, double, false>::type derivs_x_exacted
+    detail::ViewNDMaker<3, double, false>::type derivs_x_extracted
             = function_and_derivs.get_mdspan(deriv_block_x);
     // Defined on (dY, slice GridX, GridY)
-    detail::ViewNDMaker<3, double, false>::type derivs_y_exacted
+    detail::ViewNDMaker<3, double, false>::type derivs_y_extracted
             = function_and_derivs.get_mdspan(deriv_block_y);
     */
 
     // Defined on (dX, dY, slice GridX, GridY)
-    detail::ViewNDMaker<4, double, false>::type derivs_xy_exacted
+    detail::ViewNDMaker<4, double, false>::type derivs_xy_extracted
             = function_and_derivs.get_mdspan(deriv_block_xy);
 
 
@@ -169,23 +169,23 @@ TEST(DerivFieldTest, SplineBuilderUse)
     ddc::for_each(idx_range_xy, [&](IdxXY idx_xy) {
         double const x = ddc::select<X>(ddc::coordinate(idx_xy));
         double const y = ddc::select<Y>(ddc::coordinate(idx_xy));
-        function_exacted(idx_xy) = x * x + y * y + 2 * x * y;
+        function_extracted(idx_xy) = x * x + y * y + 2 * x * y;
     });
 
     ddc::for_each(idx_range_y, [&](IdxY idx_y) {
         double const y = ddc::coordinate(idx_y);
         double const x_min(xmin);
         double const x_max(xmax);
-        derivs_xmin_exacted(idx_y) = 2 * x_min + 2 * y;
-        derivs_xmax_exacted(idx_y) = 2 * x_max + 2 * y;
+        derivs_xmin_extracted(idx_y) = 2 * x_min + 2 * y;
+        derivs_xmax_extracted(idx_y) = 2 * x_max + 2 * y;
     });
 
     ddc::for_each(idx_range_x, [&](IdxX idx_x) {
         double const x = ddc::coordinate(idx_x);
         double const y_min(ymin);
         double const y_max(ymax);
-        derivs_ymin_exacted(idx_x) = 2 * y_min + 2 * x;
-        derivs_ymax_exacted(idx_x) = 2 * y_max + 2 * x;
+        derivs_ymin_extracted(idx_x) = 2 * y_min + 2 * x;
+        derivs_ymax_extracted(idx_x) = 2 * y_max + 2 * x;
     });
 
     ddc::for_each(deriv_block_xy, [&](Idx<dX, dY> idx_dxdy) {
@@ -193,7 +193,7 @@ TEST(DerivFieldTest, SplineBuilderUse)
         Idx<dY> idx_dy(idx_dxdy);
         for (IdxX idx_x : idx_range_slice_dx) {
             for (IdxY idx_y : idx_range_slice_dy) {
-                derivs_xy_exacted(
+                derivs_xy_extracted(
                         idx_dx - deriv_block_x.front(),
                         idx_dy - deriv_block_y.front(),
                         idx_range_slice_dx.distance_from_front(idx_x).value(),
@@ -269,37 +269,37 @@ TEST(DerivFieldTest, SplineBuilderUse)
     host_t<DField<IdxRange<DerivX, DerivY>>> derivs_xy_max_max(derivs_xy_max_max_alloc);
 
     // --- Copy the values from the DerivField
-    ddc::for_each(idx_range_xy, [&](IdxXY idx_xy) { function(idx_xy) = function_exacted(idx_xy); });
+    ddc::for_each(idx_range_xy, [&](IdxXY idx_xy) { function(idx_xy) = function_extracted(idx_xy); });
 
     ddc::for_each(idx_range_deriv_x_y, [&](Idx<DerivX, GridY> idx_deriv_x_y) {
-        derivs_xmin(idx_deriv_x_y) = derivs_xmin_exacted(IdxY(idx_deriv_x_y));
-        derivs_xmax(idx_deriv_x_y) = derivs_xmax_exacted(IdxY(idx_deriv_x_y));
+        derivs_xmin(idx_deriv_x_y) = derivs_xmin_extracted(IdxY(idx_deriv_x_y));
+        derivs_xmax(idx_deriv_x_y) = derivs_xmax_extracted(IdxY(idx_deriv_x_y));
     });
 
     ddc::for_each(idx_range_x_deriv_y, [&](Idx<GridX, DerivY> idx_x_deriv_y) {
-        derivs_ymin(idx_x_deriv_y) = derivs_ymin_exacted(IdxX(idx_x_deriv_y));
-        derivs_ymax(idx_x_deriv_y) = derivs_ymax_exacted(IdxX(idx_x_deriv_y));
+        derivs_ymin(idx_x_deriv_y) = derivs_ymin_extracted(IdxX(idx_x_deriv_y));
+        derivs_ymax(idx_x_deriv_y) = derivs_ymax_extracted(IdxX(idx_x_deriv_y));
     });
 
-    derivs_xy_min_min(first_deriv_x_deriv_y) = derivs_xy_exacted(
+    derivs_xy_min_min(first_deriv_x_deriv_y) = derivs_xy_extracted(
             deriv_block_x.front() - deriv_block_x.front(), // IdxStep<dX>(0)
             deriv_block_y.front() - deriv_block_y.front(), // IdxStep<dY>(0)
             idx_range_slice_dx.distance_from_front(idx_range_slice_dx.front()).value(), // int(0)
             idx_range_slice_dy.distance_from_front(idx_range_slice_dy.front()).value()); // int(0)
 
-    derivs_xy_max_min(first_deriv_x_deriv_y) = derivs_xy_exacted(
+    derivs_xy_max_min(first_deriv_x_deriv_y) = derivs_xy_extracted(
             deriv_block_x.back() - deriv_block_x.front(),
             deriv_block_y.front() - deriv_block_y.front(),
             idx_range_slice_dx.distance_from_front(idx_range_slice_dx.back()).value(),
             idx_range_slice_dy.distance_from_front(idx_range_slice_dy.front()).value());
 
-    derivs_xy_min_max(first_deriv_x_deriv_y) = derivs_xy_exacted(
+    derivs_xy_min_max(first_deriv_x_deriv_y) = derivs_xy_extracted(
             deriv_block_x.front() - deriv_block_x.front(),
             deriv_block_y.back() - deriv_block_y.front(),
             idx_range_slice_dx.distance_from_front(idx_range_slice_dx.front()).value(),
             idx_range_slice_dy.distance_from_front(idx_range_slice_dy.back()).value());
 
-    derivs_xy_max_max(first_deriv_x_deriv_y) = derivs_xy_exacted(
+    derivs_xy_max_max(first_deriv_x_deriv_y) = derivs_xy_extracted(
             deriv_block_x.back() - deriv_block_x.front(), // IdxStep<dX>(1)
             deriv_block_y.back() - deriv_block_y.front(), // IdxStep<dY>(1)
             idx_range_slice_dx.distance_from_front(idx_range_slice_dx.back()).value(), // int(1)
