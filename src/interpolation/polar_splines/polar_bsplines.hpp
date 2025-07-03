@@ -265,18 +265,18 @@ public:
                         control_pts_eval_space_mem(idx_range_ctrl_pts);
                 curvilinear_to_cartesian
                         .control_points(EvalExecSpace(), get_field(control_pts_eval_space_mem));
-                auto control_pts_mem
+                auto control_pts_mem_host
                         = ddc::create_mirror_and_copy(get_const_field(control_pts_eval_space_mem));
-                host_t<Field<Coord<X, Y>, IdxRange<BSplinesR, BSplinesTheta>>> control_pts
-                        = get_field(control_pts_mem);
+                host_t<Field<Coord<X, Y>, IdxRange<BSplinesR, BSplinesTheta>>> control_pts_host
+                        = get_field(control_pts_mem_host);
 
                 const Coord<X, Y> pole = curvilinear_to_cartesian.o_point();
                 const double x0 = ddc::get<X>(pole);
                 const double y0 = ddc::get<Y>(pole);
                 double tau = 0.0;
                 Idx<BSplinesR> ctrl_pt_row_1(1);
-                for (Idx<BSplinesTheta> i : get_idx_range<BSplinesTheta>(control_pts)) {
-                    const Coord<X, Y> point = control_pts(ctrl_pt_row_1, i);
+                for (Idx<BSplinesTheta> i : get_idx_range<BSplinesTheta>(control_pts_host)) {
+                    const Coord<X, Y> point = control_pts_host(ctrl_pt_row_1, i);
 
                     const double c_x = ddc::get<X>(point);
                     const double c_y = ddc::get<Y>(point);
@@ -337,7 +337,7 @@ public:
                 for (IdxR const ir : idx_range_r_ctrl_pts.take_first(IdxStepR(C + 1))) {
                     for (IdxTheta const itheta :
                          poloidal_spline_idx_range.take_first(n_theta_in_singular)) {
-                        const Coord<X, Y> point = control_pts(ir, itheta);
+                        const Coord<X, Y> point = control_pts_host(ir, itheta);
                         ddc::discrete_space<BernsteinBasis>()
                                 .eval_basis(get_field(bernstein_vals), point);
                         // Fill spline coefficients
