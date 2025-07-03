@@ -342,9 +342,9 @@ public:
      * identified by its control points @f$ \{(c_{x,k}, c_{y,k})\}_{k}  @f$ where
      * @f$ c_{x,k} @f$ and @f$ c_{y,k} @f$ are the B-splines coefficients:
      *
-     * @f$ x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k{r,\theta} @f$,
+     * @f$ x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k(r,\theta) @f$,
      *
-     * @f$ y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k{r,\theta} @f$,
+     * @f$ y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k(r,\theta) @f$,
      *
      * where @f$ N_r\times N_{\theta} @f$ is the number of B-splines.
      *
@@ -376,9 +376,9 @@ public:
      * identified by its control points @f$ \{(c_{x,k}, c_{y,k})\}_{k}  @f$ where
      * @f$ c_{x,k} @f$ and @f$ c_{y,k} @f$ are the B-splines coefficients:
      *
-     * @f$ x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k{r,\theta} @f$,
+     * @f$ x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k(r,\theta) @f$,
      *
-     * @f$ y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k{r,\theta} @f$,
+     * @f$ y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k(r,\theta) @f$,
      *
      * where @f$ N_r\times N_{\theta} @f$ is the number of B-splines.
      *
