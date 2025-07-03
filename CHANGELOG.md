@@ -11,8 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add a Gyroaverage operator with tests for circular geometry.
 - Curvilinear coordinate change classes have an O-point method to retrieve the O-point in the non-curvilinear coordinates.
 - Add a batched `operator()` to `DiscreteToCartesian` allowing a field of coordinates to be converted.
+- Add a `LiePoissonBracket::operator()` overload which takes a 2D tensor as the second argument to the bracket.
+- Add a function `PDI_expose_vector_field` to output a vector field via PDI.
 - Add a `control_points` method to `DiscreteToCartesian` to allow all control points to be retrieved at once.
 
 ### Fixed
@@ -23,6 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix minimum version requirement of Kokkos.
 - Fix tolerance of floating point comparisons in JacobianMatrixAndJacobianCoefficients and MultipatchSplineEvaluatorTest tests
 - Fix unnecessary `std::move` calls.
+- Fix missing assertion in `LeviCivitaTensor` to prevent division by 0 when Jacobian is calculated at singular point.
+- Fix bad result of `is_tensor_v` for `IdentityTensor`.
 
 ### Changed
 

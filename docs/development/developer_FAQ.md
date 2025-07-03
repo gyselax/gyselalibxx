@@ -1,5 +1,9 @@
 # Developer's FAQ
 
+## Should I create a branch in the library (on GitHub) or in a private repository (e.g. on GitLab)?
+
+![Decision tree for GitHub vs GitLab. Publishable work should be private, as should work specific to 1 specific physical simulation, or urgent work.](../images/gitlab_or_github.png)
+
 ## What is the difference between Debug and Release mode?
 
 A Release execution is supposed to be the fastest execution possible based on the assumption that the code is bug-free.
