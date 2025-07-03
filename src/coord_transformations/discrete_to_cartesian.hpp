@@ -390,7 +390,7 @@ public:
      *
      *
      * @param[in] exec_space
-     *          The execution space where the calculation should be carried out.
+     *          The execution space where the calculations should be carried out.
      * @param[out] pts
      *          The control points of the mapping.
      *
