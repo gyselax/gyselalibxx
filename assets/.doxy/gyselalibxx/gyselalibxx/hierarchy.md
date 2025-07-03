@@ -75,6 +75,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**GeometryXVx**](classGeometryXVx.md) _A class providing aliases for useful subindex ranges of the geometry. It is used as template parameter for generic dimensionality-agnostic operators such as advections._ 
 * **class** [**GeometryXYVxVy**](classGeometryXYVxVy.md) _A class providing aliases for useful subindex ranges of the geometry when the data is saved with the spatial dimensions distributed across MPI ranks. It is used as template parameter for generic dimensionality-agnostic operators such as advections._ 
 * **class** [**Gradient**](classGradient.md) _A class which implements a gradient operator._ 
+* **class** [**GyroAverageOperator**](classGyroAverageOperator.md) _Operator to compute the gyroaverage of a field in (r, theta) coordinates._ 
 * **class** [**IBoltzmannSolver**](classIBoltzmannSolver.md) _An abstract class for solving a Boltzmann equation._     
     * **class** [**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md) _A class that solves a Boltzmann equation using Strang's splitting._ 
     * **class** [**SplitVlasovSolver**](classSplitVlasovSolver.md) _A class that solves a Vlasov equation using Strang's splitting._ 
@@ -169,6 +170,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**FluidMoments::MomentTemperature**](structFluidMoments_1_1MomentTemperature.md) 
 * **struct** [**FluidMoments::MomentVelocity**](structFluidMoments_1_1MomentVelocity.md) 
 * **struct** [**GaussLegendreCoefficients**](structGaussLegendreCoefficients.md) _A structure containing the weights and positions associated with a Gauss-Legendre quadrature using NPoints points._ 
+* **struct** [**GyroAverageOperator::R\_gyro**](structGyroAverageOperator_1_1R__gyro.md) 
+* **struct** [**GyroAverageOperator::Theta\_gyro**](structGyroAverageOperator_1_1Theta__gyro.md) 
 * **struct** [**IdxRangeToSlice**](structIdxRangeToSlice.md) _A class to create a IdxRangeSlice type from a TypeSeq._ 
 * **struct** [**Interface**](structInterface.md) _Represent a simple sticking of two edges._ 
 * **struct** [**MPIDim**](structMPIDim.md) _An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered information will be sent to or where the gathered information will be collected from._ 

@@ -174,6 +174,8 @@ Here is a list of all files with brief descriptions:
             * **file** [**mpisplitvlasovsolver.hpp**](mpisplitvlasovsolver_8hpp.md)     
             * **file** [**splitvlasovsolver.cpp**](geometryXYVxVy_2vlasov_2splitvlasovsolver_8cpp.md) 
             * **file** [**splitvlasovsolver.hpp**](geometryXYVxVy_2vlasov_2splitvlasovsolver_8hpp.md)     
+    * **dir** [**gyroaverage**](dir_0488de83d5a156211532c59817863a53.md)     
+        * **file** [**gyroaverage\_operator.hpp**](gyroaverage__operator_8hpp.md)     
     * **dir** [**interpolation**](dir_264890e5c091f8c8d7fe1f842870c25e.md)     
         * **dir** [**polar\_splines**](dir_a6779ae02b71d57f488d261458bab1ce.md)     
             * **file** [**bernstein.hpp**](bernstein_8hpp.md)     

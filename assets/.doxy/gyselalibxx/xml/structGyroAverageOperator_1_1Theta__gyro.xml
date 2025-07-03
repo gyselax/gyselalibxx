@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structGyroAverageOperator_1_1Theta__gyro" kind="struct" language="C++" prot="private">
+    <compoundname>GyroAverageOperator::Theta_gyro</compoundname>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structGyroAverageOperator_1_1Theta__gyro_1a105db279a28a9fad8855ee3e3ed53243" prot="public" static="no">
+        <type>Theta_gyro_cov</type>
+        <definition>using GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::Theta_gyro::Dual =  Theta_gyro_cov</definition>
+        <argsstring></argsstring>
+        <name>Dual</name>
+        <qualifiedname>GyroAverageOperator::Theta_gyro::Dual</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="59" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structGyroAverageOperator_1_1Theta__gyro_1a9ce4edde9d0f283479639957d7dd472f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool GyroAverageOperator&lt; SplineRThetaBuilder, SplineRThetaEvaluator, IdxRangeRminorThetaBatch, ToLogicalCoordTransform &gt;::Theta_gyro::PERIODIC</definition>
+        <argsstring></argsstring>
+        <name>PERIODIC</name>
+        <qualifiedname>GyroAverageOperator::Theta_gyro::PERIODIC</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="57" column="31" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="55" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="56" bodyend="60"/>
+    <listofallmembers>
+      <member refid="structGyroAverageOperator_1_1Theta__gyro_1a105db279a28a9fad8855ee3e3ed53243" prot="public" virt="non-virtual"><scope>GyroAverageOperator::Theta_gyro</scope><name>Dual</name></member>
+      <member refid="structGyroAverageOperator_1_1Theta__gyro_1a9ce4edde9d0f283479639957d7dd472f" prot="public" virt="non-virtual"><scope>GyroAverageOperator::Theta_gyro</scope><name>PERIODIC</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -32,6 +32,7 @@
 | dir | [**geometryXVx**](dir_e51b496b46dd687775e46e0826614574.md) <br> |
 | dir | [**geometryXY**](dir_8727f3a3f911772a0d72e99b040a604a.md) <br> |
 | dir | [**geometryXYVxVy**](dir_e4674dab6493cf35bbeb1b23e7fbbddd.md) <br> |
+| dir | [**gyroaverage**](dir_0488de83d5a156211532c59817863a53.md) <br> |
 | dir | [**interpolation**](dir_264890e5c091f8c8d7fe1f842870c25e.md) <br> |
 | dir | [**io**](dir_c184e51c84f2c3f0345bbc8a0d75d3e1.md) <br> |
 | dir | [**math\_tools**](dir_3ced5d1c6eac490d7704c2e023d148d8.md) <br> |

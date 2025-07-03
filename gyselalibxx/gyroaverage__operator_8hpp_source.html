@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/spline_quadrature.hpp} - GyselalibX</title>
+    <title>File gyroaverage_operator.hpp - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/spline_quadrature.hpp}";
-        var mkdocs_page_input_path = "gyselalibxx/namespace_0d216.md";
+        var mkdocs_page_name = "File gyroaverage_operator.hpp";
+        var mkdocs_page_input_path = "gyselalibxx/gyroaverage__operator_8hpp_source.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -267,6 +267,12 @@
                 <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/vlasov/index.html">Vlasov solver</a>
                 </li>
     </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >gyroaverage</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/gyroaverage/index.html">Gyroaverage operator (for circular geometry)</a>
                 </li>
     </ul>
                 </li>
@@ -530,9 +536,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/spline_quadrature.hpp}</li>
+      <li class="breadcrumb-item active">File gyroaverage_operator.hpp</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/namespace_0d216.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/gyroaverage__operator_8hpp_source.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -540,10 +546,188 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="namespace-anonymous-namespacehomerunnerworkgyselalibxxgyselalibxxcode_branchsrcquadraturespline_quadraturehpp">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/spline_quadrature.hpp}</h1>
-<p><a href="namespaces.html"><strong>Namespace List</strong></a> <strong>&gt;</strong> <a href="namespace_0d216.html"><strong>anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/spline_quadrature.hpp}</strong></a></p>
-<hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/spline_quadrature.hpp</code></p></div>
+                <div><h1 id="file-gyroaverage_operatorhpp">File gyroaverage_operator.hpp</h1>
+<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_0488de83d5a156211532c59817863a53.html"><strong>gyroaverage</strong></a> <strong>&gt;</strong> <a href="gyroaverage__operator_8hpp.html"><strong>gyroaverage_operator.hpp</strong></a></p>
+<p><a href="gyroaverage__operator_8hpp.html">Go to the documentation of this file</a></p>
+<pre><code class="language-C++">// SPDX-License-Identifier: MIT
+#pragma once
+
+#include &lt;ddc/ddc.hpp&gt;
+
+#include "cartesian_to_circular.hpp"
+#include "circular_to_cartesian.hpp"
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "geometry_pseudo_cartesian.hpp"
+
+template &lt;
+        class SplineRThetaBuilder,
+        class SplineRThetaEvaluator,
+        class IdxRangeRminorThetaBatch,
+        class ToLogicalCoordTransform&gt;
+class GyroAverageOperator
+{
+    using ExecutionSpace = typename SplineRThetaBuilder::exec_space;
+
+    using GridRminor = typename SplineRThetaBuilder::interpolation_discrete_dimension_type1;
+    using GridTheta = typename SplineRThetaBuilder::interpolation_discrete_dimension_type2;
+
+    using Rminor = typename GridRminor::continuous_dimension_type;
+    using Theta = typename GridTheta::continuous_dimension_type;
+
+    using BSplinesRminor = typename SplineRThetaBuilder::bsplines_type1;
+    using BSplinesTheta = typename SplineRThetaBuilder::bsplines_type2;
+
+    struct R_gyro_cov;
+    struct Theta_gyro_cov;
+
+    struct R_gyro
+    {
+        static constexpr bool PERIODIC = false;
+        // The corresponding type in the dual space.
+        using Dual = R_gyro_cov;
+    };
+
+    struct Theta_gyro
+    {
+        static constexpr bool PERIODIC = true;
+        // The corresponding type in the dual space.
+        using Dual = Theta_gyro_cov;
+    };
+
+    using IdxRangeRminor = IdxRange&lt;GridRminor&gt;;
+    using IdxRangeTheta = IdxRange&lt;GridTheta&gt;;
+    using IdxRangeRminorTheta = IdxRange&lt;GridRminor, GridTheta&gt;;
+    using IdxRangeBatch = ddc::remove_dims_of_t&lt;IdxRangeRminorThetaBatch, GridRminor, GridTheta&gt;;
+    using IdxRangeBSRminorTheta = IdxRange&lt;BSplinesRminor, BSplinesTheta&gt;;
+
+    using IdxRminor = Idx&lt;GridRminor&gt;;
+    using IdxTheta = Idx&lt;GridTheta&gt;;
+    using IdxBatch = typename IdxRangeBatch::discrete_element_type;
+    using IdxRminorTheta = Idx&lt;GridRminor, GridTheta&gt;;
+
+    using DFieldMemRminorTheta = DFieldMem&lt;IdxRangeRminorTheta&gt;;
+    using DFieldMemRminorThetaBatch = DFieldMem&lt;IdxRangeRminorThetaBatch&gt;;
+    using DFieldMemBSRminorTheta = DFieldMem&lt;IdxRangeBSRminorTheta&gt;;
+    using DFieldRminorTheta = DField&lt;IdxRangeRminorTheta&gt;;
+    using DFieldRminorThetaBatch = DField&lt;IdxRangeRminorThetaBatch&gt;;
+    using DFieldBSRminorTheta = DField&lt;IdxRangeBSRminorTheta&gt;;
+    using DConstFieldRminorTheta = DConstField&lt;IdxRangeRminorTheta&gt;;
+    using DConstFieldRminorThetaBatch = DConstField&lt;IdxRangeRminorThetaBatch&gt;;
+
+    using CoordRminorTheta = Coord&lt;Rminor, Theta&gt;;
+    using CoordR_gyroTheta_gyro = Coord&lt;R_gyro, Theta_gyro&gt;;
+    using Rmajor = typename ToLogicalCoordTransform::cartesian_tag_x;
+    using Z = typename ToLogicalCoordTransform::cartesian_tag_y;
+    using CoordRZ = Coord&lt;Rmajor, Z&gt;;
+
+    // FIXME
+    // Need to add a static assert to check evaluator is addmissible to builder
+    // using ddc::is_evaluator_admissible
+    // This will be available from DDC 0.9.0
+    static_assert(
+            is_mapping_v&lt;ToLogicalCoordTransform&gt;,
+            "CoordinateTransformFunction must be a mapping");
+    static_assert(std::is_same_v&lt;typename ToLogicalCoordTransform::CoordArg, CoordRZ&gt;);
+    static_assert(std::is_same_v&lt;typename ToLogicalCoordTransform::CoordResult, CoordRminorTheta&gt;);
+    static_assert(is_accessible_v&lt;ExecutionSpace, ToLogicalCoordTransform&gt;);
+
+    DConstFieldRminorTheta m_rho_L;
+
+    SplineRThetaBuilder const&amp; m_spline_builder;
+
+    SplineRThetaEvaluator const&amp; m_spline_evaluator;
+
+    ToLogicalCoordTransform m_coordinate_transform;
+
+    std::size_t const m_nb_gyro_points;
+
+public:
+    explicit GyroAverageOperator(
+            DConstFieldRminorTheta const&amp; rho_L,
+            SplineRThetaBuilder const&amp; spline_builder,
+            SplineRThetaEvaluator const&amp; spline_evaluator,
+            ToLogicalCoordTransform coordinate_transform,
+            std::size_t const nb_gyro_points = 8)
+        : m_rho_L(rho_L)
+        , m_spline_builder(spline_builder)
+        , m_spline_evaluator(spline_evaluator)
+        , m_coordinate_transform(coordinate_transform)
+        , m_nb_gyro_points(nb_gyro_points)
+    {
+    }
+
+    void operator()(DFieldRminorThetaBatch const&amp; A_bar, DConstFieldRminorThetaBatch const&amp; A) const
+    {
+        IdxRangeRminorThetaBatch const rthetabatch_idx_range = get_idx_range(A);
+        IdxRangeTheta const theta_idx_range(rthetabatch_idx_range);
+        IdxRangeBatch const batch_idx_range(rthetabatch_idx_range);
+        IdxRangeRminorTheta const rtheta_idx_range(rthetabatch_idx_range);
+
+        // Instantiate chunk of spline coefs to receive output of spline_builder (r, theta)
+        DFieldMemBSRminorTheta coef_alloc(get_spline_idx_range(m_spline_builder));
+        DFieldBSRminorTheta const coef = get_field(coef_alloc);
+        DConstFieldRminorTheta const rho_L = get_const_field(m_rho_L);
+
+        using SubConstDFieldRminorTheta = DConstField&lt;
+                IdxRangeRminorTheta,
+                typename ExecutionSpace::memory_space,
+                Kokkos::layout_stride&gt;;
+        using SubDFieldRminorTheta = DField&lt;
+                IdxRangeRminorTheta,
+                typename ExecutionSpace::memory_space,
+                Kokkos::layout_stride&gt;;
+
+        ddc::for_each(batch_idx_range, [&amp;](IdxBatch const ib) {
+            SubConstDFieldRminorTheta const sub_A = A[ib];
+            SubDFieldRminorTheta sub_A_bar = A_bar[ib];
+            DFieldMemRminorTheta sub_A_alloc(rtheta_idx_range);
+            ddc::parallel_deepcopy(sub_A_alloc, sub_A);
+            m_spline_builder(coef, get_const_field(sub_A_alloc));
+            SplineRThetaEvaluator spline_evaluator = m_spline_evaluator;
+
+            ToLogicalCoordTransform coordinate_transform = m_coordinate_transform;
+            std::size_t nb_gyro_points = m_nb_gyro_points;
+            // Loop over r, theta
+            ddc::parallel_for_each(
+                    ExecutionSpace(),
+                    rtheta_idx_range,
+                    KOKKOS_LAMBDA(IdxRminorTheta const irtheta) {
+                        IdxRminor const ir(irtheta);
+                        IdxTheta const itheta(irtheta);
+
+                        // Average over gyro points
+                        double sum_over_gyro_points = 0.0;
+                        for (std::size_t igyro = 0; igyro &lt; nb_gyro_points; igyro++) {
+                            // Compute the particle position in (R, Z) coordinate
+                            double const alpha = M_PI * 2.0 / static_cast&lt;double&gt;(nb_gyro_points)
+                                                 * static_cast&lt;double&gt;(igyro);
+                            inverse_mapping_t&lt;ToLogicalCoordTransform&gt; inv_coordinate_transform
+                                    = coordinate_transform.get_inverse_mapping();
+                            CoordRZ gyrocentre = inv_coordinate_transform(ddc::coordinate(irtheta));
+                            CircularToCartesian&lt;R_gyro, Theta_gyro, Rmajor, Z&gt; circ_to_cart(
+                                    gyrocentre);
+                            CoordRZ particle_position = circ_to_cart(
+                                    CoordR_gyroTheta_gyro {rho_L(ir, itheta), alpha});
+
+                            // Convert from (R, Z) into (r, theta) coordinate
+                            CoordRminorTheta p = coordinate_transform(particle_position);
+
+                            // Spline interpolation in (r, theta) coordinate
+                            sum_over_gyro_points += spline_evaluator(p, get_const_field(coef));
+                        }
+                        sub_A_bar(ir, itheta)
+                                = sum_over_gyro_points / static_cast&lt;double&gt;(nb_gyro_points);
+                    });
+
+            // Apply periodic boundary condition in theta direction
+            ddc::parallel_deepcopy(
+                    sub_A_bar[theta_idx_range.back()],
+                    sub_A_bar[theta_idx_range.front()]);
+        });
+    }
+};
+</code></pre></div>
               
             </div>
           </div><footer>

@@ -1165,6 +1165,44 @@
   </compound>
   <compound refid="structGridY" kind="struct"><name>GridY</name>
   </compound>
+  <compound refid="classGyroAverageOperator" kind="class"><name>GyroAverageOperator</name>
+    <member refid="classGyroAverageOperator_1ae4091e1bfd6cdb27a90a42108fba2d95" kind="typedef"><name>ExecutionSpace</name></member>
+    <member refid="classGyroAverageOperator_1a7323dc58a4039a56c126128b3f47e112" kind="typedef"><name>GridRminor</name></member>
+    <member refid="classGyroAverageOperator_1a2e2eef134c74739c77d1137db16b56e3" kind="typedef"><name>GridTheta</name></member>
+    <member refid="classGyroAverageOperator_1a5691dae9d1f6fff811a9093f1c8dc05f" kind="typedef"><name>Rminor</name></member>
+    <member refid="classGyroAverageOperator_1ab738971ec6cabcbcd7eb4d6a9a0ecb9c" kind="typedef"><name>Theta</name></member>
+    <member refid="classGyroAverageOperator_1a2333d3c4f4327fdaf60d19c0be7b4659" kind="typedef"><name>BSplinesRminor</name></member>
+    <member refid="classGyroAverageOperator_1a1648e1bbc9cf1b44f6314480a2f22c4e" kind="typedef"><name>BSplinesTheta</name></member>
+    <member refid="classGyroAverageOperator_1a738bfdfe201c7b4c6ce700a6266e016d" kind="typedef"><name>IdxRangeRminor</name></member>
+    <member refid="classGyroAverageOperator_1aec0a5e18c8c1358f0b5fca02d9b49a26" kind="typedef"><name>IdxRangeTheta</name></member>
+    <member refid="classGyroAverageOperator_1a1affefe8ff2204b52dd5f05a2ac1d040" kind="typedef"><name>IdxRangeRminorTheta</name></member>
+    <member refid="classGyroAverageOperator_1a93240dac66de1c00e551d92142de1080" kind="typedef"><name>IdxRangeBatch</name></member>
+    <member refid="classGyroAverageOperator_1a51360dcf94a0de5e52d5878d332c0246" kind="typedef"><name>IdxRangeBSRminorTheta</name></member>
+    <member refid="classGyroAverageOperator_1a29387299bd61457ac1db794ac9e77ae6" kind="typedef"><name>IdxRminor</name></member>
+    <member refid="classGyroAverageOperator_1ab0637f6a4af7bea68390fefd2bcb3bb7" kind="typedef"><name>IdxTheta</name></member>
+    <member refid="classGyroAverageOperator_1a5a479ad640010a9486a4c05ef1e9f1b5" kind="typedef"><name>IdxBatch</name></member>
+    <member refid="classGyroAverageOperator_1ae089f81b3cec545fe4f52504211b334e" kind="typedef"><name>IdxRminorTheta</name></member>
+    <member refid="classGyroAverageOperator_1a14f0f968efdb9647e7ced796adc51f80" kind="typedef"><name>DFieldMemRminorTheta</name></member>
+    <member refid="classGyroAverageOperator_1a1ca8e7dcc9faa75874043a247c15c096" kind="typedef"><name>DFieldMemRminorThetaBatch</name></member>
+    <member refid="classGyroAverageOperator_1acf5f8bfb70998bcb91baa6cf65b0bd4f" kind="typedef"><name>DFieldMemBSRminorTheta</name></member>
+    <member refid="classGyroAverageOperator_1af3b1b9ddf00b77f093e0e07b3bdf9a05" kind="typedef"><name>DFieldRminorTheta</name></member>
+    <member refid="classGyroAverageOperator_1af83b28c0f65d41f073748378e9f25cda" kind="typedef"><name>DFieldRminorThetaBatch</name></member>
+    <member refid="classGyroAverageOperator_1acb777238e7aae46eed6b7f01b09596ef" kind="typedef"><name>DFieldBSRminorTheta</name></member>
+    <member refid="classGyroAverageOperator_1a1fe1a3ef952448393b859b1efb78010c" kind="typedef"><name>DConstFieldRminorTheta</name></member>
+    <member refid="classGyroAverageOperator_1a6a45b7de3af3124be844eff81403cfad" kind="typedef"><name>DConstFieldRminorThetaBatch</name></member>
+    <member refid="classGyroAverageOperator_1a8649c36b35f754be220bd88420b521fa" kind="typedef"><name>CoordRminorTheta</name></member>
+    <member refid="classGyroAverageOperator_1ac84680201de98fe36f76f124edc55676" kind="typedef"><name>CoordR_gyroTheta_gyro</name></member>
+    <member refid="classGyroAverageOperator_1a30b921d2de8ec7be98f3ff7f1533c50c" kind="typedef"><name>Rmajor</name></member>
+    <member refid="classGyroAverageOperator_1ac30ac18d813cec33ba33ed8da00bccb8" kind="typedef"><name>Z</name></member>
+    <member refid="classGyroAverageOperator_1a76958457fe28b69f1ab401cf71489bd7" kind="typedef"><name>CoordRZ</name></member>
+    <member refid="classGyroAverageOperator_1a5ba2d676cd885a029ccdb85e63adcabc" kind="variable"><name>m_rho_L</name></member>
+    <member refid="classGyroAverageOperator_1af6a5f0d747a5a00678f4103b20ae2bf2" kind="variable"><name>m_spline_builder</name></member>
+    <member refid="classGyroAverageOperator_1afd19acac1d6c0bac6bb5db25c202de5a" kind="variable"><name>m_spline_evaluator</name></member>
+    <member refid="classGyroAverageOperator_1ac611016af8d1d7f9d3bb26a88b78c465" kind="variable"><name>m_coordinate_transform</name></member>
+    <member refid="classGyroAverageOperator_1a1b5375004b8b7ccd5d435b92c65bd7e4" kind="variable"><name>m_nb_gyro_points</name></member>
+    <member refid="classGyroAverageOperator_1ab80567574cba4d5616c6ec3463656b6c" kind="function"><name>GyroAverageOperator</name></member>
+    <member refid="classGyroAverageOperator_1a0b895f8c55a7673871e5d2b155a7495a" kind="function"><name>operator()</name></member>
+  </compound>
   <compound refid="structFEM1DPoissonSolver_1_1HiddenFEMBSplines" kind="struct"><name>FEM1DPoissonSolver::HiddenFEMBSplines</name>
   </compound>
   <compound refid="classIAdvectionSpatial" kind="class"><name>IAdvectionSpatial</name>
@@ -2395,6 +2433,10 @@
     <member refid="structR__cov_1addc6f8ecfa472ef35669ef4d4b695089" kind="variable"><name>IS_COVARIANT</name></member>
     <member refid="structR__cov_1ad33bfa8d84633a654f6d895b62e55bd3" kind="variable"><name>IS_CONTRAVARIANT</name></member>
   </compound>
+  <compound refid="structGyroAverageOperator_1_1R__gyro" kind="struct"><name>GyroAverageOperator::R_gyro</name>
+    <member refid="structGyroAverageOperator_1_1R__gyro_1a84e24cedd3763682987663a5d278d671" kind="typedef"><name>Dual</name></member>
+    <member refid="structGyroAverageOperator_1_1R__gyro_1a3a43c0c95a9a15f4bec1265f1e9944f0" kind="variable"><name>PERIODIC</name></member>
+  </compound>
   <compound refid="structPolarSplineFEMPoissonLikeSolver_1_1RBasisSubset" kind="struct"><name>PolarSplineFEMPoissonLikeSolver::RBasisSubset</name>
   </compound>
   <compound refid="structPolarSplineFEMPoissonLikeSolver_1_1RCellDim" kind="struct"><name>PolarSplineFEMPoissonLikeSolver::RCellDim</name>
@@ -2721,6 +2763,10 @@
     <member refid="structTheta__cov_1a0ec6a971ce9ef055bb3ed6b60f2b1ddf" kind="variable"><name>IS_COVARIANT</name></member>
     <member refid="structTheta__cov_1aa8fa7e714a2fd9fc2de39f95d97e6e4a" kind="variable"><name>IS_CONTRAVARIANT</name></member>
   </compound>
+  <compound refid="structGyroAverageOperator_1_1Theta__gyro" kind="struct"><name>GyroAverageOperator::Theta_gyro</name>
+    <member refid="structGyroAverageOperator_1_1Theta__gyro_1a105db279a28a9fad8855ee3e3ed53243" kind="typedef"><name>Dual</name></member>
+    <member refid="structGyroAverageOperator_1_1Theta__gyro_1a9ce4edde9d0f283479639957d7dd472f" kind="variable"><name>PERIODIC</name></member>
+  </compound>
   <compound refid="structPolarSplineFEMPoissonLikeSolver_1_1ThetaBasisSubset" kind="struct"><name>PolarSplineFEMPoissonLikeSolver::ThetaBasisSubset</name>
   </compound>
   <compound refid="structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim" kind="struct"><name>PolarSplineFEMPoissonLikeSolver::ThetaCellDim</name>
@@ -2903,13 +2949,13 @@
     <member refid="structY__pC_1a6274201b751e93509509253746e598c1" kind="variable"><name>IS_COVARIANT</name></member>
     <member refid="structY__pC_1a840b5d333654df4c5be30422ce8eeb28" kind="variable"><name>IS_CONTRAVARIANT</name></member>
   </compound>
-  <compound refid="namespace_0d210" kind="namespace"><name>@210</name>
+  <compound refid="namespace_0d211" kind="namespace"><name>@211</name>
   </compound>
-  <compound refid="namespace_0d212" kind="namespace"><name>@212</name>
+  <compound refid="namespace_0d213" kind="namespace"><name>@213</name>
   </compound>
-  <compound refid="namespace_0d214" kind="namespace"><name>@214</name>
+  <compound refid="namespace_0d215" kind="namespace"><name>@215</name>
   </compound>
-  <compound refid="namespace_0d216" kind="namespace"><name>@216</name>
+  <compound refid="namespace_0d217" kind="namespace"><name>@217</name>
   </compound>
   <compound refid="namespace_0d93" kind="namespace"><name>@93</name>
   </compound>
@@ -3740,6 +3786,8 @@
   </compound>
   <compound refid="mpisplitvlasovsolver_8hpp" kind="file"><name>mpisplitvlasovsolver.hpp</name>
   </compound>
+  <compound refid="gyroaverage__operator_8hpp" kind="file"><name>gyroaverage_operator.hpp</name>
+  </compound>
   <compound refid="i__interpolator__2d_8hpp" kind="file"><name>i_interpolator_2d.hpp</name>
   </compound>
   <compound refid="iinterpolator_8hpp" kind="file"><name>iinterpolator.hpp</name>
@@ -4245,6 +4293,8 @@
   <compound refid="dir_8727f3a3f911772a0d72e99b040a604a" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY</name>
   </compound>
   <compound refid="dir_e4674dab6493cf35bbeb1b23e7fbbddd" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy</name>
+  </compound>
+  <compound refid="dir_0488de83d5a156211532c59817863a53" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage</name>
   </compound>
   <compound refid="dir_1b70d60e6147eeeade38d183e3e9d318" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation</name>
   </compound>

@@ -215,6 +215,7 @@
 * [**GridVy**](structGridVy.md)
 * [**GridX**](structGridX.md)
 * [**GridY**](structGridY.md)
+* [**GyroAverageOperator**](classGyroAverageOperator.md)
 
 
 ## h
@@ -402,6 +403,7 @@
 
 * [**R**](structR.md)
 * [**R\_cov**](structR__cov.md)
+* [**R\_gyro**](structGyroAverageOperator_1_1R__gyro.md)
 * [**RBasisSubset**](structPolarSplineFEMPoissonLikeSolver_1_1RBasisSubset.md)
 ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * [**RCellDim**](structPolarSplineFEMPoissonLikeSolver_1_1RCellDim.md)
@@ -455,6 +457,7 @@
 ([**tensor\_tools**](namespacetensor__tools.md))
 * [**Theta**](structTheta.md)
 * [**Theta\_cov**](structTheta__cov.md)
+* [**Theta\_gyro**](structGyroAverageOperator_1_1Theta__gyro.md)
 * [**ThetaBasisSubset**](structPolarSplineFEMPoissonLikeSolver_1_1ThetaBasisSubset.md)
 ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * [**ThetaCellDim**](structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim.md)

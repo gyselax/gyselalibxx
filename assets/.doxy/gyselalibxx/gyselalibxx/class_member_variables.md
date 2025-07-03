@@ -66,7 +66,7 @@
 * **m\_epsilon** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CombinedMapping**](classCombinedMapping.md), [**CrankNicolson**](classCrankNicolson.md), [**CrankNicolsonBuilder**](classCrankNicolsonBuilder.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**KelvinHelmholtzInstabilityInitialisation**](classKelvinHelmholtzInstabilityInitialisation.md))
 * **m\_mapping** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md), [**BslPredCorrRTheta**](classBslPredCorrRTheta.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b.md), [**InverseJacobianMatrix**](classInverseJacobianMatrix.md), [**LiePoissonBracket**](classLiePoissonBracket.md), [**MetricTensorEvaluator**](classMetricTensorEvaluator.md), [**VortexMergerDensitySolution**](classVortexMergerDensitySolution.md), [**VortexMergerEquilibria**](classVortexMergerEquilibria.md))
 * **m\_polar\_spline\_evaluator** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
-* **m\_spline\_evaluator** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md), [**BslPredCorrRTheta**](classBslPredCorrRTheta.md), [**DiscreteToCartesian**](classDiscreteToCartesian.md), [**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
+* **m\_spline\_evaluator** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md), [**BslPredCorrRTheta**](classBslPredCorrRTheta.md), [**DiscreteToCartesian**](classDiscreteToCartesian.md), [**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md), [**GyroAverageOperator**](classGyroAverageOperator.md))
 * **m\_corner1** ([**BarycentricToCartesian**](classBarycentricToCartesian.md), [**CartesianToBarycentric**](classCartesianToBarycentric.md))
 * **m\_corner2** ([**BarycentricToCartesian**](classBarycentricToCartesian.md), [**CartesianToBarycentric**](classCartesianToBarycentric.md))
 * **m\_corner3** ([**BarycentricToCartesian**](classBarycentricToCartesian.md), [**CartesianToBarycentric**](classCartesianToBarycentric.md))
@@ -136,7 +136,7 @@
 * **m\_fem\_matrix** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **m\_matrix\_size** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_quad\_coef** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
-* **m\_spline\_builder** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md), [**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
+* **m\_spline\_builder** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md), [**GyroAverageOperator**](classGyroAverageOperator.md), [**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
 * **m\_spline\_fem\_evaluator** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **m\_norm** ([**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md))
 * **m\_integrate\_v** ([**FluidMoments**](classFluidMoments.md))
@@ -145,6 +145,9 @@
 * **m\_nbcells** ([**GaussLegendre**](classGaussLegendre.md))
 * **m\_valid\_idx\_range** ([**GaussLegendre**](classGaussLegendre.md))
 * **m\_metric\_tensor** ([**Gradient**](classGradient.md), [**LiePoissonBracket**](classLiePoissonBracket.md))
+* **m\_coordinate\_transform** ([**GyroAverageOperator**](classGyroAverageOperator.md))
+* **m\_nb\_gyro\_points** ([**GyroAverageOperator**](classGyroAverageOperator.md))
+* **m\_rho\_L** ([**GyroAverageOperator**](classGyroAverageOperator.md))
 * **m\_comm** ([**IMPITranspose**](classIMPITranspose.md), [**MpiChargeDensityCalculator**](classMpiChargeDensityCalculator.md))
 * **m\_mode\_k** ([**KelvinHelmholtzInstabilityInitialisation**](classKelvinHelmholtzInstabilityInitialisation.md))
 * **m\_amplitude** ([**KineticSource**](classKineticSource.md), [**KrookSourceAdaptive**](classKrookSourceAdaptive.md), [**KrookSourceConstant**](classKrookSourceConstant.md))
@@ -293,7 +296,7 @@
 ## p
 
 * **pos** ([**GaussLegendreCoefficients**](structGaussLegendreCoefficients.md))
-* **PERIODIC** ([**Mu**](structMu.md), [**R**](structR.md), [**R\_cov**](structR__cov.md), [**T**](structT.md), [**Theta**](structTheta.md), [**Theta\_cov**](structTheta__cov.md), [**Vpar**](structVpar.md), [**Vr**](structVr.md), [**Vtheta**](structVtheta.md), [**Vx**](structVx.md), [**Vy**](structVy.md), [**X**](structX.md), [**X\_pC**](structX__pC.md), [**Y**](structY.md), [**Y\_pC**](structY__pC.md))
+* **PERIODIC** ([**GyroAverageOperator::R\_gyro**](structGyroAverageOperator_1_1R__gyro.md), [**GyroAverageOperator::Theta\_gyro**](structGyroAverageOperator_1_1Theta__gyro.md), [**Mu**](structMu.md), [**R**](structR.md), [**R\_cov**](structR__cov.md), [**T**](structT.md), [**Theta**](structTheta.md), [**Theta\_cov**](structTheta__cov.md), [**Vpar**](structVpar.md), [**Vr**](structVr.md), [**Vtheta**](structVtheta.md), [**Vx**](structVx.md), [**Vy**](structVy.md), [**X**](structX.md), [**X\_pC**](structX__pC.md), [**Y**](structY.md), [**Y\_pC**](structY__pC.md))
 * **patch\_id** ([**MultipatchSplineBuilder::Build\_BuilderType**](structMultipatchSplineBuilder_1_1Build__BuilderType.md))
 
 
