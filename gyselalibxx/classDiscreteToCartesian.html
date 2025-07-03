@@ -634,6 +634,10 @@
 <td style="text-align: left;"><a href="#function-control_point"><strong>control_point</strong></a> (Idx&lt; <a href="classDiscreteToCartesian.html#typedef-bspliner"><strong>BSplineR</strong></a>, <a href="classDiscreteToCartesian.html#typedef-bsplinetheta"><strong>BSplineTheta</strong></a> &gt; const &amp; el) const<br><em>Get a control point of the mapping on B-splines.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-control_points"><strong>control_points</strong></a> (ExecSpace exec_space, Field&lt; Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;, IdxRange&lt; <a href="classDiscreteToCartesian.html#typedef-bspliner"><strong>BSplineR</strong></a>, <a href="classDiscreteToCartesian.html#typedef-bsplinetheta"><strong>BSplineTheta</strong></a> &gt;, MemorySpace &gt; pts) const<br><em>Get a set of control points of the mapping on B-splines.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;, VectorIndexSet&lt; <a href="classDiscreteToCartesian.html#typedef-r_cov"><strong>R_cov</strong></a>, <a href="classDiscreteToCartesian.html#typedef-theta_cov"><strong>Theta_cov</strong></a> &gt; &gt;</td>
 <td style="text-align: left;"><a href="#function-first_order_jacobian_matrix_r_rtheta"><strong>first_order_jacobian_matrix_r_rtheta</strong></a> (Coord&lt; <a href="classDiscreteToCartesian.html#typedef-curvilinear_tag_r"><strong>curvilinear_tag_r</strong></a>, <a href="classDiscreteToCartesian.html#typedef-curvilinear_tag_theta"><strong>curvilinear_tag_theta</strong></a> &gt; const &amp; coord) const<br><em>Get the first order expansion of the Jacobian matrix with the theta component divided by r. The expansion is carried out around</em>  <em>. The returned matrix</em> <em>is defined as:</em> __ __ __ <em>.</em></td>
 </tr>
@@ -782,13 +786,35 @@
 <p>,</p>
 <p>,</p>
 <p>where  is the number of B-splines.</p>
-<p>The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points  are equal to the pole ,  where  .</p>
+<p>The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points  are equal to the pole  where .</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>el</code> The number of the control point.</li>
 </ul>
 <p><strong>Returns:</strong></p>
 <p>The el-th control point.</p>
+<p><strong>See also:</strong> GrevilleInterpolationPoints </p>
+<p><strong>See also:</strong> KnotsAsInterpolationPoints </p>
+<hr>
+
+<h3 id="function-control_points">function control_points</h3>
+<p><em>Get a set of control points of the mapping on B-splines.</em> </p>
+<pre><code class="language-C++">template&lt;class ExecSpace&gt;
+inline void DiscreteToCartesian::control_points (
+    ExecSpace exec_space,
+    Field&lt; Coord&lt; X , Y &gt;, IdxRange&lt; BSplineR , BSplineTheta &gt;, MemorySpace &gt; pts
+) const
+</code></pre>
+<p>The mapping  decomposed on B-splines can be identified by its control points  where  and  are the B-splines coefficients:</p>
+<p>,</p>
+<p>,</p>
+<p>where  is the number of B-splines.</p>
+<p>The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points  are equal to the pole  where .</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>exec_space</code> The execution space where the calculations should be carried out. </li>
+<li><code>pts</code> The control points of the mapping.</li>
+</ul>
 <p><strong>See also:</strong> GrevilleInterpolationPoints </p>
 <p><strong>See also:</strong> KnotsAsInterpolationPoints </p>
 <hr>

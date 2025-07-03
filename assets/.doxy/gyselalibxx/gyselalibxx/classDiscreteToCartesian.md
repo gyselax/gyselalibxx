@@ -73,6 +73,7 @@ _A class for describing discrete 2D mappings from the logical domain to the phys
 | ---: | :--- |
 |   | [**DiscreteToCartesian**](#function-discretetocartesian) (SplineType curvilinear\_to\_x, SplineType curvilinear\_to\_y, SplineEvaluator const & evaluator, IdxRangeRTheta idx\_range\_singular\_point) <br>_Instantiate a_ [_**DiscreteToCartesian**_](classDiscreteToCartesian.md) _from the coefficients of 2D splines approximating the mapping._ |
 |  KOKKOS\_INLINE\_FUNCTION const Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**control\_point**](#function-control_point) (Idx&lt; [**BSplineR**](classDiscreteToCartesian.md#typedef-bspliner), [**BSplineTheta**](classDiscreteToCartesian.md#typedef-bsplinetheta) &gt; const & el) const<br>_Get a control point of the mapping on B-splines._  |
+|  void | [**control\_points**](#function-control_points) (ExecSpace exec\_space, Field&lt; Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, IdxRange&lt; [**BSplineR**](classDiscreteToCartesian.md#typedef-bspliner), [**BSplineTheta**](classDiscreteToCartesian.md#typedef-bsplinetheta) &gt;, MemorySpace &gt; pts) const<br>_Get a set of control points of the mapping on B-splines._  |
 |  KOKKOS\_INLINE\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, VectorIndexSet&lt; [**R\_cov**](classDiscreteToCartesian.md#typedef-r_cov), [**Theta\_cov**](classDiscreteToCartesian.md#typedef-theta_cov) &gt; &gt; | [**first\_order\_jacobian\_matrix\_r\_rtheta**](#function-first_order_jacobian_matrix_r_rtheta) (Coord&lt; [**curvilinear\_tag\_r**](classDiscreteToCartesian.md#typedef-curvilinear_tag_r), [**curvilinear\_tag\_theta**](classDiscreteToCartesian.md#typedef-curvilinear_tag_theta) &gt; const & coord) const<br>_Get the first order expansion of the Jacobian matrix with the theta component divided by r. The expansion is carried out around_  _. The returned matrix_ _is defined as:_ __ __ __ _._ |
 |  KOKKOS\_INLINE\_FUNCTION IdxRangeRTheta | [**idx\_range\_singular\_point**](#function-idx_range_singular_point) () const<br>_Get the index range describing the points which should be used to evaluate functions at the central point._  |
 |  KOKKOS\_FUNCTION double | [**jacobian**](#function-jacobian) (Coord&lt; [**curvilinear\_tag\_r**](classDiscreteToCartesian.md#typedef-curvilinear_tag_r), [**curvilinear\_tag\_theta**](classDiscreteToCartesian.md#typedef-curvilinear_tag_theta) &gt; const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping._  |
@@ -385,7 +386,7 @@ The mapping  decomposed on B-splines can be identified by its control points  wh
 where  is the number of B-splines.
 
 
-The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points  are equal to the pole ,  where  .
+The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points  are equal to the pole  where .
 
 
 
@@ -401,6 +402,57 @@ The control points can be obtained by interpolating the mapping on interpolation
 
 The el-th control point.
 
+
+
+
+**See also:** GrevilleInterpolationPoints 
+
+
+**See also:** KnotsAsInterpolationPoints 
+
+
+
+        
+
+<hr>
+
+
+
+### function control\_points 
+
+_Get a set of control points of the mapping on B-splines._ 
+```C++
+template<class ExecSpace>
+inline void DiscreteToCartesian::control_points (
+    ExecSpace exec_space,
+    Field< Coord< X , Y >, IdxRange< BSplineR , BSplineTheta >, MemorySpace > pts
+) const
+```
+
+
+
+The mapping  decomposed on B-splines can be identified by its control points  where  and  are the B-splines coefficients:
+
+
+,
+
+
+,
+
+
+where  is the number of B-splines.
+
+
+The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points  are equal to the pole  where .
+
+
+
+
+**Parameters:**
+
+
+* `exec_space` The execution space where the calculations should be carried out. 
+* `pts` The control points of the mapping.
 
 
 

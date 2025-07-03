@@ -61,16 +61,16 @@
         </briefdescription>
         <detaileddescription>
 <para>To integrate a function with a spline quadrature, we use:</para>
-<para><formula id="357">$ \int_a^b f(x)dx
+<para><formula id="356">$ \int_a^b f(x)dx
 \simeq \sum_{i = 0}^{N_{\text{basis}} -1 } c_i  \int_a^b b_{i,d}()x dx $</formula>,</para>
 <para>which rewritten gives</para>
-<para><formula id="358">$ \int_a^b f(x)dx
+<para><formula id="357">$ \int_a^b f(x)dx
 \simeq \sum_{i = 0}^{N_{\text{basis}} - 1} q_i f_i $</formula>,</para>
 <para>with<itemizedlist>
-<listitem><para><formula id="359">$\{ f_i\}_i $</formula> the values of the function at the interpolation points;</para>
-</listitem><listitem><para><formula id="360">$ q = \{ q_i\}_i $</formula> the quadrature coefficients we compute thanks to <formula id="361">$ q B^T = I_b $</formula>,<itemizedlist>
-<listitem><para>with <formula id="324">$ B $</formula> the matrix of B-splines <formula id="362">$ B_{ij} = b_{j,d}(x_i)$</formula>,</para>
-</listitem><listitem><para>and <formula id="363">$ I_b = \int_a^b b_{i,d}(x)dx $</formula> the integrated B-splines.</para>
+<listitem><para><formula id="358">$\{ f_i\}_i $</formula> the values of the function at the interpolation points;</para>
+</listitem><listitem><para><formula id="359">$ q = \{ q_i\}_i $</formula> the quadrature coefficients we compute thanks to <formula id="360">$ q B^T = I_b $</formula>,<itemizedlist>
+<listitem><para>with <formula id="323">$ B $</formula> the matrix of B-splines <formula id="361">$ B_{ij} = b_{j,d}(x_i)$</formula>,</para>
+</listitem><listitem><para>and <formula id="362">$ I_b = \int_a^b b_{i,d}(x)dx $</formula> the integrated B-splines.</para>
 </listitem></itemizedlist>
 </para>
 </listitem></itemizedlist>
@@ -94,7 +94,7 @@ in the 5D GYSELA Code&quot;. December 2022.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>A chunk with the quadrature coefficients <formula id="364">$ q $</formula>. </para>
+<simplesect kind="return"><para>A chunk with the quadrature coefficients <formula id="363">$ q $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>

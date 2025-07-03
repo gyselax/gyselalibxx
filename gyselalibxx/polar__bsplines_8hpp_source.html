@@ -589,9 +589,9 @@ public:
     using BSplinesTheta_tag = BSplinesTheta;
 
 
-    using DimR = typename BSplinesR::continuous_dimension_type;
+    using R = typename BSplinesR::continuous_dimension_type;
 
-    using DimTheta = typename BSplinesTheta::continuous_dimension_type;
+    using Theta = typename BSplinesTheta::continuous_dimension_type;
 
 public:
     static int constexpr continuity = C;
@@ -701,28 +701,43 @@ public:
 
         using discrete_vector_type = IdxStep&lt;DDim&gt;;
 
-        template &lt;class DiscreteMapping&gt;
-        explicit Impl(const DiscreteMapping&amp; curvilinear_to_cartesian)
+        template &lt;class X, class Y, class SplineEvaluator, class EvalMemorySpace&gt;
+        explicit Impl(const DiscreteToCartesian&lt;X, Y, SplineEvaluator, R, Theta, EvalMemorySpace&gt;&amp;
+                              curvilinear_to_cartesian)
         {
-            static_assert(is_accessible_v&lt;Kokkos::DefaultHostExecutionSpace, DiscreteMapping&gt;);
             static_assert(std::is_same_v&lt;MemorySpace, Kokkos::HostSpace&gt;);
-            using DimX = typename DiscreteMapping::cartesian_tag_x;
-            using DimY = typename DiscreteMapping::cartesian_tag_y;
-            using mapping_tensor_product_index_type
-                    = Idx&lt;typename DiscreteMapping::BSplineR,
-                          typename DiscreteMapping::BSplineTheta&gt;;
+            using DiscreteMapping
+                    = DiscreteToCartesian&lt;X, Y, SplineEvaluator, R, Theta, EvalMemorySpace&gt;;
+            static_assert(std::is_same_v&lt;typename DiscreteMapping::BSplineR, BSplinesR&gt;);
+            static_assert(std::is_same_v&lt;typename DiscreteMapping::BSplineTheta, BSplinesTheta&gt;);
+            using EvalExecSpace = std::conditional_t&lt;
+                    std::is_same_v&lt;EvalMemorySpace, Kokkos::HostSpace&gt;,
+                    Kokkos::DefaultHostExecutionSpace,
+                    Kokkos::DefaultExecutionSpace&gt;;
             if constexpr (C &gt; -1) {
-                const Coord&lt;DimX, DimY&gt; pole
-                        = curvilinear_to_cartesian(Coord&lt;DimR, DimTheta&gt;(0.0, 0.0));
-                const double x0 = ddc::get&lt;DimX&gt;(pole);
-                const double y0 = ddc::get&lt;DimY&gt;(pole);
-                double tau = 0.0;
-                for (std::size_t i(0); i &lt; ddc::discrete_space&lt;BSplinesTheta&gt;().size(); ++i) {
-                    const Coord&lt;DimX, DimY&gt; point = curvilinear_to_cartesian.control_point(
-                            mapping_tensor_product_index_type(1, i));
+                IdxRange&lt;BSplinesR&gt; idx_range_r_ctrl_pts(IdxR(0), IdxStepR(std::max(2, C + 1)));
+                IdxRange&lt;BSplinesR, BSplinesTheta&gt; idx_range_ctrl_pts(
+                        idx_range_r_ctrl_pts,
+                        ddc::discrete_space&lt;BSplinesTheta&gt;().full_domain());
+                FieldMem&lt;Coord&lt;X, Y&gt;, IdxRange&lt;BSplinesR, BSplinesTheta&gt;, EvalMemorySpace&gt;
+                        control_pts_eval_space_mem(idx_range_ctrl_pts);
+                curvilinear_to_cartesian
+                        .control_points(EvalExecSpace(), get_field(control_pts_eval_space_mem));
+                auto control_pts_mem_host
+                        = ddc::create_mirror_and_copy(get_const_field(control_pts_eval_space_mem));
+                host_t&lt;Field&lt;Coord&lt;X, Y&gt;, IdxRange&lt;BSplinesR, BSplinesTheta&gt;&gt;&gt; control_pts_host
+                        = get_field(control_pts_mem_host);
 
-                    const double c_x = ddc::get&lt;DimX&gt;(point);
-                    const double c_y = ddc::get&lt;DimY&gt;(point);
+                const Coord&lt;X, Y&gt; pole = curvilinear_to_cartesian.o_point();
+                const double x0 = ddc::get&lt;X&gt;(pole);
+                const double y0 = ddc::get&lt;Y&gt;(pole);
+                double tau = 0.0;
+                Idx&lt;BSplinesR&gt; ctrl_pt_row_1(1);
+                for (Idx&lt;BSplinesTheta&gt; i : get_idx_range&lt;BSplinesTheta&gt;(control_pts_host)) {
+                    const Coord&lt;X, Y&gt; point = control_pts_host(ctrl_pt_row_1, i);
+
+                    const double c_x = ddc::get&lt;X&gt;(point);
+                    const double c_y = ddc::get&lt;Y&gt;(point);
 
                     double tau1 = -2.0 * (c_x - x0);
                     double tau2 = c_x - x0 - sqrt(3.0) * (c_y - y0);
@@ -732,11 +747,11 @@ public:
                     tau = tau &gt; tau3 ? tau : tau3;
                 }
                 // Determine the corners for the barycentric coordinates
-                const Coord&lt;DimX, DimY&gt; corner1(x0 + tau, y0);
-                const Coord&lt;DimX, DimY&gt; corner2(x0 - 0.5 * tau, y0 + 0.5 * tau * sqrt(3.0));
-                const Coord&lt;DimX, DimY&gt; corner3(x0 - 0.5 * tau, y0 - 0.5 * tau * sqrt(3.0));
+                const Coord&lt;X, Y&gt; corner1(x0 + tau, y0);
+                const Coord&lt;X, Y&gt; corner2(x0 - 0.5 * tau, y0 + 0.5 * tau * sqrt(3.0));
+                const Coord&lt;X, Y&gt; corner3(x0 - 0.5 * tau, y0 - 0.5 * tau * sqrt(3.0));
 
-                const CartesianToBarycentric&lt;DimX, DimY, Corner1Tag, Corner2Tag, Corner3Tag&gt;
+                const CartesianToBarycentric&lt;X, Y, Corner1Tag, Corner2Tag, Corner3Tag&gt;
                         barycentric_coordinate_converter(corner1, corner2, corner3);
 
                 using BernsteinBasis = IntermediateBernsteinBasis&lt;DiscreteMapping&gt;;
@@ -772,17 +787,15 @@ public:
                 IdxRange&lt;BernsteinBasis&gt; bernstein_idx_range(
                         Idx&lt;BernsteinBasis&gt; {0},
                         IdxStep&lt;BernsteinBasis&gt; {n_singular_basis()});
+                host_t&lt;DFieldMem&lt;IdxRange&lt;BernsteinBasis&gt;&gt;&gt; bernstein_vals(bernstein_idx_range);
 
                 IdxRange&lt;BSplinesTheta&gt; poloidal_spline_idx_range
                         = ddc::discrete_space&lt;BSplinesTheta&gt;().full_domain();
 
-                for (IdxR const ir : IdxRange&lt;BSplinesR&gt;(IdxR(0), IdxStepR(C + 1))) {
+                for (IdxR const ir : idx_range_r_ctrl_pts.take_first(IdxStepR(C + 1))) {
                     for (IdxTheta const itheta :
                          poloidal_spline_idx_range.take_first(n_theta_in_singular)) {
-                        const Coord&lt;DimX, DimY&gt; point = curvilinear_to_cartesian.control_point(
-                                mapping_tensor_product_index_type(ir, itheta));
-                        host_t&lt;DFieldMem&lt;IdxRange&lt;BernsteinBasis&gt;&gt;&gt; bernstein_vals(
-                                bernstein_idx_range);
+                        const Coord&lt;X, Y&gt; point = control_pts_host(ir, itheta);
                         ddc::discrete_space&lt;BernsteinBasis&gt;()
                                 .eval_basis(get_field(bernstein_vals), point);
                         // Fill spline coefficients
@@ -836,18 +849,16 @@ public:
         Impl&amp; operator=(Impl&amp;&amp; x) = default;
 
         KOKKOS_FUNCTION tensor_product_index_type
-        eval_basis(DSpan1D singular_values, DSpan2D values, Coord&lt;DimR, DimTheta&gt; p) const;
+        eval_basis(DSpan1D singular_values, DSpan2D values, Coord&lt;R, Theta&gt; p) const;
 
         KOKKOS_FUNCTION tensor_product_index_type
-        eval_deriv_r(DSpan1D singular_derivs, DSpan2D derivs, Coord&lt;DimR, DimTheta&gt; p) const;
+        eval_deriv_r(DSpan1D singular_derivs, DSpan2D derivs, Coord&lt;R, Theta&gt; p) const;
 
         KOKKOS_FUNCTION tensor_product_index_type
-        eval_deriv_theta(DSpan1D singular_derivs, DSpan2D derivs, Coord&lt;DimR, DimTheta&gt; p) const;
+        eval_deriv_theta(DSpan1D singular_derivs, DSpan2D derivs, Coord&lt;R, Theta&gt; p) const;
 
-        KOKKOS_FUNCTION tensor_product_index_type eval_deriv_r_and_theta(
-                DSpan1D singular_derivs,
-                DSpan2D derivs,
-                Coord&lt;DimR, DimTheta&gt; p) const;
+        KOKKOS_FUNCTION tensor_product_index_type
+        eval_deriv_r_and_theta(DSpan1D singular_derivs, DSpan2D derivs, Coord&lt;R, Theta&gt; p) const;
 
         template &lt;class MemorySpace2&gt;
         [[deprecated("Use `integrals` instead")]] void integrals(
@@ -875,7 +886,7 @@ public:
         KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; eval(
                 DSpan1D singular_values,
                 DSpan2D values,
-                Coord&lt;DimR, DimTheta&gt; coord_eval,
+                Coord&lt;R, Theta&gt; coord_eval,
                 EvalTypeR const,
                 EvalTypeTheta const) const;
     };
@@ -883,22 +894,18 @@ public:
 
 template &lt;class BSplinesR, class BSplinesTheta, int C&gt;
 template &lt;class DDim, class MemorySpace&gt;
-KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::
-        Impl&lt;DDim, MemorySpace&gt;::eval_basis(
-                DSpan1D singular_values,
-                DSpan2D values,
-                Coord&lt;DimR, DimTheta&gt; p) const
+KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::Impl&lt;
+        DDim,
+        MemorySpace&gt;::eval_basis(DSpan1D singular_values, DSpan2D values, Coord&lt;R, Theta&gt; p) const
 {
     return eval(singular_values, values, p, eval_type(), eval_type());
 }
 
 template &lt;class BSplinesR, class BSplinesTheta, int C&gt;
 template &lt;class DDim, class MemorySpace&gt;
-KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::
-        Impl&lt;DDim, MemorySpace&gt;::eval_deriv_r(
-                DSpan1D singular_derivs,
-                DSpan2D derivs,
-                Coord&lt;DimR, DimTheta&gt; p) const
+KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::Impl&lt;
+        DDim,
+        MemorySpace&gt;::eval_deriv_r(DSpan1D singular_derivs, DSpan2D derivs, Coord&lt;R, Theta&gt; p) const
 {
     return eval(singular_derivs, derivs, p, eval_deriv_type(), eval_type());
 }
@@ -909,7 +916,7 @@ KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; PolarBSplines&lt;BSplinesR, 
         Impl&lt;DDim, MemorySpace&gt;::eval_deriv_theta(
                 DSpan1D singular_derivs,
                 DSpan2D derivs,
-                Coord&lt;DimR, DimTheta&gt; p) const
+                Coord&lt;R, Theta&gt; p) const
 {
     return eval(singular_derivs, derivs, p, eval_type(), eval_deriv_type());
 }
@@ -920,7 +927,7 @@ KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; PolarBSplines&lt;BSplinesR, 
         Impl&lt;DDim, MemorySpace&gt;::eval_deriv_r_and_theta(
                 DSpan1D singular_derivs,
                 DSpan2D derivs,
-                Coord&lt;DimR, DimTheta&gt; p) const
+                Coord&lt;R, Theta&gt; p) const
 {
     return eval(singular_derivs, derivs, p, eval_deriv_type(), eval_deriv_type());
 }
@@ -932,7 +939,7 @@ KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; PolarBSplines&lt;BSplinesR, 
         Impl&lt;DDim, MemorySpace&gt;::eval(
                 DSpan1D singular_values,
                 DSpan2D values,
-                Coord&lt;DimR, DimTheta&gt; coord_eval,
+                Coord&lt;R, Theta&gt; coord_eval,
                 EvalTypeR const,
                 EvalTypeTheta const) const
 {
@@ -957,16 +964,16 @@ KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; PolarBSplines&lt;BSplinesR, 
     DSpan1D const vals_theta(vals_theta_ptr.data(), ntheta);
 
     if constexpr (std::is_same_v&lt;EvalTypeR, eval_type&gt;) {
-        jmin_r = ddc::discrete_space&lt;BSplinesR&gt;().eval_basis(vals_r, ddc::select&lt;DimR&gt;(coord_eval));
+        jmin_r = ddc::discrete_space&lt;BSplinesR&gt;().eval_basis(vals_r, ddc::select&lt;R&gt;(coord_eval));
     } else if constexpr (std::is_same_v&lt;EvalTypeR, eval_deriv_type&gt;) {
-        jmin_r = ddc::discrete_space&lt;BSplinesR&gt;().eval_deriv(vals_r, ddc::select&lt;DimR&gt;(coord_eval));
+        jmin_r = ddc::discrete_space&lt;BSplinesR&gt;().eval_deriv(vals_r, ddc::select&lt;R&gt;(coord_eval));
     }
     if constexpr (std::is_same_v&lt;EvalTypeTheta, eval_type&gt;) {
         jmin_theta = ddc::discrete_space&lt;BSplinesTheta&gt;()
-                             .eval_basis(vals_theta, ddc::select&lt;DimTheta&gt;(coord_eval));
+                             .eval_basis(vals_theta, ddc::select&lt;Theta&gt;(coord_eval));
     } else if constexpr (std::is_same_v&lt;EvalTypeTheta, eval_deriv_type&gt;) {
         jmin_theta = ddc::discrete_space&lt;BSplinesTheta&gt;()
-                             .eval_deriv(vals_theta, ddc::select&lt;DimTheta&gt;(coord_eval));
+                             .eval_deriv(vals_theta, ddc::select&lt;Theta&gt;(coord_eval));
     }
 
     std::size_t nr_done = 0;

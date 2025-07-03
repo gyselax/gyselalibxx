@@ -345,7 +345,7 @@
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is: <formula id="314">$ \{F, G\} = b\dot(\nabla F \cross \nabla G) $</formula> with <formula id="315">$ b= \mathbf{B} / B $</formula> the unitary magnetic field, i.e: <formula id="316">$ \{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k $</formula> with <formula id="317">$ {\cal J}_{\rm x} $</formula> the jacobian of the system, <formula id="318">$ b_k $</formula> the covariant components of b and <formula id="319">$\epsilon^{ijk} $</formula> the Levi-Civita symbol. </para>
+<para>A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is: <formula id="313">$ \{F, G\} = b\dot(\nabla F \cross \nabla G) $</formula> with <formula id="314">$ b= \mathbf{B} / B $</formula> the unitary magnetic field, i.e: <formula id="315">$ \{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k $</formula> with <formula id="316">$ {\cal J}_{\rm x} $</formula> the jacobian of the system, <formula id="317">$ b_k $</formula> the covariant components of b and <formula id="318">$\epsilon^{ijk} $</formula> the Levi-Civita symbol. </para>
     </briefdescription>
     <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>

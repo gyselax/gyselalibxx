@@ -824,6 +824,7 @@
     <member refid="classDiscreteToCartesian_1afea2c72f045e6d7a609b76d1fb2b494e" kind="function"><name>first_order_jacobian_matrix_r_rtheta</name></member>
     <member refid="classDiscreteToCartesian_1aeade6cd026d0d03df92d00b0f2651195" kind="function"><name>idx_range_singular_point</name></member>
     <member refid="classDiscreteToCartesian_1a6c57fdeacc0c42720881993b7905ef38" kind="function"><name>control_point</name></member>
+    <member refid="classDiscreteToCartesian_1ab09fd0542b042ed470da778b6268e229" kind="function"><name>control_points</name></member>
   </compound>
   <compound refid="classDiscreteToCartesianBuilder" kind="class"><name>DiscreteToCartesianBuilder</name>
     <member refid="classDiscreteToCartesianBuilder_1a502be02cf17241c3bf0c5cc45c5c6c0e" kind="typedef"><name>MappingType</name></member>
@@ -1311,22 +1312,22 @@
     <member refid="classPolarBSplines_1_1Impl_1a05ab4a05dd54b0ab4f45459eb9e54690" kind="friend"><name>integrals</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a8ef3dd86e684d3496e02867489f0238e" kind="variable"><name>m_singular_basis_elements_alloc</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a11b300625f730f47b6db45626e121d88" kind="variable"><name>m_singular_basis_elements</name></member>
-    <member refid="classPolarBSplines_1_1Impl_1a76ae9aee443a828ec5f62ddabbda37fb" kind="function"><name>Impl</name></member>
+    <member refid="classPolarBSplines_1_1Impl_1a57eec0bfb81f5e6f493b18ceeba92fe9" kind="function"><name>Impl</name></member>
     <member refid="classPolarBSplines_1_1Impl_1aad7f0ed019b40ca8bea9259f53d94a83" kind="function"><name>Impl</name></member>
     <member refid="classPolarBSplines_1_1Impl_1af79c5cc9a060916b31c8a41e5f7cd7da" kind="function"><name>Impl</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a386e9fe73ec0a24b3773353aa4ad1af2" kind="function"><name>Impl</name></member>
     <member refid="classPolarBSplines_1_1Impl_1aa4c6ff5c6a2e63283fc779ef1a6befd2" kind="function"><name>~Impl</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a954186a181dc16f537322080f4484a1f" kind="function"><name>operator=</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a44b135ad2f6adec16d22471819ed98c1" kind="function"><name>operator=</name></member>
-    <member refid="classPolarBSplines_1_1Impl_1ae2e211339e4f422185855aae61cdfe21" kind="function"><name>eval_basis</name></member>
-    <member refid="classPolarBSplines_1_1Impl_1a317d92a0b68d1e3f140e3a3e7dd9c935" kind="function"><name>eval_deriv_r</name></member>
-    <member refid="classPolarBSplines_1_1Impl_1acf922f8d53f4283419d5c0b35417f298" kind="function"><name>eval_deriv_theta</name></member>
-    <member refid="classPolarBSplines_1_1Impl_1ad028692e16475906b674664272f43862" kind="function"><name>eval_deriv_r_and_theta</name></member>
+    <member refid="classPolarBSplines_1_1Impl_1a8ffd1d65dc3554b9ee46c1b76310b5e2" kind="function"><name>eval_basis</name></member>
+    <member refid="classPolarBSplines_1_1Impl_1aa1ad8d647af3d39e2e2fc7ff01c1a04f" kind="function"><name>eval_deriv_r</name></member>
+    <member refid="classPolarBSplines_1_1Impl_1acff0e231afa39962837191f9f094bd92" kind="function"><name>eval_deriv_theta</name></member>
+    <member refid="classPolarBSplines_1_1Impl_1ae731ae28ad158d8a5876ae85fb138850" kind="function"><name>eval_deriv_r_and_theta</name></member>
     <member refid="classPolarBSplines_1_1Impl_1af11b5fa49f044552020019eb1b8f4457" kind="function"><name>integrals</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a1ca0df2d7f5defe89ecf42ef6bcfb9fa" kind="function"><name>nbasis</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a244d6ebb4a31d96e25c1844614979cc7" kind="function"><name>full_domain</name></member>
     <member refid="classPolarBSplines_1_1Impl_1af3133a4ea7b7cc4796da428de9bba352" kind="function"><name>tensor_bspline_idx_range</name></member>
-    <member refid="classPolarBSplines_1_1Impl_1a8c685688dc3d1dcce7f57a40a0dd519c" kind="function"><name>eval</name></member>
+    <member refid="classPolarBSplines_1_1Impl_1ac7ac34ce7bc3edae10a984329adcd4f9" kind="function"><name>eval</name></member>
   </compound>
   <compound refid="classSpeciesInformation_1_1Impl" kind="class"><name>SpeciesInformation::Impl</name>
     <member refid="classSpeciesInformation_1_1Impl_1aa6c24a482e96e93bc60948619fe4a8da" kind="typedef"><name>discrete_element_type</name></member>
@@ -2214,8 +2215,8 @@
   <compound refid="classPolarBSplines" kind="class"><name>PolarBSplines</name>
     <member refid="classPolarBSplines_1af53c68e9827efcffeee27e353ac3ef7e" kind="typedef"><name>BSplinesR_tag</name></member>
     <member refid="classPolarBSplines_1a7c93c1bedcf655bff666950a59eff9ea" kind="typedef"><name>BSplinesTheta_tag</name></member>
-    <member refid="classPolarBSplines_1acdb7056a76b2985ddced01f3ca5610f2" kind="typedef"><name>DimR</name></member>
-    <member refid="classPolarBSplines_1a963f3ab10c79d029e0908ee597bc41dd" kind="typedef"><name>DimTheta</name></member>
+    <member refid="classPolarBSplines_1a648dc9ce69b7875ee05df11ca91ca831" kind="typedef"><name>R</name></member>
+    <member refid="classPolarBSplines_1ac4cbfc152e798720dd2615390e96d894" kind="typedef"><name>Theta</name></member>
     <member refid="classPolarBSplines_1a3781a1ef42e396315cd2912e0f128c8b" kind="typedef"><name>discrete_dimension_type</name></member>
     <member refid="classPolarBSplines_1a9d78494d89fbe4d9abea58a61619fae8" kind="typedef"><name>tensor_product_index_type</name></member>
     <member refid="classPolarBSplines_1a84ea418aed020ad1396d3283aba7904e" kind="typedef"><name>tensor_product_idx_range_type</name></member>

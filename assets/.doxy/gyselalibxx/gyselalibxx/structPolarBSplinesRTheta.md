@@ -38,8 +38,8 @@ See [PolarBSplines](classPolarBSplines.md)
 | ---: | :--- |
 | typedef [**BSplinesR**](structBSplinesR.md) | [**BSplinesR\_tag**](classPolarBSplines.md#typedef-bsplinesr_tag)  <br>_The radial bspline from which the polar B-splines are constructed._  |
 | typedef [**BSplinesTheta**](structBSplinesTheta.md) | [**BSplinesTheta\_tag**](classPolarBSplines.md#typedef-bsplinestheta_tag)  <br>_The poloidal bspline from which the polar B-splines are constructed._  |
-| typedef typename BSplinesR::continuous\_dimension\_type | [**DimR**](classPolarBSplines.md#typedef-dimr)  <br>_The tag for the radial direction of the B-splines._  |
-| typedef typename BSplinesTheta::continuous\_dimension\_type | [**DimTheta**](classPolarBSplines.md#typedef-dimtheta)  <br>_The tag for the poloidal direction of the B-splines._  |
+| typedef typename BSplinesR::continuous\_dimension\_type | [**R**](classPolarBSplines.md#typedef-r)  <br>_The tag for the radial direction of the B-splines._  |
+| typedef typename BSplinesTheta::continuous\_dimension\_type | [**Theta**](classPolarBSplines.md#typedef-theta)  <br>_The tag for the poloidal direction of the B-splines._  |
 | typedef [**PolarBSplines**](classPolarBSplines.md) | [**discrete\_dimension\_type**](classPolarBSplines.md#typedef-discrete_dimension_type)  <br> |
 | typedef IdxRange&lt; [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md) &gt; | [**tensor\_product\_idx\_range\_type**](classPolarBSplines.md#typedef-tensor_product_idx_range_type)  <br> |
 | typedef IdxStep&lt; [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md) &gt; | [**tensor\_product\_idx\_step\_type**](classPolarBSplines.md#typedef-tensor_product_idx_step_type)  <br> |

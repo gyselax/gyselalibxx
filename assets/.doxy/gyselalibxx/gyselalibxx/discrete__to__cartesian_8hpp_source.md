@@ -200,6 +200,20 @@ public:
     {
         return Coord<X, Y>(m_x_spline_representation(el), m_y_spline_representation(el));
     }
+
+    template <class ExecSpace>
+    void control_points(
+            ExecSpace exec_space,
+            Field<Coord<X, Y>, IdxRange<BSplineR, BSplineTheta>, MemorySpace> pts) const
+    {
+        static_assert(Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible);
+        ddc::parallel_for_each(
+                exec_space,
+                get_idx_range(pts),
+                KOKKOS_CLASS_LAMBDA(Idx<BSplineR, BSplineTheta> idx) {
+                    pts(idx) = control_point(idx);
+                });
+    }
 };
 
 

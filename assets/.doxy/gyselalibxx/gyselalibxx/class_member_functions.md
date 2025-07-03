@@ -71,6 +71,7 @@
 * **CylindricalToCartesian** ([**CylindricalToCartesian**](classCylindricalToCartesian.md))
 * **CzarnyToCartesian** ([**CzarnyToCartesian**](classCzarnyToCartesian.md))
 * **control\_point** ([**DiscreteToCartesian**](classDiscreteToCartesian.md))
+* **control\_points** ([**DiscreteToCartesian**](classDiscreteToCartesian.md))
 * **check\_distributed\_idx\_ranges\_are\_first** ([**IMPILayout**](classIMPILayout.md))
 * **copy** ([**ITimeStepper**](classITimeStepper.md))
 * **connected\_to\_patch** ([**Interface**](structInterface.md))

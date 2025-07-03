@@ -747,10 +747,10 @@
         </briefdescription>
         <detaileddescription>
 <para>The mapping <formula id="123">$ (r,\theta) \mapsto (x,y) $</formula> decomposed on B-splines can be identified by its control points <formula id="124">$ \{(c_{x,k}, c_{y,k})\}_{k}  $</formula> where <formula id="125">$ c_{x,k} $</formula> and <formula id="126">$ c_{y,k} $</formula> are the B-splines coefficients:</para>
-<para><formula id="127">$ x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k{r,\theta} $</formula>,</para>
-<para><formula id="128">$ y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k{r,\theta} $</formula>,</para>
+<para><formula id="127">$ x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k(r,\theta) $</formula>,</para>
+<para><formula id="128">$ y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k(r,\theta) $</formula>,</para>
 <para>where <formula id="129">$ N_r\times N_{\theta} $</formula> is the number of B-splines.</para>
-<para>The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points <formula id="130">$ \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}} $</formula> are equal to the pole <formula id="131">$ (c_{x,k}, c_{y,k}) = (x_0,y_0) $</formula>, <formula id="132">$ \forall k = 0, ..., N_{\theta}-1 $</formula> where <formula id="133">$ x(0,\theta), y(0,\theta) = (x_0,y_0) $</formula> <formula id="20">$ \forall \theta $</formula>.</para>
+<para>The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points <formula id="130">$ \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}} $</formula> are equal to the pole <formula id="131">$ (c_{x,k}, c_{y,k}) = (x_0,y_0) , \ \forall k = 0, ..., N_{\theta}-1 $</formula> where <formula id="132">$ x(0,\theta), y(0,\theta) = (x_0,y_0) \ \forall \theta $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">el</parametername>
@@ -772,6 +772,61 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="366" column="40" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="366" bodyend="370"/>
       </memberdef>
+      <memberdef kind="function" id="classDiscreteToCartesian_1ab09fd0542b042ed470da778b6268e229" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ExecSpace</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;::control_points</definition>
+        <argsstring>(ExecSpace exec_space, Field&lt; Coord&lt; X, Y &gt;, IdxRange&lt; BSplineR, BSplineTheta &gt;, MemorySpace &gt; pts) const</argsstring>
+        <name>control_points</name>
+        <qualifiedname>DiscreteToCartesian::control_points</qualifiedname>
+        <param>
+          <type>ExecSpace</type>
+          <declname>exec_space</declname>
+        </param>
+        <param>
+          <type>Field&lt; Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, IdxRange&lt; <ref refid="classDiscreteToCartesian_1a77815368f1e5e77222cf4a66b3589c2e" kindref="member">BSplineR</ref>, <ref refid="classDiscreteToCartesian_1aee74ab0f1f920e05ef94fbb15b36f6fc" kindref="member">BSplineTheta</ref> &gt;, MemorySpace &gt;</type>
+          <declname>pts</declname>
+        </param>
+        <briefdescription>
+<para>Get a set of control points of the mapping on B-splines. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The mapping <formula id="123">$ (r,\theta) \mapsto (x,y) $</formula> decomposed on B-splines can be identified by its control points <formula id="124">$ \{(c_{x,k}, c_{y,k})\}_{k}  $</formula> where <formula id="125">$ c_{x,k} $</formula> and <formula id="126">$ c_{y,k} $</formula> are the B-splines coefficients:</para>
+<para><formula id="127">$ x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k(r,\theta) $</formula>,</para>
+<para><formula id="128">$ y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k(r,\theta) $</formula>,</para>
+<para>where <formula id="129">$ N_r\times N_{\theta} $</formula> is the number of B-splines.</para>
+<para>The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points <formula id="130">$ \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}} $</formula> are equal to the pole <formula id="131">$ (c_{x,k}, c_{y,k}) = (x_0,y_0) , \ \forall k = 0, ..., N_{\theta}-1 $</formula> where <formula id="132">$ x(0,\theta), y(0,\theta) = (x_0,y_0) \ \forall \theta $</formula>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">exec_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The execution space where the calculations should be carried out. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pts</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control points of the mapping.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para>GrevilleInterpolationPoints </para>
+</simplesect>
+<simplesect kind="see"><para>KnotsAsInterpolationPoints </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="401" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="401" bodyend="412"/>
+      </memberdef>
     </sectiondef>
     <briefdescription>
 <para>A class for describing discrete 2D mappings from the logical domain to the physical domain. </para>
@@ -782,13 +837,14 @@
 <para><formula id="107">$ y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta).$</formula></para>
 <para>This mapping could be costly to inverse. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="34" bodyend="371"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="34" bodyend="413"/>
     <listofallmembers>
       <member refid="classDiscreteToCartesian_1a77815368f1e5e77222cf4a66b3589c2e" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>BSplineR</name></member>
       <member refid="classDiscreteToCartesian_1aee74ab0f1f920e05ef94fbb15b36f6fc" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>BSplineTheta</name></member>
       <member refid="classDiscreteToCartesian_1a7e46471be9fce4ff796a971c9a660c97" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>cartesian_tag_x</name></member>
       <member refid="classDiscreteToCartesian_1a6c115a3ce558a2d1d1256a09f8e7408a" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>cartesian_tag_y</name></member>
       <member refid="classDiscreteToCartesian_1a6c57fdeacc0c42720881993b7905ef38" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>control_point</name></member>
+      <member refid="classDiscreteToCartesian_1ab09fd0542b042ed470da778b6268e229" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>control_points</name></member>
       <member refid="classDiscreteToCartesian_1a2b2e0b6ec7ee087fdb814f9fa22aec01" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>CoordArg</name></member>
       <member refid="classDiscreteToCartesian_1abeb60464a16b00d2718751bf092cff7b" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>CoordJacobian</name></member>
       <member refid="classDiscreteToCartesian_1ad3524c5f93fade40f00a204901975a33" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>CoordResult</name></member>

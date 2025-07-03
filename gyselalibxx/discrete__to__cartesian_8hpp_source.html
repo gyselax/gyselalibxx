@@ -741,6 +741,20 @@ public:
     {
         return Coord&lt;X, Y&gt;(m_x_spline_representation(el), m_y_spline_representation(el));
     }
+
+    template &lt;class ExecSpace&gt;
+    void control_points(
+            ExecSpace exec_space,
+            Field&lt;Coord&lt;X, Y&gt;, IdxRange&lt;BSplineR, BSplineTheta&gt;, MemorySpace&gt; pts) const
+    {
+        static_assert(Kokkos::SpaceAccessibility&lt;ExecSpace, MemorySpace&gt;::accessible);
+        ddc::parallel_for_each(
+                exec_space,
+                get_idx_range(pts),
+                KOKKOS_CLASS_LAMBDA(Idx&lt;BSplineR, BSplineTheta&gt; idx) {
+                    pts(idx) = control_point(idx);
+                });
+    }
 };
 
 

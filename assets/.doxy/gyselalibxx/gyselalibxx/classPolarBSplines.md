@@ -41,8 +41,8 @@
 | ---: | :--- |
 | typedef [**BSplinesR**](structBSplinesR.md) | [**BSplinesR\_tag**](#typedef-bsplinesr_tag)  <br>_The radial bspline from which the polar B-splines are constructed._  |
 | typedef [**BSplinesTheta**](structBSplinesTheta.md) | [**BSplinesTheta\_tag**](#typedef-bsplinestheta_tag)  <br>_The poloidal bspline from which the polar B-splines are constructed._  |
-| typedef typename BSplinesR::continuous\_dimension\_type | [**DimR**](#typedef-dimr)  <br>_The tag for the radial direction of the B-splines._  |
-| typedef typename BSplinesTheta::continuous\_dimension\_type | [**DimTheta**](#typedef-dimtheta)  <br>_The tag for the poloidal direction of the B-splines._  |
+| typedef typename BSplinesR::continuous\_dimension\_type | [**R**](#typedef-r)  <br>_The tag for the radial direction of the B-splines._  |
+| typedef typename BSplinesTheta::continuous\_dimension\_type | [**Theta**](#typedef-theta)  <br>_The tag for the poloidal direction of the B-splines._  |
 | typedef [**PolarBSplines**](classPolarBSplines.md) | [**discrete\_dimension\_type**](#typedef-discrete_dimension_type)  <br> |
 | typedef IdxRange&lt; [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md) &gt; | [**tensor\_product\_idx\_range\_type**](#typedef-tensor_product_idx_range_type)  <br> |
 | typedef IdxStep&lt; [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md) &gt; | [**tensor\_product\_idx\_step\_type**](#typedef-tensor_product_idx_step_type)  <br> |
@@ -163,11 +163,11 @@ using PolarBSplines< BSplinesR, BSplinesTheta, C >::BSplinesTheta_tag =  BSpline
 
 
 
-### typedef DimR 
+### typedef R 
 
 _The tag for the radial direction of the B-splines._ 
 ```C++
-using PolarBSplines< BSplinesR, BSplinesTheta, C >::DimR =  typename BSplinesR::continuous_dimension_type;
+using PolarBSplines< BSplinesR, BSplinesTheta, C >::R =  typename BSplinesR::continuous_dimension_type;
 ```
 
 
@@ -177,11 +177,11 @@ using PolarBSplines< BSplinesR, BSplinesTheta, C >::DimR =  typename BSplinesR::
 
 
 
-### typedef DimTheta 
+### typedef Theta 
 
 _The tag for the poloidal direction of the B-splines._ 
 ```C++
-using PolarBSplines< BSplinesR, BSplinesTheta, C >::DimTheta =  typename BSplinesTheta::continuous_dimension_type;
+using PolarBSplines< BSplinesR, BSplinesTheta, C >::Theta =  typename BSplinesTheta::continuous_dimension_type;
 ```
 
 

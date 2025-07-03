@@ -70,14 +70,14 @@
 
 | Type | Name |
 | ---: | :--- |
-|   | [**Impl**](#function-impl-25) (const DiscreteMapping & curvilinear\_to\_cartesian) <br> |
+|   | [**Impl**](#function-impl-25) (const [**DiscreteToCartesian**](classDiscreteToCartesian.md)&lt; [**X**](structX.md), [**Y**](structY.md), SplineEvaluator, [**R**](classPolarBSplines.md#typedef-r), [**Theta**](classPolarBSplines.md#typedef-theta), EvalMemorySpace &gt; & curvilinear\_to\_cartesian) <br> |
 |   | [**Impl**](#function-impl-35) ([**Impl**](classPolarBSplines_1_1Impl.md)&lt; DDim, OriginMemorySpace &gt; const & impl) <br> |
 |   | [**Impl**](#function-impl-45) ([**Impl**](classPolarBSplines_1_1Impl.md) const & x) = default<br> |
 |   | [**Impl**](#function-impl-55) ([**Impl**](classPolarBSplines_1_1Impl.md) && x) = default<br> |
-|  KOKKOS\_FUNCTION [**tensor\_product\_index\_type**](classPolarBSplines.md#typedef-tensor_product_index_type) | [**eval\_basis**](#function-eval_basis) (DSpan1D singular\_values, DSpan2D values, Coord&lt; [**DimR**](classPolarBSplines.md#typedef-dimr), [**DimTheta**](classPolarBSplines.md#typedef-dimtheta) &gt; p) const<br>_Evaluate the polar basis splines at the coordinate p._  |
-|  KOKKOS\_FUNCTION [**tensor\_product\_index\_type**](classPolarBSplines.md#typedef-tensor_product_index_type) | [**eval\_deriv\_r**](#function-eval_deriv_r) (DSpan1D singular\_derivs, DSpan2D derivs, Coord&lt; [**DimR**](classPolarBSplines.md#typedef-dimr), [**DimTheta**](classPolarBSplines.md#typedef-dimtheta) &gt; p) const<br>_Evaluate the radial derivative of the polar basis splines at the coordinate p._  |
-|  KOKKOS\_FUNCTION [**tensor\_product\_index\_type**](classPolarBSplines.md#typedef-tensor_product_index_type) | [**eval\_deriv\_r\_and\_theta**](#function-eval_deriv_r_and_theta) (DSpan1D singular\_derivs, DSpan2D derivs, Coord&lt; [**DimR**](classPolarBSplines.md#typedef-dimr), [**DimTheta**](classPolarBSplines.md#typedef-dimtheta) &gt; p) const<br>_Evaluate the second order derivative of the polar basis splines in the radial and poloidal directions, at the coordinate p._  |
-|  KOKKOS\_FUNCTION [**tensor\_product\_index\_type**](classPolarBSplines.md#typedef-tensor_product_index_type) | [**eval\_deriv\_theta**](#function-eval_deriv_theta) (DSpan1D singular\_derivs, DSpan2D derivs, Coord&lt; [**DimR**](classPolarBSplines.md#typedef-dimr), [**DimTheta**](classPolarBSplines.md#typedef-dimtheta) &gt; p) const<br>_Evaluate the poloidal derivative of the polar basis splines at the coordinate p._  |
+|  KOKKOS\_FUNCTION [**tensor\_product\_index\_type**](classPolarBSplines.md#typedef-tensor_product_index_type) | [**eval\_basis**](#function-eval_basis) (DSpan1D singular\_values, DSpan2D values, Coord&lt; [**R**](classPolarBSplines.md#typedef-r), [**Theta**](classPolarBSplines.md#typedef-theta) &gt; p) const<br>_Evaluate the polar basis splines at the coordinate p._  |
+|  KOKKOS\_FUNCTION [**tensor\_product\_index\_type**](classPolarBSplines.md#typedef-tensor_product_index_type) | [**eval\_deriv\_r**](#function-eval_deriv_r) (DSpan1D singular\_derivs, DSpan2D derivs, Coord&lt; [**R**](classPolarBSplines.md#typedef-r), [**Theta**](classPolarBSplines.md#typedef-theta) &gt; p) const<br>_Evaluate the radial derivative of the polar basis splines at the coordinate p._  |
+|  KOKKOS\_FUNCTION [**tensor\_product\_index\_type**](classPolarBSplines.md#typedef-tensor_product_index_type) | [**eval\_deriv\_r\_and\_theta**](#function-eval_deriv_r_and_theta) (DSpan1D singular\_derivs, DSpan2D derivs, Coord&lt; [**R**](classPolarBSplines.md#typedef-r), [**Theta**](classPolarBSplines.md#typedef-theta) &gt; p) const<br>_Evaluate the second order derivative of the polar basis splines in the radial and poloidal directions, at the coordinate p._  |
+|  KOKKOS\_FUNCTION [**tensor\_product\_index\_type**](classPolarBSplines.md#typedef-tensor_product_index_type) | [**eval\_deriv\_theta**](#function-eval_deriv_theta) (DSpan1D singular\_derivs, DSpan2D derivs, Coord&lt; [**R**](classPolarBSplines.md#typedef-r), [**Theta**](classPolarBSplines.md#typedef-theta) &gt; p) const<br>_Evaluate the poloidal derivative of the polar basis splines at the coordinate p._  |
 |  [**discrete\_domain\_type**](classPolarBSplines_1_1Impl.md#typedef-discrete_domain_type) | [**full\_domain**](#function-full_domain) () noexcept const<br> |
 |  void | [**integrals**](#function-integrals-22) ([**PolarSpline**](structPolarSpline.md)&lt; DDim, MemorySpace2 &gt; int\_vals) const<br> |
 |  std::size\_t | [**nbasis**](#function-nbasis) () noexcept const<br> |
@@ -196,9 +196,9 @@ using PolarBSplines< BSplinesR, BSplinesTheta, C >::Impl< DDim, MemorySpace >::d
 ### function Impl [2/5]
 
 ```C++
-template<class DiscreteMapping>
+template<class X, class Y, class SplineEvaluator, class EvalMemorySpace>
 inline explicit PolarBSplines::Impl::Impl (
-    const DiscreteMapping & curvilinear_to_cartesian
+    const DiscreteToCartesian < X , Y , SplineEvaluator, R , Theta , EvalMemorySpace > & curvilinear_to_cartesian
 ) 
 ```
 
@@ -318,7 +318,7 @@ _Evaluate the polar basis splines at the coordinate p._
 KOKKOS_FUNCTION tensor_product_index_type PolarBSplines::Impl::eval_basis (
     DSpan1D singular_values,
     DSpan2D values,
-    Coord< DimR , DimTheta > p
+    Coord< R , Theta > p
 ) const
 ```
 
@@ -359,7 +359,7 @@ _Evaluate the radial derivative of the polar basis splines at the coordinate p._
 KOKKOS_FUNCTION tensor_product_index_type PolarBSplines::Impl::eval_deriv_r (
     DSpan1D singular_derivs,
     DSpan2D derivs,
-    Coord< DimR , DimTheta > p
+    Coord< R , Theta > p
 ) const
 ```
 
@@ -400,7 +400,7 @@ _Evaluate the second order derivative of the polar basis splines in the radial a
 KOKKOS_FUNCTION tensor_product_index_type PolarBSplines::Impl::eval_deriv_r_and_theta (
     DSpan1D singular_derivs,
     DSpan2D derivs,
-    Coord< DimR , DimTheta > p
+    Coord< R , Theta > p
 ) const
 ```
 
@@ -441,7 +441,7 @@ _Evaluate the poloidal derivative of the polar basis splines at the coordinate p
 KOKKOS_FUNCTION tensor_product_index_type PolarBSplines::Impl::eval_deriv_theta (
     DSpan1D singular_derivs,
     DSpan2D derivs,
-    Coord< DimR , DimTheta > p
+    Coord< R , Theta > p
 ) const
 ```
 
