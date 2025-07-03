@@ -32,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Generalise `compute_coeffs_on_mapping` to work with any mapping.
 - Rely on GPU-aware MPI to allow GPU-direct MPI for `MPITransposeAllToAll`.
 - Curvilinear coordinate change classes take a `Coord` type to specify the O-point in the constructor.
-- Allow `init_discrete_space` to be used to initialise `PolarBSplines` with a `DiscreteToCartesian` coordinate change, accessible only on GPU.
+- Allow `init_discrete_space` to be used to initialise `PolarBSplines` with a GPU-based `DiscreteToCartesian` coordinate change operator.
 
 ### Deprecated
 
