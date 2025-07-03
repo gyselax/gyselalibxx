@@ -269,7 +269,9 @@ TEST(DerivFieldTest, SplineBuilderUse)
     host_t<DField<IdxRange<DerivX, DerivY>>> derivs_xy_max_max(derivs_xy_max_max_alloc);
 
     // --- Copy the values from the DerivField
-    ddc::for_each(idx_range_xy, [&](IdxXY idx_xy) { function(idx_xy) = function_extracted(idx_xy); });
+    ddc::for_each(idx_range_xy, [&](IdxXY idx_xy) {
+        function(idx_xy) = function_extracted(idx_xy);
+    });
 
     ddc::for_each(idx_range_deriv_x_y, [&](Idx<DerivX, GridY> idx_deriv_x_y) {
         derivs_xmin(idx_deriv_x_y) = derivs_xmin_extracted(IdxY(idx_deriv_x_y));
