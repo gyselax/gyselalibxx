@@ -49,10 +49,19 @@ authors:
   affiliation: 2
   orcid: 0000-0001-8982-4230
 
+- given-names: Baptiste
+  surname: Legouix
+  affiliation: 2
+
 - given-names: Etienne
   surname: Malaboeuf
   affiliation: 5
   orcid: 0009-0007-3320-1406
+
+- given-names: Yann
+  surname: Munschy
+  affiliation: "1, 2"
+  orcid: 0000-0002-3002-9352
 
 - given-names: Kevin
   surname: Obrejan
