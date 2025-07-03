@@ -34,7 +34,7 @@ using FieldRTheta = Field<ElementType, IdxRangeRTheta>;
 
 
 /**
- * @brief A class that represents a scalar field.
+ * @brief A class that represents a scalar field: \f$(r, \theta) \mapsto r^2 \cos(\theta) + 2 r^3 \sin(\theta)\f$.
  * To be used to compute the gradient of the field.
  */
 class GradientTestFunction
@@ -54,22 +54,6 @@ public:
      * @brief Default destructor.
      */
     KOKKOS_DEFAULTED_FUNCTION ~GradientTestFunction() = default;
-
-    /**
-     * @brief Get the value of the function at given coordinate.
-     *
-     * @param[in] coord_rth The coordinate where we want to evaluate
-     * the function.
-     *
-     * @return The value of the function at the coordinate.
-     */
-    KOKKOS_INLINE_FUNCTION double operator()(CoordRTheta const coord_rth) const
-    {
-        double const r = ddc::get<R>(coord_rth);
-        double const theta = ddc::get<Theta>(coord_rth);
-
-        return ipow(r, 2) * Kokkos::cos(theta) + 2 * ipow(r, 3) * Kokkos::sin(theta);
-    }
 
     /**
      * @brief Get the value of the gradient of the field 

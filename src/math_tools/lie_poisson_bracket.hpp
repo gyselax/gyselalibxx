@@ -62,6 +62,38 @@ public:
      * @param[in] B A vector containing the magnetic field at the given coordinate.
      * @param[in] coord The coordinate where the calculation is carried out.
      */
+    template <
+            class TensorType,
+            class = std::enable_if_t<is_tensor_type_v<TensorType> && TensorType::rank() == 2>>
+    KOKKOS_INLINE_FUNCTION auto operator()(
+            DTensor<CovBasisSpatial> const& partial_derivatives_f,
+            TensorType const& partial_derivatives_g,
+            DTensor<BasisSpatial> const& B,
+            MappingCoord const& coord) const
+    {
+        double J = m_mapping.jacobian(coord);
+        LeviCivitaTensor<double, BasisSpatial> eps(J);
+        DTensor<CovBasisSpatial, CovBasisSpatial> metric_tensor = m_metric_tensor(coord);
+        double B_norm = norm(metric_tensor, B);
+        return tensor_mul(
+                index<'i', 'j', 'k'>(eps),
+                index<'i', 'l'>(metric_tensor),
+                index<'l'>(B / B_norm),
+                index<'j'>(partial_derivatives_f),
+                index<'m', 'k'>(partial_derivatives_g));
+    }
+
+    /**
+     * @brief Compute the gyrokinetic Poisson bracket at a given coordinate, from
+     * the partial derivatives of the two fields, and the magnetic field.
+     *
+     * @param[in] partial_derivatives_f A vector containing the partial derivatives
+     * of the scalar field f expressed at the given coordinate.
+     * @param[in] partial_derivatives_g A vector containing the partial derivatives
+     * of the scalar field g expressed at the given coordinate.
+     * @param[in] B A vector containing the magnetic field at the given coordinate.
+     * @param[in] coord The coordinate where the calculation is carried out.
+     */
     KOKKOS_INLINE_FUNCTION double operator()(
             DTensor<CovBasisSpatial> const& partial_derivatives_f,
             DTensor<CovBasisSpatial> const& partial_derivatives_g,

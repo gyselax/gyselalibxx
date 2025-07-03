@@ -90,7 +90,7 @@ int main(int argc, char** argv)
                         conf_gyselalibxx);
         init(get_field(allfdistribu));
     } else {
-        RestartInitialisation const restart(iter_start, time_start);
+        RestartInitialisation const restart(time_start);
         restart(get_field(allfdistribu));
     }
     auto allfequilibrium_host = ddc::create_mirror_view_and_copy(get_field(allfequilibrium));

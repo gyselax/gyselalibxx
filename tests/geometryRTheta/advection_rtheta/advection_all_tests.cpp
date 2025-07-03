@@ -272,9 +272,9 @@ int main(int argc, char** argv)
             SplineInterpPointsR>(conf_gyselalibxx, "r");
     PC_tree_destroy(&conf_gyselalibxx);
 
-    std::vector<CoordTheta> theta_knots
+    std::vector<CoordTheta> theta_break_points
             = build_uniform_break_points(theta_min, theta_max, theta_ncells);
-    ddc::init_discrete_space<BSplinesTheta>(theta_knots);
+    ddc::init_discrete_space<BSplinesTheta>(theta_break_points);
     ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
 
     IdxRangeTheta const interpolation_idx_range_theta(
@@ -328,11 +328,13 @@ int main(int argc, char** argv)
 
     // SET THE DIFFERENT PARAMETERS OF THE TESTS ------------------------------------------------
     // Offset the centre of the circle to ensure that this is correctly handled
-    CircularToCartMapping const from_circ_map(6.2, 0.8);
-    CircularToPseudoCartMapping const to_pseudo_circ_map(6.2, 0.8);
-    CartesianToCircular<X, Y, R, Theta> to_circ_map(6.2, 0.8);
-    CzarnyToCartMapping const from_czarny_map(0.3, 1.4, 6.2, 0.8);
-    CartesianToCzarny<X, Y, R, Theta> const to_czarny_map(0.3, 1.4, 6.2, 0.8);
+    Coord<X, Y> origin_point(6.2, 0.8);
+    CircularToCartMapping const from_circ_map(origin_point);
+    Coord<X_pC, Y_pC> origin_point_pc(6.2, 0.8);
+    CircularToPseudoCartMapping const to_pseudo_circ_map(origin_point_pc);
+    CartesianToCircular<X, Y, R, Theta> to_circ_map(origin_point);
+    CzarnyToCartMapping const from_czarny_map(0.3, 1.4, origin_point);
+    CartesianToCzarny<X, Y, R, Theta> const to_czarny_map(0.3, 1.4, origin_point);
     DiscreteMappingBuilderHost const discrete_czarny_map_builder_host(
             Kokkos::DefaultHostExecutionSpace(),
             from_czarny_map,
