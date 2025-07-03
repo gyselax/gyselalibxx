@@ -4,6 +4,7 @@ The `src/` folder contains all the code necessary to build a gyrokinetic semi-La
 
 - [advection](./advection/README.md) - Code describing semi-Lagrangian advection routines.
 - [collisions](./collisions/README.md) - Code describing the inter and intra species collisions.
+- [gyroaverage](./gyroaverage/README.md) - Code describing the gyroaverage operator.
 - [data\_types](./data_types/README.md) - Code describing useful data types which are not provided by DDC.
 - [geometryRTheta](./geometryRTheta/README.md) - Code describing methods which are specific to a 2D curvilinear geometry containing a singular point.
 - [geometryVparMu](./geometryVparMu/README.md) - Code describing methods which are specific to a simulation operators in velocity space (vpar,mu).
