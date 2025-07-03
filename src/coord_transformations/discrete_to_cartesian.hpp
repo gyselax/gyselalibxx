@@ -351,8 +351,8 @@ public:
      * The control points can be obtained by interpolating the mapping on interpolation
      * points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints).
      * We can also note that the first control points @f$ \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}} @f$
-     * are equal to the pole @f$ (c_{x,k}, c_{y,k}) = (x_0,y_0) @f$, @f$ \forall k = 0, ..., N_{\theta}-1 @f$
-     * where @f$ x(0,\theta), y(0,\theta) = (x_0,y_0) @f$ @f$ \forall \theta @f$.
+     * are equal to the pole @f$ (c_{x,k}, c_{y,k}) = (x_0,y_0) , \ \forall k = 0, ..., N_{\theta}-1 @f$
+     * where @f$ x(0,\theta), y(0,\theta) = (x_0,y_0) \ \forall \theta @f$.
      *
      *
      * @param[in] el
@@ -385,8 +385,8 @@ public:
      * The control points can be obtained by interpolating the mapping on interpolation
      * points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints).
      * We can also note that the first control points @f$ \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}} @f$
-     * are equal to the pole @f$ (c_{x,k}, c_{y,k}) = (x_0,y_0) @f$, @f$ \forall k = 0, ..., N_{\theta}-1 @f$
-     * where @f$ x(0,\theta), y(0,\theta) = (x_0,y_0) @f$ @f$ \forall \theta @f$.
+     * are equal to the pole @f$ (c_{x,k}, c_{y,k}) = (x_0,y_0) , \ \forall k = 0, ..., N_{\theta}-1 @f$
+     * where @f$ x(0,\theta), y(0,\theta) = (x_0,y_0) \ \forall \theta @f$.
      *
      *
      * @param[in] exec_space
