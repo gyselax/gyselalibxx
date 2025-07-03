@@ -29,6 +29,13 @@ rm spack-0.23.1.tar.gz
 # Bug fix for spack < 0.24 and gcc>=14
 wget https://raw.githubusercontent.com/spack/spack/b369d8b2509794c4f46f62c81f25c247ca58418e/var/spack/repos/builtin/packages/py-netcdf4/package.py -O spack-0.23.1/var/spack/repos/builtin/packages/py-netcdf4/package.py
 
+# set paths for spack to not use home ~/.spack folder
+CURRENT_DIR=$(pwd)
+export SPACK_PATH=${CURRENT_DIR}/spack-0.23.1/
+export SPACK_USER_CONFIG_PATH="${SPACK_PATH}/user_config"
+export SPACK_SYSTEM_CONFIG_PATH="${SPACK_PATH}/sys_config"
+export SPACK_USER_CACHE_PATH="${SPACK_PATH}/user_cache"
+
 # Activate spack
 . spack-0.23.1/share/spack/setup-env.sh
 
@@ -69,8 +76,6 @@ spack env activate -p gyselalibxx-env
 PYTHON_EXECUTABLE=$(which python3)
 spack env deactivate
 
-CURRENT_DIR=$(pwd)
-
 cat >${SCRIPT_DIR}/environment.sh <<EOL
 if [ "\${BASH_SOURCE[0]}" -ef "\$0" ]
 then
@@ -79,7 +84,11 @@ then
     exit 1
 fi
 
-. ${CURRENT_DIR}/spack-0.23.1/share/spack/setup-env.sh
+export SPACK_PATH=${CURRENT_DIR}/spack-0.23.1/
+export SPACK_USER_CONFIG_PATH="\${SPACK_PATH}/user_config"
+export SPACK_SYSTEM_CONFIG_PATH="\${SPACK_PATH}/sys_config"
+export SPACK_USER_CACHE_PATH="\${SPACK_PATH}/user_cache"
+. \${SPACK_PATH}/share/spack/setup-env.sh
 spack env activate -p gyselalibxx-env
 export PYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
 EOL
