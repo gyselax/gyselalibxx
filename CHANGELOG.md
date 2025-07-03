@@ -11,6 +11,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+### Fixed
+
+### Changed
+
+### Deprecated
+
+## [v0.2.0] - 2025-07-03
+
+### Added
+
 - Add a Gyroaverage operator with tests for circular geometry.
 - Curvilinear coordinate change classes have an O-point method to retrieve the O-point in the non-curvilinear coordinates.
 - Add a batched `operator()` to `DiscreteToCartesian` allowing a field of coordinates to be converted.
