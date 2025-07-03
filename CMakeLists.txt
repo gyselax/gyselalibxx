@@ -82,7 +82,7 @@ if("${GYSELALIBXX_INCLUDE_TESTING_DEPENDENCIES}")
   endif()
 endif()
 
-find_package(Kokkos 4.5.1 QUIET)
+find_package(Kokkos 4.4.1 QUIET)
 if(NOT "${Kokkos_FOUND}")
   ## Use Kokkos from `vendor/`
   if("${Kokkos_ENABLE_CUDA}")

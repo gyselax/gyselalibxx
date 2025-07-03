@@ -85,14 +85,14 @@ int main(int argc, char** argv)
     CoordTheta const theta_max(2.0 * M_PI);
     IdxStepTheta const theta_ncells(PCpp_int(conf_gyselalibxx, ".SplineMesh.theta_ncells"));
 
-    std::vector<CoordR> r_knots = build_uniform_break_points(r_min, r_max, r_ncells);
-    std::vector<CoordTheta> theta_knots
+    std::vector<CoordR> r_break_points = build_uniform_break_points(r_min, r_max, r_ncells);
+    std::vector<CoordTheta> theta_break_points
             = build_uniform_break_points(theta_min, theta_max, theta_ncells);
 
     // Creating mesh & supports
-    ddc::init_discrete_space<BSplinesR>(r_knots);
+    ddc::init_discrete_space<BSplinesR>(r_break_points);
 
-    ddc::init_discrete_space<BSplinesTheta>(theta_knots);
+    ddc::init_discrete_space<BSplinesTheta>(theta_break_points);
 
     ddc::init_discrete_space<GridR>(SplineInterpPointsR::get_sampling<GridR>());
     ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
@@ -106,10 +106,11 @@ int main(int argc, char** argv)
 
     double major_radius = 6.1;
     double vertical_offset = 0.3;
+    Coord<X, Y> origin_point(major_radius, vertical_offset);
 #if defined(CIRCULAR_MAPPING)
-    const Mapping mapping(major_radius, vertical_offset);
+    const Mapping mapping(origin_point);
 #elif defined(CZARNY_MAPPING)
-    const Mapping mapping(0.3, 1.4, major_radius, vertical_offset);
+    const Mapping mapping(0.3, 1.4, origin_point);
 #endif
 
     ddc::NullExtrapolationRule bv_r_min;
@@ -117,22 +118,13 @@ int main(int argc, char** argv)
     ddc::PeriodicExtrapolationRule<Theta> bv_theta_min;
     ddc::PeriodicExtrapolationRule<Theta> bv_theta_max;
     SplineRThetaEvaluatorNullBound evaluator(bv_r_min, bv_r_max, bv_theta_min, bv_theta_max);
-    SplineRThetaEvaluatorNullBound_host
-            evaluator_host(bv_r_min, bv_r_max, bv_theta_min, bv_theta_max);
-
-    DiscreteMappingBuilder_host const discrete_mapping_builder_host(
-            Kokkos::DefaultHostExecutionSpace(),
-            mapping,
-            builder_host,
-            evaluator_host);
 
 
     DiscreteMappingBuilder const
             discrete_mapping_builder(Kokkos::DefaultExecutionSpace(), mapping, builder, evaluator);
     DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
-    DiscreteToCartesian const discrete_mapping_host = discrete_mapping_builder_host();
 
-    ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping_host);
+    ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
     IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(builder);
 

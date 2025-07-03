@@ -14,7 +14,7 @@ cd -- "${TOOLCHAIN_ROOT_DIRECTORY}"
 
 SPACK_USER_VERSION="spack-user-4.0.0"
 
-export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-MI250/Configuration.${SPACK_USER_VERSION}"
+export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-GENOA/Configuration.${SPACK_USER_VERSION}"
 export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
 
 module purge
