@@ -9,6 +9,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include "../../advection/r_theta_test_cases.hpp"
+
 #include "bsl_advection_polar.hpp"
 #include "geometry.hpp"
 #include "l_norm_tools.hpp"
@@ -19,7 +21,6 @@
 #include "polar_spline_evaluator.hpp"
 #include "quadrature.hpp"
 #include "spline_quadrature.hpp"
-#include "test_cases.hpp"
 #include "trapezoid_quadrature.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
@@ -185,7 +186,7 @@ host_t<FieldMemRTheta<CoordRTheta>> compute_exact_feet_rtheta(
                   DiscreteToCartesian<X, Y, SplineRThetaEvaluatorConstBound_host>>);
 
     host_t<FieldMemRTheta<CoordRTheta>> feet_coords_rtheta(idx_range_rtheta);
-    CoordXY const coord_xy_centre = CoordXY(logical_to_physical_mapping(CoordRTheta(0, 0)));
+    CoordXY const coord_xy_centre = CoordXY(logical_to_physical_mapping.o_point());
     ddc::for_each(idx_range_rtheta, [&](IdxRTheta const irtheta) {
         CoordRTheta const coord_rtheta = ddc::coordinate(irtheta);
         CoordXY const coord_xy

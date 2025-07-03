@@ -246,6 +246,7 @@ template <class Mapping, bool RaiseError = true>
 static constexpr bool has_inv_jacobian_v
         = mapping_detail::DefinesInvJacobian<Mapping, !RaiseError>::value;
 
+/// Indicates that a coordinate change operator is 2D with a curvilinear mapping showing an O-point.
 template <class Mapping>
 static constexpr bool is_curvilinear_2d_mapping_v = mapping_detail::IsCurvilinear2DMapping<
         std::remove_const_t<std::remove_reference_t<Mapping>>>::value;

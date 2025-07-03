@@ -77,13 +77,13 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     CoordTheta const theta_max(2.0 * M_PI);
     IdxStepTheta const theta_ncells(Nt);
 
-    std::vector<CoordR> r_knots = build_uniform_break_points(r_min, r_max, r_ncells);
-    std::vector<CoordTheta> theta_knots
+    std::vector<CoordR> r_break_points = build_uniform_break_points(r_min, r_max, r_ncells);
+    std::vector<CoordTheta> theta_break_points
             = build_uniform_break_points(theta_min, theta_max, theta_ncells);
 
     // Creating mesh & supports:
-    ddc::init_discrete_space<BSplinesR>(r_knots);
-    ddc::init_discrete_space<BSplinesTheta>(theta_knots);
+    ddc::init_discrete_space<BSplinesR>(r_break_points);
+    ddc::init_discrete_space<BSplinesTheta>(theta_break_points);
 
     ddc::init_discrete_space<GridR>(SplineInterpPointsR::get_sampling<GridR>());
     ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
@@ -144,10 +144,9 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, grid);
 
-    RK3<FieldMemRTheta<CoordRTheta>,
-        DVectorFieldMemRTheta<X, Y>,
-        Kokkos::DefaultExecutionSpace> const time_stepper(grid);
+    RK3Builder const time_stepper;
     SplinePolarFootFinder find_feet(
+            grid,
             time_stepper,
             to_physical_mapping,
             to_physical_mapping,

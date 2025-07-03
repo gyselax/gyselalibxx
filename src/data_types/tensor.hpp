@@ -73,9 +73,8 @@ public:
     using base_type::rank;
 
 private:
-    using base_type::s_n_elements;
-    std::array<ElementType, s_n_elements> m_data_alloc;
     using base_type::m_data;
+    using base_type::s_n_elements;
 
 public:
     /**
@@ -110,7 +109,8 @@ public:
         static_assert(
                 rank() == 1,
                 "Filling the tensor on initialisation is only permitted for 1D vector objects");
-        m_data.m_data_alloc = std::array<ElementType, base_type::size()>({elements...});
+        m_data.m_data_alloc
+                = std::array<ElementType, base_type::size()>({ElementType(elements)...});
     }
 
     /**

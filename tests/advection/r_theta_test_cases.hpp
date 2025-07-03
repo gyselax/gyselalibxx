@@ -5,13 +5,8 @@
 #include "cartesian_to_circular.hpp"
 #include "circular_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
-#include "geometry.hpp"
 #include "indexed_tensor.hpp"
 #include "math_tools.hpp"
-#include "paraconfpp.hpp"
-#include "params.yaml.hpp"
-#include "polar_spline.hpp"
-#include "polar_spline_evaluator.hpp"
 
 /*
  *  This file defines
@@ -42,6 +37,12 @@
 template <class Mapping>
 class FunctionToBeAdvected_cos_4_ellipse
 {
+    static_assert(is_curvilinear_2d_mapping_v<Mapping>);
+    using X = typename Mapping::cartesian_tag_x;
+    using Y = typename Mapping::cartesian_tag_y;
+    using R = typename Mapping::curvilinear_tag_r;
+    using Theta = typename Mapping::curvilinear_tag_theta;
+
 private:
     Mapping const& m_mapping;
 
@@ -67,9 +68,9 @@ public:
      *
      * @return The value of the function at the coordinate.
      */
-    KOKKOS_FUNCTION double operator()(CoordRTheta coord_rtheta) const
+    KOKKOS_FUNCTION double operator()(Coord<R, Theta> coord_rtheta) const
     {
-        CoordXY const coord_xy(m_mapping(coord_rtheta));
+        Coord<X, Y> const coord_xy(m_mapping(coord_rtheta));
         double const x = ddc::get<X>(coord_xy);
         double const y = ddc::get<Y>(coord_xy);
 
@@ -99,15 +100,21 @@ public:
 template <class Mapping>
 class FunctionToBeAdvected_gaussian
 {
+    static_assert(is_curvilinear_2d_mapping_v<Mapping>);
+    using X = typename Mapping::cartesian_tag_x;
+    using Y = typename Mapping::cartesian_tag_y;
+    using R = typename Mapping::curvilinear_tag_r;
+    using Theta = typename Mapping::curvilinear_tag_theta;
+
 private:
     Mapping const& m_mapping;
     double const m_constant;
-    double const m_x0;
-    double const m_y0;
+    Coord<X> const m_x0;
+    Coord<Y> const m_y0;
     double const m_sig_x;
     double const m_sig_y;
-    double const m_rmin;
-    double const m_rmax;
+    Coord<R> const m_rmin;
+    Coord<R> const m_rmax;
 
 public:
     /**
@@ -163,18 +170,18 @@ public:
      *
      * @return The value of the function at the coordinate.
      */
-    KOKKOS_FUNCTION double operator()(CoordRTheta coord_rtheta) const
+    KOKKOS_FUNCTION double operator()(Coord<R, Theta> coord_rtheta) const
     {
         // Gaussian centred in (x0, y0):
-        CoordXY const coord_xy(m_mapping(coord_rtheta));
-        double const x = ddc::get<X>(coord_xy);
-        double const y = ddc::get<Y>(coord_xy);
-        double const r = ddc::get<R>(coord_rtheta);
+        Coord<X, Y> const coord_xy(m_mapping(coord_rtheta));
+        double const deviation_x = ddc::select<X>(coord_xy) - m_x0;
+        double const deviation_y = ddc::select<Y>(coord_xy) - m_y0;
+        Coord<R> const r = ddc::select<R>(coord_rtheta);
         if ((m_rmin <= r) and (r <= m_rmax)) {
             return m_constant
                    * Kokkos::exp(
-                           -ipow(x - m_x0, 2) / (2 * m_sig_x * m_sig_x)
-                           - ipow(y - m_y0, 2) / (2 * m_sig_y * m_sig_y));
+                           -ipow(deviation_x, 2) / (2 * m_sig_x * m_sig_x)
+                           - ipow(deviation_y, 2) / (2 * m_sig_y * m_sig_y));
         } else {
             return 0.0;
         }
@@ -201,6 +208,7 @@ public:
  * - @f$ Y(t + dt) = y_c + (X(t) - x_c) \sin(\omega dt) + (Y(t) - y_c) \cos(\omega dt) @f$.
  *
  */
+template <class X, class Y>
 class AdvectionField_decentred_rotation
 {
 private:
@@ -216,7 +224,7 @@ public:
     AdvectionField_decentred_rotation() : m_omega(2 * M_PI), m_xc(0.25), m_yc(0.) {}
 
     /// Copy operator
-    explicit KOKKOS_DEFAULTED_FUNCTION AdvectionField_decentred_rotation(
+    KOKKOS_DEFAULTED_FUNCTION AdvectionField_decentred_rotation(
             AdvectionField_decentred_rotation const&)
             = default;
 
@@ -230,7 +238,7 @@ public:
 ￼     *
 ￼     * @return The advection field in the physical domain.
 ￼     */
-    KOKKOS_FUNCTION DVector<X, Y> operator()(CoordXY const coord, double const t) const
+    KOKKOS_FUNCTION DVector<X, Y> operator()(Coord<X, Y> const coord, double const t) const
     {
         double const x = m_omega * (m_yc - ddc::get<Y>(coord));
         double const y = m_omega * (ddc::get<X>(coord) - m_xc);
@@ -247,7 +255,7 @@ public:
 ￼     *
 ￼     * @return The characteristic feet in the physical domain.
 ￼     */
-    KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord, double const t) const
+    KOKKOS_FUNCTION Coord<X, Y> exact_feet(Coord<X, Y> coord, double const t) const
     {
         double const x = ddc::get<X>(coord);
         double const y = ddc::get<Y>(coord);
@@ -255,7 +263,7 @@ public:
                               - (y - m_yc) * Kokkos::sin(m_omega * -t);
         double const foot_y = m_yc + (x - m_xc) * Kokkos::sin(m_omega * -t)
                               + (y - m_yc) * Kokkos::cos(m_omega * -t);
-        return CoordXY(foot_x, foot_y);
+        return Coord<X, Y>(foot_x, foot_y);
     }
 };
 
@@ -276,10 +284,11 @@ public:
  * - @f$ Y(t + dt) = Y(t) + dt v_y @f$.
  *
  */
+template <class X, class Y>
 class AdvectionField_translation
 {
 private:
-    CoordXY const m_velocity;
+    DVector<X, Y> const m_velocity;
 
 public:
     /**
@@ -290,10 +299,7 @@ public:
      * @param[in] vy
      *      The constant second component of the advection field in the physical domain.
      */
-    AdvectionField_translation(CoordVx vx, CoordVy vy)
-        : m_velocity(ddc::get<Vx>(vx), ddc::get<Vy>(vy))
-    {
-    }
+    explicit AdvectionField_translation(DVector<X, Y> const& velocity) : m_velocity(velocity) {}
 
     /// Copy operator
     KOKKOS_DEFAULTED_FUNCTION AdvectionField_translation(AdvectionField_translation const&)
@@ -309,9 +315,9 @@ public:
 ￼     *
 ￼     * @return The advection field in the physical domain.
 ￼     */
-    KOKKOS_FUNCTION DVector<X, Y> operator()(CoordXY const coord, double const t) const
+    KOKKOS_FUNCTION DVector<X, Y> operator()(Coord<X, Y> const coord, double const t) const
     {
-        return DVector<X, Y>(m_velocity);
+        return m_velocity;
     }
 
     /**
@@ -324,7 +330,7 @@ public:
 ￼     *
 ￼     * @return The characteristic feet in the physical domain.
 ￼     */
-    KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord, double const t) const
+    KOKKOS_FUNCTION Coord<X, Y> exact_feet(Coord<X, Y> coord, double const t) const
     {
         return coord - t * m_velocity;
     }
@@ -351,6 +357,7 @@ public:
  *      - and @f$ (R(t), \Theta(t)) = \mathcal{F}^{-1} (X(t), Y(t))@f$.
  *
  */
+template <class X, class Y, class R, class Theta>
 class AdvectionField_rotation
 {
 private:
@@ -368,8 +375,8 @@ public:
      * @param[in] vtheta
      *      The constant second polar component of the advection field in the physical domain.
      */
-    AdvectionField_rotation(CoordVr vr, CoordVtheta vtheta)
-        : m_v(vr, vtheta)
+    explicit AdvectionField_rotation(DVector<R, Theta> const& velocity)
+        : m_v(velocity)
         , m_physical_to_logical_mapping()
         , m_logical_to_physical_mapping()
     {
@@ -388,9 +395,9 @@ public:
 ￼     *
 ￼     * @return The advection field in the physical domain.
 ￼     */
-    KOKKOS_FUNCTION DVector<X, Y> operator()(CoordXY const coord, double const t) const
+    KOKKOS_FUNCTION DVector<X, Y> operator()(Coord<X, Y> const coord, double const t) const
     {
-        CoordRTheta const coord_rtheta(m_physical_to_logical_mapping(coord));
+        Coord<R, Theta> const coord_rtheta(m_physical_to_logical_mapping(coord));
         Tensor jacobian = m_logical_to_physical_mapping.jacobian_matrix(coord_rtheta);
         return tensor_mul(index<'i', 'j'>(jacobian), index<'j'>(m_v));
     }
@@ -405,9 +412,9 @@ public:
 ￼     *
 ￼     * @return The characteristic feet in the physical domain.
 ￼     */
-    KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord_xy, double const t) const
+    KOKKOS_FUNCTION Coord<X, Y> exact_feet(Coord<X, Y> coord_xy, double const t) const
     {
-        CoordRTheta const coord_rtheta(m_physical_to_logical_mapping(coord_xy));
+        Coord<R, Theta> const coord_rtheta(m_physical_to_logical_mapping(coord_xy));
         return m_logical_to_physical_mapping(coord_rtheta - t * m_v);
     }
 };
@@ -463,15 +470,17 @@ struct AdvectionSimulation
  * @see AdvectionField_translation
  */
 template <class Mapping>
-AdvectionSimulation<AdvectionField_translation, FunctionToBeAdvected_gaussian<Mapping>>
-get_translation_simulation(Mapping const& mapping, double const rmin, double const rmax)
+auto get_translation_simulation(Mapping const& mapping, double const rmin, double const rmax)
 {
-    return AdvectionSimulation<AdvectionField_translation, FunctionToBeAdvected_gaussian<Mapping>>(
-            {AdvectionField_translation(
-                     CoordVx(std::cos(2 * M_PI * 511. / 4096.) / 2.),
-                     CoordVy(std::sin(2 * M_PI * 511. / 4096.) / 2.)),
-             FunctionToBeAdvected_gaussian<
-                     Mapping>(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax)});
+    using X = typename Mapping::cartesian_tag_x;
+    using Y = typename Mapping::cartesian_tag_y;
+    return AdvectionSimulation<
+            AdvectionField_translation<X, Y>,
+            FunctionToBeAdvected_gaussian<Mapping>>(
+            {AdvectionField_translation(DVector<X, Y>(
+                     std::cos(2 * M_PI * 511. / 4096.) / 2.,
+                     std::sin(2 * M_PI * 511. / 4096.) / 2.)),
+             FunctionToBeAdvected_gaussian(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax)});
 }
 
 /**
@@ -499,11 +508,16 @@ get_translation_simulation(Mapping const& mapping, double const rmin, double con
  * @see AdvectionField_rotation
  */
 template <class Mapping>
-AdvectionSimulation<AdvectionField_rotation, FunctionToBeAdvected_gaussian<Mapping>>
-get_rotation_simulation(Mapping const& mapping, double const rmin, double const rmax)
+auto get_rotation_simulation(Mapping const& mapping, double const rmin, double const rmax)
 {
-    return AdvectionSimulation<AdvectionField_rotation, FunctionToBeAdvected_gaussian<Mapping>>(
-            {AdvectionField_rotation(CoordVr(0.), CoordVtheta(2 * M_PI)),
+    using X = typename Mapping::cartesian_tag_x;
+    using Y = typename Mapping::cartesian_tag_y;
+    using R = typename Mapping::curvilinear_tag_r;
+    using Theta = typename Mapping::curvilinear_tag_theta;
+    return AdvectionSimulation<
+            AdvectionField_rotation<X, Y, R, Theta>,
+            FunctionToBeAdvected_gaussian<Mapping>>(
+            {AdvectionField_rotation<X, Y, R, Theta>(DVector<R, Theta>(0., 2 * M_PI)),
              FunctionToBeAdvected_gaussian<
                      Mapping>(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax)});
 }
@@ -534,12 +548,13 @@ get_rotation_simulation(Mapping const& mapping, double const rmin, double const 
  * @see AdvectionField_decentred_rotation
  */
 template <class Mapping>
-AdvectionSimulation<AdvectionField_decentred_rotation, FunctionToBeAdvected_cos_4_ellipse<Mapping>>
-get_decentred_rotation_simulation(Mapping const& mapping)
+auto get_decentred_rotation_simulation(Mapping const& mapping)
 {
+    using X = typename Mapping::cartesian_tag_x;
+    using Y = typename Mapping::cartesian_tag_y;
     return AdvectionSimulation<
-            AdvectionField_decentred_rotation,
+            AdvectionField_decentred_rotation<X, Y>,
             FunctionToBeAdvected_cos_4_ellipse<Mapping>>(
-            {AdvectionField_decentred_rotation(),
+            {AdvectionField_decentred_rotation<X, Y>(),
              FunctionToBeAdvected_cos_4_ellipse<Mapping>(mapping)});
 }

@@ -31,20 +31,13 @@ DFieldSpVxVyXY PredCorr::operator()(
 
     // electrostatic potential and electric field (depending only on x)
     DFieldMemXY electrostatic_potential(get_idx_range<GridX, GridY>(allfdistribu_v2D_split));
-    DFieldMemXY electric_field_x(get_idx_range<GridX, GridY>(allfdistribu_v2D_split));
-    DFieldMemXY electric_field_y(get_idx_range<GridX, GridY>(allfdistribu_v2D_split));
+    DVectorFieldMemXY electric_field(get_idx_range<GridX, GridY>(allfdistribu_v2D_split));
 
     host_t<DFieldMemXY> electrostatic_potential_host(
             get_idx_range<GridX, GridY>(allfdistribu_v2D_split));
 
     // a 2D memory block of the same size as fdistribu
     DFieldMemSpVxVyXY allfdistribu_half_t(get_idx_range(allfdistribu_v2D_split));
-
-    m_poisson_solver(
-            get_field(electrostatic_potential),
-            get_field(electric_field_x),
-            get_field(electric_field_y),
-            get_const_field(allfdistribu_v2D_split));
 
     int iter = 0;
     for (; iter < steps; ++iter) {
@@ -54,10 +47,10 @@ DFieldSpVxVyXY PredCorr::operator()(
         // the associated electric field
         m_poisson_solver(
                 get_field(electrostatic_potential),
-                get_field(electric_field_x),
-                get_field(electric_field_y),
+                get_field(electric_field),
                 get_const_field(allfdistribu_v2D_split));
 
+        Kokkos::Profiling::pushRegion("PDIWrite");
         transpose_layout(
                 Kokkos::DefaultExecutionSpace(),
                 get_field(allfdistribu_v2D_split_output_layout),
@@ -72,41 +65,31 @@ DFieldSpVxVyXY PredCorr::operator()(
                 .with("time_saved", iter_time)
                 .with("fdistribu", allfdistribu_host)
                 .with("electrostatic_potential", electrostatic_potential_host);
-
+        Kokkos::Profiling::popRegion();
         // copy fdistribu
         ddc::parallel_deepcopy(allfdistribu_half_t, allfdistribu_v2D_split);
 
         // predictor
-        m_vlasov_solver(
-                get_field(allfdistribu_half_t),
-                get_const_field(electric_field_x),
-                get_const_field(electric_field_y),
-                dt / 2);
+        m_vlasov_solver(get_field(allfdistribu_half_t), get_const_field(electric_field), dt / 2);
 
         // computation of the electrostatic potential at time tn+1/2
         // and the associated electric field
         m_poisson_solver(
                 get_field(electrostatic_potential),
-                get_field(electric_field_x),
-                get_field(electric_field_y),
+                get_field(electric_field),
                 get_const_field(allfdistribu_half_t));
 
         // correction on a dt
-        m_vlasov_solver(
-                get_field(allfdistribu_v2D_split),
-                get_const_field(electric_field_x),
-                get_const_field(electric_field_y),
-                dt);
+        m_vlasov_solver(get_field(allfdistribu_v2D_split), get_const_field(electric_field), dt);
     }
 
     double const final_time = iter * dt;
     m_poisson_solver(
             get_field(electrostatic_potential),
-            get_field(electric_field_x),
-            get_field(electric_field_y),
+            get_field(electric_field),
             get_const_field(allfdistribu_v2D_split));
 
-
+    Kokkos::Profiling::pushRegion("PDIWrite");
     transpose_layout(
             Kokkos::DefaultExecutionSpace(),
             get_field(allfdistribu_v2D_split_output_layout),
@@ -121,6 +104,7 @@ DFieldSpVxVyXY PredCorr::operator()(
             .with("time_saved", final_time)
             .with("fdistribu", allfdistribu_host)
             .with("electrostatic_potential", electrostatic_potential_host);
+    Kokkos::Profiling::popRegion();
 
     return allfdistribu_v2D_split;
 }

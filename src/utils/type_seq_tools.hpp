@@ -3,6 +3,24 @@
 
 namespace detail {
 
+template <class GridDim, typename = void>
+struct GetCDim
+{
+    using type = GridDim;
+};
+
+template <class GridDim>
+struct GetCDim<
+        GridDim,
+        std::enable_if_t<
+                std::is_same_v<
+                        typename GridDim::continuous_dimension_type,
+                        typename GridDim::continuous_dimension_type>,
+                void>>
+{
+    using type = typename GridDim::continuous_dimension_type;
+};
+
 template <
         class TypeSeqIn,
         std::size_t Start,
@@ -34,7 +52,7 @@ template <class Dim, class HeadGrid, class... Grids>
 struct FindGrid<Dim, ddc::detail::TypeSeq<HeadGrid, Grids...>>
 {
     using type = std::conditional_t<
-            std::is_same_v<typename HeadGrid::continuous_dimension_type, Dim>,
+            std::is_same_v<typename GetCDim<HeadGrid>::type, Dim>,
             HeadGrid,
             typename FindGrid<Dim, ddc::detail::TypeSeq<Grids...>>::type>;
 };
@@ -44,6 +62,15 @@ struct FindGrid<Dim, ddc::detail::TypeSeq<>>
 {
     static_assert(std::is_same_v<Dim, Dim>, "Grid not found");
     using type = void;
+};
+
+template <class CoordType, class IdxRangeType>
+struct FindIdxType;
+
+template <class... Dims, class IdxRangeType>
+struct FindIdxType<Coord<Dims...>, IdxRangeType>
+{
+    using type = Idx<typename FindGrid<Dims, ddc::to_type_seq_t<IdxRangeType>>::type...>;
 };
 
 template <class... TypeSeqs>
@@ -90,21 +117,23 @@ struct GetPermutationParity<
         ddc::detail::TypeSeq<HeadType, TailTypeSeq...>,
         ddc::detail::TypeSeq<HeadType, TailOrderedTypeSeq...>>
 {
-    static_assert(
-            std::is_same_v<
-                    ddc::detail::TypeSeq<HeadType, TailOrderedTypeSeq...>,
-                    typename detail::GetUnique<
-                            ddc::detail::TypeSeq<HeadType, TailOrderedTypeSeq...>>::type>,
-            "Cannot calculate the permutation parity of a type seq with duplicate elements.");
-    static_assert(
-            std::is_same_v<
-                    ddc::detail::TypeSeq<HeadType, TailTypeSeq...>,
-                    typename detail::GetUnique<
-                            ddc::detail::TypeSeq<HeadType, TailTypeSeq...>>::type>,
-            "Cannot calculate the permutation parity of a type seq with duplicate elements.");
-    static constexpr int value = GetPermutationParity<
-            ddc::detail::TypeSeq<TailTypeSeq...>,
-            ddc::detail::TypeSeq<TailOrderedTypeSeq...>>::value;
+private:
+    static constexpr bool contains_duplicate
+            = (!std::is_same_v<
+                      ddc::detail::TypeSeq<HeadType, TailOrderedTypeSeq...>,
+                      typename detail::GetUnique<
+                              ddc::detail::TypeSeq<HeadType, TailOrderedTypeSeq...>>::type>)
+              || (!std::is_same_v<
+                      ddc::detail::TypeSeq<HeadType, TailTypeSeq...>,
+                      typename detail::GetUnique<
+                              ddc::detail::TypeSeq<HeadType, TailTypeSeq...>>::type>);
+
+public:
+    static constexpr int value
+            = contains_duplicate ? 0
+                                 : GetPermutationParity<
+                                         ddc::detail::TypeSeq<TailTypeSeq...>,
+                                         ddc::detail::TypeSeq<TailOrderedTypeSeq...>>::value;
 };
 
 template <class HeadType, class... TailTypeSeq, class OrderedHeadType, class... TailOrderedTypeSeq>
@@ -112,24 +141,26 @@ struct GetPermutationParity<
         ddc::detail::TypeSeq<HeadType, TailTypeSeq...>,
         ddc::detail::TypeSeq<OrderedHeadType, TailOrderedTypeSeq...>>
 {
-    static_assert(
-            std::is_same_v<
-                    ddc::detail::TypeSeq<OrderedHeadType, TailOrderedTypeSeq...>,
-                    typename detail::GetUnique<
-                            ddc::detail::TypeSeq<OrderedHeadType, TailOrderedTypeSeq...>>::type>,
-            "Cannot calculate the permutation parity of a type seq with duplicate elements.");
-    static_assert(
-            std::is_same_v<
-                    ddc::detail::TypeSeq<HeadType, TailTypeSeq...>,
-                    typename detail::GetUnique<
-                            ddc::detail::TypeSeq<HeadType, TailTypeSeq...>>::type>,
-            "Cannot calculate the permutation parity of a type seq with duplicate elements.");
-    static constexpr int value = -GetPermutationParity<
-            ddc::type_seq_replace_t<
-                    ddc::detail::TypeSeq<TailTypeSeq...>,
-                    ddc::detail::TypeSeq<OrderedHeadType>,
-                    ddc::detail::TypeSeq<HeadType>>,
-            ddc::detail::TypeSeq<TailOrderedTypeSeq...>>::value;
+private:
+    static constexpr bool contains_duplicate
+            = (!std::is_same_v<
+                      ddc::detail::TypeSeq<OrderedHeadType, TailOrderedTypeSeq...>,
+                      typename detail::GetUnique<
+                              ddc::detail::TypeSeq<OrderedHeadType, TailOrderedTypeSeq...>>::type>)
+              || (!std::is_same_v<
+                      ddc::detail::TypeSeq<HeadType, TailTypeSeq...>,
+                      typename detail::GetUnique<
+                              ddc::detail::TypeSeq<HeadType, TailTypeSeq...>>::type>);
+
+public:
+    static constexpr int value
+            = contains_duplicate ? 0
+                                 : -GetPermutationParity<
+                                         ddc::type_seq_replace_t<
+                                                 ddc::detail::TypeSeq<TailTypeSeq...>,
+                                                 ddc::detail::TypeSeq<OrderedHeadType>,
+                                                 ddc::detail::TypeSeq<HeadType>>,
+                                         ddc::detail::TypeSeq<TailOrderedTypeSeq...>>::value;
 };
 
 template <>
@@ -203,3 +234,11 @@ constexpr int type_seq_permutation_parity_v
 template <class Element, std::size_t n_elements>
 using type_seq_duplicate_t =
         typename detail::TypeSeqDuplicate<Element, std::make_index_sequence<n_elements>>::type;
+
+/**
+ * @brief Find the type of an index which allows access to a Coordinate of the specified type.
+ * @tparam CoordType The type of the coordinate
+ * @tparam IdxRangeType The type of the index range that the index will come from.
+ */
+template <class CoordType, class IdxRangeType>
+using find_idx_t = typename detail::FindIdxType<CoordType, IdxRangeType>::type;

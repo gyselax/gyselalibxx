@@ -50,11 +50,6 @@ using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         SplineRThetaEvaluatorNullBound>;
 using DiscreteMappingBuilder
         = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
-using DiscreteMappingBuilder_host = DiscreteToCartesianBuilder<
-        X,
-        Y,
-        SplineRThetaBuilder_host,
-        SplineRThetaEvaluatorConstBound_host>;
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
 
 namespace fs = std::filesystem;
@@ -131,42 +126,27 @@ int main(int argc, char** argv)
             to_physical_mapping,
             builder,
             spline_evaluator_extrapol);
-    DiscreteMappingBuilder_host const discrete_mapping_builder_host(
-            Kokkos::DefaultHostExecutionSpace(),
-            to_physical_mapping,
-            builder_host,
-            spline_evaluator_extrapol_host);
     DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
-    DiscreteToCartesian const discrete_mapping_host = discrete_mapping_builder_host();
 
 
-    ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping_host);
+    ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
     IdxRangeBSRTheta const idx_range_bsplinesRTheta = get_spline_idx_range(builder);
 
 
     // --- Time integration method --------------------------------------------------------------------
 #if defined(EULER_METHOD)
-    Euler<FieldMemRTheta<CoordRTheta>,
-          DVectorFieldMemRTheta<X, Y>,
-          Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rtheta);
+    EulerBuilder const time_stepper;
 
 #elif defined(CRANK_NICOLSON_METHOD)
     double const epsilon_CN = 1e-8;
-    CrankNicolson<
-            FieldMemRTheta<CoordRTheta>,
-            DVectorFieldMemRTheta<X, Y>,
-            Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rtheta, 20, epsilon_CN);
+    CrankNicolsonBuilder const time_stepper(20, epsilon_CN);
 
 #elif defined(RK3_METHOD)
-    RK3<FieldMemRTheta<CoordRTheta>,
-        DVectorFieldMemRTheta<X, Y>,
-        Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rtheta);
+    RK3Builder const time_stepper;
 
 #elif defined(RK4_METHOD)
-    RK4<FieldMemRTheta<CoordRTheta>,
-        DVectorFieldMemRTheta<X, Y>,
-        Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rtheta);
+    RK4Builder const time_stepper;
 
 #endif
 
@@ -188,6 +168,7 @@ int main(int argc, char** argv)
     PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, mesh_rtheta);
 
     SplinePolarFootFinder find_feet(
+            mesh_rtheta,
             time_stepper,
             to_physical_mapping,
             to_physical_mapping,

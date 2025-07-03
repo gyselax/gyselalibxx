@@ -50,11 +50,6 @@ using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         SplineRThetaEvaluatorNullBound>;
 using DiscreteMappingBuilder
         = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
-using DiscreteMappingBuilder_host = DiscreteToCartesianBuilder<
-        X,
-        Y,
-        SplineRThetaBuilder_host,
-        SplineRThetaEvaluatorConstBound_host>;
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
 
 } // end namespace
@@ -125,23 +120,15 @@ int main(int argc, char** argv)
             to_physical_mapping,
             builder,
             spline_evaluator_extrapol);
-    DiscreteMappingBuilder_host const discrete_mapping_builder_host(
-            Kokkos::DefaultHostExecutionSpace(),
-            to_physical_mapping,
-            builder_host,
-            spline_evaluator_extrapol_host);
     DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
-    DiscreteToCartesian const discrete_mapping_host = discrete_mapping_builder_host();
 
-    ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping_host);
+    ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
-    IdxRangeBSRTheta const idx_range_bsplinesRTheta = get_spline_idx_range(builder_host);
+    IdxRangeBSRTheta const idx_range_bsplinesRTheta = get_spline_idx_range(builder);
 
 
     // --- Time integration method --------------------------------------------------------------------
-    Euler<FieldMemRTheta<CoordRTheta>,
-          DVectorFieldMemRTheta<X, Y>,
-          Kokkos::DefaultExecutionSpace> const time_stepper(grid);
+    EulerBuilder const time_stepper;
 
 
     // --- Advection operator -------------------------------------------------------------------------
@@ -161,6 +148,7 @@ int main(int argc, char** argv)
     PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, grid);
 
     SplinePolarFootFinder find_feet(
+            grid,
             time_stepper,
             to_physical_mapping,
             to_physical_mapping,
