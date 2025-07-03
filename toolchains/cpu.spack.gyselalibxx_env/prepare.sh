@@ -52,6 +52,7 @@ git clone https://github.com/pdidev/spack.git spack-0.23.1/var/spack/repos/pdi
 spack repo add --scope site spack-0.23.1/var/spack/repos/pdi
 
 spack compiler find
+spack external find
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   COMPILER='apple-clang@14:'
