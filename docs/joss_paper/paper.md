@@ -52,6 +52,7 @@ authors:
 - given-names: Baptiste
   surname: Legouix
   affiliation: 2
+  orcid: 0009-0006-7585-669X
 
 - given-names: Etienne
   surname: Malaboeuf
