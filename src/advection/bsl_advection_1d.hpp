@@ -20,6 +20,7 @@
  * @f$ \partial_t f_s(t,x) + A_{s, x_i} (x') \cdot \partial_{x_i} f_s (t, x) = 0, \qquad x\in \Omega, x'\in\Omega'@f$
  * 
  * with 
+ *
  *  * @f$ f @f$, a function defined on an domain @f$ \Omega @f$; 
  *  * @f$ A @f$, an advection field defined on subdomain @f$ \Omega'\subset \Omega @f$; 
  *  * @f$ x_i @f$, an advection dimension.
