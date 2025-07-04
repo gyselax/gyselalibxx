@@ -663,7 +663,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (Coord&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; const &amp; coord) const<br><em>Convert the</em>  <em>coordinate to the equivalent (x,y) coordinate.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (Coord&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; const &amp; coord) const<br><em>Convert the</em> <span class="arithmatex">\((r, \theta)\)</span> <em>coordinate to the equivalent (x,y) coordinate.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classCircularToCartesian.html"><strong>CircularToCartesian</strong></a> &amp;</td>
@@ -680,10 +680,16 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>The mapping  is defined as follow :</p>
-<p>It and its Jacobian matrix are invertible everywhere except for .</p>
+<p>The mapping <span class="arithmatex">\((r,\theta)\mapsto (x,y)\)</span> is defined as follow :</p>
+<div class="arithmatex">\[x(r,\theta) = r \cos(\theta) + x_0,\]</div>
+<div class="arithmatex">\[y(r,\theta) = r \sin(\theta) + y_0.\]</div>
+<p>It and its Jacobian matrix are invertible everywhere except for <span class="arithmatex">\(r = 0\)</span>.</p>
 <p>The Jacobian matrix coefficients are defined as follow</p>
-<p>and the matrix determinant: . </p>
+<div class="arithmatex">\[J_{11}(r,\theta)  = \cos(\theta)\]</div>
+<div class="arithmatex">\[J_{12}(r,\theta)  = - r \sin(\theta)\]</div>
+<div class="arithmatex">\[J_{21}(r,\theta)  = \sin(\theta)\]</div>
+<div class="arithmatex">\[J_{22}(r,\theta)  = r \cos(\theta)\]</div>
+<p>and the matrix determinant: <span class="arithmatex">\(det(J) = r\)</span>. </p>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-coordarg">typedef CoordArg</h3>
 <p><em>The type of the argument of the function described by this mapping.</em> </p>
@@ -894,7 +900,7 @@ inline KOKKOS_FUNCTION double CircularToCartesian::jacobian_component (
 <hr>
 
 <h3 id="function-operator">function operator()</h3>
-<p><em>Convert the</em>  <em>coordinate to the equivalent (x,y) coordinate.</em></p>
+<p><em>Convert the</em> <span class="arithmatex">\((r, \theta)\)</span> <em>coordinate to the equivalent (x,y) coordinate.</em></p>
 <pre><code class="language-C++">inline KOKKOS_FUNCTION Coord&lt; X , Y &gt; CircularToCartesian::operator() (
     Coord&lt; R , Theta &gt; const &amp; coord
 ) const

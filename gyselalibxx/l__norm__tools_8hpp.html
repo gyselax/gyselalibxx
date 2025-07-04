@@ -703,6 +703,7 @@ double norm_L1 (
     DField&lt; IdxRangeQuad, typename ExecSpace::memory_space &gt; function
 ) 
 </code></pre>
+<div class="arithmatex">\[\int_{\Omega} |f(X)|  dX\]</div>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>exec_space</code> The space on which the function is executed (CPU/GPU). </li>
@@ -722,6 +723,7 @@ double norm_L2 (
     DField&lt; IdxRangeQuad, typename ExecSpace::memory_space &gt; function
 ) 
 </code></pre>
+<div class="arithmatex">\[\sqrt{\int_{\Omega} |f(X)|^2  dX}\]</div>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>exec_space</code> The space on which the function is executed (CPU/GPU). </li>
@@ -739,7 +741,7 @@ KOKKOS_FUNCTION double norm_inf (
     Coord&lt; Tags... &gt; coord
 ) 
 </code></pre>
-<p>For a given vector  , compute .</p>
+<p>For a given vector <span class="arithmatex">\(x\)</span> , compute <span class="arithmatex">\(|Vert x |Vert_{\infty} = \sup_n |x_n|\)</span>.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>coord</code> The given vector.</li>
@@ -755,7 +757,7 @@ KOKKOS_FUNCTION double norm_inf (
     DVector &lt; Tags... &gt; vec
 ) 
 </code></pre>
-<p>For a given vector  , compute .</p>
+<p>For a given vector <span class="arithmatex">\(x\)</span> , compute <span class="arithmatex">\(|Vert x |Vert_{\infty} = \sup_n |x_n|\)</span>.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>vec</code> The given vector.</li>

@@ -647,7 +647,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION Coord&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; const &amp; coord) const<br><em>Convert the coordinate (x,y) to the equivalent</em>  <em>coordinate.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; const &amp; coord) const<br><em>Convert the coordinate (x,y) to the equivalent</em> <span class="arithmatex">\((r, \theta)\)</span> <em>coordinate.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classCartesianToCircular.html"><strong>CartesianToCircular</strong></a> &amp;</td>
@@ -664,10 +664,16 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>The mapping  is defined as follow :</p>
-<p>It and its Jacobian matrix are invertible everywhere except for .</p>
+<p>The mapping <span class="arithmatex">\((x,y)\mapsto (r,\theta)\)</span> is defined as follow :</p>
+<div class="arithmatex">\[r(x,y) = \sqrt (x-x_0)^2+(y-y_0)^2 ,\]</div>
+<div class="arithmatex">\[\theta(x,y) = atan2(\frac{y-y_0}{x-x_0}) .\]</div>
+<p>It and its Jacobian matrix are invertible everywhere except for <span class="arithmatex">\(r = 0\)</span>.</p>
 <p>The Jacobian matrix coefficients are defined as follow</p>
-<p>and the matrix determinant: . </p>
+<div class="arithmatex">\[J_{11}(x,y)  =\frac{x-x_0}{\sqrt{(x-x_0)^2+(y-y_0)^2}}\]</div>
+<div class="arithmatex">\[J_{12}(x,y)  =\frac{y-y_0}{\sqrt{(x-x_0)^2+(y-y_0)^2}}\]</div>
+<div class="arithmatex">\[J_{21}(x,y)  =\frac{-(y-y_0)}{(x-x_0)^2+(y-y_0)^2}\]</div>
+<div class="arithmatex">\[J_{22}(x,y)  =\frac{x-x_0}{(x-x_0)^2+(y-y_0)^2}\]</div>
+<p>and the matrix determinant: <span class="arithmatex">\(det(J) = 1/((x-x_0)^2+(y-y_0)^2)\)</span>. </p>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-coordarg">typedef CoordArg</h3>
 <p><em>The type of the argument of the function described by this mapping.</em> </p>
@@ -824,7 +830,7 @@ inline KOKKOS_INLINE_FUNCTION double CartesianToCircular::jacobian_component (
 <hr>
 
 <h3 id="function-operator">function operator()</h3>
-<p><em>Convert the coordinate (x,y) to the equivalent</em>  <em>coordinate.</em></p>
+<p><em>Convert the coordinate (x,y) to the equivalent</em> <span class="arithmatex">\((r, \theta)\)</span> <em>coordinate.</em></p>
 <pre><code class="language-C++">inline KOKKOS_FUNCTION Coord&lt; R , Theta &gt; CartesianToCircular::operator() (
     Coord&lt; X , Y &gt; const &amp; coord
 ) const

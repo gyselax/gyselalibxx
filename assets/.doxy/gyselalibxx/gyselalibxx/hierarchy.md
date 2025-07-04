@@ -7,7 +7,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**AdvectionFieldFinder**](classAdvectionFieldFinder.md) _Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation._ 
 * **class** [**BarycentricToCartesian**](classBarycentricToCartesian.md) _A class to convert barycentric coordinates to Cartesian coordinates on a triangle._ 
 * **class** [**BslAdvection1D**](classBslAdvection1D.md) _A class which computes the advection along the dimension of interest GridInterest._ 
-* **class** [**BslAdvectionPolar**](classBslAdvectionPolar.md) _Define an advection operator on 2D_  _domain._
+* **class** [**BslAdvectionPolar**](classBslAdvectionPolar.md) _Define an advection operator on 2D_ \((r, \theta)\) _domain._
 * **class** [**IAdvectionSpatial**](classIAdvectionSpatial.md) _A class which provides an advection operator._     
     * **class** [**BslAdvectionSpatial**](classBslAdvectionSpatial.md) _A class which computes the spatial advection along the dimension of interest_ [_**GridX**_](structGridX.md) _. Working for every Cartesian geometry._
 * **class** [**IAdvectionVelocity**](classIAdvectionVelocity.md) _A class which provides an advection operator._     
@@ -47,7 +47,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **class** [**KineticSource**](classKineticSource.md) _A class that describes a source of particles._ 
     * **class** [**KrookSourceAdaptive**](classKrookSourceAdaptive.md) _A class that describes a source of particles._ 
     * **class** [**KrookSourceConstant**](classKrookSourceConstant.md) _A class that describes a source of particles._ 
-* **class** [**CombinedMapping**](classCombinedMapping.md) _A class which describes a mapping which is constructed by combining two mappings. Let us denote Mapping1 as_  _and Mapping2 as_ _then this mapping represents:_ _._
+* **class** [**CombinedMapping**](classCombinedMapping.md) _A class which describes a mapping which is constructed by combining two mappings. Let us denote Mapping1 as_ \(\mathcal{F}\) _and Mapping2 as_\(\mathcal{G}\) _then this mapping represents:_\(\mathcal{F} \circ \mathcal{G}\) _._
 * **class** [**ITimeStepper**](classITimeStepper.md) _The superclass from which all timestepping methods inherit._     
     * **class** [**CrankNicolson**](classCrankNicolson.md) _A class which provides an implementation of a Crank-Nicolson method._ 
     * **class** [**Euler**](classEuler.md) _A class which provides an implementation of an explicit_ [_**Euler**_](classEuler.md) _method._
@@ -61,7 +61,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**DerivFieldCommon**](classDerivFieldCommon.md) 
 * **class** [**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md) _An abstract class which holds a chunk of memory describing a field and its derivatives. This is the superclass for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _and_[_**DerivField**_](classDerivField.md) _._
 * **class** [**DerivFieldMem**](classDerivFieldMem.md) 
-* **class** [**DiocotronDensitySolution**](classDiocotronDensitySolution.md) _The diocotron exact solution of the density_  _._
+* **class** [**DiocotronDensitySolution**](classDiocotronDensitySolution.md) _The diocotron exact solution of the density_ \(\rho\) _._
 * **class** [**DiscreteToCartesian**](classDiscreteToCartesian.md) _A class for describing discrete 2D mappings from the logical domain to the physical domain._ 
 * **class** [**DiscreteToCartesianBuilder**](classDiscreteToCartesianBuilder.md) _A class to create a_ [_**DiscreteToCartesian**_](classDiscreteToCartesian.md) _instance from an analytical mapping. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data._
 * **class** [**EdgeTransformation**](classEdgeTransformation.md) _Transform a coordinate or an index from one edge to the one on the other edge._ 
@@ -93,7 +93,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **class** [**MPITransposeAllToAll**](classMPITransposeAllToAll.md) _A class describing an operator for converting from/to different MPI layouts using AlltoAll._ 
     * **class** [**MPITransposeAllToAll**](classMPITransposeAllToAll.md) _A class describing an operator for converting from/to different MPI layouts using AlltoAll._ 
 * **class** [**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md) 
-* **class** [**IPolarFootFinder**](classIPolarFootFinder.md) _Define a base class for all the time integration methods used to find the foot of a characteristic on a polar domain (a polar domain is a domain defined on the_  _plane)._
+* **class** [**IPolarFootFinder**](classIPolarFootFinder.md) _Define a base class for all the time integration methods used to find the foot of a characteristic on a polar domain (a polar domain is a domain defined on the_ \((r,\theta)\) _plane)._
 * **class** [**IQNSolver**](classIQNSolver.md) _Base class for a Quasi-Neutrality solver._     
     * **class** [**NullQNSolver**](classNullQNSolver.md) _Null operator._ 
     * **class** [**NullQNSolver**](classNullQNSolver.md) _Null operator._ 
@@ -115,7 +115,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**KelvinHelmholtzInstabilityInitialisation**](classKelvinHelmholtzInstabilityInitialisation.md) _Initialise the allfdistribu function._ 
 * **class** [**Lagrange**](classLagrange.md) _A class which implements_ [_**Lagrange**_](classLagrange.md) _polynomials._
 * **class** [**LeviCivitaTensor**](classLeviCivitaTensor.md) 
-* **class** [**LiePoissonBracket**](classLiePoissonBracket.md) _A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is:_  _with_ _the unitary magnetic field, i.e:_ _with_ _the jacobian of the system,_ _the covariant components of b and_ _the Levi-Civita symbol._
+* **class** [**LiePoissonBracket**](classLiePoissonBracket.md) _A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is:_ \(\{F, G\} = b\dot(\nabla F \cross \nabla G)\) _with_\(b= \mathbf{B} / B\) _the unitary magnetic field, i.e:_\(\{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k\) _with_\({\cal J}_{\rm x}\) _the jacobian of the system,_\(b_k\) _the covariant components of b and_\(\epsilon^{ijk}\) _the Levi-Civita symbol._
 * **class** [**MatchingIdxSlice**](classMatchingIdxSlice.md) _Store the conforming indexes of each patch of a given interface._ 
 * **class** [**Matrix**](classMatrix.md) _The super class from which matrix classes should inherit. This class is used to solve matrix equations._     
     * **class** [**Matrix\_Banded**](classMatrix__Banded.md) _A matrix class representing a banded matrix._ 
@@ -154,7 +154,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**SplineBuilder2DCache**](classSplineBuilder2DCache.md) _A class that stores spline builder coefficients and recomputes them when required._ 
 * **class** [**TensorCommon**](classTensorCommon.md) _A superclass for_ [_**Tensor**_](classTensor.md) _calculations._[_**Tensor**_](classTensor.md) _classes containing data will inherit from this class. The class_[_**Tensor**_](classTensor.md) _will represent most Tensors but other subclasses may be necessary (e.g. to access a Vector in a_[_**VectorField**_](classVectorField.md) _)._    
     * **class** [**Tensor**](classTensor.md) _A class representing a_ [_**Tensor**_](classTensor.md) _._
-* **class** [**ToroidalToCylindrical**](classToroidalToCylindrical.md) _A class describing a coordinate change from a toroidal system of coordinates to a cylindrical system of coordinates. The toroidal coordinates are described by a polar plane_  _and a perpendicular dimension_ _. The cylindrical coordinates are_ _._ _describe a Cartesian slice._ _are therefore defined from this slice with a 2D coordinate change operator._ _is chosen to be equal to_ _to preserve the orientation of the axes (following the right-hand rule)._
+* **class** [**ToroidalToCylindrical**](classToroidalToCylindrical.md) _A class describing a coordinate change from a toroidal system of coordinates to a cylindrical system of coordinates. The toroidal coordinates are described by a polar plane_ \((\rho, \theta)\) _and a perpendicular dimension_\(\phi\) _. The cylindrical coordinates are_\((R, Z, \zeta)\) _._\((R, Z)\) _describe a Cartesian slice._\((\rho, \theta)\) _are therefore defined from this slice with a 2D coordinate change operator._\(\zeta\) _is chosen to be equal to_\(-\phi\) _to preserve the orientation of the axes (following the right-hand rule)._
 * **class** [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md) _A class which evaluates the triangular Bernstein polynomials._ 
 * **class** [**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md) 
 * **class** [**VectorFieldCommon**](classVectorFieldCommon.md) 
@@ -162,7 +162,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**VortexMergerEquilibria**](classVortexMergerEquilibria.md) _Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates._ 
 * **class** [**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md) _Helper class for the initialisation of the mesh of interpolation points._ 
 * **class** [**tensor\_tools::IndexedTensor**](classtensor__tools_1_1IndexedTensor.md) _A class to capture the description of a tensor indexed at a specific component. This class should not be explicitly declared in user code. It is the output of a call to the index&lt;...&gt; function and is an input to the tensor\_mul function._ 
-* **class** [**tensor\_tools::TensorIndexElement**](classtensor__tools_1_1TensorIndexElement.md) _A class describing an index of a tensor. For example for a 2x2 metric tensor on an (x,y) plane the element_  _would have the index TensorIndexElement&lt;TensorIndexSetXY, X, X&gt;._
+* **class** [**tensor\_tools::TensorIndexElement**](classtensor__tools_1_1TensorIndexElement.md) _A class describing an index of a tensor. For example for a 2x2 metric tensor on an (x,y) plane the element_ \(g_{xx}\) _would have the index TensorIndexElement&lt;TensorIndexSetXY, X, X&gt;._
 * **struct** [**ConstPolarSpline**](structConstPolarSpline.md) _A structure containing the two ConstFields necessary to define a constant reference to a spline on a set of polar basis splines._ 
 * **struct** [**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md) _Define constant extrapolation rule for onion shape geometries. Struct useful for the MultipatchSplineEvaluator types._  __
 * **struct** [**Edge**](structEdge.md) _Define an edge of a given patch._ 
@@ -175,7 +175,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**IdxRangeToSlice**](structIdxRangeToSlice.md) _A class to create a IdxRangeSlice type from a TypeSeq._ 
 * **struct** [**Interface**](structInterface.md) _Represent a simple sticking of two edges._ 
 * **struct** [**MPIDim**](structMPIDim.md) _An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered information will be sent to or where the gathered information will be collected from._ 
-* **struct** [**Mu**](structMu.md) _Define non periodic magnetic momentum_  _._
+* **struct** [**Mu**](structMu.md) _Define non periodic magnetic momentum_ \(\mu\) _._
 * **struct** [**MultipatchSplineBuilder2D::Build\_BuilderType**](structMultipatchSplineBuilder2D_1_1Build__BuilderType.md) 
 * **struct** [**MultipatchSplineBuilder2D::Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;**](structMultipatchSplineBuilder2D_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_388990a8744187d12e0f612652c86727.md) 
 * **struct** [**MultipatchSplineBuilder::Build\_BuilderType**](structMultipatchSplineBuilder_1_1Build__BuilderType.md) 
@@ -209,7 +209,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**T**](structT.md) _A class which describes the real space in the temporal direction._ 
 * **struct** [**Theta**](structTheta.md) _Define periodic real contravariant_ [_**Theta**_](structTheta.md) _dimension._
 * **struct** [**Theta\_cov**](structTheta__cov.md) _Define periodic real covariant_ [_**Theta**_](structTheta.md) _dimension._
-* **struct** [**Vpar**](structVpar.md) _Define non periodic parallel velocity_  _._
+* **struct** [**Vpar**](structVpar.md) _Define non periodic parallel velocity_ \(v_\parallel\) _._
 * **struct** [**Vr**](structVr.md) _Define non periodic real_ [_**R**_](structR.md) _velocity dimension._
 * **struct** [**Vtheta**](structVtheta.md) _Define periodic real_ [_**Theta**_](structTheta.md) _velocity dimension._
 * **struct** [**Vx**](structVx.md) _Define non periodic real_ [_**X**_](structX.md) _velocity dimension._

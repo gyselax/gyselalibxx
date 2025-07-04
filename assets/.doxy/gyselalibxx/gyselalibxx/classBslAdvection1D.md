@@ -92,17 +92,22 @@ This operator solves the following equation type
 
 
 
+\[\partial_t f_s(t,x) + A_{s, x_i} (x') \cdot \partial_{x_i} f_s (t, x) = 0, \qquad x\in \Omega, x'\in\Omega'\]
+
 
 
 with
-* , a function defined on an domain ;
-* , an advection field defined on subdomain ;
-* , an advection dimension.
+
+
+
+* \(f\), a function defined on an domain \(\Omega\);
+* \(A\), an advection field defined on subdomain \(\Omega'\subset \Omega\);
+* \(x_i\), an advection dimension.
 
 
 
 
-The characteristic equation is solved on the advection domain . Then the feet on  are computed from the characteristic feet on  and the function  is interpolated at the feet in .
+The characteristic equation is solved on the advection domain \(\Omega'\). Then the feet on \(\Omega\) are computed from the characteristic feet on \(\Omega'\) and the function \(f\) is interpolated at the feet in \(\Omega\).
 
 
 The characteristic equation is solved using a time integration method ([**ITimeStepper**](classITimeStepper.md)).
@@ -113,9 +118,9 @@ The characteristic equation is solved using a time integration method ([**ITimeS
 **Template parameters:**
 
 
-* `GridInterest` The dimension along which the advection is computed. It refers to the dimension of  in the equation. 
-* `IdxRangeAdvection` The index range for the interpolation points defined on  where the characteristic equation is solved.  also refers to the domain of the advection field. It had to also be defined on the GridInterest for the time integration method. 
-* `IdxRangeFunction` The index range of  where allfdistribu is defined. 
+* `GridInterest` The dimension along which the advection is computed. It refers to the dimension of \(x_i\) in the equation. 
+* `IdxRangeAdvection` The index range for the interpolation points defined on \(\Omega'\) where the characteristic equation is solved. \(\Omega'\) also refers to the domain of the advection field. It had to also be defined on the GridInterest for the time integration method. 
+* `IdxRangeFunction` The index range of \(\Omega\) where allfdistribu is defined. 
 * `AdvectionFieldBuilder` The type of the spline builder for the advection field (see SplineBuilder). 
 * `AdvectionFieldEvaluator` The type of the spline evaluator for the advection field (see SplineEvaluator). 
  

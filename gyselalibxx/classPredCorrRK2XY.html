@@ -579,18 +579,18 @@
 <h2 id="detailed-description">Detailed Description</h2>
 <p>It solves in time the following guiding-centre equations system:</p>
 <ul>
-<li>,</li>
-<li>,</li>
-<li>.</li>
+<li><span class="arithmatex">\(-\Delta \phi = f\)</span>,</li>
+<li><span class="arithmatex">\(E = - \nabla \phi\)</span>,</li>
+<li><span class="arithmatex">\(\partial_t f - E_y \partial_x f + E_x \partial_y f= 0\)</span>.</li>
 </ul>
 <p>This method is mainly a Runge-Kutta 2 method:</p>
-<p>for ,</p>
+<p>for <span class="arithmatex">\(n \geq 0\)</span>,</p>
 <p>First, it advects on a half time step:
-* 1./2. From , it computes  with a <a href="classFFTPoissonSolver.html"><strong>FFTPoissonSolver</strong></a>;
-* 3. From  and , it computes  with a <a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a> on ;</p>
+* 1./2. From <span class="arithmatex">\(f^n\)</span>, it computes <span class="arithmatex">\(E^n\)</span> with a <a href="classFFTPoissonSolver.html"><strong>FFTPoissonSolver</strong></a>;
+* 3. From <span class="arithmatex">\(f^n\)</span> and <span class="arithmatex">\(E^n\)</span>, it computes <span class="arithmatex">\(f^{n+1/2}\)</span> with a <a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a> on <span class="arithmatex">\(\frac{dt}{2}\)</span>;</p>
 <p>Secondly, it advects on a full time step:
-* 4./5. From , it computes  with a <a href="classFFTPoissonSolver.html"><strong>FFTPoissonSolver</strong></a>;
-* 6. From  and , it computes  with a BslAdvectionRP on .</p>
+* 4./5. From <span class="arithmatex">\(f^{n+1/2}\)</span>, it computes <span class="arithmatex">\(E^{n+1/2}\)</span> with a <a href="classFFTPoissonSolver.html"><strong>FFTPoissonSolver</strong></a>;
+* 6. From <span class="arithmatex">\(f^n\)</span> and <span class="arithmatex">\(E^{n+1/2}\)</span>, it computes <span class="arithmatex">\(f^{n+1}\)</span> with a BslAdvectionRP on <span class="arithmatex">\(dt\)</span>.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>PoissonSolver</code> Type of the Poisson solver applied in the method. </li>
@@ -612,9 +612,9 @@
 <p><code>poisson_solver</code> Poisson solver also computing the electric field. </p>
 </li>
 <li>
-<p><code>advection_x</code> 1D advection operator along  direction. </p>
+<p><code>advection_x</code> 1D advection operator along <span class="arithmatex">\(x\)</span> direction. </p>
 </li>
-<li><code>advection_y</code> 1D advection operator along  direction. </li>
+<li><code>advection_y</code> 1D advection operator along <span class="arithmatex">\(y\)</span> direction. </li>
 </ul>
 <hr>
 
@@ -629,7 +629,7 @@
 <p>Along the simulation, the data are saved in an output folder.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>allfdistribu</code> Initial function . </li>
+<li><code>allfdistribu</code> Initial function <span class="arithmatex">\(f (0, x, y)\)</span>. </li>
 <li><code>dt</code> Time step. </li>
 <li><code>nbiter</code> Number of time steps. </li>
 </ul>

@@ -671,7 +671,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION <a href="classCylindricalToCartesian.html#typedef-coordresult"><strong>CoordResult</strong></a></td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classCylindricalToCartesian.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Convert the</em>  <em>coordinate to the equivalent (x,y) coordinate.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classCylindricalToCartesian.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Convert the</em> <span class="arithmatex">\((r, \zeta)\)</span> <em>coordinate to the equivalent (x,y) coordinate.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classCylindricalToCartesian.html"><strong>CylindricalToCartesian</strong></a> &amp;</td>
@@ -688,10 +688,22 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>The mapping  is defined as follow :</p>
-<p>It and its Jacobian matrix are invertible everywhere except for .</p>
+<p>The mapping <span class="arithmatex">\((R, Z, \zeta)\mapsto (x,y,z)\)</span> is defined as follow :</p>
+<div class="arithmatex">\[x(R, Z, \zeta) = R \cos(\zeta),\]</div>
+<div class="arithmatex">\[y(R, Z, \zeta) = R \sin(\zeta).\]</div>
+<div class="arithmatex">\[z(R, Z, \zeta) = z.\]</div>
+<p>It and its Jacobian matrix are invertible everywhere except for <span class="arithmatex">\(R = 0\)</span>.</p>
 <p>The Jacobian matrix coefficients are defined as follow</p>
-<p>and the matrix determinant: . </p>
+<div class="arithmatex">\[J^x_{\;R}(R, Z, \zeta) = \cos(\zeta)\]</div>
+<div class="arithmatex">\[J^x_{\;Z}(R, Z, \zeta) = 0\]</div>
+<div class="arithmatex">\[J^x_{\;\zeta}(R, Z, \zeta) = - R \sin(\zeta)\]</div>
+<div class="arithmatex">\[J^y_{\;R}(R, Z, \zeta) = \sin(\zeta)\]</div>
+<div class="arithmatex">\[J^y_{\;Z}(R, Z, \zeta) = 0\]</div>
+<div class="arithmatex">\[J^y_{\;\zeta}(R, Z, \zeta) = R \cos(\zeta)\]</div>
+<div class="arithmatex">\[J^z_{\;R}(R, Z, \zeta) = 0\]</div>
+<div class="arithmatex">\[J^z_{\;Z}(R, Z, \zeta) = 1\]</div>
+<div class="arithmatex">\[J^z_{\;\zeta}(R, Z, \zeta) = 0\]</div>
+<p>and the matrix determinant: <span class="arithmatex">\(\det(J) = -R\)</span>. </p>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-coordarg">typedef CoordArg</h3>
 <p><em>The type of the argument of the function described by this mapping.</em> </p>
@@ -899,7 +911,7 @@ inline KOKKOS_FUNCTION double CylindricalToCartesian::jacobian_component (
 <hr>
 
 <h3 id="function-operator">function operator()</h3>
-<p><em>Convert the</em>  <em>coordinate to the equivalent (x,y) coordinate.</em></p>
+<p><em>Convert the</em> <span class="arithmatex">\((r, \zeta)\)</span> <em>coordinate to the equivalent (x,y) coordinate.</em></p>
 <pre><code class="language-C++">inline KOKKOS_FUNCTION CoordResult CylindricalToCartesian::operator() (
     CoordArg const &amp; coord
 ) const

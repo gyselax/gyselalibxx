@@ -567,7 +567,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (DFieldXY allfdistribu, DFieldXY allfdistribu_equilibrium) <br><em>Initialise</em>  <em>and</em> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (DFieldXY allfdistribu, DFieldXY allfdistribu_equilibrium) <br><em>Initialise</em> <span class="arithmatex">\(f_{eq}\)</span> <em>and</em><span class="arithmatex">\(f\)</span> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
@@ -576,9 +576,10 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>Set the allfdistribu at </p>
-<p>and ,</p>
-<p>with  an amplitude of perturbation and  mode equal to  divided by the length of the index range on . </p>
+<p>Set the allfdistribu at 
+[f_{eq}(x, y) = \sin(y)]</p>
+<p>and <span class="arithmatex">\(f_0(x, y) = f_{eq}(x, y) + \varepsilon \cos(kx)\)</span>,</p>
+<p>with <span class="arithmatex">\(\varepsilon\)</span> an amplitude of perturbation and <span class="arithmatex">\(k\)</span> mode equal to <span class="arithmatex">\(2\pi\)</span> divided by the length of the index range on <span class="arithmatex">\(x\)</span>. </p>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-kelvinhelmholtzinstabilityinitialisation">function KelvinHelmholtzInstabilityInitialisation</h3>
 <p><em>Instantiate the initializer.</em> </p>
@@ -589,13 +590,13 @@
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>epsilon</code> , the amplitude of perturbation. </li>
-<li><code>mode_k</code> , the perturbation mode. </li>
+<li><code>epsilon</code> <span class="arithmatex">\(\varepsilon\)</span>, the amplitude of perturbation. </li>
+<li><code>mode_k</code> <span class="arithmatex">\(k\)</span>, the perturbation mode. </li>
 </ul>
 <hr>
 
 <h3 id="function-operator">function operator()</h3>
-<p><em>Initialise</em>  <em>and</em> <em>.</em></p>
+<p><em>Initialise</em> <span class="arithmatex">\(f_{eq}\)</span> <em>and</em><span class="arithmatex">\(f\)</span> <em>.</em></p>
 <pre><code class="language-C++">inline void KelvinHelmholtzInstabilityInitialisation::operator() (
     DFieldXY allfdistribu,
     DFieldXY allfdistribu_equilibrium
@@ -603,8 +604,8 @@
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>allfdistribu</code> Field referring to the  function. </li>
-<li><code>allfdistribu_equilibrium</code> Field referring to the  function. </li>
+<li><code>allfdistribu</code> Field referring to the <span class="arithmatex">\(f\)</span> function. </li>
+<li><code>allfdistribu_equilibrium</code> Field referring to the <span class="arithmatex">\(f_{eq}\)</span> function. </li>
 </ul>
 <hr>
 

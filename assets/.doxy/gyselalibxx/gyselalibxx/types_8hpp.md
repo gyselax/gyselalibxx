@@ -39,7 +39,7 @@
 | ---: | :--- |
 | typedef typename Patch::BSplines1 | [**BSplines1OnPatch**](#typedef-bsplines1onpatch)  <br>_Type for_ [_**MultipatchType**_](classMultipatchType.md) _: The BSplines on the first of the_[_**Patch**_](structPatch.md) _'s logical dimensions._ |
 | typedef typename Patch::BSplines2 | [**BSplines2OnPatch**](#typedef-bsplines2onpatch)  <br>_Type for_ [_**MultipatchType**_](classMultipatchType.md) _: The BSplines on the second of the_[_**Patch**_](structPatch.md) _'s logical dimensions._ |
-| typedef DConstField&lt; IdxRange&lt; ddc::Deriv&lt; typename Patch::Dim1 &gt;, ddc::Deriv&lt; typename Patch::Dim2 &gt; &gt; &gt; | [**ConstDeriv12\_OnPatch\_2D**](#typedef-constderiv12_onpatch_2d)  <br>_Type for_ [_**MultipatchType**_](classMultipatchType.md) _: A constant field of the derivatives_ _defined on the index ranges of valid n and m._ |
+| typedef DConstField&lt; IdxRange&lt; ddc::Deriv&lt; typename Patch::Dim1 &gt;, ddc::Deriv&lt; typename Patch::Dim2 &gt; &gt; &gt; | [**ConstDeriv12\_OnPatch\_2D**](#typedef-constderiv12_onpatch_2d)  <br>_Type for_ [_**MultipatchType**_](classMultipatchType.md) _: A constant field of the derivatives_\(\partial_1^(n)\partial_2^(m) f(x)\) _defined on the index ranges of valid n and m._ |
 | typedef DConstField&lt; IdxRange&lt; ddc::Deriv&lt; typename Patch::Dim1 &gt;, typename Patch::Grid2 &gt; &gt; | [**ConstDeriv1\_OnPatch\_2D**](#typedef-constderiv1_onpatch_2d)  <br>_Type for_ [_**MultipatchType**_](classMultipatchType.md) _: A constant field of the n-th derivatives in the direction of_[_**Patch**_](structPatch.md) _'s first logical grid defined on the index range of n and the_[_**Patch**_](structPatch.md) _'s second logical grid._ |
 | typedef DConstField&lt; IdxRange&lt; typename Patch::Grid1, ddc::Deriv&lt; typename Patch::Dim2 &gt; &gt; &gt; | [**ConstDeriv2\_OnPatch\_2D**](#typedef-constderiv2_onpatch_2d)  <br>_Type for_ [_**MultipatchType**_](classMultipatchType.md) _: A constant field of the n-th derivatives in the direction of_[_**Patch**_](structPatch.md) _'s second logical grid defined on the index range of n and the_[_**Patch**_](structPatch.md) _'s first logical grid._ |
 | typedef DConstField&lt; typename Patch::IdxRangeBS1 &gt; | [**ConstSplineCoeff1OnPatch\_1D**](#typedef-constsplinecoeff1onpatch_1d)  <br>_Type for_ [_**MultipatchType**_](classMultipatchType.md) _: A field of spline coefficients for a non-batched spline defined on the first of the_[_**Patch**_](structPatch.md) _'s logical dimensions._ |
@@ -152,7 +152,7 @@ using BSplines2OnPatch =  typename Patch::BSplines2;
 
 ### typedef ConstDeriv12\_OnPatch\_2D 
 
-_Type for_ [_**MultipatchType**_](classMultipatchType.md) _: A constant field of the derivatives_ _defined on the index ranges of valid n and m._
+_Type for_ [_**MultipatchType**_](classMultipatchType.md) _: A constant field of the derivatives_\(\partial_1^(n)\partial_2^(m) f(x)\) _defined on the index ranges of valid n and m._
 ```C++
 using ConstDeriv12_OnPatch_2D =  DConstField<IdxRange<ddc::Deriv<typename Patch::Dim1>, ddc::Deriv<typename Patch::Dim2> >>;
 ```

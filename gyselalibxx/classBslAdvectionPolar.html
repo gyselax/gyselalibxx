@@ -549,7 +549,7 @@
                 <div><h1 id="class-bsladvectionpolar">Class BslAdvectionPolar</h1>
 <p><strong>template &lt;class FootFinder, class LogicalToPhysicalMapping, class InterpolatorPolar&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a></p>
-<p><em>Define an advection operator on 2D</em>  <em>domain.</em><a href="#detailed-description">More...</a></p>
+<p><em>Define an advection operator on 2D</em> <span class="arithmatex">\((r, \theta)\)</span> <em>domain.</em><a href="#detailed-description">More...</a></p>
 <ul>
 <li><code>#include &lt;bsl_advection_polar.hpp&gt;</code></li>
 </ul>
@@ -582,11 +582,14 @@
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
 <p>The advection operator uses a backward semi-Lagrangian method. The method is based on the property that the solution is constant along the characteristics.</p>
-<p>For the following equation: </p>
-<p>we write the characteristics: </p>
-<p>Then the property gives us: </p>
-<p>So the first step of the advection operator is to compute the feet of the characteristics  for each mesh point .</p>
-<p>For the second step, we interpolate the function at the computed feet of the characteristics, and obtain the function at the next time step: .</p>
+<p>For the following equation: 
+[\partial_t f(t,x) + A(t, x) \cdot \nabla_x f(t,x) = 0,]</p>
+<p>we write the characteristics: 
+[\partial_t X(t; s, x) = A(t, X(t; s, x)), \qquad \text{ with } X(s; s, x) = x.]</p>
+<p>Then the property gives us: 
+[f(t, x) = f(0, X(t; 0, x)), \quad \forall t.]</p>
+<p>So the first step of the advection operator is to compute the feet of the characteristics <span class="arithmatex">\(X(t; t+\Delta t, x_i)\)</span> for each mesh point <span class="arithmatex">\(x_i\)</span>.</p>
+<p>For the second step, we interpolate the function at the computed feet of the characteristics, and obtain the function at the next time step: <span class="arithmatex">\(f(t + \Delta t, x) = f(t, X(t; t+\Delta, x))\)</span>.</p>
 <p>Different time integration methods are implemented to solve the equation of the characteristics. They are defined in the <a href="classIPolarFootFinder.html"><strong>IPolarFootFinder</strong></a> class.</p>
 <p>The feet can be advected on different domains (physical domain or pseudo-physical domain) which are determined in the <a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a> operator.</p>
 <p>The interpolation of the function is always done in the logical domain, where the B-splines are defined.</p>

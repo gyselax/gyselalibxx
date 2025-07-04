@@ -191,10 +191,10 @@ See [ITimeStepper](classITimeStepper.md)
 A class which provides an implementation of an explicit [**Euler**](classEuler.md) method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. The values which evolve are defined on an index range.
 
 
-For the following ODE : ,
+For the following ODE : \(\partial_t y(t) = f(t, y(t))\),
 
 
-the explicit [**Euler**](classEuler.md) method is given by : .
+the explicit [**Euler**](classEuler.md) method is given by : \(y^{n+1} =  y^{n} + dt f(t^{n}, y^{n})\).
 
 
 The method is order 1. 

@@ -74,7 +74,7 @@ _A class for describing discrete 2D mappings from the logical domain to the phys
 |   | [**DiscreteToCartesian**](#function-discretetocartesian) (SplineType curvilinear\_to\_x, SplineType curvilinear\_to\_y, SplineEvaluator const & evaluator, IdxRangeRTheta idx\_range\_singular\_point) <br>_Instantiate a_ [_**DiscreteToCartesian**_](classDiscreteToCartesian.md) _from the coefficients of 2D splines approximating the mapping._ |
 |  KOKKOS\_INLINE\_FUNCTION const Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**control\_point**](#function-control_point) (Idx&lt; [**BSplineR**](classDiscreteToCartesian.md#typedef-bspliner), [**BSplineTheta**](classDiscreteToCartesian.md#typedef-bsplinetheta) &gt; const & el) const<br>_Get a control point of the mapping on B-splines._  |
 |  void | [**control\_points**](#function-control_points) (ExecSpace exec\_space, Field&lt; Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, IdxRange&lt; [**BSplineR**](classDiscreteToCartesian.md#typedef-bspliner), [**BSplineTheta**](classDiscreteToCartesian.md#typedef-bsplinetheta) &gt;, MemorySpace &gt; pts) const<br>_Get a set of control points of the mapping on B-splines._  |
-|  KOKKOS\_INLINE\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, VectorIndexSet&lt; [**R\_cov**](classDiscreteToCartesian.md#typedef-r_cov), [**Theta\_cov**](classDiscreteToCartesian.md#typedef-theta_cov) &gt; &gt; | [**first\_order\_jacobian\_matrix\_r\_rtheta**](#function-first_order_jacobian_matrix_r_rtheta) (Coord&lt; [**curvilinear\_tag\_r**](classDiscreteToCartesian.md#typedef-curvilinear_tag_r), [**curvilinear\_tag\_theta**](classDiscreteToCartesian.md#typedef-curvilinear_tag_theta) &gt; const & coord) const<br>_Get the first order expansion of the Jacobian matrix with the theta component divided by r. The expansion is carried out around_  _. The returned matrix_ _is defined as:_ __ __ __ _._ |
+|  KOKKOS\_INLINE\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, VectorIndexSet&lt; [**R\_cov**](classDiscreteToCartesian.md#typedef-r_cov), [**Theta\_cov**](classDiscreteToCartesian.md#typedef-theta_cov) &gt; &gt; | [**first\_order\_jacobian\_matrix\_r\_rtheta**](#function-first_order_jacobian_matrix_r_rtheta) (Coord&lt; [**curvilinear\_tag\_r**](classDiscreteToCartesian.md#typedef-curvilinear_tag_r), [**curvilinear\_tag\_theta**](classDiscreteToCartesian.md#typedef-curvilinear_tag_theta) &gt; const & coord) const<br>_Get the first order expansion of the Jacobian matrix with the theta component divided by r. The expansion is carried out around_ \(r=0\) _. The returned matrix_\(J\) _is defined as:_\(J_{00} = \frac{\partial x}{\partial r}(r, \theta)\) __\(J_{01} = \frac{1}{r} \frac{\partial x}{\partial \theta}(r, \theta) + O(r^2) = \frac{\partial^2 x}{\partial r \partial \theta}(0, \theta)\) __\(J_{10} = \frac{\partial y}{\partial r}(r, \theta)\) __\(J_{11} = \frac{1}{r} \frac{\partial y}{\partial \theta}(r, \theta) + O(r^2) = \frac{\partial^2 y}{\partial r \partial \theta}(0, \theta)\) _._ |
 |  KOKKOS\_INLINE\_FUNCTION IdxRangeRTheta | [**idx\_range\_singular\_point**](#function-idx_range_singular_point) () const<br>_Get the index range describing the points which should be used to evaluate functions at the central point._  |
 |  KOKKOS\_FUNCTION double | [**jacobian**](#function-jacobian) (Coord&lt; [**curvilinear\_tag\_r**](classDiscreteToCartesian.md#typedef-curvilinear_tag_r), [**curvilinear\_tag\_theta**](classDiscreteToCartesian.md#typedef-curvilinear_tag_theta) &gt; const & coord) const<br>_Compute the Jacobian, the determinant of the Jacobian matrix of the mapping._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |
@@ -117,8 +117,12 @@ The mapping describe here is only defined on a grid. The [**DiscreteToCartesian*
 
 
 
+\[x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta),\]
 
 
+
+
+\[y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta).\]
 
 
 
@@ -329,7 +333,7 @@ inline DiscreteToCartesian::DiscreteToCartesian (
 
 
 
-A discrete mapping is a mapping whose values are known only at the mesh points of the grid. To interpolate the mapping, we use B-splines. The [**DiscreteToCartesian**](classDiscreteToCartesian.md) mapping is initialised from the coefficients in front of the basis splines which arise when we approximate the functions , and  (with  and  the physical dimensions in the logical domain) with Splines (using SplineBuilder2D). Then to interpolate the mapping, we will evaluate the decomposed functions on B-splines (see DiscreteToCartesian::operator()).
+A discrete mapping is a mapping whose values are known only at the mesh points of the grid. To interpolate the mapping, we use B-splines. The [**DiscreteToCartesian**](classDiscreteToCartesian.md) mapping is initialised from the coefficients in front of the basis splines which arise when we approximate the functions \(x(r,\theta)\), and \(y(r,\theta)\) (with \(x\) and \(y\) the physical dimensions in the logical domain) with Splines (using SplineBuilder2D). Then to interpolate the mapping, we will evaluate the decomposed functions on B-splines (see DiscreteToCartesian::operator()).
 
 
 Here, the evaluator is given as input.
@@ -374,19 +378,19 @@ inline KOKKOS_INLINE_FUNCTION const Coord< X , Y > DiscreteToCartesian::control_
 
 
 
-The mapping  decomposed on B-splines can be identified by its control points  where  and  are the B-splines coefficients:
+The mapping \((r,\theta) \mapsto (x,y)\) decomposed on B-splines can be identified by its control points \(\{(c_{x,k}, c_{y,k})\}_{k}\) where \(c_{x,k}\) and \(c_{y,k}\) are the B-splines coefficients:
 
 
-,
+\(x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k(r,\theta)\),
 
 
-,
+\(y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k(r,\theta)\),
 
 
-where  is the number of B-splines.
+where \(N_r\times N_{\theta}\) is the number of B-splines.
 
 
-The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points  are equal to the pole  where .
+The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points \(\{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}}\) are equal to the pole \((c_{x,k}, c_{y,k}) = (x_0,y_0) , \ \forall k = 0, ..., N_{\theta}-1\) where \(x(0,\theta), y(0,\theta) = (x_0,y_0) \ \forall \theta\).
 
 
 
@@ -431,19 +435,19 @@ inline void DiscreteToCartesian::control_points (
 
 
 
-The mapping  decomposed on B-splines can be identified by its control points  where  and  are the B-splines coefficients:
+The mapping \((r,\theta) \mapsto (x,y)\) decomposed on B-splines can be identified by its control points \(\{(c_{x,k}, c_{y,k})\}_{k}\) where \(c_{x,k}\) and \(c_{y,k}\) are the B-splines coefficients:
 
 
-,
+\(x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k(r,\theta)\),
 
 
-,
+\(y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k(r,\theta)\),
 
 
-where  is the number of B-splines.
+where \(N_r\times N_{\theta}\) is the number of B-splines.
 
 
-The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points  are equal to the pole  where .
+The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points \(\{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}}\) are equal to the pole \((c_{x,k}, c_{y,k}) = (x_0,y_0) , \ \forall k = 0, ..., N_{\theta}-1\) where \(x(0,\theta), y(0,\theta) = (x_0,y_0) \ \forall \theta\).
 
 
 
@@ -471,7 +475,7 @@ The control points can be obtained by interpolating the mapping on interpolation
 
 ### function first\_order\_jacobian\_matrix\_r\_rtheta 
 
-_Get the first order expansion of the Jacobian matrix with the theta component divided by r. The expansion is carried out around_  _. The returned matrix_ _is defined as:_ __ __ __ _._
+_Get the first order expansion of the Jacobian matrix with the theta component divided by r. The expansion is carried out around_ \(r=0\) _. The returned matrix_\(J\) _is defined as:_\(J_{00} = \frac{\partial x}{\partial r}(r, \theta)\) __\(J_{01} = \frac{1}{r} \frac{\partial x}{\partial \theta}(r, \theta) + O(r^2) = \frac{\partial^2 x}{\partial r \partial \theta}(0, \theta)\) __\(J_{10} = \frac{\partial y}{\partial r}(r, \theta)\) __\(J_{11} = \frac{1}{r} \frac{\partial y}{\partial \theta}(r, \theta) + O(r^2) = \frac{\partial^2 y}{\partial r \partial \theta}(0, \theta)\) _._
 ```C++
 inline KOKKOS_INLINE_FUNCTION DTensor < VectorIndexSet< X , Y >, VectorIndexSet< R_cov , Theta_cov > > DiscreteToCartesian::first_order_jacobian_matrix_r_rtheta (
     Coord< curvilinear_tag_r , curvilinear_tag_theta > const & coord
@@ -574,10 +578,10 @@ inline KOKKOS_INLINE_FUNCTION double DiscreteToCartesian::jacobian_component (
 
 
 
-For a mapping given by , with  the curvilinear coordinates and  the Cartesian coordinates, the (i,j) coefficient of the Jacobian matrix is given by .
+For a mapping given by \(\mathcal{F} : {q_i}\mapsto {x_i}\), with \({q_i}\) the curvilinear coordinates and \({x_i}\) the Cartesian coordinates, the (i,j) coefficient of the Jacobian matrix is given by \(J^i_j\frac{\partial x_i}{\partial q_j}\).
 
 
-As the mapping is decomposed on B-splines, it means it computes the derivatives of B-splines  (the derivatives are implemented in SplineEvaluator2D).
+As the mapping is decomposed on B-splines, it means it computes the derivatives of B-splines \(\frac{\partial x_i}{\partial q_j} (r,\theta)= \sum_k c_{x_i,k} \frac{\partial B_k}{\partial q_j}(r,\theta)\) (the derivatives are implemented in SplineEvaluator2D).
 
 
 

@@ -709,7 +709,7 @@ std::array<internal_mdspan_type, n_fields> DerivFieldCommon< FieldType, IdxRange
 
 
 
-The fields which contain the values have different index ranges to the fields containing derivatives so a DDC object cannot be used directly. E.g. for a 2D field ([**X**](structX.md),[**Y**](structY.md)) with derivatives provided in both directions the elements of internal\_fields have the type : DFieldMem&lt;IdxRange&lt;Deriv&lt;IDimX&gt;, Deriv&lt;IDimY&gt;, IDimX, IDimY&gt; The derivative index ranges are then defined such that the elements of internal\_fields represent: 0 :  1 :  2 :  3 :  
+The fields which contain the values have different index ranges to the fields containing derivatives so a DDC object cannot be used directly. E.g. for a 2D field ([**X**](structX.md),[**Y**](structY.md)) with derivatives provided in both directions the elements of internal\_fields have the type : DFieldMem&lt;IdxRange&lt;Deriv&lt;IDimX&gt;, Deriv&lt;IDimY&gt;, IDimX, IDimY&gt; The derivative index ranges are then defined such that the elements of internal\_fields represent: 0 : \(f(x,y)\) 1 : \(\partial_x^k f(x,y)  \quad \forall 1 \leq k \leq NDerivs\) 2 : \(\partial_y^k f(x,y)  \quad \forall 1 \leq k \leq NDerivs\) 3 : \(\partial_x^j \partial_y^k f(x,y)  \quad \forall 1 \leq j \leq NDerivs,  \forall 1 \leq k \leq NDerivs\) 
 
 
         
@@ -821,7 +821,7 @@ inline KOKKOS_FUNCTION int DerivFieldCommon< FieldType, IdxRange< DDims... > >::
 
 
 
-The index is calculated using a bit mask. Mathematically the equation which determines the index in `internal_fields` is:  where  is the index of the dimension  in the tags.
+The index is calculated using a bit mask. Mathematically the equation which determines the index in `internal_fields` is: \(\sum_{\xi} 2^{i_\xi} \delta_{\text{using derivs in }\xi}\) where \(i_\xi\) is the index of the dimension \(\xi\) in the tags.
 
 
 

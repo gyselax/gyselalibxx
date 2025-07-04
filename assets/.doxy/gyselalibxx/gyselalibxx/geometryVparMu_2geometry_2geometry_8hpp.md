@@ -39,8 +39,8 @@
 | struct | [**BSplinesVpar**](structBSplinesVpar.md) <br> |
 | struct | [**GridMu**](structGridMu.md) <br> |
 | struct | [**GridVpar**](structGridVpar.md) <br> |
-| struct | [**Mu**](structMu.md) <br>_Define non periodic magnetic momentum_  _._ |
-| struct | [**Vpar**](structVpar.md) <br>_Define non periodic parallel velocity_  _._ |
+| struct | [**Mu**](structMu.md) <br>_Define non periodic magnetic momentum_ \(\mu\) _._ |
+| struct | [**Vpar**](structVpar.md) <br>_Define non periodic parallel velocity_ \(v_\parallel\) _._ |
 
 
 ## Public Types

@@ -100,7 +100,7 @@ virtual DFieldSpXVx IRightHandSide::operator() (
 
 
 
-The source  acts on the distribution function following the evolution equation df/dt = S 
+The source \(S\) acts on the distribution function following the evolution equation df/dt = S 
 
 **Parameters:**
 

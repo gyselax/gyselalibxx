@@ -10,7 +10,7 @@
 
 
 
-_Define a base class for all the time integration methods used to find the foot of a characteristic on a polar domain (a polar domain is a domain defined on the_  _plane)._[More...](#detailed-description)
+_Define a base class for all the time integration methods used to find the foot of a characteristic on a polar domain (a polar domain is a domain defined on the_ \((r,\theta)\) _plane)._[More...](#detailed-description)
 
 * `#include <ipolar_foot_finder.hpp>`
 
@@ -60,7 +60,7 @@ _Define a base class for all the time integration methods used to find the foot 
 
 | Type | Name |
 | ---: | :--- |
-| virtual void | [**operator()**](#function-operator) (Field&lt; Coord&lt; [**R**](classIPolarFootFinder.md#typedef-r), [**Theta**](classIPolarFootFinder.md#typedef-theta) &gt;, [**IdxRangeOperator**](classIPolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classIPolarFootFinder.md#typedef-memory_space) &gt; feet, [**DVectorConstField**](classVectorField.md)&lt; [**IdxRangeOperator**](classIPolarFootFinder.md#typedef-idxrangeoperator), [**VectorIndexSetAdvectionDims**](classIPolarFootFinder.md#typedef-vectorindexsetadvectiondims), [**memory\_space**](classIPolarFootFinder.md#typedef-memory_space) &gt; advection\_field, double dt) const = 0<br>_Advect the feet over_  _._ |
+| virtual void | [**operator()**](#function-operator) (Field&lt; Coord&lt; [**R**](classIPolarFootFinder.md#typedef-r), [**Theta**](classIPolarFootFinder.md#typedef-theta) &gt;, [**IdxRangeOperator**](classIPolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classIPolarFootFinder.md#typedef-memory_space) &gt; feet, [**DVectorConstField**](classVectorField.md)&lt; [**IdxRangeOperator**](classIPolarFootFinder.md#typedef-idxrangeoperator), [**VectorIndexSetAdvectionDims**](classIPolarFootFinder.md#typedef-vectorindexsetadvectiondims), [**memory\_space**](classIPolarFootFinder.md#typedef-memory_space) &gt; advection\_field, double dt) const = 0<br>_Advect the feet over_ \(dt\) _._ |
 | virtual  | [**~IPolarFootFinder**](#function-ipolarfootfinder) () = default<br> |
 
 
@@ -157,7 +157,7 @@ using IPolarFootFinder< GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRang
 
 ### function operator() 
 
-_Advect the feet over_  _._
+_Advect the feet over_ \(dt\) _._
 ```C++
 virtual void IPolarFootFinder::operator() (
     Field< Coord< R , Theta >, IdxRangeOperator , memory_space > feet,

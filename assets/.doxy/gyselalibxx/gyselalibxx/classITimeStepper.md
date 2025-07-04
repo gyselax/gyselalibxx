@@ -114,7 +114,7 @@ Inherited by the following classes: [CrankNicolson](classCrankNicolson.md),  [Eu
 ## Detailed Description
 
 
-The class exposes three update functions which are used to carry out one step of the chosen timestepping method to solve an ODE of the form: , 
+The class exposes three update functions which are used to carry out one step of the chosen timestepping method to solve an ODE of the form: \(\partial_t y(t) = f(t, y(t))\), 
 
 
     

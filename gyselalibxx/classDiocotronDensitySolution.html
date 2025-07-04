@@ -548,7 +548,7 @@
               
                 <div><h1 id="class-diocotrondensitysolution">Class DiocotronDensitySolution</h1>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classDiocotronDensitySolution.html"><strong>DiocotronDensitySolution</strong></a></p>
-<p><em>The diocotron exact solution of the density</em>  <em>.</em><a href="#detailed-description">More...</a></p>
+<p><em>The diocotron exact solution of the density</em> <span class="arithmatex">\(\rho\)</span> <em>.</em><a href="#detailed-description">More...</a></p>
 <ul>
 <li><code>#include &lt;diocotron_initialisation_equilibrium.hpp&gt;</code></li>
 </ul>
@@ -586,11 +586,11 @@
 <h2 id="detailed-description">Detailed Description</h2>
 <p>The equations of the diocotron simulation are the Vlasov-Poisson equations</p>
 <ul>
-<li>,</li>
-<li>,</li>
-<li>.</li>
+<li><span class="arithmatex">\(\partial_t \rho - E_y \partial_x \rho + E_x \partial_y \rho = 0\)</span>,</li>
+<li><span class="arithmatex">\(L \phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho\)</span>,</li>
+<li><span class="arithmatex">\(E = -\nabla \phi\)</span>.</li>
 </ul>
-<p>The <a href="classDiocotronDensitySolution.html"><strong>DiocotronDensitySolution</strong></a> provides an initial perturbed solution  for the density  and its associated equilibrium solution . </p>
+<p>The <a href="classDiocotronDensitySolution.html"><strong>DiocotronDensitySolution</strong></a> provides an initial perturbed solution <span class="arithmatex">\(\rho_0\)</span> for the density <span class="arithmatex">\(\rho\)</span> and its associated equilibrium solution <span class="arithmatex">\(\rho_{eq}\)</span>. </p>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-diocotrondensitysolution">function DiocotronDensitySolution</h3>
 <p><em>Instantiate a</em> <a href="classDiocotronDensitySolution.html"><em><strong>DiocotronDensitySolution</strong></em></a> <em>.</em></p>
@@ -610,7 +610,7 @@
 <li><code>R1</code> The value of the r-coordinate where the domain of non null initial condition starts. </li>
 <li><code>R2</code> The value of the r-coordinate where the domain of non null initial condition ends. </li>
 <li><code>W2</code> The value of the r-coordinate where the domain ends. </li>
-<li><code>Q</code> The charge carried by the inner conductor at . </li>
+<li><code>Q</code> The charge carried by the inner conductor at <span class="arithmatex">\(r = W_1\)</span>. </li>
 <li><code>l</code> The mode of the perturbation. </li>
 <li><code>eps</code> The amplitude of the perturbation. </li>
 </ul>
@@ -624,10 +624,10 @@
 </code></pre>
 <p>The equilibrium is given by</p>
 <ul>
-<li>if , ,</li>
-<li>otherwise, ,</li>
+<li>if <span class="arithmatex">\(R_1 \leq r \leq R_2\)</span>, <span class="arithmatex">\(\rho_0(r, \theta) = \exp\left( - \left(\frac{r - \bar{r}}{d}\right)^p \right)\)</span>,</li>
+<li>otherwise, <span class="arithmatex">\(\rho_0(r, \theta) = 0\)</span>,</li>
 </ul>
-<p>with ,  and .</p>
+<p>with <span class="arithmatex">\(p = 50\)</span>, <span class="arithmatex">\(\bar{r} = \frac{R_1 + R_2}{2}\)</span> and <span class="arithmatex">\(d = \frac{R_2 - R_1}{2}\)</span>.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>coord</code> The coordinate where we evaluate the equilibrium.</li>
@@ -640,7 +640,7 @@
 <p><em>Get the frequency of the perturbation.</em> </p>
 <pre><code class="language-C++">double DiocotronDensitySolution::get_frequency () const
 </code></pre>
-<p>The frequency of the perturbation is given by the real part of , where  is the solution of the dispersion relation.</p>
+<p>The frequency of the perturbation is given by the real part of <span class="arithmatex">\(\omega\)</span>, where <span class="arithmatex">\(\omega\)</span> is the solution of the dispersion relation.</p>
 <p><strong>Returns:</strong></p>
 <p>The frequency of the perturbation. </p>
 <hr>
@@ -649,7 +649,7 @@
 <p><em>Get the slope of the perturbation.</em> </p>
 <pre><code class="language-C++">double DiocotronDensitySolution::get_slope () const
 </code></pre>
-<p>The slope of the perturbation is given by the imaginary part of , where  is the solution of the dispersion relation.</p>
+<p>The slope of the perturbation is given by the imaginary part of <span class="arithmatex">\(\omega\)</span>, where <span class="arithmatex">\(\omega\)</span> is the solution of the dispersion relation.</p>
 <p><strong>Returns:</strong></p>
 <p>The slope of the perturbation. </p>
 <hr>
@@ -662,10 +662,10 @@
 </code></pre>
 <p>The initial condition is given by</p>
 <ul>
-<li>if , ,</li>
-<li>otherwise, ,</li>
+<li>if <span class="arithmatex">\(R_1 \leq r \leq R_2\)</span>, <span class="arithmatex">\(\rho_0(r, \theta) = (1 + \varepsilon \cos(l\theta)) \exp\left( - \left(\frac{r - \bar{r}}{d}\right)^p \right)\)</span>,</li>
+<li>otherwise, <span class="arithmatex">\(\rho_0(r, \theta) = 0\)</span>,</li>
 </ul>
-<p>with ,  and .</p>
+<p>with <span class="arithmatex">\(p = 50\)</span>, <span class="arithmatex">\(\bar{r} = \frac{R_1 + R_2}{2}\)</span> and <span class="arithmatex">\(d = \frac{R_2 - R_1}{2}\)</span>.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>coord</code> The coordinate where we evaluate the initial condition.</li>

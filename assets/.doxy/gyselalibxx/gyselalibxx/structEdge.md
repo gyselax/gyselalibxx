@@ -93,12 +93,12 @@ _Define an edge of a given patch._ [More...](#detailed-description)
 ## Detailed Description
 
 
-An edge is defined by a patch, a dimension and an extremity. For example, in the patch defined on logical index range ,
+An edge is defined by a patch, a dimension and an extremity. For example, in the patch defined on logical index range \([a_x, b_x]\times[a_y, b_y]\),
 
 
 
-* the edge [**GridY**](structGridY.md), BACK refers to the set ,
-* and the edge [**GridY**](structGridY.md), FRONT refers to the set .
+* the edge [**GridY**](structGridY.md), BACK refers to the set \([a_x, b_x]\times\{b_y\}\),
+* and the edge [**GridY**](structGridY.md), FRONT refers to the set \([a_x, b_x]\times\{a_y\}\).
 
 
 

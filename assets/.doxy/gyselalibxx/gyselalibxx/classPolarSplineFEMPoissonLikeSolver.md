@@ -78,7 +78,7 @@ _Define a polar PDE solver for a Poisson-like equation._ [More...](#detailed-des
 |  void | [**compute\_singular\_elements**](#function-compute_singular_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const values\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const col\_idx\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const nnz\_per\_row\_csr\_host) <br>_Computes the matrix element corresponding to the singular area. ie: the region enclosing the O-point._  |
 |  void | [**compute\_stencil\_elements**](#function-compute_stencil_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const values\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const col\_idx\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const nnz\_per\_row\_csr\_host) <br>_Computes the matrix element corresponding to the regular stencil ie: out to singular or overlapping areas._  |
 |  double | [**get\_matrix\_stencil\_element**](#function-get_matrix_stencil_element) (IdxBSRTheta idx\_test, IdxBSRTheta idx\_trial, ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, SplineRThetaEvaluatorNullBound const & evaluator, Mapping const & mapping) <br>_Computes the matrix element corresponding to two tensor product splines with index idx\_test and idx\_trial._  |
-|  void | [**init\_nnz\_per\_line**](#function-init_nnz_per_line) (Kokkos::View&lt; int \*, Kokkos::LayoutRight &gt; nnz) const<br>_Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on_  _splines. After this function the array will contain: nnz[0] = 0. nnz[1] = 0. nnz[2] = number of non-zero elements in line 0. nnz[3] = number of non-zero elements in lines 0-1. ... nnz[matrix\_size] = number of non-zero elements in lines 0-(matrix\_size-1)._ |
+|  void | [**init\_nnz\_per\_line**](#function-init_nnz_per_line) (Kokkos::View&lt; int \*, Kokkos::LayoutRight &gt; nnz) const<br>_Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on_ \((r,\theta)\) _splines. After this function the array will contain: nnz[0] = 0. nnz[1] = 0. nnz[2] = number of non-zero elements in line 0. nnz[3] = number of non-zero elements in lines 0-1. ... nnz[matrix\_size] = number of non-zero elements in lines 0-(matrix\_size-1)._ |
 |  void | [**operator()**](#function-operator) (RHSFunction const & rhs, host\_t&lt; [**PolarSplineMemRTheta**](structPolarSplineMem.md) &gt; & spline) const<br>_Solve the Poisson-like equation._  |
 |  void | [**operator()**](#function-operator_1) (RHSFunction const & rhs, DFieldRTheta phi) const<br>_Solve the Poisson-like equation._  |
 
@@ -91,7 +91,7 @@ _Define a polar PDE solver for a Poisson-like equation._ [More...](#detailed-des
 |  KOKKOS\_INLINE\_FUNCTION void | [**get\_value\_and\_gradient**](#function-get_value_and_gradient-12) (double & value, [**DVector**](classTensor.md)&lt; [**R\_cov**](structR__cov.md), [**Theta\_cov**](structTheta__cov.md) &gt; & derivs, [**EvalDeriv1DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType.md) const & r\_basis, [**EvalDeriv1DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType.md) const & theta\_basis) <br>_Computes the value and gradient from r\_basis and theta\_basis inputs._  |
 |  KOKKOS\_INLINE\_FUNCTION void | [**get\_value\_and\_gradient**](#function-get_value_and_gradient-22) (double & value, [**DVector**](classTensor.md)&lt; [**R\_cov**](structR__cov.md), [**Theta\_cov**](structTheta__cov.md) &gt; & derivs, [**EvalDeriv2DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.md) const & basis, [**EvalDeriv2DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.md) const &) <br>_Computes the value and gradient from r\_basis and theta\_basis inputs._  |
 |  KOKKOS\_FUNCTION double | [**templated\_weak\_integral\_element**](#function-templated_weak_integral_element) (IdxQuadratureR idx\_r, IdxQuadratureTheta idx\_theta, TestValDerivType const & test\_bspline\_val\_and\_deriv, TrialValDerivType const & trial\_bspline\_val\_and\_deriv, TestValDerivType const & test\_bspline\_val\_and\_deriv\_theta, TrialValDerivType const & trial\_bspline\_val\_and\_deriv\_theta, ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Mapping const & mapping, DField&lt; IdxRangeQuadratureRTheta &gt; int\_volume) <br>_Computes a quadrature summand corresponding to the inner product._  |
-|  KOKKOS\_FUNCTION int | [**theta\_mod**](#function-theta_mod) (int idx\_theta) <br>_Calculates the modulo idx\_theta in relation to cells number along_  _direction ._ |
+|  KOKKOS\_FUNCTION int | [**theta\_mod**](#function-theta_mod) (int idx\_theta) <br>_Calculates the modulo idx\_theta in relation to cells number along_ \(\theta\) _direction ._ |
 |  KOKKOS\_FUNCTION double | [**weak\_integral\_element**](#function-weak_integral_element) (IdxQuadratureR idx\_r, IdxQuadratureTheta idx\_theta, [**EvalDeriv2DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.md) const & test\_bspline\_val\_and\_deriv, [**EvalDeriv2DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.md) const & trial\_bspline\_val\_and\_deriv, ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, SplineRThetaEvaluatorNullBound const & evaluator, Mapping const & mapping, DField&lt; IdxRangeQuadratureRTheta &gt; int\_volume) <br>_compute the weak integral value._  |
 
 
@@ -125,10 +125,10 @@ _Define a polar PDE solver for a Poisson-like equation._ [More...](#detailed-des
 Solve the following Partial Differential Equation
 
 
-(1) , in ,
+(1) \(L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho\), in \(\Omega\),
 
 
-, on ,
+\(\phi = 0\), on \(\partial \Omega\),
 
 
 As finite element basis functions we will use polar b-splines which are divided into two types: 1) Basis splines that can be written as a tensor product of 1d basis splines ("non-singular B-splines") 2) Basis splines that cover the centre point and are defined as a linear combination of basis splines of type 1 ("singular B-splines")
@@ -145,9 +145,9 @@ As finite element basis functions we will use polar b-splines which are divided 
 
 * [**GridR**](structGridR.md) The radial grid type. 
 * [**GridR**](structGridR.md) The poloidal grid type. 
-* [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) The type of the 2D polar B-splines (on the coordinate system  including B-splines which traverse the O point). 
+* [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) The type of the 2D polar B-splines (on the coordinate system \((r,\theta)\) including B-splines which traverse the O point). 
 * `SplineRThetaEvaluatorNullBound` The type of the 2D (cross-product) spline evaluator. 
-* `IdxRangeFull` The full index range of  including any batch dimensions. 
+* `IdxRangeFull` The full index range of \(\phi\) including any batch dimensions. 
 
 
 
@@ -220,10 +220,10 @@ inline PolarSplineFEMPoissonLikeSolver::PolarSplineFEMPoissonLikeSolver (
 The equation we are studying:
 
 
-(1) , in ,
+(1) \(L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho\), in \(\Omega\),
 
 
-, on .
+\(\phi = 0\), on \(\partial \Omega\).
 
 
 
@@ -231,10 +231,10 @@ The equation we are studying:
 **Parameters:**
 
 
-* `coeff_alpha` The spline representation of the  function in the definition of the Poisson-like equation. 
-* `coeff_beta` The spline representation of the  function in the definition of the Poisson-like equation. 
+* `coeff_alpha` The spline representation of the \(\alpha\) function in the definition of the Poisson-like equation. 
+* `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
-* `spline_evaluator` An evaluator for evaluating 2D splines on .
+* `spline_evaluator` An evaluator for evaluating 2D splines on \((r,\theta)\).
 
 
 
@@ -275,10 +275,10 @@ inline void PolarSplineFEMPoissonLikeSolver::compute_overlapping_singular_elemen
 **Parameters:**
 
 
-* `coeff_alpha` The spline representation of the  function in the definition of the Poisson-like equation. 
-* `coeff_beta` The spline representation of the  function in the definition of the Poisson-like equation. 
+* `coeff_alpha` The spline representation of the \(\alpha\) function in the definition of the Poisson-like equation. 
+* `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
-* `spline_evaluator` An evaluator for evaluating 2D splines on . 
+* `spline_evaluator` An evaluator for evaluating 2D splines on \((r,\theta)\). 
 * `values_csr_host` A 2D Kokkos view which stores the values of non-zero elements for the whole batch. 
 * `col_idx_csr_host` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) 
 * `nnz_per_row_csr_host` A 1D Kokkos view of length matrix\_size+1 which stores the count of the non-zeros along the lines of the matrix. 
@@ -315,10 +315,10 @@ inline void PolarSplineFEMPoissonLikeSolver::compute_singular_elements (
 **Parameters:**
 
 
-* `coeff_alpha` The spline representation of the  function in the definition of the Poisson-like equation. 
-* `coeff_beta` The spline representation of the  function in the definition of the Poisson-like equation. 
+* `coeff_alpha` The spline representation of the \(\alpha\) function in the definition of the Poisson-like equation. 
+* `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
-* `spline_evaluator` An evaluator for evaluating 2D splines on . 
+* `spline_evaluator` An evaluator for evaluating 2D splines on \((r,\theta)\). 
 * `values_csr_host` A 2D Kokkos view which stores the values of non-zero elements for the whole batch. 
 * `col_idx_csr_host` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix). 
 * `nnz_per_row_csr_host` A 1D Kokkos view of length matrix\_size+1 which stores the count of the non-zeros along the lines of the matrix. 
@@ -355,10 +355,10 @@ inline void PolarSplineFEMPoissonLikeSolver::compute_stencil_elements (
 **Parameters:**
 
 
-* `coeff_alpha` The spline representation of the  function in the definition of the Poisson-like equation. 
-* `coeff_beta` The spline representation of the  function in the definition of the Poisson-like equation. 
+* `coeff_alpha` The spline representation of the \(\alpha\) function in the definition of the Poisson-like equation. 
+* `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
-* `spline_evaluator` An evaluator for evaluating 2D splines on . 
+* `spline_evaluator` An evaluator for evaluating 2D splines on \((r,\theta)\). 
 * `values_csr_host` A 2D Kokkos view which stores the values of non-zero elements for the whole batch. 
 * `col_idx_csr_host` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) 
 * `nnz_per_row_csr_host` A 1D Kokkos view of length matrix\_size+1 which stores the count of the non-zeros along the lines of the matrix. 
@@ -396,9 +396,9 @@ inline double PolarSplineFEMPoissonLikeSolver::get_matrix_stencil_element (
 
 * `idx_test` The index for polar B-spline in the test space. 
 * `idx_trial` The index for polar B-spline in the trial space. 
-* `coeff_alpha` The spline representation of the  function in the definition of the Poisson-like equation. 
-* `coeff_beta` The spline representation of the  function in the definition of the Poisson-like equation. 
-* `evaluator` An evaluator for evaluating 2D splines on . 
+* `coeff_alpha` The spline representation of the \(\alpha\) function in the definition of the Poisson-like equation. 
+* `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
+* `evaluator` An evaluator for evaluating 2D splines on \((r, \theta)\). 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
 
 
@@ -419,7 +419,7 @@ The value of the matrix element.
 
 ### function init\_nnz\_per\_line 
 
-_Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on_  _splines. After this function the array will contain: nnz[0] = 0. nnz[1] = 0. nnz[2] = number of non-zero elements in line 0. nnz[3] = number of non-zero elements in lines 0-1. ... nnz[matrix\_size] = number of non-zero elements in lines 0-(matrix\_size-1)._
+_Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on_ \((r,\theta)\) _splines. After this function the array will contain: nnz[0] = 0. nnz[1] = 0. nnz[2] = number of non-zero elements in line 0. nnz[3] = number of non-zero elements in lines 0-1. ... nnz[matrix\_size] = number of non-zero elements in lines 0-(matrix\_size-1)._
 ```C++
 inline void PolarSplineFEMPoissonLikeSolver::init_nnz_per_line (
     Kokkos::View< int *, Kokkos::LayoutRight > nnz
@@ -457,7 +457,7 @@ inline void PolarSplineFEMPoissonLikeSolver::operator() (
 
 
 
-This operator returns the coefficients associated with the B-Splines of the solution .
+This operator returns the coefficients associated with the B-Splines of the solution \(\phi\).
 
 
 
@@ -465,8 +465,8 @@ This operator returns the coefficients associated with the B-Splines of the solu
 **Parameters:**
 
 
-* `rhs` The rhs  of the Poisson-like equation. The type is templated but we can use the [**PoissonLikeRHSFunction**](classPoissonLikeRHSFunction.md) class. 
-* `spline` The spline representation of the solution , also used as initial data for the iterative solver. 
+* `rhs` The rhs \(\rho\) of the Poisson-like equation. The type is templated but we can use the [**PoissonLikeRHSFunction**](classPoissonLikeRHSFunction.md) class. 
+* `spline` The spline representation of the solution \(\phi\), also used as initial data for the iterative solver. 
 
 
 
@@ -490,7 +490,7 @@ inline void PolarSplineFEMPoissonLikeSolver::operator() (
 
 
 
-This operator uses the other operator () and returns the values on the grid of the solution .
+This operator uses the other operator () and returns the values on the grid of the solution \(\phi\).
 
 
 
@@ -498,8 +498,8 @@ This operator uses the other operator () and returns the values on the grid of t
 **Parameters:**
 
 
-* `rhs` The rhs  of the Poisson-like equation. The type is templated but we can use the [**PoissonLikeRHSFunction**](classPoissonLikeRHSFunction.md) class. 
-* `phi` The values of the solution  on the given coords\_eval, also used as initial data for the iterative solver. 
+* `rhs` The rhs \(\rho\) of the Poisson-like equation. The type is templated but we can use the [**PoissonLikeRHSFunction**](classPoissonLikeRHSFunction.md) class. 
+* `phi` The values of the solution \(\phi\) on the given coords\_eval, also used as initial data for the iterative solver. 
 
 
 
@@ -536,7 +536,7 @@ static inline KOKKOS_FUNCTION IdxRangeQuadratureRTheta PolarSplineFEMPoissonLike
 
 **Returns:**
 
-The quadrature range corresponding to the  indices. 
+The quadrature range corresponding to the \((r,\theta)\) indices. 
 
 
 
@@ -568,7 +568,7 @@ static inline KOKKOS_INLINE_FUNCTION void PolarSplineFEMPoissonLikeSolver::get_v
 
 
 * `value` The product of radial and poloidal values.
-* `derivs` derivatives over  directions.
+* `derivs` derivatives over \((r, \theta)\) directions.
 * `r_basis` A data structure containing values and derivative over radial direction.
 * `theta_basis` A data structure containing values and derivative over poloidal direction. 
 
@@ -601,7 +601,7 @@ static inline KOKKOS_INLINE_FUNCTION void PolarSplineFEMPoissonLikeSolver::get_v
 
 
 * `value` The product of radial and poloidal values.
-* `derivs` derivatives over  directions.
+* `derivs` derivatives over \((r, \theta)\) directions.
 * `basis` A data structure containing values and derivative over radial and poloidal directions. 
 
 
@@ -646,9 +646,9 @@ static inline KOKKOS_FUNCTION double PolarSplineFEMPoissonLikeSolver::templated_
 * `trial_bspline_val_and_deriv` The data structure containing the derivatives over radial and poloidal directions for trial space. 
 * `test_bspline_val_and_deriv_theta` The data structure containing the value and derivative along poloidal direction for test space. 
 * `trial_bspline_val_and_deriv_theta` The data structure containing the value and derivative along poloidal direction for trial space. 
-* `coeff_alpha` The spline representation of the  function in the definition of the Poisson-like equation. 
-* `coeff_beta` The spline representation of the  function in the definition of the Poisson-like equation. 
-* `spline_evaluator` An evaluator for evaluating 2D splines on . 
+* `coeff_alpha` The spline representation of the \(\alpha\) function in the definition of the Poisson-like equation. 
+* `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
+* `spline_evaluator` An evaluator for evaluating 2D splines on \((r,\theta)\). 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
 * `int_volume` The integral volume associated with each point used in the quadrature scheme. 
 
@@ -670,7 +670,7 @@ inner product of the test and trial spline is computed using a quadrature. This 
 
 ### function theta\_mod 
 
-_Calculates the modulo idx\_theta in relation to cells number along_  _direction ._
+_Calculates the modulo idx\_theta in relation to cells number along_ \(\theta\) _direction ._
 ```C++
 static inline KOKKOS_FUNCTION int PolarSplineFEMPoissonLikeSolver::theta_mod (
     int idx_theta
@@ -684,13 +684,13 @@ static inline KOKKOS_FUNCTION int PolarSplineFEMPoissonLikeSolver::theta_mod (
 **Parameters:**
 
 
-* `idx_theta`  index.
+* `idx_theta` \(\theta\) index.
 
 
 
 **Returns:**
 
-The corresponding indice modulo  direction cells number 
+The corresponding indice modulo \(\theta\) direction cells number 
 
 
 
@@ -731,10 +731,10 @@ static inline KOKKOS_FUNCTION double PolarSplineFEMPoissonLikeSolver::weak_integ
 * `idx_theta` The index for poloidal direction 
 * `test_bspline_val_and_deriv` The data structure containing the derivatives over radial and poloidal directions for test space. 
 * `trial_bspline_val_and_deriv` The data structure containing the derivatives over radial and poloidal directions for trial space. 
-* `coeff_alpha` The spline representation of the  function in the definition of the Poisson-like equation. 
-* `coeff_beta` The spline representation of the  function in the definition of the Poisson-like equation. 
+* `coeff_alpha` The spline representation of the \(\alpha\) function in the definition of the Poisson-like equation. 
+* `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
-* `evaluator` An evaluator for evaluating 2D splines on . 
+* `evaluator` An evaluator for evaluating 2D splines on \((r,\theta)\). 
 * `int_volume` The integral volume associated with each point used in the quadrature scheme. 
 
 

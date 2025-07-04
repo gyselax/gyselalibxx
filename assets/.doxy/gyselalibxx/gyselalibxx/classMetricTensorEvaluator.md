@@ -228,7 +228,7 @@ inline KOKKOS_FUNCTION DTensor < Dims_cov, Dims_cov > MetricTensorEvaluator::ope
 
 
 
-The metric tensor matrix is defined as: . with  the Jacobian matrix.
+The metric tensor matrix is defined as: \(G = (J_{\mathcal{F}})^T J_{\mathcal{F}}\). with \(J_{\mathcal{F}}\) the Jacobian matrix.
 
 
 

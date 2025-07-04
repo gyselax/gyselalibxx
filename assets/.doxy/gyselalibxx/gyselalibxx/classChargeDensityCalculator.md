@@ -200,10 +200,10 @@ See [IChargeDensityCalculator](classIChargeDensityCalculator.md)
 ## Detailed Description
 
 
-A class which computes charges density by solving the equation:  where  is the charge of the species  and  is the distribution function.
+A class which computes charges density by solving the equation: \(\sum_s \int_{v} q_s f_s(x,v) dv\) where \(q_s\) is the charge of the species \(s\) and \(f_s(x,v)\) is the distribution function.
 
 
-A class which computes charges density by solving the equation:  where  is the charge of the species  and  is the distribution function. 
+A class which computes charges density by solving the equation: \(\int_{vx} \int_{vy} q_s f_s(x,y,vx,vy) dvx dvy\) where \(q_s\) is the charge of the species \(s\) and \(f_s(x,y,vx,vy)\) is the distribution function. 
 
 
     

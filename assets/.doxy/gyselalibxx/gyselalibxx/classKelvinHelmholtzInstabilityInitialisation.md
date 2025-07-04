@@ -53,7 +53,7 @@ _Initialise the allfdistribu function._ [More...](#detailed-description)
 | Type | Name |
 | ---: | :--- |
 |   | [**KelvinHelmholtzInstabilityInitialisation**](#function-kelvinhelmholtzinstabilityinitialisation) (double const epsilon, double const mode\_k) <br>_Instantiate the initializer._  |
-|  void | [**operator()**](#function-operator) (DFieldXY allfdistribu, DFieldXY allfdistribu\_equilibrium) <br>_Initialise_  _and_ _._ |
+|  void | [**operator()**](#function-operator) (DFieldXY allfdistribu, DFieldXY allfdistribu\_equilibrium) <br>_Initialise_ \(f_{eq}\) _and_\(f\) _._ |
 |   | [**~KelvinHelmholtzInstabilityInitialisation**](#function-kelvinhelmholtzinstabilityinitialisation) () = default<br> |
 
 
@@ -87,12 +87,14 @@ _Initialise the allfdistribu function._ [More...](#detailed-description)
 
 
 Set the allfdistribu at 
+\[f_{eq}(x, y) = \sin(y)\]
 
 
-and ,
+
+and \(f_0(x, y) = f_{eq}(x, y) + \varepsilon \cos(kx)\),
 
 
-with  an amplitude of perturbation and  mode equal to  divided by the length of the index range on . 
+with \(\varepsilon\) an amplitude of perturbation and \(k\) mode equal to \(2\pi\) divided by the length of the index range on \(x\). 
 
 
     
@@ -118,8 +120,8 @@ inline KelvinHelmholtzInstabilityInitialisation::KelvinHelmholtzInstabilityIniti
 **Parameters:**
 
 
-* `epsilon` , the amplitude of perturbation. 
-* `mode_k` , the perturbation mode. 
+* `epsilon` \(\varepsilon\), the amplitude of perturbation. 
+* `mode_k` \(k\), the perturbation mode. 
 
 
 
@@ -132,7 +134,7 @@ inline KelvinHelmholtzInstabilityInitialisation::KelvinHelmholtzInstabilityIniti
 
 ### function operator() 
 
-_Initialise_  _and_ _._
+_Initialise_ \(f_{eq}\) _and_\(f\) _._
 ```C++
 inline void KelvinHelmholtzInstabilityInitialisation::operator() (
     DFieldXY allfdistribu,
@@ -147,8 +149,8 @@ inline void KelvinHelmholtzInstabilityInitialisation::operator() (
 **Parameters:**
 
 
-* `allfdistribu` Field referring to the  function. 
-* `allfdistribu_equilibrium` Field referring to the  function. 
+* `allfdistribu` Field referring to the \(f\) function. 
+* `allfdistribu_equilibrium` Field referring to the \(f_{eq}\) function. 
 
 
 

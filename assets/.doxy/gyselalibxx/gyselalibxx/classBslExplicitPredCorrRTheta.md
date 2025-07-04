@@ -76,7 +76,7 @@ Inherits the following classes: [ITimeSolverRTheta](classITimeSolverRTheta.md)
 | Type | Name |
 | ---: | :--- |
 |   | [**BslExplicitPredCorrRTheta**](#function-bslexplicitpredcorrrtheta) (LogicalToPhysicalMapping const & logical\_to\_physical, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, IdxRangeRTheta const & grid, SplineRThetaBuilder\_host const & builder, [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md)&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), SplineRThetaEvaluatorNullBound &gt; const & poisson\_solver, SplineRThetaEvaluatorConstBound\_host const & advection\_evaluator) <br>_Instantiate a_ [_**BslExplicitPredCorrRTheta**_](classBslExplicitPredCorrRTheta.md) _._ |
-| virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps) const<br>_Solves on_  _the equations system._ |
+| virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps) const<br>_Solves on_ \(T = dt*N\) _the equations system._ |
 
 
 ## Public Functions inherited from ITimeSolverRTheta
@@ -85,7 +85,7 @@ See [ITimeSolverRTheta](classITimeSolverRTheta.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](classITimeSolverRTheta.md#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps=1) const = 0<br>_Solves on_  _the equations system._ |
+| virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](classITimeSolverRTheta.md#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps=1) const = 0<br>_Solves on_ \(T = dt*N\) _the equations system._ |
 | virtual  | [**~ITimeSolverRTheta**](classITimeSolverRTheta.md#function-itimesolverrtheta) () = default<br> |
 
 
@@ -155,42 +155,42 @@ It solves in time the following Vlasov-Poisson equations system:
 
 
 
-* ,
-* ,
-* ,
+* \(- \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho\),
+* \(E = - \nabla \phi\),
+* \(\partial_t \rho - E_y \partial_x \rho + E_x \partial_y \rho = 0\),
 
 
 
 
-we write .
+we write \((A_x, A_y) =  (-E_y, E_x)\).
 
 
 The second order explicit predictor-corrector is also detailed in Edoardo Zoni's article ([https://doi.org/10.1016/j.jcp.2019.108889](https://doi.org/10.1016/j.jcp.2019.108889)).
 
 
-for ,
+for \(n \geq 0\),
 
 
 First, it predicts:
-* 1. From , it computes  with a [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md);
-* 2. From , it computes  with a [**AdvectionFieldFinder**](classAdvectionFieldFinder.md);
-* 3. From  and , it computes  with a [**BslAdvectionPolar**](classBslAdvectionPolar.md) on ;
+* 1. From \(\rho^n\), it computes \(\phi^n\) with a [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md);
+* 2. From \(\phi^n\), it computes \(A^n\) with a [**AdvectionFieldFinder**](classAdvectionFieldFinder.md);
+* 3. From \(\rho^n\) and \(A^n\), it computes \(\rho^P\) with a [**BslAdvectionPolar**](classBslAdvectionPolar.md) on \(dt\);
 
 
 
 
-We write  the characteristic feet such that .
+We write \(X^P\) the characteristic feet such that \(\partial_t X^P = A^n(X^n)\).
 
 
 Secondly, it corrects:
-* 4. From , it computes  with a [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md);
-* 5. From , it computes  with a [**AdvectionFieldFinder**](classAdvectionFieldFinder.md);
-* 6. From  and , it computes  with a [**BslAdvectionPolar**](classBslAdvectionPolar.md) on .
+* 4. From \(\rho^P\), it computes \(\phi^P\) with a [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md);
+* 5. From \(\phi^P\), it computes \(A^P\) with a [**AdvectionFieldFinder**](classAdvectionFieldFinder.md);
+* 6. From \(\rho^n\) and \(\frac{A^{P}(X^n) + A^n(X^P)}{2}\), it computes \(\rho^{n+1}\) with a [**BslAdvectionPolar**](classBslAdvectionPolar.md) on \(dt\).
 
 
 
 
-(With  the characteristic feet such that .)
+(With \(X^C\) the characteristic feet such that \(\partial_t X^C = \frac{A^{P}(X^n) + A^n(X^P)}{2}\).)
 
 
 
@@ -251,7 +251,7 @@ inline BslExplicitPredCorrRTheta::BslExplicitPredCorrRTheta (
 
 ### function operator() 
 
-_Solves on_  _the equations system._
+_Solves on_ \(T = dt*N\) _the equations system._
 ```C++
 inline virtual host_t< DFieldRTheta > BslExplicitPredCorrRTheta::operator() (
     host_t< DFieldRTheta > density,
@@ -267,9 +267,9 @@ inline virtual host_t< DFieldRTheta > BslExplicitPredCorrRTheta::operator() (
 **Parameters:**
 
 
-* `density` On input: the initial condition. On output: the solution at . 
+* `density` On input: the initial condition. On output: the solution at \(dt *N\). 
 * `dt` The time step. 
-* `steps` The number  of time interactions.
+* `steps` The number \(N\) of time interactions.
 
 
 

@@ -192,13 +192,13 @@ See [ITimeStepper](classITimeStepper.md)
 A class which provides an implementation of a Crank-Nicolson method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. The values which evolve are defined on an index range.
 
 
-For the following ODE : ,
+For the following ODE : \(\partial_t y(t) = f(t, y(t))\),
 
 
-the Crank-Nicolson method is given by : .
+the Crank-Nicolson method is given by : \(y^{k} =  y^{n} + \frac{dt}{2} \left(f(t^{n}, y^{n}) + f(t^{k}, y^{k}) \right)\).
 
 
-The method is an implicit method. If , then we set .
+The method is an implicit method. If \(|y^{k+1} -  y^{k}| < \varepsilon\), then we set \(y^{n+1} = y^{k+1}\).
 
 
 The method is order 2. 
@@ -302,7 +302,7 @@ inline explicit CrankNicolson::CrankNicolson (
 
 * `idx_range` The index range on which the points which evolve over time are defined. 
 * `counter` The maximal number of loops for the implicit method. 
-* `epsilon` The  upperbound of the difference of two steps in the implicit method: . 
+* `epsilon` The \(\varepsilon\) upperbound of the difference of two steps in the implicit method: \(|y^{k+1} -  y^{k}| < \varepsilon\). 
 
 
 

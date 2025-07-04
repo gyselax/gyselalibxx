@@ -152,20 +152,22 @@ host_t< DFieldMem< IdxRange< Grid1D > > > spline_quadrature_coefficients_1d (
 To integrate a function with a spline quadrature, we use:
 
 
-,
+\(\int_a^b f(x)dx
+\simeq \sum_{i = 0}^{N_{\text{basis}} -1 } c_i  \int_a^b b_{i,d}()x dx\),
 
 
 which rewritten gives
 
 
-,
+\(\int_a^b f(x)dx
+\simeq \sum_{i = 0}^{N_{\text{basis}} - 1} q_i f_i\),
 
 
 with
-*  the values of the function at the interpolation points;
-*  the quadrature coefficients we compute thanks to ,
-  * with  the matrix of B-splines ,
-  * and  the integrated B-splines.
+* \(\{ f_i\}_i\) the values of the function at the interpolation points;
+* \(q = \{ q_i\}_i\) the quadrature coefficients we compute thanks to \(q B^T = I_b\),
+  * with \(B\) the matrix of B-splines \(B_{ij} = b_{j,d}(x_i)\),
+  * and \(I_b = \int_a^b b_{i,d}(x)dx\) the integrated B-splines.
 
 
 
@@ -188,7 +190,7 @@ in the 5D GYSELA Code". December 2022.
 
 **Returns:**
 
-A chunk with the quadrature coefficients . 
+A chunk with the quadrature coefficients \(q\). 
 
 
 

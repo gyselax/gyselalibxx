@@ -210,16 +210,16 @@ See [IQNSolver](classIQNSolver.md)
 ## Detailed Description
 
 
-An operator which solves the Quasi-Neutrality equation:  using a fast Fourier transform on a periodic domain. This operator only works for equidistant points.
+An operator which solves the Quasi-Neutrality equation: \(- \frac{d^2 \phi}{dx^2} = \rho\) using a fast Fourier transform on a periodic domain. This operator only works for equidistant points.
 
 
-The electric field,  is calculated using a spline interpolation implemented in ElectricField.
+The electric field, \(\frac{d \phi}{dx}\) is calculated using a spline interpolation implemented in ElectricField.
 
 
-An operator which solves the Quasi-Neutrality equation:  using a fast Fourier transform on a periodic index range. This operator only works for equidistant points.
+An operator which solves the Quasi-Neutrality equation: \(- \frac{d^2 \phi}{dx^2} = \rho\) using a fast Fourier transform on a periodic index range. This operator only works for equidistant points.
 
 
-The electric field,  is calculated using a spline interpolation implemented in ElectricField. 
+The electric field, \(\frac{d \phi}{dx}\) is calculated using a spline interpolation implemented in ElectricField. 
 
 
     

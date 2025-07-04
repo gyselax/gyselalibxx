@@ -184,8 +184,18 @@ void compute_Vcoll_Tcoll (
 
 Computation of Vcoll and Tcoll, which are the moments of the kernel maxwellian function of the intra species collision operator. Vcoll and Tcoll are defined as follows:
 * 
+\[Tcoll = Pcoll^{-1}[Imean0*Imean2 - Imean1*Imean1]\]
+
 * 
-*  where the 5 integrals are defined as:   The brackets  represent the integral in velocity: 
+\[Vcoll = Pcoll^{-1}[Imean4*Imean1 - Imean3*Imean2]\]
+
+* \(Pcoll = Imean0*Imean4 - Imean1*Imean3\) where the 5 integrals are defined as:  \(\[
+    Imean0=<Dcoll> ;
+    Imean1=<v*Dcoll> ;
+    Imean2=<v^2*Dcoll> ;
+    Imean3=<d/dv(Dcoll)>
+    Imean4=<d/dv(v*Dcoll)>
+ \]\) The brackets \(<.>\) represent the integral in velocity: \(<.> = \int . dv\)
 
 
 

@@ -281,6 +281,8 @@ double norm_L1 (
 
 
 
+\[\int_{\Omega} |f(X)|  dX\]
+
 
 
 
@@ -323,6 +325,8 @@ double norm_L2 (
 
 
 
+\[\sqrt{\int_{\Omega} |f(X)|^2  dX}\]
+
 
 
 
@@ -362,7 +366,7 @@ KOKKOS_FUNCTION double norm_inf (
 
 
 
-For a given vector  , compute .
+For a given vector \(x\) , compute \(|Vert x |Vert_{\infty} = \sup_n |x_n|\).
 
 
 
@@ -400,7 +404,7 @@ KOKKOS_FUNCTION double norm_inf (
 
 
 
-For a given vector  , compute .
+For a given vector \(x\) , compute \(|Vert x |Vert_{\infty} = \sup_n |x_n|\).
 
 
 

@@ -10,7 +10,7 @@
 
 
 
-_Define an advection operator on 2D_  _domain._[More...](#detailed-description)
+_Define an advection operator on 2D_ \((r, \theta)\) _domain._[More...](#detailed-description)
 
 * `#include <bsl_advection_polar.hpp>`
 
@@ -93,18 +93,24 @@ The advection operator uses a backward semi-Lagrangian method. The method is bas
 
 
 For the following equation: 
+\[\partial_t f(t,x) + A(t, x) \cdot \nabla_x f(t,x) = 0,\]
+
 
 
 we write the characteristics: 
+\[\partial_t X(t; s, x) = A(t, X(t; s, x)), \qquad \text{ with } X(s; s, x) = x.\]
+
 
 
 Then the property gives us: 
+\[f(t, x) = f(0, X(t; 0, x)), \quad \forall t.\]
 
 
-So the first step of the advection operator is to compute the feet of the characteristics  for each mesh point .
+
+So the first step of the advection operator is to compute the feet of the characteristics \(X(t; t+\Delta t, x_i)\) for each mesh point \(x_i\).
 
 
-For the second step, we interpolate the function at the computed feet of the characteristics, and obtain the function at the next time step: .
+For the second step, we interpolate the function at the computed feet of the characteristics, and obtain the function at the next time step: \(f(t + \Delta t, x) = f(t, X(t; t+\Delta, x))\).
 
 
 Different time integration methods are implemented to solve the equation of the characteristics. They are defined in the [**IPolarFootFinder**](classIPolarFootFinder.md) class.

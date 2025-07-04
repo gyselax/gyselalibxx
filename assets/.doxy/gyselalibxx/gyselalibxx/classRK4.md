@@ -191,20 +191,20 @@ See [ITimeStepper](classITimeStepper.md)
 A class which provides an implementation of a fourth-order Runge-Kutta method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. The values which evolve are defined on an index range.
 
 
-For the following ODE : ,
+For the following ODE : \(\partial_t y(t) = f(t, y(t))\),
 
 
-the Runge-Kutta 3 method is given by : ,
+the Runge-Kutta 3 method is given by : \(y^{n+1} =  y^{n} + \frac{dt}{6} \left(k_1 + 2k_2 + 2k_3 + k_4 \right)\),
 
 
 with
 
 
 
-* ,
-* ,
-* ,
-* . 
+* \(k_1 = f(t^{n}, y^{n})\),
+* \(k_2 = f(t^{n+1/2}, y^{n} + \frac{dt}{2} k_1 )\),
+* \(k_3 = f(t^{n+1/2}, y^{n} + \frac{dt}{2} k_2 )\),
+* \(k_3 = f(t^{n}, y^{n} + dt k_3 )\). 
 
 
 

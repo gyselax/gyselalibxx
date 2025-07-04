@@ -10,7 +10,7 @@
 
 
 
-_A class to find the foot of the characteristics on the_  _plane._[More...](#detailed-description)
+_A class to find the foot of the characteristics on the_ \((r,\theta)\) _plane._[More...](#detailed-description)
 
 * `#include <spline_polar_foot_finder.hpp>`
 
@@ -101,8 +101,8 @@ See [IPolarFootFinder](classIPolarFootFinder.md)
 | ---: | :--- |
 |   | [**SplinePolarFootFinder**](#function-splinepolarfootfinder) (IdxRangeBatched const & idx\_range\_operator, TimeStepperBuilder const & time\_stepper\_builder, LogicalToPhysicalMapping const & logical\_to\_physical\_mapping, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical\_mapping, SplineRThetaBuilderAdvection const & builder\_advection\_field, SplineRThetaEvaluatorAdvection const & evaluator\_advection\_field, double epsilon=1e-12) <br>_Instantiate a time integration method for the advection operator._  |
 |  void | [**is\_unified**](#function-is_unified) (Field&lt; [**T**](structT.md), [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; const & values) const<br>_Check if the values at the centre point are the same._  |
-|  void | [**operator()**](#function-operator) ([**CFieldFeet**](classSplinePolarFootFinder.md#typedef-cfieldfeet) feet, [**DVectorConstField**](classVectorField.md)&lt; [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**VectorIndexSetAdvectionDims**](classSplinePolarFootFinder.md#typedef-vectorindexsetadvectiondims), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; advection\_field, double dt) const<br>_Advect the feet over_  _._ |
-|  void | [**unify\_value\_at\_centre\_pt**](#function-unify_value_at_centre_pt) (Field&lt; [**T**](structT.md), [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; values) const<br>_Replace the value at_  _point by the value at_ _for all_ _._ |
+|  void | [**operator()**](#function-operator) ([**CFieldFeet**](classSplinePolarFootFinder.md#typedef-cfieldfeet) feet, [**DVectorConstField**](classVectorField.md)&lt; [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**VectorIndexSetAdvectionDims**](classSplinePolarFootFinder.md#typedef-vectorindexsetadvectiondims), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; advection\_field, double dt) const<br>_Advect the feet over_ \(dt\) _._ |
+|  void | [**unify\_value\_at\_centre\_pt**](#function-unify_value_at_centre_pt) (Field&lt; [**T**](structT.md), [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; values) const<br>_Replace the value at_ \((r=0, \theta)\) _point by the value at_\((r=0,0)\) _for all_\(\theta\) _._ |
 
 
 ## Public Functions inherited from IPolarFootFinder
@@ -111,7 +111,7 @@ See [IPolarFootFinder](classIPolarFootFinder.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual void | [**operator()**](classIPolarFootFinder.md#function-operator) (Field&lt; Coord&lt; [**R**](classIPolarFootFinder.md#typedef-r), [**Theta**](classIPolarFootFinder.md#typedef-theta) &gt;, [**IdxRangeOperator**](classIPolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classIPolarFootFinder.md#typedef-memory_space) &gt; feet, [**DVectorConstField**](classVectorField.md)&lt; [**IdxRangeOperator**](classIPolarFootFinder.md#typedef-idxrangeoperator), [**VectorIndexSetAdvectionDims**](classIPolarFootFinder.md#typedef-vectorindexsetadvectiondims), [**memory\_space**](classIPolarFootFinder.md#typedef-memory_space) &gt; advection\_field, double dt) const = 0<br>_Advect the feet over_  _._ |
+| virtual void | [**operator()**](classIPolarFootFinder.md#function-operator) (Field&lt; Coord&lt; [**R**](classIPolarFootFinder.md#typedef-r), [**Theta**](classIPolarFootFinder.md#typedef-theta) &gt;, [**IdxRangeOperator**](classIPolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classIPolarFootFinder.md#typedef-memory_space) &gt; feet, [**DVectorConstField**](classVectorField.md)&lt; [**IdxRangeOperator**](classIPolarFootFinder.md#typedef-idxrangeoperator), [**VectorIndexSetAdvectionDims**](classIPolarFootFinder.md#typedef-vectorindexsetadvectiondims), [**memory\_space**](classIPolarFootFinder.md#typedef-memory_space) &gt; advection\_field, double dt) const = 0<br>_Advect the feet over_ \(dt\) _._ |
 | virtual  | [**~IPolarFootFinder**](classIPolarFootFinder.md#function-ipolarfootfinder) () = default<br> |
 
 
@@ -408,7 +408,7 @@ inline SplinePolarFootFinder::SplinePolarFootFinder (
 * `logical_to_pseudo_physical_mapping` The mapping from the logical domain to the pseudo-physical domain. 
 * `builder_advection_field` The spline builder which computes the spline representation of the advection field. 
 * `evaluator_advection_field` The B-splines evaluator to evaluate the advection field. 
-* `epsilon`  parameter used for the linearisation of the advection field around the central point.
+* `epsilon` \(\varepsilon\) parameter used for the linearisation of the advection field around the central point.
 
 
 
@@ -434,7 +434,7 @@ inline void SplinePolarFootFinder::is_unified (
 
 
 
-For polar geometry, to ensure continuity at the centre point, we have to be sure that all the points for  have the same value. This function check if for , the values  are the same.
+For polar geometry, to ensure continuity at the centre point, we have to be sure that all the points for \(r = 0\) have the same value. This function check if for \(r= 0\), the values \(\forall \theta\) are the same.
 
 
 
@@ -455,7 +455,7 @@ For polar geometry, to ensure continuity at the centre point, we have to be sure
 
 ### function operator() 
 
-_Advect the feet over_  _._
+_Advect the feet over_ \(dt\) _._
 ```C++
 inline void SplinePolarFootFinder::operator() (
     CFieldFeet feet,
@@ -466,7 +466,7 @@ inline void SplinePolarFootFinder::operator() (
 
 
 
-From the advection field in the physical domain, compute the advection field in the right domain an compute its B-splines coefficients. Then, use the given time integration method (time\_stepper) to solve the characteristic equation over .
+From the advection field in the physical domain, compute the advection field in the right domain an compute its B-splines coefficients. Then, use the given time integration method (time\_stepper) to solve the characteristic equation over \(dt\).
 
 
 
@@ -489,7 +489,7 @@ From the advection field in the physical domain, compute the advection field in 
 
 ### function unify\_value\_at\_centre\_pt 
 
-_Replace the value at_  _point by the value at_ _for all_ _._
+_Replace the value at_ \((r=0, \theta)\) _point by the value at_\((r=0,0)\) _for all_\(\theta\) _._
 ```C++
 template<class T>
 inline void SplinePolarFootFinder::unify_value_at_centre_pt (
@@ -499,7 +499,7 @@ inline void SplinePolarFootFinder::unify_value_at_centre_pt (
 
 
 
-For polar geometry, to ensure continuity at the centre point, we have to be sure that all the points for  have the same value. As the computation of the values of a table can induces machine errors, this function is useful to reset the values at the central point at the same value.
+For polar geometry, to ensure continuity at the centre point, we have to be sure that all the points for \(r = 0\) have the same value. As the computation of the values of a table can induces machine errors, this function is useful to reset the values at the central point at the same value.
 
 
 

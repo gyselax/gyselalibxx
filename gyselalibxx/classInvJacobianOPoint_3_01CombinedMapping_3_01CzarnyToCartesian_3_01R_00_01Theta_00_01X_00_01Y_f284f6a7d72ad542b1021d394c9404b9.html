@@ -573,7 +573,7 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>A specialisation of <a href="classInvJacobianOPoint.html"><strong>InvJacobianOPoint</strong></a> for a combined mapping  where  is a Czarny mapping from logical to physical, and  is an inverse circular mapping from physical to logical. The combined mapping  therefore maps from a physical domain  to a physical domain . </p>
+<p>A specialisation of <a href="classInvJacobianOPoint.html"><strong>InvJacobianOPoint</strong></a> for a combined mapping <span class="arithmatex">\(\mathcal{F} \circ \mathcal{G}\)</span> where <span class="arithmatex">\(\mathcal{F}\)</span> is a Czarny mapping from logical to physical, and <span class="arithmatex">\(\mathcal{G}\)</span> is an inverse circular mapping from physical to logical. The combined mapping <span class="arithmatex">\(\mathcal{F} \circ \mathcal{G}\)</span> therefore maps from a physical domain <span class="arithmatex">\((X_{pc}, Y_{pc})\)</span> to a physical domain <span class="arithmatex">\((X, Y)\)</span>. </p>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-invjacobianopoint">function InvJacobianOPoint</h3>
 <p><em>The constructor of</em> <a href="classInvJacobianOPoint.html"><em><strong>InvJacobianOPoint</strong></em></a> <em>.</em></p>
@@ -593,9 +593,18 @@
 </code></pre>
 <p>The pseudo-Cartesian Jacobian matrix for a Czarny mapping is given by :
 * 
-* 
-* 
-* </p>
+[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = - \sqrt{1 + \varepsilon^2},]</p>
+<ul>
+<li>
+<div class="arithmatex">\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0,\]</div>
+</li>
+<li>
+<div class="arithmatex">\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0,\]</div>
+</li>
+<li>
+<div class="arithmatex">\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = \frac{2 - \sqrt{1 + \varepsilon^2}}{e \xi}.\]</div>
+</li>
+</ul>
 <p><strong>Returns:</strong></p>
 <p>The matrix evaluated at the central point. </p>
 <hr>

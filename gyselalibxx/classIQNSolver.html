@@ -591,8 +591,9 @@
 <h2 id="detailed-description">Detailed Description</h2>
 <p>An operator which solves the Quasi-Neutrality equation using a fast Fourier transform.</p>
 <p>An operator which solves the Quasi-Neutrality equation.</p>
-<p>An operator which solves the Quasi-Neutrality equation: </p>
-<p>An operator which solves the Quasi-Neutrality equation:  using a fast Fourier transform on a periodic domain. This operator only works for equidistant points. </p>
+<p>An operator which solves the Quasi-Neutrality equation: 
+[- \frac{d^2 \phi}{dx^2} = \rho]</p>
+<p>An operator which solves the Quasi-Neutrality equation: <span class="arithmatex">\(- \frac{d^2 \phi}{dx^2} = \rho\)</span> using a fast Fourier transform on a periodic domain. This operator only works for equidistant points. </p>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-operator">function operator()</h3>
 <p><em>Compute the electrical potential and the electric field from the Quasi-Neutrality equation.</em> </p>
@@ -605,7 +606,7 @@
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>electrostatic_potential</code> The solution of the Quasi-Neutrality equation. </li>
-<li><code>electric_field</code> The electric field . </li>
+<li><code>electric_field</code> The electric field <span class="arithmatex">\(E = -\nabla \phi\)</span>. </li>
 <li><code>density</code> The rhs of the Quasi-Neutrality equation. </li>
 </ul>
 <hr>

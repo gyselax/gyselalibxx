@@ -631,11 +631,11 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-e"><strong>e</strong></a> () const<br><em>Return the</em>  <em>parameter.</em></td>
+<td style="text-align: left;"><a href="#function-e"><strong>e</strong></a> () const<br><em>Return the</em> <span class="arithmatex">\(e\)</span> <em>parameter.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-epsilon"><strong>epsilon</strong></a> () const<br><em>Return the</em>  <em>parameter.</em></td>
+<td style="text-align: left;"><a href="#function-epsilon"><strong>epsilon</strong></a> () const<br><em>Return the</em> <span class="arithmatex">\(\epsilon\)</span> <em>parameter.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION <a href="classCartesianToCzarny.html"><strong>CartesianToCzarny</strong></a>&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a>, <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt;</td>
@@ -667,7 +667,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (Coord&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; const &amp; coord) const<br><em>Convert the</em>  <em>coordinate to the equivalent (x,y) coordinate.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (Coord&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt; const &amp; coord) const<br><em>Convert the</em> <span class="arithmatex">\((r, \theta)\)</span> <em>coordinate to the equivalent (x,y) coordinate.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a> &amp;</td>
@@ -684,13 +684,23 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>The mapping  is defined by</p>
-<p>with  and  and  given as parameters.</p>
+<p>The mapping <span class="arithmatex">\((r,\theta)\mapsto (x,y)\)</span> is defined by</p>
+<div class="arithmatex">\[x(r,\theta) = \frac{1}{\epsilon} \left( 1 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right) + x_0,\]</div>
+<div class="arithmatex">\[y(r,\theta) = \frac{e\xi r \sin(\theta)}{2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } + y_0,\]</div>
+<p>with <span class="arithmatex">\(\xi = 1/\sqrt{1 - \epsilon^2 /4}\)</span> and <span class="arithmatex">\(e\)</span> and <span class="arithmatex">\(\epsilon\)</span> given as parameters.</p>
 <p>See O. Czarny and G. Huysmans. Bézier surfaces and finite elements for MHD simulations. Journal of Computational Physics, 227(16):7423–7445, 2008. doi:10.1016/j.jcp.2008.04.001.</p>
-<p>It and its Jacobian matrix are invertible everywhere except for .</p>
+<p>It and its Jacobian matrix are invertible everywhere except for <span class="arithmatex">\(r = 0\)</span>.</p>
 <p>Its Jacobian coefficients are defined as follow</p>
-<p>.</p>
-<p>and   </p>
+<div class="arithmatex">\[J_{11}(r,\theta) = - \cos(\theta)\frac{1}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }\]</div>
+<div class="arithmatex">\[J_{12}(r,\theta)  =  r\sin(\theta)\frac{1}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }\]</div>
+<div class="arithmatex">\[J_{21}(r,\theta)  =  \cos(\theta)\frac{e\epsilon \xi r\sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left(
+2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}  \right)^2 }
++  \sin(\theta)\frac{e\xi }{ 2- \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }\]</div>
+<p><span class="arithmatex">\(J_{22}(r,\theta)  =   r \sin(\theta)\frac{- e\epsilon \xi r \sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left(
+2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right)^2 }
++  r\cos(\theta)\frac{e\xi }{ 2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }\)</span>.</p>
+<p>and  <span class="arithmatex">\(\det(J(r, \theta)) = \frac{- r}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}}
+ \frac{e\xi}{2 -  \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}}.\)</span> </p>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-coordarg">typedef CoordArg</h3>
 <p><em>The type of the argument of the function described by this mapping.</em> </p>
@@ -768,9 +778,9 @@
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>epsilon</code> The  parameter in the definition of the mapping <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>. </li>
-<li><code>e</code> The  parameter in the definition of the mapping <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>. </li>
-<li><code>coordinate_origin</code> The (x,y)-coordinate defining the origin  of the coordinate-system.</li>
+<li><code>epsilon</code> The <span class="arithmatex">\(\epsilon\)</span> parameter in the definition of the mapping <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>. </li>
+<li><code>e</code> The <span class="arithmatex">\(e\)</span> parameter in the definition of the mapping <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a>. </li>
+<li><code>coordinate_origin</code> The (x,y)-coordinate defining the origin <span class="arithmatex">\((x_0, y_0)\)</span> of the coordinate-system.</li>
 </ul>
 <p><strong>See also:</strong> <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a> </p>
 <hr>
@@ -800,20 +810,20 @@
 <hr>
 
 <h3 id="function-e">function e</h3>
-<p><em>Return the</em>  <em>parameter.</em></p>
+<p><em>Return the</em> <span class="arithmatex">\(e\)</span> <em>parameter.</em></p>
 <pre><code class="language-C++">inline KOKKOS_FUNCTION double CzarnyToCartesian::e () const
 </code></pre>
 <p><strong>Returns:</strong></p>
-<p>The value of .</p>
+<p>The value of <span class="arithmatex">\(e\)</span>.</p>
 <p><strong>See also:</strong> <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a> </p>
 <hr>
 
 <h3 id="function-epsilon">function epsilon</h3>
-<p><em>Return the</em>  <em>parameter.</em></p>
+<p><em>Return the</em> <span class="arithmatex">\(\epsilon\)</span> <em>parameter.</em></p>
 <pre><code class="language-C++">inline KOKKOS_FUNCTION double CzarnyToCartesian::epsilon () const
 </code></pre>
 <p><strong>Returns:</strong></p>
-<p>The value of .</p>
+<p>The value of <span class="arithmatex">\(\epsilon\)</span>.</p>
 <p><strong>See also:</strong> <a href="classCzarnyToCartesian.html"><strong>CzarnyToCartesian</strong></a> </p>
 <hr>
 
@@ -910,7 +920,7 @@ inline KOKKOS_FUNCTION double CzarnyToCartesian::jacobian_component (
 <hr>
 
 <h3 id="function-operator">function operator()</h3>
-<p><em>Convert the</em>  <em>coordinate to the equivalent (x,y) coordinate.</em></p>
+<p><em>Convert the</em> <span class="arithmatex">\((r, \theta)\)</span> <em>coordinate to the equivalent (x,y) coordinate.</em></p>
 <pre><code class="language-C++">inline KOKKOS_FUNCTION Coord&lt; X , Y &gt; CzarnyToCartesian::operator() (
     Coord&lt; R , Theta &gt; const &amp; coord
 ) const

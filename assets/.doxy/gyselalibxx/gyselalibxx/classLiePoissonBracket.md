@@ -10,7 +10,7 @@
 
 
 
-_A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is:_  _with_ _the unitary magnetic field, i.e:_ _with_ _the jacobian of the system,_ _the covariant components of b and_ _the Levi-Civita symbol._[More...](#detailed-description)
+_A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is:_ \(\{F, G\} = b\dot(\nabla F \cross \nabla G)\) _with_\(b= \mathbf{B} / B\) _the unitary magnetic field, i.e:_\(\{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k\) _with_\({\cal J}_{\rm x}\) _the jacobian of the system,_\(b_k\) _the covariant components of b and_\(\epsilon^{ijk}\) _the Levi-Civita symbol._[More...](#detailed-description)
 
 * `#include <lie_poisson_bracket.hpp>`
 

@@ -80,7 +80,7 @@ _A class for describing the circular 2D mapping._ [More...](#detailed-descriptio
 |  KOKKOS\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |
 |  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, VectorIndexSet&lt; [**R\_cov**](classCircularToCartesian.md#typedef-r_cov), [**Theta\_cov**](classCircularToCartesian.md#typedef-theta_cov) &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute full Jacobian matrix._  |
 |  KOKKOS\_INLINE\_FUNCTION Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**o\_point**](#function-o_point) () const<br>_Get the O-point in Cartesian coordinates._  |
-|  KOKKOS\_FUNCTION Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**operator()**](#function-operator) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Convert the_  _coordinate to the equivalent (x,y) coordinate._ |
+|  KOKKOS\_FUNCTION Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**operator()**](#function-operator) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Convert the_ \((r, \theta)\) _coordinate to the equivalent (x,y) coordinate._ |
 |  [**CircularToCartesian**](classCircularToCartesian.md) & | [**operator=**](#function-operator_1) ([**CircularToCartesian**](classCircularToCartesian.md) const & x) = default<br>_Assign a_ [_**CircularToCartesian**_](classCircularToCartesian.md) _from another_[_**CircularToCartesian**_](classCircularToCartesian.md) _(lvalue)._ |
 |  [**CircularToCartesian**](classCircularToCartesian.md) & | [**operator=**](#function-operator_2) ([**CircularToCartesian**](classCircularToCartesian.md) && x) = default<br>_Assign a_ [_**CircularToCartesian**_](classCircularToCartesian.md) _from another temporary_[_**CircularToCartesian**_](classCircularToCartesian.md) _(rvalue)._ |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**~CircularToCartesian**](#function-circulartocartesian) () = default<br> |
@@ -115,34 +115,46 @@ _A class for describing the circular 2D mapping._ [More...](#detailed-descriptio
 ## Detailed Description
 
 
-The mapping  is defined as follow :
+The mapping \((r,\theta)\mapsto (x,y)\) is defined as follow :
+
+
+
+\[x(r,\theta) = r \cos(\theta) + x_0,\]
 
 
 
 
+\[y(r,\theta) = r \sin(\theta) + y_0.\]
 
 
 
-
-It and its Jacobian matrix are invertible everywhere except for .
+It and its Jacobian matrix are invertible everywhere except for \(r = 0\).
 
 
 The Jacobian matrix coefficients are defined as follow
 
 
 
+\[J_{11}(r,\theta)  = \cos(\theta)\]
 
 
 
 
+\[J_{12}(r,\theta)  = - r \sin(\theta)\]
 
 
 
 
+\[J_{21}(r,\theta)  = \sin(\theta)\]
 
 
 
-and the matrix determinant: . 
+
+\[J_{22}(r,\theta)  = r \cos(\theta)\]
+
+
+
+and the matrix determinant: \(det(J) = r\). 
 
 
     
@@ -658,7 +670,7 @@ The O-point.
 
 ### function operator() 
 
-_Convert the_  _coordinate to the equivalent (x,y) coordinate._
+_Convert the_ \((r, \theta)\) _coordinate to the equivalent (x,y) coordinate._
 ```C++
 inline KOKKOS_FUNCTION Coord< X , Y > CircularToCartesian::operator() (
     Coord< R , Theta > const & coord

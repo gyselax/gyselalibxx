@@ -41,7 +41,7 @@
 | typedef IdxRange&lt; ODims... &gt; | [**laplacian\_idx\_range\_type**](#typedef-laplacian_idx_range_type)  <br>_The type of the index range on which the equation is defined._  |
 | typedef LayoutSpace | [**layout\_space**](#typedef-layout_space)  <br>_The layout space of the Fields passed to operator()._  |
 | typedef MemorySpace | [**memory\_space**](#typedef-memory_space)  <br>_The space (CPU/GPU) where the Fields passed to operator() are saved._  |
-| typedef std::conditional\_t&lt; ddc::type\_seq\_size\_v&lt; [**laplacian\_tags**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-laplacian_tags) &gt;==1, [**field\_type**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-field_type), [**VectorField**](classVectorField.md)&lt; double, IdxRangeFull, [**real\_laplacian\_tags**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-real_laplacian_tags), MemorySpace, LayoutSpace &gt; &gt; | [**vector\_field\_type**](#typedef-vector_field_type)  <br>_The type of the derivative of_  _._ |
+| typedef std::conditional\_t&lt; ddc::type\_seq\_size\_v&lt; [**laplacian\_tags**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-laplacian_tags) &gt;==1, [**field\_type**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-field_type), [**VectorField**](classVectorField.md)&lt; double, IdxRangeFull, [**real\_laplacian\_tags**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-real_laplacian_tags), MemorySpace, LayoutSpace &gt; &gt; | [**vector\_field\_type**](#typedef-vector_field_type)  <br>_The type of the derivative of_ \(\phi\) _._ |
 
 
 
@@ -66,8 +66,8 @@
 
 | Type | Name |
 | ---: | :--- |
-| virtual [**field\_type**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-field_type) | [**operator()**](#function-operator) ([**field\_type**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-field_type) phi, [**field\_type**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-field_type) rho) const = 0<br>_An operator which calculates the solution_  _to Poisson's equation:_ _._ |
-| virtual [**field\_type**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-field_type) | [**operator()**](#function-operator_1) ([**field\_type**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-field_type) phi, [**vector\_field\_type**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-vector_field_type) E, [**field\_type**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-field_type) rho) const = 0<br>_An operator which calculates the solution_  _to Poisson's equation and its derivative:_ __ _._ |
+| virtual [**field\_type**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-field_type) | [**operator()**](#function-operator) ([**field\_type**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-field_type) phi, [**field\_type**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-field_type) rho) const = 0<br>_An operator which calculates the solution_ \(\phi\) _to Poisson's equation:_\(-\Delta \phi = \rho\) _._ |
+| virtual [**field\_type**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-field_type) | [**operator()**](#function-operator_1) ([**field\_type**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-field_type) phi, [**vector\_field\_type**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-vector_field_type) E, [**field\_type**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-field_type) rho) const = 0<br>_An operator which calculates the solution_ \(\phi\) _to Poisson's equation and its derivative:_\(- \Delta \phi = \rho\) __\(E = - \nabla \phi\) _._ |
 
 
 
@@ -113,6 +113,8 @@
 
 
 An abstract class from which a Poisson solver can inherit. Classes inheriting from this must implement a way to solve the following equation: 
+\[-\Delta \phi = \rho\]
+
 
 
 
@@ -234,7 +236,7 @@ using IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, MemorySpace, LayoutSpa
 
 ### typedef vector\_field\_type 
 
-_The type of the derivative of_  _._
+_The type of the derivative of_ \(\phi\) _._
 ```C++
 using IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, MemorySpace, LayoutSpace >::vector_field_type =  std::conditional_t< ddc::type_seq_size_v<laplacian_tags> == 1, field_type, VectorField<double, IdxRangeFull, real_laplacian_tags, MemorySpace, LayoutSpace> >;
 ```
@@ -250,7 +252,7 @@ using IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, MemorySpace, LayoutSpa
 
 ### function operator() 
 
-_An operator which calculates the solution_  _to Poisson's equation:_ _._
+_An operator which calculates the solution_ \(\phi\) _to Poisson's equation:_\(-\Delta \phi = \rho\) _._
 ```C++
 virtual field_type IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, MemorySpace, LayoutSpace >::operator() (
     field_type phi,
@@ -286,7 +288,7 @@ A reference to the solution to Poisson's equation.
 
 ### function operator() 
 
-_An operator which calculates the solution_  _to Poisson's equation and its derivative:_ __ _._
+_An operator which calculates the solution_ \(\phi\) _to Poisson's equation and its derivative:_\(- \Delta \phi = \rho\) __\(E = - \nabla \phi\) _._
 ```C++
 virtual field_type IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, MemorySpace, LayoutSpace >::operator() (
     field_type phi,

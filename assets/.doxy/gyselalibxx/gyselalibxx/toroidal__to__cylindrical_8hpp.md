@@ -30,7 +30,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**ToroidalToCylindrical**](classToroidalToCylindrical.md) &lt;class Curvilinear2DToCartesian, class Zeta, class Phi&gt;<br>_A class describing a coordinate change from a toroidal system of coordinates to a cylindrical system of coordinates. The toroidal coordinates are described by a polar plane_  _and a perpendicular dimension_ _. The cylindrical coordinates are_ _._ _describe a Cartesian slice._ _are therefore defined from this slice with a 2D coordinate change operator._ _is chosen to be equal to_ _to preserve the orientation of the axes (following the right-hand rule)._ |
+| class | [**ToroidalToCylindrical**](classToroidalToCylindrical.md) &lt;class Curvilinear2DToCartesian, class Zeta, class Phi&gt;<br>_A class describing a coordinate change from a toroidal system of coordinates to a cylindrical system of coordinates. The toroidal coordinates are described by a polar plane_ \((\rho, \theta)\) _and a perpendicular dimension_\(\phi\) _. The cylindrical coordinates are_\((R, Z, \zeta)\) _._\((R, Z)\) _describe a Cartesian slice._\((\rho, \theta)\) _are therefore defined from this slice with a 2D coordinate change operator._\(\zeta\) _is chosen to be equal to_\(-\phi\) _to preserve the orientation of the axes (following the right-hand rule)._ |
 
 
 

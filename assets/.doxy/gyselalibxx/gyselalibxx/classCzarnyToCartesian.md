@@ -72,8 +72,8 @@ _A class for describing the Czarny 2D mapping._ [More...](#detailed-description)
 |  KOKKOS\_FUNCTION | [**CzarnyToCartesian**](#function-czarnytocartesian-13) (double epsilon, double e, Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; coordinate\_origin=Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt;(0.0, 0.0)) <br>_Instantiate a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from parameters._ |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**CzarnyToCartesian**](#function-czarnytocartesian-23) ([**CzarnyToCartesian**](classCzarnyToCartesian.md) const & other) = default<br>_Instantiate a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from another_[_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _(lvalue)._ |
 |   | [**CzarnyToCartesian**](#function-czarnytocartesian-33) ([**CzarnyToCartesian**](classCzarnyToCartesian.md) && x) = default<br>_Instantiate a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from another temporary_[_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _(rvalue)._ |
-|  KOKKOS\_FUNCTION double | [**e**](#function-e) () const<br>_Return the_  _parameter._ |
-|  KOKKOS\_FUNCTION double | [**epsilon**](#function-epsilon) () const<br>_Return the_  _parameter._ |
+|  KOKKOS\_FUNCTION double | [**e**](#function-e) () const<br>_Return the_ \(e\) _parameter._ |
+|  KOKKOS\_FUNCTION double | [**epsilon**](#function-epsilon) () const<br>_Return the_ \(\epsilon\) _parameter._ |
 |  KOKKOS\_INLINE\_FUNCTION [**CartesianToCzarny**](classCartesianToCzarny.md)&lt; [**X**](structX.md), [**Y**](structY.md), [**R**](structR.md), [**Theta**](structTheta.md) &gt; | [**get\_inverse\_mapping**](#function-get_inverse_mapping) () const<br>_Get the inverse mapping._  |
 |  KOKKOS\_FUNCTION double | [**inv\_jacobian\_component**](#function-inv_jacobian_component) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the (i,j) coefficient of the inverse Jacobian matrix._  |
 |  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt;, VectorIndexSet&lt; [**X\_cov**](classCzarnyToCartesian.md#typedef-x_cov), [**Y\_cov**](classCzarnyToCartesian.md#typedef-y_cov) &gt; &gt; | [**inv\_jacobian\_matrix**](#function-inv_jacobian_matrix) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute full inverse Jacobian matrix._  |
@@ -81,7 +81,7 @@ _A class for describing the Czarny 2D mapping._ [More...](#detailed-description)
 |  KOKKOS\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |
 |  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt;, VectorIndexSet&lt; [**R\_cov**](classCzarnyToCartesian.md#typedef-r_cov), [**Theta\_cov**](classCzarnyToCartesian.md#typedef-theta_cov) &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Compute full Jacobian matrix._  |
 |  KOKKOS\_INLINE\_FUNCTION Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**o\_point**](#function-o_point) () const<br>_Get the O-point in Cartesian coordinates._  |
-|  KOKKOS\_FUNCTION Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**operator()**](#function-operator) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Convert the_  _coordinate to the equivalent (x,y) coordinate._ |
+|  KOKKOS\_FUNCTION Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**operator()**](#function-operator) (Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; const & coord) const<br>_Convert the_ \((r, \theta)\) _coordinate to the equivalent (x,y) coordinate._ |
 |  [**CzarnyToCartesian**](classCzarnyToCartesian.md) & | [**operator=**](#function-operator_1) ([**CzarnyToCartesian**](classCzarnyToCartesian.md) const & x) = default<br>_Assign a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from another_[_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _(lvalue)._ |
 |  [**CzarnyToCartesian**](classCzarnyToCartesian.md) & | [**operator=**](#function-operator_2) ([**CzarnyToCartesian**](classCzarnyToCartesian.md) && x) = default<br>_Assign a_ [_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _from another temporary_[_**CzarnyToCartesian**_](classCzarnyToCartesian.md) _(rvalue)._ |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**~CzarnyToCartesian**](#function-czarnytocartesian) () = default<br> |
@@ -116,40 +116,55 @@ _A class for describing the Czarny 2D mapping._ [More...](#detailed-description)
 ## Detailed Description
 
 
-The mapping  is defined by
+The mapping \((r,\theta)\mapsto (x,y)\) is defined by
+
+
+
+\[x(r,\theta) = \frac{1}{\epsilon} \left( 1 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right) + x_0,\]
 
 
 
 
+\[y(r,\theta) = \frac{e\xi r \sin(\theta)}{2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } + y_0,\]
 
 
 
-
-with  and  and  given as parameters.
+with \(\xi = 1/\sqrt{1 - \epsilon^2 /4}\) and \(e\) and \(\epsilon\) given as parameters.
 
 
 See O. Czarny and G. Huysmans. Bézier surfaces and finite elements for MHD simulations. Journal of Computational Physics, 227(16):7423–7445, 2008. doi:10.1016/j.jcp.2008.04.001.
 
 
-It and its Jacobian matrix are invertible everywhere except for .
+It and its Jacobian matrix are invertible everywhere except for \(r = 0\).
 
 
 Its Jacobian coefficients are defined as follow
 
 
 
+\[J_{11}(r,\theta) = - \cos(\theta)\frac{1}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }\]
 
 
 
 
+\[J_{12}(r,\theta)  =  r\sin(\theta)\frac{1}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }\]
 
 
 
 
-.
+\[J_{21}(r,\theta)  =  \cos(\theta)\frac{e\epsilon \xi r\sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left(
+2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}  \right)^2 }
++  \sin(\theta)\frac{e\xi }{ 2- \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }\]
 
 
-and   
+
+\(J_{22}(r,\theta)  =   r \sin(\theta)\frac{- e\epsilon \xi r \sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left(
+2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right)^2 }
++  r\cos(\theta)\frac{e\xi }{ 2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }\).
+
+
+and  \(\det(J(r, \theta)) = \frac{- r}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}}
+ \frac{e\xi}{2 -  \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}}.\) 
 
 
     
@@ -332,9 +347,9 @@ inline explicit KOKKOS_FUNCTION CzarnyToCartesian::CzarnyToCartesian (
 **Parameters:**
 
 
-* `epsilon` The  parameter in the definition of the mapping [**CzarnyToCartesian**](classCzarnyToCartesian.md). 
-* `e` The  parameter in the definition of the mapping [**CzarnyToCartesian**](classCzarnyToCartesian.md). 
-* `coordinate_origin` The (x,y)-coordinate defining the origin  of the coordinate-system.
+* `epsilon` The \(\epsilon\) parameter in the definition of the mapping [**CzarnyToCartesian**](classCzarnyToCartesian.md). 
+* `e` The \(e\) parameter in the definition of the mapping [**CzarnyToCartesian**](classCzarnyToCartesian.md). 
+* `coordinate_origin` The (x,y)-coordinate defining the origin \((x_0, y_0)\) of the coordinate-system.
 
 
 
@@ -404,7 +419,7 @@ CzarnyToCartesian::CzarnyToCartesian (
 
 ### function e 
 
-_Return the_  _parameter._
+_Return the_ \(e\) _parameter._
 ```C++
 inline KOKKOS_FUNCTION double CzarnyToCartesian::e () const
 ```
@@ -415,7 +430,7 @@ inline KOKKOS_FUNCTION double CzarnyToCartesian::e () const
 
 **Returns:**
 
-The value of .
+The value of \(e\).
 
 
 
@@ -432,7 +447,7 @@ The value of .
 
 ### function epsilon 
 
-_Return the_  _parameter._
+_Return the_ \(\epsilon\) _parameter._
 ```C++
 inline KOKKOS_FUNCTION double CzarnyToCartesian::epsilon () const
 ```
@@ -443,7 +458,7 @@ inline KOKKOS_FUNCTION double CzarnyToCartesian::epsilon () const
 
 **Returns:**
 
-The value of .
+The value of \(\epsilon\).
 
 
 
@@ -694,7 +709,7 @@ The O-point.
 
 ### function operator() 
 
-_Convert the_  _coordinate to the equivalent (x,y) coordinate._
+_Convert the_ \((r, \theta)\) _coordinate to the equivalent (x,y) coordinate._
 ```C++
 inline KOKKOS_FUNCTION Coord< X , Y > CzarnyToCartesian::operator() (
     Coord< R , Theta > const & coord

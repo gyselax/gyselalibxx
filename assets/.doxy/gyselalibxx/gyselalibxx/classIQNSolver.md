@@ -97,9 +97,11 @@ An operator which solves the Quasi-Neutrality equation.
 
 
 An operator which solves the Quasi-Neutrality equation: 
+\[- \frac{d^2 \phi}{dx^2} = \rho\]
 
 
-An operator which solves the Quasi-Neutrality equation:  using a fast Fourier transform on a periodic domain. This operator only works for equidistant points. 
+
+An operator which solves the Quasi-Neutrality equation: \(- \frac{d^2 \phi}{dx^2} = \rho\) using a fast Fourier transform on a periodic domain. This operator only works for equidistant points. 
 
 
     
@@ -127,7 +129,7 @@ virtual void IQNSolver::operator() (
 
 
 * `electrostatic_potential` The solution of the Quasi-Neutrality equation. 
-* `electric_field` The electric field . 
+* `electric_field` The electric field \(E = -\nabla \phi\). 
 * `density` The rhs of the Quasi-Neutrality equation. 
 
 

@@ -8,7 +8,7 @@
 
 
 
-_Define non periodic parallel velocity_  _._
+_Define non periodic parallel velocity_ \(v_\parallel\) _._
 
 * `#include <geometry.hpp>`
 

@@ -67,10 +67,10 @@ _A class for describing the Czarny 2D mapping._ [More...](#detailed-description)
 |  KOKKOS\_FUNCTION | [**CartesianToCzarny**](#function-cartesiantoczarny-13) (double epsilon, double e, Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; o\_point=Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt;(0.0, 0.0)) <br>_Instantiate a_ [_**CartesianToCzarny**_](classCartesianToCzarny.md) _from parameters._ |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**CartesianToCzarny**](#function-cartesiantoczarny-23) ([**CartesianToCzarny**](classCartesianToCzarny.md) const & other) = default<br>_Instantiate a_ [_**CartesianToCzarny**_](classCartesianToCzarny.md) _from another_[_**CartesianToCzarny**_](classCartesianToCzarny.md) _(lvalue)._ |
 |   | [**CartesianToCzarny**](#function-cartesiantoczarny-33) ([**CartesianToCzarny**](classCartesianToCzarny.md) && x) = default<br>_Instantiate a_ [_**CartesianToCzarny**_](classCartesianToCzarny.md) _from another temporary_[_**CartesianToCzarny**_](classCartesianToCzarny.md) _(rvalue)._ |
-|  KOKKOS\_FUNCTION double | [**e**](#function-e) () const<br>_Return the_  _parameter._ |
-|  KOKKOS\_FUNCTION double | [**epsilon**](#function-epsilon) () const<br>_Return the_  _parameter._ |
+|  KOKKOS\_FUNCTION double | [**e**](#function-e) () const<br>_Return the_ \(e\) _parameter._ |
+|  KOKKOS\_FUNCTION double | [**epsilon**](#function-epsilon) () const<br>_Return the_ \(\epsilon\) _parameter._ |
 |  KOKKOS\_INLINE\_FUNCTION [**CzarnyToCartesian**](classCzarnyToCartesian.md)&lt; [**R**](structR.md), [**Theta**](structTheta.md), [**X**](structX.md), [**Y**](structY.md) &gt; | [**get\_inverse\_mapping**](#function-get_inverse_mapping) () const<br>_Get the inverse mapping._  |
-|  KOKKOS\_FUNCTION Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; | [**operator()**](#function-operator) (Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; const & coord) const<br>_Convert the coordinate (x,y) to the equivalent_  _coordinate._ |
+|  KOKKOS\_FUNCTION Coord&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; | [**operator()**](#function-operator) (Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; const & coord) const<br>_Convert the coordinate (x,y) to the equivalent_ \((r, \theta)\) _coordinate._ |
 |  [**CartesianToCzarny**](classCartesianToCzarny.md) & | [**operator=**](#function-operator_1) ([**CartesianToCzarny**](classCartesianToCzarny.md) const & x) = default<br>_Assign a_ [_**CartesianToCzarny**_](classCartesianToCzarny.md) _from another_[_**CartesianToCzarny**_](classCartesianToCzarny.md) _(lvalue)._ |
 |  [**CartesianToCzarny**](classCartesianToCzarny.md) & | [**operator=**](#function-operator_2) ([**CartesianToCzarny**](classCartesianToCzarny.md) && x) = default<br>_Assign a_ [_**CartesianToCzarny**_](classCartesianToCzarny.md) _from another temporary_[_**CartesianToCzarny**_](classCartesianToCzarny.md) _(rvalue)._ |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**~CartesianToCzarny**](#function-cartesiantoczarny) () = default<br> |
@@ -105,16 +105,20 @@ _A class for describing the Czarny 2D mapping._ [More...](#detailed-description)
 ## Detailed Description
 
 
-The mapping  is defined by
+The mapping \((x,y)  \mapsto (r,\theta)\) is defined by
+
+
+
+\[r(x,y) = \sqrt{\frac{\hat{y}^2 (1+\epsilon \hat{x})^2}{e^2\xi^2+0.25(\epsilon \hat{x}^2-2\hat{x}-\epsilon)^2}},\]
 
 
 
 
+\[\theta (x,y)) = atan2(2. \hat{y} (1+\epsilon \hat{x}), (e \xi (\epsilon \hat{x}^2 - 2\hat{x}-\epsilon))),\]
 
 
 
-
-with , ,  and  and  given as parameters.
+with \(\hat{x} = x-x_0\), \(\hat{y} = y-y_0\), \(\xi = 1/\sqrt{1 - \epsilon^2 /4}\) and \(e\) and \(\epsilon\) given as parameters.
 
 
 See O. Czarny and G. Huysmans. Bézier surfaces and finite elements for MHD simulations. Journal of Computational Physics, 227(16):7423–7445, 2008. doi:10.1016/j.jcp.2008.04.001. 
@@ -230,8 +234,8 @@ inline explicit KOKKOS_FUNCTION CartesianToCzarny::CartesianToCzarny (
 **Parameters:**
 
 
-* `epsilon` The  parameter in the definition of the mapping [**CartesianToCzarny**](classCartesianToCzarny.md). 
-* `e` The  parameter in the definition of the mapping [**CartesianToCzarny**](classCartesianToCzarny.md). 
+* `epsilon` The \(\epsilon\) parameter in the definition of the mapping [**CartesianToCzarny**](classCartesianToCzarny.md). 
+* `e` The \(e\) parameter in the definition of the mapping [**CartesianToCzarny**](classCartesianToCzarny.md). 
 * `o_point` The (x,y)-coordinate of the O-point ((0,0) by default).
 
 
@@ -302,7 +306,7 @@ CartesianToCzarny::CartesianToCzarny (
 
 ### function e 
 
-_Return the_  _parameter._
+_Return the_ \(e\) _parameter._
 ```C++
 inline KOKKOS_FUNCTION double CartesianToCzarny::e () const
 ```
@@ -313,7 +317,7 @@ inline KOKKOS_FUNCTION double CartesianToCzarny::e () const
 
 **Returns:**
 
-The value of .
+The value of \(e\).
 
 
 
@@ -330,7 +334,7 @@ The value of .
 
 ### function epsilon 
 
-_Return the_  _parameter._
+_Return the_ \(\epsilon\) _parameter._
 ```C++
 inline KOKKOS_FUNCTION double CartesianToCzarny::epsilon () const
 ```
@@ -341,7 +345,7 @@ inline KOKKOS_FUNCTION double CartesianToCzarny::epsilon () const
 
 **Returns:**
 
-The value of .
+The value of \(\epsilon\).
 
 
 
@@ -383,7 +387,7 @@ The inverse mapping.
 
 ### function operator() 
 
-_Convert the coordinate (x,y) to the equivalent_  _coordinate._
+_Convert the coordinate (x,y) to the equivalent_ \((r, \theta)\) _coordinate._
 ```C++
 inline KOKKOS_FUNCTION Coord< R , Theta > CartesianToCzarny::operator() (
     Coord< X , Y > const & coord

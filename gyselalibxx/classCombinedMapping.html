@@ -549,7 +549,7 @@
                 <div><h1 id="class-combinedmapping">Class CombinedMapping</h1>
 <p><strong>template &lt;class Mapping1, class Mapping2, class CoordJacobianType&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classCombinedMapping.html"><strong>CombinedMapping</strong></a></p>
-<p><em>A class which describes a mapping which is constructed by combining two mappings. Let us denote Mapping1 as</em>  <em>and Mapping2 as</em> <em>then this mapping represents:</em> <em>.</em><a href="#detailed-description">More...</a></p>
+<p><em>A class which describes a mapping which is constructed by combining two mappings. Let us denote Mapping1 as</em> <span class="arithmatex">\(\mathcal{F}\)</span> <em>and Mapping2 as</em><span class="arithmatex">\(\mathcal{G}\)</span> <em>then this mapping represents:</em><span class="arithmatex">\(\mathcal{F} \circ \mathcal{G}\)</span> <em>.</em><a href="#detailed-description">More...</a></p>
 <ul>
 <li><code>#include &lt;combined_mapping.hpp&gt;</code></li>
 </ul>
@@ -632,8 +632,8 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>There are therefore 3 domains in this calculation ,  and  with  and </p>
-<p>The functions in this mapping are defined on the coordinate system associated with the domain . </p>
+<p>There are therefore 3 domains in this calculation <span class="arithmatex">\(\Omega_{start}\)</span>, <span class="arithmatex">\(\Omega_{mid}\)</span> and <span class="arithmatex">\(\Omega_{end}\)</span> with <span class="arithmatex">\(\mathcal{F}(\Omega_{mid})\rightarrow\Omega_{end}\)</span> and <span class="arithmatex">\(\mathcal{G}(\Omega_{start})\rightarrow\Omega_{mid}\)</span></p>
+<p>The functions in this mapping are defined on the coordinate system associated with the domain <span class="arithmatex">\(\Omega_{mid}\)</span>. </p>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-coordarg">typedef CoordArg</h3>
 <p><em>The type of the argument of the function described by this mapping.</em> </p>
@@ -677,7 +677,7 @@
 <ul>
 <li><code>mapping_1</code> The first mapping. </li>
 <li><code>mapping_2</code> The second mapping. </li>
-<li><code>epsilon</code> The parameter  which determines when a point is close enough to the central O-point for linearisation to be required when calculating the inverse of the Jacobian. The Jacobian is linearised on . </li>
+<li><code>epsilon</code> The parameter <span class="arithmatex">\(\varepsilon\)</span> which determines when a point is close enough to the central O-point for linearisation to be required when calculating the inverse of the Jacobian. The Jacobian is linearised on <span class="arithmatex">\(r \in [0, \varepsilon]\)</span>. </li>
 </ul>
 <hr>
 
@@ -731,7 +731,7 @@ inline KOKKOS_INLINE_FUNCTION double CombinedMapping::inv_jacobian_component (
     CoordIntermediate const &amp; coord
 ) const
 </code></pre>
-<p>If one of the mappings is singular then this function linearises the inverse Jacobian between the O-point and . The inverse Jacobian at the O-point is calculated using the class <a href="classInvJacobianOPoint.html"><strong>InvJacobianOPoint</strong></a> in this case. The inverse Jacobian at a point where the matrices are not singular is calculated using non_singular_inverse_jacobian_matrix</p>
+<p>If one of the mappings is singular then this function linearises the inverse Jacobian between the O-point and <span class="arithmatex">\(r = \varepsilon\)</span>. The inverse Jacobian at the O-point is calculated using the class <a href="classInvJacobianOPoint.html"><strong>InvJacobianOPoint</strong></a> in this case. The inverse Jacobian at a point where the matrices are not singular is calculated using non_singular_inverse_jacobian_matrix</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>coord</code> The coordinate where we evaluate the inverse Jacobian matrix. </li>
@@ -778,7 +778,8 @@ inline KOKKOS_INLINE_FUNCTION double CombinedMapping::jacobian_component (
 ) const
 </code></pre>
 <p>For some computations, we need the complete Jacobian matrix or just the coefficients. This is calculated by combining the Jacobian matrices of the 2 curvilinear mappings.</p>
-<p>The Jacobians that are used for the calculation must be mappings from  so they can be calculated on the correct coordinate system.</p>
+<p><span class="arithmatex">\(J_{(x_{in}, y_{in})-&gt;(x_{out},y_{out})} = J_{F\circ G}\)</span> <span class="arithmatex">\(= J_{(x_{mid}, y_{mid})-&gt;(x_{out},y_{out})}J_{(x_{in}, y_{in})-&gt;(x_{mid}, y_{mid})} = J_F J_G\)</span> <span class="arithmatex">\(= J_{(x_{mid}, y_{mid})-&gt;(x_{out},y_{out})} [J_{(x_{mid}, y_{mid})-&gt;(x_{in}, y_{in})}]^{-1} = J_F [J_{G^{-1}}]^{-1}\)</span></p>
+<p>The Jacobians that are used for the calculation must be mappings from <span class="arithmatex">\((x_{mid}, y_{mid})\)</span> so they can be calculated on the correct coordinate system.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>coord</code> The coordinate where we evaluate the Jacobian matrix. </li>

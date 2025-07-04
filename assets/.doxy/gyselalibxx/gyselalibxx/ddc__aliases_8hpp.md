@@ -33,12 +33,12 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef ddc::ChunkView&lt; ElementType, IdxRange, LayoutStridedPolicy, MemorySpace &gt; | [**ConstField**](#typedef-constfield)  <br>_An alias describing the type of a constant field defined on a grid (e.g. the electric field defined on the grid_  _)_ |
+| typedef ddc::ChunkView&lt; ElementType, IdxRange, LayoutStridedPolicy, MemorySpace &gt; | [**ConstField**](#typedef-constfield)  <br>_An alias describing the type of a constant field defined on a grid (e.g. the electric field defined on the grid_ \({x_0, x_1, .., x_N}\) _)_ |
 | typedef ddc::Coordinate&lt; Dims... &gt; | [**Coord**](#typedef-coord)  <br>_An alias describing the type of a coordinate (e.g. a coordinate in phase-space (x, vx))._  |
-| typedef ConstField&lt; double, IdxRange, MemorySpace, LayoutStridedPolicy &gt; | [**DConstField**](#typedef-dconstfield)  <br>_An alias describing the type of a constant field of doubles defined on a grid (e.g. the electric field defined on the grid_  _)_ |
-| typedef Field&lt; double, IdxRange, MemorySpace, LayoutStridedPolicy &gt; | [**DField**](#typedef-dfield)  <br>_An alias describing the type of a field of doubles defined on a grid (e.g. the electric field defined on the grid_  _)_ |
+| typedef ConstField&lt; double, IdxRange, MemorySpace, LayoutStridedPolicy &gt; | [**DConstField**](#typedef-dconstfield)  <br>_An alias describing the type of a constant field of doubles defined on a grid (e.g. the electric field defined on the grid_ \({x_0, x_1, .., x_N}\) _)_ |
+| typedef Field&lt; double, IdxRange, MemorySpace, LayoutStridedPolicy &gt; | [**DField**](#typedef-dfield)  <br>_An alias describing the type of a field of doubles defined on a grid (e.g. the electric field defined on the grid_ \({x_0, x_1, .., x_N}\) _)_ |
 | typedef FieldMem&lt; double, IdxRange, MemSpace &gt; | [**DFieldMem**](#typedef-dfieldmem)  <br>_An alias describing the type of an object which will allocate memory for a field of doubles when it is created._  |
-| typedef ddc::ChunkSpan&lt; ElementType, IdxRange, LayoutStridedPolicy, MemorySpace &gt; | [**Field**](#typedef-field)  <br>_An alias describing the type of a field defined on a grid (e.g. the electric field defined on the grid_  _)_ |
+| typedef ddc::ChunkSpan&lt; ElementType, IdxRange, LayoutStridedPolicy, MemorySpace &gt; | [**Field**](#typedef-field)  <br>_An alias describing the type of a field defined on a grid (e.g. the electric field defined on the grid_ \({x_0, x_1, .., x_N}\) _)_ |
 | typedef ddc::Chunk&lt; ElementType, IdxRange, ddc::KokkosAllocator&lt; ElementType, MemSpace &gt; &gt; | [**FieldMem**](#typedef-fieldmem)  <br>_An alias describing the type of an object which will allocate memory for a field when it is created._  |
 | typedef ddc::DiscreteElement&lt; GridTypes... &gt; | [**Idx**](#typedef-idx)  <br>_An alias describing the type of an index that is used to access the values of a field defined on a grid._  |
 | typedef ddc::DiscreteDomain&lt; GridTypes... &gt; | [**IdxRange**](#typedef-idxrange)  <br>_An alias describing the type of an index range describing the subsection of a grid on which a field is defined._  |
@@ -101,7 +101,7 @@
 
 ### typedef ConstField 
 
-_An alias describing the type of a constant field defined on a grid (e.g. the electric field defined on the grid_  _)_
+_An alias describing the type of a constant field defined on a grid (e.g. the electric field defined on the grid_ \({x_0, x_1, .., x_N}\) _)_
 ```C++
 using ConstField =  ddc::ChunkView<ElementType, IdxRange, LayoutStridedPolicy, MemorySpace>;
 ```
@@ -133,7 +133,7 @@ This file contains aliases for DDC. The documentation for DDC can be found at [h
 
 ### typedef DConstField 
 
-_An alias describing the type of a constant field of doubles defined on a grid (e.g. the electric field defined on the grid_  _)_
+_An alias describing the type of a constant field of doubles defined on a grid (e.g. the electric field defined on the grid_ \({x_0, x_1, .., x_N}\) _)_
 ```C++
 using DConstField =  ConstField<double, IdxRange, MemorySpace, LayoutStridedPolicy>;
 ```
@@ -147,7 +147,7 @@ using DConstField =  ConstField<double, IdxRange, MemorySpace, LayoutStridedPoli
 
 ### typedef DField 
 
-_An alias describing the type of a field of doubles defined on a grid (e.g. the electric field defined on the grid_  _)_
+_An alias describing the type of a field of doubles defined on a grid (e.g. the electric field defined on the grid_ \({x_0, x_1, .., x_N}\) _)_
 ```C++
 using DField =  Field<double, IdxRange, MemorySpace, LayoutStridedPolicy>;
 ```
@@ -175,7 +175,7 @@ using DFieldMem =  FieldMem<double, IdxRange, MemSpace>;
 
 ### typedef Field 
 
-_An alias describing the type of a field defined on a grid (e.g. the electric field defined on the grid_  _)_
+_An alias describing the type of a field defined on a grid (e.g. the electric field defined on the grid_ \({x_0, x_1, .., x_N}\) _)_
 ```C++
 using Field =  ddc::ChunkSpan<ElementType, IdxRange, LayoutStridedPolicy, MemorySpace>;
 ```

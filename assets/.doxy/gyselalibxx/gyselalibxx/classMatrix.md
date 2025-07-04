@@ -257,7 +257,7 @@ virtual DSpan1D Matrix::solve_inplace (
 
 
 
-Solve the following matrix equation:  The result  is saved into the memory allocated for .
+Solve the following matrix equation: \(M x = b\) The result \(x\) is saved into the memory allocated for \(b\).
 
 
 
@@ -271,7 +271,7 @@ Solve the following matrix equation:  The result  is saved into the memory alloc
 
 **Returns:**
 
-The solution . 
+The solution \(x\). 
 
 
 
@@ -294,7 +294,7 @@ virtual DSpan2D Matrix::solve_multiple_inplace (
 
 
 
-Solve the following matrix equation:  for multiple values of  and . The first dimension is iterated over with each slice representing an equation to be solved. The result  is saved into the memory allocated for .
+Solve the following matrix equation: \(M x = b\) for multiple values of \(b\) and \(x\). The first dimension is iterated over with each slice representing an equation to be solved. The result \(x\) is saved into the memory allocated for \(b\).
 
 
 
@@ -308,7 +308,7 @@ Solve the following matrix equation:  for multiple values of  and . The first di
 
 **Returns:**
 
-The solution . 
+The solution \(x\). 
 
 
 
@@ -331,7 +331,7 @@ virtual DSpan1D Matrix::solve_transpose_inplace (
 
 
 
-Solve the following matrix equation:  The result  is saved into the memory allocated for .
+Solve the following matrix equation: \(M^T x = b\) The result \(x\) is saved into the memory allocated for \(b\).
 
 
 
@@ -345,7 +345,7 @@ Solve the following matrix equation:  The result  is saved into the memory alloc
 
 **Returns:**
 
-The solution . 
+The solution \(x\). 
 
 
 

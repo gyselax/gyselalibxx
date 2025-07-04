@@ -34,7 +34,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**DiocotronDensitySolution**](classDiocotronDensitySolution.md) <br>_The diocotron exact solution of the density_  _._ |
+| class | [**DiocotronDensitySolution**](classDiocotronDensitySolution.md) <br>_The diocotron exact solution of the density_ \(\rho\) _._ |
 
 
 

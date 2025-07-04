@@ -564,7 +564,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">typedef ddc::ChunkView&lt; ElementType, IdxRange, LayoutStridedPolicy, MemorySpace &gt;</td>
-<td style="text-align: left;"><a href="#typedef-constfield"><strong>ConstField</strong></a>  <br><em>An alias describing the type of a constant field defined on a grid (e.g. the electric field defined on the grid</em>  <em>)</em></td>
+<td style="text-align: left;"><a href="#typedef-constfield"><strong>ConstField</strong></a>  <br><em>An alias describing the type of a constant field defined on a grid (e.g. the electric field defined on the grid</em> <span class="arithmatex">\({x_0, x_1, .., x_N}\)</span> <em>)</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef ddc::Coordinate&lt; Dims... &gt;</td>
@@ -572,11 +572,11 @@
 </tr>
 <tr>
 <td style="text-align: right;">typedef ConstField&lt; double, IdxRange, MemorySpace, LayoutStridedPolicy &gt;</td>
-<td style="text-align: left;"><a href="#typedef-dconstfield"><strong>DConstField</strong></a>  <br><em>An alias describing the type of a constant field of doubles defined on a grid (e.g. the electric field defined on the grid</em>  <em>)</em></td>
+<td style="text-align: left;"><a href="#typedef-dconstfield"><strong>DConstField</strong></a>  <br><em>An alias describing the type of a constant field of doubles defined on a grid (e.g. the electric field defined on the grid</em> <span class="arithmatex">\({x_0, x_1, .., x_N}\)</span> <em>)</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef Field&lt; double, IdxRange, MemorySpace, LayoutStridedPolicy &gt;</td>
-<td style="text-align: left;"><a href="#typedef-dfield"><strong>DField</strong></a>  <br><em>An alias describing the type of a field of doubles defined on a grid (e.g. the electric field defined on the grid</em>  <em>)</em></td>
+<td style="text-align: left;"><a href="#typedef-dfield"><strong>DField</strong></a>  <br><em>An alias describing the type of a field of doubles defined on a grid (e.g. the electric field defined on the grid</em> <span class="arithmatex">\({x_0, x_1, .., x_N}\)</span> <em>)</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef FieldMem&lt; double, IdxRange, MemSpace &gt;</td>
@@ -584,7 +584,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">typedef ddc::ChunkSpan&lt; ElementType, IdxRange, LayoutStridedPolicy, MemorySpace &gt;</td>
-<td style="text-align: left;"><a href="#typedef-field"><strong>Field</strong></a>  <br><em>An alias describing the type of a field defined on a grid (e.g. the electric field defined on the grid</em>  <em>)</em></td>
+<td style="text-align: left;"><a href="#typedef-field"><strong>Field</strong></a>  <br><em>An alias describing the type of a field defined on a grid (e.g. the electric field defined on the grid</em> <span class="arithmatex">\({x_0, x_1, .., x_N}\)</span> <em>)</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef ddc::Chunk&lt; ElementType, IdxRange, ddc::KokkosAllocator&lt; ElementType, MemSpace &gt; &gt;</td>
@@ -618,7 +618,7 @@
 </table>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-constfield">typedef ConstField</h3>
-<p><em>An alias describing the type of a constant field defined on a grid (e.g. the electric field defined on the grid</em>  <em>)</em></p>
+<p><em>An alias describing the type of a constant field defined on a grid (e.g. the electric field defined on the grid</em> <span class="arithmatex">\({x_0, x_1, .., x_N}\)</span> <em>)</em></p>
 <pre><code class="language-C++">using ConstField =  ddc::ChunkView&lt;ElementType, IdxRange, LayoutStridedPolicy, MemorySpace&gt;;
 </code></pre>
 <hr>
@@ -631,13 +631,13 @@
 <hr>
 
 <h3 id="typedef-dconstfield">typedef DConstField</h3>
-<p><em>An alias describing the type of a constant field of doubles defined on a grid (e.g. the electric field defined on the grid</em>  <em>)</em></p>
+<p><em>An alias describing the type of a constant field of doubles defined on a grid (e.g. the electric field defined on the grid</em> <span class="arithmatex">\({x_0, x_1, .., x_N}\)</span> <em>)</em></p>
 <pre><code class="language-C++">using DConstField =  ConstField&lt;double, IdxRange, MemorySpace, LayoutStridedPolicy&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-dfield">typedef DField</h3>
-<p><em>An alias describing the type of a field of doubles defined on a grid (e.g. the electric field defined on the grid</em>  <em>)</em></p>
+<p><em>An alias describing the type of a field of doubles defined on a grid (e.g. the electric field defined on the grid</em> <span class="arithmatex">\({x_0, x_1, .., x_N}\)</span> <em>)</em></p>
 <pre><code class="language-C++">using DField =  Field&lt;double, IdxRange, MemorySpace, LayoutStridedPolicy&gt;;
 </code></pre>
 <hr>
@@ -649,7 +649,7 @@
 <hr>
 
 <h3 id="typedef-field">typedef Field</h3>
-<p><em>An alias describing the type of a field defined on a grid (e.g. the electric field defined on the grid</em>  <em>)</em></p>
+<p><em>An alias describing the type of a field defined on a grid (e.g. the electric field defined on the grid</em> <span class="arithmatex">\({x_0, x_1, .., x_N}\)</span> <em>)</em></p>
 <pre><code class="language-C++">using Field =  ddc::ChunkSpan&lt;ElementType, IdxRange, LayoutStridedPolicy, MemorySpace&gt;;
 </code></pre>
 <hr>

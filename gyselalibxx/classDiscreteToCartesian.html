@@ -639,7 +639,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt;, VectorIndexSet&lt; <a href="classDiscreteToCartesian.html#typedef-r_cov"><strong>R_cov</strong></a>, <a href="classDiscreteToCartesian.html#typedef-theta_cov"><strong>Theta_cov</strong></a> &gt; &gt;</td>
-<td style="text-align: left;"><a href="#function-first_order_jacobian_matrix_r_rtheta"><strong>first_order_jacobian_matrix_r_rtheta</strong></a> (Coord&lt; <a href="classDiscreteToCartesian.html#typedef-curvilinear_tag_r"><strong>curvilinear_tag_r</strong></a>, <a href="classDiscreteToCartesian.html#typedef-curvilinear_tag_theta"><strong>curvilinear_tag_theta</strong></a> &gt; const &amp; coord) const<br><em>Get the first order expansion of the Jacobian matrix with the theta component divided by r. The expansion is carried out around</em>  <em>. The returned matrix</em> <em>is defined as:</em> __ __ __ <em>.</em></td>
+<td style="text-align: left;"><a href="#function-first_order_jacobian_matrix_r_rtheta"><strong>first_order_jacobian_matrix_r_rtheta</strong></a> (Coord&lt; <a href="classDiscreteToCartesian.html#typedef-curvilinear_tag_r"><strong>curvilinear_tag_r</strong></a>, <a href="classDiscreteToCartesian.html#typedef-curvilinear_tag_theta"><strong>curvilinear_tag_theta</strong></a> &gt; const &amp; coord) const<br><em>Get the first order expansion of the Jacobian matrix with the theta component divided by r. The expansion is carried out around</em> <span class="arithmatex">\(r=0\)</span> <em>. The returned matrix</em><span class="arithmatex">\(J\)</span> <em>is defined as:</em><span class="arithmatex">\(J_{00} = \frac{\partial x}{\partial r}(r, \theta)\)</span> <strong><span class="arithmatex">\(J_{01} = \frac{1}{r} \frac{\partial x}{\partial \theta}(r, \theta) + O(r^2) = \frac{\partial^2 x}{\partial r \partial \theta}(0, \theta)\)</span> </strong><span class="arithmatex">\(J_{10} = \frac{\partial y}{\partial r}(r, \theta)\)</span> __<span class="arithmatex">\(J_{11} = \frac{1}{r} \frac{\partial y}{\partial \theta}(r, \theta) + O(r^2) = \frac{\partial^2 y}{\partial r \partial \theta}(0, \theta)\)</span> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION IdxRangeRTheta</td>
@@ -673,6 +673,8 @@
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
 <p>The mapping describe here is only defined on a grid. The <a href="classDiscreteToCartesian.html"><strong>DiscreteToCartesian</strong></a> class decomposes the mapping on B-splines to evaluate it on the physical domain.</p>
+<div class="arithmatex">\[x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta),\]</div>
+<div class="arithmatex">\[y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta).\]</div>
 <p>This mapping could be costly to inverse. </p>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-bspliner">typedef BSplineR</h3>
@@ -762,7 +764,7 @@
     IdxRangeRTheta idx_range_singular_point
 ) 
 </code></pre>
-<p>A discrete mapping is a mapping whose values are known only at the mesh points of the grid. To interpolate the mapping, we use B-splines. The <a href="classDiscreteToCartesian.html"><strong>DiscreteToCartesian</strong></a> mapping is initialised from the coefficients in front of the basis splines which arise when we approximate the functions , and  (with  and  the physical dimensions in the logical domain) with Splines (using SplineBuilder2D). Then to interpolate the mapping, we will evaluate the decomposed functions on B-splines (see DiscreteToCartesian::operator()).</p>
+<p>A discrete mapping is a mapping whose values are known only at the mesh points of the grid. To interpolate the mapping, we use B-splines. The <a href="classDiscreteToCartesian.html"><strong>DiscreteToCartesian</strong></a> mapping is initialised from the coefficients in front of the basis splines which arise when we approximate the functions <span class="arithmatex">\(x(r,\theta)\)</span>, and <span class="arithmatex">\(y(r,\theta)\)</span> (with <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> the physical dimensions in the logical domain) with Splines (using SplineBuilder2D). Then to interpolate the mapping, we will evaluate the decomposed functions on B-splines (see DiscreteToCartesian::operator()).</p>
 <p>Here, the evaluator is given as input.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -782,11 +784,11 @@
     Idx&lt; BSplineR , BSplineTheta &gt; const &amp; el
 ) const
 </code></pre>
-<p>The mapping  decomposed on B-splines can be identified by its control points  where  and  are the B-splines coefficients:</p>
-<p>,</p>
-<p>,</p>
-<p>where  is the number of B-splines.</p>
-<p>The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points  are equal to the pole  where .</p>
+<p>The mapping <span class="arithmatex">\((r,\theta) \mapsto (x,y)\)</span> decomposed on B-splines can be identified by its control points <span class="arithmatex">\(\{(c_{x,k}, c_{y,k})\}_{k}\)</span> where <span class="arithmatex">\(c_{x,k}\)</span> and <span class="arithmatex">\(c_{y,k}\)</span> are the B-splines coefficients:</p>
+<p><span class="arithmatex">\(x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k(r,\theta)\)</span>,</p>
+<p><span class="arithmatex">\(y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k(r,\theta)\)</span>,</p>
+<p>where <span class="arithmatex">\(N_r\times N_{\theta}\)</span> is the number of B-splines.</p>
+<p>The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points <span class="arithmatex">\(\{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}}\)</span> are equal to the pole <span class="arithmatex">\((c_{x,k}, c_{y,k}) = (x_0,y_0) , \ \forall k = 0, ..., N_{\theta}-1\)</span> where <span class="arithmatex">\(x(0,\theta), y(0,\theta) = (x_0,y_0) \ \forall \theta\)</span>.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>el</code> The number of the control point.</li>
@@ -805,11 +807,11 @@ inline void DiscreteToCartesian::control_points (
     Field&lt; Coord&lt; X , Y &gt;, IdxRange&lt; BSplineR , BSplineTheta &gt;, MemorySpace &gt; pts
 ) const
 </code></pre>
-<p>The mapping  decomposed on B-splines can be identified by its control points  where  and  are the B-splines coefficients:</p>
-<p>,</p>
-<p>,</p>
-<p>where  is the number of B-splines.</p>
-<p>The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points  are equal to the pole  where .</p>
+<p>The mapping <span class="arithmatex">\((r,\theta) \mapsto (x,y)\)</span> decomposed on B-splines can be identified by its control points <span class="arithmatex">\(\{(c_{x,k}, c_{y,k})\}_{k}\)</span> where <span class="arithmatex">\(c_{x,k}\)</span> and <span class="arithmatex">\(c_{y,k}\)</span> are the B-splines coefficients:</p>
+<p><span class="arithmatex">\(x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k(r,\theta)\)</span>,</p>
+<p><span class="arithmatex">\(y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k(r,\theta)\)</span>,</p>
+<p>where <span class="arithmatex">\(N_r\times N_{\theta}\)</span> is the number of B-splines.</p>
+<p>The control points can be obtained by interpolating the mapping on interpolation points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints). We can also note that the first control points <span class="arithmatex">\(\{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}}\)</span> are equal to the pole <span class="arithmatex">\((c_{x,k}, c_{y,k}) = (x_0,y_0) , \ \forall k = 0, ..., N_{\theta}-1\)</span> where <span class="arithmatex">\(x(0,\theta), y(0,\theta) = (x_0,y_0) \ \forall \theta\)</span>.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>exec_space</code> The execution space where the calculations should be carried out. </li>
@@ -820,7 +822,7 @@ inline void DiscreteToCartesian::control_points (
 <hr>
 
 <h3 id="function-first_order_jacobian_matrix_r_rtheta">function first_order_jacobian_matrix_r_rtheta</h3>
-<p><em>Get the first order expansion of the Jacobian matrix with the theta component divided by r. The expansion is carried out around</em>  <em>. The returned matrix</em> <em>is defined as:</em> __ __ __ <em>.</em></p>
+<p><em>Get the first order expansion of the Jacobian matrix with the theta component divided by r. The expansion is carried out around</em> <span class="arithmatex">\(r=0\)</span> <em>. The returned matrix</em><span class="arithmatex">\(J\)</span> <em>is defined as:</em><span class="arithmatex">\(J_{00} = \frac{\partial x}{\partial r}(r, \theta)\)</span> <strong><span class="arithmatex">\(J_{01} = \frac{1}{r} \frac{\partial x}{\partial \theta}(r, \theta) + O(r^2) = \frac{\partial^2 x}{\partial r \partial \theta}(0, \theta)\)</span> </strong><span class="arithmatex">\(J_{10} = \frac{\partial y}{\partial r}(r, \theta)\)</span> __<span class="arithmatex">\(J_{11} = \frac{1}{r} \frac{\partial y}{\partial \theta}(r, \theta) + O(r^2) = \frac{\partial^2 y}{\partial r \partial \theta}(0, \theta)\)</span> <em>.</em></p>
 <pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION DTensor &lt; VectorIndexSet&lt; X , Y &gt;, VectorIndexSet&lt; R_cov , Theta_cov &gt; &gt; DiscreteToCartesian::first_order_jacobian_matrix_r_rtheta (
     Coord&lt; curvilinear_tag_r , curvilinear_tag_theta &gt; const &amp; coord
 ) const
@@ -862,8 +864,8 @@ inline KOKKOS_INLINE_FUNCTION double DiscreteToCartesian::jacobian_component (
     Coord&lt; R , Theta &gt; coord
 ) const
 </code></pre>
-<p>For a mapping given by , with  the curvilinear coordinates and  the Cartesian coordinates, the (i,j) coefficient of the Jacobian matrix is given by .</p>
-<p>As the mapping is decomposed on B-splines, it means it computes the derivatives of B-splines  (the derivatives are implemented in SplineEvaluator2D).</p>
+<p>For a mapping given by <span class="arithmatex">\(\mathcal{F} : {q_i}\mapsto {x_i}\)</span>, with <span class="arithmatex">\({q_i}\)</span> the curvilinear coordinates and <span class="arithmatex">\({x_i}\)</span> the Cartesian coordinates, the (i,j) coefficient of the Jacobian matrix is given by <span class="arithmatex">\(J^i_j\frac{\partial x_i}{\partial q_j}\)</span>.</p>
+<p>As the mapping is decomposed on B-splines, it means it computes the derivatives of B-splines <span class="arithmatex">\(\frac{\partial x_i}{\partial q_j} (r,\theta)= \sum_k c_{x_i,k} \frac{\partial B_k}{\partial q_j}(r,\theta)\)</span> (the derivatives are implemented in SplineEvaluator2D).</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>coord</code> The coordinate where we evaluate the Jacobian matrix.</li>

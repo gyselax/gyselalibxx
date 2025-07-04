@@ -87,7 +87,7 @@
 ## Detailed Description
 
 
-A specialisation of [**InvJacobianOPoint**](classInvJacobianOPoint.md) for a combined mapping  where  is a circular mapping from logical to physical, and  is an inverse circular mapping from physical to logical. The combined mapping  therefore maps from a physical domain  to a physical domain  (this mapping is equivalent to the identity). 
+A specialisation of [**InvJacobianOPoint**](classInvJacobianOPoint.md) for a combined mapping \(\mathcal{F} \circ \mathcal{G}\) where \(\mathcal{F}\) is a circular mapping from logical to physical, and \(\mathcal{G}\) is an inverse circular mapping from physical to logical. The combined mapping \(\mathcal{F} \circ \mathcal{G}\) therefore maps from a physical domain \((X_{pc}, Y_{pc})\) to a physical domain \((X, Y)\) (this mapping is equivalent to the identity). 
 
 
     
@@ -132,11 +132,19 @@ inline KOKKOS_INLINE_FUNCTION DTensor < VectorIndexSet< Xpc, Ypc >, VectorIndexS
 
 
 
-Here, as , the Jacobian matrix of  is the identity matrix. So, the pseudo-Cartesian Jacobian matrix for a circular mapping is given by :
+Here, as \(\mathcal{G}^{-1} =  \mathcal{F}\), the Jacobian matrix of \((\mathcal{F} \circ \mathcal{G}^{-1})^{-1}\) is the identity matrix. So, the pseudo-Cartesian Jacobian matrix for a circular mapping is given by :
 * 
+\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = 1,\]
+
 * 
+\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0,\]
+
 * 
+\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0,\]
+
 * 
+\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = 1.\]
+
 
 
 

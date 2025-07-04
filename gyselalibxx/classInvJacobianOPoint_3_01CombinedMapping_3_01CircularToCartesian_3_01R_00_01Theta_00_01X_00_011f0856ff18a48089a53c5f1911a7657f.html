@@ -573,7 +573,7 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>A specialisation of <a href="classInvJacobianOPoint.html"><strong>InvJacobianOPoint</strong></a> for a combined mapping  where  is a circular mapping from logical to physical, and  is an inverse circular mapping from physical to logical. The combined mapping  therefore maps from a physical domain  to a physical domain  (this mapping is equivalent to the identity). </p>
+<p>A specialisation of <a href="classInvJacobianOPoint.html"><strong>InvJacobianOPoint</strong></a> for a combined mapping <span class="arithmatex">\(\mathcal{F} \circ \mathcal{G}\)</span> where <span class="arithmatex">\(\mathcal{F}\)</span> is a circular mapping from logical to physical, and <span class="arithmatex">\(\mathcal{G}\)</span> is an inverse circular mapping from physical to logical. The combined mapping <span class="arithmatex">\(\mathcal{F} \circ \mathcal{G}\)</span> therefore maps from a physical domain <span class="arithmatex">\((X_{pc}, Y_{pc})\)</span> to a physical domain <span class="arithmatex">\((X, Y)\)</span> (this mapping is equivalent to the identity). </p>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-invjacobianopoint">function InvJacobianOPoint</h3>
 <p><em>The constructor of</em> <a href="classInvJacobianOPoint.html"><em><strong>InvJacobianOPoint</strong></em></a> <em>.</em></p>
@@ -591,11 +591,20 @@
 <p><em>Compute the full inverse Jacobian matrix from a coordinate system (x_pc, y_pc) to a coordinate system (x, y).</em> </p>
 <pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION DTensor &lt; VectorIndexSet&lt; Xpc, Ypc &gt;, VectorIndexSet&lt; X_cov, Y_cov &gt; &gt; InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::operator() () const
 </code></pre>
-<p>Here, as , the Jacobian matrix of  is the identity matrix. So, the pseudo-Cartesian Jacobian matrix for a circular mapping is given by :
+<p>Here, as <span class="arithmatex">\(\mathcal{G}^{-1} =  \mathcal{F}\)</span>, the Jacobian matrix of <span class="arithmatex">\((\mathcal{F} \circ \mathcal{G}^{-1})^{-1}\)</span> is the identity matrix. So, the pseudo-Cartesian Jacobian matrix for a circular mapping is given by :
 * 
-* 
-* 
-* </p>
+[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = 1,]</p>
+<ul>
+<li>
+<div class="arithmatex">\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0,\]</div>
+</li>
+<li>
+<div class="arithmatex">\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0,\]</div>
+</li>
+<li>
+<div class="arithmatex">\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = 1.\]</div>
+</li>
+</ul>
 <p><strong>Returns:</strong></p>
 <p>The matrix evaluated at the central point. </p>
 <hr>

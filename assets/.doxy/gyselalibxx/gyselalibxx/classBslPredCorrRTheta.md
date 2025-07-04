@@ -76,7 +76,7 @@ Inherits the following classes: [ITimeSolverRTheta](classITimeSolverRTheta.md)
 | Type | Name |
 | ---: | :--- |
 |   | [**BslPredCorrRTheta**](#function-bslpredcorrrtheta) (Mapping const & mapping, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, SplineRThetaBuilder\_host const & builder, SplineRThetaEvaluatorNullBound\_host const & rhs\_evaluator, [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md)&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), SplineRThetaEvaluatorNullBound &gt; const & poisson\_solver) <br>_Instantiate a_ [_**BslPredCorrRTheta**_](classBslPredCorrRTheta.md) _._ |
-| virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps) override const<br>_Solves on_  _the equations system._ |
+| virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps) override const<br>_Solves on_ \(T = dt*N\) _the equations system._ |
 
 
 ## Public Functions inherited from ITimeSolverRTheta
@@ -85,7 +85,7 @@ See [ITimeSolverRTheta](classITimeSolverRTheta.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](classITimeSolverRTheta.md#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps=1) const = 0<br>_Solves on_  _the equations system._ |
+| virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](classITimeSolverRTheta.md#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps=1) const = 0<br>_Solves on_ \(T = dt*N\) _the equations system._ |
 | virtual  | [**~ITimeSolverRTheta**](classITimeSolverRTheta.md#function-itimesolverrtheta) () = default<br> |
 
 
@@ -155,34 +155,34 @@ It solves in time the following Vlasov-Poisson equations system:
 
 
 
-* ,
-* ,
-* ,
+* \(- \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho\),
+* \(E = - \nabla \phi\),
+* \(\partial_t \rho - E_y \partial_x \rho + E_x \partial_y \rho = 0\),
 
 
 
 
-we write .
+we write \((A_x, A_y) =  (-E_y, E_x)\).
 
 
 This method is mainly a Runge-Kutta 2 method:
 
 
-for ,
+for \(n \geq 0\),
 
 
 First, it advects on a half time step:
-* 1. From , it computes  with a [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md);
-* 2. From , it computes  with a [**AdvectionFieldFinder**](classAdvectionFieldFinder.md);
-* 3. From  and , it computes  with a [**BslAdvectionPolar**](classBslAdvectionPolar.md) on ;
+* 1. From \(\rho^n\), it computes \(\phi^n\) with a [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md);
+* 2. From \(\phi^n\), it computes \(A^n\) with a [**AdvectionFieldFinder**](classAdvectionFieldFinder.md);
+* 3. From \(\rho^n\) and \(A^n\), it computes \(\rho^{n+1/2}\) with a [**BslAdvectionPolar**](classBslAdvectionPolar.md) on \(\frac{dt}{2}\);
 
 
 
 
 Secondly, it advects on a full time step:
-* 4. From , it computes  with a [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md);
-* 5. From , it computes  with a [**AdvectionFieldFinder**](classAdvectionFieldFinder.md);
-* 6. From  and , it computes  with a [**BslAdvectionPolar**](classBslAdvectionPolar.md) on .
+* 4. From \(\rho^{n+1/2}\), it computes \(\phi^{n+1/2}\) with a [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md);
+* 5. From \(\phi^{n+1/2}\), it computes \(A^{n+1/2}\) with a [**AdvectionFieldFinder**](classAdvectionFieldFinder.md);
+* 6. From \(\rho^n\) and \(A^{n+1/2}\), it computes \(\rho^{n+1}\) with a [**BslAdvectionPolar**](classBslAdvectionPolar.md) on \(dt\).
 
 
 
@@ -241,7 +241,7 @@ inline BslPredCorrRTheta::BslPredCorrRTheta (
 
 ### function operator() 
 
-_Solves on_  _the equations system._
+_Solves on_ \(T = dt*N\) _the equations system._
 ```C++
 inline virtual host_t< DFieldRTheta > BslPredCorrRTheta::operator() (
     host_t< DFieldRTheta > density,
@@ -257,9 +257,9 @@ inline virtual host_t< DFieldRTheta > BslPredCorrRTheta::operator() (
 **Parameters:**
 
 
-* `density` On input: the initial condition. On output: the solution at . 
+* `density` On input: the initial condition. On output: the solution at \(dt *N\). 
 * `dt` The time step. 
-* `steps` The number  of time interactions.
+* `steps` The number \(N\) of time interactions.
 
 
 

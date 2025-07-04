@@ -15,7 +15,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**BSplinesY**](structBSplinesY.md) 
 * **class** [**BarycentricToCartesian**](classBarycentricToCartesian.md) _A class to convert barycentric coordinates to Cartesian coordinates on a triangle._     
 * **class** [**BslAdvection1D**](classBslAdvection1D.md) _A class which computes the advection along the dimension of interest GridInterest._     
-* **class** [**BslAdvectionPolar**](classBslAdvectionPolar.md) _Define an advection operator on 2D_  _domain._    
+* **class** [**BslAdvectionPolar**](classBslAdvectionPolar.md) _Define an advection operator on 2D_ \((r, \theta)\) _domain._    
 * **class** [**BslAdvectionSpatial**](classBslAdvectionSpatial.md) _A class which computes the spatial advection along the dimension of interest_ [_**GridX**_](structGridX.md) _. Working for every Cartesian geometry._    
 * **class** [**BslAdvectionVelocity**](classBslAdvectionVelocity.md) _A class which computes the velocity advection along the dimension of interest GridV. Working for every Cartesian geometry._     
 * **class** [**BslExplicitPredCorrRTheta**](classBslExplicitPredCorrRTheta.md) _A second order explicit predictor-corrector for the Vlasov-Poisson equations._     
@@ -39,7 +39,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**CollisionsIntra**](classCollisionsIntra.md) _Class describing the intra-species collision operator._     
     * **struct** [**GhostedVx**](structCollisionsIntra_1_1GhostedVx.md) 
     * **struct** [**GhostedVxStaggered**](structCollisionsIntra_1_1GhostedVxStaggered.md) 
-* **class** [**CombinedMapping**](classCombinedMapping.md) _A class which describes a mapping which is constructed by combining two mappings. Let us denote Mapping1 as_  _and Mapping2 as_ _then this mapping represents:_ _._    
+* **class** [**CombinedMapping**](classCombinedMapping.md) _A class which describes a mapping which is constructed by combining two mappings. Let us denote Mapping1 as_ \(\mathcal{F}\) _and Mapping2 as_\(\mathcal{G}\) _then this mapping represents:_\(\mathcal{F} \circ \mathcal{G}\) _._    
 * **struct** [**ConstPolarSpline**](structConstPolarSpline.md) _A structure containing the two ConstFields necessary to define a constant reference to a spline on a set of polar basis splines._     
 * **struct** [**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md) _Define constant extrapolation rule for onion shape geometries. Struct useful for the MultipatchSplineEvaluator types._  __    
 * **class** [**ConstantPartialDerivative**](classConstantPartialDerivative.md) _A class to get the derivative of a constant function. When the derivative of a function is known to be 0 but the dimension is still needed this class can be used to avoid unnecessary calculations._     
@@ -54,7 +54,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md) _An abstract class which holds a chunk of memory describing a field and its derivatives. This is the superclass for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _and_[_**DerivField**_](classDerivField.md) _._    
 * **class** [**DerivFieldMem**](classDerivFieldMem.md) 
 * **class** [**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md) _A class which holds a chunk of memory describing a field and its derivatives._     
-* **class** [**DiocotronDensitySolution**](classDiocotronDensitySolution.md) _The diocotron exact solution of the density_  _._    
+* **class** [**DiocotronDensitySolution**](classDiocotronDensitySolution.md) _The diocotron exact solution of the density_ \(\rho\) _._    
 * **class** [**DiscreteToCartesian**](classDiscreteToCartesian.md) _A class for describing discrete 2D mappings from the logical domain to the physical domain._     
 * **class** [**DiscreteToCartesianBuilder**](classDiscreteToCartesianBuilder.md) _A class to create a_ [_**DiscreteToCartesian**_](classDiscreteToCartesian.md) _instance from an analytical mapping. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data._    
 * **struct** [**Edge**](structEdge.md) _Define an edge of a given patch._     
@@ -65,7 +65,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **struct** [**GridPDEDimQ**](structFEM1DPoissonSolver_1_1GridPDEDimQ.md) _The grid of quadrature points along the PDEDim direction._ 
     * **struct** [**HiddenFEMBSplines**](structFEM1DPoissonSolver_1_1HiddenFEMBSplines.md) 
 * **class** [**FFTPoissonSolver**](classFFTPoissonSolver.md) 
-* **class** [**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md) _A class to solve the following equation:_  _using a Fourier transform._    
+* **class** [**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md) _A class to solve the following equation:_ \(-\Delta \phi = \rho\) _using a Fourier transform._    
     * **struct** [**GridFourier**](structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace2aeecfe91d464f5738599cc105fb6087.md) 
 * **class** [**FluidMoments**](classFluidMoments.md) _A class that computes fluid moments of the distribution function._     
     * **struct** [**MomentDensity**](structFluidMoments_1_1MomentDensity.md) 
@@ -105,7 +105,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**IPartialDerivativeCreator**](classIPartialDerivativeCreator.md) _An abstract class which provides a create\_instance function to instantiate an object of the_ [_**IPartialDerivative**_](classIPartialDerivative.md) _class where required._    
 * **class** [**IPoissonSolver**](classIPoissonSolver.md) 
 * **class** [**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md)     
-* **class** [**IPolarFootFinder**](classIPolarFootFinder.md) _Define a base class for all the time integration methods used to find the foot of a characteristic on a polar domain (a polar domain is a domain defined on the_  _plane)._    
+* **class** [**IPolarFootFinder**](classIPolarFootFinder.md) _Define a base class for all the time integration methods used to find the foot of a characteristic on a polar domain (a polar domain is a domain defined on the_ \((r,\theta)\) _plane)._    
 * **class** [**IPreallocatableInterpolator**](classIPreallocatableInterpolator.md) _A class which provides access to an interpolating function which can be preallocated where useful._     
 * **class** [**IPreallocatableInterpolator2D**](classIPreallocatableInterpolator2D.md) _A class which provides access to an interpolating function which can be preallocated where useful._     
 * **class** [**IQNSolver**](classIQNSolver.md) _Base class for a Quasi-Neutrality solver._     
@@ -130,7 +130,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**Lagrange**](classLagrange.md) _A class which implements_ [_**Lagrange**_](classLagrange.md) _polynomials._    
 * **class** [**LagrangeInterpolator**](classLagrangeInterpolator.md) _A class for interpolating a function using_ [_**Lagrange**_](classLagrange.md) _polynomials. It is designed to work with both uniform and non-uniform mesh, and have the advantage to be local._    
 * **class** [**LeviCivitaTensor**](classLeviCivitaTensor.md)     
-* **class** [**LiePoissonBracket**](classLiePoissonBracket.md) _A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is:_  _with_ _the unitary magnetic field, i.e:_ _with_ _the jacobian of the system,_ _the covariant components of b and_ _the Levi-Civita symbol._    
+* **class** [**LiePoissonBracket**](classLiePoissonBracket.md) _A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is:_ \(\{F, G\} = b\dot(\nabla F \cross \nabla G)\) _with_\(b= \mathbf{B} / B\) _the unitary magnetic field, i.e:_\(\{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k\) _with_\({\cal J}_{\rm x}\) _the jacobian of the system,_\(b_k\) _the covariant components of b and_\(\epsilon^{ijk}\) _the Levi-Civita symbol._    
 * **struct** [**MPIDim**](structMPIDim.md) _An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered information will be sent to or where the gathered information will be collected from._     
 * **class** [**MPILayout**](classMPILayout.md) _A class describing a way in which data may be laid out across MPI processes._     
 * **class** [**MPITransposeAllToAll**](classMPITransposeAllToAll.md) _A class describing an operator for converting from/to different MPI layouts using AlltoAll._     
@@ -152,7 +152,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **class** [**Impl**](classMoments_1_1Impl.md) [_**Impl**_](classMoments_1_1Impl.md) _object storing attributes in_`MemorySpace` _._    
 * **class** [**MpiChargeDensityCalculator**](classMpiChargeDensityCalculator.md) _A class which computes charges density with Kokkos._     
 * **class** [**MpiSplitVlasovSolver**](classMpiSplitVlasovSolver.md) _A class that solves a Vlasov equation using Strang's splitting on an MPI distributed mesh._     
-* **struct** [**Mu**](structMu.md) _Define non periodic magnetic momentum_  _._    
+* **struct** [**Mu**](structMu.md) _Define non periodic magnetic momentum_ \(\mu\) _._    
 * **class** [**MultipatchConnectivity**](classMultipatchConnectivity.md) _A helper class which provides functionalities to recognise how different patches are connected._     
 * **class** [**MultipatchField**](classMultipatchField.md) _A class to store field objects on patches._     
 * **class** [**MultipatchFieldMem**](classMultipatchFieldMem.md) _A class to store field memory block objects on patches._     
@@ -239,7 +239,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **namespace** [**SplineInterpPointsY**](namespaceSplineInterpPointsY.md) 
 * **class** [**SplineInterpolator**](classSplineInterpolator.md) _A class for interpolating a function using splines._     
 * **class** [**SplineInterpolator2D**](classSplineInterpolator2D.md) _A class for interpolating a function using a 2D tensor product of splines._     
-* **class** [**SplinePolarFootFinder**](classSplinePolarFootFinder.md) _A class to find the foot of the characteristics on the_  _plane._    
+* **class** [**SplinePolarFootFinder**](classSplinePolarFootFinder.md) _A class to find the foot of the characteristics on the_ \((r,\theta)\) _plane._    
 * **class** [**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md) _A class that solves a Boltzmann equation using Strang's splitting._     
 * **class** [**SplitVlasovSolver**](classSplitVlasovSolver.md) _A class that solves a Vlasov equation using Strang's splitting._     
 * **struct** [**T**](structT.md) _A class which describes the real space in the temporal direction._     
@@ -247,7 +247,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**TensorCommon**](classTensorCommon.md) _A superclass for_ [_**Tensor**_](classTensor.md) _calculations._[_**Tensor**_](classTensor.md) _classes containing data will inherit from this class. The class_[_**Tensor**_](classTensor.md) _will represent most Tensors but other subclasses may be necessary (e.g. to access a Vector in a_[_**VectorField**_](classVectorField.md) _)._    
 * **struct** [**Theta**](structTheta.md) _Define periodic real contravariant_ [_**Theta**_](structTheta.md) _dimension._    
 * **struct** [**Theta\_cov**](structTheta__cov.md) _Define periodic real covariant_ [_**Theta**_](structTheta.md) _dimension._    
-* **class** [**ToroidalToCylindrical**](classToroidalToCylindrical.md) _A class describing a coordinate change from a toroidal system of coordinates to a cylindrical system of coordinates. The toroidal coordinates are described by a polar plane_  _and a perpendicular dimension_ _. The cylindrical coordinates are_ _._ _describe a Cartesian slice._ _are therefore defined from this slice with a 2D coordinate change operator._ _is chosen to be equal to_ _to preserve the orientation of the axes (following the right-hand rule)._    
+* **class** [**ToroidalToCylindrical**](classToroidalToCylindrical.md) _A class describing a coordinate change from a toroidal system of coordinates to a cylindrical system of coordinates. The toroidal coordinates are described by a polar plane_ \((\rho, \theta)\) _and a perpendicular dimension_\(\phi\) _. The cylindrical coordinates are_\((R, Z, \zeta)\) _._\((R, Z)\) _describe a Cartesian slice._\((\rho, \theta)\) _are therefore defined from this slice with a 2D coordinate change operator._\(\zeta\) _is chosen to be equal to_\(-\phi\) _to preserve the orientation of the axes (following the right-hand rule)._    
 * **class** [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md) _A class which evaluates the triangular Bernstein polynomials._     
     * **class** [**Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md)     
 * **class** [**VectorField**](classVectorField.md) _A class which holds multiple (scalar) fields in order to represent a vector field._     
@@ -255,7 +255,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**VectorFieldMem**](classVectorFieldMem.md) _Pre-declaration of_ [_**VectorFieldMem**_](classVectorFieldMem.md) _._    
 * **class** [**VortexMergerDensitySolution**](classVortexMergerDensitySolution.md) _Initial condition for the vortex merger simulation._     
 * **class** [**VortexMergerEquilibria**](classVortexMergerEquilibria.md) _Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates._     
-* **struct** [**Vpar**](structVpar.md) _Define non periodic parallel velocity_  _._    
+* **struct** [**Vpar**](structVpar.md) _Define non periodic parallel velocity_ \(v_\parallel\) _._    
 * **struct** [**Vr**](structVr.md) _Define non periodic real_ [_**R**_](structR.md) _velocity dimension._    
 * **struct** [**Vtheta**](structVtheta.md) _Define periodic real_ [_**Theta**_](structTheta.md) _velocity dimension._    
 * **struct** [**Vx**](structVx.md) _Define non periodic real_ [_**X**_](structX.md) _velocity dimension._    
@@ -334,7 +334,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **struct** [**GetCovariantDims**](structtensor__tools_1_1GetCovariantDims.md) _A class to get a VectorIndexSet containing only covariant dimensions._ 
     * **struct** [**GetCovariantDims&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1GetCovariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md) _A class to get a VectorIndexSet containing only covariant dimensions._     
     * **class** [**IndexedTensor**](classtensor__tools_1_1IndexedTensor.md) _A class to capture the description of a tensor indexed at a specific component. This class should not be explicitly declared in user code. It is the output of a call to the index&lt;...&gt; function and is an input to the tensor\_mul function._     
-    * **class** [**TensorIndexElement**](classtensor__tools_1_1TensorIndexElement.md) _A class describing an index of a tensor. For example for a 2x2 metric tensor on an (x,y) plane the element_  _would have the index TensorIndexElement&lt;TensorIndexSetXY, X, X&gt;._
+    * **class** [**TensorIndexElement**](classtensor__tools_1_1TensorIndexElement.md) _A class describing an index of a tensor. For example for a 2x2 metric tensor on an (x,y) plane the element_ \(g_{xx}\) _would have the index TensorIndexElement&lt;TensorIndexSetXY, X, X&gt;._
     * **struct** [**VectorIndexIdMap**](structtensor__tools_1_1VectorIndexIdMap.md) _A class representing a vector index identifier._     
     * **struct** [**is\_contravariant\_vector\_index\_set**](structtensor__tools_1_1is__contravariant__vector__index__set.md) 
     * **struct** [**is\_contravariant\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__contravariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md) _A helper structure to check if all the dimensions in a VectorIndexSet can represent contravariant indices._     

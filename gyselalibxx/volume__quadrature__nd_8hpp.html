@@ -588,15 +588,18 @@ DFieldMem&lt; IdxRangeCoeffs, typename ExecSpace::memory_space &gt; compute_coef
 <ul>
 <li>2D example: (but it is implemented for ND)</li>
 </ul>
+<div class="arithmatex">\[\int_{\Omega_{\text{cart}}} f(x,y) dxdy
+ = \int_{\Omega} f(r,\theta) |det(J(r,\theta))| drd\theta
+ \simeq \sum_{i,j} [q_{i,j}| det(J(r_i,\theta_j))|] f_{ij}\]</div>
 <p>This function uses rvalues. It means that coefficients is a temporary input parameter and it returns a temporary coefficient object. The <a href="classQuadrature.html"><strong>Quadrature</strong></a> object can only be instantiate with rvalues.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>exec_space</code> The space on which the function is executed (CPU/GPU). </li>
-<li><code>mapping</code> The mapping function from the logical domain  to the physical domain . </li>
-<li><code>coefficients_alloc</code> The quadrature coefficients .</li>
+<li><code>mapping</code> The mapping function from the logical domain <span class="arithmatex">\((r,\theta)\)</span> to the physical domain <span class="arithmatex">\((x, y)\)</span>. </li>
+<li><code>coefficients_alloc</code> The quadrature coefficients <span class="arithmatex">\(\{q_{ij}\}_{ij}\)</span>.</li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>A rvalue FieldMem to the modified coefficients . </p>
+<p>A rvalue FieldMem to the modified coefficients <span class="arithmatex">\(\{q_{ij}| det(J(r_i,\theta_j))|\}_{ij}\)</span>. </p>
 <hr>
 
 <hr>

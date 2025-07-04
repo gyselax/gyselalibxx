@@ -149,9 +149,15 @@ inline void VortexMergerDensitySolution::set_initialisation (
 
 
 The initial condition is given by  
+\[\rho(0, x, y) = \rho_{eq}(x,y) + \varepsilon
+     \left(
+         \exp\left[-\frac{(x - x_1^*)^2 + (y - y_1^*)^2}{2\sigma^2}\right]
+      +  \exp\left[-\frac{(x - x_2^*)^2 + (y - y_2^*)^2}{2\sigma^2}\right]
+     \right)\]
 
 
-with  given by [**VortexMergerEquilibria::set\_equilibrium**](classVortexMergerEquilibria.md#function-set_equilibrium).
+
+with \(\rho_{eq}\) given by [**VortexMergerEquilibria::set\_equilibrium**](classVortexMergerEquilibria.md#function-set_equilibrium).
 
 
 The initial condition is also given in Edoardo Zoni's article ([https://doi.org/10.1016/j.jcp.2019.108889](https://doi.org/10.1016/j.jcp.2019.108889)).
@@ -164,12 +170,12 @@ The initial condition is also given in Edoardo Zoni's article ([https://doi.org/
 
 * `rho_init` The initial condition of the density. 
 * `rho_eq` The equilibrium density solution computed thanks to [**VortexMergerEquilibria::set\_equilibrium**](classVortexMergerEquilibria.md#function-set_equilibrium). 
-* `eps` The  amplitude of the perturbation. 
-* `sigma` The  of the Gaussian functions. 
-* `x_star_1` The  parameter. 
-* `y_star_1` The  parameter. 
-* `x_star_2` The  parameter. 
-* `y_star_2` The  parameter. 
+* `eps` The \(\varepsilon\) amplitude of the perturbation. 
+* `sigma` The \(\sigma\) of the Gaussian functions. 
+* `x_star_1` The \(x_1^*\) parameter. 
+* `y_star_1` The \(y_1^*\) parameter. 
+* `x_star_2` The \(x_2^*\) parameter. 
+* `y_star_2` The \(y_2^*\) parameter. 
 
 
 

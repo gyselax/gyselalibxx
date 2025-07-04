@@ -1003,7 +1003,7 @@ inline KOKKOS_FUNCTION constexpr auto DerivFieldCommon&lt; FieldType, IdxRange&l
 <p><em>The internal fields describing the values and derivatives.</em> </p>
 <pre><code class="language-C++">std::array&lt;internal_mdspan_type, n_fields&gt; DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::internal_fields;
 </code></pre>
-<p>The fields which contain the values have different index ranges to the fields containing derivatives so a DDC object cannot be used directly. E.g. for a 2D field (<a href="structX.html"><strong>X</strong></a>,<a href="structY.html"><strong>Y</strong></a>) with derivatives provided in both directions the elements of internal_fields have the type : DFieldMem&lt;IdxRange&lt;Deriv&lt;IDimX&gt;, Deriv&lt;IDimY&gt;, IDimX, IDimY&gt; The derivative index ranges are then defined such that the elements of internal_fields represent: 0 :  1 :  2 :  3 :  </p>
+<p>The fields which contain the values have different index ranges to the fields containing derivatives so a DDC object cannot be used directly. E.g. for a 2D field (<a href="structX.html"><strong>X</strong></a>,<a href="structY.html"><strong>Y</strong></a>) with derivatives provided in both directions the elements of internal_fields have the type : DFieldMem&lt;IdxRange&lt;Deriv&lt;IDimX&gt;, Deriv&lt;IDimY&gt;, IDimX, IDimY&gt; The derivative index ranges are then defined such that the elements of internal_fields represent: 0 : <span class="arithmatex">\(f(x,y)\)</span> 1 : <span class="arithmatex">\(\partial_x^k f(x,y)  \quad \forall 1 \leq k \leq NDerivs\)</span> 2 : <span class="arithmatex">\(\partial_y^k f(x,y)  \quad \forall 1 \leq k \leq NDerivs\)</span> 3 : <span class="arithmatex">\(\partial_x^j \partial_y^k f(x,y)  \quad \forall 1 \leq j \leq NDerivs,  \forall 1 \leq k \leq NDerivs\)</span> </p>
 <hr>
 
 <h3 id="variable-m_cross_derivative_idx_range">variable m_cross_derivative_idx_range</h3>
@@ -1053,7 +1053,7 @@ inline KOKKOS_FUNCTION int DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims...
     Idx&lt; Tag... &gt; idx
 ) const
 </code></pre>
-<p>The index is calculated using a bit mask. Mathematically the equation which determines the index in <code>internal_fields</code> is:  where  is the index of the dimension  in the tags.</p>
+<p>The index is calculated using a bit mask. Mathematically the equation which determines the index in <code>internal_fields</code> is: <span class="arithmatex">\(\sum_{\xi} 2^{i_\xi} \delta_{\text{using derivs in }\xi}\)</span> where <span class="arithmatex">\(i_\xi\)</span> is the index of the dimension <span class="arithmatex">\(\xi\)</span> in the tags.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>idx</code> The derivatives of interest.</li>

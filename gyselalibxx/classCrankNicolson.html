@@ -734,9 +734,9 @@
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
 <p>A class which provides an implementation of a Crank-Nicolson method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. The values which evolve are defined on an index range.</p>
-<p>For the following ODE : ,</p>
-<p>the Crank-Nicolson method is given by : .</p>
-<p>The method is an implicit method. If , then we set .</p>
+<p>For the following ODE : <span class="arithmatex">\(\partial_t y(t) = f(t, y(t))\)</span>,</p>
+<p>the Crank-Nicolson method is given by : <span class="arithmatex">\(y^{k} =  y^{n} + \frac{dt}{2} \left(f(t^{n}, y^{n}) + f(t^{k}, y^{k}) \right)\)</span>.</p>
+<p>The method is an implicit method. If <span class="arithmatex">\(|y^{k+1} -  y^{k}| &lt; \varepsilon\)</span>, then we set <span class="arithmatex">\(y^{n+1} = y^{k+1}\)</span>.</p>
 <p>The method is order 2. </p>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-derivconstfield">typedef DerivConstField</h3>
@@ -781,7 +781,7 @@
 <ul>
 <li><code>idx_range</code> The index range on which the points which evolve over time are defined. </li>
 <li><code>counter</code> The maximal number of loops for the implicit method. </li>
-<li><code>epsilon</code> The  upperbound of the difference of two steps in the implicit method: . </li>
+<li><code>epsilon</code> The <span class="arithmatex">\(\varepsilon\)</span> upperbound of the difference of two steps in the implicit method: <span class="arithmatex">\(|y^{k+1} -  y^{k}| &lt; \varepsilon\)</span>. </li>
 </ul>
 <hr>
 

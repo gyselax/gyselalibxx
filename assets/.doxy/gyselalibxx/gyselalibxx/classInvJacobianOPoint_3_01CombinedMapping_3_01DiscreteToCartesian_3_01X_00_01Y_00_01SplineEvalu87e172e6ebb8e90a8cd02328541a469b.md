@@ -87,7 +87,7 @@
 ## Detailed Description
 
 
-A specialisation of [**InvJacobianOPoint**](classInvJacobianOPoint.md) for a combined mapping  where  is a discrete mapping from logical to physical, and  is an inverse circular mapping from physical to logical. The combined mapping  therefore maps from a physical domain  to a physical domain . 
+A specialisation of [**InvJacobianOPoint**](classInvJacobianOPoint.md) for a combined mapping \(\mathcal{F} \circ \mathcal{G}\) where \(\mathcal{F}\) is a discrete mapping from logical to physical, and \(\mathcal{G}\) is an inverse circular mapping from physical to logical. The combined mapping \(\mathcal{F} \circ \mathcal{G}\) therefore maps from a physical domain \((X_{pc}, Y_{pc})\) to a physical domain \((X, Y)\). 
 
 
     
@@ -135,23 +135,37 @@ inline KOKKOS_FUNCTION DTensor < VectorIndexSet< Xpc, Ypc >, VectorIndexSet< X_c
 The discrete mappings can be difficult to inverse especially at the central point. In case of non analytical invertible mapping, we can work in another domain called pseudo-Cartesian domain. In this domain, it is easier to inverse the Jacobian matrix. The idea is detailed in Edoardo Zoni's article (_Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the method of characteristics and spline finite elements_, [https://doi.org/10.1016/j.jcp.2019.108889](https://doi.org/10.1016/j.jcp.2019.108889))
 
 
-The current mapping maps from the logical domain to the physical domain . The pseudo-Cartesian domain is built with  and using the circular mapping :
-* ,
-* .
+The current mapping maps from the logical domain to the physical domain \(\mathcal{F}: (r,\theta) \mapsto (x, y)\). The pseudo-Cartesian domain is built with \(\mathcal{F}\) and using the circular mapping \(\mathcal{G}\):
+* \(\mathcal{G}_{11}(r, \theta) = \cos(\theta),
+     \qquad\quad \mathcal{G}_{12}(r, \theta) = \sin(\theta)\),
+* \(\mathcal{G}_{21}(r, \theta) = -\frac{1}{r}\sin(\theta),
+     \qquad\quad \mathcal{G}_{22}(r, \theta) = \frac{1}{r}\cos(\theta)\).
 
 
 
 
-The pseudo-Cartesian domain is obtained by the composition of both mappings: . This new mapping is invertible and its inverse at the central point is given by
+The pseudo-Cartesian domain is obtained by the composition of both mappings: \((\mathcal{F} \circ \mathcal{G}^{-1})^{-1}\). This new mapping is invertible and its inverse at the central point is given by
 * 
+\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{11}(0, \theta) = \partial_r x (0, \theta) \cos(\theta)
+             - \partial_{r \theta} x (0, \theta) \sin(\theta),\]
+
 * 
+\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{12}(0, \theta) = \partial_r x (0, \theta) \sin(\theta)
+             + \partial_{r \theta} x (0, \theta) \cos(\theta),\]
+
 * 
+\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{21}(0, \theta) = \partial_r y (0, \theta) \cos(\theta)
+             - \partial_{r \theta} y (0, \theta) \sin(\theta),\]
+
 * 
+\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{22}(0, \theta) = \partial_r y (0, \theta) \sin(\theta)
+             + \partial_{r \theta} y (0, \theta) \cos(\theta).\]
 
 
 
 
-So the pseudo-Cartesian Jacobian matrix at the central point, , is obtained by inversing this matrix.
+
+So the pseudo-Cartesian Jacobian matrix at the central point, \((J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}(0, \theta)\), is obtained by inversing this matrix.
 
 
 

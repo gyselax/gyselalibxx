@@ -121,6 +121,10 @@ For polar integration, we can add the Jacobian determinant to the quadrature coe
 
 
 
+\[\int_{\Omega_{\text{cart}}} f(x,y) dxdy
+ = \int_{\Omega} f(r,\theta) |det(J(r,\theta))| drd\theta
+ \simeq \sum_{i,j} [q_{i,j}| det(J(r_i,\theta_j))|] f_{ij}\]
+
 
 
 This function uses rvalues. It means that coefficients is a temporary input parameter and it returns a temporary coefficient object. The [**Quadrature**](classQuadrature.md) object can only be instantiate with rvalues.
@@ -132,14 +136,14 @@ This function uses rvalues. It means that coefficients is a temporary input para
 
 
 * `exec_space` The space on which the function is executed (CPU/GPU). 
-* `mapping` The mapping function from the logical domain  to the physical domain . 
-* `coefficients_alloc` The quadrature coefficients .
+* `mapping` The mapping function from the logical domain \((r,\theta)\) to the physical domain \((x, y)\). 
+* `coefficients_alloc` The quadrature coefficients \(\{q_{ij}\}_{ij}\).
 
 
 
 **Returns:**
 
-A rvalue FieldMem to the modified coefficients . 
+A rvalue FieldMem to the modified coefficients \(\{q_{ij}| det(J(r_i,\theta_j))|\}_{ij}\). 
 
 
 

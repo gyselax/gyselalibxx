@@ -8,7 +8,7 @@
 
 
 
-_Define non periodic magnetic momentum_  _._
+_Define non periodic magnetic momentum_ \(\mu\) _._
 
 * `#include <geometry.hpp>`
 

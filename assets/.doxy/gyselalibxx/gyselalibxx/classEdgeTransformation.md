@@ -94,12 +94,16 @@ _Transform a coordinate or an index from one edge to the one on the other edge._
 
 According to the orientation of the interface, we compute the equivalent coordinate
 * if True, 
+\[\\ t \mapsto min_2 + \frac{t - min_1}{max_1 - min_1}(max_2 - min_2)\]
+
 * if False, 
+\[\\ t \mapsto max_2 - \frac{t - min_1}{max_1 - min_1}(max_2 - min_2)\]
 
 
 
 
-where  and  are the minimum and maximum coordinates of the edge .
+
+where \(min_i\) and \(max_i\) are the minimum and maximum coordinates of the edge \(i\).
 
 
 For the indices, we look for an equivalent index corresponding to a coordinate equivalent to the coordinate of the initial index.

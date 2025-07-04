@@ -53,7 +53,7 @@ Inherited by the following classes: [BslExplicitPredCorrRTheta](classBslExplicit
 
 | Type | Name |
 | ---: | :--- |
-| virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps=1) const = 0<br>_Solves on_  _the equations system._ |
+| virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps=1) const = 0<br>_Solves on_ \(T = dt*N\) _the equations system._ |
 | virtual  | [**~ITimeSolverRTheta**](#function-itimesolverrtheta) () = default<br> |
 
 
@@ -95,7 +95,7 @@ Inherited by the following classes: [BslExplicitPredCorrRTheta](classBslExplicit
 
 ### function operator() 
 
-_Solves on_  _the equations system._
+_Solves on_ \(T = dt*N\) _the equations system._
 ```C++
 virtual host_t< DFieldRTheta > ITimeSolverRTheta::operator() (
     host_t< DFieldRTheta > density,
@@ -111,9 +111,9 @@ virtual host_t< DFieldRTheta > ITimeSolverRTheta::operator() (
 **Parameters:**
 
 
-* `density` On input: the initial condition. On output: the solution at . 
+* `density` On input: the initial condition. On output: the solution at \(dt *N\). 
 * `dt` The time step. 
-* `steps` The number  of time interactions.
+* `steps` The number \(N\) of time interactions.
 
 
 

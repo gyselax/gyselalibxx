@@ -578,17 +578,20 @@
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
 <p>This operator solves the following equation type</p>
-<p>with
-* , a function defined on an domain ;
-* , an advection field defined on subdomain ;
-* , an advection dimension.</p>
-<p>The characteristic equation is solved on the advection domain . Then the feet on  are computed from the characteristic feet on  and the function  is interpolated at the feet in .</p>
+<div class="arithmatex">\[\partial_t f_s(t,x) + A_{s, x_i} (x') \cdot \partial_{x_i} f_s (t, x) = 0, \qquad x\in \Omega, x'\in\Omega'\]</div>
+<p>with</p>
+<ul>
+<li><span class="arithmatex">\(f\)</span>, a function defined on an domain <span class="arithmatex">\(\Omega\)</span>;</li>
+<li><span class="arithmatex">\(A\)</span>, an advection field defined on subdomain <span class="arithmatex">\(\Omega'\subset \Omega\)</span>;</li>
+<li><span class="arithmatex">\(x_i\)</span>, an advection dimension.</li>
+</ul>
+<p>The characteristic equation is solved on the advection domain <span class="arithmatex">\(\Omega'\)</span>. Then the feet on <span class="arithmatex">\(\Omega\)</span> are computed from the characteristic feet on <span class="arithmatex">\(\Omega'\)</span> and the function <span class="arithmatex">\(f\)</span> is interpolated at the feet in <span class="arithmatex">\(\Omega\)</span>.</p>
 <p>The characteristic equation is solved using a time integration method (<a href="classITimeStepper.html"><strong>ITimeStepper</strong></a>).</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
-<li><code>GridInterest</code> The dimension along which the advection is computed. It refers to the dimension of  in the equation. </li>
-<li><code>IdxRangeAdvection</code> The index range for the interpolation points defined on  where the characteristic equation is solved.  also refers to the domain of the advection field. It had to also be defined on the GridInterest for the time integration method. </li>
-<li><code>IdxRangeFunction</code> The index range of  where allfdistribu is defined. </li>
+<li><code>GridInterest</code> The dimension along which the advection is computed. It refers to the dimension of <span class="arithmatex">\(x_i\)</span> in the equation. </li>
+<li><code>IdxRangeAdvection</code> The index range for the interpolation points defined on <span class="arithmatex">\(\Omega'\)</span> where the characteristic equation is solved. <span class="arithmatex">\(\Omega'\)</span> also refers to the domain of the advection field. It had to also be defined on the GridInterest for the time integration method. </li>
+<li><code>IdxRangeFunction</code> The index range of <span class="arithmatex">\(\Omega\)</span> where allfdistribu is defined. </li>
 <li><code>AdvectionFieldBuilder</code> The type of the spline builder for the advection field (see SplineBuilder). </li>
 <li>
 <p><code>AdvectionFieldEvaluator</code> The type of the spline evaluator for the advection field (see SplineEvaluator). </p>

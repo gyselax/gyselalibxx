@@ -136,7 +136,7 @@ inline explicit CrankNicolsonBuilder::CrankNicolsonBuilder (
 
 
 * `counter` The maximal number of loops for the implicit method. 
-* `epsilon` The  upperbound of the difference of two steps in the implicit method: . 
+* `epsilon` The \(\varepsilon\) upperbound of the difference of two steps in the implicit method: \(|y^{k+1} -  y^{k}| < \varepsilon\). 
 
 
 

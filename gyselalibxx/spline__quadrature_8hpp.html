@@ -604,14 +604,16 @@ host_t&lt; DFieldMem&lt; IdxRange&lt; Grid1D &gt; &gt; &gt; spline_quadrature_co
 ) 
 </code></pre>
 <p>To integrate a function with a spline quadrature, we use:</p>
-<p>,</p>
+<p><span class="arithmatex">\(\int_a^b f(x)dx
+\simeq \sum_{i = 0}^{N_{\text{basis}} -1 } c_i  \int_a^b b_{i,d}()x dx\)</span>,</p>
 <p>which rewritten gives</p>
-<p>,</p>
+<p><span class="arithmatex">\(\int_a^b f(x)dx
+\simeq \sum_{i = 0}^{N_{\text{basis}} - 1} q_i f_i\)</span>,</p>
 <p>with
-*  the values of the function at the interpolation points;
-*  the quadrature coefficients we compute thanks to ,
-  * with  the matrix of B-splines ,
-  * and  the integrated B-splines.</p>
+* <span class="arithmatex">\(\{ f_i\}_i\)</span> the values of the function at the interpolation points;
+* <span class="arithmatex">\(q = \{ q_i\}_i\)</span> the quadrature coefficients we compute thanks to <span class="arithmatex">\(q B^T = I_b\)</span>,
+  * with <span class="arithmatex">\(B\)</span> the matrix of B-splines <span class="arithmatex">\(B_{ij} = b_{j,d}(x_i)\)</span>,
+  * and <span class="arithmatex">\(I_b = \int_a^b b_{i,d}(x)dx\)</span> the integrated B-splines.</p>
 <p>More details are given in Emily Bourne's thesis "Non-Uniform Numerical Schemes for the Modelling of Turbulence
 in the 5D GYSELA Code". December 2022.</p>
 <p><strong>Parameters:</strong></p>
@@ -620,7 +622,7 @@ in the 5D GYSELA Code". December 2022.</p>
 <li><code>builder</code> The spline builder describing the way in which splines would be constructed.</li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>A chunk with the quadrature coefficients . </p>
+<p>A chunk with the quadrature coefficients <span class="arithmatex">\(q\)</span>. </p>
 <hr>
 
 <hr>

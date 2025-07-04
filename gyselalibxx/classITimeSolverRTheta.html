@@ -564,7 +564,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">virtual host_t&lt; DFieldRTheta &gt;</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (host_t&lt; DFieldRTheta &gt; density, double const dt, int const steps=1) const = 0<br><em>Solves on</em>  <em>the equations system.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (host_t&lt; DFieldRTheta &gt; density, double const dt, int const steps=1) const = 0<br><em>Solves on</em> <span class="arithmatex">\(T = dt*N\)</span> <em>the equations system.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual</td>
@@ -589,7 +589,7 @@
 </table>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-operator">function operator()</h3>
-<p><em>Solves on</em>  <em>the equations system.</em></p>
+<p><em>Solves on</em> <span class="arithmatex">\(T = dt*N\)</span> <em>the equations system.</em></p>
 <pre><code class="language-C++">virtual host_t&lt; DFieldRTheta &gt; ITimeSolverRTheta::operator() (
     host_t&lt; DFieldRTheta &gt; density,
     double const dt,
@@ -598,9 +598,9 @@
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>density</code> On input: the initial condition. On output: the solution at . </li>
+<li><code>density</code> On input: the initial condition. On output: the solution at <span class="arithmatex">\(dt *N\)</span>. </li>
 <li><code>dt</code> The time step. </li>
-<li><code>steps</code> The number  of time interactions.</li>
+<li><code>steps</code> The number <span class="arithmatex">\(N\)</span> of time interactions.</li>
 </ul>
 <p><strong>Returns:</strong></p>
 <p>A Field toward density. </p>

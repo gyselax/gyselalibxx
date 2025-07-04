@@ -236,7 +236,7 @@ See [Matrix](classMatrix.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual void | [**calculate\_delta\_to\_factorise**](#function-calculate_delta_to_factorise) () override<br>_Calculate the contents of the dense matrix_  _that will be factorised. This is the element_ _of the blockwise LU decomposition of the matrix._ |
+| virtual void | [**calculate\_delta\_to\_factorise**](#function-calculate_delta_to_factorise) () override<br>_Calculate the contents of the dense matrix_ \(delta'\) _that will be factorised. This is the element_\(delta'\) _of the blockwise LU decomposition of the matrix._ |
 | virtual DSpan1D | [**solve\_lambda\_section**](#function-solve_lambda_section) (DSpan1D v, DView1D u) override const<br>_Calculate the solution to the following equation:_  |
 | virtual DSpan1D | [**solve\_lambda\_section\_transpose**](#function-solve_lambda_section_transpose) (DSpan1D u, DView1D v) override const<br>_Calculate the solution to the following equation:_  |
 
@@ -248,7 +248,7 @@ See [Matrix\_Corner\_Block](classMatrix__Corner__Block.md)
 | Type | Name |
 | ---: | :--- |
 |   | [**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md#function-matrix_corner_block-22) (int n, int k, std::unique\_ptr&lt; [**Matrix**](classMatrix.md) &gt; q, int lambda\_size1, int lambda\_size2) <br>_A constructor for the matrix._  |
-| virtual void | [**calculate\_delta\_to\_factorise**](classMatrix__Corner__Block.md#function-calculate_delta_to_factorise) () <br>_Calculate the contents of the dense matrix_  _that will be factorised. This is the element_ _of the blockwise LU decomposition of the matrix._ |
+| virtual void | [**calculate\_delta\_to\_factorise**](classMatrix__Corner__Block.md#function-calculate_delta_to_factorise) () <br>_Calculate the contents of the dense matrix_ \(delta'\) _that will be factorised. This is the element_\(delta'\) _of the blockwise LU decomposition of the matrix._ |
 | virtual DSpan1D | [**solve\_gamma\_section**](classMatrix__Corner__Block.md#function-solve_gamma_section) (DSpan1D const u, DView1D const v) const<br>_Calculate the solution to the following equation:_  |
 | virtual DSpan1D | [**solve\_gamma\_section\_transpose**](classMatrix__Corner__Block.md#function-solve_gamma_section_transpose) (DSpan1D const v, DView1D const u) const<br>_Calculate the solution to the following equation:_  |
 | virtual DSpan1D | [**solve\_lambda\_section**](classMatrix__Corner__Block.md#function-solve_lambda_section) (DSpan1D v, DView1D u) const<br>_Calculate the solution to the following equation:_  |
@@ -421,7 +421,7 @@ int const Matrix_Periodic_Banded::ku;
 
 ### function calculate\_delta\_to\_factorise 
 
-_Calculate the contents of the dense matrix_  _that will be factorised. This is the element_ _of the blockwise LU decomposition of the matrix._
+_Calculate the contents of the dense matrix_ \(delta'\) _that will be factorised. This is the element_\(delta'\) _of the blockwise LU decomposition of the matrix._
 ```C++
 virtual void Matrix_Periodic_Banded::calculate_delta_to_factorise () override
 ```
@@ -432,11 +432,15 @@ virtual void Matrix_Periodic_Banded::calculate_delta_to_factorise () override
 
 
 
+\[\delta' = \delta - \lambda \beta\]
 
 
-With  the solution of the equation:
+
+With \(\beta\) the solution of the equation:
 
 
+
+\[Q \beta = \gamma\]
 
 
 
@@ -464,9 +468,11 @@ virtual DSpan1D Matrix_Periodic_Banded::solve_lambda_section (
 
 
 
+\[v - \lambda u\]
 
 
-The result is saved into the argument . This calculation is one of the steps necessary to solve the matrix equation.
+
+The result is saved into the argument \(v\). This calculation is one of the steps necessary to solve the matrix equation.
 
 
 
@@ -508,9 +514,11 @@ virtual DSpan1D Matrix_Periodic_Banded::solve_lambda_section_transpose (
 
 
 
+\[u - \lambda v\]
 
 
-The result is saved into the argument . This calculation is one of the steps necessary to solve the matrix equation.
+
+The result is saved into the argument \(u\). This calculation is one of the steps necessary to solve the matrix equation.
 
 
 

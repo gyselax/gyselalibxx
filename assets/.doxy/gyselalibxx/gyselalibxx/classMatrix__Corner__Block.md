@@ -177,7 +177,7 @@ See [Matrix](classMatrix.md)
 | Type | Name |
 | ---: | :--- |
 |   | [**Matrix\_Corner\_Block**](#function-matrix_corner_block-22) (int n, int k, std::unique\_ptr&lt; [**Matrix**](classMatrix.md) &gt; q, int lambda\_size1, int lambda\_size2) <br>_A constructor for the matrix._  |
-| virtual void | [**calculate\_delta\_to\_factorise**](#function-calculate_delta_to_factorise) () <br>_Calculate the contents of the dense matrix_  _that will be factorised. This is the element_ _of the blockwise LU decomposition of the matrix._ |
+| virtual void | [**calculate\_delta\_to\_factorise**](#function-calculate_delta_to_factorise) () <br>_Calculate the contents of the dense matrix_ \(delta'\) _that will be factorised. This is the element_\(delta'\) _of the blockwise LU decomposition of the matrix._ |
 | virtual DSpan1D | [**solve\_gamma\_section**](#function-solve_gamma_section) (DSpan1D const u, DView1D const v) const<br>_Calculate the solution to the following equation:_  |
 | virtual DSpan1D | [**solve\_gamma\_section\_transpose**](#function-solve_gamma_section_transpose) (DSpan1D const v, DView1D const u) const<br>_Calculate the solution to the following equation:_  |
 | virtual DSpan1D | [**solve\_lambda\_section**](#function-solve_lambda_section) (DSpan1D v, DView1D u) const<br>_Calculate the solution to the following equation:_  |
@@ -345,7 +345,7 @@ virtual DSpan1D Matrix_Corner_Block::solve_inplace (
 
 
 
-Solve the following matrix equation:  The result  is saved into the memory allocated for .
+Solve the following matrix equation: \(M x = b\) The result \(x\) is saved into the memory allocated for \(b\).
 
 
 
@@ -359,7 +359,7 @@ Solve the following matrix equation:  The result  is saved into the memory alloc
 
 **Returns:**
 
-The solution . 
+The solution \(x\). 
 
 
 
@@ -384,7 +384,7 @@ virtual DSpan2D Matrix_Corner_Block::solve_multiple_inplace (
 
 
 
-Solve the following matrix equation:  for multiple values of  and . The first dimension is iterated over with each slice representing an equation to be solved. The result  is saved into the memory allocated for .
+Solve the following matrix equation: \(M x = b\) for multiple values of \(b\) and \(x\). The first dimension is iterated over with each slice representing an equation to be solved. The result \(x\) is saved into the memory allocated for \(b\).
 
 
 
@@ -398,7 +398,7 @@ Solve the following matrix equation:  for multiple values of  and . The first di
 
 **Returns:**
 
-The solution . 
+The solution \(x\). 
 
 
 
@@ -423,7 +423,7 @@ virtual DSpan1D Matrix_Corner_Block::solve_transpose_inplace (
 
 
 
-Solve the following matrix equation:  The result  is saved into the memory allocated for .
+Solve the following matrix equation: \(M^T x = b\) The result \(x\) is saved into the memory allocated for \(b\).
 
 
 
@@ -437,7 +437,7 @@ Solve the following matrix equation:  The result  is saved into the memory alloc
 
 **Returns:**
 
-The solution . 
+The solution \(x\). 
 
 
 
@@ -604,7 +604,7 @@ Matrix_Corner_Block::Matrix_Corner_Block (
 
 ### function calculate\_delta\_to\_factorise 
 
-_Calculate the contents of the dense matrix_  _that will be factorised. This is the element_ _of the blockwise LU decomposition of the matrix._
+_Calculate the contents of the dense matrix_ \(delta'\) _that will be factorised. This is the element_\(delta'\) _of the blockwise LU decomposition of the matrix._
 ```C++
 virtual void Matrix_Corner_Block::calculate_delta_to_factorise () 
 ```
@@ -615,11 +615,15 @@ virtual void Matrix_Corner_Block::calculate_delta_to_factorise ()
 
 
 
+\[\delta' = \delta - \lambda \beta\]
 
 
-With  the solution of the equation:
+
+With \(\beta\) the solution of the equation:
 
 
+
+\[Q \beta = \gamma\]
 
 
 
@@ -645,9 +649,11 @@ virtual DSpan1D Matrix_Corner_Block::solve_gamma_section (
 
 
 
+\[u - \beta e\]
 
 
-The result is saved into the argument . This calculation is one of the steps necessary to solve the matrix equation.
+
+The result is saved into the argument \(u\). This calculation is one of the steps necessary to solve the matrix equation.
 
 
 
@@ -687,9 +693,11 @@ virtual DSpan1D Matrix_Corner_Block::solve_gamma_section_transpose (
 
 
 
+\[v - \beta u\]
 
 
-The result is saved into the argument . This calculation is one of the steps necessary to solve the matrix equation.
+
+The result is saved into the argument \(v\). This calculation is one of the steps necessary to solve the matrix equation.
 
 
 
@@ -729,9 +737,11 @@ virtual DSpan1D Matrix_Corner_Block::solve_lambda_section (
 
 
 
+\[v - \lambda u\]
 
 
-The result is saved into the argument . This calculation is one of the steps necessary to solve the matrix equation.
+
+The result is saved into the argument \(v\). This calculation is one of the steps necessary to solve the matrix equation.
 
 
 
@@ -771,9 +781,11 @@ virtual DSpan1D Matrix_Corner_Block::solve_lambda_section_transpose (
 
 
 
+\[u - \lambda v\]
 
 
-The result is saved into the argument . This calculation is one of the steps necessary to solve the matrix equation.
+
+The result is saved into the argument \(u\). This calculation is one of the steps necessary to solve the matrix equation.
 
 
 

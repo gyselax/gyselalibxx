@@ -156,22 +156,22 @@ inline void VortexMergerEquilibria::find_equilibrium (
 
 
 
-The equilibrium is determined by the eigenvalue problem. For the given initial data ,
+The equilibrium is determined by the eigenvalue problem. For the given initial data \((\sigma^0, \phi^0)\),
 
 
 
-* compute ;
-* compute  with ;
-* for  given, compute  with  ;
-* compute .
+* compute \(\rho^i = \sigma^{i-1} f(\phi^{i-1})\);
+* compute \(\phi_*^i\) with \(-\nabla\cdot\nabla\phi_*^i = \rho^i\);
+* for \(\phi_{\text{max}}\) given, compute \(c^i\) with \(c^i = \phi_{\text{max}} / \Vert \phi_*^i \Vert_{\mathcal{L}^\infty}\) ;
+* compute \((\sigma^i, \phi^i) = c^i (\sigma^{i-1}, \phi_*^i)\).
 
 
 
 
-We iterate until .
+We iterate until \(|\sigma^i - \sigma^{i-1}|\leq \tau\).
 
 
-For the vortex merger simulation, .
+For the vortex merger simulation, \(f(\phi) = \phi^2\).
 
 
 The algorithm is also detailed in Edoardo Zoni's article ([https://doi.org/10.1016/j.jcp.2019.108889](https://doi.org/10.1016/j.jcp.2019.108889)).
@@ -182,12 +182,12 @@ The algorithm is also detailed in Edoardo Zoni's article ([https://doi.org/10.10
 **Parameters:**
 
 
-* `sigma` The  parameter. 
-* `phi_eq` The equilibrium electrical potential . 
-* `rho_eq` The equilibrium density . 
-* `function` The function . 
-* `phi_max` The maximal value of the electrical potential . 
-* `tau` The  parameter. 
+* `sigma` The \(\sigma\) parameter. 
+* `phi_eq` The equilibrium electrical potential \(\phi\). 
+* `rho_eq` The equilibrium density \(\rho\). 
+* `function` The function \(f\). 
+* `phi_max` The maximal value of the electrical potential \(\phi\). 
+* `tau` The \(\tau\) parameter. 
 * `count_max` The maximal number of iteration of the implicit loop. 
 
 
@@ -218,11 +218,11 @@ inline void VortexMergerEquilibria::set_equilibrium (
 **Parameters:**
 
 
-* `rho_eq` The equilibrium density . 
+* `rho_eq` The equilibrium density \(\rho\). 
  
-* `function` The function  used to compute the equilibrium. 
-* `phi_max` The maximal value of the electrical potential . 
-* `tau` The  parameter. 
+* `function` The function \(f\) used to compute the equilibrium. 
+* `phi_max` The maximal value of the electrical potential \(\phi\). 
+* `tau` The \(\tau\) parameter. 
 
 
 

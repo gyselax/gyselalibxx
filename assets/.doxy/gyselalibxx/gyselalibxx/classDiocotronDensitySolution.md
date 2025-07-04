@@ -8,7 +8,7 @@
 
 
 
-_The diocotron exact solution of the density_  _._[More...](#detailed-description)
+_The diocotron exact solution of the density_ \(\rho\) _._[More...](#detailed-description)
 
 * `#include <diocotron_initialisation_equilibrium.hpp>`
 
@@ -92,14 +92,14 @@ The equations of the diocotron simulation are the Vlasov-Poisson equations
 
 
 
-* ,
-* ,
-* .
+* \(\partial_t \rho - E_y \partial_x \rho + E_x \partial_y \rho = 0\),
+* \(L \phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho\),
+* \(E = -\nabla \phi\).
 
 
 
 
-The [**DiocotronDensitySolution**](classDiocotronDensitySolution.md) provides an initial perturbed solution  for the density  and its associated equilibrium solution . 
+The [**DiocotronDensitySolution**](classDiocotronDensitySolution.md) provides an initial perturbed solution \(\rho_0\) for the density \(\rho\) and its associated equilibrium solution \(\rho_{eq}\). 
 
 
     
@@ -134,7 +134,7 @@ inline DiocotronDensitySolution::DiocotronDensitySolution (
 * `R1` The value of the r-coordinate where the domain of non null initial condition starts. 
 * `R2` The value of the r-coordinate where the domain of non null initial condition ends. 
 * `W2` The value of the r-coordinate where the domain ends. 
-* `Q` The charge carried by the inner conductor at . 
+* `Q` The charge carried by the inner conductor at \(r = W_1\). 
 * `l` The mode of the perturbation. 
 * `eps` The amplitude of the perturbation. 
 
@@ -162,13 +162,13 @@ The equilibrium is given by
 
 
 
-* if , ,
-* otherwise, ,
+* if \(R_1 \leq r \leq R_2\), \(\rho_0(r, \theta) = \exp\left( - \left(\frac{r - \bar{r}}{d}\right)^p \right)\),
+* otherwise, \(\rho_0(r, \theta) = 0\),
 
 
 
 
-with ,  and .
+with \(p = 50\), \(\bar{r} = \frac{R_1 + R_2}{2}\) and \(d = \frac{R_2 - R_1}{2}\).
 
 
 
@@ -203,7 +203,7 @@ double DiocotronDensitySolution::get_frequency () const
 
 
 
-The frequency of the perturbation is given by the real part of , where  is the solution of the dispersion relation.
+The frequency of the perturbation is given by the real part of \(\omega\), where \(\omega\) is the solution of the dispersion relation.
 
 
 
@@ -231,7 +231,7 @@ double DiocotronDensitySolution::get_slope () const
 
 
 
-The slope of the perturbation is given by the imaginary part of , where  is the solution of the dispersion relation.
+The slope of the perturbation is given by the imaginary part of \(\omega\), where \(\omega\) is the solution of the dispersion relation.
 
 
 
@@ -265,13 +265,13 @@ The initial condition is given by
 
 
 
-* if , ,
-* otherwise, ,
+* if \(R_1 \leq r \leq R_2\), \(\rho_0(r, \theta) = (1 + \varepsilon \cos(l\theta)) \exp\left( - \left(\frac{r - \bar{r}}{d}\right)^p \right)\),
+* otherwise, \(\rho_0(r, \theta) = 0\),
 
 
 
 
-with ,  and .
+with \(p = 50\), \(\bar{r} = \frac{R_1 + R_2}{2}\) and \(d = \frac{R_2 - R_1}{2}\).
 
 
 

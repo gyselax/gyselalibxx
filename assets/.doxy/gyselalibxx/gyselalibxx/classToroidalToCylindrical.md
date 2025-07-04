@@ -10,7 +10,7 @@
 
 
 
-_A class describing a coordinate change from a toroidal system of coordinates to a cylindrical system of coordinates. The toroidal coordinates are described by a polar plane_  _and a perpendicular dimension_ _. The cylindrical coordinates are_ _._ _describe a Cartesian slice._ _are therefore defined from this slice with a 2D coordinate change operator._ _is chosen to be equal to_ _to preserve the orientation of the axes (following the right-hand rule)._[More...](#detailed-description)
+_A class describing a coordinate change from a toroidal system of coordinates to a cylindrical system of coordinates. The toroidal coordinates are described by a polar plane_ \((\rho, \theta)\) _and a perpendicular dimension_\(\phi\) _. The cylindrical coordinates are_\((R, Z, \zeta)\) _._\((R, Z)\) _describe a Cartesian slice._\((\rho, \theta)\) _are therefore defined from this slice with a 2D coordinate change operator._\(\zeta\) _is chosen to be equal to_\(-\phi\) _to preserve the orientation of the axes (following the right-hand rule)._[More...](#detailed-description)
 
 * `#include <toroidal_to_cylindrical.hpp>`
 
@@ -74,7 +74,7 @@ _A class describing a coordinate change from a toroidal system of coordinates to
 |  KOKKOS\_FUNCTION double | [**jacobian**](#function-jacobian) ([**CoordArg**](classToroidalToCylindrical.md#typedef-coordarg) const & coord) const<br>_Compute the Jacobian: the determinant of the Jacobian matrix of the mapping._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) ([**CoordArg**](classToroidalToCylindrical.md#typedef-coordarg) const & coord) const<br>_Compute the (i,j) coefficient of the Jacobian matrix._  |
 |  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; [**R**](structR.md), Z, Zeta &gt;, VectorIndexSet&lt; Rho\_cov, [**Theta\_cov**](structTheta__cov.md), Phi\_cov &gt; &gt; | [**jacobian\_matrix**](#function-jacobian_matrix) ([**CoordArg**](classToroidalToCylindrical.md#typedef-coordarg) const & coord) const<br>_Compute the Jacobian matrix._  |
-|  KOKKOS\_FUNCTION [**CoordResult**](classToroidalToCylindrical.md#typedef-coordresult) | [**operator()**](#function-operator) ([**CoordArg**](classToroidalToCylindrical.md#typedef-coordarg) const & coord) const<br>_Convert the_  _coordinate to the equivalent_ _coordinate._ |
+|  KOKKOS\_FUNCTION [**CoordResult**](classToroidalToCylindrical.md#typedef-coordresult) | [**operator()**](#function-operator) ([**CoordArg**](classToroidalToCylindrical.md#typedef-coordarg) const & coord) const<br>_Convert the_ \((\rho, \theta, \phi)\) _coordinate to the equivalent_\((R, Z, \zeta)\) _coordinate._ |
 
 
 
@@ -111,7 +111,7 @@ _A class describing a coordinate change from a toroidal system of coordinates to
 **Template parameters:**
 
 
-* `Curvilinear2DToCartesian` An operator describing the coordinate change from  to . 
+* `Curvilinear2DToCartesian` An operator describing the coordinate change from \((\rho, \theta)\) to \((R, Z)\). 
 * `Zeta` The angle of the cylindrical coordinates. 
 * `Phi` The toroidal component of the toroidal coordinates. 
 
@@ -268,7 +268,7 @@ inline explicit ToroidalToCylindrical::ToroidalToCylindrical (
 **Parameters:**
 
 
-* `mapping_2d` The mapping governing the transformation from  to . 
+* `mapping_2d` The mapping governing the transformation from \((\rho, \theta)\) to \((R, Z)\). 
 
 
 
@@ -500,7 +500,7 @@ The Jacobian matrix.
 
 ### function operator() 
 
-_Convert the_  _coordinate to the equivalent_ _coordinate._
+_Convert the_ \((\rho, \theta, \phi)\) _coordinate to the equivalent_\((R, Z, \zeta)\) _coordinate._
 ```C++
 inline KOKKOS_FUNCTION CoordResult ToroidalToCylindrical::operator() (
     CoordArg const & coord

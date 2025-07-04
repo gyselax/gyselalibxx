@@ -92,7 +92,7 @@ A class which calculates the charge density.
 A class which calculates the charge density. This is then used as the right hand side of the Quasi-Neutrality equation.
 
 
-A class which computes charges density by solving the equation:  where  is the charge of the species  and  is the distribution function. 
+A class which computes charges density by solving the equation: \(\int_{v} q_s f_s(x,v) dv\) where \(q_s\) is the charge of the species \(s\) and \(f_s(x,v)\) is the distribution function. 
 
 
     

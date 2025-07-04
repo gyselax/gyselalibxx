@@ -834,7 +834,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">virtual void</td>
-<td style="text-align: left;"><a href="classMatrix__Corner__Block.html#function-calculate_delta_to_factorise"><strong>calculate_delta_to_factorise</strong></a> () <br><em>Calculate the contents of the dense matrix</em>  <em>that will be factorised. This is the element</em> <em>of the blockwise LU decomposition of the matrix.</em></td>
+<td style="text-align: left;"><a href="classMatrix__Corner__Block.html#function-calculate_delta_to_factorise"><strong>calculate_delta_to_factorise</strong></a> () <br><em>Calculate the contents of the dense matrix</em> <span class="arithmatex">\(delta'\)</span> <em>that will be factorised. This is the element</em><span class="arithmatex">\(delta'\)</span> <em>of the blockwise LU decomposition of the matrix.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual DSpan1D</td>
@@ -876,7 +876,7 @@
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
 <p>where E is a banded matrix, and A, E and I are square matrices.</p>
-<p>This matrix is solved by rearranging it to:  This new matrix is a corner matrix of the form:  with  and  Internally the matrix is saved in the corner format. </p>
+<p>This matrix is solved by rearranging it to:  This new matrix is a corner matrix of the form:  with <span class="arithmatex">\(Q = E\)</span> and  Internally the matrix is saved in the corner format. </p>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-matrix_centre_block">function Matrix_Centre_Block</h3>
 <p><em>A constructor for the matrix.</em> </p>
@@ -936,13 +936,13 @@
     DSpan1D b
 ) override const
 </code></pre>
-<p>Solve the following matrix equation:  The result  is saved into the memory allocated for .</p>
+<p>Solve the following matrix equation: <span class="arithmatex">\(M x = b\)</span> The result <span class="arithmatex">\(x\)</span> is saved into the memory allocated for <span class="arithmatex">\(b\)</span>.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>b</code> The right-hand side of the equation on input. The solution on output. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>The solution . </p>
+<p>The solution <span class="arithmatex">\(x\)</span>. </p>
 <p>Implements <a href="classMatrix__Corner__Block.html#function-solve_inplace"><em>Matrix_Corner_Block::solve_inplace</em></a></p>
 <hr>
 
@@ -952,13 +952,13 @@
     DSpan2D bx
 ) override const
 </code></pre>
-<p>Solve the following matrix equation:  for multiple values of  and . The first dimension is iterated over with each slice representing an equation to be solved. The result  is saved into the memory allocated for .</p>
+<p>Solve the following matrix equation: <span class="arithmatex">\(M x = b\)</span> for multiple values of <span class="arithmatex">\(b\)</span> and <span class="arithmatex">\(x\)</span>. The first dimension is iterated over with each slice representing an equation to be solved. The result <span class="arithmatex">\(x\)</span> is saved into the memory allocated for <span class="arithmatex">\(b\)</span>.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>bx</code> The right-hand side of the equation on input. The solution on output. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>The solution . </p>
+<p>The solution <span class="arithmatex">\(x\)</span>. </p>
 <p>Implements <a href="classMatrix__Corner__Block.html#function-solve_multiple_inplace"><em>Matrix_Corner_Block::solve_multiple_inplace</em></a></p>
 <hr>
 
@@ -968,13 +968,13 @@
     DSpan1D b
 ) override const
 </code></pre>
-<p>Solve the following matrix equation:  The result  is saved into the memory allocated for .</p>
+<p>Solve the following matrix equation: <span class="arithmatex">\(M^T x = b\)</span> The result <span class="arithmatex">\(x\)</span> is saved into the memory allocated for <span class="arithmatex">\(b\)</span>.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>b</code> The right-hand side of the equation on input. The solution on output. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>The solution . </p>
+<p>The solution <span class="arithmatex">\(x\)</span>. </p>
 <p>Implements <a href="classMatrix__Corner__Block.html#function-solve_transpose_inplace"><em>Matrix_Corner_Block::solve_transpose_inplace</em></a></p>
 <hr>
 <h2 id="protected-attributes-documentation">Protected Attributes Documentation</h2>
@@ -1022,7 +1022,7 @@
     DSpan1D bx
 ) const
 </code></pre>
-<p>I.e. for  with  a vector of length nb, return  </p>
+<p>I.e. for  with <span class="arithmatex">\(B\)</span> a vector of length nb, return  </p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>bx</code> The solution of the rearranged matrix equation. </li>
@@ -1037,7 +1037,7 @@
     DSpan2D bx
 ) const
 </code></pre>
-<p>I.e. for  with  a vector of length nb, return  </p>
+<p>I.e. for  with <span class="arithmatex">\(B\)</span> a vector of length nb, return  </p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>bx</code> The solutions of the rearranged matrix equations. </li>
@@ -1052,7 +1052,7 @@
     DSpan1D bx
 ) const
 </code></pre>
-<p>I.e. for  with  a vector of length nb, return  </p>
+<p>I.e. for  with <span class="arithmatex">\(B\)</span> a vector of length nb, return  </p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>bx</code> The right-hand side of the matrix equation to be solved. </li>
@@ -1067,7 +1067,7 @@
     DSpan2D bx
 ) const
 </code></pre>
-<p>I.e. for  with  a vector of length nb, return  </p>
+<p>I.e. for  with <span class="arithmatex">\(B\)</span> a vector of length nb, return  </p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>bx</code> The right-hand sides of the matrix equations to be solved. </li>

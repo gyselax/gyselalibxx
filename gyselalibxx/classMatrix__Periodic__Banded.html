@@ -778,7 +778,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">virtual void</td>
-<td style="text-align: left;"><a href="#function-calculate_delta_to_factorise"><strong>calculate_delta_to_factorise</strong></a> () override<br><em>Calculate the contents of the dense matrix</em>  <em>that will be factorised. This is the element</em> <em>of the blockwise LU decomposition of the matrix.</em></td>
+<td style="text-align: left;"><a href="#function-calculate_delta_to_factorise"><strong>calculate_delta_to_factorise</strong></a> () override<br><em>Calculate the contents of the dense matrix</em> <span class="arithmatex">\(delta'\)</span> <em>that will be factorised. This is the element</em><span class="arithmatex">\(delta'\)</span> <em>of the blockwise LU decomposition of the matrix.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual DSpan1D</td>
@@ -806,7 +806,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">virtual void</td>
-<td style="text-align: left;"><a href="classMatrix__Corner__Block.html#function-calculate_delta_to_factorise"><strong>calculate_delta_to_factorise</strong></a> () <br><em>Calculate the contents of the dense matrix</em>  <em>that will be factorised. This is the element</em> <em>of the blockwise LU decomposition of the matrix.</em></td>
+<td style="text-align: left;"><a href="classMatrix__Corner__Block.html#function-calculate_delta_to_factorise"><strong>calculate_delta_to_factorise</strong></a> () <br><em>Calculate the contents of the dense matrix</em> <span class="arithmatex">\(delta'\)</span> <em>that will be factorised. This is the element</em><span class="arithmatex">\(delta'\)</span> <em>of the blockwise LU decomposition of the matrix.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual DSpan1D</td>
@@ -913,11 +913,13 @@
 <hr>
 <h2 id="protected-functions-documentation">Protected Functions Documentation</h2>
 <h3 id="function-calculate_delta_to_factorise">function calculate_delta_to_factorise</h3>
-<p><em>Calculate the contents of the dense matrix</em>  <em>that will be factorised. This is the element</em> <em>of the blockwise LU decomposition of the matrix.</em></p>
+<p><em>Calculate the contents of the dense matrix</em> <span class="arithmatex">\(delta'\)</span> <em>that will be factorised. This is the element</em><span class="arithmatex">\(delta'\)</span> <em>of the blockwise LU decomposition of the matrix.</em></p>
 <pre><code class="language-C++">virtual void Matrix_Periodic_Banded::calculate_delta_to_factorise () override
 </code></pre>
 <p>It is defined as:</p>
-<p>With  the solution of the equation:</p>
+<div class="arithmatex">\[\delta' = \delta - \lambda \beta\]</div>
+<p>With <span class="arithmatex">\(\beta\)</span> the solution of the equation:</p>
+<div class="arithmatex">\[Q \beta = \gamma\]</div>
 <p>which should already be stored in the variable Abm_1_gamma when this method is called. </p>
 <p>Implements <a href="classMatrix__Corner__Block.html#function-calculate_delta_to_factorise"><em>Matrix_Corner_Block::calculate_delta_to_factorise</em></a></p>
 <hr>
@@ -929,7 +931,8 @@
     DView1D u
 ) override const
 </code></pre>
-<p>The result is saved into the argument . This calculation is one of the steps necessary to solve the matrix equation.</p>
+<div class="arithmatex">\[v - \lambda u\]</div>
+<p>The result is saved into the argument <span class="arithmatex">\(v\)</span>. This calculation is one of the steps necessary to solve the matrix equation.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>v</code> A vector of length k describing the final values in the right-hand side of the matrix to be solved. </li>
@@ -947,7 +950,8 @@
     DView1D v
 ) override const
 </code></pre>
-<p>The result is saved into the argument . This calculation is one of the steps necessary to solve the matrix equation.</p>
+<div class="arithmatex">\[u - \lambda v\]</div>
+<p>The result is saved into the argument <span class="arithmatex">\(u\)</span>. This calculation is one of the steps necessary to solve the matrix equation.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>u</code> A vector of length (n-k). This is an intermediate result of the calculation which solves the transposed matrix equation. </li>

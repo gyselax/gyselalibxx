@@ -10,7 +10,7 @@
 
 
 
-_A class which describes a mapping which is constructed by combining two mappings. Let us denote Mapping1 as_  _and Mapping2 as_ _then this mapping represents:_ _._[More...](#detailed-description)
+_A class which describes a mapping which is constructed by combining two mappings. Let us denote Mapping1 as_ \(\mathcal{F}\) _and Mapping2 as_\(\mathcal{G}\) _then this mapping represents:_\(\mathcal{F} \circ \mathcal{G}\) _._[More...](#detailed-description)
 
 * `#include <combined_mapping.hpp>`
 
@@ -103,10 +103,10 @@ _A class which describes a mapping which is constructed by combining two mapping
 ## Detailed Description
 
 
-There are therefore 3 domains in this calculation ,  and  with  and 
+There are therefore 3 domains in this calculation \(\Omega_{start}\), \(\Omega_{mid}\) and \(\Omega_{end}\) with \(\mathcal{F}(\Omega_{mid})\rightarrow\Omega_{end}\) and \(\mathcal{G}(\Omega_{start})\rightarrow\Omega_{mid}\)
 
 
-The functions in this mapping are defined on the coordinate system associated with the domain . 
+The functions in this mapping are defined on the coordinate system associated with the domain \(\Omega_{mid}\). 
 
 
     
@@ -207,7 +207,7 @@ inline CombinedMapping::CombinedMapping (
 
 * `mapping_1` The first mapping. 
 * `mapping_2` The second mapping. 
-* `epsilon` The parameter  which determines when a point is close enough to the central O-point for linearisation to be required when calculating the inverse of the Jacobian. The Jacobian is linearised on . 
+* `epsilon` The parameter \(\varepsilon\) which determines when a point is close enough to the central O-point for linearisation to be required when calculating the inverse of the Jacobian. The Jacobian is linearised on \(r \in [0, \varepsilon]\). 
 
 
 
@@ -337,7 +337,7 @@ inline KOKKOS_FUNCTION InvJacobianMatrixType CombinedMapping::inv_jacobian_matri
 
 
 
-If one of the mappings is singular then this function linearises the inverse Jacobian between the O-point and . The inverse Jacobian at the O-point is calculated using the class [**InvJacobianOPoint**](classInvJacobianOPoint.md) in this case. The inverse Jacobian at a point where the matrices are not singular is calculated using non\_singular\_inverse\_jacobian\_matrix
+If one of the mappings is singular then this function linearises the inverse Jacobian between the O-point and \(r = \varepsilon\). The inverse Jacobian at the O-point is calculated using the class [**InvJacobianOPoint**](classInvJacobianOPoint.md) in this case. The inverse Jacobian at a point where the matrices are not singular is calculated using non\_singular\_inverse\_jacobian\_matrix
 
 
 
@@ -452,10 +452,10 @@ inline KOKKOS_INLINE_FUNCTION JacobianMatrixType CombinedMapping::jacobian_matri
 For some computations, we need the complete Jacobian matrix or just the coefficients. This is calculated by combining the Jacobian matrices of the 2 curvilinear mappings.
 
 
-  
+\(J_{(x_{in}, y_{in})->(x_{out},y_{out})} = J_{F\circ G}\) \(= J_{(x_{mid}, y_{mid})->(x_{out},y_{out})}J_{(x_{in}, y_{in})->(x_{mid}, y_{mid})} = J_F J_G\) \(= J_{(x_{mid}, y_{mid})->(x_{out},y_{out})} [J_{(x_{mid}, y_{mid})->(x_{in}, y_{in})}]^{-1} = J_F [J_{G^{-1}}]^{-1}\)
 
 
-The Jacobians that are used for the calculation must be mappings from  so they can be calculated on the correct coordinate system.
+The Jacobians that are used for the calculation must be mappings from \((x_{mid}, y_{mid})\) so they can be calculated on the correct coordinate system.
 
 
 

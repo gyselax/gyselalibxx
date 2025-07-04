@@ -549,7 +549,7 @@
                 <div><h1 id="class-fftpoissonsolver-idxrange-gridpdedim1d-idxrangefull-execspace-layoutspace">Class FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;</h1>
 <p><strong>template &lt;class... GridPDEDim1D, class IdxRangeFull, class ExecSpace, class LayoutSpace&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html"><strong>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;</strong></a></p>
-<p><em>A class to solve the following equation:</em>  <em>using a Fourier transform.</em><a href="#detailed-description">More...</a></p>
+<p><em>A class to solve the following equation:</em> <span class="arithmatex">\(-\Delta \phi = \rho\)</span> <em>using a Fourier transform.</em><a href="#detailed-description">More...</a></p>
 <ul>
 <li><code>#include &lt;fft_poisson_solver.hpp&gt;</code></li>
 </ul>
@@ -624,7 +624,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename base_type::vector_field_type</td>
-<td style="text-align: left;"><a href="#typedef-vector_field_type"><strong>vector_field_type</strong></a>  <br><em>The type of the derivative of</em>  <em>.</em></td>
+<td style="text-align: left;"><a href="#typedef-vector_field_type"><strong>vector_field_type</strong></a>  <br><em>The type of the derivative of</em> <span class="arithmatex">\(\phi\)</span> <em>.</em></td>
 </tr>
 </tbody>
 </table>
@@ -647,11 +647,11 @@
 </tr>
 <tr>
 <td style="text-align: right;">virtual <a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#typedef-field_type"><strong>field_type</strong></a></td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#typedef-field_type"><strong>field_type</strong></a> phi, <a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#typedef-field_type"><strong>field_type</strong></a> rho) const<br><em>An operator which calculates the solution</em>  <em>to Poisson's equation:</em> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#typedef-field_type"><strong>field_type</strong></a> phi, <a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#typedef-field_type"><strong>field_type</strong></a> rho) const<br><em>An operator which calculates the solution</em> <span class="arithmatex">\(\phi\)</span> <em>to Poisson's equation:</em><span class="arithmatex">\(- \Delta \phi = \rho\)</span> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual <a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#typedef-field_type"><strong>field_type</strong></a></td>
-<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (<a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#typedef-field_type"><strong>field_type</strong></a> phi, <a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#typedef-vector_field_type"><strong>vector_field_type</strong></a> E, <a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#typedef-field_type"><strong>field_type</strong></a> rho) const<br><em>An operator which calculates the solution</em>  <em>to Poisson's equation and its derivative:</em> __ <em>.</em></td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (<a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#typedef-field_type"><strong>field_type</strong></a> phi, <a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#typedef-vector_field_type"><strong>vector_field_type</strong></a> E, <a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#typedef-field_type"><strong>field_type</strong></a> rho) const<br><em>An operator which calculates the solution</em> <span class="arithmatex">\(\phi\)</span> <em>to Poisson's equation and its derivative:</em><span class="arithmatex">\(- \Delta \phi = \rho\)</span> __<span class="arithmatex">\(E = - \nabla \phi\)</span> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -736,7 +736,7 @@
 <hr>
 
 <h3 id="typedef-vector_field_type">typedef vector_field_type</h3>
-<p><em>The type of the derivative of</em>  <em>.</em></p>
+<p><em>The type of the derivative of</em> <span class="arithmatex">\(\phi\)</span> <em>.</em></p>
 <pre><code class="language-C++">using FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;::vector_field_type =  typename base_type::vector_field_type;
 </code></pre>
 <hr>
@@ -773,7 +773,7 @@ inline void FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull
 <hr>
 
 <h3 id="function-operator">function operator()</h3>
-<p><em>An operator which calculates the solution</em>  <em>to Poisson's equation:</em> <em>.</em></p>
+<p><em>An operator which calculates the solution</em> <span class="arithmatex">\(\phi\)</span> <em>to Poisson's equation:</em><span class="arithmatex">\(- \Delta \phi = \rho\)</span> <em>.</em></p>
 <pre><code class="language-C++">inline virtual field_type FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;::operator() (
     field_type phi,
     field_type rho
@@ -789,7 +789,7 @@ inline void FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull
 <hr>
 
 <h3 id="function-operator_1">function operator()</h3>
-<p><em>An operator which calculates the solution</em>  <em>to Poisson's equation and its derivative:</em> __ <em>.</em></p>
+<p><em>An operator which calculates the solution</em> <span class="arithmatex">\(\phi\)</span> <em>to Poisson's equation and its derivative:</em><span class="arithmatex">\(- \Delta \phi = \rho\)</span> __<span class="arithmatex">\(E = - \nabla \phi\)</span> <em>.</em></p>
 <pre><code class="language-C++">inline virtual field_type FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;::operator() (
     field_type phi,
     vector_field_type E,

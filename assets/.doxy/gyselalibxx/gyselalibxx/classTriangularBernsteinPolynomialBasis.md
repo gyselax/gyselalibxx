@@ -98,10 +98,10 @@ _A class which evaluates the triangular Bernstein polynomials._ [More...](#detai
 ## Detailed Description
 
 
-Triangular Bernstein polynomials of degree  are defined as: 
+Triangular Bernstein polynomials of degree \(D\) are defined as: \(T_{i_1,i_2,i_3}(x,y) = \binom{D}{i_1\,i_2\,i_3} \lambda_1^{i_1} \lambda_2^{i_2} \lambda_3^{i_3}, \quad i_1 +i_2+i_3 =D\)
 
 
-Where , , and  are the barycentric coordinates of 
+Where \(\lambda_1\), \(\lambda_2\), and \(\lambda_3\) are the barycentric coordinates of \((x,y)\)
 
 
 c.f. Toshniwal et al. 2017 Multi-degree smooth polar splines: A framework for geometric modelling and isogeometric analysis [https://doi.org/10.1016/j.cma.2016.11.009](https://doi.org/10.1016/j.cma.2016.11.009)

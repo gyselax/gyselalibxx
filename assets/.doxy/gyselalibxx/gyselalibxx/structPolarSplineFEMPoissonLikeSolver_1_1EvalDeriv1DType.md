@@ -36,8 +36,8 @@ _Object storing a value and a value of the derivative of a 1D function._
 
 | Type | Name |
 | ---: | :--- |
-|  double | [**derivative**](#variable-derivative)  <br>_The derivative of the function_  _._ |
-|  double | [**value**](#variable-value)  <br>_The value of the function_  _._ |
+|  double | [**derivative**](#variable-derivative)  <br>_The derivative of the function_ \(\partial_x f(x)\) _._ |
+|  double | [**value**](#variable-value)  <br>_The value of the function_ \(f(x)\) _._ |
 
 
 
@@ -89,7 +89,7 @@ _Object storing a value and a value of the derivative of a 1D function._
 
 ### variable derivative 
 
-_The derivative of the function_  _._
+_The derivative of the function_ \(\partial_x f(x)\) _._
 ```C++
 double PolarSplineFEMPoissonLikeSolver< GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, IdxRangeFull >::EvalDeriv1DType::derivative;
 ```
@@ -103,7 +103,7 @@ double PolarSplineFEMPoissonLikeSolver< GridR, GridTheta, PolarBSplinesRTheta, S
 
 ### variable value 
 
-_The value of the function_  _._
+_The value of the function_ \(f(x)\) _._
 ```C++
 double PolarSplineFEMPoissonLikeSolver< GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, IdxRangeFull >::EvalDeriv1DType::value;
 ```

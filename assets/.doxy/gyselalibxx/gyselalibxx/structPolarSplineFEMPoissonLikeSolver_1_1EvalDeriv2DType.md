@@ -36,8 +36,8 @@ _Object storing a value and a value of the derivatives in each direction of a 2D
 
 | Type | Name |
 | ---: | :--- |
-|  [**DVector**](classTensor.md)&lt; [**R\_cov**](structR__cov.md), [**Theta\_cov**](structTheta__cov.md) &gt; | [**derivative**](#variable-derivative)  <br>_The gradient of the function_  _._ |
-|  double | [**value**](#variable-value)  <br>_The value of the function_  _._ |
+|  [**DVector**](classTensor.md)&lt; [**R\_cov**](structR__cov.md), [**Theta\_cov**](structTheta__cov.md) &gt; | [**derivative**](#variable-derivative)  <br>_The gradient of the function_ \(\nabla f(r, \theta)\) _._ |
+|  double | [**value**](#variable-value)  <br>_The value of the function_ \(f(r, \theta)\) _._ |
 
 
 
@@ -89,7 +89,7 @@ _Object storing a value and a value of the derivatives in each direction of a 2D
 
 ### variable derivative 
 
-_The gradient of the function_  _._
+_The gradient of the function_ \(\nabla f(r, \theta)\) _._
 ```C++
 DVector<R_cov, Theta_cov> PolarSplineFEMPoissonLikeSolver< GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, IdxRangeFull >::EvalDeriv2DType::derivative;
 ```
@@ -103,7 +103,7 @@ DVector<R_cov, Theta_cov> PolarSplineFEMPoissonLikeSolver< GridR, GridTheta, Pol
 
 ### variable value 
 
-_The value of the function_  _._
+_The value of the function_ \(f(r, \theta)\) _._
 ```C++
 double PolarSplineFEMPoissonLikeSolver< GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, IdxRangeFull >::EvalDeriv2DType::value;
 ```

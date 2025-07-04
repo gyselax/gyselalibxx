@@ -60,11 +60,11 @@ _Solve the Poisson-like equation and return the electric field for the coupled V
 | Type | Name |
 | ---: | :--- |
 |   | [**AdvectionFieldFinder**](#function-advectionfieldfinder) (Mapping const & mapping, double const epsilon=1e-12) <br>_Instantiate a AdvectionFieldRTheta ._  |
-|  void | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; electrostatic\_potential, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; advection\_field\_xy) const<br>_Compute the advection field from a Field of_  _values._ |
-|  void | [**operator()**](#function-operator_1) (host\_t&lt; Spline2D &gt; electrostatic\_potential\_coef, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; advection\_field\_xy) const<br>_Compute the advection field from a spline representation of_  _solution. The B-splines basis used is the cross-product of two 1D B-splines basis._ |
+|  void | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; electrostatic\_potential, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; advection\_field\_xy) const<br>_Compute the advection field from a Field of_ \(\phi\) _values._ |
+|  void | [**operator()**](#function-operator_1) (host\_t&lt; Spline2D &gt; electrostatic\_potential\_coef, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; advection\_field\_xy) const<br>_Compute the advection field from a spline representation of_ \(\phi\) _solution. The B-splines basis used is the cross-product of two 1D B-splines basis._ |
 |  void | [**operator()**](#function-operator_2) (host\_t&lt; [**PolarSplineMemRTheta**](structPolarSplineMem.md) &gt; & electrostatic\_potential\_coef, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; advection\_field\_xy) const<br>_Compute the advection field from the Poisson-like equation solution. The B-splines basis used is the polar B-splines (_ [_**PolarSplineMem**_](structPolarSplineMem.md) _)._ |
-|  void | [**operator()**](#function-operator_3) (host\_t&lt; DFieldRTheta &gt; electrostatic\_potential, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; &gt; advection\_field\_rtheta, [**DVector**](classTensor.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; & advection\_field\_xy\_centre) const<br>_Compute the advection field from a Field of_  _values._ |
-|  void | [**operator()**](#function-operator_4) (host\_t&lt; Spline2D &gt; electrostatic\_potential\_coef, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; &gt; advection\_field\_rtheta, [**DVector**](classTensor.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; & advection\_field\_xy\_centre) const<br>_Compute the advection field from a spline representation of_  _. The B-splines basis used is the cross-product of two 1D B-splines basis._ |
+|  void | [**operator()**](#function-operator_3) (host\_t&lt; DFieldRTheta &gt; electrostatic\_potential, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; &gt; advection\_field\_rtheta, [**DVector**](classTensor.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; & advection\_field\_xy\_centre) const<br>_Compute the advection field from a Field of_ \(\phi\) _values._ |
+|  void | [**operator()**](#function-operator_4) (host\_t&lt; Spline2D &gt; electrostatic\_potential\_coef, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; &gt; advection\_field\_rtheta, [**DVector**](classTensor.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; & advection\_field\_xy\_centre) const<br>_Compute the advection field from a spline representation of_ \(\phi\) _. The B-splines basis used is the cross-product of two 1D B-splines basis._ |
 |  void | [**operator()**](#function-operator_5) (host\_t&lt; [**PolarSplineMemRTheta**](structPolarSplineMem.md) &gt; & electrostatic\_potential\_coef, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; &gt; advection\_field\_rtheta, [**DVector**](classTensor.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; & advection\_field\_xy\_centre) const<br>_Compute the advection field from the Poisson-like equation. The B-splines basis used is the polar B-splines (_ [_**PolarSplineMem**_](structPolarSplineMem.md) _)._ |
 
 
@@ -101,58 +101,59 @@ The Vlasov-Poisson equations are given by
 
 
 
-* (1) ,
-* (2) ,
-* (3) .
+* (1) \(\partial_t \rho + (E \wedge e_z) \cdot \nabla \rho = 0\),
+* (2) \(- \nabla\cdot\nabla \phi = \rho\),
+* (3) \(E = -\nabla \phi\).
 
 
 
 
-The functions are defined on a logical domain, and the mapping from the logical domain to the physical domain is written .
+The functions are defined on a logical domain, and the mapping from the logical domain to the physical domain is written \(\mathcal{F}\).
 
 
-We here focus on equation (3). The  is already computed on B-splines with the given Poisson solver. Then in the AdvectionFieldFinder::operator() we compute the advection field ( ) thanks to (3) using the B-splines coefficients. Depending on the given mapping, the computation at the centre point is not always well-defined so we linearise around the centre point as explained in Edoardo Zoni's article ([https://doi.org/10.1016/j.jcp.2019.108889](https://doi.org/10.1016/j.jcp.2019.108889)).
+We here focus on equation (3). The \(\phi\) is already computed on B-splines with the given Poisson solver. Then in the AdvectionFieldFinder::operator() we compute the advection field ( \(A = E \wedge e_z\)) thanks to (3) using the B-splines coefficients. Depending on the given mapping, the computation at the centre point is not always well-defined so we linearise around the centre point as explained in Edoardo Zoni's article ([https://doi.org/10.1016/j.jcp.2019.108889](https://doi.org/10.1016/j.jcp.2019.108889)).
 
 
 The advection field can be computed along the logical domain axis or the physical domain axis.
 
 
 1- In the first case, we compute the electric field thanks to (3) and
-* ,
-* ,
+* \(\nabla_{x,y} \phi(r, \theta) = (J^{-1})^{T} \hat{\nabla}_{r,\theta} \phi(r, \theta)\),
+* \(E(r, \theta) = -\nabla_{x,y} \phi(r, \theta)\),
 
 
 
 
-For ,  is ill-defined so we linearise  ,
+For \(r < \varepsilon\), \((J^{-1})^{T}\) is ill-defined so we linearise  \(E(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right)  E(0, \theta)
++ \frac{r}{\varepsilon} E(\varepsilon, \theta)\),
 
 
-with  computed thanks to
-
-
-
-* ,
-* ,
+with \(E(0, \theta)\) computed thanks to
 
 
 
+* \(\partial_r \phi (0, \theta_1) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right](0, \theta_1)\),
+* \(\partial_r \phi (0, \theta_2) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right] (0, \theta_2)\),
 
-where  and  correspond to linearly independent directions.
 
 
-Then the advection field along the physical domain axis is given by .
+
+where \(\theta_1\) and \(\theta_2\) correspond to linearly independent directions.
+
+
+Then the advection field along the physical domain axis is given by \(A = E \wedge e_z\).
 
 
 2- In the second case, the advection field along the logical domain axis is computed with
-* ,
-* with , the coefficients of the inverse metric tensor,
-* , the coefficients of the metric tensor,
-* , the unnormalized local covariants vectors.
+* \(\hat{\nabla} \phi = \sum_{i,j} \partial_{x_i} \phi g^{ij} e_j\),
+* with \(g^{ij}\), the coefficients of the inverse metric tensor,
+* \(g_{jj}\), the coefficients of the metric tensor,
+* \(e_j\), the unnormalized local covariants vectors.
 
 
 
 
-Then, we compute  and , with  the Jacobian matrix of the transformation .
+Then, we compute \(\hat{E}_{r\theta} = -\hat{\nabla}_{r\theta} \phi\) and \(\hat{A}_{r\theta} = J^{-1}(J \hat{E}_{r\theta} \wedge e_z)\), with \(J\) the Jacobian matrix of the transformation \((r,\theta) \mapsto (x,y)\).
 
 
 The equation (1) is solved thanks to advection operator (IAdvectionRTheta).
@@ -210,8 +211,8 @@ inline explicit AdvectionFieldFinder::AdvectionFieldFinder (
 **Parameters:**
 
 
-* `mapping` The mapping  from the logical domain to the physical domain. 
-* `epsilon` The parameter  for the linearisation of the electric field. 
+* `mapping` The mapping \(\mathcal{F}\) from the logical domain to the physical domain. 
+* `epsilon` The parameter \(\varepsilon\) for the linearisation of the electric field. 
 
 
 
@@ -224,7 +225,7 @@ inline explicit AdvectionFieldFinder::AdvectionFieldFinder (
 
 ### function operator() 
 
-_Compute the advection field from a Field of_  _values._
+_Compute the advection field from a Field of_ \(\phi\) _values._
 ```C++
 inline void AdvectionFieldFinder::operator() (
     host_t< DFieldRTheta > electrostatic_potential,
@@ -239,7 +240,7 @@ inline void AdvectionFieldFinder::operator() (
 **Parameters:**
 
 
-* `electrostatic_potential` The values of the solution  of the Poisson-like equation (2). 
+* `electrostatic_potential` The values of the solution \(\phi\) of the Poisson-like equation (2). 
 * `advection_field_xy` The advection field on the physical axis. 
 
 
@@ -253,7 +254,7 @@ inline void AdvectionFieldFinder::operator() (
 
 ### function operator() 
 
-_Compute the advection field from a spline representation of_  _solution. The B-splines basis used is the cross-product of two 1D B-splines basis._
+_Compute the advection field from a spline representation of_ \(\phi\) _solution. The B-splines basis used is the cross-product of two 1D B-splines basis._
 ```C++
 inline void AdvectionFieldFinder::operator() (
     host_t< Spline2D > electrostatic_potential_coef,
@@ -268,7 +269,7 @@ inline void AdvectionFieldFinder::operator() (
 **Parameters:**
 
 
-* `electrostatic_potential_coef` The spline representation of the solution  of the Poisson-like equation (2). 
+* `electrostatic_potential_coef` The spline representation of the solution \(\phi\) of the Poisson-like equation (2). 
 * `advection_field_xy` The advection field on the physical axis. 
 
 
@@ -297,7 +298,7 @@ inline void AdvectionFieldFinder::operator() (
 **Parameters:**
 
 
-* `electrostatic_potential_coef` The polar spline representation of the solution  of the Poisson-like equation (2). 
+* `electrostatic_potential_coef` The polar spline representation of the solution \(\phi\) of the Poisson-like equation (2). 
 * `advection_field_xy` The advection field on the physical axis. 
 
 
@@ -311,7 +312,7 @@ inline void AdvectionFieldFinder::operator() (
 
 ### function operator() 
 
-_Compute the advection field from a Field of_  _values._
+_Compute the advection field from a Field of_ \(\phi\) _values._
 ```C++
 inline void AdvectionFieldFinder::operator() (
     host_t< DFieldRTheta > electrostatic_potential,
@@ -327,7 +328,7 @@ inline void AdvectionFieldFinder::operator() (
 **Parameters:**
 
 
-* `electrostatic_potential` The values of the solution  of the Poisson-like equation (2). 
+* `electrostatic_potential` The values of the solution \(\phi\) of the Poisson-like equation (2). 
 * `advection_field_rtheta` The advection field on the logical axis. It is expressed on the contravariant basis. 
 * `advection_field_xy_centre` The advection field at the centre point on the Cartesian basis. 
 
@@ -342,7 +343,7 @@ inline void AdvectionFieldFinder::operator() (
 
 ### function operator() 
 
-_Compute the advection field from a spline representation of_  _. The B-splines basis used is the cross-product of two 1D B-splines basis._
+_Compute the advection field from a spline representation of_ \(\phi\) _. The B-splines basis used is the cross-product of two 1D B-splines basis._
 ```C++
 inline void AdvectionFieldFinder::operator() (
     host_t< Spline2D > electrostatic_potential_coef,
@@ -358,7 +359,7 @@ inline void AdvectionFieldFinder::operator() (
 **Parameters:**
 
 
-* `electrostatic_potential_coef` The spline representation of the solution  of the Poisson-like equation (2). 
+* `electrostatic_potential_coef` The spline representation of the solution \(\phi\) of the Poisson-like equation (2). 
 * `advection_field_rtheta` The advection field on the logical axis. It is expressed on the contravariant basis. 
 * `advection_field_xy_centre` The advection field at the centre point on the Cartesian basis. 
 
@@ -389,7 +390,7 @@ inline void AdvectionFieldFinder::operator() (
 **Parameters:**
 
 
-* `electrostatic_potential_coef` The polar spline representation of the solution  of the Poisson-like equation (2). 
+* `electrostatic_potential_coef` The polar spline representation of the solution \(\phi\) of the Poisson-like equation (2). 
 * `advection_field_rtheta` The advection field on the logical axis. It is expressed on the contravariant basis. 
 * `advection_field_xy_centre` The advection field at the centre point on the Cartesian basis. 
 

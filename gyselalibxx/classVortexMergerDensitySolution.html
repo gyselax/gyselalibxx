@@ -603,19 +603,24 @@
     const double y_star_2
 ) 
 </code></pre>
-<p>The initial condition is given by  </p>
-<p>with  given by <a href="classVortexMergerEquilibria.html#function-set_equilibrium"><strong>VortexMergerEquilibria::set_equilibrium</strong></a>.</p>
+<p>The initial condition is given by<br>
+[\rho(0, x, y) = \rho_{eq}(x,y) + \varepsilon
+     \left(
+         \exp\left[-\frac{(x - x_1^<em>)^2 + (y - y_1^</em>)^2}{2\sigma^2}\right]
+      +  \exp\left[-\frac{(x - x_2^<em>)^2 + (y - y_2^</em>)^2}{2\sigma^2}\right]
+     \right)]</p>
+<p>with <span class="arithmatex">\(\rho_{eq}\)</span> given by <a href="classVortexMergerEquilibria.html#function-set_equilibrium"><strong>VortexMergerEquilibria::set_equilibrium</strong></a>.</p>
 <p>The initial condition is also given in Edoardo Zoni's article (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>).</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>rho_init</code> The initial condition of the density. </li>
 <li><code>rho_eq</code> The equilibrium density solution computed thanks to <a href="classVortexMergerEquilibria.html#function-set_equilibrium"><strong>VortexMergerEquilibria::set_equilibrium</strong></a>. </li>
-<li><code>eps</code> The  amplitude of the perturbation. </li>
-<li><code>sigma</code> The  of the Gaussian functions. </li>
-<li><code>x_star_1</code> The  parameter. </li>
-<li><code>y_star_1</code> The  parameter. </li>
-<li><code>x_star_2</code> The  parameter. </li>
-<li><code>y_star_2</code> The  parameter. </li>
+<li><code>eps</code> The <span class="arithmatex">\(\varepsilon\)</span> amplitude of the perturbation. </li>
+<li><code>sigma</code> The <span class="arithmatex">\(\sigma\)</span> of the Gaussian functions. </li>
+<li><code>x_star_1</code> The <span class="arithmatex">\(x_1^*\)</span> parameter. </li>
+<li><code>y_star_1</code> The <span class="arithmatex">\(y_1^*\)</span> parameter. </li>
+<li><code>x_star_2</code> The <span class="arithmatex">\(x_2^*\)</span> parameter. </li>
+<li><code>y_star_2</code> The <span class="arithmatex">\(y_2^*\)</span> parameter. </li>
 </ul>
 <hr>
 

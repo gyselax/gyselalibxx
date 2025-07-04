@@ -10,7 +10,7 @@
 
 
 
-_A class to solve the following equation:_  _using a Fourier transform._[More...](#detailed-description)
+_A class to solve the following equation:_ \(-\Delta \phi = \rho\) _using a Fourier transform._[More...](#detailed-description)
 
 * `#include <fft_poisson_solver.hpp>`
 
@@ -51,7 +51,7 @@ Inherits the following classes: [IPoissonSolver](classIPoissonSolver.md)
 | typedef typename base\_type::laplacian\_idx\_range\_type | [**laplacian\_idx\_range\_type**](#typedef-laplacian_idx_range_type)  <br>_The type of the index range on which the equation is defined._  |
 | typedef typename base\_type::layout\_space | [**layout\_space**](#typedef-layout_space)  <br>_The layout space of the Fields passed to operator()._  |
 | typedef typename base\_type::memory\_space | [**memory\_space**](#typedef-memory_space)  <br>_The space (CPU/GPU) where the Fields passed to operator() are saved._  |
-| typedef typename base\_type::vector\_field\_type | [**vector\_field\_type**](#typedef-vector_field_type)  <br>_The type of the derivative of_  _._ |
+| typedef typename base\_type::vector\_field\_type | [**vector\_field\_type**](#typedef-vector_field_type)  <br>_The type of the derivative of_ \(\phi\) _._ |
 
 
 
@@ -98,8 +98,8 @@ Inherits the following classes: [IPoissonSolver](classIPoissonSolver.md)
 | ---: | :--- |
 |   | [**FFTPoissonSolver**](#function-fftpoissonsolver) ([**laplacian\_idx\_range\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-laplacian_idx_range_type) laplacian\_idx\_range) <br>_A constructor for the FFT Poisson solver. This constructor calls ddc::init\_discrete\_space so it should only be called once per simulation._  |
 |  void | [**negative\_differentiate\_equation**](#function-negative_differentiate_equation) ([**fourier\_field\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-fourier_field_type) derivative, [**fourier\_field\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-fourier_field_type) values) const<br>_Differentiate and multiply by -1 an expression in Fourier space by multiplying by -i \* k This function should be private. It is not due to the inclusion of a KOKKOS\_LAMBDA._  |
-| virtual [**field\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-field_type) | [**operator()**](#function-operator) ([**field\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-field_type) phi, [**field\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-field_type) rho) const<br>_An operator which calculates the solution_  _to Poisson's equation:_ _._ |
-| virtual [**field\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-field_type) | [**operator()**](#function-operator_1) ([**field\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-field_type) phi, [**vector\_field\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-vector_field_type) E, [**field\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-field_type) rho) const<br>_An operator which calculates the solution_  _to Poisson's equation and its derivative:_ __ _._ |
+| virtual [**field\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-field_type) | [**operator()**](#function-operator) ([**field\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-field_type) phi, [**field\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-field_type) rho) const<br>_An operator which calculates the solution_ \(\phi\) _to Poisson's equation:_\(- \Delta \phi = \rho\) _._ |
+| virtual [**field\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-field_type) | [**operator()**](#function-operator_1) ([**field\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-field_type) phi, [**vector\_field\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-vector_field_type) E, [**field\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-field_type) rho) const<br>_An operator which calculates the solution_ \(\phi\) _to Poisson's equation and its derivative:_\(- \Delta \phi = \rho\) __\(E = - \nabla \phi\) _._ |
 |  void | [**solve\_poisson\_equation**](#function-solve_poisson_equation) ([**fourier\_field\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-fourier_field_type) intermediate\_chunk, DField&lt; [**laplacian\_idx\_range\_type**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-laplacian_idx_range_type), [**memory\_space**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md#typedef-memory_space), Layout &gt; rho) const<br>_A function to solve the Poisson equation in Fourier space This function should be private. It is not due to the inclusion of a KOKKOS\_LAMBDA._  |
 
 
@@ -335,7 +335,7 @@ using FFTPoissonSolver< IdxRange< GridPDEDim1D... >, IdxRangeFull, ExecSpace, La
 
 ### typedef vector\_field\_type 
 
-_The type of the derivative of_  _._
+_The type of the derivative of_ \(\phi\) _._
 ```C++
 using FFTPoissonSolver< IdxRange< GridPDEDim1D... >, IdxRangeFull, ExecSpace, LayoutSpace >::vector_field_type =  typename base_type::vector_field_type;
 ```
@@ -415,7 +415,7 @@ inline void FFTPoissonSolver< IdxRange< GridPDEDim1D... >, IdxRangeFull, ExecSpa
 
 ### function operator() 
 
-_An operator which calculates the solution_  _to Poisson's equation:_ _._
+_An operator which calculates the solution_ \(\phi\) _to Poisson's equation:_\(- \Delta \phi = \rho\) _._
 ```C++
 inline virtual field_type FFTPoissonSolver< IdxRange< GridPDEDim1D... >, IdxRangeFull, ExecSpace, LayoutSpace >::operator() (
     field_type phi,
@@ -451,7 +451,7 @@ A reference to the solution to Poisson's equation.
 
 ### function operator() 
 
-_An operator which calculates the solution_  _to Poisson's equation and its derivative:_ __ _._
+_An operator which calculates the solution_ \(\phi\) _to Poisson's equation and its derivative:_\(- \Delta \phi = \rho\) __\(E = - \nabla \phi\) _._
 ```C++
 inline virtual field_type FFTPoissonSolver< IdxRange< GridPDEDim1D... >, IdxRangeFull, ExecSpace, LayoutSpace >::operator() (
     field_type phi,

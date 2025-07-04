@@ -82,8 +82,8 @@ Inherits the following classes: [IPoissonSolver](classIPoissonSolver.md)
 | Type | Name |
 | ---: | :--- |
 |   | [**FEM1DPoissonSolver**](#function-fem1dpoissonsolver) (SplineBuilder const & spline\_builder, SplineEvaluator const & spline\_evaluator) <br> |
-|  field\_type | [**operator()**](#function-operator) (field\_type phi, field\_type rho) override const<br>_An operator which calculates the solution_  _to Poisson's equation:_ _._ |
-|  field\_type | [**operator()**](#function-operator_1) (field\_type phi, vector\_field\_type E, field\_type rho) override const<br>_An operator which calculates the solution_  _to Poisson's equation and its derivative:_ __ _._ |
+|  field\_type | [**operator()**](#function-operator) (field\_type phi, field\_type rho) override const<br>_An operator which calculates the solution_ \(\phi\) _to Poisson's equation:_\(-\Delta \phi = \rho\) _._ |
+|  field\_type | [**operator()**](#function-operator_1) (field\_type phi, vector\_field\_type E, field\_type rho) override const<br>_An operator which calculates the solution_ \(\phi\) _to Poisson's equation and its derivative:_\(- \Delta \phi = \rho\) __\(E = - \nabla \phi\) _._ |
 |  void | [**solve\_matrix\_system**](#function-solve_matrix_system) (BatchedFEMBSplinesCoeff phi\_spline\_coef, field\_type rho) const<br> |
 
 
@@ -144,7 +144,7 @@ Inherits the following classes: [IPoissonSolver](classIPoissonSolver.md)
 ## Detailed Description
 
 
-A class to solve the following equation:  using a Finite Element Method.
+A class to solve the following equation: \(-\Delta \phi = \rho\) using a Finite Element Method.
 
 
 
@@ -198,7 +198,7 @@ Construct the FemQNSolver operator.
 
 ### function operator() 
 
-_An operator which calculates the solution_  _to Poisson's equation:_ _._
+_An operator which calculates the solution_ \(\phi\) _to Poisson's equation:_\(-\Delta \phi = \rho\) _._
 ```C++
 inline field_type FEM1DPoissonSolver::operator() (
     field_type phi,
@@ -234,7 +234,7 @@ A reference to the solution to Poisson's equation.
 
 ### function operator() 
 
-_An operator which calculates the solution_  _to Poisson's equation and its derivative:_ __ _._
+_An operator which calculates the solution_ \(\phi\) _to Poisson's equation and its derivative:_\(- \Delta \phi = \rho\) __\(E = - \nabla \phi\) _._
 ```C++
 inline field_type FEM1DPoissonSolver::operator() (
     field_type phi,

@@ -92,9 +92,9 @@ It solves in time the following guiding-centre equations system:
 
 
 
-* ,
-* ,
-* .
+* \(-\Delta \phi = f\),
+* \(E = - \nabla \phi\),
+* \(\partial_t f - E_y \partial_x f + E_x \partial_y f= 0\).
 
 
 
@@ -102,19 +102,19 @@ It solves in time the following guiding-centre equations system:
 This method is mainly a Runge-Kutta 2 method:
 
 
-for ,
+for \(n \geq 0\),
 
 
 First, it advects on a half time step:
-* 1./2. From , it computes  with a [**FFTPoissonSolver**](classFFTPoissonSolver.md);
-* 3. From  and , it computes  with a [**BslAdvection1D**](classBslAdvection1D.md) on ;
+* 1./2. From \(f^n\), it computes \(E^n\) with a [**FFTPoissonSolver**](classFFTPoissonSolver.md);
+* 3. From \(f^n\) and \(E^n\), it computes \(f^{n+1/2}\) with a [**BslAdvection1D**](classBslAdvection1D.md) on \(\frac{dt}{2}\);
 
 
 
 
 Secondly, it advects on a full time step:
-* 4./5. From , it computes  with a [**FFTPoissonSolver**](classFFTPoissonSolver.md);
-* 6. From  and , it computes  with a BslAdvectionRP on .
+* 4./5. From \(f^{n+1/2}\), it computes \(E^{n+1/2}\) with a [**FFTPoissonSolver**](classFFTPoissonSolver.md);
+* 6. From \(f^n\) and \(E^{n+1/2}\), it computes \(f^{n+1}\) with a BslAdvectionRP on \(dt\).
 
 
 
@@ -157,8 +157,8 @@ inline PredCorrRK2XY::PredCorrRK2XY (
 
 * `poisson_solver` Poisson solver also computing the electric field. 
  
-* `advection_x` 1D advection operator along  direction. 
-* `advection_y` 1D advection operator along  direction. 
+* `advection_x` 1D advection operator along \(x\) direction. 
+* `advection_y` 1D advection operator along \(y\) direction. 
 
 
 
@@ -190,7 +190,7 @@ Along the simulation, the data are saved in an output folder.
 **Parameters:**
 
 
-* `allfdistribu` Initial function . 
+* `allfdistribu` Initial function \(f (0, x, y)\). 
 * `dt` Time step. 
 * `nbiter` Number of time steps. 
 

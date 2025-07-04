@@ -569,7 +569,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">virtual host_t&lt; DFieldRTheta &gt;</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (host_t&lt; DFieldRTheta &gt; density, double const dt, int const steps) const<br><em>Solves on</em>  <em>the equations system.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (host_t&lt; DFieldRTheta &gt; density, double const dt, int const steps) const<br><em>Solves on</em> <span class="arithmatex">\(T = dt*N\)</span> <em>the equations system.</em></td>
 </tr>
 </tbody>
 </table>
@@ -585,7 +585,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">virtual host_t&lt; DFieldRTheta &gt;</td>
-<td style="text-align: left;"><a href="classITimeSolverRTheta.html#function-operator"><strong>operator()</strong></a> (host_t&lt; DFieldRTheta &gt; density, double const dt, int const steps=1) const = 0<br><em>Solves on</em>  <em>the equations system.</em></td>
+<td style="text-align: left;"><a href="classITimeSolverRTheta.html#function-operator"><strong>operator()</strong></a> (host_t&lt; DFieldRTheta &gt; density, double const dt, int const steps=1) const = 0<br><em>Solves on</em> <span class="arithmatex">\(T = dt*N\)</span> <em>the equations system.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual</td>
@@ -612,25 +612,25 @@
 <h2 id="detailed-description">Detailed Description</h2>
 <p>It solves in time the following Vlasov-Poisson equations system:</p>
 <ul>
-<li>,</li>
-<li>,</li>
-<li>,</li>
+<li><span class="arithmatex">\(- \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho\)</span>,</li>
+<li><span class="arithmatex">\(E = - \nabla \phi\)</span>,</li>
+<li><span class="arithmatex">\(\partial_t \rho - E_y \partial_x \rho + E_x \partial_y \rho = 0\)</span>,</li>
 </ul>
-<p>we write .</p>
+<p>we write <span class="arithmatex">\((A_x, A_y) =  (-E_y, E_x)\)</span>.</p>
 <p>The second order implicit predictor-corrector is also detailed in Edoardo Zoni's article (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>).</p>
-<p>for ,</p>
+<p>for <span class="arithmatex">\(n \geq 0\)</span>,</p>
 <p>First, it predicts:
-* 1. From , it computes  with a <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>;
-* 2. From , it computes  with a <a href="classAdvectionFieldFinder.html"><strong>AdvectionFieldFinder</strong></a>;
-* 3. From  and , it computes implicitly  with a <a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a> on :
-  * the characteristic feet  is such that  with  the result of the implicit method:
-    * .</p>
+* 1. From <span class="arithmatex">\(\rho^n\)</span>, it computes <span class="arithmatex">\(\phi^n\)</span> with a <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>;
+* 2. From <span class="arithmatex">\(\phi^n\)</span>, it computes <span class="arithmatex">\(A^n\)</span> with a <a href="classAdvectionFieldFinder.html"><strong>AdvectionFieldFinder</strong></a>;
+* 3. From <span class="arithmatex">\(\rho^n\)</span> and <span class="arithmatex">\(A^n\)</span>, it computes implicitly <span class="arithmatex">\(\rho^P\)</span> with a <a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a> on <span class="arithmatex">\(\frac{dt}{4}\)</span>:
+  * the characteristic feet <span class="arithmatex">\(X^P\)</span> is such that <span class="arithmatex">\(X^P = X^k\)</span> with <span class="arithmatex">\(X^k\)</span> the result of the implicit method:
+    * <span class="arithmatex">\(X^k = X^n - \frac{dt}{4} \partial_t X^k\)</span>.</p>
 <p>Secondly, it corrects:
-* 4. From , it computes  with a <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>;
-* 5. From , it computes  with a <a href="classAdvectionFieldFinder.html"><strong>AdvectionFieldFinder</strong></a>;
-* 6. From  and , it computes  with a <a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a> on .
-  * the characteristic feet  is such that  with  the result of the implicit method:
-    * ,</p>
+* 4. From <span class="arithmatex">\(\rho^P\)</span>, it computes <span class="arithmatex">\(\phi^P\)</span> with a <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>;
+* 5. From <span class="arithmatex">\(\phi^P\)</span>, it computes <span class="arithmatex">\(A^P\)</span> with a <a href="classAdvectionFieldFinder.html"><strong>AdvectionFieldFinder</strong></a>;
+* 6. From <span class="arithmatex">\(\rho^n\)</span> and <span class="arithmatex">\(A^{P}\)</span>, it computes <span class="arithmatex">\(\rho^{n+1}\)</span> with a <a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a> on <span class="arithmatex">\(\frac{dt}{2}\)</span>.
+  * the characteristic feet <span class="arithmatex">\(X^C\)</span> is such that <span class="arithmatex">\(X^C = X^k\)</span> with <span class="arithmatex">\(X^k\)</span> the result of the implicit method:
+    * <span class="arithmatex">\(\partial_t X^k = A^P(X^n) + A^P(X^{k-1})\)</span>,</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>LogicalToPhysicalMapping</code> A class describing a mapping from curvilinear coordinates to Cartesian coordinates. </li>
@@ -662,7 +662,7 @@
 <hr>
 
 <h3 id="function-operator">function operator()</h3>
-<p><em>Solves on</em>  <em>the equations system.</em></p>
+<p><em>Solves on</em> <span class="arithmatex">\(T = dt*N\)</span> <em>the equations system.</em></p>
 <pre><code class="language-C++">inline virtual host_t&lt; DFieldRTheta &gt; BslImplicitPredCorrRTheta::operator() (
     host_t&lt; DFieldRTheta &gt; density,
     double const dt,
@@ -671,9 +671,9 @@
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>density</code> On input: the initial condition. On output: the solution at . </li>
+<li><code>density</code> On input: the initial condition. On output: the solution at <span class="arithmatex">\(dt *N\)</span>. </li>
 <li><code>dt</code> The time step. </li>
-<li><code>steps</code> The number  of time interactions.</li>
+<li><code>steps</code> The number <span class="arithmatex">\(N\)</span> of time interactions.</li>
 </ul>
 <p><strong>Returns:</strong></p>
 <p>A Field toward density. </p>

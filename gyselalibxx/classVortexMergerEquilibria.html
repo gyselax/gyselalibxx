@@ -614,24 +614,24 @@
     int count_max=25
 ) const
 </code></pre>
-<p>The equilibrium is determined by the eigenvalue problem. For the given initial data ,</p>
+<p>The equilibrium is determined by the eigenvalue problem. For the given initial data <span class="arithmatex">\((\sigma^0, \phi^0)\)</span>,</p>
 <ul>
-<li>compute ;</li>
-<li>compute  with ;</li>
-<li>for  given, compute  with  ;</li>
-<li>compute .</li>
+<li>compute <span class="arithmatex">\(\rho^i = \sigma^{i-1} f(\phi^{i-1})\)</span>;</li>
+<li>compute <span class="arithmatex">\(\phi_*^i\)</span> with <span class="arithmatex">\(-\nabla\cdot\nabla\phi_*^i = \rho^i\)</span>;</li>
+<li>for <span class="arithmatex">\(\phi_{\text{max}}\)</span> given, compute <span class="arithmatex">\(c^i\)</span> with <span class="arithmatex">\(c^i = \phi_{\text{max}} / \Vert \phi_*^i \Vert_{\mathcal{L}^\infty}\)</span> ;</li>
+<li>compute <span class="arithmatex">\((\sigma^i, \phi^i) = c^i (\sigma^{i-1}, \phi_*^i)\)</span>.</li>
 </ul>
-<p>We iterate until .</p>
-<p>For the vortex merger simulation, .</p>
+<p>We iterate until <span class="arithmatex">\(|\sigma^i - \sigma^{i-1}|\leq \tau\)</span>.</p>
+<p>For the vortex merger simulation, <span class="arithmatex">\(f(\phi) = \phi^2\)</span>.</p>
 <p>The algorithm is also detailed in Edoardo Zoni's article (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>).</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>sigma</code> The  parameter. </li>
-<li><code>phi_eq</code> The equilibrium electrical potential . </li>
-<li><code>rho_eq</code> The equilibrium density . </li>
-<li><code>function</code> The function . </li>
-<li><code>phi_max</code> The maximal value of the electrical potential . </li>
-<li><code>tau</code> The  parameter. </li>
+<li><code>sigma</code> The <span class="arithmatex">\(\sigma\)</span> parameter. </li>
+<li><code>phi_eq</code> The equilibrium electrical potential <span class="arithmatex">\(\phi\)</span>. </li>
+<li><code>rho_eq</code> The equilibrium density <span class="arithmatex">\(\rho\)</span>. </li>
+<li><code>function</code> The function <span class="arithmatex">\(f\)</span>. </li>
+<li><code>phi_max</code> The maximal value of the electrical potential <span class="arithmatex">\(\phi\)</span>. </li>
+<li><code>tau</code> The <span class="arithmatex">\(\tau\)</span> parameter. </li>
 <li><code>count_max</code> The maximal number of iteration of the implicit loop. </li>
 </ul>
 <hr>
@@ -648,13 +648,13 @@
 <p><strong>Parameters:</strong></p>
 <ul>
 <li>
-<p><code>rho_eq</code> The equilibrium density . </p>
+<p><code>rho_eq</code> The equilibrium density <span class="arithmatex">\(\rho\)</span>. </p>
 </li>
 <li>
-<p><code>function</code> The function  used to compute the equilibrium. </p>
+<p><code>function</code> The function <span class="arithmatex">\(f\)</span> used to compute the equilibrium. </p>
 </li>
-<li><code>phi_max</code> The maximal value of the electrical potential . </li>
-<li><code>tau</code> The  parameter. </li>
+<li><code>phi_max</code> The maximal value of the electrical potential <span class="arithmatex">\(\phi\)</span>. </li>
+<li><code>tau</code> The <span class="arithmatex">\(\tau\)</span> parameter. </li>
 </ul>
 <hr>
 
