@@ -54,8 +54,8 @@ spack repo add --scope site spack-0.23.1/var/spack/repos/pdi
 spack compiler find
 spack external find
 # after `spack external find`, un-find some packages that commonly cause issues (curl and perl)
-sed -i '/^\s*curl:/,/^\s*[^ ]/ s/^\(\s*\)/#\1/' ${SPACK_USER_CONFIG_PATH}/packages.yaml
-sed -i '/^\s*perl:/,/^\s*[^ ]/ s/^\(\s*\)/#\1/' ${SPACK_USER_CONFIG_PATH}/packages.yaml
+sed -i.save '/^\s*curl:/,/^\s*[^ ]/ s/^\(\s*\)/#\1/' ${SPACK_USER_CONFIG_PATH}/packages.yaml
+sed -i.save '/^\s*perl:/,/^\s*[^ ]/ s/^\(\s*\)/#\1/' ${SPACK_USER_CONFIG_PATH}/packages.yaml
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   COMPILER='apple-clang@14:'
