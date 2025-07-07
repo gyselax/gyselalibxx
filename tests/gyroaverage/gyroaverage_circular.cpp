@@ -13,7 +13,7 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "gyroaverage_operator.hpp"
-#inlcude "test_math_utils.hpp"
+#include "test_math_utils.hpp"
 
 namespace {
 
