@@ -8,12 +8,15 @@
 #include "9patches_2d_periodic_strips_non_uniform.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
+#include "derivative_field.hpp"
+#include "derivative_field_mem.hpp"
 #include "interface.hpp"
 #include "interface_derivative_matrix.hpp"
 #include "interface_derivatives_test_utils.hpp"
 #include "mesh_builder.hpp"
 #include "non_uniform_interpolation_points.hpp"
 #include "single_interface_derivatives_calculator.hpp"
+#include "view.hpp"
 
 
 /*
@@ -127,6 +130,38 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         ddc::PeriodicExtrapolationRule<Xg>,
         ddc::ConstantExtrapolationRule<Yg, Xg>,
         ddc::ConstantExtrapolationRule<Yg, Xg>>;
+
+
+template <class Patch>
+using DerivFieldMemOnPatch = DerivFieldMem<
+        double,
+        IdxRange<
+                ddc::Deriv<typename Patch::Grid1>,
+                ddc::Deriv<typename Patch::Grid2>,
+                typename Patch::Grid1,
+                typename Patch::Grid2>,
+        2>;
+
+template <class Patch>
+using DerivFieldMemOnPatch_host = host_t<DerivFieldMemOnPatch<Patch>>;
+
+template <class Patch>
+using DerivFieldOnPatch = DerivField<
+        double,
+        IdxRange<
+                ddc::Deriv<typename Patch::Grid1>,
+                ddc::Deriv<typename Patch::Grid2>,
+                typename Patch::Grid1,
+                typename Patch::Grid2>>;
+
+template <class Patch>
+using DerivFieldOnPatch_host = host_t<DerivFieldOnPatch<Patch>>;
+
+template <class Patch>
+using IdxRange1SliceOnPatch = IdxRangeSlice<typename Patch::Grid1>;
+
+template <class Patch>
+using IdxRange2SliceOnPatch = IdxRangeSlice<typename Patch::Grid2>;
 
 
 // USEFUL FUNCTIONS ==============================================================================
@@ -299,6 +334,316 @@ void initialise_all_xy_derivatives_max_max(
      ...);
 }
 
+
+template <class Patch>
+void copy_function_values_in_deriv_field_on_patch(
+        DerivFieldOnPatch_host<Patch> function_and_derivs,
+        DFieldOnPatch_host<Patch> const& function)
+{
+    DField<typename Patch::IdxRange12, Kokkos::HostSpace, Kokkos::layout_stride> function_extracted
+            = function_and_derivs.get_values_field();
+    ddc::for_each(get_idx_range(function), [&](typename Patch::Idx12 const idx) {
+        function_extracted(idx) = function(idx);
+    });
+}
+
+template <class... Patches>
+void copy_function_values_in_deriv_field(
+        MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+        MultipatchField<DFieldOnPatch_host, Patches...> const& functions)
+{
+    (copy_function_values_in_deriv_field_on_patch<Patches>(
+             functions_and_derivs.template get<Patches>(),
+             functions.template get<Patches>()),
+     ...);
+}
+
+
+template <class Patch>
+void copy_deriv_x_in_deriv_field_on_patch(
+        DerivFieldOnPatch_host<Patch> function_and_derivs,
+        Deriv1_OnPatch_2D_host<Patch> const& deriv_xmin,
+        Deriv1_OnPatch_2D_host<Patch> const& deriv_xmax,
+        IdxRangeSlice<typename Patch::Grid1> const& idx_range_slice_dx)
+{
+    using dX = typename ddc::Deriv<typename Patch::Grid1>;
+    using DerivX = typename ddc::Deriv<typename Patch::Dim1>;
+    Idx<dX, typename Patch::Grid1> idx_slice_deriv_xmin(Idx<dX>(1), idx_range_slice_dx.front());
+    Idx<dX, typename Patch::Grid1> idx_slice_deriv_xmax(Idx<dX>(1), idx_range_slice_dx.back());
+
+    DField<IdxRange<typename Patch::Grid2>, Kokkos::HostSpace, Kokkos::layout_stride>
+            derivs_xmin_extracted = function_and_derivs[idx_slice_deriv_xmin];
+    DField<IdxRange<typename Patch::Grid2>, Kokkos::HostSpace, Kokkos::layout_stride>
+            derivs_xmax_extracted = function_and_derivs[idx_slice_deriv_xmax];
+
+    ddc::for_each(get_idx_range(derivs_xmin_extracted), [&](typename Patch::Idx2 const idx_y) {
+        derivs_xmin_extracted(idx_y) = deriv_xmin(Idx<DerivX>(1), idx_y);
+        derivs_xmax_extracted(idx_y) = deriv_xmax(Idx<DerivX>(1), idx_y);
+    });
+}
+
+template <class... Patches>
+void copy_derivs_x_in_deriv_field(
+        MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+        MultipatchField<Deriv1_OnPatch_2D_host, Patches...> const& derivs_xmin,
+        MultipatchField<Deriv1_OnPatch_2D_host, Patches...> const& derivs_xmax,
+        MultipatchType<IdxRange1SliceOnPatch, Patches...> const& idx_ranges_slice_dx)
+{
+    (copy_deriv_x_in_deriv_field_on_patch<Patches>(
+             functions_and_derivs.template get<Patches>(),
+             derivs_xmin.template get<Patches>(),
+             derivs_xmax.template get<Patches>(),
+             idx_ranges_slice_dx.template get<Patches>()),
+     ...);
+}
+
+
+
+template <class Patch>
+void copy_deriv_y_in_deriv_field_on_patch(
+        DerivFieldOnPatch_host<Patch> function_and_derivs,
+        Deriv2_OnPatch_2D_host<Patch> const& deriv_ymin,
+        Deriv2_OnPatch_2D_host<Patch> const& deriv_ymax,
+        IdxRangeSlice<typename Patch::Grid2> const& idx_range_slice_dy)
+{
+    using dY = typename ddc::Deriv<typename Patch::Grid2>;
+    using DerivY = typename ddc::Deriv<typename Patch::Dim2>;
+    Idx<dY, typename Patch::Grid2> idx_slice_deriv_ymin(Idx<dY>(1), idx_range_slice_dy.front());
+    Idx<dY, typename Patch::Grid2> idx_slice_deriv_ymax(Idx<dY>(1), idx_range_slice_dy.back());
+
+    DField<IdxRange<typename Patch::Grid1>, Kokkos::HostSpace, Kokkos::layout_stride>
+            derivs_ymin_extracted = function_and_derivs[idx_slice_deriv_ymin];
+    DField<IdxRange<typename Patch::Grid1>, Kokkos::HostSpace, Kokkos::layout_stride>
+            derivs_ymax_extracted = function_and_derivs[idx_slice_deriv_ymax];
+
+    ddc::for_each(get_idx_range(derivs_ymin_extracted), [&](typename Patch::Idx1 const idx_x) {
+        derivs_ymin_extracted(idx_x) = deriv_ymin(Idx<DerivY>(1), idx_x);
+        derivs_ymax_extracted(idx_x) = deriv_ymax(Idx<DerivY>(1), idx_x);
+    });
+}
+
+template <class... Patches>
+void copy_derivs_y_in_deriv_field(
+        MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+        MultipatchField<Deriv2_OnPatch_2D_host, Patches...> const& derivs_ymin,
+        MultipatchField<Deriv2_OnPatch_2D_host, Patches...> const& derivs_ymax,
+        MultipatchType<IdxRange2SliceOnPatch, Patches...> const& idx_ranges_slice_dy)
+{
+    (copy_deriv_y_in_deriv_field_on_patch<Patches>(
+             functions_and_derivs.template get<Patches>(),
+             derivs_ymin.template get<Patches>(),
+             derivs_ymax.template get<Patches>(),
+             idx_ranges_slice_dy.template get<Patches>()),
+     ...);
+}
+
+
+template <class Patch>
+void copy_deriv_xy_in_deriv_field_on_patch(
+        DerivFieldOnPatch_host<Patch> function_and_derivs,
+        Deriv12_OnPatch_2D_host<Patch> const& derivs_xy_min_min,
+        Deriv12_OnPatch_2D_host<Patch> const& derivs_xy_max_min,
+        Deriv12_OnPatch_2D_host<Patch> const& derivs_xy_min_max,
+        Deriv12_OnPatch_2D_host<Patch> const& derivs_xy_max_max,
+        IdxRangeSlice<typename Patch::Grid1> const& idx_range_slice_dx,
+        IdxRangeSlice<typename Patch::Grid2> const& idx_range_slice_dy)
+{
+    using dX = typename ddc::Deriv<typename Patch::Grid1>;
+    using dY = typename ddc::Deriv<typename Patch::Grid2>;
+    using DerivX = typename ddc::Deriv<typename Patch::Dim1>;
+    using DerivY = typename ddc::Deriv<typename Patch::Dim2>;
+
+    IdxRange<dX> deriv_block_x(Idx<dX>(1), IdxStep<dX>(2));
+    IdxRange<dY> deriv_block_y(Idx<dY>(1), IdxStep<dY>(2));
+    IdxRange<dX, dY> deriv_block_xy(deriv_block_x, deriv_block_y);
+
+    detail::ViewNDMaker<4, double, false>::type derivs_xy_extracted
+            = function_and_derivs.get_mdspan(deriv_block_xy);
+
+    Idx<DerivX, DerivY> idx(1, 1);
+
+    derivs_xy_extracted(IdxStep<dX>(0), IdxStep<dY>(0), 0, 0) = derivs_xy_min_min(idx);
+    derivs_xy_extracted(IdxStep<dX>(1), IdxStep<dY>(0), 1, 0) = derivs_xy_max_min(idx);
+    derivs_xy_extracted(IdxStep<dX>(0), IdxStep<dY>(1), 0, 1) = derivs_xy_min_max(idx);
+    derivs_xy_extracted(IdxStep<dX>(1), IdxStep<dY>(1), 1, 1) = derivs_xy_max_max(idx);
+}
+
+template <class... Patches>
+void copy_derivs_xy_in_deriv_field(
+        MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+        std::tuple<Deriv12_OnPatch_2D_host<Patches>...> const& derivs_xy_min_min,
+        std::tuple<Deriv12_OnPatch_2D_host<Patches>...> const& derivs_xy_max_min,
+        std::tuple<Deriv12_OnPatch_2D_host<Patches>...> const& derivs_xy_min_max,
+        std::tuple<Deriv12_OnPatch_2D_host<Patches>...> const& derivs_xy_max_max,
+        MultipatchType<IdxRange1SliceOnPatch, Patches...> const& idx_ranges_slice_dx,
+        MultipatchType<IdxRange2SliceOnPatch, Patches...> const& idx_ranges_slice_dy)
+{
+    (copy_deriv_xy_in_deriv_field_on_patch<Patches>(
+             functions_and_derivs.template get<Patches>(),
+             std::get<0>(derivs_xy_min_min),
+             std::get<0>(derivs_xy_max_min),
+             std::get<0>(derivs_xy_min_max),
+             std::get<0>(derivs_xy_max_max),
+             idx_ranges_slice_dx.template get<Patches>(),
+             idx_ranges_slice_dy.template get<Patches>()),
+     ...);
+}
+
+
+
+template <class Patch>
+void copy_deriv_field_in_function_values_on_patch(
+        DFieldOnPatch_host<Patch> const& function,
+        DerivFieldOnPatch_host<Patch> function_and_derivs)
+{
+    DField<typename Patch::IdxRange12, Kokkos::HostSpace, Kokkos::layout_stride> function_extracted
+            = function_and_derivs.get_values_field();
+    ddc::for_each(get_idx_range(function), [&](typename Patch::Idx12 const idx) {
+        function(idx) = function_extracted(idx);
+    });
+}
+
+template <class... Patches>
+void copy_deriv_field_in_function_values(
+        MultipatchField<DFieldOnPatch_host, Patches...> const& functions,
+        MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
+{
+    (copy_deriv_field_in_function_values_on_patch<Patches>(
+             functions.template get<Patches>(),
+             functions_and_derivs.template get<Patches>()),
+     ...);
+}
+
+
+template <class Patch>
+void copy_deriv_field_in_derivs_x_on_patch(
+        Deriv1_OnPatch_2D_host<Patch> const& deriv_xmin,
+        Deriv1_OnPatch_2D_host<Patch> const& deriv_xmax,
+        DerivFieldOnPatch_host<Patch> function_and_derivs,
+        IdxRangeSlice<typename Patch::Grid1> const& idx_range_slice_dx)
+{
+    using dX = typename ddc::Deriv<typename Patch::Grid1>;
+    using DerivX = typename ddc::Deriv<typename Patch::Dim1>;
+    Idx<dX, typename Patch::Grid1> idx_slice_deriv_xmin(Idx<dX>(1), idx_range_slice_dx.front());
+    Idx<dX, typename Patch::Grid1> idx_slice_deriv_xmax(Idx<dX>(1), idx_range_slice_dx.back());
+
+    DField<IdxRange<typename Patch::Grid2>, Kokkos::HostSpace, Kokkos::layout_stride>
+            derivs_xmin_extracted = function_and_derivs[idx_slice_deriv_xmin];
+    DField<IdxRange<typename Patch::Grid2>, Kokkos::HostSpace, Kokkos::layout_stride>
+            derivs_xmax_extracted = function_and_derivs[idx_slice_deriv_xmax];
+
+    ddc::for_each(get_idx_range(derivs_xmin_extracted), [&](typename Patch::Idx2 const idx_y) {
+        deriv_xmin(Idx<DerivX>(1), idx_y) = derivs_xmin_extracted(idx_y);
+        deriv_xmax(Idx<DerivX>(1), idx_y) = derivs_xmax_extracted(idx_y);
+    });
+}
+
+template <class... Patches>
+void copy_deriv_field_in_derivs_x(
+        MultipatchField<Deriv1_OnPatch_2D_host, Patches...> const& derivs_xmin,
+        MultipatchField<Deriv1_OnPatch_2D_host, Patches...> const& derivs_xmax,
+        MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+        MultipatchType<IdxRange1SliceOnPatch, Patches...> const& idx_ranges_slice_dx)
+{
+    (copy_deriv_field_in_derivs_x_on_patch<Patches>(
+             derivs_xmin.template get<Patches>(),
+             derivs_xmax.template get<Patches>(),
+             functions_and_derivs.template get<Patches>(),
+             idx_ranges_slice_dx.template get<Patches>()),
+     ...);
+}
+
+
+
+template <class Patch>
+void copy_deriv_field_in_derivs_y_on_patch(
+        Deriv2_OnPatch_2D_host<Patch> const& deriv_ymin,
+        Deriv2_OnPatch_2D_host<Patch> const& deriv_ymax,
+        DerivFieldOnPatch_host<Patch> function_and_derivs,
+        IdxRangeSlice<typename Patch::Grid2> const& idx_range_slice_dy)
+{
+    using dY = typename ddc::Deriv<typename Patch::Grid2>;
+    using DerivY = typename ddc::Deriv<typename Patch::Dim2>;
+    Idx<dY, typename Patch::Grid2> idx_slice_deriv_ymin(Idx<dY>(1), idx_range_slice_dy.front());
+    Idx<dY, typename Patch::Grid2> idx_slice_deriv_ymax(Idx<dY>(1), idx_range_slice_dy.back());
+
+    DField<IdxRange<typename Patch::Grid1>, Kokkos::HostSpace, Kokkos::layout_stride>
+            derivs_ymin_extracted = function_and_derivs[idx_slice_deriv_ymin];
+    DField<IdxRange<typename Patch::Grid1>, Kokkos::HostSpace, Kokkos::layout_stride>
+            derivs_ymax_extracted = function_and_derivs[idx_slice_deriv_ymax];
+
+    ddc::for_each(get_idx_range(derivs_ymin_extracted), [&](typename Patch::Idx1 const idx_x) {
+        deriv_ymin(Idx<DerivY>(1), idx_x) = derivs_ymin_extracted(idx_x);
+        deriv_ymax(Idx<DerivY>(1), idx_x) = derivs_ymax_extracted(idx_x);
+    });
+}
+
+template <class... Patches>
+void copy_deriv_field_in_derivs_y(
+        MultipatchField<Deriv2_OnPatch_2D_host, Patches...> const& derivs_ymin,
+        MultipatchField<Deriv2_OnPatch_2D_host, Patches...> const& derivs_ymax,
+        MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+        MultipatchType<IdxRange2SliceOnPatch, Patches...> const& idx_ranges_slice_dy)
+{
+    (copy_deriv_field_in_derivs_y_on_patch<Patches>(
+             derivs_ymin.template get<Patches>(),
+             derivs_ymax.template get<Patches>(),
+             functions_and_derivs.template get<Patches>(),
+             idx_ranges_slice_dy.template get<Patches>()),
+     ...);
+}
+
+
+template <class Patch>
+void copy_deriv_field_in_deriv_xy_on_patch(
+        Deriv12_OnPatch_2D_host<Patch> const& derivs_xy_min_min,
+        Deriv12_OnPatch_2D_host<Patch> const& derivs_xy_max_min,
+        Deriv12_OnPatch_2D_host<Patch> const& derivs_xy_min_max,
+        Deriv12_OnPatch_2D_host<Patch> const& derivs_xy_max_max,
+        DerivFieldOnPatch_host<Patch> function_and_derivs,
+        IdxRangeSlice<typename Patch::Grid1> const& idx_range_slice_dx,
+        IdxRangeSlice<typename Patch::Grid2> const& idx_range_slice_dy)
+{
+    using dX = typename ddc::Deriv<typename Patch::Grid1>;
+    using dY = typename ddc::Deriv<typename Patch::Grid2>;
+    using DerivX = typename ddc::Deriv<typename Patch::Dim1>;
+    using DerivY = typename ddc::Deriv<typename Patch::Dim2>;
+
+    IdxRange<dX> deriv_block_x(Idx<dX>(1), IdxStep<dX>(2));
+    IdxRange<dY> deriv_block_y(Idx<dY>(1), IdxStep<dY>(2));
+    IdxRange<dX, dY> deriv_block_xy(deriv_block_x, deriv_block_y);
+
+    detail::ViewNDMaker<4, double, false>::type derivs_xy_extracted
+            = function_and_derivs.get_mdspan(deriv_block_xy);
+
+    Idx<DerivX, DerivY> idx(1, 1);
+
+    derivs_xy_min_min(idx) = derivs_xy_extracted(IdxStep<dX>(0), IdxStep<dY>(0), 0, 0);
+    derivs_xy_max_min(idx) = derivs_xy_extracted(IdxStep<dX>(1), IdxStep<dY>(0), 1, 0);
+    derivs_xy_min_max(idx) = derivs_xy_extracted(IdxStep<dX>(0), IdxStep<dY>(1), 0, 1);
+    derivs_xy_max_max(idx) = derivs_xy_extracted(IdxStep<dX>(1), IdxStep<dY>(1), 1, 1);
+}
+
+template <class... Patches>
+void copy_deriv_field_in_derivs_xy(
+        std::tuple<Deriv12_OnPatch_2D_host<Patches>...> const& derivs_xy_min_min,
+        std::tuple<Deriv12_OnPatch_2D_host<Patches>...> const& derivs_xy_max_min,
+        std::tuple<Deriv12_OnPatch_2D_host<Patches>...> const& derivs_xy_min_max,
+        std::tuple<Deriv12_OnPatch_2D_host<Patches>...> const& derivs_xy_max_max,
+        MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+        MultipatchType<IdxRange1SliceOnPatch, Patches...> const& idx_ranges_slice_dx,
+        MultipatchType<IdxRange2SliceOnPatch, Patches...> const& idx_ranges_slice_dy)
+{
+    (copy_deriv_field_in_deriv_xy_on_patch<Patches>(
+             std::get<0>(derivs_xy_min_min),
+             std::get<0>(derivs_xy_max_min),
+             std::get<0>(derivs_xy_min_max),
+             std::get<0>(derivs_xy_max_max),
+             functions_and_derivs.template get<Patches>(),
+             idx_ranges_slice_dx.template get<Patches>(),
+             idx_ranges_slice_dy.template get<Patches>()),
+     ...);
+}
 
 
 struct InterfaceDerivativeMatrixTest : public ::testing::Test
@@ -1800,5 +2145,255 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             derivs_xy_max_max,
             evaluator_g,
             get_const_field(function_g_coef),
+            std::make_integer_sequence<std::size_t, 9> {});
+
+
+
+    // Try to use DerivField =====================================================================
+    // Instantiate DerivField --------------------------------------------------------------------
+    IdxRangeSlice<GridX<1>> idx_range_slice_dx1(
+            idx_range_x1.front(),
+            typename Patch1::IdxStep1(2),
+            idx_range_x1.extents());
+    IdxRangeSlice<GridX<2>> idx_range_slice_dx2(
+            idx_range_x2.front(),
+            typename Patch2::IdxStep1(2),
+            idx_range_x2.extents());
+    IdxRangeSlice<GridX<3>> idx_range_slice_dx3(
+            idx_range_x3.front(),
+            typename Patch3::IdxStep1(2),
+            idx_range_x3.extents());
+    IdxRangeSlice<GridX<4>> idx_range_slice_dx4(
+            idx_range_x4.front(),
+            typename Patch4::IdxStep1(2),
+            idx_range_x4.extents());
+    IdxRangeSlice<GridX<5>> idx_range_slice_dx5(
+            idx_range_x5.front(),
+            typename Patch5::IdxStep1(2),
+            idx_range_x5.extents());
+    IdxRangeSlice<GridX<6>> idx_range_slice_dx6(
+            idx_range_x6.front(),
+            typename Patch6::IdxStep1(2),
+            idx_range_x6.extents());
+    IdxRangeSlice<GridX<7>> idx_range_slice_dx7(
+            idx_range_x7.front(),
+            typename Patch7::IdxStep1(2),
+            idx_range_x7.extents());
+    IdxRangeSlice<GridX<8>> idx_range_slice_dx8(
+            idx_range_x8.front(),
+            typename Patch8::IdxStep1(2),
+            idx_range_x8.extents());
+    IdxRangeSlice<GridX<9>> idx_range_slice_dx9(
+            idx_range_x9.front(),
+            typename Patch9::IdxStep1(2),
+            idx_range_x9.extents());
+
+    IdxRangeSlice<GridY<1>> idx_range_slice_dy1(
+            idx_range_y1.front(),
+            typename Patch1::IdxStep2(2),
+            idx_range_y1.extents());
+    IdxRangeSlice<GridY<2>> idx_range_slice_dy2(
+            idx_range_y2.front(),
+            typename Patch2::IdxStep2(2),
+            idx_range_y2.extents());
+    IdxRangeSlice<GridY<3>> idx_range_slice_dy3(
+            idx_range_y3.front(),
+            typename Patch3::IdxStep2(2),
+            idx_range_y3.extents());
+    IdxRangeSlice<GridY<4>> idx_range_slice_dy4(
+            idx_range_y4.front(),
+            typename Patch4::IdxStep2(2),
+            idx_range_y4.extents());
+    IdxRangeSlice<GridY<5>> idx_range_slice_dy5(
+            idx_range_y5.front(),
+            typename Patch5::IdxStep2(2),
+            idx_range_y5.extents());
+    IdxRangeSlice<GridY<6>> idx_range_slice_dy6(
+            idx_range_y6.front(),
+            typename Patch6::IdxStep2(2),
+            idx_range_y6.extents());
+    IdxRangeSlice<GridY<7>> idx_range_slice_dy7(
+            idx_range_y7.front(),
+            typename Patch7::IdxStep2(2),
+            idx_range_y7.extents());
+    IdxRangeSlice<GridY<8>> idx_range_slice_dy8(
+            idx_range_y8.front(),
+            typename Patch8::IdxStep2(2),
+            idx_range_y8.extents());
+    IdxRangeSlice<GridY<9>> idx_range_slice_dy9(
+            idx_range_y9.front(),
+            typename Patch9::IdxStep2(2),
+            idx_range_y9.extents());
+
+    MultipatchType<
+            IdxRange1SliceOnPatch,
+            Patch1,
+            Patch2,
+            Patch3,
+            Patch4,
+            Patch5,
+            Patch6,
+            Patch7,
+            Patch8,
+            Patch9>
+            idx_ranges_slice_dx(
+                    idx_range_slice_dx1,
+                    idx_range_slice_dx2,
+                    idx_range_slice_dx3,
+                    idx_range_slice_dx4,
+                    idx_range_slice_dx5,
+                    idx_range_slice_dx6,
+                    idx_range_slice_dx7,
+                    idx_range_slice_dx8,
+                    idx_range_slice_dx9);
+
+    MultipatchType<
+            IdxRange2SliceOnPatch,
+            Patch1,
+            Patch2,
+            Patch3,
+            Patch4,
+            Patch5,
+            Patch6,
+            Patch7,
+            Patch8,
+            Patch9>
+            idx_ranges_slice_dy(
+                    idx_range_slice_dy1,
+                    idx_range_slice_dy2,
+                    idx_range_slice_dy3,
+                    idx_range_slice_dy4,
+                    idx_range_slice_dy5,
+                    idx_range_slice_dy6,
+                    idx_range_slice_dy7,
+                    idx_range_slice_dy8,
+                    idx_range_slice_dy9);
+
+    DerivFieldMemOnPatch_host<Patch1>
+            function_and_derivs_1_alloc(idx_range_xy1, idx_range_slice_dx1, idx_range_slice_dy1);
+    DerivFieldMemOnPatch_host<Patch2>
+            function_and_derivs_2_alloc(idx_range_xy2, idx_range_slice_dx2, idx_range_slice_dy2);
+    DerivFieldMemOnPatch_host<Patch3>
+            function_and_derivs_3_alloc(idx_range_xy3, idx_range_slice_dx3, idx_range_slice_dy3);
+    DerivFieldMemOnPatch_host<Patch4>
+            function_and_derivs_4_alloc(idx_range_xy4, idx_range_slice_dx4, idx_range_slice_dy4);
+    DerivFieldMemOnPatch_host<Patch5>
+            function_and_derivs_5_alloc(idx_range_xy5, idx_range_slice_dx5, idx_range_slice_dy5);
+    DerivFieldMemOnPatch_host<Patch6>
+            function_and_derivs_6_alloc(idx_range_xy6, idx_range_slice_dx6, idx_range_slice_dy6);
+    DerivFieldMemOnPatch_host<Patch7>
+            function_and_derivs_7_alloc(idx_range_xy7, idx_range_slice_dx7, idx_range_slice_dy7);
+    DerivFieldMemOnPatch_host<Patch8>
+            function_and_derivs_8_alloc(idx_range_xy8, idx_range_slice_dx8, idx_range_slice_dy8);
+    DerivFieldMemOnPatch_host<Patch9>
+            function_and_derivs_9_alloc(idx_range_xy9, idx_range_slice_dx9, idx_range_slice_dy9);
+
+    DerivFieldOnPatch_host<Patch1> function_and_derivs_1(function_and_derivs_1_alloc);
+    DerivFieldOnPatch_host<Patch2> function_and_derivs_2(function_and_derivs_2_alloc);
+    DerivFieldOnPatch_host<Patch3> function_and_derivs_3(function_and_derivs_3_alloc);
+    DerivFieldOnPatch_host<Patch4> function_and_derivs_4(function_and_derivs_4_alloc);
+    DerivFieldOnPatch_host<Patch5> function_and_derivs_5(function_and_derivs_5_alloc);
+    DerivFieldOnPatch_host<Patch6> function_and_derivs_6(function_and_derivs_6_alloc);
+    DerivFieldOnPatch_host<Patch7> function_and_derivs_7(function_and_derivs_7_alloc);
+    DerivFieldOnPatch_host<Patch8> function_and_derivs_8(function_and_derivs_8_alloc);
+    DerivFieldOnPatch_host<Patch9> function_and_derivs_9(function_and_derivs_9_alloc);
+
+
+    MultipatchField<
+            DerivFieldOnPatch_host,
+            Patch1,
+            Patch2,
+            Patch3,
+            Patch4,
+            Patch5,
+            Patch6,
+            Patch7,
+            Patch8,
+            Patch9>
+            functions_and_derivs(
+                    function_and_derivs_1,
+                    function_and_derivs_2,
+                    function_and_derivs_3,
+                    function_and_derivs_4,
+                    function_and_derivs_5,
+                    function_and_derivs_6,
+                    function_and_derivs_7,
+                    function_and_derivs_8,
+                    function_and_derivs_9);
+
+    // Fill in the DerivField with the data ------------------------------------------------------
+    copy_function_values_in_deriv_field(functions_and_derivs, functions);
+    copy_derivs_x_in_deriv_field(
+            functions_and_derivs,
+            derivs_xmin,
+            derivs_xmax,
+            idx_ranges_slice_dx);
+    copy_derivs_y_in_deriv_field(
+            functions_and_derivs,
+            derivs_ymin,
+            derivs_ymax,
+            idx_ranges_slice_dy);
+
+    copy_derivs_xy_in_deriv_field(
+            functions_and_derivs,
+            derivs_xy_min_min,
+            derivs_xy_max_min,
+            derivs_xy_min_max,
+            derivs_xy_max_max,
+            idx_ranges_slice_dx,
+            idx_ranges_slice_dy);
+
+    // Use the InterfaceDerivativeMatrix ---------------------------------------------------------
+    MultipatchField<DerivFieldOnPatch_host, Patch1, Patch2, Patch3> functions_and_derivs_123(
+            function_and_derivs_1,
+            function_and_derivs_2,
+            function_and_derivs_3);
+
+    matrix_123.solve_deriv(functions_and_derivs_123);
+
+    copy_deriv_field_in_function_values(functions, functions_and_derivs);
+    copy_deriv_field_in_derivs_x(
+            derivs_xmin,
+            derivs_xmax,
+            functions_and_derivs,
+            idx_ranges_slice_dx);
+    copy_deriv_field_in_derivs_y(
+            derivs_ymin,
+            derivs_ymax,
+            functions_and_derivs,
+            idx_ranges_slice_dy);
+
+    copy_deriv_field_in_derivs_xy(
+            derivs_xy_min_min,
+            derivs_xy_max_min,
+            derivs_xy_min_max,
+            derivs_xy_max_max,
+            functions_and_derivs,
+            idx_ranges_slice_dx,
+            idx_ranges_slice_dy);
+
+    // Test the values of the derivatives ========================================================
+    check_all_x_derivatives(
+            derivs_xmin,
+            derivs_xmax,
+            evaluator_g,
+            get_const_field(function_g_coef),
+            idx_ranges);
+
+    check_all_y_derivatives(
+            derivs_ymin,
+            derivs_ymax,
+            evaluator_g,
+            get_const_field(function_g_coef),
+            idx_ranges);
+
+    check_all_xy_derivatives(
+            derivs_xy_min_min,
+            derivs_xy_max_min,
+            derivs_xy_min_max,
+            derivs_xy_max_max,
+            evaluator_g,
+            get_const_field(function_g_coef),
+            idx_ranges,
             std::make_integer_sequence<std::size_t, 9> {});
 }

@@ -115,6 +115,8 @@ public:
     /// @brief The type of the elements in the chunks.
     using element_type = typename base_type::element_type;
 
+    using memory_space = MemorySpace;
+
     /**
      * @brief The IdxRange on which the chunks in this object are defined.
      *
