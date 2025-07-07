@@ -1,7 +1,10 @@
+#include <cassert>
+
 #include "test_math_utils.hpp"
 
 double cyl_bessel_j(const double nu, const double x)
 {
+    assert(nu < 30);
     double fct = 1;
     double sum = 0;
     for (int k = 0; k < 10; fct *= ++k) {
