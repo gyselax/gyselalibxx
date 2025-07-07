@@ -13,6 +13,7 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "gyroaverage_operator.hpp"
+#inlcude "test_math_utils.hpp"
 
 namespace {
 
@@ -369,12 +370,12 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
         std::size_t nb_gyro_points_half = m_nb_gyro_points / 2;
         double const sgn = std::pow(-1.0, static_cast<double>(nb_gyro_points_half));
         double const sgn_tmp = nb_gyro_points % 2 == 0 ? sgn : -sgn;
-        double const res_th = std::cyl_bessel_j(0, kperprho) * std::cos(phase);
+        double const res_th = cyl_bessel_j(0, kperprho) * std::cos(phase);
         double const err_J0_th
                 = 2.0
-                  * (std::cyl_bessel_j(nb_gyro_points, kperprho) * std::cos(nb_gyro_points * phik)
+                  * (cyl_bessel_j(nb_gyro_points, kperprho) * std::cos(nb_gyro_points * phik)
                              * std::cos(phase) * sgn_tmp
-                     + std::cyl_bessel_j(2 * nb_gyro_points, kperprho)
+                     + cyl_bessel_j(2 * nb_gyro_points, kperprho)
                                * std::cos(2 * nb_gyro_points * phik) * std::cos(phase));
         double const err_J0_num = A_bar_host(ir, itheta, ibatch) - res_th;
 
