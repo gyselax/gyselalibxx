@@ -52,11 +52,9 @@
  *
  * with @f$ E(0, \theta) @f$ computed thanks to
  *
- *  - @f$ \partial_r \phi (0, \theta_1) = \left[\partial_r x  \partial_x \phi
- * + \partial_r y  \partial_y \phi \right](0, \theta_1) @f$,
+ *  - @f$ \partial_r \phi (0, \theta_1) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right](0, \theta_1) @f$,
  *
- *  - @f$ \partial_r \phi (0, \theta_2) = \left[\partial_r x  \partial_x \phi
- * + \partial_r y  \partial_y \phi \right] (0, \theta_2) @f$,
+ *  - @f$ \partial_r \phi (0, \theta_2) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right] (0, \theta_2) @f$,
  *
  * where @f$ \theta_1 @f$ and @f$ \theta_2 @f$  correspond to
  * linearly independent directions.
