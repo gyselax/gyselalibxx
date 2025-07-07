@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Remove use of `std::cyl_bessel_j` which is not available on MacOS.
+
 ### Changed
 
 ### Deprecated
