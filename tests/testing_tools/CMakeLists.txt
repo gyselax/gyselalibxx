@@ -7,3 +7,8 @@ add_library(testing_tools STATIC
 target_include_directories(testing_tools
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
 )
+
+target_link_libraries(testing_tools
+    PUBLIC
+    Kokkos::kokkos
+)
