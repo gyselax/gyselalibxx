@@ -38,7 +38,7 @@ inline constexpr bool
  * @tparam ElementType The type of the elements inside the chunks.
  * @tparam IdxRange<DDims...> The index range on which the internal fields are defined.
  *          This index range is the physical index range on which the values are defined combined with
- *          the index range of the derivatives of interest (e.g. IdxRange<Deriv<IDimX>, IDimX, IDimY>).
+ *          the index range of the derivatives of interest (e.g. IdxRange<Deriv<X>, GridX, GridY>).
  * @tparam NDerivs The number of derivatives which are defined in the dimensions where derivatives
  *          appear.
  * @tparam MemSpace The memory space where the data will be saved.

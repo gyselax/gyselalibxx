@@ -137,7 +137,7 @@ protected:
      * The fields which contain the values have different index ranges to the fields containing derivatives
      * so a DDC object cannot be used directly.
      * E.g. for a 2D field (X,Y) with derivatives provided in both directions the elements of internal_fields
-     * have the type : DFieldMem<IdxRange<Deriv<IDimX>, Deriv<IDimY>, IDimX, IDimY>
+     * have the type : DFieldMem<IdxRange<Deriv<X>, Deriv<Y>, GridX, GridY>>
      * The derivative index ranges are then defined such that the  elements of internal_fields represent:
      * 0 : @f$f(x,y)@f$
      * 1 : @f$\partial_x^k f(x,y)  \quad \forall 1 \leq k \leq NDerivs@f$
