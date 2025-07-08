@@ -81,7 +81,7 @@ public:
     /// @brief A type sequence containing all dimensions for which derivatives are present in this object.
     using physical_deriv_grids = typename base_type::physical_deriv_grids;
 
-    /// @brief A type sequence containing all the physical dimensions on which the chunks are defined.
+    /// @brief A type sequence containing all the physical grids on which the fields are defined.
     using physical_grids = typename base_type::physical_grids;
 
     /// @brief The physical index range on which the field is defined.
@@ -269,9 +269,11 @@ public:
             ddc::StridedDiscreteDomain<DerivDoms>... m_deriv_idx_range)
         : base_type(
                 val_idx_range,
-                discrete_deriv_idx_range_type(IdxRange<ddc::Deriv<DerivDoms>>(
-                        Idx<ddc::Deriv<DerivDoms>>(1),
-                        IdxStep<ddc::Deriv<DerivDoms>>(NDerivs))...),
+                discrete_deriv_idx_range_type(
+                        IdxRange<ddc::Deriv<typename DerivDoms::continuous_dimension_type>>(
+                                Idx<ddc::Deriv<typename DerivDoms::continuous_dimension_type>>(1),
+                                IdxStep<ddc::Deriv<typename DerivDoms::continuous_dimension_type>>(
+                                        NDerivs))...),
                 to_subidx_range_collection<physical_deriv_grids>(m_deriv_idx_range...))
     {
         static_assert(

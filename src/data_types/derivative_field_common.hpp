@@ -9,6 +9,7 @@
 #include "ddc_aliases.hpp"
 #include "deriv_details.hpp"
 #include "idx_range_slice.hpp"
+#include "type_seq_tools.hpp"
 
 template <class T>
 inline constexpr bool enable_deriv_field = false;
@@ -54,9 +55,9 @@ public:
     using deriv_tags = detail::deriv_sub_set_t<ddc::detail::TypeSeq<DDims...>>;
 
     /// @brief A type sequence containing all physical dimensions for which derivatives are present in this object.
-    using physical_deriv_grids = typename detail::strip_deriv_t<deriv_tags>;
+    using physical_deriv_grids = find_all_grids_t<detail::strip_deriv_t<deriv_tags>, ddc::detail::TypeSeq<DDims...>>;
 
-    /// @brief A type sequence containing all the physical dimensions on which the fields are defined.
+    /// @brief A type sequence containing all the physical grids on which the fields are defined.
     using physical_grids = ddc::type_seq_remove_t<ddc::detail::TypeSeq<DDims...>, deriv_tags>;
 
     /// @brief The type of the elements in the fields.
