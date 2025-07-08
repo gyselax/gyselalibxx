@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Fix type of derivatives stored in `DerivFieldMem` and `DerivField` types.
+
 ### Changed
 
 ### Deprecated
