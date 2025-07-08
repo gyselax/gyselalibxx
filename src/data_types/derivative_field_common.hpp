@@ -55,7 +55,8 @@ public:
     using deriv_tags = detail::deriv_sub_set_t<ddc::detail::TypeSeq<DDims...>>;
 
     /// @brief A type sequence containing all physical dimensions for which derivatives are present in this object.
-    using physical_deriv_grids = find_all_grids_t<detail::strip_deriv_t<deriv_tags>, ddc::detail::TypeSeq<DDims...>>;
+    using physical_deriv_grids
+            = find_all_grids_t<detail::strip_deriv_t<deriv_tags>, ddc::detail::TypeSeq<DDims...>>;
 
     /// @brief A type sequence containing all the physical grids on which the fields are defined.
     using physical_grids = ddc::type_seq_remove_t<ddc::detail::TypeSeq<DDims...>, deriv_tags>;
