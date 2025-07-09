@@ -16,5 +16,8 @@ if __name__ == '__main__':
 
     relevant_configs = [c for c in config if any(r in Path(c['file']).parents for r in relevant_folders)]
 
+    for c in relevant_configs:
+        c['command'] = ' '.join(s for s in c['command'].split() if not (s.startswith('-I') and '/vendor/' in s))
+
     with open(args.config_file_out, 'w', encoding='utf-8') as f:
         config = json.dump(relevant_configs, f, indent=2)
