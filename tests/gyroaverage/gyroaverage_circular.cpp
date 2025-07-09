@@ -306,90 +306,87 @@ TEST_P(GyroAverageCircularParamTests, TestPeriodicity)
     });
 }
 
-// This test needs tuning to represent realistic physical parameters.
-// In its current state it requires Bessel functions evaluated using arguments
-// for which the function is not very stable.
-//TEST_P(GyroAverageCircularParamTests, TestAnalytical)
-//{
-//    DConstFieldRThetaBatch A = get_const_field(m_A_alloc);
-//    DFieldRThetaBatch A_bar = get_field(m_A_bar_alloc);
-//
-//    using SplineRThetaBuilder = SplineRThetaBuilderType<Kokkos::DefaultExecutionSpace>;
-//    using SplineRThetaEvaluatorNullBound
-//            = SplineRThetaEvaluatorNullBoundType<Kokkos::DefaultExecutionSpace>;
-//
-//    IdxRangeRThetaBatch const rthetabatch_idx_range = get_idx_range(A_bar);
-//    IdxRangeRTheta const rtheta_idx_range(rthetabatch_idx_range);
-//    ddc::NullExtrapolationRule r_extrapolation_rule;
-//    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-//    SplineRThetaBuilder const spline_builder(rtheta_idx_range);
-//    SplineRThetaEvaluatorNullBound const spline_evaluator(
-//            r_extrapolation_rule,
-//            r_extrapolation_rule,
-//            theta_extrapolation_rule,
-//            theta_extrapolation_rule);
-//
-//    using GyroAverageOperatorType = GyroAverageOperator<
-//            SplineRThetaBuilder,
-//            SplineRThetaEvaluatorNullBound,
-//            IdxRangeRThetaBatch,
-//            CartesianToPolar>;
-//    GyroAverageOperatorType gyroaverage(
-//            get_const_field(m_rho_L_alloc),
-//            spline_builder,
-//            spline_evaluator,
-//            CartesianToPolar(),
-//            m_nb_gyro_points);
-//    gyroaverage(A_bar, A);
-//
-//    auto Rcoord_alloc_host = ddc::create_mirror_and_copy(get_field(m_Rcoord_alloc));
-//    host_t<DFieldRTheta> Rcoord_host = get_field(Rcoord_alloc_host);
-//    auto Zcoord_alloc_host = ddc::create_mirror_and_copy(get_field(m_Zcoord_alloc));
-//    host_t<DFieldRTheta> Zcoord_host = get_field(Zcoord_alloc_host);
-//    auto rho_L_alloc_host = ddc::create_mirror_and_copy(get_field(m_rho_L_alloc));
-//    host_t<DFieldRTheta> rho_L_host = get_field(rho_L_alloc_host);
-//    auto A_bar_alloc_host = ddc::create_mirror_and_copy(A_bar);
-//    host_t<DFieldRThetaBatch> A_bar_host = get_field(A_bar_alloc_host);
-//
-//    IdxRangeTheta const theta_idx_range(rthetabatch_idx_range);
-//
-//    double const r0 = m_r0;
-//    double const R0 = m_R0;
-//    double const kperp = m_kperp;
-//    double const kx = m_kx;
-//    double const ky = m_ky;
-//    int const nb_gyro_points = m_nb_gyro_points;
-//    ddc::for_each(rthetabatch_idx_range, [&](IdxRThetaBatch const irthetabatch) {
-//        IdxR const ir(irthetabatch);
-//        IdxTheta const itheta(irthetabatch);
-//        IdxBatch const ibatch(irthetabatch);
-//        double const r = ddc::coordinate(ir);
-//        double const R0eff = R0;
-//        double const gyroradius = rho_L_host(ir, itheta);
-//        double const kperprho = kperp * gyroradius;
-//        double const phase = kx * (Rcoord_host(ir, itheta) - R0eff) + ky * Zcoord_host(ir, itheta);
-//        double const phik
-//                = std::atan2(Zcoord_host(ir, itheta), Rcoord_host(ir, itheta) - R0eff) - M_PI / 4;
-//        std::size_t nb_gyro_points_half = m_nb_gyro_points / 2;
-//        double const sgn = std::pow(-1.0, static_cast<double>(nb_gyro_points_half));
-//        double const sgn_tmp = nb_gyro_points % 2 == 0 ? sgn : -sgn;
-//        double const res_th = cyl_bessel_j(0, kperprho) * std::cos(phase);
-//        double const err_J0_th
-//                = 2.0
-//                  * (cyl_bessel_j(nb_gyro_points, kperprho) * std::cos(nb_gyro_points * phik)
-//                             * std::cos(phase) * sgn_tmp
-//                     + cyl_bessel_j(2 * nb_gyro_points, kperprho)
-//                               * std::cos(2 * nb_gyro_points * phik) * std::cos(phase));
-//        double const err_J0_num = A_bar_host(ir, itheta, ibatch) - res_th;
-//
-//        // In the outer region, the particle position can be out of small radius (r), where the values are considered to be zero.
-//        // Also the gyroaveraged value has the periodicity along theta direction (tested separately above)
-//        // These conditions are not taken into account in the analytical formula, so we do not test these cases.
-//        if (r < r0 * 0.8 && itheta < theta_idx_range.back()) {
-//            EXPECT_NEAR(err_J0_num, err_J0_th, 5e-2);
-//        }
-//    });
-//}
+TEST_P(GyroAverageCircularParamTests, TestAnalytical)
+{
+    DConstFieldRThetaBatch A = get_const_field(m_A_alloc);
+    DFieldRThetaBatch A_bar = get_field(m_A_bar_alloc);
+
+    using SplineRThetaBuilder = SplineRThetaBuilderType<Kokkos::DefaultExecutionSpace>;
+    using SplineRThetaEvaluatorNullBound
+            = SplineRThetaEvaluatorNullBoundType<Kokkos::DefaultExecutionSpace>;
+
+    IdxRangeRThetaBatch const rthetabatch_idx_range = get_idx_range(A_bar);
+    IdxRangeRTheta const rtheta_idx_range(rthetabatch_idx_range);
+    ddc::NullExtrapolationRule r_extrapolation_rule;
+    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
+    SplineRThetaBuilder const spline_builder(rtheta_idx_range);
+    SplineRThetaEvaluatorNullBound const spline_evaluator(
+            r_extrapolation_rule,
+            r_extrapolation_rule,
+            theta_extrapolation_rule,
+            theta_extrapolation_rule);
+
+    using GyroAverageOperatorType = GyroAverageOperator<
+            SplineRThetaBuilder,
+            SplineRThetaEvaluatorNullBound,
+            IdxRangeRThetaBatch,
+            CartesianToPolar>;
+    GyroAverageOperatorType gyroaverage(
+            get_const_field(m_rho_L_alloc),
+            spline_builder,
+            spline_evaluator,
+            CartesianToPolar(),
+            m_nb_gyro_points);
+    gyroaverage(A_bar, A);
+
+    auto Rcoord_alloc_host = ddc::create_mirror_and_copy(get_field(m_Rcoord_alloc));
+    host_t<DFieldRTheta> Rcoord_host = get_field(Rcoord_alloc_host);
+    auto Zcoord_alloc_host = ddc::create_mirror_and_copy(get_field(m_Zcoord_alloc));
+    host_t<DFieldRTheta> Zcoord_host = get_field(Zcoord_alloc_host);
+    auto rho_L_alloc_host = ddc::create_mirror_and_copy(get_field(m_rho_L_alloc));
+    host_t<DFieldRTheta> rho_L_host = get_field(rho_L_alloc_host);
+    auto A_bar_alloc_host = ddc::create_mirror_and_copy(A_bar);
+    host_t<DFieldRThetaBatch> A_bar_host = get_field(A_bar_alloc_host);
+
+    IdxRangeTheta const theta_idx_range(rthetabatch_idx_range);
+
+    double const r0 = m_r0;
+    double const R0 = m_R0;
+    double const kperp = m_kperp;
+    double const kx = m_kx;
+    double const ky = m_ky;
+    int const nb_gyro_points = m_nb_gyro_points;
+    ddc::for_each(rthetabatch_idx_range, [&](IdxRThetaBatch const irthetabatch) {
+        IdxR const ir(irthetabatch);
+        IdxTheta const itheta(irthetabatch);
+        IdxBatch const ibatch(irthetabatch);
+        double const r = ddc::coordinate(ir);
+        double const R0eff = R0;
+        double const gyroradius = rho_L_host(ir, itheta);
+        double const kperprho = kperp * gyroradius;
+        double const phase = kx * (Rcoord_host(ir, itheta) - R0eff) + ky * Zcoord_host(ir, itheta);
+        double const phik
+                = std::atan2(Zcoord_host(ir, itheta), Rcoord_host(ir, itheta) - R0eff) - M_PI / 4;
+        std::size_t nb_gyro_points_half = m_nb_gyro_points / 2;
+        double const sgn = std::pow(-1.0, static_cast<double>(nb_gyro_points_half));
+        double const sgn_tmp = nb_gyro_points % 2 == 0 ? sgn : -sgn;
+        double const res_th = cyl_bessel_j(0, kperprho) * std::cos(phase);
+        double const err_J0_th
+                = 2.0
+                  * (cyl_bessel_j(nb_gyro_points, kperprho) * std::cos(nb_gyro_points * phik)
+                             * std::cos(phase) * sgn_tmp
+                     + cyl_bessel_j(2 * nb_gyro_points, kperprho)
+                               * std::cos(2 * nb_gyro_points * phik) * std::cos(phase));
+        double const err_J0_num = A_bar_host(ir, itheta, ibatch) - res_th;
+
+        // In the outer region, the particle position can be out of small radius (r), where the values are considered to be zero.
+        // Also the gyroaveraged value has the periodicity along theta direction (tested separately above)
+        // These conditions are not taken into account in the analytical formula, so we do not test these cases.
+        if (r < r0 * 0.8 && itheta < theta_idx_range.back()) {
+            EXPECT_NEAR(err_J0_num, err_J0_th, 5e-2);
+        }
+    });
+}
 
 // Parameterisation over Larmor radius
 INSTANTIATE_TEST_SUITE_P(
