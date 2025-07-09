@@ -1,0 +1,31 @@
+#!/bin/bash
+# SPDX-License-Identifier: MIT
+
+set -o errexit -o noclobber -o nounset -o pipefail
+
+usage() {
+    echo "Usage: $0 [TOOLCHAIN] [RELEVANT_FOLDERS...]" >&2
+}
+
+if (( $# < 2 ))
+then
+    usage
+    exit 1
+fi
+
+TOOLCHAIN=$(realpath $1)
+
+params="${@:2}"
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+GYSELALIB_DIR=$(dirname ${SCRIPT_DIR})
+
+mkdir build_cppcheck
+cd build_cppcheck
+cmake -DCMAKE_TOOLCHAIN_FILE=${TOOLCHAIN} -DGYSELALIBXX_RUN_CPPCHECK=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+cd ..
+
+python3 ${SCRIPT_DIR}/ci_tools/reduce_to_relevant_files.py build_cppcheck/compile_commands.json build_cppcheck/relevant_compile_commands.json ${params}
+
+cppcheck -i ${GYSELALIB_DIR}/vendor --library=googletest --check-level=exhaustive --enable=style --std=c++17 --max-ctu-depth=5 --suppress=unusedStructMember --suppress=useStlAlgorithm --suppress=knownConditionTrueFalse --suppress=ctuOneDefinitionRuleViolation --addon=${SCRIPT_DIR}/ci_tools/check_naming_conventions --project=build_cppcheck/relevant_compile_commands.json
