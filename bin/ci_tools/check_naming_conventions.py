@@ -28,8 +28,14 @@ file_exceptions = [HOME_DIR / 'src' / 'utils' / 'ddc_helper.hpp',
 RE_SNAKE_CASE = re.compile("[a-z0-9]+(?:_[a-z0-9]+)*")
 RE_CAMEL_CASE = re.compile("([A-Z][a-z0-9]*)+")
 
-def reportError(token, severity, msg, errorId):
-    cppcheckdata.reportError(token, severity, msg, 'naming', errorId)
+class FileErrInfo:
+    def __init__(self, fname):
+        self.file = fname
+        self.linenr = 0
+        self.column = None
+
+def reportError(token, msg, errorId):
+    cppcheckdata.reportError(token, 'style', msg, 'naming', errorId)
 
 def main():
     parser = cppcheckdata.ArgumentParser()
@@ -43,11 +49,13 @@ def main():
         print(f'Checking {arg}...')
         data = cppcheckdata.parsedump(arg)
 
-        fname = Path(arg).stem
-        res = re.match(RE_SNAKE_CASE, fname)
-        if not res:
-            reportError(var.typeStartToken, 'style',
-                        f'File {arg} violates snake-case naming convention', 'varname')
+        # No token to report on
+        #fname = Path(arg).stem
+        #res = re.match(RE_SNAKE_CASE, fname)
+        #if not res:
+        #    filename = arg.removesuffix(".dump")
+        #    reportError(token,
+        #                f'File {filename} violates snake-case naming convention', 'varname')
 
         for cfg in data.iterconfigurations():
             print(f'Checking {arg}, config {cfg.name}...')
@@ -56,7 +64,7 @@ def main():
             for tok in ddc_usage:
                 key = tok.str
                 new_key = ddc_keyword_map[key]
-                reportError(tok, 'style',
+                reportError(tok,
                             f'Please use the new naming conventions instead of DDC names ({key}->{new_key})',
                             'DDCNames')
 
@@ -64,7 +72,7 @@ def main():
                 if var.nameToken:
                     res = re.match(RE_SNAKE_CASE, var.nameToken.str)
                     if not res:
-                        reportError(var.typeStartToken, 'style',
+                        reportError(var.typeStartToken,
                                     f'Variable {var.nameToken.str} violates snake-case naming convention',
                                     'varname')
                 if (var.access is None) or var.access != 'Private':
@@ -72,7 +80,7 @@ def main():
 
                 if not ((var.nameToken.str.startswith('m_') and not var.isStatic) or
                         (var.nameToken.str.startswith('s_') and var.isStatic)):
-                    reportError(var.typeStartToken, 'style',
+                    reportError(var.typeStartToken,
                                 f'Private member variable {var.nameToken.str} violates naming convention',
                                 'privateMemberVariable')
 
@@ -85,8 +93,7 @@ def main():
                         continue
                     res = re.match(RE_SNAKE_CASE, scope.className)
                     if not res:
-                        reportError(
-                            scope.bodyStart, 'style',
+                        reportError(scope.bodyStart,
                             f'Function {scope.className} violates snake-case naming convention',
                             'functionName')
 
@@ -96,8 +103,7 @@ def main():
                         continue
                     res = re.match(RE_CAMEL_CASE, scope.className)
                     if not res:
-                        reportError(
-                            scope.bodyStart, 'style',
+                        reportError(scope.bodyStart,
                             f'{scope.type} {scope.className} violates camel-case naming convention',
                             f'{scope.type.lower()}Name')
 
