@@ -138,3 +138,23 @@ As the static function can be called without having an instance of a class, this
 ## X is not defined
 
 This usually occurs when the file containing the definition of `X` is not correctly included. Double check if the `#include <X.hpp>` line is in your file.
+
+## Incomplete type is not allowed
+
+Gyselalib++ includes a certain number of assumptions about the types describing the dimensions. If these assumptions are not respected then errors may be seen when the code tries to access the expected attribute. For example you may see:
+
+```bash
+${GYSELALIBXX_HOME}/src/data_types/vector_index_tools.hpp(82): error: incomplete type is not allowed
+      static constexpr bool value = (Dims::IS_COVARIANT && ...);
+```
+
+The attributes that may be mentioned are:
+
+- `IS_COVARIANT`
+- `IS_CONTRAVARIANT`
+- `Dual`
+- `PERIODIC`
+
+The first 3 attributes are related to covariant and contravariant tensors. For more details see [Coding Covariant & Contravariant Tensors](../standards/coding_covariant_and_contravariant_tensors.md). The documentation about [Mathematical and physical conventions](../standards/mathematical_and_physical_conventions.md) may also be useful if you are not familiar with the concept of covariant and contravariant tensors.
+
+The `PERIODIC` attribute is required by DDC. It is a `static constexpr boolean` indicating if the dimension is periodic or not.

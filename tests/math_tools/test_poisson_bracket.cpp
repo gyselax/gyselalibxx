@@ -24,7 +24,6 @@
  */
 
 void compute_and_test_Lie_Poisson_Bracket()
-
 {
     using Mapping2D = CircularToCartesian<Rho, Theta, R, Z>;
     using ToroidalMapping = ToroidalToCylindrical<Mapping2D, Zeta, Phi>;
@@ -138,4 +137,50 @@ void compute_and_test_Lie_Poisson_Bracket()
 TEST(LiePoissonBracket, axisymmetric_tokamak)
 {
     compute_and_test_Lie_Poisson_Bracket();
+}
+
+TEST(LiePoissonBracket, batched_elementwise)
+{
+    using Mapping2D = CircularToCartesian<Rho, Theta, R, Z>;
+    using ToroidalMapping = ToroidalToCylindrical<Mapping2D, Zeta, Phi>;
+    using CylindricalMapping = CylindricalToCartesian<R, Z, Zeta, X, Y>;
+    Coord<R, Z> origin_point(6.2, 0.0);
+    Mapping2D polar_to_RZ(origin_point);
+    ToroidalMapping toroidal_to_cylindrical(polar_to_RZ);
+    CylindricalMapping cylindrical_to_cartesian;
+    CombinedMapping<CylindricalMapping, ToroidalMapping, Coord<Rho, Theta, Phi>>
+            mapping(cylindrical_to_cartesian, toroidal_to_cylindrical);
+    LiePoissonBracket calculate_poisson_bracket(mapping);
+    MetricTensorEvaluator get_metric_tensor(mapping);
+
+    using BasisSpatial = VectorIndexSet<Rho, Theta, Phi>;
+    using CovBasisSpatial = get_covariant_dims_t<BasisSpatial>;
+    IdxStepRho nrho(10);
+    IdxStepTheta ntheta(10);
+    IdxStepPhi nphi(2);
+    ddc::init_discrete_space<GridRho>(
+            GridRho::init<GridRho>(Coord<Rho>(0.0), Coord<Rho>(1.0), nrho));
+    ddc::init_discrete_space<GridTheta>(GridTheta::init<GridTheta>(
+            build_uniform_break_points(Coord<Theta>(0.0), Coord<Theta>(2 * M_PI), ntheta)));
+    ddc::init_discrete_space<GridPhi>(
+            GridPhi::init<GridPhi>(Coord<Phi>(0.0), Coord<Phi>(2 * M_PI), nphi));
+
+    Coord<Rho, Theta, Phi> coord
+            = ddc::coordinate(Idx<GridRho, GridTheta, GridPhi>(nrho - 1, 0, 0));
+    DVector<Rho_cov, Theta_cov, Phi_cov> df(0.0, 0.0, 1.0);
+    DVector<Rho_cov, Theta_cov, Phi_cov> B_cov(1.0, 1.0, 1.0);
+    DTensor<BasisSpatial, BasisSpatial> inv_G = get_metric_tensor.inverse(coord);
+    double B_norm = norm(inv_G, B_cov);
+    B_cov /= B_norm;
+    DVector<Rho, Theta, Phi> B = tensor_mul(index<'i', 'j'>(inv_G), index<'j'>(B_cov));
+    IdentityTensor<double, BasisSpatial, CovBasisSpatial> id;
+
+    DVector<Rho, Theta, Phi> lp = calculate_poisson_bracket(df, id, B, coord);
+
+    double J = mapping.jacobian(coord);
+
+    double expected = 1.0 / (J * B_norm);
+    EXPECT_DOUBLE_EQ(ddcHelper::get<Rho>(lp), expected);
+    EXPECT_DOUBLE_EQ(ddcHelper::get<Theta>(lp), -expected);
+    EXPECT_DOUBLE_EQ(ddcHelper::get<Phi>(lp), 0.0);
 }

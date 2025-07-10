@@ -13,9 +13,9 @@ target_link_libraries("io"
     PUBLIC
         DDC::core
         PDI::pdi
+        gslx::data_types
         gslx::paraconfpp
         gslx::utils
-
 )
 
 add_library("gslx::io" ALIAS "io")

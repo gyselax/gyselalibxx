@@ -118,22 +118,13 @@ int main(int argc, char** argv)
     ddc::PeriodicExtrapolationRule<Theta> bv_theta_min;
     ddc::PeriodicExtrapolationRule<Theta> bv_theta_max;
     SplineRThetaEvaluatorNullBound evaluator(bv_r_min, bv_r_max, bv_theta_min, bv_theta_max);
-    SplineRThetaEvaluatorNullBound_host
-            evaluator_host(bv_r_min, bv_r_max, bv_theta_min, bv_theta_max);
-
-    DiscreteMappingBuilder_host const discrete_mapping_builder_host(
-            Kokkos::DefaultHostExecutionSpace(),
-            mapping,
-            builder_host,
-            evaluator_host);
 
 
     DiscreteMappingBuilder const
             discrete_mapping_builder(Kokkos::DefaultExecutionSpace(), mapping, builder, evaluator);
     DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
-    DiscreteToCartesian const discrete_mapping_host = discrete_mapping_builder_host();
 
-    ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping_host);
+    ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
     IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(builder);
 

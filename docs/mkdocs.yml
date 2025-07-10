@@ -32,6 +32,7 @@ nav:
       - Developer FAQ: docs/development/developer_FAQ.md
   - Troubleshooting:
       - Compilation Issues: docs/troubleshooting/Common_compilation_problems.md
+      - Debugging: docs/troubleshooting/Debugging_workflow.md
 
   - API:  # API reference documentation
       - Gyselalib++:

@@ -1,7 +1,11 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#include <ddc/ddc.hpp>
+#include <ddc/pdi.hpp>
 
 #include <pdi.h>
+
+#include "vector_field.hpp"
 
 namespace detail {
 
@@ -42,6 +46,12 @@ auto get_vector_tuple(TupleType input_args, std::integer_sequence<size_t, I...>)
     return std::tie(std::get<I * 2 + 1>(input_args)...);
 }
 
+template <class TupleType, class StringTupleType, size_t... I>
+void expose_arrays(TupleType out_obj, StringTupleType names, std::integer_sequence<size_t, I...>)
+{
+    ((ddc::expose_to_pdi(std::get<I>(names).c_str(), std::get<I>(out_obj))), ...);
+}
+
 } // namespace detail
 
 /**
@@ -80,4 +90,27 @@ void PDI_expose_idx_range(IdxRange<Grids...> index_range, std::string name)
     }
     PDI_expose((name + "_starts").c_str(), starts_s_arr.data(), PDI_OUT);
     PDI_expose((name + "_extents").c_str(), extents_s_arr.data(), PDI_OUT);
+}
+
+/**
+ * @brief A helper function to expose a vector field to PDI ready for output to a file.
+ *
+ * @param[in] name_stem The prefix for the names of the elements of the vector field.
+ * @param[in] out_vector The vector field to be exposed.
+ * @param[in] name_suffixes The suffixes for the names of the elements of the vector field.
+ *                          There must be the same number of suffixes as there are dimensions
+ *                          in the vector field.
+ */
+template <class ElementType, class IdxRangeType, class... IndexTag, class... StringType>
+void PDI_expose_vector_field(
+        std::string const& name_stem,
+        VectorConstField<ElementType, IdxRangeType, VectorIndexSet<IndexTag...>, Kokkos::HostSpace>
+                out_vector,
+        StringType const&... name_suffixes)
+{
+    static_assert(sizeof...(StringType) == sizeof...(IndexTag));
+    static_assert((std::is_convertible_v<StringType, std::string> && ...));
+    std::tuple names = {(name_stem + name_suffixes)...};
+    std::tuple out_obj = std::make_tuple(ddcHelper::get<IndexTag>(out_vector)...);
+    detail::expose_arrays(out_obj, names, std::make_index_sequence<sizeof...(StringType)> {});
 }

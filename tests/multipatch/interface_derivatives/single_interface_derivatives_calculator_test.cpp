@@ -21,7 +21,6 @@
 #include "single_interface_derivatives_calculator.hpp"
 
 
-
 /*
     Test: 
     * Interpolation with Hermite boundary conditions. 
