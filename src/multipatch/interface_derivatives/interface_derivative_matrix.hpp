@@ -509,8 +509,7 @@ public:
                 });
     }
 
-    void solve_deriv(
-            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
+    void solve_deriv(MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
     {
         constexpr bool is_first_idx_range_perp_on_dim1
                 = ddc::in_tags_v<typename FirstPatch::Grid1, Grid1DSeq>;
@@ -524,7 +523,7 @@ public:
         ddc::for_each(
                 idx_range_par_first,
                 [&](typename IdxRangeParFirstType::discrete_element_type const& idx_par) {
-                    (*this).solve_deriv(functions_and_derivs);
+                    (*this).solve_deriv(functions_and_derivs, idx_par);
                 });
     }
 
@@ -729,7 +728,7 @@ private:
         double lin_comb_funct;
 
         if constexpr (std::is_same_v<eval_type, eval_deriv>) {
-            // Use the function values to compute the first derivatives. 
+            // Use the function values to compute the first derivatives.
             DField<typename Patch1::IdxRange12, Kokkos::HostSpace, Kokkos::layout_stride> function_1
                     = function_and_derivs_1.get_values_field();
             DField<typename Patch2::IdxRange12, Kokkos::HostSpace, Kokkos::layout_stride> function_2
@@ -738,10 +737,11 @@ private:
             lin_comb_funct = sign
                              * std::get<I>(m_derivatives_calculators)
                                        .get_function_coefficients(
-                                               function_1[idx_slice_1],
-                                               function_2[idx_slice_2]);
+                                               get_const_field(function_1[idx_slice_1]),
+                                               get_const_field(function_2[idx_slice_2]));
+
         } else {
-            // Use the first derivatives to compute the cross-derivatives. 
+            // Use the first derivatives to compute the cross-derivatives.
             using GridPerp1 = typename InterfaceI::Edge1::perpendicular_grid;
             using GridPerp2 = typename InterfaceI::Edge2::perpendicular_grid;
 
@@ -754,29 +754,27 @@ private:
             using dGridPerp1 = typename ddc::Deriv<GridPerp1>;
             using dGridPerp2 = typename ddc::Deriv<GridPerp2>;
 
-            IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch1>());
-            IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch2>());
+            IdxRange<GridPar1> idx_range_par_1(m_idx_ranges.template get<Patch1>());
+            IdxRange<GridPar2> idx_range_par_2(m_idx_ranges.template get<Patch2>());
 
-            Idx<GridPerp1> idx_deriv_1 = (extermity_1 == Extremity::FRONT)
-                                                 ? idx_range_perp_1.front()
-                                                 : idx_range_perp_1.back();
-            Idx<GridPerp2> idx_deriv_2 = (extermity_2 == Extremity::FRONT)
-                                                 ? idx_range_perp_2.front()
-                                                 : idx_range_perp_2.back();
+            Idx<GridPar1> idx_deriv_1 = (extermity_1 == Extremity::FRONT) ? idx_range_par_1.front()
+                                                                          : idx_range_par_1.back();
+            Idx<GridPar2> idx_deriv_2 = (extermity_2 == Extremity::FRONT) ? idx_range_par_2.front()
+                                                                          : idx_range_par_2.back();
 
-            Idx<dGridPerp1, GridPerp1> idx_slice_deriv_y1(Idx<dGridPerp1>(1), idx_deriv_1);
-            Idx<dGridPerp2, GridPerp2> idx_slice_deriv_y2(Idx<dGridPerp1>(1), idx_deriv_2);
+            Idx<dGridPerp1, GridPar1> idx_slice_deriv_1(Idx<dGridPerp1>(1), idx_deriv_1);
+            Idx<dGridPerp2, GridPar2> idx_slice_deriv_2(Idx<dGridPerp1>(1), idx_deriv_2);
 
-            DField<IdxRange<GridPar1>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_1
-                    = function_and_derivs_1[idx_slice_deriv_y1];
-            DField<IdxRange<GridPar2>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_2
-                    = function_and_derivs_2[idx_slice_deriv_y2];
+            DField<IdxRange<GridPerp1>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_1
+                    = function_and_derivs_1[idx_slice_deriv_1];
+            DField<IdxRange<GridPerp2>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_2
+                    = function_and_derivs_2[idx_slice_deriv_2];
 
             lin_comb_funct = sign
                              * std::get<I>(m_derivatives_calculators)
                                        .get_function_coefficients(
-                                               derivs_1[idx_slice_1],
-                                               derivs_2[idx_slice_2]);
+                                               get_const_field(derivs_1[idx_slice_1]),
+                                               get_const_field(derivs_2[idx_slice_2]));
         }
 
         m_vector->get_values()[I] = lin_comb_funct;
@@ -857,7 +855,7 @@ private:
 
         IdxRange<GridPar1D> idx_range_1d_first_patch(m_idx_ranges.template get<FirstPatch>());
         int slice_idx_value = (slice_idx - idx_range_1d_first_patch.front()).value();
-        (update_derivatives_at_interface<I, eval_type>(slice_idx_value, functions_and_derivs), ...);
+        (update_derivatives_at_interface<I, eval_type>(functions_and_derivs, slice_idx_value), ...);
     }
 
     /// @brief Associate the Ith derivative values to the correct derivative field.
@@ -888,9 +886,9 @@ private:
         using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
 
         // The orientation of the ordered interface and the one in the derivative calculator.
-        constexpr bool is_same_orientation = std::is_same_v<
-                InterfaceI,
-                find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>>;
+        // constexpr bool is_same_orientation = std::is_same_v<
+        //         InterfaceI,
+        //         find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>>;
 
         using Patch1 = typename InterfaceI::Edge1::associated_patch;
         using Patch2 = typename InterfaceI::Edge2::associated_patch;
@@ -911,8 +909,11 @@ private:
             using GridPar1 = typename InterfaceI::Edge1::parallel_grid;
             using GridPar2 = typename InterfaceI::Edge2::parallel_grid;
 
-            using dGridPerp1 = typename ddc::Deriv<GridPerp1>;
-            using dGridPerp2 = typename ddc::Deriv<GridPerp2>;
+            // using dGridPerp1 = typename ddc::Deriv<GridPerp1>;
+            // using dGridPerp2 = typename ddc::Deriv<GridPerp2>;
+
+            using dGridPar1 = typename ddc::Deriv<GridPar1>;
+            using dGridPar2 = typename ddc::Deriv<GridPar2>;
 
             IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch1>());
             IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch2>());
@@ -924,13 +925,13 @@ private:
                                                  ? idx_range_perp_2.front()
                                                  : idx_range_perp_2.back();
 
-            Idx<dGridPerp1, GridPerp1> idx_slice_deriv_y1(Idx<dGridPerp1>(1), idx_deriv_1);
-            Idx<dGridPerp2, GridPerp2> idx_slice_deriv_y2(Idx<dGridPerp1>(1), idx_deriv_2);
+            Idx<dGridPar1, GridPerp1> idx_slice_deriv_1(Idx<dGridPar1>(1), idx_deriv_1);
+            Idx<dGridPar2, GridPerp2> idx_slice_deriv_2(Idx<dGridPar2>(1), idx_deriv_2);
 
             DField<IdxRange<GridPar1>, Kokkos::HostSpace, Kokkos::layout_stride> deriv_1
-                    = function_and_derivs_1[idx_slice_deriv_y1];
+                    = function_and_derivs_1[idx_slice_deriv_1];
             DField<IdxRange<GridPar2>, Kokkos::HostSpace, Kokkos::layout_stride> deriv_2
-                    = function_and_derivs_2[idx_slice_deriv_y2];
+                    = function_and_derivs_2[idx_slice_deriv_2];
 
             auto [slice_idx_1, slice_idx_2] = get_slice_indexes<I, eval_type>(slice_idx_1_value);
 
@@ -965,6 +966,9 @@ private:
                     = function_and_derivs_1.get_mdspan(deriv_block_grid12_1);
             detail::ViewNDMaker<4, double, false>::type derivs_xy_2
                     = function_and_derivs_2.get_mdspan(deriv_block_grid12_2);
+
+            // DField<IdxRange<d1Grid1, d1Grid2>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_xy_1; 
+            // DField<IdxRange<d2Grid1, d2Grid2>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_xy_2; 
 
             IdxRange<GridPar1> idx_range_par_1(m_idx_ranges.template get<Patch1>());
             IdxRange<GridPar2> idx_range_par_2(m_idx_ranges.template get<Patch2>());

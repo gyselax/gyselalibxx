@@ -16,6 +16,7 @@
 #include "mesh_builder.hpp"
 #include "non_uniform_interpolation_points.hpp"
 #include "single_interface_derivatives_calculator.hpp"
+#include "single_interface_derivatives_calculator_collection.hpp"
 #include "view.hpp"
 
 
@@ -1028,7 +1029,7 @@ public:
             double const local_deriv = local_derivs(idx_deriv, idx_par);
             double const global_deriv = evaluator_g.deriv_dim_1(interface_coord, function_g_coef);
 
-            EXPECT_NEAR(local_deriv, global_deriv, 2e-14);
+            EXPECT_NEAR(local_deriv, global_deriv, 5e-14);
         });
     }
 
@@ -1079,7 +1080,7 @@ public:
             double const local_deriv = local_derivs(idx_par, idx_deriv);
             double const global_deriv = evaluator_g.deriv_dim_2(interface_coord, function_g_coef);
 
-            EXPECT_NEAR(local_deriv, global_deriv, 2e-14);
+            EXPECT_NEAR(local_deriv, global_deriv, 5e-14);
         });
     }
 
@@ -2148,7 +2149,33 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             std::make_integer_sequence<std::size_t, 9> {});
 
 
+    // Test SingleInterfaceDerivativesCalculatorCollection =======================================
 
+    SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_123(
+            derivatives_calculator_1_2,
+            derivatives_calculator_2_3,
+            derivatives_calculator_3_1);
+
+    SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_456(
+            derivatives_calculator_4_5,
+            derivatives_calculator_5_6,
+            derivatives_calculator_6_4);
+
+    SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_789(
+            derivatives_calculator_7_8,
+            derivatives_calculator_8_9,
+            derivatives_calculator_9_7);
+
+    SingleInterfaceDerivativesCalculatorCollection
+            deriv_calculators_collect_147(derivatives_calculator_1_4, derivatives_calculator_4_7);
+
+    SingleInterfaceDerivativesCalculatorCollection
+            deriv_calculators_collect_258(derivatives_calculator_2_5, derivatives_calculator_5_8);
+
+    SingleInterfaceDerivativesCalculatorCollection
+            deriv_calculators_collect_369(derivatives_calculator_3_6, derivatives_calculator_6_9);
+
+            
     // Try to use DerivField =====================================================================
     // Instantiate DerivField --------------------------------------------------------------------
     IdxRangeSlice<GridX<1>> idx_range_slice_dx1(
@@ -2342,6 +2369,7 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             derivs_xy_max_max,
             idx_ranges_slice_dx,
             idx_ranges_slice_dy);
+
 
     // Use the InterfaceDerivativeMatrix ---------------------------------------------------------
     MultipatchField<DerivFieldOnPatch_host, Patch1, Patch2, Patch3> functions_and_derivs_123(

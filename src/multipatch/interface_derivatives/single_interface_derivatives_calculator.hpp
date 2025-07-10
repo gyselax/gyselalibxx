@@ -72,6 +72,14 @@ class SingleInterfaceDerivativesCalculator
                     !std::is_same_v<typename InterfaceType::Edge2, OutsideEdge>),
             "The interface cannot be an interface with the outside domain.");
 
+    static_assert(
+            (Bound1 == ddc::BoundCond::HERMITE) || (Bound1 == ddc::BoundCond::GREVILLE),
+            "If the boundary conditionon patch 1 is periodic, please use the default parameter.");
+    static_assert(
+            (Bound2 == ddc::BoundCond::HERMITE) || (Bound2 == ddc::BoundCond::GREVILLE),
+            "If the boundary conditionon patch 2 is periodic, please use the default parameter.");
+
+
     using EdgePerpGrid1 = typename InterfaceType::Edge1::perpendicular_grid;
     using EdgePerpGrid2 = typename InterfaceType::Edge2::perpendicular_grid;
 
@@ -120,6 +128,9 @@ class SingleInterfaceDerivativesCalculator
 public:
     /// @brief Interface between the two involved patches.
     using associated_interface = InterfaceType;
+
+    static constexpr ddc::BoundCond boundary_condition_patch1 = Bound1;
+    static constexpr ddc::BoundCond boundary_condition_patch2 = Bound2;
 
 private:
     IdxRange1DPerp_1 const m_idx_range_perp_1;
