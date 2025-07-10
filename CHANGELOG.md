@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fixed memory error in `PolarSplineFEMPoissonLikeSolver`.
+- Remove non-parallelisable loop in `PolarSplineFEMPoissonLikeSolver::init_nnz_per_line`.
 
 ### Changed
 
