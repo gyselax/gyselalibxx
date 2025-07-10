@@ -850,7 +850,8 @@ public:
      * @param[in] rhs
      *      The rhs @f$ \rho@f$ of the Poisson-like equation.
      *      The type is templated but we can use the PoissonLikeRHSFunction
-     *      class.
+     *      class. It must be an object with an operator() which evaluates a
+     *      CoordRTheta and can be called from CPU.
      * @param[inout] spline
      *      The spline representation of the solution @f$\phi@f$, also used as initial data for the iterative solver.
      */
@@ -1008,7 +1009,8 @@ public:
      * @param[in] rhs
      *      The rhs @f$ \rho@f$ of the Poisson-like equation.
      *      The type is templated but we can use the PoissonLikeRHSFunction
-     *      class.
+     *      class. It must be an object with an operator() which evaluates a
+     *      CoordRTheta and can be called from CPU.
      * @param[inout] phi
      *      The values of the solution @f$\phi@f$ on the given coords_eval, also used as initial data for the iterative solver.
      */
