@@ -121,7 +121,7 @@ class InterfaceDerivativeMatrix
 
     static_assert(
             ddc::type_seq_size_v<Grid1DSeq> == n_inner_interfaces + !is_periodic,
-            "The number of 1D grids and inner interfaces should fit.");
+            "The number of 1D grids and inner interfaces should match.");
 
     static_assert(
             ddc::type_seq_size_v<Grid1DSeq> <= sizeof...(Patches),
