@@ -79,9 +79,7 @@ class InterfaceDerivativeMatrix
     static constexpr std::size_t number_of_interfaces = ddc::type_seq_size_v<interface_collection>;
 
     static_assert(
-            ((LowerBound == ddc::BoundCond::PERIODIC) && (UpperBound == ddc::BoundCond::PERIODIC))
-                    || ((LowerBound != ddc::BoundCond::PERIODIC)
-                        && (UpperBound != ddc::BoundCond::PERIODIC)),
+            ((LowerBound == ddc::BoundCond::PERIODIC) == (UpperBound == ddc::BoundCond::PERIODIC)),
             "If one boundary is periodic, the other boundary should be too.");
 
     static constexpr bool is_periodic = (LowerBound == ddc::BoundCond::PERIODIC);
@@ -967,8 +965,8 @@ private:
             detail::ViewNDMaker<4, double, false>::type derivs_xy_2
                     = function_and_derivs_2.get_mdspan(deriv_block_grid12_2);
 
-            // DField<IdxRange<d1Grid1, d1Grid2>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_xy_1; 
-            // DField<IdxRange<d2Grid1, d2Grid2>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_xy_2; 
+            // DField<IdxRange<d1Grid1, d1Grid2>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_xy_1;
+            // DField<IdxRange<d2Grid1, d2Grid2>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_xy_2;
 
             IdxRange<GridPar1> idx_range_par_1(m_idx_ranges.template get<Patch1>());
             IdxRange<GridPar2> idx_range_par_2(m_idx_ranges.template get<Patch2>());
