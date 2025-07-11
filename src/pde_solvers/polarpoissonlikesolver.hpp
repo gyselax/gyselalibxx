@@ -1642,7 +1642,7 @@ public:
                                 IdxBSRTheta k_2d = outer_bsplines_2d.front() + ir + itheta;
                                 IdxBSPolar k(PolarBSplinesRTheta::template get_polar_index<
                                              PolarBSplinesRTheta>(k_2d));
-                                if (get_idx_range(nnz).contains(k)) {
+                                if (outer_bsplines.contains(k)) {
                                     nnz(k) = nnz_sum_to_r
                                              + (thread_index + 1) * nr * stencil_overlap;
                                 }
