@@ -98,7 +98,10 @@ def main():
                     if func_scope.type == 'Global':
                         class_scope = None
                     else:
-                        func_id = func_scope.bodyStart.previous.link.previous.functionId
+                        func_close_brackets = func_scope.bodyStart
+                        while func_close_brackets.str != ')':
+                            func_close_brackets = func_close_brackets.previous
+                        func_id = func_close_brackets.link.previous.functionId
                         func = next(f for f in cfg.functions if f.Id == func_id)
                         class_scope = func.nestedIn
 
