@@ -23,7 +23,7 @@ GYSELALIB_DIR=$(dirname ${SCRIPT_DIR})
 
 mkdir build_cppcheck
 cd build_cppcheck
-cmake -DCMAKE_TOOLCHAIN_FILE=${TOOLCHAIN} -DGYSELALIBXX_RUN_CPPCHECK=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+cmake -DCMAKE_TOOLCHAIN_FILE=${TOOLCHAIN} -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
 cd ..
 
 python3 ${SCRIPT_DIR}/ci_tools/reduce_to_relevant_files.py build_cppcheck/compile_commands.json build_cppcheck/relevant_compile_commands.json ${params}
