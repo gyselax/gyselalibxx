@@ -46,7 +46,8 @@ def main():
     for arg in dump_files:
         if not arg.endswith('.dump') or any(f'{f}.dump' == arg for f in file_exceptions):
             continue
-        print(f'Checking {arg}...')
+        file = arg.removesuffix('.dump')
+        print(f'Checking {file}...')
         data = cppcheckdata.parsedump(arg)
 
         # No token to report on
@@ -60,7 +61,7 @@ def main():
         for cfg in data.iterconfigurations():
             print(f'Checking {arg}, config {cfg.name}...')
 
-            ddc_usage = [tok for tok in cfg.tokenlist if tok.str in ddc_keyword_map]
+            ddc_usage = [tok for tok in cfg.tokenlist if tok.str in ddc_keyword_map and tok.file == file]
             for tok in ddc_usage:
                 key = tok.str
                 new_key = ddc_keyword_map[key]
@@ -69,6 +70,8 @@ def main():
                             'DDCNames')
 
             for var in cfg.variables:
+                if var.nameToken is None or var.nameToken.file != file:
+                    continue
                 if var.nameToken:
                     res = re.match(RE_SNAKE_CASE, var.nameToken.str)
                     if not res:
@@ -85,6 +88,8 @@ def main():
                                 'privateMemberVariable')
 
             for scope in cfg.scopes:
+                if scope.bodyStart is None or scope.bodyStart.file != file:
+                    continue
                 if scope.type == 'Function':
                     function = scope.function
                     if function is not None and function.type in ('Constructor', 'Destructor', 'CopyConstructor', 'MoveConstructor'):
