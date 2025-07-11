@@ -57,17 +57,17 @@ def main():
         #    filename = arg.removesuffix(".dump")
         #    reportError(token,
         #                f'File {filename} violates snake-case naming convention', 'varname')
+        ddc_usage = [tok for tok in data.rawTokens if tok.str in ddc_keyword_map and tok.file == file]
+        for tok in ddc_usage:
+            key = tok.str
+            new_key = ddc_keyword_map[key]
+            reportError(tok,
+                        f'Please use the new naming conventions instead of DDC names ({key}->{new_key})',
+                        'DDCNames')
 
         for cfg in data.iterconfigurations():
             print(f'Checking {arg}, config {cfg.name}...')
 
-            ddc_usage = [tok for tok in cfg.tokenlist if tok.str in ddc_keyword_map and tok.file == file]
-            for tok in ddc_usage:
-                key = tok.str
-                new_key = ddc_keyword_map[key]
-                reportError(tok,
-                            f'Please use the new naming conventions instead of DDC names ({key}->{new_key})',
-                            'DDCNames')
 
             for var in cfg.variables:
                 if var.nameToken is None or var.nameToken.file != file:
