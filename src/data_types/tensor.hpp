@@ -102,13 +102,13 @@ public:
     template <
             class... Params,
             class = std::enable_if_t<(std::is_convertible_v<Params, ElementType> && ...)>,
-            class = std::enable_if_t<sizeof...(Params) != 1>>
+            class = (std::enable_if_t<
+                     sizeof...(Params) == base_type::size() && sizeof...(Params) != 1>)>
     explicit KOKKOS_FUNCTION Tensor(Params... elements)
     {
         static_assert(
                 rank() == 1,
                 "Filling the tensor on initialisation is only permitted for 1D vector objects");
-        static_assert(sizeof...(Params) == base_type::size());
         m_data.m_data_alloc
                 = std::array<ElementType, base_type::size()>({ElementType(elements)...});
     }
