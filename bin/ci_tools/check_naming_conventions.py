@@ -46,7 +46,10 @@ def main():
     for arg in dump_files:
         if not arg.endswith('.dump') or any(f'{f}.dump' == arg for f in file_exceptions):
             continue
-        file = arg.removesuffix('.dump')
+        file = Path(arg.removesuffix('.dump'))
+        while len(file.suffixes) > 1:
+            file = file.with_suffix('')
+        file = str(file)
         print(f'Checking {file}...')
         data = cppcheckdata.parsedump(arg)
 
