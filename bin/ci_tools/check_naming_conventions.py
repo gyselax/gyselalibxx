@@ -46,11 +46,7 @@ def main():
     for arg in dump_files:
         if not arg.endswith('.dump') or any(f'{f}.dump' == arg for f in file_exceptions):
             continue
-        file = Path(arg.removesuffix('.dump'))
-        while len(file.suffixes) > 1:
-            file = file.with_suffix('')
-        file = str(file)
-        print(f'Checking {file}...')
+        print(f'Checking {arg}...')
         data = cppcheckdata.parsedump(arg)
 
         # No token to report on
@@ -60,7 +56,7 @@ def main():
         #    filename = arg.removesuffix(".dump")
         #    reportError(token,
         #                f'File {filename} violates snake-case naming convention', 'varname')
-        ddc_usage = [tok for tok in data.rawTokens if tok.str in ddc_keyword_map and tok.file == file]
+        ddc_usage = [tok for tok in data.rawTokens if tok.str in ddc_keyword_map]
         for tok in ddc_usage:
             key = tok.str
             new_key = ddc_keyword_map[key]
@@ -73,7 +69,7 @@ def main():
 
 
             for var in cfg.variables:
-                if var.nameToken is None or var.nameToken.file != file:
+                if var.nameToken is None:
                     continue
                 if var.nameToken:
                     res = re.match(RE_SNAKE_CASE, var.nameToken.str)
@@ -91,7 +87,7 @@ def main():
                                 'privateMemberVariable')
 
             for scope in cfg.scopes:
-                if scope.bodyStart is None or scope.bodyStart.file != file:
+                if scope.bodyStart is None:
                     continue
                 if scope.type == 'Function':
                     function = scope.function
