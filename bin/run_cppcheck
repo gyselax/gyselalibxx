@@ -28,4 +28,4 @@ cd ..
 
 python3 ${SCRIPT_DIR}/ci_tools/reduce_to_relevant_files.py build_cppcheck/compile_commands.json build_cppcheck/relevant_compile_commands.json ${params}
 
-cppcheck -i ${GYSELALIB_DIR}/vendor --library=googletest --check-level=exhaustive --enable=style --std=c++17 --max-ctu-depth=5 --suppress=unusedStructMember --suppress=useStlAlgorithm --suppress=knownConditionTrueFalse --suppress=ctuOneDefinitionRuleViolation --addon=${SCRIPT_DIR}/ci_tools/check_naming_conventions --addon=${SCRIPT_DIR}/ci_tools/check_for_memory_misuse --project=build_cppcheck/relevant_compile_commands.json -v
+cppcheck -i ${GYSELALIB_DIR}/vendor --library=googletest --max-ctu-depth=5 --check-level=exhaustive --enable=style --std=c++17 --suppress=unusedStructMember --suppress=useStlAlgorithm --suppress=knownConditionTrueFalse --suppress=ctuOneDefinitionRuleViolation --addon=${SCRIPT_DIR}/ci_tools/check_naming_conventions --addon=${SCRIPT_DIR}/ci_tools/check_for_memory_misuse --project=build_cppcheck/relevant_compile_commands.json -v
