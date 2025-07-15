@@ -4,6 +4,7 @@ This file should be run using ./bin/run_cppcheck
 """
 from pathlib import Path
 import sys
+import warnings
 
 import cppcheckdata #pylint: disable=import-error
 
@@ -13,6 +14,9 @@ def reportError(token, msg, errorId, severity='error'):
     cppcheckdata.reportError(token, severity, msg, 'memory', errorId)
 
 def main():
+    """
+    Main script usable by cppcheck
+    """
     parser = cppcheckdata.ArgumentParser()
     args = parser.parse_args()
 
@@ -81,10 +85,12 @@ def main():
                         else:
                             warnings.warn("Cannot determine if type {type_descr} is on GPU or CPU")
 
+            # Check for memory misuse
             for scope in cfg.scopes:
                 if not hasattr(scope, 'exec_space'):
                     continue
 
+                # Find all variables used in this scope
                 used_vars = {}
                 body_token = scope.bodyStart
                 while body_token != scope.bodyEnd:
@@ -92,6 +98,7 @@ def main():
                         used_vars[body_token.variable] = body_token
                     body_token = body_token.next
 
+                # Find class scope
                 class_scope = scope.nestedIn
                 while class_scope.type not in ('Class', 'Struct', 'Global'):
                     class_scope = class_scope.nestedIn
@@ -113,6 +120,7 @@ def main():
                 class_captured = 'CLASS' in scope.exec_type or scope.nestedIn.type in ('Class', 'Struct')
 
                 local_access = ('Local', 'Argument')
+                # Check for missing class capture
                 if scope.exec_space == 'GPU' and not class_captured and class_scope and \
                         any(var.access not in local_access for var in used_vars):
                     for var, tok in used_vars.items():
@@ -121,12 +129,15 @@ def main():
                                 f'Class variable {var.nameToken.str} used from GPU, but class not captured. Please create a proxy variable.',
                                 'classVarOnGPU')
 
+                # Check for bad class capture
                 if scope.exec_space == 'GPU' and class_captured:
+                    # Check for nonsensical class capture
                     if class_scope is None:
                         reportError(scope.bodyStart,
                             f'Loop on GPU captures class but does not appear to be in a class.',
                             'classVarOnGPU', severity='warning')
 
+                    # Chcek if *this is used in the loop
                     this_used = False
                     body_token = scope.bodyStart
                     while body_token != scope.bodyEnd:
@@ -144,6 +155,7 @@ def main():
                                 break
                         body_token = body_token.next
 
+                    # Check for bad KOKKOS_CLASS_LAMBDA use
                     if scope.exec_type == 'KOKKOS_CLASS_LAMBDA' and \
                             not all(v in used_vars for v in class_scope.varlist) and \
                             not this_used:
@@ -156,6 +168,7 @@ def main():
                              'Please prefer proxy variables.',
                              'unnecessaryGPUclassCapture', severity='warning')
 
+                # Check for bad exec space use
                 for var in used_vars:
                     if hasattr(var, 'mem_space'):
                         if var.mem_space != scope.exec_space:

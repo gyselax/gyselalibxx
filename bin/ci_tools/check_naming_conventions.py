@@ -37,6 +37,9 @@ def reportError(token, msg, errorId):
     cppcheckdata.reportError(token, 'style', msg, 'naming', errorId)
 
 def main():
+    """
+    Main script usable by cppcheck
+    """
     parser = cppcheckdata.ArgumentParser()
     args = parser.parse_args()
 
