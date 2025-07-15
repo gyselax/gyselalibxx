@@ -2,7 +2,6 @@
 Check that CPU/GPU memory patterns are respected.
 This file should be run using ./bin/run_cppcheck
 """
-from pathlib import Path
 import sys
 import warnings
 
