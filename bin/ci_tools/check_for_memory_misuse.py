@@ -136,7 +136,7 @@ def main():
                             f'Loop on GPU captures class but does not appear to be in a class.',
                             'classVarOnGPU', severity='warning')
 
-                    # Chcek if *this is used in the loop
+                    # Check if *this is used in the loop
                     this_used = False
                     body_token = scope.bodyStart
                     while body_token != scope.bodyEnd:
