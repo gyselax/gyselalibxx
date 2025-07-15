@@ -19,7 +19,7 @@ def main():
     parser = cppcheckdata.ArgumentParser()
     args = parser.parse_args()
 
-    dump_files, ctu_info_files = cppcheckdata.get_files(args)
+    dump_files, _ = cppcheckdata.get_files(args)
 
     data_dump = {f.removesuffix('.dump'): cppcheckdata.parsedump(f) for f in dump_files}
 
@@ -77,9 +77,9 @@ def main():
                     tok_end_idx = next(i for i, tok in enumerate(cfg.tokenlist) if tok.Id == var.typeEndTokenId) + 1
                     type_descr = [tok.str for tok in cfg.tokenlist[tok_start_idx:tok_end_idx]]
                     if any(t in type_descr for t in ('FieldMem', 'VectorFieldMem', 'Field', 'VectorField', 'DiscreteToCartesian')):
-                        if (s in type_descr for s in ('host_t', 'DefaultHostExecutionSpace', 'HostSpace')):
+                        if any(s in type_descr for s in ('host_t', 'DefaultHostExecutionSpace', 'HostSpace')):
                             var.mem_space = 'CPU'
-                        elif (s in type_descr for s in ('DefaultExecutionSpace',)):
+                        elif any(s in type_descr for s in ('DefaultExecutionSpace',)):
                             var.mem_space = 'GPU'
                         else:
                             warnings.warn("Cannot determine if type {type_descr} is on GPU or CPU")
@@ -133,7 +133,7 @@ def main():
                     # Check for nonsensical class capture
                     if class_scope is None:
                         reportError(scope.bodyStart,
-                            f'Loop on GPU captures class but does not appear to be in a class.',
+                            'Loop on GPU captures class but does not appear to be in a class.',
                             'classVarOnGPU', severity='warning')
 
                     # Check if *this is used in the loop
@@ -162,7 +162,7 @@ def main():
                         while body_token != scope.bodyEnd:
                             body_token = body_token.next
                         reportError(scope.bodyStart,
-                            f'Loop on GPU captures class but not all variables are used. ' +
+                             'Loop on GPU captures class but not all variables are used. ' +
                              'This increases CPU/GPU copies and GPU memory usage unnecessarily. ' +
                              'Please prefer proxy variables.',
                              'unnecessaryGPUclassCapture', severity='warning')
@@ -173,7 +173,7 @@ def main():
                         if var.mem_space != scope.exec_space:
                             msg = ("Attempted memory access from the wrong execution space. "
                                   f"The current execution space is \"{scope.exec_space}\" but the variable "
-                                  f"{var.nameToken.str} is stored on a space compatible with \"{v.mem_space}\"")
+                                  f"{var.nameToken.str} is stored on a space compatible with \"{var.mem_space}\"")
                             reportError(scope.bodyStart, msg, 'badAccessCPUGPU')
 
 if __name__ == '__main__':
