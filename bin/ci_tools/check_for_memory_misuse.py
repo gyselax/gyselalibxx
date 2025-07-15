@@ -1,14 +1,16 @@
-import argparse
-import glob
+"""
+Check that CPU/GPU memory patterns are respected.
+This file should be run using ./bin/run_cppcheck
+"""
 from pathlib import Path
 import sys
 
-import cppcheckdata
+import cppcheckdata #pylint: disable=import-error
 
 def reportError(token, msg, errorId, severity='error'):
-    cppcheckdata.reportError(token, 'error', msg, 'memory', errorId)
-    if token.file == file:
-        cppcheckdata.reportError(token, 'error', msg, 'memory', errorId)
+    """ Report an incorrect naming convention.
+    """
+    cppcheckdata.reportError(token, severity, msg, 'memory', errorId)
 
 def main():
     parser = cppcheckdata.ArgumentParser()
@@ -18,50 +20,55 @@ def main():
 
     data_dump = {f.removesuffix('.dump'): cppcheckdata.parsedump(f) for f in dump_files}
 
-    # Detect execution spaces
     for f, data in data_dump.items():
-        global file
-        file = Path(f)
-        while len(file.suffixes) > 1:
-            file = file.with_suffix('')
-        file = str(file)
-
+        # Loop over configurations. A configuration is created by an ifdef
         for cfg in data.iterconfigurations():
-            # clang_warnings', 'containers', 'directives', 'functions', 'macro_usage', 'name', 'preprocessor_if_conditions', 'scopes', 'setIdMap', 'set_id_map', 'set_tokens_links', 'standards', 'tokenlist', 'typedefInfo', 'valueflow', 'variables'
+            # cfg properties : clang_warnings', 'containers', 'directives', 'functions', 'macro_usage', 'name', 'preprocessor_if_conditions', 'scopes', 'setIdMap', 'set_id_map', 'set_tokens_links', 'standards', 'tokenlist', 'typedefInfo', 'valueflow', 'variables'
 
             class_scope = None
 
             # Find execution space for each scope
             for scope in cfg.scopes:
+                # Only functions and lambdas have an execution space
                 if scope.type not in ('Function', 'Unconditional'):
                     continue
-                if scope.nestedIn.type == 'Class':
-                    class_scope = scope.nestedIn
+
+                # Find body start token
                 tok_idx = next(i for i, tok in enumerate(cfg.tokenlist) if tok.Id == scope.bodyStartId)
                 start_idx = next((tok_idx-i for i, tok in enumerate(reversed(cfg.tokenlist[:tok_idx]),1) if tok.str in ('{', '}', ';')), 0)
+                # Find any KOKKOS macros in the declaration
                 exec_type = next((tok.str for tok in cfg.tokenlist[start_idx:tok_idx] if 'KOKKOS_' in tok.str), 'CPU')
+
+                # Set the exec space (CPU/GPU) and the exec_type (KOKKOS_FUNCTION, KOKKOS_LAMBDA, etc)
                 scope.exec_type = exec_type
                 scope.exec_space = 'CPU' if exec_type == 'CPU' else 'GPU'
 
+            # Check for bad class access from GPU
             for scope in cfg.scopes:
                 if scope.type not in ('Class', 'Struct'):
                     continue
 
-                tok = next(tok for tok in cfg.tokenlist if tok.Id == scope.bodyStartId)
-
-                function_scopes = [s for s in scope.nestedList if s.type == 'Function']
-                functions = [s.function for s in function_scopes]
+                # Check if an instance of the class can be created on GPU
                 has_gpu_constructor = any(s.exec_space != 'CPU' for f,s in zip(functions, function_scopes) \
                                         if f.type == 'Constructor')
 
+                # Find class methods
+                function_scopes = [s for s in scope.nestedList if s.type == 'Function']
+                functions = [s.function for s in function_scopes]
+
                 nested_scopes = scope.nestedList
+                # If any methods run on GPU and the class contains references which cannot be created
+                # from GPU objects (because there is no GPU constructor)
                 if any(getattr(s, 'exec_space', None) == 'GPU' for s in nested_scopes) and \
                         any(v.isReference for v in scope.varlist) and \
                         not has_gpu_constructor:
+                    tok = next(tok for tok in cfg.tokenlist if tok.Id == scope.bodyStartId)
                     reportError(tok,
                         f'Class {scope.className} contains CPU references to objects.',
                         'classExecSpace')
 
+            # Find memory space for variables
+            for scope in cfg.scopes:
                 for var in scope.varlist:
                     tok_start_idx = next(i for i, tok in enumerate(cfg.tokenlist) if tok.Id == var.typeStartTokenId)
                     tok_end_idx = next(i for i, tok in enumerate(cfg.tokenlist) if tok.Id == var.typeEndTokenId) + 1
@@ -72,9 +79,7 @@ def main():
                         elif (s in type_descr for s in ('DefaultExecutionSpace',)):
                             var.mem_space = 'GPU'
                         else:
-                            # Look for mem_space
-                            print(type_descr)
-                            pass
+                            warnings.warn("Cannot determine if type {type_descr} is on GPU or CPU")
 
             for scope in cfg.scopes:
                 if not hasattr(scope, 'exec_space'):
