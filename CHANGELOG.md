@@ -11,6 +11,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+### Fixed
+
+- Modify `ruche.v100/environment.sh` file to fix tokamaxi simulation segfault issues.
+- Fix type of derivatives stored in `DerivFieldMem` and `DerivField` types.
+- Fixed memory error in `PolarSplineFEMPoissonLikeSolver`.
+- Remove non-parallelisable loop in `PolarSplineFEMPoissonLikeSolver::init_nnz_per_line`.
+- Remove use of `std::cyl_bessel_j` which is not available in libc++.
+
+### Changed
+
+### Deprecated
+
+## [v0.2.0] - 2025-07-03
+
+### Added
+
 - Add a Gyroaverage operator with tests for circular geometry.
 - Curvilinear coordinate change classes have an O-point method to retrieve the O-point in the non-curvilinear coordinates.
 - Add a batched `operator()` to `DiscreteToCartesian` allowing a field of coordinates to be converted.
