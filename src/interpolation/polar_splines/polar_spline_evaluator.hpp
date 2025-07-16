@@ -176,6 +176,28 @@ public:
     }
 
     /**
+     * @brief Get the values of the spline function on a domain.
+     *
+     * @param[out] spline_eval
+     *      The values of the function evaluated on the domain.
+     * @param[in] spline_coef
+     *      The B-splines coefficients of the spline function we want to evaluate.
+     */
+    template <class Domain>
+    void operator()(
+            DField<Domain, MemorySpace> const spline_eval,
+            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
+    {
+        using IdxEval = typename Domain::discrete_element_type;
+        ddc::parallel_for_each(
+                exec_space(),
+                get_idx_range(coords_eval),
+                KOKKOS_LAMBDA(IdxEval i) {
+                    spline_eval(i) = eval(ddc::coordinate(i), spline_coef);
+                });
+    }
+
+    /**
      * @brief Get the value of the derivative of the spline function on the
      * first dimension.
      *
@@ -249,9 +271,36 @@ public:
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
-        ddc::parallel_for_each(exec_space(), get_idx_range(coords_eval), KOKKOS_LAMBDA(IdxEval i) {
-            spline_eval(i) = eval_no_bc(coords_eval(i), spline_coef, eval_deriv_r_type());
-        });
+        ddc::parallel_for_each(
+                exec_space(),
+                get_idx_range(coords_eval),
+                KOKKOS_LAMBDA(IdxEval i) {
+                    spline_eval(i) = eval_no_bc(coords_eval(i), spline_coef, eval_deriv_r_type());
+                });
+    }
+
+    /**
+     * @brief Get the values of the derivative of the spline function on the
+     * first dimension.
+     *
+     *@param[out] spline_eval
+     *      The values of the function evaluated on the domain.
+     * @param[in] spline_coef
+     *      The B-splines coefficients of the spline function we want to evaluate.
+     */
+    template <class Domain>
+    void deriv_dim_1(
+            DField<Domain, MemorySpace> const spline_eval,
+            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
+    {
+        using IdxEval = typename Domain::discrete_element_type;
+        ddc::parallel_for_each(
+                exec_space(),
+                get_idx_range(spline_eval),
+                KOKKOS_LAMBDA(IdxEval i) {
+                    spline_eval(i)
+                            = eval_no_bc(ddc::coordinate(i), spline_coef, eval_deriv_r_type());
+                });
     }
 
     /**
@@ -272,9 +321,37 @@ public:
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
-        ddc::parallel_for_each(exec_space(), get_idx_range(coords_eval), KOKKOS_LAMBDA(IdxEval i) {
-            spline_eval(i) = eval_no_bc(coords_eval(i), spline_coef, eval_deriv_theta_type());
-        });
+        ddc::parallel_for_each(
+                exec_space(),
+                get_idx_range(coords_eval),
+                KOKKOS_LAMBDA(IdxEval i) {
+                    spline_eval(i)
+                            = eval_no_bc(coords_eval(i), spline_coef, eval_deriv_theta_type());
+                });
+    }
+
+    /**
+     * @brief Get the values of the derivative of the spline function on the
+     * second dimension.
+     *
+     *@param[out] spline_eval
+     *      The values of the function evaluated on the domain.
+     * @param[in] spline_coef
+     *      The B-splines coefficients of the spline function we want to evaluate..
+     */
+    template <class Domain>
+    void deriv_dim_2(
+            DField<Domain, MemorySpace> const spline_eval,
+            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
+    {
+        using IdxEval = typename Domain::discrete_element_type;
+        ddc::parallel_for_each(
+                exec_space(),
+                get_idx_range(coords_eval),
+                KOKKOS_LAMBDA(IdxEval i) {
+                    spline_eval(i)
+                            = eval_no_bc(ddc::coordinate(i), spline_coef, eval_deriv_theta_type());
+                });
     }
 
     /**
@@ -294,9 +371,38 @@ public:
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
-        ddc::parallel_for_each(exec_space(), get_idx_range(coords_eval), KOKKOS_LAMBDA(IdxEval i) {
-            spline_eval(i) = eval_no_bc(coords_eval(i), spline_coef, eval_deriv_r_theta_type());
-        });
+        ddc::parallel_for_each(
+                exec_space(),
+                get_idx_range(coords_eval),
+                KOKKOS_LAMBDA(IdxEval i) {
+                    spline_eval(i)
+                            = eval_no_bc(coords_eval(i), spline_coef, eval_deriv_r_theta_type());
+                });
+    }
+
+    /**
+     * @brief Get the values of the cross derivative of the spline function.
+     *
+     *@param[out] spline_eval
+     *      The values of the function evaluated on the domain.
+     * @param[in] spline_coef
+     *      The B-splines coefficients of the splinefunction we want to evaluate.
+     */
+    template <class Domain>
+    void deriv_dim_1_and_2(
+            DField<Domain, MemorySpace> const spline_eval,
+            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
+    {
+        using IdxEval = typename Domain::discrete_element_type;
+        ddc::parallel_for_each(
+                exec_space(),
+                get_idx_range(coords_eval),
+                KOKKOS_LAMBDA(IdxEval i) {
+                    spline_eval(i) = eval_no_bc(
+                            ddc::coordinate(i),
+                            spline_coef,
+                            eval_deriv_r_theta_type());
+                });
     }
 
 private:
