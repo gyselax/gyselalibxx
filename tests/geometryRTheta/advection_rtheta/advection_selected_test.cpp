@@ -29,7 +29,6 @@
 #include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
-#include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "rk2.hpp"
 #include "rk3.hpp"
