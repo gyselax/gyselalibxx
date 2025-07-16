@@ -47,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Bumped the minimum CMake version to 3.25 to benefit from the `add_subdirectory(.. SYSTEM)` feature.
 - Change the interface of `IVlasovSolver` and `IQNSolver` in `geometryXYVxVy` to store the electric field in a `VectorField`.
 - Integration of `ddc::StridedDiscreteDomain` by making `IdxRangeSlice` a type alias.
 - The parameter `iter_start` has been removed from the constructor of `RestartInitialisation`.
