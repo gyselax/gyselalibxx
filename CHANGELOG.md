@@ -13,15 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Modify ruche.v100/environment.sh file to fix tokamaxi simulation segfault issues.
+  
 ### Changed
 
 ### Deprecated
-
-## [v0.2.0] - 2025-07-16
-
-### Fixed
-
-- Modify ruche.v100/environment.sh file to fix tokamaxi simulation segfault issues.
 
 ## [v0.2.0] - 2025-07-03
 
