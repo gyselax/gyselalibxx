@@ -300,6 +300,7 @@
 * **FieldSp** ([**species\_info.hpp**](species__info_8hpp.md))
 * **Field** ([**ddc\_aliases.hpp**](ddc__aliases_8hpp.md))
 * **FieldMem** ([**ddc\_aliases.hpp**](ddc__aliases_8hpp.md))
+* **find\_all\_grids\_t** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))
 * **find\_grid\_t** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))
 * **find\_idx\_t** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))
 

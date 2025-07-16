@@ -559,6 +559,10 @@
 </thead>
 <tbody>
 <tr>
+<td style="text-align: right;">typedef typename detail::FindAllGrids&lt; TypeSeqDim, TypeSeqGrid &gt;::type</td>
+<td style="text-align: left;"><a href="#typedef-find_all_grids_t"><strong>find_all_grids_t</strong></a>  <br><em>A tool to find the a sequence of grids that are defined along the specified dimensions (e.g. get</em> <a href="structGridX.html"><em><strong>GridX</strong></em></a> <em>from</em><a href="structX.html"><em><strong>X</strong></em></a> <em>)</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef typename detail::FindGrid&lt; Dim, TypeSeqGrid &gt;::type</td>
 <td style="text-align: left;"><a href="#typedef-find_grid_t"><strong>find_grid_t</strong></a>  <br><em>A tool to find the grid that is defined along the specified dimension (e.g. get</em> <a href="structGridX.html"><em><strong>GridX</strong></em></a> <em>from</em><a href="structX.html"><em><strong>X</strong></em></a> <em>)</em></td>
 </tr>
@@ -604,6 +608,12 @@
 </tbody>
 </table>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-find_all_grids_t">typedef find_all_grids_t</h3>
+<p><em>A tool to find the a sequence of grids that are defined along the specified dimensions (e.g. get</em> <a href="structGridX.html"><em><strong>GridX</strong></em></a> <em>from</em><a href="structX.html"><em><strong>X</strong></em></a> <em>)</em></p>
+<pre><code class="language-C++">using find_all_grids_t =  typename detail::FindAllGrids&lt;TypeSeqDim, TypeSeqGrid&gt;::type;
+</code></pre>
+<hr>
+
 <h3 id="typedef-find_grid_t">typedef find_grid_t</h3>
 <p><em>A tool to find the grid that is defined along the specified dimension (e.g. get</em> <a href="structGridX.html"><em><strong>GridX</strong></em></a> <em>from</em><a href="structX.html"><em><strong>X</strong></em></a> <em>)</em></p>
 <pre><code class="language-C++">using find_grid_t =  typename detail::FindGrid&lt;Dim, TypeSeqGrid&gt;::type;

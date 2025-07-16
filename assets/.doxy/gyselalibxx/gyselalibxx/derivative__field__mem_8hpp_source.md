@@ -149,7 +149,10 @@ private:
             }
         } else if constexpr (ddc::in_tags_v<QueryDDim, physical_deriv_grids>) {
             if constexpr (
-                    ArrayIndex & (1 << ddc::type_seq_rank_v<ddc::Deriv<QueryDDim>, deriv_tags>)) {
+                    ArrayIndex
+                    & (1 << ddc::type_seq_rank_v<
+                               ddc::Deriv<typename QueryDDim::continuous_dimension_type>,
+                               deriv_tags>)) {
                 IdxRangeSlice<QueryDDim> idx_range_local(base_type::m_cross_derivative_idx_range);
                 return idx_range_local.extents().value();
             } else {
@@ -201,9 +204,11 @@ public:
             ddc::StridedDiscreteDomain<DerivDoms>... m_deriv_idx_range)
         : base_type(
                 val_idx_range,
-                discrete_deriv_idx_range_type(IdxRange<ddc::Deriv<DerivDoms>>(
-                        Idx<ddc::Deriv<DerivDoms>>(1),
-                        IdxStep<ddc::Deriv<DerivDoms>>(NDerivs))...),
+                discrete_deriv_idx_range_type(
+                        IdxRange<ddc::Deriv<typename DerivDoms::continuous_dimension_type>>(
+                                Idx<ddc::Deriv<typename DerivDoms::continuous_dimension_type>>(1),
+                                IdxStep<ddc::Deriv<typename DerivDoms::continuous_dimension_type>>(
+                                        NDerivs))...),
                 to_subidx_range_collection<physical_deriv_grids>(m_deriv_idx_range...))
     {
         static_assert(

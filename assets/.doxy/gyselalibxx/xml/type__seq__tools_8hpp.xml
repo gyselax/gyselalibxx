@@ -2,689 +2,708 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="type__seq__tools_8hpp" kind="file" language="C++">
     <compoundname>type_seq_tools.hpp</compoundname>
+    <includedby refid="derivative__field__common_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp</includedby>
     <includedby refid="static__tensors_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp</includedby>
     <includedby refid="tensor__index__tools_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp</includedby>
     <includedby refid="ipartial__derivative_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp</includedby>
     <includedby refid="transpose_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/transpose.hpp</includedby>
     <invincdepgraph>
-      <node id="63">
+      <node id="66">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp</label>
         <link refid="bsl__advection__1d_8hpp_source"/>
-        <childnode refid="49" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
       </node>
-      <node id="7">
+      <node id="10">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp</label>
         <link refid="bsl__advection__polar_8hpp_source"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
       </node>
-      <node id="47">
+      <node id="50">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/ipolar_foot_finder.hpp</label>
         <link refid="ipolar__foot__finder_8hpp_source"/>
-        <childnode refid="6" relation="include">
-        </childnode>
-      </node>
-      <node id="6">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp</label>
-        <link refid="spline__polar__foot__finder_8hpp_source"/>
-        <childnode refid="7" relation="include">
-        </childnode>
         <childnode refid="9" relation="include">
         </childnode>
+      </node>
+      <node id="9">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp</label>
+        <link refid="spline__polar__foot__finder_8hpp_source"/>
         <childnode refid="10" relation="include">
         </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
       </node>
-      <node id="34">
+      <node id="37">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/barycentric_to_cartesian.hpp</label>
         <link refid="barycentric__to__cartesian_8hpp_source"/>
       </node>
-      <node id="35">
+      <node id="38">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_barycentric.hpp</label>
         <link refid="cartesian__to__barycentric_8hpp_source"/>
-        <childnode refid="25" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="29">
+      <node id="32">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_circular.hpp</label>
         <link refid="cartesian__to__circular_8hpp_source"/>
-        <childnode refid="13" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="30" relation="include">
+        <childnode refid="33" relation="include">
         </childnode>
       </node>
-      <node id="31">
+      <node id="34">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp</label>
         <link refid="cartesian__to__cylindrical_8hpp_source"/>
       </node>
-      <node id="36">
+      <node id="39">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_czarny.hpp</label>
         <link refid="cartesian__to__czarny_8hpp_source"/>
       </node>
-      <node id="32">
+      <node id="35">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/circular_to_cartesian.hpp</label>
         <link refid="circular__to__cartesian_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp</label>
+        <link refid="combined__mapping_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp</label>
+        <link refid="coord__transformation__tools_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cylindrical_to_cartesian.hpp</label>
+        <link refid="cylindrical__to__cartesian_8hpp_source"/>
+      </node>
+      <node id="41">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp</label>
+        <link refid="czarny__to__cartesian_8hpp_source"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping_builder.hpp</label>
+        <link refid="discrete__mapping__builder_8hpp_source"/>
+      </node>
+      <node id="14">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp</label>
+        <link refid="discrete__to__cartesian_8hpp_source"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp</label>
+        <link refid="inv__jacobian__o__point_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inverse_jacobian_matrix.hpp</label>
+        <link refid="inverse__jacobian__matrix_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp</label>
+        <link refid="metric__tensor__evaluator_8hpp_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="30" relation="include">
+      </node>
+      <node id="27">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp</label>
+        <link refid="toroidal__to__cylindrical_8hpp_source"/>
+      </node>
+      <node id="21">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp</label>
+        <link refid="vector__mapper_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp</label>
+        <link refid="derivative__field_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp</label>
+        <link refid="derivative__field__common_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp</label>
+        <link refid="derivative__field__mem_8hpp_source"/>
+      </node>
+      <node id="30">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp</label>
+        <link refid="indexed__tensor_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
       <node id="5">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp</label>
-        <link refid="combined__mapping_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp</label>
+        <link refid="static__tensors_8hpp_source"/>
         <childnode refid="6" relation="include">
         </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
       </node>
-      <node id="33">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp</label>
-        <link refid="coord__transformation__tools_8hpp_source"/>
-        <childnode refid="6" relation="include">
+      <node id="31">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp</label>
+        <link refid="tensor_8hpp_source"/>
+        <childnode refid="32" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
-        </childnode>
-        <childnode refid="31" relation="include">
-        </childnode>
         <childnode refid="36" relation="include">
         </childnode>
-        <childnode refid="32" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="37" relation="include">
-        </childnode>
-        <childnode refid="38" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="39" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="43" relation="include">
-        </childnode>
-      </node>
-      <node id="37">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cylindrical_to_cartesian.hpp</label>
-        <link refid="cylindrical__to__cartesian_8hpp_source"/>
-      </node>
-      <node id="38">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp</label>
-        <link refid="czarny__to__cartesian_8hpp_source"/>
-        <childnode refid="13" relation="include">
-        </childnode>
-      </node>
-      <node id="12">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping_builder.hpp</label>
-        <link refid="discrete__mapping__builder_8hpp_source"/>
-      </node>
-      <node id="11">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp</label>
-        <link refid="discrete__to__cartesian_8hpp_source"/>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-      </node>
-      <node id="13">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp</label>
-        <link refid="inv__jacobian__o__point_8hpp_source"/>
-        <childnode refid="5" relation="include">
-        </childnode>
-      </node>
-      <node id="16">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inverse_jacobian_matrix.hpp</label>
-        <link refid="inverse__jacobian__matrix_8hpp_source"/>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="24" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-      </node>
-      <node id="17">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp</label>
-        <link refid="metric__tensor__evaluator_8hpp_source"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-      </node>
-      <node id="24">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp</label>
-        <link refid="toroidal__to__cylindrical_8hpp_source"/>
-      </node>
-      <node id="18">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/vector_mapper.hpp</label>
-        <link refid="vector__mapper_8hpp_source"/>
-        <childnode refid="6" relation="include">
-        </childnode>
-      </node>
-      <node id="27">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/indexed_tensor.hpp</label>
-        <link refid="indexed__tensor_8hpp"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-      </node>
-      <node id="2">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp</label>
-        <link refid="static__tensors_8hpp_source"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-      </node>
-      <node id="28">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp</label>
-        <link refid="tensor_8hpp_source"/>
-        <childnode refid="29" relation="include">
-        </childnode>
-        <childnode refid="31" relation="include">
-        </childnode>
-        <childnode refid="32" relation="include">
-        </childnode>
-        <childnode refid="33" relation="include">
-        </childnode>
-        <childnode refid="37" relation="include">
-        </childnode>
-        <childnode refid="38" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="27" relation="include">
-        </childnode>
-        <childnode refid="44" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-      </node>
-      <node id="76">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp</label>
-        <link refid="tensor__common_8hpp_source"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="28" relation="include">
-        </childnode>
-      </node>
-      <node id="26">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp</label>
-        <link refid="tensor__index__tools_8hpp_source"/>
-        <childnode refid="27" relation="include">
-        </childnode>
-        <childnode refid="28" relation="include">
-        </childnode>
-        <childnode refid="76" relation="include">
-        </childnode>
-      </node>
-      <node id="46">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp</label>
-        <link refid="vector__field_8hpp_source"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="47" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="48" relation="include">
-        </childnode>
-        <childnode refid="49" relation="include">
-        </childnode>
-        <childnode refid="50" relation="include">
-        </childnode>
-        <childnode refid="51" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="54" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="57" relation="include">
-        </childnode>
-        <childnode refid="71" relation="include">
-        </childnode>
-      </node>
-      <node id="44">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp</label>
-        <link refid="vector__field__common_8hpp_source"/>
-        <childnode refid="45" relation="include">
-        </childnode>
-        <childnode refid="56" relation="include">
-        </childnode>
-        <childnode refid="64" relation="include">
-        </childnode>
-        <childnode refid="65" relation="include">
-        </childnode>
-        <childnode refid="66" relation="include">
-        </childnode>
-        <childnode refid="67" relation="include">
-        </childnode>
-      </node>
-      <node id="45">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp</label>
-        <link refid="vector__field__mem_8hpp_source"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="46" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="48" relation="include">
-        </childnode>
-        <childnode refid="49" relation="include">
-        </childnode>
-        <childnode refid="50" relation="include">
-        </childnode>
-        <childnode refid="57" relation="include">
-        </childnode>
-      </node>
-      <node id="19">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp</label>
-        <link refid="advection__field__rtheta_8hpp_source"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-      </node>
-      <node id="15">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp</label>
-        <link refid="geometryRTheta_2geometry_2geometry_8hpp_source"/>
-      </node>
-      <node id="22">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp</label>
-        <link refid="vortex__merger__equilibrium_8hpp_source"/>
-        <childnode refid="23" relation="include">
-        </childnode>
-      </node>
-      <node id="23">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp</label>
-        <link refid="vortex__merger__initialisation_8hpp_source"/>
-      </node>
-      <node id="8">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp</label>
-        <link refid="bsl__predcorr_8hpp_source"/>
-      </node>
-      <node id="9">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_explicit.hpp</label>
-        <link refid="bsl__predcorr__second__order__explicit_8hpp_source"/>
-      </node>
-      <node id="10">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp</label>
-        <link refid="bsl__predcorr__second__order__implicit_8hpp_source"/>
-      </node>
-      <node id="72">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp</label>
-        <link refid="geometryXVx_2poisson_2qnsolver_8hpp_source"/>
-      </node>
-      <node id="48">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp</label>
-        <link refid="geometryXY_2geometry_2geometry_8hpp_source"/>
-      </node>
-      <node id="49">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp</label>
-        <link refid="predcorr__RK2_8hpp_source"/>
-      </node>
-      <node id="50">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp</label>
-        <link refid="geometryXYVxVy_2geometry_2geometry_8hpp_source"/>
-      </node>
-      <node id="73">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp</label>
-        <link refid="geometryXYVxVy_2poisson_2qnsolver_8hpp_source"/>
-      </node>
-      <node id="84">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/mpisplitvlasovsolver.hpp</label>
-        <link refid="mpisplitvlasovsolver_8hpp_source"/>
-      </node>
-      <node id="30">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp</label>
-        <link refid="gyroaverage__operator_8hpp_source"/>
-      </node>
-      <node id="25">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</label>
-        <link refid="bernstein_8hpp_source"/>
-        <childnode refid="14" relation="include">
-        </childnode>
-      </node>
-      <node id="14">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp</label>
-        <link refid="polar__bsplines_8hpp_source"/>
-        <childnode refid="15" relation="include">
-        </childnode>
-      </node>
-      <node id="52">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.hpp</label>
-        <link refid="input_8hpp_source"/>
-      </node>
-      <node id="51">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/pdi_helper.hpp</label>
-        <link refid="pdi__helper_8hpp_source"/>
-        <childnode refid="52" relation="include">
-        </childnode>
-        <childnode refid="53" relation="include">
-        </childnode>
-      </node>
-      <node id="78">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp</label>
-        <link refid="central__fdm__partial__derivatives_8hpp_source"/>
-      </node>
-      <node id="79">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp</label>
-        <link refid="central__fdm__partial__derivatives__with__boundary__values_8hpp_source"/>
-      </node>
-      <node id="20">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp</label>
-        <link refid="gradient_8hpp_source"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-      </node>
-      <node id="77">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp</label>
-        <link refid="ipartial__derivative_8hpp_source"/>
-        <childnode refid="78" relation="include">
-        </childnode>
-        <childnode refid="79" relation="include">
-        </childnode>
-        <childnode refid="80" relation="include">
-        </childnode>
-        <childnode refid="81" relation="include">
-        </childnode>
-      </node>
-      <node id="54">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/l_norm_tools.hpp</label>
-        <link refid="l__norm__tools_8hpp"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="49" relation="include">
-        </childnode>
-        <childnode refid="55" relation="include">
-        </childnode>
-        <childnode refid="56" relation="include">
-        </childnode>
-      </node>
-      <node id="3">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp</label>
-        <link refid="lie__poisson__bracket_8hpp_source"/>
-      </node>
-      <node id="4">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp</label>
-        <link refid="math__tools_8hpp_source"/>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="25" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-      </node>
-      <node id="80">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp</label>
-        <link refid="spline__1d__partial__derivative_8hpp_source"/>
-      </node>
-      <node id="81">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp</label>
-        <link refid="spline__2d__partial__derivative_8hpp_source"/>
-      </node>
-      <node id="83">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp</label>
-        <link refid="mpitransposealltoall_8hpp_source"/>
-        <childnode refid="84" relation="include">
-        </childnode>
-      </node>
-      <node id="59">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp</label>
-        <link refid="connectivity_8hpp_source"/>
-      </node>
-      <node id="39">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/onion_patch_locator.hpp</label>
-        <link refid="onion__patch__locator_8hpp_source"/>
         <childnode refid="40" relation="include">
         </childnode>
         <childnode refid="41" relation="include">
         </childnode>
-      </node>
-      <node id="40">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/utils_patch_locators.hpp</label>
-        <link refid="utils__patch__locators_8hpp_source"/>
-        <childnode refid="41" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="42" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
-      </node>
-      <node id="60">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp</label>
-        <link refid="multipatch__field_8hpp_source"/>
-        <childnode refid="61" relation="include">
+        <childnode refid="30" relation="include">
         </childnode>
-        <childnode refid="41" relation="include">
+        <childnode refid="47" relation="include">
         </childnode>
-        <childnode refid="55" relation="include">
-        </childnode>
-        <childnode refid="62" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="61">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp</label>
-        <link refid="multipatch__field__mem_8hpp_source"/>
-        <childnode refid="62" relation="include">
+      <node id="79">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp</label>
+        <link refid="tensor__common_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="58">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_type.hpp</label>
-        <link refid="multipatch__type_8hpp_source"/>
-        <childnode refid="59" relation="include">
+      <node id="29">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp</label>
+        <link refid="tensor__index__tools_8hpp_source"/>
+        <childnode refid="30" relation="include">
         </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field.hpp</label>
+        <link refid="vector__field_8hpp_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="60" relation="include">
         </childnode>
-        <childnode refid="61" relation="include">
+        <childnode refid="74" relation="include">
         </childnode>
-        <childnode refid="41" relation="include">
+      </node>
+      <node id="47">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_common.hpp</label>
+        <link refid="vector__field__common_8hpp_source"/>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
         </childnode>
         <childnode refid="68" relation="include">
         </childnode>
         <childnode refid="69" relation="include">
         </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp</label>
+        <link refid="vector__field__mem_8hpp_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp</label>
+        <link refid="advection__field__rtheta_8hpp_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp</label>
+        <link refid="geometryRTheta_2geometry_2geometry_8hpp_source"/>
+      </node>
+      <node id="25">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp</label>
+        <link refid="vortex__merger__equilibrium_8hpp_source"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp</label>
+        <link refid="vortex__merger__initialisation_8hpp_source"/>
+      </node>
+      <node id="11">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp</label>
+        <link refid="bsl__predcorr_8hpp_source"/>
+      </node>
+      <node id="12">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_explicit.hpp</label>
+        <link refid="bsl__predcorr__second__order__explicit_8hpp_source"/>
+      </node>
+      <node id="13">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp</label>
+        <link refid="bsl__predcorr__second__order__implicit_8hpp_source"/>
+      </node>
+      <node id="75">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp</label>
+        <link refid="geometryXVx_2poisson_2qnsolver_8hpp_source"/>
+      </node>
+      <node id="51">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp</label>
+        <link refid="geometryXY_2geometry_2geometry_8hpp_source"/>
+      </node>
+      <node id="52">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp</label>
+        <link refid="predcorr__RK2_8hpp_source"/>
+      </node>
+      <node id="53">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp</label>
+        <link refid="geometryXYVxVy_2geometry_2geometry_8hpp_source"/>
+      </node>
+      <node id="76">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp</label>
+        <link refid="geometryXYVxVy_2poisson_2qnsolver_8hpp_source"/>
+      </node>
+      <node id="87">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/mpisplitvlasovsolver.hpp</label>
+        <link refid="mpisplitvlasovsolver_8hpp_source"/>
+      </node>
+      <node id="33">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp</label>
+        <link refid="gyroaverage__operator_8hpp_source"/>
+      </node>
+      <node id="28">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</label>
+        <link refid="bernstein_8hpp_source"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp</label>
+        <link refid="polar__bsplines_8hpp_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.hpp</label>
+        <link refid="input_8hpp_source"/>
+      </node>
+      <node id="54">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/pdi_helper.hpp</label>
+        <link refid="pdi__helper_8hpp_source"/>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+      </node>
+      <node id="81">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp</label>
+        <link refid="central__fdm__partial__derivatives_8hpp_source"/>
+      </node>
+      <node id="82">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives_with_boundary_values.hpp</label>
+        <link refid="central__fdm__partial__derivatives__with__boundary__values_8hpp_source"/>
+      </node>
+      <node id="23">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient.hpp</label>
+        <link refid="gradient_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp</label>
+        <link refid="ipartial__derivative_8hpp_source"/>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+      </node>
+      <node id="57">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/l_norm_tools.hpp</label>
+        <link refid="l__norm__tools_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp</label>
+        <link refid="lie__poisson__bracket_8hpp_source"/>
+      </node>
+      <node id="7">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp</label>
+        <link refid="math__tools_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="83">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp</label>
+        <link refid="spline__1d__partial__derivative_8hpp_source"/>
+      </node>
+      <node id="84">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp</label>
+        <link refid="spline__2d__partial__derivative_8hpp_source"/>
+      </node>
+      <node id="86">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp</label>
+        <link refid="mpitransposealltoall_8hpp_source"/>
+        <childnode refid="87" relation="include">
+        </childnode>
+      </node>
+      <node id="62">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp</label>
+        <link refid="connectivity_8hpp_source"/>
+      </node>
+      <node id="42">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/onion_patch_locator.hpp</label>
+        <link refid="onion__patch__locator_8hpp_source"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/utils_patch_locators.hpp</label>
+        <link refid="utils__patch__locators_8hpp_source"/>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp</label>
+        <link refid="multipatch__field_8hpp_source"/>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+      </node>
+      <node id="64">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp</label>
+        <link refid="multipatch__field__mem_8hpp_source"/>
+        <childnode refid="65" relation="include">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_type.hpp</label>
+        <link refid="multipatch__type_8hpp_source"/>
+        <childnode refid="62" relation="include">
+        </childnode>
         <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+      </node>
+      <node id="60">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp</label>
+        <link refid="types_8hpp_source"/>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</label>
+        <link refid="constant__extrapolation__rules__onion_8hpp_source"/>
+      </node>
+      <node id="71">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp</label>
+        <link refid="multipatch__spline__builder_8hpp_source"/>
+      </node>
+      <node id="72">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp</label>
+        <link refid="multipatch__spline__builder__2d_8hpp_source"/>
+      </node>
+      <node id="45">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp</label>
+        <link refid="multipatch__spline__evaluator__2d_8hpp_source"/>
+      </node>
+      <node id="73">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/null_extrapolation_rules.hpp</label>
+        <link refid="null__extrapolation__rules_8hpp_source"/>
+      </node>
+      <node id="58">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/utils/multipatch_math_tools.hpp</label>
+        <link refid="multipatch__math__tools_8hpp_source"/>
+        <childnode refid="59" relation="include">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp</label>
+        <link refid="fem__1d__poisson__solver_8hpp_source"/>
+      </node>
+      <node id="78">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp</label>
+        <link refid="fft__poisson__solver_8hpp_source"/>
+      </node>
+      <node id="74">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp</label>
+        <link refid="ipoisson__solver_8hpp_source"/>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</label>
+        <link refid="polarpoissonlikesolver_8hpp_source"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/volume_quadrature_nd.hpp</label>
+        <link refid="volume__quadrature__nd_8hpp"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="56">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.hpp</label>
+        <link refid="species__init_8hpp_source"/>
+      </node>
+      <node id="59">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp</label>
+        <link refid="crank__nicolson_8hpp_source"/>
+      </node>
+      <node id="67">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/euler.hpp</label>
+        <link refid="euler_8hpp_source"/>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp</label>
+        <link refid="itimestepper_8hpp_source"/>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
         </childnode>
         <childnode refid="70" relation="include">
         </childnode>
       </node>
-      <node id="57">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp</label>
-        <link refid="types_8hpp_source"/>
-        <childnode refid="39" relation="include">
-        </childnode>
-        <childnode refid="58" relation="include">
-        </childnode>
-        <childnode refid="42" relation="include">
-        </childnode>
-      </node>
-      <node id="41">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</label>
-        <link refid="constant__extrapolation__rules__onion_8hpp_source"/>
-      </node>
       <node id="68">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp</label>
-        <link refid="multipatch__spline__builder_8hpp_source"/>
-      </node>
-      <node id="69">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder_2d.hpp</label>
-        <link refid="multipatch__spline__builder__2d_8hpp_source"/>
-      </node>
-      <node id="42">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp</label>
-        <link refid="multipatch__spline__evaluator__2d_8hpp_source"/>
-      </node>
-      <node id="70">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/null_extrapolation_rules.hpp</label>
-        <link refid="null__extrapolation__rules_8hpp_source"/>
-      </node>
-      <node id="55">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/utils/multipatch_math_tools.hpp</label>
-        <link refid="multipatch__math__tools_8hpp_source"/>
-        <childnode refid="56" relation="include">
-        </childnode>
-      </node>
-      <node id="74">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp</label>
-        <link refid="fem__1d__poisson__solver_8hpp_source"/>
-      </node>
-      <node id="75">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp</label>
-        <link refid="fft__poisson__solver_8hpp_source"/>
-      </node>
-      <node id="71">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp</label>
-        <link refid="ipoisson__solver_8hpp_source"/>
-        <childnode refid="72" relation="include">
-        </childnode>
-        <childnode refid="73" relation="include">
-        </childnode>
-        <childnode refid="74" relation="include">
-        </childnode>
-        <childnode refid="75" relation="include">
-        </childnode>
-      </node>
-      <node id="21">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</label>
-        <link refid="polarpoissonlikesolver_8hpp_source"/>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-      </node>
-      <node id="43">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/volume_quadrature_nd.hpp</label>
-        <link refid="volume__quadrature__nd_8hpp"/>
-        <childnode refid="21" relation="include">
-        </childnode>
-      </node>
-      <node id="53">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.hpp</label>
-        <link refid="species__init_8hpp_source"/>
-      </node>
-      <node id="56">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp</label>
-        <link refid="crank__nicolson_8hpp_source"/>
-      </node>
-      <node id="64">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/euler.hpp</label>
-        <link refid="euler_8hpp_source"/>
-        <childnode refid="63" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-      </node>
-      <node id="62">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp</label>
-        <link refid="itimestepper_8hpp_source"/>
-        <childnode refid="63" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="56" relation="include">
-        </childnode>
-        <childnode refid="64" relation="include">
-        </childnode>
-        <childnode refid="65" relation="include">
-        </childnode>
-        <childnode refid="66" relation="include">
-        </childnode>
-        <childnode refid="67" relation="include">
-        </childnode>
-      </node>
-      <node id="65">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk2.hpp</label>
         <link refid="rk2_8hpp_source"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
       </node>
-      <node id="66">
+      <node id="69">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk3.hpp</label>
         <link refid="rk3_8hpp_source"/>
       </node>
-      <node id="67">
+      <node id="70">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp</label>
         <link refid="rk4_8hpp_source"/>
       </node>
-      <node id="82">
+      <node id="85">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/transpose.hpp</label>
         <link refid="transpose_8hpp_source"/>
-        <childnode refid="83" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -692,11 +711,13 @@
         <link refid="type__seq__tools_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="26" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="77" relation="include">
+        <childnode refid="29" relation="include">
         </childnode>
-        <childnode refid="82" relation="include">
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -728,7 +749,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="190" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="190" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="199" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="199" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1aa14f1774e052704c69d90ca494bdb8f6" prot="public" static="no">
         <templateparamlist>
@@ -759,7 +780,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="198" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="198" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="207" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="207" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1ac95562d656c2ae2f82f9bc55881627f6" prot="public" static="no">
         <templateparamlist>
@@ -781,7 +802,29 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="202" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="202" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="211" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="211" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="type__seq__tools_8hpp_1a615b7cea587ca44ef9143e8fce9e9f49" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class TypeSeqDim</type>
+          </param>
+          <param>
+            <type>class TypeSeqGrid</type>
+          </param>
+        </templateparamlist>
+        <type>typename detail::FindAllGrids&lt; TypeSeqDim, TypeSeqGrid &gt;::type</type>
+        <definition>using find_all_grids_t =  typename detail::FindAllGrids&lt;TypeSeqDim, TypeSeqGrid&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>find_all_grids_t</name>
+        <briefdescription>
+<para>A tool to find the a sequence of grids that are defined along the specified dimensions (e.g. get <ref refid="structGridX" kindref="compound">GridX</ref> from <ref refid="structX" kindref="compound">X</ref>) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="215" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="215" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1a77a5e0ba78f573fcf19e118cc8d08b61" prot="public" static="no">
         <templateparamlist>
@@ -810,7 +853,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="209" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="209" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="222" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="222" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1a8d61e6a1acbf461eacb2729f96286f58" prot="public" static="no">
         <templateparamlist>
@@ -852,7 +895,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="235" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="236" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="248" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="249" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1add882d1d787f328ab85f39c86132221b" prot="public" static="no">
         <templateparamlist>
@@ -892,7 +935,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="244" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="244" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="257" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="257" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -924,7 +967,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="216" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="217" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="229" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="230" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="type__seq__tools_8hpp_1ae2b505ec732fa7a34361c329e7d1e66b" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -973,7 +1016,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="226" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="227" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="239" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="240" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1047,153 +1090,165 @@
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>void;</highlight></codeline>
 <codeline lineno="65"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"></highlight></codeline>
-<codeline lineno="67"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>CoordType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeType&gt;</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">FindIdxType;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqDims,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqGr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">s&gt;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">FindAllGrids;</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"></highlight></codeline>
-<codeline lineno="70"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">IdxRangeType&gt;</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">FindIdxType&lt;Coord&lt;Dims...&gt;,<sp/>IdxRangeType&gt;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TypeSeqDims,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TypeSeqGrids&gt;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">FindAllGrids&lt;ddc::detail::TypeSeq&lt;TypeSeqDims...&gt;,<sp/>TypeSeqGrids&gt;</highlight></codeline>
 <codeline lineno="72"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>Idx&lt;typename<sp/>FindGrid&lt;Dims,<sp/>ddc::to_type_seq_t&lt;IdxRangeType&gt;&gt;::type...&gt;;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>ddc::detail::TypeSeq&lt;typename<sp/>FindGrid&lt;TypeSeqDims,<sp/>TypeSeqGrids&gt;::type...&gt;;</highlight></codeline>
 <codeline lineno="74"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="75"><highlight class="normal"></highlight></codeline>
-<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TypeSeqs&gt;</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqCat;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>CoordType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeType&gt;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">FindIdxType;</highlight></codeline>
 <codeline lineno="78"><highlight class="normal"></highlight></codeline>
-<codeline lineno="79"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>First,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Second,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailTypeSeqs&gt;</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqCat&lt;ddc::detail::TypeSeq&lt;First...&gt;,<sp/>ddc::detail::TypeSeq&lt;Second...&gt;,<sp/>TailTypeSeqs...&gt;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Dims,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">IdxRangeType&gt;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">FindIdxType&lt;Coord&lt;Dims...&gt;,<sp/>IdxRangeType&gt;</highlight></codeline>
 <codeline lineno="81"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TypeSeqCat&lt;ddc::detail::TypeSeq&lt;First...,<sp/>Second...&gt;,<sp/>TailTypeSeqs...&gt;::type;</highlight></codeline>
-<codeline lineno="84"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"></highlight></codeline>
-<codeline lineno="86"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>First,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Second&gt;</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqCat&lt;ddc::detail::TypeSeq&lt;First...&gt;,<sp/>ddc::detail::TypeSeq&lt;Second...&gt;&gt;</highlight></codeline>
-<codeline lineno="88"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>ddc::detail::TypeSeq&lt;First...,<sp/>Second...&gt;;</highlight></codeline>
-<codeline lineno="90"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"></highlight></codeline>
-<codeline lineno="92"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>StartTypeSeq,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ResultTypeSeq<sp/>=<sp/>ddc::detail::TypeSeq&lt;&gt;&gt;</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetUnique;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>Idx&lt;typename<sp/>FindGrid&lt;Dims,<sp/>ddc::to_type_seq_t&lt;IdxRangeType&gt;&gt;::type...&gt;;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TypeSeqs&gt;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqCat;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>First,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Second,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailTypeSeqs&gt;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqCat&lt;ddc::detail::TypeSeq&lt;First...&gt;,<sp/>ddc::detail::TypeSeq&lt;Second...&gt;,<sp/>TailTypeSeqs...&gt;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TypeSeqCat&lt;ddc::detail::TypeSeq&lt;First...,<sp/>Second...&gt;,<sp/>TailTypeSeqs...&gt;::type;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="94"><highlight class="normal"></highlight></codeline>
-<codeline lineno="95"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HeadElem,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailElems,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ResultElems&gt;</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetUnique&lt;ddc::detail::TypeSeq&lt;HeadElem,<sp/>TailElems...&gt;,<sp/>ddc::detail::TypeSeq&lt;ResultElems...&gt;&gt;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>First,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Second&gt;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqCat&lt;ddc::detail::TypeSeq&lt;First...&gt;,<sp/>ddc::detail::TypeSeq&lt;Second...&gt;&gt;</highlight></codeline>
 <codeline lineno="97"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>GetUnique&lt;</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailElems...&gt;,</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::conditional_t&lt;</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::in_tags_v&lt;HeadElem,<sp/>ddc::detail::TypeSeq&lt;ResultElems...&gt;&gt;,</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;ResultElems...&gt;,</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;ResultElems...,<sp/>HeadElem&gt;&gt;&gt;::type;</highlight></codeline>
-<codeline lineno="104"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"></highlight></codeline>
-<codeline lineno="106"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ResultTypeSeq&gt;</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetUnique&lt;ddc::detail::TypeSeq&lt;&gt;,<sp/>ResultTypeSeq&gt;</highlight></codeline>
-<codeline lineno="108"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>ResultTypeSeq;</highlight></codeline>
-<codeline lineno="110"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"></highlight></codeline>
-<codeline lineno="112"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OrderedTypeSeqType&gt;</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>ddc::detail::TypeSeq&lt;First...,<sp/>Second...&gt;;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>StartTypeSeq,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ResultTypeSeq<sp/>=<sp/>ddc::detail::TypeSeq&lt;&gt;&gt;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetUnique;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HeadElem,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailElems,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ResultElems&gt;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetUnique&lt;ddc::detail::TypeSeq&lt;HeadElem,<sp/>TailElems...&gt;,<sp/>ddc::detail::TypeSeq&lt;ResultElems...&gt;&gt;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>GetUnique&lt;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailElems...&gt;,</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::conditional_t&lt;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::in_tags_v&lt;HeadElem,<sp/>ddc::detail::TypeSeq&lt;ResultElems...&gt;&gt;,</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;ResultElems...&gt;,</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;ResultElems...,<sp/>HeadElem&gt;&gt;&gt;::type;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="114"><highlight class="normal"></highlight></codeline>
-<codeline lineno="115"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HeadType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailTypeSeq,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailOrderedTypeSeq&gt;</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity&lt;</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;</highlight></codeline>
-<codeline lineno="119"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>contains_duplicate</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(!std::is_same_v&lt;</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailOrderedTypeSeq...&gt;,</highlight></codeline>
-<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
-<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;::type&gt;)</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>||<sp/>(!std::is_same_v&lt;</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;&gt;::type&gt;);</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"></highlight></codeline>
-<codeline lineno="131"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>value</highlight></codeline>
-<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>contains_duplicate<sp/>?<sp/>0</highlight></codeline>
-<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>GetPermutationParity&lt;</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailTypeSeq...&gt;,</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailOrderedTypeSeq...&gt;&gt;::value;</highlight></codeline>
-<codeline lineno="137"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="138"><highlight class="normal"></highlight></codeline>
-<codeline lineno="139"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HeadType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailTypeSeq,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">OrderedHeadType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailOrderedTypeSeq&gt;</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity&lt;</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;</highlight></codeline>
-<codeline lineno="143"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>contains_duplicate</highlight></codeline>
-<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(!std::is_same_v&lt;</highlight></codeline>
-<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType,<sp/>TailOrderedTypeSeq...&gt;,</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;::type&gt;)</highlight></codeline>
-<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>||<sp/>(!std::is_same_v&lt;</highlight></codeline>
-<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
-<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;&gt;::type&gt;);</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"></highlight></codeline>
-<codeline lineno="155"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>value</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>contains_duplicate<sp/>?<sp/>0</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>-GetPermutationParity&lt;</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::type_seq_replace_t&lt;</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailTypeSeq...&gt;,</highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType&gt;,</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType&gt;&gt;,</highlight></codeline>
-<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailOrderedTypeSeq...&gt;&gt;::value;</highlight></codeline>
-<codeline lineno="164"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="165"><highlight class="normal"></highlight></codeline>
-<codeline lineno="166"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;&gt;</highlight></codeline>
-<codeline lineno="167"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity&lt;ddc::detail::TypeSeq&lt;&gt;,<sp/>ddc::detail::TypeSeq&lt;&gt;&gt;</highlight></codeline>
-<codeline lineno="168"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>value<sp/>=<sp/>1;</highlight></codeline>
-<codeline lineno="170"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="171"><highlight class="normal"></highlight></codeline>
-<codeline lineno="172"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Element,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IndexSequence&gt;</highlight></codeline>
-<codeline lineno="173"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqDuplicate;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ResultTypeSeq&gt;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetUnique&lt;ddc::detail::TypeSeq&lt;&gt;,<sp/>ResultTypeSeq&gt;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>ResultTypeSeq;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OrderedTypeSeqType&gt;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HeadType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailTypeSeq,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailOrderedTypeSeq&gt;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity&lt;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>contains_duplicate</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(!std::is_same_v&lt;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailOrderedTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;::type&gt;)</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>||<sp/>(!std::is_same_v&lt;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;&gt;::type&gt;);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>value</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>contains_duplicate<sp/>?<sp/>0</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>GetPermutationParity&lt;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailOrderedTypeSeq...&gt;&gt;::value;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HeadType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailTypeSeq,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">OrderedHeadType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailOrderedTypeSeq&gt;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity&lt;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>contains_duplicate</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(!std::is_same_v&lt;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType,<sp/>TailOrderedTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType,<sp/>TailOrderedTypeSeq...&gt;&gt;::type&gt;)</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>||<sp/>(!std::is_same_v&lt;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType,<sp/>TailTypeSeq...&gt;&gt;::type&gt;);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>value</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>contains_duplicate<sp/>?<sp/>0</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>-GetPermutationParity&lt;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::type_seq_replace_t&lt;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailTypeSeq...&gt;,</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;OrderedHeadType&gt;,</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;HeadType&gt;&gt;,</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::detail::TypeSeq&lt;TailOrderedTypeSeq...&gt;&gt;::value;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="174"><highlight class="normal"></highlight></codeline>
-<codeline lineno="175"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Element,<sp/>std::size_t...<sp/>Is&gt;</highlight></codeline>
-<codeline lineno="176"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqDuplicate&lt;Element,<sp/>std::index_sequence&lt;Is...&gt;&gt;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;&gt;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">GetPermutationParity&lt;ddc::detail::TypeSeq&lt;&gt;,<sp/>ddc::detail::TypeSeq&lt;&gt;&gt;</highlight></codeline>
 <codeline lineno="177"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="178"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">&gt;</highlight></codeline>
-<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">get_element<sp/>=<sp/>Element;</highlight></codeline>
-<codeline lineno="181"><highlight class="normal"></highlight></codeline>
-<codeline lineno="182"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>ddc::detail::TypeSeq&lt;get_element&lt;Is&gt;...&gt;;</highlight></codeline>
-<codeline lineno="184"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="185"><highlight class="normal"></highlight></codeline>
-<codeline lineno="186"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>detail</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="187"><highlight class="normal"></highlight></codeline>
-<codeline lineno="189"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqIn,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Start,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>End&gt;</highlight></codeline>
-<codeline lineno="190"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_range_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqRange&lt;TypeSeqIn,<sp/>Start,<sp/>End,<sp/>Start&gt;::type;</highlight></codeline>
-<codeline lineno="191"><highlight class="normal"></highlight></codeline>
-<codeline lineno="197"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TypeSeqs&gt;</highlight></codeline>
-<codeline lineno="198"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_cat_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqCat&lt;TypeSeqs...&gt;::type;</highlight></codeline>
-<codeline lineno="199"><highlight class="normal"></highlight></codeline>
-<codeline lineno="201"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqGr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">&gt;</highlight></codeline>
-<codeline lineno="202"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_grid_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::FindGrid&lt;Dim,<sp/>TypeSeqGrid&gt;::type;</highlight></codeline>
-<codeline lineno="203"><highlight class="normal"></highlight></codeline>
-<codeline lineno="208"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>StartTypeSeq&gt;</highlight></codeline>
-<codeline lineno="209"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_unique_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;StartTypeSeq&gt;::type;</highlight></codeline>
-<codeline lineno="210"><highlight class="normal"></highlight></codeline>
-<codeline lineno="215"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType&gt;</highlight></codeline>
-<codeline lineno="216"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>type_seq_has_unique_elements_v</highlight></codeline>
-<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>std::is_same_v&lt;TypeSeqType,<sp/>type_seq_unique_t&lt;TypeSeqType&gt;&gt;;</highlight></codeline>
-<codeline lineno="218"><highlight class="normal"></highlight></codeline>
-<codeline lineno="225"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OrderedTypeSeq&gt;</highlight></codeline>
-<codeline lineno="226"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>type_seq_permutation_parity_v</highlight></codeline>
-<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>detail::GetPermutationParity&lt;TypeSeqType,<sp/>OrderedTypeSeq&gt;::value;</highlight></codeline>
-<codeline lineno="228"><highlight class="normal"></highlight></codeline>
-<codeline lineno="234"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Element,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>n_elements&gt;</highlight></codeline>
-<codeline lineno="235"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_duplicate_t<sp/>=</highlight></codeline>
-<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqDuplicate&lt;Element,<sp/>std::make_index_sequence&lt;n_elements&gt;&gt;::type;</highlight></codeline>
-<codeline lineno="237"><highlight class="normal"></highlight></codeline>
-<codeline lineno="243"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>CoordType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeType&gt;</highlight></codeline>
-<codeline lineno="244"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_idx_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::FindIdxType&lt;CoordType,<sp/>IdxRangeType&gt;::type;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>value<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Element,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IndexSequence&gt;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqDuplicate;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Element,<sp/>std::size_t...<sp/>Is&gt;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqDuplicate&lt;Element,<sp/>std::index_sequence&lt;Is...&gt;&gt;</highlight></codeline>
+<codeline lineno="186"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">get_element<sp/>=<sp/>Element;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>ddc::detail::TypeSeq&lt;get_element&lt;Is&gt;...&gt;;</highlight></codeline>
+<codeline lineno="193"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>detail</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqIn,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Start,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>End&gt;</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_range_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqRange&lt;TypeSeqIn,<sp/>Start,<sp/>End,<sp/>Start&gt;::type;</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TypeSeqs&gt;</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_cat_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqCat&lt;TypeSeqs...&gt;::type;</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqGr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_grid_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::FindGrid&lt;Dim,<sp/>TypeSeqGrid&gt;::type;</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqDim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqGr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_all_grids_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::FindAllGrids&lt;TypeSeqDim,<sp/>TypeSeqGrid&gt;::type;</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>StartTypeSeq&gt;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_unique_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;StartTypeSeq&gt;::type;</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType&gt;</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>type_seq_has_unique_elements_v</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>std::is_same_v&lt;TypeSeqType,<sp/>type_seq_unique_t&lt;TypeSeqType&gt;&gt;;</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OrderedTypeSeq&gt;</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>type_seq_permutation_parity_v</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>detail::GetPermutationParity&lt;TypeSeqType,<sp/>OrderedTypeSeq&gt;::value;</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Element,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>n_elements&gt;</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_duplicate_t<sp/>=</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqDuplicate&lt;Element,<sp/>std::make_index_sequence&lt;n_elements&gt;&gt;::type;</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>CoordType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeType&gt;</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_idx_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::FindIdxType&lt;CoordType,<sp/>IdxRangeType&gt;::type;</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp"/>
   </compounddef>

@@ -16,6 +16,7 @@
 * `#include "ddc_aliases.hpp"`
 * `#include "deriv_details.hpp"`
 * `#include "idx_range_slice.hpp"`
+* `#include "type_seq_tools.hpp"`
 
 
 

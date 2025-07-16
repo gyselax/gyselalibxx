@@ -560,6 +560,7 @@
 #include "ddc_aliases.hpp"
 #include "deriv_details.hpp"
 #include "idx_range_slice.hpp"
+#include "type_seq_tools.hpp"
 
 template &lt;class T&gt;
 inline constexpr bool enable_deriv_field = false;
@@ -587,7 +588,8 @@ public:
 
     using deriv_tags = detail::deriv_sub_set_t&lt;ddc::detail::TypeSeq&lt;DDims...&gt;&gt;;
 
-    using physical_deriv_grids = typename detail::strip_deriv_t&lt;deriv_tags&gt;;
+    using physical_deriv_grids
+            = find_all_grids_t&lt;detail::strip_deriv_t&lt;deriv_tags&gt;, ddc::detail::TypeSeq&lt;DDims...&gt;&gt;;
 
     using physical_grids = ddc::type_seq_remove_t&lt;ddc::detail::TypeSeq&lt;DDims...&gt;, deriv_tags&gt;;
 
@@ -672,7 +674,10 @@ protected:
             if constexpr (ddc::in_tags_v&lt;QueryDDim, physical_deriv_grids&gt;) {
                 // Physical dimension along which derivatives are known
                 // If information is available about the physical index range
-                if (array_idx &amp; (1 &lt;&lt; ddc::type_seq_rank_v&lt;ddc::Deriv&lt;QueryDDim&gt;, deriv_tags&gt;)) {
+                if (array_idx
+                    &amp; (1 &lt;&lt; ddc::type_seq_rank_v&lt;
+                               ddc::Deriv&lt;typename QueryDDim::continuous_dimension_type&gt;,
+                               deriv_tags&gt;)) {
                     // If the derivative is being requested
                     return get_index(ddc::select&lt;QueryDDim&gt;(slice_idx));
                 }
@@ -709,7 +714,10 @@ protected:
                 // Physical dimension along which derivatives are known
                 // If information is available about the physical index range
                 IdxRange&lt;QueryDDim&gt; idx_range_requested(slice_idx_range);
-                if (array_idx &amp; (1 &lt;&lt; ddc::type_seq_rank_v&lt;ddc::Deriv&lt;QueryDDim&gt;, deriv_tags&gt;)) {
+                if (array_idx
+                    &amp; (1 &lt;&lt; ddc::type_seq_rank_v&lt;
+                               ddc::Deriv&lt;typename QueryDDim::continuous_dimension_type&gt;,
+                               deriv_tags&gt;)) {
                     // If the derivative is being requested
                     assert(IdxRangeSlice&lt;QueryDDim&gt;(m_cross_derivative_idx_range)
                                    .contains(idx_range_requested.front())

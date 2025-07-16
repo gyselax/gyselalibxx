@@ -589,7 +589,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename base_type::physical_grids</td>
-<td style="text-align: left;"><a href="#typedef-physical_grids"><strong>physical_grids</strong></a>  <br><em>A type sequence containing all the physical dimensions on which the chunks are defined.</em></td>
+<td style="text-align: left;"><a href="#typedef-physical_grids"><strong>physical_grids</strong></a>  <br><em>A type sequence containing all the physical grids on which the fields are defined.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename base_type::physical_idx_range_type</td>
@@ -661,7 +661,7 @@
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>ElementType</code> The type of the elements inside the chunks. </li>
-<li><code>IdxRange&lt;DDims...&gt;</code> The index range on which the internal fields are defined. This index range is the physical index range on which the values are defined combined with the index range of the derivatives of interest (e.g. IdxRange&lt;Deriv&lt;IDimX&gt;, IDimX, IDimY&gt;). </li>
+<li><code>IdxRange&lt;DDims...&gt;</code> The index range on which the internal fields are defined. This index range is the physical index range on which the values are defined combined with the index range of the derivatives of interest (e.g. IdxRange&lt;Deriv&lt;X&gt;, <a href="structGridX.html"><strong>GridX</strong></a>, <a href="structGridY.html"><strong>GridY</strong></a>&gt;). </li>
 <li><code>NDerivs</code> The number of derivatives which are defined in the dimensions where derivatives appear. </li>
 <li><code>MemSpace</code> The memory space where the data will be saved. </li>
 </ul>
@@ -706,7 +706,7 @@
 <hr>
 
 <h3 id="typedef-physical_grids">typedef physical_grids</h3>
-<p><em>A type sequence containing all the physical dimensions on which the chunks are defined.</em> </p>
+<p><em>A type sequence containing all the physical grids on which the fields are defined.</em> </p>
 <pre><code class="language-C++">using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::physical_grids =  typename base_type::physical_grids;
 </code></pre>
 <hr>

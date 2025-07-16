@@ -591,12 +591,12 @@
 <td style="text-align: left;"><a href="#typedef-index_type"><strong>index_type</strong></a>  <br><em>The Idx which can be used to index this object.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef typename detail::strip_deriv_t&lt; <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-deriv_tags"><strong>deriv_tags</strong></a> &gt;</td>
+<td style="text-align: right;">typedef find_all_grids_t&lt; detail::strip_deriv_t&lt; <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-deriv_tags"><strong>deriv_tags</strong></a> &gt;, ddc::detail::TypeSeq&lt; DDims... &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-physical_deriv_grids"><strong>physical_deriv_grids</strong></a>  <br><em>A type sequence containing all physical dimensions for which derivatives are present in this object.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef ddc::type_seq_remove_t&lt; ddc::detail::TypeSeq&lt; DDims... &gt;, <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-deriv_tags"><strong>deriv_tags</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#typedef-physical_grids"><strong>physical_grids</strong></a>  <br><em>A type sequence containing all the physical dimensions on which the fields are defined.</em></td>
+<td style="text-align: left;"><a href="#typedef-physical_grids"><strong>physical_grids</strong></a>  <br><em>A type sequence containing all the physical grids on which the fields are defined.</em></td>
 </tr>
 </tbody>
 </table>
@@ -829,12 +829,12 @@
 
 <h3 id="typedef-physical_deriv_grids">typedef physical_deriv_grids</h3>
 <p><em>A type sequence containing all physical dimensions for which derivatives are present in this object.</em> </p>
-<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::physical_deriv_grids =  typename detail::strip_deriv_t&lt;deriv_tags&gt;;
+<pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::physical_deriv_grids =  find_all_grids_t&lt;detail::strip_deriv_t&lt;deriv_tags&gt;, ddc::detail::TypeSeq&lt;DDims...&gt; &gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-physical_grids">typedef physical_grids</h3>
-<p><em>A type sequence containing all the physical dimensions on which the fields are defined.</em> </p>
+<p><em>A type sequence containing all the physical grids on which the fields are defined.</em> </p>
 <pre><code class="language-C++">using DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::physical_grids =  ddc::type_seq_remove_t&lt;ddc::detail::TypeSeq&lt;DDims...&gt;, deriv_tags&gt;;
 </code></pre>
 <hr>
@@ -1003,7 +1003,7 @@ inline KOKKOS_FUNCTION constexpr auto DerivFieldCommon&lt; FieldType, IdxRange&l
 <p><em>The internal fields describing the values and derivatives.</em> </p>
 <pre><code class="language-C++">std::array&lt;internal_mdspan_type, n_fields&gt; DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::internal_fields;
 </code></pre>
-<p>The fields which contain the values have different index ranges to the fields containing derivatives so a DDC object cannot be used directly. E.g. for a 2D field (<a href="structX.html"><strong>X</strong></a>,<a href="structY.html"><strong>Y</strong></a>) with derivatives provided in both directions the elements of internal_fields have the type : DFieldMem&lt;IdxRange&lt;Deriv&lt;IDimX&gt;, Deriv&lt;IDimY&gt;, IDimX, IDimY&gt; The derivative index ranges are then defined such that the elements of internal_fields represent: 0 : <span class="arithmatex">\(f(x,y)\)</span> 1 : <span class="arithmatex">\(\partial_x^k f(x,y)  \quad \forall 1 \leq k \leq NDerivs\)</span> 2 : <span class="arithmatex">\(\partial_y^k f(x,y)  \quad \forall 1 \leq k \leq NDerivs\)</span> 3 : <span class="arithmatex">\(\partial_x^j \partial_y^k f(x,y)  \quad \forall 1 \leq j \leq NDerivs,  \forall 1 \leq k \leq NDerivs\)</span> </p>
+<p>The fields which contain the values have different index ranges to the fields containing derivatives so a DDC object cannot be used directly. E.g. for a 2D field (<a href="structX.html"><strong>X</strong></a>,<a href="structY.html"><strong>Y</strong></a>) with derivatives provided in both directions the elements of internal_fields have the type : DFieldMem&lt;IdxRange&lt;Deriv&lt;X&gt;, Deriv&lt;Y&gt;, <a href="structGridX.html"><strong>GridX</strong></a>, <a href="structGridY.html"><strong>GridY</strong></a>&gt;&gt; The derivative index ranges are then defined such that the elements of internal_fields represent: 0 : <span class="arithmatex">\(f(x,y)\)</span> 1 : <span class="arithmatex">\(\partial_x^k f(x,y)  \quad \forall 1 \leq k \leq NDerivs\)</span> 2 : <span class="arithmatex">\(\partial_y^k f(x,y)  \quad \forall 1 \leq k \leq NDerivs\)</span> 3 : <span class="arithmatex">\(\partial_x^j \partial_y^k f(x,y)  \quad \forall 1 \leq j \leq NDerivs,  \forall 1 \leq k \leq NDerivs\)</span> </p>
 <hr>
 
 <h3 id="variable-m_cross_derivative_idx_range">variable m_cross_derivative_idx_range</h3>

@@ -31,6 +31,7 @@
 
 | Type | Name |
 | ---: | :--- |
+| typedef typename detail::FindAllGrids&lt; TypeSeqDim, TypeSeqGrid &gt;::type | [**find\_all\_grids\_t**](#typedef-find_all_grids_t)  <br>_A tool to find the a sequence of grids that are defined along the specified dimensions (e.g. get_ [_**GridX**_](structGridX.md) _from_[_**X**_](structX.md) _)_ |
 | typedef typename detail::FindGrid&lt; Dim, TypeSeqGrid &gt;::type | [**find\_grid\_t**](#typedef-find_grid_t)  <br>_A tool to find the grid that is defined along the specified dimension (e.g. get_ [_**GridX**_](structGridX.md) _from_[_**X**_](structX.md) _)_ |
 | typedef typename detail::FindIdxType&lt; CoordType, IdxRangeType &gt;::type | [**find\_idx\_t**](#typedef-find_idx_t)  <br>_Find the type of an index which allows access to a Coordinate of the specified type._  |
 | typedef typename detail::TypeSeqCat&lt; TypeSeqs... &gt;::type | [**type\_seq\_cat\_t**](#typedef-type_seq_cat_t)  <br>_Concatenate type sequences into a new type sequence. This is similar to type\_seq\_merge\_t but it does not remove duplicate elements._  |
@@ -93,6 +94,20 @@
 
 ## Public Types Documentation
 
+
+
+
+### typedef find\_all\_grids\_t 
+
+_A tool to find the a sequence of grids that are defined along the specified dimensions (e.g. get_ [_**GridX**_](structGridX.md) _from_[_**X**_](structX.md) _)_
+```C++
+using find_all_grids_t =  typename detail::FindAllGrids<TypeSeqDim, TypeSeqGrid>::type;
+```
+
+
+
+
+<hr>
 
 
 

@@ -19,6 +19,7 @@
 #include "ddc_aliases.hpp"
 #include "deriv_details.hpp"
 #include "idx_range_slice.hpp"
+#include "type_seq_tools.hpp"
 
 template <class T>
 inline constexpr bool enable_deriv_field = false;
@@ -46,7 +47,8 @@ public:
 
     using deriv_tags = detail::deriv_sub_set_t<ddc::detail::TypeSeq<DDims...>>;
 
-    using physical_deriv_grids = typename detail::strip_deriv_t<deriv_tags>;
+    using physical_deriv_grids
+            = find_all_grids_t<detail::strip_deriv_t<deriv_tags>, ddc::detail::TypeSeq<DDims...>>;
 
     using physical_grids = ddc::type_seq_remove_t<ddc::detail::TypeSeq<DDims...>, deriv_tags>;
 
@@ -131,7 +133,10 @@ protected:
             if constexpr (ddc::in_tags_v<QueryDDim, physical_deriv_grids>) {
                 // Physical dimension along which derivatives are known
                 // If information is available about the physical index range
-                if (array_idx & (1 << ddc::type_seq_rank_v<ddc::Deriv<QueryDDim>, deriv_tags>)) {
+                if (array_idx
+                    & (1 << ddc::type_seq_rank_v<
+                               ddc::Deriv<typename QueryDDim::continuous_dimension_type>,
+                               deriv_tags>)) {
                     // If the derivative is being requested
                     return get_index(ddc::select<QueryDDim>(slice_idx));
                 }
@@ -168,7 +173,10 @@ protected:
                 // Physical dimension along which derivatives are known
                 // If information is available about the physical index range
                 IdxRange<QueryDDim> idx_range_requested(slice_idx_range);
-                if (array_idx & (1 << ddc::type_seq_rank_v<ddc::Deriv<QueryDDim>, deriv_tags>)) {
+                if (array_idx
+                    & (1 << ddc::type_seq_rank_v<
+                               ddc::Deriv<typename QueryDDim::continuous_dimension_type>,
+                               deriv_tags>)) {
                     // If the derivative is being requested
                     assert(IdxRangeSlice<QueryDDim>(m_cross_derivative_idx_range)
                                    .contains(idx_range_requested.front())

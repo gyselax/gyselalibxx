@@ -690,7 +690,7 @@
   <compound refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4" kind="class"><name>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</name>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a86c5aa636f12980310d65be51203f6da" kind="typedef"><name>chunk_type</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a3f69c01c044205740da326ebb3852dd3" kind="typedef"><name>deriv_tags</name></member>
-    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a7cb4b4b69a7618fa9960a107c878c5dc" kind="typedef"><name>physical_deriv_grids</name></member>
+    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a58a266c0d7b4f123694d9285a93deaba" kind="typedef"><name>physical_deriv_grids</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a1177e63f003770d42e797af98f8f93fa" kind="typedef"><name>physical_grids</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a8df83185147fa5fdbcf1d54fbbb734a2" kind="typedef"><name>element_type</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a3b1cd9e7c125ec8fa0f7509e4269b55d" kind="typedef"><name>discrete_domain_type</name></member>
@@ -4231,6 +4231,7 @@
     <member refid="type__seq__tools_8hpp_1aeff05a59d0cfa415c1d0f212296789ec" kind="typedef"><name>type_seq_range_t</name></member>
     <member refid="type__seq__tools_8hpp_1aa14f1774e052704c69d90ca494bdb8f6" kind="typedef"><name>type_seq_cat_t</name></member>
     <member refid="type__seq__tools_8hpp_1ac95562d656c2ae2f82f9bc55881627f6" kind="typedef"><name>find_grid_t</name></member>
+    <member refid="type__seq__tools_8hpp_1a615b7cea587ca44ef9143e8fce9e9f49" kind="typedef"><name>find_all_grids_t</name></member>
     <member refid="type__seq__tools_8hpp_1a77a5e0ba78f573fcf19e118cc8d08b61" kind="typedef"><name>type_seq_unique_t</name></member>
     <member refid="type__seq__tools_8hpp_1a8d61e6a1acbf461eacb2729f96286f58" kind="typedef"><name>type_seq_duplicate_t</name></member>
     <member refid="type__seq__tools_8hpp_1add882d1d787f328ab85f39c86132221b" kind="typedef"><name>find_idx_t</name></member>

@@ -41,7 +41,7 @@ Inherits the following classes: [DerivFieldCommon](classDerivFieldCommon.md)
 | typedef typename base\_type::discrete\_element\_type | [**discrete\_element\_type**](#typedef-discrete_element_type)  <br>_The Idx which can be used to index this object._  |
 | typedef typename base\_type::element\_type | [**element\_type**](#typedef-element_type)  <br>_The type of the elements in the chunks._  |
 | typedef typename base\_type::physical\_deriv\_grids | [**physical\_deriv\_grids**](#typedef-physical_deriv_grids)  <br>_A type sequence containing all dimensions for which derivatives are present in this object._  |
-| typedef typename base\_type::physical\_grids | [**physical\_grids**](#typedef-physical_grids)  <br>_A type sequence containing all the physical dimensions on which the chunks are defined._  |
+| typedef typename base\_type::physical\_grids | [**physical\_grids**](#typedef-physical_grids)  <br>_A type sequence containing all the physical grids on which the fields are defined._  |
 | typedef typename base\_type::physical\_idx\_range\_type | [**physical\_idx\_range\_type**](#typedef-physical_idx_range_type)  <br>_The physical index range on which the field is defined._  |
 | typedef [**DerivField**](classDerivField.md)&lt; ElementType, IdxRange&lt; DDims... &gt;, typename chunk\_type::memory\_space, typename chunk\_type::layout\_type &gt; | [**span\_type**](#typedef-span_type)  <br>_The type of a modifiable span of this field. This is a DDC keyword used to make this class interchangeable with Field._  |
 | typedef [**DerivField**](classDerivField.md)&lt; ElementType const, IdxRange&lt; DDims... &gt;, typename chunk\_type::memory\_space, typename chunk\_type::layout\_type &gt; | [**view\_type**](#typedef-view_type)  <br>_The type of a constant view of this field. This is a DDC keyword used to make this class interchangeable with Field._  |
@@ -167,7 +167,7 @@ The values of the field and the derivatives may be defined on different index ra
 
 
 * `ElementType` The type of the elements inside the chunks. 
-* `IdxRange<DDims...>` The index range on which the internal fields are defined. This index range is the physical index range on which the values are defined combined with the index range of the derivatives of interest (e.g. IdxRange&lt;Deriv&lt;IDimX&gt;, IDimX, IDimY&gt;). 
+* `IdxRange<DDims...>` The index range on which the internal fields are defined. This index range is the physical index range on which the values are defined combined with the index range of the derivatives of interest (e.g. IdxRange&lt;Deriv&lt;X&gt;, [**GridX**](structGridX.md), [**GridY**](structGridY.md)&gt;). 
 * `NDerivs` The number of derivatives which are defined in the dimensions where derivatives appear. 
 * `MemSpace` The memory space where the data will be saved. 
 
@@ -278,7 +278,7 @@ using DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::phy
 
 ### typedef physical\_grids 
 
-_A type sequence containing all the physical dimensions on which the chunks are defined._ 
+_A type sequence containing all the physical grids on which the fields are defined._ 
 ```C++
 using DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::physical_grids =  typename base_type::physical_grids;
 ```

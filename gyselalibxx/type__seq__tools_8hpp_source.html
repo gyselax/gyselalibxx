@@ -615,6 +615,15 @@ struct FindGrid&lt;Dim, ddc::detail::TypeSeq&lt;&gt;&gt;
     using type = void;
 };
 
+template &lt;class TypeSeqDims, class TypeSeqGrids&gt;
+struct FindAllGrids;
+
+template &lt;class... TypeSeqDims, class TypeSeqGrids&gt;
+struct FindAllGrids&lt;ddc::detail::TypeSeq&lt;TypeSeqDims...&gt;, TypeSeqGrids&gt;
+{
+    using type = ddc::detail::TypeSeq&lt;typename FindGrid&lt;TypeSeqDims, TypeSeqGrids&gt;::type...&gt;;
+};
+
 template &lt;class CoordType, class IdxRangeType&gt;
 struct FindIdxType;
 
@@ -744,6 +753,9 @@ using type_seq_cat_t = typename detail::TypeSeqCat&lt;TypeSeqs...&gt;::type;
 
 template &lt;class Dim, class TypeSeqGrid&gt;
 using find_grid_t = typename detail::FindGrid&lt;Dim, TypeSeqGrid&gt;::type;
+
+template &lt;class TypeSeqDim, class TypeSeqGrid&gt;
+using find_all_grids_t = typename detail::FindAllGrids&lt;TypeSeqDim, TypeSeqGrid&gt;::type;
 
 template &lt;class StartTypeSeq&gt;
 using type_seq_unique_t = typename detail::GetUnique&lt;StartTypeSeq&gt;::type;

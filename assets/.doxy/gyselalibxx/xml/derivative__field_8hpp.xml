@@ -40,6 +40,8 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
       </node>
       <node id="8">
         <label>idx_range_slice.hpp</label>
@@ -56,6 +58,10 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
+      </node>
+      <node id="9">
+        <label>type_seq_tools.hpp</label>
+        <link refid="type__seq__tools_8hpp_source"/>
       </node>
       <node id="6">
         <label>array</label>
