@@ -210,7 +210,7 @@ using type_seq_cat_t = typename detail::TypeSeqCat<TypeSeqs...>::type;
 template <class Dim, class TypeSeqGrid>
 using find_grid_t = typename detail::FindGrid<Dim, TypeSeqGrid>::type;
 
-/// A tool to find the grid that is defined along the specified dimension (e.g. get GridX from X)
+/// A tool to find the a sequence of grids that are defined along the specified dimensions (e.g. get GridX from X)
 template <class TypeSeqDim, class TypeSeqGrid>
 using find_all_grids_t = typename detail::FindAllGrids<TypeSeqDim, TypeSeqGrid>::type;
 
