@@ -586,6 +586,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 </ul>
 <h3 id="changed_1">Changed</h3>
 <ul>
+<li>Bumped the minimum CMake version to 3.25 to benefit from the <code>add_subdirectory(.. SYSTEM)</code> feature.</li>
 <li>Change the interface of <code>IVlasovSolver</code> and <code>IQNSolver</code> in <code>geometryXYVxVy</code> to store the electric field in a <code>VectorField</code>.</li>
 <li>Integration of <code>ddc::StridedDiscreteDomain</code> by making <code>IdxRangeSlice</code> a type alias.</li>
 <li>The parameter <code>iter_start</code> has been removed from the constructor of <code>RestartInitialisation</code>.</li>
