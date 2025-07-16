@@ -199,6 +199,125 @@ TEST(PolarSplineTest, ConstantEval)
     }
 }
 
+void test_polar_spline_eval_gpu()
+{
+    using PolarCoord = Coord<R, Theta>;
+    using CoordR = Coord<R>;
+    using CoordTheta = Coord<Theta>;
+    using SplineMem = host_t<DFieldMem<IdxRange<BSplines>>>;
+    using Evaluator = PolarSplineEvaluator<BSplines, ddc::NullExtrapolationRule>;
+    using BuilderRTheta = ddc::SplineBuilder2D<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            BSplinesR,
+            BSplinesTheta,
+            GridR,
+            GridTheta,
+            ddc::BoundCond::GREVILLE,
+            ddc::BoundCond::GREVILLE,
+            ddc::BoundCond::PERIODIC,
+            ddc::BoundCond::PERIODIC,
+            ddc::SplineSolver::LAPACK>;
+
+    using EvaluatorRTheta = ddc::SplineEvaluator2D<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            BSplinesR,
+            BSplinesTheta,
+            GridR,
+            GridTheta,
+            ddc::NullExtrapolationRule,
+            ddc::NullExtrapolationRule,
+            ddc::PeriodicExtrapolationRule<Theta>,
+            ddc::PeriodicExtrapolationRule<Theta>>;
+
+    CoordR constexpr r0(0.);
+    CoordR constexpr rN(1.);
+    CoordTheta constexpr theta0(0.);
+    CoordTheta constexpr thetaN(2. * M_PI);
+    std::size_t constexpr ncells = 20;
+
+    // 1. Create BSplines
+    {
+        IdxStep<GridR> constexpr npoints_r(ncells + 1);
+        std::vector<CoordR> breaks_r(npoints_r);
+        const double dr = (rN - r0) / ncells;
+        for (int i(0); i < npoints_r; ++i) {
+            breaks_r[i] = CoordR(r0 + i * dr);
+        }
+        ddc::init_discrete_space<BSplinesR>(breaks_r);
+#if defined(BSPLINES_TYPE_UNIFORM)
+        ddc::init_discrete_space<BSplinesTheta>(theta0, thetaN, ncells);
+#elif defined(BSPLINES_TYPE_NON_UNIFORM)
+        IdxStep<GridTheta> constexpr npoints_theta(ncells + 1);
+        std::vector<CoordTheta> breaks_theta(npoints_theta);
+        const double dp = (thetaN - theta0) / ncells;
+        for (int i(0); i < npoints_r; ++i) {
+            breaks_theta[i] = CoordTheta(theta0 + i * dp);
+        }
+        ddc::init_discrete_space<BSplinesTheta>(breaks_theta);
+#endif
+    }
+
+    ddc::init_discrete_space<GridR>(GrevillePointsR::get_sampling<GridR>());
+    ddc::init_discrete_space<GridTheta>(GrevillePointsTheta::get_sampling<GridTheta>());
+    IdxRange<GridR> interpolation_idx_range_r(GrevillePointsR::get_domain<GridR>());
+    IdxRange<GridTheta> interpolation_idx_range_theta(GrevillePointsTheta::get_domain<GridTheta>());
+    IdxRange<GridR, GridTheta>
+            interpolation_idx_range(interpolation_idx_range_r, interpolation_idx_range_theta);
+
+    BuilderRTheta builder_rtheta(interpolation_idx_range);
+
+    ddc::NullExtrapolationRule r_extrapolation_rule;
+    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
+    EvaluatorRTheta evaluator_rtheta(
+            r_extrapolation_rule,
+            r_extrapolation_rule,
+            theta_extrapolation_rule,
+            theta_extrapolation_rule);
+
+#if defined(CIRCULAR_MAPPING)
+    CircToCart const coord_changer;
+#elif defined(CZARNY_MAPPING)
+    CircToCart const coord_changer(0.3, 1.4);
+#endif
+    DiscreteToCartesianBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
+            Kokkos::DefaultExecutionSpace(),
+            coord_changer,
+            builder_rtheta,
+            evaluator_rtheta);
+    DiscreteToCartesian mapping = mapping_builder();
+    ddc::init_discrete_space<BSplines>(mapping);
+
+    SplineMem coef(ddc::discrete_space<BSplines>().full_domain());
+    ddc::parallel_fill(get_field(coef), 1.0);
+
+    ddc::NullExtrapolationRule extrapolation_rule;
+    Evaluator const spline_evaluator(extrapolation_rule);
+
+    std::size_t const n_test_points = 100;
+    double const dr = (rN - r0) / n_test_points;
+    double const dp = (thetaN - theta0) / n_test_points;
+
+    DFieldMem<IdxRange<GridR, GridTheta>> vals(interpolation_idx_range);
+    DFieldMem<IdxRange<GridR, GridTheta>> derivs_1(interpolation_idx_range);
+    DFieldMem<IdxRange<GridR, GridTheta>> derivs_2(interpolation_idx_range);
+
+    spline_evaluator(get_field(vals), get_const_field(coef));
+    spline_evaluator.deriv_dim_1(get_field(derivs_1), get_const_field(coef));
+    spline_evaluator.deriv_dim_2(get_field(derivs_2), get_const_field(coef));
+
+    auto vals_host = ddc::create_mirror_view_and_copy(vals);
+    auto derivs_1_host = ddc::create_mirror_view_and_copy(derivs_1);
+    auto derivs_2_host = ddc::create_mirror_view_and_copy(derivs_2);
+
+    ddc::for_each(interpolation_idx_range, [&](Idx<GridR, GridTheta> idx) {
+        EXPECT_NEAR(vals_host(idx), 1.0, 1.0e-14);
+        EXPECT_NEAR(derivs_1_host(idx), 0.0, 1.0e-13);
+        EXPECT_NEAR(derivs_2_host(idx), 0.0, 1.0e-13);
+    });
+}
+
 void test_polar_integrals()
 {
     using CoordR = Coord<R>;
