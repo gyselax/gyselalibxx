@@ -846,7 +846,7 @@ public:
      *      The spline representation of the solution @f$\phi@f$, also used as initial data for the iterative solver.
      */
     template <class RHSFunction>
-    void operator()(RHSFunction const& rhs, host_t<PolarSplineMemRTheta>& spline) const
+    void operator()(RHSFunction const& rhs, host_t<PolarSplineRTheta> spline) const
     {
         Kokkos::Profiling::pushRegion("PolarPoissonRHS");
 
