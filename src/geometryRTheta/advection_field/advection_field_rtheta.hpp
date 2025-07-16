@@ -183,7 +183,7 @@ public:
      *      The advection field on the physical axis. 
      */
     void operator()(
-            host_t<PolarSplineMemRTheta>& electrostatic_potential_coef,
+            host_t<PolarSplineRTheta> electrostatic_potential_coef,
             host_t<DVectorFieldRTheta<X, Y>> advection_field_xy) const
     {
         compute_advection_field_XY(
@@ -218,7 +218,7 @@ private:
                             Evaluator,
                             PolarSplineEvaluator<
                                     PolarBSplinesRTheta,
-                                    ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, host_t<PolarSplineMemRTheta>>));
+                                    ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, host_t<PolarSplineRTheta>>));
 
         IdxRangeRTheta const grid = get_idx_range(advection_field_xy);
         host_t<DVectorFieldMemRTheta<X, Y>> electric_field(grid);
@@ -407,7 +407,7 @@ public:
      *      The advection field at the centre point on the Cartesian basis.
      */
     void operator()(
-            host_t<PolarSplineMemRTheta>& electrostatic_potential_coef,
+            host_t<PolarSplineRTheta>& electrostatic_potential_coef,
             host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
             DVector<X, Y>& advection_field_xy_centre) const
     {
@@ -449,7 +449,7 @@ private:
                             Evaluator,
                             PolarSplineEvaluator<
                                     PolarBSplinesRTheta,
-                                    ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, host_t<PolarSplineMemRTheta>>));
+                                    ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, host_t<PolarSplineRTheta>>));
 
         IdxRangeRTheta const grid_without_Opoint = get_idx_range(advection_field_rtheta);
 
