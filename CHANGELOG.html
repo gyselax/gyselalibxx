@@ -557,6 +557,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <ul>
 <li>Modify <code>ruche.v100/environment.sh</code> file to fix tokamaxi simulation segfault issues.</li>
 <li>Fix type of derivatives stored in <code>DerivFieldMem</code> and <code>DerivField</code> types.</li>
+<li>Fixed memory error in <code>PolarSplineFEMPoissonLikeSolver</code>.</li>
+<li>Remove non-parallelisable loop in <code>PolarSplineFEMPoissonLikeSolver::init_nnz_per_line</code>.</li>
 </ul>
 <h3 id="changed">Changed</h3>
 <h3 id="deprecated">Deprecated</h3>

@@ -650,7 +650,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-init_nnz_per_line"><strong>init_nnz_per_line</strong></a> (Kokkos::View&lt; int *, Kokkos::LayoutRight &gt; nnz) const<br><em>Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on</em> <span class="arithmatex">\((r,\theta)\)</span> <em>splines. After this function the array will contain: nnz[0] = 0. nnz[1] = 0. nnz[2] = number of non-zero elements in line 0. nnz[3] = number of non-zero elements in lines 0-1. ... nnz[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1).</em></td>
+<td style="text-align: left;"><a href="#function-init_nnz_per_line"><strong>init_nnz_per_line</strong></a> (Kokkos::View&lt; int *, Kokkos::LayoutRight &gt; nnz_per_row) const<br><em>Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on</em> <span class="arithmatex">\((r,\theta)\)</span> <em>splines. After this function the array will contain: nnz_per_row[0] = 0. nnz_per_row[1] = 0. nnz_per_row[2] = number of non-zero elements in line 0. nnz_per_row[3] = number of non-zero elements in lines 0-1. ..._per_row nnz_per_row[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1).</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -858,14 +858,14 @@ inline double PolarSplineFEMPoissonLikeSolver::get_matrix_stencil_element (
 <hr>
 
 <h3 id="function-init_nnz_per_line">function init_nnz_per_line</h3>
-<p><em>Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on</em> <span class="arithmatex">\((r,\theta)\)</span> <em>splines. After this function the array will contain: nnz[0] = 0. nnz[1] = 0. nnz[2] = number of non-zero elements in line 0. nnz[3] = number of non-zero elements in lines 0-1. ... nnz[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1).</em></p>
+<p><em>Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on</em> <span class="arithmatex">\((r,\theta)\)</span> <em>splines. After this function the array will contain: nnz_per_row[0] = 0. nnz_per_row[1] = 0. nnz_per_row[2] = number of non-zero elements in line 0. nnz_per_row[3] = number of non-zero elements in lines 0-1. ..._per_row nnz_per_row[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1).</em></p>
 <pre><code class="language-C++">inline void PolarSplineFEMPoissonLikeSolver::init_nnz_per_line (
-    Kokkos::View&lt; int *, Kokkos::LayoutRight &gt; nnz
+    Kokkos::View&lt; int *, Kokkos::LayoutRight &gt; nnz_per_row
 ) const
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>nnz</code> A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix. </li>
+<li><code>nnz_per_row</code> A 1D Kokkos view of length matrix_size+1 which stores the sum of the non-zeros in the matrix on all lines up to the one in. </li>
 </ul>
 <hr>
 
@@ -880,7 +880,7 @@ inline void PolarSplineFEMPoissonLikeSolver::operator() (
 <p>This operator returns the coefficients associated with the B-Splines of the solution <span class="arithmatex">\(\phi\)</span>.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>rhs</code> The rhs <span class="arithmatex">\(\rho\)</span> of the Poisson-like equation. The type is templated but we can use the <a href="classPoissonLikeRHSFunction.html"><strong>PoissonLikeRHSFunction</strong></a> class. </li>
+<li><code>rhs</code> The rhs <span class="arithmatex">\(\rho\)</span> of the Poisson-like equation. The type is templated but we can use the <a href="classPoissonLikeRHSFunction.html"><strong>PoissonLikeRHSFunction</strong></a> class. It must be an object with an operator() which evaluates a CoordRTheta and can be called from CPU. </li>
 <li><code>spline</code> The spline representation of the solution <span class="arithmatex">\(\phi\)</span>, also used as initial data for the iterative solver. </li>
 </ul>
 <hr>
@@ -896,7 +896,7 @@ inline void PolarSplineFEMPoissonLikeSolver::operator() (
 <p>This operator uses the other operator () and returns the values on the grid of the solution <span class="arithmatex">\(\phi\)</span>.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>rhs</code> The rhs <span class="arithmatex">\(\rho\)</span> of the Poisson-like equation. The type is templated but we can use the <a href="classPoissonLikeRHSFunction.html"><strong>PoissonLikeRHSFunction</strong></a> class. </li>
+<li><code>rhs</code> The rhs <span class="arithmatex">\(\rho\)</span> of the Poisson-like equation. The type is templated but we can use the <a href="classPoissonLikeRHSFunction.html"><strong>PoissonLikeRHSFunction</strong></a> class. It must be an object with an operator() which evaluates a CoordRTheta and can be called from CPU. </li>
 <li><code>phi</code> The values of the solution <span class="arithmatex">\(\phi\)</span> on the given coords_eval, also used as initial data for the iterative solver. </li>
 </ul>
 <hr>

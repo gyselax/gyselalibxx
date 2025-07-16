@@ -84,11 +84,18 @@ private:
 
     using IdxRangeBSPolar = IdxRange<PolarBSplinesRTheta>;
     using IdxBSPolar = Idx<PolarBSplinesRTheta>;
+    using IdxStepBSPolar = IdxStep<PolarBSplinesRTheta>;
 
     using IdxRangeBSR = IdxRange<BSplinesR>;
     using IdxRangeBSTheta = IdxRange<BSplinesTheta>;
     using IdxRangeBSRTheta = IdxRange<BSplinesR, BSplinesTheta>;
+
+    using IdxBSR = Idx<BSplinesR>;
+    using IdxBSTheta = Idx<BSplinesTheta>;
     using IdxBSRTheta = Idx<BSplinesR, BSplinesTheta>;
+
+    using IdxStepBSR = IdxStep<BSplinesR>;
+    using IdxStepBSTheta = IdxStep<BSplinesTheta>;
 
     using IdxRangeBatchedBSRTheta
             = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
@@ -199,11 +206,11 @@ public:
         , m_matrix_size(ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - m_nbasis_theta)
         , m_idxrange_fem_non_singular(
                   ddc::discrete_space<PolarBSplinesRTheta>().tensor_bspline_idx_range().remove_last(
-                          IdxStep<PolarBSplinesRTheta> {m_nbasis_theta}))
+                          IdxStepBSPolar {m_nbasis_theta}))
         , m_idxrange_bsplines_r(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
-                  IdxStep<BSplinesR> {m_n_overlap_cells}))
+                  IdxStepBSR {m_n_overlap_cells}))
         , m_idxrange_bsplines_theta(ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
-                  IdxStep<BSplinesTheta> {m_nbasis_theta}))
+                  IdxStepBSTheta {m_nbasis_theta}))
         , m_idxrange_quadrature_r(
                   Idx<QDimRMesh>(0),
                   IdxStep<QDimRMesh>(
@@ -1185,66 +1192,142 @@ public:
         return idx_theta;
     }
 
-    void init_nnz_per_line(Kokkos::View<int*, Kokkos::LayoutRight> nnz) const
+    void init_nnz_per_line(Kokkos::View<int*, Kokkos::LayoutRight> nnz_per_row) const
     {
         Kokkos::Profiling::pushRegion("PolarPoissonInitNnz");
-        size_t const mat_size = nnz.extent(0) - 1;
+        size_t const mat_size = nnz_per_row.extent(0) - 1;
+        IdxStepBSPolar radial_boundary_splines(m_nbasis_theta);
+        IdxRangeBSPolar polar_bspl_idx_range
+                = ddc::discrete_space<PolarBSplinesRTheta>().full_domain().remove_last(
+                        radial_boundary_splines);
+
+        Kokkos::deep_copy(nnz_per_row, 0.);
+
+        assert(mat_size == polar_bspl_idx_range.size());
+        // nnz per line
+        Field<int, IdxRangeBSPolar>
+                nnz(Kokkos::subview(nnz_per_row, std::pair<int, int>(2, mat_size + 1)),
+                    polar_bspl_idx_range.remove_last(IdxStepBSPolar(1)));
+
         size_t constexpr n_singular_basis = PolarBSplinesRTheta::n_singular_basis();
         size_t constexpr degree = BSplinesR::degree();
-        size_t constexpr radial_overlap = 2 * degree + 1;
+        size_t constexpr stencil_overlap = 2 * degree + 1;
         size_t const nbasis_theta_proxy = m_nbasis_theta;
 
-        // overlap between singular domain splines and radial splines
+        // The number of radial splines which overlap with a given radial spline to its
+        // left or to its right
+        IdxStepBSR n_one_side_overlap(BSplinesR::degree());
+
+        int nnz_for_sigular_rows = n_singular_basis + degree * nbasis_theta_proxy;
+
+        // rows representing the bsplines which cover the singular domain
+        // These overlap with other singular domain splines and degree radial splines
         Kokkos::parallel_for(
                 "overlap singular radial",
                 Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, n_singular_basis + 1),
-                KOKKOS_LAMBDA(const int k) {
-                    nnz(k + 1) = n_singular_basis + degree * nbasis_theta_proxy;
-                });
+                KOKKOS_LAMBDA(const int k) { nnz_per_row(k + 1) = k * nnz_for_sigular_rows; });
 
-        // going from the internal boundary the overlapping possibilities between two radial splines increase
+        int nnz_sum = nnz_for_sigular_rows * n_singular_basis;
+
+        IdxRangeBSR idxrange_bsplines_r_overlapping_singular
+                = m_idxrange_bsplines_r.take_first(n_one_side_overlap);
+        IdxRangeBSTheta idxrange_bsplines_theta = m_idxrange_bsplines_theta;
+        IdxRangeBSRTheta idxrange_singular_overlap(
+                idxrange_bsplines_r_overlapping_singular,
+                idxrange_bsplines_theta);
+        // rows representing the bsplines which can be represented as a tensor product of
+        // radial and poloidal bsplines but which still overlap with the singular domain
         Kokkos::parallel_for(
                 "inner overlap",
-                Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, degree + 2),
-                KOKKOS_LAMBDA(const int i) {
-                    for (size_t k = n_singular_basis + (i - 1) * nbasis_theta_proxy;
-                         k < n_singular_basis + i * nbasis_theta_proxy;
-                         k++) {
-                        nnz(k + 2) = n_singular_basis + (degree + i) * radial_overlap;
-                    }
+                Kokkos::TeamPolicy<>(
+                        Kokkos::DefaultExecutionSpace(),
+                        idxrange_bsplines_r_overlapping_singular.size(),
+                        Kokkos::AUTO),
+                KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
+                    IdxStepBSR ir(team.league_rank());
+                    // number of radial bases which overlap with this element
+                    int nr = degree + ir + 1;
+
+                    // nnz to this line = nnz_singular + n_singular * ir*ntheta + ntheta * n_stencil_theta \sum_{k=degree+1}^{nr-1} k
+                    int nnz_sum_to_r = nnz_sum + n_singular_basis * ir * nbasis_theta_proxy
+                                       + (nr * (nr - 1) - degree * (degree + 1))
+                                                 * nbasis_theta_proxy * stencil_overlap / 2;
+
+                    // Loop over poloidal dimensions
+                    Kokkos::parallel_for(
+                            Kokkos::TeamThreadRange(team, nbasis_theta_proxy),
+                            [&](int const& thread_index) {
+                                IdxStepBSTheta itheta(thread_index);
+                                IdxBSRTheta k_2d = idxrange_singular_overlap.front() + ir + itheta;
+                                IdxBSPolar k(PolarBSplinesRTheta::template get_polar_index<
+                                             PolarBSplinesRTheta>(k_2d));
+                                nnz(k) = nnz_sum_to_r
+                                         + (thread_index + 1)
+                                                   * (n_singular_basis + nr * stencil_overlap);
+                            });
                 });
 
-        // Stencil with maximum possible overlap from two sides for radial spline
+        {
+            int nr = idxrange_bsplines_r_overlapping_singular.size();
+            nnz_sum += (n_singular_basis * nr + nr * (nr + 2 * degree + 1) * stencil_overlap / 2)
+                       * nbasis_theta_proxy;
+        }
+
+        IdxRangeBSR idxrange_bsplines_r_stencil
+                = m_idxrange_bsplines_r.remove(n_one_side_overlap, n_one_side_overlap + 1);
+        IdxRangeBSRTheta idxrange_stencil(idxrange_bsplines_r_stencil, idxrange_bsplines_theta);
+        IdxBSPolar idx_stencil_front
+                = PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(
+                        idxrange_stencil.front());
+        // Stencil for tensor product bsplines which only overlap with other tensor product bsplines
         Kokkos::parallel_for(
                 "Inner Stencil",
-                Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(
-                        n_singular_basis + degree * nbasis_theta_proxy,
-                        mat_size - degree * nbasis_theta_proxy),
-                KOKKOS_LAMBDA(const int k) { nnz(k + 2) = radial_overlap * radial_overlap; });
+                Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(0, idxrange_stencil.size()),
+                KOKKOS_LAMBDA(const int k) {
+                    IdxBSPolar kp(idx_stencil_front + IdxStepBSPolar(k));
+                    nnz(kp) = nnz_sum + (k + 1) * stencil_overlap * stencil_overlap;
+                });
 
+        nnz_sum += idxrange_stencil.size() * stencil_overlap * stencil_overlap;
+
+        // Get the outer radial bsplines excluding the bspline used for homogeneous Hermite boundary conditions
+        IdxRangeBSR outer_bsplines_r = m_idxrange_bsplines_r.take_last(n_one_side_overlap + 1)
+                                               .remove_last(IdxStepBSR(1));
+        IdxRangeBSRTheta outer_bsplines_2d(outer_bsplines_r, idxrange_bsplines_theta);
+        IdxRangeBSPolar outer_bsplines(
+                PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(
+                        outer_bsplines_2d.front()),
+                IdxStepBSPolar(outer_bsplines_2d.size() - 1));
+        assert(outer_bsplines.back() == get_idx_range(nnz).back());
         // Approaching the external boundary the overlapping possibilities between two radial splines decrease
         Kokkos::parallel_for(
                 "outer overlap",
-                Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, degree + 1),
-                KOKKOS_LAMBDA(const int i) {
-                    for (size_t k = mat_size - i * nbasis_theta_proxy;
-                         k < mat_size - (i - 1) * nbasis_theta_proxy;
-                         k++) {
-                        nnz(k + 2) = (degree + i) * radial_overlap;
-                    }
+                Kokkos::TeamPolicy<>(
+                        Kokkos::DefaultExecutionSpace(),
+                        outer_bsplines_r.size(),
+                        Kokkos::AUTO),
+                KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
+                    IdxStepBSR ir(team.league_rank());
+                    int nr = 2 * degree - ir;
+                    IdxBSR k_r(outer_bsplines_2d.front() + ir);
+                    int nnz_sum_to_r = nnz_sum
+                                       + (degree * (2 * degree + 1) - nr * (nr + 1) / 2)
+                                                 * stencil_overlap * nbasis_theta_proxy;
+                    // Loop over poloidal dimensions
+                    Kokkos::parallel_for(
+                            Kokkos::TeamThreadRange(team, nbasis_theta_proxy),
+                            [&](int const& thread_index) {
+                                IdxStepBSTheta itheta(thread_index);
+                                IdxBSRTheta k_2d = outer_bsplines_2d.front() + ir + itheta;
+                                IdxBSPolar k(PolarBSplinesRTheta::template get_polar_index<
+                                             PolarBSplinesRTheta>(k_2d));
+                                if (outer_bsplines.contains(k)) {
+                                    nnz(k) = nnz_sum_to_r
+                                             + (thread_index + 1) * nr * stencil_overlap;
+                                }
+                            });
                 });
 
-        // sum non-zero elements count
-        Kokkos::parallel_for(
-                "Sum over lines",
-                Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(0, 1),
-                KOKKOS_LAMBDA(const int idx) {
-                    for (size_t k = 1; k < mat_size; k++) {
-                        nnz(k + 1) += nnz(k);
-                    }
-                    nnz(0) = 0;
-                    nnz(1) = 0;
-                });
         Kokkos::Profiling::popRegion();
     }
 };
