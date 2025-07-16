@@ -38,7 +38,7 @@ inline constexpr bool
  * @tparam ElementType The type of the elements inside the chunks.
  * @tparam IdxRange<DDims...> The index range on which the internal fields are defined.
  *          This index range is the physical index range on which the values are defined combined with
- *          the index range of the derivatives of interest (e.g. IdxRange<Deriv<IDimX>, IDimX, IDimY>).
+ *          the index range of the derivatives of interest (e.g. IdxRange<Deriv<X>, GridX, GridY>).
  * @tparam NDerivs The number of derivatives which are defined in the dimensions where derivatives
  *          appear.
  * @tparam MemSpace The memory space where the data will be saved.
@@ -81,7 +81,7 @@ public:
     /// @brief A type sequence containing all dimensions for which derivatives are present in this object.
     using physical_deriv_grids = typename base_type::physical_deriv_grids;
 
-    /// @brief A type sequence containing all the physical dimensions on which the chunks are defined.
+    /// @brief A type sequence containing all the physical grids on which the fields are defined.
     using physical_grids = typename base_type::physical_grids;
 
     /// @brief The physical index range on which the field is defined.
@@ -200,7 +200,10 @@ private:
             }
         } else if constexpr (ddc::in_tags_v<QueryDDim, physical_deriv_grids>) {
             if constexpr (
-                    ArrayIndex & (1 << ddc::type_seq_rank_v<ddc::Deriv<QueryDDim>, deriv_tags>)) {
+                    ArrayIndex
+                    & (1 << ddc::type_seq_rank_v<
+                               ddc::Deriv<typename QueryDDim::continuous_dimension_type>,
+                               deriv_tags>)) {
                 IdxRangeSlice<QueryDDim> idx_range_local(base_type::m_cross_derivative_idx_range);
                 return idx_range_local.extents().value();
             } else {
@@ -269,9 +272,11 @@ public:
             ddc::StridedDiscreteDomain<DerivDoms>... m_deriv_idx_range)
         : base_type(
                 val_idx_range,
-                discrete_deriv_idx_range_type(IdxRange<ddc::Deriv<DerivDoms>>(
-                        Idx<ddc::Deriv<DerivDoms>>(1),
-                        IdxStep<ddc::Deriv<DerivDoms>>(NDerivs))...),
+                discrete_deriv_idx_range_type(
+                        IdxRange<ddc::Deriv<typename DerivDoms::continuous_dimension_type>>(
+                                Idx<ddc::Deriv<typename DerivDoms::continuous_dimension_type>>(1),
+                                IdxStep<ddc::Deriv<typename DerivDoms::continuous_dimension_type>>(
+                                        NDerivs))...),
                 to_subidx_range_collection<physical_deriv_grids>(m_deriv_idx_range...))
     {
         static_assert(
