@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
-#include "polar_spline.hpp"
 #include "view.hpp"
 
 /**
@@ -291,48 +290,6 @@ public:
         ddc::for_each(get_idx_range(coords_eval), [=](IdxEval i) {
             spline_eval(i) = eval_no_bc(coords_eval(i), spline_coef, eval_deriv_r_theta_type());
         });
-    }
-
-    /**
-     * @brief Get the in integral of a spline function over the domain.
-     *
-     * @param[in] spline_coef
-     *      The B-splines coefficients of the function we want to evaluate.
-     * @param[in] mapping
-     *      The mapping function.
-     *
-     * @return The integral of the spline function over the domain.
-     */
-    template <class Mapping>
-    double integrate(
-            host_t<ConstPolarSpline<PolarBSplinesType>> const spline_coef,
-            Mapping const mapping) const
-    {
-        int constexpr nr = ddc::discrete_space<BSplinesR>().ncells() + BSplinesR::degree() - 2;
-        int constexpr ntheta
-                = ddc::discrete_space<BSplinesTheta>().ncells() + BSplinesTheta::degree();
-        std::array<double, PolarBSplinesType::eval_size()> singular_values;
-        DSpan1D singular_vals(singular_values.data(), PolarBSplinesType::n_singular_basis());
-        std::array<double, nr * ntheta> values;
-        DSpan2D vals(values.data(), nr, ntheta);
-
-        ddc::discrete_space<PolarBSplinesType>().integrals(singular_vals, vals);
-
-        double y = 0.;
-        ddc::for_each(
-                get_idx_range(spline_coef.singular_spline_coef),
-                [=](Idx<PolarBSplinesType> const i) {
-                    y += spline_coef.singular_spline_coef(i) * singular_vals(i)
-                         * mapping.determinant(i);
-                });
-        ddc::for_each(
-                get_idx_range(spline_coef.spline_coef),
-                [=](Idx<BSplinesR, BSplinesTheta> const i) {
-                    y += spline_coef.spline_coef(i)
-                         * vals(ddc::select<BSplinesR>(i), ddc::select<BSplinesTheta>(i))
-                         * mapping.determinant(i);
-                });
-        return y;
     }
 
 private:

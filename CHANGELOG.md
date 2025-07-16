@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Deprecated
 
+- Remove unused broken metho `PolarSplineEvaluator::integrate`.
+
 ## [v0.2.0] - 2025-07-03
 
 ### Added
