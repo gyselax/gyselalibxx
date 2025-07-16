@@ -357,11 +357,20 @@ private:
             nr = nr - (Idx<BSplinesR>(continuity + 1) - jmin_r);
             jmin_r = Idx<BSplinesR>(continuity + 1);
         }
+
         host_t<DConstField<IdxRange<BSplinesR, BSplinesTheta>>> spline_coef_2d
                 = PolarBSplinesType::get_tensor_product_subset(spline_coef);
+        IdxRange<BSplinesR, BSplinesTheta> tensor_prod_idx_range = get_idx_range(spline_coef_2d);
+        IdxRange<BSplinesTheta> tensor_prod_idx_range_theta(tensor_prod_idx_range);
+        Idx<BSplinesTheta> idx_theta_max = tensor_prod_idx_range_theta.back();
+        IdxStep<BSplinesTheta> n_idx_theta = tensor_prod_idx_range_theta.extents();
         for (int i = 0; i < nr; ++i) {
             for (std::size_t j = 0; j < BSplinesTheta::degree() + 1; ++j) {
-                y += spline_coef_2d(jmin_r + i, jmin_theta + j) * vals(i, j);
+                Idx<BSplinesTheta> idx_theta = jmin_theta + j;
+                if (idx_theta > idx_theta_max) {
+                    idx_theta -= n_idx_theta;
+                }
+                y += spline_coef_2d(jmin_r + i, idx_theta) * vals(i, j);
             }
         }
         return y;
