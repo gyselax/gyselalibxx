@@ -219,7 +219,10 @@ protected:
             if constexpr (ddc::in_tags_v<QueryDDim, physical_deriv_grids>) {
                 // Physical dimension along which derivatives are known
                 // If information is available about the physical index range
-                if (array_idx & (1 << ddc::type_seq_rank_v<ddc::Deriv<QueryDDim>, deriv_tags>)) {
+                if (array_idx
+                    & (1 << ddc::type_seq_rank_v<
+                               ddc::Deriv<typename QueryDDim::continuous_dimension_type>,
+                               deriv_tags>)) {
                     // If the derivative is being requested
                     return get_index(ddc::select<QueryDDim>(slice_idx));
                 }
@@ -266,7 +269,10 @@ protected:
                 // Physical dimension along which derivatives are known
                 // If information is available about the physical index range
                 IdxRange<QueryDDim> idx_range_requested(slice_idx_range);
-                if (array_idx & (1 << ddc::type_seq_rank_v<ddc::Deriv<QueryDDim>, deriv_tags>)) {
+                if (array_idx
+                    & (1 << ddc::type_seq_rank_v<
+                               ddc::Deriv<typename QueryDDim::continuous_dimension_type>,
+                               deriv_tags>)) {
                     // If the derivative is being requested
                     assert(IdxRangeSlice<QueryDDim>(m_cross_derivative_idx_range)
                                    .contains(idx_range_requested.front())

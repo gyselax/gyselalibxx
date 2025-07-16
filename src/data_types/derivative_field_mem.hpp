@@ -200,7 +200,10 @@ private:
             }
         } else if constexpr (ddc::in_tags_v<QueryDDim, physical_deriv_grids>) {
             if constexpr (
-                    ArrayIndex & (1 << ddc::type_seq_rank_v<ddc::Deriv<QueryDDim>, deriv_tags>)) {
+                    ArrayIndex
+                    & (1 << ddc::type_seq_rank_v<
+                               ddc::Deriv<typename QueryDDim::continuous_dimension_type>,
+                               deriv_tags>)) {
                 IdxRangeSlice<QueryDDim> idx_range_local(base_type::m_cross_derivative_idx_range);
                 return idx_range_local.extents().value();
             } else {
