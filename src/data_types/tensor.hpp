@@ -102,8 +102,10 @@ public:
     template <
             class... Params,
             class = std::enable_if_t<(std::is_convertible_v<Params, ElementType> && ...)>,
-            class = (std::enable_if_t<
-                     sizeof...(Params) == base_type::size() && sizeof...(Params) != 1>)>
+            class = std::enable_if_t<
+                    sizeof...(Params) == base_type::size()
+                    && sizeof...(Params) != 1> // Avoid syntax error in cppcheck
+            >
     explicit KOKKOS_FUNCTION Tensor(Params... elements)
     {
         static_assert(
