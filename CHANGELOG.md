@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Modify `ruche.v100/environment.sh` file to fix tokamaxi simulation segfault issues.
 - Fix type of derivatives stored in `DerivFieldMem` and `DerivField` types.
+- Fixed memory error in `PolarSplineFEMPoissonLikeSolver`.
+- Remove non-parallelisable loop in `PolarSplineFEMPoissonLikeSolver::init_nnz_per_line`.
 - Remove use of `std::cyl_bessel_j` which is not available in libc++.
 
 ### Changed
