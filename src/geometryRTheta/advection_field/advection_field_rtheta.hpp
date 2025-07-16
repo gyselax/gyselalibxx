@@ -96,8 +96,11 @@ public:
 private:
     Mapping const& m_mapping;
 
-    PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule> const
-            m_polar_spline_evaluator;
+    PolarSplineEvaluator<
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::HostSpace,
+            PolarBSplinesRTheta,
+            ddc::NullExtrapolationRule> const m_polar_spline_evaluator;
 
     SplineRThetaEvaluatorNullBound_host const m_spline_evaluator;
 
@@ -216,6 +219,8 @@ private:
                 || (std::is_same_v<
                             Evaluator,
                             PolarSplineEvaluator<
+                                    Kokkos::DefaultHostExecutionSpace,
+                                    Kokkos::HostSpace,
                                     PolarBSplinesRTheta,
                                     ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, host_t<PolarSplineRTheta>>));
 
@@ -447,6 +452,8 @@ private:
                 || (std::is_same_v<
                             Evaluator,
                             PolarSplineEvaluator<
+                                    Kokkos::DefaultHostExecutionSpace,
+                                    Kokkos::HostSpace,
                                     PolarBSplinesRTheta,
                                     ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, host_t<PolarSplineRTheta>>));
 

@@ -179,7 +179,11 @@ public:
                 ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
 
         ddc::NullExtrapolationRule extrapolation_rule;
-        PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule>
+        PolarSplineEvaluator<
+                Kokkos::DefaultHostExecutionSpace,
+                Kokkos::HostSpace,
+                PolarBSplinesRTheta,
+                ddc::NullExtrapolationRule>
                 polar_spline_evaluator(extrapolation_rule);
 
         // --- For the computation of advection field from the electrostatic potential (phi): -------------
