@@ -297,9 +297,7 @@ void test_polar_integrals()
             get_idx_range(bspline_integrals),
             0.0,
             ddc::reducer::sum<double>(),
-            KOKKOS_LAMBDA(Idx<BSplines> idx) {
-                return bspline_integrals(idx);
-            });
+            KOKKOS_LAMBDA(Idx<BSplines> idx) { return bspline_integrals(idx); });
 
     EXPECT_NEAR(area, 2 * M_PI, 1e-10);
 }

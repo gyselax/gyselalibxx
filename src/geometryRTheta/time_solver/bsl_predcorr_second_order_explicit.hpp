@@ -251,7 +251,9 @@ public:
             m_poisson_solver(charge_density_coord_4, get_field(electrostatic_potential_coef));
 
             // STEP 5: From phi^P, we compute A^P:
-            advection_field_computer(get_field(electrostatic_potential_coef), advection_field_predicted);
+            advection_field_computer(
+                    get_field(electrostatic_potential_coef),
+                    advection_field_predicted);
 
 
             // ---  we evaluate the advection field A^n at the characteristic feet X^P

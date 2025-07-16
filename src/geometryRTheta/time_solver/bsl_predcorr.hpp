@@ -161,7 +161,9 @@ public:
                     m_poisson_solver(charge_density_coord, get_field(electrostatic_potential_coef));
 
                     // --- compute advection field:
-                    advection_field_computer(get_field(electrostatic_potential_coef), advection_field_host);
+                    advection_field_computer(
+                            get_field(electrostatic_potential_coef),
+                            advection_field_host);
                 };
 
         std::function<void(host_t<DFieldRTheta>, host_t<DConstVectorFieldRTheta<X, Y>>, double)>
