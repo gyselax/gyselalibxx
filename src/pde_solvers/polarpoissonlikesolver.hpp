@@ -166,6 +166,7 @@ private:
 
     using ConstSpline2D = DConstField<IdxRangeBatchedBSRTheta>;
     using PolarSplineMemRTheta = DFieldMem<IdxRange<PolarBSplinesRTheta>>;
+    using PolarSplineRTheta = DField<IdxRange<PolarBSplinesRTheta>>;
 
     using CoordFieldMemRTheta = FieldMem<CoordRTheta, IdxRangeRTheta>;
     using CoordFieldRTheta = Field<CoordRTheta, IdxRangeRTheta>;
