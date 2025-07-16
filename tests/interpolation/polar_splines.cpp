@@ -291,7 +291,7 @@ void test_polar_integrals()
 
     SplineMem bspline_integrals_alloc(ddc::discrete_space<BSplines>().full_domain());
     Spline bspline_integrals(bspline_integrals_alloc);
-    integrals(Kokkos::DefaultExecutionSpace(), PolarSpline<BSplines>(bspline_integrals));
+    PolarSplines::integrals(Kokkos::DefaultExecutionSpace(), bspline_integrals);
     double area = ddc::parallel_transform_reduce(
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(bspline_integrals),
