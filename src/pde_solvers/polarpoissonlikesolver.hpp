@@ -1010,7 +1010,7 @@ public:
                 "RHSFunction must have an operator() which takes a coordinate and returns a "
                 "double");
 
-        (*this)(rhs, m_phi_spline_coef);
+        (*this)(rhs, get_field(m_phi_spline_coef));
         CoordFieldMemRTheta coords_eval_alloc(get_idx_range(phi));
         CoordFieldRTheta coords_eval(get_field(coords_eval_alloc));
         ddc::parallel_for_each(
