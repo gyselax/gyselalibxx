@@ -142,7 +142,7 @@ public:
      */
     double operator()(
             Coord<DimR, DimTheta> coord_eval,
-            host_t<ConstPolarSpline<PolarBSplinesType>> const spline_coef) const
+            host_t<DConstField<IdxRange<PolarBSplinesType>>> const spline_coef) const
     {
         return eval(coord_eval, spline_coef);
     }
@@ -161,19 +161,7 @@ public:
     void operator()(
             DField<Domain, Kokkos::HostSpace> const spline_eval,
             ConstField<Coord<DimR, DimTheta>, Domain, Kokkos::HostSpace> const coords_eval,
-            host_t<DConstField<IdxRange<PolarBSplinesType>>> const spline_coef_field) const
-    {
-        host_t<ConstPolarSpline<PolarBSplinesType>> spline_coef(spline_coef_field);
-        using IdxEval = typename Domain::discrete_element_type;
-        ddc::for_each(get_idx_range(coords_eval), [=](IdxEval i) {
-            spline_eval(i) = eval(coords_eval(i), spline_coef);
-        });
-    }
-    template <class Domain>
-    void operator()(
-            DField<Domain, Kokkos::HostSpace> const spline_eval,
-            ConstField<Coord<DimR, DimTheta>, Domain, Kokkos::HostSpace> const coords_eval,
-            host_t<ConstPolarSpline<PolarBSplinesType>> const spline_coef) const
+            host_t<DConstField<IdxRange<PolarBSplinesType>>> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
         ddc::for_each(get_idx_range(coords_eval), [=](IdxEval i) {
@@ -196,15 +184,6 @@ public:
     double deriv_dim_1(
             Coord<DimR, DimTheta> coord_eval,
             host_t<DConstField<IdxRange<PolarBSplinesType>>> const spline_coef) const
-    {
-        return eval_no_bc(
-                coord_eval,
-                host_t<ConstPolarSpline<PolarBSplinesType>>(spline_coef),
-                eval_deriv_r_type());
-    }
-    double deriv_dim_1(
-            Coord<DimR, DimTheta> coord_eval,
-            host_t<ConstPolarSpline<PolarBSplinesType>> const spline_coef) const
     {
         return eval_no_bc(coord_eval, spline_coef, eval_deriv_r_type());
     }
@@ -225,18 +204,8 @@ public:
             Coord<DimR, DimTheta> coord_eval,
             host_t<DConstField<IdxRange<PolarBSplinesType>>> const spline_coef) const
     {
-        return eval_no_bc(
-                coord_eval,
-                host_t<ConstPolarSpline<PolarBSplinesType>>(spline_coef),
-                eval_deriv_theta_type());
-    }
-    double deriv_dim_2(
-            Coord<DimR, DimTheta> coord_eval,
-            host_t<ConstPolarSpline<PolarBSplinesType>> const spline_coef) const
-    {
         return eval_no_bc(coord_eval, spline_coef, eval_deriv_theta_type());
     }
-
 
     /**
      * @brief Get the value of the cross derivative of the spline function.
@@ -252,15 +221,6 @@ public:
     double deriv_1_and_2(
             Coord<DimR, DimTheta> coord_eval,
             host_t<DConstField<IdxRange<PolarBSplinesType>>> const spline_coef) const
-    {
-        return eval_no_bc(
-                coord_eval,
-                host_t<ConstPolarSpline<PolarBSplinesType>>(spline_coef),
-                eval_deriv_r_theta_type());
-    }
-    double deriv_1_and_2(
-            Coord<DimR, DimTheta> coord_eval,
-            host_t<ConstPolarSpline<PolarBSplinesType>> const spline_coef) const
     {
         return eval_no_bc(coord_eval, spline_coef, eval_deriv_r_theta_type());
     }
@@ -281,20 +241,6 @@ public:
             DField<Domain, Kokkos::HostSpace> const spline_eval,
             ConstField<Coord<DimR, DimTheta>, Domain, Kokkos::HostSpace> const coords_eval,
             host_t<DConstField<IdxRange<PolarBSplinesType>>> const spline_coef) const
-    {
-        using IdxEval = typename Domain::discrete_element_type;
-        ddc::for_each(get_idx_range(coords_eval), [=](IdxEval i) {
-            spline_eval(i) = eval_no_bc(
-                    coords_eval(i),
-                    host_t<ConstPolarSpline<PolarBSplinesType>>(spline_coef),
-                    eval_deriv_r_type());
-        });
-    }
-    template <class Domain>
-    void deriv_dim_1(
-            DField<Domain, Kokkos::HostSpace> const spline_eval,
-            ConstField<Coord<DimR, DimTheta>, Domain, Kokkos::HostSpace> const coords_eval,
-            host_t<ConstPolarSpline<PolarBSplinesType>> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
         ddc::for_each(get_idx_range(coords_eval), [=](IdxEval i) {
@@ -321,20 +267,6 @@ public:
     {
         using IdxEval = typename Domain::discrete_element_type;
         ddc::for_each(get_idx_range(coords_eval), [=](IdxEval i) {
-            spline_eval(i) = eval_no_bc(
-                    coords_eval(i),
-                    host_t<ConstPolarSpline<PolarBSplinesType>>(spline_coef),
-                    eval_deriv_theta_type());
-        });
-    }
-    template <class Domain>
-    void deriv_dim_2(
-            DField<Domain, Kokkos::HostSpace> const spline_eval,
-            ConstField<Coord<DimR, DimTheta>, Domain, Kokkos::HostSpace> const coords_eval,
-            host_t<ConstPolarSpline<PolarBSplinesType>> const spline_coef) const
-    {
-        using IdxEval = typename Domain::discrete_element_type;
-        ddc::for_each(get_idx_range(coords_eval), [=](IdxEval i) {
             spline_eval(i) = eval_no_bc(coords_eval(i), spline_coef, eval_deriv_theta_type());
         });
     }
@@ -354,20 +286,6 @@ public:
             DField<Domain, Kokkos::HostSpace> const spline_eval,
             ConstField<Coord<DimR, DimTheta>, Domain, Kokkos::HostSpace> const coords_eval,
             host_t<DConstField<IdxRange<PolarBSplinesType>>> const spline_coef) const
-    {
-        using IdxEval = typename Domain::discrete_element_type;
-        ddc::for_each(get_idx_range(coords_eval), [=](IdxEval i) {
-            spline_eval(i) = eval_no_bc(
-                    coords_eval(i),
-                    host_t<ConstPolarSpline<PolarBSplinesType>>(spline_coef),
-                    eval_deriv_r_theta_type());
-        });
-    }
-    template <class Domain>
-    void deriv_dim_1_and_2(
-            DField<Domain, Kokkos::HostSpace> const spline_eval,
-            ConstField<Coord<DimR, DimTheta>, Domain, Kokkos::HostSpace> const coords_eval,
-            host_t<ConstPolarSpline<PolarBSplinesType>> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
         ddc::for_each(get_idx_range(coords_eval), [=](IdxEval i) {
@@ -420,7 +338,7 @@ public:
 private:
     double eval(
             Coord<DimR, DimTheta> coord_eval,
-            host_t<ConstPolarSpline<PolarBSplinesType>> const spline_coef) const
+            host_t<DConstField<IdxRange<PolarBSplinesType>>> const spline_coef) const
     {
         const double coord_eval1 = ddc::get<DimR>(coord_eval);
         double coord_eval2 = ddc::get<DimTheta>(coord_eval);
@@ -441,7 +359,7 @@ private:
     template <class EvalType>
     double eval_no_bc(
             Coord<DimR, DimTheta> coord_eval,
-            host_t<ConstPolarSpline<PolarBSplinesType>> const spline_coef,
+            host_t<DConstField<IdxRange<PolarBSplinesType>>> const spline_coef,
             EvalType const) const
     {
         static_assert(
@@ -473,7 +391,7 @@ private:
 
         double y = 0.0;
         for (std::size_t i = 0; i < PolarBSplinesType::n_singular_basis(); ++i) {
-            y += spline_coef.singular_spline_coef(Idx<PolarBSplinesType>(i)) * singular_vals(i);
+            y += spline_coef(Idx<PolarBSplinesType>(i)) * singular_vals(i);
         }
         Idx<BSplinesR> jmin_r = ddc::select<BSplinesR>(jmin);
         Idx<BSplinesTheta> jmin_theta = ddc::select<BSplinesTheta>(jmin);
@@ -482,9 +400,11 @@ private:
             nr = nr - (Idx<BSplinesR>(continuity + 1) - jmin_r);
             jmin_r = Idx<BSplinesR>(continuity + 1);
         }
+        host_t<DConstField<IdxRange<BSplinesR, BSplinesTheta>>> spline_coef_2d
+                = PolarBSplinesType::get_tensor_product_subset(spline_coef);
         for (int i = 0; i < nr; ++i) {
             for (std::size_t j = 0; j < BSplinesTheta::degree() + 1; ++j) {
-                y += spline_coef.spline_coef(jmin_r + i, jmin_theta + j) * vals(i, j);
+                y += spline_coef_2d(jmin_r + i, jmin_theta + j) * vals(i, j);
             }
         }
         return y;

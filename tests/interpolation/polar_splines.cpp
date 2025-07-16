@@ -91,7 +91,7 @@ TEST(PolarSplineTest, ConstantEval)
     using PolarCoord = Coord<R, Theta>;
     using CoordR = Coord<R>;
     using CoordTheta = Coord<Theta>;
-    using SplineMem = PolarSplineMem<BSplines, Kokkos::HostSpace>;
+    using SplineMem = host_t<DFieldMem<IdxRange<BSplines>>>;
     using Evaluator = PolarSplineEvaluator<BSplines, ddc::NullExtrapolationRule>;
     using BuilderRTheta = ddc::SplineBuilder2D<
             Kokkos::DefaultHostExecutionSpace,
@@ -176,14 +176,8 @@ TEST(PolarSplineTest, ConstantEval)
     DiscreteToCartesian mapping = mapping_builder();
     ddc::init_discrete_space<BSplines>(mapping);
 
-    SplineMem coef(get_spline_idx_range(builder_rtheta));
-
-    ddc::for_each(get_idx_range(coef.singular_spline_coef), [&](Idx<BSplines> const i) {
-        coef.singular_spline_coef(i) = 1.0;
-    });
-    ddc::for_each(get_idx_range(coef.spline_coef), [&](Idx<BSplinesR, BSplinesTheta> const i) {
-        coef.spline_coef(i) = 1.0;
-    });
+    SplineMem coef(ddc::discrete_space<BSplines>().full_domain());
+    ddc::parallel_fill(get_field(coef), 1.0);
 
     ddc::NullExtrapolationRule extrapolation_rule;
     const Evaluator spline_evaluator(extrapolation_rule);
@@ -210,8 +204,8 @@ void test_polar_integrals()
 {
     using CoordR = Coord<R>;
     using CoordTheta = Coord<Theta>;
-    using SplineMem = PolarSplineMem<BSplines>;
-    using Spline = PolarSpline<BSplines>;
+    using SplineMem = host_t<DFieldMem<IdxRange<BSplines>>>;
+    using Spline = host_t<DField<IdxRange<BSplines>>>;
     using BuilderRTheta = ddc::SplineBuilder2D<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,
@@ -295,25 +289,17 @@ void test_polar_integrals()
     DiscreteToCartesian mapping = mapping_builder();
     ddc::init_discrete_space<BSplines>(mapping);
 
-    SplineMem bspline_integrals_alloc(get_spline_idx_range(builder_rtheta));
+    SplineMem bspline_integrals_alloc(ddc::discrete_space<BSplines>().full_domain());
     Spline bspline_integrals(bspline_integrals_alloc);
-    integrals(Kokkos::DefaultExecutionSpace(), bspline_integrals);
+    integrals(Kokkos::DefaultExecutionSpace(), PolarSpline<BSplines>(bspline_integrals));
     double area = ddc::parallel_transform_reduce(
-                          Kokkos::DefaultExecutionSpace(),
-                          get_idx_range(bspline_integrals.singular_spline_coef),
-                          0.0,
-                          ddc::reducer::sum<double>(),
-                          KOKKOS_LAMBDA(Idx<BSplines> idx) {
-                              return bspline_integrals.singular_spline_coef(idx);
-                          })
-                  + ddc::parallel_transform_reduce(
-                          Kokkos::DefaultExecutionSpace(),
-                          get_idx_range(bspline_integrals.spline_coef),
-                          0.0,
-                          ddc::reducer::sum<double>(),
-                          KOKKOS_LAMBDA(Idx<BSplinesR, BSplinesTheta> idx) {
-                              return bspline_integrals.spline_coef(idx);
-                          });
+            Kokkos::DefaultExecutionSpace(),
+            get_idx_range(bspline_integrals),
+            0.0,
+            ddc::reducer::sum<double>(),
+            KOKKOS_LAMBDA(Idx<BSplines> idx) {
+                return bspline_integrals(idx);
+            });
 
     EXPECT_NEAR(area, 2 * M_PI, 1e-10);
 }
