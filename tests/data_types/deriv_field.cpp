@@ -14,19 +14,26 @@
 
 namespace {
 
-struct GridX
+struct X
 {
 };
-using dX = ddc::Deriv<GridX>;
+
+struct GridX : UniformGridBase<X>
+{
+};
+using dX = ddc::Deriv<X>;
 using IdxX = Idx<GridX>;
 using IdxStepX = IdxStep<GridX>;
 using IdxRangeX = IdxRange<GridX>;
 
 
-struct GridY
+struct Y
 {
 };
-using dY = ddc::Deriv<GridY>;
+struct GridY : UniformGridBase<Y>
+{
+};
+using dY = ddc::Deriv<Y>;
 using IdxY = Idx<GridY>;
 using IdxStepY = IdxStep<GridY>;
 using IdxRangeY = IdxRange<GridY>;
