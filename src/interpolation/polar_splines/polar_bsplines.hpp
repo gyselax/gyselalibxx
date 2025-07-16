@@ -11,7 +11,6 @@
 #include "coord_transformation_tools.hpp"
 #include "ddc_helper.hpp"
 #include "discrete_to_cartesian.hpp"
-#include "polar_spline.hpp"
 #include "view.hpp"
 
 namespace PolarSplines {
@@ -193,11 +192,12 @@ public:
                 = coeffs[relevant_idx_range];
 
         tensor_product_index_type start_idx = get_2d_index(relevant_idx_range.front());
-        tensor_product_index_type end_idx
-                = get_2d_index(relevant_idx_range.front() + relevant_idx_range.extents());
-        tensor_product_idx_step_type idx_step = end_idx - start_idx;
+        tensor_product_index_type back_idx
+                = get_2d_index(relevant_idx_range.front() + relevant_idx_range.extents() - 1);
+        tensor_product_idx_step_type idx_step = back_idx - start_idx;
+        tensor_product_idx_step_type back_to_end(1, 1);
 
-        tensor_product_idx_range_type tensor_idx_range(start_idx, idx_step);
+        tensor_product_idx_range_type tensor_idx_range(start_idx, idx_step + back_to_end);
         assert(tensor_idx_range.size() == relevant_coeffs.size());
 
         return Field<
