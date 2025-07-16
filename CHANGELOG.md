@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v0.3.0] - 2025-09-03
+
+### Added
+
+### Fixed
+
+- Modify `ruche.v100/environment.sh` file to fix tokamaxi simulation segfault issues.
+  
+### Changed
+
+### Deprecated
+
 ## [v0.2.0] - 2025-07-03
 
 ### Added
