@@ -16,7 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Modify `ruche.v100/environment.sh` file to fix tokamaxi simulation segfault issues.
 - Fix type of derivatives stored in `DerivFieldMem` and `DerivField` types.
 
-
 ### Changed
 
 ### Deprecated
