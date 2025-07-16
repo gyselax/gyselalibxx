@@ -3203,42 +3203,6 @@
   </compound>
   <compound refid="advection__field__rtheta_8hpp" kind="file"><name>advection_field_rtheta.hpp</name>
   </compound>
-  <compound refid="diocotron__initialisation__equilibrium_8cpp" kind="file"><name>diocotron_initialisation_equilibrium.cpp</name>
-  </compound>
-  <compound refid="diocotron__initialisation__equilibrium_8hpp" kind="file"><name>diocotron_initialisation_equilibrium.hpp</name>
-  </compound>
-  <compound refid="vortex__merger__equilibrium_8hpp" kind="file"><name>vortex_merger_equilibrium.hpp</name>
-  </compound>
-  <compound refid="vortex__merger__initialisation_8hpp" kind="file"><name>vortex_merger_initialisation.hpp</name>
-  </compound>
-  <compound refid="poisson__like__rhs__function_8hpp" kind="file"><name>poisson_like_rhs_function.hpp</name>
-  </compound>
-  <compound refid="bsl__predcorr_8hpp" kind="file"><name>bsl_predcorr.hpp</name>
-  </compound>
-  <compound refid="bsl__predcorr__second__order__explicit_8hpp" kind="file"><name>bsl_predcorr_second_order_explicit.hpp</name>
-  </compound>
-  <compound refid="bsl__predcorr__second__order__implicit_8hpp" kind="file"><name>bsl_predcorr_second_order_implicit.hpp</name>
-  </compound>
-  <compound refid="collision__configuration_8hpp" kind="file"><name>collision_configuration.hpp</name>
-  </compound>
-  <compound refid="noperturbinitialisation_8cpp" kind="file"><name>noperturbinitialisation.cpp</name>
-  </compound>
-  <compound refid="noperturbinitialisation_8hpp" kind="file"><name>noperturbinitialisation.hpp</name>
-  </compound>
-  <compound refid="iboltzmannsolver_8hpp" kind="file"><name>iboltzmannsolver.hpp</name>
-  </compound>
-  <compound refid="splitrighthandsidesolver_8cpp" kind="file"><name>splitrighthandsidesolver.cpp</name>
-  </compound>
-  <compound refid="splitrighthandsidesolver_8hpp" kind="file"><name>splitrighthandsidesolver.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2boltzmann_2splitvlasovsolver_8cpp" kind="file"><name>splitvlasovsolver.cpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2vlasov_2splitvlasovsolver_8cpp" kind="file"><name>splitvlasovsolver.cpp</name>
-  </compound>
-  <compound refid="geometryXVx_2boltzmann_2splitvlasovsolver_8hpp" kind="file"><name>splitvlasovsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2vlasov_2splitvlasovsolver_8hpp" kind="file"><name>splitvlasovsolver.hpp</name>
-  </compound>
   <compound refid="geometryRTheta_2geometry_2geometry_8hpp" kind="file"><name>geometry.hpp</name>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a3cd8a3421aa474d31f7046b09c1056ab" kind="typedef"><name>CoordR</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a4d50f0edb50ea8db41c4c69e7f343939" kind="typedef"><name>CoordTheta</name></member>
@@ -3631,9 +3595,35 @@
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a3b0117d0dac4046287f6ca7e9fb498e1" kind="variable"><name>SplineVxBoundary</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a2fef8aca81ca6554971e30628ddb8be2" kind="variable"><name>SplineVyBoundary</name></member>
   </compound>
-  <compound refid="bumpontailequilibrium_8cpp" kind="file"><name>bumpontailequilibrium.cpp</name>
+  <compound refid="diocotron__initialisation__equilibrium_8cpp" kind="file"><name>diocotron_initialisation_equilibrium.cpp</name>
   </compound>
-  <compound refid="bumpontailequilibrium_8hpp" kind="file"><name>bumpontailequilibrium.hpp</name>
+  <compound refid="diocotron__initialisation__equilibrium_8hpp" kind="file"><name>diocotron_initialisation_equilibrium.hpp</name>
+  </compound>
+  <compound refid="vortex__merger__equilibrium_8hpp" kind="file"><name>vortex_merger_equilibrium.hpp</name>
+  </compound>
+  <compound refid="vortex__merger__initialisation_8hpp" kind="file"><name>vortex_merger_initialisation.hpp</name>
+  </compound>
+  <compound refid="geometryRTheta_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
+  </compound>
+  <compound refid="poisson__like__rhs__function_8hpp" kind="file"><name>poisson_like_rhs_function.hpp</name>
+  </compound>
+  <compound refid="bsl__predcorr_8hpp" kind="file"><name>bsl_predcorr.hpp</name>
+  </compound>
+  <compound refid="bsl__predcorr__second__order__explicit_8hpp" kind="file"><name>bsl_predcorr_second_order_explicit.hpp</name>
+  </compound>
+  <compound refid="bsl__predcorr__second__order__implicit_8hpp" kind="file"><name>bsl_predcorr_second_order_implicit.hpp</name>
+  </compound>
+  <compound refid="geometryRTheta_2time__solver_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
+  </compound>
+  <compound refid="collision__configuration_8hpp" kind="file"><name>collision_configuration.hpp</name>
   </compound>
   <compound refid="geometryVparMu_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
   </compound>
@@ -3659,51 +3649,23 @@
   </compound>
   <compound refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
   </compound>
+  <compound refid="noperturbinitialisation_8cpp" kind="file"><name>noperturbinitialisation.cpp</name>
+  </compound>
+  <compound refid="noperturbinitialisation_8hpp" kind="file"><name>noperturbinitialisation.hpp</name>
+  </compound>
+  <compound refid="iboltzmannsolver_8hpp" kind="file"><name>iboltzmannsolver.hpp</name>
+  </compound>
+  <compound refid="splitrighthandsidesolver_8cpp" kind="file"><name>splitrighthandsidesolver.cpp</name>
+  </compound>
+  <compound refid="splitrighthandsidesolver_8hpp" kind="file"><name>splitrighthandsidesolver.hpp</name>
+  </compound>
+  <compound refid="bumpontailequilibrium_8cpp" kind="file"><name>bumpontailequilibrium.cpp</name>
+  </compound>
+  <compound refid="bumpontailequilibrium_8hpp" kind="file"><name>bumpontailequilibrium.hpp</name>
+  </compound>
   <compound refid="restartinitialisation_8cpp" kind="file"><name>restartinitialisation.cpp</name>
   </compound>
   <compound refid="restartinitialisation_8hpp" kind="file"><name>restartinitialisation.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2initialisation_2singlemodeperturbinitialisation_8cpp" kind="file"><name>singlemodeperturbinitialisation.cpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2initialisation_2singlemodeperturbinitialisation_8cpp" kind="file"><name>singlemodeperturbinitialisation.cpp</name>
-  </compound>
-  <compound refid="geometryXVx_2initialisation_2singlemodeperturbinitialisation_8hpp" kind="file"><name>singlemodeperturbinitialisation.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2initialisation_2singlemodeperturbinitialisation_8hpp" kind="file"><name>singlemodeperturbinitialisation.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2poisson_2chargedensitycalculator_8cpp" kind="file"><name>chargedensitycalculator.cpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2poisson_2chargedensitycalculator_8cpp" kind="file"><name>chargedensitycalculator.cpp</name>
-  </compound>
-  <compound refid="geometryXVx_2poisson_2chargedensitycalculator_8hpp" kind="file"><name>chargedensitycalculator.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2poisson_2chargedensitycalculator_8hpp" kind="file"><name>chargedensitycalculator.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2poisson_2ichargedensitycalculator_8hpp" kind="file"><name>ichargedensitycalculator.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2poisson_2ichargedensitycalculator_8hpp" kind="file"><name>ichargedensitycalculator.hpp</name>
-  </compound>
-  <compound refid="geometryRTheta_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2poisson_2nullqnsolver_8cpp" kind="file"><name>nullqnsolver.cpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2poisson_2nullqnsolver_8cpp" kind="file"><name>nullqnsolver.cpp</name>
-  </compound>
-  <compound refid="geometryXVx_2poisson_2nullqnsolver_8hpp" kind="file"><name>nullqnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2poisson_2nullqnsolver_8hpp" kind="file"><name>nullqnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2poisson_2qnsolver_8cpp" kind="file"><name>qnsolver.cpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2poisson_2qnsolver_8cpp" kind="file"><name>qnsolver.cpp</name>
-  </compound>
-  <compound refid="geometryXVx_2poisson_2qnsolver_8hpp" kind="file"><name>qnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2poisson_2qnsolver_8hpp" kind="file"><name>qnsolver.hpp</name>
   </compound>
   <compound refid="collisions__inter_8cpp" kind="file"><name>collisions_inter.cpp</name>
   </compound>
@@ -3755,11 +3717,53 @@
     <member refid="mask__tanh_8hpp_1a6f9734fca864f135565da5376b5c3e72acf4c2a4bf7c328c4e51f902350475343" kind="enumvalue"><name>Inverted</name></member>
     <member refid="mask__tanh_8hpp_1a1d4432f5d3a7e655b4faae141b2d4eea" kind="function"><name>mask_tanh</name></member>
   </compound>
-  <compound refid="geometryRTheta_2time__solver_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
+  <compound refid="fluid__moments_8cpp" kind="file"><name>fluid_moments.cpp</name>
   </compound>
-  <compound refid="geometryXVx_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
+  <compound refid="fluid__moments_8hpp" kind="file"><name>fluid_moments.hpp</name>
   </compound>
-  <compound refid="geometryXYVxVy_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
+  <compound refid="initialisation__Kelvin__Helmholtz_8hpp" kind="file"><name>initialisation_Kelvin_Helmholtz.hpp</name>
+  </compound>
+  <compound refid="predcorr__RK2_8hpp" kind="file"><name>predcorr_RK2.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2initialisation_2singlemodeperturbinitialisation_8cpp" kind="file"><name>singlemodeperturbinitialisation.cpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2initialisation_2singlemodeperturbinitialisation_8cpp" kind="file"><name>singlemodeperturbinitialisation.cpp</name>
+  </compound>
+  <compound refid="geometryXVx_2initialisation_2singlemodeperturbinitialisation_8hpp" kind="file"><name>singlemodeperturbinitialisation.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2initialisation_2singlemodeperturbinitialisation_8hpp" kind="file"><name>singlemodeperturbinitialisation.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2poisson_2chargedensitycalculator_8cpp" kind="file"><name>chargedensitycalculator.cpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2poisson_2chargedensitycalculator_8cpp" kind="file"><name>chargedensitycalculator.cpp</name>
+  </compound>
+  <compound refid="geometryXVx_2poisson_2chargedensitycalculator_8hpp" kind="file"><name>chargedensitycalculator.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2poisson_2chargedensitycalculator_8hpp" kind="file"><name>chargedensitycalculator.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2poisson_2ichargedensitycalculator_8hpp" kind="file"><name>ichargedensitycalculator.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2poisson_2ichargedensitycalculator_8hpp" kind="file"><name>ichargedensitycalculator.hpp</name>
+  </compound>
+  <compound refid="mpichargedensitycalculator_8cpp" kind="file"><name>mpichargedensitycalculator.cpp</name>
+  </compound>
+  <compound refid="mpichargedensitycalculator_8hpp" kind="file"><name>mpichargedensitycalculator.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2poisson_2nullqnsolver_8cpp" kind="file"><name>nullqnsolver.cpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2poisson_2nullqnsolver_8cpp" kind="file"><name>nullqnsolver.cpp</name>
+  </compound>
+  <compound refid="geometryXVx_2poisson_2nullqnsolver_8hpp" kind="file"><name>nullqnsolver.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2poisson_2nullqnsolver_8hpp" kind="file"><name>nullqnsolver.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2poisson_2qnsolver_8cpp" kind="file"><name>qnsolver.cpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2poisson_2qnsolver_8cpp" kind="file"><name>qnsolver.cpp</name>
+  </compound>
+  <compound refid="geometryXVx_2poisson_2qnsolver_8hpp" kind="file"><name>qnsolver.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2poisson_2qnsolver_8hpp" kind="file"><name>qnsolver.hpp</name>
   </compound>
   <compound refid="geometryXVx_2time__integration_2predcorr_8cpp" kind="file"><name>predcorr.cpp</name>
   </compound>
@@ -3769,23 +3773,19 @@
   </compound>
   <compound refid="geometryXYVxVy_2time__integration_2predcorr_8hpp" kind="file"><name>predcorr.hpp</name>
   </compound>
-  <compound refid="fluid__moments_8cpp" kind="file"><name>fluid_moments.cpp</name>
-  </compound>
-  <compound refid="fluid__moments_8hpp" kind="file"><name>fluid_moments.hpp</name>
-  </compound>
-  <compound refid="initialisation__Kelvin__Helmholtz_8hpp" kind="file"><name>initialisation_Kelvin_Helmholtz.hpp</name>
-  </compound>
-  <compound refid="predcorr__RK2_8hpp" kind="file"><name>predcorr_RK2.hpp</name>
-  </compound>
-  <compound refid="mpichargedensitycalculator_8cpp" kind="file"><name>mpichargedensitycalculator.cpp</name>
-  </compound>
-  <compound refid="mpichargedensitycalculator_8hpp" kind="file"><name>mpichargedensitycalculator.hpp</name>
-  </compound>
   <compound refid="ivlasovsolver_8hpp" kind="file"><name>ivlasovsolver.hpp</name>
   </compound>
   <compound refid="mpisplitvlasovsolver_8cpp" kind="file"><name>mpisplitvlasovsolver.cpp</name>
   </compound>
   <compound refid="mpisplitvlasovsolver_8hpp" kind="file"><name>mpisplitvlasovsolver.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2boltzmann_2splitvlasovsolver_8cpp" kind="file"><name>splitvlasovsolver.cpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2vlasov_2splitvlasovsolver_8cpp" kind="file"><name>splitvlasovsolver.cpp</name>
+  </compound>
+  <compound refid="geometryXVx_2boltzmann_2splitvlasovsolver_8hpp" kind="file"><name>splitvlasovsolver.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2vlasov_2splitvlasovsolver_8hpp" kind="file"><name>splitvlasovsolver.hpp</name>
   </compound>
   <compound refid="gyroaverage__operator_8hpp" kind="file"><name>gyroaverage_operator.hpp</name>
   </compound>
