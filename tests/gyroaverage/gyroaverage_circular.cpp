@@ -239,7 +239,7 @@ protected:
 
 protected:
     double m_gyroradius;
-    std::size_t const m_nb_gyro_points = 6; // Must be odd for the error estimate below to apply
+    std::size_t const m_nb_gyro_points = 6; // Must be even for the error estimate below to apply
     double const m_B0 = 1.0;
     double const m_R0 = 300.0;
     double const m_r0 = 150.0;
