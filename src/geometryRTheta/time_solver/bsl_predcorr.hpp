@@ -126,10 +126,6 @@ public:
         IdxRangeRTheta grid(get_idx_range<GridR, GridTheta>(density_host));
         AdvectionFieldFinder advection_field_computer(m_mapping);
 
-        IdxRangeBSR radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
-                IdxStep<BSplinesR> {PolarBSplinesRTheta::continuity + 1}));
-        IdxRangeBSTheta polar_idx_range(ddc::discrete_space<BSplinesTheta>().full_domain());
-
         host_t<PolarSplineMemRTheta> electrostatic_potential_coef(
                 ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
         ddc::NullExtrapolationRule extrapolation_rule;
