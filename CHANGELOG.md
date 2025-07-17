@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Deprecated
 
+### Removed
+
+- Remove deprecated method `PolarBSplines::integrals`.
+
 ## [v0.2.0] - 2025-07-03
 
 ### Added
