@@ -227,18 +227,17 @@ public:
      * can use a dichotomy method. 
      * 
      * @warning target_idx is always replaced by the suspected index. 
-     * If there is not equivalent index, the returned index is wrong but the 
-     * closest that the algorithm found. 
+     * If there is not equivalent index, the returned index is out_of_bounds_idx.
      * 
-     * @tparam CurrentGrid The grid where the input index is defined. 
      * @tparam TargetGrid The grid where the output index is defined.
-
-     * @param[out] target_idx
-     *      A index on the edge of the target patch.
+     * @tparam CurrentGrid The grid where the input index is defined.
+     *                     This template parameter can be deduced from the function call.
+     *
      * @param[in] current_idx
      *      A index on the edge of the current patch.
-     * @tparam CurrentIdx 
-     *      The current index type of the given coordinate index. 
+     *
+     * @returns target_idx
+     *      A index on the edge of the target patch.
      * 
      * @return Boolean stating if there is an equivalent index. 
      * 
