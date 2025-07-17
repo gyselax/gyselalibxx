@@ -16,10 +16,10 @@
 namespace PolarSplines {
 
 /**
- * @brief Get the integrals of each of the polar bsplines.
+ * @brief Get the integrals over the logical domain of each of the polar B-splines.
  *
  * @param[in] execution_space The execution space on which the integrals should be calculated.
- * @param[out] int_vals The values of the integrals of each of the polar bsplines.
+ * @param[out] int_vals The values of the integrals over the logical domain of each of the polar B-splines.
  */
 template <class ExecSpace, class DDim, class MemorySpace>
 DField<IdxRange<DDim>, MemorySpace> integrals(
