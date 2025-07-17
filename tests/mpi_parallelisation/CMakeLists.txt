@@ -14,14 +14,12 @@ target_link_libraries(unit_tests_parallelisation_layout
         GTest::gmock
         gslx::mpi_parallelisation
         gslx::utils
-
 )
 
 gtest_discover_tests(unit_tests_parallelisation_layout DISCOVERY_MODE PRE_TEST)
 
 add_executable(unit_tests_parallelisation
     alltoall.cpp
-    layout.cpp
     main.cpp
 )
 target_link_libraries(unit_tests_parallelisation
@@ -31,7 +29,6 @@ target_link_libraries(unit_tests_parallelisation
         GTest::gmock
         gslx::mpi_parallelisation
         gslx::utils
-
 )
 
 function(make_mpi_test test_name)
@@ -49,6 +46,3 @@ make_mpi_test(MPIParallelisation.AllToAll2D_CPU)
 make_mpi_test(MPIParallelisation.AllToAll2D_GPU)
 make_mpi_test(MPIParallelisation.AllToAll3D_CPU)
 make_mpi_test(MPIParallelisation.AllToAll4D_CPU)
-make_mpi_test(Layout.MinimalDomainDistribution)
-make_mpi_test(Layout.SpreadDomainDistribution)
-make_mpi_test(Layout.DomainSelection)

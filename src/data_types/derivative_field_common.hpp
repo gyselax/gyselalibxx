@@ -9,6 +9,7 @@
 #include "ddc_aliases.hpp"
 #include "deriv_details.hpp"
 #include "idx_range_slice.hpp"
+#include "type_seq_tools.hpp"
 
 template <class T>
 inline constexpr bool enable_deriv_field = false;
@@ -54,9 +55,10 @@ public:
     using deriv_tags = detail::deriv_sub_set_t<ddc::detail::TypeSeq<DDims...>>;
 
     /// @brief A type sequence containing all physical dimensions for which derivatives are present in this object.
-    using physical_deriv_grids = typename detail::strip_deriv_t<deriv_tags>;
+    using physical_deriv_grids
+            = find_all_grids_t<detail::strip_deriv_t<deriv_tags>, ddc::detail::TypeSeq<DDims...>>;
 
-    /// @brief A type sequence containing all the physical dimensions on which the fields are defined.
+    /// @brief A type sequence containing all the physical grids on which the fields are defined.
     using physical_grids = ddc::type_seq_remove_t<ddc::detail::TypeSeq<DDims...>, deriv_tags>;
 
     /// @brief The type of the elements in the fields.
@@ -137,7 +139,7 @@ protected:
      * The fields which contain the values have different index ranges to the fields containing derivatives
      * so a DDC object cannot be used directly.
      * E.g. for a 2D field (X,Y) with derivatives provided in both directions the elements of internal_fields
-     * have the type : DFieldMem<IdxRange<Deriv<IDimX>, Deriv<IDimY>, IDimX, IDimY>
+     * have the type : DFieldMem<IdxRange<Deriv<X>, Deriv<Y>, GridX, GridY>>
      * The derivative index ranges are then defined such that the  elements of internal_fields represent:
      * 0 : @f$f(x,y)@f$
      * 1 : @f$\partial_x^k f(x,y)  \quad \forall 1 \leq k \leq NDerivs@f$
@@ -217,7 +219,10 @@ protected:
             if constexpr (ddc::in_tags_v<QueryDDim, physical_deriv_grids>) {
                 // Physical dimension along which derivatives are known
                 // If information is available about the physical index range
-                if (array_idx & (1 << ddc::type_seq_rank_v<ddc::Deriv<QueryDDim>, deriv_tags>)) {
+                if (array_idx
+                    & (1 << ddc::type_seq_rank_v<
+                               ddc::Deriv<typename QueryDDim::continuous_dimension_type>,
+                               deriv_tags>)) {
                     // If the derivative is being requested
                     return get_index(ddc::select<QueryDDim>(slice_idx));
                 }
@@ -264,7 +269,10 @@ protected:
                 // Physical dimension along which derivatives are known
                 // If information is available about the physical index range
                 IdxRange<QueryDDim> idx_range_requested(slice_idx_range);
-                if (array_idx & (1 << ddc::type_seq_rank_v<ddc::Deriv<QueryDDim>, deriv_tags>)) {
+                if (array_idx
+                    & (1 << ddc::type_seq_rank_v<
+                               ddc::Deriv<typename QueryDDim::continuous_dimension_type>,
+                               deriv_tags>)) {
                     // If the derivative is being requested
                     assert(IdxRangeSlice<QueryDDim>(m_cross_derivative_idx_range)
                                    .contains(idx_range_requested.front())

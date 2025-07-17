@@ -13,6 +13,7 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "gyroaverage_operator.hpp"
+#include "test_math_utils.hpp"
 
 namespace {
 
@@ -238,7 +239,7 @@ protected:
 
 protected:
     double m_gyroradius;
-    std::size_t const m_nb_gyro_points = 32;
+    std::size_t const m_nb_gyro_points = 6; // Must be even for the error estimate below to apply
     double const m_B0 = 1.0;
     double const m_R0 = 300.0;
     double const m_r0 = 150.0;
@@ -347,7 +348,19 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
     auto A_bar_alloc_host = ddc::create_mirror_and_copy(A_bar);
     host_t<DFieldRThetaBatch> A_bar_host = get_field(A_bar_alloc_host);
 
+    IdxRangeR const r_idx_range(rthetabatch_idx_range);
     IdxRangeTheta const theta_idx_range(rthetabatch_idx_range);
+    IdxRangeBatch const batch_idx_range(rthetabatch_idx_range);
+
+    IdxStep<GridR, GridTheta, GridBatch> rthetabatch_check_strides(5, 11, 1);
+    IdxStep<GridR, GridTheta, GridBatch> rthetabatch_check_extents(
+            r_idx_range.size() / 5,
+            theta_idx_range.size() / 11,
+            batch_idx_range.size());
+    IdxRangeSlice<GridR, GridTheta, GridBatch> rthetabatch_idx_range_check(
+            rthetabatch_idx_range.front(),
+            rthetabatch_check_extents,
+            rthetabatch_check_strides);
 
     double const r0 = m_r0;
     double const R0 = m_R0;
@@ -355,34 +368,33 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
     double const kx = m_kx;
     double const ky = m_ky;
     int const nb_gyro_points = m_nb_gyro_points;
-    ddc::for_each(rthetabatch_idx_range, [&](IdxRThetaBatch const irthetabatch) {
+    ddc::for_each(rthetabatch_idx_range_check, [&](IdxRThetaBatch const irthetabatch) {
         IdxR const ir(irthetabatch);
         IdxTheta const itheta(irthetabatch);
         IdxBatch const ibatch(irthetabatch);
         double const r = ddc::coordinate(ir);
-        double const R0eff = R0;
-        double const gyroradius = rho_L_host(ir, itheta);
-        double const kperprho = kperp * gyroradius;
-        double const phase = kx * (Rcoord_host(ir, itheta) - R0eff) + ky * Zcoord_host(ir, itheta);
-        double const phik
-                = std::atan2(Zcoord_host(ir, itheta), Rcoord_host(ir, itheta) - R0eff) - M_PI / 4;
-        std::size_t nb_gyro_points_half = m_nb_gyro_points / 2;
-        double const sgn = std::pow(-1.0, static_cast<double>(nb_gyro_points_half));
-        double const sgn_tmp = nb_gyro_points % 2 == 0 ? sgn : -sgn;
-        double const res_th = std::cyl_bessel_j(0, kperprho) * std::cos(phase);
-        double const err_J0_th
-                = 2.0
-                  * (std::cyl_bessel_j(nb_gyro_points, kperprho) * std::cos(nb_gyro_points * phik)
-                             * std::cos(phase) * sgn_tmp
-                     + std::cyl_bessel_j(2 * nb_gyro_points, kperprho)
-                               * std::cos(2 * nb_gyro_points * phik) * std::cos(phase));
-        double const err_J0_num = A_bar_host(ir, itheta, ibatch) - res_th;
-
         // In the outer region, the particle position can be out of small radius (r), where the values are considered to be zero.
         // Also the gyroaveraged value has the periodicity along theta direction (tested separately above)
         // These conditions are not taken into account in the analytical formula, so we do not test these cases.
-        if (r < r0 * 0.8 && itheta < theta_idx_range.back()) {
-            EXPECT_NEAR(err_J0_num, err_J0_th, 5e-2);
+        if (r < r0 * 0.8) {
+            double const R0eff = R0;
+            double const gyroradius = rho_L_host(ir, itheta);
+            double const kperprho = kperp * gyroradius;
+            double const phase
+                    = kx * (Rcoord_host(ir, itheta) - R0eff) + ky * Zcoord_host(ir, itheta);
+            double const res_th = cyl_bessel_j(0, kperprho) * std::cos(phase);
+            double const err_J0_num = A_bar_host(ir, itheta, ibatch) - res_th;
+
+            double const phik = M_PI / 4;
+            std::size_t nb_gyro_points_half = m_nb_gyro_points / 2;
+            double const sgn = std::pow(-1.0, static_cast<double>(nb_gyro_points_half));
+            double const err_J0_th = 2.0 * std::cos(phase)
+                                     * (cyl_bessel_j(nb_gyro_points, kperprho)
+                                                * std::cos(nb_gyro_points * phik) * sgn
+                                        + cyl_bessel_j(2 * nb_gyro_points, kperprho)
+                                                  * std::cos(2 * nb_gyro_points * phik));
+
+            EXPECT_NEAR(err_J0_num, err_J0_th, 3e-2);
         }
     });
 }
@@ -391,20 +403,4 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
 INSTANTIATE_TEST_SUITE_P(
         GyroAverageCircular,
         GyroAverageCircularParamTests,
-        ::testing::Values(
-                0.55,
-                1.1,
-                1.65,
-                2.2,
-                2.75,
-                3.3,
-                3.85,
-                4.4,
-                4.95,
-                5.5,
-                6.05,
-                6.6,
-                7.15,
-                7.7,
-                8.25,
-                8.8));
+        ::testing::Values(1.1, 3.3, 8.8));

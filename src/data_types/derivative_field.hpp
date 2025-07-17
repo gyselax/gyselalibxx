@@ -94,7 +94,7 @@ auto deepcopy(ExecSpace const& execution_space, FieldDst&& dst, FieldSrc&& src)
  * @tparam ElementType The type of the elements inside the chunks.
  * @tparam IdxRange<DDims...> The index range on which the internal fields are defined.
  *          This index range is the physical index range on which the values are defined combined with
- *          the index range of the derivatives of interest (e.g. IdxRange<Deriv<IDimX>, IDimX, IDimY>).
+ *          the index range of the derivatives of interest (e.g. IdxRange<Deriv<X>, GridX, GridY>).
  * @tparam MemorySpace The memory space where the data is saved (CPU/GPU).
  * @tparam LayoutStridedPolicy The way in which the memory is laid out in memory (contiguous in
  *          the leading/trailing dimension, strided, etc).

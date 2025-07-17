@@ -179,16 +179,11 @@ and $`\Delta x^+_{i} = x^+_{i+1} -  x^+_{i} \text{, } \Delta x^-_{i} = x^-_{i} -
 and $`\{f^{+/-}_{i+k}\}_k`$ the function values at the interpolation points on patch 1 (+) and
 patch 2 (-).
 
-<<<<<<< HEAD
 **Remark:** As mentioned above, the coefficient $`c^i_{N^L,N^R}`$ can be written as a linear combination
-=======
-**Remark:** As mentionnd above, the coefficient $`c^i_{N^L,N^R}`$ can be written as a linear combination
->>>>>>> main_pvidal
 of the interpolating function values. In the code, we store the weights in front of each interpolating function value
 as they depend only on the grids. For the same reason, we store $`\gamma_i`$ as a vector,
 
 ```math
-<<<<<<< HEAD
 {\bf \Gamma_i}
     = \left[({\bf \Gamma_i})_0, ({\bf \Gamma_i})_1, ({\bf \Gamma_i})_2\right]
     = \frac{3}{2} \frac{1}{\Delta x^+_{i} +\Delta x^-_{i}}
@@ -198,17 +193,6 @@ as they depend only on the grids. For the same reason, we store $`\gamma_i`$ as 
                 \frac{\Delta x^+_{i}}{\Delta x^-_{i}}
                 - \frac{\Delta x^-_{i}}{\Delta x^+_{i}}
             \right),
-=======
-{\bf \Gamma_i} 
-    = \left[({\bf \Gamma_i})_0, ({\bf \Gamma_i})_1, ({\bf \Gamma_i})_2\right] 
-    = \frac{3}{2} \frac{1}{\Delta x^+_{i} +\Delta x^-_{i}} 
-        \left[
-            - \frac{\Delta x^+_{i}}{\Delta x^-_{i}}, 
-            \left(
-                \frac{\Delta x^+_{i}}{\Delta x^-_{i}}
-                - \frac{\Delta x^-_{i}}{\Delta x^+_{i}}
-            \right), 
->>>>>>> main_pvidal
             \frac{\Delta x^-_{i}}{\Delta x^+_{i}}
         \right].
 ```
@@ -237,13 +221,8 @@ We start the recursion on patch 2. We initialise it with,
 
 ```math
 \begin{aligned}
-<<<<<<< HEAD
     & \omega_{k, 1,1}^i = \gamma_{i,k},
     && \omega_{k, 1,2}^i = \frac{1}{1 - \alpha_i  \beta_{i+1}} \omega_{k, 1,1}^i
-=======
-    & \omega_{k, 1,1}^i = \gamma_{i,k}, 
-    && \omega_{k, 1,2}^i = \frac{1}{1 - \alpha_i  \beta_{i+1}} \omega_{k, 1,1}^i 
->>>>>>> main_pvidal
                         + \frac{\alpha_i}{1 - \alpha_i  \beta_{i+1}} \gamma_{i+1,k},
 \end{aligned}
 ```
@@ -343,11 +322,7 @@ and for $`m = 2, ..., N^L-1`$,
 
 ```math
 \begin{aligned}
-<<<<<<< HEAD
     & \omega_{k, m+1,N^R}^i =
-=======
-    & \omega_{k, m+1,N^R}^i = 
->>>>>>> main_pvidal
     \frac{1}{1 - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}}}
             \left[
                 \omega_{k, m,N^R}^i
@@ -734,9 +709,5 @@ Journal of Computational Physics 228(5), 1429–1446 (2009)
 
 [^2]: Vidal, P., Bourne, E., Grandgirard, V., Mehrenberger, M., Sonnendrücker, E.,
 *Local cubic spline interpolation for Vlasov-type equations on a multi-patch geometry.*
-<<<<<<< HEAD
 Journal of Scientific Computing, (2025) [SUBMITTED - NOT PUBLISHED].
 Available on arXiv: [https://arxiv.org/abs/2505.22078](https://arxiv.org/abs/2505.22078)
-=======
-Journal of Scientific Computing, (2025) [SUBMITTED - NOT PUBLISHED]
->>>>>>> main_pvidal
