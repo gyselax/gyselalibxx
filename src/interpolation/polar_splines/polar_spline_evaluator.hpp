@@ -145,7 +145,7 @@ public:
      *
      * @return A double with value of the spline function at the given coordinate.
      */
-    KOKKOS_LAMBDA double operator()(
+    KOKKOS_FUNCTION double operator()(
             Coord<DimR, DimTheta> coord_eval,
             DConstField<IdxRange<PolarBSplinesType>> const spline_coef) const
     {
@@ -209,7 +209,7 @@ public:
      * @return The value of the derivative of the spline function on the
      * first dimension.
      */
-    KOKKOS_LAMBDA double deriv_dim_1(
+    KOKKOS_FUNCTION double deriv_dim_1(
             Coord<DimR, DimTheta> coord_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
@@ -228,7 +228,7 @@ public:
      * @return The value of the derivative of the spline function on the
      * second dimension.
      */
-    KOKKOS_LAMBDA double deriv_dim_2(
+    KOKKOS_FUNCTION double deriv_dim_2(
             Coord<DimR, DimTheta> coord_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
@@ -246,7 +246,7 @@ public:
      * @return The value of the cross derivative of the spline
      * function
      */
-    KOKKOS_LAMBDA double deriv_1_and_2(
+    KOKKOS_FUNCTION double deriv_1_and_2(
             Coord<DimR, DimTheta> coord_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
@@ -406,7 +406,7 @@ public:
     }
 
 private:
-    KOKKOS_LAMBDA double eval(
+    KOKKOS_FUNCTION double eval(
             Coord<DimR, DimTheta> coord_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
@@ -427,7 +427,7 @@ private:
     }
 
     template <class EvalType>
-    KOKKOS_LAMBDA double eval_no_bc(
+    KOKKOS_FUNCTION double eval_no_bc(
             Coord<DimR, DimTheta> coord_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef,
             EvalType const) const
