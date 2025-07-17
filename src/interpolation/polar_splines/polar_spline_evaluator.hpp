@@ -191,7 +191,7 @@ public:
         using IdxEval = typename Domain::discrete_element_type;
         ddc::parallel_for_each(
                 exec_space(),
-                get_idx_range(coords_eval),
+                get_idx_range(spline_eval),
                 KOKKOS_LAMBDA(IdxEval i) {
                     spline_eval(i) = eval(ddc::coordinate(i), spline_coef);
                 });
@@ -347,7 +347,7 @@ public:
         using IdxEval = typename Domain::discrete_element_type;
         ddc::parallel_for_each(
                 exec_space(),
-                get_idx_range(coords_eval),
+                get_idx_range(spline_eval),
                 KOKKOS_LAMBDA(IdxEval i) {
                     spline_eval(i)
                             = eval_no_bc(ddc::coordinate(i), spline_coef, eval_deriv_theta_type());
@@ -396,7 +396,7 @@ public:
         using IdxEval = typename Domain::discrete_element_type;
         ddc::parallel_for_each(
                 exec_space(),
-                get_idx_range(coords_eval),
+                get_idx_range(spline_eval),
                 KOKKOS_LAMBDA(IdxEval i) {
                     spline_eval(i) = eval_no_bc(
                             ddc::coordinate(i),
