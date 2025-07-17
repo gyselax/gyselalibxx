@@ -279,8 +279,6 @@ public:
                 m_idx_range_patch_2.extents() + int(EdgeDim2::PERIODIC));
 
 
-        bool is_equivalent_idx = false;
-
         // Get the 1D index range corresponding to the current and target domains.
         IdxRange<EdgeGrid1, EdgeGrid2> const
                 combined_idx_range(idx_range_patch_1_full, idx_range_patch_2_full);
@@ -320,7 +318,7 @@ public:
                 only true if the current index represents an extremity
                 (current_idx_value == 0 or current_idx_value == n_cells_current).
             */
-            is_equivalent_idx = (current_idx_value % (n_cells_current / gcd_cells) == 0);
+            bool is_equivalent_idx = (current_idx_value % (n_cells_current / gcd_cells) == 0);
 
             // If there is an equivalent index, update target_idx.
             if (is_equivalent_idx) {
