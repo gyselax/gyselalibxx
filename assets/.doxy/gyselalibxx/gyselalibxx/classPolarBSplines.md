@@ -80,6 +80,8 @@
 | ---: | :--- |
 |  KOKKOS\_FUNCTION [**tensor\_product\_index\_type**](classPolarBSplines.md#typedef-tensor_product_index_type) | [**get\_2d\_index**](#function-get_2d_index) (Idx&lt; DDim &gt; const & idx) <br> |
 |  KOKKOS\_FUNCTION Idx&lt; DDim &gt; | [**get\_polar\_index**](#function-get_polar_index) ([**tensor\_product\_index\_type**](classPolarBSplines.md#typedef-tensor_product_index_type) const & idx) <br> |
+|  Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt; | [**get\_singular\_subset**](#function-get_singular_subset) (Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt; coeffs) <br>_Get the subset of the coefficients associated with singular basis splines._  |
+|  Field&lt; ElementType, [**tensor\_product\_idx\_range\_type**](classPolarBSplines.md#typedef-tensor_product_idx_range_type), MemorySpace &gt; | [**get\_tensor\_product\_subset**](#function-get_tensor_product_subset) (Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt; coeffs) <br>_Get the subset of the coefficients of tensor product basis splines._  |
 |  constexpr std::size\_t | [**n\_singular\_basis**](#function-n_singular_basis) () <br> |
 |  constexpr IdxRange&lt; DDim &gt; | [**singular\_idx\_range**](#function-singular_idx_range) () <br>_Get the IdxRange containing the indices of the b-splines which traverse the singular point._  |
 
@@ -346,6 +348,48 @@ The index of the basis spline in the PolarBSpline index range.
 
 
 
+
+
+        
+
+<hr>
+
+
+
+### function get\_singular\_subset 
+
+_Get the subset of the coefficients associated with singular basis splines._ 
+```C++
+template<class ElementType, class DDim, class MemorySpace>
+static inline Field< ElementType, IdxRange< DDim >, MemorySpace > PolarBSplines::get_singular_subset (
+    Field< ElementType, IdxRange< DDim >, MemorySpace > coeffs
+) 
+```
+
+
+
+Get the subset of the coefficients which are associated with basis splines which traverse the singular point. 
+
+
+        
+
+<hr>
+
+
+
+### function get\_tensor\_product\_subset 
+
+_Get the subset of the coefficients of tensor product basis splines._ 
+```C++
+template<class ElementType, class DDim, class MemorySpace>
+static inline Field< ElementType, tensor_product_idx_range_type , MemorySpace > PolarBSplines::get_tensor_product_subset (
+    Field< ElementType, IdxRange< DDim >, MemorySpace > coeffs
+) 
+```
+
+
+
+Get the subset of the coefficients which are associated with basis splines which can be written as a product of a radial and a poloidal basis spline. 
 
 
         

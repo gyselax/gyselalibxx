@@ -39,6 +39,8 @@
       <member refid="classPolarBSplines_1a3781a1ef42e396315cd2912e0f128c8b" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>discrete_dimension_type</name></member>
       <member refid="classPolarBSplines_1a8ad5514f78dabdfe57bbfa3c487fa808" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>get_2d_index</name></member>
       <member refid="classPolarBSplines_1ab295d737e634cd296d1fdbb3a76c2e4e" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>get_polar_index</name></member>
+      <member refid="classPolarBSplines_1a285da2d17bc0056295ff7d6c686db83f" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>get_singular_subset</name></member>
+      <member refid="classPolarBSplines_1a35f5e1426b2b1f16f8f29f9047c3e2d0" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>get_tensor_product_subset</name></member>
       <member refid="classPolarBSplines_1a9254ee09fe5fce248ae80efac56c82c3" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>n_singular_basis</name></member>
       <member refid="classPolarBSplines_1a648dc9ce69b7875ee05df11ca91ca831" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>R</name></member>
       <member refid="classPolarBSplines_1ae4bb250b0904ab8a72c3f1fc029cb2fc" prot="public" virt="non-virtual"><scope>PolarBSplinesRTheta</scope><name>singular_idx_range</name></member>

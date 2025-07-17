@@ -10,7 +10,6 @@
 
 
 
-* `#include "polar_spline.hpp"`
 * `#include "view.hpp"`
 
 

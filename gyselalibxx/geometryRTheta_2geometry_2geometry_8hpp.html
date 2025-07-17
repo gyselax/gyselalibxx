@@ -829,8 +829,12 @@
 <td style="text-align: left;"><a href="#typedef-idxtheta"><strong>IdxTheta</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef <a href="structPolarSplineMem.html"><strong>PolarSplineMem</strong></a>&lt; <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a> &gt;</td>
+<td style="text-align: right;">typedef DFieldMem&lt; IdxRange&lt; <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a> &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-polarsplinememrtheta"><strong>PolarSplineMemRTheta</strong></a>  <br><em>Tag the polar B-splines decomposition of a function.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DField&lt; IdxRange&lt; <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-polarsplinertheta"><strong>PolarSplineRTheta</strong></a>  <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef DField&lt; IdxRangeBSRTheta &gt;</td>
@@ -1156,9 +1160,14 @@
 
 <h3 id="typedef-polarsplinememrtheta">typedef PolarSplineMemRTheta</h3>
 <p><em>Tag the polar B-splines decomposition of a function.</em> </p>
-<pre><code class="language-C++">using PolarSplineMemRTheta =  PolarSplineMem&lt;PolarBSplinesRTheta&gt;;
+<pre><code class="language-C++">using PolarSplineMemRTheta =  DFieldMem&lt;IdxRange&lt;PolarBSplinesRTheta&gt; &gt;;
 </code></pre>
 <p>Store the polar B-splines coefficients of the function. </p>
+<hr>
+
+<h3 id="typedef-polarsplinertheta">typedef PolarSplineRTheta</h3>
+<pre><code class="language-C++">using PolarSplineRTheta =  DField&lt;IdxRange&lt;PolarBSplinesRTheta&gt; &gt;;
+</code></pre>
 <hr>
 
 <h3 id="typedef-spline2d">typedef Spline2D</h3>

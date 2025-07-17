@@ -42,6 +42,7 @@
 
 ## i
 
+* **integrals** ([**PolarSplines**](namespacePolarSplines.md))
 * **InsertPosition** ([**connectivity\_details**](namespaceconnectivity__details.md))
 * **is\_non\_uniform\_interpolation\_points\_v** ([**ddcHelper**](namespaceddcHelper.md))
 * **index\_identifiers\_t** ([**tensor\_tools**](namespacetensor__tools.md))

@@ -17,7 +17,6 @@
 * `#include "iqnsolver.hpp"`
 * `#include "metric_tensor_evaluator.hpp"`
 * `#include "poisson_like_rhs_function.hpp"`
-* `#include "polar_spline.hpp"`
 * `#include "polar_spline_evaluator.hpp"`
 * `#include "polarpoissonlikesolver.hpp"`
 * `#include "vector_field.hpp"`

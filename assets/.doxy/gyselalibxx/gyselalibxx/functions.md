@@ -26,10 +26,6 @@
 * **compute\_Nucoll** ([**collisions\_utils.hpp**](collisions__utils_8hpp.md))
 * **compute\_Vcoll\_Tcoll** ([**collisions\_utils.hpp**](collisions__utils_8hpp.md))
 * **compute\_dvDcoll** ([**collisions\_utils.hpp**](collisions__utils_8hpp.md))
-* **create\_mirror** ([**polar\_spline.hpp**](polar__spline_8hpp.md))
-* **create\_mirror\_and\_copy** ([**polar\_spline.hpp**](polar__spline_8hpp.md))
-* **create\_mirror\_view** ([**polar\_spline.hpp**](polar__spline_8hpp.md))
-* **create\_mirror\_view\_and\_copy** ([**polar\_spline.hpp**](polar__spline_8hpp.md))
 * **convert\_coo\_to\_csr** ([**matrix\_batch\_csr.hpp**](matrix__batch__csr_8hpp.md))
 * **check\_conv** ([**matrix\_utils.hpp**](matrix__utils_8hpp.md))
 * **compute\_coeffs\_on\_mapping** ([**volume\_quadrature\_nd.hpp**](volume__quadrature__nd_8hpp.md))
@@ -74,7 +70,6 @@
 ## i
 
 * **index** ([**indexed\_tensor.hpp**](indexed__tensor_8hpp.md))
-* **integrals** ([**polar\_bsplines.hpp**](polar__bsplines_8hpp.md))
 * **init\_pseudo\_uniform\_spline\_dependent\_idx\_range** ([**input.hpp**](input_8hpp.md))
 * **init\_spline\_dependent\_idx\_range** ([**input.hpp**](input_8hpp.md))
 * **inverse** ([**math\_tools.hpp**](math__tools_8hpp.md))

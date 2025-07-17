@@ -561,7 +561,6 @@
 #include "math_tools.hpp"
 #include "matrix_batch_csr.hpp"
 #include "metric_tensor_evaluator.hpp"
-#include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "quadrature_coeffs_nd.hpp"
 #include "view.hpp"
@@ -659,7 +658,8 @@ private:
     using KnotsTheta = ddc::NonUniformBsplinesKnots&lt;BSplinesTheta&gt;;
 
     using ConstSpline2D = DConstField&lt;IdxRangeBatchedBSRTheta&gt;;
-    using PolarSplineMemRTheta = PolarSplineMem&lt;PolarBSplinesRTheta&gt;;
+    using PolarSplineMemRTheta = DFieldMem&lt;IdxRange&lt;PolarBSplinesRTheta&gt;&gt;;
+    using PolarSplineRTheta = DField&lt;IdxRange&lt;PolarBSplinesRTheta&gt;&gt;;
 
     using CoordFieldMemRTheta = FieldMem&lt;CoordRTheta, IdxRangeRTheta&gt;;
     using CoordFieldRTheta = Field&lt;CoordRTheta, IdxRangeRTheta&gt;;
@@ -777,11 +777,7 @@ public:
                           ThetaBasisSubset,
                           QDimThetaMesh&gt;(m_non_zero_bases_theta, m_idxrange_quadrature_theta))
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
-        , m_phi_spline_coef(
-                  PolarBSplinesRTheta::template singular_idx_range&lt;PolarBSplinesRTheta&gt;(),
-                  IdxRangeBSRTheta(
-                          m_idxrange_bsplines_r,
-                          ddc::discrete_space&lt;BSplinesTheta&gt;().full_domain()))
+        , m_phi_spline_coef(ddc::discrete_space&lt;PolarBSplinesRTheta&gt;().full_domain())
         , m_x_init(
                   "x_init",
                   1,
@@ -1227,7 +1223,7 @@ public:
         Kokkos::Profiling::popRegion();
     }
     template &lt;class RHSFunction&gt;
-    void operator()(RHSFunction const&amp; rhs, host_t&lt;PolarSplineMemRTheta&gt;&amp; spline) const
+    void operator()(RHSFunction const&amp; rhs, host_t&lt;PolarSplineRTheta&gt; spline) const
     {
         Kokkos::Profiling::pushRegion("PolarPoissonRHS");
 
@@ -1336,7 +1332,6 @@ public:
         IdxRangeBSRTheta dirichlet_boundary_idx_range(
                 m_idxrange_bsplines_r.take_last(IdxStep&lt;BSplinesR&gt; {1}),
                 m_idxrange_bsplines_theta);
-        IdxRangeBSTheta idxrange_polar(ddc::discrete_space&lt;BSplinesTheta&gt;().full_domain());
 
         // Fill the spline
         ddc::for_each(
@@ -1346,27 +1341,13 @@ public:
                                          - PolarBSplinesRTheta::template singular_idx_range&lt;
                                                    PolarBSplinesRTheta&gt;()
                                                    .front();
-                    spline.singular_spline_coef(idx) = x_init_host(0, bspl_idx);
+                    spline(idx) = x_init_host(0, bspl_idx);
                 });
         ddc::for_each(m_idxrange_fem_non_singular, [&amp;](IdxBSPolar const idx) {
-            const IdxBSRTheta idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
-            spline.spline_coef(idx_2d) = x_init_host(0, idx.uid());
+            spline(idx) = x_init_host(0, idx.uid());
         });
         ddc::for_each(dirichlet_boundary_idx_range, [&amp;](IdxBSRTheta const idx) {
-            spline.spline_coef(idx) = 0.0;
-        });
-
-        // Copy the periodic elements
-        IdxRangeBSRTheta copy_idx_range(
-                m_idxrange_bsplines_r,
-                idxrange_polar.remove_first(
-                        IdxStep&lt;BSplinesTheta&gt;(ddc::discrete_space&lt;BSplinesTheta&gt;().nbasis())));
-        ddc::for_each(copy_idx_range, [&amp;](IdxBSRTheta const idx_2d) {
-            spline.spline_coef(ddc::select&lt;BSplinesR&gt;(idx_2d), ddc::select&lt;BSplinesTheta&gt;(idx_2d))
-                    = spline.spline_coef(
-                            ddc::select&lt;BSplinesR&gt;(idx_2d),
-                            ddc::select&lt;BSplinesTheta&gt;(idx_2d)
-                                    - ddc::discrete_space&lt;BSplinesTheta&gt;().nbasis());
+            spline(PolarBSplinesRTheta::template get_polar_index&lt;PolarBSplinesRTheta&gt;(idx)) = 0.0;
         });
         Kokkos::Profiling::popRegion();
     }
@@ -1379,7 +1360,7 @@ public:
                 "RHSFunction must have an operator() which takes a coordinate and returns a "
                 "double");
 
-        (*this)(rhs, m_phi_spline_coef);
+        (*this)(rhs, get_field(m_phi_spline_coef));
         CoordFieldMemRTheta coords_eval_alloc(get_idx_range(phi));
         CoordFieldRTheta coords_eval(get_field(coords_eval_alloc));
         ddc::parallel_for_each(

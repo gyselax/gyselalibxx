@@ -220,10 +220,6 @@
 * **enable\_data\_access\_methods&lt; VectorFieldMem&lt; ElementType, IdxRangeType, DimSeq, Allocator &gt; &gt;** ([**vector\_field\_mem.hpp**](vector__field__mem_8hpp.md))
 * **enable\_mem\_type&lt; VectorFieldMem&lt; ElementType, IdxRangeType, DimSeq, Allocator &gt; &gt;** ([**vector\_field\_mem.hpp**](vector__field__mem_8hpp.md))
 * **enable\_vector\_field&lt; VectorFieldMem&lt; ElementType, IdxRangeType, DimSeq, MemSpace &gt; &gt;** ([**vector\_field\_mem.hpp**](vector__field__mem_8hpp.md))
-* **enable\_data\_access\_methods&lt; ConstPolarSpline&lt; PolarBSplines, MemorySpace &gt; &gt;** ([**polar\_spline.hpp**](polar__spline_8hpp.md))
-* **enable\_data\_access\_methods&lt; PolarSpline&lt; PolarBSplines, MemorySpace &gt; &gt;** ([**polar\_spline.hpp**](polar__spline_8hpp.md))
-* **enable\_data\_access\_methods&lt; PolarSplineMem&lt; PolarBSplines, MemorySpace &gt; &gt;** ([**polar\_spline.hpp**](polar__spline_8hpp.md))
-* **enable\_mem\_type&lt; PolarSplineMem&lt; PolarBSplines, MemorySpace &gt; &gt;** ([**polar\_spline.hpp**](polar__spline_8hpp.md))
 * **equivalent\_edge\_t** ([**connectivity\_details.hpp**](connectivity__details_8hpp.md))
 * **extract\_patches\_t** ([**connectivity\_details.hpp**](connectivity__details_8hpp.md))
 * **enable\_data\_access\_methods&lt; MultipatchField&lt; T, Patches... &gt; &gt;** ([**multipatch\_field.hpp**](multipatch__field_8hpp.md))
@@ -420,10 +416,6 @@
 * **IdxVxVy** ([**geometry.hpp**](geometryXYVxVy_2geometry_2geometry_8hpp.md))
 * **IdxVy** ([**geometry.hpp**](geometryXYVxVy_2geometry_2geometry_8hpp.md))
 * **IdxXYVxVy** ([**geometry.hpp**](geometryXYVxVy_2geometry_2geometry_8hpp.md))
-* **is\_polar\_spline\_v** ([**polar\_spline.hpp**](polar__spline_8hpp.md))
-* **is\_polar\_spline\_v&lt; ConstPolarSpline&lt; PolarBSplinesType, MemSpace &gt; &gt;** ([**polar\_spline.hpp**](polar__spline_8hpp.md))
-* **is\_polar\_spline\_v&lt; PolarSpline&lt; PolarBSplinesType, MemSpace &gt; &gt;** ([**polar\_spline.hpp**](polar__spline_8hpp.md))
-* **is\_polar\_spline\_v&lt; PolarSplineMem&lt; PolarBSplinesType, MemSpace &gt; &gt;** ([**polar\_spline.hpp**](polar__spline_8hpp.md))
 * **interpolator\_on\_idx\_range\_t** ([**iinterpolator.hpp**](iinterpolator_8hpp.md))
 * **insert\_into\_seq\_before\_t** ([**mpitools.hpp**](mpitools_8hpp.md))
 * **insert\_into\_type\_seq\_t** ([**mpitools.hpp**](mpitools_8hpp.md))
@@ -477,6 +469,7 @@
 ## p
 
 * **PolarSplineMemRTheta** ([**geometry.hpp**](geometryRTheta_2geometry_2geometry_8hpp.md))
+* **PolarSplineRTheta** ([**geometry.hpp**](geometryRTheta_2geometry_2geometry_8hpp.md))
 
 
 ## r

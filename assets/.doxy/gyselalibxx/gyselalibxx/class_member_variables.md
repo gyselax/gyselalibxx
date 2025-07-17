@@ -308,8 +308,6 @@
 
 ## s
 
-* **singular\_spline\_coef** ([**ConstPolarSpline**](structConstPolarSpline.md), [**PolarSpline**](structPolarSpline.md), [**PolarSplineMem**](structPolarSplineMem.md))
-* **spline\_coef** ([**ConstPolarSpline**](structConstPolarSpline.md), [**PolarSpline**](structPolarSpline.md), [**PolarSplineMem**](structPolarSplineMem.md))
 * **s\_degree** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **s\_npts\_gauss** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **s\_density** ([**FluidMoments**](classFluidMoments.md))

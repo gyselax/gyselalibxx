@@ -106,7 +106,8 @@
 | typedef IdxStep&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md) &gt; | [**IdxStepRTheta**](#typedef-idxsteprtheta)  <br> |
 | typedef IdxStep&lt; [**GridTheta**](structGridTheta.md) &gt; | [**IdxStepTheta**](#typedef-idxsteptheta)  <br> |
 | typedef Idx&lt; [**GridTheta**](structGridTheta.md) &gt; | [**IdxTheta**](#typedef-idxtheta)  <br> |
-| typedef [**PolarSplineMem**](structPolarSplineMem.md)&lt; [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) &gt; | [**PolarSplineMemRTheta**](#typedef-polarsplinememrtheta)  <br>_Tag the polar B-splines decomposition of a function._  |
+| typedef DFieldMem&lt; IdxRange&lt; [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) &gt; &gt; | [**PolarSplineMemRTheta**](#typedef-polarsplinememrtheta)  <br>_Tag the polar B-splines decomposition of a function._  |
+| typedef DField&lt; IdxRange&lt; [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) &gt; &gt; | [**PolarSplineRTheta**](#typedef-polarsplinertheta)  <br> |
 | typedef DField&lt; IdxRangeBSRTheta &gt; | [**Spline2D**](#typedef-spline2d)  <br> |
 | typedef DFieldMem&lt; IdxRangeBSRTheta &gt; | [**Spline2DMem**](#typedef-spline2dmem)  <br> |
 | typedef ddc::GrevilleInterpolationPoints&lt; [**BSplinesR**](structBSplinesR.md), SplineRBoundary, SplineRBoundary &gt; | [**SplineInterpPointsR**](#typedef-splineinterppointsr)  <br> |
@@ -798,7 +799,7 @@ using IdxTheta =  Idx<GridTheta>;
 
 _Tag the polar B-splines decomposition of a function._ 
 ```C++
-using PolarSplineMemRTheta =  PolarSplineMem<PolarBSplinesRTheta>;
+using PolarSplineMemRTheta =  DFieldMem<IdxRange<PolarBSplinesRTheta> >;
 ```
 
 
@@ -807,6 +808,19 @@ Store the polar B-splines coefficients of the function.
 
 
         
+
+<hr>
+
+
+
+### typedef PolarSplineRTheta 
+
+```C++
+using PolarSplineRTheta =  DField<IdxRange<PolarBSplinesRTheta> >;
+```
+
+
+
 
 <hr>
 

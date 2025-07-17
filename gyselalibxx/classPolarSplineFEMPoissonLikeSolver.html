@@ -654,7 +654,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (RHSFunction const &amp; rhs, host_t&lt; <a href="structPolarSplineMem.html"><strong>PolarSplineMemRTheta</strong></a> &gt; &amp; spline) const<br><em>Solve the Poisson-like equation.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (RHSFunction const &amp; rhs, host_t&lt; PolarSplineRTheta &gt; spline) const<br><em>Solve the Poisson-like equation.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -874,7 +874,7 @@ inline double PolarSplineFEMPoissonLikeSolver::get_matrix_stencil_element (
 <pre><code class="language-C++">template&lt;class RHSFunction&gt;
 inline void PolarSplineFEMPoissonLikeSolver::operator() (
     RHSFunction const &amp; rhs,
-    host_t&lt; PolarSplineMemRTheta &gt; &amp; spline
+    host_t&lt; PolarSplineRTheta &gt; spline
 ) const
 </code></pre>
 <p>This operator returns the coefficients associated with the B-Splines of the solution <span class="arithmatex">\(\phi\)</span>.</p>

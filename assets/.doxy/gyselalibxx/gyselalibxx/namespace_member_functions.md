@@ -27,6 +27,11 @@
 * **get** ([**ddcHelper**](namespaceddcHelper.md))
 
 
+## i
+
+* **integrals** ([**PolarSplines**](namespacePolarSplines.md))
+
+
 ## m
 
 * **maximum\_distance\_between\_adjacent\_points** ([**ddcHelper**](namespaceddcHelper.md))

@@ -31,7 +31,6 @@
     <includedby refid="iinterpolator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/iinterpolator.hpp</includedby>
     <includedby refid="bernstein_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</includedby>
     <includedby refid="polar__bsplines_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp</includedby>
-    <includedby refid="polar__spline_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp</includedby>
     <includedby refid="mpitransposealltoall_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp</includedby>
     <includedby refid="edge__transformation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp</includedby>
     <includedby refid="matching__idx__slice_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp</includedby>
@@ -138,10 +137,10 @@
         <childnode refid="14" relation="include">
         </childnode>
       </node>
-      <node id="89">
+      <node id="87">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/collision_common_configuration.hpp</label>
         <link refid="collision__common__configuration_8hpp_source"/>
-        <childnode refid="90" relation="include">
+        <childnode refid="88" relation="include">
         </childnode>
       </node>
       <node id="8">
@@ -308,7 +307,7 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp</label>
         <link refid="bsl__predcorr__second__order__implicit_8hpp_source"/>
       </node>
-      <node id="90">
+      <node id="88">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/collisions/collision_configuration.hpp</label>
         <link refid="collision__configuration_8hpp_source"/>
       </node>
@@ -316,11 +315,11 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry.hpp</label>
         <link refid="geometryVparMu_2geometry_2geometry_8hpp_source"/>
       </node>
-      <node id="91">
+      <node id="89">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp</label>
         <link refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8hpp_source"/>
       </node>
-      <node id="92">
+      <node id="90">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/noperturbinitialisation.hpp</label>
         <link refid="noperturbinitialisation_8hpp_source"/>
       </node>
@@ -328,23 +327,23 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp</label>
         <link refid="geometryXVx_2geometry_2geometry_8hpp_source"/>
       </node>
-      <node id="93">
+      <node id="91">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/bumpontailequilibrium.hpp</label>
         <link refid="bumpontailequilibrium_8hpp_source"/>
       </node>
-      <node id="94">
+      <node id="92">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp</label>
         <link refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp_source"/>
       </node>
-      <node id="95">
+      <node id="93">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/restartinitialisation.hpp</label>
         <link refid="restartinitialisation_8hpp_source"/>
       </node>
-      <node id="96">
+      <node id="94">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.hpp</label>
         <link refid="geometryXVx_2initialisation_2singlemodeperturbinitialisation_8hpp_source"/>
       </node>
-      <node id="82">
+      <node id="80">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/chargedensitycalculator.hpp</label>
         <link refid="geometryXVx_2poisson_2chargedensitycalculator_8hpp_source"/>
       </node>
@@ -352,19 +351,19 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp</label>
         <link refid="geometryXVx_2poisson_2qnsolver_8hpp_source"/>
       </node>
-      <node id="83">
+      <node id="81">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_inter.hpp</label>
         <link refid="collisions__inter_8hpp_source"/>
       </node>
-      <node id="84">
+      <node id="82">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp</label>
         <link refid="collisions__intra_8hpp_source"/>
       </node>
-      <node id="85">
+      <node id="83">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_utils.hpp</label>
         <link refid="collisions__utils_8hpp_source"/>
       </node>
-      <node id="86">
+      <node id="84">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp</label>
         <link refid="fluid__moments_8hpp_source"/>
       </node>
@@ -380,11 +379,11 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp</label>
         <link refid="geometryXYVxVy_2geometry_2geometry_8hpp_source"/>
       </node>
-      <node id="97">
+      <node id="95">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp</label>
         <link refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8hpp_source"/>
       </node>
-      <node id="98">
+      <node id="96">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.hpp</label>
         <link refid="geometryXYVxVy_2initialisation_2singlemodeperturbinitialisation_8hpp_source"/>
       </node>
@@ -440,26 +439,6 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp</label>
         <link refid="polar__bsplines_8hpp_source"/>
         <childnode refid="19" relation="include">
-        </childnode>
-      </node>
-      <node id="75">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp</label>
-        <link refid="polar__spline_8hpp_source"/>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="37" relation="include">
-        </childnode>
-        <childnode refid="76" relation="include">
-        </childnode>
-        <childnode refid="40" relation="include">
-        </childnode>
-      </node>
-      <node id="76">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp</label>
-        <link refid="polar__spline__evaluator_8hpp_source"/>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="40" relation="include">
         </childnode>
       </node>
       <node id="74">
@@ -520,7 +499,7 @@
         <childnode refid="40" relation="include">
         </childnode>
       </node>
-      <node id="77">
+      <node id="75">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp</label>
         <link refid="mpitransposealltoall_8hpp_source"/>
         <childnode refid="7" relation="include">
@@ -530,13 +509,13 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp</label>
         <link refid="connectivity_8hpp_source"/>
       </node>
-      <node id="78">
+      <node id="76">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp</label>
         <link refid="edge__transformation_8hpp_source"/>
-        <childnode refid="79" relation="include">
+        <childnode refid="77" relation="include">
         </childnode>
       </node>
-      <node id="79">
+      <node id="77">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp</label>
         <link refid="matching__idx__slice_8hpp_source"/>
       </node>
@@ -666,7 +645,7 @@
         <childnode refid="14" relation="include">
         </childnode>
       </node>
-      <node id="80">
+      <node id="78">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp</label>
         <link refid="gauss__legendre__integration_8hpp_source"/>
         <childnode refid="63" relation="include">
@@ -674,18 +653,18 @@
         <childnode refid="40" relation="include">
         </childnode>
       </node>
-      <node id="81">
+      <node id="79">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp</label>
         <link refid="quadrature_8hpp_source"/>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
         <childnode refid="82" relation="include">
         </childnode>
         <childnode refid="83" relation="include">
         </childnode>
         <childnode refid="84" relation="include">
-        </childnode>
-        <childnode refid="85" relation="include">
-        </childnode>
-        <childnode refid="86" relation="include">
         </childnode>
         <childnode refid="68" relation="include">
         </childnode>
@@ -693,47 +672,47 @@
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="87" relation="include">
+        <childnode refid="85" relation="include">
         </childnode>
       </node>
-      <node id="87">
+      <node id="85">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/volume_quadrature_nd.hpp</label>
         <link refid="volume__quadrature__nd_8hpp"/>
         <childnode refid="40" relation="include">
         </childnode>
       </node>
-      <node id="88">
+      <node id="86">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_info.hpp</label>
         <link refid="species__info_8hpp_source"/>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="73" relation="include">
         </childnode>
-        <childnode refid="89" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="66" relation="include">
         </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
         <childnode refid="91" relation="include">
         </childnode>
         <childnode refid="92" relation="include">
-        </childnode>
-        <childnode refid="67" relation="include">
         </childnode>
         <childnode refid="93" relation="include">
         </childnode>
         <childnode refid="94" relation="include">
         </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
         <childnode refid="95" relation="include">
         </childnode>
         <childnode refid="96" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="97" relation="include">
-        </childnode>
-        <childnode refid="98" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
@@ -831,11 +810,9 @@
         </childnode>
         <childnode refid="75" relation="include">
         </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
         <childnode refid="77" relation="include">
-        </childnode>
-        <childnode refid="78" relation="include">
-        </childnode>
-        <childnode refid="79" relation="include">
         </childnode>
         <childnode refid="43" relation="include">
         </childnode>
@@ -847,11 +824,11 @@
         </childnode>
         <childnode refid="60" relation="include">
         </childnode>
-        <childnode refid="80" relation="include">
+        <childnode refid="78" relation="include">
         </childnode>
-        <childnode refid="81" relation="include">
+        <childnode refid="79" relation="include">
         </childnode>
-        <childnode refid="88" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>

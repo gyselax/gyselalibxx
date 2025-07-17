@@ -559,7 +559,7 @@
 <p>We suppose <span class="arithmatex">\(r\)</span> positive non periodic, <span class="arithmatex">\(\theta\)</span> periodic, <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> non periodic. We denote in the code <code>Theta</code> the polar coordinate <span class="arithmatex">\(\theta\)</span>.
 The polar coordinates represent a <strong>logical domain</strong>, and the Cartesian coordinates the <strong>physical domain</strong>. Some mappings from the logical domain to the physical domain <span class="arithmatex">\((r,\theta) \mapsto (x,y)\)</span> are defined in <code>src/mapping/</code>.</p>
 <p>The splines applied are cubic and only defined on the logical domain.</p>
-<p>The polar geometry can have a degenerated point. We call <em>O-point</em> or <em>centre point</em>, the points <span class="arithmatex">\((r=0, \theta) \ \forall \theta\)</span>. At these points, the loss of some properties pushes us to define another B-spline basis. This new spline is called in the code <em>polar spline</em> (see PolarSpline). Both basis are used in the code.</p>
+<p>The polar geometry can have a degenerated point. We call <em>O-point</em> or <em>centre point</em>, the points <span class="arithmatex">\((r=0, \theta) \ \forall \theta\)</span>. At these points, the loss of some properties pushes us to define another B-spline basis. This new spline is called in the code <em>polar spline</em> (see PolarBSplines). Both basis are used in the code.</p>
 <h2 id="shortcuts">Shortcuts</h2>
 <p>The shortcuts defined in the geometry file represent:</p>
 <ol>

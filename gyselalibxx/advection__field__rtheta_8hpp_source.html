@@ -559,7 +559,6 @@
 #include "iqnsolver.hpp"
 #include "metric_tensor_evaluator.hpp"
 #include "poisson_like_rhs_function.hpp"
-#include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "polarpoissonlikesolver.hpp"
 #include "vector_field.hpp"
@@ -628,7 +627,7 @@ public:
 
 
     void operator()(
-            host_t&lt;PolarSplineMemRTheta&gt;&amp; electrostatic_potential_coef,
+            host_t&lt;PolarSplineRTheta&gt; electrostatic_potential_coef,
             host_t&lt;DVectorFieldRTheta&lt;X, Y&gt;&gt; advection_field_xy) const
     {
         compute_advection_field_XY(
@@ -653,7 +652,7 @@ private:
                             Evaluator,
                             PolarSplineEvaluator&lt;
                                     PolarBSplinesRTheta,
-                                    ddc::NullExtrapolationRule&gt;&gt; &amp;&amp; std::is_same_v&lt;SplineType, host_t&lt;PolarSplineMemRTheta&gt;&gt;));
+                                    ddc::NullExtrapolationRule&gt;&gt; &amp;&amp; std::is_same_v&lt;SplineType, host_t&lt;PolarSplineRTheta&gt;&gt;));
 
         IdxRangeRTheta const grid = get_idx_range(advection_field_xy);
         host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt; electric_field(grid);
@@ -810,7 +809,7 @@ public:
 
 
     void operator()(
-            host_t&lt;PolarSplineMemRTheta&gt;&amp; electrostatic_potential_coef,
+            host_t&lt;PolarSplineRTheta&gt;&amp; electrostatic_potential_coef,
             host_t&lt;DVectorFieldRTheta&lt;R, Theta&gt;&gt; advection_field_rtheta,
             DVector&lt;X, Y&gt;&amp; advection_field_xy_centre) const
     {
@@ -839,7 +838,7 @@ private:
                             Evaluator,
                             PolarSplineEvaluator&lt;
                                     PolarBSplinesRTheta,
-                                    ddc::NullExtrapolationRule&gt;&gt; &amp;&amp; std::is_same_v&lt;SplineType, host_t&lt;PolarSplineMemRTheta&gt;&gt;));
+                                    ddc::NullExtrapolationRule&gt;&gt; &amp;&amp; std::is_same_v&lt;SplineType, host_t&lt;PolarSplineRTheta&gt;&gt;));
 
         IdxRangeRTheta const grid_without_Opoint = get_idx_range(advection_field_rtheta);
 

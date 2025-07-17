@@ -79,7 +79,7 @@ _Define a polar PDE solver for a Poisson-like equation._ [More...](#detailed-des
 |  void | [**compute\_stencil\_elements**](#function-compute_stencil_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const values\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const col\_idx\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const nnz\_per\_row\_csr\_host) <br>_Computes the matrix element corresponding to the regular stencil ie: out to singular or overlapping areas._  |
 |  double | [**get\_matrix\_stencil\_element**](#function-get_matrix_stencil_element) (IdxBSRTheta idx\_test, IdxBSRTheta idx\_trial, ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, SplineRThetaEvaluatorNullBound const & evaluator, Mapping const & mapping) <br>_Computes the matrix element corresponding to two tensor product splines with index idx\_test and idx\_trial._  |
 |  void | [**init\_nnz\_per\_line**](#function-init_nnz_per_line) (Kokkos::View&lt; int \*, Kokkos::LayoutRight &gt; nnz\_per\_row) const<br>_Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on_ \((r,\theta)\) _splines. After this function the array will contain: nnz\_per\_row[0] = 0. nnz\_per\_row[1] = 0. nnz\_per\_row[2] = number of non-zero elements in line 0. nnz\_per\_row[3] = number of non-zero elements in lines 0-1. ...\_per\_row nnz\_per\_row[matrix\_size] = number of non-zero elements in lines 0-(matrix\_size-1)._ |
-|  void | [**operator()**](#function-operator) (RHSFunction const & rhs, host\_t&lt; [**PolarSplineMemRTheta**](structPolarSplineMem.md) &gt; & spline) const<br>_Solve the Poisson-like equation._  |
+|  void | [**operator()**](#function-operator) (RHSFunction const & rhs, host\_t&lt; PolarSplineRTheta &gt; spline) const<br>_Solve the Poisson-like equation._  |
 |  void | [**operator()**](#function-operator_1) (RHSFunction const & rhs, DFieldRTheta phi) const<br>_Solve the Poisson-like equation._  |
 
 
@@ -451,7 +451,7 @@ _Solve the Poisson-like equation._
 template<class RHSFunction>
 inline void PolarSplineFEMPoissonLikeSolver::operator() (
     RHSFunction const & rhs,
-    host_t< PolarSplineMemRTheta > & spline
+    host_t< PolarSplineRTheta > spline
 ) const
 ```
 

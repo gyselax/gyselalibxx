@@ -277,7 +277,8 @@ using Spline2DMem = DFieldMem<IdxRangeBSRTheta>;
 using Spline2D = DField<IdxRangeBSRTheta>;
 using ConstSpline2D = DConstField<IdxRangeBSRTheta>;
 
-using PolarSplineMemRTheta = PolarSplineMem<PolarBSplinesRTheta>;
+using PolarSplineMemRTheta = DFieldMem<IdxRange<PolarBSplinesRTheta>>;
+using PolarSplineRTheta = DField<IdxRange<PolarBSplinesRTheta>>;
 
 using IdxPolarBspl = Idx<PolarBSplinesRTheta>;
 

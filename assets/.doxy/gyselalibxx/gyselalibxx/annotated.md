@@ -40,7 +40,6 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **struct** [**GhostedVx**](structCollisionsIntra_1_1GhostedVx.md) 
     * **struct** [**GhostedVxStaggered**](structCollisionsIntra_1_1GhostedVxStaggered.md) 
 * **class** [**CombinedMapping**](classCombinedMapping.md) _A class which describes a mapping which is constructed by combining two mappings. Let us denote Mapping1 as_ \(\mathcal{F}\) _and Mapping2 as_\(\mathcal{G}\) _then this mapping represents:_\(\mathcal{F} \circ \mathcal{G}\) _._    
-* **struct** [**ConstPolarSpline**](structConstPolarSpline.md) _A structure containing the two ConstFields necessary to define a constant reference to a spline on a set of polar basis splines._     
 * **struct** [**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md) _Define constant extrapolation rule for onion shape geometries. Struct useful for the MultipatchSplineEvaluator types._  __    
 * **class** [**ConstantPartialDerivative**](classConstantPartialDerivative.md) _A class to get the derivative of a constant function. When the derivative of a function is known to be 0 but the dimension is still needed this class can be used to avoid unnecessary calculations._     
 * **class** [**ConstantPartialDerivativeCreator**](classConstantPartialDerivativeCreator.md) _A class to create a_ [_**ConstantPartialDerivative**_](classConstantPartialDerivative.md) _via a create\_instance function._    
@@ -184,7 +183,6 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**eval\_deriv\_type**](structPolarBSplines_1_1eval__deriv__type.md) 
 * **struct** [**eval\_type**](structPolarBSplines_1_1eval__type.md) 
 * **struct** [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) 
-* **struct** [**PolarSpline**](structPolarSpline.md) _A structure containing the two Fields necessary to define a reference to a spline on a set of polar basis splines._     
 * **class** [**PolarSplineEvaluator**](classPolarSplineEvaluator.md) _Define an evaluator on polar B-splines._     
 * **struct** [**eval\_deriv\_r\_theta\_type**](structPolarSplineEvaluator_1_1eval__deriv__r__theta__type.md) _Tag for the evaluation of the cross derivative of the function._ 
 * **struct** [**eval\_deriv\_r\_type**](structPolarSplineEvaluator_1_1eval__deriv__r__type.md) _Tag for the evaluation of the derivative on the first dimension._ 
@@ -199,7 +197,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **struct** [**RCellDim**](structPolarSplineFEMPoissonLikeSolver_1_1RCellDim.md) 
     * **struct** [**ThetaBasisSubset**](structPolarSplineFEMPoissonLikeSolver_1_1ThetaBasisSubset.md) 
     * **struct** [**ThetaCellDim**](structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim.md) 
-* **struct** [**PolarSplineMem**](structPolarSplineMem.md) _A structure containing the two FieldMems necessary to define a spline on a set of polar basis splines._     
+* **namespace** [**PolarSplines**](namespacePolarSplines.md)     
 * **class** [**PreallocatableLagrangeInterpolator**](classPreallocatableLagrangeInterpolator.md) _A class which stores information necessary to create an instance of the_ [_**LagrangeInterpolator**_](classLagrangeInterpolator.md) _class._    
 * **class** [**PreallocatableSplineInterpolator**](classPreallocatableSplineInterpolator.md) _A class which stores information necessary to create an instance of the_ [_**SplineInterpolator**_](classSplineInterpolator.md) _class._    
 * **class** [**PreallocatableSplineInterpolator2D**](classPreallocatableSplineInterpolator2D.md) _A class which stores information necessary to create a pointer to an instance of the_ [_**SplineInterpolator2D**_](classSplineInterpolator2D.md) _class._    
@@ -265,10 +263,10 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._    
 * **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d93.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d211.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d213.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d215.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d217.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d210.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d212.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d214.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d216.md) 
 * **namespace** [**connectivity\_details**](namespaceconnectivity__details.md)     
     * **struct** [**AddToTypeSeq**](structconnectivity__details_1_1AddToTypeSeq.md) _A class which helps insert an element into a type sequence._ 
     * **struct** [**AddToTypeSeq&lt; ToInsert, TypeSeq, BackInsert &gt;**](structconnectivity__details_1_1AddToTypeSeq_3_01ToInsert_00_01TypeSeq_00_01BackInsert_01_4.md) _Specialisation of_ [_**AddToTypeSeq**_](structconnectivity__details_1_1AddToTypeSeq.md) _to add an element at the back of the type sequence._    

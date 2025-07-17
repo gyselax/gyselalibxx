@@ -180,7 +180,6 @@ Here is a list of all files with brief descriptions:
         * **dir** [**polar\_splines**](dir_a6779ae02b71d57f488d261458bab1ce.md)     
             * **file** [**bernstein.hpp**](bernstein_8hpp.md)     
             * **file** [**polar\_bsplines.hpp**](polar__bsplines_8hpp.md)     
-            * **file** [**polar\_spline.hpp**](polar__spline_8hpp.md)     
             * **file** [**polar\_spline\_evaluator.hpp**](polar__spline__evaluator_8hpp.md)     
         * **file** [**Lagrange.hpp**](Lagrange_8hpp.md)     
         * **file** [**Lagrange\_interpolator.hpp**](Lagrange__interpolator_8hpp.md)     

@@ -163,7 +163,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md) _Helper class for the initialisation of the mesh of interpolation points._ 
 * **class** [**tensor\_tools::IndexedTensor**](classtensor__tools_1_1IndexedTensor.md) _A class to capture the description of a tensor indexed at a specific component. This class should not be explicitly declared in user code. It is the output of a call to the index&lt;...&gt; function and is an input to the tensor\_mul function._ 
 * **class** [**tensor\_tools::TensorIndexElement**](classtensor__tools_1_1TensorIndexElement.md) _A class describing an index of a tensor. For example for a 2x2 metric tensor on an (x,y) plane the element_ \(g_{xx}\) _would have the index TensorIndexElement&lt;TensorIndexSetXY, X, X&gt;._
-* **struct** [**ConstPolarSpline**](structConstPolarSpline.md) _A structure containing the two ConstFields necessary to define a constant reference to a spline on a set of polar basis splines._ 
 * **struct** [**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md) _Define constant extrapolation rule for onion shape geometries. Struct useful for the MultipatchSplineEvaluator types._  __
 * **struct** [**Edge**](structEdge.md) _Define an edge of a given patch._ 
 * **struct** [**FluidMoments::MomentDensity**](structFluidMoments_1_1MomentDensity.md) 
@@ -190,7 +189,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**PolarBSplines::Impl::Corner3Tag**](structPolarBSplines_1_1Impl_1_1Corner3Tag.md) _The tag for the third corner of the Barycentric coordinates._ 
 * **struct** [**PolarBSplines::eval\_deriv\_type**](structPolarBSplines_1_1eval__deriv__type.md) 
 * **struct** [**PolarBSplines::eval\_type**](structPolarBSplines_1_1eval__type.md) 
-* **struct** [**PolarSpline**](structPolarSpline.md) _A structure containing the two Fields necessary to define a reference to a spline on a set of polar basis splines._ 
 * **struct** [**PolarSplineEvaluator::eval\_deriv\_r\_theta\_type**](structPolarSplineEvaluator_1_1eval__deriv__r__theta__type.md) _Tag for the evaluation of the cross derivative of the function._ 
 * **struct** [**PolarSplineEvaluator::eval\_deriv\_r\_type**](structPolarSplineEvaluator_1_1eval__deriv__r__type.md) _Tag for the evaluation of the derivative on the first dimension._ 
 * **struct** [**PolarSplineEvaluator::eval\_deriv\_theta\_type**](structPolarSplineEvaluator_1_1eval__deriv__theta__type.md) _Tag for the evaluation of the derivative on the second dimension._ 
@@ -201,7 +199,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**PolarSplineFEMPoissonLikeSolver::RCellDim**](structPolarSplineFEMPoissonLikeSolver_1_1RCellDim.md) 
 * **struct** [**PolarSplineFEMPoissonLikeSolver::ThetaBasisSubset**](structPolarSplineFEMPoissonLikeSolver_1_1ThetaBasisSubset.md) 
 * **struct** [**PolarSplineFEMPoissonLikeSolver::ThetaCellDim**](structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim.md) 
-* **struct** [**PolarSplineMem**](structPolarSplineMem.md) _A structure containing the two FieldMems necessary to define a spline on a set of polar basis splines._ 
 * **struct** [**R**](structR.md) _Define non periodic real contravariant_ [_**R**_](structR.md) _dimension._
 * **struct** [**R\_cov**](structR__cov.md) _Define non periodic real covariant_ [_**R**_](structR.md) _dimension._
 * **struct** [**RefinedDiscreteToCartesianBuilder::Build\_BuilderType**](structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType.md) 

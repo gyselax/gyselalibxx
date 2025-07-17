@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="95" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="95" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="94" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="94" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -38,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="98" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="98" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="97" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="97" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classAdvectionFieldFinder_1a46c62cd714b9a75479695928a5057846" prot="private" static="no" mutable="no">
         <type><ref refid="classPolarSplineEvaluator" kindref="compound">PolarSplineEvaluator</ref>&lt; <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref>, ddc::NullExtrapolationRule &gt; const</type>
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="101" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="101" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="100" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classAdvectionFieldFinder_1a0c98e53bab952f38d543d863f8d6e709" prot="private" static="no" mutable="no">
         <type>SplineRThetaEvaluatorNullBound_host const</type>
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="103" column="47" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="103" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="102" column="47" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="102" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classAdvectionFieldFinder_1afaf17208dfa7b5b4fbe953426a171910" prot="private" static="no" mutable="no">
         <type>double const</type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="105" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="105" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="104" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="104" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-attrib">
@@ -97,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="107" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="107" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="106" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="106" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="119" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="119" bodyend="123"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="118" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="118" bodyend="122"/>
       </memberdef>
       <memberdef kind="function" id="classAdvectionFieldFinder_1a6c48a3bdb689fb9a270698a6617f2cfb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="139" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="139" bodyend="152"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="138" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="138" bodyend="151"/>
       </memberdef>
       <memberdef kind="function" id="classAdvectionFieldFinder_1a1c94218e7996b38d562fa98ccd29dde5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -223,16 +223,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="165" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="165" bodyend="173"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="164" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="164" bodyend="172"/>
       </memberdef>
-      <memberdef kind="function" id="classAdvectionFieldFinder_1ab5d88aecc399886af415472b221a96d9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classAdvectionFieldFinder_1ac2dc433b1586c44ce1473a6d4b60a0e7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void AdvectionFieldFinder&lt; Mapping &gt;::operator()</definition>
-        <argsstring>(host_t&lt; PolarSplineMemRTheta &gt; &amp;electrostatic_potential_coef, host_t&lt; DVectorFieldRTheta&lt; X, Y &gt; &gt; advection_field_xy) const</argsstring>
+        <argsstring>(host_t&lt; PolarSplineRTheta &gt; electrostatic_potential_coef, host_t&lt; DVectorFieldRTheta&lt; X, Y &gt; &gt; advection_field_xy) const</argsstring>
         <name>operator()</name>
         <qualifiedname>AdvectionFieldFinder::operator()</qualifiedname>
         <param>
-          <type>host_t&lt; <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMemRTheta</ref> &gt; &amp;</type>
+          <type>host_t&lt; PolarSplineRTheta &gt;</type>
           <declname>electrostatic_potential_coef</declname>
         </param>
         <param>
@@ -240,7 +240,7 @@
           <declname>advection_field_xy</declname>
         </param>
         <briefdescription>
-<para>Compute the advection field from the Poisson-like equation solution. The B-splines basis used is the polar B-splines (<ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>). </para>
+<para>Compute the advection field from the Poisson-like equation solution. The B-splines basis used is the polar B-splines (PolarSplineMem). </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -264,7 +264,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="185" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="185" bodyend="193"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="184" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="184" bodyend="192"/>
       </memberdef>
       <memberdef kind="function" id="classAdvectionFieldFinder_1a9d0eeda30e67611e8dd43b76d1917c16" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -317,7 +317,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="354" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="354" bodyend="370"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="353" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="353" bodyend="369"/>
       </memberdef>
       <memberdef kind="function" id="classAdvectionFieldFinder_1a89990a08a45c7671f3fb9fbcdeecf66f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -370,16 +370,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="385" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="385" bodyend="395"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="384" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="384" bodyend="394"/>
       </memberdef>
-      <memberdef kind="function" id="classAdvectionFieldFinder_1a96e2dc6da4ab3200da740bdf5d3aeda6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classAdvectionFieldFinder_1af7481a70d04f97c9eecc044a6cd357e6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void AdvectionFieldFinder&lt; Mapping &gt;::operator()</definition>
-        <argsstring>(host_t&lt; PolarSplineMemRTheta &gt; &amp;electrostatic_potential_coef, host_t&lt; DVectorFieldRTheta&lt; R, Theta &gt; &gt; advection_field_rtheta, DVector&lt; X, Y &gt; &amp;advection_field_xy_centre) const</argsstring>
+        <argsstring>(host_t&lt; PolarSplineRTheta &gt; &amp;electrostatic_potential_coef, host_t&lt; DVectorFieldRTheta&lt; R, Theta &gt; &gt; advection_field_rtheta, DVector&lt; X, Y &gt; &amp;advection_field_xy_centre) const</argsstring>
         <name>operator()</name>
         <qualifiedname>AdvectionFieldFinder::operator()</qualifiedname>
         <param>
-          <type>host_t&lt; <ref refid="structPolarSplineMem" kindref="compound">PolarSplineMemRTheta</ref> &gt; &amp;</type>
+          <type>host_t&lt; PolarSplineRTheta &gt; &amp;</type>
           <declname>electrostatic_potential_coef</declname>
         </param>
         <param>
@@ -391,7 +391,7 @@
           <declname>advection_field_xy_centre</declname>
         </param>
         <briefdescription>
-<para>Compute the advection field from the Poisson-like equation. The B-splines basis used is the polar B-splines (<ref refid="structPolarSplineMem" kindref="compound">PolarSplineMem</ref>). </para>
+<para>Compute the advection field from the Poisson-like equation. The B-splines basis used is the polar B-splines (PolarSplineMem). </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -423,7 +423,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="409" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="409" bodyend="419"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="408" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="408" bodyend="418"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -486,7 +486,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="208" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="208" bodyend="333"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="207" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="207" bodyend="332"/>
       </memberdef>
       <memberdef kind="function" id="classAdvectionFieldFinder_1ae49c77c27d8f831a567d6771fe9470cd" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -559,7 +559,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="438" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="438" bodyend="538"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="437" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="437" bodyend="537"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -613,7 +613,7 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="89" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="90" bodyend="539"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" line="88" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp" bodystart="89" bodyend="538"/>
     <listofallmembers>
       <member refid="classAdvectionFieldFinder_1a3086cce87c971e57d63e4ee31c0dadb6" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>AdvectionFieldFinder</name></member>
       <member refid="classAdvectionFieldFinder_1ae49c77c27d8f831a567d6771fe9470cd" prot="private" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>compute_advection_field_RTheta</name></member>
@@ -626,10 +626,10 @@
       <member refid="classAdvectionFieldFinder_1af47b6bde71aa5690521b491488645cd3" prot="private" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>n_overlap_cells</name></member>
       <member refid="classAdvectionFieldFinder_1a6c48a3bdb689fb9a270698a6617f2cfb" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
       <member refid="classAdvectionFieldFinder_1a1c94218e7996b38d562fa98ccd29dde5" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
-      <member refid="classAdvectionFieldFinder_1ab5d88aecc399886af415472b221a96d9" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
+      <member refid="classAdvectionFieldFinder_1ac2dc433b1586c44ce1473a6d4b60a0e7" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
       <member refid="classAdvectionFieldFinder_1a9d0eeda30e67611e8dd43b76d1917c16" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
       <member refid="classAdvectionFieldFinder_1a89990a08a45c7671f3fb9fbcdeecf66f" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
-      <member refid="classAdvectionFieldFinder_1a96e2dc6da4ab3200da740bdf5d3aeda6" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
+      <member refid="classAdvectionFieldFinder_1af7481a70d04f97c9eecc044a6cd357e6" prot="public" virt="non-virtual"><scope>AdvectionFieldFinder</scope><name>operator()</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

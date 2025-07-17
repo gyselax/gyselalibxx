@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespacePolarSplines" kind="namespace" language="C++">
+    <compoundname>PolarSplines</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="polar__bsplines_8hpp_1a3ba12098f03119f39af5886324f72c94" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ExecSpace</type>
+          </param>
+          <param>
+            <type>class DDim</type>
+          </param>
+          <param>
+            <type>class MemorySpace</type>
+          </param>
+        </templateparamlist>
+        <type>DField&lt; IdxRange&lt; DDim &gt;, MemorySpace &gt;</type>
+        <definition>DField&lt; IdxRange&lt; DDim &gt;, MemorySpace &gt; PolarSplines::integrals</definition>
+        <argsstring>(ExecSpace const &amp;execution_space, DField&lt; IdxRange&lt; DDim &gt;, MemorySpace &gt; int_vals)</argsstring>
+        <name>integrals</name>
+        <qualifiedname>PolarSplines::integrals</qualifiedname>
+        <param>
+          <type>ExecSpace const &amp;</type>
+          <declname>execution_space</declname>
+        </param>
+        <param>
+          <type>DField&lt; IdxRange&lt; DDim &gt;, MemorySpace &gt;</type>
+          <declname>int_vals</declname>
+        </param>
+        <briefdescription>
+<para>Get the integrals over the logical domain of each of the polar B-splines. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">execution_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The execution space on which the integrals should be calculated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">int_vals</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The values of the integrals over the logical domain of each of the polar B-splines. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="732" column="8" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="732" bodyend="800" declfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" declline="25" declcolumn="8"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="16" column="1"/>
+  </compounddef>
+</doxygen>

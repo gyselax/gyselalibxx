@@ -739,26 +739,6 @@
         <childnode refid="23" relation="include">
         </childnode>
       </node>
-      <node id="147">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline.hpp</label>
-        <link refid="polar__spline_8hpp_source"/>
-        <childnode refid="40" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="148" relation="include">
-        </childnode>
-        <childnode refid="43" relation="include">
-        </childnode>
-      </node>
-      <node id="148">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp</label>
-        <link refid="polar__spline__evaluator_8hpp_source"/>
-        <childnode refid="40" relation="include">
-        </childnode>
-        <childnode refid="43" relation="include">
-        </childnode>
-      </node>
       <node id="108">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolator.hpp</label>
         <link refid="spline__interpolator_8hpp_source"/>
@@ -1282,8 +1262,6 @@
         </childnode>
         <childnode refid="104" relation="include">
         </childnode>
-        <childnode refid="147" relation="include">
-        </childnode>
         <childnode refid="108" relation="include">
         </childnode>
         <childnode refid="106" relation="include">
@@ -1332,7 +1310,7 @@
         </childnode>
         <childnode refid="82" relation="include">
         </childnode>
-        <childnode refid="149" relation="include">
+        <childnode refid="147" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -1562,16 +1540,16 @@
         </childnode>
         <childnode refid="146" relation="include">
         </childnode>
-        <childnode refid="150" relation="include">
-        </childnode>
-        <childnode refid="151" relation="include">
-        </childnode>
-        <childnode refid="152" relation="include">
+        <childnode refid="148" relation="include">
         </childnode>
         <childnode refid="149" relation="include">
         </childnode>
+        <childnode refid="150" relation="include">
+        </childnode>
+        <childnode refid="147" relation="include">
+        </childnode>
       </node>
-      <node id="150">
+      <node id="148">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp</label>
         <link refid="ddc__helper_8hpp_source"/>
         <childnode refid="2" relation="include">
@@ -1610,8 +1588,6 @@
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="147" relation="include">
-        </childnode>
         <childnode refid="118" relation="include">
         </childnode>
         <childnode refid="123" relation="include">
@@ -1647,13 +1623,13 @@
         <childnode refid="82" relation="include">
         </childnode>
       </node>
-      <node id="151">
+      <node id="149">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/mesh_builder.hpp</label>
         <link refid="mesh__builder_8hpp_source"/>
         <childnode refid="68" relation="include">
         </childnode>
       </node>
-      <node id="152">
+      <node id="150">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/non_uniform_interpolation_points.hpp</label>
         <link refid="non__uniform__interpolation__points_8hpp_source"/>
         <childnode refid="95" relation="include">
@@ -1661,7 +1637,7 @@
         <childnode refid="68" relation="include">
         </childnode>
       </node>
-      <node id="149">
+      <node id="147">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/transpose.hpp</label>
         <link refid="transpose_8hpp_source"/>
         <childnode refid="118" relation="include">

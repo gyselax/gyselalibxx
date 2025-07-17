@@ -62,10 +62,10 @@ _Solve the Poisson-like equation and return the electric field for the coupled V
 |   | [**AdvectionFieldFinder**](#function-advectionfieldfinder) (Mapping const & mapping, double const epsilon=1e-12) <br>_Instantiate a AdvectionFieldRTheta ._  |
 |  void | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; electrostatic\_potential, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; advection\_field\_xy) const<br>_Compute the advection field from a Field of_ \(\phi\) _values._ |
 |  void | [**operator()**](#function-operator_1) (host\_t&lt; Spline2D &gt; electrostatic\_potential\_coef, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; advection\_field\_xy) const<br>_Compute the advection field from a spline representation of_ \(\phi\) _solution. The B-splines basis used is the cross-product of two 1D B-splines basis._ |
-|  void | [**operator()**](#function-operator_2) (host\_t&lt; [**PolarSplineMemRTheta**](structPolarSplineMem.md) &gt; & electrostatic\_potential\_coef, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; advection\_field\_xy) const<br>_Compute the advection field from the Poisson-like equation solution. The B-splines basis used is the polar B-splines (_ [_**PolarSplineMem**_](structPolarSplineMem.md) _)._ |
+|  void | [**operator()**](#function-operator_2) (host\_t&lt; PolarSplineRTheta &gt; electrostatic\_potential\_coef, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; advection\_field\_xy) const<br>_Compute the advection field from the Poisson-like equation solution. The B-splines basis used is the polar B-splines (PolarSplineMem)._  |
 |  void | [**operator()**](#function-operator_3) (host\_t&lt; DFieldRTheta &gt; electrostatic\_potential, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; &gt; advection\_field\_rtheta, [**DVector**](classTensor.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; & advection\_field\_xy\_centre) const<br>_Compute the advection field from a Field of_ \(\phi\) _values._ |
 |  void | [**operator()**](#function-operator_4) (host\_t&lt; Spline2D &gt; electrostatic\_potential\_coef, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; &gt; advection\_field\_rtheta, [**DVector**](classTensor.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; & advection\_field\_xy\_centre) const<br>_Compute the advection field from a spline representation of_ \(\phi\) _. The B-splines basis used is the cross-product of two 1D B-splines basis._ |
-|  void | [**operator()**](#function-operator_5) (host\_t&lt; [**PolarSplineMemRTheta**](structPolarSplineMem.md) &gt; & electrostatic\_potential\_coef, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; &gt; advection\_field\_rtheta, [**DVector**](classTensor.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; & advection\_field\_xy\_centre) const<br>_Compute the advection field from the Poisson-like equation. The B-splines basis used is the polar B-splines (_ [_**PolarSplineMem**_](structPolarSplineMem.md) _)._ |
+|  void | [**operator()**](#function-operator_5) (host\_t&lt; PolarSplineRTheta &gt; & electrostatic\_potential\_coef, host\_t&lt; [**DVectorFieldRTheta**](classVectorField.md)&lt; [**R**](structR.md), [**Theta**](structTheta.md) &gt; &gt; advection\_field\_rtheta, [**DVector**](classTensor.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; & advection\_field\_xy\_centre) const<br>_Compute the advection field from the Poisson-like equation. The B-splines basis used is the polar B-splines (PolarSplineMem)._  |
 
 
 
@@ -283,10 +283,10 @@ inline void AdvectionFieldFinder::operator() (
 
 ### function operator() 
 
-_Compute the advection field from the Poisson-like equation solution. The B-splines basis used is the polar B-splines (_ [_**PolarSplineMem**_](structPolarSplineMem.md) _)._
+_Compute the advection field from the Poisson-like equation solution. The B-splines basis used is the polar B-splines (PolarSplineMem)._ 
 ```C++
 inline void AdvectionFieldFinder::operator() (
-    host_t< PolarSplineMemRTheta > & electrostatic_potential_coef,
+    host_t< PolarSplineRTheta > electrostatic_potential_coef,
     host_t< DVectorFieldRTheta < X , Y > > advection_field_xy
 ) const
 ```
@@ -374,10 +374,10 @@ inline void AdvectionFieldFinder::operator() (
 
 ### function operator() 
 
-_Compute the advection field from the Poisson-like equation. The B-splines basis used is the polar B-splines (_ [_**PolarSplineMem**_](structPolarSplineMem.md) _)._
+_Compute the advection field from the Poisson-like equation. The B-splines basis used is the polar B-splines (PolarSplineMem)._ 
 ```C++
 inline void AdvectionFieldFinder::operator() (
-    host_t< PolarSplineMemRTheta > & electrostatic_potential_coef,
+    host_t< PolarSplineRTheta > & electrostatic_potential_coef,
     host_t< DVectorFieldRTheta < R , Theta > > advection_field_rtheta,
     DVector < X , Y > & advection_field_xy_centre
 ) const

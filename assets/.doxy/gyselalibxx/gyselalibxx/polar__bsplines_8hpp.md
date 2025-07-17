@@ -11,6 +11,7 @@
 
 
 * `#include <array>`
+* `#include <type_traits>`
 * `#include <vector>`
 * `#include <ddc/ddc.hpp>`
 * `#include "bernstein.hpp"`
@@ -18,7 +19,6 @@
 * `#include "coord_transformation_tools.hpp"`
 * `#include "ddc_helper.hpp"`
 * `#include "discrete_to_cartesian.hpp"`
-* `#include "polar_spline.hpp"`
 * `#include "view.hpp"`
 
 
@@ -33,6 +33,11 @@
 
 
 
+## Namespaces
+
+| Type | Name |
+| ---: | :--- |
+| namespace | [**PolarSplines**](namespacePolarSplines.md) <br> |
 
 
 ## Classes
@@ -67,11 +72,6 @@
 
 
 
-## Public Functions
-
-| Type | Name |
-| ---: | :--- |
-|  [**PolarSpline**](structPolarSpline.md)&lt; DDim, MemorySpace &gt; | [**integrals**](#function-integrals) (ExecSpace const & execution\_space, [**PolarSpline**](structPolarSpline.md)&lt; DDim, MemorySpace &gt; int\_vals) <br> |
 
 
 
@@ -100,25 +100,6 @@
 
 
 
-## Public Functions Documentation
-
-
-
-
-### function integrals 
-
-```C++
-template<class ExecSpace, class DDim, class MemorySpace>
-PolarSpline < DDim, MemorySpace > integrals (
-    ExecSpace const & execution_space,
-    PolarSpline < DDim, MemorySpace > int_vals
-) 
-```
-
-
-
-
-<hr>
 
 ------------------------------
 The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp`

@@ -36,7 +36,7 @@
         <link refid="classTriangularBernsteinPolynomialBasis"/>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="216" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="224" bodyend="225"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="279" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="287" bodyend="288"/>
     <listofallmembers>
       <member refid="classTriangularBernsteinPolynomialBasis_1afc2ce5f428444dc1fd4f0001d1c82f6a" prot="public" virt="non-virtual"><scope>PolarBSplines::Impl::IntermediateBernsteinBasis</scope><name>degree</name></member>
       <member refid="classTriangularBernsteinPolynomialBasis_1a15d207d662780362b254d20f8532f4fb" prot="public" virt="non-virtual"><scope>PolarBSplines::Impl::IntermediateBernsteinBasis</scope><name>discrete_dimension_type</name></member>

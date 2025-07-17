@@ -18,7 +18,6 @@
 * `#include "math_tools.hpp"`
 * `#include "matrix_batch_csr.hpp"`
 * `#include "metric_tensor_evaluator.hpp"`
-* `#include "polar_spline.hpp"`
 * `#include "polar_spline_evaluator.hpp"`
 * `#include "quadrature_coeffs_nd.hpp"`
 * `#include "view.hpp"`
