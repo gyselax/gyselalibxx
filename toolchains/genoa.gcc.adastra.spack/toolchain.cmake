@@ -6,14 +6,12 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # NOTE: We are not supposed to define CMAKE_BUILD_TYPE here.
 set(CMAKE_BUILD_TYPE Release) # Debug, Release, RelWithDebInfo and MinSizeRel
 
-# Kokkos options:
-
+# Kokkos options
 set(Kokkos_ENABLE_OPENMP ON CACHE BOOL "")
 set(Kokkos_ENABLE_SERIAL ON CACHE BOOL "")
 set(Kokkos_ARCH_ZEN4 ON CACHE BOOL "Optimize for AMD Zen4 architecture (HOST).")
 
-# Kokkos kernels options:
-
+# Kokkos Kernels options
 set(KokkosKernels_ENABLE_ALL_COMPONENTS OFF CACHE BOOL "")
 set(KokkosKernels_ENABLE_COMPONENT_BATCHED ON CACHE BOOL "")
 set(KokkosKernels_ENABLE_COMPONENT_BLAS ON CACHE BOOL "")

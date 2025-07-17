@@ -6,8 +6,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # NOTE: We are not supposed to define CMAKE_BUILD_TYPE here.
 set(CMAKE_BUILD_TYPE Release) # Debug, Release, RelWithDebInfo and MinSizeRel
 
-# Kokkos options:
-
+# Kokkos options
 set(Kokkos_ENABLE_HIP ON CACHE BOOL "Defined if the HIP execution space is enabled.")
 set(Kokkos_ENABLE_HIP_MULTIPLE_KERNEL_INSTANTIATIONS ON CACHE BOOL "If defined, multiple kernel versions are instantiated potentially improving run time.")
 set(Kokkos_ARCH_AMD_GFX90A ON CACHE BOOL "Enable support for AMD GPU MI200 series (GFX90A).")
@@ -17,8 +16,7 @@ set(Kokkos_ENABLE_OPENMP OFF CACHE BOOL "")
 set(Kokkos_ENABLE_SERIAL ON CACHE BOOL "")
 set(Kokkos_ARCH_ZEN3 ON CACHE BOOL "Optimize for AMD Zen3 architecture (HOST).")
 
-# Kokkos kernels options:
-
+# Kokkos Kernels options
 set(KokkosKernels_ENABLE_ALL_COMPONENTS OFF CACHE BOOL "")
 set(KokkosKernels_ENABLE_COMPONENT_BATCHED ON CACHE BOOL "")
 set(KokkosKernels_ENABLE_COMPONENT_BLAS ON CACHE BOOL "")
