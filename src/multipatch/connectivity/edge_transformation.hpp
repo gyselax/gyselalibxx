@@ -11,6 +11,8 @@
 #include "edge.hpp"
 #include "interface.hpp"
 
+template <class TargetGrid>
+static constexpr Idx<TargetGrid> out_of_bounds_idx = Idx<TargetGrid>(std::string::npos);
 
 /**
  * @brief Transform a coordinate or an index from one edge to the one on the other edge.
@@ -179,7 +181,7 @@ public:
         using TargetGrid = std::
                 conditional_t<std::is_same_v<CurrentIdx, Idx<EdgeGrid1>>, EdgeGrid2, EdgeGrid1>;
         Idx<TargetGrid> target_idx = search_for_match<TargetGrid>(current_idx);
-        assert(target_idx != Idx<TargetGrid>(std::string::npos));
+        assert(target_idx != out_of_bounds_idx<TargetGrid>);
         return target_idx;
     }
 
@@ -209,7 +211,7 @@ public:
         using TargetGrid = std::
                 conditional_t<std::is_same_v<CurrentIdx, Idx<EdgeGrid1>>, EdgeGrid2, EdgeGrid1>;
         Idx<TargetGrid> target_idx = search_for_match<TargetGrid>(current_idx);
-        return search_for_match<TargetGrid>(current_idx) != Idx<TargetGrid>(std::string::npos);
+        return search_for_match<TargetGrid>(current_idx) != out_of_bounds_idx<TargetGrid>;
     }
 
 
@@ -354,7 +356,7 @@ public:
             }
         }
 
-        return Idx<TargetGrid>(std::string::npos);
+        return out_of_bounds_idx<TargetGrid>;
     }
 
 
