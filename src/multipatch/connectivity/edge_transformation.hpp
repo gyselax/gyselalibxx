@@ -210,7 +210,6 @@ public:
     {
         using TargetGrid = std::
                 conditional_t<std::is_same_v<CurrentIdx, Idx<EdgeGrid1>>, EdgeGrid2, EdgeGrid1>;
-        Idx<TargetGrid> target_idx = search_for_match<TargetGrid>(current_idx);
         return search_for_match<TargetGrid>(current_idx) != out_of_bounds_idx<TargetGrid>;
     }
 
