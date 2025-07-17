@@ -675,7 +675,7 @@ public:
                                 theta_mod(ddc::select<ThetaCellDim>(cell_idx).uid()));
 
                         const IdxRangeQuadratureRTheta cell_quad_points(
-                                get_quadrature_points_in_cell(cell_idx_r, cell_idx_theta));
+                                get_quadrature_points_in_cell(cell_idx));
                         // Find the column where the non-zero data is stored
                         Idx<RBasisSubset> ib_trial_r(idx_trial_r.uid() - cell_idx_r);
                         Idx<ThetaBasisSubset> ib_trial_theta(
@@ -908,42 +908,45 @@ public:
                                        * int_volume_host(idx_r, idx_theta);
                             });
                 });
-        const std::size_t ncells_r = ddc::discrete_space<BSplinesR>().ncells();
+
+        IdxRange<ddc::knot_discrete_dimension_t<BSplinesR>> idx_range_r_bp
+                = ddc::discrete_space<BSplinesR>().break_point_domain();
+        IdxRange<ddc::knot_discrete_dimension_t<BSplinesTheta>> idx_range_theta_bp
+                = ddc::discrete_space<BSplinesTheta>().break_point_domain();
 
         ddc::for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx) {
-            const IdxBSRTheta idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
-            const std::size_t idx_r(ddc::select<BSplinesR>(idx_2d).uid());
-            const std::size_t idx_theta(ddc::select<BSplinesTheta>(idx_2d).uid());
+            IdxBSRTheta const idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
+            IdxBSR const idx_r(idx_2d);
+            IdxBSTheta const idx_theta(idx_2d);
+
+            Idx<ddc::knot_discrete_dimension_t<BSplinesR>> r_k0
+                    = ddc::discrete_space<BSplinesR>().get_first_support_knot(idx_r);
+            Idx<ddc::knot_discrete_dimension_t<BSplinesR>> r_kN
+                    = ddc::discrete_space<BSplinesR>().get_last_support_knot(idx_r);
+            Idx<ddc::knot_discrete_dimension_t<BSplinesTheta>> theta_k0
+                    = ddc::discrete_space<BSplinesTheta>().get_first_support_knot(idx_theta);
 
             // Find the cells on which the bspline is non-zero
-            int first_cell_r(idx_r - BSplinesR::degree());
-            int first_cell_theta(idx_theta - BSplinesTheta::degree());
-            std::size_t last_cell_r(idx_r + 1);
-            if (first_cell_r < 0)
-                first_cell_r = 0;
-            if (last_cell_r > ncells_r)
-                last_cell_r = ncells_r;
-            IdxStep<RCellDim> const r_length(last_cell_r - first_cell_r);
+            IdxStep<RCellDim> const r_length(
+                    (r_kN - Kokkos::max(r_k0, idx_range_r_bp.front())).value());
             IdxStep<ThetaCellDim> const theta_length(BSplinesTheta::degree() + 1);
-
-
-            Idx<RCellDim> const start_r(first_cell_r);
-            Idx<ThetaCellDim> const start_theta(theta_mod(first_cell_theta));
+            Idx<RCellDim> const start_r(Kokkos::max((r_k0 - idx_range_r_bp.front()).value(), 0l));
+            Idx<ThetaCellDim> const start_theta(theta_mod(theta_k0 - idx_range_theta_bp.front()));
             const IdxRange<RCellDim> r_cells(start_r, r_length);
             const IdxRange<ThetaCellDim> theta_cells(start_theta, theta_length);
             const IdxRange<RCellDim, ThetaCellDim> non_zero_cells(r_cells, theta_cells);
-            assert(r_length * theta_length > 0);
+            assert(non_zero_cells.size() > 0);
             double element = 0.0;
             ddc::for_each(non_zero_cells, [&](IdxCell const cell_idx) {
                 const int cell_idx_r(ddc::select<RCellDim>(cell_idx).uid());
                 const int cell_idx_theta(theta_mod(ddc::select<ThetaCellDim>(cell_idx).uid()));
 
                 const IdxRangeQuadratureRTheta cell_quad_points(
-                        get_quadrature_points_in_cell(cell_idx_r, cell_idx_theta));
+                        get_quadrature_points_in_cell(cell_idx));
 
                 // Find the column where the non-zero data is stored
-                Idx<RBasisSubset> ib_r(idx_r - cell_idx_r);
-                Idx<ThetaBasisSubset> ib_theta(theta_mod(idx_theta - cell_idx_theta));
+                Idx<RBasisSubset> ib_r(idx_r.uid() - cell_idx_r);
+                Idx<ThetaBasisSubset> ib_theta(theta_mod(idx_theta.uid() - cell_idx_theta));
 
                 // Calculate the weak integral
                 element += ddc::transform_reduce(
@@ -1031,10 +1034,12 @@ public:
      *      The quadrature range corresponding to the  @f$(r,\theta)@f$ indices.
      */
     static KOKKOS_FUNCTION IdxRangeQuadratureRTheta
-    get_quadrature_points_in_cell(int cell_idx_r, int cell_idx_theta)
+    get_quadrature_points_in_cell(Idx<RCellDim, ThetaCellDim> cell_idx)
     {
-        const IdxQuadratureR first_quad_point_r(cell_idx_r * s_n_gauss_legendre_r);
-        const IdxQuadratureTheta first_quad_point_theta(cell_idx_theta * s_n_gauss_legendre_theta);
+        const IdxQuadratureR first_quad_point_r(
+                ddc::select<RCellDim>(cell_idx).uid() * s_n_gauss_legendre_r);
+        const IdxQuadratureTheta first_quad_point_theta(
+                theta_mod(ddc::select<ThetaCellDim>(cell_idx).uid()) * s_n_gauss_legendre_theta);
         constexpr IdxStepQuadratureR n_GL_r(s_n_gauss_legendre_r);
         constexpr IdxStepQuadratureTheta n_GL_theta(s_n_gauss_legendre_theta);
         const IdxRangeQuadratureR quad_points_r(first_quad_point_r, n_GL_r);
@@ -1423,7 +1428,7 @@ public:
                     const int cell_idx_theta(theta_mod(ddc::select<ThetaCellDim>(cell_idx).uid()));
 
                     const IdxRangeQuadratureRTheta cell_quad_points(
-                            get_quadrature_points_in_cell(cell_idx_r, cell_idx_theta));
+                            get_quadrature_points_in_cell(cell_idx));
 
                     int ib_test_theta_idx = idx_test_theta - cell_idx_theta;
                     int ib_trial_theta_idx = idx_trial_theta - cell_idx_theta;
