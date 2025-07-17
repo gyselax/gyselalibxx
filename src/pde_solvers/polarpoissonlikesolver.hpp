@@ -54,6 +54,8 @@ class PolarSplineFEMPoissonLikeSolver
             std::is_same_v<IdxRangeFull, IdxRange<GridR, GridTheta>>,
             "PolarSplineFEMPoissonLikeSolver is not yet batched");
 
+    class InternalBatchDim;
+
 public:
     /// The radial dimension
     using R = typename GridR::continuous_dimension_type;
@@ -262,8 +264,8 @@ private:
             m_polar_spline_evaluator;
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>
             m_gko_matrix;
-    mutable host_t<PolarSplineMemRTheta> m_phi_spline_coef;
-    Kokkos::View<double**, Kokkos::LayoutRight> m_x_init;
+    mutable PolarSplineMemRTheta m_phi_spline_coef;
+    mutable DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> m_x_init;
 
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
 public:
@@ -334,13 +336,16 @@ public:
         , m_phi_spline_coef(ddc::discrete_space<PolarBSplinesRTheta>().full_domain())
         , m_x_init(
                   "x_init",
-                  1,
-                  ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
-                          - ddc::discrete_space<BSplinesTheta>().nbasis())
+                  IdxRange<InternalBatchDim, PolarBSplinesRTheta>(
+                          Idx<InternalBatchDim, PolarBSplinesRTheta>(0, 0),
+                          IdxStep<InternalBatchDim, PolarBSplinesRTheta>(
+                                  1,
+                                  ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
+                                          - ddc::discrete_space<BSplinesTheta>().nbasis())))
     {
         static_assert(has_jacobian_v<Mapping>);
         //initialise x_init
-        Kokkos::deep_copy(m_x_init, 0);
+        ddc::parallel_fill(get_field(m_x_init), 0);
         // Get break points
         IdxRange<KnotsR> idxrange_r_edges = ddc::discrete_space<BSplinesR>().break_point_domain();
         IdxRange<KnotsTheta> idxrange_theta_edges
@@ -865,25 +870,31 @@ public:
                 std::is_invocable_r_v<double, RHSFunction, CoordRTheta>,
                 "RHSFunction must have an operator() which takes a coordinate and returns a "
                 "double");
-        const int b_size = ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
-                           - ddc::discrete_space<BSplinesTheta>().nbasis();
-        const int batch_size = 1;
+
+        assert(get_idx_range(spline) == ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
+
+        IdxRange<InternalBatchDim> batch_idx_range(get_idx_range(m_x_init));
+
+        assert(batch_idx_range.size() == 1);
+
+        Idx<InternalBatchDim> batch_idx = batch_idx_range.front();
+
         // Create b for rhs
-        Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::HostSpace>
-                b_host("b_host", batch_size, b_size);
+        host_t<DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>>> b_host_alloc(
+                get_idx_range(m_x_init));
         //Create an initial guess
-        Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::HostSpace>
-                x_init_host("x_init_host", batch_size, b_size);
+        host_t<DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>>> x_init_host_alloc(
+                get_idx_range(m_x_init));
+        host_t<DField<IdxRange<InternalBatchDim, PolarBSplinesRTheta>>> b_host
+                = get_field(b_host_alloc);
+        host_t<DField<IdxRange<InternalBatchDim, PolarBSplinesRTheta>>> x_init_host
+                = get_field(x_init_host_alloc);
         // Fill b
         auto int_volume_host = ddc::create_mirror_view_and_copy(get_field(m_int_volume));
         ddc::for_each(
                 PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>(),
                 [&](IdxBSPolar const idx) {
-                    const int bspl_idx = idx
-                                         - PolarBSplinesRTheta::template singular_idx_range<
-                                                   PolarBSplinesRTheta>()
-                                                   .front();
-                    b_host(0, bspl_idx) = ddc::transform_reduce(
+                    b_host(batch_idx, idx) = ddc::transform_reduce(
                             m_idxrange_quadrature_singular,
                             0.0,
                             ddc::reducer::sum<double>(),
@@ -948,20 +959,19 @@ public:
                             return rhs(coord) * rb * pb * int_volume_host(idx_r, idx_theta);
                         });
             });
-            const std::size_t singular_index
-                    = idx - ddc::discrete_space<PolarBSplinesRTheta>().full_domain().front();
-            b_host(0, singular_index) = element;
+            b_host(batch_idx, idx) = element;
         });
 
-        Kokkos::View<double**, Kokkos::LayoutRight> b("b", batch_size, b_size);
-        Kokkos::deep_copy(b, b_host);
+        DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> b_alloc(get_idx_range(m_x_init));
+        DField<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> b = get_field(b_alloc);
+        ddc::parallel_deepcopy(b, b_host);
         Kokkos::Profiling::popRegion();
 
-        Kokkos::deep_copy(m_x_init, x_init_host);
+        ddc::parallel_deepcopy(get_field(m_x_init), x_init_host);
         // Solve the matrix equation
         Kokkos::Profiling::pushRegion("PolarPoissonSolve");
-        m_gko_matrix->solve(m_x_init, b);
-        Kokkos::deep_copy(x_init_host, m_x_init);
+        m_gko_matrix->solve(m_x_init.allocation_kokkos_view(), b.allocation_kokkos_view());
+        ddc::parallel_deepcopy(x_init_host, m_x_init);
         //-----------------
         IdxRangeBSRTheta dirichlet_boundary_idx_range(
                 m_idxrange_bsplines_r.take_last(IdxStep<BSplinesR> {1}),
@@ -970,15 +980,9 @@ public:
         // Fill the spline
         ddc::for_each(
                 PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>(),
-                [&](IdxBSPolar const idx) {
-                    const int bspl_idx = idx
-                                         - PolarBSplinesRTheta::template singular_idx_range<
-                                                   PolarBSplinesRTheta>()
-                                                   .front();
-                    spline(idx) = x_init_host(0, bspl_idx);
-                });
+                [&](IdxBSPolar const idx) { spline(idx) = x_init_host(batch_idx, idx); });
         ddc::for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx) {
-            spline(idx) = x_init_host(0, idx.uid());
+            spline(idx) = x_init_host(batch_idx, idx);
         });
         ddc::for_each(dirichlet_boundary_idx_range, [&](IdxBSRTheta const idx) {
             spline(PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(idx)) = 0.0;
