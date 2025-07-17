@@ -1323,7 +1323,6 @@
     <member refid="classPolarBSplines_1_1Impl_1aa1ad8d647af3d39e2e2fc7ff01c1a04f" kind="function"><name>eval_deriv_r</name></member>
     <member refid="classPolarBSplines_1_1Impl_1acff0e231afa39962837191f9f094bd92" kind="function"><name>eval_deriv_theta</name></member>
     <member refid="classPolarBSplines_1_1Impl_1ae731ae28ad158d8a5876ae85fb138850" kind="function"><name>eval_deriv_r_and_theta</name></member>
-    <member refid="classPolarBSplines_1_1Impl_1af11b5fa49f044552020019eb1b8f4457" kind="function"><name>integrals</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a1ca0df2d7f5defe89ecf42ef6bcfb9fa" kind="function"><name>nbasis</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a244d6ebb4a31d96e25c1844614979cc7" kind="function"><name>full_domain</name></member>
     <member refid="classPolarBSplines_1_1Impl_1af3133a4ea7b7cc4796da428de9bba352" kind="function"><name>tensor_bspline_idx_range</name></member>

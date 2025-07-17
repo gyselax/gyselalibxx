@@ -79,7 +79,6 @@
 |  KOKKOS\_FUNCTION [**tensor\_product\_index\_type**](classPolarBSplines.md#typedef-tensor_product_index_type) | [**eval\_deriv\_r\_and\_theta**](#function-eval_deriv_r_and_theta) (DSpan1D singular\_derivs, DSpan2D derivs, Coord&lt; [**R**](classPolarBSplines.md#typedef-r), [**Theta**](classPolarBSplines.md#typedef-theta) &gt; p) const<br>_Evaluate the second order derivative of the polar basis splines in the radial and poloidal directions, at the coordinate p._  |
 |  KOKKOS\_FUNCTION [**tensor\_product\_index\_type**](classPolarBSplines.md#typedef-tensor_product_index_type) | [**eval\_deriv\_theta**](#function-eval_deriv_theta) (DSpan1D singular\_derivs, DSpan2D derivs, Coord&lt; [**R**](classPolarBSplines.md#typedef-r), [**Theta**](classPolarBSplines.md#typedef-theta) &gt; p) const<br>_Evaluate the poloidal derivative of the polar basis splines at the coordinate p._  |
 |  [**discrete\_domain\_type**](classPolarBSplines_1_1Impl.md#typedef-discrete_domain_type) | [**full\_domain**](#function-full_domain) () noexcept const<br> |
-|  void | [**integrals**](#function-integrals-22) ([**PolarSpline**](structPolarSpline.md)&lt; DDim, MemorySpace2 &gt; int\_vals) const<br> |
 |  std::size\_t | [**nbasis**](#function-nbasis) () noexcept const<br> |
 |  [**Impl**](classPolarBSplines_1_1Impl.md) & | [**operator=**](#function-operator) ([**Impl**](classPolarBSplines_1_1Impl.md) const & x) = default<br> |
 |  [**Impl**](classPolarBSplines_1_1Impl.md) & | [**operator=**](#function-operator_1) ([**Impl**](classPolarBSplines_1_1Impl.md) && x) = default<br> |
@@ -492,36 +491,6 @@ Returns the index range containing the indices of all the polar b-splines.
 
 The index range containing the indices of all the polar b-splines. 
 
-
-
-
-
-        
-
-<hr>
-
-
-
-### function integrals [2/2]
-
-```C++
-template<class MemorySpace2>
-void PolarBSplines::Impl::integrals (
-    PolarSpline < DDim, MemorySpace2 > int_vals
-) const
-```
-
-
-
-Calculate the integrals of each of the basis splines.
-
-
-
-
-**Parameters:**
-
-
-* `int_vals` The integrals of the basis splines. 
 
 
 

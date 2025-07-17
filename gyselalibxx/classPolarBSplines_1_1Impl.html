@@ -653,10 +653,6 @@
 <td style="text-align: left;"><a href="#function-full_domain"><strong>full_domain</strong></a> () noexcept const<br></td>
 </tr>
 <tr>
-<td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-integrals-22"><strong>integrals</strong></a> (<a href="structPolarSpline.html"><strong>PolarSpline</strong></a>&lt; DDim, MemorySpace2 &gt; int_vals) const<br></td>
-</tr>
-<tr>
 <td style="text-align: right;">std::size_t</td>
 <td style="text-align: left;"><a href="#function-nbasis"><strong>nbasis</strong></a> () noexcept const<br></td>
 </tr>
@@ -841,19 +837,6 @@ inline explicit PolarBSplines::Impl::Impl (
 <p>Returns the index range containing the indices of all the polar b-splines.</p>
 <p><strong>Returns:</strong></p>
 <p>The index range containing the indices of all the polar b-splines. </p>
-<hr>
-
-<h3 id="function-integrals-22">function integrals [2/2]</h3>
-<pre><code class="language-C++">template&lt;class MemorySpace2&gt;
-void PolarBSplines::Impl::integrals (
-    PolarSpline &lt; DDim, MemorySpace2 &gt; int_vals
-) const
-</code></pre>
-<p>Calculate the integrals of each of the basis splines.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>int_vals</code> The integrals of the basis splines. </li>
-</ul>
 <hr>
 
 <h3 id="function-nbasis">function nbasis</h3>

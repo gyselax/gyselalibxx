@@ -365,7 +365,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="30" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="31" bodyend="554"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="30" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="31" bodyend="545"/>
     <listofallmembers>
       <member refid="classPolarBSplines_1af53c68e9827efcffeee27e353ac3ef7e" prot="public" virt="non-virtual"><scope>PolarBSplines</scope><name>BSplinesR_tag</name></member>
       <member refid="classPolarBSplines_1a7c93c1bedcf655bff666950a59eff9ea" prot="public" virt="non-virtual"><scope>PolarBSplines</scope><name>BSplinesTheta_tag</name></member>

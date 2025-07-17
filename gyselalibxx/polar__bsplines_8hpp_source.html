@@ -860,10 +860,6 @@ public:
         KOKKOS_FUNCTION tensor_product_index_type
         eval_deriv_r_and_theta(DSpan1D singular_derivs, DSpan2D derivs, Coord&lt;R, Theta&gt; p) const;
 
-        template &lt;class MemorySpace2&gt;
-        [[deprecated("Use `integrals` instead")]] void integrals(
-                PolarSpline&lt;DDim, MemorySpace2&gt; int_vals) const;
-
         std::size_t nbasis() const noexcept
         {
             std::size_t nr = ddc::discrete_space&lt;BSplinesR&gt;().nbasis() - C - 1;
@@ -1100,15 +1096,6 @@ PolarSpline&lt;DDim, MemorySpace&gt; integrals(
         ddc::parallel_fill(execution_space, int_vals.spline_coef[repeat_idx_range], 0.0);
     }
     return int_vals;
-}
-
-template &lt;class BSplinesR, class BSplinesTheta, int C&gt;
-template &lt;class DDim, class MemorySpace&gt;
-template &lt;class MemorySpace2&gt;
-void PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::Impl&lt;DDim, MemorySpace&gt;::integrals(
-        PolarSpline&lt;DDim, MemorySpace2&gt; int_vals) const
-{
-    integrals(Kokkos::DefaultHostExecutionSpace(), int_vals);
 }
 </code></pre></div>
               

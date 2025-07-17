@@ -239,7 +239,6 @@
 * **Impl** ([**Moments::Impl**](classMoments_1_1Impl.md), [**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**SpeciesInformation::Impl**](classSpeciesInformation_1_1Impl.md), [**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md))
 * **idx\_range** ([**MultipatchField**](classMultipatchField.md), [**MultipatchFieldMem**](classMultipatchFieldMem.md))
 * **integrate** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
-* **integrals** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
 * **init\_nnz\_per\_line** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **ielec** ([**SpeciesInformation::Impl**](classSpeciesInformation_1_1Impl.md))
 * **is\_unified** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))

@@ -590,7 +590,6 @@
 * **IdxStep12** ([**Patch&lt; grid1, grid2, bsplines\_dim1, bsplines\_dim2 &gt;**](structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md))
 * **IdxStep2** ([**Patch&lt; grid1, grid2, bsplines\_dim1, bsplines\_dim2 &gt;**](structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md))
 * **IdxStepTheta** ([**PolarBSplines**](classPolarBSplines.md))
-* **integrals** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
 * **IdxBSPolar** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **IdxBSR** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **IdxBSRTheta** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
