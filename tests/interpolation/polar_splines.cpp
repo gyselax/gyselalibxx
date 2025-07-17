@@ -91,7 +91,11 @@ TEST(PolarSplineTest, ConstantEval)
     using CoordR = Coord<R>;
     using CoordTheta = Coord<Theta>;
     using SplineMem = host_t<DFieldMem<IdxRange<BSplines>>>;
-    using Evaluator = PolarSplineEvaluator<BSplines, ddc::NullExtrapolationRule>;
+    using Evaluator = PolarSplineEvaluator<
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::HostSpace,
+            BSplines,
+            ddc::NullExtrapolationRule>;
     using BuilderRTheta = ddc::SplineBuilder2D<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::HostSpace,
@@ -201,11 +205,14 @@ TEST(PolarSplineTest, ConstantEval)
 
 void test_polar_spline_eval_gpu()
 {
-    using PolarCoord = Coord<R, Theta>;
     using CoordR = Coord<R>;
     using CoordTheta = Coord<Theta>;
     using SplineMem = host_t<DFieldMem<IdxRange<BSplines>>>;
-    using Evaluator = PolarSplineEvaluator<BSplines, ddc::NullExtrapolationRule>;
+    using Evaluator = PolarSplineEvaluator<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            BSplines,
+            ddc::NullExtrapolationRule>;
     using BuilderRTheta = ddc::SplineBuilder2D<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
@@ -295,10 +302,6 @@ void test_polar_spline_eval_gpu()
     ddc::NullExtrapolationRule extrapolation_rule;
     Evaluator const spline_evaluator(extrapolation_rule);
 
-    std::size_t const n_test_points = 100;
-    double const dr = (rN - r0) / n_test_points;
-    double const dp = (thetaN - theta0) / n_test_points;
-
     DFieldMem<IdxRange<GridR, GridTheta>> vals(interpolation_idx_range);
     DFieldMem<IdxRange<GridR, GridTheta>> derivs_1(interpolation_idx_range);
     DFieldMem<IdxRange<GridR, GridTheta>> derivs_2(interpolation_idx_range);
@@ -307,9 +310,9 @@ void test_polar_spline_eval_gpu()
     spline_evaluator.deriv_dim_1(get_field(derivs_1), get_const_field(coef));
     spline_evaluator.deriv_dim_2(get_field(derivs_2), get_const_field(coef));
 
-    auto vals_host = ddc::create_mirror_view_and_copy(vals);
-    auto derivs_1_host = ddc::create_mirror_view_and_copy(derivs_1);
-    auto derivs_2_host = ddc::create_mirror_view_and_copy(derivs_2);
+    auto vals_host = ddc::create_mirror_view_and_copy(get_field(vals));
+    auto derivs_1_host = ddc::create_mirror_view_and_copy(get_field(derivs_1));
+    auto derivs_2_host = ddc::create_mirror_view_and_copy(get_field(derivs_2));
 
     ddc::for_each(interpolation_idx_range, [&](Idx<GridR, GridTheta> idx) {
         EXPECT_NEAR(vals_host(idx), 1.0, 1.0e-14);
