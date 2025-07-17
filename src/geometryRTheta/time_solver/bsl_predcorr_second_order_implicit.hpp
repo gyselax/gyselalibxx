@@ -166,11 +166,6 @@ public:
         // Grid. ------------------------------------------------------------------------------------------
         IdxRangeRTheta const grid(get_idx_range<GridR, GridTheta>(density_host));
 
-        host_t<FieldMemRTheta<CoordRTheta>> coords(grid);
-        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
-            coords(irtheta) = ddc::coordinate(irtheta);
-        });
-
         // --- Electrostatic potential (phi). -------------------------------------------------------------
         DFieldMemRTheta electrical_potential(grid);
         host_t<DFieldMemRTheta> electrical_potential_host(grid);
@@ -205,7 +200,6 @@ public:
 
             polar_spline_evaluator(
                     get_field(electrical_potential_host),
-                    get_const_field(coords),
                     get_const_field(get_field(electrostatic_potential_coef)));
 
             ddc::PdiEvent("iteration")
