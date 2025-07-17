@@ -171,6 +171,12 @@ public:
         return Idx<BSplinesR, BSplinesTheta>(r_idx_elem, theta_idx_elem);
     }
 
+    /**
+     * @brief Get the subset of the coefficients associated with singular basis splines.
+     *
+     * Get the subset of the coefficients which are associated with basis splines which
+     * traverse the singular point.
+     */
     template <class ElementType, class DDim, class MemorySpace>
     static Field<ElementType, IdxRange<DDim>, MemorySpace> get_singular_subset(
             Field<ElementType, IdxRange<DDim>, MemorySpace> coeffs)
@@ -179,6 +185,12 @@ public:
         return coeffs[singular_idx_range<DDim>()];
     }
 
+    /**
+     * @brief Get the subset of the coefficients of tensor product basis splines.
+     *
+     * Get the subset of the coefficients which are associated with basis splines which
+     * can be written as a product of a radial and a poloidal basis spline.
+     */
     template <class ElementType, class DDim, class MemorySpace>
     static Field<ElementType, tensor_product_idx_range_type, MemorySpace> get_tensor_product_subset(
             Field<ElementType, IdxRange<DDim>, MemorySpace> coeffs)
