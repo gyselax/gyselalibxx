@@ -321,6 +321,11 @@ void test_polar_spline_eval_gpu()
     });
 }
 
+TEST(PolarSplineTest, ConstantEvalGPU)
+{
+    test_polar_spline_eval_gpu();
+}
+
 void test_polar_integrals()
 {
     using CoordR = Coord<R>;
