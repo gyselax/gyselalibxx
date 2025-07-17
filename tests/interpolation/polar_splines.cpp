@@ -203,11 +203,11 @@ void test_polar_integrals()
 {
     using CoordR = Coord<R>;
     using CoordTheta = Coord<Theta>;
-    using SplineMem = host_t<DFieldMem<IdxRange<BSplines>>>;
-    using Spline = host_t<DField<IdxRange<BSplines>>>;
+    using SplineMem = DFieldMem<IdxRange<BSplines>>;
+    using Spline = DField<IdxRange<BSplines>>;
     using BuilderRTheta = ddc::SplineBuilder2D<
-            Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
             BSplinesR,
             BSplinesTheta,
             GridR,
@@ -219,8 +219,8 @@ void test_polar_integrals()
             ddc::SplineSolver::LAPACK>;
 
     using EvaluatorRTheta = ddc::SplineEvaluator2D<
-            Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
             BSplinesR,
             BSplinesTheta,
             GridR,
@@ -281,7 +281,7 @@ void test_polar_integrals()
     CircToCart const coord_changer(0.3, 1.4);
 #endif
     DiscreteToCartesianBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
-            Kokkos::DefaultHostExecutionSpace(),
+            Kokkos::DefaultExecutionSpace(),
             coord_changer,
             builder_rtheta,
             evaluator_rtheta);
