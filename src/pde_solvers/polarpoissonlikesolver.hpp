@@ -1010,12 +1010,7 @@ public:
 
         (*this)(rhs, get_field(m_phi_spline_coef));
         CoordFieldMemRTheta coords_eval_alloc(get_idx_range(phi));
-        CoordFieldRTheta coords_eval(get_field(coords_eval_alloc));
-        ddc::parallel_for_each(
-                Kokkos::DefaultExecutionSpace(),
-                get_idx_range(phi),
-                KOKKOS_LAMBDA(IdxRTheta idx) { coords_eval(idx) = ddc::coordinate(idx); });
-        m_polar_spline_evaluator(phi, coords_eval, get_const_field(m_phi_spline_coef));
+        m_polar_spline_evaluator(phi, get_const_field(m_phi_spline_coef));
     }
 
     /**
