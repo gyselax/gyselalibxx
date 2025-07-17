@@ -500,15 +500,6 @@ public:
         eval_deriv_r_and_theta(DSpan1D singular_derivs, DSpan2D derivs, Coord<R, Theta> p) const;
 
         /**
-         * Calculate the integrals of each of the basis splines.
-         *
-         * @param[out] int_vals The integrals of the basis splines.
-         */
-        template <class MemorySpace2>
-        [[deprecated("Use `integrals` instead")]] void integrals(
-                PolarSpline<DDim, MemorySpace2> int_vals) const;
-
-        /**
          * Get the total number of basis functions.
          *
          * @returns The number of basis functions.
@@ -761,13 +752,4 @@ PolarSpline<DDim, MemorySpace> integrals(
         ddc::parallel_fill(execution_space, int_vals.spline_coef[repeat_idx_range], 0.0);
     }
     return int_vals;
-}
-
-template <class BSplinesR, class BSplinesTheta, int C>
-template <class DDim, class MemorySpace>
-template <class MemorySpace2>
-void PolarBSplines<BSplinesR, BSplinesTheta, C>::Impl<DDim, MemorySpace>::integrals(
-        PolarSpline<DDim, MemorySpace2> int_vals) const
-{
-    integrals(Kokkos::DefaultHostExecutionSpace(), int_vals);
 }
