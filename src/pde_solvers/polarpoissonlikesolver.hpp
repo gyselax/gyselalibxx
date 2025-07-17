@@ -961,7 +961,6 @@ public:
         IdxRangeBSRTheta dirichlet_boundary_idx_range(
                 m_idxrange_bsplines_r.take_last(IdxStep<BSplinesR> {1}),
                 m_idxrange_bsplines_theta);
-        IdxRangeBSTheta idxrange_polar(ddc::discrete_space<BSplinesTheta>().full_domain());
 
         // Fill the spline
         ddc::for_each(
