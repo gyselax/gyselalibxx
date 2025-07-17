@@ -17,7 +17,6 @@
 #include "math_tools.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
-#include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "quadrature.hpp"
 #include "spline_quadrature.hpp"

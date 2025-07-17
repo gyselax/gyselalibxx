@@ -26,6 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Remove deprecated method `PolarBSplines::integrals`.
+- Remove unhelpful `PolarSpline` classes in favour of `DField<IdxRange<PolarBSplines>>` types.
+- Remove unused broken method `PolarSplineEvaluator::integrate`.
 
 ## [v0.2.0] - 2025-07-03
 
