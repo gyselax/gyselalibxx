@@ -417,7 +417,7 @@ private:
         }
         if (coord_eval2 < ddc::discrete_space<BSplinesTheta>().rmin()
             || coord_eval2 > ddc::discrete_space<BSplinesTheta>().rmax()) {
-            coord_eval2 -= std::floor(
+            coord_eval2 -= Kokkos::floor(
                                    (coord_eval2 - ddc::discrete_space<BSplinesTheta>().rmin())
                                    / ddc::discrete_space<BSplinesTheta>().length())
                            * ddc::discrete_space<BSplinesTheta>().length();
