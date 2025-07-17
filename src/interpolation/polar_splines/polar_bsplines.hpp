@@ -25,7 +25,8 @@ template <class ExecSpace, class DDim, class MemorySpace>
 DField<IdxRange<DDim>, MemorySpace> integrals(
         ExecSpace const& execution_space,
         DField<IdxRange<DDim>, MemorySpace> int_vals);
-}
+
+} // namespace PolarSplines
 
 /**
  * A class containing all information describing polar B-splines.
