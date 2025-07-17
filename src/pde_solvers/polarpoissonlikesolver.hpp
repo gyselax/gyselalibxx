@@ -979,18 +979,6 @@ public:
         ddc::for_each(dirichlet_boundary_idx_range, [&](IdxBSRTheta const idx) {
             spline(PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(idx)) = 0.0;
         });
-
-        // Copy the periodic elements
-        IdxRangeBSRTheta copy_idx_range(
-                m_idxrange_bsplines_r,
-                idxrange_polar.remove_first(
-                        IdxStep<BSplinesTheta>(ddc::discrete_space<BSplinesTheta>().nbasis())));
-        IdxStepBSTheta nb_theta(m_nbasis_theta);
-        ddc::for_each(copy_idx_range, [&](IdxBSRTheta const idx_2d) {
-            spline(PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(idx_2d))
-                    = spline(PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(
-                            idx_2d - nb_theta));
-        });
         Kokkos::Profiling::popRegion();
     }
 
