@@ -15,6 +15,7 @@ target_link_libraries(unit_tests_gyroaverage
         DDC::splines
         gslx::utils
         gslx::gyroaverage
+        testing_tools
 )
 gtest_discover_tests(unit_tests_gyroaverage DISCOVERY_MODE PRE_TEST)
 
