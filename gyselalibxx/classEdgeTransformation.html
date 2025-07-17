@@ -579,8 +579,8 @@
 <td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (CurrentIdx const &amp; current_idx) const<br><em>Transform an index on the edge in the dimension of the current patch to the analogous index on the target patch.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">bool</td>
-<td style="text-align: left;"><a href="#function-search_for_match"><strong>search_for_match</strong></a> (Idx&lt; TargetGrid &gt; &amp; target_idx, Idx&lt; CurrentGrid &gt; current_idx) const<br><em>Check if a given index has an equivalent index and transform an index on the edge in the dimension of the current patch to the analogous index on the target patch.</em></td>
+<td style="text-align: right;">Idx&lt; TargetGrid &gt;</td>
+<td style="text-align: left;"><a href="#function-search_for_match"><strong>search_for_match</strong></a> (Idx&lt; CurrentGrid &gt; current_idx) const<br><em>Check if a given index has an equivalent index and transform an index on the edge in the dimension of the current patch to the analogous index on the target patch.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">Coord&lt; std::conditional_t&lt; std::is_same_v&lt; CurrentPatch, Patch1 &gt;, EdgeDim2, EdgeDim1 &gt; &gt;</td>
@@ -686,29 +686,25 @@ inline auto EdgeTransformation::operator() (
 
 <h3 id="function-search_for_match">function search_for_match</h3>
 <p><em>Check if a given index has an equivalent index and transform an index on the edge in the dimension of the current patch to the analogous index on the target patch.</em> </p>
-<pre><code class="language-C++">template&lt;class CurrentGrid, class TargetGrid&gt;
-inline bool EdgeTransformation::search_for_match (
-    Idx&lt; TargetGrid &gt; &amp; target_idx,
+<pre><code class="language-C++">template&lt;class TargetGrid, class CurrentGrid&gt;
+inline Idx&lt; TargetGrid &gt; EdgeTransformation::search_for_match (
     Idx&lt; CurrentGrid &gt; current_idx
 ) const
 </code></pre>
 <p>If the grids are uniform, we can simplify the algorithm by using modulo. Otherwise, we need to check all the indices of the target grid. We suppose the coordinate transformation bijective, so we can use a dichotomy method.</p>
 <p><strong>Warning:</strong></p>
-<p>target_idx is always replaced by the suspected index. If there is not equivalent index, the returned index is wrong but the closest that the algorithm found.</p>
+<p>target_idx is always replaced by the suspected index. If there is not equivalent index, the returned index is out_of_bounds_idx.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
-<li><code>CurrentGrid</code> The grid where the input index is defined. </li>
-<li><code>TargetGrid</code> The grid where the output index is defined.</li>
+<li><code>TargetGrid</code> The grid where the output index is defined. </li>
+<li><code>CurrentGrid</code> The grid where the input index is defined. This template parameter can be deduced from the function call.</li>
 </ul>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>target_idx</code> A index on the edge of the target patch. </li>
-<li><code>current_idx</code> A index on the edge of the current patch. </li>
+<li><code>current_idx</code> A index on the edge of the current patch.</li>
 </ul>
-<p><strong>Template parameters:</strong></p>
-<ul>
-<li><code>CurrentIdx</code> The current index type of the given coordinate index.</li>
-</ul>
+<p><strong>Returns:</strong></p>
+<p>target_idx A index on the edge of the target patch.</p>
 <p><strong>Returns:</strong></p>
 <p>Boolean stating if there is an equivalent index. </p>
 <hr>

@@ -21,6 +21,8 @@
 #include "edge.hpp"
 #include "interface.hpp"
 
+template <class TargetGrid>
+static constexpr Idx<TargetGrid> out_of_bounds_idx = Idx<TargetGrid>(std::string::npos);
 
 template <class Interface>
 class EdgeTransformation
@@ -39,9 +41,6 @@ class EdgeTransformation
 
     using IdxRangeEdge1 = IdxRange<EdgeGrid1>;
     using IdxRangeEdge2 = IdxRange<EdgeGrid2>;
-
-    using IdxEdge1 = Idx<EdgeGrid1>;
-    using IdxEdge2 = Idx<EdgeGrid2>;
 
     using Patch1 = typename Interface::Edge1::associated_patch;
     using Patch2 = typename Interface::Edge2::associated_patch;
@@ -122,11 +121,10 @@ public:
     template <class CurrentIdx>
     auto operator()(CurrentIdx const& current_idx) const
     {
-        using IdxTarget
-                = std::conditional_t<std::is_same_v<CurrentIdx, IdxEdge1>, IdxEdge2, IdxEdge1>;
-        IdxTarget target_idx;
-        [[maybe_unused]] bool is_equivalent_idx_found = search_for_match(target_idx, current_idx);
-        assert(is_equivalent_idx_found);
+        using TargetGrid = std::
+                conditional_t<std::is_same_v<CurrentIdx, Idx<EdgeGrid1>>, EdgeGrid2, EdgeGrid1>;
+        Idx<TargetGrid> target_idx = search_for_match<TargetGrid>(current_idx);
+        assert(target_idx != out_of_bounds_idx<TargetGrid>);
         return target_idx;
     }
 
@@ -135,16 +133,15 @@ public:
     template <class CurrentIdx>
     bool is_match_available(CurrentIdx const& current_idx) const
     {
-        using IdxTarget
-                = std::conditional_t<std::is_same_v<CurrentIdx, IdxEdge1>, IdxEdge2, IdxEdge1>;
-        IdxTarget potential_target_idx;
-        return search_for_match(potential_target_idx, current_idx);
+        using TargetGrid = std::
+                conditional_t<std::is_same_v<CurrentIdx, Idx<EdgeGrid1>>, EdgeGrid2, EdgeGrid1>;
+        return search_for_match<TargetGrid>(current_idx) != out_of_bounds_idx<TargetGrid>;
     }
 
 
 
-    template <class CurrentGrid, class TargetGrid>
-    bool search_for_match(Idx<TargetGrid>& target_idx, Idx<CurrentGrid> current_idx) const
+    template <class TargetGrid, class CurrentGrid>
+    Idx<TargetGrid> search_for_match(Idx<CurrentGrid> current_idx) const
     {
         static_assert(
                 std::is_same_v<CurrentGrid, EdgeGrid1> || std::is_same_v<CurrentGrid, EdgeGrid2>,
@@ -179,8 +176,6 @@ public:
                 m_idx_range_patch_2.front(),
                 m_idx_range_patch_2.extents() + int(EdgeDim2::PERIODIC));
 
-
-        bool is_equivalent_idx = false;
 
         // Get the 1D index range corresponding to the current and target domains.
         IdxRange<EdgeGrid1, EdgeGrid2> const
@@ -221,13 +216,13 @@ public:
                 only true if the current index represents an extremity
                 (current_idx_value == 0 or current_idx_value == n_cells_current).
             */
-            is_equivalent_idx = (current_idx_value % (n_cells_current / gcd_cells) == 0);
+            bool is_equivalent_idx = (current_idx_value % (n_cells_current / gcd_cells) == 0);
 
             // If there is an equivalent index, update target_idx.
             if (is_equivalent_idx) {
                 double const rescaling_factor = double(n_cells_current) / double(n_cells_target);
                 IdxStepTarget target_idx_step_rescaled(int(current_idx_value / rescaling_factor));
-                target_idx = target_idx_range.front() + target_idx_step_rescaled;
+                Idx<TargetGrid> target_idx = target_idx_range.front() + target_idx_step_rescaled;
 
                 if constexpr (!Interface::orientations_agree) {
                     IdxStepTarget target_idx_step = target_idx_range.back() - target_idx;
@@ -243,17 +238,20 @@ public:
                         target_idx = target_idx_range.front();
                     }
                 }
+                return target_idx;
             }
         } else { // Non uniform case
             // Dichotomy method comparing the coordinates of indexes of the target edge.
-            target_idx = get_target_idx(target_idx_range, current_idx);
+            Idx<TargetGrid> target_idx = get_target_idx(target_idx_range, current_idx);
             CurrentCoord const current_coord(ddc::coordinate(current_idx));
             CurrentCoord target_equivalent_coord
                     = transform_edge_coord<TargetPatch>(ddc::coordinate(target_idx));
-            is_equivalent_idx = (abs(current_coord - target_equivalent_coord) < 1e-14);
+            if (abs(current_coord - target_equivalent_coord) < 1e-14) {
+                return target_idx;
+            }
         }
 
-        return is_equivalent_idx;
+        return out_of_bounds_idx<TargetGrid>;
     }
 
 

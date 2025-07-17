@@ -520,8 +520,6 @@
 * **IdxRangeSplines** ([**DiscreteToCartesianBuilder**](classDiscreteToCartesianBuilder.md), [**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md))
 * **InterpolationField** ([**DiscreteToCartesianBuilder**](classDiscreteToCartesianBuilder.md), [**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md))
 * **InterpolationFieldMem** ([**DiscreteToCartesianBuilder**](classDiscreteToCartesianBuilder.md), [**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md))
-* **IdxEdge1** ([**EdgeTransformation**](classEdgeTransformation.md))
-* **IdxEdge2** ([**EdgeTransformation**](classEdgeTransformation.md))
 * **IdxRangeEdge1** ([**EdgeTransformation**](classEdgeTransformation.md))
 * **IdxRangeEdge2** ([**EdgeTransformation**](classEdgeTransformation.md))
 * **is\_match\_available** ([**EdgeTransformation**](classEdgeTransformation.md))

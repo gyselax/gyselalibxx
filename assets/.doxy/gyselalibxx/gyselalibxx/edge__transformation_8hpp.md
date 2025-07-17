@@ -44,6 +44,11 @@
 
 
 
+## Public Static Attributes
+
+| Type | Name |
+| ---: | :--- |
+|  constexpr Idx&lt; TargetGrid &gt; | [**out\_of\_bounds\_idx**](#variable-out_of_bounds_idx)   = `Idx&lt;TargetGrid&gt;(std::string::npos)`<br> |
 
 
 
@@ -86,6 +91,21 @@
 
 
 
+## Public Static Attributes Documentation
+
+
+
+
+### variable out\_of\_bounds\_idx 
+
+```C++
+constexpr Idx<TargetGrid> out_of_bounds_idx;
+```
+
+
+
+
+<hr>
 
 ------------------------------
 The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp`

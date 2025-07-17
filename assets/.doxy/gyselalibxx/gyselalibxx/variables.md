@@ -463,6 +463,7 @@
 
 ## o
 
+* **out\_of\_bounds\_idx** ([**edge\_transformation.hpp**](edge__transformation_8hpp.md))
 * **on\_memory\_space\_t** ([**ddc\_helper.hpp**](ddc__helper_8hpp.md))
 
 
