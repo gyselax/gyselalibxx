@@ -104,7 +104,7 @@ See [MultipatchType](classMultipatchType.md)
 |  KOKKOS\_FUNCTION auto | [**get**](#function-get) () const<br> |
 |  KOKKOS\_FUNCTION auto | [**get\_const\_field**](#function-get_const_field) () const<br>_Get a_ [_**MultipatchField**_](classMultipatchField.md) _containing constant fields so the values cannot be modified._ |
 |  KOKKOS\_FUNCTION auto | [**get\_field**](#function-get_field) () <br>_Get a_ [_**MultipatchField**_](classMultipatchField.md) _containing modifiable fields._ |
-|  auto | [**idx\_range**](#function-idx_range) () const<br>_Get a_ [_**MultipatchType**_](classMultipatchType.md) _containing the index ranges on which the fields are defined._ |
+|  KOKKOS\_FUNCTION auto | [**idx\_range**](#function-idx_range) () const<br>_Get a_ [_**MultipatchType**_](classMultipatchType.md) _containing the index ranges on which the fields are defined._ |
 |  KOKKOS\_FUNCTION auto | [**span\_cview**](#function-span_cview) () <br>_Get a_ [_**MultipatchField**_](classMultipatchField.md) _containing constant fields so the values cannot be modified. This function matches the DDC name to allow the global get\_const\_field to be defined._ |
 |  KOKKOS\_FUNCTION auto | [**span\_view**](#function-span_view) () <br>_Get a_ [_**MultipatchField**_](classMultipatchField.md) _containing modifiable fields. This function matches the DDC name to allow the global get\_const\_field to be defined._ |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**~MultipatchField**](#function-multipatchfield) () noexcept<br> |
@@ -586,7 +586,7 @@ A set of modifiable fields providing access to the fields stored in this class.
 
 _Get a_ [_**MultipatchType**_](classMultipatchType.md) _containing the index ranges on which the fields are defined._
 ```C++
-inline auto MultipatchField::idx_range () const
+inline KOKKOS_FUNCTION auto MultipatchField::idx_range () const
 ```
 
 

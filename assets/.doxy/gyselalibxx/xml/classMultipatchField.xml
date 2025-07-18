@@ -415,9 +415,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="152" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="152" bodyend="155"/>
       </memberdef>
-      <memberdef kind="function" id="classMultipatchField_1a9a4cb73606c74a79ac3bc33438320647" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>auto</type>
-        <definition>auto MultipatchField&lt; T, Patches &gt;::idx_range</definition>
+      <memberdef kind="function" id="classMultipatchField_1a81a0d66702494385f6aa986398cac4a8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION auto</type>
+        <definition>KOKKOS_FUNCTION auto MultipatchField&lt; T, Patches &gt;::idx_range</definition>
         <argsstring>() const</argsstring>
         <name>idx_range</name>
         <qualifiedname>MultipatchField::idx_range</qualifiedname>
@@ -431,7 +431,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="162" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="162" bodyend="166"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" line="162" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field.hpp" bodystart="162" bodyend="166"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchField_1a91a470e7def55ebe6311b178dce36d23" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION auto</type>
@@ -566,7 +566,7 @@
       <member refid="classMultipatchField_1a70e93ac539f73e00e629dde3bdd39fae" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>get_const_field</name></member>
       <member refid="classMultipatchField_1a91a470e7def55ebe6311b178dce36d23" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>get_field</name></member>
       <member refid="classMultipatchType_1a6a44d19ff0704be6f0b4e1d476cefbcc" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>get_tuple</name></member>
-      <member refid="classMultipatchField_1a9a4cb73606c74a79ac3bc33438320647" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>idx_range</name></member>
+      <member refid="classMultipatchField_1a81a0d66702494385f6aa986398cac4a8" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>idx_range</name></member>
       <member refid="classMultipatchField_1a5a2a447cf52dda49f36c1089372e4e42" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>idx_type</name></member>
       <member refid="classMultipatchField_1a44a9591797e84d0f116b8d424725fdea" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>InternalConstFieldOnPatch</name></member>
       <member refid="classMultipatchField_1af03d87daa72042dad5e2f47b11f3fc06" prot="public" virt="non-virtual"><scope>MultipatchField</scope><name>InternalFieldOnPatch</name></member>

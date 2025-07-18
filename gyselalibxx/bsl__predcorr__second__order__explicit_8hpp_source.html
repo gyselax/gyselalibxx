@@ -661,11 +661,6 @@ public:
         // Grid. ------------------------------------------------------------------------------------------
         IdxRangeRTheta const grid(get_idx_range&lt;GridR, GridTheta&gt;(density_host));
 
-        host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt;&gt; coords(grid);
-        ddc::for_each(grid, [&amp;](IdxRTheta const irtheta) {
-            coords(irtheta) = ddc::coordinate(irtheta);
-        });
-
         // --- Electrostatic potential (phi). -------------------------------------------------------------
         DFieldMemRTheta electrical_potential(grid);
         host_t&lt;DFieldMemRTheta&gt; electrical_potential_host(grid);
@@ -674,7 +669,11 @@ public:
                 ddc::discrete_space&lt;PolarBSplinesRTheta&gt;().full_domain());
 
         ddc::NullExtrapolationRule extrapolation_rule;
-        PolarSplineEvaluator&lt;PolarBSplinesRTheta, ddc::NullExtrapolationRule&gt;
+        PolarSplineEvaluator&lt;
+                Kokkos::DefaultHostExecutionSpace,
+                Kokkos::HostSpace,
+                PolarBSplinesRTheta,
+                ddc::NullExtrapolationRule&gt;
                 polar_spline_evaluator(extrapolation_rule);
 
         // --- For the computation of advection field from the electrostatic potential (phi): -------------
@@ -705,7 +704,6 @@ public:
 
             polar_spline_evaluator(
                     get_field(electrical_potential_host),
-                    get_const_field(coords),
                     get_const_field(electrostatic_potential_coef));
 
             ddc::PdiEvent("iteration")

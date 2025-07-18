@@ -76,7 +76,7 @@
 |  auto | [**get\_const\_field**](#function-get_const_field) (FieldType && field) <br> |
 |  KOKKOS\_INLINE\_FUNCTION auto | [**get\_field**](#function-get_field) (FieldType && field) <br> |
 |  auto | [**get\_field**](#function-get_field) (FieldType && field) <br> |
-|  auto | [**get\_idx\_range**](#function-get_idx_range) (FieldType const & field) noexcept<br> |
+|  KOKKOS\_FUNCTION auto | [**get\_idx\_range**](#function-get_idx_range) (FieldType const & field) noexcept<br> |
 |  auto | [**get\_spline\_idx\_range**](#function-get_spline_idx_range) (SplineBuilder const & builder) noexcept<br> |
 
 
@@ -342,7 +342,7 @@ inline auto get_field (
 
 ```C++
 template<class... QueryGrids, class FieldType>
-auto get_idx_range (
+KOKKOS_FUNCTION auto get_idx_range (
     FieldType const & field
 ) noexcept
 ```

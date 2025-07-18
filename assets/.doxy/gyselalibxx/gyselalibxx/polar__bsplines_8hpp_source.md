@@ -87,7 +87,7 @@ public:
 
 
     template <class DDim>
-    static constexpr IdxRange<DDim> singular_idx_range()
+    static constexpr KOKKOS_FUNCTION IdxRange<DDim> singular_idx_range()
     {
         static_assert(std::is_base_of_v<PolarBSplines, DDim>);
         return IdxRange<DDim>(Idx<DDim> {0}, IdxStep<DDim> {n_singular_basis()});
@@ -118,7 +118,7 @@ public:
     }
 
     template <class ElementType, class DDim, class MemorySpace>
-    static Field<ElementType, IdxRange<DDim>, MemorySpace> get_singular_subset(
+    static KOKKOS_FUNCTION Field<ElementType, IdxRange<DDim>, MemorySpace> get_singular_subset(
             Field<ElementType, IdxRange<DDim>, MemorySpace> coeffs)
     {
         static_assert(std::is_base_of_v<PolarBSplines, DDim>);
@@ -126,8 +126,8 @@ public:
     }
 
     template <class ElementType, class DDim, class MemorySpace>
-    static Field<ElementType, tensor_product_idx_range_type, MemorySpace> get_tensor_product_subset(
-            Field<ElementType, IdxRange<DDim>, MemorySpace> coeffs)
+    static KOKKOS_FUNCTION Field<ElementType, tensor_product_idx_range_type, MemorySpace>
+    get_tensor_product_subset(Field<ElementType, IdxRange<DDim>, MemorySpace> coeffs)
     {
         static_assert(std::is_base_of_v<PolarBSplines, DDim>);
         IdxRange<DDim> current_idx_range(get_idx_range(coeffs));

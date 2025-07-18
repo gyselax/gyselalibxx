@@ -644,11 +644,11 @@
 <td style="text-align: left;"><a href="#function-get_polar_index"><strong>get_polar_index</strong></a> (<a href="classPolarBSplines.html#typedef-tensor_product_index_type"><strong>tensor_product_index_type</strong></a> const &amp; idx) <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt;</td>
 <td style="text-align: left;"><a href="#function-get_singular_subset"><strong>get_singular_subset</strong></a> (Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt; coeffs) <br><em>Get the subset of the coefficients associated with singular basis splines.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">Field&lt; ElementType, <a href="classPolarBSplines.html#typedef-tensor_product_idx_range_type"><strong>tensor_product_idx_range_type</strong></a>, MemorySpace &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION Field&lt; ElementType, <a href="classPolarBSplines.html#typedef-tensor_product_idx_range_type"><strong>tensor_product_idx_range_type</strong></a>, MemorySpace &gt;</td>
 <td style="text-align: left;"><a href="#function-get_tensor_product_subset"><strong>get_tensor_product_subset</strong></a> (Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt; coeffs) <br><em>Get the subset of the coefficients of tensor product basis splines.</em></td>
 </tr>
 <tr>
@@ -656,7 +656,7 @@
 <td style="text-align: left;"><a href="#function-n_singular_basis"><strong>n_singular_basis</strong></a> () <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">constexpr IdxRange&lt; DDim &gt;</td>
+<td style="text-align: right;">constexpr KOKKOS_FUNCTION IdxRange&lt; DDim &gt;</td>
 <td style="text-align: left;"><a href="#function-singular_idx_range"><strong>singular_idx_range</strong></a> () <br><em>Get the IdxRange containing the indices of the b-splines which traverse the singular point.</em></td>
 </tr>
 </tbody>
@@ -759,7 +759,7 @@ static inline KOKKOS_FUNCTION Idx&lt; DDim &gt; PolarBSplines::get_polar_index (
 <h3 id="function-get_singular_subset">function get_singular_subset</h3>
 <p><em>Get the subset of the coefficients associated with singular basis splines.</em> </p>
 <pre><code class="language-C++">template&lt;class ElementType, class DDim, class MemorySpace&gt;
-static inline Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt; PolarBSplines::get_singular_subset (
+static inline KOKKOS_FUNCTION Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt; PolarBSplines::get_singular_subset (
     Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt; coeffs
 ) 
 </code></pre>
@@ -769,7 +769,7 @@ static inline Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt; Po
 <h3 id="function-get_tensor_product_subset">function get_tensor_product_subset</h3>
 <p><em>Get the subset of the coefficients of tensor product basis splines.</em> </p>
 <pre><code class="language-C++">template&lt;class ElementType, class DDim, class MemorySpace&gt;
-static inline Field&lt; ElementType, tensor_product_idx_range_type , MemorySpace &gt; PolarBSplines::get_tensor_product_subset (
+static inline KOKKOS_FUNCTION Field&lt; ElementType, tensor_product_idx_range_type , MemorySpace &gt; PolarBSplines::get_tensor_product_subset (
     Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt; coeffs
 ) 
 </code></pre>
@@ -787,7 +787,7 @@ static inline Field&lt; ElementType, tensor_product_idx_range_type , MemorySpace
 <h3 id="function-singular_idx_range">function singular_idx_range</h3>
 <p><em>Get the IdxRange containing the indices of the b-splines which traverse the singular point.</em> </p>
 <pre><code class="language-C++">template&lt;class DDim&gt;
-static inline constexpr IdxRange&lt; DDim &gt; PolarBSplines::singular_idx_range () 
+static inline constexpr KOKKOS_FUNCTION IdxRange&lt; DDim &gt; PolarBSplines::singular_idx_range () 
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>The IdxRange containing the indices of the b-splines which traverse the singular point. </p>

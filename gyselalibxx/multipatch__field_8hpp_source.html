@@ -640,7 +640,7 @@ public:
         return ::get_field(std::get&lt;T&lt;Patch&gt;&gt;(base_type::m_tuple));
     }
 
-    auto idx_range() const
+    KOKKOS_FUNCTION auto idx_range() const
     {
         return MultipatchType&lt;InternalIdxRangeOnPatch, Patches...&gt;(
                 get_idx_range(std::get&lt;T&lt;Patches&gt;&gt;(base_type::m_tuple))...);

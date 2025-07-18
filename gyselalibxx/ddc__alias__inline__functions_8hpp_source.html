@@ -645,7 +645,7 @@ inline constexpr bool is_mem_type_v
         = enable_mem_type&lt;std::remove_const_t&lt;std::remove_reference_t&lt;Type&gt;&gt;&gt;;
 
 template &lt;class... QueryGrids, class FieldType&gt;
-auto get_idx_range(FieldType const&amp; field) noexcept
+KOKKOS_FUNCTION auto get_idx_range(FieldType const&amp; field) noexcept
 {
     static_assert(
             ddc::is_chunk_v&lt;FieldType&gt; || has_idx_range_v&lt;FieldType&gt;,

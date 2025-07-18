@@ -576,8 +576,11 @@ public:
 private:
     Mapping const&amp; m_mapping;
 
-    PolarSplineEvaluator&lt;PolarBSplinesRTheta, ddc::NullExtrapolationRule&gt; const
-            m_polar_spline_evaluator;
+    PolarSplineEvaluator&lt;
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::HostSpace,
+            PolarBSplinesRTheta,
+            ddc::NullExtrapolationRule&gt; const m_polar_spline_evaluator;
 
     SplineRThetaEvaluatorNullBound_host const m_spline_evaluator;
 
@@ -651,27 +654,22 @@ private:
                 || (std::is_same_v&lt;
                             Evaluator,
                             PolarSplineEvaluator&lt;
+                                    Kokkos::DefaultHostExecutionSpace,
+                                    Kokkos::HostSpace,
                                     PolarBSplinesRTheta,
                                     ddc::NullExtrapolationRule&gt;&gt; &amp;&amp; std::is_same_v&lt;SplineType, host_t&lt;PolarSplineRTheta&gt;&gt;));
 
         IdxRangeRTheta const grid = get_idx_range(advection_field_xy);
         host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt; electric_field(grid);
 
-        host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt;&gt; coords(grid);
-        ddc::for_each(grid, [&amp;](IdxRTheta const irtheta) {
-            coords(irtheta) = ddc::coordinate(irtheta);
-        });
-
         // &gt; computation of the phi derivatives
         host_t&lt;DVectorFieldMemRTheta&lt;R_cov, Theta_cov&gt;&gt; deriv_phi(grid);
 
         evaluator.deriv_dim_1(
                 ddcHelper::get&lt;R_cov&gt;(deriv_phi),
-                get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
         evaluator.deriv_dim_2(
                 ddcHelper::get&lt;Theta_cov&gt;(deriv_phi),
-                get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
 
         InverseJacobianMatrix inv_jacobian_matrix(m_mapping);
@@ -837,6 +835,8 @@ private:
                 || (std::is_same_v&lt;
                             Evaluator,
                             PolarSplineEvaluator&lt;
+                                    Kokkos::DefaultHostExecutionSpace,
+                                    Kokkos::HostSpace,
                                     PolarBSplinesRTheta,
                                     ddc::NullExtrapolationRule&gt;&gt; &amp;&amp; std::is_same_v&lt;SplineType, host_t&lt;PolarSplineRTheta&gt;&gt;));
 

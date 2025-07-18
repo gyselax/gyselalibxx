@@ -90,10 +90,6 @@ public:
 
         host_t<PolarSplineMemRTheta> electrostatic_potential_coef(
                 ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
-        ddc::NullExtrapolationRule extrapolation_rule;
-        PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule>
-                polar_spline_evaluator(extrapolation_rule);
-
 
         host_t<DFieldMemRTheta> electrical_potential0_host(grid);
         DFieldMemRTheta electrical_potential0(grid);

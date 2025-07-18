@@ -237,14 +237,14 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="121" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="121" bodyend="124"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarBSplines_1ae4bb250b0904ab8a72c3f1fc029cb2fc" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classPolarBSplines_1a4b917802264ab0bdab190c79dff8c46a" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class DDim</type>
           </param>
         </templateparamlist>
-        <type>constexpr IdxRange&lt; DDim &gt;</type>
-        <definition>static constexpr IdxRange&lt; DDim &gt; PolarBSplines&lt; BSplinesR, BSplinesTheta, C &gt;::singular_idx_range</definition>
+        <type>constexpr KOKKOS_FUNCTION IdxRange&lt; DDim &gt;</type>
+        <definition>static constexpr KOKKOS_FUNCTION IdxRange&lt; DDim &gt; PolarBSplines&lt; BSplinesR, BSplinesTheta, C &gt;::singular_idx_range</definition>
         <argsstring>()</argsstring>
         <name>singular_idx_range</name>
         <qualifiedname>PolarBSplines::singular_idx_range</qualifiedname>
@@ -258,7 +258,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="135" column="31" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="135" bodyend="139"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="135" column="47" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="135" bodyend="139"/>
       </memberdef>
       <memberdef kind="function" id="classPolarBSplines_1ab295d737e634cd296d1fdbb3a76c2e4e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -332,7 +332,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="170" column="54" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="170" bodyend="179"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarBSplines_1a285da2d17bc0056295ff7d6c686db83f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classPolarBSplines_1a91905e2c06676c81238da05255336084" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class ElementType</type>
@@ -344,8 +344,8 @@
             <type>class MemorySpace</type>
           </param>
         </templateparamlist>
-        <type>Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt;</type>
-        <definition>static Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt; PolarBSplines&lt; BSplinesR, BSplinesTheta, C &gt;::get_singular_subset</definition>
+        <type>KOKKOS_FUNCTION Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt;</type>
+        <definition>static KOKKOS_FUNCTION Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt; PolarBSplines&lt; BSplinesR, BSplinesTheta, C &gt;::get_singular_subset</definition>
         <argsstring>(Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt; coeffs)</argsstring>
         <name>get_singular_subset</name>
         <qualifiedname>PolarBSplines::get_singular_subset</qualifiedname>
@@ -361,9 +361,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="188" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="188" bodyend="193"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="188" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="188" bodyend="193"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarBSplines_1a35f5e1426b2b1f16f8f29f9047c3e2d0" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classPolarBSplines_1a0c2e69c7b3c789d174e0d59fad43a690" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class ElementType</type>
@@ -375,8 +375,8 @@
             <type>class MemorySpace</type>
           </param>
         </templateparamlist>
-        <type>Field&lt; ElementType, <ref refid="classPolarBSplines_1a84ea418aed020ad1396d3283aba7904e" kindref="member">tensor_product_idx_range_type</ref>, MemorySpace &gt;</type>
-        <definition>static Field&lt; ElementType, tensor_product_idx_range_type, MemorySpace &gt; PolarBSplines&lt; BSplinesR, BSplinesTheta, C &gt;::get_tensor_product_subset</definition>
+        <type>KOKKOS_FUNCTION Field&lt; ElementType, <ref refid="classPolarBSplines_1a84ea418aed020ad1396d3283aba7904e" kindref="member">tensor_product_idx_range_type</ref>, MemorySpace &gt;</type>
+        <definition>static KOKKOS_FUNCTION Field&lt; ElementType, tensor_product_idx_range_type, MemorySpace &gt; PolarBSplines&lt; BSplinesR, BSplinesTheta, C &gt;::get_tensor_product_subset</definition>
         <argsstring>(Field&lt; ElementType, IdxRange&lt; DDim &gt;, MemorySpace &gt; coeffs)</argsstring>
         <name>get_tensor_product_subset</name>
         <qualifiedname>PolarBSplines::get_tensor_product_subset</qualifiedname>
@@ -392,7 +392,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="202" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="202" bodyend="226"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="203" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="203" bodyend="226"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -435,15 +435,15 @@
       <member refid="classPolarBSplines_1a3781a1ef42e396315cd2912e0f128c8b" prot="public" virt="non-virtual"><scope>PolarBSplines</scope><name>discrete_dimension_type</name></member>
       <member refid="classPolarBSplines_1a8ad5514f78dabdfe57bbfa3c487fa808" prot="public" virt="non-virtual"><scope>PolarBSplines</scope><name>get_2d_index</name></member>
       <member refid="classPolarBSplines_1ab295d737e634cd296d1fdbb3a76c2e4e" prot="public" virt="non-virtual"><scope>PolarBSplines</scope><name>get_polar_index</name></member>
-      <member refid="classPolarBSplines_1a285da2d17bc0056295ff7d6c686db83f" prot="public" virt="non-virtual"><scope>PolarBSplines</scope><name>get_singular_subset</name></member>
-      <member refid="classPolarBSplines_1a35f5e1426b2b1f16f8f29f9047c3e2d0" prot="public" virt="non-virtual"><scope>PolarBSplines</scope><name>get_tensor_product_subset</name></member>
+      <member refid="classPolarBSplines_1a91905e2c06676c81238da05255336084" prot="public" virt="non-virtual"><scope>PolarBSplines</scope><name>get_singular_subset</name></member>
+      <member refid="classPolarBSplines_1a0c2e69c7b3c789d174e0d59fad43a690" prot="public" virt="non-virtual"><scope>PolarBSplines</scope><name>get_tensor_product_subset</name></member>
       <member refid="classPolarBSplines_1a542cf47afea7ce56f7d15d843f4865c7" prot="private" virt="non-virtual"><scope>PolarBSplines</scope><name>IdxR</name></member>
       <member refid="classPolarBSplines_1a7d5b70183f7ac4cb4acd8dd076025996" prot="private" virt="non-virtual"><scope>PolarBSplines</scope><name>IdxStepR</name></member>
       <member refid="classPolarBSplines_1adf2fa6196b0b4d07cf5f93d8f61e744c" prot="private" virt="non-virtual"><scope>PolarBSplines</scope><name>IdxStepTheta</name></member>
       <member refid="classPolarBSplines_1aabb3c9905855382caf10609c1ae20aaf" prot="private" virt="non-virtual"><scope>PolarBSplines</scope><name>IdxTheta</name></member>
       <member refid="classPolarBSplines_1a9254ee09fe5fce248ae80efac56c82c3" prot="public" virt="non-virtual"><scope>PolarBSplines</scope><name>n_singular_basis</name></member>
       <member refid="classPolarBSplines_1a648dc9ce69b7875ee05df11ca91ca831" prot="public" virt="non-virtual"><scope>PolarBSplines</scope><name>R</name></member>
-      <member refid="classPolarBSplines_1ae4bb250b0904ab8a72c3f1fc029cb2fc" prot="public" virt="non-virtual"><scope>PolarBSplines</scope><name>singular_idx_range</name></member>
+      <member refid="classPolarBSplines_1a4b917802264ab0bdab190c79dff8c46a" prot="public" virt="non-virtual"><scope>PolarBSplines</scope><name>singular_idx_range</name></member>
       <member refid="classPolarBSplines_1a84ea418aed020ad1396d3283aba7904e" prot="public" virt="non-virtual"><scope>PolarBSplines</scope><name>tensor_product_idx_range_type</name></member>
       <member refid="classPolarBSplines_1a6b1ab0ce3118e3bb0172d9a70ce7ccca" prot="public" virt="non-virtual"><scope>PolarBSplines</scope><name>tensor_product_idx_step_type</name></member>
       <member refid="classPolarBSplines_1a9d78494d89fbe4d9abea58a61619fae8" prot="public" virt="non-virtual"><scope>PolarBSplines</scope><name>tensor_product_index_type</name></member>

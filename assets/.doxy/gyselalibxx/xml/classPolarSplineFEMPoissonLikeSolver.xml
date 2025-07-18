@@ -913,9 +913,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="255" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="255" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a028a96d6e0ed2e0332ee0c33141f3753" prot="private" static="no" mutable="no">
-        <type><ref refid="classPolarSplineEvaluator" kindref="compound">PolarSplineEvaluator</ref>&lt; <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref>, ddc::NullExtrapolationRule &gt;</type>
-        <definition>PolarSplineEvaluator&lt;PolarBSplinesRTheta, ddc::NullExtrapolationRule&gt; PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, IdxRangeFull &gt;::m_polar_spline_evaluator</definition>
+      <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1adfe6f1c0509f740749d6ce4397c576dd" prot="private" static="no" mutable="no">
+        <type><ref refid="classPolarSplineEvaluator" kindref="compound">PolarSplineEvaluator</ref>&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref>, ddc::NullExtrapolationRule &gt;</type>
+        <definition>PolarSplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, PolarBSplinesRTheta, ddc::NullExtrapolationRule&gt; PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, IdxRangeFull &gt;::m_polar_spline_evaluator</definition>
         <argsstring></argsstring>
         <name>m_polar_spline_evaluator</name>
         <qualifiedname>PolarSplineFEMPoissonLikeSolver::m_polar_spline_evaluator</qualifiedname>
@@ -925,7 +925,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="257" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="257" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="262" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="262" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a55664a455be46f70f1d33768cee0e7b3" prot="private" static="no" mutable="no">
         <type>std::unique_ptr&lt; <ref refid="classMatrixBatchCsr" kindref="compound">MatrixBatchCsr</ref>&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt; &gt;</type>
@@ -939,7 +939,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="259" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="259" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="264" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="264" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a70bacb50d6ea8e14e8d918520b54e0ee" prot="private" static="no" mutable="yes">
         <type>host_t&lt; PolarSplineMemRTheta &gt;</type>
@@ -953,7 +953,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="260" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="260" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="265" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="265" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a47c4cc4cf0fff9cf9cfc174e19e1930d" prot="private" static="no" mutable="no">
         <type>Kokkos::View&lt; double **, Kokkos::LayoutRight &gt;</type>
@@ -967,7 +967,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="261" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="261" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="266" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="266" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1a43b7466804454a28b1dda74afcb77a9f" prot="private" static="no" mutable="no">
         <type>const int</type>
@@ -982,7 +982,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="263" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="263" bodyend="263"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="268" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="268" bodyend="268"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -1066,7 +1066,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="289" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="289" bodyend="495"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="294" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="294" bodyend="500"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1ae5645f014d26559165955e51746f3e70" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1172,7 +1172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="520" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="520" bodyend="573"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="525" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="525" bodyend="578"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1a36be84f08a082b52a73f5134b8f1a8e2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1278,7 +1278,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="598" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="598" bodyend="712"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="603" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="603" bodyend="717"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1a161e772a03b980ad5cb19bdeb6b02925" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1384,7 +1384,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="737" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="737" bodyend="839"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="742" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="742" bodyend="844"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1a7d75afef8e0d4e4c61776b58117697d2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1431,7 +1431,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="855" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="855" bodyend="982"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="860" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="860" bodyend="987"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1ac699f74359d1f9160bed57ffcf325861" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1478,7 +1478,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="999" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="999" bodyend="1020"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="1004" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="1004" bodyend="1017"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1a90ab8ff1603bc0a3f36b5a0c5077de5b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1574,7 +1574,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="1338" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="1338" bodyend="1464"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="1335" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="1335" bodyend="1461"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1a15e528d25ba6df5a707e0b78c81c92e6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1603,7 +1603,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="1497" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="1497" bodyend="1634"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="1494" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="1494" bodyend="1631"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -1648,7 +1648,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="1033" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="1033" bodyend="1042"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="1030" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="1030" bodyend="1039"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1af97748fe740d17247902a8b1d4b1f2ac" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1780,7 +1780,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="1072" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="1072" bodyend="1095"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="1069" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="1069" bodyend="1092"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1abc0c26e86f3cfce747b6220c4b96ea23" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION void</type>
@@ -1845,7 +1845,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="1192" column="40" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="1192" bodyend="1201"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="1189" column="40" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="1189" bodyend="1198"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1a571591661a8661ddb186b64cdd5a0921" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION void</type>
@@ -1901,7 +1901,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="1213" column="40" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="1213" bodyend="1221"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="1210" column="40" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="1210" bodyend="1218"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1ac94824022d7b90428f769126de178000" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -2063,7 +2063,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="1258" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="1258" bodyend="1313"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="1255" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="1255" bodyend="1310"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1acbe58349c9ea9b73ae5476df678f4010" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION int</type>
@@ -2094,7 +2094,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="1473" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="1473" bodyend="1481"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="1470" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="1470" bodyend="1478"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -2150,7 +2150,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="50" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="51" bodyend="1635"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="50" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="51" bodyend="1632"/>
     <listofallmembers>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1aa8192e1614879aa891746d3fa69e2c67" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>BSplinesR</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1afab28aaea0218b12714a02e758802e35" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>BSplinesTheta</name></member>
@@ -2211,7 +2211,7 @@
       <member refid="classPolarSplineFEMPoissonLikeSolver_1aed25fa6b5483a9197245a36e3f888ee4" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_non_zero_bases_r</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a35305dfc6490994aa034f8e27ce2764a" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_non_zero_bases_theta</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a70bacb50d6ea8e14e8d918520b54e0ee" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_phi_spline_coef</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1a028a96d6e0ed2e0332ee0c33141f3753" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_polar_spline_evaluator</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1adfe6f1c0509f740749d6ce4397c576dd" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_polar_spline_evaluator</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a60b8ec8f412fe07a98512ca4de240d27" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_r_basis_vals_and_derivs</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1ab12917c326786f23f1852e2ac557715b" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_singular_basis_vals_and_derivs</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1a4b055701d14677f237990db5d637c478" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver</scope><name>m_theta_basis_vals_and_derivs</name></member>

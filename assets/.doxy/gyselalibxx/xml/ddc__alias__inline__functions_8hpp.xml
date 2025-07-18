@@ -1101,7 +1101,7 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="ddc__alias__inline__functions_8hpp_1a3f3a2d81fa0fa8490b3b185525841546" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="ddc__alias__inline__functions_8hpp_1a780b7925b9924e8c5917a42595f51cfe" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class...</type>
@@ -1112,8 +1112,8 @@
             <type>class FieldType</type>
           </param>
         </templateparamlist>
-        <type>auto</type>
-        <definition>auto get_idx_range</definition>
+        <type>KOKKOS_FUNCTION auto</type>
+        <definition>KOKKOS_FUNCTION auto get_idx_range</definition>
         <argsstring>(FieldType const &amp;field) noexcept</argsstring>
         <name>get_idx_range</name>
         <param>
@@ -1139,7 +1139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_alias_inline_functions.hpp" line="104" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_alias_inline_functions.hpp" bodystart="104" bodyend="122"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_alias_inline_functions.hpp" line="104" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_alias_inline_functions.hpp" bodystart="104" bodyend="122"/>
       </memberdef>
       <memberdef kind="function" id="ddc__alias__inline__functions_8hpp_1a2ea4048d6302b898f5df220d0f8b00fa" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -1408,7 +1408,7 @@
 <codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>enable_mem_type&lt;std::remove_const_t&lt;std::remove_reference_t&lt;Type&gt;&gt;&gt;;</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"></highlight></codeline>
 <codeline lineno="103"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>QueryGrids,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">FieldType&gt;</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>get_idx_range(FieldType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>field)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal">KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>get_idx_range(FieldType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>field)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="105"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::is_chunk_v&lt;FieldType&gt;<sp/>||<sp/>has_idx_range_v&lt;FieldType&gt;,</highlight></codeline>

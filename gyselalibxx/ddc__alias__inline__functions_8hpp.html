@@ -639,7 +639,7 @@
 <td style="text-align: left;"><a href="#function-get_field"><strong>get_field</strong></a> (FieldType &amp;&amp; field) <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">auto</td>
+<td style="text-align: right;">KOKKOS_FUNCTION auto</td>
 <td style="text-align: left;"><a href="#function-get_idx_range"><strong>get_idx_range</strong></a> (FieldType const &amp; field) noexcept<br></td>
 </tr>
 <tr>
@@ -742,7 +742,7 @@ inline auto get_field (
 
 <h3 id="function-get_idx_range">function get_idx_range</h3>
 <pre><code class="language-C++">template&lt;class... QueryGrids, class FieldType&gt;
-auto get_idx_range (
+KOKKOS_FUNCTION auto get_idx_range (
     FieldType const &amp; field
 ) noexcept
 </code></pre>

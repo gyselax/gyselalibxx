@@ -187,7 +187,12 @@ private:
 
     FieldMem<double, IdxRangeQuadratureRTheta> m_int_volume;
 
-    PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule> m_polar_spline_evaluator;
+    PolarSplineEvaluator<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            PolarBSplinesRTheta,
+            ddc::NullExtrapolationRule>
+            m_polar_spline_evaluator;
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>
             m_gko_matrix;
     mutable host_t<PolarSplineMemRTheta> m_phi_spline_coef;
@@ -821,18 +826,10 @@ public:
 
         (*this)(rhs, get_field(m_phi_spline_coef));
         CoordFieldMemRTheta coords_eval_alloc(get_idx_range(phi));
-        CoordFieldRTheta coords_eval(get_field(coords_eval_alloc));
-        ddc::parallel_for_each(
+        auto phi_spline_coef_device = ddc::create_mirror_view_and_copy(
                 Kokkos::DefaultExecutionSpace(),
-                get_idx_range(phi),
-                KOKKOS_LAMBDA(IdxRTheta idx) { coords_eval(idx) = ddc::coordinate(idx); });
-        auto coords_eval_host = ddc::create_mirror_and_copy(coords_eval);
-        auto phi_host = ddc::create_mirror_and_copy(phi);
-        m_polar_spline_evaluator(
-                get_field(phi_host),
-                get_const_field(coords_eval_host),
-                get_const_field(m_phi_spline_coef));
-        ddc::parallel_deepcopy(phi, phi_host);
+                get_field(m_phi_spline_coef));
+        m_polar_spline_evaluator(phi, get_const_field(phi_spline_coef_device));
     }
 
     static KOKKOS_FUNCTION IdxRangeQuadratureRTheta

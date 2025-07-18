@@ -553,6 +553,10 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <hr>
 <h2 id="unreleased">[UNRELEASED]</h2>
 <h3 id="added">Added</h3>
+<ul>
+<li>Port <code>PolarSplineEvaluator</code> methods to GPU.</li>
+<li>Add methods to <code>PolarSplineEvaluator</code> to avoid unnecessary creation of fields of coordinates.</li>
+</ul>
 <h3 id="fixed">Fixed</h3>
 <ul>
 <li>Modify <code>ruche.v100/environment.sh</code> file to fix tokamaxi simulation segfault issues.</li>
@@ -566,6 +570,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <ul>
 <li>Change interface of <code>EdgeTransformation::search_for_match</code> to return an <code>out_of_bounds_idx</code> instead of a boolean.</li>
 <li>Change spack setup in CPU installation script (<code>prepare.sh</code>) to create and use independent spack installation.</li>
+<li>Change template parameters of <code>PolarSplineEvaluator</code> to add execution and memory space information.</li>
+<li>Allow <code>get_idx_range</code> to be called from a GPU execution space.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <h3 id="removed">Removed</h3>

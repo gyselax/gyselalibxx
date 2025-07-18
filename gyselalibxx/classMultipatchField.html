@@ -663,7 +663,7 @@
 <td style="text-align: left;"><a href="#function-get_field"><strong>get_field</strong></a> () <br><em>Get a</em> <a href="classMultipatchField.html"><em><strong>MultipatchField</strong></em></a> <em>containing modifiable fields.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">auto</td>
+<td style="text-align: right;">KOKKOS_FUNCTION auto</td>
 <td style="text-align: left;"><a href="#function-idx_range"><strong>idx_range</strong></a> () const<br><em>Get a</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>containing the index ranges on which the fields are defined.</em></td>
 </tr>
 <tr>
@@ -919,7 +919,7 @@ inline KOKKOS_FUNCTION auto MultipatchField::get () const
 
 <h3 id="function-idx_range">function idx_range</h3>
 <p><em>Get a</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>containing the index ranges on which the fields are defined.</em></p>
-<pre><code class="language-C++">inline auto MultipatchField::idx_range () const
+<pre><code class="language-C++">inline KOKKOS_FUNCTION auto MultipatchField::idx_range () const
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>The set of index ranges on which the set of fields stored in this class are defined. </p>

@@ -2,7 +2,7 @@
 
 # Class PolarSplineEvaluator
 
-**template &lt;class PolarBSplinesType, class OuterExtrapolationRule&gt;**
+**template &lt;class ExecSpace, class MemorySpace, class PolarBSplinesType, class OuterExtrapolationRule&gt;**
 
 
 
@@ -39,6 +39,8 @@ _Define an evaluator on polar B-splines._ [More...](#detailed-description)
 | typedef typename BSplinesR::continuous\_dimension\_type | [**DimR**](#typedef-dimr)  <br>_Tag the first dimension of the space._  |
 | typedef typename BSplinesTheta::continuous\_dimension\_type | [**DimTheta**](#typedef-dimtheta)  <br>_Tag the second dimension of the space._  |
 | typedef PolarBSplinesType | [**bsplines\_type**](#typedef-bsplines_type)  <br>_Tag the type of B-splines._  |
+| typedef ExecSpace | [**exec\_space**](#typedef-exec_space)  <br>_The type of the Kokkos execution space used by this class._  |
+| typedef MemorySpace | [**memory\_space**](#typedef-memory_space)  <br>_The type of the Kokkos memory space used by this class._  |
 
 
 
@@ -72,16 +74,20 @@ _Define an evaluator on polar B-splines._ [More...](#detailed-description)
 |   | [**PolarSplineEvaluator**](#function-polarsplineevaluator-24) (OuterExtrapolationRule const & outer\_bc) <br>_Instantiate a_ [_**PolarSplineEvaluator**_](classPolarSplineEvaluator.md) _with boundary evaluation conditions._ |
 |   | [**PolarSplineEvaluator**](#function-polarsplineevaluator-34) ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md) const & x) = default<br>_Instantiate a_ [_**PolarSplineEvaluator**_](classPolarSplineEvaluator.md) _from another._ |
 |   | [**PolarSplineEvaluator**](#function-polarsplineevaluator-44) ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md) && x) = default<br>_Instantiate a_ [_**PolarSplineEvaluator**_](classPolarSplineEvaluator.md) _from another temporary._ |
-|  double | [**deriv\_1\_and\_2**](#function-deriv_1_and_2) (Coord&lt; [**DimR**](classPolarSplineEvaluator.md#typedef-dimr), [**DimTheta**](classPolarSplineEvaluator.md#typedef-dimtheta) &gt; coord\_eval, host\_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const spline\_coef) const<br>_Get the value of the cross derivative of the spline function._  |
-|  double | [**deriv\_dim\_1**](#function-deriv_dim_1-12) (Coord&lt; [**DimR**](classPolarSplineEvaluator.md#typedef-dimr), [**DimTheta**](classPolarSplineEvaluator.md#typedef-dimtheta) &gt; coord\_eval, host\_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const spline\_coef) const<br>_Get the value of the derivative of the spline function on the first dimension._  |
-|  void | [**deriv\_dim\_1**](#function-deriv_dim_1-22) (DField&lt; Domain, Kokkos::HostSpace &gt; const spline\_eval, ConstField&lt; Coord&lt; [**DimR**](classPolarSplineEvaluator.md#typedef-dimr), [**DimTheta**](classPolarSplineEvaluator.md#typedef-dimtheta) &gt;, Domain, Kokkos::HostSpace &gt; const coords\_eval, host\_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const spline\_coef) const<br>_Get the values of the derivative of the spline function on the first dimension._  |
-|  void | [**deriv\_dim\_1\_and\_2**](#function-deriv_dim_1_and_2) (DField&lt; Domain, Kokkos::HostSpace &gt; const spline\_eval, ConstField&lt; Coord&lt; [**DimR**](classPolarSplineEvaluator.md#typedef-dimr), [**DimTheta**](classPolarSplineEvaluator.md#typedef-dimtheta) &gt;, Domain, Kokkos::HostSpace &gt; const coords\_eval, host\_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const spline\_coef) const<br>_Get the values of the cross derivative of the spline function._  |
-|  double | [**deriv\_dim\_2**](#function-deriv_dim_2-12) (Coord&lt; [**DimR**](classPolarSplineEvaluator.md#typedef-dimr), [**DimTheta**](classPolarSplineEvaluator.md#typedef-dimtheta) &gt; coord\_eval, host\_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const spline\_coef) const<br>_Get the value of the derivative of the spline function on the second dimension._  |
-|  void | [**deriv\_dim\_2**](#function-deriv_dim_2-22) (DField&lt; Domain, Kokkos::HostSpace &gt; const spline\_eval, ConstField&lt; Coord&lt; [**DimR**](classPolarSplineEvaluator.md#typedef-dimr), [**DimTheta**](classPolarSplineEvaluator.md#typedef-dimtheta) &gt;, Domain, Kokkos::HostSpace &gt; const coords\_eval, host\_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const spline\_coef) const<br>_Get the values of the derivative of the spline function on the second dimension._  |
-|  double | [**operator()**](#function-operator) (Coord&lt; [**DimR**](classPolarSplineEvaluator.md#typedef-dimr), [**DimTheta**](classPolarSplineEvaluator.md#typedef-dimtheta) &gt; coord\_eval, host\_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const spline\_coef) const<br>_Get the value of the spline function at a given coordinate._  |
-|  void | [**operator()**](#function-operator_1) (DField&lt; Domain, Kokkos::HostSpace &gt; const spline\_eval, ConstField&lt; Coord&lt; [**DimR**](classPolarSplineEvaluator.md#typedef-dimr), [**DimTheta**](classPolarSplineEvaluator.md#typedef-dimtheta) &gt;, Domain, Kokkos::HostSpace &gt; const coords\_eval, host\_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const spline\_coef) const<br>_Get the values of the spline function on a domain._  |
-|  [**PolarSplineEvaluator**](classPolarSplineEvaluator.md) & | [**operator=**](#function-operator_2) ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md) const & x) = default<br>_Assign a_ [_**PolarSplineEvaluator**_](classPolarSplineEvaluator.md) _from another._ |
-|  [**PolarSplineEvaluator**](classPolarSplineEvaluator.md) & | [**operator=**](#function-operator_3) ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md) && x) = default<br>_Assign a_ [_**PolarSplineEvaluator**_](classPolarSplineEvaluator.md) _from another temporary._ |
+|  KOKKOS\_FUNCTION double | [**deriv\_1\_and\_2**](#function-deriv_1_and_2) (Coord&lt; [**DimR**](classPolarSplineEvaluator.md#typedef-dimr), [**DimTheta**](classPolarSplineEvaluator.md#typedef-dimtheta) &gt; coord\_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline\_coef) const<br>_Get the value of the cross derivative of the spline function._  |
+|  KOKKOS\_FUNCTION double | [**deriv\_dim\_1**](#function-deriv_dim_1-13) (Coord&lt; [**DimR**](classPolarSplineEvaluator.md#typedef-dimr), [**DimTheta**](classPolarSplineEvaluator.md#typedef-dimtheta) &gt; coord\_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline\_coef) const<br>_Get the value of the derivative of the spline function on the first dimension._  |
+|  void | [**deriv\_dim\_1**](#function-deriv_dim_1-23) (DField&lt; Domain, MemorySpace &gt; const spline\_eval, ConstField&lt; Coord&lt; [**DimR**](classPolarSplineEvaluator.md#typedef-dimr), [**DimTheta**](classPolarSplineEvaluator.md#typedef-dimtheta) &gt;, Domain, MemorySpace &gt; const coords\_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline\_coef) const<br>_Get the values of the derivative of the spline function on the first dimension._  |
+|  void | [**deriv\_dim\_1**](#function-deriv_dim_1-33) (DField&lt; Domain, MemorySpace &gt; const spline\_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline\_coef) const<br>_Get the values of the derivative of the spline function on the first dimension._  |
+|  void | [**deriv\_dim\_1\_and\_2**](#function-deriv_dim_1_and_2-12) (DField&lt; Domain, MemorySpace &gt; const spline\_eval, ConstField&lt; Coord&lt; [**DimR**](classPolarSplineEvaluator.md#typedef-dimr), [**DimTheta**](classPolarSplineEvaluator.md#typedef-dimtheta) &gt;, Domain, MemorySpace &gt; const coords\_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline\_coef) const<br>_Get the values of the cross derivative of the spline function._  |
+|  void | [**deriv\_dim\_1\_and\_2**](#function-deriv_dim_1_and_2-22) (DField&lt; Domain, MemorySpace &gt; const spline\_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline\_coef) const<br>_Get the values of the cross derivative of the spline function._  |
+|  KOKKOS\_FUNCTION double | [**deriv\_dim\_2**](#function-deriv_dim_2-13) (Coord&lt; [**DimR**](classPolarSplineEvaluator.md#typedef-dimr), [**DimTheta**](classPolarSplineEvaluator.md#typedef-dimtheta) &gt; coord\_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline\_coef) const<br>_Get the value of the derivative of the spline function on the second dimension._  |
+|  void | [**deriv\_dim\_2**](#function-deriv_dim_2-23) (DField&lt; Domain, MemorySpace &gt; const spline\_eval, ConstField&lt; Coord&lt; [**DimR**](classPolarSplineEvaluator.md#typedef-dimr), [**DimTheta**](classPolarSplineEvaluator.md#typedef-dimtheta) &gt;, Domain, MemorySpace &gt; const coords\_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline\_coef) const<br>_Get the values of the derivative of the spline function on the second dimension._  |
+|  void | [**deriv\_dim\_2**](#function-deriv_dim_2-33) (DField&lt; Domain, MemorySpace &gt; const spline\_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline\_coef) const<br>_Get the values of the derivative of the spline function on the second dimension._  |
+|  KOKKOS\_FUNCTION double | [**operator()**](#function-operator) (Coord&lt; [**DimR**](classPolarSplineEvaluator.md#typedef-dimr), [**DimTheta**](classPolarSplineEvaluator.md#typedef-dimtheta) &gt; coord\_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline\_coef) const<br>_Get the value of the spline function at a given coordinate._  |
+|  void | [**operator()**](#function-operator_1) (DField&lt; Domain, MemorySpace &gt; const spline\_eval, ConstField&lt; Coord&lt; [**DimR**](classPolarSplineEvaluator.md#typedef-dimr), [**DimTheta**](classPolarSplineEvaluator.md#typedef-dimtheta) &gt;, Domain, MemorySpace &gt; const coords\_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline\_coef) const<br>_Get the values of the spline function on a domain._  |
+|  void | [**operator()**](#function-operator_2) (DField&lt; Domain, MemorySpace &gt; const spline\_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline\_coef) const<br>_Get the values of the spline function on a domain._  |
+|  [**PolarSplineEvaluator**](classPolarSplineEvaluator.md) & | [**operator=**](#function-operator_3) ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md) const & x) = default<br>_Assign a_ [_**PolarSplineEvaluator**_](classPolarSplineEvaluator.md) _from another._ |
+|  [**PolarSplineEvaluator**](classPolarSplineEvaluator.md) & | [**operator=**](#function-operator_4) ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md) && x) = default<br>_Assign a_ [_**PolarSplineEvaluator**_](classPolarSplineEvaluator.md) _from another temporary._ |
 |   | [**~PolarSplineEvaluator**](#function-polarsplineevaluator) () = default<br> |
 
 
@@ -130,7 +136,7 @@ _Define an evaluator on polar B-splines._ [More...](#detailed-description)
 
 _Tag the type of first dimension B-splines._ 
 ```C++
-using PolarSplineEvaluator< PolarBSplinesType, OuterExtrapolationRule >::BSplinesR =  typename PolarBSplinesType::BSplinesR_tag;
+using PolarSplineEvaluator< ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule >::BSplinesR =  typename PolarBSplinesType::BSplinesR_tag;
 ```
 
 
@@ -144,7 +150,7 @@ using PolarSplineEvaluator< PolarBSplinesType, OuterExtrapolationRule >::BSpline
 
 _Tag the type of second dimension B-splines._ 
 ```C++
-using PolarSplineEvaluator< PolarBSplinesType, OuterExtrapolationRule >::BSplinesTheta =  typename PolarBSplinesType::BSplinesTheta_tag;
+using PolarSplineEvaluator< ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule >::BSplinesTheta =  typename PolarBSplinesType::BSplinesTheta_tag;
 ```
 
 
@@ -158,7 +164,7 @@ using PolarSplineEvaluator< PolarBSplinesType, OuterExtrapolationRule >::BSpline
 
 _Tag the first dimension of the space._ 
 ```C++
-using PolarSplineEvaluator< PolarBSplinesType, OuterExtrapolationRule >::DimR =  typename BSplinesR::continuous_dimension_type;
+using PolarSplineEvaluator< ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule >::DimR =  typename BSplinesR::continuous_dimension_type;
 ```
 
 
@@ -172,7 +178,7 @@ using PolarSplineEvaluator< PolarBSplinesType, OuterExtrapolationRule >::DimR = 
 
 _Tag the second dimension of the space._ 
 ```C++
-using PolarSplineEvaluator< PolarBSplinesType, OuterExtrapolationRule >::DimTheta =  typename BSplinesTheta::continuous_dimension_type;
+using PolarSplineEvaluator< ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule >::DimTheta =  typename BSplinesTheta::continuous_dimension_type;
 ```
 
 
@@ -186,7 +192,35 @@ using PolarSplineEvaluator< PolarBSplinesType, OuterExtrapolationRule >::DimThet
 
 _Tag the type of B-splines._ 
 ```C++
-using PolarSplineEvaluator< PolarBSplinesType, OuterExtrapolationRule >::bsplines_type =  PolarBSplinesType;
+using PolarSplineEvaluator< ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule >::bsplines_type =  PolarBSplinesType;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef exec\_space 
+
+_The type of the Kokkos execution space used by this class._ 
+```C++
+using PolarSplineEvaluator< ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule >::exec_space =  ExecSpace;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef memory\_space 
+
+_The type of the Kokkos memory space used by this class._ 
+```C++
+using PolarSplineEvaluator< ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule >::memory_space =  MemorySpace;
 ```
 
 
@@ -202,7 +236,7 @@ using PolarSplineEvaluator< PolarBSplinesType, OuterExtrapolationRule >::bspline
 
 _Tag the order of continuity of the B-splines basis at the O-point._ 
 ```C++
-int constexpr PolarSplineEvaluator< PolarBSplinesType, OuterExtrapolationRule >::continuity;
+int constexpr PolarSplineEvaluator< ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule >::continuity;
 ```
 
 
@@ -315,9 +349,9 @@ PolarSplineEvaluator::PolarSplineEvaluator (
 
 _Get the value of the cross derivative of the spline function._ 
 ```C++
-inline double PolarSplineEvaluator::deriv_1_and_2 (
+inline KOKKOS_FUNCTION double PolarSplineEvaluator::deriv_1_and_2 (
     Coord< DimR , DimTheta > coord_eval,
-    host_t< DConstField< IdxRange< PolarBSplinesType > > > const spline_coef
+    DConstField< IdxRange< PolarBSplinesType >, MemorySpace > const spline_coef
 ) const
 ```
 
@@ -347,13 +381,13 @@ The value of the cross derivative of the spline function
 
 
 
-### function deriv\_dim\_1 [1/2]
+### function deriv\_dim\_1 [1/3]
 
 _Get the value of the derivative of the spline function on the first dimension._ 
 ```C++
-inline double PolarSplineEvaluator::deriv_dim_1 (
+inline KOKKOS_FUNCTION double PolarSplineEvaluator::deriv_dim_1 (
     Coord< DimR , DimTheta > coord_eval,
-    host_t< DConstField< IdxRange< PolarBSplinesType > > > const spline_coef
+    DConstField< IdxRange< PolarBSplinesType >, MemorySpace > const spline_coef
 ) const
 ```
 
@@ -383,15 +417,15 @@ The value of the derivative of the spline function on the first dimension.
 
 
 
-### function deriv\_dim\_1 [2/2]
+### function deriv\_dim\_1 [2/3]
 
 _Get the values of the derivative of the spline function on the first dimension._ 
 ```C++
 template<class Domain>
 inline void PolarSplineEvaluator::deriv_dim_1 (
-    DField< Domain, Kokkos::HostSpace > const spline_eval,
-    ConstField< Coord< DimR , DimTheta >, Domain, Kokkos::HostSpace > const coords_eval,
-    host_t< DConstField< IdxRange< PolarBSplinesType > > > const spline_coef
+    DField< Domain, MemorySpace > const spline_eval,
+    ConstField< Coord< DimR , DimTheta >, Domain, MemorySpace > const coords_eval,
+    DConstField< IdxRange< PolarBSplinesType >, MemorySpace > const spline_coef
 ) const
 ```
 
@@ -415,15 +449,45 @@ inline void PolarSplineEvaluator::deriv_dim_1 (
 
 
 
-### function deriv\_dim\_1\_and\_2 
+### function deriv\_dim\_1 [3/3]
+
+_Get the values of the derivative of the spline function on the first dimension._ 
+```C++
+template<class Domain>
+inline void PolarSplineEvaluator::deriv_dim_1 (
+    DField< Domain, MemorySpace > const spline_eval,
+    DConstField< IdxRange< PolarBSplinesType >, MemorySpace > const spline_coef
+) const
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `spline_eval` The values of the function evaluated on the domain. 
+* `spline_coef` The B-splines coefficients of the spline function we want to evaluate. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function deriv\_dim\_1\_and\_2 [1/2]
 
 _Get the values of the cross derivative of the spline function._ 
 ```C++
 template<class Domain>
 inline void PolarSplineEvaluator::deriv_dim_1_and_2 (
-    DField< Domain, Kokkos::HostSpace > const spline_eval,
-    ConstField< Coord< DimR , DimTheta >, Domain, Kokkos::HostSpace > const coords_eval,
-    host_t< DConstField< IdxRange< PolarBSplinesType > > > const spline_coef
+    DField< Domain, MemorySpace > const spline_eval,
+    ConstField< Coord< DimR , DimTheta >, Domain, MemorySpace > const coords_eval,
+    DConstField< IdxRange< PolarBSplinesType >, MemorySpace > const spline_coef
 ) const
 ```
 
@@ -447,13 +511,43 @@ inline void PolarSplineEvaluator::deriv_dim_1_and_2 (
 
 
 
-### function deriv\_dim\_2 [1/2]
+### function deriv\_dim\_1\_and\_2 [2/2]
+
+_Get the values of the cross derivative of the spline function._ 
+```C++
+template<class Domain>
+inline void PolarSplineEvaluator::deriv_dim_1_and_2 (
+    DField< Domain, MemorySpace > const spline_eval,
+    DConstField< IdxRange< PolarBSplinesType >, MemorySpace > const spline_coef
+) const
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `spline_eval` The values of the function evaluated on the domain. 
+* `spline_coef` The B-splines coefficients of the splinefunction we want to evaluate. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function deriv\_dim\_2 [1/3]
 
 _Get the value of the derivative of the spline function on the second dimension._ 
 ```C++
-inline double PolarSplineEvaluator::deriv_dim_2 (
+inline KOKKOS_FUNCTION double PolarSplineEvaluator::deriv_dim_2 (
     Coord< DimR , DimTheta > coord_eval,
-    host_t< DConstField< IdxRange< PolarBSplinesType > > > const spline_coef
+    DConstField< IdxRange< PolarBSplinesType >, MemorySpace > const spline_coef
 ) const
 ```
 
@@ -483,15 +577,15 @@ The value of the derivative of the spline function on the second dimension.
 
 
 
-### function deriv\_dim\_2 [2/2]
+### function deriv\_dim\_2 [2/3]
 
 _Get the values of the derivative of the spline function on the second dimension._ 
 ```C++
 template<class Domain>
 inline void PolarSplineEvaluator::deriv_dim_2 (
-    DField< Domain, Kokkos::HostSpace > const spline_eval,
-    ConstField< Coord< DimR , DimTheta >, Domain, Kokkos::HostSpace > const coords_eval,
-    host_t< DConstField< IdxRange< PolarBSplinesType > > > const spline_coef
+    DField< Domain, MemorySpace > const spline_eval,
+    ConstField< Coord< DimR , DimTheta >, Domain, MemorySpace > const coords_eval,
+    DConstField< IdxRange< PolarBSplinesType >, MemorySpace > const spline_coef
 ) const
 ```
 
@@ -515,13 +609,43 @@ inline void PolarSplineEvaluator::deriv_dim_2 (
 
 
 
+### function deriv\_dim\_2 [3/3]
+
+_Get the values of the derivative of the spline function on the second dimension._ 
+```C++
+template<class Domain>
+inline void PolarSplineEvaluator::deriv_dim_2 (
+    DField< Domain, MemorySpace > const spline_eval,
+    DConstField< IdxRange< PolarBSplinesType >, MemorySpace > const spline_coef
+) const
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `spline_eval` The values of the function evaluated on the domain. 
+* `spline_coef` The B-splines coefficients of the spline function we want to evaluate.. 
+
+
+
+
+        
+
+<hr>
+
+
+
 ### function operator() 
 
 _Get the value of the spline function at a given coordinate._ 
 ```C++
-inline double PolarSplineEvaluator::operator() (
+inline KOKKOS_FUNCTION double PolarSplineEvaluator::operator() (
     Coord< DimR , DimTheta > coord_eval,
-    host_t< DConstField< IdxRange< PolarBSplinesType > > > const spline_coef
+    DConstField< IdxRange< PolarBSplinesType >, MemorySpace > const spline_coef
 ) const
 ```
 
@@ -557,9 +681,9 @@ _Get the values of the spline function on a domain._
 ```C++
 template<class Domain>
 inline void PolarSplineEvaluator::operator() (
-    DField< Domain, Kokkos::HostSpace > const spline_eval,
-    ConstField< Coord< DimR , DimTheta >, Domain, Kokkos::HostSpace > const coords_eval,
-    host_t< DConstField< IdxRange< PolarBSplinesType > > > const spline_coef
+    DField< Domain, MemorySpace > const spline_eval,
+    ConstField< Coord< DimR , DimTheta >, Domain, MemorySpace > const coords_eval,
+    DConstField< IdxRange< PolarBSplinesType >, MemorySpace > const spline_coef
 ) const
 ```
 
@@ -572,6 +696,36 @@ inline void PolarSplineEvaluator::operator() (
 
 * `spline_eval` The values of the function evaluated on the domain. 
 * `coords_eval` The coordinates where we want to evaluate. 
+* `spline_coef` The B-splines coefficients of the spline function we want to evaluate. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function operator() 
+
+_Get the values of the spline function on a domain._ 
+```C++
+template<class Domain>
+inline void PolarSplineEvaluator::operator() (
+    DField< Domain, MemorySpace > const spline_eval,
+    DConstField< IdxRange< PolarBSplinesType >, MemorySpace > const spline_coef
+) const
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `spline_eval` The values of the function evaluated on the domain. 
 * `spline_coef` The B-splines coefficients of the spline function we want to evaluate. 
 
 

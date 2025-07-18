@@ -11,7 +11,7 @@
   <compound refid="classAdvectionFieldFinder" kind="class"><name>AdvectionFieldFinder</name>
     <member refid="classAdvectionFieldFinder_1adc93eaa4ffdf24734faae6857ee43730" kind="typedef"><name>Matrix_2x2</name></member>
     <member refid="classAdvectionFieldFinder_1a457cb9a50e24ab460559fdd96d164bc3" kind="variable"><name>m_mapping</name></member>
-    <member refid="classAdvectionFieldFinder_1a46c62cd714b9a75479695928a5057846" kind="variable"><name>m_polar_spline_evaluator</name></member>
+    <member refid="classAdvectionFieldFinder_1ad438faa441cdbbe93e06749f1138c4d7" kind="variable"><name>m_polar_spline_evaluator</name></member>
     <member refid="classAdvectionFieldFinder_1a0c98e53bab952f38d543d863f8d6e709" kind="variable"><name>m_spline_evaluator</name></member>
     <member refid="classAdvectionFieldFinder_1afaf17208dfa7b5b4fbe953426a171910" kind="variable"><name>m_epsilon</name></member>
     <member refid="classAdvectionFieldFinder_1af47b6bde71aa5690521b491488645cd3" kind="variable"><name>n_overlap_cells</name></member>
@@ -1970,7 +1970,7 @@
     <member refid="classMultipatchField_1a5d0139029c4d048c9433fa7d81098578" kind="function"><name>MultipatchField</name></member>
     <member refid="classMultipatchField_1a56cfbacfcac49a2a205e1aa5ff6ffeeb" kind="function"><name>~MultipatchField</name></member>
     <member refid="classMultipatchField_1a5ce7a43366b076c562a4eeaf9e7e14d2" kind="function"><name>get</name></member>
-    <member refid="classMultipatchField_1a9a4cb73606c74a79ac3bc33438320647" kind="function"><name>idx_range</name></member>
+    <member refid="classMultipatchField_1a81a0d66702494385f6aa986398cac4a8" kind="function"><name>idx_range</name></member>
     <member refid="classMultipatchField_1a91a470e7def55ebe6311b178dce36d23" kind="function"><name>get_field</name></member>
     <member refid="classMultipatchField_1aad6d9590fbc8731d5e25885da11ed142" kind="function"><name>span_view</name></member>
     <member refid="classMultipatchField_1a70e93ac539f73e00e629dde3bdd39fae" kind="function"><name>get_const_field</name></member>
@@ -2214,39 +2214,45 @@
     <member refid="classPolarBSplines_1adf2fa6196b0b4d07cf5f93d8f61e744c" kind="typedef"><name>IdxStepTheta</name></member>
     <member refid="classPolarBSplines_1ae4895a87f3e1ed953614a3546c319762" kind="variable"><name>continuity</name></member>
     <member refid="classPolarBSplines_1a9254ee09fe5fce248ae80efac56c82c3" kind="function"><name>n_singular_basis</name></member>
-    <member refid="classPolarBSplines_1ae4bb250b0904ab8a72c3f1fc029cb2fc" kind="function"><name>singular_idx_range</name></member>
+    <member refid="classPolarBSplines_1a4b917802264ab0bdab190c79dff8c46a" kind="function"><name>singular_idx_range</name></member>
     <member refid="classPolarBSplines_1ab295d737e634cd296d1fdbb3a76c2e4e" kind="function"><name>get_polar_index</name></member>
     <member refid="classPolarBSplines_1a8ad5514f78dabdfe57bbfa3c487fa808" kind="function"><name>get_2d_index</name></member>
-    <member refid="classPolarBSplines_1a285da2d17bc0056295ff7d6c686db83f" kind="function"><name>get_singular_subset</name></member>
-    <member refid="classPolarBSplines_1a35f5e1426b2b1f16f8f29f9047c3e2d0" kind="function"><name>get_tensor_product_subset</name></member>
+    <member refid="classPolarBSplines_1a91905e2c06676c81238da05255336084" kind="function"><name>get_singular_subset</name></member>
+    <member refid="classPolarBSplines_1a0c2e69c7b3c789d174e0d59fad43a690" kind="function"><name>get_tensor_product_subset</name></member>
   </compound>
   <compound refid="structPolarBSplinesRTheta" kind="struct"><name>PolarBSplinesRTheta</name>
   </compound>
   <compound refid="classPolarSplineEvaluator" kind="class"><name>PolarSplineEvaluator</name>
-    <member refid="classPolarSplineEvaluator_1a4fda8acef6472fb27ffe42d078943f26" kind="typedef"><name>bsplines_type</name></member>
-    <member refid="classPolarSplineEvaluator_1af825f47ac1278302e5dd3ac0d906f09c" kind="typedef"><name>BSplinesR</name></member>
-    <member refid="classPolarSplineEvaluator_1a66468d51237ba05121d617991da901f3" kind="typedef"><name>BSplinesTheta</name></member>
-    <member refid="classPolarSplineEvaluator_1aa879b12728771565d1e10a6591b49db0" kind="typedef"><name>DimR</name></member>
-    <member refid="classPolarSplineEvaluator_1adf99dc8e8d1141f1881627a6e5218791" kind="typedef"><name>DimTheta</name></member>
-    <member refid="classPolarSplineEvaluator_1ace6e568d7d0ea1accb2fa3496ce6e781" kind="variable"><name>continuity</name></member>
-    <member refid="classPolarSplineEvaluator_1a908bfc89d300a3fb0ae4be6d791408e7" kind="variable"><name>m_outer_bc</name></member>
-    <member refid="classPolarSplineEvaluator_1ab875829c2c8dd226e73ad9c88a7fee65" kind="function"><name>PolarSplineEvaluator</name></member>
-    <member refid="classPolarSplineEvaluator_1a8960c721f4ef12c2343fae7c36dae0da" kind="function"><name>PolarSplineEvaluator</name></member>
-    <member refid="classPolarSplineEvaluator_1a13c5887c37f94a933cdd431c122a0124" kind="function"><name>PolarSplineEvaluator</name></member>
-    <member refid="classPolarSplineEvaluator_1a87b7163ab815cc562d0222b1d5dcd27e" kind="function"><name>PolarSplineEvaluator</name></member>
-    <member refid="classPolarSplineEvaluator_1a286fe6663e3004aead728b7d8acb38a9" kind="function"><name>~PolarSplineEvaluator</name></member>
-    <member refid="classPolarSplineEvaluator_1a6d675b7b73943862d1ffb2930f886213" kind="function"><name>operator=</name></member>
-    <member refid="classPolarSplineEvaluator_1ad283c37ae44c6a72f43bf2b6e48d43a8" kind="function"><name>operator=</name></member>
-    <member refid="classPolarSplineEvaluator_1a3ade826f349bae212eb66ece07384989" kind="function"><name>operator()</name></member>
-    <member refid="classPolarSplineEvaluator_1a8a8b46bd3ffc6bcf91913b96f51f2d4c" kind="function"><name>operator()</name></member>
-    <member refid="classPolarSplineEvaluator_1a27dbcc355d7f768c3292c4e294331d2c" kind="function"><name>deriv_dim_1</name></member>
-    <member refid="classPolarSplineEvaluator_1a77ed6f49904a63ed1e64d9dd870af494" kind="function"><name>deriv_dim_2</name></member>
-    <member refid="classPolarSplineEvaluator_1a45ac2b26c53a2d899388086e17a8e498" kind="function"><name>deriv_1_and_2</name></member>
-    <member refid="classPolarSplineEvaluator_1a6ebe4552d5285de3bc7b04d624f39130" kind="function"><name>deriv_dim_1</name></member>
-    <member refid="classPolarSplineEvaluator_1a44f7027a8a988429cd49514cbd3290a6" kind="function"><name>deriv_dim_2</name></member>
-    <member refid="classPolarSplineEvaluator_1a98991c8e4592b36b510a912f28382b50" kind="function"><name>deriv_dim_1_and_2</name></member>
-    <member refid="classPolarSplineEvaluator_1a7cdc364cfd313b74fd775ab5fc0e6f49" kind="function"><name>eval</name></member>
-    <member refid="classPolarSplineEvaluator_1a3524add4d80448d16dc2878315c98643" kind="function"><name>eval_no_bc</name></member>
+    <member refid="classPolarSplineEvaluator_1aa25e933b4a8eddf839133cd51f871eb2" kind="typedef"><name>bsplines_type</name></member>
+    <member refid="classPolarSplineEvaluator_1ab8165cae7e1fa3be087c8f6b81c08cf2" kind="typedef"><name>BSplinesR</name></member>
+    <member refid="classPolarSplineEvaluator_1a79a1bf83da950ca5110c8cc21fc2afae" kind="typedef"><name>BSplinesTheta</name></member>
+    <member refid="classPolarSplineEvaluator_1a28af43552a7d886407b473a5e96dc9b6" kind="typedef"><name>DimR</name></member>
+    <member refid="classPolarSplineEvaluator_1adf7cf00f2f8d1a1f600c08bd721a1302" kind="typedef"><name>DimTheta</name></member>
+    <member refid="classPolarSplineEvaluator_1a19596349497aef2be0313882417110b3" kind="typedef"><name>exec_space</name></member>
+    <member refid="classPolarSplineEvaluator_1a36f07019ff1cd152f91e339aa086de7a" kind="typedef"><name>memory_space</name></member>
+    <member refid="classPolarSplineEvaluator_1a5d17cee2ba2d4cdf43c1a6095bfa70bb" kind="variable"><name>continuity</name></member>
+    <member refid="classPolarSplineEvaluator_1ab4476121043c5f9ced201f7612d1e5a6" kind="variable"><name>m_outer_bc</name></member>
+    <member refid="classPolarSplineEvaluator_1a0fdd6b4d2a5ddc34c1de0db58bc47cdf" kind="function"><name>PolarSplineEvaluator</name></member>
+    <member refid="classPolarSplineEvaluator_1a22376cadde5fd336efcd7ebf39746694" kind="function"><name>PolarSplineEvaluator</name></member>
+    <member refid="classPolarSplineEvaluator_1aa2a619cb72a26cb365d5273e2347672c" kind="function"><name>PolarSplineEvaluator</name></member>
+    <member refid="classPolarSplineEvaluator_1a30aea2f54b0d9cdeed4abb1bdecd75d4" kind="function"><name>PolarSplineEvaluator</name></member>
+    <member refid="classPolarSplineEvaluator_1a7831775ce23f8c0cc64e36488bf8c2ab" kind="function"><name>~PolarSplineEvaluator</name></member>
+    <member refid="classPolarSplineEvaluator_1aaf568a1edaec887e8a0e1b2b389e4ab5" kind="function"><name>operator=</name></member>
+    <member refid="classPolarSplineEvaluator_1a867e9fe8c9af77a6a53718a2afc74dde" kind="function"><name>operator=</name></member>
+    <member refid="classPolarSplineEvaluator_1a235b702e90e4366cfac4ff05c287440e" kind="function"><name>operator()</name></member>
+    <member refid="classPolarSplineEvaluator_1a8d3d2469b39c8651f940c9b703f4851b" kind="function"><name>operator()</name></member>
+    <member refid="classPolarSplineEvaluator_1a9b6f13de440331355d3c333ea6812871" kind="function"><name>operator()</name></member>
+    <member refid="classPolarSplineEvaluator_1a7fd8ee0b4a74138e37d9a88d7249ae5f" kind="function"><name>deriv_dim_1</name></member>
+    <member refid="classPolarSplineEvaluator_1a7f2f29034650857c7e012727847a021a" kind="function"><name>deriv_dim_2</name></member>
+    <member refid="classPolarSplineEvaluator_1af7e609a313b6c893cfeedfb75040caf5" kind="function"><name>deriv_1_and_2</name></member>
+    <member refid="classPolarSplineEvaluator_1a1cf77ee2d864f4a46fbee5134c273fa0" kind="function"><name>deriv_dim_1</name></member>
+    <member refid="classPolarSplineEvaluator_1a4749ab3d60fde03d97dc831c418635d8" kind="function"><name>deriv_dim_1</name></member>
+    <member refid="classPolarSplineEvaluator_1a044a38452e620e2b7fbd0a1398f2b295" kind="function"><name>deriv_dim_2</name></member>
+    <member refid="classPolarSplineEvaluator_1abc472d423f3387c5bd14f69a9639c358" kind="function"><name>deriv_dim_2</name></member>
+    <member refid="classPolarSplineEvaluator_1a8da4cba85f71a287df240609fcd5165c" kind="function"><name>deriv_dim_1_and_2</name></member>
+    <member refid="classPolarSplineEvaluator_1addbf640f50811038d6dbb3fa0ed52ece" kind="function"><name>deriv_dim_1_and_2</name></member>
+    <member refid="classPolarSplineEvaluator_1acc40d8123a5bee19463b7ef44b541f47" kind="function"><name>eval</name></member>
+    <member refid="classPolarSplineEvaluator_1a6c53185490fc4990bc962eaf3cce178e" kind="function"><name>eval_no_bc</name></member>
   </compound>
   <compound refid="classPolarSplineFEMPoissonLikeSolver" kind="class"><name>PolarSplineFEMPoissonLikeSolver</name>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1aea7575e5ec7f7e2a776c1677a79137d9" kind="typedef"><name>R</name></member>
@@ -2310,7 +2316,7 @@
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a60b8ec8f412fe07a98512ca4de240d27" kind="variable"><name>m_r_basis_vals_and_derivs</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a4b055701d14677f237990db5d637c478" kind="variable"><name>m_theta_basis_vals_and_derivs</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a397c5353c41a5e9e73d4acc6d9c678c4" kind="variable"><name>m_int_volume</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a028a96d6e0ed2e0332ee0c33141f3753" kind="variable"><name>m_polar_spline_evaluator</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeSolver_1adfe6f1c0509f740749d6ce4397c576dd" kind="variable"><name>m_polar_spline_evaluator</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a55664a455be46f70f1d33768cee0e7b3" kind="variable"><name>m_gko_matrix</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a70bacb50d6ea8e14e8d918520b54e0ee" kind="variable"><name>m_phi_spline_coef</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a47c4cc4cf0fff9cf9cfc174e19e1930d" kind="variable"><name>m_x_init</name></member>
@@ -4142,7 +4148,7 @@
     <member refid="ddc__alias__inline__functions_8hpp_1a3622b318b11bb7fa48c4c5e27affd8d8" kind="variable"><name>is_gslx_field_v</name></member>
     <member refid="ddc__alias__inline__functions_8hpp_1ad86617b02c98892267695443596fcd2e" kind="variable"><name>has_data_access_methods_v</name></member>
     <member refid="ddc__alias__inline__functions_8hpp_1a6405091723383b69cd40afa89431e8b7" kind="variable"><name>is_mem_type_v</name></member>
-    <member refid="ddc__alias__inline__functions_8hpp_1a3f3a2d81fa0fa8490b3b185525841546" kind="function"><name>get_idx_range</name></member>
+    <member refid="ddc__alias__inline__functions_8hpp_1a780b7925b9924e8c5917a42595f51cfe" kind="function"><name>get_idx_range</name></member>
     <member refid="ddc__alias__inline__functions_8hpp_1a2ea4048d6302b898f5df220d0f8b00fa" kind="function"><name>get_spline_idx_range</name></member>
     <member refid="ddc__alias__inline__functions_8hpp_1a1ae34f912874b252e6cc03ada5f692ff" kind="function"><name>get_field</name></member>
     <member refid="ddc__alias__inline__functions_8hpp_1a62f03a88f476c57e05597a9708f571cf" kind="function"><name>get_field</name></member>

@@ -30,7 +30,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**PolarSplineEvaluator**](classPolarSplineEvaluator.md) &lt;class PolarBSplinesType, class OuterExtrapolationRule&gt;<br>_Define an evaluator on polar B-splines._  |
+| class | [**PolarSplineEvaluator**](classPolarSplineEvaluator.md) &lt;class ExecSpace, class MemorySpace, class PolarBSplinesType, class OuterExtrapolationRule&gt;<br>_Define an evaluator on polar B-splines._  |
 
 
 

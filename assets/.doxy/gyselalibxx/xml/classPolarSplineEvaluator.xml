@@ -9,6 +9,12 @@
     <innerclass refid="structPolarSplineEvaluator_1_1eval__type" prot="private">PolarSplineEvaluator::eval_type</innerclass>
     <templateparamlist>
       <param>
+        <type>class ExecSpace</type>
+      </param>
+      <param>
+        <type>class MemorySpace</type>
+      </param>
+      <param>
         <type>class PolarBSplinesType</type>
       </param>
       <param>
@@ -16,9 +22,9 @@
       </param>
     </templateparamlist>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="classPolarSplineEvaluator_1a4fda8acef6472fb27ffe42d078943f26" prot="public" static="no">
+      <memberdef kind="typedef" id="classPolarSplineEvaluator_1aa25e933b4a8eddf839133cd51f871eb2" prot="public" static="no">
         <type>PolarBSplinesType</type>
-        <definition>using PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::bsplines_type =  PolarBSplinesType</definition>
+        <definition>using PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::bsplines_type =  PolarBSplinesType</definition>
         <argsstring></argsstring>
         <name>bsplines_type</name>
         <qualifiedname>PolarSplineEvaluator::bsplines_type</qualifiedname>
@@ -31,9 +37,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="50" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="50" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineEvaluator_1af825f47ac1278302e5dd3ac0d906f09c" prot="public" static="no">
+      <memberdef kind="typedef" id="classPolarSplineEvaluator_1ab8165cae7e1fa3be087c8f6b81c08cf2" prot="public" static="no">
         <type>typename PolarBSplinesType::BSplinesR_tag</type>
-        <definition>using PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::BSplinesR =  typename PolarBSplinesType::BSplinesR_tag</definition>
+        <definition>using PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::BSplinesR =  typename PolarBSplinesType::BSplinesR_tag</definition>
         <argsstring></argsstring>
         <name>BSplinesR</name>
         <qualifiedname>PolarSplineEvaluator::BSplinesR</qualifiedname>
@@ -46,9 +52,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="54" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineEvaluator_1a66468d51237ba05121d617991da901f3" prot="public" static="no">
+      <memberdef kind="typedef" id="classPolarSplineEvaluator_1a79a1bf83da950ca5110c8cc21fc2afae" prot="public" static="no">
         <type>typename PolarBSplinesType::BSplinesTheta_tag</type>
-        <definition>using PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::BSplinesTheta =  typename PolarBSplinesType::BSplinesTheta_tag</definition>
+        <definition>using PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::BSplinesTheta =  typename PolarBSplinesType::BSplinesTheta_tag</definition>
         <argsstring></argsstring>
         <name>BSplinesTheta</name>
         <qualifiedname>PolarSplineEvaluator::BSplinesTheta</qualifiedname>
@@ -61,9 +67,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="58" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="58" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineEvaluator_1aa879b12728771565d1e10a6591b49db0" prot="public" static="no">
+      <memberdef kind="typedef" id="classPolarSplineEvaluator_1a28af43552a7d886407b473a5e96dc9b6" prot="public" static="no">
         <type>typename BSplinesR::continuous_dimension_type</type>
-        <definition>using PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::DimR =  typename BSplinesR::continuous_dimension_type</definition>
+        <definition>using PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::DimR =  typename BSplinesR::continuous_dimension_type</definition>
         <argsstring></argsstring>
         <name>DimR</name>
         <qualifiedname>PolarSplineEvaluator::DimR</qualifiedname>
@@ -76,9 +82,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="62" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="62" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classPolarSplineEvaluator_1adf99dc8e8d1141f1881627a6e5218791" prot="public" static="no">
+      <memberdef kind="typedef" id="classPolarSplineEvaluator_1adf7cf00f2f8d1a1f600c08bd721a1302" prot="public" static="no">
         <type>typename BSplinesTheta::continuous_dimension_type</type>
-        <definition>using PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::DimTheta =  typename BSplinesTheta::continuous_dimension_type</definition>
+        <definition>using PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::DimTheta =  typename BSplinesTheta::continuous_dimension_type</definition>
         <argsstring></argsstring>
         <name>DimTheta</name>
         <qualifiedname>PolarSplineEvaluator::DimTheta</qualifiedname>
@@ -91,11 +97,41 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="66" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="66" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="typedef" id="classPolarSplineEvaluator_1a19596349497aef2be0313882417110b3" prot="public" static="no">
+        <type>ExecSpace</type>
+        <definition>using PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::exec_space =  ExecSpace</definition>
+        <argsstring></argsstring>
+        <name>exec_space</name>
+        <qualifiedname>PolarSplineEvaluator::exec_space</qualifiedname>
+        <briefdescription>
+<para>The type of the Kokkos execution space used by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarSplineEvaluator_1a36f07019ff1cd152f91e339aa086de7a" prot="public" static="no">
+        <type>MemorySpace</type>
+        <definition>using PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::memory_space =  MemorySpace</definition>
+        <argsstring></argsstring>
+        <name>memory_space</name>
+        <qualifiedname>PolarSplineEvaluator::memory_space</qualifiedname>
+        <briefdescription>
+<para>The type of the Kokkos memory space used by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="72" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
-      <memberdef kind="variable" id="classPolarSplineEvaluator_1ace6e568d7d0ea1accb2fa3496ce6e781" prot="public" static="yes" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="classPolarSplineEvaluator_1a5d17cee2ba2d4cdf43c1a6095bfa70bb" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>int constexpr</type>
-        <definition>int constexpr PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::continuity</definition>
+        <definition>int constexpr PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::continuity</definition>
         <argsstring></argsstring>
         <name>continuity</name>
         <qualifiedname>PolarSplineEvaluator::continuity</qualifiedname>
@@ -107,13 +143,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="73" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="73" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="79" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="79" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classPolarSplineEvaluator_1a908bfc89d300a3fb0ae4be6d791408e7" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classPolarSplineEvaluator_1ab4476121043c5f9ced201f7612d1e5a6" prot="private" static="no" mutable="no">
         <type>OuterExtrapolationRule</type>
-        <definition>OuterExtrapolationRule PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::m_outer_bc</definition>
+        <definition>OuterExtrapolationRule PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::m_outer_bc</definition>
         <argsstring></argsstring>
         <name>m_outer_bc</name>
         <qualifiedname>PolarSplineEvaluator::m_outer_bc</qualifiedname>
@@ -123,13 +159,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="76" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="76" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="82" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="82" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classPolarSplineEvaluator_1ab875829c2c8dd226e73ad9c88a7fee65" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineEvaluator_1a0fdd6b4d2a5ddc34c1de0db58bc47cdf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
-        <definition>PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::PolarSplineEvaluator</definition>
+        <definition>PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::PolarSplineEvaluator</definition>
         <argsstring>()=delete</argsstring>
         <name>PolarSplineEvaluator</name>
         <qualifiedname>PolarSplineEvaluator::PolarSplineEvaluator</qualifiedname>
@@ -139,11 +175,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="79" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="85" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineEvaluator_1a8960c721f4ef12c2343fae7c36dae0da" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineEvaluator_1a22376cadde5fd336efcd7ebf39746694" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
-        <definition>PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::PolarSplineEvaluator</definition>
+        <definition>PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::PolarSplineEvaluator</definition>
         <argsstring>(OuterExtrapolationRule const &amp;outer_bc)</argsstring>
         <name>PolarSplineEvaluator</name>
         <qualifiedname>PolarSplineEvaluator::PolarSplineEvaluator</qualifiedname>
@@ -169,11 +205,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="92" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="92" bodyend="92"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="98" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="98" bodyend="98"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineEvaluator_1a13c5887c37f94a933cdd431c122a0124" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineEvaluator_1aa2a619cb72a26cb365d5273e2347672c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
-        <definition>PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::PolarSplineEvaluator</definition>
+        <definition>PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::PolarSplineEvaluator</definition>
         <argsstring>(PolarSplineEvaluator const &amp;x)=default</argsstring>
         <name>PolarSplineEvaluator</name>
         <qualifiedname>PolarSplineEvaluator::PolarSplineEvaluator</qualifiedname>
@@ -198,11 +234,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="100" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="106" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineEvaluator_1a87b7163ab815cc562d0222b1d5dcd27e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineEvaluator_1a30aea2f54b0d9cdeed4abb1bdecd75d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
-        <definition>PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::PolarSplineEvaluator</definition>
+        <definition>PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::PolarSplineEvaluator</definition>
         <argsstring>(PolarSplineEvaluator &amp;&amp;x)=default</argsstring>
         <name>PolarSplineEvaluator</name>
         <qualifiedname>PolarSplineEvaluator::PolarSplineEvaluator</qualifiedname>
@@ -227,11 +263,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="108" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="114" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineEvaluator_1a286fe6663e3004aead728b7d8acb38a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineEvaluator_1a7831775ce23f8c0cc64e36488bf8c2ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
-        <definition>PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::~PolarSplineEvaluator</definition>
+        <definition>PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::~PolarSplineEvaluator</definition>
         <argsstring>()=default</argsstring>
         <name>~PolarSplineEvaluator</name>
         <qualifiedname>PolarSplineEvaluator::~PolarSplineEvaluator</qualifiedname>
@@ -241,11 +277,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="110" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="116" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineEvaluator_1a6d675b7b73943862d1ffb2930f886213" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineEvaluator_1aaf568a1edaec887e8a0e1b2b389e4ab5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classPolarSplineEvaluator" kindref="compound">PolarSplineEvaluator</ref> &amp;</type>
-        <definition>PolarSplineEvaluator &amp; PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::operator=</definition>
+        <definition>PolarSplineEvaluator &amp; PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::operator=</definition>
         <argsstring>(PolarSplineEvaluator const &amp;x)=default</argsstring>
         <name>operator=</name>
         <qualifiedname>PolarSplineEvaluator::operator=</qualifiedname>
@@ -272,11 +308,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="120" column="26"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="126" column="26"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineEvaluator_1ad283c37ae44c6a72f43bf2b6e48d43a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineEvaluator_1a867e9fe8c9af77a6a53718a2afc74dde" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classPolarSplineEvaluator" kindref="compound">PolarSplineEvaluator</ref> &amp;</type>
-        <definition>PolarSplineEvaluator &amp; PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::operator=</definition>
+        <definition>PolarSplineEvaluator &amp; PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::operator=</definition>
         <argsstring>(PolarSplineEvaluator &amp;&amp;x)=default</argsstring>
         <name>operator=</name>
         <qualifiedname>PolarSplineEvaluator::operator=</qualifiedname>
@@ -303,20 +339,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="130" column="26"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="136" column="26"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineEvaluator_1a3ade826f349bae212eb66ece07384989" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>double</type>
-        <definition>double PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::operator()</definition>
-        <argsstring>(Coord&lt; DimR, DimTheta &gt; coord_eval, host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const spline_coef) const</argsstring>
+      <memberdef kind="function" id="classPolarSplineEvaluator_1a235b702e90e4366cfac4ff05c287440e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION double</type>
+        <definition>KOKKOS_FUNCTION double PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::operator()</definition>
+        <argsstring>(Coord&lt; DimR, DimTheta &gt; coord_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef) const</argsstring>
         <name>operator()</name>
         <qualifiedname>PolarSplineEvaluator::operator()</qualifiedname>
         <param>
-          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1aa879b12728771565d1e10a6591b49db0" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf99dc8e8d1141f1881627a6e5218791" kindref="member">DimTheta</ref> &gt;</type>
+          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a28af43552a7d886407b473a5e96dc9b6" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf7cf00f2f8d1a1f600c08bd721a1302" kindref="member">DimTheta</ref> &gt;</type>
           <declname>coord_eval</declname>
         </param>
         <param>
-          <type>host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const</type>
+          <type>DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const</type>
           <declname>spline_coef</declname>
         </param>
         <briefdescription>
@@ -346,29 +382,29 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="142" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="142" bodyend="147"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="148" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="148" bodyend="153"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineEvaluator_1a8a8b46bd3ffc6bcf91913b96f51f2d4c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineEvaluator_1a8d3d2469b39c8651f940c9b703f4851b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class Domain</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::operator()</definition>
-        <argsstring>(DField&lt; Domain, Kokkos::HostSpace &gt; const spline_eval, ConstField&lt; Coord&lt; DimR, DimTheta &gt;, Domain, Kokkos::HostSpace &gt; const coords_eval, host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const spline_coef) const</argsstring>
+        <definition>void PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::operator()</definition>
+        <argsstring>(DField&lt; Domain, MemorySpace &gt; const spline_eval, ConstField&lt; Coord&lt; DimR, DimTheta &gt;, Domain, MemorySpace &gt; const coords_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef) const</argsstring>
         <name>operator()</name>
         <qualifiedname>PolarSplineEvaluator::operator()</qualifiedname>
         <param>
-          <type>DField&lt; Domain, Kokkos::HostSpace &gt; const</type>
+          <type>DField&lt; Domain, MemorySpace &gt; const</type>
           <declname>spline_eval</declname>
         </param>
         <param>
-          <type>ConstField&lt; Coord&lt; <ref refid="classPolarSplineEvaluator_1aa879b12728771565d1e10a6591b49db0" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf99dc8e8d1141f1881627a6e5218791" kindref="member">DimTheta</ref> &gt;, Domain, Kokkos::HostSpace &gt; const</type>
+          <type>ConstField&lt; Coord&lt; <ref refid="classPolarSplineEvaluator_1a28af43552a7d886407b473a5e96dc9b6" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf7cf00f2f8d1a1f600c08bd721a1302" kindref="member">DimTheta</ref> &gt;, Domain, MemorySpace &gt; const</type>
           <declname>coords_eval</declname>
         </param>
         <param>
-          <type>host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const</type>
+          <type>DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const</type>
           <declname>spline_coef</declname>
         </param>
         <briefdescription>
@@ -404,20 +440,66 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="160" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="160" bodyend="169"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="166" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="166" bodyend="178"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineEvaluator_1a27dbcc355d7f768c3292c4e294331d2c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>double</type>
-        <definition>double PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_dim_1</definition>
-        <argsstring>(Coord&lt; DimR, DimTheta &gt; coord_eval, host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const spline_coef) const</argsstring>
+      <memberdef kind="function" id="classPolarSplineEvaluator_1a9b6f13de440331355d3c333ea6812871" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Domain</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::operator()</definition>
+        <argsstring>(DField&lt; Domain, MemorySpace &gt; const spline_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>PolarSplineEvaluator::operator()</qualifiedname>
+        <param>
+          <type>DField&lt; Domain, MemorySpace &gt; const</type>
+          <declname>spline_eval</declname>
+        </param>
+        <param>
+          <type>DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const</type>
+          <declname>spline_coef</declname>
+        </param>
+        <briefdescription>
+<para>Get the values of the spline function on a domain. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">spline_eval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The values of the function evaluated on the domain. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">spline_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The B-splines coefficients of the spline function we want to evaluate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="189" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="189" bodyend="200"/>
+      </memberdef>
+      <memberdef kind="function" id="classPolarSplineEvaluator_1a7fd8ee0b4a74138e37d9a88d7249ae5f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION double</type>
+        <definition>KOKKOS_FUNCTION double PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_dim_1</definition>
+        <argsstring>(Coord&lt; DimR, DimTheta &gt; coord_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef) const</argsstring>
         <name>deriv_dim_1</name>
         <qualifiedname>PolarSplineEvaluator::deriv_dim_1</qualifiedname>
         <param>
-          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1aa879b12728771565d1e10a6591b49db0" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf99dc8e8d1141f1881627a6e5218791" kindref="member">DimTheta</ref> &gt;</type>
+          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a28af43552a7d886407b473a5e96dc9b6" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf7cf00f2f8d1a1f600c08bd721a1302" kindref="member">DimTheta</ref> &gt;</type>
           <declname>coord_eval</declname>
         </param>
         <param>
-          <type>host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const</type>
+          <type>DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const</type>
           <declname>spline_coef</declname>
         </param>
         <briefdescription>
@@ -447,20 +529,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="183" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="183" bodyend="188"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="214" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="214" bodyend="219"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineEvaluator_1a77ed6f49904a63ed1e64d9dd870af494" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>double</type>
-        <definition>double PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_dim_2</definition>
-        <argsstring>(Coord&lt; DimR, DimTheta &gt; coord_eval, host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const spline_coef) const</argsstring>
+      <memberdef kind="function" id="classPolarSplineEvaluator_1a7f2f29034650857c7e012727847a021a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION double</type>
+        <definition>KOKKOS_FUNCTION double PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_dim_2</definition>
+        <argsstring>(Coord&lt; DimR, DimTheta &gt; coord_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef) const</argsstring>
         <name>deriv_dim_2</name>
         <qualifiedname>PolarSplineEvaluator::deriv_dim_2</qualifiedname>
         <param>
-          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1aa879b12728771565d1e10a6591b49db0" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf99dc8e8d1141f1881627a6e5218791" kindref="member">DimTheta</ref> &gt;</type>
+          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a28af43552a7d886407b473a5e96dc9b6" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf7cf00f2f8d1a1f600c08bd721a1302" kindref="member">DimTheta</ref> &gt;</type>
           <declname>coord_eval</declname>
         </param>
         <param>
-          <type>host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const</type>
+          <type>DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const</type>
           <declname>spline_coef</declname>
         </param>
         <briefdescription>
@@ -490,20 +572,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="202" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="202" bodyend="207"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="233" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="233" bodyend="238"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineEvaluator_1a45ac2b26c53a2d899388086e17a8e498" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>double</type>
-        <definition>double PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_1_and_2</definition>
-        <argsstring>(Coord&lt; DimR, DimTheta &gt; coord_eval, host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const spline_coef) const</argsstring>
+      <memberdef kind="function" id="classPolarSplineEvaluator_1af7e609a313b6c893cfeedfb75040caf5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION double</type>
+        <definition>KOKKOS_FUNCTION double PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_1_and_2</definition>
+        <argsstring>(Coord&lt; DimR, DimTheta &gt; coord_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef) const</argsstring>
         <name>deriv_1_and_2</name>
         <qualifiedname>PolarSplineEvaluator::deriv_1_and_2</qualifiedname>
         <param>
-          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1aa879b12728771565d1e10a6591b49db0" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf99dc8e8d1141f1881627a6e5218791" kindref="member">DimTheta</ref> &gt;</type>
+          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a28af43552a7d886407b473a5e96dc9b6" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf7cf00f2f8d1a1f600c08bd721a1302" kindref="member">DimTheta</ref> &gt;</type>
           <declname>coord_eval</declname>
         </param>
         <param>
-          <type>host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const</type>
+          <type>DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const</type>
           <declname>spline_coef</declname>
         </param>
         <briefdescription>
@@ -533,29 +615,29 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="220" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="220" bodyend="225"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="251" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="251" bodyend="256"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineEvaluator_1a6ebe4552d5285de3bc7b04d624f39130" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineEvaluator_1a1cf77ee2d864f4a46fbee5134c273fa0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class Domain</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_dim_1</definition>
-        <argsstring>(DField&lt; Domain, Kokkos::HostSpace &gt; const spline_eval, ConstField&lt; Coord&lt; DimR, DimTheta &gt;, Domain, Kokkos::HostSpace &gt; const coords_eval, host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const spline_coef) const</argsstring>
+        <definition>void PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_dim_1</definition>
+        <argsstring>(DField&lt; Domain, MemorySpace &gt; const spline_eval, ConstField&lt; Coord&lt; DimR, DimTheta &gt;, Domain, MemorySpace &gt; const coords_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef) const</argsstring>
         <name>deriv_dim_1</name>
         <qualifiedname>PolarSplineEvaluator::deriv_dim_1</qualifiedname>
         <param>
-          <type>DField&lt; Domain, Kokkos::HostSpace &gt; const</type>
+          <type>DField&lt; Domain, MemorySpace &gt; const</type>
           <declname>spline_eval</declname>
         </param>
         <param>
-          <type>ConstField&lt; Coord&lt; <ref refid="classPolarSplineEvaluator_1aa879b12728771565d1e10a6591b49db0" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf99dc8e8d1141f1881627a6e5218791" kindref="member">DimTheta</ref> &gt;, Domain, Kokkos::HostSpace &gt; const</type>
+          <type>ConstField&lt; Coord&lt; <ref refid="classPolarSplineEvaluator_1a28af43552a7d886407b473a5e96dc9b6" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf7cf00f2f8d1a1f600c08bd721a1302" kindref="member">DimTheta</ref> &gt;, Domain, MemorySpace &gt; const</type>
           <declname>coords_eval</declname>
         </param>
         <param>
-          <type>host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const</type>
+          <type>DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const</type>
           <declname>spline_coef</declname>
         </param>
         <briefdescription>
@@ -591,29 +673,75 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="239" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="239" bodyend="248"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="270" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="270" bodyend="282"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineEvaluator_1a44f7027a8a988429cd49514cbd3290a6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineEvaluator_1a4749ab3d60fde03d97dc831c418635d8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class Domain</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_dim_2</definition>
-        <argsstring>(DField&lt; Domain, Kokkos::HostSpace &gt; const spline_eval, ConstField&lt; Coord&lt; DimR, DimTheta &gt;, Domain, Kokkos::HostSpace &gt; const coords_eval, host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const spline_coef) const</argsstring>
-        <name>deriv_dim_2</name>
-        <qualifiedname>PolarSplineEvaluator::deriv_dim_2</qualifiedname>
+        <definition>void PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_dim_1</definition>
+        <argsstring>(DField&lt; Domain, MemorySpace &gt; const spline_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef) const</argsstring>
+        <name>deriv_dim_1</name>
+        <qualifiedname>PolarSplineEvaluator::deriv_dim_1</qualifiedname>
         <param>
-          <type>DField&lt; Domain, Kokkos::HostSpace &gt; const</type>
+          <type>DField&lt; Domain, MemorySpace &gt; const</type>
           <declname>spline_eval</declname>
         </param>
         <param>
-          <type>ConstField&lt; Coord&lt; <ref refid="classPolarSplineEvaluator_1aa879b12728771565d1e10a6591b49db0" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf99dc8e8d1141f1881627a6e5218791" kindref="member">DimTheta</ref> &gt;, Domain, Kokkos::HostSpace &gt; const</type>
+          <type>DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const</type>
+          <declname>spline_coef</declname>
+        </param>
+        <briefdescription>
+<para>Get the values of the derivative of the spline function on the first dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">spline_eval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The values of the function evaluated on the domain. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">spline_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The B-splines coefficients of the spline function we want to evaluate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="294" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="294" bodyend="306"/>
+      </memberdef>
+      <memberdef kind="function" id="classPolarSplineEvaluator_1a044a38452e620e2b7fbd0a1398f2b295" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Domain</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_dim_2</definition>
+        <argsstring>(DField&lt; Domain, MemorySpace &gt; const spline_eval, ConstField&lt; Coord&lt; DimR, DimTheta &gt;, Domain, MemorySpace &gt; const coords_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef) const</argsstring>
+        <name>deriv_dim_2</name>
+        <qualifiedname>PolarSplineEvaluator::deriv_dim_2</qualifiedname>
+        <param>
+          <type>DField&lt; Domain, MemorySpace &gt; const</type>
+          <declname>spline_eval</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; Coord&lt; <ref refid="classPolarSplineEvaluator_1a28af43552a7d886407b473a5e96dc9b6" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf7cf00f2f8d1a1f600c08bd721a1302" kindref="member">DimTheta</ref> &gt;, Domain, MemorySpace &gt; const</type>
           <declname>coords_eval</declname>
         </param>
         <param>
-          <type>host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const</type>
+          <type>DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const</type>
           <declname>spline_coef</declname>
         </param>
         <briefdescription>
@@ -649,29 +777,75 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="262" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="262" bodyend="271"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="320" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="320" bodyend="333"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineEvaluator_1a98991c8e4592b36b510a912f28382b50" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineEvaluator_1abc472d423f3387c5bd14f69a9639c358" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class Domain</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_dim_1_and_2</definition>
-        <argsstring>(DField&lt; Domain, Kokkos::HostSpace &gt; const spline_eval, ConstField&lt; Coord&lt; DimR, DimTheta &gt;, Domain, Kokkos::HostSpace &gt; const coords_eval, host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const spline_coef) const</argsstring>
-        <name>deriv_dim_1_and_2</name>
-        <qualifiedname>PolarSplineEvaluator::deriv_dim_1_and_2</qualifiedname>
+        <definition>void PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_dim_2</definition>
+        <argsstring>(DField&lt; Domain, MemorySpace &gt; const spline_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef) const</argsstring>
+        <name>deriv_dim_2</name>
+        <qualifiedname>PolarSplineEvaluator::deriv_dim_2</qualifiedname>
         <param>
-          <type>DField&lt; Domain, Kokkos::HostSpace &gt; const</type>
+          <type>DField&lt; Domain, MemorySpace &gt; const</type>
           <declname>spline_eval</declname>
         </param>
         <param>
-          <type>ConstField&lt; Coord&lt; <ref refid="classPolarSplineEvaluator_1aa879b12728771565d1e10a6591b49db0" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf99dc8e8d1141f1881627a6e5218791" kindref="member">DimTheta</ref> &gt;, Domain, Kokkos::HostSpace &gt; const</type>
+          <type>DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const</type>
+          <declname>spline_coef</declname>
+        </param>
+        <briefdescription>
+<para>Get the values of the derivative of the spline function on the second dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">spline_eval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The values of the function evaluated on the domain. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">spline_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The B-splines coefficients of the spline function we want to evaluate.. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="345" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="345" bodyend="357"/>
+      </memberdef>
+      <memberdef kind="function" id="classPolarSplineEvaluator_1a8da4cba85f71a287df240609fcd5165c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Domain</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_dim_1_and_2</definition>
+        <argsstring>(DField&lt; Domain, MemorySpace &gt; const spline_eval, ConstField&lt; Coord&lt; DimR, DimTheta &gt;, Domain, MemorySpace &gt; const coords_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef) const</argsstring>
+        <name>deriv_dim_1_and_2</name>
+        <qualifiedname>PolarSplineEvaluator::deriv_dim_1_and_2</qualifiedname>
+        <param>
+          <type>DField&lt; Domain, MemorySpace &gt; const</type>
+          <declname>spline_eval</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; Coord&lt; <ref refid="classPolarSplineEvaluator_1a28af43552a7d886407b473a5e96dc9b6" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf7cf00f2f8d1a1f600c08bd721a1302" kindref="member">DimTheta</ref> &gt;, Domain, MemorySpace &gt; const</type>
           <declname>coords_eval</declname>
         </param>
         <param>
-          <type>host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const</type>
+          <type>DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const</type>
           <declname>spline_coef</declname>
         </param>
         <briefdescription>
@@ -707,22 +881,68 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="284" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="284" bodyend="293"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="370" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="370" bodyend="383"/>
+      </memberdef>
+      <memberdef kind="function" id="classPolarSplineEvaluator_1addbf640f50811038d6dbb3fa0ed52ece" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Domain</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_dim_1_and_2</definition>
+        <argsstring>(DField&lt; Domain, MemorySpace &gt; const spline_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef) const</argsstring>
+        <name>deriv_dim_1_and_2</name>
+        <qualifiedname>PolarSplineEvaluator::deriv_dim_1_and_2</qualifiedname>
+        <param>
+          <type>DField&lt; Domain, MemorySpace &gt; const</type>
+          <declname>spline_eval</declname>
+        </param>
+        <param>
+          <type>DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const</type>
+          <declname>spline_coef</declname>
+        </param>
+        <briefdescription>
+<para>Get the values of the cross derivative of the spline function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">spline_eval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The values of the function evaluated on the domain. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">spline_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The B-splines coefficients of the splinefunction we want to evaluate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="394" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="394" bodyend="408"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
-      <memberdef kind="function" id="classPolarSplineEvaluator_1a7cdc364cfd313b74fd775ab5fc0e6f49" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>double</type>
-        <definition>double PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::eval</definition>
-        <argsstring>(Coord&lt; DimR, DimTheta &gt; coord_eval, host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const spline_coef) const</argsstring>
+      <memberdef kind="function" id="classPolarSplineEvaluator_1acc40d8123a5bee19463b7ef44b541f47" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION double</type>
+        <definition>KOKKOS_FUNCTION double PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::eval</definition>
+        <argsstring>(Coord&lt; DimR, DimTheta &gt; coord_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef) const</argsstring>
         <name>eval</name>
         <qualifiedname>PolarSplineEvaluator::eval</qualifiedname>
         <param>
-          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1aa879b12728771565d1e10a6591b49db0" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf99dc8e8d1141f1881627a6e5218791" kindref="member">DimTheta</ref> &gt;</type>
+          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a28af43552a7d886407b473a5e96dc9b6" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf7cf00f2f8d1a1f600c08bd721a1302" kindref="member">DimTheta</ref> &gt;</type>
           <declname>coord_eval</declname>
         </param>
         <param>
-          <type>host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const</type>
+          <type>DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const</type>
           <declname>spline_coef</declname>
         </param>
         <briefdescription>
@@ -731,25 +951,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="296" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="296" bodyend="314"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="411" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="411" bodyend="429"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineEvaluator_1a3524add4d80448d16dc2878315c98643" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineEvaluator_1a6c53185490fc4990bc962eaf3cce178e" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class EvalType</type>
           </param>
         </templateparamlist>
-        <type>double</type>
-        <definition>double PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::eval_no_bc</definition>
-        <argsstring>(Coord&lt; DimR, DimTheta &gt; coord_eval, host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const spline_coef, EvalType const) const</argsstring>
+        <type>KOKKOS_FUNCTION double</type>
+        <definition>KOKKOS_FUNCTION double PolarSplineEvaluator&lt; ExecSpace, MemorySpace, PolarBSplinesType, OuterExtrapolationRule &gt;::eval_no_bc</definition>
+        <argsstring>(Coord&lt; DimR, DimTheta &gt; coord_eval, DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const spline_coef, EvalType const) const</argsstring>
         <name>eval_no_bc</name>
         <qualifiedname>PolarSplineEvaluator::eval_no_bc</qualifiedname>
         <param>
-          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1aa879b12728771565d1e10a6591b49db0" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf99dc8e8d1141f1881627a6e5218791" kindref="member">DimTheta</ref> &gt;</type>
+          <type>Coord&lt; <ref refid="classPolarSplineEvaluator_1a28af43552a7d886407b473a5e96dc9b6" kindref="member">DimR</ref>, <ref refid="classPolarSplineEvaluator_1adf7cf00f2f8d1a1f600c08bd721a1302" kindref="member">DimTheta</ref> &gt;</type>
           <declname>coord_eval</declname>
         </param>
         <param>
-          <type>host_t&lt; DConstField&lt; IdxRange&lt; PolarBSplinesType &gt; &gt; &gt; const</type>
+          <type>DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemorySpace &gt; const</type>
           <declname>spline_coef</declname>
         </param>
         <param>
@@ -761,7 +981,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="317" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="317" bodyend="377"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="432" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="432" bodyend="492"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -772,32 +992,38 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="12" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="13" bodyend="378"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="12" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="13" bodyend="493"/>
     <listofallmembers>
-      <member refid="classPolarSplineEvaluator_1a4fda8acef6472fb27ffe42d078943f26" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>bsplines_type</name></member>
-      <member refid="classPolarSplineEvaluator_1af825f47ac1278302e5dd3ac0d906f09c" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>BSplinesR</name></member>
-      <member refid="classPolarSplineEvaluator_1a66468d51237ba05121d617991da901f3" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>BSplinesTheta</name></member>
-      <member refid="classPolarSplineEvaluator_1ace6e568d7d0ea1accb2fa3496ce6e781" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>continuity</name></member>
-      <member refid="classPolarSplineEvaluator_1a45ac2b26c53a2d899388086e17a8e498" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>deriv_1_and_2</name></member>
-      <member refid="classPolarSplineEvaluator_1a27dbcc355d7f768c3292c4e294331d2c" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>deriv_dim_1</name></member>
-      <member refid="classPolarSplineEvaluator_1a6ebe4552d5285de3bc7b04d624f39130" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>deriv_dim_1</name></member>
-      <member refid="classPolarSplineEvaluator_1a98991c8e4592b36b510a912f28382b50" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>deriv_dim_1_and_2</name></member>
-      <member refid="classPolarSplineEvaluator_1a77ed6f49904a63ed1e64d9dd870af494" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>deriv_dim_2</name></member>
-      <member refid="classPolarSplineEvaluator_1a44f7027a8a988429cd49514cbd3290a6" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>deriv_dim_2</name></member>
-      <member refid="classPolarSplineEvaluator_1aa879b12728771565d1e10a6591b49db0" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>DimR</name></member>
-      <member refid="classPolarSplineEvaluator_1adf99dc8e8d1141f1881627a6e5218791" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>DimTheta</name></member>
-      <member refid="classPolarSplineEvaluator_1a7cdc364cfd313b74fd775ab5fc0e6f49" prot="private" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>eval</name></member>
-      <member refid="classPolarSplineEvaluator_1a3524add4d80448d16dc2878315c98643" prot="private" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>eval_no_bc</name></member>
-      <member refid="classPolarSplineEvaluator_1a908bfc89d300a3fb0ae4be6d791408e7" prot="private" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>m_outer_bc</name></member>
-      <member refid="classPolarSplineEvaluator_1a3ade826f349bae212eb66ece07384989" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>operator()</name></member>
-      <member refid="classPolarSplineEvaluator_1a8a8b46bd3ffc6bcf91913b96f51f2d4c" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>operator()</name></member>
-      <member refid="classPolarSplineEvaluator_1a6d675b7b73943862d1ffb2930f886213" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>operator=</name></member>
-      <member refid="classPolarSplineEvaluator_1ad283c37ae44c6a72f43bf2b6e48d43a8" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>operator=</name></member>
-      <member refid="classPolarSplineEvaluator_1ab875829c2c8dd226e73ad9c88a7fee65" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>PolarSplineEvaluator</name></member>
-      <member refid="classPolarSplineEvaluator_1a8960c721f4ef12c2343fae7c36dae0da" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>PolarSplineEvaluator</name></member>
-      <member refid="classPolarSplineEvaluator_1a13c5887c37f94a933cdd431c122a0124" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>PolarSplineEvaluator</name></member>
-      <member refid="classPolarSplineEvaluator_1a87b7163ab815cc562d0222b1d5dcd27e" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>PolarSplineEvaluator</name></member>
-      <member refid="classPolarSplineEvaluator_1a286fe6663e3004aead728b7d8acb38a9" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>~PolarSplineEvaluator</name></member>
+      <member refid="classPolarSplineEvaluator_1aa25e933b4a8eddf839133cd51f871eb2" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>bsplines_type</name></member>
+      <member refid="classPolarSplineEvaluator_1ab8165cae7e1fa3be087c8f6b81c08cf2" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>BSplinesR</name></member>
+      <member refid="classPolarSplineEvaluator_1a79a1bf83da950ca5110c8cc21fc2afae" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>BSplinesTheta</name></member>
+      <member refid="classPolarSplineEvaluator_1a5d17cee2ba2d4cdf43c1a6095bfa70bb" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>continuity</name></member>
+      <member refid="classPolarSplineEvaluator_1af7e609a313b6c893cfeedfb75040caf5" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>deriv_1_and_2</name></member>
+      <member refid="classPolarSplineEvaluator_1a7fd8ee0b4a74138e37d9a88d7249ae5f" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>deriv_dim_1</name></member>
+      <member refid="classPolarSplineEvaluator_1a1cf77ee2d864f4a46fbee5134c273fa0" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>deriv_dim_1</name></member>
+      <member refid="classPolarSplineEvaluator_1a4749ab3d60fde03d97dc831c418635d8" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>deriv_dim_1</name></member>
+      <member refid="classPolarSplineEvaluator_1a8da4cba85f71a287df240609fcd5165c" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>deriv_dim_1_and_2</name></member>
+      <member refid="classPolarSplineEvaluator_1addbf640f50811038d6dbb3fa0ed52ece" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>deriv_dim_1_and_2</name></member>
+      <member refid="classPolarSplineEvaluator_1a7f2f29034650857c7e012727847a021a" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>deriv_dim_2</name></member>
+      <member refid="classPolarSplineEvaluator_1a044a38452e620e2b7fbd0a1398f2b295" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>deriv_dim_2</name></member>
+      <member refid="classPolarSplineEvaluator_1abc472d423f3387c5bd14f69a9639c358" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>deriv_dim_2</name></member>
+      <member refid="classPolarSplineEvaluator_1a28af43552a7d886407b473a5e96dc9b6" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>DimR</name></member>
+      <member refid="classPolarSplineEvaluator_1adf7cf00f2f8d1a1f600c08bd721a1302" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>DimTheta</name></member>
+      <member refid="classPolarSplineEvaluator_1acc40d8123a5bee19463b7ef44b541f47" prot="private" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>eval</name></member>
+      <member refid="classPolarSplineEvaluator_1a6c53185490fc4990bc962eaf3cce178e" prot="private" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>eval_no_bc</name></member>
+      <member refid="classPolarSplineEvaluator_1a19596349497aef2be0313882417110b3" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>exec_space</name></member>
+      <member refid="classPolarSplineEvaluator_1ab4476121043c5f9ced201f7612d1e5a6" prot="private" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>m_outer_bc</name></member>
+      <member refid="classPolarSplineEvaluator_1a36f07019ff1cd152f91e339aa086de7a" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>memory_space</name></member>
+      <member refid="classPolarSplineEvaluator_1a235b702e90e4366cfac4ff05c287440e" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>operator()</name></member>
+      <member refid="classPolarSplineEvaluator_1a8d3d2469b39c8651f940c9b703f4851b" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>operator()</name></member>
+      <member refid="classPolarSplineEvaluator_1a9b6f13de440331355d3c333ea6812871" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>operator()</name></member>
+      <member refid="classPolarSplineEvaluator_1aaf568a1edaec887e8a0e1b2b389e4ab5" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>operator=</name></member>
+      <member refid="classPolarSplineEvaluator_1a867e9fe8c9af77a6a53718a2afc74dde" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>operator=</name></member>
+      <member refid="classPolarSplineEvaluator_1a0fdd6b4d2a5ddc34c1de0db58bc47cdf" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>PolarSplineEvaluator</name></member>
+      <member refid="classPolarSplineEvaluator_1a22376cadde5fd336efcd7ebf39746694" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>PolarSplineEvaluator</name></member>
+      <member refid="classPolarSplineEvaluator_1aa2a619cb72a26cb365d5273e2347672c" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>PolarSplineEvaluator</name></member>
+      <member refid="classPolarSplineEvaluator_1a30aea2f54b0d9cdeed4abb1bdecd75d4" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>PolarSplineEvaluator</name></member>
+      <member refid="classPolarSplineEvaluator_1a7831775ce23f8c0cc64e36488bf8c2ab" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>~PolarSplineEvaluator</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>
