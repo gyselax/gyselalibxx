@@ -147,7 +147,7 @@ public:
      */
     KOKKOS_FUNCTION double operator()(
             Coord<DimR, DimTheta> coord_eval,
-            DConstField<IdxRange<PolarBSplinesType>> const spline_coef) const
+            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         return eval(coord_eval, spline_coef);
     }
@@ -172,7 +172,7 @@ public:
         ddc::parallel_for_each(
                 exec_space(),
                 get_idx_range(coords_eval),
-                KOKKOS_LAMBDA(IdxEval i) { spline_eval(i) = eval(coords_eval(i), spline_coef); });
+                KOKKOS_CLASS_LAMBDA(IdxEval i) { spline_eval(i) = eval(coords_eval(i), spline_coef); });
     }
 
     /**
@@ -192,7 +192,7 @@ public:
         ddc::parallel_for_each(
                 exec_space(),
                 get_idx_range(spline_eval),
-                KOKKOS_LAMBDA(IdxEval i) {
+                KOKKOS_CLASS_LAMBDA(IdxEval i) {
                     spline_eval(i) = eval(ddc::coordinate(i), spline_coef);
                 });
     }
@@ -274,7 +274,7 @@ public:
         ddc::parallel_for_each(
                 exec_space(),
                 get_idx_range(coords_eval),
-                KOKKOS_LAMBDA(IdxEval i) {
+                KOKKOS_CLASS_LAMBDA(IdxEval i) {
                     spline_eval(i) = eval_no_bc(coords_eval(i), spline_coef, eval_deriv_r_type());
                 });
     }
@@ -297,7 +297,7 @@ public:
         ddc::parallel_for_each(
                 exec_space(),
                 get_idx_range(spline_eval),
-                KOKKOS_LAMBDA(IdxEval i) {
+                KOKKOS_CLASS_LAMBDA(IdxEval i) {
                     spline_eval(i)
                             = eval_no_bc(ddc::coordinate(i), spline_coef, eval_deriv_r_type());
                 });
@@ -324,7 +324,7 @@ public:
         ddc::parallel_for_each(
                 exec_space(),
                 get_idx_range(coords_eval),
-                KOKKOS_LAMBDA(IdxEval i) {
+                KOKKOS_CLASS_LAMBDA(IdxEval i) {
                     spline_eval(i)
                             = eval_no_bc(coords_eval(i), spline_coef, eval_deriv_theta_type());
                 });
@@ -348,7 +348,7 @@ public:
         ddc::parallel_for_each(
                 exec_space(),
                 get_idx_range(spline_eval),
-                KOKKOS_LAMBDA(IdxEval i) {
+                KOKKOS_CLASS_LAMBDA(IdxEval i) {
                     spline_eval(i)
                             = eval_no_bc(ddc::coordinate(i), spline_coef, eval_deriv_theta_type());
                 });
@@ -374,7 +374,7 @@ public:
         ddc::parallel_for_each(
                 exec_space(),
                 get_idx_range(coords_eval),
-                KOKKOS_LAMBDA(IdxEval i) {
+                KOKKOS_CLASS_LAMBDA(IdxEval i) {
                     spline_eval(i)
                             = eval_no_bc(coords_eval(i), spline_coef, eval_deriv_r_theta_type());
                 });
@@ -397,7 +397,7 @@ public:
         ddc::parallel_for_each(
                 exec_space(),
                 get_idx_range(spline_eval),
-                KOKKOS_LAMBDA(IdxEval i) {
+                KOKKOS_CLASS_LAMBDA(IdxEval i) {
                     spline_eval(i) = eval_no_bc(
                             ddc::coordinate(i),
                             spline_coef,
@@ -471,7 +471,7 @@ private:
             jmin_r = Idx<BSplinesR>(continuity + 1);
         }
 
-        host_t<DConstField<IdxRange<BSplinesR, BSplinesTheta>>> spline_coef_2d
+        DConstField<IdxRange<BSplinesR, BSplinesTheta>, MemorySpace> spline_coef_2d
                 = PolarBSplinesType::get_tensor_product_subset(spline_coef);
         IdxRange<BSplinesR, BSplinesTheta> tensor_prod_idx_range = get_idx_range(spline_coef_2d);
         IdxRange<BSplinesTheta> tensor_prod_idx_range_theta(tensor_prod_idx_range);
