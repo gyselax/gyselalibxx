@@ -15,6 +15,8 @@ set(GYSELALIBXX_DEFAULT_CXX_FLAGS "" CACHE STRING "Default flags for C++ specifi
 # Kokkos options
 set(Kokkos_ENABLE_SERIAL ON CACHE BOOL "Allow serial code to run" FORCE)
 set(Kokkos_ENABLE_CUDA ON CACHE BOOL "Activate GPU usage via cuda" FORCE)
+set(Kokkos_ENABLE_CUDA_CONSTEXPR ON CACHE BOOL "" FORCE )
+set(Kokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE ON CACHE BOOL "" FORCE)
 set(Kokkos_ARCH_AMPERE80 ON CACHE BOOL "Indicate that the GPU architecture is A100" FORCE)
 
 # Kokkos Kernels options
