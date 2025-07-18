@@ -9,8 +9,12 @@ fi
 
 SPACK_USER_VERSION="spack-user-4.0.0"
 
-export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-MI250/Configuration.${SPACK_USER_VERSION}"
-export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
+# [TO BE REMOVED BEFORE MERGE]
+export SPACK_USER_PREFIX=/lus/home/CT5/gen2224/tpadioleau/spack-user-install
+export SPACK_USER_CONFIG_PATH=/lus/home/CT5/gen2224/tpadioleau/spack-user-install/configuration
+export SPACK_USER_CACHE_PATH=/lus/home/CT5/gen2224/tpadioleau/spack-user-install/cache
+# export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-MI250/Configuration.${SPACK_USER_VERSION}"
+# export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
 
 module purge
 
@@ -58,25 +62,8 @@ eval -- "$(
         py-pyyaml
 )"
 
-# Due to https://github.com/gyselax/gyselalibxx/pull/198#issuecomment-2943081411
-# we use a different HIP compiler to build dependencies and to build gyselalib. 
-# It is fine except we must unset some environment variables defined by spack's 
-# HIP packages so they do not interfere with HIPCC/clang in the 6.3.3 version.
-# Notably:
-unset ROCM_PATH                  # /opt/rocm-6.1.2
-unset HIP_CLANG_PATH             # /opt/rocm-6.1.2/llvm/bin
-unset HSA_PATH                   # /opt/rocm-6.1.2
-unset ROCMINFO_PATH              # /opt/rocm-6.1.2
-unset DEVICE_LIB_PATH            # /opt/rocm-6.1.2/amdgcn/bitcode
-unset HIP_DEVICE_LIB_PATH        # /opt/rocm-6.1.2/amdgcn/bitcode
-unset LLVM_PATH                  # /opt/rocm-6.1.2/llvm
-unset COMGR_PATH                 # /opt/rocm-6.1.2
-unset HIPCC_COMPILE_FLAGS_APPEND # --rocm-path=/opt/rocm-6.1.2 --gcc-toolchain=/opt/rh/gcc-toolset-13/root/usr --rocm-path=/opt/rocm-6.1.2 --gcc-toolchain=/opt/rh/gcc-toolset-13/root/usr
-unset HIPFLAGS                   # --gcc-toolchain=/opt/rh/gcc-toolset-13/root/usr --gcc-toolchain=/opt/rh/gcc-toolset-13/root/usr
-
 module load cpe/24.07
 module load craype-x86-trento craype-accel-amd-gfx90a
-# NOTE: Force 6.3.3 due to startup failures (https://github.com/gyselax/gyselalibxx/pull/198#issuecomment-2943081411)
 module load PrgEnv-gnu-amd amd-mixed/6.3.3
 
 module list

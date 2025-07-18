@@ -1,0 +1,772 @@
+compilers:
+######### Cray #################################################################
+## Cray based compiler for genoa.
+  - compiler:
+      spec: cce@18.0.0.genoa
+      paths:
+        cc: cc
+        cxx: CC
+        f77: ftn
+        fc: ftn
+      flags:
+        cflags: '-Wno-error=implicit-function-declaration -Wl,--undefined-version'
+        # cxxflags: '-Wno-error=implicit-function-declaration'
+        # cppflags: '-Wno-error=implicit-function-declaration'
+      operating_system: rhel8
+      target: x86_64
+      modules:
+        - cpe/24.07
+        - craype-x86-genoa
+        - cce/18.0.0
+        - craype/2.7.32
+        - cray-dsmml/0.3.0
+        - libfabric/1.23.1
+        - craype-network-ofi
+        - cray-mpich/8.1.30
+        - cray-libsci/24.07.0
+        - PrgEnv-cray/8.5.0
+      environment: {}
+      extra_rpaths: []
+#  - compiler:
+#      spec: cce@17.0.0.genoa
+#      paths:
+#        cc: cc
+#        cxx: CC
+#        f77: ftn
+#        fc: ftn
+#      flags:
+#        cflags: '-Wno-error=implicit-function-declaration -Wl,--undefined-version'
+#        # cxxflags: '-Wno-error=implicit-function-declaration'
+#        # cppflags: '-Wno-error=implicit-function-declaration'
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/23.12
+#        - craype-x86-genoa
+#        - cce/17.0.0
+#        - craype/2.7.30
+#        - cray-dsmml/0.2.2
+#        - libfabric/1.15.2.0
+#        - craype-network-ofi
+#        - cray-mpich/8.1.28
+#        - cray-libsci/23.12.5
+#        - PrgEnv-cray/8.5.0
+#      environment: {}
+#      extra_rpaths: []
+#  - compiler:
+#      spec: cce@16.0.0.genoa
+#      paths:
+#        cc: cc
+#        cxx: CC
+#        f77: ftn
+#        fc: ftn
+#      flags:
+#        cflags: '-Wno-error=implicit-function-declaration -Wl,--undefined-version'
+#        # cxxflags: '-Wno-error=implicit-function-declaration'
+#        # cppflags: '-Wno-error=implicit-function-declaration'
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/23.12
+#        - craype-x86-genoa
+#        - craype/2.7.30
+#        - cray-dsmml/0.2.2
+#        - libfabric/1.15.2.0
+#        - craype-network-ofi
+#        - PrgEnv-cray/8.5.0
+#        - cce/16.0.0
+#        - cray-libsci/23.12.5
+#        - cray-mpich/8.1.28
+#      environment: {}
+#      extra_rpaths: []
+#  - compiler:
+#      spec: cce@15.0.0.genoa
+#      paths:
+#        cc: cc
+#        cxx: CC
+#        f77: ftn
+#        fc: ftn
+#      flags: {}
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/23.12
+#        - craype-x86-genoa
+#        - craype/2.7.30
+#        - cray-dsmml/0.2.2
+#        - libfabric/1.15.2.0
+#        - craype-network-ofi
+#        - PrgEnv-cray/8.5.0
+#        - cray-libsci/23.05.1.4
+#        - cce/15.0.0
+#        - cray-mpich/8.1.24
+#      environment: {}
+#      extra_rpaths: []
+
+## Cray based compiler for trento + mi250 (gfx90a).
+  - compiler:
+      spec: cce@18.0.0.mi250
+      paths:
+        cc: cc
+        cxx: CC
+        f77: ftn
+        fc: ftn
+      flags:
+        cflags: '-Wno-error=implicit-function-declaration -Wl,--undefined-version'
+      operating_system: rhel8
+      target: x86_64
+      modules:
+        - cpe/24.07
+        - craype-accel-amd-gfx90a
+        - craype-x86-trento
+        - cce/18.0.0
+        - craype/2.7.32
+        - cray-dsmml/0.3.0
+        - libfabric/1.23.1
+        - craype-network-ofi
+        - cray-mpich/8.1.30
+        - cray-libsci/24.07.0
+        - PrgEnv-cray/8.5.0
+        - amd-mixed/6.3.3
+      environment: {}
+      extra_rpaths: []
+
+# ## Cray based compiler for genoa + mi300(gfx942).
+#   - compiler:
+#       spec: cce@18.0.0.mi300
+#       paths:
+#         cc: cc
+#         cxx: CC
+#         f77: ftn
+#         fc: ftn
+#       flags:
+#         cflags: '-Wno-error=implicit-function-declaration -Wl,--undefined-version'
+#       operating_system: rhel8
+#       target: x86_64
+#       modules:
+#         - cpe/24.07
+#         - craype-accel-amd-gfx942
+#         - craype-x86-genoa
+#         - cce/18.0.0
+#         - craype/2.7.32
+#         - cray-dsmml/0.3.0
+#         - libfabric/1.23.1
+#         - craype-network-ofi
+#         - cray-mpich/8.1.30
+#         - cray-libsci/24.07.0
+#         - PrgEnv-cray/8.5.0
+#         - amd-mixed/6.3.3
+#       environment: {}
+#       extra_rpaths: []
+
+#  - compiler:
+#      spec: cce@17.0.0.mi250
+#      paths:
+#        cc: cc
+#        cxx: CC
+#        f77: ftn
+#        fc: ftn
+#      flags:
+#        cflags: '-Wno-error=implicit-function-declaration -Wl,--undefined-version'
+#        # cxxflags: '-Wno-error=implicit-function-declaration'
+#        # cppflags: '-Wno-error=implicit-function-declaration'
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/23.12
+#        - craype-accel-amd-gfx90a
+#        - craype-x86-trento
+#        - cce/17.0.0
+#        - craype/2.7.30
+#        - cray-dsmml/0.2.2
+#        - libfabric/1.15.2.0
+#        - craype-network-ofi
+#        - cray-mpich/8.1.28
+#        - cray-libsci/23.12.5
+#        - PrgEnv-cray/8.5.0
+#        - amd-mixed/5.7.1
+#      environment: {}
+#      extra_rpaths: []
+#  - compiler:
+#      spec: cce@16.0.0.mi250
+#      paths:
+#        cc: cc
+#        cxx: CC
+#        f77: ftn
+#        fc: ftn
+#      flags:
+#        cflags: '-Wno-error=implicit-function-declaration -Wl,--undefined-version'
+#        # cxxflags: '-Wno-error=implicit-function-declaration'
+#        # cppflags: '-Wno-error=implicit-function-declaration'
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/23.12
+#        - craype-accel-amd-gfx90a
+#        - craype-x86-trento
+#        - craype/2.7.30
+#        - cray-dsmml/0.2.2
+#        - libfabric/1.15.2.0
+#        - craype-network-ofi
+#        - PrgEnv-cray/8.5.0
+#        - cce/16.0.0
+#        - cray-libsci/23.12.5
+#        - cray-mpich/8.1.28
+#        - amd-mixed/5.7.1
+#      environment: {}
+#      extra_rpaths: []
+
+########## GNU ##################################################################
+## GNU based compiler for all cpus.
+  - compiler:
+      spec: gcc@13.2.1.generic
+      paths:
+        cc: /opt/rh/gcc-toolset-13/root/usr/bin/gcc
+        cxx: /opt/rh/gcc-toolset-13/root/usr/bin/g++
+        f77: /opt/rh/gcc-toolset-13/root/usr/bin/gfortran
+        fc: /opt/rh/gcc-toolset-13/root/usr/bin/gfortran
+      flags: {}
+      operating_system: rhel8
+      target: x86_64
+      modules:
+        - cpe/24.07
+        - craype-x86-rome
+        - gcc-native/13.2
+        - craype/2.7.32
+        - cray-dsmml/0.3.0
+        - libfabric/1.23.1
+        - craype-network-ofi
+        - cray-mpich/8.1.30
+        - cray-libsci/24.07.0
+        - PrgEnv-gnu/8.5.0
+      environment: {}
+      extra_rpaths: []
+#  - compiler:
+#      spec: gcc@13.2.0.generic
+#      paths:
+#        cc: cc
+#        cxx: CC
+#        f77: ftn
+#        fc: ftn
+#      flags: {}
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/23.12
+#        - craype-x86-rome
+#        - gcc-native/12.1
+#        - craype/2.7.30
+#        - cray-dsmml/0.2.2
+#        - libfabric/1.20.1
+#        - craype-network-ofi
+#        - cray-mpich/8.1.28
+#        - cray-libsci/23.12.5
+#        - PrgEnv-gnu/8.5.0
+#        - gcc/13.2.0
+#      environment: {}
+#      extra_rpaths: []
+#  - compiler:
+#      spec: gcc@12.1.generic
+#      paths:
+#        cc: gcc
+#        cxx: g++
+#        f77: gfortran
+#        fc: gfortran
+#      flags: {}
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/23.12
+#        - craype-x86-rome
+#        - gcc-native/12.1
+#        - craype/2.7.30
+#        - cray-dsmml/0.2.2
+#        - libfabric/1.15.2.0
+#        - craype-network-ofi
+#        - cray-mpich/8.1.28
+#        - cray-libsci/23.12.5
+#        - PrgEnv-gnu/8.5.0
+#      environment: {}
+#      extra_rpaths: []
+#  - compiler:
+#      spec: gcc@11.2.generic
+#      paths:
+#        cc: gcc
+#        cxx: g++
+#        f77: gfortran
+#        fc: gfortran
+#      flags: {}
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/23.12
+#        - craype-x86-rome
+#        - craype/2.7.30
+#        - cray-dsmml/0.2.2
+#        - libfabric/1.15.2.0
+#        - craype-network-ofi
+#        - PrgEnv-gnu/8.5.0
+#        - gcc/11.2.0
+#        - cray-libsci/23.05.1.4
+#        - cray-mpich/8.1.24
+#      environment: {}
+#      extra_rpaths: []
+
+## GNU based compiler for genoa.
+  - compiler:
+      spec: gcc@13.2.1.genoa
+      paths:
+        cc: cc
+        cxx: CC
+        f77: ftn
+        fc: ftn
+      flags: {}
+      operating_system: rhel8
+      target: x86_64
+      modules:
+        - cpe/24.07
+        - craype-x86-genoa
+        - gcc-native/13.2
+        - craype/2.7.32
+        - cray-dsmml/0.3.0
+        - libfabric/1.23.1
+        - craype-network-ofi
+        - cray-mpich/8.1.30
+        - cray-libsci/24.07.0
+        - PrgEnv-gnu/8.5.0
+      environment: {}
+      extra_rpaths: []
+#  - compiler:
+#      spec: gcc@13.2.0.genoa
+#      paths:
+#        cc: cc
+#        cxx: CC
+#        f77: ftn
+#        fc: ftn
+#      flags:
+#        # Required for some crappy or old fortran code.
+#        fflags: '-fallow-argument-mismatch'
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/23.12
+#        - craype-x86-genoa
+#        - gcc-native/12.1
+#        - craype/2.7.30
+#        - cray-dsmml/0.2.2
+#        - libfabric/1.20.1
+#        - craype-network-ofi
+#        - cray-mpich/8.1.28
+#        - cray-libsci/23.12.5
+#        - PrgEnv-gnu/8.5.0
+#        - gcc/13.2.0
+#      environment: {}
+#      extra_rpaths: []
+#  - compiler:
+#      spec: gcc@12.1.genoa
+#      paths:
+#        # Not using the wrappers for backward compatibility with our older
+#        # stacks.
+#        cc: gcc
+#        cxx: g++
+#        f77: gfortran
+#        fc: gfortran
+#      flags: {}
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/23.12
+#        # The compiler does not recognize znver4.
+#        - craype-x86-rome
+#        - gcc-native/12.1
+#        - craype/2.7.30
+#        - cray-dsmml/0.2.2
+#        - libfabric/1.15.2.0
+#        - craype-network-ofi
+#        - cray-mpich/8.1.28
+#        - cray-libsci/23.12.5
+#        - PrgEnv-gnu/8.5.0
+#      environment: {}
+#      extra_rpaths: []
+#  - compiler:
+#      spec: gcc@11.2.genoa
+#      paths:
+#        cc: gcc
+#        cxx: g++
+#        f77: gfortran
+#        fc: gfortran
+#      flags: {}
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/23.12
+#        # The compiler does not recognize znver4.
+#        - craype-x86-rome
+#        - craype/2.7.30
+#        - cray-dsmml/0.2.2
+#        - libfabric/1.15.2.0
+#        - craype-network-ofi
+#        - PrgEnv-gnu/8.5.0
+#        - gcc/11.2.0
+#        - cray-libsci/23.05.1.4
+#        - cray-mpich/8.1.24
+#      environment: {}
+#      extra_rpaths: []
+
+## GNU based compiler for trento + ROCM used for mi250 (gfx90a).
+  - compiler:
+      spec: gcc@13.2.1.mi250
+      paths:
+        cc: cc
+        cxx: CC
+        f77: ftn
+        fc: ftn
+      flags: {}
+      operating_system: rhel8
+      target: x86_64
+      modules:
+        - cpe/24.07
+        - craype-accel-amd-gfx90a
+        - craype-x86-trento
+        - gcc-native/13.2
+        - craype/2.7.32
+        - cray-dsmml/0.3.0
+        - libfabric/1.23.1
+        - craype-network-ofi
+        - cray-mpich/8.1.30
+        - cray-libsci/24.07.0
+        - PrgEnv-gnu/8.5.0
+        - amd-mixed/6.3.3
+      environment: {}
+      extra_rpaths: []
+  - compiler:
+      spec: gcc@13.2.1.mi250.raw
+      paths:
+        cc: /opt/rh/gcc-toolset-13/root/usr/bin/gcc
+        cxx: /opt/rh/gcc-toolset-13/root/usr/bin/g++
+        f77: /opt/rh/gcc-toolset-13/root/usr/bin/gfortran
+        fc: /opt/rh/gcc-toolset-13/root/usr/bin/gfortran
+      flags: {}
+      operating_system: rhel8
+      target: x86_64
+      modules:
+        - cpe/24.07
+        - craype-accel-amd-gfx90a
+        - craype-x86-trento
+        - gcc-native/13.2
+        - craype/2.7.32
+        - cray-dsmml/0.3.0
+        - libfabric/1.23.1
+        - craype-network-ofi
+        - cray-mpich/8.1.30
+        - cray-libsci/24.07.0
+        - PrgEnv-gnu/8.5.0
+        - amd-mixed/6.3.3
+      environment: {}
+      extra_rpaths: []
+# ## GNU based compiler for genoa + ROCM used for mi300 (gfx942).
+#   - compiler:
+#       spec: gcc@13.2.mi300
+#       paths:
+#         cc: cc
+#         cxx: CC
+#         f77: ftn
+#         fc: ftn
+#       flags: {}
+#       operating_system: rhel8
+#       target: x86_64
+#       modules:
+#         - cpe/24.07
+#         - craype-accel-amd-gfx942
+#         - craype-x86-genoa
+#         - gcc-native/13.2
+#         - craype/2.7.32
+#         - cray-dsmml/0.3.0
+#         - libfabric/1.23.1
+#         - craype-network-ofi
+#         - cray-mpich/8.1.30
+#         - cray-libsci/24.07.0
+#         - PrgEnv-gnu/8.5.0
+#         - amd-mixed/6.3.3
+#       environment: {}
+#       extra_rpaths: []
+#  - compiler:
+#      spec: gcc@13.2.0.mi250
+#      paths:
+#        cc: cc
+#        cxx: CC
+#        f77: ftn
+#        fc: ftn
+#      flags: {}
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/23.12
+#        - craype-accel-amd-gfx90a
+#        - craype-x86-trento
+#        - gcc-native/12.1
+#        - craype/2.7.30
+#        - cray-dsmml/0.2.2
+#        - libfabric/1.20.1
+#        - craype-network-ofi
+#        - cray-mpich/8.1.28
+#        - cray-libsci/23.12.5
+#        - PrgEnv-gnu/8.5.0
+#        - gcc/13.2.0
+#        - amd-mixed/5.7.1
+#      environment: {}
+#      extra_rpaths: []
+#  - compiler:
+#      spec: gcc@12.1.mi250
+#      paths:
+#        cc: gcc
+#        cxx: g++
+#        f77: gfortran
+#        fc: gfortran
+#      flags: {}
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/23.12
+#        - craype-accel-amd-gfx90a
+#        - craype-x86-trento
+#        - gcc-native/12.1
+#        - craype/2.7.30
+#        - cray-dsmml/0.2.2
+#        - libfabric/1.15.2.0
+#        - craype-network-ofi
+#        - cray-mpich/8.1.28
+#        - cray-libsci/23.12.5
+#        - PrgEnv-gnu/8.5.0
+#        - amd-mixed/5.7.1
+#      environment: {}
+#      extra_rpaths: []
+#  - compiler:
+#      spec: gcc@11.2.mi250
+#      paths:
+#        cc: gcc
+#        cxx: g++
+#        f77: gfortran
+#        fc: gfortran
+#      flags: {}
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/23.12
+#        - craype-accel-amd-gfx90a
+#        - craype-x86-trento
+#        - craype/2.7.30
+#        - cray-dsmml/0.2.2
+#        - libfabric/1.15.2.0
+#        - craype-network-ofi
+#        - PrgEnv-gnu/8.5.0
+#        - gcc/11.2.0
+#        - cray-libsci/23.05.1.4
+#        - cray-mpich/8.1.24
+#        - amd-mixed/5.7.1
+#      environment: {}
+#      extra_rpaths: []
+
+########## ROCM #################################################################
+## ROCM based compiler for genoa.
+  - compiler:
+      spec: rocmcc@6.3.3.genoa
+      paths:
+        cc: cc
+        cxx: CC
+        f77: ftn
+        fc: ftn
+      flags: {}
+      operating_system: rhel8
+      target: x86_64
+      modules:
+        - cpe/24.07
+        - craype-x86-genoa
+        - amd/6.3.3
+        - craype/2.7.32
+        - cray-dsmml/0.3.0
+        - libfabric/1.23.1
+        - craype-network-ofi
+        - cray-mpich/8.1.30
+        - cray-libsci/24.07.0
+        - PrgEnv-amd/8.5.0
+      environment: {}
+      extra_rpaths: []
+#  - compiler:
+#      spec: rocmcc@5.7.1.genoa
+#      paths:
+#        cc: cc
+#        cxx: CC
+#        f77: ftn
+#        fc: ftn
+#      flags: {}
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/23.12
+#        - craype-x86-genoa
+#        - amd/5.7.1
+#        - craype/2.7.30
+#        - cray-dsmml/0.2.2
+#        - libfabric/1.15.2.0
+#        - craype-network-ofi
+#        - cray-mpich/8.1.28
+#        - cray-libsci/23.12.5
+#        - PrgEnv-amd/8.5.0
+#      environment: {}
+#      extra_rpaths: []
+
+## ROCM based compiler for trento + mi250 (gfx90a).
+  - compiler:
+      spec: rocmcc@6.3.3.mi250
+      paths:
+        cc: cc
+        cxx: CC
+        f77: ftn
+        fc: ftn
+      flags: {}
+      operating_system: rhel8
+      target: x86_64
+      modules:
+        - cpe/24.07
+        - craype-accel-amd-gfx90a
+        - craype-x86-trento
+        - amd/6.3.3
+        - craype/2.7.32
+        - cray-dsmml/0.3.0
+        - libfabric/1.23.1
+        - craype-network-ofi
+        - cray-mpich/8.1.30
+        - cray-libsci/24.07.0
+        - PrgEnv-amd/8.5.0
+      environment: {}
+      extra_rpaths: []
+#  - compiler:
+#      spec: rocmcc@5.7.1.mi250
+#      paths:
+#        cc: cc
+#        cxx: CC
+#        f77: ftn
+#        fc: ftn
+#      flags: {}
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/23.12
+#        - craype-accel-amd-gfx90a
+#        - craype-x86-trento
+#        - amd/5.7.1
+#        - craype/2.7.30
+#        - cray-dsmml/0.2.2
+#        - libfabric/1.15.2.0
+#        - craype-network-ofi
+#        - cray-mpich/8.1.28
+#        - cray-libsci/23.12.5
+#        - PrgEnv-amd/8.5.0
+#      environment: {}
+#      extra_rpaths: []
+
+########## AOCC #################################################################
+## AOCC based compiler for genoa.
+#  - compiler:
+#      spec: aocc@3.2.0.genoa
+#      paths:
+#        cc: cc
+#        cxx: CC
+#        f77: ftn
+#        fc: ftn
+#      flags: {}
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/24.07
+#        # The compiler does not recognize znver4.
+#        - craype-x86-rome
+#        - aocc/3.2.0
+#        - craype/2.7.32
+#        - cray-dsmml/0.3.0
+#        - libfabric/1.20.1
+#        - craype-network-ofi
+#        - cray-mpich/8.1.30
+#        - cray-libsci/24.07.0
+#        - PrgEnv-aocc/8.5.0
+#      environment: {}
+#      extra_rpaths: []
+#  - compiler:
+#      spec: aocc@3.2.0.genoa
+#      paths:
+#        cc: cc
+#        cxx: CC
+#        f77: ftn
+#        fc: ftn
+#      flags: {}
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/23.12
+#        # The compiler does not recognize znver4.
+#        - craype-x86-rome
+#        - aocc/3.2.0
+#        - craype/2.7.30
+#        - cray-dsmml/0.2.2
+#        - libfabric/1.15.2.0
+#        - craype-network-ofi
+#        - cray-mpich/8.1.26
+#        - cray-libsci/23.05.1.4
+#        - PrgEnv-aocc/8.5.0
+#      environment: {}
+#      extra_rpaths: []
+
+## AOCC based compiler for trento + ROCM used for mi250 (gfx90a).
+#  - compiler:
+#      spec: aocc@3.2.0.mi250
+#      paths:
+#        cc: cc
+#        cxx: CC
+#        f77: ftn
+#        fc: ftn
+#      flags: {}
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/24.07
+#        - craype-accel-amd-gfx90a
+#        - craype-x86-trento
+#        - aocc/3.2.0
+#        - craype/2.7.32
+#        - cray-dsmml/0.3.0
+#        - libfabric/1.20.1
+#        - craype-network-ofi
+#        - cray-mpich/8.1.30
+#        - cray-libsci/24.07.0
+#        - PrgEnv-amd/8.5.0
+#        - PrgEnv-aocc/8.5.0
+#        - amd-mixed/6.3.3
+#      environment: {}
+#      extra_rpaths: []
+#  - compiler:
+#      spec: aocc@3.2.0.mi250
+#      paths:
+#        cc: cc
+#        cxx: CC
+#        f77: ftn
+#        fc: ftn
+#      flags: {}
+#      operating_system: rhel8
+#      target: x86_64
+#      modules:
+#        - cpe/23.12
+#        - craype-accel-amd-gfx90a
+#        - craype-x86-trento
+#        - aocc/3.2.0
+#        - craype/2.7.30
+#        - cray-dsmml/0.2.2
+#        - libfabric/1.15.2.0
+#        - craype-network-ofi
+#        - cray-mpich/8.1.26
+#        - cray-libsci/23.05.1.4
+#        - PrgEnv-aocc/8.5.0
+#        - amd-mixed/5.7.1
+#      environment: {}
+#      extra_rpaths: []
+

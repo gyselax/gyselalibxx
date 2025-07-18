@@ -26,7 +26,7 @@ spack:
     - py-xarray
     - py-pyyaml
   - compilers:
-    - gcc@13.2.1.mi250
+    - gcc@13.2.1.mi250.raw
   - architectures:
     - arch=linux-rhel8-zen3
   specs:
