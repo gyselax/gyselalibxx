@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed memory error in `PolarSplineFEMPoissonLikeSolver`.
 - Remove non-parallelisable loop in `PolarSplineFEMPoissonLikeSolver::init_nnz_per_line`.
 - Remove use of `std::cyl_bessel_j` which is not available in libc++.
+- Fix `mi250.hipcc.adastra.spack` toolchain.
 
 ### Changed
 
