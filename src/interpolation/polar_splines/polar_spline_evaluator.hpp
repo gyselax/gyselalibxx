@@ -172,7 +172,9 @@ public:
         ddc::parallel_for_each(
                 exec_space(),
                 get_idx_range(coords_eval),
-                KOKKOS_CLASS_LAMBDA(IdxEval i) { spline_eval(i) = eval(coords_eval(i), spline_coef); });
+                KOKKOS_CLASS_LAMBDA(IdxEval i) {
+                    spline_eval(i) = eval(coords_eval(i), spline_coef);
+                });
     }
 
     /**

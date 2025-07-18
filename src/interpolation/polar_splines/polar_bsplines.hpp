@@ -199,8 +199,8 @@ public:
      * can be written as a product of a radial and a poloidal basis spline.
      */
     template <class ElementType, class DDim, class MemorySpace>
-    static KOKKOS_FUNCTION Field<ElementType, tensor_product_idx_range_type, MemorySpace> get_tensor_product_subset(
-            Field<ElementType, IdxRange<DDim>, MemorySpace> coeffs)
+    static KOKKOS_FUNCTION Field<ElementType, tensor_product_idx_range_type, MemorySpace>
+    get_tensor_product_subset(Field<ElementType, IdxRange<DDim>, MemorySpace> coeffs)
     {
         static_assert(std::is_base_of_v<PolarBSplines, DDim>);
         IdxRange<DDim> current_idx_range(get_idx_range(coeffs));
