@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Change interface of `EdgeTransformation::search_for_match` to return an `out_of_bounds_idx` instead of a boolean.
-- Uniformize toolchains.
+- Uniformise toolchains.
 
 ### Deprecated
 
