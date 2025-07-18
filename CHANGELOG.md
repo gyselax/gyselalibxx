@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Change interface of `EdgeTransformation::search_for_match` to return an `out_of_bounds_idx` instead of a boolean.
 - Change template parameters of `PolarSplineEvaluator` to add execution and memory space information.
+- Allow `get_idx_range` to be called from a GPU execution space.
 
 ### Deprecated
 
