@@ -14,7 +14,7 @@ set(KokkosKernels_ENABLE_COMPONENT_BLAS ON CACHE BOOL "")
 set(KokkosKernels_ADD_DEFAULT_ETI OFF CACHE BOOL "")
 
 # Compiler options
-set(CMAKE_CXX_FLAGS "-Wall -Wno-sign-compare")
+set(CMAKE_CXX_FLAGS_INIT "-Wall -Wno-sign-compare")
 
 # Activate/deactivate parts of the code
 set(BUILD_BENCHMARKS ON)
