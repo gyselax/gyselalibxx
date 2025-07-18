@@ -207,7 +207,7 @@ void test_polar_spline_eval_gpu()
 {
     using CoordR = Coord<R>;
     using CoordTheta = Coord<Theta>;
-    using SplineMem = host_t<DFieldMem<IdxRange<BSplines>>>;
+    using SplineMem = DFieldMem<IdxRange<BSplines>>;
     using Evaluator = PolarSplineEvaluator<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,

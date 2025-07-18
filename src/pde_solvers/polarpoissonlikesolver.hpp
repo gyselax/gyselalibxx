@@ -262,7 +262,7 @@ private:
             m_polar_spline_evaluator;
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>
             m_gko_matrix;
-    mutable PolarSplineMemRTheta m_phi_spline_coef;
+    mutable host_t<PolarSplineMemRTheta> m_phi_spline_coef;
     Kokkos::View<double**, Kokkos::LayoutRight> m_x_init;
 
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
@@ -1010,7 +1010,10 @@ public:
 
         (*this)(rhs, get_field(m_phi_spline_coef));
         CoordFieldMemRTheta coords_eval_alloc(get_idx_range(phi));
-        m_polar_spline_evaluator(phi, get_const_field(m_phi_spline_coef));
+        auto phi_spline_coef_device = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(m_phi_spline_coef));
+        m_polar_spline_evaluator(phi, get_const_field(phi_spline_coef_device));
     }
 
     /**
