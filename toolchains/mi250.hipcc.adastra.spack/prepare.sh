@@ -25,10 +25,6 @@ module purge
 module load "${SPACK_USER_VERSION}"
 module list
 
-# Install compilers and packages
-cp ${TOOLCHAIN_ROOT_DIRECTORY}/compilers.yaml ${SPACK_USER_CONFIG_PATH}/
-cp ${TOOLCHAIN_ROOT_DIRECTORY}/packages.yaml ${SPACK_USER_CONFIG_PATH}/
-
 which spack
 spack debug report
 
