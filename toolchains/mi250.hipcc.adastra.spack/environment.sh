@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [ "${BASH_SOURCE[0]}" -ef "$0" ]
+then
+    echo "This script must be sourced not executed."
+    echo ". $0"
+    exit 1
+fi
+
 SPACK_USER_VERSION="spack-user-4.0.0"
 
 export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-MI250/Configuration.${SPACK_USER_VERSION}"
