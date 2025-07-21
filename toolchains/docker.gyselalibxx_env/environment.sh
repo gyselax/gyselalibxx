@@ -1,3 +1,4 @@
+#!/bin/bash
 
 if [ "${BASH_SOURCE[0]}" -ef "$0" ]
 then
