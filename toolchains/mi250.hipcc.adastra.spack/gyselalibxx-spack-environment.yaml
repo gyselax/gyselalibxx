@@ -21,7 +21,6 @@ spack:
           - libfabric/1.23.1
           - craype-network-ofi
           - cray-mpich/8.1.30
-          - cray-libsci/24.07.0
           - PrgEnv-gnu/8.5.0
           - amd-mixed/6.3.3
         environment: {}
@@ -78,43 +77,17 @@ spack:
           - cray-mpich
         # version 1.0.0 seems to struggle to find cray-libsci/24.07 library, here the error message, at install time :
         # Error: NoLibrariesError: Unable to recursively locate cray-libsci libraries in /opt/cray/pe/libsci/24.07.0/CRAYCLANG/18.0/x86_64
-        blas: [cray-libsci, openblas, acc_cray-libsci]
-        lapack: [cray-libsci, openblas, acc_cray-libsci]
-        blacs: [cray-libsci, acc_cray-libsci]
-        scalapack: [cray-libsci]
-        netlib-scalapack: [cray-libsci]
-        mkl: [cray-libsci]
-        fftw:
-          - cray-fftw
+        blas: [openblas]
+        lapack: [openblas]
+        fftw-api:
+          - fftw
         opencl:
           - rocm-opencl@6.3.3
         opencl-runtime:
           - rocm-opencl-runtime@6.3.3
       require:
-        # GPU parameter propagation:
-        # - Avoids handling cray-mpich special case in each MPI package
-        # - Uses package constraint to automatically propagate GPU variants
-        # For MI250X:
         - one_of: [amdgpu_target=gfx90a, amdgpu_target=gfx942]
           when: +rocm
-        - spec: +rocm amdgpu_target=gfx90a ^cray-mpich+rocm amdgpu_target=gfx90a
-          when: +rocm amdgpu_target=gfx90a ^cray-mpich
-        # For MI300A:
-        - spec: +rocm amdgpu_target=gfx942 ^cray-mpich+rocm amdgpu_target=gfx942
-          when: +rocm amdgpu_target=gfx942 ^cray-mpich
-          # TODO(Etienne M): Fix all packages requiring MPICH + rocm to effectively
-          # propagate the variant.
-    acc_cray-libsci:
-      buildable: false
-      version: [24.07.0]
-      externals:
-        - spec: acc_cray-libsci@24.07.0
-          modules:
-            - cray-libsci_acc/24.07.0
-            # The GPU version depends on the CPU version.
-            - cray-libsci/24.07.0
-            - amd-mixed/6.3.3
-            - craype-accel-amd-gfx90a
     binutils:
       version: [2.38]
       externals:
@@ -129,30 +102,6 @@ spack:
         - spec: cray-mpich@8.1.30
           modules:
             - cray-mpich/8.1.30
-    cray-libsci:
-      buildable: false
-      version: [23.12.5, 24.07.0]
-      externals:
-        - spec: cray-libsci@23.12.5
-          modules:
-            - cray-libsci/23.12.5
-        - spec: cray-libsci@24.07.0  # When i tried with this one I have this warning : Warning: Extracted path from     module does not exist [module=cray-libsci/24.07.0, path=module]
-          modules:
-            - cray-libsci/24.07.0
-    cray-fftw:
-      buildable: false
-      version: [3.3.10.8]
-      externals:
-        - spec: cray-fftw@3.3.10.8
-          modules:
-            - cray-fftw/3.3.10.8
-    cuda:
-      buildable: false
-      version:
-        - '11.7'
-      externals:
-        - spec: cuda@11.7 arch=linux-rhel8-zen3
-          prefix: /opt/software/nvidia/hpc_sdk/2022_227/Linux_x86_64/22.7/cuda/11.7
     hip:
       buildable: false
       externals:
@@ -240,11 +189,6 @@ spack:
         - prefix: /opt/software/libfabric/1.23.1
           spec: libfabric@1.23.1
       version: [1.23.1]
-    llvm:
-      buildable: false
-      externals:
-        - prefix: /opt/rocm-6.3.3/llvm
-          spec: llvm@17.0.0
     llvm-amdgpu:
       buildable: false
       externals:
@@ -365,46 +309,12 @@ spack:
         - prefix: /opt/rocm-6.3.3/roctracer
           spec: roctracer-dev@6.3.3
       version: [6.3.3]
-    slurm:
-      buildable: false
-      externals:
-        - prefix: /usr
-          spec: slurm@23.02.6
-    amber:
-      version: [24-gpu, 24-cpu]
-      externals:
-        - spec: amber@24-gpu
-          prefix: /opt/software/gaia-external/GPU/AMBER/amber-24/cpe-24.07/amber_build/amber24
-          buildable: false
-        - spec: amber@24-cpu
-          prefix: /opt/software/gaia-external/CPU/AMBER/amber-24-plumed/cpe-24.07/amber24/
-          buildable: false
     julia:
       buildable: false
       version: [1.10.0]
       externals:
         - spec: julia@1.10.0
           prefix: /opt/software/gaia-external/CPU/julia-1-10-0/julia-1.10.0
-    linaro-forge:
-      buildable: true
-      version: [24.1.3]
-      externals:
-        - spec: linaro-forge@24.1.3
-          prefix: /opt/software/gaia-external/GPU/linaro-forge/24.1.3
-    paraview:
-      buildable: true
-      version: [5.13.0, 5.13.0-osmesa]
-      externals:
-        - spec: paraview@5.13.0%gcc
-          prefix: /opt/software/gaia-external/GPU/ParaView/ParaView-5.13.0-RC1-MPI-Linux-Python3.10-x86_64/
-        - spec: paraview@5.13.0-osmesa%gcc
-          prefix: /opt/software/gaia-external/GPU/ParaView/ParaView-5.13.0-osmesa-MPI-Linux-Python3.10-x86_64/
-    visit:
-      buildable: true
-      version: [3.4.2]
-      externals:
-        - spec: visit@3.4.2%gcc
-          prefix: /opt/software/gaia-external/GPU/Visit/visit3_4_2.linux-x86_64/
   modules:
     default:
       roots: {}
