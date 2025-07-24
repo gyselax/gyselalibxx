@@ -124,7 +124,7 @@ public:
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> logger = std::nullopt,
-            std::optional<int> preconditioner_max_block_size = 1u)
+            std::optional<int> preconditioner_max_block_size = std::nullopt)
         : MatrixBatch<ExecSpace>(batch_values.extent(0), nnz_per_row.size() - 1)
         , m_max_iter(max_iter.value_or(1000))
         , m_tol(res_tol.value_or(1e-15))
