@@ -54,7 +54,7 @@
 | Type | Name |
 | ---: | :--- |
 |  void | [**check\_conv**](#function-check_conv) (int const batch\_size, double const tol, std::shared\_ptr&lt; const gko::Executor &gt; gko\_exec, std::shared\_ptr&lt; const gko::batch::log::BatchConvergence&lt; double &gt; &gt; logger) <br>_A function for checking convergence. It loops over the batch and checks the if residual is lower or equal to the prescribed tolerance._  |
-|  unsigned int | [**default\_preconditionner\_max\_block\_size**](#function-default_preconditionner_max_block_size) () noexcept<br> |
+|  unsigned int | [**default\_preconditioner\_max\_block\_size**](#function-default_preconditioner_max_block_size) () noexcept<br> |
 |  void | [**save\_logger**](#function-save_logger) (std::fstream & log\_file, int const batch\_index, std::unique\_ptr&lt; sparse\_type &gt; matrix, Kokkos::View&lt; double \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const x\_view, Kokkos::View&lt; double \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const b\_view, std::shared\_ptr&lt; const gko::log::Convergence&lt; double &gt; &gt; logger, double const tol) <br>_A function to save convergence data using the logger._  |
 |  void | [**save\_logger**](#function-save_logger) (std::fstream & log\_file, std::shared\_ptr&lt; batch\_sparse\_type &gt; batch\_matrix, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const x\_view, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const b\_view, std::shared\_ptr&lt; const gko::batch::log::BatchConvergence&lt; double &gt; &gt; logger, double const tol) <br>_A function to save convergence data using the logger._  |
 |  auto | [**to\_gko\_multivector**](#function-to_gko_multivector) (std::shared\_ptr&lt; const gko::Executor &gt; const & gko\_exec, KokkosViewType const & view) <br>_A function to convert a 2D Kokkos view into a ginkgo multivector structure._  |
@@ -125,11 +125,11 @@ inline void check_conv (
 
 
 
-### function default\_preconditionner\_max\_block\_size 
+### function default\_preconditioner\_max\_block\_size 
 
 ```C++
 template<class ExecSpace>
-unsigned int default_preconditionner_max_block_size () noexcept
+unsigned int default_preconditioner_max_block_size () noexcept
 ```
 
 

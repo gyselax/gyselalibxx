@@ -565,6 +565,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Remove non-parallelisable loop in <code>PolarSplineFEMPoissonLikeSolver::init_nnz_per_line</code>.</li>
 <li>Remove use of <code>std::cyl_bessel_j</code> which is not available in libc++.</li>
 <li>Fix <code>mi250.hipcc.adastra.spack</code> toolchain.</li>
+<li>Fix uninitialised values being used as an initial guess for the result of the matrix equation in <code>PolarSplineFEMPoissonLikeSolver</code>.</li>
 </ul>
 <h3 id="changed">Changed</h3>
 <ul>
@@ -573,6 +574,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Change template parameters of <code>PolarSplineEvaluator</code> to add execution and memory space information.</li>
 <li>Allow <code>get_idx_range</code> to be called from a GPU execution space.</li>
 <li>Uniformise toolchains.</li>
+<li>Allow batch CSR convergence parameters to be specified in the constructor of <code>PolarSplineFEMPoissonLikeSolver</code>.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <h3 id="removed">Removed</h3>

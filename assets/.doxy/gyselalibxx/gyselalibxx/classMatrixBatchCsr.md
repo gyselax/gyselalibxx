@@ -82,8 +82,8 @@ See [MatrixBatch](classMatrixBatch.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**MatrixBatchCsr**](#function-matrixbatchcsr-12) (const int batch\_size, const int mat\_size, const int nnz\_per\_system, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditionner\_max\_block\_size=1u) <br>_The constructor for_ [_**MatrixBatchCsr**_](classMatrixBatchCsr.md) _class._ |
-|   | [**MatrixBatchCsr**](#function-matrixbatchcsr-22) (Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, ExecSpace &gt; batch\_values, Kokkos::View&lt; int \*, Kokkos::LayoutRight, ExecSpace &gt; cols\_idx, Kokkos::View&lt; int \*, Kokkos::LayoutRight, ExecSpace &gt; nnz\_per\_row, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditionner\_max\_block\_size=1u) <br>_Constructor for_ [_**MatrixBatchCsr**_](classMatrixBatchCsr.md) _class._ |
+|   | [**MatrixBatchCsr**](#function-matrixbatchcsr-12) (const int batch\_size, const int mat\_size, const int nnz\_per\_system, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt) <br>_The constructor for_ [_**MatrixBatchCsr**_](classMatrixBatchCsr.md) _class._ |
+|   | [**MatrixBatchCsr**](#function-matrixbatchcsr-22) (Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, ExecSpace &gt; batch\_values, Kokkos::View&lt; int \*, Kokkos::LayoutRight, ExecSpace &gt; cols\_idx, Kokkos::View&lt; int \*, Kokkos::LayoutRight, ExecSpace &gt; nnz\_per\_row, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt) <br>_Constructor for_ [_**MatrixBatchCsr**_](classMatrixBatchCsr.md) _class._ |
 |  std::tuple&lt; Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, ExecSpace &gt;, Kokkos::View&lt; int \*, Kokkos::LayoutRight, ExecSpace &gt;, Kokkos::View&lt; int \*, Kokkos::LayoutRight, ExecSpace &gt; &gt; | [**get\_batch\_csr**](#function-get_batch_csr) () <br>_A function to update information about values,indices and the number of non-zero per row for the whole batch. Data is managed by Kokkos Views stored on the host._  |
 |  double | [**norm**](#function-norm) (int batch\_idx) const<br>_A function returning the norm of a matrix located at batch\_idx._  |
 | virtual void | [**setup\_solver**](#function-setup_solver) () <br>_Perform a pre-process operation on the solver. Must be called after filling the matrix._  |
@@ -194,7 +194,7 @@ inline explicit MatrixBatchCsr::MatrixBatchCsr (
     std::optional< int > max_iter=std::nullopt,
     std::optional< double > res_tol=std::nullopt,
     std::optional< bool > logger=std::nullopt,
-    std::optional< int > preconditionner_max_block_size=1u
+    std::optional< int > preconditioner_max_block_size=std::nullopt
 ) 
 ```
 
@@ -211,7 +211,7 @@ inline explicit MatrixBatchCsr::MatrixBatchCsr (
 * `max_iter` maximal number of iterations for the solver, default 1000. 
 * `res_tol` residual tolerance parameter, to ensure convergence. Be careful! the relative residual provided here, will be used as "implicit residual" in ginkgo solver. 
 * `logger` boolean parameter for saving log information such residual and interactions count. 
-* `preconditionner_max_block_size` An optional parameter used to define the maximum size of a block 
+* `preconditioner_max_block_size` An optional parameter used to define the maximum size of a block 
 
 
 
@@ -233,7 +233,7 @@ inline explicit MatrixBatchCsr::MatrixBatchCsr (
     std::optional< int > max_iter=std::nullopt,
     std::optional< double > res_tol=std::nullopt,
     std::optional< bool > logger=std::nullopt,
-    std::optional< int > preconditionner_max_block_size=1u
+    std::optional< int > preconditioner_max_block_size=std::nullopt
 ) 
 ```
 
@@ -250,7 +250,7 @@ inline explicit MatrixBatchCsr::MatrixBatchCsr (
 * `max_iter` maximal number of iterations for the solver, default 1000. 
 * `res_tol` residual tolerance parameter, to ensure convergence. Be careful! The residual provided here, set as relative residual, will be used as "implicit residual" in ginkgo solver. Default value is set to 1e-15. 
 * `logger` boolean parameter to save logger information. Default value false. 
-* `preconditionner_max_block_size` An optional parameter used to define the maximum size of a block 
+* `preconditioner_max_block_size` An optional parameter used to define the maximum size of a block 
 
 
 

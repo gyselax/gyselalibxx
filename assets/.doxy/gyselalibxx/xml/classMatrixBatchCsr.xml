@@ -116,12 +116,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" line="64" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" bodystart="64" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classMatrixBatchCsr_1abc0579fe1f019eca3f3aa8def72d6a35" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classMatrixBatchCsr_1a7e58087bc1606a197db7a0ff1da9f166" prot="private" static="no" mutable="no">
         <type>unsigned int</type>
-        <definition>unsigned int MatrixBatchCsr&lt; ExecSpace, Solver &gt;::m_preconditionner_max_block_size</definition>
+        <definition>unsigned int MatrixBatchCsr&lt; ExecSpace, Solver &gt;::m_preconditioner_max_block_size</definition>
         <argsstring></argsstring>
-        <name>m_preconditionner_max_block_size</name>
-        <qualifiedname>MatrixBatchCsr::m_preconditionner_max_block_size</qualifiedname>
+        <name>m_preconditioner_max_block_size</name>
+        <qualifiedname>MatrixBatchCsr::m_preconditioner_max_block_size</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -132,10 +132,10 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classMatrixBatchCsr_1a3b7820a5bd67452226c742f08cf37544" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classMatrixBatchCsr_1a175fff48ad63f6f78891560e41ec9722" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
         <definition>MatrixBatchCsr&lt; ExecSpace, Solver &gt;::MatrixBatchCsr</definition>
-        <argsstring>(const int batch_size, const int mat_size, const int nnz_per_system, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditionner_max_block_size=1u)</argsstring>
+        <argsstring>(const int batch_size, const int mat_size, const int nnz_per_system, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditioner_max_block_size=std::nullopt)</argsstring>
         <name>MatrixBatchCsr</name>
         <qualifiedname>MatrixBatchCsr::MatrixBatchCsr</qualifiedname>
         <param>
@@ -167,8 +167,8 @@
         </param>
         <param>
           <type>std::optional&lt; int &gt;</type>
-          <declname>preconditionner_max_block_size</declname>
-          <defval>1u</defval>
+          <declname>preconditioner_max_block_size</declname>
+          <defval>std::nullopt</defval>
         </param>
         <briefdescription>
 <para>The constructor for <ref refid="classMatrixBatchCsr" kindref="compound">MatrixBatchCsr</ref> class. </para>
@@ -224,7 +224,7 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="in">preconditionner_max_block_size</parametername>
+<parametername direction="in">preconditioner_max_block_size</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>An optional parameter used to define the maximum size of a block </para>
@@ -237,10 +237,10 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" line="80" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_csr.hpp" bodystart="80" bodyend="101"/>
       </memberdef>
-      <memberdef kind="function" id="classMatrixBatchCsr_1aeb35ced3575736b99178638e1a21aa71" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classMatrixBatchCsr_1a9809f1cc5790fb48d953aafccaf2f261" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
         <definition>MatrixBatchCsr&lt; ExecSpace, Solver &gt;::MatrixBatchCsr</definition>
-        <argsstring>(Kokkos::View&lt; double **, Kokkos::LayoutRight, ExecSpace &gt; batch_values, Kokkos::View&lt; int *, Kokkos::LayoutRight, ExecSpace &gt; cols_idx, Kokkos::View&lt; int *, Kokkos::LayoutRight, ExecSpace &gt; nnz_per_row, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditionner_max_block_size=1u)</argsstring>
+        <argsstring>(Kokkos::View&lt; double **, Kokkos::LayoutRight, ExecSpace &gt; batch_values, Kokkos::View&lt; int *, Kokkos::LayoutRight, ExecSpace &gt; cols_idx, Kokkos::View&lt; int *, Kokkos::LayoutRight, ExecSpace &gt; nnz_per_row, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditioner_max_block_size=std::nullopt)</argsstring>
         <name>MatrixBatchCsr</name>
         <qualifiedname>MatrixBatchCsr::MatrixBatchCsr</qualifiedname>
         <param>
@@ -272,8 +272,8 @@
         </param>
         <param>
           <type>std::optional&lt; int &gt;</type>
-          <declname>preconditionner_max_block_size</declname>
-          <defval>1u</defval>
+          <declname>preconditioner_max_block_size</declname>
+          <defval>std::nullopt</defval>
         </param>
         <briefdescription>
 <para>Constructor for <ref refid="classMatrixBatchCsr" kindref="compound">MatrixBatchCsr</ref> class. </para>
@@ -329,7 +329,7 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="in">preconditionner_max_block_size</parametername>
+<parametername direction="in">preconditioner_max_block_size</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>An optional parameter used to define the maximum size of a block </para>
@@ -540,13 +540,13 @@
       <member refid="classMatrixBatchCsr_1a06d8671618226f37e29927733d416b7b" prot="public" virt="non-virtual"><scope>MatrixBatchCsr</scope><name>get_batch_csr</name></member>
       <member refid="classMatrixBatchCsr_1a8cb5b8649db36df0d7ad844478d04ae6" prot="private" virt="non-virtual"><scope>MatrixBatchCsr</scope><name>m_batch_matrix_csr</name></member>
       <member refid="classMatrixBatchCsr_1a3d851cee5113b8cf5240559486ae0acd" prot="private" virt="non-virtual"><scope>MatrixBatchCsr</scope><name>m_max_iter</name></member>
-      <member refid="classMatrixBatchCsr_1abc0579fe1f019eca3f3aa8def72d6a35" prot="private" virt="non-virtual"><scope>MatrixBatchCsr</scope><name>m_preconditionner_max_block_size</name></member>
+      <member refid="classMatrixBatchCsr_1a7e58087bc1606a197db7a0ff1da9f166" prot="private" virt="non-virtual"><scope>MatrixBatchCsr</scope><name>m_preconditioner_max_block_size</name></member>
       <member refid="classMatrixBatchCsr_1a04498eed7a9221aa732f902b7b3565f7" prot="private" virt="non-virtual"><scope>MatrixBatchCsr</scope><name>m_solver</name></member>
       <member refid="classMatrixBatchCsr_1aece8c7cc2b4f3c1356c0710ba2e17fcd" prot="private" virt="non-virtual"><scope>MatrixBatchCsr</scope><name>m_tol</name></member>
       <member refid="classMatrixBatchCsr_1aaf56ee0a630adb9cd49228eafec731cb" prot="private" virt="non-virtual"><scope>MatrixBatchCsr</scope><name>m_with_logger</name></member>
       <member refid="classMatrixBatch_1aa36e5c69da8c424b977aae7ac390715c" prot="protected" virt="non-virtual"><scope>MatrixBatchCsr</scope><name>MatrixBatch</name></member>
-      <member refid="classMatrixBatchCsr_1a3b7820a5bd67452226c742f08cf37544" prot="public" virt="non-virtual"><scope>MatrixBatchCsr</scope><name>MatrixBatchCsr</name></member>
-      <member refid="classMatrixBatchCsr_1aeb35ced3575736b99178638e1a21aa71" prot="public" virt="non-virtual"><scope>MatrixBatchCsr</scope><name>MatrixBatchCsr</name></member>
+      <member refid="classMatrixBatchCsr_1a175fff48ad63f6f78891560e41ec9722" prot="public" virt="non-virtual"><scope>MatrixBatchCsr</scope><name>MatrixBatchCsr</name></member>
+      <member refid="classMatrixBatchCsr_1a9809f1cc5790fb48d953aafccaf2f261" prot="public" virt="non-virtual"><scope>MatrixBatchCsr</scope><name>MatrixBatchCsr</name></member>
       <member refid="classMatrixBatchCsr_1a6eca63a806974a62a376ae271d6fb14d" prot="public" virt="non-virtual"><scope>MatrixBatchCsr</scope><name>norm</name></member>
       <member refid="classMatrixBatchCsr_1ad037e66bbdfdfa674e678f49d36f78df" prot="public" virt="virtual"><scope>MatrixBatchCsr</scope><name>setup_solver</name></member>
       <member refid="classMatrixBatch_1a62a55966b021f64906841fb38764dbc0" prot="public" virt="non-virtual"><scope>MatrixBatchCsr</scope><name>size</name></member>

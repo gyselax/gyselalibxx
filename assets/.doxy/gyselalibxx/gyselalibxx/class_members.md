@@ -814,7 +814,7 @@
 * **MatrixBatchCsr** ([**MatrixBatchCsr**](classMatrixBatchCsr.md))
 * **m\_batch\_matrix\_csr** ([**MatrixBatchCsr**](classMatrixBatchCsr.md))
 * **m\_max\_iter** ([**MatrixBatchCsr**](classMatrixBatchCsr.md), [**MatrixBatchEll**](classMatrixBatchEll.md))
-* **m\_preconditionner\_max\_block\_size** ([**MatrixBatchCsr**](classMatrixBatchCsr.md))
+* **m\_preconditioner\_max\_block\_size** ([**MatrixBatchCsr**](classMatrixBatchCsr.md))
 * **m\_solver** ([**MatrixBatchCsr**](classMatrixBatchCsr.md), [**MatrixBatchEll**](classMatrixBatchEll.md))
 * **m\_tol** ([**MatrixBatchCsr**](classMatrixBatchCsr.md), [**MatrixBatchEll**](classMatrixBatchEll.md))
 * **m\_with\_logger** ([**MatrixBatchCsr**](classMatrixBatchCsr.md), [**MatrixBatchEll**](classMatrixBatchEll.md))

@@ -630,7 +630,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-polarsplinefempoissonlikesolver"><strong>PolarSplineFEMPoissonLikeSolver</strong></a> (ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, Mapping const &amp; mapping, SplineRThetaEvaluatorNullBound const &amp; spline_evaluator) <br><em>Instantiate a polar Poisson-like solver using FEM with B-splines.</em></td>
+<td style="text-align: left;"><a href="#function-polarsplinefempoissonlikesolver"><strong>PolarSplineFEMPoissonLikeSolver</strong></a> (ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, Mapping const &amp; mapping, SplineRThetaEvaluatorNullBound const &amp; spline_evaluator, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; batch_solver_logger=std::nullopt, std::optional&lt; int &gt; preconditioner_max_block_size=std::nullopt) <br><em>Instantiate a polar Poisson-like solver using FEM with B-splines.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -738,7 +738,11 @@ inline PolarSplineFEMPoissonLikeSolver::PolarSplineFEMPoissonLikeSolver (
     ConstSpline2D coeff_alpha,
     ConstSpline2D coeff_beta,
     Mapping const &amp; mapping,
-    SplineRThetaEvaluatorNullBound const &amp; spline_evaluator
+    SplineRThetaEvaluatorNullBound const &amp; spline_evaluator,
+    std::optional&lt; int &gt; max_iter=std::nullopt,
+    std::optional&lt; double &gt; res_tol=std::nullopt,
+    std::optional&lt; bool &gt; batch_solver_logger=std::nullopt,
+    std::optional&lt; int &gt; preconditioner_max_block_size=std::nullopt
 ) 
 </code></pre>
 <p>The equation we are studying:</p>
@@ -749,7 +753,11 @@ inline PolarSplineFEMPoissonLikeSolver::PolarSplineFEMPoissonLikeSolver (
 <li><code>coeff_alpha</code> The spline representation of the <span class="arithmatex">\(\alpha\)</span> function in the definition of the Poisson-like equation. </li>
 <li><code>coeff_beta</code> The spline representation of the <span class="arithmatex">\(\beta\)</span> function in the definition of the Poisson-like equation. </li>
 <li><code>mapping</code> The mapping from the logical domain to the physical domain where the equation is defined. </li>
-<li><code>spline_evaluator</code> An evaluator for evaluating 2D splines on <span class="arithmatex">\((r,\theta)\)</span>.</li>
+<li><code>spline_evaluator</code> An evaluator for evaluating 2D splines on <span class="arithmatex">\((r,\theta)\)</span>. </li>
+<li><code>max_iter</code> The maximum number of iterations possible for the batched CSR solver. </li>
+<li><code>res_tol</code> The residual tolerance for the batched CSR solver. Be careful! the relative residual provided here, will be used as "implicit residual" in ginkgo solver. </li>
+<li><code>batch_solver_logger</code> Indicates whether log information such as the residual and the number of iterations should be monitored. </li>
+<li><code>preconditioner_max_block_size</code> The maximum size of the Jacobi preconditioner used by the batched CSR solver.</li>
 </ul>
 <p><strong>Template parameters:</strong></p>
 <ul>

@@ -41,7 +41,7 @@
 * **dgetrs\_** ([**matrix\_dense.cpp**](matrix__dense_8cpp.md))
 * **dpttrf\_** ([**matrix\_pds\_tridiag.cpp**](matrix__pds__tridiag_8cpp.md))
 * **dpttrs\_** ([**matrix\_pds\_tridiag.cpp**](matrix__pds__tridiag_8cpp.md))
-* **default\_preconditionner\_max\_block\_size** ([**matrix\_utils.hpp**](matrix__utils_8hpp.md))
+* **default\_preconditioner\_max\_block\_size** ([**matrix\_utils.hpp**](matrix__utils_8hpp.md))
 
 
 ## e

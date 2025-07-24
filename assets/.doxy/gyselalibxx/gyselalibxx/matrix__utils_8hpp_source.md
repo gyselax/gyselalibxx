@@ -193,7 +193,7 @@ void save_logger(
 }
 
 template <class ExecSpace>
-unsigned int default_preconditionner_max_block_size() noexcept
+unsigned int default_preconditioner_max_block_size() noexcept
 {
 #ifdef KOKKOS_ENABLE_SERIAL
     if (std::is_same_v<ExecSpace, Kokkos::Serial>) {

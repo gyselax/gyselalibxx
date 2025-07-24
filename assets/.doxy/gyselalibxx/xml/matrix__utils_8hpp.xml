@@ -498,16 +498,16 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_utils.hpp" line="173" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_utils.hpp" bodystart="173" bodyend="228"/>
       </memberdef>
-      <memberdef kind="function" id="matrix__utils_8hpp_1a82b44fa2979c3175fc1e3142e0a30945" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="matrix__utils_8hpp_1ab2f162a409cd3fb05e84086be0eed934" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class ExecSpace</type>
           </param>
         </templateparamlist>
         <type>unsigned int</type>
-        <definition>unsigned int default_preconditionner_max_block_size</definition>
+        <definition>unsigned int default_preconditioner_max_block_size</definition>
         <argsstring>() noexcept</argsstring>
-        <name>default_preconditionner_max_block_size</name>
+        <name>default_preconditioner_max_block_size</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -707,7 +707,7 @@
 <codeline lineno="228"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="229"><highlight class="normal"></highlight></codeline>
 <codeline lineno="230"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ExecSpace&gt;</highlight></codeline>
-<codeline lineno="231"><highlight class="normal"></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>default_preconditionner_max_block_size()<sp/>noexcept</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>default_preconditioner_max_block_size()<sp/>noexcept</highlight></codeline>
 <codeline lineno="232"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="233"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>KOKKOS_ENABLE_SERIAL</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;ExecSpace,<sp/>Kokkos::Serial&gt;)<sp/>{</highlight></codeline>

@@ -1797,9 +1797,9 @@
     <member refid="classMatrixBatchCsr_1a3d851cee5113b8cf5240559486ae0acd" kind="variable"><name>m_max_iter</name></member>
     <member refid="classMatrixBatchCsr_1aece8c7cc2b4f3c1356c0710ba2e17fcd" kind="variable"><name>m_tol</name></member>
     <member refid="classMatrixBatchCsr_1aaf56ee0a630adb9cd49228eafec731cb" kind="variable"><name>m_with_logger</name></member>
-    <member refid="classMatrixBatchCsr_1abc0579fe1f019eca3f3aa8def72d6a35" kind="variable"><name>m_preconditionner_max_block_size</name></member>
-    <member refid="classMatrixBatchCsr_1a3b7820a5bd67452226c742f08cf37544" kind="function"><name>MatrixBatchCsr</name></member>
-    <member refid="classMatrixBatchCsr_1aeb35ced3575736b99178638e1a21aa71" kind="function"><name>MatrixBatchCsr</name></member>
+    <member refid="classMatrixBatchCsr_1a7e58087bc1606a197db7a0ff1da9f166" kind="variable"><name>m_preconditioner_max_block_size</name></member>
+    <member refid="classMatrixBatchCsr_1a175fff48ad63f6f78891560e41ec9722" kind="function"><name>MatrixBatchCsr</name></member>
+    <member refid="classMatrixBatchCsr_1a9809f1cc5790fb48d953aafccaf2f261" kind="function"><name>MatrixBatchCsr</name></member>
     <member refid="classMatrixBatchCsr_1a06d8671618226f37e29927733d416b7b" kind="function"><name>get_batch_csr</name></member>
     <member refid="classMatrixBatchCsr_1ad037e66bbdfdfa674e678f49d36f78df" kind="function"><name>setup_solver</name></member>
     <member refid="classMatrixBatchCsr_1a5d7f76fc2c25fb4867b50181779b4c3c" kind="function"><name>solve</name></member>
@@ -2321,7 +2321,7 @@
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a70bacb50d6ea8e14e8d918520b54e0ee" kind="variable"><name>m_phi_spline_coef</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a47c4cc4cf0fff9cf9cfc174e19e1930d" kind="variable"><name>m_x_init</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a43b7466804454a28b1dda74afcb77a9f" kind="variable"><name>m_batch_idx</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a6e4d95b7b1ce10cf43579ff77b9ea88b" kind="function"><name>PolarSplineFEMPoissonLikeSolver</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeSolver_1ad239b2f33e6a3268ce783acc78935aff" kind="function"><name>PolarSplineFEMPoissonLikeSolver</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1ae5645f014d26559165955e51746f3e70" kind="function"><name>compute_singular_elements</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a36be84f08a082b52a73f5134b8f1a8e2" kind="function"><name>compute_overlapping_singular_elements</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a161e772a03b980ad5cb19bdeb6b02925" kind="function"><name>compute_stencil_elements</name></member>
@@ -3921,7 +3921,7 @@
     <member refid="matrix__utils_8hpp_1a0c50800ce61fde0cd5a6fa04cdd73052" kind="function"><name>write_log</name></member>
     <member refid="matrix__utils_8hpp_1ab585ada0b7a692fe0815972a0645df56" kind="function"><name>save_logger</name></member>
     <member refid="matrix__utils_8hpp_1ad3d9ddb187638669541fea7bec43dbe9" kind="function"><name>save_logger</name></member>
-    <member refid="matrix__utils_8hpp_1a82b44fa2979c3175fc1e3142e0a30945" kind="function"><name>default_preconditionner_max_block_size</name></member>
+    <member refid="matrix__utils_8hpp_1ab2f162a409cd3fb05e84086be0eed934" kind="function"><name>default_preconditioner_max_block_size</name></member>
   </compound>
   <compound refid="impilayout_8hpp" kind="file"><name>impilayout.hpp</name>
   </compound>

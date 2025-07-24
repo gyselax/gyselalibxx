@@ -73,7 +73,7 @@ _Define a polar PDE solver for a Poisson-like equation._ [More...](#detailed-des
 
 | Type | Name |
 | ---: | :--- |
-|   | [**PolarSplineFEMPoissonLikeSolver**](#function-polarsplinefempoissonlikesolver) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator) <br>_Instantiate a polar Poisson-like solver using FEM with B-splines._  |
+|   | [**PolarSplineFEMPoissonLikeSolver**](#function-polarsplinefempoissonlikesolver) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; batch\_solver\_logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt) <br>_Instantiate a polar Poisson-like solver using FEM with B-splines._  |
 |  void | [**compute\_overlapping\_singular\_elements**](#function-compute_overlapping_singular_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const values\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const col\_idx\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const nnz\_per\_row\_csr\_host) <br>_Computes the matrix element corresponding to singular elements overlapping with regular grid._  |
 |  void | [**compute\_singular\_elements**](#function-compute_singular_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const values\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const col\_idx\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const nnz\_per\_row\_csr\_host) <br>_Computes the matrix element corresponding to the singular area. ie: the region enclosing the O-point._  |
 |  void | [**compute\_stencil\_elements**](#function-compute_stencil_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const values\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const col\_idx\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const nnz\_per\_row\_csr\_host) <br>_Computes the matrix element corresponding to the regular stencil ie: out to singular or overlapping areas._  |
@@ -211,7 +211,11 @@ inline PolarSplineFEMPoissonLikeSolver::PolarSplineFEMPoissonLikeSolver (
     ConstSpline2D coeff_alpha,
     ConstSpline2D coeff_beta,
     Mapping const & mapping,
-    SplineRThetaEvaluatorNullBound const & spline_evaluator
+    SplineRThetaEvaluatorNullBound const & spline_evaluator,
+    std::optional< int > max_iter=std::nullopt,
+    std::optional< double > res_tol=std::nullopt,
+    std::optional< bool > batch_solver_logger=std::nullopt,
+    std::optional< int > preconditioner_max_block_size=std::nullopt
 ) 
 ```
 
@@ -234,7 +238,11 @@ The equation we are studying:
 * `coeff_alpha` The spline representation of the \(\alpha\) function in the definition of the Poisson-like equation. 
 * `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
-* `spline_evaluator` An evaluator for evaluating 2D splines on \((r,\theta)\).
+* `spline_evaluator` An evaluator for evaluating 2D splines on \((r,\theta)\). 
+* `max_iter` The maximum number of iterations possible for the batched CSR solver. 
+* `res_tol` The residual tolerance for the batched CSR solver. Be careful! the relative residual provided here, will be used as "implicit residual" in ginkgo solver. 
+* `batch_solver_logger` Indicates whether log information such as the residual and the number of iterations should be monitored. 
+* `preconditioner_max_block_size` The maximum size of the Jacobi preconditioner used by the batched CSR solver.
 
 
 

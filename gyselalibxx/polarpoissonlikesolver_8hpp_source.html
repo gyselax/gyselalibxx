@@ -746,7 +746,11 @@ public:
             ConstSpline2D coeff_alpha,
             ConstSpline2D coeff_beta,
             Mapping const&amp; mapping,
-            SplineRThetaEvaluatorNullBound const&amp; spline_evaluator)
+            SplineRThetaEvaluatorNullBound const&amp; spline_evaluator,
+            std::optional&lt;int&gt; max_iter = std::nullopt,
+            std::optional&lt;double&gt; res_tol = std::nullopt,
+            std::optional&lt;bool&gt; batch_solver_logger = std::nullopt,
+            std::optional&lt;int&gt; preconditioner_max_block_size = std::nullopt)
         : m_nbasis_r(ddc::discrete_space&lt;BSplinesR&gt;().nbasis() - m_n_overlap_cells - 1)
         , m_nbasis_theta(ddc::discrete_space&lt;BSplinesTheta&gt;().nbasis())
         , m_matrix_size(ddc::discrete_space&lt;PolarBSplinesRTheta&gt;().nbasis() - m_nbasis_theta)
@@ -911,9 +915,15 @@ public:
         Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::HostSpace&gt;
                 nnz_per_row_csr_host("nnz_per_row_csr", m_matrix_size + 1);
 
-        m_gko_matrix = std::make_unique&lt;MatrixBatchCsr&lt;
-                Kokkos::DefaultExecutionSpace,
-                MatrixBatchCsrSolver::CG&gt;&gt;(1, m_matrix_size, n_matrix_elements);
+        m_gko_matrix = std::make_unique&lt;
+                MatrixBatchCsr&lt;Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG&gt;&gt;(
+                1,
+                m_matrix_size,
+                n_matrix_elements,
+                max_iter,
+                res_tol,
+                batch_solver_logger,
+                preconditioner_max_block_size);
         auto [values, col_idx, nnz_per_row] = m_gko_matrix-&gt;get_batch_csr();
         init_nnz_per_line(nnz_per_row);
         Kokkos::deep_copy(nnz_per_row_csr_host, nnz_per_row);
@@ -1328,7 +1338,6 @@ public:
         Kokkos::deep_copy(b, b_host);
         Kokkos::Profiling::popRegion();
 
-        Kokkos::deep_copy(m_x_init, x_init_host);
         // Solve the matrix equation
         Kokkos::Profiling::pushRegion("PolarPoissonSolve");
         m_gko_matrix-&gt;solve(m_x_init, b);
