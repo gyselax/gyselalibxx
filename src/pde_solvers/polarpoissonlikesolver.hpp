@@ -287,6 +287,16 @@ public:
      *      the equation is defined.
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
+     * @param[in] max_iter
+     *      The maximum number of iterations possible for the batched CSR solver.
+     * @param[in] res_tol
+     *      The residual tolerance for the batched CSR solver. Be careful! the relative residual
+     *      provided here, will be used as "implicit residual" in ginkgo solver.
+     * @param[in] batch_solver_logger
+     *      Indicates whether log information such as the residual and the number of iterations
+     *      should be monitored.
+     * @param[in] preconditioner_max_block_size
+     *      The maximum size of the Jacobi preconditioner used by the batched CSR solver.
      *
      * @tparam Mapping A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
      */
@@ -295,7 +305,11 @@ public:
             ConstSpline2D coeff_alpha,
             ConstSpline2D coeff_beta,
             Mapping const& mapping,
-            SplineRThetaEvaluatorNullBound const& spline_evaluator)
+            SplineRThetaEvaluatorNullBound const& spline_evaluator,
+            std::optional<int> max_iter = std::nullopt,
+            std::optional<double> res_tol = std::nullopt,
+            std::optional<bool> batch_solver_logger = std::nullopt,
+            std::optional<int> preconditioner_max_block_size = std::nullopt)
         : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - m_n_overlap_cells - 1)
         , m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
         , m_matrix_size(ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - m_nbasis_theta)
@@ -460,9 +474,15 @@ public:
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace>
                 nnz_per_row_csr_host("nnz_per_row_csr", m_matrix_size + 1);
 
-        m_gko_matrix = std::make_unique<MatrixBatchCsr<
-                Kokkos::DefaultExecutionSpace,
-                MatrixBatchCsrSolver::CG>>(1, m_matrix_size, n_matrix_elements);
+        m_gko_matrix = std::make_unique<
+                MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>(
+                1,
+                m_matrix_size,
+                n_matrix_elements,
+                max_iter,
+                res_tol,
+                batch_solver_logger,
+                preconditioner_max_block_size);
         auto [values, col_idx, nnz_per_row] = m_gko_matrix->get_batch_csr();
         init_nnz_per_line(nnz_per_row);
         Kokkos::deep_copy(nnz_per_row_csr_host, nnz_per_row);
