@@ -957,7 +957,6 @@ public:
         Kokkos::deep_copy(b, b_host);
         Kokkos::Profiling::popRegion();
 
-        Kokkos::deep_copy(m_x_init, x_init_host);
         // Solve the matrix equation
         Kokkos::Profiling::pushRegion("PolarPoissonSolve");
         m_gko_matrix->solve(m_x_init, b);
