@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove non-parallelisable loop in `PolarSplineFEMPoissonLikeSolver::init_nnz_per_line`.
 - Remove use of `std::cyl_bessel_j` which is not available in libc++.
 - Fix `mi250.hipcc.adastra.spack` toolchain.
+- Fix uninitialised values being used as an initial guess for the result of the matrix equation in `PolarSplineFEMPoissonLikeSolver`.
 
 ### Changed
 
@@ -30,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change template parameters of `PolarSplineEvaluator` to add execution and memory space information.
 - Allow `get_idx_range` to be called from a GPU execution space.
 - Uniformise toolchains.
+- Allow batch CSR convergence parameters to be specified in the constructor of `PolarSplineFEMPoissonLikeSolver`.
 
 ### Deprecated
 
