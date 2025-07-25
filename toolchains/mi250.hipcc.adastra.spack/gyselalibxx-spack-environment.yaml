@@ -11,14 +11,7 @@ spack:
         flags: {}
         operating_system: rhel8
         target: x86_64
-        modules:
-          - gcc-native/13.2
-          - amd-mixed/6.3.3
-          - craype/2.7.32
-          - cray-dsmml/0.3.0
-          - libfabric/1.23.1
-          - craype-network-ofi
-          - cray-mpich/8.1.30
+        modules: []
         environment: {}
         extra_rpaths: []
   definitions:
@@ -84,19 +77,16 @@ spack:
       require:
         - one_of: [amdgpu_target=gfx90a, amdgpu_target=gfx942]
           when: +rocm
-    binutils:
-      version: [2.38]
-      externals:
-        - spec: binutils@2.38
-          buildable: false
-          modules:
-            - binutils/2.38
     cray-mpich:
       buildable: false
       version: [8.1.30]
       externals:
         - spec: cray-mpich@8.1.30
+          prefix: /opt/cray/pe/mpich/8.1.30/ofi/gnu/11.2
           modules:
+            - gcc-native/13.2
+            - craype-network-ofi
+            - craype/2.7.32
             - cray-mpich/8.1.30
     hip:
       buildable: false
