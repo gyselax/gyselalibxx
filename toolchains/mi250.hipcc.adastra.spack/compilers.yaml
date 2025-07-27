@@ -1,0 +1,15 @@
+---
+compilers:
+  - compiler:
+      spec: gcc@13.2.1.mi250.raw
+      paths:
+        cc: /opt/rh/gcc-toolset-13/root/usr/bin/gcc
+        cxx: /opt/rh/gcc-toolset-13/root/usr/bin/g++
+        f77: /opt/rh/gcc-toolset-13/root/usr/bin/gfortran
+        fc: /opt/rh/gcc-toolset-13/root/usr/bin/gfortran
+      flags: {}
+      operating_system: rhel8
+      target: x86_64
+      modules: []
+      environment: {}
+      extra_rpaths: []

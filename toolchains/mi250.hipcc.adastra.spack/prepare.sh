@@ -28,6 +28,9 @@ module list
 which spack
 spack debug report
 
+cp "${TOOLCHAIN_ROOT_DIRECTORY}/compilers.yaml" "${SPACK_USER_CONFIG_PATH}"
+cp "${TOOLCHAIN_ROOT_DIRECTORY}/packages.yaml" "${SPACK_USER_CONFIG_PATH}"
+
 mkdir -p -- "${SPACK_USER_CONFIG_PATH}/external-repositories"
 
 # Inject recent PDI recipes into our repository.
