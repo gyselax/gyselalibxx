@@ -58,8 +58,9 @@
 template <
         class Connectivity,
         class Grid1D,
-        template <typename P>
-        typename ValuesOnPatch, // Fix type ?
+        // template <typename P>
+        // typename ValuesOnPatch, // Fix type ?
+        class SingleInterfaceDerivativesCalculatorCollectionType,
         ddc::BoundCond LowerBound = ddc::BoundCond::HERMITE,
         ddc::BoundCond UpperBound = ddc::BoundCond::HERMITE,
         class ExecSpace = Kokkos::DefaultHostExecutionSpace,
@@ -187,9 +188,9 @@ class InterfaceDerivativeMatrix
     using DerivFieldOnPatch = DerivField<
             double,
             IdxRange<
-                    ddc::Deriv<typename Patch::Grid1>,
-                    ddc::Deriv<typename Patch::Grid2>,
+                    ddc::Deriv<typename Patch::Dim1>,
                     typename Patch::Grid1,
+                    ddc::Deriv<typename Patch::Dim2>,
                     typename Patch::Grid2>>;
 
     template <class Patch>
@@ -309,10 +310,12 @@ private:
 
     MultipatchType<IdxRangeOnPatch, Patches...> const& m_idx_ranges;
 
-    // TODO: WARNING, BE ABLE TO DEAL WITH DIFFERENT ORIENTATION INTERFACES.
+    // TODO: WARNING, BE ABLE TO DEAL WITH DIFFERENT ORIENTATION/ORDER INTERFACES.
     using SingleInterfaceDerivativesCalculatorTuple
             = get_tuple_deriv_calculator_t<inner_interface_collection>;
-    SingleInterfaceDerivativesCalculatorTuple const& m_derivatives_calculators;
+    // SingleInterfaceDerivativesCalculatorTuple const& m_derivatives_calculators;
+
+    SingleInterfaceDerivativesCalculatorCollectionType const& m_derivatives_calculators;
 
 public:
     ~InterfaceDerivativeMatrix() {}
@@ -331,9 +334,41 @@ public:
      * @warning The interface derivative calculators have to be ordered in the tuple. 
      *      The order has to be the same as the interfaces in the Grid1D direction. 
      */
+    // InterfaceDerivativeMatrix(
+    //         MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
+    //         SingleInterfaceDerivativesCalculatorTuple const derivatives_calculators,
+    //         double const& reduction_factor = 1e-6)
+    //     : m_idx_ranges(idx_ranges)
+    //     , m_derivatives_calculators(derivatives_calculators)
+    // {
+    //     const auto exec = gko::ReferenceExecutor::create();
+    //     m_matrix = gko::share(Matrix::create(exec, gko::dim<2>(n_inner_interfaces)));
+
+    //     set_matrix(std::make_integer_sequence<std::size_t, n_inner_interfaces> {});
+
+    //     // Define a solver.
+    //     auto solver_factory
+    //             = SolverCG::build()
+    //                       .with_criteria(
+    //                               gko::stop::Iteration::build()
+    //                                       .with_max_iters(n_inner_interfaces)
+    //                                       .on(exec),
+    //                               gko::stop::ResidualNorm<>::build()
+    //                                       .with_reduction_factor(reduction_factor)
+    //                                       .on(exec))
+    //                       .with_preconditioner(
+    //                               PreconditionerJ::build().with_max_block_size(8u).on(exec))
+    //                       .on(exec);
+    //     // Create solver
+    //     m_solver = std::move(solver_factory->generate(m_matrix));
+
+    //     // Create vectors for rhs and solution
+    //     m_vector = Matrix::create(exec, gko::dim<2>(n_inner_interfaces, 1));
+    //     m_interface_derivatives = Matrix::create(exec, gko::dim<2>(n_inner_interfaces, 1));
+    // }
     InterfaceDerivativeMatrix(
             MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-            SingleInterfaceDerivativesCalculatorTuple const derivatives_calculators,
+            SingleInterfaceDerivativesCalculatorCollectionType const derivatives_calculators,
             double const& reduction_factor = 1e-6)
         : m_idx_ranges(idx_ranges)
         , m_derivatives_calculators(derivatives_calculators)
@@ -365,148 +400,43 @@ public:
     }
 
 
+
     /**
-     * @brief Solve the matrix system MS = C to determine all the interface derivatives in the Grid1D 
-     * direction at a given index. 
-     * 
-     * @tparam IdxPar Type for the given index. It can be on the first or the second grid of the first patch. 
-     * @tparam FieldOnPatch Templated on the patch, it is the type for constant field of function values 
-     *              or first derivatives on the patch list. 
-     * @tparam DerivsTypeCollection MultipatchField or std::tuple of first derivatives or cross-derivatives 
+     * @brief Solve the matrix system MS = C to determine all the interface derivatives in the Grid1D
+     * direction at a given index.
+     *
+     * @tparam IdxPar Type for the given index. It can be on the first or the second grid of the first patch.
+     * @tparam FieldOnPatch Templated on the patch, it is the type for constant field of function values
+     *              or first derivatives on the patch list.
+     * @tparam DerivsTypeCollection MultipatchField or std::tuple of first derivatives or cross-derivatives
      *              we want to compute.
-     * 
+     *
      * @param[out] derivs_min Collection first derivatives or cross-derivatives on the west/south side we want to compute.
      * @param[out] derivs_max Collection first derivatives or cross-derivatives on the east/north side we want to compute.
-     * @param[in] idx_par Index of the line in the Grid1D direction where we compute all the interface derivatives. 
-     * @param[in] function_values Constant field collection of function values or first derivatives on the patch list. 
+     * @param[in] idx_par Index of the line in the Grid1D direction where we compute all the interface derivatives.
+     * @param[in] function_values Constant field collection of function values or first derivatives on the patch list.
      */
-    template <class IdxPar, template <typename P> class FieldOnPatch, class DerivsTypeCollection>
-    void solve( // Should be useful for non-conforming case (later).
-            DerivsTypeCollection const& derivs_min,
-            DerivsTypeCollection const& derivs_max,
-            IdxPar const& idx_par,
-            MultipatchField<FieldOnPatch, Patches...> const& function_values)
-    {
-        // Check the input types.
-        static_assert(
-                (std::is_same_v<IdxPar, typename FirstPatch::Idx1>)
-                        || (std::is_same_v<IdxPar, typename FirstPatch::Idx2>),
-                "The given index has to be a 1D index defined on the first patch. See "
-                "InterfaceDerivativeMatrix<...>::first_patch.");
-        static_assert(
-                (std::is_same_v<FieldOnPatch<FirstPatch>, ValuesOnPatch<FirstPatch>>)
-                        || (std::is_same_v<
-                                FieldOnPatch<FirstPatch>,
-                                ConstDerivsParOnPatch<FirstPatch>>),
-                "The `function_values` parameter has to be a MultipatchField collection of "
-                "function values (see ValuesOnPatch) or first derivative fields.");
-        // RMK: It seems to not recognise MultipatchField<DerivsPerpOnPatch, Patches...> being equal to
-        // MultipatchField<Deriv[1/2]_OnPatch_2D_host, Patches...>
-        static_assert(
-                (std::is_same_v<
-                        DerivsTypeCollection,
-                        MultipatchField<DerivsPerpOnPatch, Patches...>>)
-                        || (std::is_same_v<
-                                DerivsTypeCollection,
-                                MultipatchField<Deriv1_OnPatch_2D_host, Patches...>>)
-                        || (std::is_same_v<
-                                DerivsTypeCollection,
-                                MultipatchField<Deriv2_OnPatch_2D_host, Patches...>>)
-                        || (std::is_same_v<
-                                DerivsTypeCollection,
-                                MultipatchField<Deriv1_OnPatch_2D, Patches...>>)
-                        || (std::is_same_v<
-                                DerivsTypeCollection,
-                                MultipatchField<Deriv2_OnPatch_2D, Patches...>>)
-                        || (std::is_same_v<
-                                DerivsTypeCollection,
-                                std::tuple<CrossDerivsPerpOnPatch<Patches>...>>),
-                "The `derivs_min/max` parameters are either first derivative field MultipatchField "
-                "collection, or cross-derivative field tuple collection.");
-
-        // Update m_vector.
-        set_vector(
-                idx_par,
-                function_values,
-                derivs_min,
-                derivs_max,
-                std::make_integer_sequence<std::size_t, n_inner_interfaces> {});
-
-        // Update m_interface_derivatives.
-        m_solver->apply(m_vector, m_interface_derivatives);
-
-        // Update derivatives.
-        update_derivatives(
-                derivs_min,
-                derivs_max,
-                function_values,
-                idx_par,
-                std::make_integer_sequence<std::size_t, n_inner_interfaces> {});
-    }
-
     template <class IdxPar>
     void solve_deriv( // Should be useful for non-conforming case (later).
             MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
             IdxPar const& idx_par)
     {
-        // Check the input types.
-        static_assert(
-                (std::is_same_v<IdxPar, typename FirstPatch::Idx1>)
-                        || (std::is_same_v<IdxPar, typename FirstPatch::Idx2>),
-                "The given index has to be a 1D index defined on the first patch. See "
-                "InterfaceDerivativeMatrix<...>::first_patch.");
-
-        // Update m_vector.
-        set_vector<eval_deriv>(
-                idx_par,
-                functions_and_derivs,
-                std::make_integer_sequence<std::size_t, n_inner_interfaces> {});
-
-        // Update m_interface_derivatives.
-        m_solver->apply(m_vector, m_interface_derivatives);
-
-        // Update derivatives.
-        update_derivatives<eval_deriv>(
-                functions_and_derivs,
-                idx_par,
-                std::make_integer_sequence<std::size_t, n_inner_interfaces> {});
+        solve<eval_deriv>(functions_and_derivs, idx_par);
     }
 
     /**
-     * @brief Solve the matrix system MS = C to determine all the interface derivatives in the Grid1D 
-     * direction at all the indices of the first patch. 
-     * 
-     * @tparam FieldOnPatch Templated on the patch, it is the type for constant field of function values 
-     *              or first derivatives on the patch list. 
-     * @tparam DerivsTypeCollection MultipatchField or std::tuple of first derivatives or cross-derivatives 
+     * @brief Solve the matrix system MS = C to determine all the interface derivatives in the Grid1D
+     * direction at all the indices of the first patch.
+     *
+     * @tparam FieldOnPatch Templated on the patch, it is the type for constant field of function values
+     *              or first derivatives on the patch list.
+     * @tparam DerivsTypeCollection MultipatchField or std::tuple of first derivatives or cross-derivatives
      *              we want to compute.
-     * 
+     *
      * @param[out] derivs_min Collection first derivatives or cross-derivatives on the west/south side we want to compute.
      * @param[out] derivs_max Collection first derivatives or cross-derivatives on the east/north side we want to compute.
-     * @param[in] function_values Constant field collection of function values or first derivatives on the patch list. 
+     * @param[in] function_values Constant field collection of function values or first derivatives on the patch list.
      */
-    template <template <typename P> class FieldOnPatch, class DerivsTypeCollection>
-    void solve(
-            DerivsTypeCollection const& derivs_min,
-            DerivsTypeCollection const& derivs_max,
-            MultipatchField<FieldOnPatch, Patches...> const& function_values)
-    {
-        constexpr bool is_first_idx_range_perp_on_dim1
-                = ddc::in_tags_v<typename FirstPatch::Grid1, Grid1DSeq>;
-        using IdxRangeParFirstType = std::conditional_t<
-                is_first_idx_range_perp_on_dim1,
-                typename FirstPatch::IdxRange2,
-                typename FirstPatch::IdxRange1>;
-
-        IdxRangeParFirstType idx_range_par_first(m_idx_ranges.template get<FirstPatch>());
-
-        ddc::for_each(
-                idx_range_par_first,
-                [&](typename IdxRangeParFirstType::discrete_element_type const& idx_par) {
-                    (*this).solve(derivs_min, derivs_max, idx_par, function_values);
-                });
-    }
-
     void solve_deriv(MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
     {
         constexpr bool is_first_idx_range_perp_on_dim1
@@ -521,12 +451,84 @@ public:
         ddc::for_each(
                 idx_range_par_first,
                 [&](typename IdxRangeParFirstType::discrete_element_type const& idx_par) {
-                    (*this).solve_deriv(functions_and_derivs, idx_par);
+                    (*this).solve<eval_deriv>(functions_and_derivs, idx_par);
                 });
     }
 
 
+    template <class IdxPar>
+    void solve_cross_deriv(
+            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+            IdxPar const& idx_par)
+    {
+        solve<eval_cross_deriv>(functions_and_derivs, idx_par);
+    }
+
+    void solve_cross_deriv(MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
+    {
+        constexpr bool is_first_idx_range_perp_on_dim1
+                = ddc::in_tags_v<typename FirstPatch::Grid1, Grid1DSeq>;
+        using IdxRangeParFirstType = std::conditional_t<
+                is_first_idx_range_perp_on_dim1,
+                typename FirstPatch::IdxRange2,
+                typename FirstPatch::IdxRange1>;
+
+        IdxRangeParFirstType idx_range_par_first(m_idx_ranges.template get<FirstPatch>());
+
+        (*this).solve<eval_cross_deriv>(functions_and_derivs, idx_range_par_first.front());
+        (*this).solve<eval_cross_deriv>(functions_and_derivs, idx_range_par_first.back());
+    }
+
+
+
 private:
+    // template <typename eval_type>
+    // void solve(MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
+    // {
+    //     constexpr bool is_first_idx_range_perp_on_dim1
+    //             = ddc::in_tags_v<typename FirstPatch::Grid1, Grid1DSeq>;
+    //     using IdxRangeParFirstType = std::conditional_t<
+    //             is_first_idx_range_perp_on_dim1,
+    //             typename FirstPatch::IdxRange2,
+    //             typename FirstPatch::IdxRange1>;
+
+    //     IdxRangeParFirstType idx_range_par_first(m_idx_ranges.template get<FirstPatch>());
+
+    //     ddc::for_each(
+    //             idx_range_par_first,
+    //             [&](typename IdxRangeParFirstType::discrete_element_type const& idx_par) {
+    //                 (*this).solve<eval_type>(functions_and_derivs, idx_par);
+    //             });
+    // }
+
+    template <typename eval_type, class IdxPar>
+    void solve( // Should be useful for non-conforming case (later).
+            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+            IdxPar const& idx_par)
+    {
+        // Check the input types.
+        static_assert(
+                (std::is_same_v<IdxPar, typename FirstPatch::Idx1>)
+                        || (std::is_same_v<IdxPar, typename FirstPatch::Idx2>),
+                "The given index has to be a 1D index defined on the first patch. See "
+                "InterfaceDerivativeMatrix<...>::first_patch.");
+
+        // Update m_vector.
+        set_vector<eval_type>(
+                idx_par,
+                functions_and_derivs,
+                std::make_integer_sequence<std::size_t, n_inner_interfaces> {});
+
+        // Update m_interface_derivatives.
+        m_solver->apply(m_vector, m_interface_derivatives);
+
+        // Update derivatives.
+        update_derivatives<eval_type>(
+                functions_and_derivs,
+                idx_par,
+                std::make_integer_sequence<std::size_t, n_inner_interfaces> {});
+    }
+
     /// @brief Set the matrix (I - M).
     template <std::size_t... I>
     void set_matrix(std::integer_sequence<std::size_t, I...>)
@@ -539,10 +541,10 @@ private:
     void set_line_matrix()
     {
         using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
+        using EquivalentInterfaceI
+                = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
 
-        constexpr bool is_same_orientation = std::is_same_v<
-                InterfaceI,
-                find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>>;
+        constexpr bool is_same_orientation = std::is_same_v<InterfaceI, EquivalentInterfaceI>;
 
         // Check that the Ith element of the derivative calculators collection is on InterfaceI.
         using DerivativeCalculator
@@ -552,22 +554,34 @@ private:
                 typename InterfaceDerivativeCalculator::Edge2,
                 typename InterfaceDerivativeCalculator::Edge1,
                 InterfaceDerivativeCalculator::orientations_agree>;
-        static_assert(
-                (is_same_orientation && std::is_same_v<InterfaceI, InterfaceDerivativeCalculator>)
-                        || (!is_same_orientation
-                            && std::is_same_v<
-                                    InterfaceI,
-                                    InterfaceDerivativeCalculatorSymmetrical>),
-                "The list of interface derivative calculators is not well sorted.");
+        // static_assert(
+        //         (is_same_orientation && std::is_same_v<InterfaceI, InterfaceDerivativeCalculator>)
+        //                 || (!is_same_orientation
+        //                     && std::is_same_v<
+        //                             InterfaceI,
+        //                             InterfaceDerivativeCalculatorSymmetrical>),
+        //         "The list of interface derivative calculators is not well sorted.");
 
+        // const double coeff_left
+        //         = is_same_orientation
+        //                   ? std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_1()
+        //                   : std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_2();
+        // const double coeff_right
+        //         = is_same_orientation
+        //                   ? std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_2()
+        //                   : std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_1();
         const double coeff_left
                 = is_same_orientation
-                          ? std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_1()
-                          : std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_2();
+                          ? m_derivatives_calculators.template get<EquivalentInterfaceI>()
+                                    .get_coeff_deriv_patch_1()
+                          : m_derivatives_calculators.template get<EquivalentInterfaceI>()
+                                    .get_coeff_deriv_patch_2();
         const double coeff_right
                 = is_same_orientation
-                          ? std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_2()
-                          : std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_1();
+                          ? m_derivatives_calculators.template get<EquivalentInterfaceI>()
+                                    .get_coeff_deriv_patch_2()
+                          : m_derivatives_calculators.template get<EquivalentInterfaceI>()
+                                    .get_coeff_deriv_patch_1();
         const double coefs[] = {-coeff_left, 1, -coeff_right};
 
         for (int dofs : {-1, 0, 1}) {
@@ -584,30 +598,6 @@ private:
         }
     }
 
-    /// @brief Set the vector C.
-    template <
-            class OGrid1D,
-            class DerivCollectionType,
-            template <typename P>
-            class FieldOnPatch,
-            std::size_t... I>
-    void set_vector(
-            Idx<OGrid1D> const& slice_idx,
-            MultipatchField<FieldOnPatch, Patches...> const& functions,
-            DerivCollectionType const& derivs_min,
-            DerivCollectionType const& derivs_max,
-            std::integer_sequence<std::size_t, I...>)
-    {
-        static_assert(
-                (std::is_same_v<OGrid1D, typename FirstPatch::Grid1>)
-                || (std::is_same_v<OGrid1D, typename FirstPatch::Grid2>)
-                || (std::is_same_v<OGrid1D, ddc::Deriv<typename FirstPatch::Dim1>>)
-                || (std::is_same_v<OGrid1D, ddc::Deriv<typename FirstPatch::Dim2>>));
-
-        IdxRange<OGrid1D> idx_range_1d_first_patch(m_idx_ranges.template get<FirstPatch>());
-        int slice_idx_value = (slice_idx - idx_range_1d_first_patch.front()).value();
-        (set_line_vector<I>(slice_idx_value, functions, derivs_min, derivs_max), ...);
-    }
 
     /// @brief Set the vector C.
     template <typename eval_type, class GridPar1D, std::size_t... I>
@@ -627,76 +617,6 @@ private:
         (set_line_vector<I, eval_type>(slice_idx_value, functions_and_derivs), ...);
     }
 
-
-    /// @brief Fill in the Ith line of the vector C corresponding.
-    template <std::size_t I, template <typename P> class FieldOnPatch, class DerivCollectionType>
-    void set_line_vector(
-            int& slice_idx_1_value,
-            MultipatchField<FieldOnPatch, Patches...> const& functions,
-            DerivCollectionType const& derivs_min,
-            DerivCollectionType const& derivs_max)
-    {
-        using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
-
-        // The orientation of the ordered interface and the one in the derivative calculator.
-        constexpr bool is_same_orientation = std::is_same_v<
-                InterfaceI,
-                find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>>;
-
-        // If the orientations are not the same, we change the sign.
-        const int sign = is_same_orientation - !is_same_orientation;
-
-        using Patch1 = typename InterfaceI::Edge1::associated_patch;
-        using Patch2 = typename InterfaceI::Edge2::associated_patch;
-
-        auto [idx_slice_1, idx_slice_2]
-                = get_slice_indexes<I, Patch1, Patch2>(slice_idx_1_value, functions);
-
-        FieldOnPatch<Patch1> function_1 = functions.template get<Patch1>();
-        FieldOnPatch<Patch2> function_2 = functions.template get<Patch2>();
-
-        double lin_comb_funct = sign
-                                * std::get<I>(m_derivatives_calculators)
-                                          .get_function_coefficients(
-                                                  function_1[idx_slice_1],
-                                                  function_2[idx_slice_2]);
-
-        m_vector->get_values()[I] = lin_comb_funct;
-
-        // TODO: Test this part.
-        if constexpr (LowerBound == ddc::BoundCond::HERMITE && I == 0) {
-            {
-                auto [deriv_1, deriv_2]
-                        = get_interface_derivatives<I>(derivs_min, derivs_min, Extremity::BACK);
-                auto [idx_first_deriv_1, idx_first_deriv_2]
-                        = get_deriv_indexes<I>(deriv_1, deriv_2);
-
-                double coeff_deriv_1
-                        = std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_1();
-                double coeff_deriv_2
-                        = std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_2();
-
-                m_vector->get_values()[I]
-                        += is_same_orientation
-                                   ? coeff_deriv_1 * deriv_1(idx_first_deriv_1, idx_slice_1)
-                                   : -coeff_deriv_2 * deriv_2(idx_first_deriv_2, idx_slice_2);
-            }
-        }
-        if constexpr (UpperBound == ddc::BoundCond::HERMITE && I == n_inner_interfaces - 1) {
-            auto [deriv_1, deriv_2]
-                    = get_interface_derivatives<I>(derivs_min, derivs_min, Extremity::BACK);
-            auto [idx_first_deriv_1, idx_first_deriv_2] = get_deriv_indexes<I>(deriv_1, deriv_2);
-
-            double coeff_deriv_1 = std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_1();
-            double coeff_deriv_2 = std::get<I>(m_derivatives_calculators).get_coeff_deriv_patch_2();
-
-            m_vector->get_values()[I]
-                    += is_same_orientation
-                               ? coeff_deriv_2 * deriv_2(idx_first_deriv_2, idx_slice_2)
-                               : -coeff_deriv_1 * deriv_1(idx_first_deriv_1, idx_slice_1);
-        }
-    }
-
     /// @brief Fill in the Ith line of the vector C corresponding.
     template <std::size_t I, typename eval_type>
     void set_line_vector(
@@ -704,11 +624,12 @@ private:
             MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
     {
         using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
+        using EquivalentInterfaceI
+                = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
+
 
         // The orientation of the ordered interface and the one in the derivative calculator.
-        constexpr bool is_same_orientation = std::is_same_v<
-                InterfaceI,
-                find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>>;
+        constexpr bool is_same_orientation = std::is_same_v<InterfaceI, EquivalentInterfaceI>;
 
         // If the orientations are not the same, we change the sign.
         const int sign = is_same_orientation - !is_same_orientation;
@@ -733,7 +654,8 @@ private:
                     = function_and_derivs_2.get_values_field();
 
             lin_comb_funct = sign
-                             * std::get<I>(m_derivatives_calculators)
+                             // * std::get<I>(m_derivatives_calculators)
+                             * m_derivatives_calculators.template get<EquivalentInterfaceI>()
                                        .get_function_coefficients(
                                                get_const_field(function_1[idx_slice_1]),
                                                get_const_field(function_2[idx_slice_2]));
@@ -743,38 +665,71 @@ private:
             using GridPerp1 = typename InterfaceI::Edge1::perpendicular_grid;
             using GridPerp2 = typename InterfaceI::Edge2::perpendicular_grid;
 
+            using DimPerp1 = typename GridPerp1::continuous_dimension_type;
+            using DimPerp2 = typename GridPerp2::continuous_dimension_type;
+
             using GridPar1 = typename InterfaceI::Edge1::parallel_grid;
             using GridPar2 = typename InterfaceI::Edge2::parallel_grid;
+
+            using DimPar1 = typename GridPar1::continuous_dimension_type;
+            using DimPar2 = typename GridPar2::continuous_dimension_type;
+
 
             constexpr Extremity extermity_1 = InterfaceI::Edge1::extremity;
             constexpr Extremity extermity_2 = InterfaceI::Edge2::extremity;
 
-            using dGridPerp1 = typename ddc::Deriv<GridPerp1>;
-            using dGridPerp2 = typename ddc::Deriv<GridPerp2>;
+            using DerivPar1 = typename ddc::Deriv<DimPar1>;
+            using DerivPar2 = typename ddc::Deriv<DimPar2>;
 
             IdxRange<GridPar1> idx_range_par_1(m_idx_ranges.template get<Patch1>());
             IdxRange<GridPar2> idx_range_par_2(m_idx_ranges.template get<Patch2>());
 
-            Idx<GridPar1> idx_deriv_1 = (extermity_1 == Extremity::FRONT) ? idx_range_par_1.front()
-                                                                          : idx_range_par_1.back();
-            Idx<GridPar2> idx_deriv_2 = (extermity_2 == Extremity::FRONT) ? idx_range_par_2.front()
-                                                                          : idx_range_par_2.back();
+            assert((idx_slice_1 == idx_range_par_1.front())
+                   || (idx_slice_1 == idx_range_par_1.back()));
+            assert((idx_slice_2 == idx_range_par_2.front())
+                   || (idx_slice_2 == idx_range_par_2.back()));
 
-            Idx<dGridPerp1, GridPar1> idx_slice_deriv_1(Idx<dGridPerp1>(1), idx_deriv_1);
-            Idx<dGridPerp2, GridPar2> idx_slice_deriv_2(Idx<dGridPerp1>(1), idx_deriv_2);
+
+            IdxRangeSlice<GridPar1> idx_range_slice_dpar_1(
+                    idx_range_par_1.front(),
+                    IdxStep<GridPar1>(2),
+                    idx_range_par_1.extents());
+
+            IdxRangeSlice<GridPar2> idx_range_slice_dpar_2(
+                    idx_range_par_2.front(),
+                    IdxStep<GridPar2>(2),
+                    idx_range_par_2.extents());
+
+
+            Idx<GridPar1> idx_deriv_1 = (idx_slice_1 == idx_range_par_1.front())
+                                                ? idx_range_slice_dpar_1.front()
+                                                : idx_range_slice_dpar_1.back();
+            Idx<GridPar2> idx_deriv_2 = (idx_slice_2 == idx_range_par_2.front())
+                                                ? idx_range_slice_dpar_2.front()
+                                                : idx_range_slice_dpar_2.back();
+
+            Idx<DerivPar1, GridPar1> idx_slice_deriv_1(Idx<DerivPar1>(1), idx_deriv_1);
+            Idx<DerivPar2, GridPar2> idx_slice_deriv_2(Idx<DerivPar2>(1), idx_deriv_2);
 
             DField<IdxRange<GridPerp1>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_1
                     = function_and_derivs_1[idx_slice_deriv_1];
             DField<IdxRange<GridPerp2>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_2
                     = function_and_derivs_2[idx_slice_deriv_2];
 
+            // ddc::for_each(get_idx_range(derivs_1), [&](auto const idx) {
+            //     std::cout << idx << "  " << derivs_1(idx) << std::endl;
+            // });
+            // std::cout << std::endl;
+            // ddc::for_each(get_idx_range(derivs_2), [&](auto const idx) {
+            //     std::cout << idx << "  " << derivs_2(idx) << std::endl;
+            // });
             lin_comb_funct = sign
-                             * std::get<I>(m_derivatives_calculators)
+                             // * std::get<I>(m_derivatives_calculators)
+                             * m_derivatives_calculators.template get<EquivalentInterfaceI>()
                                        .get_function_coefficients(
-                                               get_const_field(derivs_1[idx_slice_1]),
-                                               get_const_field(derivs_2[idx_slice_2]));
+                                               get_const_field(derivs_1),
+                                               get_const_field(derivs_2));
         }
-
         m_vector->get_values()[I] = lin_comb_funct;
 
         // TODO: Test this part.
@@ -811,32 +766,6 @@ private:
         // }
     }
 
-    /// @brief Once the interface derivatives computed, fill in the correct derivative fields.
-    template <
-            class OGrid1D,
-            class DerivCollectionType,
-            template <typename P>
-            class FieldOnPatch,
-            std::size_t... I>
-    void update_derivatives(
-            DerivCollectionType const& derivs_min,
-            DerivCollectionType const& derivs_max,
-            MultipatchField<FieldOnPatch, Patches...> const& function_values,
-            Idx<OGrid1D> const& slice_idx,
-            std::integer_sequence<std::size_t, I...>)
-    {
-        static_assert(
-                (std::is_same_v<OGrid1D, typename FirstPatch::Grid1>)
-                || (std::is_same_v<OGrid1D, typename FirstPatch::Grid2>)
-                || (std::is_same_v<OGrid1D, ddc::Deriv<typename FirstPatch::Dim1>>)
-                || (std::is_same_v<OGrid1D, ddc::Deriv<typename FirstPatch::Dim2>>));
-
-        IdxRange<OGrid1D> idx_range_1d_first_patch(m_idx_ranges.template get<FirstPatch>());
-        int slice_idx_value = (slice_idx - idx_range_1d_first_patch.front()).value();
-        (update_derivatives_at_interface<
-                 I>(derivs_min, derivs_max, function_values, slice_idx_value),
-         ...);
-    }
 
     /// @brief Once the interface derivatives computed, fill in the correct derivative fields.
     template <typename eval_type, class GridPar1D, std::size_t... I>
@@ -856,24 +785,6 @@ private:
         (update_derivatives_at_interface<I, eval_type>(functions_and_derivs, slice_idx_value), ...);
     }
 
-    /// @brief Associate the Ith derivative values to the correct derivative field.
-    template <std::size_t I, template <typename P> class FieldOnPatch, class DerivCollectionType>
-    void update_derivatives_at_interface(
-            DerivCollectionType const& derivs_min,
-            DerivCollectionType const& derivs_max,
-            MultipatchField<FieldOnPatch, Patches...> const& function_values,
-            int& slice_idx_1_value)
-    {
-        auto [deriv_1, deriv_2]
-                = get_interface_derivatives<I>(derivs_min, derivs_max, Extremity::FRONT);
-
-        auto [slice_idx_1, slice_idx_2] = get_slice_indexes<I>(slice_idx_1_value, function_values);
-        auto [idx_first_deriv_1, idx_first_deriv_2] = get_deriv_indexes<I>(deriv_1, deriv_2);
-
-        // Update derivatives
-        deriv_1(idx_first_deriv_1, slice_idx_1) = m_interface_derivatives->get_values()[I];
-        deriv_2(idx_first_deriv_2, slice_idx_2) = m_interface_derivatives->get_values()[I];
-    }
 
     /// @brief Associate the Ith derivative values to the correct derivative field.
     template <std::size_t I, typename eval_type>
@@ -907,29 +818,49 @@ private:
             using GridPar1 = typename InterfaceI::Edge1::parallel_grid;
             using GridPar2 = typename InterfaceI::Edge2::parallel_grid;
 
-            // using dGridPerp1 = typename ddc::Deriv<GridPerp1>;
-            // using dGridPerp2 = typename ddc::Deriv<GridPerp2>;
+            using DimPar1 = typename GridPar1::continuous_dimension_type;
+            using DimPar2 = typename GridPar2::continuous_dimension_type;
 
-            using dGridPar1 = typename ddc::Deriv<GridPar1>;
-            using dGridPar2 = typename ddc::Deriv<GridPar2>;
+            using DimPerp1 = typename GridPerp1::continuous_dimension_type;
+            using DimPerp2 = typename GridPerp2::continuous_dimension_type;
+
+            // using DerivPerp1 = typename ddc::Deriv<GridPerp1>;
+            // using DerivPerp2 = typename ddc::Deriv<GridPerp2>;
+
+            using DerivPar1 = typename ddc::Deriv<DimPar1>;
+            using DerivPar2 = typename ddc::Deriv<DimPar2>;
+
+            using DerivPerp1 = typename ddc::Deriv<DimPerp1>;
+            using DerivPerp2 = typename ddc::Deriv<DimPerp2>;
 
             IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch1>());
             IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch2>());
 
-            Idx<GridPerp1> idx_deriv_1 = (extermity_1 == Extremity::FRONT)
-                                                 ? idx_range_perp_1.front()
-                                                 : idx_range_perp_1.back();
-            Idx<GridPerp2> idx_deriv_2 = (extermity_2 == Extremity::FRONT)
-                                                 ? idx_range_perp_2.front()
-                                                 : idx_range_perp_2.back();
+            IdxRangeSlice<GridPerp1> idx_range_slice_dperp_1(
+                    idx_range_perp_1.front(),
+                    IdxStep<GridPerp1>(2),
+                    idx_range_perp_1.extents());
 
-            Idx<dGridPar1, GridPerp1> idx_slice_deriv_1(Idx<dGridPar1>(1), idx_deriv_1);
-            Idx<dGridPar2, GridPerp2> idx_slice_deriv_2(Idx<dGridPar2>(1), idx_deriv_2);
+            IdxRangeSlice<GridPerp2> idx_range_slice_dperp_2(
+                    idx_range_perp_2.front(),
+                    IdxStep<GridPerp2>(2),
+                    idx_range_perp_2.extents());
+
+            Idx<GridPerp1> idx_deriv_1 = (extermity_1 == Extremity::FRONT)
+                                                 ? idx_range_slice_dperp_1.front()
+                                                 : idx_range_slice_dperp_1.back();
+            Idx<GridPerp2> idx_deriv_2 = (extermity_2 == Extremity::FRONT)
+                                                 ? idx_range_slice_dperp_2.front()
+                                                 : idx_range_slice_dperp_2.back();
+
+            Idx<DerivPerp1, GridPerp1> idx_slice_deriv_1(Idx<DerivPerp1>(1), idx_deriv_1);
+            Idx<DerivPerp2, GridPerp2> idx_slice_deriv_2(Idx<DerivPerp2>(1), idx_deriv_2);
 
             DField<IdxRange<GridPar1>, Kokkos::HostSpace, Kokkos::layout_stride> deriv_1
                     = function_and_derivs_1[idx_slice_deriv_1];
             DField<IdxRange<GridPar2>, Kokkos::HostSpace, Kokkos::layout_stride> deriv_2
                     = function_and_derivs_2[idx_slice_deriv_2];
+
 
             auto [slice_idx_1, slice_idx_2] = get_slice_indexes<I, eval_type>(slice_idx_1_value);
 
@@ -944,34 +875,59 @@ private:
             constexpr bool is_grid_par_1_on_dim1 = std::is_same_v<GridPar1, typename Patch1::Grid1>;
             constexpr bool is_grid_par_2_on_dim1 = std::is_same_v<GridPar2, typename Patch2::Grid1>;
 
-            using d1Grid1 = ddc::Deriv<typename Patch1::Grid1>;
-            using d1Grid2 = ddc::Deriv<typename Patch1::Grid2>;
+            using Grid1_1 = typename Patch1::Grid1;
+            using Grid2_1 = typename Patch1::Grid2;
+            using Grid1_2 = typename Patch2::Grid1;
+            using Grid2_2 = typename Patch2::Grid2;
 
-            using d2Grid1 = ddc::Deriv<typename Patch2::Grid1>;
-            using d2Grid2 = ddc::Deriv<typename Patch2::Grid2>;
+            using Deriv1_1 = ddc::Deriv<typename Patch1::Dim1>;
+            using Deriv2_1 = ddc::Deriv<typename Patch1::Dim2>;
 
-            IdxRange<d1Grid1> deriv_block_grid1_1(Idx<d1Grid1>(1), IdxStep<d1Grid1>(2));
-            IdxRange<d1Grid2> deriv_block_grid2_1(Idx<d1Grid2>(1), IdxStep<d1Grid2>(2));
-            IdxRange<d1Grid1, d1Grid2>
-                    deriv_block_grid12_1(deriv_block_grid1_1, deriv_block_grid2_1);
+            using Deriv1_2 = ddc::Deriv<typename Patch2::Dim1>;
+            using Deriv2_2 = ddc::Deriv<typename Patch2::Dim2>;
 
-            IdxRange<d2Grid1> deriv_block_grid1_2(Idx<d2Grid1>(1), IdxStep<d2Grid1>(2));
-            IdxRange<d2Grid2> deriv_block_grid2_2(Idx<d2Grid2>(1), IdxStep<d2Grid2>(2));
-            IdxRange<d2Grid1, d2Grid2>
-                    deriv_block_grid12_2(deriv_block_grid1_2, deriv_block_grid2_2);
+            Idx<Deriv1_1> idx_deriv1_1(1);
+            Idx<Deriv2_1> idx_deriv2_1(1);
+            Idx<Deriv1_2> idx_deriv1_2(1);
+            Idx<Deriv2_2> idx_deriv2_2(1);
 
-            detail::ViewNDMaker<4, double, false>::type derivs_xy_1
-                    = function_and_derivs_1.get_mdspan(deriv_block_grid12_1);
-            detail::ViewNDMaker<4, double, false>::type derivs_xy_2
-                    = function_and_derivs_2.get_mdspan(deriv_block_grid12_2);
+            IdxRange<Deriv1_1> idx_range_deriv1_1(idx_deriv1_1, IdxStep<Deriv1_1>(1));
+            IdxRange<Deriv2_1> idx_range_deriv2_1(idx_deriv2_1, IdxStep<Deriv2_1>(1));
+            IdxRange<Deriv1_2> idx_range_deriv1_2(idx_deriv1_2, IdxStep<Deriv1_2>(1));
+            IdxRange<Deriv2_2> idx_range_deriv2_2(idx_deriv2_2, IdxStep<Deriv2_2>(1));
 
-            // DField<IdxRange<d1Grid1, d1Grid2>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_xy_1;
-            // DField<IdxRange<d2Grid1, d2Grid2>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_xy_2;
+            IdxRange<Deriv1_1, Deriv2_1> idx_range_derivs_1(idx_range_deriv1_1, idx_range_deriv2_1);
+            IdxRange<Deriv1_2, Deriv2_2> idx_range_derivs_2(idx_range_deriv1_2, idx_range_deriv2_2);
+
+            IdxRange<Grid1_1> idx_range_grid1_1(m_idx_ranges.template get<Patch1>());
+            IdxRange<Grid2_1> idx_range_grid2_1(m_idx_ranges.template get<Patch1>());
+            IdxRange<Grid1_2> idx_range_grid1_2(m_idx_ranges.template get<Patch2>());
+            IdxRange<Grid2_2> idx_range_grid2_2(m_idx_ranges.template get<Patch2>());
+
+            IdxRangeSlice<Grid1_1> idx_range_slice_d1_1(
+                    idx_range_grid1_1.front(),
+                    IdxStep<Grid1_1>(2),
+                    idx_range_grid1_1.extents());
+            IdxRangeSlice<Grid2_1> idx_range_slice_d2_1(
+                    idx_range_grid2_1.front(),
+                    IdxStep<Grid2_1>(2),
+                    idx_range_grid2_1.extents());
+
+            IdxRangeSlice<Grid1_2> idx_range_slice_d1_2(
+                    idx_range_grid1_2.front(),
+                    IdxStep<Grid1_2>(2),
+                    idx_range_grid1_2.extents());
+            IdxRangeSlice<Grid2_2> idx_range_slice_d2_2(
+                    idx_range_grid2_2.front(),
+                    IdxStep<Grid2_2>(2),
+                    idx_range_grid2_2.extents());
+
 
             IdxRange<GridPar1> idx_range_par_1(m_idx_ranges.template get<Patch1>());
             IdxRange<GridPar2> idx_range_par_2(m_idx_ranges.template get<Patch2>());
 
-            auto [slice_idx_1, slice_idx_2] = get_slice_indexes<I, eval_type>(slice_idx_1_value);
+            auto [slice_idx_1, slice_idx_2]
+                    = get_slice_indexes<I, eval_cross_deriv>(slice_idx_1_value);
 
             assert((slice_idx_1 == idx_range_par_1.front())
                    || (slice_idx_1 == idx_range_par_1.back()));
@@ -981,52 +937,73 @@ private:
             const bool is_idx_par_min_1 = (slice_idx_1 == idx_range_par_1.front());
             const bool is_idx_par_min_2 = (slice_idx_2 == idx_range_par_2.front());
 
-            int val1;
-            int val2;
+
+            // --- Update the cross-derivative on Patch1
+            Idx<Grid1_1> idx_d1_1;
+            Idx<Grid2_1> idx_d2_1;
             if (is_idx_par_min_1 && (extermity_1 == Extremity::FRONT)) {
                 // corner min min
-                val1 = 0;
-                val2 = 0;
+                idx_d1_1 = idx_range_grid1_1.front();
+                idx_d2_1 = idx_range_grid2_1.front();
             } else if (!is_idx_par_min_1 && (extermity_1 == Extremity::BACK)) {
                 // corner max max
-                val1 = 1;
-                val2 = 1;
+                idx_d1_1 = idx_range_grid1_1.back();
+                idx_d2_1 = idx_range_grid2_1.back();
             } else if (
                     (is_grid_par_1_on_dim1 && (extermity_1 == Extremity::BACK))
                     || (!is_grid_par_1_on_dim1 && (extermity_1 == Extremity::FRONT))) {
                 // corner max min
-                val1 = 1;
-                val2 = 0;
+                idx_d1_1 = idx_range_grid1_1.back();
+                idx_d2_1 = idx_range_grid2_1.front();
             } else {
                 // corner min max
-                val1 = 0;
-                val2 = 1;
+                idx_d1_1 = idx_range_grid1_1.front();
+                idx_d2_1 = idx_range_grid2_1.back();
             }
-            derivs_xy_1(IdxStep<d1Grid1>(val1), IdxStep<d1Grid2>(val2), val1, val2)
+            std::cout << "before updating cross-derivatives on patch 1" << std::endl;
+            auto field = function_and_derivs_1[idx_range_deriv1_1][idx_d1_1];
+            ddc::for_each(get_idx_range(field), [&](auto const idx) {
+                std::cout << idx << std::endl;
+                // std::cout << idx << "  " << field(idx) << std::endl;
+            });
+            DField<IdxRange<Deriv1_1, Deriv2_1>, Kokkos::HostSpace, Kokkos::layout_stride>
+                    cross_deriv_extracted_1
+                    = function_and_derivs_1[idx_range_derivs_1][idx_d1_1][idx_d2_1];
+
+            cross_deriv_extracted_1(Idx<Deriv1_1, Deriv2_1>(1, 1))
                     = m_interface_derivatives->get_values()[I];
 
 
+            // --- Update the cross-derivative on Patch2
+            Idx<Grid1_2> idx_d1_2;
+            Idx<Grid2_2> idx_d2_2;
             if (is_idx_par_min_2 && (extermity_2 == Extremity::FRONT)) {
                 // corner min min
-                val1 = 0;
-                val2 = 0;
+                idx_d1_2 = idx_range_slice_d1_2.front();
+                idx_d2_2 = idx_range_slice_d2_2.front();
             } else if (!is_idx_par_min_2 && (extermity_2 == Extremity::BACK)) {
                 // corner max max
-                val1 = 1;
-                val2 = 1;
+                idx_d1_2 = idx_range_slice_d1_2.back();
+                idx_d2_2 = idx_range_slice_d2_2.back();
             } else if (
                     (is_grid_par_2_on_dim1 && (extermity_2 == Extremity::BACK))
                     || (!is_grid_par_2_on_dim1 && (extermity_2 == Extremity::FRONT))) {
                 // corner max min
-                val1 = 1;
-                val2 = 0;
+                idx_d1_2 = idx_range_slice_d1_2.back();
+                idx_d2_2 = idx_range_slice_d2_2.front();
             } else {
                 // corner min max
-                val1 = 0;
-                val2 = 1;
+                idx_d1_2 = idx_range_slice_d1_2.front();
+                idx_d2_2 = idx_range_slice_d2_2.back();
             }
-            derivs_xy_2(IdxStep<d2Grid1>(val1), IdxStep<d2Grid2>(val2), val1, val2)
+            std::cout << "before updating cross-derivatives on patch 2" << std::endl;
+            DField<IdxRange<Deriv1_2, Deriv2_2>, Kokkos::HostSpace, Kokkos::layout_stride>
+                    cross_deriv_extracted_2
+                    = function_and_derivs_2[idx_range_derivs_2][idx_d1_2][idx_d2_2];
+            cross_deriv_extracted_2(Idx<Deriv1_2, Deriv2_2>(1, 1))
                     = m_interface_derivatives->get_values()[I];
+
+            std::cout << "after updating cross-derivatives" << std::endl;
         }
 
         // auto [slice_idx_1, slice_idx_2] = get_slice_indexes<I, eval_type>(slice_idx_1_value);
@@ -1074,40 +1051,6 @@ private:
     }
 
 
-    /// @brief Get the cross-derivative field on Patch1 and Patch2 for the Ith interface.
-    template <
-            std::size_t I,
-            class Patch1 = typename ddc::type_seq_element_t<I, inner_interface_collection>::Edge1::
-                    associated_patch,
-            class Patch2 = typename ddc::type_seq_element_t<I, inner_interface_collection>::Edge2::
-                    associated_patch>
-    std::tuple<CrossDerivsPerpOnPatch<Patch1>, CrossDerivsPerpOnPatch<Patch2>>
-    get_interface_derivatives(
-            std::tuple<CrossDerivsPerpOnPatch<Patches>...> const& cross_derivs_min,
-            std::tuple<CrossDerivsPerpOnPatch<Patches>...> const& cross_derivs_max,
-            Extremity const extremity)
-    {
-        using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
-
-        // Hyp: the derivatives in the tuples are well ordered.
-        constexpr std::size_t I1 = I;
-        constexpr std::size_t I2 = (I + 1) % n_inner_interfaces;
-
-        constexpr Extremity extermity_1 = InterfaceI::Edge1::extremity;
-        constexpr Extremity extermity_2 = InterfaceI::Edge2::extremity;
-
-        // TODO: Assert to be sure that the cross-derivatives are well-ordered?
-        // How to do it? Dim specialised for patches? message?
-        CrossDerivsPerpOnPatch<Patch1> deriv_1 = (extermity_1 == extremity)
-                                                         ? std::get<I1>(cross_derivs_min)
-                                                         : std::get<I1>(cross_derivs_max);
-        CrossDerivsPerpOnPatch<Patch2> deriv_2 = (extermity_2 == extremity)
-                                                         ? std::get<I2>(cross_derivs_min)
-                                                         : std::get<I2>(cross_derivs_max);
-        return std::make_tuple(deriv_1, deriv_2);
-    }
-
-
     /// @brief @brief Get the Patch1 and Patch2 derivative indices on the grid parallel to the interface.
     template <std::size_t I, class DerivFieldOnPatch1, class DerivFieldOnPatch2>
     auto get_deriv_indexes(DerivFieldOnPatch1 const& deriv_1, DerivFieldOnPatch2 const& deriv_2)
@@ -1130,74 +1073,6 @@ private:
         return std::make_tuple(idx_first_deriv_1, idx_first_deriv_2);
     }
 
-    /// @brief Get the slice indices on Patch1 and Patch2 corresponding to the given integer on Patch1.
-    template <
-            std::size_t I,
-            class Patch1 = typename ddc::type_seq_element_t<I, inner_interface_collection>::Edge1::
-                    associated_patch,
-            class Patch2 = typename ddc::type_seq_element_t<I, inner_interface_collection>::Edge2::
-                    associated_patch,
-            template <typename P>
-            class FieldOnPatch>
-    auto get_slice_indexes(
-            int& slice_idx_1_value,
-            MultipatchField<FieldOnPatch, Patches...> const& function_values)
-    {
-        using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
-
-        using PerpGrid1 = typename InterfaceI::Edge1::perpendicular_grid;
-        using PerpGrid2 = typename InterfaceI::Edge2::perpendicular_grid;
-
-        using ParallGrid1 = typename InterfaceI::Edge1::parallel_grid;
-        using ParallGrid2 = typename InterfaceI::Edge2::parallel_grid;
-
-        // Define all the different index ranges.
-        IdxRange<PerpGrid1> const idx_range_perp_1(m_idx_ranges.template get<Patch1>());
-        IdxRange<PerpGrid2> const idx_range_perp_2(m_idx_ranges.template get<Patch2>());
-
-        IdxRange<ParallGrid1> const idx_range_parell_1(m_idx_ranges.template get<Patch1>());
-        IdxRange<ParallGrid2> const idx_range_parell_2(m_idx_ranges.template get<Patch2>());
-
-        FieldOnPatch<Patch1> function_1 = function_values.template get<Patch1>();
-        FieldOnPatch<Patch2> function_2 = function_values.template get<Patch2>();
-
-        // Index range on Grid(s) or ddc::Deriv(s).
-        auto const idx_range_fct_parall_1
-                = ddc::remove_dims_of(get_idx_range(function_1), idx_range_perp_1);
-        auto const idx_range_fct_parall_2
-                = ddc::remove_dims_of(get_idx_range(function_2), idx_range_perp_2);
-
-        // Get slice indexes.
-        EdgeTransformation<InterfaceI> index_converter(idx_range_parell_1, idx_range_parell_2);
-
-        using OIdx1 = typename decltype(idx_range_fct_parall_1)::discrete_element_type;
-        using OIdx2 = typename decltype(idx_range_fct_parall_2)::discrete_element_type;
-        OIdx1 slice_idx_1;
-        OIdx2 slice_idx_2;
-        /*
-            If function_values is defined on the same index range than the one given
-            in the collection of index range, then it means we working on the values 
-            of the function.
-            Otherwise,  it means we working on the first derivatives of the function. 
-            The operator is then applied to compute the cross-derivatives. The index
-            we return is (1) for the first derivative. 
-        */
-        if constexpr (std::is_same_v<
-                              decltype(idx_range_parell_1),
-                              decltype(idx_range_fct_parall_1)>) {
-            slice_idx_1 = OIdx1(slice_idx_1_value);
-            slice_idx_2 = OIdx2(index_converter(slice_idx_1));
-            slice_idx_1_value = (slice_idx_2 - idx_range_parell_2.front()).value();
-
-        } else {
-            // Stay index for the first derivatives.
-            slice_idx_1 = OIdx1(1);
-            slice_idx_2 = OIdx2(1);
-        }
-
-        return std::make_tuple(slice_idx_1, slice_idx_2);
-    }
-
     template <std::size_t I, typename eval_type>
     auto get_slice_indexes(int& slice_idx_1_value)
     {
@@ -1209,26 +1084,26 @@ private:
         using ParallGrid1 = typename InterfaceI::Edge1::parallel_grid;
         using ParallGrid2 = typename InterfaceI::Edge2::parallel_grid;
 
-        if constexpr (std::is_same_v<eval_type, eval_deriv>) {
-            IdxRange<ParallGrid1> const idx_range_parell_1(m_idx_ranges.template get<Patch1>());
-            IdxRange<ParallGrid2> const idx_range_parell_2(m_idx_ranges.template get<Patch2>());
+        // if constexpr (std::is_same_v<eval_type, eval_deriv>) {
+        IdxRange<ParallGrid1> const idx_range_parell_1(m_idx_ranges.template get<Patch1>());
+        IdxRange<ParallGrid2> const idx_range_parell_2(m_idx_ranges.template get<Patch2>());
 
-            // Get slice indexes.
-            EdgeTransformation<InterfaceI> index_converter(idx_range_parell_1, idx_range_parell_2);
+        // Get slice indexes.
+        EdgeTransformation<InterfaceI> index_converter(idx_range_parell_1, idx_range_parell_2);
 
-            Idx<ParallGrid1> slice_idx_1(slice_idx_1_value);
-            Idx<ParallGrid2> slice_idx_2(index_converter(slice_idx_1));
-            slice_idx_1_value = (slice_idx_2 - idx_range_parell_2.front()).value();
-            return std::make_tuple(slice_idx_1, slice_idx_2);
+        Idx<ParallGrid1> slice_idx_1(slice_idx_1_value);
+        Idx<ParallGrid2> slice_idx_2(index_converter(slice_idx_1));
+        slice_idx_1_value = (slice_idx_2 - idx_range_parell_2.front()).value();
+        return std::make_tuple(slice_idx_1, slice_idx_2);
 
-        } else {
-            using ParallDim1 = typename ParallGrid1::continuous_dimension_type;
-            using ParallDim2 = typename ParallGrid2::continuous_dimension_type;
+        // } else {
+        //     using ParallDim1 = typename ParallGrid1::continuous_dimension_type;
+        //     using ParallDim2 = typename ParallGrid2::continuous_dimension_type;
 
-            // Stay index for the first derivatives.
-            Idx<ddc::Deriv<ParallDim1>> slice_idx_1(1);
-            Idx<ddc::Deriv<ParallDim2>> slice_idx_2(1);
-            return std::make_tuple(slice_idx_1, slice_idx_2);
-        }
+        //     // Stay index for the first derivatives.
+        //     Idx<ddc::Deriv<ParallDim1>> slice_idx_1(1);
+        //     Idx<ddc::Deriv<ParallDim2>> slice_idx_2(1);
+        //     return std::make_tuple(slice_idx_1, slice_idx_2);
+        // }
     }
 };
