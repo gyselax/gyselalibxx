@@ -967,13 +967,10 @@ public:
         double basis_val_trial_space;
         DVector<R_cov, Theta_cov> basis_derivs_test_space;
         DVector<R_cov, Theta_cov> basis_derivs_trial_space;
-        std::tie(basis_val_test_space, basis_derivs_test_space) = get_polar_bspline_vals_and_derivs(
-                idx_test,
-                idx_quad);
+        std::tie(basis_val_test_space, basis_derivs_test_space)
+                = get_polar_bspline_vals_and_derivs(idx_test, idx_quad);
         std::tie(basis_val_trial_space, basis_derivs_trial_space)
-                = get_polar_bspline_vals_and_derivs(
-                        idx_trial,
-                        idx_quad);
+                = get_polar_bspline_vals_and_derivs(idx_trial, idx_quad);
 
         MetricTensorEvaluator<Mapping, CoordRTheta> get_metric_tensor(mapping);
 
