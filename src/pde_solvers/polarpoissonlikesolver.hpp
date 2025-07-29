@@ -123,6 +123,7 @@ private:
 
     using IdxStepBSR = IdxStep<BSplinesR>;
     using IdxStepBSTheta = IdxStep<BSplinesTheta>;
+    using IdxStepBSRTheta = IdxStep<BSplinesR, BSplinesTheta>;
 
     using IdxRangeBatchedBSRTheta
             = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
@@ -551,10 +552,10 @@ public:
                             Idx<QDimRMesh> const idx_r(idx_quad);
                             Idx<QDimThetaMesh> const idx_theta(idx_quad);
                             return weak_integral_element(
+                                    idx_test,
+                                    idx_trial,
                                     idx_r,
                                     idx_theta,
-                                    singular_basis_vals_and_derivs(idx_test, idx_r, idx_theta),
-                                    singular_basis_vals_and_derivs(idx_trial, idx_r, idx_theta),
                                     coeff_alpha,
                                     coeff_beta,
                                     spline_evaluator,
@@ -680,14 +681,10 @@ public:
                                     IdxQuadratureR const idx_r(idx_quad);
                                     IdxQuadratureTheta const idx_theta(idx_quad);
                                     return weak_integral_element<Mapping>(
+                                            idx_test,
+                                            idx_trial_polar,
                                             idx_r,
                                             idx_theta,
-                                            singular_basis_vals_and_derivs(
-                                                    idx_test,
-                                                    idx_r,
-                                                    idx_theta),
-                                            r_basis_vals_and_derivs(ib_trial_r, idx_r),
-                                            theta_basis_vals_and_derivs(ib_trial_theta, idx_theta),
                                             coeff_alpha,
                                             coeff_beta,
                                             spline_evaluator,
@@ -1029,8 +1026,8 @@ public:
      * @return 
      *      The quadrature range corresponding to the  @f$(r,\theta)@f$ indices.
      */
-    static KOKKOS_FUNCTION IdxRangeQuadratureRTheta
-    get_quadrature_points_in_cell(int cell_idx_r, int cell_idx_theta)
+    KOKKOS_FUNCTION IdxRangeQuadratureRTheta
+    get_quadrature_points_in_cell(int cell_idx_r, int cell_idx_theta) const
     {
         const IdxQuadratureR first_quad_point_r(cell_idx_r * s_n_gauss_legendre_r);
         const IdxQuadratureTheta first_quad_point_theta(cell_idx_theta * s_n_gauss_legendre_theta);
@@ -1041,142 +1038,6 @@ public:
         return IdxRangeQuadratureRTheta(quad_points_r, quad_points_theta);
     }
 
-    /**
-     * @brief compute the weak integral value.
-     *
-     * @param[in] idx_r
-     *      The index for radial direction.
-     * @param[in] idx_theta
-     *      The index for poloidal direction
-     * @param[in] test_bspline_val_and_deriv
-     *      The data structure containing the derivatives over radial and poloidal directions for test space.
-     * @param[in] trial_bspline_val_and_deriv
-     *      The data structure containing the derivatives over radial and poloidal directions for trial space.
-     * @param[in] coeff_alpha
-     *      The spline representation of the @f$ \alpha @f$ function in the
-     *      definition of the Poisson-like equation.
-     * @param[in] coeff_beta
-     *      The spline representation of the  @f$ \beta @f$ function in the
-     *      definition of the Poisson-like equation.
-     * @param[in] mapping
-     *      The mapping from the logical domain to the physical domain where
-     *      the equation is defined.
-     * @param[in] evaluator
-     *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
-     * @param[in] int_volume
-     *      The integral volume associated with each point used in the quadrature scheme.
-     * @return 
-     *      The value of the weak integral.
-     */
-    template <class Mapping>
-    static KOKKOS_FUNCTION double weak_integral_element(
-            IdxQuadratureR idx_r,
-            IdxQuadratureTheta idx_theta,
-            EvalDeriv2DType const& test_bspline_val_and_deriv,
-            EvalDeriv2DType const& trial_bspline_val_and_deriv,
-            ConstSpline2D coeff_alpha,
-            ConstSpline2D coeff_beta,
-            SplineRThetaEvaluatorNullBound const& evaluator,
-            Mapping const& mapping,
-            DField<IdxRangeQuadratureRTheta> int_volume)
-    {
-        return templated_weak_integral_element(
-                idx_r,
-                idx_theta,
-                test_bspline_val_and_deriv,
-                trial_bspline_val_and_deriv,
-                test_bspline_val_and_deriv,
-                trial_bspline_val_and_deriv,
-                coeff_alpha,
-                coeff_beta,
-                evaluator,
-                mapping,
-                int_volume);
-    }
-
-    ///@cond
-    template <class Mapping>
-    static KOKKOS_FUNCTION double weak_integral_element(
-            IdxQuadratureR idx_r,
-            IdxQuadratureTheta idx_theta,
-            EvalDeriv2DType const& test_bspline_val_and_deriv,
-            EvalDeriv1DType const& trial_bspline_val_and_deriv_r,
-            EvalDeriv1DType const& trial_bspline_val_and_deriv_theta,
-            ConstSpline2D coeff_alpha,
-            ConstSpline2D coeff_beta,
-            SplineRThetaEvaluatorNullBound const& evaluator,
-            Mapping const& mapping,
-            DField<IdxRangeQuadratureRTheta> int_volume)
-    {
-        return templated_weak_integral_element(
-                idx_r,
-                idx_theta,
-                test_bspline_val_and_deriv,
-                trial_bspline_val_and_deriv_r,
-                test_bspline_val_and_deriv,
-                trial_bspline_val_and_deriv_theta,
-                coeff_alpha,
-                coeff_beta,
-                evaluator,
-                mapping,
-                int_volume);
-    }
-
-    template <class Mapping>
-    static KOKKOS_FUNCTION double weak_integral_element(
-            IdxQuadratureR idx_r,
-            IdxQuadratureTheta idx_theta,
-            EvalDeriv1DType const& test_bspline_val_and_deriv_r,
-            EvalDeriv2DType const& trial_bspline_val_and_deriv,
-            EvalDeriv1DType const& test_bspline_val_and_deriv_theta,
-            ConstSpline2D coeff_alpha,
-            ConstSpline2D coeff_beta,
-            SplineRThetaEvaluatorNullBound const& evaluator,
-            Mapping const& mapping,
-            DField<IdxRangeQuadratureRTheta> int_volume)
-    {
-        return templated_weak_integral_element(
-                idx_r,
-                idx_theta,
-                test_bspline_val_and_deriv_r,
-                trial_bspline_val_and_deriv,
-                test_bspline_val_and_deriv_theta,
-                trial_bspline_val_and_deriv,
-                coeff_alpha,
-                coeff_beta,
-                evaluator,
-                mapping,
-                int_volume);
-    }
-
-    template <class Mapping>
-    static KOKKOS_FUNCTION double weak_integral_element(
-            IdxQuadratureR idx_r,
-            IdxQuadratureTheta idx_theta,
-            EvalDeriv1DType const& test_bspline_val_and_deriv_r,
-            EvalDeriv1DType const& trial_bspline_val_and_deriv_r,
-            EvalDeriv1DType const& test_bspline_val_and_deriv_theta,
-            EvalDeriv1DType const& trial_bspline_val_and_deriv_theta,
-            ConstSpline2D coeff_alpha,
-            ConstSpline2D coeff_beta,
-            SplineRThetaEvaluatorNullBound const& evaluator,
-            Mapping const& mapping,
-            DField<IdxRangeQuadratureRTheta> int_volume)
-    {
-        return templated_weak_integral_element(
-                idx_r,
-                idx_theta,
-                test_bspline_val_and_deriv_r,
-                trial_bspline_val_and_deriv_r,
-                test_bspline_val_and_deriv_theta,
-                trial_bspline_val_and_deriv_theta,
-                coeff_alpha,
-                coeff_beta,
-                evaluator,
-                mapping,
-                int_volume);
-    }
-    ///@endcond
 
     /**
      * @brief Computes the value and gradient from r_basis and theta_basis inputs.
@@ -1189,11 +1050,11 @@ public:
      *
      * @param[in] theta_basis A data structure containing values and derivative over poloidal direction.
      */
-    static KOKKOS_INLINE_FUNCTION void get_value_and_gradient(
+    KOKKOS_INLINE_FUNCTION void get_value_and_gradient(
             double& value,
             DVector<R_cov, Theta_cov>& derivs,
             EvalDeriv1DType const& r_basis,
-            EvalDeriv1DType const& theta_basis)
+            EvalDeriv1DType const& theta_basis) const
     {
         value = r_basis.value * theta_basis.value;
         ddcHelper::get<R_cov>(derivs) = r_basis.derivative * theta_basis.value;
@@ -1210,11 +1071,11 @@ public:
      * @param[in] basis A data structure containing values and derivative over radial and poloidal directions.
      *
      */
-    static KOKKOS_INLINE_FUNCTION void get_value_and_gradient(
+    KOKKOS_INLINE_FUNCTION void get_value_and_gradient(
             double& value,
             DVector<R_cov, Theta_cov>& derivs,
             EvalDeriv2DType const& basis,
-            EvalDeriv2DType const&) // Last argument is duplicate
+            EvalDeriv2DType const&) const // Last argument is duplicate
     {
         value = basis.value;
         derivs = basis.derivative;
@@ -1254,29 +1115,18 @@ public:
      * quadrature. This function returns one summand of the quadrature for 
      * the quadrature point given by the indices.
      */
-    template <class Mapping, class TestValDerivType, class TrialValDerivType>
-    static KOKKOS_FUNCTION double templated_weak_integral_element(
+    template <class Mapping>
+    KOKKOS_FUNCTION double weak_integral_element(
+            IdxBSPolar idx_test,
+            IdxBSPolar idx_trial,
             IdxQuadratureR idx_r,
             IdxQuadratureTheta idx_theta,
-            TestValDerivType const& test_bspline_val_and_deriv,
-            TrialValDerivType const& trial_bspline_val_and_deriv,
-            TestValDerivType const& test_bspline_val_and_deriv_theta,
-            TrialValDerivType const& trial_bspline_val_and_deriv_theta,
             ConstSpline2D coeff_alpha,
             ConstSpline2D coeff_beta,
             SplineRThetaEvaluatorNullBound const& spline_evaluator,
             Mapping const& mapping,
-            DField<IdxRangeQuadratureRTheta> int_volume)
+            DField<IdxRangeQuadratureRTheta> int_volume) const
     {
-        static_assert(
-                std::is_same_v<
-                        TestValDerivType,
-                        EvalDeriv1DType> || std::is_same_v<TestValDerivType, EvalDeriv2DType>);
-        static_assert(
-                std::is_same_v<
-                        TrialValDerivType,
-                        EvalDeriv1DType> || std::is_same_v<TrialValDerivType, EvalDeriv2DType>);
-
         // Calculate coefficients at quadrature point
         CoordRTheta coord(ddc::coordinate(idx_r), ddc::coordinate(idx_theta));
         const double alpha = spline_evaluator(coord, coeff_alpha);
@@ -1287,16 +1137,10 @@ public:
         double basis_val_trial_space;
         DVector<R_cov, Theta_cov> basis_derivs_test_space;
         DVector<R_cov, Theta_cov> basis_derivs_trial_space;
-        get_value_and_gradient(
-                basis_val_test_space,
-                basis_derivs_test_space,
-                test_bspline_val_and_deriv,
-                test_bspline_val_and_deriv_theta);
-        get_value_and_gradient(
-                basis_val_trial_space,
-                basis_derivs_trial_space,
-                trial_bspline_val_and_deriv,
-                trial_bspline_val_and_deriv_theta);
+        std::tie(basis_val_test_space, basis_derivs_test_space)
+                = get_vals_and_derivs(idx_test, IdxQuadratureRTheta(idx_r, idx_theta));
+        std::tie(basis_val_trial_space, basis_derivs_trial_space)
+                = get_vals_and_derivs(idx_trial, IdxQuadratureRTheta(idx_r, idx_theta));
 
         MetricTensorEvaluator<Mapping, CoordRTheta> get_metric_tensor(mapping);
 
@@ -1437,6 +1281,12 @@ public:
                     assert(ib_test_theta.uid() < BSplinesTheta::degree() + 1);
                     assert(ib_trial_r.uid() < BSplinesR::degree() + 1);
                     assert(ib_trial_theta.uid() < BSplinesTheta::degree() + 1);
+                    const IdxBSPolar idx_test_polar(
+                            PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(
+                                    idx_test));
+                    const IdxBSPolar idx_trial_polar(
+                            PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(
+                                    idx_trial));
 
                     // Calculate the weak integral
                     return ddc::parallel_transform_reduce(
@@ -1448,12 +1298,10 @@ public:
                                 IdxQuadratureR const idx_r(idx_quad);
                                 IdxQuadratureTheta const idx_theta(idx_quad);
                                 return weak_integral_element(
+                                        idx_test_polar,
+                                        idx_trial_polar,
                                         idx_r,
                                         idx_theta,
-                                        r_basis_vals_and_derivs(ib_test_r, idx_r),
-                                        r_basis_vals_and_derivs(ib_trial_r, idx_r),
-                                        theta_basis_vals_and_derivs(ib_test_theta, idx_theta),
-                                        theta_basis_vals_and_derivs(ib_trial_theta, idx_theta),
                                         coeff_alpha,
                                         coeff_beta,
                                         evaluator,
@@ -1470,7 +1318,7 @@ public:
      *
      * @return The corresponding indice modulo @f$ \theta @f$ direction cells number
      */
-    static KOKKOS_FUNCTION int theta_mod(int idx_theta)
+    KOKKOS_FUNCTION int theta_mod(int idx_theta) const
     {
         int ncells_theta = ddc::discrete_space<BSplinesTheta>().ncells();
         while (idx_theta < 0)
@@ -1478,6 +1326,56 @@ public:
         while (idx_theta >= ncells_theta)
             idx_theta -= ncells_theta;
         return idx_theta;
+    }
+
+    std::tuple<double, DVector<R_cov, Theta_cov>> get_vals_and_derivs(
+            IdxBSPolar idx,
+            IdxQuadratureRTheta const idx_quad) const
+    {
+        const CoordRTheta coord(ddc::coordinate(idx_quad));
+
+        std::array<double, PolarBSplinesRTheta::n_singular_basis()> singular_data;
+        std::array<double, m_n_non_zero_bases_r * m_n_non_zero_bases_theta> data;
+        // Values of the polar basis splines around the singular point
+        // at a given coordinate
+        DSpan1D singular_vals(singular_data.data(), PolarBSplinesRTheta::n_singular_basis());
+        // Values of the polar basis splines, that do not cover the singular point,
+        // at a given coordinate
+        DSpan2D vals(data.data(), m_n_non_zero_bases_r, m_n_non_zero_bases_theta);
+
+        double val;
+        DVector<R_cov, Theta_cov> derivs;
+        if (idx < IdxBSPolar(PolarBSplinesRTheta::n_singular_basis())) {
+            IdxStepBSPolar idx_step
+                    = idx
+                      - PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>()
+                                .front();
+            ddc::discrete_space<PolarBSplinesRTheta>().eval_basis(singular_vals, vals, coord);
+            val = singular_vals[idx_step.value()];
+            ddc::discrete_space<PolarBSplinesRTheta>().eval_deriv_r(singular_vals, vals, coord);
+            ddcHelper::get<R_cov>(derivs) = singular_vals[idx_step.value()];
+            ddc::discrete_space<PolarBSplinesRTheta>().eval_deriv_theta(singular_vals, vals, coord);
+            ddcHelper::get<Theta_cov>(derivs) = singular_vals[idx_step.value()];
+        } else {
+            IdxBSRTheta idx_front = ddc::discrete_space<PolarBSplinesRTheta>()
+                                            .eval_basis(singular_vals, vals, coord);
+            IdxBSR idx_r(idx_front);
+            IdxBSTheta idx_theta(idx_front);
+            if (idx_r < IdxBSR(m_n_overlap_cells)) {
+                idx_front = IdxBSRTheta(IdxBSR(m_n_overlap_cells), idx_theta);
+            }
+
+            IdxStepBSRTheta offset = PolarBSplinesRTheta::get_2d_index(idx) - idx_front;
+            IdxStepBSR ir(offset);
+            IdxStepBSTheta itheta(theta_mod(ddc::select<BSplinesTheta>(offset)));
+
+            val = vals(ir, itheta);
+            ddc::discrete_space<PolarBSplinesRTheta>().eval_deriv_r(singular_vals, vals, coord);
+            ddcHelper::get<R_cov>(derivs) = vals(ir, itheta);
+            ddc::discrete_space<PolarBSplinesRTheta>().eval_deriv_theta(singular_vals, vals, coord);
+            ddcHelper::get<Theta_cov>(derivs) = vals(ir, itheta);
+        }
+        return std::make_tuple(val, derivs);
     }
 
     /**
