@@ -99,6 +99,9 @@ private:
     /// The 1D B-splines in the poloidal direction
     using BSplinesTheta = typename PolarBSplinesRTheta::BSplinesTheta_tag;
 
+    using KnotsR = ddc::knot_discrete_dimension_t<BSplinesR>;
+    using KnotsTheta = ddc::knot_discrete_dimension_t<BSplinesTheta>;
+
     using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
     using IdxRTheta = Idx<GridR, GridTheta>;
 
@@ -159,9 +162,6 @@ private:
      * @brief Tag a vector on the second dimension of the quadrature mesh.
      */
     using IdxStepQuadratureTheta = IdxStep<QDimThetaMesh>;
-
-    using KnotsR = ddc::NonUniformBsplinesKnots<BSplinesR>;
-    using KnotsTheta = ddc::NonUniformBsplinesKnots<BSplinesTheta>;
 
     using ConstSpline2D = DConstField<IdxRangeBatchedBSRTheta>;
     using PolarSplineMemRTheta = DFieldMem<IdxRange<PolarBSplinesRTheta>>;
@@ -539,54 +539,62 @@ public:
         ddc::for_each(idxrange_singular, [&](IdxBSPolar const idx_test) {
             ddc::for_each(idxrange_non_singular_near_centre, [&](IdxBSRTheta const idx_trial) {
                 const IdxBSPolar idx_trial_polar(to_polar(idx_trial));
-                const Idx<BSplinesR> idx_trial_r(idx_trial);
-                const Idx<BSplinesTheta> idx_trial_theta(idx_trial);
+                const IdxBSR idx_trial_r(idx_trial);
+                const IdxBSTheta idx_trial_theta(idx_trial);
+
+                auto& bspl_r = ddc::discrete_space<BSplinesR>();
+                auto& bspl_theta = ddc::discrete_space<BSplinesTheta>();
 
                 // Find the index range covering the cells where both the test and trial functions are non-zero
-                const Idx<RCellDim> first_overlap_element_r(
-                        idx_trial_r.uid() < BSplinesR::degree()
-                                ? 0
-                                : idx_trial_r.uid() - BSplinesR::degree());
-                const Idx<ThetaCellDim> first_overlap_element_theta(
-                        theta_mod(idx_trial_theta.uid() - BSplinesTheta::degree()));
+                const Idx<KnotsR> start_non_zero_r(
+                        ::max(bspl_r.break_point_domain().front(),
+                              bspl_r.get_first_support_knot(idx_trial_r)));
+                const Idx<KnotsR> end_non_zero_r(
+                        ::min(bspl_r.get_last_support_knot(IdxBSR(PolarBSplinesRTheta::continuity)),
+                              bspl_r.get_last_support_knot(idx_trial_r)));
 
-                const IdxStep<RCellDim> n_overlap_r(
-                        m_n_overlap_cells - first_overlap_element_r.uid());
-                const IdxStep<ThetaCellDim> n_overlap_theta(BSplinesTheta::degree() + 1);
+                const Idx<KnotsTheta> start_non_zero_theta(
+                        bspl_theta.get_first_support_knot(idx_trial_theta));
+                const Idx<KnotsTheta> end_non_zero_theta(
+                        bspl_theta.get_last_support_knot(idx_trial_theta));
 
-                const IdxRange<RCellDim> r_cells(first_overlap_element_r, n_overlap_r);
-                const IdxRange<ThetaCellDim>
-                        theta_cells(first_overlap_element_theta, n_overlap_theta);
-                const IdxRange<RCellDim, ThetaCellDim> non_zero_cells(r_cells, theta_cells);
+                const IdxRange<KnotsR>
+                        knot_range_r(start_non_zero_r, end_non_zero_r - start_non_zero_r);
+                const IdxRange<KnotsTheta> knot_range_theta(
+                        start_non_zero_theta,
+                        end_non_zero_theta - start_non_zero_theta);
+                const IdxRange<KnotsR, KnotsTheta> knot_range(knot_range_r, knot_range_theta);
 
-                if (n_overlap_r > 0) {
-                    double element = 0.0;
 
-                    ddc::for_each(non_zero_cells, [&](IdxCell const cell_idx) {
-                        const int cell_idx_r(ddc::select<RCellDim>(cell_idx).uid());
-                        const int cell_idx_theta(
-                                theta_mod(ddc::select<ThetaCellDim>(cell_idx).uid()));
+                if (knot_range.size() > 0) {
+                    const IdxRangeQuadratureRTheta quad_range
+                            = get_quadrature_points_in_range(knot_range);
+                    IdxRangeQuadratureRTheta full_quad_idx_range(
+                            m_idxrange_quadrature_r,
+                            m_idxrange_quadrature_theta);
+                    // Calculate the weak integral
+                    double element = ddc::parallel_transform_reduce(
+                            Kokkos::DefaultExecutionSpace(),
+                            quad_range,
+                            0.0,
+                            ddc::reducer::sum<double>(),
+                            KOKKOS_LAMBDA(IdxQuadratureRTheta idx_quad) {
+                                // Manage periodicity
+                                if (!full_quad_idx_range.contains(idx_quad)) {
+                                    idx_quad -= IdxStep<QDimThetaMesh>(
+                                            full_quad_idx_range.template extent<QDimThetaMesh>());
+                                }
 
-                        const IdxRangeQuadratureRTheta cell_quad_points(
-                                get_quadrature_points_in_cell(cell_idx_r, cell_idx_theta));
-                        // Calculate the weak integral
-                        element += ddc::parallel_transform_reduce(
-                                Kokkos::DefaultExecutionSpace(),
-                                cell_quad_points,
-                                0.0,
-                                ddc::reducer::sum<double>(),
-                                KOKKOS_LAMBDA(IdxQuadratureRTheta const idx_quad) {
-                                    return weak_integral_element<Mapping>(
-                                            idx_test,
-                                            idx_trial_polar,
-                                            idx_quad,
-                                            coeff_alpha,
-                                            coeff_beta,
-                                            spline_evaluator,
-                                            mapping,
-                                            int_volume_proxy);
-                                });
-                    });
+                                return weak_integral_element<Mapping>(
+                                        idx_test,
+                                        idx_trial_polar,
+                                        idx_quad,
+                                        coeff_alpha,
+                                        coeff_beta,
+                                        spline_evaluator,
+                                        mapping,
+                                        int_volume_proxy);
+                            });
 
                     int const row_idx = idx_test - idxrange_singular.front();
                     int const col_idx = idx_trial_polar - idxrange_singular.front();
@@ -646,10 +654,10 @@ public:
 
             // Calculate the index of the elements that are already filled
             IdxRangeBSTheta remaining_theta(
-                    Idx<BSplinesTheta> {idx_test_theta},
+                    IdxBSTheta {idx_test_theta},
                     IdxStep<BSplinesTheta> {BSplinesTheta::degree() + 1});
-            ddc::for_each(remaining_theta, [&](Idx<BSplinesTheta> const idx_trial_theta) {
-                IdxBSRTheta idx_trial(Idx<BSplinesR>(idx_test_r), idx_trial_theta);
+            ddc::for_each(remaining_theta, [&](IdxBSTheta const idx_trial_theta) {
+                IdxBSRTheta idx_trial(IdxBSR(idx_test_r), idx_trial_theta);
                 IdxBSPolar idx_trial_polar(
                         to_polar(IdxBSRTheta(idx_test_r, theta_mod(idx_trial_theta.uid()))));
                 double element = get_matrix_stencil_element(
@@ -685,7 +693,7 @@ public:
                             min(BSplinesR::degree(),
                                 ddc::discrete_space<BSplinesR>().nbasis() - 2 - idx_test_r)});
             IdxRangeBSTheta relevant_theta(
-                    Idx<BSplinesTheta> {
+                    IdxBSTheta {
                             idx_test_theta + ddc::discrete_space<BSplinesTheta>().nbasis()
                             - BSplinesTheta::degree()},
                     IdxStep<BSplinesTheta> {2 * BSplinesTheta::degree() + 1});
@@ -906,6 +914,32 @@ public:
         const IdxRangeQuadratureR quad_points_r(first_quad_point_r, n_GL_r);
         const IdxRangeQuadratureTheta quad_points_theta(first_quad_point_theta, n_GL_theta);
         return IdxRangeQuadratureRTheta(quad_points_r, quad_points_theta);
+    }
+    KOKKOS_FUNCTION IdxRangeQuadratureRTheta
+    get_quadrature_points_in_range(IdxRange<KnotsR, KnotsTheta> knot_range) const
+    {
+        IdxRange<KnotsR> k_range_r(knot_range);
+        IdxRange<KnotsTheta> k_range_theta(knot_range);
+
+        IdxStep<KnotsR> k_r_offset
+                = k_range_r.front() - ddc::discrete_space<BSplinesR>().break_point_domain().front();
+        IdxQuadratureR q_r_offset
+                = m_idxrange_quadrature_r.front() + k_r_offset.value() * s_n_gauss_legendre_r;
+        IdxStepQuadratureR q_r_len(k_range_r.extents().value() * s_n_gauss_legendre_r);
+        IdxRangeQuadratureR q_range_r(q_r_offset, q_r_len);
+
+        IdxStep<KnotsTheta> k_theta_offset
+                = k_range_theta.front()
+                  - ddc::discrete_space<BSplinesTheta>().break_point_domain().front();
+        if (k_theta_offset < 0)
+            k_theta_offset += ddc::discrete_space<BSplinesTheta>().ncells();
+        IdxQuadratureTheta q_theta_offset = m_idxrange_quadrature_theta.front()
+                                            + k_theta_offset.value() * s_n_gauss_legendre_theta;
+        IdxStepQuadratureTheta q_theta_len(
+                k_range_theta.extents().value() * s_n_gauss_legendre_theta);
+        IdxRangeQuadratureTheta q_range_theta(q_theta_offset, q_theta_len);
+
+        return IdxRangeQuadratureRTheta(q_range_r, q_range_theta);
     }
 
     /**
