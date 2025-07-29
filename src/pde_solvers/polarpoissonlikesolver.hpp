@@ -525,8 +525,8 @@ public:
         ddc::for_each(idxrange_singular, [&](IdxBSPolar const idx_test) {
             ddc::for_each(idxrange_non_singular_near_centre, [&](IdxBSRTheta const idx_trial) {
                 const IdxBSPolar idx_trial_polar(to_polar(idx_trial));
-                const Idx<BSplinesR> idx_trial_r(ddc::select<BSplinesR>(idx_trial));
-                const Idx<BSplinesTheta> idx_trial_theta(ddc::select<BSplinesTheta>(idx_trial));
+                const Idx<BSplinesR> idx_trial_r(idx_trial);
+                const Idx<BSplinesTheta> idx_trial_theta(idx_trial);
 
                 // Find the index range covering the cells where both the test and trial functions are non-zero
                 const Idx<RCellDim> first_overlap_element_r(
