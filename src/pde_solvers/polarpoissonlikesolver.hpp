@@ -246,13 +246,6 @@ private:
     FieldMem<double, IdxRangeQuadratureR> m_weights_r;
     FieldMem<double, IdxRangeQuadratureTheta> m_weights_theta;
 
-    // Basis Spline values and derivatives at Gauss-Legendre points
-    host_t<FieldMem<EvalDeriv2DType, IdxRange<PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh>>>
-            m_singular_basis_vals_and_derivs;
-    host_t<FieldMem<EvalDeriv1DType, IdxRange<RBasisSubset, QDimRMesh>>> m_r_basis_vals_and_derivs;
-    host_t<FieldMem<EvalDeriv1DType, IdxRange<ThetaBasisSubset, QDimThetaMesh>>>
-            m_theta_basis_vals_and_derivs;
-
     FieldMem<double, IdxRangeQuadratureRTheta> m_int_volume;
 
     PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule> m_polar_spline_evaluator;
@@ -316,16 +309,6 @@ public:
                   m_idxrange_quadrature_theta)
         , m_weights_r(m_idxrange_quadrature_r)
         , m_weights_theta(m_idxrange_quadrature_theta)
-        , m_singular_basis_vals_and_derivs(IdxRange<PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh>(
-                  PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>(),
-                  ddc::select<QDimRMesh>(m_idxrange_quadrature_singular),
-                  ddc::select<QDimThetaMesh>(m_idxrange_quadrature_singular)))
-        , m_r_basis_vals_and_derivs(
-                  IdxRange<RBasisSubset, QDimRMesh>(m_non_zero_bases_r, m_idxrange_quadrature_r))
-        , m_theta_basis_vals_and_derivs(
-                  IdxRange<
-                          ThetaBasisSubset,
-                          QDimThetaMesh>(m_non_zero_bases_theta, m_idxrange_quadrature_theta))
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
         , m_phi_spline_coef(ddc::discrete_space<PolarBSplinesRTheta>().full_domain())
         , m_x_init(
@@ -356,74 +339,6 @@ public:
                 mapping,
                 gauss_legendre_quadrature_coefficients<
                         Kokkos::DefaultExecutionSpace>(gl_coeffs_r, gl_coeffs_theta));
-
-        // Find value and derivative of 1D B-splines in radial direction
-        ddc::for_each(m_idxrange_quadrature_r, [&](IdxQuadratureR const idx_r) {
-            std::array<double, 2 * m_n_non_zero_bases_r> data;
-            DSpan2D vals(data.data(), m_n_non_zero_bases_r, 2);
-            ddc::discrete_space<BSplinesR>()
-                    .eval_basis_and_n_derivs(vals, ddc::coordinate(idx_r), 1);
-            for (auto ib : m_non_zero_bases_r) {
-                const int ib_idx = ib - m_non_zero_bases_r.front();
-                m_r_basis_vals_and_derivs(ib, idx_r).value = vals(ib_idx, 0);
-                m_r_basis_vals_and_derivs(ib, idx_r).derivative = vals(ib_idx, 1);
-            }
-        });
-
-        // Find value and derivative of 1D B-splines in poloidal direction
-        ddc::for_each(m_idxrange_quadrature_theta, [&](IdxQuadratureTheta const idx_theta) {
-            std::array<double, 2 * m_n_non_zero_bases_theta> data;
-            DSpan2D vals(data.data(), m_n_non_zero_bases_theta, 2);
-            ddc::discrete_space<BSplinesTheta>()
-                    .eval_basis_and_n_derivs(vals, ddc::coordinate(idx_theta), 1);
-            for (auto ib : m_non_zero_bases_theta) {
-                const int ib_idx = ib - m_non_zero_bases_theta.front();
-                m_theta_basis_vals_and_derivs(ib, idx_theta).value = vals(ib_idx, 0);
-                m_theta_basis_vals_and_derivs(ib, idx_theta).derivative = vals(ib_idx, 1);
-            }
-        });
-
-        IdxRangeBSPolar idxrange_singular
-                = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
-
-        // Find value and derivative of 2D B-splines covering the singular point
-        ddc::for_each(m_idxrange_quadrature_singular, [&](IdxQuadratureRTheta const irtheta) {
-            std::array<double, PolarBSplinesRTheta::n_singular_basis()> singular_data;
-            std::array<double, m_n_non_zero_bases_r * m_n_non_zero_bases_theta> data;
-            // Values of the polar basis splines around the singular point
-            // at a given coordinate
-            DSpan1D singular_vals(singular_data.data(), PolarBSplinesRTheta::n_singular_basis());
-            // Values of the polar basis splines, that do not cover the singular point,
-            // at a given coordinate
-            DSpan2D vals(data.data(), m_n_non_zero_bases_r, m_n_non_zero_bases_theta);
-            IdxQuadratureR const idx_r(irtheta);
-            IdxQuadratureTheta const idx_theta(irtheta);
-
-            const CoordRTheta coord(ddc::coordinate(irtheta));
-
-            // Calculate the value
-            ddc::discrete_space<PolarBSplinesRTheta>().eval_basis(singular_vals, vals, coord);
-            for (IdxBSPolar ib : idxrange_singular) {
-                m_singular_basis_vals_and_derivs(ib, idx_r, idx_theta).value
-                        = singular_vals[ib - idxrange_singular.front()];
-            }
-
-            // Calculate the radial derivative
-            ddc::discrete_space<PolarBSplinesRTheta>().eval_deriv_r(singular_vals, vals, coord);
-            for (IdxBSPolar ib : idxrange_singular) {
-                ddcHelper::get<R_cov>(
-                        m_singular_basis_vals_and_derivs(ib, idx_r, idx_theta).derivative)
-                        = singular_vals[ib - idxrange_singular.front()];
-            }
-
-            // Calculate the poloidal derivative
-            ddc::discrete_space<PolarBSplinesRTheta>().eval_deriv_theta(singular_vals, vals, coord);
-            for (IdxBSPolar ib : idxrange_singular) {
-                ddcHelper::get<Theta_cov>(
-                        m_singular_basis_vals_and_derivs(ib, idx_r, idx_theta).derivative)
-                        = singular_vals[ib - idxrange_singular.front()];
-            }
-        });
 
         // Number of elements in the matrix that correspond to the splines
         // that cover the singular point
@@ -531,11 +446,6 @@ public:
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
         IdxRangeQuadratureRTheta idxrange_quadrature_singular = m_idxrange_quadrature_singular;
 
-        auto singular_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                get_field(m_singular_basis_vals_and_derivs));
-        Field<EvalDeriv2DType, IdxRange<PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh>>
-                singular_basis_vals_and_derivs = get_field(singular_basis_vals_and_derivs_alloc);
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume);
 
         Kokkos::Profiling::pushRegion("PolarPoissonFillFemMatrix");
@@ -615,22 +525,7 @@ public:
                 central_radial_bspline_idx_range,
                 m_idxrange_bsplines_theta);
 
-        auto singular_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                get_field(m_singular_basis_vals_and_derivs));
-        auto r_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                get_field(m_r_basis_vals_and_derivs));
-        auto theta_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                get_field(m_theta_basis_vals_and_derivs));
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume);
-        Field<EvalDeriv2DType, IdxRange<PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh>>
-                singular_basis_vals_and_derivs = get_field(singular_basis_vals_and_derivs_alloc);
-        Field<EvalDeriv1DType, IdxRange<RBasisSubset, QDimRMesh>> r_basis_vals_and_derivs
-                = get_field(r_basis_vals_and_derivs_alloc);
-        Field<EvalDeriv1DType, IdxRange<ThetaBasisSubset, QDimThetaMesh>>
-                theta_basis_vals_and_derivs = get_field(theta_basis_vals_and_derivs_alloc);
         // Calculate the matrix elements where bspline products overlap the B-splines which cover the singular point
         ddc::for_each(idxrange_singular, [&](IdxBSPolar const idx_test) {
             ddc::for_each(idxrange_non_singular_near_centre, [&](IdxBSRTheta const idx_trial) {
@@ -880,12 +775,29 @@ public:
                             0.0,
                             ddc::reducer::sum<double>(),
                             [&](IdxQuadratureRTheta const idx_quad) {
+                                const CoordRTheta coord(ddc::coordinate(idx_quad));
+
+                                std::array<double, PolarBSplinesRTheta::n_singular_basis()>
+                                        singular_data;
+                                std::array<double, m_n_non_zero_bases_r * m_n_non_zero_bases_theta>
+                                        data;
+                                // Values of the polar basis splines around the singular point
+                                // at a given coordinate
+                                DSpan1D singular_vals(
+                                        singular_data.data(),
+                                        PolarBSplinesRTheta::n_singular_basis());
+                                // Values of the polar basis splines, that do not cover the singular point,
+                                // at a given coordinate
+                                DSpan2D
+                                        vals(data.data(),
+                                             m_n_non_zero_bases_r,
+                                             m_n_non_zero_bases_theta);
+
+                                ddc::discrete_space<PolarBSplinesRTheta>()
+                                        .eval_basis(singular_vals, vals, coord);
                                 IdxQuadratureR const idx_r(idx_quad);
                                 IdxQuadratureTheta const idx_theta(idx_quad);
-                                CoordRTheta coord(ddc::coordinate(idx_quad));
-                                return rhs(coord)
-                                       * m_singular_basis_vals_and_derivs(idx, idx_r, idx_theta)
-                                                 .value
+                                return rhs(coord) * singular_vals[bspl_idx]
                                        * int_volume_host(idx_r, idx_theta);
                             });
                 });
@@ -935,9 +847,7 @@ public:
                             IdxQuadratureR const idx_r(idx_quad);
                             IdxQuadratureTheta const idx_theta(idx_quad);
                             CoordRTheta coord(ddc::coordinate(idx_quad));
-                            double rb = m_r_basis_vals_and_derivs(ib_r, idx_r).value;
-                            double pb = m_theta_basis_vals_and_derivs(ib_theta, idx_theta).value;
-                            return rhs(coord) * rb * pb * int_volume_host(idx_r, idx_theta);
+                            return rhs(coord) * get_vals(idx, idx_quad) * int_volume_host(idx_r, idx_theta);
                         });
             });
             const std::size_t singular_index
@@ -1036,49 +946,6 @@ public:
         const IdxRangeQuadratureR quad_points_r(first_quad_point_r, n_GL_r);
         const IdxRangeQuadratureTheta quad_points_theta(first_quad_point_theta, n_GL_theta);
         return IdxRangeQuadratureRTheta(quad_points_r, quad_points_theta);
-    }
-
-
-    /**
-     * @brief Computes the value and gradient from r_basis and theta_basis inputs.
-     * 
-     * @param[out] value The product of radial and poloidal values.
-     *
-     * @param[out] derivs derivatives over @f$ (r, \theta) @f$ directions. 
-     *
-     * @param[in] r_basis A data structure containing values and derivative over radial direction.
-     *
-     * @param[in] theta_basis A data structure containing values and derivative over poloidal direction.
-     */
-    KOKKOS_INLINE_FUNCTION void get_value_and_gradient(
-            double& value,
-            DVector<R_cov, Theta_cov>& derivs,
-            EvalDeriv1DType const& r_basis,
-            EvalDeriv1DType const& theta_basis) const
-    {
-        value = r_basis.value * theta_basis.value;
-        ddcHelper::get<R_cov>(derivs) = r_basis.derivative * theta_basis.value;
-        ddcHelper::get<Theta_cov>(derivs) = r_basis.value * theta_basis.derivative;
-    }
-
-    /**
-     * @brief Computes the value and gradient from r_basis and theta_basis inputs.
-     * 
-     * @param[out] value The product of radial and poloidal values.
-     *
-     * @param[out] derivs derivatives over @f$ (r, \theta) @f$ directions. 
-     *
-     * @param[in] basis A data structure containing values and derivative over radial and poloidal directions.
-     *
-     */
-    KOKKOS_INLINE_FUNCTION void get_value_and_gradient(
-            double& value,
-            DVector<R_cov, Theta_cov>& derivs,
-            EvalDeriv2DType const& basis,
-            EvalDeriv2DType const&) const // Last argument is duplicate
-    {
-        value = basis.value;
-        derivs = basis.derivative;
     }
 
     /**
@@ -1243,17 +1110,6 @@ public:
         const IdxRange<ThetaCellDim> theta_cells(first_overlap_element_theta, n_overlap_theta);
         const IdxRange<RCellDim, ThetaCellDim> non_zero_cells(r_cells, theta_cells);
 
-        auto r_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                get_field(m_r_basis_vals_and_derivs));
-        auto theta_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                get_field(m_theta_basis_vals_and_derivs));
-
-        Field<EvalDeriv1DType, IdxRange<RBasisSubset, QDimRMesh>> r_basis_vals_and_derivs
-                = get_field(r_basis_vals_and_derivs_alloc);
-        Field<EvalDeriv1DType, IdxRange<ThetaBasisSubset, QDimThetaMesh>>
-                theta_basis_vals_and_derivs = get_field(theta_basis_vals_and_derivs_alloc);
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume);
 
         assert(n_overlap_r * n_overlap_theta > 0);
@@ -1326,6 +1182,43 @@ public:
         while (idx_theta >= ncells_theta)
             idx_theta -= ncells_theta;
         return idx_theta;
+    }
+
+    double get_vals(IdxBSPolar idx, IdxQuadratureRTheta const idx_quad) const
+    {
+        const CoordRTheta coord(ddc::coordinate(idx_quad));
+
+        std::array<double, PolarBSplinesRTheta::n_singular_basis()> singular_data;
+        std::array<double, m_n_non_zero_bases_r * m_n_non_zero_bases_theta> data;
+        // Values of the polar basis splines around the singular point
+        // at a given coordinate
+        DSpan1D singular_vals(singular_data.data(), PolarBSplinesRTheta::n_singular_basis());
+        // Values of the polar basis splines, that do not cover the singular point,
+        // at a given coordinate
+        DSpan2D vals(data.data(), m_n_non_zero_bases_r, m_n_non_zero_bases_theta);
+
+        if (idx < IdxBSPolar(PolarBSplinesRTheta::n_singular_basis())) {
+            IdxStepBSPolar idx_step
+                    = idx
+                      - PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>()
+                                .front();
+            ddc::discrete_space<PolarBSplinesRTheta>().eval_basis(singular_vals, vals, coord);
+            return singular_vals[idx_step.value()];
+        } else {
+            IdxBSRTheta idx_front = ddc::discrete_space<PolarBSplinesRTheta>()
+                                            .eval_basis(singular_vals, vals, coord);
+            IdxBSR idx_r(idx_front);
+            IdxBSTheta idx_theta(idx_front);
+            if (idx_r < IdxBSR(m_n_overlap_cells)) {
+                idx_front = IdxBSRTheta(IdxBSR(m_n_overlap_cells), idx_theta);
+            }
+
+            IdxStepBSRTheta offset = PolarBSplinesRTheta::get_2d_index(idx) - idx_front;
+            IdxStepBSR ir(offset);
+            IdxStepBSTheta itheta(theta_mod(ddc::select<BSplinesTheta>(offset)));
+
+            return vals(ir, itheta);
+        }
     }
 
     std::tuple<double, DVector<R_cov, Theta_cov>> get_vals_and_derivs(
