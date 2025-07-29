@@ -1376,7 +1376,7 @@ public:
     /**
      * Convert a 2D (r,theta) bspline index into a polar bspline index.
      *
-     * @param[in] The 2D (r,theta) bspline index.
+     * @param[in] idx The 2D (r,theta) bspline index.
      * @return The polar bspline index.
      */
     KOKKOS_INLINE_FUNCTION IdxBSPolar to_polar(IdxBSRTheta idx) const
