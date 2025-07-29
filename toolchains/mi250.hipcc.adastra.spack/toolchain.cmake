@@ -32,10 +32,5 @@ set(koliop_ENABLE_LTO OFF CACHE BOOL "")
 set(CMAKE_CXX_FLAGS_INIT "${CMAKE_CXX_FLAGS_INIT} -Wall -Wextra -Wpedantic -Wcast-align -Wformat=2 -Winit-self -Woverloaded-virtual -Wsign-promo -Wstrict-aliasing -Wdisabled-optimization -Wtautological-compare -Wpacked -Wunreachable-code -Wno-sign-compare -Wno-unused-parameter -Wno-unused-but-set-variable")
 
 # FIXME: blas are not properly detected.
-set(CMAKE_CXX_FLAGS_INIT "${CMAKE_CXX_FLAGS_INIT} -isystem $ENV{CRAY_LIBSCI_PREFIX}/include")
+set(CMAKE_CXX_FLAGS_INIT "${CMAKE_CXX_FLAGS_INIT} -isystem $ENV{SPACK_USER_PREFIX}/linux-rhel8-zen3/gcc-13.2.1.mi250.raw/openblas-0.3.28-ipbz/include")
 set(CMAKE_EXE_LINKER_FLAGS_INIT "$ENV{PE_MPICH_GTL_DIR_amd_gfx90a} $ENV{PE_MPICH_GTL_LIBS_amd_gfx90a}")
-
-# NOTE: People often export this as environment variable instead.
-set(BLAS_LIBRARIES "$ENV{CRAY_LIBSCI_PREFIX}/lib/libsci_gnu.so;" CACHE STRING "")
-# set(LAPACK_LIBRARIES "$ENV{CRAY_LIBSCI_PREFIX}/lib/libsci_gnu.so;" CACHE STRING "")
-# set(LAPACKE_LIBRARIES "$ENV{CRAY_LIBSCI_PREFIX}/lib/libsci_gnu.so;" CACHE STRING "")
