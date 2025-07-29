@@ -1143,6 +1143,15 @@ public:
         return idx_theta;
     }
 
+    /**
+     * @brief Get the value and derivative of the specified polar bspline at the specified quadrature point.
+     *
+     * @param[in] idx
+     *      The polar bspline of interest.
+     * @param[in] idx_quad
+     *      The index of the quadrature point where the values and derivatives should be calculated.
+     * @return The value and the derivative of the polar bspline.
+     */
     template <bool calculate_derivs = true>
     auto get_polar_bspline_vals_and_derivs(IdxBSPolar idx, IdxQuadratureRTheta const idx_quad) const
     {
@@ -1202,6 +1211,15 @@ public:
         }
     }
 
+    /**
+     * @brief Get the value of the specified polar bspline at the specified quadrature point.
+     *
+     * @param[in] idx
+     *      The polar bspline of interest.
+     * @param[in] idx_quad
+     *      The index of the quadrature point where the values and derivatives should be calculated.
+     * @return The value of the polar bspline at the coordinate.
+     */
     double get_polar_bspline_vals(IdxBSPolar idx, IdxQuadratureRTheta const idx_quad) const
     {
         return get_polar_bspline_vals_and_derivs<false>(idx, idx_quad);
@@ -1355,6 +1373,12 @@ public:
         Kokkos::Profiling::popRegion();
     }
 
+    /**
+     * Convert a 2D (r,theta) bspline index into a polar bspline index.
+     *
+     * @param[in] The 2D (r,theta) bspline index.
+     * @return The polar bspline index.
+     */
     KOKKOS_INLINE_FUNCTION IdxBSPolar to_polar(IdxBSRTheta idx) const
     {
         return PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(idx);
