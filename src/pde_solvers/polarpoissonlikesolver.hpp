@@ -235,7 +235,12 @@ private:
 
     FieldMem<double, IdxRangeQuadratureRTheta> m_int_volume;
 
-    PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule> m_polar_spline_evaluator;
+    PolarSplineEvaluator<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            PolarBSplinesRTheta,
+            ddc::NullExtrapolationRule>
+            m_polar_spline_evaluator;
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>
             m_gko_matrix;
     mutable host_t<PolarSplineMemRTheta> m_phi_spline_coef;
@@ -263,6 +268,16 @@ public:
      *      the equation is defined.
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
+     * @param[in] max_iter
+     *      The maximum number of iterations possible for the batched CSR solver.
+     * @param[in] res_tol
+     *      The residual tolerance for the batched CSR solver. Be careful! the relative residual
+     *      provided here, will be used as "implicit residual" in ginkgo solver.
+     * @param[in] batch_solver_logger
+     *      Indicates whether log information such as the residual and the number of iterations
+     *      should be monitored.
+     * @param[in] preconditioner_max_block_size
+     *      The maximum size of the Jacobi preconditioner used by the batched CSR solver.
      *
      * @tparam Mapping A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
      */
@@ -271,7 +286,11 @@ public:
             ConstSpline2D coeff_alpha,
             ConstSpline2D coeff_beta,
             Mapping const& mapping,
-            SplineRThetaEvaluatorNullBound const& spline_evaluator)
+            SplineRThetaEvaluatorNullBound const& spline_evaluator,
+            std::optional<int> max_iter = std::nullopt,
+            std::optional<double> res_tol = std::nullopt,
+            std::optional<bool> batch_solver_logger = std::nullopt,
+            std::optional<int> preconditioner_max_block_size = std::nullopt)
         : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - m_n_overlap_cells - 1)
         , m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
         , m_matrix_size(ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - m_nbasis_theta)
@@ -358,9 +377,15 @@ public:
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace>
                 nnz_per_row_csr_host("nnz_per_row_csr", m_matrix_size + 1);
 
-        m_gko_matrix = std::make_unique<MatrixBatchCsr<
-                Kokkos::DefaultExecutionSpace,
-                MatrixBatchCsrSolver::CG>>(1, m_matrix_size, n_matrix_elements);
+        m_gko_matrix = std::make_unique<
+                MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>(
+                1,
+                m_matrix_size,
+                n_matrix_elements,
+                max_iter,
+                res_tol,
+                batch_solver_logger,
+                preconditioner_max_block_size);
         auto [values, col_idx, nnz_per_row] = m_gko_matrix->get_batch_csr();
         init_nnz_per_line(nnz_per_row);
         Kokkos::deep_copy(nnz_per_row_csr_host, nnz_per_row);
@@ -829,7 +854,6 @@ public:
         Kokkos::deep_copy(b, b_host);
         Kokkos::Profiling::popRegion();
 
-        Kokkos::deep_copy(m_x_init, x_init_host);
         // Solve the matrix equation
         Kokkos::Profiling::pushRegion("PolarPoissonSolve");
         m_gko_matrix->solve(m_x_init, b);
@@ -882,18 +906,10 @@ public:
 
         (*this)(rhs, get_field(m_phi_spline_coef));
         CoordFieldMemRTheta coords_eval_alloc(get_idx_range(phi));
-        CoordFieldRTheta coords_eval(get_field(coords_eval_alloc));
-        ddc::parallel_for_each(
+        auto phi_spline_coef_device = ddc::create_mirror_view_and_copy(
                 Kokkos::DefaultExecutionSpace(),
-                get_idx_range(phi),
-                KOKKOS_LAMBDA(IdxRTheta idx) { coords_eval(idx) = ddc::coordinate(idx); });
-        auto coords_eval_host = ddc::create_mirror_and_copy(coords_eval);
-        auto phi_host = ddc::create_mirror_and_copy(phi);
-        m_polar_spline_evaluator(
-                get_field(phi_host),
-                get_const_field(coords_eval_host),
-                get_const_field(m_phi_spline_coef));
-        ddc::parallel_deepcopy(phi, phi_host);
+                get_field(m_phi_spline_coef));
+        m_polar_spline_evaluator(phi, get_const_field(phi_spline_coef_device));
     }
 
     /**
