@@ -222,11 +222,6 @@ private:
     static constexpr IdxStep<ThetaBasisSubset> m_n_non_zero_bases_theta
             = IdxStep<ThetaBasisSubset>(BSplinesTheta::degree() + 1);
 
-    static constexpr IdxRange<RBasisSubset> m_non_zero_bases_r
-            = IdxRange<RBasisSubset>(Idx<RBasisSubset> {0}, m_n_non_zero_bases_r);
-    static constexpr IdxRange<ThetaBasisSubset> m_non_zero_bases_theta
-            = IdxRange<ThetaBasisSubset>(Idx<ThetaBasisSubset> {0}, m_n_non_zero_bases_theta);
-
     const int m_nbasis_r;
     const int m_nbasis_theta;
 
@@ -529,9 +524,7 @@ public:
         // Calculate the matrix elements where bspline products overlap the B-splines which cover the singular point
         ddc::for_each(idxrange_singular, [&](IdxBSPolar const idx_test) {
             ddc::for_each(idxrange_non_singular_near_centre, [&](IdxBSRTheta const idx_trial) {
-                const IdxBSPolar idx_trial_polar(
-                        PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(
-                                idx_trial));
+                const IdxBSPolar idx_trial_polar(to_polar(idx_trial));
                 const Idx<BSplinesR> idx_trial_r(ddc::select<BSplinesR>(idx_trial));
                 const Idx<BSplinesTheta> idx_trial_theta(ddc::select<BSplinesTheta>(idx_trial));
 
@@ -562,10 +555,6 @@ public:
 
                         const IdxRangeQuadratureRTheta cell_quad_points(
                                 get_quadrature_points_in_cell(cell_idx_r, cell_idx_theta));
-                        // Find the column where the non-zero data is stored
-                        Idx<RBasisSubset> ib_trial_r(idx_trial_r.uid() - cell_idx_r);
-                        Idx<ThetaBasisSubset> ib_trial_theta(
-                                theta_mod(idx_trial_theta.uid() - cell_idx_theta));
                         // Calculate the weak integral
                         element += ddc::parallel_transform_reduce(
                                 Kokkos::DefaultExecutionSpace(),
@@ -651,8 +640,7 @@ public:
             ddc::for_each(remaining_theta, [&](Idx<BSplinesTheta> const idx_trial_theta) {
                 IdxBSRTheta idx_trial(Idx<BSplinesR>(idx_test_r), idx_trial_theta);
                 IdxBSPolar idx_trial_polar(
-                        PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(
-                                IdxBSRTheta(idx_test_r, theta_mod(idx_trial_theta.uid()))));
+                        to_polar(IdxBSRTheta(idx_test_r, theta_mod(idx_trial_theta.uid()))));
                 double element = get_matrix_stencil_element(
                         idx_test,
                         idx_trial,
@@ -697,8 +685,7 @@ public:
                 const int idx_trial_r(ddc::select<BSplinesR>(idx_trial).uid());
                 const int idx_trial_theta(ddc::select<BSplinesTheta>(idx_trial).uid());
                 IdxBSPolar idx_trial_polar(
-                        PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(
-                                IdxBSRTheta(idx_trial_r, theta_mod(idx_trial_theta))));
+                        to_polar(IdxBSRTheta(idx_trial_r, theta_mod(idx_trial_theta))));
                 double element = get_matrix_stencil_element(
                         idx_test,
                         idx_trial,
@@ -847,7 +834,8 @@ public:
                             IdxQuadratureR const idx_r(idx_quad);
                             IdxQuadratureTheta const idx_theta(idx_quad);
                             CoordRTheta coord(ddc::coordinate(idx_quad));
-                            return rhs(coord) * get_vals(idx, idx_quad) * int_volume_host(idx_r, idx_theta);
+                            return rhs(coord) * get_vals(idx, idx_quad)
+                                   * int_volume_host(idx_r, idx_theta);
                         });
             });
             const std::size_t singular_index
@@ -883,7 +871,7 @@ public:
             spline(idx) = x_init_host(0, idx.uid());
         });
         ddc::for_each(dirichlet_boundary_idx_range, [&](IdxBSRTheta const idx) {
-            spline(PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(idx)) = 0.0;
+            spline(to_polar(idx)) = 0.0;
         });
         Kokkos::Profiling::popRegion();
     }
@@ -1124,25 +1112,8 @@ public:
                     const IdxRangeQuadratureRTheta cell_quad_points(
                             get_quadrature_points_in_cell(cell_idx_r, cell_idx_theta));
 
-                    int ib_test_theta_idx = idx_test_theta - cell_idx_theta;
-                    int ib_trial_theta_idx = idx_trial_theta - cell_idx_theta;
-
-                    // Find the column where the non-zero data is stored
-                    Idx<RBasisSubset> ib_test_r(idx_test_r - cell_idx_r);
-                    Idx<ThetaBasisSubset> ib_test_theta(theta_mod(ib_test_theta_idx));
-                    Idx<RBasisSubset> ib_trial_r(idx_trial_r - cell_idx_r);
-                    Idx<ThetaBasisSubset> ib_trial_theta(theta_mod(ib_trial_theta_idx));
-
-                    assert(ib_test_r.uid() < BSplinesR::degree() + 1);
-                    assert(ib_test_theta.uid() < BSplinesTheta::degree() + 1);
-                    assert(ib_trial_r.uid() < BSplinesR::degree() + 1);
-                    assert(ib_trial_theta.uid() < BSplinesTheta::degree() + 1);
-                    const IdxBSPolar idx_test_polar(
-                            PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(
-                                    idx_test));
-                    const IdxBSPolar idx_trial_polar(
-                            PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(
-                                    idx_trial));
+                    const IdxBSPolar idx_test_polar(to_polar(idx_test));
+                    const IdxBSPolar idx_trial_polar(to_polar(idx_trial));
 
                     // Calculate the weak integral
                     return ddc::parallel_transform_reduce(
@@ -1352,8 +1323,7 @@ public:
                             [&](int const& thread_index) {
                                 IdxStepBSTheta itheta(thread_index);
                                 IdxBSRTheta k_2d = idxrange_singular_overlap.front() + ir + itheta;
-                                IdxBSPolar k(PolarBSplinesRTheta::template get_polar_index<
-                                             PolarBSplinesRTheta>(k_2d));
+                                IdxBSPolar k(to_polar(k_2d));
                                 nnz(k) = nnz_sum_to_r
                                          + (thread_index + 1)
                                                    * (n_singular_basis + nr * stencil_overlap);
@@ -1369,9 +1339,7 @@ public:
         IdxRangeBSR idxrange_bsplines_r_stencil
                 = m_idxrange_bsplines_r.remove(n_one_side_overlap, n_one_side_overlap + 1);
         IdxRangeBSRTheta idxrange_stencil(idxrange_bsplines_r_stencil, idxrange_bsplines_theta);
-        IdxBSPolar idx_stencil_front
-                = PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(
-                        idxrange_stencil.front());
+        IdxBSPolar idx_stencil_front = to_polar(idxrange_stencil.front());
         // Stencil for tensor product bsplines which only overlap with other tensor product bsplines
         Kokkos::parallel_for(
                 "Inner Stencil",
@@ -1388,8 +1356,7 @@ public:
                                                .remove_last(IdxStepBSR(1));
         IdxRangeBSRTheta outer_bsplines_2d(outer_bsplines_r, idxrange_bsplines_theta);
         IdxRangeBSPolar outer_bsplines(
-                PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(
-                        outer_bsplines_2d.front()),
+                to_polar(outer_bsplines_2d.front()),
                 IdxStepBSPolar(outer_bsplines_2d.size() - 1));
         assert(outer_bsplines.back() == get_idx_range(nnz).back());
         // Approaching the external boundary the overlapping possibilities between two radial splines decrease
@@ -1412,8 +1379,7 @@ public:
                             [&](int const& thread_index) {
                                 IdxStepBSTheta itheta(thread_index);
                                 IdxBSRTheta k_2d = outer_bsplines_2d.front() + ir + itheta;
-                                IdxBSPolar k(PolarBSplinesRTheta::template get_polar_index<
-                                             PolarBSplinesRTheta>(k_2d));
+                                IdxBSPolar k(to_polar(k_2d));
                                 if (outer_bsplines.contains(k)) {
                                     nnz(k) = nnz_sum_to_r
                                              + (thread_index + 1) * nr * stencil_overlap;
@@ -1422,5 +1388,10 @@ public:
                 });
 
         Kokkos::Profiling::popRegion();
+    }
+
+    KOKKOS_INLINE_FUNCTION IdxBSPolar to_polar(IdxBSRTheta idx) const
+    {
+        return PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(idx);
     }
 };
