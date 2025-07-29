@@ -70,12 +70,6 @@ private:
     using Theta_cov = typename Theta::Dual;
 
 public:
-    struct RBasisSubset
-    {
-    };
-    struct ThetaBasisSubset
-    {
-    };
     struct RCellDim
     {
     };
@@ -215,12 +209,10 @@ private:
 
     // Number of cells over which a radial B-splines has its support
     // This is the case for b-splines which are not affected by the higher knot multiplicity at the boundary.
-    static constexpr IdxStep<RBasisSubset> m_n_non_zero_bases_r
-            = IdxStep<RBasisSubset>(BSplinesR::degree() + 1);
+    static constexpr int m_n_non_zero_bases_r = BSplinesR::degree() + 1;
 
     // Number of cells over which a poloidal B-splines has its support
-    static constexpr IdxStep<ThetaBasisSubset> m_n_non_zero_bases_theta
-            = IdxStep<ThetaBasisSubset>(BSplinesTheta::degree() + 1);
+    static constexpr int m_n_non_zero_bases_theta = BSplinesTheta::degree() + 1;
 
     const int m_nbasis_r;
     const int m_nbasis_theta;
@@ -820,10 +812,6 @@ public:
 
                 const IdxRangeQuadratureRTheta cell_quad_points(
                         get_quadrature_points_in_cell(cell_idx_r, cell_idx_theta));
-
-                // Find the column where the non-zero data is stored
-                Idx<RBasisSubset> ib_r(idx_r - cell_idx_r);
-                Idx<ThetaBasisSubset> ib_theta(theta_mod(idx_theta - cell_idx_theta));
 
                 // Calculate the weak integral
                 element += ddc::transform_reduce(
