@@ -151,10 +151,15 @@ public:
     {
         Idx<BSplinesR> idx_r(idx);
         Idx<BSplinesTheta> idx_theta(idx);
+        int const n_theta = ddc::discrete_space<BSplinesTheta>().nbasis();
         int const r_idx = idx_r - Idx<BSplinesR>(C + 1);
-        int const theta_idx = idx_theta - Idx<BSplinesTheta>(0);
+        int theta_idx = idx_theta - Idx<BSplinesTheta>(0);
+        // theta_idx may be too large but it cannot be too small as Idx is unsigned
+        while (theta_idx >= n_theta)
+            theta_idx -= n_theta;
+
         assert(r_idx >= 0);
-        int local_idx(r_idx * ddc::discrete_space<BSplinesTheta>().nbasis() + theta_idx);
+        int local_idx(r_idx * n_theta + theta_idx);
         return Idx<DDim>(n_singular_basis() + local_idx);
     }
 
