@@ -963,7 +963,7 @@ public:
      * the quadrature point given by the indices.
      */
     template <class Mapping>
-    KOKKOS_FUNCTION double weak_integral_element(
+    static KOKKOS_FUNCTION double weak_integral_element(
             IdxBSPolar idx_test,
             IdxBSPolar idx_trial,
             IdxQuadratureRTheta idx_quad,
@@ -971,7 +971,7 @@ public:
             ConstSpline2D coeff_beta,
             SplineRThetaEvaluatorNullBound const& spline_evaluator,
             Mapping const& mapping,
-            DField<IdxRangeQuadratureRTheta> int_volume) const
+            DField<IdxRangeQuadratureRTheta> int_volume)
     {
         // Calculate coefficients at quadrature point
         CoordRTheta coord(ddc::coordinate(idx_quad));
@@ -981,12 +981,10 @@ public:
         // Define the value and gradient of the test and trial basis functions
         double basis_val_test_space;
         double basis_val_trial_space;
-        DVector<R_cov, Theta_cov> basis_derivs_test_space;
-        DVector<R_cov, Theta_cov> basis_derivs_trial_space;
-        std::tie(basis_val_test_space, basis_derivs_test_space)
-                = get_polar_bspline_vals_and_derivs(idx_test, idx_quad);
-        std::tie(basis_val_trial_space, basis_derivs_trial_space)
-                = get_polar_bspline_vals_and_derivs(idx_trial, idx_quad);
+        DVector<R_cov, Theta_cov> basis_derivs_test_space
+                = get_polar_bspline_vals_and_derivs(basis_val_test_space, idx_test, idx_quad);
+        DVector<R_cov, Theta_cov> basis_derivs_trial_space
+                = get_polar_bspline_vals_and_derivs(basis_val_trial_space, idx_trial, idx_quad);
 
         MetricTensorEvaluator<Mapping, CoordRTheta> get_metric_tensor(mapping);
 
@@ -1133,7 +1131,7 @@ public:
      *
      * @return The corresponding indice modulo @f$ \theta @f$ direction cells number
      */
-    KOKKOS_FUNCTION int theta_mod(int idx_theta) const
+    static KOKKOS_FUNCTION int theta_mod(int idx_theta)
     {
         int ncells_theta = ddc::discrete_space<BSplinesTheta>().ncells();
         while (idx_theta < 0)
@@ -1153,7 +1151,7 @@ public:
      * @return The value and the derivative of the polar bspline.
      */
     template <bool calculate_derivs = true>
-    auto get_polar_bspline_vals_and_derivs(IdxBSPolar idx, IdxQuadratureRTheta const idx_quad) const
+    static KOKKOS_FUNCTION auto get_polar_bspline_vals_and_derivs(double& val, IdxBSPolar idx, IdxQuadratureRTheta const idx_quad)
     {
         const CoordRTheta coord(ddc::coordinate(idx_quad));
 
@@ -1174,16 +1172,16 @@ public:
                       - PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>()
                                 .front();
             polar_bspl.eval_basis(singular_vals, vals, coord);
-            double val = singular_vals[offset.value()];
+            val = singular_vals[offset.value()];
             if constexpr (calculate_derivs) {
                 polar_bspl.eval_deriv_r(singular_vals, vals, coord);
                 double r_deriv = singular_vals[offset.value()];
                 polar_bspl.eval_deriv_theta(singular_vals, vals, coord);
                 double theta_deriv = singular_vals[offset.value()];
                 DVector<R_cov, Theta_cov> derivs(r_deriv, theta_deriv);
-                return std::make_tuple(val, derivs);
+                return derivs;
             } else {
-                return val;
+                return;
             }
         } else {
             IdxBSRTheta idx_front = polar_bspl.eval_basis(singular_vals, vals, coord);
@@ -1197,16 +1195,16 @@ public:
             IdxStepBSR ir(offset);
             IdxStepBSTheta itheta(theta_mod(ddc::select<BSplinesTheta>(offset)));
 
-            double val = vals(ir, itheta);
+            val = vals(ir, itheta);
             if constexpr (calculate_derivs) {
                 polar_bspl.eval_deriv_r(singular_vals, vals, coord);
                 double r_deriv = vals(ir, itheta);
                 polar_bspl.eval_deriv_theta(singular_vals, vals, coord);
                 double theta_deriv = vals(ir, itheta);
                 DVector<R_cov, Theta_cov> derivs(r_deriv, theta_deriv);
-                return std::make_tuple(val, derivs);
+                return derivs;
             } else {
-                return val;
+                return;
             }
         }
     }
@@ -1220,9 +1218,11 @@ public:
      *      The index of the quadrature point where the values and derivatives should be calculated.
      * @return The value of the polar bspline at the coordinate.
      */
-    double get_polar_bspline_vals(IdxBSPolar idx, IdxQuadratureRTheta const idx_quad) const
+    static KOKKOS_INLINE_FUNCTION double get_polar_bspline_vals(IdxBSPolar idx, IdxQuadratureRTheta const idx_quad)
     {
-        return get_polar_bspline_vals_and_derivs<false>(idx, idx_quad);
+        double val;
+        get_polar_bspline_vals_and_derivs<false>(val, idx, idx_quad);
+		return val;
     }
 
     /**
@@ -1379,7 +1379,7 @@ public:
      * @param[in] idx The 2D (r,theta) bspline index.
      * @return The polar bspline index.
      */
-    KOKKOS_INLINE_FUNCTION IdxBSPolar to_polar(IdxBSRTheta idx) const
+    static KOKKOS_INLINE_FUNCTION IdxBSPolar to_polar(IdxBSRTheta idx)
     {
         return PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(idx);
     }
