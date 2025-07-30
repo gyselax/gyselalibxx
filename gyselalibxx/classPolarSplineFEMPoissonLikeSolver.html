@@ -580,15 +580,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structPolarSplineFEMPoissonLikeSolver_1_1RBasisSubset.html"><strong>RBasisSubset</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">struct</td>
 <td style="text-align: left;"><a href="structPolarSplineFEMPoissonLikeSolver_1_1RCellDim.html"><strong>RCellDim</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structPolarSplineFEMPoissonLikeSolver_1_1ThetaBasisSubset.html"><strong>ThetaBasisSubset</strong></a> <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">struct</td>
@@ -649,6 +641,10 @@
 <td style="text-align: left;"><a href="#function-get_matrix_stencil_element"><strong>get_matrix_stencil_element</strong></a> (IdxBSRTheta idx_test, IdxBSRTheta idx_trial, ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, SplineRThetaEvaluatorNullBound const &amp; evaluator, Mapping const &amp; mapping) <br><em>Computes the matrix element corresponding to two tensor product splines with index idx_test and idx_trial.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">KOKKOS_FUNCTION IdxRangeQuadratureRTheta</td>
+<td style="text-align: left;"><a href="#function-get_quadrature_points_in_cell"><strong>get_quadrature_points_in_cell</strong></a> (int cell_idx_r, int cell_idx_theta) const<br><em>compute the quadrature range for a given pair of indices</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">void</td>
 <td style="text-align: left;"><a href="#function-init_nnz_per_line"><strong>init_nnz_per_line</strong></a> (Kokkos::View&lt; int *, Kokkos::LayoutRight &gt; nnz_per_row) const<br><em>Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on</em> <span class="arithmatex">\((r,\theta)\)</span> <em>splines. After this function the array will contain: nnz_per_row[0] = 0. nnz_per_row[1] = 0. nnz_per_row[2] = number of non-zero elements in line 0. nnz_per_row[3] = number of non-zero elements in lines 0-1. ..._per_row nnz_per_row[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1).</em></td>
 </tr>
@@ -672,28 +668,24 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION IdxRangeQuadratureRTheta</td>
-<td style="text-align: left;"><a href="#function-get_quadrature_points_in_cell"><strong>get_quadrature_points_in_cell</strong></a> (int cell_idx_r, int cell_idx_theta) <br><em>compute the quadrature range for a given pair of indices</em></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
+<td style="text-align: left;"><a href="#function-get_polar_bspline_vals"><strong>get_polar_bspline_vals</strong></a> (CoordRTheta coord, IdxBSPolar idx) <br><em>Get the value of the specified polar bspline at the specified point.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_INLINE_FUNCTION void</td>
-<td style="text-align: left;"><a href="#function-get_value_and_gradient-12"><strong>get_value_and_gradient</strong></a> (double &amp; value, <a href="classTensor.html"><strong>DVector</strong></a>&lt; <a href="structR__cov.html"><strong>R_cov</strong></a>, <a href="structTheta__cov.html"><strong>Theta_cov</strong></a> &gt; &amp; derivs, <a href="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType.html"><strong>EvalDeriv1DType</strong></a> const &amp; r_basis, <a href="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType.html"><strong>EvalDeriv1DType</strong></a> const &amp; theta_basis) <br><em>Computes the value and gradient from r_basis and theta_basis inputs.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">KOKKOS_INLINE_FUNCTION void</td>
-<td style="text-align: left;"><a href="#function-get_value_and_gradient-22"><strong>get_value_and_gradient</strong></a> (double &amp; value, <a href="classTensor.html"><strong>DVector</strong></a>&lt; <a href="structR__cov.html"><strong>R_cov</strong></a>, <a href="structTheta__cov.html"><strong>Theta_cov</strong></a> &gt; &amp; derivs, <a href="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.html"><strong>EvalDeriv2DType</strong></a> const &amp; basis, <a href="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.html"><strong>EvalDeriv2DType</strong></a> const &amp;) <br><em>Computes the value and gradient from r_basis and theta_basis inputs.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">KOKKOS_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-templated_weak_integral_element"><strong>templated_weak_integral_element</strong></a> (IdxQuadratureR idx_r, IdxQuadratureTheta idx_theta, TestValDerivType const &amp; test_bspline_val_and_deriv, TrialValDerivType const &amp; trial_bspline_val_and_deriv, TestValDerivType const &amp; test_bspline_val_and_deriv_theta, TrialValDerivType const &amp; trial_bspline_val_and_deriv_theta, ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, SplineRThetaEvaluatorNullBound const &amp; spline_evaluator, Mapping const &amp; mapping, DField&lt; IdxRangeQuadratureRTheta &gt; int_volume) <br><em>Computes a quadrature summand corresponding to the inner product.</em></td>
+<td style="text-align: right;">KOKKOS_FUNCTION auto</td>
+<td style="text-align: left;"><a href="#function-get_polar_bspline_vals_and_derivs"><strong>get_polar_bspline_vals_and_derivs</strong></a> (double &amp; val, CoordRTheta coord, IdxBSPolar idx) <br><em>Get the value and derivative of the specified polar bspline at the specified quadrature point.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION int</td>
 <td style="text-align: left;"><a href="#function-theta_mod"><strong>theta_mod</strong></a> (int idx_theta) <br><em>Calculates the modulo idx_theta in relation to cells number along</em> <span class="arithmatex">\(\theta\)</span> <em>direction .</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION IdxBSPolar</td>
+<td style="text-align: left;"><a href="#function-to_polar"><strong>to_polar</strong></a> (IdxBSRTheta idx) <br></td>
+</tr>
+<tr>
 <td style="text-align: right;">KOKKOS_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-weak_integral_element"><strong>weak_integral_element</strong></a> (IdxQuadratureR idx_r, IdxQuadratureTheta idx_theta, <a href="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.html"><strong>EvalDeriv2DType</strong></a> const &amp; test_bspline_val_and_deriv, <a href="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.html"><strong>EvalDeriv2DType</strong></a> const &amp; trial_bspline_val_and_deriv, ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, SplineRThetaEvaluatorNullBound const &amp; evaluator, Mapping const &amp; mapping, DField&lt; IdxRangeQuadratureRTheta &gt; int_volume) <br><em>compute the weak integral value.</em></td>
+<td style="text-align: left;"><a href="#function-weak_integral_element"><strong>weak_integral_element</strong></a> (IdxBSPolar idx_test, IdxBSPolar idx_trial, IdxQuadratureRTheta idx_quad, ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, SplineRThetaEvaluatorNullBound const &amp; spline_evaluator, Mapping const &amp; mapping, DField&lt; IdxRangeQuadratureRTheta &gt; int_volume) <br><em>Computes a quadrature summand corresponding to the inner product.</em></td>
 </tr>
 </tbody>
 </table>
@@ -865,6 +857,22 @@ inline double PolarSplineFEMPoissonLikeSolver::get_matrix_stencil_element (
 <p>The value of the matrix element. </p>
 <hr>
 
+<h3 id="function-get_quadrature_points_in_cell">function get_quadrature_points_in_cell</h3>
+<p><em>compute the quadrature range for a given pair of indices</em> </p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION IdxRangeQuadratureRTheta PolarSplineFEMPoissonLikeSolver::get_quadrature_points_in_cell (
+    int cell_idx_r,
+    int cell_idx_theta
+) const
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>cell_idx_r</code> The index for radial direction </li>
+<li><code>cell_idx_theta</code> The index for poloidal direction </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The quadrature range corresponding to the <span class="arithmatex">\((r,\theta)\)</span> indices. </p>
+<hr>
+
 <h3 id="function-init_nnz_per_line">function init_nnz_per_line</h3>
 <p><em>Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on</em> <span class="arithmatex">\((r,\theta)\)</span> <em>splines. After this function the array will contain: nnz_per_row[0] = 0. nnz_per_row[1] = 0. nnz_per_row[2] = number of non-zero elements in line 0. nnz_per_row[3] = number of non-zero elements in lines 0-1. ..._per_row nnz_per_row[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1).</em></p>
 <pre><code class="language-C++">inline void PolarSplineFEMPoissonLikeSolver::init_nnz_per_line (
@@ -909,90 +917,40 @@ inline void PolarSplineFEMPoissonLikeSolver::operator() (
 </ul>
 <hr>
 <h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
-<h3 id="function-get_quadrature_points_in_cell">function get_quadrature_points_in_cell</h3>
-<p><em>compute the quadrature range for a given pair of indices</em> </p>
-<pre><code class="language-C++">static inline KOKKOS_FUNCTION IdxRangeQuadratureRTheta PolarSplineFEMPoissonLikeSolver::get_quadrature_points_in_cell (
-    int cell_idx_r,
-    int cell_idx_theta
+<h3 id="function-get_polar_bspline_vals">function get_polar_bspline_vals</h3>
+<p><em>Get the value of the specified polar bspline at the specified point.</em> </p>
+<pre><code class="language-C++">static inline KOKKOS_INLINE_FUNCTION double PolarSplineFEMPoissonLikeSolver::get_polar_bspline_vals (
+    CoordRTheta coord,
+    IdxBSPolar idx
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>cell_idx_r</code> The index for radial direction </li>
-<li><code>cell_idx_theta</code> The index for poloidal direction </li>
+<li><code>coord</code> The coordinate where the value of the polar bspline should be calculated. </li>
+<li><code>idx</code> The polar bspline of interest. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>The quadrature range corresponding to the <span class="arithmatex">\((r,\theta)\)</span> indices. </p>
+<p>The value of the polar bspline at the coordinate. </p>
 <hr>
 
-<h3 id="function-get_value_and_gradient-12">function get_value_and_gradient [1/2]</h3>
-<p><em>Computes the value and gradient from r_basis and theta_basis inputs.</em> </p>
-<pre><code class="language-C++">static inline KOKKOS_INLINE_FUNCTION void PolarSplineFEMPoissonLikeSolver::get_value_and_gradient (
-    double &amp; value,
-    DVector &lt; R_cov , Theta_cov &gt; &amp; derivs,
-    EvalDeriv1DType const &amp; r_basis,
-    EvalDeriv1DType const &amp; theta_basis
+<h3 id="function-get_polar_bspline_vals_and_derivs">function get_polar_bspline_vals_and_derivs</h3>
+<p><em>Get the value and derivative of the specified polar bspline at the specified quadrature point.</em> </p>
+<pre><code class="language-C++">template&lt;bool calculate_derivs&gt;
+static inline KOKKOS_FUNCTION auto PolarSplineFEMPoissonLikeSolver::get_polar_bspline_vals_and_derivs (
+    double &amp; val,
+    CoordRTheta coord,
+    IdxBSPolar idx
 ) 
 </code></pre>
+<p>This method calculates the value and the derivatives of polar bsplines. It is templated by calculate_derivs to avoid code duplication between get_polar_bspline_vals_and_derivs and get_polar_bspline_vals. The calling method should not need to use the template parameter.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>value</code> The product of radial and poloidal values.</li>
-<li><code>derivs</code> derivatives over <span class="arithmatex">\((r, \theta)\)</span> directions.</li>
-<li><code>r_basis</code> A data structure containing values and derivative over radial direction.</li>
-<li><code>theta_basis</code> A data structure containing values and derivative over poloidal direction. </li>
-</ul>
-<hr>
-
-<h3 id="function-get_value_and_gradient-22">function get_value_and_gradient [2/2]</h3>
-<p><em>Computes the value and gradient from r_basis and theta_basis inputs.</em> </p>
-<pre><code class="language-C++">static inline KOKKOS_INLINE_FUNCTION void PolarSplineFEMPoissonLikeSolver::get_value_and_gradient (
-    double &amp; value,
-    DVector &lt; R_cov , Theta_cov &gt; &amp; derivs,
-    EvalDeriv2DType const &amp; basis,
-    EvalDeriv2DType const &amp;
-) 
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>value</code> The product of radial and poloidal values.</li>
-<li><code>derivs</code> derivatives over <span class="arithmatex">\((r, \theta)\)</span> directions.</li>
-<li><code>basis</code> A data structure containing values and derivative over radial and poloidal directions. </li>
-</ul>
-<hr>
-
-<h3 id="function-templated_weak_integral_element">function templated_weak_integral_element</h3>
-<p><em>Computes a quadrature summand corresponding to the inner product.</em> </p>
-<pre><code class="language-C++">template&lt;class Mapping, class TestValDerivType, class TrialValDerivType&gt;
-static inline KOKKOS_FUNCTION double PolarSplineFEMPoissonLikeSolver::templated_weak_integral_element (
-    IdxQuadratureR idx_r,
-    IdxQuadratureTheta idx_theta,
-    TestValDerivType const &amp; test_bspline_val_and_deriv,
-    TrialValDerivType const &amp; trial_bspline_val_and_deriv,
-    TestValDerivType const &amp; test_bspline_val_and_deriv_theta,
-    TrialValDerivType const &amp; trial_bspline_val_and_deriv_theta,
-    ConstSpline2D coeff_alpha,
-    ConstSpline2D coeff_beta,
-    SplineRThetaEvaluatorNullBound const &amp; spline_evaluator,
-    Mapping const &amp; mapping,
-    DField&lt; IdxRangeQuadratureRTheta &gt; int_volume
-) 
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>idx_r</code> The index for radial direction. </li>
-<li><code>idx_theta</code> The index for poloidal direction </li>
-<li><code>test_bspline_val_and_deriv</code> The data structure containing the derivatives over radial and poloidal directions for test space. </li>
-<li><code>trial_bspline_val_and_deriv</code> The data structure containing the derivatives over radial and poloidal directions for trial space. </li>
-<li><code>test_bspline_val_and_deriv_theta</code> The data structure containing the value and derivative along poloidal direction for test space. </li>
-<li><code>trial_bspline_val_and_deriv_theta</code> The data structure containing the value and derivative along poloidal direction for trial space. </li>
-<li><code>coeff_alpha</code> The spline representation of the <span class="arithmatex">\(\alpha\)</span> function in the definition of the Poisson-like equation. </li>
-<li><code>coeff_beta</code> The spline representation of the <span class="arithmatex">\(\beta\)</span> function in the definition of the Poisson-like equation. </li>
-<li><code>spline_evaluator</code> An evaluator for evaluating 2D splines on <span class="arithmatex">\((r,\theta)\)</span>. </li>
-<li><code>mapping</code> The mapping from the logical domain to the physical domain where the equation is defined. </li>
-<li><code>int_volume</code> The integral volume associated with each point used in the quadrature scheme. </li>
+<li><code>val</code> The value of the specified polar bspline at the specified point. </li>
+<li><code>coord</code> The coordinate where the value of the polar bspline should be calculated. </li>
+<li><code>idx</code> The polar bspline of interest. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>inner product of the test and trial spline is computed using a quadrature. This function returns one summand of the quadrature for the quadrature point given by the indices. </p>
+<p>The derivative of the polar bspline (only returned if calculate_derivs is true). </p>
 <hr>
 
 <h3 id="function-theta_mod">function theta_mod</h3>
@@ -1009,35 +967,47 @@ static inline KOKKOS_FUNCTION double PolarSplineFEMPoissonLikeSolver::templated_
 <p>The corresponding indice modulo <span class="arithmatex">\(\theta\)</span> direction cells number </p>
 <hr>
 
+<h3 id="function-to_polar">function to_polar</h3>
+<pre><code class="language-C++">static inline KOKKOS_INLINE_FUNCTION IdxBSPolar PolarSplineFEMPoissonLikeSolver::to_polar (
+    IdxBSRTheta idx
+) 
+</code></pre>
+<p>Convert a 2D (r,theta) bspline index into a polar bspline index.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>idx</code> The 2D (r,theta) bspline index. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The polar bspline index. </p>
+<hr>
+
 <h3 id="function-weak_integral_element">function weak_integral_element</h3>
-<p><em>compute the weak integral value.</em> </p>
+<p><em>Computes a quadrature summand corresponding to the inner product.</em> </p>
 <pre><code class="language-C++">template&lt;class Mapping&gt;
 static inline KOKKOS_FUNCTION double PolarSplineFEMPoissonLikeSolver::weak_integral_element (
-    IdxQuadratureR idx_r,
-    IdxQuadratureTheta idx_theta,
-    EvalDeriv2DType const &amp; test_bspline_val_and_deriv,
-    EvalDeriv2DType const &amp; trial_bspline_val_and_deriv,
+    IdxBSPolar idx_test,
+    IdxBSPolar idx_trial,
+    IdxQuadratureRTheta idx_quad,
     ConstSpline2D coeff_alpha,
     ConstSpline2D coeff_beta,
-    SplineRThetaEvaluatorNullBound const &amp; evaluator,
+    SplineRThetaEvaluatorNullBound const &amp; spline_evaluator,
     Mapping const &amp; mapping,
     DField&lt; IdxRangeQuadratureRTheta &gt; int_volume
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>idx_r</code> The index for radial direction. </li>
-<li><code>idx_theta</code> The index for poloidal direction </li>
-<li><code>test_bspline_val_and_deriv</code> The data structure containing the derivatives over radial and poloidal directions for test space. </li>
-<li><code>trial_bspline_val_and_deriv</code> The data structure containing the derivatives over radial and poloidal directions for trial space. </li>
+<li><code>idx_test</code> The index of the test basis spline. </li>
+<li><code>idx_trial</code> The index of the trial basis spline. </li>
+<li><code>idx_quad</code> The index for the point in the quadrature scheme. </li>
 <li><code>coeff_alpha</code> The spline representation of the <span class="arithmatex">\(\alpha\)</span> function in the definition of the Poisson-like equation. </li>
 <li><code>coeff_beta</code> The spline representation of the <span class="arithmatex">\(\beta\)</span> function in the definition of the Poisson-like equation. </li>
+<li><code>spline_evaluator</code> An evaluator for evaluating 2D splines on <span class="arithmatex">\((r,\theta)\)</span>. </li>
 <li><code>mapping</code> The mapping from the logical domain to the physical domain where the equation is defined. </li>
-<li><code>evaluator</code> An evaluator for evaluating 2D splines on <span class="arithmatex">\((r,\theta)\)</span>. </li>
 <li><code>int_volume</code> The integral volume associated with each point used in the quadrature scheme. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>The value of the weak integral. </p>
+<p>inner product of the test and trial spline is computed using a quadrature. This function returns one summand of the quadrature for the quadrature point given by the indices. </p>
 <hr>
 
 <hr>

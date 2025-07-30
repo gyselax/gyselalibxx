@@ -2276,6 +2276,7 @@
     <member refid="classPolarSplineFEMPoissonLikeSolver_1ac8301b508a21377b16f42738b3b538db" kind="typedef"><name>IdxBSRTheta</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1ace510c6d1c74c3de2237863c059005e6" kind="typedef"><name>IdxStepBSR</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a1b50a3f154b869880484162d845bb80b" kind="typedef"><name>IdxStepBSTheta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeSolver_1aa54f14c96117041d0c69b091c31d2c92" kind="typedef"><name>IdxStepBSRTheta</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1acb822602e3cf7ed13ad88a3b081ef8fe" kind="typedef"><name>IdxRangeBatchedBSRTheta</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a8ba9f918887d84294520a338796f76bb" kind="typedef"><name>IdxRangeBatch</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a98d4ee9d9dcccd5de223c9165f405aa6" kind="typedef"><name>IdxRangeQuadratureR</name></member>
@@ -2297,10 +2298,8 @@
     <member refid="classPolarSplineFEMPoissonLikeSolver_1abea37425f329fb962279f550a9a900a9" kind="variable"><name>s_n_gauss_legendre_r</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a0f4757ae5829f507a44f6ab119fe9edd" kind="variable"><name>s_n_gauss_legendre_theta</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a86e2ff04d5704480a5a3fa3a300c4b3b" kind="variable"><name>m_n_overlap_cells</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a9563f3ca1e57241e12f5350353577093" kind="variable"><name>m_n_non_zero_bases_r</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a715217c6ef2d21949b4870fdb9c25b86" kind="variable"><name>m_n_non_zero_bases_theta</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1aed25fa6b5483a9197245a36e3f888ee4" kind="variable"><name>m_non_zero_bases_r</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a35305dfc6490994aa034f8e27ce2764a" kind="variable"><name>m_non_zero_bases_theta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeSolver_1aac7630fc04854aef1382a8b71e7f266d" kind="variable"><name>m_n_non_zero_bases_r</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeSolver_1ab8270b33e0481eab317032c5d46b705b" kind="variable"><name>m_n_non_zero_bases_theta</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1ae6ed06bc3045f9358fcecc5faf46ce61" kind="variable"><name>m_nbasis_r</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a3e0b42cae266052c9207b486955bb992" kind="variable"><name>m_nbasis_theta</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1ac0a14f99526d7311034a9492c44bdfb8" kind="variable"><name>m_matrix_size</name></member>
@@ -2312,9 +2311,6 @@
     <member refid="classPolarSplineFEMPoissonLikeSolver_1afd0422e5a6cdd44919a33a1fdef5de03" kind="variable"><name>m_idxrange_quadrature_singular</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a6115292f2e279384a9aba2f9e98c8622" kind="variable"><name>m_weights_r</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a3451e432cc47c49dd4d274c36cccf3fb" kind="variable"><name>m_weights_theta</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1ab12917c326786f23f1852e2ac557715b" kind="variable"><name>m_singular_basis_vals_and_derivs</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a60b8ec8f412fe07a98512ca4de240d27" kind="variable"><name>m_r_basis_vals_and_derivs</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a4b055701d14677f237990db5d637c478" kind="variable"><name>m_theta_basis_vals_and_derivs</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a397c5353c41a5e9e73d4acc6d9c678c4" kind="variable"><name>m_int_volume</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1adfe6f1c0509f740749d6ce4397c576dd" kind="variable"><name>m_polar_spline_evaluator</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a55664a455be46f70f1d33768cee0e7b3" kind="variable"><name>m_gko_matrix</name></member>
@@ -2327,14 +2323,14 @@
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a161e772a03b980ad5cb19bdeb6b02925" kind="function"><name>compute_stencil_elements</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a7d75afef8e0d4e4c61776b58117697d2" kind="function"><name>operator()</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1ac699f74359d1f9160bed57ffcf325861" kind="function"><name>operator()</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeSolver_1acdf95dac2706619b995021ca85d70678" kind="function"><name>get_quadrature_points_in_cell</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a90ab8ff1603bc0a3f36b5a0c5077de5b" kind="function"><name>get_matrix_stencil_element</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a15e528d25ba6df5a707e0b78c81c92e6" kind="function"><name>init_nnz_per_line</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1ad28d1360dd316f67bae8ae9a0b866958" kind="function"><name>get_quadrature_points_in_cell</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1af97748fe740d17247902a8b1d4b1f2ac" kind="function"><name>weak_integral_element</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1abc0c26e86f3cfce747b6220c4b96ea23" kind="function"><name>get_value_and_gradient</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a571591661a8661ddb186b64cdd5a0921" kind="function"><name>get_value_and_gradient</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1ac94824022d7b90428f769126de178000" kind="function"><name>templated_weak_integral_element</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeSolver_1a927ace754421f6951892bf2c1bd57866" kind="function"><name>weak_integral_element</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1acbe58349c9ea9b73ae5476df678f4010" kind="function"><name>theta_mod</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeSolver_1aef5a25d0952c71226d089f7b34a4f84f" kind="function"><name>get_polar_bspline_vals_and_derivs</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeSolver_1a1229098e45381cd6008d620ab49c7970" kind="function"><name>get_polar_bspline_vals</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeSolver_1af770ddf5e1bc2824b4c42c8447e9d214" kind="function"><name>to_polar</name></member>
   </compound>
   <compound refid="classPreallocatableLagrangeInterpolator" kind="class"><name>PreallocatableLagrangeInterpolator</name>
     <member refid="classPreallocatableLagrangeInterpolator_1afc234adece0019e074190e2b1cb71158" kind="variable"><name>m_evaluator</name></member>
@@ -2418,8 +2414,6 @@
   <compound refid="structGyroAverageOperator_1_1R__gyro" kind="struct"><name>GyroAverageOperator::R_gyro</name>
     <member refid="structGyroAverageOperator_1_1R__gyro_1a84e24cedd3763682987663a5d278d671" kind="typedef"><name>Dual</name></member>
     <member refid="structGyroAverageOperator_1_1R__gyro_1a3a43c0c95a9a15f4bec1265f1e9944f0" kind="variable"><name>PERIODIC</name></member>
-  </compound>
-  <compound refid="structPolarSplineFEMPoissonLikeSolver_1_1RBasisSubset" kind="struct"><name>PolarSplineFEMPoissonLikeSolver::RBasisSubset</name>
   </compound>
   <compound refid="structPolarSplineFEMPoissonLikeSolver_1_1RCellDim" kind="struct"><name>PolarSplineFEMPoissonLikeSolver::RCellDim</name>
   </compound>
@@ -2748,8 +2742,6 @@
   <compound refid="structGyroAverageOperator_1_1Theta__gyro" kind="struct"><name>GyroAverageOperator::Theta_gyro</name>
     <member refid="structGyroAverageOperator_1_1Theta__gyro_1a105db279a28a9fad8855ee3e3ed53243" kind="typedef"><name>Dual</name></member>
     <member refid="structGyroAverageOperator_1_1Theta__gyro_1a9ce4edde9d0f283479639957d7dd472f" kind="variable"><name>PERIODIC</name></member>
-  </compound>
-  <compound refid="structPolarSplineFEMPoissonLikeSolver_1_1ThetaBasisSubset" kind="struct"><name>PolarSplineFEMPoissonLikeSolver::ThetaBasisSubset</name>
   </compound>
   <compound refid="structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim" kind="struct"><name>PolarSplineFEMPoissonLikeSolver::ThetaCellDim</name>
   </compound>

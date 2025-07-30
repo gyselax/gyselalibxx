@@ -195,9 +195,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**PolarSplineEvaluator::eval\_type**](structPolarSplineEvaluator_1_1eval__type.md) _Tag for the evaluation of the function._ 
 * **struct** [**PolarSplineFEMPoissonLikeSolver::EvalDeriv1DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType.md) _Object storing a value and a value of the derivative of a 1D function._ 
 * **struct** [**PolarSplineFEMPoissonLikeSolver::EvalDeriv2DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.md) _Object storing a value and a value of the derivatives in each direction of a 2D function._ 
-* **struct** [**PolarSplineFEMPoissonLikeSolver::RBasisSubset**](structPolarSplineFEMPoissonLikeSolver_1_1RBasisSubset.md) 
 * **struct** [**PolarSplineFEMPoissonLikeSolver::RCellDim**](structPolarSplineFEMPoissonLikeSolver_1_1RCellDim.md) 
-* **struct** [**PolarSplineFEMPoissonLikeSolver::ThetaBasisSubset**](structPolarSplineFEMPoissonLikeSolver_1_1ThetaBasisSubset.md) 
 * **struct** [**PolarSplineFEMPoissonLikeSolver::ThetaCellDim**](structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim.md) 
 * **struct** [**R**](structR.md) _Define non periodic real contravariant_ [_**R**_](structR.md) _dimension._
 * **struct** [**R\_cov**](structR__cov.md) _Define non periodic real covariant_ [_**R**_](structR.md) _dimension._
