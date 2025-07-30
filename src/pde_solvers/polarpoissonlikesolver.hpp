@@ -774,7 +774,7 @@ public:
                             ddc::reducer::sum<double>(),
                             [&](IdxQuadratureRTheta const idx_quad) {
                                 const CoordRTheta coord(ddc::coordinate(idx_quad));
-                                return rhs(coord) * get_vals(idx, idx_quad)
+                                return rhs(coord) * get_polar_bspline_vals(idx, idx_quad)
                                        * int_volume_host(idx_quad);
                             });
                 });
@@ -1123,11 +1123,17 @@ public:
     /**
      * @brief Get the value and derivative of the specified polar bspline at the specified quadrature point.
      *
+     * This method calculates the value and the derivatives of polar bsplines. It is templated by
+     * calculate_derivs to avoid code duplication between get_polar_bspline_vals_and_derivs and
+     * get_polar_bspline_vals. The calling method should not need to use the template paramter.
+     *
+     * @param[out] val
+     *      The value of the specified polar bspline at the specified point.
      * @param[in] idx
      *      The polar bspline of interest.
      * @param[in] idx_quad
      *      The index of the quadrature point where the values and derivatives should be calculated.
-     * @return The value and the derivative of the polar bspline.
+     * @return The derivative of the polar bspline (only returned if calculate_derivs is true).
      */
     template <bool calculate_derivs = true>
     static KOKKOS_FUNCTION auto get_polar_bspline_vals_and_derivs(double& val, IdxBSPolar idx, IdxQuadratureRTheta const idx_quad)
