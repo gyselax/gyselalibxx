@@ -465,13 +465,8 @@ private:
         for (std::size_t i = 0; i < PolarBSplinesType::n_singular_basis(); ++i) {
             y += spline_coef(Idx<PolarBSplinesType>(i)) * singular_vals(i);
         }
-        Idx<BSplinesR> jmin_r = ddc::select<BSplinesR>(jmin);
-        Idx<BSplinesTheta> jmin_theta = ddc::select<BSplinesTheta>(jmin);
-        int nr = BSplinesR::degree() + 1;
-        if (jmin_r < Idx<BSplinesR>(continuity + 1)) {
-            nr = nr - (Idx<BSplinesR>(continuity + 1) - jmin_r);
-            jmin_r = Idx<BSplinesR>(continuity + 1);
-        }
+        Idx<BSplinesR> jmin_r(jmin);
+        Idx<BSplinesTheta> jmin_theta(jmin);
 
         DConstField<IdxRange<BSplinesR, BSplinesTheta>, MemorySpace> spline_coef_2d
                 = PolarBSplinesType::get_tensor_product_subset(spline_coef);
@@ -479,7 +474,7 @@ private:
         IdxRange<BSplinesTheta> tensor_prod_idx_range_theta(tensor_prod_idx_range);
         Idx<BSplinesTheta> idx_theta_max = tensor_prod_idx_range_theta.back();
         IdxStep<BSplinesTheta> n_idx_theta = tensor_prod_idx_range_theta.extents();
-        for (int i = 0; i < nr; ++i) {
+        for (int i = 0; i < BSplinesR::degree() + 1; ++i) {
             for (std::size_t j = 0; j < BSplinesTheta::degree() + 1; ++j) {
                 Idx<BSplinesTheta> idx_theta = jmin_theta + j;
                 if (idx_theta > idx_theta_max) {
