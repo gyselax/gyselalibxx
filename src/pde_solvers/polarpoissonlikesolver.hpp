@@ -565,8 +565,7 @@ public:
                         KOKKOS_LAMBDA(IdxQuadratureRTheta idx_quad) {
                             // Manage periodicity
                             if (!full_quad_idx_range.contains(idx_quad)) {
-                                idx_quad -= IdxStep<QDimThetaMesh>(
-                                        full_quad_idx_range.template extent<QDimThetaMesh>());
+                                idx_quad -= full_quad_idx_range.template extent<QDimThetaMesh>();
                             }
 
                             return weak_integral_element<Mapping>(
@@ -796,8 +795,7 @@ public:
                     [&](IdxQuadratureRTheta idx_quad) {
                         // Manage periodicity
                         if (!full_quad_idx_range.contains(idx_quad)) {
-                            idx_quad -= IdxStep<QDimThetaMesh>(
-                                    full_quad_idx_range.template extent<QDimThetaMesh>());
+                            idx_quad -= full_quad_idx_range.template extent<QDimThetaMesh>();
                         }
                         CoordRTheta coord(ddc::coordinate(idx_quad));
                         return rhs(coord) * get_polar_bspline_vals(coord, idx)
@@ -1025,8 +1023,7 @@ public:
                 KOKKOS_LAMBDA(IdxQuadratureRTheta idx_quad) {
                     // Manage periodicity
                     if (!full_quad_idx_range.contains(idx_quad)) {
-                        idx_quad -= IdxStep<QDimThetaMesh>(
-                                full_quad_idx_range.template extent<QDimThetaMesh>());
+                        idx_quad -= full_quad_idx_range.template extent<QDimThetaMesh>();
                     }
                     return weak_integral_element(
                             idx_test_polar,
