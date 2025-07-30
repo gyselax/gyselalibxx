@@ -774,29 +774,8 @@ public:
                             ddc::reducer::sum<double>(),
                             [&](IdxQuadratureRTheta const idx_quad) {
                                 const CoordRTheta coord(ddc::coordinate(idx_quad));
-
-                                std::array<double, PolarBSplinesRTheta::n_singular_basis()>
-                                        singular_data;
-                                std::array<double, m_n_non_zero_bases_r * m_n_non_zero_bases_theta>
-                                        data;
-                                // Values of the polar basis splines around the singular point
-                                // at a given coordinate
-                                DSpan1D singular_vals(
-                                        singular_data.data(),
-                                        PolarBSplinesRTheta::n_singular_basis());
-                                // Values of the polar basis splines, that do not cover the singular point,
-                                // at a given coordinate
-                                DSpan2D
-                                        vals(data.data(),
-                                             m_n_non_zero_bases_r,
-                                             m_n_non_zero_bases_theta);
-
-                                ddc::discrete_space<PolarBSplinesRTheta>()
-                                        .eval_basis(singular_vals, vals, coord);
-                                IdxQuadratureR const idx_r(idx_quad);
-                                IdxQuadratureTheta const idx_theta(idx_quad);
-                                return rhs(coord) * singular_vals[bspl_idx]
-                                       * int_volume_host(idx_r, idx_theta);
+                                return rhs(coord) * get_vals(idx, idx_quad)
+                                       * int_volume_host(idx_quad);
                             });
                 });
         const std::size_t ncells_r = ddc::discrete_space<BSplinesR>().ncells();
