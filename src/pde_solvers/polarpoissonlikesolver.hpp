@@ -1136,7 +1136,10 @@ public:
      * @return The derivative of the polar bspline (only returned if calculate_derivs is true).
      */
     template <bool calculate_derivs = true>
-    static KOKKOS_FUNCTION auto get_polar_bspline_vals_and_derivs(double& val, CoordRTheta coord, IdxBSPolar idx)
+    static KOKKOS_FUNCTION auto get_polar_bspline_vals_and_derivs(
+            double& val,
+            CoordRTheta coord,
+            IdxBSPolar idx)
     {
         std::array<double, PolarBSplinesRTheta::n_singular_basis()> singular_data;
         std::array<double, m_n_non_zero_bases_r * m_n_non_zero_bases_theta> data;
@@ -1199,7 +1202,7 @@ public:
     {
         double val;
         get_polar_bspline_vals_and_derivs<false>(val, coord, idx);
-		return val;
+        return val;
     }
 
     /**
