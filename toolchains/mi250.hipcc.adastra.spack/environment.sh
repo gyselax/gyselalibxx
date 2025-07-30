@@ -34,7 +34,10 @@ eval -- "$(
         --env gyselalibxx-spack-environment \
         load --sh \
         cmake \
-        fftw \
+        kokkos \
+        kokkos-fft \
+        kokkos-kernels \
+        kokkos-tools \
         ginkgo \
         googletest \
         ninja \

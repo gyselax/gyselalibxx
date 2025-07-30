@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow `get_idx_range` to be called from a GPU execution space.
 - Uniformise toolchains.
 - Allow batch CSR convergence parameters to be specified in the constructor of `PolarSplineFEMPoissonLikeSolver`.
+- Adastra toolchain installs with Spack the Kokkos ecosystem.
 
 ### Deprecated
 
