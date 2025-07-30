@@ -535,6 +535,9 @@ public:
                 m_idxrange_bsplines_theta);
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume);
+        IdxRangeQuadratureRTheta
+                full_quad_idx_range(m_idxrange_quadrature_r, m_idxrange_quadrature_theta);
+
         // Calculate the matrix elements where bspline products overlap the B-splines which cover the singular point
         ddc::for_each(idxrange_singular, [&](IdxBSPolar const idx_test) {
             ddc::for_each(idxrange_non_singular_near_centre, [&](IdxBSRTheta const idx_trial) {
@@ -569,9 +572,6 @@ public:
                 if (knot_range.size() > 0) {
                     const IdxRangeQuadratureRTheta quad_range
                             = get_quadrature_points_in_range(knot_range);
-                    IdxRangeQuadratureRTheta full_quad_idx_range(
-                            m_idxrange_quadrature_r,
-                            m_idxrange_quadrature_theta);
                     // Calculate the weak integral
                     double element = ddc::parallel_transform_reduce(
                             Kokkos::DefaultExecutionSpace(),
@@ -785,48 +785,52 @@ public:
         });
         const std::size_t ncells_r = ddc::discrete_space<BSplinesR>().ncells();
 
+        IdxRangeQuadratureRTheta
+                full_quad_idx_range(m_idxrange_quadrature_r, m_idxrange_quadrature_theta);
+
         ddc::for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx) {
             const IdxBSRTheta idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
-            const std::size_t idx_r(ddc::select<BSplinesR>(idx_2d).uid());
-            const std::size_t idx_theta(ddc::select<BSplinesTheta>(idx_2d).uid());
+            const IdxBSR idx_r(idx_2d);
+            const IdxBSTheta idx_theta(idx_2d);
+
+            auto& bspl_r = ddc::discrete_space<BSplinesR>();
+            auto& bspl_theta = ddc::discrete_space<BSplinesTheta>();
 
             // Find the cells on which the bspline is non-zero
-            int first_cell_r(idx_r - BSplinesR::degree());
-            int first_cell_theta(idx_theta - BSplinesTheta::degree());
-            std::size_t last_cell_r(idx_r + 1);
-            if (first_cell_r < 0)
-                first_cell_r = 0;
-            if (last_cell_r > ncells_r)
-                last_cell_r = ncells_r;
-            IdxStep<RCellDim> const r_length(last_cell_r - first_cell_r);
-            IdxStep<ThetaCellDim> const theta_length(BSplinesTheta::degree() + 1);
+            const Idx<KnotsR> start_non_zero_r(
+                    ::max(bspl_r.break_point_domain().front(),
+                          bspl_r.get_first_support_knot(idx_r)));
+            const Idx<KnotsR> end_non_zero_r(
+                    ::min(bspl_r.break_point_domain().back(), bspl_r.get_last_support_knot(idx_r)));
 
+            const Idx<KnotsTheta> start_non_zero_theta(
+                    bspl_theta.get_first_support_knot(idx_theta));
+            const Idx<KnotsTheta> end_non_zero_theta(bspl_theta.get_last_support_knot(idx_theta));
 
-            Idx<RCellDim> const start_r(first_cell_r);
-            Idx<ThetaCellDim> const start_theta(theta_mod(first_cell_theta));
-            const IdxRange<RCellDim> r_cells(start_r, r_length);
-            const IdxRange<ThetaCellDim> theta_cells(start_theta, theta_length);
-            const IdxRange<RCellDim, ThetaCellDim> non_zero_cells(r_cells, theta_cells);
-            assert(r_length * theta_length > 0);
-            double element = 0.0;
-            ddc::for_each(non_zero_cells, [&](IdxCell const cell_idx) {
-                const int cell_idx_r(ddc::select<RCellDim>(cell_idx).uid());
-                const int cell_idx_theta(theta_mod(ddc::select<ThetaCellDim>(cell_idx).uid()));
+            const IdxRange<KnotsR>
+                    knot_range_r(start_non_zero_r, end_non_zero_r - start_non_zero_r);
+            const IdxRange<KnotsTheta> knot_range_theta(
+                    start_non_zero_theta,
+                    end_non_zero_theta - start_non_zero_theta);
+            const IdxRange<KnotsR, KnotsTheta> knot_range(knot_range_r, knot_range_theta);
 
-                const IdxRangeQuadratureRTheta cell_quad_points(
-                        get_quadrature_points_in_cell(cell_idx_r, cell_idx_theta));
+            const IdxRangeQuadratureRTheta quad_range = get_quadrature_points_in_range(knot_range);
 
-                // Calculate the weak integral
-                element += ddc::transform_reduce(
-                        cell_quad_points,
-                        0.0,
-                        ddc::reducer::sum<double>(),
-                        [&](IdxQuadratureRTheta const idx_quad) {
-                            CoordRTheta coord(ddc::coordinate(idx_quad));
-                            return rhs(coord) * get_polar_bspline_vals(coord, idx)
-                                   * int_volume_host(idx_quad);
-                        });
-            });
+            // Calculate the weak integral
+            double element = ddc::transform_reduce(
+                    quad_range,
+                    0.0,
+                    ddc::reducer::sum<double>(),
+                    [&](IdxQuadratureRTheta idx_quad) {
+                        // Manage periodicity
+                        if (!full_quad_idx_range.contains(idx_quad)) {
+                            idx_quad -= IdxStep<QDimThetaMesh>(
+                                    full_quad_idx_range.template extent<QDimThetaMesh>());
+                        }
+                        CoordRTheta coord(ddc::coordinate(idx_quad));
+                        return rhs(coord) * get_polar_bspline_vals(coord, idx)
+                               * int_volume_host(idx_quad);
+                    });
             const std::size_t singular_index
                     = idx - ddc::discrete_space<PolarBSplinesRTheta>().full_domain().front();
             b_host(0, singular_index) = element;
