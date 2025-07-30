@@ -1125,7 +1125,7 @@ public:
      *
      * This method calculates the value and the derivatives of polar bsplines. It is templated by
      * calculate_derivs to avoid code duplication between get_polar_bspline_vals_and_derivs and
-     * get_polar_bspline_vals. The calling method should not need to use the template paramter.
+     * get_polar_bspline_vals. The calling method should not need to use the template parameter.
      *
      * @param[out] val
      *      The value of the specified polar bspline at the specified point.
