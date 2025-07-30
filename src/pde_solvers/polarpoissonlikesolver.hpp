@@ -1051,7 +1051,7 @@ public:
      *
      * @return The corresponding indice modulo @f$ \theta @f$ direction cells number
      */
-    static KOKKOS_FUNCTION int theta_mod(int idx_theta)
+    static KOKKOS_FUNCTION IdxStepBSTheta theta_mod(IdxStepBSTheta idx_theta)
     {
         int ncells_theta = ddc::discrete_space<BSplinesTheta>().ncells();
         while (idx_theta < 0)
@@ -1125,7 +1125,7 @@ public:
             IdxBSRTheta idx_front = polar_bspl.eval_basis(singular_vals, vals, coord);
             IdxStepBSRTheta offset = PolarBSplinesRTheta::get_2d_index(idx) - idx_front;
             IdxStepBSR ir(offset);
-            IdxStepBSTheta itheta(theta_mod(ddc::select<BSplinesTheta>(offset)));
+            IdxStepBSTheta itheta(theta_mod(IdxStepBSTheta(offset)));
 
             val = vals(ir, itheta);
             if constexpr (calculate_derivs) {
@@ -1317,14 +1317,27 @@ public:
     }
 
     /**
-     * @brief compute the quadrature range for a given pair of indices
+     * @brief Compute the quadrature range between a provided set of knots.
      *
-     * @param[in] cell_idx_r
-     *      The index for radial direction
-     * @param[in] cell_idx_theta
-     *      The index for poloidal direction
+     * Compute the range of quadrature points which are found between a set of knots
+     * in both the radial and poloidal directions. In order to return a contiguous range
+     * the result may include indices which are outside the domain. A modulo operator
+     * should be applied before using the indices.
+     *
+     * @param[in] start_knot_r
+     *      The index of the knot describing the lower bound of the domain of interest
+     *      in the radial direction.
+     * @param[in] end_knot_r
+     *      The index of the knot describing the upper bound of the domain of interest
+     *      in the radial direction.
+     * @param[in] start_knot_theta
+     *      The index of the knot describing the lower bound of the domain of interest
+     *      in the poloidal direction.
+     * @param[in] end_knot_theta
+     *      The index of the knot describing the upper bound of the domain of interest
+     *      in the poloidal direction.
      * @return 
-     *      The quadrature range corresponding to the  @f$(r,\theta)@f$ indices.
+     *      The range of quadrature points in the specified domain.
      */
     KOKKOS_FUNCTION IdxRangeQuadratureRTheta get_quadrature_between_knots(
             Idx<KnotsR> start_knot_r,
