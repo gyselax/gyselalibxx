@@ -636,17 +636,17 @@ public:
         // Calculate the matrix elements following a stencil
         ddc::for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx_test_polar) {
             const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
-            const std::size_t idx_test_r(ddc::select<BSplinesR>(idx_test).uid());
-            const std::size_t idx_test_theta(ddc::select<BSplinesTheta>(idx_test).uid());
+            const IdxBSR idx_test_r(idx_test);
+            const IdxBSTheta idx_test_theta(idx_test);
 
             // Calculate the index of the elements that are already filled
             IdxRangeBSTheta remaining_theta(
-                    IdxBSTheta {idx_test_theta},
+                    idx_test_theta,
                     IdxStep<BSplinesTheta> {BSplinesTheta::degree() + 1});
             ddc::for_each(remaining_theta, [&](IdxBSTheta const idx_trial_theta) {
-                IdxBSRTheta idx_trial(IdxBSR(idx_test_r), idx_trial_theta);
+                IdxBSRTheta idx_trial(idx_test_r, idx_trial_theta);
                 IdxBSPolar idx_trial_polar(
-                        to_polar(IdxBSRTheta(idx_test_r, theta_mod(idx_trial_theta.uid()))));
+                        to_polar(IdxBSRTheta(idx_test_r, theta_mod(idx_trial_theta))));
                 double element = get_matrix_stencil_element(
                         idx_test,
                         idx_trial,
@@ -674,22 +674,18 @@ public:
                     nnz_per_row_csr_host(int_polar_idx_trial + 1)++;
                 }
             });
-            IdxRangeBSR remaining_r(
-                    ddc::select<BSplinesR>(idx_test) + 1,
-                    IdxStep<BSplinesR> {
-                            min(BSplinesR::degree(),
-                                ddc::discrete_space<BSplinesR>().nbasis() - 2 - idx_test_r)});
+            IdxRangeBSR full_idx_range = ddc::discrete_space<BSplinesR>().full_domain();
+            IdxRangeBSR remaining_r(idx_test_r + 1, idx_test_r - full_idx_range.front() - 2);
             IdxRangeBSTheta relevant_theta(
-                    IdxBSTheta {
-                            idx_test_theta + ddc::discrete_space<BSplinesTheta>().nbasis()
-                            - BSplinesTheta::degree()},
+                    idx_test_theta + ddc::discrete_space<BSplinesTheta>().nbasis()
+                            - BSplinesTheta::degree(),
                     IdxStep<BSplinesTheta> {2 * BSplinesTheta::degree() + 1});
 
             IdxRangeBSRTheta trial_idx_range(remaining_r, relevant_theta);
 
             ddc::for_each(trial_idx_range, [&](IdxBSRTheta const idx_trial) {
-                const int idx_trial_r(ddc::select<BSplinesR>(idx_trial).uid());
-                const int idx_trial_theta(ddc::select<BSplinesTheta>(idx_trial).uid());
+                const IdxBSR idx_trial_r(idx_trial);
+                const IdxBSTheta idx_trial_theta(idx_trial);
                 IdxBSPolar idx_trial_polar(
                         to_polar(IdxBSRTheta(idx_trial_r, theta_mod(idx_trial_theta))));
                 double element = get_matrix_stencil_element(
