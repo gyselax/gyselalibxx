@@ -18,6 +18,7 @@
 #include "non_uniform_interpolation_points.hpp"
 #include "single_interface_derivatives_calculator.hpp"
 #include "single_interface_derivatives_calculator_collection.hpp"
+#include "types.hpp"
 #include "view.hpp"
 
 
@@ -134,37 +135,6 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         ddc::ConstantExtrapolationRule<Yg, Xg>>;
 
 
-template <class Patch>
-using DerivFieldMemOnPatch = DerivFieldMem<
-        double,
-        IdxRange<
-                ddc::Deriv<typename Patch::Dim1>,
-                typename Patch::Grid1,
-                ddc::Deriv<typename Patch::Dim2>,
-                typename Patch::Grid2>,
-        1>;
-
-template <class Patch>
-using DerivFieldMemOnPatch_host = host_t<DerivFieldMemOnPatch<Patch>>;
-
-template <class Patch>
-using DerivFieldOnPatch = DerivField<
-        double,
-        IdxRange<
-                ddc::Deriv<typename Patch::Dim1>,
-                typename Patch::Grid1,
-                ddc::Deriv<typename Patch::Dim2>,
-                typename Patch::Grid2>>;
-
-template <class Patch>
-using DerivFieldOnPatch_host = host_t<DerivFieldOnPatch<Patch>>;
-
-template <class Patch>
-using IdxRange1SliceOnPatch = IdxRangeSlice<typename Patch::Grid1>;
-
-template <class Patch>
-using IdxRange2SliceOnPatch = IdxRangeSlice<typename Patch::Grid2>;
-
 
 // USEFUL FUNCTIONS ==============================================================================
 /// @brief Convert a local coordinate into a global coordinate.
@@ -188,14 +158,6 @@ void initialise_2D_function(DField<IdxRange<Grid1, Grid2>, Kokkos::HostSpace, La
 }
 
 /// @brief Initialise all the functions defined on the patches.
-// template <class... Patches>
-// void initialise_all_functions(MultipatchField<DFieldOnPatch_host, Patches...> const& functions)
-// {
-//     (initialise_2D_function<typename Patches::Grid1, typename Patches::Grid2>(
-//              functions.template get<Patches>()),
-//      ...);
-// }
-
 template <class... Patches>
 void initialise_all_functions(
         MultipatchField<DerivFieldOnPatch_host, Patches...> const& functions_and_derivs)
@@ -204,148 +166,6 @@ void initialise_all_functions(
              (functions_and_derivs.template get<Patches>()).get_values_field()),
      ...);
 }
-
-// /// @brief Initialise the y-derivatives from the global spline.
-// template <class Grid1, class Grid2>
-// void initialise_2D_y_derivative(
-//         host_t<DField<IdxRange<Grid1, ddc::Deriv<typename Grid2::continuous_dimension_type>>>>
-//                 deriv_y,
-//         Idx<Grid2> const& idx_y,
-//         SplineRThetagEvaluator const& evaluator_g,
-//         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef)
-// {
-//     ddc::for_each(
-//             get_idx_range(deriv_y),
-//             [&](Idx<Grid1, ddc::Deriv<typename Grid2::continuous_dimension_type>> idx) {
-//                 Idx<Grid1, Grid2> idx_xy(Idx<Grid1>(idx), idx_y);
-//                 Coord<Xg, Yg> interface_coord(get_global_coord(ddc::coordinate(idx_xy)));
-//                 deriv_y(idx) = evaluator_g.deriv_dim_2(interface_coord, function_g_coef);
-//             });
-// }
-
-// /// @brief Initialise all the y-derivatives on the lower/left bounds.
-// template <class... Patches>
-// void initialise_all_y_derivatives_min(
-//         MultipatchField<Deriv2_OnPatch_2D_host, Patches...> const& derivs_ymin,
-//         MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-//         SplineRThetagEvaluator const& evaluator_g,
-//         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef)
-// {
-//     (initialise_2D_y_derivative<typename Patches::Grid1, typename Patches::Grid2>(
-//              derivs_ymin.template get<Patches>(),
-//              typename Patches::IdxRange2(idx_ranges.template get<Patches>()).front(),
-//              evaluator_g,
-//              function_g_coef),
-//      ...);
-// }
-
-// /// @brief Initialise all the y-derivatives on the upper/right bounds.
-// template <class... Patches>
-// void initialise_all_y_derivatives_max(
-//         MultipatchField<Deriv2_OnPatch_2D_host, Patches...> const& derivs_ymax,
-//         MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-//         SplineRThetagEvaluator const& evaluator_g,
-//         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef)
-// {
-//     (initialise_2D_y_derivative<typename Patches::Grid1, typename Patches::Grid2>(
-//              derivs_ymax.template get<Patches>(),
-//              typename Patches::IdxRange2(idx_ranges.template get<Patches>()).back(),
-//              evaluator_g,
-//              function_g_coef),
-//      ...);
-// }
-
-
-// /// @brief Initialise the cross-derivatives from the global spline.
-// template <class Grid1, class Grid2>
-// void initialise_2D_xy_derivative(
-//         host_t<DField<IdxRange<
-//                 ddc::Deriv<typename Grid1::continuous_dimension_type>,
-//                 ddc::Deriv<typename Grid2::continuous_dimension_type>>>> deriv_xy,
-//         Idx<Grid1> const& idx_x,
-//         Idx<Grid2> const& idx_y,
-//         SplineRThetagEvaluator const& evaluator_g,
-//         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef)
-// {
-//     Idx<Grid1, Grid2> idx(idx_x, idx_y);
-//     Coord<Xg, Yg> interface_coord(get_global_coord(ddc::coordinate(idx)));
-//     deriv_xy(get_idx_range(deriv_xy).front())
-//             = evaluator_g.deriv_1_and_2(interface_coord, function_g_coef);
-// }
-
-// /// @brief Initialise all the cross-derivatives on the lower/left - lower/left corners.
-// template <std::size_t... I, class... Patches>
-// void initialise_all_xy_derivatives_min_min(
-//         std::tuple<Deriv12_OnPatch_2D_host<Patches>...> const& derivs_min_min,
-//         MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-//         SplineRThetagEvaluator const& evaluator_g,
-//         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
-//         std::integer_sequence<std::size_t, I...>)
-// {
-//     (initialise_2D_xy_derivative<typename Patches::Grid1, typename Patches::Grid2>(
-//              std::get<I>(derivs_min_min),
-//              typename Patches::IdxRange1(idx_ranges.template get<Patches>()).front(),
-//              typename Patches::IdxRange2(idx_ranges.template get<Patches>()).front(),
-//              evaluator_g,
-//              function_g_coef),
-//      ...);
-// }
-
-// /// @brief Initialise all the cross-derivatives on the upper/right - lower/left corners.
-// template <std::size_t... I, class... Patches>
-// void initialise_all_xy_derivatives_max_min(
-//         std::tuple<Deriv12_OnPatch_2D_host<Patches>...> const& derivs_max_min,
-//         MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-//         SplineRThetagEvaluator const& evaluator_g,
-//         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
-//         std::integer_sequence<std::size_t, I...>)
-// {
-//     (initialise_2D_xy_derivative<typename Patches::Grid1, typename Patches::Grid2>(
-//              std::get<I>(derivs_max_min),
-//              typename Patches::IdxRange1(idx_ranges.template get<Patches>()).back(),
-//              typename Patches::IdxRange2(idx_ranges.template get<Patches>()).front(),
-//              evaluator_g,
-//              function_g_coef),
-//      ...);
-// }
-
-// /// @brief Initialise all the cross-derivatives on the lower/left - upper/right corners.
-// template <std::size_t... I, class... Patches>
-// void initialise_all_xy_derivatives_min_max(
-//         std::tuple<Deriv12_OnPatch_2D_host<Patches>...> const& derivs_min_max,
-//         MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-//         SplineRThetagEvaluator const& evaluator_g,
-//         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
-//         std::integer_sequence<std::size_t, I...>)
-// {
-//     (initialise_2D_xy_derivative<typename Patches::Grid1, typename Patches::Grid2>(
-//              std::get<I>(derivs_min_max),
-//              typename Patches::IdxRange1(idx_ranges.template get<Patches>()).front(),
-//              typename Patches::IdxRange2(idx_ranges.template get<Patches>()).back(),
-//              evaluator_g,
-//              function_g_coef),
-//      ...);
-// }
-
-// /// @brief Initialise all the cross-derivatives on the upper/right - lower/left corners.
-// template <std::size_t... I, class... Patches>
-// void initialise_all_xy_derivatives_max_max(
-//         std::tuple<Deriv12_OnPatch_2D_host<Patches>...> const& derivs_max_max,
-//         MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-//         SplineRThetagEvaluator const& evaluator_g,
-//         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
-//         std::integer_sequence<std::size_t, I...>)
-// {
-//     (initialise_2D_xy_derivative<typename Patches::Grid1, typename Patches::Grid2>(
-//              std::get<I>(derivs_max_max),
-//              typename Patches::IdxRange1(idx_ranges.template get<Patches>()).back(),
-//              typename Patches::IdxRange2(idx_ranges.template get<Patches>()).back(),
-//              evaluator_g,
-//              function_g_coef),
-//      ...);
-// }
-
-
 
 struct InterfaceDerivativeMatrixTest : public ::testing::Test
 {
@@ -480,7 +300,6 @@ protected:
     const IdxRange<GridYg> idx_range_yg;
     const IdxRange<GridXg, GridYg> idx_range_xy_g;
 
-
 public:
     InterfaceDerivativeMatrixTest()
         : idx_range_x1(SplineInterpPointsX<1>::template get_domain<GridX<1>>())
@@ -516,11 +335,11 @@ public:
     {
     }
 
-
     // INITIALISE DOMAINS ------------------------------------------------------------------------
     static void SetUpTestSuite()
     {
         // Creating of meshes and supports .......................................................
+        // The patches are conforming between each other.
         std::vector<Coord<X>> break_points_x147
                 = build_random_non_uniform_break_points(x1_min, x1_max, x1_ncells);
         std::vector<Coord<X>> break_points_x258
@@ -544,7 +363,6 @@ public:
         std::vector<Coord<Y>> interpolation_points_y456 = break_points_y456;
         std::vector<Coord<Y>> interpolation_points_y789
                 = get_interpolation_points_add_one_on_left(break_points_y789);
-
 
         // Patch 1 ...............................................................................
         ddc::init_discrete_space<BSplinesX<1>>(break_points_x147);
@@ -665,18 +483,18 @@ public:
             int const x_shift,
             int const y_shift)
     {
+        using Grid1 = typename Patch::Grid1;
+        using Grid2 = typename Patch::Grid2;
         ddc::for_each(idx_range, [&](typename Patch::Idx12 const& idx) {
-            typename Patch::IdxStep1 idx_x(
-                    typename Patch::Idx1(idx) - typename Patch::IdxRange1(idx_range).front());
-            typename Patch::IdxStep2 idx_y(
-                    typename Patch::Idx2(idx) - typename Patch::IdxRange2(idx_range).front());
+            IdxStep<Grid1> idx_x(Idx<Grid1>(idx) - IdxRange<Grid1>(idx_range).front());
+            IdxStep<Grid2> idx_y(Idx<Grid2>(idx) - IdxRange<Grid2>(idx_range).front());
             Idx<GridXg, GridYg> idx_g(idx_x.value() + x_shift, idx_y.value() + y_shift);
             EXPECT_NEAR(
-                    ddc::coordinate(typename Patch::Idx1(idx)),
+                    ddc::coordinate(Idx<Grid1>(idx)),
                     ddc::coordinate(Idx<GridXg>(idx_g)),
                     1e-15);
             EXPECT_NEAR(
-                    ddc::coordinate(typename Patch::Idx2(idx)),
+                    ddc::coordinate(Idx<Grid2>(idx)),
                     ddc::coordinate(Idx<GridYg>(idx_g)),
                     1e-15);
         });
@@ -785,7 +603,6 @@ public:
         DField<IdxRange<typename Patch::Grid1>, Kokkos::HostSpace, Kokkos::layout_stride>
                 derivs_ymax_extracted = function_and_derivs[idx_slice_max];
 
-
         typename Patch::IdxRange1 idx_range_par(get_idx_range(derivs_ymin_extracted));
         ddc::for_each(idx_range_par, [&](typename Patch::Idx1 const& idx_par) {
             typename Patch::Idx12 idx_min(idx_par, idx_range_perp.front());
@@ -798,11 +615,15 @@ public:
             double const global_deriv_max
                     = evaluator_g.deriv_dim_2(interface_coord_max, function_g_coef);
 
-            if constexpr (!ddc::in_tags_v<Patch, ddc::detail::TypeSeq<Patch1, Patch2, Patch3>>) {
-                EXPECT_NEAR(derivs_ymax_extracted(idx_par), global_deriv_max, 5e-14);
-            }
+            // For Patch7, Patch8, Patch9, we defined ddc::BoundCond::GREVILLE the local lower Y-boundary,
+            // we don't need the y-derivatives for y = ymin. Their values are not checked.
             if constexpr (!ddc::in_tags_v<Patch, ddc::detail::TypeSeq<Patch7, Patch8, Patch9>>) {
                 EXPECT_NEAR(derivs_ymin_extracted(idx_par), global_deriv_min, 5e-14);
+            }
+            // For Patch1, Patch2, Patch3, we defined ddc::BoundCond::GREVILLE the local lower Y-boundary,
+            // we don't need the y-derivatives for y = ymax. Their values are not checked.
+            if constexpr (!ddc::in_tags_v<Patch, ddc::detail::TypeSeq<Patch1, Patch2, Patch3>>) {
+                EXPECT_NEAR(derivs_ymax_extracted(idx_par), global_deriv_max, 5e-14);
             }
         });
     }
@@ -819,8 +640,6 @@ public:
             MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
             MultipatchType<IdxRange1SliceOnPatch, Patches...> const& idx_range_slices_dx,
             MultipatchType<IdxRange2SliceOnPatch, Patches...> const& idx_range_slices_dy)
-
-
     {
         (check_xy_derivatives<Patches>(
                  functions_and_derivs.template get<Patches>(),
@@ -848,13 +667,9 @@ public:
         using GridY = typename Patch::Grid2;
         using DerivX = typename ddc::Deriv<typename Patch::Dim1>;
         using DerivY = typename ddc::Deriv<typename Patch::Dim2>;
+
         Idx<DerivX> idx_deriv_x(1);
         Idx<DerivY> idx_deriv_y(1);
-        IdxStep<DerivX> nelems_deriv_x(1);
-        IdxStep<DerivY> nelems_deriv_y(1);
-        IdxRange<DerivX> idx_range_deriv_x(idx_deriv_x, nelems_deriv_x);
-        IdxRange<DerivY> idx_range_deriv_y(idx_deriv_y, nelems_deriv_y);
-        IdxRange<DerivX, DerivY> idx_range_deriv_xy(idx_range_deriv_x, idx_range_deriv_y);
 
         Idx<DerivX, GridX, DerivY, GridY> idx_cross_deriv_min_min(
                 idx_deriv_x,
@@ -880,42 +695,13 @@ public:
                 idx_deriv_y,
                 idx_range_slice_dy.back());
 
+        IdxRange<GridX> idx_range_x(idx_range);
+        IdxRange<GridY> idx_range_y(idx_range);
 
-        // IdxRange<GridX> idx_range_cross_deriv_xmin(
-        //         Idx<GridX>(idx_range_slice_dx.front()),
-        //         IdxStep<GridX>(1));
-        // IdxRange<GridX> idx_range_cross_deriv_xmax(
-        //         Idx<GridX>(idx_range_slice_dx.back()),
-        //         IdxStep<GridX>(1));
-
-        // IdxRange<GridY> idx_range_cross_deriv_ymin(
-        //         Idx<GridY>(idx_range_slice_dy.front()),
-        //         IdxStep<GridY>(1));
-        // IdxRange<GridY> idx_range_cross_deriv_ymax(
-        //         Idx<GridY>(idx_range_slice_dy.back()),
-        //         IdxStep<GridY>(1));
-
-        // IdxRange<DerivX, GridX, DerivY, GridY> idx_range_deriv_xy_min_min(
-        //         idx_range_deriv_x,
-        //         idx_range_cross_deriv_xmin,
-        //         idx_range_deriv_y,
-        //         idx_range_cross_deriv_ymin);
-
-        // DField<IdxRange<DerivX, DerivY>, Kokkos::HostSpace, Kokkos::layout_stride>
-        //         derivs_xy_min_min_extracted
-        //         = function_and_derivs[idx_range_deriv_xy_min_min][idx_range_slice_dx.front()]
-        //                              [idx_range_slice_dy.front()];
-
-
-        typename Patch::Idx1 idx_1min(idx_range.front());
-        typename Patch::Idx1 idx_1max(idx_range.back());
-        typename Patch::Idx2 idx_2min(idx_range.front());
-        typename Patch::Idx2 idx_2max(idx_range.back());
-
-        typename Patch::Idx12 idx_min_min(idx_1min, idx_2min);
-        typename Patch::Idx12 idx_max_min(idx_1max, idx_2min);
-        typename Patch::Idx12 idx_min_max(idx_1min, idx_2max);
-        typename Patch::Idx12 idx_max_max(idx_1max, idx_2max);
+        Idx<GridX, GridY> idx_min_min(idx_range_x.front(), idx_range_y.front());
+        Idx<GridX, GridY> idx_max_min(idx_range_x.back(), idx_range_y.front());
+        Idx<GridX, GridY> idx_min_max(idx_range_x.front(), idx_range_y.back());
+        Idx<GridX, GridY> idx_max_max(idx_range_x.back(), idx_range_y.back());
 
         Coord<Xg, Yg> interface_coord_min_min(get_global_coord(ddc::coordinate(idx_min_min)));
         Coord<Xg, Yg> interface_coord_max_min(get_global_coord(ddc::coordinate(idx_max_min)));
@@ -931,10 +717,14 @@ public:
         double const global_deriv_max_max
                 = evaluator_g.deriv_1_and_2(interface_coord_max_max, function_g_coef);
 
+        // For Patch7, Patch8, Patch9, we defined ddc::BoundCond::GREVILLE the local lower Y-boundary,
+        // we don't need the cross-derivatives for y = ymin. Their value is not checked.
         if constexpr (!ddc::in_tags_v<Patch, ddc::detail::TypeSeq<Patch7, Patch8, Patch9>>) {
             EXPECT_NEAR(function_and_derivs(idx_cross_deriv_min_min), global_deriv_min_min, 5e-13);
             EXPECT_NEAR(function_and_derivs(idx_cross_deriv_max_min), global_deriv_max_min, 5e-13);
         }
+        // For Patch1, Patch2, Patch3, we defined ddc::BoundCond::GREVILLE the local upper Y-boundary,
+        // we don't need the cross-derivatives for y = ymax. Their value is not checked.
         if constexpr (!ddc::in_tags_v<Patch, ddc::detail::TypeSeq<Patch1, Patch2, Patch3>>) {
             EXPECT_NEAR(function_and_derivs(idx_cross_deriv_min_max), global_deriv_min_max, 5e-13);
             EXPECT_NEAR(function_and_derivs(idx_cross_deriv_max_max), global_deriv_max_max, 5e-13);
@@ -945,7 +735,7 @@ public:
      * and the global spline. 
      */
     template <class... Patches>
-    void check_all_spline_representation_conformity(
+    void check_all_spline_representation_agreement(
             MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
             MultipatchType<IdxRange1SliceOnPatch, Patches...> const& idx_range_slices_x,
             MultipatchType<IdxRange2SliceOnPatch, Patches...> const& idx_range_slices_y,
@@ -953,7 +743,7 @@ public:
             SplineRThetagEvaluator const& evaluator_g,
             host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef)
     {
-        (check_spline_representation_conformity<Patches>(
+        (check_spline_representation_agreement<Patches>(
                  idx_ranges.template get<Patches>(),
                  idx_range_slices_x.template get<Patches>(),
                  idx_range_slices_y.template get<Patches>(),
@@ -967,7 +757,7 @@ public:
      * and the global spline for a given patch.  
      */
     template <class Patch>
-    void check_spline_representation_conformity(
+    void check_spline_representation_agreement(
             typename Patch::IdxRange12 const& idx_range_xy,
             IdxRange1SliceOnPatch<Patch> const& idx_range_slice_x,
             IdxRange2SliceOnPatch<Patch> const& idx_range_slice_y,
@@ -1024,14 +814,15 @@ public:
         IdxRange<GridX> idx_range_x(idx_range_xy);
         IdxRange<GridY> idx_range_y(idx_range_xy);
 
-        IdxRange<GridX>
-                idx_range_slice_xmin(Idx<GridX>(idx_range_slice_x.front()), IdxStep<GridX>(1));
-        IdxRange<GridX>
-                idx_range_slice_xmax(Idx<GridX>(idx_range_slice_x.back()), IdxStep<GridX>(1));
-        IdxRange<GridY>
-                idx_range_slice_ymin(Idx<GridY>(idx_range_slice_y.front()), IdxStep<GridY>(1));
-        IdxRange<GridY>
-                idx_range_slice_ymax(Idx<GridY>(idx_range_slice_y.back()), IdxStep<GridY>(1));
+        Idx<GridX> idx_slice_xmin(idx_range_slice_x.front());
+        Idx<GridX> idx_slice_xmax(idx_range_slice_x.back());
+        Idx<GridY> idx_slice_ymin(idx_range_slice_y.front());
+        Idx<GridY> idx_slice_ymax(idx_range_slice_y.back());
+
+        IdxRange<GridX> idx_range_slice_xmin(idx_slice_xmin, IdxStep<GridX>(1));
+        IdxRange<GridX> idx_range_slice_xmax(idx_slice_xmax, IdxStep<GridX>(1));
+        IdxRange<GridY> idx_range_slice_ymin(idx_slice_ymin, IdxStep<GridY>(1));
+        IdxRange<GridY> idx_range_slice_ymax(idx_slice_ymax, IdxStep<GridY>(1));
 
         IdxRange<DerivX, GridX, GridY>
                 idx_range_deriv_xmin(idx_range_deriv_x, idx_range_slice_xmin, idx_range_y);
@@ -1043,18 +834,14 @@ public:
                 idx_range_deriv_ymax(idx_range_x, idx_range_deriv_y, idx_range_slice_ymax);
 
         DField<IdxRange<DerivX, GridY>, Kokkos::HostSpace, Kokkos::layout_stride>
-                deriv_xmin_extracted
-                = function_and_derivs[idx_range_deriv_xmin][idx_range_slice_x.front()];
+                deriv_xmin_extracted = function_and_derivs[idx_range_deriv_xmin][idx_slice_xmin];
         DField<IdxRange<DerivX, GridY>, Kokkos::HostSpace, Kokkos::layout_stride>
-                deriv_xmax_extracted
-                = function_and_derivs[idx_range_deriv_xmax][idx_range_slice_x.back()];
+                deriv_xmax_extracted = function_and_derivs[idx_range_deriv_xmax][idx_slice_xmax];
 
         DField<IdxRange<GridX, DerivY>, Kokkos::HostSpace, Kokkos::layout_stride>
-                deriv_ymin_extracted
-                = function_and_derivs[idx_range_deriv_ymin][idx_range_slice_y.front()];
+                deriv_ymin_extracted = function_and_derivs[idx_range_deriv_ymin][idx_slice_ymin];
         DField<IdxRange<GridX, DerivY>, Kokkos::HostSpace, Kokkos::layout_stride>
-                deriv_ymax_extracted
-                = function_and_derivs[idx_range_deriv_ymax][idx_range_slice_y.back()];
+                deriv_ymax_extracted = function_and_derivs[idx_range_deriv_ymax][idx_slice_ymax];
 
         // ------ cross-derivatives.
         IdxRange<DerivX, GridX, DerivY, GridY> idx_range_deriv_xy_min_min(
@@ -1080,20 +867,16 @@ public:
 
         DField<IdxRange<DerivX, DerivY>, Kokkos::HostSpace, Kokkos::layout_stride>
                 deriv_xy_min_min_extracted
-                = function_and_derivs[idx_range_deriv_xy_min_min][idx_range_slice_x.front()]
-                                     [idx_range_slice_y.front()];
+                = function_and_derivs[idx_range_deriv_xy_min_min][idx_slice_xmin][idx_slice_ymin];
         DField<IdxRange<DerivX, DerivY>, Kokkos::HostSpace, Kokkos::layout_stride>
                 deriv_xy_max_min_extracted
-                = function_and_derivs[idx_range_deriv_xy_max_min][idx_range_slice_x.back()]
-                                     [idx_range_slice_y.front()];
+                = function_and_derivs[idx_range_deriv_xy_max_min][idx_slice_xmax][idx_slice_ymin];
         DField<IdxRange<DerivX, DerivY>, Kokkos::HostSpace, Kokkos::layout_stride>
                 deriv_xy_min_max_extracted
-                = function_and_derivs[idx_range_deriv_xy_min_max][idx_range_slice_x.front()]
-                                     [idx_range_slice_y.back()];
+                = function_and_derivs[idx_range_deriv_xy_min_max][idx_slice_xmin][idx_slice_ymax];
         DField<IdxRange<DerivX, DerivY>, Kokkos::HostSpace, Kokkos::layout_stride>
                 deriv_xy_max_max_extracted
-                = function_and_derivs[idx_range_deriv_xy_max_max][idx_range_slice_x.back()]
-                                     [idx_range_slice_y.back()];
+                = function_and_derivs[idx_range_deriv_xy_max_max][idx_slice_xmax][idx_slice_ymax];
 
 
         // --- define fields on the correct layout.
@@ -1233,6 +1016,7 @@ public:
         host_t<CoordFieldMemOnPatch<Patch>> eval_points_alloc(idx_range_xy);
         host_t<CoordFieldOnPatch<Patch>> eval_points(eval_points_alloc);
 
+        // The evaluation points are placed in the middle of the cells, except for the last one.
         ddc::for_each(idx_range_xy, [&](typename Patch::Idx12 const idx) {
             Coord<X, Y> const mesh_point(ddc::coordinate(idx));
             typename Patch::Idx1 idx_1(idx);
@@ -1248,9 +1032,8 @@ public:
         ddc::for_each(idx_range_xy, [&](typename Patch::Idx12 const idx) {
             Coord<Xg, Yg> const eval_point_g(get_global_coord(eval_points(idx)));
 
-            double const local_spline = evaluator(eval_points(idx), get_const_field(function_coef));
-            double const global_spline
-                    = evaluator_g(eval_point_g, get_const_field(function_g_coef));
+            double local_spline = evaluator(eval_points(idx), get_const_field(function_coef));
+            double global_spline = evaluator_g(eval_point_g, get_const_field(function_g_coef));
 
             EXPECT_NEAR(local_spline, global_spline, 1e-14);
         });
@@ -1340,7 +1123,7 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
 
 
 
-    // Order in sequences ------------------------------------------------------------------------
+    // Collect the derivative calculators --------------------------------------------------------
     SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_123(
             derivatives_calculator_1_2,
             derivatives_calculator_2_3,
@@ -1365,7 +1148,7 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
     SingleInterfaceDerivativesCalculatorCollection
             deriv_calculators_collect_369(derivatives_calculator_3_6, derivatives_calculator_6_9);
 
-
+    // Collect the index ranges ------------------------------------------------------------------
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2, Patch3>
             idx_ranges_123(idx_range_xy1, idx_range_xy2, idx_range_xy3);
     MultipatchType<IdxRangeOnPatch, Patch4, Patch5, Patch6>
@@ -1381,6 +1164,27 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
     MultipatchType<IdxRangeOnPatch, Patch3, Patch6, Patch9>
             idx_ranges_369(idx_range_xy3, idx_range_xy6, idx_range_xy9);
 
+    MultipatchType<
+            IdxRangeOnPatch,
+            Patch1,
+            Patch2,
+            Patch3,
+            Patch4,
+            Patch5,
+            Patch6,
+            Patch7,
+            Patch8,
+            Patch9>
+            idx_ranges(
+                    idx_range_xy1,
+                    idx_range_xy2,
+                    idx_range_xy3,
+                    idx_range_xy4,
+                    idx_range_xy5,
+                    idx_range_xy6,
+                    idx_range_xy7,
+                    idx_range_xy8,
+                    idx_range_xy9);
 
     // Instantiate the matrix calculators --------------------------------------------------------
     InterfaceDerivativeMatrix<
@@ -1459,37 +1263,8 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             Patch9>
             matrix_369(idx_ranges_369, deriv_calculators_collect_369);
 
-    // Instantiate test function values ==========================================================
 
-    host_t<DFieldMem<IdxRange<GridXg, GridYg>>> function_g_alloc(idx_range_xy_g);
-    host_t<DField<IdxRange<GridXg, GridYg>>> function_g = get_field(function_g_alloc);
-
-
-    // Test the values of the derivatives ========================================================
-    MultipatchType<
-            IdxRangeOnPatch,
-            Patch1,
-            Patch2,
-            Patch3,
-            Patch4,
-            Patch5,
-            Patch6,
-            Patch7,
-            Patch8,
-            Patch9>
-            idx_ranges(
-                    idx_range_xy1,
-                    idx_range_xy2,
-                    idx_range_xy3,
-                    idx_range_xy4,
-                    idx_range_xy5,
-                    idx_range_xy6,
-                    idx_range_xy7,
-                    idx_range_xy8,
-                    idx_range_xy9);
-
-
-    // Try to use DerivField =====================================================================
+    // Instantiate DerivField ====================================================================
     // Instantiate index range slices ------------------------------------------------------------
     IdxRangeSlice<GridX<1>>
             idx_range_slice_dx1(idx_range_x1.front(), IdxStep<GridX<1>>(2), idx_range_x1.extents());
@@ -1529,6 +1304,7 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
     IdxRangeSlice<GridY<9>>
             idx_range_slice_dy9(idx_range_y9.front(), IdxStep<GridY<9>>(2), idx_range_y9.extents());
 
+    // Collect the index range slices.
     MultipatchType<
             IdxRange1SliceOnPatch,
             Patch1,
@@ -1603,115 +1379,7 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
     DerivFieldOnPatch_host<Patch8> function_and_derivs_8(function_and_derivs_8_alloc);
     DerivFieldOnPatch_host<Patch9> function_and_derivs_9(function_and_derivs_9_alloc);
 
-
-    MultipatchField<
-            DerivFieldOnPatch_host,
-            Patch1,
-            Patch2,
-            Patch3,
-            Patch4,
-            Patch5,
-            Patch6,
-            Patch7,
-            Patch8,
-            Patch9>
-            functions_and_derivs(
-                    function_and_derivs_1,
-                    function_and_derivs_2,
-                    function_and_derivs_3,
-                    function_and_derivs_4,
-                    function_and_derivs_5,
-                    function_and_derivs_6,
-                    function_and_derivs_7,
-                    function_and_derivs_8,
-                    function_and_derivs_9);
-
-
-    // Initialise the data =======================================================================
-    initialise_all_functions(functions_and_derivs);
-    initialise_2D_function<GridXg, GridYg>(function_g);
-
-    // Build global spline representation ---
-    SplineRThetagBuilder builder_g(idx_range_xy_g);
-
-    host_t<DFieldMem<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef_alloc(
-            builder_g.batched_spline_domain(idx_range_xy_g));
-    host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef
-            = get_field(function_g_coef_alloc);
-
-    builder_g(function_g_coef, get_const_field(function_g));
-
-    // Global spline evaluator ---
-    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymin_g(yg_min);
-    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymax_g(yg_max);
-    ddc::PeriodicExtrapolationRule<Xg> bc_x_g;
-    SplineRThetagEvaluator evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g);
-
-
-    // // Initialise the boundary derivatives.
-    // initialise_all_y_derivatives_min(
-    //         derivs_ymin_789,
-    //         idx_ranges_789,
-    //         evaluator_g,
-    //         get_const_field(function_g_coef));
-    // initialise_all_y_derivatives_max(
-    //         derivs_ymax_123,
-    //         idx_ranges_123,
-    //         evaluator_g,
-    //         get_const_field(function_g_coef));
-
-    // // Initialise the boundary cross-derivatives.
-    // initialise_all_xy_derivatives_min_min(
-    //         derivs_xy_min_min_789,
-    //         idx_ranges_789,
-    //         evaluator_g,
-    //         get_const_field(function_g_coef),
-    //         std::make_integer_sequence<std::size_t, 3> {});
-
-    // initialise_all_xy_derivatives_max_min(
-    //         derivs_xy_max_min_789,
-    //         idx_ranges_789,
-    //         evaluator_g,
-    //         get_const_field(function_g_coef),
-    //         std::make_integer_sequence<std::size_t, 3> {});
-
-    // initialise_all_xy_derivatives_min_max(
-    //         derivs_xy_min_max_123,
-    //         idx_ranges_123,
-    //         evaluator_g,
-    //         get_const_field(function_g_coef),
-    //         std::make_integer_sequence<std::size_t, 3> {});
-
-    // initialise_all_xy_derivatives_max_max(
-    //         derivs_xy_max_max_123,
-    //         idx_ranges_123,
-    //         evaluator_g,
-    //         get_const_field(function_g_coef),
-    //         std::make_integer_sequence<std::size_t, 3> {});
-
-    // Use the InterfaceDerivativeMatrix ---------------------------------------------------------
-    // MultipatchField<
-    //         DerivFieldOnPatch_host,
-    //         Patch1,
-    //         Patch2,
-    //         Patch3,
-    //         Patch4,
-    //         Patch5,
-    //         Patch6,
-    //         Patch7,
-    //         Patch8,
-    //         Patch9>
-    //         functions_and_derivs(
-    //                 function_and_derivs_1,
-    //                 function_and_derivs_2,
-    //                 function_and_derivs_3,
-    //                 function_and_derivs_4,
-    //                 function_and_derivs_5,
-    //                 function_and_derivs_6,
-    //                 function_and_derivs_7,
-    //                 function_and_derivs_8,
-    //                 function_and_derivs_9);
-
+    // Collect the fields with derivatives.
     MultipatchField<DerivFieldOnPatch_host, Patch1, Patch2, Patch3> functions_and_derivs_123(
             function_and_derivs_1,
             function_and_derivs_2,
@@ -1744,7 +1412,39 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             function_and_derivs_6,
             function_and_derivs_9);
 
-    std::cout << "before solving." << std::endl;
+
+    MultipatchField<
+            DerivFieldOnPatch_host,
+            Patch1,
+            Patch2,
+            Patch3,
+            Patch4,
+            Patch5,
+            Patch6,
+            Patch7,
+            Patch8,
+            Patch9>
+            functions_and_derivs(
+                    function_and_derivs_1,
+                    function_and_derivs_2,
+                    function_and_derivs_3,
+                    function_and_derivs_4,
+                    function_and_derivs_5,
+                    function_and_derivs_6,
+                    function_and_derivs_7,
+                    function_and_derivs_8,
+                    function_and_derivs_9);
+
+    // Instantiate the field of global function values. No derivatives needed.
+    host_t<DFieldMem<IdxRange<GridXg, GridYg>>> function_g_alloc(idx_range_xy_g);
+    host_t<DField<IdxRange<GridXg, GridYg>>> function_g = get_field(function_g_alloc);
+
+    // Initialise the data =======================================================================
+    // --- the function values.
+    initialise_all_functions(functions_and_derivs);
+    initialise_2D_function<GridXg, GridYg>(function_g);
+
+    // --- the first derivatives from the function values.
     matrix_123.solve_deriv(functions_and_derivs_123);
     matrix_456.solve_deriv(functions_and_derivs_456);
     matrix_789.solve_deriv(functions_and_derivs_789);
@@ -1753,13 +1453,31 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
     matrix_258.solve_deriv(functions_and_derivs_258);
     matrix_369.solve_deriv(functions_and_derivs_369);
 
+    // --- the cross-derivatives from the first derivatives.
     matrix_147.solve_cross_deriv(functions_and_derivs_147);
     matrix_258.solve_cross_deriv(functions_and_derivs_258);
     matrix_369.solve_cross_deriv(functions_and_derivs_369);
 
-    std::cout << "after solving." << std::endl;
-
     // Test the values of the derivatives ========================================================
+    // --- Define an equivalent global spline.
+    // Build global spline representation ---
+    SplineRThetagBuilder builder_g(idx_range_xy_g);
+
+    host_t<DFieldMem<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef_alloc(
+            builder_g.batched_spline_domain(idx_range_xy_g));
+    host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef
+            = get_field(function_g_coef_alloc);
+
+    builder_g(function_g_coef, get_const_field(function_g));
+
+    // Global spline evaluator ---
+    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymin_g(yg_min);
+    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymax_g(yg_max);
+    ddc::PeriodicExtrapolationRule<Xg> bc_x_g;
+    SplineRThetagEvaluator evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g);
+
+
+    // Check each derivatives ---
     check_all_x_derivatives(
             functions_and_derivs,
             evaluator_g,
@@ -1782,34 +1500,12 @@ TEST_F(InterfaceDerivativeMatrixTest, InterfaceDerivativeMatrixCheck)
             idx_ranges_slice_dx,
             idx_ranges_slice_dy);
 
-
-    check_x_derivatives<Patch1>(
-            functions_and_derivs.template get<Patch1>(),
-            evaluator_g,
-            get_const_field(function_g_coef),
-            typename Patch1::IdxRange1(idx_ranges.template get<Patch1>()),
-            idx_ranges_slice_dx.template get<Patch1>());
-
-    check_all_spline_representation_conformity(
+    // Check the whole spline representations ---
+    check_all_spline_representation_agreement(
             idx_ranges,
             idx_ranges_slice_dx,
             idx_ranges_slice_dy,
             functions_and_derivs,
             evaluator_g,
             get_const_field(function_g_coef));
-
-    // check_all_spline_representation_conformity(
-    //         idx_ranges,
-    //         functions,
-    //         derivs_xmin,
-    //         derivs_xmax,
-    //         derivs_ymin,
-    //         derivs_ymax,
-    //         derivs_xy_min_min,
-    //         derivs_xy_max_min,
-    //         derivs_xy_min_max,
-    //         derivs_xy_max_max,
-    //         evaluator_g,
-    //         get_const_field(function_g_coef),
-    //         std::make_integer_sequence<std::size_t, 9> {});
 }

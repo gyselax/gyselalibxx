@@ -8,6 +8,9 @@
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
+#include "derivative_field.hpp"
+#include "derivative_field_mem.hpp"
+
 
 
 // GRIDS -----------------------------------------------------------------------------------------
@@ -297,3 +300,36 @@ using ConstDeriv2_OnPatch_2D_host = host_t<ConstDeriv2_OnPatch_2D<Patch>>;
 
 template <class Patch>
 using ConstDeriv12_OnPatch_2D_host = host_t<ConstDeriv12_OnPatch_2D<Patch>>;
+
+
+
+template <class Patch>
+using DerivFieldMemOnPatch = DerivFieldMem<
+        double,
+        IdxRange<
+                ddc::Deriv<typename Patch::Dim1>,
+                typename Patch::Grid1,
+                ddc::Deriv<typename Patch::Dim2>,
+                typename Patch::Grid2>,
+        1>;
+
+template <class Patch>
+using DerivFieldMemOnPatch_host = host_t<DerivFieldMemOnPatch<Patch>>;
+
+template <class Patch>
+using DerivFieldOnPatch = DerivField<
+        double,
+        IdxRange<
+                ddc::Deriv<typename Patch::Dim1>,
+                typename Patch::Grid1,
+                ddc::Deriv<typename Patch::Dim2>,
+                typename Patch::Grid2>>;
+
+template <class Patch>
+using DerivFieldOnPatch_host = host_t<DerivFieldOnPatch<Patch>>;
+
+template <class Patch>
+using IdxRange1SliceOnPatch = IdxRangeSlice<typename Patch::Grid1>;
+
+template <class Patch>
+using IdxRange2SliceOnPatch = IdxRangeSlice<typename Patch::Grid2>;
