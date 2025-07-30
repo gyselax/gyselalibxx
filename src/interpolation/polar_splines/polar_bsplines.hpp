@@ -154,6 +154,7 @@ public:
         int const n_theta = ddc::discrete_space<BSplinesTheta>().nbasis();
         int const r_idx = idx_r - Idx<BSplinesR>(C + 1);
         int theta_idx = idx_theta - Idx<BSplinesTheta>(0);
+        // theta_idx may be too large but it cannot be too small as Idx is unsigned
         while (theta_idx >= n_theta)
             theta_idx -= n_theta;
 
