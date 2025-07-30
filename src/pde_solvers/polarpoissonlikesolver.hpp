@@ -548,52 +548,48 @@ public:
                 const Idx<KnotsTheta> end_non_zero_theta(
                         bspl_theta.get_last_support_knot(idx_trial_theta));
 
-                const IdxRange<KnotsR>
-                        knot_range_r(start_non_zero_r, end_non_zero_r - start_non_zero_r);
-                const IdxRange<KnotsTheta> knot_range_theta(
+                const IdxRangeQuadratureRTheta quad_range = get_quadrature_between_knots(
+                        start_non_zero_r,
+                        end_non_zero_r,
                         start_non_zero_theta,
-                        end_non_zero_theta - start_non_zero_theta);
-                const IdxRange<KnotsR, KnotsTheta> knot_range(knot_range_r, knot_range_theta);
+                        end_non_zero_theta);
 
 
-                if (knot_range.size() > 0) {
-                    const IdxRangeQuadratureRTheta quad_range
-                            = get_quadrature_points_in_range(knot_range);
-                    // Calculate the weak integral
-                    double element = ddc::parallel_transform_reduce(
-                            Kokkos::DefaultExecutionSpace(),
-                            quad_range,
-                            0.0,
-                            ddc::reducer::sum<double>(),
-                            KOKKOS_LAMBDA(IdxQuadratureRTheta idx_quad) {
-                                // Manage periodicity
-                                if (!full_quad_idx_range.contains(idx_quad)) {
-                                    idx_quad -= IdxStep<QDimThetaMesh>(
-                                            full_quad_idx_range.template extent<QDimThetaMesh>());
-                                }
+                assert(quad_range.size() > 0);
+                // Calculate the weak integral
+                double element = ddc::parallel_transform_reduce(
+                        Kokkos::DefaultExecutionSpace(),
+                        quad_range,
+                        0.0,
+                        ddc::reducer::sum<double>(),
+                        KOKKOS_LAMBDA(IdxQuadratureRTheta idx_quad) {
+                            // Manage periodicity
+                            if (!full_quad_idx_range.contains(idx_quad)) {
+                                idx_quad -= IdxStep<QDimThetaMesh>(
+                                        full_quad_idx_range.template extent<QDimThetaMesh>());
+                            }
 
-                                return weak_integral_element<Mapping>(
-                                        idx_test,
-                                        idx_trial_polar,
-                                        idx_quad,
-                                        coeff_alpha,
-                                        coeff_beta,
-                                        spline_evaluator,
-                                        mapping,
-                                        int_volume_proxy);
-                            });
+                            return weak_integral_element<Mapping>(
+                                    idx_test,
+                                    idx_trial_polar,
+                                    idx_quad,
+                                    coeff_alpha,
+                                    coeff_beta,
+                                    spline_evaluator,
+                                    mapping,
+                                    int_volume_proxy);
+                        });
 
-                    int const row_idx = idx_test - idxrange_singular.front();
-                    int const col_idx = idx_trial_polar - idxrange_singular.front();
-                    //a_ij
-                    col_idx_csr_host(nnz_per_row_csr_host(row_idx + 1)) = col_idx;
-                    values_csr_host(m_batch_idx, nnz_per_row_csr_host(row_idx + 1)) = element;
-                    nnz_per_row_csr_host(row_idx + 1)++;
-                    //a_ji
-                    col_idx_csr_host(nnz_per_row_csr_host(col_idx + 1)) = row_idx;
-                    values_csr_host(m_batch_idx, nnz_per_row_csr_host(col_idx + 1)) = element;
-                    nnz_per_row_csr_host(col_idx + 1)++;
-                }
+                int const row_idx = idx_test - idxrange_singular.front();
+                int const col_idx = idx_trial_polar - idxrange_singular.front();
+                //a_ij
+                col_idx_csr_host(nnz_per_row_csr_host(row_idx + 1)) = col_idx;
+                values_csr_host(m_batch_idx, nnz_per_row_csr_host(row_idx + 1)) = element;
+                nnz_per_row_csr_host(row_idx + 1)++;
+                //a_ji
+                col_idx_csr_host(nnz_per_row_csr_host(col_idx + 1)) = row_idx;
+                values_csr_host(m_batch_idx, nnz_per_row_csr_host(col_idx + 1)) = element;
+                nnz_per_row_csr_host(col_idx + 1)++;
             });
         });
     }
@@ -790,14 +786,11 @@ public:
                     bspl_theta.get_first_support_knot(idx_theta));
             const Idx<KnotsTheta> end_non_zero_theta(bspl_theta.get_last_support_knot(idx_theta));
 
-            const IdxRange<KnotsR>
-                    knot_range_r(start_non_zero_r, end_non_zero_r - start_non_zero_r);
-            const IdxRange<KnotsTheta> knot_range_theta(
+            const IdxRangeQuadratureRTheta quad_range = get_quadrature_between_knots(
+                    start_non_zero_r,
+                    end_non_zero_r,
                     start_non_zero_theta,
-                    end_non_zero_theta - start_non_zero_theta);
-            const IdxRange<KnotsR, KnotsTheta> knot_range(knot_range_r, knot_range_theta);
-
-            const IdxRangeQuadratureRTheta quad_range = get_quadrature_points_in_range(knot_range);
+                    end_non_zero_theta);
 
             // Calculate the weak integral
             double element = ddc::transform_reduce(
@@ -879,54 +872,6 @@ public:
                 Kokkos::DefaultExecutionSpace(),
                 get_field(m_phi_spline_coef));
         m_polar_spline_evaluator(phi, get_const_field(phi_spline_coef_device));
-    }
-
-    /**
-     * @brief compute the quadrature range for a given pair of indices
-     *
-     * @param[in] cell_idx_r
-     *      The index for radial direction
-     * @param[in] cell_idx_theta
-     *      The index for poloidal direction
-     * @return 
-     *      The quadrature range corresponding to the  @f$(r,\theta)@f$ indices.
-     */
-    KOKKOS_FUNCTION IdxRangeQuadratureRTheta
-    get_quadrature_points_in_cell(int cell_idx_r, int cell_idx_theta) const
-    {
-        const IdxQuadratureR first_quad_point_r(cell_idx_r * s_n_gauss_legendre_r);
-        const IdxQuadratureTheta first_quad_point_theta(cell_idx_theta * s_n_gauss_legendre_theta);
-        constexpr IdxStepQuadratureR n_GL_r(s_n_gauss_legendre_r);
-        constexpr IdxStepQuadratureTheta n_GL_theta(s_n_gauss_legendre_theta);
-        const IdxRangeQuadratureR quad_points_r(first_quad_point_r, n_GL_r);
-        const IdxRangeQuadratureTheta quad_points_theta(first_quad_point_theta, n_GL_theta);
-        return IdxRangeQuadratureRTheta(quad_points_r, quad_points_theta);
-    }
-    KOKKOS_FUNCTION IdxRangeQuadratureRTheta
-    get_quadrature_points_in_range(IdxRange<KnotsR, KnotsTheta> knot_range) const
-    {
-        IdxRange<KnotsR> k_range_r(knot_range);
-        IdxRange<KnotsTheta> k_range_theta(knot_range);
-
-        IdxStep<KnotsR> k_r_offset
-                = k_range_r.front() - ddc::discrete_space<BSplinesR>().break_point_domain().front();
-        IdxQuadratureR q_r_offset
-                = m_idxrange_quadrature_r.front() + k_r_offset.value() * s_n_gauss_legendre_r;
-        IdxStepQuadratureR q_r_len(k_range_r.extents().value() * s_n_gauss_legendre_r);
-        IdxRangeQuadratureR q_range_r(q_r_offset, q_r_len);
-
-        IdxStep<KnotsTheta> k_theta_offset
-                = k_range_theta.front()
-                  - ddc::discrete_space<BSplinesTheta>().break_point_domain().front();
-        if (k_theta_offset < 0)
-            k_theta_offset += ddc::discrete_space<BSplinesTheta>().ncells();
-        IdxQuadratureTheta q_theta_offset = m_idxrange_quadrature_theta.front()
-                                            + k_theta_offset.value() * s_n_gauss_legendre_theta;
-        IdxStepQuadratureTheta q_theta_len(
-                k_range_theta.extents().value() * s_n_gauss_legendre_theta);
-        IdxRangeQuadratureTheta q_range_theta(q_theta_offset, q_theta_len);
-
-        return IdxRangeQuadratureRTheta(q_range_r, q_range_theta);
     }
 
     /**
@@ -1066,11 +1011,11 @@ public:
         const Idx<KnotsTheta> end_non_zero_theta(
                 ::min(last_support_knot_theta_test, last_support_knot_theta_trial));
 
-        const IdxRange<KnotsR> knot_range_r(start_non_zero_r, end_non_zero_r - start_non_zero_r);
-        const IdxRange<KnotsTheta>
-                knot_range_theta(start_non_zero_theta, end_non_zero_theta - start_non_zero_theta);
-        const IdxRange<KnotsR, KnotsTheta> knot_range(knot_range_r, knot_range_theta);
-        const IdxRangeQuadratureRTheta quad_range = get_quadrature_points_in_range(knot_range);
+        const IdxRangeQuadratureRTheta quad_range = get_quadrature_between_knots(
+                start_non_zero_r,
+                end_non_zero_r,
+                start_non_zero_theta,
+                end_non_zero_theta);
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume);
 
@@ -1369,5 +1314,46 @@ public:
     static KOKKOS_INLINE_FUNCTION IdxBSPolar to_polar(IdxBSRTheta idx)
     {
         return PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(idx);
+    }
+
+    /**
+     * @brief compute the quadrature range for a given pair of indices
+     *
+     * @param[in] cell_idx_r
+     *      The index for radial direction
+     * @param[in] cell_idx_theta
+     *      The index for poloidal direction
+     * @return 
+     *      The quadrature range corresponding to the  @f$(r,\theta)@f$ indices.
+     */
+    KOKKOS_FUNCTION IdxRangeQuadratureRTheta get_quadrature_between_knots(
+            Idx<KnotsR> start_knot_r,
+            Idx<KnotsR> end_knot_r,
+            Idx<KnotsTheta> start_knot_theta,
+            Idx<KnotsTheta> end_knot_theta) const
+    {
+        const IdxRange<KnotsR> k_range_r(start_knot_r, end_knot_r - start_knot_r);
+        const IdxRange<KnotsTheta>
+                k_range_theta(start_knot_theta, end_knot_theta - start_knot_theta);
+
+        IdxStep<KnotsR> k_r_offset
+                = k_range_r.front() - ddc::discrete_space<BSplinesR>().break_point_domain().front();
+        IdxQuadratureR q_r_offset
+                = m_idxrange_quadrature_r.front() + k_r_offset.value() * s_n_gauss_legendre_r;
+        IdxStepQuadratureR q_r_len(k_range_r.extents().value() * s_n_gauss_legendre_r);
+        IdxRangeQuadratureR q_range_r(q_r_offset, q_r_len);
+
+        IdxStep<KnotsTheta> k_theta_offset
+                = k_range_theta.front()
+                  - ddc::discrete_space<BSplinesTheta>().break_point_domain().front();
+        if (k_theta_offset < 0)
+            k_theta_offset += ddc::discrete_space<BSplinesTheta>().ncells();
+        IdxQuadratureTheta q_theta_offset = m_idxrange_quadrature_theta.front()
+                                            + k_theta_offset.value() * s_n_gauss_legendre_theta;
+        IdxStepQuadratureTheta q_theta_len(
+                k_range_theta.extents().value() * s_n_gauss_legendre_theta);
+        IdxRangeQuadratureTheta q_range_theta(q_theta_offset, q_theta_len);
+
+        return IdxRangeQuadratureRTheta(q_range_r, q_range_theta);
     }
 };
