@@ -700,6 +700,7 @@ KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesT
     Idx<BSplinesR> first_tensor_product_radial_spline(C + 1);
 
     if (jmin_r < first_tensor_product_radial_spline) {
+        jmin_r = first_tensor_product_radial_spline;
         nr_done = first_tensor_product_radial_spline - jmin_r;
         for (discrete_element_type k : singular_idx_range<DDim>()) {
             singular_values(k - discrete_element_type(0)) = 0.0;
