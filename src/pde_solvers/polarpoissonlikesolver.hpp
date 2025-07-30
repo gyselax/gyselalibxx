@@ -641,8 +641,7 @@ public:
                     IdxStep<BSplinesTheta> {BSplinesTheta::degree() + 1});
             ddc::for_each(remaining_theta, [&](IdxBSTheta const idx_trial_theta) {
                 IdxBSRTheta idx_trial(idx_test_r, idx_trial_theta);
-                IdxBSPolar idx_trial_polar(
-                        to_polar(IdxBSRTheta(idx_test_r, theta_mod(idx_trial_theta))));
+                IdxBSPolar idx_trial_polar(to_polar(theta_mod(idx_trial)));
                 double element = get_matrix_stencil_element(
                         idx_test,
                         idx_trial,
@@ -680,10 +679,7 @@ public:
             IdxRangeBSRTheta trial_idx_range(remaining_r, relevant_theta);
 
             ddc::for_each(trial_idx_range, [&](IdxBSRTheta const idx_trial) {
-                const IdxBSR idx_trial_r(idx_trial);
-                const IdxBSTheta idx_trial_theta(idx_trial);
-                IdxBSPolar idx_trial_polar(
-                        to_polar(IdxBSRTheta(idx_trial_r, theta_mod(idx_trial_theta))));
+                IdxBSPolar idx_trial_polar(to_polar(theta_mod(idx_trial)));
                 double element = get_matrix_stencil_element(
                         idx_test,
                         idx_trial,
@@ -1060,16 +1056,28 @@ public:
             idx_theta -= ncells_theta;
         return idx_theta;
     }
-    static KOKKOS_INLINE_FUNCTION IdxBSTheta theta_mod(IdxBSTheta idx_theta)
+
+    /**
+     * @brief Calculates the index which is inside the poloidal domain using the periodicity properties.
+     *
+     * @param[in] idx A multi-dimensional index including the polar bspline index.
+     *
+     * @return The corresponding index inside the domain.
+     */
+    template <class IdxType>
+    static KOKKOS_INLINE_FUNCTION IdxType theta_mod(IdxType idx)
     {
+        static_assert(ddc::is_discrete_element_v<IdxType>);
+        static_assert(ddc::in_tags_v<BSplinesTheta, ddc::to_type_seq_t<IdxType>>);
         IdxRangeBSTheta idx_range_theta
                 = ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
                         IdxStepBSTheta(ddc::discrete_space<BSplinesTheta>().nbasis()));
-        while (idx_theta < idx_range_theta.front())
-            idx_theta += idx_range_theta.extents();
-        while (idx_theta > idx_range_theta.back())
-            idx_theta -= idx_range_theta.extents();
-        return idx_theta;
+        if (ddc::select<BSplinesTheta>(idx) < idx_range_theta.front())
+            idx += idx_range_theta.extents();
+        if (ddc::select<BSplinesTheta>(idx) > idx_range_theta.back())
+            idx -= idx_range_theta.extents();
+        assert(idx_range_theta.contains(ddc::select<BSplinesTheta>(idx)));
+        return idx;
     }
 
     /**
