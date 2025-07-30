@@ -774,7 +774,7 @@ public:
                             ddc::reducer::sum<double>(),
                             [&](IdxQuadratureRTheta const idx_quad) {
                                 const CoordRTheta coord(ddc::coordinate(idx_quad));
-                                return rhs(coord) * get_polar_bspline_vals(idx, idx_quad)
+                                return rhs(coord) * get_polar_bspline_vals(coord, idx)
                                        * int_volume_host(idx_quad);
                             });
                 });
@@ -820,7 +820,7 @@ public:
                             IdxQuadratureR const idx_r(idx_quad);
                             IdxQuadratureTheta const idx_theta(idx_quad);
                             CoordRTheta coord(ddc::coordinate(idx_quad));
-                            return rhs(coord) * get_polar_bspline_vals(idx, idx_quad)
+                            return rhs(coord) * get_polar_bspline_vals(coord, idx)
                                    * int_volume_host(idx_r, idx_theta);
                         });
             });
@@ -961,9 +961,9 @@ public:
         double basis_val_test_space;
         double basis_val_trial_space;
         DVector<R_cov, Theta_cov> basis_derivs_test_space
-                = get_polar_bspline_vals_and_derivs(basis_val_test_space, idx_test, idx_quad);
+                = get_polar_bspline_vals_and_derivs(basis_val_test_space, coord, idx_test);
         DVector<R_cov, Theta_cov> basis_derivs_trial_space
-                = get_polar_bspline_vals_and_derivs(basis_val_trial_space, idx_trial, idx_quad);
+                = get_polar_bspline_vals_and_derivs(basis_val_trial_space, coord, idx_trial);
 
         MetricTensorEvaluator<Mapping, CoordRTheta> get_metric_tensor(mapping);
 
@@ -1129,17 +1129,15 @@ public:
      *
      * @param[out] val
      *      The value of the specified polar bspline at the specified point.
+     * @param[in] coord
+     *      The coordinate where the value of the polar bspline should be calculated.
      * @param[in] idx
      *      The polar bspline of interest.
-     * @param[in] idx_quad
-     *      The index of the quadrature point where the values and derivatives should be calculated.
      * @return The derivative of the polar bspline (only returned if calculate_derivs is true).
      */
     template <bool calculate_derivs = true>
-    static KOKKOS_FUNCTION auto get_polar_bspline_vals_and_derivs(double& val, IdxBSPolar idx, IdxQuadratureRTheta const idx_quad)
+    static KOKKOS_FUNCTION auto get_polar_bspline_vals_and_derivs(double& val, CoordRTheta coord, IdxBSPolar idx)
     {
-        const CoordRTheta coord(ddc::coordinate(idx_quad));
-
         std::array<double, PolarBSplinesRTheta::n_singular_basis()> singular_data;
         std::array<double, m_n_non_zero_bases_r * m_n_non_zero_bases_theta> data;
         // Values of the polar basis splines around the singular point
@@ -1195,18 +1193,18 @@ public:
     }
 
     /**
-     * @brief Get the value of the specified polar bspline at the specified quadrature point.
+     * @brief Get the value of the specified polar bspline at the specified point.
      *
+     * @param[in] coord
+     *      The coordinate where the value of the polar bspline should be calculated.
      * @param[in] idx
      *      The polar bspline of interest.
-     * @param[in] idx_quad
-     *      The index of the quadrature point where the values and derivatives should be calculated.
      * @return The value of the polar bspline at the coordinate.
      */
-    static KOKKOS_INLINE_FUNCTION double get_polar_bspline_vals(IdxBSPolar idx, IdxQuadratureRTheta const idx_quad)
+    static KOKKOS_INLINE_FUNCTION double get_polar_bspline_vals(CoordRTheta coord, IdxBSPolar idx)
     {
         double val;
-        get_polar_bspline_vals_and_derivs<false>(val, idx, idx_quad);
+        get_polar_bspline_vals_and_derivs<false>(val, coord, idx);
 		return val;
     }
 
