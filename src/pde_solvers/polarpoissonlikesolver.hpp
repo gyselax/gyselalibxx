@@ -69,14 +69,6 @@ private:
     /// The poloidal dimension
     using Theta_cov = typename Theta::Dual;
 
-public:
-    struct RCellDim
-    {
-    };
-    struct ThetaCellDim
-    {
-    };
-
 
 public:
     /**
@@ -195,11 +187,6 @@ public:
         /// The gradient of the function @f$\nabla f(r, \theta)@f$.
         DVector<R_cov, Theta_cov> derivative;
     };
-
-    /**
-     * @brief Tag an index of cell.
-     */
-    using IdxCell = Idx<RCellDim, ThetaCellDim>;
 
 private:
     static constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
