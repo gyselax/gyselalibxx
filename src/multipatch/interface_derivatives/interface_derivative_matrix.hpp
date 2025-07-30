@@ -716,13 +716,6 @@ private:
             DField<IdxRange<GridPerp2>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_2
                     = function_and_derivs_2[idx_slice_deriv_2];
 
-            // ddc::for_each(get_idx_range(derivs_1), [&](auto const idx) {
-            //     std::cout << idx << "  " << derivs_1(idx) << std::endl;
-            // });
-            // std::cout << std::endl;
-            // ddc::for_each(get_idx_range(derivs_2), [&](auto const idx) {
-            //     std::cout << idx << "  " << derivs_2(idx) << std::endl;
-            // });
             lin_comb_funct = sign
                              // * std::get<I>(m_derivatives_calculators)
                              * m_derivatives_calculators.template get<EquivalentInterfaceI>()
@@ -937,42 +930,45 @@ private:
             const bool is_idx_par_min_1 = (slice_idx_1 == idx_range_par_1.front());
             const bool is_idx_par_min_2 = (slice_idx_2 == idx_range_par_2.front());
 
+            // std::cout << "is_idx_par_min_1 = " << is_idx_par_min_1 << std::endl;
+            // std::cout << "extermity_1 == Extremity::FRONT = " << (extermity_1 == Extremity::FRONT)
+            //           << std::endl;
+            // std::cout << "is_grid_par_1_on_dim1 = " << is_grid_par_1_on_dim1 << std::endl;
+
+            // std::cout << "is_idx_par_min_2 = " << is_idx_par_min_2 << std::endl;
+            // std::cout << "extermity_2 == Extremity::FRONT = " << (extermity_2 == Extremity::FRONT)
+            //           << std::endl;
+            // std::cout << "is_grid_par_2_on_dim1 = " << is_grid_par_2_on_dim1 << std::endl;
+
 
             // --- Update the cross-derivative on Patch1
             Idx<Grid1_1> idx_d1_1;
             Idx<Grid2_1> idx_d2_1;
             if (is_idx_par_min_1 && (extermity_1 == Extremity::FRONT)) {
                 // corner min min
-                idx_d1_1 = idx_range_grid1_1.front();
-                idx_d2_1 = idx_range_grid2_1.front();
+                idx_d1_1 = idx_range_slice_d1_1.front();
+                idx_d2_1 = idx_range_slice_d2_1.front();
             } else if (!is_idx_par_min_1 && (extermity_1 == Extremity::BACK)) {
                 // corner max max
-                idx_d1_1 = idx_range_grid1_1.back();
-                idx_d2_1 = idx_range_grid2_1.back();
+                idx_d1_1 = idx_range_slice_d1_1.back();
+                idx_d2_1 = idx_range_slice_d2_1.back();
             } else if (
                     (is_grid_par_1_on_dim1 && (extermity_1 == Extremity::BACK))
                     || (!is_grid_par_1_on_dim1 && (extermity_1 == Extremity::FRONT))) {
-                // corner max min
-                idx_d1_1 = idx_range_grid1_1.back();
-                idx_d2_1 = idx_range_grid2_1.front();
-            } else {
                 // corner min max
-                idx_d1_1 = idx_range_grid1_1.front();
-                idx_d2_1 = idx_range_grid2_1.back();
+                idx_d1_1 = idx_range_slice_d1_1.front();
+                idx_d2_1 = idx_range_slice_d2_1.back();
+            } else {
+                // corner max min
+                idx_d1_1 = idx_range_slice_d1_1.back();
+                idx_d2_1 = idx_range_slice_d2_1.front();
             }
-            std::cout << "before updating cross-derivatives on patch 1" << std::endl;
-            auto field = function_and_derivs_1[idx_range_deriv1_1][idx_d1_1];
-            ddc::for_each(get_idx_range(field), [&](auto const idx) {
-                std::cout << idx << std::endl;
-                // std::cout << idx << "  " << field(idx) << std::endl;
-            });
-            DField<IdxRange<Deriv1_1, Deriv2_1>, Kokkos::HostSpace, Kokkos::layout_stride>
-                    cross_deriv_extracted_1
-                    = function_and_derivs_1[idx_range_derivs_1][idx_d1_1][idx_d2_1];
+            Idx<Deriv1_1, Grid1_1, Deriv2_1, Grid2_1>
+                    idx_cross_deriv1(Idx<Deriv1_1>(1), idx_d1_1, Idx<Deriv2_1>(1), idx_d2_1);
+            function_and_derivs_1(idx_cross_deriv1) = m_interface_derivatives->get_values()[I];
 
-            cross_deriv_extracted_1(Idx<Deriv1_1, Deriv2_1>(1, 1))
-                    = m_interface_derivatives->get_values()[I];
-
+            // std::cout << "Patch1, " << idx_d1_1 << "   " << idx_d2_1 << "   "
+            //           << m_interface_derivatives->get_values()[I] << std::endl;
 
             // --- Update the cross-derivative on Patch2
             Idx<Grid1_2> idx_d1_2;
@@ -988,22 +984,20 @@ private:
             } else if (
                     (is_grid_par_2_on_dim1 && (extermity_2 == Extremity::BACK))
                     || (!is_grid_par_2_on_dim1 && (extermity_2 == Extremity::FRONT))) {
-                // corner max min
-                idx_d1_2 = idx_range_slice_d1_2.back();
-                idx_d2_2 = idx_range_slice_d2_2.front();
-            } else {
                 // corner min max
                 idx_d1_2 = idx_range_slice_d1_2.front();
                 idx_d2_2 = idx_range_slice_d2_2.back();
+            } else {
+                // corner max min
+                idx_d1_2 = idx_range_slice_d1_2.back();
+                idx_d2_2 = idx_range_slice_d2_2.front();
             }
-            std::cout << "before updating cross-derivatives on patch 2" << std::endl;
-            DField<IdxRange<Deriv1_2, Deriv2_2>, Kokkos::HostSpace, Kokkos::layout_stride>
-                    cross_deriv_extracted_2
-                    = function_and_derivs_2[idx_range_derivs_2][idx_d1_2][idx_d2_2];
-            cross_deriv_extracted_2(Idx<Deriv1_2, Deriv2_2>(1, 1))
-                    = m_interface_derivatives->get_values()[I];
+            Idx<Deriv1_2, Grid1_2, Deriv2_2, Grid2_2>
+                    idx_cross_deriv2(Idx<Deriv1_2>(1), idx_d1_2, Idx<Deriv2_2>(1), idx_d2_2);
+            function_and_derivs_2(idx_cross_deriv2) = m_interface_derivatives->get_values()[I];
 
-            std::cout << "after updating cross-derivatives" << std::endl;
+            // std::cout << "Patch2, " << idx_d1_2 << "   " << idx_d2_2 << "   "
+            //           << m_interface_derivatives->get_values()[I] << std::endl;
         }
 
         // auto [slice_idx_1, slice_idx_2] = get_slice_indexes<I, eval_type>(slice_idx_1_value);
