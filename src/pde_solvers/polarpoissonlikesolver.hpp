@@ -817,11 +817,9 @@ public:
                         0.0,
                         ddc::reducer::sum<double>(),
                         [&](IdxQuadratureRTheta const idx_quad) {
-                            IdxQuadratureR const idx_r(idx_quad);
-                            IdxQuadratureTheta const idx_theta(idx_quad);
                             CoordRTheta coord(ddc::coordinate(idx_quad));
                             return rhs(coord) * get_polar_bspline_vals(coord, idx)
-                                   * int_volume_host(idx_r, idx_theta);
+                                   * int_volume_host(idx_quad);
                         });
             });
             const std::size_t singular_index
