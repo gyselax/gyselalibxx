@@ -761,23 +761,20 @@ public:
                 x_init_host("x_init_host", batch_size, b_size);
         // Fill b
         auto int_volume_host = ddc::create_mirror_view_and_copy(get_field(m_int_volume));
-        ddc::for_each(
-                PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>(),
-                [&](IdxBSPolar const idx) {
-                    const int bspl_idx = idx
-                                         - PolarBSplinesRTheta::template singular_idx_range<
-                                                   PolarBSplinesRTheta>()
-                                                   .front();
-                    b_host(0, bspl_idx) = ddc::transform_reduce(
-                            m_idxrange_quadrature_singular,
-                            0.0,
-                            ddc::reducer::sum<double>(),
-                            [&](IdxQuadratureRTheta const idx_quad) {
-                                const CoordRTheta coord(ddc::coordinate(idx_quad));
-                                return rhs(coord) * get_polar_bspline_vals(coord, idx)
-                                       * int_volume_host(idx_quad);
-                            });
-                });
+        IdxRangeBSPolar idx_range_singular
+                = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
+        ddc::for_each(idx_range_singular, [&](IdxBSPolar const idx) {
+            const int bspl_idx = idx - idx_range_singular.front();
+            b_host(0, bspl_idx) = ddc::transform_reduce(
+                    m_idxrange_quadrature_singular,
+                    0.0,
+                    ddc::reducer::sum<double>(),
+                    [&](IdxQuadratureRTheta const idx_quad) {
+                        const CoordRTheta coord(ddc::coordinate(idx_quad));
+                        return rhs(coord) * get_polar_bspline_vals(coord, idx)
+                               * int_volume_host(idx_quad);
+                    });
+        });
         const std::size_t ncells_r = ddc::discrete_space<BSplinesR>().ncells();
 
         ddc::for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx) {
