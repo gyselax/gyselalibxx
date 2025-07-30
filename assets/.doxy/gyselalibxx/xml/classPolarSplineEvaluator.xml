@@ -981,7 +981,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="432" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="432" bodyend="492"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="432" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="432" bodyend="487"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -992,7 +992,7 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="12" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="13" bodyend="493"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" line="12" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp" bodystart="13" bodyend="488"/>
     <listofallmembers>
       <member refid="classPolarSplineEvaluator_1aa25e933b4a8eddf839133cd51f871eb2" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>bsplines_type</name></member>
       <member refid="classPolarSplineEvaluator_1ab8165cae7e1fa3be087c8f6b81c08cf2" prot="public" virt="non-virtual"><scope>PolarSplineEvaluator</scope><name>BSplinesR</name></member>

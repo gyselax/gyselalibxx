@@ -827,99 +827,100 @@
 <codeline lineno="707"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="708"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="709"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="710"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="711"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>k(0);<sp/>k<sp/>&lt;<sp/>n_singular_basis();<sp/>++k)<sp/>{</highlight></codeline>
-<codeline lineno="712"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>singular_values(k)<sp/>=<sp/>0.0;</highlight></codeline>
-<codeline lineno="713"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="714"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="715"><highlight class="normal"></highlight></codeline>
-<codeline lineno="716"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>i(0);<sp/>i<sp/>&lt;<sp/>nr<sp/>-<sp/>nr_done;<sp/>++i)<sp/>{</highlight></codeline>
-<codeline lineno="717"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>j(0);<sp/>j<sp/>&lt;<sp/>ntheta;<sp/>++j)<sp/>{</highlight></codeline>
-<codeline lineno="718"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>values(i,<sp/>j)<sp/>=<sp/>vals_r[i<sp/>+<sp/>nr_done]<sp/>*<sp/>vals_theta[j];</highlight></codeline>
-<codeline lineno="719"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="720"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="721"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>i(nr<sp/>-<sp/>nr_done);<sp/>i<sp/>&lt;<sp/>nr;<sp/>++i)<sp/>{</highlight></codeline>
-<codeline lineno="722"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>j(0);<sp/>j<sp/>&lt;<sp/>ntheta;<sp/>++j)<sp/>{</highlight></codeline>
-<codeline lineno="723"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>values(i,<sp/>j)<sp/>=<sp/>0.0;</highlight></codeline>
-<codeline lineno="724"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="725"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="726"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Idx&lt;BSplinesR,<sp/>BSplinesTheta&gt;(jmin_r,<sp/>jmin_theta);</highlight></codeline>
-<codeline lineno="727"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="728"><highlight class="normal"></highlight></codeline>
-<codeline lineno="729"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">PolarSplines<sp/>{</highlight></codeline>
-<codeline lineno="730"><highlight class="normal"></highlight></codeline>
-<codeline lineno="731"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ExecSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>DDim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemorySpace&gt;</highlight></codeline>
-<codeline lineno="732"><highlight class="normal">DField&lt;IdxRange&lt;DDim&gt;,<sp/>MemorySpace&gt;<sp/>integrals(</highlight></codeline>
-<codeline lineno="733"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>execution_space,</highlight></codeline>
-<codeline lineno="734"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DField&lt;IdxRange&lt;DDim&gt;,<sp/>MemorySpace&gt;<sp/>int_vals)</highlight></codeline>
-<codeline lineno="735"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="736"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="737"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::SpaceAccessibility&lt;ExecSpace,<sp/>MemorySpace&gt;::accessible,</highlight></codeline>
-<codeline lineno="738"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;MemorySpace<sp/>has<sp/>to<sp/>be<sp/>accessible<sp/>for<sp/>ExecutionSpace.&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="739"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>DDim::BSplinesR_tag;</highlight></codeline>
-<codeline lineno="740"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>DDim::BSplinesTheta_tag;</highlight></codeline>
-<codeline lineno="741"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxR<sp/>=<sp/>Idx&lt;BSplinesR&gt;;</highlight></codeline>
-<codeline lineno="742"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxTheta<sp/>=<sp/>Idx&lt;BSplinesTheta&gt;;</highlight></codeline>
-<codeline lineno="743"><highlight class="normal"></highlight></codeline>
-<codeline lineno="744"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>r_bspl_space<sp/>=<sp/>ddc::discrete_space&lt;BSplinesR&gt;();</highlight></codeline>
-<codeline lineno="745"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>theta_bspl_space<sp/>=<sp/>ddc::discrete_space&lt;BSplinesTheta&gt;();</highlight></codeline>
-<codeline lineno="746"><highlight class="normal"></highlight></codeline>
-<codeline lineno="747"><highlight class="normal"><sp/><sp/><sp/><sp/>assert(get_idx_range(int_vals)<sp/>==<sp/>ddc::discrete_space&lt;DDim&gt;().full_domain());</highlight></codeline>
-<codeline lineno="748"><highlight class="normal"></highlight></codeline>
-<codeline lineno="749"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMem&lt;IdxRange&lt;BSplinesR&gt;,<sp/>MemorySpace&gt;<sp/>r_integrals_alloc(</highlight></codeline>
-<codeline lineno="750"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>r_bspl_space.full_domain().take_first(IdxStep&lt;BSplinesR&gt;<sp/>{r_bspl_space.nbasis()}));</highlight></codeline>
-<codeline lineno="751"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMem&lt;IdxRange&lt;BSplinesTheta&gt;,<sp/>MemorySpace&gt;<sp/>theta_integrals_alloc(</highlight></codeline>
-<codeline lineno="752"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>theta_bspl_space.full_domain().take_first(</highlight></codeline>
-<codeline lineno="753"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxStep&lt;BSplinesTheta&gt;<sp/>{theta_bspl_space.size()}));</highlight></codeline>
-<codeline lineno="754"><highlight class="normal"><sp/><sp/><sp/><sp/>DField&lt;IdxRange&lt;BSplinesR&gt;,<sp/>MemorySpace&gt;<sp/>r_integrals<sp/>=<sp/>get_field(r_integrals_alloc);</highlight></codeline>
-<codeline lineno="755"><highlight class="normal"><sp/><sp/><sp/><sp/>DField&lt;IdxRange&lt;BSplinesTheta&gt;,<sp/>MemorySpace&gt;<sp/>theta_integrals<sp/>=<sp/>get_field(theta_integrals_alloc);</highlight></codeline>
-<codeline lineno="756"><highlight class="normal"></highlight></codeline>
-<codeline lineno="757"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::integrals(execution_space,<sp/>r_integrals);</highlight></codeline>
-<codeline lineno="758"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::integrals(execution_space,<sp/>theta_integrals);</highlight></codeline>
-<codeline lineno="759"><highlight class="normal"></highlight></codeline>
-<codeline lineno="760"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRange&lt;BSplinesR,<sp/>BSplinesTheta&gt;<sp/>singular_2d_idx_range(</highlight></codeline>
-<codeline lineno="761"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_idx_range(ddc::discrete_space&lt;DDim&gt;().m_singular_basis_elements));</highlight></codeline>
-<codeline lineno="762"><highlight class="normal"><sp/><sp/><sp/><sp/>std::size_t<sp/>n_singular_r<sp/>=<sp/>singular_2d_idx_range.template<sp/>extent&lt;BSplinesR&gt;().value();</highlight></codeline>
-<codeline lineno="763"><highlight class="normal"><sp/><sp/><sp/><sp/>std::size_t<sp/>n_singular_theta<sp/>=<sp/>singular_2d_idx_range.template<sp/>extent&lt;BSplinesTheta&gt;().value();</highlight></codeline>
-<codeline lineno="764"><highlight class="normal"></highlight></codeline>
-<codeline lineno="765"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRange&lt;DDim&gt;<sp/>singular_idx_range<sp/>=<sp/>DDim::template<sp/>singular_idx_range&lt;DDim&gt;();</highlight></codeline>
-<codeline lineno="766"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::parallel_for(</highlight></codeline>
-<codeline lineno="767"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::TeamPolicy&lt;&gt;(execution_space,<sp/>singular_idx_range.size(),<sp/>Kokkos::AUTO),</highlight></codeline>
-<codeline lineno="768"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KOKKOS_LAMBDA(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Kokkos::TeamPolicy&lt;&gt;::member_type&amp;<sp/>team)<sp/>{</highlight></codeline>
-<codeline lineno="769"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>idx<sp/>=<sp/>team.league_rank();</highlight></codeline>
-<codeline lineno="770"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;DDim&gt;<sp/>k(idx);</highlight></codeline>
-<codeline lineno="771"><highlight class="normal"></highlight></codeline>
-<codeline lineno="772"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Sum<sp/>over<sp/>quadrature<sp/>dimensions</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="773"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>teamSum<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="774"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::parallel_reduce(</highlight></codeline>
-<codeline lineno="775"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::TeamThreadMDRange(team,<sp/>n_singular_r,<sp/>n_singular_theta),</highlight></codeline>
-<codeline lineno="776"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[&amp;](</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>r_thread_index,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>theta_thread_index,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal">&amp;<sp/>sum)<sp/>{</highlight></codeline>
-<codeline lineno="777"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxR<sp/>i(r_thread_index);</highlight></codeline>
-<codeline lineno="778"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxTheta<sp/>j(theta_thread_index);</highlight></codeline>
-<codeline lineno="779"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sum<sp/>+=<sp/>ddc::discrete_space&lt;DDim&gt;().m_singular_basis_elements(k,<sp/>i,<sp/>j)</highlight></codeline>
-<codeline lineno="780"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>r_integrals(i)<sp/>*<sp/>theta_integrals(j);</highlight></codeline>
-<codeline lineno="781"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
-<codeline lineno="782"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>teamSum);</highlight></codeline>
-<codeline lineno="783"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int_vals(k)<sp/>=<sp/>teamSum;</highlight></codeline>
-<codeline lineno="784"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
-<codeline lineno="785"><highlight class="normal"></highlight></codeline>
+<codeline lineno="710"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>jmin_r<sp/>=<sp/>first_tensor_product_radial_spline;</highlight></codeline>
+<codeline lineno="711"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="712"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>k(0);<sp/>k<sp/>&lt;<sp/>n_singular_basis();<sp/>++k)<sp/>{</highlight></codeline>
+<codeline lineno="713"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>singular_values(k)<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="714"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="715"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="716"><highlight class="normal"></highlight></codeline>
+<codeline lineno="717"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>i(0);<sp/>i<sp/>&lt;<sp/>nr<sp/>-<sp/>nr_done;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="718"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>j(0);<sp/>j<sp/>&lt;<sp/>ntheta;<sp/>++j)<sp/>{</highlight></codeline>
+<codeline lineno="719"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>values(i,<sp/>j)<sp/>=<sp/>vals_r[i<sp/>+<sp/>nr_done]<sp/>*<sp/>vals_theta[j];</highlight></codeline>
+<codeline lineno="720"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="721"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="722"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>i(nr<sp/>-<sp/>nr_done);<sp/>i<sp/>&lt;<sp/>nr;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="723"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>j(0);<sp/>j<sp/>&lt;<sp/>ntheta;<sp/>++j)<sp/>{</highlight></codeline>
+<codeline lineno="724"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>values(i,<sp/>j)<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="725"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="726"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="727"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Idx&lt;BSplinesR,<sp/>BSplinesTheta&gt;(jmin_r,<sp/>jmin_theta);</highlight></codeline>
+<codeline lineno="728"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="729"><highlight class="normal"></highlight></codeline>
+<codeline lineno="730"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">PolarSplines<sp/>{</highlight></codeline>
+<codeline lineno="731"><highlight class="normal"></highlight></codeline>
+<codeline lineno="732"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ExecSpace,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>DDim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>MemorySpace&gt;</highlight></codeline>
+<codeline lineno="733"><highlight class="normal">DField&lt;IdxRange&lt;DDim&gt;,<sp/>MemorySpace&gt;<sp/>integrals(</highlight></codeline>
+<codeline lineno="734"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>execution_space,</highlight></codeline>
+<codeline lineno="735"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DField&lt;IdxRange&lt;DDim&gt;,<sp/>MemorySpace&gt;<sp/>int_vals)</highlight></codeline>
+<codeline lineno="736"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="737"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="738"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::SpaceAccessibility&lt;ExecSpace,<sp/>MemorySpace&gt;::accessible,</highlight></codeline>
+<codeline lineno="739"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;MemorySpace<sp/>has<sp/>to<sp/>be<sp/>accessible<sp/>for<sp/>ExecutionSpace.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="740"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>DDim::BSplinesR_tag;</highlight></codeline>
+<codeline lineno="741"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>DDim::BSplinesTheta_tag;</highlight></codeline>
+<codeline lineno="742"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxR<sp/>=<sp/>Idx&lt;BSplinesR&gt;;</highlight></codeline>
+<codeline lineno="743"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxTheta<sp/>=<sp/>Idx&lt;BSplinesTheta&gt;;</highlight></codeline>
+<codeline lineno="744"><highlight class="normal"></highlight></codeline>
+<codeline lineno="745"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>r_bspl_space<sp/>=<sp/>ddc::discrete_space&lt;BSplinesR&gt;();</highlight></codeline>
+<codeline lineno="746"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>theta_bspl_space<sp/>=<sp/>ddc::discrete_space&lt;BSplinesTheta&gt;();</highlight></codeline>
+<codeline lineno="747"><highlight class="normal"></highlight></codeline>
+<codeline lineno="748"><highlight class="normal"><sp/><sp/><sp/><sp/>assert(get_idx_range(int_vals)<sp/>==<sp/>ddc::discrete_space&lt;DDim&gt;().full_domain());</highlight></codeline>
+<codeline lineno="749"><highlight class="normal"></highlight></codeline>
+<codeline lineno="750"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMem&lt;IdxRange&lt;BSplinesR&gt;,<sp/>MemorySpace&gt;<sp/>r_integrals_alloc(</highlight></codeline>
+<codeline lineno="751"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>r_bspl_space.full_domain().take_first(IdxStep&lt;BSplinesR&gt;<sp/>{r_bspl_space.nbasis()}));</highlight></codeline>
+<codeline lineno="752"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMem&lt;IdxRange&lt;BSplinesTheta&gt;,<sp/>MemorySpace&gt;<sp/>theta_integrals_alloc(</highlight></codeline>
+<codeline lineno="753"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>theta_bspl_space.full_domain().take_first(</highlight></codeline>
+<codeline lineno="754"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxStep&lt;BSplinesTheta&gt;<sp/>{theta_bspl_space.size()}));</highlight></codeline>
+<codeline lineno="755"><highlight class="normal"><sp/><sp/><sp/><sp/>DField&lt;IdxRange&lt;BSplinesR&gt;,<sp/>MemorySpace&gt;<sp/>r_integrals<sp/>=<sp/>get_field(r_integrals_alloc);</highlight></codeline>
+<codeline lineno="756"><highlight class="normal"><sp/><sp/><sp/><sp/>DField&lt;IdxRange&lt;BSplinesTheta&gt;,<sp/>MemorySpace&gt;<sp/>theta_integrals<sp/>=<sp/>get_field(theta_integrals_alloc);</highlight></codeline>
+<codeline lineno="757"><highlight class="normal"></highlight></codeline>
+<codeline lineno="758"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::integrals(execution_space,<sp/>r_integrals);</highlight></codeline>
+<codeline lineno="759"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::integrals(execution_space,<sp/>theta_integrals);</highlight></codeline>
+<codeline lineno="760"><highlight class="normal"></highlight></codeline>
+<codeline lineno="761"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRange&lt;BSplinesR,<sp/>BSplinesTheta&gt;<sp/>singular_2d_idx_range(</highlight></codeline>
+<codeline lineno="762"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_idx_range(ddc::discrete_space&lt;DDim&gt;().m_singular_basis_elements));</highlight></codeline>
+<codeline lineno="763"><highlight class="normal"><sp/><sp/><sp/><sp/>std::size_t<sp/>n_singular_r<sp/>=<sp/>singular_2d_idx_range.template<sp/>extent&lt;BSplinesR&gt;().value();</highlight></codeline>
+<codeline lineno="764"><highlight class="normal"><sp/><sp/><sp/><sp/>std::size_t<sp/>n_singular_theta<sp/>=<sp/>singular_2d_idx_range.template<sp/>extent&lt;BSplinesTheta&gt;().value();</highlight></codeline>
+<codeline lineno="765"><highlight class="normal"></highlight></codeline>
+<codeline lineno="766"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRange&lt;DDim&gt;<sp/>singular_idx_range<sp/>=<sp/>DDim::template<sp/>singular_idx_range&lt;DDim&gt;();</highlight></codeline>
+<codeline lineno="767"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::parallel_for(</highlight></codeline>
+<codeline lineno="768"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::TeamPolicy&lt;&gt;(execution_space,<sp/>singular_idx_range.size(),<sp/>Kokkos::AUTO),</highlight></codeline>
+<codeline lineno="769"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KOKKOS_LAMBDA(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Kokkos::TeamPolicy&lt;&gt;::member_type&amp;<sp/>team)<sp/>{</highlight></codeline>
+<codeline lineno="770"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>idx<sp/>=<sp/>team.league_rank();</highlight></codeline>
+<codeline lineno="771"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;DDim&gt;<sp/>k(idx);</highlight></codeline>
+<codeline lineno="772"><highlight class="normal"></highlight></codeline>
+<codeline lineno="773"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Sum<sp/>over<sp/>quadrature<sp/>dimensions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="774"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>teamSum<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="775"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::parallel_reduce(</highlight></codeline>
+<codeline lineno="776"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::TeamThreadMDRange(team,<sp/>n_singular_r,<sp/>n_singular_theta),</highlight></codeline>
+<codeline lineno="777"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[&amp;](</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>r_thread_index,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>theta_thread_index,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal">&amp;<sp/>sum)<sp/>{</highlight></codeline>
+<codeline lineno="778"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxR<sp/>i(r_thread_index);</highlight></codeline>
+<codeline lineno="779"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxTheta<sp/>j(theta_thread_index);</highlight></codeline>
+<codeline lineno="780"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sum<sp/>+=<sp/>ddc::discrete_space&lt;DDim&gt;().m_singular_basis_elements(k,<sp/>i,<sp/>j)</highlight></codeline>
+<codeline lineno="781"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>r_integrals(i)<sp/>*<sp/>theta_integrals(j);</highlight></codeline>
+<codeline lineno="782"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="783"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>teamSum);</highlight></codeline>
+<codeline lineno="784"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int_vals(k)<sp/>=<sp/>teamSum;</highlight></codeline>
+<codeline lineno="785"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
 <codeline lineno="786"><highlight class="normal"></highlight></codeline>
-<codeline lineno="787"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRange&lt;DDim&gt;<sp/>tensor_bspline_idx_range(ddc::discrete_space&lt;DDim&gt;().tensor_bspline_idx_range());</highlight></codeline>
-<codeline lineno="788"><highlight class="normal"></highlight></codeline>
-<codeline lineno="789"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_for_each(</highlight></codeline>
-<codeline lineno="790"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>execution_space,</highlight></codeline>
-<codeline lineno="791"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tensor_bspline_idx_range,</highlight></codeline>
-<codeline lineno="792"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KOKKOS_LAMBDA(Idx&lt;DDim&gt;<sp/>idx)<sp/>{</highlight></codeline>
-<codeline lineno="793"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;BSplinesR,<sp/>BSplinesTheta&gt;<sp/>idx_2d<sp/>=<sp/>DDim::get_2d_index(idx);</highlight></codeline>
-<codeline lineno="794"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;BSplinesR&gt;<sp/>idx_r(idx_2d);</highlight></codeline>
-<codeline lineno="795"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;BSplinesTheta&gt;<sp/>idx_theta(idx_2d);</highlight></codeline>
-<codeline lineno="796"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int_vals(idx)<sp/>=<sp/>r_integrals(idx_r)<sp/>*<sp/>theta_integrals(idx_theta);</highlight></codeline>
-<codeline lineno="797"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
-<codeline lineno="798"><highlight class="normal"></highlight></codeline>
-<codeline lineno="799"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>int_vals;</highlight></codeline>
-<codeline lineno="800"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="801"><highlight class="normal"></highlight></codeline>
-<codeline lineno="802"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>PolarSplines</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="787"><highlight class="normal"></highlight></codeline>
+<codeline lineno="788"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRange&lt;DDim&gt;<sp/>tensor_bspline_idx_range(ddc::discrete_space&lt;DDim&gt;().tensor_bspline_idx_range());</highlight></codeline>
+<codeline lineno="789"><highlight class="normal"></highlight></codeline>
+<codeline lineno="790"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_for_each(</highlight></codeline>
+<codeline lineno="791"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>execution_space,</highlight></codeline>
+<codeline lineno="792"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tensor_bspline_idx_range,</highlight></codeline>
+<codeline lineno="793"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KOKKOS_LAMBDA(Idx&lt;DDim&gt;<sp/>idx)<sp/>{</highlight></codeline>
+<codeline lineno="794"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;BSplinesR,<sp/>BSplinesTheta&gt;<sp/>idx_2d<sp/>=<sp/>DDim::get_2d_index(idx);</highlight></codeline>
+<codeline lineno="795"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;BSplinesR&gt;<sp/>idx_r(idx_2d);</highlight></codeline>
+<codeline lineno="796"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;BSplinesTheta&gt;<sp/>idx_theta(idx_2d);</highlight></codeline>
+<codeline lineno="797"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int_vals(idx)<sp/>=<sp/>r_integrals(idx_r)<sp/>*<sp/>theta_integrals(idx_theta);</highlight></codeline>
+<codeline lineno="798"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="799"><highlight class="normal"></highlight></codeline>
+<codeline lineno="800"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>int_vals;</highlight></codeline>
+<codeline lineno="801"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="802"><highlight class="normal"></highlight></codeline>
+<codeline lineno="803"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>PolarSplines</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp"/>
   </compounddef>

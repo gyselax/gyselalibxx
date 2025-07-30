@@ -370,32 +370,27 @@
 <codeline lineno="465"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>PolarBSplinesType::n_singular_basis();<sp/>++i)<sp/>{</highlight></codeline>
 <codeline lineno="466"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>y<sp/>+=<sp/>spline_coef(Idx&lt;PolarBSplinesType&gt;(i))<sp/>*<sp/>singular_vals(i);</highlight></codeline>
 <codeline lineno="467"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="468"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;BSplinesR&gt;<sp/>jmin_r<sp/>=<sp/>ddc::select&lt;BSplinesR&gt;(jmin);</highlight></codeline>
-<codeline lineno="469"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;BSplinesTheta&gt;<sp/>jmin_theta<sp/>=<sp/>ddc::select&lt;BSplinesTheta&gt;(jmin);</highlight></codeline>
-<codeline lineno="470"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>nr<sp/>=<sp/>BSplinesR::degree()<sp/>+<sp/>1;</highlight></codeline>
-<codeline lineno="471"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(jmin_r<sp/>&lt;<sp/>Idx&lt;BSplinesR&gt;(<ref refid="classPolarSplineEvaluator_1a5d17cee2ba2d4cdf43c1a6095bfa70bb" kindref="member">continuity</ref><sp/>+<sp/>1))<sp/>{</highlight></codeline>
-<codeline lineno="472"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nr<sp/>=<sp/>nr<sp/>-<sp/>(Idx&lt;BSplinesR&gt;(<ref refid="classPolarSplineEvaluator_1a5d17cee2ba2d4cdf43c1a6095bfa70bb" kindref="member">continuity</ref><sp/>+<sp/>1)<sp/>-<sp/>jmin_r);</highlight></codeline>
-<codeline lineno="473"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>jmin_r<sp/>=<sp/>Idx&lt;BSplinesR&gt;(<ref refid="classPolarSplineEvaluator_1a5d17cee2ba2d4cdf43c1a6095bfa70bb" kindref="member">continuity</ref><sp/>+<sp/>1);</highlight></codeline>
-<codeline lineno="474"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="475"><highlight class="normal"></highlight></codeline>
-<codeline lineno="476"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DConstField&lt;IdxRange&lt;BSplinesR,<sp/>BSplinesTheta&gt;,<sp/>MemorySpace&gt;<sp/>spline_coef_2d</highlight></codeline>
-<codeline lineno="477"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>PolarBSplinesType::get_tensor_product_subset(spline_coef);</highlight></codeline>
-<codeline lineno="478"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;BSplinesR,<sp/>BSplinesTheta&gt;<sp/>tensor_prod_idx_range<sp/>=<sp/>get_idx_range(spline_coef_2d);</highlight></codeline>
-<codeline lineno="479"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;BSplinesTheta&gt;<sp/>tensor_prod_idx_range_theta(tensor_prod_idx_range);</highlight></codeline>
-<codeline lineno="480"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;BSplinesTheta&gt;<sp/>idx_theta_max<sp/>=<sp/>tensor_prod_idx_range_theta.back();</highlight></codeline>
-<codeline lineno="481"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxStep&lt;BSplinesTheta&gt;<sp/>n_idx_theta<sp/>=<sp/>tensor_prod_idx_range_theta.extents();</highlight></codeline>
-<codeline lineno="482"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>nr;<sp/>++i)<sp/>{</highlight></codeline>
-<codeline lineno="483"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>j<sp/>=<sp/>0;<sp/>j<sp/>&lt;<sp/>BSplinesTheta::degree()<sp/>+<sp/>1;<sp/>++j)<sp/>{</highlight></codeline>
-<codeline lineno="484"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;BSplinesTheta&gt;<sp/>idx_theta<sp/>=<sp/>jmin_theta<sp/>+<sp/>j;</highlight></codeline>
-<codeline lineno="485"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(idx_theta<sp/>&gt;<sp/>idx_theta_max)<sp/>{</highlight></codeline>
-<codeline lineno="486"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>idx_theta<sp/>-=<sp/>n_idx_theta;</highlight></codeline>
-<codeline lineno="487"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="488"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>y<sp/>+=<sp/>spline_coef_2d(jmin_r<sp/>+<sp/>i,<sp/>idx_theta)<sp/>*<sp/>vals(i,<sp/>j);</highlight></codeline>
-<codeline lineno="489"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="490"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="491"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>y;</highlight></codeline>
-<codeline lineno="492"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="493"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="468"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;BSplinesR&gt;<sp/>jmin_r(jmin);</highlight></codeline>
+<codeline lineno="469"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;BSplinesTheta&gt;<sp/>jmin_theta(jmin);</highlight></codeline>
+<codeline lineno="470"><highlight class="normal"></highlight></codeline>
+<codeline lineno="471"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DConstField&lt;IdxRange&lt;BSplinesR,<sp/>BSplinesTheta&gt;,<sp/>MemorySpace&gt;<sp/>spline_coef_2d</highlight></codeline>
+<codeline lineno="472"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>PolarBSplinesType::get_tensor_product_subset(spline_coef);</highlight></codeline>
+<codeline lineno="473"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;BSplinesR,<sp/>BSplinesTheta&gt;<sp/>tensor_prod_idx_range<sp/>=<sp/>get_idx_range(spline_coef_2d);</highlight></codeline>
+<codeline lineno="474"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;BSplinesTheta&gt;<sp/>tensor_prod_idx_range_theta(tensor_prod_idx_range);</highlight></codeline>
+<codeline lineno="475"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;BSplinesTheta&gt;<sp/>idx_theta_max<sp/>=<sp/>tensor_prod_idx_range_theta.back();</highlight></codeline>
+<codeline lineno="476"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxStep&lt;BSplinesTheta&gt;<sp/>n_idx_theta<sp/>=<sp/>tensor_prod_idx_range_theta.extents();</highlight></codeline>
+<codeline lineno="477"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>BSplinesR::degree()<sp/>+<sp/>1;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="478"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>j<sp/>=<sp/>0;<sp/>j<sp/>&lt;<sp/>BSplinesTheta::degree()<sp/>+<sp/>1;<sp/>++j)<sp/>{</highlight></codeline>
+<codeline lineno="479"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx&lt;BSplinesTheta&gt;<sp/>idx_theta<sp/>=<sp/>jmin_theta<sp/>+<sp/>j;</highlight></codeline>
+<codeline lineno="480"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(idx_theta<sp/>&gt;<sp/>idx_theta_max)<sp/>{</highlight></codeline>
+<codeline lineno="481"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>idx_theta<sp/>-=<sp/>n_idx_theta;</highlight></codeline>
+<codeline lineno="482"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="483"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>y<sp/>+=<sp/>spline_coef_2d(jmin_r<sp/>+<sp/>i,<sp/>idx_theta)<sp/>*<sp/>vals(i,<sp/>j);</highlight></codeline>
+<codeline lineno="484"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="485"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="486"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>y;</highlight></codeline>
+<codeline lineno="487"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="488"><highlight class="normal">};</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_spline_evaluator.hpp"/>
   </compounddef>
