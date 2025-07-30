@@ -1168,12 +1168,6 @@ public:
             }
         } else {
             IdxBSRTheta idx_front = polar_bspl.eval_basis(singular_vals, vals, coord);
-            IdxBSR idx_r(idx_front);
-            IdxBSTheta idx_theta(idx_front);
-            if (idx_r < IdxBSR(m_n_overlap_cells)) {
-                idx_front = IdxBSRTheta(IdxBSR(m_n_overlap_cells), idx_theta);
-            }
-
             IdxStepBSRTheta offset = PolarBSplinesRTheta::get_2d_index(idx) - idx_front;
             IdxStepBSR ir(offset);
             IdxStepBSTheta itheta(theta_mod(ddc::select<BSplinesTheta>(offset)));
