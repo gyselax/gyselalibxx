@@ -669,7 +669,10 @@ public:
                 }
             });
             IdxRangeBSR full_idx_range = ddc::discrete_space<BSplinesR>().full_domain();
-            IdxRangeBSR remaining_r(idx_test_r + 1, idx_test_r - full_idx_range.front() - 2);
+            IdxStep<BSplinesR> n_remaining_r(
+                    ::min(IdxStep<BSplinesR>(BSplinesR::degree()),
+                          full_idx_range.back() - idx_test_r - 1));
+            IdxRangeBSR remaining_r(idx_test_r + 1, n_remaining_r);
             IdxRangeBSTheta relevant_theta(
                     idx_test_theta + ddc::discrete_space<BSplinesTheta>().nbasis()
                             - BSplinesTheta::degree(),
@@ -1024,6 +1027,7 @@ public:
                     if (!full_quad_idx_range.contains(idx_quad)) {
                         idx_quad -= full_quad_idx_range.template extent<QDimThetaMesh>();
                     }
+                    assert(full_quad_idx_range.contains(idx_quad));
                     return weak_integral_element(
                             idx_test_polar,
                             idx_trial_polar,
@@ -1370,6 +1374,8 @@ public:
         IdxStepQuadratureTheta q_theta_len(
                 k_range_theta.extents().value() * s_n_gauss_legendre_theta);
         IdxRangeQuadratureTheta q_range_theta(q_theta_offset, q_theta_len);
+        assert(q_range_r.extents() > 0);
+        assert(q_range_theta.extents() > 0);
 
         return IdxRangeQuadratureRTheta(q_range_r, q_range_theta);
     }
