@@ -1048,7 +1048,7 @@ public:
         int n_theta = ddc::discrete_space<BSplinesTheta>().nbasis();
         while (idx_theta < 0)
             idx_theta += n_theta;
-        while (idx_theta >= ncells_theta)
+        while (idx_theta >= n_theta)
             idx_theta -= n_theta;
         return idx_theta;
     }
