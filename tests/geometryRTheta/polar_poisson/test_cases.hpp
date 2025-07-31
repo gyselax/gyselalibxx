@@ -218,7 +218,7 @@ public:
     using CurvilinearToCartesian = typename ChosenSolution::coordinate_converter_type;
 
 private:
-    CurvilinearToCartesian const& m_coordinate_converter;
+    CurvilinearToCartesian m_coordinate_converter;
 
 public:
     /**
@@ -240,7 +240,7 @@ public:
      *
      * @return The value of the RHS at the O-point.
      */
-    double solution_at_pole(Coord<R, Theta> const& coord) const;
+    KOKKOS_FUNCTION double solution_at_pole(Coord<R, Theta> const& coord) const;
     /**
      * @brief Get the value of the RHS on the domain excluding the O-point.
      *
@@ -249,7 +249,7 @@ public:
      *
      * @return The value of the RHS on the domain excluding the O-point.
      */
-    double non_singular_solution(Coord<R, Theta> const& coord) const;
+    KOKKOS_FUNCTION double non_singular_solution(Coord<R, Theta> const& coord) const;
     /**
      * @brief Get the value of the RHS at any point of the domain.
      *
@@ -258,7 +258,7 @@ public:
      *
      * @return The value of the RHS at any point of the domain.
      */
-    double operator()(Coord<R, Theta> const& coord) const
+    KOKKOS_FUNCTION double operator()(Coord<R, Theta> const& coord) const
     {
         if (ddc::get<R>(coord) == 0.0) {
             return solution_at_pole(coord);
