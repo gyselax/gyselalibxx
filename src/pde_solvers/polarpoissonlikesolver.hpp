@@ -54,8 +54,6 @@ class PolarSplineFEMPoissonLikeSolver
             std::is_same_v<IdxRangeFull, IdxRange<GridR, GridTheta>>,
             "PolarSplineFEMPoissonLikeSolver is not yet batched");
 
-    class InternalBatchDim;
-
 public:
     /// The radial dimension
     using R = typename GridR::continuous_dimension_type;
@@ -85,6 +83,8 @@ public:
     struct QDimThetaMesh : NonUniformGridBase<Theta>
     {
     };
+
+    class InternalBatchDim;
 
 private:
     using CoordRTheta = Coord<R, Theta>;
