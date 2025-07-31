@@ -26,6 +26,7 @@ concurrency:
 
 env:
   SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+  CHANGES_REF: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || inputs.merge_target }}
 
 jobs:
   pre_job:
