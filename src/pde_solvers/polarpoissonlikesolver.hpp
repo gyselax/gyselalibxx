@@ -830,19 +830,20 @@ public:
         m_gko_matrix->solve(m_x_init.allocation_kokkos_view(), b.allocation_kokkos_view());
         ddc::parallel_deepcopy(get_field(x_init_host), get_const_field(m_x_init));
         //-----------------
-        IdxRangeBSRTheta dirichlet_boundary_idx_range(
-                m_idxrange_bsplines_r.take_last(IdxStep<BSplinesR> {1}),
-                m_idxrange_bsplines_theta);
+        IdxStepBSPolar radial_boundary_splines(m_nbasis_theta);
+        IdxRangeBSPolar polar_bspl_idx_range
+                = ddc::discrete_space<PolarBSplinesRTheta>().full_domain().remove_last(
+                        radial_boundary_splines);
+        IdxRangeBSPolar bc_polar_bspl_idx_range
+                = ddc::discrete_space<PolarBSplinesRTheta>().full_domain().take_last(
+                        radial_boundary_splines);
 
         // Fill the spline
-        ddc::for_each(
-                PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>(),
-                [&](IdxBSPolar const idx) { spline(idx) = x_init_host(batch_idx, idx); });
-        ddc::for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx) {
+        ddc::for_each(polar_bspl_idx_range, [&](IdxBSPolar const idx) {
             spline(idx) = x_init_host(batch_idx, idx);
         });
-        ddc::for_each(dirichlet_boundary_idx_range, [&](IdxBSRTheta const idx) {
-            spline(to_polar(idx)) = 0.0;
+        ddc::for_each(bc_polar_bspl_idx_range, [&](IdxBSPolar const idx) {
+            spline(idx) = 0.0;
         });
         Kokkos::Profiling::popRegion();
     }
