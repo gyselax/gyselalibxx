@@ -233,7 +233,7 @@ private:
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>
             m_gko_matrix;
     mutable PolarSplineMemRTheta m_phi_spline_coef;
-    mutable DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> m_x_init;
+    mutable DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> m_x_init_alloc;
 
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
 public:
@@ -306,7 +306,7 @@ public:
         , m_weights_theta(m_idxrange_quadrature_theta)
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
         , m_phi_spline_coef(ddc::discrete_space<PolarBSplinesRTheta>().full_domain())
-        , m_x_init(
+        , m_x_init_alloc(
                   "x_init",
                   IdxRange<InternalBatchDim, PolarBSplinesRTheta>(
                           Idx<InternalBatchDim, PolarBSplinesRTheta>(0, 0),
@@ -317,7 +317,7 @@ public:
     {
         static_assert(has_jacobian_v<Mapping>);
         //initialise x_init
-        ddc::parallel_fill(m_x_init, 0);
+        ddc::parallel_fill(get_field(m_x_init_alloc), 0);
         // Get break points
         IdxRange<KnotsR> idxrange_r_edges = ddc::discrete_space<BSplinesR>().break_point_domain();
         IdxRange<KnotsTheta> idxrange_theta_edges
@@ -734,7 +734,7 @@ public:
      *      The spline representation of the solution @f$\phi@f$, also used as initial data for the iterative solver.
      */
     template <class RHSFunction>
-    void operator()(RHSFunction const& rhs, host_t<PolarSplineRTheta> spline) const
+    void operator()(RHSFunction const& rhs, PolarSplineRTheta spline) const
     {
         Kokkos::Profiling::pushRegion("PolarPoissonRHS");
 
@@ -743,7 +743,7 @@ public:
                 "RHSFunction must have an operator() which takes a coordinate and returns a "
                 "double");
         assert(get_idx_range(spline) == ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
-        IdxRange<InternalBatchDim> batch_idx_range(get_idx_range(m_x_init));
+        IdxRange<InternalBatchDim> batch_idx_range(get_idx_range(m_x_init_alloc));
 
         assert(batch_idx_range.size() == 1);
 
@@ -751,14 +751,13 @@ public:
 
         // Create b for rhs
         host_t<DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>>> b_host_alloc(
-                get_idx_range(m_x_init));
-        //Create an initial guess
-        host_t<DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>>> x_init_host_alloc(
-                get_idx_range(m_x_init));
+                get_idx_range(m_x_init_alloc));
         host_t<DField<IdxRange<InternalBatchDim, PolarBSplinesRTheta>>> b_host
                 = get_field(b_host_alloc);
-        host_t<DField<IdxRange<InternalBatchDim, PolarBSplinesRTheta>>> x_init_host
-                = get_field(x_init_host_alloc);
+
+        // Get initial guess
+        DField<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> x_init = get_field(m_x_init_alloc);
+
         // Fill b
         auto int_volume_host = ddc::create_mirror_view_and_copy(get_field(m_int_volume));
         IdxRangeBSPolar idx_range_singular
@@ -820,15 +819,14 @@ public:
             b_host(batch_idx, idx) = element;
         });
 
-        DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> b_alloc(get_idx_range(m_x_init));
+        DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> b_alloc(get_idx_range(x_init));
         DField<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> b = get_field(b_alloc);
         ddc::parallel_deepcopy(b, b_host);
         Kokkos::Profiling::popRegion();
 
         // Solve the matrix equation
         Kokkos::Profiling::pushRegion("PolarPoissonSolve");
-        m_gko_matrix->solve(m_x_init.allocation_kokkos_view(), b.allocation_kokkos_view());
-        ddc::parallel_deepcopy(get_field(x_init_host), get_const_field(m_x_init));
+        m_gko_matrix->solve(x_init.allocation_kokkos_view(), b.allocation_kokkos_view());
         //-----------------
         IdxStepBSPolar radial_boundary_splines(m_nbasis_theta);
         IdxRangeBSPolar polar_bspl_idx_range
@@ -839,12 +837,10 @@ public:
                         radial_boundary_splines);
 
         // Fill the spline
-        ddc::for_each(polar_bspl_idx_range, [&](IdxBSPolar const idx) {
-            spline(idx) = x_init_host(batch_idx, idx);
-        });
-        ddc::for_each(bc_polar_bspl_idx_range, [&](IdxBSPolar const idx) {
-            spline(idx) = 0.0;
-        });
+        ddc::parallel_for_each(
+                polar_bspl_idx_range,
+                KOKKOS_LAMBDA(IdxBSPolar const idx) { spline(idx) = x_init(batch_idx, idx); });
+        ddc::parallel_fill(spline[bc_polar_bspl_idx_range], 0.0);
         Kokkos::Profiling::popRegion();
     }
 
