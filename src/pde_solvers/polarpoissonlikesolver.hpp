@@ -797,8 +797,7 @@ public:
                     b(batch_idx, idx) = teamSum;
                 });
 
-        IdxRangeQuadratureRTheta
-                full_quad_idx_range(m_idxrange_quadrature_r, m_idxrange_quadrature_theta);
+        IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
 
         ddc::parallel_for_each(
                 m_idxrange_fem_non_singular,
@@ -828,7 +827,7 @@ public:
                             end_non_zero_r,
                             start_non_zero_theta,
                             end_non_zero_theta,
-                            m_idxrange_quadrature.front());
+                            full_quad_idx_range.front());
 
                     // Calculate the weak integral
                     double element = ddc::transform_reduce(
@@ -1382,7 +1381,7 @@ public:
             Idx<KnotsR> end_knot_r,
             Idx<KnotsTheta> start_knot_theta,
             Idx<KnotsTheta> end_knot_theta,
-            IdxQuadratureRTheta idx_quad_front) const
+            IdxQuadratureRTheta idx_quad_front)
     {
         const IdxRange<KnotsR> k_range_r(start_knot_r, end_knot_r - start_knot_r);
         const IdxRange<KnotsTheta>
