@@ -216,8 +216,8 @@ private:
 
     IdxRangeQuadratureR m_idxrange_quadrature_r;
     IdxRangeQuadratureTheta m_idxrange_quadrature_theta;
-    IdxRangeQuadratureRTheta m_idxrange_quadrature;
     IdxRangeQuadratureRTheta m_idxrange_quadrature_singular;
+    IdxRangeQuadratureRTheta m_idxrange_quadrature;
 
     // Gauss-Legendre points and weights
     FieldMem<double, IdxRangeQuadratureR> m_weights_r;
