@@ -578,14 +578,6 @@
 <td style="text-align: right;">struct</td>
 <td style="text-align: left;"><a href="structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh.html"><strong>QDimThetaMesh</strong></a> <br><em>Tag the second dimension for the quadrature mesh.</em></td>
 </tr>
-<tr>
-<td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structPolarSplineFEMPoissonLikeSolver_1_1RCellDim.html"><strong>RCellDim</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim.html"><strong>ThetaCellDim</strong></a> <br></td>
-</tr>
 </tbody>
 </table>
 <h2 id="public-types">Public Types</h2>
@@ -597,10 +589,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align: right;">typedef Idx&lt; <a href="structPolarSplineFEMPoissonLikeSolver_1_1RCellDim.html"><strong>RCellDim</strong></a>, <a href="structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim.html"><strong>ThetaCellDim</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#typedef-idxcell"><strong>IdxCell</strong></a>  <br><em>Tag an index of cell.</em></td>
-</tr>
 <tr>
 <td style="text-align: right;">typedef typename GridR::continuous_dimension_type</td>
 <td style="text-align: left;"><a href="#typedef-r"><strong>R</strong></a>  <br><em>The radial dimension.</em></td>
@@ -642,7 +630,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION IdxRangeQuadratureRTheta</td>
-<td style="text-align: left;"><a href="#function-get_quadrature_points_in_cell"><strong>get_quadrature_points_in_cell</strong></a> (int cell_idx_r, int cell_idx_theta) const<br><em>compute the quadrature range for a given pair of indices</em></td>
+<td style="text-align: left;"><a href="#function-get_quadrature_between_knots"><strong>get_quadrature_between_knots</strong></a> (Idx&lt; KnotsR &gt; start_knot_r, Idx&lt; KnotsR &gt; end_knot_r, Idx&lt; KnotsTheta &gt; start_knot_theta, Idx&lt; KnotsTheta &gt; end_knot_theta) const<br><em>Compute the quadrature range between a provided set of knots.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -676,8 +664,12 @@
 <td style="text-align: left;"><a href="#function-get_polar_bspline_vals_and_derivs"><strong>get_polar_bspline_vals_and_derivs</strong></a> (double &amp; val, CoordRTheta coord, IdxBSPolar idx) <br><em>Get the value and derivative of the specified polar bspline at the specified quadrature point.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION int</td>
-<td style="text-align: left;"><a href="#function-theta_mod"><strong>theta_mod</strong></a> (int idx_theta) <br><em>Calculates the modulo idx_theta in relation to cells number along</em> <span class="arithmatex">\(\theta\)</span> <em>direction .</em></td>
+<td style="text-align: right;">KOKKOS_FUNCTION IdxStepBSTheta</td>
+<td style="text-align: left;"><a href="#function-theta_mod-12"><strong>theta_mod</strong></a> (IdxStepBSTheta idx_theta) <br><em>Calculates the modulo idx_theta in relation to cells number along</em> <span class="arithmatex">\(\theta\)</span> <em>direction .</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION IdxType</td>
+<td style="text-align: left;"><a href="#function-theta_mod-22"><strong>theta_mod</strong></a> (IdxType idx) <br><em>Calculates the index which is inside the poloidal domain using the periodicity properties.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION IdxBSPolar</td>
@@ -705,12 +697,6 @@
 <li><code>IdxRangeFull</code> The full index range of <span class="arithmatex">\(\phi\)</span> including any batch dimensions. </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
-<h3 id="typedef-idxcell">typedef IdxCell</h3>
-<p><em>Tag an index of cell.</em> </p>
-<pre><code class="language-C++">using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, IdxRangeFull &gt;::IdxCell =  Idx&lt;RCellDim, ThetaCellDim&gt;;
-</code></pre>
-<hr>
-
 <h3 id="typedef-r">typedef R</h3>
 <p><em>The radial dimension.</em> </p>
 <pre><code class="language-C++">using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, IdxRangeFull &gt;::R =  typename GridR::continuous_dimension_type;
@@ -857,20 +843,25 @@ inline double PolarSplineFEMPoissonLikeSolver::get_matrix_stencil_element (
 <p>The value of the matrix element. </p>
 <hr>
 
-<h3 id="function-get_quadrature_points_in_cell">function get_quadrature_points_in_cell</h3>
-<p><em>compute the quadrature range for a given pair of indices</em> </p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION IdxRangeQuadratureRTheta PolarSplineFEMPoissonLikeSolver::get_quadrature_points_in_cell (
-    int cell_idx_r,
-    int cell_idx_theta
+<h3 id="function-get_quadrature_between_knots">function get_quadrature_between_knots</h3>
+<p><em>Compute the quadrature range between a provided set of knots.</em> </p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION IdxRangeQuadratureRTheta PolarSplineFEMPoissonLikeSolver::get_quadrature_between_knots (
+    Idx&lt; KnotsR &gt; start_knot_r,
+    Idx&lt; KnotsR &gt; end_knot_r,
+    Idx&lt; KnotsTheta &gt; start_knot_theta,
+    Idx&lt; KnotsTheta &gt; end_knot_theta
 ) const
 </code></pre>
+<p>Compute the range of quadrature points which are found between a set of knots in both the radial and poloidal directions. In order to return a contiguous range the result may include indices which are outside the domain. A modulo operator should be applied before using the indices.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>cell_idx_r</code> The index for radial direction </li>
-<li><code>cell_idx_theta</code> The index for poloidal direction </li>
+<li><code>start_knot_r</code> The index of the knot describing the lower bound of the domain of interest in the radial direction. </li>
+<li><code>end_knot_r</code> The index of the knot describing the upper bound of the domain of interest in the radial direction. </li>
+<li><code>start_knot_theta</code> The index of the knot describing the lower bound of the domain of interest in the poloidal direction. </li>
+<li><code>end_knot_theta</code> The index of the knot describing the upper bound of the domain of interest in the poloidal direction. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>The quadrature range corresponding to the <span class="arithmatex">\((r,\theta)\)</span> indices. </p>
+<p>The range of quadrature points in the specified domain. </p>
 <hr>
 
 <h3 id="function-init_nnz_per_line">function init_nnz_per_line</h3>
@@ -953,10 +944,10 @@ static inline KOKKOS_FUNCTION auto PolarSplineFEMPoissonLikeSolver::get_polar_bs
 <p>The derivative of the polar bspline (only returned if calculate_derivs is true). </p>
 <hr>
 
-<h3 id="function-theta_mod">function theta_mod</h3>
+<h3 id="function-theta_mod-12">function theta_mod [1/2]</h3>
 <p><em>Calculates the modulo idx_theta in relation to cells number along</em> <span class="arithmatex">\(\theta\)</span> <em>direction .</em></p>
-<pre><code class="language-C++">static inline KOKKOS_FUNCTION int PolarSplineFEMPoissonLikeSolver::theta_mod (
-    int idx_theta
+<pre><code class="language-C++">static inline KOKKOS_FUNCTION IdxStepBSTheta PolarSplineFEMPoissonLikeSolver::theta_mod (
+    IdxStepBSTheta idx_theta
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -965,6 +956,21 @@ static inline KOKKOS_FUNCTION auto PolarSplineFEMPoissonLikeSolver::get_polar_bs
 </ul>
 <p><strong>Returns:</strong></p>
 <p>The corresponding indice modulo <span class="arithmatex">\(\theta\)</span> direction cells number </p>
+<hr>
+
+<h3 id="function-theta_mod-22">function theta_mod [2/2]</h3>
+<p><em>Calculates the index which is inside the poloidal domain using the periodicity properties.</em> </p>
+<pre><code class="language-C++">template&lt;class IdxType&gt;
+static inline KOKKOS_INLINE_FUNCTION IdxType PolarSplineFEMPoissonLikeSolver::theta_mod (
+    IdxType idx
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>idx</code> A multi-dimensional index including the polar bspline index.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The corresponding index inside the domain. </p>
 <hr>
 
 <h3 id="function-to_polar">function to_polar</h3>

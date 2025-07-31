@@ -208,7 +208,7 @@
 * **get\_matrix\_stencil\_element** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **get\_polar\_bspline\_vals** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **get\_polar\_bspline\_vals\_and\_derivs** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
-* **get\_quadrature\_points\_in\_cell** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
+* **get\_quadrature\_between\_knots** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **get\_2d\_polar\_mapping** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **get\_slice** ([**VectorField**](classVectorField.md))
 * **get\_domain** ([**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md))

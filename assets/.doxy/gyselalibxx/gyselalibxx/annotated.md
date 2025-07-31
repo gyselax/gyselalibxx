@@ -193,8 +193,6 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **struct** [**EvalDeriv2DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.md) _Object storing a value and a value of the derivatives in each direction of a 2D function._     
     * **struct** [**QDimRMesh**](structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.md) _Tag the first dimension for the quadrature mesh._ 
     * **struct** [**QDimThetaMesh**](structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh.md) _Tag the second dimension for the quadrature mesh._ 
-    * **struct** [**RCellDim**](structPolarSplineFEMPoissonLikeSolver_1_1RCellDim.md) 
-    * **struct** [**ThetaCellDim**](structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim.md) 
 * **namespace** [**PolarSplines**](namespacePolarSplines.md)     
 * **class** [**PreallocatableLagrangeInterpolator**](classPreallocatableLagrangeInterpolator.md) _A class which stores information necessary to create an instance of the_ [_**LagrangeInterpolator**_](classLagrangeInterpolator.md) _class._    
 * **class** [**PreallocatableSplineInterpolator**](classPreallocatableSplineInterpolator.md) _A class which stores information necessary to create an instance of the_ [_**SplineInterpolator**_](classSplineInterpolator.md) _class._    

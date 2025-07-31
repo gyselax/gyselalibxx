@@ -36,15 +36,12 @@ _Define a polar PDE solver for a Poisson-like equation._ [More...](#detailed-des
 | struct | [**EvalDeriv2DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.md) <br>_Object storing a value and a value of the derivatives in each direction of a 2D function._  |
 | struct | [**QDimRMesh**](structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.md) <br>_Tag the first dimension for the quadrature mesh._  |
 | struct | [**QDimThetaMesh**](structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh.md) <br>_Tag the second dimension for the quadrature mesh._  |
-| struct | [**RCellDim**](structPolarSplineFEMPoissonLikeSolver_1_1RCellDim.md) <br> |
-| struct | [**ThetaCellDim**](structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim.md) <br> |
 
 
 ## Public Types
 
 | Type | Name |
 | ---: | :--- |
-| typedef Idx&lt; [**RCellDim**](structPolarSplineFEMPoissonLikeSolver_1_1RCellDim.md), [**ThetaCellDim**](structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim.md) &gt; | [**IdxCell**](#typedef-idxcell)  <br>_Tag an index of cell._  |
 | typedef typename GridR::continuous\_dimension\_type | [**R**](#typedef-r)  <br>_The radial dimension._  |
 | typedef typename GridTheta::continuous\_dimension\_type | [**Theta**](#typedef-theta)  <br>_The poloidal dimension._  |
 
@@ -76,7 +73,7 @@ _Define a polar PDE solver for a Poisson-like equation._ [More...](#detailed-des
 |  void | [**compute\_singular\_elements**](#function-compute_singular_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const values\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const col\_idx\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const nnz\_per\_row\_csr\_host) <br>_Computes the matrix element corresponding to the singular area. ie: the region enclosing the O-point._  |
 |  void | [**compute\_stencil\_elements**](#function-compute_stencil_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const values\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const col\_idx\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const nnz\_per\_row\_csr\_host) <br>_Computes the matrix element corresponding to the regular stencil ie: out to singular or overlapping areas._  |
 |  double | [**get\_matrix\_stencil\_element**](#function-get_matrix_stencil_element) (IdxBSRTheta idx\_test, IdxBSRTheta idx\_trial, ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, SplineRThetaEvaluatorNullBound const & evaluator, Mapping const & mapping) <br>_Computes the matrix element corresponding to two tensor product splines with index idx\_test and idx\_trial._  |
-|  KOKKOS\_FUNCTION IdxRangeQuadratureRTheta | [**get\_quadrature\_points\_in\_cell**](#function-get_quadrature_points_in_cell) (int cell\_idx\_r, int cell\_idx\_theta) const<br>_compute the quadrature range for a given pair of indices_  |
+|  KOKKOS\_FUNCTION IdxRangeQuadratureRTheta | [**get\_quadrature\_between\_knots**](#function-get_quadrature_between_knots) (Idx&lt; KnotsR &gt; start\_knot\_r, Idx&lt; KnotsR &gt; end\_knot\_r, Idx&lt; KnotsTheta &gt; start\_knot\_theta, Idx&lt; KnotsTheta &gt; end\_knot\_theta) const<br>_Compute the quadrature range between a provided set of knots._  |
 |  void | [**init\_nnz\_per\_line**](#function-init_nnz_per_line) (Kokkos::View&lt; int \*, Kokkos::LayoutRight &gt; nnz\_per\_row) const<br>_Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on_ \((r,\theta)\) _splines. After this function the array will contain: nnz\_per\_row[0] = 0. nnz\_per\_row[1] = 0. nnz\_per\_row[2] = number of non-zero elements in line 0. nnz\_per\_row[3] = number of non-zero elements in lines 0-1. ...\_per\_row nnz\_per\_row[matrix\_size] = number of non-zero elements in lines 0-(matrix\_size-1)._ |
 |  void | [**operator()**](#function-operator) (RHSFunction const & rhs, host\_t&lt; PolarSplineRTheta &gt; spline) const<br>_Solve the Poisson-like equation._  |
 |  void | [**operator()**](#function-operator_1) (RHSFunction const & rhs, DFieldRTheta phi) const<br>_Solve the Poisson-like equation._  |
@@ -88,7 +85,8 @@ _Define a polar PDE solver for a Poisson-like equation._ [More...](#detailed-des
 | ---: | :--- |
 |  KOKKOS\_INLINE\_FUNCTION double | [**get\_polar\_bspline\_vals**](#function-get_polar_bspline_vals) (CoordRTheta coord, IdxBSPolar idx) <br>_Get the value of the specified polar bspline at the specified point._  |
 |  KOKKOS\_FUNCTION auto | [**get\_polar\_bspline\_vals\_and\_derivs**](#function-get_polar_bspline_vals_and_derivs) (double & val, CoordRTheta coord, IdxBSPolar idx) <br>_Get the value and derivative of the specified polar bspline at the specified quadrature point._  |
-|  KOKKOS\_FUNCTION int | [**theta\_mod**](#function-theta_mod) (int idx\_theta) <br>_Calculates the modulo idx\_theta in relation to cells number along_ \(\theta\) _direction ._ |
+|  KOKKOS\_FUNCTION IdxStepBSTheta | [**theta\_mod**](#function-theta_mod-12) (IdxStepBSTheta idx\_theta) <br>_Calculates the modulo idx\_theta in relation to cells number along_ \(\theta\) _direction ._ |
+|  KOKKOS\_INLINE\_FUNCTION IdxType | [**theta\_mod**](#function-theta_mod-22) (IdxType idx) <br>_Calculates the index which is inside the poloidal domain using the periodicity properties._  |
 |  KOKKOS\_INLINE\_FUNCTION IdxBSPolar | [**to\_polar**](#function-to_polar) (IdxBSRTheta idx) <br> |
 |  KOKKOS\_FUNCTION double | [**weak\_integral\_element**](#function-weak_integral_element) (IdxBSPolar idx\_test, IdxBSPolar idx\_trial, IdxQuadratureRTheta idx\_quad, ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Mapping const & mapping, DField&lt; IdxRangeQuadratureRTheta &gt; int\_volume) <br>_Computes a quadrature summand corresponding to the inner product._  |
 
@@ -153,20 +151,6 @@ As finite element basis functions we will use polar b-splines which are divided 
     
 ## Public Types Documentation
 
-
-
-
-### typedef IdxCell 
-
-_Tag an index of cell._ 
-```C++
-using PolarSplineFEMPoissonLikeSolver< GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, IdxRangeFull >::IdxCell =  Idx<RCellDim, ThetaCellDim>;
-```
-
-
-
-
-<hr>
 
 
 
@@ -423,16 +407,21 @@ The value of the matrix element.
 
 
 
-### function get\_quadrature\_points\_in\_cell 
+### function get\_quadrature\_between\_knots 
 
-_compute the quadrature range for a given pair of indices_ 
+_Compute the quadrature range between a provided set of knots._ 
 ```C++
-inline KOKKOS_FUNCTION IdxRangeQuadratureRTheta PolarSplineFEMPoissonLikeSolver::get_quadrature_points_in_cell (
-    int cell_idx_r,
-    int cell_idx_theta
+inline KOKKOS_FUNCTION IdxRangeQuadratureRTheta PolarSplineFEMPoissonLikeSolver::get_quadrature_between_knots (
+    Idx< KnotsR > start_knot_r,
+    Idx< KnotsR > end_knot_r,
+    Idx< KnotsTheta > start_knot_theta,
+    Idx< KnotsTheta > end_knot_theta
 ) const
 ```
 
+
+
+Compute the range of quadrature points which are found between a set of knots in both the radial and poloidal directions. In order to return a contiguous range the result may include indices which are outside the domain. A modulo operator should be applied before using the indices.
 
 
 
@@ -440,14 +429,16 @@ inline KOKKOS_FUNCTION IdxRangeQuadratureRTheta PolarSplineFEMPoissonLikeSolver:
 **Parameters:**
 
 
-* `cell_idx_r` The index for radial direction 
-* `cell_idx_theta` The index for poloidal direction 
+* `start_knot_r` The index of the knot describing the lower bound of the domain of interest in the radial direction. 
+* `end_knot_r` The index of the knot describing the upper bound of the domain of interest in the radial direction. 
+* `start_knot_theta` The index of the knot describing the lower bound of the domain of interest in the poloidal direction. 
+* `end_knot_theta` The index of the knot describing the upper bound of the domain of interest in the poloidal direction. 
 
 
 
 **Returns:**
 
-The quadrature range corresponding to the \((r,\theta)\) indices. 
+The range of quadrature points in the specified domain. 
 
 
 
@@ -632,12 +623,12 @@ The derivative of the polar bspline (only returned if calculate\_derivs is true)
 
 
 
-### function theta\_mod 
+### function theta\_mod [1/2]
 
 _Calculates the modulo idx\_theta in relation to cells number along_ \(\theta\) _direction ._
 ```C++
-static inline KOKKOS_FUNCTION int PolarSplineFEMPoissonLikeSolver::theta_mod (
-    int idx_theta
+static inline KOKKOS_FUNCTION IdxStepBSTheta PolarSplineFEMPoissonLikeSolver::theta_mod (
+    IdxStepBSTheta idx_theta
 ) 
 ```
 
@@ -655,6 +646,41 @@ static inline KOKKOS_FUNCTION int PolarSplineFEMPoissonLikeSolver::theta_mod (
 **Returns:**
 
 The corresponding indice modulo \(\theta\) direction cells number 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function theta\_mod [2/2]
+
+_Calculates the index which is inside the poloidal domain using the periodicity properties._ 
+```C++
+template<class IdxType>
+static inline KOKKOS_INLINE_FUNCTION IdxType PolarSplineFEMPoissonLikeSolver::theta_mod (
+    IdxType idx
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `idx` A multi-dimensional index including the polar bspline index.
+
+
+
+**Returns:**
+
+The corresponding index inside the domain. 
 
 
 
