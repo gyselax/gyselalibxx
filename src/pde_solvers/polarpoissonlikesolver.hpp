@@ -448,7 +448,7 @@ public:
     {
         IdxRangeBSPolar idxrange_singular
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
-        IdxRangeQuadratureRTheta idxrange_quadrature_singular = m_idxrange_quadrature_singular;
+        IdxRangeQuadratureRTheta idx_range_quad_singular = m_idxrange_quadrature_singular;
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume_alloc);
 
@@ -459,7 +459,7 @@ public:
                 // Calculate the weak integral
                 double const element = ddc::parallel_transform_reduce(
                         Kokkos::DefaultExecutionSpace(),
-                        idxrange_quadrature_singular,
+                        idx_range_quad_singular,
                         0.0,
                         ddc::reducer::sum<double>(),
                         KOKKOS_LAMBDA(Idx<QDimRMesh, QDimThetaMesh> const& idx_quad) {
@@ -762,6 +762,8 @@ public:
         IdxRangeBSPolar idx_range_singular
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
 
+        IdxRangeQuadratureRTheta idx_range_quad_singular = m_idxrange_quadrature_singular;
+
         // Fill b
         // Multi-level parallelism is needed as idx_range_singular.size() ~= 3 but b is on GPU
         Kokkos::parallel_for(
@@ -776,15 +778,13 @@ public:
                     Kokkos::parallel_reduce(
                             Kokkos::TeamThreadMDRange(
                                     team,
-                                    m_idxrange_quadrature_singular.template extent<QDimRMesh>(),
-                                    m_idxrange_quadrature_singular
-                                            .template extent<QDimThetaMesh>()),
+                                    idx_range_quad_singular.template extent<QDimRMesh>(),
+                                    idx_range_quad_singular.template extent<QDimThetaMesh>()),
                             [&](int r_thread_index, int theta_thread_index, double& sum) {
-                                IdxQuadratureRTheta idx_quad
-                                        = m_idxrange_quadrature_singular.front()
-                                          + IdxStep<QDimRMesh, QDimThetaMesh>(
-                                                  r_thread_index,
-                                                  theta_thread_index);
+                                IdxQuadratureRTheta idx_quad = idx_range_quad_singular.front()
+                                                               + IdxStep<QDimRMesh, QDimThetaMesh>(
+                                                                       r_thread_index,
+                                                                       theta_thread_index);
                                 const CoordRTheta coord(ddc::coordinate(idx_quad));
                                 sum += rhs(coord) * get_polar_bspline_vals(coord, idx)
                                        * int_volume(idx_quad);
