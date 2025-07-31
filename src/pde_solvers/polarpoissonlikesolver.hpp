@@ -84,7 +84,9 @@ public:
     {
     };
 
-    class InternalBatchDim;
+    class InternalBatchDim
+    {
+    };
 
 private:
     using CoordRTheta = Coord<R, Theta>;
