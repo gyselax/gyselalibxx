@@ -2,15 +2,16 @@
 #include "test_cases.hpp"
 
 template <>
-KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<CircularToCartesian<R, Theta, X, Y>>>::
-        solution_at_pole(Coord<R, Theta> const& coord) const
+KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
+        CircularToCartesian<R, Theta, X, Y>>>::solution_at_pole(Coord<R, Theta> const& coord) const
 {
     return 0.0;
 }
 
 template <>
-KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<CircularToCartesian<R, Theta, X, Y>>>::
-        non_singular_solution(Coord<R, Theta> const& coord) const
+KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
+        CircularToCartesian<R, Theta, X, Y>>>::non_singular_solution(Coord<R, Theta> const& coord)
+        const
 {
     const double r = ddc::get<R>(coord);
     const double theta = ddc::get<Theta>(coord);
@@ -75,15 +76,16 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<CircularToCarte
 //---------------------------------------------------------------------
 
 template <>
-KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<CzarnyToCartesian<R, Theta, X, Y>>>::
-        solution_at_pole(Coord<R, Theta> const& coord) const
+KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
+        CzarnyToCartesian<R, Theta, X, Y>>>::solution_at_pole(Coord<R, Theta> const& coord) const
 {
     return 0.0;
 }
 
 template <>
-KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<CzarnyToCartesian<R, Theta, X, Y>>>::
-        non_singular_solution(Coord<R, Theta> const& coord) const
+KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
+        CzarnyToCartesian<R, Theta, X, Y>>>::non_singular_solution(Coord<R, Theta> const& coord)
+        const
 {
     const double r = ddc::get<R>(coord);
     const double theta = ddc::get<Theta>(coord);
@@ -1723,15 +1725,16 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<CzarnyToCartesi
 //---------------------------------------------------------------------
 
 template <>
-KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<CircularToCartesian<R, Theta, X, Y>>>::
-        solution_at_pole(Coord<R, Theta> const& coord) const
+KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
+        CircularToCartesian<R, Theta, X, Y>>>::solution_at_pole(Coord<R, Theta> const& coord) const
 {
     return 0.0;
 }
 
 template <>
-KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<CircularToCartesian<R, Theta, X, Y>>>::
-        non_singular_solution(Coord<R, Theta> const& coord) const
+KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
+        CircularToCartesian<R, Theta, X, Y>>>::non_singular_solution(Coord<R, Theta> const& coord)
+        const
 {
     const double r = ddc::get<R>(coord);
     const double theta = ddc::get<Theta>(coord);
@@ -1763,15 +1766,16 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<CircularToCar
 //---------------------------------------------------------------------
 
 template <>
-KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<CzarnyToCartesian<R, Theta, X, Y>>>::
-        solution_at_pole(Coord<R, Theta> const& coord) const
+KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
+        CzarnyToCartesian<R, Theta, X, Y>>>::solution_at_pole(Coord<R, Theta> const& coord) const
 {
     return 0.0;
 }
 
 template <>
-KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<CzarnyToCartesian<R, Theta, X, Y>>>::
-        non_singular_solution(Coord<R, Theta> const& coord) const
+KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
+        CzarnyToCartesian<R, Theta, X, Y>>>::non_singular_solution(Coord<R, Theta> const& coord)
+        const
 {
     const double r = ddc::get<R>(coord);
     const double theta = ddc::get<Theta>(coord);
