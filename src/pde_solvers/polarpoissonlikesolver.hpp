@@ -798,6 +798,7 @@ public:
                 });
 
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
+        IdxRangeQuadratureTheta full_quad_idx_range_theta(full_quad_idx_range);
 
         ddc::parallel_for_each(
                 m_idxrange_fem_non_singular,
@@ -830,21 +831,20 @@ public:
                             full_quad_idx_range.front());
 
                     // Calculate the weak integral
-                    double element = ddc::transform_reduce(
-                            quad_range,
-                            0.0,
-                            ddc::reducer::sum<double>(),
-                            [&](IdxQuadratureRTheta idx_quad) {
-                                // Manage periodicity
-                                if (!full_quad_idx_range.contains(idx_quad)) {
-                                    idx_quad
-                                            -= full_quad_idx_range.template extent<QDimThetaMesh>();
-                                }
-                                CoordRTheta coord(ddc::coordinate(idx_quad));
-                                return rhs(coord) * get_polar_bspline_vals(coord, idx)
-                                       * int_volume(idx_quad);
-                            });
-                    b(batch_idx, idx) = element;
+                    b(batch_idx, idx) = 0.0;
+                    for (IdxQuadratureTheta idx_quad_theta :
+                         ddc::select<QDimThetaMesh>(quad_range)) {
+                        // Manage periodicity
+                        if (!full_quad_idx_range_theta.contains(idx_quad_theta)) {
+                            idx_quad_theta -= full_quad_idx_range_theta.extents();
+                        }
+                        for (IdxQuadratureR idx_quad_r : ddc::select<QDimRMesh>(quad_range)) {
+                            IdxQuadratureRTheta idx_quad(idx_quad_r, idx_quad_theta);
+                            CoordRTheta coord(ddc::coordinate(idx_quad));
+                            b(batch_idx, idx) += rhs(coord) * get_polar_bspline_vals(coord, idx)
+                                                 * int_volume(idx_quad);
+                        }
+                    }
                 });
 
         Kokkos::Profiling::popRegion();
