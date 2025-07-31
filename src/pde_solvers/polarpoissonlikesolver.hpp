@@ -628,6 +628,9 @@ public:
         IdxRangeBSPolar idxrange_singular
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
 
+        IdxRangeBSR full_idx_range_r
+                = ddc::discrete_space<BSplinesR>().full_domain().remove_last(1);
+
         // Calculate the matrix elements following a stencil
         ddc::for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx_test_polar) {
             const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
@@ -668,10 +671,9 @@ public:
                     nnz_per_row_csr_host(int_polar_idx_trial + 1)++;
                 }
             });
-            IdxRangeBSR full_idx_range = ddc::discrete_space<BSplinesR>().full_domain();
             IdxStep<BSplinesR> n_remaining_r(
                     ::min(IdxStep<BSplinesR>(BSplinesR::degree()),
-                          full_idx_range.back() - idx_test_r - 1));
+                          full_idx_range_r.back() - idx_test_r));
             IdxRangeBSR remaining_r(idx_test_r + 1, n_remaining_r);
             IdxRangeBSTheta relevant_theta(
                     idx_test_theta + ddc::discrete_space<BSplinesTheta>().nbasis()
