@@ -757,7 +757,6 @@ public:
                                * int_volume_host(idx_quad);
                     });
         });
-        const std::size_t ncells_r = ddc::discrete_space<BSplinesR>().ncells();
 
         IdxRangeQuadratureRTheta
                 full_quad_idx_range(m_idxrange_quadrature_r, m_idxrange_quadrature_theta);
@@ -1046,11 +1045,11 @@ public:
      */
     static KOKKOS_FUNCTION IdxStepBSTheta theta_mod(IdxStepBSTheta idx_theta)
     {
-        int ncells_theta = ddc::discrete_space<BSplinesTheta>().ncells();
+        int n_theta = ddc::discrete_space<BSplinesTheta>().nbasis();
         while (idx_theta < 0)
-            idx_theta += ncells_theta;
+            idx_theta += n_theta;
         while (idx_theta >= ncells_theta)
-            idx_theta -= ncells_theta;
+            idx_theta -= n_theta;
         return idx_theta;
     }
 
@@ -1365,7 +1364,7 @@ public:
                 = k_range_theta.front()
                   - ddc::discrete_space<BSplinesTheta>().break_point_domain().front();
         if (k_theta_offset < 0)
-            k_theta_offset += ddc::discrete_space<BSplinesTheta>().ncells();
+            k_theta_offset += ddc::discrete_space<BSplinesTheta>().nbasis();
         IdxQuadratureTheta q_theta_offset = m_idxrange_quadrature_theta.front()
                                             + k_theta_offset.value() * s_n_gauss_legendre_theta;
         IdxStepQuadratureTheta q_theta_len(
