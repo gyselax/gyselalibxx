@@ -30,7 +30,7 @@ on:
       merge_target:
         description: "The branch to which this branch should be compared to filter out costly tests (default: devel)"
         required: false
-        default: devel
+        default: origin/devel
         type: string
 
 concurrency:
