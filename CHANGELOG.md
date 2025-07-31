@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Uniformise toolchains.
 - Allow batch CSR convergence parameters to be specified in the constructor of `PolarSplineFEMPoissonLikeSolver`.
 - Change the internals of `PolarSplineFEMPoissonLikeSolver` to precalculate fewer values.
+- Change the internals of `PolarSplineFEMPoissonLikeSolver` to avoid calls to DDC's internals.
 
 ### Deprecated
 
