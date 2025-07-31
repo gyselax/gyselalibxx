@@ -216,6 +216,7 @@ private:
 
     IdxRangeQuadratureR m_idxrange_quadrature_r;
     IdxRangeQuadratureTheta m_idxrange_quadrature_theta;
+    IdxRangeQuadratureRTheta m_idxrange_quadrature;
     IdxRangeQuadratureRTheta m_idxrange_quadrature_singular;
 
     // Gauss-Legendre points and weights
@@ -302,6 +303,7 @@ public:
                   m_idxrange_quadrature_r.take_first(
                           IdxStep<QDimRMesh> {m_n_overlap_cells * s_n_gauss_legendre_r}),
                   m_idxrange_quadrature_theta)
+        , m_idxrange_quadrature(m_idxrange_quadrature_r, m_idxrange_quadrature_theta)
         , m_weights_r(m_idxrange_quadrature_r)
         , m_weights_theta(m_idxrange_quadrature_theta)
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
@@ -557,7 +559,8 @@ public:
                         start_non_zero_r,
                         end_non_zero_r,
                         start_non_zero_theta,
-                        end_non_zero_theta);
+                        end_non_zero_theta,
+                        m_idxrange_quadrature.front());
 
 
                 assert(quad_range.size() > 0);
@@ -824,7 +827,8 @@ public:
                             start_non_zero_r,
                             end_non_zero_r,
                             start_non_zero_theta,
-                            end_non_zero_theta);
+                            end_non_zero_theta,
+                            m_idxrange_quadrature.front());
 
                     // Calculate the weak integral
                     double element = ddc::transform_reduce(
@@ -1034,7 +1038,8 @@ public:
                 start_non_zero_r,
                 end_non_zero_r,
                 start_non_zero_theta,
-                end_non_zero_theta);
+                end_non_zero_theta,
+                m_idxrange_quadrature.front());
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume_alloc);
 
@@ -1367,14 +1372,17 @@ public:
      * @param[in] end_knot_theta
      *      The index of the knot describing the upper bound of the domain of interest
      *      in the poloidal direction.
+     * @param[in] idx_quad_front
+     *      The first index of the index range of the quadrature points.
      * @return 
      *      The range of quadrature points in the specified domain.
      */
-    KOKKOS_FUNCTION IdxRangeQuadratureRTheta get_quadrature_between_knots(
+    static KOKKOS_FUNCTION IdxRangeQuadratureRTheta get_quadrature_between_knots(
             Idx<KnotsR> start_knot_r,
             Idx<KnotsR> end_knot_r,
             Idx<KnotsTheta> start_knot_theta,
-            Idx<KnotsTheta> end_knot_theta) const
+            Idx<KnotsTheta> end_knot_theta,
+            IdxQuadratureRTheta idx_quad_front) const
     {
         const IdxRange<KnotsR> k_range_r(start_knot_r, end_knot_r - start_knot_r);
         const IdxRange<KnotsTheta>
@@ -1383,7 +1391,7 @@ public:
         IdxStep<KnotsR> k_r_offset
                 = k_range_r.front() - ddc::discrete_space<BSplinesR>().break_point_domain().front();
         IdxQuadratureR q_r_offset
-                = m_idxrange_quadrature_r.front() + k_r_offset.value() * s_n_gauss_legendre_r;
+                = IdxQuadratureR(idx_quad_front) + k_r_offset.value() * s_n_gauss_legendre_r;
         IdxStepQuadratureR q_r_len(k_range_r.extents().value() * s_n_gauss_legendre_r);
         IdxRangeQuadratureR q_range_r(q_r_offset, q_r_len);
 
@@ -1392,7 +1400,7 @@ public:
                   - ddc::discrete_space<BSplinesTheta>().break_point_domain().front();
         if (k_theta_offset < 0)
             k_theta_offset += ddc::discrete_space<BSplinesTheta>().nbasis();
-        IdxQuadratureTheta q_theta_offset = m_idxrange_quadrature_theta.front()
+        IdxQuadratureTheta q_theta_offset = IdxQuadratureTheta(idx_quad_front)
                                             + k_theta_offset.value() * s_n_gauss_legendre_theta;
         IdxStepQuadratureTheta q_theta_len(
                 k_range_theta.extents().value() * s_n_gauss_legendre_theta);
