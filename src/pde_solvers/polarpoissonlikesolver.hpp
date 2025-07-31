@@ -222,7 +222,7 @@ private:
     FieldMem<double, IdxRangeQuadratureR> m_weights_r;
     FieldMem<double, IdxRangeQuadratureTheta> m_weights_theta;
 
-    FieldMem<double, IdxRangeQuadratureRTheta> m_int_volume;
+    FieldMem<double, IdxRangeQuadratureRTheta> m_int_volume_alloc;
 
     PolarSplineEvaluator<
             Kokkos::DefaultExecutionSpace,
@@ -332,7 +332,7 @@ public:
         GaussLegendre<QDimRMesh, s_n_gauss_legendre_r> gl_coeffs_r(get_const_field(breaks_r));
         GaussLegendre<QDimThetaMesh, s_n_gauss_legendre_theta> gl_coeffs_theta(
                 get_const_field(breaks_theta));
-        m_int_volume = compute_coeffs_on_mapping(
+        m_int_volume_alloc = compute_coeffs_on_mapping(
                 Kokkos::DefaultExecutionSpace(),
                 mapping,
                 gauss_legendre_quadrature_coefficients<
@@ -450,7 +450,7 @@ public:
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
         IdxRangeQuadratureRTheta idxrange_quadrature_singular = m_idxrange_quadrature_singular;
 
-        DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume);
+        DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume_alloc);
 
         Kokkos::Profiling::pushRegion("PolarPoissonFillFemMatrix");
         // Calculate the matrix elements corresponding to the B-splines which cover the singular point
@@ -526,7 +526,7 @@ public:
                 central_radial_bspline_idx_range,
                 m_idxrange_bsplines_theta);
 
-        DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume);
+        DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume_alloc);
         IdxRangeQuadratureRTheta
                 full_quad_idx_range(m_idxrange_quadrature_r, m_idxrange_quadrature_theta);
 
@@ -750,78 +750,100 @@ public:
         Idx<InternalBatchDim> batch_idx = batch_idx_range.front();
 
         // Create b for rhs
-        host_t<DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>>> b_host_alloc(
+        DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> b_alloc(
                 get_idx_range(m_x_init_alloc));
-        host_t<DField<IdxRange<InternalBatchDim, PolarBSplinesRTheta>>> b_host
-                = get_field(b_host_alloc);
+        DField<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> b = get_field(b_alloc);
 
         // Get initial guess
         DField<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> x_init = get_field(m_x_init_alloc);
 
-        // Fill b
-        auto int_volume_host = ddc::create_mirror_view_and_copy(get_field(m_int_volume));
+        DConstField<IdxRangeQuadratureRTheta> int_volume = get_field(m_int_volume_alloc);
+
         IdxRangeBSPolar idx_range_singular
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
-        ddc::for_each(idx_range_singular, [&](IdxBSPolar const idx) {
-            b_host(batch_idx, idx) = ddc::transform_reduce(
-                    m_idxrange_quadrature_singular,
-                    0.0,
-                    ddc::reducer::sum<double>(),
-                    [&](IdxQuadratureRTheta const idx_quad) {
-                        const CoordRTheta coord(ddc::coordinate(idx_quad));
-                        return rhs(coord) * get_polar_bspline_vals(coord, idx)
-                               * int_volume_host(idx_quad);
-                    });
-        });
+
+        // Fill b
+        // Multi-level parallelism is needed as idx_range_singular.size() ~= 3 but b is on GPU
+        Kokkos::parallel_for(
+                Kokkos::TeamPolicy<>(
+                        Kokkos::DefaultExecutionSpace(),
+                        idx_range_singular.size(),
+                        Kokkos::AUTO),
+                KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
+                    IdxBSPolar idx
+                            = idx_range_singular.front() + IdxStepBSPolar(team.league_rank());
+                    double teamSum = 0;
+                    Kokkos::parallel_reduce(
+                            Kokkos::TeamThreadMDRange(
+                                    team,
+                                    m_idxrange_quadrature_singular.template extent<QDimRMesh>(),
+                                    m_idxrange_quadrature_singular
+                                            .template extent<QDimThetaMesh>()),
+                            [&](int r_thread_index, int theta_thread_index, double& sum) {
+                                IdxQuadratureRTheta idx_quad
+                                        = m_idxrange_quadrature_singular.front()
+                                          + IdxStep<QDimRMesh, QDimThetaMesh>(
+                                                  r_thread_index,
+                                                  theta_thread_index);
+                                const CoordRTheta coord(ddc::coordinate(idx_quad));
+                                sum += rhs(coord) * get_polar_bspline_vals(coord, idx)
+                                       * int_volume(idx_quad);
+                            },
+                            teamSum);
+
+                    b(batch_idx, idx) = teamSum;
+                });
 
         IdxRangeQuadratureRTheta
                 full_quad_idx_range(m_idxrange_quadrature_r, m_idxrange_quadrature_theta);
 
-        ddc::for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx) {
-            const IdxBSRTheta idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
-            const IdxBSR idx_r(idx_2d);
-            const IdxBSTheta idx_theta(idx_2d);
+        ddc::parallel_for_each(
+                m_idxrange_fem_non_singular,
+                KOKKOS_LAMBDA(IdxBSPolar const idx) {
+                    const IdxBSRTheta idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
+                    const IdxBSR idx_r(idx_2d);
+                    const IdxBSTheta idx_theta(idx_2d);
 
-            auto& bspl_r = ddc::discrete_space<BSplinesR>();
-            auto& bspl_theta = ddc::discrete_space<BSplinesTheta>();
+                    auto& bspl_r = ddc::discrete_space<BSplinesR>();
+                    auto& bspl_theta = ddc::discrete_space<BSplinesTheta>();
 
-            // Find the cells on which the bspline is non-zero
-            const Idx<KnotsR> start_non_zero_r(
-                    ::max(bspl_r.break_point_domain().front(),
-                          bspl_r.get_first_support_knot(idx_r)));
-            const Idx<KnotsR> end_non_zero_r(
-                    ::min(bspl_r.break_point_domain().back(), bspl_r.get_last_support_knot(idx_r)));
+                    // Find the cells on which the bspline is non-zero
+                    const Idx<KnotsR> start_non_zero_r(
+                            ::max(bspl_r.break_point_domain().front(),
+                                  bspl_r.get_first_support_knot(idx_r)));
+                    const Idx<KnotsR> end_non_zero_r(
+                            ::min(bspl_r.break_point_domain().back(),
+                                  bspl_r.get_last_support_knot(idx_r)));
 
-            const Idx<KnotsTheta> start_non_zero_theta(
-                    bspl_theta.get_first_support_knot(idx_theta));
-            const Idx<KnotsTheta> end_non_zero_theta(bspl_theta.get_last_support_knot(idx_theta));
+                    const Idx<KnotsTheta> start_non_zero_theta(
+                            bspl_theta.get_first_support_knot(idx_theta));
+                    const Idx<KnotsTheta> end_non_zero_theta(
+                            bspl_theta.get_last_support_knot(idx_theta));
 
-            const IdxRangeQuadratureRTheta quad_range = get_quadrature_between_knots(
-                    start_non_zero_r,
-                    end_non_zero_r,
-                    start_non_zero_theta,
-                    end_non_zero_theta);
+                    const IdxRangeQuadratureRTheta quad_range = get_quadrature_between_knots(
+                            start_non_zero_r,
+                            end_non_zero_r,
+                            start_non_zero_theta,
+                            end_non_zero_theta);
 
-            // Calculate the weak integral
-            double element = ddc::transform_reduce(
-                    quad_range,
-                    0.0,
-                    ddc::reducer::sum<double>(),
-                    [&](IdxQuadratureRTheta idx_quad) {
-                        // Manage periodicity
-                        if (!full_quad_idx_range.contains(idx_quad)) {
-                            idx_quad -= full_quad_idx_range.template extent<QDimThetaMesh>();
-                        }
-                        CoordRTheta coord(ddc::coordinate(idx_quad));
-                        return rhs(coord) * get_polar_bspline_vals(coord, idx)
-                               * int_volume_host(idx_quad);
-                    });
-            b_host(batch_idx, idx) = element;
-        });
+                    // Calculate the weak integral
+                    double element = ddc::transform_reduce(
+                            quad_range,
+                            0.0,
+                            ddc::reducer::sum<double>(),
+                            [&](IdxQuadratureRTheta idx_quad) {
+                                // Manage periodicity
+                                if (!full_quad_idx_range.contains(idx_quad)) {
+                                    idx_quad
+                                            -= full_quad_idx_range.template extent<QDimThetaMesh>();
+                                }
+                                CoordRTheta coord(ddc::coordinate(idx_quad));
+                                return rhs(coord) * get_polar_bspline_vals(coord, idx)
+                                       * int_volume(idx_quad);
+                            });
+                    b(batch_idx, idx) = element;
+                });
 
-        DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> b_alloc(get_idx_range(x_init));
-        DField<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> b = get_field(b_alloc);
-        ddc::parallel_deepcopy(b, b_host);
         Kokkos::Profiling::popRegion();
 
         // Solve the matrix equation
@@ -868,10 +890,7 @@ public:
 
         (*this)(rhs, get_field(m_phi_spline_coef));
         CoordFieldMemRTheta coords_eval_alloc(get_idx_range(phi));
-        auto phi_spline_coef_device = ddc::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                get_field(m_phi_spline_coef));
-        m_polar_spline_evaluator(phi, get_const_field(phi_spline_coef_device));
+        m_polar_spline_evaluator(phi, get_const_field(m_phi_spline_coef));
     }
 
     /**
@@ -1017,7 +1036,7 @@ public:
                 start_non_zero_theta,
                 end_non_zero_theta);
 
-        DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume);
+        DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume_alloc);
 
         const IdxBSPolar idx_test_polar(to_polar(idx_test));
         const IdxBSPolar idx_trial_polar(to_polar(idx_trial));
