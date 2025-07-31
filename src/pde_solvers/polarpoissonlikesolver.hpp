@@ -734,7 +734,7 @@ public:
      *      class. It must be an object with an operator() which evaluates a
      *      CoordRTheta and can be called from GPU.
      * @param[inout] spline
-     *      The spline representation of the solution @f$\phi@f$, also used as initial data for the iterative solver.
+     *      The spline representation of the solution @f$\phi@f$.
      */
     template <class RHSFunction>
     void operator()(RHSFunction const& rhs, PolarSplineRTheta spline) const
@@ -881,7 +881,7 @@ public:
      *      class. It must be an object with an operator() which evaluates a
      *      CoordRTheta and can be called from GPU.
      * @param[inout] phi
-     *      The values of the solution @f$\phi@f$ on the given coords_eval, also used as initial data for the iterative solver.
+     *      The values of the solution @f$\phi@f$ on the given coords_eval.
      */
     template <class RHSFunction>
     void operator()(RHSFunction const& rhs, DFieldRTheta phi) const
