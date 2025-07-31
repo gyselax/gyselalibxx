@@ -1072,9 +1072,9 @@ public:
         IdxRangeBSTheta idx_range_theta
                 = ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
                         IdxStepBSTheta(ddc::discrete_space<BSplinesTheta>().nbasis()));
-        if (ddc::select<BSplinesTheta>(idx) < idx_range_theta.front())
+        while (ddc::select<BSplinesTheta>(idx) < idx_range_theta.front())
             idx += idx_range_theta.extents();
-        if (ddc::select<BSplinesTheta>(idx) > idx_range_theta.back())
+        while (ddc::select<BSplinesTheta>(idx) > idx_range_theta.back())
             idx -= idx_range_theta.extents();
         assert(idx_range_theta.contains(ddc::select<BSplinesTheta>(idx)));
         return idx;
