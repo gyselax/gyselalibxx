@@ -8,7 +8,6 @@
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
 #include "math_tools.hpp"
-#include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
 
 /*

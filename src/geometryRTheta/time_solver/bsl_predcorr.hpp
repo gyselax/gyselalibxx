@@ -126,17 +126,8 @@ public:
         IdxRangeRTheta grid(get_idx_range<GridR, GridTheta>(density_host));
         AdvectionFieldFinder advection_field_computer(m_mapping);
 
-        IdxRangeBSR radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
-                IdxStep<BSplinesR> {PolarBSplinesRTheta::continuity + 1}));
-        IdxRangeBSTheta polar_idx_range(ddc::discrete_space<BSplinesTheta>().full_domain());
-
         host_t<PolarSplineMemRTheta> electrostatic_potential_coef(
-                PolarBSplinesRTheta::singular_idx_range<PolarBSplinesRTheta>(),
-                IdxRangeBSRTheta(radial_bsplines, polar_idx_range));
-        ddc::NullExtrapolationRule extrapolation_rule;
-        PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule>
-                polar_spline_evaluator(extrapolation_rule);
-
+                ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
 
         host_t<DFieldMemRTheta> electrical_potential0_host(grid);
         DFieldMemRTheta electrical_potential0(grid);
@@ -159,10 +150,12 @@ public:
                     // --- compute electrostatic potential:
                     host_t<Spline2DMem> density_coef(get_spline_idx_range(m_builder));
                     m_builder(get_field(density_coef), get_const_field(density_host));
-                    m_poisson_solver(charge_density_coord, electrostatic_potential_coef);
+                    m_poisson_solver(charge_density_coord, get_field(electrostatic_potential_coef));
 
                     // --- compute advection field:
-                    advection_field_computer(electrostatic_potential_coef, advection_field_host);
+                    advection_field_computer(
+                            get_field(electrostatic_potential_coef),
+                            advection_field_host);
                 };
 
         std::function<void(host_t<DFieldRTheta>, host_t<DConstVectorFieldRTheta<X, Y>>, double)>

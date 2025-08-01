@@ -166,25 +166,19 @@ public:
         // Grid. ------------------------------------------------------------------------------------------
         IdxRangeRTheta const grid(get_idx_range<GridR, GridTheta>(density_host));
 
-        host_t<FieldMemRTheta<CoordRTheta>> coords(grid);
-        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
-            coords(irtheta) = ddc::coordinate(irtheta);
-        });
-
-        IdxRangeBSR radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
-                IdxStep<BSplinesR> {PolarBSplinesRTheta::continuity + 1}));
-        IdxRangeBSTheta polar_idx_range(ddc::discrete_space<BSplinesTheta>().full_domain());
-
         // --- Electrostatic potential (phi). -------------------------------------------------------------
         DFieldMemRTheta electrical_potential(grid);
         host_t<DFieldMemRTheta> electrical_potential_host(grid);
 
         host_t<PolarSplineMemRTheta> electrostatic_potential_coef(
-                PolarBSplinesRTheta::singular_idx_range<PolarBSplinesRTheta>(),
-                IdxRangeBSRTheta(radial_bsplines, polar_idx_range));
+                ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
 
         ddc::NullExtrapolationRule extrapolation_rule;
-        PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule>
+        PolarSplineEvaluator<
+                Kokkos::DefaultHostExecutionSpace,
+                Kokkos::HostSpace,
+                PolarBSplinesRTheta,
+                ddc::NullExtrapolationRule>
                 polar_spline_evaluator(extrapolation_rule);
 
         // --- For the computation of advection field from the electrostatic potential (phi): -------------
@@ -202,12 +196,11 @@ public:
             m_builder(get_field(density_coef), get_const_field(density_host));
             PoissonLikeRHSFunction const
                     charge_density_coord_1(get_const_field(density_coef), m_evaluator);
-            m_poisson_solver(charge_density_coord_1, electrostatic_potential_coef);
+            m_poisson_solver(charge_density_coord_1, get_field(electrostatic_potential_coef));
 
             polar_spline_evaluator(
                     get_field(electrical_potential_host),
-                    get_const_field(coords),
-                    get_const_field(electrostatic_potential_coef));
+                    get_const_field(get_field(electrostatic_potential_coef)));
 
             ddc::PdiEvent("iteration")
                     .with("iter", iter)
@@ -217,7 +210,7 @@ public:
 
 
             // STEP 2: From phi^n, we compute A^n:
-            advection_field_computer(electrostatic_potential_coef, advection_field);
+            advection_field_computer(get_field(electrostatic_potential_coef), advection_field);
 
 
             // STEP 3: From rho^n and A^n, we compute rho^P: Vlasov equation
@@ -301,10 +294,10 @@ public:
             m_builder(get_field(density_coef), get_const_field(density_predicted_host));
             PoissonLikeRHSFunction const
                     charge_density_coord_4(get_const_field(density_coef), m_evaluator);
-            m_poisson_solver(charge_density_coord_4, electrostatic_potential_coef);
+            m_poisson_solver(charge_density_coord_4, get_field(electrostatic_potential_coef));
 
             // STEP 5: From phi^P, we compute A^P:
-            advection_field_computer(electrostatic_potential_coef, advection_field);
+            advection_field_computer(get_field(electrostatic_potential_coef), advection_field);
 
 
             // STEP 6: From rho^n and A^P, we compute rho^{n+1}: Vlasov equation

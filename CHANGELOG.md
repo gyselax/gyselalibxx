@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Port `PolarSplineEvaluator` methods to GPU.
+- Add methods to `PolarSplineEvaluator` to avoid unnecessary creation of fields of coordinates.
+
 ### Fixed
 
 - Modify `ruche.v100/environment.sh` file to fix tokamaxi simulation segfault issues.
@@ -18,10 +21,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed memory error in `PolarSplineFEMPoissonLikeSolver`.
 - Remove non-parallelisable loop in `PolarSplineFEMPoissonLikeSolver::init_nnz_per_line`.
 - Remove use of `std::cyl_bessel_j` which is not available in libc++.
+- Fix `mi250.hipcc.adastra.spack` toolchain.
+- Fix uninitialised values being used as an initial guess for the result of the matrix equation in `PolarSplineFEMPoissonLikeSolver`.
 
 ### Changed
 
+- Change interface of `EdgeTransformation::search_for_match` to return an `out_of_bounds_idx` instead of a boolean.
+- Change spack setup in CPU installation script (`prepare.sh`) to create and use independent spack installation.
+- Change template parameters of `PolarSplineEvaluator` to add execution and memory space information.
+- Allow `get_idx_range` to be called from a GPU execution space.
+- Uniformise toolchains.
+- Allow batch CSR convergence parameters to be specified in the constructor of `PolarSplineFEMPoissonLikeSolver`.
+- Change the internals of `PolarSplineFEMPoissonLikeSolver` to precalculate fewer values.
+- Change the internals of `PolarSplineFEMPoissonLikeSolver` to avoid calls to DDC's internals.
+
 ### Deprecated
+
+### Removed
+
+- Remove deprecated method `PolarBSplines::integrals`.
+- Remove unhelpful `PolarSpline` classes in favour of `DField<IdxRange<PolarBSplines>>` types.
+- Remove unused broken method `PolarSplineEvaluator::integrate`.
 
 ## [v0.2.0] - 2025-07-03
 
