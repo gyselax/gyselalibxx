@@ -30,15 +30,15 @@ mkdir -p -- "${SPACK_USER_CONFIG_PATH}/external-repositories"
 git clone https://github.com/pdidev/spack "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi" || true
 git -C "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi" checkout 5483cfea7d2d39d654c2962114248f597b3ecf46
 
-git clone https://github.com/tpadioleau/spack-patches "${SPACK_USER_CONFIG_PATH}/external-repositories/v0.23-patches" || true
-git -C "${SPACK_USER_CONFIG_PATH}/external-repositories/v0.23-patches" checkout releases/v0.23-patches
-git -C "${SPACK_USER_CONFIG_PATH}/external-repositories/v0.23-patches" pull
+git clone https://github.com/gyselax/spack "${SPACK_USER_CONFIG_PATH}/external-repositories/gyselalibxx" || true
+git -C "${SPACK_USER_CONFIG_PATH}/external-repositories/gyselalibxx" checkout releases/v0.23
+git -C "${SPACK_USER_CONFIG_PATH}/external-repositories/gyselalibxx" pull
 
 spack env remove --yes-to-all gyselalibxx-spack-environment
 spack env create gyselalibxx-spack-environment "${TOOLCHAIN_ROOT_DIRECTORY}/gyselalibxx-spack-environment.yaml"
 
 spack --env gyselalibxx-spack-environment repo add "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi"
-spack --env gyselalibxx-spack-environment repo add "${SPACK_USER_CONFIG_PATH}/external-repositories/v0.23-patches"
+spack --env gyselalibxx-spack-environment repo add "${SPACK_USER_CONFIG_PATH}/external-repositories/gyselalibxx"
 
 echo "Preparing the Spack environment..."
 
