@@ -507,7 +507,10 @@ struct CollectAllGridsOnDim
                     Edge<StartPatch, Grid1D, BACK>,
                     InterfaceTypeSeq,
                     FrontInsert,
-                    BackwardTypeSeq>::type>;
+                    // BackwardTypeSeq>::type>;
+                    ddc::type_seq_remove_t<
+                            ddc::detail::TypeSeq<ddc::type_seq_element_t<0, BackwardTypeSeq>>,
+                            BackwardTypeSeq>>::type>;
 };
 
 /**

@@ -4,7 +4,6 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
-
 /**
  *  @brief Get interpolation points from the break points by placing 
  * the interpolation points on the break points and adding one on the
@@ -35,6 +34,20 @@ std::vector<CoordType> get_interpolation_points_add_one_on_right(
     std::vector<CoordType> interpolation_points(break_points);
     interpolation_points.insert(interpolation_points.end() - 1, additional_point);
     return interpolation_points;
+}
+
+/**
+ *  @brief Get interpolation points from the break points by placing 
+ * the interpolation points on the break points and adding one on the
+ * right boundary cell at 1/3 of the cell and another on the left 
+ * boundary cell at 2/3 of the cell. 
+ */
+template <class CoordType>
+std::vector<CoordType> get_interpolation_points_add_one_on_left_and_one_on_right(
+        std::vector<CoordType> const& break_points)
+{
+    return get_interpolation_points_add_one_on_left(
+            get_interpolation_points_add_one_on_right(break_points));
 }
 
 /**
