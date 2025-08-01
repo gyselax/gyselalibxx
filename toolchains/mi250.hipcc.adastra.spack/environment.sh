@@ -34,12 +34,12 @@ eval -- "$(
         --env gyselalibxx-spack-environment \
         load --sh \
         cmake \
+        ginkgo \
+        googletest \
         kokkos \
         kokkos-fft \
         kokkos-kernels \
         kokkos-tools \
-        ginkgo \
-        googletest \
         ninja \
         paraconf \
         pdi \
