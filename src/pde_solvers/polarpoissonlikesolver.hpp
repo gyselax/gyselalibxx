@@ -762,7 +762,7 @@ public:
         // Get initial guess
         DField<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> x_init = get_field(m_x_init_alloc);
 
-        DConstField<IdxRangeQuadratureRTheta> int_volume = get_field(m_int_volume_alloc);
+        DConstField<IdxRangeQuadratureRTheta> int_volume = get_const_field(m_int_volume_alloc);
 
         IdxRangeBSPolar idx_range_singular
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
