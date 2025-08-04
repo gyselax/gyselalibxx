@@ -500,6 +500,12 @@ struct CollectAllGridsOnDim
             InterfaceTypeSeq,
             BackInsert>::type;
     // Work forward from back (end) of grid inserting each new grid at the end of the sequence
+    // In the periodic case this object will contain duplicate grids with those found in
+    // BackwardTypeSeq. In the non-periodic case only Grid1D will be found in both.
+    // The template argument FoundGrids of CollectGridsAlongDim cannot be used to avoid this
+    // duplication as it will cause the loop to stop early when it detects Grid1D for the
+    // ForwardTypeSeq. Workarounds using std::conditional_t to handle OutsideEdges are not
+    // possible as the compiler evaluates all expressions in the conditional.
     using ForwardTypeSeq = typename CollectGridsAlongDim<
             Edge<StartPatch, Grid1D, BACK>,
             InterfaceTypeSeq,
