@@ -140,7 +140,7 @@ public:
         host_t<DFieldRTheta> electrical_potential_host = get_field(electrical_potential_alloc_host);
         host_t<PolarSplineRTheta> electrostatic_potential_coef_host
                 = get_field(electrostatic_potential_coef_alloc_host);
-		DFieldRTheta density = get_field(density_alloc);
+        DFieldRTheta density = get_field(density_alloc);
 
         // Operators
         AdvectionFieldFinder advection_field_computer(m_mapping);
