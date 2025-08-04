@@ -380,8 +380,6 @@ TEST(MultipatchConnectivityDetailsTest, CollectGridsOnDim)
 
     using interface_collection =
             typename Connectivity::get_all_interfaces_along_direction_t<GridX<1>>;
-    using all_patches = typename Connectivity::all_patches;
-
     using expected_interfaces_along_gridx
             = ddc::detail::TypeSeq<WestInterface1, Interface_1_2, Interface_2_3, EastInterface3>;
 
