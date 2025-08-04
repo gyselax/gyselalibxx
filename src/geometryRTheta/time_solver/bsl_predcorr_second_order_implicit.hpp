@@ -211,14 +211,14 @@ public:
         AdvectionFieldFinder advection_field_computer(m_logical_to_physical);
 
         PoissonLikeRHSFunction const
-                charge_density_coord(get_const_field(density_coef_host), m_evaluator);
+                charge_density(get_const_field(density_coef_host), m_evaluator);
 
         start_time = std::chrono::system_clock::now();
         for (int iter(0); iter < steps; ++iter) {
             // STEP 1: From rho^n, we compute phi^n: Poisson equation
             m_builder(density_coef_host, get_const_field(density_host));
             m_poisson_solver(
-                    charge_density_coord,
+                    charge_density,
                     get_field(electrostatic_potential_coef_alloc_host));
 
             polar_spline_evaluator(
@@ -303,7 +303,7 @@ public:
             ddc::parallel_deepcopy(density_predicted_host, density_predicted);
             m_builder(density_coef_host, get_const_field(density_predicted_host));
             m_poisson_solver(
-                    charge_density_coord,
+                    charge_density,
                     get_field(electrostatic_potential_coef_alloc_host));
 
             // STEP 5: From phi^P, we compute A^P:
@@ -359,7 +359,7 @@ public:
 
         // STEP 1: From rho^n, we compute phi^n: Poisson equation
         m_builder(density_coef_host, get_const_field(density_host));
-        m_poisson_solver(charge_density_coord, get_field(electrical_potential_alloc));
+        m_poisson_solver(charge_density, get_field(electrical_potential_alloc));
         ddc::parallel_deepcopy(
                 get_field(electrical_potential_alloc_host),
                 get_const_field(electrical_potential_alloc));
