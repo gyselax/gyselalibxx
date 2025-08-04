@@ -194,6 +194,8 @@ public:
         host_t<DVectorFieldRTheta<X, Y>> advection_field_k_host(advection_field_k_alloc_host);
         host_t<DVectorFieldRTheta<X, Y>> advection_field_k_tot_host(
                 advection_field_k_tot_alloc_host);
+        host_t<VectorSplineCoeffs2D<X, Y>> advection_field_coefs_k_host(
+                advection_field_coefs_k_alloc_host);
         DFieldRTheta density_predicted = get_field(density_predicted_alloc);
         host_t<DFieldRTheta> density_predicted_host = get_field(density_predicted_alloc_host);
         DFieldRTheta density = get_field(density_alloc);
@@ -239,10 +241,10 @@ public:
 
             // STEP 3: From rho^n and A^n, we compute rho^P: Vlasov equation
             m_builder(
-                    ddcHelper::get<X>(advection_field_coefs_k_alloc_host),
+                    ddcHelper::get<X>(advection_field_coefs_k_host),
                     ddcHelper::get<X>(get_const_field(advection_field_host)));
             m_builder(
-                    ddcHelper::get<Y>(advection_field_coefs_k_alloc_host),
+                    ddcHelper::get<Y>(advection_field_coefs_k_host),
                     ddcHelper::get<Y>(get_const_field(advection_field_host)));
 
             // initialisation:
@@ -253,7 +255,7 @@ public:
             const double tau = 1e-6;
             implicit_loop(
                     advection_field_host,
-                    get_const_field(advection_field_coefs_k_alloc_host),
+                    get_const_field(advection_field_coefs_k_host),
                     get_field(feet_coords_alloc_host),
                     dt / 4.,
                     tau);
@@ -262,11 +264,11 @@ public:
             m_evaluator(
                     ddcHelper::get<X>(advection_field_k_host),
                     get_const_field(feet_coords_alloc_host),
-                    ddcHelper::get<X>(get_const_field(advection_field_coefs_k_alloc_host)));
+                    ddcHelper::get<X>(get_const_field(advection_field_coefs_k_host)));
             m_evaluator(
                     ddcHelper::get<Y>(advection_field_k_host),
                     get_const_field(feet_coords_alloc_host),
-                    ddcHelper::get<Y>(get_const_field(advection_field_coefs_k_alloc_host)));
+                    ddcHelper::get<Y>(get_const_field(advection_field_coefs_k_host)));
 
             // Compute the new advection field (E^n(X^n) + E^n(X^P)) /2:
             ddc::for_each(grid, [&](IdxRTheta const irtheta) {
@@ -309,10 +311,10 @@ public:
 
             // STEP 6: From rho^n and A^P, we compute rho^{n+1}: Vlasov equation
             m_builder(
-                    ddcHelper::get<X>(advection_field_coefs_k_alloc_host),
+                    ddcHelper::get<X>(advection_field_coefs_k_host),
                     ddcHelper::get<X>(get_const_field(advection_field_host)));
             m_builder(
-                    ddcHelper::get<Y>(advection_field_coefs_k_alloc_host),
+                    ddcHelper::get<Y>(advection_field_coefs_k_host),
                     ddcHelper::get<Y>(get_const_field(advection_field_host)));
 
 
@@ -323,7 +325,7 @@ public:
 
             implicit_loop(
                     advection_field_host,
-                    get_const_field(advection_field_coefs_k_alloc_host),
+                    get_const_field(advection_field_coefs_k_host),
                     get_field(feet_coords_alloc_host),
                     dt / 2.,
                     tau);
@@ -332,11 +334,11 @@ public:
             m_evaluator(
                     ddcHelper::get<X>(advection_field_k_host),
                     get_const_field(feet_coords_alloc_host),
-                    ddcHelper::get<X>(get_const_field(advection_field_coefs_k_alloc_host)));
+                    ddcHelper::get<X>(get_const_field(advection_field_coefs_k_host)));
             m_evaluator(
                     ddcHelper::get<Y>(advection_field_k_host),
                     get_const_field(feet_coords_alloc_host),
-                    ddcHelper::get<Y>(get_const_field(advection_field_coefs_k_alloc_host)));
+                    ddcHelper::get<Y>(get_const_field(advection_field_coefs_k_host)));
 
             // Computed advection field (A^P(X^n) + A^P(X^P)) /2:
             ddc::for_each(grid, [&](IdxRTheta const irtheta) {
