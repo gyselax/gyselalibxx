@@ -123,38 +123,49 @@ public:
 
 
         // Grid. ------------------------------------------------------------------------------------------
-        IdxRangeRTheta grid(get_idx_range<GridR, GridTheta>(density_host));
-        AdvectionFieldFinder advection_field_computer(m_mapping);
+        IdxRangeRTheta grid(get_idx_range(density_host));
 
-        host_t<PolarSplineMemRTheta> electrostatic_potential_coef(
+        // Data
+        DFieldMemRTheta electrical_potential_alloc(grid);
+        host_t<Spline2DMem> density_coef_host(get_spline_idx_range(m_builder));
+        host_t<PolarSplineMemRTheta> electrostatic_potential_coef_alloc_host(
                 ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
 
-        host_t<DFieldMemRTheta> electrical_potential0_host(grid);
-        DFieldMemRTheta electrical_potential0(grid);
-        host_t<Spline2DMem> density_coef(get_spline_idx_range(m_builder));
-        m_builder(get_field(density_coef), get_const_field(density_host));
+        auto electrical_potential_alloc_host
+                = ddc::create_mirror_view(get_field(electrical_potential_alloc));
+
+        // Fields
+        DFieldRTheta electrical_potential = get_field(electrical_potential_alloc);
+        host_t<DFieldRTheta> electrical_potential_host = get_field(electrical_potential_alloc_host);
+        host_t<PolarSplineRTheta> electrostatic_potential_coef_host
+                = get_field(electrostatic_potential_coef_alloc_host);
+
+        // Operators
+        AdvectionFieldFinder advection_field_computer(m_mapping);
         PoissonLikeRHSFunction const
-                charge_density_coord(get_const_field(density_coef), m_spline_evaluator);
-        m_poisson_solver(charge_density_coord, get_field(electrical_potential0));
-        ddc::parallel_deepcopy(electrical_potential0, electrical_potential0_host);
+                charge_density_coord(get_const_field(density_coef_host), m_spline_evaluator);
+
+        // Setup
+        m_builder(get_field(density_coef_host), get_const_field(density_host));
+        m_poisson_solver(charge_density_coord, electrical_potential);
+        ddc::parallel_deepcopy(electrical_potential_host, get_const_field(electrical_potential));
         ddc::PdiEvent("iteration")
                 .with("iter", 0)
                 .with("time", 0)
                 .with("density", density_host)
-                .with("electrical_potential", electrical_potential0_host);
+                .with("electrical_potential", electrical_potential_host);
 
-
+        // RK2 methods
         std::function<void(host_t<DVectorFieldRTheta<X, Y>>, host_t<DConstFieldRTheta>)>
                 define_advection_field = [&](host_t<DVectorFieldRTheta<X, Y>> advection_field_host,
                                              host_t<DConstFieldRTheta> density_host) {
                     // --- compute electrostatic potential:
-                    host_t<Spline2DMem> density_coef(get_spline_idx_range(m_builder));
-                    m_builder(get_field(density_coef), get_const_field(density_host));
-                    m_poisson_solver(charge_density_coord, get_field(electrostatic_potential_coef));
+                    m_builder(get_field(density_coef_host), get_const_field(density_host));
+                    m_poisson_solver(charge_density_coord, electrostatic_potential_coef_host);
 
                     // --- compute advection field:
                     advection_field_computer(
-                            get_field(electrostatic_potential_coef),
+                            electrostatic_potential_coef_host,
                             advection_field_host);
                 };
 
@@ -176,8 +187,8 @@ public:
             host_t<DVectorFieldMemRTheta<X, Y>>,
             Kokkos::DefaultHostExecutionSpace>
                 time_stepper(grid);
-        DFieldMemRTheta electrical_potential(grid);
-        host_t<DFieldMemRTheta> electrical_potential_host(grid);
+
+        // Iteration loop
         start_time = std::chrono::system_clock::now();
         for (int iter(0); iter < steps; ++iter) {
             time_stepper
@@ -188,9 +199,11 @@ public:
                             advect_density);
 
 
-            m_builder(get_field(density_coef), get_const_field(density_host));
-            m_poisson_solver(charge_density_coord, get_field(electrical_potential));
-            ddc::parallel_deepcopy(electrical_potential_host, electrical_potential);
+            m_builder(get_field(density_coef_host), get_const_field(density_host));
+            m_poisson_solver(charge_density_coord, electrical_potential);
+            ddc::parallel_deepcopy(
+                    electrical_potential_host,
+                    get_const_field(electrical_potential));
             ddc::PdiEvent("iteration")
                     .with("iter", iter + 1)
                     .with("time", iter * dt)
