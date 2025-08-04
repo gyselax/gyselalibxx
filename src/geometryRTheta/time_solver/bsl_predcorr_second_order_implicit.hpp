@@ -197,6 +197,7 @@ public:
         DFieldRTheta density_predicted = get_field(density_predicted_alloc);
         host_t<DFieldRTheta> density_predicted_host = get_field(density_predicted_alloc_host);
         DFieldRTheta density = get_field(density_alloc);
+        host_t<Spline2D> density_coef_host(density_coef_alloc_host);
 
         // Operators
         ddc::NullExtrapolationRule extrapolation_rule;
@@ -210,12 +211,12 @@ public:
         AdvectionFieldFinder advection_field_computer(m_logical_to_physical);
 
         PoissonLikeRHSFunction const
-                charge_density_coord(get_const_field(density_coef_alloc_host), m_evaluator);
+                charge_density_coord(get_const_field(density_coef_host), m_evaluator);
 
         start_time = std::chrono::system_clock::now();
         for (int iter(0); iter < steps; ++iter) {
             // STEP 1: From rho^n, we compute phi^n: Poisson equation
-            m_builder(get_field(density_coef_alloc_host), get_const_field(density_host));
+            m_builder(density_coef_host, get_const_field(density_host));
             m_poisson_solver(
                     charge_density_coord,
                     get_field(electrostatic_potential_coef_alloc_host));
@@ -300,7 +301,7 @@ public:
 
             // STEP 4: From rho^P, we compute phi^P: Poisson equation
             ddc::parallel_deepcopy(density_predicted_host, density_predicted);
-            m_builder(get_field(density_coef_alloc_host), get_const_field(density_predicted_host));
+            m_builder(density_coef_host, get_const_field(density_predicted_host));
             m_poisson_solver(
                     charge_density_coord,
                     get_field(electrostatic_potential_coef_alloc_host));
@@ -357,7 +358,7 @@ public:
         }
 
         // STEP 1: From rho^n, we compute phi^n: Poisson equation
-        m_builder(get_field(density_coef_alloc_host), get_const_field(density_host));
+        m_builder(density_coef_host, get_const_field(density_host));
         m_poisson_solver(charge_density_coord, get_field(electrical_potential_alloc));
         ddc::parallel_deepcopy(
                 get_field(electrical_potential_alloc_host),
