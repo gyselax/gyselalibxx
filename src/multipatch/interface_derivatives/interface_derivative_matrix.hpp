@@ -32,6 +32,15 @@
  */
 
 
+template <
+        class Connectivity,
+        class Grid1D,
+        class PatchSeq,
+        ddc::BoundCond LowerBound,
+        ddc::BoundCond UpperBound,
+        class SingleInterfaceDerivativesCalculatorCollectionType>
+class InterfaceDerivativeMatrix;
+
 /**
   * @brief Class to compute the interface derivatives along a given direction 
   * on all the interfaces.  
@@ -48,22 +57,26 @@
   * 
   * @tparam Connectivity A MultipatchConnectivity class describing all the patch connections.
   * @tparam Grid1D A given direction.
-  * @tparam ValuesOnPatch Type of the const Field  where the function values are defined. 
-  *         It is templated on the patch. 
+  * @tparam Patches List of patches containing all the involved patches in the given direction. 
   * @tparam LowerBound Lower/left boundary condition of the first local spline along the given direction. 
   * @tparam UpperBound Upper/right boundary condition of the last local spline along the given direction. 
-  * @tparam ExecSpace Execution space.
-  * @tparam Patches List of patches containing all the involved patches in the given direction. 
+  * @tparam SingleInterfaceDerivativesCalculatorCollectionType A SingleInterfaceDerivativesCalculatorCollection
+  * that stores the SingleInterfaceDerivativesCalculator needed to compute the interface derivatives. 
   */
 template <
         class Connectivity,
         class Grid1D,
-        class SingleInterfaceDerivativesCalculatorCollectionType,
-        ddc::BoundCond LowerBound = ddc::BoundCond::HERMITE,
-        ddc::BoundCond UpperBound = ddc::BoundCond::HERMITE,
-        class ExecSpace = Kokkos::DefaultHostExecutionSpace,
-        class... Patches>
-class InterfaceDerivativeMatrix
+        class... Patches,
+        ddc::BoundCond LowerBound,
+        ddc::BoundCond UpperBound,
+        class SingleInterfaceDerivativesCalculatorCollectionType>
+class InterfaceDerivativeMatrix<
+        Connectivity,
+        Grid1D,
+        ddc::detail::TypeSeq<Patches...>,
+        LowerBound,
+        UpperBound,
+        SingleInterfaceDerivativesCalculatorCollectionType>
 {
     // All the interfaces given as input to the MultipatchConnectivity class.
     // We expect the parameters defined on these interfaces.
@@ -85,7 +98,7 @@ class InterfaceDerivativeMatrix
 
     // TODO: remove Interfaces with OutsideEdge
     // Remove all the interfaces with an OutsideEdge.
-    // Rely on the get_all_interfaces_along_direction_t that orders the interfaces.
+    // Rely on the fact that get_all_interfaces_along_direction_t orders the interfaces.
     using outer_interface_collection = std::conditional_t<
             is_periodic,
             ddc::detail::TypeSeq<>,
@@ -136,56 +149,40 @@ class InterfaceDerivativeMatrix
             "in the given Grid1D direction.");
 
     // Struct to define the type of derivatives and cross-derivatives for each patch in the direction.
-    template <typename Patch>
-    struct GetDerivsOnPatch
-    {
-        static constexpr bool is_grid_on_dim1 = ddc::in_tags_v<typename Patch::Grid1, Grid1DSeq>;
-        using GridPerp
-                = std::conditional_t<is_grid_on_dim1, typename Patch::Grid1, typename Patch::Grid2>;
-        using GridPar
-                = std::conditional_t<is_grid_on_dim1, typename Patch::Grid2, typename Patch::Grid1>;
-        using DerivPerp = ddc::Deriv<typename GridPerp::continuous_dimension_type>;
-        using DerivPar = ddc::Deriv<typename GridPar::continuous_dimension_type>;
+    // template <typename Patch>
+    // struct GetDerivsOnPatch
+    // {
+    //     static constexpr bool is_grid_on_dim1 = ddc::in_tags_v<typename Patch::Grid1, Grid1DSeq>;
+    //     using GridPerp
+    //             = std::conditional_t<is_grid_on_dim1, typename Patch::Grid1, typename Patch::Grid2>;
+    //     using GridPar
+    //             = std::conditional_t<is_grid_on_dim1, typename Patch::Grid2, typename Patch::Grid1>;
+    //     using DerivPerp = ddc::Deriv<typename GridPerp::continuous_dimension_type>;
+    //     using DerivPar = ddc::Deriv<typename GridPar::continuous_dimension_type>;
 
-        using IdxRangeDerivPerp = std::conditional_t<
-                is_grid_on_dim1,
-                IdxRange<DerivPerp, GridPar>,
-                IdxRange<GridPar, DerivPerp>>;
-        using IdxRangeDerivPar = std::conditional_t<
-                is_grid_on_dim1,
-                IdxRange<GridPerp, DerivPar>,
-                IdxRange<DerivPar, GridPerp>>;
+    //     using IdxRangeDerivPerp = std::conditional_t<
+    //             is_grid_on_dim1,
+    //             IdxRange<DerivPerp, GridPar>,
+    //             IdxRange<GridPar, DerivPerp>>;
+    //     using IdxRangeDerivPar = std::conditional_t<
+    //             is_grid_on_dim1,
+    //             IdxRange<GridPerp, DerivPar>,
+    //             IdxRange<DerivPar, GridPerp>>;
 
-        using type_perp = DField<IdxRangeDerivPerp, typename ExecSpace::memory_space>;
-        using type_par = DConstField<IdxRangeDerivPar, typename ExecSpace::memory_space>;
-    };
+    //     using type_perp = DField<IdxRangeDerivPerp, typename ExecSpace::memory_space>;
+    //     using type_par = DConstField<IdxRangeDerivPar, typename ExecSpace::memory_space>;
+    // };
 
-    // Field for the first derivatives along the perpendicular direction of the interface.
-    template <typename Patch>
-    using DerivsPerpOnPatch = typename GetDerivsOnPatch<Patch>::type_perp;
+    // // Field for the first derivatives along the perpendicular direction of the interface.
+    // template <typename Patch>
+    // using DerivsPerpOnPatch = typename GetDerivsOnPatch<Patch>::type_perp;
 
-    // template <class Patch>
-    // using DerivFieldOnPatch = DerivField<
-    //         double,
-    //         IdxRange<
-    //                 ddc::Deriv<typename Patch::Dim1>,
-    //                 typename Patch::Grid1,
-    //                 ddc::Deriv<typename Patch::Dim2>,
-    //                 typename Patch::Grid2>>;
-
-    // template <class Patch>
-    // using DerivFieldOnPatch_host = host_t<DerivFieldOnPatch<Patch>>;
-
-
-    // template <class Patch>
-    // using IdxRange1SliceOnPatch = IdxRangeSlice<typename Patch::Grid1>;
-
-    // template <class Patch>
-    // using IdxRange2SliceOnPatch = IdxRangeSlice<typename Patch::Grid2>;
-
+    // Tag to identify we are computing the first derivatives.
     struct eval_deriv
     {
     };
+
+    // Tag to identify we are computing the cross-derivatives.
     struct eval_cross_deriv
     {
     };
@@ -193,10 +190,10 @@ class InterfaceDerivativeMatrix
 
     // HELPFUL ALIASES ===========================================================================
     // Get the type of the interface given to define the Connectivity class.
-    template <typename CurrentInterface>
-    using get_equivalent_interface_t = find_associated_interface_t<
-            typename CurrentInterface::Edge1,
-            all_interface_collection>;
+    // template <typename CurrentInterface>
+    // using get_equivalent_interface_t = find_associated_interface_t<
+    //         typename CurrentInterface::Edge1,
+    //         all_interface_collection>;
 
     // Get the type of the interface sorted along the Grid1D direction.
     // template <typename CurrentInterface>
@@ -204,69 +201,69 @@ class InterfaceDerivativeMatrix
     //         = find_associated_interface_t<typename CurrentInterface::Edge1, interface_collection>;
 
     // Get a tuple of SingleInterfaceDerivativesCalculator from an Interface collection.
-    template <bool is_periodic, typename InterfaceCollection>
-    struct get_tuple_deriv_calculator;
+    // template <bool is_periodic, typename InterfaceCollection>
+    // struct get_tuple_deriv_calculator;
 
-    template <class... Interfaces>
-    struct get_tuple_deriv_calculator<true, ddc::detail::TypeSeq<Interfaces...>>
-    {
-        using InterfaceCollection = ddc::detail::TypeSeq<Interfaces...>;
-        using type = std::tuple<SingleInterfaceDerivativesCalculator<
-                get_equivalent_interface_t<Interfaces>> const&...>;
-    };
+    // template <class... Interfaces>
+    // struct get_tuple_deriv_calculator<true, ddc::detail::TypeSeq<Interfaces...>>
+    // {
+    //     using InterfaceCollection = ddc::detail::TypeSeq<Interfaces...>;
+    //     using type = std::tuple<SingleInterfaceDerivativesCalculator<
+    //             get_equivalent_interface_t<Interfaces>> const&...>;
+    // };
 
-    template <class... Interfaces>
-    struct get_tuple_deriv_calculator<false, ddc::detail::TypeSeq<Interfaces...>>
-    {
-        using InterfaceCollection = ddc::detail::TypeSeq<Interfaces...>;
+    // template <class... Interfaces>
+    // struct get_tuple_deriv_calculator<false, ddc::detail::TypeSeq<Interfaces...>>
+    // {
+    //     using InterfaceCollection = ddc::detail::TypeSeq<Interfaces...>;
 
-        using EquivalentFirstInterface = get_equivalent_interface_t<FirstInterface>;
-        using EquivalentLastInterface = get_equivalent_interface_t<LastInterface>;
+    //     using EquivalentFirstInterface = get_equivalent_interface_t<FirstInterface>;
+    //     using EquivalentLastInterface = get_equivalent_interface_t<LastInterface>;
 
-        static constexpr bool is_first_interface_same_orientation
-                = std::is_same_v<FirstInterface, EquivalentFirstInterface>;
-        static constexpr bool is_last_interface_same_orientation
-                = std::is_same_v<LastInterface, EquivalentLastInterface>;
+    //     static constexpr bool is_first_interface_same_orientation
+    //             = std::is_same_v<FirstInterface, EquivalentFirstInterface>;
+    //     static constexpr bool is_last_interface_same_orientation
+    //             = std::is_same_v<LastInterface, EquivalentLastInterface>;
 
-        using inner_inner_interface_collection = ddc::type_seq_remove_t<
-                InterfaceCollection,
-                ddc::detail::TypeSeq<FirstInterface, LastInterface>>;
+    //     using inner_inner_interface_collection = ddc::type_seq_remove_t<
+    //             InterfaceCollection,
+    //             ddc::detail::TypeSeq<FirstInterface, LastInterface>>;
 
 
-        using inner_deriv_calculators =
-                typename get_tuple_deriv_calculator<true, inner_inner_interface_collection>::type;
+    //     using inner_deriv_calculators =
+    //             typename get_tuple_deriv_calculator<true, inner_inner_interface_collection>::type;
 
-        using first_deriv_calculator = std::conditional_t<
-                is_first_interface_same_orientation,
-                std::tuple<SingleInterfaceDerivativesCalculator<
-                        FirstInterface,
-                        LowerBound,
-                        ddc::BoundCond::HERMITE> const&>,
-                std::tuple<SingleInterfaceDerivativesCalculator<
-                        EquivalentFirstInterface,
-                        ddc::BoundCond::HERMITE,
-                        LowerBound> const&>>;
+    //     using first_deriv_calculator = std::conditional_t<
+    //             is_first_interface_same_orientation,
+    //             std::tuple<SingleInterfaceDerivativesCalculator<
+    //                     FirstInterface,
+    //                     LowerBound,
+    //                     ddc::BoundCond::HERMITE> const&>,
+    //             std::tuple<SingleInterfaceDerivativesCalculator<
+    //                     EquivalentFirstInterface,
+    //                     ddc::BoundCond::HERMITE,
+    //                     LowerBound> const&>>;
 
-        using last_deriv_calculator = std::conditional_t<
-                is_last_interface_same_orientation,
-                std::tuple<SingleInterfaceDerivativesCalculator<
-                        LastInterface,
-                        ddc::BoundCond::HERMITE,
-                        UpperBound> const&>,
-                std::tuple<SingleInterfaceDerivativesCalculator<
-                        EquivalentLastInterface,
-                        UpperBound,
-                        ddc::BoundCond::HERMITE> const&>>;
+    //     using last_deriv_calculator = std::conditional_t<
+    //             is_last_interface_same_orientation,
+    //             std::tuple<SingleInterfaceDerivativesCalculator<
+    //                     LastInterface,
+    //                     ddc::BoundCond::HERMITE,
+    //                     UpperBound> const&>,
+    //             std::tuple<SingleInterfaceDerivativesCalculator<
+    //                     EquivalentLastInterface,
+    //                     UpperBound,
+    //                     ddc::BoundCond::HERMITE> const&>>;
 
-        using type = decltype(std::tuple_cat(
-                std::declval<first_deriv_calculator>(),
-                std::declval<inner_deriv_calculators>(),
-                std::declval<last_deriv_calculator>()));
-    };
+    //     using type = decltype(std::tuple_cat(
+    //             std::declval<first_deriv_calculator>(),
+    //             std::declval<inner_deriv_calculators>(),
+    //             std::declval<last_deriv_calculator>()));
+    // };
 
-    template <typename InterfaceTypeSeq>
-    using get_tuple_deriv_calculator_t =
-            typename get_tuple_deriv_calculator<is_periodic, InterfaceTypeSeq>::type;
+    // template <typename InterfaceTypeSeq>
+    // using get_tuple_deriv_calculator_t =
+    //         typename get_tuple_deriv_calculator<is_periodic, InterfaceTypeSeq>::type;
 
     // ===========================================================================================
 
@@ -291,8 +288,8 @@ private:
     MultipatchType<IdxRangeOnPatch, Patches...> const& m_idx_ranges;
 
     // TODO: WARNING, BE ABLE TO DEAL WITH DIFFERENT ORIENTATION/ORDER INTERFACES.
-    using SingleInterfaceDerivativesCalculatorTuple
-            = get_tuple_deriv_calculator_t<inner_interface_collection>;
+    // using SingleInterfaceDerivativesCalculatorTuple
+    //         = get_tuple_deriv_calculator_t<inner_interface_collection>;
     // SingleInterfaceDerivativesCalculatorTuple const& m_derivatives_calculators;
 
     SingleInterfaceDerivativesCalculatorCollectionType const& m_derivatives_calculators;
@@ -316,7 +313,7 @@ public:
      */
     InterfaceDerivativeMatrix(
             MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-            SingleInterfaceDerivativesCalculatorCollectionType const derivatives_calculators,
+            SingleInterfaceDerivativesCalculatorCollectionType const& derivatives_calculators,
             double const& reduction_factor = 1e-6)
         : m_idx_ranges(idx_ranges)
         , m_derivatives_calculators(derivatives_calculators)
@@ -1154,31 +1151,31 @@ private:
     }
 
 
-    /// @brief Get the first derivative field on Patch1 and Patch2 for the Ith interface.
-    template <
-            std::size_t I,
-            class Patch1 = typename ddc::type_seq_element_t<I, inner_interface_collection>::Edge1::
-                    associated_patch,
-            class Patch2 = typename ddc::type_seq_element_t<I, inner_interface_collection>::Edge2::
-                    associated_patch>
-    std::tuple<DerivsPerpOnPatch<Patch1>, DerivsPerpOnPatch<Patch2>> get_interface_derivatives(
-            MultipatchField<DerivsPerpOnPatch, Patches...> const& derivs_min,
-            MultipatchField<DerivsPerpOnPatch, Patches...> const& derivs_max,
-            Extremity const extremity)
-    {
-        using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
+    // /// @brief Get the first derivative field on Patch1 and Patch2 for the Ith interface.
+    // template <
+    //         std::size_t I,
+    //         class Patch1 = typename ddc::type_seq_element_t<I, inner_interface_collection>::Edge1::
+    //                 associated_patch,
+    //         class Patch2 = typename ddc::type_seq_element_t<I, inner_interface_collection>::Edge2::
+    //                 associated_patch>
+    // std::tuple<DerivsPerpOnPatch<Patch1>, DerivsPerpOnPatch<Patch2>> get_interface_derivatives(
+    //         MultipatchField<DerivsPerpOnPatch, Patches...> const& derivs_min,
+    //         MultipatchField<DerivsPerpOnPatch, Patches...> const& derivs_max,
+    //         Extremity const extremity)
+    // {
+    //     using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
 
-        constexpr Extremity extermity_1 = InterfaceI::Edge1::extremity;
-        constexpr Extremity extermity_2 = InterfaceI::Edge2::extremity;
+    //     constexpr Extremity extermity_1 = InterfaceI::Edge1::extremity;
+    //     constexpr Extremity extermity_2 = InterfaceI::Edge2::extremity;
 
-        DerivsPerpOnPatch<Patch1> deriv_1 = (extermity_1 == extremity)
-                                                    ? derivs_min.template get<Patch1>()
-                                                    : derivs_max.template get<Patch1>();
-        DerivsPerpOnPatch<Patch2> deriv_2 = (extermity_2 == extremity)
-                                                    ? derivs_min.template get<Patch2>()
-                                                    : derivs_max.template get<Patch2>();
-        return std::make_tuple(deriv_1, deriv_2);
-    }
+    //     DerivsPerpOnPatch<Patch1> deriv_1 = (extermity_1 == extremity)
+    //                                                 ? derivs_min.template get<Patch1>()
+    //                                                 : derivs_max.template get<Patch1>();
+    //     DerivsPerpOnPatch<Patch2> deriv_2 = (extermity_2 == extremity)
+    //                                                 ? derivs_min.template get<Patch2>()
+    //                                                 : derivs_max.template get<Patch2>();
+    //     return std::make_tuple(deriv_1, deriv_2);
+    // }
 
 
     /// @brief @brief Get the Patch1 and Patch2 derivative indices on the grid parallel to the interface.

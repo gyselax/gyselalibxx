@@ -74,10 +74,10 @@ class SingleInterfaceDerivativesCalculator
 
     static_assert(
             (Bound1 == ddc::BoundCond::HERMITE) || (Bound1 == ddc::BoundCond::GREVILLE),
-            "If the boundary conditionon patch 1 is periodic, please use the default parameter.");
+            "If the boundary condition on patch 1 is periodic, please use the default parameter.");
     static_assert(
             (Bound2 == ddc::BoundCond::HERMITE) || (Bound2 == ddc::BoundCond::GREVILLE),
-            "If the boundary conditionon patch 2 is periodic, please use the default parameter.");
+            "If the boundary condition on patch 2 is periodic, please use the default parameter.");
 
 
     using EdgePerpGrid1 = typename InterfaceType::Edge1::perpendicular_grid;

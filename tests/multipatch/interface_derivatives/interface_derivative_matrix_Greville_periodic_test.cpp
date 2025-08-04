@@ -586,37 +586,28 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
     InterfaceDerivativeMatrix<
             Connectivity,
             GridX<1>,
-            decltype(deriv_calculators_collect_123),
+            ddc::detail::TypeSeq<Patch1, Patch2, Patch3>,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
-            Kokkos::DefaultHostExecutionSpace,
-            Patch1,
-            Patch2,
-            Patch3>
+            decltype(deriv_calculators_collect_123)>
             matrix_123(idx_ranges_123, deriv_calculators_collect_123);
 
     InterfaceDerivativeMatrix<
             Connectivity,
             GridX<4>,
-            decltype(deriv_calculators_collect_456),
+            ddc::detail::TypeSeq<Patch4, Patch5, Patch6>,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
-            Kokkos::DefaultHostExecutionSpace,
-            Patch4,
-            Patch5,
-            Patch6>
+            decltype(deriv_calculators_collect_456)>
             matrix_456(idx_ranges_456, deriv_calculators_collect_456);
 
     InterfaceDerivativeMatrix<
             Connectivity,
             GridX<7>,
-            decltype(deriv_calculators_collect_789),
+            ddc::detail::TypeSeq<Patch7, Patch8, Patch9>,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
-            Kokkos::DefaultHostExecutionSpace,
-            Patch7,
-            Patch8,
-            Patch9>
+            decltype(deriv_calculators_collect_789)>
             matrix_789(idx_ranges_789, deriv_calculators_collect_789);
 
 
@@ -624,39 +615,29 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
     InterfaceDerivativeMatrix<
             Connectivity,
             GridY<1>,
-            decltype(deriv_calculators_collect_147),
+            ddc::detail::TypeSeq<Patch1, Patch4, Patch7, Patch2>,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::GREVILLE,
-            Kokkos::DefaultHostExecutionSpace,
-            Patch1,
-            Patch4,
-            Patch7,
-            Patch2>
+            decltype(deriv_calculators_collect_147)>
             matrix_147(idx_ranges_147, deriv_calculators_collect_147);
 
     InterfaceDerivativeMatrix<
             Connectivity,
             GridY<2>,
-            decltype(deriv_calculators_collect_258),
+            ddc::detail::TypeSeq<Patch2, Patch5, Patch8>,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::GREVILLE,
-            Kokkos::DefaultHostExecutionSpace,
-            Patch2,
-            Patch5,
-            Patch8>
+            decltype(deriv_calculators_collect_258)>
             matrix_258(idx_ranges_258, deriv_calculators_collect_258);
 
 
     InterfaceDerivativeMatrix<
             Connectivity,
             GridY<3>,
-            decltype(deriv_calculators_collect_369),
+            ddc::detail::TypeSeq<Patch3, Patch6, Patch9>,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::GREVILLE,
-            Kokkos::DefaultHostExecutionSpace,
-            Patch3,
-            Patch6,
-            Patch9>
+            decltype(deriv_calculators_collect_369)>
             matrix_369(idx_ranges_369, deriv_calculators_collect_369);
 
 

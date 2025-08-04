@@ -357,13 +357,10 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
     InterfaceDerivativeMatrix<
             Connectivity,
             GridX<1>,
-            decltype(deriv_calculators_collect),
+            ddc::detail::TypeSeq<Patch1, Patch2, Patch3>,
             ddc::BoundCond::HERMITE,
             ddc::BoundCond::HERMITE,
-            Kokkos::DefaultHostExecutionSpace,
-            Patch1,
-            Patch2,
-            Patch3>
+            decltype(deriv_calculators_collect)>
             matrix(idx_ranges, deriv_calculators_collect);
 
 

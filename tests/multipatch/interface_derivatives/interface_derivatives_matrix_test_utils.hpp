@@ -56,7 +56,7 @@ template <
         class Xg = typename BSplinesXg::continuous_dimension_type,
         class Yg = typename BSplinesYg::continuous_dimension_type>
 void initialise_y_derivatives(
-        DerivFieldOnPatch_host<Patch>& function_and_derivs,
+        DerivFieldOnPatch_host<Patch> function_and_derivs,
         IdxRange2SliceOnPatch<Patch> const& idx_range_slice_dy,
         SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef)
