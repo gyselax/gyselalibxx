@@ -12,6 +12,13 @@
 #include "single_interface_derivatives_calculator.hpp"
 #include "types.hpp"
 
+template <class T>
+inline constexpr bool enable_single_derivative_calculator_collection = false;
+
+template <class T>
+inline constexpr bool is_single_derivative_calculator_collection_v
+        = enable_single_derivative_calculator_collection<
+                std::remove_const_t<std::remove_reference_t<T>>>;
 
 
 template <class... DerivCalculatorType>
@@ -27,9 +34,11 @@ class SingleInterfaceDerivativesCalculatorCollection
     static_assert(
             (is_single_derivative_calculator_v<DerivCalculatorType> && ...),
             "The input parameters should be SingleInterfaceDerivativesCalculator.");
-    
+
     template <class Interface>
-    using get_deriv_calulator_t =ddc::type_seq_element_t<ddc::type_seq_rank_v<Interface, InterfaceTypeSeq>, DerivCalculatorTypeSeq>;
+    using get_deriv_calulator_t = ddc::type_seq_element_t<
+            ddc::type_seq_rank_v<Interface, InterfaceTypeSeq>,
+            DerivCalculatorTypeSeq>;
 
 
 
@@ -60,3 +69,8 @@ public:
                 m_derivative_calculator_collection);
     }
 };
+
+
+template <class... DerivCalculatorType>
+inline constexpr bool enable_single_derivative_calculator_collection<
+        SingleInterfaceDerivativesCalculatorCollection<DerivCalculatorType...>> = true;

@@ -12,7 +12,7 @@
 #include "matching_idx_slice.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
-#include "single_interface_derivatives_calculator.hpp"
+#include "single_interface_derivatives_calculator_collection.hpp"
 #include "types.hpp"
 #include "view.hpp"
 
@@ -88,6 +88,12 @@ class InterfaceDerivativeMatrix<
     // All the patches of the geometry.
     using all_patches = typename Connectivity::all_patches;
 
+    static_assert(
+            is_single_derivative_calculator_collection_v<
+                    SingleInterfaceDerivativesCalculatorCollectionType>,
+            "Please provide a SingleInterfaceDerivativesCalculatorCollection type.");
+
+
     static constexpr std::size_t number_of_interfaces = ddc::type_seq_size_v<interface_collection>;
 
     static_assert(
@@ -158,86 +164,6 @@ class InterfaceDerivativeMatrix<
     {
     };
 
-
-    // HELPFUL ALIASES ===========================================================================
-    // Get the type of the interface given to define the Connectivity class.
-    // template <typename CurrentInterface>
-    // using get_equivalent_interface_t = find_associated_interface_t<
-    //         typename CurrentInterface::Edge1,
-    //         all_interface_collection>;
-
-    // Get the type of the interface sorted along the Grid1D direction.
-    // template <typename CurrentInterface>
-    // using get_sorted_interface_t
-    //         = find_associated_interface_t<typename CurrentInterface::Edge1, interface_collection>;
-
-    // Get a tuple of SingleInterfaceDerivativesCalculator from an Interface collection.
-    // template <bool is_periodic, typename InterfaceCollection>
-    // struct get_tuple_deriv_calculator;
-
-    // template <class... Interfaces>
-    // struct get_tuple_deriv_calculator<true, ddc::detail::TypeSeq<Interfaces...>>
-    // {
-    //     using InterfaceCollection = ddc::detail::TypeSeq<Interfaces...>;
-    //     using type = std::tuple<SingleInterfaceDerivativesCalculator<
-    //             get_equivalent_interface_t<Interfaces>> const&...>;
-    // };
-
-    // template <class... Interfaces>
-    // struct get_tuple_deriv_calculator<false, ddc::detail::TypeSeq<Interfaces...>>
-    // {
-    //     using InterfaceCollection = ddc::detail::TypeSeq<Interfaces...>;
-
-    //     using EquivalentFirstInterface = get_equivalent_interface_t<FirstInterface>;
-    //     using EquivalentLastInterface = get_equivalent_interface_t<LastInterface>;
-
-    //     static constexpr bool is_first_interface_same_orientation
-    //             = std::is_same_v<FirstInterface, EquivalentFirstInterface>;
-    //     static constexpr bool is_last_interface_same_orientation
-    //             = std::is_same_v<LastInterface, EquivalentLastInterface>;
-
-    //     using inner_inner_interface_collection = ddc::type_seq_remove_t<
-    //             InterfaceCollection,
-    //             ddc::detail::TypeSeq<FirstInterface, LastInterface>>;
-
-
-    //     using inner_deriv_calculators =
-    //             typename get_tuple_deriv_calculator<true, inner_inner_interface_collection>::type;
-
-    //     using first_deriv_calculator = std::conditional_t<
-    //             is_first_interface_same_orientation,
-    //             std::tuple<SingleInterfaceDerivativesCalculator<
-    //                     FirstInterface,
-    //                     LowerBound,
-    //                     ddc::BoundCond::HERMITE> const&>,
-    //             std::tuple<SingleInterfaceDerivativesCalculator<
-    //                     EquivalentFirstInterface,
-    //                     ddc::BoundCond::HERMITE,
-    //                     LowerBound> const&>>;
-
-    //     using last_deriv_calculator = std::conditional_t<
-    //             is_last_interface_same_orientation,
-    //             std::tuple<SingleInterfaceDerivativesCalculator<
-    //                     LastInterface,
-    //                     ddc::BoundCond::HERMITE,
-    //                     UpperBound> const&>,
-    //             std::tuple<SingleInterfaceDerivativesCalculator<
-    //                     EquivalentLastInterface,
-    //                     UpperBound,
-    //                     ddc::BoundCond::HERMITE> const&>>;
-
-    //     using type = decltype(std::tuple_cat(
-    //             std::declval<first_deriv_calculator>(),
-    //             std::declval<inner_deriv_calculators>(),
-    //             std::declval<last_deriv_calculator>()));
-    // };
-
-    // template <typename InterfaceTypeSeq>
-    // using get_tuple_deriv_calculator_t =
-    //         typename get_tuple_deriv_calculator<is_periodic, InterfaceTypeSeq>::type;
-
-    // ===========================================================================================
-
     using Matrix = gko::matrix::Dense<double>;
 
 public:
@@ -257,11 +183,6 @@ private:
     std::unique_ptr<SolverCG> m_solver;
 
     MultipatchType<IdxRangeOnPatch, Patches...> const& m_idx_ranges;
-
-    // TODO: WARNING, BE ABLE TO DEAL WITH DIFFERENT ORIENTATION/ORDER INTERFACES.
-    // using SingleInterfaceDerivativesCalculatorTuple
-    //         = get_tuple_deriv_calculator_t<inner_interface_collection>;
-    // SingleInterfaceDerivativesCalculatorTuple const& m_derivatives_calculators;
 
     SingleInterfaceDerivativesCalculatorCollectionType const& m_derivatives_calculators;
 
@@ -454,22 +375,6 @@ private:
                 = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
 
         constexpr bool is_same_orientation = std::is_same_v<InterfaceI, EquivalentInterfaceI>;
-
-        // Check that the Ith element of the derivative calculators collection is on InterfaceI.
-        // using DerivativeCalculator
-        //         = std::decay_t<std::tuple_element_t<I, SingleInterfaceDerivativesCalculatorTuple>>;
-        // using InterfaceDerivativeCalculator = typename DerivativeCalculator::associated_interface;
-        // using InterfaceDerivativeCalculatorSymmetrical = Interface<
-        //         typename InterfaceDerivativeCalculator::Edge2,
-        //         typename InterfaceDerivativeCalculator::Edge1,
-        //         InterfaceDerivativeCalculator::orientations_agree>;
-        // static_assert(
-        //         (is_same_orientation && std::is_same_v<InterfaceI, InterfaceDerivativeCalculator>)
-        //                 || (!is_same_orientation
-        //                     && std::is_same_v<
-        //                             InterfaceI,
-        //                             InterfaceDerivativeCalculatorSymmetrical>),
-        //         "The list of interface derivative calculators is not well sorted.");
 
         double const coeff_deriv_patch1
                 = m_derivatives_calculators.template get<EquivalentInterfaceI>()
