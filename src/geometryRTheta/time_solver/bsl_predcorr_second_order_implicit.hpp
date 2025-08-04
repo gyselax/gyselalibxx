@@ -199,6 +199,9 @@ public:
         DFieldRTheta density = get_field(density_alloc);
         host_t<Spline2D> density_coef_host(density_coef_alloc_host);
 
+        host_t<PolarSplineRTheta> electrostatic_potential_coef_host(
+                electrostatic_potential_coef_alloc_host);
+
         // Operators
         ddc::NullExtrapolationRule extrapolation_rule;
         PolarSplineEvaluator<
@@ -217,13 +220,11 @@ public:
         for (int iter(0); iter < steps; ++iter) {
             // STEP 1: From rho^n, we compute phi^n: Poisson equation
             m_builder(density_coef_host, get_const_field(density_host));
-            m_poisson_solver(
-                    charge_density,
-                    get_field(electrostatic_potential_coef_alloc_host));
+            m_poisson_solver(charge_density, electrostatic_potential_coef_host);
 
             polar_spline_evaluator(
                     get_field(electrical_potential_alloc_host),
-                    get_const_field(get_field(electrostatic_potential_coef_alloc_host)));
+                    get_const_field(electrostatic_potential_coef_host));
 
             ddc::PdiEvent("iteration")
                     .with("iter", iter)
@@ -233,9 +234,7 @@ public:
 
 
             // STEP 2: From phi^n, we compute A^n:
-            advection_field_computer(
-                    get_field(electrostatic_potential_coef_alloc_host),
-                    advection_field_host);
+            advection_field_computer(electrostatic_potential_coef_host, advection_field_host);
 
 
             // STEP 3: From rho^n and A^n, we compute rho^P: Vlasov equation
@@ -302,14 +301,10 @@ public:
             // STEP 4: From rho^P, we compute phi^P: Poisson equation
             ddc::parallel_deepcopy(density_predicted_host, density_predicted);
             m_builder(density_coef_host, get_const_field(density_predicted_host));
-            m_poisson_solver(
-                    charge_density,
-                    get_field(electrostatic_potential_coef_alloc_host));
+            m_poisson_solver(charge_density, electrostatic_potential_coef_host);
 
             // STEP 5: From phi^P, we compute A^P:
-            advection_field_computer(
-                    get_field(electrostatic_potential_coef_alloc_host),
-                    advection_field_host);
+            advection_field_computer(electrostatic_potential_coef_host, advection_field_host);
 
 
             // STEP 6: From rho^n and A^P, we compute rho^{n+1}: Vlasov equation
