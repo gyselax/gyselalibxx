@@ -181,13 +181,9 @@ public:
                 polar_spline_evaluator(extrapolation_rule);
 
         // --- For the computation of advection field from the electrostatic potential (phi): -------------
-        host_t<DVectorFieldMemRTheta<X, Y>> electric_field_alloc(grid);
-        host_t<DVectorFieldMemRTheta<X, Y>> electric_field_predicted_alloc(grid);
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_alloc(grid);
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_predicted_alloc(grid);
 
-        host_t<DVectorFieldRTheta<X, Y>> electric_field(electric_field_alloc);
-        host_t<DVectorFieldRTheta<X, Y>> electric_field_predicted(electric_field_predicted_alloc);
         host_t<DVectorFieldRTheta<X, Y>> advection_field_host(advection_field_alloc);
         host_t<DVectorFieldRTheta<X, Y>> advection_field_predicted(advection_field_predicted_alloc);
 
