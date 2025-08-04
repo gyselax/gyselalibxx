@@ -133,6 +133,7 @@ public:
 
         auto electrical_potential_alloc_host
                 = ddc::create_mirror_view(get_field(electrical_potential_alloc));
+        auto density = ddc::create_mirror_view(Kokkos::DefaultExecutionSpace(), density_host);
 
         // Fields
         DFieldRTheta electrical_potential = get_field(electrical_potential_alloc);
@@ -156,49 +157,47 @@ public:
                 .with("electrical_potential", electrical_potential_host);
 
         // RK2 methods
-        std::function<void(host_t<DVectorFieldRTheta<X, Y>>, host_t<DConstFieldRTheta>)>
-                define_advection_field = [&](host_t<DVectorFieldRTheta<X, Y>> advection_field_host,
-                                             host_t<DConstFieldRTheta> density_host) {
-                    // --- compute electrostatic potential:
-                    m_builder(get_field(density_coef_host), get_const_field(density_host));
-                    m_poisson_solver(charge_density_coord, electrostatic_potential_coef_host);
+        std::function<void(DVectorFieldRTheta<X, Y>, DConstFieldRTheta)> define_advection_field
+                = [&](DVectorFieldRTheta<X, Y> advection_field, DConstFieldRTheta density) {
+                      ddc::parallel_deepcopy(density_host, density);
+                      // --- compute electrostatic potential:
+                      m_builder(get_field(density_coef_host), get_const_field(density_host));
+                      m_poisson_solver(charge_density_coord, electrostatic_potential_coef_host);
 
-                    // --- compute advection field:
-                    advection_field_computer(
-                            electrostatic_potential_coef_host,
-                            advection_field_host);
-                };
+                      auto advection_field_host = ddcHelper::create_mirror_view_and_copy(
+                              Kokkos::DefaultHostExecutionSpace(),
+                              advection_field);
 
-        std::function<void(host_t<DFieldRTheta>, host_t<DConstVectorFieldRTheta<X, Y>>, double)>
-                advect_density = [&](host_t<DFieldRTheta> density_host,
-                                     host_t<DConstVectorFieldRTheta<X, Y>> advection_field_host,
-                                     double dt) {
-                    auto density = ddc::create_mirror_view_and_copy(
-                            Kokkos::DefaultExecutionSpace(),
-                            density_host);
-                    auto advection_field = ddcHelper::create_mirror_view_and_copy(
-                            Kokkos::DefaultExecutionSpace(),
-                            advection_field_host);
-                    m_advection_solver(get_field(density), get_const_field(advection_field), dt);
-                    ddc::parallel_deepcopy(density_host, density);
-                };
+                      // --- compute advection field:
+                      advection_field_computer(
+                              electrostatic_potential_coef_host,
+                              get_field(advection_field_host));
 
-        RK2<host_t<DFieldMemRTheta>,
-            host_t<DVectorFieldMemRTheta<X, Y>>,
-            Kokkos::DefaultHostExecutionSpace>
+                      ddcHelper::deepcopy(advection_field, advection_field_host);
+                  };
+
+        std::function<void(DFieldRTheta, DConstVectorFieldRTheta<X, Y>, double)> advect_density
+                = [&](DFieldRTheta density,
+                      DConstVectorFieldRTheta<X, Y> advection_field,
+                      double dt) {
+                      m_advection_solver(get_field(density), get_const_field(advection_field), dt);
+                  };
+
+        RK2<DFieldMemRTheta, DVectorFieldMemRTheta<X, Y>, Kokkos::DefaultExecutionSpace>
                 time_stepper(grid);
 
         // Iteration loop
         start_time = std::chrono::system_clock::now();
         for (int iter(0); iter < steps; ++iter) {
+            ddc::parallel_deepcopy(density, density_host);
             time_stepper
-                    .update(Kokkos::DefaultHostExecutionSpace(),
-                            density_host,
+                    .update(Kokkos::DefaultExecutionSpace(),
+                            density,
                             dt,
                             define_advection_field,
                             advect_density);
 
-
+            ddc::parallel_deepcopy(density_host, density);
             m_builder(get_field(density_coef_host), get_const_field(density_host));
             m_poisson_solver(charge_density_coord, electrical_potential);
             ddc::parallel_deepcopy(
