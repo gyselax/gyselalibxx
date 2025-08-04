@@ -148,35 +148,6 @@ class InterfaceDerivativeMatrix<
             "A patch is missing in the given patch list. The list has to contain all the patches "
             "in the given Grid1D direction.");
 
-    // Struct to define the type of derivatives and cross-derivatives for each patch in the direction.
-    // template <typename Patch>
-    // struct GetDerivsOnPatch
-    // {
-    //     static constexpr bool is_grid_on_dim1 = ddc::in_tags_v<typename Patch::Grid1, Grid1DSeq>;
-    //     using GridPerp
-    //             = std::conditional_t<is_grid_on_dim1, typename Patch::Grid1, typename Patch::Grid2>;
-    //     using GridPar
-    //             = std::conditional_t<is_grid_on_dim1, typename Patch::Grid2, typename Patch::Grid1>;
-    //     using DerivPerp = ddc::Deriv<typename GridPerp::continuous_dimension_type>;
-    //     using DerivPar = ddc::Deriv<typename GridPar::continuous_dimension_type>;
-
-    //     using IdxRangeDerivPerp = std::conditional_t<
-    //             is_grid_on_dim1,
-    //             IdxRange<DerivPerp, GridPar>,
-    //             IdxRange<GridPar, DerivPerp>>;
-    //     using IdxRangeDerivPar = std::conditional_t<
-    //             is_grid_on_dim1,
-    //             IdxRange<GridPerp, DerivPar>,
-    //             IdxRange<DerivPar, GridPerp>>;
-
-    //     using type_perp = DField<IdxRangeDerivPerp, typename ExecSpace::memory_space>;
-    //     using type_par = DConstField<IdxRangeDerivPar, typename ExecSpace::memory_space>;
-    // };
-
-    // // Field for the first derivatives along the perpendicular direction of the interface.
-    // template <typename Patch>
-    // using DerivsPerpOnPatch = typename GetDerivsOnPatch<Patch>::type_perp;
-
     // Tag to identify we are computing the first derivatives.
     struct eval_deriv
     {
@@ -652,109 +623,6 @@ private:
                         += is_same_orientation ? coeff_deriv_2 * deriv_2 : -coeff_deriv_1 * deriv_1;
             }
         }
-
-        //     if constexpr (LowerBound == ddc::BoundCond::HERMITE && I == 0) {
-        //         {
-        //             // auto [deriv_1, deriv_2]
-        //             //         = get_interface_derivatives<I>(derivs_min, derivs_min, Extremity::BACK);
-        //             // auto [idx_first_deriv_1, idx_first_deriv_2]
-        //             //         = get_deriv_indexes<I>(deriv_1, deriv_2);
-
-        //             IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch1>());
-        //             IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch2>());
-
-        //             IdxRangeSlice<GridPerp1> idx_range_slice_dperp_1(
-        //                     idx_range_perp_1.front(),
-        //                     IdxStep<GridPerp1>(2),
-        //                     idx_range_perp_1.extents());
-
-        //             IdxRangeSlice<GridPerp2> idx_range_slice_dperp_2(
-        //                     idx_range_perp_1.front(),
-        //                     IdxStep<GridPerp2>(2),
-        //                     idx_range_perp_1.extents());
-
-        //             Idx<GridPerp1> idx_deriv_1 = (extermity_1 == Extremity::BACK)
-        //                                                  ? idx_range_slice_dperp_1.front()
-        //                                                  : idx_range_slice_dperp_1.back();
-        //             Idx<GridPerp2> idx_deriv_2 = (extermity_2 == Extremity::BACK)
-        //                                                  ? idx_range_slice_dperp_2.front()
-        //                                                  : idx_range_slice_dperp_2.back();
-
-        //             Idx<DerivPerp1, GridPerp1> idx_slice_deriv_1(Idx<DerivPerp1>(1), idx_deriv_1);
-        //             Idx<DerivPerp2, GridPerp2> idx_slice_deriv_2(Idx<DerivPerp2>(1), idx_deriv_2);
-
-        //             // DField<IdxRange<GridPar1>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_1
-        //             //         = function_and_derivs_1[idx_slice_deriv_1];
-        //             // DField<IdxRange<GridPar2>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_2
-        //             //         = function_and_derivs_2[idx_slice_deriv_2];
-
-        //             const double deriv_1 = function_and_derivs_1[idx_slice_deriv_1](idx_slice_1);
-        //             const double deriv_2 = function_and_derivs_2[idx_slice_deriv_2](idx_slice_2);
-
-        //             double coeff_deriv_1
-        //                     = m_derivatives_calculators.template get<EquivalentInterfaceI>()
-        //                               .get_coeff_deriv_patch_1();
-        //             double coeff_deriv_2
-        //                     = m_derivatives_calculators.template get<EquivalentInterfaceI>()
-        //                               .get_coeff_deriv_patch_2();
-
-        //             m_vector->get_values()[I]
-        //                     += is_same_orientation ? coeff_deriv_1 * deriv_1 : -coeff_deriv_2 * deriv_2;
-        //         }
-        //     }
-        //     if constexpr (UpperBound == ddc::BoundCond::HERMITE && I == n_inner_interfaces - 1) {
-        //         // auto [deriv_1, deriv_2]
-        //         //         = get_interface_derivatives<I>(derivs_min, derivs_min, Extremity::BACK);
-        //         // auto [idx_first_deriv_1, idx_first_deriv_2] = get_deriv_indexes<I>(deriv_1, deriv_2);
-
-        //         // double coeff_deriv_1 = m_derivatives_calculators.template get<EquivalentInterfaceI>()
-        //         //                                .get_coeff_deriv_patch_1();
-        //         // double coeff_deriv_2 = m_derivatives_calculators.template get<EquivalentInterfaceI>()
-        //         //                                .get_coeff_deriv_patch_2();
-
-        //         // m_vector->get_values()[I]
-        //         //         += is_same_orientation
-        //         //                    ? coeff_deriv_2 * deriv_2(idx_first_deriv_2, idx_slice_2)
-        //         //                    : -coeff_deriv_1 * deriv_1(idx_first_deriv_1, idx_slice_1);
-        //         IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch1>());
-        //         IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch2>());
-
-        //         IdxRangeSlice<GridPerp1> idx_range_slice_dperp_1(
-        //                 idx_range_perp_1.front(),
-        //                 IdxStep<GridPerp1>(2),
-        //                 idx_range_perp_1.extents());
-
-        //         IdxRangeSlice<GridPerp2> idx_range_slice_dperp_2(
-        //                 idx_range_perp_1.front(),
-        //                 IdxStep<GridPerp2>(2),
-        //                 idx_range_perp_1.extents());
-
-        //         Idx<GridPerp1> idx_deriv_1 = (extermity_1 == Extremity::BACK)
-        //                                              ? idx_range_slice_dperp_1.front()
-        //                                              : idx_range_slice_dperp_1.back();
-        //         Idx<GridPerp2> idx_deriv_2 = (extermity_2 == Extremity::BACK)
-        //                                              ? idx_range_slice_dperp_2.front()
-        //                                              : idx_range_slice_dperp_2.back();
-
-        //         Idx<DerivPerp1, GridPerp1> idx_slice_deriv_1(Idx<DerivPerp1>(1), idx_deriv_1);
-        //         Idx<DerivPerp2, GridPerp2> idx_slice_deriv_2(Idx<DerivPerp2>(1), idx_deriv_2);
-
-        //         // DField<IdxRange<GridPar1>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_1
-        //         //         = function_and_derivs_1[idx_slice_deriv_1];
-        //         // DField<IdxRange<GridPar2>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_2
-        //         //         = function_and_derivs_2[idx_slice_deriv_2];
-
-        //         const double deriv_1 = function_and_derivs_1[idx_slice_deriv_1](idx_slice_1);
-        //         const double deriv_2 = function_and_derivs_2[idx_slice_deriv_2](idx_slice_2);
-
-        //         double coeff_deriv_1 = m_derivatives_calculators.template get<EquivalentInterfaceI>()
-        //                                        .get_coeff_deriv_patch_1();
-        //         double coeff_deriv_2 = m_derivatives_calculators.template get<EquivalentInterfaceI>()
-        //                                        .get_coeff_deriv_patch_2();
-
-        //         m_vector->get_values()[I]
-        //                 += is_same_orientation ? coeff_deriv_2 * deriv_2 : -coeff_deriv_1 * deriv_1;
-        //     }
     }
 
     /// @brief Fill in the Ith line of the vector C corresponding.
@@ -1150,55 +1018,6 @@ private:
         function_and_derivs_2(idx_cross_deriv2) = m_interface_derivatives->get_values()[I];
     }
 
-
-    // /// @brief Get the first derivative field on Patch1 and Patch2 for the Ith interface.
-    // template <
-    //         std::size_t I,
-    //         class Patch1 = typename ddc::type_seq_element_t<I, inner_interface_collection>::Edge1::
-    //                 associated_patch,
-    //         class Patch2 = typename ddc::type_seq_element_t<I, inner_interface_collection>::Edge2::
-    //                 associated_patch>
-    // std::tuple<DerivsPerpOnPatch<Patch1>, DerivsPerpOnPatch<Patch2>> get_interface_derivatives(
-    //         MultipatchField<DerivsPerpOnPatch, Patches...> const& derivs_min,
-    //         MultipatchField<DerivsPerpOnPatch, Patches...> const& derivs_max,
-    //         Extremity const extremity)
-    // {
-    //     using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
-
-    //     constexpr Extremity extermity_1 = InterfaceI::Edge1::extremity;
-    //     constexpr Extremity extermity_2 = InterfaceI::Edge2::extremity;
-
-    //     DerivsPerpOnPatch<Patch1> deriv_1 = (extermity_1 == extremity)
-    //                                                 ? derivs_min.template get<Patch1>()
-    //                                                 : derivs_max.template get<Patch1>();
-    //     DerivsPerpOnPatch<Patch2> deriv_2 = (extermity_2 == extremity)
-    //                                                 ? derivs_min.template get<Patch2>()
-    //                                                 : derivs_max.template get<Patch2>();
-    //     return std::make_tuple(deriv_1, deriv_2);
-    // }
-
-
-    /// @brief @brief Get the Patch1 and Patch2 derivative indices on the grid parallel to the interface.
-    template <std::size_t I, class DerivFieldOnPatch1, class DerivFieldOnPatch2>
-    auto get_deriv_indexes(DerivFieldOnPatch1 const& deriv_1, DerivFieldOnPatch2 const& deriv_2)
-    {
-        using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
-
-        using PerpGrid1 = typename InterfaceI::Edge1::perpendicular_grid;
-        using PerpGrid2 = typename InterfaceI::Edge2::perpendicular_grid;
-
-        using PerpDim1 = typename PerpGrid1::continuous_dimension_type;
-        using PerpDim2 = typename PerpGrid2::continuous_dimension_type;
-
-        // Determine the parallel indexes.
-        IdxRange<ddc::Deriv<PerpDim1>> idx_range_first_deriv_1(get_idx_range(deriv_1));
-        IdxRange<ddc::Deriv<PerpDim2>> idx_range_first_deriv_2(get_idx_range(deriv_2));
-
-        Idx<ddc::Deriv<PerpDim1>> idx_first_deriv_1(idx_range_first_deriv_1.front());
-        Idx<ddc::Deriv<PerpDim2>> idx_first_deriv_2(idx_range_first_deriv_2.front());
-
-        return std::make_tuple(idx_first_deriv_1, idx_first_deriv_2);
-    }
 
     template <typename InterfaceI>
     auto get_slice_indexes(int& slice_idx_1_value)
