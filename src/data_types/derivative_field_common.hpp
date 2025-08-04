@@ -274,18 +274,6 @@ protected:
                                ddc::Deriv<typename QueryDDim::continuous_dimension_type>,
                                deriv_tags>)) {
                     // If the derivative is being requested
-                    // std::cout << IdxRangeSlice<QueryDDim>(m_cross_derivative_idx_range)
-                    //                      .contains(idx_range_requested.front())
-                    //           << std::endl;
-                    // std::cout << (idx_range_requested.extents() == 1) << "  "
-                    //           << idx_range_requested.extents() << std::endl;
-                    // std::cout
-                    //         << (IdxRangeSlice<QueryDDim>(m_cross_derivative_idx_range).strides()
-                    //             == 1)
-                    //         << "  "
-                    //         << IdxRangeSlice<QueryDDim>(m_cross_derivative_idx_range).strides()
-                    //         << std::endl;
-
                     assert(IdxRangeSlice<QueryDDim>(m_cross_derivative_idx_range)
                                    .contains(idx_range_requested.front())
                            && (idx_range_requested.extents() == 1
@@ -604,9 +592,9 @@ public:
      *
      * @returns Field The field on the physical index range.
      */
-    // auto get_values_field() const
-    // {
-    //     IdxRange<> no_specified_dims;
-    //     return get_internal_field(no_specified_dims).span_cview();
-    // }
+    auto get_values_const_field() const
+    {
+        IdxRange<> no_specified_dims;
+        return get_internal_field(no_specified_dims).span_cview();
+    }
 };
