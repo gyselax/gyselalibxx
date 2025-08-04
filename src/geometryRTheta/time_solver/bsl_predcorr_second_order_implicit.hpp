@@ -340,12 +340,7 @@ public:
             });
             // X^k = X^n - dt * ( A^P(X^n) + A^P(X^P) )/2
             ddc::parallel_deepcopy(get_field(density), get_const_field(density_host));
-            ddc::parallel_deepcopy(
-                    ddcHelper::get<X>(advection_field_k_tot),
-                    ddcHelper::get<X>(advection_field_k_tot_host));
-            ddc::parallel_deepcopy(
-                    ddcHelper::get<Y>(advection_field_k_tot),
-                    ddcHelper::get<Y>(advection_field_k_tot_host));
+            ddcHelper::deepcopy(advection_field_k_tot, advection_field_k_tot_host);
             m_advection_solver(get_field(density), get_const_field(advection_field_k_tot), dt);
             ddc::parallel_deepcopy(density_host, get_const_field(density));
         }
