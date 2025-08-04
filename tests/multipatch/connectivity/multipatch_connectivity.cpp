@@ -402,4 +402,3 @@ TEST(MultipatchConnectivityDetailsTest, CollectGridsOnDim)
     static_assert(ddc::in_tags_v<GridX<2>, Grid1DSeq2>);
     static_assert(ddc::in_tags_v<GridX<3>, Grid1DSeq2>);
 }
-
