@@ -339,7 +339,7 @@ template <
                 FoundInterfaces>>
 struct CollectInterfacesAlongDim;
 
-/// Specialisation of CollectGridsAlongDim to iterate recursively over the grids on the dimension.
+/// Specialisation of CollectInterfacesAlongDim to iterate recursively over the interfaces on the dimension.
 template <
         class StartEdge,
         class InterfaceTypeSeq,
@@ -388,7 +388,7 @@ struct CollectInterfacesAlongDim<
     using type = FoundInterfaces;
 };
 
-/// Specialisation of CollectGridsAlongDim to stop when there are no more grids.
+/// Specialisation of CollectInterfacesAlongDim to stop when there are no more interfaces.
 template <class StartEdge, class InterfaceTypeSeq, InsertPosition insert_pos, class FoundInterfaces>
 struct CollectInterfacesAlongDim<
         StartEdge,
