@@ -504,7 +504,7 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
     ddc::ConstantExtrapolationRule<Xg, Yg> bc_xmax_g(xg_max, yg_min, yg_max);
     SplineRThetagEvaluator evaluator_g(bc_xmin_g, bc_xmax_g, bc_ymin_g, bc_ymax_g);
 
-    // ------ intialise the first derivatives from the global spline 
+    // ------ intialise the first derivatives from the global spline
     Idx<ddc::Deriv<X<1>>, GridX<1>>
             idx_slice_xmin_1(Idx<ddc::Deriv<X<1>>>(1), idx_range_slice_dx1.front());
     Idx<ddc::Deriv<X<3>>, GridX<3>>
@@ -528,158 +528,19 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
                 = evaluator_g.deriv_dim_1(interface_coord_min, const_function_g_coef);
     });
 
-    Idx<ddc::Deriv<Y<1>>, GridY<1>>
-            idx_slice_ymin_1(Idx<ddc::Deriv<Y<1>>>(1), idx_range_slice_dy1.front());
-    Idx<ddc::Deriv<Y<1>>, GridY<1>>
-            idx_slice_ymax_1(Idx<ddc::Deriv<Y<1>>>(1), idx_range_slice_dy1.back());
-
-    Idx<ddc::Deriv<Y<2>>, GridY<2>>
-            idx_slice_ymin_2(Idx<ddc::Deriv<Y<2>>>(1), idx_range_slice_dy2.front());
-    Idx<ddc::Deriv<Y<2>>, GridY<2>>
-            idx_slice_ymax_2(Idx<ddc::Deriv<Y<2>>>(1), idx_range_slice_dy2.back());
-
-    Idx<ddc::Deriv<Y<3>>, GridY<3>>
-            idx_slice_ymin_3(Idx<ddc::Deriv<Y<3>>>(1), idx_range_slice_dy3.front());
-    Idx<ddc::Deriv<Y<3>>, GridY<3>>
-            idx_slice_ymax_3(Idx<ddc::Deriv<Y<3>>>(1), idx_range_slice_dy3.back());
-
-
-    DField<IdxRange<typename Patch1::Grid1>, Kokkos::HostSpace, Kokkos::layout_stride>
-            derivs_ymin_extracted_1 = function_and_derivs_1[idx_slice_ymin_1];
-    DField<IdxRange<typename Patch1::Grid1>, Kokkos::HostSpace, Kokkos::layout_stride>
-            derivs_ymax_extracted_1 = function_and_derivs_1[idx_slice_ymax_1];
-    ddc::for_each(idx_range_x1, [&](Idx<GridX<1>> const& idx_par) {
-        Idx<GridX<1>, GridY<1>> idx_min(idx_par, idx_range_y1.front());
-        Idx<GridX<1>, GridY<1>> idx_max(idx_par, idx_range_y1.back());
-        Coord<Xg, Yg> interface_coord_min(get_global_coord<Xg, Yg>(ddc::coordinate(idx_min)));
-        Coord<Xg, Yg> interface_coord_max(get_global_coord<Xg, Yg>(ddc::coordinate(idx_max)));
-        derivs_ymin_extracted_1(idx_par)
-                = evaluator_g.deriv_dim_2(interface_coord_min, const_function_g_coef);
-        derivs_ymax_extracted_1(idx_par)
-                = evaluator_g.deriv_dim_2(interface_coord_max, const_function_g_coef);
-    });
-
-    DField<IdxRange<typename Patch2::Grid1>, Kokkos::HostSpace, Kokkos::layout_stride>
-            derivs_ymin_extracted_2 = function_and_derivs_2[idx_slice_ymin_2];
-    DField<IdxRange<typename Patch2::Grid1>, Kokkos::HostSpace, Kokkos::layout_stride>
-            derivs_ymax_extracted_2 = function_and_derivs_2[idx_slice_ymax_2];
-    ddc::for_each(idx_range_x2, [&](Idx<GridX<2>> const& idx_par) {
-        Idx<GridX<2>, GridY<2>> idx_min(idx_par, idx_range_y2.front());
-        Idx<GridX<2>, GridY<2>> idx_max(idx_par, idx_range_y2.back());
-        Coord<Xg, Yg> interface_coord_min(get_global_coord<Xg, Yg>(ddc::coordinate(idx_min)));
-        Coord<Xg, Yg> interface_coord_max(get_global_coord<Xg, Yg>(ddc::coordinate(idx_max)));
-        derivs_ymin_extracted_2(idx_par)
-                = evaluator_g.deriv_dim_2(interface_coord_min, const_function_g_coef);
-        derivs_ymax_extracted_2(idx_par)
-                = evaluator_g.deriv_dim_2(interface_coord_max, const_function_g_coef);
-    });
-
-    DField<IdxRange<typename Patch3::Grid1>, Kokkos::HostSpace, Kokkos::layout_stride>
-            derivs_ymin_extracted_3 = function_and_derivs_3[idx_slice_ymin_3];
-    DField<IdxRange<typename Patch3::Grid1>, Kokkos::HostSpace, Kokkos::layout_stride>
-            derivs_ymax_extracted_3 = function_and_derivs_3[idx_slice_ymax_3];
-    ddc::for_each(idx_range_x3, [&](Idx<GridX<3>> const& idx_par) {
-        Idx<GridX<3>, GridY<3>> idx_min(idx_par, idx_range_y3.front());
-        Idx<GridX<3>, GridY<3>> idx_max(idx_par, idx_range_y3.back());
-        Coord<Xg, Yg> interface_coord_min(get_global_coord<Xg, Yg>(ddc::coordinate(idx_min)));
-        Coord<Xg, Yg> interface_coord_max(get_global_coord<Xg, Yg>(ddc::coordinate(idx_max)));
-        derivs_ymin_extracted_3(idx_par)
-                = evaluator_g.deriv_dim_2(interface_coord_min, const_function_g_coef);
-        derivs_ymax_extracted_3(idx_par)
-                = evaluator_g.deriv_dim_2(interface_coord_max, const_function_g_coef);
-    });
+    initialise_all_y_derivatives(
+            functions_and_derivs,
+            idx_ranges_slice_dy,
+            evaluator_g,
+            const_function_g_coef);
 
     // ------ intialise the cross-derivatives from the global spline
-    Idx<ddc::Deriv<X<1>>, GridX<1>, ddc::Deriv<Y<1>>, GridY<1>> idx_cross_deriv_min_min_1(
-            Idx<ddc::Deriv<X<1>>>(1),
-            idx_range_slice_dx1.front(),
-            Idx<ddc::Deriv<Y<1>>>(1),
-            idx_range_slice_dy1.front());
-    Idx<ddc::Deriv<X<1>>, GridX<1>, ddc::Deriv<Y<1>>, GridY<1>> idx_cross_deriv_max_min_1(
-            Idx<ddc::Deriv<X<1>>>(1),
-            idx_range_slice_dx1.back(),
-            Idx<ddc::Deriv<Y<1>>>(1),
-            idx_range_slice_dy1.front());
-    Idx<ddc::Deriv<X<1>>, GridX<1>, ddc::Deriv<Y<1>>, GridY<1>> idx_cross_deriv_min_max_1(
-            Idx<ddc::Deriv<X<1>>>(1),
-            idx_range_slice_dx1.front(),
-            Idx<ddc::Deriv<Y<1>>>(1),
-            idx_range_slice_dy1.back());
-    Idx<ddc::Deriv<X<1>>, GridX<1>, ddc::Deriv<Y<1>>, GridY<1>> idx_cross_deriv_max_max_1(
-            Idx<ddc::Deriv<X<1>>>(1),
-            idx_range_slice_dx1.back(),
-            Idx<ddc::Deriv<Y<1>>>(1),
-            idx_range_slice_dy1.back());
-
-    Idx<ddc::Deriv<X<2>>, GridX<2>, ddc::Deriv<Y<2>>, GridY<2>> idx_cross_deriv_min_min_2(
-            Idx<ddc::Deriv<X<2>>>(1),
-            idx_range_slice_dx2.front(),
-            Idx<ddc::Deriv<Y<2>>>(1),
-            idx_range_slice_dy2.front());
-    Idx<ddc::Deriv<X<2>>, GridX<2>, ddc::Deriv<Y<2>>, GridY<2>> idx_cross_deriv_max_min_2(
-            Idx<ddc::Deriv<X<2>>>(1),
-            idx_range_slice_dx2.back(),
-            Idx<ddc::Deriv<Y<2>>>(1),
-            idx_range_slice_dy2.front());
-    Idx<ddc::Deriv<X<2>>, GridX<2>, ddc::Deriv<Y<2>>, GridY<2>> idx_cross_deriv_min_max_2(
-            Idx<ddc::Deriv<X<2>>>(1),
-            idx_range_slice_dx2.front(),
-            Idx<ddc::Deriv<Y<2>>>(1),
-            idx_range_slice_dy2.back());
-    Idx<ddc::Deriv<X<2>>, GridX<2>, ddc::Deriv<Y<2>>, GridY<2>> idx_cross_deriv_max_max_2(
-            Idx<ddc::Deriv<X<2>>>(1),
-            idx_range_slice_dx2.back(),
-            Idx<ddc::Deriv<Y<2>>>(1),
-            idx_range_slice_dy2.back());
-
-    Idx<ddc::Deriv<X<3>>, GridX<3>, ddc::Deriv<Y<3>>, GridY<3>> idx_cross_deriv_min_min_3(
-            Idx<ddc::Deriv<X<3>>>(1),
-            idx_range_slice_dx3.front(),
-            Idx<ddc::Deriv<Y<3>>>(1),
-            idx_range_slice_dy3.front());
-    Idx<ddc::Deriv<X<3>>, GridX<3>, ddc::Deriv<Y<3>>, GridY<3>> idx_cross_deriv_max_min_3(
-            Idx<ddc::Deriv<X<3>>>(1),
-            idx_range_slice_dx3.back(),
-            Idx<ddc::Deriv<Y<3>>>(1),
-            idx_range_slice_dy3.front());
-    Idx<ddc::Deriv<X<3>>, GridX<3>, ddc::Deriv<Y<3>>, GridY<3>> idx_cross_deriv_min_max_3(
-            Idx<ddc::Deriv<X<3>>>(1),
-            idx_range_slice_dx3.front(),
-            Idx<ddc::Deriv<Y<3>>>(1),
-            idx_range_slice_dy3.back());
-    Idx<ddc::Deriv<X<3>>, GridX<3>, ddc::Deriv<Y<3>>, GridY<3>> idx_cross_deriv_max_max_3(
-            Idx<ddc::Deriv<X<3>>>(1),
-            idx_range_slice_dx3.back(),
-            Idx<ddc::Deriv<Y<3>>>(1),
-            idx_range_slice_dy3.back());
-
-    function_and_derivs_1(idx_cross_deriv_min_min_1)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(0, 0), const_function_g_coef);
-    function_and_derivs_1(idx_cross_deriv_max_min_1)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(1, 0), const_function_g_coef);
-    function_and_derivs_1(idx_cross_deriv_min_max_1)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(0, 1), const_function_g_coef);
-    function_and_derivs_1(idx_cross_deriv_max_max_1)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(1, 1), const_function_g_coef);
-
-    function_and_derivs_2(idx_cross_deriv_min_min_2)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(1, 0), const_function_g_coef);
-    function_and_derivs_2(idx_cross_deriv_max_min_2)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(2, 0), const_function_g_coef);
-    function_and_derivs_2(idx_cross_deriv_min_max_2)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(1, 1), const_function_g_coef);
-    function_and_derivs_2(idx_cross_deriv_max_max_2)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(2, 1), const_function_g_coef);
-
-    function_and_derivs_3(idx_cross_deriv_min_min_3)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(2, 0), const_function_g_coef);
-    function_and_derivs_3(idx_cross_deriv_max_min_3)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(3, 0), const_function_g_coef);
-    function_and_derivs_3(idx_cross_deriv_min_max_3)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(2, 1), const_function_g_coef);
-    function_and_derivs_3(idx_cross_deriv_max_max_3)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(3, 1), const_function_g_coef);
-
+    initialise_all_cross_derivatives(
+            functions_and_derivs,
+            idx_ranges_slice_dx,
+            idx_ranges_slice_dy,
+            evaluator_g,
+            const_function_g_coef);
 
     // --- the first derivatives from the function values.
     matrix.solve_deriv(functions_and_derivs);
@@ -689,7 +550,7 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
         Here, it is not needed to compute the cross-derivatives because
         they are given by the boundary conditions. Otherwise, we want to 
         check that the matrix computes correctly the values. 
-    */ 
+    */
     matrix.solve_cross_deriv(functions_and_derivs);
 
     // Test the values of the derivatives ========================================================

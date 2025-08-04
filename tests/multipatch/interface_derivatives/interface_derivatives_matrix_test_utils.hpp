@@ -47,6 +47,162 @@ void initialise_all_functions(
      ...);
 }
 
+/// @brief Initialise the y-derivatives of a given DerivField from the global spline.
+template <
+        class Patch,
+        class SplineXYgEvaluator,
+        class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
+        class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
+        class Xg = typename BSplinesXg::continuous_dimension_type,
+        class Yg = typename BSplinesYg::continuous_dimension_type>
+void initialise_y_derivatives(
+        DerivFieldOnPatch_host<Patch>& function_and_derivs,
+        IdxRange2SliceOnPatch<Patch> const& idx_range_slice_dy,
+        SplineXYgEvaluator const& evaluator_g,
+        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef)
+{
+    using DerivX = ddc::Deriv<typename Patch::Dim1>;
+    using DerivY = ddc::Deriv<typename Patch::Dim2>;
+    using GridX = typename Patch::Grid1;
+    using GridY = typename Patch::Grid2;
+
+    IdxRange<GridX, GridY> idx_range_xy = get_idx_range(function_and_derivs.get_values_field());
+    IdxRange<GridX> idx_range_x(idx_range_xy);
+    IdxRange<GridY> idx_range_y(idx_range_xy);
+
+    Idx<DerivY, GridY> idx_slice_ymin(Idx<DerivY>(1), idx_range_slice_dy.front());
+    Idx<DerivY, GridY> idx_slice_ymax(Idx<DerivY>(1), idx_range_slice_dy.back());
+
+    DField<IdxRange<GridX>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_ymin_extracted
+            = function_and_derivs[idx_slice_ymin];
+    DField<IdxRange<GridX>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_ymax_extracted
+            = function_and_derivs[idx_slice_ymax];
+
+    ddc::for_each(idx_range_x, [&](Idx<GridX> const& idx_par) {
+        Idx<GridX, GridY> idx_min(idx_par, idx_range_y.front());
+        Idx<GridX, GridY> idx_max(idx_par, idx_range_y.back());
+        Coord<Xg, Yg> interface_coord_min(get_global_coord<Xg, Yg>(ddc::coordinate(idx_min)));
+        Coord<Xg, Yg> interface_coord_max(get_global_coord<Xg, Yg>(ddc::coordinate(idx_max)));
+
+        derivs_ymin_extracted(idx_par)
+                = evaluator_g.deriv_dim_2(interface_coord_min, const_function_g_coef);
+        derivs_ymax_extracted(idx_par)
+                = evaluator_g.deriv_dim_2(interface_coord_max, const_function_g_coef);
+    });
+}
+
+
+/// @brief Initialise all the y-derivatives of the given DerivFields from the global spline.
+template <
+        class SplineXYgEvaluator,
+        class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
+        class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
+        class... Patches>
+void initialise_all_y_derivatives(
+        MultipatchField<DerivFieldOnPatch_host, Patches...>& functions_and_derivs,
+        MultipatchType<IdxRange2SliceOnPatch, Patches...> const& idx_ranges_slice_dy,
+        SplineXYgEvaluator const& evaluator_g,
+        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef)
+{
+    (initialise_y_derivatives<Patches>(
+             functions_and_derivs.template get<Patches>(),
+             idx_ranges_slice_dy.template get<Patches>(),
+             evaluator_g,
+             const_function_g_coef),
+     ...);
+}
+
+/// @brief Initialise the cross-derivatives of a given DerivField from the global spline.
+template <
+        class Patch,
+        class SplineXYgEvaluator,
+        class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
+        class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
+        class Xg = typename BSplinesXg::continuous_dimension_type,
+        class Yg = typename BSplinesYg::continuous_dimension_type>
+void initialise_cross_derivatives(
+        DerivFieldOnPatch_host<Patch> function_and_derivs,
+        IdxRange1SliceOnPatch<Patch> const& idx_range_slice_dx,
+        IdxRange2SliceOnPatch<Patch> const& idx_range_slice_dy,
+        SplineXYgEvaluator const& evaluator_g,
+        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef,
+        double const& xshift)
+{
+    using DerivX = ddc::Deriv<typename Patch::Dim1>;
+    using DerivY = ddc::Deriv<typename Patch::Dim2>;
+    using GridX = typename Patch::Grid1;
+    using GridY = typename Patch::Grid2;
+
+    using IdxdXXdYY = Idx<DerivX, GridX, DerivY, GridY>;
+
+    IdxdXXdYY idx_cross_deriv_min_min(
+            Idx<DerivX>(1),
+            idx_range_slice_dx.front(),
+            Idx<DerivY>(1),
+            idx_range_slice_dy.front());
+    IdxdXXdYY idx_cross_deriv_max_min(
+            Idx<DerivX>(1),
+            idx_range_slice_dx.back(),
+            Idx<DerivY>(1),
+            idx_range_slice_dy.front());
+    IdxdXXdYY idx_cross_deriv_min_max(
+            Idx<DerivX>(1),
+            idx_range_slice_dx.front(),
+            Idx<DerivY>(1),
+            idx_range_slice_dy.back());
+    IdxdXXdYY idx_cross_deriv_max_max(
+            Idx<DerivX>(1),
+            idx_range_slice_dx.back(),
+            Idx<DerivY>(1),
+            idx_range_slice_dy.back());
+
+    function_and_derivs(idx_cross_deriv_min_min)
+            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(0 + xshift, 0), const_function_g_coef);
+    function_and_derivs(idx_cross_deriv_max_min)
+            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(1 + xshift, 0), const_function_g_coef);
+    function_and_derivs(idx_cross_deriv_min_max)
+            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(0 + xshift, 1), const_function_g_coef);
+    function_and_derivs(idx_cross_deriv_max_max)
+            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(1 + xshift, 1), const_function_g_coef);
+}
+
+/// @brief Initialise all the cross-derivatives of the given DerivFields from the global spline.
+template <
+        class SplineXYgEvaluator,
+        class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
+        class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
+        class Patch1,
+        class Patch2,
+        class Patch3>
+void initialise_all_cross_derivatives(
+        MultipatchField<DerivFieldOnPatch_host, Patch1, Patch2, Patch3>& functions_and_derivs,
+        MultipatchType<IdxRange1SliceOnPatch, Patch1, Patch2, Patch3> const& idx_ranges_slice_dx,
+        MultipatchType<IdxRange2SliceOnPatch, Patch1, Patch2, Patch3> const& idx_ranges_slice_dy,
+        SplineXYgEvaluator const& evaluator_g,
+        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef)
+{
+    initialise_cross_derivatives<Patch1>(
+            functions_and_derivs.template get<Patch1>(),
+            idx_ranges_slice_dx.template get<Patch1>(),
+            idx_ranges_slice_dy.template get<Patch1>(),
+            evaluator_g,
+            const_function_g_coef,
+            0);
+    initialise_cross_derivatives<Patch2>(
+            functions_and_derivs.template get<Patch2>(),
+            idx_ranges_slice_dx.template get<Patch2>(),
+            idx_ranges_slice_dy.template get<Patch2>(),
+            evaluator_g,
+            const_function_g_coef,
+            1);
+    initialise_cross_derivatives<Patch3>(
+            functions_and_derivs.template get<Patch3>(),
+            idx_ranges_slice_dx.template get<Patch3>(),
+            idx_ranges_slice_dy.template get<Patch3>(),
+            evaluator_g,
+            const_function_g_coef,
+            2);
+}
 
 // CHECK OPERATORS -------------------------------------------------------------------------------
 
@@ -78,12 +234,12 @@ void check_interpolation_grids(
      */
 template <
         class Patch,
-        class SplineRThetagEvaluator,
-        class BSplinesXg = typename SplineRThetagEvaluator::bsplines_type1,
-        class BSplinesYg = typename SplineRThetagEvaluator::bsplines_type2>
+        class SplineXYgEvaluator,
+        class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
+        class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2>
 void check_x_derivatives(
         DerivFieldOnPatch_host<Patch> function_and_derivs,
-        SplineRThetagEvaluator const& evaluator_g,
+        SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         typename Patch::IdxRange1 const& idx_range_perp,
         IdxRange1SliceOnPatch<Patch> const& idx_range_slice_dx)
@@ -123,13 +279,13 @@ void check_x_derivatives(
      * the interfaces. 
      */
 template <
-        class SplineRThetagEvaluator,
-        class BSplinesXg = typename SplineRThetagEvaluator::bsplines_type1,
-        class BSplinesYg = typename SplineRThetagEvaluator::bsplines_type2,
+        class SplineXYgEvaluator,
+        class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
+        class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
         class... Patches>
 void check_all_x_derivatives(
         MultipatchField<DerivFieldOnPatch_host, Patches...>& functions_and_derivs,
-        SplineRThetagEvaluator const& evaluator_g,
+        SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
         MultipatchType<IdxRange1SliceOnPatch, Patches...> const& idx_range_slices_dx)
@@ -152,12 +308,12 @@ template <
         class Patch,
         class PatchSeqMin,
         class PatchSeqMax,
-        class SplineRThetagEvaluator,
-        class BSplinesXg = typename SplineRThetagEvaluator::bsplines_type1,
-        class BSplinesYg = typename SplineRThetagEvaluator::bsplines_type2>
+        class SplineXYgEvaluator,
+        class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
+        class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2>
 void check_y_derivatives(
         DerivFieldOnPatch_host<Patch> function_and_derivs,
-        SplineRThetagEvaluator const& evaluator_g,
+        SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         typename Patch::IdxRange2 const& idx_range_perp,
         IdxRange2SliceOnPatch<Patch> const& idx_range_slice_dy)
@@ -207,13 +363,13 @@ void check_y_derivatives(
 template <
         class PatchSeqMin,
         class PatchSeqMax,
-        class SplineRThetagEvaluator,
-        class BSplinesXg = typename SplineRThetagEvaluator::bsplines_type1,
-        class BSplinesYg = typename SplineRThetagEvaluator::bsplines_type2,
+        class SplineXYgEvaluator,
+        class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
+        class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
         class... Patches>
 void check_all_y_derivatives(
         MultipatchField<DerivFieldOnPatch_host, Patches...>& functions_and_derivs,
-        SplineRThetagEvaluator const& evaluator_g,
+        SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
         MultipatchType<IdxRange2SliceOnPatch, Patches...> const& idx_range_slices_dy)
@@ -235,12 +391,12 @@ template <
         class Patch,
         class PatchSeqMin,
         class PatchSeqMax,
-        class SplineRThetagEvaluator,
-        class BSplinesXg = typename SplineRThetagEvaluator::bsplines_type1,
-        class BSplinesYg = typename SplineRThetagEvaluator::bsplines_type2>
+        class SplineXYgEvaluator,
+        class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
+        class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2>
 void check_xy_derivatives(
         DerivFieldOnPatch_host<Patch> function_and_derivs,
-        SplineRThetagEvaluator const& evaluator_g,
+        SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         typename Patch::IdxRange12 const& idx_range,
         IdxRange1SliceOnPatch<Patch> const& idx_range_slice_dx,
@@ -323,13 +479,13 @@ void check_xy_derivatives(
 template <
         class PatchSeqMin,
         class PatchSeqMax,
-        class SplineRThetagEvaluator,
-        class BSplinesXg = typename SplineRThetagEvaluator::bsplines_type1,
-        class BSplinesYg = typename SplineRThetagEvaluator::bsplines_type2,
+        class SplineXYgEvaluator,
+        class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
+        class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
         class... Patches>
 void check_all_xy_derivatives(
         MultipatchField<DerivFieldOnPatch_host, Patches...>& functions_and_derivs,
-        SplineRThetagEvaluator const& evaluator_g,
+        SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
         MultipatchType<IdxRange1SliceOnPatch, Patches...> const& idx_range_slices_dx,
@@ -353,15 +509,15 @@ template <
         class Patch,
         class PatchSeqMin,
         class PatchSeqMax,
-        class SplineRThetagEvaluator,
-        class BSplinesXg = typename SplineRThetagEvaluator::bsplines_type1,
-        class BSplinesYg = typename SplineRThetagEvaluator::bsplines_type2>
+        class SplineXYgEvaluator,
+        class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
+        class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2>
 void check_spline_representation_agreement(
         typename Patch::IdxRange12 const& idx_range_xy,
         IdxRange1SliceOnPatch<Patch> const& idx_range_slice_x,
         IdxRange2SliceOnPatch<Patch> const& idx_range_slice_y,
         DerivFieldOnPatch_host<Patch> function_and_derivs,
-        SplineRThetagEvaluator const& evaluator_g,
+        SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef)
 {
     using HostExecSpace = Kokkos::DefaultHostExecutionSpace;
@@ -648,16 +804,16 @@ void check_spline_representation_agreement(
 template <
         class PatchSeqMin,
         class PatchSeqMax,
-        class SplineRThetagEvaluator,
-        class BSplinesXg = typename SplineRThetagEvaluator::bsplines_type1,
-        class BSplinesYg = typename SplineRThetagEvaluator::bsplines_type2,
+        class SplineXYgEvaluator,
+        class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
+        class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
         class... Patches>
 void check_all_spline_representation_agreement(
         MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
         MultipatchType<IdxRange1SliceOnPatch, Patches...> const& idx_range_slices_x,
         MultipatchType<IdxRange2SliceOnPatch, Patches...> const& idx_range_slices_y,
         MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
-        SplineRThetagEvaluator const& evaluator_g,
+        SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef)
 {
     (check_spline_representation_agreement<Patches, PatchSeqMin, PatchSeqMax>(

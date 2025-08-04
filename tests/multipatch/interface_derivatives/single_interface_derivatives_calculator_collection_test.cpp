@@ -470,16 +470,6 @@ public:
 } // end namespace
 
 
-// TEST_F(SingleInterfaceDerivativesCalculatorCollectionTest, CheckThrowWrongInterface)
-// {
-//     SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_123(
-//             derivatives_calculator_1_2,
-//             derivatives_calculator_2_3,
-//             derivatives_calculator_3_1);
-
-//     EXPECT_THROW(auto deriv_calculator = deriv_calculators_collect_123.template get<Interface_1_2>(), std::invalid_argument);
-// }
-
 TEST_F(SingleInterfaceDerivativesCalculatorCollectionTest, CheckCallToOperators)
 {
     // Order in sequences ------------------------------------------------------------------------
