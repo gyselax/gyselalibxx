@@ -9,6 +9,14 @@
 #include "edge_transformation.hpp"
 #include "types.hpp"
 
+
+template <class T>
+inline constexpr bool enable_single_derivative_calculator = false;
+
+template <class T>
+inline constexpr bool is_single_derivative_calculator_v
+        = enable_single_derivative_calculator<std::remove_const_t<std::remove_reference_t<T>>>;
+
 /**
  * @brief Compute the derivative of an equivalent global spline 
  * at the interface between two patches. 
@@ -1082,3 +1090,14 @@ private:
         return (extremity == FRONT) ? idx_range.front() : idx_range.back();
     }
 };
+
+
+
+template <
+        class InterfaceType,
+        ddc::BoundCond Bound1,
+        ddc::BoundCond Bound2>
+inline constexpr bool enable_single_derivative_calculator<SingleInterfaceDerivativesCalculator<
+        InterfaceType,
+        Bound1,
+        Bound2>> = true;
