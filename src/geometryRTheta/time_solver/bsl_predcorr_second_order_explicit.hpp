@@ -186,8 +186,9 @@ public:
         // --- For the computation of advection field from the electrostatic potential (phi): -------------
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_alloc_host(grid);
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_predicted_alloc_host(grid);
-        auto advection_field_alloc = ddcHelper::
-                create_mirror_view(Kokkos::DefaultExecutionSpace(), advection_field_host);
+        auto advection_field_alloc = ddcHelper::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(advection_field_alloc_host));
 
         // Create fields
         host_t<DVectorFieldRTheta<X, Y>> advection_field_host(advection_field_alloc_host);
@@ -240,7 +241,7 @@ public:
             // STEP 3: From rho^n and A^n, we compute rho^P: Vlasov equation
             // --- Copy rho^n because it will be modified:
             ddc::parallel_deepcopy(get_field(density_predicted_alloc), density_host);
-            ddc::parallel_deepcopy(advection_field, advection_field_host);
+            ddcHelper::deepcopy(advection_field, advection_field_host);
             m_advection_solver(get_field(density_predicted_alloc), advection_field, dt);
 
             // --- advect also the feet because it is needed for the next step
