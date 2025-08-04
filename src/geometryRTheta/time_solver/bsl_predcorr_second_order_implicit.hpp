@@ -176,6 +176,7 @@ public:
         // --- For the computation of advection field from the electrostatic potential (phi): -------------
         host_t<DVectorFieldMemRTheta<X, Y>> electric_field_alloc(grid);
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_alloc(grid);
+
         host_t<DVectorFieldRTheta<X, Y>> electric_field(electric_field_alloc);
         host_t<DVectorFieldRTheta<X, Y>> advection_field(advection_field_alloc);
 
@@ -217,8 +218,8 @@ public:
 
 
             // STEP 3: From rho^n and A^n, we compute rho^P: Vlasov equation
-            host_t<DVectorFieldMemRTheta<X, Y>> advection_field_k(grid);
-            host_t<DVectorFieldMemRTheta<X, Y>> advection_field_k_tot_host(grid);
+            host_t<DVectorFieldMemRTheta<X, Y>> advection_field_k_alloc(grid);
+            host_t<DVectorFieldMemRTheta<X, Y>> advection_field_k_tot_alloc_host(grid);
 
             host_t<VectorSplineCoeffsMem2D<X, Y>> advection_field_coefs_k(
                     get_spline_idx_range(m_builder));
@@ -248,24 +249,20 @@ public:
 
             // Evaluate A^n at X^P:
             m_evaluator(
-                    get_field(ddcHelper::get<X>(advection_field_k)),
+                    get_field(ddcHelper::get<X>(advection_field_k_alloc)),
                     get_const_field(feet_coords),
                     ddcHelper::get<X>(get_const_field(advection_field_coefs_k)));
             m_evaluator(
-                    get_field(ddcHelper::get<Y>(advection_field_k)),
+                    get_field(ddcHelper::get<Y>(advection_field_k_alloc)),
                     get_const_field(feet_coords),
                     ddcHelper::get<Y>(get_const_field(advection_field_coefs_k)));
 
             // Compute the new advection field (E^n(X^n) + E^n(X^P)) /2:
             ddc::for_each(grid, [&](IdxRTheta const irtheta) {
-                ddcHelper::get<X>(advection_field_k_tot_host)(irtheta)
-                        = (ddcHelper::get<X>(advection_field)(irtheta)
-                           + ddcHelper::get<X>(advection_field_k)(irtheta))
-                          / 2.;
-                ddcHelper::get<Y>(advection_field_k_tot_host)(irtheta)
-                        = (ddcHelper::get<Y>(advection_field)(irtheta)
-                           + ddcHelper::get<Y>(advection_field_k)(irtheta))
-                          / 2.;
+                ddcHelper::assign_vector_field_element(
+                        advection_field_k_tot_alloc_host,
+                        irtheta,
+                        (advection_field(irtheta) + advection_field_k_alloc(irtheta)) / 2.0);
             });
 
 
@@ -275,7 +272,7 @@ public:
             ddc::parallel_deepcopy(density_predicted, density_host);
             auto advection_field_k_tot = ddcHelper::create_mirror_view_and_copy(
                     Kokkos::DefaultExecutionSpace(),
-                    get_field(advection_field_k_tot_host));
+                    get_field(advection_field_k_tot_alloc_host));
             m_advection_solver(
                     get_field(density_predicted),
                     get_const_field(advection_field_k_tot),
@@ -287,7 +284,7 @@ public:
             });
             m_foot_finder(
                     get_field(feet_coords),
-                    get_const_field(advection_field_k_tot_host),
+                    get_const_field(advection_field_k_tot_alloc_host),
                     dt / 2.);
 
 
@@ -324,34 +321,30 @@ public:
 
             // Evaluate A^P at X^P:
             m_evaluator(
-                    get_field(ddcHelper::get<X>(advection_field_k)),
+                    get_field(ddcHelper::get<X>(advection_field_k_alloc)),
                     get_const_field(feet_coords),
                     ddcHelper::get<X>(get_const_field(advection_field_coefs_k)));
             m_evaluator(
-                    get_field(ddcHelper::get<Y>(advection_field_k)),
+                    get_field(ddcHelper::get<Y>(advection_field_k_alloc)),
                     get_const_field(feet_coords),
                     ddcHelper::get<Y>(get_const_field(advection_field_coefs_k)));
 
             // Computed advection field (A^P(X^n) + A^P(X^P)) /2:
             ddc::for_each(grid, [&](IdxRTheta const irtheta) {
-                ddcHelper::get<X>(advection_field_k_tot_host)(irtheta)
-                        = (ddcHelper::get<X>(advection_field)(irtheta)
-                           + ddcHelper::get<X>(advection_field_k)(irtheta))
-                          / 2.;
-                ddcHelper::get<Y>(advection_field_k_tot_host)(irtheta)
-                        = (ddcHelper::get<Y>(advection_field)(irtheta)
-                           + ddcHelper::get<Y>(advection_field_k)(irtheta))
-                          / 2.;
+                ddcHelper::assign_vector_field_element(
+                        advection_field_k_tot_alloc_host,
+                        irtheta,
+                        (advection_field(irtheta) + advection_field_k_alloc(irtheta)) / 2.);
             });
             // X^k = X^n - dt * ( A^P(X^n) + A^P(X^P) )/2
             auto density = ddc::
                     create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), density_host);
             ddc::parallel_deepcopy(
                     ddcHelper::get<X>(advection_field_k_tot),
-                    ddcHelper::get<X>(advection_field_k_tot_host));
+                    ddcHelper::get<X>(advection_field_k_tot_alloc_host));
             ddc::parallel_deepcopy(
                     ddcHelper::get<Y>(advection_field_k_tot),
-                    ddcHelper::get<Y>(advection_field_k_tot_host));
+                    ddcHelper::get<Y>(advection_field_k_tot_alloc_host));
             m_advection_solver(get_field(density), get_const_field(advection_field_k_tot), dt);
             ddc::parallel_deepcopy(density_host, get_const_field(density));
         }
@@ -401,8 +394,8 @@ private:
             double const tau) const
     {
         IdxRangeRTheta const grid = get_idx_range(advection_field);
-        host_t<DVectorFieldMemRTheta<X, Y>> advection_field_k(grid);
-        host_t<DVectorFieldMemRTheta<X, Y>> advection_field_k_tot_host(grid);
+        host_t<DVectorFieldMemRTheta<X, Y>> advection_field_k_alloc(grid);
+        host_t<DVectorFieldMemRTheta<X, Y>> advection_field_k_tot_alloc_host(grid);
         host_t<FieldMemRTheta<CoordRTheta>> feet_coords_tmp(grid);
 
         double square_difference_feet = 0.;
@@ -413,22 +406,20 @@ private:
 
             // Evaluate A at X^{k-1}:
             m_evaluator(
-                    get_field(ddcHelper::get<X>(advection_field_k)),
+                    get_field(ddcHelper::get<X>(advection_field_k_alloc)),
                     get_const_field(feet_coords),
                     ddcHelper::get<X>(advection_field_coefs_k));
             m_evaluator(
-                    get_field(ddcHelper::get<Y>(advection_field_k)),
+                    get_field(ddcHelper::get<Y>(advection_field_k_alloc)),
                     get_const_field(feet_coords),
                     ddcHelper::get<Y>(advection_field_coefs_k));
 
             // Compute the new advection field A(X^n) + A(X^{k-1}):
             ddc::for_each(grid, [&](IdxRTheta const irtheta) {
-                ddcHelper::get<X>(advection_field_k_tot_host)(irtheta)
-                        = ddcHelper::get<X>(advection_field)(irtheta)
-                          + ddcHelper::get<X>(advection_field_k)(irtheta);
-                ddcHelper::get<Y>(advection_field_k_tot_host)(irtheta)
-                        = ddcHelper::get<Y>(advection_field)(irtheta)
-                          + ddcHelper::get<Y>(advection_field_k)(irtheta);
+                ddcHelper::assign_vector_field_element(
+                        advection_field_k_tot_alloc_host,
+                        irtheta,
+                        advection_field(irtheta) + advection_field_k_alloc(irtheta));
             });
 
             // X^{k-1} = X^k:
@@ -438,7 +429,7 @@ private:
             ddc::for_each(grid, [&](IdxRTheta const irtheta) {
                 feet_coords(irtheta) = CoordRTheta(ddc::coordinate(irtheta));
             });
-            m_foot_finder(feet_coords, get_const_field(advection_field_k_tot_host), dt);
+            m_foot_finder(feet_coords, get_const_field(advection_field_k_tot_alloc_host), dt);
 
 
             // Convergence test:
