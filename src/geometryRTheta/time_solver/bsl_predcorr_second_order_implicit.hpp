@@ -167,8 +167,8 @@ public:
         IdxRangeRTheta const grid(get_idx_range(density_host));
 
         // --- Electrostatic potential (phi). -------------------------------------------------------------
-        DFieldMemRTheta electrical_potential(grid);
-        host_t<DFieldMemRTheta> electrical_potential_host(grid);
+        DFieldMemRTheta electrical_potential_alloc(grid);
+        host_t<DFieldMemRTheta> electrical_potential_alloc_host(grid);
 
         host_t<PolarSplineMemRTheta> electrostatic_potential_coef(
                 ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
@@ -202,14 +202,14 @@ public:
             m_poisson_solver(charge_density_coord, get_field(electrostatic_potential_coef));
 
             polar_spline_evaluator(
-                    get_field(electrical_potential_host),
+                    get_field(electrical_potential_alloc_host),
                     get_const_field(get_field(electrostatic_potential_coef)));
 
             ddc::PdiEvent("iteration")
                     .with("iter", iter)
                     .with("time", iter * dt)
                     .with("density", density_host)
-                    .with("electrical_potential", electrical_potential_host);
+                    .with("electrical_potential", electrical_potential_alloc_host);
 
 
             // STEP 2: From phi^n, we compute A^n:
@@ -358,14 +358,16 @@ public:
 
         // STEP 1: From rho^n, we compute phi^n: Poisson equation
         m_builder(get_field(density_coef_alloc_host), get_const_field(density_host));
-        m_poisson_solver(charge_density_coord, get_field(electrical_potential));
-        ddc::parallel_deepcopy(electrical_potential_host, electrical_potential);
+        m_poisson_solver(charge_density_coord, get_field(electrical_potential_alloc));
+        ddc::parallel_deepcopy(
+                get_field(electrical_potential_alloc_host),
+                get_const_field(electrical_potential_alloc));
 
         ddc::PdiEvent("last_iteration")
                 .with("iter", steps)
                 .with("time", steps * dt)
                 .with("density", density_host)
-                .with("electrical_potential", electrical_potential_host);
+                .with("electrical_potential", electrical_potential_alloc_host);
 
         end_time = std::chrono::system_clock::now();
         display_time_difference("Iterations time: ", start_time, end_time);
