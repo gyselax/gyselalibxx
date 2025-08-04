@@ -271,22 +271,15 @@ public:
 
             // STEP 6: From rho^n and (A^n(X^P) + A^P(X^n))/2, we compute rho^{n+1}: Vlasov equation
             ddc::for_each(grid, [&](IdxRTheta const irtheta) {
-                ddcHelper::get<X>(advection_field_host)(irtheta)
-                        = (ddcHelper::get<X>(advection_field_evaluated_alloc_host)(irtheta)
-                           + ddcHelper::get<X>(advection_field_predicted_host)(irtheta))
-                          / 2.;
-                ddcHelper::get<Y>(advection_field_host)(irtheta)
-                        = (ddcHelper::get<Y>(advection_field_evaluated_alloc_host)(irtheta)
-                           + ddcHelper::get<Y>(advection_field_predicted_host)(irtheta))
-                          / 2.;
+                ddcHelper::assign_vector_field_element(
+                        advection_field_host,
+                        irtheta,
+                        (advection_field_evaluated_alloc_host(irtheta)
+                         + advection_field_predicted_host(irtheta))
+                                / 2.);
             });
 
-            ddc::parallel_deepcopy(
-                    ddcHelper::get<X>(advection_field),
-                    ddcHelper::get<X>(advection_field_host));
-            ddc::parallel_deepcopy(
-                    ddcHelper::get<Y>(advection_field),
-                    ddcHelper::get<Y>(advection_field_host));
+            ddcHelper::deepcopy(advection_field, advection_field_host);
             auto density = ddc::
                     create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), density_host);
             m_advection_solver(get_field(density), get_const_field(advection_field), dt);
