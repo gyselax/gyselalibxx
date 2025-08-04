@@ -34,8 +34,7 @@ _A class which collects all grids along a given dimension in both directions._ [
 
 | Type | Name |
 | ---: | :--- |
-| typedef typename [**CollectGridsAlongDim**](structconnectivity__details_1_1CollectGridsAlongDim.md)&lt; [**Edge**](structEdge.md)&lt; StartPatch, Grid1D, FRONT &gt;, InterfaceTypeSeq, BackInsert &gt;[**::type**](structconnectivity__details_1_1CollectAllGridsOnDim.md#typedef-type) | [**BackwardTypeSeq**](#typedef-backwardtypeseq)  <br>_The type sequence describing all grids found by iterating along this dimension in the backwards direction._  |
-| typedef ddc::type\_seq\_merge\_t&lt; [**BackwardTypeSeq**](structconnectivity__details_1_1CollectAllGridsOnDim.md#typedef-backwardtypeseq), typename [**CollectGridsAlongDim**](structconnectivity__details_1_1CollectGridsAlongDim.md)&lt; [**Edge**](structEdge.md)&lt; StartPatch, Grid1D, BACK &gt;, InterfaceTypeSeq, FrontInsert, [**BackwardTypeSeq**](structconnectivity__details_1_1CollectAllGridsOnDim.md#typedef-backwardtypeseq) &gt;::type &gt; | [**type**](#typedef-type)  <br>_The type found by the class._  |
+| typedef ddc::type\_seq\_merge\_t&lt; BackwardTypeSeq, ForwardTypeSeq &gt; | [**type**](#typedef-type)  <br>_The type found by the class._  |
 
 
 
@@ -105,29 +104,11 @@ _A class which collects all grids along a given dimension in both directions._ [
 
 
 
-### typedef BackwardTypeSeq 
-
-_The type sequence describing all grids found by iterating along this dimension in the backwards direction._ 
-```C++
-using connectivity_details::CollectAllGridsOnDim< StartPatch, Grid1D, InterfaceTypeSeq >::BackwardTypeSeq =  typename CollectGridsAlongDim< Edge<StartPatch, Grid1D, FRONT>, InterfaceTypeSeq, BackInsert>::type;
-```
-
-
-
-This is found by working backward from front (start) of grid inserting each new grid at the start of the sequence. 
-
-
-        
-
-<hr>
-
-
-
 ### typedef type 
 
 _The type found by the class._ 
 ```C++
-using connectivity_details::CollectAllGridsOnDim< StartPatch, Grid1D, InterfaceTypeSeq >::type =  ddc::type_seq_merge_t< BackwardTypeSeq, typename CollectGridsAlongDim< Edge<StartPatch, Grid1D, BACK>, InterfaceTypeSeq, FrontInsert, BackwardTypeSeq>::type>;
+using connectivity_details::CollectAllGridsOnDim< StartPatch, Grid1D, InterfaceTypeSeq >::type =  ddc::type_seq_merge_t<BackwardTypeSeq, ForwardTypeSeq>;
 ```
 
 

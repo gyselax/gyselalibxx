@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="358" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="363" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="359" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="364" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701_1a2636f16ad2713171f31c1e914e5e4ffa" prot="public" static="no">
         <type>typename <ref refid="structconnectivity__details_1_1CollectInterfacesAlongDim" kindref="compound">CollectInterfacesAlongDim</ref>&lt; typename <ref refid="structconnectivity__details_1_1SwapExtremity" kindref="compound">SwapExtremity</ref>&lt; MatchingEdge &gt;::type, InterfaceTypeSeq, insert_pos, <ref refid="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701_1aa92bb7a60063721d6f9cb3abb70caf06" kindref="member">NewInterfaceList</ref> &gt;::type</type>
@@ -51,15 +51,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="365" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="369" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="366" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="370" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>Specialisation of <ref refid="structconnectivity__details_1_1CollectGridsAlongDim" kindref="compound">CollectGridsAlongDim</ref> to iterate recursively over the grids on the dimension. </para>
+<para>Specialisation of <ref refid="structconnectivity__details_1_1CollectInterfacesAlongDim" kindref="compound">CollectInterfacesAlongDim</ref> to iterate recursively over the interfaces on the dimension. </para>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="349" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="356" bodyend="370"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="350" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="357" bodyend="371"/>
     <listofallmembers>
       <member refid="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701_1aa92bb7a60063721d6f9cb3abb70caf06" prot="public" virt="non-virtual"><scope>connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false &gt;</scope><name>NewInterfaceList</name></member>
       <member refid="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701_1a2636f16ad2713171f31c1e914e5e4ffa" prot="public" virt="non-virtual"><scope>connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, false &gt;</scope><name>type</name></member>

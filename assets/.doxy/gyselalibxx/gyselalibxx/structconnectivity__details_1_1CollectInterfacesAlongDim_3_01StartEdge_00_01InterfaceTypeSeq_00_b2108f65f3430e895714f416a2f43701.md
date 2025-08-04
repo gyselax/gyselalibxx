@@ -10,7 +10,7 @@
 
 
 
-_Specialisation of_ [_**CollectGridsAlongDim**_](structconnectivity__details_1_1CollectGridsAlongDim.md) _to iterate recursively over the grids on the dimension._
+_Specialisation of_ [_**CollectInterfacesAlongDim**_](structconnectivity__details_1_1CollectInterfacesAlongDim.md) _to iterate recursively over the interfaces on the dimension._
 
 * `#include <connectivity_details.hpp>`
 

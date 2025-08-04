@@ -10,7 +10,7 @@
 
 
 
-_Specialisation of_ [_**CollectGridsAlongDim**_](structconnectivity__details_1_1CollectGridsAlongDim.md) _to stop when there are no more grids._
+_Specialisation of_ [_**CollectInterfacesAlongDim**_](structconnectivity__details_1_1CollectInterfacesAlongDim.md) _to stop when there are no more interfaces._
 
 * `#include <connectivity_details.hpp>`
 

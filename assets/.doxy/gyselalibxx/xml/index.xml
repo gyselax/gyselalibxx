@@ -402,7 +402,9 @@
   </compound>
   <compound refid="structconnectivity__details_1_1CollectAllGridsOnDim" kind="struct"><name>connectivity_details::CollectAllGridsOnDim</name>
     <member refid="structconnectivity__details_1_1CollectAllGridsOnDim_1af63c952e5dd5c666fe92c78d7dfe46fd" kind="typedef"><name>BackwardTypeSeq</name></member>
-    <member refid="structconnectivity__details_1_1CollectAllGridsOnDim_1a5a3778e3b25f878a9876eaf6ba6202d4" kind="typedef"><name>type</name></member>
+    <member refid="structconnectivity__details_1_1CollectAllGridsOnDim_1abc21fd7e16eed594203f9b2b26f7e96e" kind="typedef"><name>NonOverlappingBackwardTypeSeq</name></member>
+    <member refid="structconnectivity__details_1_1CollectAllGridsOnDim_1ae611802c40822d1fe71404e1fd96ee09" kind="typedef"><name>ForwardTypeSeq</name></member>
+    <member refid="structconnectivity__details_1_1CollectAllGridsOnDim_1ae3f3416977775825c28efeda6567b498" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="structconnectivity__details_1_1CollectAllInterfacesOnDim" kind="struct"><name>connectivity_details::CollectAllInterfacesOnDim</name>
     <member refid="structconnectivity__details_1_1CollectAllInterfacesOnDim_1af231202bb9b639a1829a4bba04b72bbc" kind="typedef"><name>BackwardTypeSeq</name></member>

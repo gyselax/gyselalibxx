@@ -361,6 +361,7 @@
 * **find\_connections\_t** ([**MultipatchConnectivity**](classMultipatchConnectivity.md))
 * **full\_domain** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
 * **find\_equilibrium** ([**VortexMergerEquilibria**](classVortexMergerEquilibria.md))
+* **ForwardTypeSeq** ([**connectivity\_details::CollectAllGridsOnDim**](structconnectivity__details_1_1CollectAllGridsOnDim.md))
 
 
 ## g
@@ -947,6 +948,7 @@
 * **n\_dims** ([**Patch&lt; grid1, grid2, bsplines\_dim1, bsplines\_dim2 &gt;**](structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md))
 * **nbasis** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md))
 * **n\_singular\_basis** ([**PolarBSplines**](classPolarBSplines.md))
+* **NonOverlappingBackwardTypeSeq** ([**connectivity\_details::CollectAllGridsOnDim**](structconnectivity__details_1_1CollectAllGridsOnDim.md))
 * **NewGridList** ([**connectivity\_details::CollectGridsAlongDim&lt; StartEdge, InterfaceTypeSeq, insert\_pos, FoundGrids, MatchingEdge, false &gt;**](structconnectivity__details_1_1CollectGridsAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_01insd7a4bdb826ecb568487bbd509c5f008b.md))
 * **NewInterfaceList** ([**connectivity\_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert\_pos, FoundInterfaces, MatchingEdge, false &gt;**](structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701.md))
 * **N\_BE\_MAX** ([**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md))

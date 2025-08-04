@@ -230,6 +230,7 @@
 * **fourier\_idx\_range\_type** ([**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md))
 * **fourier\_index\_type** ([**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md))
 * **find\_connections\_t** ([**MultipatchConnectivity**](classMultipatchConnectivity.md))
+* **ForwardTypeSeq** ([**connectivity\_details::CollectAllGridsOnDim**](structconnectivity__details_1_1CollectAllGridsOnDim.md))
 
 
 ## g
@@ -450,6 +451,7 @@
 
 ## n
 
+* **NonOverlappingBackwardTypeSeq** ([**connectivity\_details::CollectAllGridsOnDim**](structconnectivity__details_1_1CollectAllGridsOnDim.md))
 * **NewGridList** ([**connectivity\_details::CollectGridsAlongDim&lt; StartEdge, InterfaceTypeSeq, insert\_pos, FoundGrids, MatchingEdge, false &gt;**](structconnectivity__details_1_1CollectGridsAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_01insd7a4bdb826ecb568487bbd509c5f008b.md))
 * **NewInterfaceList** ([**connectivity\_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert\_pos, FoundInterfaces, MatchingEdge, false &gt;**](structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_b2108f65f3430e895714f416a2f43701.md))
 

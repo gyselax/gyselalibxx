@@ -6,6 +6,7 @@
     <includedby refid="static__tensors_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp</includedby>
     <includedby refid="tensor__index__tools_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_index_tools.hpp</includedby>
     <includedby refid="ipartial__derivative_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp</includedby>
+    <includedby refid="connectivity__details_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp</includedby>
     <includedby refid="transpose_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/transpose.hpp</includedby>
     <invincdepgraph>
       <node id="66">
@@ -404,7 +405,7 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp</label>
         <link refid="geometryXYVxVy_2poisson_2qnsolver_8hpp_source"/>
       </node>
-      <node id="87">
+      <node id="88">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/mpisplitvlasovsolver.hpp</label>
         <link refid="mpisplitvlasovsolver_8hpp_source"/>
       </node>
@@ -506,15 +507,21 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_2d_partial_derivative.hpp</label>
         <link refid="spline__2d__partial__derivative_8hpp_source"/>
       </node>
-      <node id="86">
+      <node id="87">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpitransposealltoall.hpp</label>
         <link refid="mpitransposealltoall_8hpp_source"/>
-        <childnode refid="87" relation="include">
+        <childnode refid="88" relation="include">
         </childnode>
       </node>
       <node id="62">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp</label>
         <link refid="connectivity_8hpp_source"/>
+      </node>
+      <node id="85">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp</label>
+        <link refid="connectivity__details_8hpp_source"/>
+        <childnode refid="62" relation="include">
+        </childnode>
       </node>
       <node id="42">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/onion_patch_locator.hpp</label>
@@ -700,10 +707,10 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp</label>
         <link refid="rk4_8hpp_source"/>
       </node>
-      <node id="85">
+      <node id="86">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/transpose.hpp</label>
         <link refid="transpose_8hpp_source"/>
-        <childnode refid="86" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -718,6 +725,8 @@
         <childnode refid="80" relation="include">
         </childnode>
         <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

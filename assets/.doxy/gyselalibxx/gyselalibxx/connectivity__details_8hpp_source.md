@@ -17,6 +17,7 @@
 #include "edge.hpp"
 #include "interface.hpp"
 #include "patch.hpp"
+#include "type_seq_tools.hpp"
 
 namespace connectivity_details {
 template <class Patch, class InterfaceTypeSeq>
@@ -354,18 +355,24 @@ struct CollectGridsAlongDim<StartEdge, InterfaceTypeSeq, insert_pos, FoundGrids,
 template <class StartPatch, class Grid1D, class InterfaceTypeSeq>
 struct CollectAllGridsOnDim
 {
+private:
     using BackwardTypeSeq = typename CollectGridsAlongDim<
             Edge<StartPatch, Grid1D, FRONT>,
             InterfaceTypeSeq,
             BackInsert>::type;
-    using type = ddc::type_seq_merge_t<
-            BackwardTypeSeq,
-            // Work forward from back (end) of grid inserting each new grid at the end of the sequence
-            typename CollectGridsAlongDim<
-                    Edge<StartPatch, Grid1D, BACK>,
-                    InterfaceTypeSeq,
-                    FrontInsert,
-                    BackwardTypeSeq>::type>;
+    // Remove the final element so ForwardTypeSeq doesn't find these elements again in the
+    // periodic case and doesn't stop upon encountering Grid1D.
+    using NonOverlappingBackwardTypeSeq
+            = type_seq_range_t<BackwardTypeSeq, 0, ddc::type_seq_size_v<BackwardTypeSeq> - 1>;
+    // Work forward from back (end) of grid inserting each new grid at the end of the sequence
+    using ForwardTypeSeq = typename CollectGridsAlongDim<
+            Edge<StartPatch, Grid1D, BACK>,
+            InterfaceTypeSeq,
+            FrontInsert,
+            NonOverlappingBackwardTypeSeq>::type;
+
+public:
+    using type = ddc::type_seq_merge_t<BackwardTypeSeq, ForwardTypeSeq>;
 };
 
 template <class StartPatch, class Grid1D, class InterfaceTypeSeq>

@@ -563,11 +563,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef typename <a href="structconnectivity__details_1_1CollectGridsAlongDim.html"><strong>CollectGridsAlongDim</strong></a>&lt; <a href="structEdge.html"><strong>Edge</strong></a>&lt; StartPatch, Grid1D, FRONT &gt;, InterfaceTypeSeq, BackInsert &gt;<a href="structconnectivity__details_1_1CollectAllGridsOnDim.html#typedef-type"><strong>::type</strong></a></td>
-<td style="text-align: left;"><a href="#typedef-backwardtypeseq"><strong>BackwardTypeSeq</strong></a>  <br><em>The type sequence describing all grids found by iterating along this dimension in the backwards direction.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef ddc::type_seq_merge_t&lt; <a href="structconnectivity__details_1_1CollectAllGridsOnDim.html#typedef-backwardtypeseq"><strong>BackwardTypeSeq</strong></a>, typename <a href="structconnectivity__details_1_1CollectGridsAlongDim.html"><strong>CollectGridsAlongDim</strong></a>&lt; <a href="structEdge.html"><strong>Edge</strong></a>&lt; StartPatch, Grid1D, BACK &gt;, InterfaceTypeSeq, FrontInsert, <a href="structconnectivity__details_1_1CollectAllGridsOnDim.html#typedef-backwardtypeseq"><strong>BackwardTypeSeq</strong></a> &gt;::type &gt;</td>
+<td style="text-align: right;">typedef ddc::type_seq_merge_t&lt; BackwardTypeSeq, ForwardTypeSeq &gt;</td>
 <td style="text-align: left;"><a href="#typedef-type"><strong>type</strong></a>  <br><em>The type found by the class.</em></td>
 </tr>
 </tbody>
@@ -580,16 +576,9 @@
 <li><code>InterfaceTypeSeq</code> A DDC type sequence containing all the possible Interfaces. </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
-<h3 id="typedef-backwardtypeseq">typedef BackwardTypeSeq</h3>
-<p><em>The type sequence describing all grids found by iterating along this dimension in the backwards direction.</em> </p>
-<pre><code class="language-C++">using connectivity_details::CollectAllGridsOnDim&lt; StartPatch, Grid1D, InterfaceTypeSeq &gt;::BackwardTypeSeq =  typename CollectGridsAlongDim&lt; Edge&lt;StartPatch, Grid1D, FRONT&gt;, InterfaceTypeSeq, BackInsert&gt;::type;
-</code></pre>
-<p>This is found by working backward from front (start) of grid inserting each new grid at the start of the sequence. </p>
-<hr>
-
 <h3 id="typedef-type">typedef type</h3>
 <p><em>The type found by the class.</em> </p>
-<pre><code class="language-C++">using connectivity_details::CollectAllGridsOnDim&lt; StartPatch, Grid1D, InterfaceTypeSeq &gt;::type =  ddc::type_seq_merge_t&lt; BackwardTypeSeq, typename CollectGridsAlongDim&lt; Edge&lt;StartPatch, Grid1D, BACK&gt;, InterfaceTypeSeq, FrontInsert, BackwardTypeSeq&gt;::type&gt;;
+<pre><code class="language-C++">using connectivity_details::CollectAllGridsOnDim&lt; StartPatch, Grid1D, InterfaceTypeSeq &gt;::type =  ddc::type_seq_merge_t&lt;BackwardTypeSeq, ForwardTypeSeq&gt;;
 </code></pre>
 <hr>
 
