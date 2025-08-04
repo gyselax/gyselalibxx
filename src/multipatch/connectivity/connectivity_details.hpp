@@ -499,15 +499,13 @@ struct CollectAllGridsOnDim
             Edge<StartPatch, Grid1D, FRONT>,
             InterfaceTypeSeq,
             BackInsert>::type;
+    // Work forward from back (end) of grid inserting each new grid at the end of the sequence
+    using ForwardTypeSeq = typename CollectGridsAlongDim<
+            Edge<StartPatch, Grid1D, BACK>,
+            InterfaceTypeSeq,
+            FrontInsert>::type;
     /// The type found by the class.
-    using type = ddc::type_seq_merge_t<
-            BackwardTypeSeq,
-            // Work forward from back (end) of grid inserting each new grid at the end of the sequence
-            typename CollectGridsAlongDim<
-                    Edge<StartPatch, Grid1D, BACK>,
-                    InterfaceTypeSeq,
-                    FrontInsert,
-                    BackwardTypeSeq>::type>;
+    using type = ddc::type_seq_merge_t<BackwardTypeSeq, ForwardTypeSeq>;
 };
 
 /**
