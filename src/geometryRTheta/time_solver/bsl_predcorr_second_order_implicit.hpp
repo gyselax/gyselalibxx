@@ -164,7 +164,7 @@ public:
         std::chrono::time_point<std::chrono::system_clock> end_time;
 
         // Grid. ------------------------------------------------------------------------------------------
-        IdxRangeRTheta const grid(get_idx_range<GridR, GridTheta>(density_host));
+        IdxRangeRTheta const grid(get_idx_range(density_host));
 
         // --- Electrostatic potential (phi). -------------------------------------------------------------
         DFieldMemRTheta electrical_potential(grid);
@@ -173,6 +173,15 @@ public:
         host_t<PolarSplineMemRTheta> electrostatic_potential_coef(
                 ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
 
+        // --- For the computation of advection field from the electrostatic potential (phi): -------------
+        host_t<DVectorFieldMemRTheta<X, Y>> electric_field_alloc(grid);
+        host_t<DVectorFieldMemRTheta<X, Y>> advection_field_alloc(grid);
+        host_t<DVectorFieldRTheta<X, Y>> electric_field(electric_field_alloc);
+        host_t<DVectorFieldRTheta<X, Y>> advection_field(advection_field_alloc);
+
+        host_t<Spline2DMem> density_coef_alloc_host(get_spline_idx_range(m_builder));
+
+        // Operators
         ddc::NullExtrapolationRule extrapolation_rule;
         PolarSplineEvaluator<
                 Kokkos::DefaultHostExecutionSpace,
@@ -181,22 +190,16 @@ public:
                 ddc::NullExtrapolationRule>
                 polar_spline_evaluator(extrapolation_rule);
 
-        // --- For the computation of advection field from the electrostatic potential (phi): -------------
-        host_t<DVectorFieldMemRTheta<X, Y>> electric_field_alloc(grid);
-        host_t<DVectorFieldMemRTheta<X, Y>> advection_field_alloc(grid);
-        host_t<DVectorFieldRTheta<X, Y>> electric_field(electric_field_alloc);
-        host_t<DVectorFieldRTheta<X, Y>> advection_field(advection_field_alloc);
-
         AdvectionFieldFinder advection_field_computer(m_logical_to_physical);
+
+        PoissonLikeRHSFunction const
+                charge_density_coord(get_const_field(density_coef_alloc_host), m_evaluator);
 
         start_time = std::chrono::system_clock::now();
         for (int iter(0); iter < steps; ++iter) {
             // STEP 1: From rho^n, we compute phi^n: Poisson equation
-            host_t<Spline2DMem> density_coef(get_spline_idx_range(m_builder));
-            m_builder(get_field(density_coef), get_const_field(density_host));
-            PoissonLikeRHSFunction const
-                    charge_density_coord_1(get_const_field(density_coef), m_evaluator);
-            m_poisson_solver(charge_density_coord_1, get_field(electrostatic_potential_coef));
+            m_builder(get_field(density_coef_alloc_host), get_const_field(density_host));
+            m_poisson_solver(charge_density_coord, get_field(electrostatic_potential_coef));
 
             polar_spline_evaluator(
                     get_field(electrical_potential_host),
@@ -291,10 +294,8 @@ public:
             // STEP 4: From rho^P, we compute phi^P: Poisson equation
             auto density_predicted_host
                     = ddc::create_mirror_view_and_copy(get_field(density_predicted));
-            m_builder(get_field(density_coef), get_const_field(density_predicted_host));
-            PoissonLikeRHSFunction const
-                    charge_density_coord_4(get_const_field(density_coef), m_evaluator);
-            m_poisson_solver(charge_density_coord_4, get_field(electrostatic_potential_coef));
+            m_builder(get_field(density_coef_alloc_host), get_const_field(density_predicted_host));
+            m_poisson_solver(charge_density_coord, get_field(electrostatic_potential_coef));
 
             // STEP 5: From phi^P, we compute A^P:
             advection_field_computer(get_field(electrostatic_potential_coef), advection_field);
@@ -356,10 +357,7 @@ public:
         }
 
         // STEP 1: From rho^n, we compute phi^n: Poisson equation
-        host_t<Spline2DMem> density_coef(get_spline_idx_range(m_builder));
-        m_builder(get_field(density_coef), get_const_field(density_host));
-        PoissonLikeRHSFunction const
-                charge_density_coord(get_const_field(density_coef), m_evaluator);
+        m_builder(get_field(density_coef_alloc_host), get_const_field(density_host));
         m_poisson_solver(charge_density_coord, get_field(electrical_potential));
         ddc::parallel_deepcopy(electrical_potential_host, electrical_potential);
 
