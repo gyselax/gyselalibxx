@@ -169,7 +169,7 @@ public:
         DFieldMemRTheta electrical_potential(grid);
         host_t<DFieldMemRTheta> electrical_potential_host(grid);
 
-        host_t<PolarSplineMemRTheta> electrostatic_potential_coef(
+        host_t<PolarSplineMemRTheta> electrostatic_potential_coef_alloc_host(
                 ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
 
         host_t<Spline2DMem> density_coef_alloc_host(get_spline_idx_range(m_builder));
@@ -209,11 +209,13 @@ public:
             double const time = iter * dt;
             // STEP 1: From rho^n, we compute phi^n: Poisson equation
             m_builder(get_field(density_coef_alloc_host), get_const_field(density_host));
-            m_poisson_solver(charge_density_coord, get_field(electrostatic_potential_coef));
+            m_poisson_solver(
+                    charge_density_coord,
+                    get_field(electrostatic_potential_coef_alloc_host));
 
             polar_spline_evaluator(
                     get_field(electrical_potential_host),
-                    get_const_field(electrostatic_potential_coef));
+                    get_const_field(electrostatic_potential_coef_alloc_host));
 
             ddc::PdiEvent("iteration")
                     .with("iter", iter)
@@ -222,7 +224,9 @@ public:
                     .with("electrical_potential", electrical_potential_host);
 
             // STEP 2: From phi^n, we compute A^n:
-            advection_field_computer(get_field(electrostatic_potential_coef), advection_field_host);
+            advection_field_computer(
+                    get_field(electrostatic_potential_coef_alloc_host),
+                    advection_field_host);
 
 
             // STEP 3: From rho^n and A^n, we compute rho^P: Vlasov equation
@@ -243,11 +247,13 @@ public:
                     = ddc::create_mirror_view_and_copy(get_field(density_predicted_alloc));
             // STEP 4: From rho^P, we compute phi^P: Poisson equation
             m_builder(get_field(density_coef_alloc_host), get_const_field(density_predicted_host));
-            m_poisson_solver(charge_density_coord, get_field(electrostatic_potential_coef));
+            m_poisson_solver(
+                    charge_density_coord,
+                    get_field(electrostatic_potential_coef_alloc_host));
 
             // STEP 5: From phi^P, we compute A^P:
             advection_field_computer(
-                    get_field(electrostatic_potential_coef),
+                    get_field(electrostatic_potential_coef_alloc_host),
                     advection_field_predicted_host);
 
 
