@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove use of `std::cyl_bessel_j` which is not available in libc++.
 - Fix `mi250.hipcc.adastra.spack` toolchain.
 - Fix uninitialised values being used as an initial guess for the result of the matrix equation in `PolarSplineFEMPoissonLikeSolver`.
+- Fix missing grids when calling `collect_grids_on_dim_t`.
 
 ### Changed
 

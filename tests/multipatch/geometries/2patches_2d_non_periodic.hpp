@@ -7,7 +7,8 @@
             - uniform/non uniform cubic splines;
             - uniform/non uniform Grid1 and Grid2; 
 */
-#pragma once
+#ifdef GEOM_NAMESPACE_NAME
+
 #include <type_traits>
 
 #include <ddc/ddc.hpp>
@@ -175,3 +176,5 @@ using Connectivity = MultipatchConnectivity<
 #endif
 
 } // namespace GEOM_NAMESPACE_NAME
+
+#endif
