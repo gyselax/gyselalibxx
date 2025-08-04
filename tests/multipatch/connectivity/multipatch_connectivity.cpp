@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 
 #include "2patches_2d_non_periodic_uniform.hpp"
+#include "3patches_2d_non_periodic_non_uniform.hpp"
 #include "5patches_figure_of_eight.hpp"
 #include "9patches_2d_periodic_strips_uniform.hpp"
 #include "ddc_aliases.hpp"
@@ -340,3 +341,65 @@ TEST(MultipatchConnectivityDetailsTest, FindAssociatedInterface)
             = find_associated_interface_t<WestEdge<2>, Connectivity::interface_collection>;
     static_assert(std::is_same_v<WestEdge2Interface, Interface_1_2>);
 }
+
+TEST(MultipatchConnectivityDetailsTest, CollectGridsOnDim)
+{
+    using namespace non_periodic_non_uniform_2d_3patches;
+
+    // INTERFACES ------------------------------------------------------------------------------------
+    /* It is supposed to represent:
+     * | 1 | 2 | 3 |
+     */
+    using NorthInterface1 = Interface<NorthEdge<1>, OutsideEdge, true>;
+    using NorthInterface2 = Interface<NorthEdge<2>, OutsideEdge, true>;
+    using NorthInterface3 = Interface<NorthEdge<3>, OutsideEdge, true>;
+
+    using SouthInterface1 = Interface<OutsideEdge, SouthEdge<1>, true>;
+    using SouthInterface2 = Interface<OutsideEdge, SouthEdge<2>, true>;
+    using SouthInterface3 = Interface<OutsideEdge, SouthEdge<3>, true>;
+
+    using WestInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
+    using EastInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
+
+    using Interface_1_2 = Interface<EastEdge<1>, WestEdge<2>, true>;
+    using Interface_2_3 = Interface<EastEdge<2>, WestEdge<3>, true>;
+
+
+    // CONNECTIVITY ----------------------------------------------------------------------------------
+    using Connectivity = MultipatchConnectivity<
+            NorthInterface1,
+            NorthInterface2,
+            NorthInterface3,
+            SouthInterface1,
+            SouthInterface2,
+            SouthInterface3,
+            WestInterface1,
+            EastInterface3,
+            Interface_1_2,
+            Interface_2_3>;
+
+    using interface_collection =
+            typename Connectivity::get_all_interfaces_along_direction_t<GridX<1>>;
+    using all_patches = typename Connectivity::all_patches;
+
+    using expected_interfaces_along_gridx
+            = ddc::detail::TypeSeq<WestInterface1, Interface_1_2, Interface_2_3, EastInterface3>;
+
+    static_assert(std::is_same_v<interface_collection, expected_interfaces_along_gridx>);
+
+    using Grid1DSeq1 = collect_grids_on_dim_t<Patch1, GridX<1>, interface_collection>;
+
+    static_assert(std::is_same_v<Grid1DSeq1, ddc::detail::TypeSeq<GridX<1>, GridX<2>, GridX<3>>>);
+    static_assert(ddc::in_tags_v<GridX<1>, Grid1DSeq1>);
+    static_assert(ddc::in_tags_v<GridX<2>, Grid1DSeq1>);
+    static_assert(ddc::in_tags_v<GridX<3>, Grid1DSeq1>);
+
+    // Try by taking from other side
+    using Grid1DSeq2 = collect_grids_on_dim_t<Patch3, GridX<3>, interface_collection>;
+
+    static_assert(std::is_same_v<Grid1DSeq2, ddc::detail::TypeSeq<GridX<1>, GridX<2>, GridX<3>>>);
+    static_assert(ddc::in_tags_v<GridX<1>, Grid1DSeq2>);
+    static_assert(ddc::in_tags_v<GridX<2>, Grid1DSeq2>);
+    static_assert(ddc::in_tags_v<GridX<3>, Grid1DSeq2>);
+}
+
