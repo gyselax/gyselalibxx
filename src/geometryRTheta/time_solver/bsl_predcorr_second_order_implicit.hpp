@@ -174,12 +174,10 @@ public:
                 ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
 
         // --- For the computation of advection field from the electrostatic potential (phi): -------------
-        host_t<DVectorFieldMemRTheta<X, Y>> electric_field_alloc(grid);
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_alloc(grid);
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_k_alloc(grid);
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_k_tot_alloc_host(grid);
 
-        host_t<DVectorFieldRTheta<X, Y>> electric_field(electric_field_alloc);
         host_t<DVectorFieldRTheta<X, Y>> advection_field(advection_field_alloc);
         host_t<DVectorFieldRTheta<X, Y>> advection_field_k(advection_field_k_alloc);
         host_t<DVectorFieldRTheta<X, Y>> advection_field_k_tot_host(advection_field_k_tot_alloc_host);
