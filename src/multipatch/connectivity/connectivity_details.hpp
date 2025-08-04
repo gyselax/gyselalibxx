@@ -489,6 +489,7 @@ struct CollectGridsAlongDim<StartEdge, InterfaceTypeSeq, insert_pos, FoundGrids,
 template <class StartPatch, class Grid1D, class InterfaceTypeSeq>
 struct CollectAllGridsOnDim
 {
+private:
     /**
      * @brief The type sequence describing all grids found by iterating along this
      * dimension in the backwards direction.
@@ -500,6 +501,8 @@ struct CollectAllGridsOnDim
             Edge<StartPatch, Grid1D, FRONT>,
             InterfaceTypeSeq,
             BackInsert>::type;
+    // Remove the final element so ForwardTypeSeq doesn't find these elements again in the
+    // periodic case and doesn't stop upon encountering Grid1D.
     using NonOverlappingBackwardTypeSeq
             = type_seq_range_t<BackwardTypeSeq, 0, ddc::type_seq_size_v<BackwardTypeSeq> - 1>;
     // Work forward from back (end) of grid inserting each new grid at the end of the sequence
@@ -508,6 +511,8 @@ struct CollectAllGridsOnDim
             InterfaceTypeSeq,
             FrontInsert,
             NonOverlappingBackwardTypeSeq>::type;
+
+public:
     /// The type found by the class.
     using type = ddc::type_seq_merge_t<BackwardTypeSeq, ForwardTypeSeq>;
 };
