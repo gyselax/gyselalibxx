@@ -133,13 +133,14 @@ public:
 
         auto electrical_potential_alloc_host
                 = ddc::create_mirror_view(get_field(electrical_potential_alloc));
-        auto density = ddc::create_mirror_view(Kokkos::DefaultExecutionSpace(), density_host);
+        auto density_alloc = ddc::create_mirror_view(Kokkos::DefaultExecutionSpace(), density_host);
 
         // Fields
         DFieldRTheta electrical_potential = get_field(electrical_potential_alloc);
         host_t<DFieldRTheta> electrical_potential_host = get_field(electrical_potential_alloc_host);
         host_t<PolarSplineRTheta> electrostatic_potential_coef_host
                 = get_field(electrostatic_potential_coef_alloc_host);
+		DFieldRTheta density = get_field(density_alloc);
 
         // Operators
         AdvectionFieldFinder advection_field_computer(m_mapping);
@@ -189,7 +190,7 @@ public:
         // Iteration loop
         start_time = std::chrono::system_clock::now();
         for (int iter(0); iter < steps; ++iter) {
-            ddc::parallel_deepcopy(density, density_host);
+            ddc::parallel_deepcopy(density, get_const_field(density_host));
             time_stepper
                     .update(Kokkos::DefaultExecutionSpace(),
                             density,
@@ -197,7 +198,7 @@ public:
                             define_advection_field,
                             advect_density);
 
-            ddc::parallel_deepcopy(density_host, density);
+            ddc::parallel_deepcopy(density_host, get_const_field(density));
             m_builder(get_field(density_coef_host), get_const_field(density_host));
             m_poisson_solver(charge_density_coord, electrical_potential);
             ddc::parallel_deepcopy(
