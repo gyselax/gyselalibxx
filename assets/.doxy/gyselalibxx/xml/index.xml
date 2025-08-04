@@ -163,7 +163,7 @@
     <member refid="classBslImplicitPredCorrRTheta_1a8b2254fdb0e99c8cd064d1d9403a8bd6" kind="function"><name>BslImplicitPredCorrRTheta</name></member>
     <member refid="classBslImplicitPredCorrRTheta_1adc590a931bd7c3e2e526feaf8ae9b49e" kind="function"><name>operator()</name></member>
     <member refid="classBslImplicitPredCorrRTheta_1a21996db8281effe305258715e9fb3bda" kind="function"><name>compute_square_polar_distance</name></member>
-    <member refid="classBslImplicitPredCorrRTheta_1a546d332dc643c3ceb532b9e2ea778e05" kind="function"><name>implicit_loop</name></member>
+    <member refid="classBslImplicitPredCorrRTheta_1af9c5e79af6d8c2dc148ed95b5a3b6ff4" kind="function"><name>implicit_loop</name></member>
   </compound>
   <compound refid="classBslPredCorrRTheta" kind="class"><name>BslPredCorrRTheta</name>
     <member refid="classBslPredCorrRTheta_1ae1e9de22b859cabec7f5f22287e2e3c4" kind="typedef"><name>BslAdvectionRTheta</name></member>
