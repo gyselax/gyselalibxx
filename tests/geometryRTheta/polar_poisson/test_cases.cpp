@@ -193,11 +193,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                                 * ((-e) * (epsilon * epsilon) * r * sin_theta
                                                            * ipow(cos_theta, 2) * xi
                                                            / (ipow(2.0 - tmp1, 2)
-                                                              * pow((epsilon
-                                                                             * (epsilon
-                                                                                + 2.0 * r * cos_theta)
-                                                                     + 1.0),
-                                                                    (3.0 / 2.0)))
+                                                              * Kokkos::pow(
+                                                                      (epsilon
+                                                                               * (epsilon
+                                                                                  + 2.0 * r * cos_theta)
+                                                                       + 1.0),
+                                                                      (3.0 / 2.0)))
                                                    + 2.0 * e * (epsilon * epsilon) * r * sin_theta
                                                              * ipow(cos_theta, 2) * xi
                                                              / (ipow(2.0 - tmp1, 3)
@@ -214,11 +215,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                                 * (e * (epsilon * epsilon) * r * ipow(sin_theta, 2)
                                                            * cos_theta * xi
                                                            / (ipow(2.0 - tmp1, 2)
-                                                              * pow((epsilon
-                                                                             * (epsilon
-                                                                                + 2.0 * r * cos_theta)
-                                                                     + 1.0),
-                                                                    (3.0 / 2.0)))
+                                                              * Kokkos::pow(
+                                                                      (epsilon
+                                                                               * (epsilon
+                                                                                  + 2.0 * r * cos_theta)
+                                                                       + 1.0),
+                                                                      (3.0 / 2.0)))
                                                    - 2.0 * e * (epsilon * epsilon) * r
                                                              * ipow(sin_theta, 2) * cos_theta * xi
                                                              / (ipow(2.0 - tmp1, 3)
@@ -241,11 +243,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                                   * ((-2.0) * e * (epsilon * epsilon) * r
                                                              * sin_theta * ipow(cos_theta, 2) * xi
                                                              / (ipow(2.0 - tmp1, 2)
-                                                                * pow((epsilon
-                                                                               * (epsilon
-                                                                                  + 2.0 * r * cos_theta)
-                                                                       + 1.0),
-                                                                      (3.0 / 2.0)))
+                                                                * Kokkos::pow(
+                                                                        (epsilon
+                                                                                 * (epsilon
+                                                                                    + 2.0 * r * cos_theta)
+                                                                         + 1.0),
+                                                                        (3.0 / 2.0)))
                                                      + 4.0 * e * (epsilon * epsilon) * r * sin_theta
                                                                * ipow(cos_theta, 2) * xi
                                                                / (ipow(2.0 - tmp1, 3)
@@ -273,11 +276,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                                   * (2.0 * e * (epsilon * epsilon) * r
                                                              * ipow(sin_theta, 2) * cos_theta * xi
                                                              / (ipow(2.0 - tmp1, 2)
-                                                                * pow((epsilon
-                                                                               * (epsilon
-                                                                                  + 2.0 * r * cos_theta)
-                                                                       + 1.0),
-                                                                      (3.0 / 2.0)))
+                                                                * Kokkos::pow(
+                                                                        (epsilon
+                                                                                 * (epsilon
+                                                                                    + 2.0 * r * cos_theta)
+                                                                         + 1.0),
+                                                                        (3.0 / 2.0)))
                                                      - 4.0 * e * (epsilon * epsilon) * r
                                                                * ipow(sin_theta, 2) * cos_theta * xi
                                                                / (ipow(2.0 - tmp1, 3)
@@ -289,38 +293,52 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                                                / (ipow(2.0 - tmp1, 2) * tmp1)
                                                      + 2.0 * e * epsilon * ipow(cos_theta, 2) * xi
                                                                / (ipow(2.0 - tmp1, 2) * tmp1)))
-                                     * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                     / (ipow(2.0 - tmp1, 2) * tmp1)
-                                             + e * sin_theta * xi / ((2.0 - tmp1))),
-                                            2.0)
+                                     * (Kokkos::
+                                                pow((e * epsilon * r * sin_theta * cos_theta * xi
+                                                             / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                     + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                    2.0)
                                         + ipow(cos_theta, 2)
                                                   / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                      + 1.0)))
                         * Kokkos::exp(-tanh_term)
-                        / pow(((-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                               / (ipow(2.0 - tmp1, 2) * tmp1)
-                                       + e * cos_theta * xi / ((2.0 - tmp1)))
-                                              * (e * epsilon * r * sin_theta * cos_theta * xi
-                                                         / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                 + e * sin_theta * xi / ((2.0 - tmp1)))
-                                      - sin_theta * cos_theta
-                                                / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                   + 1.0)),
-                                     2.0))
-                               + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                               / (ipow(2.0 - tmp1, 2) * tmp1)
-                                       + e * cos_theta * xi / ((2.0 - tmp1))),
-                                      2.0)
-                                  + ipow(sin_theta, 2)
-                                            / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                         * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                         / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                 + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                2.0)
-                                            + ipow(cos_theta, 2)
-                                                      / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                         + 1.0))),
-                              (3.0 / 2.0))
+                        / Kokkos::
+                                pow(((-Kokkos::
+                                              pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                            / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                    + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                           * (e * epsilon * r * sin_theta
+                                                                      * cos_theta * xi
+                                                                      / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                              + e * sin_theta * xi / ((2.0 - tmp1)))
+                                                   - sin_theta * cos_theta
+                                                             / (epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0)),
+                                                  2.0))
+                                     + (Kokkos::
+                                                pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                             / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                     + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                    2.0)
+                                        + ipow(sin_theta, 2)
+                                                  / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                     + 1.0))
+                                               * (Kokkos::
+                                                          pow((e * epsilon * r * sin_theta
+                                                                       * cos_theta * xi
+                                                                       / (ipow(2.0 - tmp1, 2)
+                                                                          * tmp1)
+                                                               + e * sin_theta * xi
+                                                                         / ((2.0 - tmp1))),
+                                                              2.0)
+                                                  + ipow(cos_theta, 2)
+                                                            / (epsilon
+                                                                       * (epsilon
+                                                                          + 2.0 * r * cos_theta)
+                                                               + 1.0))),
+                                    (3.0 / 2.0))
               - r
                         * (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                     / (ipow(2.0 - tmp1, 2) * tmp1)
@@ -335,8 +353,9 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                    * Kokkos::sin(
                                            2.0 * M_PI * e * r * sin_theta * xi / ((2.0 - tmp1)))
                                    * cos_theta
-                                   / pow((epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0),
-                                         (3.0 / 2.0))
+                                   / Kokkos::
+                                           pow((epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0),
+                                               (3.0 / 2.0))
                            - 0.4096 * minus_pow_6 * plus_pow_6
                                      * ((-2.0) * M_PI * e * epsilon * r * ipow(sin_theta, 2) * xi
                                                 / (ipow(2.0 - tmp1, 2) * tmp1)
@@ -351,9 +370,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                      * (2.0 * M_PI * e * (epsilon * epsilon) * r
                                                 * ipow(sin_theta, 2) * cos_theta * xi
                                                 / (ipow(2.0 - tmp1, 2)
-                                                   * pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                          + 1.0),
-                                                         (3.0 / 2.0)))
+                                                   * Kokkos::
+                                                           pow((epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0),
+                                                               (3.0 / 2.0)))
                                         - 4.0 * M_PI * e * (epsilon * epsilon) * r
                                                   * ipow(sin_theta, 2) * cos_theta * xi
                                                   / (ipow(2.0 - tmp1, 3)
@@ -413,41 +435,50 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                      / tmp1)
                         * Kokkos::exp(-tanh_term)
                         / Kokkos::sqrt(
-                                (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1)))
-                                               * (e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1)))
-                                       - sin_theta * cos_theta
-                                                 / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                    + 1.0)),
-                                      2.0))
-                                + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1))),
-                                       2.0)
+                                (-Kokkos::
+                                         pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                       / (ipow(2.0 - tmp1, 2) * tmp1)
+                                               + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                      * (e * epsilon * r * sin_theta * cos_theta
+                                                                 * xi / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                         + e * sin_theta * xi / ((2.0 - tmp1)))
+                                              - sin_theta * cos_theta
+                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0)),
+                                             2.0))
+                                + (Kokkos::
+                                           pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                        / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                + e * cos_theta * xi / ((2.0 - tmp1))),
+                                               2.0)
                                    + ipow(sin_theta, 2)
                                              / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                          * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          * (Kokkos::
+                                                     pow((e * epsilon * r * sin_theta * cos_theta
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(cos_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0)))
               + r
                         * ((-2.0) * epsilon * ipow(sin_theta, 2) * cos_theta
-                                   / pow((epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0), 2.0)
+                                   / Kokkos::
+                                           pow((epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0),
+                                               2.0)
                            + ((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                       / (ipow(2.0 - tmp1, 2) * tmp1)
                               + e * cos_theta * xi / ((2.0 - tmp1)))
                                      * (2.0 * e * (epsilon * epsilon) * r * ipow(sin_theta, 2)
                                                 * cos_theta * xi
                                                 / (ipow(2.0 - tmp1, 2)
-                                                   * pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                          + 1.0),
-                                                         (3.0 / 2.0)))
+                                                   * Kokkos::
+                                                           pow((epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0),
+                                                               (3.0 / 2.0)))
                                         - 4.0 * e * (epsilon * epsilon) * r * ipow(sin_theta, 2)
                                                   * cos_theta * xi
                                                   / (ipow(2.0 - tmp1, 3)
@@ -479,26 +510,30 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                      * Kokkos::cos(2.0 * M_PI * (1.0 - tmp1) / epsilon))
                         * Kokkos::exp(-tanh_term)
                         / Kokkos::sqrt(
-                                (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1)))
-                                               * (e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1)))
-                                       - sin_theta * cos_theta
-                                                 / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                    + 1.0)),
-                                      2.0))
-                                + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1))),
-                                       2.0)
+                                (-Kokkos::
+                                         pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                       / (ipow(2.0 - tmp1, 2) * tmp1)
+                                               + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                      * (e * epsilon * r * sin_theta * cos_theta
+                                                                 * xi / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                         + e * sin_theta * xi / ((2.0 - tmp1)))
+                                              - sin_theta * cos_theta
+                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0)),
+                                             2.0))
+                                + (Kokkos::
+                                           pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                        / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                + e * cos_theta * xi / ((2.0 - tmp1))),
+                                               2.0)
                                    + ipow(sin_theta, 2)
                                              / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                          * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          * (Kokkos::
+                                                     pow((e * epsilon * r * sin_theta * cos_theta
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(cos_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0)))
@@ -516,16 +551,21 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                              2.0 * M_PI * e * r * sin_theta * xi / ((2.0 - tmp1)))
                                      / tmp1)
                         * (2.0 * epsilon * sin_theta * ipow(cos_theta, 2)
-                                   / pow((epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0), 2.0)
+                                   / Kokkos::
+                                           pow((epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0),
+                                               2.0)
                            + ((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                       / (ipow(2.0 - tmp1, 2) * tmp1)
                               + e * cos_theta * xi / ((2.0 - tmp1)))
                                      * ((-e) * (epsilon * epsilon) * r * sin_theta
                                                 * ipow(cos_theta, 2) * xi
                                                 / (ipow(2.0 - tmp1, 2)
-                                                   * pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                          + 1.0),
-                                                         (3.0 / 2.0)))
+                                                   * Kokkos::
+                                                           pow((epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0),
+                                                               (3.0 / 2.0)))
                                         + 2.0 * e * (epsilon * epsilon) * r * sin_theta
                                                   * ipow(cos_theta, 2) * xi
                                                   / (ipow(2.0 - tmp1, 3)
@@ -539,9 +579,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                      * (e * (epsilon * epsilon) * r * ipow(sin_theta, 2) * cos_theta
                                                 * xi
                                                 / (ipow(2.0 - tmp1, 2)
-                                                   * pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                          + 1.0),
-                                                         (3.0 / 2.0)))
+                                                   * Kokkos::
+                                                           pow((epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0),
+                                                               (3.0 / 2.0)))
                                         - 2.0 * e * (epsilon * epsilon) * r * ipow(sin_theta, 2)
                                                   * cos_theta * xi
                                                   / (ipow(2.0 - tmp1, 3)
@@ -553,36 +596,41 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                                   / (ipow(2.0 - tmp1, 2) * tmp1)))
                         * Kokkos::exp(-tanh_term)
                         / Kokkos::sqrt(
-                                (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1)))
-                                               * (e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1)))
-                                       - sin_theta * cos_theta
-                                                 / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                    + 1.0)),
-                                      2.0))
-                                + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1))),
-                                       2.0)
+                                (-Kokkos::
+                                         pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                       / (ipow(2.0 - tmp1, 2) * tmp1)
+                                               + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                      * (e * epsilon * r * sin_theta * cos_theta
+                                                                 * xi / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                         + e * sin_theta * xi / ((2.0 - tmp1)))
+                                              - sin_theta * cos_theta
+                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0)),
+                                             2.0))
+                                + (Kokkos::
+                                           pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                        / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                + e * cos_theta * xi / ((2.0 - tmp1))),
+                                               2.0)
                                    + ipow(sin_theta, 2)
                                              / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                          * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          * (Kokkos::
+                                                     pow((e * epsilon * r * sin_theta * cos_theta
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(cos_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0)))
               + r
-                        * (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                        / (ipow(2.0 - tmp1, 2) * tmp1)
-                                + e * cos_theta * xi / ((2.0 - tmp1))),
-                               2.0)
+                        * (Kokkos::
+                                   pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                / (ipow(2.0 - tmp1, 2) * tmp1)
+                                        + e * cos_theta * xi / ((2.0 - tmp1))),
+                                       2.0)
                            + ipow(sin_theta, 2) / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                        * (20.0 * pow(tanh_term, 2.0) - 20.0)
+                        * (20.0 * Kokkos::pow(tanh_term, 2.0) - 20.0)
                         * (0.4096 * minus_pow_6 * plus_pow_6
                                    * (2.0 * M_PI * e * epsilon * r * sin_theta * cos_theta * xi
                                               / (ipow(2.0 - tmp1, 2) * tmp1)
@@ -605,47 +653,56 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                      * Kokkos::cos(2.0 * M_PI * (1.0 - tmp1) / epsilon))
                         * Kokkos::exp(-tanh_term)
                         / Kokkos::sqrt(
-                                (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1)))
-                                               * (e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1)))
-                                       - sin_theta * cos_theta
-                                                 / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                    + 1.0)),
-                                      2.0))
-                                + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1))),
-                                       2.0)
+                                (-Kokkos::
+                                         pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                       / (ipow(2.0 - tmp1, 2) * tmp1)
+                                               + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                      * (e * epsilon * r * sin_theta * cos_theta
+                                                                 * xi / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                         + e * sin_theta * xi / ((2.0 - tmp1)))
+                                              - sin_theta * cos_theta
+                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0)),
+                                             2.0))
+                                + (Kokkos::
+                                           pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                        / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                + e * cos_theta * xi / ((2.0 - tmp1))),
+                                               2.0)
                                    + ipow(sin_theta, 2)
                                              / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                          * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          * (Kokkos::
+                                                     pow((e * epsilon * r * sin_theta * cos_theta
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(cos_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0)))
               + r
-                        * (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                        / (ipow(2.0 - tmp1, 2) * tmp1)
-                                + e * cos_theta * xi / ((2.0 - tmp1))),
-                               2.0)
+                        * (Kokkos::
+                                   pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                / (ipow(2.0 - tmp1, 2) * tmp1)
+                                        + e * cos_theta * xi / ((2.0 - tmp1))),
+                                       2.0)
                            + ipow(sin_theta, 2) / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                         * ((-0.8192) * M_PI * epsilon * minus_pow_6 * plus_pow_6
                                    * Kokkos::sin(2.0 * M_PI * (1.0 - tmp1) / epsilon)
                                    * Kokkos::sin(
                                            2.0 * M_PI * e * r * sin_theta * xi / ((2.0 - tmp1)))
                                    * ipow(cos_theta, 2)
-                                   / pow((epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0),
-                                         (3.0 / 2.0))
+                                   / Kokkos::
+                                           pow((epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0),
+                                               (3.0 / 2.0))
                            - 0.4096 * minus_pow_6 * plus_pow_6
-                                     * pow((2.0 * M_PI * e * epsilon * r * sin_theta * cos_theta
-                                                    * xi / (ipow(2.0 - tmp1, 2) * tmp1)
-                                            + 2.0 * M_PI * e * sin_theta * xi / ((2.0 - tmp1))),
-                                           2.0)
+                                     * Kokkos::
+                                             pow((2.0 * M_PI * e * epsilon * r * sin_theta
+                                                          * cos_theta * xi
+                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                  + 2.0 * M_PI * e * sin_theta * xi
+                                                            / ((2.0 - tmp1))),
+                                                 2.0)
                                      * Kokkos::sin(
                                              2.0 * M_PI * e * r * sin_theta * xi / ((2.0 - tmp1)))
                                      * Kokkos::cos(2.0 * M_PI * (1.0 - tmp1) / epsilon)
@@ -653,9 +710,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                      * ((-2.0) * M_PI * e * (epsilon * epsilon) * r * sin_theta
                                                 * ipow(cos_theta, 2) * xi
                                                 / (ipow(2.0 - tmp1, 2)
-                                                   * pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                          + 1.0),
-                                                         (3.0 / 2.0)))
+                                                   * Kokkos::
+                                                           pow((epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0),
+                                                               (3.0 / 2.0)))
                                         + 4.0 * M_PI * e * (epsilon * epsilon) * r * sin_theta
                                                   * ipow(cos_theta, 2) * xi
                                                   / (ipow(2.0 - tmp1, 3)
@@ -718,34 +778,39 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                      * Kokkos::cos(2.0 * M_PI * (1.0 - tmp1) / epsilon))
                         * Kokkos::exp(-tanh_term)
                         / Kokkos::sqrt(
-                                (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1)))
-                                               * (e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1)))
-                                       - sin_theta * cos_theta
-                                                 / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                    + 1.0)),
-                                      2.0))
-                                + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1))),
-                                       2.0)
+                                (-Kokkos::
+                                         pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                       / (ipow(2.0 - tmp1, 2) * tmp1)
+                                               + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                      * (e * epsilon * r * sin_theta * cos_theta
+                                                                 * xi / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                         + e * sin_theta * xi / ((2.0 - tmp1)))
+                                              - sin_theta * cos_theta
+                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0)),
+                                             2.0))
+                                + (Kokkos::
+                                           pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                        / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                + e * cos_theta * xi / ((2.0 - tmp1))),
+                                               2.0)
                                    + ipow(sin_theta, 2)
                                              / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                          * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          * (Kokkos::
+                                                     pow((e * epsilon * r * sin_theta * cos_theta
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(cos_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0)))
               + r
-                        * (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                        / (ipow(2.0 - tmp1, 2) * tmp1)
-                                + e * cos_theta * xi / ((2.0 - tmp1))),
-                               2.0)
+                        * (Kokkos::
+                                   pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                / (ipow(2.0 - tmp1, 2) * tmp1)
+                                        + e * cos_theta * xi / ((2.0 - tmp1))),
+                                       2.0)
                            + ipow(sin_theta, 2) / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                         * (1.0 / 2.0
                                    * (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
@@ -757,9 +822,10 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                       - sin_theta * cos_theta
                                                 / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                                    * (4.0 * epsilon * sin_theta * ipow(cos_theta, 2)
-                                              / pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                     + 1.0),
-                                                    2.0)
+                                              / Kokkos::
+                                                      pow((epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0),
+                                                          2.0)
                                       + 2.0
                                                 * ((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                                            / (ipow(2.0 - tmp1, 2) * tmp1)
@@ -767,11 +833,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                                 * ((-e) * (epsilon * epsilon) * r * sin_theta
                                                            * ipow(cos_theta, 2) * xi
                                                            / (ipow(2.0 - tmp1, 2)
-                                                              * pow((epsilon
-                                                                             * (epsilon
-                                                                                + 2.0 * r * cos_theta)
-                                                                     + 1.0),
-                                                                    (3.0 / 2.0)))
+                                                              * Kokkos::pow(
+                                                                      (epsilon
+                                                                               * (epsilon
+                                                                                  + 2.0 * r * cos_theta)
+                                                                       + 1.0),
+                                                                      (3.0 / 2.0)))
                                                    + 2.0 * e * (epsilon * epsilon) * r * sin_theta
                                                              * ipow(cos_theta, 2) * xi
                                                              / (ipow(2.0 - tmp1, 3)
@@ -788,11 +855,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                                 * (e * (epsilon * epsilon) * r * ipow(sin_theta, 2)
                                                            * cos_theta * xi
                                                            / (ipow(2.0 - tmp1, 2)
-                                                              * pow((epsilon
-                                                                             * (epsilon
-                                                                                + 2.0 * r * cos_theta)
-                                                                     + 1.0),
-                                                                    (3.0 / 2.0)))
+                                                              * Kokkos::pow(
+                                                                      (epsilon
+                                                                               * (epsilon
+                                                                                  + 2.0 * r * cos_theta)
+                                                                       + 1.0),
+                                                                      (3.0 / 2.0)))
                                                    - 2.0 * e * (epsilon * epsilon) * r
                                                              * ipow(sin_theta, 2) * cos_theta * xi
                                                              / (ipow(2.0 - tmp1, 3)
@@ -806,20 +874,24 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                                              / (ipow(2.0 - tmp1, 2) * tmp1)))
                            - 1.0 / 2.0
                                      * ((-2.0) * epsilon * ipow(cos_theta, 3)
-                                                / pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                       + 1.0),
-                                                      2.0)
+                                                / Kokkos::
+                                                        pow((epsilon
+                                                                     * (epsilon
+                                                                        + 2.0 * r * cos_theta)
+                                                             + 1.0),
+                                                            2.0)
                                         + (e * epsilon * r * sin_theta * cos_theta * xi
                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
                                            + e * sin_theta * xi / ((2.0 - tmp1)))
                                                   * ((-2.0) * e * (epsilon * epsilon) * r
                                                              * sin_theta * ipow(cos_theta, 2) * xi
                                                              / (ipow(2.0 - tmp1, 2)
-                                                                * pow((epsilon
-                                                                               * (epsilon
-                                                                                  + 2.0 * r * cos_theta)
-                                                                       + 1.0),
-                                                                      (3.0 / 2.0)))
+                                                                * Kokkos::pow(
+                                                                        (epsilon
+                                                                                 * (epsilon
+                                                                                    + 2.0 * r * cos_theta)
+                                                                         + 1.0),
+                                                                        (3.0 / 2.0)))
                                                      + 4.0 * e * (epsilon * epsilon) * r * sin_theta
                                                                * ipow(cos_theta, 2) * xi
                                                                / (ipow(2.0 - tmp1, 3)
@@ -829,29 +901,34 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                                                      + 1.0))
                                                      + 4.0 * e * epsilon * sin_theta * cos_theta
                                                                * xi / (ipow(2.0 - tmp1, 2) * tmp1)))
-                                     * (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                     / (ipow(2.0 - tmp1, 2) * tmp1)
-                                             + e * cos_theta * xi / ((2.0 - tmp1))),
-                                            2.0)
+                                     * (Kokkos::
+                                                pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                             / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                     + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                    2.0)
                                         + ipow(sin_theta, 2)
                                                   / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                      + 1.0))
                            - 1.0 / 2.0
                                      * ((-2.0) * epsilon * ipow(sin_theta, 2) * cos_theta
-                                                / pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                       + 1.0),
-                                                      2.0)
+                                                / Kokkos::
+                                                        pow((epsilon
+                                                                     * (epsilon
+                                                                        + 2.0 * r * cos_theta)
+                                                             + 1.0),
+                                                            2.0)
                                         + ((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
                                            + e * cos_theta * xi / ((2.0 - tmp1)))
                                                   * (2.0 * e * (epsilon * epsilon) * r
                                                              * ipow(sin_theta, 2) * cos_theta * xi
                                                              / (ipow(2.0 - tmp1, 2)
-                                                                * pow((epsilon
-                                                                               * (epsilon
-                                                                                  + 2.0 * r * cos_theta)
-                                                                       + 1.0),
-                                                                      (3.0 / 2.0)))
+                                                                * Kokkos::pow(
+                                                                        (epsilon
+                                                                                 * (epsilon
+                                                                                    + 2.0 * r * cos_theta)
+                                                                         + 1.0),
+                                                                        (3.0 / 2.0)))
                                                      - 4.0 * e * (epsilon * epsilon) * r
                                                                * ipow(sin_theta, 2) * cos_theta * xi
                                                                / (ipow(2.0 - tmp1, 3)
@@ -863,10 +940,11 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                                                / (ipow(2.0 - tmp1, 2) * tmp1)
                                                      + 2.0 * e * epsilon * ipow(cos_theta, 2) * xi
                                                                / (ipow(2.0 - tmp1, 2) * tmp1)))
-                                     * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                     / (ipow(2.0 - tmp1, 2) * tmp1)
-                                             + e * sin_theta * xi / ((2.0 - tmp1))),
-                                            2.0)
+                                     * (Kokkos::
+                                                pow((e * epsilon * r * sin_theta * cos_theta * xi
+                                                             / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                     + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                    2.0)
                                         + ipow(cos_theta, 2)
                                                   / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                      + 1.0)))
@@ -891,30 +969,43 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                              2.0 * M_PI * e * r * sin_theta * xi / ((2.0 - tmp1)))
                                      * Kokkos::cos(2.0 * M_PI * (1.0 - tmp1) / epsilon))
                         * Kokkos::exp(-tanh_term)
-                        / pow(((-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                               / (ipow(2.0 - tmp1, 2) * tmp1)
-                                       + e * cos_theta * xi / ((2.0 - tmp1)))
-                                              * (e * epsilon * r * sin_theta * cos_theta * xi
-                                                         / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                 + e * sin_theta * xi / ((2.0 - tmp1)))
-                                      - sin_theta * cos_theta
-                                                / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                   + 1.0)),
-                                     2.0))
-                               + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                               / (ipow(2.0 - tmp1, 2) * tmp1)
-                                       + e * cos_theta * xi / ((2.0 - tmp1))),
-                                      2.0)
-                                  + ipow(sin_theta, 2)
-                                            / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                         * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                         / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                 + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                2.0)
-                                            + ipow(cos_theta, 2)
-                                                      / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                         + 1.0))),
-                              (3.0 / 2.0))
+                        / Kokkos::
+                                pow(((-Kokkos::
+                                              pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                            / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                    + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                           * (e * epsilon * r * sin_theta
+                                                                      * cos_theta * xi
+                                                                      / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                              + e * sin_theta * xi / ((2.0 - tmp1)))
+                                                   - sin_theta * cos_theta
+                                                             / (epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0)),
+                                                  2.0))
+                                     + (Kokkos::
+                                                pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                             / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                     + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                    2.0)
+                                        + ipow(sin_theta, 2)
+                                                  / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                     + 1.0))
+                                               * (Kokkos::
+                                                          pow((e * epsilon * r * sin_theta
+                                                                       * cos_theta * xi
+                                                                       / (ipow(2.0 - tmp1, 2)
+                                                                          * tmp1)
+                                                               + e * sin_theta * xi
+                                                                         / ((2.0 - tmp1))),
+                                                              2.0)
+                                                  + ipow(cos_theta, 2)
+                                                            / (epsilon
+                                                                       * (epsilon
+                                                                          + 2.0 * r * cos_theta)
+                                                               + 1.0))),
+                                    (3.0 / 2.0))
               - (((-e) * epsilon * r * ipow(sin_theta, 2) * xi / (ipow(2.0 - tmp1, 2) * tmp1)
                   + e * cos_theta * xi / ((2.0 - tmp1)))
                          * (e * epsilon * r * sin_theta * cos_theta * xi
@@ -935,26 +1026,30 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                      / tmp1)
                         * Kokkos::exp(-tanh_term)
                         / Kokkos::sqrt(
-                                (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1)))
-                                               * (e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1)))
-                                       - sin_theta * cos_theta
-                                                 / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                    + 1.0)),
-                                      2.0))
-                                + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1))),
-                                       2.0)
+                                (-Kokkos::
+                                         pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                       / (ipow(2.0 - tmp1, 2) * tmp1)
+                                               + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                      * (e * epsilon * r * sin_theta * cos_theta
+                                                                 * xi / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                         + e * sin_theta * xi / ((2.0 - tmp1)))
+                                              - sin_theta * cos_theta
+                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0)),
+                                             2.0))
+                                + (Kokkos::
+                                           pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                        / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                + e * cos_theta * xi / ((2.0 - tmp1))),
+                                               2.0)
                                    + ipow(sin_theta, 2)
                                              / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                          * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          * (Kokkos::
+                                                     pow((e * epsilon * r * sin_theta * cos_theta
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(cos_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0)))
@@ -969,8 +1064,9 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                    * Kokkos::sin(
                                            2.0 * M_PI * e * r * sin_theta * xi / ((2.0 - tmp1)))
                                    * cos_theta
-                                   / pow((epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0),
-                                         (3.0 / 2.0))
+                                   / Kokkos::
+                                           pow((epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0),
+                                               (3.0 / 2.0))
                            - 0.4096 * r * minus_pow_6 * plus_pow_6
                                      * ((-2.0) * M_PI * e * epsilon * r * ipow(sin_theta, 2) * xi
                                                 / (ipow(2.0 - tmp1, 2) * tmp1)
@@ -1030,9 +1126,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                      * (2.0 * M_PI * e * (epsilon * epsilon) * (r * r)
                                                 * ipow(sin_theta, 2) * cos_theta * xi
                                                 / (ipow(2.0 - tmp1, 2)
-                                                   * pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                          + 1.0),
-                                                         (3.0 / 2.0)))
+                                                   * Kokkos::
+                                                           pow((epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0),
+                                                               (3.0 / 2.0)))
                                         - 4.0 * M_PI * e * (epsilon * epsilon) * (r * r)
                                                   * ipow(sin_theta, 2) * cos_theta * xi
                                                   / (ipow(2.0 - tmp1, 3)
@@ -1053,26 +1152,30 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                      / tmp1)
                         * Kokkos::exp(-tanh_term)
                         / Kokkos::sqrt(
-                                (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1)))
-                                               * (e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1)))
-                                       - sin_theta * cos_theta
-                                                 / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                    + 1.0)),
-                                      2.0))
-                                + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1))),
-                                       2.0)
+                                (-Kokkos::
+                                         pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                       / (ipow(2.0 - tmp1, 2) * tmp1)
+                                               + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                      * (e * epsilon * r * sin_theta * cos_theta
+                                                                 * xi / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                         + e * sin_theta * xi / ((2.0 - tmp1)))
+                                              - sin_theta * cos_theta
+                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0)),
+                                             2.0))
+                                + (Kokkos::
+                                           pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                        / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                + e * cos_theta * xi / ((2.0 - tmp1))),
+                                               2.0)
                                    + ipow(sin_theta, 2)
                                              / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                          * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          * (Kokkos::
+                                                     pow((e * epsilon * r * sin_theta * cos_theta
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(cos_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0)))
@@ -1092,9 +1195,10 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                       - sin_theta * cos_theta
                                                 / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                                    * ((-4.0) * epsilon * r * ipow(sin_theta, 2) * cos_theta
-                                              / pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                     + 1.0),
-                                                    2.0)
+                                              / Kokkos::
+                                                      pow((epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0),
+                                                          2.0)
                                       + 2.0
                                                 * ((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                                            / (ipow(2.0 - tmp1, 2) * tmp1)
@@ -1102,11 +1206,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                                 * (e * (epsilon * epsilon) * (r * r)
                                                            * ipow(sin_theta, 2) * cos_theta * xi
                                                            / (ipow(2.0 - tmp1, 2)
-                                                              * pow((epsilon
-                                                                             * (epsilon
-                                                                                + 2.0 * r * cos_theta)
-                                                                     + 1.0),
-                                                                    (3.0 / 2.0)))
+                                                              * Kokkos::pow(
+                                                                      (epsilon
+                                                                               * (epsilon
+                                                                                  + 2.0 * r * cos_theta)
+                                                                       + 1.0),
+                                                                      (3.0 / 2.0)))
                                                    - 2.0 * e * (epsilon * epsilon) * (r * r)
                                                              * ipow(sin_theta, 2) * cos_theta * xi
                                                              / (ipow(2.0 - tmp1, 3)
@@ -1126,11 +1231,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                                 * ((-e) * (epsilon * epsilon) * (r * r)
                                                            * ipow(sin_theta, 3) * xi
                                                            / (ipow(2.0 - tmp1, 2)
-                                                              * pow((epsilon
-                                                                             * (epsilon
-                                                                                + 2.0 * r * cos_theta)
-                                                                     + 1.0),
-                                                                    (3.0 / 2.0)))
+                                                              * Kokkos::pow(
+                                                                      (epsilon
+                                                                               * (epsilon
+                                                                                  + 2.0 * r * cos_theta)
+                                                                       + 1.0),
+                                                                      (3.0 / 2.0)))
                                                    + 2.0 * e * (epsilon * epsilon) * (r * r)
                                                              * ipow(sin_theta, 3) * xi
                                                              / (ipow(2.0 - tmp1, 3)
@@ -1146,28 +1252,33 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                       - 2.0 * ipow(cos_theta, 2)
                                                 / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                            - 1.0 / 2.0
-                                     * (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                     / (ipow(2.0 - tmp1, 2) * tmp1)
-                                             + e * cos_theta * xi / ((2.0 - tmp1))),
-                                            2.0)
+                                     * (Kokkos::
+                                                pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                             / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                     + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                    2.0)
                                         + ipow(sin_theta, 2)
                                                   / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                      + 1.0))
                                      * (2.0 * epsilon * r * sin_theta * ipow(cos_theta, 2)
-                                                / pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                       + 1.0),
-                                                      2.0)
+                                                / Kokkos::
+                                                        pow((epsilon
+                                                                     * (epsilon
+                                                                        + 2.0 * r * cos_theta)
+                                                             + 1.0),
+                                                            2.0)
                                         + (e * epsilon * r * sin_theta * cos_theta * xi
                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
                                            + e * sin_theta * xi / ((2.0 - tmp1)))
                                                   * (2.0 * e * (epsilon * epsilon) * (r * r)
                                                              * ipow(sin_theta, 2) * cos_theta * xi
                                                              / (ipow(2.0 - tmp1, 2)
-                                                                * pow((epsilon
-                                                                               * (epsilon
-                                                                                  + 2.0 * r * cos_theta)
-                                                                       + 1.0),
-                                                                      (3.0 / 2.0)))
+                                                                * Kokkos::pow(
+                                                                        (epsilon
+                                                                                 * (epsilon
+                                                                                    + 2.0 * r * cos_theta)
+                                                                         + 1.0),
+                                                                        (3.0 / 2.0)))
                                                      - 4.0 * e * (epsilon * epsilon) * (r * r)
                                                                * ipow(sin_theta, 2) * cos_theta * xi
                                                                / (ipow(2.0 - tmp1, 3)
@@ -1184,28 +1295,33 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                                   / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                      + 1.0))
                            - 1.0 / 2.0
-                                     * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                     / (ipow(2.0 - tmp1, 2) * tmp1)
-                                             + e * sin_theta * xi / ((2.0 - tmp1))),
-                                            2.0)
+                                     * (Kokkos::
+                                                pow((e * epsilon * r * sin_theta * cos_theta * xi
+                                                             / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                     + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                    2.0)
                                         + ipow(cos_theta, 2)
                                                   / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                      + 1.0))
                                      * (2.0 * epsilon * r * ipow(sin_theta, 3)
-                                                / pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                       + 1.0),
-                                                      2.0)
+                                                / Kokkos::
+                                                        pow((epsilon
+                                                                     * (epsilon
+                                                                        + 2.0 * r * cos_theta)
+                                                             + 1.0),
+                                                            2.0)
                                         + ((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
                                            + e * cos_theta * xi / ((2.0 - tmp1)))
                                                   * ((-2.0) * e * (epsilon * epsilon) * (r * r)
                                                              * ipow(sin_theta, 3) * xi
                                                              / (ipow(2.0 - tmp1, 2)
-                                                                * pow((epsilon
-                                                                               * (epsilon
-                                                                                  + 2.0 * r * cos_theta)
-                                                                       + 1.0),
-                                                                      (3.0 / 2.0)))
+                                                                * Kokkos::pow(
+                                                                        (epsilon
+                                                                                 * (epsilon
+                                                                                    + 2.0 * r * cos_theta)
+                                                                         + 1.0),
+                                                                        (3.0 / 2.0)))
                                                      + 4.0 * e * (epsilon * epsilon) * (r * r)
                                                                * ipow(sin_theta, 3) * xi
                                                                / (ipow(2.0 - tmp1, 3)
@@ -1240,30 +1356,43 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                              2.0 * M_PI * e * r * sin_theta * xi / ((2.0 - tmp1)))
                                      * Kokkos::cos(2.0 * M_PI * (1.0 - tmp1) / epsilon))
                         * Kokkos::exp(-tanh_term)
-                        / pow(((-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                               / (ipow(2.0 - tmp1, 2) * tmp1)
-                                       + e * cos_theta * xi / ((2.0 - tmp1)))
-                                              * (e * epsilon * r * sin_theta * cos_theta * xi
-                                                         / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                 + e * sin_theta * xi / ((2.0 - tmp1)))
-                                      - sin_theta * cos_theta
-                                                / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                   + 1.0)),
-                                     2.0))
-                               + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                               / (ipow(2.0 - tmp1, 2) * tmp1)
-                                       + e * cos_theta * xi / ((2.0 - tmp1))),
-                                      2.0)
-                                  + ipow(sin_theta, 2)
-                                            / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                         * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                         / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                 + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                2.0)
-                                            + ipow(cos_theta, 2)
-                                                      / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                         + 1.0))),
-                              (3.0 / 2.0))
+                        / Kokkos::
+                                pow(((-Kokkos::
+                                              pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                            / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                    + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                           * (e * epsilon * r * sin_theta
+                                                                      * cos_theta * xi
+                                                                      / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                              + e * sin_theta * xi / ((2.0 - tmp1)))
+                                                   - sin_theta * cos_theta
+                                                             / (epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0)),
+                                                  2.0))
+                                     + (Kokkos::
+                                                pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                             / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                     + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                    2.0)
+                                        + ipow(sin_theta, 2)
+                                                  / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                     + 1.0))
+                                               * (Kokkos::
+                                                          pow((e * epsilon * r * sin_theta
+                                                                       * cos_theta * xi
+                                                                       / (ipow(2.0 - tmp1, 2)
+                                                                          * tmp1)
+                                                               + e * sin_theta * xi
+                                                                         / ((2.0 - tmp1))),
+                                                              2.0)
+                                                  + ipow(cos_theta, 2)
+                                                            / (epsilon
+                                                                       * (epsilon
+                                                                          + 2.0 * r * cos_theta)
+                                                               + 1.0))),
+                                    (3.0 / 2.0))
               + (0.4096 * minus_pow_6 * plus_pow_6
                          * ((-2.0) * M_PI * e * epsilon * r * ipow(sin_theta, 2) * xi
                                     / (ipow(2.0 - tmp1, 2) * tmp1)
@@ -1275,16 +1404,21 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                            * Kokkos::sin(2.0 * M_PI * e * r * sin_theta * xi / ((2.0 - tmp1)))
                            / tmp1)
                         * (2.0 * epsilon * r * sin_theta * ipow(cos_theta, 2)
-                                   / pow((epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0), 2.0)
+                                   / Kokkos::
+                                           pow((epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0),
+                                               2.0)
                            + (e * epsilon * r * sin_theta * cos_theta * xi
                                       / (ipow(2.0 - tmp1, 2) * tmp1)
                               + e * sin_theta * xi / ((2.0 - tmp1)))
                                      * (2.0 * e * (epsilon * epsilon) * (r * r) * ipow(sin_theta, 2)
                                                 * cos_theta * xi
                                                 / (ipow(2.0 - tmp1, 2)
-                                                   * pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                          + 1.0),
-                                                         (3.0 / 2.0)))
+                                                   * Kokkos::
+                                                           pow((epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0),
+                                                               (3.0 / 2.0)))
                                         - 4.0 * e * (epsilon * epsilon) * (r * r)
                                                   * ipow(sin_theta, 2) * cos_theta * xi
                                                   / (ipow(2.0 - tmp1, 3)
@@ -1299,26 +1433,30 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                      / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                         * Kokkos::exp(-tanh_term)
                         / Kokkos::sqrt(
-                                (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1)))
-                                               * (e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1)))
-                                       - sin_theta * cos_theta
-                                                 / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                    + 1.0)),
-                                      2.0))
-                                + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1))),
-                                       2.0)
+                                (-Kokkos::
+                                         pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                       / (ipow(2.0 - tmp1, 2) * tmp1)
+                                               + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                      * (e * epsilon * r * sin_theta * cos_theta
+                                                                 * xi / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                         + e * sin_theta * xi / ((2.0 - tmp1)))
+                                              - sin_theta * cos_theta
+                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0)),
+                                             2.0))
+                                + (Kokkos::
+                                           pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                        / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                + e * cos_theta * xi / ((2.0 - tmp1))),
+                                               2.0)
                                    + ipow(sin_theta, 2)
                                              / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                          * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          * (Kokkos::
+                                                     pow((e * epsilon * r * sin_theta * cos_theta
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(cos_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0)))
@@ -1332,10 +1470,11 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                            * Kokkos::sin(2.0 * M_PI * (1.0 - tmp1) / epsilon)
                            * Kokkos::sin(2.0 * M_PI * e * r * sin_theta * xi / ((2.0 - tmp1)))
                            / tmp1)
-                        * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                        / (ipow(2.0 - tmp1, 2) * tmp1)
-                                + e * sin_theta * xi / ((2.0 - tmp1))),
-                               2.0)
+                        * (Kokkos::
+                                   pow((e * epsilon * r * sin_theta * cos_theta * xi
+                                                / (ipow(2.0 - tmp1, 2) * tmp1)
+                                        + e * sin_theta * xi / ((2.0 - tmp1))),
+                                       2.0)
                            + ipow(cos_theta, 2) / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                         * (1.0 / 2.0
                                    * (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
@@ -1347,9 +1486,10 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                       - sin_theta * cos_theta
                                                 / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                                    * ((-4.0) * epsilon * r * ipow(sin_theta, 2) * cos_theta
-                                              / pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                     + 1.0),
-                                                    2.0)
+                                              / Kokkos::
+                                                      pow((epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0),
+                                                          2.0)
                                       + 2.0
                                                 * ((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                                            / (ipow(2.0 - tmp1, 2) * tmp1)
@@ -1357,11 +1497,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                                 * (e * (epsilon * epsilon) * (r * r)
                                                            * ipow(sin_theta, 2) * cos_theta * xi
                                                            / (ipow(2.0 - tmp1, 2)
-                                                              * pow((epsilon
-                                                                             * (epsilon
-                                                                                + 2.0 * r * cos_theta)
-                                                                     + 1.0),
-                                                                    (3.0 / 2.0)))
+                                                              * Kokkos::pow(
+                                                                      (epsilon
+                                                                               * (epsilon
+                                                                                  + 2.0 * r * cos_theta)
+                                                                       + 1.0),
+                                                                      (3.0 / 2.0)))
                                                    - 2.0 * e * (epsilon * epsilon) * (r * r)
                                                              * ipow(sin_theta, 2) * cos_theta * xi
                                                              / (ipow(2.0 - tmp1, 3)
@@ -1381,11 +1522,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                                 * ((-e) * (epsilon * epsilon) * (r * r)
                                                            * ipow(sin_theta, 3) * xi
                                                            / (ipow(2.0 - tmp1, 2)
-                                                              * pow((epsilon
-                                                                             * (epsilon
-                                                                                + 2.0 * r * cos_theta)
-                                                                     + 1.0),
-                                                                    (3.0 / 2.0)))
+                                                              * Kokkos::pow(
+                                                                      (epsilon
+                                                                               * (epsilon
+                                                                                  + 2.0 * r * cos_theta)
+                                                                       + 1.0),
+                                                                      (3.0 / 2.0)))
                                                    + 2.0 * e * (epsilon * epsilon) * (r * r)
                                                              * ipow(sin_theta, 3) * xi
                                                              / (ipow(2.0 - tmp1, 3)
@@ -1401,28 +1543,33 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                       - 2.0 * ipow(cos_theta, 2)
                                                 / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                            - 1.0 / 2.0
-                                     * (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                     / (ipow(2.0 - tmp1, 2) * tmp1)
-                                             + e * cos_theta * xi / ((2.0 - tmp1))),
-                                            2.0)
+                                     * (Kokkos::
+                                                pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                             / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                     + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                    2.0)
                                         + ipow(sin_theta, 2)
                                                   / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                      + 1.0))
                                      * (2.0 * epsilon * r * sin_theta * ipow(cos_theta, 2)
-                                                / pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                       + 1.0),
-                                                      2.0)
+                                                / Kokkos::
+                                                        pow((epsilon
+                                                                     * (epsilon
+                                                                        + 2.0 * r * cos_theta)
+                                                             + 1.0),
+                                                            2.0)
                                         + (e * epsilon * r * sin_theta * cos_theta * xi
                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
                                            + e * sin_theta * xi / ((2.0 - tmp1)))
                                                   * (2.0 * e * (epsilon * epsilon) * (r * r)
                                                              * ipow(sin_theta, 2) * cos_theta * xi
                                                              / (ipow(2.0 - tmp1, 2)
-                                                                * pow((epsilon
-                                                                               * (epsilon
-                                                                                  + 2.0 * r * cos_theta)
-                                                                       + 1.0),
-                                                                      (3.0 / 2.0)))
+                                                                * Kokkos::pow(
+                                                                        (epsilon
+                                                                                 * (epsilon
+                                                                                    + 2.0 * r * cos_theta)
+                                                                         + 1.0),
+                                                                        (3.0 / 2.0)))
                                                      - 4.0 * e * (epsilon * epsilon) * (r * r)
                                                                * ipow(sin_theta, 2) * cos_theta * xi
                                                                / (ipow(2.0 - tmp1, 3)
@@ -1439,28 +1586,33 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                                   / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                      + 1.0))
                            - 1.0 / 2.0
-                                     * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                     / (ipow(2.0 - tmp1, 2) * tmp1)
-                                             + e * sin_theta * xi / ((2.0 - tmp1))),
-                                            2.0)
+                                     * (Kokkos::
+                                                pow((e * epsilon * r * sin_theta * cos_theta * xi
+                                                             / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                     + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                    2.0)
                                         + ipow(cos_theta, 2)
                                                   / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                      + 1.0))
                                      * (2.0 * epsilon * r * ipow(sin_theta, 3)
-                                                / pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                       + 1.0),
-                                                      2.0)
+                                                / Kokkos::
+                                                        pow((epsilon
+                                                                     * (epsilon
+                                                                        + 2.0 * r * cos_theta)
+                                                             + 1.0),
+                                                            2.0)
                                         + ((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
                                            + e * cos_theta * xi / ((2.0 - tmp1)))
                                                   * ((-2.0) * e * (epsilon * epsilon) * (r * r)
                                                              * ipow(sin_theta, 3) * xi
                                                              / (ipow(2.0 - tmp1, 2)
-                                                                * pow((epsilon
-                                                                               * (epsilon
-                                                                                  + 2.0 * r * cos_theta)
-                                                                       + 1.0),
-                                                                      (3.0 / 2.0)))
+                                                                * Kokkos::pow(
+                                                                        (epsilon
+                                                                                 * (epsilon
+                                                                                    + 2.0 * r * cos_theta)
+                                                                         + 1.0),
+                                                                        (3.0 / 2.0)))
                                                      + 4.0 * e * (epsilon * epsilon) * (r * r)
                                                                * ipow(sin_theta, 3) * xi
                                                                / (ipow(2.0 - tmp1, 3)
@@ -1475,33 +1627,48 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                                   / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                      + 1.0)))
                         * Kokkos::exp(-tanh_term)
-                        / pow(((-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                               / (ipow(2.0 - tmp1, 2) * tmp1)
-                                       + e * cos_theta * xi / ((2.0 - tmp1)))
-                                              * (e * epsilon * r * sin_theta * cos_theta * xi
-                                                         / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                 + e * sin_theta * xi / ((2.0 - tmp1)))
-                                      - sin_theta * cos_theta
-                                                / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                   + 1.0)),
-                                     2.0))
-                               + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                               / (ipow(2.0 - tmp1, 2) * tmp1)
-                                       + e * cos_theta * xi / ((2.0 - tmp1))),
-                                      2.0)
-                                  + ipow(sin_theta, 2)
-                                            / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                         * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                         / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                 + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                2.0)
-                                            + ipow(cos_theta, 2)
-                                                      / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                         + 1.0))),
-                              (3.0 / 2.0))
-              + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi / (ipow(2.0 - tmp1, 2) * tmp1)
-                      + e * cos_theta * xi / ((2.0 - tmp1))),
-                     2.0)
+                        / Kokkos::
+                                pow(((-Kokkos::
+                                              pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                            / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                    + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                           * (e * epsilon * r * sin_theta
+                                                                      * cos_theta * xi
+                                                                      / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                              + e * sin_theta * xi / ((2.0 - tmp1)))
+                                                   - sin_theta * cos_theta
+                                                             / (epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0)),
+                                                  2.0))
+                                     + (Kokkos::
+                                                pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                             / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                     + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                    2.0)
+                                        + ipow(sin_theta, 2)
+                                                  / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                     + 1.0))
+                                               * (Kokkos::
+                                                          pow((e * epsilon * r * sin_theta
+                                                                       * cos_theta * xi
+                                                                       / (ipow(2.0 - tmp1, 2)
+                                                                          * tmp1)
+                                                               + e * sin_theta * xi
+                                                                         / ((2.0 - tmp1))),
+                                                              2.0)
+                                                  + ipow(cos_theta, 2)
+                                                            / (epsilon
+                                                                       * (epsilon
+                                                                          + 2.0 * r * cos_theta)
+                                                               + 1.0))),
+                                    (3.0 / 2.0))
+              + (Kokkos::
+                         pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                      / (ipow(2.0 - tmp1, 2) * tmp1)
+                              + e * cos_theta * xi / ((2.0 - tmp1))),
+                             2.0)
                  + ipow(sin_theta, 2) / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                         * (0.4096 * minus_pow_6 * plus_pow_6
                                    * (2.0 * M_PI * e * epsilon * r * sin_theta * cos_theta * xi
@@ -1525,45 +1692,55 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                      * Kokkos::cos(2.0 * M_PI * (1.0 - tmp1) / epsilon))
                         * Kokkos::exp(-tanh_term)
                         / Kokkos::sqrt(
-                                (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1)))
-                                               * (e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1)))
-                                       - sin_theta * cos_theta
-                                                 / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                    + 1.0)),
-                                      2.0))
-                                + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1))),
-                                       2.0)
+                                (-Kokkos::
+                                         pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                       / (ipow(2.0 - tmp1, 2) * tmp1)
+                                               + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                      * (e * epsilon * r * sin_theta * cos_theta
+                                                                 * xi / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                         + e * sin_theta * xi / ((2.0 - tmp1)))
+                                              - sin_theta * cos_theta
+                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0)),
+                                             2.0))
+                                + (Kokkos::
+                                           pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                        / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                + e * cos_theta * xi / ((2.0 - tmp1))),
+                                               2.0)
                                    + ipow(sin_theta, 2)
                                              / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                          * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          * (Kokkos::
+                                                     pow((e * epsilon * r * sin_theta * cos_theta
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(cos_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0)))
-              + (pow((e * epsilon * r * sin_theta * cos_theta * xi / (ipow(2.0 - tmp1, 2) * tmp1)
-                      + e * sin_theta * xi / ((2.0 - tmp1))),
-                     2.0)
+              + (Kokkos::
+                         pow((e * epsilon * r * sin_theta * cos_theta * xi
+                                      / (ipow(2.0 - tmp1, 2) * tmp1)
+                              + e * sin_theta * xi / ((2.0 - tmp1))),
+                             2.0)
                  + ipow(cos_theta, 2) / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                         * ((-0.8192) * M_PI * epsilon * r * minus_pow_6 * plus_pow_6
                                    * ipow(sin_theta, 2)
                                    * Kokkos::sin(2.0 * M_PI * (1.0 - tmp1) / epsilon)
                                    * Kokkos::sin(
                                            2.0 * M_PI * e * r * sin_theta * xi / ((2.0 - tmp1)))
-                                   / pow((epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0),
-                                         (3.0 / 2.0))
+                                   / Kokkos::
+                                           pow((epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0),
+                                               (3.0 / 2.0))
                            - 0.4096 * r * minus_pow_6 * plus_pow_6
-                                     * pow(((-2.0) * M_PI * e * epsilon * r * ipow(sin_theta, 2)
-                                                    * xi / (ipow(2.0 - tmp1, 2) * tmp1)
-                                            + 2.0 * M_PI * e * cos_theta * xi / ((2.0 - tmp1))),
-                                           2.0)
+                                     * Kokkos::
+                                             pow(((-2.0) * M_PI * e * epsilon * r
+                                                          * ipow(sin_theta, 2) * xi
+                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                  + 2.0 * M_PI * e * cos_theta * xi
+                                                            / ((2.0 - tmp1))),
+                                                 2.0)
                                      * Kokkos::sin(
                                              2.0 * M_PI * e * r * sin_theta * xi / ((2.0 - tmp1)))
                                      * Kokkos::cos(2.0 * M_PI * (1.0 - tmp1) / epsilon)
@@ -1585,9 +1762,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                      * ((-2.0) * M_PI * e * (epsilon * epsilon) * (r * r)
                                                 * ipow(sin_theta, 3) * xi
                                                 / (ipow(2.0 - tmp1, 2)
-                                                   * pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                          + 1.0),
-                                                         (3.0 / 2.0)))
+                                                   * Kokkos::
+                                                           pow((epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0),
+                                                               (3.0 / 2.0)))
                                         + 4.0 * M_PI * e * (epsilon * epsilon) * (r * r)
                                                   * ipow(sin_theta, 3) * xi
                                                   / (ipow(2.0 - tmp1, 3)
@@ -1606,26 +1786,30 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                      * cos_theta / tmp1)
                         * Kokkos::exp(-tanh_term)
                         / Kokkos::sqrt(
-                                (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1)))
-                                               * (e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1)))
-                                       - sin_theta * cos_theta
-                                                 / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                    + 1.0)),
-                                      2.0))
-                                + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1))),
-                                       2.0)
+                                (-Kokkos::
+                                         pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                       / (ipow(2.0 - tmp1, 2) * tmp1)
+                                               + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                      * (e * epsilon * r * sin_theta * cos_theta
+                                                                 * xi / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                         + e * sin_theta * xi / ((2.0 - tmp1)))
+                                              - sin_theta * cos_theta
+                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0)),
+                                             2.0))
+                                + (Kokkos::
+                                           pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                        / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                + e * cos_theta * xi / ((2.0 - tmp1))),
+                                               2.0)
                                    + ipow(sin_theta, 2)
                                              / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                          * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          * (Kokkos::
+                                                     pow((e * epsilon * r * sin_theta * cos_theta
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(cos_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0)))
@@ -1646,16 +1830,21 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                            * Kokkos::sin(2.0 * M_PI * e * r * sin_theta * xi / ((2.0 - tmp1)))
                            * Kokkos::cos(2.0 * M_PI * (1.0 - tmp1) / epsilon))
                         * ((-2.0) * epsilon * r * ipow(sin_theta, 2) * cos_theta
-                                   / pow((epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0), 2.0)
+                                   / Kokkos::
+                                           pow((epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0),
+                                               2.0)
                            + ((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                       / (ipow(2.0 - tmp1, 2) * tmp1)
                               + e * cos_theta * xi / ((2.0 - tmp1)))
                                      * (e * (epsilon * epsilon) * (r * r) * ipow(sin_theta, 2)
                                                 * cos_theta * xi
                                                 / (ipow(2.0 - tmp1, 2)
-                                                   * pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                          + 1.0),
-                                                         (3.0 / 2.0)))
+                                                   * Kokkos::
+                                                           pow((epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0),
+                                                               (3.0 / 2.0)))
                                         - 2.0 * e * (epsilon * epsilon) * (r * r)
                                                   * ipow(sin_theta, 2) * cos_theta * xi
                                                   / (ipow(2.0 - tmp1, 3)
@@ -1672,9 +1861,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                                      * ((-e) * (epsilon * epsilon) * (r * r) * ipow(sin_theta, 3)
                                                 * xi
                                                 / (ipow(2.0 - tmp1, 2)
-                                                   * pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                          + 1.0),
-                                                         (3.0 / 2.0)))
+                                                   * Kokkos::
+                                                           pow((epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0),
+                                                               (3.0 / 2.0)))
                                         + 2.0 * e * (epsilon * epsilon) * (r * r)
                                                   * ipow(sin_theta, 3) * xi
                                                   / (ipow(2.0 - tmp1, 3)
@@ -1687,51 +1879,59 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CartesianSolution<
                            - ipow(cos_theta, 2) / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                         * Kokkos::exp(-tanh_term)
                         / Kokkos::sqrt(
-                                (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1)))
-                                               * (e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1)))
-                                       - sin_theta * cos_theta
-                                                 / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                    + 1.0)),
-                                      2.0))
-                                + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1))),
-                                       2.0)
+                                (-Kokkos::
+                                         pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                       / (ipow(2.0 - tmp1, 2) * tmp1)
+                                               + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                      * (e * epsilon * r * sin_theta * cos_theta
+                                                                 * xi / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                         + e * sin_theta * xi / ((2.0 - tmp1)))
+                                              - sin_theta * cos_theta
+                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0)),
+                                             2.0))
+                                + (Kokkos::
+                                           pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                        / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                + e * cos_theta * xi / ((2.0 - tmp1))),
+                                               2.0)
                                    + ipow(sin_theta, 2)
                                              / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                          * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          * (Kokkos::
+                                                     pow((e * epsilon * r * sin_theta * cos_theta
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(cos_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0))))
                      / (r
                         * Kokkos::sqrt(
-                                (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1)))
-                                               * (e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1)))
-                                       - sin_theta * cos_theta
-                                                 / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                    + 1.0)),
-                                      2.0))
-                                + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                / (ipow(2.0 - tmp1, 2) * tmp1)
-                                        + e * cos_theta * xi / ((2.0 - tmp1))),
-                                       2.0)
+                                (-Kokkos::
+                                         pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                       / (ipow(2.0 - tmp1, 2) * tmp1)
+                                               + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                      * (e * epsilon * r * sin_theta * cos_theta
+                                                                 * xi / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                         + e * sin_theta * xi / ((2.0 - tmp1)))
+                                              - sin_theta * cos_theta
+                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0)),
+                                             2.0))
+                                + (Kokkos::
+                                           pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                        / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                + e * cos_theta * xi / ((2.0 - tmp1))),
+                                               2.0)
                                    + ipow(sin_theta, 2)
                                              / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                          * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          * (Kokkos::
+                                                     pow((e * epsilon * r * sin_theta * cos_theta
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(cos_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0))));
@@ -1817,34 +2017,41 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                               + e * sin_theta * xi / ((2.0 - tmp1)))
                                    - sin_theta * cos_theta
                                              / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                * (20.0 * pow(tanh_term, 2.0) - 20.0) * Kokkos::exp(-tanh_term)
-                                * Kokkos::sin(11.0 * theta)
+                                * (20.0 * Kokkos::pow(tanh_term, 2.0) - 20.0)
+                                * Kokkos::exp(-tanh_term) * Kokkos::sin(11.0 * theta)
                                 / Kokkos::sqrt(
-                                        (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                        / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                + e * cos_theta * xi / ((2.0 - tmp1)))
-                                                       * (e * epsilon * r * sin_theta * cos_theta
-                                                                  * xi
-                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                          + e * sin_theta * xi / ((2.0 - tmp1)))
-                                               - sin_theta * cos_theta
-                                                         / (epsilon
-                                                                    * (epsilon
-                                                                       + 2.0 * r * cos_theta)
-                                                            + 1.0)),
-                                              2.0))
-                                        + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                        / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                + e * cos_theta * xi / ((2.0 - tmp1))),
-                                               2.0)
+                                        (-Kokkos::
+                                                 pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                               / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                       + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                              * (e * epsilon * r * sin_theta
+                                                                         * cos_theta * xi
+                                                                         / (ipow(2.0 - tmp1, 2)
+                                                                            * tmp1)
+                                                                 + e * sin_theta * xi
+                                                                           / ((2.0 - tmp1)))
+                                                      - sin_theta * cos_theta
+                                                                / (epsilon
+                                                                           * (epsilon
+                                                                              + 2.0 * r * cos_theta)
+                                                                   + 1.0)),
+                                                     2.0))
+                                        + (Kokkos::
+                                                   pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                                / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                        + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                       2.0)
                                            + ipow(sin_theta, 2)
                                                      / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                         + 1.0))
-                                                  * (pow((e * epsilon * r * sin_theta * cos_theta
-                                                                  * xi
-                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                          + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                         2.0)
+                                                  * (Kokkos::
+                                                             pow((e * epsilon * r * sin_theta
+                                                                          * cos_theta * xi
+                                                                          / (ipow(2.0 - tmp1, 2)
+                                                                             * tmp1)
+                                                                  + e * sin_theta * xi
+                                                                            / ((2.0 - tmp1))),
+                                                                 2.0)
                                                      + ipow(cos_theta, 2)
                                                                / (epsilon
                                                                           * (epsilon
@@ -1873,11 +2080,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                         + 2.0 * r * cos_theta)
                                                              + 1.0))
                                              * (4.0 * epsilon * sin_theta * ipow(cos_theta, 2)
-                                                        / pow((epsilon
-                                                                       * (epsilon
-                                                                          + 2.0 * r * cos_theta)
-                                                               + 1.0),
-                                                              2.0)
+                                                        / Kokkos::pow(
+                                                                (epsilon
+                                                                         * (epsilon
+                                                                            + 2.0 * r * cos_theta)
+                                                                 + 1.0),
+                                                                2.0)
                                                 + 2.0
                                                           * ((-e) * epsilon * r * ipow(sin_theta, 2)
                                                                      * xi
@@ -1887,11 +2095,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                      * sin_theta
                                                                      * ipow(cos_theta, 2) * xi
                                                                      / (ipow(2.0 - tmp1, 2)
-                                                                        * pow((epsilon
-                                                                                       * (epsilon
-                                                                                          + 2.0 * r * cos_theta)
-                                                                               + 1.0),
-                                                                              (3.0 / 2.0)))
+                                                                        * Kokkos::pow(
+                                                                                (epsilon
+                                                                                         * (epsilon
+                                                                                            + 2.0 * r * cos_theta)
+                                                                                 + 1.0),
+                                                                                (3.0 / 2.0)))
                                                              + 2.0 * e * (epsilon * epsilon) * r
                                                                        * sin_theta
                                                                        * ipow(cos_theta, 2) * xi
@@ -1913,11 +2122,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                      * ipow(sin_theta, 2)
                                                                      * cos_theta * xi
                                                                      / (ipow(2.0 - tmp1, 2)
-                                                                        * pow((epsilon
-                                                                                       * (epsilon
-                                                                                          + 2.0 * r * cos_theta)
-                                                                               + 1.0),
-                                                                              (3.0 / 2.0)))
+                                                                        * Kokkos::pow(
+                                                                                (epsilon
+                                                                                         * (epsilon
+                                                                                            + 2.0 * r * cos_theta)
+                                                                                 + 1.0),
+                                                                                (3.0 / 2.0)))
                                                              - 2.0 * e * (epsilon * epsilon) * r
                                                                        * ipow(sin_theta, 2)
                                                                        * cos_theta * xi
@@ -1934,11 +2144,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                           * tmp1)))
                                      - 1.0 / 2.0
                                                * ((-2.0) * epsilon * ipow(cos_theta, 3)
-                                                          / pow((epsilon
-                                                                         * (epsilon
-                                                                            + 2.0 * r * cos_theta)
-                                                                 + 1.0),
-                                                                2.0)
+                                                          / Kokkos::pow(
+                                                                  (epsilon
+                                                                           * (epsilon
+                                                                              + 2.0 * r * cos_theta)
+                                                                   + 1.0),
+                                                                  2.0)
                                                   + (e * epsilon * r * sin_theta * cos_theta * xi
                                                              / (ipow(2.0 - tmp1, 2) * tmp1)
                                                      + e * sin_theta * xi / ((2.0 - tmp1)))
@@ -1946,11 +2157,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                        * sin_theta
                                                                        * ipow(cos_theta, 2) * xi
                                                                        / (ipow(2.0 - tmp1, 2)
-                                                                          * pow((epsilon
-                                                                                         * (epsilon
-                                                                                            + 2.0 * r * cos_theta)
-                                                                                 + 1.0),
-                                                                                (3.0 / 2.0)))
+                                                                          * Kokkos::pow(
+                                                                                  (epsilon
+                                                                                           * (epsilon
+                                                                                              + 2.0 * r * cos_theta)
+                                                                                   + 1.0),
+                                                                                  (3.0 / 2.0)))
                                                                + 4.0 * e * (epsilon * epsilon) * r
                                                                          * sin_theta
                                                                          * ipow(cos_theta, 2) * xi
@@ -1963,10 +2175,14 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                          * cos_theta * xi
                                                                          / (ipow(2.0 - tmp1, 2)
                                                                             * tmp1)))
-                                               * (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                               / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                       + e * cos_theta * xi / ((2.0 - tmp1))),
-                                                      2.0)
+                                               * (Kokkos::
+                                                          pow(((-e) * epsilon * r
+                                                                       * ipow(sin_theta, 2) * xi
+                                                                       / (ipow(2.0 - tmp1, 2)
+                                                                          * tmp1)
+                                                               + e * cos_theta * xi
+                                                                         / ((2.0 - tmp1))),
+                                                              2.0)
                                                   + ipow(sin_theta, 2)
                                                             / (epsilon
                                                                        * (epsilon
@@ -1974,11 +2190,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                + 1.0))
                                      - 1.0 / 2.0
                                                * ((-2.0) * epsilon * ipow(sin_theta, 2) * cos_theta
-                                                          / pow((epsilon
-                                                                         * (epsilon
-                                                                            + 2.0 * r * cos_theta)
-                                                                 + 1.0),
-                                                                2.0)
+                                                          / Kokkos::pow(
+                                                                  (epsilon
+                                                                           * (epsilon
+                                                                              + 2.0 * r * cos_theta)
+                                                                   + 1.0),
+                                                                  2.0)
                                                   + ((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                                              / (ipow(2.0 - tmp1, 2) * tmp1)
                                                      + e * cos_theta * xi / ((2.0 - tmp1)))
@@ -1986,11 +2203,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                        * ipow(sin_theta, 2)
                                                                        * cos_theta * xi
                                                                        / (ipow(2.0 - tmp1, 2)
-                                                                          * pow((epsilon
-                                                                                         * (epsilon
-                                                                                            + 2.0 * r * cos_theta)
-                                                                                 + 1.0),
-                                                                                (3.0 / 2.0)))
+                                                                          * Kokkos::pow(
+                                                                                  (epsilon
+                                                                                           * (epsilon
+                                                                                              + 2.0 * r * cos_theta)
+                                                                                   + 1.0),
+                                                                                  (3.0 / 2.0)))
                                                                - 4.0 * e * (epsilon * epsilon) * r
                                                                          * ipow(sin_theta, 2)
                                                                          * cos_theta * xi
@@ -2007,63 +2225,80 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                          * ipow(cos_theta, 2) * xi
                                                                          / (ipow(2.0 - tmp1, 2)
                                                                             * tmp1)))
-                                               * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                               / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                       + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                      2.0)
+                                               * (Kokkos::
+                                                          pow((e * epsilon * r * sin_theta
+                                                                       * cos_theta * xi
+                                                                       / (ipow(2.0 - tmp1, 2)
+                                                                          * tmp1)
+                                                               + e * sin_theta * xi
+                                                                         / ((2.0 - tmp1))),
+                                                              2.0)
                                                   + ipow(cos_theta, 2)
                                                             / (epsilon
                                                                        * (epsilon
                                                                           + 2.0 * r * cos_theta)
                                                                + 1.0)))
                                   * Kokkos::exp(-tanh_term) * Kokkos::sin(11.0 * theta)
-                                  / pow(((-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                         / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                 + e * cos_theta * xi / ((2.0 - tmp1)))
-                                                        * (e * epsilon * r * sin_theta * cos_theta
+                                  / Kokkos::pow(
+                                          ((-Kokkos::pow(
+                                                   (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                             / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                     + e * cos_theta * xi
+                                                               / ((2.0 - tmp1)))
+                                                            * (e * epsilon * r * sin_theta
+                                                                       * cos_theta
+                                                                       * xi
+                                                                       / (ipow(2.0 - tmp1, 2)
+                                                                          * tmp1)
+                                                               + e * sin_theta * xi
+                                                                         / ((2.0 - tmp1)))
+                                                    - sin_theta * cos_theta
+                                                              / (epsilon
+                                                                         * (epsilon
+                                                                            + 2.0 * r * cos_theta)
+                                                                 + 1.0)),
+                                                   2.0))
+                                           + (Kokkos::
+                                                      pow(((-e) * epsilon * r * ipow(sin_theta, 2)
                                                                    * xi
                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                           + e * sin_theta * xi / ((2.0 - tmp1)))
-                                                - sin_theta * cos_theta
-                                                          / (epsilon
-                                                                     * (epsilon
-                                                                        + 2.0 * r * cos_theta)
-                                                             + 1.0)),
-                                               2.0))
-                                         + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                         / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                 + e * cos_theta * xi / ((2.0 - tmp1))),
-                                                2.0)
-                                            + ipow(sin_theta, 2)
-                                                      / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                         + 1.0))
-                                                   * (pow((e * epsilon * r * sin_theta * cos_theta
-                                                                   * xi
-                                                                   / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                           + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                           + e * cos_theta * xi / ((2.0 - tmp1))),
                                                           2.0)
-                                                      + ipow(cos_theta, 2)
-                                                                / (epsilon
-                                                                           * (epsilon
-                                                                              + 2.0 * r * cos_theta)
-                                                                   + 1.0))),
-                                        (3.0 / 2.0))
+                                              + ipow(sin_theta, 2)
+                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0))
+                                                     * (Kokkos::
+                                                                pow((e * epsilon * r * sin_theta
+                                                                             * cos_theta * xi
+                                                                             / (ipow(2.0 - tmp1, 2)
+                                                                                * tmp1)
+                                                                     + e * sin_theta * xi
+                                                                               / ((2.0 - tmp1))),
+                                                                    2.0)
+                                                        + ipow(cos_theta, 2)
+                                                                  / (epsilon
+                                                                             * (epsilon
+                                                                                + 2.0 * r * cos_theta)
+                                                                     + 1.0))),
+                                          (3.0 / 2.0))
                         + 4.5056 * r * ipow(r - 1.0, 6)
                                   * (2.0 * epsilon * sin_theta * ipow(cos_theta, 2)
-                                             / pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                    + 1.0),
-                                                   2.0)
+                                             / Kokkos::
+                                                     pow((epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                          + 1.0),
+                                                         2.0)
                                      + ((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                                 / (ipow(2.0 - tmp1, 2) * tmp1)
                                         + e * cos_theta * xi / ((2.0 - tmp1)))
                                                * ((-e) * (epsilon * epsilon) * r * sin_theta
                                                           * ipow(cos_theta, 2) * xi
                                                           / (ipow(2.0 - tmp1, 2)
-                                                             * pow((epsilon
-                                                                            * (epsilon
-                                                                               + 2.0 * r * cos_theta)
-                                                                    + 1.0),
-                                                                   (3.0 / 2.0)))
+                                                             * Kokkos::pow(
+                                                                     (epsilon
+                                                                              * (epsilon
+                                                                                 + 2.0 * r * cos_theta)
+                                                                      + 1.0),
+                                                                     (3.0 / 2.0)))
                                                   + 2.0 * e * (epsilon * epsilon) * r * sin_theta
                                                             * ipow(cos_theta, 2) * xi
                                                             / (ipow(2.0 - tmp1, 3)
@@ -2079,11 +2314,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                * (e * (epsilon * epsilon) * r * ipow(sin_theta, 2)
                                                           * cos_theta * xi
                                                           / (ipow(2.0 - tmp1, 2)
-                                                             * pow((epsilon
-                                                                            * (epsilon
-                                                                               + 2.0 * r * cos_theta)
-                                                                    + 1.0),
-                                                                   (3.0 / 2.0)))
+                                                             * Kokkos::pow(
+                                                                     (epsilon
+                                                                              * (epsilon
+                                                                                 + 2.0 * r * cos_theta)
+                                                                      + 1.0),
+                                                                     (3.0 / 2.0)))
                                                   - 2.0 * e * (epsilon * epsilon) * r
                                                             * ipow(sin_theta, 2) * cos_theta * xi
                                                             / (ipow(2.0 - tmp1, 3)
@@ -2097,31 +2333,38 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                             / (ipow(2.0 - tmp1, 2) * tmp1)))
                                   * Kokkos::exp(-tanh_term) * Kokkos::sin(11.0 * theta)
                                   / Kokkos::sqrt(
-                                          (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1)))
-                                                         * (e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1)))
-                                                 - sin_theta * cos_theta
-                                                           / (epsilon
-                                                                      * (epsilon
-                                                                         + 2.0 * r * cos_theta)
-                                                              + 1.0)),
-                                                2.0))
-                                          + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          (-Kokkos::pow(
+                                                  (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                            / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                    + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                           * (e * epsilon * r * sin_theta
+                                                                      * cos_theta
+                                                                      * xi
+                                                                      / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                              + e * sin_theta * xi / ((2.0 - tmp1)))
+                                                   - sin_theta * cos_theta
+                                                             / (epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0)),
+                                                  2.0))
+                                          + (Kokkos::
+                                                     pow(((-e) * epsilon * r * ipow(sin_theta, 2)
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(sin_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0))
-                                                    * (pow((e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                           2.0)
+                                                    * (Kokkos::
+                                                               pow((e * epsilon * r * sin_theta
+                                                                            * cos_theta * xi
+                                                                            / (ipow(2.0 - tmp1, 2)
+                                                                               * tmp1)
+                                                                    + e * sin_theta * xi
+                                                                              / ((2.0 - tmp1))),
+                                                                   2.0)
                                                        + ipow(cos_theta, 2)
                                                                  / (epsilon
                                                                             * (epsilon
@@ -2138,31 +2381,38 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                                   * Kokkos::exp(-tanh_term) * Kokkos::sin(11.0 * theta)
                                   / Kokkos::sqrt(
-                                          (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1)))
-                                                         * (e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1)))
-                                                 - sin_theta * cos_theta
-                                                           / (epsilon
-                                                                      * (epsilon
-                                                                         + 2.0 * r * cos_theta)
-                                                              + 1.0)),
-                                                2.0))
-                                          + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          (-Kokkos::pow(
+                                                  (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                            / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                    + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                           * (e * epsilon * r * sin_theta
+                                                                      * cos_theta
+                                                                      * xi
+                                                                      / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                              + e * sin_theta * xi / ((2.0 - tmp1)))
+                                                   - sin_theta * cos_theta
+                                                             / (epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0)),
+                                                  2.0))
+                                          + (Kokkos::
+                                                     pow(((-e) * epsilon * r * ipow(sin_theta, 2)
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(sin_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0))
-                                                    * (pow((e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                           2.0)
+                                                    * (Kokkos::
+                                                               pow((e * epsilon * r * sin_theta
+                                                                            * cos_theta * xi
+                                                                            / (ipow(2.0 - tmp1, 2)
+                                                                               * tmp1)
+                                                                    + e * sin_theta * xi
+                                                                              / ((2.0 - tmp1))),
+                                                                   2.0)
                                                        + ipow(cos_theta, 2)
                                                                  / (epsilon
                                                                             * (epsilon
@@ -2171,60 +2421,67 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                         + r
                                   * (12.288 * r * ipow(r - 1.0, 4) * Kokkos::cos(11.0 * theta)
                                      + 17.2032 * ipow(r - 1.0, 5) * Kokkos::cos(11.0 * theta))
-                                  * (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
-                                          + e * cos_theta * xi / ((2.0 - tmp1))),
-                                         2.0)
+                                  * (Kokkos::
+                                             pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                  + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                 2.0)
                                      + ipow(sin_theta, 2)
                                                / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                                   * Kokkos::exp(-tanh_term)
                                   / Kokkos::sqrt(
-                                          (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta
-                                                            / (Kokkos::sqrt(
-                                                                       1.0
-                                                                       - 1.0 / 4.0
-                                                                                 * (epsilon
-                                                                                    * epsilon))
-                                                               * (2.0 - tmp1)))
-                                                         * (e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1)))
-                                                 - sin_theta * cos_theta
-                                                           / (epsilon
-                                                                      * (epsilon
-                                                                         + 2.0 * r * cos_theta)
-                                                              + 1.0)),
-                                                2.0))
-                                          + (pow(((-e) * epsilon * r * ipow(sin_theta, 2)
-                                                          / (Kokkos::sqrt(
-                                                                     1.0
-                                                                     - 1.0 / 4.0
-                                                                               * (epsilon
-                                                                                  * epsilon))
-                                                             * ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta
-                                                            / (Kokkos::sqrt(
-                                                                       1.0
-                                                                       - 1.0 / 4.0
-                                                                                 * (epsilon
-                                                                                    * epsilon))
-                                                               * (2.0 - tmp1))),
-                                                 2.0)
+                                          (-Kokkos::pow(
+                                                  (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                            / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                    + e * cos_theta
+                                                              / (Kokkos::sqrt(
+                                                                         1.0
+                                                                         - 1.0 / 4.0
+                                                                                   * (epsilon
+                                                                                      * epsilon))
+                                                                 * (2.0 - tmp1)))
+                                                           * (e * epsilon * r * sin_theta
+                                                                      * cos_theta * xi
+                                                                      / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                              + e * sin_theta * xi / ((2.0 - tmp1)))
+                                                   - sin_theta * cos_theta
+                                                             / (epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0)),
+                                                  2.0))
+                                          + (Kokkos::pow(
+                                                     ((-e) * epsilon * r * ipow(sin_theta, 2)
+                                                              / (Kokkos::sqrt(
+                                                                         1.0
+                                                                         - 1.0 / 4.0
+                                                                                   * (epsilon
+                                                                                      * epsilon))
+                                                                 * ipow(2.0 - tmp1, 2) * tmp1)
+                                                      + e * cos_theta
+                                                                / (Kokkos::sqrt(
+                                                                           1.0
+                                                                           - 1.0 / 4.0
+                                                                                     * (epsilon
+                                                                                        * epsilon))
+                                                                   * (2.0 - tmp1))),
+                                                     2.0)
                                              + ipow(sin_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0))
-                                                    * (pow((e * epsilon * r * sin_theta * cos_theta
-                                                                    / (Kokkos::sqrt(
-                                                                               1.0
-                                                                               - 1.0 / 4.0
-                                                                                         * (epsilon
-                                                                                            * epsilon))
-                                                                       * ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                           2.0)
+                                                    * (Kokkos::pow(
+                                                               (e * epsilon * r * sin_theta
+                                                                        * cos_theta
+                                                                        / (Kokkos::sqrt(
+                                                                                   1.0
+                                                                                   - 1.0 / 4.0
+                                                                                             * (epsilon
+                                                                                                * epsilon))
+                                                                           * ipow(2.0 - tmp1, 2)
+                                                                           * tmp1)
+                                                                + e * sin_theta * xi
+                                                                          / ((2.0 - tmp1))),
+                                                               2.0)
                                                        + ipow(cos_theta, 2)
                                                                  / (epsilon
                                                                             * (epsilon
@@ -2234,20 +2491,22 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                   * (2.4576 * r * ipow(r - 1.0, 5) * Kokkos::cos(11.0 * theta)
                                      + 2.4576 * ipow(r - 1.0, 6) * Kokkos::cos(11.0 * theta))
                                   * ((-2.0) * epsilon * ipow(sin_theta, 2) * cos_theta
-                                             / pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                    + 1.0),
-                                                   2.0)
+                                             / Kokkos::
+                                                     pow((epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                          + 1.0),
+                                                         2.0)
                                      + ((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                                 / (ipow(2.0 - tmp1, 2) * tmp1)
                                         + e * cos_theta * xi / ((2.0 - tmp1)))
                                                * (2.0 * e * (epsilon * epsilon) * r
                                                           * ipow(sin_theta, 2) * cos_theta * xi
                                                           / (ipow(2.0 - tmp1, 2)
-                                                             * pow((epsilon
-                                                                            * (epsilon
-                                                                               + 2.0 * r * cos_theta)
-                                                                    + 1.0),
-                                                                   (3.0 / 2.0)))
+                                                             * Kokkos::pow(
+                                                                     (epsilon
+                                                                              * (epsilon
+                                                                                 + 2.0 * r * cos_theta)
+                                                                      + 1.0),
+                                                                     (3.0 / 2.0)))
                                                   - 4.0 * e * (epsilon * epsilon) * r
                                                             * ipow(sin_theta, 2) * cos_theta * xi
                                                             / (ipow(2.0 - tmp1, 3)
@@ -2261,31 +2520,38 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                             / (ipow(2.0 - tmp1, 2) * tmp1)))
                                   * Kokkos::exp(-tanh_term)
                                   / Kokkos::sqrt(
-                                          (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1)))
-                                                         * (e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1)))
-                                                 - sin_theta * cos_theta
-                                                           / (epsilon
-                                                                      * (epsilon
-                                                                         + 2.0 * r * cos_theta)
-                                                              + 1.0)),
-                                                2.0))
-                                          + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          (-Kokkos::pow(
+                                                  (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                            / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                    + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                           * (e * epsilon * r * sin_theta
+                                                                      * cos_theta
+                                                                      * xi
+                                                                      / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                              + e * sin_theta * xi / ((2.0 - tmp1)))
+                                                   - sin_theta * cos_theta
+                                                             / (epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0)),
+                                                  2.0))
+                                          + (Kokkos::
+                                                     pow(((-e) * epsilon * r * ipow(sin_theta, 2)
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(sin_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0))
-                                                    * (pow((e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                           2.0)
+                                                    * (Kokkos::
+                                                               pow((e * epsilon * r * sin_theta
+                                                                            * cos_theta * xi
+                                                                            / (ipow(2.0 - tmp1, 2)
+                                                                               * tmp1)
+                                                                    + e * sin_theta * xi
+                                                                              / ((2.0 - tmp1))),
+                                                                   2.0)
                                                        + ipow(cos_theta, 2)
                                                                  / (epsilon
                                                                             * (epsilon
@@ -2294,44 +2560,52 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                         + r
                                   * (2.4576 * r * ipow(r - 1.0, 5) * Kokkos::cos(11.0 * theta)
                                      + 2.4576 * ipow(r - 1.0, 6) * Kokkos::cos(11.0 * theta))
-                                  * (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
-                                          + e * cos_theta * xi / ((2.0 - tmp1))),
-                                         2.0)
+                                  * (Kokkos::
+                                             pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                  + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                 2.0)
                                      + ipow(sin_theta, 2)
                                                / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                  * (20.0 * pow(tanh_term, 2.0) - 20.0) * Kokkos::exp(-tanh_term)
+                                  * (20.0 * Kokkos::pow(tanh_term, 2.0) - 20.0)
+                                  * Kokkos::exp(-tanh_term)
                                   / Kokkos::sqrt(
-                                          (-pow((((-e) * epsilon * r * ipow(sin_theta, 2)
-                                                          / (Kokkos::sqrt(
-                                                                     1.0
-                                                                     - 1.0 / 4.0
-                                                                               * (epsilon
-                                                                                  * epsilon))
-                                                             * ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1)))
-                                                         * (e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1)))
-                                                 - sin_theta * cos_theta
-                                                           / (epsilon
-                                                                      * (epsilon
-                                                                         + 2.0 * r * cos_theta)
-                                                              + 1.0)),
-                                                2.0))
-                                          + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          (-Kokkos::pow(
+                                                  (((-e) * epsilon * r * ipow(sin_theta, 2)
+                                                            / (Kokkos::sqrt(
+                                                                       1.0
+                                                                       - 1.0 / 4.0
+                                                                                 * (epsilon
+                                                                                    * epsilon))
+                                                               * ipow(2.0 - tmp1, 2) * tmp1)
+                                                    + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                           * (e * epsilon * r * sin_theta
+                                                                      * cos_theta * xi
+                                                                      / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                              + e * sin_theta * xi / ((2.0 - tmp1)))
+                                                   - sin_theta * cos_theta
+                                                             / (epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0)),
+                                                  2.0))
+                                          + (Kokkos::
+                                                     pow(((-e) * epsilon * r * ipow(sin_theta, 2)
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(sin_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0))
-                                                    * (pow((e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                           2.0)
+                                                    * (Kokkos::
+                                                               pow((e * epsilon * r * sin_theta
+                                                                            * cos_theta * xi
+                                                                            / (ipow(2.0 - tmp1, 2)
+                                                                               * tmp1)
+                                                                    + e * sin_theta * xi
+                                                                              / ((2.0 - tmp1))),
+                                                                   2.0)
                                                        + ipow(cos_theta, 2)
                                                                  / (epsilon
                                                                             * (epsilon
@@ -2340,10 +2614,11 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                         + r
                                   * (2.4576 * r * ipow(r - 1.0, 5) * Kokkos::cos(11.0 * theta)
                                      + 2.4576 * ipow(r - 1.0, 6) * Kokkos::cos(11.0 * theta))
-                                  * (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
-                                          + e * cos_theta * xi / ((2.0 - tmp1))),
-                                         2.0)
+                                  * (Kokkos::
+                                             pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                  + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                 2.0)
                                      + ipow(sin_theta, 2)
                                                / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                                   * (1.0 / 2.0
@@ -2360,11 +2635,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                         + 2.0 * r * cos_theta)
                                                              + 1.0))
                                              * (4.0 * epsilon * sin_theta * ipow(cos_theta, 2)
-                                                        / pow((epsilon
-                                                                       * (epsilon
-                                                                          + 2.0 * r * cos_theta)
-                                                               + 1.0),
-                                                              2.0)
+                                                        / Kokkos::pow(
+                                                                (epsilon
+                                                                         * (epsilon
+                                                                            + 2.0 * r * cos_theta)
+                                                                 + 1.0),
+                                                                2.0)
                                                 + 2.0
                                                           * ((-e) * epsilon * r * ipow(sin_theta, 2)
                                                                      * xi
@@ -2374,11 +2650,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                      * sin_theta
                                                                      * ipow(cos_theta, 2) * xi
                                                                      / (ipow(2.0 - tmp1, 2)
-                                                                        * pow((epsilon
-                                                                                       * (epsilon
-                                                                                          + 2.0 * r * cos_theta)
-                                                                               + 1.0),
-                                                                              (3.0 / 2.0)))
+                                                                        * Kokkos::pow(
+                                                                                (epsilon
+                                                                                         * (epsilon
+                                                                                            + 2.0 * r * cos_theta)
+                                                                                 + 1.0),
+                                                                                (3.0 / 2.0)))
                                                              + 2.0 * e * (epsilon * epsilon) * r
                                                                        * sin_theta
                                                                        * ipow(cos_theta, 2) * xi
@@ -2400,11 +2677,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                      * ipow(sin_theta, 2)
                                                                      * cos_theta * xi
                                                                      / (ipow(2.0 - tmp1, 2)
-                                                                        * pow((epsilon
-                                                                                       * (epsilon
-                                                                                          + 2.0 * r * cos_theta)
-                                                                               + 1.0),
-                                                                              (3.0 / 2.0)))
+                                                                        * Kokkos::pow(
+                                                                                (epsilon
+                                                                                         * (epsilon
+                                                                                            + 2.0 * r * cos_theta)
+                                                                                 + 1.0),
+                                                                                (3.0 / 2.0)))
                                                              - 2.0 * e * (epsilon * epsilon) * r
                                                                        * ipow(sin_theta, 2)
                                                                        * cos_theta * xi
@@ -2421,11 +2699,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                           * tmp1)))
                                      - 1.0 / 2.0
                                                * ((-2.0) * epsilon * ipow(cos_theta, 3)
-                                                          / pow((epsilon
-                                                                         * (epsilon
-                                                                            + 2.0 * r * cos_theta)
-                                                                 + 1.0),
-                                                                2.0)
+                                                          / Kokkos::pow(
+                                                                  (epsilon
+                                                                           * (epsilon
+                                                                              + 2.0 * r * cos_theta)
+                                                                   + 1.0),
+                                                                  2.0)
                                                   + (e * epsilon * r * sin_theta * cos_theta * xi
                                                              / (ipow(2.0 - tmp1, 2) * tmp1)
                                                      + e * sin_theta * xi / ((2.0 - tmp1)))
@@ -2433,11 +2712,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                        * sin_theta
                                                                        * ipow(cos_theta, 2) * xi
                                                                        / (ipow(2.0 - tmp1, 2)
-                                                                          * pow((epsilon
-                                                                                         * (epsilon
-                                                                                            + 2.0 * r * cos_theta)
-                                                                                 + 1.0),
-                                                                                (3.0 / 2.0)))
+                                                                          * Kokkos::pow(
+                                                                                  (epsilon
+                                                                                           * (epsilon
+                                                                                              + 2.0 * r * cos_theta)
+                                                                                   + 1.0),
+                                                                                  (3.0 / 2.0)))
                                                                + 4.0 * e * (epsilon * epsilon) * r
                                                                          * sin_theta
                                                                          * ipow(cos_theta, 2) * xi
@@ -2450,10 +2730,14 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                          * cos_theta * xi
                                                                          / (ipow(2.0 - tmp1, 2)
                                                                             * tmp1)))
-                                               * (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                               / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                       + e * cos_theta * xi / ((2.0 - tmp1))),
-                                                      2.0)
+                                               * (Kokkos::
+                                                          pow(((-e) * epsilon * r
+                                                                       * ipow(sin_theta, 2) * xi
+                                                                       / (ipow(2.0 - tmp1, 2)
+                                                                          * tmp1)
+                                                               + e * cos_theta * xi
+                                                                         / ((2.0 - tmp1))),
+                                                              2.0)
                                                   + ipow(sin_theta, 2)
                                                             / (epsilon
                                                                        * (epsilon
@@ -2461,11 +2745,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                + 1.0))
                                      - 1.0 / 2.0
                                                * ((-2.0) * epsilon * ipow(sin_theta, 2) * cos_theta
-                                                          / pow((epsilon
-                                                                         * (epsilon
-                                                                            + 2.0 * r * cos_theta)
-                                                                 + 1.0),
-                                                                2.0)
+                                                          / Kokkos::pow(
+                                                                  (epsilon
+                                                                           * (epsilon
+                                                                              + 2.0 * r * cos_theta)
+                                                                   + 1.0),
+                                                                  2.0)
                                                   + ((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                                              / (ipow(2.0 - tmp1, 2) * tmp1)
                                                      + e * cos_theta * xi / ((2.0 - tmp1)))
@@ -2473,11 +2758,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                        * ipow(sin_theta, 2)
                                                                        * cos_theta * xi
                                                                        / (ipow(2.0 - tmp1, 2)
-                                                                          * pow((epsilon
-                                                                                         * (epsilon
-                                                                                            + 2.0 * r * cos_theta)
-                                                                                 + 1.0),
-                                                                                (3.0 / 2.0)))
+                                                                          * Kokkos::pow(
+                                                                                  (epsilon
+                                                                                           * (epsilon
+                                                                                              + 2.0 * r * cos_theta)
+                                                                                   + 1.0),
+                                                                                  (3.0 / 2.0)))
                                                                - 4.0 * e * (epsilon * epsilon) * r
                                                                          * ipow(sin_theta, 2)
                                                                          * cos_theta * xi
@@ -2494,47 +2780,62 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                          * ipow(cos_theta, 2) * xi
                                                                          / (ipow(2.0 - tmp1, 2)
                                                                             * tmp1)))
-                                               * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                               / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                       + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                      2.0)
+                                               * (Kokkos::
+                                                          pow((e * epsilon * r * sin_theta
+                                                                       * cos_theta * xi
+                                                                       / (ipow(2.0 - tmp1, 2)
+                                                                          * tmp1)
+                                                               + e * sin_theta * xi
+                                                                         / ((2.0 - tmp1))),
+                                                              2.0)
                                                   + ipow(cos_theta, 2)
                                                             / (epsilon
                                                                        * (epsilon
                                                                           + 2.0 * r * cos_theta)
                                                                + 1.0)))
                                   * Kokkos::exp(-tanh_term)
-                                  / pow(((-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                         / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                 + e * cos_theta * xi / ((2.0 - tmp1)))
-                                                        * (e * epsilon * r * sin_theta * cos_theta
+                                  / Kokkos::pow(
+                                          ((-Kokkos::pow(
+                                                   (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                             / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                     + e * cos_theta * xi
+                                                               / ((2.0 - tmp1)))
+                                                            * (e * epsilon * r * sin_theta
+                                                                       * cos_theta
+                                                                       * xi
+                                                                       / (ipow(2.0 - tmp1, 2)
+                                                                          * tmp1)
+                                                               + e * sin_theta * xi
+                                                                         / ((2.0 - tmp1)))
+                                                    - sin_theta * cos_theta
+                                                              / (epsilon
+                                                                         * (epsilon
+                                                                            + 2.0 * r * cos_theta)
+                                                                 + 1.0)),
+                                                   2.0))
+                                           + (Kokkos::
+                                                      pow(((-e) * epsilon * r * ipow(sin_theta, 2)
                                                                    * xi
                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                           + e * sin_theta * xi / ((2.0 - tmp1)))
-                                                - sin_theta * cos_theta
-                                                          / (epsilon
-                                                                     * (epsilon
-                                                                        + 2.0 * r * cos_theta)
-                                                             + 1.0)),
-                                               2.0))
-                                         + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                         / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                 + e * cos_theta * xi / ((2.0 - tmp1))),
-                                                2.0)
-                                            + ipow(sin_theta, 2)
-                                                      / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                         + 1.0))
-                                                   * (pow((e * epsilon * r * sin_theta * cos_theta
-                                                                   * xi
-                                                                   / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                           + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                           + e * cos_theta * xi / ((2.0 - tmp1))),
                                                           2.0)
-                                                      + ipow(cos_theta, 2)
-                                                                / (epsilon
-                                                                           * (epsilon
-                                                                              + 2.0 * r * cos_theta)
-                                                                   + 1.0))),
-                                        (3.0 / 2.0))
+                                              + ipow(sin_theta, 2)
+                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0))
+                                                     * (Kokkos::
+                                                                pow((e * epsilon * r * sin_theta
+                                                                             * cos_theta * xi
+                                                                             / (ipow(2.0 - tmp1, 2)
+                                                                                * tmp1)
+                                                                     + e * sin_theta * xi
+                                                                               / ((2.0 - tmp1))),
+                                                                    2.0)
+                                                        + ipow(cos_theta, 2)
+                                                                  / (epsilon
+                                                                             * (epsilon
+                                                                                + 2.0 * r * cos_theta)
+                                                                     + 1.0))),
+                                          (3.0 / 2.0))
                         + 27.0336 * ipow(r - 1.0, 6)
                                   * (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                               / (ipow(2.0 - tmp1, 2) * tmp1)
@@ -2546,70 +2847,85 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                                   * Kokkos::exp(-tanh_term) * Kokkos::sin(11.0 * theta)
                                   / Kokkos::sqrt(
-                                          (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1)))
-                                                         * (e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1)))
-                                                 - sin_theta * cos_theta
-                                                           / (epsilon
-                                                                      * (epsilon
-                                                                         + 2.0 * r * cos_theta)
-                                                              + 1.0)),
-                                                2.0))
-                                          + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          (-Kokkos::pow(
+                                                  (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                            / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                    + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                           * (e * epsilon * r * sin_theta
+                                                                      * cos_theta
+                                                                      * xi
+                                                                      / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                              + e * sin_theta * xi / ((2.0 - tmp1)))
+                                                   - sin_theta * cos_theta
+                                                             / (epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0)),
+                                                  2.0))
+                                          + (Kokkos::
+                                                     pow(((-e) * epsilon * r * ipow(sin_theta, 2)
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(sin_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0))
-                                                    * (pow((e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                           2.0)
+                                                    * (Kokkos::
+                                                               pow((e * epsilon * r * sin_theta
+                                                                            * cos_theta * xi
+                                                                            / (ipow(2.0 - tmp1, 2)
+                                                                               * tmp1)
+                                                                    + e * sin_theta * xi
+                                                                              / ((2.0 - tmp1))),
+                                                                   2.0)
                                                        + ipow(cos_theta, 2)
                                                                  / (epsilon
                                                                             * (epsilon
                                                                                + 2.0 * r * cos_theta)
                                                                     + 1.0)))
                         - 49.5616 * ipow(r - 1.0, 6)
-                                  * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
-                                          + e * sin_theta * xi / ((2.0 - tmp1))),
-                                         2.0)
+                                  * (Kokkos::
+                                             pow((e * epsilon * r * sin_theta * cos_theta * xi
+                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                  + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                 2.0)
                                      + ipow(cos_theta, 2)
                                                / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                                   * Kokkos::exp(-tanh_term) * Kokkos::cos(11.0 * theta)
                                   / Kokkos::sqrt(
-                                          (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1)))
-                                                         * (e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1)))
-                                                 - sin_theta * cos_theta
-                                                           / (epsilon
-                                                                      * (epsilon
-                                                                         + 2.0 * r * cos_theta)
-                                                              + 1.0)),
-                                                2.0))
-                                          + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          (-Kokkos::pow(
+                                                  (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                            / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                    + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                           * (e * epsilon * r * sin_theta
+                                                                      * cos_theta
+                                                                      * xi
+                                                                      / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                              + e * sin_theta * xi / ((2.0 - tmp1)))
+                                                   - sin_theta * cos_theta
+                                                             / (epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0)),
+                                                  2.0))
+                                          + (Kokkos::
+                                                     pow(((-e) * epsilon * r * ipow(sin_theta, 2)
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(sin_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0))
-                                                    * (pow((e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                           2.0)
+                                                    * (Kokkos::
+                                                               pow((e * epsilon * r * sin_theta
+                                                                            * cos_theta * xi
+                                                                            / (ipow(2.0 - tmp1, 2)
+                                                                               * tmp1)
+                                                                    + e * sin_theta * xi
+                                                                              / ((2.0 - tmp1))),
+                                                                   2.0)
                                                        + ipow(cos_theta, 2)
                                                                  / (epsilon
                                                                             * (epsilon
@@ -2617,20 +2933,22 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                     + 1.0)))
                         - 4.5056 * ipow(r - 1.0, 6)
                                   * (2.0 * epsilon * r * sin_theta * ipow(cos_theta, 2)
-                                             / pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                    + 1.0),
-                                                   2.0)
+                                             / Kokkos::
+                                                     pow((epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                          + 1.0),
+                                                         2.0)
                                      + (e * epsilon * r * sin_theta * cos_theta * xi
                                                 / (ipow(2.0 - tmp1, 2) * tmp1)
                                         + e * sin_theta * xi / ((2.0 - tmp1)))
                                                * (2.0 * e * (epsilon * epsilon) * (r * r)
                                                           * ipow(sin_theta, 2) * cos_theta * xi
                                                           / (ipow(2.0 - tmp1, 2)
-                                                             * pow((epsilon
-                                                                            * (epsilon
-                                                                               + 2.0 * r * cos_theta)
-                                                                    + 1.0),
-                                                                   (3.0 / 2.0)))
+                                                             * Kokkos::pow(
+                                                                     (epsilon
+                                                                              * (epsilon
+                                                                                 + 2.0 * r * cos_theta)
+                                                                      + 1.0),
+                                                                     (3.0 / 2.0)))
                                                   - 4.0 * e * (epsilon * epsilon) * (r * r)
                                                             * ipow(sin_theta, 2) * cos_theta * xi
                                                             / (ipow(2.0 - tmp1, 3)
@@ -2647,47 +2965,54 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                                   * Kokkos::exp(-tanh_term) * Kokkos::sin(11.0 * theta)
                                   / Kokkos::sqrt(
-                                          (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1)))
-                                                         * (e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1)))
-                                                 - sin_theta * cos_theta
-                                                           / (epsilon
-                                                                      * (epsilon
-                                                                         + 2.0 * r * cos_theta)
-                                                              + 1.0)),
-                                                2.0))
-                                          + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta
-                                                            / (Kokkos::sqrt(
-                                                                       1.0
-                                                                       - 1.0 / 4.0
-                                                                                 * (epsilon
-                                                                                    * epsilon))
-                                                               * (2.0 - tmp1))),
-                                                 2.0)
+                                          (-Kokkos::pow(
+                                                  (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                            / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                    + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                           * (e * epsilon * r * sin_theta
+                                                                      * cos_theta
+                                                                      * xi
+                                                                      / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                              + e * sin_theta * xi / ((2.0 - tmp1)))
+                                                   - sin_theta * cos_theta
+                                                             / (epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0)),
+                                                  2.0))
+                                          + (Kokkos::pow(
+                                                     ((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                              / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                      + e * cos_theta
+                                                                / (Kokkos::sqrt(
+                                                                           1.0
+                                                                           - 1.0 / 4.0
+                                                                                     * (epsilon
+                                                                                        * epsilon))
+                                                                   * (2.0 - tmp1))),
+                                                     2.0)
                                              + ipow(sin_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0))
-                                                    * (pow((e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                           2.0)
+                                                    * (Kokkos::
+                                                               pow((e * epsilon * r * sin_theta
+                                                                            * cos_theta * xi
+                                                                            / (ipow(2.0 - tmp1, 2)
+                                                                               * tmp1)
+                                                                    + e * sin_theta * xi
+                                                                              / ((2.0 - tmp1))),
+                                                                   2.0)
                                                        + ipow(cos_theta, 2)
                                                                  / (epsilon
                                                                             * (epsilon
                                                                                + 2.0 * r * cos_theta)
                                                                     + 1.0)))
                         - 4.5056 * ipow(r - 1.0, 6)
-                                  * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
-                                          + e * sin_theta * xi / ((2.0 - tmp1))),
-                                         2.0)
+                                  * (Kokkos::
+                                             pow((e * epsilon * r * sin_theta * cos_theta * xi
+                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                  + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                 2.0)
                                      + ipow(cos_theta, 2)
                                                / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                                   * (1.0 / 2.0
@@ -2705,11 +3030,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                              + 1.0))
                                              * ((-4.0) * epsilon * r * ipow(sin_theta, 2)
                                                         * cos_theta
-                                                        / pow((epsilon
-                                                                       * (epsilon
-                                                                          + 2.0 * r * cos_theta)
-                                                               + 1.0),
-                                                              2.0)
+                                                        / Kokkos::pow(
+                                                                (epsilon
+                                                                         * (epsilon
+                                                                            + 2.0 * r * cos_theta)
+                                                                 + 1.0),
+                                                                2.0)
                                                 + 2.0
                                                           * ((-e) * epsilon * r * ipow(sin_theta, 2)
                                                                      * xi
@@ -2719,11 +3045,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                      * ipow(sin_theta, 2)
                                                                      * cos_theta * xi
                                                                      / (ipow(2.0 - tmp1, 2)
-                                                                        * pow((epsilon
-                                                                                       * (epsilon
-                                                                                          + 2.0 * r * cos_theta)
-                                                                               + 1.0),
-                                                                              (3.0 / 2.0)))
+                                                                        * Kokkos::pow(
+                                                                                (epsilon
+                                                                                         * (epsilon
+                                                                                            + 2.0 * r * cos_theta)
+                                                                                 + 1.0),
+                                                                                (3.0 / 2.0)))
                                                              - 2.0 * e * (epsilon * epsilon)
                                                                        * (r * r)
                                                                        * ipow(sin_theta, 2)
@@ -2750,11 +3077,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                           * ((-e) * (epsilon * epsilon) * (r * r)
                                                                      * ipow(sin_theta, 3) * xi
                                                                      / (ipow(2.0 - tmp1, 2)
-                                                                        * pow((epsilon
-                                                                                       * (epsilon
-                                                                                          + 2.0 * r * cos_theta)
-                                                                               + 1.0),
-                                                                              (3.0 / 2.0)))
+                                                                        * Kokkos::pow(
+                                                                                (epsilon
+                                                                                         * (epsilon
+                                                                                            + 2.0 * r * cos_theta)
+                                                                                 + 1.0),
+                                                                                (3.0 / 2.0)))
                                                              + 2.0 * e * (epsilon * epsilon)
                                                                        * (r * r)
                                                                        * ipow(sin_theta, 3) * xi
@@ -2779,21 +3107,26 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                         + 2.0 * r * cos_theta)
                                                              + 1.0))
                                      - 1.0 / 2.0
-                                               * (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                               / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                       + e * cos_theta * xi / ((2.0 - tmp1))),
-                                                      2.0)
+                                               * (Kokkos::
+                                                          pow(((-e) * epsilon * r
+                                                                       * ipow(sin_theta, 2) * xi
+                                                                       / (ipow(2.0 - tmp1, 2)
+                                                                          * tmp1)
+                                                               + e * cos_theta * xi
+                                                                         / ((2.0 - tmp1))),
+                                                              2.0)
                                                   + ipow(sin_theta, 2)
                                                             / (epsilon
                                                                        * (epsilon
                                                                           + 2.0 * r * cos_theta)
                                                                + 1.0))
                                                * (2.0 * epsilon * r * sin_theta * ipow(cos_theta, 2)
-                                                          / pow((epsilon
-                                                                         * (epsilon
-                                                                            + 2.0 * r * cos_theta)
-                                                                 + 1.0),
-                                                                2.0)
+                                                          / Kokkos::pow(
+                                                                  (epsilon
+                                                                           * (epsilon
+                                                                              + 2.0 * r * cos_theta)
+                                                                   + 1.0),
+                                                                  2.0)
                                                   + (e * epsilon * r * sin_theta * cos_theta * xi
                                                              / (ipow(2.0 - tmp1, 2) * tmp1)
                                                      + e * sin_theta * xi / ((2.0 - tmp1)))
@@ -2802,11 +3135,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                        * ipow(sin_theta, 2)
                                                                        * cos_theta * xi
                                                                        / (ipow(2.0 - tmp1, 2)
-                                                                          * pow((epsilon
-                                                                                         * (epsilon
-                                                                                            + 2.0 * r * cos_theta)
-                                                                                 + 1.0),
-                                                                                (3.0 / 2.0)))
+                                                                          * Kokkos::pow(
+                                                                                  (epsilon
+                                                                                           * (epsilon
+                                                                                              + 2.0 * r * cos_theta)
+                                                                                   + 1.0),
+                                                                                  (3.0 / 2.0)))
                                                                - 4.0 * e * (epsilon * epsilon)
                                                                          * (r * r)
                                                                          * ipow(sin_theta, 2)
@@ -2832,21 +3166,26 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                           + 2.0 * r * cos_theta)
                                                                + 1.0))
                                      - 1.0 / 2.0
-                                               * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                               / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                       + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                      2.0)
+                                               * (Kokkos::
+                                                          pow((e * epsilon * r * sin_theta
+                                                                       * cos_theta * xi
+                                                                       / (ipow(2.0 - tmp1, 2)
+                                                                          * tmp1)
+                                                               + e * sin_theta * xi
+                                                                         / ((2.0 - tmp1))),
+                                                              2.0)
                                                   + ipow(cos_theta, 2)
                                                             / (epsilon
                                                                        * (epsilon
                                                                           + 2.0 * r * cos_theta)
                                                                + 1.0))
                                                * (2.0 * epsilon * r * ipow(sin_theta, 3)
-                                                          / pow((epsilon
-                                                                         * (epsilon
-                                                                            + 2.0 * r * cos_theta)
-                                                                 + 1.0),
-                                                                2.0)
+                                                          / Kokkos::pow(
+                                                                  (epsilon
+                                                                           * (epsilon
+                                                                              + 2.0 * r * cos_theta)
+                                                                   + 1.0),
+                                                                  2.0)
                                                   + ((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                                              / (ipow(2.0 - tmp1, 2) * tmp1)
                                                      + e * cos_theta * xi / ((2.0 - tmp1)))
@@ -2854,11 +3193,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                        * (r * r)
                                                                        * ipow(sin_theta, 3) * xi
                                                                        / (ipow(2.0 - tmp1, 2)
-                                                                          * pow((epsilon
-                                                                                         * (epsilon
-                                                                                            + 2.0 * r * cos_theta)
-                                                                                 + 1.0),
-                                                                                (3.0 / 2.0)))
+                                                                          * Kokkos::pow(
+                                                                                  (epsilon
+                                                                                           * (epsilon
+                                                                                              + 2.0 * r * cos_theta)
+                                                                                   + 1.0),
+                                                                                  (3.0 / 2.0)))
                                                                + 4.0 * e * (epsilon * epsilon)
                                                                          * (r * r)
                                                                          * ipow(sin_theta, 3) * xi
@@ -2879,37 +3219,48 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                           + 2.0 * r * cos_theta)
                                                                + 1.0)))
                                   * Kokkos::exp(-tanh_term) * Kokkos::sin(11.0 * theta)
-                                  / pow(((-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                         / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                 + e * cos_theta * xi / ((2.0 - tmp1)))
-                                                        * (e * epsilon * r * sin_theta * cos_theta
+                                  / Kokkos::pow(
+                                          ((-Kokkos::pow(
+                                                   (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                             / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                     + e * cos_theta * xi
+                                                               / ((2.0 - tmp1)))
+                                                            * (e * epsilon * r * sin_theta
+                                                                       * cos_theta
+                                                                       * xi
+                                                                       / (ipow(2.0 - tmp1, 2)
+                                                                          * tmp1)
+                                                               + e * sin_theta * xi
+                                                                         / ((2.0 - tmp1)))
+                                                    - sin_theta * cos_theta
+                                                              / (epsilon
+                                                                         * (epsilon
+                                                                            + 2.0 * r * cos_theta)
+                                                                 + 1.0)),
+                                                   2.0))
+                                           + (Kokkos::
+                                                      pow(((-e) * epsilon * r * ipow(sin_theta, 2)
                                                                    * xi
                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                           + e * sin_theta * xi / ((2.0 - tmp1)))
-                                                - sin_theta * cos_theta
-                                                          / (epsilon
-                                                                     * (epsilon
-                                                                        + 2.0 * r * cos_theta)
-                                                             + 1.0)),
-                                               2.0))
-                                         + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                         / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                 + e * cos_theta * xi / ((2.0 - tmp1))),
-                                                2.0)
-                                            + ipow(sin_theta, 2)
-                                                      / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                         + 1.0))
-                                                   * (pow((e * epsilon * r * sin_theta * cos_theta
-                                                                   * xi
-                                                                   / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                           + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                           + e * cos_theta * xi / ((2.0 - tmp1))),
                                                           2.0)
-                                                      + ipow(cos_theta, 2)
-                                                                / (epsilon
-                                                                           * (epsilon
-                                                                              + 2.0 * r * cos_theta)
-                                                                   + 1.0))),
-                                        (3.0 / 2.0))
+                                              + ipow(sin_theta, 2)
+                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0))
+                                                     * (Kokkos::
+                                                                pow((e * epsilon * r * sin_theta
+                                                                             * cos_theta * xi
+                                                                             / (ipow(2.0 - tmp1, 2)
+                                                                                * tmp1)
+                                                                     + e * sin_theta * xi
+                                                                               / ((2.0 - tmp1))),
+                                                                    2.0)
+                                                        + ipow(cos_theta, 2)
+                                                                  / (epsilon
+                                                                             * (epsilon
+                                                                                + 2.0 * r * cos_theta)
+                                                                     + 1.0))),
+                                          (3.0 / 2.0))
                         - (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                     / (ipow(2.0 - tmp1, 2) * tmp1)
                             + e * cos_theta * xi / ((2.0 - tmp1)))
@@ -2922,31 +3273,38 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                      - 27.0336 * ipow(r - 1.0, 6) * Kokkos::sin(11.0 * theta))
                                   * Kokkos::exp(-tanh_term)
                                   / Kokkos::sqrt(
-                                          (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1)))
-                                                         * (e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1)))
-                                                 - sin_theta * cos_theta
-                                                           / (epsilon
-                                                                      * (epsilon
-                                                                         + 2.0 * r * cos_theta)
-                                                              + 1.0)),
-                                                2.0))
-                                          + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          (-Kokkos::pow(
+                                                  (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                            / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                    + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                           * (e * epsilon * r * sin_theta
+                                                                      * cos_theta
+                                                                      * xi
+                                                                      / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                              + e * sin_theta * xi / ((2.0 - tmp1)))
+                                                   - sin_theta * cos_theta
+                                                             / (epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0)),
+                                                  2.0))
+                                          + (Kokkos::
+                                                     pow(((-e) * epsilon * r * ipow(sin_theta, 2)
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(sin_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0))
-                                                    * (pow((e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                           2.0)
+                                                    * (Kokkos::
+                                                               pow((e * epsilon * r * sin_theta
+                                                                            * cos_theta * xi
+                                                                            / (ipow(2.0 - tmp1, 2)
+                                                                               * tmp1)
+                                                                    + e * sin_theta * xi
+                                                                              / ((2.0 - tmp1))),
+                                                                   2.0)
                                                        + ipow(cos_theta, 2)
                                                                  / (epsilon
                                                                             * (epsilon
@@ -2977,11 +3335,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                              + 1.0))
                                              * ((-4.0) * epsilon * r * ipow(sin_theta, 2)
                                                         * cos_theta
-                                                        / pow((epsilon
-                                                                       * (epsilon
-                                                                          + 2.0 * r * cos_theta)
-                                                               + 1.0),
-                                                              2.0)
+                                                        / Kokkos::pow(
+                                                                (epsilon
+                                                                         * (epsilon
+                                                                            + 2.0 * r * cos_theta)
+                                                                 + 1.0),
+                                                                2.0)
                                                 + 2.0
                                                           * ((-e) * epsilon * r * ipow(sin_theta, 2)
                                                                      * xi
@@ -2991,11 +3350,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                      * ipow(sin_theta, 2)
                                                                      * cos_theta * xi
                                                                      / (ipow(2.0 - tmp1, 2)
-                                                                        * pow((epsilon
-                                                                                       * (epsilon
-                                                                                          + 2.0 * r * cos_theta)
-                                                                               + 1.0),
-                                                                              (3.0 / 2.0)))
+                                                                        * Kokkos::pow(
+                                                                                (epsilon
+                                                                                         * (epsilon
+                                                                                            + 2.0 * r * cos_theta)
+                                                                                 + 1.0),
+                                                                                (3.0 / 2.0)))
                                                              - 2.0 * e * (epsilon * epsilon)
                                                                        * (r * r)
                                                                        * ipow(sin_theta, 2)
@@ -3022,11 +3382,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                           * ((-e) * (epsilon * epsilon) * (r * r)
                                                                      * ipow(sin_theta, 3) * xi
                                                                      / (ipow(2.0 - tmp1, 2)
-                                                                        * pow((epsilon
-                                                                                       * (epsilon
-                                                                                          + 2.0 * r * cos_theta)
-                                                                               + 1.0),
-                                                                              (3.0 / 2.0)))
+                                                                        * Kokkos::pow(
+                                                                                (epsilon
+                                                                                         * (epsilon
+                                                                                            + 2.0 * r * cos_theta)
+                                                                                 + 1.0),
+                                                                                (3.0 / 2.0)))
                                                              + 2.0 * e * (epsilon * epsilon)
                                                                        * (r * r)
                                                                        * ipow(sin_theta, 3) * xi
@@ -3051,21 +3412,26 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                         + 2.0 * r * cos_theta)
                                                              + 1.0))
                                      - 1.0 / 2.0
-                                               * (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                               / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                       + e * cos_theta * xi / ((2.0 - tmp1))),
-                                                      2.0)
+                                               * (Kokkos::
+                                                          pow(((-e) * epsilon * r
+                                                                       * ipow(sin_theta, 2) * xi
+                                                                       / (ipow(2.0 - tmp1, 2)
+                                                                          * tmp1)
+                                                               + e * cos_theta * xi
+                                                                         / ((2.0 - tmp1))),
+                                                              2.0)
                                                   + ipow(sin_theta, 2)
                                                             / (epsilon
                                                                        * (epsilon
                                                                           + 2.0 * r * cos_theta)
                                                                + 1.0))
                                                * (2.0 * epsilon * r * sin_theta * ipow(cos_theta, 2)
-                                                          / pow((epsilon
-                                                                         * (epsilon
-                                                                            + 2.0 * r * cos_theta)
-                                                                 + 1.0),
-                                                                2.0)
+                                                          / Kokkos::pow(
+                                                                  (epsilon
+                                                                           * (epsilon
+                                                                              + 2.0 * r * cos_theta)
+                                                                   + 1.0),
+                                                                  2.0)
                                                   + (e * epsilon * r * sin_theta * cos_theta * xi
                                                              / (ipow(2.0 - tmp1, 2) * tmp1)
                                                      + e * sin_theta * xi / ((2.0 - tmp1)))
@@ -3074,11 +3440,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                        * ipow(sin_theta, 2)
                                                                        * cos_theta * xi
                                                                        / (ipow(2.0 - tmp1, 2)
-                                                                          * pow((epsilon
-                                                                                         * (epsilon
-                                                                                            + 2.0 * r * cos_theta)
-                                                                                 + 1.0),
-                                                                                (3.0 / 2.0)))
+                                                                          * Kokkos::pow(
+                                                                                  (epsilon
+                                                                                           * (epsilon
+                                                                                              + 2.0 * r * cos_theta)
+                                                                                   + 1.0),
+                                                                                  (3.0 / 2.0)))
                                                                - 4.0 * e * (epsilon * epsilon)
                                                                          * (r * r)
                                                                          * ipow(sin_theta, 2)
@@ -3104,21 +3471,26 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                           + 2.0 * r * cos_theta)
                                                                + 1.0))
                                      - 1.0 / 2.0
-                                               * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                               / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                       + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                      2.0)
+                                               * (Kokkos::
+                                                          pow((e * epsilon * r * sin_theta
+                                                                       * cos_theta * xi
+                                                                       / (ipow(2.0 - tmp1, 2)
+                                                                          * tmp1)
+                                                               + e * sin_theta * xi
+                                                                         / ((2.0 - tmp1))),
+                                                              2.0)
                                                   + ipow(cos_theta, 2)
                                                             / (epsilon
                                                                        * (epsilon
                                                                           + 2.0 * r * cos_theta)
                                                                + 1.0))
                                                * (2.0 * epsilon * r * ipow(sin_theta, 3)
-                                                          / pow((epsilon
-                                                                         * (epsilon
-                                                                            + 2.0 * r * cos_theta)
-                                                                 + 1.0),
-                                                                2.0)
+                                                          / Kokkos::pow(
+                                                                  (epsilon
+                                                                           * (epsilon
+                                                                              + 2.0 * r * cos_theta)
+                                                                   + 1.0),
+                                                                  2.0)
                                                   + ((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                                              / (ipow(2.0 - tmp1, 2) * tmp1)
                                                      + e * cos_theta * xi / ((2.0 - tmp1)))
@@ -3126,11 +3498,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                        * (r * r)
                                                                        * ipow(sin_theta, 3) * xi
                                                                        / (ipow(2.0 - tmp1, 2)
-                                                                          * pow((epsilon
-                                                                                         * (epsilon
-                                                                                            + 2.0 * r * cos_theta)
-                                                                                 + 1.0),
-                                                                                (3.0 / 2.0)))
+                                                                          * Kokkos::pow(
+                                                                                  (epsilon
+                                                                                           * (epsilon
+                                                                                              + 2.0 * r * cos_theta)
+                                                                                   + 1.0),
+                                                                                  (3.0 / 2.0)))
                                                                + 4.0 * e * (epsilon * epsilon)
                                                                          * (r * r)
                                                                          * ipow(sin_theta, 3) * xi
@@ -3151,73 +3524,92 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                                           + 2.0 * r * cos_theta)
                                                                + 1.0)))
                                   * Kokkos::exp(-tanh_term)
-                                  / pow(((-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                         / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                 + e * cos_theta * xi / ((2.0 - tmp1)))
-                                                        * (e * epsilon * r * sin_theta * cos_theta
+                                  / Kokkos::pow(
+                                          ((-Kokkos::pow(
+                                                   (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                             / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                     + e * cos_theta * xi
+                                                               / ((2.0 - tmp1)))
+                                                            * (e * epsilon * r * sin_theta
+                                                                       * cos_theta
+                                                                       * xi
+                                                                       / (ipow(2.0 - tmp1, 2)
+                                                                          * tmp1)
+                                                               + e * sin_theta * xi
+                                                                         / ((2.0 - tmp1)))
+                                                    - sin_theta * cos_theta
+                                                              / (epsilon
+                                                                         * (epsilon
+                                                                            + 2.0 * r * cos_theta)
+                                                                 + 1.0)),
+                                                   2.0))
+                                           + (Kokkos::
+                                                      pow(((-e) * epsilon * r * ipow(sin_theta, 2)
                                                                    * xi
                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                           + e * sin_theta * xi / ((2.0 - tmp1)))
-                                                - sin_theta * cos_theta
-                                                          / (epsilon
-                                                                     * (epsilon
-                                                                        + 2.0 * r * cos_theta)
-                                                             + 1.0)),
-                                               2.0))
-                                         + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                         / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                 + e * cos_theta * xi / ((2.0 - tmp1))),
-                                                2.0)
-                                            + ipow(sin_theta, 2)
-                                                      / (epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                         + 1.0))
-                                                   * (pow((e * epsilon * r * sin_theta * cos_theta
-                                                                   * xi
-                                                                   / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                           + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                           + e * cos_theta * xi / ((2.0 - tmp1))),
                                                           2.0)
-                                                      + ipow(cos_theta, 2)
-                                                                / (epsilon
-                                                                           * (epsilon
-                                                                              + 2.0 * r * cos_theta)
-                                                                   + 1.0))),
-                                        (3.0 / 2.0))
+                                              + ipow(sin_theta, 2)
+                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                           + 1.0))
+                                                     * (Kokkos::
+                                                                pow((e * epsilon * r * sin_theta
+                                                                             * cos_theta * xi
+                                                                             / (ipow(2.0 - tmp1, 2)
+                                                                                * tmp1)
+                                                                     + e * sin_theta * xi
+                                                                               / ((2.0 - tmp1))),
+                                                                    2.0)
+                                                        + ipow(cos_theta, 2)
+                                                                  / (epsilon
+                                                                             * (epsilon
+                                                                                + 2.0 * r * cos_theta)
+                                                                     + 1.0))),
+                                          (3.0 / 2.0))
                         + 6.0
                                   * (2.4576 * r * ipow(r - 1.0, 5) * Kokkos::cos(11.0 * theta)
                                      + 2.4576 * ipow(r - 1.0, 6) * Kokkos::cos(11.0 * theta))
-                                  * (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
-                                          + e * cos_theta * xi / ((2.0 - tmp1))),
-                                         2.0)
+                                  * (Kokkos::
+                                             pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                  + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                 2.0)
                                      + ipow(sin_theta, 2)
                                                / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                                   * Kokkos::exp(-tanh_term)
                                   / Kokkos::sqrt(
-                                          (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1)))
-                                                         * (e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1)))
-                                                 - sin_theta * cos_theta
-                                                           / (epsilon
-                                                                      * (epsilon
-                                                                         + 2.0 * r * cos_theta)
-                                                              + 1.0)),
-                                                2.0))
-                                          + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          (-Kokkos::pow(
+                                                  (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                            / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                    + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                           * (e * epsilon * r * sin_theta
+                                                                      * cos_theta
+                                                                      * xi
+                                                                      / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                              + e * sin_theta * xi / ((2.0 - tmp1)))
+                                                   - sin_theta * cos_theta
+                                                             / (epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0)),
+                                                  2.0))
+                                          + (Kokkos::
+                                                     pow(((-e) * epsilon * r * ipow(sin_theta, 2)
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(sin_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0))
-                                                    * (pow((e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                           2.0)
+                                                    * (Kokkos::
+                                                               pow((e * epsilon * r * sin_theta
+                                                                            * cos_theta * xi
+                                                                            / (ipow(2.0 - tmp1, 2)
+                                                                               * tmp1)
+                                                                    + e * sin_theta * xi
+                                                                              / ((2.0 - tmp1))),
+                                                                   2.0)
                                                        + ipow(cos_theta, 2)
                                                                  / (epsilon
                                                                             * (epsilon
@@ -3226,20 +3618,22 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                         - (2.4576 * r * ipow(r - 1.0, 5) * Kokkos::cos(11.0 * theta)
                            + 2.4576 * ipow(r - 1.0, 6) * Kokkos::cos(11.0 * theta))
                                   * ((-2.0) * epsilon * r * ipow(sin_theta, 2) * cos_theta
-                                             / pow((epsilon * (epsilon + 2.0 * r * cos_theta)
-                                                    + 1.0),
-                                                   2.0)
+                                             / Kokkos::
+                                                     pow((epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                          + 1.0),
+                                                         2.0)
                                      + ((-e) * epsilon * r * ipow(sin_theta, 2) * xi
                                                 / (ipow(2.0 - tmp1, 2) * tmp1)
                                         + e * cos_theta * xi / ((2.0 - tmp1)))
                                                * (e * (epsilon * epsilon) * (r * r)
                                                           * ipow(sin_theta, 2) * cos_theta * xi
                                                           / (ipow(2.0 - tmp1, 2)
-                                                             * pow((epsilon
-                                                                            * (epsilon
-                                                                               + 2.0 * r * cos_theta)
-                                                                    + 1.0),
-                                                                   (3.0 / 2.0)))
+                                                             * Kokkos::pow(
+                                                                     (epsilon
+                                                                              * (epsilon
+                                                                                 + 2.0 * r * cos_theta)
+                                                                      + 1.0),
+                                                                     (3.0 / 2.0)))
                                                   - 2.0 * e * (epsilon * epsilon) * (r * r)
                                                             * ipow(sin_theta, 2) * cos_theta * xi
                                                             / (ipow(2.0 - tmp1, 3)
@@ -3258,11 +3652,12 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                * ((-e) * (epsilon * epsilon) * (r * r)
                                                           * ipow(sin_theta, 3) * xi
                                                           / (ipow(2.0 - tmp1, 2)
-                                                             * pow((epsilon
-                                                                            * (epsilon
-                                                                               + 2.0 * r * cos_theta)
-                                                                    + 1.0),
-                                                                   (3.0 / 2.0)))
+                                                             * Kokkos::pow(
+                                                                     (epsilon
+                                                                              * (epsilon
+                                                                                 + 2.0 * r * cos_theta)
+                                                                      + 1.0),
+                                                                     (3.0 / 2.0)))
                                                   + 2.0 * e * (epsilon * epsilon) * (r * r)
                                                             * ipow(sin_theta, 3) * xi
                                                             / (ipow(2.0 - tmp1, 3)
@@ -3279,56 +3674,67 @@ KOKKOS_FUNCTION double ManufacturedPoissonTest<CurvilinearSolution<
                                                / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
                                   * Kokkos::exp(-tanh_term)
                                   / Kokkos::sqrt(
-                                          (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1)))
-                                                         * (e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1)))
-                                                 - sin_theta * cos_theta
-                                                           / (epsilon
-                                                                      * (epsilon
-                                                                         + 2.0 * r * cos_theta)
-                                                              + 1.0)),
-                                                2.0))
-                                          + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                                          / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                  + e * cos_theta * xi / ((2.0 - tmp1))),
-                                                 2.0)
+                                          (-Kokkos::pow(
+                                                  (((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                            / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                    + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                           * (e * epsilon * r * sin_theta
+                                                                      * cos_theta
+                                                                      * xi
+                                                                      / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                              + e * sin_theta * xi / ((2.0 - tmp1)))
+                                                   - sin_theta * cos_theta
+                                                             / (epsilon
+                                                                        * (epsilon
+                                                                           + 2.0 * r * cos_theta)
+                                                                + 1.0)),
+                                                  2.0))
+                                          + (Kokkos::
+                                                     pow(((-e) * epsilon * r * ipow(sin_theta, 2)
+                                                                  * xi
+                                                                  / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                          + e * cos_theta * xi / ((2.0 - tmp1))),
+                                                         2.0)
                                              + ipow(sin_theta, 2)
                                                        / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                           + 1.0))
-                                                    * (pow((e * epsilon * r * sin_theta * cos_theta
-                                                                    * xi
-                                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
-                                                            + e * sin_theta * xi / ((2.0 - tmp1))),
-                                                           2.0)
+                                                    * (Kokkos::
+                                                               pow((e * epsilon * r * sin_theta
+                                                                            * cos_theta * xi
+                                                                            / (ipow(2.0 - tmp1, 2)
+                                                                               * tmp1)
+                                                                    + e * sin_theta * xi
+                                                                              / ((2.0 - tmp1))),
+                                                                   2.0)
                                                        + ipow(cos_theta, 2)
                                                                  / (epsilon
                                                                             * (epsilon
                                                                                + 2.0 * r * cos_theta)
                                                                     + 1.0))))
                      / Kokkos::sqrt(
-                             (-pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                             / (ipow(2.0 - tmp1, 2) * tmp1)
-                                     + e * cos_theta * xi / ((2.0 - tmp1)))
-                                            * (e * epsilon * r * sin_theta * cos_theta * xi
-                                                       / (ipow(2.0 - tmp1, 2) * tmp1)
-                                               + e * sin_theta * xi / ((2.0 - tmp1)))
-                                    - sin_theta * cos_theta
-                                              / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0)),
-                                   2.0))
-                             + (pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
-                                             / (ipow(2.0 - tmp1, 2) * tmp1)
-                                     + e * cos_theta * xi / ((2.0 - tmp1))),
-                                    2.0)
+                             (-Kokkos::
+                                      pow((((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                    / (ipow(2.0 - tmp1, 2) * tmp1)
+                                            + e * cos_theta * xi / ((2.0 - tmp1)))
+                                                   * (e * epsilon * r * sin_theta * cos_theta * xi
+                                                              / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                      + e * sin_theta * xi / ((2.0 - tmp1)))
+                                           - sin_theta * cos_theta
+                                                     / (epsilon * (epsilon + 2.0 * r * cos_theta)
+                                                        + 1.0)),
+                                          2.0))
+                             + (Kokkos::
+                                        pow(((-e) * epsilon * r * ipow(sin_theta, 2) * xi
+                                                     / (ipow(2.0 - tmp1, 2) * tmp1)
+                                             + e * cos_theta * xi / ((2.0 - tmp1))),
+                                            2.0)
                                 + ipow(sin_theta, 2)
                                           / (epsilon * (epsilon + 2.0 * r * cos_theta) + 1.0))
-                                       * (pow((e * epsilon * r * sin_theta * cos_theta * xi
-                                                       / (ipow(2.0 - tmp1, 2) * tmp1)
-                                               + e * sin_theta * xi / ((2.0 - tmp1))),
-                                              2.0)
+                                       * (Kokkos::
+                                                  pow((e * epsilon * r * sin_theta * cos_theta * xi
+                                                               / (ipow(2.0 - tmp1, 2) * tmp1)
+                                                       + e * sin_theta * xi / ((2.0 - tmp1))),
+                                                      2.0)
                                           + ipow(cos_theta, 2)
                                                     / (epsilon * (epsilon + 2.0 * r * cos_theta)
                                                        + 1.0)));
