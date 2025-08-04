@@ -172,13 +172,13 @@ public:
         host_t<PolarSplineMemRTheta> electrostatic_potential_coef(
                 ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
 
-        ddc::NullExtrapolationRule extrapolation_rule;
-        PolarSplineEvaluator<
-                Kokkos::DefaultHostExecutionSpace,
-                Kokkos::HostSpace,
-                PolarBSplinesRTheta,
-                ddc::NullExtrapolationRule>
-                polar_spline_evaluator(extrapolation_rule);
+        host_t<Spline2DMem> density_coef(get_spline_idx_range(m_builder));
+        DFieldMemRTheta density_predicted(grid);
+        host_t<FieldMemRTheta<CoordRTheta>> feet_coords(grid);
+        host_t<DVectorFieldMemRTheta<X, Y>> advection_field_evaluated(grid);
+        host_t<VectorSplineCoeffsMem2D<X, Y>> advection_field_coefs(
+                get_spline_idx_range(m_builder));
+
 
         // --- For the computation of advection field from the electrostatic potential (phi): -------------
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_alloc(grid);
@@ -186,6 +186,15 @@ public:
 
         host_t<DVectorFieldRTheta<X, Y>> advection_field_host(advection_field_alloc);
         host_t<DVectorFieldRTheta<X, Y>> advection_field_predicted(advection_field_predicted_alloc);
+
+        // --- Operators ----------------------------------------------------------------------------------
+        ddc::NullExtrapolationRule extrapolation_rule;
+        PolarSplineEvaluator<
+                Kokkos::DefaultHostExecutionSpace,
+                Kokkos::HostSpace,
+                PolarBSplinesRTheta,
+                ddc::NullExtrapolationRule>
+                polar_spline_evaluator(extrapolation_rule);
 
         AdvectionFieldFinder advection_field_computer(m_logical_to_physical);
 
@@ -198,7 +207,6 @@ public:
         for (int iter(0); iter < steps; ++iter) {
             double const time = iter * dt;
             // STEP 1: From rho^n, we compute phi^n: Poisson equation
-            host_t<Spline2DMem> density_coef(get_spline_idx_range(m_builder));
             m_builder(get_field(density_coef), get_const_field(density_host));
             m_poisson_solver(charge_density_coord, get_field(electrostatic_potential_coef));
 
@@ -218,7 +226,6 @@ public:
 
             // STEP 3: From rho^n and A^n, we compute rho^P: Vlasov equation
             // --- Copy rho^n because it will be modified:
-            DFieldMemRTheta density_predicted(grid);
             ddc::parallel_deepcopy(get_field(density_predicted), density_host);
             auto advection_field = ddcHelper::create_mirror_view_and_copy(
                     Kokkos::DefaultExecutionSpace(),
@@ -226,7 +233,6 @@ public:
             m_advection_solver(get_field(density_predicted), get_field(advection_field), dt);
 
             // --- advect also the feet because it is needed for the next step
-            host_t<FieldMemRTheta<CoordRTheta>> feet_coords(grid);
             ddc::for_each(grid, [&](IdxRTheta const irtheta) {
                 feet_coords(irtheta) = CoordRTheta(ddc::coordinate(irtheta));
             });
@@ -245,10 +251,6 @@ public:
 
 
             // ---  we evaluate the advection field A^n at the characteristic feet X^P
-            host_t<DVectorFieldMemRTheta<X, Y>> advection_field_evaluated(grid);
-            host_t<VectorSplineCoeffsMem2D<X, Y>> advection_field_coefs(
-                    get_spline_idx_range(m_builder));
-
             m_builder(
                     ddcHelper::get<X>(advection_field_coefs),
                     ddcHelper::get<X>(get_const_field(advection_field_host)));
@@ -291,7 +293,6 @@ public:
         }
 
         // STEP 1: From rho^n, we compute phi^n: Poisson equation
-        host_t<Spline2DMem> density_coef(get_spline_idx_range(m_builder));
         m_builder(get_field(density_coef), get_const_field(density_host));
         m_poisson_solver(charge_density_coord, get_field(electrical_potential));
         ddc::parallel_deepcopy(electrical_potential_host, electrical_potential);
