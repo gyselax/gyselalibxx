@@ -7,6 +7,7 @@
 #include "edge.hpp"
 #include "interface.hpp"
 #include "patch.hpp"
+#include "type_seq_tools.hpp"
 
 namespace connectivity_details {
 /**
@@ -499,17 +500,14 @@ struct CollectAllGridsOnDim
             Edge<StartPatch, Grid1D, FRONT>,
             InterfaceTypeSeq,
             BackInsert>::type;
+    using NonOverlappingBackwardTypeSeq
+            = type_seq_range_t<BackwardTypeSeq, 0, ddc::type_seq_size_v<BackwardTypeSeq> - 1>;
     // Work forward from back (end) of grid inserting each new grid at the end of the sequence
-    // In the periodic case this object will contain duplicate grids with those found in
-    // BackwardTypeSeq. In the non-periodic case only Grid1D will be found in both.
-    // The template argument FoundGrids of CollectGridsAlongDim cannot be used to avoid this
-    // duplication as it will cause the loop to stop early when it detects Grid1D for the
-    // ForwardTypeSeq. Workarounds using std::conditional_t to handle OutsideEdges are not
-    // possible as the compiler evaluates all expressions in the conditional.
     using ForwardTypeSeq = typename CollectGridsAlongDim<
             Edge<StartPatch, Grid1D, BACK>,
             InterfaceTypeSeq,
-            FrontInsert>::type;
+            FrontInsert,
+            NonOverlappingBackwardTypeSeq>::type;
     /// The type found by the class.
     using type = ddc::type_seq_merge_t<BackwardTypeSeq, ForwardTypeSeq>;
 };
