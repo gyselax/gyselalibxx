@@ -417,7 +417,7 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
     initialise_all_functions(functions_and_derivs);
     initialise_2D_function<GridXg, GridYg>(function_g);
 
-    // --- the derivatives
+    // --- the derivatives of the equivalent global spline.
     Idx<DerivXg> first_dxg(1);
     IdxStep<DerivXg> n_deriv_xg(1);
     IdxRange<DerivXg> idx_range_deriv_xg(first_dxg, n_deriv_xg);
@@ -473,7 +473,7 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
     derivs_xyg_max_max(first_dxg, first_dyg)
             = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xg_max) * std::sin(yg_max);
 
-    // --- the derivatives from an equivalent global spline.
+    // --- the local derivatives from an equivalent global spline.
     // ------- build global spline representation
     SplineRThetagBuilder builder_g(idx_range_xy_g);
 
@@ -542,7 +542,7 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             evaluator_g,
             const_function_g_coef);
 
-    // --- the first derivatives from the function values.
+    // --- the first derivatives (on inner interfaces) from the function values.
     matrix.solve_deriv(functions_and_derivs);
 
     // --- the cross-derivatives from the first derivatives.
@@ -554,9 +554,7 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
     matrix.solve_cross_deriv(functions_and_derivs);
 
     // Test the values of the derivatives ========================================================
-    using PatchSeqLowerBound = ddc::detail::TypeSeq<>;
-    using PatchSeqUpperBound = ddc::detail::TypeSeq<>;
-
+    using EmptyPatchSeq = ddc::detail::TypeSeq<>;
 
     // Check each derivatives ---
     check_all_x_derivatives(
@@ -566,14 +564,14 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             idx_ranges,
             idx_ranges_slice_dx);
 
-    check_all_y_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
+    check_all_y_derivatives<EmptyPatchSeq, EmptyPatchSeq>(
             functions_and_derivs,
             evaluator_g,
             const_function_g_coef,
             idx_ranges,
             idx_ranges_slice_dy);
 
-    check_all_xy_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
+    check_all_xy_derivatives<EmptyPatchSeq, EmptyPatchSeq>(
             functions_and_derivs,
             evaluator_g,
             const_function_g_coef,
@@ -582,7 +580,7 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             idx_ranges_slice_dy);
 
     // Check the whole spline representations ---
-    check_all_spline_representation_agreement<PatchSeqLowerBound, PatchSeqUpperBound>(
+    check_all_spline_representation_agreement<EmptyPatchSeq, EmptyPatchSeq>(
             idx_ranges,
             idx_ranges_slice_dx,
             idx_ranges_slice_dy,
