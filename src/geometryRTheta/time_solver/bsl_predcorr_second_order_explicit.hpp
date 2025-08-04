@@ -174,6 +174,9 @@ public:
 
         host_t<Spline2DMem> density_coef_alloc_host(get_spline_idx_range(m_builder));
         DFieldMemRTheta density_predicted_alloc(grid);
+        auto density_predicted_host_alloc
+                = ddc::create_mirror_view(get_field(density_predicted_alloc));
+        auto density_alloc = ddc::create_mirror_view(Kokkos::DefaultExecutionSpace(), density_host);
         host_t<FieldMemRTheta<CoordRTheta>> feet_coords_alloc_host(grid);
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_evaluated_alloc_host(grid);
         host_t<VectorSplineCoeffsMem2D<X, Y>> advection_field_coefs_alloc_host(
@@ -183,10 +186,16 @@ public:
         // --- For the computation of advection field from the electrostatic potential (phi): -------------
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_alloc_host(grid);
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_predicted_alloc_host(grid);
+        auto advection_field_alloc = ddcHelper::
+                create_mirror_view(Kokkos::DefaultExecutionSpace(), advection_field_host);
 
+        // Create fields
         host_t<DVectorFieldRTheta<X, Y>> advection_field_host(advection_field_alloc_host);
         host_t<DVectorFieldRTheta<X, Y>> advection_field_predicted_host(
                 advection_field_predicted_alloc_host);
+        DVectorFieldRTheta<X, Y> advection_field(advection_field_alloc);
+        host_t<DFieldRTheta> density_predicted_host(density_predicted_host_alloc);
+        DFieldRTheta density = get_field(density_alloc);
 
         // --- Operators ----------------------------------------------------------------------------------
         ddc::NullExtrapolationRule extrapolation_rule;
@@ -228,14 +237,11 @@ public:
                     get_field(electrostatic_potential_coef_alloc_host),
                     advection_field_host);
 
-
             // STEP 3: From rho^n and A^n, we compute rho^P: Vlasov equation
             // --- Copy rho^n because it will be modified:
             ddc::parallel_deepcopy(get_field(density_predicted_alloc), density_host);
-            auto advection_field = ddcHelper::create_mirror_view_and_copy(
-                    Kokkos::DefaultExecutionSpace(),
-                    advection_field_host);
-            m_advection_solver(get_field(density_predicted_alloc), get_field(advection_field), dt);
+            ddc::parallel_deepcopy(advection_field, advection_field_host);
+            m_advection_solver(get_field(density_predicted_alloc), advection_field, dt);
 
             // --- advect also the feet because it is needed for the next step
             ddc::for_each(grid, [&](IdxRTheta const irtheta) {
@@ -243,8 +249,7 @@ public:
             });
             m_find_feet(get_field(feet_coords_alloc_host), get_field(advection_field_host), dt);
 
-            auto density_predicted_host
-                    = ddc::create_mirror_view_and_copy(get_field(density_predicted_alloc));
+            ddc::parallel_deepcopy(density_predicted_host, get_field(density_predicted_alloc));
             // STEP 4: From rho^P, we compute phi^P: Poisson equation
             m_builder(get_field(density_coef_alloc_host), get_const_field(density_predicted_host));
             m_poisson_solver(
@@ -286,8 +291,7 @@ public:
             });
 
             ddcHelper::deepcopy(advection_field, advection_field_host);
-            auto density = ddc::
-                    create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), density_host);
+            ddc::parallel_deepcopy(density, density_host);
             m_advection_solver(get_field(density), get_const_field(advection_field), dt);
             ddc::parallel_deepcopy(density_host, density);
         }
