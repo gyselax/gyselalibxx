@@ -5,6 +5,6 @@ runs:
   steps:
     - run: |
         git config --global --add safe.directory $(pwd)
-        git fetch --no-recurse-submodules origin ${{ github.event.pull_request.base.sha }}
+        git fetch --no-recurse-submodules origin ${CHANGES_REF}
         git diff --name-only ${CHANGES_REF} > changed_files.txt
       shell: bash
