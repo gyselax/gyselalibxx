@@ -210,7 +210,7 @@ public:
         AdvectionFieldFinder advection_field_computer(m_logical_to_physical);
 
         PoissonLikeRHSFunction const
-                charge_density_coord(get_const_field(density_coef_alloc_host), m_evaluator);
+                charge_density(get_const_field(density_coef_alloc_host), m_evaluator);
 
 
         // --- Parameter for linearisation of advection field: --------------------------------------------
@@ -219,9 +219,7 @@ public:
             double const time = iter * dt;
             // STEP 1: From rho^n, we compute phi^n: Poisson equation
             m_builder(get_field(density_coef_alloc_host), get_const_field(density_host));
-            m_poisson_solver(
-                    charge_density_coord,
-                    get_field(electrostatic_potential_coef_alloc_host));
+            m_poisson_solver(charge_density, get_field(electrostatic_potential_coef_alloc_host));
 
             polar_spline_evaluator(
                     get_field(electrical_potential_host),
@@ -253,9 +251,7 @@ public:
             ddc::parallel_deepcopy(density_predicted_host, get_field(density_predicted_alloc));
             // STEP 4: From rho^P, we compute phi^P: Poisson equation
             m_builder(get_field(density_coef_alloc_host), get_const_field(density_predicted_host));
-            m_poisson_solver(
-                    charge_density_coord,
-                    get_field(electrostatic_potential_coef_alloc_host));
+            m_poisson_solver(charge_density, get_field(electrostatic_potential_coef_alloc_host));
 
             // STEP 5: From phi^P, we compute A^P:
             advection_field_computer(
@@ -299,7 +295,7 @@ public:
 
         // STEP 1: From rho^n, we compute phi^n: Poisson equation
         m_builder(get_field(density_coef_alloc_host), get_const_field(density_host));
-        m_poisson_solver(charge_density_coord, get_field(electrical_potential));
+        m_poisson_solver(charge_density, get_field(electrical_potential));
         ddc::parallel_deepcopy(electrical_potential_host, electrical_potential);
         ddc::PdiEvent("last_iteration")
                 .with("iter", steps)
