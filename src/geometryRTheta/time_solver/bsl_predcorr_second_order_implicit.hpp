@@ -181,14 +181,14 @@ public:
                 get_spline_idx_range(m_builder));
         host_t<FieldMemRTheta<CoordRTheta>> feet_coords_alloc_host(grid);
         DFieldMemRTheta density_predicted_alloc(grid);
-        host_t<Spline2DMem> density_coef_alloc_host(get_spline_idx_range(m_builder));
+        Spline2DMem density_coef_alloc(get_spline_idx_range(m_builder));
 
         auto advection_field_k_tot_alloc = ddcHelper::create_mirror_view_and_copy(
                 Kokkos::DefaultExecutionSpace(),
                 get_field(advection_field_k_tot_alloc_host));
         auto density_predicted_alloc_host
                 = ddc::create_mirror_view(get_field(density_predicted_alloc));
-        auto density_alloc = ddc::create_mirror_view(Kokkos::DefaultExecutionSpace(), density_host);
+        auto density_alloc = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), density_host);
 
         host_t<DVectorFieldRTheta<X, Y>> advection_field_host(advection_field_alloc_host);
         host_t<DVectorFieldRTheta<X, Y>> advection_field_k_host(advection_field_k_alloc_host);
@@ -199,7 +199,7 @@ public:
         DFieldRTheta density_predicted = get_field(density_predicted_alloc);
         host_t<DFieldRTheta> density_predicted_host = get_field(density_predicted_alloc_host);
         DFieldRTheta density = get_field(density_alloc);
-        host_t<Spline2D> density_coef_host(density_coef_alloc_host);
+        Spline2D density_coef(density_coef_alloc);
 
         host_t<PolarSplineRTheta> electrostatic_potential_coef_host(
                 electrostatic_potential_coef_alloc_host);
@@ -216,12 +216,12 @@ public:
         AdvectionFieldFinder advection_field_computer(m_logical_to_physical);
 
         PoissonLikeRHSFunction const
-                charge_density(get_const_field(density_coef_host), m_evaluator);
+                charge_density(get_const_field(density_coef), m_evaluator);
 
         start_time = std::chrono::system_clock::now();
         for (int iter(0); iter < steps; ++iter) {
             // STEP 1: From rho^n, we compute phi^n: Poisson equation
-            m_builder(density_coef_host, get_const_field(density_host));
+            m_builder(density_coef, get_const_field(density));
             m_poisson_solver(charge_density, electrostatic_potential_coef_host);
 
             polar_spline_evaluator(
@@ -281,7 +281,7 @@ public:
 
             // X^P = X^n - dt/2 * ( E^n(X^n) + E^n(X^P) )/2:
             // --- Copy rho^n because it will be modified:
-            ddc::parallel_deepcopy(density_predicted, density_host);
+            ddc::parallel_deepcopy(density_predicted, density);
             ddcHelper::deepcopy(
                     get_field(advection_field_k_tot_alloc),
                     get_const_field(advection_field_k_tot_host));
@@ -301,8 +301,7 @@ public:
 
 
             // STEP 4: From rho^P, we compute phi^P: Poisson equation
-            ddc::parallel_deepcopy(density_predicted_host, density_predicted);
-            m_builder(density_coef_host, get_const_field(density_predicted_host));
+            m_builder(density_coef, get_const_field(density_predicted));
             m_poisson_solver(charge_density, electrostatic_potential_coef_host);
 
             // STEP 5: From phi^P, we compute A^P:
@@ -348,14 +347,12 @@ public:
                         (advection_field_host(irtheta) + advection_field_k_host(irtheta)) / 2.);
             });
             // X^k = X^n - dt * ( A^P(X^n) + A^P(X^P) )/2
-            ddc::parallel_deepcopy(density, get_const_field(density_host));
             ddcHelper::deepcopy(advection_field_k_tot_alloc, advection_field_k_tot_host);
             m_advection_solver(density, get_const_field(advection_field_k_tot_alloc), dt);
-            ddc::parallel_deepcopy(density_host, get_const_field(density));
         }
 
         // STEP 1: From rho^n, we compute phi^n: Poisson equation
-        m_builder(density_coef_host, get_const_field(density_host));
+        m_builder(density_coef, get_const_field(density));
         m_poisson_solver(charge_density, get_field(electrical_potential_alloc));
         ddc::parallel_deepcopy(
                 get_field(electrical_potential_alloc_host),
@@ -370,7 +367,7 @@ public:
         end_time = std::chrono::system_clock::now();
         display_time_difference("Iterations time: ", start_time, end_time);
 
-
+        ddc::parallel_deepcopy(density_host, get_const_field(density));
         return density_host;
     }
 
