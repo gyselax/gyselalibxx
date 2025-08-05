@@ -263,7 +263,7 @@ using DerivFieldOnPatch = DerivField<
                 ddc::Deriv<typename Patch::Dim2>,
                 typename Patch::Grid2>>;
 
-                
+
 // --- ON HOST ---
 /**
  * @brief A field memory with derivatives constaining the function values on the 2D grid, and first derivatives 
