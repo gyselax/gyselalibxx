@@ -525,7 +525,7 @@ We simply refer it as
 > the patches in the given direction use **Hermite boundary conditions**.
 >
 > If the equivalent global spline uses **additional interpolation points as closure condition**
-> (see [Additional interpolation point not on a break point](#additional-interpolation-point-not-on-a-break-point)), then $`b^1 = 0 \text{ and } b^{N_I-1} = 0`$.
+> (see [Additional interpolation point not on a break point](#additional-interpolation-point-not-on-a-break-point)), then $`b^1 = 0 \text{ and } a^{N_I-1} = 0`$.
 > So, the dependency on the boundary derivatives disappears in the vector *C*.
 >
 > If the equivalent global spline uses **periodic boundary conditions**, then we can add an additional
@@ -563,30 +563,30 @@ We simply refer it as
 
 First, for each interface in the geometry, we instantiate a `SingleInterfaceDerivatorCalculator`
 (see [How to use the SingleInterfaceDerivatorCalculator operator?](#how-to-use-the-singleinterfacederivativescalculator-operator)).
-We store all the derivative calculator is a `std::tuple`.
+We store a constant reference of all the derivative calculator in a `SingleInterfaceDerivatorCalculatorCollection`.
 
 ```cpp
 SingleInterfaceDerivatorCalculator<Interface_1, BoundCond1_1, BoundCond1_2> derivative_calculator_1(...);
 SingleInterfaceDerivatorCalculator<Interface_2, BoundCond2_1, BoundCond2_2> derivative_calculator_2(...);
 ...
 
-// Using std::tie() allows us to store references instead of copying the objects.
-std::tuple derivative_calculators = std::tie(derivative_calculator_1, derivative_calculator_2, ...);
+using DerivCalculatorCollection = SingleInterfaceDerivatorCalculatorCollection<
+    SingleInterfaceDerivatorCalculator<Interface_1, BoundCond1_1, BoundCond1_2>, 
+    SingleInterfaceDerivatorCalculator<Interface_2, BoundCond2_1, BoundCond2_2>>; 
+
+DerivCalculatorCollection derivative_calculators (derivative_calculator_1, derivative_calculator_2, ...);
 ```
 
 We can then instantiate `InterfaceDerivativeMatrix` with the tuple of derivative calculator.
 
 ```cpp
 InterfaceDerivativeMatrix<
-        Connectivity,                       // MultipatchConnectivity class
-        Grid1D,                             // the given direction.
-        DConstFieldOnPatch_host,            // type for function field.
-        BoundCondGlobalLower,               // boundary condition for the equivalent global spline
-        BoundCondGlobalUpper,               // boundary condition for the equivalent global spline
-        KokkosExecutionSpace,
-        Patch1,                             // list of patches containing all the needed ones
-        Patch2,
-        ...>
+        Connectivity,                               // MultipatchConnectivity class
+        Grid1D,                                     // the given direction.
+        ddc::detail::TypeSeq<Patch1, Patch2, ...>   // list of patches containing all the needed ones
+        BoundCondGlobalLower,                       // boundary condition for the equivalent global spline
+        BoundCondGlobalUpper,                       // boundary condition for the equivalent global spline
+        DerivCalculatorCollection>
         matrix(idx_ranges, derivative_calculators);
 ```
 
@@ -596,21 +596,19 @@ During the instantiation, `InterfaceDerivativeMatrix` will allocate memory for t
 for the right hand side vector *C* and for the solution vector *S*.
 It also computes the matrix and stores it.
 
-If we want to solve the system for a given function, we then use the operator `.solve()`.
+If we want to solve the system for a given function, we then use the operator `.solve_deriv()`.
 
 ```cpp
-matrix.solve(
-    derivs_min,         // A MultipatchField collection of first derivatives on lower side
-    derivs_max,         // A MultipatchField collection of first derivatives on upper side
-    const_functions     // A MultipatchField collection of function values
+matrix.solve_deriv(
+    functions_and_derivs,         // A MultipatchField collection of DerivField.
     );
 ```
 
-During the call to `.solve()`, it computes the right hand side vector *C*.
+During the call to `.solve_deriv()`, it computes the right hand side vector *C*.
 It solves the matrix system to get the solution vector *S*.
-It fill in the `derivs_min` and `derivs_max` collection with the computed derivatives at the right place.
+It fill in the derivatives in th `functions_and_derivs` collection with the computed derivatives at the right place.
 
-:warning: The values in `derivs_min` and `derivs_max` are overwritten during the last step.
+:warning: The derivatives in `functions_and_derivs` are overwritten during the last step.
 
 #### A 2D case operator
 
@@ -630,12 +628,16 @@ So, we start by defining the `InterfaceDerivativeMatrix` matrices for each perio
 $`\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}`$ (`GridX1`, `GridX4` and `GridX7`).
 
 ```cpp
-InterfaceDerivativeMatrix<Connectivity, GridX1, DConstFieldOnPatch_host, ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC,
-        KokkosExecutionSpace,Patch1, Patch2, Patch3>
+InterfaceDerivativeMatrix<Connectivity, GridX1, 
+        ddc::detail::TypeSeq<Patch1, Patch2, Patch3>, 
+        ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC,
+        DerivCalculatorCollection123>
         matrix_123(idx_ranges_123, derivative_calculators_123);
 
-InterfaceDerivativeMatrix<Connectivity, GridX4, DConstFieldOnPatch_host, ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC,
-        KokkosExecutionSpace,Patch1, Patch2, Patch3>
+InterfaceDerivativeMatrix<Connectivity, GridX4, 
+        ddc::detail::TypeSeq<Patch4, Patch5, Patch6>,
+        ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC,
+        DerivCalculatorCollection456>
         matrix_456(idx_ranges_456, derivative_calculators_456);
 // ...
 ```
@@ -644,12 +646,16 @@ We also define `InterfaceDerivativeMatrix` matrices for each non-periodic direct
 $`\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}`$ (`GridY1`, `GridY2` and `GridY3`).
 
 ```cpp
-InterfaceDerivativeMatrix<Connectivity, GridY1, DConstFieldOnPatch_host, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE,
-        KokkosExecutionSpace,Patch1, Patch4, Patch7>
+InterfaceDerivativeMatrix<Connectivity, GridY1, 
+        ddc::detail::TypeSeq<Patch1, Patch4, Patch7>,
+        ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE,
+        DerivCalculatorCollection147>
         matrix_147(idx_ranges_147, derivative_calculators_147);
 
-InterfaceDerivativeMatrix<Connectivity, GridY2, DConstFieldOnPatch_host, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE,
-        KokkosExecutionSpace,Patch2, Patch5, Patch8>
+InterfaceDerivativeMatrix<Connectivity, GridY2, 
+        ddc::detail::TypeSeq<Patch2, Patch5, Patch8>,
+        ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE,
+        DerivCalculatorCollection258>
         matrix_258(idx_ranges_258, derivative_calculators_258);
 // ...
 ```
@@ -662,8 +668,8 @@ With these matrices, we can compute all the interface *x*-derivatives using the 
 $`\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}`$,
 
 ```cpp
-matrix_147.solve(derivs_xmin_147, derivs_xmax_147, const_functions_174);
-matrix_258.solve(derivs_xmin_258, derivs_xmax_258, const_functions_258);
+matrix_147.solve_deriv(functions_and_derivs_147);
+matrix_258.solve_deriv(functions_and_derivs_258);
 // ...
 ```
 
@@ -671,8 +677,8 @@ we can compute all the interface *y*-derivatives using the directions
 $`\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}`$,
 
 ```cpp
-matrix_123.solve(derivs_ymin_123, derivs_ymax_123, const_functions_123);
-matrix_456.solve(derivs_ymin_456, derivs_ymax_456, const_functions_456);
+matrix_123.solve_deriv(functions_and_derivs_123);
+matrix_456.solve_deriv(functions_and_derivs_456);
 // ...
 ```
 
@@ -680,12 +686,10 @@ From the computed first derivatives, we can compute the cross-derivatives along 
 E.g.
 
 ```cpp
-matrix_123.solve(derivs_xy_min_min_123, derivs_xy_max_min_123, const_derivs_ymin_123);
-matrix_123.solve(derivs_xy_min_max_123, derivs_xy_max_max_123, const_derivs_ymax_123);
+matrix_123.solve_cross_deriv(functions_and_derivs_123); // along x direction using y-derivatives 
 // ...
 // or
-matrix_147.solve(derivs_xy_min_min_147, derivs_xy_min_max_147, const_derivs_xmin_147)
-matrix_147.solve(derivs_xy_max_min_147, derivs_xy_max_max_147, const_derivs_xmax_147)
+matrix_147.solve_cross_deriv(functions_and_derivs_147); // along y direction using x-derivatives
 // ...
 ```
 
@@ -694,12 +698,10 @@ all have the data to build local spline representations.
 On conforming global meshes, the local splines are exactly pieces of an equivalent
 global spline.
 
-> **Remark:** The cross-derivative fields are defined as `DField` on `IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>>`.
-> So, there are the same type for every patches. We cannot use a `MultipatchField` to store them and
-> we are using `std::tuple` instead.
->
-> **Warning:** The cross-derivatives in the `std::tuple` have to follow the list of order patches along one
-> direction!
+
+:warning: **Warning:** 
+The cross-derivatives are computed from the first derivatives. So, the `.solve_deriv()` has to be applied before the `.solve_cross_deriv()`. 
+It is recommended to applied `.solve_deriv()` on _every_ group of patches before. 
 
 ## References
 
