@@ -213,9 +213,9 @@ int main(int argc, char** argv)
             to_physical_mapping,
             advection_operator,
             mesh_rtheta,
-            builder_host,
+            builder,
             poisson_solver,
-            spline_evaluator_extrapol_host);
+            spline_evaluator_extrapol);
 #elif defined(IMPLICIT_PREDCORR)
     BslImplicitPredCorrRTheta predcorr_operator(
             to_physical_mapping,

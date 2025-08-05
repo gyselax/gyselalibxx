@@ -69,14 +69,6 @@ private:
             SplineRThetaBuilder,
             SplineRThetaEvaluatorConstBound>;
 
-    using SplinePolarFootFinderType_host = SplinePolarFootFinder<
-            IdxRangeRTheta,
-            EulerBuilder,
-            LogicalToPhysicalMapping,
-            LogicalToPseudoPhysicalMapping,
-            SplineRThetaBuilder_host,
-            SplineRThetaEvaluatorConstBound_host>;
-
     using BslAdvectionRTheta = BslAdvectionPolar<
             SplinePolarFootFinderType,
             LogicalToPhysicalMapping,
@@ -91,7 +83,7 @@ private:
     BslAdvectionRTheta const& m_advection_solver;
 
     EulerBuilder const m_euler;
-    SplinePolarFootFinderType_host const m_find_feet;
+    SplinePolarFootFinderType const m_find_feet;
 
     PolarSplineFEMPoissonLikeSolver<
             GridR,
@@ -99,8 +91,8 @@ private:
             PolarBSplinesRTheta,
             SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
 
-    SplineRThetaBuilder_host const& m_builder;
-    SplineRThetaEvaluatorConstBound_host const& m_evaluator;
+    SplineRThetaBuilder const& m_builder;
+    SplineRThetaEvaluatorConstBound const& m_evaluator;
 
 
 
@@ -130,13 +122,13 @@ public:
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
             BslAdvectionRTheta const& advection_solver,
             IdxRangeRTheta const& grid,
-            SplineRThetaBuilder_host const& builder,
+            SplineRThetaBuilder const& builder,
             PolarSplineFEMPoissonLikeSolver<
                     GridR,
                     GridTheta,
                     PolarBSplinesRTheta,
                     SplineRThetaEvaluatorNullBound> const& poisson_solver,
-            SplineRThetaEvaluatorConstBound_host const& advection_evaluator)
+            SplineRThetaEvaluatorConstBound const& advection_evaluator)
         : m_logical_to_physical(logical_to_physical)
         , m_advection_solver(advection_solver)
         , m_find_feet(
