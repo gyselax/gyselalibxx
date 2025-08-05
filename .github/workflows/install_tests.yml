@@ -17,6 +17,9 @@ concurrency:
   group: ${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.run_id }}
   cancel-in-progress: true
 
+env:
+  CHANGES_REF: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
+
 jobs:
   pre_job:
     name: 'Check for unnecessary runs'

@@ -590,7 +590,7 @@ public:
      *
      * This function is equivalent to calling operator[] with a 0D IdxRange.
      *
-     * @returns Field The field on the physical index range.
+     * @returns Field The constant field on the physical index range.
      */
     auto get_values_const_field() const
     {
