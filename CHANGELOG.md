@@ -41,7 +41,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Clean up code in `BslExplicitPredCorrRTheta::operator()`.
 - Clean up code in `BslImplicitPredCorrRTheta::operator()`.
 - Remove the const version of `get_values_field()` and change it into `get_values_const_field()` in `DerivFieldCommon`.
-- 
 
 ### Deprecated
 
