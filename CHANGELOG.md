@@ -15,8 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add methods to `PolarSplineEvaluator` to avoid unnecessary creation of fields of coordinates.
 - Allow a `DerivField` to be stored in a `MultipatchField`.
 - Add `DerivFieldOnPatch` and `IdxRangeSliceOnPatch` aliases for the `MultipatchField` in `types.hpp`.
-- Add a `periodic_strips_non_uniform_2d_9patches` geometry. 
-
+- Add a `periodic_strips_non_uniform_2d_9patches` geometry.
 
 ### Fixed
 
