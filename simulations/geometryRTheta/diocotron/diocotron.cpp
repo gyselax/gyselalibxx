@@ -159,11 +159,6 @@ int main(int argc, char** argv)
             r_extrapolation_rule,
             theta_extrapolation_rule,
             theta_extrapolation_rule);
-    SplineRThetaEvaluatorNullBound_host spline_evaluator_host(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
 
     PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, mesh_rtheta);
 
@@ -204,8 +199,8 @@ int main(int argc, char** argv)
     BslPredCorrRTheta predcorr_operator(
             to_physical_mapping,
             advection_operator,
-            builder_host,
-            spline_evaluator_host,
+            builder,
+            spline_evaluator,
             poisson_solver);
 #elif defined(EXPLICIT_PREDCORR)
     BslExplicitPredCorrRTheta predcorr_operator(
@@ -294,7 +289,7 @@ int main(int argc, char** argv)
     host_t<DFieldMemRTheta> phi_eq_host(mesh_rtheta);
     host_t<Spline2DMem> rho_coef_eq(idx_range_bsplinesRTheta);
     builder_host(get_field(rho_coef_eq), get_const_field(rho_eq));
-    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq), spline_evaluator_host);
+    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq), spline_evaluator);
     poisson_solver(poisson_rhs_eq, get_field(phi_eq));
     ddc::parallel_deepcopy(phi_eq, phi_eq_host);
 

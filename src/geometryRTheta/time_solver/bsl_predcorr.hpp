@@ -73,8 +73,8 @@ private:
             PolarBSplinesRTheta,
             SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
 
-    SplineRThetaBuilder_host const& m_builder;
-    SplineRThetaEvaluatorNullBound_host const& m_spline_evaluator;
+    SplineRThetaBuilder const& m_builder;
+    SplineRThetaEvaluatorNullBound const& m_spline_evaluator;
 
 
 public:
@@ -98,8 +98,8 @@ public:
     BslPredCorrRTheta(
             Mapping const& mapping,
             BslAdvectionRTheta const& advection_solver,
-            SplineRThetaBuilder_host const& builder,
-            SplineRThetaEvaluatorNullBound_host const& rhs_evaluator,
+            SplineRThetaBuilder const& builder,
+            SplineRThetaEvaluatorNullBound const& rhs_evaluator,
             PolarSplineFEMPoissonLikeSolver<
                     GridR,
                     GridTheta,
