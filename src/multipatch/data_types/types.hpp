@@ -233,7 +233,6 @@ using ConstSplineCoeffOnPatch_2D_host = host_t<ConstSplineCoeffOnPatch_2D<Patch>
 
 
 
-
 // DERIVATIVES -----------------------------------------------------------------------------------
 
 // --- ON DEVICE ---
