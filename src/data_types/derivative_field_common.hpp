@@ -590,9 +590,9 @@ public:
      *
      * This function is equivalent to calling operator[] with a 0D IdxRange.
      *
-     * @returns Field The field on the physical index range.
+     * @returns Field The constant field on the physical index range.
      */
-    auto get_values_field() const
+    auto get_values_const_field() const
     {
         IdxRange<> no_specified_dims;
         return get_internal_field(no_specified_dims).span_cview();
