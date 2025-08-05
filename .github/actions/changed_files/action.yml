@@ -8,3 +8,8 @@ runs:
         git fetch --no-recurse-submodules origin ${CHANGES_REF}
         git diff --name-only ${CHANGES_REF} > changed_files.txt
       shell: bash
+    - if: github.event_name == 'push'
+      run: |
+        git config --global --add safe.directory $(pwd)
+        git show ${{ github.sha }} --name-only --pretty= > changed_files.txt
+      shell: bash
