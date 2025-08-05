@@ -16,7 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow a `DerivField` to be stored in a `MultipatchField`.
 - Add `DerivFieldOnPatch` and `IdxRangeSliceOnPatch` aliases for the `MultipatchField` in `types.hpp`.
 
-
 ### Fixed
 
 - Modify `ruche.v100/environment.sh` file to fix tokamaxi simulation segfault issues.
