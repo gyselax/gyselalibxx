@@ -11,14 +11,14 @@
  * @brief Type of right-hand side (rhs) function of the Poisson equation.
  * @tparam RadialExtrapolationRule The extrapolation rule applied at the outer radial bound.
  */
-template <class RadialExtrapolationRule>
+template <class RadialExtrapolationRule, class ExecSpace, class MemSpace>
 class PoissonLikeRHSFunction
 {
 public:
     /// The type of the 2D Spline Evaluator used by this class
     using evaluator_type = ddc::SplineEvaluator2D<
-            Kokkos::DefaultExecutionSpace,
-            Kokkos::DefaultExecutionSpace::memory_space,
+            ExecSpace,
+            MemSpace,
             BSplinesR,
             BSplinesTheta,
             GridR,
@@ -29,7 +29,7 @@ public:
             ddc::PeriodicExtrapolationRule<Theta>>;
 
 private:
-    ConstSpline2D const m_coefs;
+    DConstField<IdxRangeBSRTheta, MemSpace> const m_coefs;
     evaluator_type const& m_evaluator;
 
 public:
@@ -41,7 +41,9 @@ public:
 	 * @param[in] evaluator
 	 *      Evaluator on B-splines.
 	 */
-    PoissonLikeRHSFunction(ConstSpline2D coefs, evaluator_type const& evaluator)
+    PoissonLikeRHSFunction(
+            DConstField<IdxRangeBSRTheta, MemSpace> coefs,
+            evaluator_type const& evaluator)
         : m_coefs(coefs)
         , m_evaluator(evaluator)
     {
@@ -55,7 +57,7 @@ public:
 	 *
 	 * @return A double with the value of the rhs at the given coordinate.
 	 */
-    double operator()(CoordRTheta const& coord_rtheta) const
+    KOKKOS_INLINE_FUNCTION double operator()(CoordRTheta const& coord_rtheta) const
     {
         return m_evaluator(coord_rtheta, m_coefs);
     }
