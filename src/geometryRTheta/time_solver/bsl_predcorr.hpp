@@ -159,24 +159,25 @@ public:
                 .with("electrical_potential", electrical_potential_host);
 
         // RK2 methods
-        std::function<void(DVectorFieldRTheta<X, Y>, DConstFieldRTheta)> define_advection_field
-                = [&](DVectorFieldRTheta<X, Y> advection_field, DConstFieldRTheta density) {
-                      ddc::parallel_deepcopy(density_host, density);
-                      // --- compute electrostatic potential:
-                      m_builder(density_coef_host, get_const_field(density_host));
-                      m_poisson_solver(charge_density, electrostatic_potential_coef_host);
+        std::function<void(DVectorFieldRTheta<X, Y>, DConstFieldRTheta)> define_advection_field =
+                [&](DVectorFieldRTheta<X, Y> advection_field, DConstFieldRTheta density) {
+                    ddc::parallel_deepcopy(density_host, density);
+                    // --- compute electrostatic potential:
+                    m_builder(density_coef_host, get_const_field(density_host));
+                    m_poisson_solver(charge_density, electrostatic_potential_coef_host);
 
-                      auto advection_field_alloc_host = ddcHelper::create_mirror_view_and_copy(
-                              Kokkos::DefaultHostExecutionSpace(),
-                              advection_field);
+                    auto advection_field_alloc_host = ddcHelper::create_mirror_view_and_copy(
+                            Kokkos::DefaultHostExecutionSpace(),
+                            advection_field);
 
-                      // --- compute advection field:
-                      advection_field_computer(
-                              electrostatic_potential_coef_host,
-                              get_field(advection_field_alloc_host));
+                    // --- compute advection field:
+                    advection_field_computer(
+                            electrostatic_potential_coef_host,
+                            get_field(advection_field_alloc_host));
 
-                      ddcHelper::deepcopy(advection_field, advection_field_host);
-                  };
+                    ddcHelper::
+                            deepcopy(advection_field, get_const_field(advection_field_alloc_host));
+                };
 
         RK2<DFieldMemRTheta, DVectorFieldMemRTheta<X, Y>, Kokkos::DefaultExecutionSpace>
                 time_stepper(grid);
