@@ -128,7 +128,7 @@ public:
         // Data
         DFieldMemRTheta electrical_potential_alloc(grid);
         Spline2DMem density_coef_alloc(get_spline_idx_range(m_builder));
-        host_t<PolarSplineMemRTheta> electrostatic_potential_coef_alloc(
+        PolarSplineMemRTheta electrostatic_potential_coef_alloc(
                 ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
 
         auto electrical_potential_alloc_host
@@ -163,9 +163,8 @@ public:
         // RK2 methods
         std::function<void(DVectorFieldRTheta<X, Y>, DConstFieldRTheta)> define_advection_field =
                 [&](DVectorFieldRTheta<X, Y> advection_field, DConstFieldRTheta density) {
-                    ddc::parallel_deepcopy(density_host, density);
                     // --- compute electrostatic potential:
-                    m_builder(density_coef, get_const_field(density_host));
+                    m_builder(density_coef, get_const_field(density));
                     m_poisson_solver(charge_density, electrostatic_potential_coef);
 
                     auto advection_field_alloc_host = ddcHelper::create_mirror_view_and_copy(
@@ -198,9 +197,9 @@ public:
                             define_advection_field,
                             m_advection_solver);
 
-            ddc::parallel_deepcopy(density_host, get_const_field(density));
-            m_builder(density_coef, get_const_field(density_host));
+            m_builder(density_coef, get_const_field(density));
             m_poisson_solver(charge_density, electrical_potential);
+            ddc::parallel_deepcopy(density_host, get_const_field(density));
             ddc::parallel_deepcopy(
                     electrical_potential_host,
                     get_const_field(electrical_potential));
