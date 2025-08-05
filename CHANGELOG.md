@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Port `PolarSplineEvaluator` methods to GPU.
 - Add methods to `PolarSplineEvaluator` to avoid unnecessary creation of fields of coordinates.
+- Allow a `DerivField` to be stored in a `MultipatchField`.
 
 ### Fixed
 
@@ -35,10 +36,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow batch CSR convergence parameters to be specified in the constructor of `PolarSplineFEMPoissonLikeSolver`.
 - Change the internals of `PolarSplineFEMPoissonLikeSolver` to precalculate fewer values.
 - Change the internals of `PolarSplineFEMPoissonLikeSolver` to avoid calls to DDC's internals.
+- Clean up code in `BslPredCorrRTheta::operator()`.
 - Clean up code in `BslExplicitPredCorrRTheta::operator()`.
 - Clean up code in `BslImplicitPredCorrRTheta::operator()`.
 - Ported `PolarSplineFEMPoissonLikeSolver::operator()` to GPU.
 - Change constructor arguments of `BslImplicitPredCorrRTheta` to pass a spline builder and evaluator which operate on GPU.
+- Remove the const version of `get_values_field()` and change it into `get_values_const_field()` in `DerivFieldCommon`.
 
 ### Deprecated
 
