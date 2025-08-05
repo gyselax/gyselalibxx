@@ -75,7 +75,7 @@
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
-        <childnode refid="51" relation="include">
+        <childnode refid="56" relation="include">
         </childnode>
       </node>
       <node id="40">
@@ -232,7 +232,7 @@
         <childnode refid="28" relation="include">
         </childnode>
       </node>
-      <node id="51">
+      <node id="56">
         <label>vector_mapper.hpp</label>
         <link refid="vector__mapper_8hpp_source"/>
         <childnode refid="30" relation="include">
@@ -246,6 +246,64 @@
         <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>deriv_details.hpp</label>
+        <link refid="deriv__details_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>derivative_field.hpp</label>
+        <link refid="derivative__field_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>derivative_field_common.hpp</label>
+        <link refid="derivative__field__common_8hpp_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>derivative_field_mem.hpp</label>
+        <link refid="derivative__field__mem_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>idx_range_slice.hpp</label>
+        <link refid="idx__range__slice_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="10">
@@ -416,7 +474,7 @@
         <childnode refid="48" relation="include">
         </childnode>
       </node>
-      <node id="50">
+      <node id="55">
         <label>multipatch_field_mem.hpp</label>
         <link refid="multipatch__field__mem_8hpp_source"/>
         <childnode refid="47" relation="include">
@@ -442,6 +500,10 @@
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
@@ -477,7 +539,7 @@
         </childnode>
         <childnode refid="47" relation="include">
         </childnode>
-        <childnode refid="50" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
       </node>
       <node id="2">

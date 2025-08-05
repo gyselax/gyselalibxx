@@ -557,6 +557,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Port <code>PolarSplineEvaluator</code> methods to GPU.</li>
 <li>Add methods to <code>PolarSplineEvaluator</code> to avoid unnecessary creation of fields of coordinates.</li>
 <li>Allow a <code>DerivField</code> to be stored in a <code>MultipatchField</code>.</li>
+<li>Add <code>DerivFieldOnPatch</code> and <code>IdxRangeSliceOnPatch</code> aliases for the <code>MultipatchField</code> in <code>types.hpp</code>.</li>
 </ul>
 <h3 id="fixed">Fixed</h3>
 <ul>
@@ -568,6 +569,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Fix <code>mi250.hipcc.adastra.spack</code> toolchain.</li>
 <li>Fix uninitialised values being used as an initial guess for the result of the matrix equation in <code>PolarSplineFEMPoissonLikeSolver</code>.</li>
 <li>Fix missing grids when calling <code>collect_grids_on_dim_t</code>.</li>
+<li>Fix <code>is_borrowed_deriv_field_v&lt;&gt;</code> in <code>derivative_field_common.hpp</code> file.</li>
 </ul>
 <h3 id="changed">Changed</h3>
 <ul>

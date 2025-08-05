@@ -553,6 +553,8 @@
 <li><code>#include &lt;ddc/kernels/splines.hpp&gt;</code></li>
 <li><code>#include "ddc_aliases.hpp"</code></li>
 <li><code>#include "ddc_helper.hpp"</code></li>
+<li><code>#include "derivative_field.hpp"</code></li>
+<li><code>#include "derivative_field_mem.hpp"</code></li>
 <li><code>#include "vector_field.hpp"</code></li>
 <li><code>#include "vector_field_mem.hpp"</code></li>
 <li><code>#include "vector_index_tools.hpp"</code></li>
@@ -568,324 +570,424 @@
 <tbody>
 <tr>
 <td style="text-align: right;">typedef typename Patch::BSplines1</td>
-<td style="text-align: left;"><a href="#typedef-bsplines1onpatch"><strong>BSplines1OnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: The BSplines on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+<td style="text-align: left;"><a href="#typedef-bsplines1onpatch"><strong>BSplines1OnPatch</strong></a>  <br><em>The BSplines dimension on the first of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename Patch::BSplines2</td>
-<td style="text-align: left;"><a href="#typedef-bsplines2onpatch"><strong>BSplines2OnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: The BSplines on the second of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+<td style="text-align: left;"><a href="#typedef-bsplines2onpatch"><strong>BSplines2OnPatch</strong></a>  <br><em>The BSplines dimension on the second of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef DConstField&lt; IdxRange&lt; ddc::Deriv&lt; typename Patch::Dim1 &gt;, ddc::Deriv&lt; typename Patch::Dim2 &gt; &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-constderiv12_onpatch_2d"><strong>ConstDeriv12_OnPatch_2D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant field of the derivatives</em><span class="arithmatex">\(\partial_1^(n)\partial_2^(m) f(x)\)</span> <em>defined on the index ranges of valid n and m.</em></td>
+<td style="text-align: left;"><a href="#typedef-constderiv12_onpatch_2d"><strong>ConstDeriv12_OnPatch_2D</strong></a>  <br><em>A constant field of the derivatives</em> <span class="arithmatex">\(\partial_1^(n)\partial_2^(m) f(x)\)</span> <em>defined on the index ranges of valid n and m.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef DConstField&lt; IdxRange&lt; ddc::Deriv&lt; typename Patch::Dim1 &gt;, typename Patch::Grid2 &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-constderiv1_onpatch_2d"><strong>ConstDeriv1_OnPatch_2D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant field of the n-th derivatives in the direction of</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical grid defined on the index range of n and the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s second logical grid.</em></td>
+<td style="text-align: left;"><a href="#typedef-constderiv1_onpatch_2d"><strong>ConstDeriv1_OnPatch_2D</strong></a>  <br><em>A constant field of the n-th derivatives in the direction of</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical grid defined on the index range of n and the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s second logical grid.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef DConstField&lt; IdxRange&lt; typename Patch::Grid1, ddc::Deriv&lt; typename Patch::Dim2 &gt; &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-constderiv2_onpatch_2d"><strong>ConstDeriv2_OnPatch_2D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant field of the n-th derivatives in the direction of</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s second logical grid defined on the index range of n and the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical grid.</em></td>
+<td style="text-align: left;"><a href="#typedef-constderiv2_onpatch_2d"><strong>ConstDeriv2_OnPatch_2D</strong></a>  <br><em>A constant field of the n-th derivatives in the direction of</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s second logical grid defined on the index range of n and the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical grid.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef DConstField&lt; typename Patch::IdxRangeBS1 &gt;</td>
-<td style="text-align: left;"><a href="#typedef-constsplinecoeff1onpatch_1d"><strong>ConstSplineCoeff1OnPatch_1D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of spline coefficients for a non-batched spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+<td style="text-align: left;"><a href="#typedef-constsplinecoeff1onpatch_1d"><strong>ConstSplineCoeff1OnPatch_1D</strong></a>  <br><em>A constant field of spline coefficients for a non-batched spline defined on the first of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef DConstField&lt; IdxRange&lt; typename Patch::BSplines1, typename Patch::Grid2 &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-constsplinecoeff1onpatch_2d"><strong>ConstSplineCoeff1OnPatch_2D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of spline coefficients batched over the second of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions for a spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+<td style="text-align: left;"><a href="#typedef-constsplinecoeff1onpatch_2d"><strong>ConstSplineCoeff1OnPatch_2D</strong></a>  <br><em>A constant field of spline coefficients batched over the second of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions for a spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef DConstField&lt; typename Patch::IdxRangeBS12 &gt;</td>
-<td style="text-align: left;"><a href="#typedef-constsplinecoeffonpatch_2d"><strong>ConstSplineCoeffOnPatch_2D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of 2D spline coefficients for a non-batched spline defined on both of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+<td style="text-align: left;"><a href="#typedef-constsplinecoeffonpatch_2d"><strong>ConstSplineCoeffOnPatch_2D</strong></a>  <br><em>A constant field of 2D spline coefficients for a non-batched spline defined on both of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef host_t&lt; ConstSplineCoeffOnPatch_2D&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-constsplinecoeffonpatch_2d_host"><strong>ConstSplineCoeffOnPatch_2D_host</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of 2D spline coefficients for a non-batched spline defined on both of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions. Defined on host.</em></td>
+<td style="text-align: left;"><a href="#typedef-constsplinecoeffonpatch_2d_host"><strong>ConstSplineCoeffOnPatch_2D_host</strong></a>  <br><em>A constant field of 2D spline coefficients for a non-batched spline defined on both of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions. Defined on host.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef Field&lt; typename Patch::Coord1, typename Patch::IdxRange1 &gt;</td>
-<td style="text-align: left;"><a href="#typedef-coord1field1onpatch_1d"><strong>Coord1Field1OnPatch_1D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: Field of 1D coordinates defined on the defined on domain of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical dimension.</em></td>
+<td style="text-align: left;"><a href="#typedef-coord1field1onpatch_1d"><strong>Coord1Field1OnPatch_1D</strong></a>  <br><em>Field of 1D first coordinates defined on the first</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 1D logical domain.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef ConstField&lt; typename Patch::Coord12, typename Patch::IdxRange12 &gt;</td>
-<td style="text-align: left;"><a href="#typedef-coordconstfieldonpatch"><strong>CoordConstFieldOnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: ConstField of 2D coordinates defined on the 2D</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical domain.</em></td>
+<td style="text-align: left;"><a href="#typedef-coordconstfieldonpatch"><strong>CoordConstFieldOnPatch</strong></a>  <br><em>ConstField of 2D coordinates defined on the 2D</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical domain.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef FieldMem&lt; typename Patch::Coord12, typename Patch::IdxRange12 &gt;</td>
-<td style="text-align: left;"><a href="#typedef-coordfieldmemonpatch"><strong>CoordFieldMemOnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: Field of 2D coordinates defined on the 2D</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical domain.</em></td>
+<td style="text-align: left;"><a href="#typedef-coordfieldmemonpatch"><strong>CoordFieldMemOnPatch</strong></a>  <br><em>FieldMem of 2D coordinates defined on the 2D</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical domain.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef Field&lt; typename Patch::Coord12, typename Patch::IdxRange12 &gt;</td>
-<td style="text-align: left;"><a href="#typedef-coordfieldonpatch"><strong>CoordFieldOnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: Field of 2D coordinates defined on the 2D</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical domain.</em></td>
+<td style="text-align: left;"><a href="#typedef-coordfieldonpatch"><strong>CoordFieldOnPatch</strong></a>  <br><em>Field of 2D coordinates defined on the 2D</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical domain.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef DConstField&lt; typename Patch::IdxRange1 &gt;</td>
-<td style="text-align: left;"><a href="#typedef-dconstfield1onpatch"><strong>DConstField1OnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant Field of doubles on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+<td style="text-align: left;"><a href="#typedef-dconstfield1onpatch"><strong>DConstField1OnPatch</strong></a>  <br><em>A constant Field of doubles on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical domain.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef DConstField&lt; typename Patch::IdxRange12 &gt;</td>
-<td style="text-align: left;"><a href="#typedef-dconstfieldonpatch"><strong>DConstFieldOnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant Field defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+<td style="text-align: left;"><a href="#typedef-dconstfieldonpatch"><strong>DConstFieldOnPatch</strong></a>  <br><em>A constant Field of doubles defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef host_t&lt; DConstFieldOnPatch&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-dconstfieldonpatch_host"><strong>DConstFieldOnPatch_host</strong></a>  <br><em>A constant Field of doubles on host on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef DField&lt; typename Patch::IdxRange1 &gt;</td>
-<td style="text-align: left;"><a href="#typedef-dfield1onpatch"><strong>DField1OnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A Field of doubles on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+<td style="text-align: left;"><a href="#typedef-dfield1onpatch"><strong>DField1OnPatch</strong></a>  <br><em>A Field of doubles defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical domain.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef DFieldMem&lt; typename Patch::IdxRange1 &gt;</td>
-<td style="text-align: left;"><a href="#typedef-dfieldmem1onpatch"><strong>DFieldMem1OnPatch</strong></a>  <br><em>A FieldMem defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical domain.</em></td>
+<td style="text-align: left;"><a href="#typedef-dfieldmem1onpatch"><strong>DFieldMem1OnPatch</strong></a>  <br><em>A FieldMem of doubles defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical domain.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef DFieldMem&lt; typename Patch::IdxRange2 &gt;</td>
-<td style="text-align: left;"><a href="#typedef-dfieldmem2onpatch"><strong>DFieldMem2OnPatch</strong></a>  <br><em>A FieldMem defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical domain.</em></td>
+<td style="text-align: left;"><a href="#typedef-dfieldmem2onpatch"><strong>DFieldMem2OnPatch</strong></a>  <br><em>A FieldMem of doubles defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s second logical domain.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef DFieldMem&lt; typename Patch::IdxRange12 &gt;</td>
-<td style="text-align: left;"><a href="#typedef-dfieldmemonpatch"><strong>DFieldMemOnPatch</strong></a>  <br><em>A FieldMem defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+<td style="text-align: left;"><a href="#typedef-dfieldmemonpatch"><strong>DFieldMemOnPatch</strong></a>  <br><em>A FieldMem of doubles defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef DField&lt; typename Patch::IdxRange12 &gt;</td>
-<td style="text-align: left;"><a href="#typedef-dfieldonpatch"><strong>DFieldOnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A Field defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+<td style="text-align: left;"><a href="#typedef-dfieldonpatch"><strong>DFieldOnPatch</strong></a>  <br><em>A Field of doubles defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef host_t&lt; DFieldOnPatch&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-dfieldonpatch_host"><strong>DFieldOnPatch_host</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A Field defined on host on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+<td style="text-align: left;"><a href="#typedef-dfieldonpatch_host"><strong>DFieldOnPatch_host</strong></a>  <br><em>A Field of doubles defined on host on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef <a href="classVectorField.html"><strong>VectorConstField</strong></a>&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt; typename Patch::Dim1, typename Patch::Dim2 &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-dvectorconstfieldonpatch"><strong>DVectorConstFieldOnPatch</strong></a>  <br><em>A ConstVectorField defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+<td style="text-align: left;"><a href="#typedef-dvectorconstfieldonpatch"><strong>DVectorConstFieldOnPatch</strong></a>  <br><em>A ConstVectorField of doubles defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef <a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a>&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt; typename Patch::Dim1, typename Patch::Dim2 &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-dvectorfieldmemonpatch"><strong>DVectorFieldMemOnPatch</strong></a>  <br><em>A</em> <a href="classVectorFieldMem.html"><em><strong>VectorFieldMem</strong></em></a> <em>defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+<td style="text-align: left;"><a href="#typedef-dvectorfieldmemonpatch"><strong>DVectorFieldMemOnPatch</strong></a>  <br><em>A</em> <a href="classVectorFieldMem.html"><em><strong>VectorFieldMem</strong></em></a> <em>of doubles defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef <a href="classVectorField.html"><strong>VectorField</strong></a>&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt; typename Patch::Dim1, typename Patch::Dim2 &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-dvectorfieldonpatch"><strong>DVectorFieldOnPatch</strong></a>  <br><em>A</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+<td style="text-align: left;"><a href="#typedef-dvectorfieldonpatch"><strong>DVectorFieldOnPatch</strong></a>  <br><em>A</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>of doubles defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="classDerivFieldMem.html"><strong>DerivFieldMem</strong></a>&lt; double, IdxRange&lt; ddc::Deriv&lt; typename Patch::Dim1 &gt;, typename Patch::Grid1, ddc::Deriv&lt; typename Patch::Dim2 &gt;, typename Patch::Grid2 &gt;, 1 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-derivfieldmemonpatch"><strong>DerivFieldMemOnPatch</strong></a>  <br><em>A field memory with derivatives containing the function values on the 2D grid, the first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef host_t&lt; <a href="classDerivFieldMem.html"><strong>DerivFieldMemOnPatch</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-derivfieldmemonpatch_host"><strong>DerivFieldMemOnPatch_host</strong></a>  <br><em>A field memory with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). Defined on host.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef <a href="classDerivField.html"><strong>DerivField</strong></a>&lt; double, IdxRange&lt; ddc::Deriv&lt; typename Patch::Dim1 &gt;, typename Patch::Grid1, ddc::Deriv&lt; typename Patch::Dim2 &gt;, typename Patch::Grid2 &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-derivfieldonpatch"><strong>DerivFieldOnPatch</strong></a>  <br><em>A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef host_t&lt; <a href="classDerivField.html"><strong>DerivFieldOnPatch</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-derivfieldonpatch_host"><strong>DerivFieldOnPatch_host</strong></a>  <br><em>A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). Defined on host.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename Patch::Grid1</td>
-<td style="text-align: left;"><a href="#typedef-grid1onpatch"><strong>Grid1OnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: The grid on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+<td style="text-align: left;"><a href="#typedef-grid1onpatch"><strong>Grid1OnPatch</strong></a>  <br><em>The grid on the first of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename Patch::Grid2</td>
-<td style="text-align: left;"><a href="#typedef-grid2onpatch"><strong>Grid2OnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: The grid on the second of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+<td style="text-align: left;"><a href="#typedef-grid2onpatch"><strong>Grid2OnPatch</strong></a>  <br><em>The grid on the second of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename Patch::Idx1</td>
-<td style="text-align: left;"><a href="#typedef-idx1onpatch"><strong>Idx1OnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: An index for the grid on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+<td style="text-align: left;"><a href="#typedef-idx1onpatch"><strong>Idx1OnPatch</strong></a>  <br><em>An index for the grid on the first of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename Patch::IdxRange1</td>
-<td style="text-align: left;"><a href="#typedef-idxrange1onpatch"><strong>IdxRange1OnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: An index range over the grids on the first</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 1D logical domain.</em></td>
+<td style="text-align: left;"><a href="#typedef-idxrange1onpatch"><strong>IdxRange1OnPatch</strong></a>  <br><em>An index range over the grids on the first</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 1D logical domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRangeSlice&lt; typename Patch::Grid1 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrange1sliceonpatch"><strong>IdxRange1SliceOnPatch</strong></a>  <br><em>An index range slice over the grids on the first</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 1D logical domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRangeSlice&lt; typename Patch::Grid2 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrange2sliceonpatch"><strong>IdxRange2SliceOnPatch</strong></a>  <br><em>An index range slice over the grids on the second</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 1D logical domain.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename Patch::IdxRange12</td>
-<td style="text-align: left;"><a href="#typedef-idxrangeonpatch"><strong>IdxRangeOnPatch</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: An index range over the grids on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
+<td style="text-align: left;"><a href="#typedef-idxrangeonpatch"><strong>IdxRangeOnPatch</strong></a>  <br><em>An index range over the grids on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef DField&lt; typename Patch::IdxRangeBS1 &gt;</td>
-<td style="text-align: left;"><a href="#typedef-splinecoeff1onpatch_1d"><strong>SplineCoeff1OnPatch_1D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of spline coefficients for a non-batched spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+<td style="text-align: left;"><a href="#typedef-splinecoeff1onpatch_1d"><strong>SplineCoeff1OnPatch_1D</strong></a>  <br><em>A field of spline coefficients for a non-batched spline defined on the first of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef DField&lt; IdxRange&lt; typename Patch::BSplines1, typename Patch::Grid2 &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-splinecoeff1onpatch_2d"><strong>SplineCoeff1OnPatch_2D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of spline coefficients batched over the second of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions for a spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+<td style="text-align: left;"><a href="#typedef-splinecoeff1onpatch_2d"><strong>SplineCoeff1OnPatch_2D</strong></a>  <br><em>A field of spline coefficients batched over the second of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions for a spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DFieldMem&lt; typename Patch::IdxRangeBS12 &gt;</td>
+<td style="text-align: left;"><a href="#typedef-splinecoeffmemonpatch_2d"><strong>SplineCoeffMemOnPatch_2D</strong></a>  <br><em>A field memory of 2D spline coefficients for a non-batched spline defined on both of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef host_t&lt; SplineCoeffMemOnPatch_2D&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-splinecoeffmemonpatch_2d_host"><strong>SplineCoeffMemOnPatch_2D_host</strong></a>  <br><em>A field memory of 2D spline coefficients for a non-batched spline defined on both of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions. Defined on host.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef DField&lt; typename Patch::IdxRangeBS12 &gt;</td>
-<td style="text-align: left;"><a href="#typedef-splinecoeffonpatch_2d"><strong>SplineCoeffOnPatch_2D</strong></a>  <br><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of 2D spline coefficients for a non-batched spline defined on both of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+<td style="text-align: left;"><a href="#typedef-splinecoeffonpatch_2d"><strong>SplineCoeffOnPatch_2D</strong></a>  <br><em>A field of 2D spline coefficients for a non-batched spline defined on both of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef host_t&lt; SplineCoeffOnPatch_2D&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-splinecoeffonpatch_2d_host"><strong>SplineCoeffOnPatch_2D_host</strong></a>  <br><em>A field of 2D spline coefficients for a non-batched spline defined on both of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions. Defined on host.</em></td>
 </tr>
 </tbody>
 </table>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-bsplines1onpatch">typedef BSplines1OnPatch</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: The BSplines on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<p><em>The BSplines dimension on the first of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
 <pre><code class="language-C++">using BSplines1OnPatch =  typename Patch::BSplines1;
 </code></pre>
 <hr>
 
 <h3 id="typedef-bsplines2onpatch">typedef BSplines2OnPatch</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: The BSplines on the second of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<p><em>The BSplines dimension on the second of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
 <pre><code class="language-C++">using BSplines2OnPatch =  typename Patch::BSplines2;
 </code></pre>
 <hr>
 
 <h3 id="typedef-constderiv12_onpatch_2d">typedef ConstDeriv12_OnPatch_2D</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant field of the derivatives</em><span class="arithmatex">\(\partial_1^(n)\partial_2^(m) f(x)\)</span> <em>defined on the index ranges of valid n and m.</em></p>
+<p><em>A constant field of the derivatives</em> <span class="arithmatex">\(\partial_1^(n)\partial_2^(m) f(x)\)</span> <em>defined on the index ranges of valid n and m.</em></p>
 <pre><code class="language-C++">using ConstDeriv12_OnPatch_2D =  DConstField&lt;IdxRange&lt;ddc::Deriv&lt;typename Patch::Dim1&gt;, ddc::Deriv&lt;typename Patch::Dim2&gt; &gt;&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-constderiv1_onpatch_2d">typedef ConstDeriv1_OnPatch_2D</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant field of the n-th derivatives in the direction of</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical grid defined on the index range of n and the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s second logical grid.</em></p>
+<p><em>A constant field of the n-th derivatives in the direction of</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical grid defined on the index range of n and the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s second logical grid.</em></p>
 <pre><code class="language-C++">using ConstDeriv1_OnPatch_2D =  DConstField&lt;IdxRange&lt;ddc::Deriv&lt;typename Patch::Dim1&gt;, typename Patch::Grid2&gt; &gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-constderiv2_onpatch_2d">typedef ConstDeriv2_OnPatch_2D</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant field of the n-th derivatives in the direction of</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s second logical grid defined on the index range of n and the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical grid.</em></p>
+<p><em>A constant field of the n-th derivatives in the direction of</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s second logical grid defined on the index range of n and the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical grid.</em></p>
 <pre><code class="language-C++">using ConstDeriv2_OnPatch_2D =  DConstField&lt;IdxRange&lt;typename Patch::Grid1, ddc::Deriv&lt;typename Patch::Dim2&gt; &gt;&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-constsplinecoeff1onpatch_1d">typedef ConstSplineCoeff1OnPatch_1D</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of spline coefficients for a non-batched spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<p><em>A constant field of spline coefficients for a non-batched spline defined on the first of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
 <pre><code class="language-C++">using ConstSplineCoeff1OnPatch_1D =  DConstField&lt;typename Patch::IdxRangeBS1&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-constsplinecoeff1onpatch_2d">typedef ConstSplineCoeff1OnPatch_2D</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of spline coefficients batched over the second of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions for a spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<p><em>A constant field of spline coefficients batched over the second of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions for a spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
 <pre><code class="language-C++">using ConstSplineCoeff1OnPatch_2D =  DConstField&lt;IdxRange&lt;typename Patch::BSplines1, typename Patch::Grid2&gt; &gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-constsplinecoeffonpatch_2d">typedef ConstSplineCoeffOnPatch_2D</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of 2D spline coefficients for a non-batched spline defined on both of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<p><em>A constant field of 2D spline coefficients for a non-batched spline defined on both of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
 <pre><code class="language-C++">using ConstSplineCoeffOnPatch_2D =  DConstField&lt;typename Patch::IdxRangeBS12&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-constsplinecoeffonpatch_2d_host">typedef ConstSplineCoeffOnPatch_2D_host</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of 2D spline coefficients for a non-batched spline defined on both of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions. Defined on host.</em></p>
+<p><em>A constant field of 2D spline coefficients for a non-batched spline defined on both of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions. Defined on host.</em></p>
 <pre><code class="language-C++">using ConstSplineCoeffOnPatch_2D_host =  host_t&lt;ConstSplineCoeffOnPatch_2D&lt;Patch&gt; &gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-coord1field1onpatch_1d">typedef Coord1Field1OnPatch_1D</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: Field of 1D coordinates defined on the defined on domain of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical dimension.</em></p>
+<p><em>Field of 1D first coordinates defined on the first</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 1D logical domain.</em></p>
 <pre><code class="language-C++">using Coord1Field1OnPatch_1D =  Field&lt;typename Patch::Coord1, typename Patch::IdxRange1&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-coordconstfieldonpatch">typedef CoordConstFieldOnPatch</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: ConstField of 2D coordinates defined on the 2D</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical domain.</em></p>
+<p><em>ConstField of 2D coordinates defined on the 2D</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical domain.</em></p>
 <pre><code class="language-C++">using CoordConstFieldOnPatch =  ConstField&lt;typename Patch::Coord12, typename Patch::IdxRange12&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-coordfieldmemonpatch">typedef CoordFieldMemOnPatch</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: Field of 2D coordinates defined on the 2D</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical domain.</em></p>
+<p><em>FieldMem of 2D coordinates defined on the 2D</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical domain.</em></p>
 <pre><code class="language-C++">using CoordFieldMemOnPatch =  FieldMem&lt;typename Patch::Coord12, typename Patch::IdxRange12&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-coordfieldonpatch">typedef CoordFieldOnPatch</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: Field of 2D coordinates defined on the 2D</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical domain.</em></p>
+<p><em>Field of 2D coordinates defined on the 2D</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical domain.</em></p>
 <pre><code class="language-C++">using CoordFieldOnPatch =  Field&lt;typename Patch::Coord12, typename Patch::IdxRange12&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-dconstfield1onpatch">typedef DConstField1OnPatch</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant Field of doubles on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<p><em>A constant Field of doubles on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical domain.</em></p>
 <pre><code class="language-C++">using DConstField1OnPatch =  DConstField&lt;typename Patch::IdxRange1&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-dconstfieldonpatch">typedef DConstFieldOnPatch</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A constant Field defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
+<p><em>A constant Field of doubles defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
 <pre><code class="language-C++">using DConstFieldOnPatch =  DConstField&lt;typename Patch::IdxRange12&gt;;
 </code></pre>
 <hr>
 
+<h3 id="typedef-dconstfieldonpatch_host">typedef DConstFieldOnPatch_host</h3>
+<p><em>A constant Field of doubles on host on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
+<pre><code class="language-C++">using DConstFieldOnPatch_host =  host_t&lt;DConstFieldOnPatch&lt;Patch&gt; &gt;;
+</code></pre>
+<hr>
+
 <h3 id="typedef-dfield1onpatch">typedef DField1OnPatch</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A Field of doubles on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<p><em>A Field of doubles defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical domain.</em></p>
 <pre><code class="language-C++">using DField1OnPatch =  DField&lt;typename Patch::IdxRange1&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-dfieldmem1onpatch">typedef DFieldMem1OnPatch</h3>
-<p><em>A FieldMem defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical domain.</em></p>
+<p><em>A FieldMem of doubles defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical domain.</em></p>
 <pre><code class="language-C++">using DFieldMem1OnPatch =  DFieldMem&lt;typename Patch::IdxRange1&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-dfieldmem2onpatch">typedef DFieldMem2OnPatch</h3>
-<p><em>A FieldMem defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s first logical domain.</em></p>
+<p><em>A FieldMem of doubles defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s second logical domain.</em></p>
 <pre><code class="language-C++">using DFieldMem2OnPatch =  DFieldMem&lt;typename Patch::IdxRange2&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-dfieldmemonpatch">typedef DFieldMemOnPatch</h3>
-<p><em>A FieldMem defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
+<p><em>A FieldMem of doubles defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
 <pre><code class="language-C++">using DFieldMemOnPatch =  DFieldMem&lt;typename Patch::IdxRange12&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-dfieldonpatch">typedef DFieldOnPatch</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A Field defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
+<p><em>A Field of doubles defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
 <pre><code class="language-C++">using DFieldOnPatch =  DField&lt;typename Patch::IdxRange12&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-dfieldonpatch_host">typedef DFieldOnPatch_host</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A Field defined on host on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
+<p><em>A Field of doubles defined on host on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
 <pre><code class="language-C++">using DFieldOnPatch_host =  host_t&lt;DFieldOnPatch&lt;Patch&gt; &gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-dvectorconstfieldonpatch">typedef DVectorConstFieldOnPatch</h3>
-<p><em>A ConstVectorField defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
+<p><em>A ConstVectorField of doubles defined on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
 <pre><code class="language-C++">using DVectorConstFieldOnPatch =  VectorConstField&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt;typename Patch::Dim1, typename Patch::Dim2&gt; &gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-dvectorfieldmemonpatch">typedef DVectorFieldMemOnPatch</h3>
-<p><em>A</em> <a href="classVectorFieldMem.html"><em><strong>VectorFieldMem</strong></em></a> <em>defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
+<p><em>A</em> <a href="classVectorFieldMem.html"><em><strong>VectorFieldMem</strong></em></a> <em>of doubles defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
 <pre><code class="language-C++">using DVectorFieldMemOnPatch =  VectorFieldMem&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt;typename Patch::Dim1, typename Patch::Dim2&gt; &gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-dvectorfieldonpatch">typedef DVectorFieldOnPatch</h3>
-<p><em>A</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
+<p><em>A</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>of doubles defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
 <pre><code class="language-C++">using DVectorFieldOnPatch =  VectorField&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt;typename Patch::Dim1, typename Patch::Dim2&gt; &gt;;
 </code></pre>
 <hr>
 
+<h3 id="typedef-derivfieldmemonpatch">typedef DerivFieldMemOnPatch</h3>
+<p><em>A field memory with derivatives containing the function values on the 2D grid, the first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y).</em></p>
+<pre><code class="language-C++">using DerivFieldMemOnPatch =  DerivFieldMem&lt; double, IdxRange&lt; ddc::Deriv&lt;typename Patch::Dim1&gt;, typename Patch::Grid1, ddc::Deriv&lt;typename Patch::Dim2&gt;, typename Patch::Grid2&gt;, 1&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-derivfieldmemonpatch_host">typedef DerivFieldMemOnPatch_host</h3>
+<p><em>A field memory with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). Defined on host.</em></p>
+<pre><code class="language-C++">using DerivFieldMemOnPatch_host =  host_t&lt;DerivFieldMemOnPatch&lt;Patch&gt; &gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-derivfieldonpatch">typedef DerivFieldOnPatch</h3>
+<p><em>A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y).</em></p>
+<pre><code class="language-C++">using DerivFieldOnPatch =  DerivField&lt; double, IdxRange&lt; ddc::Deriv&lt;typename Patch::Dim1&gt;, typename Patch::Grid1, ddc::Deriv&lt;typename Patch::Dim2&gt;, typename Patch::Grid2&gt; &gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-derivfieldonpatch_host">typedef DerivFieldOnPatch_host</h3>
+<p><em>A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). Defined on host.</em></p>
+<pre><code class="language-C++">using DerivFieldOnPatch_host =  host_t&lt;DerivFieldOnPatch&lt;Patch&gt; &gt;;
+</code></pre>
+<hr>
+
 <h3 id="typedef-grid1onpatch">typedef Grid1OnPatch</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: The grid on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<p><em>The grid on the first of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
 <pre><code class="language-C++">using Grid1OnPatch =  typename Patch::Grid1;
 </code></pre>
 <hr>
 
 <h3 id="typedef-grid2onpatch">typedef Grid2OnPatch</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: The grid on the second of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<p><em>The grid on the second of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
 <pre><code class="language-C++">using Grid2OnPatch =  typename Patch::Grid2;
 </code></pre>
 <hr>
 
 <h3 id="typedef-idx1onpatch">typedef Idx1OnPatch</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: An index for the grid on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<p><em>An index for the grid on the first of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
 <pre><code class="language-C++">using Idx1OnPatch =  typename Patch::Idx1;
 </code></pre>
 <hr>
 
 <h3 id="typedef-idxrange1onpatch">typedef IdxRange1OnPatch</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: An index range over the grids on the first</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 1D logical domain.</em></p>
+<p><em>An index range over the grids on the first</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 1D logical domain.</em></p>
 <pre><code class="language-C++">using IdxRange1OnPatch =  typename Patch::IdxRange1;
 </code></pre>
 <hr>
 
+<h3 id="typedef-idxrange1sliceonpatch">typedef IdxRange1SliceOnPatch</h3>
+<p><em>An index range slice over the grids on the first</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 1D logical domain.</em></p>
+<pre><code class="language-C++">using IdxRange1SliceOnPatch =  IdxRangeSlice&lt;typename Patch::Grid1&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrange2sliceonpatch">typedef IdxRange2SliceOnPatch</h3>
+<p><em>An index range slice over the grids on the second</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 1D logical domain.</em></p>
+<pre><code class="language-C++">using IdxRange2SliceOnPatch =  IdxRangeSlice&lt;typename Patch::Grid2&gt;;
+</code></pre>
+<hr>
+
 <h3 id="typedef-idxrangeonpatch">typedef IdxRangeOnPatch</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: An index range over the grids on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
+<p><em>An index range over the grids on the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></p>
 <pre><code class="language-C++">using IdxRangeOnPatch =  typename Patch::IdxRange12;
 </code></pre>
 <hr>
 
 <h3 id="typedef-splinecoeff1onpatch_1d">typedef SplineCoeff1OnPatch_1D</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of spline coefficients for a non-batched spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<p><em>A field of spline coefficients for a non-batched spline defined on the first of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
 <pre><code class="language-C++">using SplineCoeff1OnPatch_1D =  DField&lt;typename Patch::IdxRangeBS1&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-splinecoeff1onpatch_2d">typedef SplineCoeff1OnPatch_2D</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of spline coefficients batched over the second of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions for a spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<p><em>A field of spline coefficients batched over the second of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions for a spline defined on the first of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
 <pre><code class="language-C++">using SplineCoeff1OnPatch_2D =  DField&lt;IdxRange&lt;typename Patch::BSplines1, typename Patch::Grid2&gt; &gt;;
 </code></pre>
 <hr>
 
+<h3 id="typedef-splinecoeffmemonpatch_2d">typedef SplineCoeffMemOnPatch_2D</h3>
+<p><em>A field memory of 2D spline coefficients for a non-batched spline defined on both of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<pre><code class="language-C++">using SplineCoeffMemOnPatch_2D =  DFieldMem&lt;typename Patch::IdxRangeBS12&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-splinecoeffmemonpatch_2d_host">typedef SplineCoeffMemOnPatch_2D_host</h3>
+<p><em>A field memory of 2D spline coefficients for a non-batched spline defined on both of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions. Defined on host.</em></p>
+<pre><code class="language-C++">using SplineCoeffMemOnPatch_2D_host =  host_t&lt;SplineCoeffMemOnPatch_2D&lt;Patch&gt; &gt;;
+</code></pre>
+<hr>
+
 <h3 id="typedef-splinecoeffonpatch_2d">typedef SplineCoeffOnPatch_2D</h3>
-<p><em>Type for</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>: A field of 2D spline coefficients for a non-batched spline defined on both of the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
+<p><em>A field of 2D spline coefficients for a non-batched spline defined on both of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions.</em></p>
 <pre><code class="language-C++">using SplineCoeffOnPatch_2D =  DField&lt;typename Patch::IdxRangeBS12&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-splinecoeffonpatch_2d_host">typedef SplineCoeffOnPatch_2D_host</h3>
+<p><em>A field of 2D spline coefficients for a non-batched spline defined on both of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions. Defined on host.</em></p>
+<pre><code class="language-C++">using SplineCoeffOnPatch_2D_host =  host_t&lt;SplineCoeffOnPatch_2D&lt;Patch&gt; &gt;;
 </code></pre>
 <hr>
 

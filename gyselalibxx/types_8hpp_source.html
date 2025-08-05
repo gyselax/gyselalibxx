@@ -556,9 +556,15 @@
 
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "derivative_field.hpp"
+#include "derivative_field_mem.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
+
+/*
+    List of aliases useful to store data in MultipatchType or MultipatchField. 
+*/
 
 
 // GRIDS -----------------------------------------------------------------------------------------
@@ -570,9 +576,9 @@ template &lt;class Patch&gt;
 using Grid2OnPatch = typename Patch::Grid2;
 
 
-
 // FIELDS ----------------------------------------------------------------------------------------
 
+// --- ON DEVICE ---
 template &lt;class Patch&gt;
 using DFieldMemOnPatch = DFieldMem&lt;typename Patch::IdxRange12&gt;;
 
@@ -582,25 +588,32 @@ using DFieldMem1OnPatch = DFieldMem&lt;typename Patch::IdxRange1&gt;;
 template &lt;class Patch&gt;
 using DFieldMem2OnPatch = DFieldMem&lt;typename Patch::IdxRange2&gt;;
 
+
 template &lt;class Patch&gt;
 using DFieldOnPatch = DField&lt;typename Patch::IdxRange12&gt;;
+
+template &lt;class Patch&gt;
+using DField1OnPatch = DField&lt;typename Patch::IdxRange1&gt;;
+
 
 template &lt;class Patch&gt;
 using DConstFieldOnPatch = DConstField&lt;typename Patch::IdxRange12&gt;;
 
 template &lt;class Patch&gt;
+using DConstField1OnPatch = DConstField&lt;typename Patch::IdxRange1&gt;;
+
+
+// --- ON HOST ---
+template &lt;class Patch&gt;
 using DFieldOnPatch_host = host_t&lt;DFieldOnPatch&lt;Patch&gt;&gt;;
 
-
 template &lt;class Patch&gt;
-using DField1OnPatch = DField&lt;typename Patch::IdxRange1&gt;;
-
-template &lt;class Patch&gt;
-using DConstField1OnPatch = DConstField&lt;typename Patch::IdxRange1&gt;;
+using DConstFieldOnPatch_host = host_t&lt;DConstFieldOnPatch&lt;Patch&gt;&gt;;
 
 
 // VECTOR FIELDS ---------------------------------------------------------------------------------
 
+// --- ON DEVICE ---
 template &lt;class Patch&gt;
 using DVectorFieldMemOnPatch = VectorFieldMem&lt;
         double,
@@ -619,11 +632,11 @@ using DVectorConstFieldOnPatch = VectorConstField&lt;
         typename Patch::IdxRange12,
         VectorIndexSet&lt;typename Patch::Dim1, typename Patch::Dim2&gt;&gt;;
 
+
 // IDX, IDXRANGE ---------------------------------------------------------------------------------
 
 template &lt;class Patch&gt;
 using IdxRangeOnPatch = typename Patch::IdxRange12;
-
 
 template &lt;class Patch&gt;
 using IdxRange1OnPatch = typename Patch::IdxRange1;
@@ -632,9 +645,18 @@ template &lt;class Patch&gt;
 using Idx1OnPatch = typename Patch::Idx1;
 
 
+// IDXRANGESLICE ---------------------------------------------------------------------------------
 
-// COORDINATES -----------------------------------------------------------------------------------
+template &lt;class Patch&gt;
+using IdxRange1SliceOnPatch = IdxRangeSlice&lt;typename Patch::Grid1&gt;;
 
+template &lt;class Patch&gt;
+using IdxRange2SliceOnPatch = IdxRangeSlice&lt;typename Patch::Grid2&gt;;
+
+
+// COORDINATE FIELDS -----------------------------------------------------------------------------
+
+// --- ON DEVICE ---
 template &lt;class Patch&gt;
 using CoordFieldMemOnPatch = FieldMem&lt;typename Patch::Coord12, typename Patch::IdxRange12&gt;;
 
@@ -649,7 +671,6 @@ template &lt;class Patch&gt;
 using Coord1Field1OnPatch_1D = Field&lt;typename Patch::Coord1, typename Patch::IdxRange1&gt;;
 
 
-
 // SPLINES ---------------------------------------------------------------------------------------
 
 template &lt;class Patch&gt;
@@ -659,14 +680,16 @@ template &lt;class Patch&gt;
 using BSplines2OnPatch = typename Patch::BSplines2;
 
 
+// --- ON DEVICE ---
+template &lt;class Patch&gt;
+using SplineCoeffMemOnPatch_2D = DFieldMem&lt;typename Patch::IdxRangeBS12&gt;;
+
 template &lt;class Patch&gt;
 using SplineCoeffOnPatch_2D = DField&lt;typename Patch::IdxRangeBS12&gt;;
 
 template &lt;class Patch&gt;
 using ConstSplineCoeffOnPatch_2D = DConstField&lt;typename Patch::IdxRangeBS12&gt;;
 
-template &lt;class Patch&gt;
-using ConstSplineCoeffOnPatch_2D_host = host_t&lt;ConstSplineCoeffOnPatch_2D&lt;Patch&gt;&gt;;
 
 template &lt;class Patch&gt;
 using SplineCoeff1OnPatch_2D = DField&lt;IdxRange&lt;typename Patch::BSplines1, typename Patch::Grid2&gt;&gt;;
@@ -683,9 +706,20 @@ template &lt;class Patch&gt;
 using ConstSplineCoeff1OnPatch_1D = DConstField&lt;typename Patch::IdxRangeBS1&gt;;
 
 
+// --- ON HOST ---
+template &lt;class Patch&gt;
+using SplineCoeffMemOnPatch_2D_host = host_t&lt;SplineCoeffMemOnPatch_2D&lt;Patch&gt;&gt;;
+
+template &lt;class Patch&gt;
+using SplineCoeffOnPatch_2D_host = host_t&lt;SplineCoeffOnPatch_2D&lt;Patch&gt;&gt;;
+
+template &lt;class Patch&gt;
+using ConstSplineCoeffOnPatch_2D_host = host_t&lt;ConstSplineCoeffOnPatch_2D&lt;Patch&gt;&gt;;
+
 
 // DERIVATIVES -----------------------------------------------------------------------------------
 
+// --- ON DEVICE ---
 template &lt;class Patch&gt;
 using ConstDeriv1_OnPatch_2D
         = DConstField&lt;IdxRange&lt;ddc::Deriv&lt;typename Patch::Dim1&gt;, typename Patch::Grid2&gt;&gt;;
@@ -697,6 +731,37 @@ using ConstDeriv2_OnPatch_2D
 template &lt;class Patch&gt;
 using ConstDeriv12_OnPatch_2D
         = DConstField&lt;IdxRange&lt;ddc::Deriv&lt;typename Patch::Dim1&gt;, ddc::Deriv&lt;typename Patch::Dim2&gt;&gt;&gt;;
+
+
+// FIELDS WITH DERIVATIVES -----------------------------------------------------------------------
+
+// --- ON DEVICE ---
+template &lt;class Patch&gt;
+using DerivFieldMemOnPatch = DerivFieldMem&lt;
+        double,
+        IdxRange&lt;
+                ddc::Deriv&lt;typename Patch::Dim1&gt;,
+                typename Patch::Grid1,
+                ddc::Deriv&lt;typename Patch::Dim2&gt;,
+                typename Patch::Grid2&gt;,
+        1&gt;;
+
+template &lt;class Patch&gt;
+using DerivFieldOnPatch = DerivField&lt;
+        double,
+        IdxRange&lt;
+                ddc::Deriv&lt;typename Patch::Dim1&gt;,
+                typename Patch::Grid1,
+                ddc::Deriv&lt;typename Patch::Dim2&gt;,
+                typename Patch::Grid2&gt;&gt;;
+
+
+// --- ON HOST ---
+template &lt;class Patch&gt;
+using DerivFieldMemOnPatch_host = host_t&lt;DerivFieldMemOnPatch&lt;Patch&gt;&gt;;
+
+template &lt;class Patch&gt;
+using DerivFieldOnPatch_host = host_t&lt;DerivFieldOnPatch&lt;Patch&gt;&gt;;
 </code></pre></div>
               
             </div>

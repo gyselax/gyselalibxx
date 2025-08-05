@@ -574,8 +574,8 @@ inline constexpr bool is_deriv_field_v
 
 template &lt;class T&gt;
 inline constexpr bool is_borrowed_deriv_field_v
-        = (std::is_lvalue_reference_v&lt;T&gt;)
-          || (enable_borrowed_deriv_field&lt;std::remove_cv_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;);
+        = is_deriv_field_v&lt;
+                  T&gt; &amp;&amp; (std::is_lvalue_reference_v&lt;T&gt; || enable_borrowed_deriv_field&lt;std::remove_cv_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;);
 
 template &lt;class FieldType, class SupportType&gt;
 class DerivFieldCommon;

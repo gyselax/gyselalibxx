@@ -3988,32 +3988,42 @@
     <member refid="types_8hpp_1a9a7404f8f80d95c1f7112fc396af2912" kind="typedef"><name>DFieldMem1OnPatch</name></member>
     <member refid="types_8hpp_1af707f2c421334e9740b1dfce6d7aa16b" kind="typedef"><name>DFieldMem2OnPatch</name></member>
     <member refid="types_8hpp_1abd7056a75bab9a48308c5e52c8bb2fe6" kind="typedef"><name>DFieldOnPatch</name></member>
-    <member refid="types_8hpp_1ad115e73802088e60cf563d01ef65f7ca" kind="typedef"><name>DConstFieldOnPatch</name></member>
-    <member refid="types_8hpp_1a0c083bd63f5b8f8e6d6b30626bcba754" kind="typedef"><name>DFieldOnPatch_host</name></member>
     <member refid="types_8hpp_1a2a3cb765f38d252cd663d549514480ec" kind="typedef"><name>DField1OnPatch</name></member>
+    <member refid="types_8hpp_1ad115e73802088e60cf563d01ef65f7ca" kind="typedef"><name>DConstFieldOnPatch</name></member>
     <member refid="types_8hpp_1a6f391ab73694daad1f5c41d3674bab62" kind="typedef"><name>DConstField1OnPatch</name></member>
+    <member refid="types_8hpp_1a0c083bd63f5b8f8e6d6b30626bcba754" kind="typedef"><name>DFieldOnPatch_host</name></member>
+    <member refid="types_8hpp_1ae4b45f85b6953dbbb8dca68cd8ce6af7" kind="typedef"><name>DConstFieldOnPatch_host</name></member>
     <member refid="types_8hpp_1a783c27efa47611362fc6204ecc5579eb" kind="typedef"><name>DVectorFieldMemOnPatch</name></member>
     <member refid="types_8hpp_1aec21f7fae0b3eed7c635666530f1428b" kind="typedef"><name>DVectorFieldOnPatch</name></member>
     <member refid="types_8hpp_1a5044aca2508ee07bde39d49a2643009a" kind="typedef"><name>DVectorConstFieldOnPatch</name></member>
     <member refid="types_8hpp_1adca1f60ae1d21724cf7681c0c06e7d88" kind="typedef"><name>IdxRangeOnPatch</name></member>
     <member refid="types_8hpp_1a381d4abfe729339bbda045bd9b5888e5" kind="typedef"><name>IdxRange1OnPatch</name></member>
     <member refid="types_8hpp_1a9471b1c9dff70e98fa0cf893e44713c7" kind="typedef"><name>Idx1OnPatch</name></member>
+    <member refid="types_8hpp_1adf24b1be2c0abcac9e4380ec5056df32" kind="typedef"><name>IdxRange1SliceOnPatch</name></member>
+    <member refid="types_8hpp_1a697d45caeeb304309beb73f8e4faee21" kind="typedef"><name>IdxRange2SliceOnPatch</name></member>
     <member refid="types_8hpp_1a94c88ef22950e4faef7cffdf5f3a5024" kind="typedef"><name>CoordFieldMemOnPatch</name></member>
     <member refid="types_8hpp_1afddcc3a3dce39a14c551e4ee9d6bebf3" kind="typedef"><name>CoordFieldOnPatch</name></member>
     <member refid="types_8hpp_1aac7f80f49282448060010245f9615f74" kind="typedef"><name>CoordConstFieldOnPatch</name></member>
     <member refid="types_8hpp_1a15503c5d64148ce35bed306d9da11d9a" kind="typedef"><name>Coord1Field1OnPatch_1D</name></member>
     <member refid="types_8hpp_1a3199cb88eca63a53b1f86daf7beb654a" kind="typedef"><name>BSplines1OnPatch</name></member>
     <member refid="types_8hpp_1a8e960b1f416d63f0b2645abc6c3152f5" kind="typedef"><name>BSplines2OnPatch</name></member>
+    <member refid="types_8hpp_1aa2fdcdec788d98e7fc681c057057df3c" kind="typedef"><name>SplineCoeffMemOnPatch_2D</name></member>
     <member refid="types_8hpp_1a985a26fc11c4b7a561e8093e291275fb" kind="typedef"><name>SplineCoeffOnPatch_2D</name></member>
     <member refid="types_8hpp_1af62d7b86fe4b8d5c5f034e538edd71dd" kind="typedef"><name>ConstSplineCoeffOnPatch_2D</name></member>
-    <member refid="types_8hpp_1a4ac75c3c8c6d5ab44d83714a1cc61a6c" kind="typedef"><name>ConstSplineCoeffOnPatch_2D_host</name></member>
     <member refid="types_8hpp_1a1f808f943fcc0a706dc3be1b25f7adaa" kind="typedef"><name>SplineCoeff1OnPatch_2D</name></member>
     <member refid="types_8hpp_1adc7753f16858f567b23124df34921601" kind="typedef"><name>ConstSplineCoeff1OnPatch_2D</name></member>
     <member refid="types_8hpp_1aec44906df96f66bb9f069741ea6c1a31" kind="typedef"><name>SplineCoeff1OnPatch_1D</name></member>
     <member refid="types_8hpp_1a80d1d902c9db76fa1d2684f79d1e69c8" kind="typedef"><name>ConstSplineCoeff1OnPatch_1D</name></member>
+    <member refid="types_8hpp_1aa42d76c0193e8600663b2be698323bd2" kind="typedef"><name>SplineCoeffMemOnPatch_2D_host</name></member>
+    <member refid="types_8hpp_1ae133834fecca422b4f52f74c92af9df7" kind="typedef"><name>SplineCoeffOnPatch_2D_host</name></member>
+    <member refid="types_8hpp_1a4ac75c3c8c6d5ab44d83714a1cc61a6c" kind="typedef"><name>ConstSplineCoeffOnPatch_2D_host</name></member>
     <member refid="types_8hpp_1a780541f2db744158478c0464740b1e34" kind="typedef"><name>ConstDeriv1_OnPatch_2D</name></member>
     <member refid="types_8hpp_1ae458d58c82b119cc5c77e713a6051350" kind="typedef"><name>ConstDeriv2_OnPatch_2D</name></member>
     <member refid="types_8hpp_1a28cf00870be61abdf21c9ac0b94b4665" kind="typedef"><name>ConstDeriv12_OnPatch_2D</name></member>
+    <member refid="types_8hpp_1ab01a60b5448206f042e68cef3d4a21ed" kind="typedef"><name>DerivFieldMemOnPatch</name></member>
+    <member refid="types_8hpp_1ad9e2bb24f59d31bfc9d02b8220b7af40" kind="typedef"><name>DerivFieldOnPatch</name></member>
+    <member refid="types_8hpp_1a9fe5f4635682b53bd250fa2e6b9091a6" kind="typedef"><name>DerivFieldMemOnPatch_host</name></member>
+    <member refid="types_8hpp_1ae9b4dd49e86776b834dada3f2218f283" kind="typedef"><name>DerivFieldOnPatch_host</name></member>
   </compound>
   <compound refid="constant__extrapolation__rules__onion_8hpp" kind="file"><name>constant_extrapolation_rules_onion.hpp</name>
   </compound>
