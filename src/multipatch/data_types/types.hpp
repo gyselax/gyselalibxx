@@ -263,7 +263,7 @@ using ConstDeriv12_OnPatch_2D
 
 // --- ON DEVICE ---
 /**
- * @brief A field memory with derivatives constaining the function values on the 2D grid, the first derivatives 
+ * @brief A field memory with derivatives containing the function values on the 2D grid, the first derivatives 
  * on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid 
  * defined on the given Patch. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). 
  */
@@ -278,7 +278,7 @@ using DerivFieldMemOnPatch = DerivFieldMem<
         1>;
 
 /**
- * @brief A field with derivatives constaining the function values on the 2D grid, and first derivatives 
+ * @brief A field with derivatives containing the function values on the 2D grid, and first derivatives 
  * on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid 
  * defined on the given Patch. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). 
  */
@@ -294,7 +294,7 @@ using DerivFieldOnPatch = DerivField<
 
 // --- ON HOST ---
 /**
- * @brief A field memory with derivatives constaining the function values on the 2D grid, and first derivatives 
+ * @brief A field memory with derivatives containing the function values on the 2D grid, and first derivatives 
  * on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid 
  * defined on the given Patch. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). 
  * Defined on host. 
@@ -303,7 +303,7 @@ template <class Patch>
 using DerivFieldMemOnPatch_host = host_t<DerivFieldMemOnPatch<Patch>>;
 
 /**
- * @brief A field with derivatives constaining the function values on the 2D grid, and first derivatives 
+ * @brief A field with derivatives containing the function values on the 2D grid, and first derivatives 
  * on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid 
  * defined on the given Patch. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). 
  * Defined on host. 
