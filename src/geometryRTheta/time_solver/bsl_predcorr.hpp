@@ -177,13 +177,6 @@ public:
                       ddcHelper::deepcopy(advection_field, advection_field_host);
                   };
 
-        std::function<void(DFieldRTheta, DConstVectorFieldRTheta<X, Y>, double)> advect_density
-                = [&](DFieldRTheta density,
-                      DConstVectorFieldRTheta<X, Y> advection_field,
-                      double dt) {
-                      m_advection_solver(density, advection_field, dt);
-                  };
-
         RK2<DFieldMemRTheta, DVectorFieldMemRTheta<X, Y>, Kokkos::DefaultExecutionSpace>
                 time_stepper(grid);
 
@@ -196,7 +189,7 @@ public:
                             density,
                             dt,
                             define_advection_field,
-                            advect_density);
+                            m_advection_solver);
 
             ddc::parallel_deepcopy(density_host, get_const_field(density));
             m_builder(get_field(density_coef_alloc_host), get_const_field(density_host));
